@@ -1,0 +1,17 @@
+{
+    "customer":{
+        "action":"CUSTOMER_CREATE",
+        "status":"Failure",
+        "errors":[
+            "[customerId] is already used for another customer."
+        ],
+        "paymentCard":{
+            "action":"PAYMENT_CARD_CREATE",
+            "status":"Valid",
+            "authorization":{
+                "action":"AUTHORIZE_PAYMENT_CARD",
+                "status":"Valid"
+            }
+        }
+    }
+}
