@@ -1,0 +1,25 @@
+{
+    "customer":{
+        "action":"CUSTOMER_CREATE",
+        "status":"Success",
+        "paymentCard":{
+            "action":"PAYMENT_CARD_CREATE",
+            "status":"Success",
+            "authorization":{
+                "action":"AUTHORIZE_PAYMENT_CARD",
+                "status":"Success",
+                "transaction":{
+                    "id":"3356446865202abe3d5044",
+                    "customerId":"custB26",
+                    "type":"authorize",
+                    "result":"approved",
+                    "currency":"USD",
+                    "amount":"1.99",
+                    "processorAccount":"pv123",
+                    "last4":"1111",
+                    "paymentMethod":"Visa"
+                }
+            }
+        }
+    }
+}
