@@ -12,6 +12,7 @@ class RebillyCustomerTest extends \Codeception\TestCase\Test
     {
         $this->setExpectedException('Exception', 'Please set the correct environment');
         $customer = new RebillyCustomer();
+        $customer->setEnvironment(null);
         $customer->create();
     }
 
