@@ -32,13 +32,13 @@ class RebillyMeteredBilling extends RebillyRequest
     /**
      * @param mixed $attributes
      */
-    public function __construct($attributes)
+    public function __construct($attributes = null)
     {
         if (is_array($attributes)) {
             foreach ($attributes as $attribute => $value) {
                 $this->$attribute = $value;
             }
-        } else {
+        } elseif (is_string($attributes)) {
             $this->itemId = $attributes;
         }
     }

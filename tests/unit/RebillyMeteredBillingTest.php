@@ -1,6 +1,6 @@
 <?php
 
-class RebillyMeteredBilling extends \Codeception\TestCase\Test
+class RebillyMeteredBillingTest extends \Codeception\TestCase\Test
 {
     public function testMeteredBillingPost()
     {
@@ -8,7 +8,7 @@ class RebillyMeteredBilling extends \Codeception\TestCase\Test
         $subscription->setApiKey('apiKey');
         $meteredBilling = new RebillyMeteredBilling();
         $meteredBilling->itemId = 'abc1';
-        $meteredBilling->type = 'debit';
+        $meteredBilling->type = RebillyMeteredBilling::TYPE_DEBIT;
         $meteredBilling->amount = '9.99';
         $meteredBilling->quantity = 1;
         $meteredBilling->description = 'Test widget';
