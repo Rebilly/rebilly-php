@@ -4,7 +4,6 @@ class RebillyThreeDSecureTest extends \Codeception\TestCase\Test
     public function testCreateThreeDSecure()
     {
         $subscription = new RebillySubscription('subscriptionId');
-        $subscription->setEnvironment(RebillyRequest::ENV_STAGING);
         $subscription->setApiKey('apiKey');
         $threeDSecure = new RebillyThreeDSecure();
         $threeDSecure->amount = '10.00';

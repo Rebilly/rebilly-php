@@ -6,6 +6,8 @@
  */
 class RebillySubscription extends RebillyRequest
 {
+
+    const SUBSCRIPTION_URL = 'subscriptions/';
     /**
      * @var string $websiteId unique id for each website
      */
@@ -83,27 +85,13 @@ class RebillySubscription extends RebillyRequest
     }
 
     /**
-     * Send POST request to Rebilly
-     * @return RebillyResponse response from Rebilly
+     * Sends the request to Rebilly's endpoint and returns the prepared response.
+     * @return array the api prepared response
      */
-    public function createThreeDSecure()
+    public function create()
     {
-        $this->setApiController(RebillyThreeDSecure::THREE_D_SECURE_URL);
-
+        $this->setApiController(self::SUBSCRIPTION_URL);
         $data = $this->buildRequest($this);
-
-        return $this->sendPostRequest($data, get_class());
-    }
-
-    /**
-     * Create Metered Billing
-     * @return RebillyResponse
-     */
-    public function createMeteredBilling()
-    {
-        $this->setApiController(RebillyMeteredBilling::URL);
-        $data = $this->buildRequest($this);
-
         return $this->sendPostRequest($data);
     }
 

@@ -5,8 +5,12 @@
  */
 class RebillyMeteredBilling extends RebillyRequest
 {
-    const URL = 'meteredBilling/';
+    const TYPE_DEBIT = 'debit';
+    const TYPE_CREDIT = 'credit';
 
+    /**
+     * @var string $itemId the id assigned to the item by the Merchant
+     */
     public $itemId;
     /**
      * @var string $type Can be 'DEBIT' or 'CREDIT'
@@ -37,13 +41,6 @@ class RebillyMeteredBilling extends RebillyRequest
         } else {
             $this->itemId = $attributes;
         }
-    }
-
-    public function retrieve()
-    {
-        $this->setApiController(self::URL . $this->itemId);
-
-        return $this->sendGetRequest();
     }
 
     /**
