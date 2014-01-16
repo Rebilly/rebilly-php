@@ -5,8 +5,6 @@
  */
 class RebillyThreeDSecure
 {
-
-    const THREE_D_SECURE_URL = 'threeDSecure/';
     /**
      * @var string
      */

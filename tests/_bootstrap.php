@@ -1,3 +1,3 @@
 <?php
-//require_once __DIR__  . '/../lib/RebillyApi.php';
-// This is global bootstrap for autoloading 
+//require_once __DIR__  . '/../rebilly_api.php';
+// This is global bootstrap for autoloading
