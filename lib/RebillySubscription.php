@@ -8,6 +8,22 @@ class RebillySubscription extends RebillyRequest
 {
 
     const SUBSCRIPTION_URL = 'subscriptions/';
+
+    /**
+     * Customers subscriptions change types
+     */
+    const SWITCH_AT_NEXT_REBILL = 'AT_NEXT_REBILL';
+    const SWITCH_NOW_WITH_PRORATA_REFUND = 'NOW_WITH_PRORATA_REFUND';
+    const SWITCH_NOW_WITHOUT_REFUND = 'NOW_WITHOUT_REFUND';
+
+    /***
+     * Customers subscriptions cancellation types
+     */
+    const CANCEL_AT_NEXT_REBILL = 'AT_NEXT_REBILL';
+    const CANCEL_NOW = 'NOW_WITHOUT_REFUND';
+    const CANCEL_NOW_WITH_PRORATA_REFUND = 'NOW_WITH_PRORATA_REFUND';
+    const CANCEL_NOW_FULL_REFUND = 'NOW_WITH_FULL_REFUND';
+
     /**
      * @var string $websiteId unique id for each website
      */
@@ -56,22 +72,6 @@ class RebillySubscription extends RebillyRequest
      * @var RebillyMeteredBilling $meteredBilling metered billing information
      */
     public $meteredBilling;
-
-    /**
-     * Customers subscriptions change types
-     */
-    const SWITCH_AT_NEXT_REBILL = 'AT_NEXT_REBILL';
-    const SWITCH_NOW_WITH_PRORATA_REFUND = 'NOW_WITH_PRORATA_REFUND';
-    const SWITCH_NOW_WITHOUT_REFUND = 'NOW_WITHOUT_REFUND';
-
-    /***
-     * Customers subscriptions cancellation types
-     */
-    const CANCEL_AT_NEXT_REBILL = 'AT_NEXT_REBILL';
-    const CANCEL_NOW = 'NOW_WITHOUT_REFUND';
-    const CANCEL_NOW_WITH_PRORATA_REFUND = 'NOW_WITH_PRORATA_REFUND';
-    const CANCEL_NOW_FULL_REFUND = 'NOW_WITH_FULL_REFUND';
-    const CANCEL_NOW_ALL_REFUND = 'NOW_WITH_ALL_CHARGES_REFUND';
 
     /**
      * Set lookupSubscriptionId when $id is passed
