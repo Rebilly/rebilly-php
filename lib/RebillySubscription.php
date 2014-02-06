@@ -6,6 +6,24 @@
  */
 class RebillySubscription extends RebillyRequest
 {
+
+    const SUBSCRIPTION_URL = 'subscriptions/';
+
+    /**
+     * Customers subscriptions change types
+     */
+    const SWITCH_AT_NEXT_REBILL = 'AT_NEXT_REBILL';
+    const SWITCH_NOW_WITH_PRORATA_REFUND = 'NOW_WITH_PRORATA_REFUND';
+    const SWITCH_NOW_WITHOUT_REFUND = 'NOW_WITHOUT_REFUND';
+
+    /***
+     * Customers subscriptions cancellation types
+     */
+    const CANCEL_AT_NEXT_REBILL = 'AT_NEXT_REBILL';
+    const CANCEL_NOW = 'NOW_WITHOUT_REFUND';
+    const CANCEL_NOW_WITH_PRORATA_REFUND = 'NOW_WITH_PRORATA_REFUND';
+    const CANCEL_NOW_FULL_REFUND = 'NOW_WITH_FULL_REFUND';
+
     /**
      * @var string $websiteId unique id for each website
      */
@@ -56,22 +74,6 @@ class RebillySubscription extends RebillyRequest
     public $meteredBilling;
 
     /**
-     * Customers subscriptions change types
-     */
-    const SWITCH_AT_NEXT_REBILL = 'AT_NEXT_REBILL';
-    const SWITCH_NOW_WITH_PRORATA_REFUND = 'NOW_WITH_PRORATA_REFUND';
-    const SWITCH_NOW_WITHOUT_REFUND = 'NOW_WITHOUT_REFUND';
-
-    /***
-     * Customers subscriptions cancellation types
-     */
-    const CANCEL_AT_NEXT_REBILL = 'AT_NEXT_REBILL';
-    const CANCEL_NOW = 'NOW_WITHOUT_REFUND';
-    const CANCEL_NOW_WITH_PRORATA_REFUND = 'NOW_WITH_PRORATA_REFUND';
-    const CANCEL_NOW_FULL_REFUND = 'NOW_WITH_FULL_REFUND';
-    const CANCEL_NOW_ALL_REFUND = 'NOW_WITH_ALL_CHARGES_REFUND';
-
-    /**
      * Set lookupSubscriptionId when $id is passed
      * @param null $id
      */
@@ -83,27 +85,13 @@ class RebillySubscription extends RebillyRequest
     }
 
     /**
-     * Send POST request to Rebilly
-     * @return RebillyResponse response from Rebilly
+     * Sends the request to Rebilly's endpoint and returns the prepared response.
+     * @return array the api prepared response
      */
-    public function createThreeDSecure()
+    public function create()
     {
-        $this->setApiController(RebillyThreeDSecure::THREE_D_SECURE_URL);
-
+        $this->setApiController(self::SUBSCRIPTION_URL);
         $data = $this->buildRequest($this);
-
-        return $this->sendPostRequest($data, get_class());
-    }
-
-    /**
-     * Create Metered Billing
-     * @return RebillyResponse
-     */
-    public function createMeteredBilling()
-    {
-        $this->setApiController(RebillyMeteredBilling::URL);
-        $data = $this->buildRequest($this);
-
         return $this->sendPostRequest($data);
     }
 
