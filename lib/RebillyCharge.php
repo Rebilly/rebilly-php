@@ -1,5 +1,15 @@
 <?php
-
+/**
+ * Class RebillyCharge Holds all variables to create charge
+ *
+ * Available attributes:
+ * @var string $amount
+ * @var string $websiteId
+ * @var string $currency
+ * @var string $processorAccountId
+ * @var RebillyAddressInfo $deliveryAddress
+ * @var RebillyThreeDSecure $threeDSecure
+ */
 class RebillyCharge extends RebillyRequest
 {
     /**
@@ -22,7 +32,6 @@ class RebillyCharge extends RebillyRequest
      * @var RebillyAddressInfo $deliveryAddress delivery address of a customer
      */
     public $deliveryAddress;
-
     /**
      * @var RebillyThreeDSecure $threeDSecure 3ds info
      */

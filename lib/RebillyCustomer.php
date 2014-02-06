@@ -1,11 +1,50 @@
 <?php
 /**
- * Class RebillyCustomer
+ * Class RebillyCustomer Holds all the variables and methods to create/update
+ *  - Customer
+ *  - PaymentCard
+ *  - Charge
+ *  - Subscription
  *
+ * Usage: Example to create a customer
+ * <pre>
+ *     // Please checkout our documentation for more examples
+ *     $customer = new RebillyCustomer();
+ *     $customer->setEnvironment(RebillyRequest::ENV_STAGING);
+ *     $customer->setApiKey('apiKey');
+ *     $customer->customerId = 'cust123';
+ *     $customer->email = 'email@email.com';
+ *     $customer->firstName = 'John';
+ *     $customer->lastName = 'Doe';
+ *     $customer->ipAddress = '192.168.1.1';
+ *
+ *     $response = $customer->create();
+ *     $rawResponse = $response->getRawResponse();
+ *
+ *     if ($rawResponse->action === RebillyResponse::CUSTOMER_CREATE && $rawResponse->status === RebillyResponse::STATUS_SUCCESS) {
+ *         // Successfully created customer
+ *     }
+ * </pre>
+ *
+ * Available attributes:
+ * @var string $customerId
+ * @var string $lookupCustomerId
+ * @var string $email
+ * @var string $firstName
+ * @var string $lastName
+ * @var string $ipAddress
+ * @var RebillyPaymentCard $paymentCard
+ * @var RebillySubscription $subscription
+ * @var RebillySubscription $subscription
  */
 
 class RebillyCustomer extends RebillyRequest
 {
+    /**
+     * Customer's URL endpoint
+     */
+    const CUSTOMER_URL = 'customers/';
+
     /**
      * @var string $customerId unique id for each customer use for creating new customer
      */
@@ -23,7 +62,7 @@ class RebillyCustomer extends RebillyRequest
      */
     public $firstName;
     /**
-     * @var string $lastName customer's last name
+     * v customer's last name
      */
     public $lastName;
     /**
@@ -39,11 +78,9 @@ class RebillyCustomer extends RebillyRequest
      */
     public $subscription;
     /**
-     * @var@ RebillySubscription $subscription subscription attach to a customer use when switch subscription
+     * @var RebillySubscription $subscription subscription attach to a customer use when switch subscription
      */
     public $newSubscription;
-
-    const CUSTOMER_URL = 'customers/';
 
     /**
      * Set lookupCustomerId when $id is passed

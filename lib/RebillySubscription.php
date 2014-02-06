@@ -6,7 +6,9 @@
  */
 class RebillySubscription extends RebillyRequest
 {
-
+    /**
+     * Subscription's URL endpoint
+     */
     const SUBSCRIPTION_URL = 'subscriptions/';
 
     /**

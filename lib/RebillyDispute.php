@@ -1,6 +1,46 @@
 <?php
 
-
+/**
+ * Class RebillyDispute Holds variables and methods to create dispute
+ *
+ * Usage: Example to create dispute
+ * <pre>
+ *     $dispute = new RebillyDispute();
+ *     $dispute->setEnvironment(RebillyRequest::ENV_STAGING);
+ *     $dispute->setApiKey('apiKey');
+ *     $dispute->processorAccountId = 'processorAccountId';
+ *     $dispute->type = '1CB';
+ *     $dispute->postedTime = '2013-02-19 13:10:30';
+ *     $dispute->transactionId = '1389302294524db5af2696e';
+ *     $dispute->amount = '5.99';
+ *     $dispute->currency = 'USD';
+ *     $dispute->rawResponse = 'Raw Response';
+ *
+ *     $response = $dispute->create();
+ *     $rawResponse = $response->getRawResponse();
+ *
+ *     if ($rawResponse->action === RebillyResponse::DISPUTE_ENTRY_CREATE && $rawResponse->status === RebillyResponse::STATUS_SUCCESS) {
+ *         // Successfully created dispute
+ *     }
+ * </pre>
+ *
+ * Available attributes:
+ * @var string $processorAccountId
+ * @var string $type
+ * @var string $postedTime
+ * @var string $transactionId
+ * @var string $legacyTransactionId
+ * @var string $acquirerReferenceId
+ * @var string $amount
+ * @var string $currency
+ * @var string $disputeReasonCodeId
+ * @var string $deadlineTime
+ * @var string $processorReasonCode
+ * @var string $processorReferenceId
+ * @var string $processorComments
+ * @var string $rawResponse
+ * @var string $paymentMethod
+ */
 class RebillyDispute extends RebillyRequest
 {
     /**
@@ -12,11 +52,11 @@ class RebillyDispute extends RebillyRequest
      */
     public $processorAccountId;
     /**
-     * @var enun $type dispute type can be ('1CB', '2CB', 'RET')
+     * @var string $type dispute type can be ('1CB', '2CB', 'RET')
      */
     public $type;
     /**
-     * @var timestamp $postedTime dispute time
+     * @var string $postedTime dispute time
      */
     public $postedTime;
     /**
@@ -32,7 +72,7 @@ class RebillyDispute extends RebillyRequest
      */
     public $acquirerReferenceId;
     /**
-     * @var decimal $amount dispute amount
+     * @var string $amount dispute amount
      */
     public $amount;
     /**
@@ -44,7 +84,7 @@ class RebillyDispute extends RebillyRequest
      */
     public $disputeReasonCodeId;
     /**
-     * @var timestamp $deadlineTime dispute deadline
+     * @var string $deadlineTime dispute deadline
      */
     public $deadlineTime;
     /**
