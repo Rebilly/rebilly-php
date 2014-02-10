@@ -62,7 +62,7 @@ class RebillyCustomer extends RebillyRequest
      */
     public $firstName;
     /**
-     * v customer's last name
+     * @var string $lastName customer's last name
      */
     public $lastName;
     /**
