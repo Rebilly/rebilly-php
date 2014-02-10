@@ -23,6 +23,11 @@
 class RebillyPlan extends RebillyRequest
 {
     /**
+     * Plan API's URL endpoint
+     */
+    const PLAN_URL = 'plans/';
+
+    /**
      * @var string $planId
      */
     public $planId;
@@ -82,8 +87,6 @@ class RebillyPlan extends RebillyRequest
      * @var number $contractRebill
      */
     public $contractRebill;
-
-    const PLAN_URL = 'plans/';
 
     public function __construct($id = null)
     {

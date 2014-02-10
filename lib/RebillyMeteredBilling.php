@@ -5,6 +5,9 @@
  */
 class RebillyMeteredBilling extends RebillyRequest
 {
+    /**
+     * MeteredBilling type
+     */
     const TYPE_DEBIT = 'debit';
     const TYPE_CREDIT = 'credit';
 
