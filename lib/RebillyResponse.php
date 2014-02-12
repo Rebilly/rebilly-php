@@ -40,7 +40,7 @@ class RebillyResponse
     /**
      * @var integer $statusCode HTTP response code
      */
-    private $statusCode;
+    public $statusCode;
     /**
      * @var JSON object $response response from Rebilly
      */
