@@ -53,4 +53,4 @@ class RebillyCustomField extends RebillyRequest
     {
         return get_object_vars($class);
     }
-} 
+}
