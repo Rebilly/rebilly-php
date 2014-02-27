@@ -61,16 +61,16 @@ class RebillyCustomerTest extends \Codeception\TestCase\Test
         $customer->lastName   = 'MasterLast';
         $customer->ipAddress  = '10.0.0.1';
 
-        $customerCustomField = [
-            new RebillyCustomField([
+        $customerCustomField = array(
+            new RebillyCustomField(array(
                 'label' => 'customFieldABC',
                 'value' => 'customFieldABC',
-            ]),
-            new RebillyCustomField([
+            )),
+            new RebillyCustomField(array(
                 'label' => 'customFieldXYZ',
                 'value' => 'customFieldXYZ',
-            ]),
-        ];
+            )),
+        );
 
         $customer->customField = $customerCustomField;
 
