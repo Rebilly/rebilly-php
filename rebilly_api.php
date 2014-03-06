@@ -15,5 +15,6 @@ require_once(dirname(__FILE__) . '/lib/RebillyToken.php');
 require_once(dirname(__FILE__) . '/lib/RebillyThreeDSecure.php');
 require_once(dirname(__FILE__) . '/lib/RebillyMeteredBilling.php');
 require_once(dirname(__FILE__) . '/lib/RebillyPlan.php');
+require_once(dirname(__FILE__) . '/lib/RebillyCustomField.php');
 require_once(dirname(__FILE__) . '/lib/util/RebillyCurlError.php');
 require_once(dirname(__FILE__) . '/lib/util/RebillyHttpStatusCode.php');

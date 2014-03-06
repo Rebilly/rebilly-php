@@ -51,5 +51,31 @@ class RebillyCustomerTest extends \Codeception\TestCase\Test
         expect($customer->buildRequest($customer))
             ->equals('{"customerId":"'.$this->newCustomerId.'","email":"master@example.com","firstName":"MasterFirst","lastName":"MasterLast","ipAddress":"10.0.0.1"}');
     }
+
+    public function testCustomerWithCustomField()
+    {
+        $customer = new RebillyCustomer();
+        $customer->customerId = $this->newCustomerId;
+        $customer->email      = 'master@example.com';
+        $customer->firstName  = 'MasterFirst';
+        $customer->lastName   = 'MasterLast';
+        $customer->ipAddress  = '10.0.0.1';
+
+        $customerCustomField = array(
+            new RebillyCustomField(array(
+                'label' => 'customFieldABC',
+                'value' => 'customFieldABC',
+            )),
+            new RebillyCustomField(array(
+                'label' => 'customFieldXYZ',
+                'value' => 'customFieldXYZ',
+            )),
+        );
+
+        $customer->customField = $customerCustomField;
+
+        expect($customer->buildRequest($customer))
+            ->equals('{"customerId":"'.$this->newCustomerId.'","email":"master@example.com","firstName":"MasterFirst","lastName":"MasterLast","ipAddress":"10.0.0.1","customField":[{"label":"customFieldABC","value":"customFieldABC"},{"label":"customFieldXYZ","value":"customFieldXYZ"}]}');
+    }
 }
 
