@@ -62,11 +62,19 @@ abstract class RebillyRequest
 
     abstract public function getPublicProperties($class);
 
+    /**
+     * Set api key
+     * @param string $key
+     */
     public function setApiKey($key)
     {
         $this->apiKey = $key;
     }
 
+    /**
+     * Set environment
+     * @param string $env
+     */
     public function setEnvironment($env)
     {
         $this->environment = $env;
@@ -81,6 +89,10 @@ abstract class RebillyRequest
         $this->controller = $controller;
     }
 
+    /**
+     * Get URL
+     * @return string
+     */
     public function getApiUrl()
     {
         return $this->apiUrl;
@@ -93,6 +105,22 @@ abstract class RebillyRequest
     {
         return $this->request;
     }
+
+    /**
+     * Set attributes
+     * @param array $attributes
+     */
+    public function setAttributes($attributes)
+    {
+        if (is_array($attributes)) {
+            foreach ($attributes as $key => $value) {
+                if (!empty($value)) {
+                    $this->{$key} = $value;
+                }
+            }
+        }
+    }
+
     /**
      * Send a GET request
      * @return array response back from Rebilly
