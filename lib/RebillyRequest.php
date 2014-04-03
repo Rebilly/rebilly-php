@@ -28,25 +28,20 @@ abstract class RebillyRequest
     /**
      * string environment
      */
-    const ENV_DEVELOPMENT = 'development';
-    const ENV_STAGING     = 'staging';
-    const ENV_SANDBOX     = 'sandbox';
-    const ENV_PRODUCTION  = 'production';
-
+    const ENV_SANDBOX    = 'sandbox';
+    const ENV_PRODUCTION = 'production';
     /**
      * @var array Key is the constant representing the environment and value is the base api endpoint url.
      */
     private $urls = array(
-        self::ENV_DEVELOPMENT => 'http://api.dev-local.rebilly.com/v2/',
-        self::ENV_STAGING     => 'http://apix.rebilly.com/v2/',
-        self::ENV_SANDBOX     => 'https://api-sandbox.rebilly.com/v2/',
-        self::ENV_PRODUCTION  => 'https://api.rebilly.com/v2/',
+        self::ENV_SANDBOX    => 'https://api-sandbox.rebilly.com/v2/',
+        self::ENV_PRODUCTION => 'https://api.rebilly.com/v2/',
     );
 
     /**
      * @var string the environment relates to the endpoint - it defaults to development environment.
      */
-    private $environment = self::ENV_DEVELOPMENT;
+    private $environment = self::ENV_SANDBOX;
     private $controller;
     private $request;
 
@@ -96,6 +91,15 @@ abstract class RebillyRequest
     public function getApiUrl()
     {
         return $this->apiUrl;
+    }
+
+    /**
+     * Set API url
+     * @param $url
+     */
+    public function setApiUrl($url)
+    {
+        $this->apiUrl = $url;
     }
 
     /**
@@ -179,7 +183,11 @@ abstract class RebillyRequest
             throw new Exception('Please set the correct environment.');
         }
 
-        $this->apiUrl = $this->urls[$this->environment] . $this->controller;
+        if (!isset($this->apiUrl)) {
+            $this->apiUrl = $this->urls[$this->environment];
+        }
+        $this->apiUrl = $this->apiUrl . $this->controller;
+
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $this->apiUrl);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -263,5 +271,4 @@ abstract class RebillyRequest
                 throw new Exception('An unexpected error occurred connecting with Rebilly.');
         }
     }
-
 }
