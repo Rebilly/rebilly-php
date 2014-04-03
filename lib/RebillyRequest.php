@@ -29,13 +29,14 @@ abstract class RebillyRequest
      * string environment
      */
     const ENV_SANDBOX    = 'sandbox';
-    const ENV_PRODUCTION = 'production';
+    const ENV_PRODUCTION = 'live';
+    const ENV_LIVE       = 'live';
     /**
      * @var array Key is the constant representing the environment and value is the base api endpoint url.
      */
     private $urls = array(
-        self::ENV_SANDBOX    => 'https://api-sandbox.rebilly.com/v2/',
-        self::ENV_PRODUCTION => 'https://api.rebilly.com/v2/',
+        self::ENV_SANDBOX => 'https://api-sandbox.rebilly.com/v2/',
+        self::ENV_LIVE    => 'https://api.rebilly.com/v2/',
     );
 
     /**
