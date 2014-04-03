@@ -29,8 +29,9 @@ abstract class RebillyRequest
      * string environment
      */
     const ENV_SANDBOX    = 'sandbox';
-    const ENV_PRODUCTION = 'live';
     const ENV_LIVE       = 'live';
+    // will be deprecated soon
+    const ENV_PRODUCTION = 'live';
     /**
      * @var array Key is the constant representing the environment and value is the base api endpoint url.
      */
