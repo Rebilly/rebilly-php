@@ -6,7 +6,7 @@
  * <pre>
  *     // Please checkout our documentation for more examples
  *     $blacklist = new RebillyBlacklist(RebillyBlacklist::TYPE_CUSTOMERID);
- *     $blacklist->setEnvironment(RebillyRequest::ENV_STAGING);
+ *     $blacklist->setEnvironment(RebillyRequest::ENV_SANDBOX);
  *     $blacklist->setApiKey('apiKey');
  *     $blacklist->value = 'cust123';
  *     $response = $blacklist->create();

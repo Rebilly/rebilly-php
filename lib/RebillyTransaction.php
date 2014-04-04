@@ -6,8 +6,8 @@
  * Usage:
  * <pre>
  *     $transaction = new RebillyTransaction('transactionId');
- *     // Set proper environment Production or Staging
- *     $transaction->setEnvironment(RebillyRequest::ENV_STAGING);
+ *     // Set proper environment LIVE or SANDBOX
+ *     $transaction->setEnvironment(RebillyRequest::ENV_SANDBOX);
  *     $transaction->setApiKey('apiKey');
  *     //Set amount if want to do partial refund, full refund otherwise.
  *     $transaction->amount = '5.99';

@@ -10,7 +10,7 @@
  * <pre>
  *     // Please checkout our documentation for more examples
  *     $customer = new RebillyCustomer();
- *     $customer->setEnvironment(RebillyRequest::ENV_STAGING);
+ *     $customer->setEnvironment(RebillyRequest::ENV_SANDBOX);
  *     $customer->setApiKey('apiKey');
  *     $customer->customerId = 'cust123';
  *     $customer->email = 'email@email.com';

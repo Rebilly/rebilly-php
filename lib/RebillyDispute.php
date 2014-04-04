@@ -6,7 +6,7 @@
  * Usage: Example to create dispute
  * <pre>
  *     $dispute = new RebillyDispute();
- *     $dispute->setEnvironment(RebillyRequest::ENV_STAGING);
+ *     $dispute->setEnvironment(RebillyRequest::ENV_SANDBOX);
  *     $dispute->setApiKey('apiKey');
  *     $dispute->processorAccountId = 'processorAccountId';
  *     $dispute->type = '1CB';

@@ -6,7 +6,7 @@
  * <pre>
  *     // Please checkout our documentation for more examples
  *     $token = new RebillyToken();
- *     $token->setEnvironment(RebillyRequest::ENV_DEVELOPMENT);
+ *     $token->setEnvironment(RebillyRequest::ENV_SANDBOX);
  *     $token->setApiKey('apiKey');
  *     $token->pan = '4111111111111111';
  *     $token->expMonth = '10';
