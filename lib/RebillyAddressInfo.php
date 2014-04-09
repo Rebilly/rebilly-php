@@ -1,6 +1,6 @@
 <?php
 
-class RebillyAddressInfo
+class RebillyAddressInfo extends RebillyRequest
 {
     /**
      * @var string $firstName customer's first name
@@ -46,4 +46,14 @@ class RebillyAddressInfo
      * @var string $postCode customer postal code
      */
     public $postalCode;
+
+    /**
+     * Return all the property of this class
+     * @param $class
+     * @return array
+     */
+    public function getPublicProperties($class)
+    {
+        return get_object_vars($class);
+    }
 }
