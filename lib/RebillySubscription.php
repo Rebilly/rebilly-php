@@ -71,11 +71,6 @@ class RebillySubscription extends RebillyRequest
     public $lookupSubscriptionId;
 
     /**
-     * @var RebillyMeteredBilling $meteredBilling metered billing information
-     */
-    public $meteredBilling;
-
-    /**
      * Set lookupSubscriptionId when $id is passed
      * @param null $id
      */
