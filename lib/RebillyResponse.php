@@ -35,7 +35,6 @@ class RebillyResponse
     const TOKEN_CREATE           = 'TOKEN_CREATE';
     const PLAN_CREATE            = 'PLAN_CREATE';
     const PLAN_DELETE            = 'PLAN_DELETE';
-    const INVOICE_ITEM_CREATE    = 'INVOICE_ITEM_CREATE';
 
     /**
      * @var integer $statusCode HTTP response code
@@ -107,7 +106,7 @@ class RebillyResponse
     }
 
     /**
-     * @return object raw response from Rebilly
+     * @return array raw response from Rebilly
      */
     public function getRawResponse()
     {
