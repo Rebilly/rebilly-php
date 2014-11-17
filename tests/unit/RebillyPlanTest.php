@@ -24,11 +24,10 @@ class RebillyPlanTest extends \Codeception\TestCase\Test
     public function testCreate()
     {
         $plan = new RebillyPlan();
-        $plan->name = '5 days trial';
         $plan->isActive = true;
+        $plan->name = '5 days trial';
         $plan->currency = 'USD';
         $plan->description = 'free 5 days trial';
-        $plan->expireTime = '2014-12-12 12:00:00';
         $plan->recurringAmount = '10.00';
         $plan->recurringPeriodUnit = 'monthly';
         $plan->recurringPeriodLength = '1';
@@ -36,9 +35,10 @@ class RebillyPlanTest extends \Codeception\TestCase\Test
         $plan->trialPeriodLength = '5';
         $plan->trialAmount = '0.00';
         $plan->setupAmount = '10.00';
+        $plan->expireTime = '2014-12-12 12:00:00';
 
         $this->assertEquals(
-            '{"name":"5 days trial","isActive":true,"currency":"USD","description":"free 5 days trial","expireTime":"2014-12-12 12:00:00","setupAmount":"10.00","recurringAmount":"10.00","recurringPeriodUnit":"monthly","recurringPeriodLength":"1","trialAmount":"0.00","trialPeriodUnit":"daily","trialPeriodLength":"5"}',
+            '{"isActive":true,"name":"5 days trial","currency":"USD","description":"free 5 days trial","recurringAmount":"10.00","recurringPeriodUnit":"monthly","recurringPeriodLength":"1","trialAmount":"0.00","trialPeriodUnit":"daily","trialPeriodLength":"5","setupAmount":"10.00","expireTime":"2014-12-12 12:00:00"}',
             stripcslashes($plan->buildRequest($plan))
         );
     }

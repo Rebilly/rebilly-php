@@ -37,9 +37,9 @@ class RebillyLayout extends RebillyRequest
      */
     public function create()
     {
-        $data = isset($this->name) ? $this->name : null;
+        $data['name'] = isset($this->name) ? $this->name : null;
 
-        return $this->sendPostRequest($data, get_class());
+        return $this->sendPostRequest(json_encode($data), get_class());
     }
 
     /**
