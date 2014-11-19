@@ -23,22 +23,22 @@ class RebillyPlanTest extends \Codeception\TestCase\Test
      */
     public function testCreate()
     {
-        $plan                          = new RebillyPlan();
-        $plan->planId                  = 'plan123ABC';
-        $plan->name                    = '5 days trial';
-        $plan->currency                = 'USD';
-        $plan->description             = 'free 5 days trial';
-        $plan->expireTime              = '2014-12-12 12:00:00';
-        $plan->recurringAmount         = '10.00';
-        $plan->recurringIntervalUnit   = 'monthly';
-        $plan->recurringIntervalLength = '1';
-        $plan->trialIntervalUnit       = 'daily';
-        $plan->trialIntervalLength     = '5';
-        $plan->trialAmount             = '0.00';
-        $plan->setupAmount             = '10.00';
+        $plan = new RebillyPlan();
+        $plan->isActive = true;
+        $plan->name = '5 days trial';
+        $plan->currency = 'USD';
+        $plan->description = 'free 5 days trial';
+        $plan->recurringAmount = '10.00';
+        $plan->recurringPeriodUnit = 'monthly';
+        $plan->recurringPeriodLength = '1';
+        $plan->trialPeriodUnit = 'daily';
+        $plan->trialPeriodLength = '5';
+        $plan->trialAmount = '0.00';
+        $plan->setupAmount = '10.00';
+        $plan->expireTime = '2014-12-12 12:00:00';
 
         $this->assertEquals(
-            '{"planId":"plan123ABC","name":"5 days trial","currency":"USD","description":"free 5 days trial","expireTime":"2014-12-12 12:00:00","setupAmount":"10.00","recurringAmount":"10.00","recurringIntervalUnit":"monthly","recurringIntervalLength":"1","trialAmount":"0.00","trialIntervalUnit":"daily","trialIntervalLength":"5"}',
+            '{"isActive":true,"name":"5 days trial","currency":"USD","description":"free 5 days trial","recurringAmount":"10.00","recurringPeriodUnit":"monthly","recurringPeriodLength":"1","trialAmount":"0.00","trialPeriodUnit":"daily","trialPeriodLength":"5","setupAmount":"10.00","expireTime":"2014-12-12 12:00:00"}',
             stripcslashes($plan->buildRequest($plan))
         );
     }
@@ -51,7 +51,7 @@ class RebillyPlanTest extends \Codeception\TestCase\Test
         $plan = new RebillyPlan('plan123ABC');
 
         $this->assertEquals(
-            '{"lookupPlanId":"plan123ABC"}',
+            '{"id":"plan123ABC"}',
             stripcslashes($plan->buildRequest($plan))
         );
     }

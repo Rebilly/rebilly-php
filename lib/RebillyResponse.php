@@ -70,7 +70,7 @@ class RebillyResponse
         if (isset($response->customer)) {
             $response = $response->customer;
         }
-        
+
         if (is_array($response) || is_object($response)) {
             $this->buildResponse($response);
         }
