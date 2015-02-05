@@ -1,5 +1,5 @@
 <?php
-// Require all Rebilly base class
+// Require all Rebilly base class - v2
 require_once(dirname(__FILE__) . '/lib/RebillyRequest.php');
 require_once(dirname(__FILE__) . '/lib/RebillyResponse.php');
 require_once(dirname(__FILE__) . '/lib/RebillyAddressInfo.php');
@@ -18,3 +18,16 @@ require_once(dirname(__FILE__) . '/lib/RebillyLayout.php');
 require_once(dirname(__FILE__) . '/lib/RebillyCustomField.php');
 require_once(dirname(__FILE__) . '/lib/util/RebillyCurlError.php');
 require_once(dirname(__FILE__) . '/lib/util/RebillyHttpStatusCode.php');
+
+// v2.1
+require_once(dirname(__FILE__) . '/lib/v2_1/Blacklist.php');
+require_once(dirname(__FILE__) . '/lib/v2_1/Customer.php');
+require_once(dirname(__FILE__) . '/lib/v2_1/Invoice.php');
+require_once(dirname(__FILE__) . '/lib/v2_1/InvoiceItem.php');
+require_once(dirname(__FILE__) . '/lib/v2_1/Layout.php');
+require_once(dirname(__FILE__) . '/lib/v2_1/PaymentCard.php');
+require_once(dirname(__FILE__) . '/lib/v2_1/Plan.php');
+require_once(dirname(__FILE__) . '/lib/v2_1/Signature.php');
+require_once(dirname(__FILE__) . '/lib/v2_1/Subscription.php');
+require_once(dirname(__FILE__) . '/lib/v2_1/Transaction.php');
+require_once(dirname(__FILE__) . '/lib/v2_1/Token.php');
