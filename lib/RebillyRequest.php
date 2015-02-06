@@ -36,8 +36,8 @@ abstract class RebillyRequest
      * @var array Key is the constant representing the environment and value is the base api endpoint url.
      */
     private $urls = array(
-        self::ENV_SANDBOX => 'https://api-sandbox.rebilly.com/v2/',
-        self::ENV_LIVE    => 'https://api.rebilly.com/v2/',
+        self::ENV_SANDBOX => 'https://api-sandbox.rebilly.com/v',
+        self::ENV_LIVE    => 'https://api.rebilly.com/v',
     );
 
     /**
@@ -56,6 +56,11 @@ abstract class RebillyRequest
      * @var string unique key for each user to call Rebilly API
      */
     private $apiKey;
+
+    /**
+     * @var $apiVersion
+     */
+    private $apiVersion = 2;
 
     abstract public function getPublicProperties($class);
 
@@ -102,6 +107,15 @@ abstract class RebillyRequest
     public function setApiUrl($url)
     {
         $this->apiUrl = $url;
+    }
+
+    /**
+     * Set API version
+     * @param $version
+     */
+    public function setVersion($version)
+    {
+        $this->apiVersion = $version;
     }
 
     /**
@@ -188,7 +202,7 @@ abstract class RebillyRequest
         if (!isset($this->apiUrl)) {
             $this->apiUrl = $this->urls[$this->environment];
         }
-        $this->apiUrl = $this->apiUrl . $this->controller;
+        $this->apiUrl = $this->apiUrl . $this->apiVersion . '/' . $this->controller;
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $this->apiUrl);
