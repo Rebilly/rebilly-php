@@ -66,6 +66,8 @@ class Contact extends RebillyRequest
     /** @var  string $postalCode */
     public $postalCode;
 
+    /** @var string $id */
+    private $id;
     /**
      * Set api version and endpoint
      * @param null $id
