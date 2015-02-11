@@ -67,6 +67,8 @@ class Customer extends RebillyRequest
     public $lastName;
     /** @var  string $ipAddress */
     public $ipAddress;
+    /** @var  string  $defaultCard */
+    public $defaultCard;
     /** @var  string $id */
     private $id;
 
