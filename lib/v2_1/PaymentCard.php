@@ -92,7 +92,7 @@ class PaymentCard extends RebillyRequest
     public function retrieve()
     {
         if (empty($this->id)) {
-            throw new Exception('invoice id cannot be empty.');
+            throw new Exception('PaymentCard id cannot be empty.');
         }
         $this->setApiController(self::CUSTOMER_END_POINT . $this->customerId . self::CARD_END_POINT . $this->id);
 
