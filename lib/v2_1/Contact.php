@@ -121,6 +121,21 @@ class Contact extends RebillyRequest
     }
 
     /**
+     * Create a new contact with ID
+     * @return RebillyResponse
+     */
+    public function update()
+    {
+        if (empty($this->id)) {
+            throw new Exception('contact id cannot be empty.');
+        }
+        $this->setApiController(self::CONTACT_END_POINT . $this->id);
+        $data = $this->buildRequest($this);
+
+        return $this->sendPutRequest($data);
+    }
+
+    /**
      * List all contacts
      * @return RebillyResponse
      */
