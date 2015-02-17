@@ -146,7 +146,7 @@ class Subscription extends RebillyRequest
     }
 
     /**
-     * Switch to new subscription
+     * Get a subscription
      * @return RebillyResponse
      */
     public function retrieve()
@@ -156,6 +156,17 @@ class Subscription extends RebillyRequest
         }
 
         $this->setApiController(self::CUSTOMER_END_POINT . $this->customerId . self::SUBSCRIPTION_END_POINT . $this->id);
+
+        return $this->sendGetRequest();
+    }
+
+    /**
+     * List all subscriptions belong to a customer
+     * @return RebillyResponse
+     */
+    public function listAll()
+    {
+        $this->setApiController(self::CUSTOMER_END_POINT . $this->customerId . self::SUBSCRIPTION_END_POINT);
 
         return $this->sendGetRequest();
     }

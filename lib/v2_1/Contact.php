@@ -121,7 +121,7 @@ class Contact extends RebillyRequest
     }
 
     /**
-     * List all contact belong to a customer
+     * List all contacts
      * @return RebillyResponse
      */
     public function listAll()
