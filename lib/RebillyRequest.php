@@ -61,6 +61,10 @@ abstract class RebillyRequest
      * @var $apiVersion
      */
     private $apiVersion = 2;
+    /**
+     * @var array $queryParams
+     */
+    private $queryParam;
 
     abstract public function getPublicProperties($class);
 
@@ -124,6 +128,11 @@ abstract class RebillyRequest
     public function getRequest()
     {
         return $this->request;
+    }
+
+    public function setQueryParam(array $param)
+    {
+        $this->queryParam = $param;
     }
 
     /**
@@ -204,6 +213,9 @@ abstract class RebillyRequest
         }
         $this->apiUrl = $this->apiUrl . $this->apiVersion . '/' . $this->controller;
 
+        if (isset($this->queryParam) && $verb === self::METHOD_GET) {
+            $this->apiUrl .= '?' . http_build_query($this->queryParam);
+        }
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $this->apiUrl);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);

@@ -37,14 +37,27 @@ use Exception;
  *
  * $response =  $contact->retrieve();
  *
- * if ($response->statusCode === 201) {
+ * if ($response->statusCode === 200) {
+ *     // Success
+ * }
+ * ~~~
+ *
+ * ~~~
+ * // List all contacts
+ * $contact = new Rebilly\v2_1\Contact();
+ * $contact->setEnvironment(RebillyRequest::ENV_SANDBOX);
+ * $contact->setApiKey('apiKey');
+ *
+ * $response =  $contact->listAll();
+ *
+ * if ($response->statusCode === 200) {
  *     // Success
  * }
  * ~~~
  */
 class Contact extends RebillyRequest
 {
-    const END_POINT = 'contacts/';
+    const CONTACT_END_POINT = 'contacts/';
     /** @var  string $firstName */
     public $firstName;
     /** @var  string $lastName */
@@ -68,6 +81,7 @@ class Contact extends RebillyRequest
 
     /** @var string $id */
     private $id;
+
     /**
      * Set api version and endpoint
      * @param null $id
@@ -78,7 +92,7 @@ class Contact extends RebillyRequest
             $this->id = $id;
         }
         $this->setVersion(2.1);
-        $this->setApiController(self::END_POINT);
+        $this->setApiController(self::CONTACT_END_POINT);
     }
 
     /**
@@ -101,8 +115,32 @@ class Contact extends RebillyRequest
         if (empty($this->id)) {
             throw new Exception('contact id cannot be empty.');
         }
-        $this->setApiController(self::END_POINT . $this->id);
+        $this->setApiController(self::CONTACT_END_POINT . $this->id);
 
+        return $this->sendGetRequest();
+    }
+
+    /**
+     * Create a new contact with ID
+     * @return RebillyResponse
+     */
+    public function update()
+    {
+        if (empty($this->id)) {
+            throw new Exception('contact id cannot be empty.');
+        }
+        $this->setApiController(self::CONTACT_END_POINT . $this->id);
+        $data = $this->buildRequest($this);
+
+        return $this->sendPutRequest($data);
+    }
+
+    /**
+     * List all contacts
+     * @return RebillyResponse
+     */
+    public function listAll()
+    {
         return $this->sendGetRequest();
     }
 

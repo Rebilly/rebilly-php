@@ -61,6 +61,10 @@ class Invoice extends RebillyRequest
     public $currency;
     /** @var  string $dueTime */
     public $dueTime;
+    /** @var  string $billingContact */
+    public $billingContact;
+    /** @var  string $deliveryContact */
+    public $deliveryContact;
 
     private $id;
 
