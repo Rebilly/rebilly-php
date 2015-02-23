@@ -39,7 +39,7 @@ use Exception;
  * }
  * ~~~
  * ===========================
- * List all transactions belong to a customer
+ * Get all transactions that belong to a customer
  * ===========================
  * ~~~
  * // Get a transaction
@@ -85,7 +85,7 @@ class Transaction extends RebillyRequest
     }
 
     /**
-     * Create authorized transaction
+     * Do refund
      * @return RebillyResponse
      */
     public function refund()
@@ -112,7 +112,7 @@ class Transaction extends RebillyRequest
     }
 
     /**
-     * Get all transactions belong to a customer
+     * Get all transactions that belong to a customer
      * @return RebillyResponse
      */
     public function retrieveCustomerTransaction()
