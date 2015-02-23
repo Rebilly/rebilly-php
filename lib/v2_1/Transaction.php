@@ -47,7 +47,7 @@ use Exception;
  * $transaction->setEnvironment(RebillyRequest::ENV_SANDBOX);
  * $transaction->setApiKey('apiKey');
  *
- * $response = $transaction->retrieveCustomerTransaction();
+ * $response = $transaction->retrieveByCustomer();
  * if ($response.statusCode === 200) {
  *     // Success
  * }
@@ -115,7 +115,7 @@ class Transaction extends RebillyRequest
      * Get all transactions that belong to a customer
      * @return RebillyResponse
      */
-    public function retrieveCustomerTransaction()
+    public function retrieveByCustomer()
     {
         if (empty($this->customerId)) {
             throw new Exception('Customer ID cannot be empty.');
