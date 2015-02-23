@@ -2,11 +2,15 @@
 namespace Rebilly\v2_1;
 
 use RebillyRequest;
+use Exception;
 
 /**
  * Class RebillyTransaction
  *
  * Usage:
+ * ===========================
+ * Refund a transaction
+ * ===========================
  * ~~~
  * // Create refund
  * $transaction = new Rebilly\v2_1\Transaction('transactionId');
@@ -20,7 +24,9 @@ use RebillyRequest;
  *     // Successfully refunded
  * }
  * ~~~
- *
+ * ===========================
+ * Get a transaction
+ * ===========================
  * ~~~
  * // Get a transaction
  * $transaction = new Rebilly\v2_1\Transaction('transactionId');
@@ -29,37 +35,62 @@ use RebillyRequest;
  *
  * $response = $transaction->retrieve();
  * if ($response.statusCode === 200) {
+ *     // Success
+ * }
+ * ~~~
+ * ===========================
+ * Get all transactions that belong to a customer
+ * ===========================
+ * ~~~
+ * // Get a transaction
+ * $transaction = new Rebilly\v2_1\Transaction(null, 'customerId');
+ * $transaction->setEnvironment(RebillyRequest::ENV_SANDBOX);
+ * $transaction->setApiKey('apiKey');
  *
+ * $response = $transaction->retrieveByCustomer();
+ * if ($response.statusCode === 200) {
+ *     // Success
  * }
  * ~~~
  */
 class Transaction extends RebillyRequest
 {
-    const END_POINT = 'transactions/';
+    const CUSTOMER_END_POINT = 'customers/';
+    const TRANSACTION_END_POINT = 'transactions/';
     /**
      * @var string $amount Amount to be refunded.
      */
     public $amount;
+    /** @var string $customerId */
+    private $customerId;
     /**
      * @var string $id transactionId
      */
-    public $id;
+    private $id;
 
-    public function __construct($id = null)
+    /**
+     * Set version
+     * @param null $id
+     * @param null $customerId
+     */
+    public function __construct($id = null, $customerId = null)
     {
         if (!empty($id)) {
             $this->id = $id;
+        }
+        if (!empty($customerId)) {
+            $this->customerId = $customerId;
         }
         $this->setVersion(2.1);
     }
 
     /**
-     * Create authorized transaction
+     * Do refund
      * @return RebillyResponse
      */
     public function refund()
     {
-        $this->setApiController(self::END_POINT . $this->id . '/refund/');
+        $this->setApiController(self::TRANSACTION_END_POINT . $this->id . '/refund/');
 
         $data = $this->buildRequest($this);
 
@@ -72,7 +103,24 @@ class Transaction extends RebillyRequest
      */
     public function retrieve()
     {
-        $this->setApiController(self::END_POINT . $this->id);
+        if (empty($this->id)) {
+            throw new Exception('Transaction ID cannot be empty.');
+        }
+        $this->setApiController(self::TRANSACTION_END_POINT . $this->id);
+
+        return $this->sendGetRequest();
+    }
+
+    /**
+     * Get all transactions that belong to a customer
+     * @return RebillyResponse
+     */
+    public function retrieveByCustomer()
+    {
+        if (empty($this->customerId)) {
+            throw new Exception('Customer ID cannot be empty.');
+        }
+        $this->setApiController(self::CUSTOMER_END_POINT . $this->customerId . '/' . self::TRANSACTION_END_POINT);
 
         return $this->sendGetRequest();
     }
