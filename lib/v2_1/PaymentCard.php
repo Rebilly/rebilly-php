@@ -61,8 +61,8 @@ class PaymentCard extends RebillyRequest
     public $expMonth;
     /** @var int $expYear */
     public $expYear;
-    /** @var string $contact */
-    public $contact;
+    /** @var string $billingContact */
+    public $billingContact;
     /** @var int $cvv */
     public $cvv;
     /** @var string $token */
@@ -73,6 +73,12 @@ class PaymentCard extends RebillyRequest
     /** @var string $id */
     private $id;
 
+    /**
+     * Set customer's ID and version
+     * @param string $customerId
+     * @param null $id
+     * @throws Exception
+     */
     public function __construct($customerId, $id = null)
     {
         $this->customerId = $customerId;
