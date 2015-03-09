@@ -57,8 +57,8 @@ class Subscription extends RebillyRequest
     public $website;
     /** @var  string $paymentCard */
     public $paymentCard;
-    /** @var  string $deliveryAddress */
-    public $deliveryAddress;
+    /** @var  string $deliveryContact */
+    public $deliveryContact;
     /** @var  integer $quantity */
     public $quantity;
     /** @var  string $policy */
