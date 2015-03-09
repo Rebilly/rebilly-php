@@ -48,11 +48,13 @@ class RebillyPlanTest extends \Codeception\TestCase\Test
      */
     public function testDelete()
     {
-        $plan = new RebillyPlan('plan123ABC');
-
-        $this->assertEquals(
-            '{"id":"plan123ABC"}',
-            stripcslashes($plan->buildRequest($plan))
-        );
+        //@todo Since we change to new API
+        // ID is in the URL now, this test is useless now
+//        $plan = new RebillyPlan('plan123ABC');
+//
+//        $this->assertEquals(
+//            '{"id":"plan123ABC"}',
+//            stripcslashes($plan->buildRequest($plan))
+//        );
     }
 }
