@@ -276,7 +276,8 @@ abstract class RebillyRequest
             // Get all properties of the class and value
             $objectArray = $this->getPublicProperties($object);
             // Get only public properties of the class -- name only
-            $properties = (new ReflectionObject($object))->getProperties(ReflectionProperty::IS_PUBLIC);
+            $reflectionClass = new ReflectionObject($object);
+            $properties = $reflectionClass->getProperties(ReflectionProperty::IS_PUBLIC);
             foreach ($properties as $property) {
                 $publicProperties[$property->name] = $property->name;
             }
