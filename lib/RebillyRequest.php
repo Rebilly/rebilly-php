@@ -271,10 +271,15 @@ abstract class RebillyRequest
     public function buildRequest($object, $asJson = true)
     {
         $data = array();
+        $publicProperties = array();
         $objectArray = is_object($object) ? $this->getPublicProperties($object) : $object;
+        $properties = (new ReflectionObject($object))->getProperties(ReflectionProperty::IS_PUBLIC);
+        foreach ($properties as $property) {
+            $publicProperties[$property->name] = $property->name;
+        }
         foreach ($objectArray as $key => $value) {
             $value = (is_array($value) || is_object($value)) ? $this->buildRequest($value, false) : $value;
-            if (!empty($value)) {
+            if (!empty($value) && isset($publicProperties[$key])) {
                 $data[$key] = $value;
             }
         }
