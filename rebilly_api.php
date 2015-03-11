@@ -23,6 +23,7 @@ require_once(dirname(__FILE__) . '/lib/util/RebillyHttpStatusCode.php');
 require_once(dirname(__FILE__) . '/lib/v2_1/Blacklist.php');
 require_once(dirname(__FILE__) . '/lib/v2_1/Contact.php');
 require_once(dirname(__FILE__) . '/lib/v2_1/Customer.php');
+require_once(dirname(__FILE__) . '/lib/v2_1/Dispute.php');
 require_once(dirname(__FILE__) . '/lib/v2_1/Invoice.php');
 require_once(dirname(__FILE__) . '/lib/v2_1/InvoiceItem.php');
 require_once(dirname(__FILE__) . '/lib/v2_1/Layout.php');
