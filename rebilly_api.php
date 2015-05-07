@@ -27,6 +27,7 @@ require_once(dirname(__FILE__) . '/lib/v2_1/Dispute.php');
 require_once(dirname(__FILE__) . '/lib/v2_1/Invoice.php');
 require_once(dirname(__FILE__) . '/lib/v2_1/InvoiceItem.php');
 require_once(dirname(__FILE__) . '/lib/v2_1/Layout.php');
+require_once(dirname(__FILE__) . '/lib/v2_1/LeadSource.php');
 require_once(dirname(__FILE__) . '/lib/v2_1/PaymentCard.php');
 require_once(dirname(__FILE__) . '/lib/v2_1/Plan.php');
 require_once(dirname(__FILE__) . '/lib/v2_1/Signature.php');
