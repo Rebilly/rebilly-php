@@ -1,5 +1,8 @@
 <?php
 
+use Rebilly\HttpClient\HttpClientAdapter;
+use Rebilly\HttpClient\CurlAdapter\CurlAdapter;
+
 /**
  * Class RebillyRequest.
  */
@@ -35,7 +38,7 @@ abstract class RebillyRequest
     /** @var string */
     private $requestBody;
 
-    /** @var RebillyHttpClient */
+    /** @var HttpClientAdapter */
     private $clientAdapter;
 
     /**
@@ -214,7 +217,7 @@ abstract class RebillyRequest
      */
     final public function sendGetRequest()
     {
-        $this->method = RebillyHttpClient::METHOD_GET;
+        $this->method = HttpClientAdapter::METHOD_GET;
 
         return $this->getClientAdapter()->sendRequest($this);
     }
@@ -228,7 +231,7 @@ abstract class RebillyRequest
      */
     final public function sendPostRequest($data)
     {
-        $this->method = RebillyHttpClient::METHOD_POST;
+        $this->method = HttpClientAdapter::METHOD_POST;
         $this->data = $data;
 
         return $this->getClientAdapter()->sendRequest($this);
@@ -243,7 +246,7 @@ abstract class RebillyRequest
      */
     final public function sendPutRequest($data)
     {
-        $this->method = RebillyHttpClient::METHOD_PUT;
+        $this->method = HttpClientAdapter::METHOD_PUT;
         $this->data = $data;
 
         return $this->getClientAdapter()->sendRequest($this);
@@ -258,37 +261,37 @@ abstract class RebillyRequest
      */
     final public function sendDeleteRequest($data)
     {
-        $this->method = RebillyHttpClient::METHOD_DELETE;
+        $this->method = HttpClientAdapter::METHOD_DELETE;
         $this->data = $data;
 
         return $this->getClientAdapter()->sendRequest($this);
     }
 
     /**
-     * @param RebillyHttpClient $adapter
+     * @param HttpClientAdapter $adapter
      */
-    public function setClientAdapter(RebillyHttpClient $adapter)
+    public function setClientAdapter(HttpClientAdapter $adapter)
     {
         $this->clientAdapter = $adapter;
     }
 
     /**
-     * @return RebillyHttpClient
+     * @return HttpClientAdapter
      */
     public function getClientAdapter()
     {
         if ($this->clientAdapter === null) {
-            $this->clientAdapter = $this->getDefaultClientAdapter();
+            $this->setClientAdapter($this->getDefaultClientAdapter());
         }
         return $this->clientAdapter;
     }
 
     /**
-     * @return RebillyCurlAdapter
+     * @return CurlAdapter
      */
     private function getDefaultClientAdapter()
     {
-        return new RebillyCurlAdapter();
+        return new CurlAdapter();
     }
 
     /**

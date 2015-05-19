@@ -1,13 +1,29 @@
 <?php
 /**
+ * This file is part of Rebilly.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @see http://rebilly.com
+ */
+
+namespace Rebilly\HttpClient\CurlAdapter;
+
+use Exception;
+use Rebilly\HttpClient\HttpClientAdapter;
+use RebillyRequest as Request;
+use RebillyResponse as Response;
+
+/**
  * Class RebillyCurlAdapter.
  */
-class RebillyCurlAdapter implements RebillyHttpClient
+class CurlAdapter implements HttpClientAdapter
 {
     /**
      * {@inheritdoc}
      */
-    public function sendRequest(RebillyRequest $request)
+    public function sendRequest(Request $request)
     {
         $headers = array(
             'Accept: application/json',
@@ -57,7 +73,7 @@ class RebillyCurlAdapter implements RebillyHttpClient
         $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
-        $rebillyResponse = new RebillyResponse($statusCode, $response);
+        $rebillyResponse = new Response($statusCode, $response);
         $rebillyResponse->prepareResponse();
 
         return $rebillyResponse;
@@ -73,9 +89,9 @@ class RebillyCurlAdapter implements RebillyHttpClient
     private function handleError($errorNumber)
     {
         switch ($errorNumber) {
-            case RebillyCurlError::$codes['CURLE_COULDNT_CONNECT'] :
-            case RebillyCurlError::$codes['CURLE_COULDNT_RESOLVE_HOST'] :
-            case RebillyCurlError::$codes['CURLE_OPERATION_TIMEOUTED'] :
+            case CurlError::$codes['CURLE_COULDNT_CONNECT'] :
+            case CurlError::$codes['CURLE_COULDNT_RESOLVE_HOST'] :
+            case CurlError::$codes['CURLE_OPERATION_TIMEOUTED'] :
                 throw new Exception('Failed connect to Rebilly.');
             default:
                 throw new Exception('An unexpected error occurred connecting with Rebilly.');
