@@ -1,4 +1,10 @@
 <?php
+// Common classes
+require_once(dirname(__FILE__) . '/lib/HttpClient/HttpClientAdapter.php');
+require_once(dirname(__FILE__) . '/lib/HttpClient/CurlAdapter/CurlAdapter.php');
+require_once(dirname(__FILE__) . '/lib/HttpClient/CurlAdapter/CurlError.php');
+require_once(dirname(__FILE__) . '/lib/util/RebillyHttpStatusCode.php');
+
 // Require all Rebilly base class - v2
 require_once(dirname(__FILE__) . '/lib/RebillyRequest.php');
 require_once(dirname(__FILE__) . '/lib/RebillyResponse.php');
@@ -16,8 +22,6 @@ require_once(dirname(__FILE__) . '/lib/RebillyThreeDSecure.php');
 require_once(dirname(__FILE__) . '/lib/RebillyPlan.php');
 require_once(dirname(__FILE__) . '/lib/RebillyLayout.php');
 require_once(dirname(__FILE__) . '/lib/RebillyCustomField.php');
-require_once(dirname(__FILE__) . '/lib/util/RebillyCurlError.php');
-require_once(dirname(__FILE__) . '/lib/util/RebillyHttpStatusCode.php');
 
 // v2.1
 require_once(dirname(__FILE__) . '/lib/v2_1/Blacklist.php');

@@ -1,6 +1,19 @@
 <?php
+/**
+ * This file is part of Rebilly.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @see http://rebilly.com
+ */
 
-class RebillyCurlError
+namespace Rebilly\HttpClient\CurlAdapter;
+
+/**
+ * Class CurlError.
+ */
+class CurlError
 {
     public static $codes = array(
         'CURLE_UNSUPPORTED_PROTOCOL' => 1,
