@@ -24,7 +24,7 @@
       "classmap": ["lib/","lib/util"]
     },
     "require-dev": {
-        "codeception/codeception": "*",
+        "codeception/codeception": "~1.8",
         "codeception/verify": "*"
     }
 }
