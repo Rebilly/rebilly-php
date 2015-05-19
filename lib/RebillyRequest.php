@@ -265,7 +265,15 @@ abstract class RebillyRequest
     }
 
     /**
-     * @return RebillyCurlAdapter
+     * @param RebillyHttpClient $adapter
+     */
+    public function setClientAdapter(RebillyHttpClient $adapter)
+    {
+        $this->clientAdapter = $adapter;
+    }
+
+    /**
+     * @return RebillyHttpClient
      */
     public function getClientAdapter()
     {
