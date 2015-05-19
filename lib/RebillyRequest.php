@@ -1,51 +1,42 @@
 <?php
 
 /**
- * Class RebillyRequest
+ * Class RebillyRequest.
  */
 abstract class RebillyRequest
 {
     /**
-     * Verb GET method
+     * String environment.
      */
-    const METHOD_GET = 'GET';
+    const ENV_SANDBOX = 'sandbox';
+    const ENV_LIVE = 'live';
 
     /**
-     * Verb POST method
+     * @deprecated
      */
-    const METHOD_POST = 'POST';
-
-    /**
-     * Verb PUT method
-     */
-    const METHOD_PUT = 'PUT';
-
-    /**
-     * Verb DELETE method
-     */
-    const METHOD_DELETE = 'DELETE';
-
-    /**
-     * string environment
-     */
-    const ENV_SANDBOX    = 'sandbox';
-    const ENV_LIVE       = 'live';
-    // will be deprecated soon
     const ENV_PRODUCTION = 'live';
+
     /**
      * @var array Key is the constant representing the environment and value is the base api endpoint url.
      */
     private $urls = array(
         self::ENV_SANDBOX => 'https://api-sandbox.rebilly.com/v',
-        self::ENV_LIVE    => 'https://api.rebilly.com/v',
+        self::ENV_LIVE => 'https://api.rebilly.com/v',
     );
 
     /**
      * @var string the environment relates to the endpoint - it defaults to development environment.
      */
     private $environment = self::ENV_SANDBOX;
+
+    /** @var string */
     private $controller;
-    private $request;
+
+    /** @var string */
+    private $requestBody;
+
+    /** @var RebillyHttpClient */
+    private $clientAdapter;
 
     /**
      * @var string Rebilly base API URL
@@ -57,19 +48,69 @@ abstract class RebillyRequest
      */
     private $apiKey;
 
-    /**
-     * @var $apiVersion
-     */
+    /** @var float */
     private $apiVersion = 2;
+
     /**
-     * @var array $queryParams
+     * @var array
      */
     private $queryParam;
+
+    /**
+     * @var string
+     */
+    private $method;
+
+    /**
+     * @var mixed
+     */
+    private $data;
 
     abstract public function getPublicProperties($class);
 
     /**
-     * Set api key
+     * @return string
+     */
+    final public function getMethod()
+    {
+        return $this->method;
+    }
+
+    /**
+     * @return mixed
+     */
+    final public function getData()
+    {
+        return $this->data;
+    }
+
+    /**
+     * Get api URL.
+     *
+     * @throws Exception
+     *
+     * @return string
+     */
+    final public function prepareUrl()
+    {
+        if ($this->environment === null || !array_key_exists($this->environment, $this->urls)) {
+            throw new Exception('Please set the correct environment.');
+        }
+
+        if (!isset($this->apiUrl)) {
+            $this->apiUrl = $this->urls[$this->environment];
+        }
+
+        $this->apiUrl = $this->apiUrl . $this->apiVersion . '/' . $this->controller;
+
+        if (isset($this->queryParam)) {
+            $this->apiUrl .= '?' . http_build_query($this->queryParam);
+        }
+    }
+
+    /**
+     * Set api key.
+     *
      * @param string $key
      */
     public function setApiKey($key)
@@ -78,7 +119,18 @@ abstract class RebillyRequest
     }
 
     /**
-     * Set environment
+     * Get api key.
+     *
+     * @return string
+     */
+    public function getApiKey()
+    {
+        return $this->apiKey;
+    }
+
+    /**
+     * Set environment.
+     *
      * @param string $env
      */
     public function setEnvironment($env)
@@ -87,7 +139,8 @@ abstract class RebillyRequest
     }
 
     /**
-     * Set controller
+     * Set controller.
+     *
      * @param $controller
      */
     public function setApiController($controller)
@@ -96,7 +149,8 @@ abstract class RebillyRequest
     }
 
     /**
-     * Get URL
+     * Get URL.
+     *
      * @return string
      */
     public function getApiUrl()
@@ -105,7 +159,8 @@ abstract class RebillyRequest
     }
 
     /**
-     * Set API url
+     * Set API url.
+     *
      * @param $url
      */
     public function setApiUrl($url)
@@ -114,7 +169,8 @@ abstract class RebillyRequest
     }
 
     /**
-     * Set API version
+     * Set API version.
+     *
      * @param $version
      */
     public function setVersion($version)
@@ -127,7 +183,7 @@ abstract class RebillyRequest
      */
     public function getRequest()
     {
-        return $this->request;
+        return $this->requestBody;
     }
 
     public function setQueryParam(array $param)
@@ -136,7 +192,8 @@ abstract class RebillyRequest
     }
 
     /**
-     * Set attributes
+     * Set attributes.
+     *
      * @param array $attributes
      */
     public function setAttributes($attributes)
@@ -151,114 +208,79 @@ abstract class RebillyRequest
     }
 
     /**
-     * Send a GET request
-     * @return array response back from Rebilly
-     */
-    public function sendGetRequest()
-    {
-        return $this->sendRequest(self::METHOD_GET);
-    }
-
-    /**
-     * Send a POST request
-     * @param array $data data need to be sent to Rebilly
-     * @return array response back from Rebilly
-     */
-    public function sendPostRequest($data)
-    {
-        return $this->sendRequest(self::METHOD_POST, $data);
-    }
-
-    /**
-     * Send a PUT request
-     * @param array $data data need to be sent to Rebilly
-     * @return array response back from Rebilly
-     */
-    public function sendPutRequest($data)
-    {
-        return $this->sendRequest(self::METHOD_PUT, $data);
-    }
-
-    /**
-     * Send a DELETE request
-     * @param array $data data need to be sent to Rebilly
-     * @return array response back from Rebilly
-     */
-    public function sendDeleteRequest($data)
-    {
-        return $this->sendRequest(self::METHOD_DELETE, $data);
-    }
-
-    /**
-     * Sends request to Rebilly API, and returns prepared response.
+     * Send a GET request.
      *
-     * @param string $verb specific method for the request
-     * @param string|null $data data need to be sent for POST or PUT requests body
-     * @return array $response response back from Rebilly
+     * @return RebillyResponse response back from Rebilly
      */
-    private function sendRequest($verb, $data = null)
+    final public function sendGetRequest()
     {
-        $headers = array(
-            'Accept: application/json',
-            'Content-Type: application/json',
-            'REB-APIKEY:' . $this->apiKey,
-        );
+        $this->method = RebillyHttpClient::METHOD_GET;
 
-        if ($this->environment === null || !array_key_exists($this->environment, $this->urls)) {
-            throw new Exception('Please set the correct environment.');
+        return $this->getClientAdapter()->sendRequest($this);
+    }
+
+    /**
+     * Send a POST request.
+     *
+     * @param array $data data need to be sent to Rebilly
+     *
+     * @return RebillyResponse response back from Rebilly
+     */
+    final public function sendPostRequest($data)
+    {
+        $this->method = RebillyHttpClient::METHOD_POST;
+        $this->data = $data;
+
+        return $this->getClientAdapter()->sendRequest($this);
+    }
+
+    /**
+     * Send a PUT request.
+     *
+     * @param array $data data need to be sent to Rebilly
+     *
+     * @return RebillyResponse response back from Rebilly
+     */
+    final public function sendPutRequest($data)
+    {
+        $this->method = RebillyHttpClient::METHOD_PUT;
+        $this->data = $data;
+
+        return $this->getClientAdapter()->sendRequest($this);
+    }
+
+    /**
+     * Send a DELETE request.
+     *
+     * @param array $data data need to be sent to Rebilly
+     *
+     * @return RebillyResponse response back from Rebilly
+     */
+    final public function sendDeleteRequest($data)
+    {
+        $this->method = RebillyHttpClient::METHOD_DELETE;
+        $this->data = $data;
+
+        return $this->getClientAdapter()->sendRequest($this);
+    }
+
+    /**
+     * @return RebillyCurlAdapter
+     */
+    public function getClientAdapter()
+    {
+        if ($this->clientAdapter === null) {
+            $this->clientAdapter = $this->getDefaultClientAdapter();
         }
+        return $this->clientAdapter;
+    }
 
-        if (!isset($this->apiUrl)) {
-            $this->apiUrl = $this->urls[$this->environment];
-        }
-        $this->apiUrl = $this->apiUrl . $this->apiVersion . '/' . $this->controller;
-
-        if (isset($this->queryParam) && $verb === self::METHOD_GET) {
-            $this->apiUrl .= '?' . http_build_query($this->queryParam);
-        }
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $this->apiUrl);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_MAXREDIRS, 1);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 20);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 100);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
-
-        switch ($verb) {
-            case self::METHOD_GET:
-                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, self::METHOD_GET);
-                break;
-            case self::METHOD_POST:
-                curl_setopt($ch, CURLOPT_POST, true);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-                break;
-            case self::METHOD_PUT:
-                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, self::METHOD_PUT);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-                break;
-            case self::METHOD_DELETE:
-                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, self::METHOD_DELETE);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-                break;
-        }
-        $response = curl_exec($ch);
-
-        if ($response === false) {
-            $errorNumber = curl_errno($ch);
-            $this->handleError($errorNumber);
-            curl_close($ch);
-        }
-
-        $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
-
-        $rebillyResponse = new RebillyResponse($statusCode, $response);
-        $rebillyResponse->prepareResponse();
-
-        return $rebillyResponse;
+    /**
+     * @return RebillyCurlAdapter
+     */
+    private function getDefaultClientAdapter()
+    {
+        return new RebillyCurlAdapter();
     }
 
     /**
@@ -266,6 +288,8 @@ abstract class RebillyRequest
      * Encode the request in json.
      *
      * @param mixed $object
+     * @param bool $asJson
+     *
      * @return string $this->request the json encoded request
      */
     public function buildRequest($object, $asJson = true)
@@ -296,24 +320,8 @@ abstract class RebillyRequest
         if (!$asJson) {
             return $data;
         }
-        $this->request = json_encode($data);
+        $this->requestBody = json_encode($data);
 
-        return $this->request;
-    }
-
-    /**
-     * curl Error handling
-     * @param int $errorNumber curl error code
-     */
-    private function handleError($errorNumber)
-    {
-        switch ($errorNumber) {
-            case RebillyCurlError::$codes['CURLE_COULDNT_CONNECT'] :
-            case RebillyCurlError::$codes['CURLE_COULDNT_RESOLVE_HOST'] :
-            case RebillyCurlError::$codes['CURLE_OPERATION_TIMEOUTED'] :
-                throw new Exception('Failed connect to Rebilly.');
-            default:
-                throw new Exception('An unexpected error occurred connecting with Rebilly.');
-        }
+        return $this->requestBody;
     }
 }

@@ -16,7 +16,9 @@ require_once(dirname(__FILE__) . '/lib/RebillyThreeDSecure.php');
 require_once(dirname(__FILE__) . '/lib/RebillyPlan.php');
 require_once(dirname(__FILE__) . '/lib/RebillyLayout.php');
 require_once(dirname(__FILE__) . '/lib/RebillyCustomField.php');
+require_once(dirname(__FILE__) . '/lib/util/RebillyCurlAdapter.php');
 require_once(dirname(__FILE__) . '/lib/util/RebillyCurlError.php');
+require_once(dirname(__FILE__) . '/lib/util/RebillyHttpClient.php');
 require_once(dirname(__FILE__) . '/lib/util/RebillyHttpStatusCode.php');
 
 // v2.1
