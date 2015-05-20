@@ -11,7 +11,9 @@ class RebillyHttpStatusCode
      */
     const STATUS_OK = 200;
     const STATUS_CREATED = 201;
+    const STATUS_ACCEPTED = 202;
     const STATUS_NO_CONTENT = 204;
+    const REDIRECT_SEE_OTHER = 303;
     const ERROR_BAD_REQUEST = 400;
     const ERROR_UNAUTHORIZED = 401;
     const ERROR_REQUEST_FAILED = 402;
