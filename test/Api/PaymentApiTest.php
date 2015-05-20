@@ -88,6 +88,18 @@ final class PaymentApiTest extends TestCase
     }
 
     /**
+     * @return array
+     */
+    protected function demoInvalidPayment()
+    {
+        return [
+            'details' => [
+                'Error message',
+            ],
+        ];
+    }
+
+    /**
      * @test
      * @expectedResponseJson demoPaymentList
      */
@@ -177,6 +189,20 @@ final class PaymentApiTest extends TestCase
         $request = $this->history()->getLastRequest();
 
         $this->assertEquals('/v2.1/queue/payments/dummy_payment_1/', $request->getPath());
+    }
+
+    /**
+     * @test
+     * @expectedResponseStatus 422
+     * @expectedResponseJson demoInvalidPayment
+     */
+    public function createPaymentWithInvalidData()
+    {
+        $response = $this->controller->createPayment();
+        $data = $response->getRawResponse();
+
+        $this->assertEquals(422, $response->statusCode);
+        $this->assertObjectHasAttribute('details', $data);
     }
 
     /**
