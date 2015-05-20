@@ -11,6 +11,7 @@
 namespace Rebilly\Test\Adapter;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Stream\Stream;
 use Rebilly\HttpClient\HttpClient;
 use RebillyRequest as Request;
@@ -51,7 +52,11 @@ final class GuzzleAdapter implements HttpClient
             $guzzleRequest->setBody(Stream::factory($request->getData()));
         }
 
-        $guzzleResponse = $this->client->send($guzzleRequest);
+        try {
+            $guzzleResponse = $this->client->send($guzzleRequest);
+        } catch (ClientException $e) {
+            $guzzleResponse = $e->getResponse();
+        }
 
         $response = new Response(
             $guzzleResponse->getStatusCode(),
