@@ -41,7 +41,7 @@ class RebillyResponse
      */
     public $statusCode;
     /**
-     * @var JSON object $response response from Rebilly
+     * @var string JSON object $response response from Rebilly
      */
     private $response;
     /**
@@ -78,7 +78,8 @@ class RebillyResponse
 
     /**
      * Check response and add to errors or warning if any
-     * @param object $response
+     *
+     * @param object|array $response
      */
     private function buildResponse($response)
     {
@@ -109,11 +110,13 @@ class RebillyResponse
     }
 
     /**
-     * @return array raw response from Rebilly
+     * @param bool $asArray
+     *
+     * @return object|array raw response from Rebilly
      */
-    public function getRawResponse()
+    public function getRawResponse($asArray = false)
     {
-        return json_decode($this->response);
+        return json_decode($this->response, $asArray);
     }
 
     /**

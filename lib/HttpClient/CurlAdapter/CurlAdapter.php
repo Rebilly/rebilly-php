@@ -11,14 +11,14 @@
 namespace Rebilly\HttpClient\CurlAdapter;
 
 use Exception;
-use Rebilly\HttpClient\HttpClientAdapter;
+use Rebilly\HttpClient\HttpClient;
 use RebillyRequest as Request;
 use RebillyResponse as Response;
 
 /**
  * Class RebillyCurlAdapter.
  */
-class CurlAdapter implements HttpClientAdapter
+class CurlAdapter implements HttpClient
 {
     /**
      * {@inheritdoc}
@@ -45,6 +45,10 @@ class CurlAdapter implements HttpClientAdapter
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
 
         switch ($request->getMethod()) {
+            case self::METHOD_HEAD:
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, self::METHOD_HEAD);
+                curl_setopt($ch, CURLOPT_NOBODY, true);
+                break;
             case self::METHOD_GET:
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, self::METHOD_GET);
                 break;

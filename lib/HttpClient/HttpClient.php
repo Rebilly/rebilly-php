@@ -14,10 +14,15 @@ use RebillyRequest as Request;
 use RebillyResponse as Response;
 
 /**
- * Interface HttpClientAdapter.
+ * Interface HttpClient.
  */
-interface HttpClientAdapter
+interface HttpClient
 {
+    /**
+     * Verb HEAD method.
+     */
+    const METHOD_HEAD = 'HEAD';
+
     /**
      * Verb GET method.
      */

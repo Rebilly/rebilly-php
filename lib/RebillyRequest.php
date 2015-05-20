@@ -1,6 +1,6 @@
 <?php
 
-use Rebilly\HttpClient\HttpClientAdapter;
+use Rebilly\HttpClient\HttpClient;
 use Rebilly\HttpClient\CurlAdapter\CurlAdapter;
 
 /**
@@ -38,7 +38,7 @@ abstract class RebillyRequest
     /** @var string */
     private $requestBody;
 
-    /** @var HttpClientAdapter */
+    /** @var HttpClient */
     private $clientAdapter;
 
     /**
@@ -90,24 +90,25 @@ abstract class RebillyRequest
     /**
      * Get api URL.
      *
+     * @param bool $refresh
+     *
      * @throws Exception
      *
      * @return string
      */
-    final public function prepareUrl()
+    final public function prepareUrl($refresh = false)
     {
-        if ($this->environment === null || !array_key_exists($this->environment, $this->urls)) {
-            throw new Exception('Please set the correct environment.');
-        }
+        if (!isset($this->apiUrl) || $refresh) {
+            if ($this->environment === null || !array_key_exists($this->environment, $this->urls)) {
+                throw new Exception('Please set the correct environment.');
+            }
 
-        if (!isset($this->apiUrl)) {
             $this->apiUrl = $this->urls[$this->environment];
-        }
+            $this->apiUrl = $this->apiUrl . $this->apiVersion . '/' . $this->controller;
 
-        $this->apiUrl = $this->apiUrl . $this->apiVersion . '/' . $this->controller;
-
-        if (isset($this->queryParam)) {
-            $this->apiUrl .= '?' . http_build_query($this->queryParam);
+            if (isset($this->queryParam)) {
+                $this->apiUrl .= '?' . http_build_query($this->queryParam);
+            }
         }
     }
 
@@ -217,9 +218,9 @@ abstract class RebillyRequest
      */
     final public function sendGetRequest()
     {
-        $this->method = HttpClientAdapter::METHOD_GET;
+        $this->method = HttpClient::METHOD_GET;
 
-        return $this->getClientAdapter()->sendRequest($this);
+        return $this->getHttpClient()->sendRequest($this);
     }
 
     /**
@@ -231,10 +232,10 @@ abstract class RebillyRequest
      */
     final public function sendPostRequest($data)
     {
-        $this->method = HttpClientAdapter::METHOD_POST;
+        $this->method = HttpClient::METHOD_POST;
         $this->data = $data;
 
-        return $this->getClientAdapter()->sendRequest($this);
+        return $this->getHttpClient()->sendRequest($this);
     }
 
     /**
@@ -246,10 +247,10 @@ abstract class RebillyRequest
      */
     final public function sendPutRequest($data)
     {
-        $this->method = HttpClientAdapter::METHOD_PUT;
+        $this->method = HttpClient::METHOD_PUT;
         $this->data = $data;
 
-        return $this->getClientAdapter()->sendRequest($this);
+        return $this->getHttpClient()->sendRequest($this);
     }
 
     /**
@@ -261,27 +262,39 @@ abstract class RebillyRequest
      */
     final public function sendDeleteRequest($data)
     {
-        $this->method = HttpClientAdapter::METHOD_DELETE;
+        $this->method = HttpClient::METHOD_DELETE;
         $this->data = $data;
 
-        return $this->getClientAdapter()->sendRequest($this);
+        return $this->getHttpClient()->sendRequest($this);
     }
 
     /**
-     * @param HttpClientAdapter $adapter
+     * Send a HEAD request.
+     *
+     * @return RebillyResponse response back from Rebilly
      */
-    public function setClientAdapter(HttpClientAdapter $adapter)
+    final public function sendHeadRequest()
+    {
+        $this->method = HttpClient::METHOD_HEAD;
+
+        return $this->getHttpClient()->sendRequest($this);
+    }
+
+    /**
+     * @param HttpClient $adapter
+     */
+    public function setHttpClient(HttpClient $adapter)
     {
         $this->clientAdapter = $adapter;
     }
 
     /**
-     * @return HttpClientAdapter
+     * @return HttpClient
      */
-    public function getClientAdapter()
+    public function getHttpClient()
     {
         if ($this->clientAdapter === null) {
-            $this->setClientAdapter($this->getDefaultClientAdapter());
+            $this->setHttpClient($this->getDefaultHttpClient());
         }
         return $this->clientAdapter;
     }
@@ -289,7 +302,7 @@ abstract class RebillyRequest
     /**
      * @return CurlAdapter
      */
-    private function getDefaultClientAdapter()
+    private function getDefaultHttpClient()
     {
         return new CurlAdapter();
     }
