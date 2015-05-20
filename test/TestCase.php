@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of PHP Rebilly API.
+ * This file is part of the PHP Rebilly API package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -21,8 +21,6 @@ use Rebilly\Test\Adapter\GuzzleAdapter;
 
 /**
  * Class TestCase.
- *
- * @author Veaceslav Medvedev <slavcopost@gmail.com>
  */
 class TestCase extends AbstractTestCase
 {

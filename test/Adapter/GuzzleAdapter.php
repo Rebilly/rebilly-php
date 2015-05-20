@@ -2,10 +2,10 @@
 /**
  * This file is part of the PHP Rebilly API package.
  *
- * (c) Veaceslav Medvedev <slavcopost@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE.md
+ * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
+ * @see http://rebilly.com
  */
 
 namespace Rebilly\Test\Adapter;
@@ -18,8 +18,6 @@ use RebillyResponse as Response;
 
 /**
  * Class GuzzleAdapter.
- *
- * @author Veaceslav Medvedev <slavcopost@gmail.com>
  */
 final class GuzzleAdapter implements HttpClient
 {
