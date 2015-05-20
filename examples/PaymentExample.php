@@ -151,7 +151,8 @@ final class PaymentExample
         $response = $payment->create();
 
         if ($response->statusCode === RebillyHttpStatusCode::ERROR_UNPROCESSABLE_ENTITY) {
-            $this->log('Cannot save payment. The payment data has errors');
+            $data = $response->getRawResponse();
+            $this->log('Cannot save payment. The payment data has errors: ' . json_encode($data->details));
         } elseif ($response->statusCode === RebillyHttpStatusCode::STATUS_ACCEPTED) {
             $data = $response->getRawResponse();
             $this->log('Payment "' . $data->id . '" was scheduled at ' . $data->createdTime);
