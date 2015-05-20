@@ -9,6 +9,8 @@ use Exception;
 
 /**
  * Class Payment.
+ *
+ * @example https://github.com/Rebilly/rebilly-php/blob/master/examples/PaymentExample.php
  */
 class Payment extends RebillyRequest
 {
