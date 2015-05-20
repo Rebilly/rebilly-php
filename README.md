@@ -1,4 +1,4 @@
-# Rebill PHP Client
+# Rebilly PHP Client
 
 [![Build Status](https://img.shields.io/travis/Rebilly/rebilly-php/master.svg?style=flat-square)](https://travis-ci.org/Rebilly/rebilly-php)
 [![Packagist Version](https://img.shields.io/packagist/v/rebilly/client-php.svg?style=flat-square)](https://packagist.org/packages/rebilly/client-php)
