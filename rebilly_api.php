@@ -1,40 +1,80 @@
 <?php
-// Common classes
-require_once(dirname(__FILE__) . '/lib/HttpClient/HttpClient.php');
-require_once(dirname(__FILE__) . '/lib/HttpClient/CurlAdapter/CurlAdapter.php');
-require_once(dirname(__FILE__) . '/lib/HttpClient/CurlAdapter/CurlError.php');
-require_once(dirname(__FILE__) . '/lib/util/RebillyHttpStatusCode.php');
+/**
+ * Class RebillyClassLoader.
+ */
+final class RebillyClassLoader
+{
+    private $fileExtension = '.php';
+    private $namespaceSeparator = '\\';
+    private $rootNamespace;
+    private $includePath;
+    private $classMap = [];
 
-// Require all Rebilly base class - v2
-require_once(dirname(__FILE__) . '/lib/RebillyRequest.php');
-require_once(dirname(__FILE__) . '/lib/RebillyResponse.php');
-require_once(dirname(__FILE__) . '/lib/RebillyAddressInfo.php');
-require_once(dirname(__FILE__) . '/lib/RebillyBlacklist.php');
-require_once(dirname(__FILE__) . '/lib/RebillyCharge.php');
-require_once(dirname(__FILE__) . '/lib/RebillyCustomer.php');
-require_once(dirname(__FILE__) . '/lib/RebillyDispute.php');
-require_once(dirname(__FILE__) . '/lib/RebillyPaymentCard.php');
-require_once(dirname(__FILE__) . '/lib/RebillySignature.php');
-require_once(dirname(__FILE__) . '/lib/RebillySubscription.php');
-require_once(dirname(__FILE__) . '/lib/RebillyTransaction.php');
-require_once(dirname(__FILE__) . '/lib/RebillyToken.php');
-require_once(dirname(__FILE__) . '/lib/RebillyThreeDSecure.php');
-require_once(dirname(__FILE__) . '/lib/RebillyPlan.php');
-require_once(dirname(__FILE__) . '/lib/RebillyLayout.php');
-require_once(dirname(__FILE__) . '/lib/RebillyCustomField.php');
+    /**
+     * Create new instance.
+     *
+     * @param string $rootNamespace
+     * @param string $includePath
+     * @param array $classMap
+     */
+    public function __construct($rootNamespace, $includePath, $classMap = [])
+    {
+        $this->rootNamespace = $rootNamespace;
+        $this->includePath = $includePath;
+        $this->classMap = $classMap;
+    }
 
-// v2.1
-require_once(dirname(__FILE__) . '/lib/v2_1/Blacklist.php');
-require_once(dirname(__FILE__) . '/lib/v2_1/Contact.php');
-require_once(dirname(__FILE__) . '/lib/v2_1/Customer.php');
-require_once(dirname(__FILE__) . '/lib/v2_1/Dispute.php');
-require_once(dirname(__FILE__) . '/lib/v2_1/Invoice.php');
-require_once(dirname(__FILE__) . '/lib/v2_1/InvoiceItem.php');
-require_once(dirname(__FILE__) . '/lib/v2_1/Layout.php');
-require_once(dirname(__FILE__) . '/lib/v2_1/LeadSource.php');
-require_once(dirname(__FILE__) . '/lib/v2_1/PaymentCard.php');
-require_once(dirname(__FILE__) . '/lib/v2_1/Plan.php');
-require_once(dirname(__FILE__) . '/lib/v2_1/Signature.php');
-require_once(dirname(__FILE__) . '/lib/v2_1/Subscription.php');
-require_once(dirname(__FILE__) . '/lib/v2_1/Token.php');
-require_once(dirname(__FILE__) . '/lib/v2_1/Transaction.php');
+    /**
+     * Register autoloader.
+     */
+    public function register()
+    {
+        spl_autoload_register(array($this, 'loadClass'));
+    }
+
+    /**
+     * Unregister autoloader.
+     */
+    public function unregister()
+    {
+        spl_autoload_unregister(array($this, 'loadClass'));
+    }
+
+    /**
+     * Loads the given class or interface.
+     *
+     * @param string $className The name of the class to load.
+     */
+    public function loadClass($className)
+    {
+        if (isset($this->classMap[$className])) {
+            require $this->classMap[$className];
+            return;
+        }
+
+        $filePath = '';
+
+        if ($this->rootNamespace . $this->namespaceSeparator === substr($className, 0, strlen($this->rootNamespace . $this->namespaceSeparator))) {
+            if (false !== ($lastNsPos = strripos($className, $this->namespaceSeparator))) {
+                $namespace = substr($className, 0, $lastNsPos);
+                $className = substr($className, $lastNsPos + 1);
+                $filePath = str_replace($this->namespaceSeparator, DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
+            }
+        }
+
+        require $this->includePath . DIRECTORY_SEPARATOR . $filePath . $className . $this->fileExtension;
+    }
+}
+
+/**
+ * Register `Rebilly` root namespace and link to `lib` directory.
+ * All classes without namespace will load from base directory.
+ */
+$loader = new RebillyClassLoader(
+    'Rebilly',
+    __DIR__ . '/lib',
+    [
+        'RebillyHttpStatusCode' => __DIR__ . '/lib/util/RebillyHttpStatusCode.php',
+    ]
+);
+$loader->register();
