@@ -1,6 +1,6 @@
 <?php
 // Common classes
-require_once(dirname(__FILE__) . '/lib/HttpClient/HttpClientAdapter.php');
+require_once(dirname(__FILE__) . '/lib/HttpClient/HttpClient.php');
 require_once(dirname(__FILE__) . '/lib/HttpClient/CurlAdapter/CurlAdapter.php');
 require_once(dirname(__FILE__) . '/lib/HttpClient/CurlAdapter/CurlError.php');
 require_once(dirname(__FILE__) . '/lib/util/RebillyHttpStatusCode.php');
