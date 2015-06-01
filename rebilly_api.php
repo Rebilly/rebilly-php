@@ -47,11 +47,14 @@ final class RebillyClassLoader
      */
     public function loadClass($className)
     {
+        if (isset($this->classMap[$className])) {
+            require $this->classMap[$className];
+            return;
+        }
+
         $filePath = '';
 
-        if (isset($this->classMap[$className])) {
-
-        } elseif ($this->rootNamespace . $this->namespaceSeparator === substr($className, 0, strlen($this->rootNamespace . $this->namespaceSeparator))) {
+        if ($this->rootNamespace . $this->namespaceSeparator === substr($className, 0, strlen($this->rootNamespace . $this->namespaceSeparator))) {
             if (false !== ($lastNsPos = strripos($className, $this->namespaceSeparator))) {
                 $namespace = substr($className, 0, $lastNsPos);
                 $className = substr($className, $lastNsPos + 1);
