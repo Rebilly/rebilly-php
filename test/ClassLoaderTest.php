@@ -26,7 +26,7 @@ final class ClassLoaderTest extends TestCase
         $this->loader = new RebillyClassLoader(
             'Rebilly\Test',
             __DIR__,
-            ['OldClass' => __DIR__ . '/lib/OldClass.php']
+            ['OldClass' => __DIR__ . '/Stub/OldClass.php']
         );
     }
 
@@ -44,7 +44,7 @@ final class ClassLoaderTest extends TestCase
      */
     public function shouldSupportClassMap()
     {
-        $this->assertEquals(__DIR__ . '/lib/OldClass.php', $this->loader->findClassFile('OldClass'));
+        $this->assertEquals(__DIR__ . '/Stub/OldClass.php', $this->loader->findClassFile('OldClass'));
     }
 
     /**
@@ -54,5 +54,6 @@ final class ClassLoaderTest extends TestCase
     {
         $this->loader->register();
         $this->assertTrue(class_exists('Rebilly\\Test\\Stub\\EmptyClass'));
+        $this->assertTrue(class_exists('OldClass'));
     }
 }
