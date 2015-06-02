@@ -1,80 +1,32 @@
 <?php
 /**
- * Class RebillyClassLoader.
- */
-final class RebillyClassLoader
-{
-    private $fileExtension = '.php';
-    private $namespaceSeparator = '\\';
-    private $rootNamespace;
-    private $includePath;
-    private $classMap = [];
-
-    /**
-     * Create new instance.
-     *
-     * @param string $rootNamespace
-     * @param string $includePath
-     * @param array $classMap
-     */
-    public function __construct($rootNamespace, $includePath, $classMap = [])
-    {
-        $this->rootNamespace = $rootNamespace;
-        $this->includePath = $includePath;
-        $this->classMap = $classMap;
-    }
-
-    /**
-     * Register autoloader.
-     */
-    public function register()
-    {
-        spl_autoload_register(array($this, 'loadClass'));
-    }
-
-    /**
-     * Unregister autoloader.
-     */
-    public function unregister()
-    {
-        spl_autoload_unregister(array($this, 'loadClass'));
-    }
-
-    /**
-     * Loads the given class or interface.
-     *
-     * @param string $className The name of the class to load.
-     */
-    public function loadClass($className)
-    {
-        if (isset($this->classMap[$className])) {
-            require $this->classMap[$className];
-            return;
-        }
-
-        $filePath = '';
-
-        if ($this->rootNamespace . $this->namespaceSeparator === substr($className, 0, strlen($this->rootNamespace . $this->namespaceSeparator))) {
-            if (false !== ($lastNsPos = strripos($className, $this->namespaceSeparator))) {
-                $namespace = substr($className, 0, $lastNsPos);
-                $className = substr($className, $lastNsPos + 1);
-                $filePath = str_replace($this->namespaceSeparator, DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
-            }
-        }
-
-        require $this->includePath . DIRECTORY_SEPARATOR . $filePath . $className . $this->fileExtension;
-    }
-}
-
-/**
  * Register `Rebilly` root namespace and link to `lib` directory.
  * All classes without namespace will load from base directory.
  */
+
+require_once __DIR__ . '/lib/RebillyClassLoader.php';
+
 $loader = new RebillyClassLoader(
     'Rebilly',
     __DIR__ . '/lib',
     [
         'RebillyHttpStatusCode' => __DIR__ . '/lib/util/RebillyHttpStatusCode.php',
+        'RebillyRequest' => __DIR__ . '/lib/RebillyRequest.php',
+        'RebillyResponse' => __DIR__ . '/lib/RebillyResponse.php',
+        'RebillyAddressInfo' => __DIR__ . '/lib/RebillyAddressInfo.php',
+        'RebillyBlacklist' => __DIR__ . '/lib/RebillyBlacklist.php',
+        'RebillyCharge' => __DIR__ . '/lib/RebillyCharge.php',
+        'RebillyCustomer' => __DIR__ . '/lib/RebillyCustomer.php',
+        'RebillyDispute' => __DIR__ . '/lib/RebillyDispute.php',
+        'RebillyPaymentCard' => __DIR__ . '/lib/RebillyPaymentCard.php',
+        'RebillySignature' => __DIR__ . '/lib/RebillySignature.php',
+        'RebillySubscription' => __DIR__ . '/lib/RebillySubscription.php',
+        'RebillyTransaction' => __DIR__ . '/lib/RebillyTransaction.php',
+        'RebillyToken' => __DIR__ . '/lib/RebillyToken.php',
+        'RebillyThreeDSecure' => __DIR__ . '/lib/RebillyThreeDSecure.php',
+        'RebillyPlan' => __DIR__ . '/lib/RebillyPlan.php',
+        'RebillyLayout' => __DIR__ . '/lib/RebillyLayout.php',
+        'RebillyCustomField' => __DIR__ . '/lib/RebillyCustomField.php',
     ]
 );
 $loader->register();
