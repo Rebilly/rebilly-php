@@ -3,7 +3,7 @@
 		 stopOnError="false" stopOnFailure="false" stopOnIncomplete="false" stopOnSkipped="false"
 		 bootstrap="test/Bootstrap.php">
 	<testsuites>
-		<testsuite name="all">
+		<testsuite name="Rebilly Test Suite">
 			<directory suffix="Test.php">test/</directory>
 		</testsuite>
 	</testsuites>
