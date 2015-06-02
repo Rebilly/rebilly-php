@@ -17,7 +17,7 @@ final class RebillyClassLoader
     private $namespaceSeparator = '\\';
     private $rootNamespace;
     private $includePath;
-    private $classMap = [];
+    private $classMap = array();
 
     /**
      * Create new instance.
@@ -26,7 +26,7 @@ final class RebillyClassLoader
      * @param string $includePath
      * @param array $classMap
      */
-    public function __construct($rootNamespace, $includePath, $classMap = [])
+    public function __construct($rootNamespace, $includePath, $classMap = array())
     {
         $this->rootNamespace = $rootNamespace;
         $this->includePath = $includePath;
