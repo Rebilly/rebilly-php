@@ -53,7 +53,7 @@ class RebillyResponse
      */
     public  $warnings = array();
     /**
-     * @var array $transaction
+     * @var array|object $transaction
      */
     public $transactions = array();
 
