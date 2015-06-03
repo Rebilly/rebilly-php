@@ -1,27 +1,28 @@
 <?php
 /**
- * Class RebillyPlanTest - Test JSON request Plan
+ * This file is part of Rebilly.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @see http://rebilly.com
  */
 
-class RebillyPlanTest extends \Codeception\TestCase\Test
+namespace Rebilly\Test\Deprecated;
+
+use RebillyPlan;
+use Rebilly\Test\TestCase;
+
+/**
+ * Class RebillyTokenTest.
+ *
+ * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
+ */
+final class RebillyPlanTest extends TestCase
 {
     /**
-     * @var \CodeGuy
+     * @test
      */
-    protected $codeGuy;
-
-    protected function _before()
-    {
-    }
-
-    protected function _after()
-    {
-    }
-
-    /**
-     * Test Create Plan JSON request
-     */
-    public function testCreate()
+    public function createPlanJson()
     {
         $plan = new RebillyPlan();
         $plan->isActive = true;
@@ -39,22 +40,17 @@ class RebillyPlanTest extends \Codeception\TestCase\Test
 
         $this->assertEquals(
             '{"isActive":true,"name":"5 days trial","currency":"USD","description":"free 5 days trial","recurringAmount":"10.00","recurringPeriodUnit":"monthly","recurringPeriodLength":"1","trialAmount":"0.00","trialPeriodUnit":"daily","trialPeriodLength":"5","setupAmount":"10.00","expireTime":"2014-12-12 12:00:00"}',
-            stripcslashes($plan->buildRequest($plan))
+            $plan->buildRequest($plan)
         );
     }
 
     /**
-     * Test Delete Plan JSON request
+     * @todo Since we change to new API
      */
-    public function testDelete()
+    public function deletePlanJson()
     {
-        //@todo Since we change to new API
         // ID is in the URL now, this test is useless now
-//        $plan = new RebillyPlan('plan123ABC');
-//
-//        $this->assertEquals(
-//            '{"id":"plan123ABC"}',
-//            stripcslashes($plan->buildRequest($plan))
-//        );
+        // $plan = new RebillyPlan('plan123ABC');
+        // $this->assertEquals('{"id":"plan123ABC"}', $plan->buildRequest($plan));
     }
 }
