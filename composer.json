@@ -1,30 +1,44 @@
 {
-    "name": "rebilly/client-php",
-    "description": "Rebilly PHP Client",
-    "keywords": [
-      "payment processing",
-      "api",
-      "transactions",
-      "subscriptions"
-    ],
-    "homepage": "http://rebilly.com/",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Rebilly",
-            "homepage": "https://github.com/rebilly"
-        }
-    ],
-    "require": {
-      "php": ">=5.2",
-      "ext-curl": "*",
-      "ext-json": "*"
-    },
-    "autoload": {
-      "classmap": ["lib/","lib/util"]
-    },
-    "require-dev": {
-        "codeception/codeception": "*",
-        "codeception/verify": "*"
+  "name": "rebilly/client-php",
+  "description": "Rebilly PHP Client",
+  "keywords": [
+    "payment processing",
+    "api",
+    "transactions",
+    "subscriptions"
+  ],
+  "homepage": "http://rebilly.com/",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Rebilly",
+      "homepage": "https://github.com/rebilly"
     }
+  ],
+  "require": {
+    "php": ">=5.3",
+    "ext-curl": "*",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Rebilly\\": "src"
+    },
+    "classmap": [
+      "lib/",
+      "lib/util"
+    ]
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.6.9",
+    "guzzlehttp/guzzle": "~5.3.0"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Rebilly\\Test\\": [
+        "test",
+        "examples"
+      ]
+    }
+  }
 }

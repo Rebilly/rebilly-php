@@ -3,21 +3,21 @@
  * Class RebillyPlan
  *
  * Available attributes:
- * @property string $planId
- * @property string $lookupPlanId
+ * @property boolean $isActive
  * @property string $name
  * @property string $currency
  * @property string $description
+ * @property float $recurringAmount
+ * @property string $recurringPeriodUnit
+ * @property integer $recurringPeriodLength
+ * @property float $trialAmount
+ * @property string $trialPeriodUnit
+ * @property integer $trialPeriodLength
+ * @property float $setupAmount
  * @property string $expireTime
- * @property decimal $setupAmount
- * @property decimal $recurringAmount
- * @property string $recurringIntervalUnit
- * @property integer $recurringIntervalLength
- * @property decimal $trialAmount
- * @property string $trialIntervalUnit
- * @property integer $trialIntervalLength
- * @property string $contractTerm
- * @property integer $contractRebill
+ * @property string $contractTermUnit
+ * @property integer $contractTermLength
+ * @property integer $recurringPeriodLimit
  */
 
 class RebillyPlan extends RebillyRequest
@@ -26,15 +26,10 @@ class RebillyPlan extends RebillyRequest
      * Plan API's URL endpoint
      */
     const PLAN_URL = 'plans/';
-
     /**
-     * @var string $planId
+     * @var boolean $isActive
      */
-    public $planId;
-    /**
-     * @var string $lookupPlanId
-     */
-    public $lookupPlanId;
+    public $isActive;
     /**
      * @var string $name
      */
@@ -48,50 +43,56 @@ class RebillyPlan extends RebillyRequest
      */
     public $description;
     /**
+     * @var float $recurringAmount
+     */
+    public $recurringAmount;
+    /**
+     * @var string $recurringPeriodUnit
+     */
+    public $recurringPeriodUnit;
+    /**
+     * @var int $recurringPeriodLength
+     */
+    public $recurringPeriodLength;
+    /**
+     * @var float $trialAmount
+     */
+    public $trialAmount;
+    /**
+     * @var string $trialPeriodUnit
+     */
+    public $trialPeriodUnit;
+    /**
+     * @var int $trialPeriodLength
+     */
+    public $trialPeriodLength;
+    /**
+     * @var float $setupAmount
+     */
+    public $setupAmount;
+    /**
      * @var string $expireTime
      */
     public $expireTime;
     /**
-     * @var number $setupAmount
+     * @var string $contractTermUnit
      */
-    public $setupAmount;
+    public $contractTermUnit;
     /**
-     * @var number $recurringAmount
+     * @var int $contractTermLength
      */
-    public $recurringAmount;
+    public $contractTermLength;
     /**
-     * @var string $recurringIntervalUnit
+     * @var int $contractTermLength
      */
-    public $recurringIntervalUnit;
-    /**
-     * @var number $recurringIntervalLength
-     */
-    public $recurringIntervalLength;
-    /**
-     * @var number $trialAmount
-     */
-    public $trialAmount;
-    /**
-     * @var string $trialIntervalUnit
-     */
-    public $trialIntervalUnit;
-    /**
-     * @var number $trialIntervalLength
-     */
-    public $trialIntervalLength;
-    /**
-     * @var string $contractTerm (1 year, 2 months, 20 weeks, ...)
-     */
-    public $contractTerm;
-    /**
-     * @var number $contractRebill
-     */
-    public $contractRebill;
+    public $recurringPeriodLimit;
+
+    private $id;
 
     public function __construct($id = null)
     {
         if ($id !== null) {
-            $this->lookupPlanId = $id;
+            $this->id = $id;
         }
         $this->setApiController(self::PLAN_URL);
     }
@@ -108,11 +109,24 @@ class RebillyPlan extends RebillyRequest
     }
 
     /**
+     * Send Put request to update a plan
+     * @return mixed RebillyResponse
+     */
+    public function update()
+    {
+        $this->setApiController(self::PLAN_URL . $this->id);
+        $data = $this->buildRequest($this);
+
+        return $this->sendPutRequest($data, get_class());
+    }
+
+    /**
      * Send Delete request to delete a plan
      * @return mixed RebillyResponse
      */
     public function delete()
     {
+        $this->setApiController(self::PLAN_URL . $this->id);
         $data = $this->buildRequest($this);
 
         return $this->sendDeleteRequest($data, get_class());
@@ -124,7 +138,7 @@ class RebillyPlan extends RebillyRequest
      */
     public function retrieve()
     {
-        $this->setApiController(self::PLAN_URL . $this->lookupPlanId);
+        $this->setApiController(self::PLAN_URL . $this->id);
 
         return $this->sendGetRequest();
     }

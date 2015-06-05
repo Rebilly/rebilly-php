@@ -35,14 +35,13 @@ class RebillyResponse
     const TOKEN_CREATE           = 'TOKEN_CREATE';
     const PLAN_CREATE            = 'PLAN_CREATE';
     const PLAN_DELETE            = 'PLAN_DELETE';
-    const INVOICE_ITEM_CREATE    = 'INVOICE_ITEM_CREATE';
 
     /**
      * @var integer $statusCode HTTP response code
      */
     public $statusCode;
     /**
-     * @var JSON object $response response from Rebilly
+     * @var string JSON object $response response from Rebilly
      */
     private $response;
     /**
@@ -54,7 +53,7 @@ class RebillyResponse
      */
     public  $warnings = array();
     /**
-     * @var array $transaction
+     * @var array|object $transaction
      */
     public $transactions = array();
 
@@ -71,12 +70,16 @@ class RebillyResponse
         if (isset($response->customer)) {
             $response = $response->customer;
         }
-        $this->buildResponse($response);
+
+        if (is_array($response) || is_object($response)) {
+            $this->buildResponse($response);
+        }
     }
 
     /**
      * Check response and add to errors or warning if any
-     * @param object $response
+     *
+     * @param object|array $response
      */
     private function buildResponse($response)
     {
@@ -107,11 +110,13 @@ class RebillyResponse
     }
 
     /**
-     * @return object raw response from Rebilly
+     * @param bool $asArray
+     *
+     * @return object|array raw response from Rebilly
      */
-    public function getRawResponse()
+    public function getRawResponse($asArray = false)
     {
-        return json_decode($this->response);
+        return json_decode($this->response, $asArray);
     }
 
     /**
