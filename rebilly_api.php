@@ -6,6 +6,8 @@ require_once(__DIR__ . '/lib/HttpClient/CurlAdapter/CurlError.php');
 require_once(__DIR__ . '/lib/util/RebillyHttpStatusCode.php');
 
 // Require all Rebilly base class - v2
+require_once(__DIR__ . '/lib/RebillyRequest.php');
+require_once(__DIR__ . '/lib/RebillyResponse.php');
 require_once(__DIR__ . '/lib/RebillyAddressInfo.php');
 require_once(__DIR__ . '/lib/RebillyBlacklist.php');
 require_once(__DIR__ . '/lib/RebillyCharge.php');
@@ -15,8 +17,6 @@ require_once(__DIR__ . '/lib/RebillyDispute.php');
 require_once(__DIR__ . '/lib/RebillyLayout.php');
 require_once(__DIR__ . '/lib/RebillyPaymentCard.php');
 require_once(__DIR__ . '/lib/RebillyPlan.php');
-require_once(__DIR__ . '/lib/RebillyRequest.php');
-require_once(__DIR__ . '/lib/RebillyResponse.php');
 require_once(__DIR__ . '/lib/RebillySignature.php');
 require_once(__DIR__ . '/lib/RebillySubscription.php');
 require_once(__DIR__ . '/lib/RebillyThreeDSecure.php');
