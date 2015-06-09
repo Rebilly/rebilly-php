@@ -17,7 +17,7 @@ use Exception;
  * $card->setApiKey('apiKey');
  *
  * $response = $card->listAll();
- * if ($response.statusCode === 200) {
+ * if ($response->statusCode === 200) {
  *     // Success
  * }
  * ~~~
@@ -33,7 +33,7 @@ use Exception;
  * $card->contact = "contact123ABC";
  *
  * $response = $card->create();
- * if ($response.statusCode === 201) {
+ * if ($response->statusCode === 201) {
  *     // Success
  * }
  * ~~~
@@ -45,7 +45,7 @@ use Exception;
  * $card->setApiKey('apiKey');
  *
  * $response = $card->deactivate();
- * if ($response.statusCode === 200) {
+ * if ($response->statusCode === 200) {
  *     // Success
  * }
  * ~~~
