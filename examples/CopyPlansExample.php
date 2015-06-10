@@ -68,7 +68,7 @@ final class CopyPlansExample
      *
      * @throws HttpException
      */
-    protected function getSandboxPlans($limit = 50, $offset = 0)
+    public function getSandboxPlans($limit = 50, $offset = 0)
     {
         $plan = new Plan();
         $plan->setApiKey($this->sandboxAPIKey);
@@ -92,7 +92,7 @@ final class CopyPlansExample
      *
      * @throws HttpException
      */
-    protected function saveLivePlan($data)
+    public function saveLivePlan($data)
     {
         $plan = new Plan($data->id);
         $plan->setApiKey($this->liveAPIKey);
