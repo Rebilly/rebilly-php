@@ -13,7 +13,7 @@ use RebillyRequest;
  *
  * ### Usage:
  * ```php
- * $class = new CopyPlansExample(['liveAPIKey' => 'LIVE_API_KEY', 'sandboxAPIKey' => 'SANDBOX_API_KEY']);
+ * $class = new CopyPlansExample('LIVE_API_KEY', 'SANDBOX_API_KEY');
  * $class->copyPlans(100, 0);
  * ```
  */
@@ -22,23 +22,20 @@ final class CopyPlansExample
     /**
      * @var string Live API key
      */
-    public $liveAPIKey;
+    private $liveAPIKey;
     /**
      * @var string Sandbox API key
      */
-    public $sandboxAPIKey;
+    private $sandboxAPIKey;
 
     /**
-     * @throws Exception
+     * @param string $liveAPIKey Live API key
+     * @param string $sandboxAPIKey Sandbox API key
      */
-    public function __construct()
+    public function __construct($liveAPIKey, $sandboxAPIKey)
     {
-        if (empty($this->liveAPIKey)) {
-            throw new Exception('Live API key must be set.');
-        }
-        if (empty($this->sandboxAPIKey)) {
-            throw new Exception('Sandbox API key must be set.');
-        }
+        $this->liveAPIKey = $liveAPIKey;
+        $this->sandboxAPIKey = $sandboxAPIKey;
     }
 
     /**
