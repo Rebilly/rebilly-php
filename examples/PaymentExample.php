@@ -145,6 +145,7 @@ final class PaymentExample
         $payment->setHttpClient($this->client);
 
         $payment->website = 'my_website';
+        $payment->customer = 'my_customer';
         $payment->paymentInstrument = new PaymentCardInstrument();
         $payment->paymentInstrument->paymentCard = 'my_payment_card';
 

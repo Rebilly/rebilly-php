@@ -222,6 +222,7 @@ final class PaymentApiTest extends TestCase
         $this->assertEquals('POST', $request->getMethod());
         $this->assertEquals('/v2.1/payments/', $request->getPath());
         $this->assertEquals('my_website', $result->website);
+        $this->assertEquals('my_customer', $result->customer);
         $this->assertEquals('my_payment_card', $result->paymentInstrument->paymentCard);
     }
 }

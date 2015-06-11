@@ -31,6 +31,9 @@ class Payment extends RebillyRequest
     public $website;
 
     /** @var string */
+    public $customer;
+
+    /** @var string */
     public $method = self::METHOD_PAYMENT_CARD;
 
     /** @var PaymentCardInstrument */
