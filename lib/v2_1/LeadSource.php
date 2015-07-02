@@ -147,11 +147,8 @@ class LeadSource extends RebillyRequest
     public $clickId;
     /** @var string $ipAddress */
     public $ipAddress;
-    /** @var string $customer */
-    public $customer;
-
     /** @var string $customerId */
-    private $customerId;
+    public $customerId;
     /** @var string $id */
     private $id;
 
@@ -195,7 +192,7 @@ class LeadSource extends RebillyRequest
         if (empty($this->customerId)) {
             throw new Exception('customerId cannot be empty.');
         }
-        $this->setApiController(self::LEAD_END_POINT);
+        $this->setApiController(self::LEAD_END_POINT . $this->id);
         $data = $this->buildRequest($this);
 
         return $this->sendPutRequest($data);
@@ -211,7 +208,7 @@ class LeadSource extends RebillyRequest
         if (empty($this->customerId)) {
             throw new Exception('customerId cannot be empty.');
         }
-        $this->setApiController(self::LEAD_END_POINT);
+        $this->setApiController(self::LEAD_END_POINT . $this->id);
 
         return $this->sendGetRequest();
     }
