@@ -32,6 +32,7 @@ require_once(__DIR__ . '/lib/v2_1/Invoice.php');
 require_once(__DIR__ . '/lib/v2_1/InvoiceItem.php');
 require_once(__DIR__ . '/lib/v2_1/Layout.php');
 require_once(__DIR__ . '/lib/v2_1/LeadSource.php');
+require_once(__DIR__ . '/lib/v2_1/Organization.php');
 require_once(__DIR__ . '/lib/v2_1/Payment.php');
 require_once(__DIR__ . '/lib/v2_1/PaymentCard.php');
 require_once(__DIR__ . '/lib/v2_1/PaymentCardInstrument.php');

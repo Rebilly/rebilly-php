@@ -19,7 +19,7 @@ use Exception;
  * $blacklist->setApiKey('apiKey');
  *
  * $response = $blacklist->retrieve();
- * if ($response.statusCode === 200) {
+ * if ($response->statusCode === 200) {
  *     // Success
  * }
  * ~~~
@@ -28,7 +28,7 @@ use Exception;
  * List all blacklists
  * =======================
  * ~~~
- * $blacklist = new Rebilly\v2_1\Blacklist('blacklistId');
+ * $blacklist = new Rebilly\v2_1\Blacklist();
  * $blacklist->setApiUrl(RebillyRequest::ENV_SANDBOX);
  * $blacklist->setApiKey('apiKey');
  * $params = [
@@ -37,7 +37,7 @@ use Exception;
  * $blacklist->setQueryParam($params);
  *
  * $response = $blacklist->listAll();
- * if ($response.statusCode === 200) {
+ * if ($response->statusCode === 200) {
  *     // Success
  * }
  * ~~~
@@ -54,7 +54,7 @@ use Exception;
  * $blacklist->ttl = 36000;
  *
  * $response = $blacklist->create();
- * if ($response.statusCode === 201) {
+ * if ($response->statusCode === 201) {
  *     // Successfully created
  * }
  * ~~~
@@ -71,7 +71,7 @@ use Exception;
  * $blacklist->ttl = 36000;
  *
  * $response = $blacklist->create();
- * if ($response.statusCode === 201) {
+ * if ($response->statusCode === 201) {
  *     // Successfully created
  * }
  * ~~~
@@ -85,7 +85,7 @@ use Exception;
  * $blacklist->setApiKey('apiKey');
  *
  * $response = $blacklist->delete();
- * if ($response.statusCode === 204) {
+ * if ($response->statusCode === 204) {
  *     // Successfully deleted
  * }
  * ~~~
