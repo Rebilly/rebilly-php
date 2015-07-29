@@ -12,7 +12,7 @@
  * $leadSource->setApiKey("apiKey");
  * $leadSource->setEnvironment(RebillyRequest::ENV_SANDBOX);
  * $params = [
- *     "fields" => "medium,source,customer", // only want to show "id", "medium", "source" and "customer"
+ *     "fields" => "medium,source,customerId", // only want to show "id", "medium", "source" and "customerId"
  *     "expand" => "customer", // expand customer object
  * ];
  * $leadSource->setQueryParam($params);
@@ -31,7 +31,7 @@
  * $leadSource->setApiKey("apiKey");
  * $leadSource->setEnvironment(RebillyRequest::ENV_SANDBOX);
  * $params = [
- *     "fields" => "medium,source,customer", // only want to show "id", "medium", "source" and "customer"
+ *     "fields" => "medium,source,customerId", // only want to show "id", "medium", "source" and "customerId"
  *     "expand" => "customer", // expand customer object
  * ];
  * $leadSource->setQueryParam($params);
@@ -109,6 +109,7 @@
 namespace Rebilly\v2_1;
 
 use RebillyRequest;
+use RebillyResponse;
 use Exception;
 
 class LeadSource extends RebillyRequest
@@ -146,11 +147,8 @@ class LeadSource extends RebillyRequest
     public $clickId;
     /** @var string $ipAddress */
     public $ipAddress;
-    /** @var string $attribution */
-    public $attribution;
-
     /** @var string $customerId */
-    private $customerId;
+    public $customerId;
     /** @var string $id */
     private $id;
 
@@ -171,13 +169,14 @@ class LeadSource extends RebillyRequest
     /**
      * Create new lead source
      * @return RebillyResponse
+     * @throws Exception
      */
     public function create()
     {
         if (empty($this->customerId)) {
             throw new Exception('customerId cannot be empty.');
         }
-        $this->setApiController(self::CUSTOMER_END_POINT . $this->customerId . '/' . self::LEAD_END_POINT);
+        $this->setApiController(self::LEAD_END_POINT);
         $data = $this->buildRequest($this);
 
         return $this->sendPostRequest($data);
@@ -186,13 +185,14 @@ class LeadSource extends RebillyRequest
     /**
      * Create with ID
      * @return RebillyResponse
+     * @throws Exception
      */
     public function update()
     {
         if (empty($this->customerId)) {
             throw new Exception('customerId cannot be empty.');
         }
-        $this->setApiController(self::CUSTOMER_END_POINT . $this->customerId . '/' . self::LEAD_END_POINT . $this->id);
+        $this->setApiController(self::LEAD_END_POINT . $this->id);
         $data = $this->buildRequest($this);
 
         return $this->sendPutRequest($data);
@@ -201,13 +201,14 @@ class LeadSource extends RebillyRequest
     /**
      * Get lead source
      * @return RebillyResponse
+     * @throws Exception
      */
     public function retrieve()
     {
         if (empty($this->customerId)) {
             throw new Exception('customerId cannot be empty.');
         }
-        $this->setApiController(self::CUSTOMER_END_POINT . $this->customerId . '/' . self::LEAD_END_POINT . $this->id);
+        $this->setApiController(self::LEAD_END_POINT . $this->id);
 
         return $this->sendGetRequest();
     }
@@ -215,6 +216,7 @@ class LeadSource extends RebillyRequest
     /**
      * List all lead source per customer
      * @return RebillyResponse
+     * @throws Exception
      */
     public function listByCustomer()
     {

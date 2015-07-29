@@ -57,6 +57,9 @@ class RebillyResponse
      */
     public $transactions = array();
 
+    /** @var array Links array */
+    public $links = [];
+
     public function __construct($code, $response)
     {
         $this->statusCode = $code;
@@ -83,6 +86,13 @@ class RebillyResponse
      */
     private function buildResponse($response)
     {
+        if (isset($response->_links)) {
+            foreach ($response->_links as $link) {
+                $this->links[$link->rel] = $link->href;
+            }
+            unset($response->_links);
+        }
+
         foreach ($response as $key => $value) {
             if (isset($response->errors)) {
                 foreach ($response->errors as $errMessage) {
@@ -163,5 +173,25 @@ class RebillyResponse
         if (!in_array($message, $this->warnings)) {
             array_push($this->warnings, $message);
         }
+    }
+
+    /**
+     * @todo: Move this method to payment resource in new library version.
+     *
+     * @return bool Check if is approval required.
+     */
+    public function isApprovalRequired()
+    {
+        return isset($this->links['approval_url']);
+    }
+
+    /**
+     * @todo: Move this method to payment resource in new library version.
+     *
+     * @return string Approval URL
+     */
+    public function getApprovalLink()
+    {
+        return $this->links['approval_url'];
     }
 }
