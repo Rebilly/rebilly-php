@@ -143,6 +143,18 @@ abstract class RebillyRequest
     }
 
     /**
+     * Set environment and URL for it. If not set then default urls are used
+     *
+     * @param string $env
+     * @param string $url
+     */
+    public function setEnvironmentUrl($env, $url)
+    {
+        $this->environment = $env;
+        $this->urls[$env] = $url;
+    }
+
+    /**
      * Set controller.
      *
      * @param $controller
