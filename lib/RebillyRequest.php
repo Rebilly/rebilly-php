@@ -143,7 +143,8 @@ abstract class RebillyRequest
     }
 
     /**
-     * Set environment and URL for it. If not set then default urls are used
+     * Set environment and URL for it in the format: "https://{URL}/".
+     * If not set then default urls are used
      *
      * @param string $env
      * @param string $url
@@ -151,7 +152,7 @@ abstract class RebillyRequest
     public function setEnvironmentUrl($env, $url)
     {
         $this->environment = $env;
-        $this->urls[$env] = $url;
+        $this->urls[$env] = $url . 'v';
     }
 
     /**
