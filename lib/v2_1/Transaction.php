@@ -112,6 +112,17 @@ class Transaction extends RebillyRequest
     }
 
     /**
+     * Retrieve a transaction
+     * @return RebillyResponse
+     */
+    public function listAll()
+    {
+        $this->setApiController(self::TRANSACTION_END_POINT);
+
+        return $this->sendGetRequest();
+    }
+
+    /**
      * Get all transactions that belong to a customer
      * @return RebillyResponse
      */
