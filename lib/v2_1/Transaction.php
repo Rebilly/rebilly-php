@@ -112,7 +112,7 @@ class Transaction extends RebillyRequest
     }
 
     /**
-     * Retrieve a transaction
+     * Retrieve a transaction list
      * @return RebillyResponse
      */
     public function listAll()
