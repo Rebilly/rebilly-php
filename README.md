@@ -12,7 +12,7 @@
 *  If you use composer, you can install from composer as well.
 
 ## Loading
-We recommend you use the `composer autoloader` to load the relevant files into your application.  If you do not use composer, you could include `rebilly_api.php`.
+We recommend you use the `composer autoloader` to load the relevant files into your application.
 
 ## Usage
 
@@ -20,16 +20,14 @@ Set the environment, set your api key,
 and then use according to documentation.
 
 ```php
-$customer = new Rebilly\v2_1\Customer();
-$customer->setEnvironment(RebillyRequest::ENV_SANDBOX);
-$customer->setApiKey(API_SECRET_KEY);
+TBD
 ```
 
 Use version 2.1 of the API.
 
 ## Requirements
 
-* PHP 5.3+ (tested with 5.3, 5.4, 5.5, 5.6).  PHP 5.3 has passed end of life.  We recommend you use PHP 5.6.
+* PHP 5.4+ (tested with 5.4, 5.5, 5.6). We recommend you use PHP 5.6.
 * CURL (verify peer requires a root certificate authority -- if you have not configured php curl to use one, and your system libs aren't linked to one, you may need to do a [manual configuration](http://stackoverflow.com/questions/17478283/paypal-access-ssl-certificate-unable-to-get-local-issuer-certificate/19149687#19149687) to use the appropriate certificate authority)
 * PHPUnit (tests only)
 
