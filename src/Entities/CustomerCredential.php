@@ -8,19 +8,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Rebilly\Api;
+namespace Rebilly\Entities;
 
 use ArrayObject;
 use Rebilly\Client;
-use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Resource\Entity;
+use Rebilly\Resource\Collection;
 
 /**
- * Class AuthenticationToken.
+ * Class CustomerCredential.
  *
  * ```json
  * {
- *   "token"
+ *   "id"
  *   "username"
  *   "password"
  *   "expiredAt"
@@ -28,39 +28,22 @@ use Rebilly\Resource\Entity;
  * ```
  *
  * @todo Make time properties consistent, rename `expiredAt` to `expiredTime`
- * @todo Add collection and `search` method
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
  */
-final class AuthenticationToken extends Entity
+final class CustomerCredential extends Entity
 {
     /********************************************************************************
      * Resource Getters and Setters
      *******************************************************************************/
 
     /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return $this->getToken();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setId($value)
-    {
-        return $this->setToken($value);
-    }
-
-    /**
      * @return string
      */
-    public function getToken()
+    public function getCustomerId()
     {
-        return $this->getAttribute('token');
+        return $this->getAttribute('customerId');
     }
 
     /**
@@ -68,9 +51,9 @@ final class AuthenticationToken extends Entity
      *
      * @return $this
      */
-    public function setToken($value)
+    public function setCustomerId($value)
     {
-        return $this->setAttribute('token', $value);
+        return $this->setAttribute('customerId', $value);
     }
 
     /**
@@ -128,63 +111,73 @@ final class AuthenticationToken extends Entity
     }
 
     /********************************************************************************
-     * Authentication Token API Facades
+     * Customer Credential API Facades
      *******************************************************************************/
 
     /**
      * Facade for client command
      *
-     * @param string $token
      * @param array|ArrayObject $params
      *
-     * @return AuthenticationToken
+     * @return CustomerCredential[]|Collection
      */
-    public static function load($token, $params = [])
+    public static function search($params = [])
     {
-        $params['token'] = $token;
-
-        return Client::get('authentication-tokens/{token}', $params);
+        return Client::get('credentials', $params);
     }
 
     /**
      * Facade for client command
      *
-     * @param string $token
+     * @param string $credentialId
+     * @param array|ArrayObject $params
      *
-     * @return AuthenticationToken
+     * @return CustomerCredential
      */
-    public static function verify($token)
+    public static function load($credentialId, $params = [])
     {
-        try {
-            Client::head('authentication-tokens/{token}', ['token' => $token]);
+        $params['credentialId'] = $credentialId;
 
-            return true;
-        } catch (NotFoundException $e) {
-            return false;
+        return Client::get('credentials/{credentialId}', $params);
+    }
+
+    /**
+     * Facade for client command
+     *
+     * @param array|CustomerCredential $data
+     * @param string $credentialId
+     *
+     * @return CustomerCredential
+     */
+    public static function create($data, $credentialId = null)
+    {
+        if (isset($credentialId)) {
+            return Client::put($data, 'credentials/{credentialId}', ['credentialId' => $credentialId]);
+        } else {
+            return Client::post($data, 'credentials');
         }
     }
 
     /**
      * Facade for client command
      *
-     * @param array|AuthenticationToken $data
+     * @param string $credentialId
+     * @param array|CustomerCredential $data
      *
-     * @return AuthenticationToken
+     * @return CustomerCredential
      */
-    public static function login($data)
+    public static function update($credentialId, $data)
     {
-        return Client::post($data, 'authentication-tokens');
+        return Client::put($data, 'credentials/{credentialId}', ['credentialId' => $credentialId]);
     }
 
     /**
      * Facade for client command
      *
-     * @param string $token
-     *
-     * @return AuthenticationToken
+     * @param string $credentialId
      */
-    public static function logout($token)
+    public static function delete($credentialId)
     {
-        Client::delete('authentication-tokens/{token}', ['token' => $token]);
+        Client::delete('credentials/{credentialId}', ['credentialId' => $credentialId]);
     }
 }

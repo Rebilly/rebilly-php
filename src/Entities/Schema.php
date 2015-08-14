@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Rebilly\Api;
+namespace Rebilly\Entities;
 
 use ArrayIterator;
 use ArrayAccess;

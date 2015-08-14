@@ -103,7 +103,7 @@ final class Client
         $this->transport = $options->getHttpHandler();
 
         // Objects factory, often depends by version
-        $this->factory = new Resource\Factory(new Api\Schema());
+        $this->factory = new Resource\Factory(new Entity\Schema());
 
         $this->middleware = new Middleware\CompositeMiddleware();
 
