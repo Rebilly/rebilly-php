@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Rebilly\Api;
+namespace Rebilly\Entities;
 
 use ArrayObject;
 use Rebilly\Client;
@@ -16,11 +16,11 @@ use Rebilly\Resource\Entity;
 use Rebilly\Resource\Collection;
 
 /**
- * Class CustomerCredential.
+ * Class ResetPasswordToken.
  *
  * ```json
  * {
- *   "id"
+ *   "token"
  *   "username"
  *   "password"
  *   "expiredAt"
@@ -32,18 +32,34 @@ use Rebilly\Resource\Collection;
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
  */
-final class CustomerCredential extends Entity
+final class ResetPasswordToken extends Entity
 {
     /********************************************************************************
      * Resource Getters and Setters
      *******************************************************************************/
 
     /**
+     * {@inheritdoc}
+     */
+    public function getId()
+    {
+        return $this->getToken();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setId($value)
+    {
+        return $this->setToken($value);
+    }
+
+    /**
      * @return string
      */
-    public function getCustomerId()
+    public function getToken()
     {
-        return $this->getAttribute('customerId');
+        return $this->getAttribute('token');
     }
 
     /**
@@ -51,9 +67,9 @@ final class CustomerCredential extends Entity
      *
      * @return $this
      */
-    public function setCustomerId($value)
+    public function setToken($value)
     {
-        return $this->setAttribute('customerId', $value);
+        return $this->setAttribute('token', $value);
     }
 
     /**
@@ -111,7 +127,7 @@ final class CustomerCredential extends Entity
     }
 
     /********************************************************************************
-     * Customer Credential API Facades
+     * Reset Password Token API Facades
      *******************************************************************************/
 
     /**
@@ -119,65 +135,42 @@ final class CustomerCredential extends Entity
      *
      * @param array|ArrayObject $params
      *
-     * @return CustomerCredential[]|Collection
+     * @return ResetPasswordToken[]|Collection
      */
     public static function search($params = [])
     {
-        return Client::get('credentials', $params);
+        return Client::get('password-tokens', $params);
     }
 
     /**
      * Facade for client command
      *
-     * @param string $credentialId
+     * @param string $token
      * @param array|ArrayObject $params
      *
-     * @return CustomerCredential
+     * @return ResetPasswordToken
      */
-    public static function load($credentialId, $params = [])
+    public static function load($token, $params = [])
     {
-        $params['credentialId'] = $credentialId;
+        $params['token'] = $token;
 
-        return Client::get('credentials/{credentialId}', $params);
+        return Client::get('password-tokens/{token}', $params);
     }
 
     /**
      * Facade for client command
      *
-     * @param array|CustomerCredential $data
-     * @param string $credentialId
+     * @param array|ResetPasswordToken $data
+     * @param string $token
      *
-     * @return CustomerCredential
+     * @return ResetPasswordToken
      */
-    public static function create($data, $credentialId = null)
+    public static function create($data, $token = null)
     {
-        if (isset($credentialId)) {
-            return Client::put($data, 'credentials/{credentialId}', ['credentialId' => $credentialId]);
+        if (isset($token)) {
+            return Client::put($data, 'password-tokens/{token}', ['token' => $token]);
         } else {
-            return Client::post($data, 'credentials');
+            return Client::post($data, 'password-tokens');
         }
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $credentialId
-     * @param array|CustomerCredential $data
-     *
-     * @return CustomerCredential
-     */
-    public static function update($credentialId, $data)
-    {
-        return Client::put($data, 'credentials/{credentialId}', ['credentialId' => $credentialId]);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $credentialId
-     */
-    public static function delete($credentialId)
-    {
-        Client::delete('credentials/{credentialId}', ['credentialId' => $credentialId]);
     }
 }

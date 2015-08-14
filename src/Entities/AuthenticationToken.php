@@ -8,15 +8,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Rebilly\Api;
+namespace Rebilly\Entities;
 
 use ArrayObject;
 use Rebilly\Client;
+use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Resource\Entity;
-use Rebilly\Resource\Collection;
 
 /**
- * Class ResetPasswordToken.
+ * Class AuthenticationToken.
  *
  * ```json
  * {
@@ -28,11 +28,12 @@ use Rebilly\Resource\Collection;
  * ```
  *
  * @todo Make time properties consistent, rename `expiredAt` to `expiredTime`
+ * @todo Add collection and `search` method
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
  */
-final class ResetPasswordToken extends Entity
+final class AuthenticationToken extends Entity
 {
     /********************************************************************************
      * Resource Getters and Setters
@@ -49,7 +50,7 @@ final class ResetPasswordToken extends Entity
     /**
      * {@inheritdoc}
      */
-    public function setId($value)
+    protected function setId($value)
     {
         return $this->setToken($value);
     }
@@ -127,50 +128,63 @@ final class ResetPasswordToken extends Entity
     }
 
     /********************************************************************************
-     * Reset Password Token API Facades
+     * Authentication Token API Facades
      *******************************************************************************/
 
     /**
      * Facade for client command
      *
-     * @param array|ArrayObject $params
-     *
-     * @return ResetPasswordToken[]|Collection
-     */
-    public static function search($params = [])
-    {
-        return Client::get('password-tokens', $params);
-    }
-
-    /**
-     * Facade for client command
-     *
      * @param string $token
      * @param array|ArrayObject $params
      *
-     * @return ResetPasswordToken
+     * @return AuthenticationToken
      */
     public static function load($token, $params = [])
     {
         $params['token'] = $token;
 
-        return Client::get('password-tokens/{token}', $params);
+        return Client::get('authentication-tokens/{token}', $params);
     }
 
     /**
      * Facade for client command
      *
-     * @param array|ResetPasswordToken $data
      * @param string $token
      *
-     * @return ResetPasswordToken
+     * @return AuthenticationToken
      */
-    public static function create($data, $token = null)
+    public static function verify($token)
     {
-        if (isset($token)) {
-            return Client::put($data, 'password-tokens/{token}', ['token' => $token]);
-        } else {
-            return Client::post($data, 'password-tokens');
+        try {
+            Client::head('authentication-tokens/{token}', ['token' => $token]);
+
+            return true;
+        } catch (NotFoundException $e) {
+            return false;
         }
+    }
+
+    /**
+     * Facade for client command
+     *
+     * @param array|AuthenticationToken $data
+     *
+     * @return AuthenticationToken
+     */
+    public static function login($data)
+    {
+        return Client::post($data, 'authentication-tokens');
+    }
+
+    /**
+     * Facade for client command
+     *
+     * @param string $token
+     *
+     * @return AuthenticationToken
+     */
+    public static function logout($token)
+    {
+        Client::delete('authentication-tokens/{token}', ['token' => $token]);
     }
 }

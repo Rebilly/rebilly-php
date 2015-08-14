@@ -8,7 +8,7 @@
  * @see http://rebilly.com
  */
 
-namespace Rebilly\Api;
+namespace Rebilly\Entities;
 
 use ArrayObject;
 use Rebilly\Client;
