@@ -177,6 +177,6 @@ final class Transaction extends Entity
      */
     public static function refund($transactionId, $amount)
     {
-        return Client::post(['amount' => $amount], 'transactions/{transactionId}', ['transactionId' => $transactionId]);
+        return Client::post(['amount' => $amount], 'transactions/{transactionId}/refund', ['transactionId' => $transactionId]);
     }
 }
