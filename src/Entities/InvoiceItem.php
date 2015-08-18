@@ -10,14 +10,11 @@
 
 namespace Rebilly\Entities;
 
-use ArrayObject;
 use DomainException;
-use Rebilly\Client;
 use Rebilly\Resource\Entity;
-use Rebilly\Resource\Collection;
 
 /**
- * Class InvoiceItem.
+ * Class InvoiceItem
  *
  * ```json
  * {
@@ -30,24 +27,23 @@ use Rebilly\Resource\Collection;
  * }
  * ```
  *
- * @todo Change endpoint to `invoice-items`, remove invoiceId dependency.
- *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
  */
 final class InvoiceItem extends Entity
 {
+    const MSG_UNEXPECTED_TYPE = 'Unexpected type. Only %s types support';
+
+    const TYPE_CREDIT = 'credit';
+    const TYPE_DEBIT = 'debit';
+
     /**
      * @return array
      */
     public static function types()
     {
-        return ['credit', 'debit'];
+        return [self::TYPE_CREDIT, self::TYPE_DEBIT];
     }
-
-    /********************************************************************************
-     * Resource Getters and Setters
-     *******************************************************************************/
 
     /**
      * @return string
@@ -66,7 +62,7 @@ final class InvoiceItem extends Entity
     public function setType($value)
     {
         if (!in_array($value, self::types())) {
-            throw new DomainException('Only "' . implode(', ', self::types()) . ' type supports');
+            throw new DomainException(sprintf(self::MSG_UNEXPECTED_TYPE, implode(', ', self::types())));
         }
 
         return $this->setAttribute('type', $value);
@@ -160,67 +156,5 @@ final class InvoiceItem extends Entity
     public function setPeriodEndTime($value)
     {
         return $this->setAttribute('periodEndTime', $value);
-    }
-
-    /********************************************************************************
-     * Invoice Item API Facades
-     *******************************************************************************/
-
-    /**
-     * Facade for client command
-     *
-     * @param string $invoiceId
-     * @param array|ArrayObject $params
-     *
-     * @return InvoiceItem[]|Collection
-     */
-    public static function search($invoiceId, $params = [])
-    {
-        $params['invoiceId'] = $invoiceId;
-
-        return Client::get('invoices/{invoiceId}/items', $params);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $invoiceId
-     * @param string $invoiceItemId
-     * @param array|ArrayObject $params
-     *
-     * @return InvoiceItem
-     */
-    public static function load($invoiceId, $invoiceItemId, $params = [])
-    {
-        $params['invoiceId'] = $invoiceId;
-        $params['invoiceItemId'] = $invoiceItemId;
-
-        return Client::get('invoices/{invoiceId}/items/{invoiceItemId}', $params);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param array|InvoiceItem $data
-     * @param string $invoiceId
-     * @param string $invoiceItemId
-     *
-     * @return InvoiceItem
-     */
-    public static function create($data, $invoiceId, $invoiceItemId = null)
-    {
-        if (isset($invoiceItemId)) {
-            return Client::put(
-                $data,
-                'invoices/{invoiceId}/items/{invoiceItemId}',
-                ['invoiceId' => $invoiceId, 'invoiceItemId' => $invoiceItemId]
-            );
-        } else {
-            return Client::post(
-                $data,
-                'invoices/{invoiceId}/items',
-                ['invoiceId' => $invoiceId]
-            );
-        }
     }
 }

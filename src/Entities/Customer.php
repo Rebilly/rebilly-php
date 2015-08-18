@@ -10,14 +10,10 @@
 
 namespace Rebilly\Entities;
 
-use ArrayObject;
-use Rebilly\Client;
-use Rebilly\ParamBag;
 use Rebilly\Resource\Entity;
-use Rebilly\Resource\Collection;
 
 /**
- * Class Customer.
+ * Class Customer
  *
  * ```json
  * {
@@ -34,10 +30,6 @@ use Rebilly\Resource\Collection;
  */
 final class Customer extends Entity
 {
-    /********************************************************************************
-     * Resource Getters and Setters
-     *******************************************************************************/
-
     /**
      * @return string
      */
@@ -116,85 +108,5 @@ final class Customer extends Entity
     public function getCreatedTime()
     {
         return $this->getAttribute('createdTime');
-    }
-
-    /********************************************************************************
-     * Related resource
-     *******************************************************************************/
-
-    /**
-     * @return string
-     */
-    public function getLeadSources()
-    {
-        if (!$this->hasEmbeddedResource('lead-sources')) {
-            $this->setEmbeddedResource(
-                'lead-sources',
-                LeadSource::search(ParamBag::create()->filter('customerId', $this->getId()))
-            );
-        }
-
-        return $this->getEmbeddedResource('lead-sources');
-    }
-
-    /********************************************************************************
-     * Customer API Facades
-     *******************************************************************************/
-
-    /**
-     * Facade for client command
-     *
-     * @param array|ArrayObject $params
-     *
-     * @return Customer[]|Collection
-     */
-    public static function search($params = [])
-    {
-        return Client::get('customers', $params);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $customerId
-     * @param array|ArrayObject $params
-     *
-     * @return Customer
-     */
-    public static function load($customerId, $params = [])
-    {
-        $params['customerId'] = $customerId;
-
-        return Client::get('customers/{customerId}', $params);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param array|Customer $data
-     * @param string $customerId
-     *
-     * @return Customer
-     */
-    public static function create($data, $customerId = null)
-    {
-        if (isset($customerId)) {
-            return Client::put($data, 'customers/{customerId}', ['customerId' => $customerId]);
-        } else {
-            return Client::post($data, 'customers');
-        }
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $customerId
-     * @param array|Customer $data
-     *
-     * @return Customer
-     */
-    public static function update($customerId, $data)
-    {
-        return Client::put($data, 'customers/{customerId}', ['customerId' => $customerId]);
     }
 }

@@ -10,13 +10,10 @@
 
 namespace Rebilly\Entities;
 
-use ArrayObject;
-use Rebilly\Client;
 use Rebilly\Resource\Entity;
-use Rebilly\Resource\Collection;
 
 /**
- * Class Plan.
+ * Class Plan
  *
  * ```json
  * {
@@ -48,10 +45,6 @@ use Rebilly\Resource\Collection;
  */
 final class Plan extends Entity
 {
-    /********************************************************************************
-     * Resource Getters and Setters
-     *******************************************************************************/
-
     /**
      * @return bool
      */
@@ -356,66 +349,5 @@ final class Plan extends Entity
     public function setMaxQuantity($value)
     {
         return $this->setAttribute('maxQuantity', (int) $value);
-    }
-
-    /********************************************************************************
-     * Plan API Facades
-     *******************************************************************************/
-
-    /**
-     * Facade for client command
-     *
-     * @param array|ArrayObject $params
-     *
-     * @return Plan[]|Collection
-     */
-    public static function search($params = [])
-    {
-        return Client::get('plans', $params);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $planId
-     * @param array|ArrayObject $params
-     *
-     * @return Plan
-     */
-    public static function load($planId, $params = [])
-    {
-        $params['planId'] = $planId;
-
-        return Client::get('plans/{planId}', $params);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param array|Plan $data
-     * @param string $planId
-     *
-     * @return Plan
-     */
-    public static function create($data, $planId = null)
-    {
-        if (isset($planId)) {
-            return Client::put($data, 'plans/{planId}', ['planId' => $planId]);
-        } else {
-            return Client::post($data, 'plans');
-        }
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $planId
-     * @param array|Plan $data
-     *
-     * @return Plan
-     */
-    public static function update($planId, $data)
-    {
-        return Client::put($data, 'plans/{planId}', ['planId' => $planId]);
     }
 }

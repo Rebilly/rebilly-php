@@ -10,13 +10,10 @@
 
 namespace Rebilly\Entities;
 
-use ArrayObject;
-use Rebilly\Client;
-use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Resource\Entity;
 
 /**
- * Class AuthenticationToken.
+ * Class AuthenticationToken
  *
  * ```json
  * {
@@ -28,17 +25,12 @@ use Rebilly\Resource\Entity;
  * ```
  *
  * @todo Make time properties consistent, rename `expiredAt` to `expiredTime`
- * @todo Add collection and `search` method
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
  */
 final class AuthenticationToken extends Entity
 {
-    /********************************************************************************
-     * Resource Getters and Setters
-     *******************************************************************************/
-
     /**
      * {@inheritdoc}
      */
@@ -125,66 +117,5 @@ final class AuthenticationToken extends Entity
     public function setExpiredTime($value)
     {
         return $this->setAttribute('expiredAt', $value);
-    }
-
-    /********************************************************************************
-     * Authentication Token API Facades
-     *******************************************************************************/
-
-    /**
-     * Facade for client command
-     *
-     * @param string $token
-     * @param array|ArrayObject $params
-     *
-     * @return AuthenticationToken
-     */
-    public static function load($token, $params = [])
-    {
-        $params['token'] = $token;
-
-        return Client::get('authentication-tokens/{token}', $params);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $token
-     *
-     * @return AuthenticationToken
-     */
-    public static function verify($token)
-    {
-        try {
-            Client::head('authentication-tokens/{token}', ['token' => $token]);
-
-            return true;
-        } catch (NotFoundException $e) {
-            return false;
-        }
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param array|AuthenticationToken $data
-     *
-     * @return AuthenticationToken
-     */
-    public static function login($data)
-    {
-        return Client::post($data, 'authentication-tokens');
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $token
-     *
-     * @return AuthenticationToken
-     */
-    public static function logout($token)
-    {
-        Client::delete('authentication-tokens/{token}', ['token' => $token]);
     }
 }

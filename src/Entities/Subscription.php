@@ -10,13 +10,10 @@
 
 namespace Rebilly\Entities;
 
-use ArrayObject;
-use Rebilly\Client;
-use Rebilly\Resource\Collection;
 use Rebilly\Resource\Entity;
 
 /**
- * Class Subscription.
+ * Class Subscription
  *
  * ```json
  * {
@@ -36,10 +33,6 @@ use Rebilly\Resource\Entity;
  */
 final class Subscription extends Entity
 {
-    /********************************************************************************
-     * Resource Getters and Setters
-     *******************************************************************************/
-
     /**
      * @return string
      */
@@ -196,101 +189,5 @@ final class Subscription extends Entity
     public function setRenewalTime($value)
     {
         return $this->setAttribute('renewalTime', $value);
-    }
-
-    /********************************************************************************
-     * Subscription API Facades
-     *******************************************************************************/
-
-    /**
-     * Facade for client command
-     *
-     * @param array|ArrayObject $params
-     *
-     * @return Subscription[]|Collection
-     */
-    public static function search($params = [])
-    {
-        return Client::get('subscriptions', $params);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $subscriptionId
-     * @param array|ArrayObject $params
-     *
-     * @return Subscription
-     */
-    public static function load($subscriptionId, $params = [])
-    {
-
-        $params['subscriptionId'] = $subscriptionId;
-
-        return Client::get('subscriptions/{subscriptionId}', $params);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param array|Subscription $data
-     * @param string $subscriptionId
-     *
-     * @return Subscription
-     */
-    public static function create($data, $subscriptionId = null)
-    {
-        if (isset($subscriptionId)) {
-            return Client::put($data, 'subscriptions/{subscriptionId}', ['subscriptionId' => $subscriptionId]);
-        } else {
-            return Client::post($data, 'subscriptions');
-        }
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $subscriptionId
-     * @param array|Subscription $data
-     *
-     * @return Subscription
-     */
-    public static function update($subscriptionId, $data)
-    {
-        return Client::put($data, 'subscriptions/{subscriptionId}', ['subscriptionId' => $subscriptionId]);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $subscriptionId
-     * @param array|SubscriptionCancel $data
-     *
-     * @return Subscription
-     */
-    public static function cancel($subscriptionId, $data)
-    {
-        return Client::post(
-            $data,
-            'subscriptions/{subscriptionId}/cancel',
-            ['subscriptionId' => $subscriptionId]
-        );
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $subscriptionId
-     * @param array|SubscriptionSwitch $data
-     *
-     * @return Subscription
-     */
-    public static function switchTo($subscriptionId, $data)
-    {
-        return Client::post(
-            $data,
-            'subscriptions/{subscriptionId}/switch',
-            ['subscriptionId' => $subscriptionId]
-        );
     }
 }

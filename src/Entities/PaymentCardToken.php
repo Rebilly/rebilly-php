@@ -10,13 +10,10 @@
 
 namespace Rebilly\Entities;
 
-use ArrayObject;
-use Rebilly\Client;
 use Rebilly\Resource\Entity;
-use Rebilly\Resource\Collection;
 
 /**
- * Class PaymentCardToken.
+ * Class PaymentCardToken
  *
  * ```json
  * {
@@ -38,17 +35,12 @@ use Rebilly\Resource\Collection;
  * ```
  *
  * @todo Check if need `cvv` getter
- * @todo Seems this object repeats PaymentCard and Contact
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
  */
 final class PaymentCardToken extends Entity
 {
-    /********************************************************************************
-     * Resource Getters and Setters
-     *******************************************************************************/
-
     /**
      * @param string $value
      *
@@ -291,36 +283,5 @@ final class PaymentCardToken extends Entity
     public function setFingerprint($value)
     {
         return $this->setAttribute('fingerprint', $value);
-    }
-
-    /********************************************************************************
-     * Payment Card Token API Facades
-     *******************************************************************************/
-
-    /**
-     * Facade for client command
-     *
-     * @param array|ArrayObject $params
-     *
-     * @return PaymentCardToken[]|Collection
-     */
-    public static function search($params = [])
-    {
-        return Client::get('tokens', $params);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $tokenId
-     * @param array|ArrayObject $params
-     *
-     * @return PaymentCardToken
-     */
-    public static function load($tokenId, $params = [])
-    {
-        $params['tokenId'] = $tokenId;
-
-        return Client::get('tokens/{tokenId}', $params);
     }
 }

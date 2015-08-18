@@ -11,7 +11,7 @@
 namespace Rebilly\Entities;
 
 /**
- * Class SubscriptionSwitch.
+ * Class SubscriptionSwitch
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1

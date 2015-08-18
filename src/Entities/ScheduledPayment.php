@@ -10,10 +10,7 @@
 
 namespace Rebilly\Entities;
 
-use Rebilly\Client;
-use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Resource\Entity;
-use Rebilly\Resource\Collection;
 
 /**
  * Class ScheduledPayment.
@@ -38,15 +35,13 @@ use Rebilly\Resource\Collection;
  * }
  * ```
  *
+ * @todo To be consistent we should rename `approval_link` to `approvalLink`
+ *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
  */
 final class ScheduledPayment extends Entity
 {
-    /********************************************************************************
-     * Resource Getters and Setters
-     *******************************************************************************/
-
     /**
      * @return string
      */
@@ -82,11 +77,11 @@ final class ScheduledPayment extends Entity
     }
 
     /**
-     * @return string
+     * @return bool
      */
     public function isApprovalRequired()
     {
-        return $this->getAttribute('state') === 'suspended' && $this->getLink('approval_link') !== null;
+        return $this->getState() === 'suspended' && $this->getLink('approval_link') !== null;
     }
 
     /**
@@ -95,49 +90,5 @@ final class ScheduledPayment extends Entity
     public function getApprovalLink()
     {
         return $this->getLink('approval_link');
-    }
-
-    /********************************************************************************
-     * Scheduled Payment API Facades
-     *******************************************************************************/
-
-    /**
-     * Facade for client command
-     *
-     * @return ScheduledPayment[]|Collection
-     */
-    public static function search()
-    {
-        return Client::get('queue/payments');
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $paymentId
-     *
-     * @return ScheduledPayment
-     */
-    public static function exist($paymentId)
-    {
-        try {
-            Client::head('queue/payments/{paymentId}', ['paymentId' => $paymentId]);
-
-            return true;
-        } catch (NotFoundException $e) {
-            return false;
-        }
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $paymentId
-     *
-     * @return ScheduledPayment
-     */
-    public static function load($paymentId)
-    {
-        return Client::get('queue/payments/{paymentId}', ['paymentId' => $paymentId]);
     }
 }

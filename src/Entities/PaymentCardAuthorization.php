@@ -13,7 +13,7 @@ namespace Rebilly\Entities;
 use Rebilly\Resource\Resource;
 
 /**
- * Class PaymentCardAuthorization.
+ * Class PaymentCardAuthorization
  *
  * @todo Rename property `website` to `websiteId`
  * @todo Rename property `processorAccount` to `processorAccountId`

@@ -10,13 +10,10 @@
 
 namespace Rebilly\Entities;
 
-use ArrayObject;
-use Rebilly\Client;
 use Rebilly\Resource\Entity;
-use Rebilly\Resource\Collection;
 
 /**
- * Class CustomerCredential.
+ * Class CustomerCredential
  *
  * ```json
  * {
@@ -34,10 +31,6 @@ use Rebilly\Resource\Collection;
  */
 final class CustomerCredential extends Entity
 {
-    /********************************************************************************
-     * Resource Getters and Setters
-     *******************************************************************************/
-
     /**
      * @return string
      */
@@ -108,76 +101,5 @@ final class CustomerCredential extends Entity
     public function setExpiredTime($value)
     {
         return $this->setAttribute('expiredAt', $value);
-    }
-
-    /********************************************************************************
-     * Customer Credential API Facades
-     *******************************************************************************/
-
-    /**
-     * Facade for client command
-     *
-     * @param array|ArrayObject $params
-     *
-     * @return CustomerCredential[]|Collection
-     */
-    public static function search($params = [])
-    {
-        return Client::get('credentials', $params);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $credentialId
-     * @param array|ArrayObject $params
-     *
-     * @return CustomerCredential
-     */
-    public static function load($credentialId, $params = [])
-    {
-        $params['credentialId'] = $credentialId;
-
-        return Client::get('credentials/{credentialId}', $params);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param array|CustomerCredential $data
-     * @param string $credentialId
-     *
-     * @return CustomerCredential
-     */
-    public static function create($data, $credentialId = null)
-    {
-        if (isset($credentialId)) {
-            return Client::put($data, 'credentials/{credentialId}', ['credentialId' => $credentialId]);
-        } else {
-            return Client::post($data, 'credentials');
-        }
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $credentialId
-     * @param array|CustomerCredential $data
-     *
-     * @return CustomerCredential
-     */
-    public static function update($credentialId, $data)
-    {
-        return Client::put($data, 'credentials/{credentialId}', ['credentialId' => $credentialId]);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $credentialId
-     */
-    public static function delete($credentialId)
-    {
-        Client::delete('credentials/{credentialId}', ['credentialId' => $credentialId]);
     }
 }

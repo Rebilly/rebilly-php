@@ -11,9 +11,7 @@
 namespace Rebilly\Entities;
 
 use DomainException;
-use Rebilly\Client;
 use Rebilly\Resource\Entity;
-use Rebilly\Resource\Collection;
 
 /**
  * Class Payment.
@@ -30,7 +28,7 @@ use Rebilly\Resource\Collection;
  *   "currency": 'currency',
  *   "method": 'enum',
  *   "paymentInstrument": {
- *     ""
+ *     "key": "value"
  *   },
  *   "description": 'string'
  * }
@@ -41,6 +39,8 @@ use Rebilly\Resource\Collection;
  */
 final class Payment extends Entity
 {
+    const MSG_UNEXPECTED_METHOD = 'Unexpected method. Only %s methods support';
+
     const METHOD_PAYMENT_CARD = 'payment_card';
     const METHOD_PAYPAL = 'paypal';
 
@@ -54,10 +54,6 @@ final class Payment extends Entity
             Payment::METHOD_PAYPAL,
         ];
     }
-
-    /********************************************************************************
-     * Resource Getters and Setters
-     *******************************************************************************/
 
     /**
      * @return string
@@ -166,85 +162,37 @@ final class Payment extends Entity
     }
 
     /**
-     * @return string
+     * @return PaymentMethods\PaymentCardMethod|PaymentMethods\PaypalMethod
      */
     public function getMethod()
     {
-        return $this->getAttribute('method');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return Payment
-     */
-    public function setMethod($value)
-    {
-        if (!in_array($value, Payment::methods())) {
-            throw new DomainException('Only "' . implode(', ', Payment::methods()) . ' method supports');
+        if ($this->getAttribute('method') === null) {
+            return null;
         }
 
-        return $this->setAttribute('method', $value);
-    }
-
-    /**
-     * @return array
-     */
-    public function getPaymentInstrument()
-    {
-        return $this->getAttribute('paymentInstrument');
-    }
-
-    /**
-     * @param array $value
-     *
-     * @return Payment
-     */
-    public function setPaymentInstrument($value)
-    {
-        return $this->setAttribute('paymentInstrument', (array) $value);
-    }
-
-    /********************************************************************************
-     * Payment API Facades
-     *******************************************************************************/
-
-    /**
-     * Facade for client command
-     *
-     * @return Payment[]|Collection
-     */
-    public static function search()
-    {
-        return Client::get('payments');
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $paymentId
-     *
-     * @return Payment
-     */
-    public static function load($paymentId)
-    {
-        return Client::get('payments/{paymentId}', ['paymentId' => $paymentId]);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param array|Payment $payment
-     * @param string|null $paymentId
-     *
-     * @return Payment|ScheduledPayment
-     */
-    public static function create($payment, $paymentId = null)
-    {
-        if (isset($paymentId)) {
-            return Client::put($payment, 'payments/{paymentId}', ['paymentId' => $paymentId]);
-        } else {
-            return Client::post($payment, 'payments');
+        switch ($this->getAttribute('method')) {
+            case self::METHOD_PAYMENT_CARD:
+                return new PaymentMethods\PaymentCardMethod((array) $this->getAttribute('paymentInstrument'));
+            case self::METHOD_PAYPAL:
+                return new PaymentMethods\PaypalMethod((array) $this->getAttribute('paymentInstrument'));
+            default:
+                throw new DomainException(sprintf(self::MSG_UNEXPECTED_METHOD, implode(', ', Payment::methods())));
         }
+    }
+
+    /**
+     * @param PaymentMethod $value
+     *
+     * @return Payment
+     */
+    public function setMethod(PaymentMethod $value)
+    {
+        if (!in_array($value->getName(), Payment::methods())) {
+            throw new DomainException(sprintf(self::MSG_UNEXPECTED_METHOD, implode(', ', Payment::methods())));
+        }
+
+        return $this
+            ->setAttribute('method', $value->getName())
+            ->setAttribute('paymentInstrument', $value->jsonSerialize());
     }
 }

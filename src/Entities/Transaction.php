@@ -10,13 +10,10 @@
 
 namespace Rebilly\Entities;
 
-use ArrayObject;
-use Rebilly\Client;
 use Rebilly\Resource\Entity;
-use Rebilly\Resource\Collection;
 
 /**
- * Class Transaction.
+ * Class Transaction
  *
  *
  * ```json
@@ -44,10 +41,6 @@ use Rebilly\Resource\Collection;
  */
 final class Transaction extends Entity
 {
-    /********************************************************************************
-     * Resource Getters and Setters
-     *******************************************************************************/
-
     /**
      * @return string
      */
@@ -134,49 +127,5 @@ final class Transaction extends Entity
     public function getPaymentCardId()
     {
         return $this->getAttribute('paymentCard');
-    }
-
-    /********************************************************************************
-     * Transaction API Facades
-     *******************************************************************************/
-
-    /**
-     * Facade for client command
-     *
-     * @param array|ArrayObject $params
-     *
-     * @return Transaction[]|Collection
-     */
-    public static function search($params = [])
-    {
-        return Client::get('transactions', $params);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $transactionId
-     * @param array|ArrayObject $params
-     *
-     * @return Transaction
-     */
-    public static function load($transactionId, $params = [])
-    {
-        $params['transactionId'] = $transactionId;
-
-        return Client::get('transactions/{transactionId}', $params);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $transactionId
-     * @param float $amount
-     *
-     * @return Transaction
-     */
-    public static function refund($transactionId, $amount)
-    {
-        return Client::post(['amount' => $amount], 'transactions/{transactionId}/refund', ['transactionId' => $transactionId]);
     }
 }
