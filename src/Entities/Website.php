@@ -10,13 +10,10 @@
 
 namespace Rebilly\Entities;
 
-use ArrayObject;
-use Rebilly\Client;
 use Rebilly\Resource\Entity;
-use Rebilly\Resource\Collection;
 
 /**
- * Class Website.
+ * Class Website
  *
  * ```json
  * {
@@ -37,10 +34,6 @@ use Rebilly\Resource\Collection;
  */
 final class Website extends Entity
 {
-    /********************************************************************************
-     * Resource Getters and Setters
-     *******************************************************************************/
-
     /**
      * @return string
      */
@@ -191,76 +184,5 @@ final class Website extends Entity
     public function setWebHookPassword($value)
     {
         return $this->setAttribute('webHookPassword', $value);
-    }
-
-    /********************************************************************************
-     * Website API Facades
-     *******************************************************************************/
-
-    /**
-     * Facade for client command
-     *
-     * @param array|ArrayObject $params
-     *
-     * @return Website[]|Collection
-     */
-    public static function search($params = [])
-    {
-        return Client::get('websites', $params);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $websiteId
-     * @param array|ArrayObject $params
-     *
-     * @return Website
-     */
-    public static function load($websiteId, $params = [])
-    {
-        $params['websiteId'] = $websiteId;
-
-        return Client::get('websites/{websiteId}', $params);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param array|Website $data
-     * @param string $websiteId
-     *
-     * @return Website
-     */
-    public static function create($data, $websiteId = null)
-    {
-        if (isset($websiteId)) {
-            return Client::put($data, 'websites/{websiteId}', ['websiteId' => $websiteId]);
-        } else {
-            return Client::post($data, 'websites');
-        }
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $websiteId
-     * @param array|Website $data
-     *
-     * @return Website
-     */
-    public static function update($websiteId, $data)
-    {
-        return Client::put($data, 'websites/{websiteId}', ['websiteId' => $websiteId]);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $websiteId
-     */
-    public static function delete($websiteId)
-    {
-        Client::delete('websites/{websiteId}', ['websiteId' => $websiteId]);
     }
 }

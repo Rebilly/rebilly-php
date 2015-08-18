@@ -10,14 +10,11 @@
 
 namespace Rebilly\Entities;
 
-use ArrayObject;
 use DomainException;
-use Rebilly\Client;
-use Rebilly\Resource\Collection;
 use Rebilly\Resource\Entity;
 
 /**
- * Class Blacklist.
+ * Class Blacklist
  *
  * ```json
  * {
@@ -34,6 +31,8 @@ use Rebilly\Resource\Entity;
  */
 final class Blacklist extends Entity
 {
+    const MSG_UNEXPECTED_TYPE = 'Unexpected type. Only %s types support';
+
     /**
      * @return array
      */
@@ -41,10 +40,6 @@ final class Blacklist extends Entity
     {
         return ['paymentCard', 'customerId', 'email', 'ipAddress', 'bin', 'country'];
     }
-
-    /********************************************************************************
-     * Resource Getters and Setters
-     *******************************************************************************/
 
     /**
      * @return mixed
@@ -63,7 +58,7 @@ final class Blacklist extends Entity
     public function setType($value)
     {
         if (!in_array($value, self::types())) {
-            throw new DomainException('Only "' . implode(', ', self::types()) . ' type supports');
+            throw new DomainException(sprintf(self::MSG_UNEXPECTED_TYPE, implode(', ', self::types())));
         }
 
         return $this->setAttribute('type', $value);
@@ -111,63 +106,5 @@ final class Blacklist extends Entity
     public function getCreatedTime()
     {
         return $this->getAttribute('createdTime');
-    }
-
-    /********************************************************************************
-     * Blacklist API Facades
-     *******************************************************************************/
-
-    /**
-     * Facade for client command
-     *
-     * @param array|ArrayObject $params
-     *
-     * @return Blacklist[]|Collection
-     */
-    public static function search($params = [])
-    {
-        return Client::get('blacklists', $params);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $blacklistId
-     * @param array|ArrayObject $params
-     *
-     * @return Blacklist
-     */
-    public static function load($blacklistId, $params = [])
-    {
-        $params['blacklistId'] = $blacklistId;
-
-        return Client::get('blacklists/{blacklistId}', $params);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param array|Blacklist $data
-     * @param string $blacklistId
-     *
-     * @return Blacklist
-     */
-    public static function create($data, $blacklistId = null)
-    {
-        if (isset($blacklistId)) {
-            return Client::put($data, 'blacklists/{blacklistId}', ['blacklistId' => $blacklistId]);
-        } else {
-            return Client::post($data, 'blacklists');
-        }
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $blacklistId
-     */
-    public static function delete($blacklistId)
-    {
-        Client::delete('blacklists/{blacklistId}', ['blacklistId' => $blacklistId]);
     }
 }

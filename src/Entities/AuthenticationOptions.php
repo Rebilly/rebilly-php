@@ -10,11 +10,10 @@
 
 namespace Rebilly\Entities;
 
-use Rebilly\Client;
 use Rebilly\Resource\Resource;
 
 /**
- * Class AuthenticationOptions.
+ * Class AuthenticationOptions
  *
  * ```json
  * {
@@ -25,25 +24,11 @@ use Rebilly\Resource\Resource;
  * }
  * ```
  *
- * @todo Rename property `merchant` to `merchantId`
- *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
  */
 final class AuthenticationOptions extends Resource
 {
-    /********************************************************************************
-     * Resource Getters and Setters
-     *******************************************************************************/
-
-    /**
-     * @return string
-     */
-    public function getMerchantId()
-    {
-        return $this->getAttribute('merchant');
-    }
-
     /**
      * @return string
      */
@@ -114,31 +99,5 @@ final class AuthenticationOptions extends Resource
     public function setResetTokenTtl($value)
     {
         return $this->setAttribute('resetTokenTtl', (int) $value);
-    }
-
-    /********************************************************************************
-     * Authentication Options API Facades
-     *******************************************************************************/
-
-    /**
-     * Facade for client command
-     *
-     * @return AuthenticationOptions
-     */
-    public static function load()
-    {
-        return Client::get('authentication-options');
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param array|AuthenticationOptions $data
-     *
-     * @return AuthenticationOptions
-     */
-    public static function update($data)
-    {
-        return Client::put($data, 'authentication-options');
     }
 }

@@ -8,51 +8,41 @@
  * file that was distributed with this source code.
  */
 
-namespace Rebilly\Entities;
+namespace Rebilly\Entities\PaymentMethods;
 
-use Rebilly\Resource\Entity;
+use Rebilly\Entities\Payment;
+use Rebilly\Entities\PaymentMethod;
 
 /**
- * Class Layout
- *
- * ```json
- * {
- *   "id",
- *   "name"
- *   "items"
- * }
- * ```
- *
- * @todo Items
+ * Class PaypalMethod
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
  */
-final class Layout extends Entity
+final class PaypalMethod extends PaymentMethod
 {
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    public function getName()
+    public function name()
     {
-        return $this->getAttribute('name');
+        return Payment::METHOD_PAYPAL;
     }
 
     /**
      * @param string $value
-     *
      * @return $this
      */
-    public function setName($value)
+    public function setPaypalKey($value)
     {
-        return $this->setAttribute('name', $value);
+        return $this->setAttribute('paypal', $value);
     }
 
     /**
      * @return string
      */
-    public function getItems()
+    public function getPaypalKey()
     {
-        return $this->getAttribute('items');
+        return $this->getAttribute('paypal');
     }
 }

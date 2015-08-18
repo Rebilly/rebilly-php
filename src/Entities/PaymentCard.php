@@ -10,13 +10,10 @@
 
 namespace Rebilly\Entities;
 
-use ArrayObject;
-use Rebilly\Client;
 use Rebilly\Resource\Entity;
-use Rebilly\Resource\Collection;
 
 /**
- * Class PaymentCard.
+ * Class PaymentCard
  *
  * ```json
  * {
@@ -41,10 +38,6 @@ use Rebilly\Resource\Collection;
  */
 final class PaymentCard extends Entity
 {
-    /********************************************************************************
-     * Resource Getters and Setters
-     *******************************************************************************/
-
     /**
      * @param string $value
      *
@@ -157,100 +150,5 @@ final class PaymentCard extends Entity
     public function getCreatedTime()
     {
         return $this->getAttribute('createdTime');
-    }
-
-    /********************************************************************************
-     * Payment card API Facades
-     *******************************************************************************/
-
-    /**
-     * Facade for client command
-     *
-     * @param array|ArrayObject $params
-     *
-     * @return PaymentCard[]|Collection
-     */
-    public static function search($params = [])
-    {
-        return Client::get('payment-cards', $params);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $cardId
-     * @param array|ArrayObject $params
-     *
-     * @return PaymentCard
-     */
-    public static function load($cardId, $params = [])
-    {
-        $params['cardId'] = $cardId;
-
-        return Client::get('payment-cards/{cardId}', $params);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param array|PaymentCard $data
-     * @param string $cardId
-     *
-     * @return PaymentCard
-     */
-    public static function create($data, $cardId = null)
-    {
-        if (isset($cardId)) {
-            return Client::put($data, 'payment-cards/{cardId}', ['cardId' => $cardId]);
-        } else {
-            return Client::post($data, 'payment-cards');
-        }
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param array|PaymentCardToken $data
-     * @param string $cardId
-     *
-     * @return PaymentCard
-     */
-    public static function createFromToken($data, $cardId = null)
-    {
-        if (is_string($data)) {
-            $data = ['token' => $data];
-        }
-
-        if (isset($cardId)) {
-            return Client::put($data, 'payment-cards/{cardId}', ['cardId' => $cardId]);
-        } else {
-            return Client::post($data, 'payment-cards');
-        }
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param array|PaymentCardAuthorization $data
-     * @param string $cardId
-     *
-     * @return PaymentCard
-     *
-     */
-    public static function authorize($data, $cardId)
-    {
-        return Client::post($data, 'payment-cards/{cardId}/authorization', ['cardId' => $cardId]);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $cardId
-     *
-     * @return PaymentCard
-     */
-    public static function deactivate($cardId)
-    {
-        return Client::post([], 'payment-cards/{cardId}/deactivation', ['cardId' => $cardId]);
     }
 }

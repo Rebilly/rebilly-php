@@ -10,13 +10,10 @@
 
 namespace Rebilly\Entities;
 
-use ArrayObject;
-use Rebilly\Client;
 use Rebilly\Resource\Entity;
-use Rebilly\Resource\Collection;
 
 /**
- * Class ResetPasswordToken.
+ * Class ResetPasswordToken
  *
  * ```json
  * {
@@ -34,10 +31,6 @@ use Rebilly\Resource\Collection;
  */
 final class ResetPasswordToken extends Entity
 {
-    /********************************************************************************
-     * Resource Getters and Setters
-     *******************************************************************************/
-
     /**
      * {@inheritdoc}
      */
@@ -124,53 +117,5 @@ final class ResetPasswordToken extends Entity
     public function setExpiredTime($value)
     {
         return $this->setAttribute('expiredAt', $value);
-    }
-
-    /********************************************************************************
-     * Reset Password Token API Facades
-     *******************************************************************************/
-
-    /**
-     * Facade for client command
-     *
-     * @param array|ArrayObject $params
-     *
-     * @return ResetPasswordToken[]|Collection
-     */
-    public static function search($params = [])
-    {
-        return Client::get('password-tokens', $params);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $token
-     * @param array|ArrayObject $params
-     *
-     * @return ResetPasswordToken
-     */
-    public static function load($token, $params = [])
-    {
-        $params['token'] = $token;
-
-        return Client::get('password-tokens/{token}', $params);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param array|ResetPasswordToken $data
-     * @param string $token
-     *
-     * @return ResetPasswordToken
-     */
-    public static function create($data, $token = null)
-    {
-        if (isset($token)) {
-            return Client::put($data, 'password-tokens/{token}', ['token' => $token]);
-        } else {
-            return Client::post($data, 'password-tokens');
-        }
     }
 }

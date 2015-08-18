@@ -10,13 +10,10 @@
 
 namespace Rebilly\Entities;
 
-use ArrayObject;
-use Rebilly\Client;
 use Rebilly\Resource\Entity;
-use Rebilly\Resource\Collection;
 
 /**
- * Class Contact.
+ * Class Contact
  *
  * ```json
  * {
@@ -44,10 +41,6 @@ use Rebilly\Resource\Collection;
  */
 final class Contact extends Entity
 {
-    /********************************************************************************
-     * Resource Getters and Setters
-     *******************************************************************************/
-
     /**
      * @return string
      */
@@ -252,53 +245,5 @@ final class Contact extends Entity
     public function getCreatedTime()
     {
         return $this->getAttribute('createdTime');
-    }
-
-    /********************************************************************************
-     * Contact API Facades
-     *******************************************************************************/
-
-    /**
-     * Facade for client command
-     *
-     * @param array|ArrayObject $params
-     *
-     * @return Contact[]|Collection
-     */
-    public static function search($params = [])
-    {
-        return Client::get('contacts', $params);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $contactId
-     * @param array|ArrayObject $params
-     *
-     * @return Contact
-     */
-    public static function load($contactId, $params = [])
-    {
-        $params['contactId'] = $contactId;
-
-        return Client::get('contacts/{contactId}', $params);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param array|Contact $data
-     * @param string $contactId
-     *
-     * @return Contact
-     */
-    public static function create($data, $contactId = null)
-    {
-        if (isset($contactId)) {
-            return Client::put($data, 'contacts/{contactId}', ['contactId' => $contactId]);
-        } else {
-            return Client::post($data, 'contacts');
-        }
     }
 }

@@ -10,13 +10,10 @@
 
 namespace Rebilly\Entities;
 
-use ArrayObject;
-use Rebilly\Client;
 use Rebilly\Resource\Entity;
-use Rebilly\Resource\Collection;
 
 /**
- * Class LeadSource.
+ * Class LeadSource
  *
  * ```json
  * {
@@ -37,14 +34,11 @@ use Rebilly\Resource\Collection;
  * }
  * ```
  *
- * @property string $customerId
+ * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
+ * @version 0.1
  */
 final class LeadSource extends Entity
 {
-    /********************************************************************************
-     * Resource Getters and Setters
-     *******************************************************************************/
-
     /**
      * @return string
      */
@@ -295,53 +289,5 @@ final class LeadSource extends Entity
     public function setCurrency($value)
     {
         return $this->setAttribute('currency', $value);
-    }
-
-    /********************************************************************************
-     * Lead Source API Facades
-     *******************************************************************************/
-
-    /**
-     * Facade for client command
-     *
-     * @param array|ArrayObject $params
-     *
-     * @return LeadSource[]|Collection
-     */
-    public static function search($params = [])
-    {
-        return Client::get('lead-sources', $params);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param string $leadSourceId
-     * @param array|ArrayObject $params
-     *
-     * @return LeadSource
-     */
-    public static function load($leadSourceId, $params = [])
-    {
-        $params['leadSourceId'] = $leadSourceId;
-
-        return Client::get('lead-sources/{leadSourceId}', $params);
-    }
-
-    /**
-     * Facade for client command
-     *
-     * @param array|LeadSource $data
-     * @param string $leadSourceId
-     *
-     * @return LeadSource
-     */
-    public static function create($data, $leadSourceId = null)
-    {
-        if (isset($leadSourceId)) {
-            return Client::put($data, 'lead-sources/{leadSourceId}', ['leadSourceId' => $leadSourceId]);
-        } else {
-            return Client::post($data, 'lead-sources');
-        }
     }
 }
