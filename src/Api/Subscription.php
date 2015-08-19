@@ -22,11 +22,11 @@ use Rebilly\Resource\Entity;
  * {
  *   "id"
  *   "customerId"
- *   "plan"
- *   "website"
- *   "invoice"
- *   "billingAddress"
- *   "deliveryAddress"
+ *   "planId"
+ *   "websiteId"
+ *   "initialInvoiceId"
+ *   "billingContactId"
+ *   "deliveryContactId"
  *   "quantity"
  * }
  * ```
@@ -67,11 +67,21 @@ final class Subscription extends Entity
     }
 
     /**
+     * @param string $value
+     *
+     * @return Subscription
+     */
+    public function setInitialInvoiceId($value)
+    {
+        return $this->setAttribute('initialInvoiceId', $value);
+    }
+
+    /**
      * @return string
      */
     public function getPlanId()
     {
-        return $this->getAttribute('plan');
+        return $this->getAttribute('planId');
     }
 
     /**
@@ -81,7 +91,7 @@ final class Subscription extends Entity
      */
     public function setPlanId($value)
     {
-        return $this->setAttribute('plan', $value);
+        return $this->setAttribute('planId', $value);
     }
 
     /**
@@ -89,7 +99,7 @@ final class Subscription extends Entity
      */
     public function getWebsiteId()
     {
-        return $this->getAttribute('website');
+        return $this->getAttribute('websiteId');
     }
 
     /**
@@ -99,7 +109,7 @@ final class Subscription extends Entity
      */
     public function setWebsiteId($value)
     {
-        return $this->setAttribute('website', $value);
+        return $this->setAttribute('websiteId', $value);
     }
 
     /**
@@ -123,27 +133,17 @@ final class Subscription extends Entity
     /**
      * @return string
      */
-    public function getBillingAddressId()
+    public function getBillingContactId()
     {
-        return $this->getAttribute('billingAddress');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setBillingAddressId($value)
-    {
-        return $this->setAttribute('billingAddress', $value);
+        return $this->getAttribute('billingContactId');
     }
 
     /**
      * @return string
      */
-    public function getDeliveryAddressId()
+    public function getDeliveryContactId()
     {
-        return $this->getAttribute('deliveryAddress');
+        return $this->getAttribute('deliveryContactId');
     }
 
     /**
@@ -151,9 +151,9 @@ final class Subscription extends Entity
      *
      * @return $this
      */
-    public function setDeliveryAddressId($value)
+    public function setDeliveryContactId($value)
     {
-        return $this->setAttribute('deliveryAddress', $value);
+        return $this->setAttribute('deliveryContactId', $value);
     }
 
     /**
