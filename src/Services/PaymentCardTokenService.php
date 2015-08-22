@@ -13,8 +13,8 @@ namespace Rebilly\Services;
 use ArrayObject;
 use Rebilly\Entities\PaymentCardToken;
 use Rebilly\Http\Exception\NotFoundException;
-use Rebilly\Resource\Collection;
-use Rebilly\Resource\Service;
+use Rebilly\Rest\Collection;
+use Rebilly\Rest\Service;
 
 /**
  * Class PaymentCardTokenService

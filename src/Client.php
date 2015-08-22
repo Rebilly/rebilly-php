@@ -79,7 +79,7 @@ final class Client
     /** @var Middleware */
     private $middleware;
 
-    /** @var Resource\Factory */
+    /** @var Rest\Factory */
     private $factory;
 
     /** @var Http\HttpHandler */
@@ -117,7 +117,7 @@ final class Client
         $this->transport = $options->getHttpHandler();
 
         // Objects factory, often depends by version
-        $this->factory = new Resource\Factory(new Entities\Schema());
+        $this->factory = new Rest\Factory(new Entities\Schema());
 
         $this->middleware = new Middleware\CompositeMiddleware();
 
@@ -236,7 +236,7 @@ final class Client
     /**
      * @param string $name
      *
-     * @return Resource\Service
+     * @return Rest\Service
      */
     private function service($name)
     {

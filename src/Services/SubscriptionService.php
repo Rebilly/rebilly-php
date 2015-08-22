@@ -16,8 +16,8 @@ use Rebilly\Entities\SubscriptionCancel;
 use Rebilly\Entities\SubscriptionSwitch;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
-use Rebilly\Resource\Collection;
-use Rebilly\Resource\Service;
+use Rebilly\Rest\Collection;
+use Rebilly\Rest\Service;
 
 /**
  * Class SubscriptionService

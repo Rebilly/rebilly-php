@@ -8,13 +8,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Rebilly\Resource;
+namespace Rebilly\Rest;
 
-use Exception;
+use RuntimeException;
 use ArrayAccess;
 
 /**
- * Class Factory.
+ * Class Factory
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
@@ -65,7 +65,7 @@ final class Factory
      * @param string $uri
      * @param array $content
      *
-     * @throws Exception
+     * @throws RuntimeException
      *
      * @return mixed|Collection|Entity|Entity[]
      */
@@ -79,7 +79,6 @@ final class Factory
             }
         }
 
-        // TODO: Add more informative message
-        throw new Exception(sprintf('Cannot create resource by URI "%s"', $uri));
+        throw new RuntimeException(sprintf('Cannot create resource by URI "%s"', $uri));
     }
 }

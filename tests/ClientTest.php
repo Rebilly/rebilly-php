@@ -15,8 +15,7 @@ use Rebilly\Entities\Payment;
 use Rebilly\Entities\PaymentMethods\PaypalMethod;
 use Rebilly\Entities\ScheduledPayment;
 use Rebilly\Http\Exception\UnprocessableEntityException;
-use Rebilly\Resource\Collection;
-// use LogicException as PendingException;
+use Rebilly\Rest\Collection;
 use Rebilly\Client;
 
 defined('APIKEY') or define('APIKEY', null);

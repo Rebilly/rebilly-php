@@ -14,8 +14,8 @@ use ArrayObject;
 use Rebilly\Http\Exception\GoneException;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
-use Rebilly\Resource\Collection;
-use Rebilly\Resource\Service;
+use Rebilly\Rest\Collection;
+use Rebilly\Rest\Service;
 use Rebilly\Entities;
 
 /**

@@ -8,12 +8,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Rebilly\Resource;
+namespace Rebilly\Rest;
 
 use Rebilly\Client;
 
 /**
- * Class Service.
+ * Class Service
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
