@@ -8,20 +8,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Rebilly\Resource;
+namespace Rebilly\Rest;
 
 /**
- * Class Entity.
+ * Class Entity
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
  */
 abstract class Entity extends Resource
 {
-    /********************************************************************************
-     * Resource Getters and Setters
-     *******************************************************************************/
-
     /**
      * Getter for entity ID.
      *

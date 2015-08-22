@@ -14,7 +14,7 @@ use ArrayIterator;
 use ArrayAccess;
 use InvalidArgumentException;
 use IteratorAggregate;
-use Rebilly\Resource\Collection;
+use Rebilly\Rest\Collection;
 
 /**
  * Class Schema.

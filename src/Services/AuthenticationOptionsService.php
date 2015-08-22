@@ -13,7 +13,7 @@ namespace Rebilly\Services;
 use ArrayObject;
 use Rebilly\Entities\AuthenticationOptions;
 use Rebilly\Http\Exception\UnprocessableEntityException;
-use Rebilly\Resource\Service;
+use Rebilly\Rest\Service;
 
 /**
  * Class AuthenticationOptionsService

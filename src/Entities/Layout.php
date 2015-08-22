@@ -10,7 +10,7 @@
 
 namespace Rebilly\Entities;
 
-use Rebilly\Resource\Entity;
+use Rebilly\Rest\Entity;
 
 /**
  * Class Layout

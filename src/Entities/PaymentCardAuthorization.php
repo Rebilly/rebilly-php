@@ -10,7 +10,7 @@
 
 namespace Rebilly\Entities;
 
-use Rebilly\Resource\Resource;
+use Rebilly\Rest\Resource;
 
 /**
  * Class PaymentCardAuthorization

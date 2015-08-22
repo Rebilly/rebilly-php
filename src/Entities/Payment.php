@@ -11,7 +11,7 @@
 namespace Rebilly\Entities;
 
 use DomainException;
-use Rebilly\Resource\Entity;
+use Rebilly\Rest\Entity;
 
 /**
  * Class Payment.

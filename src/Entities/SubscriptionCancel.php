@@ -11,7 +11,7 @@
 namespace Rebilly\Entities;
 
 use DomainException;
-use Rebilly\Resource\Resource;
+use Rebilly\Rest\Resource;
 
 /**
  * Class SubscriptionCancel

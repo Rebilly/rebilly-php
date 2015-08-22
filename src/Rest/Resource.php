@@ -8,17 +8,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Rebilly\Resource;
+namespace Rebilly\Rest;
 
 use ArrayAccess;
 use ArrayObject;
 use JsonSerializable;
 use Serializable;
-use InvalidArgumentException;
-use RuntimeException;
+use OutOfRangeException;
+use DomainException;
 
 /**
- * Class Resource.
+ * Class Resource
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
@@ -58,54 +58,6 @@ abstract class Resource implements Serializable, JsonSerializable, ArrayAccess
         $this->data = clone $this->data;
         $this->embeddedData = clone $this->embeddedData;
         $this->links = clone $this->links;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __get($name)
-    {
-        if (method_exists($this, 'get' . $name)) {
-            return call_user_func([$this, 'get' . $name]);
-        }
-
-        if (method_exists($this, 'set' . $name)) {
-            throw new RuntimeException(sprintf('Trying to set the read-only property "%"', $name));
-        } else {
-            throw new InvalidArgumentException(sprintf('The property "%" does not exist', $name));
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __set($name, $value)
-    {
-        if (method_exists($this, 'set' . $name)) {
-            return call_user_func([$this, 'set' . $name], $value);
-        }
-
-        if (method_exists($this, 'get' . $name)) {
-            throw new RuntimeException(sprintf('Trying to get the write-only property "%"', $name));
-        } else {
-            throw new InvalidArgumentException(sprintf('The property "%" does not exist', $name));
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __isset($name)
-    {
-        return method_exists($this, 'get' . $name) || method_exists($this, 'set' . $name);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __unset($name)
-    {
-        $this->__set($name, null);
     }
 
     /**
@@ -222,7 +174,7 @@ abstract class Resource implements Serializable, JsonSerializable, ArrayAccess
      */
     public function offsetExists($offset)
     {
-        return isset($this->data[$offset]);
+        return method_exists($this, 'get' . $offset) || method_exists($this, 'set' . $offset);
     }
 
     /**
@@ -230,7 +182,15 @@ abstract class Resource implements Serializable, JsonSerializable, ArrayAccess
      */
     public function offsetGet($offset)
     {
-        return $this->data[$offset];
+        if (method_exists($this, 'get' . $offset)) {
+            return call_user_func([$this, 'get' . $offset]);
+        }
+
+        if (method_exists($this, 'set' . $offset)) {
+            throw new DomainException(sprintf('Trying to set the read-only property "%"', $offset));
+        } else {
+            throw new OutOfRangeException(sprintf('The property "%" does not exist', $offset));
+        }
     }
 
     /**
@@ -238,7 +198,15 @@ abstract class Resource implements Serializable, JsonSerializable, ArrayAccess
      */
     public function offsetSet($offset, $value)
     {
-        $this->data[$offset] = $value;
+        if (method_exists($this, 'set' . $offset)) {
+            return call_user_func([$this, 'set' . $offset], $value);
+        }
+
+        if (method_exists($this, 'get' . $offset)) {
+            throw new DomainException(sprintf('Trying to get the write-only property "%"', $offset));
+        } else {
+            throw new OutOfRangeException(sprintf('The property "%" does not exist', $offset));
+        }
     }
 
     /**
@@ -246,6 +214,6 @@ abstract class Resource implements Serializable, JsonSerializable, ArrayAccess
      */
     public function offsetUnset($offset)
     {
-        unset($this->data[$offset]);
+        $this->offsetSet($offset, null);
     }
 }
