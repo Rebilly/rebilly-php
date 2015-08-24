@@ -186,7 +186,7 @@ class CurlHandler implements HttpHandler
             throw new RuntimeException('Cannot initialize a cURL session');
         }
 
-        $this->reference = $reference;;
+        $this->reference = $reference;
         curl_setopt_array($this->reference, $options);
     }
 

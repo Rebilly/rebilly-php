@@ -28,7 +28,6 @@ use Rebilly\Rest\Entity;
  *
  * @todo Rename property `billingContact` to `billingContactId`
  * @todo Rename property `deliveryContact` to `deliveryContactId`
- *
  */
 final class Invoice extends Entity
 {

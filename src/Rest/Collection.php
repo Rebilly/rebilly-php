@@ -77,7 +77,7 @@ class Collection implements Serializable, JsonSerializable, IteratorAggregate, A
     /**
      * {@inheritdoc}
      */
-    function jsonSerialize()
+    public function jsonSerialize()
     {
         return array_map(
             function (JsonSerializable $item) {

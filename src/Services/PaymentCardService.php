@@ -95,7 +95,6 @@ final class PaymentCardService extends Service
      * @throws UnprocessableEntityException The input data does not valid
      *
      * @return PaymentCard
-     *
      */
     public function authorize($data, $cardId)
     {
