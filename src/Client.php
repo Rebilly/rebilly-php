@@ -447,4 +447,16 @@ final class Client
 
         return new GuzzleUri($uri);
     }
+
+    /**
+     * Returns a client option.
+     *
+     * @param string $name
+     *
+     * @return mixed|null
+     */
+    public function getOption($name)
+    {
+        return isset($this->config[$name]) ? $this->config[$name] : null;
+    }
 }
