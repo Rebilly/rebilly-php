@@ -13,7 +13,6 @@ namespace Rebilly;
 use ArrayObject;
 use BadMethodCallException;
 use Rebilly\Http\CurlHandler;
-// use Rebilly\Middleware\Mock;
 use RuntimeException;
 use InvalidArgumentException;
 use Psr\Http\Message\RequestInterface as Request;
@@ -28,8 +27,6 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * This class implements a queue of middleware, which can be attached using the `attach()` method,
  * and is itself middleware.
  *
- * TODO: Decide use 3rd party implementation of PSR-7 or to include in the library
- *
  * @see Client::createRequest()
  * @see Client::createResponse()
  *
@@ -37,13 +34,17 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  *
  * @see Client::__call()
  * @see Client::send()
- * @see Client::service()
  *
  * @method mixed get($path, $params = [], $headers = [])
  * @method void head($path, $params = [], $headers = [])
  * @method mixed post($payload, $path, $params = [], $headers = [])
  * @method mixed put($payload, $path, $params = [], $headers = [])
  * @method void delete($path, $params = [], $headers = [])
+ *
+ * Magic methods for services factories:
+ *
+ * @see Client::__call()
+ * @see Client::service()
  *
  * @method Services\AuthenticationOptionsService authenticationOptions()
  * @method Services\AuthenticationTokenService authenticationToken()
@@ -73,8 +74,8 @@ final class Client
     const SANDBOX_HOST = 'https://api-sandbox.rebilly.com';
     const CURRENT_VERSION = 'v2.1';
 
-    /** @var Configuration */
-    private $config;
+    /** @var array */
+    private $config = [];
 
     /** @var Middleware */
     private $middleware;
@@ -89,52 +90,52 @@ final class Client
     private $services = [];
 
     /**
-     * Constructor
+     * The client constructor accepts the following options:
+     *
+     * - apiKey: (callable|string) Specifies the APIKEY used to sign requests.
+     *   A callable provider should return APIKEY string.
+     * - baseUrl: (string) The full URI of the webservice. This is only
+     *   required when connecting to a custom endpoint (e.g., a tests).
+     * - httpHandler: (callable) An HTTP handler is a Closure that accepts a PSR-7 request object
+     *   and returns a PSR-7 response object or rejected with an exception.
+     *
+     * @see Rebilly\ApiKeyProvider
      *
      * @param array|ArrayObject $options
      */
-    public function __construct($options)
+    public function __construct(array $options)
     {
-        if (!($options instanceof Configuration)) {
-            $options = new Configuration($options);
-        }
+        extract($options, EXTR_SKIP);
 
-        if ($options->getApiKey() === null) {
+        if (!isset($apiKey)) {
             throw new RuntimeException('Missed API Key');
         }
 
-        if ($options->getBaseUrl() === null) {
-            $options->setBaseUrl(Client::BASE_HOST);
+        if (is_callable($apiKey)) {
+            $apiKey = (string) call_user_func($apiKey);
         }
 
-        if ($options->getHttpHandler() === null) {
-            $options->setHttpHandler(new CurlHandler([CURLOPT_FOLLOWLOCATION => false]));
+        if (!isset($baseUrl)) {
+            $baseUrl = Client::BASE_HOST;
         }
 
-        $this->config = $options;
+        if (!isset($httpHandler)) {
+            $httpHandler = new CurlHandler([CURLOPT_FOLLOWLOCATION => false]);
+        }
+
+        $this->config = compact('apiKey', 'baseUrl', 'httpHandler');
 
         // HTTP transport
-        $this->transport = $options->getHttpHandler();
+        $this->transport = $httpHandler;
 
         // Objects factory, often depends by version
         $this->factory = new Rest\Factory(new Entities\Schema());
 
-        $this->middleware = new Middleware\CompositeMiddleware();
-
         // Prepare middleware stack
-        $this->middleware->attach(
-            new Middleware\BaseUri($this->createUri($options->getBaseUrl() . '/' . Client::CURRENT_VERSION))
-        );
-        $this->middleware->attach(new Middleware\ApiKeyAuthentication($options->getApiKey()));
-
-        /*
-         * TODO: Implement more middleware
-         *
-         * $this->middleware->attach(new HttpCache(Psr\Cache\CacheItemPoolInterface $pool));
-         * $this->middleware->attach(new Logger(Psr\Log\LoggerInterface $writer));
-         * $this->middleware->attach(new History($max = 5));
-         * $this->middleware->attach(new Debug($debug = true));
-         */
+        $this->middleware = new Middleware\CompositeMiddleware();
+        $this->middleware
+            ->attach(new Middleware\BaseUri($this->createUri($baseUrl . '/' . Client::CURRENT_VERSION)))
+            ->attach(new Middleware\ApiKeyAuthentication($apiKey));
     }
 
     /********************************************************************************
@@ -153,7 +154,7 @@ final class Client
         $thisClass = str_replace(__NAMESPACE__ . '\\', '', __CLASS__);
         $baseDir = __DIR__;
 
-        if (substr($baseDir, -strlen($thisClass)) === $thisClass) {
+        if (substr($baseDir, strlen($thisClass)) * -1 === $thisClass) {
             $baseDir = substr($baseDir, 0, -strlen($thisClass));
         }
 

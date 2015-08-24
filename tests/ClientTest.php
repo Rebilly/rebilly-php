@@ -16,9 +16,8 @@ use Rebilly\Entities\PaymentMethods\PaypalMethod;
 use Rebilly\Entities\ScheduledPayment;
 use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Rest\Collection;
+use Rebilly\ApiKeyProvider;
 use Rebilly\Client;
-
-defined('APIKEY') or define('APIKEY', null);
 
 /**
  * Class ClientTest.
@@ -32,7 +31,7 @@ final class ClientTest extends TestCase
     {
         parent::setUp();
 
-        if (APIKEY === null) {
+        if (!getenv(ApiKeyProvider::ENV_APIKEY)) {
             $this->markTestSkipped();
         }
     }
@@ -43,7 +42,7 @@ final class ClientTest extends TestCase
     public function initClient()
     {
         $client = new Client([
-            'apiKey' => APIKEY,
+            'apiKey' => ApiKeyProvider::env(),
             'baseUrl' => 'https://api-sandbox.rebilly.com',
             'httpHandler' => null,
         ]);
@@ -64,7 +63,7 @@ final class ClientTest extends TestCase
         $customers = $client->customers()->search();
 
         $this->assertInstanceOf(Collection::class, $customers);
-        $this->assertGreaterThan(0, $customers);
+        $this->assertGreaterThan(0, count($customers));
 
         // var_dump($customers->jsonSerialize());
 
@@ -116,7 +115,7 @@ final class ClientTest extends TestCase
 
                 while ($payment instanceof ScheduledPayment && $attemptsWait-- > 0) {
                     sleep(1);
-                    echo "Polling queue...";
+                    echo "Polling queue...\n";
                     $payment = $client->payments()->loadFromQueue($payment->getId());
                 }
             }

@@ -75,7 +75,7 @@ class CompositeMiddleware implements Middleware
     /**
      * @param Middleware|callable $middleware
      *
-     * @return $this
+     * @return CompositeMiddleware
      */
     public function attach(callable $middleware)
     {
@@ -85,7 +85,7 @@ class CompositeMiddleware implements Middleware
     }
 
     /**
-     * @return $this
+     * @return CompositeMiddleware
      */
     public function clear()
     {
