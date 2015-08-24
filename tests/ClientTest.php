@@ -10,14 +10,13 @@
 
 namespace Rebilly\Tests;
 
-use Rebilly\Entities\Customer;
-use Rebilly\Entities\Payment;
-use Rebilly\Entities\PaymentMethods\PaypalMethod;
-use Rebilly\Entities\ScheduledPayment;
-use Rebilly\Http\Exception\UnprocessableEntityException;
-use Rebilly\Rest\Collection;
 use Rebilly\ApiKeyProvider;
 use Rebilly\Client;
+use Rebilly\ParamBag;
+use RuntimeException;
+use Psr\Http\Message\RequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\UriInterface as Uri;
 
 /**
  * Class ClientTest.
@@ -39,11 +38,41 @@ final class ClientTest extends TestCase
     /**
      * @test
      */
+    public function autoloadClasses()
+    {
+        $this->assertEquals(true, class_exists(Client::class));
+
+        Client::autoload(ParamBag::class);
+
+        $this->assertEquals(true, class_exists(ParamBag::class, false));
+
+        Client::registerAutoloader();
+        $this->assertTrue(in_array([Client::class, 'autoload'], spl_autoload_functions()));
+
+        Client::unregisterAutoloader();
+        $this->assertFalse(in_array([Client::class, 'autoload'], spl_autoload_functions()));
+    }
+
+    /**
+     * @test
+     */
     public function initClient()
     {
+        try {
+            new Client([]);
+        } catch (RuntimeException $e) {
+            $this->assertEquals('Missed API Key', $e->getMessage());
+        }
+
         $client = new Client([
             'apiKey' => ApiKeyProvider::env(),
-            'baseUrl' => 'https://api-sandbox.rebilly.com',
+        ]);
+
+        $this->assertEquals(Client::BASE_HOST, $client->getOption('baseUrl'));
+
+        $client = new Client([
+            'apiKey' => ApiKeyProvider::env(),
+            'baseUrl' => Client::SANDBOX_HOST,
             'httpHandler' => null,
         ]);
 
@@ -56,71 +85,49 @@ final class ClientTest extends TestCase
      *
      * @param Client $client
      */
-    public function howToUseApi($client)
+    public function useFactoryMethods(Client $client)
     {
-        $faker = $this->getFaker();
+        $request = $client->createRequest('GET', $client->getOption('baseUrl'), null);
+        $this->assertInstanceOf(Request::class, $request);
 
-        $customers = $client->customers()->search();
+        $response = $client->createResponse();
+        $this->assertInstanceOf(Response::class, $response);
 
-        $this->assertInstanceOf(Collection::class, $customers);
-        $this->assertGreaterThan(0, count($customers));
+        $uri = $client->createUri($request->getUri(), ['param' => 'value']);
+        $this->assertInstanceOf(Uri::class, $uri);
+        $this->assertStringEndsWith('param=value', $uri->getQuery());
 
-        // var_dump($customers->jsonSerialize());
+        $uri = $client->createUri(
+            $client->getOption('baseUrl') . '/{version}',
+            [
+                'version' => 'v3',
+                'param' => 'value',
+            ]
+        );
 
-        $customer = $customers[0];
-        $customer->setFirstName($faker->firstName);
-        $customer->setLastName($faker->lastName);
-
-        $customer = $client->customers()->update($customer->getId(), $customer);
-        $this->assertInstanceOf(Customer::class, $customer);
-
-        // var_dump($customer->jsonSerialize());
+        $this->assertInstanceOf(Uri::class, $uri);
+        $this->assertStringEndsWith('v3', $uri->getPath());
+        $this->assertStringEndsWith('param=value', $uri->getQuery());
     }
 
     /**
      * @test
-     * @depends initClient
-     * @-expectedException \Rebilly\Http\Exception\UnprocessableEntityException
-     *
-     * @param Client $client
      */
-    public function howToUsePayments(Client $client)
+    public function injectHttpHandler()
     {
-        $faker = $this->getFaker();
-
-        $method = new PaypalMethod();
-        $method->setPaypalKey('A');
-
-        $payment = new Payment();
-        $payment->setDescription($faker->sentence);
-        $payment->setWebsiteId('github');
-        $payment->setCustomerId('customer-1');
-        $payment->setAmount(10);
-        $payment->setCurrency('USD');
-        $payment->setMethod($method);
-
-        try {
-            $payment = $client->payments()->create($payment);
-        } catch (UnprocessableEntityException $e) {
-            var_dump($e->getErrors());
-            return;
-        }
-
-        if ($payment instanceof ScheduledPayment) {
-            if ($payment->isApprovalRequired()) {
-                // Redirect the user to approval URL
-                $this->assertStringStartsWith('http', $payment->getApprovalLink());
-            } else {
-                $attemptsWait = 2;
-
-                while ($payment instanceof ScheduledPayment && $attemptsWait-- > 0) {
-                    sleep(1);
-                    echo "Polling queue...\n";
-                    $payment = $client->payments()->loadFromQueue($payment->getId());
-                }
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => function ($request) {
+                return $request;
             }
-        }
+        ]);
 
-        // $this->assertInstanceOf(Payment::class, $payment);
+        $request = $client->createRequest('GET', $client->getOption('baseUrl'), null);
+        $this->assertInstanceOf(Request::class, $request);
+
+        $response = $client->createResponse();
+        $this->assertInstanceOf(Response::class, $response);
+
+        $this->assertEquals($response, call_user_func($client, $request, $response));
     }
 }
