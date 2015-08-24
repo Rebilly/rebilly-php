@@ -49,6 +49,26 @@ final class ParamBag extends ArrayObject
 
     /**
      * @param string $attribute
+     * @param mixed $startValue
+     * @param mixed $endValue
+     *
+     * @return $this
+     */
+    public function filterRange($attribute, $startValue, $endValue)
+    {
+        $filter = $attribute . ':' . $startValue . '..' . $endValue;
+
+        if ($this->offsetExists('filter')) {
+            $filter = $this->offsetGet('filter') . ';' . $filter;
+        }
+
+        $this->offsetSet('filter', $filter);
+
+        return $this;
+    }
+
+    /**
+     * @param string $attribute
      * @param int $direction
      *
      * @return $this
