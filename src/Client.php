@@ -13,8 +13,9 @@ namespace Rebilly;
 use ArrayObject;
 use BadMethodCallException;
 use Rebilly\Http\CurlHandler;
-use Rebilly\Middleware\Mock;
+// use Rebilly\Middleware\Mock;
 use RuntimeException;
+use InvalidArgumentException;
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;
@@ -34,14 +35,34 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  *
  * Magic facades for HTTP methods:
  *
+ * @see Client::__call()
  * @see Client::send()
- * @see Client::__callStatic()
+ * @see Client::service()
  *
- * @method static mixed get($path, $params = [], $headers = [])
- * @method static void head($path, $params = [], $headers = [])
- * @method static mixed post($payload, $path, $params = [], $headers = [])
- * @method static mixed put($payload, $path, $params = [], $headers = [])
- * @method static void delete($path, $params = [], $headers = [])
+ * @method mixed get($path, $params = [], $headers = [])
+ * @method void head($path, $params = [], $headers = [])
+ * @method mixed post($payload, $path, $params = [], $headers = [])
+ * @method mixed put($payload, $path, $params = [], $headers = [])
+ * @method void delete($path, $params = [], $headers = [])
+ *
+ * @method Services\AuthenticationOptionsService authenticationOptions()
+ * @method Services\AuthenticationTokenService authenticationToken()
+ * @method Services\BlacklistService blacklists()
+ * @method Services\ContactService contacts()
+ * @method Services\CustomerCredentialService customerCredentials()
+ * @method Services\CustomerService customers()
+ * @method Services\InvoiceItemService invoiceItems()
+ * @method Services\InvoiceService invoices()
+ * @method Services\LayoutService layouts()
+ * @method Services\LeadSourceService leadSources()
+ * @method Services\PaymentCardService paymentCards()
+ * @method Services\PaymentCardTokenService paymentCardTokens()
+ * @method Services\PaymentService payments()
+ * @method Services\PlanService plans()
+ * @method Services\ResetPasswordTokenService resetPasswordTokens()
+ * @method Services\SubscriptionService subscriptions()
+ * @method Services\TransactionService transactions()
+ * @method Services\WebsiteService websites()
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
@@ -52,27 +73,20 @@ final class Client
     const SANDBOX_HOST = 'https://api-sandbox.rebilly.com';
     const CURRENT_VERSION = 'v2.1';
 
-    /**
-     * You're right singleton is anti-pattern, but I think it's not singleton.
-     * The implementation more like Registry pattern, keeping last created client for use in facades.
-     * You still may create more clients or client mock, provided that not using facades.
-     *
-     * @see Client::__callStatic()
-     * @var self
-     */
-    private static $instance;
-
     /** @var Configuration */
     private $config;
 
     /** @var Middleware */
     private $middleware;
 
-    /** @var Resource\Factory */
+    /** @var Rest\Factory */
     private $factory;
 
     /** @var Http\HttpHandler */
     private $transport;
+
+    /** @var array */
+    private $services = [];
 
     /**
      * Constructor
@@ -103,7 +117,7 @@ final class Client
         $this->transport = $options->getHttpHandler();
 
         // Objects factory, often depends by version
-        $this->factory = new Resource\Factory(new Api\Schema());
+        $this->factory = new Rest\Factory(new Entities\Schema());
 
         $this->middleware = new Middleware\CompositeMiddleware();
 
@@ -121,34 +135,6 @@ final class Client
          * $this->middleware->attach(new History($max = 5));
          * $this->middleware->attach(new Debug($debug = true));
          */
-
-        if (self::getInstance() === null) {
-            self::setInstance($this);
-        }
-    }
-
-    /********************************************************************************
-     * Client instance shortcut
-     *******************************************************************************/
-
-    /**
-     * Save instance as default to use in facades.
-     *
-     * @param Client $instance
-     */
-    public static function setInstance(self $instance = null)
-    {
-        self::$instance = $instance;
-    }
-
-    /**
-     * Returns default client.
-     *
-     * @return Client
-     */
-    public static function getInstance()
-    {
-        return self::$instance;
     }
 
     /********************************************************************************
@@ -225,26 +211,100 @@ final class Client
      *
      * @return mixed
      */
-    public static function __callStatic($name, $arguments)
+    public function __call($name, $arguments)
     {
-        if (self::$instance === null) {
-            throw new RuntimeException('The client is not initialized');
-        }
-
         switch (strtoupper($name)) {
             case 'HEAD':
             case 'GET':
             case 'DELETE':
                 array_unshift($arguments, null);
                 array_unshift($arguments, $name);
-                return call_user_func_array([self::$instance, 'send'], $arguments);
+                return call_user_func_array([$this, 'send'], $arguments);
             case 'POST':
             case 'PUT':
                 array_unshift($arguments, $name);
-                return call_user_func_array([self::$instance, 'send'], $arguments);
-            default:
-                throw new BadMethodCallException(sprintf('Call unknown method %s::%s', __CLASS__, $name));
+                return call_user_func_array([$this, 'send'], $arguments);
         }
+
+        try {
+            return $this->service(lcfirst($name));
+        } catch (InvalidArgumentException $e) {
+            throw new BadMethodCallException(sprintf('Call unknown method %s::%s', __CLASS__, $name));
+        }
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return Rest\Service
+     */
+    private function service($name)
+    {
+        if (!isset($this->services[$name])) {
+            switch ($name) {
+                case 'authenticationOptions':
+                    $service = Services\AuthenticationOptionsService::class;
+                    break;
+                case 'authenticationToken':
+                    $service = Services\AuthenticationTokenService::class;
+                    break;
+                case 'blacklists':
+                    $service = Services\BlacklistService::class;
+                    break;
+                case 'contacts':
+                    $service = Services\ContactService::class;
+                    break;
+                case 'customerCredentials':
+                    $service = Services\CustomerCredentialService::class;
+                    break;
+                case 'customers':
+                    $service = Services\CustomerService::class;
+                    break;
+                case 'invoiceItems':
+                    $service = Services\InvoiceItemService::class;
+                    break;
+                case 'invoices':
+                    $service = Services\InvoiceService::class;
+                    break;
+                case 'layouts':
+                    $service = Services\LayoutService::class;
+                    break;
+                case 'leadSources':
+                    $service = Services\LeadSourceService::class;
+                    break;
+                case 'paymentCards':
+                    $service = Services\PaymentCardService::class;
+                    break;
+                case 'paymentCardTokens':
+                    $service = Services\PaymentCardTokenService::class;
+                    break;
+                case 'payments':
+                    $service = Services\PaymentService::class;
+                    break;
+                case 'plans':
+                    $service = Services\PlanService::class;
+                    break;
+                case 'resetPasswordTokens':
+                    $service = Services\ResetPasswordTokenService::class;
+                    break;
+                case 'subscriptions':
+                    $service = Services\SubscriptionService::class;
+                    break;
+                case 'transactions':
+                    $service = Services\TransactionService::class;
+                    break;
+                case 'websites':
+                    $service = Services\WebsiteService::class;
+                    break;
+                default:
+                    throw new InvalidArgumentException(sprintf('Service %s does not implement', $name));
+
+            }
+
+            $this->services[$name] = new $service($this);
+        }
+
+        return $this->services[$name];
     }
 
     /**
@@ -285,6 +345,8 @@ final class Client
         switch (true) {
             case $response->getStatusCode() === 404:
                 throw new Http\Exception\NotFoundException();
+            case $response->getStatusCode() === 410:
+                throw new Http\Exception\GoneException();
             case $response->getStatusCode() === 422:
                 $content = json_decode($response->getBody()->getContents(), true);
                 $content = isset($content['details']) ? $content['details'] : [];
