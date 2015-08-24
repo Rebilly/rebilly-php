@@ -56,15 +56,9 @@ final class ParamBag extends ArrayObject
      */
     public function filterRange($attribute, $startValue, $endValue)
     {
-        $filter = $attribute . ':' . $startValue . '..' . $endValue;
+        $filter = $startValue . '..' . $endValue;
 
-        if ($this->offsetExists('filter')) {
-            $filter = $this->offsetGet('filter') . ';' . $filter;
-        }
-
-        $this->offsetSet('filter', $filter);
-
-        return $this;
+        return $this->filter($attribute, $filter);
     }
 
     /**
