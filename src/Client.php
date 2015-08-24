@@ -425,8 +425,12 @@ final class Client
      */
     public function createUri($uri, array $params = [])
     {
-        if ($uri instanceof GuzzleUri && !empty($params)) {
-            return $uri->withQuery(http_build_query($params));
+        if ($uri instanceof GuzzleUri) {
+            if (!empty($params)) {
+                $uri = $uri->withQuery(http_build_query($params));
+            }
+
+            return $uri;
         }
 
         // If URL template given, prepare URI
