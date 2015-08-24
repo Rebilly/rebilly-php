@@ -36,7 +36,7 @@ final class ParamBag extends ArrayObject
      */
     public function filter($attribute, $value)
     {
-        $filter = $attribute . ':' . $value;
+        $filter = $attribute . ':' . (is_array($value) ? implode(',', $value) : $value);
 
         if ($this->offsetExists('filter')) {
             $filter = $this->offsetGet('filter') . ';' . $filter;
