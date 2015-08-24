@@ -147,30 +147,27 @@ final class Client
     /**
      * PSR-0 autoloader
      *
-     * @param string $className
+     * @param string $class
      */
-    public static function autoload($className)
+    public static function autoload($class)
     {
-        $thisClass = str_replace(__NAMESPACE__ . '\\', '', __CLASS__);
-        $baseDir = __DIR__;
+        $class = ltrim($class, '\\');
 
-        if (substr($baseDir, strlen($thisClass)) * -1 === $thisClass) {
-            $baseDir = substr($baseDir, 0, -strlen($thisClass));
-        }
+        if (strpos($class, __NAMESPACE__) === 0) {
+            $lastNsPos = strripos($class, '\\');
 
-        $className = ltrim($className, '\\');
-        $fileName = $baseDir;
+            $namespace = substr($class, 0, $lastNsPos + 1);
+            $namespace = substr($namespace, strlen(__NAMESPACE__));
+            $namespace = str_replace('\\', DIRECTORY_SEPARATOR, $namespace);
 
-        if ($lastNsPos = strripos($className, '\\')) {
-            $namespace = substr($className, 0, $lastNsPos);
-            $className = substr($className, $lastNsPos + 1);
-            $fileName .= str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
-        }
+            $class = substr($class, $lastNsPos + 1);
+            $class = str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
 
-        $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
+            $filename = __DIR__ . $namespace . $class;
 
-        if (file_exists($fileName)) {
-            require $fileName;
+            if (file_exists($filename)) {
+                require $filename;
+            }
         }
     }
 
@@ -179,7 +176,15 @@ final class Client
      */
     public static function registerAutoloader()
     {
-        spl_autoload_register(__CLASS__ . "::autoload");
+        spl_autoload_register([__CLASS__, 'autoload']);
+    }
+
+    /**
+     * Unregister PSR-0 autoloader
+     */
+    public static function unregisterAutoloader()
+    {
+        spl_autoload_unregister([__CLASS__, 'autoload']);
     }
 
     /********************************************************************************
