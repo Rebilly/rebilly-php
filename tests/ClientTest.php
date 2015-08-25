@@ -10,9 +10,11 @@
 
 namespace Rebilly\Tests;
 
+use ArrayObject;
 use Rebilly\ApiKeyProvider;
 use Rebilly\Client;
 use Rebilly\ParamBag;
+use Rebilly\Rest\Service;
 use RuntimeException;
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -119,7 +121,7 @@ final class ClientTest extends TestCase
             'apiKey' => 'QWERTY',
             'httpHandler' => function ($request) {
                 return $request;
-            }
+            },
         ]);
 
         $request = $client->createRequest('GET', $client->getOption('baseUrl'), null);
@@ -129,5 +131,27 @@ final class ClientTest extends TestCase
         $this->assertInstanceOf(Response::class, $response);
 
         $this->assertEquals($response, call_user_func($client, $request, $response));
+    }
+
+    /**
+     * @test
+     * @expectedException \BadMethodCallException
+     */
+    public function callInvalidService()
+    {
+        /** @var mixed $client */
+        $client = new Client(['apiKey' => 'QWERTY']);
+        $client->invalidService();
+    }
+
+    /**
+     * @test
+     */
+    public function callValidService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+        $service = $client->customers();
+
+        $this->assertInstanceOf(Service::class, $service);
     }
 }
