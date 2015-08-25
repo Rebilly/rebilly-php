@@ -199,7 +199,7 @@ final class Client
      */
     public function __invoke(Request $request, Response $response)
     {
-        $result = $this->transport->send($request);
+        $result = call_user_func($this->transport, $request);
 
         return $result instanceof Response ? $result : $response;
     }

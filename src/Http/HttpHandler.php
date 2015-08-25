@@ -26,5 +26,5 @@ interface HttpHandler
      *
      * @return Response
      */
-    public function send(Request $request);
+    public function __invoke(Request $request);
 }
