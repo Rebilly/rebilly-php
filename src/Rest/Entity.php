@@ -54,4 +54,14 @@ abstract class Entity extends Resource
     {
         return $this->getAttribute('updatedTime');
     }
+
+    /**
+     * @param string $value
+     *
+     * @return string
+     */
+    protected function setUpdatedTime($value)
+    {
+        return $this->setAttribute('updatedTime', $value);
+    }
 }

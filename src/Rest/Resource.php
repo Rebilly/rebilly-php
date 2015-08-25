@@ -78,7 +78,9 @@ abstract class Resource implements Serializable, JsonSerializable, ArrayAccess
             unset($data['_links']);
         }
 
-        $this->data->exchangeArray($data);
+        foreach ($data as $key => $value) {
+            $this->offsetSet($key, $value);
+        }
     }
 
     /**
@@ -187,9 +189,13 @@ abstract class Resource implements Serializable, JsonSerializable, ArrayAccess
         }
 
         if (method_exists($this, 'set' . $offset)) {
-            throw new DomainException(sprintf('Trying to set the read-only property "%"', $offset));
+            throw new DomainException(
+                sprintf('Trying to get the write-only property "%s::%s"', get_class($this), $offset)
+            );
         } else {
-            throw new OutOfRangeException(sprintf('The property "%" does not exist', $offset));
+            throw new OutOfRangeException(
+                sprintf('The property "%s::%s" does not exist', get_class($this), $offset)
+            );
         }
     }
 
@@ -203,9 +209,13 @@ abstract class Resource implements Serializable, JsonSerializable, ArrayAccess
         }
 
         if (method_exists($this, 'get' . $offset)) {
-            throw new DomainException(sprintf('Trying to get the write-only property "%"', $offset));
+            throw new DomainException(
+                sprintf('Trying to set the read-only property "%s::%s"', get_class($this), $offset)
+            );
         } else {
-            throw new OutOfRangeException(sprintf('The property "%" does not exist', $offset));
+            throw new OutOfRangeException(
+                sprintf('The property "%s::%s" does not exist', get_class($this), $offset)
+            );
         }
     }
 
