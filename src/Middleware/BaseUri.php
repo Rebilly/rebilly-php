@@ -44,7 +44,7 @@ final class BaseUri implements Middleware
         // Prepare default URL
         // TODO: Improve URI modification
         $uri = $this->uri;
-        $uri = $uri->withPath($uri->getPath() . '/' . $request->getUri()->getPath());
+        $uri = $uri->withPath($uri->getPath() . '/' . ltrim($request->getUri()->getPath(), '/'));
         $uri = $uri->withQuery($request->getUri()->getQuery());
         $request = $request->withUri($uri);
 
