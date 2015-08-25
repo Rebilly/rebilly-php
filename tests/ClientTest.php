@@ -13,6 +13,8 @@ namespace Rebilly\Tests;
 use ArrayObject;
 use Rebilly\ApiKeyProvider;
 use Rebilly\Client;
+use Rebilly\Http\Exception\HttpException;
+use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\ParamBag;
 use Rebilly\Rest\Service;
 use RuntimeException;
@@ -153,5 +155,73 @@ final class ClientTest extends TestCase
         $service = $client->customers();
 
         $this->assertInstanceOf(Service::class, $service);
+    }
+
+    /**
+     * @test
+     * @dataProvider provideHttpExceptionCodes
+     *
+     * @param int $code
+     */
+    public function sendInvalidRequest($code)
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+        $response = $client->createResponse();
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => function () use ($response, $code) {
+                return $response->withStatus($code);
+            },
+        ]);
+
+        try {
+            $client->post([], 'customers');
+        } catch (UnprocessableEntityException $e) {
+            $this->assertEquals($code, $e->getStatusCode());
+            $this->assertEmpty($e->getErrors());
+        } catch (HttpException $e) {
+            $this->assertEquals($code, $e->getStatusCode());
+        }
+    }
+
+    /**
+     * @test
+     */
+    public function sendValidRequest()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+        $response = $client->createResponse();
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => function (Request $request) use ($response) {
+                if ($request->getMethod() === 'HEAD') {
+                    return $response;
+                }
+
+                $body = $response->getBody();
+                $body->write(json_encode(['id' => 'dummy']));
+
+                return $response->withBody($body);
+            },
+        ]);
+
+        $client->head('dummy', new ArrayObject());
+
+        $result = $client->post([], 'customers');
+
+        $this->assertNotNull($result);
+    }
+
+    public function provideHttpExceptionCodes()
+    {
+        return [
+            [404],
+            [410],
+            [422],
+            [400],
+            [500],
+        ];
     }
 }
