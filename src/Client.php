@@ -292,7 +292,7 @@ final class Client
      *
      * @return mixed|null The resulting resource or null
      */
-    private function send($method, $payload, $path, $params = [], array $headers = [])
+    public function send($method, $payload, $path, $params = [], array $headers = [])
     {
         if (!is_array($params)) {
             $params = (array) $params;
