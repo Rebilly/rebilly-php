@@ -74,6 +74,27 @@ final class Client
     const SANDBOX_HOST = 'https://api-sandbox.rebilly.com';
     const CURRENT_VERSION = 'v2.1';
 
+    private static $services = [
+        'authenticationOptions' => Services\AuthenticationOptionsService::class,
+        'authenticationToken' => Services\AuthenticationTokenService::class,
+        'blacklists' => Services\BlacklistService::class,
+        'contacts' => Services\ContactService::class,
+        'customerCredentials' => Services\CustomerCredentialService::class,
+        'customers' => Services\CustomerService::class,
+        'invoiceItems' => Services\InvoiceItemService::class,
+        'invoices' => Services\InvoiceService::class,
+        'layouts' => Services\LayoutService::class,
+        'leadSources' => Services\LeadSourceService::class,
+        'paymentCards' => Services\PaymentCardService::class,
+        'paymentCardTokens' => Services\PaymentCardTokenService::class,
+        'payments' => Services\PaymentService::class,
+        'plans' => Services\PlanService::class,
+        'resetPasswordTokens' => Services\ResetPasswordTokenService::class,
+        'subscriptions' => Services\SubscriptionService::class,
+        'transactions' => Services\TransactionService::class,
+        'websites' => Services\WebsiteService::class,
+    ];
+
     /** @var array */
     private $config = [];
 
@@ -87,7 +108,7 @@ final class Client
     private $transport;
 
     /** @var array */
-    private $services = [];
+    private $registry = [];
 
     /**
      * The client constructor accepts the following options:
@@ -246,71 +267,15 @@ final class Client
      */
     private function service($name)
     {
-        if (!isset($this->services[$name])) {
-            switch ($name) {
-                case 'authenticationOptions':
-                    $service = Services\AuthenticationOptionsService::class;
-                    break;
-                case 'authenticationToken':
-                    $service = Services\AuthenticationTokenService::class;
-                    break;
-                case 'blacklists':
-                    $service = Services\BlacklistService::class;
-                    break;
-                case 'contacts':
-                    $service = Services\ContactService::class;
-                    break;
-                case 'customerCredentials':
-                    $service = Services\CustomerCredentialService::class;
-                    break;
-                case 'customers':
-                    $service = Services\CustomerService::class;
-                    break;
-                case 'invoiceItems':
-                    $service = Services\InvoiceItemService::class;
-                    break;
-                case 'invoices':
-                    $service = Services\InvoiceService::class;
-                    break;
-                case 'layouts':
-                    $service = Services\LayoutService::class;
-                    break;
-                case 'leadSources':
-                    $service = Services\LeadSourceService::class;
-                    break;
-                case 'paymentCards':
-                    $service = Services\PaymentCardService::class;
-                    break;
-                case 'paymentCardTokens':
-                    $service = Services\PaymentCardTokenService::class;
-                    break;
-                case 'payments':
-                    $service = Services\PaymentService::class;
-                    break;
-                case 'plans':
-                    $service = Services\PlanService::class;
-                    break;
-                case 'resetPasswordTokens':
-                    $service = Services\ResetPasswordTokenService::class;
-                    break;
-                case 'subscriptions':
-                    $service = Services\SubscriptionService::class;
-                    break;
-                case 'transactions':
-                    $service = Services\TransactionService::class;
-                    break;
-                case 'websites':
-                    $service = Services\WebsiteService::class;
-                    break;
-                default:
-                    throw new InvalidArgumentException(sprintf('Service %s does not implement', $name));
-
+        if (!isset($this->registry[$name])) {
+            if (isset(self::$services[$name])) {
+                $this->registry[$name] = new self::$services[$name]($this);
+            } else {
+                throw new InvalidArgumentException(sprintf('Service %s does not implement', $name));
             }
-
-            $this->services[$name] = new $service($this);
         }
 
-        return $this->services[$name];
+        return $this->registry[$name];
     }
 
     /**
