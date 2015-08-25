@@ -32,11 +32,11 @@ install:
 
 script:
   # PHPUnit
-  - if [[ $EXECUTE_COVERAGE == 'true' ]]; then ./vendor/bin/phpunit --coverage-clover=coverage.clover ; fi
+  - if [[ $EXECUTE_COVERAGE == 'true' ]]; then mkdir -p build/logs ; fi
+  - if [[ $EXECUTE_COVERAGE == 'true' ]]; then ./vendor/bin/phpunit --coverage-text --coverage-clover=build/logs/coverage.xml ; fi
   - if [[ $EXECUTE_COVERAGE != 'true' ]]; then ./vendor/bin/phpunit ; fi
   # PHP CS Fixer
   - if [[ EXECUTE_CS_CHECK != 'true' ]]; then ./vendor/bin/php-cs-fixer fix -v --diff --dry-run ; fi
 
 after_script:
-  - wget https://scrutinizer-ci.com/ocular.phar
-  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+  - if [[ $EXECUTE_COVERAGE == 'true' ]]; then ./vendor/bin/coveralls -v ; fi
