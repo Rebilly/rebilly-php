@@ -13,6 +13,7 @@ namespace Rebilly\Tests\Api;
 use InvalidArgumentException;
 use Rebilly\Entities;
 use Rebilly\Rest;
+use Rebilly\Tests\TestCase;
 
 /**
  * Class ApiTest.
