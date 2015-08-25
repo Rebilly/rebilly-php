@@ -25,13 +25,5 @@ abstract class PaymentMethod extends Resource
      *
      * @return string
      */
-    abstract protected function name();
-
-    /**
-     * @return string
-     */
-    final public function getName()
-    {
-        return $this->name();
-    }
+    abstract public function name();
 }

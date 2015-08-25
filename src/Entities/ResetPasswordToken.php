@@ -42,7 +42,7 @@ final class ResetPasswordToken extends Entity
     /**
      * {@inheritdoc}
      */
-    public function setId($value)
+    protected function setId($value)
     {
         return $this->setToken($value);
     }
@@ -60,7 +60,7 @@ final class ResetPasswordToken extends Entity
      *
      * @return $this
      */
-    public function setToken($value)
+    protected function setToken($value)
     {
         return $this->setAttribute('token', $value);
     }

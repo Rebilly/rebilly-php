@@ -51,11 +51,31 @@ final class ScheduledPayment extends Entity
     }
 
     /**
+     * @param string $value
+     *
+     * @return string
+     */
+    protected function setCreatedTime($value)
+    {
+        return $this->setAttribute('createdTime', $value);
+    }
+
+    /**
      * @return string
      */
     public function getState()
     {
         return $this->getAttribute('state');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return string
+     */
+    protected function setState($value)
+    {
+        return $this->setAttribute('state', $value);
     }
 
     /**

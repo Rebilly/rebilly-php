@@ -60,7 +60,7 @@ final class AuthenticationToken extends Entity
      *
      * @return $this
      */
-    public function setToken($value)
+    protected function setToken($value)
     {
         return $this->setAttribute('token', $value);
     }

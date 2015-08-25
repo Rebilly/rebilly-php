@@ -132,7 +132,7 @@ final class LeadSource extends Entity
     /**
      * @return string
      */
-    public function getСontent()
+    public function getContent()
     {
         return $this->getAttribute('content');
     }
@@ -142,7 +142,7 @@ final class LeadSource extends Entity
      *
      * @return $this
      */
-    public function setСontent($value)
+    public function setContent($value)
     {
         return $this->setAttribute('content', $value);
     }

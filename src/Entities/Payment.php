@@ -64,6 +64,16 @@ final class Payment extends Entity
     }
 
     /**
+     * @param string $value
+     *
+     * @return string
+     */
+    protected function setCreatedTime($value)
+    {
+        return $this->setAttribute('createdTime', $value);
+    }
+
+    /**
      * @return string
      */
     public function getState()
@@ -187,12 +197,12 @@ final class Payment extends Entity
      */
     public function setMethod(PaymentMethod $value)
     {
-        if (!in_array($value->getName(), Payment::methods())) {
+        if (!in_array($value->name(), Payment::methods())) {
             throw new DomainException(sprintf(self::MSG_UNEXPECTED_METHOD, implode(', ', Payment::methods())));
         }
 
         return $this
-            ->setAttribute('method', $value->getName())
+            ->setAttribute('method', $value->name())
             ->setAttribute('paymentInstrument', $value->jsonSerialize());
     }
 }

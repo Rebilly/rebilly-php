@@ -25,6 +25,8 @@ use Rebilly\Rest\Entity;
  * }
  * ```
  *
+ * @todo Rename defaultCard to defaultCardId
+ *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
  */
@@ -108,5 +110,45 @@ final class Customer extends Entity
     public function getCreatedTime()
     {
         return $this->getAttribute('createdTime');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return string
+     */
+    protected function setCreatedTime($value)
+    {
+        return $this->setAttribute('createdTime', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getDefaultCardId()
+    {
+        return $this->getAttribute('defaultCard');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setDefaultCardId($value)
+    {
+        return $this->setAttribute('defaultCard', $value);
+    }
+
+    /**
+     * @deprecated
+     *
+     * @param string $value
+     *
+     * @return $this
+     */
+    protected function setDefaultCard($value)
+    {
+        return $this->setDefaultCardId($value);
     }
 }
