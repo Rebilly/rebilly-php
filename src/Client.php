@@ -313,26 +313,32 @@ final class Client
          */
         $response = call_user_func($this->middleware, $request, $response, $this);
 
-        switch (true) {
-            case $response->getStatusCode() === 404:
-                throw new Http\Exception\NotFoundException();
-            case $response->getStatusCode() === 410:
-                throw new Http\Exception\GoneException();
-            case $response->getStatusCode() === 422:
-                $content = json_decode($response->getBody()->getContents(), true);
-                $content = isset($content['details']) ? $content['details'] : [];
+        if ($response->getStatusCode() === 404) {
+            throw new Http\Exception\NotFoundException();
+        }
 
-                throw new Http\Exception\UnprocessableEntityException($content);
-            case $response->getStatusCode() >= 500:
-                throw new Http\Exception\ServerException(
-                    $response->getStatusCode(),
-                    $response->getReasonPhrase()
-                );
-            case $response->getStatusCode() >= 400:
-                throw new Http\Exception\ClientException(
-                    $response->getStatusCode(),
-                    $response->getReasonPhrase()
-                );
+        if ($response->getStatusCode() === 410) {
+            throw new Http\Exception\GoneException();
+        }
+
+        if ($response->getStatusCode() === 422) {
+            $content = json_decode($response->getBody()->getContents(), true);
+            $content = isset($content['details']) ? $content['details'] : [];
+            throw new Http\Exception\UnprocessableEntityException($content);
+        }
+
+        if ($response->getStatusCode() >= 500) {
+            throw new Http\Exception\ServerException(
+                $response->getStatusCode(),
+                $response->getReasonPhrase()
+            );
+        }
+
+        if ($response->getStatusCode() >= 400) {
+            throw new Http\Exception\ClientException(
+                $response->getStatusCode(),
+                $response->getReasonPhrase()
+            );
         }
 
         if (in_array($request->getMethod(), ['HEAD', 'DELETE'])) {
