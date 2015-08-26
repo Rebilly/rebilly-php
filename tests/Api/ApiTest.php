@@ -13,10 +13,12 @@ namespace Rebilly\Tests\Api;
 use InvalidArgumentException;
 use Rebilly\Client;
 use Rebilly\Entities;
+use Rebilly\Http\CurlHandler;
 use Rebilly\Rest;
 use Rebilly\Services;
 use Rebilly\Tests\TestCase;
 use Psr\Http\Message\RequestInterface as Request;
+use PHPUnit_Framework_MockObject_MockObject as MockObject;
 
 /**
  * Class ApiTest.
@@ -154,6 +156,260 @@ class ApiTest extends TestCase
                 $service->delete($this->getFakeValue($id, $entityClass));
             }
         }
+    }
+
+    /**
+     * @test
+     */
+    public function authenticationTokenService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->getMock(CurlHandler::class);
+
+        $handler
+            ->expects($this->at(0))
+            ->method('__invoke')
+            ->will($this->returnValue($client->createResponse()));
+
+        $handler
+            ->expects($this->at(1))
+            ->method('__invoke')
+            ->will($this->returnValue($client->createResponse()->withStatus(404)));
+
+        $handler
+            ->expects($this->at(2))
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'authentication-tokens/token')
+            ));
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+
+        $service = $client->authenticationTokens();
+
+        $result = $service->verify('dummy');
+        $this->assertTrue($result);
+
+        $result = $service->verify('dummy');
+        $this->assertFalse($result);
+
+        $result = $service->login(['username' => 'dummy', 'password' => 'qwerty']);
+        $this->assertInstanceOf(Entities\AuthenticationToken::class, $result);
+
+        $service->logout('dummy');
+    }
+
+    /**
+     * @test
+     */
+    public function invoiceService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->getMock(CurlHandler::class);
+
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'invoices/dummy')
+            ));
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+
+        $service = $client->invoices();
+
+        $result = $service->void('dummy');
+        $this->assertInstanceOf(Entities\Invoice::class, $result);
+
+        $result = $service->abandon('dummy');
+        $this->assertInstanceOf(Entities\Invoice::class, $result);
+
+        $result = $service->issue('dummy', date('Y-m-d H:i:s'));
+        $this->assertInstanceOf(Entities\Invoice::class, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function invoiceItemService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->getMock(CurlHandler::class);
+
+        $handler
+            ->expects($this->at(0))
+            ->method('__invoke')
+            ->will($this->returnValue($client->createResponse()));
+
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'invoices/invoiceId/items/dummy')
+            ));
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+
+        $service = $client->invoiceItems();
+
+        $result = $service->search('invoiceId');
+        $this->assertInstanceOf(Rest\Collection::class, $result);
+
+        $result = $service->load('invoiceId', 'dummy');
+        $this->assertInstanceOf(Entities\InvoiceItem::class, $result);
+
+        $result = $service->create([], 'invoiceId');
+        $this->assertInstanceOf(Entities\InvoiceItem::class, $result);
+
+        $result = $service->create([], 'invoiceId', 'dummy');
+        $this->assertInstanceOf(Entities\InvoiceItem::class, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function subscriptionService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->getMock(CurlHandler::class);
+
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'subscriptions/dummy')
+            ));
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+
+        $service = $client->subscriptions();
+
+        $result = $service->cancel('dummy', []);
+        $this->assertInstanceOf(Entities\Subscription::class, $result);
+
+        $result = $service->switchTo('dummy', []);
+        $this->assertInstanceOf(Entities\Subscription::class, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function transactionService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->getMock(CurlHandler::class);
+
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'transactions/dummy')
+            ));
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+
+        $service = $client->transactions();
+
+        $result = $service->refund('dummy', 10);
+        $this->assertInstanceOf(Entities\Transaction::class, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function paymentService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->getMock(CurlHandler::class);
+
+        $handler
+            ->expects($this->at(0))
+            ->method('__invoke')
+            ->will($this->returnValue($client->createResponse()));
+
+        $handler
+            ->expects($this->at(1))
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'queue/payments/dummy')
+            ));
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+
+        $service = $client->payments();
+
+        $result = $service->searchInQueue();
+        $this->assertInstanceOf(Rest\Collection::class, $result);
+
+        $result = $service->loadFromQueue('dummy');
+        $this->assertInstanceOf(Entities\ScheduledPayment::class, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function paymentCardService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->getMock(CurlHandler::class);
+
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'payment-cards/dummy')
+            ));
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+
+        $service = $client->paymentCards();
+
+        $result = $service->createFromToken('token');
+        $this->assertInstanceOf(Entities\PaymentCard::class, $result);
+
+        $result = $service->createFromToken('token', 'dummy');
+        $this->assertInstanceOf(Entities\PaymentCard::class, $result);
+
+        $result = $service->authorize([], 'dummy');
+        $this->assertInstanceOf(Entities\PaymentCard::class, $result);
+
+        $result = $service->deactivate('dummy');
+        $this->assertInstanceOf(Entities\PaymentCard::class, $result);
     }
 
     /**
