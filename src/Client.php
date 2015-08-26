@@ -122,7 +122,7 @@ final class Client
      *
      * @see Rebilly\ApiKeyProvider
      *
-     * @param array|ArrayObject $options
+     * @param array $options
      */
     public function __construct(array $options)
     {
