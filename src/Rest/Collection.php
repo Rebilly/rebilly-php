@@ -17,7 +17,6 @@ use Iterator;
 use LogicException;
 use IteratorAggregate;
 use JsonSerializable;
-use Serializable;
 
 /**
  * Class Collection
@@ -25,7 +24,7 @@ use Serializable;
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
  */
-class Collection implements Serializable, JsonSerializable, IteratorAggregate, ArrayAccess, Countable
+class Collection implements JsonSerializable, IteratorAggregate, ArrayAccess, Countable
 {
     /** @var Resource */
     private $prototype;
@@ -85,22 +84,6 @@ class Collection implements Serializable, JsonSerializable, IteratorAggregate, A
             },
             $this->items
         );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    final public function serialize()
-    {
-        return json_encode($this);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    final public function unserialize($serialized)
-    {
-        return json_decode($serialized, true);
     }
 
     /**

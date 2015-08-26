@@ -13,7 +13,6 @@ namespace Rebilly\Rest;
 use ArrayAccess;
 use ArrayObject;
 use JsonSerializable;
-use Serializable;
 use OutOfRangeException;
 use DomainException;
 
@@ -23,7 +22,7 @@ use DomainException;
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
  */
-abstract class Resource implements Serializable, JsonSerializable, ArrayAccess
+abstract class Resource implements JsonSerializable, ArrayAccess
 {
     /** @var ArrayObject */
     private $data;
@@ -89,22 +88,6 @@ abstract class Resource implements Serializable, JsonSerializable, ArrayAccess
     final public function jsonSerialize()
     {
         return $this->data->getArrayCopy();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    final public function serialize()
-    {
-        return json_encode($this);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    final public function unserialize($serialized)
-    {
-        return json_decode($serialized, true);
     }
 
     /**
