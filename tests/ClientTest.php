@@ -30,15 +30,6 @@ use Psr\Http\Message\UriInterface as Uri;
  */
 final class ClientTest extends TestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-
-        if (!getenv(ApiKeyProvider::ENV_APIKEY)) {
-            $this->markTestSkipped();
-        }
-    }
-
     /**
      * @test
      */
