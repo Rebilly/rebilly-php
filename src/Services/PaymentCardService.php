@@ -68,7 +68,7 @@ final class PaymentCardService extends Service
     }
 
     /**
-     * @param array|PaymentCardToken $data
+     * @param string|array|PaymentCardToken $data
      * @param string $cardId
      *
      * @throws UnprocessableEntityException The input data does not valid
