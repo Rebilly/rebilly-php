@@ -47,7 +47,7 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @see Client::service()
  *
  * @method Services\AuthenticationOptionsService authenticationOptions()
- * @method Services\AuthenticationTokenService authenticationToken()
+ * @method Services\AuthenticationTokenService authenticationTokens()
  * @method Services\BlacklistService blacklists()
  * @method Services\ContactService contacts()
  * @method Services\CustomerCredentialService customerCredentials()
@@ -76,7 +76,7 @@ final class Client
 
     private static $services = [
         'authenticationOptions' => Services\AuthenticationOptionsService::class,
-        'authenticationToken' => Services\AuthenticationTokenService::class,
+        'authenticationTokens' => Services\AuthenticationTokenService::class,
         'blacklists' => Services\BlacklistService::class,
         'contacts' => Services\ContactService::class,
         'customerCredentials' => Services\CustomerCredentialService::class,
