@@ -11,14 +11,15 @@
 namespace Rebilly\Tests\Api;
 
 use InvalidArgumentException;
+use Rebilly\Client;
 use Rebilly\Entities;
 use Rebilly\Rest;
+use Rebilly\Services;
 use Rebilly\Tests\TestCase;
+use Psr\Http\Message\RequestInterface as Request;
 
 /**
  * Class ApiTest.
- *
- * @group wip
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  */
@@ -79,6 +80,83 @@ class ApiTest extends TestCase
     }
 
     /**
+     * @test
+     * @dataProvider provideServiceClasses
+     *
+     * @param string $name
+     * @param string $serviceClass
+     * @param string $entityClass
+     * @param string $id
+     */
+    public function useService($name, $serviceClass, $entityClass, $id = 'id')
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => function (Request $request) use ($client) {
+                $response = $client->createResponse();
+                $uri = $request->getUri();
+
+                if ($request->getMethod() === 'POST') {
+                    $response = $response->withHeader(
+                        'Location',
+                        $uri->withPath(rtrim($uri->getPath(), '/') . '/dummy')
+                    );
+                }
+
+                return $response;
+            }
+        ]);
+
+        $service = $client->$name();
+        $this->assertInstanceOf($serviceClass, $service);
+
+        if (method_exists($service, 'search')) {
+            $set = $service->search();
+            $this->assertInstanceOf(Rest\Collection::class, $set);
+        }
+
+        if (method_exists($service, 'load')) {
+            if ($id === null) {
+                $entity = $service->load();
+            } else {
+                $entity = $service->load($this->getFakeValue($id, $entityClass));
+            }
+
+            $this->assertInstanceOf($entityClass, $entity);
+        }
+
+        if (method_exists($service, 'create')) {
+            $entity = $service->create([]);
+            $this->assertInstanceOf($entityClass, $entity);
+
+            if ($id !== null) {
+                $entity = $service->create([], $this->getFakeValue($id, $entityClass));
+                $this->assertInstanceOf($entityClass, $entity);
+            }
+        }
+
+        if (method_exists($service, 'update')) {
+            if ($id === null) {
+                $entity = $service->update([]);
+            } else {
+                $entity = $service->update($this->getFakeValue($id, $entityClass), []);
+            }
+
+            $this->assertInstanceOf($entityClass, $entity);
+        }
+
+        if (method_exists($service, 'delete')) {
+            if ($id === null) {
+                $service->delete();
+            } else {
+                $service->delete($this->getFakeValue($id, $entityClass));
+            }
+        }
+    }
+
+    /**
      * @return array
      */
     public function provideEntityClasses()
@@ -108,6 +186,108 @@ class ApiTest extends TestCase
             [Entities\SubscriptionCancel::class, null],
             [Entities\Transaction::class],
             [Entities\Website::class],
+        ];
+    }
+
+
+    /**
+     * @return array
+     */
+    public function provideServiceClasses()
+    {
+        return [
+            [
+                'authenticationOptions',
+                Services\AuthenticationOptionsService::class,
+                Entities\AuthenticationOptions::class,
+                null,
+            ],
+            [
+                'authenticationTokens',
+                Services\AuthenticationTokenService::class,
+                Entities\AuthenticationToken::class,
+                'token',
+            ],
+            [
+                'blacklists',
+                Services\BlacklistService::class,
+                Entities\Blacklist::class,
+            ],
+            [
+                'contacts',
+                Services\ContactService::class,
+                Entities\Contact::class,
+            ],
+            [
+                'customerCredentials',
+                Services\CustomerCredentialService::class,
+                Entities\CustomerCredential::class,
+            ],
+            [
+                'customers',
+                Services\CustomerService::class,
+                Entities\Customer::class,
+            ],
+            /*[ // TODO depends from invoiceId
+                'invoiceItems',
+                Services\InvoiceItemService::class,
+                Entities\InvoiceItem::class,
+            ],*/
+            [
+                'invoices',
+                Services\InvoiceService::class,
+                Entities\Invoice::class,
+            ],
+            [
+                'layouts',
+                Services\LayoutService::class,
+                Entities\Layout::class,
+            ],
+            [
+                'leadSources',
+                Services\LeadSourceService::class,
+                Entities\LeadSource::class,
+            ],
+            [
+                'paymentCards',
+                Services\PaymentCardService::class,
+                Entities\PaymentCard::class,
+            ],
+            [
+                'paymentCardTokens',
+                Services\PaymentCardTokenService::class,
+                Entities\PaymentCardToken::class,
+            ],
+            [
+                'payments',
+                Services\PaymentService::class,
+                Entities\Payment::class,
+            ],
+            [
+                'plans',
+                Services\PlanService::class,
+                Entities\Plan::class,
+            ],
+            [
+                'resetPasswordTokens',
+                Services\ResetPasswordTokenService::class,
+                Entities\ResetPasswordToken::class,
+            ],
+            [
+                'subscriptions',
+                Services\SubscriptionService::class,
+                Entities\Subscription::class,
+            ],
+            [
+                'transactions',
+                Services\TransactionService::class,
+                Entities\Transaction::class,
+            ],
+            [
+                'websites',
+                Services\WebsiteService::class,
+                Entities\Website::class,
+            ],
         ];
     }
 
