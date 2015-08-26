@@ -78,8 +78,6 @@ final class AuthenticationTokenService extends Service
 
     /**
      * @param string $token
-     *
-     * @return AuthenticationToken
      */
     public function logout($token)
     {
