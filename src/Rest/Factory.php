@@ -44,7 +44,7 @@ final class Factory
     private function generatePatterns()
     {
         foreach ($this->builders as $uri => $builder) {
-            $pattern = $uri;
+            $pattern = '/' . ltrim($uri, '/');
 
             if (preg_match_all('/{[\w]+}/i', $uri, $matches)) {
                 foreach (array_unique($matches[0]) as $match) {
@@ -71,7 +71,7 @@ final class Factory
      */
     public function create($uri, $content)
     {
-        $uri = trim($uri, '/');
+        $uri = '/' . trim($uri, '/');
 
         foreach ($this->patterns as $pattern => $key) {
             if (preg_match($pattern, $uri)) {
