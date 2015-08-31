@@ -258,8 +258,10 @@ final class Client
         try {
             return $this->service(lcfirst($name));
         } catch (InvalidArgumentException $e) {
-            throw new BadMethodCallException(sprintf('Call unknown method %s::%s', __CLASS__, $name));
+            // Expect this kind of exceptions
         }
+
+        throw new BadMethodCallException(sprintf('Call unknown method %s::%s', __CLASS__, $name));
     }
 
     /**
