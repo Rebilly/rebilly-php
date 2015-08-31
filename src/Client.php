@@ -136,7 +136,9 @@ final class Client
             $apiKey = (string) call_user_func($apiKey);
         }
 
-        if (!isset($baseUrl)) {
+        if (isset($baseUrl)) {
+            $baseUrl = ltrim($baseUrl, '/');
+        } else {
             $baseUrl = Client::BASE_HOST;
         }
 
