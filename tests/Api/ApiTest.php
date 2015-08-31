@@ -432,7 +432,6 @@ class ApiTest extends TestCase
             [Entities\LeadSource::class],
             [Entities\Payment::class],
             [Entities\PaymentMethods\PaymentCardMethod::class, null],
-            [Entities\PaymentMethods\PaypalMethod::class, null],
             [Entities\PaymentCard::class],
             [Entities\PaymentCardAuthorization::class, null],
             [Entities\PaymentCardToken::class, null],
@@ -602,7 +601,6 @@ class ApiTest extends TestCase
                 return $faker->ipv4;
             case 'token':
             case 'fingerprint':
-            case 'paypalKey':
                 return $faker->md5;
             case 'name':
             case 'medium':
