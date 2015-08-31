@@ -49,7 +49,7 @@ final class ContactService extends Service
     }
 
     /**
-     * @param array|ContactService $data
+     * @param array|Contact $data
      * @param string $contactId
      *
      * @throws UnprocessableEntityException The input data does not valid
