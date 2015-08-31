@@ -77,9 +77,7 @@ abstract class Resource implements JsonSerializable, ArrayAccess
             unset($data['_links']);
         }
 
-        foreach ($data as $key => $value) {
-            $this->offsetSet($key, $value);
-        }
+        $this->data->exchangeArray($data);
     }
 
     /**
