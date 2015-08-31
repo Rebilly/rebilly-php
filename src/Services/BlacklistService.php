@@ -11,6 +11,7 @@
 namespace Rebilly\Services;
 
 use ArrayObject;
+use JsonSerializable;
 use Rebilly\Entities\Blacklist;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
@@ -49,7 +50,7 @@ final class BlacklistService extends Service
     }
 
     /**
-     * @param array|Blacklist $data
+     * @param array|JsonSerializable|Blacklist $data
      * @param string $blacklistId
      *
      * @throws UnprocessableEntityException The input data does not valid

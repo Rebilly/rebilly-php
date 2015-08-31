@@ -11,6 +11,7 @@
 namespace Rebilly\Services;
 
 use ArrayObject;
+use JsonSerializable;
 use Rebilly\Entities\Layout;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
@@ -49,7 +50,7 @@ final class LayoutService extends Service
     }
 
     /**
-     * @param array|Layout $data
+     * @param array|JsonSerializable|Layout $data
      * @param string $layoutId
      *
      * @throws UnprocessableEntityException The input data does not valid
@@ -67,7 +68,7 @@ final class LayoutService extends Service
 
     /**
      * @param string $layoutId
-     * @param array|Layout $data
+     * @param array|JsonSerializable|Layout $data
      *
      * @throws UnprocessableEntityException The input data does not valid
      *

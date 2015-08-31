@@ -11,6 +11,7 @@
 namespace Rebilly\Services;
 
 use ArrayObject;
+use JsonSerializable;
 use Rebilly\Entities\InvoiceItem;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
@@ -59,7 +60,7 @@ final class InvoiceItemService extends Service
     }
 
     /**
-     * @param array|InvoiceItem $data
+     * @param array|JsonSerializable|InvoiceItem $data
      * @param string $invoiceId
      * @param string $invoiceItemId
      *

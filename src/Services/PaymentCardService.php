@@ -11,6 +11,7 @@
 namespace Rebilly\Services;
 
 use ArrayObject;
+use JsonSerializable;
 use Rebilly\Entities\PaymentCard;
 use Rebilly\Entities\PaymentCardAuthorization;
 use Rebilly\Entities\PaymentCardToken;
@@ -51,7 +52,7 @@ final class PaymentCardService extends Service
     }
 
     /**
-     * @param array|PaymentCard $data
+     * @param array|JsonSerializable|PaymentCard $data
      * @param string $cardId
      *
      * @throws UnprocessableEntityException The input data does not valid
@@ -68,7 +69,7 @@ final class PaymentCardService extends Service
     }
 
     /**
-     * @param string|array|PaymentCardToken $data
+     * @param string|array|JsonSerializable|PaymentCardToken $data
      * @param string $cardId
      *
      * @throws UnprocessableEntityException The input data does not valid
@@ -89,7 +90,7 @@ final class PaymentCardService extends Service
     }
 
     /**
-     * @param array|PaymentCardAuthorization $data
+     * @param array|JsonSerializable|PaymentCardAuthorization $data
      * @param string $cardId
      *
      * @throws UnprocessableEntityException The input data does not valid

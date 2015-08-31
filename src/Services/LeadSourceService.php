@@ -11,6 +11,7 @@
 namespace Rebilly\Services;
 
 use ArrayObject;
+use JsonSerializable;
 use Rebilly\Entities\LeadSource;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
@@ -49,7 +50,7 @@ final class LeadSourceService extends Service
     }
 
     /**
-     * @param array|LeadSource $data
+     * @param array|JsonSerializable|LeadSource $data
      * @param string $leadSourceId
      *
      * @throws UnprocessableEntityException The input data does not valid

@@ -11,6 +11,7 @@
 namespace Rebilly\Services;
 
 use ArrayObject;
+use JsonSerializable;
 use Rebilly\Entities\Contact;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
@@ -49,7 +50,7 @@ final class ContactService extends Service
     }
 
     /**
-     * @param array|Contact $data
+     * @param array|JsonSerializable|Contact $data
      * @param string $contactId
      *
      * @throws UnprocessableEntityException The input data does not valid

@@ -11,6 +11,7 @@
 namespace Rebilly\Services;
 
 use ArrayObject;
+use JsonSerializable;
 use Rebilly\Entities\Website;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
@@ -49,7 +50,7 @@ final class WebsiteService extends Service
     }
 
     /**
-     * @param array|Website $data
+     * @param array|JsonSerializable|Website $data
      * @param string $websiteId
      *
      * @throws UnprocessableEntityException The input data does not valid
@@ -67,7 +68,7 @@ final class WebsiteService extends Service
 
     /**
      * @param string $websiteId
-     * @param array|Website $data
+     * @param array|JsonSerializable|Website $data
      *
      * @throws UnprocessableEntityException The input data does not valid
      *

@@ -11,6 +11,7 @@
 namespace Rebilly\Services;
 
 use ArrayObject;
+use JsonSerializable;
 use Rebilly\Entities\Plan;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
@@ -49,7 +50,7 @@ final class PlanService extends Service
     }
 
     /**
-     * @param array|Plan $data
+     * @param array|JsonSerializable|Plan $data
      * @param string $planId
      *
      * @throws UnprocessableEntityException The input data does not valid
@@ -67,7 +68,7 @@ final class PlanService extends Service
 
     /**
      * @param string $planId
-     * @param array|Plan $data
+     * @param array|JsonSerializable|Plan $data
      *
      * @throws UnprocessableEntityException The input data does not valid
      *

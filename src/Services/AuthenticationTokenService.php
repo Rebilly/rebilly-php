@@ -11,6 +11,7 @@
 namespace Rebilly\Services;
 
 use ArrayObject;
+use JsonSerializable;
 use Rebilly\Entities\AuthenticationToken;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
@@ -65,7 +66,7 @@ final class AuthenticationTokenService extends Service
     }
 
     /**
-     * @param array|AuthenticationToken $data
+     * @param array|JsonSerializable|AuthenticationToken $data
      *
      * @throws UnprocessableEntityException The input data does not valid
      *

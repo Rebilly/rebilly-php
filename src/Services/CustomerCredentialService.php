@@ -11,6 +11,7 @@
 namespace Rebilly\Services;
 
 use ArrayObject;
+use JsonSerializable;
 use Rebilly\Entities\CustomerCredential;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
@@ -49,7 +50,7 @@ final class CustomerCredentialService extends Service
     }
 
     /**
-     * @param array|CustomerCredential $data
+     * @param array|JsonSerializable|CustomerCredential $data
      * @param string $credentialId
      *
      * @throws UnprocessableEntityException The input data does not valid
@@ -67,7 +68,7 @@ final class CustomerCredentialService extends Service
 
     /**
      * @param string $credentialId
-     * @param array|CustomerCredential $data
+     * @param array|JsonSerializable|CustomerCredential $data
      *
      * @throws UnprocessableEntityException The input data does not valid
      *

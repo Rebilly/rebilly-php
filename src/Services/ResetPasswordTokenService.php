@@ -11,6 +11,7 @@
 namespace Rebilly\Services;
 
 use ArrayObject;
+use JsonSerializable;
 use Rebilly\Entities\ResetPasswordToken;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
@@ -49,7 +50,7 @@ final class ResetPasswordTokenService extends Service
     }
 
     /**
-     * @param array|ResetPasswordToken $data
+     * @param array|JsonSerializable|ResetPasswordToken $data
      * @param string $token
      *
      * @throws UnprocessableEntityException The input data does not valid

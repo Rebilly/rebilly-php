@@ -11,6 +11,7 @@
 namespace Rebilly\Services;
 
 use ArrayObject;
+use JsonSerializable;
 use Rebilly\Entities\Subscription;
 use Rebilly\Entities\SubscriptionCancel;
 use Rebilly\Entities\SubscriptionSwitch;
@@ -51,7 +52,7 @@ final class SubscriptionService extends Service
     }
 
     /**
-     * @param array|Subscription $data
+     * @param array|JsonSerializable|Subscription $data
      * @param string $subscriptionId
      *
      * @throws UnprocessableEntityException The input data does not valid
@@ -69,7 +70,7 @@ final class SubscriptionService extends Service
 
     /**
      * @param string $subscriptionId
-     * @param array|Subscription $data
+     * @param array|JsonSerializable|Subscription $data
      *
      * @throws UnprocessableEntityException The input data does not valid
      *
@@ -82,7 +83,7 @@ final class SubscriptionService extends Service
 
     /**
      * @param string $subscriptionId
-     * @param array|SubscriptionCancel $data
+     * @param array|JsonSerializable|SubscriptionCancel $data
      *
      * @throws UnprocessableEntityException The input data does not valid
      *
@@ -99,7 +100,7 @@ final class SubscriptionService extends Service
 
     /**
      * @param string $subscriptionId
-     * @param array|SubscriptionSwitch $data
+     * @param array|JsonSerializable|SubscriptionSwitch $data
      *
      * @throws UnprocessableEntityException The input data does not valid
      *
