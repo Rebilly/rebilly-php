@@ -113,16 +113,6 @@ final class Customer extends Entity
     }
 
     /**
-     * @param string $value
-     *
-     * @return string
-     */
-    protected function setCreatedTime($value)
-    {
-        return $this->setAttribute('createdTime', $value);
-    }
-
-    /**
      * @return string
      */
     public function getDefaultCardId()
@@ -138,17 +128,5 @@ final class Customer extends Entity
     public function setDefaultCardId($value)
     {
         return $this->setAttribute('defaultCard', $value);
-    }
-
-    /**
-     * @deprecated
-     *
-     * @param string $value
-     *
-     * @return $this
-     */
-    protected function setDefaultCard($value)
-    {
-        return $this->setDefaultCardId($value);
     }
 }

@@ -13,6 +13,8 @@ namespace Rebilly\Http;
 /**
  * Class CurlSession.
  *
+ * @codeCoverageIgnore
+ *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
  */

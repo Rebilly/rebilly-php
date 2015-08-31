@@ -23,6 +23,8 @@ use PHPUnit_Framework_MockObject_MockObject as MockObject;
 /**
  * Class ApiTest.
  *
+ * @group wip
+ *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  */
 class ApiTest extends TestCase

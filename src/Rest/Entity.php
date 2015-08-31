@@ -32,18 +32,6 @@ abstract class Entity extends Resource
     }
 
     /**
-     * Setter for entity ID.
-     *
-     * @param string $value
-     *
-     * @return string
-     */
-    protected function setId($value)
-    {
-        return $this->setAttribute('id', $value);
-    }
-
-    /**
      * Getter for entity updated time.
      *
      * This property present always and should used to control cache.
@@ -53,15 +41,5 @@ abstract class Entity extends Resource
     public function getUpdatedTime()
     {
         return $this->getAttribute('updatedTime');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return string
-     */
-    protected function setUpdatedTime($value)
-    {
-        return $this->setAttribute('updatedTime', $value);
     }
 }

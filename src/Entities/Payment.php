@@ -64,16 +64,6 @@ final class Payment extends Entity
     }
 
     /**
-     * @param string $value
-     *
-     * @return string
-     */
-    protected function setCreatedTime($value)
-    {
-        return $this->setAttribute('createdTime', $value);
-    }
-
-    /**
      * @return string
      */
     public function getState()

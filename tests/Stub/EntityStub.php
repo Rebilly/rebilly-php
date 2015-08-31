@@ -50,20 +50,12 @@ final class EntityStub extends Entity
 
     public function getRelation1()
     {
-        if (!$this->hasEmbeddedResource('relation1')) {
-            $this->setEmbeddedResource('relation1', null);
-        }
-
         return $this->getEmbeddedResource('relation1');
     }
 
     // TODO Something wrong here
     public function getRelation2()
     {
-        if (!$this->hasEmbeddedResource('relation2')) {
-            $this->setEmbeddedResource('relation2', null);
-        }
-
         return $this->getEmbeddedResource('relation2');
     }
 

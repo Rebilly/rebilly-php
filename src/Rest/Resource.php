@@ -132,18 +132,6 @@ abstract class Resource implements JsonSerializable, ArrayAccess
 
     /**
      * @param string $name
-     * @param mixed $value
-     *
-     * @return $this
-     */
-    final protected function setEmbeddedResource($name, $value)
-    {
-        $this->embeddedData[$name] = $value;
-        return $this;
-    }
-
-    /**
-     * @param string $name
      *
      * @return mixed
      */

@@ -40,29 +40,11 @@ final class AuthenticationToken extends Entity
     }
 
     /**
-     * {@inheritdoc}
-     */
-    protected function setId($value)
-    {
-        return $this->setToken($value);
-    }
-
-    /**
      * @return string
      */
     public function getToken()
     {
         return $this->getAttribute('token');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    protected function setToken($value)
-    {
-        return $this->setAttribute('token', $value);
     }
 
     /**
