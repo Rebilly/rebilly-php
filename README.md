@@ -17,18 +17,18 @@ There are 2 supported methods of installing the Rebilly SDK for PHP.
 **The recommended way to install the SDK is through Composer.**
 
 Using [Composer](http://getcomposer.org/) is the recommended way to install the Rebilly SDK for PHP.
-To get started, you need run the Composer command (assume you're in project root directory)
+To get started, you need run the Composer commands (assume you're in project root directory)
 
-1. to install the latest stable version of the SDK:
+1. Install the latest stable version of the SDK:
 
 ```bash
 php composer.phar require rebilly/client-php
 ```
 
-2. install the dependencies:
+2. Update the dependencies:
 
 ```bash
-php composer.phar install
+php composer.phar update rebilly/client-php
 ```
 
 You can find out more on how to install Composer, configure autoloading,
