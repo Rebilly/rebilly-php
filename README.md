@@ -21,15 +21,15 @@ To get started, you need run the Composer commands (assume you're in project roo
 
 1. Install the latest stable version of the SDK:
 
-```bash
-php composer.phar require rebilly/client-php
-```
+  ```bash
+  php composer.phar require rebilly/client-php
+  ```
 
 2. Update the dependencies:
 
-```bash
-php composer.phar update rebilly/client-php
-```
+  ```bash
+  php composer.phar update rebilly/client-php
+  ```
 
 You can find out more on how to install Composer, configure autoloading,
 and other best-practices for defining dependencies at [getcomposer.org](http://getcomposer.org/).
