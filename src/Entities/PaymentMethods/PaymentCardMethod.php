@@ -62,4 +62,21 @@ final class PaymentCardMethod extends PaymentMethod
     {
         return $this->getAttribute('gatewayAccountId');
     }
+
+    /**
+     * @param int $value
+     * @return $this
+     */
+    public function setGatewayTimeout($value)
+    {
+        return $this->setAttribute('gatewayTimeout', (int) $value);
+    }
+
+    /**
+     * @return int
+     */
+    public function getGatewayTimeout()
+    {
+        return $this->getAttribute('gatewayTimeout');
+    }
 }
