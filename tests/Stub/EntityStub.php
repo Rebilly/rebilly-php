@@ -1,9 +1,11 @@
 <?php
 /**
- * Slavcodev Components
+ * This file is part of the PHP Rebilly API package.
  *
- * @author Veaceslav Medvedev <slavcopost@gmail.com>
- * @license http://www.opensource.org/licenses/bsd-license.php
+ * (c) 2015 Rebilly SRL
+ *
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
  */
 
 namespace Rebilly\Tests\Stub;
@@ -13,8 +15,7 @@ use Rebilly\Rest\Entity;
 /**
  * Class EntityStub.
  *
- * @author Veaceslav Medvedev <slavcopost@gmail.com>
- * @version 0.1
+ * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  */
 final class EntityStub extends Entity
 {
