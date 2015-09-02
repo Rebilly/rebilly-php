@@ -22,7 +22,7 @@ use Rebilly\Middleware;
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
  */
-abstract class LogHandler implements Middleware
+class LogHandler implements Middleware
 {
     /** @var mixed */
     private $logger;

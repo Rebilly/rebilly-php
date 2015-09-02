@@ -22,40 +22,40 @@ use Psr\Http\Message\ResponseInterface as Response;
  */
 class CurlHandler implements HttpHandler
 {
-    /** @var array The base options */
+    /**
+     * @var array The base options
+     */
     private $options = [];
-
-    /** @var resource The reference to opened session */
-    private $reference;
 
     /**
      * Constructor
      *
-     * @param array $options
+     * @see http://php.net/manual/en/function.curl-setopt.php
+     *
+     * @param array $options The base options
      */
     public function __construct(array $options = [])
     {
-        $this->options = array_merge(
+        $this->options = array_replace(
             // Default CURL options
             [
                 CURLOPT_USERAGENT => @$_SERVER['HTTP_USER_AGENT'] ?: 'Curl/PHP' . PHP_VERSION,
             ],
-            $options
+            $options,
+            // Required options
+            [
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_HEADER => true,
+            ],
+            /*
+             * Ensuring security options
+             * @link http://stackoverflow.com/questions/13740933/
+             */
+            [
+                CURLOPT_SSL_VERIFYPEER => 1,
+                CURLOPT_SSL_VERIFYHOST => 2,
+            ]
         );
-
-        register_shutdown_function(
-            function () {
-                $this->closeSession();
-            }
-        );
-    }
-
-    /**
-     * Close opened CURL session.
-     */
-    public function __destruct()
-    {
-        $this->closeSession();
     }
 
     /**
@@ -63,26 +63,9 @@ class CurlHandler implements HttpHandler
      *
      * @return Response
      */
-    public function send(Request $request)
+    public function __invoke(Request $request)
     {
-        $this->closeSession();
-
-        /*
-         * Options for session
-         * @see http://php.net/manual/en/function.curl-setopt.php
-         */
-        $options = $this->options;
-
-        // Required options
-        $options[CURLOPT_RETURNTRANSFER] = true;
-        $options[CURLOPT_HEADER] = true;
-
-        /*
-         * Ensuring security options
-         * @link http://stackoverflow.com/questions/13740933/
-         */
-        $options[CURLOPT_SSL_VERIFYPEER] = 1;
-        $options[CURLOPT_SSL_VERIFYHOST] = 2;
+        $options = [];
 
         // Headers
         $headerLines = [];
@@ -135,25 +118,10 @@ class CurlHandler implements HttpHandler
             $options[CURLOPT_HTTPHEADER][] = 'Content-Type:';
         }
 
-        $this->openSession($options);
+        list($body, $headerLines) = $this->execute($options);
 
-        ob_start();
-        $result = curl_exec($this->reference);
-        ob_end_clean();
+        $headerLines = preg_split("#\r\n#", $headerLines, -1, PREG_SPLIT_NO_EMPTY);
 
-        if ($result === false) {
-            /*
-             * @see http://curl.haxx.se/libcurl/c/libcurl-errors.html
-             */
-            new Exception\TransferException(
-                curl_error($this->reference),
-                curl_errno($this->reference)
-            );
-        }
-
-        $headerSize = curl_getinfo($this->reference, CURLINFO_HEADER_SIZE);
-        $headerLines = preg_split("#\r\n#", substr($result, 0, $headerSize), -1, PREG_SPLIT_NO_EMPTY);
-        $body = substr($result, $headerSize);
         $headers = [];
 
         // Extract the version and status from the first header
@@ -168,35 +136,55 @@ class CurlHandler implements HttpHandler
 
         $response = new \GuzzleHttp\Psr7\Response($statusCode, $headers, $body, $protocolVersion, $reasonPhrase);
 
-        $this->closeSession();
-
         return $response;
     }
 
     /**
-     * Initialize a cURL session.
+     * Execute cURL session.
      *
      * @param array $options
+     *
+     * @throws RuntimeException
+     * @throws Exception\TransferException
+     *
+     * @return array
      */
-    private function openSession(array $options = [])
+    protected function execute(array $options = [])
     {
-        $reference = curl_init();
+        $session = $this->createSession();
+        $result = [];
 
-        if (!is_resource($reference)) {
-            throw new RuntimeException('Cannot initialize a cURL session');
+        try {
+            if ($session->open() === false) {
+                throw new RuntimeException('Cannot initialize a cURL session');
+            }
+
+            $session->setOptions($options + $this->options);
+
+            $result = $session->execute();
+
+            if ($result === false) {
+                throw new Exception\TransferException($session->getErrorMessage(), $session->getErrorCode());
+            }
+
+            $headerSize = $session->getInfo(CURLINFO_HEADER_SIZE);
+
+            $result = [
+                substr($result, $headerSize),
+                substr($result, 0, $headerSize)
+            ];
+        } finally {
+            $session->close();
         }
 
-        $this->reference = $reference;;
-        curl_setopt_array($this->reference, $options);
+        return $result;
     }
 
     /**
-     * Close opened session.
+     * @return CurlSession
      */
-    private function closeSession()
+    protected function createSession()
     {
-        if (is_resource($this->reference)) {
-            curl_close($this->reference);
-        }
+        return new CurlSession();
     }
 }

@@ -8,23 +8,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Rebilly\Http;
+namespace Rebilly\Http\Exception;
 
-use Psr\Http\Message\RequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
+use Exception;
 
 /**
- * Class HttpHandler.
+ * Class GoneException.
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
  */
-interface HttpHandler
+final class GoneException extends ClientException
 {
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
-    public function __invoke(Request $request);
+    public function __construct($message = "", $code = 0, Exception $previous = null)
+    {
+        parent::__construct(410, $message, $code, $previous);
+    }
 }

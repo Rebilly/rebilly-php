@@ -8,23 +8,22 @@
  * file that was distributed with this source code.
  */
 
-namespace Rebilly\Http;
+namespace Rebilly\Entities;
 
-use Psr\Http\Message\RequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
+use Rebilly\Rest\Resource;
 
 /**
- * Class HttpHandler.
+ * Class PaymentMethod
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
  */
-interface HttpHandler
+abstract class PaymentMethod extends Resource
 {
     /**
-     * @param Request $request
+     * Return the method name
      *
-     * @return Response
+     * @return string
      */
-    public function __invoke(Request $request);
+    abstract public function name();
 }

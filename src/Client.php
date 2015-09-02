@@ -13,8 +13,8 @@ namespace Rebilly;
 use ArrayObject;
 use BadMethodCallException;
 use Rebilly\Http\CurlHandler;
-use Rebilly\Middleware\Mock;
 use RuntimeException;
+use InvalidArgumentException;
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;
@@ -27,21 +27,43 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * This class implements a queue of middleware, which can be attached using the `attach()` method,
  * and is itself middleware.
  *
- * TODO: Decide use 3rd party implementation of PSR-7 or to include in the library
- *
  * @see Client::createRequest()
  * @see Client::createResponse()
  *
  * Magic facades for HTTP methods:
  *
+ * @see Client::__call()
  * @see Client::send()
- * @see Client::__callStatic()
  *
- * @method static mixed get($path, $params = [], $headers = [])
- * @method static void head($path, $params = [], $headers = [])
- * @method static mixed post($payload, $path, $params = [], $headers = [])
- * @method static mixed put($payload, $path, $params = [], $headers = [])
- * @method static void delete($path, $params = [], $headers = [])
+ * @method mixed get($path, $params = [], $headers = [])
+ * @method void head($path, $params = [], $headers = [])
+ * @method mixed post($payload, $path, $params = [], $headers = [])
+ * @method mixed put($payload, $path, $params = [], $headers = [])
+ * @method void delete($path, $params = [], $headers = [])
+ *
+ * Magic methods for services factories:
+ *
+ * @see Client::__call()
+ * @see Client::service()
+ *
+ * @method Services\AuthenticationOptionsService authenticationOptions()
+ * @method Services\AuthenticationTokenService authenticationTokens()
+ * @method Services\BlacklistService blacklists()
+ * @method Services\ContactService contacts()
+ * @method Services\CustomerCredentialService customerCredentials()
+ * @method Services\CustomerService customers()
+ * @method Services\InvoiceItemService invoiceItems()
+ * @method Services\InvoiceService invoices()
+ * @method Services\LayoutService layouts()
+ * @method Services\LeadSourceService leadSources()
+ * @method Services\PaymentCardService paymentCards()
+ * @method Services\PaymentCardTokenService paymentCardTokens()
+ * @method Services\PaymentService payments()
+ * @method Services\PlanService plans()
+ * @method Services\ResetPasswordTokenService resetPasswordTokens()
+ * @method Services\SubscriptionService subscriptions()
+ * @method Services\TransactionService transactions()
+ * @method Services\WebsiteService websites()
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
@@ -52,103 +74,91 @@ final class Client
     const SANDBOX_HOST = 'https://api-sandbox.rebilly.com';
     const CURRENT_VERSION = 'v2.1';
 
-    /**
-     * You're right singleton is anti-pattern, but I think it's not singleton.
-     * The implementation more like Registry pattern, keeping last created client for use in facades.
-     * You still may create more clients or client mock, provided that not using facades.
-     *
-     * @see Client::__callStatic()
-     * @var self
-     */
-    private static $instance;
+    private static $services = [
+        'authenticationOptions' => Services\AuthenticationOptionsService::class,
+        'authenticationTokens' => Services\AuthenticationTokenService::class,
+        'blacklists' => Services\BlacklistService::class,
+        'contacts' => Services\ContactService::class,
+        'customerCredentials' => Services\CustomerCredentialService::class,
+        'customers' => Services\CustomerService::class,
+        'invoiceItems' => Services\InvoiceItemService::class,
+        'invoices' => Services\InvoiceService::class,
+        'layouts' => Services\LayoutService::class,
+        'leadSources' => Services\LeadSourceService::class,
+        'paymentCards' => Services\PaymentCardService::class,
+        'paymentCardTokens' => Services\PaymentCardTokenService::class,
+        'payments' => Services\PaymentService::class,
+        'plans' => Services\PlanService::class,
+        'resetPasswordTokens' => Services\ResetPasswordTokenService::class,
+        'subscriptions' => Services\SubscriptionService::class,
+        'transactions' => Services\TransactionService::class,
+        'websites' => Services\WebsiteService::class,
+    ];
 
-    /** @var Configuration */
-    private $config;
+    /** @var array */
+    private $config = [];
 
     /** @var Middleware */
     private $middleware;
 
-    /** @var Resource\Factory */
+    /** @var Rest\Factory */
     private $factory;
 
     /** @var Http\HttpHandler */
     private $transport;
 
-    /**
-     * Constructor
-     *
-     * @param array|ArrayObject $options
-     */
-    public function __construct($options)
-    {
-        if (!($options instanceof Configuration)) {
-            $options = new Configuration($options);
-        }
+    /** @var array */
+    private $registry = [];
 
-        if ($options->getApiKey() === null) {
+    /**
+     * The client constructor accepts the following options:
+     *
+     * - apiKey: (callable|string) Specifies the APIKEY used to sign requests.
+     *   A callable provider should return APIKEY string.
+     * - baseUrl: (string) The full URI of the webservice. This is only
+     *   required when connecting to a custom endpoint (e.g., a tests).
+     * - httpHandler: (callable) An HTTP handler is a Closure that accepts a PSR-7 request object
+     *   and returns a PSR-7 response object or rejected with an exception.
+     *
+     * @see Rebilly\ApiKeyProvider
+     *
+     * @param array $options
+     */
+    public function __construct(array $options)
+    {
+        extract($options, EXTR_SKIP);
+
+        if (!isset($apiKey)) {
             throw new RuntimeException('Missed API Key');
         }
 
-        if ($options->getBaseUrl() === null) {
-            $options->setBaseUrl(Client::BASE_HOST);
+        if (is_callable($apiKey)) {
+            $apiKey = (string) call_user_func($apiKey);
         }
 
-        if ($options->getHttpHandler() === null) {
-            $options->setHttpHandler(new CurlHandler([CURLOPT_FOLLOWLOCATION => false]));
+        if (isset($baseUrl)) {
+            $baseUrl = ltrim($baseUrl, '/');
+        } else {
+            $baseUrl = Client::BASE_HOST;
         }
 
-        $this->config = $options;
+        if (!isset($httpHandler)) {
+            $httpHandler = new CurlHandler([CURLOPT_FOLLOWLOCATION => false]);
+        }
+
+        $this->config = compact('apiKey', 'baseUrl', 'httpHandler');
 
         // HTTP transport
-        $this->transport = $options->getHttpHandler();
+        $this->transport = $httpHandler;
 
         // Objects factory, often depends by version
-        $this->factory = new Resource\Factory(new Api\Schema());
-
-        $this->middleware = new Middleware\CompositeMiddleware();
+        $this->factory = new Rest\Factory(new Entities\Schema());
 
         // Prepare middleware stack
-        $this->middleware->attach(
-            new Middleware\BaseUri($this->createUri($options->getBaseUrl() . '/' . Client::CURRENT_VERSION))
-        );
-        $this->middleware->attach(new Middleware\ApiKeyAuthentication($options->getApiKey()));
-
-        /*
-         * TODO: Implement more middleware
-         *
-         * $this->middleware->attach(new HttpCache(Psr\Cache\CacheItemPoolInterface $pool));
-         * $this->middleware->attach(new Logger(Psr\Log\LoggerInterface $writer));
-         * $this->middleware->attach(new History($max = 5));
-         * $this->middleware->attach(new Debug($debug = true));
-         */
-
-        if (self::getInstance() === null) {
-            self::setInstance($this);
-        }
-    }
-
-    /********************************************************************************
-     * Client instance shortcut
-     *******************************************************************************/
-
-    /**
-     * Save instance as default to use in facades.
-     *
-     * @param Client $instance
-     */
-    public static function setInstance(self $instance = null)
-    {
-        self::$instance = $instance;
-    }
-
-    /**
-     * Returns default client.
-     *
-     * @return Client
-     */
-    public static function getInstance()
-    {
-        return self::$instance;
+        $this->middleware = new Middleware\CompositeMiddleware();
+        $this->middleware
+            ->attach(new Middleware\BaseUri($this->createUri($baseUrl . '/' . Client::CURRENT_VERSION)))
+            ->attach(new Middleware\ApiKeyAuthentication($apiKey));
     }
 
     /********************************************************************************
@@ -160,30 +170,27 @@ final class Client
     /**
      * PSR-0 autoloader
      *
-     * @param string $className
+     * @param string $class
      */
-    public static function autoload($className)
+    public static function autoload($class)
     {
-        $thisClass = str_replace(__NAMESPACE__ . '\\', '', __CLASS__);
-        $baseDir = __DIR__;
+        $class = ltrim($class, '\\');
 
-        if (substr($baseDir, -strlen($thisClass)) === $thisClass) {
-            $baseDir = substr($baseDir, 0, -strlen($thisClass));
-        }
+        if (strpos($class, __NAMESPACE__) === 0) {
+            $lastNsPos = strripos($class, '\\');
 
-        $className = ltrim($className, '\\');
-        $fileName = $baseDir;
+            $namespace = substr($class, 0, $lastNsPos + 1);
+            $namespace = substr($namespace, strlen(__NAMESPACE__));
+            $namespace = str_replace('\\', DIRECTORY_SEPARATOR, $namespace);
 
-        if ($lastNsPos = strripos($className, '\\')) {
-            $namespace = substr($className, 0, $lastNsPos);
-            $className = substr($className, $lastNsPos + 1);
-            $fileName .= str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
-        }
+            $class = substr($class, $lastNsPos + 1);
+            $class = str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
 
-        $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
+            $filename = __DIR__ . $namespace . $class;
 
-        if (file_exists($fileName)) {
-            require $fileName;
+            if (file_exists($filename)) {
+                require $filename;
+            }
         }
     }
 
@@ -192,7 +199,15 @@ final class Client
      */
     public static function registerAutoloader()
     {
-        spl_autoload_register(__CLASS__ . "::autoload");
+        spl_autoload_register([__CLASS__, 'autoload']);
+    }
+
+    /**
+     * Unregister PSR-0 autoloader
+     */
+    public static function unregisterAutoloader()
+    {
+        spl_autoload_unregister([__CLASS__, 'autoload']);
     }
 
     /********************************************************************************
@@ -207,7 +222,7 @@ final class Client
      */
     public function __invoke(Request $request, Response $response)
     {
-        $result = $this->transport->send($request);
+        $result = call_user_func($this->transport, $request);
 
         return $result instanceof Response ? $result : $response;
     }
@@ -225,26 +240,46 @@ final class Client
      *
      * @return mixed
      */
-    public static function __callStatic($name, $arguments)
+    public function __call($name, $arguments)
     {
-        if (self::$instance === null) {
-            throw new RuntimeException('The client is not initialized');
-        }
-
         switch (strtoupper($name)) {
             case 'HEAD':
             case 'GET':
             case 'DELETE':
                 array_unshift($arguments, null);
                 array_unshift($arguments, $name);
-                return call_user_func_array([self::$instance, 'send'], $arguments);
+                return call_user_func_array([$this, 'send'], $arguments);
             case 'POST':
             case 'PUT':
                 array_unshift($arguments, $name);
-                return call_user_func_array([self::$instance, 'send'], $arguments);
-            default:
-                throw new BadMethodCallException(sprintf('Call unknown method %s::%s', __CLASS__, $name));
+                return call_user_func_array([$this, 'send'], $arguments);
         }
+
+        try {
+            return $this->service(lcfirst($name));
+        } catch (InvalidArgumentException $e) {
+            // Expect this kind of exceptions
+        }
+
+        throw new BadMethodCallException(sprintf('Call unknown method %s::%s', __CLASS__, $name));
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return Rest\Service
+     */
+    private function service($name)
+    {
+        if (!isset($this->registry[$name])) {
+            if (isset(self::$services[$name])) {
+                $this->registry[$name] = new self::$services[$name]($this);
+            } else {
+                throw new InvalidArgumentException(sprintf('Service %s does not implement', $name));
+            }
+        }
+
+        return $this->registry[$name];
     }
 
     /**
@@ -261,7 +296,7 @@ final class Client
      *
      * @return mixed|null The resulting resource or null
      */
-    private function send($method, $payload, $path, $params = [], array $headers = [])
+    public function send($method, $payload, $path, $params = [], array $headers = [])
     {
         if (!is_array($params)) {
             $params = (array) $params;
@@ -282,24 +317,32 @@ final class Client
          */
         $response = call_user_func($this->middleware, $request, $response, $this);
 
-        switch (true) {
-            case $response->getStatusCode() === 404:
-                throw new Http\Exception\NotFoundException();
-            case $response->getStatusCode() === 422:
-                $content = json_decode($response->getBody()->getContents(), true);
-                $content = isset($content['details']) ? $content['details'] : [];
+        if ($response->getStatusCode() === 404) {
+            throw new Http\Exception\NotFoundException();
+        }
 
-                throw new Http\Exception\UnprocessableEntityException($content);
-            case $response->getStatusCode() >= 500:
-                throw new Http\Exception\ServerException(
-                    $response->getStatusCode(),
-                    $response->getReasonPhrase()
-                );
-            case $response->getStatusCode() >= 400:
-                throw new Http\Exception\ClientException(
-                    $response->getStatusCode(),
-                    $response->getReasonPhrase()
-                );
+        if ($response->getStatusCode() === 410) {
+            throw new Http\Exception\GoneException();
+        }
+
+        if ($response->getStatusCode() === 422) {
+            $content = json_decode($response->getBody()->getContents(), true);
+            $content = isset($content['details']) ? $content['details'] : [];
+            throw new Http\Exception\UnprocessableEntityException($content);
+        }
+
+        if ($response->getStatusCode() >= 500) {
+            throw new Http\Exception\ServerException(
+                $response->getStatusCode(),
+                $response->getReasonPhrase()
+            );
+        }
+
+        if ($response->getStatusCode() >= 400) {
+            throw new Http\Exception\ClientException(
+                $response->getStatusCode(),
+                $response->getReasonPhrase()
+            );
         }
 
         if (in_array($request->getMethod(), ['HEAD', 'DELETE'])) {
@@ -357,8 +400,12 @@ final class Client
      */
     public function createUri($uri, array $params = [])
     {
-        if ($uri instanceof GuzzleUri && !empty($params)) {
-            return $uri->withQuery(http_build_query($params));
+        if ($uri instanceof GuzzleUri) {
+            if (!empty($params)) {
+                $uri = $uri->withQuery(http_build_query($params));
+            }
+
+            return $uri;
         }
 
         // If URL template given, prepare URI
@@ -378,5 +425,17 @@ final class Client
         }
 
         return new GuzzleUri($uri);
+    }
+
+    /**
+     * Returns a client option.
+     *
+     * @param string $name
+     *
+     * @return mixed|null
+     */
+    public function getOption($name)
+    {
+        return isset($this->config[$name]) ? $this->config[$name] : null;
     }
 }
