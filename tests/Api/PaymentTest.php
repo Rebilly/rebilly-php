@@ -11,7 +11,7 @@
 namespace Rebilly\Tests\Api;
 
 use Rebilly\Entities\Payment;
-use Rebilly\Entities\PaymentMethods\PaypalMethod;
+use Rebilly\Entities\PaymentMethods\PaymentCardMethod;
 use Rebilly\Entities\ScheduledPayment;
 use Rebilly\Http\Exception\UnprocessableEntityException;
 
@@ -31,8 +31,8 @@ final class PaymentTest extends TestCase
         $faker = $this->getFaker();
         $client = $this->getClient();
 
-        $method = new PaypalMethod();
-        $method->setPaypalKey('A');
+        $method = new PaymentCardMethod();
+        $method->setPaymentCardId($faker->uuid);
 
         $payment = new Payment();
         $payment->setDescription($faker->sentence);
