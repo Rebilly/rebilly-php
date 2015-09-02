@@ -10,7 +10,7 @@
 
 namespace Rebilly\Middleware;
 
-use SplStack;
+use SplDoublyLinkedList;
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Rebilly\Middleware;
@@ -23,7 +23,7 @@ use Rebilly\Middleware;
  */
 class CompositeMiddleware implements Middleware
 {
-    /** @var SplStack The FIFO stack */
+    /** @var SplDoublyLinkedList The FIFO stack */
     private $stack;
 
     /** @var callable */
@@ -34,10 +34,16 @@ class CompositeMiddleware implements Middleware
 
     /**
      * Constructor
+     *
+     * @param callable|null $middleware
      */
-    public function __construct()
+    public function __construct(callable $middleware = null)
     {
-        $this->stack = new SplStack();
+        $this->clear();
+
+        foreach (array_filter(func_get_args(), 'is_callable') as $middleware) {
+            $this->attach($middleware);
+        }
 
         // The queue dispatcher, middleware which iterate queue
         $this->dispatcher = function (Request $request, Response $response, callable $next = null) {
@@ -89,7 +95,8 @@ class CompositeMiddleware implements Middleware
      */
     public function clear()
     {
-        $this->stack = new SplStack();
+        $this->stack = new SplDoublyLinkedList();
+        $this->stack->setIteratorMode(SplDoublyLinkedList::IT_MODE_FIFO);
 
         return $this;
     }
