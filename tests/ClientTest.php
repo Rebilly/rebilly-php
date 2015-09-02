@@ -68,6 +68,15 @@ final class ClientTest extends TestCase
             $this->assertEquals('HTTP handler should be callable', $e->getMessage());
         }
 
+        try {
+            new Client([
+                'apiKey' => ApiKeyProvider::env(),
+                'middleware' => 'invalid',
+            ]);
+        } catch (RuntimeException $e) {
+            $this->assertEquals('Middleware should be callable', $e->getMessage());
+        }
+
         $client = new Client([
             'apiKey' => ApiKeyProvider::env(),
         ]);
