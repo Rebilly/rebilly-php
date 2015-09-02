@@ -144,6 +144,8 @@ final class Client
 
         if (!isset($httpHandler)) {
             $httpHandler = new CurlHandler([CURLOPT_FOLLOWLOCATION => false]);
+        } elseif (!is_callable($httpHandler)) {
+            throw new RuntimeException('HTTP handler should be callable');
         }
 
         $this->config = compact('apiKey', 'baseUrl', 'httpHandler');
