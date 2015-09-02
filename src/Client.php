@@ -119,6 +119,9 @@ final class Client
      *   required when connecting to a custom endpoint (e.g., a tests).
      * - httpHandler: (callable) An HTTP handler is a Closure that accepts a PSR-7 request object
      *   and returns a PSR-7 response object or rejected with an exception.
+     * - middleware: (callable|Middleware) Middleware is code that can take the incoming request,
+     *   perform actions based on it, and pass delegation on to the HTTP handler.
+     *   Also can take the response from HTTP handler and perform actions on it.
      *
      * @see Rebilly\ApiKeyProvider
      *
@@ -148,7 +151,13 @@ final class Client
             throw new RuntimeException('HTTP handler should be callable');
         }
 
-        $this->config = compact('apiKey', 'baseUrl', 'httpHandler');
+        if (!isset($middleware)) {
+            $middleware = null;
+        } elseif (!is_callable($middleware)) {
+            throw new RuntimeException('Middleware should be callable');
+        }
+
+        $this->config = compact('apiKey', 'baseUrl', 'httpHandler', 'middleware');
 
         // HTTP transport
         $this->transport = $httpHandler;
@@ -157,10 +166,11 @@ final class Client
         $this->factory = new Rest\Factory(new Entities\Schema());
 
         // Prepare middleware stack
-        $this->middleware = new Middleware\CompositeMiddleware();
-        $this->middleware
-            ->attach(new Middleware\BaseUri($this->createUri($baseUrl . '/' . Client::CURRENT_VERSION)))
-            ->attach(new Middleware\ApiKeyAuthentication($apiKey));
+        $this->middleware = new Middleware\CompositeMiddleware(
+            new Middleware\BaseUri($this->createUri($baseUrl . '/' . Client::CURRENT_VERSION)),
+            new Middleware\ApiKeyAuthentication($apiKey),
+            $middleware
+        );
     }
 
     /********************************************************************************
