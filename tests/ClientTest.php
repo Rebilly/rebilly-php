@@ -11,6 +11,7 @@
 namespace Rebilly\Tests;
 
 use ArrayObject;
+use Psr\Log\NullLogger;
 use Rebilly\ApiKeyProvider;
 use Rebilly\Client;
 use Rebilly\Http\Exception\HttpException;
@@ -71,6 +72,15 @@ final class ClientTest extends TestCase
         try {
             new Client([
                 'apiKey' => ApiKeyProvider::env(),
+                'logger' => 'invalid',
+            ]);
+        } catch (RuntimeException $e) {
+            $this->assertEquals('Logger should implement PSR-3 LoggerInterface', $e->getMessage());
+        }
+
+        try {
+            new Client([
+                'apiKey' => ApiKeyProvider::env(),
                 'middleware' => 'invalid',
             ]);
         } catch (RuntimeException $e) {
@@ -87,6 +97,7 @@ final class ClientTest extends TestCase
             'apiKey' => ApiKeyProvider::env(),
             'baseUrl' => Client::SANDBOX_HOST,
             'httpHandler' => null,
+            'logger' => new NullLogger(),
         ]);
 
         return $client;
