@@ -13,10 +13,12 @@ namespace Rebilly;
 use ArrayObject;
 use BadMethodCallException;
 use Rebilly\Http\CurlHandler;
+use Rebilly\Middleware\LogHandler;
 use RuntimeException;
 use InvalidArgumentException;
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Log\LoggerInterface as Logger;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;
 use GuzzleHttp\Psr7\Response as GuzzleResponse;
 use GuzzleHttp\Psr7\Uri as GuzzleUri;
@@ -119,6 +121,8 @@ final class Client
      *   required when connecting to a custom endpoint (e.g., a tests).
      * - httpHandler: (callable) An HTTP handler is a Closure that accepts a PSR-7 request object
      *   and returns a PSR-7 response object or rejected with an exception.
+     * - logger: (Psr\Log\LoggerInterface) A PSR-3 logger object
+     * - logOptions: (array) An associative array. See LogHandler documentation to check available options.
      * - middleware: (callable|Middleware) Middleware is code that can take the incoming request,
      *   perform actions based on it, and pass delegation on to the HTTP handler.
      *   Also can take the response from HTTP handler and perform actions on it.
@@ -126,6 +130,8 @@ final class Client
      * @see Rebilly\ApiKeyProvider
      *
      * @param array $options
+     *
+     * @throws RuntimeException
      */
     public function __construct(array $options)
     {
@@ -151,13 +157,28 @@ final class Client
             throw new RuntimeException('HTTP handler should be callable');
         }
 
+        if (!isset($logger)) {
+            $logger = null;
+        } elseif ($logger instanceof Logger) {
+            $logger = new LogHandler($logger, isset($logOptions) ? (array) $logOptions : []);
+        } else {
+            throw new RuntimeException('Logger should implement PSR-3 LoggerInterface');
+        }
+
         if (!isset($middleware)) {
             $middleware = null;
         } elseif (!is_callable($middleware)) {
             throw new RuntimeException('Middleware should be callable');
         }
 
-        $this->config = compact('apiKey', 'baseUrl', 'httpHandler', 'middleware');
+        $this->config = compact(
+            'apiKey',
+            'baseUrl',
+            'httpHandler',
+            'logger',
+            'logOptions',
+            'middleware'
+        );
 
         // HTTP transport
         $this->transport = $httpHandler;
@@ -169,7 +190,8 @@ final class Client
         $this->middleware = new Middleware\CompositeMiddleware(
             new Middleware\BaseUri($this->createUri($baseUrl . '/' . Client::CURRENT_VERSION)),
             new Middleware\ApiKeyAuthentication($apiKey),
-            $middleware
+            $middleware,
+            $logger
         );
     }
 
