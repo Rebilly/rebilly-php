@@ -14,7 +14,6 @@ use GuzzleHttp\ClientInterface as GuzzleClient;
 use GuzzleHttp\Psr7\Response as GuzzleResponse;
 use GuzzleHttp\Exception\RequestException;
 use Psr\Http\Message\RequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
 
 /**
  * Class GuzzleAdapter.
@@ -40,7 +39,7 @@ final class GuzzleAdapter implements HttpHandler
     /**
      * {@inheritdoc}
      */
-    public function send(Request $request)
+    public function __invoke(Request $request)
     {
         try {
             $response = $this->wrappedClient->send($request);

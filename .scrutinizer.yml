@@ -1,9 +1,0 @@
-filter:
-    paths: [src/*]
-    excluded_paths: [vendor/*, test/*]
-before_commands:
-    - 'composer self-update'
-    - 'composer install --dev --prefer-source'
-tools:
-    external_code_coverage:
-        timeout: 1800
