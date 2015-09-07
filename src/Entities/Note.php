@@ -10,7 +10,7 @@
 
 namespace Rebilly\Entities;
 
-use Rebilly\Http\Exception\UnprocessableEntityException;
+use DomainException;
 use Rebilly\Rest\Entity;
 
 /**
@@ -38,10 +38,7 @@ final class Note extends Entity
     const RELATED_TYPE_CUSTOMER = 'customer';
     const RELATED_TYPE_WEBSITE = 'website';
 
-    public $allowableRelatedTypes = [
-        self::RELATED_TYPE_CUSTOMER,
-        self::RELATED_TYPE_WEBSITE,
-    ];
+    const MSG_UNEXPECTED_TYPE = 'Unexpected type. Only %s types support';
 
     /**
      * @return string
@@ -74,8 +71,8 @@ final class Note extends Entity
      */
     public function setRelatedType($value)
     {
-        if (!in_array($value, $this->allowableRelatedTypes)) {
-            throw new UnprocessableEntityException('Invalid relatedType');
+        if (!in_array($value, self::getAllowedRelatedTypes())) {
+            throw new DomainException(sprintf(self::MSG_UNEXPECTED_TYPE, implode(', ', self::getAllowedRelatedTypes())));
         }
         return $this->setAttribute('relatedType', $value);
     }
@@ -140,5 +137,13 @@ final class Note extends Entity
     public function getCreatedBy()
     {
         return $this->getAttribute('createdBy');
+    }
+
+    public static function getAllowedRelatedTypes()
+    {
+        return [
+            self::RELATED_TYPE_CUSTOMER,
+            self::RELATED_TYPE_WEBSITE,
+        ];
     }
 }
