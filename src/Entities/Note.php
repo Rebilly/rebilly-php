@@ -134,25 +134,4 @@ final class Note extends Entity
     {
         return $this->getAttribute('createdBy');
     }
-
-    /**
-     * @return Customer|Website
-     * @throws UnprocessableEntityException
-     */
-    public function getRelatedResource()
-    {
-        switch ($this->getAttribute('relatedType')) {
-            case self::RELATED_TYPE_CUSTOMER:
-                $resource = new Customer();
-                break;
-            case self::RELATED_TYPE_WEBSITE:
-                $resource = new Website();
-                break;
-            default:
-                throw new UnprocessableEntityException();
-        }
-        $resource->populate($this->getAttribute('relatedResource'));
-        //TODO
-        return $resource;
-    }
 }
