@@ -10,6 +10,7 @@
 
 namespace Rebilly\Entities;
 
+use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Rest\Entity;
 
 /**
@@ -36,6 +37,11 @@ final class Note extends Entity
 {
     const RELATED_TYPE_CUSTOMER = 'customer';
     const RELATED_TYPE_WEBSITE = 'website';
+
+    public $allowableRelatedTypes = [
+        self::RELATED_TYPE_CUSTOMER,
+        self::RELATED_TYPE_WEBSITE,
+    ];
 
     /**
      * @return string
@@ -68,6 +74,9 @@ final class Note extends Entity
      */
     public function setRelatedType($value)
     {
+        if (!in_array($value, $this->allowableRelatedTypes)) {
+            throw new UnprocessableEntityException('Wrong relatedType');
+        }
         return $this->setAttribute('relatedType', $value);
     }
 
