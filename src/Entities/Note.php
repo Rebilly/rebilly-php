@@ -75,7 +75,7 @@ final class Note extends Entity
     public function setRelatedType($value)
     {
         if (!in_array($value, $this->allowableRelatedTypes)) {
-            throw new UnprocessableEntityException('Wrong relatedType');
+            throw new UnprocessableEntityException('Invalid relatedType');
         }
         return $this->setAttribute('relatedType', $value);
     }
