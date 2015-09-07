@@ -10,7 +10,6 @@
 
 namespace Rebilly\Entities;
 
-use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Rest\Entity;
 
 /**
@@ -24,7 +23,6 @@ use Rebilly\Rest\Entity;
  *   "content"
  *   "archived"
  *   "createdBy"
- *   "relatedResource"
  *   "createdTime"
  *   "updatedTime"
  *   "archivedTime"
