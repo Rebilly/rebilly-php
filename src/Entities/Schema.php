@@ -141,6 +141,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'authentication-tokens/{token}' => function (array $content) {
                 return new AuthenticationToken($content);
             },
+            'notes' => function (array $content) {
+                return new Collection(new Note(), $content);
+            },
+            'notes/{noteId}' => function (array $content) {
+                return new Note($content);
+            },
         ];
     }
 
