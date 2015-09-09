@@ -78,4 +78,12 @@ final class PlanService extends Service
     {
         return $this->client()->put($data, 'plans/{planId}', ['planId' => $planId]);
     }
+
+    /**
+     * @param string $planId
+     */
+    public function delete($planId)
+    {
+        $this->client()->delete('plans/{planId}', ['planId' => $planId]);
+    }
 }
