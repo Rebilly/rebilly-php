@@ -48,7 +48,7 @@ final class Factory
 
             if (preg_match_all('/{[\w]+}/i', $uri, $matches)) {
                 foreach (array_unique($matches[0]) as $match) {
-                    $pattern = str_replace($match, '[\w\d\-_]+', $pattern);
+                    $pattern = str_replace($match, '[\w\d\@_~\-\.]+', $pattern);
                 }
             }
 
