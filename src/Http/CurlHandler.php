@@ -171,7 +171,7 @@ class CurlHandler implements HttpHandler
 
             $result = [
                 substr($result, $headerSize),
-                substr($result, 0, $headerSize)
+                substr($result, 0, $headerSize) ?: null
             ];
         } finally {
             $session->close();
