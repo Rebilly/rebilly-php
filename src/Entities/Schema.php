@@ -147,6 +147,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'notes/{noteId}' => function (array $content) {
                 return new Note($content);
             },
+            'organizations' => function (array $content) {
+                return new Collection(new Organization(), $content);
+            },
+            'organizations/{organizationId}' => function (array $content) {
+                return new Organization($content);
+            },
         ];
     }
 

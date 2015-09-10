@@ -67,6 +67,7 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\TransactionService transactions()
  * @method Services\WebsiteService websites()
  * @method Services\NoteService notes()
+ * @method Services\OrganizationService organizations()
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
@@ -97,6 +98,7 @@ final class Client
         'transactions' => Services\TransactionService::class,
         'websites' => Services\WebsiteService::class,
         'notes' => Services\NoteService::class,
+        'organizations' => Services\OrganizationService::class,
     ];
 
     /** @var array */
