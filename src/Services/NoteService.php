@@ -62,7 +62,7 @@ final class NoteService extends Service
         if (isset($noteId)) {
             return $this->client()->put($data, 'notes/{noteId}', ['noteId' => $noteId]);
         } else {
-            return $this->client()->post($data, 'notes/');
+            return $this->client()->post($data, 'notes');
         }
     }
 

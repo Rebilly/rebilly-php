@@ -62,7 +62,7 @@ final class OrganizationService extends Service
         if (isset($organizationId)) {
             return $this->client()->put($data, 'organizations/{organizationId}', ['organizationId' => $organizationId]);
         } else {
-            return $this->client()->post($data, 'organizations/');
+            return $this->client()->post($data, 'organizations');
         }
     }
 
