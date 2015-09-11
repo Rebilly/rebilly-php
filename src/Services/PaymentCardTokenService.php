@@ -68,14 +68,13 @@ final class PaymentCardTokenService extends Service
 
     /**
      * @param string $tokenId
-     * @param array|ArrayObject $params
      *
      * @throws NotFoundException The resource data does exist
      *
      * @return PaymentCardToken
      */
-    public function expire($tokenId, $data = [])
+    public function expire($tokenId)
     {
-        return $this->client()->post(['tokenId' => $tokenId] + (array) $data, 'tokens/'.$tokenId.'/expiration');
+        return $this->client()->post(null, 'tokens/{tokenId}/expiration', ['tokenId' => $tokenId]);
     }
 }
