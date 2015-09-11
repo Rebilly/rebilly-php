@@ -41,6 +41,14 @@ final class Note extends Entity
     const MSG_UNEXPECTED_TYPE = 'Unexpected type. Only %s types support';
 
     /**
+     * @return array
+     */
+    public static function relatedTypes()
+    {
+        return [self::RELATED_TYPE_CUSTOMER, self::RELATED_TYPE_WEBSITE];
+    }
+
+    /**
      * @return string
      */
     public function getCreatedTime()
@@ -71,8 +79,8 @@ final class Note extends Entity
      */
     public function setRelatedType($value)
     {
-        if (!in_array($value, self::getAllowedRelatedTypes())) {
-            throw new DomainException(sprintf(self::MSG_UNEXPECTED_TYPE, implode(', ', self::getAllowedRelatedTypes())));
+        if (!in_array($value, self::relatedTypes())) {
+            throw new DomainException(sprintf(self::MSG_UNEXPECTED_TYPE, implode(', ', self::relatedTypes())));
         }
         return $this->setAttribute('relatedType', $value);
     }
@@ -137,13 +145,5 @@ final class Note extends Entity
     public function getCreatedBy()
     {
         return $this->getAttribute('createdBy');
-    }
-
-    public static function getAllowedRelatedTypes()
-    {
-        return [
-            self::RELATED_TYPE_CUSTOMER,
-            self::RELATED_TYPE_WEBSITE,
-        ];
     }
 }

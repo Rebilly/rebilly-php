@@ -16,6 +16,7 @@ use Rebilly\Entities;
 use Rebilly\Http\CurlHandler;
 use Rebilly\Rest;
 use Rebilly\Services;
+use Rebilly\Tests\Stub\JsonObject;
 use Rebilly\Tests\TestCase;
 use Psr\Http\Message\RequestInterface as Request;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
@@ -69,7 +70,7 @@ class ApiTest extends TestCase
 
         foreach ($getters as $attribute => $method) {
             if (isset($values[$attribute])) {
-                $this->assertEquals($values[$attribute], $resource->$method());
+                $this->assertEquals($values[$attribute], $resource->$method(), 'Invalid ' . $attribute);
             } else {
                 $this->assertNull($resource->$method());
             }
@@ -400,7 +401,9 @@ class ApiTest extends TestCase
 
         $service = $client->paymentCards();
 
-        $result = $service->createFromToken('token', ['customerId' => $faker->uuid]);
+        $card = new JsonObject(['customerId' => $faker->uuid]);
+
+        $result = $service->createFromToken('token', $card);
         $this->assertInstanceOf(Entities\PaymentCard::class, $result);
 
         $result = $service->createFromToken('token', ['customerId' => $faker->uuid], 'dummy');
@@ -442,6 +445,8 @@ class ApiTest extends TestCase
             [Entities\SubscriptionCancel::class, null],
             [Entities\Transaction::class],
             [Entities\Website::class],
+            [Entities\Note::class],
+            [Entities\Organization::class],
         ];
     }
 
@@ -544,6 +549,16 @@ class ApiTest extends TestCase
                 Services\WebsiteService::class,
                 Entities\Website::class,
             ],
+            [
+                'notes',
+                Services\NoteService::class,
+                Entities\Note::class,
+            ],
+            [
+                'organizations',
+                Services\OrganizationService::class,
+                Entities\Organization::class,
+            ],
         ];
     }
 
@@ -572,6 +587,7 @@ class ApiTest extends TestCase
             case 'paymentCardId':
             case 'gatewayAccountId':
             case 'defaultCardId':
+            case 'relatedId':
                 return $faker->uuid;
             case 'dueTime':
             case 'expiredTime':
@@ -630,6 +646,7 @@ class ApiTest extends TestCase
             case 'webHookPassword':
                 return $faker->md5;
             case 'isActive':
+            case 'archived':
                 return $faker->boolean();
             case 'credentialTtl':
             case 'authTokenTtl':
@@ -697,6 +714,10 @@ class ApiTest extends TestCase
                 return 'USD';
             case 'payment':
                 return []; // TODO
+            case 'relatedType':
+                return $faker->randomElement(
+                    [Entities\Note::RELATED_TYPE_CUSTOMER, Entities\Note::RELATED_TYPE_WEBSITE]
+                );
             case 'method':
                 return new Entities\PaymentMethods\PaymentCardMethod(); // TODO
             default:
