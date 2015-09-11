@@ -16,6 +16,7 @@ use Rebilly\Entities;
 use Rebilly\Http\CurlHandler;
 use Rebilly\Rest;
 use Rebilly\Services;
+use Rebilly\Tests\Stub\JsonObject;
 use Rebilly\Tests\TestCase;
 use Psr\Http\Message\RequestInterface as Request;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
@@ -400,7 +401,9 @@ class ApiTest extends TestCase
 
         $service = $client->paymentCards();
 
-        $result = $service->createFromToken('token', ['customerId' => $faker->uuid]);
+        $card = new JsonObject(['customerId' => $faker->uuid]);
+
+        $result = $service->createFromToken('token', $card);
         $this->assertInstanceOf(Entities\PaymentCard::class, $result);
 
         $result = $service->createFromToken('token', ['customerId' => $faker->uuid], 'dummy');
