@@ -76,6 +76,14 @@ final class Transaction extends Entity
     /**
      * @return string
      */
+    public function getResult()
+    {
+        return $this->getAttribute('result');
+    }
+
+    /**
+     * @return string
+     */
     public function getParentTransactionId()
     {
         return $this->getAttribute('parentTransaction');
