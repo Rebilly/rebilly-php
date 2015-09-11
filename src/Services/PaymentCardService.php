@@ -69,24 +69,27 @@ final class PaymentCardService extends Service
     }
 
     /**
-     * @param string|array|JsonSerializable|PaymentCardToken $data
+     * @param string|array|JsonSerializable|PaymentCardToken $token
+     * @param array|JsonSerializable|PaymentCard $data
      * @param string $cardId
      *
      * @throws UnprocessableEntityException The input data does not valid
      *
      * @return PaymentCard
      */
-    public function createFromToken($data, $cardId = null)
+    public function createFromToken($token, $data, $cardId = null)
     {
-        if (is_string($data)) {
-            $data = ['token' => $data];
+        if ($data instanceof JsonSerializable) {
+            $data = $data->jsonSerialize();
         }
 
-        if (isset($cardId)) {
-            return $this->client()->put($data, 'payment-cards/{cardId}', ['cardId' => $cardId]);
+        if (is_string($token)) {
+            $data['token'] = $token;
         } else {
-            return $this->client()->post($data, 'payment-cards');
+            $data['token'] = $token['token'];
         }
+
+        return $this->create($data, $cardId);
     }
 
     /**
