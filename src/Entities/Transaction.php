@@ -136,4 +136,12 @@ final class Transaction extends Entity
     {
         return $this->getAttribute('paymentCard');
     }
+
+    /**
+     * @return string
+     */
+    public function getResult()
+    {
+        return $this->getAttribute('result');
+    }
 }
