@@ -74,8 +74,8 @@ final class PaymentCardTokenService extends Service
      *
      * @return PaymentCardToken
      */
-    public function expire($tokenId, $params = [])
+    public function expire($tokenId, $data = [])
     {
-        return $this->client()->post(['tokenId' => $tokenId] + (array) $params, 'tokens/'.$tokenId.'/expiration');
+        return $this->client()->post(['tokenId' => $tokenId] + (array) $data, 'tokens/'.$tokenId.'/expiration');
     }
 }
