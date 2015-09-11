@@ -380,6 +380,7 @@ class ApiTest extends TestCase
      */
     public function paymentCardService()
     {
+        $faker = $this->getFaker();
         $client = new Client(['apiKey' => 'QWERTY']);
 
         /** @var CurlHandler|MockObject $handler */
@@ -399,10 +400,10 @@ class ApiTest extends TestCase
 
         $service = $client->paymentCards();
 
-        $result = $service->createFromToken('token');
+        $result = $service->createFromToken('token', ['customerId' => $faker->uuid]);
         $this->assertInstanceOf(Entities\PaymentCard::class, $result);
 
-        $result = $service->createFromToken('token', 'dummy');
+        $result = $service->createFromToken('token', ['customerId' => $faker->uuid], 'dummy');
         $this->assertInstanceOf(Entities\PaymentCard::class, $result);
 
         $result = $service->authorize([], 'dummy');
