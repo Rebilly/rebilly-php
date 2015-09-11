@@ -128,7 +128,7 @@ final class Organization extends Entity
      */
     public function getCountry()
     {
-        return $this->getAttribute('region');
+        return $this->getAttribute('country');
     }
 
     /**
