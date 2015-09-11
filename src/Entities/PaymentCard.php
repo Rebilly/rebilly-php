@@ -161,4 +161,14 @@ final class PaymentCard extends Entity
     {
         return $this->setAttribute('cvv', $value);
     }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setToken($value)
+    {
+        return $this->setAttribute('token', $value);
+    }
 }
