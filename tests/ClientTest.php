@@ -221,7 +221,7 @@ final class ClientTest extends TestCase
                 }
 
                 $body = $response->getBody();
-                $body->write(json_encode(['id' => 'dummy']));
+                $body->write(json_encode([['id' => 'dummy']]));
 
                 return $response->withBody($body);
             },

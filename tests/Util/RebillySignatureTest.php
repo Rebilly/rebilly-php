@@ -16,7 +16,6 @@ use RuntimeException;
 
 /**
  * Class RebillySignatureTest.
- * @group wip
  */
 class RebillySignatureTest extends TestCase
 {
