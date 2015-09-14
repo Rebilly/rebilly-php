@@ -182,6 +182,14 @@ final class Subscription extends Entity
     }
 
     /**
+     * @return string
+     */
+    public function getCreatedTime()
+    {
+        return $this->getAttribute('createdTime');
+    }
+
+    /**
      * @param string $value
      *
      * @return $this
