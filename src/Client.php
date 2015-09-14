@@ -394,6 +394,10 @@ final class Client
 
         $uri = $location->getPath();
 
+        // Rewind stream
+        // see: https://github.com/guzzle/psr7/issues/38
+        $response->getBody()->rewind();
+
         // Unserialize response body
         $content = json_decode($response->getBody()->getContents(), true);
 
