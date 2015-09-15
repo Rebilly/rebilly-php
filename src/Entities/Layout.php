@@ -23,13 +23,13 @@ use Rebilly\Rest\Entity;
  * }
  * ```
  *
- * @todo Items
- *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
  */
 final class Layout extends Entity
 {
+    private $_items = [];
+
     /**
      * @return string
      */
@@ -54,5 +54,21 @@ final class Layout extends Entity
     public function getItems()
     {
         return $this->getAttribute('items');
+    }
+
+    /**
+     * @param $planId
+     * @param bool|false $starred
+     *
+     * @return $this
+     */
+    public function addItem($planId, $starred = false)
+    {
+        $this->_items[] = [
+            'planId' => $planId,
+            'starred' => (bool)$starred
+        ];
+
+        return $this->setAttribute('items', $this->_items);
     }
 }
