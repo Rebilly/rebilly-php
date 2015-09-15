@@ -66,7 +66,7 @@ final class Layout extends Entity
     {
         $this->_items[] = [
             'planId' => $planId,
-            'starred' => (bool)$starred
+            'starred' => (bool) $starred
         ];
 
         return $this->setAttribute('items', $this->_items);
