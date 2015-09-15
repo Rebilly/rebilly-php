@@ -19,6 +19,7 @@ use Rebilly\Services;
 use Rebilly\Tests\Stub\JsonObject;
 use Rebilly\Tests\TestCase;
 use Psr\Http\Message\RequestInterface as Request;
+use GuzzleHttp\Psr7;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
 
 /**
@@ -417,6 +418,56 @@ class ApiTest extends TestCase
     }
 
     /**
+     * @test
+     * @group wip
+     */
+    public function layoutService()
+    {
+        $faker = $this->getFaker();
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->getMock(CurlHandler::class);
+
+        $layout = new Entities\Layout();
+        $layout->addItem([
+            'planId' => $faker->uuid,
+            'starred' => true,
+        ]);
+        $layout->setItems([
+            [
+                'planId' => $faker->uuid,
+                'starred' => true,
+            ],
+            new Entities\LayoutItem([
+                'planId' => $faker->uuid,
+            ])
+        ]);
+
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client
+                    ->createResponse()
+                    ->withHeader('Location', 'layouts/dummy')
+                    ->withBody(Psr7\stream_for(json_encode($layout)))
+            ));
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+
+        $service = $client->layouts();
+
+        $result = $service->create($layout);
+        $this->assertInstanceOf(Entities\Layout::class, $result);
+        $this->assertCount(2, $result->getItems());
+        $this->assertInstanceOf(Entities\LayoutItem::class, $result->getItems()[0]);
+    }
+
+    /**
      * @return array
      */
     public function provideEntityClasses()
@@ -431,6 +482,7 @@ class ApiTest extends TestCase
             [Entities\Invoice::class],
             [Entities\InvoiceItem::class],
             [Entities\Layout::class],
+            [Entities\LayoutItem::class, null],
             [Entities\LeadSource::class],
             [Entities\Payment::class],
             [Entities\PaymentMethods\PaymentCardMethod::class, null],
@@ -647,6 +699,7 @@ class ApiTest extends TestCase
                 return $faker->md5;
             case 'isActive':
             case 'archived':
+            case 'starred':
                 return $faker->boolean();
             case 'credentialTtl':
             case 'authTokenTtl':
@@ -699,6 +752,23 @@ class ApiTest extends TestCase
                     case Entities\SubscriptionCancel::class:
                     case Entities\SubscriptionSwitch::class:
                         return $faker->randomElement(Entities\SubscriptionCancel::policies());
+                    default:
+                        throw new InvalidArgumentException(
+                            sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
+                        );
+                }
+            case 'items':
+                switch ($class) {
+                    case Entities\Layout::class:
+                        return [
+                            new Entities\LayoutItem([
+                                'planId' => 'foo',
+                                'starred' => true,
+                            ]),
+                            new Entities\LayoutItem([
+                                'planId' => 'bar',
+                            ]),
+                        ];
                     default:
                         throw new InvalidArgumentException(
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
