@@ -59,9 +59,9 @@ final class PaymentCardAuthorization extends Resource
     /**
      * @return string
      */
-    public function getProcessorAccountId()
+    public function getGatewayAccountId()
     {
-        return $this->getAttribute('processorAccountId');
+        return $this->getAttribute('gatewayAccountId');
     }
 
     /**
@@ -69,8 +69,8 @@ final class PaymentCardAuthorization extends Resource
      *
      * @return PaymentCardAuthorization
      */
-    public function setProcessorAccountId($value)
+    public function setGatewayAccountId($value)
     {
-        return $this->setAttribute('processorAccountId', $value);
+        return $this->setAttribute('gatewayAccountId', $value);
     }
 }
