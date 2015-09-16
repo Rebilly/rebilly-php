@@ -65,4 +65,12 @@ final class ResetPasswordTokenService extends Service
             return $this->client()->post($data, 'password-tokens');
         }
     }
+
+    /**
+     * @param string $token
+     */
+    public function delete($token)
+    {
+        $this->client()->delete('password-tokens/{token}', ['token' => $token]);
+    }
 }
