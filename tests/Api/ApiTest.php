@@ -419,7 +419,6 @@ class ApiTest extends TestCase
 
     /**
      * @test
-     * @group wip
      */
     public function layoutService()
     {
