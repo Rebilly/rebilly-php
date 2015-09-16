@@ -15,9 +15,6 @@ use Rebilly\Rest\Resource;
 /**
  * Class PaymentCardAuthorization
  *
- * @todo Rename property `website` to `websiteId`
- * @todo Rename property `processorAccount` to `processorAccountId`
- *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
  */
@@ -46,7 +43,7 @@ final class PaymentCardAuthorization extends Resource
      */
     public function getWebsiteId()
     {
-        return $this->getAttribute('website');
+        return $this->getAttribute('websiteId');
     }
 
     /**
@@ -56,7 +53,7 @@ final class PaymentCardAuthorization extends Resource
      */
     public function setWebsiteId($value)
     {
-        return $this->setAttribute('website', $value);
+        return $this->setAttribute('websiteId', $value);
     }
 
     /**
@@ -64,7 +61,7 @@ final class PaymentCardAuthorization extends Resource
      */
     public function getProcessorAccountId()
     {
-        return $this->getAttribute('processorAccount');
+        return $this->getAttribute('processorAccountId');
     }
 
     /**
@@ -74,6 +71,6 @@ final class PaymentCardAuthorization extends Resource
      */
     public function setProcessorAccountId($value)
     {
-        return $this->setAttribute('processorAccount', $value);
+        return $this->setAttribute('processorAccountId', $value);
     }
 }
