@@ -392,7 +392,7 @@ final class Client
             ? $this->createUri($response->getHeaderLine('Location'))
             : $request->getUri();
 
-        $uri = $location->getPath();
+        $uri = urldecode($location->getPath());
 
         // Rewind stream
         // see: https://github.com/guzzle/psr7/issues/38
