@@ -394,15 +394,29 @@ final class Client
 
         $uri = urldecode($location->getPath());
 
-        // Rewind stream
-        // see: https://github.com/guzzle/psr7/issues/38
-        $response->getBody()->rewind();
-
         // Unserialize response body
-        $content = json_decode($response->getBody()->getContents(), true);
+        $content = json_decode((string) $response->getBody(), true) ?: [];
 
         // Build expected resource
-        $resource = $this->factory->create($uri, $content);
+        $resource = $this->factory->create($uri, []);
+
+        if ($resource instanceof Rest\Collection) {
+            $content = [
+                'data' => $content,
+                '_metadata' => [
+                    'uri' => $uri,
+                    'limit' => (int) $response->getHeaderLine('X-Pagination-Limit'),
+                    'offset' => (int) $response->getHeaderLine('X-Pagination-Offset'),
+                    'total' => (int) $response->getHeaderLine('X-Pagination-Total'),
+                ],
+            ];
+        } else {
+            $content['_metadata'] = [
+                'uri' => $uri,
+            ];
+        }
+
+        $resource->populate($content);
 
         return $resource;
     }
