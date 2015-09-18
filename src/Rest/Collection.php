@@ -12,6 +12,7 @@ namespace Rebilly\Rest;
 
 use ArrayIterator;
 use ArrayAccess;
+use ArrayObject;
 use Countable;
 use Iterator;
 use LogicException;
@@ -26,14 +27,19 @@ use JsonSerializable;
  */
 class Collection implements JsonSerializable, IteratorAggregate, ArrayAccess, Countable
 {
+    /** @var ArrayObject */
+    private $metadata;
+
     /** @var Resource */
     private $prototype;
 
-    /** @var Resource[] */
+    /** @var Resource[]|Entity[] */
     private $items = [];
 
     public function __construct(Resource $prototype, $items = [])
     {
+        $this->metadata = new ArrayObject();
+
         $this->prototype = $prototype;
 
         if (!empty($items)) {
@@ -42,15 +48,36 @@ class Collection implements JsonSerializable, IteratorAggregate, ArrayAccess, Co
     }
 
     /**
-     * @param array $items
+     * Clone private objects on entity clone.
      */
-    final public function populate(array $items)
+    public function __clone()
+    {
+        $this->metadata = clone $this->metadata;
+
+        foreach ($this->items as $index => $item) {
+            $this->items[$index] = clone $item;
+        }
+    }
+
+    /**
+     * @param array $data
+     */
+    final public function populate(array $data)
     {
         $this->items = [];
 
-        foreach ($items as $data) {
+        if (isset($data['_metadata'])) {
+            $this->metadata->exchangeArray($data['_metadata']);
+            unset($data['_metadata']);
+        }
+
+        if (isset($data['data'])) {
+            $data = $data['data'];
+        }
+
+        foreach ($data as $row) {
             $item = clone $this->prototype;
-            $item->populate($data);
+            $item->populate($row);
             $this->items[] = $item;
         }
     }
@@ -116,5 +143,39 @@ class Collection implements JsonSerializable, IteratorAggregate, ArrayAccess, Co
     public function offsetUnset($offset)
     {
         throw new LogicException();
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return mixed
+     */
+    final protected function getMetadata($name)
+    {
+        return isset($this->metadata[$name]) ? $this->metadata[$name] : null;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOffset()
+    {
+        return $this->getMetadata('offset');
+    }
+
+    /**
+     * @return int
+     */
+    public function getLimit()
+    {
+        return $this->getMetadata('limit');
+    }
+
+    /**
+     * @return int
+     */
+    public function getTotalItems()
+    {
+        return $this->getMetadata('total');
     }
 }
