@@ -62,4 +62,19 @@ final class LayoutItem extends Resource
     {
         return $this->setAttribute('starred', (bool) $value);
     }
+
+    /**
+     * @todo Get Plan from embedded data
+     * @return Plan|null
+     */
+    public function getPlan()
+    {
+        $values = $this->getAttribute('plan');
+
+        if ($values !== null) {
+            return new Plan($values);
+        } else {
+            return null;
+        }
+    }
 }
