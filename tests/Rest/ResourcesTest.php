@@ -115,8 +115,9 @@ class ResourcesTest extends TestCase
         $resource->offsetUnset('field1');
         $resource->offsetSet('field2', 'dummy');
 
-        $this->assertTrue($resource->offsetExists('field1'));
-        $this->assertFalse($resource->offsetExists('field3'));
+        $this->assertFalse(isset($resource['field1']));
+        $this->assertTrue(isset($resource['field2']));
+        $this->assertFalse(isset($resource['field3']));
 
         $this->assertEquals(null, $resource->offsetGet('field1'));
         $this->assertEquals('dummy', $resource->offsetGet('field2'));
