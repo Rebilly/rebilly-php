@@ -65,4 +65,9 @@ final class EntityStub extends Entity
     {
         return $this->getLink('self');
     }
+
+    public function getCustomMetadata()
+    {
+        return $this->getMetadata('customMeta');
+    }
 }

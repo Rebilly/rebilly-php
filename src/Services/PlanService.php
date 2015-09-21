@@ -15,6 +15,7 @@ use JsonSerializable;
 use Rebilly\Entities\Plan;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
+use Rebilly\Paginator;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
 
@@ -26,6 +27,16 @@ use Rebilly\Rest\Service;
  */
 final class PlanService extends Service
 {
+    /**
+     * @param array|ArrayObject $params
+     *
+     * @return Plan[][]|Collection[]|Paginator
+     */
+    public function paginator($params = [])
+    {
+        return new Paginator($this->client(), 'plans', $params);
+    }
+
     /**
      * @param array|ArrayObject $params
      *

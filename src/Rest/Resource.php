@@ -25,6 +25,9 @@ use DomainException;
 abstract class Resource implements JsonSerializable, ArrayAccess
 {
     /** @var ArrayObject */
+    private $metadata;
+
+    /** @var ArrayObject */
     private $data;
 
     /** @var ArrayObject */
@@ -40,6 +43,7 @@ abstract class Resource implements JsonSerializable, ArrayAccess
      */
     public function __construct(array $data = [])
     {
+        $this->metadata = new ArrayObject();
         $this->data = new ArrayObject();
         $this->embeddedData = new ArrayObject();
         $this->links = new ArrayObject();
@@ -54,6 +58,7 @@ abstract class Resource implements JsonSerializable, ArrayAccess
      */
     public function __clone()
     {
+        $this->metadata = clone $this->metadata;
         $this->data = clone $this->data;
         $this->embeddedData = clone $this->embeddedData;
         $this->links = clone $this->links;
@@ -64,6 +69,11 @@ abstract class Resource implements JsonSerializable, ArrayAccess
      */
     final public function populate(array $data)
     {
+        if (isset($data['_metadata'])) {
+            $this->metadata->exchangeArray($data['_metadata']);
+            unset($data['_metadata']);
+        }
+
         if (isset($data['_embedded'])) {
             $this->embeddedData->exchangeArray($data['_embedded']);
             unset($data['_embedded']);
@@ -127,7 +137,7 @@ abstract class Resource implements JsonSerializable, ArrayAccess
      */
     final protected function getEmbeddedResource($name)
     {
-        return isset($this->embeddedData[$name]) ? $this->embeddedData[$name] : null;
+        return $this->hasEmbeddedResource($name) ? $this->embeddedData[$name] : null;
     }
 
     /**
@@ -138,6 +148,16 @@ abstract class Resource implements JsonSerializable, ArrayAccess
     final protected function getLink($name)
     {
         return isset($this->links[$name]) ? $this->links[$name] : null;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return mixed
+     */
+    final protected function getMetadata($name)
+    {
+        return isset($this->metadata[$name]) ? $this->metadata[$name] : null;
     }
 
     /**
