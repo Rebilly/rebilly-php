@@ -137,7 +137,7 @@ abstract class Resource implements JsonSerializable, ArrayAccess
      */
     final protected function getEmbeddedResource($name)
     {
-        return isset($this->embeddedData[$name]) ? $this->embeddedData[$name] : null;
+        return $this->hasEmbeddedResource($name) ? $this->embeddedData[$name] : null;
     }
 
     /**
