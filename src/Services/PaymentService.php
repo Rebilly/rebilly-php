@@ -15,6 +15,7 @@ use JsonSerializable;
 use Rebilly\Http\Exception\GoneException;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
+use Rebilly\Paginator;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
 use Rebilly\Entities;
@@ -27,6 +28,16 @@ use Rebilly\Entities;
  */
 final class PaymentService extends Service
 {
+    /**
+     * @param array|ArrayObject $params
+     *
+     * @return Entities\Payment[][]|Collection[]|Paginator
+     */
+    public function paginator($params = [])
+    {
+        return new Paginator($this->client(), 'payments', $params);
+    }
+
     /**
      * @param array|ArrayObject $params
      *
@@ -65,6 +76,16 @@ final class PaymentService extends Service
         } else {
             return $this->client()->post($payment, 'payments');
         }
+    }
+
+    /**
+     * @param array|ArrayObject $params
+     *
+     * @return Entities\ScheduledPayment[][]|Collection[]|Paginator
+     */
+    public function paginatorForQueue($params = [])
+    {
+        return new Paginator($this->client(), 'queue/payments', $params);
     }
 
     /**

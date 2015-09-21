@@ -15,6 +15,7 @@ use JsonSerializable;
 use Rebilly\Entities\Contact;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
+use Rebilly\Paginator;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
 
@@ -26,6 +27,16 @@ use Rebilly\Rest\Service;
  */
 final class ContactService extends Service
 {
+    /**
+     * @param array|ArrayObject $params
+     *
+     * @return Contact[][]|Collection[]|Paginator
+     */
+    public function paginator($params = [])
+    {
+        return new Paginator($this->client(), 'contacts', $params);
+    }
+
     /**
      * @param array|ArrayObject $params
      *
