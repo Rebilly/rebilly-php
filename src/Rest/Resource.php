@@ -101,6 +101,16 @@ abstract class Resource implements JsonSerializable, ArrayAccess
     /**
      * @param string $name
      *
+     * @return bool
+     */
+    final protected function hasAttribute($name)
+    {
+        return method_exists($this, 'get' . $name) || method_exists($this, 'set' . $name);
+    }
+
+    /**
+     * @param string $name
+     *
      * @return mixed
      */
     final protected function getAttribute($name)
@@ -165,7 +175,7 @@ abstract class Resource implements JsonSerializable, ArrayAccess
      */
     public function offsetExists($offset)
     {
-        return method_exists($this, 'get' . $offset) || method_exists($this, 'set' . $offset);
+        return $this->hasAttribute($offset) && $this->getAttribute($offset) !== null;
     }
 
     /**
