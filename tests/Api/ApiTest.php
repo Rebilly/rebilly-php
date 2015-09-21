@@ -14,6 +14,7 @@ use InvalidArgumentException;
 use Rebilly\Client;
 use Rebilly\Entities;
 use Rebilly\Http\CurlHandler;
+use Rebilly\Paginator;
 use Rebilly\Rest;
 use Rebilly\Services;
 use Rebilly\Tests\Stub\JsonObject;
@@ -115,6 +116,11 @@ class ApiTest extends TestCase
 
         $service = $client->$name();
         $this->assertInstanceOf($serviceClass, $service);
+
+        if (method_exists($service, 'paginator')) {
+            $paginator = $service->paginator();
+            $this->assertInstanceOf(Paginator::class, $paginator);
+        }
 
         if (method_exists($service, 'search')) {
             $set = $service->search();
@@ -256,6 +262,11 @@ class ApiTest extends TestCase
             ->will($this->returnValue($client->createResponse()));
 
         $handler
+            ->expects($this->at(1))
+            ->method('__invoke')
+            ->will($this->returnValue($client->createResponse()));
+
+        $handler
             ->expects($this->any())
             ->method('__invoke')
             ->will($this->returnValue(
@@ -268,6 +279,9 @@ class ApiTest extends TestCase
         ]);
 
         $service = $client->invoiceItems();
+
+        $paginator = $service->paginator('invoiceId');
+        $this->assertInstanceOf(Paginator::class, $paginator);
 
         $result = $service->search('invoiceId');
         $this->assertInstanceOf(Rest\Collection::class, $result);
@@ -359,6 +373,11 @@ class ApiTest extends TestCase
         $handler
             ->expects($this->at(1))
             ->method('__invoke')
+            ->will($this->returnValue($client->createResponse()));
+
+        $handler
+            ->expects($this->at(1))
+            ->method('__invoke')
             ->will($this->returnValue(
                 $client->createResponse()->withHeader('Location', 'queue/payments/dummy')
             ));
@@ -369,6 +388,9 @@ class ApiTest extends TestCase
         ]);
 
         $service = $client->payments();
+
+        $paginator = $service->paginatorForQueue();
+        $this->assertInstanceOf(Paginator::class, $paginator);
 
         $result = $service->searchInQueue();
         $this->assertInstanceOf(Rest\Collection::class, $result);
