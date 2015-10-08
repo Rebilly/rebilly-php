@@ -54,6 +54,10 @@ class ApiTest extends TestCase
         $methods = get_class_methods($resource);
 
         foreach ($methods as $method) {
+            if (in_array($method, ['getEmbeddedResource'])) {
+                continue;
+            }
+
             $prefix = substr($method, 0, 3);
 
             if ($prefix === 'get') {
