@@ -27,6 +27,7 @@ use Rebilly\Rest\Entity;
  *   "billingContact": "ADDRESS1",
  *   "createdTime": "2015-02-11 04:45:23",
  *   "updatedTime": "2015-02-11 04:45:23"
+ *   "customFields": []
  * }
  * ```
  *
@@ -160,5 +161,23 @@ final class PaymentCard extends Entity
     public function setCvv($value)
     {
         return $this->setAttribute('cvv', $value);
+    }
+
+    /**
+     * @return array
+     */
+    public function getCustomFields()
+    {
+        return $this->getAttribute('customFields');
+    }
+
+    /**
+     * @param array $value
+     *
+     * @return $this
+     */
+    public function setCustomFields($value)
+    {
+        return $this->setAttribute('customFields', $value);
     }
 }

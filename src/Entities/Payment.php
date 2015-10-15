@@ -31,6 +31,7 @@ use Rebilly\Rest\Entity;
  *     "key": "value"
  *   },
  *   "description": 'string'
+ *   "customFields": 'array'
  * }
  * ```
  *
@@ -190,5 +191,23 @@ final class Payment extends Entity
         return $this
             ->setAttribute('method', $value->name())
             ->setAttribute('paymentInstrument', $value->jsonSerialize());
+    }
+
+    /**
+     * @return array
+     */
+    public function getCustomFields()
+    {
+        return $this->getAttribute('customFields');
+    }
+
+    /**
+     * @param array $value
+     *
+     * @return $this
+     */
+    public function setCustomFields($value)
+    {
+        return $this->setAttribute('customFields', $value);
     }
 }
