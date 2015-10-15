@@ -811,6 +811,8 @@ class ApiTest extends TestCase
                 );
             case 'method':
                 return new Entities\PaymentMethods\PaymentCardMethod(); // TODO
+            case 'customFields':
+                return [];
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)

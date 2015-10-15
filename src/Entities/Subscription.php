@@ -25,6 +25,7 @@ use Rebilly\Rest\Entity;
  *   "billingContactId"
  *   "deliveryContactId"
  *   "quantity"
+ *   "customFields"
  * }
  * ```
  *
@@ -197,5 +198,23 @@ final class Subscription extends Entity
     public function setRenewalTime($value)
     {
         return $this->setAttribute('renewalTime', $value);
+    }
+
+    /**
+     * @return array
+     */
+    public function getCustomFields()
+    {
+        return $this->getAttribute('customFields');
+    }
+
+    /**
+     * @param array $value
+     *
+     * @return $this
+     */
+    public function setCustomFields($value)
+    {
+        return $this->setAttribute('customFields', $value);
     }
 }

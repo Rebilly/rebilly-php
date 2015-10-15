@@ -26,6 +26,7 @@ use Rebilly\Rest\Entity;
  *   "webHookUrl"
  *   "webHookUsername"
  *   "webHookPassword"
+ *   "customFields"
  * }
  * ```
  *
@@ -184,5 +185,23 @@ final class Website extends Entity
     public function setWebHookPassword($value)
     {
         return $this->setAttribute('webHookPassword', $value);
+    }
+
+    /**
+     * @return array
+     */
+    public function getCustomFields()
+    {
+        return $this->getAttribute('customFields');
+    }
+
+    /**
+     * @param array $value
+     *
+     * @return $this
+     */
+    public function setCustomFields($value)
+    {
+        return $this->setAttribute('customFields', $value);
     }
 }
