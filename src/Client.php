@@ -394,6 +394,9 @@ final class Client
 
         $uri = urldecode($location->getPath());
 
+        // Remove version from URI
+        $uri = preg_replace('#^/' . self::CURRENT_VERSION . '#', '', $uri);
+
         // Unserialize response body
         $content = json_decode((string) $response->getBody(), true) ?: [];
 
