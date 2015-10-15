@@ -52,7 +52,7 @@ final class Factory
                 }
             }
 
-            $this->patterns['#' . $pattern . '$#i'] = $uri;
+            $this->patterns['#^' . $pattern . '$#i'] = $uri;
         }
 
         // Sort patterns to ensure that longer more precisely pattern comes first
