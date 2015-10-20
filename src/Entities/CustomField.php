@@ -36,6 +36,7 @@ final class CustomField extends Entity
     const RESOURCE_TYPE_PAYMENTS = 'payments';
     const RESOURCE_TYPE_SUBSCRIPTIONS = 'subscriptions';
     const RESOURCE_TYPE_WEBSITES = 'websites';
+    const RESOURCE_TYPE_CONTACTS = 'contacts';
 
     const TYPE_ARRAY = 'array';
     const TYPE_BOOLEAN = 'boolean';

@@ -31,6 +31,7 @@ use Rebilly\Rest\Entity;
  *   "phoneNumber"
  *   "createdTime",
  *   "updatedTime",
+ *   "customFields"
  * }
  * ```
  *
@@ -245,5 +246,23 @@ final class Contact extends Entity
     public function getCreatedTime()
     {
         return $this->getAttribute('createdTime');
+    }
+
+    /**
+     * @return array
+     */
+    public function getCustomFields()
+    {
+        return $this->getAttribute('customFields');
+    }
+
+    /**
+     * @param array $value
+     *
+     * @return $this
+     */
+    public function setCustomFields($value)
+    {
+        return $this->setAttribute('customFields', $value);
     }
 }
