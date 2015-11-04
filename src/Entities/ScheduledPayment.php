@@ -20,7 +20,8 @@ use Rebilly\Rest\Entity;
  *   "id": 'string',
  *   "createdTime": 'datetime',
  *   "updatedTime": 'datetime',
- *   "state": 'enum',
+ *   "status": 'enum',
+ *   "result": 'enum',
  *   "payment": {
  *     "website": 'string',
  *     "customer": 'string',
@@ -51,11 +52,28 @@ final class ScheduledPayment extends Entity
     }
 
     /**
+     * @deprecated
      * @return string
      */
     public function getState()
     {
         return $this->getAttribute('state');
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->getAttribute('status');
+    }
+
+    /**
+     * @return string
+     */
+    public function getResult()
+    {
+        return $this->getAttribute('result');
     }
 
     /**
@@ -81,7 +99,7 @@ final class ScheduledPayment extends Entity
      */
     public function isApprovalRequired()
     {
-        return $this->getState() === 'suspended' && $this->getLink('approval_link') !== null;
+        return $this->getStatus() === 'suspended' && $this->getApprovalLink() !== null;
     }
 
     /**
@@ -89,6 +107,6 @@ final class ScheduledPayment extends Entity
      */
     public function getApprovalLink()
     {
-        return $this->getLink('approval_link');
+        return $this->getLink('approval_url');
     }
 }
