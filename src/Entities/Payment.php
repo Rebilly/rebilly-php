@@ -63,11 +63,28 @@ final class Payment extends Entity
     }
 
     /**
+     * @deprecated
      * @return string
      */
     public function getState()
     {
         return $this->getAttribute('state');
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->getAttribute('status');
+    }
+
+    /**
+     * @return string
+     */
+    public function getResult()
+    {
+        return $this->getAttribute('result');
     }
 
     /**
