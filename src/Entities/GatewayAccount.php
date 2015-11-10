@@ -48,6 +48,16 @@ final class GatewayAccount extends Entity
     }
 
     /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setGatewayName($value)
+    {
+        return $this->setAttribute('gatewayName', $value);
+    }
+
+    /**
      * @return int
      */
     public function getMerchantCategoryCode()
@@ -149,7 +159,7 @@ final class GatewayAccount extends Entity
             }
         }
 
-        return $this->setAttribute('websites', $value);
+        return $this->setAttribute('websites', $websites);
     }
 
     /**
