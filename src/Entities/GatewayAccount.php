@@ -20,17 +20,20 @@ use Rebilly\Rest\Entity;
  * {
  *   "id"
  *   "gatewayName",
+ *   "gatewayConfig",
  *   "merchantCategoryCode",
- *   "descriptor",
- *   "city",
+ *   "acquirerName'"
  *   "organizationId",
  *   "websites",
- *   "acquirerName'"
+ *   "paymentMethods"
+ *   "descriptor",
+ *   "city",
+ *   "dynamicDescriptor"
+ *   "can3DSecure"
  *   "monthlyLimit",
  *   "acceptedCurrencies",
  *   "downtimeStart",
  *   "downtimeEnd",
- *   "gatewayConfig",
  * }
  * ```
  *
@@ -39,6 +42,42 @@ use Rebilly\Rest\Entity;
  */
 final class GatewayAccount extends Entity
 {
+    const PAYMENT_METHOD_VISA = 'Visa';
+    const PAYMENT_METHOD_MASTERCARD = 'Mastercard';
+    const PAYMENT_METHOD_AMERICAN_EXPRESS = 'American_Express';
+    const PAYMENT_METHOD_DISCOVER = 'Discover';
+    const PAYMENT_METHOD_MAESTRO = 'Maestro';
+    const PAYMENT_METHOD_SOLO = 'Solo';
+    const PAYMENT_METHOD_ELECTRON = 'Electron';
+    const PAYMENT_METHOD_JCB = 'JCB';
+    const PAYMENT_METHOD_VOYAGER = 'Voyager';
+    const PAYMENT_METHOD_DINERS_CLUB = 'Diners_Club';
+    const PAYMENT_METHOD_SWITCH = 'Switch';
+    const PAYMENT_METHOD_LASER = 'Laser';
+
+    const MSG_UNEXPECTED_TYPE = 'Unexpected payment method. Only %s methods support';
+
+    /**
+     * @return array
+     */
+    public static function allowedPaymentMethods()
+    {
+        return [
+            self::PAYMENT_METHOD_VISA,
+            self::PAYMENT_METHOD_MASTERCARD,
+            self::PAYMENT_METHOD_AMERICAN_EXPRESS,
+            self::PAYMENT_METHOD_DISCOVER,
+            self::PAYMENT_METHOD_MAESTRO,
+            self::PAYMENT_METHOD_SOLO,
+            self::PAYMENT_METHOD_ELECTRON,
+            self::PAYMENT_METHOD_JCB,
+            self::PAYMENT_METHOD_VOYAGER,
+            self::PAYMENT_METHOD_DINERS_CLUB,
+            self::PAYMENT_METHOD_SWITCH,
+            self::PAYMENT_METHOD_LASER
+        ];
+    }
+
     /**
      * @return string
      */
@@ -260,5 +299,65 @@ final class GatewayAccount extends Entity
     public function setGatewayConfig($value)
     {
         return $this->setAttribute('gatewayConfig', $value);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getDynamicDescriptor()
+    {
+        return $this->getAttribute('dynamicDescriptor');
+    }
+
+    /**
+     * @param bool $value
+     *
+     * @return $this
+     */
+    public function setDynamicDescriptor($value)
+    {
+        return $this->setAttribute('dynamicDescriptor', $value);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getCan3DSecure()
+    {
+        return $this->getAttribute('can3DSecure');
+    }
+
+    /**
+     * @param bool $value
+     *
+     * @return $this
+     */
+    public function setCan3DSecure($value)
+    {
+        return $this->setAttribute('can3DSecure', $value);
+    }
+
+    /**
+     * @return array
+     */
+    public function getPaymentMethods()
+    {
+        return $this->getAttribute('paymentMethods');
+    }
+
+    /**
+     * @param array $value
+     *
+     * @return $this
+     */
+    public function setPaymentMethods($value)
+    {
+        foreach ($value as $paymentMethod) {
+            if (!in_array($paymentMethod, self::allowedPaymentMethods())) {
+                throw new DomainException(sprintf(self::MSG_UNEXPECTED_TYPE, implode(', ', self::allowedPaymentMethods())));
+            }
+        }
+
+        return $this->setAttribute('paymentMethods', $value);
     }
 }
