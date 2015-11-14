@@ -55,6 +55,9 @@ final class GatewayAccount extends Entity
     const PAYMENT_METHOD_SWITCH = 'Switch';
     const PAYMENT_METHOD_LASER = 'Laser';
 
+    const TYPE_3DSECURE_INTEGRATED = 'integrated';
+    const TYPE_3DSECURE_EXTERNAL = 'external';
+
     const MSG_UNEXPECTED_TYPE = 'Unexpected payment method. Only %s methods support';
 
     /**
@@ -322,9 +325,9 @@ final class GatewayAccount extends Entity
     /**
      * @return bool
      */
-    public function getCan3DSecure()
+    public function getThreeDSecure()
     {
-        return $this->getAttribute('can3DSecure');
+        return $this->getAttribute('threeDSecure');
     }
 
     /**
@@ -332,9 +335,27 @@ final class GatewayAccount extends Entity
      *
      * @return $this
      */
-    public function setCan3DSecure($value)
+    public function setThreeDSecure($value)
     {
-        return $this->setAttribute('can3DSecure', $value);
+        return $this->setAttribute('threeDSecure', $value);
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getThreeDSecureType()
+    {
+        return $this->getAttribute('threeDSecureType');
+    }
+
+    /**
+     * @param null|string $value
+     *
+     * @return $this
+     */
+    public function setThreeDSecureType($value)
+    {
+        return $this->setAttribute('threeDSecureType', $value);
     }
 
     /**
