@@ -50,6 +50,14 @@ final class AuthenticationToken extends Entity
     /**
      * @return string
      */
+    public function getCredentialId()
+    {
+        return $this->getAttribute('credentialId');
+    }
+
+    /**
+     * @return string
+     */
     public function getUsername()
     {
         return $this->getAttribute('username');
