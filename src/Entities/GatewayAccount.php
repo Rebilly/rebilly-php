@@ -374,7 +374,7 @@ final class GatewayAccount extends Entity
         $allowedPaymentMethods = self::allowedPaymentMethods();
         foreach ($value as $paymentMethod) {
             if (!in_array($paymentMethod, $allowedPaymentMethods)) {
-                throw new DomainException(sprintf(self::MSG_UNEXPECTED_TYPE, implode(', ', self::allowedPaymentMethods())));
+                throw new DomainException(sprintf(self::MSG_UNEXPECTED_TYPE, implode(', ', $allowedPaymentMethods)));
             }
         }
 
