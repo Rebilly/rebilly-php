@@ -159,6 +159,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'custom-fields/{resourceType}/{name}' => function (array $content) {
                 return new CustomField($content);
             },
+            'gateway-accounts' => function (array $content) {
+                return new Collection(new GatewayAccount(), $content);
+            },
+            'gateway-accounts/{gatewayAccountId}' => function (array $content) {
+                return new GatewayAccount($content);
+            },
         ];
     }
 
