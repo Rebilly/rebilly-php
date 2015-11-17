@@ -31,7 +31,6 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
-
         if (!getenv(ApiKeyProvider::ENV_APIKEY)) {
             $this->markTestSkipped();
         } else {

@@ -50,6 +50,9 @@ class ResourcesTest extends TestCase
                     'href' => 'http://example.com',
                 ],
             ],
+            '_metadata' => [
+                'customMeta' => 'value',
+            ],
         ];
     }
 
@@ -101,7 +104,9 @@ class ResourcesTest extends TestCase
      */
     public function initEntity(Factory $factory)
     {
-        $resource = $factory->create('stubs/uuid', $this->fakeData);
+        /** @var EntityStub $resource */
+        $resource = $factory->create('stubs/uuid', []);
+        $resource->populate($this->fakeData);
 
         $this->assertInstanceOf(EntityStub::class, $resource);
         $this->assertEquals('uuid', $resource->getId());
@@ -110,8 +115,9 @@ class ResourcesTest extends TestCase
         $resource->offsetUnset('field1');
         $resource->offsetSet('field2', 'dummy');
 
-        $this->assertTrue($resource->offsetExists('field1'));
-        $this->assertFalse($resource->offsetExists('field3'));
+        $this->assertFalse(isset($resource['field1']));
+        $this->assertTrue(isset($resource['field2']));
+        $this->assertFalse(isset($resource['field3']));
 
         $this->assertEquals(null, $resource->offsetGet('field1'));
         $this->assertEquals('dummy', $resource->offsetGet('field2'));
@@ -120,6 +126,8 @@ class ResourcesTest extends TestCase
         $this->assertEquals(null, $resource->getRelation2());
 
         $this->assertEquals('http://example.com', $resource->getSelfLink());
+
+        $this->assertEquals('value', $resource->getCustomMetadata());
 
         return $resource;
     }
@@ -209,12 +217,35 @@ class ResourcesTest extends TestCase
      */
     public function initCollection(Factory $factory)
     {
-        $set = $factory->create('stubs', [$this->fakeData]);
+        $set = $factory->create('stubs', [
+            'data' => [$this->fakeData],
+            '_metadata' => [
+                'total' => 1,
+                'limit' => 100,
+                'offset' => 0,
+            ],
+        ]);
 
         $this->assertInstanceOf(Collection::class, $set);
         $this->assertGreaterThan(0, count($set));
 
+        $this->assertEquals(1, $set->getTotalItems());
+        $this->assertEquals(100, $set->getLimit());
+        $this->assertEquals(0, $set->getOffset());
+
         return $set;
+    }
+
+    /**
+     * @test
+     * @depends initCollection
+     *
+     * @param Collection $set
+     */
+    public function cloneCollection(Collection $set)
+    {
+        $clone = clone $set;
+        $this->assertNotEquals(spl_object_hash($set[0]), spl_object_hash($clone[0]));
     }
 
     /**

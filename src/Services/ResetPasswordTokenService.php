@@ -15,6 +15,7 @@ use JsonSerializable;
 use Rebilly\Entities\ResetPasswordToken;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
+use Rebilly\Paginator;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
 
@@ -26,6 +27,16 @@ use Rebilly\Rest\Service;
  */
 final class ResetPasswordTokenService extends Service
 {
+    /**
+     * @param array|ArrayObject $params
+     *
+     * @return ResetPasswordToken[][]|Collection[]|Paginator
+     */
+    public function paginator($params = [])
+    {
+        return new Paginator($this->client(), 'password-tokens', $params);
+    }
+
     /**
      * @param array|ArrayObject $params
      *
@@ -64,5 +75,13 @@ final class ResetPasswordTokenService extends Service
         } else {
             return $this->client()->post($data, 'password-tokens');
         }
+    }
+
+    /**
+     * @param string $token
+     */
+    public function delete($token)
+    {
+        $this->client()->delete('password-tokens/{token}', ['token' => $token]);
     }
 }

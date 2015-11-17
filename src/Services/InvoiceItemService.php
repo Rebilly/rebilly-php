@@ -15,6 +15,7 @@ use JsonSerializable;
 use Rebilly\Entities\InvoiceItem;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
+use Rebilly\Paginator;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
 
@@ -28,6 +29,21 @@ use Rebilly\Rest\Service;
  */
 final class InvoiceItemService extends Service
 {
+    /**
+     * @param string $invoiceId
+     * @param array|ArrayObject $params
+     *
+     * @return InvoiceItem[][]|Collection[]|Paginator
+     */
+    public function paginator($invoiceId, $params = [])
+    {
+        return new Paginator(
+            $this->client(),
+            'invoices/{invoiceId}/items',
+            ['invoiceId' => $invoiceId] + (array) $params
+        );
+    }
+
     /**
      * @param string $invoiceId
      * @param array|ArrayObject $params

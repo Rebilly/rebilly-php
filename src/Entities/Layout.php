@@ -10,6 +10,7 @@
 
 namespace Rebilly\Entities;
 
+use DomainException;
 use Rebilly\Rest\Entity;
 
 /**
@@ -18,12 +19,10 @@ use Rebilly\Rest\Entity;
  * ```json
  * {
  *   "id",
- *   "name"
+ *   "name",
  *   "items"
  * }
  * ```
- *
- * @todo Items
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
@@ -49,10 +48,53 @@ final class Layout extends Entity
     }
 
     /**
-     * @return string
+     * @return array|LayoutItem[]
      */
     public function getItems()
     {
-        return $this->getAttribute('items');
+        $items = $this->getAttribute('items') ?: [];
+
+        foreach ($items as $i => $item) {
+            $items[$i] = new LayoutItem($item);
+        }
+
+        return $items;
+    }
+
+    /**
+     * @param array|LayoutItem[] $values
+     *
+     * @return $this
+     */
+    public function setItems($values)
+    {
+        $this->setAttribute('items', []);
+
+        foreach ($values as $value) {
+            $this->addItem($value);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param array|LayoutItem $value
+     *
+     * @throws DomainException
+     *
+     * @return $this
+     */
+    public function addItem($value)
+    {
+        if ($value instanceof LayoutItem) {
+            $value = $value->jsonSerialize();
+        } elseif (!is_array($value)) {
+            throw new DomainException('Invalid layout item');
+        }
+
+        $items = $this->getAttribute('items') ?: [];
+        $items[] = $value;
+
+        return $this->setAttribute('items', $items);
     }
 }

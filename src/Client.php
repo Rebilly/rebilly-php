@@ -68,6 +68,8 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\WebsiteService websites()
  * @method Services\NoteService notes()
  * @method Services\OrganizationService organizations()
+ * @method Services\CustomFieldService customFields()
+ * @method Services\GatewayAccountService gatewayAccounts()
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
@@ -99,6 +101,8 @@ final class Client
         'websites' => Services\WebsiteService::class,
         'notes' => Services\NoteService::class,
         'organizations' => Services\OrganizationService::class,
+        'customFields' => Services\CustomFieldService::class,
+        'gatewayAccounts' => Services\GatewayAccountService::class,
     ];
 
     /** @var array */
@@ -392,13 +396,34 @@ final class Client
             ? $this->createUri($response->getHeaderLine('Location'))
             : $request->getUri();
 
-        $uri = $location->getPath();
+        $uri = urldecode($location->getPath());
+
+        // Remove version from URI
+        $uri = preg_replace('#^/' . self::CURRENT_VERSION . '#', '', $uri);
 
         // Unserialize response body
-        $content = json_decode($response->getBody()->getContents(), true);
+        $content = json_decode((string) $response->getBody(), true) ?: [];
 
         // Build expected resource
-        $resource = $this->factory->create($uri, $content);
+        $resource = $this->factory->create($uri, []);
+
+        if ($resource instanceof Rest\Collection) {
+            $content = [
+                'data' => $content,
+                '_metadata' => [
+                    'uri' => $uri,
+                    'limit' => (int) $response->getHeaderLine('X-Pagination-Limit'),
+                    'offset' => (int) $response->getHeaderLine('X-Pagination-Offset'),
+                    'total' => (int) $response->getHeaderLine('X-Pagination-Total'),
+                ],
+            ];
+        } else {
+            $content['_metadata'] = [
+                'uri' => $uri,
+            ];
+        }
+
+        $resource->populate($content);
 
         return $resource;
     }

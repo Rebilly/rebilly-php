@@ -15,6 +15,7 @@ use JsonSerializable;
 use Rebilly\Entities\PaymentCardToken;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
+use Rebilly\Paginator;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
 
@@ -27,20 +28,13 @@ use Rebilly\Rest\Service;
 final class PaymentCardTokenService extends Service
 {
     /**
-     * @param array|JsonSerializable|PaymentCardToken $data
-     * @param string $tokenId
+     * @param array|ArrayObject $params
      *
-     * @throws UnprocessableEntityException The input data does not valid
-     *
-     * @return PaymentCardToken
+     * @return PaymentCardToken[][]|Collection[]|Paginator
      */
-    public function create($data, $tokenId = null)
+    public function paginator($params = [])
     {
-        if (isset($tokenId)) {
-            return $this->client()->put($data, 'tokens/{tokenId}', ['tokenId' => $tokenId]);
-        } else {
-            return $this->client()->post($data, 'tokens');
-        }
+        return new Paginator($this->client(), 'tokens', $params);
     }
 
     /**
@@ -64,6 +58,23 @@ final class PaymentCardTokenService extends Service
     public function load($tokenId, $params = [])
     {
         return $this->client()->get('tokens/{tokenId}', ['tokenId' => $tokenId] + (array) $params);
+    }
+
+    /**
+     * @param array|JsonSerializable|PaymentCardToken $data
+     * @param string $tokenId
+     *
+     * @throws UnprocessableEntityException The input data does not valid
+     *
+     * @return PaymentCardToken
+     */
+    public function create($data, $tokenId = null)
+    {
+        if (isset($tokenId)) {
+            return $this->client()->put($data, 'tokens/{tokenId}', ['tokenId' => $tokenId]);
+        } else {
+            return $this->client()->post($data, 'tokens');
+        }
     }
 
     /**

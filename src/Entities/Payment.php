@@ -21,7 +21,8 @@ use Rebilly\Rest\Entity;
  *   "id": 'string',
  *   "createdTime": 'datetime',
  *   "updatedTime": 'datetime',
- *   "state": 'enum',
+ *   "status": 'enum',
+ *   "result": 'enum',
  *   "website": 'string',
  *   "customer": 'string',
  *   "amount": 'float',
@@ -31,6 +32,7 @@ use Rebilly\Rest\Entity;
  *     "key": "value"
  *   },
  *   "description": 'string'
+ *   "customFields": 'array'
  * }
  * ```
  *
@@ -62,11 +64,28 @@ final class Payment extends Entity
     }
 
     /**
+     * @deprecated
      * @return string
      */
     public function getState()
     {
         return $this->getAttribute('state');
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->getAttribute('status');
+    }
+
+    /**
+     * @return string
+     */
+    public function getResult()
+    {
+        return $this->getAttribute('result');
     }
 
     /**
@@ -92,7 +111,7 @@ final class Payment extends Entity
      */
     public function getWebsiteId()
     {
-        return $this->getAttribute('website');
+        return $this->getAttribute('websiteId');
     }
 
     /**
@@ -102,7 +121,7 @@ final class Payment extends Entity
      */
     public function setWebsiteId($value)
     {
-        return $this->setAttribute('website', $value);
+        return $this->setAttribute('websiteId', $value);
     }
 
     /**
@@ -110,7 +129,7 @@ final class Payment extends Entity
      */
     public function getCustomerId()
     {
-        return $this->getAttribute('customer');
+        return $this->getAttribute('customerId');
     }
 
     /**
@@ -120,7 +139,7 @@ final class Payment extends Entity
      */
     public function setCustomerId($value)
     {
-        return $this->setAttribute('customer', $value);
+        return $this->setAttribute('customerId', $value);
     }
 
     /**
@@ -190,5 +209,23 @@ final class Payment extends Entity
         return $this
             ->setAttribute('method', $value->name())
             ->setAttribute('paymentInstrument', $value->jsonSerialize());
+    }
+
+    /**
+     * @return array
+     */
+    public function getCustomFields()
+    {
+        return $this->getAttribute('customFields');
+    }
+
+    /**
+     * @param array $value
+     *
+     * @return $this
+     */
+    public function setCustomFields($value)
+    {
+        return $this->setAttribute('customFields', $value);
     }
 }
