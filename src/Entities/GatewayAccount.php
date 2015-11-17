@@ -185,12 +185,10 @@ final class GatewayAccount extends Entity
      * @return $this
      * @throws DomainException
      */
-    public function setWebsites($value)
+    public function setWebsites(array $value)
     {
         $websites = [];
-        if (!is_array($value)) {
-            throw new DomainException('Websites must be an array');
-        }
+
         foreach ($value as $website) {
             if ($website instanceof Website) {
                 $websites[] = $website->getId();
@@ -373,9 +371,10 @@ final class GatewayAccount extends Entity
      */
     public function setPaymentMethods($value)
     {
+        $allowedPaymentMethods = self::allowedPaymentMethods();
         foreach ($value as $paymentMethod) {
-            if (!in_array($paymentMethod, self::allowedPaymentMethods())) {
-                throw new DomainException(sprintf(self::MSG_UNEXPECTED_TYPE, implode(', ', self::allowedPaymentMethods())));
+            if (!in_array($paymentMethod, $allowedPaymentMethods)) {
+                throw new DomainException(sprintf(self::MSG_UNEXPECTED_TYPE, implode(', ', $allowedPaymentMethods)));
             }
         }
 
