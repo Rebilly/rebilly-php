@@ -20,11 +20,9 @@ use Rebilly\Rest\Entity;
  *   "token"
  *   "username"
  *   "password"
- *   "expiredAt"
+ *   "expiredTime"
  * }
  * ```
- *
- * @todo Make time properties consistent, rename `expiredAt` to `expiredTime`
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
@@ -88,7 +86,7 @@ final class ResetPasswordToken extends Entity
      */
     public function getExpiredTime()
     {
-        return $this->getAttribute('expiredAt');
+        return $this->getAttribute('expiredTime');
     }
 
     /**
@@ -98,6 +96,6 @@ final class ResetPasswordToken extends Entity
      */
     public function setExpiredTime($value)
     {
-        return $this->setAttribute('expiredAt', $value);
+        return $this->setAttribute('expiredTime', $value);
     }
 }
