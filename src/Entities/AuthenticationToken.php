@@ -74,14 +74,6 @@ final class AuthenticationToken extends Entity
     }
 
     /**
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->getAttribute('password');
-    }
-
-    /**
      * @param string $value
      *
      * @return $this
@@ -108,4 +100,13 @@ final class AuthenticationToken extends Entity
     {
         return $this->setAttribute('expiredAt', $value);
     }
+
+    /**
+     * @return string
+     */
+    public function getCustomerId()
+    {
+        return $this->getAttribute('customerId');
+    }
+
 }
