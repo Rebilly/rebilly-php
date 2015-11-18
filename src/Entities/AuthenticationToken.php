@@ -108,5 +108,4 @@ final class AuthenticationToken extends Entity
     {
         return $this->getAttribute('customerId');
     }
-
 }
