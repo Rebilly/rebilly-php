@@ -380,4 +380,12 @@ final class GatewayAccount extends Entity
 
         return $this->setAttribute('paymentMethods', $value);
     }
+
+    /**
+     * @return string
+     */
+    public function getCreatedTime()
+    {
+        return $this->getAttribute('createdTime');
+    }
 }
