@@ -58,6 +58,14 @@ final class Invoice extends Entity
     }
 
     /**
+     * @return string
+     */
+    public function getAmount()
+    {
+        return $this->getAttribute('amount');
+    }
+
+    /**
      * @param string $value
      *
      * @return $this
