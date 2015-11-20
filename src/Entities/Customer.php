@@ -122,6 +122,18 @@ final class Customer extends Entity
     }
 
     /**
+     * @return null|PaymentCard
+     */
+    public function getDefaultCard()
+    {
+        if ($this->hasEmbeddedResource('defaultCard')) {
+            return new PaymentCard($this->getEmbeddedResource('defaultCard'));
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * @param string $value
      *
      * @return $this

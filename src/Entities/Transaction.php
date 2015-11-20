@@ -136,4 +136,16 @@ final class Transaction extends Entity
     {
         return $this->getAttribute('paymentCard');
     }
+
+    /**
+     * @return null|PaymentCard
+     */
+    public function getPaymentCard()
+    {
+        if ($this->hasEmbeddedResource('paymentCard')) {
+            return new PaymentCard($this->getEmbeddedResource('paymentCard'));
+        } else {
+            return null;
+        }
+    }
 }

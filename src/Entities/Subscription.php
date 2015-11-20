@@ -87,11 +87,15 @@ final class Subscription extends Entity
     }
 
     /**
-     * @return array
+     * @return null|Plan
      */
     public function getPlan()
     {
-        return $this->getAttribute('plan');
+        if ($this->hasEmbeddedResource('plan')) {
+            return new Plan($this->getEmbeddedResource('plan'));
+        } else {
+            return null;
+        }
     }
 
     /**
