@@ -108,6 +108,14 @@ final class Plan extends Entity
     }
 
     /**
+     * @return string
+     */
+    public function getCurrencySign()
+    {
+        return $this->getAttribute('currencySign');
+    }
+
+    /**
      * @param string $value
      *
      * @return $this

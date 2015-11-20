@@ -61,6 +61,14 @@ final class Subscription extends Entity
     }
 
     /**
+     * @return string
+     */
+    public function getInitialInvoiceId()
+    {
+        return $this->getAttribute('getInitialInvoiceId');
+    }
+
+    /**
      * @param string $value
      *
      * @return Subscription
@@ -76,6 +84,14 @@ final class Subscription extends Entity
     public function getPlanId()
     {
         return $this->getAttribute('planId');
+    }
+
+    /**
+     * @return array
+     */
+    public function getPlan()
+    {
+        return $this->getAttribute('plan');
     }
 
     /**
