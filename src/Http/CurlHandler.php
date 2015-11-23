@@ -169,6 +169,10 @@ class CurlHandler implements HttpHandler
 
             $headerSize = $session->getInfo(CURLINFO_HEADER_SIZE);
 
+            if (strlen($result) < $headerSize) {
+                throw new Exception\TransferException('Header size(' . $headerSize . ') does not match result: ' . $result);
+            }
+
             $result = [
                 substr($result, $headerSize),
                 substr($result, 0, $headerSize) ?: null
