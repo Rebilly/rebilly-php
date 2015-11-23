@@ -42,6 +42,14 @@ final class ResetPasswordToken extends Entity
     /**
      * @return string
      */
+    public function getCredentialId()
+    {
+        return $this->getAttribute('credentialId');
+    }
+
+    /**
+     * @return string
+     */
     public function getToken()
     {
         return $this->getAttribute('token');
