@@ -170,7 +170,7 @@ class CurlHandler implements HttpHandler
             $headerSize = $session->getInfo(CURLINFO_HEADER_SIZE);
 
             $result = [
-                substr($result, $headerSize),
+                substr($result, $headerSize) ?: null,
                 substr($result, 0, $headerSize) ?: null
             ];
         } finally {
