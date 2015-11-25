@@ -111,4 +111,9 @@ final class PaymentService extends Service
     {
         return $this->client()->get('queue/payments/{paymentId}', ['paymentId' => $paymentId] + (array) $params);
     }
+
+    public function cancel($paymentId, $data = [])
+    {
+        return $this->client()->post($data, 'payments/{paymentId}/cancel', ['paymentId' => $paymentId]);
+    }
 }
