@@ -18,6 +18,7 @@ use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Paginator;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
+use Rebilly\Rest\File;
 
 /**
  * Class InvoiceService
@@ -119,5 +120,20 @@ final class InvoiceService extends Service
     public function issue($invoiceId, $issuedTime)
     {
         return $this->client()->post(['issuedTime' => $issuedTime], 'invoices/{invoiceId}/issue', ['invoiceId' => $invoiceId]);
+    }
+
+    /**
+     * @param string $invoiceId
+     * @param array $params
+     *
+     * @return File
+     */
+    public function loadPdf($invoiceId, $params = [])
+    {
+        return $this->client()->get(
+            'invoices/{invoiceId}',
+            ['invoiceId' => $invoiceId] + (array) $params,
+            ['accept' => 'application/pdf']
+        );
     }
 }
