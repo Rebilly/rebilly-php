@@ -32,13 +32,11 @@ class FileTest extends TestCase
                 'httpHandler' => function () use ($client) {
                     $response = $client
                         ->createResponse()
-                        ->withHeader('Content-Type', 'application/pdf')
-                    ;
+                        ->withHeader('Content-Type', 'application/pdf');
 
                     $response
                         ->getBody()
-                        ->write(file_get_contents(__DIR__ . '/Stub/invoice.pdf'))
-                    ;
+                        ->write(file_get_contents(__DIR__ . '/Stub/invoice.pdf'));
 
                     return $response;
                 },
