@@ -703,6 +703,7 @@ class ApiTest extends TestCase
             case 'path':
                 return $faker->words;
             case 'description':
+            case 'richDescription':
                 return $faker->sentences;
             case 'pan':
                 return $faker->creditCardNumber;

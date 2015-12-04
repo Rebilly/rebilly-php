@@ -22,6 +22,7 @@ use Rebilly\Rest\Entity;
  *   "name"
  *   "currency"
  *   "description"
+ *   "richDescription"
  *   "recurringAmount"
  *   "recurringPeriodUnit"
  *   "recurringPeriodLength"
@@ -97,6 +98,24 @@ final class Plan extends Entity
     public function setDescription($value)
     {
         return $this->setAttribute('description', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getRichDescription()
+    {
+        return $this->getAttribute('richDescription');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setRichDescription($value)
+    {
+        return $this->setAttribute('richDescription', $value);
     }
 
     /**
