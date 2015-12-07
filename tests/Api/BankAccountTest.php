@@ -23,22 +23,22 @@ class BankAccountTest extends TestCase
     /**
      * @test
      */
-    public function searchTheContactTests()
+    public function searchBankAccount()
     {
         $client = $this->getClient();
 
-        $contacts = $client->contacts()->search();
+        $bankAccounts = $client->bankAccounts()->search();
 
-        $this->assertInstanceOf(Collection::class, $contacts);
-        $this->assertGreaterThan(0, count($contacts));
+        $this->assertInstanceOf(Collection::class, $bankAccounts);
+        $this->assertGreaterThan(0, count($bankAccounts));
 
-        return $contacts[0];
+        return $bankAccounts[0];
     }
 
     /**
      * @test
      */
-    public function createTheCustomer()
+    public function createBankAccount()
     {
         $client = $this->getClient();
 
