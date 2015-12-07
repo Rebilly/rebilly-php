@@ -30,6 +30,15 @@ final class Schema implements IteratorAggregate, ArrayAccess
     public function __construct()
     {
         $this->builders = [
+            'bank-accounts' => function (array $content) {
+                return new Collection(new BankAccount(), $content);
+            },
+            'bank-accounts/{bankAccountId}' => function (array $content) {
+                return new BankAccount($content);
+            },
+            'bank-accounts/{bankAccountId}/deactivation' => function (array $content) {
+                return new BankAccount($content);
+            },
             'blacklists' => function (array $content) {
                 return new Collection(new Blacklist(), $content);
             },
