@@ -168,7 +168,7 @@ final class BankAccount extends Entity
     }
 
     /**
-     * @return null|Customer
+     * @return null|Contact
      */
     public function getContact()
     {
