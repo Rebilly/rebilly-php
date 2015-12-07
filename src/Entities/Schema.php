@@ -36,9 +36,6 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'bank-accounts/{bankAccountId}' => function (array $content) {
                 return new BankAccount($content);
             },
-            'bank-accounts/{bankAccountId}/deactivation' => function (array $content) {
-                return new BankAccount($content);
-            },
             'blacklists' => function (array $content) {
                 return new Collection(new Blacklist(), $content);
             },
