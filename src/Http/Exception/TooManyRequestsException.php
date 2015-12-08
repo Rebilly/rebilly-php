@@ -26,7 +26,7 @@ final class TooManyRequestsException extends ClientException
     public function __construct($retryAfter, $rateLimit = 0, $message = '', $code = 0, Exception $previous = null)
     {
         $this->retryAfter = $retryAfter;
-        $this->rateLimit = $rateLimit;
+        $this->rateLimit = (int) $rateLimit;
 
         parent::__construct(429, $message, $code, $previous);
     }
