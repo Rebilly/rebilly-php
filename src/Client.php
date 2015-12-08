@@ -375,6 +375,14 @@ final class Client
             throw new Http\Exception\UnprocessableEntityException($content);
         }
 
+        if ($response->getStatusCode() === 429) {
+            throw new Http\Exception\TooManyRequestsException(
+                $response->getHeaderLine('Retry-After'),
+                $response->getHeaderLine('X-Rate-Limit-Limit'),
+                'Too many requests, retry after ' . $response->getHeaderLine('Retry-After')
+            );
+        }
+
         if ($response->getStatusCode() >= 500) {
             throw new Http\Exception\ServerException(
                 $response->getStatusCode(),
