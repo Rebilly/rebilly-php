@@ -14,6 +14,7 @@ use ArrayObject;
 use BadMethodCallException;
 use Rebilly\Http\CurlHandler;
 use Rebilly\Middleware\LogHandler;
+use Rebilly\Rest\File;
 use RuntimeException;
 use InvalidArgumentException;
 use Psr\Http\Message\RequestInterface as Request;
@@ -401,6 +402,35 @@ final class Client
             return null;
         }
 
+        $responseParsers = [
+            'application/json' => [$this, 'parseJsonResponseBody'],
+            'application/pdf' => [$this, 'parseBinaryResponseBody'],
+        ];
+
+        $mediaTypePattern = '/^([a-z0-9]+\/[a-z0-9]+).*/i';
+
+        if (preg_match($mediaTypePattern, $response->getHeaderLine('Content-Type'), $matches)) {
+            $contentType = strtolower($matches[1]);
+        } else {
+            $contentType = 'application/json';
+        }
+
+        if (!isset($responseParsers[$contentType])) {
+            throw new InvalidArgumentException(sprintf('Unsupported "%s" response', $contentType));
+        }
+
+        return call_user_func($responseParsers[$contentType], $request, $response, $contentType);
+    }
+
+    /**
+     * @param Request $request
+     * @param Response $response
+     * @param string $type
+     *
+     * @return mixed
+     */
+    protected function parseJsonResponseBody(Request $request, Response $response, $type)
+    {
         // Find resource type (URL) in response location or request url
         $location = $response->hasHeader('Location')
             ? $this->createUri($response->getHeaderLine('Location'))
@@ -436,6 +466,20 @@ final class Client
         $resource->populate($content);
 
         return $resource;
+    }
+
+    /**
+     * @param Request $request
+     * @param Response $response
+     * @param string $type
+     *
+     * @return File
+     */
+    protected function parseBinaryResponseBody(Request $request, Response $response, $type)
+    {
+        $body = $response->getBody();
+
+        return new File($type, (string) $body, $body->getSize());
     }
 
     /**
