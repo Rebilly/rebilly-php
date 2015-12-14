@@ -48,7 +48,7 @@ final class JwtAuthentication implements Middleware
         $jwt = JwtAuth::getJwt();
 
         if (null !== $jwt && !JwtAuth::isExpiredJwt($jwt)) {
-            $request = $request->withHeader(JwtAuth::TOKEN_NAME, $jwt);
+            $request = $request->withHeader(JwtAuth::HEADER, $jwt);
         } else {
             $request = $request->withHeader(self::HEADER, $this->key);
         }

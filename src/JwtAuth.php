@@ -12,7 +12,7 @@ namespace Rebilly;
 
 use Lcobucci\JWT\Parser;
 use Lcobucci\JWT\ValidationData;
-use Exception;
+use BadMethodCallException;
 
 /**
  * Class JwtAuth
@@ -22,7 +22,9 @@ use Exception;
  */
 class JwtAuth
 {
-    const TOKEN_NAME = 'REB-JWT';
+    const HEADER = 'Authorization';
+    const JWT_FILE = '.rebilly/jwt.ini';
+
 
     public static function isExpiredJwt($token)
     {
@@ -32,22 +34,15 @@ class JwtAuth
 
     public static function getJwt()
     {
-        self::startSession();
-        return isset($_SESSION[self::TOKEN_NAME]) ? $_SESSION[self::TOKEN_NAME] : null;
+        if (file_exists(self::JWT_FILE)) {
+            return file_get_contents(self::JWT_FILE);
+        }
+
+        return null;
     }
 
     public static function saveJwt($token)
     {
-        self::startSession();
-        $_SESSION[self::TOKEN_NAME] = $token;
-    }
-
-    private static function startSession()
-    {
-        if (session_status() !== PHP_SESSION_ACTIVE) {
-            if (!session_start()) {
-                throw new Exception('Session start fail');
-            }
-        }
+        file_put_contents(self::JWT_FILE, $token);
     }
 }

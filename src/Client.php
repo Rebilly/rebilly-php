@@ -398,8 +398,8 @@ final class Client
             );
         }
 
-        if ($response->hasHeader(JwtAuth::TOKEN_NAME)) {
-            JwtAuth::saveJwt($response->getHeader(JwtAuth::TOKEN_NAME)[0]);
+        if ($response->hasHeader(JwtAuth::HEADER)) {
+            JwtAuth::saveJwt($response->getHeader(JwtAuth::HEADER)[0]);
         }
 
         if (in_array($request->getMethod(), ['HEAD', 'DELETE'])) {
