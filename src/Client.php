@@ -200,7 +200,7 @@ final class Client
         // Prepare middleware stack
         $this->middleware = new Middleware\CompositeMiddleware(
             new Middleware\BaseUri($this->createUri($baseUrl . '/' . Client::CURRENT_VERSION)),
-            new Middleware\ApiKeyAuthentication($apiKey),
+            new Middleware\JwtAuthentication($apiKey),
             $middleware,
             $logger
         );
@@ -396,6 +396,10 @@ final class Client
                 $response->getStatusCode(),
                 $response->getReasonPhrase()
             );
+        }
+
+        if ($response->hasHeader(JwtAuth::HEADER)) {
+            JwtAuth::saveJwt($response->getHeader(JwtAuth::HEADER)[0]);
         }
 
         if (in_array($request->getMethod(), ['HEAD', 'DELETE'])) {
