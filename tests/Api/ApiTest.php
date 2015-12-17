@@ -732,8 +732,6 @@ class ApiTest extends TestCase
             case 'recurringPeriodLimit':
             case 'minQuantity':
             case 'maxQuantity':
-            case 'gatewayTimeout':
-                return $faker->numberBetween(1, 10);
             case 'address2':
                 return $faker->address;
             case 'postalCode':
