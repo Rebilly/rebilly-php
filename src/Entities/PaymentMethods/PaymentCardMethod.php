@@ -62,5 +62,4 @@ final class PaymentCardMethod extends PaymentMethod
     {
         return $this->getAttribute('gatewayAccountId');
     }
-
 }
