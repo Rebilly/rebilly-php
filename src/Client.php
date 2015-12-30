@@ -72,6 +72,7 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\OrganizationService organizations()
  * @method Services\CustomFieldService customFields()
  * @method Services\GatewayAccountService gatewayAccounts()
+ * @method Services\SessionService sessions()
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
@@ -106,6 +107,7 @@ final class Client
         'organizations' => Services\OrganizationService::class,
         'customFields' => Services\CustomFieldService::class,
         'gatewayAccounts' => Services\GatewayAccountService::class,
+        'sessions' => Services\SessionService::class,
     ];
 
     /** @var array */
