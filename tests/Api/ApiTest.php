@@ -119,11 +119,13 @@ class ApiTest extends TestCase
 
         if (method_exists($service, 'paginator')) {
             $paginator = $service->paginator();
+
             $this->assertInstanceOf(Paginator::class, $paginator);
         }
 
         if (method_exists($service, 'search')) {
             $set = $service->search();
+
             $this->assertInstanceOf(Rest\Collection::class, $set);
         }
 
@@ -442,6 +444,42 @@ class ApiTest extends TestCase
     /**
      * @test
      */
+    public function customFieldService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => function () use ($client) {
+                return $client->createResponse();
+            },
+        ]);
+
+        $service = $client->customFields();
+        $entityClass = Entities\CustomField::class;
+        $resourceType = Entities\CustomField::RESOURCE_TYPE_CUSTOMERS;
+
+        $paginator = $service->paginator($resourceType);
+        $this->assertInstanceOf(Paginator::class, $paginator);
+
+        $entity = $service->create($resourceType, $this->getFakeValue('id', $entityClass), []);
+        $this->assertInstanceOf($entityClass, $entity);
+
+        $set = $service->search($resourceType);
+        $this->assertInstanceOf(Rest\Collection::class, $set);
+
+        $entity = $service->load($resourceType, $this->getFakeValue('id', $entityClass));
+        $this->assertInstanceOf($entityClass, $entity);
+
+        $entity = $service->update($resourceType, $this->getFakeValue('id', $entityClass), []);
+        $this->assertInstanceOf($entityClass, $entity);
+
+        $service->delete($resourceType, $this->getFakeValue('id', $entityClass));
+    }
+
+    /**
+     * @test
+     */
     public function layoutService()
     {
         $faker = $this->getFaker();
@@ -520,6 +558,9 @@ class ApiTest extends TestCase
             [Entities\Website::class],
             [Entities\Note::class],
             [Entities\Organization::class],
+            [Entities\GatewayAccount::class],
+            [Entities\BankAccount::class],
+            [Entities\CustomField::class, 'name'],
         ];
     }
 
@@ -632,6 +673,16 @@ class ApiTest extends TestCase
                 Services\OrganizationService::class,
                 Entities\Organization::class,
             ],
+            [
+                'gatewayAccounts',
+                Services\GatewayAccountService::class,
+                Entities\GatewayAccount::class,
+            ],
+            [
+                'bankAccounts',
+                Services\BankAccountService::class,
+                Entities\BankAccount::class,
+            ],
         ];
     }
 
@@ -651,6 +702,7 @@ class ApiTest extends TestCase
             case 'id':
             case 'password':
             case 'customerId':
+            case 'contactId':
             case 'websiteId':
             case 'initialInvoiceId':
             case 'billingContactId':
@@ -668,6 +720,8 @@ class ApiTest extends TestCase
             case 'periodStartTime':
             case 'renewalTime':
             case 'periodEndTime':
+            case 'downtimeStart':
+            case 'downtimeEnd':
                 return $faker->date('Y-m-d H:i:s');
             case 'unitPrice':
             case 'amount':
@@ -676,6 +730,11 @@ class ApiTest extends TestCase
             case 'setupAmount':
                 return $faker->randomFloat(2);
             case 'checkoutPageUri':
+            case 'gatewayName':
+            case 'organizationId':
+            case 'acquirerName':
+            case 'routingNumber':
+            case 'accountNumber':
                 return $faker->word;
             case 'organization':
                 return $faker->company;
@@ -701,6 +760,7 @@ class ApiTest extends TestCase
             case 'salesAgent':
             case 'clickId':
             case 'path':
+            case 'descriptor':
                 return $faker->words;
             case 'description':
             case 'richDescription':
@@ -733,6 +793,7 @@ class ApiTest extends TestCase
             case 'recurringPeriodLimit':
             case 'minQuantity':
             case 'maxQuantity':
+            case 'monthlyLimit':
                 return $faker->numberBetween(1, 10);
             case 'address2':
                 return $faker->address;
@@ -754,6 +815,8 @@ class ApiTest extends TestCase
                         return $faker->randomElement(Entities\Blacklist::types());
                     case Entities\InvoiceItem::class:
                         return $faker->randomElement(Entities\InvoiceItem::types());
+                    case Entities\CustomField::class:
+                        return $faker->randomElement(Entities\CustomField::allowedTypes());
                     default:
                         throw new InvalidArgumentException(
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
@@ -812,7 +875,24 @@ class ApiTest extends TestCase
             case 'method':
                 return new Entities\PaymentMethods\PaymentCardMethod(); // TODO
             case 'customFields':
+            case 'gatewayConfig':
+            case 'additionalSchema':
                 return [];
+            case 'websites':
+                return [$faker->word];
+            case 'acceptedCurrencies':
+                return ['USD'];
+            case 'dynamicDescriptor':
+            case 'threeDSecure':
+                return false;
+            case 'threeDSecureType':
+                return 'integrated';
+            case 'paymentMethods':
+                return ['Visa'];
+            case 'merchantCategoryCode':
+                return 5966;
+            case 'accountType':
+                return 'checking';
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
