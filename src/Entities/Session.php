@@ -118,8 +118,8 @@ final class Session extends Entity
      */
     public function setPermissions($value)
     {
-        $allowedResources = self::getAllowedResources();
-        $allowedMethods = self::getAllowedMethods();
+        $allowedResources = self::allowedResources();
+        $allowedMethods = self::allowedMethods();
 
         if (!is_array($value)) {
             throw new DomainException(self::MSG_INVALID_FORMAT);
@@ -157,7 +157,7 @@ final class Session extends Entity
     /**
      * @return array
      */
-    public static function getAllowedResources()
+    public static function allowedResources()
     {
         return [
             self::WILDCARD,
@@ -189,7 +189,7 @@ final class Session extends Entity
     /**
      * @return array
      */
-    public static function getAllowedMethods()
+    public static function allowedMethods()
     {
         return [
             self::METHOD_GET,

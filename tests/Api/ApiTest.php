@@ -561,6 +561,7 @@ class ApiTest extends TestCase
             [Entities\GatewayAccount::class],
             [Entities\BankAccount::class],
             [Entities\CustomField::class, 'name'],
+            [Entities\Session::class],
         ];
     }
 
@@ -682,6 +683,11 @@ class ApiTest extends TestCase
                 'bankAccounts',
                 Services\BankAccountService::class,
                 Entities\BankAccount::class,
+            ],
+            [
+                'sessions',
+                Services\SessionService::class,
+                Entities\Session::class,
             ],
         ];
     }
@@ -893,6 +899,8 @@ class ApiTest extends TestCase
                 return 5966;
             case 'accountType':
                 return 'checking';
+            case 'permissions':
+                return [];
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
