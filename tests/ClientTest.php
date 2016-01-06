@@ -57,7 +57,7 @@ final class ClientTest extends TestCase
         try {
             new Client([]);
         } catch (RuntimeException $e) {
-            $this->assertEquals('Missed API Key', $e->getMessage());
+            $this->assertEquals('Missing Authentication information', $e->getMessage());
         }
 
         try {

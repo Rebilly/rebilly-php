@@ -130,6 +130,8 @@ final class Client
      *
      * - apiKey: (callable|string) Specifies the APIKEY used to sign requests.
      *   A callable provider should return APIKEY string.
+     * - sessionToken: (callable|string) Specifies the JWT token used to sign requests.
+     *   A callable provider should return JWT token string.
      * - baseUrl: (string) The full URI of the webservice. This is only
      *   required when connecting to a custom endpoint (e.g., a tests).
      * - httpHandler: (callable) An HTTP handler is a Closure that accepts a PSR-7 request object
@@ -150,12 +152,16 @@ final class Client
     {
         extract($options, EXTR_SKIP);
 
-        if (!isset($apiKey)) {
-            throw new RuntimeException('Missed API Key');
-        }
-
-        if (is_callable($apiKey)) {
-            $apiKey = (string) call_user_func($apiKey);
+        if (isset($apiKey)) {
+            $authentication = new Middleware\ApiKeyAuthentication(
+                is_callable($apiKey) ? call_user_func($apiKey) : $apiKey
+            );
+        } elseif (isset($sessionToken)) {
+            $authentication = new Middleware\BearerAuthentication(
+                is_callable($sessionToken) ? call_user_func($sessionToken) : $sessionToken
+            );
+        } else {
+            throw new RuntimeException('Missing Authentication information');
         }
 
         if (isset($baseUrl)) {
@@ -186,6 +192,7 @@ final class Client
 
         $this->config = compact(
             'apiKey',
+            'sessionToken',
             'baseUrl',
             'httpHandler',
             'logger',
@@ -202,7 +209,7 @@ final class Client
         // Prepare middleware stack
         $this->middleware = new Middleware\CompositeMiddleware(
             new Middleware\BaseUri($this->createUri($baseUrl . '/' . Client::CURRENT_VERSION)),
-            new Middleware\ApiKeyAuthentication($apiKey),
+            $authentication,
             $middleware,
             $logger
         );
