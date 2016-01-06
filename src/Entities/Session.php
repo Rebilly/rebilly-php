@@ -67,6 +67,7 @@ final class Session extends Entity
     const MSG_UNEXPECTED_RESOURCE = 'Unexpected resource. Only %s resources support';
     const MSG_UNEXPECTED_METHOD = 'Unexpected method. Only %s methods support';
     const MSG_INVALID_FORMAT = 'Incorrect permissions format';
+    const MSG_MISSING_PROPERTY = 'Incorrect permissions format - missing %s property';
 
     /**
      * @return string
@@ -124,18 +125,28 @@ final class Session extends Entity
             throw new DomainException(self::MSG_INVALID_FORMAT);
         }
 
-        foreach ($value as $resource => $rule) {
-            if (!in_array($resource, $allowedResources)) {
+        foreach ($value as $resourceName => $rule) {
+            if (!in_array($resourceName, $allowedResources)) {
                 throw new DomainException(sprintf(self::MSG_UNEXPECTED_RESOURCE, implode(', ', $allowedResources)));
             }
 
-            if (!is_array($rule) || !isset($rule['id']) || !isset($rule['methods'])) {
+            if (!is_array($rule)) {
                 throw new DomainException(self::MSG_INVALID_FORMAT);
             }
 
-            foreach ($rule['methods'] as $method) {
-                if (!in_array($method, $allowedMethods)) {
-                    throw new DomainException(sprintf(self::MSG_UNEXPECTED_METHOD, implode(', ', $allowedMethods)));
+            if (!isset($rule['id'])) {
+                throw new DomainException(sprintf(self::MSG_MISSING_PROPERTY, 'id'));
+            }
+
+            if (!isset($rule['methods'])) {
+                throw new DomainException(sprintf(self::MSG_MISSING_PROPERTY, 'methods'));
+            }
+
+            if (self::WILDCARD !== $rule['methods']) {
+                foreach ($rule['methods'] as $method) {
+                    if (!in_array($method, $allowedMethods)) {
+                        throw new DomainException(sprintf(self::MSG_UNEXPECTED_METHOD, implode(', ', $allowedMethods)));
+                    }
                 }
             }
         }
