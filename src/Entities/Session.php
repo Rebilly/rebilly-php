@@ -133,9 +133,11 @@ final class Session extends Entity
                 throw new DomainException(self::MSG_INVALID_FORMAT);
             }
 
-            foreach ($rule['methods'] as $method) {
-                if (!in_array($method, $allowedMethods)) {
-                    throw new DomainException(sprintf(self::MSG_UNEXPECTED_METHOD, implode(', ', $allowedMethods)));
+            if (self::WILDCARD !== $rule['methods']) {
+                foreach ($rule['methods'] as $method) {
+                    if (!in_array($method, $allowedMethods)) {
+                        throw new DomainException(sprintf(self::MSG_UNEXPECTED_METHOD, implode(', ', $allowedMethods)));
+                    }
                 }
             }
         }
