@@ -125,7 +125,7 @@ final class Session extends Entity
             throw new DomainException(self::MSG_INVALID_FORMAT);
         }
 
-        foreach ($value as $resourceName => $rule) {
+        foreach ($value as $rule) {
             if (!is_array($rule)) {
                 throw new DomainException(self::MSG_INVALID_FORMAT);
             }
