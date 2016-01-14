@@ -55,7 +55,7 @@ final class EmailCredential extends Entity
     }
 
     /**
-     * @return bool
+     * @return string
      */
     public function getSenderName()
     {
