@@ -177,6 +177,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'sessions/{sessionId}' => function (array $content) {
                 return new Session($content);
             },
+            'email-credentials' => function (array $content) {
+                return new Collection(new EmailCredential(), $content);
+            },
+            'email-credentials/{credentialId}' => function (array $content) {
+                return new EmailCredential($content);
+            },
         ];
     }
 
