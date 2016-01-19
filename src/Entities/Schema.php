@@ -177,6 +177,9 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'sessions/{sessionId}' => function (array $content) {
                 return new Session($content);
             },
+            'login' => function (array $content) {
+                return new Session($content);
+            },
         ];
     }
 
