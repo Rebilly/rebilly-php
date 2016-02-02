@@ -189,6 +189,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'users/reset-password' => function (array $content) {
                 return new User($content);
             },
+            'users' => function (array $content) {
+                return new Collection(new User(), $content);
+            },
+            'users/{userId}' => function (array $content) {
+                return new User($content);
+            },
         ];
     }
 

@@ -41,11 +41,31 @@ final class User extends Entity
     }
 
     /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setEmail($value)
+    {
+        return $this->setAttribute('email', $value);
+    }
+
+    /**
      * @return string
      */
     public function getFirstName()
     {
         return $this->getAttribute('firstName');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setFirstName($value)
+    {
+        return $this->setAttribute('firstName', $value);
     }
 
     /**
@@ -57,11 +77,31 @@ final class User extends Entity
     }
 
     /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setLastName($value)
+    {
+        return $this->setAttribute('lastName', $value);
+    }
+
+    /**
      * @return string
      */
     public function getPhoneNumber()
     {
         return $this->getAttribute('ipAddress');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setPhoneNumber($value)
+    {
+        return $this->setAttribute('phoneNumber', $value);
     }
 
     /**
