@@ -562,6 +562,7 @@ class ApiTest extends TestCase
             [Entities\BankAccount::class],
             [Entities\CustomField::class, 'name'],
             [Entities\Session::class],
+            [Entities\User::class],
         ];
     }
 
@@ -688,6 +689,11 @@ class ApiTest extends TestCase
                 'sessions',
                 Services\SessionService::class,
                 Entities\Session::class,
+            ],
+            [
+                'users',
+                Services\UserService::class,
+                Entities\User::class,
             ],
         ];
     }

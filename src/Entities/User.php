@@ -91,7 +91,7 @@ final class User extends Entity
      */
     public function getPhoneNumber()
     {
-        return $this->getAttribute('ipAddress');
+        return $this->getAttribute('phoneNumber');
     }
 
     /**
