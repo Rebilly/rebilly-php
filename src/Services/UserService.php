@@ -83,7 +83,7 @@ final class UserService extends Service
     /**
      * @param array|ArrayObject $params
      *
-     * @return User[][]|Collection[]|Paginator
+     * @return User[]|Collection[]|Paginator
      */
     public function paginator($params = [])
     {
