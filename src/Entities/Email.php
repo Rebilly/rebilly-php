@@ -26,8 +26,13 @@ use Rebilly\Rest\Entity;
  */
 final class Email extends Entity
 {
-    public function __construct($email)
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setEmail($value)
     {
-        parent::__construct(['email' => $email]);
+        return $this->setAttribute('email', $value);
     }
 }
