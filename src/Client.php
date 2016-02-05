@@ -74,6 +74,7 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\GatewayAccountService gatewayAccounts()
  * @method Services\SessionService sessions()
  * @method Services\LoginService login()
+ * @method Services\ThreeDSecureService threeDSecure()
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
@@ -110,6 +111,7 @@ final class Client
         'gatewayAccounts' => Services\GatewayAccountService::class,
         'sessions' => Services\SessionService::class,
         'login' => Services\LoginService::class,
+        'threeDSecure' => Services\ThreeDSecureService::class,
     ];
 
     /** @var array */

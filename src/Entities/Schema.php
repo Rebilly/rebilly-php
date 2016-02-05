@@ -180,6 +180,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'login' => function (array $content) {
                 return new Session($content);
             },
+            '3dsecure' => function (array $content) {
+                return new Collection(new ThreeDSecure(), $content);
+            },
+            '3dsecure/{3dsecureId}' => function (array $content) {
+                return new ThreeDSecure($content);
+            },
         ];
     }
 
