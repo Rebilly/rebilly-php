@@ -14,6 +14,7 @@ use ArrayObject;
 use BadMethodCallException;
 use Rebilly\Http\CurlHandler;
 use Rebilly\Middleware\LogHandler;
+use Rebilly\Rest\File;
 use RuntimeException;
 use InvalidArgumentException;
 use Psr\Http\Message\RequestInterface as Request;
@@ -50,6 +51,7 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  *
  * @method Services\AuthenticationOptionsService authenticationOptions()
  * @method Services\AuthenticationTokenService authenticationTokens()
+ * @method Services\BankAccountService bankAccounts()
  * @method Services\BlacklistService blacklists()
  * @method Services\ContactService contacts()
  * @method Services\CustomerCredentialService customerCredentials()
@@ -70,6 +72,8 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\OrganizationService organizations()
  * @method Services\CustomFieldService customFields()
  * @method Services\GatewayAccountService gatewayAccounts()
+ * @method Services\SessionService sessions()
+ * @method Services\LoginService login()
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
@@ -83,6 +87,7 @@ final class Client
     private static $services = [
         'authenticationOptions' => Services\AuthenticationOptionsService::class,
         'authenticationTokens' => Services\AuthenticationTokenService::class,
+        'bankAccounts' => Services\BankAccountService::class,
         'blacklists' => Services\BlacklistService::class,
         'contacts' => Services\ContactService::class,
         'customerCredentials' => Services\CustomerCredentialService::class,
@@ -103,6 +108,8 @@ final class Client
         'organizations' => Services\OrganizationService::class,
         'customFields' => Services\CustomFieldService::class,
         'gatewayAccounts' => Services\GatewayAccountService::class,
+        'sessions' => Services\SessionService::class,
+        'login' => Services\LoginService::class,
     ];
 
     /** @var array */
@@ -125,6 +132,8 @@ final class Client
      *
      * - apiKey: (callable|string) Specifies the APIKEY used to sign requests.
      *   A callable provider should return APIKEY string.
+     * - sessionToken: (callable|string) Specifies the JWT token used to sign requests.
+     *   A callable provider should return JWT token string.
      * - baseUrl: (string) The full URI of the webservice. This is only
      *   required when connecting to a custom endpoint (e.g., a tests).
      * - httpHandler: (callable) An HTTP handler is a Closure that accepts a PSR-7 request object
@@ -145,12 +154,16 @@ final class Client
     {
         extract($options, EXTR_SKIP);
 
-        if (!isset($apiKey)) {
-            throw new RuntimeException('Missed API Key');
-        }
-
-        if (is_callable($apiKey)) {
-            $apiKey = (string) call_user_func($apiKey);
+        if (isset($apiKey)) {
+            $authentication = new Middleware\ApiKeyAuthentication(
+                is_callable($apiKey) ? call_user_func($apiKey) : $apiKey
+            );
+        } elseif (isset($sessionToken)) {
+            $authentication = new Middleware\BearerAuthentication(
+                is_callable($sessionToken) ? call_user_func($sessionToken) : $sessionToken
+            );
+        } else {
+            throw new RuntimeException('Missing Authentication information');
         }
 
         if (isset($baseUrl)) {
@@ -181,6 +194,7 @@ final class Client
 
         $this->config = compact(
             'apiKey',
+            'sessionToken',
             'baseUrl',
             'httpHandler',
             'logger',
@@ -197,7 +211,7 @@ final class Client
         // Prepare middleware stack
         $this->middleware = new Middleware\CompositeMiddleware(
             new Middleware\BaseUri($this->createUri($baseUrl . '/' . Client::CURRENT_VERSION)),
-            new Middleware\ApiKeyAuthentication($apiKey),
+            $authentication,
             $middleware,
             $logger
         );
@@ -373,6 +387,14 @@ final class Client
             throw new Http\Exception\UnprocessableEntityException($content);
         }
 
+        if ($response->getStatusCode() === 429) {
+            throw new Http\Exception\TooManyRequestsException(
+                $response->getHeaderLine('Retry-After'),
+                $response->getHeaderLine('X-Rate-Limit-Limit'),
+                'Too many requests, retry after ' . $response->getHeaderLine('Retry-After')
+            );
+        }
+
         if ($response->getStatusCode() >= 500) {
             throw new Http\Exception\ServerException(
                 $response->getStatusCode(),
@@ -391,6 +413,35 @@ final class Client
             return null;
         }
 
+        $responseParsers = [
+            'application/json' => [$this, 'parseJsonResponseBody'],
+            'application/pdf' => [$this, 'parseBinaryResponseBody'],
+        ];
+
+        $mediaTypePattern = '/^([a-z0-9]+\/[a-z0-9]+).*/i';
+
+        if (preg_match($mediaTypePattern, $response->getHeaderLine('Content-Type'), $matches)) {
+            $contentType = strtolower($matches[1]);
+        } else {
+            $contentType = 'application/json';
+        }
+
+        if (!isset($responseParsers[$contentType])) {
+            throw new InvalidArgumentException(sprintf('Unsupported "%s" response', $contentType));
+        }
+
+        return call_user_func($responseParsers[$contentType], $request, $response, $contentType);
+    }
+
+    /**
+     * @param Request $request
+     * @param Response $response
+     * @param string $type
+     *
+     * @return mixed
+     */
+    protected function parseJsonResponseBody(Request $request, Response $response, $type)
+    {
         // Find resource type (URL) in response location or request url
         $location = $response->hasHeader('Location')
             ? $this->createUri($response->getHeaderLine('Location'))
@@ -426,6 +477,20 @@ final class Client
         $resource->populate($content);
 
         return $resource;
+    }
+
+    /**
+     * @param Request $request
+     * @param Response $response
+     * @param string $type
+     *
+     * @return File
+     */
+    protected function parseBinaryResponseBody(Request $request, Response $response, $type)
+    {
+        $body = $response->getBody();
+
+        return new File($type, (string) $body, $body->getSize());
     }
 
     /**

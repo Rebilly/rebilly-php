@@ -30,6 +30,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
     public function __construct()
     {
         $this->builders = [
+            'bank-accounts' => function (array $content) {
+                return new Collection(new BankAccount(), $content);
+            },
+            'bank-accounts/{bankAccountId}' => function (array $content) {
+                return new BankAccount($content);
+            },
             'blacklists' => function (array $content) {
                 return new Collection(new Blacklist(), $content);
             },
@@ -164,6 +170,15 @@ final class Schema implements IteratorAggregate, ArrayAccess
             },
             'gateway-accounts/{gatewayAccountId}' => function (array $content) {
                 return new GatewayAccount($content);
+            },
+            'sessions' => function (array $content) {
+                return new Collection(new Session(), $content);
+            },
+            'sessions/{sessionId}' => function (array $content) {
+                return new Session($content);
+            },
+            'login' => function (array $content) {
+                return new Session($content);
             },
         ];
     }
