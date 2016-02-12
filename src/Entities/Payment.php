@@ -228,4 +228,22 @@ final class Payment extends Entity
     {
         return $this->setAttribute('customFields', $value);
     }
+
+    /**
+     * @return array
+     */
+    public function getInvoiceIds()
+    {
+        return $this->getAttribute('invoiceIds');
+    }
+
+    /**
+     * @param array $value
+     *
+     * @return $this
+     */
+    public function setInvoiceIds($value)
+    {
+        return $this->setAttribute('invoiceIds', $value);
+    }
 }
