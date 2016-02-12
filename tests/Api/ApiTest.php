@@ -901,6 +901,8 @@ class ApiTest extends TestCase
                 return 'checking';
             case 'permissions':
                 return [];
+            case 'invoiceIds':
+                return [];
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
