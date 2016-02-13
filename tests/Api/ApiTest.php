@@ -562,6 +562,7 @@ class ApiTest extends TestCase
             [Entities\BankAccount::class],
             [Entities\CustomField::class, 'name'],
             [Entities\Session::class],
+            [Entities\ThreeDSecure::class],
         ];
     }
 
@@ -690,6 +691,11 @@ class ApiTest extends TestCase
                 Entities\Session::class,
             ],
             [
+                'threeDSecure',
+                Services\ThreeDSecureService::class,
+                Entities\ThreeDSecure::class,
+            ],
+            [
                 'emailCredentials',
                 Services\EmailCredentialService::class,
                 Entities\EmailCredential::class,
@@ -746,6 +752,10 @@ class ApiTest extends TestCase
             case 'acquirerName':
             case 'routingNumber':
             case 'accountNumber':
+            case 'enrollmentEci':
+            case 'eci':
+            case 'cavv':
+            case 'xid':
             case 'senderName':
                 return $faker->word;
             case 'organization':
@@ -909,6 +919,12 @@ class ApiTest extends TestCase
                 return 'checking';
             case 'permissions':
                 return [];
+            case 'invoiceIds':
+                return [];
+            case 'enrolled':
+            case 'payerAuthResponseStatus':
+            case 'signatureVerification':
+                return 'Y';
             case 'port':
                 return $faker->randomNumber(25, 100);
             case 'authenticationMethod':
