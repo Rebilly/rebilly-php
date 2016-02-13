@@ -73,6 +73,7 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\CustomFieldService customFields()
  * @method Services\GatewayAccountService gatewayAccounts()
  * @method Services\SessionService sessions()
+ * @method Services\EmailCredentialService emailCredentials()
  * @method Services\LoginService login()
  * @method Services\ThreeDSecureService threeDSecure()
  *
@@ -110,6 +111,7 @@ final class Client
         'customFields' => Services\CustomFieldService::class,
         'gatewayAccounts' => Services\GatewayAccountService::class,
         'sessions' => Services\SessionService::class,
+        'emailCredentials' => Services\EmailCredentialService::class,
         'login' => Services\LoginService::class,
         'threeDSecure' => Services\ThreeDSecureService::class,
     ];
