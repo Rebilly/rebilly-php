@@ -911,6 +911,8 @@ class ApiTest extends TestCase
                 return 'checking';
             case 'permissions':
                 return [];
+            case 'invoiceIds':
+                return [];
             case 'enrolled':
             case 'payerAuthResponseStatus':
             case 'signatureVerification':

@@ -31,6 +31,7 @@ use Rebilly\Rest\Entity;
  *   "website"
  *   "customer"
  *   "paymentCard"
+ *   "payment"
  * }
  * ```
  *
@@ -144,6 +145,18 @@ final class Transaction extends Entity
     {
         if ($this->hasEmbeddedResource('paymentCard')) {
             return new PaymentCard($this->getEmbeddedResource('paymentCard'));
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * @return null|Payment
+     */
+    public function getPayment()
+    {
+        if ($this->hasEmbeddedResource('payment')) {
+            return new Payment($this->getEmbeddedResource('payment'));
         } else {
             return null;
         }
