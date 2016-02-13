@@ -562,6 +562,7 @@ class ApiTest extends TestCase
             [Entities\BankAccount::class],
             [Entities\CustomField::class, 'name'],
             [Entities\Session::class],
+            [Entities\ThreeDSecure::class],
         ];
     }
 
@@ -689,6 +690,11 @@ class ApiTest extends TestCase
                 Services\SessionService::class,
                 Entities\Session::class,
             ],
+            [
+                'threeDSecure',
+                Services\ThreeDSecureService::class,
+                Entities\ThreeDSecure::class,
+            ],
         ];
     }
 
@@ -741,6 +747,10 @@ class ApiTest extends TestCase
             case 'acquirerName':
             case 'routingNumber':
             case 'accountNumber':
+            case 'enrollmentEci':
+            case 'eci':
+            case 'cavv':
+            case 'xid':
                 return $faker->word;
             case 'organization':
                 return $faker->company;
@@ -903,6 +913,10 @@ class ApiTest extends TestCase
                 return [];
             case 'invoiceIds':
                 return [];
+            case 'enrolled':
+            case 'payerAuthResponseStatus':
+            case 'signatureVerification':
+                return 'Y';
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
