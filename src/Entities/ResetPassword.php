@@ -10,7 +10,7 @@
 
 namespace Rebilly\Entities;
 
-use Rebilly\Rest\Entity;
+use Rebilly\Rest\Resource;
 
 /**
  * Class ResetPassword
@@ -25,8 +25,16 @@ use Rebilly\Rest\Entity;
  * @author Maksim Tuzov <maksim.tuzov@rebilly.com>
  * @version 0.1
  */
-final class ResetPassword extends Entity
+final class ResetPassword extends Resource
 {
+    /**
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->getAttribute('token');
+    }
+
     /**
      * @param string $value
      *
@@ -35,6 +43,14 @@ final class ResetPassword extends Entity
     public function setToken($value)
     {
         return $this->setAttribute('token', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getNewPassword()
+    {
+        return $this->getAttribute('newPassword');
     }
 
     /**

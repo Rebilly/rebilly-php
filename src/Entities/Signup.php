@@ -10,7 +10,7 @@
 
 namespace Rebilly\Entities;
 
-use Rebilly\Rest\Entity;
+use Rebilly\Rest\Resource;
 
 /**
  * Class Signup
@@ -29,8 +29,16 @@ use Rebilly\Rest\Entity;
  * @author Maksim Tuzov <maksim.tuzov@rebilly.com>
  * @version 0.1
  */
-final class Signup extends Entity
+final class Signup extends Resource
 {
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->getAttribute('email');
+    }
+
     /**
      * @param string $value
      *
@@ -39,6 +47,14 @@ final class Signup extends Entity
     public function setEmail($value)
     {
         return $this->setAttribute('email', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getCompany()
+    {
+        return $this->getAttribute('company');
     }
 
     /**
@@ -52,6 +68,14 @@ final class Signup extends Entity
     }
 
     /**
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return $this->getAttribute('firstName');
+    }
+
+    /**
      * @param string $value
      *
      * @return $this
@@ -59,6 +83,14 @@ final class Signup extends Entity
     public function setFirstName($value)
     {
         return $this->setAttribute('firstName', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastName()
+    {
+        return $this->getAttribute('lastName');
     }
 
     /**
@@ -72,6 +104,14 @@ final class Signup extends Entity
     }
 
     /**
+     * @return string
+     */
+    public function getBusinessPhone()
+    {
+        return $this->getAttribute('businessPhone');
+    }
+
+    /**
      * @param string $value
      *
      * @return $this
@@ -79,6 +119,14 @@ final class Signup extends Entity
     public function setBusinessPhone($value)
     {
         return $this->setAttribute('businessPhone', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->getAttribute('password');
     }
 
     /**

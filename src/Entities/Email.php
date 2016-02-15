@@ -10,7 +10,7 @@
 
 namespace Rebilly\Entities;
 
-use Rebilly\Rest\Entity;
+use Rebilly\Rest\Resource;
 
 /**
  * Class Email
@@ -24,8 +24,16 @@ use Rebilly\Rest\Entity;
  * @author Maksim Tuzov <maksim.tuzov@rebilly.com>
  * @version 0.1
  */
-final class Email extends Entity
+final class Email extends Resource
 {
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->getAttribute('email');
+    }
+
     /**
      * @param string $value
      *
