@@ -563,6 +563,7 @@ class ApiTest extends TestCase
             [Entities\CustomField::class, 'name'],
             [Entities\Session::class],
             [Entities\User::class],
+            [Entities\ThreeDSecure::class],
         ];
     }
 
@@ -695,6 +696,16 @@ class ApiTest extends TestCase
                 Services\UserService::class,
                 Entities\User::class,
             ],
+            [
+                'threeDSecure',
+                Services\ThreeDSecureService::class,
+                Entities\ThreeDSecure::class,
+            ],
+            [
+                'emailCredentials',
+                Services\EmailCredentialService::class,
+                Entities\EmailCredential::class,
+            ],
         ];
     }
 
@@ -747,12 +758,18 @@ class ApiTest extends TestCase
             case 'acquirerName':
             case 'routingNumber':
             case 'accountNumber':
+            case 'enrollmentEci':
+            case 'eci':
+            case 'cavv':
+            case 'xid':
+            case 'senderName':
                 return $faker->word;
             case 'organization':
                 return $faker->company;
             case 'servicePhone':
                 return $faker->phoneNumber;
             case 'serviceEmail':
+            case 'senderEmail':
                 return $faker->email;
             case 'region':
                 return $faker->city;
@@ -786,6 +803,7 @@ class ApiTest extends TestCase
             case 'expMonth':
                 return $faker->month;
             case 'webHookUrl':
+            case 'host':
                 return $faker->url;
             case 'webHookUsername':
                 return $faker->userName;
@@ -907,6 +925,18 @@ class ApiTest extends TestCase
                 return 'checking';
             case 'permissions':
                 return [];
+            case 'invoiceIds':
+                return [];
+            case 'enrolled':
+            case 'payerAuthResponseStatus':
+            case 'signatureVerification':
+                return 'Y';
+            case 'port':
+                return $faker->randomNumber(25, 100);
+            case 'authenticationMethod':
+                return $faker->randomElement(Entities\EmailCredential::allowedAuthenticationMethods());
+            case 'encryptionMethod':
+                return $faker->randomElement(Entities\EmailCredential::allowedEncryptionMethods());
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
