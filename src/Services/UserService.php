@@ -65,7 +65,7 @@ final class UserService extends Service
      */
     public function forgotPassword($data)
     {
-        return $this->client()->put($data, 'users/forgot-password');
+        return $this->client()->post($data, 'users/forgot-password');
     }
 
     /**
@@ -77,7 +77,7 @@ final class UserService extends Service
      */
     public function resetPassword($data)
     {
-        return $this->client()->put($data, 'users/reset-password');
+        return $this->client()->post($data, 'users/reset-password');
     }
 
     /**
