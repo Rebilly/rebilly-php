@@ -237,4 +237,22 @@ final class Subscription extends Entity
     {
         return $this->setAttribute('customFields', $value);
     }
+
+    /**
+     * @return bool
+     */
+    public function getAutopay()
+    {
+        return $this->getAttribute('autopay');
+    }
+
+    /**
+     * @param bool $value
+     *
+     * @return $this
+     */
+    public function setAutopay($value)
+    {
+        return $this->setAttribute('autopay', $value);
+    }
 }
