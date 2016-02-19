@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/Rebilly/rebilly-php.png?label=ready&title=Ready)](https://waffle.io/Rebilly/rebilly-php)
 # Rebilly SDK for PHP
 
 [![Build Status](https://img.shields.io/travis/Rebilly/rebilly-php/master.svg?style=flat-square)](https://travis-ci.org/Rebilly/rebilly-php)
