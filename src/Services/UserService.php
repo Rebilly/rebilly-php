@@ -39,9 +39,9 @@ final class UserService extends Service
      *
      * @return Session
      */
-    public function login($data)
+    public function signin($data)
     {
-        return $this->client()->post($data, 'users/login');
+        return $this->client()->post($data, 'signin');
     }
 
     /**
@@ -53,7 +53,7 @@ final class UserService extends Service
      */
     public function signup($data)
     {
-        return $this->client()->post($data, 'users/signup');
+        return $this->client()->post($data, 'signup');
     }
 
     /**
@@ -65,19 +65,24 @@ final class UserService extends Service
      */
     public function forgotPassword($data)
     {
-        return $this->client()->post($data, 'users/forgot-password');
+        return $this->client()->post($data, 'forgot-password');
     }
 
     /**
+     * @param string $userId
+     * @param string $token
      * @param array|JsonSerializable|ResetPassword $data
      *
      * @throws UnprocessableEntityException The input data does not valid
      *
      * @return User
      */
-    public function resetPassword($data)
+    public function resetPassword($userId, $token, $data)
     {
-        return $this->client()->post($data, 'users/reset-password');
+        return $this->client()->post($data, 'users/{userId}/reset-password/{token}', [
+            'userId' => $userId,
+            'token' => $token,
+        ]);
     }
 
     /**

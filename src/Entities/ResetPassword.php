@@ -17,7 +17,6 @@ use Rebilly\Rest\Resource;
  *
  * ```json
  * {
- *   "token"
  *   "newPassword"
  * }
  * ```
@@ -27,24 +26,6 @@ use Rebilly\Rest\Resource;
  */
 final class ResetPassword extends Resource
 {
-    /**
-     * @return string
-     */
-    public function getToken()
-    {
-        return $this->getAttribute('token');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setToken($value)
-    {
-        return $this->setAttribute('token', $value);
-    }
-
     /**
      * @return string
      */
