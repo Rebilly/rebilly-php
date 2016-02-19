@@ -931,6 +931,8 @@ class ApiTest extends TestCase
                 return $faker->randomElement(Entities\EmailCredential::allowedAuthenticationMethods());
             case 'encryptionMethod':
                 return $faker->randomElement(Entities\EmailCredential::allowedEncryptionMethods());
+            case 'autopay':
+                return $faker->boolean();
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
