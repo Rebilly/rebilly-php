@@ -119,7 +119,7 @@ final class UserService extends Service
      */
     public function load($userId, $params = [])
     {
-        return $this->client()->get('users/{userId}', ['userId' => $userId] + (array)$params);
+        return $this->client()->get('users/{userId}', ['userId' => $userId] + (array) $params);
     }
 
     /**
