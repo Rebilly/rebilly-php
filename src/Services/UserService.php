@@ -61,7 +61,7 @@ final class UserService extends Service
      *
      * @throws UnprocessableEntityException The input data does not valid
      *
-     * @return Email
+     * @return null
      */
     public function forgotPassword($data)
     {
@@ -79,10 +79,14 @@ final class UserService extends Service
      */
     public function resetPassword($userId, $token, $data)
     {
-        return $this->client()->post($data, 'users/{userId}/reset-password/{token}', [
-            'userId' => $userId,
-            'token' => $token,
-        ]);
+        return $this->client()->post(
+            $data,
+            'users/{userId}/reset-password/{token}',
+            [
+                'userId' => $userId,
+                'token' => $token,
+            ]
+        );
     }
 
     /**
@@ -115,7 +119,7 @@ final class UserService extends Service
      */
     public function load($userId, $params = [])
     {
-        return $this->client()->get('users/{userId}', ['userId' => $userId] + (array) $params);
+        return $this->client()->get('users/{userId}', ['userId' => $userId] + (array)$params);
     }
 
     /**
