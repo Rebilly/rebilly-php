@@ -73,8 +73,8 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\CustomFieldService customFields()
  * @method Services\GatewayAccountService gatewayAccounts()
  * @method Services\SessionService sessions()
+ * @method Services\UserService users()
  * @method Services\EmailCredentialService emailCredentials()
- * @method Services\LoginService login()
  * @method Services\ThreeDSecureService threeDSecure()
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
@@ -111,8 +111,8 @@ final class Client
         'customFields' => Services\CustomFieldService::class,
         'gatewayAccounts' => Services\GatewayAccountService::class,
         'sessions' => Services\SessionService::class,
+        'users' => Services\UserService::class,
         'emailCredentials' => Services\EmailCredentialService::class,
-        'login' => Services\LoginService::class,
         'threeDSecure' => Services\ThreeDSecureService::class,
     ];
 
@@ -167,7 +167,7 @@ final class Client
                 is_callable($sessionToken) ? call_user_func($sessionToken) : $sessionToken
             );
         } else {
-            throw new RuntimeException('Missing Authentication information');
+            $authentication = null;
         }
 
         if (isset($baseUrl)) {
