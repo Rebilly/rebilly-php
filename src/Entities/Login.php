@@ -10,7 +10,7 @@
 
 namespace Rebilly\Entities;
 
-use Rebilly\Rest\Entity;
+use Rebilly\Rest\Resource;
 
 /**
  * Class Login
@@ -26,8 +26,16 @@ use Rebilly\Rest\Entity;
  * @author Arman Tuyakbayev <arman.tuyakbayev@rebilly.com>
  * @version 0.1
  */
-final class Login extends Entity
+final class Login extends Resource
 {
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->getAttribute('email');
+    }
+
     /**
      * @param string $value
      *
@@ -39,6 +47,14 @@ final class Login extends Entity
     }
 
     /**
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->getAttribute('password');
+    }
+
+    /**
      * @param string $value
      *
      * @return $this
@@ -46,6 +62,14 @@ final class Login extends Entity
     public function setPassword($value)
     {
         return $this->setAttribute('password', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getExpiredTime()
+    {
+        return $this->getAttribute('expiredTime');
     }
 
     /**
