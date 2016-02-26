@@ -32,7 +32,7 @@ use Rebilly\Rest\Entity;
  */
 final class Session extends Entity
 {
-    const WILDCARD = '*';
+    const WILDCARD = null;
 
     const RESOURCE_AUTHENTICATION_OPTIONS = 'authentication-options';
     const RESOURCE_AUTHENTICATION_TOKENS = 'authentication-tokens';
@@ -65,9 +65,13 @@ final class Session extends Entity
     const METHOD_HEAD = 'HEAD';
 
     const MSG_UNEXPECTED_RESOURCE = 'Unexpected resource. Only %s resources support';
+    const MSG_INVALID_RESOURCE_IDS = 'Incorrect resource ids format. It should be empty or an array';
+    const MSG_INVALID_METHODS = 'Incorrect methods format. It should be empty or an array';
     const MSG_UNEXPECTED_METHOD = 'Unexpected method. Only %s methods support';
     const MSG_INVALID_FORMAT = 'Incorrect permissions format';
     const MSG_MISSING_PROPERTY = 'Incorrect permissions format - missing %s property';
+
+    private static $allowedRuleKeys = ['resourceName', 'methods', 'resourceIds'];
 
     /**
      * @return string
@@ -121,7 +125,7 @@ final class Session extends Entity
         $allowedResources = self::allowedResources();
         $allowedMethods = self::allowedMethods();
 
-        if (!is_array($value)) {
+        if (null !== $value && !is_array($value)) {
             throw new DomainException(self::MSG_INVALID_FORMAT);
         }
 
@@ -130,23 +134,26 @@ final class Session extends Entity
                 throw new DomainException(self::MSG_INVALID_FORMAT);
             }
 
-            if (!isset($rule['resourceName'])) {
-                throw new DomainException(sprintf(self::MSG_MISSING_PROPERTY, 'resourceName'));
+            foreach (array_keys($rule) as $key) {
+                if (!in_array($key, self::$allowedRuleKeys)) {
+                    throw new DomainException(self::MSG_INVALID_FORMAT);
+                }
             }
 
-            if (!in_array($rule['resourceName'], $allowedResources)) {
+            if (!empty($rule['resourceName']) && !in_array($rule['resourceName'], $allowedResources)) {
                 throw new DomainException(sprintf(self::MSG_UNEXPECTED_RESOURCE, implode(', ', $allowedResources)));
             }
 
-            if (!isset($rule['id'])) {
-                throw new DomainException(sprintf(self::MSG_MISSING_PROPERTY, 'id'));
+            if (!empty($rule['resourceIds']) && !is_array($rule['resourceIds'])) {
+                throw new DomainException(self::MSG_INVALID_RESOURCE_IDS);
             }
 
-            if (!isset($rule['methods'])) {
-                throw new DomainException(sprintf(self::MSG_MISSING_PROPERTY, 'methods'));
+
+            if (!empty($rule['methods']) && !is_array($rule['methods'])) {
+                throw new DomainException(self::MSG_INVALID_METHODS);
             }
 
-            if (self::WILDCARD !== $rule['methods']) {
+            if (!empty($rule['methods'])) {
                 foreach ($rule['methods'] as $method) {
                     if (!in_array($method, $allowedMethods)) {
                         throw new DomainException(sprintf(self::MSG_UNEXPECTED_METHOD, implode(', ', $allowedMethods)));
