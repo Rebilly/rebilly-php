@@ -32,8 +32,6 @@ use Rebilly\Rest\Entity;
  */
 final class Session extends Entity
 {
-    const WILDCARD = null;
-
     const RESOURCE_AUTHENTICATION_OPTIONS = 'authentication-options';
     const RESOURCE_AUTHENTICATION_TOKENS = 'authentication-tokens';
     const RESOURCE_BANK_ACCOUNTS = 'bank-accounts';
@@ -171,7 +169,6 @@ final class Session extends Entity
     public static function allowedResources()
     {
         return [
-            self::WILDCARD,
             self::RESOURCE_AUTHENTICATION_OPTIONS,
             self::RESOURCE_AUTHENTICATION_TOKENS,
             self::RESOURCE_BANK_ACCOUNTS,
