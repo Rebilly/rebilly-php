@@ -69,8 +69,6 @@ final class Session extends Entity
     const MSG_INVALID_FORMAT = 'Incorrect permissions format';
     const MSG_MISSING_PROPERTY = 'Incorrect permissions format - missing %s property';
 
-    private static $allowedRuleKeys = ['resourceName', 'methods', 'resourceIds'];
-
     /**
      * @return string
      */
@@ -132,12 +130,6 @@ final class Session extends Entity
                 throw new DomainException(self::MSG_INVALID_FORMAT);
             }
 
-            foreach (array_keys($rule) as $key) {
-                if (!in_array($key, self::$allowedRuleKeys)) {
-                    throw new DomainException(self::MSG_INVALID_FORMAT);
-                }
-            }
-
             if (!empty($rule['resourceName']) && !in_array($rule['resourceName'], $allowedResources)) {
                 throw new DomainException(sprintf(self::MSG_UNEXPECTED_RESOURCE, implode(', ', $allowedResources)));
             }
@@ -145,7 +137,6 @@ final class Session extends Entity
             if (!empty($rule['resourceIds']) && !is_array($rule['resourceIds'])) {
                 throw new DomainException(self::MSG_INVALID_RESOURCE_IDS);
             }
-
 
             if (!empty($rule['methods']) && !is_array($rule['methods'])) {
                 throw new DomainException(self::MSG_INVALID_METHODS);
