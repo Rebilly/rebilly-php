@@ -195,6 +195,9 @@ final class Schema implements IteratorAggregate, ArrayAccess
             '3dsecure/{3dsecureId}' => function (array $content) {
                 return new ThreeDSecure($content);
             },
+            'reporting-currencies' => function (array $content) {
+                return new ReportingCurrencies($content);
+            },
         ];
     }
 
