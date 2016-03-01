@@ -198,6 +198,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'reporting-currencies' => function (array $content) {
                 return new ReportingCurrencies($content);
             },
+            'logs' => function (array $content) {
+                return new Collection(new Log(), $content);
+            },
+            'logs/{logId}' => function (array $content) {
+                return new Log($content);
+            },
         ];
     }
 
