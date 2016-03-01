@@ -55,6 +55,6 @@ final class LogService extends Service
      */
     public function load($logId, $params = [])
     {
-        return $this->client()->get('logs/{logId}', ['logId' => $logId] + (array)$params);
+        return $this->client()->get('logs/{logId}', ['logId' => $logId] + (array) $params);
     }
 }
