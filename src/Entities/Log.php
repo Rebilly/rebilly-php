@@ -35,7 +35,7 @@ use Rebilly\Rest\Entity;
 final class Log extends Entity
 {
     /**
-     * @return integer
+     * @return int
      */
     public function getStatus()
     {
@@ -83,7 +83,7 @@ final class Log extends Entity
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getDuration()
     {
