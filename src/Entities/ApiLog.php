@@ -13,7 +13,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Entity;
 
 /**
- * Class Log
+ * Class ApiLog
  *
  * ```json
  * {
@@ -32,7 +32,7 @@ use Rebilly\Rest\Entity;
  * @author Maksim Tuzov <maksim.tuzov@rebilly.com>
  * @version 0.1
  */
-final class Log extends Entity
+final class ApiLog extends Entity
 {
     /**
      * @return int

@@ -707,9 +707,9 @@ class ApiTest extends TestCase
                 Entities\EmailCredential::class,
             ],
             [
-                'logs',
-                Services\LogService::class,
-                Entities\Log::class,
+                'apiLogs',
+                Services\ApiLogService::class,
+                Entities\ApiLog::class,
             ],
         ];
     }

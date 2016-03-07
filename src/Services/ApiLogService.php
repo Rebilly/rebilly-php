@@ -11,38 +11,38 @@
 namespace Rebilly\Services;
 
 use ArrayObject;
-use Rebilly\Entities\Log;
+use Rebilly\Entities\ApiLog;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Paginator;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
 
 /**
- * Class LogService
+ * Class ApiLogService
  *
  * @author Maksim Tuzov <maksim.tuzov@rebilly.com>
  * @version 0.1
  */
-final class LogService extends Service
+final class ApiLogService extends Service
 {
     /**
      * @param array|ArrayObject $params
      *
-     * @return Log[]|Collection[]|Paginator
+     * @return ApiLog[]|Collection[]|Paginator
      */
     public function paginator($params = [])
     {
-        return new Paginator($this->client(), 'logs', $params);
+        return new Paginator($this->client(), 'tracking/api', $params);
     }
 
     /**
      * @param array|ArrayObject $params
      *
-     * @return Log[]|Collection
+     * @return ApiLog[]|Collection
      */
     public function search($params = [])
     {
-        return $this->client()->get('logs', $params);
+        return $this->client()->get('tracking/api', $params);
     }
 
     /**
@@ -51,10 +51,10 @@ final class LogService extends Service
      *
      * @throws NotFoundException The resource data does exist
      *
-     * @return Log
+     * @return ApiLog
      */
     public function load($logId, $params = [])
     {
-        return $this->client()->get('logs/{logId}', ['logId' => $logId] + (array) $params);
+        return $this->client()->get('tracking/api/{logId}', ['logId' => $logId] + (array) $params);
     }
 }
