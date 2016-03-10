@@ -706,6 +706,11 @@ class ApiTest extends TestCase
                 Services\EmailCredentialService::class,
                 Entities\EmailCredential::class,
             ],
+            [
+                'subscriptionLogs',
+                Services\SubscriptionLogService::class,
+                Entities\SubscriptionLog::class,
+            ],
         ];
     }
 
