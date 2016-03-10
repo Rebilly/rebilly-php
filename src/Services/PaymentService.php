@@ -124,4 +124,19 @@ final class PaymentService extends Service
     {
         return $this->client()->post([], 'queue/payments/{paymentId}/cancel', ['paymentId' => $paymentId]);
     }
+
+    /**
+     * @param array|JsonSerializable|Entities\Payment $payment
+     * @param string $paymentId
+     *
+     * @throws NotFoundException The payment does not exist
+     * @throws NotFoundException The scheduled payment does not exist
+     * @throws GoneException The process is completed but the payment can not be created
+     *
+     * @return Entities\ScheduledPayment|Entities\Payment
+     */
+    public function update($payment, $paymentId)
+    {
+        return $this->client()->put($payment, 'queue/payments/{paymentId}', ['paymentId' => $paymentId]);
+    }
 }
