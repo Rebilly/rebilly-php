@@ -126,8 +126,8 @@ final class PaymentService extends Service
     }
 
     /**
-     * @param array|JsonSerializable|Entities\Payment $payment
      * @param string $paymentId
+     * @param array|JsonSerializable|Entities\Payment $params
      *
      * @throws NotFoundException The payment does not exist
      * @throws NotFoundException The scheduled payment does not exist
@@ -135,8 +135,8 @@ final class PaymentService extends Service
      *
      * @return Entities\ScheduledPayment|Entities\Payment
      */
-    public function update($payment, $paymentId)
+    public function update($paymentId, $params)
     {
-        return $this->client()->put($payment, 'queue/payments/{paymentId}', ['paymentId' => $paymentId]);
+        return $this->client()->put($params, 'queue/payments/{paymentId}', ['paymentId' => $paymentId]);
     }
 }
