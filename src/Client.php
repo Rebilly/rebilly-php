@@ -76,6 +76,7 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\UserService users()
  * @method Services\EmailCredentialService emailCredentials()
  * @method Services\ThreeDSecureService threeDSecure()
+ * @method Services\SchedulePaymentService scheduledPayments()
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
@@ -101,6 +102,7 @@ final class Client
         'paymentCards' => Services\PaymentCardService::class,
         'paymentCardTokens' => Services\PaymentCardTokenService::class,
         'payments' => Services\PaymentService::class,
+        'scheduledPayments' => Services\SchedulePaymentService::class,
         'plans' => Services\PlanService::class,
         'resetPasswordTokens' => Services\ResetPasswordTokenService::class,
         'subscriptions' => Services\SubscriptionService::class,
