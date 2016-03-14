@@ -79,6 +79,7 @@ final class PaymentService extends Service
     }
 
     /**
+     * @deprecated
      * @param array|ArrayObject $params
      *
      * @return Entities\ScheduledPayment[][]|Collection[]|Paginator
@@ -89,6 +90,7 @@ final class PaymentService extends Service
     }
 
     /**
+     * @deprecated
      * @param array|ArrayObject $params
      *
      * @return Entities\ScheduledPayment[]|Collection
@@ -99,6 +101,7 @@ final class PaymentService extends Service
     }
 
     /**
+     * @deprecated
      * @param string $paymentId
      * @param array|ArrayObject $params
      *
@@ -113,6 +116,7 @@ final class PaymentService extends Service
     }
 
     /**
+     * @deprecated
      * @param string $paymentId
      *
      * @throws NotFoundException The payment does not exist

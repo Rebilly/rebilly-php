@@ -199,10 +199,10 @@ final class Schema implements IteratorAggregate, ArrayAccess
                 return new ReportingCurrencies($content);
             },
             'tracking/api' => function (array $content) {
-                return new Collection(new ApiLog(), $content);
+                return new Collection(new ApiTracking(), $content);
             },
             'tracking/api/{logId}' => function (array $content) {
-                return new ApiLog($content);
+                return new ApiTracking($content);
             },
         ];
     }

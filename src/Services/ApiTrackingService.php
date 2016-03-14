@@ -11,24 +11,24 @@
 namespace Rebilly\Services;
 
 use ArrayObject;
-use Rebilly\Entities\ApiLog;
+use Rebilly\Entities\ApiTracking;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Paginator;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
 
 /**
- * Class ApiLogService
+ * Class ApiTrackingService
  *
  * @author Maksim Tuzov <maksim.tuzov@rebilly.com>
  * @version 0.1
  */
-final class ApiLogService extends Service
+final class ApiTrackingService extends Service
 {
     /**
      * @param array|ArrayObject $params
      *
-     * @return ApiLog[]|Collection[]|Paginator
+     * @return ApiTracking[]|Collection[]|Paginator
      */
     public function paginator($params = [])
     {
@@ -38,7 +38,7 @@ final class ApiLogService extends Service
     /**
      * @param array|ArrayObject $params
      *
-     * @return ApiLog[]|Collection
+     * @return ApiTracking[]|Collection
      */
     public function search($params = [])
     {
@@ -51,7 +51,7 @@ final class ApiLogService extends Service
      *
      * @throws NotFoundException The resource data does exist
      *
-     * @return ApiLog
+     * @return ApiTracking
      */
     public function load($logId, $params = [])
     {
