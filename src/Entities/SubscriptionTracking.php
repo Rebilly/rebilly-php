@@ -13,7 +13,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Entity;
 
 /**
- * Class SubscriptionLog
+ * Class SubscriptionTracking
  *
  * ```json
  * {
@@ -29,7 +29,7 @@ use Rebilly\Rest\Entity;
  * @author Maksim Tuzov <maksim.tuzov@rebilly.com>
  * @version 0.1
  */
-final class SubscriptionLog extends Entity
+final class SubscriptionTracking extends Entity
 {
     /**
      * @return string;

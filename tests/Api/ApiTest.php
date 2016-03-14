@@ -642,6 +642,11 @@ class ApiTest extends TestCase
                 Entities\Payment::class,
             ],
             [
+                'scheduledPayments',
+                Services\SchedulePaymentService::class,
+                Entities\ScheduledPayment::class,
+            ],
+            [
                 'plans',
                 Services\PlanService::class,
                 Entities\Plan::class,
@@ -707,9 +712,9 @@ class ApiTest extends TestCase
                 Entities\EmailCredential::class,
             ],
             [
-                'subscriptionLogs',
-                Services\SubscriptionLogService::class,
-                Entities\SubscriptionLog::class,
+                'subscriptionTracking',
+                Services\SubscriptionTrackingService::class,
+                Entities\SubscriptionTracking::class,
             ],
         ];
     }

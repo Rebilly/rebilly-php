@@ -11,24 +11,24 @@
 namespace Rebilly\Services;
 
 use ArrayObject;
-use Rebilly\Entities\SubscriptionLog;
+use Rebilly\Entities\SubscriptionTracking;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Paginator;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
 
 /**
- * Class SubscriptionLogService
+ * Class SubscriptionTrackingService
  *
  * @author Maksim Tuzov <maksim.tuzov@rebilly.com>
  * @version 0.1
  */
-final class SubscriptionLogService extends Service
+final class SubscriptionTrackingService extends Service
 {
     /**
      * @param array|ArrayObject $params
      *
-     * @return SubscriptionLog[]|Collection[]|Paginator
+     * @return SubscriptionTracking[]|Collection[]|Paginator
      */
     public function paginator($params = [])
     {
@@ -38,7 +38,7 @@ final class SubscriptionLogService extends Service
     /**
      * @param array|ArrayObject $params
      *
-     * @return SubscriptionLog[]|Collection
+     * @return SubscriptionTracking[]|Collection
      */
     public function search($params = [])
     {
@@ -51,7 +51,7 @@ final class SubscriptionLogService extends Service
      *
      * @throws NotFoundException The resource data does exist
      *
-     * @return SubscriptionLog
+     * @return SubscriptionTracking
      */
     public function load($logId, $params = [])
     {
