@@ -578,36 +578,6 @@ class ApiTest extends TestCase
         $service = $client->users();
         $result = $service->signin([]);
         $this->assertInstanceOf(Entities\User::class, $result);
-
-        $handler = $this->getMock(CurlHandler::class);
-        $handler
-            ->expects($this->any())
-            ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'reporting-currencies')
-            ));
-        $client = new Client([
-            'apiKey' => 'QWERTY',
-            'httpHandler' => $handler,
-        ]);
-        $service = $client->users();
-        $result = $service->reportingCurrencies();
-        $this->assertInstanceOf(Entities\ReportingCurrencies::class, $result);
-
-        $handler = $this->getMock(CurlHandler::class);
-        $handler
-            ->expects($this->any())
-            ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'users/userId/password')
-            ));
-        $client = new Client([
-            'apiKey' => 'QWERTY',
-            'httpHandler' => $handler,
-        ]);
-        $service = $client->users();
-        $result = $service->updatePassword('userId', []);
-        $this->assertInstanceOf(Entities\User::class, $result);
     }
 
     /**
