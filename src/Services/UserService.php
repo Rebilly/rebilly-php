@@ -177,14 +177,4 @@ final class UserService extends Service
             ]
         );
     }
-
-    /**
-     * Gets currencies available to be used as a reporting currency
-     *
-     * @return array - [<currency 3 letter code> => <currency 3 letter code - currency name> ...]
-     */
-    public function reportingCurrencies()
-    {
-        return $this->client()->get('reporting-currencies', []);
-    }
 }
