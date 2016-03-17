@@ -487,7 +487,6 @@ class ApiTest extends TestCase
 
         /** @var CurlHandler|MockObject $handler */
         $handler = $this->getMock(CurlHandler::class);
-
         $layout = new Entities\Layout();
         $layout->addItem([
             'planId' => $faker->uuid,
@@ -524,6 +523,76 @@ class ApiTest extends TestCase
         $this->assertInstanceOf(Entities\Layout::class, $result);
         $this->assertCount(2, $result->getItems());
         $this->assertInstanceOf(Entities\LayoutItem::class, $result->getItems()[0]);
+    }
+
+    /**
+     * @test
+     */
+    public function userService()
+    {
+        $faker = $this->getFaker();
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->getMock(CurlHandler::class);
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'users/userId')
+            ));
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+        $service = $client->users();
+        $result = $service->load('userId');
+        $this->assertInstanceOf(Entities\User::class, $result);
+
+        $handler = $this->getMock(CurlHandler::class);
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'users/signup')
+            ));
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+        $service = $client->users();
+        $result = $service->signup([]);
+        $this->assertInstanceOf(Entities\User::class, $result);
+
+        $handler = $this->getMock(CurlHandler::class);
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'users/signin')
+            ));
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+        $service = $client->users();
+        $result = $service->signin([]);
+        $this->assertInstanceOf(Entities\User::class, $result);
+
+        $handler = $this->getMock(CurlHandler::class);
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'users/userId')
+            ));
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+        $service = $client->users();
+        $result = $service->updatePassword('userId', []);
+        $this->assertInstanceOf(Entities\User::class, $result);
     }
 
     /**
@@ -571,6 +640,7 @@ class ApiTest extends TestCase
             [Entities\Reports\StatisticsReport::class],
             [Entities\Reports\SubscribersReport::class],
             [Entities\Reports\TransactionsHistogramReport::class],
+            [Entities\UpdatePassword::class],
         ];
     }
 
@@ -736,6 +806,8 @@ class ApiTest extends TestCase
         switch ($attribute) {
             case 'id':
             case 'password':
+            case 'currentPassword':
+            case 'newPassword':
             case 'customerId':
             case 'contactId':
             case 'websiteId':
