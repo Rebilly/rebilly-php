@@ -711,6 +711,11 @@ class ApiTest extends TestCase
                 Services\EmailCredentialService::class,
                 Entities\EmailCredential::class,
             ],
+            [
+                'webhookTracking',
+                Services\WebhookTrackingService::class,
+                Entities\WebhookTracking::class,
+            ],
         ];
     }
 

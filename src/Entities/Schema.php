@@ -198,6 +198,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'reporting-currencies' => function (array $content) {
                 return new ReportingCurrencies($content);
             },
+            'tracking/webhooks' => function (array $content) {
+                return new Collection(new WebhookTracking(), $content);
+            },
+            'tracking/webhooks/{logId}' => function (array $content) {
+                return new WebhookTracking($content);
+            },
         ];
     }
 
