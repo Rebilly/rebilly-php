@@ -633,6 +633,13 @@ class ApiTest extends TestCase
             [Entities\Session::class],
             [Entities\User::class],
             [Entities\ThreeDSecure::class],
+            [Entities\Reports\DisputesReport::class],
+            [Entities\Reports\DunningReport::class],
+            [Entities\Reports\RetentionPercentageReport::class],
+            [Entities\Reports\RetentionValueReport::class],
+            [Entities\Reports\StatisticsReport::class],
+            [Entities\Reports\SubscribersReport::class],
+            [Entities\Reports\TransactionsHistogramReport::class],
             [Entities\UpdatePassword::class],
         ];
     }

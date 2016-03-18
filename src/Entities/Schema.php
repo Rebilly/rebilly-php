@@ -14,6 +14,13 @@ use ArrayIterator;
 use ArrayAccess;
 use InvalidArgumentException;
 use IteratorAggregate;
+use Rebilly\Entities\Reports\DisputesReport;
+use Rebilly\Entities\Reports\DunningReport;
+use Rebilly\Entities\Reports\RetentionValueReport;
+use Rebilly\Entities\Reports\StatisticsReport;
+use Rebilly\Entities\Reports\SubscribersReport;
+use Rebilly\Entities\Reports\TransactionsHistogramReport;
+use Rebilly\Entities\Reports\TransactionsReport;
 use Rebilly\Rest\Collection;
 
 /**
@@ -194,6 +201,30 @@ final class Schema implements IteratorAggregate, ArrayAccess
             },
             '3dsecure/{3dsecureId}' => function (array $content) {
                 return new ThreeDSecure($content);
+            },
+            'reports/dunning' => function (array $content) {
+                return new DunningReport($content);
+            },
+            'reports/disputes' => function (array $content) {
+                return new DisputesReport($content);
+            },
+            'reports/retention-value' => function (array $content) {
+                return new RetentionValueReport($content);
+            },
+            'reports/retention-percentage' => function (array $content) {
+                return new RetentionValueReport($content);
+            },
+            'reports/subscribers' => function (array $content) {
+                return new SubscribersReport($content);
+            },
+            'reports/statistics' => function (array $content) {
+                return new StatisticsReport($content);
+            },
+            'reports/transactions' => function (array $content) {
+                return new TransactionsReport($content);
+            },
+            'histograms/transactions' => function (array $content) {
+                return new TransactionsHistogramReport($content);
             },
         ];
     }

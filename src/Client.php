@@ -77,6 +77,8 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\EmailCredentialService emailCredentials()
  * @method Services\ThreeDSecureService threeDSecure()
  * @method Services\SchedulePaymentService scheduledPayments()
+ * @method Services\ReportService reports()
+ * @method Services\HistogramService histogram()
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
@@ -116,6 +118,8 @@ final class Client
         'users' => Services\UserService::class,
         'emailCredentials' => Services\EmailCredentialService::class,
         'threeDSecure' => Services\ThreeDSecureService::class,
+        'reports' => Services\ReportService::class,
+        'histogram' => Services\HistogramService::class,
     ];
 
     /** @var array */
