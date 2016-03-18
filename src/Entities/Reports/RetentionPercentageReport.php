@@ -10,7 +10,7 @@
 
 namespace Rebilly\Entities\Reports;
 
-use Rebilly\Rest\Entity;
+use Rebilly\Rest\Resource;
 
 /**
  * Class RetentionPercentageReport
@@ -24,7 +24,7 @@ use Rebilly\Rest\Entity;
  * @author Arman Tuyakbayev <arman.tuyakbayev@rebilly.com>
  * @version 0.1
  */
-final class RetentionPercentageReport extends Entity
+final class RetentionPercentageReport extends Resource
 {
     /**
      * @return array

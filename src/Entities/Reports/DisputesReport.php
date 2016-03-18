@@ -10,7 +10,7 @@
 
 namespace Rebilly\Entities\Reports;
 
-use Rebilly\Rest\Entity;
+use Rebilly\Rest\Resource;
 
 /**
  * Class DisputesReport
@@ -24,7 +24,7 @@ use Rebilly\Rest\Entity;
  * @author Arman Tuyakbayev <arman.tuyakbayev@rebilly.com>
  * @version 0.1
  */
-final class DisputesReport extends Entity
+final class DisputesReport extends Resource
 {
     /**
      * @return array

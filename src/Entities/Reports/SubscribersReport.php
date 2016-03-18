@@ -10,7 +10,7 @@
 
 namespace Rebilly\Entities\Reports;
 
-use Rebilly\Rest\Entity;
+use Rebilly\Rest\Resource;
 
 /**
  * Class SubscribersReport
@@ -28,7 +28,7 @@ use Rebilly\Rest\Entity;
  * @author Arman Tuyakbayev <arman.tuyakbayev@rebilly.com>
  * @version 0.1
  */
-final class SubscribersReport extends Entity
+final class SubscribersReport extends Resource
 {
     /**
      * @return array

@@ -10,7 +10,7 @@
 
 namespace Rebilly\Entities\Reports;
 
-use Rebilly\Rest\Entity;
+use Rebilly\Rest\Resource;
 
 /**
  * Class StatisticsReport
@@ -32,7 +32,7 @@ use Rebilly\Rest\Entity;
  * @author Arman Tuyakbayev <arman.tuyakbayev@rebilly.com>
  * @version 0.1
  */
-final class StatisticsReport extends Entity
+final class StatisticsReport extends Resource
 {
     /**
      * @return float

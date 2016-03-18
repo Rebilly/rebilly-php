@@ -10,7 +10,7 @@
 
 namespace Rebilly\Entities\Reports;
 
-use Rebilly\Rest\Entity;
+use Rebilly\Rest\Resource;
 
 /**
  * Class TransactionsHistogramReport
@@ -24,7 +24,7 @@ use Rebilly\Rest\Entity;
  * @author Arman Tuyakbayev <arman.tuyakbayev@rebilly.com>
  * @version 0.1
  */
-final class TransactionsHistogramReport extends Entity
+final class TransactionsHistogramReport extends Resource
 {
     /**
      * @return array
