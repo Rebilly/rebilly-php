@@ -195,6 +195,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             '3dsecure/{3dsecureId}' => function (array $content) {
                 return new ThreeDSecure($content);
             },
+            'api-keys' => function (array $content) {
+                return new Collection(new ApiKey(), $content);
+            },
+            'api-keys/{apiKeyId}' => function (array $content) {
+                return new ApiKey($content);
+            },
         ];
     }
 

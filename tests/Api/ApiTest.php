@@ -781,6 +781,11 @@ class ApiTest extends TestCase
                 Services\EmailCredentialService::class,
                 Entities\EmailCredential::class,
             ],
+            [
+                'apiKeys',
+                Services\ApiKeyService::class,
+                Entities\ApiKey::class,
+            ],
         ];
     }
 
