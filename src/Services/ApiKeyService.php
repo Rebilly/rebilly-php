@@ -71,7 +71,7 @@ final class ApiKeyService extends Service
         if (isset($apiKeyId)) {
             return $this->client()->put($data, 'api-keys/{apiKeyId}', ['apiKeyId' => $apiKeyId]);
         } else {
-            return $this->client()->post($data, 'apiKeys');
+            return $this->client()->post($data, 'api-keys');
         }
     }
 

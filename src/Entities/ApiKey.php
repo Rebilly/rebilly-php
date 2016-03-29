@@ -10,6 +10,7 @@
 
 namespace Rebilly\Entities;
 
+use DomainException;
 use Rebilly\Rest\Entity;
 
 /**
@@ -31,6 +32,18 @@ use Rebilly\Rest\Entity;
  */
 final class ApiKey extends Entity
 {
+    const DATETIME_FORMAT_MYSQL = 'mysql';
+    const DATETIME_FORMAT_ISO8601 = 'iso8601';
+    const MSG_UNEXPECTED_DATETIME_FORMAT = 'Unexpected datetime format. Only %s formats support';
+
+    /**
+     * @return array
+     */
+    public static function datetimeFormats()
+    {
+        return [self::DATETIME_FORMAT_MYSQL, self::DATETIME_FORMAT_ISO8601];
+    }
+
     /**
      * @return string;
      */
@@ -64,6 +77,10 @@ final class ApiKey extends Entity
      */
     public function setDatetimeFormat($value)
     {
+        if (!in_array($value, self::datetimeFormats())) {
+            throw new DomainException(sprintf(self::MSG_UNEXPECTED_DATETIME_FORMAT, implode(', ', self::datetimeFormats())));
+        }
+
         return $this->setAttribute('datetimeFormat', $value);
     }
 
