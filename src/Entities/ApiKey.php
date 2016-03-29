@@ -78,7 +78,9 @@ final class ApiKey extends Entity
     public function setDatetimeFormat($value)
     {
         if (!in_array($value, self::datetimeFormats())) {
-            throw new DomainException(sprintf(self::MSG_UNEXPECTED_DATETIME_FORMAT, implode(', ', self::datetimeFormats())));
+            throw new DomainException(
+                sprintf(self::MSG_UNEXPECTED_DATETIME_FORMAT, implode(', ', self::datetimeFormats()))
+            );
         }
 
         return $this->setAttribute('datetimeFormat', $value);
