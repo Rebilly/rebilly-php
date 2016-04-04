@@ -42,11 +42,6 @@ use Rebilly\Rest\Entity;
  */
 final class Transaction extends Entity
 {
-    private static $resultApproved = 'approved';
-    private static $resultDeclined = 'declined';
-    private static $resultCanceled = 'canceled';
-    private static $resultUnknown = 'unknown';
-
     /**
      * @return string
      */
@@ -172,6 +167,6 @@ final class Transaction extends Entity
      */
     public function isApproved()
     {
-        return $this->getResult() === self::$resultApproved;
+        return $this->getResult() === 'approved';
     }
 }
