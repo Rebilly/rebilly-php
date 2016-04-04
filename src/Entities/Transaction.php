@@ -161,4 +161,12 @@ final class Transaction extends Entity
             return null;
         }
     }
+
+    /**
+     * @return bool
+     */
+    public function isApproved()
+    {
+        return $this->getResult() === 'approved';
+    }
 }
