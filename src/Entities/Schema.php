@@ -201,6 +201,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'api-keys/{apiKeyId}' => function (array $content) {
                 return new ApiKey($content);
             },
+            'checkout-pages' => function (array $content) {
+                return new Collection(new CheckoutPage(), $content);
+            },
+            'checkout-pages/{checkoutPageId}' => function (array $content) {
+                return new CheckoutPage($content);
+            },
         ];
     }
 

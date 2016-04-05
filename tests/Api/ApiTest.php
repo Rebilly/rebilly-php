@@ -787,6 +787,11 @@ class ApiTest extends TestCase
                 Services\ApiKeyService::class,
                 Entities\ApiKey::class,
             ],
+            [
+                'checkoutPages',
+                Services\CheckoutPageService::class,
+                Entities\CheckoutPage::class,
+            ],
         ];
     }
 
@@ -835,6 +840,7 @@ class ApiTest extends TestCase
             case 'trialAmount':
             case 'setupAmount':
                 return $faker->randomFloat(2);
+            case 'uri':
             case 'checkoutPageUri':
             case 'gatewayName':
             case 'organizationId':
@@ -846,6 +852,7 @@ class ApiTest extends TestCase
             case 'cavv':
             case 'xid':
             case 'senderName':
+            case 'redirectUrl':
                 return $faker->word;
             case 'organization':
                 return $faker->company;
@@ -897,6 +904,7 @@ class ApiTest extends TestCase
             case 'isActive':
             case 'archived':
             case 'starred':
+            case 'allowCustomCustomerId':
                 return $faker->boolean();
             case 'credentialTtl':
             case 'authTokenTtl':
@@ -909,6 +917,7 @@ class ApiTest extends TestCase
             case 'minQuantity':
             case 'maxQuantity':
             case 'monthlyLimit':
+            case 'redirectTimeout':
                 return $faker->numberBetween(1, 10);
             case 'address2':
                 return $faker->address;
