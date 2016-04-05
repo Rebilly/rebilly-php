@@ -77,6 +77,7 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\EmailCredentialService emailCredentials()
  * @method Services\ThreeDSecureService threeDSecure()
  * @method Services\SchedulePaymentService scheduledPayments()
+ * @method Services\ApiKeyService apiKeys()
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
@@ -116,6 +117,7 @@ final class Client
         'users' => Services\UserService::class,
         'emailCredentials' => Services\EmailCredentialService::class,
         'threeDSecure' => Services\ThreeDSecureService::class,
+        'apiKeys' => Services\ApiKeyService::class,
     ];
 
     /** @var array */

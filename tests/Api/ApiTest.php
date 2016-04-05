@@ -634,6 +634,7 @@ class ApiTest extends TestCase
             [Entities\User::class],
             [Entities\ThreeDSecure::class],
             [Entities\UpdatePassword::class],
+            [Entities\ApiKey::class],
         ];
     }
 
@@ -781,6 +782,11 @@ class ApiTest extends TestCase
                 Services\EmailCredentialService::class,
                 Entities\EmailCredential::class,
             ],
+            [
+                'apiKeys',
+                Services\ApiKeyService::class,
+                Entities\ApiKey::class,
+            ],
         ];
     }
 
@@ -854,6 +860,7 @@ class ApiTest extends TestCase
                 return $faker->ipv4;
             case 'token':
             case 'fingerprint':
+            case 'secretKey':
                 return $faker->md5;
             case 'name':
             case 'medium':
@@ -883,6 +890,7 @@ class ApiTest extends TestCase
             case 'host':
                 return $faker->url;
             case 'webHookUsername':
+            case 'userName':
                 return $faker->userName;
             case 'webHookPassword':
                 return $faker->md5;
@@ -917,6 +925,7 @@ class ApiTest extends TestCase
             case 'phoneNumber':
                 return $faker->$attribute;
             case 'type':
+            case 'datetimeFormat':
                 switch ($class) {
                     case Entities\Blacklist::class:
                         return $faker->randomElement(Entities\Blacklist::types());
@@ -924,6 +933,8 @@ class ApiTest extends TestCase
                         return $faker->randomElement(Entities\InvoiceItem::types());
                     case Entities\CustomField::class:
                         return $faker->randomElement(Entities\CustomField::allowedTypes());
+                    case Entities\ApiKey::class:
+                        return $faker->randomElement(Entities\ApiKey::datetimeFormats());
                     default:
                         throw new InvalidArgumentException(
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
