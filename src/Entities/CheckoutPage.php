@@ -55,9 +55,9 @@ final class CheckoutPage extends Entity
     /**
      * @return string
      */
-    public function getUri()
+    public function getUriPath()
     {
-        return $this->getAttribute('uri');
+        return $this->getAttribute('uriPath');
     }
 
     /**
@@ -65,9 +65,9 @@ final class CheckoutPage extends Entity
      *
      * @return $this
      */
-    public function setUri($value)
+    public function setUriPath($value)
     {
-        return $this->setAttribute('uri', $value);
+        return $this->setAttribute('uriPath', $value);
     }
 
     /**
