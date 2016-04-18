@@ -135,11 +135,7 @@ final class PayPalAccount extends Entity
      */
     public function getCustomer()
     {
-        if ($this->hasEmbeddedResource('customer')) {
-            return new Customer($this->getEmbeddedResource('customer'));
-        } else {
-            return null;
-        }
+        return $this->hasEmbeddedResource('customer') ? new Customer($this->getEmbeddedResource('customer')) : null;
     }
 
     /**
@@ -147,10 +143,6 @@ final class PayPalAccount extends Entity
      */
     public function getContact()
     {
-        if ($this->hasEmbeddedResource('contact')) {
-            return new Contact($this->getEmbeddedResource('contact'));
-        } else {
-            return null;
-        }
+        return $this->hasEmbeddedResource('contact') ? new Contact($this->getEmbeddedResource('contact')) : null;
     }
 }
