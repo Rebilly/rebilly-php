@@ -25,7 +25,7 @@ class PayPalAccountTest extends TestCase
     /**
      * @test
      */
-    public function searchBankAccount()
+    public function searchPayPalAccount()
     {
         $client = $this->getClient();
 
@@ -40,7 +40,7 @@ class PayPalAccountTest extends TestCase
     /**
      * @test
      */
-    public function createBankAccount()
+    public function createPayPalAccount()
     {
         $client = $this->getClient();
 
