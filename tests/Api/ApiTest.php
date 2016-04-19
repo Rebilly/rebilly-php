@@ -629,6 +629,7 @@ class ApiTest extends TestCase
             [Entities\Organization::class],
             [Entities\GatewayAccount::class],
             [Entities\BankAccount::class],
+            [Entities\PayPalAccount::class],
             [Entities\CustomField::class, 'name'],
             [Entities\Session::class],
             [Entities\User::class],
@@ -763,6 +764,11 @@ class ApiTest extends TestCase
                 Entities\BankAccount::class,
             ],
             [
+                'payPalAccounts',
+                Services\PayPalAccountService::class,
+                Entities\PayPalAccount::class,
+            ],
+            [
                 'sessions',
                 Services\SessionService::class,
                 Entities\Session::class,
@@ -823,6 +829,7 @@ class ApiTest extends TestCase
             case 'paymentCardId':
             case 'gatewayAccountId':
             case 'defaultCardId':
+            case 'defaultPaymentInstrumentId':
             case 'relatedId':
                 return $faker->uuid;
             case 'dueTime':
@@ -1000,6 +1007,7 @@ class ApiTest extends TestCase
                     [Entities\Note::RELATED_TYPE_CUSTOMER, Entities\Note::RELATED_TYPE_WEBSITE]
                 );
             case 'method':
+            case 'defaultPaymentMethod':
                 return new Entities\PaymentMethods\PaymentCardMethod(); // TODO
             case 'customFields':
             case 'gatewayConfig':

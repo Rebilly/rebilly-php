@@ -63,6 +63,7 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\PaymentCardService paymentCards()
  * @method Services\PaymentCardTokenService paymentCardTokens()
  * @method Services\PaymentService payments()
+ * @method Services\PayPalAccountService payPalAccounts()
  * @method Services\PlanService plans()
  * @method Services\ResetPasswordTokenService resetPasswordTokens()
  * @method Services\SubscriptionService subscriptions()
@@ -104,6 +105,7 @@ final class Client
         'paymentCards' => Services\PaymentCardService::class,
         'paymentCardTokens' => Services\PaymentCardTokenService::class,
         'payments' => Services\PaymentService::class,
+        'payPalAccounts' => Services\PayPalAccountService::class,
         'scheduledPayments' => Services\SchedulePaymentService::class,
         'plans' => Services\PlanService::class,
         'resetPasswordTokens' => Services\ResetPasswordTokenService::class,
