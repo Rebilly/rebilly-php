@@ -89,6 +89,7 @@ final class Client
     const BASE_HOST = 'https://api.rebilly.com';
     const SANDBOX_HOST = 'https://api-sandbox.rebilly.com';
     const CURRENT_VERSION = 'v2.1';
+    const SDK_VERSION = '2.0.2';
 
     private static $services = [
         'authenticationOptions' => Services\AuthenticationOptionsService::class,
@@ -223,6 +224,7 @@ final class Client
         // Prepare middleware stack
         $this->middleware = new Middleware\CompositeMiddleware(
             new Middleware\BaseUri($this->createUri($baseUrl . '/' . Client::CURRENT_VERSION)),
+            new Middleware\UserAgent(self::SDK_VERSION),
             $authentication,
             $middleware,
             $logger
