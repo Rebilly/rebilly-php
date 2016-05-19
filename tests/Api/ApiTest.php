@@ -487,7 +487,6 @@ class ApiTest extends TestCase
 
         /** @var CurlHandler|MockObject $handler */
         $handler = $this->getMock(CurlHandler::class);
-
         $layout = new Entities\Layout();
         $layout->addItem([
             'planId' => $faker->uuid,
@@ -527,6 +526,76 @@ class ApiTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function userService()
+    {
+        $faker = $this->getFaker();
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->getMock(CurlHandler::class);
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'users/userId')
+            ));
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+        $service = $client->users();
+        $result = $service->load('userId');
+        $this->assertInstanceOf(Entities\User::class, $result);
+
+        $handler = $this->getMock(CurlHandler::class);
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'users/signup')
+            ));
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+        $service = $client->users();
+        $result = $service->signup([]);
+        $this->assertInstanceOf(Entities\User::class, $result);
+
+        $handler = $this->getMock(CurlHandler::class);
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'users/signin')
+            ));
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+        $service = $client->users();
+        $result = $service->signin([]);
+        $this->assertInstanceOf(Entities\User::class, $result);
+
+        $handler = $this->getMock(CurlHandler::class);
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'users/userId')
+            ));
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+        $service = $client->users();
+        $result = $service->updatePassword('userId', []);
+        $this->assertInstanceOf(Entities\User::class, $result);
+    }
+
+    /**
      * @return array
      */
     public function provideEntityClasses()
@@ -560,10 +629,13 @@ class ApiTest extends TestCase
             [Entities\Organization::class],
             [Entities\GatewayAccount::class],
             [Entities\BankAccount::class],
+            [Entities\PayPalAccount::class],
             [Entities\CustomField::class, 'name'],
             [Entities\Session::class],
             [Entities\User::class],
             [Entities\ThreeDSecure::class],
+            [Entities\UpdatePassword::class],
+            [Entities\ApiKey::class],
         ];
     }
 
@@ -692,6 +764,11 @@ class ApiTest extends TestCase
                 Entities\BankAccount::class,
             ],
             [
+                'payPalAccounts',
+                Services\PayPalAccountService::class,
+                Entities\PayPalAccount::class,
+            ],
+            [
                 'sessions',
                 Services\SessionService::class,
                 Entities\Session::class,
@@ -716,6 +793,16 @@ class ApiTest extends TestCase
                 Services\ApiTrackingService::class,
                 Entities\ApiTracking::class,
             ],
+            [
+                'apiKeys',
+                Services\ApiKeyService::class,
+                Entities\ApiKey::class,
+            ],
+            [
+                'checkoutPages',
+                Services\CheckoutPageService::class,
+                Entities\CheckoutPage::class,
+            ],
         ];
     }
 
@@ -734,6 +821,8 @@ class ApiTest extends TestCase
         switch ($attribute) {
             case 'id':
             case 'password':
+            case 'currentPassword':
+            case 'newPassword':
             case 'customerId':
             case 'contactId':
             case 'websiteId':
@@ -745,6 +834,7 @@ class ApiTest extends TestCase
             case 'paymentCardId':
             case 'gatewayAccountId':
             case 'defaultCardId':
+            case 'defaultPaymentInstrumentId':
             case 'relatedId':
                 return $faker->uuid;
             case 'dueTime':
@@ -762,6 +852,7 @@ class ApiTest extends TestCase
             case 'trialAmount':
             case 'setupAmount':
                 return $faker->randomFloat(2);
+            case 'uriPath':
             case 'checkoutPageUri':
             case 'gatewayName':
             case 'organizationId':
@@ -773,6 +864,7 @@ class ApiTest extends TestCase
             case 'cavv':
             case 'xid':
             case 'senderName':
+            case 'redirectUrl':
                 return $faker->word;
             case 'organization':
                 return $faker->company;
@@ -787,6 +879,7 @@ class ApiTest extends TestCase
                 return $faker->ipv4;
             case 'token':
             case 'fingerprint':
+            case 'secretKey':
                 return $faker->md5;
             case 'name':
             case 'medium':
@@ -816,12 +909,14 @@ class ApiTest extends TestCase
             case 'host':
                 return $faker->url;
             case 'webHookUsername':
+            case 'userName':
                 return $faker->userName;
             case 'webHookPassword':
                 return $faker->md5;
             case 'isActive':
             case 'archived':
             case 'starred':
+            case 'allowCustomCustomerId':
                 return $faker->boolean();
             case 'credentialTtl':
             case 'authTokenTtl':
@@ -834,6 +929,7 @@ class ApiTest extends TestCase
             case 'minQuantity':
             case 'maxQuantity':
             case 'monthlyLimit':
+            case 'redirectTimeout':
                 return $faker->numberBetween(1, 10);
             case 'address2':
                 return $faker->address;
@@ -850,6 +946,7 @@ class ApiTest extends TestCase
             case 'phoneNumber':
                 return $faker->$attribute;
             case 'type':
+            case 'datetimeFormat':
                 switch ($class) {
                     case Entities\Blacklist::class:
                         return $faker->randomElement(Entities\Blacklist::types());
@@ -857,6 +954,8 @@ class ApiTest extends TestCase
                         return $faker->randomElement(Entities\InvoiceItem::types());
                     case Entities\CustomField::class:
                         return $faker->randomElement(Entities\CustomField::allowedTypes());
+                    case Entities\ApiKey::class:
+                        return $faker->randomElement(Entities\ApiKey::datetimeFormats());
                     default:
                         throw new InvalidArgumentException(
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
@@ -913,6 +1012,7 @@ class ApiTest extends TestCase
                     [Entities\Note::RELATED_TYPE_CUSTOMER, Entities\Note::RELATED_TYPE_WEBSITE]
                 );
             case 'method':
+            case 'defaultPaymentMethod':
                 return new Entities\PaymentMethods\PaymentCardMethod(); // TODO
             case 'customFields':
             case 'gatewayConfig':

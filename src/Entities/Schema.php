@@ -102,6 +102,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'payment-cards/{cardId}' => function (array $content) {
                 return new PaymentCard($content);
             },
+            'paypal-accounts' => function (array $content) {
+                return new Collection(new PayPalAccount(), $content);
+            },
+            'paypal-accounts/{paypalAccountId}' => function (array $content) {
+                return new PayPalAccount($content);
+            },
             'tokens' => function (array $content) {
                 return new Collection(new PaymentCardToken(), $content);
             },
@@ -195,8 +201,17 @@ final class Schema implements IteratorAggregate, ArrayAccess
             '3dsecure/{3dsecureId}' => function (array $content) {
                 return new ThreeDSecure($content);
             },
-            'reporting-currencies' => function (array $content) {
-                return new ReportingCurrencies($content);
+            'api-keys' => function (array $content) {
+                return new Collection(new ApiKey(), $content);
+            },
+            'api-keys/{apiKeyId}' => function (array $content) {
+                return new ApiKey($content);
+            },
+            'checkout-pages' => function (array $content) {
+                return new Collection(new CheckoutPage(), $content);
+            },
+            'checkout-pages/{checkoutPageId}' => function (array $content) {
+                return new CheckoutPage($content);
             },
             'tracking/api' => function (array $content) {
                 return new Collection(new ApiTracking(), $content);
