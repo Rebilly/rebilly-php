@@ -213,6 +213,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'checkout-pages/{checkoutPageId}' => function (array $content) {
                 return new CheckoutPage($content);
             },
+            'tracking/api' => function (array $content) {
+                return new Collection(new ApiTracking(), $content);
+            },
+            'tracking/api/{logId}' => function (array $content) {
+                return new ApiTracking($content);
+            },
         ];
     }
 

@@ -77,6 +77,7 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\UserService users()
  * @method Services\EmailCredentialService emailCredentials()
  * @method Services\ThreeDSecureService threeDSecure()
+ * @method Services\ApiTrackingService apiTracking()
  * @method Services\SchedulePaymentService scheduledPayments()
  * @method Services\ApiKeyService apiKeys()
  * @method Services\CheckoutPageService checkoutPages()
@@ -121,6 +122,7 @@ final class Client
         'users' => Services\UserService::class,
         'emailCredentials' => Services\EmailCredentialService::class,
         'threeDSecure' => Services\ThreeDSecureService::class,
+        'apiTracking' => Services\ApiTrackingService::class,
         'apiKeys' => Services\ApiKeyService::class,
         'checkoutPages' => Services\CheckoutPageService::class,
     ];
