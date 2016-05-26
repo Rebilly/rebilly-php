@@ -789,11 +789,11 @@ class ApiTest extends TestCase
                 Entities\EmailCredential::class,
             ],
             [
-<<<<<<< HEAD
                 'subscriptionTracking',
                 Services\SubscriptionTrackingService::class,
                 Entities\SubscriptionTracking::class,
-=======
+            ],
+            [
                 'apiTracking',
                 Services\ApiTrackingService::class,
                 Entities\ApiTracking::class,
@@ -807,7 +807,6 @@ class ApiTest extends TestCase
                 'checkoutPages',
                 Services\CheckoutPageService::class,
                 Entities\CheckoutPage::class,
->>>>>>> master
             ],
         ];
     }
