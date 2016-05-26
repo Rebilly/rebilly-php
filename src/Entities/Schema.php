@@ -219,6 +219,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'tracking/api/{logId}' => function (array $content) {
                 return new ApiTracking($content);
             },
+            'tracking/subscriptions' => function (array $content) {
+                return new Collection(new SubscriptionTracking(), $content);
+            },
+            'tracking/subscriptions/{logId}' => function (array $content) {
+                return new SubscriptionTracking($content);
+            },
         ];
     }
 
