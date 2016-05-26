@@ -17,6 +17,7 @@ use Rebilly\Entities\Login;
 use Rebilly\Entities\ResetPassword;
 use Rebilly\Entities\Session;
 use Rebilly\Entities\Signup;
+use Rebilly\Entities\UpdatePassword;
 use Rebilly\Entities\User;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
@@ -158,5 +159,22 @@ final class UserService extends Service
     public function delete($userId)
     {
         $this->client()->delete('users/{userId}', ['userId' => $userId]);
+    }
+
+    /**
+     * @param string $userId
+     * @param array|JsonSerializable|UpdatePassword $data
+     *
+     * @return User
+     */
+    public function updatePassword($userId, $data)
+    {
+        return $this->client()->post(
+            $data,
+            'users/{userId}/password',
+            [
+                'userId' => $userId,
+            ]
+        );
     }
 }
