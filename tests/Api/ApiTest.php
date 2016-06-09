@@ -636,6 +636,7 @@ class ApiTest extends TestCase
             [Entities\ThreeDSecure::class],
             [Entities\UpdatePassword::class],
             [Entities\ApiKey::class],
+            [Entities\Dispute::class],
         ];
     }
 
@@ -808,6 +809,11 @@ class ApiTest extends TestCase
                 Services\CheckoutPageService::class,
                 Entities\CheckoutPage::class,
             ],
+            [
+                'disputes',
+                Services\DisputeService::class,
+                Entities\Dispute::class,
+            ],
         ];
     }
 
@@ -841,6 +847,7 @@ class ApiTest extends TestCase
             case 'defaultCardId':
             case 'defaultPaymentInstrumentId':
             case 'relatedId':
+            case 'transactionId':
                 return $faker->uuid;
             case 'dueTime':
             case 'expiredTime':
@@ -850,6 +857,8 @@ class ApiTest extends TestCase
             case 'periodEndTime':
             case 'downtimeStart':
             case 'downtimeEnd':
+            case 'postedTime':
+            case 'deadlineTime':
                 return $faker->date('Y-m-d H:i:s');
             case 'unitPrice':
             case 'amount':
@@ -870,6 +879,7 @@ class ApiTest extends TestCase
             case 'xid':
             case 'senderName':
             case 'redirectUrl':
+            case 'acquirerReferenceNumber':
                 return $faker->word;
             case 'organization':
                 return $faker->company;
@@ -961,6 +971,8 @@ class ApiTest extends TestCase
                         return $faker->randomElement(Entities\CustomField::allowedTypes());
                     case Entities\ApiKey::class:
                         return $faker->randomElement(Entities\ApiKey::datetimeFormats());
+                    case Entities\Dispute::class:
+                        return $faker->randomElement(Entities\Dispute::allowedTypes());
                     default:
                         throw new InvalidArgumentException(
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
@@ -1054,6 +1066,10 @@ class ApiTest extends TestCase
                 return $faker->randomElement(Entities\EmailCredential::allowedEncryptionMethods());
             case 'autopay':
                 return $faker->boolean();
+            case 'reasonCode':
+                return '1000';
+            case 'status':
+                return $faker->randomElement(Entities\Dispute::allowedStatuses());
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
