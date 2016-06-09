@@ -636,6 +636,7 @@ class ApiTest extends TestCase
             [Entities\ThreeDSecure::class],
             [Entities\UpdatePassword::class],
             [Entities\ApiKey::class],
+            [Entities\ApiTracking::class],
         ];
     }
 
@@ -808,6 +809,11 @@ class ApiTest extends TestCase
                 Services\CheckoutPageService::class,
                 Entities\CheckoutPage::class,
             ],
+            [
+                'apiTracking',
+                Services\ApiTrackingService::class,
+                Entities\ApiTracking::class,
+            ],
         ];
     }
 
@@ -870,6 +876,8 @@ class ApiTest extends TestCase
             case 'xid':
             case 'senderName':
             case 'redirectUrl':
+            case 'request':
+            case 'response':
                 return $faker->word;
             case 'organization':
                 return $faker->company;
@@ -1018,7 +1026,14 @@ class ApiTest extends TestCase
                 );
             case 'method':
             case 'defaultPaymentMethod':
-                return new Entities\PaymentMethods\PaymentCardMethod(); // TODO
+                switch ($class) {
+                    case Entities\Customer::class:
+                        return new Entities\PaymentMethods\PaymentCardMethod(); // TODO
+                    case Entities\ApiTracking::class:
+                        return 'GET';
+                    default:
+                        return new Entities\PaymentMethods\PaymentCardMethod(); // TODO
+                }
             case 'customFields':
             case 'gatewayConfig':
             case 'additionalSchema':
@@ -1054,6 +1069,10 @@ class ApiTest extends TestCase
                 return $faker->randomElement(Entities\EmailCredential::allowedEncryptionMethods());
             case 'autopay':
                 return $faker->boolean();
+            case 'status':
+                return 200;
+            case 'duration':
+                return $faker->randomNumber(1, 100);
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
