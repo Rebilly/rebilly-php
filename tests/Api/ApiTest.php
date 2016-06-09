@@ -1096,14 +1096,19 @@ class ApiTest extends TestCase
                 return $faker->randomElement(Entities\EmailCredential::allowedEncryptionMethods());
             case 'autopay':
                 return $faker->boolean();
-            case 'status':
-                return 200;
             case 'duration':
                 return $faker->numberBetween(1, 100);
             case 'reasonCode':
                 return '1000';
             case 'status':
-                return $faker->randomElement(Entities\Dispute::allowedStatuses());
+                switch ($class) {
+                    case Entities\ApiTracking::class:
+                        return 200;
+                    case Entities\Dispute::class:
+                        return $faker->randomElement(Entities\Dispute::allowedStatuses());
+                    default:
+                        return $faker->randomElement(Entities\Dispute::allowedStatuses());
+                }
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
