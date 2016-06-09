@@ -1076,7 +1076,7 @@ class ApiTest extends TestCase
             case 'signatureVerification':
                 return 'Y';
             case 'port':
-                return $faker->randomNumber(25, 100);
+                return $faker->numberBetween(25, 100);
             case 'authenticationMethod':
                 return $faker->randomElement(Entities\EmailCredential::allowedAuthenticationMethods());
             case 'encryptionMethod':
