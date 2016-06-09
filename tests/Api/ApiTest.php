@@ -641,6 +641,8 @@ class ApiTest extends TestCase
             [Entities\SubscriptionTracking::class],
             [Entities\Signup::class],
             [Entities\ResetPassword::class],
+            [Entities\Email::class],
+            [Entities\EmailCredential::class],
         ];
     }
 
