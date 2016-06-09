@@ -277,7 +277,7 @@ final class Dispute extends Entity
         if (!in_array($value, $allowedStatuses)) {
             throw new DomainException(sprintf(self::MSG_UNEXPECTED_STATUS, implode(', ', $allowedStatuses)));
         }
-        
+
         return $this->setAttribute('status', $value);
     }
 
