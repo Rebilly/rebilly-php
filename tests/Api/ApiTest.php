@@ -638,6 +638,7 @@ class ApiTest extends TestCase
             [Entities\ApiKey::class],
             [Entities\ApiTracking::class],
             [Entities\CheckoutPage::class],
+            [Entities\SubscriptionTracking::class],
         ];
     }
 
@@ -815,6 +816,11 @@ class ApiTest extends TestCase
                 Services\ApiTrackingService::class,
                 Entities\ApiTracking::class,
             ],
+            [
+                'subscriptionTracking',
+                Services\SubscriptionTrackingService::class,
+                Entities\SubscriptionTracking::class,
+            ],
         ];
     }
 
@@ -848,6 +854,8 @@ class ApiTest extends TestCase
             case 'defaultCardId':
             case 'defaultPaymentInstrumentId':
             case 'relatedId':
+            case 'subscriptionId':
+            case 'subscriptionId':
                 return $faker->uuid;
             case 'dueTime':
             case 'expiredTime':
