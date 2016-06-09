@@ -1087,7 +1087,7 @@ class ApiTest extends TestCase
             case 'status':
                 return 200;
             case 'duration':
-                return $faker->randomNumber(1, 100);
+                return $faker->numberBetween(1, 100);
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
