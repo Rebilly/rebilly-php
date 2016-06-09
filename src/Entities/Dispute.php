@@ -247,11 +247,11 @@ final class Dispute extends Entity
     public function setType($value)
     {
         $allowedTypes = self::allowedTypes();
-        
+
         if (!in_array($value, $allowedTypes)) {
             throw new DomainException(sprintf(self::MSG_UNEXPECTED_TYPE, implode(', ', $allowedTypes)));
         }
-        
+
         return $this->setAttribute('type', $value);
     }
 
