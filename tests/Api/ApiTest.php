@@ -637,6 +637,7 @@ class ApiTest extends TestCase
             [Entities\UpdatePassword::class],
             [Entities\ApiKey::class],
             [Entities\ApiTracking::class],
+            [Entities\CheckoutPage::class],
         ];
     }
 
