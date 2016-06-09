@@ -643,6 +643,7 @@ class ApiTest extends TestCase
             [Entities\ResetPassword::class],
             [Entities\Email::class],
             [Entities\EmailCredential::class],
+            [Entities\Login::class],
         ];
     }
 
