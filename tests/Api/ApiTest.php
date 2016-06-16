@@ -818,7 +818,7 @@ class ApiTest extends TestCase
                 Entities\SubscriptionTracking::class,
             ],
             [
-                'webhookTracking',
+                'websiteWebhookTracking',
                 Services\WebsiteWebhookTrackingService::class,
                 Entities\WebsiteWebhookTracking::class,
             ],
