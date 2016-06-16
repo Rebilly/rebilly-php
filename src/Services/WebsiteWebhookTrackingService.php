@@ -11,7 +11,7 @@
 namespace Rebilly\Services;
 
 use ArrayObject;
-use Rebilly\Entities\WebhookTracking;
+use Rebilly\Entities\WebsiteWebhookTracking;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Paginator;
 use Rebilly\Rest\Collection;
@@ -23,26 +23,26 @@ use Rebilly\Rest\Service;
  * @author Maksim Tuzov <maksim.tuzov@rebilly.com>
  * @version 0.1
  */
-final class WebhookTrackingService extends Service
+final class WebsiteWebhookTrackingService extends Service
 {
     /**
      * @param array|ArrayObject $params
      *
-     * @return WebhookTracking[]|Collection[]|Paginator
+     * @return WebsiteWebhookTracking[]|Collection[]|Paginator
      */
     public function paginator($params = [])
     {
-        return new Paginator($this->client(), 'tracking/webhooks', $params);
+        return new Paginator($this->client(), 'tracking/website-webhooks', $params);
     }
 
     /**
      * @param array|ArrayObject $params
      *
-     * @return WebhookTracking[]|Collection
+     * @return WebsiteWebhookTracking[]|Collection
      */
     public function search($params = [])
     {
-        return $this->client()->get('tracking/webhooks', $params);
+        return $this->client()->get('tracking/website-webhooks', $params);
     }
 
     /**
@@ -51,10 +51,10 @@ final class WebhookTrackingService extends Service
      *
      * @throws NotFoundException The resource data does exist
      *
-     * @return WebhookTracking
+     * @return WebsiteWebhookTracking
      */
     public function load($trackId, $params = [])
     {
-        return $this->client()->get('tracking/webhooks/{trackId}', ['trackId' => $trackId] + (array) $params);
+        return $this->client()->get('tracking/website-webhooks/{trackId}', ['trackId' => $trackId] + (array) $params);
     }
 }

@@ -18,9 +18,8 @@ use Rebilly\Rest\Entity;
  * ```json
  * {
  *   "id"
- *   "websiteName"
+ *   "websiteId"
  *   "eventName"
- *   "initiatedFrom"
  *   "status"
  *   "response"
  *   "pushData"
@@ -33,14 +32,14 @@ use Rebilly\Rest\Entity;
  * @author Maksim Tuzov <maksim.tuzov@rebilly.com>
  * @version 0.1
  */
-final class WebhookTracking extends Entity
+final class WebsiteWebhookTracking extends Entity
 {
     /**
      * @return string;
      */
-    public function getWebsiteName()
+    public function getWebsiteId()
     {
-        return $this->getAttribute('websiteName');
+        return $this->getAttribute('websiteId');
     }
 
     /**
@@ -49,14 +48,6 @@ final class WebhookTracking extends Entity
     public function getEventName()
     {
         return $this->getAttribute('eventName');
-    }
-
-    /**
-     * @return string
-     */
-    public function getInitiatedFrom()
-    {
-        return $this->getAttribute('initiatedFrom');
     }
 
     /**

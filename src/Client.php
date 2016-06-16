@@ -80,7 +80,7 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\SubscriptionTrackingService subscriptionTracking()
  * @method Services\ApiTrackingService apiTracking()
  * @method Services\SchedulePaymentService scheduledPayments()
- * @method Services\WebhookTrackingService webhookTracking()
+ * @method Services\WebsiteWebhookTrackingService websiteWebhookTracking()
  * @method Services\ApiKeyService apiKeys()
  * @method Services\CheckoutPageService checkoutPages()
  *
@@ -124,7 +124,7 @@ final class Client
         'users' => Services\UserService::class,
         'emailCredentials' => Services\EmailCredentialService::class,
         'threeDSecure' => Services\ThreeDSecureService::class,
-        'webhookTracking' => Services\WebhookTrackingService::class,
+        'websiteWebhookTracking' => Services\WebsiteWebhookTrackingService::class,
         'subscriptionTracking' => Services\SubscriptionTrackingService::class,
         'apiTracking' => Services\ApiTrackingService::class,
         'apiKeys' => Services\ApiKeyService::class,
