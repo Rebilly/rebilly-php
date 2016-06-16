@@ -63,6 +63,7 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\PaymentCardService paymentCards()
  * @method Services\PaymentCardTokenService paymentCardTokens()
  * @method Services\PaymentService payments()
+ * @method Services\PayPalAccountService payPalAccounts()
  * @method Services\PlanService plans()
  * @method Services\ResetPasswordTokenService resetPasswordTokens()
  * @method Services\SubscriptionService subscriptions()
@@ -76,8 +77,12 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\UserService users()
  * @method Services\EmailCredentialService emailCredentials()
  * @method Services\ThreeDSecureService threeDSecure()
+ * @method Services\SubscriptionTrackingService subscriptionTracking()
+ * @method Services\ApiTrackingService apiTracking()
  * @method Services\SchedulePaymentService scheduledPayments()
  * @method Services\WebhookTrackingService webhookTracking()
+ * @method Services\ApiKeyService apiKeys()
+ * @method Services\CheckoutPageService checkoutPages()
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
@@ -87,6 +92,7 @@ final class Client
     const BASE_HOST = 'https://api.rebilly.com';
     const SANDBOX_HOST = 'https://api-sandbox.rebilly.com';
     const CURRENT_VERSION = 'v2.1';
+    const SDK_VERSION = '2.0.2';
 
     private static $services = [
         'authenticationOptions' => Services\AuthenticationOptionsService::class,
@@ -103,6 +109,7 @@ final class Client
         'paymentCards' => Services\PaymentCardService::class,
         'paymentCardTokens' => Services\PaymentCardTokenService::class,
         'payments' => Services\PaymentService::class,
+        'payPalAccounts' => Services\PayPalAccountService::class,
         'scheduledPayments' => Services\SchedulePaymentService::class,
         'plans' => Services\PlanService::class,
         'resetPasswordTokens' => Services\ResetPasswordTokenService::class,
@@ -118,6 +125,10 @@ final class Client
         'emailCredentials' => Services\EmailCredentialService::class,
         'threeDSecure' => Services\ThreeDSecureService::class,
         'webhookTracking' => Services\WebhookTrackingService::class,
+        'subscriptionTracking' => Services\SubscriptionTrackingService::class,
+        'apiTracking' => Services\ApiTrackingService::class,
+        'apiKeys' => Services\ApiKeyService::class,
+        'checkoutPages' => Services\CheckoutPageService::class,
     ];
 
     /** @var array */
@@ -219,6 +230,7 @@ final class Client
         // Prepare middleware stack
         $this->middleware = new Middleware\CompositeMiddleware(
             new Middleware\BaseUri($this->createUri($baseUrl . '/' . Client::CURRENT_VERSION)),
+            new Middleware\UserAgent(self::SDK_VERSION),
             $authentication,
             $middleware,
             $logger

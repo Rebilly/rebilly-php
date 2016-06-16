@@ -629,11 +629,21 @@ class ApiTest extends TestCase
             [Entities\Organization::class],
             [Entities\GatewayAccount::class],
             [Entities\BankAccount::class],
+            [Entities\PayPalAccount::class],
             [Entities\CustomField::class, 'name'],
             [Entities\Session::class],
             [Entities\User::class],
             [Entities\ThreeDSecure::class],
             [Entities\UpdatePassword::class],
+            [Entities\ApiKey::class],
+            [Entities\ApiTracking::class],
+            [Entities\CheckoutPage::class],
+            [Entities\SubscriptionTracking::class],
+            [Entities\Signup::class],
+            [Entities\ResetPassword::class],
+            [Entities\Email::class],
+            [Entities\EmailCredential::class],
+            [Entities\Login::class],
         ];
     }
 
@@ -762,6 +772,11 @@ class ApiTest extends TestCase
                 Entities\BankAccount::class,
             ],
             [
+                'payPalAccounts',
+                Services\PayPalAccountService::class,
+                Entities\PayPalAccount::class,
+            ],
+            [
                 'sessions',
                 Services\SessionService::class,
                 Entities\Session::class,
@@ -780,6 +795,26 @@ class ApiTest extends TestCase
                 'emailCredentials',
                 Services\EmailCredentialService::class,
                 Entities\EmailCredential::class,
+            ],
+            [
+                'apiKeys',
+                Services\ApiKeyService::class,
+                Entities\ApiKey::class,
+            ],
+            [
+                'checkoutPages',
+                Services\CheckoutPageService::class,
+                Entities\CheckoutPage::class,
+            ],
+            [
+                'apiTracking',
+                Services\ApiTrackingService::class,
+                Entities\ApiTracking::class,
+            ],
+            [
+                'subscriptionTracking',
+                Services\SubscriptionTrackingService::class,
+                Entities\SubscriptionTracking::class,
             ],
             [
                 'webhookTracking',
@@ -817,7 +852,9 @@ class ApiTest extends TestCase
             case 'paymentCardId':
             case 'gatewayAccountId':
             case 'defaultCardId':
+            case 'defaultPaymentInstrumentId':
             case 'relatedId':
+            case 'subscriptionId':
                 return $faker->uuid;
             case 'dueTime':
             case 'expiredTime':
@@ -834,6 +871,7 @@ class ApiTest extends TestCase
             case 'trialAmount':
             case 'setupAmount':
                 return $faker->randomFloat(2);
+            case 'uriPath':
             case 'checkoutPageUri':
             case 'gatewayName':
             case 'organizationId':
@@ -845,10 +883,15 @@ class ApiTest extends TestCase
             case 'cavv':
             case 'xid':
             case 'senderName':
+            case 'redirectUrl':
+            case 'request':
+            case 'response':
                 return $faker->word;
             case 'organization':
+            case 'company':
                 return $faker->company;
             case 'servicePhone':
+            case 'businessPhone':
                 return $faker->phoneNumber;
             case 'serviceEmail':
             case 'senderEmail':
@@ -859,6 +902,7 @@ class ApiTest extends TestCase
                 return $faker->ipv4;
             case 'token':
             case 'fingerprint':
+            case 'secretKey':
                 return $faker->md5;
             case 'name':
             case 'medium':
@@ -888,12 +932,14 @@ class ApiTest extends TestCase
             case 'host':
                 return $faker->url;
             case 'webHookUsername':
+            case 'userName':
                 return $faker->userName;
             case 'webHookPassword':
                 return $faker->md5;
             case 'isActive':
             case 'archived':
             case 'starred':
+            case 'allowCustomCustomerId':
                 return $faker->boolean();
             case 'credentialTtl':
             case 'authTokenTtl':
@@ -906,6 +952,7 @@ class ApiTest extends TestCase
             case 'minQuantity':
             case 'maxQuantity':
             case 'monthlyLimit':
+            case 'redirectTimeout':
                 return $faker->numberBetween(1, 10);
             case 'address2':
                 return $faker->address;
@@ -922,6 +969,7 @@ class ApiTest extends TestCase
             case 'phoneNumber':
                 return $faker->$attribute;
             case 'type':
+            case 'datetimeFormat':
                 switch ($class) {
                     case Entities\Blacklist::class:
                         return $faker->randomElement(Entities\Blacklist::types());
@@ -929,6 +977,8 @@ class ApiTest extends TestCase
                         return $faker->randomElement(Entities\InvoiceItem::types());
                     case Entities\CustomField::class:
                         return $faker->randomElement(Entities\CustomField::allowedTypes());
+                    case Entities\ApiKey::class:
+                        return $faker->randomElement(Entities\ApiKey::datetimeFormats());
                     default:
                         throw new InvalidArgumentException(
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
@@ -985,7 +1035,15 @@ class ApiTest extends TestCase
                     [Entities\Note::RELATED_TYPE_CUSTOMER, Entities\Note::RELATED_TYPE_WEBSITE]
                 );
             case 'method':
-                return new Entities\PaymentMethods\PaymentCardMethod(); // TODO
+            case 'defaultPaymentMethod':
+                switch ($class) {
+                    case Entities\Customer::class:
+                        return new Entities\PaymentMethods\PaymentCardMethod(); // TODO
+                    case Entities\ApiTracking::class:
+                        return 'GET';
+                    default:
+                        return new Entities\PaymentMethods\PaymentCardMethod(); // TODO
+                }
             case 'customFields':
             case 'gatewayConfig':
             case 'additionalSchema':
@@ -1014,13 +1072,17 @@ class ApiTest extends TestCase
             case 'signatureVerification':
                 return 'Y';
             case 'port':
-                return $faker->randomNumber(25, 100);
+                return $faker->numberBetween(25, 100);
             case 'authenticationMethod':
                 return $faker->randomElement(Entities\EmailCredential::allowedAuthenticationMethods());
             case 'encryptionMethod':
                 return $faker->randomElement(Entities\EmailCredential::allowedEncryptionMethods());
             case 'autopay':
                 return $faker->boolean();
+            case 'status':
+                return 200;
+            case 'duration':
+                return $faker->numberBetween(1, 100);
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)

@@ -160,4 +160,40 @@ final class Customer extends Entity
     {
         return $this->setAttribute('customFields', $value);
     }
+
+    /**
+     * @return string
+     */
+    public function getDefaultPaymentMethod()
+    {
+        return $this->getAttribute('defaultPaymentMethod');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setDefaultPaymentMethod($value)
+    {
+        return $this->setAttribute('defaultPaymentMethod', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getDefaultPaymentInstrumentId()
+    {
+        return $this->getAttribute('defaultPaymentInstrumentId');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setDefaultPaymentInstrumentId($value)
+    {
+        return $this->setAttribute('defaultPaymentInstrumentId', $value);
+    }
 }
