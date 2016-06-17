@@ -41,10 +41,10 @@ use Rebilly\Rest\Entity;
  */
 final class Dispute extends Entity
 {
-    const TYPE_1CB = '1CB';
-    const TYPE_2CB = '2CB';
-    const TYPE_RET = 'RET';
-    const TYPE_ARB = 'ARB';
+    const TYPE_1CB = 'first-chargeback';
+    const TYPE_2CB = 'second-chargeback';
+    const TYPE_RET = 'information-request';
+    const TYPE_ARB = 'arbitration';
 
     const STATUS_RESPONSE_NEEDED = 'response-needed';
     const STATUS_UNDER_REVIEW = 'under-review';
