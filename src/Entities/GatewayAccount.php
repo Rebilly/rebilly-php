@@ -58,7 +58,7 @@ final class GatewayAccount extends Entity
 
     const TYPE_3DSECURE_INTEGRATED = 'integrated';
     const TYPE_3DSECURE_EXTERNAL = 'external';
-    
+
     const METHOD_PAYMENT_CARD = 'payment_card';
     const METHOD_PAYPAL = 'paypal';
     const METHOD_ACH = 'ach';
@@ -399,7 +399,7 @@ final class GatewayAccount extends Entity
     public function setPaymentCardSchemes($value)
     {
         $allowedPaymentCardSchemes = self::allowedPaymentCardSchemes();
-        
+
         foreach ($value as $paymentCardScheme) {
             if (!in_array($paymentCardScheme, $allowedPaymentCardSchemes)) {
                 throw new DomainException(sprintf(self::MSG_UNEXPECTED_PAYMENT_CARD_SCHEME, implode(', ', $allowedPaymentCardSchemes)));
@@ -437,7 +437,7 @@ final class GatewayAccount extends Entity
         if (!in_array($value, $allowedMethods)) {
             throw new DomainException(sprintf(self::MSG_UNEXPECTED_METHOD, implode(', ', $allowedMethods)));
         }
-        
+
         return $this->setAttribute('method', $value);
     }
 }
