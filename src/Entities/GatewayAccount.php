@@ -54,6 +54,7 @@ final class GatewayAccount extends Entity
     const PAYMENT_METHOD_DINERS_CLUB = 'Diners Club';
     const PAYMENT_METHOD_SWITCH = 'Switch';
     const PAYMENT_METHOD_LASER = 'Laser';
+    const PAYMENT_METHOD_CHINA_UNIONPAY = 'China UnionPay';
 
     const TYPE_3DSECURE_INTEGRATED = 'integrated';
     const TYPE_3DSECURE_EXTERNAL = 'external';
@@ -61,6 +62,10 @@ final class GatewayAccount extends Entity
     const METHOD_PAYMENT_CARD = 'payment_card';
     const METHOD_PAYPAL = 'paypal';
     const METHOD_ACH = 'ach';
+    const METHOD_CASH = 'cash';
+    const METHOD_CHECK = 'check';
+    const METHOD_WIRE = 'wire';
+    const METHOD_CHINA_UNIONPAY = 'china_unionpay';
 
     const MSG_UNEXPECTED_PAYMENT_CARD_SCHEME = 'Unexpected payment card scheme. Only %s payment card schemes support';
     const MSG_UNEXPECTED_METHOD = 'Unexpected method. Only %s methods support';
@@ -82,7 +87,8 @@ final class GatewayAccount extends Entity
             self::PAYMENT_METHOD_VOYAGER,
             self::PAYMENT_METHOD_DINERS_CLUB,
             self::PAYMENT_METHOD_SWITCH,
-            self::PAYMENT_METHOD_LASER
+            self::PAYMENT_METHOD_LASER,
+            self::PAYMENT_METHOD_CHINA_UNIONPAY,
         ];
     }
 
@@ -95,6 +101,10 @@ final class GatewayAccount extends Entity
             self::METHOD_PAYMENT_CARD,
             self::METHOD_ACH,
             self::METHOD_PAYPAL,
+            self::METHOD_CASH,
+            self::METHOD_CHECK,
+            self::METHOD_WIRE,
+            self::METHOD_CHINA_UNIONPAY,
         ];
     }
 
