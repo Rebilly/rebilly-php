@@ -17,10 +17,6 @@ use Rebilly\Rest\Entity;
  *
  * ```json
  * {
- *   "pan"
- *   "expMonth"
- *   "expYear"
- *   "cvv"
  *   "firstName"
  *   "lastName"
  *   "address"
@@ -34,77 +30,11 @@ use Rebilly\Rest\Entity;
  * }
  * ```
  *
- * @todo Check if need `cvv` getter
- *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
  */
 final class PaymentCardToken extends Entity
 {
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setPan($value)
-    {
-        return $this->setAttribute('pan', $value);
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setCvv($value)
-    {
-        return $this->setAttribute('cvv', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getLast4()
-    {
-        return $this->getAttribute('last4');
-    }
-
-    /**
-     * @return string
-     */
-    public function getExpYear()
-    {
-        return $this->getAttribute('expYear');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setExpYear($value)
-    {
-        return $this->setAttribute('expYear', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getExpMonth()
-    {
-        return $this->getAttribute('expMonth');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setExpMonth($value)
-    {
-        return $this->setAttribute('expMonth', $value);
-    }
-
     /**
      * @return string
      */
@@ -283,5 +213,15 @@ final class PaymentCardToken extends Entity
     public function setFingerprint($value)
     {
         return $this->setAttribute('fingerprint', $value);
+    }
+
+    /**
+     * @param PaymentInstrument $value
+     *
+     * @return $this
+     */
+    public function setPaymentInstrument(PaymentInstrument $value)
+    {
+        return $this->setAttribute('paymentInstrument', $value->jsonSerialize());
     }
 }
