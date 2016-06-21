@@ -43,27 +43,32 @@ use Rebilly\Rest\Entity;
 final class GatewayAccount extends Entity
 {
     const PAYMENT_METHOD_VISA = 'Visa';
-    const PAYMENT_METHOD_MASTERCARD = 'Mastercard';
-    const PAYMENT_METHOD_AMERICAN_EXPRESS = 'American_Express';
+    const PAYMENT_METHOD_MASTERCARD = 'MasterCard';
+    const PAYMENT_METHOD_AMERICAN_EXPRESS = 'American Express';
     const PAYMENT_METHOD_DISCOVER = 'Discover';
     const PAYMENT_METHOD_MAESTRO = 'Maestro';
     const PAYMENT_METHOD_SOLO = 'Solo';
     const PAYMENT_METHOD_ELECTRON = 'Electron';
     const PAYMENT_METHOD_JCB = 'JCB';
     const PAYMENT_METHOD_VOYAGER = 'Voyager';
-    const PAYMENT_METHOD_DINERS_CLUB = 'Diners_Club';
+    const PAYMENT_METHOD_DINERS_CLUB = 'Diners Club';
     const PAYMENT_METHOD_SWITCH = 'Switch';
     const PAYMENT_METHOD_LASER = 'Laser';
 
     const TYPE_3DSECURE_INTEGRATED = 'integrated';
     const TYPE_3DSECURE_EXTERNAL = 'external';
+    
+    const METHOD_PAYMENT_CARD = 'payment_card';
+    const METHOD_PAYPAL = 'paypal';
+    const METHOD_ACH = 'ach';
 
-    const MSG_UNEXPECTED_TYPE = 'Unexpected payment method. Only %s methods support';
+    const MSG_UNEXPECTED_PAYMENT_CARD_SCHEME = 'Unexpected payment card scheme. Only %s payment card schemes support';
+    const MSG_UNEXPECTED_METHOD = 'Unexpected method. Only %s methods support';
 
     /**
      * @return array
      */
-    public static function allowedPaymentMethods()
+    public static function allowedPaymentCardSchemes()
     {
         return [
             self::PAYMENT_METHOD_VISA,
@@ -78,6 +83,18 @@ final class GatewayAccount extends Entity
             self::PAYMENT_METHOD_DINERS_CLUB,
             self::PAYMENT_METHOD_SWITCH,
             self::PAYMENT_METHOD_LASER
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public static function allowedMethods()
+    {
+        return [
+            self::METHOD_PAYMENT_CARD,
+            self::METHOD_ACH,
+            self::METHOD_PAYPAL,
         ];
     }
 
@@ -359,9 +376,9 @@ final class GatewayAccount extends Entity
     /**
      * @return array
      */
-    public function getPaymentMethods()
+    public function getPaymentCardSchemes()
     {
-        return $this->getAttribute('paymentMethods');
+        return $this->getAttribute('paymentCardSchemes');
     }
 
     /**
@@ -369,16 +386,17 @@ final class GatewayAccount extends Entity
      *
      * @return $this
      */
-    public function setPaymentMethods($value)
+    public function setPaymentCardSchemes($value)
     {
-        $allowedPaymentMethods = self::allowedPaymentMethods();
-        foreach ($value as $paymentMethod) {
-            if (!in_array($paymentMethod, $allowedPaymentMethods)) {
-                throw new DomainException(sprintf(self::MSG_UNEXPECTED_TYPE, implode(', ', $allowedPaymentMethods)));
+        $allowedPaymentCardSchemes = self::allowedPaymentCardSchemes();
+        
+        foreach ($value as $paymentCardScheme) {
+            if (!in_array($paymentCardScheme, $allowedPaymentCardSchemes)) {
+                throw new DomainException(sprintf(self::MSG_UNEXPECTED_PAYMENT_CARD_SCHEME, implode(', ', $allowedPaymentCardSchemes)));
             }
         }
 
-        return $this->setAttribute('paymentMethods', $value);
+        return $this->setAttribute('paymentCardSchemes', $value);
     }
 
     /**
@@ -387,5 +405,29 @@ final class GatewayAccount extends Entity
     public function getCreatedTime()
     {
         return $this->getAttribute('createdTime');
+    }
+
+    /**
+     * @return string
+     */
+    public function getMethod()
+    {
+        return $this->getAttribute('method');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setMethod($value)
+    {
+        $allowedMethods = self::allowedMethods();
+
+        if (!in_array($value, $allowedMethods)) {
+            throw new DomainException(sprintf(self::MSG_UNEXPECTED_METHOD, implode(', ', $allowedMethods)));
+        }
+        
+        return $this->setAttribute('method', $value);
     }
 }
