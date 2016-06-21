@@ -1,5 +1,7 @@
 <?php
 
+namespace Rebilly\Entities\PaymentInstruments;
+
 use Rebilly\Entities\PaymentInstrument;
 
 class PaymentCardPaymentInstrument extends PaymentInstrument

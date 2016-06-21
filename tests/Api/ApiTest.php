@@ -1088,6 +1088,8 @@ class ApiTest extends TestCase
                 return 200;
             case 'duration':
                 return $faker->numberBetween(1, 100);
+            case 'paymentInstrument':
+                return new Entities\PaymentInstruments\PaymentCardPaymentInstrument();
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
