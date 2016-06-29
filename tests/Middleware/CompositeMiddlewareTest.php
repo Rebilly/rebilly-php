@@ -34,16 +34,16 @@ class CompositeMiddlewareTest extends TestCase
 
         $middleware
             ->attach(function (Request $request, Response $response, $next) {
-                return call_user_func($next, $request, $response->withHeader('X-Header1', 'dummy'));
+                return call_user_func($next, $request, $response->withHeader('Header1', 'dummy'));
             })
             ->clear();
 
         $middleware
             ->attach(function (Request $request, Response $response, $next) {
-                return call_user_func($next, $request, $response->withHeader('X-Header2', 'dummy'));
+                return call_user_func($next, $request, $response->withHeader('Header2', 'dummy'));
             })
             ->attach(function (Request $request, Response $response, $next) {
-                return call_user_func($next, $request, $response->withHeader('X-Header3', 'dummy'));
+                return call_user_func($next, $request, $response->withHeader('Header3', 'dummy'));
             });
 
         $done = function (Request $request, Response $response) {
@@ -61,10 +61,10 @@ class CompositeMiddlewareTest extends TestCase
         $result = call_user_func($middleware, $request, $response, $done);
 
         // Check middleware stack
-        $this->assertEquals('dummy', $result->getHeaderLine('X-Header2'));
-        $this->assertEquals('dummy', $result->getHeaderLine('X-Header3'));
+        $this->assertEquals('dummy', $result->getHeaderLine('Header2'));
+        $this->assertEquals('dummy', $result->getHeaderLine('Header3'));
 
         // Middleware was cleared, so first handler not applied
-        $this->assertFalse($result->hasHeader('X-Header1'));
+        $this->assertFalse($result->hasHeader('Header1'));
     }
 }
