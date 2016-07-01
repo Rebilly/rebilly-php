@@ -36,7 +36,7 @@ class LogHandlerTest extends TestCase
         $done = function (Request $request, Response $response) {
             unset($request);
 
-            return $response->withHeader('X-Vendor', ['foo', 'bar']);
+            return $response->withHeader('Vendor', ['foo', 'bar']);
         };
 
         $request = $client->createRequest('GET', '/dummy', null);
