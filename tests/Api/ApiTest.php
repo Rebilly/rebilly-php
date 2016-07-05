@@ -644,6 +644,7 @@ class ApiTest extends TestCase
             [Entities\Email::class],
             [Entities\EmailCredential::class],
             [Entities\Login::class],
+            [Entities\WebsiteWebhookTracking::class],
         ];
     }
 
@@ -797,16 +798,6 @@ class ApiTest extends TestCase
                 Entities\EmailCredential::class,
             ],
             [
-                'subscriptionTracking',
-                Services\SubscriptionTrackingService::class,
-                Entities\SubscriptionTracking::class,
-            ],
-            [
-                'apiTracking',
-                Services\ApiTrackingService::class,
-                Entities\ApiTracking::class,
-            ],
-            [
                 'apiKeys',
                 Services\ApiKeyService::class,
                 Entities\ApiKey::class,
@@ -825,6 +816,11 @@ class ApiTest extends TestCase
                 'subscriptionTracking',
                 Services\SubscriptionTrackingService::class,
                 Entities\SubscriptionTracking::class,
+            ],
+            [
+                'websiteWebhookTracking',
+                Services\WebsiteWebhookTrackingService::class,
+                Entities\WebsiteWebhookTracking::class,
             ],
         ];
     }
