@@ -42,18 +42,19 @@ use Rebilly\Rest\Entity;
  */
 final class GatewayAccount extends Entity
 {
-    const PAYMENT_METHOD_VISA = 'Visa';
-    const PAYMENT_METHOD_MASTERCARD = 'Mastercard';
-    const PAYMENT_METHOD_AMERICAN_EXPRESS = 'American_Express';
-    const PAYMENT_METHOD_DISCOVER = 'Discover';
-    const PAYMENT_METHOD_MAESTRO = 'Maestro';
-    const PAYMENT_METHOD_SOLO = 'Solo';
-    const PAYMENT_METHOD_ELECTRON = 'Electron';
-    const PAYMENT_METHOD_JCB = 'JCB';
-    const PAYMENT_METHOD_VOYAGER = 'Voyager';
-    const PAYMENT_METHOD_DINERS_CLUB = 'Diners_Club';
-    const PAYMENT_METHOD_SWITCH = 'Switch';
-    const PAYMENT_METHOD_LASER = 'Laser';
+    const PAYMENT_METHOD_VISA = 'visa';
+    const PAYMENT_METHOD_MASTERCARD = 'master-card';
+    const PAYMENT_METHOD_AMERICAN_EXPRESS = 'american-express';
+    const PAYMENT_METHOD_DISCOVER = 'discover';
+    const PAYMENT_METHOD_MAESTRO = 'maestro';
+    const PAYMENT_METHOD_SOLO = 'solo';
+    const PAYMENT_METHOD_ELECTRON = 'electron';
+    const PAYMENT_METHOD_JCB = 'jcb';
+    const PAYMENT_METHOD_VOYAGER = 'voyager';
+    const PAYMENT_METHOD_DINERS_CLUB = 'diners-club';
+    const PAYMENT_METHOD_SWITCH = 'switch';
+    const PAYMENT_METHOD_LASER = 'laser';
+    const PAYMENT_METHOD_CHINA_UNION_PAY = 'china-unionpay';
 
     const TYPE_3DSECURE_INTEGRATED = 'integrated';
     const TYPE_3DSECURE_EXTERNAL = 'external';

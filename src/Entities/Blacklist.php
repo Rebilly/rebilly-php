@@ -38,7 +38,7 @@ final class Blacklist extends Entity
      */
     public static function types()
     {
-        return ['paymentCard', 'customerId', 'email', 'ipAddress', 'bin', 'country', 'fingerprint'];
+        return ['payment-card', 'customer-id', 'email', 'ip-address', 'bin', 'country', 'fingerprint'];
     }
 
     /**

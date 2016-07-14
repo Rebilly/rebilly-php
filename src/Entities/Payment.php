@@ -45,8 +45,8 @@ final class Payment extends Entity
 
     const METHOD_ACH = 'ach';
     const METHOD_CASH = 'cash';
-    const METHOD_CHINA_UNIONPAY = 'china_unionpay';
-    const METHOD_PAYMENT_CARD = 'payment_card';
+    const METHOD_CHINA_UNIONPAY = 'china-unionpay';
+    const METHOD_PAYMENT_CARD = 'payment-card';
     const METHOD_PAYPAL = 'paypal';
 
     /**
