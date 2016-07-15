@@ -530,7 +530,6 @@ class ApiTest extends TestCase
      */
     public function userService()
     {
-        $faker = $this->getFaker();
         $client = new Client(['apiKey' => 'QWERTY']);
 
         /** @var CurlHandler|MockObject $handler */
@@ -644,6 +643,7 @@ class ApiTest extends TestCase
             [Entities\Email::class],
             [Entities\EmailCredential::class],
             [Entities\Login::class],
+            [Entities\Dispute::class],
             [Entities\WebsiteWebhookTracking::class],
         ];
     }
@@ -818,6 +818,11 @@ class ApiTest extends TestCase
                 Entities\SubscriptionTracking::class,
             ],
             [
+                'disputes',
+                Services\DisputeService::class,
+                Entities\Dispute::class,
+            ],
+            [
                 'websiteWebhookTracking',
                 Services\WebsiteWebhookTrackingService::class,
                 Entities\WebsiteWebhookTracking::class,
@@ -856,6 +861,7 @@ class ApiTest extends TestCase
             case 'defaultPaymentInstrumentId':
             case 'relatedId':
             case 'subscriptionId':
+            case 'transactionId':
                 return $faker->uuid;
             case 'dueTime':
             case 'expiredTime':
@@ -865,6 +871,8 @@ class ApiTest extends TestCase
             case 'periodEndTime':
             case 'downtimeStart':
             case 'downtimeEnd':
+            case 'postedTime':
+            case 'deadlineTime':
                 return $faker->date('Y-m-d H:i:s');
             case 'unitPrice':
             case 'amount':
@@ -887,6 +895,7 @@ class ApiTest extends TestCase
             case 'redirectUrl':
             case 'request':
             case 'response':
+            case 'acquirerReferenceNumber':
                 return $faker->word;
             case 'organization':
             case 'company':
@@ -980,6 +989,8 @@ class ApiTest extends TestCase
                         return $faker->randomElement(Entities\CustomField::allowedTypes());
                     case Entities\ApiKey::class:
                         return $faker->randomElement(Entities\ApiKey::datetimeFormats());
+                    case Entities\Dispute::class:
+                        return $faker->randomElement(Entities\Dispute::allowedTypes());
                     default:
                         throw new InvalidArgumentException(
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
@@ -1080,10 +1091,19 @@ class ApiTest extends TestCase
                 return $faker->randomElement(Entities\EmailCredential::allowedEncryptionMethods());
             case 'autopay':
                 return $faker->boolean();
-            case 'status':
-                return 200;
             case 'duration':
                 return $faker->numberBetween(1, 100);
+            case 'reasonCode':
+                return '1000';
+            case 'status':
+                switch ($class) {
+                    case Entities\ApiTracking::class:
+                        return 200;
+                    case Entities\Dispute::class:
+                        return $faker->randomElement(Entities\Dispute::allowedStatuses());
+                    default:
+                        return $faker->randomElement(Entities\Dispute::allowedStatuses());
+                }
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
