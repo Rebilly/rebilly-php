@@ -530,7 +530,6 @@ class ApiTest extends TestCase
      */
     public function userService()
     {
-        $faker = $this->getFaker();
         $client = new Client(['apiKey' => 'QWERTY']);
 
         /** @var CurlHandler|MockObject $handler */
@@ -645,6 +644,7 @@ class ApiTest extends TestCase
             [Entities\EmailCredential::class],
             [Entities\Login::class],
             [Entities\Dispute::class],
+            [Entities\WebsiteWebhookTracking::class],
         ];
     }
 
@@ -798,16 +798,6 @@ class ApiTest extends TestCase
                 Entities\EmailCredential::class,
             ],
             [
-                'subscriptionTracking',
-                Services\SubscriptionTrackingService::class,
-                Entities\SubscriptionTracking::class,
-            ],
-            [
-                'apiTracking',
-                Services\ApiTrackingService::class,
-                Entities\ApiTracking::class,
-            ],
-            [
                 'apiKeys',
                 Services\ApiKeyService::class,
                 Entities\ApiKey::class,
@@ -831,6 +821,11 @@ class ApiTest extends TestCase
                 'disputes',
                 Services\DisputeService::class,
                 Entities\Dispute::class,
+            ],
+            [
+                'websiteWebhookTracking',
+                Services\WebsiteWebhookTrackingService::class,
+                Entities\WebsiteWebhookTracking::class,
             ],
         ];
     }

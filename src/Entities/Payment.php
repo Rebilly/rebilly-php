@@ -43,7 +43,11 @@ final class Payment extends Entity
 {
     const MSG_UNEXPECTED_METHOD = 'Unexpected method. Only %s methods support';
 
+    const METHOD_ACH = 'ach';
+    const METHOD_CASH = 'cash';
+    const METHOD_CHINA_UNIONPAY = 'china_unionpay';
     const METHOD_PAYMENT_CARD = 'payment_card';
+    const METHOD_PAYPAL = 'paypal';
 
     /**
      * @return array
@@ -51,7 +55,11 @@ final class Payment extends Entity
     public static function methods()
     {
         return [
+            Payment::METHOD_ACH,
+            Payment::METHOD_CASH,
+            Payment::METHOD_CHINA_UNIONPAY,
             Payment::METHOD_PAYMENT_CARD,
+            Payment::METHOD_PAYPAL,
         ];
     }
 

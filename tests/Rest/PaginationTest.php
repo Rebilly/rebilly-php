@@ -45,9 +45,9 @@ class PaginationTest extends TestCase
                 /** @var Response $response */
                 $response = $factory
                     ->createResponse()
-                    ->withHeader('X-Pagination-Total', $total)
-                    ->withHeader('X-Pagination-Limit', $query['limit'])
-                    ->withHeader('X-Pagination-Offset', isset($query['offset']) ? $query['offset'] : 0);
+                    ->withHeader('Pagination-Total', $total)
+                    ->withHeader('Pagination-Limit', $query['limit'])
+                    ->withHeader('Pagination-Offset', isset($query['offset']) ? $query['offset'] : 0);
 
                 return $response;
             },
