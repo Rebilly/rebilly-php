@@ -43,7 +43,7 @@ use Rebilly\Rest\Entity;
 final class GatewayAccount extends Entity
 {
     const PAYMENT_METHOD_VISA = 'Visa';
-    const PAYMENT_METHOD_MASTERCARD = 'Mastercard';
+    const PAYMENT_METHOD_MASTERCARD = 'MasterCard';
     const PAYMENT_METHOD_AMERICAN_EXPRESS = 'American_Express';
     const PAYMENT_METHOD_DISCOVER = 'Discover';
     const PAYMENT_METHOD_MAESTRO = 'Maestro';
