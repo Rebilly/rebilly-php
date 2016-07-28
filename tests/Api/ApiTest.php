@@ -1053,6 +1053,8 @@ class ApiTest extends TestCase
                         return new Entities\PaymentMethods\PaymentCardMethod(); // TODO
                     case Entities\ApiTracking::class:
                         return 'GET';
+                    case Entities\GatewayAccount::class:
+                        return Entities\GatewayAccount::METHOD_PAYMENT_CARD;
                     default:
                         return new Entities\PaymentMethods\PaymentCardMethod(); // TODO
                 }
@@ -1069,6 +1071,7 @@ class ApiTest extends TestCase
                 return false;
             case 'threeDSecureType':
                 return 'integrated';
+            case 'paymentCardSchemes':
             case 'paymentMethods':
                 return ['Visa'];
             case 'merchantCategoryCode':
