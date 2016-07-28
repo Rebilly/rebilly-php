@@ -1072,6 +1072,7 @@ class ApiTest extends TestCase
             case 'threeDSecureType':
                 return 'integrated';
             case 'paymentCardSchemes':
+            case 'paymentMethods':
                 return ['Visa'];
             case 'merchantCategoryCode':
                 return 5966;
