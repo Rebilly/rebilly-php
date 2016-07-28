@@ -16,26 +16,7 @@ use Rebilly\Rest\Entity;
 /**
  * Class GatewayAccount
  *
- * ```json
- * {
- *   "id"
- *   "gatewayName",
- *   "gatewayConfig",
- *   "merchantCategoryCode",
- *   "acquirerName'"
- *   "organizationId",
- *   "websites",
- *   "paymentMethods"
- *   "descriptor",
- *   "city",
- *   "dynamicDescriptor"
- *   "can3DSecure"
- *   "monthlyLimit",
- *   "acceptedCurrencies",
- *   "downtimeStart",
- *   "downtimeEnd",
- * }
- * ```
+ * @see http://rebilly.github.io/RebillyAPI/#tag/Gateway%20Accounts
  *
  * @author Arman Tuyakbayev <arman.tuyakbayev@rebilly.com>
  * @version 0.1
@@ -44,27 +25,71 @@ final class GatewayAccount extends Entity
 {
     const PAYMENT_METHOD_VISA = 'Visa';
     const PAYMENT_METHOD_MASTERCARD = 'MasterCard';
-    const PAYMENT_METHOD_AMERICAN_EXPRESS = 'American_Express';
+    const PAYMENT_METHOD_AMERICAN_EXPRESS = 'American Express';
     const PAYMENT_METHOD_DISCOVER = 'Discover';
     const PAYMENT_METHOD_MAESTRO = 'Maestro';
     const PAYMENT_METHOD_SOLO = 'Solo';
     const PAYMENT_METHOD_ELECTRON = 'Electron';
     const PAYMENT_METHOD_JCB = 'JCB';
     const PAYMENT_METHOD_VOYAGER = 'Voyager';
-    const PAYMENT_METHOD_DINERS_CLUB = 'Diners_Club';
+    const PAYMENT_METHOD_DINERS_CLUB = 'Diners Club';
     const PAYMENT_METHOD_SWITCH = 'Switch';
     const PAYMENT_METHOD_LASER = 'Laser';
-    const PAYMENT_METHOD_CHINA_UNION_PAY = 'China Unionpay';
+    const PAYMENT_METHOD_CHINA_UNIONPAY = 'China UnionPay';
 
     const TYPE_3DSECURE_INTEGRATED = 'integrated';
     const TYPE_3DSECURE_EXTERNAL = 'external';
 
-    const MSG_UNEXPECTED_TYPE = 'Unexpected payment method. Only %s methods support';
+    const METHOD_PAYMENT_CARD = 'payment-card';
+    const METHOD_PAYPAL = 'paypal';
+    const METHOD_ACH = 'ach';
+    const METHOD_CASH = 'cash';
+    const METHOD_CHECK = 'check';
+    const METHOD_WIRE = 'wire';
+    const METHOD_CHINA_UNIONPAY = 'china-unionpay';
+
+    const MSG_UNEXPECTED_PAYMENT_CARD_SCHEME = 'Unexpected payment card scheme. Only %s payment card schemes support';
+    const MSG_UNEXPECTED_METHOD = 'Unexpected method. Only %s methods support';
+
+    /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see GatewayAccount::allowedPaymentCardSchemes()
+     *
+     * @return array
+     */
+    public static function allowedPaymentMethods()
+    {
+        return self::allowedPaymentCardSchemes();
+    }
+
+    /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see GatewayAccount::getPaymentCardSchemes()
+     *
+     * @return array
+     */
+    public function getPaymentMethods()
+    {
+        return $this->getPaymentCardSchemes();
+    }
+
+    /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see GatewayAccount::setPaymentCardSchemes()
+     *
+     * @param array $value
+     *
+     * @return GatewayAccount
+     */
+    public function setPaymentMethods($value)
+    {
+        return $this->setPaymentCardSchemes($value);
+    }
 
     /**
      * @return array
      */
-    public static function allowedPaymentMethods()
+    public static function allowedPaymentCardSchemes()
     {
         return [
             self::PAYMENT_METHOD_VISA,
@@ -79,7 +104,23 @@ final class GatewayAccount extends Entity
             self::PAYMENT_METHOD_DINERS_CLUB,
             self::PAYMENT_METHOD_SWITCH,
             self::PAYMENT_METHOD_LASER,
-            self::PAYMENT_METHOD_CHINA_UNION_PAY,
+            self::PAYMENT_METHOD_CHINA_UNIONPAY,
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public static function allowedMethods()
+    {
+        return [
+            self::METHOD_PAYMENT_CARD,
+            self::METHOD_ACH,
+            self::METHOD_PAYPAL,
+            self::METHOD_CASH,
+            self::METHOD_CHECK,
+            self::METHOD_WIRE,
+            self::METHOD_CHINA_UNIONPAY,
         ];
     }
 
@@ -361,9 +402,9 @@ final class GatewayAccount extends Entity
     /**
      * @return array
      */
-    public function getPaymentMethods()
+    public function getPaymentCardSchemes()
     {
-        return $this->getAttribute('paymentMethods');
+        return $this->getAttribute('paymentCardSchemes');
     }
 
     /**
@@ -371,16 +412,17 @@ final class GatewayAccount extends Entity
      *
      * @return $this
      */
-    public function setPaymentMethods($value)
+    public function setPaymentCardSchemes($value)
     {
-        $allowedPaymentMethods = self::allowedPaymentMethods();
-        foreach ($value as $paymentMethod) {
-            if (!in_array($paymentMethod, $allowedPaymentMethods)) {
-                throw new DomainException(sprintf(self::MSG_UNEXPECTED_TYPE, implode(', ', $allowedPaymentMethods)));
+        $allowedPaymentCardSchemes = self::allowedPaymentCardSchemes();
+
+        foreach ($value as $paymentCardScheme) {
+            if (!in_array($paymentCardScheme, $allowedPaymentCardSchemes)) {
+                throw new DomainException(sprintf(self::MSG_UNEXPECTED_PAYMENT_CARD_SCHEME, implode(', ', $allowedPaymentCardSchemes)));
             }
         }
 
-        return $this->setAttribute('paymentMethods', $value);
+        return $this->setAttribute('paymentCardSchemes', $value);
     }
 
     /**
@@ -389,5 +431,29 @@ final class GatewayAccount extends Entity
     public function getCreatedTime()
     {
         return $this->getAttribute('createdTime');
+    }
+
+    /**
+     * @return string
+     */
+    public function getMethod()
+    {
+        return $this->getAttribute('method');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setMethod($value)
+    {
+        $allowedMethods = self::allowedMethods();
+
+        if (!in_array($value, $allowedMethods)) {
+            throw new DomainException(sprintf(self::MSG_UNEXPECTED_METHOD, implode(', ', $allowedMethods)));
+        }
+
+        return $this->setAttribute('method', $value);
     }
 }

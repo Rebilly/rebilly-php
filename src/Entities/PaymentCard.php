@@ -180,4 +180,12 @@ final class PaymentCard extends Entity
     {
         return $this->setAttribute('customFields', $value);
     }
+
+    /**
+     * @return string
+     */
+    public function getBin()
+    {
+        return $this->getAttribute('bin');
+    }
 }

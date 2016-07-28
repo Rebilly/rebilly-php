@@ -83,6 +83,7 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\WebsiteWebhookTrackingService websiteWebhookTracking()
  * @method Services\ApiKeyService apiKeys()
  * @method Services\CheckoutPageService checkoutPages()
+ * @method Services\DisputeService disputes()
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
@@ -129,6 +130,7 @@ final class Client
         'apiTracking' => Services\ApiTrackingService::class,
         'apiKeys' => Services\ApiKeyService::class,
         'checkoutPages' => Services\CheckoutPageService::class,
+        'disputes' => Services\DisputeService::class,
     ];
 
     /** @var array */
