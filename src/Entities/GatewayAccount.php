@@ -16,26 +16,7 @@ use Rebilly\Rest\Entity;
 /**
  * Class GatewayAccount
  *
- * ```json
- * {
- *   "id"
- *   "gatewayName",
- *   "gatewayConfig",
- *   "merchantCategoryCode",
- *   "acquirerName'"
- *   "organizationId",
- *   "websites",
- *   "paymentMethods"
- *   "descriptor",
- *   "city",
- *   "dynamicDescriptor"
- *   "can3DSecure"
- *   "monthlyLimit",
- *   "acceptedCurrencies",
- *   "downtimeStart",
- *   "downtimeEnd",
- * }
- * ```
+ * @see http://rebilly.github.io/RebillyAPI/#tag/Gateway%20Accounts
  *
  * @author Arman Tuyakbayev <arman.tuyakbayev@rebilly.com>
  * @version 0.1
