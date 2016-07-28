@@ -15,20 +15,7 @@ use Rebilly\Rest\Entity;
 /**
  * Class PaymentCardToken
  *
- * ```json
- * {
- *   "firstName"
- *   "lastName"
- *   "address"
- *   "address2"
- *   "city"
- *   "region"
- *   "country"
- *   "phoneNumber"
- *   "postalCode"
- *   "fingerprint"
- * }
- * ```
+ * @see http://rebilly.github.io/RebillyAPI/#tag/Payment%20Tokens
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
