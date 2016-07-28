@@ -1,49 +1,61 @@
-CHANGELOG
-=========
+# Change Log
+All notable changes to this project will be documented in this file
+using the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
+This project adheres to [Semantic Versioning](http://semver.org/).
 
-## 2.0.2 - 2016-04-28
+## [Unreleased]
 
-* Added `User-Agent` to all requests.
-* Added paypal service and default payment method.
-* Enabled Checkout Pages API.
-* Added API keys management.
-* Added `autopay` (boolean) attribute to Subscription entity.
-* Enabled User management API and Authentication API.
-* Enabled Email Credentials API.
-* Added ability to authentication client with JWT.
-* Enabled Sessions API.
-* Added support of Rate limiting.
-* Updated Payments API, added `cancel` method.
-* Handle responses with PDF content.
-* Update some resource fields.
-* Enabled Gateway Accounts API.
-* Updated Payments API, added `status` and `result` fields, deprecated `state` field.
-* Enabled Custom Fields API.
+-
 
-## 2.0.1-rc - 2015-09-15
+## [2.0.2] 2016-04-28
 
-* Added support of pagination.
-* Updated Customer Authentication API, added `delete` method to reset token.
-* Fixed resource factory, use decoded URL.
-* Enabled Layouts API.
-* Updated Subscriptions API, added `createdTime` and `updatedTime` fields.
-* Fixed response body read.
-* Updated Payments API, fixed field names.
-* Updated Payment Cards API, added creating card from token.
-* Updated Transactions API, added `result` field.
-* Updated Payment Cards API, added `cvv` field.
-* Updated Tokens API, added `create` and `expire` method.
-* Enabled Organizations API.
-* Updated Plans API, added `delete` method.
-* Fixed parsing response w/o content.
-* Added `RebillySignature` helper.
-* Added fingerprint as blacklist type.
-* Enabled custom logger injection.
+### Added
+- [x] Added `User-Agent` to all requests.
+- [x] Added paypal service and default payment method.
+- [x] Enabled Checkout Pages API.
+- [x] Added API keys management.
+- [x] Added `autopay` (boolean) attribute to Subscription entity.
+- [x] Enabled User management API and Authentication API.
+- [x] Enabled Email Credentials API.
+- [x] Added ability to authentication client with JWT.
+- [x] Enabled Sessions API.
+- [x] Added support of Rate limiting.
+- [x] Handle responses with PDF content.
+- [x] Enabled Gateway Accounts API.
+- [x] Enabled Custom Fields API.
+- [x] Updated Payments API, added `cancel` method.
 
-## 2.0.1-beta - 2015-09-15
+### Changed
+- [x] Update some resource fields.
+- [x] Updated Payments API, added `status` and `result` fields, deprecated `state` field.
 
-* Multiple fixes and enhancements.
+## [2.0.1-rc] 2015-09-15
 
-## 2.0.1-alpha - 2015-09-15
+### Added
+- [x] Added support of pagination.
+- [x] Enabled Layouts API.
+- [x] Enabled Organizations API.
+- [x] Added `RebillySignature` helper.
+- [x] Added fingerprint as blacklist type.
+- [x] Enabled custom logger injection.
+- [x] Updated Customer Authentication API, added `delete` method to reset token.
+- [x] Updated Subscriptions API, added `createdTime` and `updatedTime` fields.
+- [x] Updated Payment Cards API, added creating card from token.
+- [x] Updated Transactions API, added `result` field.
+- [x] Updated Payment Cards API, added `cvv` field.
+- [x] Updated Tokens API, added `create` and `expire` method.
+- [x] Updated Plans API, added `delete` method.
+
+### Fixed
+- [x] Updated Payments API, fixed field names.
+- [x] Fixed resource factory, use decoded URL.
+- [x] Fixed response body read.
+- [x] Fixed parsing response w/o content.
+
+## [2.0.1-beta] 2015-09-15
+
+Multiple fixes and enhancements.
+
+## [2.0.1-alpha] 2015-09-15
 
 Initial release.
