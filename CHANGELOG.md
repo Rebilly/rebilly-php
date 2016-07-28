@@ -7,6 +7,30 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 -
 
+## [2.0.3] 2016-07-29
+
+### Added
+- [x] Enabled Disputes API.
+- [x] Enabled Webhook Tracking API.
+- [x] Enabled Subscription Tracking API.
+- [x] Enabled API Tracking.
+- [x] Use vendor headers without additional prefixes.
+
+### Changed
+- [x] Updated Payment Tokens API, added `paymentInstrument`.
+- [x] Updated Gateway Accounts API, added `method`.
+- [x] Updated Payment Cards API, added `bin`.
+- [x] Updated Payments API, added missing supported methods.
+
+### Deprecated
+- [x] Since Payment Tokens resource was extended with `paymentInstrument`, all fields related to 
+payment card are deprecated.
+- [x] The `paymentMethods` was renamed to `paymentCardSchemes`, all methods related to old name 
+are deprecated. 
+
+### Fixed
+- [x] Fixed Gateway payment schemes.
+
 ## [2.0.2] 2016-04-28
 
 ### Added
