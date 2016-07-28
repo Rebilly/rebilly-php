@@ -71,6 +71,41 @@ final class GatewayAccount extends Entity
     const MSG_UNEXPECTED_METHOD = 'Unexpected method. Only %s methods support';
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see GatewayAccount::allowedPaymentCardSchemes()
+     *
+     * @return array
+     */
+    public static function allowedPaymentMethods()
+    {
+        return self::allowedPaymentCardSchemes();
+    }
+
+    /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see GatewayAccount::getPaymentCardSchemes()
+     *
+     * @return array
+     */
+    public function getPaymentMethods()
+    {
+        return $this->getPaymentCardSchemes();
+    }
+
+    /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see GatewayAccount::setPaymentCardSchemes()
+     *
+     * @param array $value
+     *
+     * @return GatewayAccount
+     */
+    public function setPaymentMethods($value)
+    {
+        return $this->setPaymentCardSchemes($value);
+    }
+
+    /**
      * @return array
      */
     public static function allowedPaymentCardSchemes()
