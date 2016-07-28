@@ -59,13 +59,13 @@ final class GatewayAccount extends Entity
     const TYPE_3DSECURE_INTEGRATED = 'integrated';
     const TYPE_3DSECURE_EXTERNAL = 'external';
 
-    const METHOD_PAYMENT_CARD = 'payment_card';
+    const METHOD_PAYMENT_CARD = 'payment-card';
     const METHOD_PAYPAL = 'paypal';
     const METHOD_ACH = 'ach';
     const METHOD_CASH = 'cash';
     const METHOD_CHECK = 'check';
     const METHOD_WIRE = 'wire';
-    const METHOD_CHINA_UNIONPAY = 'china_unionpay';
+    const METHOD_CHINA_UNIONPAY = 'china-unionpay';
 
     const MSG_UNEXPECTED_PAYMENT_CARD_SCHEME = 'Unexpected payment card scheme. Only %s payment card schemes support';
     const MSG_UNEXPECTED_METHOD = 'Unexpected method. Only %s methods support';
