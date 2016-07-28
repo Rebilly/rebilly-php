@@ -37,7 +37,7 @@ and other best-practices for defining dependencies at [getcomposer.org](http://g
 
 ## Requirements
 
-* PHP 5.5+ (tested with 5.5, 5.6, 7.0). We recommend you use PHP 7.0.
+* PHP 5.6+. We recommend you use PHP 7.0.
 * CURL (verify peer requires a root certificate authority -- if you have not configured php curl to use one, and your system libs aren't linked to one, you may need to do a [manual configuration](http://stackoverflow.com/questions/17478283/paypal-access-ssl-certificate-unable-to-get-local-issuer-certificate/19149687#19149687) to use the appropriate certificate authority)
 * PHPUnit (tests only)
 
