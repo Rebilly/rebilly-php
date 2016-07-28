@@ -201,6 +201,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             '3dsecure/{3dsecureId}' => function (array $content) {
                 return new ThreeDSecure($content);
             },
+            'tracking/website-webhooks' => function (array $content) {
+                return new Collection(new WebsiteWebhookTracking(), $content);
+            },
+            'tracking/website-webhooks/{trackId}' => function (array $content) {
+                return new WebsiteWebhookTracking($content);
+            },
             'api-keys' => function (array $content) {
                 return new Collection(new ApiKey(), $content);
             },
@@ -224,6 +230,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             },
             'tracking/subscriptions/{logId}' => function (array $content) {
                 return new SubscriptionTracking($content);
+            },
+            'disputes' => function (array $content) {
+                return new Collection(new Dispute(), $content);
+            },
+            'disputes/{disputeId}' => function (array $content) {
+                return new Dispute($content);
             },
         ];
     }

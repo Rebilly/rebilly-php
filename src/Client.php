@@ -80,8 +80,10 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\SubscriptionTrackingService subscriptionTracking()
  * @method Services\ApiTrackingService apiTracking()
  * @method Services\SchedulePaymentService scheduledPayments()
+ * @method Services\WebsiteWebhookTrackingService websiteWebhookTracking()
  * @method Services\ApiKeyService apiKeys()
  * @method Services\CheckoutPageService checkoutPages()
+ * @method Services\DisputeService disputes()
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
@@ -123,10 +125,12 @@ final class Client
         'users' => Services\UserService::class,
         'emailCredentials' => Services\EmailCredentialService::class,
         'threeDSecure' => Services\ThreeDSecureService::class,
+        'websiteWebhookTracking' => Services\WebsiteWebhookTrackingService::class,
         'subscriptionTracking' => Services\SubscriptionTrackingService::class,
         'apiTracking' => Services\ApiTrackingService::class,
         'apiKeys' => Services\ApiKeyService::class,
         'checkoutPages' => Services\CheckoutPageService::class,
+        'disputes' => Services\DisputeService::class,
     ];
 
     /** @var array */
@@ -408,7 +412,7 @@ final class Client
         if ($response->getStatusCode() === 429) {
             throw new Http\Exception\TooManyRequestsException(
                 $response->getHeaderLine('Retry-After'),
-                $response->getHeaderLine('X-Rate-Limit-Limit'),
+                $response->getHeaderLine('Rate-Limit-Limit'),
                 'Too many requests, retry after ' . $response->getHeaderLine('Retry-After')
             );
         }
@@ -481,9 +485,9 @@ final class Client
                 'data' => $content,
                 '_metadata' => [
                     'uri' => $uri,
-                    'limit' => (int) $response->getHeaderLine('X-Pagination-Limit'),
-                    'offset' => (int) $response->getHeaderLine('X-Pagination-Offset'),
-                    'total' => (int) $response->getHeaderLine('X-Pagination-Total'),
+                    'limit' => (int) $response->getHeaderLine('Pagination-Limit'),
+                    'offset' => (int) $response->getHeaderLine('Pagination-Offset'),
+                    'total' => (int) $response->getHeaderLine('Pagination-Total'),
                 ],
             ];
         } else {
