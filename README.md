@@ -1,11 +1,10 @@
-[![Stories in Ready](https://badge.waffle.io/Rebilly/rebilly-php.png?label=ready&title=Ready)](https://waffle.io/Rebilly/rebilly-php)
 # Rebilly SDK for PHP
 
-[![Build Status](https://img.shields.io/travis/Rebilly/rebilly-php/master.svg?style=flat-square)](https://travis-ci.org/Rebilly/rebilly-php)
-[![Coverage Status](https://coveralls.io/repos/Rebilly/rebilly-php/badge.svg?branch=master&service=github)](https://coveralls.io/github/Rebilly/rebilly-php?branch=master)
-[![Packagist Version](https://img.shields.io/packagist/v/rebilly/client-php.svg?style=flat-square)](https://packagist.org/packages/rebilly/client-php)
-[![Total Downloads](https://img.shields.io/packagist/dt/rebilly/client-php.svg?style=flat-square)](https://packagist.org/packages/rebilly/client-php)
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/Rebilly/rebilly-php/master/LICENSE)
+[![Latest Version on Packagist][ico-version]][link-packagist]
+[![Software License][ico-license]](LICENSE)
+[![Build Status][ico-travis]][link-travis]
+[![Total Downloads][ico-downloads]][link-downloads]
+[![Coverage Status][ico-coveralls]][link-coveralls]
 
 The **Rebilly SDK for PHP** makes it easy for developers to access
 [Rebilly REST APIs](https://www.rebilly.com/api/documentation/) in their PHP code.
@@ -83,3 +82,14 @@ $ composer install
 # run the test (from project root)
 phpunit
 ```
+
+[ico-version]: https://img.shields.io/packagist/v/rebilly/client-php.svg?style=flat-square
+[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/Rebilly/rebilly-php/master.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/rebilly/client-php.svg?style=flat-square
+[ico-coveralls]: https://coveralls.io/repos/Rebilly/rebilly-php/badge.svg?branch=master&service=github
+
+[link-packagist]: https://packagist.org/packages/rebilly/client-php
+[link-travis]: https://travis-ci.org/Rebilly/rebilly-php
+[link-downloads]: https://packagist.org/packages/rebilly/client-php
+[link-coveralls]: https://coveralls.io/github/Rebilly/rebilly-php?branch=master
