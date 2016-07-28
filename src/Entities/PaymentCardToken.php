@@ -15,26 +15,7 @@ use Rebilly\Rest\Entity;
 /**
  * Class PaymentCardToken
  *
- * ```json
- * {
- *   "pan"
- *   "expMonth"
- *   "expYear"
- *   "cvv"
- *   "firstName"
- *   "lastName"
- *   "address"
- *   "address2"
- *   "city"
- *   "region"
- *   "country"
- *   "phoneNumber"
- *   "postalCode"
- *   "fingerprint"
- * }
- * ```
- *
- * @todo Check if need `cvv` getter
+ * @see http://rebilly.github.io/RebillyAPI/#tag/Payment%20Tokens
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
@@ -42,67 +23,100 @@ use Rebilly\Rest\Entity;
 final class PaymentCardToken extends Entity
 {
     /**
+     * @todo Rewrite ApiTest, which requires this method before deprecated methods.
+     *
+     * @param PaymentInstrument $value
+     *
+     * @return $this
+     */
+    public function setPaymentInstrument(PaymentInstrument $value)
+    {
+        return $this->setAttribute('paymentInstrument', $value->jsonSerialize());
+    }
+
+    /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see PaymentCardToken::setPaymentInstrument()
+     *
      * @param string $value
      *
      * @return $this
      */
     public function setPan($value)
     {
-        return $this->setAttribute('pan', $value);
+        return $this->setDefaultPaymentInstrumentValue('pan', $value);
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see PaymentCardToken::setPaymentInstrument()
+     *
      * @param string $value
      *
      * @return $this
      */
     public function setCvv($value)
     {
-        return $this->setAttribute('cvv', $value);
+        return $this->setDefaultPaymentInstrumentValue('cvv', $value);
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see PaymentCardToken::setPaymentInstrument()
+     *
      * @return string
      */
     public function getLast4()
     {
-        return $this->getAttribute('last4');
+        return $this->getDefaultPaymentInstrumentValue('last4');
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see PaymentCardToken::setPaymentInstrument()
+     *
      * @return string
      */
     public function getExpYear()
     {
-        return $this->getAttribute('expYear');
+        return $this->getDefaultPaymentInstrumentValue('expYear');
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see PaymentCardToken::setPaymentInstrument()
+     *
      * @param string $value
      *
      * @return $this
      */
     public function setExpYear($value)
     {
-        return $this->setAttribute('expYear', $value);
+        return $this->setDefaultPaymentInstrumentValue('expYear', $value);
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see PaymentCardToken::setPaymentInstrument()
+     *
      * @return string
      */
     public function getExpMonth()
     {
-        return $this->getAttribute('expMonth');
+        return $this->getDefaultPaymentInstrumentValue('expMonth');
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see PaymentCardToken::setPaymentInstrument()
+     *
      * @param string $value
      *
      * @return $this
      */
     public function setExpMonth($value)
     {
-        return $this->setAttribute('expMonth', $value);
+        return $this->setDefaultPaymentInstrumentValue('expMonth', $value);
     }
 
     /**
@@ -283,5 +297,31 @@ final class PaymentCardToken extends Entity
     public function setFingerprint($value)
     {
         return $this->setAttribute('fingerprint', $value);
+    }
+
+    /**
+     * @param $attribute
+     * @param $value
+     *
+     * @return $this
+     */
+    private function setDefaultPaymentInstrumentValue($attribute, $value)
+    {
+        $data = (array) $this->getAttribute('paymentInstrument');
+        $data[$attribute] = $value;
+
+        return $this->setAttribute('paymentInstrument', $data);
+    }
+
+    /**
+     * @param $attribute
+     *
+     * @return mixed|null
+     */
+    private function getDefaultPaymentInstrumentValue($attribute)
+    {
+        $data = (array) $this->getAttribute('paymentInstrument');
+
+        return isset($data[$attribute]) ? $data[$attribute] : null;
     }
 }

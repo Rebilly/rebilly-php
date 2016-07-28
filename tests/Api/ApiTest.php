@@ -1096,6 +1096,8 @@ class ApiTest extends TestCase
                 return $faker->boolean();
             case 'duration':
                 return $faker->numberBetween(1, 100);
+            case 'paymentInstrument':
+                return new Entities\PaymentInstruments\PaymentCardPaymentInstrument();
             case 'reasonCode':
                 return '1000';
             case 'status':
