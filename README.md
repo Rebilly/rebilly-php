@@ -7,7 +7,7 @@
 [![Coverage Status][ico-coveralls]][link-coveralls]
 
 The **Rebilly SDK for PHP** makes it easy for developers to access
-[Rebilly REST APIs](https://www.rebilly.com/api/documentation/) in their PHP code.
+[Rebilly REST APIs][link-api-doc] in their PHP code.
 You can get started in minutes by installing the SDK through Composer or by downloading
 a single zip file from our [latest release](https://github.com/Rebilly/rebilly-php/releases).
 
@@ -70,7 +70,7 @@ try {
 
 ## Documentation
 
-Read [https://www.rebilly.com/api/documentation/](https://www.rebilly.com/api/documentation/) for more details.
+Read [Rebilly REST APIs documentation][link-api-doc] for more details.
 
 ## Tests
 
@@ -89,6 +89,7 @@ phpunit
 [ico-downloads]: https://img.shields.io/packagist/dt/rebilly/client-php.svg?style=flat-square
 [ico-coveralls]: https://coveralls.io/repos/Rebilly/rebilly-php/badge.svg?branch=master&service=github
 
+[link-api-doc]: http://rebilly.github.io/RebillyAPI/
 [link-packagist]: https://packagist.org/packages/rebilly/client-php
 [link-travis]: https://travis-ci.org/Rebilly/rebilly-php
 [link-downloads]: https://packagist.org/packages/rebilly/client-php
