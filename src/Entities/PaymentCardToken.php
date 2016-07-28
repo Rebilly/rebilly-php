@@ -23,6 +23,103 @@ use Rebilly\Rest\Entity;
 final class PaymentCardToken extends Entity
 {
     /**
+     * @todo Rewrite ApiTest, which requires this method before deprecated methods.
+     *
+     * @param PaymentInstrument $value
+     *
+     * @return $this
+     */
+    public function setPaymentInstrument(PaymentInstrument $value)
+    {
+        return $this->setAttribute('paymentInstrument', $value->jsonSerialize());
+    }
+
+    /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see PaymentCardToken::setPaymentInstrument()
+     *
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setPan($value)
+    {
+        return $this->setDefaultPaymentInstrumentValue('pan', $value);
+    }
+
+    /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see PaymentCardToken::setPaymentInstrument()
+     *
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setCvv($value)
+    {
+        return $this->setDefaultPaymentInstrumentValue('cvv', $value);
+    }
+
+    /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see PaymentCardToken::setPaymentInstrument()
+     *
+     * @return string
+     */
+    public function getLast4()
+    {
+        return $this->getDefaultPaymentInstrumentValue('last4');
+    }
+
+    /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see PaymentCardToken::setPaymentInstrument()
+     *
+     * @return string
+     */
+    public function getExpYear()
+    {
+        return $this->getDefaultPaymentInstrumentValue('expYear');
+    }
+
+    /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see PaymentCardToken::setPaymentInstrument()
+     *
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setExpYear($value)
+    {
+        return $this->setDefaultPaymentInstrumentValue('expYear', $value);
+    }
+
+    /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see PaymentCardToken::setPaymentInstrument()
+     *
+     * @return string
+     */
+    public function getExpMonth()
+    {
+        return $this->getDefaultPaymentInstrumentValue('expMonth');
+    }
+
+    /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see PaymentCardToken::setPaymentInstrument()
+     *
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setExpMonth($value)
+    {
+        return $this->setDefaultPaymentInstrumentValue('expMonth', $value);
+    }
+
+    /**
      * @return string
      */
     public function getFirstName()
@@ -203,12 +300,28 @@ final class PaymentCardToken extends Entity
     }
 
     /**
-     * @param PaymentInstrument $value
+     * @param $attribute
+     * @param $value
      *
      * @return $this
      */
-    public function setPaymentInstrument(PaymentInstrument $value)
+    private function setDefaultPaymentInstrumentValue($attribute, $value)
     {
-        return $this->setAttribute('paymentInstrument', $value->jsonSerialize());
+        $data = (array) $this->getAttribute('paymentInstrument');
+        $data[$attribute] = $value;
+
+        return $this->setAttribute('paymentInstrument', $data);
+    }
+
+    /**
+     * @param $attribute
+     *
+     * @return mixed|null
+     */
+    private function getDefaultPaymentInstrumentValue($attribute)
+    {
+        $data = (array) $this->getAttribute('paymentInstrument');
+
+        return isset($data[$attribute]) ? $data[$attribute] : null;
     }
 }
