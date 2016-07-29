@@ -44,6 +44,8 @@
     }
   },
   "scripts": {
-    "test": "phpunit"
+    "test": "phpunit",
+    "cs": "php-cs-fixer fix -vv --dry-run || true",
+    "cs-fix": "php-cs-fixer fix -vv || true"
   }
 }
