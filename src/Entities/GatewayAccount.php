@@ -70,19 +70,19 @@ final class GatewayAccount extends Entity
     public static function allowedPaymentCardSchemes()
     {
         return [
-            CardAssociation::BRAND_VISA,
-            CardAssociation::BRAND_MASTERCARD,
-            CardAssociation::BRAND_AMERICAN_EXPRESS,
-            CardAssociation::BRAND_DISCOVER,
-            CardAssociation::BRAND_MAESTRO,
-            CardAssociation::BRAND_SOLO,
-            CardAssociation::BRAND_ELECTRON,
-            CardAssociation::BRAND_JCB,
-            CardAssociation::BRAND_VOYAGER,
-            CardAssociation::BRAND_DINERS_CLUB,
-            CardAssociation::BRAND_SWITCH,
-            CardAssociation::BRAND_LASER,
-            CardAssociation::BRAND_CHINA_UNIONPAY,
+            PaymentCardScheme::SCHEME_VISA,
+            PaymentCardScheme::SCHEME_MASTERCARD,
+            PaymentCardScheme::SCHEME_AMERICAN_EXPRESS,
+            PaymentCardScheme::SCHEME_DISCOVER,
+            PaymentCardScheme::SCHEME_MAESTRO,
+            PaymentCardScheme::SCHEME_SOLO,
+            PaymentCardScheme::SCHEME_ELECTRON,
+            PaymentCardScheme::SCHEME_JCB,
+            PaymentCardScheme::SCHEME_VOYAGER,
+            PaymentCardScheme::SCHEME_DINERS_CLUB,
+            PaymentCardScheme::SCHEME_SWITCH,
+            PaymentCardScheme::SCHEME_LASER,
+            PaymentCardScheme::SCHEME_CHINA_UNIONPAY,
         ];
     }
 
