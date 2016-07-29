@@ -23,10 +23,9 @@ class SubscriptionCancel extends Resource
 {
     const MSG_UNEXPECTED_POLICY = 'Unexpected type. Only %s types support';
 
-    const AT_NEXT_REBILL = 'AT_NEXT_REBILL';
-    const NOW_WITHOUT_REFUND = 'NOW_WITHOUT_REFUND';
-    const NOW_WITH_PRORATA_REFUND = 'NOW_WITH_PRORATA_REFUND';
-    const NOW_WITH_FULL_REFUND = 'NOW_WITH_FULL_REFUND';
+    const AT_NEXT_RENEWAL = 'at-next-renewal';
+    const NOW = 'now';
+    const NOW_WITH_PRORATA_CREDIT = 'now-with-prorata-credit';
 
     /**
      * @return array
@@ -34,10 +33,9 @@ class SubscriptionCancel extends Resource
     public static function policies()
     {
         return [
-            self::AT_NEXT_REBILL,
-            self::NOW_WITHOUT_REFUND,
-            self::NOW_WITH_PRORATA_REFUND,
-            self::NOW_WITH_FULL_REFUND,
+            self::AT_NEXT_RENEWAL,
+            self::NOW,
+            self::NOW_WITH_PRORATA_CREDIT,
         ];
     }
 

@@ -31,6 +31,14 @@ use Rebilly\Rest\Entity;
  */
 final class Blacklist extends Entity
 {
+    const TYPE_PAYMENT_CARD = 'payment-card';
+    const TYPE_CUSTOMER_ID = 'customer-id';
+    const TYPE_EMAIL = 'email';
+    const TYPE_IP_ADDRESS = 'ip-address';
+    const TYPE_BIN = 'bin';
+    const TYPE_COUNTRY = 'country';
+    const TYPE_FINGERPRINT = 'fingerprint';
+
     const MSG_UNEXPECTED_TYPE = 'Unexpected type. Only %s types support';
 
     /**
@@ -38,7 +46,15 @@ final class Blacklist extends Entity
      */
     public static function types()
     {
-        return ['paymentCard', 'customerId', 'email', 'ipAddress', 'bin', 'country', 'fingerprint'];
+        return [
+            self::TYPE_PAYMENT_CARD,
+            self::TYPE_CUSTOMER_ID,
+            self::TYPE_EMAIL,
+            self::TYPE_IP_ADDRESS,
+            self::TYPE_BIN,
+            self::TYPE_COUNTRY,
+            self::TYPE_FINGERPRINT,
+        ];
     }
 
     /**
