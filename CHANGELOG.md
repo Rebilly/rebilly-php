@@ -5,7 +5,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
--
+### Changed
+- [x] Changed all enum values and made it consistent using `kebab-case` notation of naming.
 
 ## [2.0.3] 2016-07-29
 
