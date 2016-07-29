@@ -32,30 +32,6 @@ use Rebilly\Rest\Entity;
  */
 final class Session extends Entity
 {
-    const RESOURCE_AUTHENTICATION_OPTIONS = 'authentication-options';
-    const RESOURCE_AUTHENTICATION_TOKENS = 'authentication-tokens';
-    const RESOURCE_BANK_ACCOUNTS = 'bank-accounts';
-    const RESOURCE_BLACKLISTS = 'blacklists';
-    const RESOURCE_CONTACTS = 'contacts';
-    const RESOURCE_CREDENTIALS = 'credentials';
-    const RESOURCE_CUSTOMERS = 'customers';
-    const RESOURCE_CUSTOM_FIELDS = 'custom-fields';
-    const RESOURCE_DISPUTES = 'disputes';
-    const RESOURCE_GATEWAY_ACCOUNTS = 'gateway-accounts';
-    const RESOURCE_INVOICES = 'invoices';
-    const RESOURCE_LEAD_SOURCES = 'lead-sources';
-    const RESOURCE_LAYOUTS = 'layouts';
-    const RESOURCE_ORGANIZATIONS = 'organizations';
-    const RESOURCE_PAYMENT_CARDS = 'payment-cards';
-    const RESOURCE_PAYMENTS = 'payments';
-    const RESOURCE_PASSWORD_TOKENS = 'password-tokens';
-    const RESOURCE_PLANS = 'plans';
-    const RESOURCE_QUEUE = 'queue';
-    const RESOURCE_SUBSCRIPTIONS = 'subscriptions';
-    const RESOURCE_TRANSACTIONS = 'transactions';
-    const RESOURCE_TOKENS = 'tokens';
-    const RESOURCE_WEBSITES = 'websites';
-
     const METHOD_POST = 'POST';
     const METHOD_GET = 'GET';
     const METHOD_PUT = 'PUT';
@@ -160,28 +136,28 @@ final class Session extends Entity
     public static function allowedResources()
     {
         return [
-            self::RESOURCE_AUTHENTICATION_OPTIONS,
-            self::RESOURCE_AUTHENTICATION_TOKENS,
-            self::RESOURCE_BANK_ACCOUNTS,
-            self::RESOURCE_BLACKLISTS,
-            self::RESOURCE_CONTACTS,
-            self::RESOURCE_CREDENTIALS,
-            self::RESOURCE_CUSTOMERS,
-            self::RESOURCE_CUSTOM_FIELDS,
-            self::RESOURCE_DISPUTES,
-            self::RESOURCE_GATEWAY_ACCOUNTS,
-            self::RESOURCE_INVOICES,
-            self::RESOURCE_LEAD_SOURCES,
-            self::RESOURCE_LAYOUTS,
-            self::RESOURCE_ORGANIZATIONS,
-            self::RESOURCE_PAYMENT_CARDS,
-            self::RESOURCE_PAYMENTS,
-            self::RESOURCE_PASSWORD_TOKENS,
-            self::RESOURCE_PLANS,
-            self::RESOURCE_SUBSCRIPTIONS,
-            self::RESOURCE_TRANSACTIONS,
-            self::RESOURCE_TOKENS,
-            self::RESOURCE_WEBSITES,
+            ResourceType::TYPE_AUTHENTICATION_OPTIONS,
+            ResourceType::TYPE_AUTHENTICATION_TOKENS,
+            ResourceType::TYPE_BANK_ACCOUNTS,
+            ResourceType::TYPE_BLACKLISTS,
+            ResourceType::TYPE_CONTACTS,
+            ResourceType::TYPE_CREDENTIALS,
+            ResourceType::TYPE_CUSTOMERS,
+            ResourceType::TYPE_CUSTOM_FIELDS,
+            ResourceType::TYPE_DISPUTES,
+            ResourceType::TYPE_GATEWAY_ACCOUNTS,
+            ResourceType::TYPE_INVOICES,
+            ResourceType::TYPE_LEAD_SOURCES,
+            ResourceType::TYPE_LAYOUTS,
+            ResourceType::TYPE_ORGANIZATIONS,
+            ResourceType::TYPE_PAYMENT_CARDS,
+            ResourceType::TYPE_PAYMENTS,
+            ResourceType::TYPE_PASSWORD_TOKENS,
+            ResourceType::TYPE_PLANS,
+            ResourceType::TYPE_SUBSCRIPTIONS,
+            ResourceType::TYPE_TRANSACTIONS,
+            ResourceType::TYPE_TOKENS,
+            ResourceType::TYPE_WEBSITES,
         ];
     }
 

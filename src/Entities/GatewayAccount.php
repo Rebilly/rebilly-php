@@ -23,30 +23,8 @@ use Rebilly\Rest\Entity;
  */
 final class GatewayAccount extends Entity
 {
-    const PAYMENT_METHOD_VISA = 'Visa';
-    const PAYMENT_METHOD_MASTERCARD = 'MasterCard';
-    const PAYMENT_METHOD_AMERICAN_EXPRESS = 'American Express';
-    const PAYMENT_METHOD_DISCOVER = 'Discover';
-    const PAYMENT_METHOD_MAESTRO = 'Maestro';
-    const PAYMENT_METHOD_SOLO = 'Solo';
-    const PAYMENT_METHOD_ELECTRON = 'Electron';
-    const PAYMENT_METHOD_JCB = 'JCB';
-    const PAYMENT_METHOD_VOYAGER = 'Voyager';
-    const PAYMENT_METHOD_DINERS_CLUB = 'Diners Club';
-    const PAYMENT_METHOD_SWITCH = 'Switch';
-    const PAYMENT_METHOD_LASER = 'Laser';
-    const PAYMENT_METHOD_CHINA_UNIONPAY = 'China UnionPay';
-
     const TYPE_3DSECURE_INTEGRATED = 'integrated';
     const TYPE_3DSECURE_EXTERNAL = 'external';
-
-    const METHOD_PAYMENT_CARD = 'payment-card';
-    const METHOD_PAYPAL = 'paypal';
-    const METHOD_ACH = 'ach';
-    const METHOD_CASH = 'cash';
-    const METHOD_CHECK = 'check';
-    const METHOD_WIRE = 'wire';
-    const METHOD_CHINA_UNIONPAY = 'china-unionpay';
 
     const MSG_UNEXPECTED_PAYMENT_CARD_SCHEME = 'Unexpected payment card scheme. Only %s payment card schemes support';
     const MSG_UNEXPECTED_METHOD = 'Unexpected method. Only %s methods support';
@@ -92,19 +70,19 @@ final class GatewayAccount extends Entity
     public static function allowedPaymentCardSchemes()
     {
         return [
-            self::PAYMENT_METHOD_VISA,
-            self::PAYMENT_METHOD_MASTERCARD,
-            self::PAYMENT_METHOD_AMERICAN_EXPRESS,
-            self::PAYMENT_METHOD_DISCOVER,
-            self::PAYMENT_METHOD_MAESTRO,
-            self::PAYMENT_METHOD_SOLO,
-            self::PAYMENT_METHOD_ELECTRON,
-            self::PAYMENT_METHOD_JCB,
-            self::PAYMENT_METHOD_VOYAGER,
-            self::PAYMENT_METHOD_DINERS_CLUB,
-            self::PAYMENT_METHOD_SWITCH,
-            self::PAYMENT_METHOD_LASER,
-            self::PAYMENT_METHOD_CHINA_UNIONPAY,
+            PaymentCardScheme::SCHEME_VISA,
+            PaymentCardScheme::SCHEME_MASTERCARD,
+            PaymentCardScheme::SCHEME_AMERICAN_EXPRESS,
+            PaymentCardScheme::SCHEME_DISCOVER,
+            PaymentCardScheme::SCHEME_MAESTRO,
+            PaymentCardScheme::SCHEME_SOLO,
+            PaymentCardScheme::SCHEME_ELECTRON,
+            PaymentCardScheme::SCHEME_JCB,
+            PaymentCardScheme::SCHEME_VOYAGER,
+            PaymentCardScheme::SCHEME_DINERS_CLUB,
+            PaymentCardScheme::SCHEME_SWITCH,
+            PaymentCardScheme::SCHEME_LASER,
+            PaymentCardScheme::SCHEME_CHINA_UNIONPAY,
         ];
     }
 
@@ -114,13 +92,13 @@ final class GatewayAccount extends Entity
     public static function allowedMethods()
     {
         return [
-            self::METHOD_PAYMENT_CARD,
-            self::METHOD_ACH,
-            self::METHOD_PAYPAL,
-            self::METHOD_CASH,
-            self::METHOD_CHECK,
-            self::METHOD_WIRE,
-            self::METHOD_CHINA_UNIONPAY,
+            PaymentMethod::METHOD_PAYMENT_CARD,
+            PaymentMethod::METHOD_ACH,
+            PaymentMethod::METHOD_PAYPAL,
+            PaymentMethod::METHOD_CASH,
+            PaymentMethod::METHOD_CHECK,
+            PaymentMethod::METHOD_WIRE,
+            PaymentMethod::METHOD_CHINA_UNIONPAY,
         ];
     }
 

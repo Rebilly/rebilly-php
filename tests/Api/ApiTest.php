@@ -457,7 +457,7 @@ class ApiTest extends TestCase
 
         $service = $client->customFields();
         $entityClass = Entities\CustomField::class;
-        $resourceType = Entities\CustomField::RESOURCE_TYPE_CUSTOMERS;
+        $resourceType = Entities\ResourceType::TYPE_CUSTOMERS;
 
         $paginator = $service->paginator($resourceType);
         $this->assertInstanceOf(Paginator::class, $paginator);
@@ -1043,9 +1043,7 @@ class ApiTest extends TestCase
             case 'payment':
                 return []; // TODO
             case 'relatedType':
-                return $faker->randomElement(
-                    [Entities\Note::RELATED_TYPE_CUSTOMER, Entities\Note::RELATED_TYPE_WEBSITE]
-                );
+                return $faker->randomElement(Entities\Note::relatedTypes());
             case 'method':
             case 'defaultPaymentMethod':
                 switch ($class) {
@@ -1054,7 +1052,7 @@ class ApiTest extends TestCase
                     case Entities\ApiTracking::class:
                         return 'GET';
                     case Entities\GatewayAccount::class:
-                        return Entities\GatewayAccount::METHOD_PAYMENT_CARD;
+                        return Entities\PaymentMethod::METHOD_PAYMENT_CARD;
                     default:
                         return new Entities\PaymentMethods\PaymentCardMethod(); // TODO
                 }

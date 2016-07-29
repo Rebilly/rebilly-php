@@ -43,23 +43,17 @@ final class Payment extends Entity
 {
     const MSG_UNEXPECTED_METHOD = 'Unexpected method. Only %s methods support';
 
-    const METHOD_ACH = 'ach';
-    const METHOD_CASH = 'cash';
-    const METHOD_CHINA_UNIONPAY = 'china-unionpay';
-    const METHOD_PAYMENT_CARD = 'payment-card';
-    const METHOD_PAYPAL = 'paypal';
-
     /**
      * @return array
      */
     public static function methods()
     {
         return [
-            Payment::METHOD_ACH,
-            Payment::METHOD_CASH,
-            Payment::METHOD_CHINA_UNIONPAY,
-            Payment::METHOD_PAYMENT_CARD,
-            Payment::METHOD_PAYPAL,
+            PaymentMethod::METHOD_ACH,
+            PaymentMethod::METHOD_CASH,
+            PaymentMethod::METHOD_CHINA_UNIONPAY,
+            PaymentMethod::METHOD_PAYMENT_CARD,
+            PaymentMethod::METHOD_PAYPAL,
         ];
     }
 
@@ -196,7 +190,7 @@ final class Payment extends Entity
         }
 
         switch ($this->getAttribute('method')) {
-            case self::METHOD_PAYMENT_CARD:
+            case PaymentMethod::METHOD_PAYMENT_CARD:
                 return new PaymentMethods\PaymentCardMethod((array) $this->getAttribute('paymentInstrument'));
             default:
                 throw new DomainException(sprintf(self::MSG_UNEXPECTED_METHOD, implode(', ', Payment::methods())));

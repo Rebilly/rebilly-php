@@ -10,7 +10,6 @@
 
 namespace Rebilly\Entities\PaymentMethods;
 
-use Rebilly\Entities\Payment;
 use Rebilly\Entities\PaymentMethod;
 
 /**
@@ -26,7 +25,7 @@ final class PaymentCardMethod extends PaymentMethod
      */
     public function name()
     {
-        return Payment::METHOD_PAYMENT_CARD;
+        return PaymentMethod::METHOD_PAYMENT_CARD;
     }
 
     /**

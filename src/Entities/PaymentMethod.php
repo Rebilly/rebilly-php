@@ -20,6 +20,14 @@ use Rebilly\Rest\Resource;
  */
 abstract class PaymentMethod extends Resource
 {
+    const METHOD_PAYMENT_CARD = 'payment-card';
+    const METHOD_PAYPAL = 'paypal';
+    const METHOD_ACH = 'ach';
+    const METHOD_CASH = 'cash';
+    const METHOD_CHECK = 'check';
+    const METHOD_WIRE = 'wire';
+    const METHOD_CHINA_UNIONPAY = 'china-unionpay';
+
     /**
      * Return the method name
      *

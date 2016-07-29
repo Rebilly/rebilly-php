@@ -35,13 +35,6 @@ use Rebilly\Rest\Entity;
  */
 final class Note extends Entity
 {
-    const RELATED_TYPE_CUSTOMER = 'customer';
-    const RELATED_TYPE_WEBSITE = 'website';
-    const RELATED_TYPE_PAYMENT_CARD = 'payment-card';
-    const RELATED_TYPE_PAYMENT_GATEWAY = 'payment-gateway';
-    const RELATED_TYPE_SUBSCRIPTION = 'subscription';
-    const RELATED_TYPE_TRANSACTION = 'transaction';
-
     const MSG_UNEXPECTED_TYPE = 'Unexpected type. Only %s types support';
 
     /**
@@ -50,12 +43,12 @@ final class Note extends Entity
     public static function relatedTypes()
     {
         return [
-            self::RELATED_TYPE_CUSTOMER,
-            self::RELATED_TYPE_WEBSITE,
-            self::RELATED_TYPE_PAYMENT_CARD,
-            self::RELATED_TYPE_PAYMENT_GATEWAY,
-            self::RELATED_TYPE_SUBSCRIPTION,
-            self::RELATED_TYPE_TRANSACTION,
+            ResourceType::TYPE_CUSTOMER,
+            ResourceType::TYPE_WEBSITE,
+            ResourceType::TYPE_PAYMENT_CARD,
+            ResourceType::TYPE_PAYMENT_GATEWAY,
+            ResourceType::TYPE_SUBSCRIPTION,
+            ResourceType::TYPE_TRANSACTION,
         ];
     }
 
