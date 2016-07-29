@@ -31,13 +31,6 @@ final class CustomField extends Entity
 {
     const MSG_UNEXPECTED_TYPE = 'Unexpected type. Only %s types support';
 
-    const RESOURCE_TYPE_CUSTOMERS = 'customers';
-    const RESOURCE_TYPE_PAYMENT_CARDS = 'payment-cards';
-    const RESOURCE_TYPE_PAYMENTS = 'payments';
-    const RESOURCE_TYPE_SUBSCRIPTIONS = 'subscriptions';
-    const RESOURCE_TYPE_WEBSITES = 'websites';
-    const RESOURCE_TYPE_CONTACTS = 'contacts';
-
     const TYPE_ARRAY = 'array';
     const TYPE_BOOLEAN = 'boolean';
     const TYPE_DATE = 'date';
