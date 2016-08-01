@@ -76,9 +76,9 @@ final class BankAccount extends Entity
     /**
      * @return string
      */
-    public function getName()
+    public function getBankName()
     {
-        return $this->getAttribute('name');
+        return $this->getAttribute('bankName');
     }
 
     /**
@@ -86,9 +86,9 @@ final class BankAccount extends Entity
      *
      * @return $this
      */
-    public function setName($value)
+    public function setBankName($value)
     {
-        return $this->setAttribute('name', $value);
+        return $this->setAttribute('bankName', $value);
     }
 
     /**
