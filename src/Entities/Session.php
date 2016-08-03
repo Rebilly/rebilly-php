@@ -22,6 +22,7 @@ use Rebilly\Rest\Entity;
  *   "token"
  *   "expiredTime"
  *   "permissions"
+ *   "userId"
  *   "createdTime"
  *   "updatedTime"
  * }
@@ -152,6 +153,14 @@ final class Session extends Entity
         }
 
         return $this->setAttribute('permissions', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getUserId()
+    {
+        return $this->getAttribute('userId');
     }
 
     /**
