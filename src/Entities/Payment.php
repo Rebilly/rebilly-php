@@ -10,7 +10,7 @@
 
 namespace Rebilly\Entities;
 
-use DomainException;
+use Rebilly\Entities\CustomerPaymentInstruments\BaseInstrument;
 use Rebilly\Rest\Entity;
 
 /**
@@ -56,6 +56,11 @@ final class Payment extends Entity
             PaymentMethod::METHOD_PAYPAL,
         ];
     }
+
+    /**
+     * BaseInstrument|null
+     */
+    private $paymentInstrument;
 
     /**
      * @return string
@@ -181,36 +186,23 @@ final class Payment extends Entity
     }
 
     /**
-     * @return PaymentMethods\PaymentCardMethod
+     * @return BaseInstrument
      */
-    public function getMethod()
+    public function getPaymentInstrument()
     {
-        if ($this->getAttribute('method') === null) {
-            return null;
-        }
-
-        switch ($this->getAttribute('method')) {
-            case PaymentMethod::METHOD_PAYMENT_CARD:
-                return new PaymentMethods\PaymentCardMethod((array) $this->getAttribute('paymentInstrument'));
-            default:
-                throw new DomainException(sprintf(self::MSG_UNEXPECTED_METHOD, implode(', ', Payment::methods())));
-        }
+        return $this->paymentInstrument;
     }
 
     /**
-     * @param PaymentMethod $value
+     * @param BaseInstrument $value
      *
-     * @return Payment
+     * @return $this
      */
-    public function setMethod(PaymentMethod $value)
+    public function setPaymentInstrument(BaseInstrument $value)
     {
-        if (!in_array($value->name(), Payment::methods())) {
-            throw new DomainException(sprintf(self::MSG_UNEXPECTED_METHOD, implode(', ', Payment::methods())));
-        }
+        $this->paymentInstrument = $value;
 
-        return $this
-            ->setAttribute('method', $value->name())
-            ->setAttribute('paymentInstrument', $value->jsonSerialize());
+        return $this->setAttribute('paymentInstrument', $value->jsonSerialize());
     }
 
     /**
