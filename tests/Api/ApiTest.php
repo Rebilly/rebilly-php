@@ -916,6 +916,7 @@ class ApiTest extends TestCase
             case 'secretKey':
                 return $faker->md5;
             case 'name':
+            case 'bankName':
             case 'medium':
             case 'source':
             case 'campaign':
