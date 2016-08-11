@@ -21,6 +21,24 @@ use Rebilly\Entities\PaymentMethod;
 class CashInstrument extends BaseInstrument
 {
     /**
+     * @return string
+     */
+    public function getReceivedBy()
+    {
+        return $this->getAttribute('receivedBy');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setReceivedBy($value)
+    {
+        return $this->setAttribute('receivedBy', $value);
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function methodName()
