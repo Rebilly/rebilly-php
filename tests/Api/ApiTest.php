@@ -861,6 +861,7 @@ class ApiTest extends TestCase
             case 'defaultPaymentInstrumentId':
             case 'relatedId':
             case 'subscriptionId':
+            case 'userId':
             case 'transactionId':
                 return $faker->uuid;
             case 'dueTime':
@@ -915,6 +916,7 @@ class ApiTest extends TestCase
             case 'secretKey':
                 return $faker->md5;
             case 'name':
+            case 'bankName':
             case 'medium':
             case 'source':
             case 'campaign':

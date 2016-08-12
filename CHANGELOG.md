@@ -7,6 +7,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 -
 
+## [2.0.4] 2016-08-12
+
+### Added
+- [x] Added `userId` attribute to `Session`. 
+
+### Fixed
+- [x] Fixed `bankName` attribute in `BankAccount`.
+
 ## [2.0.3] 2016-07-29
 
 ### Added
