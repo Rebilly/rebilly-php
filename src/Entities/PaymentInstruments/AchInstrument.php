@@ -8,24 +8,24 @@
  * file that was distributed with this source code.
  */
 
-namespace Rebilly\Entities\CustomerPaymentInstruments;
+namespace Rebilly\Entities\PaymentInstruments;
 
 use Rebilly\Entities\PaymentMethod;
 
 /**
- * Class PaymentCardInstrument
+ * Class AchInstrument
  *
  * @author Maksim Tuzov <maksim.tuzov@rebilly.com>
  * @version 0.1
  */
-class PaymentCardInstrument extends BaseInstrument
+class AchInstrument extends BaseInstrument
 {
     /**
      * @return string
      */
-    public function getPayPalAccountId()
+    public function getBankAccountId()
     {
-        return $this->getAttribute('payPalAccountId');
+        return $this->getAttribute('bankAccountId');
     }
 
     /**
@@ -33,9 +33,9 @@ class PaymentCardInstrument extends BaseInstrument
      *
      * @return $this
      */
-    public function setPayPalAccountId($value)
+    public function setBankAccountId($value)
     {
-        return $this->setAttribute('payPalAccountId', $value);
+        return $this->setAttribute('bankAccountId', $value);
     }
 
     /**
@@ -61,6 +61,6 @@ class PaymentCardInstrument extends BaseInstrument
      */
     protected function methodName()
     {
-        return PaymentMethod::METHOD_PAYPAL;
+        return PaymentMethod::METHOD_ACH;
     }
 }

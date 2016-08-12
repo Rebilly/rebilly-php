@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Rebilly\Entities\CustomerPaymentInstruments;
+namespace Rebilly\Entities\PaymentInstruments;
 
 use DomainException;
 use Rebilly\Entities\PaymentMethod;

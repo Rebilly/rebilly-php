@@ -25,11 +25,11 @@ final class PaymentCardToken extends Entity
     /**
      * @todo Rewrite ApiTest, which requires this method before deprecated methods.
      *
-     * @param PaymentInstrument $value
+     * @param PaymentInstrumentData $value
      *
      * @return $this
      */
-    public function setPaymentInstrument(PaymentInstrument $value)
+    public function setPaymentInstrument(PaymentInstrumentData $value)
     {
         return $this->setAttribute('paymentInstrument', $value->jsonSerialize());
     }

@@ -1,10 +1,10 @@
 <?php
 
-namespace Rebilly\Entities\PaymentInstruments;
+namespace Rebilly\Entities\PaymentInstruments\Data;
 
-use Rebilly\Entities\PaymentInstrument;
+use Rebilly\Entities\PaymentInstrumentData;
 
-class BankAccountPaymentInstrument extends PaymentInstrument
+class BankAccountPaymentInstrumentData extends PaymentInstrumentData
 {
     const ACCOUNT_TYPE_CHECKING = 'checking';
     const ACCOUNT_TYPE_SAVINGS = 'savings';

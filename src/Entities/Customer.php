@@ -10,7 +10,7 @@
 
 namespace Rebilly\Entities;
 
-use Rebilly\Entities\CustomerPaymentInstruments\BaseInstrument;
+use Rebilly\Entities\PaymentInstruments\BaseInstrument;
 use Rebilly\Rest\Entity;
 
 /**

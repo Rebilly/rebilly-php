@@ -18,6 +18,6 @@ use Rebilly\Rest\Resource;
  * @author Arman Tuyakbayev <arman.tuyakbayev@rebilly.com>
  * @version 0.1
  */
-abstract class PaymentInstrument extends Resource
+abstract class PaymentInstrumentData extends Resource
 {
 }
