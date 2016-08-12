@@ -21,11 +21,17 @@ use Rebilly\Rest\Resource;
  */
 abstract class PaymentMethodInstrument extends Resource
 {
+    const MSG_UNEXPECTED_METHOD = 'Unexpected method. Only %s method support';
+
     /**
      * {@inheritdoc}
      */
     public function __construct(array $data = [])
     {
+        if (isset($data['method']) && $data['method'] !== $this->methodName()) {
+            throw new DomainException(sprintf(self::MSG_UNEXPECTED_METHOD, $this->methodName()));
+        }
+
         parent::__construct($data);
 
         $this->setAttribute('method', $this->methodName());
