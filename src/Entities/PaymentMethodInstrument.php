@@ -29,7 +29,7 @@ abstract class PaymentMethodInstrument extends Resource
     const MSG_UNSUPPORTED_METHOD = 'Unexpected method. Only %s methods support';
     const MSG_REQUIRED_METHOD = 'Method is required';
 
-    const SUPPORT_METHODS = [
+    protected static $supportMethods = [
         PaymentMethod::METHOD_ACH,
         PaymentMethod::METHOD_CASH,
         PaymentMethod::METHOD_PAYMENT_CARD,
@@ -68,7 +68,7 @@ abstract class PaymentMethodInstrument extends Resource
                 $paymentInstrument = new PayPalInstrument($data);
                 break;
             default:
-                throw new DomainException(sprintf(self::MSG_UNSUPPORTED_METHOD, implode(',', self::SUPPORT_METHODS)));
+                throw new DomainException(sprintf(self::MSG_UNSUPPORTED_METHOD, implode(',', self::$supportMethods)));
         }
 
         return $paymentInstrument;
