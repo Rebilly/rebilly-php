@@ -1098,12 +1098,16 @@ class ApiTest extends TestCase
             case 'paymentInstrument':
                 switch ($class) {
                     case Entities\Payment::class:
-                        return new Entities\PaymentInstruments\PaymentCardInstrument();
+                        return new Entities\PaymentInstruments\PaymentCardInstrument([
+                            'method' => Entities\PaymentMethod::METHOD_PAYMENT_CARD
+                        ]);
                     default:
                         return new Entities\PaymentInstruments\PaymentCardPaymentInstrument();
                 }
             case 'defaultPaymentInstrument':
-                return new Entities\PaymentInstruments\PaymentCardInstrument();
+                return new Entities\PaymentInstruments\PaymentCardInstrument([
+                    'method' => Entities\PaymentMethod::METHOD_PAYMENT_CARD
+                ]);
             case 'reasonCode':
                 return '1000';
             case 'status':
