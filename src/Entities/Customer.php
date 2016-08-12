@@ -10,7 +10,6 @@
 
 namespace Rebilly\Entities;
 
-use DomainException;
 use Rebilly\Rest\Entity;
 
 /**
