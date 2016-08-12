@@ -32,8 +32,6 @@ use Rebilly\Rest\Entity;
  */
 final class Customer extends Entity
 {
-    const MSG_REQUIRED_PAYMENT_INSTRUMENT = 'Attribute defaultPaymentInstrument is required';
-
     /**
      * PaymentMethodInstrument|null
      */
@@ -44,12 +42,10 @@ final class Customer extends Entity
      */
     public function __construct(array $data = [])
     {
-        if (!isset($data['defaultPaymentInstrument'])) {
-            throw new DomainException(self::MSG_REQUIRED_PAYMENT_INSTRUMENT);
+        if (isset($data['defaultPaymentInstrument'])) {
+            $this->defaultPaymentInstrument = PaymentMethodInstrument::createFromData($data['defaultPaymentInstrument']);
+            $data['defaultPaymentInstrument'] = $this->defaultPaymentInstrument->jsonSerialize();
         }
-
-        $this->defaultPaymentInstrument = PaymentMethodInstrument::createFromData($data['defaultPaymentInstrument']);
-        $data['defaultPaymentInstrument'] = $this->defaultPaymentInstrument->jsonSerialize();
 
         parent::__construct($data);
     }

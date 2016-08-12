@@ -41,8 +41,6 @@ use Rebilly\Rest\Entity;
  */
 final class Payment extends Entity
 {
-    const MSG_REQUIRED_PAYMENT_INSTRUMENT = 'Attribute paymentInstrument is required';
-
     /**
      * @return array
      */
@@ -67,12 +65,10 @@ final class Payment extends Entity
      */
     public function __construct(array $data = [])
     {
-        if (!isset($data['paymentInstrument'])) {
-            throw new DomainException(self::MSG_REQUIRED_PAYMENT_INSTRUMENT);
+        if (isset($data['paymentInstrument'])) {
+            $this->paymentInstrument = PaymentMethodInstrument::createFromData($data['paymentInstrument']);
+            $data['paymentInstrument'] = $this->paymentInstrument->jsonSerialize();
         }
-
-        $this->paymentInstrument = PaymentMethodInstrument::createFromData($data['paymentInstrument']);
-        $data['paymentInstrument'] = $this->paymentInstrument->jsonSerialize();
 
         parent::__construct($data);
     }
