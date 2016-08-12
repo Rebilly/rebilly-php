@@ -66,7 +66,7 @@ final class Payment extends Entity
     {
         if (isset($data['paymentInstrument'])) {
             $this->paymentInstrument = PaymentMethodInstrument::createFromData($data['paymentInstrument']);
-            $data['defaultPaymentInstrument'] = $this->paymentInstrument->jsonSerialize();
+            $data['paymentInstrument'] = $this->paymentInstrument->jsonSerialize();
         }
 
         parent::__construct($data);
