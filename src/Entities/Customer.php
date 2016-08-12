@@ -10,7 +10,6 @@
 
 namespace Rebilly\Entities;
 
-use Rebilly\Entities\PaymentInstruments\BaseInstrument;
 use Rebilly\Rest\Entity;
 
 /**
@@ -33,7 +32,7 @@ use Rebilly\Rest\Entity;
 final class Customer extends Entity
 {
     /**
-     * BaseInstrument|null
+     * PaymentMethodInstrument|null
      */
     private $defaultPaymentInstrument;
 
@@ -136,7 +135,7 @@ final class Customer extends Entity
     }
 
     /**
-     * @return BaseInstrument
+     * @return PaymentMethodInstrument
      */
     public function getDefaultPaymentInstrument()
     {
@@ -144,11 +143,11 @@ final class Customer extends Entity
     }
 
     /**
-     * @param BaseInstrument $value
+     * @param PaymentMethodInstrument $value
      *
      * @return $this
      */
-    public function setDefaultPaymentInstrument(BaseInstrument $value)
+    public function setDefaultPaymentInstrument(PaymentMethodInstrument $value)
     {
         $this->defaultPaymentInstrument = $value;
 

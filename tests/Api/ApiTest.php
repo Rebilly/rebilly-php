@@ -1100,7 +1100,7 @@ class ApiTest extends TestCase
                     case Entities\Payment::class:
                         return new Entities\PaymentInstruments\PaymentCardInstrument();
                     default:
-                        return new Entities\PaymentInstruments\Data\PaymentCardData();
+                        return new Entities\PaymentInstruments\PaymentCardPaymentInstrument();
                 }
             case 'defaultPaymentInstrument':
                 return new Entities\PaymentInstruments\PaymentCardInstrument();

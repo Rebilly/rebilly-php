@@ -1,10 +1,10 @@
 <?php
 
-namespace Rebilly\Entities\PaymentInstruments\Data;
+namespace Rebilly\Entities\PaymentInstruments;
 
-use Rebilly\Entities\PaymentInstrumentData;
+use Rebilly\Entities\PaymentInstrument;
 
-class PaymentCardData extends PaymentInstrumentData
+class PaymentCardPaymentInstrument extends PaymentInstrument
 {
     /**
      * @param string $value

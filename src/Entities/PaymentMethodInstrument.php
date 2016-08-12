@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Rebilly\Entities\PaymentInstruments;
+namespace Rebilly\Entities;
 
 use DomainException;
 use Rebilly\Entities\PaymentMethod;
@@ -20,7 +20,7 @@ use Rebilly\Rest\Resource;
  * @author Maksim Tuzov <maksim.tuzov@rebilly.com>
  * @version 0.1
  */
-abstract class BaseInstrument extends Resource
+abstract class PaymentMethodInstrument extends Resource
 {
     const MSG_UNEXPECTED_METHOD = 'Unexpected method. Only %s method support';
 

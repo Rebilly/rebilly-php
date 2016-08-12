@@ -11,6 +11,7 @@
 namespace Rebilly\Entities\PaymentInstruments;
 
 use Rebilly\Entities\PaymentMethod;
+use Rebilly\Entities\PaymentMethodInstrument;
 
 /**
  * Class PayPalInstrument
@@ -18,7 +19,7 @@ use Rebilly\Entities\PaymentMethod;
  * @author Maksim Tuzov <maksim.tuzov@rebilly.com>
  * @version 0.1
  */
-class PayPalInstrument extends BaseInstrument
+class PayPalInstrument extends PaymentMethodInstrument
 {
     /**
      * @return string
