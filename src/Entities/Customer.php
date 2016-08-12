@@ -10,6 +10,7 @@
 
 namespace Rebilly\Entities;
 
+use DomainException;
 use Rebilly\Rest\Entity;
 
 /**
@@ -31,10 +32,27 @@ use Rebilly\Rest\Entity;
  */
 final class Customer extends Entity
 {
+    const MSG_REQUIRED_PAYMENT_INSTRUMENT = 'Attribute defaultPaymentInstrument is required';
+
     /**
      * PaymentMethodInstrument|null
      */
     private $defaultPaymentInstrument;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __construct(array $data = [])
+    {
+        if (!isset($data['defaultPaymentInstrument'])) {
+            throw new DomainException(self::MSG_REQUIRED_PAYMENT_INSTRUMENT);
+        }
+
+        $this->defaultPaymentInstrument = PaymentMethodInstrument::createFromData($data['defaultPaymentInstrument']);
+        $data['defaultPaymentInstrument'] = $this->defaultPaymentInstrument->jsonSerialize();
+
+        parent::__construct($data);
+    }
 
     /**
      * @return string
