@@ -10,7 +10,6 @@
 
 namespace Rebilly\Entities;
 
-use DomainException;
 use Rebilly\Rest\Entity;
 
 /**
@@ -41,8 +40,6 @@ use Rebilly\Rest\Entity;
  */
 final class Payment extends Entity
 {
-    const MSG_UNEXPECTED_METHOD = 'Unexpected method. Only %s methods support';
-
     /**
      * @return array
      */
@@ -56,6 +53,25 @@ final class Payment extends Entity
             PaymentMethod::METHOD_PAYPAL,
         ];
     }
+
+    /**
+     * PaymentMethodInstrument|null
+     */
+    private $paymentInstrument;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __construct(array $data = [])
+    {
+        if (isset($data['paymentInstrument'])) {
+            $this->paymentInstrument = PaymentMethodInstrument::createFromData($data['paymentInstrument']);
+            $data['paymentInstrument'] = $this->paymentInstrument->jsonSerialize();
+        }
+
+        parent::__construct($data);
+    }
+
 
     /**
      * @return string
@@ -181,36 +197,23 @@ final class Payment extends Entity
     }
 
     /**
-     * @return PaymentMethods\PaymentCardMethod
+     * @return PaymentMethodInstrument
      */
-    public function getMethod()
+    public function getPaymentInstrument()
     {
-        if ($this->getAttribute('method') === null) {
-            return null;
-        }
-
-        switch ($this->getAttribute('method')) {
-            case PaymentMethod::METHOD_PAYMENT_CARD:
-                return new PaymentMethods\PaymentCardMethod((array) $this->getAttribute('paymentInstrument'));
-            default:
-                throw new DomainException(sprintf(self::MSG_UNEXPECTED_METHOD, implode(', ', Payment::methods())));
-        }
+        return $this->paymentInstrument;
     }
 
     /**
-     * @param PaymentMethod $value
+     * @param PaymentMethodInstrument $value
      *
-     * @return Payment
+     * @return $this
      */
-    public function setMethod(PaymentMethod $value)
+    public function setPaymentInstrument(PaymentMethodInstrument $value)
     {
-        if (!in_array($value->name(), Payment::methods())) {
-            throw new DomainException(sprintf(self::MSG_UNEXPECTED_METHOD, implode(', ', Payment::methods())));
-        }
+        $this->paymentInstrument = $value;
 
-        return $this
-            ->setAttribute('method', $value->name())
-            ->setAttribute('paymentInstrument', $value->jsonSerialize());
+        return $this->setAttribute('paymentInstrument', $value->jsonSerialize());
     }
 
     /**

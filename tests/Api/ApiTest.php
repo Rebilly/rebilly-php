@@ -1097,7 +1097,18 @@ class ApiTest extends TestCase
             case 'duration':
                 return $faker->numberBetween(1, 100);
             case 'paymentInstrument':
-                return new Entities\PaymentInstruments\PaymentCardPaymentInstrument();
+                switch ($class) {
+                    case Entities\Payment::class:
+                        return new Entities\PaymentInstruments\PaymentCardInstrument([
+                            'method' => Entities\PaymentMethod::METHOD_PAYMENT_CARD
+                        ]);
+                    default:
+                        return new Entities\PaymentInstruments\PaymentCardPaymentInstrument();
+                }
+            case 'defaultPaymentInstrument':
+                return new Entities\PaymentInstruments\PaymentCardInstrument([
+                    'method' => Entities\PaymentMethod::METHOD_PAYMENT_CARD
+                ]);
             case 'reasonCode':
                 return '1000';
             case 'status':
