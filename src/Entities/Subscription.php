@@ -201,7 +201,7 @@ final class Subscription extends Entity
      */
     public function getCancelledTime()
     {
-        return $this->getAttribute('cancelledTime');
+        return $this->getCanceledTime();
     }
 
     /**
