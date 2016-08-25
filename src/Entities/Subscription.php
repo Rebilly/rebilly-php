@@ -195,16 +195,6 @@ final class Subscription extends Entity
     }
 
     /**
-     * @deprecated
-     *
-     * @return string
-     */
-    public function getCancelledTime()
-    {
-        return $this->getCanceledTime();
-    }
-
-    /**
      * @return string
      */
     public function getRenewalTime()
