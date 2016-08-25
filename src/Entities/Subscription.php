@@ -189,9 +189,19 @@ final class Subscription extends Entity
     /**
      * @return string
      */
+    public function getCanceledTime()
+    {
+        return $this->getAttribute('canceledTime');
+    }
+
+    /**
+     * @deprecated
+     *
+     * @return string
+     */
     public function getCancelledTime()
     {
-        return $this->getAttribute('cancelledTime');
+        return $this->getCanceledTime();
     }
 
     /**
