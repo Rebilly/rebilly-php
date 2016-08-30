@@ -142,6 +142,16 @@ final class UserService extends Service
 
     /**
      * @param string $userId
+     *
+     * @return User
+     */
+    public function totpReset($userId)
+    {
+        return $this->client()->post([], 'users/{userId}/totp-reset/', ['userId' => $userId]);
+    }
+
+    /**
+     * @param string $userId
      * @param array|JsonSerializable|User $data
      *
      * @throws UnprocessableEntityException The input data does not valid
