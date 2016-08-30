@@ -145,7 +145,7 @@ final class UserService extends Service
      *
      * @return User
      */
-    public function totpReset($userId)
+    public function resetTotp($userId)
     {
         return $this->client()->post([], 'users/{userId}/totp-reset/', ['userId' => $userId]);
     }
