@@ -167,7 +167,7 @@ final class Client
      *   perform actions based on it, and pass delegation on to the HTTP handler.
      *   Also can take the response from HTTP handler and perform actions on it.
      *
-     * @see Rebilly\ApiKeyProvider
+     * @see ApiKeyProvider
      *
      * @param array $options
      *
