@@ -83,6 +83,14 @@ final class Transaction extends Entity
     }
 
     /**
+     * @return array
+     */
+    public function getGateway()
+    {
+        return $this->getAttribute('gateway');
+    }
+
+    /**
      * @return string
      */
     public function getParentTransactionId()
