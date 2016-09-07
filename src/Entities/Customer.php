@@ -26,13 +26,29 @@ use Rebilly\Rest\Entity;
  * }
  * ```
  *
- * @todo Rename defaultCard to defaultCardId
- *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
  */
 final class Customer extends Entity
 {
+    /**
+     * PaymentMethodInstrument|null
+     */
+    private $defaultPaymentInstrument;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __construct(array $data = [])
+    {
+        if (isset($data['defaultPaymentInstrument'])) {
+            $this->defaultPaymentInstrument = PaymentMethodInstrument::createFromData($data['defaultPaymentInstrument']);
+            $data['defaultPaymentInstrument'] = $this->defaultPaymentInstrument->jsonSerialize();
+        }
+
+        parent::__construct($data);
+    }
+
     /**
      * @return string
      */
@@ -114,36 +130,6 @@ final class Customer extends Entity
     }
 
     /**
-     * @return string
-     */
-    public function getDefaultCardId()
-    {
-        return $this->getAttribute('defaultCard');
-    }
-
-    /**
-     * @return null|PaymentCard
-     */
-    public function getDefaultCard()
-    {
-        if ($this->hasEmbeddedResource('defaultCard')) {
-            return new PaymentCard($this->getEmbeddedResource('defaultCard'));
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setDefaultCardId($value)
-    {
-        return $this->setAttribute('defaultCard', $value);
-    }
-
-    /**
      * @return array
      */
     public function getCustomFields()
@@ -162,38 +148,22 @@ final class Customer extends Entity
     }
 
     /**
-     * @return string
+     * @return PaymentMethodInstrument
      */
-    public function getDefaultPaymentMethod()
+    public function getDefaultPaymentInstrument()
     {
-        return $this->getAttribute('defaultPaymentMethod');
+        return $this->defaultPaymentInstrument;
     }
 
     /**
-     * @param string $value
+     * @param PaymentMethodInstrument $value
      *
      * @return $this
      */
-    public function setDefaultPaymentMethod($value)
+    public function setDefaultPaymentInstrument(PaymentMethodInstrument $value)
     {
-        return $this->setAttribute('defaultPaymentMethod', $value);
-    }
+        $this->defaultPaymentInstrument = $value;
 
-    /**
-     * @return string
-     */
-    public function getDefaultPaymentInstrumentId()
-    {
-        return $this->getAttribute('defaultPaymentInstrumentId');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setDefaultPaymentInstrumentId($value)
-    {
-        return $this->setAttribute('defaultPaymentInstrumentId', $value);
+        return $this->setAttribute('defaultPaymentInstrument', $value->jsonSerialize());
     }
 }

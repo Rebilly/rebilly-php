@@ -84,6 +84,7 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\ApiKeyService apiKeys()
  * @method Services\CheckoutPageService checkoutPages()
  * @method Services\DisputeService disputes()
+ * @method Services\PasswordService passwords()
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
@@ -93,7 +94,7 @@ final class Client
     const BASE_HOST = 'https://api.rebilly.com';
     const SANDBOX_HOST = 'https://api-sandbox.rebilly.com';
     const CURRENT_VERSION = 'v2.1';
-    const SDK_VERSION = '2.0.3';
+    const SDK_VERSION = '2.0.4';
 
     private static $services = [
         'authenticationOptions' => Services\AuthenticationOptionsService::class,
@@ -131,6 +132,7 @@ final class Client
         'apiKeys' => Services\ApiKeyService::class,
         'checkoutPages' => Services\CheckoutPageService::class,
         'disputes' => Services\DisputeService::class,
+        'passwords' => Services\PasswordService::class,
     ];
 
     /** @var array */
@@ -165,7 +167,7 @@ final class Client
      *   perform actions based on it, and pass delegation on to the HTTP handler.
      *   Also can take the response from HTTP handler and perform actions on it.
      *
-     * @see Rebilly\ApiKeyProvider
+     * @see ApiKeyProvider
      *
      * @param array $options
      *

@@ -645,6 +645,7 @@ class ApiTest extends TestCase
             [Entities\Login::class],
             [Entities\Dispute::class],
             [Entities\WebsiteWebhookTracking::class],
+            [Entities\Password::class],
         ];
     }
 
@@ -827,6 +828,11 @@ class ApiTest extends TestCase
                 Services\WebsiteWebhookTrackingService::class,
                 Entities\WebsiteWebhookTracking::class,
             ],
+            [
+                'passwords',
+                Services\PasswordService::class,
+                Entities\Password::class,
+            ],
         ];
     }
 
@@ -916,6 +922,7 @@ class ApiTest extends TestCase
             case 'secretKey':
                 return $faker->md5;
             case 'name':
+            case 'bankName':
             case 'medium':
             case 'source':
             case 'campaign':
@@ -1096,7 +1103,18 @@ class ApiTest extends TestCase
             case 'duration':
                 return $faker->numberBetween(1, 100);
             case 'paymentInstrument':
-                return new Entities\PaymentInstruments\PaymentCardPaymentInstrument();
+                switch ($class) {
+                    case Entities\Payment::class:
+                        return new Entities\PaymentInstruments\PaymentCardInstrument([
+                            'method' => Entities\PaymentMethod::METHOD_PAYMENT_CARD
+                        ]);
+                    default:
+                        return new Entities\PaymentInstruments\PaymentCardPaymentInstrument();
+                }
+            case 'defaultPaymentInstrument':
+                return new Entities\PaymentInstruments\PaymentCardInstrument([
+                    'method' => Entities\PaymentMethod::METHOD_PAYMENT_CARD
+                ]);
             case 'reasonCode':
                 return '1000';
             case 'status':

@@ -237,6 +237,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'disputes/{disputeId}' => function (array $content) {
                 return new Dispute($content);
             },
+            'passwords' => function (array $content) {
+                return new Collection(new Password(), $content);
+            },
+            'passwords/{token}' => function (array $content) {
+                return new Password($content);
+            },
         ];
     }
 
