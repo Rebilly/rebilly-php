@@ -5,20 +5,21 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Entity;
 
 /**
- * Class Gateway
+ * Class AvsResponse.
  */
 final class AvsResponse extends Entity
 {
-    public function __construct(array $data)
-    {
-        parent::__construct($data);
-    }
-
+    /**
+     * @return string
+     */
     public function getMessage()
     {
         return $this->getAttribute('message');
     }
 
+    /**
+     * @return string
+     */
     public function getCode()
     {
         return $this->getAttribute('code');
