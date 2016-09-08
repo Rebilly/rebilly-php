@@ -2,12 +2,12 @@
 
 namespace Rebilly\Entities;
 
-use Rebilly\Rest\Entity;
+use Rebilly\Rest\Resource;
 
 /**
  * Class Gateway.
  */
-final class Gateway extends Entity
+final class Gateway extends Resource
 {
     private $response;
     private $avsResponse;

@@ -2,12 +2,12 @@
 
 namespace Rebilly\Entities;
 
-use Rebilly\Rest\Entity;
+use Rebilly\Rest\Resource;
 
 /**
  * Class AvsResponse.
  */
-final class AvsResponse extends Entity
+final class AvsResponse extends Resource
 {
     /**
      * @return string

@@ -2,12 +2,12 @@
 
 namespace Rebilly\Entities;
 
-use Rebilly\Rest\Entity;
+use Rebilly\Rest\Resource;
 
 /**
  * Class CvvResponse
  */
-final class CvvResponse extends Entity
+final class CvvResponse extends Resource
 {
     /**
      * @return string
