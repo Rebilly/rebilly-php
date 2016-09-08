@@ -155,7 +155,11 @@ final class Transaction extends Entity
      */
     public function getGateway()
     {
-        return new Gateway($this->getAttribute('gateway'));
+        if ($this->getAttribute('gateway') === null) {
+            return null;
+        } else {
+            return new Gateway($this->getAttribute('gateway'));
+        }
     }
 
     /**
