@@ -24,6 +24,7 @@ use Rebilly\Rest\Entity;
  *   "ipAddress"
  *   "request"
  *   "response"
+ *   "user"
  *   "duration"
  *   "createdTime"
  * }
@@ -80,6 +81,14 @@ final class ApiTracking extends Entity
     public function getResponse()
     {
         return $this->getAttribute('response');
+    }
+
+    /**
+     * @return null|TrackingUser
+     */
+    public function getUser()
+    {
+        return $this->hasEmbeddedResource('user') ? new TrackingUser($this->getEmbeddedResource('user')) : null;
     }
 
     /**
