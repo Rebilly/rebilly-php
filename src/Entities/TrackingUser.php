@@ -34,7 +34,7 @@ final class TrackingUser extends Resource
      */
     public function getEmail()
     {
-        return $this->getAttribute('Email');
+        return $this->getAttribute('email');
     }
 
     /**
