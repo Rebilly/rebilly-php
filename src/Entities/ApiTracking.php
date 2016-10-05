@@ -21,7 +21,6 @@ use Rebilly\Rest\Entity;
  *   "status"
  *   "url"
  *   "method"
- *   "ipAddress"
  *   "request"
  *   "response"
  *   "user"
@@ -57,14 +56,6 @@ final class ApiTracking extends Entity
     public function getMethod()
     {
         return $this->getAttribute('method');
-    }
-
-    /**
-     * @return string
-     */
-    public function getIpAddress()
-    {
-        return $this->getAttribute('ipAddress');
     }
 
     /**
