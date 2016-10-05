@@ -23,7 +23,7 @@ use Rebilly\Rest\Entity;
  * }
  * ```
  */
-final class PaymentCardMigrationsRequest extends Entity
+final class PaymentCardMigrationsRequest extends Resource
 {
     /**
      * @return string
