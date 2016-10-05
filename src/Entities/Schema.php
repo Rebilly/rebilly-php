@@ -243,6 +243,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'passwords/{token}' => function (array $content) {
                 return new Password($content);
             },
+            'payment-cards-migrations/migrate' => function (array $content) {
+                return new PaymentCardMigrationsResponse($content);
+            },
+            'payment-cards-migrations' => function (array $content) {
+                return new Collection(new PaymentCard(), $content);
+            },
         ];
     }
 
