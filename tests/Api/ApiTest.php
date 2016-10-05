@@ -645,7 +645,6 @@ class ApiTest extends TestCase
             [Entities\Login::class],
             [Entities\Dispute::class],
             [Entities\WebsiteWebhookTracking::class],
-            [Entities\Password::class],
         ];
     }
 
@@ -827,11 +826,6 @@ class ApiTest extends TestCase
                 'websiteWebhookTracking',
                 Services\WebsiteWebhookTrackingService::class,
                 Entities\WebsiteWebhookTracking::class,
-            ],
-            [
-                'passwords',
-                Services\PasswordService::class,
-                Entities\Password::class,
             ],
         ];
     }
