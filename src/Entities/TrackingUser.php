@@ -17,9 +17,14 @@ use Rebilly\Rest\Resource;
  *
  * ```json
  * {
+ *   "userId"
+ *   "apiKeyId"
  *   "email"
  *   "firstName"
  *   "lastName"
+ *   "ipAddress"
+ *   "userAgent"
+ *   "fingerprint"
  *   "isSupport"
  * }
  * ```
