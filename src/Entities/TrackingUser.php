@@ -105,6 +105,4 @@ final class TrackingUser extends Resource
     {
         return $this->getAttribute('isSupport');
     }
-
-
 }
