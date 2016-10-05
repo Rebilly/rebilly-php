@@ -188,4 +188,20 @@ final class PaymentCard extends Entity
     {
         return $this->getAttribute('bin');
     }
+
+    /**
+     * @return string
+     */
+    public function getBinBank()
+    {
+        return $this->getAttribute('binBank');
+    }
+
+    /**
+     * @return string
+     */
+    public function getBinCountry()
+    {
+        return $this->getAttribute('binCountry');
+    }
 }
