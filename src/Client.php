@@ -84,7 +84,6 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\ApiKeyService apiKeys()
  * @method Services\CheckoutPageService checkoutPages()
  * @method Services\DisputeService disputes()
- * @method Services\PasswordService passwords()
  * @method Services\PaymentCardMigrationsService paymentCardMigrations()
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
@@ -133,7 +132,6 @@ final class Client
         'apiKeys' => Services\ApiKeyService::class,
         'checkoutPages' => Services\CheckoutPageService::class,
         'disputes' => Services\DisputeService::class,
-        'passwords' => Services\PasswordService::class,
         'paymentCardMigrations' => Services\PaymentCardMigrationsService::class,
     ];
 
