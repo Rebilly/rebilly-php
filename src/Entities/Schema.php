@@ -237,6 +237,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'disputes/{disputeId}' => function (array $content) {
                 return new Dispute($content);
             },
+            'payment-cards-migrations/migrate' => function (array $content) {
+                return new PaymentCardMigrationsResponse($content);
+            },
+            'payment-cards-migrations' => function (array $content) {
+                return new Collection(new PaymentCard(), $content);
+            },
         ];
     }
 
