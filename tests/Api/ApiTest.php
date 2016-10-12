@@ -645,6 +645,7 @@ class ApiTest extends TestCase
             [Entities\Login::class],
             [Entities\Dispute::class],
             [Entities\WebsiteWebhookTracking::class],
+            [Entities\PaymentCardMigrationsRequest::class],
         ];
     }
 
@@ -827,6 +828,11 @@ class ApiTest extends TestCase
                 Services\WebsiteWebhookTrackingService::class,
                 Entities\WebsiteWebhookTracking::class,
             ],
+            [
+                'paymentCardMigrations',
+                Services\PaymentCardMigrationsService::class,
+                Entities\PaymentCardMigrationsRequest::class,
+            ],
         ];
     }
 
@@ -863,6 +869,8 @@ class ApiTest extends TestCase
             case 'subscriptionId':
             case 'userId':
             case 'transactionId':
+            case 'fromGatewayAccountId':
+            case 'toGatewayAccountId':
                 return $faker->uuid;
             case 'dueTime':
             case 'expiredTime':
@@ -1120,6 +1128,8 @@ class ApiTest extends TestCase
                     default:
                         return $faker->randomElement(Entities\Dispute::allowedStatuses());
                 }
+            case 'paymentCardIds':
+                return [$faker->uuid];
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
