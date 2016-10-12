@@ -15,7 +15,6 @@ use JsonSerializable;
 use Rebilly\Entities\PaymentCard;
 use Rebilly\Entities\PaymentCardMigrationsRequest;
 use Rebilly\Entities\PaymentCardMigrationsResponse;
-use Rebilly\Entities\User;
 use Rebilly\Paginator;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
