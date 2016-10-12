@@ -30,14 +30,4 @@ final class PaymentCardMigrationsResponse extends Resource
     {
         return $this->getAttribute('migratedCards');
     }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setMigratedCards($value)
-    {
-        return $this->setAttribute('migratedCards', $value);
-    }
 }

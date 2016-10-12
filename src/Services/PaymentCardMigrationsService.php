@@ -28,7 +28,7 @@ final class PaymentCardMigrationsService extends Service
     /**
      * @param array|ArrayObject $params
      *
-     * @return User[]|Collection[]|Paginator
+     * @return PaymentCard[]|Collection[]|Paginator
      */
     public function paginator($params = [])
     {
@@ -46,7 +46,6 @@ final class PaymentCardMigrationsService extends Service
     }
 
     /**
-     * @param string $userId
      * @param array|JsonSerializable|PaymentCardMigrationsRequest $data
      *
      * @return PaymentCardMigrationsResponse

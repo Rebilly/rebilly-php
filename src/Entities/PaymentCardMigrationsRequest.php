@@ -62,7 +62,7 @@ final class PaymentCardMigrationsRequest extends Resource
     }
 
     /**
-     * @return string
+     * @return array
      */
     public function getPaymentCardIds()
     {
@@ -70,7 +70,7 @@ final class PaymentCardMigrationsRequest extends Resource
     }
 
     /**
-     * @param string $value
+     * @param array $value
      *
      * @return $this
      */
