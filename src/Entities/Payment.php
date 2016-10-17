@@ -201,6 +201,12 @@ final class Payment extends Entity
      */
     public function getPaymentInstrument()
     {
+        if ($this->paymentInstrument === null) {
+            $this->setPaymentInstrument(
+                PaymentMethodInstrument::createFromData($this->getAttribute('paymentInstrument'))
+            );
+        }
+
         return $this->paymentInstrument;
     }
 

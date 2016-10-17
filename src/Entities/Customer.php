@@ -152,6 +152,12 @@ final class Customer extends Entity
      */
     public function getDefaultPaymentInstrument()
     {
+        if ($this->defaultPaymentInstrument === null) {
+            $this->setDefaultPaymentInstrument(
+                PaymentMethodInstrument::createFromData($this->getAttribute('defaultPaymentInstrument'))
+            );
+        }
+
         return $this->defaultPaymentInstrument;
     }
 
