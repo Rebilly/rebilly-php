@@ -19,14 +19,16 @@ use Rebilly\Rest\Entity;
  * {
  *   "id"
  *   "name"
- *   "url"
- *   "phone"
- *   "email"
- *   "checkoutPageUri"
- *   "webHookUrl"
- *   "webHookUsername"
- *   "webHookPassword"
- *   "customFields"
+ *   "extension"
+ *   "description"
+ *   "tags"
+ *   "sha1"
+ *   "mime"
+ *   "size"
+ *   "width"
+ *   "height"
+ *   "createdTime"
+ *   "updatedTime"
  * }
  * ```
  */
@@ -38,6 +40,14 @@ final class File extends Entity
     public function getCreatedTime()
     {
         return $this->getAttribute('createdTime');
+    }
+
+    /**
+     * @return string
+     */
+    public function getUpdatedTime()
+    {
+        return $this->getAttribute('updatedTime');
     }
 
     /**
@@ -59,146 +69,90 @@ final class File extends Entity
     }
 
     /**
-     * @return string
+     * @return bool
      */
-    public function getUrl()
+    public function getExtension()
     {
-        return $this->getAttribute('url');
+        return $this->getAttribute('extension');
     }
 
     /**
-     * @param string $value
-     *
      * @return $this
      */
-    public function setUrl($value)
+    public function setExtension($value)
     {
-        return $this->setAttribute('url', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getServicePhone()
-    {
-        return $this->getAttribute('servicePhone');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setServicePhone($value)
-    {
-        return $this->setAttribute('servicePhone', $value);
+        return $this->setAttribute('extension', $value);
     }
 
     /**
      * @return string
      */
-    public function getServiceEmail()
+    public function getDescription()
     {
-        return $this->getAttribute('serviceEmail');
+        return $this->getAttribute('description');
     }
 
     /**
-     * @param string $value
-     *
      * @return $this
      */
-    public function setServiceEmail($value)
+    public function setDescription($value)
     {
-        return $this->setAttribute('serviceEmail', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getCheckoutPageUri()
-    {
-        return $this->getAttribute('checkoutPageUri');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setCheckoutPageUri($value)
-    {
-        return $this->setAttribute('checkoutPageUri', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getWebHookUrl()
-    {
-        return $this->getAttribute('webHookUrl');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setWebHookUrl($value)
-    {
-        return $this->setAttribute('webHookUrl', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getWebHookUsername()
-    {
-        return $this->getAttribute('webHookUsername');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setWebHookUsername($value)
-    {
-        return $this->setAttribute('webHookUsername', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getWebHookPassword()
-    {
-        return $this->getAttribute('webHookPassword');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setWebHookPassword($value)
-    {
-        return $this->setAttribute('webHookPassword', $value);
+        return $this->setAttribute('description', $value);
     }
 
     /**
      * @return array
      */
-    public function getCustomFields()
+    public function getTags()
     {
-        return $this->getAttribute('customFields');
+        return $this->getAttribute('tags');
     }
 
     /**
-     * @param array $value
-     *
      * @return $this
      */
-    public function setCustomFields($value)
+    public function setTags($value)
     {
-        return $this->setAttribute('customFields', $value);
+        return $this->setAttribute('tags', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getSha1()
+    {
+        return $this->getAttribute('sha1');
+    }
+
+    /**
+     * @return string
+     */
+    public function getMime()
+    {
+        return $this->getAttribute('mime');
+    }
+
+    /**
+     * @return int
+     */
+    public function getSize()
+    {
+        return $this->getAttribute('size');
+    }
+
+    /**
+     * @return int
+     */
+    public function getWidth()
+    {
+        return $this->getAttribute('width');
+    }
+
+    /**
+     * @return int
+     */
+    public function getHeight()
+    {
+        return $this->getAttribute('height');
     }
 }
