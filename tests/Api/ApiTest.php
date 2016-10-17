@@ -646,6 +646,8 @@ class ApiTest extends TestCase
             [Entities\Dispute::class],
             [Entities\WebsiteWebhookTracking::class],
             [Entities\PaymentCardMigrationsRequest::class],
+            [Entities\Coupons\Coupon::class],
+            [Entities\Coupons\Redemption::class],
         ];
     }
 
@@ -871,6 +873,7 @@ class ApiTest extends TestCase
             case 'transactionId':
             case 'fromGatewayAccountId':
             case 'toGatewayAccountId':
+            case 'redemptionCode':
                 return $faker->uuid;
             case 'dueTime':
             case 'expiredTime':
@@ -882,6 +885,7 @@ class ApiTest extends TestCase
             case 'downtimeEnd':
             case 'postedTime':
             case 'deadlineTime':
+            case 'issuedTime':
                 return $faker->date('Y-m-d H:i:s');
             case 'unitPrice':
             case 'amount':
@@ -1130,6 +1134,25 @@ class ApiTest extends TestCase
                 }
             case 'paymentCardIds':
                 return [$faker->uuid];
+            case 'discount':
+                return Entities\Coupons\Discount::createFromData([
+                    'type' => 'fixed',
+                    'amount' => $faker->numberBetween(1, 100),
+                    'currency' => 'USD',
+                ]);
+            case 'restrictions':
+            case 'additionalRestrictions':
+                return [
+                    Entities\Coupons\Restriction::createFromData([
+                        'type' => 'minimum-order-amount',
+                        'amount' => $faker->numberBetween(1, 100),
+                        'currency' => 'USD',
+                    ]),
+                    Entities\Coupons\Restriction::createFromData([
+                        'type' => 'discounts-per-redemption',
+                        'quantity' => $faker->numberBetween(1, 100),
+                    ])
+                ];
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
