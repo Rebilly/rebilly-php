@@ -13,6 +13,9 @@ namespace Rebilly\Entities\Coupons;
 use DomainException;
 use Rebilly\Rest\Resource;
 
+/**
+ * Class Discount.
+ */
 abstract class Discount extends Resource
 {
     const MSG_UNSUPPORTED_TYPE = 'Unexpected type. Only %s types support';
@@ -21,7 +24,7 @@ abstract class Discount extends Resource
     const TYPE_FIXED = 'fixed';
     const TYPE_PERCENT = 'percent';
 
-    protected static $supportedTypes = [
+    private static $supportedTypes = [
         self::TYPE_FIXED,
         self::TYPE_PERCENT,
     ];
@@ -31,11 +34,7 @@ abstract class Discount extends Resource
      */
     public function __construct(array $data = [])
     {
-        if (!isset($data['type'])) {
-            throw new DomainException(self::MSG_REQUIRED_TYPE);
-        }
-
-        parent::__construct($data);
+        parent::__construct(['type' => $this->discountType()] + $data);
     }
 
     /**
@@ -57,7 +56,9 @@ abstract class Discount extends Resource
                 $discount = new Discounts\Percent($data);
                 break;
             default:
-                throw new DomainException(sprintf(self::MSG_UNSUPPORTED_TYPE, implode(',', self::$supportedTypes)));
+                throw new DomainException(
+                    sprintf(self::MSG_UNSUPPORTED_TYPE, implode(',', self::$supportedTypes))
+                );
         }
 
         return $discount;
@@ -66,5 +67,13 @@ abstract class Discount extends Resource
     /**
      * @return string
      */
-    abstract public function getDiscountType();
+    public function getType()
+    {
+        return $this->getAttribute('type');
+    }
+
+    /**
+     * @return string
+     */
+    abstract protected function discountType();
 }

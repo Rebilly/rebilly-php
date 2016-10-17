@@ -29,40 +29,9 @@ use Rebilly\Rest\Resource;
  *   "updatedTime"
  * }
  * ```
- *
- * @author Arman Tuyakbayev <arman.tuyakbayev@rebilly.com>
- * @version 0.1
  */
 final class Coupon extends Resource
 {
-    /**
-     * @var Discount|null
-     */
-    private $discount;
-
-    /**
-     * @var Restriction[]
-     */
-    private $restrictions = [];
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __construct(array $data = [])
-    {
-        if (isset($data['discount'])) {
-            $this->discount = Discount::createFromData($data);
-        }
-
-        if (isset($data['restrictions']) && is_array($data['restrictions'])) {
-            foreach ($data['restrictions'] as $restriction) {
-                $this->restrictions[] = Restriction::createFromData($restriction);
-            }
-        }
-
-        parent::__construct($data);
-    }
-
     /**
      * @return string
      */
@@ -86,7 +55,7 @@ final class Coupon extends Resource
      */
     public function getDiscount()
     {
-        return $this->discount;
+        return $this->getAttribute('discount');
     }
 
     /**
@@ -96,9 +65,17 @@ final class Coupon extends Resource
      */
     public function setDiscount(Discount $discount)
     {
-        $this->discount = $discount;
-
         return $this->setAttribute('discount', $discount->jsonSerialize());
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return Discount
+     */
+    public function createDiscount(array $data)
+    {
+        return Discount::createFromData($data);
     }
 
     /**
@@ -106,7 +83,7 @@ final class Coupon extends Resource
      */
     public function getRestrictions()
     {
-        return $this->restrictions;
+        return $this->getAttribute('restrictions');
     }
 
     /**
@@ -128,9 +105,22 @@ final class Coupon extends Resource
             $value[] = $restriction->jsonSerialize();
         }
 
-        $this->restrictions = $restrictions;
-
         return $this->setAttribute('restrictions', $value);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return array
+     */
+    public function createRestrictions(array $data)
+    {
+        return array_map(
+            function (array $values) {
+                return Restriction::createFromData($values);
+            },
+            $data
+        );
     }
 
     /**

@@ -12,6 +12,9 @@ namespace Rebilly\Entities\Coupons\Restrictions;
 
 use Rebilly\Entities\Coupons\Restriction;
 
+/**
+ * Class DiscountsPerRedemption.
+ */
 class DiscountsPerRedemption extends Restriction
 {
     /**
@@ -30,5 +33,13 @@ class DiscountsPerRedemption extends Restriction
     public function setQuantity($value)
     {
         return $this->setAttribute('quantity', $value);
+    }
+
+    /**
+     * @return string
+     */
+    protected function restrictionType()
+    {
+        return self::TYPE_DISCOUNTS_PER_REDEMPTION;
     }
 }

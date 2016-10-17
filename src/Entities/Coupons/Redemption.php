@@ -26,31 +26,9 @@ use Rebilly\Rest\Entity;
  *   "canceledTime"
  * }
  * ```
- *
- * @author Arman Tuyakbayev <arman.tuyakbayev@rebilly.com>
- * @version 0.1
  */
 final class Redemption extends Entity
 {
-    /**
-     * @var Restriction[]
-     */
-    private $additionalRestrictions = [];
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __construct(array $data = [])
-    {
-        if (isset($data['additionalRestrictions']) && is_array($data['additionalRestrictions'])) {
-            foreach ($data['additionalRestrictions'] as $restriction) {
-                $this->additionalRestrictions[] = Restriction::createFromData($restriction);
-            }
-        }
-
-        parent::__construct($data);
-    }
-
     /**
      * @return string
      */
@@ -92,7 +70,7 @@ final class Redemption extends Entity
      */
     public function getAdditionalRestrictions()
     {
-        return $this->additionalRestrictions;
+        return $this->getAttribute('additionalRestrictions');
     }
 
     /**
@@ -114,9 +92,22 @@ final class Redemption extends Entity
             $value[] = $restriction->jsonSerialize();
         }
 
-        $this->additionalRestrictions = $restrictions;
-
         return $this->setAttribute('additionalRestrictions', $value);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return array
+     */
+    public function createAdditionalRestrictions(array $data)
+    {
+        return array_map(
+            function (array $values) {
+                return Restriction::createFromData($values);
+            },
+            $data
+        );
     }
 
     /**

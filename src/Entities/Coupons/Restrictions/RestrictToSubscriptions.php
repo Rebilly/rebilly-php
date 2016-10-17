@@ -12,6 +12,9 @@ namespace Rebilly\Entities\Coupons\Restrictions;
 
 use Rebilly\Entities\Coupons\Restriction;
 
+/**
+ * Class RestrictToSubscriptions.
+ */
 class RestrictToSubscriptions extends Restriction
 {
     /**
@@ -30,5 +33,13 @@ class RestrictToSubscriptions extends Restriction
     public function setSubscriptionIds($value)
     {
         return $this->setAttribute('subscriptionIds', $value);
+    }
+
+    /**
+     * @return string
+     */
+    protected function restrictionType()
+    {
+        return self::TYPE_RESTRICT_TO_SUBSCRIPTIONS;
     }
 }

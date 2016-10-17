@@ -12,6 +12,9 @@ namespace Rebilly\Entities\Coupons\Restrictions;
 
 use Rebilly\Entities\Coupons\Restriction;
 
+/**
+ * Class RestrictToPlans.
+ */
 class RestrictToPlans extends Restriction
 {
     /**
@@ -30,5 +33,13 @@ class RestrictToPlans extends Restriction
     public function setPlanIds($value)
     {
         return $this->setAttribute('planIds', $value);
+    }
+
+    /**
+     * @return string
+     */
+    protected function restrictionType()
+    {
+        return self::TYPE_RESTRICT_TO_PLANS;
     }
 }

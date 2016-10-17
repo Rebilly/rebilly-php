@@ -12,6 +12,9 @@ namespace Rebilly\Entities\Coupons\Restrictions;
 
 use Rebilly\Entities\Coupons\Restriction;
 
+/**
+ * Class RestrictToInvoices.
+ */
 class RestrictToInvoices extends Restriction
 {
     /**
@@ -30,5 +33,13 @@ class RestrictToInvoices extends Restriction
     public function setInvoiceIds($value)
     {
         return $this->setAttribute('invoiceIds', $value);
+    }
+
+    /**
+     * @return string
+     */
+    protected function restrictionType()
+    {
+        return self::TYPE_RESTRICT_TO_INVOICES;
     }
 }

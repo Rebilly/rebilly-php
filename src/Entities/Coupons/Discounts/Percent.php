@@ -12,16 +12,11 @@ namespace Rebilly\Entities\Coupons\Discounts;
 
 use Rebilly\Entities\Coupons\Discount;
 
+/**
+ * Class Percent.
+ */
 class Percent extends Discount
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getDiscountType()
-    {
-        return self::TYPE_PERCENT;
-    }
-
     /**
      * @return float
      */
@@ -38,5 +33,13 @@ class Percent extends Discount
     public function setValue($value)
     {
         return $this->setAttribute('value', $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function discountType()
+    {
+        return self::TYPE_PERCENT;
     }
 }

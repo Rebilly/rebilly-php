@@ -12,16 +12,11 @@ namespace Rebilly\Entities\Coupons\Discounts;
 
 use Rebilly\Entities\Coupons\Discount;
 
+/**
+ * Class Fixed.
+ */
 class Fixed extends Discount
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getDiscountType()
-    {
-        return self::TYPE_FIXED;
-    }
-
     /**
      * @return float
      */
@@ -56,5 +51,13 @@ class Fixed extends Discount
     public function setCurrency($value)
     {
         return $this->setAttribute('currency', $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function discountType()
+    {
+        return self::TYPE_FIXED;
     }
 }
