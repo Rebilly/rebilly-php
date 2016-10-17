@@ -85,6 +85,7 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\CheckoutPageService checkoutPages()
  * @method Services\DisputeService disputes()
  * @method Services\PaymentCardMigrationsService paymentCardMigrations()
+ * @method Services\FileService files()
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
@@ -118,6 +119,8 @@ final class Client
         'subscriptions' => Services\SubscriptionService::class,
         'transactions' => Services\TransactionService::class,
         'websites' => Services\WebsiteService::class,
+        'files' => Services\FileService::class,
+        'attachments' => Services\AttachmentService::class,
         'notes' => Services\NoteService::class,
         'organizations' => Services\OrganizationService::class,
         'customFields' => Services\CustomFieldService::class,
