@@ -479,23 +479,15 @@ final class Client
         // Unserialize response body
         $content = json_decode((string) $response->getBody(), true) ?: [];
 
+        $content['_metadata'] = [
+            'uri' => $uri,
+            'limit' => (int) $response->getHeaderLine('Pagination-Limit'),
+            'offset' => (int) $response->getHeaderLine('Pagination-Offset'),
+            'total' => (int) $response->getHeaderLine('Pagination-Total'),
+        ];
+
         // Build expected resource
         $resource = $this->factory->create($uri, $content);
-
-        if ($resource instanceof Rest\Collection) {
-            $metadata = [
-                'uri' => $uri,
-                'limit' => (int) $response->getHeaderLine('Pagination-Limit'),
-                'offset' => (int) $response->getHeaderLine('Pagination-Offset'),
-                'total' => (int) $response->getHeaderLine('Pagination-Total'),
-            ];
-        } else {
-            $metadata = [
-                'uri' => $uri,
-            ];
-        }
-
-        $resource->populate(['_metadata' => $metadata]);
 
         return $resource;
     }
