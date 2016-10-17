@@ -12,8 +12,8 @@ namespace Rebilly\Tests\Rest;
 
 use ArrayObject;
 use DomainException;
-use LogicException;
 use OutOfRangeException;
+use LogicException;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Factory;
 use Rebilly\Tests\Stub\EntityStub;
@@ -105,7 +105,8 @@ class ResourcesTest extends TestCase
     public function initEntity(Factory $factory)
     {
         /** @var EntityStub $resource */
-        $resource = $factory->create('stubs/uuid', $this->fakeData);
+        $resource = $factory->create('stubs/uuid', []);
+        $resource->populate($this->fakeData);
 
         $this->assertInstanceOf(EntityStub::class, $resource);
         $this->assertEquals('uuid', $resource->getId());
