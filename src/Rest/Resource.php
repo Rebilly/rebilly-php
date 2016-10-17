@@ -95,8 +95,6 @@ abstract class Resource implements JsonSerializable, ArrayAccess
         foreach ($data as $key => $value) {
             if ($this->hasAttribute($key)) {
                 $this->setAttribute($key, $value);
-            } else {
-                $this->data[$key] = $value;
             }
         }
     }
