@@ -23,6 +23,8 @@ use Rebilly\Rest\Entity;
  *   "expMonth": "07",
  *   "status": "active",
  *   "brand": "Visa",
+ *   "binCountry": "US",
+ *   "binBank": "Bank123",
  *   "customer": "ABCD1234",
  *   "billingContact": "ADDRESS1",
  *   "createdTime": "2015-02-11 04:45:23",
@@ -187,5 +189,21 @@ final class PaymentCard extends Entity
     public function getBin()
     {
         return $this->getAttribute('bin');
+    }
+
+    /**
+     * @return string
+     */
+    public function getBankName()
+    {
+        return $this->getAttribute('bankName');
+    }
+
+    /**
+     * @return string
+     */
+    public function getBankCountry()
+    {
+        return $this->getAttribute('bankCountry');
     }
 }
