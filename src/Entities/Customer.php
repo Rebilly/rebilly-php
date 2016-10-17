@@ -25,30 +25,9 @@ use Rebilly\Rest\Entity;
  *   "customFields"
  * }
  * ```
- *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
- * @version 0.1
  */
 final class Customer extends Entity
 {
-    /**
-     * PaymentMethodInstrument|null
-     */
-    private $defaultPaymentInstrument;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __construct(array $data = [])
-    {
-        if (isset($data['defaultPaymentInstrument'])) {
-            $this->defaultPaymentInstrument = PaymentMethodInstrument::createFromData($data['defaultPaymentInstrument']);
-            $data['defaultPaymentInstrument'] = $this->defaultPaymentInstrument->jsonSerialize();
-        }
-
-        parent::__construct($data);
-    }
-
     /**
      * @return string
      */
@@ -152,7 +131,7 @@ final class Customer extends Entity
      */
     public function getDefaultPaymentInstrument()
     {
-        return $this->defaultPaymentInstrument;
+        return $this->getAttribute('defaultPaymentInstrument');
     }
 
     /**
@@ -162,8 +141,16 @@ final class Customer extends Entity
      */
     public function setDefaultPaymentInstrument(PaymentMethodInstrument $value)
     {
-        $this->defaultPaymentInstrument = $value;
-
         return $this->setAttribute('defaultPaymentInstrument', $value->jsonSerialize());
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return PaymentMethodInstrument
+     */
+    public function createDefaultPaymentInstrument(array $data)
+    {
+        return PaymentMethodInstrument::createFromData($data);
     }
 }

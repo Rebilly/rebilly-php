@@ -11,6 +11,7 @@
 namespace Rebilly\Tests\Api;
 
 use InvalidArgumentException;
+use JsonSerializable;
 use Rebilly\Client;
 use Rebilly\Entities;
 use Rebilly\Http\CurlHandler;
@@ -42,6 +43,7 @@ class ApiTest extends TestCase
         $getters = [];
         $setters = [];
         $values = [];
+        $objects = [];
 
         if ($id !== null) {
             $values[$id] = $this->getFakeValue($id, $class);
@@ -66,15 +68,27 @@ class ApiTest extends TestCase
         }
 
         foreach ($setters as $attribute => $method) {
-            $values[$attribute] = $this->getFakeValue($attribute, $class);
-            $resource->$method($values[$attribute]);
+            $value = $this->getFakeValue($attribute, $class);
+            $values[$attribute] = $value;
+
+            // Test attributes factory
+            if (is_array($value) && method_exists($resource, "create{$attribute}")) {
+                $value = $resource->{"create{$attribute}"}($value);
+                $objects[$attribute] = $value;
+            }
+
+            $resource->$method($value);
         }
 
         foreach ($getters as $attribute => $method) {
-            if (isset($values[$attribute])) {
-                $this->assertEquals($values[$attribute], $resource->$method(), 'Invalid ' . $attribute);
+            $value = $resource->$method();
+
+            if (isset($objects[$attribute]) && $value instanceof JsonSerializable) {
+                $this->assertEquals($values[$attribute], $value->jsonSerialize(), 'Invalid ' . $attribute);
+            } elseif (isset($values[$attribute])) {
+                $this->assertEquals($values[$attribute], $value, 'Invalid ' . $attribute);
             } else {
-                $this->assertNull($resource->$method());
+                $this->assertNull($value);
             }
         }
 
@@ -1114,9 +1128,9 @@ class ApiTest extends TestCase
                         return new Entities\PaymentInstruments\PaymentCardPaymentInstrument();
                 }
             case 'defaultPaymentInstrument':
-                return new Entities\PaymentInstruments\PaymentCardInstrument([
-                    'method' => Entities\PaymentMethod::METHOD_PAYMENT_CARD
-                ]);
+                return [
+                    'method' => Entities\PaymentMethod::METHOD_PAYMENT_CARD,
+                ];
             case 'reasonCode':
                 return '1000';
             case 'status':

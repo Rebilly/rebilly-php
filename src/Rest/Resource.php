@@ -31,6 +31,9 @@ abstract class Resource implements JsonSerializable, ArrayAccess
     private $data;
 
     /** @var ArrayObject */
+    private $internalCache;
+
+    /** @var ArrayObject */
     private $embeddedData;
 
     /** @var ArrayObject */
@@ -45,6 +48,7 @@ abstract class Resource implements JsonSerializable, ArrayAccess
     {
         $this->metadata = new ArrayObject();
         $this->data = new ArrayObject();
+        $this->internalCache = new ArrayObject();
         $this->embeddedData = new ArrayObject();
         $this->links = new ArrayObject();
 
@@ -60,6 +64,7 @@ abstract class Resource implements JsonSerializable, ArrayAccess
     {
         $this->metadata = clone $this->metadata;
         $this->data = clone $this->data;
+        $this->internalCache = clone $this->internalCache;
         $this->embeddedData = clone $this->embeddedData;
         $this->links = clone $this->links;
     }
@@ -87,7 +92,11 @@ abstract class Resource implements JsonSerializable, ArrayAccess
             unset($data['_links']);
         }
 
-        $this->data->exchangeArray($data);
+        foreach ($data as $key => $value) {
+            if ($this->hasAttribute($key)) {
+                $this->setAttribute($key, $value);
+            }
+        }
     }
 
     /**
@@ -115,7 +124,13 @@ abstract class Resource implements JsonSerializable, ArrayAccess
      */
     final protected function getAttribute($name)
     {
-        return isset($this->data[$name]) ? $this->data[$name] : null;
+        if (isset($this->internalCache[$name])) {
+            return $this->internalCache[$name];
+        } elseif (isset($this->data[$name])) {
+            return $this->data[$name];
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -126,8 +141,43 @@ abstract class Resource implements JsonSerializable, ArrayAccess
      */
     final protected function setAttribute($name, $value)
     {
+        if ($this->hasAttributeValueFactory($name)) {
+            $this->internalCache[$name] = $this->createAttributeValue($name, $value);
+            $value = $this->internalCache[$name]->jsonSerialize();
+        }
+
         $this->data[$name] = $value;
+
         return $this;
+    }
+
+    /**
+     * @param string $name
+     * @param mixed $value
+     *
+     * @return JsonSerializable
+     */
+    private function createAttributeValue($name, $value)
+    {
+        $factory = "create{$name}";
+
+        $value = $this->{$factory}($value);
+
+        if (!($value instanceof JsonSerializable)) {
+            throw new DomainException('Invalid value factory');
+        }
+
+        return $value;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return bool
+     */
+    private function hasAttributeValueFactory($name)
+    {
+        return method_exists($this, "create{$name}");
     }
 
     /**

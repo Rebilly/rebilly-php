@@ -70,4 +70,19 @@ final class EntityStub extends Entity
     {
         return $this->getMetadata('customMeta');
     }
+
+    public function getComplexField()
+    {
+        return $this->getAttribute('complexField');
+    }
+
+    public function setComplexField(EntityStub $value)
+    {
+        return $this->setAttribute('complexField', $value->jsonSerialize());
+    }
+
+    public function createComplexField(array $value)
+    {
+        return new self($value);
+    }
 }

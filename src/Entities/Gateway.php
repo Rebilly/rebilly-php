@@ -9,41 +9,12 @@ use Rebilly\Rest\Resource;
  */
 final class Gateway extends Resource
 {
-    private $response;
-    private $avsResponse;
-    private $cvvResponse;
-
-    /**
-     * Gateway constructor.
-     *
-     * @param array $data
-     */
-    public function __construct(array $data)
-    {
-        if (isset($data['response'])) {
-            $this->response = new GatewayResponse($data['response']);
-            $data['response'] = $this->response->jsonSerialize();
-        }
-
-        if (isset($data['cvvResponse'])) {
-            $this->cvvResponse = new CvvResponse($data['cvvResponse']);
-            $data['cvvResponse'] = $this->cvvResponse->jsonSerialize();
-        }
-
-        if (isset($data['avsResponse'])) {
-            $this->avsResponse = new AvsResponse($data['avsResponse']);
-            $data['avsResponse'] = $this->avsResponse->jsonSerialize();
-        }
-
-        parent::__construct($data);
-    }
-
     /**
      * @return null|GatewayResponse
      */
     public function getResponse()
     {
-        return $this->response;
+        return $this->getAttribute('response');
     }
 
     /**
@@ -51,7 +22,7 @@ final class Gateway extends Resource
      */
     public function getAvsResponse()
     {
-        return $this->avsResponse;
+        return $this->getAttribute('avsResponse');
     }
 
     /**
@@ -59,6 +30,36 @@ final class Gateway extends Resource
      */
     public function getCvvResponse()
     {
-        return $this->cvvResponse;
+        return $this->getAttribute('cvvResponse');
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return GatewayResponse
+     */
+    public function createResponse(array $data)
+    {
+        return new GatewayResponse($data);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return AvsResponse
+     */
+    public function createAvsResponse(array $data)
+    {
+        return new AvsResponse($data);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return CvvResponse
+     */
+    public function createCvvResponse(array $data)
+    {
+        return new CvvResponse($data);
     }
 }
