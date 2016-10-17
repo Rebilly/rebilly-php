@@ -143,7 +143,10 @@ abstract class Resource implements JsonSerializable, ArrayAccess
     {
         if ($this->hasAttributeValueFactory($name)) {
             $this->internalCache[$name] = $this->createAttributeValue($name, $value);
-            $value = $this->internalCache[$name]->jsonSerialize();
+
+            $value = $this->internalCache[$name] instanceof JsonSerializable
+                ? $this->internalCache[$name]->jsonSerialize()
+                : $this->internalCache[$name];
         }
 
         $this->data[$name] = $value;
@@ -163,7 +166,7 @@ abstract class Resource implements JsonSerializable, ArrayAccess
 
         $value = $this->{$factory}($value);
 
-        if (!($value instanceof JsonSerializable)) {
+        if (!($value instanceof JsonSerializable || is_array($value))) {
             throw new DomainException('Invalid value factory');
         }
 
