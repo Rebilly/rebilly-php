@@ -56,19 +56,14 @@ final class FileService extends Service
 
     /**
      * @param array|JsonSerializable|File $data
-     * @param string $fileId
      *
      * @throws UnprocessableEntityException The input data does not valid
      *
      * @return File
      */
-    public function create($data, $fileId = null)
+    public function create($data)
     {
-        if (isset($fileId)) {
-            return $this->client()->put($data, 'files/{fileId}', ['fileId' => $fileId]);
-        } else {
-            return $this->client()->post($data, 'files');
-        }
+        return $this->client()->post($data, 'files');
     }
 
     /**
