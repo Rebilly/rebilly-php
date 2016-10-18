@@ -14,6 +14,8 @@ use InvalidArgumentException;
 use JsonSerializable;
 use Rebilly\Client;
 use Rebilly\Entities;
+use Rebilly\Entities\Customer;
+use Rebilly\Entities\PaymentMethodInstrument;
 use Rebilly\Http\CurlHandler;
 use Rebilly\Paginator;
 use Rebilly\Rest;
@@ -98,6 +100,7 @@ class ApiTest extends TestCase
         $this->assertNotEmpty($json);
     }
 
+
     /**
      * @test
      * @dataProvider provideServiceClasses
@@ -180,6 +183,71 @@ class ApiTest extends TestCase
                 $service->delete($this->getFakeValue($id, $entityClass));
             }
         }
+    }
+
+    /**
+     * @test
+     */
+    public function customerService()
+    {
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->getMock(CurlHandler::class);
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+
+        $service = $client->customers();
+
+        $customers = [
+            [
+                "id" => "foo",
+                "email" => "user@example.com",
+                "firstName" => "string",
+                "lastName" => "string",
+                "ipAddress" => "192.168.0.1",
+                "defaultPaymentInstrument" => [
+                    'method' => 'cash',
+                ],
+                "createdTime" => "2016-10-18T06:39:36Z",
+                "updatedTime" => "2016-10-18T06:39:36Z",
+            ],
+            [
+                "id" => "bar",
+                "email" => "user@example.com",
+                "firstName" => "string",
+                "lastName" => "string",
+                "ipAddress" => "192.168.0.1",
+                "defaultPaymentInstrument" => null,
+                "createdTime" => "2016-10-18T06:39:36Z",
+                "updatedTime" => "2016-10-18T06:39:36Z",
+            ],
+        ];
+
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will(
+                $this->returnValue(
+                    $client
+                        ->createResponse()
+                        ->withBody(Psr7\stream_for(json_encode($customers)))
+                )
+            );
+
+        $result = $service->search();
+
+        $this->assertCount(2, $result);
+        $this->assertInstanceOf(Rest\Collection::class, $result);
+
+        $this->assertInstanceOf(Customer::class, $result[0]);
+        $this->assertSame($customers[0]['id'], $result[0]->getId());
+        $this->assertInstanceOf(PaymentMethodInstrument::class, $result[0]->getDefaultPaymentInstrument());
+
+        $this->assertInstanceOf(Customer::class, $result[1]);
+        $this->assertSame($customers[1]['id'], $result[1]->getId());
+        $this->assertNull($result[1]->getDefaultPaymentInstrument());
     }
 
     /**

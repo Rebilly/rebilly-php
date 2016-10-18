@@ -141,7 +141,7 @@ abstract class Resource implements JsonSerializable, ArrayAccess
      */
     final protected function setAttribute($name, $value)
     {
-        if ($this->hasAttributeValueFactory($name)) {
+        if ($value !== null && $this->hasAttributeValueFactory($name)) {
             $this->internalCache[$name] = $this->createAttributeValue($name, $value);
             $value = $this->internalCache[$name]->jsonSerialize();
         }
