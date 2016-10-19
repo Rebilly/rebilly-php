@@ -79,7 +79,7 @@ final class PaymentRetryInstruction extends Resource
      *
      * @return PaymentRetryAttempt
      */
-    public function createPaymentRetryAttempt($data = array())
+    public function createPaymentRetryAttempt($data = [])
     {
         return new PaymentRetryAttempt($data);
     }
