@@ -11,8 +11,11 @@
 namespace Rebilly\Tests\Api;
 
 use InvalidArgumentException;
+use JsonSerializable;
 use Rebilly\Client;
 use Rebilly\Entities;
+use Rebilly\Entities\Customer;
+use Rebilly\Entities\PaymentMethodInstrument;
 use Rebilly\Http\CurlHandler;
 use Rebilly\Paginator;
 use Rebilly\Rest;
@@ -42,6 +45,7 @@ class ApiTest extends TestCase
         $getters = [];
         $setters = [];
         $values = [];
+        $objects = [];
 
         if ($id !== null) {
             $values[$id] = $this->getFakeValue($id, $class);
@@ -66,15 +70,27 @@ class ApiTest extends TestCase
         }
 
         foreach ($setters as $attribute => $method) {
-            $values[$attribute] = $this->getFakeValue($attribute, $class);
-            $resource->$method($values[$attribute]);
+            $value = $this->getFakeValue($attribute, $class);
+            $values[$attribute] = $value;
+
+            // Test attributes factory
+            if (is_array($value) && method_exists($resource, "create{$attribute}")) {
+                $value = $resource->{"create{$attribute}"}($value);
+                $objects[$attribute] = $value;
+            }
+
+            $resource->$method($value);
         }
 
         foreach ($getters as $attribute => $method) {
-            if (isset($values[$attribute])) {
-                $this->assertEquals($values[$attribute], $resource->$method(), 'Invalid ' . $attribute);
+            $value = $resource->$method();
+
+            if (isset($objects[$attribute]) && $value instanceof JsonSerializable) {
+                $this->assertEquals($values[$attribute], $value->jsonSerialize(), 'Invalid ' . $attribute);
+            } elseif (isset($values[$attribute])) {
+                $this->assertEquals($values[$attribute], $value, 'Invalid ' . $attribute);
             } else {
-                $this->assertNull($resource->$method());
+                $this->assertNull($value);
             }
         }
 
@@ -83,6 +99,7 @@ class ApiTest extends TestCase
         $this->assertTrue(is_array($json));
         $this->assertNotEmpty($json);
     }
+
 
     /**
      * @test
@@ -166,6 +183,71 @@ class ApiTest extends TestCase
                 $service->delete($this->getFakeValue($id, $entityClass));
             }
         }
+    }
+
+    /**
+     * @test
+     */
+    public function customerService()
+    {
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->getMock(CurlHandler::class);
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+
+        $service = $client->customers();
+
+        $customers = [
+            [
+                "id" => "foo",
+                "email" => "user@example.com",
+                "firstName" => "string",
+                "lastName" => "string",
+                "ipAddress" => "192.168.0.1",
+                "defaultPaymentInstrument" => [
+                    'method' => 'cash',
+                ],
+                "createdTime" => "2016-10-18T06:39:36Z",
+                "updatedTime" => "2016-10-18T06:39:36Z",
+            ],
+            [
+                "id" => "bar",
+                "email" => "user@example.com",
+                "firstName" => "string",
+                "lastName" => "string",
+                "ipAddress" => "192.168.0.1",
+                "defaultPaymentInstrument" => null,
+                "createdTime" => "2016-10-18T06:39:36Z",
+                "updatedTime" => "2016-10-18T06:39:36Z",
+            ],
+        ];
+
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will(
+                $this->returnValue(
+                    $client
+                        ->createResponse()
+                        ->withBody(Psr7\stream_for(json_encode($customers)))
+                )
+            );
+
+        $result = $service->search();
+
+        $this->assertCount(2, $result);
+        $this->assertInstanceOf(Rest\Collection::class, $result);
+
+        $this->assertInstanceOf(Customer::class, $result[0]);
+        $this->assertSame($customers[0]['id'], $result[0]->getId());
+        $this->assertInstanceOf(PaymentMethodInstrument::class, $result[0]->getDefaultPaymentInstrument());
+
+        $this->assertInstanceOf(Customer::class, $result[1]);
+        $this->assertSame($customers[1]['id'], $result[1]->getId());
+        $this->assertNull($result[1]->getDefaultPaymentInstrument());
     }
 
     /**
@@ -1114,9 +1196,9 @@ class ApiTest extends TestCase
                         return new Entities\PaymentInstruments\PaymentCardPaymentInstrument();
                 }
             case 'defaultPaymentInstrument':
-                return new Entities\PaymentInstruments\PaymentCardInstrument([
-                    'method' => Entities\PaymentMethod::METHOD_PAYMENT_CARD
-                ]);
+                return [
+                    'method' => Entities\PaymentMethod::METHOD_PAYMENT_CARD,
+                ];
             case 'reasonCode':
                 return '1000';
             case 'status':
