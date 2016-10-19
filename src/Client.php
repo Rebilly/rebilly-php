@@ -336,6 +336,10 @@ final class Client
             case 'PUT':
                 array_unshift($arguments, $name);
                 return call_user_func_array([$this, 'send'], $arguments);
+            case 'POSTRAW':
+                array_unshift($arguments, 'POST');
+                array_push($arguments, [], [], true);
+                return call_user_func_array([$this, 'send'], $arguments);
         }
 
         try {
@@ -373,20 +377,22 @@ final class Client
      * @param string $path The URL path or URL Template
      * @param array|ArrayObject $params The URL parameters. Parameters used for URL template or encode to query string.
      * @param array $headers The headers specific for request.
+     * @param boolean $sendRaw allows sending raw request body or json-encode it by default
      *
      * @throws Http\Exception\ServerException
      * @throws Http\Exception\ClientException
      *
      * @return mixed|null The resulting resource or null
      */
-    public function send($method, $payload, $path, $params = [], array $headers = [])
+    public function send($method, $payload, $path, $params = [], array $headers = [], $sendRaw = false)
     {
         if (!is_array($params)) {
             $params = (array) $params;
         }
 
-        // Serialize $payload
-        $payload = json_encode($payload, JSON_FORCE_OBJECT);
+        if ($sendRaw === false) {
+            $payload = json_encode($payload, JSON_FORCE_OBJECT);
+        }
 
         $headers['Content-Type'] = 'application/json';
 
