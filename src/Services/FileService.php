@@ -63,7 +63,7 @@ final class FileService extends Service
      */
     public function create($data)
     {
-        if(!empty($data->url) || isset($data['url'])) {
+        if (!empty($data->url) || isset($data['url'])) {
             return $this->client()->post($data, 'files');
         }
 
