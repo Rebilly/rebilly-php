@@ -26,7 +26,7 @@ final class PaymentRetryAttempt extends Resource
      */
     public function setScheduleInstruction(ScheduleInstruction $value)
     {
-        return $this->setAttribute('scheduleInstruction', $value);
+        return $this->setAttribute('scheduleInstruction', $value->jsonSerialize());
     }
 
     /**
@@ -54,7 +54,7 @@ final class PaymentRetryAttempt extends Resource
      */
     public function setPaymentInstruction(PaymentInstruction $value)
     {
-        return $this->setAttribute('paymentInstruction', $value);
+        return $this->setAttribute('paymentInstruction', $value->jsonSerialize());
     }
 
     /**

@@ -10,7 +10,6 @@
 
 namespace Rebilly\Entities\PaymentRetryInstructions\ScheduleInstructionTypes;
 
-use DateTime;
 use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstruction;
 
 /**
