@@ -1199,6 +1199,8 @@ class ApiTest extends TestCase
                 return [
                     'method' => Entities\PaymentMethod::METHOD_PAYMENT_CARD,
                 ];
+            case 'retryInstruction':
+                return new Entities\PaymentRetryInstruction();
             case 'reasonCode':
                 return '1000';
             case 'status':
