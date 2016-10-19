@@ -218,4 +218,40 @@ final class Payment extends Entity
     {
         return $this->setAttribute('invoiceIds', $value);
     }
+
+    /**
+     * @return PaymentRetryInstruction
+     */
+    public function getRetryInstruction()
+    {
+        return $this->getAttribute('retryInstruction');
+    }
+
+    /**
+     * @param PaymentRetryInstruction $value
+     *
+     * @return $this
+     */
+    public function setRetryInstruction(PaymentRetryInstruction $value)
+    {
+        return $this->setAttribute('retryInstruction', $value->jsonSerialize());
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return PaymentRetryInstruction
+     */
+    public function createRetryInstruction(array $data)
+    {
+        return new PaymentRetryInstruction($data);
+    }
+
+    /**
+     * @return int
+     */
+    public function getRetryNumber()
+    {
+        return $this->getAttribute('retryNumber');
+    }
 }
