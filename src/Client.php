@@ -85,6 +85,8 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\CheckoutPageService checkoutPages()
  * @method Services\DisputeService disputes()
  * @method Services\PaymentCardMigrationsService paymentCardMigrations()
+ * @method Services\CouponService coupons()
+ * @method Services\RedemptionService couponsRedemptions()
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
@@ -133,6 +135,8 @@ final class Client
         'checkoutPages' => Services\CheckoutPageService::class,
         'disputes' => Services\DisputeService::class,
         'paymentCardMigrations' => Services\PaymentCardMigrationsService::class,
+        'coupons' => Services\CouponService::class,
+        'couponsRedemptions' => Services\RedemptionService::class,
     ];
 
     /** @var array */

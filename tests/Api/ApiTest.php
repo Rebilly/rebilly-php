@@ -85,8 +85,19 @@ class ApiTest extends TestCase
         foreach ($getters as $attribute => $method) {
             $value = $resource->$method();
 
-            if (isset($objects[$attribute]) && $value instanceof JsonSerializable) {
-                $this->assertEquals($values[$attribute], $value->jsonSerialize(), 'Invalid ' . $attribute);
+            if (isset($objects[$attribute])) {
+                if ($value instanceof JsonSerializable) {
+                    $value = $value->jsonSerialize();
+                } elseif (is_array($value)) {
+                    $value = array_map(
+                        function (JsonSerializable $item) {
+                            return $item->jsonSerialize();
+                        },
+                        $value
+                    );
+                }
+
+                $this->assertEquals($values[$attribute], $value, 'Invalid ' . $attribute);
             } elseif (isset($values[$attribute])) {
                 $this->assertEquals($values[$attribute], $value, 'Invalid ' . $attribute);
             } else {
@@ -728,6 +739,8 @@ class ApiTest extends TestCase
             [Entities\Dispute::class],
             [Entities\WebsiteWebhookTracking::class],
             [Entities\PaymentCardMigrationsRequest::class],
+            [Entities\Coupons\Coupon::class],
+            [Entities\Coupons\Redemption::class],
         ];
     }
 
@@ -953,6 +966,7 @@ class ApiTest extends TestCase
             case 'transactionId':
             case 'fromGatewayAccountId':
             case 'toGatewayAccountId':
+            case 'redemptionCode':
                 return $faker->uuid;
             case 'dueTime':
             case 'expiredTime':
@@ -964,6 +978,7 @@ class ApiTest extends TestCase
             case 'downtimeEnd':
             case 'postedTime':
             case 'deadlineTime':
+            case 'issuedTime':
                 return $faker->date('Y-m-d H:i:s');
             case 'unitPrice':
             case 'amount':
@@ -1212,6 +1227,24 @@ class ApiTest extends TestCase
                 }
             case 'paymentCardIds':
                 return [$faker->uuid];
+            case 'discount':
+                return [
+                    'type' => 'fixed',
+                    'amount' => $faker->numberBetween(1, 100),
+                    'currency' => 'USD',
+                ];
+            case 'restrictions':
+            case 'additionalRestrictions':
+                return [
+                    [
+                        'type' => 'restrict-to-invoices',
+                        'invoiceIds' => ['foo', 'bar'],
+                    ],
+                    [
+                        'type' => 'discounts-per-redemption',
+                        'quantity' => $faker->numberBetween(1, 100),
+                    ]
+                ];
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)

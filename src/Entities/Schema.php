@@ -14,6 +14,8 @@ use ArrayIterator;
 use ArrayAccess;
 use InvalidArgumentException;
 use IteratorAggregate;
+use Rebilly\Entities\Coupons\Coupon;
+use Rebilly\Entities\Coupons\Redemption;
 use Rebilly\Rest\Collection;
 
 /**
@@ -242,6 +244,18 @@ final class Schema implements IteratorAggregate, ArrayAccess
             },
             'payment-cards-migrations' => function (array $content) {
                 return new Collection(new PaymentCard(), $content);
+            },
+            'coupons' => function (array $content) {
+                return new Collection(new Coupon(), $content);
+            },
+            'coupons/{redemptionCode}' => function (array $content) {
+                return new Coupon($content);
+            },
+            'coupons-redemptions' => function (array $content) {
+                return new Collection(new Redemption(), $content);
+            },
+            'coupons-redemptions/{redemptionId}' => function (array $content) {
+                return new Redemption($content);
             },
         ];
     }
