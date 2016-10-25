@@ -62,6 +62,9 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'customers/{customerId}' => function (array $content) {
                 return new Customer($content);
             },
+            'customers/{customerId}/lead-source' => function (array $content) {
+                return new LeadSource($content);
+            },
             'lead-sources' => function (array $content) {
                 return new Collection(new LeadSource(), $content);
             },
@@ -80,6 +83,9 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'invoices/{invoiceId}/items/{invoiceItemId}' => function (array $content) {
                 return new InvoiceItem($content);
             },
+            'invoices/{invoiceId}/lead-source' => function (array $content) {
+                return new LeadSource($content);
+            },
             'plans' => function (array $content) {
                 return new Collection(new Plan(), $content);
             },
@@ -97,6 +103,9 @@ final class Schema implements IteratorAggregate, ArrayAccess
             },
             'subscriptions/{subscriptionId}' => function (array $content) {
                 return new Subscription($content);
+            },
+            'invoices/{subscriptionId}/lead-source' => function (array $content) {
+                return new LeadSource($content);
             },
             'payment-cards' => function (array $content) {
                 return new Collection(new PaymentCard(), $content);
@@ -121,6 +130,9 @@ final class Schema implements IteratorAggregate, ArrayAccess
             },
             'payments/{id}' => function (array $content) {
                 return new Payment($content);
+            },
+            'payments/{id}/lead-source' => function (array $content) {
+                return new LeadSource($content);
             },
             'transactions' => function (array $content) {
                 return new Collection(new Transaction(), $content);
