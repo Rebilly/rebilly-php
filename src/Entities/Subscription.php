@@ -153,6 +153,16 @@ final class Subscription extends Entity
     }
 
     /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setBillingContactId($value)
+    {
+        return $this->setAttribute('billingContactId', $value);
+    }
+
+    /**
      * @return string
      */
     public function getDeliveryContactId()
