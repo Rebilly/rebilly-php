@@ -51,6 +51,18 @@ final class Subscription extends Entity
     }
 
     /**
+     * @return null|Customer
+     */
+    public function getCustomer()
+    {
+        if ($this->hasEmbeddedResource('customer')) {
+            return new Customer($this->getEmbeddedResource('customer'));
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * @param string $value
      *
      * @return Subscription
@@ -117,6 +129,18 @@ final class Subscription extends Entity
     }
 
     /**
+     * @return null|Website
+     */
+    public function getWebsite()
+    {
+        if ($this->hasEmbeddedResource('website')) {
+            return new Website($this->getEmbeddedResource('website'));
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * @param string $value
      *
      * @return Subscription
@@ -153,6 +177,18 @@ final class Subscription extends Entity
     }
 
     /**
+     * @return null|Contact
+     */
+    public function getBillingContact()
+    {
+        if ($this->hasEmbeddedResource('billingContact')) {
+            return new Contact($this->getEmbeddedResource('billingContact'));
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * @param string $value
      *
      * @return $this
@@ -168,6 +204,18 @@ final class Subscription extends Entity
     public function getDeliveryContactId()
     {
         return $this->getAttribute('deliveryContactId');
+    }
+
+    /**
+     * @return null|Contact
+     */
+    public function getDeliveryContact()
+    {
+        if ($this->hasEmbeddedResource('deliveryContact')) {
+            return new Contact($this->getEmbeddedResource('deliveryContact'));
+        } else {
+            return null;
+        }
     }
 
     /**
