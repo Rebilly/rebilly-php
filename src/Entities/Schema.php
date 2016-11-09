@@ -65,6 +65,9 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'customers/{customerId}/lead-source' => function (array $content) {
                 return new LeadSource($content);
             },
+            'customers/{customerId}/lead-source/{leadSourceId}' => function (array $content) {
+                return new LeadSource($content);
+            },
             'lead-sources' => function (array $content) {
                 return new Collection(new LeadSource(), $content);
             },
@@ -86,6 +89,9 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'invoices/{invoiceId}/lead-source' => function (array $content) {
                 return new LeadSource($content);
             },
+            'invoices/{invoiceId}/lead-source/{leadSourceId}' => function (array $content) {
+                return new LeadSource($content);
+            },
             'plans' => function (array $content) {
                 return new Collection(new Plan(), $content);
             },
@@ -105,6 +111,9 @@ final class Schema implements IteratorAggregate, ArrayAccess
                 return new Subscription($content);
             },
             'subscriptions/{subscriptionId}/lead-source' => function (array $content) {
+                return new LeadSource($content);
+            },
+            'subscriptions/{subscriptionId}/lead-source/{leadSourceId}' => function (array $content) {
                 return new LeadSource($content);
             },
             'payment-cards' => function (array $content) {
@@ -132,6 +141,9 @@ final class Schema implements IteratorAggregate, ArrayAccess
                 return new Payment($content);
             },
             'payments/{id}/lead-source' => function (array $content) {
+                return new LeadSource($content);
+            },
+            'payments/{id}/lead-source/{leadSourceId}' => function (array $content) {
                 return new LeadSource($content);
             },
             'transactions' => function (array $content) {
