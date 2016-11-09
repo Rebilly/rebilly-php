@@ -156,6 +156,6 @@ final class SubscriptionService extends Service
      */
     public function putLeadSource($subscriptionId, $leadSource)
     {
-        return $this->client()->put($leadSource, 'subscriptions/{subscriptionId}/lead-source', ['subscriptionId' => $subscriptionId]);
+        return $this->client()->put($leadSource, 'subscriptions/{subscriptionId}/lead-source/{leadSourceId}', ['subscriptionId' => $subscriptionId, 'leadSourceId' => $leadSource->getId()]);
     }
 }

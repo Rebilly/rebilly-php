@@ -167,6 +167,6 @@ final class InvoiceService extends Service
      */
     public function putLeadSource($invoiceId, $leadSource)
     {
-        return $this->client()->put($leadSource, 'invoices/{invoiceId}/lead-source', ['invoiceId' => $invoiceId]);
+        return $this->client()->put($leadSource, 'invoices/{invoiceId}/lead-source/{leadSourceId}', ['invoiceId' => $invoiceId, 'leadSourceId' => $leadSource->getId()]);
     }
 }

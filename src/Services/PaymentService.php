@@ -159,6 +159,6 @@ final class PaymentService extends Service
      */
     public function putLeadSource($paymentId, $leadSource)
     {
-        return $this->client()->put($leadSource, 'payments/{paymentId}/lead-source', ['paymentId' => $paymentId]);
+        return $this->client()->put($leadSource, 'payments/{paymentId}/lead-source/{leadSourceId}', ['paymentId' => $paymentId, 'leadSourceId' => $leadSource->getId()]);
     }
 }

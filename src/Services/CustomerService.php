@@ -120,7 +120,7 @@ final class CustomerService extends Service
      */
     public function putLeadSource($customerId, $leadSource)
     {
-        return $this->client()->put($leadSource, 'customers/{customerId}/lead-source', ['customerId' => $customerId]);
+        return $this->client()->put($leadSource, 'customers/{customerId}/lead-source/{leadSourceId}', ['customerId' => $customerId, 'leadSourceId' => $leadSource->getId()]);
     }
 
 }
