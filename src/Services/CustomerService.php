@@ -115,11 +115,16 @@ final class CustomerService extends Service
     /**
      * @param string $customerId
      * @param LeadSource $leadSource
+     * @param string $leadSourceId
      *
      * @return LeadSource
      */
-    public function putLeadSource($customerId, $leadSource)
+    public function putLeadSource($customerId, $leadSource, $leadSourceId = null)
     {
-        return $this->client()->put($leadSource, 'customers/{customerId}/lead-source/{leadSourceId}', ['customerId' => $customerId, 'leadSourceId' => $leadSource->getId()]);
+        if (!isset($leadSourceId)) {
+            $leadSourceId = $leadSource->getId();
+        }
+
+        return $this->client()->put($leadSource, 'customers/{customerId}/lead-source/{leadSourceId}', ['customerId' => $customerId, 'leadSourceId' => $leadSourceId]);
     }
 }
