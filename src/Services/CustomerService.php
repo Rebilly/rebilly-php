@@ -122,5 +122,4 @@ final class CustomerService extends Service
     {
         return $this->client()->put($leadSource, 'customers/{customerId}/lead-source/{leadSourceId}', ['customerId' => $customerId, 'leadSourceId' => $leadSource->getId()]);
     }
-
 }
