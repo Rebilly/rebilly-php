@@ -13,6 +13,7 @@ namespace Rebilly\Services;
 use ArrayObject;
 use JsonSerializable;
 use Rebilly\Entities\Customer;
+use Rebilly\Entities\LeadSource;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Paginator;
@@ -89,4 +90,37 @@ final class CustomerService extends Service
     {
         return $this->client()->put($data, 'customers/{customerId}', ['customerId' => $customerId]);
     }
+
+    /**
+     * @param string $subscriptionId
+     *
+     * @return LeadSource
+     */
+    public function getLeadSource($customerId)
+    {
+        return $this->client()->get('customers/{customerId}/lead-source', ['customerId' => $customerId]);
+    }
+
+    /**
+     * @param string $customerId
+     * @param LeadSource $leadSource
+     *
+     * @return LeadSource
+     */
+    public function postLeadSource($customerId, $leadSource)
+    {
+        return $this->client()->post($leadSource, 'customers/{customerId}/lead-source', ['customerId' => $customerId]);
+    }
+
+    /**
+     * @param string $customerId
+     * @param LeadSource $leadSource
+     *
+     * @return LeadSource
+     */
+    public function putLeadSource($customerId, $leadSource)
+    {
+        return $this->client()->put($leadSource, 'customers/{customerId}/lead-source', ['customerId' => $customerId]);
+    }
+
 }
