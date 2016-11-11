@@ -123,7 +123,6 @@ final class Blacklist extends Entity
     }
 
     /**
-     *
      * @return mixed
      */
     public function getExpiredTime()
