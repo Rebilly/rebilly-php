@@ -254,4 +254,16 @@ final class Payment extends Entity
     {
         return $this->getAttribute('retryNumber');
     }
+
+    /**
+     * @return null|LeadSource
+     */
+    public function getLeadSource()
+    {
+        if ($this->hasEmbeddedResource('leadSource')) {
+            return new LeadSource($this->getEmbeddedResource('leadSource'));
+        } else {
+            return null;
+        }
+    }
 }
