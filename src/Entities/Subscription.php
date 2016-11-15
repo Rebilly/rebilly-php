@@ -313,4 +313,16 @@ final class Subscription extends Entity
     {
         return $this->setAttribute('autopay', $value);
     }
+
+    /**
+     * @return null|LeadSource
+     */
+    public function getLeadSource()
+    {
+        if ($this->hasEmbeddedResource('leadSource')) {
+            return new LeadSource($this->getEmbeddedResource('leadSource'));
+        } else {
+            return null;
+        }
+    }
 }

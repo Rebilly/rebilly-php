@@ -146,4 +146,16 @@ final class Invoice extends Entity
     {
         return $this->setAttribute('deliveryContact', $value);
     }
+
+    /**
+     * @return null|LeadSource
+     */
+    public function getLeadSource()
+    {
+        if ($this->hasEmbeddedResource('leadSource')) {
+            return new LeadSource($this->getEmbeddedResource('leadSource'));
+        } else {
+            return null;
+        }
+    }
 }
