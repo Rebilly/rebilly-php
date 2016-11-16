@@ -269,6 +269,9 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'coupons-redemptions/{redemptionId}' => function (array $content) {
                 return new Redemption($content);
             },
+            'websites/{websiteId}/webhook' => function (array $content) {
+                return new WebsiteWebhook($content);
+            },
         ];
     }
 
