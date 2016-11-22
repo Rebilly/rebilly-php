@@ -154,24 +154,8 @@ final class InvoiceService extends Service
      *
      * @return LeadSource
      */
-    public function postLeadSource($invoiceId, $leadSource)
+    public function putLeadSource($invoiceId, $leadSource)
     {
-        return $this->client()->post($leadSource, 'invoices/{invoiceId}/lead-source', ['invoiceId' => $invoiceId]);
-    }
-
-    /**
-     * @param string $invoiceId
-     * @param LeadSource $leadSource
-     * @param string $leadSourceId
-     *
-     * @return LeadSource
-     */
-    public function putLeadSource($invoiceId, $leadSource, $leadSourceId)
-    {
-        if (!isset($leadSourceId)) {
-            $leadSourceId = $leadSource->getId();
-        }
-
-        return $this->client()->put($leadSource, 'invoices/{invoiceId}/lead-source/{leadSourceId}', ['invoiceId' => $invoiceId, 'leadSourceId' => $leadSourceId]);
+        return $this->client()->put($leadSource, 'invoices/{invoiceId}/lead-source', ['invoiceId' => $invoiceId]);
     }
 }

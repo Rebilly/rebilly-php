@@ -146,24 +146,8 @@ final class PaymentService extends Service
      *
      * @return LeadSource
      */
-    public function postLeadSource($paymentId, $leadSource)
+    public function putLeadSource($paymentId, $leadSource)
     {
-        return $this->client()->post($leadSource, 'payments/{paymentId}/lead-source', ['paymentId' => $paymentId]);
-    }
-
-    /**
-     * @param string $paymentId
-     * @param LeadSource $leadSource
-     * @param string $leadSourceId
-     *
-     * @return LeadSource
-     */
-    public function putLeadSource($paymentId, $leadSource, $leadSourceId = null)
-    {
-        if (!isset($leadSourceId)) {
-            $leadSourceId = $leadSource->getId();
-        }
-
-        return $this->client()->put($leadSource, 'payments/{paymentId}/lead-source/{leadSourceId}', ['paymentId' => $paymentId, 'leadSourceId' => $leadSourceId]);
+        return $this->client()->put($leadSource, 'payments/{paymentId}/lead-source', ['paymentId' => $paymentId]);
     }
 }
