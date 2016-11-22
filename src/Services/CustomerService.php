@@ -92,7 +92,7 @@ final class CustomerService extends Service
     }
 
     /**
-     * @param string $subscriptionId
+     * @param string $customerId
      *
      * @return LeadSource
      */
@@ -110,5 +110,13 @@ final class CustomerService extends Service
     public function putLeadSource($customerId, $leadSource)
     {
         return $this->client()->put($leadSource, 'customers/{customerId}/lead-source', ['customerId' => $customerId]);
+    }
+
+    /**
+     * @param string $customerId
+     */
+    public function deleteLeadSource($customerId)
+    {
+        $this->client()->delete('customers/{customerId}/lead-source', ['customerId' => $customerId]);
     }
 }

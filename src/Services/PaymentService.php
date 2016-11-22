@@ -150,4 +150,12 @@ final class PaymentService extends Service
     {
         return $this->client()->put($leadSource, 'payments/{paymentId}/lead-source', ['paymentId' => $paymentId]);
     }
+
+    /**
+     * @param string $paymentId
+     */
+    public function deleteLeadSource($paymentId)
+    {
+        $this->client()->delete('payments/{paymentId}/lead-source', ['paymentId' => $paymentId]);
+    }
 }

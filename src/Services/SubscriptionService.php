@@ -147,4 +147,12 @@ final class SubscriptionService extends Service
     {
         return $this->client()->put($leadSource, 'subscriptions/{subscriptionId}/lead-source', ['subscriptionId' => $subscriptionId]);
     }
+
+    /**
+     * @param string $subscriptionId
+     */
+    public function deleteLeadSource($subscriptionId)
+    {
+        $this->client()->delete('subscriptions/{subscriptionId}/lead-source', ['subscriptionId' => $subscriptionId]);
+    }
 }

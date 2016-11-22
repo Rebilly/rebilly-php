@@ -158,4 +158,12 @@ final class InvoiceService extends Service
     {
         return $this->client()->put($leadSource, 'invoices/{invoiceId}/lead-source', ['invoiceId' => $invoiceId]);
     }
+
+    /**
+     * @param string $invoiceId
+     */
+    public function deleteLeadSource($invoiceId)
+    {
+        $this->client()->delete('invoices/{invoiceId}/lead-source', ['invoiceId' => $invoiceId]);
+    }
 }
