@@ -107,7 +107,7 @@ final class CustomerService extends Service
      *
      * @return LeadSource
      */
-    public function putLeadSource($customerId, $leadSource)
+    public function updateLeadSource($customerId, $leadSource)
     {
         return $this->client()->put($leadSource, 'customers/{customerId}/lead-source', ['customerId' => $customerId]);
     }
