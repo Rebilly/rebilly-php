@@ -143,7 +143,7 @@ final class SubscriptionService extends Service
      *
      * @return LeadSource
      */
-    public function putLeadSource($subscriptionId, $leadSource)
+    public function updateLeadSource($subscriptionId, $leadSource)
     {
         return $this->client()->put($leadSource, 'subscriptions/{subscriptionId}/lead-source', ['subscriptionId' => $subscriptionId]);
     }
