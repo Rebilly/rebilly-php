@@ -150,7 +150,7 @@ final class InvoiceService extends Service
 
     /**
      * @param string $invoiceId
-     * @param LeadSource $leadSource
+     * @param array|JsonSerializable|LeadSource $leadSource
      *
      * @return LeadSource
      */

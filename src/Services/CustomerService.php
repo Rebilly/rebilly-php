@@ -103,7 +103,7 @@ final class CustomerService extends Service
 
     /**
      * @param string $customerId
-     * @param LeadSource $leadSource
+     * @param array|JsonSerializable|LeadSource $leadSource
      *
      * @return LeadSource
      */

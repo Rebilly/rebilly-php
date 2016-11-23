@@ -139,7 +139,7 @@ final class SubscriptionService extends Service
 
     /**
      * @param string $subscriptionId
-     * @param LeadSource $leadSource
+     * @param array|JsonSerializable|LeadSource $leadSource
      *
      * @return LeadSource
      */

@@ -142,7 +142,7 @@ final class PaymentService extends Service
 
     /**
      * @param string $paymentId
-     * @param LeadSource $leadSource
+     * @param array|JsonSerializable|LeadSource $leadSource
      *
      * @return LeadSource
      */
