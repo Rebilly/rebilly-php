@@ -76,4 +76,17 @@ final class ContactService extends Service
             return $this->client()->post($data, 'contacts');
         }
     }
+
+    /**
+     * @param string $contactId
+     * @param array|JsonSerializable|Contact $data
+     *
+     * @throws UnprocessableEntityException The input data does not valid
+     *
+     * @return Contact
+     */
+    public function update($contactId, $data)
+    {
+        return $this->client()->put($data, 'contacts/{contactId}', ['contactId' => $contactId]);
+    }
 }
