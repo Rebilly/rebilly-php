@@ -315,6 +315,22 @@ final class Subscription extends Entity
     }
 
     /**
+     * @return bool
+     */
+    public function getInTrial()
+    {
+        return $this->getAttribute('inTrial');
+    }
+
+    /**
+     * @return int
+     */
+    public function getRebillNumber()
+    {
+        return $this->getAttribute('rebillNumber');
+    }
+
+    /**
      * @return null|LeadSource
      */
     public function getLeadSource()
