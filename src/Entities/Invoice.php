@@ -158,4 +158,12 @@ final class Invoice extends Entity
             return null;
         }
     }
+
+    /**
+     * @return array
+     */
+    public function getItems()
+    {
+        return $this->getAttribute('items');
+    }
 }
