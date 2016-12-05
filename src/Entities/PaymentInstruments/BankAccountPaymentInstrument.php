@@ -3,6 +3,7 @@
 namespace Rebilly\Entities\PaymentInstruments;
 
 use Rebilly\Entities\PaymentInstrument;
+use Rebilly\Entities\PaymentMethod;
 
 class BankAccountPaymentInstrument extends PaymentInstrument
 {
@@ -22,6 +23,14 @@ class BankAccountPaymentInstrument extends PaymentInstrument
             self::ACCOUNT_TYPE_SAVINGS,
             self::ACCOUNT_TYPE_OTHER,
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function name()
+    {
+        return PaymentMethod::METHOD_ACH;
     }
 
     /**
