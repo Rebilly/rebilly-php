@@ -3,9 +3,18 @@
 namespace Rebilly\Entities\PaymentInstruments;
 
 use Rebilly\Entities\PaymentInstrument;
+use Rebilly\Entities\PaymentMethod;
 
 class PaymentCardPaymentInstrument extends PaymentInstrument
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function name()
+    {
+        return PaymentMethod::METHOD_PAYMENT_CARD;
+    }
+
     /**
      * @param string $value
      *
