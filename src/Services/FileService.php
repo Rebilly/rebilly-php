@@ -55,7 +55,7 @@ final class FileService extends Service
     }
 
     /**
-     * @param array|JsonSerializable|File $data
+     * @param array|JsonSerializable|string|File $data
      *
      * @throws UnprocessableEntityException The input data does not valid
      *
