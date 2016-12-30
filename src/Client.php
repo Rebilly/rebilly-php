@@ -380,7 +380,6 @@ final class Client
      * @param string $path The URL path or URL Template
      * @param array|ArrayObject $params The URL parameters. Parameters used for URL template or encode to query string.
      * @param array $headers The headers specific for request.
-     * @param bool $sendRaw allows sending raw request body or json-encode it by default
      *
      * @throws Http\Exception\ServerException
      * @throws Http\Exception\ClientException

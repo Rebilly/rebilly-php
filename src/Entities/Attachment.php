@@ -19,8 +19,8 @@ use Rebilly\Rest\Entity;
  * {
  *   "id"
  *   "fileId"
- *   "resourceType"
- *   "resourceId"
+ *   "relatedType"
+ *   "relatedId"
  *   "name"
  *   "description"
  *   "createdTime"
@@ -102,29 +102,29 @@ final class Attachment extends Entity
     /**
      * @return array
      */
-    public function getResourceId()
+    public function getRelatedId()
     {
-        return $this->getAttribute('resourceId');
+        return $this->getAttribute('relatedId');
     }
 
     /**
      * @return $this
      */
-    public function setResourceId($value)
+    public function setRelatedId($value)
     {
-        return $this->setAttribute('resourceId', $value);
+        return $this->setAttribute('relatedId', $value);
     }
 
     /**
      * @return string
      */
-    public function getResourceType()
+    public function getRelatedType()
     {
-        return $this->getAttribute('resourceType');
+        return $this->getAttribute('relatedType');
     }
 
-    public function setResourceType($value)
+    public function setRelatedType($value)
     {
-        return $this->setAttribute('resourceType', $value);
+        return $this->setAttribute('relatedType', $value);
     }
 }
