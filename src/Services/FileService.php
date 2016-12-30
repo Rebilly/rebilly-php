@@ -67,7 +67,7 @@ final class FileService extends Service
             return $this->client()->post($data, 'files');
         }
 
-        return $this->client()->postRaw($data, 'files');
+        return $this->client()->post($data, 'files');
     }
 
     /**

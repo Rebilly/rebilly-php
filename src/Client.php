@@ -86,6 +86,7 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\DisputeService disputes()
  * @method Services\PaymentCardMigrationsService paymentCardMigrations()
  * @method Services\FileService files()
+ * @method Services\AttachmentService attachments()
  * @method Services\CouponService coupons()
  * @method Services\RedemptionService couponsRedemptions()
  * @method Services\WebsiteWebhookService websiteWebhook()
@@ -342,10 +343,6 @@ final class Client
             case 'PUT':
                 array_unshift($arguments, $name);
                 return call_user_func_array([$this, 'send'], $arguments);
-            case 'POSTRAW':
-                array_unshift($arguments, 'POST');
-                array_push($arguments, [], [], true);
-                return call_user_func_array([$this, 'send'], $arguments);
         }
 
         try {
@@ -390,21 +387,22 @@ final class Client
      *
      * @return mixed|null The resulting resource or null
      */
-    public function send($method, $payload, $path, $params = [], array $headers = [], $sendRaw = false)
+    public function send($method, $payload, $path, $params = [], array $headers = [])
     {
         if (!is_array($params)) {
             $params = (array) $params;
         }
 
-        if ($sendRaw === false) {
-            $payload = json_encode($payload, JSON_FORCE_OBJECT);
+        $data = json_encode($payload, JSON_FORCE_OBJECT);
+        if ($data === false) {
+            $data = $payload;
         }
 
         $headers['Content-Type'] = 'application/json';
 
         // Prepare request and response objects
         $uri = $this->createUri($path, $params);
-        $request = $this->createRequest($method, $uri, $payload, $headers);
+        $request = $this->createRequest($method, $uri, $data, $headers);
         $response = $this->createResponse();
 
         /**
