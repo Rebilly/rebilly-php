@@ -59,7 +59,6 @@ final class AttachmentService extends Service
      * @param null $attachmentId
      *
      * @return Attachment The input data does not valid
-     *
      */
     public function create($data, $attachmentId = null)
     {
