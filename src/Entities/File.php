@@ -45,14 +45,6 @@ final class File extends Entity
     /**
      * @return string
      */
-    public function getUpdatedTime()
-    {
-        return $this->getAttribute('updatedTime');
-    }
-
-    /**
-     * @return bool
-     */
     public function getName()
     {
         return $this->getAttribute('name');
@@ -69,7 +61,7 @@ final class File extends Entity
     }
 
     /**
-     * @return bool
+     * @return string
      */
     public function getExtension()
     {
@@ -109,6 +101,8 @@ final class File extends Entity
     }
 
     /**
+     * @param $value
+     *
      * @return $this
      */
     public function setTags($value)

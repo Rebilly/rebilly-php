@@ -56,10 +56,10 @@ final class AttachmentService extends Service
 
     /**
      * @param array|JsonSerializable|Attachment $data
+     * @param null $attachmentId
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @return Attachment The input data does not valid
      *
-     * @return Attachment
      */
     public function create($data, $attachmentId = null)
     {

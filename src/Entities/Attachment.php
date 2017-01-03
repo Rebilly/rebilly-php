@@ -10,6 +10,7 @@
 
 namespace Rebilly\Entities;
 
+use DomainException;
 use Rebilly\Rest\Entity;
 
 /**
@@ -30,6 +31,36 @@ use Rebilly\Rest\Entity;
  */
 final class Attachment extends Entity
 {
+    const MSG_UNEXPECTED_TYPE = 'Unexpected relatedType. Only %s types are supported.';
+
+    const TYPE_CUSTOMER = 'customer';
+    const TYPE_DISPUTE = 'dispute';
+    const TYPE_INVOICE = 'invoice';
+    const TYPE_NOTE = 'note';
+    const TYPE_PAYMENT = 'payment';
+    const TYPE_PLAN = 'plan';
+    const TYPE_PRODUCT = 'product';
+    const TYPE_SUBSCRIPTION = 'subscription';
+    const TYPE_TRANSACTION = 'transaction';
+
+    /**
+     * @return array
+     */
+    public static function allowedTypes()
+    {
+        return [
+            self::TYPE_CUSTOMER,
+            self::TYPE_DISPUTE,
+            self::TYPE_INVOICE,
+            self::TYPE_NOTE,
+            self::TYPE_PAYMENT,
+            self::TYPE_PLAN,
+            self::TYPE_PRODUCT,
+            self::TYPE_SUBSCRIPTION,
+            self::TYPE_TRANSACTION,
+        ];
+    }
+
     /**
      * @return string
      */
@@ -41,14 +72,6 @@ final class Attachment extends Entity
     /**
      * @return string
      */
-    public function getUpdatedTime()
-    {
-        return $this->getAttribute('updatedTime');
-    }
-
-    /**
-     * @return bool
-     */
     public function getName()
     {
         return $this->getAttribute('name');
@@ -59,9 +82,8 @@ final class Attachment extends Entity
      *
      * @return $this
      */
-    public function setName(
-        $value
-    ) {
+    public function setName($value)
+    {
         return $this->setAttribute('name', $value);
     }
 
@@ -76,14 +98,13 @@ final class Attachment extends Entity
     /**
      * @return $this
      */
-    public function setDescription(
-        $value
-    ) {
+    public function setDescription($value)
+    {
         return $this->setAttribute('description', $value);
     }
 
     /**
-     * @return bool
+     * @return string
      */
     public function getFileId()
     {
@@ -93,14 +114,13 @@ final class Attachment extends Entity
     /**
      * @return $this
      */
-    public function setFileId(
-        $value
-    ) {
+    public function setFileId($value)
+    {
         return $this->setAttribute('fileId', $value);
     }
 
     /**
-     * @return array
+     * @return string
      */
     public function getRelatedId()
     {
@@ -123,8 +143,17 @@ final class Attachment extends Entity
         return $this->getAttribute('relatedType');
     }
 
+    /**
+     * @param $value
+     *
+     * @return $this
+     */
     public function setRelatedType($value)
     {
+        if (!in_array($value, self::allowedTypes())) {
+            throw new DomainException(sprintf(self::MSG_UNEXPECTED_TYPE, implode(', ', self::allowedTypes())));
+        }
+
         return $this->setAttribute('relatedType', $value);
     }
 }
