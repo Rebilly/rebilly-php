@@ -10,6 +10,7 @@
 
 namespace Rebilly\Entities;
 
+use DomainException;
 use Rebilly\Rest\Entity;
 
 /**
@@ -34,6 +35,28 @@ use Rebilly\Rest\Entity;
  */
 final class File extends Entity
 {
+    const MSG_UNEXPECTED_EXTENSION = 'Unexpected extension. Only %s extensions are supported.';
+
+    const EXTENSION_JPEG = 'jpeg';
+    const EXTENSION_JPG = 'jpg';
+    const EXTENSION_PDF = 'pdf';
+    const EXTENSION_PNG = 'png';
+    const EXTENSION_MP3 = 'mp3';
+
+    /**
+     * @return array
+     */
+    public static function allowedTypes()
+    {
+        return [
+            self::EXTENSION_JPEG,
+            self::EXTENSION_JPG,
+            self::EXTENSION_PDF,
+            self::EXTENSION_PNG,
+            self::EXTENSION_MP3,
+        ];
+    }
+
     /**
      * @return string
      */
@@ -73,6 +96,10 @@ final class File extends Entity
      */
     public function setExtension($value)
     {
+        if (!in_array($value, self::allowedTypes())) {
+            throw new DomainException(sprintf(self::MSG_UNEXPECTED_EXTENSION, implode(', ', self::allowedTypes())));
+        }
+
         return $this->setAttribute('extension', $value);
     }
 

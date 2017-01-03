@@ -693,12 +693,14 @@ class ApiTest extends TestCase
     public function provideEntityClasses()
     {
         return [
+            [Entities\Attachment::class],
             [Entities\AuthenticationOptions::class, null],
             [Entities\AuthenticationToken::class, 'token'],
             [Entities\Blacklist::class],
             [Entities\Contact::class],
             [Entities\Customer::class],
             [Entities\CustomerCredential::class],
+            [Entities\File::class],
             [Entities\Invoice::class],
             [Entities\InvoiceItem::class],
             [Entities\Layout::class],
@@ -752,6 +754,11 @@ class ApiTest extends TestCase
     {
         return [
             [
+                'attachments',
+                Services\AttachmentService::class,
+                Entities\Attachment::class,
+            ],
+            [
                 'authenticationOptions',
                 Services\AuthenticationOptionsService::class,
                 Entities\AuthenticationOptions::class,
@@ -788,6 +795,11 @@ class ApiTest extends TestCase
                 Services\InvoiceItemService::class,
                 Entities\InvoiceItem::class,
             ],*/
+            [
+                'files',
+                Services\FileService::class,
+                Entities\File::class,
+            ],
             [
                 'invoices',
                 Services\InvoiceService::class,
@@ -947,6 +959,7 @@ class ApiTest extends TestCase
             case 'id':
             case 'password':
             case 'currentPassword':
+            case 'fileId':
             case 'newPassword':
             case 'customerId':
             case 'contactId':
@@ -1085,6 +1098,10 @@ class ApiTest extends TestCase
             case 'country':
             case 'phoneNumber':
                 return $faker->$attribute;
+            case 'extension':
+                return $faker->randomElement(Entities\File::allowedTypes());
+            case 'tags':
+                return [$faker->word];
             case 'type':
             case 'datetimeFormat':
                 switch ($class) {
@@ -1150,7 +1167,12 @@ class ApiTest extends TestCase
             case 'payment':
                 return []; // TODO
             case 'relatedType':
-                return $faker->randomElement(Entities\Note::relatedTypes());
+                switch ($class) {
+                    case Entities\Attachment::class:
+                        return $faker->randomElement(Entities\Attachment::allowedTypes());
+                    case Entities\Note::class:
+                        return $faker->randomElement(Entities\Note::relatedTypes());
+                }
             case 'method':
             case 'defaultPaymentMethod':
                 switch ($class) {
