@@ -59,4 +59,12 @@ final class WebsiteWebhookService extends Service
     {
         return $this->client()->put($data, 'websites/{websiteId}/webhook', ['websiteId' => $websiteId]);
     }
+
+    /**
+     * @param string $websiteId
+     */
+    public function delete($websiteId)
+    {
+        $this->client()->delete('websites/{websiteId}/webhook', ['websiteId' => $websiteId]);
+    }
 }
