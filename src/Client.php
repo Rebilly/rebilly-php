@@ -85,6 +85,8 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\CheckoutPageService checkoutPages()
  * @method Services\DisputeService disputes()
  * @method Services\PaymentCardMigrationsService paymentCardMigrations()
+ * @method Services\FileService files()
+ * @method Services\AttachmentService attachments()
  * @method Services\CouponService coupons()
  * @method Services\RedemptionService couponsRedemptions()
  * @method Services\WebsiteWebhookService websiteWebhook()
@@ -121,6 +123,8 @@ final class Client
         'subscriptions' => Services\SubscriptionService::class,
         'transactions' => Services\TransactionService::class,
         'websites' => Services\WebsiteService::class,
+        'files' => Services\FileService::class,
+        'attachments' => Services\AttachmentService::class,
         'notes' => Services\NoteService::class,
         'organizations' => Services\OrganizationService::class,
         'customFields' => Services\CustomFieldService::class,
@@ -388,14 +392,16 @@ final class Client
             $params = (array) $params;
         }
 
-        // Serialize $payload
-        $payload = json_encode($payload, JSON_FORCE_OBJECT);
+        $data = json_encode($payload, JSON_FORCE_OBJECT);
+        if ($data === false) {
+            $data = $payload;
+        }
 
         $headers['Content-Type'] = 'application/json';
 
         // Prepare request and response objects
         $uri = $this->createUri($path, $params);
-        $request = $this->createRequest($method, $uri, $payload, $headers);
+        $request = $this->createRequest($method, $uri, $data, $headers);
         $response = $this->createResponse();
 
         /**
