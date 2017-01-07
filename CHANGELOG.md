@@ -15,17 +15,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - [x] Added support to `activate` a `User`.
 - [x] Added support to delete a `WebsiteWebhook`.
  
+### Changed
+- [x] Require PHP 7.1 unit tests to pass, and updated README. PHP 5.5 is at end of life and not supported by PHP.  We recommend upgrading if you are using PHP 5.5.  We will continue support of it for now.
+
 ### Fixed
-- [x] Fixed SDK_Version properly incremented.
+- [x] Fixed `SDK_VERSION` now properly incremented.
 - [x] Fixed `PaymentCardToken` to properly set the `method` attribute.
 
 
 ## [2.0.5] 2016-11-29
-
-### Changed
-- [x] Changed all enum values and made it consistent using `kebab-case` notation of naming.
-- [x] Moved support for the deprecated Website Webhooks to own object `WebsiteWebhook`.
-- [x] `LeadSource` is not an independent entity, but a child of `Customer`, `Subscription`, `Invoice`, or `Payment`.
 
 ### Added
 - [x] Added support for `Blacklist` `expiredTime` attribute, and deprecated `expireTime` attribute.
@@ -35,6 +33,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - [x] Added support for `Note`s attached `PaymentCard`, `GatewayAccount`, `Subscription` and `Transaction`.
 - [x] Added support for `Payment` attributes `retryInstruction` and `retryNumber`, and added support for creating instructions.
 - [x] Added support for `PaymentCardMigrations`.
+
+### Changed
+- [x] Changed all enum values and made it consistent using `kebab-case` notation of naming.
+- [x] Moved support for the deprecated Website Webhooks to own object `WebsiteWebhook`.
+- [x] `LeadSource` is not an independent entity, but a child of `Customer`, `Subscription`, `Invoice`, or `Payment`.
 
 ### Fixed
 - [x] Fixed `bankName` attribute in `BankAccount`.
