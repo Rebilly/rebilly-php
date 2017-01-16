@@ -50,7 +50,7 @@ final class ValuesListTrackingService extends Service
      *
      * @return ValuesList[]|Collection
      */
-    public function load($listId, $params = [])
+    public function searchById($listId, $params = [])
     {
         return $this->client()->get('tracking/lists/{listId}', ['listId' => $listId] + (array) $params);
     }
