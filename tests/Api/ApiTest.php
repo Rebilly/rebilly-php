@@ -688,6 +688,45 @@ class ApiTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function listsService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->getMock(CurlHandler::class);
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'lists/listId')
+            ));
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+        $service = $client->lists();
+        $result = $service->load('listId');
+        $this->assertInstanceOf(Entities\ValuesList::class, $result);
+
+        $handler = $this->getMock(CurlHandler::class);
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'lists/listId/version')
+            ));
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+        $service = $client->lists();
+        $result = $service->loadVersion('listId', 2);
+        $this->assertInstanceOf(Entities\ValuesList::class, $result);
+    }
+
+    /**
      * @return array
      */
     public function provideEntityClasses()
@@ -743,6 +782,7 @@ class ApiTest extends TestCase
             [Entities\PaymentCardMigrationsRequest::class],
             [Entities\Coupons\Coupon::class],
             [Entities\Coupons\Redemption::class],
+            [Entities\ValuesList::class],
         ];
     }
 
@@ -940,6 +980,16 @@ class ApiTest extends TestCase
                 Services\PaymentCardMigrationsService::class,
                 Entities\PaymentCardMigrationsRequest::class,
             ],
+            [
+                'lists',
+                Services\ValuesListService::class,
+                Entities\ValuesList::class,
+            ],
+            [
+                'listsTracking',
+                Services\ValuesListTrackingService::class,
+                Entities\ValuesList::class,
+            ],
         ];
     }
 
@@ -980,6 +1030,7 @@ class ApiTest extends TestCase
             case 'fromGatewayAccountId':
             case 'toGatewayAccountId':
             case 'redemptionCode':
+            case 'listId':
                 return $faker->uuid;
             case 'dueTime':
             case 'expiredTime':
@@ -1082,6 +1133,7 @@ class ApiTest extends TestCase
             case 'minQuantity':
             case 'maxQuantity':
             case 'monthlyLimit':
+            case 'version':
             case 'redirectTimeout':
                 return $faker->numberBetween(1, 10);
             case 'address2':
@@ -1268,6 +1320,11 @@ class ApiTest extends TestCase
                         'type' => 'discounts-per-redemption',
                         'quantity' => $faker->numberBetween(1, 100),
                     ]
+                ];
+            case 'values':
+                return [
+                    $faker->word,
+                    $faker->numberBetween(1, 100),
                 ];
             default:
                 throw new InvalidArgumentException(

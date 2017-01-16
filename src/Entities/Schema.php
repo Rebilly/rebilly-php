@@ -284,6 +284,21 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'websites/{websiteId}/webhook' => function (array $content) {
                 return new WebsiteWebhook($content);
             },
+            'lists' => function (array $content) {
+                return new Collection(new ValuesList(), $content);
+            },
+            'lists/{listId}' => function (array $content) {
+                return new ValuesList($content);
+            },
+            'lists/{listId}/{version}' => function (array $content) {
+                return new ValuesList($content);
+            },
+            'tracking/lists' => function (array $content) {
+                return new Collection(new ValuesList(), $content);
+            },
+            'tracking/lists/{listId}' => function (array $content) {
+                return new Collection(new ValuesList(), $content);
+            },
         ];
     }
 
