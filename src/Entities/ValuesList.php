@@ -89,11 +89,15 @@ final class ValuesList extends Entity
     {
         $listValues = [];
 
+        if (!is_array($values)) {
+            throw new DomainException('Values cannot be empty');
+        }
+
         foreach ($values as $value) {
-            if (is_string($value)) {
+            if (is_scalar($value)) {
                 $listValues[] = $value;
             } else {
-                throw new DomainException('Each value must be string identifier');
+                throw new DomainException('Each value must be a scalar element');
             }
         }
 
