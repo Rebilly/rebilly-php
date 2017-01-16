@@ -64,7 +64,7 @@ final class ValuesList extends Entity
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getVersion()
     {

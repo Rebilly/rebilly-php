@@ -59,7 +59,7 @@ final class ValuesListService extends Service
 
     /**
      * @param string $listId
-     * @param integer $version
+     * @param int $version
      * @param array|ArrayObject $params
      *
      * @throws NotFoundException The resource data does exist
