@@ -688,45 +688,6 @@ class ApiTest extends TestCase
     }
 
     /**
-     * @test
-     */
-    public function listsService()
-    {
-        $client = new Client(['apiKey' => 'QWERTY']);
-
-        /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class);
-        $handler
-            ->expects($this->any())
-            ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'lists/listId')
-            ));
-        $client = new Client([
-            'apiKey' => 'QWERTY',
-            'httpHandler' => $handler,
-        ]);
-        $service = $client->lists();
-        $result = $service->load('listId');
-        $this->assertInstanceOf(Entities\ValuesList::class, $result);
-
-        $handler = $this->getMock(CurlHandler::class);
-        $handler
-            ->expects($this->any())
-            ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'lists/listId/version')
-            ));
-        $client = new Client([
-            'apiKey' => 'QWERTY',
-            'httpHandler' => $handler,
-        ]);
-        $service = $client->lists();
-        $result = $service->loadVersion('listId', 2);
-        $this->assertInstanceOf(Entities\ValuesList::class, $result);
-    }
-
-    /**
      * @return array
      */
     public function provideEntityClasses()
