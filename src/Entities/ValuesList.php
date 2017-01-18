@@ -40,14 +40,6 @@ final class ValuesList extends Entity
     /**
      * @return string
      */
-    public function getUpdatedTime()
-    {
-        return $this->getAttribute('updatedTime');
-    }
-
-    /**
-     * @return string
-     */
     public function getName()
     {
         return $this->getAttribute('name');
