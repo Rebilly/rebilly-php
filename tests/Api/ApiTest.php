@@ -991,7 +991,6 @@ class ApiTest extends TestCase
             case 'fromGatewayAccountId':
             case 'toGatewayAccountId':
             case 'redemptionCode':
-            case 'listId':
                 return $faker->uuid;
             case 'dueTime':
             case 'expiredTime':
@@ -1094,7 +1093,6 @@ class ApiTest extends TestCase
             case 'minQuantity':
             case 'maxQuantity':
             case 'monthlyLimit':
-            case 'version':
             case 'redirectTimeout':
                 return $faker->numberBetween(1, 10);
             case 'address2':
