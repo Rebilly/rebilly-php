@@ -108,6 +108,24 @@ class SubscriptionCancel extends Resource
     }
 
     /**
+     * @return string
+     */
+    public function getCancelDescription()
+    {
+        return $this->getAttribute('cancelDescription');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return SubscriptionCancel
+     */
+    public function setCancelDescription($value)
+    {
+        return $this->setAttribute('cancelDescription', $value);
+    }
+
+    /**
      * @param string $value
      *
      * @throws DomainException

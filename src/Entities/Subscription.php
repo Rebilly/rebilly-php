@@ -347,6 +347,14 @@ final class Subscription extends Entity
     }
 
     /**
+     * @return string
+     */
+    public function getCancelDescription()
+    {
+        return $this->getAttribute('cancelDescription');
+    }
+
+    /**
      * @return null|LeadSource
      */
     public function getLeadSource()
