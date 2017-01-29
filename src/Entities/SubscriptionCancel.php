@@ -148,8 +148,8 @@ class SubscriptionCancel extends Resource
      */
     public function setCanceledBy($value)
     {
-        if (!in_array($value, self::getCanceledBy())) {
-            throw new DomainException(sprintf(self::UNEXPECTED_CATEGORY, implode(', ', self::getCanceledBy())));
+        if (!in_array($value, self::canceledBySources())) {
+            throw new DomainException(sprintf(self::UNEXPECTED_CATEGORY, implode(', ', self::canceledBySources())));
         }
 
         return $this->setAttribute('by', $value);
