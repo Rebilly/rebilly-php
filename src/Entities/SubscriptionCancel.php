@@ -104,7 +104,7 @@ class SubscriptionCancel extends Resource
      */
     public function getCanceledBy()
     {
-        return $this->getAttribute('cancelledBy');
+        return $this->getAttribute('canceledBy');
     }
 
     /**
@@ -154,7 +154,7 @@ class SubscriptionCancel extends Resource
             throw new DomainException(sprintf(self::UNEXPECTED_CATEGORY, implode(', ', self::cancelCategories())));
         }
 
-        return $this->setAttribute('category', $value);
+        return $this->setAttribute('cancelCategory', $value);
     }
 
     /**
@@ -170,6 +170,6 @@ class SubscriptionCancel extends Resource
             throw new DomainException(sprintf(self::UNEXPECTED_CATEGORY, implode(', ', self::canceledBySources())));
         }
 
-        return $this->setAttribute('by', $value);
+        return $this->setAttribute('canceledBy', $value);
     }
 }
