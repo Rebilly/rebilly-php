@@ -35,8 +35,8 @@ class SubscriptionCancel extends Resource
     const CATEGORY_DID_NOT_WANT = 'did-not-want';
     const CATEGORY_MISSING_FEATURES = 'missing-features';
     const CATEGORY_BUGS_OR_PROBLEMS = 'bugs-or-problems';
-    const CATEGORY_DO_NOT_REMEMBER = 'suspected-fraud';
-    const CATEGORY_RISK_WARNING = 'contract-expired';
+    const CATEGORY_DO_NOT_REMEMBER = 'do-not-remember';
+    const CATEGORY_RISK_WARNING = 'risk-warning';
     const CATEGORY_TOO_EXPENSIVE = 'too-expensive';
 
     const SOURCE_MERCHANT = 'merchant';
