@@ -34,7 +34,6 @@ final class ApiKeyProvider
      */
     public static function env()
     {
-        putenv(self::ENV_APIKEY.'=K2ZtKoNIhFQg4e3HPgCWQtzRWhg803uTApWzBem');
         return function () {
             return getenv(self::ENV_APIKEY);
         };
