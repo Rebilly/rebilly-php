@@ -1049,6 +1049,7 @@ class ApiTest extends TestCase
                 return $faker->words;
             case 'description':
             case 'richDescription':
+            case 'cancelDescription':
                 return $faker->sentences;
             case 'pan':
                 return $faker->creditCardNumber;
@@ -1269,6 +1270,10 @@ class ApiTest extends TestCase
                         'quantity' => $faker->numberBetween(1, 100),
                     ]
                 ];
+            case 'cancelCategory':
+                return $faker->randomElement(Entities\SubscriptionCancel::cancelCategories());
+            case 'canceledBy':
+                return $faker->randomElement(Entities\SubscriptionCancel::canceledBySources());
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
