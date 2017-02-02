@@ -742,6 +742,7 @@ class ApiTest extends TestCase
             [Entities\PaymentCardMigrationsRequest::class],
             [Entities\Coupons\Coupon::class],
             [Entities\Coupons\Redemption::class],
+            [Entities\ValuesList::class],
         ];
     }
 
@@ -933,6 +934,16 @@ class ApiTest extends TestCase
                 'paymentCardMigrations',
                 Services\PaymentCardMigrationsService::class,
                 Entities\PaymentCardMigrationsRequest::class,
+            ],
+            [
+                'lists',
+                Services\ValuesListService::class,
+                Entities\ValuesList::class,
+            ],
+            [
+                'listsTracking',
+                Services\ValuesListTrackingService::class,
+                Entities\ValuesList::class,
             ],
         ];
     }
@@ -1263,6 +1274,11 @@ class ApiTest extends TestCase
                         'type' => 'discounts-per-redemption',
                         'quantity' => $faker->numberBetween(1, 100),
                     ]
+                ];
+            case 'values':
+                return [
+                    $faker->word,
+                    $faker->numberBetween(1, 100),
                 ];
             case 'cancelCategory':
                 return $faker->randomElement(Entities\SubscriptionCancel::cancelCategories());
