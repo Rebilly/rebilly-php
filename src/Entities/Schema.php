@@ -290,9 +290,6 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'tracking/lists' => function (array $content) {
                 return new Collection(new ValuesList(), $content);
             },
-            'tracking/lists/{listId}' => function (array $content) {
-                return new Collection(new ValuesList(), $content);
-            },
         ];
     }
 

@@ -41,17 +41,4 @@ final class ValuesListTrackingService extends Service
     {
         return $this->client()->get('tracking/lists', $params);
     }
-
-    /**
-     * @param string $listId
-     * @param array|ArrayObject $params
-     *
-     * @throws NotFoundException The resource data does exist
-     *
-     * @return ValuesList[]|Collection
-     */
-    public function searchById($listId, $params = [])
-    {
-        return $this->client()->get('tracking/lists/{listId}', ['listId' => $listId] + (array) $params);
-    }
 }
