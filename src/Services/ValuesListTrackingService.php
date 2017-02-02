@@ -12,7 +12,6 @@ namespace Rebilly\Services;
 
 use ArrayObject;
 use Rebilly\Entities\ValuesList;
-use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Paginator;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
