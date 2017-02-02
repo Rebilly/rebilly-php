@@ -75,7 +75,6 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\GatewayAccountService gatewayAccounts()
  * @method Services\SessionService sessions()
  * @method Services\UserService users()
- * @method Services\EmailCredentialService emailCredentials()
  * @method Services\ThreeDSecureService threeDSecure()
  * @method Services\SubscriptionTrackingService subscriptionTracking()
  * @method Services\ApiTrackingService apiTracking()
@@ -133,7 +132,6 @@ final class Client
         'gatewayAccounts' => Services\GatewayAccountService::class,
         'sessions' => Services\SessionService::class,
         'users' => Services\UserService::class,
-        'emailCredentials' => Services\EmailCredentialService::class,
         'threeDSecure' => Services\ThreeDSecureService::class,
         'websiteWebhookTracking' => Services\WebsiteWebhookTrackingService::class,
         'subscriptionTracking' => Services\SubscriptionTrackingService::class,

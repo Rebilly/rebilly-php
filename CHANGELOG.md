@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Removed
+- [x] Removed Email Credentials API, it is never used.
 
 ## [2.0.6] 2017-01-07
 
@@ -83,7 +85,6 @@ are deprecated.
 - [x] Added API keys management.
 - [x] Added `autopay` (boolean) attribute to Subscription entity.
 - [x] Enabled User management API and Authentication API.
-- [x] Enabled Email Credentials API.
 - [x] Added ability to authentication client with JWT.
 - [x] Enabled Sessions API.
 - [x] Added support of Rate limiting.

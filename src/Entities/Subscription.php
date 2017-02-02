@@ -331,6 +331,30 @@ final class Subscription extends Entity
     }
 
     /**
+     * @return string
+     */
+    public function getCancelCategory()
+    {
+        return $this->getAttribute('cancelCategory');
+    }
+
+    /**
+     * @return string
+     */
+    public function getCanceledBy()
+    {
+        return $this->getAttribute('canceledBy');
+    }
+
+    /**
+     * @return string
+     */
+    public function getCancelDescription()
+    {
+        return $this->getAttribute('cancelDescription');
+    }
+
+    /**
      * @return null|LeadSource
      */
     public function getLeadSource()

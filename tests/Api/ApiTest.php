@@ -736,7 +736,6 @@ class ApiTest extends TestCase
             [Entities\Signup::class],
             [Entities\ResetPassword::class],
             [Entities\Email::class],
-            [Entities\EmailCredential::class],
             [Entities\Login::class],
             [Entities\Dispute::class],
             [Entities\WebsiteWebhookTracking::class],
@@ -902,11 +901,6 @@ class ApiTest extends TestCase
                 Entities\ThreeDSecure::class,
             ],
             [
-                'emailCredentials',
-                Services\EmailCredentialService::class,
-                Entities\EmailCredential::class,
-            ],
-            [
                 'apiKeys',
                 Services\ApiKeyService::class,
                 Entities\ApiKey::class,
@@ -1060,6 +1054,7 @@ class ApiTest extends TestCase
                 return $faker->words;
             case 'description':
             case 'richDescription':
+            case 'cancelDescription':
                 return $faker->sentences;
             case 'pan':
                 return $faker->creditCardNumber;
@@ -1183,6 +1178,10 @@ class ApiTest extends TestCase
                         return $faker->randomElement(Entities\Attachment::allowedTypes());
                     case Entities\Note::class:
                         return $faker->randomElement(Entities\Note::relatedTypes());
+                    default:
+                        throw new InvalidArgumentException(
+                            sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
+                        );
                 }
             case 'method':
             case 'defaultPaymentMethod':
@@ -1226,10 +1225,6 @@ class ApiTest extends TestCase
                 return 'Y';
             case 'port':
                 return $faker->numberBetween(25, 100);
-            case 'authenticationMethod':
-                return $faker->randomElement(Entities\EmailCredential::allowedAuthenticationMethods());
-            case 'encryptionMethod':
-                return $faker->randomElement(Entities\EmailCredential::allowedEncryptionMethods());
             case 'autopay':
                 return $faker->boolean();
             case 'duration':
@@ -1285,6 +1280,10 @@ class ApiTest extends TestCase
                     $faker->word,
                     $faker->numberBetween(1, 100),
                 ];
+            case 'cancelCategory':
+                return $faker->randomElement(Entities\SubscriptionCancel::cancelCategories());
+            case 'canceledBy':
+                return $faker->randomElement(Entities\SubscriptionCancel::canceledBySources());
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
