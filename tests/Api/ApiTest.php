@@ -736,7 +736,6 @@ class ApiTest extends TestCase
             [Entities\Signup::class],
             [Entities\ResetPassword::class],
             [Entities\Email::class],
-            [Entities\EmailCredential::class],
             [Entities\Login::class],
             [Entities\Dispute::class],
             [Entities\WebsiteWebhookTracking::class],
@@ -899,11 +898,6 @@ class ApiTest extends TestCase
                 'threeDSecure',
                 Services\ThreeDSecureService::class,
                 Entities\ThreeDSecure::class,
-            ],
-            [
-                'emailCredentials',
-                Services\EmailCredentialService::class,
-                Entities\EmailCredential::class,
             ],
             [
                 'apiKeys',
@@ -1173,6 +1167,10 @@ class ApiTest extends TestCase
                         return $faker->randomElement(Entities\Attachment::allowedTypes());
                     case Entities\Note::class:
                         return $faker->randomElement(Entities\Note::relatedTypes());
+                    default:
+                        throw new InvalidArgumentException(
+                            sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
+                        );
                 }
             case 'method':
             case 'defaultPaymentMethod':
@@ -1216,10 +1214,6 @@ class ApiTest extends TestCase
                 return 'Y';
             case 'port':
                 return $faker->numberBetween(25, 100);
-            case 'authenticationMethod':
-                return $faker->randomElement(Entities\EmailCredential::allowedAuthenticationMethods());
-            case 'encryptionMethod':
-                return $faker->randomElement(Entities\EmailCredential::allowedEncryptionMethods());
             case 'autopay':
                 return $faker->boolean();
             case 'duration':

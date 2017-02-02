@@ -215,12 +215,6 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'users/{userId}' => function (array $content) {
                 return new User($content);
             },
-            'email-credentials' => function (array $content) {
-                return new Collection(new EmailCredential(), $content);
-            },
-            'email-credentials/{credentialId}' => function (array $content) {
-                return new EmailCredential($content);
-            },
             '3dsecure' => function (array $content) {
                 return new Collection(new ThreeDSecure(), $content);
             },
