@@ -1206,8 +1206,6 @@ class ApiTest extends TestCase
             case 'dynamicDescriptor':
             case 'threeDSecure':
                 return false;
-            case 'threeDSecureType':
-                return 'integrated';
             case 'paymentCardSchemes':
             case 'paymentMethods':
                 return ['Visa'];
