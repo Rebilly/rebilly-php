@@ -193,4 +193,84 @@ final class Transaction extends Entity
     {
         return $this->getAttribute('invoiceIds');
     }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->getAttribute('status');
+    }
+
+    /**
+     * @return array
+     */
+    public function getChildTransactions()
+    {
+        return $this->getAttribute('childTransactions');
+    }
+
+    /**
+     * @return string
+     */
+    public function getGatewayAccountId()
+    {
+        return $this->getAttribute('gatewayAccountId');
+    }
+
+    /**
+     * @return string
+     */
+    public function getGatewayTransactionId()
+    {
+        return $this->getAttribute('gatewayTransactionId');
+    }
+
+    /**
+     * @return string
+     */
+    public function getGatewayName()
+    {
+        return $this->getAttribute('gatewayName');
+    }
+
+    /**
+     * @return string
+     */
+    public function getAcquirerName()
+    {
+        return $this->getAttribute('acquirerName');
+    }
+
+    /**
+     * @return string
+     */
+    public function getMethod()
+    {
+        return $this->getAttribute('method');
+    }
+
+    /**
+     * @return string
+     */
+    public function getBin()
+    {
+        return $this->getAttribute('bin');
+    }
+
+    /**
+     * @return bool
+     */
+    public function has3ds()
+    {
+        return $this->getAttribute('has3ds');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasDcc()
+    {
+        return $this->getAttribute('hasDcc');
+    }
 }
