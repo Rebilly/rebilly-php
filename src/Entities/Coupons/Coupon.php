@@ -19,6 +19,7 @@ use Rebilly\Rest\Resource;
  * ```json
  * {
  *   "redemptionCode"
+ *   "description"
  *   "discount"
  *   "restrictions"
  *   "redemptionsCount"
@@ -48,6 +49,24 @@ final class Coupon extends Resource
     public function setRedemptionCode($value)
     {
         return $this->setAttribute('redemptionCode', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->getAttribute('description');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setDescription($value)
+    {
+        return $this->setAttribute('description', $value);
     }
 
     /**
