@@ -177,4 +177,20 @@ final class Transaction extends Entity
     {
         return $this->getResult() === 'approved';
     }
+
+    /**
+     * @return array
+     */
+    public function getSubscriptionIds()
+    {
+        return $this->getAttribute('subscriptionIds');
+    }
+
+    /**
+     * @return array
+     */
+    public function getInvoiceIds()
+    {
+        return $this->getAttribute('invoiceIds');
+    }
 }
