@@ -69,14 +69,6 @@ final class Transaction extends Entity
     /**
      * @return string
      */
-    public function getUpdatedTime()
-    {
-        return $this->getAttribute('updatedTime');
-    }
-
-    /**
-     * @return string
-     */
     public function getType()
     {
         return $this->getAttribute('type');
@@ -269,7 +261,7 @@ final class Transaction extends Entity
     /**
      * @return bool
      */
-    public function isHas3ds()
+    public function has3ds()
     {
         return $this->getAttribute('has3ds');
     }
@@ -277,7 +269,7 @@ final class Transaction extends Entity
     /**
      * @return bool
      */
-    public function isHasDcc()
+    public function hasDcc()
     {
         return $this->getAttribute('hasDcc');
     }
