@@ -360,24 +360,6 @@ final class GatewayAccount extends Entity
     }
 
     /**
-     * @return null|string
-     */
-    public function getThreeDSecureType()
-    {
-        return $this->getAttribute('threeDSecureType');
-    }
-
-    /**
-     * @param null|string $value
-     *
-     * @return $this
-     */
-    public function setThreeDSecureType($value)
-    {
-        return $this->setAttribute('threeDSecureType', $value);
-    }
-
-    /**
      * @return array
      */
     public function getPaymentCardSchemes()
