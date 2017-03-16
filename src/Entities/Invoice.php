@@ -166,4 +166,12 @@ final class Invoice extends Entity
     {
         return $this->getAttribute('items');
     }
+
+    /**
+     * @return float
+     */
+    public function getShippingAmount()
+    {
+        return $this->getAttribute('shippingAmount');
+    }
 }
