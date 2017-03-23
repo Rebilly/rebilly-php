@@ -945,6 +945,11 @@ class ApiTest extends TestCase
                 Services\ValuesListTrackingService::class,
                 Entities\ValuesList::class,
             ],
+            [
+                'shippingZones',
+                Services\ShippingZoneService::class,
+                Entities\ShippingZone::class,
+            ],
         ];
     }
 
