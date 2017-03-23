@@ -744,7 +744,7 @@ class ApiTest extends TestCase
             [Entities\Coupons\Redemption::class],
             [Entities\ValuesList::class],
             [Entities\Shipping\ShippingZone::class],
-            [Entities\Shipping\Rate::class],
+            //[Entities\Shipping\Rate::class],
         ];
     }
 
@@ -1289,12 +1289,14 @@ class ApiTest extends TestCase
                 return $faker->numberBetween(5, 7);
             case 'maxOrderSubtotal':
                 return $faker->numberBetween(8, 10);
-            case 'price':
-                return $faker->numberBetween(2, 3);
-            case 'countries':
-                return ['US'];
-            case 'isDefault':
-                return false;
+
+        case 'price':
+            return $faker->numberBetween(2, 3);
+
+        case 'countries':
+            return ['US'];
+        case 'isDefault':
+            return false;
             case 'rates':
                 return [
                     Entities\Shipping\Rate::createFromData([
