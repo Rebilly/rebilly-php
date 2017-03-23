@@ -1,11 +1,11 @@
 <?php
 /**
- * This attachment is part of the PHP Rebilly API package.
+ * This file is part of the PHP Rebilly API package.
  *
  * (c) 2015 Rebilly SRL
  *
  * For the full copyright and license information, please view the LICENSE.md
- * attachment that was distributed with this source code.
+ * file that was distributed with this source code.
  */
 
 namespace Rebilly\Entities;
