@@ -33,6 +33,7 @@ final class Product extends Entity
          '51010',
          '31000',
          '30070',
+         null,
      ];
     }
     /**
