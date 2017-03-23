@@ -30,7 +30,7 @@ use Rebilly\Rest\Entity;
  */
 final class ShippingZone extends Entity
 {
-    const MSG_RATES_WRONG = "Rates must be an array of Rate resource";
+    const MSG_RATES_WRONG = "Rates must be an array of Rate resources";
 
     /**
      * @return string

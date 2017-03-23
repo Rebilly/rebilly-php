@@ -1299,9 +1299,9 @@ class ApiTest extends TestCase
                 return [
                     Entities\Shipping\Rate::createFromData([
                         'name' => 'test',
-                        'minOrderSubtotal'=> 4,
-                        'maxOrderSubtotal'=> 10,
-                        'price'=> 5,
+                        'minOrderSubtotal' => 4,
+                        'maxOrderSubtotal' => 10,
+                        'price' => 5,
                         'default' => false,
                         'currency'=> 'USD',
                     ]),
