@@ -62,6 +62,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'attachments/{attachmentId}' => function (array $content) {
                 return new Attachment($content);
             },
+            'products' => function (array $content) {
+                return new Collection(new Product(), $content);
+            },
+            'products/{productId}' => function (array $content) {
+                return new Product($content);
+            },
             'contacts' => function (array $content) {
                 return new Collection(new Contact(), $content);
             },
