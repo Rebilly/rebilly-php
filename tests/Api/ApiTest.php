@@ -1303,7 +1303,7 @@ class ApiTest extends TestCase
                         'maxOrderSubtotal' => 10,
                         'price' => 5,
                         'default' => false,
-                        'currency'=> 'USD',
+                        'currency' => 'USD',
                     ]),
                 ];
             case 'cancelCategory':
