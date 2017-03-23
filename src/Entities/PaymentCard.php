@@ -134,7 +134,7 @@ final class PaymentCard extends Entity
      */
     public function getBillingContactId()
     {
-        return $this->getAttribute('billingContact');
+        return $this->getAttribute('billingContactId');
     }
 
     /**
@@ -144,7 +144,7 @@ final class PaymentCard extends Entity
      */
     public function setBillingContactId($value)
     {
-        return $this->setAttribute('billingContact', $value);
+        return $this->setAttribute('billingContactId', $value);
     }
 
     /**

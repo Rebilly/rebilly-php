@@ -12,6 +12,7 @@ namespace Rebilly\Services;
 
 use ArrayObject;
 use JsonSerializable;
+use Rebilly\Entities\LeadSource;
 use Rebilly\Http\Exception\GoneException;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
@@ -127,5 +128,34 @@ final class PaymentService extends Service
     public function cancel($paymentId)
     {
         return $this->client()->post([], 'queue/payments/{paymentId}/cancel', ['paymentId' => $paymentId]);
+    }
+
+    /**
+     * @param string $paymentId
+     *
+     * @return LeadSource
+     */
+    public function getLeadSource($paymentId)
+    {
+        return $this->client()->get('payments/{paymentId}/lead-source', ['paymentId' => $paymentId]);
+    }
+
+    /**
+     * @param string $paymentId
+     * @param array|JsonSerializable|LeadSource $leadSource
+     *
+     * @return LeadSource
+     */
+    public function updateLeadSource($paymentId, $leadSource)
+    {
+        return $this->client()->put($leadSource, 'payments/{paymentId}/lead-source', ['paymentId' => $paymentId]);
+    }
+
+    /**
+     * @param string $paymentId
+     */
+    public function deleteLeadSource($paymentId)
+    {
+        $this->client()->delete('payments/{paymentId}/lead-source', ['paymentId' => $paymentId]);
     }
 }

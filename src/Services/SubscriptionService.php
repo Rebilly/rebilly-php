@@ -12,6 +12,7 @@ namespace Rebilly\Services;
 
 use ArrayObject;
 use JsonSerializable;
+use Rebilly\Entities\LeadSource;
 use Rebilly\Entities\Subscription;
 use Rebilly\Entities\SubscriptionCancel;
 use Rebilly\Entities\SubscriptionSwitch;
@@ -124,5 +125,34 @@ final class SubscriptionService extends Service
             'subscriptions/{subscriptionId}/switch',
             ['subscriptionId' => $subscriptionId]
         );
+    }
+
+    /**
+     * @param string $subscriptionId
+     *
+     * @return LeadSource
+     */
+    public function getLeadSource($subscriptionId)
+    {
+        return $this->client()->get('subscriptions/{subscriptionId}/lead-source', ['subscriptionId' => $subscriptionId]);
+    }
+
+    /**
+     * @param string $subscriptionId
+     * @param array|JsonSerializable|LeadSource $leadSource
+     *
+     * @return LeadSource
+     */
+    public function updateLeadSource($subscriptionId, $leadSource)
+    {
+        return $this->client()->put($leadSource, 'subscriptions/{subscriptionId}/lead-source', ['subscriptionId' => $subscriptionId]);
+    }
+
+    /**
+     * @param string $subscriptionId
+     */
+    public function deleteLeadSource($subscriptionId)
+    {
+        $this->client()->delete('subscriptions/{subscriptionId}/lead-source', ['subscriptionId' => $subscriptionId]);
     }
 }

@@ -18,14 +18,10 @@ use Rebilly\Entities\PaymentInstruments\PayPalInstrument;
 use Rebilly\Rest\Resource;
 
 /**
- * Class BaseInstrument
- *
- * @author Maksim Tuzov <maksim.tuzov@rebilly.com>
- * @version 0.1
+ * Class PaymentMethodInstrument.
  */
 abstract class PaymentMethodInstrument extends Resource
 {
-    const MSG_UNEXPECTED_METHOD = 'Unexpected method. Only %s method support';
     const MSG_UNSUPPORTED_METHOD = 'Unexpected method. Only %s methods support';
     const MSG_REQUIRED_METHOD = 'Method is required';
 
@@ -41,13 +37,14 @@ abstract class PaymentMethodInstrument extends Resource
      */
     public function __construct(array $data = [])
     {
-        if (!isset($data['method']) || $data['method'] !== $this->methodName()) {
-            throw new DomainException(sprintf(self::MSG_UNEXPECTED_METHOD, $this->methodName()));
-        }
-
-        parent::__construct($data);
+        parent::__construct(['method' => $this->methodName()] + $data);
     }
 
+    /**
+     * @param array $data
+     *
+     * @return PaymentMethodInstrument
+     */
     public static function createFromData(array $data)
     {
         if (!isset($data['method'])) {
@@ -68,10 +65,20 @@ abstract class PaymentMethodInstrument extends Resource
                 $paymentInstrument = new PayPalInstrument($data);
                 break;
             default:
-                throw new DomainException(sprintf(self::MSG_UNSUPPORTED_METHOD, implode(',', self::$supportMethods)));
+                throw new DomainException(
+                    sprintf(self::MSG_UNSUPPORTED_METHOD, implode(',', self::$supportMethods))
+                );
         }
 
         return $paymentInstrument;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMethod()
+    {
+        return $this->getAttribute('method');
     }
 
     /**

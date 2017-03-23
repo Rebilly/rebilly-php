@@ -10,14 +10,15 @@
 
 namespace Rebilly\Rest;
 
-use ArrayIterator;
 use ArrayAccess;
+use ArrayIterator;
 use ArrayObject;
 use Countable;
 use Iterator;
-use LogicException;
 use IteratorAggregate;
 use JsonSerializable;
+use LogicException;
+use Rebilly\Rest\Resource as ApiResource;
 
 /**
  * Class Collection
@@ -33,10 +34,10 @@ class Collection implements JsonSerializable, IteratorAggregate, ArrayAccess, Co
     /** @var Resource */
     private $prototype;
 
-    /** @var Resource[]|Entity[] */
+    /** @var ApiResource[]|Entity[] */
     private $items = [];
 
-    public function __construct(Resource $prototype, $items = [])
+    public function __construct(ApiResource $prototype, $items = [])
     {
         $this->metadata = new ArrayObject();
 
@@ -85,7 +86,7 @@ class Collection implements JsonSerializable, IteratorAggregate, ArrayAccess, Co
     /**
      * {@inheritdoc}
      *
-     * @return Iterator|Resource[]
+     * @return Iterator|ApiResource[]
      */
     public function getIterator()
     {

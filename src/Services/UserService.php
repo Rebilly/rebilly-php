@@ -151,6 +151,18 @@ final class UserService extends Service
     }
 
     /**
+     * @param string $token
+     *
+     * @throws UnprocessableEntityException The token is not valid
+     *
+     * @return User
+     */
+    public function activate($token)
+    {
+        return $this->client()->post([], 'activation/{token}', ['token' => $token]);
+    }
+
+    /**
      * @param string $userId
      * @param array|JsonSerializable|User $data
      *

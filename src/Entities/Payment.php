@@ -14,29 +14,6 @@ use Rebilly\Rest\Entity;
 
 /**
  * Class Payment.
- *
- * ```json
- * {
- *   "id": 'string',
- *   "createdTime": 'datetime',
- *   "updatedTime": 'datetime',
- *   "status": 'enum',
- *   "result": 'enum',
- *   "website": 'string',
- *   "customer": 'string',
- *   "amount": 'float',
- *   "currency": 'currency',
- *   "method": 'enum',
- *   "paymentInstrument": {
- *     "key": "value"
- *   },
- *   "description": 'string'
- *   "customFields": 'array'
- * }
- * ```
- *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
- * @version 0.1
  */
 final class Payment extends Entity
 {
@@ -52,24 +29,6 @@ final class Payment extends Entity
             PaymentMethod::METHOD_PAYMENT_CARD,
             PaymentMethod::METHOD_PAYPAL,
         ];
-    }
-
-    /**
-     * PaymentMethodInstrument|null
-     */
-    private $paymentInstrument;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __construct(array $data = [])
-    {
-        if (isset($data['paymentInstrument'])) {
-            $this->paymentInstrument = PaymentMethodInstrument::createFromData($data['paymentInstrument']);
-            $data['paymentInstrument'] = $this->paymentInstrument->jsonSerialize();
-        }
-
-        parent::__construct($data);
     }
 
 
@@ -201,7 +160,7 @@ final class Payment extends Entity
      */
     public function getPaymentInstrument()
     {
-        return $this->paymentInstrument;
+        return $this->getAttribute('paymentInstrument');
     }
 
     /**
@@ -211,9 +170,17 @@ final class Payment extends Entity
      */
     public function setPaymentInstrument(PaymentMethodInstrument $value)
     {
-        $this->paymentInstrument = $value;
-
         return $this->setAttribute('paymentInstrument', $value->jsonSerialize());
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return PaymentMethodInstrument
+     */
+    public function createPaymentInstrument(array $data)
+    {
+        return PaymentMethodInstrument::createFromData($data);
     }
 
     /**
@@ -250,5 +217,53 @@ final class Payment extends Entity
     public function setInvoiceIds($value)
     {
         return $this->setAttribute('invoiceIds', $value);
+    }
+
+    /**
+     * @return PaymentRetryInstruction
+     */
+    public function getRetryInstruction()
+    {
+        return $this->getAttribute('retryInstruction');
+    }
+
+    /**
+     * @param PaymentRetryInstruction $value
+     *
+     * @return $this
+     */
+    public function setRetryInstruction(PaymentRetryInstruction $value)
+    {
+        return $this->setAttribute('retryInstruction', $value->jsonSerialize());
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return PaymentRetryInstruction
+     */
+    public function createRetryInstruction(array $data)
+    {
+        return new PaymentRetryInstruction($data);
+    }
+
+    /**
+     * @return int
+     */
+    public function getRetryNumber()
+    {
+        return $this->getAttribute('retryNumber');
+    }
+
+    /**
+     * @return null|LeadSource
+     */
+    public function getLeadSource()
+    {
+        if ($this->hasEmbeddedResource('leadSource')) {
+            return new LeadSource($this->getEmbeddedResource('leadSource'));
+        } else {
+            return null;
+        }
     }
 }

@@ -22,10 +22,25 @@ use Rebilly\Rest\Resource;
 class SubscriptionCancel extends Resource
 {
     const MSG_UNEXPECTED_POLICY = 'Unexpected type. Only %s types support';
+    const UNEXPECTED_CATEGORY = 'Unexpected cancel category. Only %s categories are supported';
+    const UNEXPECTED_CANCEL_SOURCE = 'Unexpected cancel source. Only %s cancel sources are supported';
 
     const AT_NEXT_RENEWAL = 'at-next-renewal';
     const NOW = 'now';
     const NOW_WITH_PRORATA_CREDIT = 'now-with-prorata-credit';
+
+    const CATEGORY_OTHER = 'other';
+    const CATEGORY_BILLING_FAILURE  = 'billing-failure';
+    const CATEGORY_DID_NOT_USE = 'did-not-use';
+    const CATEGORY_DID_NOT_WANT = 'did-not-want';
+    const CATEGORY_MISSING_FEATURES = 'missing-features';
+    const CATEGORY_BUGS_OR_PROBLEMS = 'bugs-or-problems';
+    const CATEGORY_DO_NOT_REMEMBER = 'do-not-remember';
+    const CATEGORY_RISK_WARNING = 'risk-warning';
+    const CATEGORY_TOO_EXPENSIVE = 'too-expensive';
+
+    const SOURCE_MERCHANT = 'merchant';
+    const SOURCE_CUSTOMER = 'customer';
 
     /**
      * @return array
@@ -40,11 +55,74 @@ class SubscriptionCancel extends Resource
     }
 
     /**
+     * @return array
+     */
+    public static function cancelCategories()
+    {
+        return [
+            self::CATEGORY_OTHER,
+            self::CATEGORY_BILLING_FAILURE,
+            self::CATEGORY_DID_NOT_USE,
+            self::CATEGORY_DID_NOT_WANT,
+            self::CATEGORY_MISSING_FEATURES,
+            self::CATEGORY_BUGS_OR_PROBLEMS,
+            self::CATEGORY_DO_NOT_REMEMBER,
+            self::CATEGORY_RISK_WARNING,
+            self::CATEGORY_TOO_EXPENSIVE,
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public static function canceledBySources()
+    {
+        return [
+            self::SOURCE_MERCHANT,
+            self::SOURCE_CUSTOMER,
+        ];
+    }
+
+    /**
      * @return string
      */
     public function getPolicy()
     {
         return $this->getAttribute('policy');
+    }
+
+    /**
+     * @return string
+     */
+    public function getCancelCategory()
+    {
+        return $this->getAttribute('cancelCategory');
+    }
+
+    /**
+     * @return string
+     */
+    public function getCanceledBy()
+    {
+        return $this->getAttribute('canceledBy');
+    }
+
+    /**
+     * @return string
+     */
+    public function getCancelDescription()
+    {
+        return $this->getAttribute('cancelDescription');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return SubscriptionCancel
+     */
+    public function setCancelDescription($value)
+    {
+        return $this->setAttribute('cancelDescription', $value);
     }
 
     /**
@@ -61,5 +139,37 @@ class SubscriptionCancel extends Resource
         }
 
         return $this->setAttribute('policy', $value);
+    }
+
+    /**
+     * @param string $value
+     *
+     * @throws DomainException
+     *
+     * @return SubscriptionCancel
+     */
+    public function setCancelCategory($value)
+    {
+        if (!in_array($value, self::cancelCategories())) {
+            throw new DomainException(sprintf(self::UNEXPECTED_CATEGORY, implode(', ', self::cancelCategories())));
+        }
+
+        return $this->setAttribute('cancelCategory', $value);
+    }
+
+    /**
+     * @param string $value
+     *
+     * @throws DomainException
+     *
+     * @return SubscriptionCancel
+     */
+    public function setCanceledBy($value)
+    {
+        if (!in_array($value, self::canceledBySources())) {
+            throw new DomainException(sprintf(self::UNEXPECTED_CATEGORY, implode(', ', self::canceledBySources())));
+        }
+
+        return $this->setAttribute('canceledBy', $value);
     }
 }

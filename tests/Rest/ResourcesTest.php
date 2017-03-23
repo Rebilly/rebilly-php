@@ -209,6 +209,44 @@ class ResourcesTest extends TestCase
 
     /**
      * @test
+     */
+    public function useComplexResourceFields()
+    {
+        $resource = new EntityStub();
+
+        $this->assertNull($resource->getComplexField());
+
+        $resource->setComplexField(new EntityStub());
+
+        $this->assertInstanceOf(EntityStub::class, $resource->getComplexField());
+
+        $json = $resource->jsonSerialize();
+
+        $this->assertArrayHasKey('complexField', $json);
+        $this->assertTrue(is_array($json['complexField']));
+    }
+
+    /**
+     * @test
+     */
+    public function useComplexResourceFieldsInCollection()
+    {
+        $collection = new Collection(
+            new EntityStub(),
+            [
+                [
+                    'complexField' => [],
+                ],
+            ]
+        );
+
+        $this->assertCount(1, $collection);
+        $this->assertInstanceOf(EntityStub::class, $collection[0]);
+        $this->assertInstanceOf(EntityStub::class, $collection[0]->getComplexField());
+    }
+
+    /**
+     * @test
      * @depends initFactory
      *
      * @param Factory $factory

@@ -89,4 +89,12 @@ final class LayoutService extends Service
     {
         return $this->client()->put($data, 'layouts/{layoutId}', ['layoutId' => $layoutId]);
     }
+
+    /**
+     * @param string $layoutId
+     */
+    public function delete($layoutId)
+    {
+        $this->client()->delete('layouts/{layoutId}', ['layoutId' => $layoutId]);
+    }
 }

@@ -75,7 +75,6 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\GatewayAccountService gatewayAccounts()
  * @method Services\SessionService sessions()
  * @method Services\UserService users()
- * @method Services\EmailCredentialService emailCredentials()
  * @method Services\ThreeDSecureService threeDSecure()
  * @method Services\SubscriptionTrackingService subscriptionTracking()
  * @method Services\ApiTrackingService apiTracking()
@@ -85,6 +84,13 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\CheckoutPageService checkoutPages()
  * @method Services\DisputeService disputes()
  * @method Services\PaymentCardMigrationsService paymentCardMigrations()
+ * @method Services\FileService files()
+ * @method Services\AttachmentService attachments()
+ * @method Services\CouponService coupons()
+ * @method Services\RedemptionService couponsRedemptions()
+ * @method Services\WebsiteWebhookService websiteWebhook()
+ * @method Services\ValuesListService lists()
+ * @method Services\ValuesListTrackingService listsTracking()
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
@@ -94,7 +100,7 @@ final class Client
     const BASE_HOST = 'https://api.rebilly.com';
     const SANDBOX_HOST = 'https://api-sandbox.rebilly.com';
     const CURRENT_VERSION = 'v2.1';
-    const SDK_VERSION = '2.0.4';
+    const SDK_VERSION = '2.0.6';
 
     private static $services = [
         'authenticationOptions' => Services\AuthenticationOptionsService::class,
@@ -118,13 +124,14 @@ final class Client
         'subscriptions' => Services\SubscriptionService::class,
         'transactions' => Services\TransactionService::class,
         'websites' => Services\WebsiteService::class,
+        'files' => Services\FileService::class,
+        'attachments' => Services\AttachmentService::class,
         'notes' => Services\NoteService::class,
         'organizations' => Services\OrganizationService::class,
         'customFields' => Services\CustomFieldService::class,
         'gatewayAccounts' => Services\GatewayAccountService::class,
         'sessions' => Services\SessionService::class,
         'users' => Services\UserService::class,
-        'emailCredentials' => Services\EmailCredentialService::class,
         'threeDSecure' => Services\ThreeDSecureService::class,
         'websiteWebhookTracking' => Services\WebsiteWebhookTrackingService::class,
         'subscriptionTracking' => Services\SubscriptionTrackingService::class,
@@ -133,6 +140,11 @@ final class Client
         'checkoutPages' => Services\CheckoutPageService::class,
         'disputes' => Services\DisputeService::class,
         'paymentCardMigrations' => Services\PaymentCardMigrationsService::class,
+        'coupons' => Services\CouponService::class,
+        'couponsRedemptions' => Services\RedemptionService::class,
+        'websiteWebhook' => Services\WebsiteWebhookService::class,
+        'lists' => Services\ValuesListService::class,
+        'listsTracking' => Services\ValuesListTrackingService::class,
     ];
 
     /** @var array */
@@ -382,14 +394,16 @@ final class Client
             $params = (array) $params;
         }
 
-        // Serialize $payload
-        $payload = json_encode($payload, JSON_FORCE_OBJECT);
+        $data = json_encode($payload, JSON_FORCE_OBJECT);
+        if ($data === false) {
+            $data = $payload;
+        }
 
         $headers['Content-Type'] = 'application/json';
 
         // Prepare request and response objects
         $uri = $this->createUri($path, $params);
-        $request = $this->createRequest($method, $uri, $payload, $headers);
+        $request = $this->createRequest($method, $uri, $data, $headers);
         $response = $this->createResponse();
 
         /**
