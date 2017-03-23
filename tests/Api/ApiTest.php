@@ -1268,7 +1268,7 @@ class ApiTest extends TestCase
                     'currency' => 'USD',
                 ];
             case 'taxCategoryId':
-                return $faker->randomElement(Entities\Product::TAX_CATEGORIES);
+                return $faker->randomElement(Entities\Product::allowedTaxCategories());
             case 'accountingCode':
                 return (string) $faker->numberBetween(1000,10000);
             case 'requiresShipping':

@@ -23,7 +23,7 @@ use Rebilly\Rest\Entity;
  */
 final class Product extends Entity
 {
-    function allowedTaxCategories()
+    public static function allowedTaxCategories()
     {
      return [
          '99999',
