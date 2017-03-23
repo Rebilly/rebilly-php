@@ -23,16 +23,18 @@ use Rebilly\Rest\Entity;
  */
 final class Product extends Entity
 {
-    const TAX_CATEGORIES = [
-        '99999',
-        '20010',
-        '40030',
-        '51020',
-        '51010',
-        '31000',
-        '30070',
-    ];
-
+    function allowedTaxCategories()
+    {
+     return [
+         '99999',
+         '20010',
+         '40030',
+         '51020',
+         '51010',
+         '31000',
+         '30070',
+     ];
+    }
     /**
      * @return string
      */
