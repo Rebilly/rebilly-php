@@ -16,6 +16,7 @@ use InvalidArgumentException;
 use IteratorAggregate;
 use Rebilly\Entities\Coupons\Coupon;
 use Rebilly\Entities\Coupons\Redemption;
+use Rebilly\Entities\Shipping\ShippingZone;
 use Rebilly\Rest\Collection;
 
 /**

@@ -743,6 +743,8 @@ class ApiTest extends TestCase
             [Entities\Coupons\Coupon::class],
             [Entities\Coupons\Redemption::class],
             [Entities\ValuesList::class],
+            [Entities\Shipping\ShippingZone::class],
+            [Entities\Shipping\Rate::class],
         ];
     }
 
@@ -948,7 +950,7 @@ class ApiTest extends TestCase
             [
                 'shippingZones',
                 Services\ShippingZoneService::class,
-                Entities\ShippingZone::class,
+                Entities\Shipping\ShippingZone::class,
             ],
         ];
     }
@@ -1282,6 +1284,27 @@ class ApiTest extends TestCase
                 return [
                     $faker->word,
                     $faker->numberBetween(1, 100),
+                ];
+            case 'minOrderSubtotal':
+                return $faker->numberBetween(5, 7);
+            case 'maxOrderSubtotal':
+                return $faker->numberBetween(8, 10);
+            case 'price':
+                return $faker->numberBetween(2, 3);
+            case 'countries':
+                return ['US'];
+            case 'isDefault':
+                return false;
+            case 'rates':
+                return [
+                    Entities\Shipping\Rate::createFromData([
+                        'name' => 'test',
+                        'minOrderSubtotal'=> 4,
+                        'maxOrderSubtotal'=> 10,
+                        'price'=> 5,
+                        'default' => false,
+                        'currency'=> 'USD',
+                    ]),
                 ];
             case 'cancelCategory':
                 return $faker->randomElement(Entities\SubscriptionCancel::cancelCategories());

@@ -8,8 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Rebilly\Entities;
+namespace Rebilly\Entities\Shipping;
 
+use DomainException;
 use Rebilly\Rest\Entity;
 
 /**
@@ -29,6 +30,8 @@ use Rebilly\Rest\Entity;
  */
 final class ShippingZone extends Entity
 {
+    const MSG_RATES_WRONG = "Rates must be an array of Rate resource";
+
     /**
      * @return string
      */
@@ -64,6 +67,8 @@ final class ShippingZone extends Entity
     }
 
     /**
+     * @param []string $value
+     *
      * @return $this
      */
     public function setCountries($value)
@@ -80,10 +85,16 @@ final class ShippingZone extends Entity
     }
 
     /**
+     * @param []Rate $value
+     *
      * @return $this
      */
     public function setRates($value)
     {
+        if (!is_array($value)) {
+            throw new DomainException(self::MSG_RATES_WRONG);
+        }
+
         return $this->setAttribute('rates', $value);
     }
 
