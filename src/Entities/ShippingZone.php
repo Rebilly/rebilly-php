@@ -13,7 +13,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Entity;
 
 /**
- * Class Attachment
+ * Class ShippingZone
  *
  * ```json
  * {
@@ -88,7 +88,7 @@ final class ShippingZone extends Entity
     }
 
     /**
-     * @return array
+     * @return bool
      */
     public function getIsDefault()
     {
@@ -96,6 +96,8 @@ final class ShippingZone extends Entity
     }
 
     /**
+     * @param $value
+     *
      * @return $this
      */
     public function setIsDefault($value)

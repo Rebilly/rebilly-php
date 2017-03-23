@@ -50,7 +50,7 @@ final class ShippingZoneService extends Service
      * @param array|JsonSerializable|ShippingZone $data
      * @param null $shippingZoneId
      *
-     * @return ShippingZone The input data does not valid
+     * @return ShippingZone
      */
     public function create($data, $shippingZoneId = null)
     {
