@@ -1270,7 +1270,7 @@ class ApiTest extends TestCase
             case 'taxCategoryId':
                 return $faker->randomElement(Entities\Product::TAX_CATEGORIES);
             case 'accountingCode':
-                return $faker->word;
+                return (string) $faker->numberBetween(1000,10000);
             case 'requiresShipping':
                 return $faker->randomElement([true, false]);
             case 'restrictions':
