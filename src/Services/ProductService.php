@@ -50,7 +50,7 @@ final class ProductService extends Service
      * @param array|JsonSerializable|Product $data
      * @param null $productId
      *
-     * @return Product The input data does not valid
+     * @return Product
      */
     public function create($data, $productId = null)
     {

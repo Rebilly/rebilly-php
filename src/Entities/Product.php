@@ -24,7 +24,7 @@ use Rebilly\Rest\Entity;
  */
 final class Product extends Entity
 {
-    const MSG_UNEXPECTED_TAX_CATEGORY = 'Unexpected taxCategory. Only %s categories are supported.';
+    const MSG_UNEXPECTED_TAX_CATEGORY = 'Unexpected taxCategoryId. Only %s categories are supported.';
 
     /**
      * @return array
@@ -100,7 +100,7 @@ final class Product extends Entity
      */
     public function setTaxCategoryId($value)
     {
-        if (!in_array($value, self::allowedTaxCategories())) {
+        if (!in_array($value, self::allowedTaxCategories(), true)) {
             throw new DomainException(sprintf(
                 self::MSG_UNEXPECTED_TAX_CATEGORY,
                 implode(', ', self::allowedTaxCategories())
