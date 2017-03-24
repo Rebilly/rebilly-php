@@ -180,11 +180,12 @@ final class Invoice extends Entity
      */
     public function getTaxes()
     {
-        $taxes = [];
-        foreach ($this->getAttribute('taxes') as $tax) {
-            $taxes[] = new InvoiceTax($tax);
+        $invoiceTaxes = [];
+        $taxes = $this->getAttribute('taxes');
+        foreach ($taxes as $tax) {
+            $invoiceTaxes[] = new InvoiceTax($tax);
         }
 
-        return $taxes;
+        return $invoiceTaxes;
     }
 }

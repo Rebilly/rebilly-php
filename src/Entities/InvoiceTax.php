@@ -10,12 +10,12 @@
 
 namespace Rebilly\Entities;
 
-use Rebilly\Rest\Entity;
+use Rebilly\Rest\Resource;
 
 /**
  * Class InvoiceTax
  */
-final class InvoiceTax extends Entity
+final class InvoiceTax extends Resource
 {
     /**
      * @return string
