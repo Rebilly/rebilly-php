@@ -67,7 +67,7 @@ final class ShippingZone extends Entity
     }
 
     /**
-     * @param []string $value
+     * @param string[] $value
      *
      * @return $this
      */
@@ -85,7 +85,7 @@ final class ShippingZone extends Entity
     }
 
     /**
-     * @param []Rate $value
+     * @param Rate[] $value
      *
      * @return $this
      */

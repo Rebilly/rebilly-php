@@ -80,7 +80,7 @@ class Rate extends Resource
     }
 
     /**
-     * @return mixed
+     * @return float
      */
     public function getName()
     {
@@ -88,7 +88,7 @@ class Rate extends Resource
     }
 
     /**
-     * @param mixed $name
+     * @param string $name
      */
     public function setName($name)
     {
@@ -96,7 +96,7 @@ class Rate extends Resource
     }
 
     /**
-     * @return mixed
+     * @return float
      */
     public function getMinOrderSubtotal()
     {
@@ -104,7 +104,7 @@ class Rate extends Resource
     }
 
     /**
-     * @param mixed $minOrderSubtotal
+     * @param float $minOrderSubtotal
      */
     public function setMinOrderSubtotal($minOrderSubtotal)
     {
@@ -112,7 +112,7 @@ class Rate extends Resource
     }
 
     /**
-     * @return mixed
+     * @return float
      */
     public function getMaxOrderSubtotal()
     {
@@ -120,7 +120,7 @@ class Rate extends Resource
     }
 
     /**
-     * @param mixed $maxOrderSubtotal
+     * @param float $maxOrderSubtotal
      */
     public function setMaxOrderSubtotal($maxOrderSubtotal)
     {
@@ -128,7 +128,7 @@ class Rate extends Resource
     }
 
     /**
-     * @return mixed
+     * @return float
      */
     public function getPrice()
     {
@@ -136,7 +136,7 @@ class Rate extends Resource
     }
 
     /**
-     * @param mixed $price
+     * @param float $price
      */
     public function setPrice($price)
     {
@@ -144,7 +144,7 @@ class Rate extends Resource
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getCurrency()
     {
@@ -152,7 +152,7 @@ class Rate extends Resource
     }
 
     /**
-     * @param mixed $currency
+     * @param string $currency
      */
     public function setCurrency($currency)
     {
