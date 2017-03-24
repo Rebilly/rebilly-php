@@ -176,7 +176,7 @@ final class Invoice extends Entity
     }
 
     /**
-     * @return array
+     * @return array|null
      */
     public function getTaxes()
     {
