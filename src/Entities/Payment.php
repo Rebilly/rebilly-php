@@ -14,30 +14,6 @@ use Rebilly\Rest\Entity;
 
 /**
  * Class Payment.
- *
- * ```json
- * {
- *   "id": 'string',
- *   "createdTime": 'datetime',
- *   "updatedTime": 'datetime',
- *   "status": 'enum',
- *   "result": 'enum',
- *   "website": 'string',
- *   "customer": 'string',
- *   "amount": 'float',
- *   "currency": 'currency',
- *   "method": 'enum',
- *   "paymentInstrument": {
- *     "key": "value"
- *   },
- *   "description": 'string'
- *   "customFields": 'array'
- *   "retriedPaymentId": 'string'
- * }
- * ```
- *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
- * @version 0.1
  */
 final class Payment extends Entity
 {
