@@ -51,6 +51,18 @@ final class Subscription extends Entity
     }
 
     /**
+     * @return null|Customer
+     */
+    public function getCustomer()
+    {
+        if ($this->hasEmbeddedResource('customer')) {
+            return new Customer($this->getEmbeddedResource('customer'));
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * @param string $value
      *
      * @return Subscription
@@ -117,6 +129,18 @@ final class Subscription extends Entity
     }
 
     /**
+     * @return null|Website
+     */
+    public function getWebsite()
+    {
+        if ($this->hasEmbeddedResource('website')) {
+            return new Website($this->getEmbeddedResource('website'));
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * @param string $value
      *
      * @return Subscription
@@ -153,11 +177,45 @@ final class Subscription extends Entity
     }
 
     /**
+     * @return null|Contact
+     */
+    public function getBillingContact()
+    {
+        if ($this->hasEmbeddedResource('billingContact')) {
+            return new Contact($this->getEmbeddedResource('billingContact'));
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setBillingContactId($value)
+    {
+        return $this->setAttribute('billingContactId', $value);
+    }
+
+    /**
      * @return string
      */
     public function getDeliveryContactId()
     {
         return $this->getAttribute('deliveryContactId');
+    }
+
+    /**
+     * @return null|Contact
+     */
+    public function getDeliveryContact()
+    {
+        if ($this->hasEmbeddedResource('deliveryContact')) {
+            return new Contact($this->getEmbeddedResource('deliveryContact'));
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -254,5 +312,57 @@ final class Subscription extends Entity
     public function setAutopay($value)
     {
         return $this->setAttribute('autopay', $value);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getInTrial()
+    {
+        return $this->getAttribute('inTrial');
+    }
+
+    /**
+     * @return int
+     */
+    public function getRebillNumber()
+    {
+        return $this->getAttribute('rebillNumber');
+    }
+
+    /**
+     * @return string
+     */
+    public function getCancelCategory()
+    {
+        return $this->getAttribute('cancelCategory');
+    }
+
+    /**
+     * @return string
+     */
+    public function getCanceledBy()
+    {
+        return $this->getAttribute('canceledBy');
+    }
+
+    /**
+     * @return string
+     */
+    public function getCancelDescription()
+    {
+        return $this->getAttribute('cancelDescription');
+    }
+
+    /**
+     * @return null|LeadSource
+     */
+    public function getLeadSource()
+    {
+        if ($this->hasEmbeddedResource('leadSource')) {
+            return new LeadSource($this->getEmbeddedResource('leadSource'));
+        } else {
+            return null;
+        }
     }
 }

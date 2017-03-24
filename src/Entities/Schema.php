@@ -14,6 +14,9 @@ use ArrayIterator;
 use ArrayAccess;
 use InvalidArgumentException;
 use IteratorAggregate;
+use Rebilly\Entities\Coupons\Coupon;
+use Rebilly\Entities\Coupons\Redemption;
+use Rebilly\Entities\Shipping\ShippingZone;
 use Rebilly\Rest\Collection;
 
 /**
@@ -48,6 +51,30 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'websites/{websiteId}' => function (array $content) {
                 return new Website($content);
             },
+            'files' => function (array $content) {
+                return new Collection(new File(), $content);
+            },
+            'files/{fileId}' => function (array $content) {
+                return new File($content);
+            },
+            'attachments' => function (array $content) {
+                return new Collection(new Attachment(), $content);
+            },
+            'attachments/{attachmentId}' => function (array $content) {
+                return new Attachment($content);
+            },
+            'shipping-zones' => function (array $content) {
+                return new Collection(new ShippingZone(), $content);
+            },
+            'shipping-zones/{shippingZoneId}' => function (array $content) {
+                return new ShippingZone($content);
+            },
+            'products' => function (array $content) {
+                return new Collection(new Product(), $content);
+            },
+            'products/{productId}' => function (array $content) {
+                return new Product($content);
+            },
             'contacts' => function (array $content) {
                 return new Collection(new Contact(), $content);
             },
@@ -59,6 +86,9 @@ final class Schema implements IteratorAggregate, ArrayAccess
             },
             'customers/{customerId}' => function (array $content) {
                 return new Customer($content);
+            },
+            'customers/{customerId}/lead-source' => function (array $content) {
+                return new LeadSource($content);
             },
             'lead-sources' => function (array $content) {
                 return new Collection(new LeadSource(), $content);
@@ -78,6 +108,9 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'invoices/{invoiceId}/items/{invoiceItemId}' => function (array $content) {
                 return new InvoiceItem($content);
             },
+            'invoices/{invoiceId}/lead-source' => function (array $content) {
+                return new LeadSource($content);
+            },
             'plans' => function (array $content) {
                 return new Collection(new Plan(), $content);
             },
@@ -95,6 +128,9 @@ final class Schema implements IteratorAggregate, ArrayAccess
             },
             'subscriptions/{subscriptionId}' => function (array $content) {
                 return new Subscription($content);
+            },
+            'subscriptions/{subscriptionId}/lead-source' => function (array $content) {
+                return new LeadSource($content);
             },
             'payment-cards' => function (array $content) {
                 return new Collection(new PaymentCard(), $content);
@@ -119,6 +155,9 @@ final class Schema implements IteratorAggregate, ArrayAccess
             },
             'payments/{id}' => function (array $content) {
                 return new Payment($content);
+            },
+            'payments/{id}/lead-source' => function (array $content) {
+                return new LeadSource($content);
             },
             'transactions' => function (array $content) {
                 return new Collection(new Transaction(), $content);
@@ -189,12 +228,6 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'users/{userId}' => function (array $content) {
                 return new User($content);
             },
-            'email-credentials' => function (array $content) {
-                return new Collection(new EmailCredential(), $content);
-            },
-            'email-credentials/{credentialId}' => function (array $content) {
-                return new EmailCredential($content);
-            },
             '3dsecure' => function (array $content) {
                 return new Collection(new ThreeDSecure(), $content);
             },
@@ -242,6 +275,33 @@ final class Schema implements IteratorAggregate, ArrayAccess
             },
             'payment-cards-migrations' => function (array $content) {
                 return new Collection(new PaymentCard(), $content);
+            },
+            'coupons' => function (array $content) {
+                return new Collection(new Coupon(), $content);
+            },
+            'coupons/{redemptionCode}' => function (array $content) {
+                return new Coupon($content);
+            },
+            'coupons-redemptions' => function (array $content) {
+                return new Collection(new Redemption(), $content);
+            },
+            'coupons-redemptions/{redemptionId}' => function (array $content) {
+                return new Redemption($content);
+            },
+            'websites/{websiteId}/webhook' => function (array $content) {
+                return new WebsiteWebhook($content);
+            },
+            'lists' => function (array $content) {
+                return new Collection(new ValuesList(), $content);
+            },
+            'lists/{listId}' => function (array $content) {
+                return new ValuesList($content);
+            },
+            'lists/{listId}/{version}' => function (array $content) {
+                return new ValuesList($content);
+            },
+            'tracking/lists' => function (array $content) {
+                return new Collection(new ValuesList(), $content);
             },
         ];
     }

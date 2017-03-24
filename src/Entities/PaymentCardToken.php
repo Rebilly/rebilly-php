@@ -31,7 +31,10 @@ final class PaymentCardToken extends Entity
      */
     public function setPaymentInstrument(PaymentInstrument $value)
     {
-        return $this->setAttribute('paymentInstrument', $value->jsonSerialize());
+        $this->setAttribute('method', $value->name());
+        $this->setAttribute('paymentInstrument', $value->jsonSerialize());
+
+        return $this;
     }
 
     /**
@@ -310,7 +313,10 @@ final class PaymentCardToken extends Entity
         $data = (array) $this->getAttribute('paymentInstrument');
         $data[$attribute] = $value;
 
-        return $this->setAttribute('paymentInstrument', $data);
+        $this->setAttribute('method', PaymentMethod::METHOD_PAYMENT_CARD);
+        $this->setAttribute('paymentInstrument', $data);
+
+        return $this;
     }
 
     /**

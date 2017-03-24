@@ -20,4 +20,10 @@ use Rebilly\Rest\Resource;
  */
 abstract class PaymentInstrument extends Resource
 {
+    /**
+     * Return the method name
+     *
+     * @return string
+     */
+    abstract public function name();
 }

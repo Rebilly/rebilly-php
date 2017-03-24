@@ -38,6 +38,7 @@ final class Session extends Entity
     const METHOD_PUT = 'PUT';
     const METHOD_DELETE = 'DELETE';
     const METHOD_HEAD = 'HEAD';
+    const METHOD_PATCH = 'PATCH';
 
     const MSG_UNEXPECTED_RESOURCE = 'Unexpected resource. Only %s resources support';
     const MSG_INVALID_RESOURCE_IDS = 'Incorrect resource ids format. It should be empty or an array';
@@ -181,6 +182,7 @@ final class Session extends Entity
             self::METHOD_PUT,
             self::METHOD_DELETE,
             self::METHOD_HEAD,
+            self::METHOD_PATCH,
         ];
     }
 }

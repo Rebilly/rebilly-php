@@ -11,8 +11,11 @@
 namespace Rebilly\Tests\Api;
 
 use InvalidArgumentException;
+use JsonSerializable;
 use Rebilly\Client;
 use Rebilly\Entities;
+use Rebilly\Entities\Customer;
+use Rebilly\Entities\PaymentMethodInstrument;
 use Rebilly\Http\CurlHandler;
 use Rebilly\Paginator;
 use Rebilly\Rest;
@@ -42,6 +45,7 @@ class ApiTest extends TestCase
         $getters = [];
         $setters = [];
         $values = [];
+        $objects = [];
 
         if ($id !== null) {
             $values[$id] = $this->getFakeValue($id, $class);
@@ -66,15 +70,38 @@ class ApiTest extends TestCase
         }
 
         foreach ($setters as $attribute => $method) {
-            $values[$attribute] = $this->getFakeValue($attribute, $class);
-            $resource->$method($values[$attribute]);
+            $value = $this->getFakeValue($attribute, $class);
+            $values[$attribute] = $value;
+
+            // Test attributes factory
+            if (is_array($value) && method_exists($resource, "create{$attribute}")) {
+                $value = $resource->{"create{$attribute}"}($value);
+                $objects[$attribute] = $value;
+            }
+
+            $resource->$method($value);
         }
 
         foreach ($getters as $attribute => $method) {
-            if (isset($values[$attribute])) {
-                $this->assertEquals($values[$attribute], $resource->$method(), 'Invalid ' . $attribute);
+            $value = $resource->$method();
+
+            if (isset($objects[$attribute])) {
+                if ($value instanceof JsonSerializable) {
+                    $value = $value->jsonSerialize();
+                } elseif (is_array($value)) {
+                    $value = array_map(
+                        function (JsonSerializable $item) {
+                            return $item->jsonSerialize();
+                        },
+                        $value
+                    );
+                }
+
+                $this->assertEquals($values[$attribute], $value, 'Invalid ' . $attribute);
+            } elseif (isset($values[$attribute])) {
+                $this->assertEquals($values[$attribute], $value, 'Invalid ' . $attribute);
             } else {
-                $this->assertNull($resource->$method());
+                $this->assertNull($value);
             }
         }
 
@@ -83,6 +110,7 @@ class ApiTest extends TestCase
         $this->assertTrue(is_array($json));
         $this->assertNotEmpty($json);
     }
+
 
     /**
      * @test
@@ -166,6 +194,71 @@ class ApiTest extends TestCase
                 $service->delete($this->getFakeValue($id, $entityClass));
             }
         }
+    }
+
+    /**
+     * @test
+     */
+    public function customerService()
+    {
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->getMock(CurlHandler::class);
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+
+        $service = $client->customers();
+
+        $customers = [
+            [
+                "id" => "foo",
+                "email" => "user@example.com",
+                "firstName" => "string",
+                "lastName" => "string",
+                "ipAddress" => "192.168.0.1",
+                "defaultPaymentInstrument" => [
+                    'method' => 'cash',
+                ],
+                "createdTime" => "2016-10-18T06:39:36Z",
+                "updatedTime" => "2016-10-18T06:39:36Z",
+            ],
+            [
+                "id" => "bar",
+                "email" => "user@example.com",
+                "firstName" => "string",
+                "lastName" => "string",
+                "ipAddress" => "192.168.0.1",
+                "defaultPaymentInstrument" => null,
+                "createdTime" => "2016-10-18T06:39:36Z",
+                "updatedTime" => "2016-10-18T06:39:36Z",
+            ],
+        ];
+
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will(
+                $this->returnValue(
+                    $client
+                        ->createResponse()
+                        ->withBody(Psr7\stream_for(json_encode($customers)))
+                )
+            );
+
+        $result = $service->search();
+
+        $this->assertCount(2, $result);
+        $this->assertInstanceOf(Rest\Collection::class, $result);
+
+        $this->assertInstanceOf(Customer::class, $result[0]);
+        $this->assertSame($customers[0]['id'], $result[0]->getId());
+        $this->assertInstanceOf(PaymentMethodInstrument::class, $result[0]->getDefaultPaymentInstrument());
+
+        $this->assertInstanceOf(Customer::class, $result[1]);
+        $this->assertSame($customers[1]['id'], $result[1]->getId());
+        $this->assertNull($result[1]->getDefaultPaymentInstrument());
     }
 
     /**
@@ -600,12 +693,14 @@ class ApiTest extends TestCase
     public function provideEntityClasses()
     {
         return [
+            [Entities\Attachment::class],
             [Entities\AuthenticationOptions::class, null],
             [Entities\AuthenticationToken::class, 'token'],
             [Entities\Blacklist::class],
             [Entities\Contact::class],
             [Entities\Customer::class],
             [Entities\CustomerCredential::class],
+            [Entities\File::class],
             [Entities\Invoice::class],
             [Entities\InvoiceItem::class],
             [Entities\Layout::class],
@@ -641,11 +736,14 @@ class ApiTest extends TestCase
             [Entities\Signup::class],
             [Entities\ResetPassword::class],
             [Entities\Email::class],
-            [Entities\EmailCredential::class],
             [Entities\Login::class],
             [Entities\Dispute::class],
             [Entities\WebsiteWebhookTracking::class],
             [Entities\PaymentCardMigrationsRequest::class],
+            [Entities\Coupons\Coupon::class],
+            [Entities\Coupons\Redemption::class],
+            [Entities\ValuesList::class],
+            [Entities\Product::class],
         ];
     }
 
@@ -656,6 +754,11 @@ class ApiTest extends TestCase
     public function provideServiceClasses()
     {
         return [
+            [
+                'attachments',
+                Services\AttachmentService::class,
+                Entities\Attachment::class,
+            ],
             [
                 'authenticationOptions',
                 Services\AuthenticationOptionsService::class,
@@ -693,6 +796,11 @@ class ApiTest extends TestCase
                 Services\InvoiceItemService::class,
                 Entities\InvoiceItem::class,
             ],*/
+            [
+                'files',
+                Services\FileService::class,
+                Entities\File::class,
+            ],
             [
                 'invoices',
                 Services\InvoiceService::class,
@@ -794,11 +902,6 @@ class ApiTest extends TestCase
                 Entities\ThreeDSecure::class,
             ],
             [
-                'emailCredentials',
-                Services\EmailCredentialService::class,
-                Entities\EmailCredential::class,
-            ],
-            [
                 'apiKeys',
                 Services\ApiKeyService::class,
                 Entities\ApiKey::class,
@@ -833,6 +936,26 @@ class ApiTest extends TestCase
                 Services\PaymentCardMigrationsService::class,
                 Entities\PaymentCardMigrationsRequest::class,
             ],
+            [
+                'products',
+                Services\ProductService::class,
+                Entities\Product::class,
+            ],
+            [
+                'lists',
+                Services\ValuesListService::class,
+                Entities\ValuesList::class,
+            ],
+            [
+                'listsTracking',
+                Services\ValuesListTrackingService::class,
+                Entities\ValuesList::class,
+            ],
+            [
+                'shippingZones',
+                Services\ShippingZoneService::class,
+                Entities\Shipping\ShippingZone::class,
+            ],
         ];
     }
 
@@ -852,6 +975,7 @@ class ApiTest extends TestCase
             case 'id':
             case 'password':
             case 'currentPassword':
+            case 'fileId':
             case 'newPassword':
             case 'customerId':
             case 'contactId':
@@ -871,6 +995,7 @@ class ApiTest extends TestCase
             case 'transactionId':
             case 'fromGatewayAccountId':
             case 'toGatewayAccountId':
+            case 'redemptionCode':
                 return $faker->uuid;
             case 'dueTime':
             case 'expiredTime':
@@ -882,6 +1007,7 @@ class ApiTest extends TestCase
             case 'downtimeEnd':
             case 'postedTime':
             case 'deadlineTime':
+            case 'issuedTime':
                 return $faker->date('Y-m-d H:i:s');
             case 'unitPrice':
             case 'amount':
@@ -939,6 +1065,7 @@ class ApiTest extends TestCase
                 return $faker->words;
             case 'description':
             case 'richDescription':
+            case 'cancelDescription':
                 return $faker->sentences;
             case 'pan':
                 return $faker->creditCardNumber;
@@ -988,6 +1115,10 @@ class ApiTest extends TestCase
             case 'country':
             case 'phoneNumber':
                 return $faker->$attribute;
+            case 'extension':
+                return $faker->randomElement(Entities\File::allowedTypes());
+            case 'tags':
+                return [$faker->word];
             case 'type':
             case 'datetimeFormat':
                 switch ($class) {
@@ -1053,7 +1184,16 @@ class ApiTest extends TestCase
             case 'payment':
                 return []; // TODO
             case 'relatedType':
-                return $faker->randomElement(Entities\Note::relatedTypes());
+                switch ($class) {
+                    case Entities\Attachment::class:
+                        return $faker->randomElement(Entities\Attachment::allowedTypes());
+                    case Entities\Note::class:
+                        return $faker->randomElement(Entities\Note::relatedTypes());
+                    default:
+                        throw new InvalidArgumentException(
+                            sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
+                        );
+                }
             case 'method':
             case 'defaultPaymentMethod':
                 switch ($class) {
@@ -1077,8 +1217,6 @@ class ApiTest extends TestCase
             case 'dynamicDescriptor':
             case 'threeDSecure':
                 return false;
-            case 'threeDSecureType':
-                return 'integrated';
             case 'paymentCardSchemes':
             case 'paymentMethods':
                 return ['Visa'];
@@ -1096,10 +1234,6 @@ class ApiTest extends TestCase
                 return 'Y';
             case 'port':
                 return $faker->numberBetween(25, 100);
-            case 'authenticationMethod':
-                return $faker->randomElement(Entities\EmailCredential::allowedAuthenticationMethods());
-            case 'encryptionMethod':
-                return $faker->randomElement(Entities\EmailCredential::allowedEncryptionMethods());
             case 'autopay':
                 return $faker->boolean();
             case 'duration':
@@ -1114,9 +1248,11 @@ class ApiTest extends TestCase
                         return new Entities\PaymentInstruments\PaymentCardPaymentInstrument();
                 }
             case 'defaultPaymentInstrument':
-                return new Entities\PaymentInstruments\PaymentCardInstrument([
-                    'method' => Entities\PaymentMethod::METHOD_PAYMENT_CARD
-                ]);
+                return [
+                    'method' => Entities\PaymentMethod::METHOD_PAYMENT_CARD,
+                ];
+            case 'retryInstruction':
+                return new Entities\PaymentRetryInstruction();
             case 'reasonCode':
                 return '1000';
             case 'status':
@@ -1130,6 +1266,52 @@ class ApiTest extends TestCase
                 }
             case 'paymentCardIds':
                 return [$faker->uuid];
+            case 'discount':
+                return [
+                    'type' => 'fixed',
+                    'amount' => $faker->numberBetween(1, 100),
+                    'currency' => 'USD',
+                ];
+            case 'taxCategoryId':
+                return $faker->randomElement(Entities\Product::allowedTaxCategories());
+            case 'accountingCode':
+                return (string) $faker->numberBetween(1000, 10000);
+            case 'requiresShipping':
+                return $faker->randomElement([true, false]);
+            case 'restrictions':
+            case 'additionalRestrictions':
+                return [
+                    [
+                        'type' => 'restrict-to-invoices',
+                        'invoiceIds' => ['foo', 'bar'],
+                    ],
+                    [
+                        'type' => 'discounts-per-redemption',
+                        'quantity' => $faker->numberBetween(1, 100),
+                    ]
+                ];
+            case 'countries':
+                return ['US'];
+            case 'rates':
+                return [
+                    Entities\Shipping\Rate::createFromData([
+                        'name' => 'test',
+                        'minOrderSubtotal' => 4,
+                        'maxOrderSubtotal' => 10,
+                        'price' => 5,
+                        'default' => false,
+                        'currency' => 'USD',
+                    ]),
+                ];
+            case 'values':
+                return [
+                    $faker->word,
+                    $faker->numberBetween(1, 100),
+                ];
+            case 'cancelCategory':
+                return $faker->randomElement(Entities\SubscriptionCancel::cancelCategories());
+            case 'canceledBy':
+                return $faker->randomElement(Entities\SubscriptionCancel::canceledBySources());
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)

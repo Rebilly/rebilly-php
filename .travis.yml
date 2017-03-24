@@ -8,13 +8,12 @@ matrix:
     - php: 5.5
     - php: 5.6
     - php: 7
+    - php: 7.1
       env:
         - EXECUTE_COVERAGE=true
         - EXECUTE_CS_CHECK=true
-    - php: 7.1
     - php: hhvm
   allow_failures:
-    - php: 7.1
     - php: hhvm
 
 notifications:
