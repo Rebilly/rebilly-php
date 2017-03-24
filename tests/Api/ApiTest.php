@@ -1282,8 +1282,6 @@ class ApiTest extends TestCase
                 return $faker->randomElement(Entities\SubscriptionCancel::cancelCategories());
             case 'canceledBy':
                 return $faker->randomElement(Entities\SubscriptionCancel::canceledBySources());
-            case 'taxes':
-                return [['description' => 'Test tax', 'amount' => 5.5]];
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)

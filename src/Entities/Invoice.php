@@ -176,7 +176,7 @@ final class Invoice extends Entity
     }
 
     /**
-     * @return array|null
+     * @return array
      */
     public function getTaxes()
     {
@@ -186,6 +186,8 @@ final class Invoice extends Entity
             foreach ($taxes as $tax) {
                 $invoiceTaxes[] = new InvoiceTax($tax);
             }
+        } else {
+            $invoiceTaxes = $taxes;
         }
 
         return $invoiceTaxes;
