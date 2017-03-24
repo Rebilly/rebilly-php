@@ -32,6 +32,7 @@ use Rebilly\Rest\Entity;
  *   },
  *   "description": 'string'
  *   "customFields": 'array'
+ *   "retriedPaymentId": 'string'
  * }
  * ```
  *
@@ -250,5 +251,13 @@ final class Payment extends Entity
     public function setInvoiceIds($value)
     {
         return $this->setAttribute('invoiceIds', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getRetriedPaymentId()
+    {
+        return $this->getAttribute('retriedPaymentId');
     }
 }
