@@ -182,8 +182,10 @@ final class Invoice extends Entity
     {
         $invoiceTaxes = [];
         $taxes = $this->getAttribute('taxes');
-        foreach ($taxes as $tax) {
-            $invoiceTaxes[] = new InvoiceTax($tax);
+        if (count($taxes) > 0) {
+            foreach ($taxes as $tax) {
+                $invoiceTaxes[] = new InvoiceTax($tax);
+            }
         }
 
         return $invoiceTaxes;
