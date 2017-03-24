@@ -78,6 +78,7 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\ThreeDSecureService threeDSecure()
  * @method Services\SubscriptionTrackingService subscriptionTracking()
  * @method Services\ApiTrackingService apiTracking()
+ * @method Services\ShippingZoneService shippingZones()
  * @method Services\SchedulePaymentService scheduledPayments()
  * @method Services\WebsiteWebhookTrackingService websiteWebhookTracking()
  * @method Services\ApiKeyService apiKeys()
@@ -147,6 +148,7 @@ final class Client
         'websiteWebhook' => Services\WebsiteWebhookService::class,
         'lists' => Services\ValuesListService::class,
         'listsTracking' => Services\ValuesListTrackingService::class,
+        'shippingZones' => Services\ShippingZoneService::class,
     ];
 
     /** @var array */

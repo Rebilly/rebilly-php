@@ -951,6 +951,11 @@ class ApiTest extends TestCase
                 Services\ValuesListTrackingService::class,
                 Entities\ValuesList::class,
             ],
+            [
+                'shippingZones',
+                Services\ShippingZoneService::class,
+                Entities\Shipping\ShippingZone::class,
+            ],
         ];
     }
 
@@ -1284,6 +1289,19 @@ class ApiTest extends TestCase
                         'type' => 'discounts-per-redemption',
                         'quantity' => $faker->numberBetween(1, 100),
                     ]
+                ];
+            case 'countries':
+                return ['US'];
+            case 'rates':
+                return [
+                    Entities\Shipping\Rate::createFromData([
+                        'name' => 'test',
+                        'minOrderSubtotal' => 4,
+                        'maxOrderSubtotal' => 10,
+                        'price' => 5,
+                        'default' => false,
+                        'currency' => 'USD',
+                    ]),
                 ];
             case 'values':
                 return [
