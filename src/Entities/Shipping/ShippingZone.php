@@ -107,7 +107,7 @@ final class ShippingZone extends Entity
     }
 
     /**
-     * @param $value
+     * @param bool $value
      *
      * @return $this
      */
