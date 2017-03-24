@@ -743,6 +743,7 @@ class ApiTest extends TestCase
             [Entities\Coupons\Coupon::class],
             [Entities\Coupons\Redemption::class],
             [Entities\ValuesList::class],
+            [Entities\Product::class],
         ];
     }
 
@@ -934,6 +935,11 @@ class ApiTest extends TestCase
                 'paymentCardMigrations',
                 Services\PaymentCardMigrationsService::class,
                 Entities\PaymentCardMigrationsRequest::class,
+            ],
+            [
+                'products',
+                Services\ProductService::class,
+                Entities\Product::class,
             ],
             [
                 'lists',
@@ -1261,6 +1267,12 @@ class ApiTest extends TestCase
                     'amount' => $faker->numberBetween(1, 100),
                     'currency' => 'USD',
                 ];
+            case 'taxCategoryId':
+                return $faker->randomElement(Entities\Product::allowedTaxCategories());
+            case 'accountingCode':
+                return (string) $faker->numberBetween(1000, 10000);
+            case 'requiresShipping':
+                return $faker->randomElement([true, false]);
             case 'restrictions':
             case 'additionalRestrictions':
                 return [

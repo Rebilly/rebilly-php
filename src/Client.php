@@ -86,6 +86,7 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\PaymentCardMigrationsService paymentCardMigrations()
  * @method Services\FileService files()
  * @method Services\AttachmentService attachments()
+ * @method Services\ProductService products()
  * @method Services\CouponService coupons()
  * @method Services\RedemptionService couponsRedemptions()
  * @method Services\WebsiteWebhookService websiteWebhook()
@@ -126,6 +127,7 @@ final class Client
         'websites' => Services\WebsiteService::class,
         'files' => Services\FileService::class,
         'attachments' => Services\AttachmentService::class,
+        'products' => Services\ProductService::class,
         'notes' => Services\NoteService::class,
         'organizations' => Services\OrganizationService::class,
         'customFields' => Services\CustomFieldService::class,
