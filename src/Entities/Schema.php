@@ -69,6 +69,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'shipping-zones/{shippingZoneId}' => function (array $content) {
                 return new ShippingZone($content);
             },
+            'products' => function (array $content) {
+                return new Collection(new Product(), $content);
+            },
+            'products/{productId}' => function (array $content) {
+                return new Product($content);
+            },
             'contacts' => function (array $content) {
                 return new Collection(new Contact(), $content);
             },
