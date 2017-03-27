@@ -220,6 +220,14 @@ final class Payment extends Entity
     }
 
     /**
+     * @return string
+     */
+    public function getRetriedPaymentId()
+    {
+        return $this->getAttribute('retriedPaymentId');
+    }
+
+    /**
      * @return PaymentRetryInstruction
      */
     public function getRetryInstruction()
