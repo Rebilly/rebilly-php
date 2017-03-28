@@ -31,12 +31,26 @@ final class Customer extends Entity
     /**
      * @return string
      */
+    public function getPrimaryContactId()
+    {
+        return $this->getAttribute('primaryContactId');
+    }
+
+    /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see Contact::getEmail()
+     *
+     * @return string
+     */
     public function getEmail()
     {
         return $this->getAttribute('email');
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see Contact::setEmail()
+     *
      * @param string $value
      *
      * @return $this
@@ -47,6 +61,9 @@ final class Customer extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see Contact::getFirstName()
+     *
      * @return string
      */
     public function getFirstName()
@@ -55,6 +72,9 @@ final class Customer extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see Contact::setFirstName()
+     *
      * @param string $value
      *
      * @return $this
@@ -65,6 +85,9 @@ final class Customer extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see Contact::getLastName()
+     *
      * @return string
      */
     public function getLastName()
@@ -73,6 +96,9 @@ final class Customer extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see Contact::setLastName()
+     *
      * @param string $value
      *
      * @return $this
@@ -161,6 +187,18 @@ final class Customer extends Entity
     {
         if ($this->hasEmbeddedResource('leadSource')) {
             return new LeadSource($this->getEmbeddedResource('leadSource'));
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * @return null|Contact
+     */
+    public function getPrimaryContact()
+    {
+        if ($this->hasEmbeddedResource('primaryContact')) {
+            return new Contact($this->getEmbeddedResource('primaryContact'));
         } else {
             return null;
         }
