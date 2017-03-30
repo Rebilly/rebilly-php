@@ -75,4 +75,33 @@ final class TransactionService extends Service
             ['transactionId' => $transactionId]
         );
     }
+
+    /**
+     * @param string $transactionId
+     *
+     * @return LeadSource
+     */
+    public function getLeadSource($transactionId)
+    {
+        return $this->client()->get('transactions/{transactionId}/lead-source', ['transactionId' => $transactionId]);
+    }
+
+    /**
+     * @param string $transactionId
+     * @param array|JsonSerializable|LeadSource $leadSource
+     *
+     * @return LeadSource
+     */
+    public function updateLeadSource($transactionId, $leadSource)
+    {
+        return $this->client()->put($leadSource, 'transactions/{transactionId}/lead-source', ['transactionId' => $transactionId]);
+    }
+
+    /**
+     * @param string $transactionId
+     */
+    public function deleteLeadSource($transactionId)
+    {
+        $this->client()->delete('transactions/{transactionId}/lead-source', ['transactionId' => $transactionId]);
+    }
 }
