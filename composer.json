@@ -47,5 +47,10 @@
     "test": "phpunit",
     "cs": "php-cs-fixer fix -vv --dry-run || true",
     "cs-fix": "php-cs-fixer fix -vv || true"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x"
+    }
   }
 }
