@@ -129,33 +129,4 @@ final class PaymentService extends Service
     {
         return $this->client()->post([], 'queue/payments/{paymentId}/cancel', ['paymentId' => $paymentId]);
     }
-
-    /**
-     * @param string $paymentId
-     *
-     * @return LeadSource
-     */
-    public function getLeadSource($paymentId)
-    {
-        return $this->client()->get('payments/{paymentId}/lead-source', ['paymentId' => $paymentId]);
-    }
-
-    /**
-     * @param string $paymentId
-     * @param array|JsonSerializable|LeadSource $leadSource
-     *
-     * @return LeadSource
-     */
-    public function updateLeadSource($paymentId, $leadSource)
-    {
-        return $this->client()->put($leadSource, 'payments/{paymentId}/lead-source', ['paymentId' => $paymentId]);
-    }
-
-    /**
-     * @param string $paymentId
-     */
-    public function deleteLeadSource($paymentId)
-    {
-        $this->client()->delete('payments/{paymentId}/lead-source', ['paymentId' => $paymentId]);
-    }
 }
