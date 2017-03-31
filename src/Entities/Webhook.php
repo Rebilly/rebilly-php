@@ -124,12 +124,4 @@ final class Webhook extends Entity
     {
         return $this->getAttribute('createdTime');
     }
-
-    /**
-     * @return string
-     */
-    public function getSelfLink()
-    {
-        return $this->getLink('self');
-    }
 }
