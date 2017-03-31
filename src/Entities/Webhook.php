@@ -6,21 +6,6 @@ use Rebilly\Rest\Entity;
 
 /**
  * Class WebsiteWebhook
- *
- * ```json
- * {
- *   "id"
- *   "eventsFilter"
- *   "status"
- *   "method"
- *   "url"
- *   "headers"
- *   "credentialHash"
- *   "createdTime"
- *   "updatedTime"
- *   "_links"
- * }
- * ```
  */
 final class Webhook extends Entity
 {

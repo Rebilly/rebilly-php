@@ -57,7 +57,7 @@ final class WebhooksService extends Service
 
     /**
      * @param array|JsonSerializable|Webkook $data
-     * @param null $webhookId
+     * @param string|null $webhookId
      *
      * @return Webkook
      */
