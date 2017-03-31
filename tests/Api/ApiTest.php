@@ -744,6 +744,7 @@ class ApiTest extends TestCase
             [Entities\Coupons\Redemption::class],
             [Entities\ValuesList::class],
             [Entities\Product::class],
+            [Entities\Webhook::class],
         ];
     }
 
@@ -956,6 +957,11 @@ class ApiTest extends TestCase
                 Services\ShippingZoneService::class,
                 Entities\Shipping\ShippingZone::class,
             ],
+            [
+                'webhooks',
+                Services\WebhooksService::class,
+                Entities\Webhook::class,
+            ],
         ];
     }
 
@@ -1083,6 +1089,25 @@ class ApiTest extends TestCase
                 return $faker->userName;
             case 'webHookPassword':
                 return $faker->md5;
+            case 'eventsFilter':
+                return $faker->randomElements([
+                    "gateway-account-requested",
+                    "subscription-trial-ended",
+                    "subscription-activated",
+                    "subscription-canceled",
+                    "subscription-renewed",
+                    "transaction-processed",
+                    "payment-card-expired",
+                    "payment-declined",
+                    "invoice-modified",
+                    "invoice-created",
+                    "dispute-created",
+                    "suspended-payment-completed"
+                ], 3);
+            case 'headers':
+                return [["name" => $faker->word, "value" => $faker->word, "status" => $faker->randomElement(["active", "inactive"])]];
+            case 'credentialHash':
+                return $faker->uuid;
             case 'isActive':
             case 'archived':
             case 'starred':

@@ -8,6 +8,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 - [x] Removed Email Credentials API, it is never used.
 
+## [2.0.7] 2017-03-30
+
+### Added
+- [x] Added support for Global `Webhooks` 
+
 ## [2.0.6] 2017-01-07
 
 ### Added
