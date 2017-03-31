@@ -91,6 +91,7 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\CouponService coupons()
  * @method Services\RedemptionService couponsRedemptions()
  * @method Services\WebsiteWebhookService websiteWebhook()
+ * @method Services\WebhooksService webhooks()
  * @method Services\ValuesListService lists()
  * @method Services\ValuesListTrackingService listsTracking()
  *
@@ -146,6 +147,7 @@ final class Client
         'coupons' => Services\CouponService::class,
         'couponsRedemptions' => Services\RedemptionService::class,
         'websiteWebhook' => Services\WebsiteWebhookService::class,
+        'webhooks' => Services\WebhooksService::class,
         'lists' => Services\ValuesListService::class,
         'listsTracking' => Services\ValuesListTrackingService::class,
         'shippingZones' => Services\ShippingZoneService::class,
