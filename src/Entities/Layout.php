@@ -29,6 +29,8 @@ use Rebilly\Rest\Entity;
  */
 final class Layout extends Entity
 {
+    private $_items = [];
+
     /**
      * @return string
      */
@@ -96,5 +98,21 @@ final class Layout extends Entity
         $items[] = $value;
 
         return $this->setAttribute('items', $items);
+    }
+
+    /**
+     * @param $planId
+     * @param bool|false $starred
+     *
+     * @return $this
+     */
+    public function addItem($planId, $starred = false)
+    {
+        $this->_items[] = [
+            'planId' => $planId,
+            'starred' => (bool) $starred
+        ];
+
+        return $this->setAttribute('items', $this->_items);
     }
 }
