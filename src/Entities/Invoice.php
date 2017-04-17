@@ -96,6 +96,24 @@ final class Invoice extends Entity
     /**
      * @return string
      */
+    public function getCreatedTime()
+    {
+        return $this->getAttribute('createdTime');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setCreatedTime($value)
+    {
+        return $this->setAttribute('createdTime', $value);
+    }
+
+    /**
+     * @return string
+     */
     public function getDueTime()
     {
         return $this->getAttribute('dueTime');
@@ -109,6 +127,43 @@ final class Invoice extends Entity
     public function setDueTime($value)
     {
         return $this->setAttribute('dueTime', $value);
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getIssuedTime()
+    {
+        return $this->getAttribute('issueTime');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setIssuedTime($value)
+    {
+        return $this->setAttribute('issuedTime', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getClosedTime()
+    {
+        return $this->getAttribute('closedTime');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setClosedTime($value)
+    {
+        return $this->setAttribute('closedTime', $value);
     }
 
     /**
