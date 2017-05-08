@@ -5,6 +5,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Added
+- [x] Added support for `Webhooks` 
+
 ### Removed
 - [x] Removed Email Credentials API, it is never used.
 

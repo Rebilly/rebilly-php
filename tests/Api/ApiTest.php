@@ -743,6 +743,8 @@ class ApiTest extends TestCase
             [Entities\Coupons\Coupon::class],
             [Entities\Coupons\Redemption::class],
             [Entities\ValuesList::class],
+            [Entities\Product::class],
+            [Entities\Webhook::class],
         ];
     }
 
@@ -936,6 +938,11 @@ class ApiTest extends TestCase
                 Entities\PaymentCardMigrationsRequest::class,
             ],
             [
+                'products',
+                Services\ProductService::class,
+                Entities\Product::class,
+            ],
+            [
                 'lists',
                 Services\ValuesListService::class,
                 Entities\ValuesList::class,
@@ -944,6 +951,16 @@ class ApiTest extends TestCase
                 'listsTracking',
                 Services\ValuesListTrackingService::class,
                 Entities\ValuesList::class,
+            ],
+            [
+                'shippingZones',
+                Services\ShippingZoneService::class,
+                Entities\Shipping\ShippingZone::class,
+            ],
+            [
+                'webhooks',
+                Services\WebhooksService::class,
+                Entities\Webhook::class,
             ],
         ];
     }
@@ -1072,6 +1089,25 @@ class ApiTest extends TestCase
                 return $faker->userName;
             case 'webHookPassword':
                 return $faker->md5;
+            case 'eventsFilter':
+                return $faker->randomElements([
+                    "gateway-account-requested",
+                    "subscription-trial-ended",
+                    "subscription-activated",
+                    "subscription-canceled",
+                    "subscription-renewed",
+                    "transaction-processed",
+                    "payment-card-expired",
+                    "payment-declined",
+                    "invoice-modified",
+                    "invoice-created",
+                    "dispute-created",
+                    "suspended-payment-completed"
+                ], 3);
+            case 'headers':
+                return [["name" => $faker->word, "value" => $faker->word, "status" => $faker->randomElement(["active", "inactive"])]];
+            case 'credentialHash':
+                return $faker->uuid;
             case 'isActive':
             case 'archived':
             case 'starred':
@@ -1261,6 +1297,12 @@ class ApiTest extends TestCase
                     'amount' => $faker->numberBetween(1, 100),
                     'currency' => 'USD',
                 ];
+            case 'taxCategoryId':
+                return $faker->randomElement(Entities\Product::allowedTaxCategories());
+            case 'accountingCode':
+                return (string) $faker->numberBetween(1000, 10000);
+            case 'requiresShipping':
+                return $faker->randomElement([true, false]);
             case 'restrictions':
             case 'additionalRestrictions':
                 return [
@@ -1272,6 +1314,19 @@ class ApiTest extends TestCase
                         'type' => 'discounts-per-redemption',
                         'quantity' => $faker->numberBetween(1, 100),
                     ]
+                ];
+            case 'countries':
+                return ['US'];
+            case 'rates':
+                return [
+                    Entities\Shipping\Rate::createFromData([
+                        'name' => 'test',
+                        'minOrderSubtotal' => 4,
+                        'maxOrderSubtotal' => 10,
+                        'price' => 5,
+                        'default' => false,
+                        'currency' => 'USD',
+                    ]),
                 ];
             case 'values':
                 return [
