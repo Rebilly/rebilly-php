@@ -51,7 +51,7 @@ final class ContactService extends Service
      * @param string $contactId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The payment does not exist
+     * @throws NotFoundException The contact does not exist
      *
      * @return Contact
      */
@@ -88,5 +88,15 @@ final class ContactService extends Service
     public function update($contactId, $data)
     {
         return $this->client()->put($data, 'contacts/{contactId}', ['contactId' => $contactId]);
+    }
+
+    /**
+     * @param string $contactId
+     *
+     * @throws NotFoundException The contact does not exist
+     */
+    public function delete($contactId)
+    {
+        $this->client()->delete('contacts/{contactId}', ['contactId' => $contactId]);
     }
 }
