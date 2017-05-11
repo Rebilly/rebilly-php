@@ -66,6 +66,14 @@ class Address extends Resource
     private $emails;
 
     /**
+     * {@inheritdoc}
+     */
+    public function __construct(array $data = [])
+    {
+        parent::__construct($data);
+    }
+
+    /**
      * @param array $data
      *
      * @return Address
@@ -85,10 +93,12 @@ class Address extends Resource
     public static function createFromContact(Contact $contact)
     {
         $instance = self::createFromData($contact->jsonSerialize());
-        $instance->setPhoneNumbers([
-            'primary' => true,
-            'label' => 'main',
-            'value' => '1'//$contact->getPhoneNumber(),
+        $instance = $instance->setPhoneNumbers([
+            [
+                'primary' => true,
+                'label' => 'main',
+                'value' => $contact->getPhoneNumber(),
+            ]
         ]);
 
         return $instance;
