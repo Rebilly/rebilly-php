@@ -6,7 +6,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Resource;
 
 /**
- * Class Address. Represents a single email or a phoneNumber in an Address resource.
+ * Class AddressContactInstrument. Represents a single email or a phoneNumber in an Address resource.
  */
 class AddressContactInstrument extends Resource
 {

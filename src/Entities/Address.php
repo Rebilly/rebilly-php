@@ -78,6 +78,23 @@ class Address extends Resource
     }
 
     /**
+     * @param Contact $contact
+     *
+     * @return Address
+     */
+    public static function createFromContact(Contact $contact)
+    {
+        $instance = self::createFromData($contact->jsonSerialize());
+        $instance->setPhoneNumbers([
+            'primary' => true,
+            'label' => 'main',
+            'value' => '1'//$contact->getPhoneNumber(),
+        ]);
+
+        return $instance;
+    }
+
+    /**
      * @return string
      */
     public function getFirstName()
@@ -240,7 +257,7 @@ class Address extends Resource
     }
 
     /**
-     * @return string
+     * @return []AddressContactInstrument
      */
     public function getPhoneNumbers()
     {
@@ -248,7 +265,7 @@ class Address extends Resource
     }
 
     /**
-     * @param string $value
+     * @param []AddressContactInstrument $value
      *
      * @return $this
      */
@@ -258,7 +275,7 @@ class Address extends Resource
     }
 
     /**
-     * @return string
+     * @return []AddressContactInstrument
      */
     public function getEmails()
     {
@@ -266,7 +283,7 @@ class Address extends Resource
     }
 
     /**
-     * @param string $value
+     * @param []AddressContactInstrument $value
      *
      * @return $this
      */
