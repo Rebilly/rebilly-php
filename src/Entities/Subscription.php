@@ -169,6 +169,8 @@ final class Subscription extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     *
      * @return string
      */
     public function getBillingContactId()
@@ -177,6 +179,8 @@ final class Subscription extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     *
      * @return null|Contact
      */
     public function getBillingContact()
@@ -189,6 +193,7 @@ final class Subscription extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version.
      * @param string $value
      *
      * @return $this
@@ -207,6 +212,8 @@ final class Subscription extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     *
      * @return null|Contact
      */
     public function getDeliveryContact()
@@ -219,6 +226,7 @@ final class Subscription extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version.
      * @param string $value
      *
      * @return $this
@@ -364,5 +372,41 @@ final class Subscription extends Entity
         } else {
             return null;
         }
+    }
+
+    /**
+     * @return Address
+     */
+    public function getBillingAddress()
+    {
+        return $this->getAttribute('billingAddress');
+    }
+
+    /**
+     * @param Address $value
+     *
+     * @return $this
+     */
+    public function setBillingAddress($value)
+    {
+        return $this->setAttribute('billingAddress', $value);
+    }
+
+    /**
+     * @return Address
+     */
+    public function getDeliveryAddress()
+    {
+        return $this->getAttribute('deliveryAddress');
+    }
+
+    /**
+     * @param Address $value
+     *
+     * @return $this
+     */
+    public function setDeliveryAddress($value)
+    {
+        return $this->setAttribute('deliveryAddress', $value);
     }
 }
