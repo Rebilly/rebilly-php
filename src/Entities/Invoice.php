@@ -116,7 +116,7 @@ final class Invoice extends Entity
      */
     public function getBillingContactId()
     {
-        return $this->getAttribute('billingContact');
+        return $this->getAttribute('billingContactId');
     }
 
     /**
@@ -126,7 +126,7 @@ final class Invoice extends Entity
      */
     public function setBillingContactId($value)
     {
-        return $this->setAttribute('billingContact', $value);
+        return $this->setAttribute('billingContactId', $value);
     }
 
     /**
@@ -134,7 +134,7 @@ final class Invoice extends Entity
      */
     public function getDeliveryContactId()
     {
-        return $this->getAttribute('deliveryContact');
+        return $this->getAttribute('deliveryContactId');
     }
 
     /**
@@ -144,7 +144,7 @@ final class Invoice extends Entity
      */
     public function setDeliveryContactId($value)
     {
-        return $this->setAttribute('deliveryContact', $value);
+        return $this->setAttribute('deliveryContactId', $value);
     }
 
     /**
