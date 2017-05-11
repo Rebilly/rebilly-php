@@ -188,7 +188,7 @@ final class Invoice extends Entity
      */
     public function setBillingAddress($value)
     {
-        return $this->setAttribute('billingAddress', $value);
+        return $this->setAttribute('billingAddress', $value->jsonSerialize());
     }
 
     /**
@@ -206,6 +206,6 @@ final class Invoice extends Entity
      */
     public function setDeliveryAddress($value)
     {
-        return $this->setAttribute('deliveryAddress', $value);
+        return $this->setAttribute('deliveryAddress', $value->jsonSerialize());
     }
 }

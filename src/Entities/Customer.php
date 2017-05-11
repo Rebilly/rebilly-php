@@ -101,6 +101,24 @@ final class Customer extends Entity
     }
 
     /**
+     * @return Address
+     */
+    public function getPrimaryAddress()
+    {
+        return $this->getAttribute('primaryAddress');
+    }
+
+    /**
+     * @param Address $value
+     *
+     * @return $this
+     */
+    public function setPrimaryAddress($value)
+    {
+        return $this->setAttribute('primaryAddress', $value->jsonSerialize());
+    }
+
+    /**
      * @return string
      */
     public function getCreatedTime()

@@ -56,6 +56,8 @@ final class BankAccount extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     *
      * @return string
      */
     public function getContactId()
@@ -64,6 +66,7 @@ final class BankAccount extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version.
      * @param string $value
      *
      * @return $this
@@ -71,6 +74,24 @@ final class BankAccount extends Entity
     public function setContactId($value)
     {
         return $this->setAttribute('contactId', $value);
+    }
+
+    /**
+     * @return Address
+     */
+    public function getAddress()
+    {
+        return $this->getAttribute('address');
+    }
+
+    /**
+     * @param Address $value
+     *
+     * @return $this
+     */
+    public function setAddress($value)
+    {
+        return $this->setAttribute('address', $value->jsonSerialize());
     }
 
     /**
