@@ -53,6 +53,8 @@ final class PayPalAccount extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     *
      * @return string
      */
     public function getContactId()
@@ -61,6 +63,7 @@ final class PayPalAccount extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version.
      * @param string $value
      *
      * @return $this
@@ -139,6 +142,8 @@ final class PayPalAccount extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     *
      * @return null|Contact
      */
     public function getContact()

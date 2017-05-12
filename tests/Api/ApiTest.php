@@ -1219,6 +1219,34 @@ class ApiTest extends TestCase
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
                         );
                 }
+            case 'primaryAddress':
+            case 'billingAddress':
+            case 'deliveryAddress':
+                return Entities\Address::createFromData([
+                    'firstName' => $faker->firstName,
+                    'lastName' => $faker->lastName,
+                    'city' => $faker->city,
+                    'region' => $faker->randomElement(),
+                    'postalCode' => $faker->postcode,
+                    'organization' => $faker->randomElement(),
+                    'country' => $faker->countryCode,
+                    'address' => $faker->address,
+                    'address2' => $faker->streetAddress,
+                    'emails' => [
+                        [
+                            'label' => 'main',
+                            'primary' => 'true',
+                            'value' => 'hello@test.com',
+                        ]
+                    ],
+                    'phoneNumbers' => [
+                        [
+                            'label' => 'main',
+                            'primary' => 'true',
+                            'value' => '555123456',
+                        ]
+                    ],
+                ]);
             case 'method':
             case 'defaultPaymentMethod':
                 switch ($class) {
