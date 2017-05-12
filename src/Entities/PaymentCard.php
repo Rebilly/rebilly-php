@@ -130,6 +130,8 @@ final class PaymentCard extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     *
      * @return string
      */
     public function getBillingContactId()
@@ -138,6 +140,7 @@ final class PaymentCard extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version.
      * @param string $value
      *
      * @return $this
