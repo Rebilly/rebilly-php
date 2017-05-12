@@ -206,4 +206,22 @@ final class PaymentCard extends Entity
     {
         return $this->getAttribute('bankCountry');
     }
+
+    /**
+     * @return Address
+     */
+    public function getBillingAddress()
+    {
+        return $this->getAttribute('billingAddress');
+    }
+
+    /**
+     * @param Address $value
+     *
+     * @return $this
+     */
+    public function setBillingAddress($value)
+    {
+        return $this->setAttribute('billingAddress', $value->jsonSerialize());
+    }
 }

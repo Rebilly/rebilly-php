@@ -145,4 +145,22 @@ final class PayPalAccount extends Entity
     {
         return $this->hasEmbeddedResource('contact') ? new Contact($this->getEmbeddedResource('contact')) : null;
     }
+
+    /**
+     * @return Address
+     */
+    public function getAddress()
+    {
+        return $this->getAttribute('address');
+    }
+
+    /**
+     * @param Address $value
+     *
+     * @return $this
+     */
+    public function setAddress($value)
+    {
+        return $this->setAttribute('address', $value->jsonSerialize());
+    }
 }
