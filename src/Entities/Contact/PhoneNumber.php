@@ -2,7 +2,6 @@
 
 namespace Rebilly\Entities\Contact;
 
-
 use Rebilly\Rest\Resource;
 
 /**

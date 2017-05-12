@@ -4,7 +4,6 @@ namespace Rebilly\Entities;
 
 use Rebilly\Rest\Resource;
 
-
 /**
  * Class Address.
  */
@@ -246,5 +245,4 @@ class Address extends Resource
     {
         return $this->setAttribute('emails', $value);
     }
-
 }
