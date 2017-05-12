@@ -1,38 +1,23 @@
 <?php
 
-namespace Rebilly\Entities;
+namespace Rebilly\Entities\Contact;
 
 
 use Rebilly\Rest\Resource;
 
 /**
- * Class AddressContactInstrument. Represents a single email or a phoneNumber in an Address resource.
+ * Class Email. Represents a single email in an Address resource.
  */
-class AddressContactInstrument extends Resource
+class Email extends Resource
 {
-    /*
-     * @var string
-     */
-    private $label;
-
-    /*
-     * @var string
-     */
-    private $value;
-
-    /*
-     * @var bool
-     */
-    private $primary;
-
     /**
      * @param array $data
      *
-     * @return AddressContactInstrument
+     * @return PhoneNumber
      */
     public static function createFromData(array $data)
     {
-        $item = new AddressContactInstrument($data);
+        $item = new PhoneNumber($data);
 
         return $item;
     }

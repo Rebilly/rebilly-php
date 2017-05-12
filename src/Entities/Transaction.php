@@ -273,4 +273,20 @@ final class Transaction extends Entity
     {
         return $this->getAttribute('hasDcc');
     }
+
+    /**
+     * @return Address
+     */
+    public function getDeliveryAddress()
+    {
+        return $this->getAttribute('deliveryAddress');
+    }
+
+    /**
+     * @return Address
+     */
+    public function getBillingAddress()
+    {
+        return $this->getAttribute('billingAddress');
+    }
 }

@@ -10,61 +10,6 @@ use Rebilly\Rest\Resource;
  */
 class Address extends Resource
 {
-    /*
-     * @var string
-     */
-    private $firstName;
-
-    /*
-     * @var string
-     */
-    private $lastName;
-
-    /*
-     * @var string
-     */
-    private $country;
-
-    /*
-     * @var string
-     */
-    private $organization;
-
-    /*
-     * @var string
-     */
-    private $address;
-
-    /*
-     * @var string
-     */
-    private $address2;
-
-    /*
-     * @var string
-     */
-    private $city;
-
-    /*
-     * @var string
-     */
-    private $region;
-
-    /*
-     * @var string
-     */
-    private $postalCode;
-
-    /*
-     * @var []AddressContactInstrument
-     */
-    private $phoneNumbers;
-
-    /*
-     * @var []AddressContactInstrument
-     */
-    private $emails;
-
     /**
      * {@inheritdoc}
      */
