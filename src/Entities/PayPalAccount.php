@@ -166,6 +166,6 @@ final class PayPalAccount extends Entity
      */
     public function setAddress($value)
     {
-        return $this->setAttribute('address', $value->jsonSerialize());
+        return $this->setAttribute('address', $value);
     }
 }
