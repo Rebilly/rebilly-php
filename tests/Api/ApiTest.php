@@ -1222,7 +1222,6 @@ class ApiTest extends TestCase
             case 'primaryAddress':
             case 'billingAddress':
             case 'deliveryAddress':
-                //var_dump($class); die();
                 $item = Entities\Address::createFromData([
                     'firstName' => $faker->firstName,
                     'lastName' => $faker->lastName,
