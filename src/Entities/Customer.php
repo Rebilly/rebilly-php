@@ -109,7 +109,7 @@ final class Customer extends Entity
     }
 
     /**
-     * @param Address $value
+     * @param Address|array $value
      *
      * @return $this
      */

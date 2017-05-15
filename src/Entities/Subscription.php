@@ -383,7 +383,7 @@ final class Subscription extends Entity
     }
 
     /**
-     * @param Address $value
+     * @param Address|array $value
      *
      * @return $this
      */
@@ -401,7 +401,7 @@ final class Subscription extends Entity
     }
 
     /**
-     * @param Address $value
+     * @param Address|array $value
      *
      * @return $this
      */

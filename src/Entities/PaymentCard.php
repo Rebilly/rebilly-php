@@ -130,7 +130,7 @@ final class PaymentCard extends Entity
     }
 
     /**
-     * @deprecated The method is deprecated and will be removed in next version.
+     * @deprecated The method is deprecated and will be removed in next version. Please use getBillingAddress.
      *
      * @return string
      */
@@ -140,7 +140,7 @@ final class PaymentCard extends Entity
     }
 
     /**
-     * @deprecated The method is deprecated and will be removed in next version.
+     * @deprecated The method is deprecated and will be removed in next version. Please use setBillingAddress.
      * @param string $value
      *
      * @return $this
@@ -219,7 +219,7 @@ final class PaymentCard extends Entity
     }
 
     /**
-     * @param Address $value
+     * @param Address|array $value
      *
      * @return $this
      */

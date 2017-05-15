@@ -56,7 +56,7 @@ final class BankAccount extends Entity
     }
 
     /**
-     * @deprecated The method is deprecated and will be removed in next version.
+     * @deprecated The method is deprecated and will be removed in next version. Please use getAddress.
      *
      * @return string
      */
@@ -66,7 +66,7 @@ final class BankAccount extends Entity
     }
 
     /**
-     * @deprecated The method is deprecated and will be removed in next version.
+     * @deprecated The method is deprecated and will be removed in next version. Please use setAddress.
      * @param string $value
      *
      * @return $this
@@ -85,7 +85,7 @@ final class BankAccount extends Entity
     }
 
     /**
-     * @param Address $value
+     * @param Address|array $value
      *
      * @return $this
      */

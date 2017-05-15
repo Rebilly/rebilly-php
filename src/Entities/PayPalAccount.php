@@ -53,7 +53,7 @@ final class PayPalAccount extends Entity
     }
 
     /**
-     * @deprecated The method is deprecated and will be removed in next version.
+     * @deprecated The method is deprecated and will be removed in next version. Please use getAddress.
      *
      * @return string
      */
@@ -63,7 +63,7 @@ final class PayPalAccount extends Entity
     }
 
     /**
-     * @deprecated The method is deprecated and will be removed in next version.
+     * @deprecated The method is deprecated and will be removed in next version. Please use setAddress.
      * @param string $value
      *
      * @return $this
@@ -142,7 +142,7 @@ final class PayPalAccount extends Entity
     }
 
     /**
-     * @deprecated The method is deprecated and will be removed in next version.
+     * @deprecated The method is deprecated and will be removed in next version. Please use getAddress.
      *
      * @return null|Contact
      */
@@ -160,7 +160,7 @@ final class PayPalAccount extends Entity
     }
 
     /**
-     * @param Address $value
+     * @param Address|array $value
      *
      * @return $this
      */

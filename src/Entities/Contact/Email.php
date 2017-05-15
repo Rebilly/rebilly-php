@@ -12,11 +12,11 @@ class Email extends Resource
     /**
      * @param array $data
      *
-     * @return PhoneNumber
+     * @return Email
      */
     public static function createFromData(array $data)
     {
-        $item = new PhoneNumber($data);
+        $item = new Email($data);
 
         return $item;
     }
@@ -26,7 +26,7 @@ class Email extends Resource
      */
     public function getLabel()
     {
-        return $this->getAttribute('firstName');
+        return $this->getAttribute('label');
     }
 
     /**
@@ -36,7 +36,7 @@ class Email extends Resource
      */
     public function setLabel($value)
     {
-        return $this->setAttribute('firstName', $value);
+        return $this->setAttribute('label', $value);
     }
 
     /**
@@ -44,7 +44,7 @@ class Email extends Resource
      */
     public function getValue()
     {
-        return $this->getAttribute('firstName');
+        return $this->getAttribute('value');
     }
 
     /**
@@ -54,7 +54,7 @@ class Email extends Resource
      */
     public function setValue($value)
     {
-        return $this->setAttribute('firstName', $value);
+        return $this->setAttribute('value', $value);
     }
 
     /**
@@ -62,7 +62,7 @@ class Email extends Resource
      */
     public function getPrimary()
     {
-        return $this->getAttribute('firstName');
+        return $this->getAttribute('primary');
     }
 
     /**
@@ -72,6 +72,6 @@ class Email extends Resource
      */
     public function setPrimary($value)
     {
-        return $this->setAttribute('firstName', $value);
+        return $this->setAttribute('primary', $value);
     }
 }

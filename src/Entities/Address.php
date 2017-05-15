@@ -183,7 +183,7 @@ class Address extends Resource
     }
 
     /**
-     * @param string $value
+     * @param string $value - ISO Alpha-2 (2-letter) Country code
      *
      * @return $this
      */
@@ -211,7 +211,7 @@ class Address extends Resource
     }
 
     /**
-     * @return []AddressContactInstrument
+     * @return []PhoneNumber
      */
     public function getPhoneNumbers()
     {
@@ -219,7 +219,7 @@ class Address extends Resource
     }
 
     /**
-     * @param []AddressContactInstrument $value
+     * @param []PhoneNumber $value
      *
      * @return $this
      */
@@ -229,7 +229,7 @@ class Address extends Resource
     }
 
     /**
-     * @return []AddressContactInstrument
+     * @return []PhoneNumber
      */
     public function getEmails()
     {
@@ -237,7 +237,7 @@ class Address extends Resource
     }
 
     /**
-     * @param []AddressContactInstrument $value
+     * @param []PhoneNumber $value
      *
      * @return $this
      */

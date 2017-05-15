@@ -112,7 +112,7 @@ final class Invoice extends Entity
     }
 
     /**
-     * @deprecated The method is deprecated and will be removed in next version.
+     * @deprecated The method is deprecated and will be removed in next version. Please use getBillingAddress.
      *
      * @return string
      */
@@ -122,7 +122,7 @@ final class Invoice extends Entity
     }
 
     /**
-     * @deprecated The method is deprecated and will be removed in next version.
+     * @deprecated The method is deprecated and will be removed in next version. Please use setBillingAddress.
      * @param string $value
      *
      * @return $this
@@ -133,7 +133,7 @@ final class Invoice extends Entity
     }
 
     /**
-     * @deprecated The method is deprecated and will be removed in next version.
+     * @deprecated The method is deprecated and will be removed in next version. Please use getDeliveryAddress.
      *
      * @return string
      */
@@ -143,7 +143,7 @@ final class Invoice extends Entity
     }
 
     /**
-     * @deprecated The method is deprecated and will be removed in next version.
+     * @deprecated The method is deprecated and will be removed in next version. Please use setDeliveryAddress.
      * @param string $value
      *
      * @return $this
@@ -182,7 +182,7 @@ final class Invoice extends Entity
     }
 
     /**
-     * @param Address $value
+     * @param Address|array $value
      *
      * @return $this
      */
@@ -200,7 +200,7 @@ final class Invoice extends Entity
     }
 
     /**
-     * @param Address $value
+     * @param Address|array $value
      *
      * @return $this
      */

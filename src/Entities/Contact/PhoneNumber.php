@@ -21,12 +21,13 @@ class PhoneNumber extends Resource
         return $item;
     }
 
+
     /**
      * @return string
      */
     public function getLabel()
     {
-        return $this->getAttribute('firstName');
+        return $this->getAttribute('label');
     }
 
     /**
@@ -36,7 +37,7 @@ class PhoneNumber extends Resource
      */
     public function setLabel($value)
     {
-        return $this->setAttribute('firstName', $value);
+        return $this->setAttribute('label', $value);
     }
 
     /**
@@ -44,7 +45,7 @@ class PhoneNumber extends Resource
      */
     public function getValue()
     {
-        return $this->getAttribute('firstName');
+        return $this->getAttribute('value');
     }
 
     /**
@@ -54,7 +55,7 @@ class PhoneNumber extends Resource
      */
     public function setValue($value)
     {
-        return $this->setAttribute('firstName', $value);
+        return $this->setAttribute('value', $value);
     }
 
     /**
@@ -62,7 +63,7 @@ class PhoneNumber extends Resource
      */
     public function getPrimary()
     {
-        return $this->getAttribute('firstName');
+        return $this->getAttribute('primary');
     }
 
     /**
@@ -72,6 +73,6 @@ class PhoneNumber extends Resource
      */
     public function setPrimary($value)
     {
-        return $this->setAttribute('firstName', $value);
+        return $this->setAttribute('primary', $value);
     }
 }
