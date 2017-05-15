@@ -1228,7 +1228,7 @@ class ApiTest extends TestCase
                     'city' => $faker->city,
                     'region' => $faker->randomElement(),
                     'postalCode' => $faker->postcode,
-                    'organization' => $faker->randomElement(),
+                    'organization' => $faker->company,
                     'country' => $faker->countryCode,
                     'address' => $faker->address,
                     'address2' => $faker->streetAddress,
