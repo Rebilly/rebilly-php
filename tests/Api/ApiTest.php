@@ -1226,9 +1226,9 @@ class ApiTest extends TestCase
                     'firstName' => $faker->firstName,
                     'lastName' => $faker->lastName,
                     'city' => $faker->city,
-                    'region' => $faker->randomElement(),
+                    'region' => $faker->word,
                     'postalCode' => $faker->postcode,
-                    'organization' => $faker->randomElement(),
+                    'organization' => $faker->word,
                     'country' => $faker->countryCode,
                     'address' => $faker->address,
                     'address2' => $faker->streetAddress,
@@ -1247,7 +1247,6 @@ class ApiTest extends TestCase
                         ]
                     ],
                 ]);
-               // var_dump($item); die();
                 return $item;
             case 'method':
             case 'defaultPaymentMethod':
