@@ -225,6 +225,6 @@ final class PaymentCard extends Entity
      */
     public function setBillingAddress($value)
     {
-        return $this->setAttribute('billingAddress', $value);
+        return $this->setAttribute('billingAddress', $value instanceof Address ? $value->jsonSerialize() : $value);
     }
 }

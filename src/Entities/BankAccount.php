@@ -91,7 +91,7 @@ final class BankAccount extends Entity
      */
     public function setAddress($value)
     {
-        return $this->setAttribute('address', $value);
+        return $this->setAttribute('address', $value instanceof Address ? $value->jsonSerialize() : $value);
     }
 
     /**
