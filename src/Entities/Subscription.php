@@ -389,7 +389,7 @@ final class Subscription extends Entity
      */
     public function setBillingAddress($value)
     {
-        return $this->setAttribute('billingAddress', $value instanceof Address ? $value->jsonSerialize() : $value);
+        return $this->setAttribute('billingAddress', $value);
     }
 
     /**
@@ -407,6 +407,6 @@ final class Subscription extends Entity
      */
     public function setDeliveryAddress($value)
     {
-        return $this->setAttribute('deliveryAddress', $value instanceof Address ? $value->jsonSerialize() : $value);
+        return $this->setAttribute('deliveryAddress', $value);
     }
 }
