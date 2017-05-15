@@ -229,15 +229,15 @@ class Address extends Resource
     }
 
     /**
-     * @return []PhoneNumber
+     * @return []Email
      */
     public function getEmails()
     {
-        return $this->getAttribute('phoneNumbers');
+        return $this->getAttribute('emails');
     }
 
     /**
-     * @param []PhoneNumber $value
+     * @param []Email $value
      *
      * @return $this
      */
