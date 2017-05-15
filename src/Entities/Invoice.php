@@ -25,9 +25,6 @@ use Rebilly\Rest\Entity;
  *   "deliveryContact"
  * }
  * ```
- *
- * @todo Rename property `billingContact` to `billingContactId`
- * @todo Rename property `deliveryContact` to `deliveryContactId`
  */
 final class Invoice extends Entity
 {
@@ -188,7 +185,7 @@ final class Invoice extends Entity
      */
     public function setBillingAddress($value)
     {
-        return $this->setAttribute('billingAddress', $value instanceof Address ? $value->jsonSerialize() : $value);
+        return $this->setAttribute('billingAddress', $value);
     }
 
     /**
@@ -206,6 +203,6 @@ final class Invoice extends Entity
      */
     public function setDeliveryAddress($value)
     {
-        return $this->setAttribute('deliveryAddress', $value instanceof Address ? $value->jsonSerialize() : $value);
+        return $this->setAttribute('deliveryAddress', $value);
     }
 }

@@ -115,7 +115,7 @@ final class Customer extends Entity
      */
     public function setPrimaryAddress($value)
     {
-        return $this->setAttribute('primaryAddress', $value->jsonSerialize());
+        return $this->setAttribute('primaryAddress', $value);
     }
 
     /**
