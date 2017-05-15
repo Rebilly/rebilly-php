@@ -123,6 +123,8 @@ final class PaymentCardToken extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version. 
+     *
      * @return string
      */
     public function getFirstName()
@@ -131,6 +133,7 @@ final class PaymentCardToken extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version. Please use setBillingAddress.
      * @param string $value
      *
      * @return $this
@@ -141,6 +144,8 @@ final class PaymentCardToken extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version. 
+     *
      * @return string
      */
     public function getLastName()
@@ -149,6 +154,7 @@ final class PaymentCardToken extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version. Please use setBillingAddress.
      * @param string $value
      *
      * @return $this
@@ -159,6 +165,8 @@ final class PaymentCardToken extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version. 
+     *
      * @return string
      */
     public function getAddress()
@@ -167,6 +175,7 @@ final class PaymentCardToken extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version. Please use setBillingAddress.
      * @param string $value
      *
      * @return $this
@@ -177,6 +186,8 @@ final class PaymentCardToken extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version. 
+     *
      * @return string
      */
     public function getAddress2()
@@ -185,6 +196,7 @@ final class PaymentCardToken extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version. Please use setBillingAddress.
      * @param string $value
      *
      * @return $this
@@ -195,6 +207,8 @@ final class PaymentCardToken extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version. 
+     *
      * @return string
      */
     public function getCity()
@@ -203,6 +217,7 @@ final class PaymentCardToken extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version. Please use setBillingAddress.
      * @param string $value
      *
      * @return $this
@@ -213,6 +228,8 @@ final class PaymentCardToken extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version. 
+     *
      * @return string
      */
     public function getRegion()
@@ -221,6 +238,8 @@ final class PaymentCardToken extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version. Please use setBillingAddress.
+     *
      * @param string $value
      *
      * @return $this
@@ -231,6 +250,8 @@ final class PaymentCardToken extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version. 
+     *
      * @return string
      */
     public function getCountry()
@@ -239,6 +260,8 @@ final class PaymentCardToken extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version. Please use setBillingAddress.
+     *
      * @param string $value
      *
      * @return $this
@@ -249,6 +272,8 @@ final class PaymentCardToken extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version. 
+     *
      * @return string
      */
     public function getPostalCode()
@@ -257,6 +282,7 @@ final class PaymentCardToken extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version. Please use setBillingAddress.
      * @param string $value
      *
      * @return $this
@@ -267,6 +293,8 @@ final class PaymentCardToken extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version. 
+     *
      * @return string
      */
     public function getPhoneNumber()
@@ -275,6 +303,7 @@ final class PaymentCardToken extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version. Please use setBillingAddress.
      * @param string $value
      *
      * @return $this
@@ -283,6 +312,18 @@ final class PaymentCardToken extends Entity
     {
         return $this->setAttribute('phoneNumber', $value);
     }
+
+    /**
+     * @param Address|array $value
+     *
+     * @return $this
+     */
+    public function setBillingAddress($value)
+    {
+        return $this->setAttribute('billingAddress', $value);
+    }
+
+
 
     /**
      * @return string
