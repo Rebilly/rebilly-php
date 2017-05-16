@@ -2,6 +2,7 @@
 
 namespace Rebilly\Entities;
 
+use Rebilly\Entities\Contact\PhoneNumber;
 use Rebilly\Rest\Resource;
 
 /**
@@ -36,16 +37,7 @@ class Address extends Resource
      */
     public static function createFromContact(Contact $contact)
     {
-        $instance = self::createFromData($contact->jsonSerialize());
-        $instance = $instance->setPhoneNumbers([
-            [
-                'primary' => true,
-                'label' => 'main',
-                'value' => $contact->getPhoneNumber(),
-            ]
-        ]);
-
-        return $instance;
+        return self::createFromData($contact->jsonSerialize());
     }
 
     /**
@@ -211,7 +203,7 @@ class Address extends Resource
     }
 
     /**
-     * @return []PhoneNumber
+     * @return PhoneNumber[]
      */
     public function getPhoneNumbers()
     {
@@ -219,7 +211,7 @@ class Address extends Resource
     }
 
     /**
-     * @param []PhoneNumber $value
+     * @param PhoneNumber[] $value
      *
      * @return $this
      */
@@ -229,7 +221,7 @@ class Address extends Resource
     }
 
     /**
-     * @return []Email
+     * @return Email[]
      */
     public function getEmails()
     {
@@ -237,7 +229,7 @@ class Address extends Resource
     }
 
     /**
-     * @param []Email $value
+     * @param Email[] $value
      *
      * @return $this
      */
