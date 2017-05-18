@@ -34,16 +34,16 @@ class CustomerAddressTest extends TestCase
             'lastName' => 'lname',
             'phoneNumbers' => [
                 Contact\PhoneNumber::createFromData([
-                    'primary'=> true,
-                    'value'=> '523424123',
-                    'label'=> 'main',
+                    'primary' => true,
+                    'value' => '523424123',
+                    'label' => 'main',
                 ]),
             ],
             'emails' => [
                 Contact\Email::createFromData([
-                    'primary'=> true,
-                    'value'=> 'hellodiesel@test.com',
-                    'label'=> 'main',
+                    'primary' => true,
+                    'value' => 'hellodiesel@test.com',
+                    'label' => 'main',
                 ]),
             ],
         ]);
