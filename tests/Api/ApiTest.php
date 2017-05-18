@@ -1108,13 +1108,7 @@ class ApiTest extends TestCase
                     "suspended-payment-completed"
                 ], 3);
             case 'headers':
-                return [
-                    [
-                        "name" => $faker->word,
-                        "value" => $faker->word,
-                        "status" => $faker->randomElement(["active", "inactive"])
-                    ]
-                ];
+                return [["name" => $faker->word, "value" => $faker->word, "status" => $faker->randomElement(["active", "inactive"])]];
             case 'credentialHash':
                 return $faker->uuid;
             case 'isActive':
