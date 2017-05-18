@@ -175,7 +175,7 @@ class Address extends Resource
     }
 
     /**
-     * @param string $value - ISO Alpha-2 (2-letter) Country code
+     * @param string $value - ISO 3166-1 Country code
      *
      * @return $this
      */

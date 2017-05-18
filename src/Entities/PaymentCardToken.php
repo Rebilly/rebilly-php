@@ -323,8 +323,6 @@ final class PaymentCardToken extends Entity
         return $this->setAttribute('billingAddress', $value);
     }
 
-
-
     /**
      * @return string
      */

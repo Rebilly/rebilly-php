@@ -51,7 +51,7 @@ final class ContactService extends Service
      * @param string $contactId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The contact does not exist
+     * @throws NotFoundException
      *
      * @return Contact
      */
