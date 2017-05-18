@@ -53,6 +53,8 @@ final class PayPalAccount extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version. Please use getAddress.
+     *
      * @return string
      */
     public function getContactId()
@@ -61,6 +63,7 @@ final class PayPalAccount extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version. Please use setAddress.
      * @param string $value
      *
      * @return $this
@@ -139,10 +142,30 @@ final class PayPalAccount extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version. Please use getAddress.
+     *
      * @return null|Contact
      */
     public function getContact()
     {
         return $this->hasEmbeddedResource('contact') ? new Contact($this->getEmbeddedResource('contact')) : null;
+    }
+
+    /**
+     * @return Address
+     */
+    public function getAddress()
+    {
+        return $this->getAttribute('address');
+    }
+
+    /**
+     * @param Address|array $value
+     *
+     * @return $this
+     */
+    public function setAddress($value)
+    {
+        return $this->setAttribute('address', $value);
     }
 }

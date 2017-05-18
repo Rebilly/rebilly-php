@@ -693,11 +693,14 @@ class ApiTest extends TestCase
     public function provideEntityClasses()
     {
         return [
+            [Entities\Address::class],
             [Entities\Attachment::class],
             [Entities\AuthenticationOptions::class, null],
             [Entities\AuthenticationToken::class, 'token'],
             [Entities\Blacklist::class],
             [Entities\Contact::class],
+            [Entities\Contact\Email::class],
+            [Entities\Contact\PhoneNumber::class],
             [Entities\Customer::class],
             [Entities\CustomerCredential::class],
             [Entities\File::class],
@@ -1135,11 +1138,57 @@ class ApiTest extends TestCase
             case 'lastName':
             case 'username':
             case 'url':
-            case 'address':
             case 'city':
             case 'country':
             case 'phoneNumber':
                 return $faker->$attribute;
+            case 'address':
+                switch ($class) {
+                    case Entities\Address::class:
+                        return new Entities\Address([
+                            'firstName' => $faker->firstName,
+                            'lastName' => $faker->lastName,
+                            'city' => $faker->city,
+                            'region' => $faker->word,
+                            'postalCode' => $faker->postcode,
+                            'organization' => $faker->company,
+                            'country' => $faker->countryCode,
+                            'address' => $faker->address,
+                            'address2' => $faker->streetAddress,
+                            'emails' => [
+                                new Entities\Contact\Email([
+                                    'label' => $faker->word,
+                                    'primary' => $faker->boolean(),
+                                    'value' => $faker->email,
+                                ]),
+                            ],
+                            'phoneNumbers' => [
+                                new Entities\Contact\PhoneNumber([
+                                    'label' => $faker->word,
+                                    'primary' => $faker->boolean(),
+                                    'value' => $faker->phoneNumber,
+                                ]),
+                            ],
+                        ]);
+                    default:
+                        return $faker->$attribute;
+                }
+            case 'phoneNumbers':
+                return [
+                    new Entities\Contact\PhoneNumber([
+                        'label' => $faker->word,
+                        'primary' => $faker->boolean(),
+                        'value' => $faker->phoneNumber,
+                    ]),
+                ];
+            case 'emails':
+                return [
+                    new Entities\Contact\Email([
+                        'label' => $faker->word,
+                        'primary' => $faker->boolean(),
+                        'value' => $faker->email,
+                    ]),
+                ];
             case 'extension':
                 return $faker->randomElement(Entities\File::allowedTypes());
             case 'tags':
@@ -1164,6 +1213,8 @@ class ApiTest extends TestCase
                 }
             case 'value':
                 switch ($class) {
+                    case Entities\Contact\Email::class:
+                    case Entities\Contact\PhoneNumber::class:
                     case Entities\Blacklist::class:
                         return $faker->word;
                     default:
@@ -1219,6 +1270,46 @@ class ApiTest extends TestCase
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
                         );
                 }
+            case 'label':
+                switch ($class) {
+                    case Entities\Contact\Email::class:
+                    case Entities\Contact\PhoneNumber::class:
+                        return $faker->word;
+                    default:
+                        throw new InvalidArgumentException(
+                            sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
+                        );
+                }
+            case 'primary':
+                return $faker->boolean();
+            case 'primaryAddress':
+            case 'billingAddress':
+            case 'deliveryAddress':
+                return Entities\Address::createFromData([
+                    'firstName' => $faker->firstName,
+                    'lastName' => $faker->lastName,
+                    'city' => $faker->city,
+                    'region' => $faker->word,
+                    'postalCode' => $faker->postcode,
+                    'organization' => $faker->company,
+                    'country' => $faker->countryCode,
+                    'address' => $faker->address,
+                    'address2' => $faker->streetAddress,
+                    'emails' => [
+                        [
+                            'label' => $faker->word,
+                            'primary' => $faker->boolean(),
+                            'value' => $faker->email,
+                        ]
+                    ],
+                    'phoneNumbers' => [
+                        [
+                            'label' => $faker->word,
+                            'primary' => $faker->boolean(),
+                            'value' => $faker->phoneNumber,
+                        ]
+                    ],
+                ]);
             case 'method':
             case 'defaultPaymentMethod':
                 switch ($class) {
