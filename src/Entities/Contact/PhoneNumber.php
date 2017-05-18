@@ -21,7 +21,6 @@ class PhoneNumber extends Resource
         return $item;
     }
 
-
     /**
      * @return string
      */
