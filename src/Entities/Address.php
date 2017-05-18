@@ -25,9 +25,7 @@ class Address extends Resource
      */
     public static function createFromData(array $data)
     {
-        $item = new Address($data);
-
-        return $item;
+        return new Address($data);
     }
 
     /**

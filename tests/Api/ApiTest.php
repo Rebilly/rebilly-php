@@ -1285,7 +1285,7 @@ class ApiTest extends TestCase
             case 'primaryAddress':
             case 'billingAddress':
             case 'deliveryAddress':
-                $item = Entities\Address::createFromData([
+                return Entities\Address::createFromData([
                     'firstName' => $faker->firstName,
                     'lastName' => $faker->lastName,
                     'city' => $faker->city,
@@ -1310,7 +1310,6 @@ class ApiTest extends TestCase
                         ]
                     ],
                 ]);
-                return $item;
             case 'method':
             case 'defaultPaymentMethod':
                 switch ($class) {

@@ -16,9 +16,7 @@ class Email extends Resource
      */
     public static function createFromData(array $data)
     {
-        $item = new Email($data);
-
-        return $item;
+        return new Email($data);
     }
 
     /**

@@ -16,9 +16,7 @@ class PhoneNumber extends Resource
      */
     public static function createFromData(array $data)
     {
-        $item = new PhoneNumber($data);
-
-        return $item;
+        return new PhoneNumber($data);
     }
 
     /**
