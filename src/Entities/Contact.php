@@ -63,6 +63,24 @@ final class Contact extends Entity
     /**
      * @return string
      */
+    public function getEmail()
+    {
+        return $this->getAttribute('email');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setEmail($value)
+    {
+        return $this->setAttribute('email', $value);
+    }
+
+    /**
+     * @return string
+     */
     public function getFirstName()
     {
         return $this->getAttribute('firstName');
