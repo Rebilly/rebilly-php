@@ -14,21 +14,7 @@ use DomainException;
 use Rebilly\Rest\Entity;
 
 /**
- * Class InvoiceItem
- *
- * ```json
- * {
- *   "type"
- *   "unitPrice"
- *   "quantity"
- *   "description"
- *   "periodStartTime"
- *   "periodEndTime"
- * }
- * ```
- *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
- * @version 0.1
+ * Class InvoiceItem.
  */
 final class InvoiceItem extends Entity
 {
@@ -156,5 +142,23 @@ final class InvoiceItem extends Entity
     public function setPeriodEndTime($value)
     {
         return $this->setAttribute('periodEndTime', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getProductId()
+    {
+        return $this->getAttribute('productId');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setProductId($value)
+    {
+        return $this->setAttribute('productId', $value);
     }
 }
