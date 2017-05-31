@@ -1005,6 +1005,7 @@ class ApiTest extends TestCase
             case 'fromGatewayAccountId':
             case 'toGatewayAccountId':
             case 'redemptionCode':
+            case 'productId':
                 return $faker->uuid;
             case 'dueTime':
             case 'expiredTime':
