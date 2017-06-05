@@ -205,4 +205,28 @@ final class Invoice extends Entity
     {
         return $this->setAttribute('deliveryAddress', $value);
     }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->getAttribute('status');
+    }
+
+    /**
+     * @return int
+     */
+    public function getCollectionPeriod()
+    {
+        return $this->getAttribute('collectionPeriod');
+    }
+
+    /**
+     * @return int
+     */
+    public function getDelinquentCollectionPeriod()
+    {
+        return $this->getAttribute('delinquentCollectionPeriod');
+    }
 }
