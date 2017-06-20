@@ -320,8 +320,7 @@ final class Client
      */
     public function __invoke(Request $request, Response $response)
     {
-        $request = $request->withAddedHeader("REB-CLIENT", "PHP-SDK")
-            ->withAddedHeader("REB-CLIENT-VERSION", self::SDK_VERSION);
+        $request = $request->withAddedHeader('REB-API-CONSUMER', 'REB-PHP-CLIENT/' . self::SDK_VERSION);
 
         $result = call_user_func($this->transport, $request);
 
