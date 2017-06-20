@@ -253,6 +253,7 @@ final class Client
         $this->middleware = new Middleware\CompositeMiddleware(
             new Middleware\BaseUri($this->createUri($baseUrl . '/' . Client::CURRENT_VERSION)),
             new Middleware\UserAgent(self::SDK_VERSION),
+            new Middleware\ApiConsumer(self::SDK_VERSION),
             $authentication,
             $middleware,
             $logger
@@ -320,8 +321,6 @@ final class Client
      */
     public function __invoke(Request $request, Response $response)
     {
-        $request = $request->withAddedHeader('REB-API-CONSUMER', 'REB-PHP-CLIENT/' . self::SDK_VERSION);
-
         $result = call_user_func($this->transport, $request);
 
         return $result instanceof Response ? $result : $response;
