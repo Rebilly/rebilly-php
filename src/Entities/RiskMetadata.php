@@ -85,16 +85,16 @@ final class RiskMetadata extends Resource
     /**
      * @return string|null
      */
-    public function getVPNServiceName()
+    public function getVpnServiceName()
     {
-        return $this->getAttribute('VPNServiceName');
+        return $this->getAttribute('vpnServiceName');
     }
 
     /**
      * @return string|null
      */
-    public function getISP()
+    public function getIsp()
     {
-        return $this->getAttribute('ISP');
+        return $this->getAttribute('isp');
     }
 }
