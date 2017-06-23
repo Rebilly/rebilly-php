@@ -748,6 +748,7 @@ class ApiTest extends TestCase
             [Entities\ValuesList::class],
             [Entities\Product::class],
             [Entities\Webhook::class],
+            [Entities\RiskMetadata::class],
         ];
     }
 
