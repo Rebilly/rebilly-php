@@ -274,4 +274,22 @@ final class Payment extends Entity
             return null;
         }
     }
+
+    /**
+     * @return RiskMetadata
+     */
+    public function getRiskMetadata()
+    {
+        return $this->getAttribute('riskMetadata');
+    }
+
+    /**
+     * @param RiskMetadata|array $value
+     *
+     * @return $this
+     */
+    public function setRiskMetadata($value)
+    {
+        return $this->setAttribute('riskMetadata', $value);
+    }
 }

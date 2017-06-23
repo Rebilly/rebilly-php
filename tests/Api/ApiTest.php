@@ -1430,6 +1430,10 @@ class ApiTest extends TestCase
                 return $faker->randomElement(Entities\SubscriptionCancel::cancelCategories());
             case 'canceledBy':
                 return $faker->randomElement(Entities\SubscriptionCancel::canceledBySources());
+            case 'riskMetadata':
+                return new Entities\RiskMetadata([
+                    'ipAddress' => $faker->ipv4,
+                ]);
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
