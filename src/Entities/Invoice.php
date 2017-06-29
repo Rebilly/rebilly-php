@@ -171,6 +171,32 @@ final class Invoice extends Entity
     }
 
     /**
+     * @return float
+     */
+    public function getShippingAmount()
+    {
+        return $this->getAttribute('shippingAmount');
+    }
+
+    /**
+     * @return array
+     */
+    public function getTaxes()
+    {
+        $invoiceTaxes = [];
+        $taxes = $this->getAttribute('taxes');
+        if (count($taxes) > 0) {
+            foreach ($taxes as $tax) {
+                $invoiceTaxes[] = new InvoiceTax($tax);
+            }
+        } else {
+            $invoiceTaxes = $taxes;
+        }
+
+        return $invoiceTaxes;
+    }
+
+    /**
      * @return Address
      */
     public function getBillingAddress()
