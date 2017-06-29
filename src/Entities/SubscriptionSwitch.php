@@ -10,6 +10,8 @@
 
 namespace Rebilly\Entities;
 
+use DomainException;
+
 /**
  * Class SubscriptionSwitch
  *
@@ -18,6 +20,46 @@ namespace Rebilly\Entities;
  */
 final class SubscriptionSwitch extends SubscriptionCancel
 {
+    const AT_NEXT_RENEWAL = 'at-next-renewal';
+    const NOW = 'now';
+    const NOW_WITH_PRORATA_CREDIT = 'now-with-prorata-credit';
+
+    /**
+     * @return array
+     */
+    public static function policies()
+    {
+        return [
+            self::AT_NEXT_RENEWAL,
+            self::NOW,
+            self::NOW_WITH_PRORATA_CREDIT,
+        ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getPolicy()
+    {
+        return $this->getAttribute('policy');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @throws DomainException
+     *
+     * @return SubscriptionCancel
+     */
+    public function setPolicy($value)
+    {
+        if (!in_array($value, self::policies())) {
+            throw new DomainException(sprintf(self::MSG_UNEXPECTED_POLICY, implode(', ', self::policies())));
+        }
+
+        return $this->setAttribute('policy', $value);
+    }
+
     /**
      * @return string
      */
