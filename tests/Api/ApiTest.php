@@ -693,11 +693,14 @@ class ApiTest extends TestCase
     public function provideEntityClasses()
     {
         return [
+            [Entities\Address::class],
             [Entities\Attachment::class],
             [Entities\AuthenticationOptions::class, null],
             [Entities\AuthenticationToken::class, 'token'],
             [Entities\Blacklist::class],
             [Entities\Contact::class],
+            [Entities\Contact\Email::class],
+            [Entities\Contact\PhoneNumber::class],
             [Entities\Customer::class],
             [Entities\CustomerCredential::class],
             [Entities\File::class],
@@ -743,6 +746,8 @@ class ApiTest extends TestCase
             [Entities\Coupons\Coupon::class],
             [Entities\Coupons\Redemption::class],
             [Entities\ValuesList::class],
+            [Entities\Product::class],
+            [Entities\Webhook::class],
         ];
     }
 
@@ -936,6 +941,11 @@ class ApiTest extends TestCase
                 Entities\PaymentCardMigrationsRequest::class,
             ],
             [
+                'products',
+                Services\ProductService::class,
+                Entities\Product::class,
+            ],
+            [
                 'lists',
                 Services\ValuesListService::class,
                 Entities\ValuesList::class,
@@ -944,6 +954,16 @@ class ApiTest extends TestCase
                 'listsTracking',
                 Services\ValuesListTrackingService::class,
                 Entities\ValuesList::class,
+            ],
+            [
+                'shippingZones',
+                Services\ShippingZoneService::class,
+                Entities\Shipping\ShippingZone::class,
+            ],
+            [
+                'webhooks',
+                Services\WebhooksService::class,
+                Entities\Webhook::class,
             ],
         ];
     }
@@ -985,6 +1005,7 @@ class ApiTest extends TestCase
             case 'fromGatewayAccountId':
             case 'toGatewayAccountId':
             case 'redemptionCode':
+            case 'productId':
                 return $faker->uuid;
             case 'dueTime':
             case 'expiredTime':
@@ -1072,6 +1093,25 @@ class ApiTest extends TestCase
                 return $faker->userName;
             case 'webHookPassword':
                 return $faker->md5;
+            case 'eventsFilter':
+                return $faker->randomElements([
+                    "gateway-account-requested",
+                    "subscription-trial-ended",
+                    "subscription-activated",
+                    "subscription-canceled",
+                    "subscription-renewed",
+                    "transaction-processed",
+                    "payment-card-expired",
+                    "payment-declined",
+                    "invoice-modified",
+                    "invoice-created",
+                    "dispute-created",
+                    "suspended-payment-completed"
+                ], 3);
+            case 'headers':
+                return [["name" => $faker->word, "value" => $faker->word, "status" => $faker->randomElement(["active", "inactive"])]];
+            case 'credentialHash':
+                return $faker->uuid;
             case 'isActive':
             case 'archived':
             case 'starred':
@@ -1099,11 +1139,57 @@ class ApiTest extends TestCase
             case 'lastName':
             case 'username':
             case 'url':
-            case 'address':
             case 'city':
             case 'country':
             case 'phoneNumber':
                 return $faker->$attribute;
+            case 'address':
+                switch ($class) {
+                    case Entities\Address::class:
+                        return new Entities\Address([
+                            'firstName' => $faker->firstName,
+                            'lastName' => $faker->lastName,
+                            'city' => $faker->city,
+                            'region' => $faker->word,
+                            'postalCode' => $faker->postcode,
+                            'organization' => $faker->company,
+                            'country' => $faker->countryCode,
+                            'address' => $faker->address,
+                            'address2' => $faker->streetAddress,
+                            'emails' => [
+                                new Entities\Contact\Email([
+                                    'label' => $faker->word,
+                                    'primary' => $faker->boolean(),
+                                    'value' => $faker->email,
+                                ]),
+                            ],
+                            'phoneNumbers' => [
+                                new Entities\Contact\PhoneNumber([
+                                    'label' => $faker->word,
+                                    'primary' => $faker->boolean(),
+                                    'value' => $faker->phoneNumber,
+                                ]),
+                            ],
+                        ]);
+                    default:
+                        return $faker->$attribute;
+                }
+            case 'phoneNumbers':
+                return [
+                    new Entities\Contact\PhoneNumber([
+                        'label' => $faker->word,
+                        'primary' => $faker->boolean(),
+                        'value' => $faker->phoneNumber,
+                    ]),
+                ];
+            case 'emails':
+                return [
+                    new Entities\Contact\Email([
+                        'label' => $faker->word,
+                        'primary' => $faker->boolean(),
+                        'value' => $faker->email,
+                    ]),
+                ];
             case 'extension':
                 return $faker->randomElement(Entities\File::allowedTypes());
             case 'tags':
@@ -1128,6 +1214,8 @@ class ApiTest extends TestCase
                 }
             case 'value':
                 switch ($class) {
+                    case Entities\Contact\Email::class:
+                    case Entities\Contact\PhoneNumber::class:
                     case Entities\Blacklist::class:
                         return $faker->word;
                     default:
@@ -1183,6 +1271,46 @@ class ApiTest extends TestCase
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
                         );
                 }
+            case 'label':
+                switch ($class) {
+                    case Entities\Contact\Email::class:
+                    case Entities\Contact\PhoneNumber::class:
+                        return $faker->word;
+                    default:
+                        throw new InvalidArgumentException(
+                            sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
+                        );
+                }
+            case 'primary':
+                return $faker->boolean();
+            case 'primaryAddress':
+            case 'billingAddress':
+            case 'deliveryAddress':
+                return Entities\Address::createFromData([
+                    'firstName' => $faker->firstName,
+                    'lastName' => $faker->lastName,
+                    'city' => $faker->city,
+                    'region' => $faker->word,
+                    'postalCode' => $faker->postcode,
+                    'organization' => $faker->company,
+                    'country' => $faker->countryCode,
+                    'address' => $faker->address,
+                    'address2' => $faker->streetAddress,
+                    'emails' => [
+                        [
+                            'label' => $faker->word,
+                            'primary' => $faker->boolean(),
+                            'value' => $faker->email,
+                        ]
+                    ],
+                    'phoneNumbers' => [
+                        [
+                            'label' => $faker->word,
+                            'primary' => $faker->boolean(),
+                            'value' => $faker->phoneNumber,
+                        ]
+                    ],
+                ]);
             case 'method':
             case 'defaultPaymentMethod':
                 switch ($class) {
@@ -1261,6 +1389,12 @@ class ApiTest extends TestCase
                     'amount' => $faker->numberBetween(1, 100),
                     'currency' => 'USD',
                 ];
+            case 'taxCategoryId':
+                return $faker->randomElement(Entities\Product::allowedTaxCategories());
+            case 'accountingCode':
+                return (string) $faker->numberBetween(1000, 10000);
+            case 'requiresShipping':
+                return $faker->randomElement([true, false]);
             case 'restrictions':
             case 'additionalRestrictions':
                 return [
@@ -1272,6 +1406,19 @@ class ApiTest extends TestCase
                         'type' => 'discounts-per-redemption',
                         'quantity' => $faker->numberBetween(1, 100),
                     ]
+                ];
+            case 'countries':
+                return ['US'];
+            case 'rates':
+                return [
+                    Entities\Shipping\Rate::createFromData([
+                        'name' => 'test',
+                        'minOrderSubtotal' => 4,
+                        'maxOrderSubtotal' => 10,
+                        'price' => 5,
+                        'default' => false,
+                        'currency' => 'USD',
+                    ]),
                 ];
             case 'values':
                 return [

@@ -25,9 +25,6 @@ use Rebilly\Rest\Entity;
  *   "deliveryContact"
  * }
  * ```
- *
- * @todo Rename property `billingContact` to `billingContactId`
- * @todo Rename property `deliveryContact` to `deliveryContactId`
  */
 final class Invoice extends Entity
 {
@@ -112,39 +109,45 @@ final class Invoice extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version. Please use getBillingAddress.
+     *
      * @return string
      */
     public function getBillingContactId()
     {
-        return $this->getAttribute('billingContact');
+        return $this->getAttribute('billingContactId');
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version. Please use setBillingAddress.
      * @param string $value
      *
      * @return $this
      */
     public function setBillingContactId($value)
     {
-        return $this->setAttribute('billingContact', $value);
+        return $this->setAttribute('billingContactId', $value);
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version. Please use getDeliveryAddress.
+     *
      * @return string
      */
     public function getDeliveryContactId()
     {
-        return $this->getAttribute('deliveryContact');
+        return $this->getAttribute('deliveryContactId');
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version. Please use setDeliveryAddress.
      * @param string $value
      *
      * @return $this
      */
     public function setDeliveryContactId($value)
     {
-        return $this->setAttribute('deliveryContact', $value);
+        return $this->setAttribute('deliveryContactId', $value);
     }
 
     /**
@@ -191,5 +194,65 @@ final class Invoice extends Entity
         }
 
         return $invoiceTaxes;
+    }
+
+    /**
+     * @return Address
+     */
+    public function getBillingAddress()
+    {
+        return $this->getAttribute('billingAddress');
+    }
+
+    /**
+     * @param Address|array $value
+     *
+     * @return $this
+     */
+    public function setBillingAddress($value)
+    {
+        return $this->setAttribute('billingAddress', $value);
+    }
+
+    /**
+     * @return Address
+     */
+    public function getDeliveryAddress()
+    {
+        return $this->getAttribute('deliveryAddress');
+    }
+
+    /**
+     * @param Address|array $value
+     *
+     * @return $this
+     */
+    public function setDeliveryAddress($value)
+    {
+        return $this->setAttribute('deliveryAddress', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->getAttribute('status');
+    }
+
+    /**
+     * @return int
+     */
+    public function getCollectionPeriod()
+    {
+        return $this->getAttribute('collectionPeriod');
+    }
+
+    /**
+     * @return int
+     */
+    public function getDelinquentCollectionPeriod()
+    {
+        return $this->getAttribute('delinquentCollectionPeriod');
     }
 }

@@ -130,6 +130,8 @@ final class PaymentCard extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version. Please use getBillingAddress.
+     *
      * @return string
      */
     public function getBillingContactId()
@@ -138,6 +140,7 @@ final class PaymentCard extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version. Please use setBillingAddress.
      * @param string $value
      *
      * @return $this
@@ -205,5 +208,23 @@ final class PaymentCard extends Entity
     public function getBankCountry()
     {
         return $this->getAttribute('bankCountry');
+    }
+
+    /**
+     * @return Address
+     */
+    public function getBillingAddress()
+    {
+        return $this->getAttribute('billingAddress');
+    }
+
+    /**
+     * @param Address|array $value
+     *
+     * @return $this
+     */
+    public function setBillingAddress($value)
+    {
+        return $this->setAttribute('billingAddress', $value);
     }
 }

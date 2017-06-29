@@ -16,6 +16,7 @@ use InvalidArgumentException;
 use IteratorAggregate;
 use Rebilly\Entities\Coupons\Coupon;
 use Rebilly\Entities\Coupons\Redemption;
+use Rebilly\Entities\Shipping\ShippingZone;
 use Rebilly\Rest\Collection;
 
 /**
@@ -61,6 +62,18 @@ final class Schema implements IteratorAggregate, ArrayAccess
             },
             'attachments/{attachmentId}' => function (array $content) {
                 return new Attachment($content);
+            },
+            'shipping-zones' => function (array $content) {
+                return new Collection(new ShippingZone(), $content);
+            },
+            'shipping-zones/{shippingZoneId}' => function (array $content) {
+                return new ShippingZone($content);
+            },
+            'products' => function (array $content) {
+                return new Collection(new Product(), $content);
+            },
+            'products/{productId}' => function (array $content) {
+                return new Product($content);
             },
             'contacts' => function (array $content) {
                 return new Collection(new Contact(), $content);
@@ -289,6 +302,15 @@ final class Schema implements IteratorAggregate, ArrayAccess
             },
             'tracking/lists' => function (array $content) {
                 return new Collection(new ValuesList(), $content);
+            },
+            'webhooks' => function (array $content) {
+                return new Collection(new Webhook(), $content);
+            },
+            'webhooks/{webhookId}' => function (array $content) {
+                return new Webhook($content);
+            },
+            'previews/webhooks' => function (array $content) {
+                return new Webhook($content);
             },
         ];
     }
