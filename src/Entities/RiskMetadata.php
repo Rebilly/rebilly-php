@@ -97,4 +97,40 @@ final class RiskMetadata extends Resource
     {
         return $this->getAttribute('isp');
     }
+
+    /**
+     * @return string|null
+     */
+    public function getFingerprint()
+    {
+        return $this->getAttribute('fingerprint');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setFingerprint($value)
+    {
+        return $this->setAttribute('fingerprint', $value);
+    }
+
+    /**
+     * @return array
+     */
+    public function getHttpHeaders()
+    {
+        return $this->getAttribute('httpHeaders');
+    }
+
+    /**
+     * @param array $value
+     *
+     * @return $this
+     */
+    public function setHttpHeaders($value)
+    {
+        return $this->setAttribute('httpHeaders', $value);
+    }
 }
