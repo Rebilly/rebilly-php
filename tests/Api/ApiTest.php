@@ -1434,6 +1434,11 @@ class ApiTest extends TestCase
                 return new Entities\RiskMetadata([
                     'ipAddress' => $faker->ipv4,
                 ]);
+            case 'httpHeaders':
+                return [
+                    'User-Agent' => 'Mozilla/5.0',
+                    'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                ];
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
