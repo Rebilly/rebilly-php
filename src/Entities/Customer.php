@@ -83,24 +83,6 @@ final class Customer extends Entity
     }
 
     /**
-     * @return string
-     */
-    public function getIpAddress()
-    {
-        return $this->getAttribute('ipAddress');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setIpAddress($value)
-    {
-        return $this->setAttribute('ipAddress', $value);
-    }
-
-    /**
      * @return Address
      */
     public function getPrimaryAddress()
