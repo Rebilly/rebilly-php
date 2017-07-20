@@ -133,4 +133,60 @@ final class RiskMetadata extends Resource
     {
         return $this->setAttribute('httpHeaders', $value);
     }
+
+    /**
+     * @return string|null
+     */
+    public function getCountry()
+    {
+        return $this->getAttribute('country');
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCity()
+    {
+        return $this->getAttribute('city');
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getLatitude()
+    {
+        return $this->getAttribute('latitude');
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getLongitude()
+    {
+        return $this->getAttribute('longitude');
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPostalCode()
+    {
+        return $this->getAttribute('postalCode');
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTimeZone()
+    {
+        return $this->getAttribute('timeZone');
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getAccuracyRadius()
+    {
+        return $this->getAttribute('accuracyRadius');
+    }
 }
