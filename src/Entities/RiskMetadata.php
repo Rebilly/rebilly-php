@@ -77,9 +77,9 @@ final class RiskMetadata extends Resource
     /**
      * @return bool
      */
-    public function getIsVPN()
+    public function getIsVpn()
     {
-        return $this->getAttribute('isVPN');
+        return $this->getAttribute('isVpn');
     }
 
     /**
