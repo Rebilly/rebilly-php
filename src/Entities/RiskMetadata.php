@@ -24,6 +24,15 @@ use Rebilly\Rest\Resource;
  *   "ipVPN",
  *   "vpnServiceName",
  *   "isp"
+ *   "fingerprint"
+ *   "httpHeaders"
+ *   "country"
+ *   "city"
+ *   "latitude"
+ *   "longitude"
+ *   "postalCode"
+ *   "timeZone"
+ *   "accuracyRadius"
  * }
  * ```
  *
