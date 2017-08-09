@@ -94,10 +94,13 @@ final class Customer extends Entity
     {
         return $this->getAttribute('ipAddress');
     }
+
     /**
      * @deprecated The method is deprecated and will be removed in next version.
      * @see Payment::setRiskMetadata()
      * @see Subscription::setRiskMetadata()
+     *
+     * @param string $value
      *
      * @return $this
      */
