@@ -83,6 +83,30 @@ final class Customer extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see Payment::getRiskMetadata()
+     * @see Subscription::getRiskMetadata()
+     * @see Transaction::getRiskMetadata()
+     *
+     * @return string
+     */
+    public function getIpAddress()
+    {
+        return $this->getAttribute('ipAddress');
+    }
+    /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see Payment::setRiskMetadata()
+     * @see Subscription::setRiskMetadata()
+     *
+     * @return $this
+     */
+    public function setIpAddress($value)
+    {
+        return $this->setAttribute('ipAddress', $value);
+    }
+
+    /**
      * @return Address
      */
     public function getPrimaryAddress()
