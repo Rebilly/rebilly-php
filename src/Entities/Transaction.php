@@ -289,4 +289,12 @@ final class Transaction extends Entity
     {
         return $this->getAttribute('billingAddress');
     }
+
+    /**
+     * @return RiskMetadata
+     */
+    public function getRiskMetadata()
+    {
+        return $this->getAttribute('riskMetadata');
+    }
 }

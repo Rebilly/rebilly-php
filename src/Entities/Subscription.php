@@ -409,4 +409,22 @@ final class Subscription extends Entity
     {
         return $this->setAttribute('deliveryAddress', $value);
     }
+
+    /**
+     * @return RiskMetadata
+     */
+    public function getRiskMetadata()
+    {
+        return $this->getAttribute('riskMetadata');
+    }
+
+    /**
+     * @param RiskMetadata|array $value
+     *
+     * @return $this
+     */
+    public function setRiskMetadata($value)
+    {
+        return $this->setAttribute('riskMetadata', $value);
+    }
 }
