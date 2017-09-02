@@ -312,6 +312,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'previews/webhooks' => function (array $content) {
                 return new Webhook($content);
             },
+            'tracking/webhooks' => function (array $content) {
+                return new Collection(new WebhookTracking(), $content);
+            },
+            'tracking/webhooks/{webhookId}' => function (array $content) {
+                return new WebhookTracking($content);
+            },
         ];
     }
 
