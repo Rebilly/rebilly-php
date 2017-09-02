@@ -33,7 +33,6 @@ use Rebilly\Rest\Entity;
  */
 final class WebhookTracking extends Entity
 {
-
     /**
      * @return string
      */
