@@ -151,6 +151,7 @@ final class Client
         'lists' => Services\ValuesListService::class,
         'listsTracking' => Services\ValuesListTrackingService::class,
         'shippingZones' => Services\ShippingZoneService::class,
+        'webhooksTracking' => Services\WebhookTrackingService::class,
     ];
 
     /** @var array */
