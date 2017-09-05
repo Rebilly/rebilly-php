@@ -749,6 +749,7 @@ class ApiTest extends TestCase
             [Entities\Product::class],
             [Entities\Webhook::class],
             [Entities\RiskMetadata::class],
+            [Entities\WebhookTracking::class],
         ];
     }
 
@@ -965,6 +966,11 @@ class ApiTest extends TestCase
                 'webhooks',
                 Services\WebhooksService::class,
                 Entities\Webhook::class,
+            ],
+            [
+                'webhooksTracking',
+                Services\WebhookTrackingService::class,
+                Entities\WebhookTracking::class,
             ],
         ];
     }
