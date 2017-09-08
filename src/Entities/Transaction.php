@@ -127,7 +127,7 @@ final class Transaction extends Entity
      */
     public function getCustomerId()
     {
-        return $this->getAttribute('customer');
+        return $this->getAttribute('customerId');
     }
 
     /**
