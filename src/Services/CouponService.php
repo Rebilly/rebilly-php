@@ -64,7 +64,7 @@ final class CouponService extends Service
      * @param array|JsonSerializable|Coupon $data
      * @param string $redemptionCode
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws UnprocessableEntityException The input data is not valid
      *
      * @return Coupon
      */
@@ -81,12 +81,28 @@ final class CouponService extends Service
      * @param string $redemptionCode
      * @param array|JsonSerializable|Coupon $data
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws UnprocessableEntityException The input data is not valid
      *
      * @return Coupon
      */
     public function update($redemptionCode, $data)
     {
         return $this->client()->put($data, 'coupons/{redemptionCode}', ['redemptionCode' => $redemptionCode]);
+    }
+
+    /**
+     * @param $redemptionCode
+     * @param null $expiredTime Leaving $expiredTime null with expire the coupon.
+     *
+     * @throws UnprocessableEntityException The input data is not valid
+     *
+     * @return Coupon
+     */
+    public function expiration($redemptionCode, $expiredTime = null)
+    {
+        return $this->client()->post(
+            ['expiredTime' => $expiredTime],
+            'coupons/{redemptionCode}/expiration', ['redemptionCode' => $redemptionCode]
+        );
     }
 }
