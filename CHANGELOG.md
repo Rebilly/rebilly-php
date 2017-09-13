@@ -3,13 +3,44 @@ All notable changes to this project will be documented in this file
 using the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+<!--
+Types of changes
+
+Added - for new features.
+Changed - for changes in existing functionality.
+Deprecated - for soon-to-be removed features.
+Removed - for now removed features.
+Fixed - for any bug fixes.
+Security - in case of vulnerabilities.
+-->
+
 ## [Unreleased]
 
+_TBD_
+
+## [2.0.7] 2017-09-13
+
 ### Added
-- [x] Added support for `Webhooks` 
+- [x] Added ability to configure permission of the `PATCH` method for the user session.
+- [x] Added missing getters and setters in the `Subscription`, `SubscriptionSwitch`, `Transaction`, `Coupon`.
+- [x] Added `status` property in the `Invoice`.
+- [x] Added `DELETE` method to the **Contacts API**.
+- [x] Added **Contact Value Object** which is replacement to the relations between `Contact` and other resource,
+      like `Transaction`, `Invoice` and others.
+- [x] Implemented **Values List API**.
+- [x] Added new endpoint to change the Coupon expiration.
+- [x] Implemented **Products API**.
+- [x] Implemented **Shipping Zone API**.
+- [x] Implemented **Webhooks API**.
+- [x] Implemented **Webhooks Tracking API**.
+- [x] Implemented **Risk Metadata API**.
 
 ### Removed
 - [x] Removed Email Credentials API, it is never used.
+- [x] Removed attribute `threeDSecureType` from the `Transaction`.
+
+### Fixed
+- [x] Fixed some erroneous properties in resources.
 
 ## [2.0.6] 2017-01-07
 
