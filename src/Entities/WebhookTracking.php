@@ -100,7 +100,7 @@ final class WebhookTracking extends Entity
     /**
      * @return string
      */
-    public function getIitiatedTime()
+    public function getInitiatedTime()
     {
         return $this->getAttribute('initiatedTime');
     }
