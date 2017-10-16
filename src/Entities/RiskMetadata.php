@@ -33,6 +33,7 @@ use Rebilly\Rest\Resource;
  *   "postalCode"
  *   "timeZone"
  *   "accuracyRadius"
+ *   "distance"
  * }
  * ```
  *
@@ -197,5 +198,13 @@ final class RiskMetadata extends Resource
     public function getAccuracyRadius()
     {
         return $this->getAttribute('accuracyRadius');
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getDistance()
+    {
+        return $this->getAttribute('distance');
     }
 }
