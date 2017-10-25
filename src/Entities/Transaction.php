@@ -297,4 +297,20 @@ final class Transaction extends Entity
     {
         return $this->getAttribute('riskMetadata');
     }
+
+    /**
+     * @return bool
+     */
+    public function getIsRetry()
+    {
+        return $this->getAttribute('isRetry');
+    }
+
+    /**
+     * @return string
+     */
+    public function getRetriesResult()
+    {
+        return $this->getAttribute('retriesResult');
+    }
 }
