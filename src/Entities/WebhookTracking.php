@@ -74,11 +74,27 @@ final class WebhookTracking extends Entity
     }
 
     /**
-     * @return array
+     * @return string
      */
     public function getPayload()
     {
         return $this->getAttribute('payload');
+    }
+
+    /**
+     * @return string
+     */
+    public function getSource()
+    {
+        return $this->getAttribute('source');
+    }
+
+    /**
+     * @return int
+     */
+    public function getAttempt()
+    {
+        return $this->getAttribute('attempt');
     }
 
     /**
