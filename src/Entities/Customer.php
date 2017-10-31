@@ -166,9 +166,9 @@ final class Customer extends Entity
      *
      * @return $this
      */
-    public function setDefaultPaymentInstrument(PaymentMethodInstrument $value)
+    public function setDefaultPaymentInstrument($value)
     {
-        return $this->setAttribute('defaultPaymentInstrument', $value->jsonSerialize());
+        return $this->setAttribute('defaultPaymentInstrument', $value);
     }
 
     /**
