@@ -215,7 +215,7 @@ final class PaymentCard extends Entity
      */
     public function getBillingAddress()
     {
-        return $this->getAttribute('billingAddress');
+        return new Address($this->getAttribute('billingAddress'));
     }
 
     /**
