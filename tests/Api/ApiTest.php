@@ -75,8 +75,7 @@ class ApiTest extends TestCase
 
             // Test attributes factory
             if (is_array($value) && method_exists($resource, "create{$attribute}")) {
-                $value = $resource->{"create{$attribute}"}($value);
-                $objects[$attribute] = $value;
+                $objects[$attribute] = $resource->{"create{$attribute}"}($value);
             }
 
             $resource->$method($value);
@@ -1293,7 +1292,7 @@ class ApiTest extends TestCase
             case 'primaryAddress':
             case 'billingAddress':
             case 'deliveryAddress':
-                return Entities\Address::createFromData([
+                return [
                     'firstName' => $faker->firstName,
                     'lastName' => $faker->lastName,
                     'city' => $faker->city,
@@ -1317,7 +1316,7 @@ class ApiTest extends TestCase
                             'value' => $faker->phoneNumber,
                         ]
                     ],
-                ]);
+                ];
             case 'method':
             case 'defaultPaymentMethod':
                 switch ($class) {
