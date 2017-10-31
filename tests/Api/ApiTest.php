@@ -1151,8 +1151,9 @@ class ApiTest extends TestCase
                 return $faker->$attribute;
             case 'address':
                 switch ($class) {
-                    case Entities\Address::class:
-                        return new Entities\Address([
+                    case Entities\BankAccount::class:
+                    case Entities\PayPalAccount::class:
+                        return [
                             'firstName' => $faker->firstName,
                             'lastName' => $faker->lastName,
                             'city' => $faker->city,
@@ -1176,7 +1177,7 @@ class ApiTest extends TestCase
                                     'value' => $faker->phoneNumber,
                                 ]),
                             ],
-                        ]);
+                        ];
                     default:
                         return $faker->$attribute;
                 }
