@@ -687,6 +687,28 @@ class ApiTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function useFactories()
+    {
+        $resource = new Customer();
+
+        $data = $this->getFakeValue('primaryAddress', Customer::class);
+
+        self::assertNotEmpty($data);
+
+        $resource->setPrimaryAddress($data);
+
+        self::assertInstanceOf(Entities\Address::class, $resource->getPrimaryAddress());
+
+        $data = $this->getFakeValue('primaryAddress', Customer::class);
+
+        $resource->setPrimaryAddress(Entities\Address::createFromData($data));
+
+        self::assertInstanceOf(Entities\Address::class, $resource->getPrimaryAddress());
+    }
+
+    /**
      * @return array
      */
     public function provideEntityClasses()
