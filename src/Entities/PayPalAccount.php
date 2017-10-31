@@ -168,4 +168,14 @@ final class PayPalAccount extends Entity
     {
         return $this->setAttribute('address', $value);
     }
+
+    /**
+     * @param array $data
+     *
+     * @return Address
+     */
+    public function createAddress(array $data)
+    {
+        return new Address($data);
+    }
 }

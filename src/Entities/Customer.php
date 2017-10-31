@@ -192,4 +192,14 @@ final class Customer extends Entity
             return null;
         }
     }
+
+    /**
+     * @param array $data
+     *
+     * @return Address
+     */
+    public function createPrimaryAddress(array $data)
+    {
+        return new Address($data);
+    }
 }
