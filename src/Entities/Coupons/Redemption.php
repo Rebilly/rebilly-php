@@ -82,17 +82,7 @@ final class Redemption extends Entity
      */
     public function setAdditionalRestrictions(array $restrictions)
     {
-        $value = [];
-
-        foreach ($restrictions as $restriction) {
-            if (!$restriction instanceof Restriction) {
-                throw new DomainException('Wrong restrictions object');
-            }
-
-            $value[] = $restriction->jsonSerialize();
-        }
-
-        return $this->setAttribute('additionalRestrictions', $value);
+        return $this->setAttribute('additionalRestrictions', $restrictions);
     }
 
     /**

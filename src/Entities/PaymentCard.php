@@ -227,4 +227,14 @@ final class PaymentCard extends Entity
     {
         return $this->setAttribute('billingAddress', $value);
     }
+
+    /**
+     * @param array $data
+     *
+     * @return Address
+     */
+    public function createBillingAddress(array $data)
+    {
+        return new Address($data);
+    }
 }

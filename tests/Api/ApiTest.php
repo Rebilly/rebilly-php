@@ -75,8 +75,7 @@ class ApiTest extends TestCase
 
             // Test attributes factory
             if (is_array($value) && method_exists($resource, "create{$attribute}")) {
-                $value = $resource->{"create{$attribute}"}($value);
-                $objects[$attribute] = $value;
+                $objects[$attribute] = $resource->{"create{$attribute}"}($value);
             }
 
             $resource->$method($value);
@@ -1152,8 +1151,9 @@ class ApiTest extends TestCase
                 return $faker->$attribute;
             case 'address':
                 switch ($class) {
-                    case Entities\Address::class:
-                        return new Entities\Address([
+                    case Entities\BankAccount::class:
+                    case Entities\PayPalAccount::class:
+                        return [
                             'firstName' => $faker->firstName,
                             'lastName' => $faker->lastName,
                             'city' => $faker->city,
@@ -1177,7 +1177,7 @@ class ApiTest extends TestCase
                                     'value' => $faker->phoneNumber,
                                 ]),
                             ],
-                        ]);
+                        ];
                     default:
                         return $faker->$attribute;
                 }
@@ -1293,7 +1293,7 @@ class ApiTest extends TestCase
             case 'primaryAddress':
             case 'billingAddress':
             case 'deliveryAddress':
-                return Entities\Address::createFromData([
+                return [
                     'firstName' => $faker->firstName,
                     'lastName' => $faker->lastName,
                     'city' => $faker->city,
@@ -1317,7 +1317,7 @@ class ApiTest extends TestCase
                             'value' => $faker->phoneNumber,
                         ]
                     ],
-                ]);
+                ];
             case 'method':
             case 'defaultPaymentMethod':
                 switch ($class) {

@@ -82,9 +82,9 @@ final class Coupon extends Resource
      *
      * @return $this
      */
-    public function setDiscount(Discount $discount)
+    public function setDiscount($discount)
     {
-        return $this->setAttribute('discount', $discount->jsonSerialize());
+        return $this->setAttribute('discount', $discount);
     }
 
     /**
@@ -114,17 +114,7 @@ final class Coupon extends Resource
      */
     public function setRestrictions(array $restrictions)
     {
-        $value = [];
-
-        foreach ($restrictions as $restriction) {
-            if (!$restriction instanceof Restriction) {
-                throw new DomainException('Wrong restrictions object');
-            }
-
-            $value[] = $restriction->jsonSerialize();
-        }
-
-        return $this->setAttribute('restrictions', $value);
+        return $this->setAttribute('restrictions', $restrictions);
     }
 
     /**

@@ -85,6 +85,16 @@ final class BankAccount extends Entity
     }
 
     /**
+     * @param array $data
+     *
+     * @return Address
+     */
+    public function createAddress(array $data)
+    {
+        return new Address($data);
+    }
+
+    /**
      * @param Address|array $value
      *
      * @return $this
