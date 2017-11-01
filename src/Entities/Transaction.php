@@ -299,6 +299,16 @@ final class Transaction extends Entity
     }
 
     /**
+     * @param array $data
+     *
+     * @return Address
+     */
+    public function createBillingAddress(array $data)
+    {
+        return new Address($data);
+    }
+
+    /**
      * @return bool
      */
     public function getIsRetry()

@@ -164,6 +164,10 @@ abstract class Resource implements JsonSerializable, ArrayAccess
     {
         $factory = "create{$name}";
 
+        if ($value instanceof JsonSerializable) {
+            $value = $value->jsonSerialize();
+        }
+
         $value = $this->{$factory}($value);
 
         if (!($value instanceof JsonSerializable || is_array($value))) {

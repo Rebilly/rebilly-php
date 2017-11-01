@@ -255,4 +255,24 @@ final class Invoice extends Entity
     {
         return $this->getAttribute('delinquentCollectionPeriod');
     }
+
+    /**
+     * @param array $data
+     *
+     * @return Address
+     */
+    public function createBillingAddress(array $data)
+    {
+        return new Address($data);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return Address
+     */
+    public function createDeliveryAddress(array $data)
+    {
+        return new Address($data);
+    }
 }
