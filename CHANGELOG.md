@@ -17,6 +17,7 @@ Security - in case of vulnerabilities.
 ## [Unreleased]
 
 _TBD_
+- [x] Removed **Website** checkoutPageUri.
 
 ## [2.0.7] 2017-09-13
 
