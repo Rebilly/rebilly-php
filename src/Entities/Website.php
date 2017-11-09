@@ -22,7 +22,6 @@ use Rebilly\Rest\Entity;
  *   "url"
  *   "phone"
  *   "email"
- *   "checkoutPageUri"
  *   "webHookUrl"
  *   "webHookUsername"
  *   "webHookPassword"
@@ -113,24 +112,6 @@ final class Website extends Entity
     public function setServiceEmail($value)
     {
         return $this->setAttribute('serviceEmail', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getCheckoutPageUri()
-    {
-        return $this->getAttribute('checkoutPageUri');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setCheckoutPageUri($value)
-    {
-        return $this->setAttribute('checkoutPageUri', $value);
     }
 
     /**

@@ -1054,7 +1054,6 @@ class ApiTest extends TestCase
             case 'setupAmount':
                 return $faker->randomFloat(2);
             case 'uriPath':
-            case 'checkoutPageUri':
             case 'gatewayName':
             case 'organizationId':
             case 'acquirerName':
