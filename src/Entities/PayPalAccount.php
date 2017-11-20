@@ -53,7 +53,7 @@ final class PayPalAccount extends Entity
     }
 
     /**
-     * @deprecated The method is deprecated and will be removed in next version. Please use getAddress.
+     * @deprecated The method is deprecated and will be removed in next version. Please use getBillingAddress.
      *
      * @return string
      */
@@ -63,7 +63,7 @@ final class PayPalAccount extends Entity
     }
 
     /**
-     * @deprecated The method is deprecated and will be removed in next version. Please use setAddress.
+     * @deprecated The method is deprecated and will be removed in next version. Please use setBillingAddress.
      * @param string $value
      *
      * @return $this
@@ -142,7 +142,7 @@ final class PayPalAccount extends Entity
     }
 
     /**
-     * @deprecated The method is deprecated and will be removed in next version. Please use getAddress.
+     * @deprecated The method is deprecated and will be removed in next version. Please use getBillingAddress.
      *
      * @return null|Contact
      */
@@ -154,9 +154,9 @@ final class PayPalAccount extends Entity
     /**
      * @return Address
      */
-    public function getAddress()
+    public function getBillingAddress()
     {
-        return $this->getAttribute('address');
+        return $this->getAttribute('billingAddress');
     }
 
     /**
@@ -164,9 +164,9 @@ final class PayPalAccount extends Entity
      *
      * @return $this
      */
-    public function setAddress($value)
+    public function setBillingAddress($value)
     {
-        return $this->setAttribute('address', $value);
+        return $this->setAttribute('billingAddress', $value);
     }
 
     /**
@@ -174,7 +174,7 @@ final class PayPalAccount extends Entity
      *
      * @return Address
      */
-    public function createAddress(array $data)
+    public function createBillingAddress(array $data)
     {
         return new Address($data);
     }
