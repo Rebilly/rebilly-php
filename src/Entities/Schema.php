@@ -216,9 +216,6 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'gateway-accounts/{gatewayAccountId}' => function (array $content) {
                 return new GatewayAccount($content);
             },
-            'sessions' => function (array $content) {
-                return new Collection(new Session(), $content);
-            },
             'sessions/{sessionId}' => function (array $content) {
                 return new Session($content);
             },

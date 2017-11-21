@@ -20,33 +20,13 @@ use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
 
 /**
- * Class AclTokenService
+ * Class SessionService
  *
  * @author Arman Tuyakbayev <arman.tuyakbayev@rebilly.com>
  * @version 0.1
  */
 final class SessionService extends Service
 {
-    /**
-     * @param array|ArrayObject $params
-     *
-     * @return Session[][]|Collection[]|Paginator
-     */
-    public function paginator($params = [])
-    {
-        return new Paginator($this->client(), 'sessions', $params);
-    }
-
-    /**
-     * @param array|ArrayObject $params
-     *
-     * @return Session[]|Collection
-     */
-    public function search($params = [])
-    {
-        return $this->client()->get('sessions', $params);
-    }
-
     /**
      * @param string $tokenId
      * @param array|ArrayObject $params
