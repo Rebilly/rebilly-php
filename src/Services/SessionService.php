@@ -15,8 +15,6 @@ use JsonSerializable;
 use Rebilly\Entities\Session;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
-use Rebilly\Paginator;
-use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
 
 /**
