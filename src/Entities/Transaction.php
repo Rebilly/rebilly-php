@@ -323,4 +323,12 @@ final class Transaction extends Entity
     {
         return $this->getAttribute('retriesResult');
     }
+
+    /**
+     * @return array
+     */
+    public function getRedirectUrls()
+    {
+        return $this->getAttribute('redirectUrls');
+    }
 }
