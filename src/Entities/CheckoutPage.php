@@ -26,6 +26,8 @@ use Rebilly\Rest\Entity;
  *   "redirectTimeout"
  *   "isActive"
  *   "allowCustomCustomerId"
+ *   "createdTime"
+ *   "updatedTime"
  * }
  * ```
  *
@@ -176,5 +178,13 @@ final class CheckoutPage extends Entity
     public function setAllowCustomCustomerId($value)
     {
         return $this->setAttribute('allowCustomCustomerId', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getCreatedTime()
+    {
+        return $this->getAttribute('createdTime');
     }
 }
