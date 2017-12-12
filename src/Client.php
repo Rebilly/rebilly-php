@@ -459,6 +459,10 @@ final class Client
             return null;
         }
 
+        if ($response->getStatusCode() === 204) {
+            return null;
+        }
+
         $responseParsers = [
             'application/json' => [$this, 'parseJsonResponseBody'],
             'application/pdf' => [$this, 'parseBinaryResponseBody'],
