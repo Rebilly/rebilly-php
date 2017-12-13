@@ -762,7 +762,6 @@ class ApiTest extends TestCase
             [Entities\Email::class],
             [Entities\Login::class],
             [Entities\Dispute::class],
-            [Entities\WebsiteWebhookTracking::class],
             [Entities\PaymentCardMigrationsRequest::class],
             [Entities\Coupons\Coupon::class],
             [Entities\Coupons\Redemption::class],
@@ -954,11 +953,6 @@ class ApiTest extends TestCase
                 Entities\Dispute::class,
             ],
             [
-                'websiteWebhookTracking',
-                Services\WebsiteWebhookTrackingService::class,
-                Entities\WebsiteWebhookTracking::class,
-            ],
-            [
                 'paymentCardMigrations',
                 Services\PaymentCardMigrationsService::class,
                 Entities\PaymentCardMigrationsRequest::class,
@@ -1112,14 +1106,10 @@ class ApiTest extends TestCase
                 return $faker->year;
             case 'expMonth':
                 return $faker->month;
-            case 'webHookUrl':
             case 'host':
                 return $faker->url;
-            case 'webHookUsername':
             case 'userName':
                 return $faker->userName;
-            case 'webHookPassword':
-                return $faker->md5;
             case 'eventsFilter':
                 return $faker->randomElements([
                     "gateway-account-requested",
