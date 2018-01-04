@@ -33,7 +33,7 @@ final class Invoice extends Entity
      */
     public function getCustomerId()
     {
-        return $this->getAttribute('customer');
+        return $this->getAttribute('customerId');
     }
 
     /**
@@ -43,7 +43,7 @@ final class Invoice extends Entity
      */
     public function setCustomerId($value)
     {
-        return $this->setAttribute('customer', $value);
+        return $this->setAttribute('customerId', $value);
     }
 
     /**
@@ -51,7 +51,7 @@ final class Invoice extends Entity
      */
     public function getWebsiteId()
     {
-        return $this->getAttribute('website');
+        return $this->getAttribute('websiteId');
     }
 
     /**
@@ -69,7 +69,7 @@ final class Invoice extends Entity
      */
     public function setWebsiteId($value)
     {
-        return $this->setAttribute('website', $value);
+        return $this->setAttribute('websiteId', $value);
     }
 
     /**
