@@ -5,7 +5,7 @@ namespace Rebilly\Entities\Contact;
 use Rebilly\Rest\Resource;
 
 /**
- * Class Email. Represents a single email in an Address resource.
+ * Class ForgotPassword. Represents a single email in an Address resource.
  */
 class Email extends Resource
 {

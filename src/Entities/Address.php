@@ -2,6 +2,7 @@
 
 namespace Rebilly\Entities;
 
+use Rebilly\Entities\Contact\Email;
 use Rebilly\Entities\Contact\PhoneNumber;
 use Rebilly\Rest\Resource;
 
@@ -219,7 +220,7 @@ class Address extends Resource
     }
 
     /**
-     * @return Email[]
+     * @return ForgotPassword[]
      */
     public function getEmails()
     {
@@ -227,7 +228,7 @@ class Address extends Resource
     }
 
     /**
-     * @param Email[] $value
+     * @param ForgotPassword[] $value
      *
      * @return $this
      */

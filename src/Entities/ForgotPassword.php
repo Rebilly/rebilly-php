@@ -13,18 +13,9 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Resource;
 
 /**
- * Class Email
- *
- * ```json
- * {
- *   "email"
- * }
- * ```
- *
- * @author Maksim Tuzov <maksim.tuzov@rebilly.com>
- * @version 0.1
+ * Class ForgotPassword.
  */
-final class Email extends Resource
+final class ForgotPassword extends Resource
 {
     /**
      * @return string
