@@ -5,18 +5,18 @@ namespace Rebilly\Entities\Contact;
 use Rebilly\Rest\Resource;
 
 /**
- * Class ForgotPassword. Represents a single email in an Address resource.
+ * Class Email. Represents a single email in an Address resource.
  */
 class Email extends Resource
 {
     /**
      * @param array $data
      *
-     * @return Email
+     * @return self
      */
     public static function createFromData(array $data)
     {
-        return new Email($data);
+        return new self($data);
     }
 
     /**

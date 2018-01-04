@@ -220,7 +220,7 @@ class Address extends Resource
     }
 
     /**
-     * @return ForgotPassword[]
+     * @return Email[]
      */
     public function getEmails()
     {
@@ -228,7 +228,7 @@ class Address extends Resource
     }
 
     /**
-     * @param ForgotPassword[] $value
+     * @param Email[] $value
      *
      * @return $this
      */
