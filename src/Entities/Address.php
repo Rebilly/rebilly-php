@@ -2,6 +2,7 @@
 
 namespace Rebilly\Entities;
 
+use Rebilly\Entities\Contact\Email;
 use Rebilly\Entities\Contact\PhoneNumber;
 use Rebilly\Rest\Resource;
 

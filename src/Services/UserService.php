@@ -12,7 +12,7 @@ namespace Rebilly\Services;
 
 use ArrayObject;
 use JsonSerializable;
-use Rebilly\Entities\Email;
+use Rebilly\Entities\ForgotPassword;
 use Rebilly\Entities\Login;
 use Rebilly\Entities\ResetPassword;
 use Rebilly\Entities\Session;
@@ -58,7 +58,7 @@ final class UserService extends Service
     }
 
     /**
-     * @param array|JsonSerializable|Email $data
+     * @param array|JsonSerializable|ForgotPassword $data
      *
      * @throws UnprocessableEntityException The input data does not valid
      *

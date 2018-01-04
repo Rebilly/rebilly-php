@@ -12,11 +12,11 @@ class Email extends Resource
     /**
      * @param array $data
      *
-     * @return Email
+     * @return self
      */
     public static function createFromData(array $data)
     {
-        return new Email($data);
+        return new self($data);
     }
 
     /**
