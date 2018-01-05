@@ -18,7 +18,7 @@ Security - in case of vulnerabilities.
 
 _TBD_
 
-## [2.1.1] 2018-01-04
+## [2.1.0] 2018-01-04
 - [x] Updated Invoice methods to use `websiteId` and `customerId`
 - [x] Rename `Email` object to `ForgotPassword` and update corresponding usages.
 - [x] Fix erroneous import of wrong `Email` object.
