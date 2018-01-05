@@ -17,6 +17,11 @@ Security - in case of vulnerabilities.
 ## [Unreleased]
 
 _TBD_
+
+## [2.1.1] 2018-01-04
+- [x] Updated Invoice methods to use `websiteId` and `customerId`
+- [x] Rename `Email` object to `ForgotPassword` and update corresponding usages.
+- [x] Fix erroneous import of wrong `Email` object.
 - [x] Removed **Website** checkoutPageUri.
 
 ## [2.0.7] 2017-09-13
