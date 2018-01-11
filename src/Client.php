@@ -80,7 +80,6 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\ApiTrackingService apiTracking()
  * @method Services\ShippingZoneService shippingZones()
  * @method Services\SchedulePaymentService scheduledPayments()
- * @method Services\WebsiteWebhookTrackingService websiteWebhookTracking()
  * @method Services\ApiKeyService apiKeys()
  * @method Services\CheckoutPageService checkoutPages()
  * @method Services\DisputeService disputes()
@@ -90,7 +89,6 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\ProductService products()
  * @method Services\CouponService coupons()
  * @method Services\RedemptionService couponsRedemptions()
- * @method Services\WebsiteWebhookService websiteWebhook()
  * @method Services\WebhooksService webhooks()
  * @method Services\ValuesListService lists()
  * @method Services\ValuesListTrackingService listsTracking()
@@ -138,7 +136,6 @@ final class Client
         'sessions' => Services\SessionService::class,
         'users' => Services\UserService::class,
         'threeDSecure' => Services\ThreeDSecureService::class,
-        'websiteWebhookTracking' => Services\WebsiteWebhookTrackingService::class,
         'subscriptionTracking' => Services\SubscriptionTrackingService::class,
         'apiTracking' => Services\ApiTrackingService::class,
         'apiKeys' => Services\ApiKeyService::class,
@@ -147,7 +144,6 @@ final class Client
         'paymentCardMigrations' => Services\PaymentCardMigrationsService::class,
         'coupons' => Services\CouponService::class,
         'couponsRedemptions' => Services\RedemptionService::class,
-        'websiteWebhook' => Services\WebsiteWebhookService::class,
         'webhooks' => Services\WebhooksService::class,
         'lists' => Services\ValuesListService::class,
         'listsTracking' => Services\ValuesListTrackingService::class,
