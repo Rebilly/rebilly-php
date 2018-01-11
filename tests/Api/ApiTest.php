@@ -770,6 +770,8 @@ class ApiTest extends TestCase
             [Entities\Webhook::class],
             [Entities\RiskMetadata::class],
             [Entities\WebhookTracking::class],
+            [Entities\EmailNotifications\CustomerNotification::class],
+            [Entities\EmailNotifications\OrderNotification::class],
         ];
     }
 
@@ -987,6 +989,16 @@ class ApiTest extends TestCase
                 Services\WebhookTrackingService::class,
                 Entities\WebhookTracking::class,
             ],
+            [
+                'customerNotifications',
+                Services\CustomerNotificationService::class,
+                Entities\EmailNotifications\CustomerNotification::class,
+            ],
+            [
+                'orderNotifications',
+                Services\OrderNotificationService::class,
+                Entities\EmailNotifications\OrderNotification::class,
+            ],
         ];
     }
 
@@ -1093,6 +1105,8 @@ class ApiTest extends TestCase
             case 'clickId':
             case 'path':
             case 'descriptor':
+            case 'subject':
+            case 'body':
                 return $faker->words;
             case 'description':
             case 'richDescription':
@@ -1455,6 +1469,10 @@ class ApiTest extends TestCase
                 return [
                     'User-Agent' => 'Mozilla/5.0',
                     'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                ];
+            case 'receiverEmails':
+                return [
+                    $faker->email,
                 ];
             default:
                 throw new InvalidArgumentException(

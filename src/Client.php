@@ -153,6 +153,8 @@ final class Client
         'listsTracking' => Services\ValuesListTrackingService::class,
         'shippingZones' => Services\ShippingZoneService::class,
         'webhooksTracking' => Services\WebhookTrackingService::class,
+        'customerNotifications' => Services\CustomerNotificationService::class,
+        'orderNotifications' => Services\OrderNotificationService::class,
     ];
 
     /** @var array */

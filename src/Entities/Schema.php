@@ -16,6 +16,8 @@ use InvalidArgumentException;
 use IteratorAggregate;
 use Rebilly\Entities\Coupons\Coupon;
 use Rebilly\Entities\Coupons\Redemption;
+use Rebilly\Entities\EmailNotifications\CustomerNotification;
+use Rebilly\Entities\EmailNotifications\OrderNotification;
 use Rebilly\Entities\Shipping\ShippingZone;
 use Rebilly\Rest\Collection;
 
@@ -305,6 +307,18 @@ final class Schema implements IteratorAggregate, ArrayAccess
             },
             'tracking/webhooks/{webhookId}' => function (array $content) {
                 return new WebhookTracking($content);
+            },
+            'customer-notifications' => function (array $content) {
+                return new Collection(new CustomerNotification(), $content);
+            },
+            'customer-notifications/{eventType}' => function (array $content) {
+                return new CustomerNotification($content);
+            },
+            'order-notifications' => function (array $content) {
+                return new Collection(new OrderNotification(), $content);
+            },
+            'order-notifications/{eventType}' => function (array $content) {
+                return new OrderNotification($content);
             },
         ];
     }
