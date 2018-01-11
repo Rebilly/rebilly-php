@@ -22,9 +22,6 @@ use Rebilly\Rest\Entity;
  *   "url"
  *   "phone"
  *   "email"
- *   "webHookUrl"
- *   "webHookUsername"
- *   "webHookPassword"
  *   "customFields"
  * }
  * ```
