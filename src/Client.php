@@ -93,6 +93,8 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\ValuesListService lists()
  * @method Services\ValuesListTrackingService listsTracking()
  * @method Services\WebhookTrackingService webhooksTracking()
+ * @method Services\CustomerNotificationService customerNotifications()
+ * @method Services\OrderNotificationService orderNotifications()
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
