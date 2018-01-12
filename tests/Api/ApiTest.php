@@ -770,6 +770,8 @@ class ApiTest extends TestCase
             [Entities\Webhook::class],
             [Entities\RiskMetadata::class],
             [Entities\WebhookTracking::class],
+            [Entities\Shipping\ShippingZone::class],
+            [Entities\InvoiceTax::class],
             [Entities\EmailNotifications\CustomerNotification::class],
             [Entities\EmailNotifications\OrderNotification::class],
         ];
@@ -988,6 +990,16 @@ class ApiTest extends TestCase
                 'webhooksTracking',
                 Services\WebhookTrackingService::class,
                 Entities\WebhookTracking::class,
+            ],
+            [
+                'coupons',
+                Services\CouponService::class,
+                Entities\Coupons\Coupon::class,
+            ],
+            [
+                'couponsRedemptions',
+                Services\RedemptionService::class,
+                Entities\Coupons\Redemption::class,
             ],
             [
                 'customerNotifications',
@@ -1470,6 +1482,8 @@ class ApiTest extends TestCase
                     'User-Agent' => 'Mozilla/5.0',
                     'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
                 ];
+            case 'isDefault':
+                return $faker->boolean;
             case 'receiverEmails':
                 return [
                     $faker->email,
