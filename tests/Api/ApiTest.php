@@ -1484,9 +1484,12 @@ class ApiTest extends TestCase
                 ];
             case 'isDefault':
                 return $faker->boolean;
-            case 'receiverEmails':
+            case 'notifications':
                 return [
-                    $faker->email,
+                    [
+                        'email' => $faker->email,
+                        'active' => 'active',
+                    ],
                 ];
             default:
                 throw new InvalidArgumentException(
