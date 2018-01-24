@@ -10,6 +10,7 @@
 
 namespace Rebilly\Entities\EmailNotifications;
 
+use DomainException;
 use Rebilly\Rest\Entity;
 
 /**
@@ -18,6 +19,7 @@ use Rebilly\Rest\Entity;
  */
 final class OrderNotification extends Entity
 {
+    const MSG_UNEXPECTED_NOTIFICATIONS = 'Unexpected notifications type, it must be an array of Notification';
     /**
      * @return string
      */
@@ -83,9 +85,9 @@ final class OrderNotification extends Entity
     /**
      * @return array
      */
-    public function getReceiverEmails()
+    public function getNotifications()
     {
-        return $this->getAttribute('receiverEmails');
+        return $this->getAttribute('notifications');
     }
 
     /**
@@ -93,9 +95,13 @@ final class OrderNotification extends Entity
      *
      * @return $this
      */
-    public function setReceiverEmails($value)
+    public function setNotifications($value)
     {
-        return $this->setAttribute('receiverEmails', $value);
+        if (!is_array($value)) {
+            throw new DomainException(self::MSG_UNEXPECTED_NOTIFICATIONS);
+        }
+
+        return $this->setAttribute('notifications', $value);
     }
 
     /**
