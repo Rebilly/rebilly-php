@@ -310,7 +310,7 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'email-notifications' => function (array $content) {
                 return new Collection(new EmailNotification(), $content);
             },
-            'email-notifications/{id}' => function (array $content) {
+            'email-notifications/{notificationId}' => function (array $content) {
                 return new EmailNotification($content);
             },
         ];

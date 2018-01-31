@@ -1485,6 +1485,14 @@ class ApiTest extends TestCase
                         'active' => 'active',
                     ],
                 ];
+            case 'eventType':
+                return $faker->randomElement([
+                    "subscription-created",
+                    "subscription-activated",
+                    "subscription-canceled",
+                    "subscription-renewed",
+                    "payment-card-expired",
+                ]);
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)

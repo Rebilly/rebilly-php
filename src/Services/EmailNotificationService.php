@@ -48,28 +48,28 @@ final class EmailNotificationService extends Service
     }
 
     /**
-     * @param string $id
+     * @param string $notificationId
      * @param array|ArrayObject $params
      *
      * @throws NotFoundException The customer does not exist
      *
      * @return EmailNotification
      */
-    public function load($id, $params = [])
+    public function load($notificationId, $params = [])
     {
-        return $this->client()->get('email-notifications/{id}', ['{id}' => $id] + (array) $params);
+        return $this->client()->get('email-notifications/{notificationId}', ['notificationId' => $notificationId] + (array) $params);
     }
 
     /**
-     * @param string $id
+     * @param string $notificationId
      * @param array|JsonSerializable|EmailNotification $data
      *
      * @throws UnprocessableEntityException The input data is not valid
      *
      * @return EmailNotification
      */
-    public function update($id, $data)
+    public function update($notificationId, $data)
     {
-        return $this->client()->put($data, 'email-notifications/{id}', ['id' => $id]);
+        return $this->client()->put($data, 'email-notifications/{notificationId}', ['notificationId' => $notificationId]);
     }
 }
