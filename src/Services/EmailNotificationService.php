@@ -12,7 +12,7 @@ namespace Rebilly\Services;
 
 use ArrayObject;
 use JsonSerializable;
-use Rebilly\Entities\EmailNotifications\CustomerNotification;
+use Rebilly\Entities\EmailNotifications\EmailNotification;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Paginator;
@@ -20,56 +20,56 @@ use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
 
 /**
- * Class CustomerNotificationService
+ * Class EmailNotificationService
  *
  * @author Arman Tuyakbayev <arman.tuyakbayev@rebilly.com>
  * @version 0.1
  */
-final class CustomerNotificationService extends Service
+final class EmailNotificationService extends Service
 {
     /**
      * @param array|ArrayObject $params
      *
-     * @return CustomerNotification[][]|Collection[]|Paginator
+     * @return EmailNotification[][]|Collection[]|Paginator
      */
     public function paginator($params = [])
     {
-        return new Paginator($this->client(), 'customer-notifications', $params);
+        return new Paginator($this->client(), 'email-notifications', $params);
     }
 
     /**
      * @param array|ArrayObject $params
      *
-     * @return CustomerNotification[]|Collection
+     * @return EmailNotification[]|Collection
      */
     public function search($params = [])
     {
-        return $this->client()->get('customer-notifications', $params);
+        return $this->client()->get('email-notifications', $params);
     }
 
     /**
-     * @param string $eventType
+     * @param string $id
      * @param array|ArrayObject $params
      *
      * @throws NotFoundException The customer does not exist
      *
-     * @return CustomerNotification
+     * @return EmailNotification
      */
-    public function load($eventType, $params = [])
+    public function load($id, $params = [])
     {
-        return $this->client()->get('customer-notifications/{eventType}', ['eventType' => $eventType] + (array) $params);
+        return $this->client()->get('email-notifications/{id}', ['id}' => $id] + (array) $params);
     }
 
     /**
-     * @param string $eventType
-     * @param array|JsonSerializable|CustomerNotification $data
+     * @param string $id
+     * @param array|JsonSerializable|EmailNotification $data
      *
      * @throws UnprocessableEntityException The input data is not valid
      *
-     * @return CustomerNotification
+     * @return EmailNotification
      */
-    public function update($eventType, $data)
+    public function update($id, $data)
     {
-        return $this->client()->put($data, 'customer-notifications/{eventType}', ['eventType' => $eventType]);
+        return $this->client()->put($data, 'email-notifications/{id}', ['id' => $id]);
     }
 }

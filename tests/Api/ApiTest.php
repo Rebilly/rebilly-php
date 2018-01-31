@@ -772,8 +772,7 @@ class ApiTest extends TestCase
             [Entities\WebhookTracking::class],
             [Entities\Shipping\ShippingZone::class],
             [Entities\InvoiceTax::class],
-            [Entities\EmailNotifications\CustomerNotification::class],
-            [Entities\EmailNotifications\OrderNotification::class],
+            [Entities\EmailNotifications\EmailNotification::class],
         ];
     }
 
@@ -1002,14 +1001,9 @@ class ApiTest extends TestCase
                 Entities\Coupons\Redemption::class,
             ],
             [
-                'customerNotifications',
-                Services\CustomerNotificationService::class,
-                Entities\EmailNotifications\CustomerNotification::class,
-            ],
-            [
-                'orderNotifications',
-                Services\OrderNotificationService::class,
-                Entities\EmailNotifications\OrderNotification::class,
+                'emailNotifications',
+                Services\EmailNotificationService::class,
+                Entities\EmailNotifications\EmailNotification::class,
             ],
         ];
     }
