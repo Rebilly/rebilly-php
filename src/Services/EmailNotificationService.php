@@ -57,7 +57,7 @@ final class EmailNotificationService extends Service
      */
     public function load($id, $params = [])
     {
-        return $this->client()->get('email-notifications/{id}', ['id}' => $id] + (array) $params);
+        return $this->client()->get('email-notifications/{id}', ['{id}' => $id] + (array) $params);
     }
 
     /**
