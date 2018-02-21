@@ -17,6 +17,9 @@ Security - in case of vulnerabilities.
 ## [Unreleased]
 
 _TBD_
+- [x] Added `SubscriptionChangePlan`. 
+- [x] Added `lineItems` and `lineItemSubtotal` to `Subscription` entity.
+- [x] Deprecated Subscription switch.
 
 ## [2.1.0] 2018-01-04
 - [x] Updated Invoice methods to use `websiteId` and `customerId`

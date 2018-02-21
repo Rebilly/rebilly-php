@@ -17,6 +17,7 @@ use DomainException;
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
+ * @deprecated
  */
 final class SubscriptionSwitch extends SubscriptionCancel
 {

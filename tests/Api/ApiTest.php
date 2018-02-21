@@ -1052,6 +1052,7 @@ class ApiTest extends TestCase
             case 'postedTime':
             case 'deadlineTime':
             case 'issuedTime':
+            case 'effectiveTime':
                 return $faker->date('Y-m-d H:i:s');
             case 'unitPrice':
             case 'amount':
@@ -1470,6 +1471,12 @@ class ApiTest extends TestCase
                 ];
             case 'isDefault':
                 return $faker->boolean;
+            case 'preview':
+            case 'prorated':
+                return $faker->boolean();
+            case 'renewalPolicy':
+                return $faker->randomElement(Entities\SubscriptionChangePlan::renewalPolicies());
+
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)

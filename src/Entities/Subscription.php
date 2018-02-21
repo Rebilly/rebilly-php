@@ -447,4 +447,20 @@ final class Subscription extends Entity
     {
         return new Address($data);
     }
+
+    /**
+     * @return array
+     */
+    public function getLineItems()
+    {
+        return $this->getAttribute('lineItems');
+    }
+
+    /**
+     * @return float
+     */
+    public function getLineItemSubtotal()
+    {
+        return $this->getAttribute('lineItemSubtotal');
+    }
 }
