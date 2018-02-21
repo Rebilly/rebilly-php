@@ -15,6 +15,7 @@ use JsonSerializable;
 use Rebilly\Entities\LeadSource;
 use Rebilly\Entities\Subscription;
 use Rebilly\Entities\SubscriptionCancel;
+use Rebilly\Entities\SubscriptionChangePlan;
 use Rebilly\Entities\SubscriptionSwitch;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
@@ -111,6 +112,8 @@ final class SubscriptionService extends Service
     }
 
     /**
+     * @deprecated
+     *
      * @param string $subscriptionId
      * @param array|JsonSerializable|SubscriptionSwitch $data
      *
@@ -123,6 +126,23 @@ final class SubscriptionService extends Service
         return $this->client()->post(
             $data,
             'subscriptions/{subscriptionId}/switch',
+            ['subscriptionId' => $subscriptionId]
+        );
+    }
+
+    /**
+     * @param string $subscriptionId
+     * @param array|JsonSerializable|SubscriptionChangePlan $data
+     *
+     * @throws UnprocessableEntityException The input data does not valid
+     *
+     * @return Subscription
+     */
+    public function changePlan($subscriptionId, $data)
+    {
+        return $this->client()->post(
+            $data,
+            'subscriptions/{subscriptionId}/change-plan',
             ['subscriptionId' => $subscriptionId]
         );
     }
