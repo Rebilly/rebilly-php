@@ -17,6 +17,7 @@ Security - in case of vulnerabilities.
 ## [Unreleased]
 
 _TBD_
+- [x] Added schema for subscriptions `change-plan` endpoint
 - [x] Added `SubscriptionChangePlan`. 
 - [x] Added `lineItems` and `lineItemSubtotal` to `Subscription` entity.
 - [x] Deprecated Subscription switch.
