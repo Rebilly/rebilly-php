@@ -72,4 +72,12 @@ final class EmailNotificationService extends Service
     {
         return $this->client()->put($data, 'email-notifications/{notificationId}', ['notificationId' => $notificationId]);
     }
+
+    /**
+     * @param $data
+     */
+    public function preview($data)
+    {
+        $this->client()->post($data, 'previews/email-notifications');
+    }
 }
