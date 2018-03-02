@@ -74,7 +74,7 @@ final class EmailNotificationService extends Service
     }
 
     /**
-     * @param $data
+     * @param array $data
      */
     public function preview($data)
     {
