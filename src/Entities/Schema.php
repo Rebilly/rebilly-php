@@ -17,6 +17,7 @@ use IteratorAggregate;
 use Rebilly\Entities\Coupons\Coupon;
 use Rebilly\Entities\Coupons\Redemption;
 use Rebilly\Entities\EmailNotifications\EmailNotification;
+use Rebilly\Entities\EmailNotifications\EmailNotificationTracking;
 use Rebilly\Entities\Shipping\ShippingZone;
 use Rebilly\Rest\Collection;
 
@@ -318,6 +319,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             },
             'email-notifications/{notificationId}' => function (array $content) {
                 return new EmailNotification($content);
+            },
+            'tracking/email-notifications' => function (array $content) {
+                return new Collection(new EmailNotificationTracking(), $content);
+            },
+            'tracking/email-notifications/{trackId}' => function (array $content) {
+                return new EmailNotificationTracking($content);
             },
         ];
     }

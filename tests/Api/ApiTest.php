@@ -773,6 +773,7 @@ class ApiTest extends TestCase
             [Entities\Shipping\ShippingZone::class],
             [Entities\InvoiceTax::class],
             [Entities\EmailNotifications\EmailNotification::class],
+            [Entities\EmailNotifications\EmailNotificationTracking::class],
         ];
     }
 
@@ -1004,6 +1005,11 @@ class ApiTest extends TestCase
                 'emailNotifications',
                 Services\EmailNotificationService::class,
                 Entities\EmailNotifications\EmailNotification::class,
+            ],
+            [
+                'emailNotificationsTracking',
+                Services\EmailNotificationTrackingService::class,
+                Entities\EmailNotifications\EmailNotificationTracking::class,
             ],
         ];
     }

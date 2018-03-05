@@ -61,6 +61,23 @@ final class EmailNotificationService extends Service
     }
 
     /**
+     * @param array|JsonSerializable|EmailNotification $data
+     * @param string $notificationId
+     *
+     * @throws UnprocessableEntityException The input data is not valid
+     *
+     * @return EmailNotification
+     */
+    public function create($data, $notificationId = null)
+    {
+        if (isset($notificationId)) {
+            return $this->client()->put($data, 'email-notifications/{notificationId}', ['notificationId' => $notificationId]);
+        } else {
+            return $this->client()->post($data, 'email-notifications');
+        }
+    }
+
+    /**
      * @param string $notificationId
      * @param array|JsonSerializable|EmailNotification $data
      *

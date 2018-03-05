@@ -20,6 +20,7 @@ use Rebilly\Rest\Entity;
 final class EmailNotification extends Entity
 {
     const MSG_UNEXPECTED_NOTIFICATIONS = 'Unexpected notifications type, it must be an array of Notification';
+    const MSG_UNEXPECTED_TAGS = 'Unexpected tags, it must be an array of strings';
 
     /**
      * @return string
@@ -121,5 +122,27 @@ final class EmailNotification extends Entity
     public function getCreatedTime()
     {
         return $this->getAttribute('createdTime');
+    }
+
+    /**
+     * @return array
+     */
+    public function getTags()
+    {
+        return $this->getAttribute('tags');
+    }
+
+    /**
+     * @param array $value
+     *
+     * @return $this
+     */
+    public function setTags($value)
+    {
+        if (!is_array($value)) {
+            throw new DomainException(self::MSG_UNEXPECTED_TAGS);
+        }
+
+        return $this->setAttribute('tags', $value);
     }
 }
