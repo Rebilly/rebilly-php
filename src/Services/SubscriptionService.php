@@ -12,10 +12,12 @@ namespace Rebilly\Services;
 
 use ArrayObject;
 use JsonSerializable;
+use Rebilly\Entities\Invoice;
 use Rebilly\Entities\LeadSource;
 use Rebilly\Entities\Subscription;
 use Rebilly\Entities\SubscriptionCancel;
 use Rebilly\Entities\SubscriptionChangePlan;
+use Rebilly\Entities\SubscriptionInterimInvoice;
 use Rebilly\Entities\SubscriptionSwitch;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
@@ -143,6 +145,23 @@ final class SubscriptionService extends Service
         return $this->client()->post(
             $data,
             'subscriptions/{subscriptionId}/change-plan',
+            ['subscriptionId' => $subscriptionId]
+        );
+    }
+
+    /**
+     * @param string $subscriptionId
+     * @param array|JsonSerializable|SubscriptionInterimInvoice $data
+     *
+     * @throws UnprocessableEntityException The input data does not valid
+     *
+     * @return Invoice
+     */
+    public function issueInterimInvoice($subscriptionId, $data)
+    {
+        return $this->client()->post(
+            $data,
+            'subscriptions/{subscriptionId}/interim-invoice',
             ['subscriptionId' => $subscriptionId]
         );
     }

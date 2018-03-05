@@ -133,6 +133,9 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'subscriptions/{subscriptionId}/change-plan' => function (array $content) {
                 return new Subscription($content);
             },
+            'subscriptions/{subscriptionId}/interim-invoice' => function (array $content) {
+                return new Invoice($content);
+            },
             'subscriptions/{subscriptionId}/lead-source' => function (array $content) {
                 return new LeadSource($content);
             },
