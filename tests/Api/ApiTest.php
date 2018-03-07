@@ -772,6 +772,8 @@ class ApiTest extends TestCase
             [Entities\WebhookTracking::class],
             [Entities\Shipping\ShippingZone::class],
             [Entities\InvoiceTax::class],
+            [Entities\EmailNotifications\EmailNotification::class],
+            [Entities\EmailNotifications\EmailNotificationTracking::class],
         ];
     }
 
@@ -999,6 +1001,16 @@ class ApiTest extends TestCase
                 Services\RedemptionService::class,
                 Entities\Coupons\Redemption::class,
             ],
+            [
+                'emailNotifications',
+                Services\EmailNotificationService::class,
+                Entities\EmailNotifications\EmailNotification::class,
+            ],
+            [
+                'emailNotificationsTracking',
+                Services\EmailNotificationTrackingService::class,
+                Entities\EmailNotifications\EmailNotificationTracking::class,
+            ],
         ];
     }
 
@@ -1106,6 +1118,8 @@ class ApiTest extends TestCase
             case 'clickId':
             case 'path':
             case 'descriptor':
+            case 'subject':
+            case 'body':
                 return $faker->words;
             case 'description':
             case 'richDescription':
@@ -1476,7 +1490,21 @@ class ApiTest extends TestCase
                 return $faker->boolean();
             case 'renewalPolicy':
                 return $faker->randomElement(Entities\SubscriptionChangePlan::renewalPolicies());
-
+            case 'notifications':
+                return [
+                    [
+                        'email' => $faker->email,
+                        'active' => 'active',
+                    ],
+                ];
+            case 'eventType':
+                return $faker->randomElement([
+                    "subscription-created",
+                    "subscription-activated",
+                    "subscription-canceled",
+                    "subscription-renewed",
+                    "payment-card-expired",
+                ]);
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)

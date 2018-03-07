@@ -93,6 +93,8 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\ValuesListService lists()
  * @method Services\ValuesListTrackingService listsTracking()
  * @method Services\WebhookTrackingService webhooksTracking()
+ * @method Services\EmailNotificationService emailNotifications()
+ * @method Services\EmailNotificationTrackingService emailNotificationsTracking()
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
@@ -149,6 +151,8 @@ final class Client
         'listsTracking' => Services\ValuesListTrackingService::class,
         'shippingZones' => Services\ShippingZoneService::class,
         'webhooksTracking' => Services\WebhookTrackingService::class,
+        'emailNotifications' => Services\EmailNotificationService::class,
+        'emailNotificationsTracking' => Services\EmailNotificationTrackingService::class,
     ];
 
     /** @var array */
