@@ -39,9 +39,9 @@ final class Notification extends Resource
     /**
      * @return bool
      */
-    public function getActive()
+    public function getStatus()
     {
-        return $this->getAttribute('active');
+        return $this->getAttribute('status');
     }
 
     /**
@@ -49,8 +49,8 @@ final class Notification extends Resource
      *
      * @return $this
      */
-    public function setActive($value)
+    public function setStatus($value)
     {
-        return $this->setAttribute('active', $value);
+        return $this->setAttribute('status', $value);
     }
 }
