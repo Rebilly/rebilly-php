@@ -125,8 +125,16 @@ final class Coupon extends Resource
     public function createRestrictions(array $data)
     {
         return array_map(
-            function (array $values) {
-                return Restriction::createFromData($values);
+            function ($restriction) {
+                if ($restriction instanceof Restriction) {
+                    return $restriction;
+                }
+
+                if (!is_array($restriction)) {
+                    throw new DomainException('Incorrect restriction - it must be an array or instance of Restriction.');
+                }
+
+                return Restriction::createFromData($restriction);
             },
             $data
         );
