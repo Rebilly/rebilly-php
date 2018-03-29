@@ -416,9 +416,6 @@ class ApiTest extends TestCase
 
         $result = $service->cancel('dummy', []);
         $this->assertInstanceOf(Entities\Subscription::class, $result);
-
-        $result = $service->switchTo('dummy', []);
-        $this->assertInstanceOf(Entities\Subscription::class, $result);
     }
 
     /**
@@ -739,7 +736,6 @@ class ApiTest extends TestCase
             [Entities\ResetPasswordToken::class, 'token'],
             [Entities\ScheduledPayment::class],
             [Entities\Subscription::class],
-            [Entities\SubscriptionSwitch::class, null],
             [Entities\SubscriptionCancel::class, null],
             [Entities\Transaction::class],
             [Entities\Website::class],
@@ -1271,7 +1267,6 @@ class ApiTest extends TestCase
             case 'policy':
                 switch ($class) {
                     case Entities\SubscriptionCancel::class:
-                    case Entities\SubscriptionSwitch::class:
                         return $faker->randomElement(Entities\SubscriptionCancel::policies());
                     default:
                         throw new InvalidArgumentException(

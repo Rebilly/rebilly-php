@@ -18,7 +18,6 @@ use Rebilly\Entities\Subscription;
 use Rebilly\Entities\SubscriptionCancel;
 use Rebilly\Entities\SubscriptionChangePlan;
 use Rebilly\Entities\SubscriptionInterimInvoice;
-use Rebilly\Entities\SubscriptionSwitch;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Paginator;
@@ -109,25 +108,6 @@ final class SubscriptionService extends Service
         return $this->client()->post(
             $data,
             'subscriptions/{subscriptionId}/cancel',
-            ['subscriptionId' => $subscriptionId]
-        );
-    }
-
-    /**
-     * @deprecated
-     *
-     * @param string $subscriptionId
-     * @param array|JsonSerializable|SubscriptionSwitch $data
-     *
-     * @throws UnprocessableEntityException The input data does not valid
-     *
-     * @return Subscription
-     */
-    public function switchTo($subscriptionId, $data)
-    {
-        return $this->client()->post(
-            $data,
-            'subscriptions/{subscriptionId}/switch',
             ['subscriptionId' => $subscriptionId]
         );
     }
