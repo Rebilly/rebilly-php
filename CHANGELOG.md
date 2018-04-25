@@ -17,6 +17,7 @@ Security - in case of vulnerabilities.
 ## [Unreleased]
 
 _TBD_
+- [x] Removed support for Subscription Tracking.
 - [x] Added support for subscription interim invoices.
 - [x] Added schema for subscriptions `change-plan` endpoint.
 - [x] Added `SubscriptionChangePlan`. 
