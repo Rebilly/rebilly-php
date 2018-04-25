@@ -943,11 +943,6 @@ class ApiTest extends TestCase
                 Entities\ApiTracking::class,
             ],
             [
-                'subscriptionTracking',
-                Services\SubscriptionTrackingService::class,
-                Entities\SubscriptionTracking::class,
-            ],
-            [
                 'disputes',
                 Services\DisputeService::class,
                 Entities\Dispute::class,
