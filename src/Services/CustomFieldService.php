@@ -101,16 +101,4 @@ final class CustomFieldService extends Service
             'name' => $name,
         ]);
     }
-
-    /**
-     * @param string $resourceType
-     * @param string $name
-     */
-    public function delete($resourceType, $name)
-    {
-        $this->client()->delete('custom-fields/{resourceType}/{name}', [
-            'resourceType' => $resourceType,
-            'name' => $name,
-        ]);
-    }
 }
