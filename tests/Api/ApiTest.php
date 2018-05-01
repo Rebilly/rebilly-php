@@ -562,8 +562,6 @@ class ApiTest extends TestCase
 
         $entity = $service->update($resourceType, $this->getFakeValue('id', $entityClass), []);
         $this->assertInstanceOf($entityClass, $entity);
-
-        $service->delete($resourceType, $this->getFakeValue('id', $entityClass));
     }
 
     /**
