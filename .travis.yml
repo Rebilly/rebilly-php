@@ -12,6 +12,7 @@ matrix:
       env:
         - EXECUTE_COVERAGE=true
         - EXECUTE_CS_CHECK=true
+    - php: 7.2
     - php: hhvm
   allow_failures:
     - php: hhvm
