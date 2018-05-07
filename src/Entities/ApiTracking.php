@@ -43,11 +43,19 @@ final class ApiTracking extends Entity
     }
 
     /**
-     * @return string;
+     * @return string
      */
     public function getUrl()
     {
         return $this->getAttribute('url');
+    }
+
+    /**
+     * @return string
+     */
+    public function getRoute()
+    {
+        return $this->getAttribute('route');
     }
 
     /**
