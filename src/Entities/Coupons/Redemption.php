@@ -22,7 +22,7 @@ use Rebilly\Rest\Entity;
  *   "redemptionCode"
  *   "customerId"
  *   "additionalRestrictions"
- *   "redeemedTime"
+ *   "createdTime"
  *   "canceledTime"
  * }
  * ```
@@ -103,9 +103,19 @@ final class Redemption extends Entity
     /**
      * @return string
      */
+    public function getCreatedTime()
+    {
+        return $this->getAttribute('createdTime');
+    }
+
+    /**
+     * @deprecated Use getCreatedTime() instead
+     *
+     * @return string
+     */
     public function getRedeemedTime()
     {
-        return $this->getAttribute('redeemedTime');
+        return $this->getAttribute('createdTime');
     }
 
     /**
