@@ -109,6 +109,16 @@ final class Redemption extends Entity
     }
 
     /**
+     * @deprecated Use getCreatedTime() instead
+     *
+     * @return string
+     */
+    public function getRedeemedTime()
+    {
+        return $this->getAttribute('createdTime');
+    }
+
+    /**
      * @return string
      */
     public function getCanceledTime()
