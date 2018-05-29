@@ -70,7 +70,6 @@ final class UserService extends Service
     }
 
     /**
-     * @param string $userId
      * @param string $token
      * @param array|JsonSerializable|ResetPassword $data
      *
@@ -78,16 +77,9 @@ final class UserService extends Service
      *
      * @return User
      */
-    public function resetPassword($userId, $token, $data)
+    public function resetPassword($token, $data)
     {
-        return $this->client()->post(
-            $data,
-            'users/{userId}/reset-password/{token}',
-            [
-                'userId' => $userId,
-                'token' => $token,
-            ]
-        );
+        return $this->client()->post($data, 'reset-password/{token}', ['token' => $token]);
     }
 
     /**
