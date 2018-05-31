@@ -202,4 +202,12 @@ final class Customer extends Entity
     {
         return new Address($data);
     }
+
+    /**
+     * @return CustomerLifetimeRevenue
+     */
+    public function getLifetimeRevenue()
+    {
+        return new CustomerLifetimeRevenue($this->getAttribute('lifetimeRevenue'));
+    }
 }
