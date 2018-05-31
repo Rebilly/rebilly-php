@@ -61,9 +61,9 @@ final class EmailNotification extends Entity
     /**
      * @return string
      */
-    public function getBody()
+    public function getBodyText()
     {
-        return $this->getAttribute('body');
+        return $this->getAttribute('bodyText');
     }
 
     /**
@@ -71,9 +71,45 @@ final class EmailNotification extends Entity
      *
      * @return $this
      */
-    public function setBody($value)
+    public function setBodyText($value)
     {
-        return $this->setAttribute('body', $value);
+        return $this->setAttribute('bodyText', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getBodyHtml()
+    {
+        return $this->getAttribute('bodyHtml');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setBodyHtml($value)
+    {
+        return $this->setAttribute('bodyHtml', $value);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getAttachInvoice()
+    {
+        return $this->getAttribute('attachInvoice');
+    }
+
+    /**
+     * @param bool $value
+     *
+     * @return $this
+     */
+    public function setAttachInvoice($value)
+    {
+        return $this->setAttribute('attachInvoice', $value);
     }
 
     /**
