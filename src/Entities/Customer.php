@@ -18,11 +18,12 @@ use Rebilly\Rest\Entity;
  * ```json
  * {
  *   "id"
- *   "email"
- *   "firstName"
- *   "lastName"
- *   "ipAddress"
  *   "customFields"
+ *   "defaultPaymentInstrument"
+ *   "invoiceCount"
+ *   "lifetimeRevenue"
+ *   "createdTime"
+ *   "updatedTime"
  * }
  * ```
  */
@@ -201,5 +202,31 @@ final class Customer extends Entity
     public function createPrimaryAddress(array $data)
     {
         return new Address($data);
+    }
+
+    /**
+     * @return CustomerLifetimeRevenue
+     */
+    public function getLifetimeRevenue()
+    {
+        return $this->getAttribute('lifetimeRevenue');
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return CustomerLifetimeRevenue
+     */
+    public function createLifetimeRevenue(array $data)
+    {
+        return CustomerLifetimeRevenue::createFromData($data);
+    }
+
+    /**
+     * @return int
+     */
+    public function getInvoiceCount()
+    {
+        return $this->getAttribute('invoiceCount');
     }
 }
