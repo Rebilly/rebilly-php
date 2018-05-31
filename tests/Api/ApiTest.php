@@ -1109,6 +1109,8 @@ class ApiTest extends TestCase
             case 'descriptor':
             case 'subject':
             case 'body':
+            case 'bodyText':
+            case 'bodyHtml':
                 return $faker->words;
             case 'description':
             case 'richDescription':
@@ -1149,6 +1151,7 @@ class ApiTest extends TestCase
             case 'archived':
             case 'starred':
             case 'allowCustomCustomerId':
+            case 'attachInvoice':
                 return $faker->boolean();
             case 'credentialTtl':
             case 'authTokenTtl':
