@@ -40,4 +40,14 @@ class CustomerLifetimeRevenue extends Resource
     {
         return $this->getAttribute('amountUsd');
     }
+
+    /**
+     * @param array $data
+     *
+     * @return CustomerLifetimeRevenue
+     */
+    public static function createFromData(array $data)
+    {
+        return new CustomerLifetimeRevenue($data);
+    }
 }
