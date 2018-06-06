@@ -48,7 +48,7 @@ final class ThreeDSecure extends Entity
     }
 
     /**
-     * @return bool
+     * @return string
      */
     public function getCustomerId()
     {

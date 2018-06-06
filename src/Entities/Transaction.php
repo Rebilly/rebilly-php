@@ -69,6 +69,14 @@ final class Transaction extends Entity
     /**
      * @return string
      */
+    public function getUpdatedTime()
+    {
+        return $this->getAttribute('updatedTime');
+    }
+
+    /**
+     * @return string
+     */
     public function getType()
     {
         return $this->getAttribute('type');
@@ -136,6 +144,54 @@ final class Transaction extends Entity
     public function getPaymentCardId()
     {
         return $this->getAttribute('paymentCard');
+    }
+
+    /**
+     * @return array
+     */
+    public function getChildTransactions()
+    {
+        return $this->getAttribute('childTransactions');
+    }
+
+    /**
+     * @return array
+     */
+    public function getInvoiceIds()
+    {
+        return $this->getAttribute('invoiceIds');
+    }
+
+    /**
+     * @return array
+     */
+    public function getSubscriptionIds()
+    {
+        return $this->getAttribute('subscriptionIds');
+    }
+
+    /**
+     * @return PaymentMethodInstrument
+     */
+    public function getPaymentInstrument()
+    {
+        return $this->getAttribute('paymentInstrument');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasDcc()
+    {
+        return $this->getAttribute('hasDcc');
+    }
+
+    /**
+     * @return array
+     */
+    public function getDcc()
+    {
+        return $this->getAttribute('dcc');
     }
 
     /**
