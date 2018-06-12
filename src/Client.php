@@ -94,6 +94,7 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\WebhookTrackingService webhooksTracking()
  * @method Services\EmailNotificationService emailNotifications()
  * @method Services\EmailNotificationTrackingService emailNotificationsTracking()
+ * @method Services\GatewayDowntimeService gatewayDowntimes()
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
@@ -151,6 +152,7 @@ final class Client
         'webhooksTracking' => Services\WebhookTrackingService::class,
         'emailNotifications' => Services\EmailNotificationService::class,
         'emailNotificationsTracking' => Services\EmailNotificationTrackingService::class,
+        'gatewayDowntimes' => Services\GatewayDowntimeService::class,
     ];
 
     /** @var array */

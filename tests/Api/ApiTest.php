@@ -768,6 +768,7 @@ class ApiTest extends TestCase
             [Entities\InvoiceTax::class],
             [Entities\EmailNotifications\EmailNotification::class],
             [Entities\EmailNotifications\EmailNotificationTracking::class],
+            [Entities\GatewayDowntime::class],
         ];
     }
 
@@ -1000,6 +1001,11 @@ class ApiTest extends TestCase
                 Services\EmailNotificationTrackingService::class,
                 Entities\EmailNotifications\EmailNotificationTracking::class,
             ],
+            [
+                'gatewayDowntimes',
+                Services\GatewayDowntimeService::class,
+                Entities\GatewayDowntime::class,
+            ],
         ];
     }
 
@@ -1054,6 +1060,8 @@ class ApiTest extends TestCase
             case 'deadlineTime':
             case 'issuedTime':
             case 'effectiveTime':
+            case 'startTime':
+            case 'endTime':
                 return $faker->date('Y-m-d H:i:s');
             case 'unitPrice':
             case 'amount':

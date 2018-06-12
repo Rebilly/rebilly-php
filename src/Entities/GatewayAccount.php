@@ -278,39 +278,11 @@ final class GatewayAccount extends Entity
     }
 
     /**
-     * @return string
+     * @return bool
      */
-    public function getDowntimeStart()
+    public function getIsInDowntime()
     {
-        return $this->getAttribute('downtimeStart');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setDowntimeStart($value)
-    {
-        return $this->setAttribute('downtimeStart', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getDowntimeEnd()
-    {
-        return $this->getAttribute('downtimeEnd');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setDowntimeEnd($value)
-    {
-        return $this->setAttribute('downtimeEnd', $value);
+        return $this->getAttribute('isInDowntime');
     }
 
     /**
