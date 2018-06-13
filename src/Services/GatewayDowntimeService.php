@@ -72,6 +72,19 @@ final class GatewayDowntimeService extends Service
 
     /**
      * @param string $downtimeId
+     * @param array|JsonSerializable|GatewayDowntime $data
+     *
+     * @throws UnprocessableEntityException The input data is not valid
+     *
+     * @return GatewayDowntime
+     */
+    public function update($downtimeId, $data)
+    {
+        return $this->client()->put($data, 'gateway-downtimes/{downtimeId}', ['downtimeId' => $downtimeId]);
+    }
+
+    /**
+     * @param string $downtimeId
      */
     public function delete($downtimeId)
     {
