@@ -23,7 +23,8 @@ use Rebilly\Rest\Entity;
  *   "responseBody"
  *   "body"
  *   "subject"
- *   "email"
+ *   "sender"
+ *   "recipients"
  *   "sentTime"
  *   "initiatedTime"
  *   "createdTime"
@@ -75,9 +76,17 @@ final class EmailNotificationTracking extends Entity
     /**
      * @return string
      */
-    public function getEmail()
+    public function getSender()
     {
-        return $this->getAttribute('email');
+        return $this->getAttribute('sender');
+    }
+
+    /**
+     * @return array
+     */
+    public function getRecipients()
+    {
+        return $this->getAttribute('recipients');
     }
 
     /**
