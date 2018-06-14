@@ -32,7 +32,7 @@ final class GatewayDowntimeService extends Service
      */
     public function paginator($params = [])
     {
-        return new Paginator($this->client(), 'gateway-downtimes', (array) $params);
+        return new Paginator($this->client(), 'gateway-account-downtimes', (array) $params);
     }
 
     /**
@@ -42,7 +42,7 @@ final class GatewayDowntimeService extends Service
      */
     public function search($params = [])
     {
-        return $this->client()->get('gateway-downtimes', (array) $params);
+        return $this->client()->get('gateway-account-downtimes', (array) $params);
     }
 
     /**
@@ -54,7 +54,7 @@ final class GatewayDowntimeService extends Service
     public function load($downtimeId, $params = [])
     {
         return $this->client()->get(
-            'gateway-downtimes/{downtimeId}',
+            'gateway-account-downtimes/{downtimeId}',
             ['downtimeId' => $downtimeId] + (array) $params);
     }
 
@@ -67,7 +67,7 @@ final class GatewayDowntimeService extends Service
      */
     public function create($data)
     {
-        return $this->client()->post($data, 'gateway-downtimes');
+        return $this->client()->post($data, 'gateway-account-downtimes');
     }
 
     /**
@@ -80,7 +80,7 @@ final class GatewayDowntimeService extends Service
      */
     public function update($downtimeId, $data)
     {
-        return $this->client()->put($data, 'gateway-downtimes/{downtimeId}', ['downtimeId' => $downtimeId]);
+        return $this->client()->put($data, 'gateway-account-downtimes/{downtimeId}', ['downtimeId' => $downtimeId]);
     }
 
     /**
@@ -89,7 +89,7 @@ final class GatewayDowntimeService extends Service
     public function delete($downtimeId)
     {
         $this->client()->delete(
-            'gateway-downtimes/{downtimeId}',
+            'gateway-account-downtimes/{downtimeId}',
             ['downtimeId' => $downtimeId]
         );
     }
