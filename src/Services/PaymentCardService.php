@@ -104,14 +104,14 @@ final class PaymentCardService extends Service
     }
 
     /**
-     * @param array|JsonSerializable|PaymentCardAuthorization $data
      * @param string $cardId
+     * @param array|JsonSerializable|PaymentCardAuthorization $data
      *
      * @throws UnprocessableEntityException The input data does not valid
      *
      * @return PaymentCard
      */
-    public function update($data, $cardId)
+    public function update($cardId, $data)
     {
         return $this->client()->patch($data, 'payment-cards/{cardId}', ['cardId' => $cardId]);
     }
