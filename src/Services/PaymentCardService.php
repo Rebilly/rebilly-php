@@ -105,7 +105,7 @@ final class PaymentCardService extends Service
 
     /**
      * @param string $cardId
-     * @param array|JsonSerializable|PaymentCardAuthorization $data
+     * @param array|JsonSerializable|PaymentCard $data
      *
      * @throws UnprocessableEntityException The input data does not valid
      *
