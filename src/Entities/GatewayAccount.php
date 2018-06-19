@@ -280,9 +280,9 @@ final class GatewayAccount extends Entity
     /**
      * @return bool
      */
-    public function getIsInDowntime()
+    public function getIsDown()
     {
-        return $this->getAttribute('isInDowntime');
+        return $this->getAttribute('isDown');
     }
 
     /**
