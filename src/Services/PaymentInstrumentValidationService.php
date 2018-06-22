@@ -13,7 +13,6 @@ namespace Rebilly\Services;
 
 use ArrayObject;
 use JsonSerializable;
-use Rebilly\Entities\PaymentCard;
 use Rebilly\Entities\PaymentInstrumentValidation;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
@@ -57,7 +56,7 @@ final class PaymentInstrumentValidationService extends Service
     }
 
     /**
-     * @param array|JsonSerializable|PaymentCard $data
+     * @param array|JsonSerializable|PaymentInstrumentValidation $data
      *
      * @throws UnprocessableEntityException The input data does not valid
      *
