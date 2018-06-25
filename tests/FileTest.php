@@ -51,6 +51,7 @@ class FileTest extends TestCase
 
             $this->assertTrue(file_exists($filename));
             $this->assertEquals($file->getSize(), filesize($filename));
+            $this->assertSame('application/pdf', $file->getMimeType());
         } else {
             throw new RuntimeException('Cannot download file');
         }
