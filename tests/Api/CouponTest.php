@@ -18,12 +18,12 @@ use Rebilly\Entities\Coupons\Restrictions\RedemptionsPerCustomer;
 use Rebilly\Entities\Coupons\Restrictions\RestrictToInvoices;
 use Rebilly\Entities\Coupons\Restrictions\RestrictToPlans;
 use Rebilly\Entities\Coupons\Restrictions\RestrictToSubscriptions;
-use Rebilly\Tests\TestCase;
+use Rebilly\Tests\TestCase as BaseTestCase;
 
 /**
  * Class CouponTest.
  */
-class CouponTest extends TestCase
+class CouponTest extends BaseTestCase
 {
     /**
      * @test

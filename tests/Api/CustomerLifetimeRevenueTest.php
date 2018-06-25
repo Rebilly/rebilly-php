@@ -11,12 +11,12 @@
 namespace Rebilly\Tests\Api;
 
 use Rebilly\Entities\CustomerLifetimeRevenue;
-use Rebilly\Tests\TestCase;
+use Rebilly\Tests\TestCase as BaseTestCase;
 
 /**
  * Class CustomerLifetimeRevenueTest.
  */
-class CustomerLifetimeRevenueTest extends TestCase
+class CustomerLifetimeRevenueTest extends BaseTestCase
 {
     /**
      * @test
