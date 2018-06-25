@@ -11,9 +11,11 @@
 namespace Rebilly\Tests\Api;
 
 use DomainException;
+use Rebilly\Entities\PaymentRetryInstructions\PaymentInstruction;
 use Rebilly\Entities\PaymentRetryInstructions\PaymentInstructionTypes\DiscountType;
 use Rebilly\Entities\PaymentRetryInstructions\PaymentInstructionTypes\NoneType;
 use Rebilly\Entities\PaymentRetryInstructions\PaymentInstructionTypes\PartialType;
+use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstruction;
 use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstructionTypes\AutoType;
 use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstructionTypes\DateIntervalType;
 use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstructionTypes\DayOfMonthType;
@@ -29,7 +31,7 @@ class PaymentRetryInstructionsTest extends BaseTestCase
     /**
      * @test
      */
-    public function discountType()
+    public function paymentInstructionsDiscountType()
     {
         $instruction = new DiscountType();
         $instruction->setValue(15);
@@ -44,7 +46,7 @@ class PaymentRetryInstructionsTest extends BaseTestCase
     /**
      * @test
      */
-    public function noneType()
+    public function paymentInstructionsNoneType()
     {
         $instruction = new NoneType();
 
@@ -55,7 +57,7 @@ class PaymentRetryInstructionsTest extends BaseTestCase
     /**
      * @test
      */
-    public function partialType()
+    public function paymentInstructionsPartialType()
     {
         $instruction = new PartialType();
         $instruction->setType('partial');
@@ -71,7 +73,7 @@ class PaymentRetryInstructionsTest extends BaseTestCase
      * @expectedException DomainException
      * @test
      */
-    public function paymentMethodIsRequired()
+    public function paymentInstructionsMethodIsRequired()
     {
         PartialType::createFromData([]);
     }
@@ -80,11 +82,20 @@ class PaymentRetryInstructionsTest extends BaseTestCase
      * @expectedException DomainException
      * @test
      */
-    public function paymentMethodMustBeCorrect()
+    public function paymentInstructionsMethodMustBeCorrect()
     {
         PartialType::createFromData([
             'method' => 'wrong',
         ]);
+    }
+
+    /**
+     * @test
+     * @dataProvider providePaymentInstructions
+     */
+    public function paymentInstructionsCreateFromData($data)
+    {
+        PaymentInstruction::createFromData($data);
     }
 
     /**
@@ -174,5 +185,74 @@ class PaymentRetryInstructionsTest extends BaseTestCase
         AutoType::createFromData([
             'method' => 'wrong',
         ]);
+    }
+
+    /**
+     * @test
+     * @dataProvider provideScheduleInstructions
+     */
+    public function scheduleInstructionsCreateFromData($data)
+    {
+        ScheduleInstruction::createFromData($data);
+    }
+
+    /**
+     * @return array
+     */
+    public function providePaymentInstructions()
+    {
+        return [
+            [
+                [
+                    'method' => 'discount',
+                    'value' => 1,
+                ],
+            ],
+            [
+                [
+                    'method' => 'none',
+                ],
+            ],
+            [
+                [
+                    'method' => 'partial',
+                    'value' => 1,
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function provideScheduleInstructions()
+    {
+        return [
+            [
+                [
+                    'method' => 'auto',
+                ],
+            ],
+            [
+                [
+                    'method' => 'date-interval',
+                ],
+            ],
+            [
+                [
+                    'method' => 'day-of-month',
+                ],
+            ],
+            [
+                [
+                    'method' => 'day-of-week',
+                ],
+            ],
+            [
+                [
+                    'method' => 'immediately',
+                ],
+            ],
+        ];
     }
 }

@@ -11,8 +11,10 @@
 namespace Rebilly\Tests\Api;
 
 use DomainException;
+use Rebilly\Entities\Coupons\Discount;
 use Rebilly\Entities\Coupons\Discounts\Fixed;
 use Rebilly\Entities\Coupons\Discounts\Percent;
+use Rebilly\Entities\Coupons\Restriction;
 use Rebilly\Entities\Coupons\Restrictions\DiscountsPerRedemption;
 use Rebilly\Entities\Coupons\Restrictions\RedemptionsPerCustomer;
 use Rebilly\Entities\Coupons\Restrictions\RestrictToInvoices;
@@ -76,6 +78,15 @@ class CouponTest extends BaseTestCase
             'amount' => 15,
             'currency' => 'USD',
         ]);
+    }
+
+    /**
+     * @test
+     * @dataProvider provideDiscounts
+     */
+    public function discountCreateFromData($data)
+    {
+        Discount::createFromData($data);
     }
 
     /**
@@ -164,5 +175,75 @@ class CouponTest extends BaseTestCase
             'type' => 'wrong',
             'planIds' => ['123', '234'],
         ]);
+    }
+
+    /**
+     * @test
+     * @dataProvider provideRestrictions
+     */
+    public function restrictionCreateFromData($data)
+    {
+        Restriction::createFromData($data);
+    }
+
+    /**
+     * @return array
+     */
+    public function provideDiscounts()
+    {
+        return [
+            [
+                [
+                    'type' => 'fixed',
+                    'amount' => 1,
+                    'currency' => 'USD',
+                ],
+            ],
+            [
+                [
+                    'type' => 'percent',
+                    'value' => 10,
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function provideRestrictions()
+    {
+        return [
+            [
+                [
+                    'type' => 'discounts-per-redemption',
+                    'quantity' => 1,
+                ],
+            ],
+            [
+                [
+                    'type' => 'redemptions-per-customer',
+                    'quantity' => 1,
+                ],
+            ],
+            [
+                [
+                    'type' => 'restrict-to-invoices',
+                    'invoiceIds' => ['123', '234'],
+                ],
+            ],
+            [
+                [
+                    'type' => 'restrict-to-plans',
+                    'planIds' => ['123', '234'],
+                ],
+            ],
+            [
+                [
+                    'type' => 'restrict-to-subscriptions',
+                    'subscriptionIds' => ['123', '234'],
+                ],
+            ],
+        ];
     }
 }
