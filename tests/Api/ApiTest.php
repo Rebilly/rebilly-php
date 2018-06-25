@@ -769,6 +769,7 @@ class ApiTest extends TestCase
             [Entities\EmailNotifications\EmailNotification::class],
             [Entities\EmailNotifications\EmailNotificationTracking::class],
             [Entities\EmailNotifications\Notification::class],
+            [Entities\SubscriptionChangePlan::class],
         ];
     }
 
