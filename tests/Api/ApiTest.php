@@ -768,10 +768,53 @@ class ApiTest extends TestCase
             [Entities\InvoiceTax::class],
             [Entities\EmailNotifications\EmailNotification::class],
             [Entities\EmailNotifications\EmailNotificationTracking::class],
-            [Entities\GatewayDowntime::class],
+            [Entities\GatewayAccountDowntime::class],
         ];
     }
 
+    /**
+     * @test
+     */
+    public function gatewayDowntimeService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => function (Request $request) use ($client) {
+                $response = $client->createResponse();
+                $uri = $request->getUri();
+
+                if ($request->getMethod() === 'POST') {
+                    $response = $response->withHeader(
+                        'Location',
+                        $uri->withPath(rtrim($uri->getPath(), '/') . '/dummy')
+                    );
+                }
+
+                return $response;
+            }
+        ]);
+
+        $service = $client->gatewayDowntimes();
+        self::assertInstanceOf(Services\GatewayAccountDowntimeService::class, $service);
+
+        $paginator = $service->paginator('dummyGateway');
+        self::assertInstanceOf(Paginator::class, $paginator);
+
+        $set = $service->search('dummyGateway');
+        self::assertInstanceOf(Rest\Collection::class, $set);
+
+        $entity = $service->load('dummyGateway', 'dummyDowntime');
+        self::assertInstanceOf(Entities\GatewayAccountDowntime::class, $entity);
+
+        $entity = $service->create('dummyGateway', []);
+        self::assertInstanceOf(Entities\GatewayAccountDowntime::class, $entity);
+
+        $entity = $service->update('dummyGateway', 'dummyDowntime', []);
+        self::assertInstanceOf(Entities\GatewayAccountDowntime::class, $entity);
+
+        $service->delete('dummyGateway', 'dummyDowntime');
+    }
 
     /**
      * @return array
@@ -1000,11 +1043,6 @@ class ApiTest extends TestCase
                 'emailNotificationsTracking',
                 Services\EmailNotificationTrackingService::class,
                 Entities\EmailNotifications\EmailNotificationTracking::class,
-            ],
-            [
-                'gatewayDowntimes',
-                Services\GatewayDowntimeService::class,
-                Entities\GatewayDowntime::class,
             ],
         ];
     }

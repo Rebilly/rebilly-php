@@ -13,11 +13,11 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Entity;
 
 /**
- * Class GatewayDowntime
+ * Class GatewayAccountDowntime
  *
  * @author Arman Tuyakbayev <arman.tuyakbayev@rebilly.com>
  */
-final class GatewayDowntime extends Entity
+final class GatewayAccountDowntime extends Entity
 {
     /**
      * @param string $value
