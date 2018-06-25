@@ -136,12 +136,12 @@ class PaymentInstrumentsTest extends BaseTestCase
      */
     public function paymentCardMigrationsResponse()
     {
-       $response = new PaymentCardMigrationsResponse([
-           'migratedCards' => 2,
-       ]);
+        $response = new PaymentCardMigrationsResponse([
+            'migratedCards' => 2,
+        ]);
 
-       self::assertInstanceOf(PaymentCardMigrationsResponse::class, $response);
-       self::assertSame(2, $response->getMigratedCards());
+        self::assertInstanceOf(PaymentCardMigrationsResponse::class, $response);
+        self::assertSame(2, $response->getMigratedCards());
     }
 
     /**

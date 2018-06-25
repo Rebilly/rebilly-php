@@ -11,15 +11,7 @@
 namespace Rebilly\Tests\Api;
 
 use DomainException;
-use Rebilly\Entities\PaymentCardMigrationsResponse;
-use Rebilly\Entities\PaymentInstruments\AchInstrument;
-use Rebilly\Entities\PaymentInstruments\CashInstrument;
-use Rebilly\Entities\PaymentInstruments\PaymentCardInstrument;
-use Rebilly\Entities\PaymentInstruments\PaymentCardPaymentInstrument;
-use Rebilly\Entities\PaymentInstruments\PayPalInstrument;
-use Rebilly\Entities\PaymentMethodInstrument;
 use Rebilly\Entities\Session;
-use Rebilly\Entities\Shipping\Rate;
 use Rebilly\Tests\TestCase as BaseTestCase;
 
 /**
