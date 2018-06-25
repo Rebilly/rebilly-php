@@ -30,13 +30,8 @@ class CouponTest extends BaseTestCase
      */
     public function typePercent()
     {
-        /**
-         * @var Percent $discount
-         */
-        $discount = Percent::createFromData([
-            'type' => 'percent',
-            'value' => 15,
-        ]);
+        $discount = new Percent();
+        $discount->setValue(15);
 
         self::assertInstanceOf(Percent::class, $discount);
         self::assertSame(15, $discount->getValue());
@@ -48,14 +43,9 @@ class CouponTest extends BaseTestCase
      */
     public function typeFixed()
     {
-        /**
-         * @var Fixed $discount
-         */
-        $discount = Fixed::createFromData([
-            'type' => 'fixed',
-            'amount' => 15,
-            'currency' => 'USD',
-        ]);
+        $discount = new Fixed();
+        $discount->setAmount(15);
+        $discount->setCurrency('USD');
 
         self::assertInstanceOf(Fixed::class, $discount);
         self::assertSame(15, $discount->getAmount());
@@ -93,13 +83,8 @@ class CouponTest extends BaseTestCase
      */
     public function restrictionDiscountsPerRedemption()
     {
-        /**
-         * @var DiscountsPerRedemption $restriction
-         */
-        $restriction = DiscountsPerRedemption::createFromData([
-            'type' => 'discounts-per-redemption',
-            'quantity' => 3,
-        ]);
+        $restriction = new DiscountsPerRedemption();
+        $restriction->setQuantity(3);
 
         self::assertInstanceOf(DiscountsPerRedemption::class, $restriction);
         self::assertSame(3, $restriction->getQuantity());
@@ -111,13 +96,8 @@ class CouponTest extends BaseTestCase
      */
     public function restrictionRedemptionsPerCustomer()
     {
-        /**
-         * @var RedemptionsPerCustomer $restriction
-         */
-        $restriction = RedemptionsPerCustomer::createFromData([
-            'type' => 'redemptions-per-customer',
-            'quantity' => 3,
-        ]);
+        $restriction = new RedemptionsPerCustomer();
+        $restriction->setQuantity(3);
 
         self::assertInstanceOf(RedemptionsPerCustomer::class, $restriction);
         self::assertSame(3, $restriction->getQuantity());
@@ -129,13 +109,8 @@ class CouponTest extends BaseTestCase
      */
     public function restrictionRestrictToInvoices()
     {
-        /**
-         * @var RestrictToInvoices $restriction
-         */
-        $restriction = RestrictToInvoices::createFromData([
-            'type' => 'restrict-to-invoices',
-            'invoiceIds' => ['123', '234'],
-        ]);
+        $restriction = new RestrictToInvoices();
+        $restriction->setInvoiceIds(['123', '234']);
 
         self::assertInstanceOf(RestrictToInvoices::class, $restriction);
         self::assertSame(['123', '234'], $restriction->getInvoiceIds());
@@ -147,13 +122,8 @@ class CouponTest extends BaseTestCase
      */
     public function restrictionRestrictToSubscriptions()
     {
-        /**
-         * @var RestrictToSubscriptions $restriction
-         */
-        $restriction = RestrictToSubscriptions::createFromData([
-            'type' => 'restrict-to-subscriptions',
-            'subscriptionIds' => ['123', '234'],
-        ]);
+        $restriction = new RestrictToSubscriptions();
+        $restriction->setSubscriptionIds(['123', '234']);
 
         self::assertInstanceOf(RestrictToSubscriptions::class, $restriction);
         self::assertSame(['123', '234'], $restriction->getSubscriptionIds());
@@ -165,13 +135,8 @@ class CouponTest extends BaseTestCase
      */
     public function restrictionRestrictToPlans()
     {
-        /**
-         * @var RestrictToPlans $restriction
-         */
-        $restriction = RestrictToPlans::createFromData([
-            'type' => 'restrict-to-plans',
-            'planIds' => ['123', '234'],
-        ]);
+        $restriction = new RestrictToPlans();
+        $restriction->setPlanIds(['123', '234']);
 
         self::assertInstanceOf(RestrictToPlans::class, $restriction);
         self::assertSame(['123', '234'], $restriction->getPlanIds());
