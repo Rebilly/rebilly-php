@@ -11,6 +11,7 @@
 namespace Rebilly\Tests\Api;
 
 use DomainException;
+use Rebilly\Entities\PaymentCardMigrationsResponse;
 use Rebilly\Entities\PaymentInstruments\AchInstrument;
 use Rebilly\Entities\PaymentInstruments\CashInstrument;
 use Rebilly\Entities\PaymentInstruments\PaymentCardInstrument;
@@ -128,6 +129,19 @@ class PaymentInstrumentsTest extends BaseTestCase
     public function paymentInstructionsCreateFromData($data)
     {
         PaymentMethodInstrument::createFromData($data);
+    }
+
+    /**
+     * @test
+     */
+    public function paymentCardMigrationsResponse()
+    {
+       $response = new PaymentCardMigrationsResponse([
+           'migratedCards' => 2,
+       ]);
+
+       self::assertInstanceOf(PaymentCardMigrationsResponse::class, $response);
+       self::assertSame(2, $response->getMigratedCards());
     }
 
     /**
