@@ -9,6 +9,7 @@
  */
 
 namespace Rebilly\Tests\Api;
+
 use DomainException;
 use Rebilly\Entities\Coupons\Discounts\Fixed;
 use Rebilly\Entities\Coupons\Discounts\Percent;
@@ -18,7 +19,6 @@ use Rebilly\Entities\Coupons\Restrictions\RestrictToInvoices;
 use Rebilly\Entities\Coupons\Restrictions\RestrictToPlans;
 use Rebilly\Entities\Coupons\Restrictions\RestrictToSubscriptions;
 use Rebilly\Tests\TestCase;
-
 
 /**
  * Class CouponTest.
