@@ -28,7 +28,7 @@ abstract class PaymentInstruction extends Resource
     const PARTIAL = 'partial';
     const DISCOUNT = 'discount';
 
-    const AVAILABLE_METHODS = [
+    private static $availableMethods = [
         self::NONE,
         self::PARTIAL,
         self::DISCOUNT,
@@ -65,7 +65,7 @@ abstract class PaymentInstruction extends Resource
                 break;
             default:
                 throw new DomainException(
-                    sprintf(self::UNSUPPORTED_METHOD, implode(',', self::AVAILABLE_METHODS))
+                    sprintf(self::UNSUPPORTED_METHOD, implode(',', self::$availableMethods))
                 );
         }
 
