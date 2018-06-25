@@ -9,6 +9,7 @@
  */
 
 namespace Rebilly\Tests\Api;
+use DomainException;
 use Rebilly\Entities\Coupons\Discounts\Fixed;
 use Rebilly\Entities\Coupons\Discounts\Percent;
 use Rebilly\Entities\Coupons\Restrictions\DiscountsPerRedemption;
@@ -60,6 +61,31 @@ class CouponTest extends TestCase
         self::assertSame(15, $discount->getAmount());
         self::assertSame('USD', $discount->getCurrency());
         self::assertSame('fixed', $discount->getType());
+    }
+
+    /**
+     * @expectedException DomainException
+     * @test
+     */
+    public function typeIsRequired()
+    {
+        Fixed::createFromData([
+            'amount' => 15,
+            'currency' => 'USD',
+        ]);
+    }
+
+    /**
+     * @expectedException DomainException
+     * @test
+     */
+    public function typeMustBeCorrect()
+    {
+        Fixed::createFromData([
+            'type' => 'wrong',
+            'amount' => 15,
+            'currency' => 'USD',
+        ]);
     }
 
     /**
@@ -150,5 +176,28 @@ class CouponTest extends TestCase
         self::assertInstanceOf(RestrictToPlans::class, $restriction);
         self::assertSame(['123', '234'], $restriction->getPlanIds());
         self::assertSame('restrict-to-plans', $restriction->getType());
+    }
+
+    /**
+     * @expectedException DomainException
+     * @test
+     */
+    public function restrictionTypeIsRequired()
+    {
+        RestrictToPlans::createFromData([
+            'planIds' => ['123', '234'],
+        ]);
+    }
+
+    /**
+     * @expectedException DomainException
+     * @test
+     */
+    public function restrictionTypeMustBeCorrect()
+    {
+        RestrictToPlans::createFromData([
+            'type' => 'wrong',
+            'planIds' => ['123', '234'],
+        ]);
     }
 }
