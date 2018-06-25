@@ -770,6 +770,7 @@ class ApiTest extends TestCase
             [Entities\EmailNotifications\EmailNotificationTracking::class],
             [Entities\EmailNotifications\Notification::class],
             [Entities\SubscriptionChangePlan::class],
+            [Entities\SubscriptionInterimInvoice::class],
         ];
     }
 
