@@ -32,7 +32,7 @@ abstract class ScheduleInstruction extends Resource
     const DAY_OF_WEEK = 'day-of-week';
     const IMMEDIATELY = 'immediately';
 
-    const AVAILABLE_METHODS = [
+    private static $availableMethods = [
         self::AUTO,
         self::DATE_INTERVAL,
         self::DAY_OF_MONTH,
@@ -77,7 +77,7 @@ abstract class ScheduleInstruction extends Resource
                 break;
             default:
                 throw new DomainException(
-                    sprintf(self::UNSUPPORTED_METHOD, implode(',', self::AVAILABLE_METHODS))
+                    sprintf(self::UNSUPPORTED_METHOD, implode(',', self::$availableMethods))
                 );
         }
 
