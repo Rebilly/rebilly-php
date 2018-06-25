@@ -16,6 +16,8 @@ use Rebilly\Client;
 use Rebilly\Entities;
 use Rebilly\Entities\Customer;
 use Rebilly\Entities\PaymentMethodInstrument;
+use Rebilly\Entities\PaymentRetryInstructions\PaymentInstruction;
+use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstruction;
 use Rebilly\Http\CurlHandler;
 use Rebilly\Paginator;
 use Rebilly\Rest;
@@ -772,6 +774,7 @@ class ApiTest extends TestCase
             [Entities\SubscriptionChangePlan::class],
             [Entities\SubscriptionInterimInvoice::class],
             [Entities\PaymentInstruments\BankAccountPaymentInstrument::class],
+            [Entities\PaymentRetryAttempt::class],
         ];
     }
 
@@ -1499,6 +1502,14 @@ class ApiTest extends TestCase
                     "subscription-canceled",
                     "subscription-renewed",
                     "payment-card-expired",
+                ]);
+            case 'scheduleInstruction':
+                return ScheduleInstruction::createFromData([
+                    'method' => 'auto',
+                ]);
+            case 'paymentInstruction':
+                return PaymentInstruction::createFromData([
+                    'method' => 'none',
                 ]);
             default:
                 throw new InvalidArgumentException(
