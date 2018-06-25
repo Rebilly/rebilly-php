@@ -18,7 +18,7 @@ use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstruction;
 class DayOfMonthType extends ScheduleInstruction
 {
     /**
-     * @return string
+     * @return int
      */
     public function getDay()
     {
@@ -26,7 +26,7 @@ class DayOfMonthType extends ScheduleInstruction
     }
 
     /**
-     * @param string $value
+     * @param int $value
      *
      * @return $this
      */
@@ -58,6 +58,6 @@ class DayOfMonthType extends ScheduleInstruction
      */
     protected function methodName()
     {
-        return ScheduleInstruction::DAY_OF_WEEK;
+        return ScheduleInstruction::DAY_OF_MONTH;
     }
 }
