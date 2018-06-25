@@ -265,6 +265,38 @@ class ApiTest extends TestCase
     /**
      * @test
      */
+    public function customerLeadSourcesService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->getMock(CurlHandler::class);
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'lead-sources/dummy')
+            ));
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+
+        $service = $client->customers();
+
+        $result = $service->getLeadSource('dummy');
+        $this->assertInstanceOf(Entities\LeadSource::class, $result);
+
+        $result = $service->updateLeadSource('dummy', []);
+        $this->assertInstanceOf(Entities\LeadSource::class, $result);
+
+        $service->deleteLeadSource('dummy');
+    }
+
+    /**
+     * @test
+     */
     public function authenticationTokenService()
     {
         $client = new Client(['apiKey' => 'QWERTY']);
@@ -395,6 +427,38 @@ class ApiTest extends TestCase
     /**
      * @test
      */
+    public function invoiceLeadSourcesService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->getMock(CurlHandler::class);
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'lead-sources/dummy')
+            ));
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+
+        $service = $client->invoices();
+
+        $result = $service->getLeadSource('dummy');
+        $this->assertInstanceOf(Entities\LeadSource::class, $result);
+
+        $result = $service->updateLeadSource('dummy', []);
+        $this->assertInstanceOf(Entities\LeadSource::class, $result);
+
+        $service->deleteLeadSource('dummy');
+    }
+
+    /**
+     * @test
+     */
     public function subscriptionService()
     {
         $client = new Client(['apiKey' => 'QWERTY']);
@@ -418,6 +482,72 @@ class ApiTest extends TestCase
 
         $result = $service->cancel('dummy', []);
         $this->assertInstanceOf(Entities\Subscription::class, $result);
+
+        $result = $service->changePlan('dummy', []);
+        $this->assertInstanceOf(Entities\Subscription::class, $result);
+
+        $result = $service->issueInterimInvoice('dummy', []);
+        $this->assertInstanceOf(Entities\Subscription::class, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function subscriptionLeadSourcesService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->getMock(CurlHandler::class);
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'lead-sources/dummy')
+            ));
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+
+        $service = $client->subscriptions();
+
+        $result = $service->getLeadSource('dummy');
+        $this->assertInstanceOf(Entities\LeadSource::class, $result);
+
+        $result = $service->updateLeadSource('dummy', []);
+        $this->assertInstanceOf(Entities\LeadSource::class, $result);
+
+        $service->deleteLeadSource('dummy');
+    }
+
+    /**
+     * @test
+     */
+    public function couponService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->getMock(CurlHandler::class);
+
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'coupons/dummy')
+            ));
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+
+        $service = $client->coupons();
+
+        $result = $service->expiration('dummy');
+        $this->assertInstanceOf(Entities\Coupons\Coupon::class, $result);
     }
 
     /**
