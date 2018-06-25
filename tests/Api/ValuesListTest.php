@@ -63,7 +63,7 @@ class ValuesListTest extends BaseTestCase
             'Single value is not a scalar value' => [
                 [
                     [],
-                ]
+                ],
             ],
         ];
     }
