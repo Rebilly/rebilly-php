@@ -11,6 +11,8 @@
 namespace Rebilly\Tests\Api;
 
 use DomainException;
+use Rebilly\Entities\PaymentRetryAttempt;
+use Rebilly\Entities\PaymentRetryInstruction;
 use Rebilly\Entities\PaymentRetryInstructions\PaymentInstruction;
 use Rebilly\Entities\PaymentRetryInstructions\PaymentInstructionTypes\DiscountType;
 use Rebilly\Entities\PaymentRetryInstructions\PaymentInstructionTypes\NoneType;
@@ -194,6 +196,78 @@ class PaymentRetryInstructionsTest extends BaseTestCase
     public function scheduleInstructionsCreateFromData($data)
     {
         ScheduleInstruction::createFromData($data);
+    }
+
+    /**
+     * @test
+     */
+    public function paymentRetryInstruction()
+    {
+        $attempt = new PaymentRetryAttempt([
+            'scheduleInstruction' => ScheduleInstruction::createFromData([
+                'method' => 'auto',
+            ]),
+        ]);
+        $attempt->setScheduleInstruction(ScheduleInstruction::createFromData([
+            'method' => 'auto',
+        ]));
+        $attempt->setPaymentInstruction(PaymentInstruction::createFromData([
+            'method' => 'none',
+        ]));
+
+        $instruction = new PaymentRetryInstruction();
+        $instruction->setAttempts([$attempt]);
+        $instruction->setAfterAttemptPolicy(PaymentRetryInstruction::AFTER_ATTEMPT_POLICY_NONE);
+        $instruction->setAfterRetryEndPolicy(PaymentRetryInstruction::AFTER_RETRY_END_POLICY_CANCEL_SUBSCRIPTION);
+
+        self::assertSame(PaymentRetryInstruction::AFTER_ATTEMPT_POLICY_NONE, $instruction->getAfterAttemptPolicy());
+        self::assertSame(PaymentRetryInstruction::AFTER_RETRY_END_POLICY_CANCEL_SUBSCRIPTION, $instruction->getAfterRetryEndPolicy());
+        self::assertEquals([$attempt], $instruction->getAttempts());
+    }
+
+    /**
+     * @test
+     * @expectedException DomainException
+     */
+    public function attemptMustBeArray()
+    {
+        $instruction = new PaymentRetryInstruction();
+        $instruction->addAttempt('wrong');
+    }
+
+    /**
+     * @test
+     * @expectedException DomainException
+     */
+    public function afterAttemptPolicyMustBeCorrect()
+    {
+        $instruction = new PaymentRetryInstruction();
+        $instruction->setAfterAttemptPolicy('wrong');
+    }
+
+    /**
+     * @test
+     * @expectedException DomainException
+     */
+    public function afterRetryEndPolicyMustBeCorrect()
+    {
+        $instruction = new PaymentRetryInstruction();
+        $instruction->setAfterRetryEndPolicy('wrong');
+    }
+
+    /**
+     * @test
+     */
+    public function createPaymentRetryAttempt()
+    {
+        $instruction = new PaymentRetryInstruction();
+        $attempt = $instruction->createPaymentRetryAttempt([
+            'scheduleInstruction' => ScheduleInstruction::createFromData([
+                'method' => 'auto',
+            ]),
+        ]);
+
+        self::assertInstanceOf(PaymentRetryAttempt::class, $attempt);
     }
 
     /**
