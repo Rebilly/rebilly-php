@@ -81,7 +81,7 @@ final class ValuesList extends Entity
     {
         $listValues = [];
 
-        if (!is_array($values)) {
+        if (empty($values)) {
             throw new DomainException('Values cannot be empty');
         }
 
