@@ -687,6 +687,9 @@ class ApiTest extends TestCase
         $result = $service->createFromToken('token', ['customerId' => $faker->uuid], 'dummy');
         $this->assertInstanceOf(Entities\PaymentCard::class, $result);
 
+        $result = $service->createFromToken(['token' => 'dummy'], $card);
+        $this->assertInstanceOf(Entities\PaymentCard::class, $result);
+
         $result = $service->authorize([], 'dummy');
         $this->assertInstanceOf(Entities\PaymentCard::class, $result);
 
