@@ -226,6 +226,51 @@ class PaymentRetryInstructionsTest extends BaseTestCase
     }
 
     /**
+     * @test
+     * @expectedException DomainException
+     */
+    public function attemptMustBeArray()
+    {
+        $instruction = new PaymentRetryInstruction();
+        $instruction->addAttempt('wrong');
+    }
+
+    /**
+     * @test
+     * @expectedException DomainException
+     */
+    public function afterAttemptPolicyMustBeCorrect()
+    {
+        $instruction = new PaymentRetryInstruction();
+        $instruction->setAfterAttemptPolicy('wrong');
+    }
+
+    /**
+     * @test
+     * @expectedException DomainException
+     */
+    public function afterRetryEndPolicyMustBeCorrect()
+    {
+        $instruction = new PaymentRetryInstruction();
+        $instruction->setAfterRetryEndPolicy('wrong');
+    }
+
+    /**
+     * @test
+     */
+    public function createPaymentRetryAttempt()
+    {
+        $instruction = new PaymentRetryInstruction();
+        $attempt = $instruction->createPaymentRetryAttempt([
+            'scheduleInstruction' => ScheduleInstruction::createFromData([
+                'method' => 'auto',
+            ]),
+        ]);
+
+        self::assertInstanceOf(PaymentRetryAttempt::class, $attempt);
+    }
+
+    /**
      * @return array
      */
     public function providePaymentInstructions()

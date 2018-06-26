@@ -917,6 +917,33 @@ class ApiTest extends TestCase
     /**
      * @test
      */
+    public function paymentCardMigrationService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->getMock(CurlHandler::class);
+
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'payment-cards-migrations/migrate')
+            ));
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+        $service = $client->paymentCardMigrations();
+
+        $result = $service->migrate([]);
+        $this->assertInstanceOf(Entities\PaymentCardMigrationsResponse::class, $result);
+    }
+
+    /**
+     * @test
+     */
     public function useFactories()
     {
         $resource = new Customer();
