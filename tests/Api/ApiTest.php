@@ -581,6 +581,38 @@ class ApiTest extends TestCase
     /**
      * @test
      */
+    public function transactionLeadSourcesService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->getMock(CurlHandler::class);
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'lead-sources/dummy')
+            ));
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+
+        $service = $client->transactions();
+
+        $result = $service->getLeadSource('dummy');
+        $this->assertInstanceOf(Entities\LeadSource::class, $result);
+
+        $result = $service->updateLeadSource('dummy', []);
+        $this->assertInstanceOf(Entities\LeadSource::class, $result);
+
+        $service->deleteLeadSource('dummy');
+    }
+
+    /**
+     * @test
+     */
     public function paymentService()
     {
         $client = new Client(['apiKey' => 'QWERTY']);
@@ -811,6 +843,75 @@ class ApiTest extends TestCase
         $service = $client->users();
         $result = $service->updatePassword('userId', []);
         $this->assertInstanceOf(Entities\User::class, $result);
+
+        $service->forgotPassword([]);
+
+        $result = $service->resetPassword('token', []);
+        $this->assertInstanceOf(Entities\User::class, $result);
+
+        $result = $service->resetTotp('userId');
+        $this->assertInstanceOf(Entities\User::class, $result);
+
+        $result = $service->activate('token');
+        $this->assertInstanceOf(Entities\User::class, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function redemptionService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->getMock(CurlHandler::class);
+
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'coupons-redemptions/dummy')
+            ));
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+
+        $service = $client->couponsRedemptions();
+
+        $result = $service->redeem([]);
+        $this->assertInstanceOf(Entities\Coupons\Redemption::class, $result);
+
+        $result = $service->cancel('dummy');
+        $this->assertInstanceOf(Entities\Coupons\Redemption::class, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function emailNotificationService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->getMock(CurlHandler::class);
+
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'email-notifications/dummy')
+            ));
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+
+        $service = $client->emailNotifications();
+
+        $service->preview([]);
     }
 
     /**
