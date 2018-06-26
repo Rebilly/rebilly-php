@@ -944,6 +944,169 @@ class ApiTest extends TestCase
     /**
      * @test
      */
+    public function bankAccountService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->getMock(CurlHandler::class);
+
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'bank-accounts/dummy')
+            ));
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+        $service = $client->bankAccounts();
+
+        $result = $service->deactivate('dummy');
+        $this->assertInstanceOf(Entities\BankAccount::class, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function payPalAccountService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->getMock(CurlHandler::class);
+
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'paypal-accounts/dummy')
+            ));
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+        $service = $client->payPalAccounts();
+
+        $result = $service->deactivate('dummy');
+        $this->assertInstanceOf(Entities\PayPalAccount::class, $result);
+
+        $result = $service->activate([], 'dummy');
+        $this->assertInstanceOf(Entities\PayPalAccount::class, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function paymentCardTokenService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->getMock(CurlHandler::class);
+
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'tokens/dummy')
+            ));
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+        $service = $client->paymentCardTokens();
+
+        $result = $service->expire('dummy');
+        $this->assertInstanceOf(Entities\PaymentCardToken::class, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function schedulePaymentService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->getMock(CurlHandler::class);
+
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'queue/payments/dummy')
+            ));
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+        $service = $client->scheduledPayments();
+
+        $result = $service->cancel('dummy');
+        $this->assertInstanceOf(Entities\ScheduledPayment::class, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function valuesListService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->getMock(CurlHandler::class);
+
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'lists/dummy')
+            ));
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+        $service = $client->lists();
+
+        $result = $service->loadVersion('dummy', 1);
+        $this->assertInstanceOf(Entities\ValuesList::class, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function webhookService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->getMock(CurlHandler::class);
+
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'previews/webhooks')
+            ));
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+        $service = $client->webhooks();
+        $service->preview([]);
+    }
+
+    /**
+     * @test
+     */
     public function useFactories()
     {
         $resource = new Customer();
