@@ -99,7 +99,7 @@ class PaymentInstrumentValidation extends Resource
     }
 
     /**
-     * @return string
+     * @return int
      */
     public function getExpMonth()
     {
