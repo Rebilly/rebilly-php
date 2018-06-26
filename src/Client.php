@@ -42,6 +42,7 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method void head($path, $params = [], $headers = [])
  * @method mixed post($payload, $path, $params = [], $headers = [])
  * @method mixed put($payload, $path, $params = [], $headers = [])
+ * @method mixed patch($payload, $path, $params = [], $headers = [])
  * @method void delete($path, $params = [], $headers = [])
  *
  * Magic methods for services factories:
@@ -351,6 +352,7 @@ final class Client
                 return call_user_func_array([$this, 'send'], $arguments);
             case 'POST':
             case 'PUT':
+            case 'PATCH':
                 array_unshift($arguments, $name);
                 return call_user_func_array([$this, 'send'], $arguments);
         }
