@@ -11,19 +11,6 @@
 namespace Rebilly\Tests\Api;
 
 use DomainException;
-use Rebilly\Entities\PaymentRetryAttempt;
-use Rebilly\Entities\PaymentRetryInstruction;
-use Rebilly\Entities\PaymentRetryInstructions\PaymentInstruction;
-use Rebilly\Entities\PaymentRetryInstructions\PaymentInstructionTypes\DiscountType;
-use Rebilly\Entities\PaymentRetryInstructions\PaymentInstructionTypes\NoneType;
-use Rebilly\Entities\PaymentRetryInstructions\PaymentInstructionTypes\PartialType;
-use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstruction;
-use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstructionTypes\AutoType;
-use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstructionTypes\DateIntervalType;
-use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstructionTypes\DayOfMonthType;
-use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstructionTypes\DayOfWeekType;
-use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstructionTypes\ImmediatelyType;
-use Rebilly\Entities\Subscription;
 use Rebilly\Entities\SubscriptionCancel;
 use Rebilly\Tests\TestCase as BaseTestCase;
 
