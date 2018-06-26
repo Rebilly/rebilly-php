@@ -11,7 +11,6 @@
 
 namespace Rebilly\Entities;
 
-
 use Rebilly\Rest\Resource;
 
 class PaymentInstrumentValidation extends Resource
