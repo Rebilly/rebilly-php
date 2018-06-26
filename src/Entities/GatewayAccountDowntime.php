@@ -84,6 +84,14 @@ final class GatewayAccountDowntime extends Entity
     /**
      * @return string
      */
+    public function getReason()
+    {
+        return $this->getAttribute('reason');
+    }
+
+    /**
+     * @return string
+     */
     public function getCreatedTime()
     {
         return $this->getAttribute('createdTime');
