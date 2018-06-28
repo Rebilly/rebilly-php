@@ -104,6 +104,14 @@ class CurlHandler implements HttpHandler
 
                 $request = $request->withoutHeader('Content-Length');
                 break;
+            case 'PATCH':
+                $options[CURLOPT_CUSTOMREQUEST] = 'PATCH';
+                $options[CURLOPT_POSTFIELDS] = (string) $request->getBody();
+
+                // Don't duplicate the Content-Length header
+                $request = $request->withoutHeader('Content-Length');
+                $request = $request->withoutHeader('Transfer-Encoding');
+                break;
             default:
                 $options[CURLOPT_CUSTOMREQUEST] = $request->getMethod();
         }
