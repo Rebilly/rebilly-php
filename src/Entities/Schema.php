@@ -326,6 +326,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'tracking/email-notifications/{trackId}' => function (array $content) {
                 return new EmailNotificationTracking($content);
             },
+            'payment-instrument-validation' => function (array $content) {
+                return new Collection(new PaymentInstrumentValidation(), $content);
+            },
+            'payment-instrument-validation/{paymentInstrumentValidationId}' => function (array $content) {
+                return new PaymentInstrumentValidation($content);
+            },
         ];
     }
 
