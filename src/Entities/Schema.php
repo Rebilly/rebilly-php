@@ -326,6 +326,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'tracking/email-notifications/{trackId}' => function (array $content) {
                 return new EmailNotificationTracking($content);
             },
+            'gateway-accounts/{gatewayAccountId}/downtime-schedules' => function (array $content) {
+                return new Collection(new GatewayAccountDowntime(), $content);
+            },
+            'gateway-accounts/{gatewayAccountId}/downtime-schedules/{downtimeId}' => function (array $content) {
+                return new GatewayAccountDowntime($content);
+            },
         ];
     }
 

@@ -192,6 +192,7 @@ class ApiTest extends TestCase
             [Entities\SubscriptionInterimInvoice::class],
             [Entities\PaymentInstruments\BankAccountPaymentInstrument::class],
             [Entities\PaymentRetryAttempt::class],
+            [Entities\GatewayAccountDowntime::class],
         ];
     }
 }
