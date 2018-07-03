@@ -115,6 +115,8 @@ abstract class TestCase extends BaseTestCase
             case 'deadlineTime':
             case 'issuedTime':
             case 'effectiveTime':
+            case 'startTime':
+            case 'endTime':
                 return $faker->date('Y-m-d H:i:s');
             case 'unitPrice':
             case 'amount':
