@@ -44,5 +44,4 @@ class PaymentCardValidation extends PaymentInstrumentValidation
     {
         return $this->getAttribute('expMonth');
     }
-
 }

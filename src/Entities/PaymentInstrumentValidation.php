@@ -46,16 +46,6 @@ abstract class PaymentInstrumentValidation extends Resource
 
     /**
      * @param $value
-     *
-     * @return $this
-     */
-    public function setMethod($value)
-    {
-        return $this->setAttribute('method', $value);
-    }
-
-    /**
-     * @param $value
      * @return $this
      */
     public function setPaymentInstrumentId($value)
