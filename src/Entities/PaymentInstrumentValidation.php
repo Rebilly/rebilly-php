@@ -12,15 +12,36 @@
 namespace Rebilly\Entities;
 
 use Rebilly\Rest\Resource;
+use DomainException;
 
-class PaymentInstrumentValidation extends Resource
+abstract class PaymentInstrumentValidation extends Resource
 {
+    protected static $supportMethods = [
+        PaymentMethod::METHOD_PAYMENT_CARD,
+    ];
+
     /**
-     * @inheritdoc
+     * @param array $data
+     *
+     * @return PaymentCardValidation
      */
-    public function __construct(array $data = [])
+    public static function createFromData(array $data)
     {
-        parent::__construct($data);
+        if (!isset($data['method'])) {
+            throw new DomainException('Method is required');
+        }
+        switch ($data['method']) {
+            case PaymentMethod::METHOD_PAYMENT_CARD:
+                $paymentInstrumentValidation = new PaymentCardValidation($data);
+
+                break;
+            default:
+                throw new DomainException(
+                    sprintf('Unexpected method. Only %s methods support', implode(',', self::$supportMethods))
+                );
+        }
+
+        return $paymentInstrumentValidation;
     }
 
     /**
@@ -72,38 +93,6 @@ class PaymentInstrumentValidation extends Resource
     public function getResponseCode()
     {
         return $this->getAttribute('responseCode');
-    }
-
-    /**
-     * @return string
-     */
-    public function getAvsResult()
-    {
-        return $this->getAttribute('avsResult');
-    }
-
-    /**
-     * @return string
-     */
-    public function getCvvResult()
-    {
-        return $this->getAttribute('cvvResult');
-    }
-
-    /**
-     * @return int
-     */
-    public function getExpYear()
-    {
-        return $this->getAttribute('expYear');
-    }
-
-    /**
-     * @return int
-     */
-    public function getExpMonth()
-    {
-        return $this->getAttribute('expMonth');
     }
 
     /**
