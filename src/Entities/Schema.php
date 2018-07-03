@@ -336,7 +336,7 @@ final class Schema implements IteratorAggregate, ArrayAccess
                 return new Collection(new PaymentInstrumentValidation(), $content);
             },
             'payment-instrument-validation/{paymentInstrumentValidationId}' => function (array $content) {
-                return new PaymentInstrumentValidation($content);
+                return PaymentInstrumentValidation::createFromData($content);
             },
         ];
     }
