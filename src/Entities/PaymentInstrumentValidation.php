@@ -14,7 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Resource;
 use DomainException;
 
-class PaymentInstrumentValidation extends Resource
+abstract class PaymentInstrumentValidation extends Resource
 {
     protected static $supportMethods = [
         PaymentMethod::METHOD_PAYMENT_CARD,

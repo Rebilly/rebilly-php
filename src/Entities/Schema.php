@@ -333,7 +333,7 @@ final class Schema implements IteratorAggregate, ArrayAccess
                 return new GatewayAccountDowntime($content);
             },
             'payment-instrument-validation' => function (array $content) {
-                return new Collection(new PaymentInstrumentValidation(), $content);
+                return new Collection(new PaymentCardValidation(), $content);
             },
             'payment-instrument-validation/{paymentInstrumentValidationId}' => function (array $content) {
                 return PaymentInstrumentValidation::createFromData($content);
