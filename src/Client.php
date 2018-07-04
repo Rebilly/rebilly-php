@@ -96,6 +96,7 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\EmailNotificationService emailNotifications()
  * @method Services\EmailNotificationTrackingService emailNotificationsTracking()
  * @method Services\GatewayAccountDowntimeService gatewayDowntimes()
+ * @method Services\PaymentInstrumentValidationService paymentInstrumentValidation()
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  * @version 0.1
@@ -154,6 +155,7 @@ final class Client
         'emailNotifications' => Services\EmailNotificationService::class,
         'emailNotificationsTracking' => Services\EmailNotificationTrackingService::class,
         'gatewayDowntimes' => Services\GatewayAccountDowntimeService::class,
+        'paymentInstrumentValidation' => Services\PaymentInstrumentValidationService::class,
     ];
 
     /** @var array */
