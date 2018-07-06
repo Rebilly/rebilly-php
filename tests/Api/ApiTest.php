@@ -153,7 +153,7 @@ class ApiTest extends TestCase
             [Entities\ResetPasswordToken::class, 'token'],
             [Entities\ScheduledPayment::class],
             [Entities\Subscription::class],
-            [Entities\SubscriptionCancel::class, null],
+            [Entities\SubscriptionCancellation::class, null],
             [Entities\Transaction::class],
             [Entities\Website::class],
             [Entities\Note::class],

@@ -1166,6 +1166,11 @@ class ServiceTest extends BaseTestCase
                 Entities\ResetPasswordToken::class,
             ],
             [
+                'subscriptionCancellations',
+                Services\SubscriptionCancellationService::class,
+                Entities\SubscriptionCancellation::class,
+            ],
+            [
                 'subscriptions',
                 Services\SubscriptionService::class,
                 Entities\Subscription::class,

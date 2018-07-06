@@ -11,22 +11,22 @@
 namespace Rebilly\Tests\Api;
 
 use DomainException;
-use Rebilly\Entities\SubscriptionCancel;
+use Rebilly\Entities\SubscriptionCancellation;
 use Rebilly\Tests\TestCase as BaseTestCase;
 
 /**
  * Class SubscriptionTest.
  */
-class SubscriptionTest extends BaseTestCase
+class SubscriptionCancellationTest extends BaseTestCase
 {
     /**
      * @expectedException DomainException
      * @test
      */
-    public function cancelPolicyMustBeCorrect()
+    public function cancelStatusMustBeCorrect()
     {
-        $subscriptionCancel = new SubscriptionCancel();
-        $subscriptionCancel->setPolicy('wrong');
+        $subscriptionCancel = new SubscriptionCancellation();
+        $subscriptionCancel->setStatus('wrong');
     }
 
     /**
@@ -35,8 +35,8 @@ class SubscriptionTest extends BaseTestCase
      */
     public function cancelCategoryMustBeCorrect()
     {
-        $subscriptionCancel = new SubscriptionCancel();
-        $subscriptionCancel->setCancelCategory('wrong');
+        $subscriptionCancel = new SubscriptionCancellation();
+        $subscriptionCancel->setReason('wrong');
     }
 
     /**
@@ -45,7 +45,7 @@ class SubscriptionTest extends BaseTestCase
      */
     public function canceledByMustBeCorrect()
     {
-        $subscriptionCancel = new SubscriptionCancel();
+        $subscriptionCancel = new SubscriptionCancellation();
         $subscriptionCancel->setCanceledBy('wrong');
     }
 }
