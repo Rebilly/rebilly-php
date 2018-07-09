@@ -338,6 +338,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'payment-instrument-validation/{paymentInstrumentValidationId}' => function (array $content) {
                 return PaymentInstrumentValidation::createFromData($content);
             },
+            'subscription-reactivations' => function (array $content) {
+                return new Collection(new SubscriptionReactivation(), $content);
+            },
+            'subscription-reactivations/{reactivationId}' => function (array $content) {
+                return new SubscriptionReactivation($content);
+            },
         ];
     }
 
