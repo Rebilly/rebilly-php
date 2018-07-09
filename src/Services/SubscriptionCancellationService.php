@@ -62,7 +62,7 @@ class SubscriptionCancellationService extends Service
         return $this->client()->put(
             $data,
             'subscription-cancellations/{cancellationId}',
-            ['subscriptionId' => $cancellationId]
+            ['cancellationId' => $cancellationId]
         );
     }
 
