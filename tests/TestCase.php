@@ -562,12 +562,17 @@ abstract class TestCase extends BaseTestCase
                     'method' => 'none',
                 ]);
             case 'lineItems':
-                return [new Entities\LineItem([
-                    'type' => $faker->randomElement([Entities\LineItem::TYPE_DEBIT, Entities\LineItem::TYPE_CREDIT]),
-                    'description' => $faker->sentence,
-                    'unitPriceAmount' => $faker->randomFloat(),
-                    'unitPriceCurrency' => 'USD',
-                ])];
+                return [
+                    [
+                        'type' => $faker->randomElement([
+                            Entities\LineItem::TYPE_DEBIT,
+                            Entities\LineItem::TYPE_CREDIT,
+                        ]),
+                        'description' => $faker->sentence,
+                        'unitPriceAmount' => $faker->randomFloat(),
+                        'unitPriceCurrency' => 'USD',
+                    ],
+                ];
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)

@@ -50,6 +50,18 @@ class SubscriptionCancellation extends Resource
     }
 
     /**
+     * @param array $data
+     *
+     * @return array
+     */
+    public function createLineItems($data)
+    {
+        return array_map(function ($row) {
+            return new LineItem($row);
+        }, $data);
+    }
+
+    /**
      * @return array
      */
     public static function reasons()
