@@ -11,7 +11,6 @@
 
 namespace Rebilly\Services;
 
-
 use ArrayObject;
 use JsonSerializable;
 use Rebilly\Entities\SubscriptionCancellation;
