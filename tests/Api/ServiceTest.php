@@ -406,6 +406,35 @@ class ServiceTest extends BaseTestCase
     /**
      * @test
      */
+    public function subscriptionCancellationService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->getMock(CurlHandler::class);
+
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue($client->createResponse()));
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+
+        $service = $client->subscriptionCancellations();
+
+        $result = $service->update('dummy', []);
+        $this->assertInstanceOf(Entities\SubscriptionCancellation::class, $result);
+
+        $result = $service->load('dummy', []);
+        $this->assertInstanceOf(Entities\SubscriptionCancellation::class, $result);
+    }
+
+    /**
+     * @test
+     */
     public function subscriptionLeadSourcesService()
     {
         $client = new Client(['apiKey' => 'QWERTY']);
