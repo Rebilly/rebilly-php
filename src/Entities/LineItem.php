@@ -68,7 +68,7 @@ class LineItem extends Resource
     }
 
     /**
-     * @param int $value
+     * @param float $value
      *
      * @return LineItem
      */
@@ -78,7 +78,7 @@ class LineItem extends Resource
     }
 
     /**
-     * @return int
+     * @return float
      */
     public function getUnitPriceAmount()
     {

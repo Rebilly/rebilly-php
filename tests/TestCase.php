@@ -117,6 +117,7 @@ abstract class TestCase extends BaseTestCase
             case 'effectiveTime':
             case 'startTime':
             case 'endTime':
+            case 'churnTime':
                 return $faker->date('Y-m-d H:i:s');
             case 'unitPrice':
             case 'amount':
@@ -517,7 +518,7 @@ abstract class TestCase extends BaseTestCase
                     $faker->word,
                     $faker->numberBetween(1, 100),
                 ];
-            case 'cancelCategory':
+            case 'reason':
                 return $faker->randomElement(Entities\SubscriptionCancellation::reasons());
             case 'canceledBy':
                 return $faker->randomElement(Entities\SubscriptionCancellation::canceledBySources());
@@ -560,6 +561,13 @@ abstract class TestCase extends BaseTestCase
                 return PaymentInstruction::createFromData([
                     'method' => 'none',
                 ]);
+            case 'lineItems':
+                return [new Entities\LineItem([
+                    'type' => $faker->randomElement([Entities\LineItem::TYPE_DEBIT, Entities\LineItem::TYPE_CREDIT]),
+                    'description' => $faker->sentence,
+                    'unitPriceAmount' => $faker->randomFloat(),
+                    'unitPriceCurrency' => 'USD',
+                ])];
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)

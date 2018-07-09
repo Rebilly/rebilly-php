@@ -18,8 +18,12 @@ use Rebilly\Rest\Resource;
  */
 class SubscriptionCancellation extends Resource
 {
+    const UNEXPECTED_STATUS = 'Unexpected status. Only %s statuses are supported';
     const UNEXPECTED_CATEGORY = 'Unexpected cancel category. Only %s categories are supported';
     const UNEXPECTED_CANCEL_SOURCE = 'Unexpected cancel source. Only %s cancel sources are supported';
+
+    const STATUS_DRAFT = 'draft';
+    const STATUS_CONFIRMED = 'confirmed';
 
     const CATEGORY_OTHER = 'other';
     const CATEGORY_BILLING_FAILURE  = 'billing-failure';
@@ -39,7 +43,10 @@ class SubscriptionCancellation extends Resource
      */
     public static function statuses()
     {
-        return ['draft', 'confirmed'];
+        return [
+            self::STATUS_DRAFT,
+            self::STATUS_CONFIRMED,
+        ];
     }
 
     /**
@@ -122,6 +129,10 @@ class SubscriptionCancellation extends Resource
      */
     public function setStatus($value)
     {
+        if (!in_array($value, self::statuses())) {
+            throw new DomainException(sprintf(self::UNEXPECTED_STATUS, implode(', ', self::statuses())));
+        }
+
         return $this->setAttribute('status', $value);
     }
 
