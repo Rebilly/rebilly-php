@@ -70,6 +70,7 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\SubscriptionService subscriptions()
  * @method Services\SubscriptionCancellationService subscriptionCancellations()
  * @method Services\TransactionService transactions()
+ * @method Services\SubscriptionReactivationService subscriptionReactivations()
  * @method Services\WebsiteService websites()
  * @method Services\NoteService notes()
  * @method Services\OrganizationService organizations()
@@ -131,6 +132,7 @@ final class Client
         'subscriptions' => Services\SubscriptionService::class,
         'subscriptionCancellations' => Services\SubscriptionCancellationService::class,
         'transactions' => Services\TransactionService::class,
+        'subscriptionReactivations' => Services\SubscriptionReactivationService::class,
         'websites' => Services\WebsiteService::class,
         'files' => Services\FileService::class,
         'attachments' => Services\AttachmentService::class,

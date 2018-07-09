@@ -344,6 +344,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'subscription-cancellations/{cancellationId}' => function (array $content) {
                 return new SubscriptionCancellation($content);
             },
+            'subscription-reactivations' => function (array $content) {
+                return new Collection(new SubscriptionReactivation(), $content);
+            },
+            'subscription-reactivations/{reactivationId}' => function (array $content) {
+                return new SubscriptionReactivation($content);
+            },
         ];
     }
 

@@ -1202,6 +1202,11 @@ class ServiceTest extends BaseTestCase
                 Entities\Subscription::class,
             ],
             [
+                'subscriptionReactivations',
+                Services\SubscriptionReactivationService::class,
+                Entities\SubscriptionReactivation::class,
+            ],
+            [
                 'transactions',
                 Services\TransactionService::class,
                 Entities\Transaction::class,
