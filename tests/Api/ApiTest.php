@@ -156,6 +156,7 @@ class ApiTest extends TestCase
             [Entities\Subscription::class],
             [Entities\SubscriptionCancel::class, null],
             [Entities\SubscriptionCancellation::class, null],
+            [Entities\LineItem::class, null],
             [Entities\Transaction::class],
             [Entities\Website::class],
             [Entities\Note::class],

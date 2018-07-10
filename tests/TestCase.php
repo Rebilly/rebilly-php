@@ -120,6 +120,7 @@ abstract class TestCase extends BaseTestCase
             case 'churnTime':
                 return $faker->date('Y-m-d H:i:s');
             case 'unitPrice':
+            case 'unitPriceAmount':
             case 'amount':
             case 'recurringAmount':
             case 'trialAmount':
@@ -298,6 +299,8 @@ abstract class TestCase extends BaseTestCase
             case 'type':
             case 'datetimeFormat':
                 switch ($class) {
+                    case Entities\LineItem::class:
+                        return $faker->randomElement(Entities\LineItem::types());
                     case Entities\Blacklist::class:
                         return $faker->randomElement(Entities\Blacklist::types());
                     case Entities\InvoiceItem::class:
@@ -357,6 +360,7 @@ abstract class TestCase extends BaseTestCase
             case 'passwordPattern':
                 return '/\w\d{6,}/';
             case 'currency':
+            case 'unitPriceCurrency':
                 return 'USD';
             case 'payment':
                 return []; // TODO
