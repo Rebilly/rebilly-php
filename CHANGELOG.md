@@ -23,6 +23,9 @@ _TBD_
 - [x] Added `SubscriptionChangePlan`. 
 - [x] Added `lineItems` and `lineItemSubtotal` to `Subscription` entity.
 - [x] Deprecated Subscription switch.
+- [x] Deprecated support for `subscription/{id}/cancel` endpoint (`SubscriptionCancel` with policy).
+- [x] Added support for `subscription-cancellations` endpoint (`SubscriptionCancellation` resource).
+- [x] Added support for `subscription-reactivations` endpoint (`SubscriptionReactivation` resource).
 
 ## [2.1.0] 2018-01-04
 - [x] Updated Invoice methods to use `websiteId` and `customerId`

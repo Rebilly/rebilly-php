@@ -324,6 +324,15 @@ abstract class TestCase extends BaseTestCase
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
                         );
                 }
+            case 'policy':
+                switch ($class) {
+                    case Entities\SubscriptionCancel::class:
+                        return $faker->randomElement(Entities\SubscriptionCancel::policies());
+                    default:
+                        throw new InvalidArgumentException(
+                            sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
+                        );
+                }
             case 'items':
                 switch ($class) {
                     case Entities\Layout::class:
@@ -518,6 +527,8 @@ abstract class TestCase extends BaseTestCase
                     $faker->word,
                     $faker->numberBetween(1, 100),
                 ];
+            case 'cancelCategory':
+                return $faker->randomElement(Entities\SubscriptionCancel::cancelCategories());
             case 'reason':
                 return $faker->randomElement(Entities\SubscriptionCancellation::reasons());
             case 'canceledBy':

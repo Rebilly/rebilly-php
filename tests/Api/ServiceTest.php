@@ -396,6 +396,9 @@ class ServiceTest extends BaseTestCase
 
         $service = $client->subscriptions();
 
+        $result = $service->cancel('dummy', []);
+        $this->assertInstanceOf(Entities\Subscription::class, $result);
+
         $result = $service->changePlan('dummy', []);
         $this->assertInstanceOf(Entities\Subscription::class, $result);
 

@@ -15,6 +15,7 @@ use JsonSerializable;
 use Rebilly\Entities\Invoice;
 use Rebilly\Entities\LeadSource;
 use Rebilly\Entities\Subscription;
+use Rebilly\Entities\SubscriptionCancel;
 use Rebilly\Entities\SubscriptionChangePlan;
 use Rebilly\Entities\SubscriptionInterimInvoice;
 use Rebilly\Http\Exception\NotFoundException;
@@ -92,6 +93,23 @@ final class SubscriptionService extends Service
     public function update($subscriptionId, $data)
     {
         return $this->client()->put($data, 'subscriptions/{subscriptionId}', ['subscriptionId' => $subscriptionId]);
+    }
+
+    /**
+     * @param string $subscriptionId
+     * @param array|JsonSerializable|SubscriptionCancel $data
+     *
+     * @throws UnprocessableEntityException The input data does not valid
+     *
+     * @return Subscription
+     */
+    public function cancel($subscriptionId, $data)
+    {
+        return $this->client()->post(
+            $data,
+            'subscriptions/{subscriptionId}/cancel',
+            ['subscriptionId' => $subscriptionId]
+        );
     }
 
     /**
