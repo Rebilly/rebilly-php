@@ -117,8 +117,10 @@ abstract class TestCase extends BaseTestCase
             case 'effectiveTime':
             case 'startTime':
             case 'endTime':
+            case 'churnTime':
                 return $faker->date('Y-m-d H:i:s');
             case 'unitPrice':
+            case 'unitPriceAmount':
             case 'amount':
             case 'recurringAmount':
             case 'trialAmount':
@@ -297,6 +299,8 @@ abstract class TestCase extends BaseTestCase
             case 'type':
             case 'datetimeFormat':
                 switch ($class) {
+                    case Entities\LineItem::class:
+                        return $faker->randomElement(Entities\LineItem::types());
                     case Entities\Blacklist::class:
                         return $faker->randomElement(Entities\Blacklist::types());
                     case Entities\InvoiceItem::class:
@@ -356,6 +360,7 @@ abstract class TestCase extends BaseTestCase
             case 'passwordPattern':
                 return '/\w\d{6,}/';
             case 'currency':
+            case 'unitPriceCurrency':
                 return 'USD';
             case 'payment':
                 return []; // TODO
@@ -473,6 +478,8 @@ abstract class TestCase extends BaseTestCase
                 return '1000';
             case 'status':
                 switch ($class) {
+                    case Entities\SubscriptionCancellation::class:
+                        return $faker->randomElement(Entities\SubscriptionCancellation::statuses());
                     case Entities\ApiTracking::class:
                         return 200;
                     case Entities\Dispute::class:
@@ -526,8 +533,10 @@ abstract class TestCase extends BaseTestCase
                 ];
             case 'cancelCategory':
                 return $faker->randomElement(Entities\SubscriptionCancel::cancelCategories());
+            case 'reason':
+                return $faker->randomElement(Entities\SubscriptionCancellation::reasons());
             case 'canceledBy':
-                return $faker->randomElement(Entities\SubscriptionCancel::canceledBySources());
+                return $faker->randomElement(Entities\SubscriptionCancellation::canceledBySources());
             case 'riskMetadata':
                 return new Entities\RiskMetadata([
                     'ipAddress' => $faker->ipv4,
@@ -567,6 +576,18 @@ abstract class TestCase extends BaseTestCase
                 return PaymentInstruction::createFromData([
                     'method' => 'none',
                 ]);
+            case 'lineItems':
+                return [
+                    [
+                        'type' => $faker->randomElement([
+                            Entities\LineItem::TYPE_DEBIT,
+                            Entities\LineItem::TYPE_CREDIT,
+                        ]),
+                        'description' => $faker->sentence,
+                        'unitPriceAmount' => $faker->randomFloat(),
+                        'unitPriceCurrency' => 'USD',
+                    ],
+                ];
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)

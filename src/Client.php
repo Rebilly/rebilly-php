@@ -68,6 +68,7 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\PlanService plans()
  * @method Services\ResetPasswordTokenService resetPasswordTokens()
  * @method Services\SubscriptionService subscriptions()
+ * @method Services\SubscriptionCancellationService subscriptionCancellations()
  * @method Services\TransactionService transactions()
  * @method Services\SubscriptionReactivationService subscriptionReactivations()
  * @method Services\WebsiteService websites()
@@ -129,6 +130,7 @@ final class Client
         'plans' => Services\PlanService::class,
         'resetPasswordTokens' => Services\ResetPasswordTokenService::class,
         'subscriptions' => Services\SubscriptionService::class,
+        'subscriptionCancellations' => Services\SubscriptionCancellationService::class,
         'transactions' => Services\TransactionService::class,
         'subscriptionReactivations' => Services\SubscriptionReactivationService::class,
         'websites' => Services\WebsiteService::class,
