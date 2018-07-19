@@ -103,6 +103,6 @@ final class RejectionReason extends Resource
      */
     public function setMessage($value)
     {
-        return $this->setAttribute('type', $value);
+        return $this->setAttribute('message', $value);
     }
 }
