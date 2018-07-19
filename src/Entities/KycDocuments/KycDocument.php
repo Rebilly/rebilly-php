@@ -107,7 +107,7 @@ final class KycDocument extends Entity
     {
         $allowedTypes = self::allowedTypes();
 
-        if ( ! in_array($value, $allowedTypes)) {
+        if (!in_array($value, $allowedTypes)) {
             throw new DomainException(self::MSG_BAD_DOCUMENT_TYPE);
         }
 
