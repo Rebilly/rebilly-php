@@ -131,7 +131,7 @@ final class KycDocument extends Entity
             return null;
         }
 
-        return RejectionReason::createFromData($this->getAttribute('rejectionReason'));
+        return $this->getAttribute('rejectionReason');
     }
 
     /**
@@ -149,11 +149,17 @@ final class KycDocument extends Entity
      */
     public function getDocumentMatches()
     {
-        if (empty($this->getAttribute('rejectionReason'))) {
-            return null;
-        }
+        return $this->getAttribute('documentMatches');
+    }
 
-        return DocumentMatches::createFromData($this->getAttribute('rejectionReason'));
+    /**
+     * @param array $data
+     *
+     * @return DocumentMatches
+     */
+    public function createDocumentMatches(array $data)
+    {
+        return DocumentMatches::createFromData($data);
     }
 
     /**
