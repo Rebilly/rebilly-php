@@ -94,7 +94,7 @@ final class KycService extends Service
      */
     public function accept($kycDocumentId)
     {
-        return $this->client()->post(null, 'kyc-documents/{id}/acceptance', ['id' => $kycDocumentId]);
+        return $this->client()->post([], 'kyc-documents/{id}/acceptance', ['id' => $kycDocumentId]);
     }
 
     /**

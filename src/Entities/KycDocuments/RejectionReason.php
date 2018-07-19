@@ -75,10 +75,34 @@ final class RejectionReason extends Resource
     }
 
     /**
+     * @param string $value
+     *
+     * @return string
+     */
+    public function setType($value)
+    {
+        if (!in_array($value, self::allowedRejectionTypes(), true)) {
+            throw new DomainException(self::MSG_UNSUPPORTED_TYPE);
+        }
+
+        return $this->setAttribute('type', $value);
+    }
+
+    /**
      * @return string
      */
     public function getMessage()
     {
         return $this->getAttribute('message');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return string
+     */
+    public function setMessage($value)
+    {
+        return $this->setAttribute('type', $value);
     }
 }
