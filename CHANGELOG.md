@@ -26,6 +26,7 @@ _TBD_
 - [x] Deprecated support for `subscription/{id}/cancel` endpoint (`SubscriptionCancel` with policy).
 - [x] Added support for `subscription-cancellations` endpoint (`SubscriptionCancellation` resource).
 - [x] Added support for `subscription-reactivations` endpoint (`SubscriptionReactivation` resource).
+- [x] Added support for `kyc-documents` endpoint (`KycDocument` resource).
 
 ## [2.1.0] 2018-01-04
 - [x] Updated Invoice methods to use `websiteId` and `customerId`

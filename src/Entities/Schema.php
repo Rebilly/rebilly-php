@@ -18,6 +18,7 @@ use Rebilly\Entities\Coupons\Coupon;
 use Rebilly\Entities\Coupons\Redemption;
 use Rebilly\Entities\EmailNotifications\EmailNotification;
 use Rebilly\Entities\EmailNotifications\EmailNotificationTracking;
+use Rebilly\Entities\KycDocuments\KycDocument;
 use Rebilly\Entities\Shipping\ShippingZone;
 use Rebilly\Rest\Collection;
 
@@ -349,6 +350,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             },
             'subscription-reactivations/{reactivationId}' => function (array $content) {
                 return new SubscriptionReactivation($content);
+            },
+            'kyc-documents' => function (array $content) {
+                return new Collection(new KycDocument(), $content);
+            },
+            'kyc-documents/{id}' => function (array $content) {
+                return new KycDocument($content);
             },
         ];
     }
