@@ -85,6 +85,24 @@ final class Plan extends Entity
     /**
      * @return string
      */
+    public function getProductId()
+    {
+        return $this->getAttribute('productId');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setProductId($value)
+    {
+        return $this->setAttribute('productId', $value);
+    }
+
+    /**
+     * @return string
+     */
     public function getDescription()
     {
         return $this->getAttribute('description');
