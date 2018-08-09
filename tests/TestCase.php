@@ -484,6 +484,8 @@ abstract class TestCase extends BaseTestCase
                         return 200;
                     case Entities\Dispute::class:
                         return $faker->randomElement(Entities\Dispute::allowedStatuses());
+                    case Entities\PaymentCard::class:
+                        return 'active';
                     default:
                         return $faker->randomElement(Entities\Dispute::allowedStatuses());
                 }
