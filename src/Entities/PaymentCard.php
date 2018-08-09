@@ -104,6 +104,16 @@ final class PaymentCard extends Entity
     }
 
     /**
+     * @param $value
+     * 
+     * @return $this
+     */
+    public function setBillingAddress($value)
+    {
+        return $this->setAttribute('status', $value);
+    }
+
+    /**
      * @return string
      */
     public function getBrand()
