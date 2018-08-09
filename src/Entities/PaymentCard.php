@@ -10,6 +10,7 @@
 
 namespace Rebilly\Entities;
 
+use DomainException;
 use Rebilly\Rest\Entity;
 
 /**
@@ -41,6 +42,12 @@ use Rebilly\Rest\Entity;
  */
 final class PaymentCard extends Entity
 {
+    const STATUS_ACTIVE = 'active';
+
+    const STATUS_INACTIVE = 'inactive';
+
+    const STATUS_DEACTIVATED = 'deactivated';
+
     /**
      * @param string $value
      *
@@ -110,6 +117,10 @@ final class PaymentCard extends Entity
      */
     public function setStatus($value)
     {
+        if (!in_array($value, [self::STATUS_INACTIVE, self::STATUS_ACTIVE, self::STATUS_DEACTIVATED])) {
+            throw new DomainException('Payment Card status is not in the list');
+        }
+
         return $this->setAttribute('status', $value);
     }
 
