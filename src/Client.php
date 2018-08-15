@@ -109,7 +109,7 @@ final class Client
     const BASE_HOST = 'https://api.rebilly.com';
     const SANDBOX_HOST = 'https://api-sandbox.rebilly.com';
     const CURRENT_VERSION = 'v2.1';
-    const SDK_VERSION = '2.0.7';
+    const SDK_VERSION = '2.2.0';
 
     private static $services = [
         'authenticationOptions' => Services\AuthenticationOptionsService::class,

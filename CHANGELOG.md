@@ -17,16 +17,39 @@ Security - in case of vulnerabilities.
 ## [Unreleased]
 
 _TBD_
-- [x] Removed support for Subscription Tracking.
+
+## [2.2.0] 2018-08-14
+
+### Added
 - [x] Added support for subscription interim invoices.
 - [x] Added schema for subscriptions `change-plan` endpoint.
 - [x] Added `SubscriptionChangePlan`. 
 - [x] Added `lineItems` and `lineItemSubtotal` to `Subscription` entity.
-- [x] Deprecated Subscription switch.
-- [x] Deprecated support for `subscription/{id}/cancel` endpoint (`SubscriptionCancel` with policy).
-- [x] Added support for `subscription-cancellations` endpoint (`SubscriptionCancellation` resource).
-- [x] Added support for `subscription-reactivations` endpoint (`SubscriptionReactivation` resource).
-- [x] Added support for `kyc-documents` endpoint (`KycDocument` resource).
+- [x] Implemented new Subscription Cancellations API.
+- [x] Implemented Subscription-reactivations API.
+- [x] Implemented KYC Documents API.
+- [x] Implemented Gateway Account Downtime API.
+- [x] Implemented Email Notifications API.
+- [x] Added Customer Lifetime Revenue.
+- [x] Added route to ApiTracking.
+- [x] Added productId to Plan.
+- [x] Added setting status to payment card.
+- [x] Added payment instrument validation.
+
+### Removed
+- [x] Removed Subscription switch.
+- [x] Removed support for Subscription Tracking.
+- [x] Removed downtime settings in Gateway Account API.
+- [x] Removed custom fields deletion.
+
+### Fixed
+- [x] Fixed PATCH calls.
+- [x] Fixed reset-password endpoint.
+- [x] Fix coupons restrictions.
+
+### Deprecated
+- [x] Deprecated support for old `subscription/{id}/cancel` endpoint (`SubscriptionCancel` with policy).
+- [x] Deprecated Redemption's redeemedTime in favor of createdTime.
 
 ## [2.1.0] 2018-01-04
 - [x] Updated Invoice methods to use `websiteId` and `customerId`
