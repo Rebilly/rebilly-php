@@ -73,4 +73,22 @@ final class PaymentCardAuthorization extends Resource
     {
         return $this->setAttribute('gatewayAccountId', $value);
     }
+
+    /**
+     * @return string
+     */
+    public function getAmount()
+    {
+        return $this->getAttribute('amount');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return PaymentCardAuthorization
+     */
+    public function setAmount($value)
+    {
+        return $this->setAttribute('amount', $value);
+    }
 }
