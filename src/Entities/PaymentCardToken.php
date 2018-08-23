@@ -342,6 +342,16 @@ final class PaymentCardToken extends Entity
     }
 
     /**
+     * @param LeadSource|array $value
+     *
+     * @return PaymentCardToken
+     */
+    public function setLeadSource($value)
+    {
+        return $this->setAttribute('leadSource', $value);
+    }
+
+    /**
      * @param $attribute
      * @param $value
      *
