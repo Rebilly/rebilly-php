@@ -590,10 +590,6 @@ abstract class TestCase extends BaseTestCase
                         'unitPriceCurrency' => 'USD',
                     ],
                 ];
-            case 'leadSource':
-                return new Entities\LeadSource([
-                    'source' => 'Rebilly',
-                ]);
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
