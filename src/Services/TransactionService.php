@@ -11,7 +11,6 @@
 namespace Rebilly\Services;
 
 use ArrayObject;
-use Rebilly\Entities\LeadSource;
 use Rebilly\Entities\Transaction;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
