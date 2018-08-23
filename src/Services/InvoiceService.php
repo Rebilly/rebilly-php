@@ -137,33 +137,4 @@ final class InvoiceService extends Service
             ['accept' => 'application/pdf']
         );
     }
-
-    /**
-     * @param string $invoiceId
-     *
-     * @return LeadSource
-     */
-    public function getLeadSource($invoiceId)
-    {
-        return $this->client()->get('invoices/{invoiceId}/lead-source', ['invoiceId' => $invoiceId]);
-    }
-
-    /**
-     * @param string $invoiceId
-     * @param array|JsonSerializable|LeadSource $leadSource
-     *
-     * @return LeadSource
-     */
-    public function updateLeadSource($invoiceId, $leadSource)
-    {
-        return $this->client()->put($leadSource, 'invoices/{invoiceId}/lead-source', ['invoiceId' => $invoiceId]);
-    }
-
-    /**
-     * @param string $invoiceId
-     */
-    public function deleteLeadSource($invoiceId)
-    {
-        $this->client()->delete('invoices/{invoiceId}/lead-source', ['invoiceId' => $invoiceId]);
-    }
 }

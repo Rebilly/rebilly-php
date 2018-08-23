@@ -145,33 +145,4 @@ final class SubscriptionService extends Service
             ['subscriptionId' => $subscriptionId]
         );
     }
-
-    /**
-     * @param string $subscriptionId
-     *
-     * @return LeadSource
-     */
-    public function getLeadSource($subscriptionId)
-    {
-        return $this->client()->get('subscriptions/{subscriptionId}/lead-source', ['subscriptionId' => $subscriptionId]);
-    }
-
-    /**
-     * @param string $subscriptionId
-     * @param array|JsonSerializable|LeadSource $leadSource
-     *
-     * @return LeadSource
-     */
-    public function updateLeadSource($subscriptionId, $leadSource)
-    {
-        return $this->client()->put($leadSource, 'subscriptions/{subscriptionId}/lead-source', ['subscriptionId' => $subscriptionId]);
-    }
-
-    /**
-     * @param string $subscriptionId
-     */
-    public function deleteLeadSource($subscriptionId)
-    {
-        $this->client()->delete('subscriptions/{subscriptionId}/lead-source', ['subscriptionId' => $subscriptionId]);
-    }
 }
