@@ -29,7 +29,6 @@ _TBD_
       `recurringPeriodUnit`, `recurringPeriodLength`, `recurringPeriodLimit`, `trialPeriodUnit`, `trialPeriodLength`,
       `contractTermUnit`, `contractTermLength`, `minQuantity`, `maxQuantity` 
 
-
 ## [2.2.0] 2018-08-14
 
 ### Added
