@@ -144,9 +144,22 @@ abstract class Resource implements JsonSerializable, ArrayAccess
         if ($value !== null && $this->hasAttributeValueFactory($name)) {
             $this->internalCache[$name] = $this->createAttributeValue($name, $value);
 
-            $value = $this->internalCache[$name] instanceof JsonSerializable
-                ? $this->internalCache[$name]->jsonSerialize()
-                : $this->internalCache[$name];
+            if ($this->internalCache[$name] instanceof JsonSerializable) {
+                $value = $this->internalCache[$name]->jsonSerialize();
+            } elseif (is_array($this->internalCache[$name])) {
+                $value = array_map(
+                    function ($value) {
+                        if ($value instanceof JsonSerializable) {
+                            $value = $value->jsonSerialize();
+                        }
+
+                        return $value;
+                    },
+                    $this->internalCache[$name]
+                );
+            } else {
+                $value = $this->internalCache[$name];
+            }
         }
 
         $this->data[$name] = $value;
