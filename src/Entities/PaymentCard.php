@@ -155,6 +155,14 @@ final class PaymentCard extends Entity
      *
      * @return string
      */
+    public function getBillingContact()
+    {
+        return $this->getAttribute('billingContact');
+    }
+    
+    /**
+     * @return string
+     */
     public function getBillingContactId()
     {
         return $this->getAttribute('billingContactId');
