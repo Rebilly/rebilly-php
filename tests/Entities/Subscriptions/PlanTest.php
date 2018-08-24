@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Rebilly\Tests\Entities\Subscriptions;
 
 use Rebilly\Entities\Plan;
