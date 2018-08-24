@@ -18,6 +18,9 @@ Security - in case of vulnerabilities.
 
 _TBD_
 
+### Changed
+- [x] Replaced magic methods like `get`, `post` with explicit defined methods.
+
 ## [2.2.0] 2018-08-14
 
 ### Added
