@@ -45,7 +45,7 @@ final class PlanTest extends TestCase
     /**
      * @test
      */
-    public function buildObject()
+    public function buildObjectUsingSetterToSendToServer()
     {
         $value = new Plan();
         $value->setIsActive(self::DEFAULT_DATA['isActive']);
@@ -60,6 +60,7 @@ final class PlanTest extends TestCase
         $value->setSetup($value->createSetup(self::DEFAULT_DATA['setup']));
 
         $expectedJson = self::DEFAULT_DATA;
+        // Unset read-only properties which we not set.
         unset(
             $expectedJson['id'],
             $expectedJson['currencySign']
@@ -71,7 +72,7 @@ final class PlanTest extends TestCase
     /**
      * @test
      */
-    public function populatePlan()
+    public function populatePlanFromArrayReceivedFromServer()
     {
         $plan = new Plan(self::DEFAULT_DATA);
 
