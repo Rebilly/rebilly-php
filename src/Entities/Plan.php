@@ -10,6 +10,15 @@
 
 namespace Rebilly\Entities;
 
+use Rebilly\Entities\Subscriptions\PlanPricing;
+use Rebilly\Entities\Subscriptions\PlanSetup;
+use Rebilly\Entities\Subscriptions\PlanTrial;
+use Rebilly\Entities\Subscriptions\Pricing\FixedFee;
+use Rebilly\Entities\Subscriptions\Pricing\FlatRate;
+use Rebilly\Entities\Subscriptions\Pricing\Stairstep;
+use Rebilly\Entities\Subscriptions\Pricing\Tiered;
+use Rebilly\Entities\Subscriptions\Pricing\Volume;
+use Rebilly\Entities\Subscriptions\RecurringInterval;
 use Rebilly\Rest\Entity;
 
 /**
@@ -101,6 +110,8 @@ final class Plan extends Entity
     }
 
     /**
+     * @deprecated
+     *
      * @return string
      */
     public function getDescription()
@@ -109,6 +120,8 @@ final class Plan extends Entity
     }
 
     /**
+     * @deprecated
+     *
      * @param string $value
      *
      * @return $this
@@ -119,6 +132,8 @@ final class Plan extends Entity
     }
 
     /**
+     * @deprecated
+     *
      * @return string
      */
     public function getRichDescription()
@@ -127,6 +142,8 @@ final class Plan extends Entity
     }
 
     /**
+     * @deprecated
+     *
      * @param string $value
      *
      * @return $this
@@ -163,236 +180,94 @@ final class Plan extends Entity
     }
 
     /**
-     * @return float
+     * @return FlatRate|FixedFee|Stairstep|Tiered|Volume
      */
-    public function getRecurringAmount()
+    public function getPricing()
     {
-        return $this->getAttribute('recurringAmount');
+        return $this->getAttribute('pricing');
     }
 
     /**
-     * @param float $value
+     * @param PlanPricing $pricing
      *
      * @return $this
      */
-    public function setRecurringAmount($value)
+    public function setPricing(PlanPricing $pricing)
     {
-        return $this->setAttribute('recurringAmount', $value);
+        return $this->setAttribute('pricing', $pricing);
+    }
+
+    public function createPricing(array $data)
+    {
+        return PlanPricing::createFromData($data);
     }
 
     /**
-     * @return string
+     * @return RecurringInterval
      */
-    public function getRecurringPeriodUnit()
+    public function getRecurringInterval()
     {
-        return $this->getAttribute('recurringPeriodUnit');
+        return $this->getAttribute('recurringInterval');
     }
 
     /**
-     * @param string $value
+     * @param RecurringInterval $value
      *
      * @return $this
      */
-    public function setRecurringPeriodUnit($value)
+    public function setRecurringInterval(RecurringInterval $value)
     {
-        return $this->setAttribute('recurringPeriodUnit', $value);
+        return $this->setAttribute('recurringInterval', $value);
+    }
+
+    public function createRecurringInterval(array $data)
+    {
+        return new RecurringInterval($data);
     }
 
     /**
-     * @return int
+     * @return PlanTrial
      */
-    public function getRecurringPeriodLength()
+    public function getTrial()
     {
-        return $this->getAttribute('recurringPeriodLength');
+        return $this->getAttribute('trial');
     }
 
     /**
-     * @param int $value
+     * @param PlanTrial $value
      *
      * @return $this
      */
-    public function setRecurringPeriodLength($value)
+    public function setTrial(PlanTrial $value)
     {
-        return $this->setAttribute('recurringPeriodLength', $value);
+        return $this->setAttribute('trial', $value);
+    }
+
+    public function createTrial(array $data)
+    {
+        return new PlanTrial($data);
     }
 
     /**
-     * @return float
+     * @return PlanSetup
      */
-    public function getTrialAmount()
+    public function getSetup()
     {
-        return $this->getAttribute('trialAmount');
+        return $this->getAttribute('setup');
     }
 
     /**
-     * @param float $value
+     * @param PlanSetup $value
      *
      * @return $this
      */
-    public function setTrialAmount($value)
+    public function setSetup(PlanSetup $value)
     {
-        return $this->setAttribute('trialAmount', $value);
+        return $this->setAttribute('setup', $value);
     }
 
-    /**
-     * @return string
-     */
-    public function getTrialPeriodUnit()
+    public function createSetup(array $data)
     {
-        return $this->getAttribute('trialPeriodUnit');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setTrialPeriodUnit($value)
-    {
-        return $this->setAttribute('trialPeriodUnit', $value);
-    }
-
-    /**
-     * @return int
-     */
-    public function getTrialPeriodLength()
-    {
-        return $this->getAttribute('trialPeriodLength');
-    }
-
-    /**
-     * @param int $value
-     *
-     * @return $this
-     */
-    public function setTrialPeriodLength($value)
-    {
-        return $this->setAttribute('trialPeriodLength', $value);
-    }
-
-    /**
-     * @return float
-     */
-    public function getSetupAmount()
-    {
-        return $this->getAttribute('setupAmount');
-    }
-
-    /**
-     * @param float $value
-     *
-     * @return $this
-     */
-    public function setSetupAmount($value)
-    {
-        return $this->setAttribute('setupAmount', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getExpireTime()
-    {
-        return $this->getAttribute('expireTime');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setExpireTime($value)
-    {
-        return $this->setAttribute('expireTime', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getContractTermUnit()
-    {
-        return $this->getAttribute('contractTermUnit');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setContractTermUnit($value)
-    {
-        return $this->setAttribute('contractTermUnit', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getContractTermLength()
-    {
-        return $this->getAttribute('contractTermLength');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setContractTermLength($value)
-    {
-        return $this->setAttribute('contractTermLength', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getRecurringPeriodLimit()
-    {
-        return $this->getAttribute('recurringPeriodLimit');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setRecurringPeriodLimit($value)
-    {
-        return $this->setAttribute('recurringPeriodLimit', $value);
-    }
-
-    /**
-     * @return int
-     */
-    public function getMinQuantity()
-    {
-        return $this->getAttribute('minQuantity');
-    }
-
-    /**
-     * @param int $value
-     *
-     * @return $this
-     */
-    public function setMinQuantity($value)
-    {
-        return $this->setAttribute('minQuantity', (int) $value);
-    }
-
-    /**
-     * @return int
-     */
-    public function getMaxQuantity()
-    {
-        return $this->getAttribute('maxQuantity');
-    }
-
-    /**
-     * @param int $value
-     *
-     * @return $this
-     */
-    public function setMaxQuantity($value)
-    {
-        return $this->setAttribute('maxQuantity', (int) $value);
+        return new PlanSetup($data);
     }
 }
