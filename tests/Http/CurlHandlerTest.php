@@ -67,12 +67,12 @@ class CurlHandlerTest extends TestCase
         $fakeHeaders = "HTTP/1.1 200 OK\r\nContent-Type: application/json; charset=utf-8\r\n";
 
         /** @var CurlSession|MockObject $session */
-        $session = $this->getMock(CurlSession::class);
+        $session = $this->createMock(CurlSession::class);
         $session->method('execute')->willReturn($fakeHeaders . $fakeBody);
         $session->method('getInfo')->willReturn(strlen($fakeHeaders));
 
         /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class, ['createSession']);
+        $handler = $this->createPartialMock(CurlHandler::class, ['createSession']);
         $handler->method('createSession')->willReturn($session);
 
         /** @var Response $response */
@@ -91,16 +91,17 @@ class CurlHandlerTest extends TestCase
         $request = $client->createRequest('GET', 'http://google.com', null);
 
         /** @var CurlSession|MockObject $session */
-        $session = $this->getMock(CurlSession::class, ['open']);
-        $session->expects($this->any())->method('open')->will($this->returnValue(false));
+        $session = $this->createPartialMock(CurlSession::class, ['open']);
+        $session->expects($this->any())->method('open')->willReturn(false);
 
         /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class, ['createSession']);
-        $handler->expects($this->any())->method('createSession')->will($this->returnValue($session));
+        $handler = $this->createPartialMock(CurlHandler::class, ['createSession']);
+        $handler->expects($this->any())->method('createSession')->willReturn($session);
 
         try {
             call_user_func($handler, $request);
         } catch (RuntimeException $e) {
+            self::assertSame('Cannot initialize a cURL session', $e->getMessage());
         } finally {
             if (!isset($e)) {
                 $this->fail('Failed asserting that exception of type "RuntimeException" is thrown.');
@@ -108,7 +109,7 @@ class CurlHandlerTest extends TestCase
         }
 
         /** @var CurlSession|MockObject $session */
-        $session = $this->getMock(
+        $session = $this->createPartialMock(
             CurlSession::class,
             ['open', 'execute', 'setOptions', 'getErrorMessage', 'getErrorCode']
         );
@@ -116,7 +117,7 @@ class CurlHandlerTest extends TestCase
         $session->expects($this->any())->method('execute')->will($this->returnValue(false));
 
         /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class, ['createSession']);
+        $handler = $this->createPartialMock(CurlHandler::class, ['createSession']);
         $handler->expects($this->any())->method('createSession')->will($this->returnValue($session));
 
         try {

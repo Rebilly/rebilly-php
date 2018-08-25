@@ -57,11 +57,11 @@ class CouponTest extends BaseTestCase
     }
 
     /**
-     * @expectedException DomainException
      * @test
      */
     public function typeIsRequired()
     {
+        $this->expectException(DomainException::class);
         Fixed::createFromData([
             'amount' => 15,
             'currency' => 'USD',
@@ -69,11 +69,11 @@ class CouponTest extends BaseTestCase
     }
 
     /**
-     * @expectedException DomainException
      * @test
      */
     public function typeMustBeCorrect()
     {
+        $this->expectException(DomainException::class);
         Fixed::createFromData([
             'type' => 'wrong',
             'amount' => 15,
@@ -88,7 +88,9 @@ class CouponTest extends BaseTestCase
      */
     public function discountCreateFromData($data)
     {
-        Discount::createFromData($data);
+        $value = Discount::createFromData($data);
+        self::assertInstanceOf(Discount::class, $value);
+        self::assertSame($data, $value->jsonSerialize());
     }
 
     /**
@@ -157,22 +159,22 @@ class CouponTest extends BaseTestCase
     }
 
     /**
-     * @expectedException DomainException
      * @test
      */
     public function restrictionTypeIsRequired()
     {
+        $this->expectException(DomainException::class);
         RestrictToPlans::createFromData([
             'planIds' => ['123', '234'],
         ]);
     }
 
     /**
-     * @expectedException DomainException
      * @test
      */
     public function restrictionTypeMustBeCorrect()
     {
+        $this->expectException(DomainException::class);
         RestrictToPlans::createFromData([
             'type' => 'wrong',
             'planIds' => ['123', '234'],
@@ -186,7 +188,9 @@ class CouponTest extends BaseTestCase
      */
     public function restrictionCreateFromData($data)
     {
-        Restriction::createFromData($data);
+        $value = Restriction::createFromData($data);
+        self::assertInstanceOf(Restriction::class, $value);
+        self::assertSame($data, $value->jsonSerialize());
     }
 
     /**

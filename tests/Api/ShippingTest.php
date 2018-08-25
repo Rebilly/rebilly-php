@@ -43,12 +43,12 @@ class ShippingTest extends BaseTestCase
     /**
      * @test
      * @dataProvider provideInvalidData
-     * @expectedException DomainException
      *
      * @param $data
      */
     public function exceptionOnWrongRequiredField($data)
     {
+        $this->expectException(DomainException::class);
         Rate::createFromData($data);
     }
 

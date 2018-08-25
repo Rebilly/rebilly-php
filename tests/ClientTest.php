@@ -12,6 +12,7 @@
 namespace Rebilly\Tests;
 
 use ArrayObject;
+use BadMethodCallException;
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\UriInterface as Uri;
@@ -156,12 +157,13 @@ final class ClientTest extends TestCase
 
     /**
      * @test
-     * @expectedException \BadMethodCallException
      */
     public function callInvalidService()
     {
         /** @var mixed $client */
         $client = new Client(['apiKey' => 'QWERTY']);
+
+        $this->expectException(BadMethodCallException::class);
         $client->invalidService();
     }
 

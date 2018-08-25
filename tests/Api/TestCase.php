@@ -34,11 +34,13 @@ abstract class TestCase extends BaseTestCase
         if (!getenv(ApiKeyProvider::ENV_APIKEY)) {
             $this->markTestSkipped();
         } else {
-            $this->client = new Client([
-                'apiKey' => ApiKeyProvider::env(),
-                'baseUrl' => Client::SANDBOX_HOST,
-                'httpHandler' => null,
-            ]);
+            $this->client = new Client(
+                [
+                    'apiKey' => ApiKeyProvider::env(),
+                    'baseUrl' => Client::SANDBOX_HOST,
+                    'httpHandler' => null,
+                ]
+            );
         }
     }
 

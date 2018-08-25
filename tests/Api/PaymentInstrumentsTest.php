@@ -104,20 +104,20 @@ class PaymentInstrumentsTest extends BaseTestCase
     }
 
     /**
-     * @expectedException DomainException
      * @test
      */
     public function methodIsRequired()
     {
+        $this->expectException(DomainException::class);
         PaymentMethodInstrument::createFromData([]);
     }
 
     /**
-     * @expectedException DomainException
      * @test
      */
     public function paymentInstructionsMethodMustBeCorrect()
     {
+        $this->expectException(DomainException::class);
         PaymentMethodInstrument::createFromData([
             'method' => 'wrong',
         ]);
@@ -130,7 +130,9 @@ class PaymentInstrumentsTest extends BaseTestCase
      */
     public function paymentInstructionsCreateFromData($data)
     {
-        PaymentMethodInstrument::createFromData($data);
+        $value = PaymentMethodInstrument::createFromData($data);
+        self::assertInstanceOf(PaymentMethodInstrument::class, $value);
+        self::assertSame($data, $value->jsonSerialize());
     }
 
     /**

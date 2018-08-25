@@ -14,7 +14,7 @@ namespace Rebilly\Tests;
 use Faker\Factory as FakerFactory;
 use Faker\Generator as Faker;
 use InvalidArgumentException;
-use PHPUnit_Framework_TestCase as BaseTestCase;
+use PHPUnit\Framework;
 use Rebilly\Entities;
 use Rebilly\Entities\PaymentRetryInstructions\PaymentInstruction;
 use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstruction;
@@ -23,7 +23,7 @@ use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstruction;
  * Class TestCase.
  *
  */
-abstract class TestCase extends BaseTestCase
+abstract class TestCase extends Framework\TestCase
 {
     /** @var Faker */
     private $faker;
