@@ -28,7 +28,8 @@ _TBD_
 ### Removed
 - [x] Removed deprecated Plan properties: `expiredTime`, `recurringAmount`, `trialAmount`, `setupAmount`,
       `recurringPeriodUnit`, `recurringPeriodLength`, `recurringPeriodLimit`, `trialPeriodUnit`, `trialPeriodLength`,
-      `contractTermUnit`, `contractTermLength`, `minQuantity`, `maxQuantity` 
+      `contractTermUnit`, `contractTermLength`, `minQuantity`, `maxQuantity`
+- [x] Removed `LeadSources` in **Transactions**, **Invoices** and **Subscriptions**
 
 ## [2.2.0] 2018-08-14
 
