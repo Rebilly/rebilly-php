@@ -259,55 +259,6 @@ final class Client
         );
     }
 
-    /********************************************************************************
-     * PSR-0 Autoloader
-     *
-     * Do not use if you are using Composer to autoload dependencies.
-     *******************************************************************************/
-
-    /**
-     * PSR-0 autoloader
-     *
-     * @param string $class
-     */
-    public static function autoload($class)
-    {
-        $class = ltrim($class, '\\');
-
-        if (strpos($class, __NAMESPACE__) === 0) {
-            $lastNsPos = strripos($class, '\\');
-
-            $namespace = substr($class, 0, $lastNsPos + 1);
-            $namespace = substr($namespace, strlen(__NAMESPACE__));
-            $namespace = str_replace('\\', DIRECTORY_SEPARATOR, $namespace);
-
-            $class = substr($class, $lastNsPos + 1);
-            $class = str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
-
-            $filename = __DIR__ . $namespace . $class;
-
-            if (file_exists($filename)) {
-                require $filename;
-            }
-        }
-    }
-
-    /**
-     * Register PSR-0 autoloader
-     */
-    public static function registerAutoloader()
-    {
-        spl_autoload_register([__CLASS__, 'autoload']);
-    }
-
-    /**
-     * Unregister PSR-0 autoloader
-     */
-    public static function unregisterAutoloader()
-    {
-        spl_autoload_unregister([__CLASS__, 'autoload']);
-    }
-
     // This class is a final middleware
 
     /**
