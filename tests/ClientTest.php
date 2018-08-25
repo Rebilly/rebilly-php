@@ -34,24 +34,6 @@ final class ClientTest extends TestCase
     /**
      * @test
      */
-    public function autoloadClasses()
-    {
-        $this->assertSame(true, class_exists(Client::class));
-
-        Client::autoload(ParamBag::class);
-
-        $this->assertSame(true, class_exists(ParamBag::class, false));
-
-        Client::registerAutoloader();
-        $this->assertTrue(in_array([Client::class, 'autoload'], spl_autoload_functions(), true));
-
-        Client::unregisterAutoloader();
-        $this->assertFalse(in_array([Client::class, 'autoload'], spl_autoload_functions(), true));
-    }
-
-    /**
-     * @test
-     */
     public function initClient()
     {
         try {
