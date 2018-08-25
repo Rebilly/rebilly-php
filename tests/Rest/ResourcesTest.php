@@ -228,15 +228,12 @@ class ResourcesTest extends TestCase
 
     /**
      * @test
-     * @depends initFactory
-     *
-     * @param Factory $factory
      *
      * @return Collection
      */
-    public function initCollection(Factory $factory)
+    public function initCollection()
     {
-        $set = $factory->create('stubs', [
+        $set = $this->factory->create('stubs', [
             'data' => [$this->fakeData],
             '_metadata' => [
                 'total' => 1,
