@@ -1,7 +1,7 @@
 # Rebilly SDK for PHP
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
-[![Software License][ico-license]](LICENSE.md)
+[![Software License][ico-license]](LICENSE)
 [![Build Status][ico-travis]][link-travis]
 [![Total Downloads][ico-downloads]][link-downloads]
 [![Coverage Status][ico-coveralls]][link-coveralls]
