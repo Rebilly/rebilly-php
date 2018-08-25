@@ -14,7 +14,7 @@ use DomainException;
 use Rebilly\Rest\Resource;
 
 /**
- * Class SubscriptionCancellation
+ * Class SubscriptionCancellation.
  */
 class SubscriptionCancellation extends Resource
 {
@@ -26,7 +26,7 @@ class SubscriptionCancellation extends Resource
     const STATUS_CONFIRMED = 'confirmed';
 
     const CATEGORY_OTHER = 'other';
-    const CATEGORY_BILLING_FAILURE  = 'billing-failure';
+    const CATEGORY_BILLING_FAILURE = 'billing-failure';
     const CATEGORY_DID_NOT_USE = 'did-not-use';
     const CATEGORY_DID_NOT_WANT = 'did-not-want';
     const CATEGORY_MISSING_FEATURES = 'missing-features';

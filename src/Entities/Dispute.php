@@ -316,7 +316,7 @@ final class Dispute extends Entity
      * @param string $value
      *
      * @return $this
-     * 
+     *
      * @throws DomainException
      */
     public function setType($value)
@@ -342,7 +342,7 @@ final class Dispute extends Entity
      * @param string $value
      *
      * @return $this
-     * 
+     *
      * @throws DomainException
      */
     public function setStatus($value)

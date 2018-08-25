@@ -5,16 +5,14 @@ language: php
 matrix:
   fast_finish: true
   include:
-    - php: 5.5
-    - php: 5.6
-    - php: 7
     - php: 7.1
       env:
         - EXECUTE_COVERAGE=true
-        - EXECUTE_CS_CHECK=true
+        - EXECUTE_CS_CHECK=false
     - php: 7.2
+    - php: 7.3
   allow_failures:
-    - php: 7.2
+    - php: 7.3
 
 notifications:
   email: false
@@ -29,10 +27,9 @@ install:
 script:
   # PHPUnit
   - if [[ $EXECUTE_COVERAGE == 'true' ]]; then mkdir -p build/logs ; fi
-  - if [[ $EXECUTE_COVERAGE == 'true' ]]; then ./vendor/bin/phpunit --coverage-text --coverage-clover=build/logs/coverage.xml ; fi
-  - if [[ $EXECUTE_COVERAGE != 'true' ]]; then ./vendor/bin/phpunit ; fi
+  - if [[ $EXECUTE_COVERAGE == 'true' ]]; then ./vendor/bin/phpunit --coverage-text --coverage-clover=build/logs/coverage.xml ; else ./vendor/bin/phpunit ; fi
   # PHP CS Fixer
-  - if [[ EXECUTE_CS_CHECK != 'true' ]]; then ./vendor/bin/php-cs-fixer fix -v --diff --dry-run ; fi
+  - if [[ EXECUTE_CS_CHECK == 'true' ]]; then ./vendor/bin/php-cs-fixer fix -v --diff --dry-run ; fi
 
-after_script:
-  - if [[ $EXECUTE_COVERAGE == 'true' ]]; then ./vendor/bin/coveralls -v ; fi
+after_success:
+  - if [[ $EXECUTE_COVERAGE == 'true' ]]; then .vendor/bin/php-coveralls -v ; fi
