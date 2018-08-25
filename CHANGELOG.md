@@ -23,6 +23,7 @@ _TBD_
 
 ### Changed
 - [x] Replaced magic methods like `get`, `post` with explicit defined methods.
+- [x] **Upgraded minimum PHP version to 7.1**
 
 ### Removed
 - [x] Removed deprecated Plan properties: `expiredTime`, `recurringAmount`, `trialAmount`, `setupAmount`,
