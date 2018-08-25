@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Tests\Api;
@@ -22,13 +23,14 @@ class SessionTest extends BaseTestCase
     /**
      * @test
      * @dataProvider provideInvalidData
-     * @expectedException DomainException
      *
      * @param $data
      */
     public function exceptionOnWrongPermissions($data)
     {
         $session = new Session();
+
+        $this->expectException(DomainException::class);
         $session->setPermissions($data);
     }
 
@@ -44,7 +46,7 @@ class SessionTest extends BaseTestCase
             'Single rule is not an array' => [
                 [
                     'wrong',
-                ]
+                ],
             ],
             'Wrong resourceName' => [
                 [
@@ -53,7 +55,7 @@ class SessionTest extends BaseTestCase
                         'resourceIds' => ['id123'],
                         'methods' => ['POST', 'GET'],
                     ],
-                ]
+                ],
             ],
             'Wrong resourceIds' => [
                 [
@@ -62,7 +64,7 @@ class SessionTest extends BaseTestCase
                         'resourceIds' => 'wrong',
                         'methods' => ['POST', 'GET'],
                     ],
-                ]
+                ],
             ],
             'Wrong method' => [
                 [
@@ -71,7 +73,7 @@ class SessionTest extends BaseTestCase
                         'resourceIds' => ['id123'],
                         'methods' => ['wrong'],
                     ],
-                ]
+                ],
             ],
             'Wrong methods' => [
                 [
@@ -80,7 +82,7 @@ class SessionTest extends BaseTestCase
                         'resourceIds' => ['id123'],
                         'methods' => 'wrong',
                     ],
-                ]
+                ],
             ],
         ];
     }

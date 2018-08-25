@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Entities;
@@ -30,12 +31,10 @@ use Rebilly\Rest\Entity;
  * }
  * ```
  *
- * @author Arman Tuyakbayev <arman.tuyakbayev@rebilly.com>
- * @version 0.1
  */
 final class Note extends Entity
 {
-    const MSG_UNEXPECTED_TYPE = 'Unexpected type. Only %s types support';
+    public const MSG_UNEXPECTED_TYPE = 'Unexpected type. Only %s types support';
 
     /**
      * @return array
@@ -83,9 +82,10 @@ final class Note extends Entity
      */
     public function setRelatedType($value)
     {
-        if (!in_array($value, self::relatedTypes())) {
+        if (!in_array($value, self::relatedTypes(), true)) {
             throw new DomainException(sprintf(self::MSG_UNEXPECTED_TYPE, implode(', ', self::relatedTypes())));
         }
+
         return $this->setAttribute('relatedType', $value);
     }
 

@@ -1,4 +1,13 @@
 <?php
+/**
+ * This source file is proprietary and part of Rebilly.
+ *
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
+ *
+ * @see https://www.rebilly.com
+ */
 
 namespace Rebilly\Entities\PaymentInstruments;
 
@@ -7,11 +16,13 @@ use Rebilly\Entities\PaymentMethod;
 
 class BankAccountPaymentInstrument extends PaymentInstrument
 {
-    const ACCOUNT_TYPE_CHECKING = 'checking';
-    const ACCOUNT_TYPE_SAVINGS = 'savings';
-    const ACCOUNT_TYPE_OTHER = 'other';
+    public const ACCOUNT_TYPE_CHECKING = 'checking';
 
-    const MSG_UNEXPECTED_ACCOUNT_TYPE = 'Unexpected account type. Only %s account type support';
+    public const ACCOUNT_TYPE_SAVINGS = 'savings';
+
+    public const ACCOUNT_TYPE_OTHER = 'other';
+
+    public const MSG_UNEXPECTED_ACCOUNT_TYPE = 'Unexpected account type. Only %s account type support';
 
     /**
      * @return array
@@ -104,7 +115,7 @@ class BankAccountPaymentInstrument extends PaymentInstrument
     {
         $allowedAccountTypes = self::allowedAccountTypes();
 
-        if (!in_array($value, $allowedAccountTypes)) {
+        if (!in_array($value, $allowedAccountTypes, true)) {
             throw new DomainException(sprintf(self::MSG_UNEXPECTED_ACCOUNT_TYPE, implode(', ', $allowedAccountTypes)));
         }
 

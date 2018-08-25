@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Entities;
@@ -14,33 +15,45 @@ use DomainException;
 use Rebilly\Rest\Resource;
 
 /**
- * Class SubscriptionCancel
+ * Class SubscriptionCancel.
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
- * @version 0.1
+ *
  */
 class SubscriptionCancel extends Resource
 {
-    const MSG_UNEXPECTED_POLICY = 'Unexpected type. Only %s types support';
-    const UNEXPECTED_CATEGORY = 'Unexpected cancel category. Only %s categories are supported';
-    const UNEXPECTED_CANCEL_SOURCE = 'Unexpected cancel source. Only %s cancel sources are supported';
+    public const MSG_UNEXPECTED_POLICY = 'Unexpected type. Only %s types support';
 
-    const AT_NEXT_RENEWAL = 'at-next-renewal';
-    const NOW = 'now';
-    const NOW_WITH_PRORATA_CREDIT = 'now-with-prorata-credit';
+    public const UNEXPECTED_CATEGORY = 'Unexpected cancel category. Only %s categories are supported';
 
-    const CATEGORY_OTHER = 'other';
-    const CATEGORY_BILLING_FAILURE  = 'billing-failure';
-    const CATEGORY_DID_NOT_USE = 'did-not-use';
-    const CATEGORY_DID_NOT_WANT = 'did-not-want';
-    const CATEGORY_MISSING_FEATURES = 'missing-features';
-    const CATEGORY_BUGS_OR_PROBLEMS = 'bugs-or-problems';
-    const CATEGORY_DO_NOT_REMEMBER = 'do-not-remember';
-    const CATEGORY_RISK_WARNING = 'risk-warning';
-    const CATEGORY_TOO_EXPENSIVE = 'too-expensive';
+    public const UNEXPECTED_CANCEL_SOURCE = 'Unexpected cancel source. Only %s cancel sources are supported';
 
-    const SOURCE_MERCHANT = 'merchant';
-    const SOURCE_CUSTOMER = 'customer';
+    public const AT_NEXT_RENEWAL = 'at-next-renewal';
+
+    public const NOW = 'now';
+
+    public const NOW_WITH_PRORATA_CREDIT = 'now-with-prorata-credit';
+
+    public const CATEGORY_OTHER = 'other';
+
+    public const CATEGORY_BILLING_FAILURE = 'billing-failure';
+
+    public const CATEGORY_DID_NOT_USE = 'did-not-use';
+
+    public const CATEGORY_DID_NOT_WANT = 'did-not-want';
+
+    public const CATEGORY_MISSING_FEATURES = 'missing-features';
+
+    public const CATEGORY_BUGS_OR_PROBLEMS = 'bugs-or-problems';
+
+    public const CATEGORY_DO_NOT_REMEMBER = 'do-not-remember';
+
+    public const CATEGORY_RISK_WARNING = 'risk-warning';
+
+    public const CATEGORY_TOO_EXPENSIVE = 'too-expensive';
+
+    public const SOURCE_MERCHANT = 'merchant';
+
+    public const SOURCE_CUSTOMER = 'customer';
 
     /**
      * @return array
@@ -134,7 +147,7 @@ class SubscriptionCancel extends Resource
      */
     public function setPolicy($value)
     {
-        if (!in_array($value, self::policies())) {
+        if (!in_array($value, self::policies(), true)) {
             throw new DomainException(sprintf(self::MSG_UNEXPECTED_POLICY, implode(', ', self::policies())));
         }
 
@@ -150,7 +163,7 @@ class SubscriptionCancel extends Resource
      */
     public function setCancelCategory($value)
     {
-        if (!in_array($value, self::cancelCategories())) {
+        if (!in_array($value, self::cancelCategories(), true)) {
             throw new DomainException(sprintf(self::UNEXPECTED_CATEGORY, implode(', ', self::cancelCategories())));
         }
 
@@ -166,7 +179,7 @@ class SubscriptionCancel extends Resource
      */
     public function setCanceledBy($value)
     {
-        if (!in_array($value, self::canceledBySources())) {
+        if (!in_array($value, self::canceledBySources(), true)) {
             throw new DomainException(sprintf(self::UNEXPECTED_CATEGORY, implode(', ', self::canceledBySources())));
         }
 

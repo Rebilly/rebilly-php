@@ -1,25 +1,24 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Http;
 
 use GuzzleHttp\ClientInterface as GuzzleClient;
-use GuzzleHttp\Psr7\Response as GuzzleResponse;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Psr7\Response as GuzzleResponse;
 use Psr\Http\Message\RequestInterface as Request;
 
 /**
  * Class GuzzleAdapter.
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
- * @version 0.1
  */
 final class GuzzleAdapter implements HttpHandler
 {

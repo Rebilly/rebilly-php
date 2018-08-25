@@ -1,4 +1,13 @@
 <?php
+/**
+ * This source file is proprietary and part of Rebilly.
+ *
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
+ *
+ * @see https://www.rebilly.com
+ */
 
 namespace Rebilly\Entities;
 
@@ -24,7 +33,7 @@ use Rebilly\Rest\Entity;
  */
 final class Product extends Entity
 {
-    const MSG_UNEXPECTED_TAX_CATEGORY = 'Unexpected taxCategoryId. Only %s categories are supported.';
+    public const MSG_UNEXPECTED_TAX_CATEGORY = 'Unexpected taxCategoryId. Only %s categories are supported.';
 
     /**
      * @return array
@@ -78,6 +87,7 @@ final class Product extends Entity
     }
 
     /**
+     * @param mixed $value
      * @return $this
      */
     public function setDescription($value)

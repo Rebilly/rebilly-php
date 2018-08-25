@@ -1,11 +1,12 @@
 <?php
 /**
- * This attachment is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * attachment that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Entities;
@@ -31,17 +32,25 @@ use Rebilly\Rest\Entity;
  */
 final class Attachment extends Entity
 {
-    const MSG_UNEXPECTED_TYPE = 'Unexpected relatedType. Only %s types are supported.';
+    public const MSG_UNEXPECTED_TYPE = 'Unexpected relatedType. Only %s types are supported.';
 
-    const TYPE_CUSTOMER = 'customer';
-    const TYPE_DISPUTE = 'dispute';
-    const TYPE_INVOICE = 'invoice';
-    const TYPE_NOTE = 'note';
-    const TYPE_PAYMENT = 'payment';
-    const TYPE_PLAN = 'plan';
-    const TYPE_PRODUCT = 'product';
-    const TYPE_SUBSCRIPTION = 'subscription';
-    const TYPE_TRANSACTION = 'transaction';
+    public const TYPE_CUSTOMER = 'customer';
+
+    public const TYPE_DISPUTE = 'dispute';
+
+    public const TYPE_INVOICE = 'invoice';
+
+    public const TYPE_NOTE = 'note';
+
+    public const TYPE_PAYMENT = 'payment';
+
+    public const TYPE_PLAN = 'plan';
+
+    public const TYPE_PRODUCT = 'product';
+
+    public const TYPE_SUBSCRIPTION = 'subscription';
+
+    public const TYPE_TRANSACTION = 'transaction';
 
     /**
      * @return array
@@ -96,6 +105,7 @@ final class Attachment extends Entity
     }
 
     /**
+     * @param mixed $value
      * @return $this
      */
     public function setDescription($value)
@@ -112,6 +122,7 @@ final class Attachment extends Entity
     }
 
     /**
+     * @param mixed $value
      * @return $this
      */
     public function setFileId($value)
@@ -128,6 +139,7 @@ final class Attachment extends Entity
     }
 
     /**
+     * @param mixed $value
      * @return $this
      */
     public function setRelatedId($value)
@@ -150,7 +162,7 @@ final class Attachment extends Entity
      */
     public function setRelatedType($value)
     {
-        if (!in_array($value, self::allowedTypes())) {
+        if (!in_array($value, self::allowedTypes(), true)) {
             throw new DomainException(sprintf(self::MSG_UNEXPECTED_TYPE, implode(', ', self::allowedTypes())));
         }
 

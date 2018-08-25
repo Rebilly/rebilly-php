@@ -18,6 +18,18 @@ Security - in case of vulnerabilities.
 
 _TBD_
 
+### Added
+- [x] Added new properties to `Plan`: `pricing`, `recurringInterval`, `trial`, `setup`
+
+### Changed
+- [x] Replaced magic methods like `get`, `post` with explicit defined methods.
+- [x] **Upgraded minimum PHP version to 7.1**
+
+### Removed
+- [x] Removed deprecated Plan properties: `expiredTime`, `recurringAmount`, `trialAmount`, `setupAmount`,
+      `recurringPeriodUnit`, `recurringPeriodLength`, `recurringPeriodLimit`, `trialPeriodUnit`, `trialPeriodLength`,
+      `contractTermUnit`, `contractTermLength`, `minQuantity`, `maxQuantity` 
+
 ## [2.2.0] 2018-08-14
 
 ### Added

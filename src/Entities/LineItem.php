@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Entities;
@@ -15,11 +16,11 @@ use Rebilly\Rest\Resource;
 
 class LineItem extends Resource
 {
-    const UNEXPECTED_TYPE = 'Unexpected cancel category. Only %s categories are supported';
+    public const UNEXPECTED_TYPE = 'Unexpected cancel category. Only %s categories are supported';
 
-    const TYPE_CREDIT = 'credit';
+    public const TYPE_CREDIT = 'credit';
 
-    const TYPE_DEBIT = 'debit';
+    public const TYPE_DEBIT = 'debit';
 
     public static function types()
     {
@@ -33,7 +34,7 @@ class LineItem extends Resource
      */
     public function setType($value)
     {
-        if (!in_array($value, self::types())) {
+        if (!in_array($value, self::types(), true)) {
             throw new DomainException(sprintf(self::UNEXPECTED_TYPE, implode(', ', self::types())));
         }
 

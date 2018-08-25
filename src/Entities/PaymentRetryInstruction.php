@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Entities;
@@ -18,10 +19,13 @@ use Rebilly\Rest\Resource;
  */
 final class PaymentRetryInstruction extends Resource
 {
-    const AFTER_ATTEMPT_POLICY_NONE = 'none';
-    const AFTER_ATTEMPT_POLICY_CHANGE_RENEWAL_TIME = 'change-renewal-time';
-    const AFTER_RETRY_END_POLICY_NONE = 'none';
-    const AFTER_RETRY_END_POLICY_CANCEL_SUBSCRIPTION = 'cancel-subscription';
+    public const AFTER_ATTEMPT_POLICY_NONE = 'none';
+
+    public const AFTER_ATTEMPT_POLICY_CHANGE_RENEWAL_TIME = 'change-renewal-time';
+
+    public const AFTER_RETRY_END_POLICY_NONE = 'none';
+
+    public const AFTER_RETRY_END_POLICY_CANCEL_SUBSCRIPTION = 'cancel-subscription';
 
     /**
      * @param array|PaymentRetryAttempt[] $values
@@ -86,6 +90,7 @@ final class PaymentRetryInstruction extends Resource
 
     /**
      * @param string
+     * @param mixed $value
      *
      * @return $this
      */
@@ -98,6 +103,7 @@ final class PaymentRetryInstruction extends Resource
         )) {
             throw new DomainException('Invalid after attempt policy');
         }
+
         return $this->setAttribute('afterAttemptPolicy', $value);
     }
 
@@ -111,6 +117,7 @@ final class PaymentRetryInstruction extends Resource
 
     /**
      * @param string
+     * @param mixed $value
      *
      * @return $this
      */
@@ -123,6 +130,7 @@ final class PaymentRetryInstruction extends Resource
         )) {
             throw new DomainException('Invalid after retry end policy');
         }
+
         return $this->setAttribute('afterRetryEndPolicy', $value);
     }
 

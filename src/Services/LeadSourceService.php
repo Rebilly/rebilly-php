@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Services;
@@ -22,8 +23,6 @@ use Rebilly\Rest\Service;
 /**
  * Class LeadSourceService
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
- * @version 0.1
  */
 final class LeadSourceService extends Service
 {
@@ -72,8 +71,8 @@ final class LeadSourceService extends Service
     {
         if (isset($leadSourceId)) {
             return $this->client()->put($data, 'lead-sources/{leadSourceId}', ['leadSourceId' => $leadSourceId]);
-        } else {
-            return $this->client()->post($data, 'lead-sources');
         }
+
+        return $this->client()->post($data, 'lead-sources');
     }
 }

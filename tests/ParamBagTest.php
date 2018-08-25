@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Tests;
@@ -15,7 +16,6 @@ use Rebilly\ParamBag;
 /**
  * Class ParamBagTest.
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  */
 class ParamBagTest extends TestCase
 {
@@ -38,9 +38,9 @@ class ParamBagTest extends TestCase
         $this->assertContains('attr1:foo,bar', $params['filter']);
         $this->assertContains('attr2:1..10', $params['filter']);
         $this->assertContains('attr1,-attr2', $params['sort']);
-        $this->assertEquals(10, $params['limit']);
-        $this->assertEquals(1, $params['offset']);
-        $this->assertEquals('attr1,attr2', $params['fields']);
-        $this->assertEquals('link1', $params['expand']);
+        $this->assertSame(10, $params['limit']);
+        $this->assertSame(1, $params['offset']);
+        $this->assertSame('attr1,attr2', $params['fields']);
+        $this->assertSame('link1', $params['expand']);
     }
 }

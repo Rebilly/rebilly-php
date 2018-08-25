@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Tests\Api;
@@ -72,20 +73,20 @@ class PaymentRetryInstructionsTest extends BaseTestCase
     }
 
     /**
-     * @expectedException DomainException
      * @test
      */
     public function paymentInstructionsMethodIsRequired()
     {
+        $this->expectException(DomainException::class);
         PartialType::createFromData([]);
     }
 
     /**
-     * @expectedException DomainException
      * @test
      */
     public function paymentInstructionsMethodMustBeCorrect()
     {
+        $this->expectException(DomainException::class);
         PartialType::createFromData([
             'method' => 'wrong',
         ]);
@@ -94,10 +95,13 @@ class PaymentRetryInstructionsTest extends BaseTestCase
     /**
      * @test
      * @dataProvider providePaymentInstructions
+     * @param mixed $data
      */
     public function paymentInstructionsCreateFromData($data)
     {
-        PaymentInstruction::createFromData($data);
+        $value = PaymentInstruction::createFromData($data);
+        self::assertInstanceOf(PaymentInstruction::class, $value);
+        self::assertSame($data, $value->jsonSerialize());
     }
 
     /**
@@ -170,20 +174,20 @@ class PaymentRetryInstructionsTest extends BaseTestCase
     }
 
     /**
-     * @expectedException DomainException
      * @test
      */
     public function scheduleMethodIsRequired()
     {
+        $this->expectException(DomainException::class);
         AutoType::createFromData([]);
     }
 
     /**
-     * @expectedException DomainException
      * @test
      */
     public function scheduleMethodMustBeCorrect()
     {
+        $this->expectException(DomainException::class);
         AutoType::createFromData([
             'method' => 'wrong',
         ]);
@@ -192,10 +196,13 @@ class PaymentRetryInstructionsTest extends BaseTestCase
     /**
      * @test
      * @dataProvider provideScheduleInstructions
+     * @param mixed $data
      */
     public function scheduleInstructionsCreateFromData($data)
     {
-        ScheduleInstruction::createFromData($data);
+        $value = ScheduleInstruction::createFromData($data);
+        self::assertInstanceOf(ScheduleInstruction::class, $value);
+        self::assertSame($data, $value->jsonSerialize());
     }
 
     /**
@@ -222,36 +229,41 @@ class PaymentRetryInstructionsTest extends BaseTestCase
 
         self::assertSame(PaymentRetryInstruction::AFTER_ATTEMPT_POLICY_NONE, $instruction->getAfterAttemptPolicy());
         self::assertSame(PaymentRetryInstruction::AFTER_RETRY_END_POLICY_CANCEL_SUBSCRIPTION, $instruction->getAfterRetryEndPolicy());
-        self::assertEquals([$attempt], $instruction->getAttempts());
+        self::assertCount(1, $instruction->getAttempts());
+        self::assertEquals($attempt, $instruction->getAttempts()[0]);
     }
 
     /**
      * @test
-     * @expectedException DomainException
      */
     public function attemptMustBeArray()
     {
+        /** @var mixed $instruction */
         $instruction = new PaymentRetryInstruction();
+
+        $this->expectException(DomainException::class);
         $instruction->addAttempt('wrong');
     }
 
     /**
      * @test
-     * @expectedException DomainException
      */
     public function afterAttemptPolicyMustBeCorrect()
     {
         $instruction = new PaymentRetryInstruction();
+
+        $this->expectException(DomainException::class);
         $instruction->setAfterAttemptPolicy('wrong');
     }
 
     /**
      * @test
-     * @expectedException DomainException
      */
     public function afterRetryEndPolicyMustBeCorrect()
     {
         $instruction = new PaymentRetryInstruction();
+
+        $this->expectException(DomainException::class);
         $instruction->setAfterRetryEndPolicy('wrong');
     }
 

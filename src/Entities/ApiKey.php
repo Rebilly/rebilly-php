@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Entities;
@@ -27,14 +28,14 @@ use Rebilly\Rest\Entity;
  * }
  * ```
  *
- * @author Maksim Tuzov <maksim.tuzov@rebilly.com>
- * @version 0.1
  */
 final class ApiKey extends Entity
 {
-    const DATETIME_FORMAT_MYSQL = 'mysql';
-    const DATETIME_FORMAT_ISO8601 = 'iso8601';
-    const MSG_UNEXPECTED_DATETIME_FORMAT = 'Unexpected datetime format. Only %s formats support';
+    public const DATETIME_FORMAT_MYSQL = 'mysql';
+
+    public const DATETIME_FORMAT_ISO8601 = 'iso8601';
+
+    public const MSG_UNEXPECTED_DATETIME_FORMAT = 'Unexpected datetime format. Only %s formats support';
 
     /**
      * @return array
@@ -77,7 +78,7 @@ final class ApiKey extends Entity
      */
     public function setDatetimeFormat($value)
     {
-        if (!in_array($value, self::datetimeFormats())) {
+        if (!in_array($value, self::datetimeFormats(), true)) {
             throw new DomainException(
                 sprintf(self::MSG_UNEXPECTED_DATETIME_FORMAT, implode(', ', self::datetimeFormats()))
             );

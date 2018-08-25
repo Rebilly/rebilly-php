@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of Rebilly.
+ * This source file is proprietary and part of Rebilly.
  *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * @see http://rebilly.com
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Tests;
@@ -13,7 +14,7 @@ namespace Rebilly\Tests;
 use Faker\Factory as FakerFactory;
 use Faker\Generator as Faker;
 use InvalidArgumentException;
-use PHPUnit_Framework_TestCase as BaseTestCase;
+use PHPUnit\Framework;
 use Rebilly\Entities;
 use Rebilly\Entities\PaymentRetryInstructions\PaymentInstruction;
 use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstruction;
@@ -21,9 +22,8 @@ use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstruction;
 /**
  * Class TestCase.
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  */
-abstract class TestCase extends BaseTestCase
+abstract class TestCase extends Framework\TestCase
 {
     /** @var Faker */
     private $faker;
@@ -122,9 +122,6 @@ abstract class TestCase extends BaseTestCase
             case 'unitPrice':
             case 'unitPriceAmount':
             case 'amount':
-            case 'recurringAmount':
-            case 'trialAmount':
-            case 'setupAmount':
                 return $faker->randomFloat(2);
             case 'uriPath':
             case 'gatewayName':
@@ -195,21 +192,21 @@ abstract class TestCase extends BaseTestCase
                 return $faker->userName;
             case 'eventsFilter':
                 return $faker->randomElements([
-                    "gateway-account-requested",
-                    "subscription-trial-ended",
-                    "subscription-activated",
-                    "subscription-canceled",
-                    "subscription-renewed",
-                    "transaction-processed",
-                    "payment-card-expired",
-                    "payment-declined",
-                    "invoice-modified",
-                    "invoice-created",
-                    "dispute-created",
-                    "suspended-payment-completed"
+                    'gateway-account-requested',
+                    'subscription-trial-ended',
+                    'subscription-activated',
+                    'subscription-canceled',
+                    'subscription-renewed',
+                    'transaction-processed',
+                    'payment-card-expired',
+                    'payment-declined',
+                    'invoice-modified',
+                    'invoice-created',
+                    'dispute-created',
+                    'suspended-payment-completed',
                 ], 3);
             case 'headers':
-                return [["name" => $faker->word, "value" => $faker->word, "status" => $faker->randomElement(["active", "inactive"])]];
+                return [['name' => $faker->word, 'value' => $faker->word, 'status' => $faker->randomElement(['active', 'inactive'])]];
             case 'credentialHash':
                 return $faker->uuid;
             case 'isActive':
@@ -222,10 +219,6 @@ abstract class TestCase extends BaseTestCase
             case 'authTokenTtl':
             case 'resetTokenTtl':
             case 'quantity':
-            case 'recurringPeriodLength':
-            case 'trialPeriodLength':
-            case 'contractTermLength':
-            case 'recurringPeriodLimit':
             case 'minQuantity':
             case 'maxQuantity':
             case 'monthlyLimit':
@@ -276,6 +269,7 @@ abstract class TestCase extends BaseTestCase
                     default:
                         return $faker->$attribute;
                 }
+                // no break
             case 'phoneNumbers':
                 return [
                     new Entities\Contact\PhoneNumber([
@@ -316,6 +310,7 @@ abstract class TestCase extends BaseTestCase
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
                         );
                 }
+                // no break
             case 'value':
                 switch ($class) {
                     case Entities\Contact\Email::class:
@@ -327,6 +322,7 @@ abstract class TestCase extends BaseTestCase
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
                         );
                 }
+                // no break
             case 'policy':
                 switch ($class) {
                     case Entities\SubscriptionCancel::class:
@@ -336,6 +332,7 @@ abstract class TestCase extends BaseTestCase
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
                         );
                 }
+                // no break
             case 'items':
                 switch ($class) {
                     case Entities\Layout::class:
@@ -353,10 +350,7 @@ abstract class TestCase extends BaseTestCase
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
                         );
                 }
-            case 'recurringPeriodUnit':
-            case 'trialPeriodUnit':
-            case 'contractTermUnit':
-                return 'day'; // TODO
+                // no break
             case 'passwordPattern':
                 return '/\w\d{6,}/';
             case 'currency':
@@ -375,6 +369,7 @@ abstract class TestCase extends BaseTestCase
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
                         );
                 }
+                // no break
             case 'label':
                 switch ($class) {
                     case Entities\Contact\Email::class:
@@ -385,6 +380,7 @@ abstract class TestCase extends BaseTestCase
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
                         );
                 }
+                // no break
             case 'primary':
                 return $faker->boolean();
             case 'primaryAddress':
@@ -405,14 +401,14 @@ abstract class TestCase extends BaseTestCase
                             'label' => $faker->word,
                             'primary' => $faker->boolean(),
                             'value' => $faker->email,
-                        ]
+                        ],
                     ],
                     'phoneNumbers' => [
                         [
                             'label' => $faker->word,
                             'primary' => $faker->boolean(),
                             'value' => $faker->phoneNumber,
-                        ]
+                        ],
                     ],
                 ];
             case 'method':
@@ -427,6 +423,7 @@ abstract class TestCase extends BaseTestCase
                     default:
                         return new Entities\PaymentMethods\PaymentCardMethod(); // TODO
                 }
+                // no break
             case 'customFields':
             case 'gatewayConfig':
             case 'additionalSchema':
@@ -463,11 +460,12 @@ abstract class TestCase extends BaseTestCase
                 switch ($class) {
                     case Entities\Payment::class:
                         return new Entities\PaymentInstruments\PaymentCardInstrument([
-                            'method' => Entities\PaymentMethod::METHOD_PAYMENT_CARD
+                            'method' => Entities\PaymentMethod::METHOD_PAYMENT_CARD,
                         ]);
                     default:
                         return new Entities\PaymentInstruments\PaymentCardPaymentInstrument();
                 }
+                // no break
             case 'defaultPaymentInstrument':
                 return [
                     'method' => Entities\PaymentMethod::METHOD_PAYMENT_CARD,
@@ -489,6 +487,7 @@ abstract class TestCase extends BaseTestCase
                     default:
                         return $faker->randomElement(Entities\Dispute::allowedStatuses());
                 }
+                // no break
             case 'paymentCardIds':
                 return [$faker->uuid];
             case 'discount':
@@ -513,7 +512,7 @@ abstract class TestCase extends BaseTestCase
                     [
                         'type' => 'discounts-per-redemption',
                         'quantity' => $faker->numberBetween(1, 100),
-                    ]
+                    ],
                 ];
             case 'countries':
                 return ['US'];
@@ -564,11 +563,11 @@ abstract class TestCase extends BaseTestCase
                 ];
             case 'eventType':
                 return $faker->randomElement([
-                    "subscription-created",
-                    "subscription-activated",
-                    "subscription-canceled",
-                    "subscription-renewed",
-                    "payment-card-expired",
+                    'subscription-created',
+                    'subscription-activated',
+                    'subscription-canceled',
+                    'subscription-renewed',
+                    'payment-card-expired',
                 ]);
             case 'scheduleInstruction':
                 return ScheduleInstruction::createFromData([
@@ -590,6 +589,18 @@ abstract class TestCase extends BaseTestCase
                         'unitPriceCurrency' => 'USD',
                     ],
                 ];
+            case 'leadSource':
+                return new Entities\LeadSource([
+                    'source' => 'Rebilly',
+                ]);
+            case 'pricing':
+                return new Entities\Subscriptions\Pricing\FixedFee(['price' => 1.0]);
+            case 'recurringInterval':
+                return new Entities\Subscriptions\RecurringInterval(['unit' => 'day', 'length' => 1, 'limit' => 10]);
+            case 'trial':
+                return new Entities\Subscriptions\PlanTrial(['price' => 1.0, 'period' => ['unit' => 'day', 'length' => 1]]);
+            case 'setup':
+                return new Entities\Subscriptions\PlanSetup(['price' => 1.0]);
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)

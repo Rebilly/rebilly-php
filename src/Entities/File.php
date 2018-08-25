@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Entities;
@@ -35,13 +36,17 @@ use Rebilly\Rest\Entity;
  */
 final class File extends Entity
 {
-    const MSG_UNEXPECTED_EXTENSION = 'Unexpected extension. Only %s extensions are supported.';
+    public const MSG_UNEXPECTED_EXTENSION = 'Unexpected extension. Only %s extensions are supported.';
 
-    const EXTENSION_JPEG = 'jpeg';
-    const EXTENSION_JPG = 'jpg';
-    const EXTENSION_PDF = 'pdf';
-    const EXTENSION_PNG = 'png';
-    const EXTENSION_MP3 = 'mp3';
+    public const EXTENSION_JPEG = 'jpeg';
+
+    public const EXTENSION_JPG = 'jpg';
+
+    public const EXTENSION_PDF = 'pdf';
+
+    public const EXTENSION_PNG = 'png';
+
+    public const EXTENSION_MP3 = 'mp3';
 
     /**
      * @return array
@@ -92,11 +97,12 @@ final class File extends Entity
     }
 
     /**
+     * @param mixed $value
      * @return $this
      */
     public function setExtension($value)
     {
-        if (!in_array($value, self::allowedTypes())) {
+        if (!in_array($value, self::allowedTypes(), true)) {
             throw new DomainException(sprintf(self::MSG_UNEXPECTED_EXTENSION, implode(', ', self::allowedTypes())));
         }
 
@@ -112,6 +118,7 @@ final class File extends Entity
     }
 
     /**
+     * @param mixed $value
      * @return $this
      */
     public function setDescription($value)

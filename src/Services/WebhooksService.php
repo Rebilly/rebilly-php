@@ -1,17 +1,19 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Services;
 
 use ArrayObject;
 use JsonSerializable;
+use Rebilly\Entities\Webhook;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Paginator;
@@ -26,7 +28,7 @@ final class WebhooksService extends Service
     /**
      * @param array|ArrayObject $params
      *
-     * @return Webkook[][]|Collection[]|Paginator
+     * @return Webhook[][]|Collection[]|Paginator
      */
     public function paginator($params = [])
     {
@@ -36,7 +38,7 @@ final class WebhooksService extends Service
     /**
      * @param array|ArrayObject $params
      *
-     * @return Webkook[]|Collection
+     * @return Webhook[]|Collection
      */
     public function search($params = [])
     {
@@ -48,7 +50,7 @@ final class WebhooksService extends Service
      *
      * @throws NotFoundException The resource data does exist
      *
-     * @return Webkook
+     * @return Webhook
      */
     public function load($webhookId)
     {
@@ -56,10 +58,10 @@ final class WebhooksService extends Service
     }
 
     /**
-     * @param array|JsonSerializable|Webkook $data
+     * @param array|JsonSerializable|Webhook $data
      * @param string|null $webhookId
      *
-     * @return Webkook
+     * @return Webhook
      */
     public function create($data, $webhookId = null)
     {
@@ -72,11 +74,11 @@ final class WebhooksService extends Service
 
     /**
      * @param string $webhookId
-     * @param array|JsonSerializable|Webkook $data
+     * @param array|JsonSerializable|Webhook $data
      *
      * @throws UnprocessableEntityException The input data does not valid
      *
-     * @return Webkook
+     * @return Webhook
      */
     public function update($webhookId, $data)
     {
@@ -84,9 +86,9 @@ final class WebhooksService extends Service
     }
 
     /**
-     * @param $data
+     * @param array|JsonSerializable|Webhook $data
      *
-     * @return mixed
+     * @return Webhook
      */
     public function preview($data)
     {

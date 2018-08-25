@@ -1,25 +1,24 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Middleware;
 
-use SplDoublyLinkedList;
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Rebilly\Middleware;
+use SplDoublyLinkedList;
 
 /**
  * Class CompositeMiddleware
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
- * @version 0.1
  */
 class CompositeMiddleware implements Middleware
 {

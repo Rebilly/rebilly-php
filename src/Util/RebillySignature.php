@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Util;
@@ -19,11 +20,10 @@ use RuntimeException;
  * authenticated without revealing the secret key.  The nonce, timestamp and signature
  * would most likely be used in conjunction with the Rebilly jquery library.
  *
- * @version 2.0
  */
 final class RebillySignature
 {
-    const NONCE_LENGTH = 30;
+    public const NONCE_LENGTH = 30;
 
     /**
      * This method returns an array with the header name and header values for the nonce,

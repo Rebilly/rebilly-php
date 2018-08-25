@@ -1,33 +1,41 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Tests\Http;
 
-use ReflectionMethod;
+use PHPUnit_Framework_MockObject_MockObject as MockObject;
+use Psr\Http\Message\ResponseInterface as Response;
 use Rebilly\Client;
 use Rebilly\Http\CurlHandler;
 use Rebilly\Http\CurlSession;
 use Rebilly\Http\Exception\TransferException;
 use Rebilly\Tests\TestCase;
+use ReflectionMethod;
 use RuntimeException;
-use Psr\Http\Message\RequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
 
 /**
  * Class CurlHandlerTest.
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  */
 class CurlHandlerTest extends TestCase
 {
+    /** @var Client */
+    private $client;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->client = new Client(['apiKey' => 'QWERTY']);
+    }
+
     /**
      * @test
      */
@@ -44,32 +52,34 @@ class CurlHandlerTest extends TestCase
 
     /**
      * @test
-     * @dataProvider provideRequests
+     * @dataProvider provideValidRequests
      *
-     * @param Request $request
+     * @param $method
+     * @param $url
+     * @param $payload
+     * @param $headers
      */
-    public function sendRequest(Request $request)
+    public function sendRequest($method, $url, $payload, $headers)
     {
+        $request = $this->client->createRequest($method, $url, $payload, $headers);
+
         $fakeBody = json_encode([], JSON_FORCE_OBJECT);
         $fakeHeaders = "HTTP/1.1 200 OK\r\nContent-Type: application/json; charset=utf-8\r\n";
 
         /** @var CurlSession|MockObject $session */
-        $session = $this->getMock(CurlSession::class);
-        $session->method('execute')->will($this->returnValue($fakeHeaders . $fakeBody));
-        $session->method('getInfo')->will($this->returnValue(strlen($fakeHeaders)));
+        $session = $this->createMock(CurlSession::class);
+        $session->method('execute')->willReturn($fakeHeaders . $fakeBody);
+        $session->method('getInfo')->willReturn(strlen($fakeHeaders));
 
         /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class, ['createSession']);
-        $handler
-            ->method('createSession')
-            ->will($this->returnValue($session))
-        ;
+        $handler = $this->createPartialMock(CurlHandler::class, ['createSession']);
+        $handler->method('createSession')->willReturn($session);
 
         /** @var Response $response */
         $response = call_user_func($handler, $request);
 
         $this->assertInstanceOf(Response::class, $response);
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertSame(200, $response->getStatusCode());
     }
 
     /**
@@ -81,16 +91,17 @@ class CurlHandlerTest extends TestCase
         $request = $client->createRequest('GET', 'http://google.com', null);
 
         /** @var CurlSession|MockObject $session */
-        $session = $this->getMock(CurlSession::class, ['open']);
-        $session->expects($this->any())->method('open')->will($this->returnValue(false));
+        $session = $this->createPartialMock(CurlSession::class, ['open']);
+        $session->expects($this->any())->method('open')->willReturn(false);
 
         /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class, ['createSession']);
-        $handler->expects($this->any())->method('createSession')->will($this->returnValue($session));
+        $handler = $this->createPartialMock(CurlHandler::class, ['createSession']);
+        $handler->expects($this->any())->method('createSession')->willReturn($session);
 
         try {
             call_user_func($handler, $request);
         } catch (RuntimeException $e) {
+            self::assertSame('Cannot initialize a cURL session', $e->getMessage());
         } finally {
             if (!isset($e)) {
                 $this->fail('Failed asserting that exception of type "RuntimeException" is thrown.');
@@ -98,7 +109,7 @@ class CurlHandlerTest extends TestCase
         }
 
         /** @var CurlSession|MockObject $session */
-        $session = $this->getMock(
+        $session = $this->createPartialMock(
             CurlSession::class,
             ['open', 'execute', 'setOptions', 'getErrorMessage', 'getErrorCode']
         );
@@ -106,7 +117,7 @@ class CurlHandlerTest extends TestCase
         $session->expects($this->any())->method('execute')->will($this->returnValue(false));
 
         /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class, ['createSession']);
+        $handler = $this->createPartialMock(CurlHandler::class, ['createSession']);
         $handler->expects($this->any())->method('createSession')->will($this->returnValue($session));
 
         try {
@@ -122,17 +133,15 @@ class CurlHandlerTest extends TestCase
     /**
      * @return array
      */
-    public function provideRequests()
+    public function provideValidRequests()
     {
-        $client = new Client(['apiKey' => 'QWERTY']);
-
         return [
-            [$client->createRequest('OPTIONS', 'http://google.com', null)],
-            [$client->createRequest('HEAD', 'http://google.com', null)],
-            [$client->createRequest('GET', 'http://google.com', null)],
-            [$client->createRequest('POST', 'http://google.com', [])],
-            [$client->createRequest('PUT', 'http://google.com', [])],
-            [$client->createRequest('DELETE', 'http://google.com', null)],
+            ['OPTIONS', 'http://google.com', null, []],
+            ['HEAD', 'http://google.com', null, []],
+            ['GET', 'http://google.com', null, []],
+            ['POST', 'http://google.com', 'body', []],
+            ['PUT', 'http://google.com', 'body', []],
+            ['DELETE', 'http://google.com', null, []],
         ];
     }
 }

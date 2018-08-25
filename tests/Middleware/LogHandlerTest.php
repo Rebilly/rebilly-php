@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Tests\Middleware;
@@ -22,7 +23,6 @@ use RuntimeException;
 /**
  * Class LogHandlerTest.
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  */
 class LogHandlerTest extends TestCase
 {
@@ -53,7 +53,7 @@ class LogHandlerTest extends TestCase
             'hideAuth' => true,
             'formatter' => function ($request, $response) {
                 return spl_object_hash($request) . PHP_EOL . spl_object_hash($response);
-            }
+            },
         ]);
 
         $this->expectOutputRegex('/' . spl_object_hash($request) . '/i');
@@ -64,7 +64,7 @@ class LogHandlerTest extends TestCase
                 'formatter' => 'invalid',
             ]);
         } catch (RuntimeException $e) {
-            $this->assertEquals('Formatter should be callable', $e->getMessage());
+            $this->assertSame('Formatter should be callable', $e->getMessage());
         }
     }
 }

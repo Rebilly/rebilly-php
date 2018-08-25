@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Tests\Api;
@@ -19,7 +20,6 @@ use Rebilly\Tests\TestCase;
 /**
  * Class ApiTest.
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  */
 class ApiTest extends TestCase
 {
@@ -86,7 +86,7 @@ class ApiTest extends TestCase
                     );
                 }
 
-                $this->assertEquals($values[$attribute], $value, 'Invalid ' . $attribute);
+                $this->assertSame($values[$attribute], $value, 'Invalid ' . $attribute);
             } elseif (isset($values[$attribute])) {
                 $this->assertEquals($values[$attribute], $value, 'Invalid ' . $attribute);
             } else {

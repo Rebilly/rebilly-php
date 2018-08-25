@@ -1,25 +1,25 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Tests\Middleware;
 
+use Psr\Http\Message\RequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
 use Rebilly\Client;
 use Rebilly\Middleware\CompositeMiddleware;
 use Rebilly\Tests\TestCase as TestCase;
-use Psr\Http\Message\RequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
 
 /**
  * Class CompositeMiddlewareTest.
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  */
 class CompositeMiddlewareTest extends TestCase
 {
@@ -61,8 +61,8 @@ class CompositeMiddlewareTest extends TestCase
         $result = call_user_func($middleware, $request, $response, $done);
 
         // Check middleware stack
-        $this->assertEquals('dummy', $result->getHeaderLine('Header2'));
-        $this->assertEquals('dummy', $result->getHeaderLine('Header3'));
+        $this->assertSame('dummy', $result->getHeaderLine('Header2'));
+        $this->assertSame('dummy', $result->getHeaderLine('Header3'));
 
         // Middleware was cleared, so first handler not applied
         $this->assertFalse($result->hasHeader('Header1'));

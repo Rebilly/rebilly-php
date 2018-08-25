@@ -1,19 +1,20 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Tests\Rest;
 
 use ArrayObject;
 use DomainException;
-use OutOfRangeException;
 use LogicException;
+use OutOfRangeException;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Factory;
 use Rebilly\Tests\Stub\EntityStub;
@@ -23,12 +24,15 @@ use RuntimeException;
 /**
  * Class ResourcesTest.
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  */
 class ResourcesTest extends TestCase
 {
     private $fakeDate;
+
     private $fakeData = [];
+
+    /** @var Factory */
+    private $factory;
 
     protected function setUp()
     {
@@ -54,63 +58,49 @@ class ResourcesTest extends TestCase
                 'customMeta' => 'value',
             ],
         ];
-    }
 
-
-    /**
-     * @test
-     *
-     * @return Factory
-     */
-    public function initFactory()
-    {
-        $factory = new Factory(new ArrayObject([
-            'stubs' => function (array $content) {
-                return new Collection(new EntityStub(), $content);
-            },
-            'stubs/{id}' => function (array $content) {
-                return new EntityStub($content);
-            },
-        ]));
-
-        return $factory;
+        $this->factory = new Factory(
+            new ArrayObject(
+                [
+                    'stubs' => function (array $content) {
+                        return new Collection(new EntityStub(), $content);
+                    },
+                    'stubs/{id}' => function (array $content) {
+                        return new EntityStub($content);
+                    },
+                ]
+            )
+        );
     }
 
     /**
      * @test
-     * @depends initFactory
-     *
-     * @param Factory $factory
      */
-    public function createUnknownResource(Factory $factory)
+    public function createUnknownResource()
     {
         try {
-            $factory->create('unknown', []);
+            $this->factory->create('unknown', []);
+
+            $this->fail('Failed asserting that exception of type "RuntimeException" is thrown.');
         } catch (RuntimeException $e) {
-        } finally {
-            if (!isset($e)) {
-                $this->fail('Failed asserting that exception of type "RuntimeException" is thrown.');
-            }
+            self::assertSame('Cannot create resource by URI "/unknown"', $e->getMessage());
         }
     }
 
     /**
      * @test
-     * @depends initFactory
-     *
-     * @param Factory $factory
      *
      * @return EntityStub
      */
-    public function initEntity(Factory $factory)
+    public function initEntity()
     {
         /** @var EntityStub $resource */
-        $resource = $factory->create('stubs/uuid', []);
+        $resource = $this->factory->create('stubs/uuid', []);
         $resource->populate($this->fakeData);
 
         $this->assertInstanceOf(EntityStub::class, $resource);
-        $this->assertEquals('uuid', $resource->getId());
-        $this->assertEquals($this->fakeDate, $resource->getUpdatedTime());
+        $this->assertSame('uuid', $resource->getId());
+        $this->assertSame($this->fakeDate, $resource->getUpdatedTime());
 
         $resource->offsetUnset('field1');
         $resource->offsetSet('field2', 'dummy');
@@ -119,15 +109,15 @@ class ResourcesTest extends TestCase
         $this->assertTrue(isset($resource['field2']));
         $this->assertFalse(isset($resource['field3']));
 
-        $this->assertEquals(null, $resource->offsetGet('field1'));
-        $this->assertEquals('dummy', $resource->offsetGet('field2'));
+        $this->assertSame(null, $resource->offsetGet('field1'));
+        $this->assertSame('dummy', $resource->offsetGet('field2'));
 
-        $this->assertEquals(['attribute' => 'value'], $resource->getRelation1());
-        $this->assertEquals(null, $resource->getRelation2());
+        $this->assertSame(['attribute' => 'value'], $resource->getRelation1());
+        $this->assertSame(null, $resource->getRelation2());
 
-        $this->assertEquals('http://example.com', $resource->getSelfLink());
+        $this->assertSame('http://example.com', $resource->getSelfLink());
 
-        $this->assertEquals('value', $resource->getCustomMetadata());
+        $this->assertSame('value', $resource->getCustomMetadata());
 
         return $resource;
     }
@@ -144,8 +134,8 @@ class ResourcesTest extends TestCase
 
         $clone->offsetSet('field1', 'dummy');
 
-        $this->assertEquals(null, $resource->offsetGet('field1'));
-        $this->assertEquals('dummy', $clone->offsetGet('field1'));
+        $this->assertSame(null, $resource->offsetGet('field1'));
+        $this->assertSame('dummy', $clone->offsetGet('field1'));
     }
 
     /**
@@ -161,7 +151,6 @@ class ResourcesTest extends TestCase
         $this->assertTrue(isset($json['field2']));
     }
 
-
     /**
      * @test
      * @depends initEntity
@@ -172,38 +161,30 @@ class ResourcesTest extends TestCase
     {
         try {
             $resource->offsetGet('nonExistentAttribute');
+            $this->fail('Failed asserting that exception of type "OutOfRangeException" is thrown.');
         } catch (OutOfRangeException $e) {
-        } finally {
-            if (!isset($e)) {
-                $this->fail('Failed asserting that exception of type "OutOfRangeException" is thrown.');
-            }
+            self::assertSame(sprintf('The property "%s::%s" does not exist', get_class($resource), 'nonExistentAttribute'), $e->getMessage());
         }
 
         try {
             $resource->offsetGet('writeOnlyField');
+            $this->fail('Failed asserting that exception of type "DomainException" is thrown.');
         } catch (DomainException $e) {
-        } finally {
-            if (!isset($e)) {
-                $this->fail('Failed asserting that exception of type "DomainException" is thrown.');
-            }
+            self::assertSame(sprintf('Trying to get the write-only property "%s::%s"', get_class($resource), 'writeOnlyField'), $e->getMessage());
         }
 
         try {
             $resource->offsetSet('nonExistentAttribute', 'dummy');
+            $this->fail('Failed asserting that exception of type "OutOfRangeException" is thrown.');
         } catch (OutOfRangeException $e) {
-        } finally {
-            if (!isset($e)) {
-                $this->fail('Failed asserting that exception of type "OutOfRangeException" is thrown.');
-            }
+            self::assertSame(sprintf('The property "%s::%s" does not exist', get_class($resource), 'nonExistentAttribute'), $e->getMessage());
         }
 
         try {
             $resource->offsetSet('readOnlyField', 'dummy');
+            $this->fail('Failed asserting that exception of type "DomainException" is thrown.');
         } catch (DomainException $e) {
-        } finally {
-            if (!isset($e)) {
-                $this->fail('Failed asserting that exception of type "DomainException" is thrown.');
-            }
+            self::assertSame(sprintf('Trying to set the read-only property "%s::%s"', get_class($resource), 'readOnlyField'), $e->getMessage());
         }
     }
 
@@ -247,15 +228,12 @@ class ResourcesTest extends TestCase
 
     /**
      * @test
-     * @depends initFactory
-     *
-     * @param Factory $factory
      *
      * @return Collection
      */
-    public function initCollection(Factory $factory)
+    public function initCollection()
     {
-        $set = $factory->create('stubs', [
+        $set = $this->factory->create('stubs', [
             'data' => [$this->fakeData],
             '_metadata' => [
                 'total' => 1,
@@ -267,9 +245,9 @@ class ResourcesTest extends TestCase
         $this->assertInstanceOf(Collection::class, $set);
         $this->assertGreaterThan(0, count($set));
 
-        $this->assertEquals(1, $set->getTotalItems());
-        $this->assertEquals(100, $set->getLimit());
-        $this->assertEquals(0, $set->getOffset());
+        $this->assertSame(1, $set->getTotalItems());
+        $this->assertSame(100, $set->getLimit());
+        $this->assertSame(0, $set->getOffset());
 
         return $set;
     }
@@ -283,7 +261,7 @@ class ResourcesTest extends TestCase
     public function cloneCollection(Collection $set)
     {
         $clone = clone $set;
-        $this->assertNotEquals(spl_object_hash($set[0]), spl_object_hash($clone[0]));
+        $this->assertNotSame(spl_object_hash($set[0]), spl_object_hash($clone[0]));
     }
 
     /**

@@ -1,28 +1,28 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Tests\Http;
 
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\RequestException;
+use PHPUnit_Framework_MockObject_MockObject as MockObject;
+use Psr\Http\Message\RequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
 use Rebilly\Client;
 use Rebilly\Http\GuzzleAdapter;
 use Rebilly\Tests\TestCase;
-use Psr\Http\Message\RequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
 
 /**
  * Class GuzzleAdapterTest.
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  */
 class GuzzleAdapterTest extends TestCase
 {
@@ -36,7 +36,7 @@ class GuzzleAdapterTest extends TestCase
         $response = $client->createResponse()->withStatus('204');
 
         /** @var GuzzleClient|MockObject $guzzle */
-        $guzzle = $this->getMock(GuzzleClient::class);
+        $guzzle = $this->createMock(GuzzleClient::class);
         $guzzle
             ->expects($this->any())
             ->method('send')
@@ -48,7 +48,7 @@ class GuzzleAdapterTest extends TestCase
         $response = call_user_func($handler, $request);
 
         $this->assertInstanceOf(Response::class, $response);
-        $this->assertEquals(204, $response->getStatusCode());
+        $this->assertSame(204, $response->getStatusCode());
     }
 
     /**
@@ -61,7 +61,7 @@ class GuzzleAdapterTest extends TestCase
         $request = $client->createRequest('GET', 'http://google.com', null);
 
         /** @var GuzzleClient|MockObject $guzzle */
-        $guzzle = $this->getMock(GuzzleClient::class);
+        $guzzle = $this->createMock(GuzzleClient::class);
         $guzzle
             ->expects($this->any())
             ->method('send')
@@ -74,6 +74,6 @@ class GuzzleAdapterTest extends TestCase
         $response = call_user_func($handler, $request);
 
         $this->assertInstanceOf(Response::class, $response);
-        $this->assertEquals(444, $response->getStatusCode());
+        $this->assertSame(444, $response->getStatusCode());
     }
 }

@@ -1,4 +1,13 @@
 <?php
+/**
+ * This source file is proprietary and part of Rebilly.
+ *
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
+ *
+ * @see https://www.rebilly.com
+ */
 
 namespace Rebilly\Entities;
 
@@ -26,7 +35,7 @@ class Address extends Resource
      */
     public static function createFromData(array $data)
     {
-        return new Address($data);
+        return new self($data);
     }
 
     /**

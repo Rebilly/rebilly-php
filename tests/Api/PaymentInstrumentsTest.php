@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Tests\Api;
@@ -103,20 +104,20 @@ class PaymentInstrumentsTest extends BaseTestCase
     }
 
     /**
-     * @expectedException DomainException
      * @test
      */
     public function methodIsRequired()
     {
+        $this->expectException(DomainException::class);
         PaymentMethodInstrument::createFromData([]);
     }
 
     /**
-     * @expectedException DomainException
      * @test
      */
     public function paymentInstructionsMethodMustBeCorrect()
     {
+        $this->expectException(DomainException::class);
         PaymentMethodInstrument::createFromData([
             'method' => 'wrong',
         ]);
@@ -125,10 +126,13 @@ class PaymentInstrumentsTest extends BaseTestCase
     /**
      * @test
      * @dataProvider providePaymentInstructions
+     * @param mixed $data
      */
     public function paymentInstructionsCreateFromData($data)
     {
-        PaymentMethodInstrument::createFromData($data);
+        $value = PaymentMethodInstrument::createFromData($data);
+        self::assertInstanceOf(PaymentMethodInstrument::class, $value);
+        self::assertSame($data, $value->jsonSerialize());
     }
 
     /**

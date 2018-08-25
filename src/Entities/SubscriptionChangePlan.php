@@ -1,4 +1,13 @@
 <?php
+/**
+ * This source file is proprietary and part of Rebilly.
+ *
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
+ *
+ * @see https://www.rebilly.com
+ */
 
 namespace Rebilly\Entities;
 
@@ -7,10 +16,11 @@ use Rebilly\Rest\Resource;
 
 class SubscriptionChangePlan extends Resource
 {
-    const UNEXPECTED_RENEWAL_POLICY = 'Unexpected renewalPolicy. Only %s are supported';
+    public const UNEXPECTED_RENEWAL_POLICY = 'Unexpected renewalPolicy. Only %s are supported';
 
-    const RENEWAL_POLICY_RESET = 'reset';
-    const RENEWAL_POLICY_RETAIN = 'retain';
+    public const RENEWAL_POLICY_RESET = 'reset';
+
+    public const RENEWAL_POLICY_RETAIN = 'retain';
 
     /**
      * @return array

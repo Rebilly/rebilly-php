@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Tests\Api;
@@ -20,32 +21,35 @@ use Rebilly\Tests\TestCase as BaseTestCase;
 class SubscriptionTest extends BaseTestCase
 {
     /**
-     * @expectedException DomainException
      * @test
      */
     public function cancelPolicyMustBeCorrect()
     {
         $subscriptionCancel = new SubscriptionCancel();
+
+        $this->expectException(DomainException::class);
         $subscriptionCancel->setPolicy('wrong');
     }
 
     /**
-     * @expectedException DomainException
      * @test
      */
     public function cancelCategoryMustBeCorrect()
     {
         $subscriptionCancel = new SubscriptionCancel();
+
+        $this->expectException(DomainException::class);
         $subscriptionCancel->setCancelCategory('wrong');
     }
 
     /**
-     * @expectedException DomainException
      * @test
      */
     public function canceledByMustBeCorrect()
     {
         $subscriptionCancel = new SubscriptionCancel();
+
+        $this->expectException(DomainException::class);
         $subscriptionCancel->setCanceledBy('wrong');
     }
 }

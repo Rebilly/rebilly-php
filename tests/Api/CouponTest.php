@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Tests\Api;
@@ -56,11 +57,11 @@ class CouponTest extends BaseTestCase
     }
 
     /**
-     * @expectedException DomainException
      * @test
      */
     public function typeIsRequired()
     {
+        $this->expectException(DomainException::class);
         Fixed::createFromData([
             'amount' => 15,
             'currency' => 'USD',
@@ -68,11 +69,11 @@ class CouponTest extends BaseTestCase
     }
 
     /**
-     * @expectedException DomainException
      * @test
      */
     public function typeMustBeCorrect()
     {
+        $this->expectException(DomainException::class);
         Fixed::createFromData([
             'type' => 'wrong',
             'amount' => 15,
@@ -83,10 +84,13 @@ class CouponTest extends BaseTestCase
     /**
      * @test
      * @dataProvider provideDiscounts
+     * @param mixed $data
      */
     public function discountCreateFromData($data)
     {
-        Discount::createFromData($data);
+        $value = Discount::createFromData($data);
+        self::assertInstanceOf(Discount::class, $value);
+        self::assertSame($data, $value->jsonSerialize());
     }
 
     /**
@@ -155,22 +159,22 @@ class CouponTest extends BaseTestCase
     }
 
     /**
-     * @expectedException DomainException
      * @test
      */
     public function restrictionTypeIsRequired()
     {
+        $this->expectException(DomainException::class);
         RestrictToPlans::createFromData([
             'planIds' => ['123', '234'],
         ]);
     }
 
     /**
-     * @expectedException DomainException
      * @test
      */
     public function restrictionTypeMustBeCorrect()
     {
+        $this->expectException(DomainException::class);
         RestrictToPlans::createFromData([
             'type' => 'wrong',
             'planIds' => ['123', '234'],
@@ -180,10 +184,13 @@ class CouponTest extends BaseTestCase
     /**
      * @test
      * @dataProvider provideRestrictions
+     * @param mixed $data
      */
     public function restrictionCreateFromData($data)
     {
-        Restriction::createFromData($data);
+        $value = Restriction::createFromData($data);
+        self::assertInstanceOf(Restriction::class, $value);
+        self::assertSame($data, $value->jsonSerialize());
     }
 
     /**

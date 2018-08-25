@@ -1,28 +1,31 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Tests\Api;
 
+use GuzzleHttp\Psr7;
+use PHPUnit_Framework_MockObject_MockObject as MockObject;
+use Psr\Http\Message\RequestInterface as Request;
 use Rebilly\Client;
 use Rebilly\Entities;
 use Rebilly\Entities\Customer;
+use Rebilly\Entities\EmailNotifications\EmailNotification;
 use Rebilly\Entities\PaymentMethodInstrument;
+use Rebilly\Entities\Webhook;
 use Rebilly\Http\CurlHandler;
 use Rebilly\Paginator;
 use Rebilly\Rest;
 use Rebilly\Services;
 use Rebilly\Tests\Stub\JsonObject;
 use Rebilly\Tests\TestCase as BaseTestCase;
-use Psr\Http\Message\RequestInterface as Request;
-use GuzzleHttp\Psr7;
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
 
 /**
  * Class ServiceTest.
@@ -56,7 +59,7 @@ class ServiceTest extends BaseTestCase
                 }
 
                 return $response;
-            }
+            },
         ]);
 
         $service = $client->$name();
@@ -119,7 +122,7 @@ class ServiceTest extends BaseTestCase
     public function customerService()
     {
         /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class);
+        $handler = $this->createMock(CurlHandler::class);
 
         $client = new Client([
             'apiKey' => 'QWERTY',
@@ -130,26 +133,26 @@ class ServiceTest extends BaseTestCase
 
         $customers = [
             [
-                "id" => "foo",
-                "email" => "user@example.com",
-                "firstName" => "string",
-                "lastName" => "string",
-                "ipAddress" => "192.168.0.1",
-                "defaultPaymentInstrument" => [
+                'id' => 'foo',
+                'email' => 'user@example.com',
+                'firstName' => 'string',
+                'lastName' => 'string',
+                'ipAddress' => '192.168.0.1',
+                'defaultPaymentInstrument' => [
                     'method' => 'cash',
                 ],
-                "createdTime" => "2016-10-18T06:39:36Z",
-                "updatedTime" => "2016-10-18T06:39:36Z",
+                'createdTime' => '2016-10-18T06:39:36Z',
+                'updatedTime' => '2016-10-18T06:39:36Z',
             ],
             [
-                "id" => "bar",
-                "email" => "user@example.com",
-                "firstName" => "string",
-                "lastName" => "string",
-                "ipAddress" => "192.168.0.1",
-                "defaultPaymentInstrument" => null,
-                "createdTime" => "2016-10-18T06:39:36Z",
-                "updatedTime" => "2016-10-18T06:39:36Z",
+                'id' => 'bar',
+                'email' => 'user@example.com',
+                'firstName' => 'string',
+                'lastName' => 'string',
+                'ipAddress' => '192.168.0.1',
+                'defaultPaymentInstrument' => null,
+                'createdTime' => '2016-10-18T06:39:36Z',
+                'updatedTime' => '2016-10-18T06:39:36Z',
             ],
         ];
 
@@ -186,7 +189,7 @@ class ServiceTest extends BaseTestCase
         $client = new Client(['apiKey' => 'QWERTY']);
 
         /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class);
+        $handler = $this->createMock(CurlHandler::class);
         $handler
             ->expects($this->any())
             ->method('__invoke')
@@ -218,7 +221,7 @@ class ServiceTest extends BaseTestCase
         $client = new Client(['apiKey' => 'QWERTY']);
 
         /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class);
+        $handler = $this->createMock(CurlHandler::class);
 
         $handler
             ->expects($this->at(0))
@@ -264,7 +267,7 @@ class ServiceTest extends BaseTestCase
         $client = new Client(['apiKey' => 'QWERTY']);
 
         /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class);
+        $handler = $this->createMock(CurlHandler::class);
 
         $handler
             ->expects($this->any())
@@ -298,7 +301,7 @@ class ServiceTest extends BaseTestCase
         $client = new Client(['apiKey' => 'QWERTY']);
 
         /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class);
+        $handler = $this->createMock(CurlHandler::class);
 
         $handler
             ->expects($this->at(0))
@@ -348,7 +351,7 @@ class ServiceTest extends BaseTestCase
         $client = new Client(['apiKey' => 'QWERTY']);
 
         /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class);
+        $handler = $this->createMock(CurlHandler::class);
 
         $handler
             ->expects($this->any())
@@ -382,7 +385,7 @@ class ServiceTest extends BaseTestCase
         $client = new Client(['apiKey' => 'QWERTY']);
 
         /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class);
+        $handler = $this->createMock(CurlHandler::class);
 
         $handler
             ->expects($this->any())
@@ -411,7 +414,7 @@ class ServiceTest extends BaseTestCase
         $client = new Client(['apiKey' => 'QWERTY']);
 
         /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class);
+        $handler = $this->createMock(CurlHandler::class);
 
         $handler
             ->expects($this->any())
@@ -439,7 +442,7 @@ class ServiceTest extends BaseTestCase
         $client = new Client(['apiKey' => 'QWERTY']);
 
         /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class);
+        $handler = $this->createMock(CurlHandler::class);
 
         $handler
             ->expects($this->any())
@@ -467,7 +470,7 @@ class ServiceTest extends BaseTestCase
         $client = new Client(['apiKey' => 'QWERTY']);
 
         /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class);
+        $handler = $this->createMock(CurlHandler::class);
 
         $handler
             ->expects($this->at(0))
@@ -512,7 +515,7 @@ class ServiceTest extends BaseTestCase
         $client = new Client(['apiKey' => 'QWERTY']);
 
         /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class);
+        $handler = $this->createMock(CurlHandler::class);
 
         $handler
             ->expects($this->any())
@@ -589,7 +592,7 @@ class ServiceTest extends BaseTestCase
         $client = new Client(['apiKey' => 'QWERTY']);
 
         /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class);
+        $handler = $this->createMock(CurlHandler::class);
         $layout = new Entities\Layout();
         $layout->addItem([
             'planId' => $faker->uuid,
@@ -602,7 +605,7 @@ class ServiceTest extends BaseTestCase
             ],
             new Entities\LayoutItem([
                 'planId' => $faker->uuid,
-            ])
+            ]),
         ]);
 
         $handler
@@ -636,7 +639,7 @@ class ServiceTest extends BaseTestCase
         $client = new Client(['apiKey' => 'QWERTY']);
 
         /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class);
+        $handler = $this->createMock(CurlHandler::class);
         $handler
             ->expects($this->any())
             ->method('__invoke')
@@ -651,7 +654,7 @@ class ServiceTest extends BaseTestCase
         $result = $service->load('userId');
         $this->assertInstanceOf(Entities\User::class, $result);
 
-        $handler = $this->getMock(CurlHandler::class);
+        $handler = $this->createMock(CurlHandler::class);
         $handler
             ->expects($this->any())
             ->method('__invoke')
@@ -666,7 +669,7 @@ class ServiceTest extends BaseTestCase
         $result = $service->signup([]);
         $this->assertInstanceOf(Entities\User::class, $result);
 
-        $handler = $this->getMock(CurlHandler::class);
+        $handler = $this->createMock(CurlHandler::class);
         $handler
             ->expects($this->any())
             ->method('__invoke')
@@ -681,7 +684,7 @@ class ServiceTest extends BaseTestCase
         $result = $service->signin([]);
         $this->assertInstanceOf(Entities\User::class, $result);
 
-        $handler = $this->getMock(CurlHandler::class);
+        $handler = $this->createMock(CurlHandler::class);
         $handler
             ->expects($this->any())
             ->method('__invoke')
@@ -716,7 +719,7 @@ class ServiceTest extends BaseTestCase
         $client = new Client(['apiKey' => 'QWERTY']);
 
         /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class);
+        $handler = $this->createMock(CurlHandler::class);
 
         $handler
             ->expects($this->any())
@@ -745,16 +748,11 @@ class ServiceTest extends BaseTestCase
     public function emailNotificationService()
     {
         $client = new Client(['apiKey' => 'QWERTY']);
+        $response = $client->createResponse()->withHeader('Location', 'email-notifications/dummy');
 
         /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class);
-
-        $handler
-            ->expects($this->any())
-            ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'email-notifications/dummy')
-            ));
+        $handler = $this->createMock(CurlHandler::class);
+        $handler->expects($this->once())->method('__invoke')->willReturn($response);
 
         $client = new Client([
             'apiKey' => 'QWERTY',
@@ -763,7 +761,8 @@ class ServiceTest extends BaseTestCase
 
         $service = $client->emailNotifications();
 
-        $service->preview([]);
+        $emailNotification = $service->preview([]);
+        self::assertInstanceOf(EmailNotification::class, $emailNotification);
     }
 
     /**
@@ -774,7 +773,7 @@ class ServiceTest extends BaseTestCase
         $client = new Client(['apiKey' => 'QWERTY']);
 
         /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class);
+        $handler = $this->createMock(CurlHandler::class);
 
         $handler
             ->expects($this->any())
@@ -801,7 +800,7 @@ class ServiceTest extends BaseTestCase
         $client = new Client(['apiKey' => 'QWERTY']);
 
         /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class);
+        $handler = $this->createMock(CurlHandler::class);
 
         $handler
             ->expects($this->any())
@@ -828,7 +827,7 @@ class ServiceTest extends BaseTestCase
         $client = new Client(['apiKey' => 'QWERTY']);
 
         /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class);
+        $handler = $this->createMock(CurlHandler::class);
 
         $handler
             ->expects($this->any())
@@ -858,7 +857,7 @@ class ServiceTest extends BaseTestCase
         $client = new Client(['apiKey' => 'QWERTY']);
 
         /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class);
+        $handler = $this->createMock(CurlHandler::class);
 
         $handler
             ->expects($this->any())
@@ -885,7 +884,7 @@ class ServiceTest extends BaseTestCase
         $client = new Client(['apiKey' => 'QWERTY']);
 
         /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class);
+        $handler = $this->createMock(CurlHandler::class);
 
         $handler
             ->expects($this->any())
@@ -912,7 +911,7 @@ class ServiceTest extends BaseTestCase
         $client = new Client(['apiKey' => 'QWERTY']);
 
         /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class);
+        $handler = $this->createMock(CurlHandler::class);
 
         $handler
             ->expects($this->any())
@@ -937,23 +936,21 @@ class ServiceTest extends BaseTestCase
     public function webhookService()
     {
         $client = new Client(['apiKey' => 'QWERTY']);
+        $response = $client->createResponse()->withHeader('Location', 'previews/webhooks');
 
         /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class);
+        $handler = $this->createMock(CurlHandler::class);
 
-        $handler
-            ->expects($this->any())
-            ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'previews/webhooks')
-            ));
+        $handler->expects($this->any())->method('__invoke')->willReturn($response);
 
         $client = new Client([
             'apiKey' => 'QWERTY',
             'httpHandler' => $handler,
         ]);
         $service = $client->webhooks();
-        $service->preview([]);
+        $webhook = $service->preview([]);
+
+        self::assertInstanceOf(Webhook::class, $webhook);
     }
 
     /**
@@ -976,7 +973,7 @@ class ServiceTest extends BaseTestCase
                 }
 
                 return $response;
-            }
+            },
         ]);
 
         $service = $client->gatewayDowntimes();

@@ -1,28 +1,29 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly;
 
 use ArrayObject;
 use BadMethodCallException;
-use Rebilly\Http\CurlHandler;
-use Rebilly\Middleware\LogHandler;
-use Rebilly\Rest\File;
-use RuntimeException;
+use GuzzleHttp\Psr7\Request as GuzzleRequest;
+use GuzzleHttp\Psr7\Response as GuzzleResponse;
+use GuzzleHttp\Psr7\Uri as GuzzleUri;
 use InvalidArgumentException;
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Log\LoggerInterface as Logger;
-use GuzzleHttp\Psr7\Request as GuzzleRequest;
-use GuzzleHttp\Psr7\Response as GuzzleResponse;
-use GuzzleHttp\Psr7\Uri as GuzzleUri;
+use Rebilly\Http\CurlHandler;
+use Rebilly\Middleware\LogHandler;
+use Rebilly\Rest\File;
+use RuntimeException;
 
 /**
  * Class Client.
@@ -32,18 +33,6 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  *
  * @see Client::createRequest()
  * @see Client::createResponse()
- *
- * Magic facades for HTTP methods:
- *
- * @see Client::__call()
- * @see Client::send()
- *
- * @method mixed get($path, $params = [], $headers = [])
- * @method void head($path, $params = [], $headers = [])
- * @method mixed post($payload, $path, $params = [], $headers = [])
- * @method mixed put($payload, $path, $params = [], $headers = [])
- * @method mixed patch($payload, $path, $params = [], $headers = [])
- * @method void delete($path, $params = [], $headers = [])
  *
  * Magic methods for services factories:
  *
@@ -100,16 +89,16 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\GatewayAccountDowntimeService gatewayDowntimes()
  * @method Services\PaymentInstrumentValidationService paymentInstrumentValidation()
  * @method Services\KycService kycDocuments()
- *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
- * @version 0.1
  */
 final class Client
 {
-    const BASE_HOST = 'https://api.rebilly.com';
-    const SANDBOX_HOST = 'https://api-sandbox.rebilly.com';
-    const CURRENT_VERSION = 'v2.1';
-    const SDK_VERSION = '2.2.0';
+    public const BASE_HOST = 'https://api.rebilly.com';
+
+    public const SANDBOX_HOST = 'https://api-sandbox.rebilly.com';
+
+    public const CURRENT_VERSION = 'v2.1';
+
+    public const SDK_VERSION = '2.2.0';
 
     private static $services = [
         'authenticationOptions' => Services\AuthenticationOptionsService::class,
@@ -221,7 +210,7 @@ final class Client
         if (isset($baseUrl)) {
             $baseUrl = ltrim($baseUrl, '/');
         } else {
-            $baseUrl = Client::BASE_HOST;
+            $baseUrl = self::BASE_HOST;
         }
 
         if (!isset($httpHandler)) {
@@ -262,7 +251,7 @@ final class Client
 
         // Prepare middleware stack
         $this->middleware = new Middleware\CompositeMiddleware(
-            new Middleware\BaseUri($this->createUri($baseUrl . '/' . Client::CURRENT_VERSION)),
+            new Middleware\BaseUri($this->createUri($baseUrl . '/' . self::CURRENT_VERSION)),
             new Middleware\UserAgent(self::SDK_VERSION),
             $authentication,
             $middleware,
@@ -319,9 +308,7 @@ final class Client
         spl_autoload_unregister([__CLASS__, 'autoload']);
     }
 
-    /********************************************************************************
-     * This class is a final middleware
-     *******************************************************************************/
+    // This class is a final middleware
 
     /**
      * @param Request $request
@@ -351,20 +338,6 @@ final class Client
      */
     public function __call($name, $arguments)
     {
-        switch (strtoupper($name)) {
-            case 'HEAD':
-            case 'GET':
-            case 'DELETE':
-                array_unshift($arguments, null);
-                array_unshift($arguments, $name);
-                return call_user_func_array([$this, 'send'], $arguments);
-            case 'POST':
-            case 'PUT':
-            case 'PATCH':
-                array_unshift($arguments, $name);
-                return call_user_func_array([$this, 'send'], $arguments);
-        }
-
         try {
             return $this->service(lcfirst($name));
         } catch (InvalidArgumentException $e) {
@@ -439,7 +412,8 @@ final class Client
 
         if ($response->getStatusCode() === 422) {
             $content = json_decode($response->getBody()->getContents(), true);
-            $content = isset($content['details']) ? $content['details'] : [];
+            $content = $content['details'] ?? [];
+
             throw new Http\Exception\UnprocessableEntityException($content);
         }
 
@@ -465,7 +439,7 @@ final class Client
             );
         }
 
-        if (in_array($request->getMethod(), ['HEAD', 'DELETE'])) {
+        if (in_array($request->getMethod(), ['HEAD', 'DELETE'], true)) {
             return null;
         }
 
@@ -493,6 +467,36 @@ final class Client
         return call_user_func($responseParsers[$contentType], $request, $response, $contentType);
     }
 
+    public function head($path, $params = [], array $headers = [])
+    {
+        return $this->send('HEAD', null, $path, $params, $headers);
+    }
+
+    public function get($path, $params = [], array $headers = [])
+    {
+        return $this->send('GET', null, $path, $params, $headers);
+    }
+
+    public function post($payload, $path, $params = [], array $headers = [])
+    {
+        return $this->send('POST', $payload, $path, $params, $headers);
+    }
+
+    public function put($payload, $path, $params = [], array $headers = [])
+    {
+        return $this->send('PUT', $payload, $path, $params, $headers);
+    }
+
+    public function patch($payload, $path, $params = [], array $headers = [])
+    {
+        return $this->send('PATCH', $payload, $path, $params, $headers);
+    }
+
+    public function delete($path, $params = [], array $headers = [])
+    {
+        return $this->send('DELETE', null, $path, $params, $headers);
+    }
+
     /**
      * @param Request $request
      * @param Response $response
@@ -500,7 +504,7 @@ final class Client
      *
      * @return mixed
      */
-    protected function parseJsonResponseBody(Request $request, Response $response, $type)
+    private function parseJsonResponseBody(Request $request, Response $response, $type)
     {
         // Find resource type (URL) in response location or request url
         $location = $response->hasHeader('Location')
@@ -546,7 +550,7 @@ final class Client
      *
      * @return File
      */
-    protected function parseBinaryResponseBody(Request $request, Response $response, $type)
+    private function parseBinaryResponseBody(Request $request, Response $response, $type)
     {
         $body = $response->getBody();
 

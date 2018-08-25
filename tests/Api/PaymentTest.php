@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Tests\Api;
@@ -18,7 +19,6 @@ use Rebilly\Http\Exception\UnprocessableEntityException;
 /**
  * Class PaymentTest.
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  */
 final class PaymentTest extends TestCase
 {
@@ -46,6 +46,7 @@ final class PaymentTest extends TestCase
             $payment = $client->payments()->create($payment);
         } catch (UnprocessableEntityException $e) {
             var_dump($e->getErrors());
+
             return;
         }
 

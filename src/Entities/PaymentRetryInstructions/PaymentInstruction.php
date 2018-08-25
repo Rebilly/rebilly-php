@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Entities\PaymentRetryInstructions;
@@ -21,12 +22,15 @@ use Rebilly\Rest\Resource;
  */
 abstract class PaymentInstruction extends Resource
 {
-    const UNSUPPORTED_METHOD = 'Unexpected method. Only %s methods are supported';
-    const REQUIRED_METHOD = 'Method is required';
+    public const UNSUPPORTED_METHOD = 'Unexpected method. Only %s methods are supported';
 
-    const NONE = 'none';
-    const PARTIAL = 'partial';
-    const DISCOUNT = 'discount';
+    public const REQUIRED_METHOD = 'Method is required';
+
+    public const NONE = 'none';
+
+    public const PARTIAL = 'partial';
+
+    public const DISCOUNT = 'discount';
 
     private static $availableMethods = [
         self::NONE,
@@ -56,12 +60,15 @@ abstract class PaymentInstruction extends Resource
         switch ($data['method']) {
             case self::NONE:
                 $paymentInstruction = new NoneType($data);
+
                 break;
             case self::PARTIAL:
                 $paymentInstruction = new PartialType($data);
+
                 break;
             case self::DISCOUNT:
                 $paymentInstruction = new DiscountType($data);
+
                 break;
             default:
                 throw new DomainException(

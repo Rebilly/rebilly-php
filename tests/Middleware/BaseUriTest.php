@@ -1,24 +1,24 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Tests\Middleware;
 
+use Psr\Http\Message\RequestInterface as Request;
 use Rebilly\Client;
 use Rebilly\Middleware\BaseUri;
 use Rebilly\Tests\TestCase as TestCase;
-use Psr\Http\Message\RequestInterface as Request;
 
 /**
  * Class BaseUriTest.
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  */
 class BaseUriTest extends TestCase
 {
@@ -45,7 +45,7 @@ class BaseUriTest extends TestCase
         $result = call_user_func($middleware, $request, $response, $done);
         $url = $result->getUri();
 
-        $this->assertEquals('google.com', $url->getHost());
-        $this->assertEquals('/map/demo', $url->getPath());
+        $this->assertSame('google.com', $url->getHost());
+        $this->assertSame('/map/demo', $url->getPath());
     }
 }

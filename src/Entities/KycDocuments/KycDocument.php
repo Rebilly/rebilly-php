@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Entities\KycDocuments;
@@ -33,15 +34,19 @@ use Rebilly\Rest\Entity;
  */
 final class KycDocument extends Entity
 {
-    const TYPE_IDENTITY_PROOF = 'identity-proof';
-    const TYPE_ADDRESS_PROOF = 'address-proof';
+    public const TYPE_IDENTITY_PROOF = 'identity-proof';
 
-    const STATUS_PENDING = 'pending';
-    const STATUS_IN_PROGRESS = 'in-progress';
-    const STATUS_ACCEPTED = 'accepted';
-    const STATUS_REJECTED = 'rejected';
+    public const TYPE_ADDRESS_PROOF = 'address-proof';
 
-    const MSG_BAD_DOCUMENT_TYPE = 'Bad document type provided.';
+    public const STATUS_PENDING = 'pending';
+
+    public const STATUS_IN_PROGRESS = 'in-progress';
+
+    public const STATUS_ACCEPTED = 'accepted';
+
+    public const STATUS_REJECTED = 'rejected';
+
+    public const MSG_BAD_DOCUMENT_TYPE = 'Bad document type provided.';
 
     /**
      * @return array
@@ -107,7 +112,7 @@ final class KycDocument extends Entity
     {
         $allowedTypes = self::allowedTypes();
 
-        if (!in_array($value, $allowedTypes)) {
+        if (!in_array($value, $allowedTypes, true)) {
             throw new DomainException(self::MSG_BAD_DOCUMENT_TYPE);
         }
 

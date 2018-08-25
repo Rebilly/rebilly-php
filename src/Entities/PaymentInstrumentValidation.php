@@ -11,8 +11,8 @@
 
 namespace Rebilly\Entities;
 
-use Rebilly\Rest\Resource;
 use DomainException;
+use Rebilly\Rest\Resource;
 
 abstract class PaymentInstrumentValidation extends Resource
 {

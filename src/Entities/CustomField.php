@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Entities;
@@ -24,21 +25,26 @@ use Rebilly\Rest\Entity;
  *   "description"
  * }
  * ```
- * @author Arman Tuyakbayev <arman.tuyakbayev@rebilly.com>
- * @version 0.1
  */
 final class CustomField extends Entity
 {
-    const MSG_UNEXPECTED_TYPE = 'Unexpected type. Only %s types support';
+    public const MSG_UNEXPECTED_TYPE = 'Unexpected type. Only %s types support';
 
-    const TYPE_ARRAY = 'array';
-    const TYPE_BOOLEAN = 'boolean';
-    const TYPE_DATE = 'date';
-    const TYPE_DATETIME = 'datetime';
-    const TYPE_INTEGER = 'integer';
-    const TYPE_MONETARY = 'monetary';
-    const TYPE_NUMBER = 'number';
-    const TYPE_STRING = 'string';
+    public const TYPE_ARRAY = 'array';
+
+    public const TYPE_BOOLEAN = 'boolean';
+
+    public const TYPE_DATE = 'date';
+
+    public const TYPE_DATETIME = 'datetime';
+
+    public const TYPE_INTEGER = 'integer';
+
+    public const TYPE_MONETARY = 'monetary';
+
+    public const TYPE_NUMBER = 'number';
+
+    public const TYPE_STRING = 'string';
 
     /**
      * @return array
@@ -88,7 +94,7 @@ final class CustomField extends Entity
      */
     public function setType($value)
     {
-        if (!in_array($value, self::allowedTypes())) {
+        if (!in_array($value, self::allowedTypes(), true)) {
             throw new DomainException(sprintf(self::MSG_UNEXPECTED_TYPE, implode(', ', self::allowedTypes())));
         }
 
