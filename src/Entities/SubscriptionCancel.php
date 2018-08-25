@@ -14,9 +14,10 @@ use DomainException;
 use Rebilly\Rest\Resource;
 
 /**
- * Class SubscriptionCancel
+ * Class SubscriptionCancel.
  *
  * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
+ *
  * @version 0.1
  */
 class SubscriptionCancel extends Resource
@@ -30,7 +31,7 @@ class SubscriptionCancel extends Resource
     const NOW_WITH_PRORATA_CREDIT = 'now-with-prorata-credit';
 
     const CATEGORY_OTHER = 'other';
-    const CATEGORY_BILLING_FAILURE  = 'billing-failure';
+    const CATEGORY_BILLING_FAILURE = 'billing-failure';
     const CATEGORY_DID_NOT_USE = 'did-not-use';
     const CATEGORY_DID_NOT_WANT = 'did-not-want';
     const CATEGORY_MISSING_FEATURES = 'missing-features';

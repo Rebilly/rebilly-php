@@ -123,7 +123,7 @@ final class PaymentCardToken extends Entity
     }
 
     /**
-     * @deprecated The method is deprecated and will be removed in next version. 
+     * @deprecated The method is deprecated and will be removed in next version.
      *
      * @return string
      */
@@ -144,7 +144,7 @@ final class PaymentCardToken extends Entity
     }
 
     /**
-     * @deprecated The method is deprecated and will be removed in next version. 
+     * @deprecated The method is deprecated and will be removed in next version.
      *
      * @return string
      */
@@ -165,7 +165,7 @@ final class PaymentCardToken extends Entity
     }
 
     /**
-     * @deprecated The method is deprecated and will be removed in next version. 
+     * @deprecated The method is deprecated and will be removed in next version.
      *
      * @return string
      */
@@ -186,7 +186,7 @@ final class PaymentCardToken extends Entity
     }
 
     /**
-     * @deprecated The method is deprecated and will be removed in next version. 
+     * @deprecated The method is deprecated and will be removed in next version.
      *
      * @return string
      */
@@ -207,7 +207,7 @@ final class PaymentCardToken extends Entity
     }
 
     /**
-     * @deprecated The method is deprecated and will be removed in next version. 
+     * @deprecated The method is deprecated and will be removed in next version.
      *
      * @return string
      */
@@ -228,7 +228,7 @@ final class PaymentCardToken extends Entity
     }
 
     /**
-     * @deprecated The method is deprecated and will be removed in next version. 
+     * @deprecated The method is deprecated and will be removed in next version.
      *
      * @return string
      */
@@ -250,7 +250,7 @@ final class PaymentCardToken extends Entity
     }
 
     /**
-     * @deprecated The method is deprecated and will be removed in next version. 
+     * @deprecated The method is deprecated and will be removed in next version.
      *
      * @return string
      */
@@ -272,7 +272,7 @@ final class PaymentCardToken extends Entity
     }
 
     /**
-     * @deprecated The method is deprecated and will be removed in next version. 
+     * @deprecated The method is deprecated and will be removed in next version.
      *
      * @return string
      */
@@ -293,7 +293,7 @@ final class PaymentCardToken extends Entity
     }
 
     /**
-     * @deprecated The method is deprecated and will be removed in next version. 
+     * @deprecated The method is deprecated and will be removed in next version.
      *
      * @return string
      */
