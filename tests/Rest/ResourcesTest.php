@@ -30,6 +30,9 @@ class ResourcesTest extends TestCase
     private $fakeDate;
     private $fakeData = [];
 
+    /** @var Factory */
+    private $factory;
+
     protected function setUp()
     {
         parent::setUp();
@@ -54,58 +57,44 @@ class ResourcesTest extends TestCase
                 'customMeta' => 'value',
             ],
         ];
-    }
 
-
-    /**
-     * @test
-     *
-     * @return Factory
-     */
-    public function initFactory()
-    {
-        $factory = new Factory(new ArrayObject([
-            'stubs' => function (array $content) {
-                return new Collection(new EntityStub(), $content);
-            },
-            'stubs/{id}' => function (array $content) {
-                return new EntityStub($content);
-            },
-        ]));
-
-        return $factory;
+        $this->factory = new Factory(
+            new ArrayObject(
+                [
+                    'stubs' => function (array $content) {
+                        return new Collection(new EntityStub(), $content);
+                    },
+                    'stubs/{id}' => function (array $content) {
+                        return new EntityStub($content);
+                    },
+                ]
+            )
+        );
     }
 
     /**
      * @test
-     * @depends initFactory
-     *
-     * @param Factory $factory
      */
-    public function createUnknownResource(Factory $factory)
+    public function createUnknownResource()
     {
         try {
-            $factory->create('unknown', []);
+            $this->factory->create('unknown', []);
+
+            $this->fail('Failed asserting that exception of type "RuntimeException" is thrown.');
         } catch (RuntimeException $e) {
-        } finally {
-            if (!isset($e)) {
-                $this->fail('Failed asserting that exception of type "RuntimeException" is thrown.');
-            }
+            self::assertSame('Cannot create resource by URI "/unknown"', $e->getMessage());
         }
     }
 
     /**
      * @test
-     * @depends initFactory
-     *
-     * @param Factory $factory
      *
      * @return EntityStub
      */
-    public function initEntity(Factory $factory)
+    public function initEntity()
     {
         /** @var EntityStub $resource */
-        $resource = $factory->create('stubs/uuid', []);
+        $resource = $this->factory->create('stubs/uuid', []);
         $resource->populate($this->fakeData);
 
         $this->assertInstanceOf(EntityStub::class, $resource);
@@ -172,38 +161,30 @@ class ResourcesTest extends TestCase
     {
         try {
             $resource->offsetGet('nonExistentAttribute');
+            $this->fail('Failed asserting that exception of type "OutOfRangeException" is thrown.');
         } catch (OutOfRangeException $e) {
-        } finally {
-            if (!isset($e)) {
-                $this->fail('Failed asserting that exception of type "OutOfRangeException" is thrown.');
-            }
+            self::assertSame(sprintf('The property "%s::%s" does not exist', get_class($resource), 'nonExistentAttribute'), $e->getMessage());
         }
 
         try {
             $resource->offsetGet('writeOnlyField');
+            $this->fail('Failed asserting that exception of type "DomainException" is thrown.');
         } catch (DomainException $e) {
-        } finally {
-            if (!isset($e)) {
-                $this->fail('Failed asserting that exception of type "DomainException" is thrown.');
-            }
+            self::assertSame(sprintf('Trying to get the write-only property "%s::%s"', get_class($resource), 'writeOnlyField'), $e->getMessage());
         }
 
         try {
             $resource->offsetSet('nonExistentAttribute', 'dummy');
+            $this->fail('Failed asserting that exception of type "OutOfRangeException" is thrown.');
         } catch (OutOfRangeException $e) {
-        } finally {
-            if (!isset($e)) {
-                $this->fail('Failed asserting that exception of type "OutOfRangeException" is thrown.');
-            }
+            self::assertSame(sprintf('The property "%s::%s" does not exist', get_class($resource), 'nonExistentAttribute'), $e->getMessage());
         }
 
         try {
             $resource->offsetSet('readOnlyField', 'dummy');
+            $this->fail('Failed asserting that exception of type "DomainException" is thrown.');
         } catch (DomainException $e) {
-        } finally {
-            if (!isset($e)) {
-                $this->fail('Failed asserting that exception of type "DomainException" is thrown.');
-            }
+            self::assertSame(sprintf('Trying to set the read-only property "%s::%s"', get_class($resource), 'readOnlyField'), $e->getMessage());
         }
     }
 
@@ -247,15 +228,12 @@ class ResourcesTest extends TestCase
 
     /**
      * @test
-     * @depends initFactory
-     *
-     * @param Factory $factory
      *
      * @return Collection
      */
-    public function initCollection(Factory $factory)
+    public function initCollection()
     {
-        $set = $factory->create('stubs', [
+        $set = $this->factory->create('stubs', [
             'data' => [$this->fakeData],
             '_metadata' => [
                 'total' => 1,

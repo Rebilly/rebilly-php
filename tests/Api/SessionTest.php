@@ -22,13 +22,14 @@ class SessionTest extends BaseTestCase
     /**
      * @test
      * @dataProvider provideInvalidData
-     * @expectedException DomainException
      *
      * @param $data
      */
     public function exceptionOnWrongPermissions($data)
     {
         $session = new Session();
+
+        $this->expectException(DomainException::class);
         $session->setPermissions($data);
     }
 

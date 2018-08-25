@@ -72,20 +72,20 @@ class PaymentRetryInstructionsTest extends BaseTestCase
     }
 
     /**
-     * @expectedException DomainException
      * @test
      */
     public function paymentInstructionsMethodIsRequired()
     {
+        $this->expectException(DomainException::class);
         PartialType::createFromData([]);
     }
 
     /**
-     * @expectedException DomainException
      * @test
      */
     public function paymentInstructionsMethodMustBeCorrect()
     {
+        $this->expectException(DomainException::class);
         PartialType::createFromData([
             'method' => 'wrong',
         ]);
@@ -97,7 +97,9 @@ class PaymentRetryInstructionsTest extends BaseTestCase
      */
     public function paymentInstructionsCreateFromData($data)
     {
-        PaymentInstruction::createFromData($data);
+        $value = PaymentInstruction::createFromData($data);
+        self::assertInstanceOf(PaymentInstruction::class, $value);
+        self::assertSame($data, $value->jsonSerialize());
     }
 
     /**
@@ -170,20 +172,20 @@ class PaymentRetryInstructionsTest extends BaseTestCase
     }
 
     /**
-     * @expectedException DomainException
      * @test
      */
     public function scheduleMethodIsRequired()
     {
+        $this->expectException(DomainException::class);
         AutoType::createFromData([]);
     }
 
     /**
-     * @expectedException DomainException
      * @test
      */
     public function scheduleMethodMustBeCorrect()
     {
+        $this->expectException(DomainException::class);
         AutoType::createFromData([
             'method' => 'wrong',
         ]);
@@ -195,7 +197,9 @@ class PaymentRetryInstructionsTest extends BaseTestCase
      */
     public function scheduleInstructionsCreateFromData($data)
     {
-        ScheduleInstruction::createFromData($data);
+        $value = ScheduleInstruction::createFromData($data);
+        self::assertInstanceOf(ScheduleInstruction::class, $value);
+        self::assertSame($data, $value->jsonSerialize());
     }
 
     /**
@@ -227,31 +231,35 @@ class PaymentRetryInstructionsTest extends BaseTestCase
 
     /**
      * @test
-     * @expectedException DomainException
      */
     public function attemptMustBeArray()
     {
+        /** @var mixed $instruction */
         $instruction = new PaymentRetryInstruction();
+
+        $this->expectException(DomainException::class);
         $instruction->addAttempt('wrong');
     }
 
     /**
      * @test
-     * @expectedException DomainException
      */
     public function afterAttemptPolicyMustBeCorrect()
     {
         $instruction = new PaymentRetryInstruction();
+
+        $this->expectException(DomainException::class);
         $instruction->setAfterAttemptPolicy('wrong');
     }
 
     /**
      * @test
-     * @expectedException DomainException
      */
     public function afterRetryEndPolicyMustBeCorrect()
     {
         $instruction = new PaymentRetryInstruction();
+
+        $this->expectException(DomainException::class);
         $instruction->setAfterRetryEndPolicy('wrong');
     }
 
