@@ -8,7 +8,7 @@ matrix:
     - php: 7.1
       env:
         - EXECUTE_COVERAGE=true
-        - EXECUTE_CS_CHECK=true
+        - EXECUTE_CS_CHECK=false
     - php: 7.2
 
 notifications:
