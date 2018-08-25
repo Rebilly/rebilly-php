@@ -92,9 +92,11 @@ final class EmailNotificationService extends Service
 
     /**
      * @param array $data
+     *
+     * @return EmailNotification
      */
     public function preview($data)
     {
-        $this->client()->post($data, 'previews/email-notifications/send-notification');
+        return $this->client()->post($data, 'previews/email-notifications/send-notification');
     }
 }

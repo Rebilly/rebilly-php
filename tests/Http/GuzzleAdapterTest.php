@@ -36,7 +36,7 @@ class GuzzleAdapterTest extends TestCase
         $response = $client->createResponse()->withStatus('204');
 
         /** @var GuzzleClient|MockObject $guzzle */
-        $guzzle = $this->getMock(GuzzleClient::class);
+        $guzzle = $this->createMock(GuzzleClient::class);
         $guzzle
             ->expects($this->any())
             ->method('send')
@@ -61,7 +61,7 @@ class GuzzleAdapterTest extends TestCase
         $request = $client->createRequest('GET', 'http://google.com', null);
 
         /** @var GuzzleClient|MockObject $guzzle */
-        $guzzle = $this->getMock(GuzzleClient::class);
+        $guzzle = $this->createMock(GuzzleClient::class);
         $guzzle
             ->expects($this->any())
             ->method('send')

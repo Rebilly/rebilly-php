@@ -10,7 +10,7 @@
 
 namespace Rebilly\Tests\Util;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use Rebilly\Tests\TestCase;
 use Rebilly\Util\RebillySignature;
 use RuntimeException;
 

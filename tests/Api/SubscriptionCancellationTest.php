@@ -20,32 +20,35 @@ use Rebilly\Tests\TestCase as BaseTestCase;
 class SubscriptionCancellationTest extends BaseTestCase
 {
     /**
-     * @expectedException DomainException
      * @test
      */
     public function cancelStatusMustBeCorrect()
     {
         $subscriptionCancel = new SubscriptionCancellation();
+
+        $this->expectException(DomainException::class);
         $subscriptionCancel->setStatus('wrong');
     }
 
     /**
-     * @expectedException DomainException
      * @test
      */
     public function cancelCategoryMustBeCorrect()
     {
         $subscriptionCancel = new SubscriptionCancellation();
+
+        $this->expectException(DomainException::class);
         $subscriptionCancel->setReason('wrong');
     }
 
     /**
-     * @expectedException DomainException
      * @test
      */
     public function canceledByMustBeCorrect()
     {
         $subscriptionCancel = new SubscriptionCancellation();
+
+        $this->expectException(DomainException::class);
         $subscriptionCancel->setCanceledBy('wrong');
     }
 }

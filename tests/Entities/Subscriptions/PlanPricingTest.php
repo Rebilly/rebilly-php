@@ -184,7 +184,7 @@ final class PlanPricingTest extends TestCase
      */
     public function failOnInvalidData()
     {
-        $this->setExpectedException(DomainException::class, PlanPricing::REQUIRED_FORMULA);
+        $this->expectExceptionObject(new DomainException(PlanPricing::REQUIRED_FORMULA));
         PlanPricing::createFromData(
             [
                 'price' => 10.0,
@@ -198,9 +198,10 @@ final class PlanPricingTest extends TestCase
      */
     public function failOnInvalidFormula()
     {
-        $this->setExpectedException(
-            DomainException::class,
-            sprintf(PlanPricing::UNSUPPORTED_FORMULA, implode(',', PlanPricing::getAvailableFormulas()))
+        $this->expectExceptionObject(
+            new DomainException(
+                sprintf(PlanPricing::UNSUPPORTED_FORMULA, implode(',', PlanPricing::getAvailableFormulas()))
+            )
         );
         PlanPricing::createFromData(
             [

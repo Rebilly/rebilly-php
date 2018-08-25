@@ -22,13 +22,14 @@ class ValuesListTest extends BaseTestCase
     /**
      * @test
      * @dataProvider provideInvalidData
-     * @expectedException DomainException
      *
      * @param $values
      */
     public function exceptionOnWrongValues($values)
     {
         $valuesList = new ValuesList();
+
+        $this->expectException(DomainException::class);
         $valuesList->setValues($values);
     }
 
@@ -38,16 +39,21 @@ class ValuesListTest extends BaseTestCase
     public function addValue()
     {
         $valuesList = new ValuesList();
+        self::assertNull($valuesList->getValues());
+
         $valuesList->addValue('test');
+        self::assertContains('test', $valuesList->getValues());
     }
 
     /**
      * @test
-     * @expectedException DomainException
      */
     public function exceptionOnWrongValue()
     {
+        /** @var mixed $valuesList */
         $valuesList = new ValuesList();
+
+        $this->expectException(DomainException::class);
         $valuesList->addValue([]);
     }
 
