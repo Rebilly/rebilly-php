@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Services;
@@ -20,8 +21,6 @@ use Rebilly\Rest\Service;
 /**
  * Class ApiKeyService
  *
- * @author Maksim Tuzov <maksim.tuzov@rebilly.com>
- * @version 0.1
  */
 final class ApiKeyService extends Service
 {
@@ -70,9 +69,9 @@ final class ApiKeyService extends Service
     {
         if (isset($apiKeyId)) {
             return $this->client()->put($data, 'api-keys/{apiKeyId}', ['apiKeyId' => $apiKeyId]);
-        } else {
-            return $this->client()->post($data, 'api-keys');
         }
+
+        return $this->client()->post($data, 'api-keys');
     }
 
     /**

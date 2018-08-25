@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Tests\Api;
@@ -61,19 +62,19 @@ class ShippingTest extends BaseTestCase
                 [
                     'price' => 1.2,
                     'currency' => 'USD',
-                ]
+                ],
             ],
             'Empty price' => [
                 [
                     'name' => 'test name',
                     'currency' => 'USD',
-                ]
+                ],
             ],
             'Empty currency' => [
                 [
                     'name' => 'test name',
                     'price' => 1.2,
-                ]
+                ],
             ],
         ];
     }

@@ -1,13 +1,13 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2016 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
-
 
 namespace Rebilly\Tests\Api;
 
@@ -17,7 +17,6 @@ use Rebilly\Rest\Collection;
 /**
  * Class BankAccountTest.
  *
- * @author Dara Pich <dara.pich@rebilly.com>
  */
 
 class PayPalAccountTest extends TestCase
@@ -45,14 +44,14 @@ class PayPalAccountTest extends TestCase
         $client = $this->getClient();
 
         $form = new PayPalAccount();
-        $form->setCustomerId("customerId");
-        $form->setContactId("contactId");
-        $form->setUserName("paypal123");
+        $form->setCustomerId('customerId');
+        $form->setContactId('contactId');
+        $form->setUserName('paypal123');
 
         $payPalAccount = $client->bankAccounts()->create($form);
 
         $this->assertInstanceOf(PayPalAccount::class, $payPalAccount);
-        $this->assertEquals($form->getCustomerId(), $payPalAccount->getCustomerId());
-        $this->assertEquals($form->getContactId(), $payPalAccount->getContactId());
+        $this->assertSame($form->getCustomerId(), $payPalAccount->getCustomerId());
+        $this->assertSame($form->getContactId(), $payPalAccount->getContactId());
     }
 }

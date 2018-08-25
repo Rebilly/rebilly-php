@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Entities;
@@ -36,25 +37,32 @@ use Rebilly\Rest\Entity;
  * }
  * ```
  *
- * @author Arman Tuyakbayev <arman.tuyakbayev@rebilly.com>
- * @version 0.1
  */
 final class Dispute extends Entity
 {
-    const TYPE_1CB = 'first-chargeback';
-    const TYPE_2CB = 'second-chargeback';
-    const TYPE_RET = 'information-request';
-    const TYPE_ARB = 'arbitration';
+    public const TYPE_1CB = 'first-chargeback';
 
-    const STATUS_RESPONSE_NEEDED = 'response-needed';
-    const STATUS_UNDER_REVIEW = 'under-review';
-    const STATUS_FORFEITED = 'forfeited';
-    const STATUS_WON = 'won';
-    const STATUS_LOST = 'lost';
+    public const TYPE_2CB = 'second-chargeback';
 
-    const MSG_UNEXPECTED_TYPE = 'Unexpected type. Only %s type support';
-    const MSG_UNEXPECTED_STATUS = 'Unexpected status. Only %s status support';
-    const MSG_UNEXPECTED_REASON_CODE = 'Unexpected reason code. Only %s reason code support';
+    public const TYPE_RET = 'information-request';
+
+    public const TYPE_ARB = 'arbitration';
+
+    public const STATUS_RESPONSE_NEEDED = 'response-needed';
+
+    public const STATUS_UNDER_REVIEW = 'under-review';
+
+    public const STATUS_FORFEITED = 'forfeited';
+
+    public const STATUS_WON = 'won';
+
+    public const STATUS_LOST = 'lost';
+
+    public const MSG_UNEXPECTED_TYPE = 'Unexpected type. Only %s type support';
+
+    public const MSG_UNEXPECTED_STATUS = 'Unexpected status. Only %s status support';
+
+    public const MSG_UNEXPECTED_REASON_CODE = 'Unexpected reason code. Only %s reason code support';
 
     /**
      * @return array
@@ -297,7 +305,7 @@ final class Dispute extends Entity
     {
         $allowedReasonCodes = self::allowedReasonCodes();
 
-        if (!in_array($value, $allowedReasonCodes)) {
+        if (!in_array($value, $allowedReasonCodes, true)) {
             throw new DomainException(sprintf(self::MSG_UNEXPECTED_REASON_CODE, implode(', ', $allowedReasonCodes)));
         }
 
@@ -315,15 +323,15 @@ final class Dispute extends Entity
     /**
      * @param string $value
      *
+     * @throws DomainException
      * @return $this
      *
-     * @throws DomainException
      */
     public function setType($value)
     {
         $allowedTypes = self::allowedTypes();
 
-        if (!in_array($value, $allowedTypes)) {
+        if (!in_array($value, $allowedTypes, true)) {
             throw new DomainException(sprintf(self::MSG_UNEXPECTED_TYPE, implode(', ', $allowedTypes)));
         }
 
@@ -341,15 +349,15 @@ final class Dispute extends Entity
     /**
      * @param string $value
      *
+     * @throws DomainException
      * @return $this
      *
-     * @throws DomainException
      */
     public function setStatus($value)
     {
         $allowedStatuses = self::allowedStatuses();
 
-        if (!in_array($value, $allowedStatuses)) {
+        if (!in_array($value, $allowedStatuses, true)) {
             throw new DomainException(sprintf(self::MSG_UNEXPECTED_STATUS, implode(', ', $allowedStatuses)));
         }
 

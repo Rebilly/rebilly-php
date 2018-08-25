@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2016 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Entities\Coupons;
@@ -18,11 +19,13 @@ use Rebilly\Rest\Resource;
  */
 abstract class Discount extends Resource
 {
-    const MSG_UNSUPPORTED_TYPE = 'Unexpected type. Only %s types support';
-    const MSG_REQUIRED_TYPE = 'Type is required';
+    public const MSG_UNSUPPORTED_TYPE = 'Unexpected type. Only %s types support';
 
-    const TYPE_FIXED = 'fixed';
-    const TYPE_PERCENT = 'percent';
+    public const MSG_REQUIRED_TYPE = 'Type is required';
+
+    public const TYPE_FIXED = 'fixed';
+
+    public const TYPE_PERCENT = 'percent';
 
     private static $supportedTypes = [
         self::TYPE_FIXED,
@@ -51,9 +54,11 @@ abstract class Discount extends Resource
         switch ($data['type']) {
             case self::TYPE_FIXED:
                 $discount = new Discounts\Fixed($data);
+
                 break;
             case self::TYPE_PERCENT:
                 $discount = new Discounts\Percent($data);
+
                 break;
             default:
                 throw new DomainException(

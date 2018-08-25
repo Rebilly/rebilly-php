@@ -1,19 +1,20 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Tests\Rest;
 
 use ArrayObject;
 use DomainException;
-use OutOfRangeException;
 use LogicException;
+use OutOfRangeException;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Factory;
 use Rebilly\Tests\Stub\EntityStub;
@@ -23,11 +24,11 @@ use RuntimeException;
 /**
  * Class ResourcesTest.
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  */
 class ResourcesTest extends TestCase
 {
     private $fakeDate;
+
     private $fakeData = [];
 
     /** @var Factory */
@@ -98,8 +99,8 @@ class ResourcesTest extends TestCase
         $resource->populate($this->fakeData);
 
         $this->assertInstanceOf(EntityStub::class, $resource);
-        $this->assertEquals('uuid', $resource->getId());
-        $this->assertEquals($this->fakeDate, $resource->getUpdatedTime());
+        $this->assertSame('uuid', $resource->getId());
+        $this->assertSame($this->fakeDate, $resource->getUpdatedTime());
 
         $resource->offsetUnset('field1');
         $resource->offsetSet('field2', 'dummy');
@@ -108,15 +109,15 @@ class ResourcesTest extends TestCase
         $this->assertTrue(isset($resource['field2']));
         $this->assertFalse(isset($resource['field3']));
 
-        $this->assertEquals(null, $resource->offsetGet('field1'));
-        $this->assertEquals('dummy', $resource->offsetGet('field2'));
+        $this->assertSame(null, $resource->offsetGet('field1'));
+        $this->assertSame('dummy', $resource->offsetGet('field2'));
 
-        $this->assertEquals(['attribute' => 'value'], $resource->getRelation1());
-        $this->assertEquals(null, $resource->getRelation2());
+        $this->assertSame(['attribute' => 'value'], $resource->getRelation1());
+        $this->assertSame(null, $resource->getRelation2());
 
-        $this->assertEquals('http://example.com', $resource->getSelfLink());
+        $this->assertSame('http://example.com', $resource->getSelfLink());
 
-        $this->assertEquals('value', $resource->getCustomMetadata());
+        $this->assertSame('value', $resource->getCustomMetadata());
 
         return $resource;
     }
@@ -133,8 +134,8 @@ class ResourcesTest extends TestCase
 
         $clone->offsetSet('field1', 'dummy');
 
-        $this->assertEquals(null, $resource->offsetGet('field1'));
-        $this->assertEquals('dummy', $clone->offsetGet('field1'));
+        $this->assertSame(null, $resource->offsetGet('field1'));
+        $this->assertSame('dummy', $clone->offsetGet('field1'));
     }
 
     /**
@@ -149,7 +150,6 @@ class ResourcesTest extends TestCase
 
         $this->assertTrue(isset($json['field2']));
     }
-
 
     /**
      * @test
@@ -245,9 +245,9 @@ class ResourcesTest extends TestCase
         $this->assertInstanceOf(Collection::class, $set);
         $this->assertGreaterThan(0, count($set));
 
-        $this->assertEquals(1, $set->getTotalItems());
-        $this->assertEquals(100, $set->getLimit());
-        $this->assertEquals(0, $set->getOffset());
+        $this->assertSame(1, $set->getTotalItems());
+        $this->assertSame(100, $set->getLimit());
+        $this->assertSame(0, $set->getOffset());
 
         return $set;
     }
@@ -261,7 +261,7 @@ class ResourcesTest extends TestCase
     public function cloneCollection(Collection $set)
     {
         $clone = clone $set;
-        $this->assertNotEquals(spl_object_hash($set[0]), spl_object_hash($clone[0]));
+        $this->assertNotSame(spl_object_hash($set[0]), spl_object_hash($clone[0]));
     }
 
     /**

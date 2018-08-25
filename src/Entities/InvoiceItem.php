@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Entities;
@@ -18,10 +19,11 @@ use Rebilly\Rest\Entity;
  */
 final class InvoiceItem extends Entity
 {
-    const MSG_UNEXPECTED_TYPE = 'Unexpected type. Only %s types support';
+    public const MSG_UNEXPECTED_TYPE = 'Unexpected type. Only %s types support';
 
-    const TYPE_CREDIT = 'credit';
-    const TYPE_DEBIT = 'debit';
+    public const TYPE_CREDIT = 'credit';
+
+    public const TYPE_DEBIT = 'debit';
 
     /**
      * @return array
@@ -42,12 +44,12 @@ final class InvoiceItem extends Entity
     /**
      * @param string $value
      *
-     * @return $this
      * @throws DomainException
+     * @return $this
      */
     public function setType($value)
     {
-        if (!in_array($value, self::types())) {
+        if (!in_array($value, self::types(), true)) {
             throw new DomainException(sprintf(self::MSG_UNEXPECTED_TYPE, implode(', ', self::types())));
         }
 

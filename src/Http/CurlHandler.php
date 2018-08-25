@@ -1,24 +1,23 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Http;
 
-use RuntimeException;
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use RuntimeException;
 
 /**
  * Class CurlHandler
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
- * @version 0.1
  */
 class CurlHandler implements HttpHandler
 {
@@ -80,9 +79,11 @@ class CurlHandler implements HttpHandler
         switch ($request->getMethod()) {
             case 'HEAD':
                 $options[CURLOPT_NOBODY] = true;
+
                 break;
             case 'GET':
                 $options[CURLOPT_HTTPGET] = true;
+
                 break;
             case 'POST':
                 $options[CURLOPT_POST] = true;
@@ -91,6 +92,7 @@ class CurlHandler implements HttpHandler
                 // Don't duplicate the Content-Length header
                 $request = $request->withoutHeader('Content-Length');
                 $request = $request->withoutHeader('Transfer-Encoding');
+
                 break;
             case 'PUT':
                 // Write to memory/temp
@@ -103,6 +105,7 @@ class CurlHandler implements HttpHandler
                 $options[CURLOPT_INFILESIZE] = $bytes;
 
                 $request = $request->withoutHeader('Content-Length');
+
                 break;
             case 'PATCH':
                 $options[CURLOPT_CUSTOMREQUEST] = 'PATCH';
@@ -111,6 +114,7 @@ class CurlHandler implements HttpHandler
                 // Don't duplicate the Content-Length header
                 $request = $request->withoutHeader('Content-Length');
                 $request = $request->withoutHeader('Transfer-Encoding');
+
                 break;
             default:
                 $options[CURLOPT_CUSTOMREQUEST] = $request->getMethod();
@@ -126,7 +130,7 @@ class CurlHandler implements HttpHandler
             $options[CURLOPT_HTTPHEADER][] = 'Content-Type:';
         }
 
-        list($body, $headerLines) = $this->execute($options);
+        [$body, $headerLines] = $this->execute($options);
 
         $headerLines = preg_split("#\r\n#", $headerLines, -1, PREG_SPLIT_NO_EMPTY);
 
@@ -135,10 +139,10 @@ class CurlHandler implements HttpHandler
         // Extract the version and status from the first header
         preg_match('#HTTP/(\d\.\d)\s(\d\d\d)\s(.*)#', array_shift($headerLines), $matches);
         array_shift($matches);
-        list($protocolVersion, $statusCode, $reasonPhrase) = $matches;
+        [$protocolVersion, $statusCode, $reasonPhrase] = $matches;
 
         foreach ($headerLines as $line) {
-            list($name, $values) = preg_split('#\s*:\s*#', $line, 2, PREG_SPLIT_NO_EMPTY);
+            [$name, $values] = preg_split('#\s*:\s*#', $line, 2, PREG_SPLIT_NO_EMPTY);
             $headers[$name] = preg_split('#\s*,\s*#', $values, -1, PREG_SPLIT_NO_EMPTY);
         }
 
@@ -185,7 +189,7 @@ class CurlHandler implements HttpHandler
 
             $result = [
                 substr($result, $headerSize) ?: null,
-                substr($result, 0, $headerSize) ?: null
+                substr($result, 0, $headerSize) ?: null,
             ];
         } finally {
             $session->close();

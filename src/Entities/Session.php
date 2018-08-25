@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Entities;
@@ -28,24 +29,32 @@ use Rebilly\Rest\Entity;
  * }
  * ```
  *
- * @author Arman Tuyakbayev <arman.tuyakbayev@rebilly.com>
- * @version 0.1
  */
 final class Session extends Entity
 {
-    const METHOD_POST = 'POST';
-    const METHOD_GET = 'GET';
-    const METHOD_PUT = 'PUT';
-    const METHOD_DELETE = 'DELETE';
-    const METHOD_HEAD = 'HEAD';
-    const METHOD_PATCH = 'PATCH';
+    public const METHOD_POST = 'POST';
 
-    const MSG_UNEXPECTED_RESOURCE = 'Unexpected resource. Only %s resources support';
-    const MSG_INVALID_RESOURCE_IDS = 'Incorrect resource ids format. It should be empty or an array';
-    const MSG_INVALID_METHODS = 'Incorrect methods format. It should be empty or an array';
-    const MSG_UNEXPECTED_METHOD = 'Unexpected method. Only %s methods support';
-    const MSG_INVALID_FORMAT = 'Incorrect permissions format';
-    const MSG_MISSING_PROPERTY = 'Incorrect permissions format - missing %s property';
+    public const METHOD_GET = 'GET';
+
+    public const METHOD_PUT = 'PUT';
+
+    public const METHOD_DELETE = 'DELETE';
+
+    public const METHOD_HEAD = 'HEAD';
+
+    public const METHOD_PATCH = 'PATCH';
+
+    public const MSG_UNEXPECTED_RESOURCE = 'Unexpected resource. Only %s resources support';
+
+    public const MSG_INVALID_RESOURCE_IDS = 'Incorrect resource ids format. It should be empty or an array';
+
+    public const MSG_INVALID_METHODS = 'Incorrect methods format. It should be empty or an array';
+
+    public const MSG_UNEXPECTED_METHOD = 'Unexpected method. Only %s methods support';
+
+    public const MSG_INVALID_FORMAT = 'Incorrect permissions format';
+
+    public const MSG_MISSING_PROPERTY = 'Incorrect permissions format - missing %s property';
 
     /**
      * @return string
@@ -99,7 +108,7 @@ final class Session extends Entity
         $allowedResources = self::allowedResources();
         $allowedMethods = self::allowedMethods();
 
-        if (null !== $value && !is_array($value)) {
+        if ($value !== null && !is_array($value)) {
             throw new DomainException(self::MSG_INVALID_FORMAT);
         }
 
@@ -108,7 +117,7 @@ final class Session extends Entity
                 throw new DomainException(self::MSG_INVALID_FORMAT);
             }
 
-            if (!empty($rule['resourceName']) && !in_array($rule['resourceName'], $allowedResources)) {
+            if (!empty($rule['resourceName']) && !in_array($rule['resourceName'], $allowedResources, true)) {
                 throw new DomainException(sprintf(self::MSG_UNEXPECTED_RESOURCE, implode(', ', $allowedResources)));
             }
 
@@ -122,7 +131,7 @@ final class Session extends Entity
 
             if (!empty($rule['methods'])) {
                 foreach ($rule['methods'] as $method) {
-                    if (!in_array($method, $allowedMethods)) {
+                    if (!in_array($method, $allowedMethods, true)) {
                         throw new DomainException(sprintf(self::MSG_UNEXPECTED_METHOD, implode(', ', $allowedMethods)));
                     }
                 }

@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Entities;
@@ -37,16 +38,14 @@ use Rebilly\Rest\Entity;
  * @todo Rename property `customer` to `customerId`
  * @todo Rename property `billingContact` to `billingContactId`
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
- * @version 0.1
  */
 final class PaymentCard extends Entity
 {
-    const STATUS_ACTIVE = 'active';
+    public const STATUS_ACTIVE = 'active';
 
-    const STATUS_INACTIVE = 'inactive';
+    public const STATUS_INACTIVE = 'inactive';
 
-    const STATUS_DEACTIVATED = 'deactivated';
+    public const STATUS_DEACTIVATED = 'deactivated';
 
     /**
      * @param string $value
@@ -117,7 +116,7 @@ final class PaymentCard extends Entity
      */
     public function setStatus($value)
     {
-        if (!in_array($value, [self::STATUS_INACTIVE, self::STATUS_ACTIVE, self::STATUS_DEACTIVATED])) {
+        if (!in_array($value, [self::STATUS_INACTIVE, self::STATUS_ACTIVE, self::STATUS_DEACTIVATED], true)) {
             throw new DomainException('Payment Card status is not in the list');
         }
 

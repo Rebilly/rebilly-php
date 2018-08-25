@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Entities\Subscriptions;
@@ -15,14 +16,19 @@ use Rebilly\Rest\Resource;
 
 abstract class PlanPricing extends Resource
 {
-    const UNSUPPORTED_FORMULA = 'Unexpected formula. Only %s methods are supported';
-    const REQUIRED_FORMULA = 'Formula is required';
+    public const UNSUPPORTED_FORMULA = 'Unexpected formula. Only %s methods are supported';
 
-    const FLAT_RATE = 'flat-rate';
-    const FIXED_FEE = 'fixed-fee';
-    const STAIRSTEP = 'stairstep';
-    const TIERED = 'tiered';
-    const VOLUME = 'volume';
+    public const REQUIRED_FORMULA = 'Formula is required';
+
+    public const FLAT_RATE = 'flat-rate';
+
+    public const FIXED_FEE = 'fixed-fee';
+
+    public const STAIRSTEP = 'stairstep';
+
+    public const TIERED = 'tiered';
+
+    public const VOLUME = 'volume';
 
     public function __construct(array $data = [])
     {

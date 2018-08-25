@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Entities;
@@ -17,8 +18,6 @@ use Rebilly\Rest\Entity;
  *
  * @see http://rebilly.github.io/RebillyAPI/#tag/Payment%20Tokens
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
- * @version 0.1
  */
 final class PaymentCardToken extends Entity
 {
@@ -377,6 +376,6 @@ final class PaymentCardToken extends Entity
     {
         $data = (array) $this->getAttribute('paymentInstrument');
 
-        return isset($data[$attribute]) ? $data[$attribute] : null;
+        return $data[$attribute] ?? null;
     }
 }

@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Entities\PaymentRetryInstructions;
@@ -23,14 +24,19 @@ use Rebilly\Rest\Resource;
  */
 abstract class ScheduleInstruction extends Resource
 {
-    const UNSUPPORTED_METHOD = 'Unexpected method. Only %s methods are supported';
-    const REQUIRED_METHOD = 'Method is required';
+    public const UNSUPPORTED_METHOD = 'Unexpected method. Only %s methods are supported';
 
-    const AUTO = 'auto';
-    const DATE_INTERVAL = 'date-interval';
-    const DAY_OF_MONTH = 'day-of-month';
-    const DAY_OF_WEEK = 'day-of-week';
-    const IMMEDIATELY = 'immediately';
+    public const REQUIRED_METHOD = 'Method is required';
+
+    public const AUTO = 'auto';
+
+    public const DATE_INTERVAL = 'date-interval';
+
+    public const DAY_OF_MONTH = 'day-of-month';
+
+    public const DAY_OF_WEEK = 'day-of-week';
+
+    public const IMMEDIATELY = 'immediately';
 
     private static $availableMethods = [
         self::AUTO,
@@ -62,18 +68,23 @@ abstract class ScheduleInstruction extends Resource
         switch ($data['method']) {
             case self::AUTO:
                 $scheduleInstruction = new AutoType($data);
+
                 break;
             case self::DATE_INTERVAL:
                 $scheduleInstruction = new DateIntervalType($data);
+
                 break;
             case self::DAY_OF_MONTH:
                 $scheduleInstruction = new DayOfMonthType($data);
+
                 break;
             case self::DAY_OF_WEEK:
                 $scheduleInstruction = new DayOfWeekType($data);
+
                 break;
             case self::IMMEDIATELY:
                 $scheduleInstruction = new ImmediatelyType($data);
+
                 break;
             default:
                 throw new DomainException(

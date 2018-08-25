@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Services;
@@ -22,8 +23,6 @@ use Rebilly\Rest\Service;
 /**
  * Class CustomFieldService
  *
- * @author Arman Tuyakbayev <arman.tuyakbayev@rebilly.com>
- * @version 0.1
  */
 final class CustomFieldService extends Service
 {
@@ -35,8 +34,11 @@ final class CustomFieldService extends Service
      */
     public function paginator($resourceType, $params = [])
     {
-        return new Paginator($this->client(), 'custom-fields/{resourceType}',
-            ['resourceType' => $resourceType] + (array) $params);
+        return new Paginator(
+            $this->client(),
+            'custom-fields/{resourceType}',
+            ['resourceType' => $resourceType] + (array) $params
+        );
     }
 
     /**
@@ -81,7 +83,7 @@ final class CustomFieldService extends Service
     {
         return $this->client()->get('custom-fields/{resourceType}/{name}', [
                 'resourceType' => $resourceType,
-                'name' => $name
+                'name' => $name,
             ] + (array) $params);
     }
 

@@ -1,30 +1,29 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Services;
 
 use ArrayObject;
 use JsonSerializable;
+use Rebilly\Entities;
 use Rebilly\Http\Exception\GoneException;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Paginator;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
-use Rebilly\Entities;
 
 /**
  * Class PaymentService
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
- * @version 0.1
  */
 final class PaymentService extends Service
 {
@@ -73,9 +72,9 @@ final class PaymentService extends Service
     {
         if (isset($paymentId)) {
             return $this->client()->put($payment, 'payments/{paymentId}', ['paymentId' => $paymentId]);
-        } else {
-            return $this->client()->post($payment, 'payments');
         }
+
+        return $this->client()->post($payment, 'payments');
     }
 
     /**

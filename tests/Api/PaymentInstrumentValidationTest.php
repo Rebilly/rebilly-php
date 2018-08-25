@@ -45,6 +45,6 @@ class PaymentInstrumentValidationTest extends TestCase
         $resource = $client->paymentInstrumentValidation()->create($form);
 
         $this->assertInstanceOf(PaymentInstrumentValidation::class, $resource);
-        $this->assertEquals($form->getPaymentInstrumentId(), $resource->getPaymentInstrumentId());
+        $this->assertSame($form->getPaymentInstrumentId(), $resource->getPaymentInstrumentId());
     }
 }

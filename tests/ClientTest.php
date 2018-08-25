@@ -1,17 +1,21 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Tests;
 
 use ArrayObject;
 use BadMethodCallException;
+use Psr\Http\Message\RequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\UriInterface as Uri;
 use Psr\Log\NullLogger;
 use Rebilly\ApiKeyProvider;
 use Rebilly\Client;
@@ -20,15 +24,10 @@ use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\ParamBag;
 use Rebilly\Rest\Service;
 use RuntimeException;
-use Psr\Http\Message\RequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\UriInterface as Uri;
 
 /**
  * Class ClientTest.
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
- * @version 0.1
  */
 final class ClientTest extends TestCase
 {
@@ -37,17 +36,17 @@ final class ClientTest extends TestCase
      */
     public function autoloadClasses()
     {
-        $this->assertEquals(true, class_exists(Client::class));
+        $this->assertSame(true, class_exists(Client::class));
 
         Client::autoload(ParamBag::class);
 
-        $this->assertEquals(true, class_exists(ParamBag::class, false));
+        $this->assertSame(true, class_exists(ParamBag::class, false));
 
         Client::registerAutoloader();
-        $this->assertTrue(in_array([Client::class, 'autoload'], spl_autoload_functions()));
+        $this->assertTrue(in_array([Client::class, 'autoload'], spl_autoload_functions(), true));
 
         Client::unregisterAutoloader();
-        $this->assertFalse(in_array([Client::class, 'autoload'], spl_autoload_functions()));
+        $this->assertFalse(in_array([Client::class, 'autoload'], spl_autoload_functions(), true));
     }
 
     /**
@@ -58,7 +57,7 @@ final class ClientTest extends TestCase
         try {
             new Client([]);
         } catch (RuntimeException $e) {
-            $this->assertEquals('Missing Authentication information', $e->getMessage());
+            $this->assertSame('Missing Authentication information', $e->getMessage());
         }
 
         try {
@@ -67,7 +66,7 @@ final class ClientTest extends TestCase
                 'httpHandler' => 'invalid',
             ]);
         } catch (RuntimeException $e) {
-            $this->assertEquals('HTTP handler should be callable', $e->getMessage());
+            $this->assertSame('HTTP handler should be callable', $e->getMessage());
         }
 
         try {
@@ -76,7 +75,7 @@ final class ClientTest extends TestCase
                 'logger' => 'invalid',
             ]);
         } catch (RuntimeException $e) {
-            $this->assertEquals('Logger should implement PSR-3 LoggerInterface', $e->getMessage());
+            $this->assertSame('Logger should implement PSR-3 LoggerInterface', $e->getMessage());
         }
 
         try {
@@ -85,14 +84,14 @@ final class ClientTest extends TestCase
                 'middleware' => 'invalid',
             ]);
         } catch (RuntimeException $e) {
-            $this->assertEquals('Middleware should be callable', $e->getMessage());
+            $this->assertSame('Middleware should be callable', $e->getMessage());
         }
 
         $client = new Client([
             'apiKey' => ApiKeyProvider::env(),
         ]);
 
-        $this->assertEquals(Client::BASE_HOST, $client->getOption('baseUrl'));
+        $this->assertSame(Client::BASE_HOST, $client->getOption('baseUrl'));
 
         $client = new Client([
             'apiKey' => ApiKeyProvider::env(),
@@ -153,7 +152,7 @@ final class ClientTest extends TestCase
         $response = $client->createResponse();
         $this->assertInstanceOf(Response::class, $response);
 
-        $this->assertEquals($response, call_user_func($client, $request, $response));
+        $this->assertSame($response, call_user_func($client, $request, $response));
     }
 
     /**
@@ -200,10 +199,10 @@ final class ClientTest extends TestCase
         try {
             $client->post([], 'customers');
         } catch (UnprocessableEntityException $e) {
-            $this->assertEquals($code, $e->getStatusCode());
+            $this->assertSame($code, $e->getStatusCode());
             $this->assertEmpty($e->getErrors());
         } catch (HttpException $e) {
-            $this->assertEquals($code, $e->getStatusCode());
+            $this->assertSame($code, $e->getStatusCode());
         }
     }
 

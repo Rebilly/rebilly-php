@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Entities;
@@ -22,8 +23,9 @@ use Rebilly\Rest\Resource;
  */
 abstract class PaymentMethodInstrument extends Resource
 {
-    const MSG_UNSUPPORTED_METHOD = 'Unexpected method. Only %s methods support';
-    const MSG_REQUIRED_METHOD = 'Method is required';
+    public const MSG_UNSUPPORTED_METHOD = 'Unexpected method. Only %s methods support';
+
+    public const MSG_REQUIRED_METHOD = 'Method is required';
 
     protected static $supportMethods = [
         PaymentMethod::METHOD_ACH,
@@ -54,15 +56,19 @@ abstract class PaymentMethodInstrument extends Resource
         switch ($data['method']) {
             case PaymentMethod::METHOD_ACH:
                 $paymentInstrument = new AchInstrument($data);
+
                 break;
             case PaymentMethod::METHOD_CASH:
                 $paymentInstrument = new CashInstrument($data);
+
                 break;
             case PaymentMethod::METHOD_PAYMENT_CARD:
                 $paymentInstrument = new PaymentCardInstrument($data);
+
                 break;
             case PaymentMethod::METHOD_PAYPAL:
                 $paymentInstrument = new PayPalInstrument($data);
+
                 break;
             default:
                 throw new DomainException(

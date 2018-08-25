@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Tests;
@@ -18,8 +19,6 @@ use UnexpectedValueException;
 /**
  * Class ApiKeyProviderTest.
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
- * @version 0.1
  */
 class ApiKeyProviderTest extends TestCase
 {
@@ -29,7 +28,7 @@ class ApiKeyProviderTest extends TestCase
      */
     protected function assertApiKey($expected, callable $provider)
     {
-        $this->assertEquals($expected, call_user_func($provider));
+        $this->assertSame($expected, call_user_func($provider));
     }
 
     /**
@@ -56,7 +55,6 @@ class ApiKeyProviderTest extends TestCase
         }
 
         $this->assertTrue(putenv('HOME='));
-
 
         $this->assertTrue(putenv('HOMEDRIVE=' . __DIR__));
         $this->assertTrue(putenv('HOMEPATH=' . '/..'));

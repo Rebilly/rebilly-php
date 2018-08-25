@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Services;
@@ -22,8 +23,6 @@ use Rebilly\Rest\Service;
 /**
  * Class CouponService
  *
- * @author Arman Tuyakbayev <arman.tuyakbayev@rebilly.com>
- * @version 0.1
  */
 final class CouponService extends Service
 {
@@ -72,9 +71,9 @@ final class CouponService extends Service
     {
         if (isset($redemptionCode)) {
             return $this->client()->put($data, 'coupons/{redemptionCode}', ['redemptionCode' => $redemptionCode]);
-        } else {
-            return $this->client()->post($data, 'coupons');
         }
+
+        return $this->client()->post($data, 'coupons');
     }
 
     /**
@@ -102,7 +101,8 @@ final class CouponService extends Service
     {
         return $this->client()->post(
             ['expiredTime' => $expiredTime],
-            'coupons/{redemptionCode}/expiration', ['redemptionCode' => $redemptionCode]
+            'coupons/{redemptionCode}/expiration',
+            ['redemptionCode' => $redemptionCode]
         );
     }
 }

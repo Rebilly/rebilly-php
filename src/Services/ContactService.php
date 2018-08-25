@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Services;
@@ -22,8 +23,6 @@ use Rebilly\Rest\Service;
 /**
  * Class ContactService
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
- * @version 0.1
  */
 final class ContactService extends Service
 {
@@ -72,9 +71,9 @@ final class ContactService extends Service
     {
         if (isset($contactId)) {
             return $this->client()->put($data, 'contacts/{contactId}', ['contactId' => $contactId]);
-        } else {
-            return $this->client()->post($data, 'contacts');
         }
+
+        return $this->client()->post($data, 'contacts');
     }
 
     /**

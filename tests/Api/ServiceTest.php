@@ -1,15 +1,19 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Tests\Api;
 
+use GuzzleHttp\Psr7;
+use PHPUnit_Framework_MockObject_MockObject as MockObject;
+use Psr\Http\Message\RequestInterface as Request;
 use Rebilly\Client;
 use Rebilly\Entities;
 use Rebilly\Entities\Customer;
@@ -22,9 +26,6 @@ use Rebilly\Rest;
 use Rebilly\Services;
 use Rebilly\Tests\Stub\JsonObject;
 use Rebilly\Tests\TestCase as BaseTestCase;
-use Psr\Http\Message\RequestInterface as Request;
-use GuzzleHttp\Psr7;
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
 
 /**
  * Class ServiceTest.
@@ -58,7 +59,7 @@ class ServiceTest extends BaseTestCase
                 }
 
                 return $response;
-            }
+            },
         ]);
 
         $service = $client->$name();
@@ -132,26 +133,26 @@ class ServiceTest extends BaseTestCase
 
         $customers = [
             [
-                "id" => "foo",
-                "email" => "user@example.com",
-                "firstName" => "string",
-                "lastName" => "string",
-                "ipAddress" => "192.168.0.1",
-                "defaultPaymentInstrument" => [
+                'id' => 'foo',
+                'email' => 'user@example.com',
+                'firstName' => 'string',
+                'lastName' => 'string',
+                'ipAddress' => '192.168.0.1',
+                'defaultPaymentInstrument' => [
                     'method' => 'cash',
                 ],
-                "createdTime" => "2016-10-18T06:39:36Z",
-                "updatedTime" => "2016-10-18T06:39:36Z",
+                'createdTime' => '2016-10-18T06:39:36Z',
+                'updatedTime' => '2016-10-18T06:39:36Z',
             ],
             [
-                "id" => "bar",
-                "email" => "user@example.com",
-                "firstName" => "string",
-                "lastName" => "string",
-                "ipAddress" => "192.168.0.1",
-                "defaultPaymentInstrument" => null,
-                "createdTime" => "2016-10-18T06:39:36Z",
-                "updatedTime" => "2016-10-18T06:39:36Z",
+                'id' => 'bar',
+                'email' => 'user@example.com',
+                'firstName' => 'string',
+                'lastName' => 'string',
+                'ipAddress' => '192.168.0.1',
+                'defaultPaymentInstrument' => null,
+                'createdTime' => '2016-10-18T06:39:36Z',
+                'updatedTime' => '2016-10-18T06:39:36Z',
             ],
         ];
 
@@ -700,7 +701,7 @@ class ServiceTest extends BaseTestCase
             ],
             new Entities\LayoutItem([
                 'planId' => $faker->uuid,
-            ])
+            ]),
         ]);
 
         $handler
@@ -1068,7 +1069,7 @@ class ServiceTest extends BaseTestCase
                 }
 
                 return $response;
-            }
+            },
         ]);
 
         $service = $client->gatewayDowntimes();

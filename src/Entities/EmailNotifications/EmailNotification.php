@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2018 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Entities\EmailNotifications;
@@ -13,14 +14,11 @@ namespace Rebilly\Entities\EmailNotifications;
 use DomainException;
 use Rebilly\Rest\Entity;
 
-/**
- * @author Arman Tuyakbayev <arman.tuyakbayev@rebilly.com>
- * @version 0.1
- */
 final class EmailNotification extends Entity
 {
-    const MSG_UNEXPECTED_NOTIFICATIONS = 'Unexpected notifications type, it must be an array of Notification';
-    const MSG_UNEXPECTED_TAGS = 'Unexpected tags, it must be an array of strings';
+    public const MSG_UNEXPECTED_NOTIFICATIONS = 'Unexpected notifications type, it must be an array of Notification';
+
+    public const MSG_UNEXPECTED_TAGS = 'Unexpected tags, it must be an array of strings';
 
     /**
      * @return string

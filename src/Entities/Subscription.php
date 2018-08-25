@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Entities;
@@ -29,8 +30,6 @@ use Rebilly\Rest\Entity;
  * }
  * ```
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
- * @version 0.1
  */
 final class Subscription extends Entity
 {
@@ -57,9 +56,9 @@ final class Subscription extends Entity
     {
         if ($this->hasEmbeddedResource('customer')) {
             return new Customer($this->getEmbeddedResource('customer'));
-        } else {
-            return null;
         }
+
+        return null;
     }
 
     /**
@@ -105,9 +104,9 @@ final class Subscription extends Entity
     {
         if ($this->hasEmbeddedResource('plan')) {
             return new Plan($this->getEmbeddedResource('plan'));
-        } else {
-            return null;
         }
+
+        return null;
     }
 
     /**
@@ -135,9 +134,9 @@ final class Subscription extends Entity
     {
         if ($this->hasEmbeddedResource('website')) {
             return new Website($this->getEmbeddedResource('website'));
-        } else {
-            return null;
         }
+
+        return null;
     }
 
     /**
@@ -187,9 +186,9 @@ final class Subscription extends Entity
     {
         if ($this->hasEmbeddedResource('billingContact')) {
             return new Contact($this->getEmbeddedResource('billingContact'));
-        } else {
-            return null;
         }
+
+        return null;
     }
 
     /**
@@ -220,9 +219,9 @@ final class Subscription extends Entity
     {
         if ($this->hasEmbeddedResource('deliveryContact')) {
             return new Contact($this->getEmbeddedResource('deliveryContact'));
-        } else {
-            return null;
         }
+
+        return null;
     }
 
     /**
@@ -369,9 +368,9 @@ final class Subscription extends Entity
     {
         if ($this->hasEmbeddedResource('leadSource')) {
             return new LeadSource($this->getEmbeddedResource('leadSource'));
-        } else {
-            return null;
         }
+
+        return null;
     }
 
     /**

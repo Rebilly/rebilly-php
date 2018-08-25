@@ -1,24 +1,24 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Tests\Middleware;
 
+use Psr\Http\Message\RequestInterface as Request;
 use Rebilly\Client;
 use Rebilly\Middleware\ApiKeyAuthentication;
 use Rebilly\Tests\TestCase as TestCase;
-use Psr\Http\Message\RequestInterface as Request;
 
 /**
  * Class ApiKeyAuthenticationTest.
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  */
 class ApiKeyAuthenticationTest extends TestCase
 {
@@ -43,6 +43,6 @@ class ApiKeyAuthenticationTest extends TestCase
         $result = call_user_func($middleware, $request, $response, $done);
 
         $this->assertTrue($result->hasHeader(ApiKeyAuthentication::HEADER));
-        $this->assertEquals('QWERTY', $result->getHeaderLine(ApiKeyAuthentication::HEADER));
+        $this->assertSame('QWERTY', $result->getHeaderLine(ApiKeyAuthentication::HEADER));
     }
 }
