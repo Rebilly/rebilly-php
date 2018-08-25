@@ -21,7 +21,8 @@
     "ext-curl": "*",
     "ext-json": "*",
     "psr/http-message": "~1.0",
-    "guzzlehttp/psr7": "~1.0"
+    "guzzlehttp/psr7": "~1.0",
+    "php-coveralls/php-coveralls": "^2.1"
   },
   "autoload": {
     "psr-4": {
@@ -32,8 +33,7 @@
     "phpunit/phpunit": "~4.7",
     "guzzlehttp/guzzle": "~6.0",
     "fzaninotto/faker": "~1.5",
-    "fabpot/php-cs-fixer": "~1.10",
-    "satooshi/php-coveralls": "dev-master"
+    "friendsofphp/php-cs-fixer": "~1.10"
   },
   "autoload-dev": {
     "psr-4": {
