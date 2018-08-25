@@ -21,9 +21,7 @@
     "ext-curl": "*",
     "ext-json": "*",
     "psr/http-message": "~1.0",
-    "guzzlehttp/psr7": "~1.0",
-    "php-coveralls/php-coveralls": "^2.1",
-    "friendsofphp/php-cs-fixer": "^2.13"
+    "guzzlehttp/psr7": "~1.0"
   },
   "autoload": {
     "psr-4": {
@@ -31,9 +29,11 @@
     }
   },
   "require-dev": {
-    "phpunit/phpunit": "~4.7",
-    "guzzlehttp/guzzle": "~6.0",
-    "fzaninotto/faker": "~1.5"
+    "phpunit/phpunit": "^7.3",
+    "php-coveralls/php-coveralls": "^2.1",
+    "friendsofphp/php-cs-fixer": "^2.13",
+    "fzaninotto/faker": "~1.5",
+    "guzzlehttp/guzzle": "~6.0"
   },
   "autoload-dev": {
     "psr-4": {
