@@ -19,34 +19,26 @@ use Rebilly\Rest\Resource;
  */
 class Rate extends Resource
 {
-    // @var string
-    private $name;
-
-    // @var float
-    private $minOrderSubtotal;
-
-    // @var float
-    private $maxOrderSubtotal;
-
-    // @var float
-    private $price;
-
-    // @var string
-    private $currency;
-
     public const MSG_REQUIRED_NAME = 'Name can not be blank.';
 
     public const MSG_REQUIRED_PRICE = 'Price can not be blank.';
 
     public const MSG_REQUIRED_CURRENCY = 'Currency can not be blank.';
 
-    /**
-     * {@inheritdoc}
-     */
-    public function __construct(array $data = [])
-    {
-        parent::__construct($data);
-    }
+    /** @var string */
+    private $name;
+
+    /** @var float */
+    private $minOrderSubtotal;
+
+    /** @var float */
+    private $maxOrderSubtotal;
+
+    /** @var float */
+    private $price;
+
+    /** @var string */
+    private $currency;
 
     /**
      * @param array $data
