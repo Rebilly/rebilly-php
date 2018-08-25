@@ -10,6 +10,9 @@ matrix:
         - EXECUTE_COVERAGE=true
         - EXECUTE_CS_CHECK=false
     - php: 7.2
+    - php: 7.3
+  allow_failures:
+    - php: 7.3
 
 notifications:
   email: false
