@@ -122,9 +122,6 @@ abstract class TestCase extends BaseTestCase
             case 'unitPrice':
             case 'unitPriceAmount':
             case 'amount':
-            case 'recurringAmount':
-            case 'trialAmount':
-            case 'setupAmount':
                 return $faker->randomFloat(2);
             case 'uriPath':
             case 'gatewayName':
@@ -222,10 +219,6 @@ abstract class TestCase extends BaseTestCase
             case 'authTokenTtl':
             case 'resetTokenTtl':
             case 'quantity':
-            case 'recurringPeriodLength':
-            case 'trialPeriodLength':
-            case 'contractTermLength':
-            case 'recurringPeriodLimit':
             case 'minQuantity':
             case 'maxQuantity':
             case 'monthlyLimit':
@@ -353,10 +346,6 @@ abstract class TestCase extends BaseTestCase
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
                         );
                 }
-            case 'recurringPeriodUnit':
-            case 'trialPeriodUnit':
-            case 'contractTermUnit':
-                return 'day'; // TODO
             case 'passwordPattern':
                 return '/\w\d{6,}/';
             case 'currency':
@@ -594,6 +583,14 @@ abstract class TestCase extends BaseTestCase
                 return new Entities\LeadSource([
                     'source' => 'Rebilly',
                 ]);
+            case 'pricing':
+                return new Entities\Subscriptions\Pricing\FixedFee(['price' => 1.0]);
+            case 'recurringInterval':
+                return new Entities\Subscriptions\RecurringInterval(['unit' => 'day', 'length' => 1, 'limit' => 10]);
+            case 'trial':
+                return new Entities\Subscriptions\PlanTrial(['price' => 1.0, 'period' => ['unit' => 'day', 'length' => 1]]);
+            case 'setup':
+                return new Entities\Subscriptions\PlanSetup(['price' => 1.0]);
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)

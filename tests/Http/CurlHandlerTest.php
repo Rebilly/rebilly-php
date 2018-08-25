@@ -10,16 +10,15 @@
 
 namespace Rebilly\Tests\Http;
 
-use ReflectionMethod;
+use PHPUnit_Framework_MockObject_MockObject as MockObject;
+use Psr\Http\Message\ResponseInterface as Response;
 use Rebilly\Client;
 use Rebilly\Http\CurlHandler;
 use Rebilly\Http\CurlSession;
 use Rebilly\Http\Exception\TransferException;
 use Rebilly\Tests\TestCase;
+use ReflectionMethod;
 use RuntimeException;
-use Psr\Http\Message\RequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
 
 /**
  * Class CurlHandlerTest.
@@ -28,6 +27,15 @@ use PHPUnit_Framework_MockObject_MockObject as MockObject;
  */
 class CurlHandlerTest extends TestCase
 {
+    /** @var Client */
+    private $client;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->client = new Client(['apiKey' => 'QWERTY']);
+    }
+
     /**
      * @test
      */
@@ -44,26 +52,28 @@ class CurlHandlerTest extends TestCase
 
     /**
      * @test
-     * @dataProvider provideRequests
+     * @dataProvider provideValidRequests
      *
-     * @param Request $request
+     * @param $method
+     * @param $url
+     * @param $payload
+     * @param $headers
      */
-    public function sendRequest(Request $request)
+    public function sendRequest($method, $url, $payload, $headers)
     {
+        $request = $this->client->createRequest($method, $url, $payload, $headers);
+
         $fakeBody = json_encode([], JSON_FORCE_OBJECT);
         $fakeHeaders = "HTTP/1.1 200 OK\r\nContent-Type: application/json; charset=utf-8\r\n";
 
         /** @var CurlSession|MockObject $session */
         $session = $this->getMock(CurlSession::class);
-        $session->method('execute')->will($this->returnValue($fakeHeaders . $fakeBody));
-        $session->method('getInfo')->will($this->returnValue(strlen($fakeHeaders)));
+        $session->method('execute')->willReturn($fakeHeaders . $fakeBody);
+        $session->method('getInfo')->willReturn(strlen($fakeHeaders));
 
         /** @var CurlHandler|MockObject $handler */
         $handler = $this->getMock(CurlHandler::class, ['createSession']);
-        $handler
-            ->method('createSession')
-            ->will($this->returnValue($session))
-        ;
+        $handler->method('createSession')->willReturn($session);
 
         /** @var Response $response */
         $response = call_user_func($handler, $request);
@@ -122,17 +132,15 @@ class CurlHandlerTest extends TestCase
     /**
      * @return array
      */
-    public function provideRequests()
+    public function provideValidRequests()
     {
-        $client = new Client(['apiKey' => 'QWERTY']);
-
         return [
-            [$client->createRequest('OPTIONS', 'http://google.com', null)],
-            [$client->createRequest('HEAD', 'http://google.com', null)],
-            [$client->createRequest('GET', 'http://google.com', null)],
-            [$client->createRequest('POST', 'http://google.com', [])],
-            [$client->createRequest('PUT', 'http://google.com', [])],
-            [$client->createRequest('DELETE', 'http://google.com', null)],
+            ['OPTIONS', 'http://google.com', null, []],
+            ['HEAD', 'http://google.com', null, []],
+            ['GET', 'http://google.com', null, []],
+            ['POST', 'http://google.com', 'body', []],
+            ['PUT', 'http://google.com', 'body', []],
+            ['DELETE', 'http://google.com', null, []],
         ];
     }
 }
