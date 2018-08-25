@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly;
@@ -17,15 +18,16 @@ use UnexpectedValueException;
 /**
  * APIKEY providers are functions that accept no arguments and return a string.
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
- * @version 0.1
  */
 final class ApiKeyProvider
 {
-    const ENV_APIKEY = 'REBILLY_APIKEY';
-    const INI_APIKEY = 'rebilly_apikey';
-    const INI_PROFILE = 'default';
-    const INI_DEFAULT_FILE = '/.rebilly/credentials.ini';
+    public const ENV_APIKEY = 'REBILLY_APIKEY';
+
+    public const INI_APIKEY = 'rebilly_apikey';
+
+    public const INI_PROFILE = 'default';
+
+    public const INI_DEFAULT_FILE = '/.rebilly/credentials.ini';
 
     /**
      * Provider that return APIKEY from environment variable REBILLY_APIKEY.
@@ -68,7 +70,7 @@ final class ApiKeyProvider
             }
 
             if (!isset($data[$profile][self::INI_APIKEY])) {
-                throw new UnexpectedValueException("No APIKEY present in INI profile " . "'$profile' ($filename)");
+                throw new UnexpectedValueException('No APIKEY present in INI profile ' . "'$profile' ($filename)");
             }
 
             return $data[$profile][self::INI_APIKEY];

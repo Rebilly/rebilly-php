@@ -1,32 +1,32 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Tests\Rest;
 
+use OutOfBoundsException;
+use Psr\Http\Message\RequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
 use Rebilly\Client;
 use Rebilly\Paginator;
 use Rebilly\Rest\Collection;
 use Rebilly\Tests\TestCase;
 use RuntimeException;
-use Psr\Http\Message\RequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
-use OutOfBoundsException;
 
 /**
  * Class PaginationTest.
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  */
 class PaginationTest extends TestCase
 {
-    const EXCEPTION = 'Failed asserting that exception of type "%s" is thrown.';
+    public const EXCEPTION = 'Failed asserting that exception of type "%s" is thrown.';
 
     /**
      * @test
@@ -47,7 +47,7 @@ class PaginationTest extends TestCase
                     ->createResponse()
                     ->withHeader('Pagination-Total', $total)
                     ->withHeader('Pagination-Limit', $query['limit'])
-                    ->withHeader('Pagination-Offset', isset($query['offset']) ? $query['offset'] : 0);
+                    ->withHeader('Pagination-Offset', $query['offset'] ?? 0);
 
                 return $response;
             },
@@ -63,19 +63,18 @@ class PaginationTest extends TestCase
         }
 
         $paginator = new Paginator($client, 'customers', ['limit' => 2]);
-        $this->assertEquals($total, $paginator->getTotalItems());
-        $this->assertEquals(ceil($total / 2), count($paginator));
+        $this->assertSame($total, $paginator->getTotalItems());
+        $this->assertSame(ceil($total / 2), count($paginator));
 
         $segment = $paginator->current();
         $this->assertInstanceOf(Collection::class, $segment);
-        $this->assertEquals(0, count($segment));
-        $this->assertEquals(2, $segment->getLimit());
-        $this->assertEquals(0, $segment->getOffset());
-        $this->assertEquals($paginator->getTotalItems(), $segment->getTotalItems());
+        $this->assertSame(0, count($segment));
+        $this->assertSame(2, $segment->getLimit());
+        $this->assertSame(0, $segment->getOffset());
+        $this->assertSame($paginator->getTotalItems(), $segment->getTotalItems());
 
         $this->assertTrue($paginator->isFirst());
         $this->assertFalse($paginator->isLast());
-
 
         try {
             $paginator->previous();
@@ -89,7 +88,7 @@ class PaginationTest extends TestCase
 
         foreach ($paginator as $page => $segment) {
             $this->assertInstanceOf(Collection::class, $segment);
-            $this->assertEquals($page * $segment->getLimit(), $segment->getOffset());
+            $this->assertSame($page * $segment->getLimit(), $segment->getOffset());
         }
     }
 }

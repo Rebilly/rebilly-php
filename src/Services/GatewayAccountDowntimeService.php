@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Services;
@@ -21,7 +22,6 @@ use Rebilly\Rest\Service;
 /**
  * Class GatewayAccountDowntimeService
  *
- * @author Arman Tuyakbayev <arman.tuyakbayev@rebilly.com>
  */
 final class GatewayAccountDowntimeService extends Service
 {
@@ -65,7 +65,8 @@ final class GatewayAccountDowntimeService extends Service
     {
         return $this->client()->get(
             'gateway-accounts/{gatewayAccountId}/downtime-schedules/{downtimeId}',
-            ['downtimeId' => $downtimeId, 'gatewayAccountId' => $gatewayAccountId] + (array) $params);
+            ['downtimeId' => $downtimeId, 'gatewayAccountId' => $gatewayAccountId] + (array) $params
+        );
     }
 
     /**

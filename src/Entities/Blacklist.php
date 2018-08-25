@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Entities;
@@ -26,20 +27,24 @@ use Rebilly\Rest\Entity;
  * }
  * ```
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
- * @version 0.1
  */
 final class Blacklist extends Entity
 {
-    const TYPE_PAYMENT_CARD = 'payment-card';
-    const TYPE_CUSTOMER_ID = 'customer-id';
-    const TYPE_EMAIL = 'email';
-    const TYPE_IP_ADDRESS = 'ip-address';
-    const TYPE_BIN = 'bin';
-    const TYPE_COUNTRY = 'country';
-    const TYPE_FINGERPRINT = 'fingerprint';
+    public const TYPE_PAYMENT_CARD = 'payment-card';
 
-    const MSG_UNEXPECTED_TYPE = 'Unexpected type. Only %s types support';
+    public const TYPE_CUSTOMER_ID = 'customer-id';
+
+    public const TYPE_EMAIL = 'email';
+
+    public const TYPE_IP_ADDRESS = 'ip-address';
+
+    public const TYPE_BIN = 'bin';
+
+    public const TYPE_COUNTRY = 'country';
+
+    public const TYPE_FINGERPRINT = 'fingerprint';
+
+    public const MSG_UNEXPECTED_TYPE = 'Unexpected type. Only %s types support';
 
     /**
      * @return array
@@ -68,12 +73,12 @@ final class Blacklist extends Entity
     /**
      * @param mixed $value
      *
-     * @return $this
      * @throws DomainException
+     * @return $this
      */
     public function setType($value)
     {
-        if (!in_array($value, self::types())) {
+        if (!in_array($value, self::types(), true)) {
             throw new DomainException(sprintf(self::MSG_UNEXPECTED_TYPE, implode(', ', self::types())));
         }
 

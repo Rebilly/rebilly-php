@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Services;
@@ -22,8 +23,6 @@ use Rebilly\Rest\Service;
 /**
  * Class BankAccountService
  *
- * @author Dara Pich <dara.pich@rebilly.com>
- * @version 0.1
  */
 
 class BankAccountService extends Service
@@ -73,9 +72,9 @@ class BankAccountService extends Service
     {
         if (isset($bankAccountId)) {
             return $this->client()->put($data, 'bank-accounts/{bankAccountId}', ['bankAccountId' => $bankAccountId]);
-        } else {
-            return $this->client()->post($data, 'bank-accounts');
         }
+
+        return $this->client()->post($data, 'bank-accounts');
     }
 
     /**

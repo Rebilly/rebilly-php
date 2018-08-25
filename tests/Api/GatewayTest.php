@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Tests\Api;
@@ -66,8 +67,8 @@ class GatewayTest extends BaseTestCase
         ]);
 
         self::assertInstanceOf(Gateway::class, $gateway);
-        self::assertEquals($response, $gateway->getResponse());
-        self::assertEquals($cvvResponse, $gateway->getCvvResponse());
-        self::assertEquals($avsResponse, $gateway->getAvsResponse());
+        self::assertSame($response, $gateway->getResponse());
+        self::assertSame($cvvResponse, $gateway->getCvvResponse());
+        self::assertSame($avsResponse, $gateway->getAvsResponse());
     }
 }

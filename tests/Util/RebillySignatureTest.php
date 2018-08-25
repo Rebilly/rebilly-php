@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Tests\Util;
@@ -27,11 +28,11 @@ class RebillySignatureTest extends TestCase
         try {
             RebillySignature::generateNonce(-1);
         } catch (RuntimeException $e) {
-            $this->assertEquals('Failed to generate random string', $e->getMessage());
+            $this->assertSame('Failed to generate random string', $e->getMessage());
         }
 
         $nonce = RebillySignature::generateNonce(10);
-        $this->assertEquals(10, strlen($nonce));
+        $this->assertSame(10, strlen($nonce));
     }
 
     /**
@@ -41,7 +42,7 @@ class RebillySignatureTest extends TestCase
     {
         $signature = RebillySignature::generateSignature('user', 'key');
 
-        $data = json_decode(base64_decode($signature), true);
+        $data = json_decode(base64_decode($signature, true), true);
         $this->assertTrue(is_array($data));
         $this->assertTrue(
             isset(
@@ -51,8 +52,8 @@ class RebillySignatureTest extends TestCase
                 $data['REB-SIGNATURE']
             )
         );
-        $this->assertEquals(RebillySignature::NONCE_LENGTH, strlen($data['REB-NONCE']));
-        $this->assertEquals('user', $data['REB-APIUSER']);
+        $this->assertSame(RebillySignature::NONCE_LENGTH, strlen($data['REB-NONCE']));
+        $this->assertSame('user', $data['REB-APIUSER']);
         $this->assertNotContains('key', $data['REB-SIGNATURE']);
     }
 }

@@ -1,26 +1,25 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Rest;
 
 use ArrayAccess;
 use ArrayObject;
+use DomainException;
 use JsonSerializable;
 use OutOfRangeException;
-use DomainException;
 
 /**
  * Class Resource
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
- * @version 0.1
  */
 abstract class Resource implements JsonSerializable, ArrayAccess
 {
@@ -126,11 +125,12 @@ abstract class Resource implements JsonSerializable, ArrayAccess
     {
         if (isset($this->internalCache[$name])) {
             return $this->internalCache[$name];
-        } elseif (isset($this->data[$name])) {
-            return $this->data[$name];
-        } else {
-            return null;
         }
+        if (isset($this->data[$name])) {
+            return $this->data[$name];
+        }
+
+        return null;
     }
 
     /**
@@ -261,11 +261,11 @@ abstract class Resource implements JsonSerializable, ArrayAccess
             throw new DomainException(
                 sprintf('Trying to get the write-only property "%s::%s"', get_class($this), $offset)
             );
-        } else {
-            throw new OutOfRangeException(
+        }
+
+        throw new OutOfRangeException(
                 sprintf('The property "%s::%s" does not exist', get_class($this), $offset)
             );
-        }
     }
 
     /**
@@ -281,11 +281,11 @@ abstract class Resource implements JsonSerializable, ArrayAccess
             throw new DomainException(
                 sprintf('Trying to set the read-only property "%s::%s"', get_class($this), $offset)
             );
-        } else {
-            throw new OutOfRangeException(
+        }
+
+        throw new OutOfRangeException(
                 sprintf('The property "%s::%s" does not exist', get_class($this), $offset)
             );
-        }
     }
 
     /**

@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Entities;
@@ -18,16 +19,16 @@ use Rebilly\Rest\Entity;
  *
  * @see http://rebilly.github.io/RebillyAPI/#tag/Gateway%20Accounts
  *
- * @author Arman Tuyakbayev <arman.tuyakbayev@rebilly.com>
- * @version 0.1
  */
 final class GatewayAccount extends Entity
 {
-    const TYPE_3DSECURE_INTEGRATED = 'integrated';
-    const TYPE_3DSECURE_EXTERNAL = 'external';
+    public const TYPE_3DSECURE_INTEGRATED = 'integrated';
 
-    const MSG_UNEXPECTED_PAYMENT_CARD_SCHEME = 'Unexpected payment card scheme. Only %s payment card schemes support';
-    const MSG_UNEXPECTED_METHOD = 'Unexpected method. Only %s methods support';
+    public const TYPE_3DSECURE_EXTERNAL = 'external';
+
+    public const MSG_UNEXPECTED_PAYMENT_CARD_SCHEME = 'Unexpected payment card scheme. Only %s payment card schemes support';
+
+    public const MSG_UNEXPECTED_METHOD = 'Unexpected method. Only %s methods support';
 
     /**
      * @deprecated The method is deprecated and will be removed in next version.
@@ -203,8 +204,8 @@ final class GatewayAccount extends Entity
     /**
      * @param array $value
      *
-     * @return $this
      * @throws DomainException
+     * @return $this
      */
     public function setWebsites(array $value)
     {
@@ -349,7 +350,7 @@ final class GatewayAccount extends Entity
         $allowedPaymentCardSchemes = self::allowedPaymentCardSchemes();
 
         foreach ($value as $paymentCardScheme) {
-            if (!in_array($paymentCardScheme, $allowedPaymentCardSchemes)) {
+            if (!in_array($paymentCardScheme, $allowedPaymentCardSchemes, true)) {
                 throw new DomainException(sprintf(self::MSG_UNEXPECTED_PAYMENT_CARD_SCHEME, implode(', ', $allowedPaymentCardSchemes)));
             }
         }
@@ -382,7 +383,7 @@ final class GatewayAccount extends Entity
     {
         $allowedMethods = self::allowedMethods();
 
-        if (!in_array($value, $allowedMethods)) {
+        if (!in_array($value, $allowedMethods, true)) {
             throw new DomainException(sprintf(self::MSG_UNEXPECTED_METHOD, implode(', ', $allowedMethods)));
         }
 

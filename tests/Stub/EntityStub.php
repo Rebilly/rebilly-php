@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Tests\Stub;
@@ -15,7 +16,6 @@ use Rebilly\Rest\Entity;
 /**
  * Class EntityStub.
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  */
 final class EntityStub extends Entity
 {
@@ -76,7 +76,7 @@ final class EntityStub extends Entity
         return $this->getAttribute('complexField');
     }
 
-    public function setComplexField(EntityStub $value)
+    public function setComplexField(self $value)
     {
         return $this->setAttribute('complexField', $value->jsonSerialize());
     }

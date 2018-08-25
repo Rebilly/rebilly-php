@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2016 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Entities\Shipping;
@@ -18,34 +19,26 @@ use Rebilly\Rest\Resource;
  */
 class Rate extends Resource
 {
-    /*
-     * @var string
-     */
+    // @var string
     private $name;
 
-    /*
-     * @var float
-     */
+    // @var float
     private $minOrderSubtotal;
 
-    /*
-     * @var float
-     */
+    // @var float
     private $maxOrderSubtotal;
 
-    /*
-     * @var float
-     */
+    // @var float
     private $price;
 
-    /*
-     * @var string
-     */
+    // @var string
     private $currency;
 
-    const MSG_REQUIRED_NAME = 'Name can not be blank.';
-    const MSG_REQUIRED_PRICE = 'Price can not be blank.';
-    const MSG_REQUIRED_CURRENCY = 'Currency can not be blank.';
+    public const MSG_REQUIRED_NAME = 'Name can not be blank.';
+
+    public const MSG_REQUIRED_PRICE = 'Price can not be blank.';
+
+    public const MSG_REQUIRED_CURRENCY = 'Currency can not be blank.';
 
     /**
      * {@inheritdoc}
@@ -74,7 +67,7 @@ class Rate extends Resource
             throw new DomainException(self::MSG_REQUIRED_CURRENCY);
         }
 
-        $rate = new Rate($data);
+        $rate = new self($data);
 
         return $rate;
     }

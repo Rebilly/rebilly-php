@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Tests\Api;
@@ -16,7 +17,6 @@ use Rebilly\Rest\Collection;
 /**
  * Class CustomerTest.
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  */
 class CustomerTest extends TestCase
 {
@@ -52,7 +52,7 @@ class CustomerTest extends TestCase
         $customer = $client->customers()->update($form->getId(), $form);
 
         $this->assertInstanceOf(Customer::class, $customer);
-        $this->assertEquals($form->getId(), $customer->getId());
-        $this->assertEquals($form->getFirstName(), $customer->getFirstName());
+        $this->assertSame($form->getId(), $customer->getId());
+        $this->assertSame($form->getFirstName(), $customer->getFirstName());
     }
 }

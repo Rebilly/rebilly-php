@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Entities\KycDocuments;
@@ -25,14 +26,19 @@ use Rebilly\Rest\Resource;
  */
 final class RejectionReason extends Resource
 {
-    const REJECT_DOCUMENT_UNREADABLE = 'document-unreadable';
-    const REJECT_DOCUMENT_EXPIRED = 'document-expired';
-    const REJECT_DOCUMENT_NOT_MATCHING = 'document-not-matching';
-    const REJECT_UNDERAGE_PERSON = 'underage-person';
-    const REJECT_OTHER = 'other';
+    public const REJECT_DOCUMENT_UNREADABLE = 'document-unreadable';
 
-    const MSG_REQUIRED_TYPE = 'Rejection type is required';
-    const MSG_UNSUPPORTED_TYPE = 'Bad rejection type provided.';
+    public const REJECT_DOCUMENT_EXPIRED = 'document-expired';
+
+    public const REJECT_DOCUMENT_NOT_MATCHING = 'document-not-matching';
+
+    public const REJECT_UNDERAGE_PERSON = 'underage-person';
+
+    public const REJECT_OTHER = 'other';
+
+    public const MSG_REQUIRED_TYPE = 'Rejection type is required';
+
+    public const MSG_UNSUPPORTED_TYPE = 'Bad rejection type provided.';
 
     /**
      * @return array

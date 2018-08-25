@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Middleware;
@@ -21,8 +22,6 @@ use RuntimeException;
 /**
  * Class LogHandler.
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
- * @version 0.1
  */
 final class LogHandler implements Middleware
 {
@@ -80,7 +79,7 @@ final class LogHandler implements Middleware
                 $lines = [
                     '-> Request',
                     'Hash: ' . spl_object_hash($request),
-                    'Url: '  . (string) $request->getUri(),
+                    'Url: ' . (string) $request->getUri(),
                     'Method: ' . $request->getMethod(),
                     'Headers:',
                     $this->dumpHeaders($request->getHeaders()),

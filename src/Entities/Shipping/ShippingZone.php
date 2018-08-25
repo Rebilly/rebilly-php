@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Entities\Shipping;
@@ -30,7 +31,7 @@ use Rebilly\Rest\Entity;
  */
 final class ShippingZone extends Entity
 {
-    const MSG_RATES_WRONG = "Rates must be an array of Rate resources";
+    public const MSG_RATES_WRONG = 'Rates must be an array of Rate resources';
 
     /**
      * @return string

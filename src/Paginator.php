@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of the PHP Rebilly API package.
+ * This source file is proprietary and part of Rebilly.
  *
- * (c) 2015 Rebilly SRL
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly;
@@ -13,18 +14,16 @@ namespace Rebilly;
 use ArrayObject;
 use Countable;
 use Iterator;
-use RuntimeException;
 use OutOfBoundsException;
+use RuntimeException;
 
 /**
  * Class Paginator.
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
- * @version 0.1
  */
 final class Paginator implements Iterator, Countable
 {
-    const DEFAULT_SIZE = 100;
+    public const DEFAULT_SIZE = 100;
 
     /** @var Client */
     private $client;

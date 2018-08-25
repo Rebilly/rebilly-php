@@ -1,11 +1,12 @@
 <?php
 /**
- * This file is part of Rebilly.
+ * This source file is proprietary and part of Rebilly.
  *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
  *
- * @see http://rebilly.com
+ * @see https://www.rebilly.com
  */
 
 namespace Rebilly\Tests\Api;
@@ -17,7 +18,6 @@ use Rebilly\Tests\TestCase as BaseTestCase;
 /**
  * Class TestCase.
  *
- * @author Veaceslav Medvedev <veaceslav.medvedev@rebilly.com>
  */
 abstract class TestCase extends BaseTestCase
 {
