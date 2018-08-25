@@ -88,7 +88,7 @@ class ApiTest extends TestCase
 
                 $this->assertSame($values[$attribute], $value, 'Invalid ' . $attribute);
             } elseif (isset($values[$attribute])) {
-                $this->assertSame($values[$attribute], $value, 'Invalid ' . $attribute);
+                $this->assertEquals($values[$attribute], $value, 'Invalid ' . $attribute);
             } else {
                 $this->assertNull($value);
             }

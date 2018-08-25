@@ -64,7 +64,7 @@ class PaginationTest extends TestCase
 
         $paginator = new Paginator($client, 'customers', ['limit' => 2]);
         $this->assertSame($total, $paginator->getTotalItems());
-        $this->assertSame(ceil($total / 2), count($paginator));
+        $this->assertSame((int) ceil($total / 2), count($paginator));
 
         $segment = $paginator->current();
         $this->assertInstanceOf(Collection::class, $segment);

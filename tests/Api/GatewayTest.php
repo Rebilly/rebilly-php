@@ -67,8 +67,8 @@ class GatewayTest extends BaseTestCase
         ]);
 
         self::assertInstanceOf(Gateway::class, $gateway);
-        self::assertSame($response, $gateway->getResponse());
-        self::assertSame($cvvResponse, $gateway->getCvvResponse());
-        self::assertSame($avsResponse, $gateway->getAvsResponse());
+        self::assertEquals($response, $gateway->getResponse());
+        self::assertEquals($cvvResponse, $gateway->getCvvResponse());
+        self::assertEquals($avsResponse, $gateway->getAvsResponse());
     }
 }
