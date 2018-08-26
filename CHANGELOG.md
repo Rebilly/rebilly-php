@@ -30,6 +30,7 @@ _TBD_
       `recurringPeriodUnit`, `recurringPeriodLength`, `recurringPeriodLimit`, `trialPeriodUnit`, `trialPeriodLength`,
       `contractTermUnit`, `contractTermLength`, `minQuantity`, `maxQuantity`
 - [x] Removed `LeadSources` in **Transactions**, **Invoices** and **Subscriptions**
+- [x] Removed `LeadSources` endpoint and service. Adding Lead Sources now only possible via **Tokens** and **Customers**
 
 ## [2.2.0] 2018-08-14
 
