@@ -20,17 +20,20 @@ _TBD_
 
 ### Added
 - [x] Added new properties to `Plan`: `pricing`, `recurringInterval`, `trial`, `setup`
+- [x] Added new property to `Subscription`: `items`
 
 ### Changed
 - [x] Replaced magic methods like `get`, `post` with explicit defined methods.
 - [x] **Upgraded minimum PHP version to 7.1**
 
 ### Removed
-- [x] Removed deprecated Plan properties: `expiredTime`, `recurringAmount`, `trialAmount`, `setupAmount`,
+- [x] Removed deprecated `Plan` properties: `expiredTime`, `recurringAmount`, `trialAmount`, `setupAmount`,
       `recurringPeriodUnit`, `recurringPeriodLength`, `recurringPeriodLimit`, `trialPeriodUnit`, `trialPeriodLength`,
       `contractTermUnit`, `contractTermLength`, `minQuantity`, `maxQuantity`
 - [x] Removed `LeadSources` in **Transactions**, **Invoices** and **Subscriptions**
 - [x] Removed `LeadSources` endpoint and service. Adding Lead Sources now only possible via **Tokens** and **Customers**
+- [x] Removed deprecated `Subscription` properties: `planId`, `quantity`,
+      `billingContactId`, `billingContact`, `deliveryContactId`, `deliveryContact`
 
 ## [2.2.0] 2018-08-14
 
