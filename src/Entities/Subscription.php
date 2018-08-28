@@ -207,18 +207,6 @@ final class Subscription extends Entity
     }
 
     /**
-     * @return null|LeadSource
-     */
-    public function getLeadSource()
-    {
-        if ($this->hasEmbeddedResource('leadSource')) {
-            return new LeadSource($this->getEmbeddedResource('leadSource'));
-        }
-
-        return null;
-    }
-
-    /**
      * @return Address
      */
     public function getBillingAddress()
@@ -313,11 +301,11 @@ final class Subscription extends Entity
      */
     public function getWebsite()
     {
-        if ($this->hasEmbeddedResource('website')) {
-            return new Website($this->getEmbeddedResource('website'));
-        }
+        $data = $this->getEmbeddedResource('website');
 
-        return null;
+        return $data
+            ? new Website($data)
+            : null;
     }
 
     /**
@@ -325,10 +313,22 @@ final class Subscription extends Entity
      */
     public function getCustomer()
     {
-        if ($this->hasEmbeddedResource('customer')) {
-            return new Customer($this->getEmbeddedResource('customer'));
-        }
+        $data = $this->getEmbeddedResource('customer');
 
-        return null;
+        return $data
+            ? new Customer($data)
+            : null;
+    }
+
+    /**
+     * @return null|LeadSource
+     */
+    public function getLeadSource()
+    {
+        $data = $this->getEmbeddedResource('leadSource');
+
+        return $data
+            ? new LeadSource($data)
+            : null;
     }
 }
