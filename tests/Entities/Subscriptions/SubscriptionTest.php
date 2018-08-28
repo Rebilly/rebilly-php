@@ -17,6 +17,7 @@ use Rebilly\Entities\Customer;
 use Rebilly\Entities\LeadSource;
 use Rebilly\Entities\Subscription;
 use PHPUnit\Framework\TestCase;
+use Rebilly\Entities\Subscriptions\PlanItem;
 use Rebilly\Entities\Website;
 
 class SubscriptionTest extends TestCase
@@ -54,6 +55,11 @@ class SubscriptionTest extends TestCase
             ],
             'lineItems' => [],
             'lineItemSubtotal' => 0,
+            'items' => [
+                ['planId' => 'plan-1', 'quantity' => 1],
+                ['planId' => 'plan-2', 'quantity' => null],
+                ['planId' => 'plan-3'],
+            ],
             '_embedded' => [
                 'website' => ['id' => 'website-1'],
                 'customer' => ['id' => 'customer-1'],
@@ -79,6 +85,7 @@ class SubscriptionTest extends TestCase
         $value->setBillingAddress($data['billingAddress']);
         $value->setDeliveryAddress($data['deliveryAddress']);
         $value->setRiskMetadata($data['riskMetadata']);
+        $value->setItems($data['items']);
 
         $expectedJson = $data;
         // Unset read-only properties which we not set.
@@ -136,6 +143,13 @@ class SubscriptionTest extends TestCase
         self::assertSame($data['riskMetadata'], $plan->getRiskMetadata());
         self::assertSame($data['lineItems'], $plan->getLineItems());
         self::assertSame($data['lineItemSubtotal'], $plan->getLineItemSubtotal());
+        self::assertInternalType('array', $plan->getItems());
+        self::assertCount(3, $plan->getItems());
+
+        foreach ($plan->getItems() as $i => $item) {
+            self::assertInstanceOf(PlanItem::class, $item);
+            self::assertSame($data['items'][$i], $item->jsonSerialize());
+        }
 
         // Check relationship
         self::assertInstanceOf(Website::class, $plan->getWebsite());

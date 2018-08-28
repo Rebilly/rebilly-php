@@ -297,6 +297,39 @@ final class Subscription extends Entity
     }
 
     /**
+     * @return array|Subscriptions\PlanItem[]
+     */
+    public function getItems()
+    {
+        return $this->getAttribute('items');
+    }
+
+    /**
+     * @param array $value
+     *
+     * @return $this
+     */
+    public function setItems(array $value)
+    {
+        return $this->setAttribute('items', $value);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return array|Subscriptions\PlanItem[]
+     */
+    public function createItems(array $data)
+    {
+        return array_map(
+            function (array $item) {
+                return new Subscriptions\PlanItem($item);
+            },
+            $data
+        );
+    }
+
+    /**
      * @return null|Website
      */
     public function getWebsite()
