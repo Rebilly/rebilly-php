@@ -45,8 +45,8 @@ class SubscriptionTest extends TestCase
             'inTrial' => false,
             'rebillNumber' => null,
             'canceledTime' => $now->modify('+1 week')->format('c'),
-            'cancelCategory' => null,
-            'canceledBy' => 'Jane',
+            'cancelCategory' => 'did-not-want',
+            'canceledBy' => 'customer',
             'cancelDescription' => 'Cancelled manually',
             'billingAddress' => $address,
             'deliveryAddress' => $address,
@@ -116,44 +116,44 @@ class SubscriptionTest extends TestCase
     {
         $data = self::getDefaultData();
 
-        $plan = new Subscription($data);
+        $value = new Subscription($data);
 
         // Check properties
-        self::assertSame($data['id'], $plan->getId());
-        self::assertSame($data['status'], $plan->getStatus());
-        self::assertSame($data['customerId'], $plan->getCustomerId());
-        self::assertSame($data['websiteId'], $plan->getWebsiteId());
-        self::assertSame($data['initialInvoiceId'], $plan->getInitialInvoiceId());
-        self::assertSame($data['autopay'], $plan->getAutopay());
-        self::assertSame($data['startTime'], $plan->getStartTime());
-        self::assertSame($data['endTime'], $plan->getEndTime());
-        self::assertSame($data['renewalTime'], $plan->getRenewalTime());
-        self::assertSame($data['createdTime'], $plan->getCreatedTime());
-        self::assertSame($data['customFields'], $plan->getCustomFields());
-        self::assertSame($data['inTrial'], $plan->getInTrial());
-        self::assertSame($data['rebillNumber'], $plan->getRebillNumber());
-        self::assertSame($data['canceledTime'], $plan->getCanceledTime());
-        self::assertSame($data['cancelCategory'], $plan->getCancelCategory());
-        self::assertSame($data['canceledBy'], $plan->getCanceledBy());
-        self::assertSame($data['cancelDescription'], $plan->getCancelDescription());
-        self::assertInstanceOf(Address::class, $plan->getBillingAddress());
-        self::assertSame($data['billingAddress'], $plan->getBillingAddress()->jsonSerialize());
-        self::assertInstanceOf(Address::class, $plan->getDeliveryAddress());
-        self::assertSame($data['deliveryAddress'], $plan->getDeliveryAddress()->jsonSerialize());
-        self::assertSame($data['riskMetadata'], $plan->getRiskMetadata());
-        self::assertSame($data['lineItems'], $plan->getLineItems());
-        self::assertSame($data['lineItemSubtotal'], $plan->getLineItemSubtotal());
-        self::assertInternalType('array', $plan->getItems());
-        self::assertCount(3, $plan->getItems());
+        self::assertSame($data['id'], $value->getId());
+        self::assertSame($data['status'], $value->getStatus());
+        self::assertSame($data['customerId'], $value->getCustomerId());
+        self::assertSame($data['websiteId'], $value->getWebsiteId());
+        self::assertSame($data['initialInvoiceId'], $value->getInitialInvoiceId());
+        self::assertSame($data['autopay'], $value->getAutopay());
+        self::assertSame($data['startTime'], $value->getStartTime());
+        self::assertSame($data['endTime'], $value->getEndTime());
+        self::assertSame($data['renewalTime'], $value->getRenewalTime());
+        self::assertSame($data['createdTime'], $value->getCreatedTime());
+        self::assertSame($data['customFields'], $value->getCustomFields());
+        self::assertSame($data['inTrial'], $value->getInTrial());
+        self::assertSame($data['rebillNumber'], $value->getRebillNumber());
+        self::assertSame($data['canceledTime'], $value->getCanceledTime());
+        self::assertSame($data['cancelCategory'], $value->getCancelCategory());
+        self::assertSame($data['canceledBy'], $value->getCanceledBy());
+        self::assertSame($data['cancelDescription'], $value->getCancelDescription());
+        self::assertInstanceOf(Address::class, $value->getBillingAddress());
+        self::assertSame($data['billingAddress'], $value->getBillingAddress()->jsonSerialize());
+        self::assertInstanceOf(Address::class, $value->getDeliveryAddress());
+        self::assertSame($data['deliveryAddress'], $value->getDeliveryAddress()->jsonSerialize());
+        self::assertSame($data['riskMetadata'], $value->getRiskMetadata());
+        self::assertSame($data['lineItems'], $value->getLineItems());
+        self::assertSame($data['lineItemSubtotal'], $value->getLineItemSubtotal());
+        self::assertInternalType('array', $value->getItems());
+        self::assertCount(3, $value->getItems());
 
-        foreach ($plan->getItems() as $i => $item) {
+        foreach ($value->getItems() as $i => $item) {
             self::assertInstanceOf(PlanItem::class, $item);
             self::assertSame($data['items'][$i], $item->jsonSerialize());
         }
 
         // Check relationship
-        self::assertInstanceOf(Website::class, $plan->getWebsite());
-        self::assertInstanceOf(Customer::class, $plan->getCustomer());
-        self::assertInstanceOf(LeadSource::class, $plan->getLeadSource());
+        self::assertInstanceOf(Website::class, $value->getWebsite());
+        self::assertInstanceOf(Customer::class, $value->getCustomer());
+        self::assertInstanceOf(LeadSource::class, $value->getLeadSource());
     }
 }
