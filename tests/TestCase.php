@@ -337,13 +337,23 @@ abstract class TestCase extends Framework\TestCase
                 switch ($class) {
                     case Entities\Layout::class:
                         return [
-                            new Entities\LayoutItem([
-                                'planId' => 'foo',
-                                'starred' => true,
-                            ]),
-                            new Entities\LayoutItem([
-                                'planId' => 'bar',
-                            ]),
+                            new Entities\LayoutItem(
+                                [
+                                    'planId' => 'foo',
+                                    'starred' => true,
+                                ]
+                            ),
+                            new Entities\LayoutItem(
+                                [
+                                    'planId' => 'bar',
+                                ]
+                            ),
+                        ];
+                    case Entities\Subscription::class:
+                        return [
+                            ['planId' => 'plan-1', 'quantity' => 1],
+                            ['planId' => 'plan-2', 'quantity' => null],
+                            ['planId' => 'plan-3'],
                         ];
                     default:
                         throw new InvalidArgumentException(
