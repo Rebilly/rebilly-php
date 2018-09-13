@@ -75,7 +75,7 @@ class LeadSourceTest extends BaseTestCase
             'content' => 'content',
             'medium' => 'medium',
             'path' => 'path',
-            'agent' => 'agent',
+            'salesAgent' => 'agent',
             'term' => 'term',
             'subAffiliate' => 'subaffiliate',
             'original' => [
@@ -88,7 +88,7 @@ class LeadSourceTest extends BaseTestCase
                 'content' => 'original-content',
                 'medium' => 'original-medium',
                 'path' => 'original-path',
-                'agent' => 'original-agent',
+                'salesAgent' => 'original-agent',
                 'term' => 'original-term',
                 'subAffiliate' => 'original-subaffiliate',
             ],
