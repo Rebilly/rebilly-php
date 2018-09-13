@@ -34,6 +34,7 @@ _TBD_
 - [x] Removed `LeadSources` in **Transactions**, **Invoices** and **Subscriptions**
 - [x] Removed deprecated `Subscription` properties: `planId`, `quantity`,
       `billingContactId`, `billingContact`, `deliveryContactId`, `deliveryContact`
+- [x] Removed deprecated `LeadSource` property: `ipAddress`
 
 ## [2.2.0] 2018-08-14
 

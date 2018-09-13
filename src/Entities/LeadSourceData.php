@@ -216,24 +216,6 @@ class LeadSourceData extends Resource
     /**
      * @return string
      */
-    public function getIpAddress()
-    {
-        return $this->getAttribute('ipAddress');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setIpAddress($value)
-    {
-        return $this->setAttribute('ipAddress', $value);
-    }
-
-    /**
-     * @return string
-     */
     public function getAmount()
     {
         return $this->getAttribute('amount');
