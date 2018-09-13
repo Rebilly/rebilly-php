@@ -21,6 +21,7 @@ _TBD_
 ### Added
 - [x] Added new properties to `Plan`: `pricing`, `recurringInterval`, `trial`, `setup`
 - [x] Added new property to `Subscription`: `items`
+- [x] Added new property to `LeadSource`: `original`
 
 ### Changed
 - [x] Replaced magic methods like `get`, `post` with explicit defined methods.
