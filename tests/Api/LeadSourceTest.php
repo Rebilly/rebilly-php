@@ -11,9 +11,7 @@
 
 namespace Rebilly\Tests\Api;
 
-use DomainException;
 use Rebilly\Entities\LeadSource;
-use Rebilly\Entities\SubscriptionCancel;
 use Rebilly\Tests\TestCase as BaseTestCase;
 
 class LeadSourceTest extends BaseTestCase
