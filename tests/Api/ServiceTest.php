@@ -17,7 +17,6 @@ use Psr\Http\Message\RequestInterface as Request;
 use Rebilly\Client;
 use Rebilly\Entities;
 use Rebilly\Entities\Customer;
-use Rebilly\Entities\EmailNotifications\EmailNotification;
 use Rebilly\Entities\PaymentMethodInstrument;
 use Rebilly\Entities\Webhook;
 use Rebilly\Http\CurlHandler;
@@ -745,29 +744,6 @@ class ServiceTest extends BaseTestCase
     /**
      * @test
      */
-    public function emailNotificationService()
-    {
-        $client = new Client(['apiKey' => 'QWERTY']);
-        $response = $client->createResponse()->withHeader('Location', 'email-notifications/dummy');
-
-        /** @var CurlHandler|MockObject $handler */
-        $handler = $this->createMock(CurlHandler::class);
-        $handler->expects($this->once())->method('__invoke')->willReturn($response);
-
-        $client = new Client([
-            'apiKey' => 'QWERTY',
-            'httpHandler' => $handler,
-        ]);
-
-        $service = $client->emailNotifications();
-
-        $emailNotification = $service->preview([]);
-        self::assertInstanceOf(EmailNotification::class, $emailNotification);
-    }
-
-    /**
-     * @test
-     */
     public function paymentCardMigrationService()
     {
         $client = new Client(['apiKey' => 'QWERTY']);
@@ -1224,16 +1200,6 @@ class ServiceTest extends BaseTestCase
                 'couponsRedemptions',
                 Services\RedemptionService::class,
                 Entities\Coupons\Redemption::class,
-            ],
-            [
-                'emailNotifications',
-                Services\EmailNotificationService::class,
-                Entities\EmailNotifications\EmailNotification::class,
-            ],
-            [
-                'emailNotificationsTracking',
-                Services\EmailNotificationTrackingService::class,
-                Entities\EmailNotifications\EmailNotificationTracking::class,
             ],
         ];
     }
