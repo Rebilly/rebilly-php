@@ -742,33 +742,6 @@ class ServiceTest extends BaseTestCase
     /**
      * @test
      */
-    public function emailNotificationService()
-    {
-        $client = new Client(['apiKey' => 'QWERTY']);
-
-        /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class);
-
-        $handler
-            ->expects($this->any())
-            ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'email-notifications/dummy')
-            ));
-
-        $client = new Client([
-            'apiKey' => 'QWERTY',
-            'httpHandler' => $handler,
-        ]);
-
-        $service = $client->emailNotifications();
-
-        $service->preview([]);
-    }
-
-    /**
-     * @test
-     */
     public function paymentCardMigrationService()
     {
         $client = new Client(['apiKey' => 'QWERTY']);
@@ -1227,16 +1200,6 @@ class ServiceTest extends BaseTestCase
                 'couponsRedemptions',
                 Services\RedemptionService::class,
                 Entities\Coupons\Redemption::class,
-            ],
-            [
-                'emailNotifications',
-                Services\EmailNotificationService::class,
-                Entities\EmailNotifications\EmailNotification::class,
-            ],
-            [
-                'emailNotificationsTracking',
-                Services\EmailNotificationTrackingService::class,
-                Entities\EmailNotifications\EmailNotificationTracking::class,
             ],
         ];
     }

@@ -83,8 +83,6 @@ use GuzzleHttp\Psr7\Uri as GuzzleUri;
  * @method Services\ValuesListService lists()
  * @method Services\ValuesListTrackingService listsTracking()
  * @method Services\WebhookTrackingService webhooksTracking()
- * @method Services\EmailNotificationService emailNotifications()
- * @method Services\EmailNotificationTrackingService emailNotificationsTracking()
  * @method Services\GatewayAccountDowntimeService gatewayDowntimes()
  * @method Services\PaymentInstrumentValidationService paymentInstrumentValidation()
  * @method Services\KycService kycDocuments()
@@ -142,8 +140,6 @@ final class Client
         'listsTracking' => Services\ValuesListTrackingService::class,
         'shippingZones' => Services\ShippingZoneService::class,
         'webhooksTracking' => Services\WebhookTrackingService::class,
-        'emailNotifications' => Services\EmailNotificationService::class,
-        'emailNotificationsTracking' => Services\EmailNotificationTrackingService::class,
         'gatewayDowntimes' => Services\GatewayAccountDowntimeService::class,
         'paymentInstrumentValidation' => Services\PaymentInstrumentValidationService::class,
         'kycDocuments' => Services\KycService::class,
