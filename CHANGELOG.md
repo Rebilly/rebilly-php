@@ -21,6 +21,7 @@ _TBD_
 ### Added
 - [x] Added new properties to `Plan`: `pricing`, `recurringInterval`, `trial`, `setup`
 - [x] Added new property to `Subscription`: `items`
+- [x] Added new property to `LeadSource`: `original`
 
 ### Changed
 - [x] Replaced magic methods like `get`, `post` with explicit defined methods.
@@ -34,6 +35,8 @@ _TBD_
 - [x] Removed `LeadSources` endpoint and service. Adding Lead Sources now only possible via **Tokens** and **Customers**
 - [x] Removed deprecated `Subscription` properties: `planId`, `quantity`,
       `billingContactId`, `billingContact`, `deliveryContactId`, `deliveryContact`
+- [x] Removed deprecated `LeadSource` property: `ipAddress`
+- [x] Removed `Notification`, `EmailNotification` and `EmailNotificationTracking`.
 
 ## [2.2.0] 2018-08-14
 
