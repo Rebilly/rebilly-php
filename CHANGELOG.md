@@ -31,6 +31,7 @@ _TBD_
       `recurringPeriodUnit`, `recurringPeriodLength`, `recurringPeriodLimit`, `trialPeriodUnit`, `trialPeriodLength`,
       `contractTermUnit`, `contractTermLength`, `minQuantity`, `maxQuantity`
 - [x] Removed `LeadSources` in **Transactions**, **Invoices** and **Subscriptions**
+- [x] Removed `LeadSources` endpoint and service. Adding Lead Sources now only possible via **Tokens** and **Customers**
 - [x] Removed deprecated `Subscription` properties: `planId`, `quantity`,
       `billingContactId`, `billingContact`, `deliveryContactId`, `deliveryContact`
 - [x] Removed deprecated `LeadSource` property: `ipAddress`

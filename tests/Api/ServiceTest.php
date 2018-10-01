@@ -1037,11 +1037,6 @@ class ServiceTest extends BaseTestCase
                 Entities\Layout::class,
             ],
             [
-                'leadSources',
-                Services\LeadSourceService::class,
-                Entities\LeadSource::class,
-            ],
-            [
                 'paymentCards',
                 Services\PaymentCardService::class,
                 Entities\PaymentCard::class,
