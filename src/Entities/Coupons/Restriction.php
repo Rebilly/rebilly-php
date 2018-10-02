@@ -37,7 +37,6 @@ abstract class Restriction extends Resource
 
     public const TYPE_MINIMUM_ORDER_AMOUNT = 'minimum-order-amount';
 
-
     protected static $supportedTypes = [
         self::TYPE_DISCOUNTS_PER_REDEMPTION,
         self::TYPE_REDEMPTIONS_PER_CUSTOMER,
