@@ -35,6 +35,7 @@ class SubscriptionTest extends TestCase
             'status' => 'draft',
             'customerId' => 'customer-1',
             'websiteId' => 'website-1',
+            'initialInvoiceId' => 'invoice-1',
             'autopay' => true,
             'startTime' => $now->modify('+1 day')->format('c'),
             'endTime' => $now->modify('+1 year')->format('c'),
@@ -101,6 +102,7 @@ class SubscriptionTest extends TestCase
             $expectedJson['cancelDescription'],
             $expectedJson['lineItems'],
             $expectedJson['lineItemSubtotal'],
+            $expectedJson['initialInvoiceId'],
             $expectedJson['_embedded']
         );
 
@@ -121,6 +123,7 @@ class SubscriptionTest extends TestCase
         self::assertSame($data['status'], $value->getStatus());
         self::assertSame($data['customerId'], $value->getCustomerId());
         self::assertSame($data['websiteId'], $value->getWebsiteId());
+        self::assertSame($data['initialInvoiceId'], $value->getInitialInvoiceId());
         self::assertSame($data['autopay'], $value->getAutopay());
         self::assertSame($data['startTime'], $value->getStartTime());
         self::assertSame($data['endTime'], $value->getEndTime());
