@@ -85,7 +85,6 @@ abstract class TestCase extends Framework\TestCase
             case 'customerId':
             case 'contactId':
             case 'websiteId':
-            case 'initialInvoiceId':
             case 'billingContactId':
             case 'deliveryContactId':
             case 'planId':
