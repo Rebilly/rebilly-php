@@ -52,16 +52,6 @@ final class Subscription extends Entity
     }
 
     /**
-     * @param string $value
-     *
-     * @return Subscription
-     */
-    public function setInitialInvoiceId($value)
-    {
-        return $this->setAttribute('initialInvoiceId', $value);
-    }
-
-    /**
      * @return string
      */
     public function getWebsiteId()
