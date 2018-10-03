@@ -78,7 +78,6 @@ class SubscriptionTest extends TestCase
         $value = new Subscription();
         $value->setCustomerId($data['customerId']);
         $value->setWebsiteId($data['websiteId']);
-        $value->setInitialInvoiceId($data['initialInvoiceId']);
         $value->setAutopay(true);
         $value->setRenewalTime($data['renewalTime']);
         $value->setCustomFields($data['customFields']);
@@ -103,6 +102,7 @@ class SubscriptionTest extends TestCase
             $expectedJson['cancelDescription'],
             $expectedJson['lineItems'],
             $expectedJson['lineItemSubtotal'],
+            $expectedJson['initialInvoiceId'],
             $expectedJson['_embedded']
         );
 

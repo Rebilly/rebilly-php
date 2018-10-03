@@ -37,6 +37,7 @@ _TBD_
       `billingContactId`, `billingContact`, `deliveryContactId`, `deliveryContact`
 - [x] Removed deprecated `LeadSource` property: `ipAddress`
 - [x] Removed `Notification`, `EmailNotification` and `EmailNotificationTracking`.
+- [x] Deprecate setting `initialInvoiceId` property when creating a `Subscription`.
 
 ## [2.2.0] 2018-08-14
 
