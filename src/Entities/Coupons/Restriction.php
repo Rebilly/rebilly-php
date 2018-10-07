@@ -27,9 +27,9 @@ abstract class Restriction extends Resource
     const TYPE_RESTRICT_TO_PLANS = 'restrict-to-plans';
     const TYPE_RESTRICT_TO_SUBSCRIPTIONS = 'restrict-to-subscriptions';
 
-    public const TYPE_TOTAL_REDEMPTIONS = 'total-redemptions';
+    const TYPE_TOTAL_REDEMPTIONS = 'total-redemptions';
 
-    public const TYPE_MINIMUM_ORDER_AMOUNT = 'minimum-order-amount';
+    const TYPE_MINIMUM_ORDER_AMOUNT = 'minimum-order-amount';
 
     protected static $supportedTypes = [
         self::TYPE_DISCOUNTS_PER_REDEMPTION,
