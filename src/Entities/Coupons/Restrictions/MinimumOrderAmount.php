@@ -9,8 +9,6 @@
  * @see https://www.rebilly.com
  */
 
-declare(strict_types=1);
-
 namespace Rebilly\Entities\Coupons\Restrictions;
 
 use Rebilly\Entities\Coupons\Restriction;
