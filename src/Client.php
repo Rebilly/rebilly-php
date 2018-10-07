@@ -49,7 +49,6 @@ use RuntimeException;
  * @method Services\InvoiceItemService invoiceItems()
  * @method Services\InvoiceService invoices()
  * @method Services\LayoutService layouts()
- * @method Services\LeadSourceService leadSources()
  * @method Services\PaymentCardService paymentCards()
  * @method Services\PaymentCardTokenService paymentCardTokens()
  * @method Services\PaymentService payments()
@@ -109,7 +108,6 @@ final class Client
         'invoiceItems' => Services\InvoiceItemService::class,
         'invoices' => Services\InvoiceService::class,
         'layouts' => Services\LayoutService::class,
-        'leadSources' => Services\LeadSourceService::class,
         'paymentCards' => Services\PaymentCardService::class,
         'paymentCardTokens' => Services\PaymentCardTokenService::class,
         'payments' => Services\PaymentService::class,
