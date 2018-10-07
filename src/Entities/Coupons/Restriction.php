@@ -27,12 +27,18 @@ abstract class Restriction extends Resource
     const TYPE_RESTRICT_TO_PLANS = 'restrict-to-plans';
     const TYPE_RESTRICT_TO_SUBSCRIPTIONS = 'restrict-to-subscriptions';
 
+    const TYPE_TOTAL_REDEMPTIONS = 'total-redemptions';
+
+    const TYPE_MINIMUM_ORDER_AMOUNT = 'minimum-order-amount';
+
     protected static $supportedTypes = [
         self::TYPE_DISCOUNTS_PER_REDEMPTION,
         self::TYPE_REDEMPTIONS_PER_CUSTOMER,
         self::TYPE_RESTRICT_TO_INVOICES,
         self::TYPE_RESTRICT_TO_PLANS,
         self::TYPE_RESTRICT_TO_SUBSCRIPTIONS,
+        self::TYPE_TOTAL_REDEMPTIONS,
+        self::TYPE_MINIMUM_ORDER_AMOUNT,
     ];
 
     /**
@@ -69,6 +75,14 @@ abstract class Restriction extends Resource
                 break;
             case self::TYPE_RESTRICT_TO_SUBSCRIPTIONS:
                 $restriction = new Restrictions\RestrictToSubscriptions($data);
+                break;
+            case self::TYPE_TOTAL_REDEMPTIONS:
+                $restriction = new Restrictions\TotalRedemptions($data);
+
+                break;
+            case self::TYPE_MINIMUM_ORDER_AMOUNT:
+                $restriction = new Restrictions\MinimumOrderAmount($data);
+
                 break;
             default:
                 throw new DomainException(

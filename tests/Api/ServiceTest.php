@@ -343,38 +343,6 @@ class ServiceTest extends BaseTestCase
     /**
      * @test
      */
-    public function invoiceLeadSourcesService()
-    {
-        $client = new Client(['apiKey' => 'QWERTY']);
-
-        /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class);
-        $handler
-            ->expects($this->any())
-            ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'lead-sources/dummy')
-            ));
-
-        $client = new Client([
-            'apiKey' => 'QWERTY',
-            'httpHandler' => $handler,
-        ]);
-
-        $service = $client->invoices();
-
-        $result = $service->getLeadSource('dummy');
-        $this->assertInstanceOf(Entities\LeadSource::class, $result);
-
-        $result = $service->updateLeadSource('dummy', []);
-        $this->assertInstanceOf(Entities\LeadSource::class, $result);
-
-        $service->deleteLeadSource('dummy');
-    }
-
-    /**
-     * @test
-     */
     public function subscriptionService()
     {
         $client = new Client(['apiKey' => 'QWERTY']);
@@ -438,38 +406,6 @@ class ServiceTest extends BaseTestCase
     /**
      * @test
      */
-    public function subscriptionLeadSourcesService()
-    {
-        $client = new Client(['apiKey' => 'QWERTY']);
-
-        /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class);
-        $handler
-            ->expects($this->any())
-            ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'lead-sources/dummy')
-            ));
-
-        $client = new Client([
-            'apiKey' => 'QWERTY',
-            'httpHandler' => $handler,
-        ]);
-
-        $service = $client->subscriptions();
-
-        $result = $service->getLeadSource('dummy');
-        $this->assertInstanceOf(Entities\LeadSource::class, $result);
-
-        $result = $service->updateLeadSource('dummy', []);
-        $this->assertInstanceOf(Entities\LeadSource::class, $result);
-
-        $service->deleteLeadSource('dummy');
-    }
-
-    /**
-     * @test
-     */
     public function couponService()
     {
         $client = new Client(['apiKey' => 'QWERTY']);
@@ -521,38 +457,6 @@ class ServiceTest extends BaseTestCase
 
         $result = $service->refund('dummy', 10);
         $this->assertInstanceOf(Entities\Transaction::class, $result);
-    }
-
-    /**
-     * @test
-     */
-    public function transactionLeadSourcesService()
-    {
-        $client = new Client(['apiKey' => 'QWERTY']);
-
-        /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class);
-        $handler
-            ->expects($this->any())
-            ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'lead-sources/dummy')
-            ));
-
-        $client = new Client([
-            'apiKey' => 'QWERTY',
-            'httpHandler' => $handler,
-        ]);
-
-        $service = $client->transactions();
-
-        $result = $service->getLeadSource('dummy');
-        $this->assertInstanceOf(Entities\LeadSource::class, $result);
-
-        $result = $service->updateLeadSource('dummy', []);
-        $this->assertInstanceOf(Entities\LeadSource::class, $result);
-
-        $service->deleteLeadSource('dummy');
     }
 
     /**
@@ -833,33 +737,6 @@ class ServiceTest extends BaseTestCase
 
         $result = $service->cancel('dummy');
         $this->assertInstanceOf(Entities\Coupons\Redemption::class, $result);
-    }
-
-    /**
-     * @test
-     */
-    public function emailNotificationService()
-    {
-        $client = new Client(['apiKey' => 'QWERTY']);
-
-        /** @var CurlHandler|MockObject $handler */
-        $handler = $this->getMock(CurlHandler::class);
-
-        $handler
-            ->expects($this->any())
-            ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'email-notifications/dummy')
-            ));
-
-        $client = new Client([
-            'apiKey' => 'QWERTY',
-            'httpHandler' => $handler,
-        ]);
-
-        $service = $client->emailNotifications();
-
-        $service->preview([]);
     }
 
     /**
@@ -1160,11 +1037,6 @@ class ServiceTest extends BaseTestCase
                 Entities\Layout::class,
             ],
             [
-                'leadSources',
-                Services\LeadSourceService::class,
-                Entities\LeadSource::class,
-            ],
-            [
                 'paymentCards',
                 Services\PaymentCardService::class,
                 Entities\PaymentCard::class,
@@ -1323,16 +1195,6 @@ class ServiceTest extends BaseTestCase
                 'couponsRedemptions',
                 Services\RedemptionService::class,
                 Entities\Coupons\Redemption::class,
-            ],
-            [
-                'emailNotifications',
-                Services\EmailNotificationService::class,
-                Entities\EmailNotifications\EmailNotification::class,
-            ],
-            [
-                'emailNotificationsTracking',
-                Services\EmailNotificationTrackingService::class,
-                Entities\EmailNotifications\EmailNotificationTracking::class,
             ],
         ];
     }

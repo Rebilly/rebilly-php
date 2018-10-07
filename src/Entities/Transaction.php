@@ -331,4 +331,16 @@ final class Transaction extends Entity
     {
         return $this->getAttribute('redirectUrls');
     }
+
+    /**
+     * @return null|Customer
+     */
+    public function getCustomer()
+    {
+        if ($this->hasEmbeddedResource('customer')) {
+            return new Customer($this->getEmbeddedResource('customer'));
+        }
+
+        return null;
+    }
 }
