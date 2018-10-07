@@ -18,6 +18,8 @@ Security - in case of vulnerabilities.
 
 _TBD_
 
+## [2.3.0] 2018-10-08
+
 ### Added
 - [x] Added new properties to `Plan`: `pricing`, `recurringInterval`, `trial`, `setup`
 - [x] Added new property to `Subscription`: `items`

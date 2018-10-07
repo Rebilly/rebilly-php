@@ -11,28 +11,6 @@
 
 namespace Rebilly\Entities;
 
-/**
- * Class LeadSource
- *
- * ```json
- * {
- *   "original"
- *   "customerId"
- *   "medium"
- *   "source"
- *   "campaign"
- *   "term"
- *   "content"
- *   "affiliate"
- *   "subAffiliate"
- *   "salesAgent"
- *   "clickId"
- *   "path"
- *   "currency"
- *   "amount"
- * }
- * ```
- */
 final class LeadSource extends LeadSourceData
 {
     /**

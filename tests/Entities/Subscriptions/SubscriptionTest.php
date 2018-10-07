@@ -16,7 +16,7 @@ use Rebilly\Entities\Address;
 use Rebilly\Entities\Customer;
 use Rebilly\Entities\LeadSource;
 use Rebilly\Entities\Subscription;
-use PHPUnit\Framework\TestCase;
+use Rebilly\Tests\TestCase;
 use Rebilly\Entities\Subscriptions\PlanItem;
 use Rebilly\Entities\Website;
 
