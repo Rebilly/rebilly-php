@@ -3,7 +3,7 @@
 namespace Rebilly\Tests\Entities\Subscriptions;
 
 use Rebilly\Entities\Subscriptions\PlanItem;
-use PHPUnit\Framework\TestCase;
+use Rebilly\Tests\TestCase;
 
 class PlanItemTest extends TestCase
 {
