@@ -18,6 +18,9 @@ Security - in case of vulnerabilities.
 
 _TBD_
 
+### Added
+- [x] Added new property to `RiskMetadata`: `region`
+
 ### Changed
 - [x] **Upgraded minimum PHP version to 7.1**
 
