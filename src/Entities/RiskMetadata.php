@@ -28,6 +28,7 @@ use Rebilly\Rest\Resource;
  *   "fingerprint"
  *   "httpHeaders"
  *   "country"
+ *   "region"
  *   "city"
  *   "latitude"
  *   "longitude"
@@ -149,6 +150,14 @@ final class RiskMetadata extends Resource
     public function getCountry()
     {
         return $this->getAttribute('country');
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getRegion()
+    {
+        return $this->getAttribute('region');
     }
 
     /**
