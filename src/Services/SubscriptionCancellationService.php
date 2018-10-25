@@ -33,7 +33,6 @@ class SubscriptionCancellationService extends Service
     }
 
     /**
-     * @param string $subscriptionId
      * @param array|JsonSerializable|SubscriptionCancellation $data
      *
      * @throws UnprocessableEntityException The input data does not valid

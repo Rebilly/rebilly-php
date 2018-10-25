@@ -33,7 +33,6 @@ class SubscriptionReactivationService extends Service
     }
 
     /**
-     * @param string $subscriptionId
      * @param array|JsonSerializable|SubscriptionReactivation $data
      *
      * @throws UnprocessableEntityException The input data does not valid

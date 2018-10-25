@@ -21,7 +21,7 @@ use Rebilly\Rest\Resource;
 final class PaymentRetryAttempt extends Resource
 {
     /**
-     * @param ScheduleInstruction
+     * @param ScheduleInstruction $value
      *
      * @return $this
      */
@@ -49,7 +49,7 @@ final class PaymentRetryAttempt extends Resource
     }
 
     /**
-     * @param PaymentInstruction
+     * @param PaymentInstruction $value
      *
      * @return $this
      */
