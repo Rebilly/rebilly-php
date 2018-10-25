@@ -21,7 +21,6 @@ use Rebilly\ApiKeyProvider;
 use Rebilly\Client;
 use Rebilly\Http\Exception\HttpException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
-use Rebilly\ParamBag;
 use Rebilly\Rest\Service;
 use RuntimeException;
 
