@@ -89,8 +89,9 @@ final class PaymentRetryInstruction extends Resource
     }
 
     /**
-     * @param string
-     * @param mixed $value
+     * @param string $value
+     *
+     * @throws DomainException
      *
      * @return $this
      */
@@ -116,8 +117,9 @@ final class PaymentRetryInstruction extends Resource
     }
 
     /**
-     * @param string
-     * @param mixed $value
+     * @param string $value
+     *
+     * @throws DomainException
      *
      * @return $this
      */

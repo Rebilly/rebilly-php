@@ -13,6 +13,7 @@ namespace Rebilly\Http;
 
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use Rebilly\Http\Exception\TransferException;
 use RuntimeException;
 
 /**
@@ -59,6 +60,9 @@ class CurlHandler implements HttpHandler
 
     /**
      * @param Request $request
+     *
+     * @throws RuntimeException
+     * @throws TransferException
      *
      * @return Response
      */
@@ -157,7 +161,7 @@ class CurlHandler implements HttpHandler
      * @param array $options
      *
      * @throws RuntimeException
-     * @throws Exception\TransferException
+     * @throws TransferException
      *
      * @return array
      */
@@ -176,13 +180,13 @@ class CurlHandler implements HttpHandler
             $result = $session->execute();
 
             if ($result === false) {
-                throw new Exception\TransferException($session->getErrorMessage(), $session->getErrorCode());
+                throw new TransferException($session->getErrorMessage(), $session->getErrorCode());
             }
 
             $headerSize = $session->getInfo(CURLINFO_HEADER_SIZE);
 
             if (strlen($result) < $headerSize) {
-                throw new Exception\TransferException(
+                throw new TransferException(
                     'Header size(' . $headerSize . ') does not match result: ' . $result
                 );
             }

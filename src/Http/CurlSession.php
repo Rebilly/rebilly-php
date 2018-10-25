@@ -24,7 +24,7 @@ class CurlSession
     /**
      * @param string|null $url
      *
-     * @return resource
+     * @return bool
      */
     public function open($url = null)
     {
