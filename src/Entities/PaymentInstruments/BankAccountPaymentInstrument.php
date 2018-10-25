@@ -11,6 +11,7 @@
 
 namespace Rebilly\Entities\PaymentInstruments;
 
+use DomainException;
 use Rebilly\Entities\PaymentInstrument;
 use Rebilly\Entities\PaymentMethod;
 
