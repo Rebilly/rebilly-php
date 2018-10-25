@@ -62,7 +62,7 @@ class CurlHandler implements HttpHandler
      * @param Request $request
      *
      * @throws RuntimeException
-     * @throws Exception\TransferException
+     * @throws TransferException
      *
      * @return Response
      */
