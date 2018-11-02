@@ -269,4 +269,22 @@ final class Plan extends Entity
     {
         return new PlanSetup($data);
     }
+
+    /**
+     * @return null|array
+     */
+    public function getCustomFields()
+    {
+        return $this->getAttribute('customFields');
+    }
+
+    /**
+     * @param array $value
+     *
+     * @return $this
+     */
+    public function setCustomFields($value)
+    {
+        return $this->setAttribute('customFields', $value);
+    }
 }
