@@ -24,6 +24,9 @@ _TBD_
 ### Changed
 - [x] **Upgraded minimum PHP version to 7.1**
 
+### Removed
+- [x] Deprecated `Customer` entity methods: `getFirstName`, `setFirstName`, `getLastName`, `setLastName`, `getEmail`, `setEmail`
+
 ## [2.3.0] 2018-10-08
 
 ### Added
@@ -45,7 +48,6 @@ _TBD_
 - [x] Removed deprecated `LeadSource` property: `ipAddress`
 - [x] Removed `Notification`, `EmailNotification` and `EmailNotificationTracking`.
 - [x] Deprecate setting `initialInvoiceId` property when creating a `Subscription`.
-- [x] Deprecated `Customer` entity methods: `getFirstName`, `setFirstName`, `getLastName`, `setLastName`, `getEmail`, `setEmail`
 
 ## [2.2.0] 2018-08-14
 
