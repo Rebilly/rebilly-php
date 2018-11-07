@@ -16,7 +16,7 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
-Deprecated `Customer` entity methods: `getFirstName`, `setFirstName`, `getLastName`, `setLastName`, `getEmail`, `setEmail`
+- [x] Deprecated `Customer` entity methods: `getFirstName`, `setFirstName`, `getLastName`, `setLastName`, `getEmail`, `setEmail`
 
 ### Added
 - [x] Added new property to `RiskMetadata`: `region`
