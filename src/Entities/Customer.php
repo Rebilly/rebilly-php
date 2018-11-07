@@ -31,6 +31,8 @@ use Rebilly\Rest\Entity;
 final class Customer extends Entity
 {
     /**
+     * @deprecated Use getPrimaryAddress()->getEmails() instead
+     *
      * @return string
      */
     public function getEmail()
@@ -39,6 +41,8 @@ final class Customer extends Entity
     }
 
     /**
+     * @deprecated Use getPrimaryAddress()->getEmails() instead
+     *
      * @param string $value
      *
      * @return $this
@@ -49,6 +53,8 @@ final class Customer extends Entity
     }
 
     /**
+     * @deprecated Use getPrimaryAddress()->getFirstName() instead
+     *
      * @return string
      */
     public function getFirstName()
@@ -57,6 +63,8 @@ final class Customer extends Entity
     }
 
     /**
+     * @deprecated Use getPrimaryAddress()->setFirstName() instead
+     *
      * @param string $value
      *
      * @return $this
@@ -67,6 +75,8 @@ final class Customer extends Entity
     }
 
     /**
+     * @deprecated Use getPrimaryAddress()->getLastName() instead
+     *
      * @return string
      */
     public function getLastName()
@@ -75,6 +85,8 @@ final class Customer extends Entity
     }
 
     /**
+     * @deprecated Use getPrimaryAddress()->setLastName() instead
+     *
      * @param string $value
      *
      * @return $this
