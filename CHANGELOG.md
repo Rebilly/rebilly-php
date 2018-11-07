@@ -16,7 +16,7 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
-- [x] Deprecated `Customer` entity methods: `getFirstName`, `setFirstName`, `getLastName`, `setLastName`, `getEmail`, `setEmail`
+_TBD_
 
 ### Added
 - [x] Added new property to `RiskMetadata`: `region`
@@ -45,6 +45,7 @@ Security - in case of vulnerabilities.
 - [x] Removed deprecated `LeadSource` property: `ipAddress`
 - [x] Removed `Notification`, `EmailNotification` and `EmailNotificationTracking`.
 - [x] Deprecate setting `initialInvoiceId` property when creating a `Subscription`.
+- [x] Deprecated `Customer` entity methods: `getFirstName`, `setFirstName`, `getLastName`, `setLastName`, `getEmail`, `setEmail`
 
 ## [2.2.0] 2018-08-14
 
