@@ -11,6 +11,7 @@
 
 namespace Rebilly\Entities;
 
+use Rebilly\Entities\Contact\Email;
 use Rebilly\Rest\Entity;
 
 /**
@@ -33,11 +34,32 @@ final class Customer extends Entity
     /**
      * @deprecated Use getPrimaryAddress()->getEmails() instead
      *
-     * @return string
+     * @return string|null
      */
     public function getEmail()
     {
-        return $this->getAttribute('email');
+        $primaryAddress = $this->getPrimaryAddress();
+        if ($primaryAddress === null) {
+            return null;
+        }
+
+        $emails = $primaryAddress->getEmails();
+
+        if (empty($emails)) {
+            return null;
+        }
+
+        foreach ($emails as $email) {
+            if (is_array($email)) {
+                $email = Email::createFromData($email);
+            }
+
+            if ($email->getPrimary() === true) {
+                return $email->getValue();
+            }
+        }
+
+        return $emails[0]->getValue();
     }
 
     /**
@@ -49,7 +71,23 @@ final class Customer extends Entity
      */
     public function setEmail($value)
     {
-        return $this->setAttribute('email', $value);
+        $primaryAddress = $this->getPrimaryAddress();
+        $email = Email::createFromData([
+            'label' => 'main',
+            'value' => $value,
+            'primary' => true,
+        ]);
+
+        if ($primaryAddress !== null) {
+            $primaryAddress->setEmails([$email]);
+        } else {
+            $primaryAddress = Address::createFromData(['emails' => [$email]]);
+        }
+
+        $this->setPrimaryAddress($primaryAddress);
+        $this->setAttribute('email', $value);
+
+        return $this;
     }
 
     /**
@@ -59,7 +97,12 @@ final class Customer extends Entity
      */
     public function getFirstName()
     {
-        return $this->getAttribute('firstName');
+        $primaryAddress = $this->getPrimaryAddress();
+        if ($primaryAddress === null) {
+            return null;
+        }
+
+        return $primaryAddress->getFirstName();
     }
 
     /**
@@ -71,7 +114,18 @@ final class Customer extends Entity
      */
     public function setFirstName($value)
     {
-        return $this->setAttribute('firstName', $value);
+        $primaryAddress = $this->getPrimaryAddress();
+
+        if ($primaryAddress !== null) {
+            $primaryAddress->setFirstName($value);
+        } else {
+            $primaryAddress = Address::createFromData(['firstName' => $value]);
+        }
+
+        $this->setPrimaryAddress($primaryAddress);
+        $this->setAttribute('firstName', $value);
+
+        return $this;
     }
 
     /**
@@ -81,7 +135,12 @@ final class Customer extends Entity
      */
     public function getLastName()
     {
-        return $this->getAttribute('lastName');
+        $primaryAddress = $this->getPrimaryAddress();
+        if ($primaryAddress === null) {
+            return null;
+        }
+
+        return $primaryAddress->getLastName();
     }
 
     /**
@@ -93,7 +152,18 @@ final class Customer extends Entity
      */
     public function setLastName($value)
     {
-        return $this->setAttribute('lastName', $value);
+        $primaryAddress = $this->getPrimaryAddress();
+
+        if ($primaryAddress !== null) {
+            $primaryAddress->setLastName($value);
+        } else {
+            $primaryAddress = Address::createFromData(['lastName' => $value]);
+        }
+
+        $this->setPrimaryAddress($primaryAddress);
+        $this->setAttribute('lastName', $value);
+
+        return $this;
     }
 
     /**
@@ -138,6 +208,29 @@ final class Customer extends Entity
      */
     public function setPrimaryAddress($value)
     {
+        // TODO: Remove after deprecated setEmail(), setFirstName(), setLastName() methods removed
+        if (is_array($value)) {
+            $value = Address::createFromData($value);
+        }
+
+        if (empty($value->getEmails()) && $this->getAttribute('email') !== null) {
+            $email = Email::createFromData([
+                'label' => 'main',
+                'value' => $this->getAttribute('email'),
+                'primary' => true,
+            ]);
+
+            $value->setEmails([$email]);
+        }
+
+        if (empty($value->getFirstName()) && $this->getAttribute('firstName') !== null) {
+            $value->setFirstName($this->getAttribute('firstName'));
+        }
+
+        if (empty($value->getLastName()) && $this->getAttribute('lastName') !== null) {
+            $value->setLastName($this->getAttribute('lastName'));
+        }
+
         return $this->setAttribute('primaryAddress', $value);
     }
 
