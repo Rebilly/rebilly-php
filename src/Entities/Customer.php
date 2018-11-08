@@ -63,7 +63,7 @@ final class Customer extends Entity
     }
 
     /**
-     * @deprecated Use getPrimaryAddress()->getEmails() instead
+     * @deprecated Use getPrimaryAddress()->setEmails() instead
      *
      * @param string $value
      *
