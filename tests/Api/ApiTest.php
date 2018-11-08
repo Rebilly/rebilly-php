@@ -136,7 +136,6 @@ class ApiTest extends TestCase
             [Entities\Contact::class],
             [Entities\Contact\Email::class],
             [Entities\Contact\PhoneNumber::class],
-            [Entities\Customer::class],
             [Entities\CustomerCredential::class],
             [Entities\File::class],
             [Entities\Invoice::class],

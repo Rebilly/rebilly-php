@@ -24,6 +24,9 @@ _TBD_
 ### Changed
 - [x] **Upgraded minimum PHP version to 7.1**
 
+### Deprecated
+- [x] Deprecated `Customer` entity methods: `getFirstName`, `setFirstName`, `getLastName`, `setLastName`, `getEmail`, `setEmail`
+
 ## [2.3.0] 2018-10-08
 
 ### Added
