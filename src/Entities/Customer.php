@@ -94,12 +94,7 @@ final class Customer extends Entity
      */
     public function getFirstName()
     {
-        $primaryAddress = $this->getPrimaryAddress();
-        if ($primaryAddress === null) {
-            return null;
-        }
-
-        return $primaryAddress->getFirstName();
+        return $this->getPrimaryAddress() !== null ? $this->getPrimaryAddress()->getFirstName() : null;
     }
 
     /**
@@ -132,12 +127,7 @@ final class Customer extends Entity
      */
     public function getLastName()
     {
-        $primaryAddress = $this->getPrimaryAddress();
-        if ($primaryAddress === null) {
-            return null;
-        }
-
-        return $primaryAddress->getLastName();
+        return $this->getPrimaryAddress() !== null ? $this->getPrimaryAddress()->getLastName() : null;
     }
 
     /**
