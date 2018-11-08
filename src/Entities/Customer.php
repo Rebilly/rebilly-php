@@ -44,19 +44,16 @@ final class Customer extends Entity
         }
 
         $emails = $primaryAddress->getEmails();
-
         if (empty($emails)) {
             return null;
         }
 
         foreach ($emails as $email) {
-            if (is_array($email)) {
-                $email = Email::createFromData($email);
+            if (is_array($email) && $email['primary'] === true) {
+                return $email['value'];
             }
 
-            if ($email->getPrimary() === true) {
-                return $email->getValue();
-            }
+            return $email->getValue();
         }
 
         return $emails[0]->getValue();
