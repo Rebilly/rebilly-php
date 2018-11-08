@@ -81,5 +81,6 @@ class CustomerEntityTest extends BaseTestCase
         self::assertSame('test@mail.com', $customer->getPrimaryAddress()->getEmails()[0]->getValue());
         self::assertSame('John', $customer->getPrimaryAddress()->getFirstName());
         self::assertSame('Doe', $customer->getPrimaryAddress()->getLastName());
+        self::assertSame('US', $customer->getPrimaryAddress()->getCountry());
     }
 }
