@@ -24,6 +24,9 @@ use Rebilly\Rest\Entity;
  *   "defaultPaymentInstrument"
  *   "invoiceCount"
  *   "lifetimeRevenue"
+ *   "averageValue"
+ *   "paymentCount"
+ *   "lastPaymentTime"
  *   "createdTime"
  *   "updatedTime"
  * }
@@ -313,6 +316,40 @@ final class Customer extends Entity
     public function createLifetimeRevenue(array $data)
     {
         return CustomerLifetimeRevenue::createFromData($data);
+    }
+
+    /**
+     * @return CustomerAverageValue
+     */
+    public function getAverageValue()
+    {
+        return $this->getAttribute('averageValue');
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return CustomerAverageValue
+     */
+    public function createAverageValue(array $data)
+    {
+        return CustomerAverageValue::createFromData($data);
+    }
+
+    /**
+     * @return int
+     */
+    public function getPaymentCount()
+    {
+        return $this->getAttribute('paymentCount');
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getLastPaymentTime()
+    {
+        return $this->getAttribute('lastPaymentTime');
     }
 
     /**

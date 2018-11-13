@@ -61,6 +61,7 @@ class CustomerEntityTest extends BaseTestCase
         self::assertCount(1, $customer->getCustomFields());
         self::assertSame('bar', $customer->getCustomFields()['foo']);
         self::assertSame(null, $customer->getLifetimeRevenue());
+        self::assertSame(null, $customer->getAverageValue());
     }
 
     public function testDeprecatedMethods()
