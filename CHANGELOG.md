@@ -20,6 +20,7 @@ _TBD_
 
 ### Added
 - [x] Added new property to `RiskMetadata`: `region`
+- [x] Added new properties to `Customer`: `averageValue`, `paymentCount`, `lastPaymentTime`
 
 ### Changed
 - [x] **Upgraded minimum PHP version to 7.1**
