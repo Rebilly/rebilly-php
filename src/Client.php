@@ -80,6 +80,7 @@ use RuntimeException;
  * @method Services\CouponService coupons()
  * @method Services\RedemptionService couponsRedemptions()
  * @method Services\WebhooksService webhooks()
+ * @method Services\WebhookCredentialsService webhookCredentials()
  * @method Services\ValuesListService lists()
  * @method Services\ValuesListTrackingService listsTracking()
  * @method Services\WebhookTrackingService webhooksTracking()
@@ -138,6 +139,7 @@ final class Client
         'coupons' => Services\CouponService::class,
         'couponsRedemptions' => Services\RedemptionService::class,
         'webhooks' => Services\WebhooksService::class,
+        'webhookCredentials' => Services\WebhookCredentialsService::class,
         'lists' => Services\ValuesListService::class,
         'listsTracking' => Services\ValuesListTrackingService::class,
         'shippingZones' => Services\ShippingZoneService::class,

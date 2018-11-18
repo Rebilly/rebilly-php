@@ -207,8 +207,20 @@ abstract class TestCase extends Framework\TestCase
                 ], 3);
             case 'headers':
                 return [['name' => $faker->word, 'value' => $faker->word, 'status' => $faker->randomElement(['active', 'inactive'])]];
+            case 'hash':
             case 'credentialHash':
                 return $faker->uuid;
+            case 'auth':
+                return $faker->randomElement([
+                    [
+                        'type' => 'none',
+                    ],
+                    [
+                        'type' => 'basic',
+                        'username' => $faker->userName,
+                        'password' => $faker->password,
+                    ],
+                ]);
             case 'isActive':
             case 'archived':
             case 'starred':
