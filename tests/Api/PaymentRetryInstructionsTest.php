@@ -230,7 +230,7 @@ class PaymentRetryInstructionsTest extends BaseTestCase
         self::assertSame(PaymentRetryInstruction::AFTER_ATTEMPT_POLICY_NONE, $instruction->getAfterAttemptPolicy());
         self::assertSame(PaymentRetryInstruction::AFTER_RETRY_END_POLICY_CANCEL_SUBSCRIPTION, $instruction->getAfterRetryEndPolicy());
         self::assertCount(1, $instruction->getAttempts());
-        self::assertSame($attempt, $instruction->getAttempts()[0]);
+        self::assertEquals($attempt, $instruction->getAttempts()[0]);
     }
 
     /**
