@@ -929,6 +929,29 @@ class ServiceTest extends BaseTestCase
         self::assertInstanceOf(Webhook::class, $webhook);
     }
 
+	/**
+	 * @test
+	 */
+	public function webhookCredentialService()
+	{
+		$client = new Client(['apiKey' => 'QWERTY']);
+		$response = $client->createResponse()->withHeader('Location', 'credential-hashes/webhooks/dummy');
+
+		/** @var CurlHandler|MockObject $handler */
+		$handler = $this->createMock(CurlHandler::class);
+
+		$handler->expects($this->any())->method('__invoke')->willReturn($response);
+
+		$client = new Client([
+			'apiKey' => 'QWERTY',
+			'httpHandler' => $handler,
+		]);
+		$service = $client->webhookCredentials();
+		$webhook = $service->load('dummy');
+
+		self::assertInstanceOf(Entities\WebhookCredential::class, $webhook);
+	}
+
     /**
      * @test
      */
@@ -1181,6 +1204,11 @@ class ServiceTest extends BaseTestCase
                 Services\WebhooksService::class,
                 Entities\Webhook::class,
             ],
+	        [
+		        'webhookCredentials',
+		        Services\WebhookCredentialsService::class,
+		        Entities\WebhookCredential::class,
+	        ],
             [
                 'webhooksTracking',
                 Services\WebhookTrackingService::class,
