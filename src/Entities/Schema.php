@@ -307,7 +307,7 @@ final class Schema implements IteratorAggregate, ArrayAccess
                 return new Webhook($content);
             },
             'credential-hashes/webhooks/{hash}' => function (array $content) {
-	            return new WebhookCredential($content);
+                return new WebhookCredential($content);
             },
             'tracking/webhooks' => function (array $content) {
                 return new Collection(new WebhookTracking(), $content);

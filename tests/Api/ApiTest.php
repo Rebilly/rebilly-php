@@ -88,7 +88,7 @@ class ApiTest extends TestCase
 
                 $this->assertSame($values[$attribute], $value, 'Invalid ' . $attribute);
             } elseif (isset($values[$attribute])) {
-                $this->assertEquals($values[$attribute], $value, 'Invalid ' . $attribute);
+                $this->assertSame($values[$attribute], $value, 'Invalid ' . $attribute);
             } else {
                 $this->assertNull($value);
             }
@@ -182,7 +182,7 @@ class ApiTest extends TestCase
             [Entities\ValuesList::class],
             [Entities\Product::class],
             [Entities\Webhook::class],
-	        [Entities\WebhookCredential::class, 'hash'],
+            [Entities\WebhookCredential::class, 'hash'],
             [Entities\RiskMetadata::class],
             [Entities\WebhookTracking::class],
             [Entities\Shipping\ShippingZone::class],

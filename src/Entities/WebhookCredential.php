@@ -18,39 +18,39 @@ use Rebilly\Rest\Entity;
  */
 final class WebhookCredential extends Entity
 {
-	/**
-	 * @return string
-	 */
-	public function getId()
-	{
-		return $this->getHash();
-	}
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->getHash();
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getHash()
-	{
-		return $this->getAttribute('hash');
-	}
+    /**
+     * @return string
+     */
+    public function getHash()
+    {
+        return $this->getAttribute('hash');
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getHost()
-	{
-		return $this->getAttribute('host');
-	}
+    /**
+     * @return string
+     */
+    public function getHost()
+    {
+        return $this->getAttribute('host');
+    }
 
-	/**
-	 * @param string $value
-	 *
-	 * @return $this
-	 */
-	public function setHost($value)
-	{
-		return $this->setAttribute('host', $value);
-	}
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setHost($value)
+    {
+        return $this->setAttribute('host', $value);
+    }
 
     /**
      * @return array

@@ -11,14 +11,9 @@
 
 namespace Rebilly\Services;
 
-use ArrayObject;
 use JsonSerializable;
-use Rebilly\Entities\Webhook;
 use Rebilly\Entities\WebhookCredential;
 use Rebilly\Http\Exception\NotFoundException;
-use Rebilly\Http\Exception\UnprocessableEntityException;
-use Rebilly\Paginator;
-use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
 
 /**
@@ -26,25 +21,25 @@ use Rebilly\Rest\Service;
  */
 final class WebhookCredentialsService extends Service
 {
-	/**
-	 * @param string $hash
-	 *
-	 * @throws NotFoundException The resource data does exist
-	 *
-	 * @return WebhookCredential
-	 */
-	public function load($hash)
-	{
-		return $this->client()->get('credential-hashes/webhooks/{hash}', ['hash' => $hash]);
-	}
+    /**
+     * @param string $hash
+     *
+     * @throws NotFoundException The resource data does exist
+     *
+     * @return WebhookCredential
+     */
+    public function load($hash)
+    {
+        return $this->client()->get('credential-hashes/webhooks/{hash}', ['hash' => $hash]);
+    }
 
-	/**
-	 * @param array|JsonSerializable|WebhookCredential $data
-	 *
-	 * @return WebhookCredential
-	 */
-	public function create($data)
-	{
-		return $this->client()->post($data, 'credential-hashes/webhooks');
-	}
+    /**
+     * @param array|JsonSerializable|WebhookCredential $data
+     *
+     * @return WebhookCredential
+     */
+    public function create($data)
+    {
+        return $this->client()->post($data, 'credential-hashes/webhooks');
+    }
 }
