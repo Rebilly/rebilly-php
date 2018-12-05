@@ -456,6 +456,7 @@ abstract class TestCase extends Framework\TestCase
                 return ['USD'];
             case 'dynamicDescriptor':
             case 'threeDSecure':
+            case 'used':
                 return false;
             case 'paymentCardSchemes':
             case 'paymentMethods':

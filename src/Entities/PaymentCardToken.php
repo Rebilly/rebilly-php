@@ -341,6 +341,24 @@ final class PaymentCardToken extends Entity
     }
 
     /**
+     * @return bool
+     */
+    public function getUsed()
+    {
+        return $this->getAttribute('used');
+    }
+
+    /**
+     * @param bool $value
+     *
+     * @return $this
+     */
+    public function setUsed($value)
+    {
+        return $this->setAttribute('used', $value);
+    }
+
+    /**
      * @param LeadSource|array $value
      *
      * @return PaymentCardToken
