@@ -90,4 +90,22 @@ final class PaymentCardAuthorization extends Resource
     {
         return $this->setAttribute('amount', $value);
     }
+
+    /**
+     * @return string
+     */
+    public function getRedirectUrl()
+    {
+        return $this->getAttribute('redirectUrl');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return PaymentCardAuthorization
+     */
+    public function setRedirectUrl($value)
+    {
+        return $this->setAttribute('redirectUrl', $value);
+    }
 }
