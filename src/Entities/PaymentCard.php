@@ -257,4 +257,12 @@ final class PaymentCard extends Entity
     {
         return new Address($data);
     }
+
+    /**
+     * @return null|string
+     */
+    public function getApprovalUrl()
+    {
+        return $this->getLink('approvalUrl');
+    }
 }
