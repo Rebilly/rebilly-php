@@ -23,7 +23,7 @@ _TBD_
 - [x] Added new properties to `Customer`: `averageValue`, `paymentCount`, `lastPaymentTime`
 - [x] Added new service `WebhookCredentials`
 - [x] Added new property to `PaymentCardAuthorization`: `redirectUrl` 
-- [x] Added new link to `PaymentCard`: `approvalUrl`, `authorizedTransaction` 
+- [x] Added new links to `PaymentCard`: `approvalUrl`, `authTransaction` 
 
 ### Changed
 - [x] **Upgraded minimum PHP version to 7.1**
