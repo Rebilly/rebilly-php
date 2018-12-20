@@ -55,6 +55,14 @@ final class Subscription extends Entity
     /**
      * @return string
      */
+    public function getRecentInvoiceId()
+    {
+        return $this->getAttribute('recentInvoiceId');
+    }
+
+    /**
+     * @return string
+     */
     public function getWebsiteId()
     {
         return $this->getAttribute('websiteId');
