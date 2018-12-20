@@ -24,6 +24,7 @@ _TBD_
 - [x] Added new service `WebhookCredentials`
 - [x] Added new property to `PaymentCardAuthorization`: `redirectUrl` 
 - [x] Added new links to `PaymentCard`: `approvalUrl`, `authTransaction` 
+- [x] Added new property to `Subscription`: `recentInvoiceId` 
 
 ### Changed
 - [x] **Upgraded minimum PHP version to 7.1**
