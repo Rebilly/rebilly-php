@@ -23,7 +23,7 @@ _TBD_
 - [x] Added new properties to `Customer`: `averageValue`, `paymentCount`, `lastPaymentTime`
 - [x] Added new service `WebhookCredentials`
 - [x] Added new property to `PaymentCardAuthorization`: `redirectUrl` 
-- [x] Added new link to `PaymentCard`: `approvalUrl`
+- [x] Added new links to `PaymentCard`: `approvalUrl`, `authTransaction` 
 - [x] Added new property to `Subscription`: `recentInvoiceId` 
 
 ### Changed

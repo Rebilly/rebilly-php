@@ -265,4 +265,13 @@ final class PaymentCard extends Entity
     {
         return $this->getLink('approvalUrl');
     }
+
+    public function getAuthTransaction()
+    {
+        if ($this->hasEmbeddedResource('authTransaction')) {
+            return new Transaction($this->getEmbeddedResource('authTransaction'));
+        }
+
+        return null;
+    }
 }
