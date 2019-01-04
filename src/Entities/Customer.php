@@ -359,4 +359,14 @@ final class Customer extends Entity
     {
         return $this->getAttribute('invoiceCount');
     }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setPaymentToken($value)
+    {
+        return $this->setAttribute('paymentToken', $value);
+    }
 }

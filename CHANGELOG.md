@@ -19,6 +19,7 @@ Security - in case of vulnerabilities.
 _TBD_
 
 ### Added
+- [x] Added new write-only property to set payment instrument from `token` for the `Customer` Resource.
 - [x] Added new property to `RiskMetadata`: `region`
 - [x] Added new properties to `Customer`: `averageValue`, `paymentCount`, `lastPaymentTime`
 - [x] Added new service `WebhookCredentials`
