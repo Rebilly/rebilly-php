@@ -361,7 +361,7 @@ final class Customer extends Entity
     }
 
     /**
-     * @param $value
+     * @param string $value
      *
      * @return $this
      */
