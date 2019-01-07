@@ -82,16 +82,6 @@ final class Invoice extends Entity
     }
 
     /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setSubscriptionId($value)
-    {
-        return $this->setAttribute('subscriptionId', $value);
-    }
-
-    /**
      * @return string
      */
     public function getCurrency()
@@ -107,6 +97,22 @@ final class Invoice extends Entity
     public function setCurrency($value)
     {
         return $this->setAttribute('currency', $value);
+    }
+
+    /**
+     * @return int
+     */
+    public function getInvoiceNumber()
+    {
+        return $this->getAttribute('invoiceNumber');
+    }
+
+    /**
+     * @return string
+     */
+    public function getPaidTime()
+    {
+        return $this->getAttribute('paidTime');
     }
 
     /**
@@ -195,6 +201,22 @@ final class Invoice extends Entity
     public function getShippingAmount()
     {
         return $this->getAttribute('shippingAmount');
+    }
+
+    /**
+     * @return float
+     */
+    public function getDiscountAmount()
+    {
+        return $this->getAttribute('discountAmount');
+    }
+
+    /**
+     * @return float
+     */
+    public function getSubtotalAmount()
+    {
+        return $this->getAttribute('subtotalAmount');
     }
 
     /**
