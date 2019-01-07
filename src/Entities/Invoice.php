@@ -76,6 +76,24 @@ final class Invoice extends Entity
     /**
      * @return string
      */
+    public function getSubscriptionId()
+    {
+        return $this->getAttribute('subscriptionId');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setSubscriptionId($value)
+    {
+        return $this->setAttribute('subscriptionId', $value);
+    }
+
+    /**
+     * @return string
+     */
     public function getCurrency()
     {
         return $this->getAttribute('currency');
