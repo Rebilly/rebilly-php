@@ -102,7 +102,7 @@ final class Invoice extends Entity
     /**
      * @return int
      */
-    public function getNumber()
+    public function getInvoiceNumber()
     {
         return $this->getAttribute('invoiceNumber');
     }
