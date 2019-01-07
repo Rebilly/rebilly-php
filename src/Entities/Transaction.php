@@ -50,11 +50,31 @@ final class Transaction extends Entity
     }
 
     /**
+     * @param $value
+     *
+     * @return Transaction
+     */
+    public function setAmount($value)
+    {
+        return $this->setAttribute('amount', $value);
+    }
+
+    /**
      * @return string
      */
     public function getCurrency()
     {
         return $this->getAttribute('currency');
+    }
+
+    /**
+     * @param $value
+     *
+     * @return Transaction
+     */
+    public function setCurrency($value)
+    {
+        return $this->setAttribute('currency', $value);
     }
 
     /**
@@ -71,6 +91,16 @@ final class Transaction extends Entity
     public function getType()
     {
         return $this->getAttribute('type');
+    }
+
+    /**
+     * @param $value
+     *
+     * @return Transaction
+     */
+    public function setType($value)
+    {
+        return $this->setAttribute('type', $value);
     }
 
     /**
@@ -122,11 +152,31 @@ final class Transaction extends Entity
     }
 
     /**
+     * @param $value
+     *
+     * @return Transaction
+     */
+    public function setWebsiteId($value)
+    {
+        return $this->setAttribute('websiteId', $value);
+    }
+
+    /**
      * @return string
      */
     public function getCustomerId()
     {
         return $this->getAttribute('customerId');
+    }
+
+    /**
+     * @param $value
+     *
+     * @return Transaction
+     */
+    public function setCustomerId($value)
+    {
+        return $this->setAttribute('customerId', $value);
     }
 
     /**
@@ -194,6 +244,16 @@ final class Transaction extends Entity
     }
 
     /**
+     * @param $value
+     *
+     * @return Transaction
+     */
+    public function setInvoiceIds($value)
+    {
+        return $this->setAttribute('invoiceIds', $value);
+    }
+
+    /**
      * @return string
      */
     public function getStatus()
@@ -250,6 +310,16 @@ final class Transaction extends Entity
     }
 
     /**
+     * @param $value
+     *
+     * @return Transaction
+     */
+    public function setMethod($value)
+    {
+        return $this->setAttribute('method', $value);
+    }
+
+    /**
      * @return string
      */
     public function getBin()
@@ -287,6 +357,16 @@ final class Transaction extends Entity
     public function getBillingAddress()
     {
         return $this->getAttribute('billingAddress');
+    }
+
+    /**
+     * @param $value
+     *
+     * @return Transaction
+     */
+    public function setBillingAddress($value)
+    {
+        return $this->setAttribute('billingAddress', $value);
     }
 
     /**
@@ -332,6 +412,42 @@ final class Transaction extends Entity
     }
 
     /**
+     * @return array
+     */
+    public function getRedirectUrl()
+    {
+        return $this->getAttribute('redirectUrl');
+    }
+
+    /**
+     * @param $value
+     *
+     * @return Transaction
+     */
+    public function setRedirectUrl($value)
+    {
+        return $this->setAttribute('redirectUrl', $value);
+    }
+
+    /**
+     * @return array
+     */
+    public function getNotificationUrl()
+    {
+        return $this->getAttribute('notificationUrl');
+    }
+
+    /**
+     * @param $value
+     *
+     * @return Transaction
+     */
+    public function setNotificationUrl($value)
+    {
+        return $this->setAttribute('notificationUrl', $value);
+    }
+
+    /**
      * @return null|Customer
      */
     public function getCustomer()
@@ -342,4 +458,6 @@ final class Transaction extends Entity
 
         return null;
     }
+
+
 }
