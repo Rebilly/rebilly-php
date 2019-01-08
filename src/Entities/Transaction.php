@@ -163,7 +163,7 @@ final class Transaction extends Entity
      */
     public function getWebsiteId()
     {
-        return $this->getAttribute('website');
+        return $this->getAttribute('websiteId');
     }
 
     /**
