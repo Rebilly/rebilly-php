@@ -445,7 +445,7 @@ final class Transaction extends Entity
     }
 
     /**
-     * @return
+     * @return string
      */
     public function getNotificationUrl()
     {
