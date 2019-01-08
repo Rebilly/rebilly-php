@@ -473,6 +473,4 @@ final class Transaction extends Entity
 
         return null;
     }
-
-
 }
