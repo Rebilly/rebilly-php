@@ -109,16 +109,6 @@ abstract class Resource implements JsonSerializable, ArrayAccess
     /**
      * @param string $name
      *
-     * @return mixed
-     */
-    final public function getLink($name)
-    {
-        return isset($this->links[$name]) ? $this->links[$name] : null;
-    }
-
-    /**
-     * @param string $name
-     *
      * @return bool
      */
     final protected function hasAttribute($name)
@@ -228,6 +218,16 @@ abstract class Resource implements JsonSerializable, ArrayAccess
     final protected function getEmbeddedResource($name)
     {
         return $this->hasEmbeddedResource($name) ? $this->embeddedData[$name] : null;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return mixed
+     */
+    final protected function getLink($name)
+    {
+        return isset($this->links[$name]) ? $this->links[$name] : null;
     }
 
     /**
