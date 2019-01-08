@@ -16,28 +16,6 @@ use Rebilly\Rest\Entity;
 /**
  * Class Transaction
  *
- *
- * ```json
- * {
- *   "id"
- *   "createdTime"
- *   "type"
- *   "result"
- *   "amount"
- *   "currency"
- *   "parentTransaction"
- *   "rebillNumber"
- *   "processorAccount"
- *   "processorResponse"
- *   "website"
- *   "customer"
- *   "paymentCard"
- *   "payment"
- * }
- * ```
- *
- * @todo Check if `getProcessorAccountId` is a ID or name
- *
  */
 final class Transaction extends Entity
 {
@@ -140,22 +118,6 @@ final class Transaction extends Entity
     public function getRebillNumber()
     {
         return $this->getAttribute('rebillNumber');
-    }
-
-    /**
-     * @return string
-     */
-    public function getProcessorAccountId()
-    {
-        return $this->getAttribute('processorAccount');
-    }
-
-    /**
-     * @return string
-     */
-    public function getProcessorResponse()
-    {
-        return $this->getAttribute('processorResponse');
     }
 
     /**
@@ -460,6 +422,14 @@ final class Transaction extends Entity
     public function setNotificationUrl($value)
     {
         return $this->setAttribute('notificationUrl', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getApprovalUrl()
+    {
+        return $this->getLink('approvalUrl');
     }
 
     /**
