@@ -77,7 +77,6 @@ final class TransactionService extends Service
 
     /**
      * @param array|JsonSerializable|Transaction $data
-     * @param float $amount
      *
      * @throws UnprocessableEntityException The input data does not valid
      *

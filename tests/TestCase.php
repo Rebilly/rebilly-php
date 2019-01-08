@@ -317,6 +317,8 @@ abstract class TestCase extends Framework\TestCase
                         return $faker->randomElement(Entities\ApiKey::datetimeFormats());
                     case Entities\Dispute::class:
                         return $faker->randomElement(Entities\Dispute::allowedTypes());
+                    case Entities\Transaction::class:
+                        return $faker->randomElement(Entities\Transaction::types());
                     default:
                         throw new InvalidArgumentException(
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)

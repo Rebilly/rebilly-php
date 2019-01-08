@@ -41,6 +41,21 @@ use Rebilly\Rest\Entity;
  */
 final class Transaction extends Entity
 {
+    public const TYPE_AUTHORIZE = 'authorize';
+
+    public const TYPE_SALE = 'sale';
+
+    public const TYPE_CREDIT = 'credit';
+
+    public static function types()
+    {
+        return [
+            self::TYPE_AUTHORIZE,
+            self::TYPE_SALE,
+            self::TYPE_CREDIT,
+        ];
+    }
+
     /**
      * @return string
      */
