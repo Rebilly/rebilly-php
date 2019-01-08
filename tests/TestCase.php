@@ -134,11 +134,13 @@ abstract class TestCase extends Framework\TestCase
             case 'cavv':
             case 'xid':
             case 'senderName':
-            case 'redirectUrl':
             case 'request':
             case 'response':
             case 'acquirerReferenceNumber':
                 return $faker->word;
+            case 'redirectUrl':
+            case 'notificationUrl':
+                return $faker->url;
             case 'organization':
             case 'company':
                 return $faker->company;

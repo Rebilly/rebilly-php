@@ -427,7 +427,7 @@ final class Transaction extends Entity
     }
 
     /**
-     * @return array
+     * @return string
      */
     public function getRedirectUrl()
     {
@@ -445,7 +445,7 @@ final class Transaction extends Entity
     }
 
     /**
-     * @return array
+     * @return
      */
     public function getNotificationUrl()
     {
@@ -473,6 +473,4 @@ final class Transaction extends Entity
 
         return null;
     }
-
-
 }
