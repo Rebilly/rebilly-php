@@ -134,11 +134,13 @@ abstract class TestCase extends Framework\TestCase
             case 'cavv':
             case 'xid':
             case 'senderName':
-            case 'redirectUrl':
             case 'request':
             case 'response':
             case 'acquirerReferenceNumber':
                 return $faker->word;
+            case 'redirectUrl':
+            case 'notificationUrl':
+                return $faker->url;
             case 'organization':
             case 'company':
                 return $faker->company;
@@ -317,6 +319,8 @@ abstract class TestCase extends Framework\TestCase
                         return $faker->randomElement(Entities\ApiKey::datetimeFormats());
                     case Entities\Dispute::class:
                         return $faker->randomElement(Entities\Dispute::allowedTypes());
+                    case Entities\Transaction::class:
+                        return $faker->randomElement(Entities\Transaction::types());
                     default:
                         throw new InvalidArgumentException(
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)

@@ -16,31 +16,24 @@ use Rebilly\Rest\Entity;
 /**
  * Class Transaction
  *
- *
- * ```json
- * {
- *   "id"
- *   "createdTime"
- *   "type"
- *   "result"
- *   "amount"
- *   "currency"
- *   "parentTransaction"
- *   "rebillNumber"
- *   "processorAccount"
- *   "processorResponse"
- *   "website"
- *   "customer"
- *   "paymentCard"
- *   "payment"
- * }
- * ```
- *
- * @todo Check if `getProcessorAccountId` is a ID or name
- *
  */
 final class Transaction extends Entity
 {
+    public const TYPE_AUTHORIZE = 'authorize';
+
+    public const TYPE_SALE = 'sale';
+
+    public const TYPE_CREDIT = 'credit';
+
+    public static function types()
+    {
+        return [
+            self::TYPE_AUTHORIZE,
+            self::TYPE_SALE,
+            self::TYPE_CREDIT,
+        ];
+    }
+
     /**
      * @return string
      */
@@ -50,11 +43,31 @@ final class Transaction extends Entity
     }
 
     /**
+     * @param $value
+     *
+     * @return Transaction
+     */
+    public function setAmount($value)
+    {
+        return $this->setAttribute('amount', $value);
+    }
+
+    /**
      * @return string
      */
     public function getCurrency()
     {
         return $this->getAttribute('currency');
+    }
+
+    /**
+     * @param $value
+     *
+     * @return Transaction
+     */
+    public function setCurrency($value)
+    {
+        return $this->setAttribute('currency', $value);
     }
 
     /**
@@ -71,6 +84,16 @@ final class Transaction extends Entity
     public function getType()
     {
         return $this->getAttribute('type');
+    }
+
+    /**
+     * @param $value
+     *
+     * @return Transaction
+     */
+    public function setType($value)
+    {
+        return $this->setAttribute('type', $value);
     }
 
     /**
@@ -100,25 +123,19 @@ final class Transaction extends Entity
     /**
      * @return string
      */
-    public function getProcessorAccountId()
-    {
-        return $this->getAttribute('processorAccount');
-    }
-
-    /**
-     * @return string
-     */
-    public function getProcessorResponse()
-    {
-        return $this->getAttribute('processorResponse');
-    }
-
-    /**
-     * @return string
-     */
     public function getWebsiteId()
     {
-        return $this->getAttribute('website');
+        return $this->getAttribute('websiteId');
+    }
+
+    /**
+     * @param $value
+     *
+     * @return Transaction
+     */
+    public function setWebsiteId($value)
+    {
+        return $this->setAttribute('websiteId', $value);
     }
 
     /**
@@ -127,6 +144,16 @@ final class Transaction extends Entity
     public function getCustomerId()
     {
         return $this->getAttribute('customerId');
+    }
+
+    /**
+     * @param $value
+     *
+     * @return Transaction
+     */
+    public function setCustomerId($value)
+    {
+        return $this->setAttribute('customerId', $value);
     }
 
     /**
@@ -194,6 +221,16 @@ final class Transaction extends Entity
     }
 
     /**
+     * @param $value
+     *
+     * @return Transaction
+     */
+    public function setInvoiceIds($value)
+    {
+        return $this->setAttribute('invoiceIds', $value);
+    }
+
+    /**
      * @return string
      */
     public function getStatus()
@@ -250,6 +287,16 @@ final class Transaction extends Entity
     }
 
     /**
+     * @param $value
+     *
+     * @return Transaction
+     */
+    public function setMethod($value)
+    {
+        return $this->setAttribute('method', $value);
+    }
+
+    /**
      * @return string
      */
     public function getBin()
@@ -287,6 +334,16 @@ final class Transaction extends Entity
     public function getBillingAddress()
     {
         return $this->getAttribute('billingAddress');
+    }
+
+    /**
+     * @param $value
+     *
+     * @return Transaction
+     */
+    public function setBillingAddress($value)
+    {
+        return $this->setAttribute('billingAddress', $value);
     }
 
     /**
@@ -329,6 +386,50 @@ final class Transaction extends Entity
     public function getRedirectUrls()
     {
         return $this->getAttribute('redirectUrls');
+    }
+
+    /**
+     * @return string
+     */
+    public function getRedirectUrl()
+    {
+        return $this->getAttribute('redirectUrl');
+    }
+
+    /**
+     * @param $value
+     *
+     * @return Transaction
+     */
+    public function setRedirectUrl($value)
+    {
+        return $this->setAttribute('redirectUrl', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getNotificationUrl()
+    {
+        return $this->getAttribute('notificationUrl');
+    }
+
+    /**
+     * @param $value
+     *
+     * @return Transaction
+     */
+    public function setNotificationUrl($value)
+    {
+        return $this->setAttribute('notificationUrl', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getApprovalUrl()
+    {
+        return $this->getLink('approvalUrl');
     }
 
     /**

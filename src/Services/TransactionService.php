@@ -74,4 +74,19 @@ final class TransactionService extends Service
             ['transactionId' => $transactionId]
         );
     }
+
+    /**
+     * @param array|JsonSerializable|Transaction $data
+     *
+     * @throws UnprocessableEntityException The input data does not valid
+     *
+     * @return Transaction
+     */
+    public function create($data)
+    {
+        return $this->client()->post(
+            $data,
+            'transactions'
+        );
+    }
 }
