@@ -27,6 +27,7 @@ _TBD_
 - [x] Added new links to `PaymentCard`: `approvalUrl`, `authTransaction` 
 - [x] Added new property to `Subscription`: `recentInvoiceId` 
 - [x] Added POST to `Transaction` 
+- [x] Added new property to `PaymentCardToken`: `isUsed`
 
 ### Changed
 - [x] **Upgraded minimum PHP version to 7.1**
