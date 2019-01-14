@@ -71,6 +71,26 @@ final class File extends Entity
     }
 
     /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setFile($value)
+    {
+        return $this->setAttribute('file', $value);
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setUrl($value)
+    {
+        return $this->setAttribute('url', $value);
+    }
+
+    /**
      * @return string
      */
     public function getName()
@@ -98,6 +118,7 @@ final class File extends Entity
 
     /**
      * @param mixed $value
+     *
      * @return $this
      */
     public function setExtension($value)
@@ -119,6 +140,7 @@ final class File extends Entity
 
     /**
      * @param mixed $value
+     *
      * @return $this
      */
     public function setDescription($value)

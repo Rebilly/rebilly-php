@@ -35,9 +35,6 @@ use Rebilly\Rest\Entity;
  * }
  * ```
  *
- * @todo Rename property `customer` to `customerId`
- * @todo Rename property `billingContact` to `billingContactId`
- *
  */
 final class PaymentCard extends Entity
 {
@@ -55,6 +52,16 @@ final class PaymentCard extends Entity
     public function setPan($value)
     {
         return $this->setAttribute('pan', $value);
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setToken($value)
+    {
+        return $this->setAttribute('token', $value);
     }
 
     /**
