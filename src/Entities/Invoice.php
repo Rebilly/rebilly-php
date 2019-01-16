@@ -18,10 +18,14 @@ use Rebilly\Rest\Entity;
  *
  * ```json
  * {
- *   "customer"
- *   "website"
+ *   "customerId"
+ *   "websiteId"
  *   "currency"
+ *   "abandonedTime"
+ *   "voidedTime"
+ *   "paidTime"
  *   "dueTime"
+ *   "issuedTime"
  *   "billingContact"
  *   "deliveryContact"
  * }
@@ -118,6 +122,30 @@ final class Invoice extends Entity
     /**
      * @return string
      */
+    public function getAbandonedTime()
+    {
+        return $this->getAttribute('abandonedTime');
+    }
+
+    /**
+     * @return string
+     */
+    public function getVoidedTime()
+    {
+        return $this->getAttribute('voidedTime');
+    }
+
+    /**
+     * @return string
+     */
+    public function getIssuedTime()
+    {
+        return $this->getAttribute('issuedTime');
+    }
+
+    /**
+     * @return string
+     */
     public function getDueTime()
     {
         return $this->getAttribute('dueTime');
@@ -193,6 +221,18 @@ final class Invoice extends Entity
     public function getItems()
     {
         return $this->getAttribute('items');
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return array|InvoiceItem[]
+     */
+    public function createItems(array $data)
+    {
+        return array_map(function ($element) {
+            return new InvoiceItem($element);
+        }, $data);
     }
 
     /**

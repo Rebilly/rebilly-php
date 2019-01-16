@@ -49,12 +49,11 @@ class ApiTest extends TestCase
 
         foreach ($methods as $method) {
             $prefix = substr($method, 0, 3);
+            $attribute = lcfirst(substr($method, 3));
 
             if ($prefix === 'get') {
-                $attribute = lcfirst(substr($method, 3));
                 $getters[$attribute] = $method;
             } elseif ($prefix === 'set') {
-                $attribute = lcfirst(substr($method, 3));
                 $setters[$attribute] = $method;
             }
         }

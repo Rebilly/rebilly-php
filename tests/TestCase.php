@@ -625,9 +625,32 @@ abstract class TestCase extends Framework\TestCase
             case 'recurringInterval':
                 return new Entities\Subscriptions\RecurringInterval(['unit' => 'day', 'length' => 1, 'limit' => 10]);
             case 'trial':
-                return new Entities\Subscriptions\PlanTrial(['price' => 1.0, 'period' => ['unit' => 'day', 'length' => 1]]);
+                switch ($class) {
+                    case Entities\Subscription::class:
+                        return new Entities\Subscriptions\SubscriptionTrial(['enabled' => false]);
+                    case Entities\Plan::class:
+                        return new Entities\Subscriptions\PlanTrial(['price' => 1.0, 'period' => ['unit' => 'day', 'length' => 1]]);
+                    default:
+                        throw new InvalidArgumentException(
+                            sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
+                        );
+                }
+                // no break
             case 'setup':
                 return new Entities\Subscriptions\PlanSetup(['price' => 1.0]);
+            case 'file':
+                return base64_encode('Plain-text file');
+            case 'options':
+                return [
+                    'color',
+                    'size',
+                ];
+            case 'unitLabel':
+                return 'unit';
+            case 'orderType':
+                return 'subscription-order';
+            case 'billingAnchor':
+                return new Entities\Subscriptions\BillingAnchor(['billingAnchorInstruction' => ['method' => 'immediately']]);
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)

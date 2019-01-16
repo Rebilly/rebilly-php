@@ -21,11 +21,13 @@ use Rebilly\Rest\Entity;
  * {
  *   "id"
  *   "name"
+ *   "unitLabel"
  *   "description"
  *   "taxCategoryId"
  *   "requiresShipping"
  *   "accountingCode"
  *   "customFields"
+ *   "options"
  *   "createdTime"
  *   "updatedTime"
  * }
@@ -93,6 +95,23 @@ final class Product extends Entity
     public function setDescription($value)
     {
         return $this->setAttribute('description', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getUnitLabel()
+    {
+        return $this->getAttribute('unitLabel');
+    }
+
+    /**
+     * @param string $value
+     * @return $this
+     */
+    public function setUnitLabel($value)
+    {
+        return $this->setAttribute('unitLabel', $value);
     }
 
     /**
@@ -172,5 +191,23 @@ final class Product extends Entity
     public function setCustomFields($value)
     {
         return $this->setAttribute('customFields', $value);
+    }
+
+    /**
+     * @return array
+     */
+    public function getOptions()
+    {
+        return $this->getAttribute('options');
+    }
+
+    /**
+     * @param array $value
+     *
+     * @return $this
+     */
+    public function setOptions($value)
+    {
+        return $this->setAttribute('options', $value);
     }
 }
