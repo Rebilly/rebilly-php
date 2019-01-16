@@ -224,6 +224,18 @@ final class Invoice extends Entity
     }
 
     /**
+     * @param array $data
+     *
+     * @return array|InvoiceItem[]
+     */
+    public function createItems(array $data)
+    {
+        return array_map(function ($element) {
+            return new InvoiceItem($element);
+        }, $data);
+    }
+
+    /**
      * @return float
      */
     public function getShippingAmount()

@@ -80,16 +80,6 @@ final class CustomField extends Entity
     }
 
     /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setName($value)
-    {
-        return $this->setAttribute('name', $value);
-    }
-
-    /**
      * @return string
      */
     public function getType()
