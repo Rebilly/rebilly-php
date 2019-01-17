@@ -291,7 +291,7 @@ final class Transaction extends Entity
      */
     public function getPaymentInstrument()
     {
-        return $this->getAttribute('paymentInstrument');
+        return PaymentMethodInstrument::createFromData($this->getAttribute('paymentInstrument'));
     }
 
     /**
