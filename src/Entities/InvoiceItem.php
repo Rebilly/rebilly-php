@@ -93,6 +93,22 @@ final class InvoiceItem extends Entity
     }
 
     /**
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->getAttribute('price');
+    }
+
+    /**
+     * @return float
+     */
+    public function getDiscountAmount()
+    {
+        return $this->getAttribute('discountAmount');
+    }
+
+    /**
      * @return string
      */
     public function getDescription()

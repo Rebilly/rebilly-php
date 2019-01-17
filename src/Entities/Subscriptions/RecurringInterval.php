@@ -11,6 +11,7 @@
 
 namespace Rebilly\Entities\Subscriptions;
 
+use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstruction;
 use Rebilly\Rest\Resource;
 
 final class RecurringInterval extends Resource
@@ -43,5 +44,23 @@ final class RecurringInterval extends Resource
     public function setLimit($value)
     {
         return $this->setAttribute('limit', $value);
+    }
+
+    /**
+     * @return ScheduleInstruction
+     */
+    public function getPeriodAnchorInstruction()
+    {
+        return $this->getAttribute('periodAnchorInstruction');
+    }
+
+    public function setPeriodAnchorInstruction($value)
+    {
+        return $this->setAttribute('periodAnchorInstruction', $value);
+    }
+
+    public function createPeriodAnchorInstruction(array $data)
+    {
+        return ScheduleInstruction::createFromData($data);
     }
 }

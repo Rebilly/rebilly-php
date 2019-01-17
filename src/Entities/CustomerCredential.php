@@ -65,14 +65,6 @@ final class CustomerCredential extends Entity
     }
 
     /**
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->getAttribute('password');
-    }
-
-    /**
      * @param string $value
      *
      * @return $this

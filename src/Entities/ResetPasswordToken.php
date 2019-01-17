@@ -20,7 +20,6 @@ use Rebilly\Rest\Entity;
  * {
  *   "token"
  *   "username"
- *   "password"
  *   "expiredTime"
  * }
  * ```
@@ -68,24 +67,6 @@ final class ResetPasswordToken extends Entity
     public function setUsername($value)
     {
         return $this->setAttribute('username', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->getAttribute('password');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setPassword($value)
-    {
-        return $this->setAttribute('password', $value);
     }
 
     /**

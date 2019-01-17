@@ -29,10 +29,11 @@ use Rebilly\Rest\Entity;
  * {
  *   "id"
  *   "isActive"
+ *   "productId"
+ *   "productOptions"
  *   "name"
  *   "currency"
  *   "description"
- *   "richDescription"
  *   "recurringAmount"
  *   "recurringPeriodUnit"
  *   "recurringPeriodLength"

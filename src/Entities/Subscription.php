@@ -11,13 +11,65 @@
 
 namespace Rebilly\Entities;
 
+use Rebilly\Entities\Subscriptions\BillingAnchor;
+use Rebilly\Entities\Subscriptions\RecurringInterval;
+use Rebilly\Entities\Subscriptions\SubscriptionTrial;
 use Rebilly\Rest\Entity;
 
 /**
  * Class Subscription.
+ *
+ * ```json
+ * {
+ *   "id"
+ *   "orderType"
+ *   "status"
+ *   "customerId"
+ *   "websiteId"
+ *   "initialInvoiceId"
+ *   "recentInvoiceId"
+ *   "items"
+ *   "billingAnchor"
+ *   "recurringInterval"
+ *   "deliveryAddress"
+ *   "billingAddress"
+ *   "autopay"
+ *   "riskMetadata"
+ *   "startTime"
+ *   "activationTime"
+ *   "renewalTime"
+ *   "trial"
+ *   "inTrial"
+ *   "customFields"
+ *   "createdTime"
+ *   "updatedTime"
+ *   "canceledTime"
+ *   "canceledBy"
+ *   "cancelCategory"
+ *   "cancelDescription"
+ * }
+ * ```
  */
 final class Subscription extends Entity
 {
+    /**
+     * @return string
+     */
+    public function getOrderType()
+    {
+        return $this->getAttribute('orderType');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return Subscription
+     */
+    public function setOrderType($value)
+    {
+        return $this->setAttribute('orderType', $value);
+    }
+
     /**
      * @return string
      */
@@ -123,6 +175,14 @@ final class Subscription extends Entity
     /**
      * @return string
      */
+    public function getActivationTime()
+    {
+        return $this->getAttribute('activationTime');
+    }
+
+    /**
+     * @return string
+     */
     public function getCreatedTime()
     {
         return $this->getAttribute('createdTime');
@@ -170,6 +230,34 @@ final class Subscription extends Entity
     public function getInTrial()
     {
         return $this->getAttribute('inTrial');
+    }
+
+    /**
+     * @return SubscriptionTrial
+     */
+    public function getTrial()
+    {
+        return $this->getAttribute('trial');
+    }
+
+    /**
+     * @param array $value
+     *
+     * @return $this
+     */
+    public function setTrial($value)
+    {
+        return $this->setAttribute('trial', $value);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return SubscriptionTrial
+     */
+    public function createTrial(array $data)
+    {
+        return new SubscriptionTrial($data);
     }
 
     /**
@@ -325,6 +413,62 @@ final class Subscription extends Entity
             },
             $data
         );
+    }
+
+    /**
+     * @return BillingAnchor
+     */
+    public function getBillingAnchor()
+    {
+        return $this->getAttribute('billingAnchor');
+    }
+
+    /**
+     * @param array|BillingAnchor $value
+     *
+     * @return $this
+     */
+    public function setBillingAnchor($value)
+    {
+        return $this->setAttribute('billingAnchor', $value);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return BillingAnchor
+     */
+    public function createBillingAnchor(array $data)
+    {
+        return new BillingAnchor($data);
+    }
+
+    /**
+     * @return RecurringInterval
+     */
+    public function getRecurringInterval()
+    {
+        return $this->getAttribute('recurringInterval');
+    }
+
+    /**
+     * @param array|RecurringInterval $value
+     *
+     * @return $this
+     */
+    public function setRecurringInterval($value)
+    {
+        return $this->setAttribute('recurringInterval', $value);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return RecurringInterval
+     */
+    public function createRecurringInterval(array $data)
+    {
+        return new RecurringInterval($data);
     }
 
     /**
