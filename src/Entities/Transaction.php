@@ -287,13 +287,21 @@ final class Transaction extends Entity
     }
 
     /**
-     * @param $value
+     * @return PaymentMethodInstrument
+     */
+    public function getPaymentInstrument()
+    {
+        return $this->getAttribute('paymentInstrument');
+    }
+
+    /**
+     * @param PaymentMethodInstrument $value
      *
      * @return Transaction
      */
-    public function setMethod($value)
+    public function setPaymentInstrument(PaymentMethodInstrument $value)
     {
-        return $this->setAttribute('method', $value);
+        return $this->setAttribute('paymentInstrument', $value->jsonSerialize());
     }
 
     /**
