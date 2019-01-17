@@ -486,6 +486,7 @@ abstract class TestCase extends Framework\TestCase
             case 'paymentInstrument':
                 switch ($class) {
                     case Entities\Payment::class:
+                    case Entities\Transaction::class:
                         return new Entities\PaymentInstruments\PaymentCardInstrument([
                             'method' => Entities\PaymentMethod::METHOD_PAYMENT_CARD,
                         ]);
