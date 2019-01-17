@@ -44,6 +44,10 @@ final class Blacklist extends Entity
 
     public const TYPE_FINGERPRINT = 'fingerprint';
 
+    public const TYPE_EMAIL_DOMAIN = 'email-domain';
+
+    public const TYPE_BANK_ACCOUNT = 'bank-account';
+
     public const MSG_UNEXPECTED_TYPE = 'Unexpected type. Only %s types support';
 
     /**
@@ -59,6 +63,8 @@ final class Blacklist extends Entity
             self::TYPE_BIN,
             self::TYPE_COUNTRY,
             self::TYPE_FINGERPRINT,
+            self::TYPE_EMAIL_DOMAIN,
+            self::TYPE_BANK_ACCOUNT,
         ];
     }
 
