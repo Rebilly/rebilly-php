@@ -79,6 +79,16 @@ final class Subscription extends Entity
     }
 
     /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setStatus($value)
+    {
+        return $this->setAttribute('status', $value);
+    }
+
+    /**
      * @return string
      */
     public function getCustomerId()
