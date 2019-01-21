@@ -14,24 +14,7 @@ namespace Rebilly\Entities\KycDocuments;
 use Rebilly\Rest\Resource;
 
 /**
- * Class DocumentMatches
- *
- * ```json
- * {
- *   "score",
- *   "data": {
- *     "containsImage",
- *     "isIdentityDocument",
- *     "isPublishedOnline",
- *     "firstName",
- *     "lastName",
- *     "dateOfBirth",
- *     "expiryDate",
- *     "issueDate",
- *     "hasMinimalAge"
- *   }
- * }
- * ```
+ * Class DocumentMatches.
  */
 final class DocumentMatches extends Resource
 {

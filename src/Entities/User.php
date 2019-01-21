@@ -14,20 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Entity;
 
 /**
- * Class User
- *
- * ```json
- * {
- *   "id"
- *   "email"
- *   "firstName"
- *   "lastName"
- *   "phoneNumber"
- *   "createdTime"
- *   "updatedTime"
- * }
- * ```
- *
+ * Class User.
  */
 final class User extends Entity
 {

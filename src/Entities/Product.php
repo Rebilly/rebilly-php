@@ -15,23 +15,7 @@ use DomainException;
 use Rebilly\Rest\Entity;
 
 /**
- * Class Product
- *
- * ```json
- * {
- *   "id"
- *   "name"
- *   "unitLabel"
- *   "description"
- *   "taxCategoryId"
- *   "requiresShipping"
- *   "accountingCode"
- *   "customFields"
- *   "options"
- *   "createdTime"
- *   "updatedTime"
- * }
- * ```
+ * Class Product.
  */
 final class Product extends Entity
 {

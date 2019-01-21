@@ -15,14 +15,7 @@ use DomainException;
 use Rebilly\Rest\Resource;
 
 /**
- * Class RejectionReason
- *
- * ```json
- * {
- *   "type",
- *   "message"
- * }
- * ```
+ * Class RejectionReason.
  */
 final class RejectionReason extends Resource
 {

@@ -14,27 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Entity;
 
 /**
- * Class ThreeDSecure
- *
- * ```json
- * {
- *   "id"
- *   "customerId"
- *   "gatewayAccountId"
- *   "websiteId"
- *   "enrolled;
- *   "enrollmentEci"
- *   "eci"
- *   "cavv"
- *   "xid"
- *   "payerAuthResponseStatus"
- *   "signatureVerification"
- *   "amount"
- *   "currency"
- *   "transactionId"
- * }
- * ```
- *
+ * Class ThreeDSecure.
  */
 final class ThreeDSecure extends Entity
 {

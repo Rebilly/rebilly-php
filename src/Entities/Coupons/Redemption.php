@@ -15,18 +15,7 @@ use DomainException;
 use Rebilly\Rest\Entity;
 
 /**
- * Class Redemption
- *
- * ```json
- * {
- *   "id"
- *   "redemptionCode"
- *   "customerId"
- *   "additionalRestrictions"
- *   "createdTime"
- *   "canceledTime"
- * }
- * ```
+ * Class Redemption.
  */
 final class Redemption extends Entity
 {

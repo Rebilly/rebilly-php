@@ -15,19 +15,7 @@ use DomainException;
 use Rebilly\Rest\Entity;
 
 /**
- * Class ShippingZone
- *
- * ```json
- * {
- *   "id"
- *   "name"
- *   "countries"
- *   "rates"
- *   "isDefault"
- *   "createdTime"
- *   "updatedTime"
- * }
- * ```
+ * Class ShippingZone.
  */
 final class ShippingZone extends Entity
 {

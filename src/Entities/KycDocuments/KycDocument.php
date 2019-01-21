@@ -15,22 +15,7 @@ use DomainException;
 use Rebilly\Rest\Entity;
 
 /**
- * Class KycDocument
- *
- * ```json
- * {
- *   "id",
- *   "customerId",
- *   "fileId",
- *   "documentType",
- *   "status",
- *   "rejectionReason",
- *   "documentMatches",
- *   "createdTime",
- *   "updatedTime",
- *   "processedTime",
- * }
- * ```
+ * Class KycDocument.
  */
 final class KycDocument extends Entity
 {

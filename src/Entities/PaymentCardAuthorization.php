@@ -14,8 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Resource;
 
 /**
- * Class PaymentCardAuthorization
- *
+ * Class PaymentCardAuthorization.
  */
 final class PaymentCardAuthorization extends Resource
 {

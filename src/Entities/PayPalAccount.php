@@ -14,21 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Entity;
 
 /**
- * Class PayPalAccount
- *
- * ```json
- * {
- *   "id": "ABCD2345",
- *   "customerId": "ABCD1234",
- *   "contactId": "ADDRESS1",
- *   "username": "Bank name",
- *   "status": "active",
- *   "createdTime": "2015-02-11 04:45:23",
- *   "updatedTime": "2015-02-11 04:45:23"
- *   "customFields": []
- * }
- * ```
- *
+ * Class PayPalAccount.
  */
 
 final class PayPalAccount extends Entity

@@ -15,24 +15,7 @@ use DomainException;
 use Rebilly\Rest\Entity;
 
 /**
- * Class File
- *
- * ```json
- * {
- *   "id"
- *   "name"
- *   "extension"
- *   "description"
- *   "tags"
- *   "sha1"
- *   "mime"
- *   "size"
- *   "width"
- *   "height"
- *   "createdTime"
- *   "updatedTime"
- * }
- * ```
+ * Class File.
  */
 final class File extends Entity
 {

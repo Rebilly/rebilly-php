@@ -14,7 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Resource;
 
 /**
- * Class SubscriptionReactivation
+ * Class SubscriptionReactivation.
  */
 class SubscriptionReactivation extends Resource
 {

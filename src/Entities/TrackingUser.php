@@ -14,22 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Resource;
 
 /**
- * Class TrackingUser
- *
- * ```json
- * {
- *   "userId"
- *   "apiKeyId"
- *   "email"
- *   "firstName"
- *   "lastName"
- *   "ipAddress"
- *   "userAgent"
- *   "fingerprint"
- *   "isSupport"
- * }
- * ```
- *
+ * Class TrackingUser.
  */
 final class TrackingUser extends Resource
 {

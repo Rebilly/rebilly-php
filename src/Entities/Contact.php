@@ -14,28 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Entity;
 
 /**
- * Class Contact
- *
- * ```json
- * {
- *   "id",
- *   "customerId",
- *   "firstName"
- *   "lastName"
- *   "organization"
- *   "address"
- *   "address2"
- *   "city"
- *   "region"
- *   "country"
- *   "postalCode"
- *   "phoneNumber"
- *   "createdTime",
- *   "updatedTime",
- *   "customFields"
- * }
- * ```
- *
+ * Class Contact.
  */
 final class Contact extends Entity
 {

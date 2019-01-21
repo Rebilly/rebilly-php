@@ -15,22 +15,9 @@ use DomainException;
 use Rebilly\Rest\Entity;
 
 /**
- * Class Note
+ * Class Note.
  *
- * ```json
- * {
- *   "id"
- *   "relatedType"
- *   "relatedId"
- *   "content"
- *   "archived"
- *   "createdBy"
- *   "createdTime"
- *   "updatedTime"
- *   "archivedTime"
- * }
- * ```
- *
+ * @deprecated see Timeline Comments instead.
  */
 final class Note extends Entity
 {

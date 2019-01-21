@@ -14,17 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Entity;
 
 /**
- * Class AuthenticationToken
- *
- * ```json
- * {
- *   "token"
- *   "username"
- *   "password"
- *   "expiredTime"
- * }
- * ```
- *
+ * Class AuthenticationToken.
  */
 final class AuthenticationToken extends Entity
 {

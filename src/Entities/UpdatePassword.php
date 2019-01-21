@@ -14,14 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Resource;
 
 /**
- * Class UpdatePassword
- *
- * ```json
- * {
- *   "currentPassword"
- *   "newPassword"
- * }
- * ```
+ * Class UpdatePassword.
  */
 final class UpdatePassword extends Resource
 {

@@ -14,8 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Entity;
 
 /**
- * Class GatewayAccountDowntime
- *
+ * Class GatewayAccountDowntime.
  */
 final class GatewayAccountDowntime extends Entity
 {

@@ -15,16 +15,7 @@ use DomainException;
 use Rebilly\Rest\Entity;
 
 /**
- * Class Layout
- *
- * ```json
- * {
- *   "id",
- *   "name",
- *   "items"
- * }
- * ```
- *
+ * Class Layout.
  */
 final class Layout extends Entity
 {

@@ -15,6 +15,8 @@ use Rebilly\Rest\Entity;
 
 /**
  * Class Payment.
+ *
+ * @deprecated see Transaction instead.
  */
 final class Payment extends Entity
 {

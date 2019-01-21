@@ -14,8 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Entity;
 
 /**
- * Class Transaction
- *
+ * Class Transaction.
  */
 final class Transaction extends Entity
 {

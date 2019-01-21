@@ -14,23 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Entity;
 
 /**
- * Class WebhookTracking
- *
- * ```json
- * {
- *   "id"
- *   "eventType"
- *   "url"
- *   "method"
- *   "headers"
- *   "responseCode"
- *   "responseBody"
- *   "payload"
- *   "sentTime"
- *   "initiatedTime"
- *   "createdTime"
- * }
- * ```
+ * Class WebhookTracking.
  */
 final class WebhookTracking extends Entity
 {

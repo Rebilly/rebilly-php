@@ -14,15 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Resource;
 
 /**
- * Class LayoutItem
- *
- * ```json
- * {
- *   "planId",
- *   "starred"
- * }
- * ```
- *
+ * Class LayoutItem.
  */
 final class LayoutItem extends Resource
 {

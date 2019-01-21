@@ -15,16 +15,7 @@ use DomainException;
 use Rebilly\Rest\Entity;
 
 /**
- * Class CustomField
- *
- * ```json
- * {
- *   "name"
- *   "type"
- *   "additionalSchema"
- *   "description"
- * }
- * ```
+ * Class CustomField.
  */
 final class CustomField extends Entity
 {

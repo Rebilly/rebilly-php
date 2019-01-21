@@ -14,7 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Resource;
 
 /**
- * Class CvvResponse
+ * Class CvvResponse.
  */
 final class CvvResponse extends Resource
 {

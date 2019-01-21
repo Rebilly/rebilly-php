@@ -15,10 +15,7 @@ use DomainException;
 use Rebilly\Rest\Entity;
 
 /**
- * Class GatewayAccount
- *
- * @see http://rebilly.github.io/RebillyAPI/#tag/Gateway%20Accounts
- *
+ * Class GatewayAccount.
  */
 final class GatewayAccount extends Entity
 {

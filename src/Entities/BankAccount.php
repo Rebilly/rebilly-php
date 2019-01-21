@@ -14,24 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Entity;
 
 /**
- * Class BankAccount
- *
- * ```json
- * {
- *   "id": "ABCD2345",
- *   "customerId": "ABCD1234",
- *   "contactId": "ADDRESS1",
- *   "name": "Bank name",
- *   "accountType": "checking",
- *   "routingNumber": "12345",
- *   "accountNumber": "12345",
- *   "status": "active",
- *   "createdTime": "2015-02-11 04:45:23",
- *   "updatedTime": "2015-02-11 04:45:23"
- *   "customFields": []
- * }
- * ```
- *
+ * Class BankAccount.
  */
 
 final class BankAccount extends Entity

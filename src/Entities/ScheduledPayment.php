@@ -16,29 +16,8 @@ use Rebilly\Rest\Entity;
 /**
  * Class ScheduledPayment.
  *
- * ```json
- * {
- *   "id": 'string',
- *   "createdTime": 'datetime',
- *   "updatedTime": 'datetime',
- *   "status": 'enum',
- *   "result": 'enum',
- *   "payment": {
- *     "website": 'string',
- *     "customer": 'string',
- *     "amount": 'float',
- *     "currency": 'currency',
- *     "method": 'enum',
- *     "paymentInstrument": {
- *       ""
- *     },
- *     "description": 'string'
- *   }
- * }
- * ```
- *
+ * @deprecated  see Transaction instead.
  * @todo To be consistent we should rename `approval_link` to `approvalLink`
- *
  */
 final class ScheduledPayment extends Entity
 {

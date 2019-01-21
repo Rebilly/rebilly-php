@@ -14,17 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Entity;
 
 /**
- * Class CustomerCredential
- *
- * ```json
- * {
- *   "id"
- *   "username"
- *   "password"
- *   "expiredTime"
- * }
- * ```
- *
+ * Class CustomerCredential.
  */
 final class CustomerCredential extends Entity
 {

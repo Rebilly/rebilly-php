@@ -14,19 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Entity;
 
 /**
- * Class SubscriptionTracking
- *
- * ```json
- * {
- *   "id"
- *   "subscriptionId"
- *   "invoiceItemId"
- *   "result"
- *   "message"
- *   "createdTime"
- * }
- * ```
- *
+ * Class SubscriptionTracking.
  */
 final class SubscriptionTracking extends Entity
 {
