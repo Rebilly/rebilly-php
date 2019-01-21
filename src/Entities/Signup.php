@@ -14,19 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Resource;
 
 /**
- * Class Signup
- *
- * ```json
- * {
- *   "email"
- *   "company"
- *   "firstName"
- *   "lastName"
- *   "businessPhone"
- *   "password"
- * }
- * ```
- *
+ * Class Signup.
  */
 final class Signup extends Resource
 {

@@ -18,37 +18,6 @@ use Rebilly\Rest\Entity;
 
 /**
  * Class Subscription.
- *
- * ```json
- * {
- *   "id"
- *   "orderType"
- *   "status"
- *   "customerId"
- *   "websiteId"
- *   "initialInvoiceId"
- *   "recentInvoiceId"
- *   "items"
- *   "billingAnchor"
- *   "recurringInterval"
- *   "deliveryAddress"
- *   "billingAddress"
- *   "autopay"
- *   "riskMetadata"
- *   "startTime"
- *   "activationTime"
- *   "renewalTime"
- *   "trial"
- *   "inTrial"
- *   "customFields"
- *   "createdTime"
- *   "updatedTime"
- *   "canceledTime"
- *   "canceledBy"
- *   "cancelCategory"
- *   "cancelDescription"
- * }
- * ```
  */
 final class Subscription extends Entity
 {

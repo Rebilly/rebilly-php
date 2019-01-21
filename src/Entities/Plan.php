@@ -23,35 +23,9 @@ use Rebilly\Entities\Subscriptions\RecurringInterval;
 use Rebilly\Rest\Entity;
 
 /**
- * Class Plan
- *
- * ```json
- * {
- *   "id"
- *   "isActive"
- *   "productId"
- *   "productOptions"
- *   "name"
- *   "currency"
- *   "description"
- *   "recurringAmount"
- *   "recurringPeriodUnit"
- *   "recurringPeriodLength"
- *   "trialAmount"
- *   "trialPeriodUnit"
- *   "trialPeriodLength"
- *   "setupAmount"
- *   "expireTime"
- *   "contractTermUnit"
- *   "contractTermLength"
- *   "recurringPeriodLimit"
- *   "minQuantity"
- *   "maxQuantity"
- * }
- * ```
+ * Class Plan.
  *
  * @todo Add period unit validation
- *
  */
 final class Plan extends Entity
 {

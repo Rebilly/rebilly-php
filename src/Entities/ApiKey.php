@@ -15,19 +15,7 @@ use DomainException;
 use Rebilly\Rest\Entity;
 
 /**
- * Class ApiKey
- *
- * ```json
- * {
- *   "id"
- *   "description"
- *   "datetimeFormat"
- *   "userName"
- *   "secretKey"
- *   "createdTime"
- * }
- * ```
- *
+ * Class ApiKey.
  */
 final class ApiKey extends Entity
 {

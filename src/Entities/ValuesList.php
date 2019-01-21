@@ -15,18 +15,7 @@ use DomainException;
 use Rebilly\Rest\Entity;
 
 /**
- * Class ValuesList
- *
- * ```json
- * {
- *   "id"
- *   "version"
- *   "name"
- *   "values"
- *   "createdTime"
- *   "updatedTime"
- * }
- * ```
+ * Class ValuesList.
  */
 final class ValuesList extends Entity
 {

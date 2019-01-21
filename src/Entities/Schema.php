@@ -23,7 +23,6 @@ use Rebilly\Rest\Collection;
 
 /**
  * Class Schema.
- *
  */
 final class Schema implements IteratorAggregate, ArrayAccess
 {

@@ -14,7 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Entity;
 
 /**
- * Class Webhook
+ * Class Webhook.
  */
 final class Webhook extends Entity
 {

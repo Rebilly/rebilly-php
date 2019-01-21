@@ -14,16 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Entity;
 
 /**
- * Class ResetPasswordToken
- *
- * ```json
- * {
- *   "token"
- *   "username"
- *   "expiredTime"
- * }
- * ```
- *
+ * Class ResetPasswordToken.
  */
 final class ResetPasswordToken extends Entity
 {

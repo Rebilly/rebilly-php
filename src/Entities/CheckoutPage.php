@@ -14,24 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Entity;
 
 /**
- * Class CheckoutPage
- *
- * ```json
- * {
- *   "id"
- *   "name"
- *   "uri"
- *   "planId"
- *   "websiteId"
- *   "redirectUrl"
- *   "redirectTimeout"
- *   "isActive"
- *   "allowCustomCustomerId"
- *   "createdTime"
- *   "updatedTime"
- * }
- * ```
- *
+ * Class CheckoutPage.
  */
 final class CheckoutPage extends Entity
 {

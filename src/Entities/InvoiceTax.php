@@ -14,7 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Resource;
 
 /**
- * Class InvoiceTax
+ * Class InvoiceTax.
  */
 final class InvoiceTax extends Resource
 {

@@ -14,8 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Resource;
 
 /**
- * Class PaymentInstrument
- *
+ * Class PaymentInstrument.
  */
 abstract class PaymentInstrument extends Resource
 {

@@ -14,7 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Entity;
 
 /**
- * Class WebhookCredential
+ * Class WebhookCredential.
  */
 final class WebhookCredential extends Entity
 {

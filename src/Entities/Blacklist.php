@@ -15,18 +15,7 @@ use DomainException;
 use Rebilly\Rest\Entity;
 
 /**
- * Class Blacklist
- *
- * ```json
- * {
- *   "type": "enum",
- *   "value": "string",
- *   "expireTime": "datetime",
- *   "createdTime": "datetime",
- *   "updatedTime": "datetime"
- * }
- * ```
- *
+ * Class Blacklist.
  */
 final class Blacklist extends Entity
 {

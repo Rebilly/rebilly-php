@@ -15,22 +15,7 @@ use Rebilly\Entities\Contact\Email;
 use Rebilly\Rest\Entity;
 
 /**
- * Class Customer
- *
- * ```json
- * {
- *   "id"
- *   "customFields"
- *   "defaultPaymentInstrument"
- *   "invoiceCount"
- *   "lifetimeRevenue"
- *   "averageValue"
- *   "paymentCount"
- *   "lastPaymentTime"
- *   "createdTime"
- *   "updatedTime"
- * }
- * ```
+ * Class Customer.
  */
 final class Customer extends Entity
 {

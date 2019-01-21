@@ -14,17 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Resource;
 
 /**
- * Class AuthenticationOptions
- *
- * ```json
- * {
- *   "passwordPattern"
- *   "credentialTtl"
- *   "authTokenTtl"
- *   "resetTokenTtl"
- * }
- * ```
- *
+ * Class AuthenticationOptions.
  */
 final class AuthenticationOptions extends Resource
 {

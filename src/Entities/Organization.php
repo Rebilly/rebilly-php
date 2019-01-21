@@ -14,21 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Entity;
 
 /**
- * Class Organization
- *
- * ```json
- * {
- *   "id"
- *   "name"
- *   "address"
- *   "address2"
- *   "city"
- *   "region"
- *   "country"
- *   "postalCode"
- * }
- * ```
- *
+ * Class Organization.
  */
 final class Organization extends Entity
 {

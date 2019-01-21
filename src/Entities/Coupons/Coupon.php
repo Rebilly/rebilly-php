@@ -15,22 +15,7 @@ use DomainException;
 use Rebilly\Rest\Resource;
 
 /**
- * Class Coupon
- *
- * ```json
- * {
- *   "redemptionCode"
- *   "description"
- *   "discount"
- *   "restrictions"
- *   "redemptionsCount"
- *   "status"
- *   "issuedTime"
- *   "expiredTime"
- *   "createdTime"
- *   "updatedTime"
- * }
- * ```
+ * Class Coupon.
  */
 final class Coupon extends Resource
 {

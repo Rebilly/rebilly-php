@@ -14,16 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Resource;
 
 /**
- * Class Login
- *
- * ```json
- * {
- *   "email"
- *   "password"
- *   "expiredTime"
- * }
- * ```
- *
+ * Class Login.
  */
 final class Login extends Resource
 {

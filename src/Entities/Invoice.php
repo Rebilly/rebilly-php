@@ -14,22 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Entity;
 
 /**
- * Class Invoice
- *
- * ```json
- * {
- *   "customerId"
- *   "websiteId"
- *   "currency"
- *   "abandonedTime"
- *   "voidedTime"
- *   "paidTime"
- *   "dueTime"
- *   "issuedTime"
- *   "billingContact"
- *   "deliveryContact"
- * }
- * ```
+ * Class Invoice.
  */
 final class Invoice extends Entity
 {

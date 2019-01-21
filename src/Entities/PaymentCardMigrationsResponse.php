@@ -14,13 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Resource;
 
 /**
- * Class PaymentCardMigrationsResponse
- *
- * ```json
- * {
- *   "migratedCards"
- * }
- * ```
+ * Class PaymentCardMigrationsResponse.
  */
 final class PaymentCardMigrationsResponse extends Resource
 {

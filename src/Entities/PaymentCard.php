@@ -15,26 +15,7 @@ use DomainException;
 use Rebilly\Rest\Entity;
 
 /**
- * Class PaymentCard
- *
- * ```json
- * {
- *   "id": "ABCD2345",
- *   "last4": "1234",
- *   "expYear": "2017",
- *   "expMonth": "07",
- *   "status": "active",
- *   "brand": "Visa",
- *   "binCountry": "US",
- *   "binBank": "Bank123",
- *   "customer": "ABCD1234",
- *   "billingContact": "ADDRESS1",
- *   "createdTime": "2015-02-11 04:45:23",
- *   "updatedTime": "2015-02-11 04:45:23"
- *   "customFields": []
- * }
- * ```
- *
+ * Class PaymentCard.
  */
 final class PaymentCard extends Entity
 {

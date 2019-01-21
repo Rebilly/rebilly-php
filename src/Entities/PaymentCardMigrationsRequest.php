@@ -14,15 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Resource;
 
 /**
- * Class PaymentCardMigrationsRequest
- *
- * ```json
- * {
- *   fromGatewayAccountId: "string"
- *   toGatewayAccountId: "string"
- *   paymentCardIds: []
- * }
- * ```
+ * Class PaymentCardMigrationsRequest.
  */
 final class PaymentCardMigrationsRequest extends Resource
 {

@@ -14,19 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Entity;
 
 /**
- * Class Website
- *
- * ```json
- * {
- *   "id"
- *   "name"
- *   "url"
- *   "phone"
- *   "email"
- *   "customFields"
- * }
- * ```
- *
+ * Class Website.
  */
 final class Website extends Entity
 {

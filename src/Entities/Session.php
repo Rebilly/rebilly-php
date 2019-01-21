@@ -15,20 +15,7 @@ use DomainException;
 use Rebilly\Rest\Entity;
 
 /**
- * Class Session
- *
- * ```json
- * {
- *   "id"
- *   "token"
- *   "expiredTime"
- *   "permissions"
- *   "userId"
- *   "createdTime"
- *   "updatedTime"
- * }
- * ```
- *
+ * Class Session.
  */
 final class Session extends Entity
 {

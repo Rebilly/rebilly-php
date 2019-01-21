@@ -14,31 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Resource;
 
 /**
- * Class RiskMetadata
- *
- * ```json
- * {
- *   "ipAddress",
- *   "isHosting",
- *   "ipProxy",
- *   "ipTor",
- *   "ipVPN",
- *   "vpnServiceName",
- *   "isp"
- *   "fingerprint"
- *   "httpHeaders"
- *   "country"
- *   "region"
- *   "city"
- *   "latitude"
- *   "longitude"
- *   "postalCode"
- *   "timeZone"
- *   "accuracyRadius"
- *   "distance"
- * }
- * ```
- *
+ * Class RiskMetadata.
  */
 final class RiskMetadata extends Resource
 {

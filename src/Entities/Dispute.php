@@ -15,28 +15,7 @@ use DomainException;
 use Rebilly\Rest\Entity;
 
 /**
- * Class Dispute
- *
- * ```json
- * {
- *   "id"
- *   "customerId",
- *   "transactionId",
- *   "currency",
- *   "amount"
- *   "acquirerReferenceNumber",
- *   "reasonCode",
- *   "category"
- *   "type",
- *   "status",
- *   "postedTime"
- *   "deadlineTime"
- *   "resolvedTime",
- *   "createdTime",
- *   "updatedTime",
- * }
- * ```
- *
+ * Class Dispute.
  */
 final class Dispute extends Entity
 {

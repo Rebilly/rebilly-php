@@ -14,22 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Entity;
 
 /**
- * Class ApiTracking
- *
- * ```json
- * {
- *   "id"
- *   "status"
- *   "url"
- *   "method"
- *   "request"
- *   "response"
- *   "user"
- *   "duration"
- *   "createdTime"
- * }
- * ```
- *
+ * Class ApiTracking.
  */
 final class ApiTracking extends Entity
 {
