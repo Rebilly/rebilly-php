@@ -48,6 +48,7 @@ class ExceptionTest extends TestCase
 
         $exception = new DataValidationException($content);
 
+        self::assertInstanceOf(UnprocessableEntityException::class, $exception);
         self::assertSame(['Coupon Code must exist'], $exception->getErrors());
         self::assertSame(['couponIds.0' => ['Coupon Code must exist']], $exception->getValidationErrors());
         self::assertSame('Data Validation Failed.', $exception->getMessage());
