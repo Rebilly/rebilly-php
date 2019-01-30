@@ -11,6 +11,7 @@
 
 namespace Rebilly\Entities;
 
+use DomainException;
 use Rebilly\Entities\Subscriptions\BillingAnchor;
 use Rebilly\Entities\Subscriptions\RecurringInterval;
 use Rebilly\Entities\Subscriptions\SubscriptionTrial;
@@ -21,6 +22,23 @@ use Rebilly\Rest\Entity;
  */
 final class Subscription extends Entity
 {
+    public const TYPE_SUBSCRIPTION_ORDER = 'subscription-order';
+
+    public const TYPE_ONE_TIME_ORDER = 'one-time-order';
+
+    public const MSG_UNEXPECTED_TYPE = 'Unexpected order type. Only %s types are supported';
+
+    /**
+     * @return array
+     */
+    public static function orderTypes()
+    {
+        return [
+            self::TYPE_SUBSCRIPTION_ORDER,
+            self::TYPE_ONE_TIME_ORDER,
+        ];
+    }
+
     /**
      * @return string
      */
@@ -32,10 +50,15 @@ final class Subscription extends Entity
     /**
      * @param string $value
      *
+     * @throws DomainException
      * @return Subscription
      */
     public function setOrderType($value)
     {
+        if (!in_array($value, self::orderTypes(), true)) {
+            throw new DomainException(sprintf(self::MSG_UNEXPECTED_TYPE, implode(', ', self::orderTypes())));
+        }
+
         return $this->setAttribute('orderType', $value);
     }
 
