@@ -359,7 +359,19 @@ final class Client
 
         if ($response->getStatusCode() === 422) {
             $content = json_decode($response->getBody()->getContents(), true);
-            $content = $content['details'] ?? [];
+
+            if (isset($content['invalidFields']) && is_array($content['invalidFields'])) {
+                foreach ($content['invalidFields'] as $field => &$errors) {
+                    if (is_array($errors)) {
+                        foreach ($errors as &$error) {
+                            $error = $error['message'] ?? '';
+                        }
+                    }
+                }
+                $content = $content['invalidFields'];
+            } else {
+                $content = $content['details'] ?? [];
+            }
 
             throw new Http\Exception\UnprocessableEntityException($content);
         }
