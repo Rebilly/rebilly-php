@@ -361,19 +361,10 @@ final class Client
             $content = json_decode($response->getBody()->getContents(), true);
 
             if (isset($content['invalidFields']) && is_array($content['invalidFields'])) {
-                foreach ($content['invalidFields'] as $field => &$errors) {
-                    if (is_array($errors)) {
-                        foreach ($errors as &$error) {
-                            $error = $error['message'] ?? '';
-                        }
-                    }
-                }
-                throw new Http\Exception\DataValidationException($content['invalidFields'], $content['details'] ?? []);
+                throw new Http\Exception\DataValidationException($content);
             }
 
-            $content = $content['details'] ?? [];
-
-            throw new Http\Exception\UnprocessableEntityException($content);
+            throw new Http\Exception\UnprocessableEntityException($content['details'] ?? []);
         }
 
         if ($response->getStatusCode() === 429) {

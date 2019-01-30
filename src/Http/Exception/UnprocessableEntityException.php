@@ -14,8 +14,8 @@ namespace Rebilly\Http\Exception;
 use Exception;
 
 /**
+ * @deprecated
  * Class UnprocessableEntityException.
- *
  */
 class UnprocessableEntityException extends ClientException
 {

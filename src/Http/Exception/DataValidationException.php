@@ -15,16 +15,25 @@ use Exception;
 
 /**
  * Class DataValidationException.
- *
  */
 final class DataValidationException extends UnprocessableEntityException
 {
     private $validationErrors = [];
 
-    public function __construct(array $errors = [], array $details = [], $message = '', $code = 0, Exception $previous = null)
+    public function __construct(array $content = [], $message = '', $code = 0, Exception $previous = null)
     {
-        $this->validationErrors = $errors;
-        parent::__construct($details, $message ?: 'Data Validation Failed.', $code, $previous);
+        if (isset($content['invalidFields']) && is_array($content['invalidFields'])) {
+            foreach ($content['invalidFields'] as $field => &$errors) {
+                if (is_array($errors)) {
+                    foreach ($errors as &$error) {
+                        $error = $error['message'] ?? '';
+                    }
+                }
+            }
+            $this->validationErrors = $content['invalidFields'];
+        }
+
+        parent::__construct($content['details'] ?? [], $message ?: 'Data Validation Failed.', $code, $previous);
     }
 
     /**
