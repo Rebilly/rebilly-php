@@ -360,7 +360,7 @@ final class Client
         if ($response->getStatusCode() === 422) {
             $content = json_decode($response->getBody()->getContents(), true);
 
-            throw new Http\Exception\DataValidationException($content);
+            throw new Http\Exception\DataValidationException($content ?? []);
         }
 
         if ($response->getStatusCode() === 429) {
