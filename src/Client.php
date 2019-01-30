@@ -368,10 +368,10 @@ final class Client
                         }
                     }
                 }
-                $content = $content['invalidFields'];
-            } else {
-                $content = $content['details'] ?? [];
+                throw new Http\Exception\DataValidationException($content['invalidFields'], $content['details'] ?? []);
             }
+
+            $content = $content['details'] ?? [];
 
             throw new Http\Exception\UnprocessableEntityException($content);
         }

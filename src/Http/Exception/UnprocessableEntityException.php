@@ -17,7 +17,7 @@ use Exception;
  * Class UnprocessableEntityException.
  *
  */
-final class UnprocessableEntityException extends ClientException
+class UnprocessableEntityException extends ClientException
 {
     private $errors = [];
 
