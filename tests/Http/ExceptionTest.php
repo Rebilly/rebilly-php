@@ -13,6 +13,7 @@ namespace Rebilly\Tests\Http;
 
 use Rebilly\Http\Exception\DataValidationException;
 use Rebilly\Http\Exception\TooManyRequestsException;
+use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Tests\TestCase;
 
 /**
