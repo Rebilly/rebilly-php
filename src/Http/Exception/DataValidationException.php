@@ -23,13 +23,6 @@ final class DataValidationException extends UnprocessableEntityException
     public function __construct(array $content = [], $message = '', $code = 0, Exception $previous = null)
     {
         if (isset($content['invalidFields']) && is_array($content['invalidFields'])) {
-            foreach ($content['invalidFields'] as $field => &$errors) {
-                if (is_array($errors)) {
-                    foreach ($errors as &$error) {
-                        $error = $error['message'] ?? '';
-                    }
-                }
-            }
             $this->validationErrors = $content['invalidFields'];
         }
 
