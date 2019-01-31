@@ -359,9 +359,8 @@ final class Client
 
         if ($response->getStatusCode() === 422) {
             $content = json_decode($response->getBody()->getContents(), true);
-            $content = $content['details'] ?? [];
 
-            throw new Http\Exception\UnprocessableEntityException($content);
+            throw new Http\Exception\DataValidationException($content ?? []);
         }
 
         if ($response->getStatusCode() === 429) {

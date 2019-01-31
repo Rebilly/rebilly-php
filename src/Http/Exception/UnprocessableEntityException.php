@@ -14,10 +14,10 @@ namespace Rebilly\Http\Exception;
 use Exception;
 
 /**
+ * @deprecated
  * Class UnprocessableEntityException.
- *
  */
-final class UnprocessableEntityException extends ClientException
+class UnprocessableEntityException extends ClientException
 {
     private $errors = [];
 
