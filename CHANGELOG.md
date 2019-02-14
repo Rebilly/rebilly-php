@@ -29,6 +29,7 @@ _TBD_
 - [x] Added POST to `Transaction` 
 - [x] Added new property to `PaymentCardToken`: `isUsed`
 - [x] Added new blacklist types to `Blacklist`: `email-domain`, `bank-account`
+- [x] Added new `taxCategory` to `Product`
 
 ### Changed
 - [x] **Upgraded minimum PHP version to 7.1**

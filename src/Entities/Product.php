@@ -27,6 +27,7 @@ final class Product extends Entity
     public static function allowedTaxCategories()
     {
         return [
+            '00000',
             '99999',
             '20010',
             '40030',
