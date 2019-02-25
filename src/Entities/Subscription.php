@@ -463,6 +463,9 @@ final class Subscription extends Entity
         return $this->setAttribute('recurringInterval', $value);
     }
 
+    /**
+     * @return string
+     */
     public function getBillingStatus()
     {
         return $this->getAttribute('billingStatus');
