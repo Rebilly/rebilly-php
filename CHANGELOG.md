@@ -28,7 +28,7 @@ _TBD_
 - [x] Added new property to `Subscription`: `recentInvoiceId` 
 - [x] Added POST to `Transaction` 
 - [x] Added new property to `PaymentCardToken`: `isUsed`
-- [x] Added new blacklist types to `Blacklist`: `email-domain`, `bank-account`
+- [x] Added new blacklist types to `Blacklist`: `email-domain`, `bank-account`, `address`
 - [x] Added new `taxCategory` to `Product`
 
 ### Changed
