@@ -141,14 +141,6 @@ final class BankAccount extends Entity
     }
 
     /**
-     * @return string
-     */
-    public function getAccountNumber()
-    {
-        return $this->getAttribute('accountNumber');
-    }
-
-    /**
      * @param string $value
      *
      * @return $this
