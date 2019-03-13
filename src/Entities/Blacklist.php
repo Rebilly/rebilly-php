@@ -103,7 +103,7 @@ final class Blacklist extends Entity
 
     /**
      * @deprecated The method is deprecated and will be removed in next version.
-     * @see Blacklist::getExpiredTime()
+     * @see Blacklist::getExpirationTime()
      *
      * @return mixed
      */
@@ -114,7 +114,7 @@ final class Blacklist extends Entity
 
     /**
      * @deprecated The method is deprecated and will be removed in next version.
-     * @see Blacklist::setExpiredTime()
+     * @see Blacklist::setExpirationTime()
      *
      * @param mixed $value
      *
@@ -126,6 +126,9 @@ final class Blacklist extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see Blacklist::getExpirationTime()
+     *
      * @return mixed
      */
     public function getExpiredTime()
@@ -134,6 +137,9 @@ final class Blacklist extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see Blacklist::setExpirationTime()
+     *
      * @param mixed $value
      *
      * @return $this
@@ -141,6 +147,24 @@ final class Blacklist extends Entity
     public function setExpiredTime($value)
     {
         return $this->setAttribute('expiredTime', $value);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExpirationTime()
+    {
+        return $this->getAttribute('expirationTime');
+    }
+
+    /**
+     * @param mixed $value
+     *
+     * @return $this
+     */
+    public function setExpirationTime($value)
+    {
+        return $this->setAttribute('expirationTime', $value);
     }
 
     /**
