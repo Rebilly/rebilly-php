@@ -29,6 +29,7 @@ class ApiTest extends TestCase
      *
      * @param string $class
      * @param string $id
+     * @param array $exclude
      */
     public function buildJson($class, $id = 'id', $exclude = [])
     {
