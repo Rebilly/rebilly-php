@@ -104,7 +104,7 @@ abstract class TestCase extends Framework\TestCase
             case 'productId':
                 return $faker->uuid;
             case 'dueTime':
-            case 'expiredTime':
+            case 'expireTime': // TODO inconsistent name
             case 'expirationTime':
             case 'periodStartTime':
             case 'renewalTime':
