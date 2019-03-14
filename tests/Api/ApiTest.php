@@ -29,8 +29,9 @@ class ApiTest extends TestCase
      *
      * @param string $class
      * @param string $id
+     * @param array $excludeAttributes
      */
-    public function buildJson($class, $id = 'id')
+    public function buildJson($class, $id = 'id', $excludeAttributes = [])
     {
         $getters = [];
         $setters = [];
@@ -50,6 +51,10 @@ class ApiTest extends TestCase
         foreach ($methods as $method) {
             $prefix = substr($method, 0, 3);
             $attribute = lcfirst(substr($method, 3));
+
+            if (in_array($attribute, $excludeAttributes, true)) {
+                continue;
+            }
 
             if ($prefix === 'get') {
                 $getters[$attribute] = $method;
@@ -131,7 +136,7 @@ class ApiTest extends TestCase
             [Entities\Attachment::class],
             [Entities\AuthenticationOptions::class, null],
             [Entities\AuthenticationToken::class, 'token'],
-            [Entities\Blacklist::class],
+            [Entities\Blacklist::class, 'id', ['expireTime', 'expiredTime']],
             [Entities\Contact::class],
             [Entities\Contact\Email::class],
             [Entities\Contact\PhoneNumber::class],

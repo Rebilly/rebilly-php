@@ -30,12 +30,14 @@ _TBD_
 - [x] Added new property to `PaymentCardToken`: `isUsed`
 - [x] Added new blacklist types to `Blacklist`: `email-domain`, `bank-account`, `address`
 - [x] Added new `taxCategory` to `Product`
+- [x] Added new property to `Blacklist`: `expirationTime`
 
 ### Changed
 - [x] **Upgraded minimum PHP version to 7.1**
 
 ### Deprecated
 - [x] Deprecated `Customer` entity methods: `getFirstName`, `setFirstName`, `getLastName`, `setLastName`, `getEmail`, `setEmail`
+- [x] Deprecated `Blacklist` `expiredTime` property
 
 ## [2.3.0] 2018-10-08
 

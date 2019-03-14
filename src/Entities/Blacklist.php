@@ -103,18 +103,18 @@ final class Blacklist extends Entity
 
     /**
      * @deprecated The method is deprecated and will be removed in next version.
-     * @see Blacklist::getExpiredTime()
+     * @see Blacklist::getExpirationTime()
      *
      * @return mixed
      */
     public function getExpireTime()
     {
-        return $this->getAttribute('expireTime');
+        return $this->getExpirationTime();
     }
 
     /**
      * @deprecated The method is deprecated and will be removed in next version.
-     * @see Blacklist::setExpiredTime()
+     * @see Blacklist::setExpirationTime()
      *
      * @param mixed $value
      *
@@ -122,15 +122,39 @@ final class Blacklist extends Entity
      */
     public function setExpireTime($value)
     {
-        return $this->setAttribute('expireTime', $value);
+        return $this->setExpirationTime($value);
+    }
+
+    /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see Blacklist::getExpirationTime()
+     *
+     * @return mixed
+     */
+    public function getExpiredTime()
+    {
+        return $this->getExpirationTime();
+    }
+
+    /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     * @see Blacklist::setExpirationTime()
+     *
+     * @param mixed $value
+     *
+     * @return $this
+     */
+    public function setExpiredTime($value)
+    {
+        return $this->setExpirationTime($value);
     }
 
     /**
      * @return mixed
      */
-    public function getExpiredTime()
+    public function getExpirationTime()
     {
-        return $this->getAttribute('expiredTime');
+        return $this->getAttribute('expirationTime');
     }
 
     /**
@@ -138,9 +162,9 @@ final class Blacklist extends Entity
      *
      * @return $this
      */
-    public function setExpiredTime($value)
+    public function setExpirationTime($value)
     {
-        return $this->setAttribute('expiredTime', $value);
+        return $this->setAttribute('expirationTime', $value);
     }
 
     /**
