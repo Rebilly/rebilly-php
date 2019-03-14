@@ -31,7 +31,7 @@ class ApiTest extends TestCase
      * @param string $id
      * @param array $exclude
      */
-    public function buildJson($class, $id = 'id', $exclude = [])
+    public function buildJson($class, $id = 'id', $excludeAttributes = [])
     {
         $getters = [];
         $setters = [];
@@ -52,7 +52,7 @@ class ApiTest extends TestCase
             $prefix = substr($method, 0, 3);
             $attribute = lcfirst(substr($method, 3));
 
-            if (in_array($attribute, $exclude, true)) {
+            if (in_array($attribute, $excludeAttributes, true)) {
                 continue;
             }
 
