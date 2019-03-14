@@ -30,7 +30,7 @@ class ApiTest extends TestCase
      * @param string $class
      * @param string $id
      */
-    public function buildJson($class, $id = 'id')
+    public function buildJson($class, $id = 'id', $exclude = [])
     {
         $getters = [];
         $setters = [];
@@ -51,7 +51,7 @@ class ApiTest extends TestCase
             $prefix = substr($method, 0, 3);
             $attribute = lcfirst(substr($method, 3));
 
-            if ($this->isAttributeExcluded($class, $attribute)) {
+            if (in_array($attribute, $exclude, true)) {
                 continue;
             }
 
@@ -135,7 +135,7 @@ class ApiTest extends TestCase
             [Entities\Attachment::class],
             [Entities\AuthenticationOptions::class, null],
             [Entities\AuthenticationToken::class, 'token'],
-            [Entities\Blacklist::class],
+            [Entities\Blacklist::class, 'id', ['expireTime', 'expiredTime']],
             [Entities\Contact::class],
             [Entities\Contact\Email::class],
             [Entities\Contact\PhoneNumber::class],
@@ -197,27 +197,4 @@ class ApiTest extends TestCase
             [Entities\GatewayAccountDowntime::class],
         ];
     }
-
-     /**
-     * @return array
-     */
-    public function excludeAttributes()
-    {
-        return [
-            Entities\Blacklist::class => ['expireTime', 'expiredTime'],
-        ];
-    }
-
-    /**
-     * @param $class
-     * @param $attribute
-     * @return bool
-     */
-    private function isAttributeExcluded($class, $attribute)
-    {
-        return
-            isset($this->excludeAttributes()[$class]) &&
-            in_array($attribute, $this->excludeAttributes()[$class], true);
-    }
-
 }
