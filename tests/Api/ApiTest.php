@@ -51,6 +51,10 @@ class ApiTest extends TestCase
             $prefix = substr($method, 0, 3);
             $attribute = lcfirst(substr($method, 3));
 
+            if ($this->isAttributeExcluded($class, $attribute)) {
+                continue;
+            }
+
             if ($prefix === 'get') {
                 $getters[$attribute] = $method;
             } elseif ($prefix === 'set') {
@@ -193,4 +197,27 @@ class ApiTest extends TestCase
             [Entities\GatewayAccountDowntime::class],
         ];
     }
+
+     /**
+     * @return array
+     */
+    public function excludeAttributes()
+    {
+        return [
+            Entities\Blacklist::class => ['expireTime', 'expiredTime'],
+        ];
+    }
+
+    /**
+     * @param $class
+     * @param $attribute
+     * @return bool
+     */
+    private function isAttributeExcluded($class, $attribute)
+    {
+        return
+            isset($this->excludeAttributes()[$class])
+            && in_array($attribute, $this->excludeAttributes()[$class], true);
+    }
+
 }
