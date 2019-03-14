@@ -20,31 +20,31 @@ _TBD_
 
 ### Added
 - [x] Added new write-only property to set payment instrument from `token` for the `Customer` Resource.
-- [x] Added new property to `RiskMetadata`: `region`.
-- [x] Added new properties to `Customer`: `averageValue`, `paymentCount`, `lastPaymentTime`.
-- [x] Added new service `WebhookCredentials`.
-- [x] Added new property to `PaymentCardAuthorization`: `redirectUrl`.
-- [x] Added new links to `PaymentCard`: `approvalUrl`, `authTransaction`.
-- [x] Added new property to `Subscription`: `recentInvoiceId`.
-- [x] Added POST to `Transaction`.
-- [x] Added new property to `PaymentCardToken`: `isUsed`.
-- [x] Added new blacklist types to `Blacklist`: `email-domain`, `bank-account`, `address`.
-- [x] Added new `taxCategory` to `Product`.
+- [x] Added new property to `RiskMetadata`: `region`
+- [x] Added new properties to `Customer`: `averageValue`, `paymentCount`, `lastPaymentTime`
+- [x] Added new service `WebhookCredentials`
+- [x] Added new property to `PaymentCardAuthorization`: `redirectUrl` 
+- [x] Added new links to `PaymentCard`: `approvalUrl`, `authTransaction` 
+- [x] Added new property to `Subscription`: `recentInvoiceId` 
+- [x] Added POST to `Transaction` 
+- [x] Added new property to `PaymentCardToken`: `isUsed`
+- [x] Added new blacklist types to `Blacklist`: `email-domain`, `bank-account`, `address`
+- [x] Added new `taxCategory` to `Product`
 - [x] Added new property to `Blacklist`: `expirationTime`.
 
 ### Changed
-- [x] **Upgraded minimum PHP version to 7.1**.
+- [x] **Upgraded minimum PHP version to 7.1**
 
 ### Deprecated
-- [x] Deprecated `Customer` entity methods: `getFirstName`, `setFirstName`, `getLastName`, `setLastName`, `getEmail`, `setEmail`.
+- [x] Deprecated `Customer` entity methods: `getFirstName`, `setFirstName`, `getLastName`, `setLastName`, `getEmail`, `setEmail`
 - [x] Deprecated `Blacklist` `expiredTime` property.
 
 ## [2.3.0] 2018-10-08
 
 ### Added
-- [x] Added new properties to `Plan`: `pricing`, `recurringInterval`, `trial`, `setup`.
-- [x] Added new property to `Subscription`: `items`.
-- [x] Added new property to `LeadSource`: `original`.
+- [x] Added new properties to `Plan`: `pricing`, `recurringInterval`, `trial`, `setup`
+- [x] Added new property to `Subscription`: `items`
+- [x] Added new property to `LeadSource`: `original`
 
 ### Changed
 - [x] Replaced magic methods like `get`, `post` with explicit defined methods.
@@ -52,12 +52,12 @@ _TBD_
 ### Removed
 - [x] Removed deprecated `Plan` properties: `expiredTime`, `recurringAmount`, `trialAmount`, `setupAmount`,
       `recurringPeriodUnit`, `recurringPeriodLength`, `recurringPeriodLimit`, `trialPeriodUnit`, `trialPeriodLength`,
-      `contractTermUnit`, `contractTermLength`, `minQuantity`, `maxQuantity`.
-- [x] Removed `LeadSources` in **Transactions**, **Invoices** and **Subscriptions**.
-- [x] Removed `LeadSources` endpoint and service. Adding Lead Sources now only possible via **Tokens** and **Customers**.
+      `contractTermUnit`, `contractTermLength`, `minQuantity`, `maxQuantity`
+- [x] Removed `LeadSources` in **Transactions**, **Invoices** and **Subscriptions**
+- [x] Removed `LeadSources` endpoint and service. Adding Lead Sources now only possible via **Tokens** and **Customers**
 - [x] Removed deprecated `Subscription` properties: `planId`, `quantity`,
-      `billingContactId`, `billingContact`, `deliveryContactId`, `deliveryContact`.
-- [x] Removed deprecated `LeadSource` property: `ipAddress`.
+      `billingContactId`, `billingContact`, `deliveryContactId`, `deliveryContact`
+- [x] Removed deprecated `LeadSource` property: `ipAddress`
 - [x] Removed `Notification`, `EmailNotification` and `EmailNotificationTracking`.
 - [x] Deprecate setting `initialInvoiceId` property when creating a `Subscription`.
 

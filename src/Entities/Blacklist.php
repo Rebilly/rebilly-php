@@ -109,7 +109,7 @@ final class Blacklist extends Entity
      */
     public function getExpireTime()
     {
-        return $this->getAttribute('expireTime');
+        return $this->getExpirationTime();
     }
 
     /**
@@ -122,7 +122,7 @@ final class Blacklist extends Entity
      */
     public function setExpireTime($value)
     {
-        return $this->setAttribute('expireTime', $value);
+        return $this->setExpirationTime($value);
     }
 
     /**
@@ -133,7 +133,7 @@ final class Blacklist extends Entity
      */
     public function getExpiredTime()
     {
-        return $this->getAttribute('expiredTime');
+        return $this->getExpirationTime();
     }
 
     /**
@@ -146,7 +146,7 @@ final class Blacklist extends Entity
      */
     public function setExpiredTime($value)
     {
-        return $this->setAttribute('expiredTime', $value);
+        return $this->setExpirationTime($value);
     }
 
     /**
