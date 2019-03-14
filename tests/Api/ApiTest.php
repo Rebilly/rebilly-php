@@ -216,8 +216,8 @@ class ApiTest extends TestCase
     private function isAttributeExcluded($class, $attribute)
     {
         return
-            isset($this->excludeAttributes()[$class])
-            && in_array($attribute, $this->excludeAttributes()[$class], true);
+            isset($this->excludeAttributes()[$class]) &&
+            in_array($attribute, $this->excludeAttributes()[$class], true);
     }
 
 }
