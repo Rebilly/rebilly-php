@@ -32,6 +32,7 @@ _TBD_
 - [x] Added new `taxCategory` to `Product`
 - [x] Added new property to `Blacklist`: `expirationTime`
 - [x] Added `cancel` method to `Transaction` service
+- [x] Added new properties to `Invoice`: `retryInstruction`, `autopayScheduledTime`
 
 ### Changed
 - [x] **Upgraded minimum PHP version to 7.1**

@@ -11,6 +11,7 @@
 
 namespace Rebilly\Entities;
 
+use Rebilly\Entities\InvoiceRetryInstructions\RetryInstruction;
 use Rebilly\Rest\Entity;
 
 /**
@@ -323,6 +324,42 @@ final class Invoice extends Entity
     }
 
     /**
+     * @return string
+     */
+    public function getAutopayScheduledTime()
+    {
+        return $this->getAttribute('autopayScheduledTime');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setAutopayScheduledTime($value)
+    {
+        return $this->setAttribute('autopayScheduledTime', $value);
+    }
+
+    /**
+     * @return RetryInstruction
+     */
+    public function getRetryInstruction()
+    {
+        return $this->getAttribute('retryInstruction');
+    }
+
+    /**
+     * @param RetryInstruction|array $value
+     *
+     * @return $this
+     */
+    public function setRetryInstruction($value)
+    {
+        return $this->setAttribute('retryInstruction', $value);
+    }
+
+    /**
      * @param array $data
      *
      * @return Address
@@ -340,5 +377,15 @@ final class Invoice extends Entity
     public function createDeliveryAddress(array $data)
     {
         return new Address($data);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return RetryInstruction
+     */
+    public function createRetryInstruction(array $data)
+    {
+        return RetryInstruction::createFromData($data);
     }
 }
