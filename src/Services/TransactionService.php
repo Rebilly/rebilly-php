@@ -80,7 +80,7 @@ final class TransactionService extends Service
     /**
      * @param string $transactionId
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException Transaction does not exist
      * @throws ClientException Transaction cannot be canceled
      *
      * @return Transaction
