@@ -118,6 +118,7 @@ abstract class TestCase extends Framework\TestCase
             case 'startTime':
             case 'endTime':
             case 'churnTime':
+            case 'autopayScheduledTime':
                 return $faker->date('Y-m-d H:i:s');
             case 'unitPrice':
             case 'unitPriceAmount':
@@ -499,7 +500,22 @@ abstract class TestCase extends Framework\TestCase
                     'method' => Entities\PaymentMethod::METHOD_PAYMENT_CARD,
                 ];
             case 'retryInstruction':
-                return new Entities\PaymentRetryInstruction();
+                switch ($class) {
+                    case Entities\Invoice::class:
+                        return new Entities\InvoiceRetryInstructions\RetryInstruction(
+                            [
+                                'afterAttemptPolicies' => [Entities\InvoiceRetryInstructions\RetryInstruction::AFTER_ATTEMPT_POLICY_CHANGE_SUBSCRIPTION_RENEWAL_TIME],
+                                'afterRetryEndPolicies' => [Entities\InvoiceRetryInstructions\RetryInstruction::AFTER_RETRY_END_POLICY_ABANDON_INVOICE],
+                                'attempts' => [
+                                    [
+                                        'scheduleInstruction' => ['method' => ScheduleInstruction::IMMEDIATELY],
+                                    ]
+                                ]
+                            ]
+                        );
+                    default:
+                        return new Entities\PaymentRetryInstruction();
+                }
             case 'reasonCode':
                 return '1000';
             case 'status':

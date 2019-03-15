@@ -50,12 +50,28 @@ final class RetryInstruction extends Resource
             throw new DomainException('attempts is required');
         }
 
-        if (!in_array($data['afterAttemptPolicies'], self::$availableAfterAttemptPolicies, true)) {
-            throw new DomainException('Invalid afterAttemptPolicies provided');
+        if (!is_array($data['afterAttemptPolicies'])) {
+            throw new DomainException('afterAttemptPolicies must be an array');
         }
 
-        if (!in_array($data['afterRetryEndPolicies'], self::$availableAfterRetryEndPolicies, true)) {
-            throw new DomainException('Invalid afterRetryEndPolicies provided');
+        if (!is_array($data['afterRetryEndPolicies'])) {
+            throw new DomainException('afterRetryEndPolicies must be an array');
+        }
+
+        if (!is_array($data['attempts'])) {
+            throw new DomainException('attempts must be an array');
+        }
+
+        foreach ($data['afterAttemptPolicies'] as $policy) {
+            if (!in_array($policy, self::$availableAfterAttemptPolicies, true)) {
+                throw new DomainException('Invalid afterAttemptPolicies provided');
+            }
+        }
+
+        foreach ($data['afterRetryEndPolicies'] as $policy) {
+            if (!in_array($policy, self::$availableAfterRetryEndPolicies, true)) {
+                throw new DomainException('Invalid afterRetryEndPolicies provided');
+            }
         }
 
         return new self($data);
