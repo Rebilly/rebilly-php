@@ -31,6 +31,7 @@ _TBD_
 - [x] Added new blacklist types to `Blacklist`: `email-domain`, `bank-account`, `address`
 - [x] Added new `taxCategory` to `Product`
 - [x] Added new property to `Blacklist`: `expirationTime`
+- [x] Added `cancel` method to `Transaction` service
 
 ### Changed
 - [x] **Upgraded minimum PHP version to 7.1**

@@ -12,7 +12,9 @@
 namespace Rebilly\Services;
 
 use ArrayObject;
+use JsonSerializable;
 use Rebilly\Entities\Transaction;
+use Rebilly\Http\Exception\ClientException;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Paginator;
@@ -71,6 +73,23 @@ final class TransactionService extends Service
         return $this->client()->post(
             ['amount' => $amount],
             'transactions/{transactionId}/refund',
+            ['transactionId' => $transactionId]
+        );
+    }
+
+    /**
+     * @param string $transactionId
+     *
+     * @throws NotFoundException The resource data does not exist
+     * @throws ClientException Transaction cannot be canceled
+     *
+     * @return Transaction
+     */
+    public function cancel($transactionId)
+    {
+        return $this->client()->post(
+            [],
+            'transactions/{transactionId}/cancel',
             ['transactionId' => $transactionId]
         );
     }
