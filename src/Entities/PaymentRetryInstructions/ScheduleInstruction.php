@@ -17,6 +17,7 @@ use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstructionTypes\DateInter
 use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstructionTypes\DayOfMonthType;
 use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstructionTypes\DayOfWeekType;
 use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstructionTypes\ImmediatelyType;
+use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstructionTypes\IntelligentType;
 use Rebilly\Rest\Resource;
 
 /**
@@ -38,12 +39,15 @@ abstract class ScheduleInstruction extends Resource
 
     public const IMMEDIATELY = 'immediately';
 
+    public const INTELLIGENT = 'intelligent';
+
     private static $availableMethods = [
         self::AUTO,
         self::DATE_INTERVAL,
         self::DAY_OF_MONTH,
         self::DAY_OF_WEEK,
         self::IMMEDIATELY,
+        self::INTELLIGENT,
     ];
 
     /**
@@ -84,6 +88,10 @@ abstract class ScheduleInstruction extends Resource
                 break;
             case self::IMMEDIATELY:
                 $scheduleInstruction = new ImmediatelyType($data);
+
+                break;
+            case self::INTELLIGENT:
+                $scheduleInstruction = new IntelligentType($data);
 
                 break;
             default:
