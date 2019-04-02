@@ -46,7 +46,7 @@ final class ShippingZoneService extends Service
      * @param string $shippingZoneId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does exist
+     * @throws NotFoundException The resource data does not exist
      *
      * @return ShippingZone
      */

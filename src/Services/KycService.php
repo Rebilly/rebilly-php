@@ -47,7 +47,7 @@ final class KycService extends Service
      * @param string $kycDocumentId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does exist
+     * @throws NotFoundException The resource data does not exist
      *
      * @return KycDocument
      */

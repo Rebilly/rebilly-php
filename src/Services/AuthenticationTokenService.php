@@ -50,7 +50,7 @@ final class AuthenticationTokenService extends Service
      * @param string $token
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does exist
+     * @throws NotFoundException The resource data does not exist
      *
      * @return AuthenticationToken
      */

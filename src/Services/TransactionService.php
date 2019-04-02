@@ -51,7 +51,7 @@ final class TransactionService extends Service
      * @param string $transactionId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does exist
+     * @throws NotFoundException The resource data does not exist
      *
      * @return Transaction
      */

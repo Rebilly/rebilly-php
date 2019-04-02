@@ -50,7 +50,7 @@ final class WebsiteService extends Service
      * @param string $websiteId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does exist
+     * @throws NotFoundException The resource data does not exist
      *
      * @return Website
      */

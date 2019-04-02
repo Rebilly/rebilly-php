@@ -62,7 +62,7 @@ final class InvoiceItemService extends Service
      * @param string $invoiceItemId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does exist
+     * @throws NotFoundException The resource data does not exist
      *
      * @return InvoiceItem
      */

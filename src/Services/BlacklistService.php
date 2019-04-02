@@ -50,7 +50,7 @@ final class BlacklistService extends Service
      * @param string $blacklistId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does exist
+     * @throws NotFoundException The resource data does not exist
      *
      * @return Blacklist
      */

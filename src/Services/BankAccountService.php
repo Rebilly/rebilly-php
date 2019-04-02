@@ -51,7 +51,7 @@ class BankAccountService extends Service
      * @param string $bankAccountId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does exist
+     * @throws NotFoundException The resource data does not exist
      *
      * @return BankAccount
      */

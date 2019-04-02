@@ -50,7 +50,7 @@ final class NoteService extends Service
      * @param string $noteId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does exist
+     * @throws NotFoundException The resource data does not exist
      *
      * @return Note
      */

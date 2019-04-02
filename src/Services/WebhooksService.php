@@ -48,7 +48,7 @@ final class WebhooksService extends Service
     /**
      * @param string $webhookId
      *
-     * @throws NotFoundException The resource data does exist
+     * @throws NotFoundException The resource data does not exist
      *
      * @return Webhook
      */

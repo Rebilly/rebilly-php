@@ -46,7 +46,7 @@ final class ProductService extends Service
      * @param string $productId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does exist
+     * @throws NotFoundException The resource data does not exist
      *
      * @return Product
      */
