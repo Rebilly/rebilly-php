@@ -63,6 +63,6 @@ final class WebhookTrackingService extends Service
      */
     public function resend($trackId)
     {
-        return $this->client()->post(null, 'tracking/webhooks/{trackId}/resend', ['trackId' => $trackId]);
+        return $this->client()->post([], 'tracking/webhooks/{trackId}/resend', ['trackId' => $trackId]);
     }
 }
