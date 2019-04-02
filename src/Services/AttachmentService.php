@@ -46,7 +46,7 @@ final class AttachmentService extends Service
      * @param string $attachmentId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does exist
+     * @throws NotFoundException The resource data does not exist
      *
      * @return Attachment
      */

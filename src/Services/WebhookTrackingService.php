@@ -47,12 +47,22 @@ final class WebhookTrackingService extends Service
      * @param string $trackId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does exist
+     * @throws NotFoundException The resource data does not exist
      *
      * @return WebhookTracking
      */
     public function load($trackId, $params = [])
     {
         return $this->client()->get('tracking/webhooks/{trackId}', ['trackId' => $trackId] + (array) $params);
+    }
+
+    /**
+     * @param string $trackId
+     *
+     * @throws NotFoundException The resource data does not exist
+     */
+    public function resend($trackId)
+    {
+        return $this->client()->post([], 'tracking/webhooks/{trackId}/resend', ['trackId' => $trackId]);
     }
 }

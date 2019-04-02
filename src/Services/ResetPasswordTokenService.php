@@ -50,7 +50,7 @@ final class ResetPasswordTokenService extends Service
      * @param string $token
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does exist
+     * @throws NotFoundException The resource data does not exist
      *
      * @return ResetPasswordToken
      */

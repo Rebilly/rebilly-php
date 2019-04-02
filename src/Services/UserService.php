@@ -105,7 +105,7 @@ final class UserService extends Service
      * @param string $userId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does exist
+     * @throws NotFoundException The resource data does not exist
      *
      * @return User
      */

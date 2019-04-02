@@ -49,7 +49,7 @@ final class ValuesListService extends Service
      * @param string $listId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does exist
+     * @throws NotFoundException The resource data does not exist
      *
      * @return ValuesList
      */
@@ -63,7 +63,7 @@ final class ValuesListService extends Service
      * @param int $version
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does exist
+     * @throws NotFoundException The resource data does not exist
      *
      * @return ValuesList
      */

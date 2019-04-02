@@ -24,7 +24,7 @@ final class WebhookCredentialsService extends Service
     /**
      * @param string $hash
      *
-     * @throws NotFoundException The resource data does exist
+     * @throws NotFoundException The resource data does not exist
      *
      * @return WebhookCredential
      */

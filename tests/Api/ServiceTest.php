@@ -935,6 +935,29 @@ class ServiceTest extends BaseTestCase
     /**
      * @test
      */
+    public function webhookTrackingService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+        $response = $client->createResponse()->withStatus(204);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->createMock(CurlHandler::class);
+
+        $handler->expects($this->any())->method('__invoke')->willReturn($response);
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+        $service = $client->webhooksTracking();
+        $result = $service->resend('dummy');
+
+        $this->assertNull($result);
+    }
+
+    /**
+     * @test
+     */
     public function webhookCredentialService()
     {
         $client = new Client(['apiKey' => 'QWERTY']);

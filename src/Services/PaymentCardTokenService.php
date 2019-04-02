@@ -50,7 +50,7 @@ final class PaymentCardTokenService extends Service
      * @param string $tokenId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does exist
+     * @throws NotFoundException The resource data does not exist
      *
      * @return PaymentCardToken
      */
@@ -79,7 +79,7 @@ final class PaymentCardTokenService extends Service
     /**
      * @param string $tokenId
      *
-     * @throws NotFoundException The resource data does exist
+     * @throws NotFoundException The resource data does not exist
      *
      * @return PaymentCardToken
      */

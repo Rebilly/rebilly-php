@@ -50,7 +50,7 @@ final class LayoutService extends Service
      * @param string $layoutId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does exist
+     * @throws NotFoundException The resource data does not exist
      *
      * @return Layout
      */

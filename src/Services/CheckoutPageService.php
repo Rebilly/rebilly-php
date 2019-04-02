@@ -50,7 +50,7 @@ final class CheckoutPageService extends Service
      * @param string $checkoutPageId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does exist
+     * @throws NotFoundException The resource data does not exist
      *
      * @return CheckoutPage
      */
