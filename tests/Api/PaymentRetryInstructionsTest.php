@@ -41,7 +41,7 @@ class PaymentRetryInstructionsTest extends BaseTestCase
         $instruction->setType('fixed');
 
         self::assertInstanceOf(DiscountType::class, $instruction);
-        self::assertSame(15, $instruction->getValue());
+        self::assertSame(15.0, $instruction->getValue());
         self::assertSame('fixed', $instruction->getType());
         self::assertSame('discount', $instruction->getMethod());
     }
@@ -67,7 +67,7 @@ class PaymentRetryInstructionsTest extends BaseTestCase
         $instruction->setValue(15);
 
         self::assertInstanceOf(PartialType::class, $instruction);
-        self::assertSame(15, $instruction->getValue());
+        self::assertSame(15.0, $instruction->getValue());
         self::assertSame('fixed', $instruction->getType());
         self::assertSame('partial', $instruction->getMethod());
     }

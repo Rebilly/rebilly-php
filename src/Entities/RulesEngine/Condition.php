@@ -33,6 +33,16 @@ class Condition extends Resource
 
     public const OP_IN = 'in';
 
+    public const OP_IN_LIST = 'in-list';
+
+    public const OP_SAME = 'same';
+
+    public const OP_RAND = 'rand';
+
+    public const OP_CONTAINS = 'contains';
+
+    public const OP_COUNT = 'count';
+
     public const OP_GREATER_THAN = 'gt';
 
     public const OP_GREATER_THAN_OR_EQUAL = 'gte';
@@ -53,6 +63,11 @@ class Condition extends Resource
             self::OP_BETWEEN,
             self::OP_EQUALS,
             self::OP_IN,
+            self::OP_IN_LIST,
+            self::OP_SAME,
+            self::OP_RAND,
+            self::OP_CONTAINS,
+            self::OP_COUNT,
             self::OP_GREATER_THAN,
             self::OP_GREATER_THAN_OR_EQUAL,
             self::OP_LESS_THAN,
@@ -166,6 +181,42 @@ class Condition extends Resource
     public function setPath($value): self
     {
         return $this->setAttribute('path', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getComparePath(): string
+    {
+        return $this->getAttribute('comparePath');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setComparePath($value): self
+    {
+        return $this->setAttribute('comparePath', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getListId(): string
+    {
+        return $this->getAttribute('listId');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setListId($value): self
+    {
+        return $this->setAttribute('listId', $value);
     }
 
     /**
