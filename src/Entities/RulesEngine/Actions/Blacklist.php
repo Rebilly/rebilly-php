@@ -29,7 +29,7 @@ final class Blacklist extends RuleAction
 
     public const TYPE_IP_ADDRESS = 'ip-address';
 
-    public const TYPE_PAYMENT_CARD_ID = 'payment-card-id';
+    public const TYPE_PAYMENT_CARD = 'payment-card';
 
     /**
      * @return string[]|array
