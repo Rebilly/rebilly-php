@@ -118,4 +118,16 @@ final class CustomerService extends Service
     {
         $this->client()->delete('customers/{customerId}/lead-source', ['customerId' => $customerId]);
     }
+
+    /**
+     * @param string $duplicateCustomerId
+     * @param string $targetCustomerId
+     */
+    public function merge($duplicateCustomerId, $targetCustomerId)
+    {
+        $this->client()->delete(
+            'customers/{duplicateCustomerId}?targetCustomerId={targetCustomerId}',
+            ['duplicateCustomerId' => $duplicateCustomerId, 'targetCustomerId' => $targetCustomerId]
+        );
+    }
 }

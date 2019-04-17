@@ -193,7 +193,7 @@ class ServiceTest extends BaseTestCase
             ->expects($this->any())
             ->method('__invoke')
             ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'lead-sources/dummy')
+                $client->createResponse()
             ));
 
         $client = new Client([
@@ -210,6 +210,33 @@ class ServiceTest extends BaseTestCase
         $this->assertInstanceOf(Entities\LeadSource::class, $result);
 
         $service->deleteLeadSource('dummy');
+    }
+
+    /**
+     * @test
+     */
+    public function customerMerge()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->createMock(CurlHandler::class);
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'lead-sources/dummy')
+            ));
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+
+        $service = $client->customers();
+
+        $result = $service->merge('dummy', 'dummy2');
+        $this->assertNull($result);
     }
 
     /**
