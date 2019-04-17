@@ -11,6 +11,7 @@
 
 namespace Rebilly\Entities\PaymentRetryInstructions\PaymentInstructionTypes;
 
+use DomainException;
 use Rebilly\Entities\PaymentRetryInstructions\PaymentInstruction;
 
 /**
@@ -18,6 +19,8 @@ use Rebilly\Entities\PaymentRetryInstructions\PaymentInstruction;
  */
 class PartialType extends PaymentInstruction
 {
+    public const UNEXPECTED_TYPE = 'Unexpected type. Only %s types are supported';
+
     public const TYPE_PERCENT = 'percent';
 
     public const TYPE_FIXED = 'fixed';
@@ -34,9 +37,31 @@ class PartialType extends PaymentInstruction
     }
 
     /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->getAttribute('type');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setType($value): self
+    {
+        if (!in_array($value, static::types(), true)) {
+            throw new DomainException(sprintf(self::UNEXPECTED_TYPE, implode(', ', static::types())));
+        }
+
+        return $this->setAttribute('type', $value);
+    }
+
+    /**
      * @return float
      */
-    public function getValue()
+    public function getValue(): float
     {
         return $this->getAttribute('value');
     }
@@ -46,7 +71,7 @@ class PartialType extends PaymentInstruction
      *
      * @return $this
      */
-    public function setValue($value)
+    public function setValue($value): self
     {
         return $this->setAttribute('value', $value);
     }
@@ -54,7 +79,7 @@ class PartialType extends PaymentInstruction
     /**
      * {@inheritdoc}
      */
-    protected function methodName()
+    protected function methodName(): string
     {
         return PaymentInstruction::PARTIAL;
     }

@@ -24,8 +24,6 @@ abstract class PaymentInstruction extends Resource
 {
     public const UNSUPPORTED_METHOD = 'Unexpected method. Only %s methods are supported';
 
-    public const UNEXPECTED_TYPE = 'Unexpected type. Only %s types are supported';
-
     public const REQUIRED_METHOD = 'Method is required';
 
     public const NONE = 'none';
@@ -41,11 +39,6 @@ abstract class PaymentInstruction extends Resource
     ];
 
     /**
-     * @return string[]|array
-     */
-    abstract public static function types(): array;
-
-    /**
      * {@inheritdoc}
      */
     public function __construct(array $data = [])
@@ -58,7 +51,7 @@ abstract class PaymentInstruction extends Resource
      *
      * @return PaymentInstruction
      */
-    public static function createFromData(array $data)
+    public static function createFromData(array $data): self
     {
         if (!isset($data['method'])) {
             throw new DomainException(self::REQUIRED_METHOD);
@@ -89,29 +82,7 @@ abstract class PaymentInstruction extends Resource
     /**
      * @return string
      */
-    public function getType()
-    {
-        return $this->getAttribute('type');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setType($value)
-    {
-        if (!in_array($value, static::types(), true)) {
-            throw new DomainException(sprintf(self::UNEXPECTED_TYPE, implode(', ', static::types())));
-        }
-
-        return $this->setAttribute('type', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return $this->getAttribute('method');
     }
@@ -119,5 +90,5 @@ abstract class PaymentInstruction extends Resource
     /**
      * @return string
      */
-    abstract protected function methodName();
+    abstract protected function methodName(): string;
 }
