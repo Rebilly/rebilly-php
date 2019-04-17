@@ -18,6 +18,21 @@ use Rebilly\Entities\PaymentRetryInstructions\PaymentInstruction;
  */
 class PartialType extends PaymentInstruction
 {
+    public const TYPE_PERCENT = 'percent';
+
+    public const TYPE_FIXED = 'fixed';
+
+    /**
+     * @return string[]|array
+     */
+    public static function types(): array
+    {
+        return [
+            self::TYPE_PERCENT,
+            self::TYPE_FIXED,
+        ];
+    }
+
     /**
      * @return float
      */
@@ -34,24 +49,6 @@ class PartialType extends PaymentInstruction
     public function setValue($value)
     {
         return $this->setAttribute('value', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->getAttribute('type');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setType($value)
-    {
-        return $this->setAttribute('type', $value);
     }
 
     /**

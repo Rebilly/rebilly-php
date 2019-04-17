@@ -38,11 +38,11 @@ class PaymentRetryInstructionsTest extends BaseTestCase
     {
         $instruction = new DiscountType();
         $instruction->setValue(15);
-        $instruction->setType('discount');
+        $instruction->setType('fixed');
 
         self::assertInstanceOf(DiscountType::class, $instruction);
         self::assertSame(15, $instruction->getValue());
-        self::assertSame('discount', $instruction->getType());
+        self::assertSame('fixed', $instruction->getType());
         self::assertSame('discount', $instruction->getMethod());
     }
 
@@ -63,12 +63,12 @@ class PaymentRetryInstructionsTest extends BaseTestCase
     public function paymentInstructionsPartialType()
     {
         $instruction = new PartialType();
-        $instruction->setType('partial');
+        $instruction->setType('fixed');
         $instruction->setValue(15);
 
         self::assertInstanceOf(PartialType::class, $instruction);
         self::assertSame(15, $instruction->getValue());
-        self::assertSame('partial', $instruction->getType());
+        self::assertSame('fixed', $instruction->getType());
         self::assertSame('partial', $instruction->getMethod());
     }
 
