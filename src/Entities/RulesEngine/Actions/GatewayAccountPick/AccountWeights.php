@@ -47,9 +47,9 @@ class AccountWeights extends Instruction
     /**
      * @param array $value
      *
-     * @return $this
+     * @return array
      */
-    public function createWeightedList($value): self
+    public function createWeightedList($value): array
     {
         return array_map(function ($data) {
             return AccountWeight::createFromData($data);

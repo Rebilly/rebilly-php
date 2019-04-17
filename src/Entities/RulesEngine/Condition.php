@@ -93,7 +93,7 @@ class Condition extends Resource
     }
 
     /**
-     * @return Condition
+     * @return Condition|null
      */
     public function getCondition(): ?self
     {
@@ -101,7 +101,7 @@ class Condition extends Resource
     }
 
     /**
-     * @param Condition|array $value
+     * @param Condition|null $value
      *
      * @return $this
      */

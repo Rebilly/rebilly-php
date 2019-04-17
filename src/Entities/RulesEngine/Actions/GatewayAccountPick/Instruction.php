@@ -15,7 +15,7 @@ use DomainException;
 use Rebilly\Rest\Resource;
 
 /**
- * Class GatewayAccountPickInstruction.
+ * Class Instruction.
  */
 abstract class Instruction extends Resource
 {

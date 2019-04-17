@@ -14,7 +14,7 @@ namespace Rebilly\Entities\RulesEngine\Actions;
 use Rebilly\Entities\RulesEngine\RuleAction;
 
 /**
- * Class AddRiskScore.
+ * Class TagOrUntagCustomer.
  */
 final class TagOrUntagCustomer extends RuleAction
 {

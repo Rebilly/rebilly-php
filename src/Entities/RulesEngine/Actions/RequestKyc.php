@@ -31,7 +31,7 @@ final class RequestKyc extends RuleAction
 
     public const PROMPT_POLICY_AFTER_TRANSACTION_PROCESS = 'after-transaction-process';
 
-    public const REJECTED_BEFORE_TRANSACTION_PROCESS_POLICY_DECLINED = 'process-transaction';
+    public const REJECTED_BEFORE_TRANSACTION_PROCESS_POLICY_DECLINED = 'declined';
 
     public const REJECTED_BEFORE_TRANSACTION_PROCESS_POLICY_PROCESS_TRANSACTION = 'process-transaction';
 

@@ -14,7 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Resource;
 
 /**
- * Class Product.
+ * Class ResourceAttachment.
  */
 final class ResourceAttachment extends Resource
 {
