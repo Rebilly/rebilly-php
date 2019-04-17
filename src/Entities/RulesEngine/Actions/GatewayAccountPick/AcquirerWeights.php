@@ -61,6 +61,6 @@ class AcquirerWeights extends Instruction
      */
     public function methodName(): string
     {
-        return self::METHOD_ACCOUNT_WEIGHTS;
+        return self::METHOD_ACQUIRER_WEIGHTS;
     }
 }

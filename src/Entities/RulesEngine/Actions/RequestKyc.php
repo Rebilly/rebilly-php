@@ -286,6 +286,6 @@ final class RequestKyc extends RuleAction
      */
     public function actionName(): string
     {
-        return self::NAME_TRIGGER_WEBHOOK;
+        return self::NAME_REQUEST_KYC;
     }
 }

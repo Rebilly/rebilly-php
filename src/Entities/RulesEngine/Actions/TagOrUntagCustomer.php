@@ -59,6 +59,6 @@ final class TagOrUntagCustomer extends RuleAction
      */
     public function actionName(): string
     {
-        return self::NAME_ADD_RISK_SCORE;
+        return self::NAME_TAG_OR_UNTAG_CUSTOMER;
     }
 }

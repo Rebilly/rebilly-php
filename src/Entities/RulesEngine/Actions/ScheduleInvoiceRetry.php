@@ -146,6 +146,6 @@ final class ScheduleInvoiceRetry extends RuleAction
      */
     public function actionName(): string
     {
-        return self::NAME_SCHEDULE_PAYMENT_RETRY;
+        return self::NAME_SCHEDULE_INVOICE_RETRY;
     }
 }

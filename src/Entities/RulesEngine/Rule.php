@@ -87,7 +87,7 @@ class Rule extends Resource
      */
     public function isActive(): bool
     {
-        return $this->getAttribute('status') === 'active';
+        return $this->getAttribute('status') === self::STATUS_ACTIVE;
     }
 
     /**

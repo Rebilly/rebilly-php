@@ -68,7 +68,7 @@ abstract class Instruction extends Resource
                 break;
             default:
                 throw new DomainException(
-                    sprintf(self::UNEXPECTED_METHOD, implode(',', self::methods()))
+                    sprintf(self::UNEXPECTED_METHOD, implode(', ', self::methods()))
                 );
         }
 

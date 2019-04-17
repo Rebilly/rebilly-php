@@ -41,7 +41,7 @@ final class Blacklist extends RuleAction
             self::TYPE_EMAIL,
             self::TYPE_FINGERPRINT,
             self::TYPE_IP_ADDRESS,
-            self::TYPE_PAYMENT_CARD_ID,
+            self::TYPE_PAYMENT_CARD,
         ];
     }
 
@@ -60,7 +60,7 @@ final class Blacklist extends RuleAction
      */
     public function setType($value): self
     {
-        if (!in_array($value, self::statuses(), true)) {
+        if (!in_array($value, self::types(), true)) {
             throw new DomainException(sprintf(self::UNEXPECTED_TYPE, implode(', ', self::types())));
         }
 

@@ -162,7 +162,7 @@ abstract class RuleAction extends Resource
                 break;
             default:
                 throw new DomainException(
-                    sprintf(self::UNEXPECTED_NAME, implode(',', self::names()))
+                    sprintf(self::UNEXPECTED_NAME, implode(', ', self::names()))
                 );
         }
 
@@ -182,7 +182,7 @@ abstract class RuleAction extends Resource
      */
     public function isActive(): bool
     {
-        return $this->getAttribute('status') === 'active';
+        return $this->getAttribute('status') === self::STATUS_ACTIVE;
     }
 
     /**
