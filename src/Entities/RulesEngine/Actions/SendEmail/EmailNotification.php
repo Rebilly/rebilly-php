@@ -12,12 +12,12 @@
 namespace Rebilly\Entities\RulesEngine\Actions;
 
 use Rebilly\Entities\ResourceAttachment;
-use Rebilly\Entities\RulesEngine\RuleAction;
+use Rebilly\Rest\Resource;
 
 /**
  * Class EmailNotification.
  */
-final class EmailNotification extends RuleAction
+final class EmailNotification extends Resource
 {
     /**
      * @return string
@@ -245,13 +245,5 @@ final class EmailNotification extends RuleAction
     public function setWeight($value): self
     {
         return $this->setAttribute('weight', $value);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function actionName(): string
-    {
-        return self::NAME_SEND_EMAIL;
     }
 }
