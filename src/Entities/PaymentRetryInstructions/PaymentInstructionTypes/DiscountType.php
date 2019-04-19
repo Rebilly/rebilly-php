@@ -11,6 +11,7 @@
 
 namespace Rebilly\Entities\PaymentRetryInstructions\PaymentInstructionTypes;
 
+use DomainException;
 use Rebilly\Entities\PaymentRetryInstructions\PaymentInstruction;
 
 /**
@@ -18,28 +19,27 @@ use Rebilly\Entities\PaymentRetryInstructions\PaymentInstruction;
  */
 class DiscountType extends PaymentInstruction
 {
-    /**
-     * @return float
-     */
-    public function getValue()
-    {
-        return $this->getAttribute('value');
-    }
+    public const UNEXPECTED_TYPE = 'Unexpected type. Only %s types are supported';
+
+    public const TYPE_PERCENT = 'percent';
+
+    public const TYPE_FIXED = 'fixed';
 
     /**
-     * @param float $value
-     *
-     * @return $this
+     * @return string[]|array
      */
-    public function setValue($value)
+    public static function types(): array
     {
-        return $this->setAttribute('value', $value);
+        return [
+            self::TYPE_PERCENT,
+            self::TYPE_FIXED,
+        ];
     }
 
     /**
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->getAttribute('type');
     }
@@ -49,15 +49,37 @@ class DiscountType extends PaymentInstruction
      *
      * @return $this
      */
-    public function setType($value)
+    public function setType($value): self
     {
+        if (!in_array($value, static::types(), true)) {
+            throw new DomainException(sprintf(self::UNEXPECTED_TYPE, implode(', ', static::types())));
+        }
+
         return $this->setAttribute('type', $value);
+    }
+
+    /**
+     * @return float
+     */
+    public function getValue(): float
+    {
+        return $this->getAttribute('value');
+    }
+
+    /**
+     * @param float $value
+     *
+     * @return $this
+     */
+    public function setValue($value): self
+    {
+        return $this->setAttribute('value', $value);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function methodName()
+    protected function methodName(): string
     {
         return PaymentInstruction::DISCOUNT;
     }

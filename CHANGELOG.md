@@ -35,6 +35,7 @@ _TBD_
 - [x] Added new properties to `Invoice`: `retryInstruction`, `autopayScheduledTime`
 - [x] Added `resend` method to **WebhookTracking** service
 - [x] Added `merge` method to **Customer** service
+- [x] Added new service `Rule`
 
 ### Changed
 - [x] **Upgraded minimum PHP version to 7.1**

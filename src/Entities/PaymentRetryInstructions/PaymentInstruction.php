@@ -51,7 +51,7 @@ abstract class PaymentInstruction extends Resource
      *
      * @return PaymentInstruction
      */
-    public static function createFromData(array $data)
+    public static function createFromData(array $data): self
     {
         if (!isset($data['method'])) {
             throw new DomainException(self::REQUIRED_METHOD);
@@ -82,7 +82,7 @@ abstract class PaymentInstruction extends Resource
     /**
      * @return string
      */
-    public function getMethod()
+    public function getMethod(): string
     {
         return $this->getAttribute('method');
     }
@@ -90,5 +90,5 @@ abstract class PaymentInstruction extends Resource
     /**
      * @return string
      */
-    abstract protected function methodName();
+    abstract protected function methodName(): string;
 }

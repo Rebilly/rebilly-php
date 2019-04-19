@@ -21,7 +21,7 @@ class NoneType extends PaymentInstruction
     /**
      * {@inheritdoc}
      */
-    protected function methodName()
+    protected function methodName(): string
     {
         return PaymentInstruction::NONE;
     }

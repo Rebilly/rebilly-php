@@ -509,13 +509,14 @@ abstract class TestCase extends Framework\TestCase
                                 'attempts' => [
                                     [
                                         'scheduleInstruction' => ['method' => ScheduleInstruction::IMMEDIATELY],
-                                    ]
-                                ]
+                                    ],
+                                ],
                             ]
                         );
                     default:
                         return new Entities\PaymentRetryInstruction();
                 }
+                // no break
             case 'reasonCode':
                 return '1000';
             case 'status':
