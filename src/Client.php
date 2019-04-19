@@ -87,6 +87,7 @@ use RuntimeException;
  * @method Services\GatewayAccountDowntimeService gatewayDowntimes()
  * @method Services\PaymentInstrumentValidationService paymentInstrumentValidation()
  * @method Services\KycService kycDocuments()
+ * @method Services\RuleService eventRules()
  */
 final class Client
 {
@@ -147,6 +148,7 @@ final class Client
         'gatewayDowntimes' => Services\GatewayAccountDowntimeService::class,
         'paymentInstrumentValidation' => Services\PaymentInstrumentValidationService::class,
         'kycDocuments' => Services\KycService::class,
+        'eventRules' => Services\RuleService::class,
     ];
 
     /** @var array */
