@@ -52,7 +52,11 @@ class AccountWeights extends Instruction
     public function createWeightedList($value): array
     {
         return array_map(function ($data) {
-            return AccountWeight::createFromData($data);
+            if ($data instanceof AccountWeight) {
+                return $data;
+            }
+
+            return AccountWeight::createFromData((array) $data);
         }, $value);
     }
 

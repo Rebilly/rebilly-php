@@ -166,7 +166,11 @@ class Rule extends Resource
     public function createActions(array $data): array
     {
         return array_map(function ($data) {
-            return RuleAction::createFromData($data);
+            if ($data instanceof RuleAction) {
+                return $data;
+            }
+
+            return RuleAction::createFromData((array) $data);
         }, $data);
     }
 

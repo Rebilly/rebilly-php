@@ -9,7 +9,7 @@
  * @see https://www.rebilly.com
  */
 
-namespace Rebilly\Entities\RulesEngine\Actions;
+namespace Rebilly\Entities\RulesEngine\Actions\SendEmail;
 
 use Rebilly\Entities\ResourceAttachment;
 use Rebilly\Rest\Resource;
@@ -43,16 +43,6 @@ final class EmailNotification extends Resource
     public function getVersion(): string
     {
         return $this->getAttribute('version');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setVersion($value): self
-    {
-        return $this->setAttribute('version', $value);
     }
 
     /**
@@ -225,7 +215,11 @@ final class EmailNotification extends Resource
     public function createAttachments(array $value): array
     {
         return array_map(function ($data) {
-            return new ResourceAttachment($data);
+            if ($data instanceof ResourceAttachment) {
+                return $data;
+            }
+
+            return new ResourceAttachment((array) $data);
         }, $value);
     }
 
