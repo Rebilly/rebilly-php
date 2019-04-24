@@ -52,7 +52,11 @@ class AcquirerWeights extends Instruction
     public function createWeightedList($value): array
     {
         return array_map(function ($data) {
-            return AcquirerWeight::createFromData($data);
+            if ($data instanceof AcquirerWeight) {
+                return $data;
+            }
+
+            return AcquirerWeight::createFromData((array) $data);
         }, $value);
     }
 

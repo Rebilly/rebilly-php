@@ -62,7 +62,11 @@ class EventRules extends Resource
     public function createBinds(array $data): array
     {
         return array_map(function ($data) {
-            return Bind::createFromData($data);
+            if ($data instanceof Bind) {
+                return $data;
+            }
+
+            return Bind::createFromData((array) $data);
         }, $data);
     }
 
@@ -92,7 +96,11 @@ class EventRules extends Resource
     public function createRules(array $data): array
     {
         return array_map(function ($data) {
-            return Rule::createFromData($data);
+            if ($data instanceof Rule) {
+                return $data;
+            }
+
+            return Rule::createFromData((array) $data);
         }, $data);
     }
 

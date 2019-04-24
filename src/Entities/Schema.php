@@ -18,6 +18,7 @@ use IteratorAggregate;
 use Rebilly\Entities\Coupons\Coupon;
 use Rebilly\Entities\Coupons\Redemption;
 use Rebilly\Entities\KycDocuments\KycDocument;
+use Rebilly\Entities\RulesEngine\EventRules;
 use Rebilly\Entities\Shipping\ShippingZone;
 use Rebilly\Rest\Collection;
 
@@ -343,6 +344,9 @@ final class Schema implements IteratorAggregate, ArrayAccess
             },
             'kyc-documents/{id}' => function (array $content) {
                 return new KycDocument($content);
+            },
+            'events/{eventType}/rules' => function (array $content) {
+                return new EventRules($content);
             },
         ];
     }

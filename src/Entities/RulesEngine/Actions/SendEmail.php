@@ -11,6 +11,7 @@
 
 namespace Rebilly\Entities\RulesEngine\Actions;
 
+use Rebilly\Entities\RulesEngine\Actions\SendEmail\EmailNotification;
 use Rebilly\Entities\RulesEngine\RuleAction;
 
 /**
@@ -62,7 +63,11 @@ final class SendEmail extends RuleAction
     public function createEmails(array $value): array
     {
         return array_map(function ($data) {
-            return new EmailNotification($data);
+            if ($data instanceof EmailNotification) {
+                return $data;
+            }
+
+            return new EmailNotification((array) $data);
         }, $value);
     }
 

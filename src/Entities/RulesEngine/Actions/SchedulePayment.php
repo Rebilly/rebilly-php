@@ -59,9 +59,11 @@ final class SchedulePayment extends RuleAction
      */
     public function createScheduleInstruction($value): ScheduleInstruction
     {
-        return array_map(function ($data) {
-            return ScheduleInstruction::createFromData($data);
-        }, $value);
+        if ($value instanceof ScheduleInstruction) {
+            return $value;
+        }
+
+        return ScheduleInstruction::createFromData((array) $value);
     }
 
     /**

@@ -161,7 +161,11 @@ class Condition extends Resource
     public function createConditions(array $data): array
     {
         return array_map(function ($data) {
-            return self::createFromData($data);
+            if ($data instanceof self) {
+                return $data;
+            }
+
+            return self::createFromData((array) $data);
         }, $data);
     }
 

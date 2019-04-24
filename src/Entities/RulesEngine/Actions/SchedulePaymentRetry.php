@@ -76,7 +76,11 @@ final class SchedulePaymentRetry extends RuleAction
     public function createAttempts($value): array
     {
         return array_map(function ($data) {
-            return new PaymentRetryAttempt($data);
+            if ($data instanceof PaymentRetryAttempt) {
+                return $data;
+            }
+
+            return new PaymentRetryAttempt((array) $data);
         }, $value);
     }
 
