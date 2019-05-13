@@ -287,7 +287,7 @@ class ServiceTest extends BaseTestCase
         $result = $service->login(['username' => 'dummy', 'password' => 'qwerty']);
         $this->assertInstanceOf(Entities\AuthenticationToken::class, $result);
 
-        $result = $service->exchange('token', ['invalidate' => 'false', 'expiredTime' => date('c')]);
+        $result = $service->exchange('token', ['invalidate' => false, 'expiredTime' => date('c')]);
         $this->assertInstanceOf(Entities\Session::class, $result);
 
         $service->logout('dummy');
