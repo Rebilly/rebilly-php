@@ -138,7 +138,6 @@ abstract class TestCase extends Framework\TestCase
             case 'request':
             case 'response':
             case 'acquirerReferenceNumber':
-            case 'mode':
                 return $faker->word;
             case 'redirectUrl':
             case 'notificationUrl':
@@ -307,6 +306,15 @@ abstract class TestCase extends Framework\TestCase
                 return $faker->randomElement(Entities\File::allowedTypes());
             case 'tags':
                 return [$faker->word];
+            case 'mode':
+                switch ($class) {
+                    case Entities\LineItem::class:
+                        return $faker->randomElement(Entities\AuthenticationToken::modes());
+                    default:
+                        throw new InvalidArgumentException(
+                            sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
+                        );
+                }
             case 'type':
             case 'datetimeFormat':
                 switch ($class) {
