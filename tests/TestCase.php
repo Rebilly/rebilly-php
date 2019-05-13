@@ -308,7 +308,7 @@ abstract class TestCase extends Framework\TestCase
                 return [$faker->word];
             case 'mode':
                 switch ($class) {
-                    case Entities\LineItem::class:
+                    case Entities\AuthenticationToken::class:
                         return $faker->randomElement(Entities\AuthenticationToken::modes());
                     default:
                         throw new InvalidArgumentException(
