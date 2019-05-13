@@ -14,6 +14,7 @@ namespace Rebilly\Services;
 use ArrayObject;
 use JsonSerializable;
 use Rebilly\Entities\AuthenticationToken;
+use Rebilly\Entities\Session;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Paginator;
@@ -93,5 +94,18 @@ final class AuthenticationTokenService extends Service
     public function logout($token)
     {
         $this->client()->delete('authentication-tokens/{token}', ['token' => $token]);
+    }
+
+    /**
+     * @param string $token
+     * @param array|JsonSerializable|AuthenticationToken $data
+     *
+     * @throws NotFoundException The resource data does not exist
+     *
+     * @return Session
+     */
+    public function exchange($token, $data)
+    {
+        return $this->client()->post($data, 'authentication-tokens/{token}/exchange', ['token' => $token]);
     }
 }

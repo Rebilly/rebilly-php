@@ -11,6 +11,7 @@
 
 namespace Rebilly\Entities;
 
+use DomainException;
 use Rebilly\Rest\Entity;
 
 /**
@@ -18,12 +19,21 @@ use Rebilly\Rest\Entity;
  */
 final class AuthenticationToken extends Entity
 {
+    public const MSG_UNEXPECTED_MODE = 'Unexpected mode. Only %s modes are supported';
+
+    public const MODE_PASSWORD = 'password';
+
+    public const MODE_PASSWORDLESS = 'passwordless';
+
     /**
-     * {@inheritdoc}
+     * @return array
      */
-    public function getId()
+    public static function modes()
     {
-        return $this->getToken();
+        return [
+            self::MODE_PASSWORD,
+            self::MODE_PASSWORDLESS,
+        ];
     }
 
     /**
@@ -94,5 +104,40 @@ final class AuthenticationToken extends Entity
     public function getCustomerId()
     {
         return $this->getAttribute('customerId');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setCustomerId($value)
+    {
+        return $this->setAttribute('customerId', $value);
+    }
+
+    /**
+     * @param string $value
+     *
+     * @throws DomainException
+     * @return $this
+     */
+    public function setMode($value)
+    {
+        if (!in_array($value, self::modes(), true)) {
+            throw new DomainException(sprintf(self::MSG_UNEXPECTED_MODE, implode(', ', self::modes())));
+        }
+
+        return $this->setAttribute('mode', $value);
+    }
+
+    /**
+     * @param bool $value
+     *
+     * @return $this
+     */
+    public function setInvalidate($value)
+    {
+        return $this->setAttribute('invalidate', $value);
     }
 }
