@@ -138,6 +138,7 @@ abstract class TestCase extends Framework\TestCase
             case 'request':
             case 'response':
             case 'acquirerReferenceNumber':
+            case 'mode':
                 return $faker->word;
             case 'redirectUrl':
             case 'notificationUrl':
@@ -229,6 +230,7 @@ abstract class TestCase extends Framework\TestCase
             case 'starred':
             case 'allowCustomCustomerId':
             case 'attachInvoice':
+            case 'invalidate':
                 return $faker->boolean();
             case 'credentialTtl':
             case 'authTokenTtl':
@@ -322,6 +324,8 @@ abstract class TestCase extends Framework\TestCase
                         return $faker->randomElement(Entities\Dispute::allowedTypes());
                     case Entities\Transaction::class:
                         return $faker->randomElement(Entities\Transaction::types());
+                    case Entities\Session::class:
+                        return $faker->word;
                     default:
                         throw new InvalidArgumentException(
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
