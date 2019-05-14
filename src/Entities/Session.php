@@ -137,6 +137,22 @@ final class Session extends Entity
     }
 
     /**
+     * @return string
+     */
+    public function getCustomerId()
+    {
+        return $this->getAttribute('customerId');
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->getAttribute('type');
+    }
+
+    /**
      * @return array
      */
     public static function allowedResources()

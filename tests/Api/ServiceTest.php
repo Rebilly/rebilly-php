@@ -266,6 +266,11 @@ class ServiceTest extends BaseTestCase
                 $client->createResponse()->withHeader('Location', 'authentication-tokens/token')
             ));
 
+        $handler
+            ->expects($this->at(3))
+            ->method('__invoke')
+            ->will($this->returnValue($client->createResponse()));
+
         $client = new Client([
             'apiKey' => 'QWERTY',
             'httpHandler' => $handler,
@@ -281,6 +286,9 @@ class ServiceTest extends BaseTestCase
 
         $result = $service->login(['username' => 'dummy', 'password' => 'qwerty']);
         $this->assertInstanceOf(Entities\AuthenticationToken::class, $result);
+
+        $result = $service->exchange('token', ['invalidate' => false, 'expiredTime' => date('c')]);
+        $this->assertInstanceOf(Entities\Session::class, $result);
 
         $service->logout('dummy');
     }

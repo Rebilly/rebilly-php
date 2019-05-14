@@ -36,6 +36,9 @@ _TBD_
 - [x] Added `resend` method to **WebhookTracking** service
 - [x] Added `merge` method to **Customer** service
 - [x] Added new service `Rule`
+- [x] Added new method to `AuthenticationTokenService`: `exchange`
+- [x] Added new properties to `Session`: `customerId`, `type`
+- [x] Added new properties to `AuthenticationToken`: `mode`, `invalidate`
 
 ### Changed
 - [x] **Upgraded minimum PHP version to 7.1**
