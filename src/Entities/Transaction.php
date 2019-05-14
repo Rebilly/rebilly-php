@@ -44,7 +44,7 @@ final class Transaction extends Entity
     /**
      * @param $value
      *
-     * @return Transaction
+     * @return $this
      */
     public function setAmount($value)
     {
@@ -62,7 +62,7 @@ final class Transaction extends Entity
     /**
      * @param $value
      *
-     * @return Transaction
+     * @return $this
      */
     public function setCurrency($value)
     {
@@ -80,6 +80,22 @@ final class Transaction extends Entity
     /**
      * @return string
      */
+    public function getProcessedTime()
+    {
+        return $this->getAttribute('processedTime');
+    }
+
+    /**
+     * @return string
+     */
+    public function getScheduledTime()
+    {
+        return $this->getAttribute('scheduledTime');
+    }
+
+    /**
+     * @return string
+     */
     public function getType()
     {
         return $this->getAttribute('type');
@@ -88,7 +104,7 @@ final class Transaction extends Entity
     /**
      * @param $value
      *
-     * @return Transaction
+     * @return $this
      */
     public function setType($value)
     {
@@ -130,7 +146,7 @@ final class Transaction extends Entity
     /**
      * @param $value
      *
-     * @return Transaction
+     * @return $this
      */
     public function setWebsiteId($value)
     {
@@ -148,7 +164,7 @@ final class Transaction extends Entity
     /**
      * @param $value
      *
-     * @return Transaction
+     * @return $this
      */
     public function setCustomerId($value)
     {
@@ -222,7 +238,7 @@ final class Transaction extends Entity
     /**
      * @param $value
      *
-     * @return Transaction
+     * @return $this
      */
     public function setInvoiceIds($value)
     {
@@ -296,7 +312,7 @@ final class Transaction extends Entity
     /**
      * @param PaymentMethodInstrument $value
      *
-     * @return Transaction
+     * @return $this
      */
     public function setPaymentInstrument(PaymentMethodInstrument $value)
     {
@@ -346,7 +362,7 @@ final class Transaction extends Entity
     /**
      * @param $value
      *
-     * @return Transaction
+     * @return $this
      */
     public function setBillingAddress($value)
     {
@@ -406,7 +422,7 @@ final class Transaction extends Entity
     /**
      * @param $value
      *
-     * @return Transaction
+     * @return $this
      */
     public function setRedirectUrl($value)
     {
@@ -424,7 +440,7 @@ final class Transaction extends Entity
     /**
      * @param $value
      *
-     * @return Transaction
+     * @return $this
      */
     public function setNotificationUrl($value)
     {
@@ -449,5 +465,41 @@ final class Transaction extends Entity
         }
 
         return null;
+    }
+
+    /**
+     * @return array
+     */
+    public function getCustomFields()
+    {
+        return $this->getAttribute('customFields');
+    }
+
+    /**
+     * @param array $value
+     *
+     * @return $this
+     */
+    public function setCustomFields($value)
+    {
+        return $this->setAttribute('customFields', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->getAttribute('description');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setDescription($value)
+    {
+        return $this->setAttribute('description', $value);
     }
 }
