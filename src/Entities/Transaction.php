@@ -494,7 +494,7 @@ final class Transaction extends Entity
     }
 
     /**
-     * @param $value
+     * @param string $value
      *
      * @return $this
      */
