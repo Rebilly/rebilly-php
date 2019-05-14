@@ -39,6 +39,7 @@ _TBD_
 - [x] Added new method to `AuthenticationTokenService`: `exchange`
 - [x] Added new properties to `Session`: `customerId`, `type`
 - [x] Added new properties to `AuthenticationToken`: `mode`, `invalidate`
+- [x] Added new properties to `Transaction`: `customFields`, `description`, `processedTime`, `scheduledTime`
 
 ### Changed
 - [x] **Upgraded minimum PHP version to 7.1**
