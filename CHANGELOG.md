@@ -42,6 +42,7 @@ _TBD_
 - [x] Added new properties to `Transaction`: `customFields`, `description`, `processedTime`, `scheduledTime`, `velocity`, `revision`
 - [x] Added new properties to `PaymentCard`: `method`, `panFingerprint`
 - [x] Added new properties to `BankAccount`: `accountNumberType`, `last4`, `bic`, `method`, `fingerprint`
+- [x] Added missing getters and setters to `AuthenticationToken`, `Transaction`, `PaymentCard`, `BankAccount`
 
 ### Changed
 - [x] **Upgraded minimum PHP version to 7.1**
