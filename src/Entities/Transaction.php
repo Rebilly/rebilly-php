@@ -192,6 +192,18 @@ final class Transaction extends Entity
     }
 
     /**
+     * @return null|BankAccount
+     */
+    public function getBankAccount()
+    {
+        if ($this->hasEmbeddedResource('bankAccount')) {
+            return new BankAccount($this->getEmbeddedResource('bankAccount'));
+        }
+
+        return null;
+    }
+
+    /**
      * @return Gateway|null
      */
     public function getGateway()
@@ -501,5 +513,21 @@ final class Transaction extends Entity
     public function setDescription($value)
     {
         return $this->setAttribute('description', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getVelocity()
+    {
+        return $this->getAttribute('velocity');
+    }
+
+    /**
+     * @return string
+     */
+    public function getRevision()
+    {
+        return $this->getAttribute('revision');
     }
 }

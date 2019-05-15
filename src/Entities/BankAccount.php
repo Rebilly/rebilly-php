@@ -123,6 +123,14 @@ final class BankAccount extends Entity
     }
 
     /**
+     * @return string
+     */
+    public function getRoutingNumber()
+    {
+        return $this->getAttribute('routingNumber');
+    }
+
+    /**
      * @param string $value
      *
      * @return $this
@@ -143,6 +151,32 @@ final class BankAccount extends Entity
     }
 
     /**
+     * @return string
+     */
+    public function getAccountNumberType()
+    {
+        return $this->getAttribute('accountNumberType');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setAccountNumberType($value)
+    {
+        return $this->setAttribute('accountNumberType', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getAccountType()
+    {
+        return $this->getAttribute('accountType');
+    }
+
+    /**
      * @param string $value
      *
      * @return $this
@@ -158,6 +192,38 @@ final class BankAccount extends Entity
     public function getStatus()
     {
         return $this->getAttribute('status');
+    }
+
+    /**
+     * @return string
+     */
+    public function getFingerprint()
+    {
+        return $this->getAttribute('fingerprint');
+    }
+
+    /**
+     * @return string
+     */
+    public function getLast4()
+    {
+        return $this->getAttribute('last4');
+    }
+
+    /**
+     * @return string
+     */
+    public function getBic()
+    {
+        return $this->getAttribute('bic');
+    }
+
+    /**
+     * @return string
+     */
+    public function getMethod()
+    {
+        return $this->getAttribute('method');
     }
 
     /**

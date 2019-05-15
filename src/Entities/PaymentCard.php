@@ -122,6 +122,14 @@ final class PaymentCard extends Entity
     /**
      * @return string
      */
+    public function getMethod()
+    {
+        return $this->getAttribute('method');
+    }
+
+    /**
+     * @return string
+     */
     public function getCustomerId()
     {
         return $this->getAttribute('customerId');
@@ -174,6 +182,14 @@ final class PaymentCard extends Entity
     public function setCvv($value)
     {
         return $this->setAttribute('cvv', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getFingerprint()
+    {
+        return $this->getAttribute('panFingerprint');
     }
 
     /**
