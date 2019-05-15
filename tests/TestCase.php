@@ -138,6 +138,7 @@ abstract class TestCase extends Framework\TestCase
             case 'request':
             case 'response':
             case 'acquirerReferenceNumber':
+            case 'bic':
                 return $faker->word;
             case 'redirectUrl':
             case 'notificationUrl':
@@ -158,6 +159,7 @@ abstract class TestCase extends Framework\TestCase
             case 'token':
             case 'fingerprint':
             case 'secretKey':
+            case 'panFingerprint':
                 return $faker->md5;
             case 'name':
             case 'bankName':
@@ -239,6 +241,8 @@ abstract class TestCase extends Framework\TestCase
             case 'maxQuantity':
             case 'monthlyLimit':
             case 'redirectTimeout':
+            case 'velocity':
+            case 'revision':
                 return $faker->numberBetween(1, 10);
             case 'address2':
                 return $faker->address;
@@ -482,6 +486,8 @@ abstract class TestCase extends Framework\TestCase
                 return 5966;
             case 'accountType':
                 return 'checking';
+            case 'accountNumberType':
+                return 'BBAN';
             case 'permissions':
                 return [];
             case 'invoiceIds':
