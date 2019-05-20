@@ -67,11 +67,8 @@ final class SessionService extends Service
         return $this->client()->put($data, 'sessions/{tokenId}', ['tokenId' => $tokenId]);
     }
 
-    /**
-     * @param string $tokenId
-     */
-    public function delete($tokenId)
+    public function delete()
     {
-        $this->client()->delete('sessions/{tokenId}', ['tokenId' => $tokenId]);
+        return $this->client()->post([], 'logout');
     }
 }

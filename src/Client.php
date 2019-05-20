@@ -21,6 +21,7 @@ use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Log\LoggerInterface as Logger;
 use Rebilly\Http\CurlHandler;
+use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Middleware\LogHandler;
 use Rebilly\Rest\File;
 use RuntimeException;
@@ -352,7 +353,9 @@ final class Client
         $response = call_user_func($this->middleware, $request, $response, $this);
 
         if ($response->getStatusCode() === 404) {
-            throw new Http\Exception\NotFoundException();
+            $content = json_decode($response->getBody()->getContents(), true);
+
+            throw new Http\Exception\NotFoundException($content['message'] ?? '');
         }
 
         if ($response->getStatusCode() === 410) {
