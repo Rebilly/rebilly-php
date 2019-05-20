@@ -43,6 +43,8 @@ _TBD_
 - [x] Added new properties to `PaymentCard`: `method`, `panFingerprint`
 - [x] Added new properties to `BankAccount`: `accountNumberType`, `last4`, `bic`, `method`, `fingerprint`
 - [x] Added missing getters and setters to `AuthenticationToken`, `Transaction`, `PaymentCard`, `BankAccount`
+- [x] Removed `delete` method from `SessionService`
+- [x] Added new method to `SessionService`: `logout`
 
 ### Changed
 - [x] **Upgraded minimum PHP version to 7.1**
