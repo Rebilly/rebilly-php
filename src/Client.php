@@ -21,7 +21,6 @@ use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Log\LoggerInterface as Logger;
 use Rebilly\Http\CurlHandler;
-use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Middleware\LogHandler;
 use Rebilly\Rest\File;
 use RuntimeException;
