@@ -69,6 +69,6 @@ final class SessionService extends Service
 
     public function logout()
     {
-        return $this->client()->post([], 'logout');
+        $this->client()->post([], 'logout');
     }
 }
