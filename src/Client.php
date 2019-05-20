@@ -352,9 +352,7 @@ final class Client
         $response = call_user_func($this->middleware, $request, $response, $this);
 
         if ($response->getStatusCode() === 404) {
-            $content = json_decode($response->getBody()->getContents(), true);
-
-            throw new Http\Exception\NotFoundException($content['message'] ?? '');
+            throw new Http\Exception\NotFoundException();
         }
 
         if ($response->getStatusCode() === 410) {
