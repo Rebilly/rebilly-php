@@ -67,7 +67,7 @@ final class SessionService extends Service
         return $this->client()->put($data, 'sessions/{tokenId}', ['tokenId' => $tokenId]);
     }
 
-    public function delete()
+    public function logout()
     {
         return $this->client()->post([], 'logout');
     }
