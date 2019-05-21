@@ -79,6 +79,19 @@ class BankAccountService extends Service
 
     /**
      * @param string $bankAccountId
+     * @param array|JsonSerializable|BankAccount $data
+     *
+     * @throws UnprocessableEntityException The input data does not valid
+     *
+     * @return BankAccount
+     */
+    public function update($bankAccountId, $data)
+    {
+        return $this->client()->patch($data, 'bank-accounts/{bankAccountId}', ['bankAccountId' => $bankAccountId]);
+    }
+
+    /**
+     * @param string $bankAccountId
      *
      * @return BankAccount
      */

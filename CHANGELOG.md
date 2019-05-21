@@ -45,6 +45,7 @@ _TBD_
 - [x] Added missing getters and setters to `AuthenticationToken`, `Transaction`, `PaymentCard`, `BankAccount`
 - [x] Removed `delete` method from `SessionService`
 - [x] Added new method to `SessionService`: `logout`
+- [x] Added new method to `BankAccountService`: `update`
 
 ### Changed
 - [x] **Upgraded minimum PHP version to 7.1**
