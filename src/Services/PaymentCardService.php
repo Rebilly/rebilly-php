@@ -23,8 +23,7 @@ use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
 
 /**
- * Class PaymentCardService
- *
+ * Class PaymentCardService.
  */
 final class PaymentCardService extends Service
 {

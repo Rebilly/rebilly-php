@@ -151,6 +151,16 @@ final class BankAccount extends Entity
     }
 
     /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setToken($value)
+    {
+        return $this->setAttribute('token', $value);
+    }
+
+    /**
      * @return string
      */
     public function getAccountNumberType()

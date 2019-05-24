@@ -21,11 +21,9 @@ use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
 
 /**
- * Class BankAccountService
- *
+ * Class BankAccountService.
  */
-
-class BankAccountService extends Service
+final class BankAccountService extends Service
 {
     /**
      * @param array|ArrayObject $params
@@ -75,6 +73,30 @@ class BankAccountService extends Service
         }
 
         return $this->client()->post($data, 'bank-accounts');
+    }
+
+    /**
+     * @param string|array|JsonSerializable $token
+     * @param array|JsonSerializable|BankAccount $data
+     * @param string $bankAccountId
+     *
+     * @throws UnprocessableEntityException The input data does not valid
+     *
+     * @return BankAccount
+     */
+    public function createFromToken($token, $data, $bankAccountId = null)
+    {
+        if ($data instanceof JsonSerializable) {
+            $data = $data->jsonSerialize();
+        }
+
+        if (is_string($token)) {
+            $data['token'] = $token;
+        } else {
+            $data['token'] = $token['token'];
+        }
+
+        return $this->create($data, $bankAccountId);
     }
 
     /**
