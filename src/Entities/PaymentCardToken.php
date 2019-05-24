@@ -14,10 +14,7 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Entity;
 
 /**
- * Class PaymentCardToken
- *
- * @see http://rebilly.github.io/RebillyAPI/#tag/Payment%20Tokens
- *
+ * Class PaymentCardToken.
  */
 final class PaymentCardToken extends Entity
 {
