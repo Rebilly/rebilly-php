@@ -16,9 +16,13 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
-_TBD_
+## [2.4.0] 2019-07-01
+
+### Fixed
+- [x] Added missing options in Client constructor.
 
 ### Added
+- [x] Added custom fields to `Plan`
 - [x] Added new write-only property to set payment instrument from `token` for the `Customer` Resource.
 - [x] Added new property to `RiskMetadata`: `region`
 - [x] Added new properties to `Customer`: `averageValue`, `paymentCount`, `lastPaymentTime`
