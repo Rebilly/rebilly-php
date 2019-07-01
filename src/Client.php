@@ -197,12 +197,16 @@ final class Client
             $authentication = new Middleware\ApiKeyAuthentication(
                 is_callable($apiKey) ? call_user_func($apiKey) : $apiKey
             );
+            $sessionToken = null;
         } elseif (isset($sessionToken)) {
             $authentication = new Middleware\BearerAuthentication(
                 is_callable($sessionToken) ? call_user_func($sessionToken) : $sessionToken
             );
+            $apiKey = null;
         } else {
             $authentication = null;
+            $apiKey = null;
+            $sessionToken = null;
         }
 
         if (isset($baseUrl)) {
@@ -223,6 +227,10 @@ final class Client
             $logger = new LogHandler($logger, isset($logOptions) ? (array) $logOptions : []);
         } else {
             throw new RuntimeException('Logger should implement PSR-3 LoggerInterface');
+        }
+
+        if (!isset($logOptions)) {
+            $logOptions = [];
         }
 
         if (!isset($middleware)) {
