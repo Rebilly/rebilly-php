@@ -5,14 +5,15 @@ language: php
 matrix:
   fast_finish: true
   include:
-    - php: 7.1
+    - php: "7.1"
       env:
         - EXECUTE_COVERAGE=true
         - EXECUTE_CS_CHECK=true
-    - php: 7.2
-    - php: 7.3
+    - php: "7.2"
+    - php: "7.3"
+    - php: "7.4"
   allow_failures:
-    - php: 7.3
+    - php: "7.4"
 
 notifications:
   email: false
