@@ -37,22 +37,21 @@ final class UserAgent implements Middleware
      */
     public function __invoke(Request $request, Response $response, callable $next)
     {
-        return call_user_func(
-            $next,
-            $request->withHeader(
-                'User-Agent',
-                $this->generateUserAgentName(
-                    'PHP-SDK',
-                    $this->sdkVersion,
-                    [
-                        'platform-ver=' . PHP_VERSION,
-                        'os=' . str_replace(' ', '_', php_uname('s') . ' ' . php_uname('r')),
-                        'machine=' . php_uname('m'),
-                    ]
-                )
-            ),
-            $response
-        );
+        $release = @php_uname('r') ?: 'unknown';
+        $machine = @php_uname('m') ?: 'unknown';
+
+        return $next($request->withHeader(
+            'User-Agent',
+            self::generateUserAgentName(
+                'PHP-SDK',
+                $this->sdkVersion,
+                [
+                    'platform-ver=' . PHP_VERSION,
+                    'os=' . str_replace(' ', '_', PHP_OS . ' ' . $release),
+                    'machine=' . $machine,
+                ]
+            )
+        ), $response);
     }
 
     /**
@@ -64,7 +63,7 @@ final class UserAgent implements Middleware
      *
      * @return string
      */
-    private static function generateUserAgentName($name, $version, array $features)
+    private static function generateUserAgentName($name, $version, array $features): string
     {
         return sprintf('RebillySDK/%s %s (%s)', $name, $version, implode('; ', $features));
     }
