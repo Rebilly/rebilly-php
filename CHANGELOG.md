@@ -16,6 +16,11 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
+## [2.5.0] 2019-07-19
+
+### Fixed
+- [x] Fixed CurlHandler to support HTTP/2
+
 ## [2.4.0] 2019-07-01
 
 ### Fixed
