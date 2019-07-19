@@ -16,6 +16,9 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
+### Added
+- [x] Added websiteId to Customer.
+
 ## [2.5.0] 2019-07-19
 
 ### Fixed
