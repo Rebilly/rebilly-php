@@ -84,6 +84,38 @@ class CurlHandlerTest extends TestCase
 
     /**
      * @test
+     * @dataProvider provideValidRequests
+     *
+     * @param $method
+     * @param $url
+     * @param $payload
+     * @param $headers
+     */
+    public function sendRequestHttp2($method, $url, $payload, $headers)
+    {
+        $request = $this->client->createRequest($method, $url, $payload, $headers);
+
+        $fakeBody = json_encode([], JSON_FORCE_OBJECT);
+        $fakeHeaders = "HTTP/2 200 OK\r\nContent-Type: application/json; charset=utf-8\r\n";
+
+        /** @var CurlSession|MockObject $session */
+        $session = $this->createMock(CurlSession::class);
+        $session->method('execute')->willReturn($fakeHeaders . $fakeBody);
+        $session->method('getInfo')->willReturn(strlen($fakeHeaders));
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->createPartialMock(CurlHandler::class, ['createSession']);
+        $handler->method('createSession')->willReturn($session);
+
+        /** @var Response $response */
+        $response = call_user_func($handler, $request);
+
+        $this->assertInstanceOf(Response::class, $response);
+        $this->assertSame(200, $response->getStatusCode());
+    }
+
+    /**
+     * @test
      */
     public function invalidRequest()
     {
