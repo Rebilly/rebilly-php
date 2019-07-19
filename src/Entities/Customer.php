@@ -346,12 +346,30 @@ final class Customer extends Entity
     }
 
     /**
-     * @param string $value
+     * @param string|null $value
      *
      * @return $this
      */
-    public function setPaymentToken($value)
+    public function setPaymentToken(?string $value)
     {
         return $this->setAttribute('paymentToken', $value);
+    }
+
+    /**
+     * @param string|null $value
+     *
+     * @return Customer
+     */
+    public function setWebsiteId(?string $value)
+    {
+        return $this->setAttribute('websiteId', $value);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getWebsiteId(): ?string
+    {
+        return $this->getAttribute('websiteId');
     }
 }

@@ -16,6 +16,9 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
+### Added
+- [x] Added new property to `Customer`: `websiteId`
+
 ## [2.5.0] 2019-07-19
 
 ### Fixed
