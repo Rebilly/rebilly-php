@@ -141,7 +141,7 @@ class CurlHandler implements HttpHandler
         $headers = [];
 
         // Extract the version and status from the first header
-        preg_match('#HTTP/(\d\.\d)\s(\d\d\d)\s(.*)#', array_shift($headerLines), $matches);
+        preg_match('#HTTP/(\d(?:\.\d)?)\s(\d\d\d)\s(.*)#', array_shift($headerLines), $matches);
         array_shift($matches);
         [$protocolVersion, $statusCode, $reasonPhrase] = $matches;
 
