@@ -180,12 +180,40 @@ final class Transaction extends Entity
     }
 
     /**
+     * @return array
+     */
+    public function getPlanIds()
+    {
+        return $this->getAttribute('planIds');
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isRebill()
+    {
+        return $this->getAttribute('isRebill');
+    }
+
+    /**
      * @return null|PaymentCard
      */
     public function getPaymentCard()
     {
         if ($this->hasEmbeddedResource('paymentCard')) {
             return new PaymentCard($this->getEmbeddedResource('paymentCard'));
+        }
+
+        return null;
+    }
+
+    /**
+     * @return null|LeadSource
+     */
+    public function getLeadSource()
+    {
+        if ($this->hasEmbeddedResource('leadSource')) {
+            return new LeadSource($this->getEmbeddedResource('leadSource'));
         }
 
         return null;
@@ -348,11 +376,75 @@ final class Transaction extends Entity
     }
 
     /**
+     * @return array
+     */
+    public function get3ds()
+    {
+        return $this->getAttribute('3ds');
+    }
+
+    /**
      * @return bool
      */
     public function hasDcc()
     {
         return $this->getAttribute('hasDcc');
+    }
+
+    /**
+     * @return array
+     */
+    public function getDcc()
+    {
+        return $this->getAttribute('dcc');
+    }
+
+    /**
+     * @return boolean
+     */
+    public function hasBumpOffer()
+    {
+        return $this->getAttribute('hasBumpOffer');
+    }
+
+    /**
+     * @return array
+     */
+    public function getBumpOffer()
+    {
+        return $this->getAttribute('bumpOffer');
+    }
+
+    /**
+     * @return array
+     */
+    public function getRiskScore()
+    {
+        return $this->getAttribute('riskScore');
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isDisputed()
+    {
+        return $this->getAttribute('isDisputed');
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isReconciled()
+    {
+        return $this->getAttribute('isReconciled');
+    }
+
+    /**
+     * @return boolean
+     */
+    public function hadDiscrepancy()
+    {
+        return $this->getAttribute('hadDiscrepancy');
     }
 
     /**
