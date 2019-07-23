@@ -19,6 +19,9 @@ Security - in case of vulnerabilities.
 ### Added
 - [x] Added new property to `Customer`: `websiteId`
 
+### Removed
+- [x] Removed Payments Queue API
+
 ## [2.5.0] 2019-07-19
 
 ### Fixed

@@ -28,6 +28,8 @@ use Rebilly\Rest\Service;
 final class PaymentService extends Service
 {
     /**
+     * @deprecated In favor of TransactionService
+     *
      * @param array|ArrayObject $params
      *
      * @return Entities\Payment[][]|Collection[]|Paginator
@@ -38,6 +40,8 @@ final class PaymentService extends Service
     }
 
     /**
+     * @deprecated In favor of TransactionService
+     *
      * @param array|ArrayObject $params
      *
      * @return Entities\Payment[]|Collection
@@ -48,7 +52,8 @@ final class PaymentService extends Service
     }
 
     /**
-     * @param string $paymentId
+     * @deprecated In favor of TransactionService
+     *
      * @param array|ArrayObject $params
      *
      * @throws NotFoundException The payment does not exist
@@ -61,6 +66,8 @@ final class PaymentService extends Service
     }
 
     /**
+     * @deprecated In favor of TransactionService
+     *
      * @param array|JsonSerializable|Entities\Payment $payment
      * @param string|null $paymentId
      *
@@ -75,56 +82,5 @@ final class PaymentService extends Service
         }
 
         return $this->client()->post($payment, 'payments');
-    }
-
-    /**
-     * @deprecated
-     * @param array|ArrayObject $params
-     *
-     * @return Entities\ScheduledPayment[][]|Collection[]|Paginator
-     */
-    public function paginatorForQueue($params = [])
-    {
-        return new Paginator($this->client(), 'queue/payments', $params);
-    }
-
-    /**
-     * @deprecated
-     * @param array|ArrayObject $params
-     *
-     * @return Entities\ScheduledPayment[]|Collection
-     */
-    public function searchInQueue($params = [])
-    {
-        return $this->client()->get('queue/payments', $params);
-    }
-
-    /**
-     * @deprecated
-     * @param string $paymentId
-     * @param array|ArrayObject $params
-     *
-     * @throws NotFoundException The scheduled payment does not exist
-     * @throws GoneException The process is completed but the payment can not be created
-     *
-     * @return Entities\ScheduledPayment|Entities\Payment
-     */
-    public function loadFromQueue($paymentId, $params = [])
-    {
-        return $this->client()->get('queue/payments/{paymentId}', ['paymentId' => $paymentId] + (array) $params);
-    }
-
-    /**
-     * @deprecated
-     * @param string $paymentId
-     *
-     * @throws NotFoundException The payment does not exist
-     * @throws UnprocessableEntityException The payment was not cancelled
-     *
-     * @return Entities\ScheduledPayment|Entities\Payment
-     */
-    public function cancel($paymentId)
-    {
-        return $this->client()->post([], 'queue/payments/{paymentId}/cancel', ['paymentId' => $paymentId]);
     }
 }
