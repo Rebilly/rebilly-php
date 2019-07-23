@@ -190,7 +190,7 @@ final class Transaction extends Entity
     /**
      * @return boolean
      */
-    public function isRebill()
+    public function getIsRebill()
     {
         return $this->getAttribute('isRebill');
     }
@@ -426,7 +426,7 @@ final class Transaction extends Entity
     /**
      * @return boolean
      */
-    public function isDisputed()
+    public function getIsDisputed()
     {
         return $this->getAttribute('isDisputed');
     }
@@ -434,7 +434,7 @@ final class Transaction extends Entity
     /**
      * @return boolean
      */
-    public function isReconciled()
+    public function getIsReconciled()
     {
         return $this->getAttribute('isReconciled');
     }
@@ -442,7 +442,7 @@ final class Transaction extends Entity
     /**
      * @return boolean
      */
-    public function hadDiscrepancy()
+    public function getHadDiscrepancy()
     {
         return $this->getAttribute('hadDiscrepancy');
     }
