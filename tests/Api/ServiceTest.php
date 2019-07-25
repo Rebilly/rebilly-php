@@ -1014,6 +1014,45 @@ class ServiceTest extends BaseTestCase
     }
 
     /**
+     * @test
+     */
+    public function customerTimelineService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => function (Request $request) use ($client) {
+                $response = $client->createResponse();
+                $uri = $request->getUri();
+
+                if ($request->getMethod() === 'POST') {
+                    $response = $response->withHeader(
+                        'Location',
+                        $uri->withPath(rtrim($uri->getPath(), '/') . '/dummy')
+                    );
+                }
+
+                return $response;
+            },
+        ]);
+
+        $service = $client->customerTimeline();
+        self::assertInstanceOf(Services\CustomerTimelineService::class, $service);
+
+        $paginator = $service->paginator('dummy');
+        self::assertInstanceOf(Paginator::class, $paginator);
+
+        $set = $service->searchByCustomer('dummy');
+        self::assertInstanceOf(Rest\Collection::class, $set);
+
+        $entity = $service->load('dummy', 'dummyDowntime');
+        self::assertInstanceOf(Entities\CustomerTimelineMessage::class, $entity);
+
+        $entity = $service->create([], 'dummy');
+        self::assertInstanceOf(Entities\CustomerTimelineMessage::class, $entity);
+    }
+
+    /**
      * @return array
      */
     public function provideServiceClasses()
