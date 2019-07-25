@@ -24,6 +24,22 @@ final class ExtraDataTable extends Resource
     }
 
     /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->getAttribute('title');
+    }
+
+    /**
+     * @return string
+     */
+    public function getFooter()
+    {
+        return $this->getAttribute('footer');
+    }
+
+    /**
      * @return array
      */
     public function getData()

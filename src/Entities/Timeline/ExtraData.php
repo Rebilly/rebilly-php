@@ -15,9 +15,6 @@ use Rebilly\Rest\Resource;
 
 final class ExtraData extends Resource
 {
-    /**
-     * @return array
-     */
     public function getActions()
     {
         return $this->getAttribute('actions');
