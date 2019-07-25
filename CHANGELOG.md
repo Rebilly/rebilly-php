@@ -18,6 +18,7 @@ Security - in case of vulnerabilities.
 
 ### Added
 - [x] Added new property to `Customer`: `websiteId`
+- [x] Added `Customer Timeline`
 
 ### Removed
 - [x] Removed Payments Queue API
