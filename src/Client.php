@@ -88,6 +88,7 @@ use RuntimeException;
  * @method Services\PaymentInstrumentValidationService paymentInstrumentValidation()
  * @method Services\KycService kycDocuments()
  * @method Services\RuleService eventRules()
+ * @method Services\CustomerTimelineService customerTimeline()
  */
 final class Client
 {
@@ -149,6 +150,7 @@ final class Client
         'paymentInstrumentValidation' => Services\PaymentInstrumentValidationService::class,
         'kycDocuments' => Services\KycService::class,
         'eventRules' => Services\RuleService::class,
+        'customerTimeline' => Services\CustomerTimelineService::class,
     ];
 
     /** @var array */
