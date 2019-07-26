@@ -19,8 +19,7 @@ Security - in case of vulnerabilities.
 ### Added
 - [x] Added new property to `Customer`: `websiteId`
 - [x] Added new property to `Transaction`: `requestId`
-- [x] Added `Customer Timeline`
-- [x] Added `AlternativeInstrument`
+- [x] Added `AlternativeInstrument`, `Customer Timeline` 
 
 ### Deprecated
 - [x] Deprecated `Transaction` entity method: `getPaymentCardId`
