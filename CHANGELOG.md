@@ -18,10 +18,15 @@ Security - in case of vulnerabilities.
 
 ### Added
 - [x] Added new property to `Customer`: `websiteId`
-- [x] Added `Customer Timeline`
+- [x] Added new property to `Transaction`: `requestId`
+- [x] Added `AlternativeInstrument`, `Customer Timeline` 
+
+### Deprecated
+- [x] Deprecated `Transaction` entity method: `getPaymentCardId`
 
 ### Removed
 - [x] Removed Payments Queue API
+- [X] Removed `Transaction` entity method: `getPayment`
 
 ## [2.5.0] 2019-07-19
 

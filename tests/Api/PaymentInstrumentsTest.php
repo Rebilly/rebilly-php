@@ -14,10 +14,12 @@ namespace Rebilly\Tests\Api;
 use DomainException;
 use Rebilly\Entities\PaymentCardMigrationsResponse;
 use Rebilly\Entities\PaymentInstruments\AchInstrument;
+use Rebilly\Entities\PaymentInstruments\AlternativeInstrument;
 use Rebilly\Entities\PaymentInstruments\CashInstrument;
 use Rebilly\Entities\PaymentInstruments\PaymentCardInstrument;
 use Rebilly\Entities\PaymentInstruments\PaymentCardPaymentInstrument;
 use Rebilly\Entities\PaymentInstruments\PayPalInstrument;
+use Rebilly\Entities\PaymentMethod;
 use Rebilly\Entities\PaymentMethodInstrument;
 use Rebilly\Tests\TestCase as BaseTestCase;
 
@@ -82,6 +84,27 @@ class PaymentInstrumentsTest extends BaseTestCase
         self::assertInstanceOf(CashInstrument::class, $instrument);
         self::assertSame('123', $instrument->getReceivedBy());
         self::assertSame('cash', $instrument->getMethod());
+    }
+
+    /**
+     * @test
+     */
+    public function alternativeInstrument()
+    {
+        $instrument = new AlternativeInstrument(['method' => PaymentMethod::METHOD_IDEAL]);
+
+        self::assertInstanceOf(AlternativeInstrument::class, $instrument);
+        self::assertSame('iDEAL', $instrument->getMethod());
+    }
+
+    /**
+     * @test
+     */
+    public function methodIsRequiredWhenCreatingAlternativeInstrument()
+    {
+        $this->expectException(DomainException::class);
+
+        new AlternativeInstrument();
     }
 
     /**
