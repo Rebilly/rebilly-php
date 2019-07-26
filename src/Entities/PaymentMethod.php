@@ -32,6 +32,12 @@ abstract class PaymentMethod extends Resource
 
     public const METHOD_CHINA_UNIONPAY = 'china-unionpay';
 
+    public const METHOD_IDEAL = 'iDEAL';
+
+    public const METHOD_KLARNA = 'Klarna';
+
+    public const METHOD_INTERAC = 'Interac';
+
     /**
      * Return the method name
      *

@@ -13,6 +13,7 @@ namespace Rebilly\Entities;
 
 use DomainException;
 use Rebilly\Entities\PaymentInstruments\AchInstrument;
+use Rebilly\Entities\PaymentInstruments\AlternativeInstrument;
 use Rebilly\Entities\PaymentInstruments\CashInstrument;
 use Rebilly\Entities\PaymentInstruments\PaymentCardInstrument;
 use Rebilly\Entities\PaymentInstruments\PayPalInstrument;
@@ -32,6 +33,9 @@ abstract class PaymentMethodInstrument extends Resource
         PaymentMethod::METHOD_CASH,
         PaymentMethod::METHOD_PAYMENT_CARD,
         PaymentMethod::METHOD_PAYPAL,
+        PaymentMethod::METHOD_IDEAL,
+        PaymentMethod::METHOD_KLARNA,
+        PaymentMethod::METHOD_INTERAC,
     ];
 
     /**
@@ -55,28 +59,22 @@ abstract class PaymentMethodInstrument extends Resource
 
         switch ($data['method']) {
             case PaymentMethod::METHOD_ACH:
-                $paymentInstrument = new AchInstrument($data);
-
-                break;
+                return new AchInstrument($data);
             case PaymentMethod::METHOD_CASH:
-                $paymentInstrument = new CashInstrument($data);
-
-                break;
+                return new CashInstrument($data);
             case PaymentMethod::METHOD_PAYMENT_CARD:
-                $paymentInstrument = new PaymentCardInstrument($data);
-
-                break;
+                return new PaymentCardInstrument($data);
             case PaymentMethod::METHOD_PAYPAL:
-                $paymentInstrument = new PayPalInstrument($data);
-
-                break;
+                return new PayPalInstrument($data);
             default:
-                throw new DomainException(
-                    sprintf(self::MSG_UNSUPPORTED_METHOD, implode(',', self::$supportMethods))
-                );
+                if (in_array($data['method'], self::$supportMethods, true)) {
+                    return new AlternativeInstrument($data);
+                }
         }
 
-        return $paymentInstrument;
+        throw new DomainException(
+            sprintf(self::MSG_UNSUPPORTED_METHOD, implode(',', self::$supportMethods))
+        );
     }
 
     /**

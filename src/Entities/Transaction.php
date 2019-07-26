@@ -174,6 +174,26 @@ final class Transaction extends Entity
     /**
      * @return string
      */
+    public function getRequestId()
+    {
+        return $this->getAttribute('requestId');
+    }
+
+    /**
+     * @param $value
+     *
+     * @return $this
+     */
+    public function setRequestId($value)
+    {
+        return $this->setAttribute('requestId', $value);
+    }
+
+    /**
+     * @deprecated The method is deprecated and will be removed in next version.
+     *
+     * @return string
+     */
     public function getPaymentCardId()
     {
         return $this->getAttribute('paymentCard');
@@ -209,18 +229,6 @@ final class Transaction extends Entity
     public function getGateway()
     {
         return ($this->getAttribute('gateway') !== null) ? new Gateway($this->getAttribute('gateway')) : null;
-    }
-
-    /**
-     * @return null|Payment
-     */
-    public function getPayment()
-    {
-        if ($this->hasEmbeddedResource('payment')) {
-            return new Payment($this->getEmbeddedResource('payment'));
-        }
-
-        return null;
     }
 
     /**
