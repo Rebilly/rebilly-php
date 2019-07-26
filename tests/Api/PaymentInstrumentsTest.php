@@ -100,6 +100,16 @@ class PaymentInstrumentsTest extends BaseTestCase
     /**
      * @test
      */
+    public function methodIsRequiredWhenCreatingAlternativeInstrument()
+    {
+        $this->expectException(DomainException::class);
+
+        new AlternativeInstrument();
+    }
+
+    /**
+     * @test
+     */
     public function paymentCardPaymentInstrument()
     {
         $instrument = new PaymentCardPaymentInstrument();
