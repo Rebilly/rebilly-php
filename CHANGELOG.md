@@ -28,7 +28,7 @@ Security - in case of vulnerabilities.
 ### Removed
 - [x] Removed Payments Queue API
 - [X] Removed `Transaction` entity method: `getPayment`
-- [x] Removed `ValuesList` field: `description` 
+- [x] Removed `ValuesList` field: `name` 
 
 ## [2.5.0] 2019-07-19
 
