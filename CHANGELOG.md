@@ -20,9 +20,11 @@ Security - in case of vulnerabilities.
 - [x] Added new property to `Customer`: `websiteId`
 - [x] Added new property to `Transaction`: `requestId`
 - [x] Added `AlternativeInstrument`, `Customer Timeline` 
+- [x] Added `description` field to `ValuesList` 
 
 ### Deprecated
 - [x] Deprecated `Transaction` entity method: `getPaymentCardId`
+- [x] Deprecated `ValuesList` field: `name`
 
 ### Removed
 - [x] Removed Payments Queue API
