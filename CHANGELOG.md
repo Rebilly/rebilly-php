@@ -24,11 +24,11 @@ Security - in case of vulnerabilities.
 
 ### Deprecated
 - [x] Deprecated `Transaction` entity method: `getPaymentCardId`
-- [x] Deprecated `ValuesList` field: `name`
 
 ### Removed
 - [x] Removed Payments Queue API
 - [X] Removed `Transaction` entity method: `getPayment`
+- [x] Removed `ValuesList` field: `description` 
 
 ## [2.5.0] 2019-07-19
 
