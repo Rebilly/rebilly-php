@@ -30,9 +30,9 @@ final class ValuesList extends Entity
     /**
      * @return string
      */
-    public function getName()
+    public function getDescription()
     {
-        return $this->getAttribute('name');
+        return $this->getAttribute('description');
     }
 
     /**
@@ -40,9 +40,9 @@ final class ValuesList extends Entity
      *
      * @return $this
      */
-    public function setName($value)
+    public function setDescription($value)
     {
-        return $this->setAttribute('name', $value);
+        return $this->setAttribute('description', $value);
     }
 
     /**
