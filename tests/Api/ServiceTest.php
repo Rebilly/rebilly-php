@@ -502,50 +502,6 @@ class ServiceTest extends BaseTestCase
     /**
      * @test
      */
-    public function paymentService()
-    {
-        $client = new Client(['apiKey' => 'QWERTY']);
-
-        /** @var CurlHandler|MockObject $handler */
-        $handler = $this->createMock(CurlHandler::class);
-
-        $handler
-            ->expects($this->at(0))
-            ->method('__invoke')
-            ->will($this->returnValue($client->createResponse()));
-
-        $handler
-            ->expects($this->at(1))
-            ->method('__invoke')
-            ->will($this->returnValue($client->createResponse()));
-
-        $handler
-            ->expects($this->at(1))
-            ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'queue/payments/dummy')
-            ));
-
-        $client = new Client([
-            'apiKey' => 'QWERTY',
-            'httpHandler' => $handler,
-        ]);
-
-        $service = $client->payments();
-
-        $paginator = $service->paginatorForQueue();
-        $this->assertInstanceOf(Paginator::class, $paginator);
-
-        $result = $service->searchInQueue();
-        $this->assertInstanceOf(Rest\Collection::class, $result);
-
-        $result = $service->loadFromQueue('dummy');
-        $this->assertInstanceOf(Entities\ScheduledPayment::class, $result);
-    }
-
-    /**
-     * @test
-     */
     public function paymentCardService()
     {
         $faker = $this->getFaker();
@@ -1055,6 +1011,45 @@ class ServiceTest extends BaseTestCase
         self::assertInstanceOf(Entities\GatewayAccountDowntime::class, $entity);
 
         $service->delete('dummyGateway', 'dummyDowntime');
+    }
+
+    /**
+     * @test
+     */
+    public function customerTimelineService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => function (Request $request) use ($client) {
+                $response = $client->createResponse();
+                $uri = $request->getUri();
+
+                if ($request->getMethod() === 'POST') {
+                    $response = $response->withHeader(
+                        'Location',
+                        $uri->withPath(rtrim($uri->getPath(), '/') . '/dummy')
+                    );
+                }
+
+                return $response;
+            },
+        ]);
+
+        $service = $client->customerTimeline();
+        self::assertInstanceOf(Services\CustomerTimelineService::class, $service);
+
+        $paginator = $service->paginator('dummy');
+        self::assertInstanceOf(Paginator::class, $paginator);
+
+        $set = $service->searchByCustomer('dummy');
+        self::assertInstanceOf(Rest\Collection::class, $set);
+
+        $entity = $service->load('dummy', 'dummyDowntime');
+        self::assertInstanceOf(Entities\CustomerTimelineMessage::class, $entity);
+
+        $entity = $service->create([], 'dummy');
+        self::assertInstanceOf(Entities\CustomerTimelineMessage::class, $entity);
     }
 
     /**

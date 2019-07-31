@@ -351,6 +351,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'events/{eventType}/rules' => function (array $content) {
                 return new EventRules($content);
             },
+            'customers/{customerId}/timeline' => function (array $content) {
+                return new Collection(new CustomerTimelineMessage(), $content);
+            },
+            'customers/{customerId}/timeline/{messageId}' => function (array $content) {
+                return new CustomerTimelineMessage($content);
+            },
         ];
     }
 
