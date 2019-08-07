@@ -202,6 +202,7 @@ abstract class TestCase extends Framework\TestCase
                     'subscription-trial-ended',
                     'subscription-activated',
                     'subscription-canceled',
+                    'subscription-reactivated',
                     'subscription-renewed',
                     'transaction-processed',
                     'payment-card-expired',
@@ -630,6 +631,7 @@ abstract class TestCase extends Framework\TestCase
                     'subscription-created',
                     'subscription-activated',
                     'subscription-canceled',
+                    'subscription-reactivated',
                     'subscription-renewed',
                     'payment-card-expired',
                 ]);
