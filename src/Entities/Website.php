@@ -29,7 +29,7 @@ final class Website extends Entity
     /**
      * @return string
      */
-    public function getOrganizationId(): string
+    public function getOrganizationId()
     {
         return $this->getAttribute('organizationId');
     }
@@ -39,7 +39,7 @@ final class Website extends Entity
      *
      * @return $this
      */
-    public function setOrganizationId($value): string
+    public function setOrganizationId($value)
     {
         return $this->setAttribute('organizationId', $value);
     }
