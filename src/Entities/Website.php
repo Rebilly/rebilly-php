@@ -27,7 +27,25 @@ final class Website extends Entity
     }
 
     /**
-     * @return bool
+     * @return string
+     */
+    public function getOrganizationId(): string
+    {
+        return $this->getAttribute('organizationId');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setOrganizationId($value): string
+    {
+        return $this->setAttribute('organizationId', $value);
+    }
+
+    /**
+     * @return string
      */
     public function getName()
     {
