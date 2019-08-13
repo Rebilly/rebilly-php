@@ -19,6 +19,7 @@ Security - in case of vulnerabilities.
 ### Added
 - [x] Added new property to `Customer`: `websiteId`
 - [x] Added new property to `Transaction`: `requestId`
+- [x] Added new property to `Website`: `organizationId`
 - [x] Added `AlternativeInstrument`, `Customer Timeline` 
 - [x] Added `description` field to `ValuesList` 
 
