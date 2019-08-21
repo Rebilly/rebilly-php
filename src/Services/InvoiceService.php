@@ -113,12 +113,41 @@ final class InvoiceService extends Service
     /**
      * @param string $invoiceId
      * @param string $issuedTime
+     * @param string|null $dueTime
      *
      * @return Invoice
      */
-    public function issue($invoiceId, $issuedTime)
+    public function issue($invoiceId, $issuedTime, $dueTime = null)
     {
-        return $this->client()->post(['issuedTime' => $issuedTime], 'invoices/{invoiceId}/issue', ['invoiceId' => $invoiceId]);
+        return $this->client()->post(
+            [
+                'issuedTime' => $issuedTime,
+                'dueTime' => $dueTime,
+            ],
+            'invoices/{invoiceId}/issue',
+            [
+                'invoiceId' => $invoiceId,
+            ]
+        );
+    }
+
+    /**
+     * @param string $invoiceId
+     * @param string|null $dueTime
+     *
+     * @return Invoice
+     */
+    public function reissue($invoiceId, $dueTime = null)
+    {
+        return $this->client()->post(
+            [
+                'dueTime' => $dueTime,
+            ],
+            'invoices/{invoiceId}/reissue',
+            [
+                'invoiceId' => $invoiceId,
+            ]
+        );
     }
 
     /**

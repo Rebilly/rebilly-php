@@ -22,6 +22,8 @@ Security - in case of vulnerabilities.
 - [x] Added new property to `Website`: `organizationId`
 - [x] Added `AlternativeInstrument`, `Customer Timeline` 
 - [x] Added `description` field to `ValuesList` 
+- [x] Added `reissue` method to `InvoiceService` 
+- [x] Added `dueTime` to `InvoiceService::issue()` 
 
 ### Deprecated
 - [x] Deprecated `Transaction` entity method: `getPaymentCardId`
