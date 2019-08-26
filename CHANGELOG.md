@@ -24,6 +24,7 @@ Security - in case of vulnerabilities.
 - [x] Added `description` field to `ValuesList` 
 - [x] Added `reissue` method to `InvoiceService` 
 - [x] Added `dueTime` to `InvoiceService::issue()` 
+- [x] Added new properties to `Transaction`: `requestAmount`, `requestCurrency`, `purchaseAmount`, `purchaseCurrency`
 
 ### Deprecated
 - [x] Deprecated `Transaction` entity method: `getPaymentCardId`

@@ -538,4 +538,36 @@ final class Transaction extends Entity
     {
         return $this->getAttribute('revision');
     }
+
+    /**
+     * @return string
+     */
+    public function getRequestAmount()
+    {
+        return $this->getAttribute('requestAmount');
+    }
+
+    /**
+     * @return string
+     */
+    public function getRequestCurrency()
+    {
+        return $this->getAttribute('requestCurrency');
+    }
+
+    /**
+     * @return string
+     */
+    public function getPurchaseAmount()
+    {
+        return $this->getAttribute('purchaseAmount');
+    }
+
+    /**
+     * @return string
+     */
+    public function getPurchaseCurrency()
+    {
+        return $this->getAttribute('purchaseCurrency');
+    }
 }
