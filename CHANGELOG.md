@@ -17,6 +17,7 @@ Security - in case of vulnerabilities.
 ## [Unreleased]
 
 ### Added
+- [x] Added support for empty redirect responses.
 - [x] Added new property to `Customer`: `websiteId`
 - [x] Added new property to `Transaction`: `requestId`
 - [x] Added new property to `Website`: `organizationId`
