@@ -410,11 +410,14 @@ final class Client
             && $response->hasHeader('Location')
             && empty((string) $response->getBody())
         ) {
+            $baseUrl = $this->createUri($this->config['baseUrl']);
             $location = $this->createUri($response->getHeaderLine('Location'));
-            $uri = urldecode($location->getPath());
-            $uri = preg_replace('#^/' . self::CURRENT_VERSION . '#', '', $uri);
+            if ($baseUrl->getHost() === $location->getHost()) {
+                $uri = urldecode($location->getPath());
+                $uri = preg_replace('#^/' . self::CURRENT_VERSION . '#', '', $uri);
 
-            return $this->send('GET', null, $uri);
+                return $this->send('GET', null, $uri);
+            }
         }
 
         $responseParsers = [

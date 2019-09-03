@@ -254,6 +254,39 @@ final class ClientTest extends TestCase
     /**
      * @test
      */
+    public function sendRequestWithEmptyRedirectResponseToAnotherHost()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+        $response = $client->createResponse();
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => function (Request $request) use ($response) {
+                if ($request->getMethod() === 'POST') {
+                    $location = 'https://example.com/customers/customer-1';
+                    $response = $response->withHeader('Location', $location);
+                    $response = $response->withStatus(303);
+
+                    return $response;
+                }
+
+                $body = $response->getBody();
+                $body->write(json_encode(['id' => 'customer-1']));
+
+                return $response->withBody($body);
+            },
+        ]);
+
+        /** @var Customer $result */
+        $result = $client->post([], 'customers');
+
+        $this->assertInstanceOf(Customer::class, $result);
+        $this->assertNull($result->getId());
+    }
+
+    /**
+     * @test
+     */
     public function sendRequestWithNonEmptyRedirectResponse()
     {
         $client = new Client(['apiKey' => 'QWERTY']);
