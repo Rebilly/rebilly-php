@@ -405,6 +405,21 @@ final class Client
             return null;
         }
 
+        if (
+            in_array($response->getStatusCode(), [301, 302, 303], true)
+            && $response->hasHeader('Location')
+            && empty((string) $response->getBody())
+        ) {
+            $baseUrl = $this->createUri($this->config['baseUrl']);
+            $location = $this->createUri($response->getHeaderLine('Location'));
+            if ($baseUrl->getHost() === $location->getHost()) {
+                $uri = urldecode($location->getPath());
+                $uri = preg_replace('#^/' . self::CURRENT_VERSION . '#', '', $uri);
+
+                return $this->send('GET', null, $uri);
+            }
+        }
+
         $responseParsers = [
             'application/json' => [$this, 'parseJsonResponseBody'],
             'application/pdf' => [$this, 'parseBinaryResponseBody'],
