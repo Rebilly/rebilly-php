@@ -19,6 +19,7 @@ use Psr\Http\Message\UriInterface as Uri;
 use Psr\Log\NullLogger;
 use Rebilly\ApiKeyProvider;
 use Rebilly\Client;
+use Rebilly\Entities\Customer;
 use Rebilly\Http\Exception\HttpException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Rest\Service;
@@ -214,6 +215,76 @@ final class ClientTest extends TestCase
         $result = $client->post([], 'customers');
 
         $this->assertNotNull($result);
+    }
+
+
+    /**
+     * @test
+     */
+    public function sendRequestWithEmptyRedirectResponse()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+        $response = $client->createResponse();
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => function (Request $request) use ($response) {
+                if ($request->getMethod() === 'POST') {
+                    $location = Client::BASE_HOST . '/' . Client::CURRENT_VERSION . '/customers/customer-1';
+                    $response = $response->withHeader('Location', $location);
+                    $response = $response->withStatus(303);
+
+                    return $response;
+                }
+
+                $body = $response->getBody();
+                $body->write(json_encode(['id' => 'customer-1']));
+
+                return $response->withBody($body);
+            },
+        ]);
+
+        /** @var Customer $result */
+        $result = $client->post([], 'customers');
+
+        $this->assertInstanceOf(Customer::class, $result);
+        $this->assertSame('customer-1', $result->getId());
+    }
+
+    /**
+     * @test
+     */
+    public function sendRequestWithNonEmptyRedirectResponse()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+        $response = $client->createResponse();
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => function (Request $request) use ($response) {
+                if ($request->getMethod() === 'POST') {
+                    $location = Client::BASE_HOST . '/' . Client::CURRENT_VERSION . '/customers/customer-1';
+                    $response = $response->withHeader('Location', $location);
+                    $response = $response->withStatus(303);
+
+                    $body = $response->getBody();
+                    $body->write(json_encode(['id' => 'customer-1']));
+
+                    return $response->withBody($body);
+                }
+
+                $body = $response->getBody();
+                $body->write(json_encode(['id' => 'customer-2']));
+
+                return $response->withBody($body);
+            },
+        ]);
+
+        /** @var Customer $result */
+        $result = $client->post([], 'customers');
+
+        $this->assertInstanceOf(Customer::class, $result);
+        $this->assertSame('customer-1', $result->getId());
     }
 
     public function provideHttpExceptionCodes()
