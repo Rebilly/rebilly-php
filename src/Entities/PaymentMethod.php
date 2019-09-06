@@ -38,6 +38,8 @@ abstract class PaymentMethod extends Resource
 
     public const METHOD_INTERAC = 'Interac';
 
+    public const METHOD_ONLINEUEBERWEISEN = 'Onlineueberweisen';
+
     /**
      * Return the method name
      *

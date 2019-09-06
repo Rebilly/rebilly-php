@@ -24,18 +24,22 @@ use Rebilly\Rest\Resource;
  */
 abstract class PaymentMethodInstrument extends Resource
 {
-    public const MSG_UNSUPPORTED_METHOD = 'Unexpected method. Only %s methods support';
+    public const MSG_UNSUPPORTED_METHOD = 'Unexpected method. Only %s methods are supported';
 
     public const MSG_REQUIRED_METHOD = 'Method is required';
 
-    protected static $supportMethods = [
+    protected static $supportedCommonMethods = [
         PaymentMethod::METHOD_ACH,
         PaymentMethod::METHOD_CASH,
         PaymentMethod::METHOD_PAYMENT_CARD,
         PaymentMethod::METHOD_PAYPAL,
+    ];
+
+    protected static $supportedAlternativeMethods = [
         PaymentMethod::METHOD_IDEAL,
         PaymentMethod::METHOD_KLARNA,
         PaymentMethod::METHOD_INTERAC,
+        PaymentMethod::METHOD_ONLINEUEBERWEISEN,
     ];
 
     /**
@@ -67,13 +71,16 @@ abstract class PaymentMethodInstrument extends Resource
             case PaymentMethod::METHOD_PAYPAL:
                 return new PayPalInstrument($data);
             default:
-                if (in_array($data['method'], self::$supportMethods, true)) {
+                if (in_array($data['method'], self::$supportedAlternativeMethods, true)) {
                     return new AlternativeInstrument($data);
                 }
         }
 
         throw new DomainException(
-            sprintf(self::MSG_UNSUPPORTED_METHOD, implode(',', self::$supportMethods))
+            sprintf(
+                self::MSG_UNSUPPORTED_METHOD,
+                implode(',', array_merge(self::$supportedCommonMethods, self::$supportedAlternativeMethods))
+            )
         );
     }
 
