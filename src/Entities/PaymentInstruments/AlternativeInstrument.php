@@ -21,12 +21,16 @@ class AlternativeInstrument extends PaymentMethodInstrument
 {
     private $alternativeMethod;
 
-    public const MSG_REQUIRED_METHOD = 'Method is required';
-
     public function __construct(array $data = [])
     {
         if (!isset($data['method'])) {
             throw new DomainException(self::MSG_REQUIRED_METHOD);
+        }
+
+        if (!in_array($data['method'], self::$supportedAlternativeMethods, true)) {
+            throw new DomainException(
+                sprintf(self::MSG_UNSUPPORTED_METHOD, implode(',', self::$supportedAlternativeMethods))
+            );
         }
 
         $this->alternativeMethod = $data['method'];

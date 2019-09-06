@@ -22,6 +22,7 @@ Security - in case of vulnerabilities.
 - [x] Added new property to `Transaction`: `requestId`
 - [x] Added new property to `Website`: `organizationId`
 - [x] Added `AlternativeInstrument`, `Customer Timeline` 
+- [x] Added `iDEAL`, `Klarna`, `Interac`, `Onlineueberweisen` to supported alternative payment instruments
 - [x] Added `description` field to `ValuesList` 
 - [x] Added `reissue` method to `InvoiceService` 
 - [x] Added `dueTime` to `InvoiceService::issue()` 
