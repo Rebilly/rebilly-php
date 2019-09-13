@@ -39,7 +39,7 @@ class CurlHandler implements HttpHandler
         $this->options = array_replace(
             // Default CURL options
             [
-                CURLOPT_USERAGENT => @$_SERVER['HTTP_USER_AGENT'] ?: 'Curl/PHP' . PHP_VERSION,
+                CURLOPT_USERAGENT => $_SERVER['HTTP_USER_AGENT'] ?? 'Curl/PHP' . PHP_VERSION,
             ],
             $options,
             // Required options
