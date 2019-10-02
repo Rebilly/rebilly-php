@@ -473,8 +473,6 @@ abstract class TestCase extends Framework\TestCase
             case 'gatewayConfig':
             case 'additionalSchema':
                 return [];
-            case 'websites':
-                return [$faker->word];
             case 'acceptedCurrencies':
                 return ['USD'];
             case 'dynamicDescriptor':
@@ -688,6 +686,12 @@ abstract class TestCase extends Framework\TestCase
                 return 'unit';
             case 'orderType':
                 return 'subscription-order';
+            case 'additionalCriteria':
+                return [
+                    'op' => 'equals',
+                    'path' => '/transaction/websiteId',
+                    'value' => 'website-1',
+                ];
             case 'billingAnchor':
                 return new Entities\Subscriptions\BillingAnchor(['billingAnchorInstruction' => ['method' => 'immediately']]);
             default:
