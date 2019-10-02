@@ -12,6 +12,7 @@
 namespace Rebilly\Entities;
 
 use DomainException;
+use Rebilly\Entities\RulesEngine\Condition;
 use Rebilly\Rest\Entity;
 
 /**
@@ -191,37 +192,6 @@ final class GatewayAccount extends Entity
     }
 
     /**
-     * @return array
-     */
-    public function getWebsites()
-    {
-        return $this->getAttribute('websites');
-    }
-
-    /**
-     * @param array $value
-     *
-     * @throws DomainException
-     * @return $this
-     */
-    public function setWebsites(array $value)
-    {
-        $websites = [];
-
-        foreach ($value as $website) {
-            if ($website instanceof Website) {
-                $websites[] = $website->getId();
-            } elseif (is_string($website)) {
-                $websites[] = $website;
-            } else {
-                throw new DomainException('Each website must be string identifier or Website entity object');
-            }
-        }
-
-        return $this->setAttribute('websites', $websites);
-    }
-
-    /**
      * @return string
      */
     public function getAcquirerName()
@@ -385,5 +355,23 @@ final class GatewayAccount extends Entity
         }
 
         return $this->setAttribute('method', $value);
+    }
+
+    public function getAdditionalCriteria(): Condition
+    {
+        return $this->getAttribute('additionalCriteria');
+    }
+
+    /**
+     * @param Condition $value
+     */
+    public function setAdditionalCriteria($value): self
+    {
+        return $this->setAttribute('additionalCriteria', $value);
+    }
+
+    public function createAdditionalCriteria(array $data): Condition
+    {
+        return Condition::createFromData($data);
     }
 }

@@ -27,6 +27,7 @@ Security - in case of vulnerabilities.
 - [x] Added `reissue` method to `InvoiceService` 
 - [x] Added `dueTime` to `InvoiceService::issue()` 
 - [x] Added new properties to `Transaction`: `requestAmount`, `requestCurrency`, `purchaseAmount`, `purchaseCurrency`
+- [x] Added field `additionalCriteria` into `GatewayAccount` object
 
 ### Deprecated
 - [x] Deprecated `Transaction` entity method: `getPaymentCardId`
@@ -35,6 +36,7 @@ Security - in case of vulnerabilities.
 - [x] Removed Payments Queue API
 - [X] Removed `Transaction` entity method: `getPayment`
 - [x] Removed `ValuesList` field: `name` 
+- [x] Removed field `websites` from `GatewayAccount` object 
 
 ## [2.5.0] 2019-07-19
 
