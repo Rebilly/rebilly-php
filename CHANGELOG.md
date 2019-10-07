@@ -21,12 +21,12 @@ Security - in case of vulnerabilities.
 - [x] Added new property to `Customer`: `websiteId`
 - [x] Added new property to `Transaction`: `requestId`
 - [x] Added new property to `Website`: `organizationId`
-- [x] Added `AlternativeInstrument`, `Customer Timeline` 
+- [x] Added `CheckInstrument`,`AlternativeInstrument`, `Customer Timeline` 
 - [x] Added `iDEAL`, `Klarna`, `Interac`, `Onlineueberweisen` to supported alternative payment instruments
 - [x] Added `description` field to `ValuesList` 
 - [x] Added `reissue` method to `InvoiceService` 
 - [x] Added `dueTime` to `InvoiceService::issue()` 
-- [x] Added new properties to `Transaction`: `requestAmount`, `requestCurrency`, `purchaseAmount`, `purchaseCurrency`
+- [x] Added new properties to `Transaction`: `requestAmount`, `requestCurrency`, `purchaseAmount`, `purchaseCurrency`, `isProcessedOutside`
 - [x] Added field `additionalCriteria` into `GatewayAccount` object
 
 ### Deprecated

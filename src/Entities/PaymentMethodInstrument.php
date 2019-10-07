@@ -15,6 +15,7 @@ use DomainException;
 use Rebilly\Entities\PaymentInstruments\AchInstrument;
 use Rebilly\Entities\PaymentInstruments\AlternativeInstrument;
 use Rebilly\Entities\PaymentInstruments\CashInstrument;
+use Rebilly\Entities\PaymentInstruments\CheckInstrument;
 use Rebilly\Entities\PaymentInstruments\PaymentCardInstrument;
 use Rebilly\Entities\PaymentInstruments\PayPalInstrument;
 use Rebilly\Rest\Resource;
@@ -31,6 +32,7 @@ abstract class PaymentMethodInstrument extends Resource
     protected static $supportedCommonMethods = [
         PaymentMethod::METHOD_ACH,
         PaymentMethod::METHOD_CASH,
+        PaymentMethod::METHOD_CHECK,
         PaymentMethod::METHOD_PAYMENT_CARD,
         PaymentMethod::METHOD_PAYPAL,
     ];
@@ -66,6 +68,8 @@ abstract class PaymentMethodInstrument extends Resource
                 return new AchInstrument($data);
             case PaymentMethod::METHOD_CASH:
                 return new CashInstrument($data);
+            case PaymentMethod::METHOD_CHECK:
+                return new CheckInstrument($data);
             case PaymentMethod::METHOD_PAYMENT_CARD:
                 return new PaymentCardInstrument($data);
             case PaymentMethod::METHOD_PAYPAL:
