@@ -86,7 +86,7 @@ final class Transaction extends Entity
     }
 
     /**
-     * Processed time can be defined only for processed outside transactions (isProcessedOutside = true)
+     * Can be specified only if transaction was processed outside (isProcessedOutside = true).
      *
      * @param $value
      *
