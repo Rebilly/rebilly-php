@@ -86,6 +86,18 @@ final class Transaction extends Entity
     }
 
     /**
+     * Can be specified only if transaction was processed outside (isProcessedOutside = true).
+     *
+     * @param $value
+     *
+     * @return $this
+     */
+    public function setProcessedTime($value)
+    {
+        return $this->setAttribute('processedTime', $value);
+    }
+
+    /**
      * @return string
      */
     public function getScheduledTime()
@@ -569,5 +581,23 @@ final class Transaction extends Entity
     public function getPurchaseCurrency()
     {
         return $this->getAttribute('purchaseCurrency');
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsProcessedOutside()
+    {
+        return $this->getAttribute('isProcessedOutside');
+    }
+
+    /**
+     * @param bool $value
+     *
+     * @return $this
+     */
+    public function setIsProcessedOutside($value)
+    {
+        return $this->setAttribute('isProcessedOutside', $value);
     }
 }

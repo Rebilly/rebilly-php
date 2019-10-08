@@ -120,6 +120,7 @@ abstract class TestCase extends Framework\TestCase
             case 'endTime':
             case 'churnTime':
             case 'autopayScheduledTime':
+            case 'processedTime':
                 return $faker->date('Y-m-d H:i:s');
             case 'unitPrice':
             case 'unitPriceAmount':
@@ -234,6 +235,7 @@ abstract class TestCase extends Framework\TestCase
             case 'allowCustomCustomerId':
             case 'attachInvoice':
             case 'invalidate':
+            case 'isProcessedOutside':
                 return $faker->boolean();
             case 'credentialTtl':
             case 'authTokenTtl':
