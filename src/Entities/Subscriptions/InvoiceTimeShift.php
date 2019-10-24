@@ -11,38 +11,29 @@
 
 namespace Rebilly\Entities\Subscriptions;
 
-use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstruction;
 use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstructionTypes\DateIntervalType;
 use Rebilly\Rest\Resource;
 
-final class BillingAnchor extends Resource
+final class InvoiceTimeShift extends Resource
 {
-    public function getChronology()
-    {
-        return $this->getAttribute('chronology');
-    }
-
-    public function setChronology($value)
-    {
-        return $this->setAttribute('chronology', $value);
-    }
-
     /**
-     * @return ScheduleInstruction
+     * @return DateIntervalType
      */
-    public function getBillingAnchorInstruction()
+    public function getIssueTimeShift()
     {
-        return $this->getAttribute('billingAnchorInstruction');
+        return $this->getAttribute('issueTimeShift');
     }
 
-    public function setBillingAnchorInstruction($value)
+    public function setIssueTimeShift($value)
     {
-        return $this->setAttribute('billingAnchorInstruction', $value);
+        return $this->setAttribute('issueTimeShift', $value);
     }
 
-    public function createBillingAnchorInstruction(array $data)
+    public function createIssueTimeShift(array $data)
     {
-        return ScheduleInstruction::createFromData($data);
+        $data['method'] = DateIntervalType::DATE_INTERVAL;
+
+        return DateIntervalType::createFromData($data);
     }
 
     /**
