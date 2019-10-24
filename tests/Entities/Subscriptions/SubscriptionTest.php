@@ -18,7 +18,7 @@ use Rebilly\Entities\LeadSource;
 use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstruction;
 use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstructionTypes\DateIntervalType;
 use Rebilly\Entities\Subscription;
-use Rebilly\Entities\Subscriptions\BillingAnchor;
+use Rebilly\Entities\Subscriptions\InvoiceTimeShift;
 use Rebilly\Entities\Subscriptions\PlanItem;
 use Rebilly\Entities\Website;
 use Rebilly\Tests\TestCase;
@@ -64,10 +64,10 @@ class SubscriptionTest extends TestCase
                 ['planId' => 'plan-2', 'quantity' => null],
                 ['planId' => 'plan-3'],
             ],
-            'billingAnchor' => [
-                'chronology' => 'before',
-                'billingAnchorInstruction' => [
+            'invoiceTimeShift' => [
+                'issueTimeShift' => [
                     'method' => ScheduleInstruction::DATE_INTERVAL,
+                    'chronology' => 'before',
                     'duration' => 7,
                     'unit' => 'days',
                 ],
@@ -103,18 +103,18 @@ class SubscriptionTest extends TestCase
         $value->setRiskMetadata($data['riskMetadata']);
         $value->setItems($data['items']);
 
-        $billingAnchor = new BillingAnchor();
-        $billingAnchor->setChronology($data['billingAnchor']['chronology']);
+        $invoiceTimeShift = new InvoiceTimeShift();
         $instruction = new DateIntervalType();
-        $instruction->setDuration($data['billingAnchor']['billingAnchorInstruction']['duration']);
-        $instruction->setUnit($data['billingAnchor']['billingAnchorInstruction']['unit']);
-        $billingAnchor->setBillingAnchorInstruction($instruction);
+        $instruction->setChronology($data['invoiceTimeShift']['issueTimeShift']['chronology']);
+        $instruction->setDuration($data['invoiceTimeShift']['issueTimeShift']['duration']);
+        $instruction->setUnit($data['invoiceTimeShift']['issueTimeShift']['unit']);
+        $invoiceTimeShift->setIssueTimeShift($instruction);
         $dueTimeShift = new DateIntervalType();
-        $dueTimeShift->setDuration($data['billingAnchor']['dueTimeShift']['duration']);
-        $dueTimeShift->setUnit($data['billingAnchor']['dueTimeShift']['unit']);
-        $billingAnchor->setDueTimeShift($dueTimeShift);
+        $dueTimeShift->setDuration($data['invoiceTimeShift']['dueTimeShift']['duration']);
+        $dueTimeShift->setUnit($data['invoiceTimeShift']['dueTimeShift']['unit']);
+        $invoiceTimeShift->setDueTimeShift($dueTimeShift);
 
-        $value->setBillingAnchor($billingAnchor);
+        $value->setInvoiceTimeShift($invoiceTimeShift);
 
         $expectedJson = $data;
         // Unset read-only properties which we not set.
@@ -188,17 +188,21 @@ class SubscriptionTest extends TestCase
         self::assertInstanceOf(Customer::class, $value->getCustomer());
         self::assertInstanceOf(LeadSource::class, $value->getLeadSource());
 
-        $billingAnchor = $value->getBillingAnchor();
-        self::assertInstanceOf(BillingAnchor::class, $billingAnchor);
-        self::assertSame($data['billingAnchor']['chronology'], $billingAnchor->getChronology());
-        $instructionData = $data['billingAnchor']['billingAnchorInstruction'];
-        $instruction = $billingAnchor->getBillingAnchorInstruction();
+        $invoiceTimeShift = $value->getInvoiceTimeShift();
+        self::assertInstanceOf(InvoiceTimeShift::class, $invoiceTimeShift);
+        self::assertSame(
+            $data['invoiceTimeShift']['issueTimeShift']['chronology'],
+            $invoiceTimeShift->getIssueTimeShift()->getChronology()
+        );
+        $instructionData = $data['invoiceTimeShift']['issueTimeShift'];
+        $instruction = $invoiceTimeShift->getIssueTimeShift();
         self::assertInstanceOf(DateIntervalType::class, $instruction);
+        self::assertSame($instructionData['chronology'], $instruction->getChronology());
         self::assertSame($instructionData['duration'], $instruction->getDuration());
         self::assertSame($instructionData['unit'], $instruction->getUnit());
-        self::assertTrue($billingAnchor->hasDueTimeShift());
-        $dueTimeShiftData = $data['billingAnchor']['dueTimeShift'];
-        $dueTimeShift = $billingAnchor->getDueTimeShift();
+        self::assertTrue($invoiceTimeShift->hasDueTimeShift());
+        $dueTimeShiftData = $data['invoiceTimeShift']['dueTimeShift'];
+        $dueTimeShift = $invoiceTimeShift->getDueTimeShift();
         self::assertInstanceOf(DateIntervalType::class, $dueTimeShift);
         self::assertSame($dueTimeShiftData['duration'], $dueTimeShift->getDuration());
         self::assertSame($dueTimeShiftData['unit'], $dueTimeShift->getUnit());

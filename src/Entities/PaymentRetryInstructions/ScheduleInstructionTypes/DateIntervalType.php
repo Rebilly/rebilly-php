@@ -55,6 +55,24 @@ class DateIntervalType extends ScheduleInstruction
     }
 
     /**
+     * @return string
+     */
+    public function getChronology()
+    {
+        return $this->getAttribute('chronology');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setChronology($value)
+    {
+        return $this->setAttribute('chronology', $value);
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function methodName()

@@ -694,8 +694,8 @@ abstract class TestCase extends Framework\TestCase
                     'path' => '/transaction/websiteId',
                     'value' => 'website-1',
                 ];
-            case 'billingAnchor':
-                return new Entities\Subscriptions\BillingAnchor(['billingAnchorInstruction' => ['method' => 'immediately']]);
+            case 'invoiceTimeShift':
+                return new Entities\Subscriptions\InvoiceTimeShift();
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)

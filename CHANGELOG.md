@@ -29,6 +29,7 @@ Security - in case of vulnerabilities.
 - [x] Added new properties to `Transaction`: `requestAmount`, `requestCurrency`, `purchaseAmount`, `purchaseCurrency`, `isProcessedOutside`
 - [x] Added field `additionalCriteria` into `GatewayAccount` object
 - [x] Added field `dueTimeShift` into `BillingAnchor` object
+- [x] Renamed field `billingAnchor` into `invoiceTimeShift` in `Subscription` object
 
 ### Deprecated
 - [x] Deprecated `Transaction` entity method: `getPaymentCardId`
