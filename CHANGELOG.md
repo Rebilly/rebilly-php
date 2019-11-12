@@ -26,7 +26,7 @@ Security - in case of vulnerabilities.
 - [x] Added `description` field to `ValuesList` 
 - [x] Added `reissue` method to `InvoiceService` 
 - [x] Added `dueTime` to `InvoiceService::issue()` 
-- [x] Added new properties to `Transaction`: `requestAmount`, `requestCurrency`, `purchaseAmount`, `purchaseCurrency`, `isProcessedOutside`
+- [x] Added new properties to `Transaction`: `requestAmount`, `requestCurrency`, `purchaseAmount`, `purchaseCurrency`, `reportAmount`, `reportCurrency`, `isProcessedOutside`
 - [x] Added field `additionalCriteria` into `GatewayAccount` object
 - [x] Added field `dueTimeShift` into `BillingAnchor` object
 - [x] Renamed field `billingAnchor` into `invoiceTimeShift` in `Subscription` object

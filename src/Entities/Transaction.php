@@ -584,6 +584,22 @@ final class Transaction extends Entity
     }
 
     /**
+     * @return string
+     */
+    public function getReportAmount()
+    {
+        return $this->getAttribute('reportAmount');
+    }
+
+    /**
+     * @return string
+     */
+    public function getReportCurrency()
+    {
+        return $this->getAttribute('reportCurrency');
+    }
+
+    /**
      * @return bool
      */
     public function getIsProcessedOutside()
