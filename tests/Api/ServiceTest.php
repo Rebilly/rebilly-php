@@ -440,7 +440,7 @@ class ServiceTest extends BaseTestCase
         ]);
         $service = $client->subscriptions();
 
-        $result = $service->searchUpcomingInvoices();
+        $result = $service->searchUpcomingInvoices('dummy');
         $this->assertInstanceOf(Rest\Collection::class, $result);
     }
 
