@@ -431,7 +431,7 @@ class ServiceTest extends BaseTestCase
             ->expects($this->any())
             ->method('__invoke')
             ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'subscriptions/dummy/upcoming-invoices')
+                $client->createResponse()->withHeader('Location', 'subscriptions/subscription-1/upcoming-invoices')
             ));
 
         $client = new Client([
@@ -440,7 +440,7 @@ class ServiceTest extends BaseTestCase
         ]);
         $service = $client->subscriptions();
 
-        $result = $service->searchUpcomingInvoices('dummy');
+        $result = $service->searchUpcomingInvoices('subscription-1');
         $this->assertInstanceOf(Rest\Collection::class, $result);
     }
 
