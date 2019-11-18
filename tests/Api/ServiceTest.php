@@ -412,6 +412,36 @@ class ServiceTest extends BaseTestCase
 
         $result = $service->issueInterimInvoice('dummy', []);
         $this->assertInstanceOf(Entities\Subscription::class, $result);
+
+        $result = $service->issueUpcomingInvoice('dummy', 'invoice-1');
+        $this->assertInstanceOf(Entities\Subscription::class, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function searchUpcomingInvoices()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->createMock(CurlHandler::class);
+
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'subscriptions/dummy/upcoming-invoices')
+            ));
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+        $service = $client->subscriptions();
+
+        $result = $service->searchUpcomingInvoices();
+        $this->assertInstanceOf(Rest\Collection::class, $result);
     }
 
     /**
