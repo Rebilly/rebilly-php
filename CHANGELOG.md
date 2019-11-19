@@ -30,6 +30,7 @@ Security - in case of vulnerabilities.
 - [x] Added field `additionalCriteria` into `GatewayAccount` object
 - [x] Added field `dueTimeShift` into `BillingAnchor` object
 - [x] Renamed field `billingAnchor` into `invoiceTimeShift` in `Subscription` object
+- [x] Added `getUpcomingInvoices` and `issueUpcomingInvoice` methods to **SubscriptionService**
 
 ### Deprecated
 - [x] Deprecated `Transaction` entity method: `getPaymentCardId`

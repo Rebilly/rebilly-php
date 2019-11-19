@@ -143,4 +143,35 @@ final class SubscriptionService extends Service
             ['subscriptionId' => $subscriptionId]
         );
     }
+
+    /**
+     * @param string $subscriptionId
+     *
+     * @return Invoice[]|Collection
+     */
+    public function getUpcomingInvoices($subscriptionId)
+    {
+        return $this->client()->get(
+            'subscriptions/{subscriptionId}/upcoming-invoices',
+            ['subscriptionId' => $subscriptionId]
+        );
+    }
+
+    /**
+     * @param string $subscriptionId
+     * @param string $invoiceId
+     *
+     * @return Invoice
+     */
+    public function issueUpcomingInvoice($subscriptionId, $invoiceId)
+    {
+        return $this->client()->post(
+            [],
+            'subscriptions/{subscriptionId}/upcoming-invoices/{invoiceId}/issue',
+            [
+                'subscriptionId' => $subscriptionId,
+                'invoiceId' => $invoiceId,
+            ]
+        );
+    }
 }
