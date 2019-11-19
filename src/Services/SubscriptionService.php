@@ -149,7 +149,7 @@ final class SubscriptionService extends Service
      *
      * @return Invoice[]|Collection
      */
-    public function searchUpcomingInvoices($subscriptionId)
+    public function getUpcomingInvoices($subscriptionId)
     {
         return $this->client()->get(
             'subscriptions/{subscriptionId}/upcoming-invoices',
