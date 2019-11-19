@@ -328,6 +328,9 @@ class ServiceTest extends BaseTestCase
 
         $result = $service->reissue('dummy', date('Y-m-d H:i:s'));
         $this->assertInstanceOf(Entities\Invoice::class, $result);
+
+        $result = $service->recalculate('dummy');
+        $this->assertInstanceOf(Entities\Invoice::class, $result);
     }
 
     /**
