@@ -146,15 +146,14 @@ final class SubscriptionService extends Service
 
     /**
      * @param string $subscriptionId
-     * @param array|ArrayObject $params
      *
      * @return Invoice[]|Collection
      */
-    public function searchUpcomingInvoices($subscriptionId, $params = [])
+    public function searchUpcomingInvoices($subscriptionId)
     {
         return $this->client()->get(
             'subscriptions/{subscriptionId}/upcoming-invoices',
-            ['subscriptionId' => $subscriptionId] + (array) $params
+            ['subscriptionId' => $subscriptionId]
         );
     }
 
