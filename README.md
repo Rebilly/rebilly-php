@@ -59,8 +59,38 @@ try {
 }
 ```
 
-Mock Rebilly Client for Test purposes
- 
+### Mock Rebilly Client for Test purposes
+
+If you use Guzzle jump to the 2nd example, for regular usage the example with custom handler is below.
+
+#### Custom handler
+```php
+use Rebilly\Http\HttpHandler;
+
+MockHandler implements HttpHandler {
+
+    private $responses;
+
+    public function append($response)
+    {
+        $this->responses[] = $response;
+    }
+
+    public function __invoke(Request $request)
+    {
+        return array_shift($this->responses);
+    }
+};
+
+$httpHandler = new MockHandler();
+
+new RebillyClient(['httpHandler' => $httpHandler]);
+
+// Here is mocked part
+$httpHandler->append($response);
+```
+
+#### Guzzle handler 
 ```php
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
@@ -87,7 +117,7 @@ $mockHandler->append($response);
 ```
 
 If RebillyClient does several sequenced requests in the code you need to cover,
-responses has to be appended in the same order as RebillyClient is called:
+responses have to be appended in the same order as RebillyClient is called:
 ```php
 // Send several sequenced requests
 ...
