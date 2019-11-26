@@ -15,7 +15,10 @@ use DateTimeImmutable;
 use Rebilly\Entities\Address;
 use Rebilly\Entities\Customer;
 use Rebilly\Entities\LeadSource;
+use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstruction;
+use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstructionTypes\DateIntervalType;
 use Rebilly\Entities\Subscription;
+use Rebilly\Entities\Subscriptions\InvoiceTimeShift;
 use Rebilly\Entities\Subscriptions\PlanItem;
 use Rebilly\Entities\Website;
 use Rebilly\Tests\TestCase;
@@ -61,6 +64,19 @@ class SubscriptionTest extends TestCase
                 ['planId' => 'plan-2', 'quantity' => null],
                 ['planId' => 'plan-3'],
             ],
+            'invoiceTimeShift' => [
+                'issueTimeShift' => [
+                    'method' => ScheduleInstruction::DATE_INTERVAL,
+                    'chronology' => 'before',
+                    'duration' => 7,
+                    'unit' => 'days',
+                ],
+                'dueTimeShift' => [
+                    'method' => ScheduleInstruction::DATE_INTERVAL,
+                    'duration' => 5,
+                    'unit' => 'minutes',
+                ],
+            ],
             '_embedded' => [
                 'website' => ['id' => 'website-1'],
                 'customer' => ['id' => 'customer-1'],
@@ -86,6 +102,19 @@ class SubscriptionTest extends TestCase
         $value->setDeliveryAddress($data['deliveryAddress']);
         $value->setRiskMetadata($data['riskMetadata']);
         $value->setItems($data['items']);
+
+        $invoiceTimeShift = new InvoiceTimeShift();
+        $instruction = new DateIntervalType();
+        $instruction->setChronology($data['invoiceTimeShift']['issueTimeShift']['chronology']);
+        $instruction->setDuration($data['invoiceTimeShift']['issueTimeShift']['duration']);
+        $instruction->setUnit($data['invoiceTimeShift']['issueTimeShift']['unit']);
+        $invoiceTimeShift->setIssueTimeShift($instruction);
+        $dueTimeShift = new DateIntervalType();
+        $dueTimeShift->setDuration($data['invoiceTimeShift']['dueTimeShift']['duration']);
+        $dueTimeShift->setUnit($data['invoiceTimeShift']['dueTimeShift']['unit']);
+        $invoiceTimeShift->setDueTimeShift($dueTimeShift);
+
+        $value->setInvoiceTimeShift($invoiceTimeShift);
 
         $expectedJson = $data;
         // Unset read-only properties which we not set.
@@ -158,5 +187,24 @@ class SubscriptionTest extends TestCase
         self::assertInstanceOf(Website::class, $value->getWebsite());
         self::assertInstanceOf(Customer::class, $value->getCustomer());
         self::assertInstanceOf(LeadSource::class, $value->getLeadSource());
+
+        $invoiceTimeShift = $value->getInvoiceTimeShift();
+        self::assertInstanceOf(InvoiceTimeShift::class, $invoiceTimeShift);
+        self::assertSame(
+            $data['invoiceTimeShift']['issueTimeShift']['chronology'],
+            $invoiceTimeShift->getIssueTimeShift()->getChronology()
+        );
+        $instructionData = $data['invoiceTimeShift']['issueTimeShift'];
+        $instruction = $invoiceTimeShift->getIssueTimeShift();
+        self::assertInstanceOf(DateIntervalType::class, $instruction);
+        self::assertSame($instructionData['chronology'], $instruction->getChronology());
+        self::assertSame($instructionData['duration'], $instruction->getDuration());
+        self::assertSame($instructionData['unit'], $instruction->getUnit());
+        self::assertTrue($invoiceTimeShift->hasDueTimeShift());
+        $dueTimeShiftData = $data['invoiceTimeShift']['dueTimeShift'];
+        $dueTimeShift = $invoiceTimeShift->getDueTimeShift();
+        self::assertInstanceOf(DateIntervalType::class, $dueTimeShift);
+        self::assertSame($dueTimeShiftData['duration'], $dueTimeShift->getDuration());
+        self::assertSame($dueTimeShiftData['unit'], $dueTimeShift->getUnit());
     }
 }

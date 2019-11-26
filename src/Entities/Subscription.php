@@ -12,7 +12,7 @@
 namespace Rebilly\Entities;
 
 use DomainException;
-use Rebilly\Entities\Subscriptions\BillingAnchor;
+use Rebilly\Entities\Subscriptions\InvoiceTimeShift;
 use Rebilly\Entities\Subscriptions\RecurringInterval;
 use Rebilly\Entities\Subscriptions\SubscriptionTrial;
 use Rebilly\Rest\Entity;
@@ -418,31 +418,31 @@ final class Subscription extends Entity
     }
 
     /**
-     * @return BillingAnchor
+     * @return InvoiceTimeShift
      */
-    public function getBillingAnchor()
+    public function getInvoiceTimeShift()
     {
-        return $this->getAttribute('billingAnchor');
+        return $this->getAttribute('invoiceTimeShift');
     }
 
     /**
-     * @param array|BillingAnchor $value
+     * @param array|InvoiceTimeShift $value
      *
      * @return $this
      */
-    public function setBillingAnchor($value)
+    public function setInvoiceTimeShift($value)
     {
-        return $this->setAttribute('billingAnchor', $value);
+        return $this->setAttribute('invoiceTimeShift', $value);
     }
 
     /**
      * @param array $data
      *
-     * @return BillingAnchor
+     * @return InvoiceTimeShift
      */
-    public function createBillingAnchor(array $data)
+    public function createInvoiceTimeShift(array $data)
     {
-        return new BillingAnchor($data);
+        return new InvoiceTimeShift($data);
     }
 
     /**

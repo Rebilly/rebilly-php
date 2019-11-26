@@ -120,6 +120,7 @@ abstract class TestCase extends Framework\TestCase
             case 'endTime':
             case 'churnTime':
             case 'autopayScheduledTime':
+            case 'processedTime':
                 return $faker->date('Y-m-d H:i:s');
             case 'unitPrice':
             case 'unitPriceAmount':
@@ -234,6 +235,7 @@ abstract class TestCase extends Framework\TestCase
             case 'allowCustomCustomerId':
             case 'attachInvoice':
             case 'invalidate':
+            case 'isProcessedOutside':
                 return $faker->boolean();
             case 'credentialTtl':
             case 'authTokenTtl':
@@ -473,8 +475,6 @@ abstract class TestCase extends Framework\TestCase
             case 'gatewayConfig':
             case 'additionalSchema':
                 return [];
-            case 'websites':
-                return [$faker->word];
             case 'acceptedCurrencies':
                 return ['USD'];
             case 'dynamicDescriptor':
@@ -688,8 +688,14 @@ abstract class TestCase extends Framework\TestCase
                 return 'unit';
             case 'orderType':
                 return 'subscription-order';
-            case 'billingAnchor':
-                return new Entities\Subscriptions\BillingAnchor(['billingAnchorInstruction' => ['method' => 'immediately']]);
+            case 'additionalCriteria':
+                return [
+                    'op' => 'equals',
+                    'path' => '/transaction/websiteId',
+                    'value' => 'website-1',
+                ];
+            case 'invoiceTimeShift':
+                return new Entities\Subscriptions\InvoiceTimeShift();
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)

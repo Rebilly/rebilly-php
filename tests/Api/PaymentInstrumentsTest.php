@@ -16,6 +16,7 @@ use Rebilly\Entities\PaymentCardMigrationsResponse;
 use Rebilly\Entities\PaymentInstruments\AchInstrument;
 use Rebilly\Entities\PaymentInstruments\AlternativeInstrument;
 use Rebilly\Entities\PaymentInstruments\CashInstrument;
+use Rebilly\Entities\PaymentInstruments\CheckInstrument;
 use Rebilly\Entities\PaymentInstruments\PaymentCardInstrument;
 use Rebilly\Entities\PaymentInstruments\PaymentCardPaymentInstrument;
 use Rebilly\Entities\PaymentInstruments\PayPalInstrument;
@@ -84,6 +85,19 @@ class PaymentInstrumentsTest extends BaseTestCase
         self::assertInstanceOf(CashInstrument::class, $instrument);
         self::assertSame('123', $instrument->getReceivedBy());
         self::assertSame('cash', $instrument->getMethod());
+    }
+
+    /**
+     * @test
+     */
+    public function checkInstrument()
+    {
+        $instrument = new CheckInstrument();
+        $instrument->setReference('#123');
+
+        self::assertInstanceOf(CheckInstrument::class, $instrument);
+        self::assertSame('#123', $instrument->getReference());
+        self::assertSame('check', $instrument->getMethod());
     }
 
     /**

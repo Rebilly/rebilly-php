@@ -164,4 +164,20 @@ final class InvoiceService extends Service
             ['accept' => 'application/pdf']
         );
     }
+
+    /**
+     * @param string $invoiceId
+     *
+     * @return Invoice
+     */
+    public function recalculate($invoiceId)
+    {
+        return $this->client()->post(
+            [],
+            'invoices/{invoiceId}/recalculate',
+            [
+                'invoiceId' => $invoiceId,
+            ]
+        );
+    }
 }
