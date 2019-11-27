@@ -98,6 +98,7 @@ final class PaymentCard extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version.
      * @param $value
      *
      * @return $this

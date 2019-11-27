@@ -67,6 +67,7 @@ final class PayPalAccount extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version.
      * @param string $value
      *
      * @return $this
