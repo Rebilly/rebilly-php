@@ -59,6 +59,95 @@ try {
 }
 ```
 
+### Mock Rebilly Client for Test purposes
+
+If you use Guzzle jump to the 2nd example, for regular usage the example with custom handler is below.
+
+#### Custom handler
+```php
+use Rebilly\Http\HttpHandler;
+
+MockHandler implements HttpHandler {
+
+    private $responses;
+
+    public function append($response)
+    {
+        $this->responses[] = $response;
+    }
+
+    public function __invoke(Request $request)
+    {
+        return array_shift($this->responses);
+    }
+};
+
+$httpHandler = new MockHandler();
+
+new RebillyClient(['httpHandler' => $httpHandler]);
+
+// Here is mocked part
+$httpHandler->append($response);
+```
+
+#### Guzzle handler 
+```php
+use GuzzleHttp\Client;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\Psr7\Response;
+use Rebilly\Client as RebillyClient;
+use Rebilly\Http\GuzzleAdapter;
+ 
+$mockHandler = new MockHandler();
+$guzzleAdapter = new GuzzleAdapter(
+    new Client(
+        [
+            'handler' => $mockHandler,
+        ]
+    )
+);
+
+new RebillyClient([
+    'httpHandler' => $guzzleAdapter
+]);
+
+// Here is mocked part
+$response = new Response(204);
+$mockHandler->append($response);
+```
+
+If RebillyClient does several sequenced requests in the code you need to cover,
+responses have to be appended in the same order as RebillyClient is called:
+```php
+// Send several sequenced requests
+...
+$transaction = $rebillyClient->transactions()->load($id);
+$refundedTransaction = $rebillyClient->transactions()->refund($id, $amount);
+$transactionWithCustomer = $rebillyClient->transactions()->load($id, ['expand' => 'customer']);
+...
+```
+Tests become:
+```php
+$response = new Response(200, [], json_encode($transaction));
+$responseWithCustomer = new Response(200, [], json_encode($transactionWithCustomer));
+
+/** 
+ * hint: if you receive an error message 'Cannot create resource by URI "..."' during the tests
+ * most probably the created Response misses appropriate "Location" header.
+ *
+ * Below is an example of mocked POST response `/transactions/{transactionId}/refund` which is not listed in `Rebilly\Entities\Schema`
+ * because it can be simply mapped by "Location" header from the response.
+ * The "Location" header shows Client which Schema to use to create an object out of the response content.
+ */
+  
+$responseRefund = new GuzzleResponse(201, ['Location' => 'transactions/{transactionId}'], json_encode($transaction));
+
+// Now append them in the same order as it is called in the code
+$mockHandler->append($response);
+$mockHandler->append($responseRefund);
+$mockHandler->append($responseWithCustomer);
+```
+
 ## Documentation
 
 Read [Rebilly REST APIs documentation][link-api-doc] for more details.
