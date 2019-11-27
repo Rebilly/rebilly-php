@@ -35,6 +35,8 @@ Security - in case of vulnerabilities.
 
 ### Deprecated
 - [x] Deprecated `Transaction` entity method: `getPaymentCardId`
+- [x] Deprecated `PayPalAccount` entity method: `setUserName`
+- [x] Deprecated `PaymentCard` entity method: `setStatus`
 
 ### Removed
 - [x] Removed Payments Queue API
