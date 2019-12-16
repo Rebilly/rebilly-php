@@ -103,6 +103,7 @@ abstract class TestCase extends Framework\TestCase
             case 'redemptionCode':
             case 'productId':
             case 'requestId':
+            case 'stickyGatewayAccountId':
                 return $faker->uuid;
             case 'dueTime':
             case 'expiredTime':
