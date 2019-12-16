@@ -279,4 +279,22 @@ final class PaymentCard extends Entity
 
         return null;
     }
+
+    /**
+     * @return string
+     */
+    public function getStickyGatewayAccountId()
+    {
+        return $this->getAttribute('stickyGatewayAccountId');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setStickyGatewayAccountId($value)
+    {
+        return $this->setAttribute('stickyGatewayAccountId', $value);
+    }
 }
