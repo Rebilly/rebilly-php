@@ -11,7 +11,6 @@
 
 namespace Rebilly\Entities\RulesEngine\Actions\SendEmail;
 
-use Rebilly\Entities\ResourceAttachment;
 use Rebilly\Rest\Resource;
 
 /**
@@ -46,180 +45,36 @@ final class EmailNotification extends Resource
     }
 
     /**
-     * @return string
+     * @return EmailTemplate[]|array
      */
-    public function getFrom(): string
+    public function getTemplates(): array
     {
-        return $this->getAttribute('from');
+        return $this->getAttribute('templates');
     }
 
     /**
-     * @param string $value
+     * @param EmailTemplate[]|array $value
      *
      * @return $this
      */
-    public function setFrom($value): self
+    public function setTemplates(array $value): self
     {
-        return $this->setAttribute('from', $value);
+        return $this->setAttribute('templates', $value);
     }
 
     /**
-     * @return string[]|array
-     */
-    public function getTo(): array
-    {
-        return $this->getAttribute('to');
-    }
-
-    /**
-     * @param string[]|array $value
+     * @param EmailTemplate[]|array $value
      *
-     * @return $this
+     * @return EmailTemplate[]|array
      */
-    public function setTo($value): self
-    {
-        return $this->setAttribute('to', $value);
-    }
-
-    /**
-     * @return string[]|array
-     */
-    public function getCc(): array
-    {
-        return $this->getAttribute('cc');
-    }
-
-    /**
-     * @param string[]|array $value
-     *
-     * @return $this
-     */
-    public function setCc($value): self
-    {
-        return $this->setAttribute('cc', $value);
-    }
-
-    /**
-     * @return string[]|array
-     */
-    public function getBcc(): array
-    {
-        return $this->getAttribute('bcc');
-    }
-
-    /**
-     * @param string[]|array $value
-     *
-     * @return $this
-     */
-    public function setBcc($value): self
-    {
-        return $this->setAttribute('bcc', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getSubject(): string
-    {
-        return $this->getAttribute('subject');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setSubject($value): self
-    {
-        return $this->setAttribute('subject', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getText(): string
-    {
-        return $this->getAttribute('text');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setText($value): self
-    {
-        return $this->setAttribute('text', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getHtml(): string
-    {
-        return $this->getAttribute('html');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setHtml($value): self
-    {
-        return $this->setAttribute('html', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getEditor(): string
-    {
-        return $this->getAttribute('editor');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setEditor($value): self
-    {
-        return $this->setAttribute('editor', $value);
-    }
-
-    /**
-     * @return ResourceAttachment[]|array
-     */
-    public function getAttachments(): array
-    {
-        return $this->getAttribute('attachments');
-    }
-
-    /**
-     * @param ResourceAttachment[]|array $value
-     *
-     * @return $this
-     */
-    public function setAttachments(array $value): self
-    {
-        return $this->setAttribute('attachments', $value);
-    }
-
-    /**
-     * @param ResourceAttachment[]|array $value
-     *
-     * @return ResourceAttachment[]|array
-     */
-    public function createAttachments(array $value): array
+    public function createTemplates(array $value): array
     {
         return array_map(function ($data) {
-            if ($data instanceof ResourceAttachment) {
+            if ($data instanceof EmailTemplate) {
                 return $data;
             }
 
-            return new ResourceAttachment((array) $data);
+            return new EmailTemplate((array) $data);
         }, $value);
     }
 
