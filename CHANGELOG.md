@@ -33,6 +33,7 @@ Security - in case of vulnerabilities.
 - [x] Renamed field `billingAnchor` into `invoiceTimeShift` in `Subscription` object
 - [x] Added `getUpcomingInvoices` and `issueUpcomingInvoice` methods to **SubscriptionService**
 - [x] Added `recalculate` method to **InvoiceService**
+- [x] Added `EmailTemplate` as a part of `EmailNotification` to support multi-locale emails in RulesEngine
 
 ### Deprecated
 - [x] Deprecated `Transaction` entity method: `getPaymentCardId`
@@ -44,6 +45,7 @@ Security - in case of vulnerabilities.
 - [X] Removed `Transaction` entity method: `getPayment`
 - [x] Removed `ValuesList` field: `name` 
 - [x] Removed field `websites` from `GatewayAccount` object 
+- [x] Removed `EmailNotification` entity methods related to an actual `EmailTemplate`
 
 ## [2.5.0] 2019-07-19
 
