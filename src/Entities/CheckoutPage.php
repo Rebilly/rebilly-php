@@ -37,21 +37,41 @@ final class CheckoutPage extends Entity
     }
 
     /**
+     * @deprecated use getUrlPathSegment instead
      * @return string
      */
     public function getUriPath()
     {
-        return $this->getAttribute('uriPath');
+        return $this->getAttribute('urlPathSegment');
     }
 
     /**
+     * @deprecated use setUrlPathSegment instead
      * @param string $value
      *
      * @return $this
      */
     public function setUriPath($value)
     {
-        return $this->setAttribute('uriPath', $value);
+        return $this->setAttribute('urlPathSegment', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrlPathSegment()
+    {
+        return $this->getAttribute('urlPathSegment');
+    }
+
+    /**
+     * @param string $value
+
+     * @return $this
+     */
+    public function setUrlPathSegment($value)
+    {
+        return $this->setAttribute('urlPathSegment', $value);
     }
 
     /**
@@ -105,7 +125,27 @@ final class CheckoutPage extends Entity
      */
     public function setRedirectUrl($value)
     {
-        return $this->setAttribute('redirectUrl', $value);
+        $timeout = $this->getRedirect()['timeout'] ?? 5;
+
+        return $this->setAttribute('redirect', ['url' => $value, 'timeout' => $timeout]);
+    }
+
+    /**
+     * @return array
+     */
+    public function getRedirect()
+    {
+        return $this->getAttribute('redirect');
+    }
+
+    /**
+     * @param array $value
+     *
+     * @return $this
+     */
+    public function setRedirect($value)
+    {
+        return $this->setAttribute('redirect', $value);
     }
 
     /**
@@ -123,33 +163,75 @@ final class CheckoutPage extends Entity
      */
     public function setRedirectTimeout($value)
     {
-        return $this->setAttribute('redirectTimeout', $value);
+        $url = $this->getRedirect()['url'] ?? '';
+
+        return $this->setAttribute('redirect', ['url' => $url, 'timeout' => $value]);
     }
 
     /**
+     * @deprecated use getStatus instead
      * @return bool
      */
     public function getIsActive()
     {
-        return $this->getAttribute('isActive');
+        return $this->getAttribute('status') === 'active';
     }
 
     /**
+     * @deprecated use setStatus instead
      * @param bool $value
      *
      * @return $this
      */
     public function setIsActive($value)
     {
-        return $this->setAttribute('isActive', $value);
+        return $this->setAttribute('status', $value ? 'active' : 'inactive');
     }
 
     /**
      * @return bool
      */
+    public function getStatus()
+    {
+        return $this->getAttribute('status');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setStatus($value)
+    {
+        return $this->setAttribute('status', $value);
+    }
+
+    /**
+     * @deprecated use getIsCustomCustomerIdAllowed instead
+     * @return bool
+     */
     public function getAllowCustomCustomerId()
     {
-        return $this->getAttribute('allowCustomCustomerId');
+        return $this->getAttribute('isCustomCustomerIdAllowed');
+    }
+
+    /**
+     * @deprecated use setIsCustomCustomerIdAllowed instead
+     * @param bool $value
+     *
+     * @return $this
+     */
+    public function setAllowCustomCustomerId($value)
+    {
+        return $this->setAttribute('isCustomCustomerIdAllowed', $value);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsCustomCustomerIdAllowed()
+    {
+        return $this->getAttribute('isCustomCustomerIdAllowed');
     }
 
     /**
@@ -157,9 +239,9 @@ final class CheckoutPage extends Entity
      *
      * @return $this
      */
-    public function setAllowCustomCustomerId($value)
+    public function setIsCustomCustomerIdAllowed($value)
     {
-        return $this->setAttribute('allowCustomCustomerId', $value);
+        return $this->setAttribute('isCustomCustomerIdAllowed', $value);
     }
 
     /**
