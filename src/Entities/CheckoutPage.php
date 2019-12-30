@@ -115,7 +115,7 @@ final class CheckoutPage extends Entity
      */
     public function getRedirectUrl()
     {
-        return $this->getAttribute('redirectUrl');
+        return $this->getRedirect()['url'] ?? '';
     }
 
     /**
@@ -153,7 +153,7 @@ final class CheckoutPage extends Entity
      */
     public function getRedirectTimeout()
     {
-        return $this->getAttribute('redirectTimeout');
+        return $this->getRedirect()['timeout'] ?? 5;
     }
 
     /**
