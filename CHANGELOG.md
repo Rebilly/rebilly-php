@@ -34,11 +34,13 @@ Security - in case of vulnerabilities.
 - [x] Added `getUpcomingInvoices` and `issueUpcomingInvoice` methods to **SubscriptionService**
 - [x] Added `recalculate` method to **InvoiceService**
 - [x] Added `EmailTemplate` as a part of `EmailNotification` to support multi-locale emails in RulesEngine
+- [x] Added `getUrlPathSegment`, `setUrlPathSegment`, `getRedirect`, `setRedirect`, `getStatus`, `setStatus`, `getIsCustomCustomerIdAllowed`, `setIsCustomCustomerIdAllowed` method to `CheckoutPage`
 
 ### Deprecated
 - [x] Deprecated `Transaction` entity method: `getPaymentCardId`
 - [x] Deprecated `PayPalAccount` entity method: `setUserName`
 - [x] Deprecated `PaymentCard` entity method: `setStatus`
+- [x] Deprecated `CheckoutPage` entity method: `getUriPath`, `setUriPath`, `getAllowCustomCustomerId`, `setAllowCustomCustomerId`, `getIsActive`, `setIsActive`,  
 
 ### Removed
 - [x] Removed Payments Queue API
