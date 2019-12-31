@@ -75,6 +75,8 @@ abstract class TestCase extends Framework\TestCase
         $faker = $this->getFaker();
 
         $faker->phoneNumber;
+        $redirectUrl = 'https://redirect.com';
+        $uriParh = 'pathsegment';
 
         switch ($attribute) {
             case 'id':
@@ -128,6 +130,8 @@ abstract class TestCase extends Framework\TestCase
             case 'amount':
                 return $faker->randomFloat(2);
             case 'uriPath':
+            case 'urlPathSegment':
+                return $uriParh;
             case 'gatewayName':
             case 'organizationId':
             case 'acquirerName':
@@ -144,6 +148,7 @@ abstract class TestCase extends Framework\TestCase
             case 'bic':
                 return $faker->word;
             case 'redirectUrl':
+                return $redirectUrl;
             case 'notificationUrl':
                 return $faker->url;
             case 'organization':
@@ -231,9 +236,11 @@ abstract class TestCase extends Framework\TestCase
                     ],
                 ]);
             case 'isActive':
+            case 'allowCustomCustomerId':
+            case 'isCustomCustomerIdAllowed':
+                return true;
             case 'archived':
             case 'starred':
-            case 'allowCustomCustomerId':
             case 'attachInvoice':
             case 'invalidate':
             case 'isProcessedOutside':
@@ -246,6 +253,7 @@ abstract class TestCase extends Framework\TestCase
             case 'maxQuantity':
             case 'monthlyLimit':
             case 'redirectTimeout':
+                return 5;
             case 'velocity':
             case 'revision':
                 return $faker->numberBetween(1, 10);
@@ -315,6 +323,8 @@ abstract class TestCase extends Framework\TestCase
                 return $faker->randomElement(Entities\File::allowedTypes());
             case 'tags':
                 return [$faker->word];
+            case 'redirect':
+                return ['url' => $redirectUrl, 'timeout' => 5];
             case 'mode':
                 switch ($class) {
                     case Entities\AuthenticationToken::class:
@@ -549,6 +559,8 @@ abstract class TestCase extends Framework\TestCase
                     case Entities\Dispute::class:
                         return $faker->randomElement(Entities\Dispute::allowedStatuses());
                     case Entities\PaymentCard::class:
+                        return 'active';
+                    case Entities\CheckoutPage::class:
                         return 'active';
                     default:
                         return $faker->randomElement(Entities\Dispute::allowedStatuses());
