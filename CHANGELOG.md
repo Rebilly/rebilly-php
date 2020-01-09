@@ -35,6 +35,7 @@ Security - in case of vulnerabilities.
 - [x] Added `recalculate` method to **InvoiceService**
 - [x] Added `EmailTemplate` as a part of `EmailNotification` to support multi-locale emails in RulesEngine
 - [x] Added `getUrlPathSegment`, `setUrlPathSegment`, `getRedirect`, `setRedirect`, `getStatus`, `setStatus`, `getIsCustomCustomerIdAllowed`, `setIsCustomCustomerIdAllowed` method to `CheckoutPage`
+- [x] Added `Organization-Id` header to Client config
 
 ### Deprecated
 - [x] Deprecated `Transaction` entity method: `getPaymentCardId`

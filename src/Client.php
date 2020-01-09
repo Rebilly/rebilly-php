@@ -211,6 +211,10 @@ final class Client
             $sessionToken = null;
         }
 
+        if (!isset($organizationId)) {
+            $organizationId = null;
+        }
+
         if (isset($baseUrl)) {
             $baseUrl = ltrim($baseUrl, '/');
         } else {
@@ -248,7 +252,8 @@ final class Client
             'httpHandler',
             'logger',
             'logOptions',
-            'middleware'
+            'middleware',
+            'organizationId'
         );
 
         // HTTP transport
@@ -260,6 +265,7 @@ final class Client
         // Prepare middleware stack
         $this->middleware = new Middleware\CompositeMiddleware(
             new Middleware\BaseUri($this->createUri($baseUrl . '/' . self::CURRENT_VERSION)),
+            new Middleware\OrganizationIdHeader($organizationId),
             new Middleware\UserAgent(self::SDK_VERSION),
             $authentication,
             $middleware,
