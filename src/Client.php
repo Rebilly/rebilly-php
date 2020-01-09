@@ -213,7 +213,9 @@ final class Client
             $sessionToken = null;
         }
 
-        if (!isset($organizationId)) {
+        if (isset($organizationId)) {
+            $organizationId = trim($organizationId);
+        } else {
             $organizationId = null;
         }
 
