@@ -43,7 +43,7 @@ final class OrganizationIdHeader implements Middleware
      */
     public function __invoke(Request $request, Response $response, callable $next)
     {
-        if (!is_null($this->organizationId)) {
+        if (isset($this->organizationId)) {
             $request = $request->withHeader(self::HEADER, $this->organizationId);
         }
 

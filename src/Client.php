@@ -177,6 +177,8 @@ final class Client
      *   A callable provider should return JWT token string.
      * - baseUrl: (string) The full URI of the webservice. This is only
      *   required when connecting to a custom endpoint (e.g., a tests).
+     * - organizationId: (string) Specifies the Organization ID used to receive data from one of the user's organizations.
+     *   required when need to receive data from non-default user organization.
      * - httpHandler: (callable) An HTTP handler is a Closure that accepts a PSR-7 request object
      *   and returns a PSR-7 response object or rejected with an exception.
      * - logger: (Psr\Log\LoggerInterface) A PSR-3 logger object
