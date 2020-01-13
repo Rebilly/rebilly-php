@@ -15,10 +15,6 @@ use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Rebilly\Middleware;
 
-/**
- * Class OrganizationIdHeader
- *
- */
 final class OrganizationIdHeader implements Middleware
 {
     public const HEADER = 'Organization-Id';
@@ -26,21 +22,11 @@ final class OrganizationIdHeader implements Middleware
     /** @var string */
     private $organizationId;
 
-    /**
-     * Constructor
-     *
-     * @param string $organizationId
-     */
     public function __construct($organizationId)
     {
         $this->organizationId = (string) $organizationId;
     }
 
-    /**
-     * Add HTTP header to request.
-     *
-     * {@inheritdoc}
-     */
     public function __invoke(Request $request, Response $response, callable $next)
     {
         return call_user_func(
