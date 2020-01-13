@@ -218,6 +218,7 @@ final class Client
             $organizationIdHeader = new OrganizationIdHeader($organizationId);
         } else {
             $organizationIdHeader = null;
+            $organizationId = null;
         }
 
         if (isset($baseUrl)) {
