@@ -49,29 +49,4 @@ class OrganizationIdHeaderTest extends TestCase
         $this->assertTrue($result->hasHeader(OrganizationIdHeader::HEADER));
         $this->assertSame($organizationId, $result->getHeaderLine(OrganizationIdHeader::HEADER));
     }
-
-    /**
-     * @test
-     */
-    public function notHaveHeader()
-    {
-        $client = new Client([
-            'apiKey' => 'QWERTY',
-        ]);
-        $middleware = new OrganizationIdHeader();
-
-        $done = function (Request $request) {
-            return $request;
-        };
-
-        $request = $client->createRequest('GET', '/demo', null);
-        $response = $client->createResponse();
-
-        /**
-         * @var Request $result
-         */
-        $result = call_user_func($middleware, $request, $response, $done);
-
-        $this->assertFalse($result->hasHeader(OrganizationIdHeader::HEADER));
-    }
 }

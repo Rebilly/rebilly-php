@@ -29,11 +29,11 @@ final class OrganizationIdHeader implements Middleware
     /**
      * Constructor
      *
-     * @param string|null $organizationId
+     * @param string $organizationId
      */
-    public function __construct(string $organizationId = null)
+    public function __construct($organizationId)
     {
-        $this->organizationId = $organizationId;
+        $this->organizationId = (string) $organizationId;
     }
 
     /**
@@ -43,13 +43,9 @@ final class OrganizationIdHeader implements Middleware
      */
     public function __invoke(Request $request, Response $response, callable $next)
     {
-        if (isset($this->organizationId)) {
-            $request = $request->withHeader(self::HEADER, $this->organizationId);
-        }
-
         return call_user_func(
             $next,
-            $request,
+            $request->withHeader(self::HEADER, $this->organizationId),
             $response
         );
     }
