@@ -215,9 +215,8 @@ final class Client
         }
 
         if (isset($organizationId)) {
-            $organizationIdHeader = new OrganizationIdHeader($organizationId);
+            $organizationId = new OrganizationIdHeader($organizationId);
         } else {
-            $organizationIdHeader = null;
             $organizationId = null;
         }
 
@@ -271,7 +270,7 @@ final class Client
         // Prepare middleware stack
         $this->middleware = new Middleware\CompositeMiddleware(
             new Middleware\BaseUri($this->createUri($baseUrl . '/' . self::CURRENT_VERSION)),
-            $organizationIdHeader,
+            $organizationId,
             new Middleware\UserAgent(self::SDK_VERSION),
             $authentication,
             $middleware,
