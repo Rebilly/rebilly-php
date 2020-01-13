@@ -22,6 +22,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Log\LoggerInterface as Logger;
 use Rebilly\Http\CurlHandler;
 use Rebilly\Middleware\LogHandler;
+use Rebilly\Middleware\OrganizationIdHeader;
 use Rebilly\Rest\File;
 use RuntimeException;
 
@@ -177,6 +178,8 @@ final class Client
      *   A callable provider should return JWT token string.
      * - baseUrl: (string) The full URI of the webservice. This is only
      *   required when connecting to a custom endpoint (e.g., a tests).
+     * - organizationId: (string) Specifies the Organization ID used to receive data from one of the user's organizations.
+     *   required when need to receive data from non-default user organization.
      * - httpHandler: (callable) An HTTP handler is a Closure that accepts a PSR-7 request object
      *   and returns a PSR-7 response object or rejected with an exception.
      * - logger: (Psr\Log\LoggerInterface) A PSR-3 logger object
@@ -209,6 +212,12 @@ final class Client
             $authentication = null;
             $apiKey = null;
             $sessionToken = null;
+        }
+
+        if (isset($organizationId)) {
+            $organizationId = new OrganizationIdHeader($organizationId);
+        } else {
+            $organizationId = null;
         }
 
         if (isset($baseUrl)) {
@@ -248,7 +257,8 @@ final class Client
             'httpHandler',
             'logger',
             'logOptions',
-            'middleware'
+            'middleware',
+            'organizationId'
         );
 
         // HTTP transport
@@ -260,6 +270,7 @@ final class Client
         // Prepare middleware stack
         $this->middleware = new Middleware\CompositeMiddleware(
             new Middleware\BaseUri($this->createUri($baseUrl . '/' . self::CURRENT_VERSION)),
+            $organizationId,
             new Middleware\UserAgent(self::SDK_VERSION),
             $authentication,
             $middleware,
