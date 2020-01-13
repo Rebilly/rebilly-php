@@ -16,11 +16,7 @@ use Rebilly\Client;
 use Rebilly\Middleware\OrganizationIdHeader;
 use Rebilly\Tests\TestCase;
 
-/**
- * Class OrganizationIdHeaderTest
- *
- */
-class OrganizationIdHeaderTest extends TestCase
+final class OrganizationIdHeaderTest extends TestCase
 {
     /**
      * @test
