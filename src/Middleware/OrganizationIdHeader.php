@@ -19,7 +19,6 @@ final class OrganizationIdHeader implements Middleware
 {
     public const HEADER = 'Organization-Id';
 
-    /** @var string */
     private $organizationId;
 
     public function __construct($organizationId)
