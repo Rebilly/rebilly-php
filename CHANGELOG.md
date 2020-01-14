@@ -1,7 +1,6 @@
 # Change Log
 All notable changes to this project will be documented in this file
 using the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
-This project adheres to [Semantic Versioning](http://semver.org/).
 
 <!--
 Types of changes
@@ -15,6 +14,10 @@ Security - in case of vulnerabilities.
 -->
 
 ## [Unreleased]
+
+_TBD_
+
+## [2.6.0] 2020-01-14
 
 ### Added
 - [x] Added support for empty redirect responses
@@ -30,12 +33,14 @@ Security - in case of vulnerabilities.
 - [x] Added new properties to `Transaction`: `requestAmount`, `requestCurrency`, `purchaseAmount`, `purchaseCurrency`, `reportAmount`, `reportCurrency`, `isProcessedOutside`
 - [x] Added field `additionalCriteria` into `GatewayAccount` object
 - [x] Added field `dueTimeShift` into `BillingAnchor` object
-- [x] Renamed field `billingAnchor` into `invoiceTimeShift` in `Subscription` object
 - [x] Added `getUpcomingInvoices` and `issueUpcomingInvoice` methods to **SubscriptionService**
 - [x] Added `recalculate` method to **InvoiceService**
 - [x] Added `EmailTemplate` as a part of `EmailNotification` to support multi-locale emails in RulesEngine
 - [x] Added `getUrlPathSegment`, `setUrlPathSegment`, `getRedirect`, `setRedirect`, `getStatus`, `setStatus`, `getIsCustomCustomerIdAllowed`, `setIsCustomCustomerIdAllowed` method to `CheckoutPage`
 - [x] Added `Organization-Id` header to Client config
+
+### Changed
+- [x] Renamed field `billingAnchor` into `invoiceTimeShift` in `Subscription` object
 
 ### Deprecated
 - [x] Deprecated `Transaction` entity method: `getPaymentCardId`
