@@ -21,14 +21,6 @@ _TBD_
 ## [2.6.0] 2020-01-14
 
 ### Added
-- [x] Added `Organization-Id` header to Client config
-
-## [2.5.0] 2019-07-19
-
-### Fixed
-- [x] Fixed CurlHandler to support HTTP/2
-
-### Added
 - [x] Added support for empty redirect responses
 - [x] Added new property to `Customer`: `websiteId`
 - [x] Added new property to `Transaction`: `requestId`
@@ -63,6 +55,11 @@ _TBD_
 - [x] Removed `ValuesList` field: `name` 
 - [x] Removed field `websites` from `GatewayAccount` object 
 - [x] Removed `EmailNotification` entity methods related to an actual `EmailTemplate`
+
+## [2.5.0] 2019-07-19
+
+### Fixed
+- [x] Fixed CurlHandler to support HTTP/2
 
 ## [2.4.0] 2019-07-01
 
