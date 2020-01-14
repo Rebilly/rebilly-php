@@ -42,13 +42,15 @@ _TBD_
 - [x] Added field `additionalCriteria` into `GatewayAccount` object
 - [x] Added `CheckInstrument`, `AlternativeInstrument`, `Customer Timeline`
 - [x] Added field `dueTimeShift` into `BillingAnchor` object
-- [x] Renamed field `billingAnchor` into `invoiceTimeShift` in `Subscription` object
 - [x] Added new properties to `Transaction`: `requestAmount`, `requestCurrency`, `purchaseAmount`, `purchaseCurrency`, `reportAmount`, `reportCurrency`, `isProcessedOutside`
 - [x] Added `getUpcomingInvoices` and `issueUpcomingInvoice` methods to **SubscriptionService**
 - [x] Added `recalculate` method to **InvoiceService**
 - [x] Added new property to `PaymentCard`: `stickyGatewayAccountId`
 - [x] Added `EmailTemplate` as a part of `EmailNotification` to support multi-locale emails in RulesEngine
 - [x] Added `getUrlPathSegment`, `setUrlPathSegment`, `getRedirect`, `setRedirect`, `getStatus`, `setStatus`, `getIsCustomCustomerIdAllowed`, `setIsCustomCustomerIdAllowed` method to `CheckoutPage`
+
+### Changed
+- [x] Renamed field `billingAnchor` into `invoiceTimeShift` in `Subscription` object
 
 ### Deprecated
 - [x] Deprecated `Transaction` entity method: `getPaymentCardId`
