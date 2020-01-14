@@ -16,44 +16,52 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
+_TBD_
+
+## [2.6.0] 2020-01-14
+
 ### Added
-- [x] Added support for empty redirect responses
-- [x] Added new property to `Customer`: `websiteId`
-- [x] Added new property to `Transaction`: `requestId`
-- [x] Added new property to `Website`: `organizationId`
-- [x] Added new property to `PaymentCard`: `stickyGatewayAccountId`
-- [x] Added `CheckInstrument`, `AlternativeInstrument`, `Customer Timeline` 
-- [x] Added `iDEAL`, `Klarna`, `Interac`, `Onlineueberweisen` to supported alternative payment instruments
-- [x] Added `description` field to `ValuesList` 
-- [x] Added `reissue` method to `InvoiceService` 
-- [x] Added `dueTime` to `InvoiceService::issue()` 
-- [x] Added new properties to `Transaction`: `requestAmount`, `requestCurrency`, `purchaseAmount`, `purchaseCurrency`, `reportAmount`, `reportCurrency`, `isProcessedOutside`
-- [x] Added field `additionalCriteria` into `GatewayAccount` object
-- [x] Added field `dueTimeShift` into `BillingAnchor` object
-- [x] Renamed field `billingAnchor` into `invoiceTimeShift` in `Subscription` object
-- [x] Added `getUpcomingInvoices` and `issueUpcomingInvoice` methods to **SubscriptionService**
-- [x] Added `recalculate` method to **InvoiceService**
-- [x] Added `EmailTemplate` as a part of `EmailNotification` to support multi-locale emails in RulesEngine
-- [x] Added `getUrlPathSegment`, `setUrlPathSegment`, `getRedirect`, `setRedirect`, `getStatus`, `setStatus`, `getIsCustomCustomerIdAllowed`, `setIsCustomCustomerIdAllowed` method to `CheckoutPage`
 - [x] Added `Organization-Id` header to Client config
-
-### Deprecated
-- [x] Deprecated `Transaction` entity method: `getPaymentCardId`
-- [x] Deprecated `PayPalAccount` entity method: `setUserName`
-- [x] Deprecated `PaymentCard` entity method: `setStatus`
-- [x] Deprecated `CheckoutPage` entity method: `getUriPath`, `setUriPath`, `getAllowCustomCustomerId`, `setAllowCustomCustomerId`, `getIsActive`, `setIsActive`,  
-
-### Removed
-- [x] Removed Payments Queue API
-- [X] Removed `Transaction` entity method: `getPayment`
-- [x] Removed `ValuesList` field: `name` 
-- [x] Removed field `websites` from `GatewayAccount` object 
-- [x] Removed `EmailNotification` entity methods related to an actual `EmailTemplate`
 
 ## [2.5.0] 2019-07-19
 
 ### Fixed
 - [x] Fixed CurlHandler to support HTTP/2
+
+### Added
+- [x] Added new property to `Customer`: `websiteId`
+- [x] Added `Customer Timeline`
+- [x] Added new property to `Transaction`: `requestId`
+- [x] Added `AlternativeInstrument`, `Customer Timeline`
+- [x] Added `description` field to `ValuesList`
+- [x] Added new property to `Website`: `organizationId`
+- [x] Added `reissue` method to `InvoiceService`
+- [x] Added `dueTime` to `InvoiceService::issue()`
+- [x] Added support for empty redirect responses
+- [x] Added `iDEAL`, `Klarna`, `Interac`, `Onlineueberweisen` to supported alternative payment instruments
+- [x] Added field `additionalCriteria` into `GatewayAccount` object
+- [x] Added `CheckInstrument`, `AlternativeInstrument`, `Customer Timeline`
+- [x] Added field `dueTimeShift` into `BillingAnchor` object
+- [x] Renamed field `billingAnchor` into `invoiceTimeShift` in `Subscription` object
+- [x] Added new properties to `Transaction`: `requestAmount`, `requestCurrency`, `purchaseAmount`, `purchaseCurrency`, `reportAmount`, `reportCurrency`, `isProcessedOutside`
+- [x] Added `getUpcomingInvoices` and `issueUpcomingInvoice` methods to **SubscriptionService**
+- [x] Added `recalculate` method to **InvoiceService**
+- [x] Added new property to `PaymentCard`: `stickyGatewayAccountId`
+- [x] Added `EmailTemplate` as a part of `EmailNotification` to support multi-locale emails in RulesEngine
+- [x] Added `getUrlPathSegment`, `setUrlPathSegment`, `getRedirect`, `setRedirect`, `getStatus`, `setStatus`, `getIsCustomCustomerIdAllowed`, `setIsCustomCustomerIdAllowed` method to `CheckoutPage`
+
+### Deprecated
+- [x] Deprecated `Transaction` entity method: `getPaymentCardId`
+- [x] Deprecated `PayPalAccount` entity method: `setUserName`
+- [x] Deprecated `PaymentCard` entity method: `setStatus`
+- [x] Deprecated `CheckoutPage` entity method: `getUriPath`, `setUriPath`, `getAllowCustomCustomerId`, `setAllowCustomCustomerId`, `getIsActive`, `setIsActive`,
+
+### Removed
+- [x] Removed Payments Queue API
+- [x] Removed `Transaction` entity method: `getPayment`
+- [x] Removed `ValuesList` field: `name`
+- [x] Removed field `websites` from `GatewayAccount` object
+- [x] Removed `EmailNotification` entity methods related to an actual `EmailTemplate`
 
 ## [2.4.0] 2019-07-01
 
