@@ -62,7 +62,7 @@ _TBD_
 - [X] Removed `Transaction` entity method: `getPayment`
 - [x] Removed `ValuesList` field: `name` 
 - [x] Removed field `websites` from `GatewayAccount` object 
-- [x] Removed `EmailNotification` entity methods related to an actual
+- [x] Removed `EmailNotification` entity methods related to an actual `EmailTemplate`
 
 ## [2.4.0] 2019-07-01
 
