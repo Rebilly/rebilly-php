@@ -87,6 +87,14 @@ class SubscriptionChangePlan extends Resource
     }
 
     /**
+     * @param int $value
+     */
+    public function setQuantity($value)
+    {
+        $this->setAttribute('quantity', $value);
+    }
+
+    /**
      * @return string
      */
     public function getSubscriptionId()
@@ -132,5 +140,13 @@ class SubscriptionChangePlan extends Resource
     public function getEffectiveTime()
     {
         return $this->getAttribute('effectiveTime');
+    }
+
+    /**
+     * @return int
+     */
+    public function getQuantity()
+    {
+        return $this->getAttribute('quantity');
     }
 }
