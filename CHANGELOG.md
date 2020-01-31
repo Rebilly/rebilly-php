@@ -15,7 +15,8 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
-_TBD_
+### Added
+- [x] Added new property to `SubscriptionChangePlan`: `quantity`
 
 ## [2.6.0] 2020-01-14
 
