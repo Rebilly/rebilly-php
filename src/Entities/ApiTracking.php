@@ -67,11 +67,21 @@ final class ApiTracking extends Entity
     }
 
     /**
-     * @return null|TrackingUser
+     * @return TrackingUser
      */
     public function getUser()
     {
-        return $this->hasEmbeddedResource('user') ? new TrackingUser($this->getEmbeddedResource('user')) : null;
+        return $this->getAttribute('user');
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return TrackingUser
+     */
+    public function createUser(array $data)
+    {
+        return new TrackingUser($data);
     }
 
     /**
@@ -80,6 +90,30 @@ final class ApiTracking extends Entity
     public function getDuration()
     {
         return $this->getAttribute('duration');
+    }
+
+    /**
+     * @return array
+     */
+    public function getRelatedIds()
+    {
+        return $this->getAttribute('relatedIds');
+    }
+
+    /**
+     * @return array
+     */
+    public function getRequestHeaders()
+    {
+        return $this->getAttribute('requestHeaders');
+    }
+
+    /**
+     * @return array
+     */
+    public function getResponseHeaders()
+    {
+        return $this->getAttribute('responseHeaders');
     }
 
     /**
