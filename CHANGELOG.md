@@ -17,6 +17,7 @@ Security - in case of vulnerabilities.
 
 ### Added
 - [x] Added new property to `SubscriptionChangePlan`: `quantity`
+- [x] Added new properties to `ApiTracking`: `relatedIds`, `requestHeaders`, `responseHeaders`
 
 ## [2.6.0] 2020-01-14
 
