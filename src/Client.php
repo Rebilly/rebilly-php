@@ -61,7 +61,6 @@ use RuntimeException;
  * @method Services\TransactionService transactions()
  * @method Services\SubscriptionReactivationService subscriptionReactivations()
  * @method Services\WebsiteService websites()
- * @method Services\NoteService notes()
  * @method Services\OrganizationService organizations()
  * @method Services\CustomFieldService customFields()
  * @method Services\GatewayAccountService gatewayAccounts()
@@ -99,7 +98,7 @@ final class Client
 
     public const CURRENT_VERSION = 'v2.1';
 
-    public const SDK_VERSION = '2.6.0';
+    public const SDK_VERSION = '2.7.0';
 
     private static $services = [
         'authenticationOptions' => Services\AuthenticationOptionsService::class,
@@ -127,7 +126,6 @@ final class Client
         'files' => Services\FileService::class,
         'attachments' => Services\AttachmentService::class,
         'products' => Services\ProductService::class,
-        'notes' => Services\NoteService::class,
         'organizations' => Services\OrganizationService::class,
         'customFields' => Services\CustomFieldService::class,
         'gatewayAccounts' => Services\GatewayAccountService::class,

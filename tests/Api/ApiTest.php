@@ -161,7 +161,6 @@ class ApiTest extends TestCase
             [Entities\LineItem::class, null],
             [Entities\Transaction::class],
             [Entities\Website::class],
-            [Entities\Note::class],
             [Entities\Organization::class],
             [Entities\GatewayAccount::class],
             [Entities\BankAccount::class],

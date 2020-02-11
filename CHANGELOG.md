@@ -15,9 +15,16 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
+_TBD_
+
+## [2.7.0] 2020-02-11
+
 ### Added
 - [x] Added new property to `SubscriptionChangePlan`: `quantity`
 - [x] Added new properties to `ApiTracking`: `relatedIds`, `requestHeaders`, `responseHeaders`
+
+### Removed
+- [x] Removed `Note` entity, `NoteService` service
 
 ## [2.6.0] 2020-01-14
 
