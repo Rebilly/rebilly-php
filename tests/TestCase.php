@@ -420,8 +420,6 @@ abstract class TestCase extends Framework\TestCase
                 switch ($class) {
                     case Entities\Attachment::class:
                         return $faker->randomElement(Entities\Attachment::allowedTypes());
-                    case Entities\Note::class:
-                        return $faker->randomElement(Entities\Note::relatedTypes());
                     default:
                         throw new InvalidArgumentException(
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)

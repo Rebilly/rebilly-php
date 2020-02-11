@@ -1207,11 +1207,6 @@ class ServiceTest extends BaseTestCase
                 Entities\Website::class,
             ],
             [
-                'notes',
-                Services\NoteService::class,
-                Entities\Note::class,
-            ],
-            [
                 'organizations',
                 Services\OrganizationService::class,
                 Entities\Organization::class,
