@@ -268,6 +268,22 @@ final class Transaction extends Entity
     }
 
     /**
+     * @return array
+     */
+    public function getPlanIds()
+    {
+        return $this->getAttribute('planIds');
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsDisputed()
+    {
+        return $this->getAttribute('isDisputed');
+    }
+
+    /**
      * @param $value
      *
      * @return $this
