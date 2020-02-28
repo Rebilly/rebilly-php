@@ -15,7 +15,8 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
-_TBD_
+### Added
+- [x] Added new properties to `Transaction`: `planIds`, `isDisputed`
 
 ## [2.7.0] 2020-02-11
 
