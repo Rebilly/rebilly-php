@@ -190,7 +190,7 @@ final class PaymentCard extends Entity
      */
     public function getFingerprint()
     {
-        return $this->getAttribute('panFingerprint');
+        return $this->getAttribute('fingerprint');
     }
 
     /**
