@@ -16,7 +16,11 @@ Security - in case of vulnerabilities.
 ## [Unreleased]
 
 ### Added
-- [x] Added new properties to `Transaction`: `planIds`, `isDisputed`
+- [x] Added new properties to `Transaction`: `planIds`, `isDisputed`, `retriedTransactionId`
+- [x] Added new property to `PaymentCard`: `fingerprint`
+
+### Removed
+- [x] Removed `PaymentCard` property: `panFingerprint` 
 
 ## [2.7.0] 2020-02-11
 

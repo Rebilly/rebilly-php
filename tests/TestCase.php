@@ -167,7 +167,6 @@ abstract class TestCase extends Framework\TestCase
             case 'token':
             case 'fingerprint':
             case 'secretKey':
-            case 'panFingerprint':
                 return $faker->md5;
             case 'name':
             case 'bankName':
