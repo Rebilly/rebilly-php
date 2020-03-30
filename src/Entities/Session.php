@@ -180,6 +180,7 @@ final class Session extends Entity
             ResourceType::TYPE_TRANSACTIONS,
             ResourceType::TYPE_TOKENS,
             ResourceType::TYPE_WEBSITES,
+            ResourceType::TYPE_KYC,
         ];
     }
 

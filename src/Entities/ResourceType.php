@@ -73,4 +73,6 @@ interface ResourceType
     public const TYPE_SUBSCRIPTION = 'subscription';
 
     public const TYPE_TRANSACTION = 'transaction';
+
+    public const TYPE_KYC = 'kyc';
 }
