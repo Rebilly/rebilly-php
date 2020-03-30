@@ -16,6 +16,7 @@ Security - in case of vulnerabilities.
 ## [Unreleased]
 
 ### Added
+- [x] Added new AML API
 - [x] Added new properties to `Transaction`: `planIds`, `isDisputed`, `retriedTransactionId`
 - [x] Added new property to `PaymentCard`: `fingerprint`
 

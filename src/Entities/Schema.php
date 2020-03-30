@@ -354,6 +354,9 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'customers/{customerId}/timeline/{messageId}' => function (array $content) {
                 return new CustomerTimelineMessage($content);
             },
+            'aml' => function (array $content) {
+                return new Collection(new AmlEntry(), $content);
+            },
         ];
     }
 
