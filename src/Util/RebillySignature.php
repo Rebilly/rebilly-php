@@ -67,9 +67,13 @@ final class RebillySignature
      */
     public static function generateNonce($length, $strong = true)
     {
+        if ($length <= 0 || !$strong) {
+            throw new RuntimeException('Failed to generate random string');
+        }
+
         $bytes = openssl_random_pseudo_bytes($length, $strong);
 
-        if ($bytes === false || !$strong) {
+        if ($bytes === false) {
             throw new RuntimeException('Failed to generate random string');
         }
 
