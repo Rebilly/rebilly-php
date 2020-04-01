@@ -23,7 +23,7 @@ final class AmlService extends Service
      *
      * @return AmlEntry[]|Collection
      */
-    public function search(string $firstName, string $lastName): Collection
+    public function search($firstName, $lastName)
     {
         return $this->client()->get('aml', compact('firstName', 'lastName'));
     }

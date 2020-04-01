@@ -17,82 +17,130 @@ use Rebilly\Rest\Entity;
 
 class AmlEntry extends Entity
 {
-    public function getFirstName(): string
+    /**
+     * @return string
+     */
+    public function getFirstName()
     {
         return $this->getAttribute('firstName');
     }
 
-    public function getLastName(): string
+    /**
+     * @return string
+     */
+    public function getLastName()
     {
         return $this->getAttribute('lastName');
     }
 
-    public function getSource(): string
+    /**
+     * @return string
+     */
+    public function getSource()
     {
         return $this->getAttribute('source');
     }
 
-    public function getSourceType(): string
+    /**
+     * @return string
+     */
+    public function getSourceType()
     {
         return $this->getAttribute('sourceType');
     }
 
-    public function getGender(): ?string
+    /**
+     * @return null|string
+     */
+    public function getGender()
     {
         return $this->getAttribute('gender');
     }
 
-    public function getType(): ?string
+    /**
+     * @return null|string
+     */
+    public function getType()
     {
         return $this->getAttribute('type');
     }
 
-    public function getRegime(): ?string
+    /**
+     * @return null|string
+     */
+    public function getRegime()
     {
         return $this->getAttribute('regime');
     }
 
-    public function getAuthenticity(): ?string
+    /**
+     * @return null|string
+     */
+    public function getAuthenticity()
     {
         return $this->getAttribute('authenticity');
     }
 
-    public function getNationality(): ?string
+    /**
+     * @return null|string
+     */
+    public function getNationality()
     {
         return $this->getAttribute('nationality');
     }
 
-    public function getComments(): ?string
+    /**
+     * @return null|string
+     */
+    public function getComments()
     {
         return $this->getAttribute('comments');
     }
 
+    /**
+     * @return array
+     */
     public function getTitle(): array
     {
         return $this->getAttribute('title');
     }
 
-    public function getLegalBasis(): array
+    /**
+     * @return array
+     */
+    public function getLegalBasis()
     {
         return $this->getAttribute('legalBasis');
     }
 
-    public function getAddress(): array
+    /**
+     * @return array
+     */
+    public function getAddress()
     {
         return $this->getAttribute('address');
     }
 
-    public function getDob(): array
+    /**
+     * @return array
+     */
+    public function getDob()
     {
         return $this->getAttribute('dob');
     }
 
-    public function getAliases(): array
+    /**
+     * @return array
+     */
+    public function getAliases()
     {
         return $this->getAttribute('aliases');
     }
 
-    public function getPassport(): array
+    /**
+     * @return array
+     */
+    public function getPassport()
     {
         return $this->getAttribute('passport');
     }
