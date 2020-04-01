@@ -32,8 +32,8 @@
     "phpunit/phpunit": "^7.3",
     "php-coveralls/php-coveralls": "^2.1",
     "friendsofphp/php-cs-fixer": "^2.13",
-    "fzaninotto/faker": "~1.5",
-    "guzzlehttp/guzzle": "~6.0"
+    "guzzlehttp/guzzle": "~6.0",
+    "fzaninotto/faker": "^1.9.1"
   },
   "autoload-dev": {
     "psr-4": {
