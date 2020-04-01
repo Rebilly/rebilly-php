@@ -169,6 +169,7 @@ final class Session extends Entity
             ResourceType::TYPE_DISPUTES,
             ResourceType::TYPE_GATEWAY_ACCOUNTS,
             ResourceType::TYPE_INVOICES,
+            ResourceType::TYPE_KYC,
             ResourceType::TYPE_LEAD_SOURCES,
             ResourceType::TYPE_LAYOUTS,
             ResourceType::TYPE_ORGANIZATIONS,

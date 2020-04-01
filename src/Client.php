@@ -89,6 +89,7 @@ use RuntimeException;
  * @method Services\KycService kycDocuments()
  * @method Services\RuleService eventRules()
  * @method Services\CustomerTimelineService customerTimeline()
+ * @method Services\AmlService aml()
  */
 final class Client
 {
@@ -150,6 +151,7 @@ final class Client
         'kycDocuments' => Services\KycService::class,
         'eventRules' => Services\RuleService::class,
         'customerTimeline' => Services\CustomerTimelineService::class,
+        'aml' => Services\AmlService::class,
     ];
 
     /** @var array */
