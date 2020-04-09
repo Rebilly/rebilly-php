@@ -148,48 +148,6 @@ final class Invoice extends Entity
     }
 
     /**
-     * @deprecated The method is deprecated and will be removed in next version. Please use getBillingAddress.
-     *
-     * @return string
-     */
-    public function getBillingContactId()
-    {
-        return $this->getAttribute('billingContactId');
-    }
-
-    /**
-     * @deprecated The method is deprecated and will be removed in next version. Please use setBillingAddress.
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setBillingContactId($value)
-    {
-        return $this->setAttribute('billingContactId', $value);
-    }
-
-    /**
-     * @deprecated The method is deprecated and will be removed in next version. Please use getDeliveryAddress.
-     *
-     * @return string
-     */
-    public function getDeliveryContactId()
-    {
-        return $this->getAttribute('deliveryContactId');
-    }
-
-    /**
-     * @deprecated The method is deprecated and will be removed in next version. Please use setDeliveryAddress.
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setDeliveryContactId($value)
-    {
-        return $this->setAttribute('deliveryContactId', $value);
-    }
-
-    /**
      * @return null|LeadSource
      */
     public function getLeadSource()

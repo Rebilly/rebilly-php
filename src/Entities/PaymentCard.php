@@ -147,27 +147,6 @@ final class PaymentCard extends Entity
     }
 
     /**
-     * @deprecated The method is deprecated and will be removed in next version. Please use getBillingAddress.
-     *
-     * @return string
-     */
-    public function getBillingContactId()
-    {
-        return $this->getAttribute('billingContactId');
-    }
-
-    /**
-     * @deprecated The method is deprecated and will be removed in next version. Please use setBillingAddress.
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setBillingContactId($value)
-    {
-        return $this->setAttribute('billingContactId', $value);
-    }
-
-    /**
      * @return string
      */
     public function getCreatedTime()
