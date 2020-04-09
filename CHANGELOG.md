@@ -21,7 +21,8 @@ Security - in case of vulnerabilities.
 - [x] Added new property to `PaymentCard`: `fingerprint`
 
 ### Removed
-- [x] Removed `PaymentCard` property: `panFingerprint` 
+- [x] Removed deprecated `PaymentCard` properties: `panFingerprint`, `billingContactId`
+- [x] Removed deprecated `Invoice` properties: `billingContactId`, `deliveryContactId`
 
 ## [2.7.0] 2020-02-11
 
