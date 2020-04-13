@@ -46,17 +46,6 @@ final class PayPalAccount extends Entity
     }
 
     /**
-     * @deprecated The method is deprecated and will be removed in next version.
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setUserName($value)
-    {
-        return $this->setAttribute('username', $value);
-    }
-
-    /**
      * @return array
      */
     public function getCustomFields()
@@ -91,11 +80,21 @@ final class PayPalAccount extends Entity
     }
 
     /**
+     * @deprecated The method is deprecated and will be removed in next version. Please use getApprovalUrl.
+     *
      * @return string
      */
     public function getApprovalLink()
     {
-        return $this->getLink('approval_url');
+        return $this->getApprovalUrl();
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getApprovalUrl()
+    {
+        return $this->getLink('approvalUrl');
     }
 
     /**

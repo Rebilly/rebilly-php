@@ -19,13 +19,17 @@ Security - in case of vulnerabilities.
 - [x] Added new AML API
 - [x] Added new properties to `Transaction`: `planIds`, `isDisputed`, `retriedTransactionId`
 - [x] Added new property to `PaymentCard`: `fingerprint`
+- [x] Added new method to `PayPalAccount`: `getApprovalUrl`
+
+### Deprecated
+- [x] Deprecated `PayPalAccount` method: `getApprovalLink`
 
 ### Removed
 - [x] Removed deprecated `PaymentCard` properties: `panFingerprint`, `billingContactId`
 - [x] Removed deprecated `BankAccount` property: `contactId`
 - [x] Removed deprecated `PayPalAccount` property: `contactId`
 - [x] Removed deprecated `BankAccount` method: `getContact`
-- [x] Removed deprecated `PayPalAccount` method: `getContact`
+- [x] Removed deprecated `PayPalAccount` methods: `getContact`, `setUserName`
 - [x] Removed deprecated `Invoice` properties: `billingContactId`, `deliveryContactId`
 
 ## [2.7.0] 2020-02-11
