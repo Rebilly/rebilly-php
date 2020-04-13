@@ -27,6 +27,7 @@ Security - in case of vulnerabilities.
 - [x] Removed deprecated `BankAccount` method: `getContact`
 - [x] Removed deprecated `PayPalAccount` method: `getContact`
 - [x] Removed deprecated `Invoice` properties: `billingContactId`, `deliveryContactId`
+- [x] Removed `SchedulePaymentService` service and `ScheduledPayment` entity 
 
 ## [2.7.0] 2020-02-11
 

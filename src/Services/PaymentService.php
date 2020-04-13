@@ -14,7 +14,6 @@ namespace Rebilly\Services;
 use ArrayObject;
 use JsonSerializable;
 use Rebilly\Entities;
-use Rebilly\Http\Exception\GoneException;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Paginator;
@@ -73,7 +72,7 @@ final class PaymentService extends Service
      *
      * @throws UnprocessableEntityException The input data does not valid
      *
-     * @return Entities\Payment|Entities\ScheduledPayment
+     * @return Entities\Payment
      */
     public function create($payment, $paymentId = null)
     {

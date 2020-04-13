@@ -174,12 +174,6 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'transactions/{transactionId}' => function (array $content) {
                 return new Transaction($content);
             },
-            'queue/payments' => function (array $content) {
-                return new Collection(new ScheduledPayment(), $content);
-            },
-            'queue/payments/{paymentId}' => function (array $content) {
-                return new ScheduledPayment($content);
-            },
             'authentication-options' => function (array $content) {
                 return new AuthenticationOptions($content);
             },
