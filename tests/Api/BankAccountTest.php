@@ -44,8 +44,7 @@ class BankAccountTest extends TestCase
 
         $form = new BankAccount();
         $form->setCustomerId('customerId');
-        $form->setContactId('contactId');
-        $form->setName('Bank name');
+        $form->setBankName('Bank name');
         $form->setAccountType('checking');
         $form->setRoutingNumber('12345');
         $form->setAccountNumber('12345');
@@ -54,6 +53,5 @@ class BankAccountTest extends TestCase
 
         $this->assertInstanceOf(BankAccount::class, $bankAccount);
         $this->assertSame($form->getCustomerId(), $bankAccount->getCustomerId());
-        $this->assertSame($form->getContactId(), $bankAccount->getContactId());
     }
 }

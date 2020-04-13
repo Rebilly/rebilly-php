@@ -38,27 +38,6 @@ final class PayPalAccount extends Entity
     }
 
     /**
-     * @deprecated The method is deprecated and will be removed in next version. Please use getBillingAddress.
-     *
-     * @return string
-     */
-    public function getContactId()
-    {
-        return $this->getAttribute('contactId');
-    }
-
-    /**
-     * @deprecated The method is deprecated and will be removed in next version. Please use setBillingAddress.
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setContactId($value)
-    {
-        return $this->setAttribute('contactId', $value);
-    }
-
-    /**
      * @return string
      */
     public function getUserName()
@@ -125,16 +104,6 @@ final class PayPalAccount extends Entity
     public function getCustomer()
     {
         return $this->hasEmbeddedResource('customer') ? new Customer($this->getEmbeddedResource('customer')) : null;
-    }
-
-    /**
-     * @deprecated The method is deprecated and will be removed in next version. Please use getBillingAddress.
-     *
-     * @return null|Contact
-     */
-    public function getContact()
-    {
-        return $this->hasEmbeddedResource('contact') ? new Contact($this->getEmbeddedResource('contact')) : null;
     }
 
     /**

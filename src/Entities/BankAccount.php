@@ -38,27 +38,6 @@ final class BankAccount extends Entity
     }
 
     /**
-     * @deprecated The method is deprecated and will be removed in next version. Please use getAddress.
-     *
-     * @return string
-     */
-    public function getContactId()
-    {
-        return $this->getAttribute('contactId');
-    }
-
-    /**
-     * @deprecated The method is deprecated and will be removed in next version. Please use setAddress.
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setContactId($value)
-    {
-        return $this->setAttribute('contactId', $value);
-    }
-
-    /**
      * @return Address
      */
     public function getAddress()
@@ -251,18 +230,6 @@ final class BankAccount extends Entity
     {
         if ($this->hasEmbeddedResource('customer')) {
             return new Customer($this->getEmbeddedResource('customer'));
-        }
-
-        return null;
-    }
-
-    /**
-     * @return null|Contact
-     */
-    public function getContact()
-    {
-        if ($this->hasEmbeddedResource('contact')) {
-            return new Contact($this->getEmbeddedResource('contact'));
         }
 
         return null;
