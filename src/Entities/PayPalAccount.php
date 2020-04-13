@@ -46,17 +46,6 @@ final class PayPalAccount extends Entity
     }
 
     /**
-     * @deprecated The method is deprecated and will be removed in next version.
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setUserName($value)
-    {
-        return $this->setAttribute('username', $value);
-    }
-
-    /**
      * @return array
      */
     public function getCustomFields()

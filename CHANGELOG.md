@@ -29,7 +29,7 @@ Security - in case of vulnerabilities.
 - [x] Removed deprecated `BankAccount` property: `contactId`
 - [x] Removed deprecated `PayPalAccount` property: `contactId`
 - [x] Removed deprecated `BankAccount` method: `getContact`
-- [x] Removed deprecated `PayPalAccount` method: `getContact`
+- [x] Removed deprecated `PayPalAccount` methods: `getContact`, `setUserName`
 - [x] Removed deprecated `Invoice` properties: `billingContactId`, `deliveryContactId`
 
 ## [2.7.0] 2020-02-11
