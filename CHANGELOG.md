@@ -19,6 +19,10 @@ Security - in case of vulnerabilities.
 - [x] Added new AML API
 - [x] Added new properties to `Transaction`: `planIds`, `isDisputed`, `retriedTransactionId`
 - [x] Added new property to `PaymentCard`: `fingerprint`
+- [x] Added new method to `PayPalAccount`: `getApprovalUrl`
+
+### Deprecated
+- [x] Deprecated `PayPalAccount` entity method: `getApprovalLink`
 
 ### Removed
 - [x] Removed deprecated `PaymentCard` properties: `panFingerprint`, `billingContactId`
