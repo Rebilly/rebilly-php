@@ -22,7 +22,7 @@ Security - in case of vulnerabilities.
 - [x] Added new method to `PayPalAccount`: `getApprovalUrl`
 
 ### Deprecated
-- [x] Deprecated `PayPalAccount` entity method: `getApprovalLink`
+- [x] Deprecated `PayPalAccount` method: `getApprovalLink`
 
 ### Removed
 - [x] Removed deprecated `PaymentCard` properties: `panFingerprint`, `billingContactId`
