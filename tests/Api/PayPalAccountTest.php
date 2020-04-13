@@ -45,13 +45,11 @@ class PayPalAccountTest extends TestCase
 
         $form = new PayPalAccount();
         $form->setCustomerId('customerId');
-        $form->setContactId('contactId');
         $form->setUserName('paypal123');
 
         $payPalAccount = $client->bankAccounts()->create($form);
 
         $this->assertInstanceOf(PayPalAccount::class, $payPalAccount);
         $this->assertSame($form->getCustomerId(), $payPalAccount->getCustomerId());
-        $this->assertSame($form->getContactId(), $payPalAccount->getContactId());
     }
 }

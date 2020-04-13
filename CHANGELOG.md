@@ -22,6 +22,10 @@ Security - in case of vulnerabilities.
 
 ### Removed
 - [x] Removed deprecated `PaymentCard` properties: `panFingerprint`, `billingContactId`
+- [x] Removed deprecated `BankAccount` property: `contactId`
+- [x] Removed deprecated `PayPalAccount` property: `contactId`
+- [x] Removed deprecated `BankAccount` method: `getContact`
+- [x] Removed deprecated `PayPalAccount` method: `getContact`
 - [x] Removed deprecated `Invoice` properties: `billingContactId`, `deliveryContactId`
 
 ## [2.7.0] 2020-02-11
