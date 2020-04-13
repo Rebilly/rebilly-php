@@ -885,33 +885,6 @@ class ServiceTest extends BaseTestCase
     /**
      * @test
      */
-    public function schedulePaymentService()
-    {
-        $client = new Client(['apiKey' => 'QWERTY']);
-
-        /** @var CurlHandler|MockObject $handler */
-        $handler = $this->createMock(CurlHandler::class);
-
-        $handler
-            ->expects($this->any())
-            ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'queue/payments/dummy')
-            ));
-
-        $client = new Client([
-            'apiKey' => 'QWERTY',
-            'httpHandler' => $handler,
-        ]);
-        $service = $client->scheduledPayments();
-
-        $result = $service->cancel('dummy');
-        $this->assertInstanceOf(Entities\ScheduledPayment::class, $result);
-    }
-
-    /**
-     * @test
-     */
     public function valuesListService()
     {
         $client = new Client(['apiKey' => 'QWERTY']);
@@ -1165,11 +1138,6 @@ class ServiceTest extends BaseTestCase
                 'payments',
                 Services\PaymentService::class,
                 Entities\Payment::class,
-            ],
-            [
-                'scheduledPayments',
-                Services\SchedulePaymentService::class,
-                Entities\ScheduledPayment::class,
             ],
             [
                 'plans',

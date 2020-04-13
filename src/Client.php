@@ -69,7 +69,6 @@ use RuntimeException;
  * @method Services\ThreeDSecureService threeDSecure()
  * @method Services\ApiTrackingService apiTracking()
  * @method Services\ShippingZoneService shippingZones()
- * @method Services\SchedulePaymentService scheduledPayments()
  * @method Services\ApiKeyService apiKeys()
  * @method Services\CheckoutPageService checkoutPages()
  * @method Services\DisputeService disputes()
@@ -116,7 +115,6 @@ final class Client
         'paymentCardTokens' => Services\PaymentCardTokenService::class,
         'payments' => Services\PaymentService::class,
         'payPalAccounts' => Services\PayPalAccountService::class,
-        'scheduledPayments' => Services\SchedulePaymentService::class,
         'plans' => Services\PlanService::class,
         'resetPasswordTokens' => Services\ResetPasswordTokenService::class,
         'subscriptions' => Services\SubscriptionService::class,
