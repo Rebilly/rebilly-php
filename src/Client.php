@@ -51,7 +51,6 @@ use RuntimeException;
  * @method Services\LayoutService layouts()
  * @method Services\PaymentCardService paymentCards()
  * @method Services\PaymentCardTokenService paymentCardTokens()
- * @method Services\PaymentService payments()
  * @method Services\PayPalAccountService payPalAccounts()
  * @method Services\PlanService plans()
  * @method Services\ResetPasswordTokenService resetPasswordTokens()
@@ -111,7 +110,6 @@ final class Client
         'layouts' => Services\LayoutService::class,
         'paymentCards' => Services\PaymentCardService::class,
         'paymentCardTokens' => Services\PaymentCardTokenService::class,
-        'payments' => Services\PaymentService::class,
         'payPalAccounts' => Services\PayPalAccountService::class,
         'plans' => Services\PlanService::class,
         'resetPasswordTokens' => Services\ResetPasswordTokenService::class,

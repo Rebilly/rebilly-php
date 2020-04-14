@@ -512,7 +512,6 @@ abstract class TestCase extends Framework\TestCase
                 return $faker->numberBetween(1, 100);
             case 'paymentInstrument':
                 switch ($class) {
-                    case Entities\Payment::class:
                     case Entities\Transaction::class:
                         return new Entities\PaymentInstruments\PaymentCardInstrument([
                             'method' => Entities\PaymentMethod::METHOD_PAYMENT_CARD,
