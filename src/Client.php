@@ -44,7 +44,6 @@ use RuntimeException;
  * @method Services\AuthenticationTokenService authenticationTokens()
  * @method Services\BankAccountService bankAccounts()
  * @method Services\BlacklistService blacklists()
- * @method Services\ContactService contacts()
  * @method Services\CustomerCredentialService customerCredentials()
  * @method Services\CustomerService customers()
  * @method Services\InvoiceItemService invoiceItems()
@@ -105,7 +104,6 @@ final class Client
         'authenticationTokens' => Services\AuthenticationTokenService::class,
         'bankAccounts' => Services\BankAccountService::class,
         'blacklists' => Services\BlacklistService::class,
-        'contacts' => Services\ContactService::class,
         'customerCredentials' => Services\CustomerCredentialService::class,
         'customers' => Services\CustomerService::class,
         'invoiceItems' => Services\InvoiceItemService::class,

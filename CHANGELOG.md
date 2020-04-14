@@ -25,6 +25,7 @@ Security - in case of vulnerabilities.
 - [x] Deprecated `PayPalAccount` method: `getApprovalLink`
 
 ### Removed
+- [x] Removed Contacts API
 - [x] Removed deprecated `PaymentCard` properties: `panFingerprint`, `billingContactId`
 - [x] Removed deprecated `BankAccount` property: `contactId`
 - [x] Removed deprecated `PayPalAccount` property: `contactId`

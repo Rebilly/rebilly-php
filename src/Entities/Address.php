@@ -39,16 +39,6 @@ class Address extends Resource
     }
 
     /**
-     * @param Contact $contact
-     *
-     * @return Address
-     */
-    public static function createFromContact(Contact $contact)
-    {
-        return self::createFromData($contact->jsonSerialize());
-    }
-
-    /**
      * @return string
      */
     public function getFirstName()
