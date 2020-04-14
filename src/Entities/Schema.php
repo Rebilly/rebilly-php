@@ -159,9 +159,6 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'tokens/{tokenId}' => function (array $content) {
                 return new PaymentCardToken($content);
             },
-            'payments/{id}/lead-source' => function (array $content) {
-                return new LeadSource($content);
-            },
             'transactions' => function (array $content) {
                 return new Collection(new Transaction(), $content);
             },
