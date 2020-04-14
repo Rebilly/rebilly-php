@@ -162,7 +162,6 @@ final class Session extends Entity
             ResourceType::TYPE_AUTHENTICATION_TOKENS,
             ResourceType::TYPE_BANK_ACCOUNTS,
             ResourceType::TYPE_BLACKLISTS,
-            ResourceType::TYPE_CONTACTS,
             ResourceType::TYPE_CREDENTIALS,
             ResourceType::TYPE_CUSTOMERS,
             ResourceType::TYPE_CUSTOM_FIELDS,

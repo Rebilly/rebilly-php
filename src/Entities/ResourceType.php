@@ -26,8 +26,6 @@ interface ResourceType
 
     public const TYPE_WEBSITES = 'websites';
 
-    public const TYPE_CONTACTS = 'contacts';
-
     public const TYPE_AUTHENTICATION_OPTIONS = 'authentication-options';
 
     public const TYPE_AUTHENTICATION_TOKENS = 'authentication-tokens';
