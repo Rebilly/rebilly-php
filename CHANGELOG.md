@@ -26,6 +26,7 @@ Security - in case of vulnerabilities.
 
 ### Removed
 - [x] Removed deprecated **Payments API** 
+- [x] Removed deprecated **Contacts API**
 - [x] Removed deprecated `PaymentCard` properties: `panFingerprint`, `billingContactId`
 - [x] Removed deprecated `BankAccount` property: `contactId`
 - [x] Removed deprecated `PayPalAccount` property: `contactId`

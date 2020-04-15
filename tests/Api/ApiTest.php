@@ -137,7 +137,6 @@ class ApiTest extends TestCase
             [Entities\AuthenticationOptions::class, null],
             [Entities\AuthenticationToken::class, 'token'],
             [Entities\Blacklist::class, 'id', ['expireTime', 'expiredTime']],
-            [Entities\Contact::class],
             [Entities\Contact\Email::class],
             [Entities\Contact\PhoneNumber::class],
             [Entities\CustomerCredential::class],
