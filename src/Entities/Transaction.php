@@ -460,14 +460,6 @@ final class Transaction extends Entity
     }
 
     /**
-     * @return array
-     */
-    public function getRedirectUrls()
-    {
-        return $this->getAttribute('redirectUrls');
-    }
-
-    /**
      * @return string
      */
     public function getRedirectUrl()
