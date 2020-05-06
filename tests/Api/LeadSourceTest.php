@@ -31,6 +31,7 @@ class LeadSourceTest extends BaseTestCase
         $leadSource->setContent('content');
         $leadSource->setMedium('medium');
         $leadSource->setPath('path');
+        $leadSource->setReferrer('referrer');
         $leadSource->setSalesAgent('agent');
         $leadSource->setTerm('term');
         $leadSource->setSubAffiliate('subaffiliate');
@@ -44,6 +45,7 @@ class LeadSourceTest extends BaseTestCase
         self::assertSame('content', $leadSource->getContent());
         self::assertSame('medium', $leadSource->getMedium());
         self::assertSame('path', $leadSource->getPath());
+        self::assertSame('referrer', $leadSource->getReferrer());
         self::assertSame('agent', $leadSource->getSalesAgent());
         self::assertSame('term', $leadSource->getTerm());
         self::assertSame('subaffiliate', $leadSource->getSubAffiliate());
@@ -75,6 +77,7 @@ class LeadSourceTest extends BaseTestCase
             'content' => 'content',
             'medium' => 'medium',
             'path' => 'path',
+            'referrer' => 'referrer',
             'salesAgent' => 'agent',
             'term' => 'term',
             'subAffiliate' => 'subaffiliate',
@@ -103,6 +106,7 @@ class LeadSourceTest extends BaseTestCase
         self::assertSame('content', $leadSource->getContent());
         self::assertSame('medium', $leadSource->getMedium());
         self::assertSame('path', $leadSource->getPath());
+        self::assertSame('referrer', $leadSource->getReferrer());
         self::assertSame('agent', $leadSource->getSalesAgent());
         self::assertSame('term', $leadSource->getTerm());
         self::assertSame('subaffiliate', $leadSource->getSubAffiliate());

@@ -20,6 +20,7 @@ Security - in case of vulnerabilities.
 - [x] Added new properties to `Transaction`: `planIds`, `isDisputed`, `retriedTransactionId`
 - [x] Added new property to `PaymentCard`: `fingerprint`
 - [x] Added new method to `PayPalAccount`: `getApprovalUrl`
+- [x] Added new property to `LeadSource`: `referrer`
 
 ### Deprecated
 - [x] Deprecated `PayPalAccount` method: `getApprovalLink`

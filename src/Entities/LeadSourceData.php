@@ -248,4 +248,22 @@ class LeadSourceData extends Resource
     {
         return $this->setAttribute('currency', $value);
     }
+
+    /**
+     * @return string
+     */
+    public function getReferrer()
+    {
+        return $this->getAttribute('referrer');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setReferrer($value)
+    {
+        return $this->setAttribute('referrer', $value);
+    }
 }
