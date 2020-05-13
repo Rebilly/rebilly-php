@@ -82,6 +82,7 @@ use RuntimeException;
  * @method Services\ValuesListTrackingService listsTracking()
  * @method Services\WebhookTrackingService webhooksTracking()
  * @method Services\GatewayAccountDowntimeService gatewayDowntimes()
+ * @method Services\GatewayAccountLimitService gatewayLimits()
  * @method Services\PaymentInstrumentValidationService paymentInstrumentValidation()
  * @method Services\KycService kycDocuments()
  * @method Services\RuleService eventRules()
@@ -141,6 +142,7 @@ final class Client
         'shippingZones' => Services\ShippingZoneService::class,
         'webhooksTracking' => Services\WebhookTrackingService::class,
         'gatewayDowntimes' => Services\GatewayAccountDowntimeService::class,
+        'gatewayLimits' => Services\GatewayAccountLimitService::class,
         'paymentInstrumentValidation' => Services\PaymentInstrumentValidationService::class,
         'kycDocuments' => Services\KycService::class,
         'eventRules' => Services\RuleService::class,
