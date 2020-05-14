@@ -332,6 +332,7 @@ abstract class TestCase extends Framework\TestCase
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
                         );
                 }
+                // no break
             case 'type':
             case 'datetimeFormat':
                 switch ($class) {
@@ -572,7 +573,7 @@ abstract class TestCase extends Framework\TestCase
             case 'taxCategoryId':
                 return $faker->randomElement(Entities\Product::allowedTaxCategories());
             case 'accountingCode':
-                return (string)$faker->numberBetween(1000, 10000);
+                return (string) $faker->numberBetween(1000, 10000);
             case 'requiresShipping':
                 return $faker->randomElement([true, false]);
             case 'restrictions':

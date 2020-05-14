@@ -68,7 +68,7 @@ final class GatewayAccountTest extends TestCase
                 'value' => 'website-1',
             ],
             'reconciliationWindowEnabled' => true,
-            'reconciliationWindowTtl' => 3600
+            'reconciliationWindowTtl' => 3600,
         ];
     }
 }
