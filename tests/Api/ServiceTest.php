@@ -1025,6 +1025,44 @@ class ServiceTest extends BaseTestCase
     /**
      * @test
      */
+    public function gatewayLimitService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => function (Request $request) use ($client) {
+                $response = $client->createResponse();
+                $uri = $request->getUri();
+
+                if ($request->getMethod() === 'POST') {
+                    $response = $response->withHeader(
+                        'Location',
+                        $uri->withPath(rtrim($uri->getPath(), '/') . '/dummy')
+                    );
+                }
+
+                return $response;
+            },
+        ]);
+
+        $service = $client->gatewayLimits();
+        self::assertInstanceOf(Services\GatewayAccountLimitService::class, $service);
+
+        $set = $service->search('dummyGateway');
+        self::assertInstanceOf(Rest\Collection::class, $set);
+
+        $entity = $service->load('dummyGateway', 'daily-money');
+        self::assertInstanceOf(Entities\GatewayAccountLimit::class, $entity);
+
+        $entity = $service->update('dummyGateway', 'daily-money', []);
+        self::assertInstanceOf(Entities\GatewayAccountLimit::class, $entity);
+
+        $service->delete('dummyGateway', 'daily-money');
+    }
+
+    /**
+     * @test
+     */
     public function customerTimelineService()
     {
         $client = new Client(['apiKey' => 'QWERTY']);
