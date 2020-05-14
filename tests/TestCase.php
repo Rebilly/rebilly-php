@@ -703,6 +703,8 @@ abstract class TestCase extends Framework\TestCase
                 ];
             case 'invoiceTimeShift':
                 return new Entities\Subscriptions\InvoiceTimeShift();
+            case 'additionalFilters':
+                return 'websiteId:website-1';
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
