@@ -374,4 +374,40 @@ final class GatewayAccount extends Entity
     {
         return Condition::createFromData($data);
     }
+
+    /**
+     * @return bool
+     */
+    public function getReconciliationWindowEnabled()
+    {
+        return $this->getAttribute('reconciliationWindowEnabled');
+    }
+
+    /**
+     * @param bool $value
+     *
+     * @return $this
+     */
+    public function setReconciliationWindowEnabled($value)
+    {
+        return $this->setAttribute('reconciliationWindowEnabled', $value);
+    }
+
+    /**
+     * @return int
+     */
+    public function getReconciliationWindowTtl()
+    {
+        return $this->getAttribute('reconciliationWindowTtl');
+    }
+
+    /**
+     * @param int $value
+     *
+     * @return $this
+     */
+    public function setReconciliationWindowTtl($value)
+    {
+        return $this->setAttribute('reconciliationWindowTtl', $value);
+    }
 }
