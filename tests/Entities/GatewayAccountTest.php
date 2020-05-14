@@ -27,6 +27,8 @@ final class GatewayAccountTest extends TestCase
         $value->setGatewayName($data['gatewayName']);
         $value->setAcquirerName($data['acquirerName']);
         $value->setAdditionalCriteria($data['additionalCriteria']);
+        $value->setReconciliationWindowEnabled($data['reconciliationWindowEnabled']);
+        $value->setReconciliationWindowTtl($data['reconciliationWindowTtl']);
 
         $expectedJson = $data;
         // Unset read-only properties which we not set.
@@ -50,6 +52,8 @@ final class GatewayAccountTest extends TestCase
         self::assertSame($data['gatewayName'], $gatewayAccount->getGatewayName());
         self::assertSame($data['acquirerName'], $gatewayAccount->getAcquirerName());
         self::assertSame($data['additionalCriteria'], $gatewayAccount->getAdditionalCriteria()->jsonSerialize());
+        self::assertSame($data['reconciliationWindowEnabled'], $gatewayAccount->getReconciliationWindowEnabled());
+        self::assertSame($data['reconciliationWindowTtl'], $gatewayAccount->getReconciliationWindowTtl());
     }
 
     private static function getDefaultData(): array
@@ -63,6 +67,8 @@ final class GatewayAccountTest extends TestCase
                 'path' => '/transaction/websiteId',
                 'value' => 'website-1',
             ],
+            'reconciliationWindowEnabled' => true,
+            'reconciliationWindowTtl' => 3600
         ];
     }
 }

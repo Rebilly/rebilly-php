@@ -235,6 +235,7 @@ abstract class TestCase extends Framework\TestCase
             case 'isActive':
             case 'allowCustomCustomerId':
             case 'isCustomCustomerIdAllowed':
+            case 'reconciliationWindowEnabled':
                 return true;
             case 'archived':
             case 'starred':
@@ -299,7 +300,7 @@ abstract class TestCase extends Framework\TestCase
                     default:
                         return $faker->$attribute;
                 }
-                // no break
+            // no break
             case 'phoneNumbers':
                 return [
                     new Entities\Contact\PhoneNumber([
@@ -355,7 +356,7 @@ abstract class TestCase extends Framework\TestCase
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
                         );
                 }
-                // no break
+            // no break
             case 'value':
                 switch ($class) {
                     case Entities\Contact\Email::class:
@@ -367,7 +368,7 @@ abstract class TestCase extends Framework\TestCase
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
                         );
                 }
-                // no break
+            // no break
             case 'policy':
                 switch ($class) {
                     case Entities\SubscriptionCancel::class:
@@ -377,7 +378,7 @@ abstract class TestCase extends Framework\TestCase
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
                         );
                 }
-                // no break
+            // no break
             case 'items':
                 switch ($class) {
                     case Entities\Layout::class:
@@ -405,7 +406,7 @@ abstract class TestCase extends Framework\TestCase
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
                         );
                 }
-                // no break
+            // no break
             case 'passwordPattern':
                 return '/\w\d{6,}/';
             case 'currency':
@@ -422,7 +423,7 @@ abstract class TestCase extends Framework\TestCase
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
                         );
                 }
-                // no break
+            // no break
             case 'label':
                 switch ($class) {
                     case Entities\Contact\Email::class:
@@ -433,7 +434,7 @@ abstract class TestCase extends Framework\TestCase
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
                         );
                 }
-                // no break
+            // no break
             case 'primary':
                 return $faker->boolean();
             case 'primaryAddress':
@@ -476,7 +477,7 @@ abstract class TestCase extends Framework\TestCase
                     default:
                         return new Entities\PaymentMethods\PaymentCardMethod(); // TODO
                 }
-                // no break
+            // no break
             case 'customFields':
             case 'gatewayConfig':
             case 'additionalSchema':
@@ -519,7 +520,7 @@ abstract class TestCase extends Framework\TestCase
                     default:
                         return new Entities\PaymentInstruments\PaymentCardPaymentInstrument();
                 }
-                // no break
+            // no break
             case 'defaultPaymentInstrument':
                 return [
                     'method' => Entities\PaymentMethod::METHOD_PAYMENT_CARD,
@@ -541,7 +542,7 @@ abstract class TestCase extends Framework\TestCase
                     default:
                         return new Entities\PaymentRetryInstruction();
                 }
-                // no break
+            // no break
             case 'reasonCode':
                 return '1000';
             case 'status':
@@ -559,7 +560,7 @@ abstract class TestCase extends Framework\TestCase
                     default:
                         return $faker->randomElement(Entities\Dispute::allowedStatuses());
                 }
-                // no break
+            // no break
             case 'paymentCardIds':
                 return [$faker->uuid];
             case 'discount':
@@ -571,7 +572,7 @@ abstract class TestCase extends Framework\TestCase
             case 'taxCategoryId':
                 return $faker->randomElement(Entities\Product::allowedTaxCategories());
             case 'accountingCode':
-                return (string) $faker->numberBetween(1000, 10000);
+                return (string)$faker->numberBetween(1000, 10000);
             case 'requiresShipping':
                 return $faker->randomElement([true, false]);
             case 'restrictions':
@@ -681,7 +682,7 @@ abstract class TestCase extends Framework\TestCase
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
                         );
                 }
-                // no break
+            // no break
             case 'setup':
                 return new Entities\Subscriptions\PlanSetup(['price' => 1.0]);
             case 'file':
@@ -703,6 +704,8 @@ abstract class TestCase extends Framework\TestCase
                 ];
             case 'invoiceTimeShift':
                 return new Entities\Subscriptions\InvoiceTimeShift();
+            case 'reconciliationWindowTtl':
+                return $this->faker->numberBetween(30, 36000);
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
