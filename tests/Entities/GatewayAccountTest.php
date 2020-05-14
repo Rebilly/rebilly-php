@@ -27,6 +27,7 @@ final class GatewayAccountTest extends TestCase
         $value->setGatewayName($data['gatewayName']);
         $value->setAcquirerName($data['acquirerName']);
         $value->setAdditionalCriteria($data['additionalCriteria']);
+        $value->setAdditionalFilters($data['additionalFilters']);
 
         $expectedJson = $data;
         // Unset read-only properties which we not set.
@@ -50,6 +51,7 @@ final class GatewayAccountTest extends TestCase
         self::assertSame($data['gatewayName'], $gatewayAccount->getGatewayName());
         self::assertSame($data['acquirerName'], $gatewayAccount->getAcquirerName());
         self::assertSame($data['additionalCriteria'], $gatewayAccount->getAdditionalCriteria()->jsonSerialize());
+        self::assertSame($data['additionalFilters'], $gatewayAccount->getAdditionalFilters());
     }
 
     private static function getDefaultData(): array
@@ -63,6 +65,7 @@ final class GatewayAccountTest extends TestCase
                 'path' => '/transaction/websiteId',
                 'value' => 'website-1',
             ],
+            'additionalFilters' => 'websiteId:website-1',
         ];
     }
 }
