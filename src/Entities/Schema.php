@@ -300,6 +300,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'gateway-accounts/{gatewayAccountId}/downtime-schedules/{downtimeId}' => function (array $content) {
                 return new GatewayAccountDowntime($content);
             },
+            'gateway-accounts/{gatewayAccountId}/limits' => function (array $content) {
+                return new Collection(new GatewayAccountLimit(), $content);
+            },
+            'gateway-accounts/{gatewayAccountId}/limits/{limitId}' => function (array $content) {
+                return new GatewayAccountLimit($content);
+            },
             'payment-instrument-validation' => function (array $content) {
                 return new Collection(new PaymentCardValidation(), $content);
             },

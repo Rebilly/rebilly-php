@@ -235,6 +235,7 @@ abstract class TestCase extends Framework\TestCase
             case 'isActive':
             case 'allowCustomCustomerId':
             case 'isCustomCustomerIdAllowed':
+            case 'reconciliationWindowEnabled':
                 return true;
             case 'archived':
             case 'starred':
@@ -705,6 +706,8 @@ abstract class TestCase extends Framework\TestCase
                 return new Entities\Subscriptions\InvoiceTimeShift();
             case 'additionalFilters':
                 return 'websiteId:website-1';
+            case 'reconciliationWindowTtl':
+                return $this->faker->numberBetween(30, 36000);
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
