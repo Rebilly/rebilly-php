@@ -102,6 +102,24 @@ final class BankAccount extends Entity
     }
 
     /**
+     * @return array
+     */
+    public function getBrowserData()
+    {
+        return $this->getAttribute('browserData');
+    }
+
+    /**
+     * @param array $value
+     *
+     * @return $this
+     */
+    public function setBrowserData($value)
+    {
+        return $this->setAttribute('browserData', $value);
+    }
+
+    /**
      * @return string
      */
     public function getRoutingNumber()
