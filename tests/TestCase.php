@@ -481,6 +481,7 @@ abstract class TestCase extends Framework\TestCase
             case 'customFields':
             case 'gatewayConfig':
             case 'additionalSchema':
+            case 'browserData':
                 return [];
             case 'acceptedCurrencies':
                 return ['USD'];
