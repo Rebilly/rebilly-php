@@ -423,9 +423,9 @@ final class GatewayAccount extends Entity
     /**
      * @param DigitalWallets $digitalWallets
      */
-    public function setDigitalWallets(DigitalWallets $digitalWallets): self
+    public function setDigitalWallets(?DigitalWallets $digitalWallets): self
     {
-        return $this->setAttribute('digitalWallets', $digitalWallets);
+        return $this->setAttribute('digitalWallets', $digitalWallets ?? DigitalWallets::createFromData());
     }
 
     /**
