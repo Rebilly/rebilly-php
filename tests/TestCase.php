@@ -707,7 +707,7 @@ abstract class TestCase extends Framework\TestCase
             case 'reconciliationWindowTtl':
                 return $this->faker->numberBetween(30, 36000);
             case 'digitalWallets':
-                return [
+                return Entities\DigitalWallets\DigitalWallets::createFromData([
                     'applePay' => [
                         'isEnabled' => true,
                     ],
@@ -716,7 +716,7 @@ abstract class TestCase extends Framework\TestCase
                         'merchantName' => 'test-merchant',
                         'merchantOrigin' => 'www.example.com',
                     ],
-                ];
+                ]);
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
