@@ -421,7 +421,9 @@ final class GatewayAccount extends Entity
     }
 
     /**
-     * @param DigitalWallets $digitalWallets
+     * @param DigitalWallets|null $digitalWallets
+     *
+     * @return $this
      */
     public function setDigitalWallets(?DigitalWallets $digitalWallets): self
     {
