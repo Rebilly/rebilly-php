@@ -255,6 +255,7 @@ abstract class TestCase extends Framework\TestCase
             case 'velocity':
             case 'revision':
                 return $faker->numberBetween(1, 10);
+            case 'address':
             case 'address2':
                 return $faker->address;
             case 'postalCode':
