@@ -22,7 +22,7 @@ Security - in case of vulnerabilities.
 - [x] Added new AML API
 - [x] Added new properties to `Transaction`: `planIds`, `isDisputed`, `retriedTransactionId`
 - [x] Added new properties to `PaymentCard`: `fingerprint`, `browserData`
-- [x] Added new property to `BankAccount`: `browserData`
+- [x] Added new properties to `BankAccount`: `browserData`, `billingAddress`
 - [x] Added new property to `PayPalAccount`: `browserData`
 - [x] Added new method to `PayPalAccount`: `getApprovalUrl`
 - [x] Added new property to `LeadSource`: `referrer`
@@ -34,7 +34,7 @@ Security - in case of vulnerabilities.
 - [x] Removed deprecated **Payments API** 
 - [x] Removed deprecated **Contacts API**
 - [x] Removed deprecated `PaymentCard` properties: `panFingerprint`, `billingContactId`
-- [x] Removed deprecated `BankAccount` property: `contactId`
+- [x] Removed deprecated `BankAccount` properties: `contactId`, `address`
 - [x] Removed deprecated `PayPalAccount` property: `contactId`
 - [x] Removed deprecated `BankAccount` method: `getContact`
 - [x] Removed deprecated `PayPalAccount` methods: `getContact`, `setUserName`
