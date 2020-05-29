@@ -706,6 +706,15 @@ abstract class TestCase extends Framework\TestCase
                 return new Entities\Subscriptions\InvoiceTimeShift();
             case 'reconciliationWindowTtl':
                 return $this->faker->numberBetween(30, 36000);
+            case 'browserData':
+                return Entities\BrowserData::createFromData([
+                    'colorDepth' => $faker->randomElement([1, 4, 8, 15, 16, 24, 32, 48]),
+                    'javaEnabled' => $faker->boolean(),
+                    'language' => $faker->lexify('??'),
+                    'screenHeight' => $this->faker->numberBetween(0, 999999),
+                    'screenWidth' => $this->faker->numberBetween(0, 999999),
+                    'timeZoneOffset' => $this->faker->numberBetween(-1410, 1410),
+                ]);
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
