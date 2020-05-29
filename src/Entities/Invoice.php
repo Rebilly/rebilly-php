@@ -346,4 +346,13 @@ final class Invoice extends Entity
     {
         return RetryInstruction::createFromData($data);
     }
+
+
+    /**
+     * @return array
+     */
+    public function getTransactions()
+    {
+        return $this->getAttribute('transactions');
+    }
 }

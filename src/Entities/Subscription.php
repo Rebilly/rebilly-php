@@ -15,6 +15,7 @@ use DomainException;
 use Rebilly\Entities\Subscriptions\InvoiceTimeShift;
 use Rebilly\Entities\Subscriptions\RecurringInterval;
 use Rebilly\Entities\Subscriptions\SubscriptionTrial;
+use Rebilly\Entities\Invoice;
 use Rebilly\Rest\Entity;
 
 /**
@@ -514,6 +515,18 @@ final class Subscription extends Entity
 
         return $data
             ? new LeadSource($data)
+            : null;
+    }
+
+    /**
+     * @return null|Invoice
+     */
+    public function getRecentInvoice()
+    {
+        $data = $this->getEmbeddedResource('recentInvoice');
+
+        return $data
+            ? new Invoice($data)
             : null;
     }
 }
