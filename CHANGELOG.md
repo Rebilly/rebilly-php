@@ -24,6 +24,7 @@ Security - in case of vulnerabilities.
 - [x] Added new property to `PaymentCard`: `fingerprint`
 - [x] Added new method to `PayPalAccount`: `getApprovalUrl`
 - [x] Added new property to `LeadSource`: `referrer`
+- [x] Added new property to `GatewayAccount`: `digitalWallets`
 
 ### Deprecated
 - [x] Deprecated `PayPalAccount` method: `getApprovalLink`

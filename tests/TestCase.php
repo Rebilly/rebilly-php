@@ -706,6 +706,17 @@ abstract class TestCase extends Framework\TestCase
                 return new Entities\Subscriptions\InvoiceTimeShift();
             case 'reconciliationWindowTtl':
                 return $this->faker->numberBetween(30, 36000);
+            case 'digitalWallets':
+                return [
+                    'applePay' => [
+                        'isEnabled' => true,
+                    ],
+                    'googlePay' => [
+                        'isEnabled' => true,
+                        'merchantName' => 'test-merchant',
+                        'merchantOrigin' => 'www.example.com',
+                    ],
+                ];
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)

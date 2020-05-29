@@ -12,6 +12,7 @@
 namespace Rebilly\Entities;
 
 use DomainException;
+use Rebilly\Entities\DigitalWallets\DigitalWallets;
 use Rebilly\Entities\RulesEngine\Condition;
 use Rebilly\Rest\Entity;
 
@@ -409,5 +410,31 @@ final class GatewayAccount extends Entity
     public function setReconciliationWindowTtl($value)
     {
         return $this->setAttribute('reconciliationWindowTtl', $value);
+    }
+
+    /**
+     * @return DigitalWallets
+     */
+    public function getDigitalWallets(): DigitalWallets
+    {
+        return $this->getAttribute('digitalWallets');
+    }
+
+    /**
+     * @param DigitalWallets $digitalWallets
+     */
+    public function setDigitalWallets($digitalWallets): self
+    {
+        return $this->setAttribute('digitalWallets', $digitalWallets ?? DigitalWallets::createFromData());
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return DigitalWallets
+     */
+    public function createDigitalWallets(array $data): DigitalWallets
+    {
+        return DigitalWallets::createFromData($data);
     }
 }
