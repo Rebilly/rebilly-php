@@ -102,7 +102,7 @@ final class BankAccount extends Entity
     }
 
     /**
-     * @return array
+     * @return BrowserData
      */
     public function getBrowserData()
     {
@@ -110,13 +110,23 @@ final class BankAccount extends Entity
     }
 
     /**
-     * @param array $value
+     * @param BrowserData $value
      *
      * @return $this
      */
-    public function setBrowserData($value)
+    public function setBrowserData(BrowserData $value)
     {
         return $this->setAttribute('browserData', $value);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return BrowserData
+     */
+    public function createBrowserData(array $data)
+    {
+        return BrowserData::createFromData($data);
     }
 
     /**
