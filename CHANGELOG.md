@@ -21,7 +21,9 @@ Security - in case of vulnerabilities.
 - [x] Added `GatewayAccountLimit`
 - [x] Added new AML API
 - [x] Added new properties to `Transaction`: `planIds`, `isDisputed`, `retriedTransactionId`
-- [x] Added new property to `PaymentCard`: `fingerprint`
+- [x] Added new properties to `PaymentCard`: `fingerprint`, `browserData`
+- [x] Added new property to `BankAccount`: `browserData`
+- [x] Added new property to `PayPalAccount`: `browserData`
 - [x] Added new method to `PayPalAccount`: `getApprovalUrl`
 - [x] Added new property to `LeadSource`: `referrer`
 - [x] Added new property to `GatewayAccount`: `digitalWallets`
