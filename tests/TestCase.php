@@ -255,6 +255,7 @@ abstract class TestCase extends Framework\TestCase
             case 'velocity':
             case 'revision':
                 return $faker->numberBetween(1, 10);
+            case 'address':
             case 'address2':
                 return $faker->address;
             case 'postalCode':
@@ -268,39 +269,6 @@ abstract class TestCase extends Framework\TestCase
             case 'country':
             case 'phoneNumber':
                 return $faker->$attribute;
-            case 'address':
-                switch ($class) {
-                    case Entities\BankAccount::class:
-                    case Entities\PayPalAccount::class:
-                        return [
-                            'firstName' => $faker->firstName,
-                            'lastName' => $faker->lastName,
-                            'city' => $faker->city,
-                            'region' => $faker->word,
-                            'postalCode' => $faker->postcode,
-                            'organization' => $faker->company,
-                            'country' => $faker->countryCode,
-                            'address' => $faker->address,
-                            'address2' => $faker->streetAddress,
-                            'emails' => [
-                                new Entities\Contact\Email([
-                                    'label' => $faker->word,
-                                    'primary' => $faker->boolean(),
-                                    'value' => $faker->email,
-                                ]),
-                            ],
-                            'phoneNumbers' => [
-                                new Entities\Contact\PhoneNumber([
-                                    'label' => $faker->word,
-                                    'primary' => $faker->boolean(),
-                                    'value' => $faker->phoneNumber,
-                                ]),
-                            ],
-                        ];
-                    default:
-                        return $faker->$attribute;
-                }
-                // no break
             case 'phoneNumbers':
                 return [
                     new Entities\Contact\PhoneNumber([
