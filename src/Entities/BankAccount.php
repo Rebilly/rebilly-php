@@ -40,19 +40,9 @@ final class BankAccount extends Entity
     /**
      * @return Address
      */
-    public function getAddress()
+    public function getBillingAddress()
     {
-        return $this->getAttribute('address');
-    }
-
-    /**
-     * @param array $data
-     *
-     * @return Address
-     */
-    public function createAddress(array $data)
-    {
-        return new Address($data);
+        return $this->getAttribute('billingAddress');
     }
 
     /**
@@ -60,9 +50,19 @@ final class BankAccount extends Entity
      *
      * @return $this
      */
-    public function setAddress($value)
+    public function setBillingAddress($value)
     {
-        return $this->setAttribute('address', $value instanceof Address ? $value->jsonSerialize() : $value);
+        return $this->setAttribute('billingAddress', $value);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return Address
+     */
+    public function createBillingAddress(array $data)
+    {
+        return new Address($data);
     }
 
     /**
@@ -99,6 +99,34 @@ final class BankAccount extends Entity
     public function setCustomFields($value)
     {
         return $this->setAttribute('customFields', $value);
+    }
+
+    /**
+     * @return BrowserData
+     */
+    public function getBrowserData()
+    {
+        return $this->getAttribute('browserData');
+    }
+
+    /**
+     * @param BrowserData $value
+     *
+     * @return $this
+     */
+    public function setBrowserData(BrowserData $value)
+    {
+        return $this->setAttribute('browserData', $value);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return BrowserData
+     */
+    public function createBrowserData(array $data)
+    {
+        return BrowserData::createFromData($data);
     }
 
     /**
