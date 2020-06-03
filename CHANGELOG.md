@@ -26,9 +26,12 @@ Security - in case of vulnerabilities.
 - [x] Added new property to `PayPalAccount`: `browserData`
 - [x] Added new method to `PayPalAccount`: `getApprovalUrl`
 - [x] Added new property to `LeadSource`: `referrer`
+- [x] Added new property to `GatewayAccount`: `additionalFilters`
+- [x] Added new methods to `GatewayAccount`: `getAdditionalFilters`, `setAdditionalFilters`
 
 ### Deprecated
 - [x] Deprecated `PayPalAccount` method: `getApprovalLink`
+- [x] Deprecated `GatewayAccount` methods: `getAdditionalCriteria`, `setAdditionalCriteria`, `createAdditionalCriteria`
 
 ### Removed
 - [x] Removed deprecated **Payments API** 
@@ -80,7 +83,7 @@ Security - in case of vulnerabilities.
 - [x] Deprecated `Transaction` entity method: `getPaymentCardId`
 - [x] Deprecated `PayPalAccount` entity method: `setUserName`
 - [x] Deprecated `PaymentCard` entity method: `setStatus`
-- [x] Deprecated `CheckoutPage` entity method: `getUriPath`, `setUriPath`, `getAllowCustomCustomerId`, `setAllowCustomCustomerId`, `getIsActive`, `setIsActive`,  
+- [x] Deprecated `CheckoutPage` entity methods: `getUriPath`, `setUriPath`, `getAllowCustomCustomerId`, `setAllowCustomCustomerId`, `getIsActive`, `setIsActive`
 
 ### Removed
 - [x] Removed Payments Queue API

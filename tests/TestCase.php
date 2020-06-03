@@ -672,6 +672,8 @@ abstract class TestCase extends Framework\TestCase
                 ];
             case 'invoiceTimeShift':
                 return new Entities\Subscriptions\InvoiceTimeShift();
+            case 'additionalFilters':
+                return 'websiteId:website-1';
             case 'reconciliationWindowTtl':
                 return $this->faker->numberBetween(30, 36000);
             case 'browserData':
