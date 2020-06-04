@@ -358,12 +358,17 @@ final class GatewayAccount extends Entity
         return $this->setAttribute('method', $value);
     }
 
+    /**
+     * @deprecated use additionalFilters instead
+     */
     public function getAdditionalCriteria(): Condition
     {
         return $this->getAttribute('additionalCriteria');
     }
 
     /**
+     * @deprecated use additionalFilters instead
+     *
      * @param Condition $value
      */
     public function setAdditionalCriteria($value): self
@@ -371,9 +376,30 @@ final class GatewayAccount extends Entity
         return $this->setAttribute('additionalCriteria', $value);
     }
 
+    /**
+     * @deprecated
+     */
     public function createAdditionalCriteria(array $data): Condition
     {
         return Condition::createFromData($data);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAdditionalFilters(): ?string
+    {
+        return $this->getAttribute('additionalFilters');
+    }
+
+    /**
+     * @param string|null $additionalFilters
+     *
+     * @return $this
+     */
+    public function setAdditionalFilters(?string $additionalFilters): self
+    {
+        return $this->setAttribute('additionalFilters', $additionalFilters);
     }
 
     /**

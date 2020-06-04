@@ -22,20 +22,23 @@ Security - in case of vulnerabilities.
 - [x] Added new AML API
 - [x] Added new properties to `Transaction`: `planIds`, `isDisputed`, `retriedTransactionId`
 - [x] Added new properties to `PaymentCard`: `fingerprint`, `browserData`
-- [x] Added new property to `BankAccount`: `browserData`
+- [x] Added new properties to `BankAccount`: `browserData`, `billingAddress`
 - [x] Added new property to `PayPalAccount`: `browserData`
 - [x] Added new method to `PayPalAccount`: `getApprovalUrl`
 - [x] Added new property to `LeadSource`: `referrer`
+- [x] Added new property to `GatewayAccount`: `additionalFilters`
+- [x] Added new methods to `GatewayAccount`: `getAdditionalFilters`, `setAdditionalFilters`
 - [x] Added new property to `GatewayAccount`: `digitalWallets`
 
 ### Deprecated
 - [x] Deprecated `PayPalAccount` method: `getApprovalLink`
+- [x] Deprecated `GatewayAccount` methods: `getAdditionalCriteria`, `setAdditionalCriteria`, `createAdditionalCriteria`
 
 ### Removed
 - [x] Removed deprecated **Payments API** 
 - [x] Removed deprecated **Contacts API**
 - [x] Removed deprecated `PaymentCard` properties: `panFingerprint`, `billingContactId`
-- [x] Removed deprecated `BankAccount` property: `contactId`
+- [x] Removed deprecated `BankAccount` properties: `contactId`, `address`
 - [x] Removed deprecated `PayPalAccount` property: `contactId`
 - [x] Removed deprecated `BankAccount` method: `getContact`
 - [x] Removed deprecated `PayPalAccount` methods: `getContact`, `setUserName`
@@ -81,7 +84,7 @@ Security - in case of vulnerabilities.
 - [x] Deprecated `Transaction` entity method: `getPaymentCardId`
 - [x] Deprecated `PayPalAccount` entity method: `setUserName`
 - [x] Deprecated `PaymentCard` entity method: `setStatus`
-- [x] Deprecated `CheckoutPage` entity method: `getUriPath`, `setUriPath`, `getAllowCustomCustomerId`, `setAllowCustomCustomerId`, `getIsActive`, `setIsActive`,  
+- [x] Deprecated `CheckoutPage` entity methods: `getUriPath`, `setUriPath`, `getAllowCustomCustomerId`, `setAllowCustomCustomerId`, `getIsActive`, `setIsActive`
 
 ### Removed
 - [x] Removed Payments Queue API

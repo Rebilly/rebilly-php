@@ -27,6 +27,7 @@ final class GatewayAccountTest extends TestCase
         $value->setGatewayName($data['gatewayName']);
         $value->setAcquirerName($data['acquirerName']);
         $value->setAdditionalCriteria($data['additionalCriteria']);
+        $value->setAdditionalFilters($data['additionalFilters']);
         $value->setReconciliationWindowEnabled($data['reconciliationWindowEnabled']);
         $value->setReconciliationWindowTtl($data['reconciliationWindowTtl']);
         $value->setDigitalWallets($data['digitalWallets']);
@@ -61,6 +62,7 @@ final class GatewayAccountTest extends TestCase
         self::assertSame($data['gatewayName'], $gatewayAccount->getGatewayName());
         self::assertSame($data['acquirerName'], $gatewayAccount->getAcquirerName());
         self::assertSame($data['additionalCriteria'], $gatewayAccount->getAdditionalCriteria()->jsonSerialize());
+        self::assertSame($data['additionalFilters'], $gatewayAccount->getAdditionalFilters());
         self::assertSame($data['reconciliationWindowEnabled'], $gatewayAccount->getReconciliationWindowEnabled());
         self::assertSame($data['reconciliationWindowTtl'], $gatewayAccount->getReconciliationWindowTtl());
     }
@@ -76,6 +78,7 @@ final class GatewayAccountTest extends TestCase
                 'path' => '/transaction/websiteId',
                 'value' => 'website-1',
             ],
+            'additionalFilters' => 'websiteId:website-1',
             'reconciliationWindowEnabled' => true,
             'reconciliationWindowTtl' => 3600,
             'digitalWallets' => null,
