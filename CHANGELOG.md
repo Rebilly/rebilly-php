@@ -29,6 +29,7 @@ Security - in case of vulnerabilities.
 - [x] Added new property to `GatewayAccount`: `additionalFilters`
 - [x] Added new methods to `GatewayAccount`: `getAdditionalFilters`, `setAdditionalFilters`
 - [x] Added new property to `GatewayAccount`: `digitalWallets`
+- [x] Added new methods to `GatewayAccount`: `setDigitalWallets`, `getDigitalWallets`
 
 ### Deprecated
 - [x] Deprecated `PayPalAccount` method: `getApprovalLink`
