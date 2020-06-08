@@ -18,37 +18,37 @@ final class DigitalWallets extends Resource
     /**
      * @return ApplePay
      */
-    public function getApplePay(): ApplePay
+    public function getApplePay()
     {
         return $this->getAttribute('applePay');
     }
 
     /**
-     * @param ApplePay $applePay
+     * @param ApplePay $value
      *
      * @return DigitalWallets
      */
-    public function setApplePay(ApplePay $applePay): self
+    public function setApplePay($value)
     {
-        return $this->setAttribute('applePay', $applePay);
+        return $this->setAttribute('applePay', $value);
     }
 
     /**
      * @return GooglePay
      */
-    public function getGooglePay(): GooglePay
+    public function getGooglePay()
     {
         return $this->getAttribute('googlePay');
     }
 
     /**
-     * @param GooglePay $googlePay
+     * @param GooglePay $value
      *
      * @return DigitalWallets
      */
-    public function setGooglePay(GooglePay $googlePay): self
+    public function setGooglePay($value)
     {
-        return $this->setAttribute('googlePay', $googlePay);
+        return $this->setAttribute('googlePay', $value);
     }
 
     /**
@@ -56,7 +56,7 @@ final class DigitalWallets extends Resource
      *
      * @return ApplePay
      */
-    public function createApplePay(array $data): ApplePay
+    public function createApplePay(array $data)
     {
         return ApplePay::createFromData($data);
     }
@@ -66,7 +66,7 @@ final class DigitalWallets extends Resource
      *
      * @return GooglePay
      */
-    public function createGooglePay(array $data): GooglePay
+    public function createGooglePay(array $data)
     {
         return GooglePay::createFromData($data);
     }
@@ -76,7 +76,7 @@ final class DigitalWallets extends Resource
      *
      * @return DigitalWallets
      */
-    public static function createFromData(array $data = []): self
+    public static function createFromData(array $data = [])
     {
         $object = new self($data);
         $object->setApplePay($object->createApplePay($data));

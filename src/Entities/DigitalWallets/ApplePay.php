@@ -20,7 +20,7 @@ final class ApplePay extends Resource
      *
      * @return ApplePay
      */
-    public static function createFromData(array $data = []): self
+    public static function createFromData(array $data = [])
     {
         if (empty($data)) {
             return new self(['isEnabled' => false]);
@@ -32,18 +32,18 @@ final class ApplePay extends Resource
     /**
      * @return bool
      */
-    public function getIsEnabled(): bool
+    public function getIsEnabled()
     {
         return $this->getAttribute('isEnabled');
     }
 
     /**
-     * @param bool $isEnabled
+     * @param bool $value
      *
      * @return ApplePay
      */
-    public function setIsEnabled(bool $isEnabled): self
+    public function setIsEnabled($value)
     {
-        return $this->setAttribute('isEnabled', $isEnabled);
+        return $this->setAttribute('isEnabled', $value);
     }
 }

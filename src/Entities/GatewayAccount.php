@@ -441,7 +441,7 @@ final class GatewayAccount extends Entity
     /**
      * @return DigitalWallets
      */
-    public function getDigitalWallets(): DigitalWallets
+    public function getDigitalWallets()
     {
         return $this->getAttribute('digitalWallets');
     }
@@ -451,9 +451,9 @@ final class GatewayAccount extends Entity
      *
      * @return $this
      */
-    public function setDigitalWallets(?DigitalWallets $digitalWallets): self
+    public function setDigitalWallets($value)
     {
-        return $this->setAttribute('digitalWallets', $digitalWallets ?? DigitalWallets::createFromData());
+        return $this->setAttribute('digitalWallets', $value ?? DigitalWallets::createFromData());
     }
 
     /**
@@ -461,7 +461,7 @@ final class GatewayAccount extends Entity
      *
      * @return DigitalWallets
      */
-    public function createDigitalWallets(array $data): DigitalWallets
+    public function createDigitalWallets(array $data)
     {
         return DigitalWallets::createFromData($data);
     }

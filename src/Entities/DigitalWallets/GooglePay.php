@@ -20,7 +20,7 @@ final class GooglePay extends Resource
      *
      * @return GooglePay
      */
-    public static function createFromData(array $data = []): self
+    public static function createFromData(array $data = [])
     {
         if (empty($data)) {
             return new self(['isEnabled' => false]);
@@ -32,54 +32,54 @@ final class GooglePay extends Resource
     /**
      * @return bool
      */
-    public function getIsEnabled(): bool
+    public function getIsEnabled()
     {
         return $this->getAttribute('isEnabled');
     }
 
     /**
-     * @param bool $isEnabled
+     * @param bool $value
      *
      * @return GooglePay
      */
-    public function setIsEnabled(bool $isEnabled): self
+    public function setIsEnabled($value)
     {
-        return $this->setAttribute('isEnabled', $isEnabled);
+        return $this->setAttribute('isEnabled', $value);
     }
 
     /**
      * @return string|null
      */
-    public function getMerchantName(): ?string
+    public function getMerchantName()
     {
         return $this->getAttribute('merchantName');
     }
 
     /**
-     * @param string|null $merchantName
+     * @param string|null $value
      *
      * @return GooglePay
      */
-    public function setMerchantName(?string $merchantName): self
+    public function setMerchantName($value)
     {
-        return $this->setAttribute('merchantName', $merchantName);
+        return $this->setAttribute('merchantName', $value);
     }
 
     /**
      * @return string|null
      */
-    public function getMerchantOrigin(): ?string
+    public function getMerchantOrigin()
     {
         return $this->getAttribute('merchantOrigin');
     }
 
     /**
-     * @param string|null $merchantOrigin
+     * @param string|null $value
      *
      * @return GooglePay
      */
-    public function setMerchantOrigin(?string $merchantOrigin): self
+    public function setMerchantOrigin($value)
     {
-        return $this->setAttribute('merchantOrigin', $merchantOrigin);
+        return $this->setAttribute('merchantOrigin', $value);
     }
 }
