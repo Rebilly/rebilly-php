@@ -685,6 +685,17 @@ abstract class TestCase extends Framework\TestCase
                     'screenWidth' => $this->faker->numberBetween(0, 999999),
                     'timeZoneOffset' => $this->faker->numberBetween(-1410, 1410),
                 ]);
+            case 'digitalWallets':
+                return Entities\DigitalWallets\DigitalWallets::createFromData([
+                    'applePay' => [
+                        'isEnabled' => true,
+                    ],
+                    'googlePay' => [
+                        'isEnabled' => true,
+                        'merchantName' => 'test-merchant',
+                        'merchantOrigin' => 'www.example.com',
+                    ],
+                ]);
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)

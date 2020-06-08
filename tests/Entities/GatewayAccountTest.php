@@ -30,8 +30,17 @@ final class GatewayAccountTest extends TestCase
         $value->setAdditionalFilters($data['additionalFilters']);
         $value->setReconciliationWindowEnabled($data['reconciliationWindowEnabled']);
         $value->setReconciliationWindowTtl($data['reconciliationWindowTtl']);
+        $value->setDigitalWallets($data['digitalWallets']);
 
         $expectedJson = $data;
+        $expectedJson['digitalWallets'] = [
+            'applePay' => [
+                'isEnabled' => false,
+            ],
+            'googlePay' => [
+                'isEnabled' => false,
+            ],
+        ];
         // Unset read-only properties which we not set.
         unset(
             $expectedJson['id']
@@ -72,6 +81,7 @@ final class GatewayAccountTest extends TestCase
             'additionalFilters' => 'websiteId:website-1',
             'reconciliationWindowEnabled' => true,
             'reconciliationWindowTtl' => 3600,
+            'digitalWallets' => null,
         ];
     }
 }
