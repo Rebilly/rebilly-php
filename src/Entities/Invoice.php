@@ -160,7 +160,7 @@ final class Invoice extends Entity
     }
 
     /**
-     * @return array
+     * @return array|InvoiceItem[]
      */
     public function getItems()
     {
@@ -352,12 +352,18 @@ final class Invoice extends Entity
      */
     public function getTransactions()
     {
-        $transactions = $this->getAttribute('transactions') ?: [];
+        return $this->getAttribute('transactions');
+    }
 
-        foreach ($transactions as $i => $transaction) {
-            $transactions[$i] = new Transaction($transaction);
-        }
-
-        return $transactions;
+    /**
+     * @param array $data
+     *
+     * @return array|Transaction[]
+     */
+    public function createTransactions(array $data)
+    {
+        return array_map(function ($element) {
+            return new Transaction($element);
+        }, $data);
     }
 }
