@@ -35,7 +35,6 @@ Security - in case of vulnerabilities.
 
 ### Deprecated
 - [x] Deprecated `PayPalAccount` method: `getApprovalLink`
-- [x] Deprecated `GatewayAccount` methods: `getAdditionalCriteria`, `setAdditionalCriteria`, `createAdditionalCriteria`
 
 ### Removed
 - [x] Removed deprecated **Payments API** 
@@ -47,7 +46,8 @@ Security - in case of vulnerabilities.
 - [x] Removed deprecated `PayPalAccount` methods: `getContact`, `setUserName`
 - [x] Removed deprecated `Invoice` properties: `billingContactId`, `deliveryContactId`
 - [x] Removed deprecated `Transaction` properties: `redirectUrls`
-- [x] Removed `SchedulePaymentService` service and `ScheduledPayment` entity 
+- [x] Removed `SchedulePaymentService` service and `ScheduledPayment` entity
+- [x] Removed deprecated `GatewayAccount` methods: `getAdditionalCriteria`, `setAdditionalCriteria`, `createAdditionalCriteria`
 
 ## [2.7.0] 2020-02-11
 
