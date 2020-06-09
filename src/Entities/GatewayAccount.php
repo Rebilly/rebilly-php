@@ -359,32 +359,6 @@ final class GatewayAccount extends Entity
     }
 
     /**
-     * @deprecated use additionalFilters instead
-     */
-    public function getAdditionalCriteria(): Condition
-    {
-        return $this->getAttribute('additionalCriteria');
-    }
-
-    /**
-     * @deprecated use additionalFilters instead
-     *
-     * @param Condition $value
-     */
-    public function setAdditionalCriteria($value): self
-    {
-        return $this->setAttribute('additionalCriteria', $value);
-    }
-
-    /**
-     * @deprecated
-     */
-    public function createAdditionalCriteria(array $data): Condition
-    {
-        return Condition::createFromData($data);
-    }
-
-    /**
      * @return string|null
      */
     public function getAdditionalFilters(): ?string
