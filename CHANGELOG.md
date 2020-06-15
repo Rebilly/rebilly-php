@@ -16,10 +16,9 @@ Security - in case of vulnerabilities.
 ## [Unreleased]
 
 ### Added
+- [x] Added new **AML API**
+- [x] Added new **Gateway Account Limit API**
 - [x] Added new properties to `GatewayAccount`: `reconciliationWindowEnabled`, `reconciliationWindowTtl`
-- [x] Added Gateway Account Limit API
-- [x] Added `GatewayAccountLimit`
-- [x] Added new AML API
 - [x] Added new properties to `Transaction`: `planIds`, `isDisputed`, `retriedTransactionId`
 - [x] Added new properties to `PaymentCard`: `fingerprint`, `browserData`
 - [x] Added new properties to `BankAccount`: `browserData`, `billingAddress`
@@ -39,6 +38,7 @@ Security - in case of vulnerabilities.
 ### Removed
 - [x] Removed deprecated **Payments API** 
 - [x] Removed deprecated **Contacts API**
+- [x] Removed `SchedulePaymentService` service and `ScheduledPayment` entity 
 - [x] Removed deprecated `PaymentCard` properties: `panFingerprint`, `billingContactId`
 - [x] Removed deprecated `BankAccount` properties: `contactId`, `address`
 - [x] Removed deprecated `PayPalAccount` property: `contactId`
@@ -47,7 +47,6 @@ Security - in case of vulnerabilities.
 - [x] Removed deprecated `PaymentCard` method: `setStatus`
 - [x] Removed deprecated `BankAccount` method: `getContact`
 - [x] Removed deprecated `PayPalAccount` methods: `getContact`, `setUserName`
-- [x] Removed `SchedulePaymentService` service and `ScheduledPayment` entity 
 - [x] Removed deprecated `GatewayAccount` methods: `getAdditionalCriteria`, `setAdditionalCriteria`, `createAdditionalCriteria`
 
 ## [2.7.0] 2020-02-11
