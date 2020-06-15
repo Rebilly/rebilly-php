@@ -98,21 +98,6 @@ final class PaymentCard extends Entity
     }
 
     /**
-     * @deprecated The method is deprecated and will be removed in next version.
-     * @param $value
-     *
-     * @return $this
-     */
-    public function setStatus($value)
-    {
-        if (!in_array($value, [self::STATUS_INACTIVE, self::STATUS_ACTIVE, self::STATUS_DEACTIVATED], true)) {
-            throw new DomainException('Payment Card status is not in the list');
-        }
-
-        return $this->setAttribute('status', $value);
-    }
-
-    /**
      * @return string
      */
     public function getBrand()
