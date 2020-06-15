@@ -42,11 +42,12 @@ Security - in case of vulnerabilities.
 - [x] Removed deprecated `PaymentCard` properties: `panFingerprint`, `billingContactId`
 - [x] Removed deprecated `BankAccount` properties: `contactId`, `address`
 - [x] Removed deprecated `PayPalAccount` property: `contactId`
-- [x] Removed deprecated `BankAccount` method: `getContact`
-- [x] Removed deprecated `PayPalAccount` methods: `getContact`, `setUserName`
 - [x] Removed deprecated `Invoice` properties: `billingContactId`, `deliveryContactId`
 - [x] Removed deprecated `Transaction` properties: `redirectUrls`
-- [x] Removed `SchedulePaymentService` service and `ScheduledPayment` entity
+- [x] Removed deprecated `PaymentCard` method: `setStatus`
+- [x] Removed deprecated `BankAccount` method: `getContact`
+- [x] Removed deprecated `PayPalAccount` methods: `getContact`, `setUserName`
+- [x] Removed `SchedulePaymentService` service and `ScheduledPayment` entity 
 - [x] Removed deprecated `GatewayAccount` methods: `getAdditionalCriteria`, `setAdditionalCriteria`, `createAdditionalCriteria`
 
 ## [2.7.0] 2020-02-11
