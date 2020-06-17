@@ -38,6 +38,7 @@ Security - in case of vulnerabilities.
 ### Removed
 - [x] Removed deprecated **Payments API** 
 - [x] Removed deprecated **Contacts API**
+- [x] Removed **Payment Instrument Validation API**
 - [x] Removed `SchedulePaymentService` service and `ScheduledPayment` entity 
 - [x] Removed deprecated `PaymentCard` properties: `panFingerprint`, `billingContactId`
 - [x] Removed deprecated `BankAccount` properties: `contactId`, `address`
