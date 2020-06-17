@@ -306,12 +306,6 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'gateway-accounts/{gatewayAccountId}/limits/{limitId}' => function (array $content) {
                 return new GatewayAccountLimit($content);
             },
-            'payment-instrument-validation' => function (array $content) {
-                return new Collection(new PaymentCardValidation(), $content);
-            },
-            'payment-instrument-validation/{paymentInstrumentValidationId}' => function (array $content) {
-                return PaymentInstrumentValidation::createFromData($content);
-            },
             'subscription-cancellations' => function (array $content) {
                 return new Collection(new SubscriptionCancellation(), $content);
             },
