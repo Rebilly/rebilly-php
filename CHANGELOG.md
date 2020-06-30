@@ -34,6 +34,8 @@ Security - in case of vulnerabilities.
 
 ### Deprecated
 - [x] Deprecated `PayPalAccount` method: `getApprovalLink`
+- [x] Deprecated `Subscription` method: `cancel` (use `SubscriptionCancellation` instead)
+- [x] Deprecated `SubscriptionCancel` class.
 
 ### Removed
 - [x] Removed deprecated **Payments API** 

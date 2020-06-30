@@ -16,6 +16,8 @@ use Rebilly\Rest\Resource;
 
 /**
  * Class SubscriptionCancel.
+ *
+ * @deprecated use `SubscriptionCancellation` instead.
  */
 class SubscriptionCancel extends Resource
 {

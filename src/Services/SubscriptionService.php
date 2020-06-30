@@ -94,6 +94,8 @@ final class SubscriptionService extends Service
     }
 
     /**
+     * @deprecated Use SubscriptionCancellationService instead.
+     *
      * @param string $subscriptionId
      * @param array|JsonSerializable|SubscriptionCancel $data
      *
