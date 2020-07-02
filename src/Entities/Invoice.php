@@ -366,4 +366,40 @@ final class Invoice extends Entity
             return new Transaction($element);
         }, $data);
     }
+
+    /**
+     * @return null|string
+     */
+    public function getPoNumber()
+    {
+        return $this->getAttribute('poNumber');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setPoNumber($value)
+    {
+        return $this->setAttribute('poNumber', $value);
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getNotes()
+    {
+        return $this->getAttribute('notes');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setNotes($value)
+    {
+        return $this->setAttribute('notes', $value);
+    }
 }
