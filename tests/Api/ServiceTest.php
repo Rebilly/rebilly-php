@@ -533,6 +533,9 @@ class ServiceTest extends BaseTestCase
 
         $result = $service->cancel('dummy');
         $this->assertInstanceOf(Entities\Transaction::class, $result);
+
+        $result = $service->patch('dummy', []);
+        $this->assertInstanceOf(Entities\Transaction::class, $result);
     }
 
     /**
