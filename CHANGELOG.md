@@ -15,6 +15,10 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
+_TBD_
+
+## [2.8.0] 2020-07-02
+
 ### Added
 - [x] Added new **AML API**
 - [x] Added new **Gateway Account Limit API**
@@ -31,6 +35,7 @@ Security - in case of vulnerabilities.
 - [x] Added new methods to `GatewayAccount`: `setDigitalWallets`, `getDigitalWallets`
 - [x] Added new property to `Invoice`: `transactions`
 - [x] Added new property to `Subscription`: `recentInvoice`
+- [x] Added `patch` method to `TransactionService`
 
 ### Deprecated
 - [x] Deprecated `PayPalAccount` method: `getApprovalLink`

@@ -108,4 +108,17 @@ final class TransactionService extends Service
             'transactions'
         );
     }
+
+    /**
+     * @param string $transactionId
+     * @param array|JsonSerializable|Transaction $data
+     *
+     * @throws UnprocessableEntityException The input data does not valid
+     *
+     * @return Transaction
+     */
+    public function patch($transactionId, $data)
+    {
+        return $this->client()->patch($data, 'transactions/{transactionId}', ['transactionId' => $transactionId]);
+    }
 }
