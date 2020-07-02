@@ -83,7 +83,6 @@ use RuntimeException;
  * @method Services\WebhookTrackingService webhooksTracking()
  * @method Services\GatewayAccountDowntimeService gatewayDowntimes()
  * @method Services\GatewayAccountLimitService gatewayLimits()
- * @method Services\PaymentInstrumentValidationService paymentInstrumentValidation()
  * @method Services\KycService kycDocuments()
  * @method Services\RuleService eventRules()
  * @method Services\CustomerTimelineService customerTimeline()
@@ -143,7 +142,6 @@ final class Client
         'webhooksTracking' => Services\WebhookTrackingService::class,
         'gatewayDowntimes' => Services\GatewayAccountDowntimeService::class,
         'gatewayLimits' => Services\GatewayAccountLimitService::class,
-        'paymentInstrumentValidation' => Services\PaymentInstrumentValidationService::class,
         'kycDocuments' => Services\KycService::class,
         'eventRules' => Services\RuleService::class,
         'customerTimeline' => Services\CustomerTimelineService::class,
