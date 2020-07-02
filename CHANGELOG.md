@@ -29,7 +29,7 @@ Security - in case of vulnerabilities.
 - [x] Added new methods to `GatewayAccount`: `getAdditionalFilters`, `setAdditionalFilters`
 - [x] Added new property to `GatewayAccount`: `digitalWallets`
 - [x] Added new methods to `GatewayAccount`: `setDigitalWallets`, `getDigitalWallets`
-- [x] Added new property to `Invoice`: `transactions`
+- [x] Added new properties to `Invoice`: `transactions`, `poNumber`, `notes`
 - [x] Added new property to `Subscription`: `recentInvoice`
 
 ### Deprecated

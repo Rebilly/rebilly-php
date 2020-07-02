@@ -187,6 +187,7 @@ abstract class TestCase extends Framework\TestCase
             case 'description':
             case 'richDescription':
             case 'cancelDescription':
+            case 'notes':
                 return $faker->sentences;
             case 'pan':
                 return $faker->creditCardNumber;
@@ -540,6 +541,7 @@ abstract class TestCase extends Framework\TestCase
             case 'taxCategoryId':
                 return $faker->randomElement(Entities\Product::allowedTaxCategories());
             case 'accountingCode':
+            case 'poNumber':
                 return (string) $faker->numberBetween(1000, 10000);
             case 'requiresShipping':
                 return $faker->randomElement([true, false]);
