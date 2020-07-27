@@ -15,7 +15,8 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
-_TBD_
+### Removed
+- [x] Removed payment methods restriction in the `GatewayAccount` 
 
 ## [2.8.0] 2020-07-02
 
