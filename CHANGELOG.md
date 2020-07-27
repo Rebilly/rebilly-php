@@ -15,7 +15,8 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
-_TBD_
+### Removed
+- [x] Removed payment methods restriction in the `GatewayAccount` 
 
 ## [2.8.0] 2020-07-02
 
@@ -43,7 +44,6 @@ _TBD_
 - [x] Deprecated `SubscriptionCancel` class.
 
 ### Removed
-- [x] Removed payment methods restriction in the `GatewayAccount` 
 - [x] Removed deprecated **Payments API** 
 - [x] Removed deprecated **Contacts API**
 - [x] Removed **Payment Instrument Validation API**
