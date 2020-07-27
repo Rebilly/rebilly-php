@@ -43,6 +43,7 @@ _TBD_
 - [x] Deprecated `SubscriptionCancel` class.
 
 ### Removed
+- [x] Removed payment methods restriction in the `GatewayAccount` 
 - [x] Removed deprecated **Payments API** 
 - [x] Removed deprecated **Contacts API**
 - [x] Removed **Payment Instrument Validation API**

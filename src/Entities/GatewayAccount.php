@@ -13,7 +13,6 @@ namespace Rebilly\Entities;
 
 use DomainException;
 use Rebilly\Entities\DigitalWallets\DigitalWallets;
-use Rebilly\Entities\RulesEngine\Condition;
 use Rebilly\Rest\Entity;
 
 /**
@@ -83,22 +82,6 @@ final class GatewayAccount extends Entity
             PaymentCardScheme::SCHEME_SWITCH,
             PaymentCardScheme::SCHEME_LASER,
             PaymentCardScheme::SCHEME_CHINA_UNIONPAY,
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    public static function allowedMethods()
-    {
-        return [
-            PaymentMethod::METHOD_PAYMENT_CARD,
-            PaymentMethod::METHOD_ACH,
-            PaymentMethod::METHOD_PAYPAL,
-            PaymentMethod::METHOD_CASH,
-            PaymentMethod::METHOD_CHECK,
-            PaymentMethod::METHOD_WIRE,
-            PaymentMethod::METHOD_CHINA_UNIONPAY,
         ];
     }
 
@@ -349,12 +332,6 @@ final class GatewayAccount extends Entity
      */
     public function setMethod($value)
     {
-        $allowedMethods = self::allowedMethods();
-
-        if (!in_array($value, $allowedMethods, true)) {
-            throw new DomainException(sprintf(self::MSG_UNEXPECTED_METHOD, implode(', ', $allowedMethods)));
-        }
-
         return $this->setAttribute('method', $value);
     }
 
