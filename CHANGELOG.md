@@ -16,6 +16,7 @@ Security - in case of vulnerabilities.
 ## [Unreleased]
 
 ### Removed
+- [x] Removed payment methods restriction in the `PaymentMethodInstrument` 
 - [x] Removed payment methods restriction in the `GatewayAccount` 
 
 ## [2.8.0] 2020-07-02

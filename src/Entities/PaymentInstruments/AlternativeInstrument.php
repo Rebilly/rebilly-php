@@ -11,7 +11,7 @@
 
 namespace Rebilly\Entities\PaymentInstruments;
 
-use DomainException;
+use InvalidArgumentException;
 use Rebilly\Entities\PaymentMethodInstrument;
 
 /**
@@ -24,13 +24,7 @@ class AlternativeInstrument extends PaymentMethodInstrument
     public function __construct(array $data = [])
     {
         if (!isset($data['method'])) {
-            throw new DomainException(self::MSG_REQUIRED_METHOD);
-        }
-
-        if (!in_array($data['method'], self::$supportedAlternativeMethods, true)) {
-            throw new DomainException(
-                sprintf(self::MSG_UNSUPPORTED_METHOD, implode(',', self::$supportedAlternativeMethods))
-            );
+            throw new InvalidArgumentException(self::MSG_REQUIRED_METHOD);
         }
 
         $this->alternativeMethod = $data['method'];

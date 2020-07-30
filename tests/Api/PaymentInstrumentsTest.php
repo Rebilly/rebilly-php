@@ -11,7 +11,7 @@
 
 namespace Rebilly\Tests\Api;
 
-use DomainException;
+use InvalidArgumentException;
 use Rebilly\Entities\PaymentCardMigrationsResponse;
 use Rebilly\Entities\PaymentInstruments\AchInstrument;
 use Rebilly\Entities\PaymentInstruments\AlternativeInstrument;
@@ -116,7 +116,7 @@ class PaymentInstrumentsTest extends BaseTestCase
      */
     public function methodIsRequiredWhenCreatingAlternativeInstrument()
     {
-        $this->expectException(DomainException::class);
+        $this->expectException(InvalidArgumentException::class);
 
         new AlternativeInstrument();
     }
@@ -145,19 +145,8 @@ class PaymentInstrumentsTest extends BaseTestCase
      */
     public function methodIsRequired()
     {
-        $this->expectException(DomainException::class);
+        $this->expectException(InvalidArgumentException::class);
         PaymentMethodInstrument::createFromData([]);
-    }
-
-    /**
-     * @test
-     */
-    public function paymentInstructionsMethodMustBeCorrect()
-    {
-        $this->expectException(DomainException::class);
-        PaymentMethodInstrument::createFromData([
-            'method' => 'wrong',
-        ]);
     }
 
     /**
