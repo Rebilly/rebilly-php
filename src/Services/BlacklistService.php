@@ -22,7 +22,7 @@ use Rebilly\Rest\Service;
 
 /**
  * Class BlacklistService
- *
+ * @deprecated please use BlocklistService instead
  */
 final class BlacklistService extends Service
 {

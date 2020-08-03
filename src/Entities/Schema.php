@@ -45,6 +45,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'blacklists/{blacklistId}' => function (array $content) {
                 return new Blacklist($content);
             },
+            'blocklists' => function (array $content) {
+                return new Collection(new Blocklist(), $content);
+            },
+            'blocklists/{blocklistId}' => function (array $content) {
+                return new Blocklist($content);
+            },
             'websites' => function (array $content) {
                 return new Collection(new Website(), $content);
             },

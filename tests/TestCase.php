@@ -308,6 +308,8 @@ abstract class TestCase extends Framework\TestCase
                         return $faker->randomElement(Entities\LineItem::types());
                     case Entities\Blacklist::class:
                         return $faker->randomElement(Entities\Blacklist::types());
+                    case Entities\Blocklist::class:
+                        return $faker->randomElement(Entities\Blocklist::types());
                     case Entities\InvoiceItem::class:
                         return $faker->randomElement(Entities\InvoiceItem::types());
                     case Entities\CustomField::class:
