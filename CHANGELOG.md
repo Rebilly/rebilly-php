@@ -13,6 +13,14 @@ Fixed - for any bug fixes.
 Security - in case of vulnerabilities.
 -->
 
+## [2.9.0] 2020-08-03
+
+### Added
+- [x] Added Blocklist
+
+### Deprecated
+- [x] Deprecated `Blacklist`
+
 ## [Unreleased]
 
 ### Removed
