@@ -16,7 +16,7 @@ Security - in case of vulnerabilities.
 ## [Unreleased]
 
 ### Added
-- [x] Added *Blocklist API*
+- [x] Added **Blocklist API**
 
 ### Deprecated
 - [x] Deprecated `Blacklist`
