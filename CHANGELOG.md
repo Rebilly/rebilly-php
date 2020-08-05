@@ -15,6 +15,12 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
+### Added
+- [x] Added **Blocklist API**
+
+### Deprecated
+- [x] Deprecated `Blacklist`
+
 ### Removed
 - [x] Removed payment methods restriction in the `PaymentMethodInstrument` 
 - [x] Removed payment methods restriction in the `GatewayAccount` 

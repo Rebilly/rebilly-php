@@ -15,10 +15,9 @@ use DomainException;
 use Rebilly\Rest\Entity;
 
 /**
- * Class Blacklist.
- * @deprecated please use Blocklist instead
+ * Class Blocklist.
  */
-final class Blacklist extends Entity
+final class Blocklist extends Entity
 {
     public const TYPE_PAYMENT_CARD = 'payment-card';
 
@@ -100,54 +99,6 @@ final class Blacklist extends Entity
     public function setValue($value)
     {
         return $this->setAttribute('value', $value);
-    }
-
-    /**
-     * @deprecated The method is deprecated and will be removed in next version.
-     * @see Blacklist::getExpirationTime()
-     *
-     * @return mixed
-     */
-    public function getExpireTime()
-    {
-        return $this->getExpirationTime();
-    }
-
-    /**
-     * @deprecated The method is deprecated and will be removed in next version.
-     * @see Blacklist::setExpirationTime()
-     *
-     * @param mixed $value
-     *
-     * @return $this
-     */
-    public function setExpireTime($value)
-    {
-        return $this->setExpirationTime($value);
-    }
-
-    /**
-     * @deprecated The method is deprecated and will be removed in next version.
-     * @see Blacklist::getExpirationTime()
-     *
-     * @return mixed
-     */
-    public function getExpiredTime()
-    {
-        return $this->getExpirationTime();
-    }
-
-    /**
-     * @deprecated The method is deprecated and will be removed in next version.
-     * @see Blacklist::setExpirationTime()
-     *
-     * @param mixed $value
-     *
-     * @return $this
-     */
-    public function setExpiredTime($value)
-    {
-        return $this->setExpirationTime($value);
     }
 
     /**

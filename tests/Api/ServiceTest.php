@@ -1131,6 +1131,11 @@ class ServiceTest extends BaseTestCase
                 Entities\Blacklist::class,
             ],
             [
+                'blocklists',
+                Services\BlocklistService::class,
+                Entities\Blocklist::class,
+            ],
+            [
                 'customerCredentials',
                 Services\CustomerCredentialService::class,
                 Entities\CustomerCredential::class,
