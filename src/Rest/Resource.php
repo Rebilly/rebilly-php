@@ -264,8 +264,8 @@ abstract class Resource implements JsonSerializable, ArrayAccess
         }
 
         throw new OutOfRangeException(
-                sprintf('The property "%s::%s" does not exist', get_class($this), $offset)
-            );
+            sprintf('The property "%s::%s" does not exist', get_class($this), $offset)
+        );
     }
 
     /**
@@ -284,8 +284,8 @@ abstract class Resource implements JsonSerializable, ArrayAccess
         }
 
         throw new OutOfRangeException(
-                sprintf('The property "%s::%s" does not exist', get_class($this), $offset)
-            );
+            sprintf('The property "%s::%s" does not exist', get_class($this), $offset)
+        );
     }
 
     /**

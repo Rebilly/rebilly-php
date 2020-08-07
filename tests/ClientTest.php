@@ -25,10 +25,6 @@ use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Rest\Service;
 use RuntimeException;
 
-/**
- * Class ClientTest.
- *
- */
 final class ClientTest extends TestCase
 {
     /**
@@ -216,7 +212,6 @@ final class ClientTest extends TestCase
 
         $this->assertNotNull($result);
     }
-
 
     /**
      * @test

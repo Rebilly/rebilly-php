@@ -94,9 +94,9 @@ final class InvoiceItemService extends Service
         }
 
         return $this->client()->post(
-                $data,
-                'invoices/{invoiceId}/items',
-                ['invoiceId' => $invoiceId]
-            );
+            $data,
+            'invoices/{invoiceId}/items',
+            ['invoiceId' => $invoiceId]
+        );
     }
 }

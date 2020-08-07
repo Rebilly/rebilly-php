@@ -15,7 +15,6 @@ use DomainException;
 use Rebilly\Entities\Subscriptions\InvoiceTimeShift;
 use Rebilly\Entities\Subscriptions\RecurringInterval;
 use Rebilly\Entities\Subscriptions\SubscriptionTrial;
-use Rebilly\Entities\Invoice;
 use Rebilly\Rest\Entity;
 
 /**

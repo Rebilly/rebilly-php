@@ -56,9 +56,9 @@ final class GatewayAccountLimitService extends Service
      * @param string $limitId
      * @param array|JsonSerializable|GatewayAccountLimit $data
      *
-     * @return GatewayAccountLimit
      * @throws UnprocessableEntityException The input data is not valid
      *
+     * @return GatewayAccountLimit
      */
     public function update($gatewayAccountId, $limitId, $data)
     {

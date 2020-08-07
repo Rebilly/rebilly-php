@@ -92,7 +92,7 @@ class ApiTest extends TestCase
 
                 $this->assertSame($values[$attribute], $value, sprintf('Invalid %s:$%s', $class, $attribute));
             } elseif (isset($values[$attribute])) {
-                $this->assertEquals($values[$attribute], $value, sprintf('Invalid %s:$%s', $class, $attribute));
+                $this->assertSame(json_encode($values[$attribute]), json_encode($value), sprintf('Invalid %s:$%s', $class, $attribute));
             } else {
                 $this->assertNull($value);
             }
