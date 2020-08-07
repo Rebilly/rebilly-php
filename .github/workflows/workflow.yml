@@ -12,8 +12,10 @@ jobs:
 
     env:
       EXECUTE_COVERAGE: ${{ matrix.php-version == '7.3' }}
-      LOG_PATH: "logs"
       CLOVER_PATH: "logs/clover.xml"
+      COVERALLS_LOG_PATH: "logs/coverall-output.json"
+      COVERALLS_RUN_LOCALLY: 1
+      COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
 
     steps:
       - uses: actions/checkout@v2
@@ -41,9 +43,7 @@ jobs:
 
       - name: Run PhpUnit with coverage
         if: env.EXECUTE_COVERAGE == 'true'
-        run: |
-          mkdir ${{ env.LOG_PATH }}
-          php vendor/bin/phpunit --testdox --colors=always --coverage-clover ${{ env.CLOVER_PATH }}
+        run: php vendor/bin/phpunit --testdox --colors=always --coverage-clover ${{ env.CLOVER_PATH }}
 
       - name: Run PhpUnit
         if: env.EXECUTE_COVERAGE != 'true'
@@ -58,12 +58,9 @@ jobs:
           threshold_alert: 0
           threshold_warning: 50
 
-      # Disable task, for some reason the command can't write in workspace dir:
-      # > json_path is not writable: /home/runner/work/rebilly-php/rebilly-php/logs
-      # see: https://github.com/Rebilly/rebilly-php/pull/421/checks?check_run_id=958246136
-      # - name: Upload coverage to Coveralls
-      #   if: env.EXECUTE_COVERAGE == 'true'
-      #   run: php vendor/bin/php-coveralls -v -o ${{ env.LOG_PATH }} -x ${{ env.CLOVER_PATH }}
+      - name: Upload coverage to Coveralls
+        if: env.EXECUTE_COVERAGE == 'true'
+        run: php vendor/bin/php-coveralls -v -o ${{ env.COVERALLS_LOG_PATH }} -x ${{ env.CLOVER_PATH }}
 
   lint:
     runs-on: ubuntu-latest
