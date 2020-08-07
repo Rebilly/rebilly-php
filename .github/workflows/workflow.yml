@@ -54,6 +54,10 @@ jobs:
           threshold_alert: 0
           threshold_warning: 50
 
+      - name: Upload coverage to Coveralls
+        if: env.EXECUTE_COVERAGE == 'true'
+        run: php vendor/bin/php-coveralls -v
+
   lint:
     runs-on: ubuntu-latest
 
