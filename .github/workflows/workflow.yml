@@ -1,0 +1,55 @@
+name: Tests
+on: [pull_request]
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+
+    strategy:
+      max-parallel: 1
+      matrix:
+        php-version: ['7.1', '7.2', '7.3', '7.4']
+
+    env:
+      EXECUTE_COVERAGE: ${{ matrix.php-version == '7.3' }}
+      CLOVER_FILE: "logs/clover.xml"
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: mbstring, intl, curl, json
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+          echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: composer install -n --no-suggest
+
+      - name: Run PhpUnit with coverage
+        if: env.EXECUTE_COVERAGE == 'true'
+        run: php vendor/bin/phpunit --coverage-clover ${{ env.CLOVER_FILE }}
+
+      - name: Run PhpUnit
+        if: env.EXECUTE_COVERAGE != 'true'
+        run: php vendor/bin/phpunit
+
+      - name: Coverage monitor
+        if: env.EXECUTE_COVERAGE == 'true'
+        uses: slavcodev/coverage-monitor-action@1.1.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          clover_file: ${{ env.CLOVER_FILE }}
+          threshold_alert: 0
+          threshold_warning: 50
