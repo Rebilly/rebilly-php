@@ -18,13 +18,13 @@ use Rebilly\Rest\Entity;
  */
 final class GatewayAccountLimit extends Entity
 {
-    const DAILY_MONEY_LIMIT_IDENTIFIER = 'daily-money';
+    public const DAILY_MONEY_LIMIT_IDENTIFIER = 'daily-money';
 
-    const DAILY_COUNT_LIMIT_IDENTIFIER = 'daily-count';
+    public const DAILY_COUNT_LIMIT_IDENTIFIER = 'daily-count';
 
-    const MONTHLY_MONEY_LIMIT_IDENTIFIER = 'monthly-money';
+    public const MONTHLY_MONEY_LIMIT_IDENTIFIER = 'monthly-money';
 
-    const MONTHLY_COUNT_LIMIT_IDENTIFIER = 'monthly-count';
+    public const MONTHLY_COUNT_LIMIT_IDENTIFIER = 'monthly-count';
 
     /**
      * @return string

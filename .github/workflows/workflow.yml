@@ -94,4 +94,4 @@ jobs:
         run: php vendor/bin/phpunit --coverage-clover ${{ env.CLOVER_FILE }}
 
       - name: Lint code
-        run: php vendor/bin/php-cs-fixer fix -v --diff --dry-run
+        run: php vendor/bin/php-cs-fixer fix -vv --dry-run

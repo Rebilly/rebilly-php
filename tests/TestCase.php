@@ -308,6 +308,7 @@ abstract class TestCase extends Framework\TestCase
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
                         );
                 }
+                // no break
             case 'type':
             case 'datetimeFormat':
                 switch ($class) {

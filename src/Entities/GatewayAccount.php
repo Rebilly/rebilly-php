@@ -398,7 +398,7 @@ final class GatewayAccount extends Entity
     }
 
     /**
-     * @param DigitalWallets|null $digitalWallets
+     * @param DigitalWallets|null $value
      *
      * @return $this
      */
