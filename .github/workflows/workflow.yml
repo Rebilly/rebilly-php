@@ -6,13 +6,14 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
-      max-parallel: 1
+      # max-parallel: 1
       matrix:
         php-version: ['7.1', '7.2', '7.3', '7.4']
 
     env:
       EXECUTE_COVERAGE: ${{ matrix.php-version == '7.3' }}
-      CLOVER_FILE: "logs/clover.xml"
+      LOG_PATH: "logs"
+      CLOVER_PATH: "logs/clover.xml"
 
     steps:
       - uses: actions/checkout@v2
@@ -27,6 +28,7 @@ jobs:
         id: composer-cache
         run: |
           echo "::set-output name=dir::$(composer config cache-files-dir)"
+
       - uses: actions/cache@v2
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
@@ -39,24 +41,29 @@ jobs:
 
       - name: Run PhpUnit with coverage
         if: env.EXECUTE_COVERAGE == 'true'
-        run: php vendor/bin/phpunit --coverage-clover ${{ env.CLOVER_FILE }}
+        run: |
+          mkdir ${{ env.LOG_PATH }}
+          php vendor/bin/phpunit --testdox --colors=always --coverage-clover ${{ env.CLOVER_PATH }}
 
       - name: Run PhpUnit
         if: env.EXECUTE_COVERAGE != 'true'
-        run: php vendor/bin/phpunit
+        run: php vendor/bin/phpunit --testdox --colors=always
 
       - name: Coverage monitor
         if: env.EXECUTE_COVERAGE == 'true'
         uses: slavcodev/coverage-monitor-action@1.1.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          clover_file: ${{ env.CLOVER_FILE }}
+          clover_file: ${{ env.CLOVER_PATH }}
           threshold_alert: 0
           threshold_warning: 50
 
-      - name: Upload coverage to Coveralls
-        if: env.EXECUTE_COVERAGE == 'true'
-        run: php vendor/bin/php-coveralls -v
+      # Disable task, for some reason the command can't write in workspace dir:
+      # > json_path is not writable: /home/runner/work/rebilly-php/rebilly-php/logs
+      # see: https://github.com/Rebilly/rebilly-php/pull/421/checks?check_run_id=958246136
+      # - name: Upload coverage to Coveralls
+      #   if: env.EXECUTE_COVERAGE == 'true'
+      #   run: php vendor/bin/php-coveralls -v -o ${{ env.LOG_PATH }} -x ${{ env.CLOVER_PATH }}
 
   lint:
     runs-on: ubuntu-latest
@@ -91,7 +98,7 @@ jobs:
 
       - name: Run PhpUnit with coverage
         if: env.EXECUTE_COVERAGE == 'true'
-        run: php vendor/bin/phpunit --coverage-clover ${{ env.CLOVER_FILE }}
+        run: php vendor/bin/phpunit --coverage-clover ${{ env.CLOVER_PATH }}
 
       - name: Lint code
         run: php vendor/bin/php-cs-fixer fix -vv --dry-run
