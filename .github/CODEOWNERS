@@ -1,0 +1,5 @@
+# Code Owners settings
+# See: https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners
+
+# As soon as a PR is added or a project is published, these teams will be invited for review.
+* @Rebilly/php
