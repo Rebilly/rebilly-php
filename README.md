@@ -165,12 +165,12 @@ phpunit
 
 [ico-version]: https://img.shields.io/packagist/v/rebilly/client-php.svg
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg
-[ico-github-actions]: https://github.com/Rebilly/client-php/workflows/Tests/badge.svg
+[ico-github-actions]: https://github.com/Rebilly/rebilly-php/workflows/Tests/badge.svg
 [ico-downloads]: https://img.shields.io/packagist/dt/rebilly/client-php.svg
 [ico-coveralls]: https://coveralls.io/repos/Rebilly/rebilly-php/badge.svg?branch=master&service=github
 
 [link-api-doc]: https://api-reference.rebilly.com/
 [link-packagist]: https://packagist.org/packages/rebilly/client-php
-[link-github]: https://github.com/Rebilly/client-php
+[link-github]: https://github.com/Rebilly/rebilly-php
 [link-downloads]: https://packagist.org/packages/rebilly/client-php
 [link-coveralls]: https://coveralls.io/github/Rebilly/rebilly-php?branch=master
