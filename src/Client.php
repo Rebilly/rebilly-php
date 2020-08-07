@@ -79,6 +79,7 @@ use RuntimeException;
  * @method Services\RedemptionService couponsRedemptions()
  * @method Services\WebhooksService webhooks()
  * @method Services\WebhookCredentialsService webhookCredentials()
+ * @method Services\PlaidCredentialsService plaidCredentials()
  * @method Services\ValuesListService lists()
  * @method Services\ValuesListTrackingService listsTracking()
  * @method Services\WebhookTrackingService webhooksTracking()
@@ -148,6 +149,7 @@ final class Client
         'eventRules' => Services\RuleService::class,
         'customerTimeline' => Services\CustomerTimelineService::class,
         'aml' => Services\AmlService::class,
+        'plaidCredentials' => Services\PlaidCredentialsService::class,
     ];
 
     /** @var array */
