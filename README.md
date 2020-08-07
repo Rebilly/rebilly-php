@@ -2,7 +2,7 @@
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE)
-[![Build Status][ico-travis]][link-travis]
+[![GitHub Actions status][ico-github-actions]][link-github]
 [![Total Downloads][ico-downloads]][link-downloads]
 [![Coverage Status][ico-coveralls]][link-coveralls]
 
@@ -163,14 +163,14 @@ $ composer install
 phpunit
 ```
 
-[ico-version]: https://img.shields.io/packagist/v/rebilly/client-php.svg?style=flat-square
-[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/Rebilly/rebilly-php/master.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/rebilly/client-php.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/rebilly/client-php.svg
+[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg
+[ico-github-actions]: https://github.com/Rebilly/client-php/workflows/Tests/badge.svg
+[ico-downloads]: https://img.shields.io/packagist/dt/rebilly/client-php.svg
 [ico-coveralls]: https://coveralls.io/repos/Rebilly/rebilly-php/badge.svg?branch=master&service=github
 
-[link-api-doc]: http://rebilly.github.io/RebillyAPI/
+[link-api-doc]: https://api-reference.rebilly.com/
 [link-packagist]: https://packagist.org/packages/rebilly/client-php
-[link-travis]: https://travis-ci.org/Rebilly/rebilly-php
+[link-github]: https://github.com/Rebilly/client-php
 [link-downloads]: https://packagist.org/packages/rebilly/client-php
 [link-coveralls]: https://coveralls.io/github/Rebilly/rebilly-php?branch=master
