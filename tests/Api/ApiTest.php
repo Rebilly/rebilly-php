@@ -90,9 +90,9 @@ class ApiTest extends TestCase
                     );
                 }
 
-                $this->assertSame($values[$attribute], $value, 'Invalid ' . $attribute);
+                $this->assertSame($values[$attribute], $value, sprintf('Invalid %s:$%s', $class, $attribute));
             } elseif (isset($values[$attribute])) {
-                $this->assertEquals($values[$attribute], $value, 'Invalid ' . $attribute);
+                $this->assertEquals($values[$attribute], $value, sprintf('Invalid %s:$%s', $class, $attribute));
             } else {
                 $this->assertNull($value);
             }
@@ -192,6 +192,7 @@ class ApiTest extends TestCase
             [Entities\PaymentInstruments\BankAccountPaymentInstrument::class],
             [Entities\PaymentRetryAttempt::class],
             [Entities\GatewayAccountDowntime::class],
+            [Entities\PlaidCredential::class, 'hash'],
         ];
     }
 }

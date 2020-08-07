@@ -76,7 +76,7 @@ abstract class TestCase extends Framework\TestCase
 
         $faker->phoneNumber;
         $redirectUrl = 'https://redirect.com';
-        $uriParh = 'pathsegment';
+        $uriPath = 'path-segment';
 
         switch ($attribute) {
             case 'id':
@@ -104,6 +104,10 @@ abstract class TestCase extends Framework\TestCase
             case 'productId':
             case 'requestId':
             case 'stickyGatewayAccountId':
+            case 'hash':
+            case 'credentialHash':
+            case 'clientId':
+            case 'secretToken':
                 return $faker->uuid;
             case 'dueTime':
             case 'expiredTime':
@@ -122,6 +126,7 @@ abstract class TestCase extends Framework\TestCase
             case 'churnTime':
             case 'autopayScheduledTime':
             case 'processedTime':
+            case 'deactivationTime':
                 return $faker->date('Y-m-d H:i:s');
             case 'unitPrice':
             case 'unitPriceAmount':
@@ -129,7 +134,7 @@ abstract class TestCase extends Framework\TestCase
                 return $faker->randomFloat(2);
             case 'uriPath':
             case 'urlPathSegment':
-                return $uriParh;
+                return $uriPath;
             case 'gatewayName':
             case 'organizationId':
             case 'acquirerName':
@@ -148,6 +153,7 @@ abstract class TestCase extends Framework\TestCase
             case 'redirectUrl':
                 return $redirectUrl;
             case 'notificationUrl':
+            case 'host':
                 return $faker->url;
             case 'organization':
             case 'company':
@@ -160,6 +166,11 @@ abstract class TestCase extends Framework\TestCase
                 return $faker->email;
             case 'region':
                 return $faker->city;
+            case 'address':
+            case 'address2':
+                return $faker->address;
+            case 'postalCode':
+                return $faker->postcode;
             case 'ipAddress':
                 return $faker->ipv4;
             case 'token':
@@ -197,8 +208,6 @@ abstract class TestCase extends Framework\TestCase
                 return $faker->year;
             case 'expMonth':
                 return $faker->month;
-            case 'host':
-                return $faker->url;
             case 'userName':
                 return $faker->userName;
             case 'eventsFilter':
@@ -219,9 +228,6 @@ abstract class TestCase extends Framework\TestCase
                 ], 3);
             case 'headers':
                 return [['name' => $faker->word, 'value' => $faker->word, 'status' => $faker->randomElement(['active', 'inactive'])]];
-            case 'hash':
-            case 'credentialHash':
-                return $faker->uuid;
             case 'auth':
                 return $faker->randomElement([
                     [
@@ -243,6 +249,12 @@ abstract class TestCase extends Framework\TestCase
             case 'attachInvoice':
             case 'invalidate':
             case 'isProcessedOutside':
+            case 'primary':
+            case 'isDefault':
+            case 'preview':
+            case 'prorated':
+            case 'autopay':
+            case 'useStripe':
                 return $faker->boolean();
             case 'credentialTtl':
             case 'authTokenTtl':
@@ -256,11 +268,6 @@ abstract class TestCase extends Framework\TestCase
             case 'velocity':
             case 'revision':
                 return $faker->numberBetween(1, 10);
-            case 'address':
-            case 'address2':
-                return $faker->address;
-            case 'postalCode':
-                return $faker->postcode;
             case 'email':
             case 'firstName':
             case 'lastName':
@@ -269,7 +276,7 @@ abstract class TestCase extends Framework\TestCase
             case 'city':
             case 'country':
             case 'phoneNumber':
-                return $faker->$attribute;
+                return $faker->{$attribute};
             case 'phoneNumbers':
                 return [
                     new Entities\Contact\PhoneNumber([
@@ -383,8 +390,6 @@ abstract class TestCase extends Framework\TestCase
             case 'currency':
             case 'unitPriceCurrency':
                 return 'USD';
-            case 'payment':
-                return []; // TODO
             case 'relatedType':
                 switch ($class) {
                     case Entities\Attachment::class:
@@ -406,8 +411,6 @@ abstract class TestCase extends Framework\TestCase
                         );
                 }
                 // no break
-            case 'primary':
-                return $faker->boolean();
             case 'primaryAddress':
             case 'billingAddress':
             case 'deliveryAddress':
@@ -439,12 +442,11 @@ abstract class TestCase extends Framework\TestCase
             case 'method':
             case 'defaultPaymentMethod':
                 switch ($class) {
-                    case Entities\Customer::class:
-                        return new Entities\PaymentMethods\PaymentCardMethod(); // TODO
                     case Entities\ApiTracking::class:
                         return 'GET';
                     case Entities\GatewayAccount::class:
                         return Entities\PaymentMethod::METHOD_PAYMENT_CARD;
+                    case Entities\Customer::class:
                     default:
                         return new Entities\PaymentMethods\PaymentCardMethod(); // TODO
                 }
@@ -452,6 +454,9 @@ abstract class TestCase extends Framework\TestCase
             case 'customFields':
             case 'gatewayConfig':
             case 'additionalSchema':
+            case 'permissions':
+            case 'invoiceIds':
+            case 'payment': // TODO
                 return [];
             case 'acceptedCurrencies':
                 return ['USD'];
@@ -468,18 +473,12 @@ abstract class TestCase extends Framework\TestCase
                 return 'checking';
             case 'accountNumberType':
                 return 'BBAN';
-            case 'permissions':
-                return [];
-            case 'invoiceIds':
-                return [];
             case 'enrolled':
             case 'payerAuthResponseStatus':
             case 'signatureVerification':
                 return 'Y';
             case 'port':
                 return $faker->numberBetween(25, 100);
-            case 'autopay':
-                return $faker->boolean();
             case 'duration':
                 return $faker->numberBetween(1, 100);
             case 'paymentInstrument':
@@ -522,12 +521,10 @@ abstract class TestCase extends Framework\TestCase
                         return $faker->randomElement(Entities\SubscriptionCancellation::statuses());
                     case Entities\ApiTracking::class:
                         return 200;
-                    case Entities\Dispute::class:
-                        return $faker->randomElement(Entities\Dispute::allowedStatuses());
                     case Entities\PaymentCard::class:
-                        return 'active';
                     case Entities\CheckoutPage::class:
                         return 'active';
+                    case Entities\Dispute::class:
                     default:
                         return $faker->randomElement(Entities\Dispute::allowedStatuses());
                 }
@@ -592,11 +589,6 @@ abstract class TestCase extends Framework\TestCase
                     'User-Agent' => 'Mozilla/5.0',
                     'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
                 ];
-            case 'isDefault':
-                return $faker->boolean;
-            case 'preview':
-            case 'prorated':
-                return $faker->boolean();
             case 'renewalPolicy':
                 return $faker->randomElement(Entities\SubscriptionChangePlan::renewalPolicies());
             case 'notifications':

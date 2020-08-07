@@ -17,6 +17,7 @@ Security - in case of vulnerabilities.
 
 ### Added
 - [x] Added **Blocklist API**
+- [x] Added **Plaid Credentials API**
 
 ### Deprecated
 - [x] Deprecated `Blacklist`

@@ -342,6 +342,9 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'aml' => function (array $content) {
                 return new Collection(new AmlEntry(), $content);
             },
+            'credential-hashes/plaid/{hash}' => function (array $content) {
+                return new PlaidCredential($content);
+            },
         ];
     }
 
