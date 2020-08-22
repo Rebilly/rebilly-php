@@ -296,6 +296,14 @@ class PaymentCardToken extends Entity
     }
 
     /**
+     * @return Address
+     */
+    public function getBillingAddress()
+    {
+        return $this->getAttribute('billingAddress');
+    }
+
+    /**
      * @param Address|array $value
      *
      * @return $this
@@ -303,6 +311,11 @@ class PaymentCardToken extends Entity
     public function setBillingAddress($value)
     {
         return $this->setAttribute('billingAddress', $value);
+    }
+
+    public function createBillingAddress(array $value)
+    {
+        return new Address($value);
     }
 
     /**
