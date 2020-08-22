@@ -111,7 +111,7 @@ class PaymentCardToken extends Entity
      */
     public function getFirstName()
     {
-        return $this->getAttribute('firstName');
+        return $this->getBillingAddressValue('firstName');
     }
 
     /**
@@ -122,7 +122,7 @@ class PaymentCardToken extends Entity
      */
     public function setFirstName($value)
     {
-        return $this->setAttribute('firstName', $value);
+        return $this->setBillingAddressValue('firstName', $value);
     }
 
     /**
@@ -132,7 +132,7 @@ class PaymentCardToken extends Entity
      */
     public function getLastName()
     {
-        return $this->getAttribute('lastName');
+        return $this->getBillingAddressValue('lastName');
     }
 
     /**
@@ -143,7 +143,7 @@ class PaymentCardToken extends Entity
      */
     public function setLastName($value)
     {
-        return $this->setAttribute('lastName', $value);
+        return $this->setBillingAddressValue('lastName', $value);
     }
 
     /**
@@ -153,7 +153,7 @@ class PaymentCardToken extends Entity
      */
     public function getAddress()
     {
-        return $this->getAttribute('address');
+        return $this->getBillingAddressValue('address');
     }
 
     /**
@@ -164,7 +164,7 @@ class PaymentCardToken extends Entity
      */
     public function setAddress($value)
     {
-        return $this->setAttribute('address', $value);
+        return $this->setBillingAddressValue('address', $value);
     }
 
     /**
@@ -174,7 +174,7 @@ class PaymentCardToken extends Entity
      */
     public function getAddress2()
     {
-        return $this->getAttribute('address2');
+        return $this->getBillingAddressValue('address2');
     }
 
     /**
@@ -185,7 +185,7 @@ class PaymentCardToken extends Entity
      */
     public function setAddress2($value)
     {
-        return $this->setAttribute('address2', $value);
+        return $this->setBillingAddressValue('address2', $value);
     }
 
     /**
@@ -195,7 +195,7 @@ class PaymentCardToken extends Entity
      */
     public function getCity()
     {
-        return $this->getAttribute('city');
+        return $this->getBillingAddressValue('city');
     }
 
     /**
@@ -206,7 +206,7 @@ class PaymentCardToken extends Entity
      */
     public function setCity($value)
     {
-        return $this->setAttribute('city', $value);
+        return $this->setBillingAddressValue('city', $value);
     }
 
     /**
@@ -216,7 +216,7 @@ class PaymentCardToken extends Entity
      */
     public function getRegion()
     {
-        return $this->getAttribute('region');
+        return $this->getBillingAddressValue('region');
     }
 
     /**
@@ -228,7 +228,7 @@ class PaymentCardToken extends Entity
      */
     public function setRegion($value)
     {
-        return $this->setAttribute('region', $value);
+        return $this->setBillingAddressValue('region', $value);
     }
 
     /**
@@ -238,7 +238,7 @@ class PaymentCardToken extends Entity
      */
     public function getCountry()
     {
-        return $this->getAttribute('country');
+        return $this->getBillingAddressValue('country');
     }
 
     /**
@@ -250,7 +250,7 @@ class PaymentCardToken extends Entity
      */
     public function setCountry($value)
     {
-        return $this->setAttribute('country', $value);
+        return $this->setBillingAddressValue('country', $value);
     }
 
     /**
@@ -260,7 +260,7 @@ class PaymentCardToken extends Entity
      */
     public function getPostalCode()
     {
-        return $this->getAttribute('postalCode');
+        return $this->getBillingAddressValue('postalCode');
     }
 
     /**
@@ -271,7 +271,7 @@ class PaymentCardToken extends Entity
      */
     public function setPostalCode($value)
     {
-        return $this->setAttribute('postalCode', $value);
+        return $this->setBillingAddressValue('postalCode', $value);
     }
 
     /**
@@ -281,7 +281,7 @@ class PaymentCardToken extends Entity
      */
     public function getPhoneNumber()
     {
-        return $this->getAttribute('phoneNumber');
+        return $this->getBillingAddressValue('phoneNumber');
     }
 
     /**
@@ -292,7 +292,7 @@ class PaymentCardToken extends Entity
      */
     public function setPhoneNumber($value)
     {
-        return $this->setAttribute('phoneNumber', $value);
+        return $this->setBillingAddressValue('phoneNumber', $value);
     }
 
     /**
@@ -385,13 +385,7 @@ class PaymentCardToken extends Entity
         return PaymentInstrument::createFromData($data);
     }
 
-    /**
-     * @param $attribute
-     * @param $value
-     *
-     * @return $this
-     */
-    private function setDefaultPaymentInstrumentValue($attribute, $value)
+    private function setDefaultPaymentInstrumentValue(string $attribute, $value)
     {
         if (!$this->getAttribute('paymentInstrument')) {
             $this->setPaymentInstrument(new PaymentCardPaymentInstrument());
@@ -402,17 +396,32 @@ class PaymentCardToken extends Entity
         return $this;
     }
 
-    /**
-     * @param $attribute
-     *
-     * @return mixed|null
-     */
-    private function getDefaultPaymentInstrumentValue($attribute)
+    private function getDefaultPaymentInstrumentValue(string $attribute)
     {
         if (!$this->getAttribute('paymentInstrument')) {
             $this->setPaymentInstrument(new PaymentCardPaymentInstrument());
         }
 
         return $this->getPaymentInstrument()->getAttribute($attribute);
+    }
+
+    private function setBillingAddressValue(string $attribute, $value)
+    {
+        if (!$this->getAttribute('billingAddress')) {
+            $this->setBillingAddress([]);
+        }
+
+        $this->getBillingAddress()->setAttribute($attribute, $value);
+
+        return $this;
+    }
+
+    private function getBillingAddressValue(string $attribute)
+    {
+        if (!$this->getAttribute('billingAddress')) {
+            $this->setBillingAddress([]);
+        }
+
+        return $this->getBillingAddress()->getAttribute($attribute);
     }
 }
