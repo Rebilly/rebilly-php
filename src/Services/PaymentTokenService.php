@@ -20,10 +20,6 @@ use Rebilly\Paginator;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
 
-/**
- * Class PaymentCardTokenService
- *
- */
 final class PaymentTokenService extends Service
 {
     /**
