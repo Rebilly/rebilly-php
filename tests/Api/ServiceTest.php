@@ -1172,7 +1172,7 @@ class ServiceTest extends BaseTestCase
             ],
             [
                 'paymentCardTokens',
-                Services\PaymentCardTokenService::class,
+                Services\PaymentTokenService::class,
                 Entities\PaymentCardToken::class,
             ],
             [

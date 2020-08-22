@@ -51,7 +51,7 @@ use RuntimeException;
  * @method Services\InvoiceService invoices()
  * @method Services\LayoutService layouts()
  * @method Services\PaymentCardService paymentCards()
- * @method Services\PaymentCardTokenService paymentCardTokens()
+ * @method Services\PaymentTokenService paymentCardTokens()
  * @method Services\PayPalAccountService payPalAccounts()
  * @method Services\PlanService plans()
  * @method Services\ResetPasswordTokenService resetPasswordTokens()
@@ -112,7 +112,7 @@ final class Client
         'invoices' => Services\InvoiceService::class,
         'layouts' => Services\LayoutService::class,
         'paymentCards' => Services\PaymentCardService::class,
-        'paymentCardTokens' => Services\PaymentCardTokenService::class,
+        'paymentCardTokens' => Services\PaymentTokenService::class,
         'payPalAccounts' => Services\PayPalAccountService::class,
         'plans' => Services\PlanService::class,
         'resetPasswordTokens' => Services\ResetPasswordTokenService::class,

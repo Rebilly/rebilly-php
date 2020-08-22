@@ -24,7 +24,7 @@ use Rebilly\Rest\Service;
  * Class PaymentCardTokenService
  *
  */
-final class PaymentCardTokenService extends Service
+final class PaymentTokenService extends Service
 {
     /**
      * @param array|ArrayObject $params
