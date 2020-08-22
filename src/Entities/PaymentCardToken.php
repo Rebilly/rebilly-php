@@ -11,6 +11,7 @@
 
 namespace Rebilly\Entities;
 
+use Rebilly\Entities\PaymentInstruments\PaymentCardPaymentInstrument;
 use Rebilly\Rest\Entity;
 
 /**
@@ -18,21 +19,6 @@ use Rebilly\Rest\Entity;
  */
 class PaymentCardToken extends Entity
 {
-    /**
-     * @todo Rewrite ApiTest, which requires this method before deprecated methods.
-     *
-     * @param PaymentInstrument $value
-     *
-     * @return $this
-     */
-    public function setPaymentInstrument(PaymentInstrument $value)
-    {
-        $this->setAttribute('method', $value->name());
-        $this->setAttribute('paymentInstrument', $value->jsonSerialize());
-
-        return $this;
-    }
-
     /**
      * @deprecated The method is deprecated and will be removed in next version.
      * @see PaymentCardToken::setPaymentInstrument()
@@ -356,6 +342,37 @@ class PaymentCardToken extends Entity
     }
 
     /**
+     * @return PaymentMethodInstrument
+     */
+    public function getPaymentInstrument()
+    {
+        return $this->getAttribute('paymentInstrument');
+    }
+
+    /**
+     * @param PaymentInstrument $value
+     *
+     * @return $this
+     */
+    public function setPaymentInstrument(PaymentInstrument $value)
+    {
+        $this->setAttribute('method', $value->name());
+        $this->setAttribute('paymentInstrument', $value);
+
+        return $this;
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return PaymentInstrument
+     */
+    public function createPaymentInstrument(array $data)
+    {
+        return PaymentInstrument::createFromData($data);
+    }
+
+    /**
      * @param $attribute
      * @param $value
      *
@@ -363,11 +380,11 @@ class PaymentCardToken extends Entity
      */
     private function setDefaultPaymentInstrumentValue($attribute, $value)
     {
-        $data = (array) $this->getAttribute('paymentInstrument');
-        $data[$attribute] = $value;
+        if (!$this->getAttribute('paymentInstrument')) {
+            $this->setPaymentInstrument(new PaymentCardPaymentInstrument());
+        }
 
-        $this->setAttribute('method', PaymentMethod::METHOD_PAYMENT_CARD);
-        $this->setAttribute('paymentInstrument', $data);
+        $this->getPaymentInstrument()->setAttribute($attribute, $value);
 
         return $this;
     }
@@ -379,8 +396,10 @@ class PaymentCardToken extends Entity
      */
     private function getDefaultPaymentInstrumentValue($attribute)
     {
-        $data = (array) $this->getAttribute('paymentInstrument');
+        if (!$this->getAttribute('paymentInstrument')) {
+            $this->setPaymentInstrument(new PaymentCardPaymentInstrument());
+        }
 
-        return $data[$attribute] ?? null;
+        return $this->getPaymentInstrument()->getAttribute($attribute);
     }
 }
