@@ -15,7 +15,7 @@ use ArrayObject;
 use JsonSerializable;
 use Rebilly\Entities\PaymentCard;
 use Rebilly\Entities\PaymentCardAuthorization;
-use Rebilly\Entities\PaymentCardToken;
+use Rebilly\Entities\PaymentToken;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Paginator;
@@ -78,7 +78,7 @@ final class PaymentCardService extends Service
     }
 
     /**
-     * @param string|array|JsonSerializable|PaymentCardToken $token
+     * @param string|array|JsonSerializable|PaymentToken $token
      * @param array|JsonSerializable|PaymentCard $data
      * @param string $cardId
      *

@@ -13,7 +13,7 @@ namespace Rebilly\Services;
 
 use ArrayObject;
 use JsonSerializable;
-use Rebilly\Entities\PaymentCardToken;
+use Rebilly\Entities\PaymentToken;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Paginator;
@@ -25,7 +25,7 @@ final class PaymentTokenService extends Service
     /**
      * @param array|ArrayObject $params
      *
-     * @return PaymentCardToken[][]|Collection[]|Paginator
+     * @return PaymentToken[][]|Collection[]|Paginator
      */
     public function paginator($params = [])
     {
@@ -35,7 +35,7 @@ final class PaymentTokenService extends Service
     /**
      * @param array|ArrayObject $params
      *
-     * @return PaymentCardToken[]|Collection
+     * @return PaymentToken[]|Collection
      */
     public function search($params = [])
     {
@@ -48,7 +48,7 @@ final class PaymentTokenService extends Service
      *
      * @throws NotFoundException The resource data does not exist
      *
-     * @return PaymentCardToken
+     * @return PaymentToken
      */
     public function load($tokenId, $params = [])
     {
@@ -56,11 +56,11 @@ final class PaymentTokenService extends Service
     }
 
     /**
-     * @param array|JsonSerializable|PaymentCardToken $data
+     * @param array|JsonSerializable|PaymentToken $data
      *
      * @throws UnprocessableEntityException The input data does not valid
      *
-     * @return PaymentCardToken
+     * @return PaymentToken
      */
     public function create($data)
     {
@@ -72,7 +72,7 @@ final class PaymentTokenService extends Service
      *
      * @throws NotFoundException The resource data does not exist
      *
-     * @return PaymentCardToken
+     * @return PaymentToken
      */
     public function expire($tokenId)
     {

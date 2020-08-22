@@ -14,9 +14,9 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Entity;
 
 /**
- * Class PaymentCardToken.
+ * @deprecated This class is considered deprecated in favour of PaymentToken
  */
-final class PaymentCardToken extends Entity
+class PaymentCardToken extends Entity
 {
     /**
      * @todo Rewrite ApiTest, which requires this method before deprecated methods.

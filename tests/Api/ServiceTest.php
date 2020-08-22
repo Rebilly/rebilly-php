@@ -861,7 +861,7 @@ class ServiceTest extends BaseTestCase
     /**
      * @test
      */
-    public function paymentCardTokenService()
+    public function paymentTokenService()
     {
         $client = new Client(['apiKey' => 'QWERTY']);
 
@@ -879,10 +879,10 @@ class ServiceTest extends BaseTestCase
             'apiKey' => 'QWERTY',
             'httpHandler' => $handler,
         ]);
-        $service = $client->paymentCardTokens();
+        $service = $client->paymentTokens();
 
         $result = $service->expire('dummy');
-        $this->assertInstanceOf(Entities\PaymentCardToken::class, $result);
+        $this->assertInstanceOf(Entities\PaymentToken::class, $result);
     }
 
     /**
@@ -1171,9 +1171,9 @@ class ServiceTest extends BaseTestCase
                 Entities\PaymentCard::class,
             ],
             [
-                'paymentCardTokens',
+                'paymentTokens',
                 Services\PaymentTokenService::class,
-                Entities\PaymentCardToken::class,
+                Entities\PaymentToken::class,
             ],
             [
                 'plans',

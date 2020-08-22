@@ -154,10 +154,10 @@ final class Schema implements IteratorAggregate, ArrayAccess
                 return new PayPalAccount($content);
             },
             'tokens' => function (array $content) {
-                return new Collection(new PaymentCardToken(), $content);
+                return new Collection(new PaymentToken(), $content);
             },
             'tokens/{tokenId}' => function (array $content) {
-                return new PaymentCardToken($content);
+                return new PaymentToken($content);
             },
             'transactions' => function (array $content) {
                 return new Collection(new Transaction(), $content);
