@@ -51,6 +51,7 @@ use RuntimeException;
  * @method Services\InvoiceService invoices()
  * @method Services\LayoutService layouts()
  * @method Services\PaymentCardService paymentCards()
+ * // TODO: Deprecated factory
  * @method Services\PaymentTokenService paymentCardTokens()
  * @method Services\PaymentTokenService paymentTokens()
  * @method Services\PayPalAccountService payPalAccounts()
