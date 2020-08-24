@@ -16,19 +16,27 @@ Security - in case of vulnerabilities.
 ## [Unreleased]
 
 ### Added
+
 - [x] Added **Blocklist API**
 - [x] Added **Plaid Credentials API**
+- [x] Added `PaymentToken`
+- [x] Added `Client::paymentTokens()` factory
 
 ### Deprecated
+
 - [x] Deprecated `Blacklist`
+- [x] Deprecated `PaymentCardToken`
+- [x] Deprecated `Client::paymentCardTokens()` factory
 
 ### Removed
-- [x] Removed payment methods restriction in the `PaymentMethodInstrument` 
-- [x] Removed payment methods restriction in the `GatewayAccount` 
+
+- [x] Removed payment methods restriction in the `PaymentMethodInstrument`
+- [x] Removed payment methods restriction in the `GatewayAccount`
 
 ## [2.8.0] 2020-07-02
 
 ### Added
+
 - [x] Added new **AML API**
 - [x] Added new **Gateway Account Limit API**
 - [x] Added new properties to `GatewayAccount`: `reconciliationWindowEnabled`, `reconciliationWindowTtl`
@@ -47,11 +55,13 @@ Security - in case of vulnerabilities.
 - [x] Added `patch` method to `TransactionService`
 
 ### Deprecated
+
 - [x] Deprecated `PayPalAccount` method: `getApprovalLink`
 - [x] Deprecated `Subscription` method: `cancel` (use `SubscriptionCancellation` instead)
 - [x] Deprecated `SubscriptionCancel` class.
 
 ### Removed
+
 - [x] Removed deprecated **Payments API** 
 - [x] Removed deprecated **Contacts API**
 - [x] Removed **Payment Instrument Validation API**
@@ -69,15 +79,18 @@ Security - in case of vulnerabilities.
 ## [2.7.0] 2020-02-11
 
 ### Added
+
 - [x] Added new property to `SubscriptionChangePlan`: `quantity`
 - [x] Added new properties to `ApiTracking`: `relatedIds`, `requestHeaders`, `responseHeaders`
 
 ### Removed
+
 - [x] Removed `Note` entity, `NoteService` service
 
 ## [2.6.0] 2020-01-14
 
 ### Added
+
 - [x] Added support for empty redirect responses
 - [x] Added new property to `Customer`: `websiteId`
 - [x] Added new property to `Transaction`: `requestId`
@@ -98,15 +111,18 @@ Security - in case of vulnerabilities.
 - [x] Added `Organization-Id` header to Client config
 
 ### Changed
+
 - [x] Renamed field `billingAnchor` into `invoiceTimeShift` in `Subscription` object
 
 ### Deprecated
+
 - [x] Deprecated `Transaction` entity method: `getPaymentCardId`
 - [x] Deprecated `PayPalAccount` entity method: `setUserName`
 - [x] Deprecated `PaymentCard` entity method: `setStatus`
 - [x] Deprecated `CheckoutPage` entity methods: `getUriPath`, `setUriPath`, `getAllowCustomCustomerId`, `setAllowCustomCustomerId`, `getIsActive`, `setIsActive`
 
 ### Removed
+
 - [x] Removed Payments Queue API
 - [X] Removed `Transaction` entity method: `getPayment`
 - [x] Removed `ValuesList` field: `name` 
@@ -116,14 +132,17 @@ Security - in case of vulnerabilities.
 ## [2.5.0] 2019-07-19
 
 ### Fixed
+
 - [x] Fixed CurlHandler to support HTTP/2
 
 ## [2.4.0] 2019-07-01
 
 ### Fixed
+
 - [x] Added missing options in Client constructor.
 
 ### Added
+
 - [x] Added custom fields to `Plan`
 - [x] Added new write-only property to set payment instrument from `token` for the `Customer` Resource.
 - [x] Added new property to `RiskMetadata`: `region`
@@ -154,23 +173,28 @@ Security - in case of vulnerabilities.
 - [x] Added new method to `BankAccountService`: `update`, `createFromToken`
 
 ### Changed
+
 - [x] **Upgraded minimum PHP version to 7.1**
 
 ### Deprecated
+
 - [x] Deprecated `Customer` entity methods: `getFirstName`, `setFirstName`, `getLastName`, `setLastName`, `getEmail`, `setEmail`
 - [x] Deprecated `Blacklist` `expiredTime` property
 
 ## [2.3.0] 2018-10-08
 
 ### Added
+
 - [x] Added new properties to `Plan`: `pricing`, `recurringInterval`, `trial`, `setup`
 - [x] Added new property to `Subscription`: `items`
 - [x] Added new property to `LeadSource`: `original`
 
 ### Changed
+
 - [x] Replaced magic methods like `get`, `post` with explicit defined methods.
 
 ### Removed
+
 - [x] Removed deprecated `Plan` properties: `expiredTime`, `recurringAmount`, `trialAmount`, `setupAmount`,
       `recurringPeriodUnit`, `recurringPeriodLength`, `recurringPeriodLimit`, `trialPeriodUnit`, `trialPeriodLength`,
       `contractTermUnit`, `contractTermLength`, `minQuantity`, `maxQuantity`
@@ -185,6 +209,7 @@ Security - in case of vulnerabilities.
 ## [2.2.0] 2018-08-14
 
 ### Added
+
 - [x] Added support for subscription interim invoices.
 - [x] Added schema for subscriptions `change-plan` endpoint.
 - [x] Added `SubscriptionChangePlan`. 
@@ -201,21 +226,25 @@ Security - in case of vulnerabilities.
 - [x] Added payment instrument validation.
 
 ### Removed
+
 - [x] Removed Subscription switch.
 - [x] Removed support for Subscription Tracking.
 - [x] Removed downtime settings in Gateway Account API.
 - [x] Removed custom fields deletion.
 
 ### Fixed
+
 - [x] Fixed PATCH calls.
 - [x] Fixed reset-password endpoint.
 - [x] Fix coupons restrictions.
 
 ### Deprecated
+
 - [x] Deprecated support for old `subscription/{id}/cancel` endpoint (`SubscriptionCancel` with policy).
 - [x] Deprecated Redemption's redeemedTime in favor of createdTime.
 
 ## [2.1.0] 2018-01-04
+
 - [x] Updated Invoice methods to use `websiteId` and `customerId`
 - [x] Rename `Email` object to `ForgotPassword` and update corresponding usages.
 - [x] Fix erroneous import of wrong `Email` object.
@@ -224,6 +253,7 @@ Security - in case of vulnerabilities.
 ## [2.0.7] 2017-09-13
 
 ### Added
+
 - [x] Added ability to configure permission of the `PATCH` method for the user session.
 - [x] Added missing getters and setters in the `Subscription`, `SubscriptionSwitch`, `Transaction`, `Coupon`.
 - [x] Added `status` property in the `Invoice`.
@@ -239,15 +269,18 @@ Security - in case of vulnerabilities.
 - [x] Implemented **Risk Metadata API**.
 
 ### Removed
+
 - [x] Removed Email Credentials API, it is never used.
 - [x] Removed attribute `threeDSecureType` from the `Transaction`.
 
 ### Fixed
+
 - [x] Fixed some erroneous properties in resources.
 
 ## [2.0.6] 2017-01-07
 
 ### Added
+
 - [x] Added support for `Files` and `Attachments`. 
 - [x] Added support for `Subscription` resource attributes: `inTrial` and `rebillNumber`.  
 - [x] Added support to delete `Layout` resources.
@@ -255,9 +288,11 @@ Security - in case of vulnerabilities.
 - [x] Added support to delete a `WebsiteWebhook`.
  
 ### Changed
+
 - [x] Require PHP 7.1 unit tests to pass, and updated README. PHP 5.5 is at end of life and not supported by PHP.  We recommend upgrading if you are using PHP 5.5.  We will continue support of it for now.
 
 ### Fixed
+
 - [x] Fixed `SDK_VERSION` now properly incremented.
 - [x] Fixed `PaymentCardToken` to properly set the `method` attribute.
 
@@ -265,6 +300,7 @@ Security - in case of vulnerabilities.
 ## [2.0.5] 2016-11-29
 
 ### Added
+
 - [x] Added support for `Blacklist` `expiredTime` attribute, and deprecated `expireTime` attribute.
 - [x] Added support for `Coupons` and `Discounts` and `Restrictions`.
 - [x] Added support for `Gateway` object inside of `Transaction` response.
@@ -274,24 +310,29 @@ Security - in case of vulnerabilities.
 - [x] Added support for `PaymentCardMigrations`.
 
 ### Changed
+
 - [x] Changed all enum values and made it consistent using `kebab-case` notation of naming.
 - [x] Moved support for the deprecated Website Webhooks to own object `WebsiteWebhook`.
 - [x] `LeadSource` is not an independent entity, but a child of `Customer`, `Subscription`, `Invoice`, or `Payment`.
 
 ### Fixed
+
 - [x] Fixed `bankName` attribute in `BankAccount`.
 
 ## [2.0.4] 2016-08-12
 
 ### Added
+
 - [x] Added `userId` attribute to `Session`. 
 
 ### Fixed
+
 - [x] Fixed `bankName` attribute in `BankAccount`.
 
 ## [2.0.3] 2016-07-29
 
 ### Added
+
 - [x] Enabled Disputes API.
 - [x] Enabled Webhook Tracking API.
 - [x] Enabled Subscription Tracking API.
@@ -299,23 +340,27 @@ Security - in case of vulnerabilities.
 - [x] Use vendor headers without additional prefixes.
 
 ### Changed
+
 - [x] Updated Payment Tokens API, added `paymentInstrument`.
 - [x] Updated Gateway Accounts API, added `method`.
 - [x] Updated Payment Cards API, added `bin`.
 - [x] Updated Payments API, added missing supported methods.
 
 ### Deprecated
+
 - [x] Since Payment Tokens resource was extended with `paymentInstrument`, all fields related to 
 payment card are deprecated.
 - [x] The `paymentMethods` was renamed to `paymentCardSchemes`, all methods related to old name 
 are deprecated. 
 
 ### Fixed
+
 - [x] Fixed Gateway payment schemes.
 
 ## [2.0.2] 2016-04-28
 
 ### Added
+
 - [x] Added `User-Agent` to all requests.
 - [x] Added paypal service and default payment method.
 - [x] Enabled Checkout Pages API.
@@ -331,12 +376,14 @@ are deprecated.
 - [x] Updated Payments API, added `cancel` method.
 
 ### Changed
+
 - [x] Update some resource fields.
 - [x] Updated Payments API, added `status` and `result` fields, deprecated `state` field.
 
 ## [2.0.1-rc] 2015-09-15
 
 ### Added
+
 - [x] Added support of pagination.
 - [x] Enabled Layouts API.
 - [x] Enabled Organizations API.
@@ -352,6 +399,7 @@ are deprecated.
 - [x] Updated Plans API, added `delete` method.
 
 ### Fixed
+
 - [x] Updated Payments API, fixed field names.
 - [x] Fixed resource factory, use decoded URL.
 - [x] Fixed response body read.

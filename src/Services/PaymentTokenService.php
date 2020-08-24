@@ -13,23 +13,19 @@ namespace Rebilly\Services;
 
 use ArrayObject;
 use JsonSerializable;
-use Rebilly\Entities\PaymentCardToken;
+use Rebilly\Entities\PaymentToken;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Paginator;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
 
-/**
- * Class PaymentCardTokenService
- *
- */
-final class PaymentCardTokenService extends Service
+final class PaymentTokenService extends Service
 {
     /**
      * @param array|ArrayObject $params
      *
-     * @return PaymentCardToken[][]|Collection[]|Paginator
+     * @return PaymentToken[][]|Collection[]|Paginator
      */
     public function paginator($params = [])
     {
@@ -39,7 +35,7 @@ final class PaymentCardTokenService extends Service
     /**
      * @param array|ArrayObject $params
      *
-     * @return PaymentCardToken[]|Collection
+     * @return PaymentToken[]|Collection
      */
     public function search($params = [])
     {
@@ -52,7 +48,7 @@ final class PaymentCardTokenService extends Service
      *
      * @throws NotFoundException The resource data does not exist
      *
-     * @return PaymentCardToken
+     * @return PaymentToken
      */
     public function load($tokenId, $params = [])
     {
@@ -60,19 +56,14 @@ final class PaymentCardTokenService extends Service
     }
 
     /**
-     * @param array|JsonSerializable|PaymentCardToken $data
-     * @param string $tokenId
+     * @param array|JsonSerializable|PaymentToken $data
      *
      * @throws UnprocessableEntityException The input data does not valid
      *
-     * @return PaymentCardToken
+     * @return PaymentToken
      */
-    public function create($data, $tokenId = null)
+    public function create($data)
     {
-        if (isset($tokenId)) {
-            return $this->client()->put($data, 'tokens/{tokenId}', ['tokenId' => $tokenId]);
-        }
-
         return $this->client()->post($data, 'tokens');
     }
 
@@ -81,7 +72,7 @@ final class PaymentCardTokenService extends Service
      *
      * @throws NotFoundException The resource data does not exist
      *
-     * @return PaymentCardToken
+     * @return PaymentToken
      */
     public function expire($tokenId)
     {

@@ -45,6 +45,7 @@ class ApiTest extends TestCase
 
         /** @var Rest\Resource $resource */
         $resource = new $class($values);
+        $values = array_merge($values, $resource->jsonSerialize());
 
         $methods = get_class_methods($resource);
 
@@ -131,6 +132,24 @@ class ApiTest extends TestCase
      */
     public function provideEntityClasses()
     {
+        // Ignore deprecated fields in payment token tests, they conflicted with new attribute setters `setPaymentInstrument`.
+        $paymentTokenDeprecatedAttributes = [
+            'pan',
+            'cvv',
+            'last4',
+            'expYear',
+            'expMonth',
+            'firstName',
+            'lastName',
+            'address',
+            'address2',
+            'city',
+            'region',
+            'country',
+            'postalCode',
+            'phoneNumber',
+        ];
+
         return [
             [Entities\Address::class],
             [Entities\Attachment::class],
@@ -148,7 +167,8 @@ class ApiTest extends TestCase
             [Entities\PaymentMethods\PaymentCardMethod::class, null],
             [Entities\PaymentCard::class],
             [Entities\PaymentCardAuthorization::class, null],
-            [Entities\PaymentCardToken::class, null],
+            [Entities\PaymentCardToken::class, null, $paymentTokenDeprecatedAttributes],
+            [Entities\PaymentToken::class, null, $paymentTokenDeprecatedAttributes],
             [Entities\Plan::class],
             [Entities\ResetPasswordToken::class, 'token'],
             [Entities\SubscriptionReactivation::class, null],
@@ -189,7 +209,7 @@ class ApiTest extends TestCase
             [Entities\InvoiceTax::class],
             [Entities\SubscriptionChangePlan::class],
             [Entities\SubscriptionInterimInvoice::class],
-            [Entities\PaymentInstruments\BankAccountPaymentInstrument::class],
+            [Entities\PaymentInstruments\BankAccountPaymentInstrument::class, null],
             [Entities\PaymentRetryAttempt::class],
             [Entities\GatewayAccountDowntime::class],
             [Entities\PlaidCredential::class, 'hash'],

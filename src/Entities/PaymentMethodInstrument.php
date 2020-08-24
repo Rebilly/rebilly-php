@@ -20,13 +20,8 @@ use Rebilly\Entities\PaymentInstruments\PaymentCardInstrument;
 use Rebilly\Entities\PaymentInstruments\PayPalInstrument;
 use Rebilly\Rest\Resource;
 
-/**
- * Class PaymentMethodInstrument.
- */
 abstract class PaymentMethodInstrument extends Resource
 {
-    public const MSG_UNSUPPORTED_METHOD = 'Unexpected method. Only %s methods are supported';
-
     public const MSG_REQUIRED_METHOD = 'Method is required';
 
     /**
