@@ -40,6 +40,8 @@ abstract class PaymentMethod extends Resource
 
     public const METHOD_ONLINEUEBERWEISEN = 'Onlineueberweisen';
 
+    public const METHOD_KHELOCARD = 'Khelocard';
+
     /**
      * Return the method name
      *

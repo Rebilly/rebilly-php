@@ -25,25 +25,11 @@ class BankAccountPaymentInstrument extends PaymentInstrument
 
     public const MSG_UNEXPECTED_ACCOUNT_TYPE = 'Unexpected account type. Only %s account type support';
 
-    /**
-     * @return array
-     */
-    public static function allowedAccountTypes()
-    {
-        return [
-            self::ACCOUNT_TYPE_CHECKING,
-            self::ACCOUNT_TYPE_SAVINGS,
-            self::ACCOUNT_TYPE_OTHER,
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function name()
-    {
-        return PaymentMethod::METHOD_ACH;
-    }
+    private const ALLOWED_ACCOUNT_TYPES = [
+        self::ACCOUNT_TYPE_CHECKING,
+        self::ACCOUNT_TYPE_SAVINGS,
+        self::ACCOUNT_TYPE_OTHER,
+    ];
 
     /**
      * @param string $value
@@ -114,12 +100,15 @@ class BankAccountPaymentInstrument extends PaymentInstrument
      */
     public function setAccountType($value)
     {
-        $allowedAccountTypes = self::allowedAccountTypes();
-
-        if (!in_array($value, $allowedAccountTypes, true)) {
-            throw new DomainException(sprintf(self::MSG_UNEXPECTED_ACCOUNT_TYPE, implode(', ', $allowedAccountTypes)));
+        if (!in_array($value, self::ALLOWED_ACCOUNT_TYPES, true)) {
+            throw new DomainException(sprintf(self::MSG_UNEXPECTED_ACCOUNT_TYPE, implode(', ', self::ALLOWED_ACCOUNT_TYPES)));
         }
 
         return $this->setAttribute('accountType', $value);
+    }
+
+    protected function methodName()
+    {
+        return PaymentMethod::METHOD_ACH;
     }
 }

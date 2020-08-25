@@ -12,8 +12,6 @@
 namespace Rebilly\Entities;
 
 use InvalidArgumentException;
-use Rebilly\Entities\PaymentInstruments\BankAccountPaymentInstrument;
-use Rebilly\Entities\PaymentInstruments\PaymentCardPaymentInstrument;
 use Rebilly\Rest\Resource;
 
 abstract class PaymentInstrument extends Resource
@@ -24,7 +22,7 @@ abstract class PaymentInstrument extends Resource
 
     public function __construct(array $data = [])
     {
-        parent::__construct(['method' => $this->name()] + $data);
+        parent::__construct(['method' => $this->methodName()] + $data);
     }
 
     public static function createFromData(array $data)
@@ -35,9 +33,11 @@ abstract class PaymentInstrument extends Resource
 
         switch ($data['method']) {
             case PaymentMethod::METHOD_ACH:
-                return new BankAccountPaymentInstrument($data);
+                return new PaymentInstruments\BankAccountPaymentInstrument($data);
             case PaymentMethod::METHOD_PAYMENT_CARD:
-                return new PaymentCardPaymentInstrument($data);
+                return new PaymentInstruments\PaymentCardPaymentInstrument($data);
+            case PaymentMethod::METHOD_KHELOCARD:
+                return new PaymentInstruments\KhelocardCardPaymentInstrument($data);
             default:
                 throw new InvalidArgumentException(self::ERROR_UNSUPPORTED_METHOD);
         }
@@ -52,9 +52,7 @@ abstract class PaymentInstrument extends Resource
     }
 
     /**
-     * Return the method name
-     *
      * @return string
      */
-    abstract public function name();
+    abstract protected function methodName();
 }

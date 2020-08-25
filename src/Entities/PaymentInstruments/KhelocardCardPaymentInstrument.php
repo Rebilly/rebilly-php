@@ -14,7 +14,7 @@ namespace Rebilly\Entities\PaymentInstruments;
 use Rebilly\Entities\PaymentInstrument;
 use Rebilly\Entities\PaymentMethod;
 
-class PaymentCardPaymentInstrument extends PaymentInstrument
+class KhelocardCardPaymentInstrument extends PaymentInstrument
 {
     /**
      * @param string $value
@@ -34,14 +34,6 @@ class PaymentCardPaymentInstrument extends PaymentInstrument
     public function setCvv($value)
     {
         return $this->setAttribute('cvv', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getLast4()
-    {
-        return $this->getAttribute('last4');
     }
 
     /**
@@ -82,6 +74,6 @@ class PaymentCardPaymentInstrument extends PaymentInstrument
 
     protected function methodName()
     {
-        return PaymentMethod::METHOD_PAYMENT_CARD;
+        return PaymentMethod::METHOD_KHELOCARD;
     }
 }

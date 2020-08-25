@@ -127,10 +127,7 @@ class ApiTest extends TestCase
         self::assertInstanceOf(Entities\Address::class, $resource->getPrimaryAddress());
     }
 
-    /**
-     * @return array
-     */
-    public function provideEntityClasses()
+    public function provideEntityClasses(): iterable
     {
         // Ignore deprecated fields in payment token tests, they conflicted with new attribute setters `setPaymentInstrument`.
         $paymentTokenDeprecatedAttributes = [
@@ -150,7 +147,7 @@ class ApiTest extends TestCase
             'phoneNumber',
         ];
 
-        return [
+        $cases = [
             [Entities\Address::class],
             [Entities\Attachment::class],
             [Entities\AuthenticationOptions::class, null],
@@ -210,9 +207,15 @@ class ApiTest extends TestCase
             [Entities\SubscriptionChangePlan::class],
             [Entities\SubscriptionInterimInvoice::class],
             [Entities\PaymentInstruments\BankAccountPaymentInstrument::class, null],
+            [Entities\PaymentInstruments\PaymentCardPaymentInstrument::class, null],
+            [Entities\PaymentInstruments\KhelocardCardPaymentInstrument::class, null],
             [Entities\PaymentRetryAttempt::class],
             [Entities\GatewayAccountDowntime::class],
             [Entities\PlaidCredential::class, 'hash'],
         ];
+
+        foreach ($cases as $case) {
+            yield $case[0] => $case;
+        }
     }
 }

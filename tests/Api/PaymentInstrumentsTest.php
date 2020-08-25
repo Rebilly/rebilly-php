@@ -133,7 +133,7 @@ class PaymentInstrumentsTest extends BaseTestCase
         $instrument->setPan('4111111111111111');
 
         self::assertInstanceOf(PaymentCardPaymentInstrument::class, $instrument);
-        self::assertSame('payment-card', $instrument->name());
+        self::assertSame('payment-card', $instrument->getMethod());
         self::assertSame(11, $instrument->getExpMonth());
         self::assertSame(date('Y') + 1, $instrument->getExpYear());
         self::assertFalse(method_exists($instrument, 'getCvv'));
