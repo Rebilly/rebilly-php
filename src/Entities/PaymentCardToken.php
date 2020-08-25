@@ -355,12 +355,20 @@ class PaymentCardToken extends Entity
     }
 
     /**
-     * @return PaymentMethodInstrument
+     * @return string
+     */
+    public function getMethod()
+    {
+        return $this->getAttribute('method');
+    }
+
+    /**
+     * @return PaymentInstrument
      */
     public function getPaymentInstrument()
     {
-        return PaymentMethodInstrument::createFromData([
-            'method' => $this->getAttribute('method'),
+        return PaymentInstrument::createFromData([
+            'method' => $this->getMethod(),
         ] + $this->getAttribute('paymentInstrument'));
     }
 
