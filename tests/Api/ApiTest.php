@@ -145,6 +145,7 @@ class ApiTest extends TestCase
             'country',
             'postalCode',
             'phoneNumber',
+            'method',
         ];
 
         $cases = [
