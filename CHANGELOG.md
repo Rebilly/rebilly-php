@@ -21,6 +21,7 @@ Security - in case of vulnerabilities.
 - [x] Added **Plaid Credentials API**
 - [x] Added `PaymentToken`
 - [x] Added `Client::paymentTokens()` factory
+- [x] Added `KhelocardCardPaymentInstrument` for **Khelocard** payment tokens
 
 ### Deprecated
 
