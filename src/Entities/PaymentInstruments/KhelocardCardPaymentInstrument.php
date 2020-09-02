@@ -21,9 +21,9 @@ class KhelocardCardPaymentInstrument extends PaymentInstrument
      *
      * @return $this
      */
-    public function setPan($value)
+    public function setNumber($value)
     {
-        return $this->setAttribute('pan', $value);
+        return $this->setAttribute('number', $value);
     }
 
     /**
