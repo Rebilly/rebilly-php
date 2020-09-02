@@ -16,6 +16,7 @@ use Faker\Generator as Faker;
 use InvalidArgumentException;
 use PHPUnit\Framework;
 use Rebilly\Entities;
+use Rebilly\Entities\PaymentInstruments\KhelocardCardPaymentInstrument;
 use Rebilly\Entities\PaymentRetryInstructions\PaymentInstruction;
 use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstruction;
 
@@ -693,6 +694,11 @@ abstract class TestCase extends Framework\TestCase
                         'merchantOrigin' => 'www.example.com',
                     ],
                 ]);
+            case 'number':
+                if ($class === KhelocardCardPaymentInstrument::class) {
+                    return $faker->creditCardNumber;
+                }
+                // no break
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
