@@ -563,7 +563,7 @@ class ServiceTest extends BaseTestCase
         $service = $client->payouts();
 
         $result = $service->create([]);
-        $this->assertInstanceOf(Rest\Collection::class, $result);
+        $this->assertInstanceOf(Entities\Payout::class, $result);
     }
 
     /**
