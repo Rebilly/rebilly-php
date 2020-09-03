@@ -60,6 +60,7 @@ use RuntimeException;
  * @method Services\SubscriptionService subscriptions()
  * @method Services\SubscriptionCancellationService subscriptionCancellations()
  * @method Services\TransactionService transactions()
+ * @method Services\PayoutService payouts()
  * @method Services\SubscriptionReactivationService subscriptionReactivations()
  * @method Services\WebsiteService websites()
  * @method Services\OrganizationService organizations()
@@ -122,6 +123,7 @@ final class Client
         'subscriptions' => Services\SubscriptionService::class,
         'subscriptionCancellations' => Services\SubscriptionCancellationService::class,
         'transactions' => Services\TransactionService::class,
+        'payouts' => Services\PayoutService::class,
         'subscriptionReactivations' => Services\SubscriptionReactivationService::class,
         'websites' => Services\WebsiteService::class,
         'files' => Services\FileService::class,

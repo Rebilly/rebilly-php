@@ -14,22 +14,10 @@ namespace Rebilly\Entities;
 use Rebilly\Rest\Entity;
 
 /**
- * Class Transaction.
+ * Class Payout.
  */
-class Transaction extends Entity implements TransactionInterface
+final class Payout extends Entity
 {
-    public const TYPE_AUTHORIZE = 'authorize';
-
-    public const TYPE_SALE = 'sale';
-
-    public static function types()
-    {
-        return [
-            self::TYPE_AUTHORIZE,
-            self::TYPE_SALE,
-        ];
-    }
-
     /**
      * @return string
      */
@@ -100,24 +88,6 @@ class Transaction extends Entity implements TransactionInterface
     public function getScheduledTime()
     {
         return $this->getAttribute('scheduledTime');
-    }
-
-    /**
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->getAttribute('type');
-    }
-
-    /**
-     * @param $value
-     *
-     * @return $this
-     */
-    public function setType($value)
-    {
-        return $this->setAttribute('type', $value);
     }
 
     /**
@@ -270,14 +240,6 @@ class Transaction extends Entity implements TransactionInterface
     public function getPlanIds()
     {
         return $this->getAttribute('planIds');
-    }
-
-    /**
-     * @return bool
-     */
-    public function getIsDisputed()
-    {
-        return $this->getAttribute('isDisputed');
     }
 
     /**
@@ -490,14 +452,6 @@ class Transaction extends Entity implements TransactionInterface
     public function setNotificationUrl($value)
     {
         return $this->setAttribute('notificationUrl', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getApprovalUrl()
-    {
-        return $this->getLink('approvalUrl');
     }
 
     /**
