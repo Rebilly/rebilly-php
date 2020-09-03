@@ -16,7 +16,7 @@ use Rebilly\Rest\Entity;
 /**
  * Class Transaction.
  */
-class Transaction extends Entity
+final class Transaction extends Entity
 {
     public const TYPE_AUTHORIZE = 'authorize';
 
