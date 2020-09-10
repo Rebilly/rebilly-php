@@ -57,14 +57,6 @@ final class Payout extends Entity
     /**
      * @return string
      */
-    public function getCreatedTime()
-    {
-        return $this->getAttribute('createdTime');
-    }
-
-    /**
-     * @return string
-     */
     public function getProcessedTime()
     {
         return $this->getAttribute('processedTime');
@@ -80,38 +72,6 @@ final class Payout extends Entity
     public function setProcessedTime($value)
     {
         return $this->setAttribute('processedTime', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getScheduledTime()
-    {
-        return $this->getAttribute('scheduledTime');
-    }
-
-    /**
-     * @return string
-     */
-    public function getResult()
-    {
-        return $this->getAttribute('result');
-    }
-
-    /**
-     * @return string
-     */
-    public function getParentTransactionId()
-    {
-        return $this->getAttribute('parentTransaction');
-    }
-
-    /**
-     * @return string
-     */
-    public function getRebillNumber()
-    {
-        return $this->getAttribute('rebillNumber');
     }
 
     /**
@@ -169,77 +129,11 @@ final class Payout extends Entity
     }
 
     /**
-     * @deprecated The method is deprecated and will be removed in next version.
-     *
-     * @return string
-     */
-    public function getPaymentCardId()
-    {
-        return $this->getAttribute('paymentCard');
-    }
-
-    /**
-     * @return null|PaymentCard
-     */
-    public function getPaymentCard()
-    {
-        if ($this->hasEmbeddedResource('paymentCard')) {
-            return new PaymentCard($this->getEmbeddedResource('paymentCard'));
-        }
-
-        return null;
-    }
-
-    /**
-     * @return null|BankAccount
-     */
-    public function getBankAccount()
-    {
-        if ($this->hasEmbeddedResource('bankAccount')) {
-            return new BankAccount($this->getEmbeddedResource('bankAccount'));
-        }
-
-        return null;
-    }
-
-    /**
-     * @return Gateway|null
-     */
-    public function getGateway()
-    {
-        return ($this->getAttribute('gateway') !== null) ? new Gateway($this->getAttribute('gateway')) : null;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isApproved()
-    {
-        return $this->getResult() === 'approved';
-    }
-
-    /**
-     * @return array
-     */
-    public function getSubscriptionIds()
-    {
-        return $this->getAttribute('subscriptionIds');
-    }
-
-    /**
      * @return array
      */
     public function getInvoiceIds()
     {
         return $this->getAttribute('invoiceIds');
-    }
-
-    /**
-     * @return array
-     */
-    public function getPlanIds()
-    {
-        return $this->getAttribute('planIds');
     }
 
     /**
@@ -250,62 +144,6 @@ final class Payout extends Entity
     public function setInvoiceIds($value)
     {
         return $this->setAttribute('invoiceIds', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getStatus()
-    {
-        return $this->getAttribute('status');
-    }
-
-    /**
-     * @return array
-     */
-    public function getChildTransactions()
-    {
-        return $this->getAttribute('childTransactions');
-    }
-
-    /**
-     * @return string
-     */
-    public function getGatewayAccountId()
-    {
-        return $this->getAttribute('gatewayAccountId');
-    }
-
-    /**
-     * @return string
-     */
-    public function getGatewayTransactionId()
-    {
-        return $this->getAttribute('gatewayTransactionId');
-    }
-
-    /**
-     * @return string
-     */
-    public function getGatewayName()
-    {
-        return $this->getAttribute('gatewayName');
-    }
-
-    /**
-     * @return string
-     */
-    public function getAcquirerName()
-    {
-        return $this->getAttribute('acquirerName');
-    }
-
-    /**
-     * @return string
-     */
-    public function getMethod()
-    {
-        return $this->getAttribute('method');
     }
 
     /**
@@ -327,38 +165,6 @@ final class Payout extends Entity
     }
 
     /**
-     * @return string
-     */
-    public function getBin()
-    {
-        return $this->getAttribute('bin');
-    }
-
-    /**
-     * @return bool
-     */
-    public function has3ds()
-    {
-        return $this->getAttribute('has3ds');
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasDcc()
-    {
-        return $this->getAttribute('hasDcc');
-    }
-
-    /**
-     * @return Address
-     */
-    public function getDeliveryAddress()
-    {
-        return $this->getAttribute('deliveryAddress');
-    }
-
-    /**
      * @return Address
      */
     public function getBillingAddress()
@@ -376,47 +182,6 @@ final class Payout extends Entity
         return $this->setAttribute('billingAddress', $value);
     }
 
-    /**
-     * @return RiskMetadata
-     */
-    public function getRiskMetadata()
-    {
-        return $this->getAttribute('riskMetadata');
-    }
-
-    /**
-     * @param array $data
-     *
-     * @return Address
-     */
-    public function createBillingAddress(array $data)
-    {
-        return new Address($data);
-    }
-
-    /**
-     * @return bool
-     */
-    public function getIsRetry()
-    {
-        return $this->getAttribute('isRetry');
-    }
-
-    /**
-     * @return string
-     */
-    public function getRetriesResult()
-    {
-        return $this->getAttribute('retriesResult');
-    }
-
-    /**
-     * @return string
-     */
-    public function getRetriedTransactionId()
-    {
-        return $this->getAttribute('retriedTransactionId');
-    }
 
     /**
      * @return string
@@ -455,18 +220,6 @@ final class Payout extends Entity
     }
 
     /**
-     * @return null|Customer
-     */
-    public function getCustomer()
-    {
-        if ($this->hasEmbeddedResource('customer')) {
-            return new Customer($this->getEmbeddedResource('customer'));
-        }
-
-        return null;
-    }
-
-    /**
      * @return array
      */
     public function getCustomFields()
@@ -500,70 +253,6 @@ final class Payout extends Entity
     public function setDescription($value)
     {
         return $this->setAttribute('description', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getVelocity()
-    {
-        return $this->getAttribute('velocity');
-    }
-
-    /**
-     * @return string
-     */
-    public function getRevision()
-    {
-        return $this->getAttribute('revision');
-    }
-
-    /**
-     * @return string
-     */
-    public function getRequestAmount()
-    {
-        return $this->getAttribute('requestAmount');
-    }
-
-    /**
-     * @return string
-     */
-    public function getRequestCurrency()
-    {
-        return $this->getAttribute('requestCurrency');
-    }
-
-    /**
-     * @return string
-     */
-    public function getPurchaseAmount()
-    {
-        return $this->getAttribute('purchaseAmount');
-    }
-
-    /**
-     * @return string
-     */
-    public function getPurchaseCurrency()
-    {
-        return $this->getAttribute('purchaseCurrency');
-    }
-
-    /**
-     * @return string
-     */
-    public function getReportAmount()
-    {
-        return $this->getAttribute('reportAmount');
-    }
-
-    /**
-     * @return string
-     */
-    public function getReportCurrency()
-    {
-        return $this->getAttribute('reportCurrency');
     }
 
     /**
