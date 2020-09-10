@@ -12,6 +12,7 @@
 namespace Rebilly\Services;
 
 use JsonSerializable;
+use Rebilly\Entities\Transaction;
 use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Rest\Service;
 
@@ -26,7 +27,7 @@ final class PayoutService extends Service
      *
      * @throws UnprocessableEntityException The input data does not valid
      *
-     * @return Payout
+     * @return Transaction
      */
     public function create($data)
     {
