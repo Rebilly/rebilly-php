@@ -552,7 +552,7 @@ class ServiceTest extends BaseTestCase
             ->expects($this->any())
             ->method('__invoke')
             ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'payouts')
+                $client->createResponse()->withHeader('Location', 'transactions/dummy')
             ));
 
         $client = new Client([
