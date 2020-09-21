@@ -541,6 +541,34 @@ class ServiceTest extends BaseTestCase
     /**
      * @test
      */
+    public function payoutService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->createMock(CurlHandler::class);
+
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'transactions/dummy')
+            ));
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+
+        $service = $client->payouts();
+
+        $result = $service->create([]);
+        $this->assertInstanceOf(Entities\Transaction::class, $result);
+    }
+
+    /**
+     * @test
+     */
     public function paymentCardService()
     {
         $faker = $this->getFaker();
