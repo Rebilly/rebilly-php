@@ -19,6 +19,7 @@ Security - in case of vulnerabilities.
 
 - [x] Added **Blocklist API**
 - [x] Added **Plaid Credentials API**
+- [x] Added **Payment Instruments API**
 - [x] Added `PaymentToken`
 - [x] Added `Client::paymentTokens()` factory
 - [x] Added `KhelocardCardPaymentInstrument` for **Khelocard** payment tokens
@@ -33,6 +34,7 @@ Security - in case of vulnerabilities.
 
 - [x] Removed payment methods restriction in the `PaymentMethodInstrument`
 - [x] Removed payment methods restriction in the `GatewayAccount`
+- [x] Removed `PayPalAccount` method: `getApprovalLink`
 
 ## [2.8.0] 2020-07-02
 

@@ -213,6 +213,7 @@ class ApiTest extends TestCase
             [Entities\PaymentRetryAttempt::class],
             [Entities\GatewayAccountDowntime::class],
             [Entities\PlaidCredential::class, 'hash'],
+            [Entities\CommonPaymentInstrument::class],
         ];
 
         foreach ($cases as $case) {

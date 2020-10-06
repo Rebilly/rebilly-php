@@ -155,6 +155,7 @@ final class Client
         'customerTimeline' => Services\CustomerTimelineService::class,
         'aml' => Services\AmlService::class,
         'plaidCredentials' => Services\PlaidCredentialsService::class,
+        'paymentInstruments' => Services\PaymentInstrumentService::class,
     ];
 
     /** @var array */

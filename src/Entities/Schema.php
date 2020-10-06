@@ -345,6 +345,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'credential-hashes/plaid/{hash}' => function (array $content) {
                 return new PlaidCredential($content);
             },
+            'payment-instruments' => function (array $content) {
+                return new Collection(new CommonPaymentInstrument(), $content);
+            },
+            'payment-instruments/{paymentInstrumentId}' => function (array $content) {
+                return new CommonPaymentInstrument($content);
+            },
         ];
     }
 

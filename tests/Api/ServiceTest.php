@@ -1348,6 +1348,11 @@ class ServiceTest extends BaseTestCase
                 Services\RedemptionService::class,
                 Entities\Coupons\Redemption::class,
             ],
+            [
+                'paymentInstruments',
+                Services\PaymentInstrumentService::class,
+                Entities\CommonPaymentInstrument::class,
+            ],
         ];
     }
 }
