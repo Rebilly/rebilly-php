@@ -599,14 +599,14 @@ class ServiceTest extends BaseTestCase
             'httpHandler' => $handler,
         ]);
 
-        $service = $client->paymentCards();
+        $service = $client->paymentInstruments();
 
         $paymentInstrument = new JsonObject(['customerId' => $faker->uuid, 'method' => 'payment-card']);
 
         $result = $service->createFromToken('token', $paymentInstrument);
         $this->assertInstanceOf(Entities\CommonPaymentInstrument::class, $result);
 
-        $result = $service->createFromToken('token', ['customerId' => $faker->uuid], 'dummy');
+        $result = $service->createFromToken('token', ['customerId' => $faker->uuid]);
         $this->assertInstanceOf(Entities\CommonPaymentInstrument::class, $result);
 
         $result = $service->createFromToken(['token' => 'dummy'], $paymentInstrument);
