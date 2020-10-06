@@ -34,7 +34,7 @@ Security - in case of vulnerabilities.
 
 - [x] Removed payment methods restriction in the `PaymentMethodInstrument`
 - [x] Removed payment methods restriction in the `GatewayAccount`
-- [x] Removed `PayPalAccount` method: `getApprovalLink`
+- [x] Removed deprecated `PayPalAccount` method: `getApprovalLink`
 
 ## [2.8.0] 2020-07-02
 
