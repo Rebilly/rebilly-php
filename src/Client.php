@@ -92,6 +92,7 @@ use RuntimeException;
  * @method Services\RuleService eventRules()
  * @method Services\CustomerTimelineService customerTimeline()
  * @method Services\AmlService aml()
+ * @method Services\PaymentInstrumentService paymentInstruments()
  */
 final class Client
 {
