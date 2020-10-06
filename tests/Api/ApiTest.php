@@ -194,7 +194,6 @@ class ApiTest extends TestCase
             [Entities\ForgotPassword::class],
             [Entities\Login::class],
             [Entities\Dispute::class],
-            [Entities\PaymentCardMigrationsRequest::class],
             [Entities\Coupons\Coupon::class],
             [Entities\Coupons\Redemption::class],
             [Entities\ValuesList::class],
