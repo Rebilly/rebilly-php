@@ -14,6 +14,6 @@ namespace Rebilly\Entities;
 /**
  * Class BankAccount.
  */
-final class BankAccount extends AbstractPaymentInstrument
+final class BankAccount extends CommonPaymentInstrument
 {
 }

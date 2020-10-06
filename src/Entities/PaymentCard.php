@@ -14,6 +14,6 @@ namespace Rebilly\Entities;
 /**
  * Class PaymentCard.
  */
-final class PaymentCard extends AbstractPaymentInstrument
+final class PaymentCard extends CommonPaymentInstrument
 {
 }

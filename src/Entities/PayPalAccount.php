@@ -14,6 +14,6 @@ namespace Rebilly\Entities;
 /**
  * Class PayPalAccount.
  */
-final class PayPalAccount extends AbstractPaymentInstrument
+final class PayPalAccount extends CommonPaymentInstrument
 {
 }

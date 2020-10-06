@@ -29,7 +29,7 @@ final class PaymentInstrumentService extends Service
     /**
      * @param array|ArrayObject $params
      *
-     * @return CommonPaymentInstrument[]|Collection[]|Paginator
+     * @return CommonPaymentInstrument[][]|Collection[]|Paginator
      */
     public function paginator($params = [])
     {

@@ -13,7 +13,7 @@ namespace Rebilly\Services;
 
 use ArrayObject;
 use JsonSerializable;
-use Rebilly\Entities\PaymentCard;
+use Rebilly\Entities\CommonPaymentInstrument;
 use Rebilly\Entities\PaymentCardAuthorization;
 use Rebilly\Entities\PaymentToken;
 use Rebilly\Http\Exception\NotFoundException;
@@ -30,7 +30,7 @@ final class PaymentCardService extends Service
     /**
      * @param array|ArrayObject $params
      *
-     * @return PaymentCard[][]|Collection[]|Paginator
+     * @return CommonPaymentInstrument[][]|Collection[]|Paginator
      */
     public function paginator($params = [])
     {
@@ -40,7 +40,7 @@ final class PaymentCardService extends Service
     /**
      * @param array|ArrayObject $params
      *
-     * @return PaymentCard[]|Collection
+     * @return CommonPaymentInstrument[]|Collection
      */
     public function search($params = [])
     {
@@ -53,7 +53,7 @@ final class PaymentCardService extends Service
      *
      * @throws NotFoundException The resource data does not exist
      *
-     * @return PaymentCard
+     * @return CommonPaymentInstrument
      */
     public function load($cardId, $params = [])
     {
@@ -61,12 +61,12 @@ final class PaymentCardService extends Service
     }
 
     /**
-     * @param array|JsonSerializable|PaymentCard $data
+     * @param array|JsonSerializable|CommonPaymentInstrument $data
      * @param string $cardId
      *
      * @throws UnprocessableEntityException The input data does not valid
      *
-     * @return PaymentCard
+     * @return CommonPaymentInstrument
      */
     public function create($data, $cardId = null)
     {
@@ -79,12 +79,12 @@ final class PaymentCardService extends Service
 
     /**
      * @param string|array|JsonSerializable|PaymentToken $token
-     * @param array|JsonSerializable|PaymentCard $data
+     * @param array|JsonSerializable|CommonPaymentInstrument $data
      * @param string $cardId
      *
      * @throws UnprocessableEntityException The input data does not valid
      *
-     * @return PaymentCard
+     * @return CommonPaymentInstrument
      */
     public function createFromToken($token, $data, $cardId = null)
     {
@@ -103,11 +103,11 @@ final class PaymentCardService extends Service
 
     /**
      * @param string $cardId
-     * @param array|JsonSerializable|PaymentCard $data
+     * @param array|JsonSerializable|CommonPaymentInstrument $data
      *
      * @throws UnprocessableEntityException The input data does not valid
      *
-     * @return PaymentCard
+     * @return CommonPaymentInstrument
      */
     public function update($cardId, $data)
     {
@@ -120,7 +120,7 @@ final class PaymentCardService extends Service
      *
      * @throws UnprocessableEntityException The input data does not valid
      *
-     * @return PaymentCard
+     * @return CommonPaymentInstrument
      */
     public function authorize($data, $cardId)
     {
@@ -130,7 +130,7 @@ final class PaymentCardService extends Service
     /**
      * @param string $cardId
      *
-     * @return PaymentCard
+     * @return CommonPaymentInstrument
      */
     public function deactivate($cardId)
     {
