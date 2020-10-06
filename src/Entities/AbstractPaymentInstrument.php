@@ -366,6 +366,16 @@ abstract class AbstractPaymentInstrument extends Resource
     }
 
     /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setBic($value)
+    {
+        return $this->setAttribute('bic', $value);
+    }
+
+    /**
      * @return string
      */
     public function getUserName()
