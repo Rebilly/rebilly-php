@@ -12,7 +12,6 @@
 namespace Rebilly\Tests\Api;
 
 use InvalidArgumentException;
-use Rebilly\Entities\PaymentCardMigrationsResponse;
 use Rebilly\Entities\PaymentInstruments\AchInstrument;
 use Rebilly\Entities\PaymentInstruments\AlternativeInstrument;
 use Rebilly\Entities\PaymentInstruments\CashInstrument;
@@ -159,19 +158,6 @@ class PaymentInstrumentsTest extends BaseTestCase
         $value = PaymentMethodInstrument::createFromData($data);
         self::assertInstanceOf(PaymentMethodInstrument::class, $value);
         self::assertSame($data, $value->jsonSerialize());
-    }
-
-    /**
-     * @test
-     */
-    public function paymentCardMigrationsResponse()
-    {
-        $response = new PaymentCardMigrationsResponse([
-            'migratedCards' => 2,
-        ]);
-
-        self::assertInstanceOf(PaymentCardMigrationsResponse::class, $response);
-        self::assertSame(2, $response->getMigratedCards());
     }
 
     /**

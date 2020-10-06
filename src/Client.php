@@ -74,7 +74,6 @@ use RuntimeException;
  * @method Services\ApiKeyService apiKeys()
  * @method Services\CheckoutPageService checkoutPages()
  * @method Services\DisputeService disputes()
- * @method Services\PaymentCardMigrationsService paymentCardMigrations()
  * @method Services\FileService files()
  * @method Services\AttachmentService attachments()
  * @method Services\ProductService products()
@@ -140,7 +139,6 @@ final class Client
         'apiKeys' => Services\ApiKeyService::class,
         'checkoutPages' => Services\CheckoutPageService::class,
         'disputes' => Services\DisputeService::class,
-        'paymentCardMigrations' => Services\PaymentCardMigrationsService::class,
         'coupons' => Services\CouponService::class,
         'couponsRedemptions' => Services\RedemptionService::class,
         'webhooks' => Services\WebhooksService::class,

@@ -855,33 +855,6 @@ class ServiceTest extends BaseTestCase
     /**
      * @test
      */
-    public function paymentCardMigrationService()
-    {
-        $client = new Client(['apiKey' => 'QWERTY']);
-
-        /** @var CurlHandler|MockObject $handler */
-        $handler = $this->createMock(CurlHandler::class);
-
-        $handler
-            ->expects($this->any())
-            ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'payment-cards-migrations/migrate')
-            ));
-
-        $client = new Client([
-            'apiKey' => 'QWERTY',
-            'httpHandler' => $handler,
-        ]);
-        $service = $client->paymentCardMigrations();
-
-        $result = $service->migrate([]);
-        $this->assertInstanceOf(Entities\PaymentCardMigrationsResponse::class, $result);
-    }
-
-    /**
-     * @test
-     */
     public function bankAccountService()
     {
         $client = new Client(['apiKey' => 'QWERTY']);
@@ -1342,11 +1315,6 @@ class ServiceTest extends BaseTestCase
                 'disputes',
                 Services\DisputeService::class,
                 Entities\Dispute::class,
-            ],
-            [
-                'paymentCardMigrations',
-                Services\PaymentCardMigrationsService::class,
-                Entities\PaymentCardMigrationsRequest::class,
             ],
             [
                 'products',

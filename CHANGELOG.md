@@ -32,6 +32,7 @@ Security - in case of vulnerabilities.
 
 ### Removed
 
+- [x] Removed **Payment Cards Migrations API**
 - [x] Removed payment methods restriction in the `PaymentMethodInstrument`
 - [x] Removed payment methods restriction in the `GatewayAccount`
 - [x] Removed deprecated `PayPalAccount` method: `getApprovalLink`
