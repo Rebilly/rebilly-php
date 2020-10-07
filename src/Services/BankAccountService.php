@@ -13,7 +13,7 @@ namespace Rebilly\Services;
 
 use ArrayObject;
 use JsonSerializable;
-use Rebilly\Entities\BankAccount;
+use Rebilly\Entities\CommonPaymentInstrument;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Paginator;
@@ -28,7 +28,7 @@ final class BankAccountService extends Service
     /**
      * @param array|ArrayObject $params
      *
-     * @return BankAccount[][]|Collection[]|Paginator
+     * @return CommonPaymentInstrument[][]|Collection[]|Paginator
      */
     public function paginator($params = [])
     {
@@ -38,7 +38,7 @@ final class BankAccountService extends Service
     /**
      * @param array|ArrayObject $params
      *
-     * @return BankAccount[]|Collection
+     * @return CommonPaymentInstrument[]|Collection
      */
     public function search($params = [])
     {
@@ -51,7 +51,7 @@ final class BankAccountService extends Service
      *
      * @throws NotFoundException The resource data does not exist
      *
-     * @return BankAccount
+     * @return CommonPaymentInstrument
      */
     public function load($bankAccountId, $params = [])
     {
@@ -59,12 +59,12 @@ final class BankAccountService extends Service
     }
 
     /**
-     * @param array|JsonSerializable|BankAccount $data
+     * @param array|JsonSerializable|CommonPaymentInstrument $data
      * @param string $bankAccountId
      *
      * @throws UnprocessableEntityException The input data does not valid
      *
-     * @return BankAccount
+     * @return CommonPaymentInstrument
      */
     public function create($data, $bankAccountId = null)
     {
@@ -77,12 +77,12 @@ final class BankAccountService extends Service
 
     /**
      * @param string|array|JsonSerializable $token
-     * @param array|JsonSerializable|BankAccount $data
+     * @param array|JsonSerializable|CommonPaymentInstrument $data
      * @param string $bankAccountId
      *
      * @throws UnprocessableEntityException The input data does not valid
      *
-     * @return BankAccount
+     * @return CommonPaymentInstrument
      */
     public function createFromToken($token, $data, $bankAccountId = null)
     {
@@ -101,11 +101,11 @@ final class BankAccountService extends Service
 
     /**
      * @param string $bankAccountId
-     * @param array|JsonSerializable|BankAccount $data
+     * @param array|JsonSerializable|CommonPaymentInstrument $data
      *
      * @throws UnprocessableEntityException The input data does not valid
      *
-     * @return BankAccount
+     * @return CommonPaymentInstrument
      */
     public function update($bankAccountId, $data)
     {
@@ -115,7 +115,7 @@ final class BankAccountService extends Service
     /**
      * @param string $bankAccountId
      *
-     * @return BankAccount
+     * @return CommonPaymentInstrument
      */
     public function deactivate($bankAccountId)
     {

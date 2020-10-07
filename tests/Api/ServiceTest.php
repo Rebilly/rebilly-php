@@ -106,6 +106,16 @@ class ServiceTest extends BaseTestCase
             $this->assertInstanceOf($entityClass, $entity);
         }
 
+        if (method_exists($service, 'patch')) {
+            if ($id === null) {
+                $entity = $service->patch([]);
+            } else {
+                $entity = $service->patch($this->getFakeValue($id, $entityClass), []);
+            }
+
+            $this->assertInstanceOf($entityClass, $entity);
+        }
+
         if (method_exists($service, 'delete')) {
             if ($id === null) {
                 $service->delete();
@@ -564,6 +574,46 @@ class ServiceTest extends BaseTestCase
 
         $result = $service->create([]);
         $this->assertInstanceOf(Entities\Transaction::class, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function paymentInstrumentService()
+    {
+        $faker = $this->getFaker();
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->createMock(CurlHandler::class);
+
+        $handler
+            ->expects($this->any())
+            ->method('__invoke')
+            ->will($this->returnValue(
+                $client->createResponse()->withHeader('Location', 'payment-instruments/dummy')
+            ));
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+
+        $service = $client->paymentInstruments();
+
+        $paymentInstrument = new JsonObject(['customerId' => $faker->uuid, 'method' => 'payment-card']);
+
+        $result = $service->createFromToken('token', $paymentInstrument);
+        $this->assertInstanceOf(Entities\CommonPaymentInstrument::class, $result);
+
+        $result = $service->createFromToken('token', ['customerId' => $faker->uuid]);
+        $this->assertInstanceOf(Entities\CommonPaymentInstrument::class, $result);
+
+        $result = $service->createFromToken(['token' => 'dummy'], $paymentInstrument);
+        $this->assertInstanceOf(Entities\CommonPaymentInstrument::class, $result);
+
+        $result = $service->deactivate('dummy');
+        $this->assertInstanceOf(Entities\CommonPaymentInstrument::class, $result);
     }
 
     /**
@@ -1315,6 +1365,11 @@ class ServiceTest extends BaseTestCase
                 'couponsRedemptions',
                 Services\RedemptionService::class,
                 Entities\Coupons\Redemption::class,
+            ],
+            [
+                'paymentInstruments',
+                Services\PaymentInstrumentService::class,
+                Entities\CommonPaymentInstrument::class,
             ],
         ];
     }

@@ -14,7 +14,6 @@ namespace Rebilly\Services;
 use ArrayObject;
 use JsonSerializable;
 use Rebilly\Entities\CommonPaymentInstrument;
-use Rebilly\Entities\PaymentCardAuthorization;
 use Rebilly\Entities\PaymentToken;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
@@ -23,9 +22,9 @@ use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
 
 /**
- * Class PaymentCardService.
+ * Class PaymentInstrumentService.
  */
-final class PaymentCardService extends Service
+final class PaymentInstrumentService extends Service
 {
     /**
      * @param array|ArrayObject $params
@@ -34,7 +33,7 @@ final class PaymentCardService extends Service
      */
     public function paginator($params = [])
     {
-        return new Paginator($this->client(), 'payment-cards', $params);
+        return new Paginator($this->client(), 'payment-instruments', $params);
     }
 
     /**
@@ -44,20 +43,20 @@ final class PaymentCardService extends Service
      */
     public function search($params = [])
     {
-        return $this->client()->get('payment-cards', $params);
+        return $this->client()->get('payment-instruments', $params);
     }
 
     /**
-     * @param string $cardId
+     * @param string $paymentInstrumentId
      * @param array|ArrayObject $params
      *
      * @throws NotFoundException The resource data does not exist
      *
      * @return CommonPaymentInstrument
      */
-    public function load($cardId, $params = [])
+    public function load($paymentInstrumentId, $params = [])
     {
-        return $this->client()->get('payment-cards/{cardId}', ['cardId' => $cardId] + (array) $params);
+        return $this->client()->get('payment-instruments/{paymentInstrumentId}', ['paymentInstrumentId' => $paymentInstrumentId] + (array) $params);
     }
 
     /**
@@ -68,25 +67,20 @@ final class PaymentCardService extends Service
      *
      * @return CommonPaymentInstrument
      */
-    public function create($data, $cardId = null)
+    public function create($data)
     {
-        if (isset($cardId)) {
-            return $this->client()->put($data, 'payment-cards/{cardId}', ['cardId' => $cardId]);
-        }
-
-        return $this->client()->post($data, 'payment-cards');
+        return $this->client()->post($data, 'payment-instruments');
     }
 
     /**
      * @param string|array|JsonSerializable|PaymentToken $token
      * @param array|JsonSerializable|CommonPaymentInstrument $data
-     * @param string $cardId
      *
      * @throws UnprocessableEntityException The input data does not valid
      *
      * @return CommonPaymentInstrument
      */
-    public function createFromToken($token, $data, $cardId = null)
+    public function createFromToken($token, $data)
     {
         if ($data instanceof JsonSerializable) {
             $data = $data->jsonSerialize();
@@ -98,42 +92,29 @@ final class PaymentCardService extends Service
             $data['token'] = $token['token'];
         }
 
-        return $this->create($data, $cardId);
+        return $this->create($data);
     }
 
     /**
-     * @param string $cardId
+     * @param string $paymentInstrumentId
      * @param array|JsonSerializable|CommonPaymentInstrument $data
      *
      * @throws UnprocessableEntityException The input data does not valid
      *
      * @return CommonPaymentInstrument
      */
-    public function update($cardId, $data)
+    public function update($paymentInstrumentId, $data)
     {
-        return $this->client()->patch($data, 'payment-cards/{cardId}', ['cardId' => $cardId]);
+        return $this->client()->patch($data, 'payment-instruments/{paymentInstrumentId}', ['paymentInstrumentId' => $paymentInstrumentId]);
     }
 
     /**
-     * @param array|JsonSerializable|PaymentCardAuthorization $data
-     * @param string $cardId
-     *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @param string $paymentInstrumentId
      *
      * @return CommonPaymentInstrument
      */
-    public function authorize($data, $cardId)
+    public function deactivate($paymentInstrumentId)
     {
-        return $this->client()->post($data, 'payment-cards/{cardId}/authorization', ['cardId' => $cardId]);
-    }
-
-    /**
-     * @param string $cardId
-     *
-     * @return CommonPaymentInstrument
-     */
-    public function deactivate($cardId)
-    {
-        return $this->client()->post([], 'payment-cards/{cardId}/deactivation', ['cardId' => $cardId]);
+        return $this->client()->post([], 'payment-instruments/{paymentInstrumentId}/deactivation', ['paymentInstrumentId' => $paymentInstrumentId]);
     }
 }

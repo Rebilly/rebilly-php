@@ -13,7 +13,7 @@ namespace Rebilly\Services;
 
 use ArrayObject;
 use JsonSerializable;
-use Rebilly\Entities\PayPalAccount;
+use Rebilly\Entities\CommonPaymentInstrument;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Paginator;
@@ -21,16 +21,14 @@ use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
 
 /**
- * Class PayPalAccountService
- *
+ * Class PayPalAccountService.
  */
-
 class PayPalAccountService extends Service
 {
     /**
      * @param array|ArrayObject $params
      *
-     * @return PayPalAccount[][]|Collection[]|Paginator
+     * @return CommonPaymentInstrument[][]|Collection[]|Paginator
      */
     public function paginator($params = [])
     {
@@ -40,7 +38,7 @@ class PayPalAccountService extends Service
     /**
      * @param array|ArrayObject $params
      *
-     * @return PayPalAccount[]|Collection
+     * @return CommonPaymentInstrument[]|Collection
      */
     public function search($params = [])
     {
@@ -53,7 +51,7 @@ class PayPalAccountService extends Service
      *
      * @throws NotFoundException The resource data does not exist
      *
-     * @return PayPalAccount
+     * @return CommonPaymentInstrument
      */
     public function load($paypalAccountId, $params = [])
     {
@@ -61,12 +59,12 @@ class PayPalAccountService extends Service
     }
 
     /**
-     * @param array|JsonSerializable|PayPalAccount $data
+     * @param array|JsonSerializable|CommonPaymentInstrument $data
      * @param string $paypalAccountId
      *
      * @throws UnprocessableEntityException The input data does not valid
      *
-     * @return PayPalAccount
+     * @return CommonPaymentInstrument
      */
     public function create($data, $paypalAccountId = null)
     {
@@ -78,10 +76,10 @@ class PayPalAccountService extends Service
     }
 
     /**
-     * @param array|JsonSerializable|PayPalAccount $data
+     * @param array|JsonSerializable|CommonPaymentInstrument $data
      * @param string $paypalAccountId
      *
-     * @return PayPalAccount
+     * @return CommonPaymentInstrument
      */
     public function activate($data, $paypalAccountId)
     {
@@ -91,7 +89,7 @@ class PayPalAccountService extends Service
     /**
      * @param string $paypalAccountId
      *
-     * @return PayPalAccount
+     * @return CommonPaymentInstrument
      */
     public function deactivate($paypalAccountId)
     {
