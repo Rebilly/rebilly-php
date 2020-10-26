@@ -100,7 +100,7 @@ final class GatewayAccountService extends Service
 
     /**
      * @param string $gatewayAccountId
-     * @param array|JsonSerializable
+     * @param array|JsonSerializable $data
      *
      * @throws NotFoundException The resource data does not exist
      *
