@@ -1352,6 +1352,11 @@ class ServiceTest extends BaseTestCase
                 Entities\PlaidCredential::class,
             ],
             [
+                'experianCredentials',
+                Services\ExperianCredentialsService::class,
+                Entities\ExperianCredential::class,
+            ],
+            [
                 'webhooksTracking',
                 Services\WebhookTrackingService::class,
                 Entities\WebhookTracking::class,

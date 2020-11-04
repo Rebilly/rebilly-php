@@ -345,6 +345,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'payment-instruments/{paymentInstrumentId}' => function (array $content) {
                 return new CommonPaymentInstrument($content);
             },
+            'credential-hashes/experian' => function (array $content) {
+                return new Collection(new ExperianCredential(), $content);
+            },
+            'credential-hashes/experian/{hash}' => function (array $content) {
+                return new ExperianCredential($content);
+            },
         ];
     }
 

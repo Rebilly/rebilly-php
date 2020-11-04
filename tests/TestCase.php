@@ -150,6 +150,9 @@ abstract class TestCase extends Framework\TestCase
             case 'response':
             case 'acquirerReferenceNumber':
             case 'bic':
+            case 'hmacKey':
+            case 'publicKey':
+            case 'username':
                 return $faker->word;
             case 'redirectUrl':
                 return $redirectUrl;
