@@ -30,7 +30,6 @@ Security - in case of vulnerabilities.
 - [x] Deprecated `Blacklist`
 - [x] Deprecated `PaymentCardToken`
 - [x] Deprecated `Client::paymentCardTokens()` factory
-- [x] Deprecated `CheckoutPage` and `CheckoutPageService`
 
 ### Removed
 
@@ -38,6 +37,7 @@ Security - in case of vulnerabilities.
 - [x] Removed payment methods restriction in the `PaymentMethodInstrument`
 - [x] Removed payment methods restriction in the `GatewayAccount`
 - [x] Removed deprecated `PayPalAccount` method: `getApprovalLink`
+- [x] Removed **Checkout Pages API**
 
 ## [2.8.0] 2020-07-02
 
