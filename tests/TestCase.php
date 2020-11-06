@@ -527,7 +527,6 @@ abstract class TestCase extends Framework\TestCase
                     case Entities\ApiTracking::class:
                         return 200;
                     case Entities\PaymentCard::class:
-                    case Entities\CheckoutPage::class:
                         return 'active';
                     case Entities\Dispute::class:
                     default:

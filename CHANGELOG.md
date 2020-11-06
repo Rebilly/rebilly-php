@@ -30,6 +30,7 @@ Security - in case of vulnerabilities.
 - [x] Deprecated `Blacklist`
 - [x] Deprecated `PaymentCardToken`
 - [x] Deprecated `Client::paymentCardTokens()` factory
+- [x] Deprecated `CheckoutPage` and `CheckoutPageService`
 
 ### Removed
 
