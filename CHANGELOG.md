@@ -19,6 +19,7 @@ Security - in case of vulnerabilities.
 
 - [x] Added **Blocklist API**
 - [x] Added **Plaid Credentials API**
+- [x] Added **Experian Credentials API**
 - [x] Added **Payment Instruments API**
 - [x] Added `PaymentToken`
 - [x] Added `Client::paymentTokens()` factory

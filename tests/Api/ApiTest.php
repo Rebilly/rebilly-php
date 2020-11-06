@@ -212,6 +212,7 @@ class ApiTest extends TestCase
             [Entities\PaymentRetryAttempt::class],
             [Entities\GatewayAccountDowntime::class],
             [Entities\PlaidCredential::class, 'hash'],
+            [Entities\ExperianCredential::class, 'hash'],
             [Entities\CommonPaymentInstrument::class],
         ];
 

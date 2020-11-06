@@ -82,6 +82,7 @@ use RuntimeException;
  * @method Services\WebhooksService webhooks()
  * @method Services\WebhookCredentialsService webhookCredentials()
  * @method Services\PlaidCredentialsService plaidCredentials()
+ * @method Services\ExperianCredentialsService experianCredentials()
  * @method Services\ValuesListService lists()
  * @method Services\ValuesListTrackingService listsTracking()
  * @method Services\WebhookTrackingService webhooksTracking()
@@ -154,6 +155,7 @@ final class Client
         'customerTimeline' => Services\CustomerTimelineService::class,
         'aml' => Services\AmlService::class,
         'plaidCredentials' => Services\PlaidCredentialsService::class,
+        'experianCredentials' => Services\ExperianCredentialsService::class,
         'paymentInstruments' => Services\PaymentInstrumentService::class,
     ];
 
