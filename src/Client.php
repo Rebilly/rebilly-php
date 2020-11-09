@@ -72,7 +72,6 @@ use RuntimeException;
  * @method Services\ApiTrackingService apiTracking()
  * @method Services\ShippingZoneService shippingZones()
  * @method Services\ApiKeyService apiKeys()
- * @method Services\CheckoutPageService checkoutPages()
  * @method Services\DisputeService disputes()
  * @method Services\FileService files()
  * @method Services\AttachmentService attachments()
@@ -138,7 +137,6 @@ final class Client
         'threeDSecure' => Services\ThreeDSecureService::class,
         'apiTracking' => Services\ApiTrackingService::class,
         'apiKeys' => Services\ApiKeyService::class,
-        'checkoutPages' => Services\CheckoutPageService::class,
         'disputes' => Services\DisputeService::class,
         'coupons' => Services\CouponService::class,
         'couponsRedemptions' => Services\RedemptionService::class,

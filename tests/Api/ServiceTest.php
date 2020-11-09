@@ -1302,11 +1302,6 @@ class ServiceTest extends BaseTestCase
                 Entities\ApiKey::class,
             ],
             [
-                'checkoutPages',
-                Services\CheckoutPageService::class,
-                Entities\CheckoutPage::class,
-            ],
-            [
                 'apiTracking',
                 Services\ApiTrackingService::class,
                 Entities\ApiTracking::class,
