@@ -259,6 +259,7 @@ abstract class TestCase extends Framework\TestCase
             case 'prorated':
             case 'autopay':
             case 'useStripe':
+            case 'keepTrial':
                 return $faker->boolean();
             case 'credentialTtl':
             case 'authTokenTtl':
