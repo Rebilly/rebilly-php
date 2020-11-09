@@ -24,6 +24,7 @@ Security - in case of vulnerabilities.
 - [x] Added `PaymentToken`
 - [x] Added `Client::paymentTokens()` factory
 - [x] Added `KhelocardCardPaymentInstrument` for **Khelocard** payment tokens
+- [x] Added new property to `SubscriptionChangePlan`: `keepTrial`
 
 ### Deprecated
 
