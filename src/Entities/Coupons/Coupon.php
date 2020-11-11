@@ -12,29 +12,21 @@
 namespace Rebilly\Entities\Coupons;
 
 use DomainException;
-use Rebilly\Rest\Resource;
+use Rebilly\Rest\Entity;
 
 /**
  * Class Coupon.
  */
-final class Coupon extends Resource
+final class Coupon extends Entity
 {
     /**
+     * @deprecated use {@see getId() instead}
+     *
      * @return string
      */
     public function getRedemptionCode()
     {
-        return $this->getAttribute('redemptionCode');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setRedemptionCode($value)
-    {
-        return $this->setAttribute('redemptionCode', $value);
+        return $this->getId();
     }
 
     /**

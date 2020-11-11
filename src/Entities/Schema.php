@@ -249,7 +249,7 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'coupons' => function (array $content) {
                 return new Collection(new Coupon(), $content);
             },
-            'coupons/{redemptionCode}' => function (array $content) {
+            'coupons/{couponId}' => function (array $content) {
                 return new Coupon($content);
             },
             'coupons-redemptions' => function (array $content) {

@@ -31,6 +31,8 @@ Security - in case of vulnerabilities.
 - [x] Deprecated `Blacklist`
 - [x] Deprecated `PaymentCardToken`
 - [x] Deprecated `Client::paymentCardTokens()` factory
+- [x] Deprecated `Coupon` method: `getRedemptionCode()` in favor `getId()`
+- [x] Deprecated `Redemption` method: `getRedemptionCode()`, `setRedemptionCode()` in favor `getCouponId()`/`setCouponId()`
 
 ### Removed
 
