@@ -101,7 +101,7 @@ abstract class TestCase extends Framework\TestCase
             case 'transactionId':
             case 'fromGatewayAccountId':
             case 'toGatewayAccountId':
-            case 'redemptionCode':
+            case 'couponId':
             case 'productId':
             case 'requestId':
             case 'stickyGatewayAccountId':

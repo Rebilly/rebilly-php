@@ -47,62 +47,62 @@ final class CouponService extends Service
     }
 
     /**
-     * @param string $redemptionCode
+     * @param string $couponId
      * @param array|ArrayObject $params
      *
      * @throws NotFoundException The resource data does not exist
      *
      * @return Coupon
      */
-    public function load($redemptionCode, $params = [])
+    public function load($couponId, $params = [])
     {
-        return $this->client()->get('coupons/{redemptionCode}', ['redemptionCode' => $redemptionCode] + (array) $params);
+        return $this->client()->get('coupons/{couponId}', ['couponId' => $couponId] + (array) $params);
     }
 
     /**
      * @param array|JsonSerializable|Coupon $data
-     * @param string $redemptionCode
+     * @param string $couponId
      *
      * @throws UnprocessableEntityException The input data is not valid
      *
      * @return Coupon
      */
-    public function create($data, $redemptionCode = null)
+    public function create($data, $couponId = null)
     {
-        if (isset($redemptionCode)) {
-            return $this->client()->put($data, 'coupons/{redemptionCode}', ['redemptionCode' => $redemptionCode]);
+        if (isset($couponId)) {
+            return $this->client()->put($data, 'coupons/{couponId}', ['couponId' => $couponId]);
         }
 
         return $this->client()->post($data, 'coupons');
     }
 
     /**
-     * @param string $redemptionCode
+     * @param string $couponId
      * @param array|JsonSerializable|Coupon $data
      *
      * @throws UnprocessableEntityException The input data is not valid
      *
      * @return Coupon
      */
-    public function update($redemptionCode, $data)
+    public function update($couponId, $data)
     {
-        return $this->client()->put($data, 'coupons/{redemptionCode}', ['redemptionCode' => $redemptionCode]);
+        return $this->client()->put($data, 'coupons/{couponId}', ['couponId' => $couponId]);
     }
 
     /**
-     * @param $redemptionCode
+     * @param $couponId
      * @param null $expiredTime Leaving $expiredTime null with expire the coupon.
      *
      * @throws UnprocessableEntityException The input data is not valid
      *
      * @return Coupon
      */
-    public function expiration($redemptionCode, $expiredTime = null)
+    public function expiration($couponId, $expiredTime = null)
     {
         return $this->client()->post(
             ['expiredTime' => $expiredTime],
-            'coupons/{redemptionCode}/expiration',
-            ['redemptionCode' => $redemptionCode]
+            'coupons/{couponId}/expiration',
+            ['couponId' => $couponId]
         );
     }
 }
