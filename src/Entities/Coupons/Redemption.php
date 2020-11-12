@@ -38,7 +38,7 @@ final class Redemption extends Entity
     }
 
     /**
-     * @deprecated use {@see getCouponId() instead}
+     * @deprecated use {@see getCouponId()} instead
      *
      * @return string
      */
