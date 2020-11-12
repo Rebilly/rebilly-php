@@ -20,7 +20,7 @@ use Rebilly\Rest\Entity;
 final class Coupon extends Entity
 {
     /**
-     * @deprecated use {@see getId() instead}
+     * @deprecated use {@see getId()} instead
      *
      * @return string
      */
