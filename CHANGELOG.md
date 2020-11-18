@@ -26,8 +26,13 @@ Security - in case of vulnerabilities.
 - [x] Added `KhelocardCardPaymentInstrument` for **Khelocard** payment tokens
 - [x] Added new property to `SubscriptionChangePlan`: `keepTrial`
 
+### Changed
+
+- [x] Removed API version from request URIs. See [Rebilly REST API Guide](https://api-reference.rebilly.com/) for more details.
+
 ### Deprecated
 
+- [x] Deprecated `Client::CURRENT_VERSION` constant
 - [x] Deprecated `Blacklist`
 - [x] Deprecated `PaymentCardToken`
 - [x] Deprecated `Client::paymentCardTokens()` factory
