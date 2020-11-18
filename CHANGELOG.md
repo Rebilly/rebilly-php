@@ -15,6 +15,10 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
+_TBD_
+
+## [2.9.0] 2020-11-18
+
 ### Added
 
 - [x] Added **Blocklist API**
