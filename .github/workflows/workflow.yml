@@ -52,7 +52,7 @@ jobs:
 
       - name: Coverage monitor
         if: env.EXECUTE_COVERAGE == 'true'
-        uses: slavcodev/coverage-monitor-action@1.1.0
+        uses: slavcodev/coverage-monitor-action@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           clover_file: ${{ env.CLOVER_PATH }}

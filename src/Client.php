@@ -99,9 +99,12 @@ final class Client
 
     public const SANDBOX_HOST = 'https://api-sandbox.rebilly.com';
 
+    /**
+     * @deprecated We don't use API version in URI anymore.
+     */
     public const CURRENT_VERSION = 'v2.1';
 
-    public const SDK_VERSION = '2.8.0';
+    public const SDK_VERSION = '2.9.0';
 
     private static $services = [
         'authenticationOptions' => Services\AuthenticationOptionsService::class,
@@ -272,7 +275,7 @@ final class Client
 
         // Prepare middleware stack
         $this->middleware = new Middleware\CompositeMiddleware(
-            new Middleware\BaseUri($this->createUri($baseUrl . '/' . self::CURRENT_VERSION)),
+            new Middleware\BaseUri($this->createUri($baseUrl)),
             $organizationId,
             new Middleware\UserAgent(self::SDK_VERSION),
             $authentication,
