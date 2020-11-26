@@ -15,7 +15,9 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
-_TBD_
+### Added
+
+- [x] Added new property to `Transaction`: `arn`
 
 ## [2.9.0] 2020-11-18
 
