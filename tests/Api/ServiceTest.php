@@ -581,7 +581,6 @@ class ServiceTest extends BaseTestCase
      */
     public function paymentInstrumentService()
     {
-        $faker = $this->getFaker();
         $client = new Client(['apiKey' => 'QWERTY']);
 
         /** @var CurlHandler|MockObject $handler */
@@ -601,12 +600,12 @@ class ServiceTest extends BaseTestCase
 
         $service = $client->paymentInstruments();
 
-        $paymentInstrument = new JsonObject(['customerId' => $faker->uuid, 'method' => 'payment-card']);
+        $paymentInstrument = new JsonObject(['customerId' => self::uuid(), 'method' => 'payment-card']);
 
         $result = $service->createFromToken('token', $paymentInstrument);
         $this->assertInstanceOf(Entities\CommonPaymentInstrument::class, $result);
 
-        $result = $service->createFromToken('token', ['customerId' => $faker->uuid]);
+        $result = $service->createFromToken('token', ['customerId' => self::uuid()]);
         $this->assertInstanceOf(Entities\CommonPaymentInstrument::class, $result);
 
         $result = $service->createFromToken(['token' => 'dummy'], $paymentInstrument);
@@ -621,7 +620,6 @@ class ServiceTest extends BaseTestCase
      */
     public function paymentCardService()
     {
-        $faker = $this->getFaker();
         $client = new Client(['apiKey' => 'QWERTY']);
 
         /** @var CurlHandler|MockObject $handler */
@@ -641,12 +639,12 @@ class ServiceTest extends BaseTestCase
 
         $service = $client->paymentCards();
 
-        $card = new JsonObject(['customerId' => $faker->uuid]);
+        $card = new JsonObject(['customerId' => self::uuid()]);
 
         $result = $service->createFromToken('token', $card);
         $this->assertInstanceOf(Entities\PaymentCard::class, $result);
 
-        $result = $service->createFromToken('token', ['customerId' => $faker->uuid], 'dummy');
+        $result = $service->createFromToken('token', ['customerId' => self::uuid()], 'dummy');
         $this->assertInstanceOf(Entities\PaymentCard::class, $result);
 
         $result = $service->createFromToken(['token' => 'dummy'], $card);
@@ -698,23 +696,22 @@ class ServiceTest extends BaseTestCase
      */
     public function layoutService()
     {
-        $faker = $this->getFaker();
         $client = new Client(['apiKey' => 'QWERTY']);
 
         /** @var CurlHandler|MockObject $handler */
         $handler = $this->createMock(CurlHandler::class);
         $layout = new Entities\Layout();
         $layout->addItem([
-            'planId' => $faker->uuid,
+            'planId' => self::uuid(),
             'starred' => true,
         ]);
         $layout->setItems([
             [
-                'planId' => $faker->uuid,
+                'planId' => self::uuid(),
                 'starred' => true,
             ],
             new Entities\LayoutItem([
-                'planId' => $faker->uuid,
+                'planId' => self::uuid(),
             ]),
         ]);
 
