@@ -297,7 +297,7 @@ abstract class TestCase extends Framework\TestCase
                     ]),
                 ];
             case 'extension':
-                return self::randomElements(Entities\File::allowedTypes()[0]);
+                return self::randomElements(Entities\File::allowedTypes())[0];
             case 'tags':
                 return [self::TEST_WORD];
             case 'redirect':
