@@ -78,9 +78,9 @@ final class ApiKey extends Entity
     /**
      * @return string
      */
-    public function getUserName()
+    public function getApiUser()
     {
-        return $this->getAttribute('userName');
+        return $this->getAttribute('apiUser');
     }
 
     /**

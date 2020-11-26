@@ -18,6 +18,11 @@ Security - in case of vulnerabilities.
 ### Added
 
 - [x] Added new property to `Transaction`: `arn`
+- [x] Added new property to `ApiKey`: `apiUser`
+
+### Removed
+
+- [x] Removed `ApiKey` property: `userName`
 
 ## [2.9.0] 2020-11-18
 
