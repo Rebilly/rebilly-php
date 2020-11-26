@@ -677,7 +677,7 @@ abstract class TestCase extends Framework\TestCase
                 return Entities\BrowserData::createFromData([
                     'colorDepth' => self::randomElements([1, 4, 8, 15, 16, 24, 32, 48])[0],
                     'javaEnabled' => true,
-                    'language' => '',
+                    'language' => 'en-US',
                     'screenHeight' => random_int(0, 999999),
                     'screenWidth' => random_int(0, 999999),
                     'timeZoneOffset' => random_int(-1410, 1410),
