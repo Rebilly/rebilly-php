@@ -24,12 +24,11 @@ class CustomerAddressTest extends TestCase
      */
     public function smileTest()
     {
-        $faker = $this->getFaker();
         $client = $this->getClient();
 
         $form = new Customer();
-        $form->setFirstName($faker->firstName);
-        $form->setLastName($faker->lastName);
+        $form->setFirstName(self::TEST_FIRST_NAME);
+        $form->setLastName(self::TEST_LAST_NAME);
         $form->setPrimaryAddress([
             'firstName' => 'fname',
             'lastName' => 'lname',
