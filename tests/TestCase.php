@@ -212,7 +212,7 @@ abstract class TestCase extends Framework\TestCase
                 return $faker->year;
             case 'expMonth':
                 return $faker->month;
-            case 'userName':
+            case 'apiUser':
                 return $faker->userName;
             case 'eventsFilter':
                 return $faker->randomElements([
