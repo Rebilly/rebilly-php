@@ -215,6 +215,7 @@ abstract class TestCase extends Framework\TestCase
                 return random_int(1, 12);
             case 'userName':
             case 'firstName':
+            case 'apiUser':
                 return self::TEST_FIRST_NAME;
             case 'lastName':
                 return self::TEST_LAST_NAME;
