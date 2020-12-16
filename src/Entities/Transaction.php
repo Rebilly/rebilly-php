@@ -632,4 +632,12 @@ final class Transaction extends Entity
     {
         return $this->setAttribute('isProcessedOutside', $value);
     }
+
+    /**
+     * @return string
+     */
+    public function getArn()
+    {
+        return $this->getAttribute('arn');
+    }
 }

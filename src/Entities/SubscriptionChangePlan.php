@@ -95,6 +95,14 @@ class SubscriptionChangePlan extends Resource
     }
 
     /**
+     * @param $value
+     */
+    public function setKeepTrial($value)
+    {
+        $this->setAttribute('keepTrial', $value);
+    }
+
+    /**
      * @return string
      */
     public function getSubscriptionId()
@@ -148,5 +156,13 @@ class SubscriptionChangePlan extends Resource
     public function getQuantity()
     {
         return $this->getAttribute('quantity');
+    }
+
+    /**
+     * @return bool
+     */
+    public function getKeepTrial()
+    {
+        return $this->getAttribute('keepTrial');
     }
 }

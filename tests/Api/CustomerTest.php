@@ -43,11 +43,10 @@ class CustomerTest extends TestCase
      */
     public function updateTheCustomer(Customer $form)
     {
-        $faker = $this->getFaker();
         $client = $this->getClient();
 
-        $form->setFirstName($faker->firstName);
-        $form->setLastName($faker->lastName);
+        $form->setFirstName(self::TEST_FIRST_NAME);
+        $form->setLastName(self::TEST_LAST_NAME);
 
         $customer = $client->customers()->update($form->getId(), $form);
 

@@ -228,12 +228,6 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'api-keys/{apiKeyId}' => function (array $content) {
                 return new ApiKey($content);
             },
-            'checkout-pages' => function (array $content) {
-                return new Collection(new CheckoutPage(), $content);
-            },
-            'checkout-pages/{checkoutPageId}' => function (array $content) {
-                return new CheckoutPage($content);
-            },
             'tracking/api' => function (array $content) {
                 return new Collection(new ApiTracking(), $content);
             },
@@ -255,7 +249,7 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'coupons' => function (array $content) {
                 return new Collection(new Coupon(), $content);
             },
-            'coupons/{redemptionCode}' => function (array $content) {
+            'coupons/{couponId}' => function (array $content) {
                 return new Coupon($content);
             },
             'coupons-redemptions' => function (array $content) {
@@ -344,6 +338,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             },
             'payment-instruments/{paymentInstrumentId}' => function (array $content) {
                 return new CommonPaymentInstrument($content);
+            },
+            'credential-hashes/experian' => function (array $content) {
+                return new Collection(new ExperianCredential(), $content);
+            },
+            'credential-hashes/experian/{hash}' => function (array $content) {
+                return new ExperianCredential($content);
             },
         ];
     }

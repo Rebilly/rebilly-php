@@ -225,7 +225,7 @@ final class ClientTest extends TestCase
             'apiKey' => 'QWERTY',
             'httpHandler' => function (Request $request) use ($response) {
                 if ($request->getMethod() === 'POST') {
-                    $location = Client::BASE_HOST . '/' . Client::CURRENT_VERSION . '/customers/customer-1';
+                    $location = Client::BASE_HOST . '/customers/customer-1';
                     $response = $response->withHeader('Location', $location);
                     $response = $response->withStatus(303);
 
@@ -291,7 +291,7 @@ final class ClientTest extends TestCase
             'apiKey' => 'QWERTY',
             'httpHandler' => function (Request $request) use ($response) {
                 if ($request->getMethod() === 'POST') {
-                    $location = Client::BASE_HOST . '/' . Client::CURRENT_VERSION . '/customers/customer-1';
+                    $location = Client::BASE_HOST . '/customers/customer-1';
                     $response = $response->withHeader('Location', $location);
                     $response = $response->withStatus(303);
 

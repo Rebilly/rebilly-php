@@ -17,18 +17,38 @@ Security - in case of vulnerabilities.
 
 ### Added
 
+- [x] Added new property to `Transaction`: `arn`
+- [x] Added new property to `ApiKey`: `apiUser`
+
+### Removed
+
+- [x] Removed `ApiKey` property: `userName`
+
+## [2.9.0] 2020-11-18
+
+### Added
+
 - [x] Added **Blocklist API**
 - [x] Added **Plaid Credentials API**
+- [x] Added **Experian Credentials API**
 - [x] Added **Payment Instruments API**
 - [x] Added `PaymentToken`
 - [x] Added `Client::paymentTokens()` factory
 - [x] Added `KhelocardCardPaymentInstrument` for **Khelocard** payment tokens
+- [x] Added new property to `SubscriptionChangePlan`: `keepTrial`
+
+### Changed
+
+- [x] Removed API version from request URIs. See [Rebilly REST API Guide](https://api-reference.rebilly.com/) for more details.
 
 ### Deprecated
 
+- [x] Deprecated `Client::CURRENT_VERSION` constant
 - [x] Deprecated `Blacklist`
 - [x] Deprecated `PaymentCardToken`
 - [x] Deprecated `Client::paymentCardTokens()` factory
+- [x] Deprecated `Coupon` method: `getRedemptionCode()` in favor `getId()`
+- [x] Deprecated `Redemption` method: `getRedemptionCode()`, `setRedemptionCode()` in favor `getCouponId()`/`setCouponId()`
 
 ### Removed
 
@@ -36,6 +56,7 @@ Security - in case of vulnerabilities.
 - [x] Removed payment methods restriction in the `PaymentMethodInstrument`
 - [x] Removed payment methods restriction in the `GatewayAccount`
 - [x] Removed deprecated `PayPalAccount` method: `getApprovalLink`
+- [x] Removed **Checkout Pages API**
 
 ## [2.8.0] 2020-07-02
 

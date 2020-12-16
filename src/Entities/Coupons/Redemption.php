@@ -22,9 +22,9 @@ final class Redemption extends Entity
     /**
      * @return string
      */
-    public function getRedemptionCode()
+    public function getCouponId()
     {
-        return $this->getAttribute('redemptionCode');
+        return $this->getAttribute('couponId');
     }
 
     /**
@@ -32,9 +32,31 @@ final class Redemption extends Entity
      *
      * @return $this
      */
+    public function setCouponId($value)
+    {
+        return $this->setAttribute('couponId', $value);
+    }
+
+    /**
+     * @deprecated use {@see getCouponId()} instead
+     *
+     * @return string
+     */
+    public function getRedemptionCode()
+    {
+        return $this->getCouponId();
+    }
+
+    /**
+     * @deprecated use {@see setCouponId() instead}
+     *
+     * @param string $value
+     *
+     * @return $this
+     */
     public function setRedemptionCode($value)
     {
-        return $this->setAttribute('redemptionCode', $value);
+        return $this->setCouponId($value);
     }
 
     /**

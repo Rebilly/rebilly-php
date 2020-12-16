@@ -11,8 +11,6 @@
 
 namespace Rebilly\Tests;
 
-use Faker\Factory as FakerFactory;
-use Faker\Generator as Faker;
 use InvalidArgumentException;
 use PHPUnit\Framework;
 use Rebilly\Entities;
@@ -26,28 +24,37 @@ use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstruction;
  */
 abstract class TestCase extends Framework\TestCase
 {
-    /** @var Faker */
-    private $faker;
+    protected const TEST_PAN = '4111111111111111';
 
-    /**
-     * @return Faker
-     */
-    final protected function getFaker()
-    {
-        if ($this->faker === null) {
-            $this->faker = $this->createFaker();
-        }
+    protected const TEST_EMAIL = 'mail@example.com';
 
-        return $this->faker;
-    }
+    protected const TEST_PHONE = '+123456789';
 
-    /**
-     * @return Faker
-     */
-    protected function createFaker()
-    {
-        return FakerFactory::create();
-    }
+    protected const TEST_URL = 'https://example.com/home';
+
+    protected const TEST_FIRST_NAME = 'John';
+
+    protected const TEST_LAST_NAME = 'Doe';
+
+    protected const TEST_COMPANY = 'MoneyPrint Inc.';
+
+    protected const TEST_STREET = '1st Avenue';
+
+    protected const TEST_CITY = 'New York';
+
+    protected const TEST_COUNTRY_CODE = 'US';
+
+    protected const TEST_POST_CODE = '12345';
+
+    protected const TEST_SENTENCE = 'Lorem ipsum dolor sit amet.';
+
+    protected const TEST_PARAGRAPH = 'Nullam sagittis mauris augue, ac imperdiet arcu aliquam mollis. Donec a metus porta, varius lacus vel, tincidunt quam. Proin sed rhoncus enim, id porta nibh.';
+
+    protected const TEST_WORD = 'Lorem';
+
+    protected const TEST_IPV4 = '127.0.0.1';
+
+    protected const DATE_FORMAT = 'Y-m-d H:i:s';
 
     /**
      * {@inheritdoc}
@@ -73,12 +80,6 @@ abstract class TestCase extends Framework\TestCase
      */
     protected function getFakeValue($attribute, $class)
     {
-        $faker = $this->getFaker();
-
-        $faker->phoneNumber;
-        $redirectUrl = 'https://redirect.com';
-        $uriPath = 'path-segment';
-
         switch ($attribute) {
             case 'id':
             case 'password':
@@ -101,7 +102,7 @@ abstract class TestCase extends Framework\TestCase
             case 'transactionId':
             case 'fromGatewayAccountId':
             case 'toGatewayAccountId':
-            case 'redemptionCode':
+            case 'couponId':
             case 'productId':
             case 'requestId':
             case 'stickyGatewayAccountId':
@@ -109,7 +110,7 @@ abstract class TestCase extends Framework\TestCase
             case 'credentialHash':
             case 'clientId':
             case 'secretToken':
-                return $faker->uuid;
+                return self::uuid();
             case 'dueTime':
             case 'expiredTime':
             case 'expirationTime':
@@ -128,14 +129,11 @@ abstract class TestCase extends Framework\TestCase
             case 'autopayScheduledTime':
             case 'processedTime':
             case 'deactivationTime':
-                return $faker->date('Y-m-d H:i:s');
+                return date(self::DATE_FORMAT);
             case 'unitPrice':
             case 'unitPriceAmount':
             case 'amount':
-                return $faker->randomFloat(2);
-            case 'uriPath':
-            case 'urlPathSegment':
-                return $uriPath;
+                return random_int(1, 9999) / 100;
             case 'gatewayName':
             case 'organizationId':
             case 'acquirerName':
@@ -150,34 +148,40 @@ abstract class TestCase extends Framework\TestCase
             case 'response':
             case 'acquirerReferenceNumber':
             case 'bic':
-                return $faker->word;
+            case 'hmacKey':
+            case 'publicKey':
+            case 'username':
+                return self::TEST_WORD;
             case 'redirectUrl':
-                return $redirectUrl;
             case 'notificationUrl':
+            case 'url':
             case 'host':
-                return $faker->url;
+                return self::TEST_URL;
             case 'organization':
             case 'company':
-                return $faker->company;
+                return self::TEST_COMPANY;
             case 'servicePhone':
+            case 'phoneNumber':
             case 'businessPhone':
-                return $faker->phoneNumber;
+                return self::TEST_PHONE;
             case 'serviceEmail':
             case 'senderEmail':
-                return $faker->email;
+            case 'email':
+                return self::TEST_EMAIL;
+            case 'city':
             case 'region':
-                return $faker->city;
+                return self::TEST_CITY;
             case 'address':
             case 'address2':
-                return $faker->address;
+                return self::TEST_STREET;
             case 'postalCode':
-                return $faker->postcode;
+                return self::TEST_POST_CODE;
             case 'ipAddress':
-                return $faker->ipv4;
+                return self::TEST_IPV4;
             case 'token':
             case 'fingerprint':
             case 'secretKey':
-                return $faker->md5;
+                return md5($attribute);
             case 'name':
             case 'bankName':
             case 'medium':
@@ -195,24 +199,30 @@ abstract class TestCase extends Framework\TestCase
             case 'body':
             case 'bodyText':
             case 'bodyHtml':
-                return $faker->words;
+                return self::TEST_SENTENCE;
             case 'description':
             case 'richDescription':
             case 'cancelDescription':
             case 'notes':
-                return $faker->sentences;
+                return self::TEST_PARAGRAPH;
             case 'pan':
-                return $faker->creditCardNumber;
+                return self::TEST_PAN;
             case 'cvv':
-                return $faker->numberBetween(100, 999);
+                return random_int(100, 999);
             case 'expYear':
-                return $faker->year;
+                return (int) date('Y');
             case 'expMonth':
-                return $faker->month;
+                return random_int(1, 12);
             case 'userName':
-                return $faker->userName;
+            case 'firstName':
+            case 'apiUser':
+                return self::TEST_FIRST_NAME;
+            case 'lastName':
+                return self::TEST_LAST_NAME;
+            case 'country':
+                return self::TEST_COUNTRY_CODE;
             case 'eventsFilter':
-                return $faker->randomElements([
+                return self::randomElements([
                     'gateway-account-requested',
                     'subscription-trial-ended',
                     'subscription-activated',
@@ -228,23 +238,22 @@ abstract class TestCase extends Framework\TestCase
                     'suspended-payment-completed',
                 ], 3);
             case 'headers':
-                return [['name' => $faker->word, 'value' => $faker->word, 'status' => $faker->randomElement(['active', 'inactive'])]];
+                return [['name' => self::TEST_WORD, 'value' => self::TEST_WORD, 'status' => self::randomElements(['active', 'inactive'])[0]]];
             case 'auth':
-                return $faker->randomElement([
+                return self::randomElements([
                     [
                         'type' => 'none',
                     ],
                     [
                         'type' => 'basic',
-                        'username' => $faker->userName,
-                        'password' => $faker->password,
+                        'username' => self::TEST_FIRST_NAME,
+                        'password' => self::TEST_LAST_NAME,
                     ],
-                ]);
+                ])[0];
             case 'isActive':
             case 'allowCustomCustomerId':
             case 'isCustomCustomerIdAllowed':
             case 'reconciliationWindowEnabled':
-                return true;
             case 'archived':
             case 'starred':
             case 'attachInvoice':
@@ -256,7 +265,9 @@ abstract class TestCase extends Framework\TestCase
             case 'prorated':
             case 'autopay':
             case 'useStripe':
-                return $faker->boolean();
+            case 'keepTrial':
+            case 'requiresShipping':
+                return true;
             case 'credentialTtl':
             case 'authTokenTtl':
             case 'resetTokenTtl':
@@ -268,42 +279,33 @@ abstract class TestCase extends Framework\TestCase
                 return 5;
             case 'velocity':
             case 'revision':
-                return $faker->numberBetween(1, 10);
-            case 'email':
-            case 'firstName':
-            case 'lastName':
-            case 'username':
-            case 'url':
-            case 'city':
-            case 'country':
-            case 'phoneNumber':
-                return $faker->{$attribute};
+                return random_int(1, 10);
             case 'phoneNumbers':
                 return [
                     new Entities\Contact\PhoneNumber([
-                        'label' => $faker->word,
-                        'primary' => $faker->boolean(),
-                        'value' => $faker->phoneNumber,
+                        'label' => self::TEST_WORD,
+                        'primary' => true,
+                        'value' => self::TEST_PHONE,
                     ]),
                 ];
             case 'emails':
                 return [
                     new Entities\Contact\Email([
-                        'label' => $faker->word,
-                        'primary' => $faker->boolean(),
-                        'value' => $faker->email,
+                        'label' => self::TEST_WORD,
+                        'primary' => true,
+                        'value' => self::TEST_EMAIL,
                     ]),
                 ];
             case 'extension':
-                return $faker->randomElement(Entities\File::allowedTypes());
+                return self::randomElements(Entities\File::allowedTypes())[0];
             case 'tags':
-                return [$faker->word];
+                return [self::TEST_WORD];
             case 'redirect':
-                return ['url' => $redirectUrl, 'timeout' => 5];
+                return ['url' => self::TEST_URL, 'timeout' => 5];
             case 'mode':
                 switch ($class) {
                     case Entities\AuthenticationToken::class:
-                        return $faker->randomElement(Entities\AuthenticationToken::modes());
+                        return self::randomElements(Entities\AuthenticationToken::modes())[0];
                     default:
                         throw new InvalidArgumentException(
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
@@ -314,23 +316,23 @@ abstract class TestCase extends Framework\TestCase
             case 'datetimeFormat':
                 switch ($class) {
                     case Entities\LineItem::class:
-                        return $faker->randomElement(Entities\LineItem::types());
+                        return self::randomElements(Entities\LineItem::types())[0];
                     case Entities\Blacklist::class:
-                        return $faker->randomElement(Entities\Blacklist::types());
+                        return self::randomElements(Entities\Blacklist::types())[0];
                     case Entities\Blocklist::class:
-                        return $faker->randomElement(Entities\Blocklist::types());
+                        return self::randomElements(Entities\Blocklist::types())[0];
                     case Entities\InvoiceItem::class:
-                        return $faker->randomElement(Entities\InvoiceItem::types());
+                        return self::randomElements(Entities\InvoiceItem::types())[0];
                     case Entities\CustomField::class:
-                        return $faker->randomElement(Entities\CustomField::allowedTypes());
+                        return self::randomElements(Entities\CustomField::allowedTypes())[0];
                     case Entities\ApiKey::class:
-                        return $faker->randomElement(Entities\ApiKey::datetimeFormats());
+                        return self::randomElements(Entities\ApiKey::datetimeFormats())[0];
                     case Entities\Dispute::class:
-                        return $faker->randomElement(Entities\Dispute::allowedTypes());
+                        return self::randomElements(Entities\Dispute::allowedTypes())[0];
                     case Entities\Transaction::class:
-                        return $faker->randomElement(Entities\Transaction::types());
+                        return self::randomElements(Entities\Transaction::types())[0];
                     case Entities\Session::class:
-                        return $faker->word;
+                        return self::TEST_WORD;
                     default:
                         throw new InvalidArgumentException(
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
@@ -342,7 +344,7 @@ abstract class TestCase extends Framework\TestCase
                     case Entities\Contact\Email::class:
                     case Entities\Contact\PhoneNumber::class:
                     case Entities\Blacklist::class:
-                        return $faker->word;
+                        return self::TEST_WORD;
                     default:
                         throw new InvalidArgumentException(
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
@@ -352,7 +354,7 @@ abstract class TestCase extends Framework\TestCase
             case 'policy':
                 switch ($class) {
                     case Entities\SubscriptionCancel::class:
-                        return $faker->randomElement(Entities\SubscriptionCancel::policies());
+                        return self::randomElements(Entities\SubscriptionCancel::policies())[0];
                     default:
                         throw new InvalidArgumentException(
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
@@ -395,7 +397,7 @@ abstract class TestCase extends Framework\TestCase
             case 'relatedType':
                 switch ($class) {
                     case Entities\Attachment::class:
-                        return $faker->randomElement(Entities\Attachment::allowedTypes());
+                        return self::randomElements(Entities\Attachment::allowedTypes())[0];
                     default:
                         throw new InvalidArgumentException(
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
@@ -406,7 +408,7 @@ abstract class TestCase extends Framework\TestCase
                 switch ($class) {
                     case Entities\Contact\Email::class:
                     case Entities\Contact\PhoneNumber::class:
-                        return $faker->word;
+                        return self::TEST_WORD;
                     default:
                         throw new InvalidArgumentException(
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
@@ -417,27 +419,27 @@ abstract class TestCase extends Framework\TestCase
             case 'billingAddress':
             case 'deliveryAddress':
                 return [
-                    'firstName' => $faker->firstName,
-                    'lastName' => $faker->lastName,
-                    'city' => $faker->city,
-                    'region' => $faker->word,
-                    'postalCode' => $faker->postcode,
-                    'organization' => $faker->company,
-                    'country' => $faker->countryCode,
-                    'address' => $faker->address,
-                    'address2' => $faker->streetAddress,
+                    'firstName' => self::TEST_FIRST_NAME,
+                    'lastName' => self::TEST_LAST_NAME,
+                    'city' => self::TEST_CITY,
+                    'region' => self::TEST_WORD,
+                    'postalCode' => self::TEST_POST_CODE,
+                    'organization' => self::TEST_COMPANY,
+                    'country' => self::TEST_COUNTRY_CODE,
+                    'address' => self::TEST_STREET,
+                    'address2' => self::TEST_STREET,
                     'emails' => [
                         [
-                            'label' => $faker->word,
-                            'primary' => $faker->boolean(),
-                            'value' => $faker->email,
+                            'label' => self::TEST_WORD,
+                            'primary' => true,
+                            'value' => self::TEST_EMAIL,
                         ],
                     ],
                     'phoneNumbers' => [
                         [
-                            'label' => $faker->word,
-                            'primary' => $faker->boolean(),
-                            'value' => $faker->phoneNumber,
+                            'label' => self::TEST_WORD,
+                            'primary' => true,
+                            'value' => self::TEST_PHONE,
                         ],
                     ],
                 ];
@@ -480,9 +482,9 @@ abstract class TestCase extends Framework\TestCase
             case 'signatureVerification':
                 return 'Y';
             case 'port':
-                return $faker->numberBetween(25, 100);
+                return random_int(25, 100);
             case 'duration':
-                return $faker->numberBetween(1, 100);
+                return random_int(1, 100);
             case 'paymentInstrument':
                 switch ($class) {
                     case Entities\Transaction::class:
@@ -520,32 +522,29 @@ abstract class TestCase extends Framework\TestCase
             case 'status':
                 switch ($class) {
                     case Entities\SubscriptionCancellation::class:
-                        return $faker->randomElement(Entities\SubscriptionCancellation::statuses());
+                        return self::randomElements(Entities\SubscriptionCancellation::statuses())[0];
                     case Entities\ApiTracking::class:
                         return 200;
                     case Entities\PaymentCard::class:
-                    case Entities\CheckoutPage::class:
                         return 'active';
                     case Entities\Dispute::class:
                     default:
-                        return $faker->randomElement(Entities\Dispute::allowedStatuses());
+                        return self::randomElements(Entities\Dispute::allowedStatuses())[0];
                 }
                 // no break
             case 'paymentCardIds':
-                return [$faker->uuid];
+                return [self::uuid()];
             case 'discount':
                 return [
                     'type' => 'fixed',
-                    'amount' => $faker->numberBetween(1, 100),
+                    'amount' => random_int(1, 100),
                     'currency' => 'USD',
                 ];
             case 'taxCategoryId':
-                return $faker->randomElement(Entities\Product::allowedTaxCategories());
+                return self::randomElements(Entities\Product::allowedTaxCategories())[0];
             case 'accountingCode':
             case 'poNumber':
-                return (string) $faker->numberBetween(1000, 10000);
-            case 'requiresShipping':
-                return $faker->randomElement([true, false]);
+                return (string) random_int(1000, 10000);
             case 'restrictions':
             case 'additionalRestrictions':
                 return [
@@ -555,7 +554,7 @@ abstract class TestCase extends Framework\TestCase
                     ],
                     [
                         'type' => 'discounts-per-redemption',
-                        'quantity' => $faker->numberBetween(1, 100),
+                        'quantity' => random_int(1, 100),
                     ],
                 ];
             case 'countries':
@@ -573,18 +572,18 @@ abstract class TestCase extends Framework\TestCase
                 ];
             case 'values':
                 return [
-                    $faker->word,
-                    $faker->numberBetween(1, 100),
+                    self::TEST_WORD,
+                    random_int(1, 100),
                 ];
             case 'cancelCategory':
-                return $faker->randomElement(Entities\SubscriptionCancel::cancelCategories());
+                return self::randomElements(Entities\SubscriptionCancel::cancelCategories())[0];
             case 'reason':
-                return $faker->randomElement(Entities\SubscriptionCancellation::reasons());
+                return self::randomElements(Entities\SubscriptionCancellation::reasons())[0];
             case 'canceledBy':
-                return $faker->randomElement(Entities\SubscriptionCancellation::canceledBySources());
+                return self::randomElements(Entities\SubscriptionCancellation::canceledBySources())[0];
             case 'riskMetadata':
                 return new Entities\RiskMetadata([
-                    'ipAddress' => $faker->ipv4,
+                    'ipAddress' => self::TEST_IPV4,
                 ]);
             case 'httpHeaders':
                 return [
@@ -592,23 +591,23 @@ abstract class TestCase extends Framework\TestCase
                     'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
                 ];
             case 'renewalPolicy':
-                return $faker->randomElement(Entities\SubscriptionChangePlan::renewalPolicies());
+                return self::randomElements(Entities\SubscriptionChangePlan::renewalPolicies())[0];
             case 'notifications':
                 return [
                     [
-                        'email' => $faker->email,
+                        'email' => self::TEST_EMAIL,
                         'active' => 'active',
                     ],
                 ];
             case 'eventType':
-                return $faker->randomElement([
+                return self::randomElements([
                     'subscription-created',
                     'subscription-activated',
                     'subscription-canceled',
                     'subscription-reactivated',
                     'subscription-renewed',
                     'payment-card-expired',
-                ]);
+                ])[0];
             case 'scheduleInstruction':
                 return ScheduleInstruction::createFromData([
                     'method' => 'auto',
@@ -620,12 +619,12 @@ abstract class TestCase extends Framework\TestCase
             case 'lineItems':
                 return [
                     [
-                        'type' => $faker->randomElement([
+                        'type' => self::randomElements([
                             Entities\LineItem::TYPE_DEBIT,
                             Entities\LineItem::TYPE_CREDIT,
-                        ]),
-                        'description' => $faker->sentence,
-                        'unitPriceAmount' => $faker->randomFloat(),
+                        ])[0],
+                        'description' => self::TEST_SENTENCE,
+                        'unitPriceAmount' => random_int(1, 9999) / 100,
                         'unitPriceCurrency' => 'USD',
                     ],
                 ];
@@ -673,15 +672,15 @@ abstract class TestCase extends Framework\TestCase
             case 'additionalFilters':
                 return 'websiteId:website-1';
             case 'reconciliationWindowTtl':
-                return $this->faker->numberBetween(30, 36000);
+                return random_int(30, 36000);
             case 'browserData':
                 return Entities\BrowserData::createFromData([
-                    'colorDepth' => $faker->randomElement([1, 4, 8, 15, 16, 24, 32, 48]),
-                    'javaEnabled' => $faker->boolean(),
-                    'language' => $faker->lexify('??'),
-                    'screenHeight' => $this->faker->numberBetween(0, 999999),
-                    'screenWidth' => $this->faker->numberBetween(0, 999999),
-                    'timeZoneOffset' => $this->faker->numberBetween(-1410, 1410),
+                    'colorDepth' => self::randomElements([1, 4, 8, 15, 16, 24, 32, 48])[0],
+                    'javaEnabled' => true,
+                    'language' => 'en-US',
+                    'screenHeight' => random_int(0, 999999),
+                    'screenWidth' => random_int(0, 999999),
+                    'timeZoneOffset' => random_int(-1410, 1410),
                 ]);
             case 'digitalWallets':
                 return Entities\DigitalWallets\DigitalWallets::createFromData([
@@ -696,7 +695,7 @@ abstract class TestCase extends Framework\TestCase
                 ]);
             case 'number':
                 if ($class === KhelocardCardPaymentInstrument::class) {
-                    return $faker->creditCardNumber;
+                    return self::TEST_PAN;
                 }
                 // no break
             default:
@@ -704,5 +703,25 @@ abstract class TestCase extends Framework\TestCase
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
                 );
         }
+    }
+
+    protected static function uuid(): string
+    {
+        $data = random_bytes(16);
+
+        $data[6] = chr(ord($data[6]) & 0x0f | 0x40); // set version to 0100
+        $data[8] = chr(ord($data[8]) & 0x3f | 0x80); // set bits 6-7 to 10
+
+        return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+    }
+
+    protected static function randomElements(array $values, $limit = 1): array
+    {
+        shuffle($values);
+        if ($limit > 0) {
+            $values = array_splice($values, 0, $limit);
+        }
+
+        return $values;
     }
 }
