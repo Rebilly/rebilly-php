@@ -12,6 +12,7 @@
 namespace Rebilly\Entities\Transactions;
 
 use DomainException;
+use InvalidArgumentException;
 use Rebilly\Entities\Transactions\PaymentInstructions\PaymentInstrumentInstruction;
 use Rebilly\Entities\Transactions\PaymentInstructions\PaymentMethodsInstruction;
 use Rebilly\Entities\Transactions\PaymentInstructions\PaymentTokenInstruction;
@@ -23,6 +24,15 @@ use Rebilly\Rest\Resource;
 abstract class PaymentInstruction extends Resource
 {
     public const UNSUPPORTED_INSTRUCTION = 'Unsupported payment instruction';
+
+    public function __construct(array $data = [])
+    {
+        if (!isset($data[$this->getAttributeName()])) {
+            throw new InvalidArgumentException(sprintf('Attribute %s is required', $this->getAttributeName()));
+        }
+
+        parent::__construct([$this->getAttributeName() => $data[$this->getAttributeName()]]);
+    }
 
     /**
      * @param array $data
@@ -45,4 +55,9 @@ abstract class PaymentInstruction extends Resource
 
         throw new DomainException(self::UNSUPPORTED_INSTRUCTION);
     }
+
+    /**
+     * @return string
+     */
+    abstract protected function getAttributeName();
 }
