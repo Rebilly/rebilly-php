@@ -613,9 +613,16 @@ abstract class TestCase extends Framework\TestCase
                     'method' => 'auto',
                 ]);
             case 'paymentInstruction':
-                return PaymentInstruction::createFromData([
-                    'method' => 'none',
-                ]);
+                switch ($class) {
+                    case Entities\PaymentRetryAttempt::class:
+                        return PaymentInstruction::createFromData(['method' => 'none']);
+                    case Entities\Transaction::class:
+                        return ['token' => 'token-1'];
+                    default:
+                        throw new InvalidArgumentException(
+                            sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
+                        );
+                }
             case 'lineItems':
                 return [
                     [
