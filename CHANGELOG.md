@@ -17,8 +17,11 @@ Security - in case of vulnerabilities.
 
 ### Added
 
-- [x] Added new property to `Transaction`: `arn`
+- [x] Added new properties to `Transaction`: `arn`, `paymentInstruction`
 - [x] Added new property to `ApiKey`: `apiUser`
+
+### Deprecated
+- [x] Deprecated `setPaymentInstrument`
 
 ### Removed
 

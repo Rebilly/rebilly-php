@@ -350,6 +350,16 @@ final class Transaction extends Entity
     }
 
     /**
+     * @param array $value
+     *
+     * @return $this
+     */
+    public function setPaymentInstruction(array $data)
+    {
+        return $this->setAttribute('paymentInstruction', $data);
+    }
+
+    /**
      * @return PaymentMethodInstrument
      */
     public function getPaymentInstrument()
@@ -358,6 +368,8 @@ final class Transaction extends Entity
     }
 
     /**
+     * @deprecated use {@see setPaymentInstruction()} instead
+     *
      * @param PaymentMethodInstrument $value
      *
      * @return $this
