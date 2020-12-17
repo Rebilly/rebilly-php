@@ -11,6 +11,7 @@
 
 namespace Rebilly\Entities\Transactions\PaymentInstructions;
 
+use InvalidArgumentException;
 use Rebilly\Entities\Transactions\PaymentInstruction;
 
 /**
@@ -18,18 +19,21 @@ use Rebilly\Entities\Transactions\PaymentInstruction;
  */
 final class PaymentInstrumentInstruction extends PaymentInstruction
 {
-    /**
-     * @param string $paymentInstrumentId
-     */
-    public function __construct(string $paymentInstrumentId)
+    public const MSG_REQUIRED_ID = 'Payment instrument ID is required';
+
+    public function __construct(array $data = [])
     {
-        parent::__construct(['paymentInstrumentId' => $paymentInstrumentId]);
+        if (!isset($data['paymentInstrumentId'])) {
+            throw new InvalidArgumentException(self::MSG_REQUIRED_ID);
+        }
+
+        parent::__construct(['paymentInstrumentId' => $data['paymentInstrumentId']]);
     }
 
     /**
      * @return string
      */
-    public function getPaymentInstrumentId(): string
+    public function getPaymentInstrumentId()
     {
         return $this->getAttribute('paymentInstrumentId');
     }
@@ -39,7 +43,7 @@ final class PaymentInstrumentInstruction extends PaymentInstruction
      *
      * @return $this
      */
-    public function setPaymentInstrumentId(string $value): self
+    public function setPaymentInstrumentId($value): self
     {
         return $this->setAttribute('paymentInstrumentId', $value);
     }

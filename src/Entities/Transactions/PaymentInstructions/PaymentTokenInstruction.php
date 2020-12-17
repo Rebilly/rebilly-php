@@ -11,6 +11,7 @@
 
 namespace Rebilly\Entities\Transactions\PaymentInstructions;
 
+use InvalidArgumentException;
 use Rebilly\Entities\Transactions\PaymentInstruction;
 
 /**
@@ -18,18 +19,21 @@ use Rebilly\Entities\Transactions\PaymentInstruction;
  */
 final class PaymentTokenInstruction extends PaymentInstruction
 {
-    /**
-     * @param string $token
-     */
-    public function __construct(string $token)
+    public const MSG_REQUIRED_TOKEN = 'Token is required';
+
+    public function __construct(array $data = [])
     {
-        parent::__construct(['token' => $token]);
+        if (!isset($data['token'])) {
+            throw new InvalidArgumentException(self::MSG_REQUIRED_TOKEN);
+        }
+
+        parent::__construct(['token' => $data['token']]);
     }
 
     /**
      * @return string
      */
-    public function getToken(): string
+    public function getToken()
     {
         return $this->getAttribute('token');
     }
@@ -39,7 +43,7 @@ final class PaymentTokenInstruction extends PaymentInstruction
      *
      * @return $this
      */
-    public function setToken(string $value): self
+    public function setToken($value): self
     {
         return $this->setAttribute('token', $value);
     }

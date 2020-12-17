@@ -32,15 +32,15 @@ abstract class PaymentInstruction extends Resource
     public static function createFromData(array $data): self
     {
         if (isset($data['token'])) {
-            return new PaymentTokenInstruction($data['token']);
+            return new PaymentTokenInstruction($data);
         }
 
         if (isset($data['paymentInstrumentId'])) {
-            return new PaymentInstrumentInstruction($data['paymentInstrumentId']);
+            return new PaymentInstrumentInstruction($data);
         }
 
         if (isset($data['methods'])) {
-            return new PaymentMethodsInstruction($data['methods']);
+            return new PaymentMethodsInstruction($data);
         }
 
         throw new DomainException(self::UNSUPPORTED_INSTRUCTION);

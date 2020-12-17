@@ -11,6 +11,7 @@
 
 namespace Rebilly\Entities\Transactions\PaymentInstructions;
 
+use InvalidArgumentException;
 use Rebilly\Entities\Transactions\PaymentInstruction;
 
 /**
@@ -18,18 +19,21 @@ use Rebilly\Entities\Transactions\PaymentInstruction;
  */
 final class PaymentMethodsInstruction extends PaymentInstruction
 {
-    /**
-     * @param array $methods
-     */
-    public function __construct(array $methods)
+    public const MSG_REQUIRED_METHODS = 'Methods is required';
+
+    public function __construct(array $data = [])
     {
-        parent::__construct(['methods' => $methods]);
+        if (!isset($data['methods'])) {
+            throw new InvalidArgumentException(self::MSG_REQUIRED_METHODS);
+        }
+
+        parent::__construct(['methods' => $data['methods']]);
     }
 
     /**
      * @return array
      */
-    public function getMethods(): array
+    public function getMethods()
     {
         return $this->getAttribute('methods');
     }
@@ -39,7 +43,7 @@ final class PaymentMethodsInstruction extends PaymentInstruction
      *
      * @return $this
      */
-    public function setMethods(array $value): self
+    public function setMethods($value): self
     {
         return $this->setAttribute('methods', $value);
     }
