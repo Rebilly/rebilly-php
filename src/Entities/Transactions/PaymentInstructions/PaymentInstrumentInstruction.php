@@ -36,6 +36,9 @@ final class PaymentInstrumentInstruction extends PaymentInstruction
         return $this->setAttribute($this->getAttributeName(), $value);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function getAttributeName()
     {
         return 'paymentInstrumentId';

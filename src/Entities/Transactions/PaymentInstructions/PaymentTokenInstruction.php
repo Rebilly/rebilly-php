@@ -36,6 +36,9 @@ final class PaymentTokenInstruction extends PaymentInstruction
         return $this->setAttribute($this->getAttributeName(), $value);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function getAttributeName()
     {
         return 'token';
