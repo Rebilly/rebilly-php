@@ -15,8 +15,8 @@ use InvalidArgumentException;
 use PHPUnit\Framework;
 use Rebilly\Entities;
 use Rebilly\Entities\PaymentInstruments\KhelocardCardPaymentInstrument;
-use Rebilly\Entities\PaymentRetryInstructions\PaymentInstruction;
-use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstruction;
+use Rebilly\Entities\PaymentRetryInstructions;
+use Rebilly\Entities\Transactions;
 
 /**
  * Class TestCase.
@@ -508,7 +508,7 @@ abstract class TestCase extends Framework\TestCase
                                 'afterRetryEndPolicies' => [Entities\InvoiceRetryInstructions\RetryInstruction::AFTER_RETRY_END_POLICY_ABANDON_INVOICE],
                                 'attempts' => [
                                     [
-                                        'scheduleInstruction' => ['method' => ScheduleInstruction::IMMEDIATELY],
+                                        'scheduleInstruction' => ['method' => PaymentRetryInstructions\ScheduleInstruction::IMMEDIATELY],
                                     ],
                                 ],
                             ]
@@ -609,15 +609,15 @@ abstract class TestCase extends Framework\TestCase
                     'payment-card-expired',
                 ])[0];
             case 'scheduleInstruction':
-                return ScheduleInstruction::createFromData([
+                return PaymentRetryInstructions\ScheduleInstruction::createFromData([
                     'method' => 'auto',
                 ]);
             case 'paymentInstruction':
                 switch ($class) {
                     case Entities\PaymentRetryAttempt::class:
-                        return PaymentInstruction::createFromData(['method' => 'none']);
+                        return PaymentRetryInstructions\PaymentInstruction::createFromData(['method' => 'none']);
                     case Entities\Transaction::class:
-                        return ['token' => 'token-1'];
+                        return Transactions\PaymentInstruction::createFromData(['token' => 'token-1']);
                     default:
                         throw new InvalidArgumentException(
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)

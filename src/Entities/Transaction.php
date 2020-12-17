@@ -11,6 +11,7 @@
 
 namespace Rebilly\Entities;
 
+use Rebilly\Entities\Transactions\PaymentInstruction;
 use Rebilly\Rest\Entity;
 
 /**
@@ -350,13 +351,13 @@ final class Transaction extends Entity
     }
 
     /**
-     * @param array $data
+     * @param PaymentInstruction $data
      *
      * @return $this
      */
-    public function setPaymentInstruction($data)
+    public function setPaymentInstruction(PaymentInstruction $value)
     {
-        return $this->setAttribute('paymentInstruction', $data);
+        return $this->setAttribute('paymentInstruction', $value->jsonSerialize());
     }
 
     /**
