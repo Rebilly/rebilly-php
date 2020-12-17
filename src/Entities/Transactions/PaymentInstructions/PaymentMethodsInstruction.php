@@ -29,7 +29,7 @@ final class PaymentMethodsInstruction extends PaymentInstruction
     /**
      * @return array
      */
-    public function getMethods()
+    public function getMethods(): array
     {
         return $this->getAttribute('methods');
     }
