@@ -350,7 +350,7 @@ final class Transaction extends Entity
     }
 
     /**
-     * @param array $value
+     * @param array $data
      *
      * @return $this
      */
