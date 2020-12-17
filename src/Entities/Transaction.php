@@ -354,7 +354,7 @@ final class Transaction extends Entity
      *
      * @return $this
      */
-    public function setPaymentInstruction(array $data)
+    public function setPaymentInstruction($data)
     {
         return $this->setAttribute('paymentInstruction', $data);
     }
