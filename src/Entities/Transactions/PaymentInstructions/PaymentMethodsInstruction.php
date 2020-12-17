@@ -21,13 +21,15 @@ final class PaymentMethodsInstruction extends PaymentInstruction
 {
     public const MSG_REQUIRED_METHODS = 'Methods is required';
 
+    private const ATTRIBUTE_NAME = 'methods';
+
     public function __construct(array $data = [])
     {
-        if (!isset($data['methods'])) {
+        if (!isset($data[self::ATTRIBUTE_NAME])) {
             throw new InvalidArgumentException(self::MSG_REQUIRED_METHODS);
         }
 
-        parent::__construct(['methods' => $data['methods']]);
+        parent::__construct([self::ATTRIBUTE_NAME => $data[self::ATTRIBUTE_NAME]]);
     }
 
     /**
@@ -35,7 +37,7 @@ final class PaymentMethodsInstruction extends PaymentInstruction
      */
     public function getMethods()
     {
-        return $this->getAttribute('methods');
+        return $this->getAttribute(self::ATTRIBUTE_NAME);
     }
 
     /**
@@ -45,6 +47,6 @@ final class PaymentMethodsInstruction extends PaymentInstruction
      */
     public function setMethods($value): self
     {
-        return $this->setAttribute('methods', $value);
+        return $this->setAttribute(self::ATTRIBUTE_NAME, $value);
     }
 }

@@ -21,13 +21,15 @@ final class PaymentTokenInstruction extends PaymentInstruction
 {
     public const MSG_REQUIRED_TOKEN = 'Token is required';
 
+    private const ATTRIBUTE_NAME = 'token';
+
     public function __construct(array $data = [])
     {
-        if (!isset($data['token'])) {
+        if (!isset($data[self::ATTRIBUTE_NAME])) {
             throw new InvalidArgumentException(self::MSG_REQUIRED_TOKEN);
         }
 
-        parent::__construct(['token' => $data['token']]);
+        parent::__construct([self::ATTRIBUTE_NAME => $data[self::ATTRIBUTE_NAME]]);
     }
 
     /**
@@ -35,7 +37,7 @@ final class PaymentTokenInstruction extends PaymentInstruction
      */
     public function getToken()
     {
-        return $this->getAttribute('token');
+        return $this->getAttribute(self::ATTRIBUTE_NAME);
     }
 
     /**
@@ -45,6 +47,6 @@ final class PaymentTokenInstruction extends PaymentInstruction
      */
     public function setToken($value): self
     {
-        return $this->setAttribute('token', $value);
+        return $this->setAttribute(self::ATTRIBUTE_NAME, $value);
     }
 }

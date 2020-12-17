@@ -21,13 +21,15 @@ final class PaymentInstrumentInstruction extends PaymentInstruction
 {
     public const MSG_REQUIRED_ID = 'Payment instrument ID is required';
 
+    private const ATTRIBUTE_NAME = 'paymentInstrumentId';
+
     public function __construct(array $data = [])
     {
-        if (!isset($data['paymentInstrumentId'])) {
+        if (!isset($data[self::ATTRIBUTE_NAME])) {
             throw new InvalidArgumentException(self::MSG_REQUIRED_ID);
         }
 
-        parent::__construct(['paymentInstrumentId' => $data['paymentInstrumentId']]);
+        parent::__construct([self::ATTRIBUTE_NAME => $data[self::ATTRIBUTE_NAME]]);
     }
 
     /**
@@ -35,7 +37,7 @@ final class PaymentInstrumentInstruction extends PaymentInstruction
      */
     public function getPaymentInstrumentId()
     {
-        return $this->getAttribute('paymentInstrumentId');
+        return $this->getAttribute(self::ATTRIBUTE_NAME);
     }
 
     /**
@@ -45,6 +47,6 @@ final class PaymentInstrumentInstruction extends PaymentInstruction
      */
     public function setPaymentInstrumentId($value): self
     {
-        return $this->setAttribute('paymentInstrumentId', $value);
+        return $this->setAttribute(self::ATTRIBUTE_NAME, $value);
     }
 }
