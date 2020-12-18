@@ -172,7 +172,7 @@ class SubscriptionTest extends TestCase
         self::assertSame($data['billingAddress'], $value->getBillingAddress()->jsonSerialize());
         self::assertInstanceOf(Address::class, $value->getDeliveryAddress());
         self::assertSame($data['deliveryAddress'], $value->getDeliveryAddress()->jsonSerialize());
-        self::assertSame($data['riskMetadata'], $value->getRiskMetadata());
+        self::assertSame($data['riskMetadata'], $value->getRiskMetadata()->jsonSerialize());
         self::assertSame($data['lineItems'], $value->getLineItems());
         self::assertSame($data['lineItemSubtotal'], $value->getLineItemSubtotal());
         self::assertInternalType('array', $value->getItems());

@@ -431,11 +431,21 @@ final class Transaction extends Entity
     }
 
     /**
-     * @return RiskMetadata
+     * @return RiskMetadata|null
      */
     public function getRiskMetadata()
     {
         return $this->getAttribute('riskMetadata');
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return RiskMetadata
+     */
+    public function createRiskMetadata(array $data)
+    {
+        return new RiskMetadata($data);
     }
 
     /**
