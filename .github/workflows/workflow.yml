@@ -26,6 +26,7 @@ jobs:
           php-version: ${{ matrix.php-version }}
           extensions: mbstring, intl, curl, json
           tools: composer:v1
+          ini-values: xdebug.mode=coverage
 
       - name: Get Composer Cache Directory
         id: composer-cache
@@ -80,6 +81,7 @@ jobs:
           php-version: ${{ matrix.php-version }}
           extensions: mbstring, intl, curl, json
           tools: composer:v1
+          ini-values: xdebug.mode=coverage
 
       - name: Get Composer Cache Directory
         id: composer-cache
