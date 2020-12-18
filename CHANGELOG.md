@@ -18,6 +18,7 @@ Security - in case of vulnerabilities.
 ### Added
 
 - [x] Added new properties to `Transaction`: `arn`, `paymentInstruction`
+- [x] Added new properties to `RiskMetadata`: `hasMismatchedTimeZone`, `hasMismatchedBankCountry`, `hasMismatchedBillingAddressCountry`
 - [x] Added new property to `ApiKey`: `apiUser`
 
 ### Deprecated

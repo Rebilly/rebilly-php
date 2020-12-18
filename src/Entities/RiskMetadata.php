@@ -191,4 +191,28 @@ final class RiskMetadata extends Resource
     {
         return $this->getAttribute('distance');
     }
+
+    /**
+     * @return bool
+     */
+    public function getHasMismatchedTimeZone()
+    {
+        return $this->getAttribute('hasMismatchedTimeZone');
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHasMismatchedBankCountry()
+    {
+        return $this->getAttribute('hasMismatchedBankCountry');
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHasMismatchedBillingAddressCountry()
+    {
+        return $this->getAttribute('hasMismatchedBillingAddressCountry');
+    }
 }
