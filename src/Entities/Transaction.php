@@ -351,7 +351,7 @@ final class Transaction extends Entity
     }
 
     /**
-     * @param PaymentInstruction $data
+     * @param PaymentInstruction $value
      *
      * @return $this
      */
