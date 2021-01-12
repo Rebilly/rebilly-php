@@ -175,4 +175,20 @@ final class KycDocument extends Entity
     {
         return $this->getAttribute('createdTime');
     }
+
+    /**
+     * @return string
+     */
+    public function getReason()
+    {
+        return $this->getAttribute('reason');
+    }
+
+    /**
+     * @return int
+     */
+    public function getMatchLevel()
+    {
+        return $this->getAttribute('matchLevel');
+    }
 }
