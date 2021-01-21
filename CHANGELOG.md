@@ -15,6 +15,10 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
+_TBD_
+
+## [2.10.0] 2021-01-21
+
 ### Added
 
 - [x] Added new properties to `KycDocument`: `matchLevel`, `reason`
