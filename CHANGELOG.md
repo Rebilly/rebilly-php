@@ -15,7 +15,11 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
-_TBD_
+### Removed
+
+- [x] Removed deprecated `ApiKey` property: `datetimeFormat`
+- [x] Removed deprecated `ApiKey` method: `datetimeFormats`
+- [x] Removed deprecated `ApiKey` constants: `DATETIME_FORMAT_MYSQL`, `DATETIME_FORMAT_ISO8601`, `MSG_UNEXPECTED_DATETIME_FORMAT`
 
 ## [2.10.0] 2021-01-21
 
