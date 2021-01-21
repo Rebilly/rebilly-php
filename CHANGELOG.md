@@ -27,7 +27,7 @@ _TBD_
 - [x] Added new property to `ApiKey`: `apiUser`
 
 ### Deprecated
-- [x] Deprecated `setPaymentInstrument`
+- [x] Deprecated `Transaction` method: `setPaymentInstrument`
 
 ### Removed
 
