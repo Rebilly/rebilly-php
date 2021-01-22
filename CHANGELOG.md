@@ -17,6 +17,7 @@ Security - in case of vulnerabilities.
 
 ### Removed
 
+- [x] Removed **Layouts API**
 - [x] Removed deprecated `ApiKey` property: `datetimeFormat`
 - [x] Removed deprecated `ApiKey` method: `datetimeFormats`
 - [x] Removed deprecated `ApiKey` constants: `DATETIME_FORMAT_MYSQL`, `DATETIME_FORMAT_ISO8601`, `MSG_UNEXPECTED_DATETIME_FORMAT`

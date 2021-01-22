@@ -360,20 +360,6 @@ abstract class TestCase extends Framework\TestCase
                 // no break
             case 'items':
                 switch ($class) {
-                    case Entities\Layout::class:
-                        return [
-                            new Entities\LayoutItem(
-                                [
-                                    'planId' => 'foo',
-                                    'starred' => true,
-                                ]
-                            ),
-                            new Entities\LayoutItem(
-                                [
-                                    'planId' => 'bar',
-                                ]
-                            ),
-                        ];
                     case Entities\Subscription::class:
                         return [
                             ['planId' => 'plan-1', 'quantity' => 1],

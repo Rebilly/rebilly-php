@@ -170,7 +170,6 @@ final class Session extends Entity
             ResourceType::TYPE_INVOICES,
             ResourceType::TYPE_KYC,
             ResourceType::TYPE_LEAD_SOURCES,
-            ResourceType::TYPE_LAYOUTS,
             ResourceType::TYPE_ORGANIZATIONS,
             ResourceType::TYPE_PAYMENT_CARDS,
             ResourceType::TYPE_PAYMENTS,

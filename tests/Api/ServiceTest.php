@@ -694,53 +694,6 @@ class ServiceTest extends BaseTestCase
     /**
      * @test
      */
-    public function layoutService()
-    {
-        $client = new Client(['apiKey' => 'QWERTY']);
-
-        /** @var CurlHandler|MockObject $handler */
-        $handler = $this->createMock(CurlHandler::class);
-        $layout = new Entities\Layout();
-        $layout->addItem([
-            'planId' => self::uuid(),
-            'starred' => true,
-        ]);
-        $layout->setItems([
-            [
-                'planId' => self::uuid(),
-                'starred' => true,
-            ],
-            new Entities\LayoutItem([
-                'planId' => self::uuid(),
-            ]),
-        ]);
-
-        $handler
-            ->expects($this->any())
-            ->method('__invoke')
-            ->will($this->returnValue(
-                $client
-                    ->createResponse()
-                    ->withHeader('Location', 'layouts/dummy')
-                    ->withBody(Psr7\stream_for(json_encode($layout)))
-            ));
-
-        $client = new Client([
-            'apiKey' => 'QWERTY',
-            'httpHandler' => $handler,
-        ]);
-
-        $service = $client->layouts();
-
-        $result = $service->create($layout);
-        $this->assertInstanceOf(Entities\Layout::class, $result);
-        $this->assertCount(2, $result->getItems());
-        $this->assertInstanceOf(Entities\LayoutItem::class, $result->getItems()[0]);
-    }
-
-    /**
-     * @test
-     */
     public function userService()
     {
         $client = new Client(['apiKey' => 'QWERTY']);
@@ -1207,11 +1160,6 @@ class ServiceTest extends BaseTestCase
                 'invoices',
                 Services\InvoiceService::class,
                 Entities\Invoice::class,
-            ],
-            [
-                'layouts',
-                Services\LayoutService::class,
-                Entities\Layout::class,
             ],
             [
                 'paymentCards',

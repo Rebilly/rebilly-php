@@ -46,8 +46,6 @@ interface ResourceType
 
     public const TYPE_LEAD_SOURCES = 'lead-sources';
 
-    public const TYPE_LAYOUTS = 'layouts';
-
     public const TYPE_ORGANIZATIONS = 'organizations';
 
     public const TYPE_PASSWORD_TOKENS = 'password-tokens';
