@@ -313,7 +313,6 @@ abstract class TestCase extends Framework\TestCase
                 }
                 // no break
             case 'type':
-            case 'datetimeFormat':
                 switch ($class) {
                     case Entities\LineItem::class:
                         return self::randomElements(Entities\LineItem::types())[0];
@@ -325,8 +324,6 @@ abstract class TestCase extends Framework\TestCase
                         return self::randomElements(Entities\InvoiceItem::types())[0];
                     case Entities\CustomField::class:
                         return self::randomElements(Entities\CustomField::allowedTypes())[0];
-                    case Entities\ApiKey::class:
-                        return self::randomElements(Entities\ApiKey::datetimeFormats())[0];
                     case Entities\Dispute::class:
                         return self::randomElements(Entities\Dispute::allowedTypes())[0];
                     case Entities\Transaction::class:
