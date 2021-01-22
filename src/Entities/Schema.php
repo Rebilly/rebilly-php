@@ -117,12 +117,6 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'plans/{planId}' => function (array $content) {
                 return new Plan($content);
             },
-            'layouts' => function (array $content) {
-                return new Collection(new Layout(), $content);
-            },
-            'layouts/{layoutId}' => function (array $content) {
-                return new Layout($content);
-            },
             'subscriptions' => function (array $content) {
                 return new Collection(new Subscription(), $content);
             },
