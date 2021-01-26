@@ -271,4 +271,22 @@ final class Payout extends Entity
     {
         return $this->setAttribute('isProcessedOutside', $value);
     }
+
+    /**
+     * @return bool
+     */
+    public function getIsMerchantInitiated()
+    {
+        return $this->getAttribute('isMerchantInitiated');
+    }
+
+    /**
+     * @param bool $value
+     *
+     * @return $this
+     */
+    public function setIsMerchantInitiated($value)
+    {
+        return $this->setAttribute('isMerchantInitiated', $value);
+    }
 }

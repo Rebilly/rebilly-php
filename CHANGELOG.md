@@ -15,6 +15,10 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
+### Added
+
+- [x] Added new property to `Transaction`: `isMerchantInitiated`
+
 ### Removed
 
 - [x] Removed **Layouts API**
