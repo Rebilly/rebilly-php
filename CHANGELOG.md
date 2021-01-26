@@ -15,9 +15,12 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
-### Removed
+### Added
 
 - [x] Added new property to `Transaction`: `isMerchantInitiated`
+
+### Removed
+
 - [x] Removed **Layouts API**
 - [x] Removed deprecated `ApiKey` property: `datetimeFormat`
 - [x] Removed deprecated `ApiKey` method: `datetimeFormats`
