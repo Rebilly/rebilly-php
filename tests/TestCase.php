@@ -259,6 +259,7 @@ abstract class TestCase extends Framework\TestCase
             case 'attachInvoice':
             case 'invalidate':
             case 'isProcessedOutside':
+            case 'isMerchantInitiated':
             case 'primary':
             case 'isDefault':
             case 'preview':

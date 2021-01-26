@@ -657,6 +657,24 @@ final class Transaction extends Entity
     }
 
     /**
+     * @return bool
+     */
+    public function getIsMerchantInitiated()
+    {
+        return $this->getAttribute('isMerchantInitiated');
+    }
+
+    /**
+     * @param bool $value
+     *
+     * @return $this
+     */
+    public function setIsMerchantInitiated($value)
+    {
+        return $this->setAttribute('isMerchantInitiated', $value);
+    }
+
+    /**
      * @return string
      */
     public function getArn()
