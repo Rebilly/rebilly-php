@@ -142,6 +142,34 @@ final class PaymentToken extends PaymentCardToken
         $this->showDeprecationAlert(__METHOD__);
     }
 
+    /**
+     * @return RiskMetadata|null
+     */
+    public function getRiskMetadata()
+    {
+        return $this->getAttribute('riskMetadata');
+    }
+
+    /**
+     * @param RiskMetadata $value
+     *
+     * @return $this
+     */
+    public function setRiskMetadata(RiskMetadata $value)
+    {
+        return $this->setAttribute('riskMetadata', $value);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return RiskMetadata
+     */
+    public function createRiskMetadata(array $data)
+    {
+        return RiskMetadata::createFromData($data);
+    }
+
     private function showDeprecationAlert($method)
     {
         throw new LogicException(sprintf('The method %s is deprecated', $method));

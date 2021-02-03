@@ -19,6 +19,16 @@ use Rebilly\Rest\Resource;
 final class RiskMetadata extends Resource
 {
     /**
+     * @param array $data
+     *
+     * @return RiskMetadata
+     */
+    public static function createFromData(array $data)
+    {
+        return new self($data);
+    }
+
+    /**
      * @return string
      */
     public function getIpAddress()
@@ -214,5 +224,33 @@ final class RiskMetadata extends Resource
     public function getHasMismatchedBillingAddressCountry()
     {
         return $this->getAttribute('hasMismatchedBillingAddressCountry');
+    }
+
+    /**
+     * @return BrowserData|null
+     */
+    public function getBrowserData()
+    {
+        return $this->getAttribute('browserData');
+    }
+
+    /**
+     * @param BrowserData $value
+     *
+     * @return $this
+     */
+    public function setBrowserData(BrowserData $value)
+    {
+        return $this->setAttribute('browserData', $value);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return BrowserData
+     */
+    public function createBrowserData(array $data)
+    {
+        return BrowserData::createFromData($data);
     }
 }
