@@ -439,6 +439,16 @@ final class Transaction extends Entity
     }
 
     /**
+     * @param RiskMetadata $value
+     *
+     * @return $this
+     */
+    public function setRiskMetadata(RiskMetadata $value)
+    {
+        return $this->setAttribute('riskMetadata', $value);
+    }
+
+    /**
      * @param array $data
      *
      * @return RiskMetadata

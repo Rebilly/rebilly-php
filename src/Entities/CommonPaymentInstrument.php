@@ -129,31 +129,31 @@ class CommonPaymentInstrument extends Entity
     }
 
     /**
-     * @return BrowserData
+     * @return RiskMetadata|null
      */
-    public function getBrowserData()
+    public function getRiskMetadata()
     {
-        return $this->getAttribute('browserData');
+        return $this->getAttribute('riskMetadata');
     }
 
     /**
-     * @param BrowserData $value
+     * @param RiskMetadata $value
      *
      * @return $this
      */
-    public function setBrowserData(BrowserData $value)
+    public function setRiskMetadata(RiskMetadata $value)
     {
-        return $this->setAttribute('browserData', $value);
+        return $this->setAttribute('riskMetadata', $value);
     }
 
     /**
      * @param array $data
      *
-     * @return BrowserData
+     * @return RiskMetadata
      */
-    public function createBrowserData(array $data)
+    public function createRiskMetadata(array $data)
     {
-        return BrowserData::createFromData($data);
+        return RiskMetadata::createFromData($data);
     }
 
     /**

@@ -29,24 +29,6 @@ class BrowserData extends Resource
     }
 
     /**
-     * @return string
-     */
-    public function getAcceptHeader()
-    {
-        return $this->getAttribute('acceptHeader');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setAcceptHeader($value)
-    {
-        return $this->setAttribute('acceptHeader', $value);
-    }
-
-    /**
      * @return int
      */
     public function getColorDepth()
@@ -65,29 +47,11 @@ class BrowserData extends Resource
     }
 
     /**
-     * @return string
-     */
-    public function getIpAddress()
-    {
-        return $this->getAttribute('ipAddress');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setIpAddress($value)
-    {
-        return $this->setAttribute('ipAddress', $value);
-    }
-
-    /**
      * @return bool
      */
-    public function getJavaEnabled()
+    public function getIsJavaEnabled()
     {
-        return $this->getAttribute('javaEnabled');
+        return $this->getAttribute('isJavaEnabled');
     }
 
     /**
@@ -95,9 +59,9 @@ class BrowserData extends Resource
      *
      * @return $this
      */
-    public function setJavaEnabled($value)
+    public function setIsJavaEnabled($value)
     {
-        return $this->setAttribute('javaEnabled', $value);
+        return $this->setAttribute('isJavaEnabled', $value);
     }
 
     /**
@@ -170,41 +134,5 @@ class BrowserData extends Resource
     public function setTimeZoneOffset($value)
     {
         return $this->setAttribute('timeZoneOffset', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getUserAgent()
-    {
-        return $this->getAttribute('userAgent');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setUserAgent($value)
-    {
-        return $this->setAttribute('userAgent', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getDeviceFingerprintHash()
-    {
-        return $this->getAttribute('deviceFingerprintHash');
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setDeviceFingerprintHash($value)
-    {
-        return $this->setAttribute('deviceFingerprintHash', $value);
     }
 }

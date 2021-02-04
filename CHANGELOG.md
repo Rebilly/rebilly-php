@@ -18,6 +18,10 @@ Security - in case of vulnerabilities.
 ### Added
 
 - [x] Added new property to `Transaction`: `isMerchantInitiated`
+- [x] Added new property to `BrowserData`: `isJavaEnabled`
+- [x] Added new property to `RiskMetadata`: `browserData`
+- [x] Added new property to `CommonPaymentInstrument`, `BankAccount`, `PaymentCard`, `PayPalAccount`: `riskMetadata`
+- [x] Added new property to `PaymentToken`: `riskMetadata`
 
 ### Removed
 
@@ -25,6 +29,8 @@ Security - in case of vulnerabilities.
 - [x] Removed deprecated `ApiKey` property: `datetimeFormat`
 - [x] Removed deprecated `ApiKey` method: `datetimeFormats`
 - [x] Removed deprecated `ApiKey` constants: `DATETIME_FORMAT_MYSQL`, `DATETIME_FORMAT_ISO8601`, `MSG_UNEXPECTED_DATETIME_FORMAT`
+- [x] Removed deprecated `BrowserData` properties: `acceptHeader`, `ipAddress`, `javaEnabled`, `userAgent`, `deviceFingerprintHash`
+- [x] Removed deprecated `CommonPaymentInstrument`, `BankAccount`, `PaymentCard`, `PayPalAccount` properties: `browserData`
 
 ## [2.10.0] 2021-01-21
 
