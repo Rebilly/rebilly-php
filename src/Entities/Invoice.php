@@ -402,4 +402,12 @@ final class Invoice extends Entity
     {
         return $this->setAttribute('notes', $value);
     }
+
+    /**
+     * @return string
+     */
+    public function getCreatedTime()
+    {
+        return $this->getAttribute('createdTime');
+    }
 }

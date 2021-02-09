@@ -262,4 +262,12 @@ final class Plan extends Entity
     {
         return $this->setAttribute('customFields', $value);
     }
+
+    /**
+     * @return string
+     */
+    public function getCreatedTime()
+    {
+        return $this->getAttribute('createdTime');
+    }
 }
