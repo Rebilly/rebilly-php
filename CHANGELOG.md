@@ -17,6 +17,8 @@ Security - in case of vulnerabilities.
 
 ### Added
 
+- [x] Added new property to `Plan`: `createdTime`
+- [x] Added new property to `Invoice`: `createdTime`
 - [x] Added new property to `Transaction`: `isMerchantInitiated`
 - [x] Added new property to `BrowserData`: `isJavaEnabled`
 - [x] Added new property to `RiskMetadata`: `browserData`
