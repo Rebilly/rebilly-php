@@ -394,4 +394,12 @@ final class Dispute extends Entity
     {
         return $this->getAttribute('createdTime');
     }
+
+    /**
+     * @return string
+     */
+    public function getCustomerId()
+    {
+        return $this->getAttribute('customerId');
+    }
 }
