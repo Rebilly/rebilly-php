@@ -24,6 +24,8 @@ Security - in case of vulnerabilities.
 - [x] Added new property to `RiskMetadata`: `browserData`
 - [x] Added new property to `CommonPaymentInstrument`, `BankAccount`, `PaymentCard`, `PayPalAccount`: `riskMetadata`
 - [x] Added new property to `PaymentToken`: `riskMetadata`
+- [x] Added new property to `Dispute`: `customerId`
+- [x] Added new property to `GatewayAccount`: `status`
 
 ### Removed
 
