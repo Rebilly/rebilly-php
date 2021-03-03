@@ -15,6 +15,10 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
+_TBD_
+
+## [2.11.0] 2021-03-03
+
 ### Added
 
 - [x] Added new property to `Plan`: `createdTime`
@@ -35,6 +39,10 @@ Security - in case of vulnerabilities.
 - [x] Removed deprecated `ApiKey` constants: `DATETIME_FORMAT_MYSQL`, `DATETIME_FORMAT_ISO8601`, `MSG_UNEXPECTED_DATETIME_FORMAT`
 - [x] Removed deprecated `BrowserData` properties: `acceptHeader`, `ipAddress`, `javaEnabled`, `userAgent`, `deviceFingerprintHash`
 - [x] Removed deprecated `CommonPaymentInstrument`, `BankAccount`, `PaymentCard`, `PayPalAccount` properties: `browserData`
+
+### Fixed
+
+- [x] Added missing attribute value factories for `Address`: `createPhoneNumbers`, `createEmails`
 
 ## [2.10.0] 2021-01-21
 

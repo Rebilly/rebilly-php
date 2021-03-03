@@ -84,4 +84,64 @@ class CustomerEntityTest extends BaseTestCase
         self::assertSame('Doe', $customer->getPrimaryAddress()->getLastName());
         self::assertSame('US', $customer->getPrimaryAddress()->getCountry());
     }
+
+    public function testDeprecatedMethodsWithMultiplePhoneNumbersAndEmails()
+    {
+        $customer = new Customer();
+        $customer->setPrimaryAddress(Address::createFromData([
+            'firstName' => 'John',
+            'lastName' => 'Doe',
+            'country' => 'US',
+            'phoneNumbers' => [
+                ['label' => 'other', 'value' => '+4567', 'primary' => false],
+                ['label' => 'main', 'value' => '+1234', 'primary' => true],
+            ],
+            'emails' => [
+                ['label' => 'other', 'value' => 'other@mail.com', 'primary' => false],
+                ['label' => 'main', 'value' => 'main@mail.com', 'primary' => true],
+            ],
+        ]));
+
+        self::assertSame('John', $customer->getPrimaryAddress()->getFirstName());
+        self::assertSame('Doe', $customer->getPrimaryAddress()->getLastName());
+        self::assertSame('John', $customer->getFirstName());
+        self::assertSame('Doe', $customer->getLastName());
+        self::assertCount(2, $customer->getPrimaryAddress()->getPhoneNumbers());
+        self::assertSame('+4567', $customer->getPrimaryAddress()->getPhoneNumbers()[0]->getValue());
+        self::assertSame('+1234', $customer->getPrimaryAddress()->getPhoneNumbers()[1]->getValue());
+        self::assertCount(2, $customer->getPrimaryAddress()->getEmails());
+        self::assertSame('other@mail.com', $customer->getPrimaryAddress()->getEmails()[0]->getValue());
+        self::assertSame('main@mail.com', $customer->getPrimaryAddress()->getEmails()[1]->getValue());
+        self::assertSame('main@mail.com', $customer->getEmail());
+    }
+
+    public function testDeprecatedMethodsWithoutPrimaryEmailAndPhoneNumber()
+    {
+        $customer = new Customer();
+        $customer->setPrimaryAddress(Address::createFromData([
+            'firstName' => 'John',
+            'lastName' => 'Doe',
+            'country' => 'US',
+            'phoneNumbers' => [
+                ['label' => 'other', 'value' => '+4567'],
+                ['label' => 'main', 'value' => '+1234', 'primary' => false],
+            ],
+            'emails' => [
+                ['label' => 'other', 'value' => 'other@mail.com'],
+                ['label' => 'main', 'value' => 'main@mail.com', 'primary' => false],
+            ],
+        ]));
+
+        self::assertSame('John', $customer->getPrimaryAddress()->getFirstName());
+        self::assertSame('Doe', $customer->getPrimaryAddress()->getLastName());
+        self::assertSame('John', $customer->getFirstName());
+        self::assertSame('Doe', $customer->getLastName());
+        self::assertCount(2, $customer->getPrimaryAddress()->getPhoneNumbers());
+        self::assertSame('+4567', $customer->getPrimaryAddress()->getPhoneNumbers()[0]->getValue());
+        self::assertSame('+1234', $customer->getPrimaryAddress()->getPhoneNumbers()[1]->getValue());
+        self::assertCount(2, $customer->getPrimaryAddress()->getEmails());
+        self::assertSame('other@mail.com', $customer->getPrimaryAddress()->getEmails()[0]->getValue());
+        self::assertSame('main@mail.com', $customer->getPrimaryAddress()->getEmails()[1]->getValue());
+        self::assertSame('other@mail.com', $customer->getEmail());
+    }
 }

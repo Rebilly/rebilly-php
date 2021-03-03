@@ -26,25 +26,22 @@ final class Customer extends Entity
      */
     public function getEmail()
     {
-        $primaryAddress = $this->getPrimaryAddress();
-        if ($primaryAddress === null) {
+        if ($this->getPrimaryAddress() === null) {
             return null;
         }
 
-        $emails = $primaryAddress->getEmails();
+        $emails = $this->getPrimaryAddress()->getEmails();
         if (empty($emails)) {
             return null;
         }
 
         foreach ($emails as $email) {
-            if (is_array($email) && $email['primary'] === true) {
+            if (($email['primary'] ?? false) === true) {
                 return $email['value'];
             }
-
-            return $email->getValue();
         }
 
-        return $emails[0]->getValue();
+        return $emails[0]['value'];
     }
 
     /**
