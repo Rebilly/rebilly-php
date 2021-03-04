@@ -198,6 +198,14 @@ final class Dispute extends Entity
     /**
      * @return string
      */
+    public function getCustomerId()
+    {
+        return $this->getAttribute('customerId');
+    }
+
+    /**
+     * @return string
+     */
     public function getTransactionId()
     {
         return $this->getAttribute('transactionId');
@@ -211,6 +219,18 @@ final class Dispute extends Entity
     public function setTransactionId($value)
     {
         return $this->setAttribute('transactionId', $value);
+    }
+
+    /**
+     * @return null|Transaction
+     */
+    public function getTransaction()
+    {
+        if ($this->hasEmbeddedResource('transaction')) {
+            return new Transaction($this->getEmbeddedResource('transaction'));
+        }
+
+        return null;
     }
 
     /**
@@ -294,6 +314,14 @@ final class Dispute extends Entity
     /**
      * @return string
      */
+    public function getCategory()
+    {
+        return $this->getAttribute('category');
+    }
+
+    /**
+     * @return string
+     */
     public function getType()
     {
         return $this->getAttribute('type');
@@ -346,6 +374,32 @@ final class Dispute extends Entity
     /**
      * @return string
      */
+    public function getRawResponse()
+    {
+        return $this->getAttribute('rawResponse');
+    }
+
+    /**
+     * @return string
+     */
+    public function getCaseId()
+    {
+        return $this->getAttribute('caseId');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setCaseId($value)
+    {
+        return $this->setAttribute('caseId', $value);
+    }
+
+    /**
+     * @return string
+     */
     public function getPostedTime()
     {
         return $this->getAttribute('postedTime');
@@ -393,13 +447,5 @@ final class Dispute extends Entity
     public function getCreatedTime()
     {
         return $this->getAttribute('createdTime');
-    }
-
-    /**
-     * @return string
-     */
-    public function getCustomerId()
-    {
-        return $this->getAttribute('customerId');
     }
 }
