@@ -110,6 +110,7 @@ abstract class TestCase extends Framework\TestCase
             case 'credentialHash':
             case 'clientId':
             case 'secretToken':
+            case 'caseId':
                 return self::uuid();
             case 'dueTime':
             case 'expiredTime':
