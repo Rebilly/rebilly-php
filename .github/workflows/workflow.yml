@@ -3,7 +3,7 @@ on: [pull_request]
 
 jobs:
   unit-tests:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     strategy:
       # max-parallel: 1
@@ -51,14 +51,14 @@ jobs:
         if: env.EXECUTE_COVERAGE != 'true'
         run: php vendor/bin/phpunit --testdox --colors=always
 
-      - name: Coverage monitor
-        if: env.EXECUTE_COVERAGE == 'true'
-        uses: slavcodev/coverage-monitor-action@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          clover_file: ${{ env.CLOVER_PATH }}
-          threshold_alert: 0
-          threshold_warning: 50
+#      - name: Coverage monitor
+#        if: env.EXECUTE_COVERAGE == 'true'
+#        uses: slavcodev/coverage-monitor-action@v1
+#        with:
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
+#          clover_file: ${{ env.CLOVER_PATH }}
+#          threshold_alert: 0
+#          threshold_warning: 50
 
       - name: Upload coverage to Coveralls
         if: env.EXECUTE_COVERAGE == 'true'
