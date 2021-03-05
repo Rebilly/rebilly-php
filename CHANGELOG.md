@@ -15,7 +15,9 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
-_TBD_
+### Added
+
+- [x] Added new properties to `Dispute`: `transaction`, `category`, `rawResponse`, `caseId`
 
 ## [2.11.0] 2021-03-03
 
