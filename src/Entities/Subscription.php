@@ -538,4 +538,12 @@ final class Subscription extends Entity
             ? new Invoice($data)
             : null;
     }
+
+    /**
+     * @return string
+     */
+    public function getRevision()
+    {
+        return $this->getAttribute('revision');
+    }
 }
