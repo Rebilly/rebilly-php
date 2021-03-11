@@ -367,4 +367,12 @@ final class Customer extends Entity
     {
         return $this->getAttribute('websiteId');
     }
+
+    /**
+     * @return string
+     */
+    public function getRevision()
+    {
+        return $this->getAttribute('revision');
+    }
 }
