@@ -18,6 +18,9 @@ Security - in case of vulnerabilities.
 ### Added
 
 - [x] Added new properties to `Dispute`: `transaction`, `category`, `rawResponse`, `caseId`
+- [x] Added new property to `Customer`: `revision`
+- [x] Added new property to `Invoice`: `revision`
+- [x] Added new property to `Subscription`: `revision`
 
 ## [2.11.0] 2021-03-03
 
