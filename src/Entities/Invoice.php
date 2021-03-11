@@ -406,6 +406,14 @@ final class Invoice extends Entity
     /**
      * @return string
      */
+    public function getCreatedTime()
+    {
+        return $this->getAttribute('createdTime');
+    }
+
+    /**
+     * @return string
+     */
     public function getRevision()
     {
         return $this->getAttribute('revision');
