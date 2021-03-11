@@ -219,6 +219,25 @@ class Address extends Resource
     }
 
     /**
+     * @param array $data
+     *
+     * @return PhoneNumber[]
+     */
+    public function createPhoneNumbers(array $data)
+    {
+        return array_map(
+            function ($values) {
+                if ($values instanceof PhoneNumber) {
+                    return $values;
+                }
+
+                return PhoneNumber::createFromData((array) $values);
+            },
+            $data
+        );
+    }
+
+    /**
      * @return Email[]
      */
     public function getEmails()
@@ -234,5 +253,24 @@ class Address extends Resource
     public function setEmails($value)
     {
         return $this->setAttribute('emails', $value);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return Email[]
+     */
+    public function createEmails(array $data)
+    {
+        return array_map(
+            function ($values) {
+                if ($values instanceof Email) {
+                    return $values;
+                }
+
+                return Email::createFromData((array) $values);
+            },
+            $data
+        );
     }
 }

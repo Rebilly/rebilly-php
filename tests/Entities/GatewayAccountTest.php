@@ -11,6 +11,8 @@
 
 declare(strict_types=1);
 
+namespace Rebilly\Tests\Entities;
+
 use Rebilly\Entities\GatewayAccount;
 use Rebilly\Tests\TestCase;
 

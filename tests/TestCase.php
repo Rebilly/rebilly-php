@@ -110,6 +110,7 @@ abstract class TestCase extends Framework\TestCase
             case 'credentialHash':
             case 'clientId':
             case 'secretToken':
+            case 'caseId':
                 return self::uuid();
             case 'dueTime':
             case 'expiredTime':
@@ -283,19 +284,19 @@ abstract class TestCase extends Framework\TestCase
                 return random_int(1, 10);
             case 'phoneNumbers':
                 return [
-                    new Entities\Contact\PhoneNumber([
+                    [
                         'label' => self::TEST_WORD,
                         'primary' => true,
                         'value' => self::TEST_PHONE,
-                    ]),
+                    ],
                 ];
             case 'emails':
                 return [
-                    new Entities\Contact\Email([
+                    [
                         'label' => self::TEST_WORD,
                         'primary' => true,
                         'value' => self::TEST_EMAIL,
-                    ]),
+                    ],
                 ];
             case 'extension':
                 return self::randomElements(Entities\File::allowedTypes())[0];

@@ -17,11 +17,21 @@ Security - in case of vulnerabilities.
 
 ### Added
 
+- [x] Added new properties to `Dispute`: `transaction`, `category`, `rawResponse`, `caseId`
+
+## [2.11.0] 2021-03-03
+
+### Added
+
+- [x] Added new property to `Plan`: `createdTime`
+- [x] Added new property to `Invoice`: `createdTime`
 - [x] Added new property to `Transaction`: `isMerchantInitiated`
 - [x] Added new property to `BrowserData`: `isJavaEnabled`
 - [x] Added new property to `RiskMetadata`: `browserData`
 - [x] Added new property to `CommonPaymentInstrument`, `BankAccount`, `PaymentCard`, `PayPalAccount`: `riskMetadata`
 - [x] Added new property to `PaymentToken`: `riskMetadata`
+- [x] Added new property to `Dispute`: `customerId`
+- [x] Added new property to `GatewayAccount`: `status`
 
 ### Removed
 
@@ -31,6 +41,10 @@ Security - in case of vulnerabilities.
 - [x] Removed deprecated `ApiKey` constants: `DATETIME_FORMAT_MYSQL`, `DATETIME_FORMAT_ISO8601`, `MSG_UNEXPECTED_DATETIME_FORMAT`
 - [x] Removed deprecated `BrowserData` properties: `acceptHeader`, `ipAddress`, `javaEnabled`, `userAgent`, `deviceFingerprintHash`
 - [x] Removed deprecated `CommonPaymentInstrument`, `BankAccount`, `PaymentCard`, `PayPalAccount` properties: `browserData`
+
+### Fixed
+
+- [x] Added missing attribute value factories for `Address`: `createPhoneNumbers`, `createEmails`
 
 ## [2.10.0] 2021-01-21
 
