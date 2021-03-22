@@ -699,4 +699,12 @@ final class Transaction extends Entity
     {
         return $this->getAttribute('disputeTime');
     }
+
+    /**
+     * @return string
+     */
+    public function getDisputeStatus()
+    {
+        return $this->getAttribute('disputeStatus');
+    }
 }
