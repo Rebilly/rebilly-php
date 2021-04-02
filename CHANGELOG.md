@@ -22,6 +22,10 @@ Security - in case of vulnerabilities.
 - [x] Added new property to `Customer`: `revision`
 - [x] Added new property to `Invoice`: `revision`
 - [x] Added new property to `Subscription`: `revision`
+  
+### Changed
+
+- [x] The `Transaction` property `gatewayAccountId` was made writable.
 
 ## [2.11.0] 2021-03-03
 
