@@ -707,4 +707,14 @@ final class Transaction extends Entity
     {
         return $this->getAttribute('disputeStatus');
     }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setGatewayAccountId($value)
+    {
+        return $this->setAttribute('gatewayAccountId', $value);
+    }
 }
