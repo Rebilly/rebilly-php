@@ -22,10 +22,13 @@ Security - in case of vulnerabilities.
 - [x] Added new property to `Customer`: `revision`
 - [x] Added new property to `Invoice`: `revision`
 - [x] Added new property to `Subscription`: `revision`
-  
+- [x] Added new property to `KycDocument`: `documentSubtype`
+- [x] Added new property to `KycDocument`: `fileIds`
+
 ### Changed
 
 - [x] The `Transaction` property `gatewayAccountId` was made writable.
+- [x] The `KycDocument` property `fileId` was made deprecated.
 
 ## [2.11.0] 2021-03-03
 
