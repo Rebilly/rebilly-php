@@ -33,7 +33,7 @@ Security - in case of vulnerabilities.
 
 ### Removed
 
-- [x] Removed `PUT` method from `OrganizationService::create()` method.
+- [x] Removed `put` method from `OrganizationService::create()` method.
 - [x] Removed `OrganizationService::delete()` method.
 
 ## [2.11.0] 2021-03-03
