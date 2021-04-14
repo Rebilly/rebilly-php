@@ -29,12 +29,12 @@ Security - in case of vulnerabilities.
 
 - [x] The `Transaction` property `gatewayAccountId` was made writable.
 - [x] The `KycDocument` property `fileId` was made deprecated.
-- [x] Replace `PUT` to `PATCH` in `OrganizationService::update()` method.
+- [x] Replaced `PUT` with `PATCH` in `OrganizationService::update()` method.
 
 ### Removed
 
 - [x] Removed `PUT` method from `OrganizationService::create()` method.
-- [x] Removed `delete` method from `OrganizationService`.
+- [x] Removed `OrganizationService::delete()` method.
 
 ## [2.11.0] 2021-03-03
 
