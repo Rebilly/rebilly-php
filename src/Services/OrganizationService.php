@@ -61,13 +61,12 @@ final class OrganizationService extends Service
 
     /**
      * @param array|JsonSerializable|Organization $data
-     * @param string $organizationId
      *
      * @throws UnprocessableEntityException The input data does not valid
      *
      * @return Organization
      */
-    public function create($data, $organizationId = null)
+    public function create($data)
     {
         return $this->client()->post($data, 'organizations');
     }
