@@ -86,14 +86,6 @@ final class OrganizationService extends Service
      */
     public function update($organizationId, $data)
     {
-        return $this->client()->put($data, 'organizations/{organizationId}', ['organizationId' => $organizationId]);
-    }
-
-    /**
-     * @param string $organizationId
-     */
-    public function delete($organizationId)
-    {
-        $this->client()->delete('organizations/{organizationId}', ['organizationId' => $organizationId]);
+        return $this->client()->patch($data, 'organizations/{organizationId}', ['organizationId' => $organizationId]);
     }
 }
