@@ -61,18 +61,13 @@ final class OrganizationService extends Service
 
     /**
      * @param array|JsonSerializable|Organization $data
-     * @param string $organizationId
      *
      * @throws UnprocessableEntityException The input data does not valid
      *
      * @return Organization
      */
-    public function create($data, $organizationId = null)
+    public function create($data)
     {
-        if (isset($organizationId)) {
-            return $this->client()->put($data, 'organizations/{organizationId}', ['organizationId' => $organizationId]);
-        }
-
         return $this->client()->post($data, 'organizations');
     }
 
@@ -86,14 +81,6 @@ final class OrganizationService extends Service
      */
     public function update($organizationId, $data)
     {
-        return $this->client()->put($data, 'organizations/{organizationId}', ['organizationId' => $organizationId]);
-    }
-
-    /**
-     * @param string $organizationId
-     */
-    public function delete($organizationId)
-    {
-        $this->client()->delete('organizations/{organizationId}', ['organizationId' => $organizationId]);
+        return $this->client()->patch($data, 'organizations/{organizationId}', ['organizationId' => $organizationId]);
     }
 }
