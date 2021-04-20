@@ -650,9 +650,6 @@ class ServiceTest extends BaseTestCase
         $result = $service->createFromToken(['token' => 'dummy'], $card);
         $this->assertInstanceOf(Entities\PaymentCard::class, $result);
 
-        $result = $service->authorize([], 'dummy');
-        $this->assertInstanceOf(Entities\PaymentCard::class, $result);
-
         $result = $service->deactivate('dummy');
         $this->assertInstanceOf(Entities\PaymentCard::class, $result);
     }
@@ -853,9 +850,6 @@ class ServiceTest extends BaseTestCase
         $service = $client->payPalAccounts();
 
         $result = $service->deactivate('dummy');
-        $this->assertInstanceOf(Entities\PayPalAccount::class, $result);
-
-        $result = $service->activate([], 'dummy');
         $this->assertInstanceOf(Entities\PayPalAccount::class, $result);
     }
 

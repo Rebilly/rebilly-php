@@ -162,7 +162,6 @@ class ApiTest extends TestCase
             [Entities\InvoiceItem::class],
             [Entities\PaymentMethods\PaymentCardMethod::class, null],
             [Entities\PaymentCard::class],
-            [Entities\PaymentCardAuthorization::class, null],
             [Entities\PaymentCardToken::class, null, $paymentTokenDeprecatedAttributes],
             [Entities\PaymentToken::class, null, $paymentTokenDeprecatedAttributes],
             [Entities\Plan::class],
