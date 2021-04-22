@@ -37,6 +37,7 @@ Security - in case of vulnerabilities.
 - [x] Removed `OrganizationService::delete()` method.
 - [x] Removed `PaymentCardService::authorize()` method.
 - [x] Removed `PayPalAccountService::activate()` method.
+- [x] Removed `TransactionService::cancel()` method.
 - [x] Removed `PaymentCardAuthorization` entity.
 
 ## [2.11.0] 2021-03-03
