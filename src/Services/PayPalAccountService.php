@@ -76,17 +76,6 @@ class PayPalAccountService extends Service
     }
 
     /**
-     * @param array|JsonSerializable|CommonPaymentInstrument $data
-     * @param string $paypalAccountId
-     *
-     * @return CommonPaymentInstrument
-     */
-    public function activate($data, $paypalAccountId)
-    {
-        return $this->client()->post($data, 'paypal-accounts/{paypalAccountId}/activation', ['paypalAccountId' => $paypalAccountId]);
-    }
-
-    /**
      * @param string $paypalAccountId
      *
      * @return CommonPaymentInstrument

@@ -49,7 +49,6 @@ use RuntimeException;
  * @method Services\CustomerService customers()
  * @method Services\InvoiceItemService invoiceItems()
  * @method Services\InvoiceService invoices()
- * @method Services\LayoutService layouts()
  * @method Services\PaymentCardService paymentCards()
  * // TODO: Deprecated factory
  * @method Services\PaymentTokenService paymentCardTokens()
@@ -72,7 +71,6 @@ use RuntimeException;
  * @method Services\ApiTrackingService apiTracking()
  * @method Services\ShippingZoneService shippingZones()
  * @method Services\ApiKeyService apiKeys()
- * @method Services\CheckoutPageService checkoutPages()
  * @method Services\DisputeService disputes()
  * @method Services\FileService files()
  * @method Services\AttachmentService attachments()
@@ -82,6 +80,7 @@ use RuntimeException;
  * @method Services\WebhooksService webhooks()
  * @method Services\WebhookCredentialsService webhookCredentials()
  * @method Services\PlaidCredentialsService plaidCredentials()
+ * @method Services\ExperianCredentialsService experianCredentials()
  * @method Services\ValuesListService lists()
  * @method Services\ValuesListTrackingService listsTracking()
  * @method Services\WebhookTrackingService webhooksTracking()
@@ -99,9 +98,12 @@ final class Client
 
     public const SANDBOX_HOST = 'https://api-sandbox.rebilly.com';
 
+    /**
+     * @deprecated We don't use API version in URI anymore.
+     */
     public const CURRENT_VERSION = 'v2.1';
 
-    public const SDK_VERSION = '2.8.0';
+    public const SDK_VERSION = '2.10.0';
 
     private static $services = [
         'authenticationOptions' => Services\AuthenticationOptionsService::class,
@@ -113,7 +115,6 @@ final class Client
         'customers' => Services\CustomerService::class,
         'invoiceItems' => Services\InvoiceItemService::class,
         'invoices' => Services\InvoiceService::class,
-        'layouts' => Services\LayoutService::class,
         'paymentCards' => Services\PaymentCardService::class,
         'paymentCardTokens' => Services\PaymentTokenService::class,
         'paymentTokens' => Services\PaymentTokenService::class,
@@ -137,7 +138,6 @@ final class Client
         'threeDSecure' => Services\ThreeDSecureService::class,
         'apiTracking' => Services\ApiTrackingService::class,
         'apiKeys' => Services\ApiKeyService::class,
-        'checkoutPages' => Services\CheckoutPageService::class,
         'disputes' => Services\DisputeService::class,
         'coupons' => Services\CouponService::class,
         'couponsRedemptions' => Services\RedemptionService::class,
@@ -154,6 +154,7 @@ final class Client
         'customerTimeline' => Services\CustomerTimelineService::class,
         'aml' => Services\AmlService::class,
         'plaidCredentials' => Services\PlaidCredentialsService::class,
+        'experianCredentials' => Services\ExperianCredentialsService::class,
         'paymentInstruments' => Services\PaymentInstrumentService::class,
     ];
 
@@ -272,7 +273,7 @@ final class Client
 
         // Prepare middleware stack
         $this->middleware = new Middleware\CompositeMiddleware(
-            new Middleware\BaseUri($this->createUri($baseUrl . '/' . self::CURRENT_VERSION)),
+            new Middleware\BaseUri($this->createUri($baseUrl)),
             $organizationId,
             new Middleware\UserAgent(self::SDK_VERSION),
             $authentication,

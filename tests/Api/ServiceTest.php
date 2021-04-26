@@ -541,9 +541,6 @@ class ServiceTest extends BaseTestCase
         $result = $service->refund('dummy', 10);
         $this->assertInstanceOf(Entities\Transaction::class, $result);
 
-        $result = $service->cancel('dummy');
-        $this->assertInstanceOf(Entities\Transaction::class, $result);
-
         $result = $service->patch('dummy', []);
         $this->assertInstanceOf(Entities\Transaction::class, $result);
     }
@@ -581,7 +578,6 @@ class ServiceTest extends BaseTestCase
      */
     public function paymentInstrumentService()
     {
-        $faker = $this->getFaker();
         $client = new Client(['apiKey' => 'QWERTY']);
 
         /** @var CurlHandler|MockObject $handler */
@@ -601,12 +597,12 @@ class ServiceTest extends BaseTestCase
 
         $service = $client->paymentInstruments();
 
-        $paymentInstrument = new JsonObject(['customerId' => $faker->uuid, 'method' => 'payment-card']);
+        $paymentInstrument = new JsonObject(['customerId' => self::uuid(), 'method' => 'payment-card']);
 
         $result = $service->createFromToken('token', $paymentInstrument);
         $this->assertInstanceOf(Entities\CommonPaymentInstrument::class, $result);
 
-        $result = $service->createFromToken('token', ['customerId' => $faker->uuid]);
+        $result = $service->createFromToken('token', ['customerId' => self::uuid()]);
         $this->assertInstanceOf(Entities\CommonPaymentInstrument::class, $result);
 
         $result = $service->createFromToken(['token' => 'dummy'], $paymentInstrument);
@@ -621,7 +617,6 @@ class ServiceTest extends BaseTestCase
      */
     public function paymentCardService()
     {
-        $faker = $this->getFaker();
         $client = new Client(['apiKey' => 'QWERTY']);
 
         /** @var CurlHandler|MockObject $handler */
@@ -641,18 +636,15 @@ class ServiceTest extends BaseTestCase
 
         $service = $client->paymentCards();
 
-        $card = new JsonObject(['customerId' => $faker->uuid]);
+        $card = new JsonObject(['customerId' => self::uuid()]);
 
         $result = $service->createFromToken('token', $card);
         $this->assertInstanceOf(Entities\PaymentCard::class, $result);
 
-        $result = $service->createFromToken('token', ['customerId' => $faker->uuid], 'dummy');
+        $result = $service->createFromToken('token', ['customerId' => self::uuid()], 'dummy');
         $this->assertInstanceOf(Entities\PaymentCard::class, $result);
 
         $result = $service->createFromToken(['token' => 'dummy'], $card);
-        $this->assertInstanceOf(Entities\PaymentCard::class, $result);
-
-        $result = $service->authorize([], 'dummy');
         $this->assertInstanceOf(Entities\PaymentCard::class, $result);
 
         $result = $service->deactivate('dummy');
@@ -691,54 +683,6 @@ class ServiceTest extends BaseTestCase
 
         $entity = $service->update($resourceType, $this->getFakeValue('id', $entityClass), []);
         $this->assertInstanceOf($entityClass, $entity);
-    }
-
-    /**
-     * @test
-     */
-    public function layoutService()
-    {
-        $faker = $this->getFaker();
-        $client = new Client(['apiKey' => 'QWERTY']);
-
-        /** @var CurlHandler|MockObject $handler */
-        $handler = $this->createMock(CurlHandler::class);
-        $layout = new Entities\Layout();
-        $layout->addItem([
-            'planId' => $faker->uuid,
-            'starred' => true,
-        ]);
-        $layout->setItems([
-            [
-                'planId' => $faker->uuid,
-                'starred' => true,
-            ],
-            new Entities\LayoutItem([
-                'planId' => $faker->uuid,
-            ]),
-        ]);
-
-        $handler
-            ->expects($this->any())
-            ->method('__invoke')
-            ->will($this->returnValue(
-                $client
-                    ->createResponse()
-                    ->withHeader('Location', 'layouts/dummy')
-                    ->withBody(Psr7\stream_for(json_encode($layout)))
-            ));
-
-        $client = new Client([
-            'apiKey' => 'QWERTY',
-            'httpHandler' => $handler,
-        ]);
-
-        $service = $client->layouts();
-
-        $result = $service->create($layout);
-        $this->assertInstanceOf(Entities\Layout::class, $result);
-        $this->assertCount(2, $result->getItems());
-        $this->assertInstanceOf(Entities\LayoutItem::class, $result->getItems()[0]);
     }
 
     /**
@@ -903,9 +847,6 @@ class ServiceTest extends BaseTestCase
         $service = $client->payPalAccounts();
 
         $result = $service->deactivate('dummy');
-        $this->assertInstanceOf(Entities\PayPalAccount::class, $result);
-
-        $result = $service->activate([], 'dummy');
         $this->assertInstanceOf(Entities\PayPalAccount::class, $result);
     }
 
@@ -1212,11 +1153,6 @@ class ServiceTest extends BaseTestCase
                 Entities\Invoice::class,
             ],
             [
-                'layouts',
-                Services\LayoutService::class,
-                Entities\Layout::class,
-            ],
-            [
                 'paymentCards',
                 Services\PaymentCardService::class,
                 Entities\PaymentCard::class,
@@ -1302,11 +1238,6 @@ class ServiceTest extends BaseTestCase
                 Entities\ApiKey::class,
             ],
             [
-                'checkoutPages',
-                Services\CheckoutPageService::class,
-                Entities\CheckoutPage::class,
-            ],
-            [
                 'apiTracking',
                 Services\ApiTrackingService::class,
                 Entities\ApiTracking::class,
@@ -1350,6 +1281,11 @@ class ServiceTest extends BaseTestCase
                 'plaidCredentials',
                 Services\PlaidCredentialsService::class,
                 Entities\PlaidCredential::class,
+            ],
+            [
+                'experianCredentials',
+                Services\ExperianCredentialsService::class,
+                Entities\ExperianCredential::class,
             ],
             [
                 'webhooksTracking',

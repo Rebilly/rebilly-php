@@ -351,7 +351,7 @@ final class Subscription extends Entity
     }
 
     /**
-     * @return RiskMetadata
+     * @return RiskMetadata|null
      */
     public function getRiskMetadata()
     {
@@ -366,6 +366,16 @@ final class Subscription extends Entity
     public function setRiskMetadata($value)
     {
         return $this->setAttribute('riskMetadata', $value);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return RiskMetadata
+     */
+    public function createRiskMetadata(array $data)
+    {
+        return new RiskMetadata($data);
     }
 
     /**
@@ -527,5 +537,13 @@ final class Subscription extends Entity
         return $data
             ? new Invoice($data)
             : null;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRevision()
+    {
+        return $this->getAttribute('revision');
     }
 }
