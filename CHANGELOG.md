@@ -17,8 +17,67 @@ Security - in case of vulnerabilities.
 
 ### Added
 
-- [x] Added new property to `Transaction`: `arn`
+- [x] Added new properties to `Transaction`: `disputeTime` and `disputeStatus`
+- [x] Added new properties to `Dispute`: `transaction`, `category`, `rawResponse`, `caseId`
+- [x] Added new property to `Customer`: `revision`
+- [x] Added new property to `Invoice`: `revision`
+- [x] Added new property to `Subscription`: `revision`
+- [x] Added new property to `KycDocument`: `documentSubtype`
+- [x] Added new property to `KycDocument`: `fileIds`
+
+### Changed
+
+- [x] The `Transaction` property `gatewayAccountId` was made writable.
+- [x] The `KycDocument` property `fileId` was made deprecated.
+- [x] Replaced `PUT` with `PATCH` in `OrganizationService::update()` method.
+
+### Removed
+
+- [x] Removed `put` method from `OrganizationService::create()` method.
+- [x] Removed `OrganizationService::delete()` method.
+- [x] Removed `PaymentCardService::authorize()` method.
+- [x] Removed `PayPalAccountService::activate()` method.
+- [x] Removed `TransactionService::cancel()` method.
+- [x] Removed `PaymentCardAuthorization` entity.
+
+## [2.11.0] 2021-03-03
+
+### Added
+
+- [x] Added new property to `Plan`: `createdTime`
+- [x] Added new property to `Invoice`: `createdTime`
+- [x] Added new property to `Transaction`: `isMerchantInitiated`
+- [x] Added new property to `BrowserData`: `isJavaEnabled`
+- [x] Added new property to `RiskMetadata`: `browserData`
+- [x] Added new property to `CommonPaymentInstrument`, `BankAccount`, `PaymentCard`, `PayPalAccount`: `riskMetadata`
+- [x] Added new property to `PaymentToken`: `riskMetadata`
+- [x] Added new property to `Dispute`: `customerId`
+- [x] Added new property to `GatewayAccount`: `status`
+
+### Removed
+
+- [x] Removed **Layouts API**
+- [x] Removed deprecated `ApiKey` property: `datetimeFormat`
+- [x] Removed deprecated `ApiKey` method: `datetimeFormats`
+- [x] Removed deprecated `ApiKey` constants: `DATETIME_FORMAT_MYSQL`, `DATETIME_FORMAT_ISO8601`, `MSG_UNEXPECTED_DATETIME_FORMAT`
+- [x] Removed deprecated `BrowserData` properties: `acceptHeader`, `ipAddress`, `javaEnabled`, `userAgent`, `deviceFingerprintHash`
+- [x] Removed deprecated `CommonPaymentInstrument`, `BankAccount`, `PaymentCard`, `PayPalAccount` properties: `browserData`
+
+### Fixed
+
+- [x] Added missing attribute value factories for `Address`: `createPhoneNumbers`, `createEmails`
+
+## [2.10.0] 2021-01-21
+
+### Added
+
+- [x] Added new properties to `KycDocument`: `matchLevel`, `reason`
+- [x] Added new properties to `Transaction`: `arn`, `paymentInstruction`
+- [x] Added new properties to `RiskMetadata`: `hasMismatchedTimeZone`, `hasMismatchedBankCountry`, `hasMismatchedBillingAddressCountry`
 - [x] Added new property to `ApiKey`: `apiUser`
+
+### Deprecated
+- [x] Deprecated `Transaction` method: `setPaymentInstrument`
 
 ### Removed
 

@@ -49,7 +49,6 @@ use RuntimeException;
  * @method Services\CustomerService customers()
  * @method Services\InvoiceItemService invoiceItems()
  * @method Services\InvoiceService invoices()
- * @method Services\LayoutService layouts()
  * @method Services\PaymentCardService paymentCards()
  * // TODO: Deprecated factory
  * @method Services\PaymentTokenService paymentCardTokens()
@@ -104,7 +103,7 @@ final class Client
      */
     public const CURRENT_VERSION = 'v2.1';
 
-    public const SDK_VERSION = '2.9.0';
+    public const SDK_VERSION = '2.10.0';
 
     private static $services = [
         'authenticationOptions' => Services\AuthenticationOptionsService::class,
@@ -116,7 +115,6 @@ final class Client
         'customers' => Services\CustomerService::class,
         'invoiceItems' => Services\InvoiceItemService::class,
         'invoices' => Services\InvoiceService::class,
-        'layouts' => Services\LayoutService::class,
         'paymentCards' => Services\PaymentCardService::class,
         'paymentCardTokens' => Services\PaymentTokenService::class,
         'paymentTokens' => Services\PaymentTokenService::class,

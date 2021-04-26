@@ -416,4 +416,12 @@ final class GatewayAccount extends Entity
     {
         return DigitalWallets::createFromData($data);
     }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->getAttribute('status');
+    }
 }

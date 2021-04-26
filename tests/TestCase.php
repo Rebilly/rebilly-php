@@ -15,8 +15,8 @@ use InvalidArgumentException;
 use PHPUnit\Framework;
 use Rebilly\Entities;
 use Rebilly\Entities\PaymentInstruments\KhelocardCardPaymentInstrument;
-use Rebilly\Entities\PaymentRetryInstructions\PaymentInstruction;
-use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstruction;
+use Rebilly\Entities\PaymentRetryInstructions;
+use Rebilly\Entities\Transactions;
 
 /**
  * Class TestCase.
@@ -110,6 +110,7 @@ abstract class TestCase extends Framework\TestCase
             case 'credentialHash':
             case 'clientId':
             case 'secretToken':
+            case 'caseId':
                 return self::uuid();
             case 'dueTime':
             case 'expiredTime':
@@ -259,6 +260,7 @@ abstract class TestCase extends Framework\TestCase
             case 'attachInvoice':
             case 'invalidate':
             case 'isProcessedOutside':
+            case 'isMerchantInitiated':
             case 'primary':
             case 'isDefault':
             case 'preview':
@@ -282,19 +284,19 @@ abstract class TestCase extends Framework\TestCase
                 return random_int(1, 10);
             case 'phoneNumbers':
                 return [
-                    new Entities\Contact\PhoneNumber([
+                    [
                         'label' => self::TEST_WORD,
                         'primary' => true,
                         'value' => self::TEST_PHONE,
-                    ]),
+                    ],
                 ];
             case 'emails':
                 return [
-                    new Entities\Contact\Email([
+                    [
                         'label' => self::TEST_WORD,
                         'primary' => true,
                         'value' => self::TEST_EMAIL,
-                    ]),
+                    ],
                 ];
             case 'extension':
                 return self::randomElements(Entities\File::allowedTypes())[0];
@@ -313,7 +315,6 @@ abstract class TestCase extends Framework\TestCase
                 }
                 // no break
             case 'type':
-            case 'datetimeFormat':
                 switch ($class) {
                     case Entities\LineItem::class:
                         return self::randomElements(Entities\LineItem::types())[0];
@@ -325,8 +326,6 @@ abstract class TestCase extends Framework\TestCase
                         return self::randomElements(Entities\InvoiceItem::types())[0];
                     case Entities\CustomField::class:
                         return self::randomElements(Entities\CustomField::allowedTypes())[0];
-                    case Entities\ApiKey::class:
-                        return self::randomElements(Entities\ApiKey::datetimeFormats())[0];
                     case Entities\Dispute::class:
                         return self::randomElements(Entities\Dispute::allowedTypes())[0];
                     case Entities\Transaction::class:
@@ -363,20 +362,6 @@ abstract class TestCase extends Framework\TestCase
                 // no break
             case 'items':
                 switch ($class) {
-                    case Entities\Layout::class:
-                        return [
-                            new Entities\LayoutItem(
-                                [
-                                    'planId' => 'foo',
-                                    'starred' => true,
-                                ]
-                            ),
-                            new Entities\LayoutItem(
-                                [
-                                    'planId' => 'bar',
-                                ]
-                            ),
-                        ];
                     case Entities\Subscription::class:
                         return [
                             ['planId' => 'plan-1', 'quantity' => 1],
@@ -508,7 +493,7 @@ abstract class TestCase extends Framework\TestCase
                                 'afterRetryEndPolicies' => [Entities\InvoiceRetryInstructions\RetryInstruction::AFTER_RETRY_END_POLICY_ABANDON_INVOICE],
                                 'attempts' => [
                                     [
-                                        'scheduleInstruction' => ['method' => ScheduleInstruction::IMMEDIATELY],
+                                        'scheduleInstruction' => ['method' => PaymentRetryInstructions\ScheduleInstruction::IMMEDIATELY],
                                     ],
                                 ],
                             ]
@@ -609,13 +594,21 @@ abstract class TestCase extends Framework\TestCase
                     'payment-card-expired',
                 ])[0];
             case 'scheduleInstruction':
-                return ScheduleInstruction::createFromData([
+                return PaymentRetryInstructions\ScheduleInstruction::createFromData([
                     'method' => 'auto',
                 ]);
             case 'paymentInstruction':
-                return PaymentInstruction::createFromData([
-                    'method' => 'none',
-                ]);
+                switch ($class) {
+                    case Entities\PaymentRetryAttempt::class:
+                        return PaymentRetryInstructions\PaymentInstruction::createFromData(['method' => 'none']);
+                    case Entities\Transaction::class:
+                        return Transactions\PaymentInstruction::createFromData(['token' => 'token-1']);
+                    default:
+                        throw new InvalidArgumentException(
+                            sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
+                        );
+                }
+                // no break
             case 'lineItems':
                 return [
                     [
@@ -676,7 +669,7 @@ abstract class TestCase extends Framework\TestCase
             case 'browserData':
                 return Entities\BrowserData::createFromData([
                     'colorDepth' => self::randomElements([1, 4, 8, 15, 16, 24, 32, 48])[0],
-                    'javaEnabled' => true,
+                    'isJavaEnabled' => true,
                     'language' => 'en-US',
                     'screenHeight' => random_int(0, 999999),
                     'screenWidth' => random_int(0, 999999),

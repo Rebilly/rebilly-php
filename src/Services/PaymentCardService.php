@@ -14,7 +14,6 @@ namespace Rebilly\Services;
 use ArrayObject;
 use JsonSerializable;
 use Rebilly\Entities\CommonPaymentInstrument;
-use Rebilly\Entities\PaymentCardAuthorization;
 use Rebilly\Entities\PaymentToken;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
@@ -112,19 +111,6 @@ final class PaymentCardService extends Service
     public function update($cardId, $data)
     {
         return $this->client()->patch($data, 'payment-cards/{cardId}', ['cardId' => $cardId]);
-    }
-
-    /**
-     * @param array|JsonSerializable|PaymentCardAuthorization $data
-     * @param string $cardId
-     *
-     * @throws UnprocessableEntityException The input data does not valid
-     *
-     * @return CommonPaymentInstrument
-     */
-    public function authorize($data, $cardId)
-    {
-        return $this->client()->post($data, 'payment-cards/{cardId}/authorization', ['cardId' => $cardId]);
     }
 
     /**

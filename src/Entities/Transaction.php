@@ -11,6 +11,7 @@
 
 namespace Rebilly\Entities;
 
+use Rebilly\Entities\Transactions\PaymentInstruction;
 use Rebilly\Rest\Entity;
 
 /**
@@ -350,6 +351,16 @@ final class Transaction extends Entity
     }
 
     /**
+     * @param PaymentInstruction $value
+     *
+     * @return $this
+     */
+    public function setPaymentInstruction(PaymentInstruction $value)
+    {
+        return $this->setAttribute('paymentInstruction', $value->jsonSerialize());
+    }
+
+    /**
      * @return PaymentMethodInstrument
      */
     public function getPaymentInstrument()
@@ -358,6 +369,8 @@ final class Transaction extends Entity
     }
 
     /**
+     * @deprecated use {@see setPaymentInstruction()} instead
+     *
      * @param PaymentMethodInstrument $value
      *
      * @return $this
@@ -418,11 +431,31 @@ final class Transaction extends Entity
     }
 
     /**
-     * @return RiskMetadata
+     * @return RiskMetadata|null
      */
     public function getRiskMetadata()
     {
         return $this->getAttribute('riskMetadata');
+    }
+
+    /**
+     * @param RiskMetadata $value
+     *
+     * @return $this
+     */
+    public function setRiskMetadata(RiskMetadata $value)
+    {
+        return $this->setAttribute('riskMetadata', $value);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return RiskMetadata
+     */
+    public function createRiskMetadata(array $data)
+    {
+        return new RiskMetadata($data);
     }
 
     /**
@@ -634,10 +667,54 @@ final class Transaction extends Entity
     }
 
     /**
+     * @return bool
+     */
+    public function getIsMerchantInitiated()
+    {
+        return $this->getAttribute('isMerchantInitiated');
+    }
+
+    /**
+     * @param bool $value
+     *
+     * @return $this
+     */
+    public function setIsMerchantInitiated($value)
+    {
+        return $this->setAttribute('isMerchantInitiated', $value);
+    }
+
+    /**
      * @return string
      */
     public function getArn()
     {
         return $this->getAttribute('arn');
+    }
+
+    /**
+     * @return string
+     */
+    public function getDisputeTime()
+    {
+        return $this->getAttribute('disputeTime');
+    }
+
+    /**
+     * @return string
+     */
+    public function getDisputeStatus()
+    {
+        return $this->getAttribute('disputeStatus');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setGatewayAccountId($value)
+    {
+        return $this->setAttribute('gatewayAccountId', $value);
     }
 }
