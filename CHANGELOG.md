@@ -24,6 +24,7 @@ Security - in case of vulnerabilities.
 - [x] Added new property to `Subscription`: `revision`
 - [x] Added new property to `KycDocument`: `documentSubtype`
 - [x] Added new property to `KycDocument`: `fileIds`
+- [x] Added new method to `GatewayAccountService`: `checkCredentials`
 
 ### Changed
 
@@ -146,10 +147,10 @@ Security - in case of vulnerabilities.
 
 ### Removed
 
-- [x] Removed deprecated **Payments API** 
+- [x] Removed deprecated **Payments API**
 - [x] Removed deprecated **Contacts API**
 - [x] Removed **Payment Instrument Validation API**
-- [x] Removed `SchedulePaymentService` service and `ScheduledPayment` entity 
+- [x] Removed `SchedulePaymentService` service and `ScheduledPayment` entity
 - [x] Removed deprecated `PaymentCard` properties: `panFingerprint`, `billingContactId`
 - [x] Removed deprecated `BankAccount` properties: `contactId`, `address`
 - [x] Removed deprecated `PayPalAccount` property: `contactId`
@@ -180,11 +181,11 @@ Security - in case of vulnerabilities.
 - [x] Added new property to `Transaction`: `requestId`
 - [x] Added new property to `Website`: `organizationId`
 - [x] Added new property to `PaymentCard`: `stickyGatewayAccountId`
-- [x] Added `CheckInstrument`, `AlternativeInstrument`, `Customer Timeline` 
+- [x] Added `CheckInstrument`, `AlternativeInstrument`, `Customer Timeline`
 - [x] Added `iDEAL`, `Klarna`, `Interac`, `Onlineueberweisen` to supported alternative payment instruments
-- [x] Added `description` field to `ValuesList` 
-- [x] Added `reissue` method to `InvoiceService` 
-- [x] Added `dueTime` to `InvoiceService::issue()` 
+- [x] Added `description` field to `ValuesList`
+- [x] Added `reissue` method to `InvoiceService`
+- [x] Added `dueTime` to `InvoiceService::issue()`
 - [x] Added new properties to `Transaction`: `requestAmount`, `requestCurrency`, `purchaseAmount`, `purchaseCurrency`, `reportAmount`, `reportCurrency`, `isProcessedOutside`
 - [x] Added field `additionalCriteria` into `GatewayAccount` object
 - [x] Added field `dueTimeShift` into `BillingAnchor` object
@@ -209,8 +210,8 @@ Security - in case of vulnerabilities.
 
 - [x] Removed Payments Queue API
 - [X] Removed `Transaction` entity method: `getPayment`
-- [x] Removed `ValuesList` field: `name` 
-- [x] Removed field `websites` from `GatewayAccount` object 
+- [x] Removed `ValuesList` field: `name`
+- [x] Removed field `websites` from `GatewayAccount` object
 - [x] Removed `EmailNotification` entity methods related to an actual `EmailTemplate`
 
 ## [2.5.0] 2019-07-19
@@ -232,10 +233,10 @@ Security - in case of vulnerabilities.
 - [x] Added new property to `RiskMetadata`: `region`
 - [x] Added new properties to `Customer`: `averageValue`, `paymentCount`, `lastPaymentTime`
 - [x] Added new service `WebhookCredentials`
-- [x] Added new property to `PaymentCardAuthorization`: `redirectUrl` 
-- [x] Added new links to `PaymentCard`: `approvalUrl`, `authTransaction` 
-- [x] Added new property to `Subscription`: `recentInvoiceId` 
-- [x] Added POST to `Transaction` 
+- [x] Added new property to `PaymentCardAuthorization`: `redirectUrl`
+- [x] Added new links to `PaymentCard`: `approvalUrl`, `authTransaction`
+- [x] Added new property to `Subscription`: `recentInvoiceId`
+- [x] Added POST to `Transaction`
 - [x] Added new property to `PaymentCardToken`: `isUsed`
 - [x] Added new blacklist types to `Blacklist`: `email-domain`, `bank-account`, `address`
 - [x] Added new `taxCategory` to `Product`
@@ -296,7 +297,7 @@ Security - in case of vulnerabilities.
 
 - [x] Added support for subscription interim invoices.
 - [x] Added schema for subscriptions `change-plan` endpoint.
-- [x] Added `SubscriptionChangePlan`. 
+- [x] Added `SubscriptionChangePlan`.
 - [x] Added `lineItems` and `lineItemSubtotal` to `Subscription` entity.
 - [x] Implemented new Subscription Cancellations API.
 - [x] Implemented Subscription-reactivations API.
@@ -365,12 +366,12 @@ Security - in case of vulnerabilities.
 
 ### Added
 
-- [x] Added support for `Files` and `Attachments`. 
-- [x] Added support for `Subscription` resource attributes: `inTrial` and `rebillNumber`.  
+- [x] Added support for `Files` and `Attachments`.
+- [x] Added support for `Subscription` resource attributes: `inTrial` and `rebillNumber`.
 - [x] Added support to delete `Layout` resources.
 - [x] Added support to `activate` a `User`.
 - [x] Added support to delete a `WebsiteWebhook`.
- 
+
 ### Changed
 
 - [x] Require PHP 7.1 unit tests to pass, and updated README. PHP 5.5 is at end of life and not supported by PHP.  We recommend upgrading if you are using PHP 5.5.  We will continue support of it for now.
@@ -407,7 +408,7 @@ Security - in case of vulnerabilities.
 
 ### Added
 
-- [x] Added `userId` attribute to `Session`. 
+- [x] Added `userId` attribute to `Session`.
 
 ### Fixed
 
@@ -432,10 +433,10 @@ Security - in case of vulnerabilities.
 
 ### Deprecated
 
-- [x] Since Payment Tokens resource was extended with `paymentInstrument`, all fields related to 
+- [x] Since Payment Tokens resource was extended with `paymentInstrument`, all fields related to
 payment card are deprecated.
-- [x] The `paymentMethods` was renamed to `paymentCardSchemes`, all methods related to old name 
-are deprecated. 
+- [x] The `paymentMethods` was renamed to `paymentCardSchemes`, all methods related to old name
+are deprecated.
 
 ### Fixed
 

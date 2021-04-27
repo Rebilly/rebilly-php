@@ -14,6 +14,7 @@ namespace Rebilly\Services;
 use ArrayObject;
 use JsonSerializable;
 use Rebilly\Entities\GatewayAccount;
+use Rebilly\Http\Exception\DataValidationException;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Paginator;
@@ -95,5 +96,22 @@ final class GatewayAccountService extends Service
     public function delete($gatewayAccountId)
     {
         $this->client()->delete('gateway-accounts/{gatewayAccountId}', ['gatewayAccountId' => $gatewayAccountId]);
+    }
+
+    /**
+     * @param string $gatewayAccountId
+     * @param array|JsonSerializable $data
+     *
+     * @throws NotFoundException The resource data does not exist
+     *
+     * @return bool
+     */
+    public function checkCredentials($gatewayAccountId, $data = [])
+    {
+        try {
+            return empty($this->client()->post($data, 'gateway-accounts/{gatewayAccountId}/check-credentials', ['gatewayAccountId' => $gatewayAccountId]));
+        } catch (DataValidationException $ex) {
+            return false;
+        }
     }
 }
