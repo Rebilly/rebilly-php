@@ -25,6 +25,7 @@ Security - in case of vulnerabilities.
 - [x] Added new property to `KycDocument`: `documentSubtype`
 - [x] Added new property to `KycDocument`: `fileIds`
 - [x] Added new method to `GatewayAccountService`: `checkCredentials`
+- [x] Added new property to `Transaction`: `referenceData` 
 
 ### Changed
 
