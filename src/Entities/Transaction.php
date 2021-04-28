@@ -719,7 +719,7 @@ final class Transaction extends Entity
     }
 
     /**
-     * @return string
+     * @return array
      */
     public function getReferenceData()
     {
