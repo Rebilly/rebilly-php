@@ -717,6 +717,7 @@ final class Transaction extends Entity
     {
         return $this->setAttribute('gatewayAccountId', $value);
     }
+
     /**
      * @return string
      */
