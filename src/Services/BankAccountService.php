@@ -14,8 +14,8 @@ namespace Rebilly\Services;
 use ArrayObject;
 use JsonSerializable;
 use Rebilly\Entities\CommonPaymentInstrument;
+use Rebilly\Http\Exception\DataValidationException;
 use Rebilly\Http\Exception\NotFoundException;
-use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Paginator;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
@@ -62,7 +62,7 @@ final class BankAccountService extends Service
      * @param array|JsonSerializable|CommonPaymentInstrument $data
      * @param string $bankAccountId
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return CommonPaymentInstrument
      */
@@ -80,7 +80,7 @@ final class BankAccountService extends Service
      * @param array|JsonSerializable|CommonPaymentInstrument $data
      * @param string $bankAccountId
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return CommonPaymentInstrument
      */
@@ -103,7 +103,7 @@ final class BankAccountService extends Service
      * @param string $bankAccountId
      * @param array|JsonSerializable|CommonPaymentInstrument $data
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return CommonPaymentInstrument
      */

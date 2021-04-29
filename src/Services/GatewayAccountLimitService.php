@@ -14,7 +14,7 @@ namespace Rebilly\Services;
 use ArrayObject;
 use JsonSerializable;
 use Rebilly\Entities\GatewayAccountLimit;
-use Rebilly\Http\Exception\UnprocessableEntityException;
+use Rebilly\Http\Exception\DataValidationException;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
 
@@ -56,7 +56,7 @@ final class GatewayAccountLimitService extends Service
      * @param string $limitId
      * @param array|JsonSerializable|GatewayAccountLimit $data
      *
-     * @throws UnprocessableEntityException The input data is not valid
+     * @throws DataValidationException The input data is not valid
      *
      * @return GatewayAccountLimit
      */

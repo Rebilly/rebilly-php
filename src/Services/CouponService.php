@@ -14,8 +14,8 @@ namespace Rebilly\Services;
 use ArrayObject;
 use JsonSerializable;
 use Rebilly\Entities\Coupons\Coupon;
+use Rebilly\Http\Exception\DataValidationException;
 use Rebilly\Http\Exception\NotFoundException;
-use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Paginator;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
@@ -63,7 +63,7 @@ final class CouponService extends Service
      * @param array|JsonSerializable|Coupon $data
      * @param string $couponId
      *
-     * @throws UnprocessableEntityException The input data is not valid
+     * @throws DataValidationException The input data is not valid
      *
      * @return Coupon
      */
@@ -80,7 +80,7 @@ final class CouponService extends Service
      * @param string $couponId
      * @param array|JsonSerializable|Coupon $data
      *
-     * @throws UnprocessableEntityException The input data is not valid
+     * @throws DataValidationException The input data is not valid
      *
      * @return Coupon
      */
@@ -93,7 +93,7 @@ final class CouponService extends Service
      * @param $couponId
      * @param null $expiredTime Leaving $expiredTime null with expire the coupon.
      *
-     * @throws UnprocessableEntityException The input data is not valid
+     * @throws DataValidationException The input data is not valid
      *
      * @return Coupon
      */

@@ -14,8 +14,8 @@ namespace Rebilly\Services;
 use ArrayObject;
 use JsonSerializable;
 use Rebilly\Entities\Session;
+use Rebilly\Http\Exception\DataValidationException;
 use Rebilly\Http\Exception\NotFoundException;
-use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Rest\Service;
 
 /**
@@ -41,7 +41,7 @@ final class SessionService extends Service
      * @param array|JsonSerializable|Session $data
      * @param string $tokenId
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return Session
      */
@@ -58,7 +58,7 @@ final class SessionService extends Service
      * @param string $tokenId
      * @param array|JsonSerializable|Session $data
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return Session
      */

@@ -15,8 +15,8 @@ use ArrayObject;
 use JsonSerializable;
 use Rebilly\Entities\AuthenticationToken;
 use Rebilly\Entities\Session;
+use Rebilly\Http\Exception\DataValidationException;
 use Rebilly\Http\Exception\NotFoundException;
-use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Paginator;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
@@ -79,7 +79,7 @@ final class AuthenticationTokenService extends Service
     /**
      * @param array|JsonSerializable|AuthenticationToken $data
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return AuthenticationToken
      */
