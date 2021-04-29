@@ -15,6 +15,12 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
+### Deprecated
+
+- [x] The exception `UnprocessableEntityException` is deprecated in favor of `DataValidationException`.
+  New exception has new method `getValidationErrors` which returns the erros in new format.
+- [x] The `KycDocument` property `fileId` was made deprecated.
+
 ### Added
 
 - [x] Added new properties to `Transaction`: `disputeTime` and `disputeStatus`
@@ -30,7 +36,6 @@ Security - in case of vulnerabilities.
 ### Changed
 
 - [x] The `Transaction` property `gatewayAccountId` was made writable.
-- [x] The `KycDocument` property `fileId` was made deprecated.
 - [x] Replaced `PUT` with `PATCH` in `OrganizationService::update()` method.
 
 ### Removed
