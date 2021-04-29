@@ -14,8 +14,8 @@ namespace Rebilly\Services;
 use ArrayObject;
 use JsonSerializable;
 use Rebilly\Entities\Invoice;
+use Rebilly\Http\Exception\DataValidationException;
 use Rebilly\Http\Exception\NotFoundException;
-use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Paginator;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\File;
@@ -64,7 +64,7 @@ final class InvoiceService extends Service
      * @param array|JsonSerializable|Invoice $data
      * @param string $invoiceId
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return Invoice
      */
@@ -81,7 +81,7 @@ final class InvoiceService extends Service
      * @param string $invoiceId
      * @param array|JsonSerializable|Invoice $data
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return Invoice
      */

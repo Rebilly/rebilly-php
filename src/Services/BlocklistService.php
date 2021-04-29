@@ -12,8 +12,8 @@
 namespace Rebilly\Services;
 
 use Rebilly\Entities\Blocklist;
+use Rebilly\Http\Exception\DataValidationException;
 use Rebilly\Http\Exception\NotFoundException;
-use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Paginator;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
@@ -61,7 +61,7 @@ final class BlocklistService extends Service
      * @param array|JsonSerializable|Blocklist $data
      * @param string $blocklistId
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return Blocklist
      */

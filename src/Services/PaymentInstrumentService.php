@@ -15,8 +15,8 @@ use ArrayObject;
 use JsonSerializable;
 use Rebilly\Entities\CommonPaymentInstrument;
 use Rebilly\Entities\PaymentToken;
+use Rebilly\Http\Exception\DataValidationException;
 use Rebilly\Http\Exception\NotFoundException;
-use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Paginator;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
@@ -63,7 +63,7 @@ final class PaymentInstrumentService extends Service
      * @param array|JsonSerializable|CommonPaymentInstrument $data
      * @param string $cardId
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return CommonPaymentInstrument
      */
@@ -76,7 +76,7 @@ final class PaymentInstrumentService extends Service
      * @param string|array|JsonSerializable|PaymentToken $token
      * @param array|JsonSerializable|CommonPaymentInstrument $data
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return CommonPaymentInstrument
      */
@@ -99,7 +99,7 @@ final class PaymentInstrumentService extends Service
      * @param string $paymentInstrumentId
      * @param array|JsonSerializable|CommonPaymentInstrument $data
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return CommonPaymentInstrument
      */

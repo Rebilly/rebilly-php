@@ -14,8 +14,8 @@ namespace Rebilly\Services;
 use ArrayObject;
 use JsonSerializable;
 use Rebilly\Entities\Dispute;
+use Rebilly\Http\Exception\DataValidationException;
 use Rebilly\Http\Exception\NotFoundException;
-use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Paginator;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
@@ -63,7 +63,7 @@ final class DisputeService extends Service
      * @param array|JsonSerializable|Dispute $data
      * @param string $disputeId
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return Dispute
      */
@@ -80,7 +80,7 @@ final class DisputeService extends Service
      * @param string $disputeId
      * @param array|JsonSerializable|Dispute $data
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return Dispute
      */

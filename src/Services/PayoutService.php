@@ -13,7 +13,7 @@ namespace Rebilly\Services;
 
 use JsonSerializable;
 use Rebilly\Entities\Transaction;
-use Rebilly\Http\Exception\UnprocessableEntityException;
+use Rebilly\Http\Exception\DataValidationException;
 use Rebilly\Rest\Service;
 
 /**
@@ -25,7 +25,7 @@ final class PayoutService extends Service
     /**
      * @param array|JsonSerializable|Payout $data
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return Transaction
      */

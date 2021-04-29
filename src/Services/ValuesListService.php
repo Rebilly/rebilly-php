@@ -14,8 +14,8 @@ namespace Rebilly\Services;
 use ArrayObject;
 use JsonSerializable;
 use Rebilly\Entities\ValuesList;
+use Rebilly\Http\Exception\DataValidationException;
 use Rebilly\Http\Exception\NotFoundException;
-use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Paginator;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
@@ -76,7 +76,7 @@ final class ValuesListService extends Service
      * @param array|JsonSerializable|ValuesList $data
      * @param string $listId
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return ValuesList
      */
@@ -93,7 +93,7 @@ final class ValuesListService extends Service
      * @param string $listId
      * @param array|JsonSerializable|ValuesList $data
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return ValuesList
      */

@@ -15,8 +15,8 @@ use ArrayObject;
 use JsonSerializable;
 use Rebilly\Entities\KycDocuments\KycDocument;
 use Rebilly\Entities\KycDocuments\RejectionReason;
+use Rebilly\Http\Exception\DataValidationException;
 use Rebilly\Http\Exception\NotFoundException;
-use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Paginator;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
@@ -60,7 +60,7 @@ final class KycService extends Service
      * @param array|JsonSerializable|KycDocument $data
      * @param string $kycDocumentId
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return KycDocument
      */
@@ -77,7 +77,7 @@ final class KycService extends Service
      * @param string $kycDocumentId
      * @param array|JsonSerializable|KycDocument $data
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return KycDocument
      */
@@ -89,7 +89,7 @@ final class KycService extends Service
     /**
      * @param string $kycDocumentId
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return KycDocument
      */
@@ -102,7 +102,7 @@ final class KycService extends Service
      * @param string $kycDocumentId
      * @param array|JsonSerializable|RejectionReason $data
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return KycDocument
      */

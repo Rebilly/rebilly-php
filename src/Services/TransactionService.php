@@ -14,8 +14,8 @@ namespace Rebilly\Services;
 use ArrayObject;
 use JsonSerializable;
 use Rebilly\Entities\Transaction;
+use Rebilly\Http\Exception\DataValidationException;
 use Rebilly\Http\Exception\NotFoundException;
-use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Paginator;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
@@ -63,7 +63,7 @@ final class TransactionService extends Service
      * @param string $transactionId
      * @param float $amount
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return Transaction
      */
@@ -79,7 +79,7 @@ final class TransactionService extends Service
     /**
      * @param array|JsonSerializable|Transaction $data
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return Transaction
      */
@@ -95,7 +95,7 @@ final class TransactionService extends Service
      * @param string $transactionId
      * @param array|JsonSerializable|Transaction $data
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return Transaction
      */

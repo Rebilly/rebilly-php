@@ -15,8 +15,8 @@ use ArrayObject;
 use JsonSerializable;
 use Rebilly\Entities\Customer;
 use Rebilly\Entities\LeadSource;
+use Rebilly\Http\Exception\DataValidationException;
 use Rebilly\Http\Exception\NotFoundException;
-use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Paginator;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
@@ -64,7 +64,7 @@ final class CustomerService extends Service
      * @param array|JsonSerializable|Customer $data
      * @param string $customerId
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return Customer
      */
@@ -81,7 +81,7 @@ final class CustomerService extends Service
      * @param string $customerId
      * @param array|JsonSerializable|Customer $data
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return Customer
      */

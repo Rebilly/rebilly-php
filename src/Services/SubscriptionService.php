@@ -18,8 +18,8 @@ use Rebilly\Entities\Subscription;
 use Rebilly\Entities\SubscriptionCancel;
 use Rebilly\Entities\SubscriptionChangePlan;
 use Rebilly\Entities\SubscriptionInterimInvoice;
+use Rebilly\Http\Exception\DataValidationException;
 use Rebilly\Http\Exception\NotFoundException;
-use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Paginator;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
@@ -67,7 +67,7 @@ final class SubscriptionService extends Service
      * @param array|JsonSerializable|Subscription $data
      * @param string $subscriptionId
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return Subscription
      */
@@ -84,7 +84,7 @@ final class SubscriptionService extends Service
      * @param string $subscriptionId
      * @param array|JsonSerializable|Subscription $data
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return Subscription
      */
@@ -99,7 +99,7 @@ final class SubscriptionService extends Service
      * @param string $subscriptionId
      * @param array|JsonSerializable|SubscriptionCancel $data
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return Subscription
      */
@@ -116,7 +116,7 @@ final class SubscriptionService extends Service
      * @param string $subscriptionId
      * @param array|JsonSerializable|SubscriptionChangePlan $data
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return Subscription
      */
@@ -133,7 +133,7 @@ final class SubscriptionService extends Service
      * @param string $subscriptionId
      * @param array|JsonSerializable|SubscriptionInterimInvoice $data
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return Invoice
      */

@@ -14,7 +14,7 @@ namespace Rebilly\Services;
 use ArrayObject;
 use JsonSerializable;
 use Rebilly\Entities\AuthenticationOptions;
-use Rebilly\Http\Exception\UnprocessableEntityException;
+use Rebilly\Http\Exception\DataValidationException;
 use Rebilly\Rest\Service;
 
 /**
@@ -36,7 +36,7 @@ final class AuthenticationOptionsService extends Service
     /**
      * @param array|JsonSerializable|AuthenticationOptions $data
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return AuthenticationOptions
      */

@@ -20,8 +20,8 @@ use Rebilly\Entities\Session;
 use Rebilly\Entities\Signup;
 use Rebilly\Entities\UpdatePassword;
 use Rebilly\Entities\User;
+use Rebilly\Http\Exception\DataValidationException;
 use Rebilly\Http\Exception\NotFoundException;
-use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Paginator;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
@@ -35,7 +35,7 @@ final class UserService extends Service
     /**
      * @param array|JsonSerializable|Login $data
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return Session
      */
@@ -47,7 +47,7 @@ final class UserService extends Service
     /**
      * @param array|JsonSerializable|Signup $data
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return User
      */
@@ -59,7 +59,7 @@ final class UserService extends Service
     /**
      * @param array|JsonSerializable|ForgotPassword $data
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return null
      */
@@ -72,7 +72,7 @@ final class UserService extends Service
      * @param string $token
      * @param array|JsonSerializable|ResetPassword $data
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return User
      */
@@ -118,7 +118,7 @@ final class UserService extends Service
      * @param array|JsonSerializable|User $data
      * @param string $userId
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return User
      */
@@ -144,7 +144,7 @@ final class UserService extends Service
     /**
      * @param string $token
      *
-     * @throws UnprocessableEntityException The token is not valid
+     * @throws DataValidationException The token is not valid
      *
      * @return User
      */
@@ -157,7 +157,7 @@ final class UserService extends Service
      * @param string $userId
      * @param array|JsonSerializable|User $data
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return User
      */

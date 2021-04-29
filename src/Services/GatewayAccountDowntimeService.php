@@ -14,7 +14,7 @@ namespace Rebilly\Services;
 use ArrayObject;
 use JsonSerializable;
 use Rebilly\Entities\GatewayAccountDowntime;
-use Rebilly\Http\Exception\UnprocessableEntityException;
+use Rebilly\Http\Exception\DataValidationException;
 use Rebilly\Paginator;
 use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
@@ -73,7 +73,7 @@ final class GatewayAccountDowntimeService extends Service
      * @param string $gatewayAccountId
      * @param array|JsonSerializable|GatewayAccountDowntime $data
      *
-     * @throws UnprocessableEntityException The input data does not valid
+     * @throws DataValidationException The input data does not valid
      *
      * @return GatewayAccountDowntime
      */
@@ -91,7 +91,7 @@ final class GatewayAccountDowntimeService extends Service
      * @param string $downtimeId
      * @param array|JsonSerializable|GatewayAccountDowntime $data
      *
-     * @throws UnprocessableEntityException The input data is not valid
+     * @throws DataValidationException The input data is not valid
      *
      * @return GatewayAccountDowntime
      */
