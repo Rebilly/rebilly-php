@@ -725,4 +725,100 @@ final class Transaction extends Entity
     {
         return $this->getAttribute('referenceData');
     }
+
+    /**
+     * @return bool
+     */
+    public function getIsRebill()
+    {
+        return $this->getAttribute('isRebill');
+    }
+
+    /**
+     * @return string
+     */
+    public function get3ds()
+    {
+        return $this->getAttribute('3ds');
+    }
+
+    /**
+     * @return string
+     */
+    public function getDcc()
+    {
+        return $this->getAttribute('dcc');
+    }
+
+    /**
+     * @return int
+     */
+    public function getRiskScore()
+    {
+        return $this->getAttribute('riskScore');
+    }
+
+    /**
+     * @return string
+     */
+    public function getRetryInstruction()
+    {
+        return $this->getAttribute('retryInstruction');
+    }
+
+    /**
+     * @return int
+     */
+    public function getRetryNumber()
+    {
+        return $this->getAttribute('retryNumber');
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsReconciled()
+    {
+        return $this->getAttribute('isReconciled');
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHadDiscrepancy()
+    {
+        return $this->getAttribute('hadDiscrepancy');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasBumpOffer()
+    {
+        return $this->getAttribute('hasBumpOffer');
+    }
+
+    /**
+     * @return string
+     */
+    public function getBumpOffer()
+    {
+        return $this->getAttribute('bumpOffer');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasAmountAdjustment()
+    {
+        return $this->getAttribute('hasAmountAdjustment');
+    }
+
+    /**
+     * @return string
+     */
+    public function getBillingDescriptor()
+    {
+        return $this->getAttribute('billingDescriptor');
+    }
 }
