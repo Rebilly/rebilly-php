@@ -14,7 +14,7 @@ namespace Rebilly\Entities\Transactions;
 use Rebilly\Rest\Entity;
 
 /**
- * Class ThreeDSecure.
+ * Class ThreeDSecureResult.
  */
 final class ThreeDSecureResult extends Entity
 {
