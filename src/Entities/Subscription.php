@@ -546,4 +546,52 @@ final class Subscription extends Entity
     {
         return $this->getAttribute('revision');
     }
+
+    /**
+     * @return bool
+     */
+    public function getIsTrialOnly()
+    {
+        return $this->getAttribute('isTrialOnly');
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getPoNumber()
+    {
+        return $this->getAttribute('poNumber');
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getRenewalReminderTime()
+    {
+        return $this->getAttribute('renewalReminderTime');
+    }
+
+    /**
+     * @return int
+     */
+    public function getRenewalReminderNumber()
+    {
+        return $this->getAttribute('renewalReminderNumber');
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getTrialReminderTime()
+    {
+        return $this->getAttribute('trialReminderTime');
+    }
+
+    /**
+     * @return int
+     */
+    public function getTrialReminderNumber()
+    {
+        return $this->getAttribute('trialReminderNumber');
+    }
 }
