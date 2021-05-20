@@ -450,6 +450,16 @@ final class Transaction extends Entity
     }
 
     /**
+     * @param ThreeDSecureResult $value
+     *
+     * @return $this
+     */
+    public function set3ds(ThreeDSecureResult $value)
+    {
+        return $this->setAttribute('3ds', $value);
+    }
+
+    /**
      * @param array $data
      *
      * @return RiskMetadata
@@ -457,6 +467,16 @@ final class Transaction extends Entity
     public function createRiskMetadata(array $data)
     {
         return new RiskMetadata($data);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return ThreeDSecureResult
+     */
+    public function create3dc(array $data)
+    {
+        return new ThreeDSecureResult($data);
     }
 
     /**
