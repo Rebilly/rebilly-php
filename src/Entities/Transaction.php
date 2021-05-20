@@ -12,6 +12,7 @@
 namespace Rebilly\Entities;
 
 use Rebilly\Entities\Transactions\PaymentInstruction;
+use Rebilly\Entities\Transactions\ThreeDSecureResult;
 use Rebilly\Rest\Entity;
 
 /**
@@ -735,19 +736,11 @@ final class Transaction extends Entity
     }
 
     /**
-     * @return string
+     * @return ThreeDSecureResult
      */
     public function get3ds()
     {
         return $this->getAttribute('3ds');
-    }
-
-    /**
-     * @return string
-     */
-    public function getDcc()
-    {
-        return $this->getAttribute('dcc');
     }
 
     /**
@@ -756,14 +749,6 @@ final class Transaction extends Entity
     public function getRiskScore()
     {
         return $this->getAttribute('riskScore');
-    }
-
-    /**
-     * @return string
-     */
-    public function getRetryInstruction()
-    {
-        return $this->getAttribute('retryInstruction');
     }
 
     /**
@@ -796,14 +781,6 @@ final class Transaction extends Entity
     public function hasBumpOffer()
     {
         return $this->getAttribute('hasBumpOffer');
-    }
-
-    /**
-     * @return string
-     */
-    public function getBumpOffer()
-    {
-        return $this->getAttribute('bumpOffer');
     }
 
     /**
