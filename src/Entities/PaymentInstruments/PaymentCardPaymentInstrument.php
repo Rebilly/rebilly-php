@@ -84,4 +84,20 @@ class PaymentCardPaymentInstrument extends PaymentInstrument
     {
         return PaymentMethod::METHOD_PAYMENT_CARD;
     }
+
+    /**
+     * @return null|string
+     */
+    public function getExpirationReminderTime()
+    {
+        return $this->getAttribute('expirationReminderTime');
+    }
+
+    /**
+     * @return int
+     */
+    public function getExpirationReminderNumber()
+    {
+        return $this->getAttribute('expirationReminderNumber');
+    }
 }
