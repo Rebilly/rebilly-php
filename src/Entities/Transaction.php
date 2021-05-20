@@ -474,7 +474,7 @@ final class Transaction extends Entity
      *
      * @return ThreeDSecureResult
      */
-    public function create3dc(array $data)
+    public function create3ds(array $data)
     {
         return new ThreeDSecureResult($data);
     }
