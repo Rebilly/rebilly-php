@@ -19,18 +19,57 @@ use Rebilly\Rest\Entity;
  */
 final class Transaction extends Entity
 {
+    public const RESULT_ABANDONED = 'abandoned';
+
+    public const RESULT_APPROVED = 'approved';
+
+    public const RESULT_CANCELED = 'canceled';
+
+    public const RESULT_DECLINED = 'declined';
+
+    public const RESULT_UNKNOWN = 'unknown';
+
+    public const TYPE_3DS_AUTHENTICATION = '3ds-authentication';
+
     public const TYPE_AUTHORIZE = 'authorize';
 
-    public const TYPE_SALE = 'sale';
+    public const TYPE_CAPTURE = 'capture';
 
     public const TYPE_CREDIT = 'credit';
 
+    public const TYPE_REFUND = 'refund';
+
+    public const TYPE_SALE = 'sale';
+
+    public const TYPE_VOID = 'void';
+
+    /**
+     * @return array
+     */
+    public static function results()
+    {
+        return [
+            self::RESULT_ABANDONED,
+            self::RESULT_APPROVED,
+            self::RESULT_CANCELED,
+            self::RESULT_DECLINED,
+            self::RESULT_UNKNOWN,
+        ];
+    }
+
+    /**
+     * @return array
+     */
     public static function types()
     {
         return [
+            self::TYPE_3DS_AUTHENTICATION,
             self::TYPE_AUTHORIZE,
-            self::TYPE_SALE,
+            self::TYPE_CAPTURE,
             self::TYPE_CREDIT,
+            self::TYPE_REFUND,
+            self::TYPE_SALE,
+            self::TYPE_VOID,
         ];
     }
 
