@@ -418,4 +418,44 @@ final class Invoice extends Entity
     {
         return $this->getAttribute('revision');
     }
+
+    /**
+     * @return float
+     */
+    public function getAmountDue()
+    {
+        return $this->getAttribute('amountDue');
+    }
+
+    /**
+     * @return int
+     */
+    public function getAutopayRetryNumber()
+    {
+        return $this->getAttribute('autopayRetryNumber');
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getDueReminderTime()
+    {
+        return $this->getAttribute('dueReminderTime');
+    }
+
+    /**
+     * @return int
+     */
+    public function getDueReminderNumber()
+    {
+        return $this->getAttribute('dueReminderNumber');
+    }
+
+    /**
+     * @return string
+     */
+    public function getPaymentFormUrl()
+    {
+        return $this->getAttribute('paymentFormUrl');
+    }
 }
