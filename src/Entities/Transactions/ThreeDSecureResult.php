@@ -27,7 +27,7 @@ final class ThreeDSecureResult extends Entity
     }
 
     /**
-     * @return bool
+     * @return string
      */
     public function getEnrolled()
     {
