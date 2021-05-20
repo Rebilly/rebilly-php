@@ -450,16 +450,6 @@ final class Transaction extends Entity
     }
 
     /**
-     * @param ThreeDSecureResult $value
-     *
-     * @return $this
-     */
-    public function set3ds(ThreeDSecureResult $value)
-    {
-        return $this->setAttribute('3ds', $value);
-    }
-
-    /**
      * @param array $data
      *
      * @return RiskMetadata
