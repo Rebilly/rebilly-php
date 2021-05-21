@@ -12,6 +12,7 @@
 namespace Rebilly\Entities;
 
 use Rebilly\Entities\Transactions\PaymentInstruction;
+use Rebilly\Entities\Transactions\ThreeDSecureResult;
 use Rebilly\Rest\Entity;
 
 /**
@@ -500,6 +501,16 @@ final class Transaction extends Entity
     /**
      * @param array $data
      *
+     * @return ThreeDSecureResult
+     */
+    public function create3ds(array $data)
+    {
+        return new ThreeDSecureResult($data);
+    }
+
+    /**
+     * @param array $data
+     *
      * @return Address
      */
     public function createBillingAddress(array $data)
@@ -763,5 +774,77 @@ final class Transaction extends Entity
     public function getReferenceData()
     {
         return $this->getAttribute('referenceData');
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsRebill()
+    {
+        return $this->getAttribute('isRebill');
+    }
+
+    /**
+     * @return ThreeDSecureResult
+     */
+    public function get3ds()
+    {
+        return $this->getAttribute('3ds');
+    }
+
+    /**
+     * @return int
+     */
+    public function getRiskScore()
+    {
+        return $this->getAttribute('riskScore');
+    }
+
+    /**
+     * @return int
+     */
+    public function getRetryNumber()
+    {
+        return $this->getAttribute('retryNumber');
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsReconciled()
+    {
+        return $this->getAttribute('isReconciled');
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHadDiscrepancy()
+    {
+        return $this->getAttribute('hadDiscrepancy');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasBumpOffer()
+    {
+        return $this->getAttribute('hasBumpOffer');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasAmountAdjustment()
+    {
+        return $this->getAttribute('hasAmountAdjustment');
+    }
+
+    /**
+     * @return string
+     */
+    public function getBillingDescriptor()
+    {
+        return $this->getAttribute('billingDescriptor');
     }
 }
