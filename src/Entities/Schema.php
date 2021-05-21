@@ -344,7 +344,7 @@ final class Schema implements IteratorAggregate, ArrayAccess
             },
             'tags/{tag}' => function (array $content) {
                 return new Tag($content);
-            }
+            },
         ];
     }
 

@@ -69,7 +69,7 @@ final class TagService extends Service
      */
     public function tagCustomer($tag, $customerId)
     {
-        return $this->client()->post([],'tags/{tag}/customers/{customerId}', ['tag' => $tag, 'customerId' => $customerId]);
+        return $this->client()->post([], 'tags/{tag}/customers/{customerId}', ['tag' => $tag, 'customerId' => $customerId]);
     }
 
     /**
@@ -95,7 +95,7 @@ final class TagService extends Service
      */
     public function tagCustomers($tag, $customerIds)
     {
-        return $this->client()->post(['customerIds' => $customerIds],'tags/{tag}/customers', ['tag' => $tag]);
+        return $this->client()->post(['customerIds' => $customerIds], 'tags/{tag}/customers', ['tag' => $tag]);
     }
 
     /**
