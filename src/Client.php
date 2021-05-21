@@ -91,6 +91,7 @@ use RuntimeException;
  * @method Services\CustomerTimelineService customerTimeline()
  * @method Services\AmlService aml()
  * @method Services\PaymentInstrumentService paymentInstruments()
+ * @method Services\TagService tags()
  */
 final class Client
 {
@@ -156,6 +157,7 @@ final class Client
         'plaidCredentials' => Services\PlaidCredentialsService::class,
         'experianCredentials' => Services\ExperianCredentialsService::class,
         'paymentInstruments' => Services\PaymentInstrumentService::class,
+        'tags' => Services\TagService::class,
     ];
 
     /** @var array */
