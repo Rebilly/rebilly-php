@@ -18,16 +18,16 @@ Security - in case of vulnerabilities.
 ### Deprecated
 
 - [x] The exception `UnprocessableEntityException` is deprecated in favor of `DataValidationException`.
-  New exception has new method `getValidationErrors` which returns the erros in new format.
+  New exception has new method `getValidationErrors` which returns the errors in new format.
 - [x] The `KycDocument` property `fileId` was made deprecated.
 
 ### Added
 
-- [x] Added new properties to `Transaction`: `disputeTime` and `disputeStatus`
+- [x] Added new properties to `Transaction`: `disputeTime`, `disputeStatus`, `isRebill`, `3ds`, `riskScore`, `retryNumber`, `isReconciled`, `hadDiscrepancy`, `hasBumpOffer`, `hasAmountAdjustment`, `billingDescriptor`
 - [x] Added new properties to `Dispute`: `transaction`, `category`, `rawResponse`, `caseId`
 - [x] Added new property to `Customer`: `revision`
-- [x] Added new property to `Invoice`: `revision`
-- [x] Added new property to `Subscription`: `revision`
+- [x] Added new properties to `Invoice`: `revision`, `amountDue`, `autopayRetryNumber`, `dueReminderTime`, `dueReminderNumber`, `paymentFormUrl`
+- [x] Added new properties to `Subscription`: `revision`, `isTrialOnly`, `poNumber`, `renewalReminderTime`, `renewalReminderNumber`, `trialReminderTime`, `trialReminderNumber`
 - [x] Added new property to `KycDocument`: `documentSubtype`
 - [x] Added new property to `KycDocument`: `fileIds`
 - [x] Added new method to `GatewayAccountService`: `checkCredentials`
