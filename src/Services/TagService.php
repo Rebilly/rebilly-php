@@ -100,18 +100,13 @@ final class TagService extends Service
 
     /**
      * @param array|JsonSerializable|Tag $data
-     * @param string $tag
      *
      * @throws DataValidationException The input data does not valid
      *
      * @return Tag
      */
-    public function create($data, $tag = null)
+    public function create($data)
     {
-        if (isset($tag)) {
-            return $this->client()->patch($data, 'tags/{tag}', ['tag' => $tag]);
-        }
-
         return $this->client()->post($data, 'tags');
     }
 
