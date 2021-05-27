@@ -66,9 +66,9 @@ abstract class TestCase extends Framework\TestCase
         $annotations = $this->getAnnotations();
 
         if (isset($annotations['class']['todo'])) {
-            $this->markTestSkipped('Pending test case...');
+            self::markTestSkipped('Pending test case...');
         } elseif (isset($annotations['method']['todo'])) {
-            $this->markTestSkipped('Pending test...');
+            self::markTestSkipped('Pending test...');
         }
     }
 

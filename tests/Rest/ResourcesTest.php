@@ -81,7 +81,7 @@ class ResourcesTest extends TestCase
         try {
             $this->factory->create('unknown', []);
 
-            $this->fail('Failed asserting that exception of type "RuntimeException" is thrown.');
+            self::fail('Failed asserting that exception of type "RuntimeException" is thrown.');
         } catch (RuntimeException $e) {
             self::assertSame('Cannot create resource by URI "/unknown"', $e->getMessage());
         }
@@ -98,26 +98,26 @@ class ResourcesTest extends TestCase
         $resource = $this->factory->create('stubs/uuid', []);
         $resource->populate($this->fakeData);
 
-        $this->assertInstanceOf(EntityStub::class, $resource);
-        $this->assertSame('uuid', $resource->getId());
-        $this->assertSame($this->fakeDate, $resource->getUpdatedTime());
+        self::assertInstanceOf(EntityStub::class, $resource);
+        self::assertSame('uuid', $resource->getId());
+        self::assertSame($this->fakeDate, $resource->getUpdatedTime());
 
         $resource->offsetUnset('field1');
         $resource->offsetSet('field2', 'dummy');
 
-        $this->assertFalse(isset($resource['field1']));
-        $this->assertTrue(isset($resource['field2']));
-        $this->assertFalse(isset($resource['field3']));
+        self::assertFalse(isset($resource['field1']));
+        self::assertTrue(isset($resource['field2']));
+        self::assertFalse(isset($resource['field3']));
 
-        $this->assertSame(null, $resource->offsetGet('field1'));
-        $this->assertSame('dummy', $resource->offsetGet('field2'));
+        self::assertSame(null, $resource->offsetGet('field1'));
+        self::assertSame('dummy', $resource->offsetGet('field2'));
 
-        $this->assertSame(['attribute' => 'value'], $resource->getRelation1());
-        $this->assertSame(null, $resource->getRelation2());
+        self::assertSame(['attribute' => 'value'], $resource->getRelation1());
+        self::assertSame(null, $resource->getRelation2());
 
-        $this->assertSame('http://example.com', $resource->getSelfLink());
+        self::assertSame('http://example.com', $resource->getSelfLink());
 
-        $this->assertSame('value', $resource->getCustomMetadata());
+        self::assertSame('value', $resource->getCustomMetadata());
 
         return $resource;
     }
@@ -134,8 +134,8 @@ class ResourcesTest extends TestCase
 
         $clone->offsetSet('field1', 'dummy');
 
-        $this->assertSame(null, $resource->offsetGet('field1'));
-        $this->assertSame('dummy', $clone->offsetGet('field1'));
+        self::assertSame(null, $resource->offsetGet('field1'));
+        self::assertSame('dummy', $clone->offsetGet('field1'));
     }
 
     /**
@@ -161,28 +161,28 @@ class ResourcesTest extends TestCase
     {
         try {
             $resource->offsetGet('nonExistentAttribute');
-            $this->fail('Failed asserting that exception of type "OutOfRangeException" is thrown.');
+            self::fail('Failed asserting that exception of type "OutOfRangeException" is thrown.');
         } catch (OutOfRangeException $e) {
             self::assertSame(sprintf('The property "%s::%s" does not exist', get_class($resource), 'nonExistentAttribute'), $e->getMessage());
         }
 
         try {
             $resource->offsetGet('writeOnlyField');
-            $this->fail('Failed asserting that exception of type "DomainException" is thrown.');
+            self::fail('Failed asserting that exception of type "DomainException" is thrown.');
         } catch (DomainException $e) {
             self::assertSame(sprintf('Trying to get the write-only property "%s::%s"', get_class($resource), 'writeOnlyField'), $e->getMessage());
         }
 
         try {
             $resource->offsetSet('nonExistentAttribute', 'dummy');
-            $this->fail('Failed asserting that exception of type "OutOfRangeException" is thrown.');
+            self::fail('Failed asserting that exception of type "OutOfRangeException" is thrown.');
         } catch (OutOfRangeException $e) {
             self::assertSame(sprintf('The property "%s::%s" does not exist', get_class($resource), 'nonExistentAttribute'), $e->getMessage());
         }
 
         try {
             $resource->offsetSet('readOnlyField', 'dummy');
-            $this->fail('Failed asserting that exception of type "DomainException" is thrown.');
+            self::fail('Failed asserting that exception of type "DomainException" is thrown.');
         } catch (DomainException $e) {
             self::assertSame(sprintf('Trying to set the read-only property "%s::%s"', get_class($resource), 'readOnlyField'), $e->getMessage());
         }
@@ -195,16 +195,16 @@ class ResourcesTest extends TestCase
     {
         $resource = new EntityStub();
 
-        $this->assertNull($resource->getComplexField());
+        self::assertNull($resource->getComplexField());
 
         $resource->setComplexField(new EntityStub());
 
-        $this->assertInstanceOf(EntityStub::class, $resource->getComplexField());
+        self::assertInstanceOf(EntityStub::class, $resource->getComplexField());
 
         $json = $resource->jsonSerialize();
 
-        $this->assertArrayHasKey('complexField', $json);
-        $this->assertTrue(is_array($json['complexField']));
+        self::assertArrayHasKey('complexField', $json);
+        self::assertTrue(is_array($json['complexField']));
     }
 
     /**
@@ -221,9 +221,9 @@ class ResourcesTest extends TestCase
             ]
         );
 
-        $this->assertCount(1, $collection);
-        $this->assertInstanceOf(EntityStub::class, $collection[0]);
-        $this->assertInstanceOf(EntityStub::class, $collection[0]->getComplexField());
+        self::assertCount(1, $collection);
+        self::assertInstanceOf(EntityStub::class, $collection[0]);
+        self::assertInstanceOf(EntityStub::class, $collection[0]->getComplexField());
     }
 
     /**
@@ -242,12 +242,12 @@ class ResourcesTest extends TestCase
             ],
         ]);
 
-        $this->assertInstanceOf(Collection::class, $set);
-        $this->assertGreaterThan(0, count($set));
+        self::assertInstanceOf(Collection::class, $set);
+        self::assertGreaterThan(0, count($set));
 
-        $this->assertSame(1, $set->getTotalItems());
-        $this->assertSame(100, $set->getLimit());
-        $this->assertSame(0, $set->getOffset());
+        self::assertSame(1, $set->getTotalItems());
+        self::assertSame(100, $set->getLimit());
+        self::assertSame(0, $set->getOffset());
 
         return $set;
     }
@@ -261,7 +261,7 @@ class ResourcesTest extends TestCase
     public function cloneCollection(Collection $set)
     {
         $clone = clone $set;
-        $this->assertNotSame(spl_object_hash($set[0]), spl_object_hash($clone[0]));
+        self::assertNotSame(spl_object_hash($set[0]), spl_object_hash($clone[0]));
     }
 
     /**
@@ -274,7 +274,7 @@ class ResourcesTest extends TestCase
     {
         $json = $set->jsonSerialize();
 
-        $this->assertTrue(isset($json[0]['field1']));
+        self::assertTrue(isset($json[0]['field1']));
     }
 
     /**
@@ -286,7 +286,7 @@ class ResourcesTest extends TestCase
     public function traverseCollection(Collection $set)
     {
         foreach ($set as $entity) {
-            $this->assertInstanceOf(EntityStub::class, $entity);
+            self::assertInstanceOf(EntityStub::class, $entity);
         }
     }
 
@@ -298,15 +298,15 @@ class ResourcesTest extends TestCase
      */
     public function accessCollectionItems(Collection $set)
     {
-        $this->assertTrue(isset($set[0]));
-        $this->assertInstanceOf(EntityStub::class, $set[0]);
+        self::assertTrue(isset($set[0]));
+        self::assertInstanceOf(EntityStub::class, $set[0]);
 
         try {
             unset($set[0]);
         } catch (LogicException $e) {
         } finally {
             if (!isset($e)) {
-                $this->fail('Failed asserting that exception of type "LogicException" is thrown.');
+                self::fail('Failed asserting that exception of type "LogicException" is thrown.');
             }
         }
 
@@ -315,7 +315,7 @@ class ResourcesTest extends TestCase
         } catch (LogicException $e) {
         } finally {
             if (!isset($e)) {
-                $this->fail('Failed asserting that exception of type "LogicException" is thrown.');
+                self::fail('Failed asserting that exception of type "LogicException" is thrown.');
             }
         }
     }
