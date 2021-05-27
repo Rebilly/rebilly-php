@@ -25,7 +25,7 @@ Security - in case of vulnerabilities.
 
 - [x] Added new properties to `Transaction`: `disputeTime`, `disputeStatus`, `isRebill`, `3ds`, `riskScore`, `retryNumber`, `isReconciled`, `hadDiscrepancy`, `hasBumpOffer`, `hasAmountAdjustment`, `billingDescriptor`
 - [x] Added new properties to `Dispute`: `transaction`, `category`, `rawResponse`, `caseId`
-- [x] Added new property to `Customer`: `revision`, `tags`
+- [x] Added new properties to `Customer`: `revision`, `tags`
 - [x] Added new properties to `Invoice`: `revision`, `amountDue`, `autopayRetryNumber`, `dueReminderTime`, `dueReminderNumber`, `paymentFormUrl`
 - [x] Added new properties to `Subscription`: `revision`, `isTrialOnly`, `poNumber`, `renewalReminderTime`, `renewalReminderNumber`, `trialReminderTime`, `trialReminderNumber`
 - [x] Added new property to `KycDocument`: `documentSubtype`
