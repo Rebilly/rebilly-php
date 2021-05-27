@@ -11,7 +11,7 @@
 
 namespace Rebilly\Tests\Http;
 
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
+use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Http\Message\ResponseInterface as Response;
 use Rebilly\Client;
 use Rebilly\Http\CurlHandler;
@@ -47,7 +47,7 @@ class CurlHandlerTest extends TestCase
         $ref->setAccessible(true);
 
         $session = $ref->invoke($handler);
-        $this->assertInstanceOf(CurlSession::class, $session);
+        self::assertInstanceOf(CurlSession::class, $session);
     }
 
     /**
@@ -78,8 +78,8 @@ class CurlHandlerTest extends TestCase
         /** @var Response $response */
         $response = call_user_func($handler, $request);
 
-        $this->assertInstanceOf(Response::class, $response);
-        $this->assertSame(200, $response->getStatusCode());
+        self::assertInstanceOf(Response::class, $response);
+        self::assertSame(200, $response->getStatusCode());
     }
 
     /**
@@ -110,8 +110,8 @@ class CurlHandlerTest extends TestCase
         /** @var Response $response */
         $response = call_user_func($handler, $request);
 
-        $this->assertInstanceOf(Response::class, $response);
-        $this->assertSame(200, $response->getStatusCode());
+        self::assertInstanceOf(Response::class, $response);
+        self::assertSame(200, $response->getStatusCode());
     }
 
     /**
@@ -124,11 +124,11 @@ class CurlHandlerTest extends TestCase
 
         /** @var CurlSession|MockObject $session */
         $session = $this->createPartialMock(CurlSession::class, ['open']);
-        $session->expects($this->any())->method('open')->willReturn(false);
+        $session->method('open')->willReturn(false);
 
         /** @var CurlHandler|MockObject $handler */
         $handler = $this->createPartialMock(CurlHandler::class, ['createSession']);
-        $handler->expects($this->any())->method('createSession')->willReturn($session);
+        $handler->method('createSession')->willReturn($session);
 
         try {
             call_user_func($handler, $request);
@@ -136,7 +136,7 @@ class CurlHandlerTest extends TestCase
             self::assertSame('Cannot initialize a cURL session', $e->getMessage());
         } finally {
             if (!isset($e)) {
-                $this->fail('Failed asserting that exception of type "RuntimeException" is thrown.');
+                self::fail('Failed asserting that exception of type "RuntimeException" is thrown.');
             }
         }
 
@@ -145,19 +145,19 @@ class CurlHandlerTest extends TestCase
             CurlSession::class,
             ['open', 'execute', 'setOptions', 'getErrorMessage', 'getErrorCode']
         );
-        $session->expects($this->any())->method('open')->will($this->returnValue(true));
-        $session->expects($this->any())->method('execute')->will($this->returnValue(false));
+        $session->method('open')->will(self::returnValue(true));
+        $session->method('execute')->will(self::returnValue(false));
 
         /** @var CurlHandler|MockObject $handler */
         $handler = $this->createPartialMock(CurlHandler::class, ['createSession']);
-        $handler->expects($this->any())->method('createSession')->will($this->returnValue($session));
+        $handler->method('createSession')->will(self::returnValue($session));
 
         try {
             call_user_func($handler, $request);
         } catch (TransferException $e) {
         } finally {
             if (!isset($e)) {
-                $this->fail('Failed asserting that exception of type "TransferException" is thrown.');
+                self::fail('Failed asserting that exception of type "TransferException" is thrown.');
             }
         }
     }

@@ -12,7 +12,7 @@
 namespace Rebilly\Tests\Api;
 
 use GuzzleHttp\Psr7;
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
+use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Http\Message\RequestInterface as Request;
 use Rebilly\Client;
 use Rebilly\Entities;
@@ -62,18 +62,18 @@ class ServiceTest extends BaseTestCase
         ]);
 
         $service = $client->$name();
-        $this->assertInstanceOf($serviceClass, $service);
+        self::assertInstanceOf($serviceClass, $service);
 
         if (method_exists($service, 'paginator')) {
             $paginator = $service->paginator();
 
-            $this->assertInstanceOf(Paginator::class, $paginator);
+            self::assertInstanceOf(Paginator::class, $paginator);
         }
 
         if (method_exists($service, 'search')) {
             $set = $service->search();
 
-            $this->assertInstanceOf(Rest\Collection::class, $set);
+            self::assertInstanceOf(Rest\Collection::class, $set);
         }
 
         if (method_exists($service, 'load')) {
@@ -83,16 +83,16 @@ class ServiceTest extends BaseTestCase
                 $entity = $service->load($this->getFakeValue($id, $entityClass));
             }
 
-            $this->assertInstanceOf($entityClass, $entity);
+            self::assertInstanceOf($entityClass, $entity);
         }
 
         if (method_exists($service, 'create')) {
             $entity = $service->create([]);
-            $this->assertInstanceOf($entityClass, $entity);
+            self::assertInstanceOf($entityClass, $entity);
 
             if ($id !== null) {
                 $entity = $service->create([], $this->getFakeValue($id, $entityClass));
-                $this->assertInstanceOf($entityClass, $entity);
+                self::assertInstanceOf($entityClass, $entity);
             }
         }
 
@@ -103,7 +103,7 @@ class ServiceTest extends BaseTestCase
                 $entity = $service->update($this->getFakeValue($id, $entityClass), []);
             }
 
-            $this->assertInstanceOf($entityClass, $entity);
+            self::assertInstanceOf($entityClass, $entity);
         }
 
         if (method_exists($service, 'patch')) {
@@ -113,7 +113,7 @@ class ServiceTest extends BaseTestCase
                 $entity = $service->patch($this->getFakeValue($id, $entityClass), []);
             }
 
-            $this->assertInstanceOf($entityClass, $entity);
+            self::assertInstanceOf($entityClass, $entity);
         }
 
         if (method_exists($service, 'delete')) {
@@ -166,28 +166,26 @@ class ServiceTest extends BaseTestCase
         ];
 
         $handler
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('__invoke')
-            ->will(
-                $this->returnValue(
-                    $client
-                        ->createResponse()
-                        ->withBody(Psr7\stream_for(json_encode($customers)))
-                )
+            ->willReturn(
+                $client
+                    ->createResponse()
+                    ->withBody(Psr7\stream_for(json_encode($customers)))
             );
 
         $result = $service->search();
 
-        $this->assertCount(2, $result);
-        $this->assertInstanceOf(Rest\Collection::class, $result);
+        self::assertCount(2, $result);
+        self::assertInstanceOf(Rest\Collection::class, $result);
 
-        $this->assertInstanceOf(Customer::class, $result[0]);
-        $this->assertSame($customers[0]['id'], $result[0]->getId());
-        $this->assertInstanceOf(PaymentMethodInstrument::class, $result[0]->getDefaultPaymentInstrument());
+        self::assertInstanceOf(Customer::class, $result[0]);
+        self::assertSame($customers[0]['id'], $result[0]->getId());
+        self::assertInstanceOf(PaymentMethodInstrument::class, $result[0]->getDefaultPaymentInstrument());
 
-        $this->assertInstanceOf(Customer::class, $result[1]);
-        $this->assertSame($customers[1]['id'], $result[1]->getId());
-        $this->assertNull($result[1]->getDefaultPaymentInstrument());
+        self::assertInstanceOf(Customer::class, $result[1]);
+        self::assertSame($customers[1]['id'], $result[1]->getId());
+        self::assertNull($result[1]->getDefaultPaymentInstrument());
     }
 
     /**
@@ -200,11 +198,9 @@ class ServiceTest extends BaseTestCase
         /** @var CurlHandler|MockObject $handler */
         $handler = $this->createMock(CurlHandler::class);
         $handler
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()
-            ));
+            ->willReturn($client->createResponse());
 
         $client = new Client([
             'apiKey' => 'QWERTY',
@@ -214,10 +210,10 @@ class ServiceTest extends BaseTestCase
         $service = $client->customers();
 
         $result = $service->getLeadSource('dummy');
-        $this->assertInstanceOf(Entities\LeadSource::class, $result);
+        self::assertInstanceOf(Entities\LeadSource::class, $result);
 
         $result = $service->updateLeadSource('dummy', []);
-        $this->assertInstanceOf(Entities\LeadSource::class, $result);
+        self::assertInstanceOf(Entities\LeadSource::class, $result);
 
         $service->deleteLeadSource('dummy');
     }
@@ -232,11 +228,9 @@ class ServiceTest extends BaseTestCase
         /** @var CurlHandler|MockObject $handler */
         $handler = $this->createMock(CurlHandler::class);
         $handler
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'lead-sources/dummy')
-            ));
+            ->willReturn($client->createResponse()->withHeader('Location', 'lead-sources/dummy'));
 
         $client = new Client([
             'apiKey' => 'QWERTY',
@@ -245,8 +239,7 @@ class ServiceTest extends BaseTestCase
 
         $service = $client->customers();
 
-        $result = $service->merge('dummy', 'dummy2');
-        $this->assertNull($result);
+        self::assertNull($service->merge('dummy', 'dummy2'));
     }
 
     /**
@@ -260,26 +253,24 @@ class ServiceTest extends BaseTestCase
         $handler = $this->createMock(CurlHandler::class);
 
         $handler
-            ->expects($this->at(0))
+            ->expects(self::at(0))
             ->method('__invoke')
-            ->will($this->returnValue($client->createResponse()));
+            ->willReturn($client->createResponse());
 
         $handler
-            ->expects($this->at(1))
+            ->expects(self::at(1))
             ->method('__invoke')
-            ->will($this->returnValue($client->createResponse()->withStatus(404)));
+            ->willReturn($client->createResponse()->withStatus(404));
 
         $handler
-            ->expects($this->at(2))
+            ->expects(self::at(2))
             ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'authentication-tokens/token')
-            ));
+            ->willReturn($client->createResponse()->withHeader('Location', 'authentication-tokens/token'));
 
         $handler
-            ->expects($this->at(3))
+            ->expects(self::at(3))
             ->method('__invoke')
-            ->will($this->returnValue($client->createResponse()));
+            ->willReturn($client->createResponse());
 
         $client = new Client([
             'apiKey' => 'QWERTY',
@@ -289,16 +280,16 @@ class ServiceTest extends BaseTestCase
         $service = $client->authenticationTokens();
 
         $result = $service->verify('dummy');
-        $this->assertTrue($result);
+        self::assertTrue($result);
 
         $result = $service->verify('dummy');
-        $this->assertFalse($result);
+        self::assertFalse($result);
 
         $result = $service->login(['username' => 'dummy', 'password' => 'qwerty']);
-        $this->assertInstanceOf(Entities\AuthenticationToken::class, $result);
+        self::assertInstanceOf(Entities\AuthenticationToken::class, $result);
 
         $result = $service->exchange('token', ['invalidate' => false, 'expiredTime' => date('c')]);
-        $this->assertInstanceOf(Entities\Session::class, $result);
+        self::assertInstanceOf(Entities\Session::class, $result);
 
         $service->logout('dummy');
     }
@@ -314,11 +305,9 @@ class ServiceTest extends BaseTestCase
         $handler = $this->createMock(CurlHandler::class);
 
         $handler
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'invoices/dummy')
-            ));
+            ->willReturn($client->createResponse()->withHeader('Location', 'invoices/dummy'));
 
         $client = new Client([
             'apiKey' => 'QWERTY',
@@ -328,19 +317,19 @@ class ServiceTest extends BaseTestCase
         $service = $client->invoices();
 
         $result = $service->void('dummy');
-        $this->assertInstanceOf(Entities\Invoice::class, $result);
+        self::assertInstanceOf(Entities\Invoice::class, $result);
 
         $result = $service->abandon('dummy');
-        $this->assertInstanceOf(Entities\Invoice::class, $result);
+        self::assertInstanceOf(Entities\Invoice::class, $result);
 
         $result = $service->issue('dummy', date('Y-m-d H:i:s'), date('Y-m-d H:i:s'));
-        $this->assertInstanceOf(Entities\Invoice::class, $result);
+        self::assertInstanceOf(Entities\Invoice::class, $result);
 
         $result = $service->reissue('dummy', date('Y-m-d H:i:s'));
-        $this->assertInstanceOf(Entities\Invoice::class, $result);
+        self::assertInstanceOf(Entities\Invoice::class, $result);
 
         $result = $service->recalculate('dummy');
-        $this->assertInstanceOf(Entities\Invoice::class, $result);
+        self::assertInstanceOf(Entities\Invoice::class, $result);
     }
 
     /**
@@ -354,21 +343,19 @@ class ServiceTest extends BaseTestCase
         $handler = $this->createMock(CurlHandler::class);
 
         $handler
-            ->expects($this->at(0))
+            ->expects(self::at(0))
             ->method('__invoke')
-            ->will($this->returnValue($client->createResponse()));
+            ->willReturn($client->createResponse());
 
         $handler
-            ->expects($this->at(1))
+            ->expects(self::at(1))
             ->method('__invoke')
-            ->will($this->returnValue($client->createResponse()));
+            ->willReturn($client->createResponse());
 
         $handler
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'invoices/invoiceId/items/dummy')
-            ));
+            ->willReturn($client->createResponse()->withHeader('Location', 'invoices/invoiceId/items/dummy'));
 
         $client = new Client([
             'apiKey' => 'QWERTY',
@@ -378,19 +365,19 @@ class ServiceTest extends BaseTestCase
         $service = $client->invoiceItems();
 
         $paginator = $service->paginator('invoiceId');
-        $this->assertInstanceOf(Paginator::class, $paginator);
+        self::assertInstanceOf(Paginator::class, $paginator);
 
         $result = $service->search('invoiceId');
-        $this->assertInstanceOf(Rest\Collection::class, $result);
+        self::assertInstanceOf(Rest\Collection::class, $result);
 
         $result = $service->load('invoiceId', 'dummy');
-        $this->assertInstanceOf(Entities\InvoiceItem::class, $result);
+        self::assertInstanceOf(Entities\InvoiceItem::class, $result);
 
         $result = $service->create([], 'invoiceId');
-        $this->assertInstanceOf(Entities\InvoiceItem::class, $result);
+        self::assertInstanceOf(Entities\InvoiceItem::class, $result);
 
         $result = $service->create([], 'invoiceId', 'dummy');
-        $this->assertInstanceOf(Entities\InvoiceItem::class, $result);
+        self::assertInstanceOf(Entities\InvoiceItem::class, $result);
     }
 
     /**
@@ -404,11 +391,9 @@ class ServiceTest extends BaseTestCase
         $handler = $this->createMock(CurlHandler::class);
 
         $handler
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'subscriptions/dummy')
-            ));
+            ->willReturn($client->createResponse()->withHeader('Location', 'subscriptions/dummy'));
 
         $client = new Client([
             'apiKey' => 'QWERTY',
@@ -418,16 +403,16 @@ class ServiceTest extends BaseTestCase
         $service = $client->subscriptions();
 
         $result = $service->cancel('dummy', []);
-        $this->assertInstanceOf(Entities\Subscription::class, $result);
+        self::assertInstanceOf(Entities\Subscription::class, $result);
 
         $result = $service->changePlan('dummy', []);
-        $this->assertInstanceOf(Entities\Subscription::class, $result);
+        self::assertInstanceOf(Entities\Subscription::class, $result);
 
         $result = $service->issueInterimInvoice('dummy', []);
-        $this->assertInstanceOf(Entities\Subscription::class, $result);
+        self::assertInstanceOf(Entities\Subscription::class, $result);
 
         $result = $service->issueUpcomingInvoice('dummy', 'invoice-1');
-        $this->assertInstanceOf(Entities\Subscription::class, $result);
+        self::assertInstanceOf(Entities\Subscription::class, $result);
     }
 
     /**
@@ -441,11 +426,9 @@ class ServiceTest extends BaseTestCase
         $handler = $this->createMock(CurlHandler::class);
 
         $handler
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'subscriptions/subscription-1/upcoming-invoices')
-            ));
+            ->willReturn($client->createResponse()->withHeader('Location', 'subscriptions/subscription-1/upcoming-invoices'));
 
         $client = new Client([
             'apiKey' => 'QWERTY',
@@ -454,7 +437,7 @@ class ServiceTest extends BaseTestCase
         $service = $client->subscriptions();
 
         $result = $service->getUpcomingInvoices('subscription-1');
-        $this->assertInstanceOf(Rest\Collection::class, $result);
+        self::assertInstanceOf(Rest\Collection::class, $result);
     }
 
     /**
@@ -468,9 +451,9 @@ class ServiceTest extends BaseTestCase
         $handler = $this->createMock(CurlHandler::class);
 
         $handler
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('__invoke')
-            ->will($this->returnValue($client->createResponse()));
+            ->willReturn($client->createResponse());
 
         $client = new Client([
             'apiKey' => 'QWERTY',
@@ -480,10 +463,10 @@ class ServiceTest extends BaseTestCase
         $service = $client->subscriptionCancellations();
 
         $result = $service->update('dummy', []);
-        $this->assertInstanceOf(Entities\SubscriptionCancellation::class, $result);
+        self::assertInstanceOf(Entities\SubscriptionCancellation::class, $result);
 
         $result = $service->load('dummy', []);
-        $this->assertInstanceOf(Entities\SubscriptionCancellation::class, $result);
+        self::assertInstanceOf(Entities\SubscriptionCancellation::class, $result);
     }
 
     /**
@@ -497,11 +480,9 @@ class ServiceTest extends BaseTestCase
         $handler = $this->createMock(CurlHandler::class);
 
         $handler
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'coupons/dummy')
-            ));
+            ->willReturn($client->createResponse()->withHeader('Location', 'coupons/dummy'));
 
         $client = new Client([
             'apiKey' => 'QWERTY',
@@ -511,7 +492,7 @@ class ServiceTest extends BaseTestCase
         $service = $client->coupons();
 
         $result = $service->expiration('dummy');
-        $this->assertInstanceOf(Entities\Coupons\Coupon::class, $result);
+        self::assertInstanceOf(Entities\Coupons\Coupon::class, $result);
     }
 
     /**
@@ -525,11 +506,9 @@ class ServiceTest extends BaseTestCase
         $handler = $this->createMock(CurlHandler::class);
 
         $handler
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'transactions/dummy')
-            ));
+            ->willReturn($client->createResponse()->withHeader('Location', 'transactions/dummy'));
 
         $client = new Client([
             'apiKey' => 'QWERTY',
@@ -539,10 +518,10 @@ class ServiceTest extends BaseTestCase
         $service = $client->transactions();
 
         $result = $service->refund('dummy', 10);
-        $this->assertInstanceOf(Entities\Transaction::class, $result);
+        self::assertInstanceOf(Entities\Transaction::class, $result);
 
         $result = $service->patch('dummy', []);
-        $this->assertInstanceOf(Entities\Transaction::class, $result);
+        self::assertInstanceOf(Entities\Transaction::class, $result);
     }
 
     /**
@@ -556,11 +535,9 @@ class ServiceTest extends BaseTestCase
         $handler = $this->createMock(CurlHandler::class);
 
         $handler
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'transactions/dummy')
-            ));
+            ->willReturn($client->createResponse()->withHeader('Location', 'transactions/dummy'));
 
         $client = new Client([
             'apiKey' => 'QWERTY',
@@ -570,7 +547,7 @@ class ServiceTest extends BaseTestCase
         $service = $client->payouts();
 
         $result = $service->create([]);
-        $this->assertInstanceOf(Entities\Transaction::class, $result);
+        self::assertInstanceOf(Entities\Transaction::class, $result);
     }
 
     /**
@@ -584,11 +561,9 @@ class ServiceTest extends BaseTestCase
         $handler = $this->createMock(CurlHandler::class);
 
         $handler
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'payment-instruments/dummy')
-            ));
+            ->willReturn($client->createResponse()->withHeader('Location', 'payment-instruments/dummy'));
 
         $client = new Client([
             'apiKey' => 'QWERTY',
@@ -600,16 +575,16 @@ class ServiceTest extends BaseTestCase
         $paymentInstrument = new JsonObject(['customerId' => self::uuid(), 'method' => 'payment-card']);
 
         $result = $service->createFromToken('token', $paymentInstrument);
-        $this->assertInstanceOf(Entities\CommonPaymentInstrument::class, $result);
+        self::assertInstanceOf(Entities\CommonPaymentInstrument::class, $result);
 
         $result = $service->createFromToken('token', ['customerId' => self::uuid()]);
-        $this->assertInstanceOf(Entities\CommonPaymentInstrument::class, $result);
+        self::assertInstanceOf(Entities\CommonPaymentInstrument::class, $result);
 
         $result = $service->createFromToken(['token' => 'dummy'], $paymentInstrument);
-        $this->assertInstanceOf(Entities\CommonPaymentInstrument::class, $result);
+        self::assertInstanceOf(Entities\CommonPaymentInstrument::class, $result);
 
         $result = $service->deactivate('dummy');
-        $this->assertInstanceOf(Entities\CommonPaymentInstrument::class, $result);
+        self::assertInstanceOf(Entities\CommonPaymentInstrument::class, $result);
     }
 
     /**
@@ -623,11 +598,9 @@ class ServiceTest extends BaseTestCase
         $handler = $this->createMock(CurlHandler::class);
 
         $handler
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'payment-cards/dummy')
-            ));
+            ->willReturn($client->createResponse()->withHeader('Location', 'payment-cards/dummy'));
 
         $client = new Client([
             'apiKey' => 'QWERTY',
@@ -639,16 +612,16 @@ class ServiceTest extends BaseTestCase
         $card = new JsonObject(['customerId' => self::uuid()]);
 
         $result = $service->createFromToken('token', $card);
-        $this->assertInstanceOf(Entities\PaymentCard::class, $result);
+        self::assertInstanceOf(Entities\PaymentCard::class, $result);
 
         $result = $service->createFromToken('token', ['customerId' => self::uuid()], 'dummy');
-        $this->assertInstanceOf(Entities\PaymentCard::class, $result);
+        self::assertInstanceOf(Entities\PaymentCard::class, $result);
 
         $result = $service->createFromToken(['token' => 'dummy'], $card);
-        $this->assertInstanceOf(Entities\PaymentCard::class, $result);
+        self::assertInstanceOf(Entities\PaymentCard::class, $result);
 
         $result = $service->deactivate('dummy');
-        $this->assertInstanceOf(Entities\PaymentCard::class, $result);
+        self::assertInstanceOf(Entities\PaymentCard::class, $result);
     }
 
     /**
@@ -670,19 +643,19 @@ class ServiceTest extends BaseTestCase
         $resourceType = Entities\ResourceType::TYPE_CUSTOMERS;
 
         $paginator = $service->paginator($resourceType);
-        $this->assertInstanceOf(Paginator::class, $paginator);
+        self::assertInstanceOf(Paginator::class, $paginator);
 
         $entity = $service->create($resourceType, $this->getFakeValue('id', $entityClass), []);
-        $this->assertInstanceOf($entityClass, $entity);
+        self::assertInstanceOf($entityClass, $entity);
 
         $set = $service->search($resourceType);
-        $this->assertInstanceOf(Rest\Collection::class, $set);
+        self::assertInstanceOf(Rest\Collection::class, $set);
 
         $entity = $service->load($resourceType, $this->getFakeValue('id', $entityClass));
-        $this->assertInstanceOf($entityClass, $entity);
+        self::assertInstanceOf($entityClass, $entity);
 
         $entity = $service->update($resourceType, $this->getFakeValue('id', $entityClass), []);
-        $this->assertInstanceOf($entityClass, $entity);
+        self::assertInstanceOf($entityClass, $entity);
     }
 
     /**
@@ -695,74 +668,66 @@ class ServiceTest extends BaseTestCase
         /** @var CurlHandler|MockObject $handler */
         $handler = $this->createMock(CurlHandler::class);
         $handler
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'users/userId')
-            ));
+            ->willReturn($client->createResponse()->withHeader('Location', 'users/userId'));
         $client = new Client([
             'apiKey' => 'QWERTY',
             'httpHandler' => $handler,
         ]);
         $service = $client->users();
         $result = $service->load('userId');
-        $this->assertInstanceOf(Entities\User::class, $result);
+        self::assertInstanceOf(Entities\User::class, $result);
 
         $handler = $this->createMock(CurlHandler::class);
         $handler
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'users/signup')
-            ));
+            ->willReturn($client->createResponse()->withHeader('Location', 'users/signup'));
         $client = new Client([
             'apiKey' => 'QWERTY',
             'httpHandler' => $handler,
         ]);
         $service = $client->users();
         $result = $service->signup([]);
-        $this->assertInstanceOf(Entities\User::class, $result);
+        self::assertInstanceOf(Entities\User::class, $result);
 
         $handler = $this->createMock(CurlHandler::class);
         $handler
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'users/signin')
-            ));
+            ->willReturn($client->createResponse()->withHeader('Location', 'users/signin'));
         $client = new Client([
             'apiKey' => 'QWERTY',
             'httpHandler' => $handler,
         ]);
         $service = $client->users();
         $result = $service->signin([]);
-        $this->assertInstanceOf(Entities\User::class, $result);
+        self::assertInstanceOf(Entities\User::class, $result);
 
         $handler = $this->createMock(CurlHandler::class);
         $handler
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'users/userId')
-            ));
+            ->willReturn($client->createResponse()->withHeader('Location', 'users/userId'));
         $client = new Client([
             'apiKey' => 'QWERTY',
             'httpHandler' => $handler,
         ]);
         $service = $client->users();
         $result = $service->updatePassword('userId', []);
-        $this->assertInstanceOf(Entities\User::class, $result);
+        self::assertInstanceOf(Entities\User::class, $result);
 
         $service->forgotPassword([]);
 
         $result = $service->resetPassword('token', []);
-        $this->assertInstanceOf(Entities\User::class, $result);
+        self::assertInstanceOf(Entities\User::class, $result);
 
         $result = $service->resetTotp('userId');
-        $this->assertInstanceOf(Entities\User::class, $result);
+        self::assertInstanceOf(Entities\User::class, $result);
 
         $result = $service->activate('token');
-        $this->assertInstanceOf(Entities\User::class, $result);
+        self::assertInstanceOf(Entities\User::class, $result);
     }
 
     /**
@@ -776,11 +741,9 @@ class ServiceTest extends BaseTestCase
         $handler = $this->createMock(CurlHandler::class);
 
         $handler
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'coupons-redemptions/dummy')
-            ));
+            ->willReturn($client->createResponse()->withHeader('Location', 'coupons-redemptions/dummy'));
 
         $client = new Client([
             'apiKey' => 'QWERTY',
@@ -790,10 +753,10 @@ class ServiceTest extends BaseTestCase
         $service = $client->couponsRedemptions();
 
         $result = $service->redeem([]);
-        $this->assertInstanceOf(Entities\Coupons\Redemption::class, $result);
+        self::assertInstanceOf(Entities\Coupons\Redemption::class, $result);
 
         $result = $service->cancel('dummy');
-        $this->assertInstanceOf(Entities\Coupons\Redemption::class, $result);
+        self::assertInstanceOf(Entities\Coupons\Redemption::class, $result);
     }
 
     /**
@@ -807,11 +770,9 @@ class ServiceTest extends BaseTestCase
         $handler = $this->createMock(CurlHandler::class);
 
         $handler
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'bank-accounts/dummy')
-            ));
+            ->willReturn($client->createResponse()->withHeader('Location', 'bank-accounts/dummy'));
 
         $client = new Client([
             'apiKey' => 'QWERTY',
@@ -820,7 +781,7 @@ class ServiceTest extends BaseTestCase
         $service = $client->bankAccounts();
 
         $result = $service->deactivate('dummy');
-        $this->assertInstanceOf(Entities\BankAccount::class, $result);
+        self::assertInstanceOf(Entities\BankAccount::class, $result);
     }
 
     /**
@@ -834,11 +795,9 @@ class ServiceTest extends BaseTestCase
         $handler = $this->createMock(CurlHandler::class);
 
         $handler
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'paypal-accounts/dummy')
-            ));
+            ->willReturn($client->createResponse()->withHeader('Location', 'paypal-accounts/dummy'));
 
         $client = new Client([
             'apiKey' => 'QWERTY',
@@ -847,7 +806,7 @@ class ServiceTest extends BaseTestCase
         $service = $client->payPalAccounts();
 
         $result = $service->deactivate('dummy');
-        $this->assertInstanceOf(Entities\PayPalAccount::class, $result);
+        self::assertInstanceOf(Entities\PayPalAccount::class, $result);
     }
 
     /**
@@ -861,11 +820,9 @@ class ServiceTest extends BaseTestCase
         $handler = $this->createMock(CurlHandler::class);
 
         $handler
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'tokens/dummy')
-            ));
+            ->willReturn($client->createResponse()->withHeader('Location', 'tokens/dummy'));
 
         $client = new Client([
             'apiKey' => 'QWERTY',
@@ -874,7 +831,7 @@ class ServiceTest extends BaseTestCase
         $service = $client->paymentTokens();
 
         $result = $service->expire('dummy');
-        $this->assertInstanceOf(Entities\PaymentToken::class, $result);
+        self::assertInstanceOf(Entities\PaymentToken::class, $result);
     }
 
     /**
@@ -888,11 +845,9 @@ class ServiceTest extends BaseTestCase
         $handler = $this->createMock(CurlHandler::class);
 
         $handler
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('__invoke')
-            ->will($this->returnValue(
-                $client->createResponse()->withHeader('Location', 'lists/dummy')
-            ));
+            ->willReturn($client->createResponse()->withHeader('Location', 'lists/dummy'));
 
         $client = new Client([
             'apiKey' => 'QWERTY',
@@ -901,7 +856,7 @@ class ServiceTest extends BaseTestCase
         $service = $client->lists();
 
         $result = $service->loadVersion('dummy', 1);
-        $this->assertInstanceOf(Entities\ValuesList::class, $result);
+        self::assertInstanceOf(Entities\ValuesList::class, $result);
     }
 
     /**
@@ -915,7 +870,7 @@ class ServiceTest extends BaseTestCase
         /** @var CurlHandler|MockObject $handler */
         $handler = $this->createMock(CurlHandler::class);
 
-        $handler->expects($this->any())->method('__invoke')->willReturn($response);
+        $handler->expects(self::any())->method('__invoke')->willReturn($response);
 
         $client = new Client([
             'apiKey' => 'QWERTY',
@@ -938,16 +893,15 @@ class ServiceTest extends BaseTestCase
         /** @var CurlHandler|MockObject $handler */
         $handler = $this->createMock(CurlHandler::class);
 
-        $handler->expects($this->any())->method('__invoke')->willReturn($response);
+        $handler->expects(self::any())->method('__invoke')->willReturn($response);
 
         $client = new Client([
             'apiKey' => 'QWERTY',
             'httpHandler' => $handler,
         ]);
         $service = $client->webhooksTracking();
-        $result = $service->resend('dummy');
 
-        $this->assertNull($result);
+        self::assertNull($service->resend('dummy'));
     }
 
     /**
@@ -961,7 +915,7 @@ class ServiceTest extends BaseTestCase
         /** @var CurlHandler|MockObject $handler */
         $handler = $this->createMock(CurlHandler::class);
 
-        $handler->expects($this->any())->method('__invoke')->willReturn($response);
+        $handler->expects(self::any())->method('__invoke')->willReturn($response);
 
         $client = new Client([
             'apiKey' => 'QWERTY',
