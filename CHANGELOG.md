@@ -23,6 +23,7 @@ Security - in case of vulnerabilities.
 
 ### Added
 
+- [x] Added **Tags API**
 - [x] Added new properties to `Transaction`: `disputeTime` and `disputeStatus`
 - [x] Added new properties to `Dispute`: `transaction`, `category`, `rawResponse`, `caseId`
 - [x] Added new property to `Customer`: `revision`
