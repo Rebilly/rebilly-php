@@ -1049,6 +1049,33 @@ class ServiceTest extends BaseTestCase
     }
 
     /**
+     * @test
+     */
+    public function tagService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->createMock(CurlHandler::class);
+
+        $handler
+            ->expects(self::any())
+            ->method('__invoke')
+            ->willReturn($client->createResponse());
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+
+        $service = $client->tags();
+
+        self::assertNull($service->tagCustomer('dummy', 'customer-1'));
+        self::assertNull($service->untagCustomer('dummy', 'customer-1'));
+        self::assertNull($service->tagCustomers('dummy', ['customer-1']));
+    }
+
+    /**
      * @return array
      */
     public function provideServiceClasses()
@@ -1260,6 +1287,11 @@ class ServiceTest extends BaseTestCase
                 'paymentInstruments',
                 Services\PaymentInstrumentService::class,
                 Entities\CommonPaymentInstrument::class,
+            ],
+            [
+                'tags',
+                Services\TagService::class,
+                Entities\Tag::class,
             ],
         ];
     }
