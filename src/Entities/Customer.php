@@ -375,4 +375,24 @@ final class Customer extends Entity
     {
         return $this->getAttribute('revision');
     }
+
+    /**
+     * @return array|Tag[]
+     */
+    public function getTags()
+    {
+        return $this->getAttribute('tags');
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return array|Tag[]
+     */
+    public function createTags(array $data)
+    {
+        return array_map(function ($element) {
+            return new Tag($element);
+        }, $data);
+    }
 }
