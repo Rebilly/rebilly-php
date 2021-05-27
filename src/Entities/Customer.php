@@ -383,7 +383,6 @@ final class Customer extends Entity
     {
         return $this->getAttribute('tags');
     }
-    
     /**
      * @param array $data
      *
