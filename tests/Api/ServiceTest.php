@@ -1061,7 +1061,7 @@ class ServiceTest extends BaseTestCase
         $handler
             ->expects(self::any())
             ->method('__invoke')
-            ->willReturn($client->createResponse());
+            ->willReturn($client->createResponse()->withStatus(204));
 
         $client = new Client([
             'apiKey' => 'QWERTY',
