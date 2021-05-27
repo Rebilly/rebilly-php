@@ -11,6 +11,8 @@
 
 namespace Rebilly\Services;
 
+use ArrayObject;
+use JsonSerializable;
 use Rebilly\Entities\Blocklist;
 use Rebilly\Http\Exception\DataValidationException;
 use Rebilly\Http\Exception\NotFoundException;

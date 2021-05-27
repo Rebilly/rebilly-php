@@ -23,6 +23,7 @@ Security - in case of vulnerabilities.
 
 ### Added
 
+- [x] Added **Tags API**
 - [x] Added new properties to `Transaction`: `disputeTime`, `disputeStatus`, `isRebill`, `3ds`, `riskScore`, `retryNumber`, `isReconciled`, `hadDiscrepancy`, `hasBumpOffer`, `hasAmountAdjustment`, `billingDescriptor`
 - [x] Added new properties to `Dispute`: `transaction`, `category`, `rawResponse`, `caseId`
 - [x] Added new properties to `Customer`: `revision`, `tags`

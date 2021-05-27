@@ -13,7 +13,7 @@ namespace Rebilly\Tests\Http;
 
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\RequestException;
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
+use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Rebilly\Client;
@@ -38,17 +38,16 @@ class GuzzleAdapterTest extends TestCase
         /** @var GuzzleClient|MockObject $guzzle */
         $guzzle = $this->createMock(GuzzleClient::class);
         $guzzle
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('send')
-            ->will($this->returnValue($response))
-        ;
+            ->willReturn($response);
 
         $handler = new GuzzleAdapter($guzzle);
 
         $response = call_user_func($handler, $request);
 
-        $this->assertInstanceOf(Response::class, $response);
-        $this->assertSame(204, $response->getStatusCode());
+        self::assertInstanceOf(Response::class, $response);
+        self::assertSame(204, $response->getStatusCode());
     }
 
     /**
@@ -63,17 +62,15 @@ class GuzzleAdapterTest extends TestCase
         /** @var GuzzleClient|MockObject $guzzle */
         $guzzle = $this->createMock(GuzzleClient::class);
         $guzzle
-            ->expects($this->any())
             ->method('send')
-            ->will($this->throwException(new RequestException('', $request)))
-        ;
+            ->willThrowException(new RequestException('', $request));
 
         $handler = new GuzzleAdapter($guzzle);
 
         /** @var Response $response */
         $response = call_user_func($handler, $request);
 
-        $this->assertInstanceOf(Response::class, $response);
-        $this->assertSame(444, $response->getStatusCode());
+        self::assertInstanceOf(Response::class, $response);
+        self::assertSame(444, $response->getStatusCode());
     }
 }
