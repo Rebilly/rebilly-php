@@ -20,6 +20,7 @@ Security - in case of vulnerabilities.
 - [x] The exception `UnprocessableEntityException` is deprecated in favor of `DataValidationException`.
   New exception has new method `getValidationErrors` which returns the errors in new format.
 - [x] The `KycDocument` property `fileId` was made deprecated.
+- [x] The `Transaction` `scheduledTime` property is deprecated.
 
 ### Added
 
@@ -33,6 +34,7 @@ Security - in case of vulnerabilities.
 - [x] Added new property to `KycDocument`: `fileIds`
 - [x] Added new method to `GatewayAccountService`: `checkCredentials`
 - [x] Added new property to `Transaction`: `referenceData` 
+- [x] Added new properties to `Transaction`: `settlementTime` and `discrepancyTime`
 
 ### Changed
 
