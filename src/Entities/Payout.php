@@ -289,4 +289,20 @@ final class Payout extends Entity
     {
         return $this->setAttribute('isMerchantInitiated', $value);
     }
+
+    /**
+     * @return string
+     */
+    public function getSettlementTime()
+    {
+        return $this->getAttribute('settlementTime');
+    }
+
+    /**
+     * @return string
+     */
+    public function getDiscrepancyTime()
+    {
+        return $this->getAttribute('discrepancyTime');
+    }
 }
