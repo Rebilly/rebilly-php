@@ -20,7 +20,6 @@ Security - in case of vulnerabilities.
 - [x] The exception `UnprocessableEntityException` is deprecated in favor of `DataValidationException`.
   New exception has new method `getValidationErrors` which returns the errors in new format.
 - [x] The `KycDocument` property `fileId` is deprecated.
-- [x] The `Transaction` property `scheduledTime` is deprecated.
 
 ### Added
 
@@ -46,6 +45,7 @@ Security - in case of vulnerabilities.
 - [x] Removed `PayPalAccountService::activate()` method.
 - [x] Removed `TransactionService::cancel()` method.
 - [x] Removed `PaymentCardAuthorization` entity.
+- [x] Removed deprecated `Transaction` property: `scheduledTime`.
 
 ## [2.11.0] 2021-03-03
 
