@@ -25,16 +25,13 @@ Security - in case of vulnerabilities.
 ### Added
 
 - [x] Added **Tags API**
-- [x] Added new properties to `Transaction`: `disputeTime`, `disputeStatus`, `isRebill`, `3ds`, `riskScore`, `retryNumber`, `isReconciled`, `hadDiscrepancy`, `hasBumpOffer`, `hasAmountAdjustment`, `billingDescriptor`
+- [x] Added new properties to `Transaction`: `disputeTime`, `disputeStatus`, `isRebill`, `3ds`, `riskScore`, `retryNumber`, `isReconciled`, `hadDiscrepancy`, `hasBumpOffer`, `hasAmountAdjustment`, `billingDescriptor`, `referenceData`, `settlementTime`, `discrepancyTime`
 - [x] Added new properties to `Dispute`: `transaction`, `category`, `rawResponse`, `caseId`
 - [x] Added new properties to `Customer`: `revision`, `tags`
 - [x] Added new properties to `Invoice`: `revision`, `amountDue`, `autopayRetryNumber`, `dueReminderTime`, `dueReminderNumber`, `paymentFormUrl`
 - [x] Added new properties to `Subscription`: `revision`, `isTrialOnly`, `poNumber`, `renewalReminderTime`, `renewalReminderNumber`, `trialReminderTime`, `trialReminderNumber`
-- [x] Added new property to `KycDocument`: `documentSubtype`
-- [x] Added new property to `KycDocument`: `fileIds`
+- [x] Added new properties to `KycDocument`: `documentSubtype`, `fileIds`
 - [x] Added new method to `GatewayAccountService`: `checkCredentials`
-- [x] Added new property to `Transaction`: `referenceData` 
-- [x] Added new properties to `Transaction`: `settlementTime` and `discrepancyTime`
 
 ### Changed
 
