@@ -41,6 +41,9 @@ Security - in case of vulnerabilities.
 
 ### Removed
 
+- [x] Removed `Trasnsaction::getRetriesResult()` and `Transaction::getRetriedTransactionId()` methods.
+- [x] Removed `PaymentRetryAttempt`, `SchedulePaymentRetry` classes.
+- [x] Removed `RuleAction::NAME_SCHEDULE_PAYMENT_RETRY` constant.
 - [x] Removed `put` method from `OrganizationService::create()` method.
 - [x] Removed `OrganizationService::delete()` method.
 - [x] Removed `PaymentCardService::authorize()` method.
