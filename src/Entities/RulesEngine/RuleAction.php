@@ -37,8 +37,6 @@ abstract class RuleAction extends Resource
 
     public const NAME_PICK_GATEWAY_ACCOUNT = 'pick-gateway-account';
 
-    public const NAME_SCHEDULE_PAYMENT_RETRY = 'schedule-payment-retry';
-
     public const NAME_SCHEDULE_PAYMENT = 'schedule-payment';
 
     public const NAME_SCHEDULE_INVOICE_RETRY = 'schedule-invoice-retry';
@@ -76,7 +74,6 @@ abstract class RuleAction extends Resource
             self::NAME_CANCEL_SCHEDULED_PAYMENTS,
             self::NAME_GUESS_PAYMENT_CARD_EXPIRATION,
             self::NAME_PICK_GATEWAY_ACCOUNT,
-            self::NAME_SCHEDULE_PAYMENT_RETRY,
             self::NAME_SCHEDULE_PAYMENT,
             self::NAME_SCHEDULE_INVOICE_RETRY,
             self::NAME_SEND_EMAIL,
@@ -122,10 +119,6 @@ abstract class RuleAction extends Resource
                 break;
             case self::NAME_PICK_GATEWAY_ACCOUNT:
                 $action = new Actions\PickGatewayAccount($data);
-
-                break;
-            case self::NAME_SCHEDULE_PAYMENT_RETRY:
-                $action = new Actions\SchedulePaymentRetry($data);
 
                 break;
             case self::NAME_SCHEDULE_PAYMENT:

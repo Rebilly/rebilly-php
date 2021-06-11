@@ -205,7 +205,6 @@ class ApiTest extends TestCase
             [Entities\PaymentInstruments\BankAccountPaymentInstrument::class, null],
             [Entities\PaymentInstruments\PaymentCardPaymentInstrument::class, null],
             [Entities\PaymentInstruments\KhelocardCardPaymentInstrument::class, null],
-            [Entities\PaymentRetryAttempt::class],
             [Entities\GatewayAccountDowntime::class],
             [Entities\PlaidCredential::class, 'hash'],
             [Entities\ExperianCredential::class, 'hash'],
