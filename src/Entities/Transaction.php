@@ -141,9 +141,17 @@ final class Transaction extends Entity
     /**
      * @return string
      */
-    public function getScheduledTime()
+    public function getSettlementTime()
     {
-        return $this->getAttribute('scheduledTime');
+        return $this->getAttribute('settlementTime');
+    }
+
+    /**
+     * @return string
+     */
+    public function getDiscrepancyTime()
+    {
+        return $this->getAttribute('discrepancyTime');
     }
 
     /**
