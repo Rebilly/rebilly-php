@@ -13,6 +13,7 @@ namespace Rebilly\Entities;
 
 use DomainException;
 use Rebilly\Entities\Subscriptions\InvoiceTimeShift;
+use Rebilly\Entities\Subscriptions\PlanItem;
 use Rebilly\Entities\Subscriptions\RecurringInterval;
 use Rebilly\Entities\Subscriptions\SubscriptionTrial;
 use Rebilly\Rest\Entity;
@@ -420,7 +421,11 @@ final class Subscription extends Entity
     public function createItems(array $data)
     {
         return array_map(
-            function (array $item) {
+            function ($item) {
+                if ($item instanceof PlanItem) {
+                    return $item;
+                }
+
                 return new Subscriptions\PlanItem($item);
             },
             $data

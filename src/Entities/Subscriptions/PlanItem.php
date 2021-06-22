@@ -11,11 +11,24 @@
 
 namespace Rebilly\Entities\Subscriptions;
 
+use Rebilly\Entities\Plan;
 use Rebilly\Rest\Resource;
 
 final class PlanItem extends Resource
 {
+    public function getPlan(): Plan
+    {
+        return new Plan($this->getAttribute('plan'));
+    }
+
+    public function setPlan($plan): self
+    {
+        return $this->setAttribute('plan', $plan);
+    }
+
     /**
+     * @deprecated
+     *
      * @return null|string
      */
     public function getPlanId()
@@ -24,6 +37,8 @@ final class PlanItem extends Resource
     }
 
     /**
+     * @deprecated
+     *
      * @param null|string $value
      *
      * @return $this
