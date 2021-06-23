@@ -16,6 +16,7 @@ use PHPUnit\Framework;
 use Rebilly\Entities;
 use Rebilly\Entities\PaymentInstruments\KhelocardCardPaymentInstrument;
 use Rebilly\Entities\PaymentRetryInstructions;
+use Rebilly\Entities\RulesEngine\Actions\GatewayAccountPick\AcquirerWeights;
 use Rebilly\Entities\Transactions;
 
 /**
@@ -112,6 +113,8 @@ abstract class TestCase extends Framework\TestCase
             case 'secretToken':
             case 'caseId':
             case 'resourceId':
+            case 'alternateGatewayAccountIfRejected':
+            case 'alternateGatewayAccountIfOptional':
                 return self::uuid();
             case 'dueTime':
             case 'expiredTime':
@@ -131,6 +134,7 @@ abstract class TestCase extends Framework\TestCase
             case 'autopayScheduledTime':
             case 'processedTime':
             case 'deactivationTime':
+            case 'splitTestStartTime':
                 return date(self::DATE_FORMAT);
             case 'unitPrice':
             case 'unitPriceAmount':
@@ -154,6 +158,7 @@ abstract class TestCase extends Framework\TestCase
             case 'publicKey':
             case 'username':
             case 'message':
+            case 'title':
                 return self::TEST_WORD;
             case 'redirectUrl':
             case 'notificationUrl':
@@ -212,6 +217,8 @@ abstract class TestCase extends Framework\TestCase
                 return self::TEST_PAN;
             case 'cvv':
             case 'cap':
+            case 'ttl':
+            case 'score':
                 return random_int(100, 999);
             case 'expYear':
                 return (int) date('Y');
@@ -273,6 +280,8 @@ abstract class TestCase extends Framework\TestCase
             case 'keepTrial':
             case 'requiresShipping':
             case 'isJavaEnabled':
+            case 'isMandatory':
+            case 'overrideRetryInstruction':
                 return true;
             case 'credentialTtl':
             case 'authTokenTtl':
@@ -305,6 +314,9 @@ abstract class TestCase extends Framework\TestCase
             case 'extension':
                 return self::randomElements(Entities\File::allowedTypes())[0];
             case 'tags':
+            case 'addingTags':
+            case 'removingTags':
+            case 'query':
                 return [self::TEST_WORD];
             case 'redirect':
                 return ['url' => self::TEST_URL, 'timeout' => 5];
@@ -338,6 +350,8 @@ abstract class TestCase extends Framework\TestCase
                         return self::TEST_WORD;
                     case Entities\KycDocuments\RejectionReason::class:
                         return self::randomElements(Entities\KycDocuments\RejectionReason::allowedRejectionTypes())[0];
+                    case Entities\RulesEngine\Actions\Blacklist::class:
+                        return self::randomElements(Entities\RulesEngine\Actions\Blacklist::types())[0];
                     default:
                         throw new InvalidArgumentException(
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
@@ -385,6 +399,7 @@ abstract class TestCase extends Framework\TestCase
                 return '/\w\d{6,}/';
             case 'currency':
             case 'unitPriceCurrency':
+            case 'bypassCurrencyToDisplay':
                 return 'USD';
             case 'relatedType':
                 switch ($class) {
@@ -439,6 +454,7 @@ abstract class TestCase extends Framework\TestCase
             case 'defaultPaymentMethod':
                 switch ($class) {
                     case Entities\ApiTracking::class:
+                    case Entities\RulesEngine\Actions\TriggerWebhook::class:
                         return 'GET';
                     case Entities\GatewayAccount::class:
                         return Entities\PaymentMethod::METHOD_PAYMENT_CARD;
@@ -477,6 +493,8 @@ abstract class TestCase extends Framework\TestCase
                 return random_int(25, 100);
             case 'duration':
                 return random_int(1, 100);
+            case 'attempts':
+                return [];
             case 'paymentInstrument':
                 switch ($class) {
                     case Entities\Transaction::class:
@@ -514,6 +532,18 @@ abstract class TestCase extends Framework\TestCase
                         return 200;
                     case Entities\PaymentCard::class:
                     case Entities\RulesEngine\Bind::class:
+                    case Entities\RulesEngine\Actions\AddRiskScore::class:
+                    case Entities\RulesEngine\Actions\Blacklist::class:
+                    case Entities\RulesEngine\Actions\CancelScheduledPayments::class:
+                    case Entities\RulesEngine\Actions\GuessPaymentCardExpiration::class:
+                    case Entities\RulesEngine\Actions\PickGatewayAccount::class:
+                    case Entities\RulesEngine\Actions\RequestKyc::class:
+                    case Entities\RulesEngine\Actions\ScheduleInvoiceRetry::class:
+                    case Entities\RulesEngine\Actions\SchedulePayment::class:
+                    case Entities\RulesEngine\Actions\SendEmail::class:
+                    case Entities\RulesEngine\Actions\StopSubscriptions::class:
+                    case Entities\RulesEngine\Actions\TagOrUntagCustomer::class:
+                    case Entities\RulesEngine\Actions\TriggerWebhook::class:
                         return 'active';
                     case Entities\Dispute::class:
                     default:
@@ -709,6 +739,24 @@ abstract class TestCase extends Framework\TestCase
                 return [];
             case 'resourceType':
                 return 'invoice';
+            case 'pickInstruction':
+                return new AcquirerWeights();
+            case 'excludePolicy':
+                return self::randomElements(Entities\RulesEngine\Actions\RequestKyc::excludePolicies())[0];
+            case 'promptPolicy':
+                return self::randomElements(Entities\RulesEngine\Actions\RequestKyc::promptPolicies())[0];
+            case 'rejectedBeforeTransactionProcessPolicy':
+                return self::randomElements(Entities\RulesEngine\Actions\RequestKyc::rejectedBeforeTransactionProcessPolicies())[0];
+            case 'rejectedAfterTransactionProcessPolicy':
+                return self::randomElements(Entities\RulesEngine\Actions\RequestKyc::rejectedAfterTransactionProcessPolicies())[0];
+            case 'optionalPolicy':
+                return self::randomElements(Entities\RulesEngine\Actions\RequestKyc::optionalPolicies())[0];
+            case 'afterAttemptPolicy':
+                return self::randomElements(Entities\RulesEngine\Actions\ScheduleInvoiceRetry::afterAttemptPolicies())[0];
+            case 'afterRetryEndPolicy':
+                return self::randomElements(Entities\RulesEngine\Actions\ScheduleInvoiceRetry::afterRetryEndPolicies())[0];
+            case 'amountPolicy':
+                return self::randomElements(Entities\RulesEngine\Actions\SchedulePayment::amountPolicies())[0];
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)

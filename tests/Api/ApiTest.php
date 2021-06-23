@@ -217,6 +217,18 @@ class ApiTest extends TestCase
             [Entities\KycDocuments\RejectionReason::class],
             [Entities\ResourceAttachment::class],
             [Entities\Payout::class],
+            [Entities\RulesEngine\Actions\AddRiskScore::class],
+            [Entities\RulesEngine\Actions\Blacklist::class],
+            [Entities\RulesEngine\Actions\CancelScheduledPayments::class],
+            [Entities\RulesEngine\Actions\GuessPaymentCardExpiration::class],
+            [Entities\RulesEngine\Actions\PickGatewayAccount::class],
+            [Entities\RulesEngine\Actions\RequestKyc::class],
+            [Entities\RulesEngine\Actions\ScheduleInvoiceRetry::class],
+            [Entities\RulesEngine\Actions\SchedulePayment::class],
+            [Entities\RulesEngine\Actions\SendEmail::class, 'id', ['emails']],
+            [Entities\RulesEngine\Actions\StopSubscriptions::class],
+            [Entities\RulesEngine\Actions\TagOrUntagCustomer::class],
+            [Entities\RulesEngine\Actions\TriggerWebhook::class],
         ];
 
         foreach ($cases as $case) {
