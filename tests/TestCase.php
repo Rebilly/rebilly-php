@@ -498,7 +498,6 @@ abstract class TestCase extends Framework\TestCase
                         ],
                     ]
                 );
-                // no break
             case 'reasonCode':
                 return '1000';
             case 'status':
