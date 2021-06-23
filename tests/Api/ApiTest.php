@@ -154,6 +154,7 @@ class ApiTest extends TestCase
             [Entities\AuthenticationOptions::class, null],
             [Entities\AuthenticationToken::class, 'token'],
             [Entities\Blacklist::class, 'id', ['expireTime', 'expiredTime']],
+            [Entities\Blocklist::class, 'id', ['expireTime', 'expiredTime']],
             [Entities\Contact\Email::class],
             [Entities\Contact\PhoneNumber::class],
             [Entities\CustomerCredential::class],
@@ -209,6 +210,7 @@ class ApiTest extends TestCase
             [Entities\PlaidCredential::class, 'hash'],
             [Entities\ExperianCredential::class, 'hash'],
             [Entities\CommonPaymentInstrument::class],
+            [Entities\BrowserData::class],
         ];
 
         foreach ($cases as $case) {

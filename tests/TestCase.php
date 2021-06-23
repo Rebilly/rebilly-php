@@ -269,6 +269,7 @@ abstract class TestCase extends Framework\TestCase
             case 'useStripe':
             case 'keepTrial':
             case 'requiresShipping':
+            case 'isJavaEnabled':
                 return true;
             case 'credentialTtl':
             case 'authTokenTtl':
@@ -343,6 +344,7 @@ abstract class TestCase extends Framework\TestCase
                     case Entities\Contact\Email::class:
                     case Entities\Contact\PhoneNumber::class:
                     case Entities\Blacklist::class:
+                    case Entities\Blocklist::class:
                         return self::TEST_WORD;
                     default:
                         throw new InvalidArgumentException(
@@ -485,22 +487,17 @@ abstract class TestCase extends Framework\TestCase
                     'method' => Entities\PaymentMethod::METHOD_PAYMENT_CARD,
                 ];
             case 'retryInstruction':
-                switch ($class) {
-                    case Entities\Invoice::class:
-                        return new Entities\InvoiceRetryInstructions\RetryInstruction(
+                return new Entities\InvoiceRetryInstructions\RetryInstruction(
+                    [
+                        'afterAttemptPolicies' => [Entities\InvoiceRetryInstructions\RetryInstruction::AFTER_ATTEMPT_POLICY_CHANGE_SUBSCRIPTION_RENEWAL_TIME],
+                        'afterRetryEndPolicies' => [Entities\InvoiceRetryInstructions\RetryInstruction::AFTER_RETRY_END_POLICY_ABANDON_INVOICE],
+                        'attempts' => [
                             [
-                                'afterAttemptPolicies' => [Entities\InvoiceRetryInstructions\RetryInstruction::AFTER_ATTEMPT_POLICY_CHANGE_SUBSCRIPTION_RENEWAL_TIME],
-                                'afterRetryEndPolicies' => [Entities\InvoiceRetryInstructions\RetryInstruction::AFTER_RETRY_END_POLICY_ABANDON_INVOICE],
-                                'attempts' => [
-                                    [
-                                        'scheduleInstruction' => ['method' => PaymentRetryInstructions\ScheduleInstruction::IMMEDIATELY],
-                                    ],
-                                ],
-                            ]
-                        );
-                    default:
-                        return new Entities\PaymentRetryInstruction();
-                }
+                                'scheduleInstruction' => ['method' => PaymentRetryInstructions\ScheduleInstruction::IMMEDIATELY],
+                            ],
+                        ],
+                    ]
+                );
                 // no break
             case 'reasonCode':
                 return '1000';
@@ -691,6 +688,14 @@ abstract class TestCase extends Framework\TestCase
                     return self::TEST_PAN;
                 }
                 // no break
+            case 'colorDepth':
+                return 24;
+            case 'language':
+                return 'en-US';
+            case 'screenWidth':
+            case 'screenHeight':
+            case 'timeZoneOffset':
+                return random_int(100, 1410);
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
