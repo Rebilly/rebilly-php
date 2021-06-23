@@ -494,6 +494,7 @@ abstract class TestCase extends Framework\TestCase
             case 'duration':
                 return random_int(1, 100);
             case 'attempts':
+            case 'actions':
                 return [];
             case 'paymentInstrument':
                 switch ($class) {
@@ -735,8 +736,6 @@ abstract class TestCase extends Framework\TestCase
                 return random_int(100, 1410);
             case 'labels':
                 return ['label-1'];
-            case 'actions':
-                return [];
             case 'resourceType':
                 return 'invoice';
             case 'pickInstruction':
