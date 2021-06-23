@@ -757,6 +757,15 @@ abstract class TestCase extends Framework\TestCase
                 return self::randomElements(Entities\RulesEngine\Actions\ScheduleInvoiceRetry::afterRetryEndPolicies())[0];
             case 'amountPolicy':
                 return self::randomElements(Entities\RulesEngine\Actions\SchedulePayment::amountPolicies())[0];
+            case 'weightedList':
+                return [
+                    [
+                        'weight' => 80,
+                    ],
+                    [
+                        'weight' => 20,
+                    ],
+                ];
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)

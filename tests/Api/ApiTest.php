@@ -229,6 +229,8 @@ class ApiTest extends TestCase
             [Entities\RulesEngine\Actions\StopSubscriptions::class],
             [Entities\RulesEngine\Actions\TagOrUntagCustomer::class],
             [Entities\RulesEngine\Actions\TriggerWebhook::class],
+            [Entities\RulesEngine\Actions\GatewayAccountPick\AcquirerWeights::class],
+            [Entities\RulesEngine\Actions\GatewayAccountPick\AccountWeights::class],
         ];
 
         foreach ($cases as $case) {
