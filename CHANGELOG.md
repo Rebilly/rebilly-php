@@ -15,6 +15,10 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
+_TBD_
+
+## [2.12.0] 2021-06-22
+
 ### Deprecated
 
 - [x] The exception `UnprocessableEntityException` is deprecated in favor of `DataValidationException`.
