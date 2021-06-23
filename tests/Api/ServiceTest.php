@@ -1293,6 +1293,16 @@ class ServiceTest extends BaseTestCase
                 Services\TagService::class,
                 Entities\Tag::class,
             ],
+            [
+                'kycDocuments',
+                Services\KycService::class,
+                Entities\KycDocuments\KycDocument::class,
+            ],
+            [
+                'eventRules',
+                Services\RuleService::class,
+                Entities\RulesEngine\EventRules::class,
+            ],
         ];
     }
 }
