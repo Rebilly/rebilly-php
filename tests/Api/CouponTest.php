@@ -17,10 +17,12 @@ use Rebilly\Entities\Coupons\Discounts\Fixed;
 use Rebilly\Entities\Coupons\Discounts\Percent;
 use Rebilly\Entities\Coupons\Restriction;
 use Rebilly\Entities\Coupons\Restrictions\DiscountsPerRedemption;
+use Rebilly\Entities\Coupons\Restrictions\MinimumOrderAmount;
 use Rebilly\Entities\Coupons\Restrictions\RedemptionsPerCustomer;
 use Rebilly\Entities\Coupons\Restrictions\RestrictToInvoices;
 use Rebilly\Entities\Coupons\Restrictions\RestrictToPlans;
 use Rebilly\Entities\Coupons\Restrictions\RestrictToSubscriptions;
+use Rebilly\Entities\Coupons\Restrictions\TotalRedemptions;
 use Rebilly\Tests\TestCase as BaseTestCase;
 
 /**
@@ -191,6 +193,34 @@ class CouponTest extends BaseTestCase
         $value = Restriction::createFromData($data);
         self::assertInstanceOf(Restriction::class, $value);
         self::assertSame($data, $value->jsonSerialize());
+    }
+
+    /**
+     * @test
+     */
+    public function restrictionMinimumOrderAmount()
+    {
+        $restriction = new MinimumOrderAmount();
+        $restriction->setQuantity(3);
+        $restriction->setCurrency('USD');
+
+        self::assertInstanceOf(MinimumOrderAmount::class, $restriction);
+        self::assertSame(3, $restriction->getQuantity());
+        self::assertSame('USD', $restriction->getCurrency());
+        self::assertSame('minimum-order-amount', $restriction->getType());
+    }
+
+    /**
+     * @test
+     */
+    public function restrictionTotalRedemptions()
+    {
+        $restriction = new TotalRedemptions();
+        $restriction->setQuantity(3);
+
+        self::assertInstanceOf(TotalRedemptions::class, $restriction);
+        self::assertSame(3, $restriction->getQuantity());
+        self::assertSame('total-redemptions', $restriction->getType());
     }
 
     /**
