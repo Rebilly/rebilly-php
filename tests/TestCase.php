@@ -152,6 +152,7 @@ abstract class TestCase extends Framework\TestCase
             case 'hmacKey':
             case 'publicKey':
             case 'username':
+            case 'message':
                 return self::TEST_WORD;
             case 'redirectUrl':
             case 'notificationUrl':
@@ -334,6 +335,8 @@ abstract class TestCase extends Framework\TestCase
                         return self::randomElements(Entities\Transaction::types())[0];
                     case Entities\Session::class:
                         return self::TEST_WORD;
+                    case Entities\KycDocuments\RejectionReason::class:
+                        return self::randomElements(Entities\KycDocuments\RejectionReason::allowedRejectionTypes())[0];
                     default:
                         throw new InvalidArgumentException(
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
