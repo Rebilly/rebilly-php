@@ -215,6 +215,8 @@ class ApiTest extends TestCase
             [Entities\GatewayAccountLimit::class],
             [Entities\RulesEngine\Bind::class],
             [Entities\KycDocuments\RejectionReason::class],
+            [Entities\ResourceAttachment::class],
+            [Entities\Payout::class],
         ];
 
         foreach ($cases as $case) {

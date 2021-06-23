@@ -111,6 +111,7 @@ abstract class TestCase extends Framework\TestCase
             case 'clientId':
             case 'secretToken':
             case 'caseId':
+            case 'resourceId':
                 return self::uuid();
             case 'dueTime':
             case 'expiredTime':
@@ -479,6 +480,7 @@ abstract class TestCase extends Framework\TestCase
             case 'paymentInstrument':
                 switch ($class) {
                     case Entities\Transaction::class:
+                    case Entities\Payout::class:
                         return new Entities\PaymentInstruments\PaymentCardInstrument([
                             'method' => Entities\PaymentMethod::METHOD_PAYMENT_CARD,
                         ]);
@@ -705,6 +707,8 @@ abstract class TestCase extends Framework\TestCase
                 return ['label-1'];
             case 'actions':
                 return [];
+            case 'resourceType':
+                return 'invoice';
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
