@@ -211,6 +211,9 @@ class ApiTest extends TestCase
             [Entities\ExperianCredential::class, 'hash'],
             [Entities\CommonPaymentInstrument::class],
             [Entities\BrowserData::class],
+            [Entities\Tag::class],
+            [Entities\GatewayAccountLimit::class],
+            [Entities\RulesEngine\Bind::class],
         ];
 
         foreach ($cases as $case) {

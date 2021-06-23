@@ -209,6 +209,7 @@ abstract class TestCase extends Framework\TestCase
             case 'pan':
                 return self::TEST_PAN;
             case 'cvv':
+            case 'cap':
                 return random_int(100, 999);
             case 'expYear':
                 return (int) date('Y');
@@ -507,6 +508,7 @@ abstract class TestCase extends Framework\TestCase
                     case Entities\ApiTracking::class:
                         return 200;
                     case Entities\PaymentCard::class:
+                    case Entities\RulesEngine\Bind::class:
                         return 'active';
                     case Entities\Dispute::class:
                     default:
@@ -650,6 +652,7 @@ abstract class TestCase extends Framework\TestCase
                 return 'unit';
             case 'orderType':
                 return 'subscription-order';
+            case 'criteria':
             case 'additionalCriteria':
                 return [
                     'op' => 'equals',
@@ -695,6 +698,10 @@ abstract class TestCase extends Framework\TestCase
             case 'screenHeight':
             case 'timeZoneOffset':
                 return random_int(100, 1410);
+            case 'labels':
+                return ['label-1'];
+            case 'actions':
+                return [];
             default:
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
