@@ -119,13 +119,12 @@ final class InvoiceItemService extends Service
     }
 
     /**
-     * @param array|JsonSerializable|InvoiceItem $data
      * @param string $invoiceId
      * @param string $invoiceItemId
      *
      * @return InvoiceItem
      */
-    public function delete($data, $invoiceId, $invoiceItemId)
+    public function delete($invoiceId, $invoiceItemId)
     {
         return $this->client()->delete(
             'invoices/{invoiceId}/items/{invoiceItemId}',
