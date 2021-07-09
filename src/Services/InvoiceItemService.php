@@ -124,7 +124,7 @@ final class InvoiceItemService extends Service
      */
     public function delete($invoiceId, $invoiceItemId)
     {
-        return $this->client()->delete(
+        $this->client()->delete(
             'invoices/{invoiceId}/items/{invoiceItemId}',
             ['invoiceId' => $invoiceId, 'invoiceItemId' => $invoiceItemId]
         );
