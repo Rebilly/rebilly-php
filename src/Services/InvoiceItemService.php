@@ -121,8 +121,6 @@ final class InvoiceItemService extends Service
     /**
      * @param string $invoiceId
      * @param string $invoiceItemId
-     *
-     * @return InvoiceItem
      */
     public function delete($invoiceId, $invoiceItemId)
     {
