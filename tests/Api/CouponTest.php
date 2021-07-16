@@ -277,8 +277,20 @@ class CouponTest extends BaseTestCase
             ],
             [
                 [
+                    'type' => 'restrict-to-products',
+                    'productIds' => ['123', '234'],
+                ],
+            ],
+            [
+                [
                     'type' => 'restrict-to-subscriptions',
                     'subscriptionIds' => ['123', '234'],
+                ],
+            ],
+            [
+                [
+                    'type' => 'paid-by-time',
+                    'time' => '2021-01-01 00:00:00',
                 ],
             ],
         ];

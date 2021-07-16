@@ -19,6 +19,7 @@ Security - in case of vulnerabilities.
 
 - [x] Added `InvoiceItemService::update()` method.
 - [x] Added `InvoiceItemService::delete()` method.
+- [x] Added `restrict-to-products` and `paid-by-time` Coupon restrictions.
 
 ## [2.12.0] 2021-06-22
 
