@@ -31,6 +31,8 @@ abstract class Restriction extends Resource
 
     public const TYPE_RESTRICT_TO_PLANS = 'restrict-to-plans';
 
+    public const TYPE_RESTRICT_TO_PRODUCTS = 'restrict-to-products';
+
     public const TYPE_RESTRICT_TO_SUBSCRIPTIONS = 'restrict-to-subscriptions';
 
     public const TYPE_TOTAL_REDEMPTIONS = 'total-redemptions';
@@ -42,6 +44,7 @@ abstract class Restriction extends Resource
         self::TYPE_REDEMPTIONS_PER_CUSTOMER,
         self::TYPE_RESTRICT_TO_INVOICES,
         self::TYPE_RESTRICT_TO_PLANS,
+        self::TYPE_RESTRICT_TO_PRODUCTS,
         self::TYPE_RESTRICT_TO_SUBSCRIPTIONS,
         self::TYPE_TOTAL_REDEMPTIONS,
         self::TYPE_MINIMUM_ORDER_AMOUNT,
@@ -81,6 +84,10 @@ abstract class Restriction extends Resource
                 break;
             case self::TYPE_RESTRICT_TO_PLANS:
                 $restriction = new Restrictions\RestrictToPlans($data);
+
+                break;
+            case self::TYPE_RESTRICT_TO_PRODUCTS:
+                $restriction = new Restrictions\RestrictToProducts($data);
 
                 break;
             case self::TYPE_RESTRICT_TO_SUBSCRIPTIONS:
