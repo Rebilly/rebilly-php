@@ -39,8 +39,11 @@ abstract class Restriction extends Resource
 
     public const TYPE_MINIMUM_ORDER_AMOUNT = 'minimum-order-amount';
 
+    public const TYPE_PAID_BY_TIME = 'paid-by-time';
+
     protected static $supportedTypes = [
         self::TYPE_DISCOUNTS_PER_REDEMPTION,
+        self::TYPE_PAID_BY_TIME,
         self::TYPE_REDEMPTIONS_PER_CUSTOMER,
         self::TYPE_RESTRICT_TO_INVOICES,
         self::TYPE_RESTRICT_TO_PLANS,
@@ -72,6 +75,10 @@ abstract class Restriction extends Resource
         switch ($data['type']) {
             case self::TYPE_DISCOUNTS_PER_REDEMPTION:
                 $restriction = new Restrictions\DiscountsPerRedemption($data);
+
+                break;
+            case self::TYPE_PAID_BY_TIME:
+                $restriction = new Restrictions\PaidByTime($data);
 
                 break;
             case self::TYPE_REDEMPTIONS_PER_CUSTOMER:

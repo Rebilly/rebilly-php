@@ -287,6 +287,12 @@ class CouponTest extends BaseTestCase
                     'subscriptionIds' => ['123', '234'],
                 ],
             ],
+            [
+                [
+                    'type' => 'paid-by-time',
+                    'time' => '2021-01-01 00:00:00',
+                ],
+            ],
         ];
     }
 }
