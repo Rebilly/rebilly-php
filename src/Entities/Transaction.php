@@ -537,22 +537,6 @@ final class Transaction extends Entity
     /**
      * @return string
      */
-    public function getRetriesResult()
-    {
-        return $this->getAttribute('retriesResult');
-    }
-
-    /**
-     * @return string
-     */
-    public function getRetriedTransactionId()
-    {
-        return $this->getAttribute('retriedTransactionId');
-    }
-
-    /**
-     * @return string
-     */
     public function getRedirectUrl()
     {
         return $this->getAttribute('redirectUrl');

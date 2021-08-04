@@ -99,4 +99,34 @@ final class InvoiceItemService extends Service
             ['invoiceId' => $invoiceId]
         );
     }
+
+    /**
+     * @param array|JsonSerializable|InvoiceItem $data
+     * @param string $invoiceId
+     * @param string $invoiceItemId
+     *
+     * @throws DataValidationException The input data does not valid
+     *
+     * @return InvoiceItem
+     */
+    public function update($data, $invoiceId, $invoiceItemId)
+    {
+        return $this->client()->put(
+            $data,
+            'invoices/{invoiceId}/items/{invoiceItemId}',
+            ['invoiceId' => $invoiceId, 'invoiceItemId' => $invoiceItemId]
+        );
+    }
+
+    /**
+     * @param string $invoiceId
+     * @param string $invoiceItemId
+     */
+    public function delete($invoiceId, $invoiceItemId)
+    {
+        $this->client()->delete(
+            'invoices/{invoiceId}/items/{invoiceItemId}',
+            ['invoiceId' => $invoiceId, 'invoiceItemId' => $invoiceItemId]
+        );
+    }
 }

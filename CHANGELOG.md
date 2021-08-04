@@ -15,22 +15,35 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
+### Added
+
+- [x] Added `InvoiceItemService::update()` method.
+- [x] Added `InvoiceItemService::delete()` method.
+- [x] Added `restrict-to-products` and `paid-by-time` Coupon restrictions.
+- [x] Added new property to `Invoice`: `type`.
+
+## [2.12.0] 2021-06-22
+
 ### Deprecated
 
 - [x] The exception `UnprocessableEntityException` is deprecated in favor of `DataValidationException`.
   New exception has new method `getValidationErrors` which returns the errors in new format.
-- [x] The `KycDocument` property `fileId` is deprecated.
+- [x] The `KycDocument` property `fileId` was made deprecated.
+- [x] The `PlanItem` methods `getPlanId`, `setPlanId` were made deprecated.
 
 ### Added
 
 - [x] Added **Tags API**
-- [x] Added new properties to `Transaction`: `disputeTime`, `disputeStatus`, `isRebill`, `3ds`, `riskScore`, `retryNumber`, `isReconciled`, `hadDiscrepancy`, `hasBumpOffer`, `hasAmountAdjustment`, `billingDescriptor`, `referenceData`, `settlementTime`, `discrepancyTime`
+- [x] Added new properties to `Transaction`: `disputeTime`, `disputeStatus`, `isRebill`, `3ds`, `riskScore`, `retryNumber`, `isReconciled`, `hadDiscrepancy`, `hasBumpOffer`, `hasAmountAdjustment`, `billingDescriptor`
 - [x] Added new properties to `Dispute`: `transaction`, `category`, `rawResponse`, `caseId`
 - [x] Added new properties to `Customer`: `revision`, `tags`
 - [x] Added new properties to `Invoice`: `revision`, `amountDue`, `autopayRetryNumber`, `dueReminderTime`, `dueReminderNumber`, `paymentFormUrl`
 - [x] Added new properties to `Subscription`: `revision`, `isTrialOnly`, `poNumber`, `renewalReminderTime`, `renewalReminderNumber`, `trialReminderTime`, `trialReminderNumber`
-- [x] Added new properties to `KycDocument`: `documentSubtype`, `fileIds`
+- [x] Added new property to `KycDocument`: `documentSubtype`
+- [x] Added new property to `KycDocument`: `fileIds`
 - [x] Added new method to `GatewayAccountService`: `checkCredentials`
+- [x] Added new property to `Transaction`: `referenceData`
+- [x] Added new methods to `PlanItem`: `getPlan`, `setPlan`
 
 ### Changed
 
@@ -39,13 +52,15 @@ Security - in case of vulnerabilities.
 
 ### Removed
 
+- [x] Removed `Trasnsaction::getRetriesResult()` and `Transaction::getRetriedTransactionId()` methods.
+- [x] Removed `PaymentRetryAttempt`, `SchedulePaymentRetry` classes.
+- [x] Removed `RuleAction::NAME_SCHEDULE_PAYMENT_RETRY` constant.
 - [x] Removed `put` method from `OrganizationService::create()` method.
 - [x] Removed `OrganizationService::delete()` method.
 - [x] Removed `PaymentCardService::authorize()` method.
 - [x] Removed `PayPalAccountService::activate()` method.
 - [x] Removed `TransactionService::cancel()` method.
 - [x] Removed `PaymentCardAuthorization` entity.
-- [x] Removed deprecated `Transaction` property: `scheduledTime`.
 
 ## [2.11.0] 2021-03-03
 
