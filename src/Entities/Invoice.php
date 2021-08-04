@@ -458,4 +458,12 @@ final class Invoice extends Entity
     {
         return $this->getAttribute('paymentFormUrl');
     }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->getAttribute('type');
+    }
 }
