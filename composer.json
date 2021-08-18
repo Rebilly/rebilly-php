@@ -47,8 +47,8 @@
     "diff-files": "f() { git diff --name-only --diff-filter=ACMRTUXB $1 | grep -i \\.php$ ; }; f",
     "cs": "php-cs-fixer fix -vv --dry-run || true",
     "cs-fix": "php-cs-fixer fix -vv || true",
-    "cs-feature": "composer cs -- \"$(composer diff-files origin/master)\"",
-    "cs-fix-feature": "composer cs-fix -- \"$(composer diff-files origin/master)\"",
+    "cs-feature": "composer cs -- \"$(composer diff-files origin/main)\"",
+    "cs-fix-feature": "composer cs-fix -- \"$(composer diff-files origin/main)\"",
     "cs-changes": "composer cs -- \"$(composer diff-files HEAD)\"",
     "cs-fix-changes": "composer cs-fix -- \"$(composer diff-files HEAD)\""
   },
