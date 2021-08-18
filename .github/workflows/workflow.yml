@@ -56,7 +56,7 @@ jobs:
         run: php vendor/bin/phpunit --testdox --colors=always
 
       - name: Coverage monitor
-        if: env.EXECUTE_COVERAGE == 'true'
+        if: env.EXECUTE_COVERAGE == 'true' && github.event_name == 'pull_request'
         uses: slavcodev/coverage-monitor-action@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
