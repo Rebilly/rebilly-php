@@ -209,6 +209,7 @@ class ApiTest extends TestCase
             [Entities\GatewayAccountDowntime::class],
             [Entities\PlaidCredential::class, 'hash'],
             [Entities\ExperianCredential::class, 'hash'],
+            [Entities\TaxJarCredential::class, 'hash'],
             [Entities\CommonPaymentInstrument::class],
             [Entities\BrowserData::class],
             [Entities\Tag::class],

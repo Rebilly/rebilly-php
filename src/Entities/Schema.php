@@ -339,6 +339,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'credential-hashes/experian/{hash}' => function (array $content) {
                 return new ExperianCredential($content);
             },
+            'credential-hashes/taxjar' => function (array $content) {
+                return new Collection(new TaxJarCredential(), $content);
+            },
+            'credential-hashes/taxjar/{hash}' => function (array $content) {
+                return new TaxJarCredential($content);
+            },
             'tags' => function (array $content) {
                 return new Collection(new Tag(), $content);
             },

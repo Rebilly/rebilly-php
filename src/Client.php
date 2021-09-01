@@ -156,6 +156,7 @@ final class Client
         'aml' => Services\AmlService::class,
         'plaidCredentials' => Services\PlaidCredentialsService::class,
         'experianCredentials' => Services\ExperianCredentialsService::class,
+        'taxjarCredentials' => Services\TaxJarCredentialsService::class,
         'paymentInstruments' => Services\PaymentInstrumentService::class,
         'tags' => Services\TagService::class,
     ];

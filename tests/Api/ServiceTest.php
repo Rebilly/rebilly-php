@@ -1269,6 +1269,11 @@ class ServiceTest extends BaseTestCase
                 Entities\ExperianCredential::class,
             ],
             [
+                'taxjarCredentials',
+                Services\TaxJarCredentialsService::class,
+                Entities\TaxJarCredential::class,
+            ],
+            [
                 'webhooksTracking',
                 Services\WebhookTrackingService::class,
                 Entities\WebhookTracking::class,
