@@ -92,7 +92,6 @@ abstract class TestCase extends Framework\TestCase
             case 'websiteId':
             case 'initialInvoiceId':
             case 'planId':
-            case 'processorAccountId':
             case 'paymentCardId':
             case 'gatewayAccountId':
             case 'relatedId':
@@ -462,6 +461,7 @@ abstract class TestCase extends Framework\TestCase
             case 'additionalSchema':
             case 'permissions':
             case 'invoiceIds':
+                return [];
             case 'acceptedCurrencies':
                 return ['USD'];
             case 'dynamicDescriptor':
