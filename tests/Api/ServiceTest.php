@@ -1209,11 +1209,6 @@ class ServiceTest extends BaseTestCase
                 Entities\User::class,
             ],
             [
-                'threeDSecure',
-                Services\ThreeDSecureService::class,
-                Entities\ThreeDSecure::class,
-            ],
-            [
                 'apiKeys',
                 Services\ApiKeyService::class,
                 Entities\ApiKey::class,

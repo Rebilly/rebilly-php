@@ -95,8 +95,6 @@ abstract class TestCase extends Framework\TestCase
             case 'processorAccountId':
             case 'paymentCardId':
             case 'gatewayAccountId':
-            case 'defaultCardId':
-            case 'defaultPaymentInstrumentId':
             case 'relatedId':
             case 'subscriptionId':
             case 'userId':
@@ -145,10 +143,6 @@ abstract class TestCase extends Framework\TestCase
             case 'acquirerName':
             case 'routingNumber':
             case 'accountNumber':
-            case 'enrollmentEci':
-            case 'eci':
-            case 'cavv':
-            case 'xid':
             case 'senderName':
             case 'request':
             case 'response':
@@ -468,8 +462,6 @@ abstract class TestCase extends Framework\TestCase
             case 'additionalSchema':
             case 'permissions':
             case 'invoiceIds':
-            case 'payment': // TODO
-                return [];
             case 'acceptedCurrencies':
                 return ['USD'];
             case 'dynamicDescriptor':
@@ -485,10 +477,6 @@ abstract class TestCase extends Framework\TestCase
                 return 'checking';
             case 'accountNumberType':
                 return 'BBAN';
-            case 'enrolled':
-            case 'payerAuthResponseStatus':
-            case 'signatureVerification':
-                return 'Y';
             case 'port':
                 return random_int(25, 100);
             case 'duration':

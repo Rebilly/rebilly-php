@@ -67,7 +67,6 @@ use RuntimeException;
  * @method Services\GatewayAccountService gatewayAccounts()
  * @method Services\SessionService sessions()
  * @method Services\UserService users()
- * @method Services\ThreeDSecureService threeDSecure()
  * @method Services\ApiTrackingService apiTracking()
  * @method Services\ShippingZoneService shippingZones()
  * @method Services\ApiKeyService apiKeys()
@@ -136,7 +135,6 @@ final class Client
         'gatewayAccounts' => Services\GatewayAccountService::class,
         'sessions' => Services\SessionService::class,
         'users' => Services\UserService::class,
-        'threeDSecure' => Services\ThreeDSecureService::class,
         'apiTracking' => Services\ApiTrackingService::class,
         'apiKeys' => Services\ApiKeyService::class,
         'disputes' => Services\DisputeService::class,
