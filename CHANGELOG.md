@@ -26,6 +26,7 @@ Security - in case of vulnerabilities.
 ### Removed
 
 - [x] Removed **3D Secure API**
+- [x] Removed **Blacklists API** in favor of **Blocklists API**
 - [x] Removed deprecated `Transaction` property: `scheduledTime`
 
 ## [2.12.0] 2021-06-22

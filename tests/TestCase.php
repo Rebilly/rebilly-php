@@ -327,8 +327,6 @@ abstract class TestCase extends Framework\TestCase
                 switch ($class) {
                     case Entities\LineItem::class:
                         return self::randomElements(Entities\LineItem::types())[0];
-                    case Entities\Blacklist::class:
-                        return self::randomElements(Entities\Blacklist::types())[0];
                     case Entities\Blocklist::class:
                         return self::randomElements(Entities\Blocklist::types())[0];
                     case Entities\InvoiceItem::class:
@@ -343,8 +341,8 @@ abstract class TestCase extends Framework\TestCase
                         return self::TEST_WORD;
                     case Entities\KycDocuments\RejectionReason::class:
                         return self::randomElements(Entities\KycDocuments\RejectionReason::allowedRejectionTypes())[0];
-                    case Entities\RulesEngine\Actions\Blacklist::class:
-                        return self::randomElements(Entities\RulesEngine\Actions\Blacklist::types())[0];
+                    case Entities\RulesEngine\Actions\Blocklist::class:
+                        return self::randomElements(Entities\RulesEngine\Actions\Blocklist::types())[0];
                     default:
                         throw new InvalidArgumentException(
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
@@ -355,7 +353,6 @@ abstract class TestCase extends Framework\TestCase
                 switch ($class) {
                     case Entities\Contact\Email::class:
                     case Entities\Contact\PhoneNumber::class:
-                    case Entities\Blacklist::class:
                     case Entities\Blocklist::class:
                         return self::TEST_WORD;
                     default:
@@ -522,7 +519,7 @@ abstract class TestCase extends Framework\TestCase
                     case Entities\PaymentCard::class:
                     case Entities\RulesEngine\Bind::class:
                     case Entities\RulesEngine\Actions\AddRiskScore::class:
-                    case Entities\RulesEngine\Actions\Blacklist::class:
+                    case Entities\RulesEngine\Actions\Blocklist::class:
                     case Entities\RulesEngine\Actions\CancelScheduledPayments::class:
                     case Entities\RulesEngine\Actions\GuessPaymentCardExpiration::class:
                     case Entities\RulesEngine\Actions\PickGatewayAccount::class:

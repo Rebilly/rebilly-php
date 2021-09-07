@@ -15,9 +15,9 @@ use DomainException;
 use Rebilly\Entities\RulesEngine\RuleAction;
 
 /**
- * Class Blacklist.
+ * Class Blocklist.
  */
-final class Blacklist extends RuleAction
+final class Blocklist extends RuleAction
 {
     public const UNEXPECTED_TYPE = 'Unexpected type. Only %s types are supported';
 
@@ -90,6 +90,6 @@ final class Blacklist extends RuleAction
      */
     public function actionName(): string
     {
-        return self::NAME_BLACKLIST;
+        return self::NAME_BLOCKLIST;
     }
 }
