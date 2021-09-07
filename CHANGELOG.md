@@ -23,9 +23,18 @@ Security - in case of vulnerabilities.
 - [x] Added new property to `Invoice`: `type`
 - [x] Added new properties to `Transaction`: `settlementTime`, `discrepancyTime`
 
+### Changed
+
+- [x] Renamed public constant `Rebilly\Entities\ResourceType::TYPE_BLACKLISTS` to `TYPE_BLOCKLISTS`
+- [x] Changed public constant `Rebilly\Entities\ResourceType::TYPE_BLOCKLISTS` value from `blacklists` to `blocklists`
+- [x] Renamed class from `Rebilly\Entities\RulesEngine\Actions\Blacklist` to `Rebilly\Entities\RulesEngine\Actions\Blocklist`
+- [x] Renamed public constant `Rebilly\Entities\RulesEngine\RuleAction::NAME_BLACKLIST` to `NAME_BLOCKLIST`
+- [x] Changed public constant `Rebilly\Entities\RulesEngine\RuleAction::NAME_BLOCKLIST` value from `blacklist` to `blocklist`
+
 ### Removed
 
 - [x] Removed **3D Secure API**
+- [x] Removed **Blacklists API** in favor of **Blocklists API**
 - [x] Removed deprecated `Transaction` property: `scheduledTime`
 
 ## [2.12.0] 2021-06-22

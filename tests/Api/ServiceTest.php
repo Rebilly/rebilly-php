@@ -1099,11 +1099,6 @@ class ServiceTest extends BaseTestCase
                 'token',
             ],
             [
-                'blacklists',
-                Services\BlacklistService::class,
-                Entities\Blacklist::class,
-            ],
-            [
                 'blocklists',
                 Services\BlocklistService::class,
                 Entities\Blocklist::class,
