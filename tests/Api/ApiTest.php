@@ -181,7 +181,6 @@ class ApiTest extends TestCase
             [Entities\CustomField::class, 'name'],
             [Entities\Session::class],
             [Entities\User::class],
-            [Entities\ThreeDSecure::class],
             [Entities\UpdatePassword::class],
             [Entities\ApiKey::class],
             [Entities\ApiTracking::class],
