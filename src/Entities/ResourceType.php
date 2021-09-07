@@ -32,7 +32,7 @@ interface ResourceType
 
     public const TYPE_BANK_ACCOUNTS = 'bank-accounts';
 
-    public const TYPE_BLACKLISTS = 'blacklists';
+    public const TYPE_BLOCKLISTS = 'blocklists';
 
     public const TYPE_CREDENTIALS = 'credentials';
 

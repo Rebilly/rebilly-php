@@ -29,7 +29,7 @@ abstract class RuleAction extends Resource
 
     public const STATUS_INACTIVE = 'inactive';
 
-    public const NAME_BLACKLIST = 'blacklist';
+    public const NAME_BLOCKLIST = 'blocklist';
 
     public const NAME_CANCEL_SCHEDULED_PAYMENTS = 'cancel-scheduled-payments';
 
@@ -70,7 +70,7 @@ abstract class RuleAction extends Resource
     public static function names(): array
     {
         return [
-            self::NAME_BLACKLIST,
+            self::NAME_BLOCKLIST,
             self::NAME_CANCEL_SCHEDULED_PAYMENTS,
             self::NAME_GUESS_PAYMENT_CARD_EXPIRATION,
             self::NAME_PICK_GATEWAY_ACCOUNT,
@@ -105,8 +105,8 @@ abstract class RuleAction extends Resource
         }
 
         switch ($data['name']) {
-            case self::NAME_BLACKLIST:
-                $action = new Actions\Blacklist($data);
+            case self::NAME_BLOCKLIST:
+                $action = new Actions\Blocklist($data);
 
                 break;
             case self::NAME_CANCEL_SCHEDULED_PAYMENTS:
