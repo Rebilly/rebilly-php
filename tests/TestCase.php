@@ -337,8 +337,6 @@ abstract class TestCase extends Framework\TestCase
                         return self::randomElements(Entities\Dispute::allowedTypes())[0];
                     case Entities\Transaction::class:
                         return self::randomElements(Entities\Transaction::types())[0];
-                    case Entities\Session::class:
-                        return self::TEST_WORD;
                     case Entities\KycDocuments\RejectionReason::class:
                         return self::randomElements(Entities\KycDocuments\RejectionReason::allowedRejectionTypes())[0];
                     case Entities\RulesEngine\Actions\Blocklist::class:

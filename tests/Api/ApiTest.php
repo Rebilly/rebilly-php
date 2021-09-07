@@ -178,7 +178,6 @@ class ApiTest extends TestCase
             [Entities\BankAccount::class],
             [Entities\PayPalAccount::class],
             [Entities\CustomField::class, 'name'],
-            [Entities\Session::class],
             [Entities\User::class],
             [Entities\UpdatePassword::class],
             [Entities\ApiKey::class],
