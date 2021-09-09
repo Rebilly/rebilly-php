@@ -43,7 +43,6 @@ use RuntimeException;
  * @method Services\AuthenticationOptionsService authenticationOptions()
  * @method Services\AuthenticationTokenService authenticationTokens()
  * @method Services\BankAccountService bankAccounts()
- * @method Services\BlacklistService blacklists()
  * @method Services\BlocklistService blocklists()
  * @method Services\CustomerCredentialService customerCredentials()
  * @method Services\CustomerService customers()
@@ -67,7 +66,6 @@ use RuntimeException;
  * @method Services\GatewayAccountService gatewayAccounts()
  * @method Services\SessionService sessions()
  * @method Services\UserService users()
- * @method Services\ThreeDSecureService threeDSecure()
  * @method Services\ApiTrackingService apiTracking()
  * @method Services\ShippingZoneService shippingZones()
  * @method Services\ApiKeyService apiKeys()
@@ -111,7 +109,6 @@ final class Client
         'authenticationOptions' => Services\AuthenticationOptionsService::class,
         'authenticationTokens' => Services\AuthenticationTokenService::class,
         'bankAccounts' => Services\BankAccountService::class,
-        'blacklists' => Services\BlacklistService::class,
         'blocklists' => Services\BlocklistService::class,
         'customerCredentials' => Services\CustomerCredentialService::class,
         'customers' => Services\CustomerService::class,
@@ -137,7 +134,6 @@ final class Client
         'gatewayAccounts' => Services\GatewayAccountService::class,
         'sessions' => Services\SessionService::class,
         'users' => Services\UserService::class,
-        'threeDSecure' => Services\ThreeDSecureService::class,
         'apiTracking' => Services\ApiTrackingService::class,
         'apiKeys' => Services\ApiKeyService::class,
         'disputes' => Services\DisputeService::class,

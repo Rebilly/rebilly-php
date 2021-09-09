@@ -92,11 +92,8 @@ abstract class TestCase extends Framework\TestCase
             case 'websiteId':
             case 'initialInvoiceId':
             case 'planId':
-            case 'processorAccountId':
             case 'paymentCardId':
             case 'gatewayAccountId':
-            case 'defaultCardId':
-            case 'defaultPaymentInstrumentId':
             case 'relatedId':
             case 'subscriptionId':
             case 'userId':
@@ -145,10 +142,6 @@ abstract class TestCase extends Framework\TestCase
             case 'acquirerName':
             case 'routingNumber':
             case 'accountNumber':
-            case 'enrollmentEci':
-            case 'eci':
-            case 'cavv':
-            case 'xid':
             case 'senderName':
             case 'request':
             case 'response':
@@ -335,8 +328,6 @@ abstract class TestCase extends Framework\TestCase
                 switch ($class) {
                     case Entities\LineItem::class:
                         return self::randomElements(Entities\LineItem::types())[0];
-                    case Entities\Blacklist::class:
-                        return self::randomElements(Entities\Blacklist::types())[0];
                     case Entities\Blocklist::class:
                         return self::randomElements(Entities\Blocklist::types())[0];
                     case Entities\InvoiceItem::class:
@@ -351,8 +342,8 @@ abstract class TestCase extends Framework\TestCase
                         return self::TEST_WORD;
                     case Entities\KycDocuments\RejectionReason::class:
                         return self::randomElements(Entities\KycDocuments\RejectionReason::allowedRejectionTypes())[0];
-                    case Entities\RulesEngine\Actions\Blacklist::class:
-                        return self::randomElements(Entities\RulesEngine\Actions\Blacklist::types())[0];
+                    case Entities\RulesEngine\Actions\Blocklist::class:
+                        return self::randomElements(Entities\RulesEngine\Actions\Blocklist::types())[0];
                     default:
                         throw new InvalidArgumentException(
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
@@ -363,7 +354,6 @@ abstract class TestCase extends Framework\TestCase
                 switch ($class) {
                     case Entities\Contact\Email::class:
                     case Entities\Contact\PhoneNumber::class:
-                    case Entities\Blacklist::class:
                     case Entities\Blocklist::class:
                         return self::TEST_WORD;
                     default:
@@ -469,7 +459,6 @@ abstract class TestCase extends Framework\TestCase
             case 'additionalSchema':
             case 'permissions':
             case 'invoiceIds':
-            case 'payment': // TODO
                 return [];
             case 'acceptedCurrencies':
                 return ['USD'];
@@ -486,10 +475,6 @@ abstract class TestCase extends Framework\TestCase
                 return 'checking';
             case 'accountNumberType':
                 return 'BBAN';
-            case 'enrolled':
-            case 'payerAuthResponseStatus':
-            case 'signatureVerification':
-                return 'Y';
             case 'port':
                 return random_int(25, 100);
             case 'duration':
@@ -535,7 +520,7 @@ abstract class TestCase extends Framework\TestCase
                     case Entities\PaymentCard::class:
                     case Entities\RulesEngine\Bind::class:
                     case Entities\RulesEngine\Actions\AddRiskScore::class:
-                    case Entities\RulesEngine\Actions\Blacklist::class:
+                    case Entities\RulesEngine\Actions\Blocklist::class:
                     case Entities\RulesEngine\Actions\CancelScheduledPayments::class:
                     case Entities\RulesEngine\Actions\GuessPaymentCardExpiration::class:
                     case Entities\RulesEngine\Actions\PickGatewayAccount::class:
