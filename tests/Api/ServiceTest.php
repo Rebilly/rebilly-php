@@ -1099,11 +1099,6 @@ class ServiceTest extends BaseTestCase
                 'token',
             ],
             [
-                'blacklists',
-                Services\BlacklistService::class,
-                Entities\Blacklist::class,
-            ],
-            [
                 'blocklists',
                 Services\BlocklistService::class,
                 Entities\Blocklist::class,
@@ -1207,11 +1202,6 @@ class ServiceTest extends BaseTestCase
                 'users',
                 Services\UserService::class,
                 Entities\User::class,
-            ],
-            [
-                'threeDSecure',
-                Services\ThreeDSecureService::class,
-                Entities\ThreeDSecure::class,
             ],
             [
                 'apiKeys',

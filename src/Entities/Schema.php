@@ -39,12 +39,6 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'bank-accounts/{bankAccountId}' => function (array $content) {
                 return new BankAccount($content);
             },
-            'blacklists' => function (array $content) {
-                return new Collection(new Blacklist(), $content);
-            },
-            'blacklists/{blacklistId}' => function (array $content) {
-                return new Blacklist($content);
-            },
             'blocklists' => function (array $content) {
                 return new Collection(new Blocklist(), $content);
             },
@@ -209,12 +203,6 @@ final class Schema implements IteratorAggregate, ArrayAccess
             },
             'users/{userId}' => function (array $content) {
                 return new User($content);
-            },
-            '3dsecure' => function (array $content) {
-                return new Collection(new ThreeDSecure(), $content);
-            },
-            '3dsecure/{3dsecureId}' => function (array $content) {
-                return new ThreeDSecure($content);
             },
             'api-keys' => function (array $content) {
                 return new Collection(new ApiKey(), $content);
