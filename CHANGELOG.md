@@ -22,6 +22,7 @@ Security - in case of vulnerabilities.
 - [x] Added `restrict-to-products` and `paid-by-time` Coupon restrictions.
 - [x] Added new property to `Invoice`: `type`
 - [x] Added new properties to `Transaction`: `settlementTime`, `discrepancyTime`
+- [x] Added **TaxJar Credentials API**
 
 ### Changed
 

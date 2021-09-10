@@ -79,6 +79,7 @@ use RuntimeException;
  * @method Services\WebhookCredentialsService webhookCredentials()
  * @method Services\PlaidCredentialsService plaidCredentials()
  * @method Services\ExperianCredentialsService experianCredentials()
+ * @method Services\TaxJarCredentialsService taxjarCredentials()
  * @method Services\ValuesListService lists()
  * @method Services\ValuesListTrackingService listsTracking()
  * @method Services\WebhookTrackingService webhooksTracking()
@@ -152,6 +153,7 @@ final class Client
         'aml' => Services\AmlService::class,
         'plaidCredentials' => Services\PlaidCredentialsService::class,
         'experianCredentials' => Services\ExperianCredentialsService::class,
+        'taxjarCredentials' => Services\TaxJarCredentialsService::class,
         'paymentInstruments' => Services\PaymentInstrumentService::class,
         'tags' => Services\TagService::class,
     ];

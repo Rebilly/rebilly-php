@@ -148,6 +148,7 @@ abstract class TestCase extends Framework\TestCase
             case 'acquirerReferenceNumber':
             case 'bic':
             case 'hmacKey':
+            case 'apiToken':
             case 'publicKey':
             case 'username':
             case 'message':
