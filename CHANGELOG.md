@@ -23,6 +23,8 @@ Security - in case of vulnerabilities.
 - [x] Added new property to `Invoice`: `type`
 - [x] Added new properties to `Transaction`: `settlementTime`, `discrepancyTime`
 - [x] Added **TaxJar Credentials API**
+- [x] Added `SubscriptionChangeItems`.
+- [x] Added `changeItems` method to `SubscriptionService`.
 
 ### Changed
 
@@ -37,6 +39,11 @@ Security - in case of vulnerabilities.
 - [x] Removed **3D Secure API**
 - [x] Removed **Blacklists API** in favor of **Blocklists API**
 - [x] Removed deprecated `Transaction` property: `scheduledTime`
+
+### Deprecated
+
+- [x] Deprecated `SubscriptionChangePlan`.
+- [x] Deprecated `SubscriptionService` `changePlan` method.
 
 ## [2.12.0] 2021-06-22
 
