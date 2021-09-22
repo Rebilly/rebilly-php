@@ -375,11 +375,14 @@ abstract class TestCase extends Framework\TestCase
             case 'items':
                 switch ($class) {
                     case Entities\Subscription::class:
-                    case Entities\SubscriptionChangeItems::class:
                         return [
                             ['planId' => 'plan-1', 'quantity' => 1],
                             ['planId' => 'plan-2', 'quantity' => null],
                             ['planId' => 'plan-3'],
+                        ];
+                    case Entities\SubscriptionChangeItems::class:
+                        return [
+                            ['plan' => ['id' => 'plan-1'], 'quantity' => 1],
                         ];
                     default:
                         throw new InvalidArgumentException(
