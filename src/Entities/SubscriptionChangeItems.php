@@ -64,7 +64,7 @@ class SubscriptionChangeItems extends Resource
     }
 
     /**
-     * @param $value
+     * @param string $value
      *
      * @throws DomainException
      */
@@ -77,7 +77,7 @@ class SubscriptionChangeItems extends Resource
     }
 
     /**
-     * @param $value
+     * @param bool $value
      */
     public function setProrated($value)
     {
@@ -85,7 +85,7 @@ class SubscriptionChangeItems extends Resource
     }
 
     /**
-     * @param $value
+     * @param string $value
      */
     public function setEffectiveTime($value)
     {
@@ -93,7 +93,7 @@ class SubscriptionChangeItems extends Resource
     }
 
     /**
-     * @param $value
+     * @param bool $value
      */
     public function setPreview($value)
     {
@@ -101,7 +101,7 @@ class SubscriptionChangeItems extends Resource
     }
 
     /**
-     * @param $value
+     * @param bool $value
      */
     public function setKeepTrial($value)
     {
