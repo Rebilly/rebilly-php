@@ -413,6 +413,9 @@ class ServiceTest extends BaseTestCase
 
         $result = $service->issueUpcomingInvoice('dummy', 'invoice-1');
         self::assertInstanceOf(Entities\Subscription::class, $result);
+
+        $result = $service->changeItems('dummy', []);
+        self::assertInstanceOf(Entities\Subscription::class, $result);
     }
 
     /**

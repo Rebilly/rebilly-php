@@ -16,6 +16,7 @@ use JsonSerializable;
 use Rebilly\Entities\Invoice;
 use Rebilly\Entities\Subscription;
 use Rebilly\Entities\SubscriptionCancel;
+use Rebilly\Entities\SubscriptionChangeItems;
 use Rebilly\Entities\SubscriptionChangePlan;
 use Rebilly\Entities\SubscriptionInterimInvoice;
 use Rebilly\Http\Exception\DataValidationException;
@@ -113,6 +114,9 @@ final class SubscriptionService extends Service
     }
 
     /**
+     * @deprecated
+     * @see changeItems
+     *
      * @param string $subscriptionId
      * @param array|JsonSerializable|SubscriptionChangePlan $data
      *
@@ -174,6 +178,23 @@ final class SubscriptionService extends Service
                 'subscriptionId' => $subscriptionId,
                 'invoiceId' => $invoiceId,
             ]
+        );
+    }
+
+    /**
+     * @param string $subscriptionId
+     * @param array|JsonSerializable|SubscriptionChangeItems $data
+     *
+     * @throws DataValidationException The input data is not valid
+     *
+     * @return Subscription
+     */
+    public function changeItems($subscriptionId, $data)
+    {
+        return $this->client()->post(
+            $data,
+            'subscriptions/{subscriptionId}/change-items',
+            ['subscriptionId' => $subscriptionId]
         );
     }
 }

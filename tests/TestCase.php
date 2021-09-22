@@ -380,6 +380,10 @@ abstract class TestCase extends Framework\TestCase
                             ['planId' => 'plan-2', 'quantity' => null],
                             ['planId' => 'plan-3'],
                         ];
+                    case Entities\SubscriptionChangeItems::class:
+                        return [
+                            ['plan' => ['id' => 'plan-1'], 'quantity' => 1],
+                        ];
                     default:
                         throw new InvalidArgumentException(
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
