@@ -185,7 +185,7 @@ final class SubscriptionService extends Service
      * @param string $subscriptionId
      * @param array|JsonSerializable|SubscriptionChangeItems $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException The input data is not valid
      *
      * @return Subscription
      */
