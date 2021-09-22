@@ -230,6 +230,7 @@ class ApiTest extends TestCase
             [Entities\RulesEngine\Actions\TriggerWebhook::class],
             [Entities\RulesEngine\Actions\GatewayAccountPick\AcquirerWeights::class],
             [Entities\RulesEngine\Actions\GatewayAccountPick\AccountWeights::class],
+            [Entities\SubscriptionChangeItems::class],
         ];
 
         foreach ($cases as $case) {

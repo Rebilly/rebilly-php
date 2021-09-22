@@ -12,13 +12,10 @@
 namespace Rebilly\Entities;
 
 use DomainException;
+use Rebilly\Entities\Subscriptions\PlanItem;
 use Rebilly\Rest\Resource;
 
-/**
- * @deprecated
- * @see SubscriptionChangeItems
- */
-class SubscriptionChangePlan extends Resource
+class SubscriptionChangeItems extends Resource
 {
     public const UNEXPECTED_RENEWAL_POLICY = 'Unexpected renewalPolicy. Only %s are supported';
 
@@ -38,19 +35,32 @@ class SubscriptionChangePlan extends Resource
     }
 
     /**
-     * @param $value
+     * @param array $value
+     *
+     * @return $this
      */
-    public function setSubscriptionId($value)
+    public function setItems(array $value)
     {
-        $this->setAttribute('subscriptionId', $value);
+        return $this->setAttribute('items', $value);
     }
 
     /**
-     * @param $value
+     * @param array $data
+     *
+     * @return array|Subscriptions\PlanItem[]
      */
-    public function setPlanId($value)
+    public function createItems(array $data)
     {
-        $this->setAttribute('planId', $value);
+        return array_map(
+            function ($item) {
+                if ($item instanceof PlanItem) {
+                    return $item;
+                }
+
+                return new Subscriptions\PlanItem($item);
+            },
+            $data
+        );
     }
 
     /**
@@ -91,35 +101,11 @@ class SubscriptionChangePlan extends Resource
     }
 
     /**
-     * @param int $value
-     */
-    public function setQuantity($value)
-    {
-        $this->setAttribute('quantity', $value);
-    }
-
-    /**
      * @param $value
      */
     public function setKeepTrial($value)
     {
         $this->setAttribute('keepTrial', $value);
-    }
-
-    /**
-     * @return string
-     */
-    public function getSubscriptionId()
-    {
-        return $this->getAttribute('subscriptionId');
-    }
-
-    /**
-     * @return string
-     */
-    public function getPlanId()
-    {
-        return $this->getAttribute('planId');
     }
 
     /**
@@ -152,14 +138,6 @@ class SubscriptionChangePlan extends Resource
     public function getEffectiveTime()
     {
         return $this->getAttribute('effectiveTime');
-    }
-
-    /**
-     * @return int
-     */
-    public function getQuantity()
-    {
-        return $this->getAttribute('quantity');
     }
 
     /**

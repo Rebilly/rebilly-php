@@ -375,6 +375,7 @@ abstract class TestCase extends Framework\TestCase
             case 'items':
                 switch ($class) {
                     case Entities\Subscription::class:
+                    case Entities\SubscriptionChangeItems::class:
                         return [
                             ['planId' => 'plan-1', 'quantity' => 1],
                             ['planId' => 'plan-2', 'quantity' => null],
