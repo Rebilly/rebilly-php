@@ -58,7 +58,7 @@ class BankAccountPaymentInstrument extends PaymentInstrument
     }
 
     /**
-     * @param int $value
+     * @param string $value
      *
      * @return $this
      */
@@ -68,7 +68,7 @@ class BankAccountPaymentInstrument extends PaymentInstrument
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getAccountNumber()
     {
