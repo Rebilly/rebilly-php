@@ -57,7 +57,7 @@ final class ProductService extends Service
 
     /**
      * @param array|JsonSerializable|Product $data
-     * @param null $productId
+     * @param null|string $productId
      *
      * @return Product
      */
