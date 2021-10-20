@@ -523,6 +523,9 @@ class ServiceTest extends BaseTestCase
         $result = $service->refund('dummy', 10);
         self::assertInstanceOf(Entities\Transaction::class, $result);
 
+        $result = $service->refund('dummy', 10, 'refund', true);
+        self::assertInstanceOf(Entities\Transaction::class, $result);
+
         $result = $service->patch('dummy', []);
         self::assertInstanceOf(Entities\Transaction::class, $result);
     }
