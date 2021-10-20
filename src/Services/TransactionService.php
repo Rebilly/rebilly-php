@@ -62,15 +62,21 @@ final class TransactionService extends Service
     /**
      * @param string $transactionId
      * @param float $amount
+     * @param string $description
+     * @param bool $isProcessedOutside
      *
      * @throws DataValidationException The input data does not valid
      *
      * @return Transaction
      */
-    public function refund($transactionId, $amount)
+    public function refund($transactionId, $amount, $description = null, $isProcessedOutside = false)
     {
         return $this->client()->post(
-            ['amount' => $amount],
+            [
+                'amount' => $amount,
+                'description' => $description,
+                'isProcessedOutside' => $isProcessedOutside,
+            ],
             'transactions/{transactionId}/refund',
             ['transactionId' => $transactionId]
         );
