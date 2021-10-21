@@ -62,7 +62,7 @@ final class TransactionService extends Service
     /**
      * @param string $transactionId
      * @param float $amount
-     * @param string $description
+     * @param null|string $description
      * @param bool $isProcessedOutside
      *
      * @throws DataValidationException The input data does not valid
