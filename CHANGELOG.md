@@ -25,6 +25,7 @@ Security - in case of vulnerabilities.
 - [x] Added **TaxJar Credentials API**
 - [x] Added `SubscriptionChangeItems`.
 - [x] Added `changeItems` method to `SubscriptionService`.
+- [x] Added `description`, `isProcessedOutside` arguments to `TransactionService::refund` method.
 
 ### Changed
 
