@@ -15,6 +15,10 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
+_TBD_
+
+## [2.13.0] 2021-10-21
+
 ### Added
 
 - [x] Added `InvoiceItemService::update()` method.
