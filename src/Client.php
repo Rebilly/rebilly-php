@@ -103,7 +103,7 @@ final class Client
      */
     public const CURRENT_VERSION = 'v2.1';
 
-    public const SDK_VERSION = '2.12.0';
+    public const SDK_VERSION = '2.13.0';
 
     private static $services = [
         'authenticationOptions' => Services\AuthenticationOptionsService::class,
