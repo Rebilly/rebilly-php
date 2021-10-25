@@ -35,7 +35,7 @@ class SubscriptionCancellationService extends Service
     /**
      * @param array|JsonSerializable|SubscriptionCancellation $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return SubscriptionCancellation
      */
@@ -51,7 +51,7 @@ class SubscriptionCancellationService extends Service
      * @param string $cancellationId
      * @param array|JsonSerializable|SubscriptionCancellation $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return SubscriptionCancellation
      */
@@ -78,7 +78,7 @@ class SubscriptionCancellationService extends Service
      * @param string $cancellationId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return SubscriptionCancellation
      */

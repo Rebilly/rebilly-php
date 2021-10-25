@@ -48,7 +48,7 @@ final class WebhooksService extends Service
     /**
      * @param string $webhookId
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return Webhook
      */
@@ -76,7 +76,7 @@ final class WebhooksService extends Service
      * @param string $webhookId
      * @param array|JsonSerializable|Webhook $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Webhook
      */

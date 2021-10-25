@@ -50,7 +50,7 @@ final class PlanService extends Service
      * @param string $planId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return Plan
      */
@@ -63,7 +63,7 @@ final class PlanService extends Service
      * @param array|JsonSerializable|Plan $data
      * @param string $planId
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Plan
      */
@@ -80,7 +80,7 @@ final class PlanService extends Service
      * @param string $planId
      * @param array|JsonSerializable|Plan $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Plan
      */

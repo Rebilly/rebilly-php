@@ -50,7 +50,7 @@ final class RedemptionService extends Service
      * @param string $redemptionId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return Redemption
      */
@@ -62,7 +62,7 @@ final class RedemptionService extends Service
     /**
      * @param array|JsonSerializable|Redemption $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Redemption
      */

@@ -26,7 +26,7 @@ final class RuleService extends Service
      * @param string $eventType
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return EventRules
      */

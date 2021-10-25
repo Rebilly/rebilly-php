@@ -50,7 +50,7 @@ final class DisputeService extends Service
      * @param string $disputeId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return Dispute
      */
@@ -63,7 +63,7 @@ final class DisputeService extends Service
      * @param array|JsonSerializable|Dispute $data
      * @param string $disputeId
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Dispute
      */
@@ -80,7 +80,7 @@ final class DisputeService extends Service
      * @param string $disputeId
      * @param array|JsonSerializable|Dispute $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Dispute
      */

@@ -49,7 +49,7 @@ class PayPalAccountService extends Service
      * @param string $paypalAccountId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return CommonPaymentInstrument
      */
@@ -62,7 +62,7 @@ class PayPalAccountService extends Service
      * @param array|JsonSerializable|CommonPaymentInstrument $data
      * @param string $paypalAccountId
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return CommonPaymentInstrument
      */

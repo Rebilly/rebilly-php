@@ -56,7 +56,7 @@ final class GatewayAccountLimitService extends Service
      * @param string $limitId
      * @param array|JsonSerializable|GatewayAccountLimit $data
      *
-     * @throws DataValidationException The input data is not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return GatewayAccountLimit
      */

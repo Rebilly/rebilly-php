@@ -55,7 +55,7 @@ final class SubscriptionService extends Service
      * @param string $subscriptionId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return Subscription
      */
@@ -68,7 +68,7 @@ final class SubscriptionService extends Service
      * @param array|JsonSerializable|Subscription $data
      * @param string $subscriptionId
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Subscription
      */
@@ -85,7 +85,7 @@ final class SubscriptionService extends Service
      * @param string $subscriptionId
      * @param array|JsonSerializable|Subscription $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Subscription
      */
@@ -100,7 +100,7 @@ final class SubscriptionService extends Service
      * @param string $subscriptionId
      * @param array|JsonSerializable|SubscriptionCancel $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Subscription
      */
@@ -120,7 +120,7 @@ final class SubscriptionService extends Service
      * @param string $subscriptionId
      * @param array|JsonSerializable|SubscriptionChangePlan $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Subscription
      */
@@ -137,7 +137,7 @@ final class SubscriptionService extends Service
      * @param string $subscriptionId
      * @param array|JsonSerializable|SubscriptionInterimInvoice $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Invoice
      */
@@ -185,7 +185,7 @@ final class SubscriptionService extends Service
      * @param string $subscriptionId
      * @param array|JsonSerializable|SubscriptionChangeItems $data
      *
-     * @throws DataValidationException The input data is not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Subscription
      */

@@ -50,7 +50,7 @@ final class WebsiteService extends Service
      * @param string $websiteId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return Website
      */
@@ -63,7 +63,7 @@ final class WebsiteService extends Service
      * @param array|JsonSerializable|Website $data
      * @param string $websiteId
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Website
      */
@@ -80,7 +80,7 @@ final class WebsiteService extends Service
      * @param string $websiteId
      * @param array|JsonSerializable|Website $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Website
      */

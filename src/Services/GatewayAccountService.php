@@ -50,7 +50,7 @@ final class GatewayAccountService extends Service
      * @param string $gatewayAccountId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return GatewayAccount
      */
@@ -63,7 +63,7 @@ final class GatewayAccountService extends Service
      * @param array|JsonSerializable|GatewayAccount $data
      * @param string $gatewayAccountId
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return GatewayAccount
      */
@@ -80,7 +80,7 @@ final class GatewayAccountService extends Service
      * @param string $gatewayAccountId
      * @param array|JsonSerializable|GatewayAccount $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return GatewayAccount
      */
@@ -101,7 +101,7 @@ final class GatewayAccountService extends Service
      * @param string $gatewayAccountId
      * @param array|JsonSerializable $data
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return bool
      */

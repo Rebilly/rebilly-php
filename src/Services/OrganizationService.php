@@ -50,7 +50,7 @@ final class OrganizationService extends Service
      * @param string $organizationId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return Organization
      */
@@ -62,7 +62,7 @@ final class OrganizationService extends Service
     /**
      * @param array|JsonSerializable|Organization $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Organization
      */
@@ -75,7 +75,7 @@ final class OrganizationService extends Service
      * @param string $organizationId
      * @param array|JsonSerializable|Organization $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Organization
      */

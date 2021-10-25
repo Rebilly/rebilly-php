@@ -50,7 +50,7 @@ final class ApiKeyService extends Service
      * @param string $apiKeyId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return ApiKey
      */
@@ -63,7 +63,7 @@ final class ApiKeyService extends Service
      * @param array|JsonSerializable|ApiKey $data
      * @param string $apiKeyId
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return ApiKey
      */
@@ -80,7 +80,7 @@ final class ApiKeyService extends Service
      * @param string $apiKeyId
      * @param array|JsonSerializable|ApiKey $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return ApiKey
      */

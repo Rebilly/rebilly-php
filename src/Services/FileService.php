@@ -46,7 +46,7 @@ final class FileService extends Service
      * @param string $fileId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return File
      */
@@ -58,7 +58,7 @@ final class FileService extends Service
     /**
      * @param array|JsonSerializable|string|File $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return File
      */
@@ -71,7 +71,7 @@ final class FileService extends Service
      * @param string $fileId
      * @param array|JsonSerializable|File $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return File
      */

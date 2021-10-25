@@ -36,7 +36,7 @@ final class AuthenticationOptionsService extends Service
     /**
      * @param array|JsonSerializable|AuthenticationOptions $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return AuthenticationOptions
      */

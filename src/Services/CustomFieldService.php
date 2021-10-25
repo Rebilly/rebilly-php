@@ -58,7 +58,7 @@ final class CustomFieldService extends Service
      * @param string $name
      * @param array|JsonSerializable|CustomField $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return CustomField
      */
@@ -75,7 +75,7 @@ final class CustomFieldService extends Service
      * @param string $name
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The custom field does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return CustomField
      */
@@ -92,7 +92,7 @@ final class CustomFieldService extends Service
      * @param string $name
      * @param array|JsonSerializable|CustomField $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return CustomField
      */

@@ -46,7 +46,7 @@ final class ProductService extends Service
      * @param string $productId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return Product
      */
@@ -74,7 +74,7 @@ final class ProductService extends Service
      * @param string $productId
      * @param array|JsonSerializable|Product $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Product
      */

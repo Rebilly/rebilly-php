@@ -47,7 +47,7 @@ final class WebhookTrackingService extends Service
      * @param string $trackId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return WebhookTracking
      */
@@ -59,7 +59,7 @@ final class WebhookTrackingService extends Service
     /**
      * @param string $trackId
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      */
     public function resend($trackId)
     {
