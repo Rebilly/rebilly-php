@@ -73,7 +73,7 @@ final class GatewayAccountDowntimeService extends Service
      * @param string $gatewayAccountId
      * @param array|JsonSerializable|GatewayAccountDowntime $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return GatewayAccountDowntime
      */
@@ -91,7 +91,7 @@ final class GatewayAccountDowntimeService extends Service
      * @param string $downtimeId
      * @param array|JsonSerializable|GatewayAccountDowntime $data
      *
-     * @throws DataValidationException The input data is not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return GatewayAccountDowntime
      */

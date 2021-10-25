@@ -50,7 +50,7 @@ final class TagService extends Service
      * @param string $tag
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return Tag
      */
@@ -63,7 +63,7 @@ final class TagService extends Service
      * @param string $tag
      * @param string $customerId
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return void
      */
@@ -76,7 +76,7 @@ final class TagService extends Service
      * @param string $tag
      * @param string $customerId
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return void
      */
@@ -89,7 +89,7 @@ final class TagService extends Service
      * @param string $tag
      * @param array $customerIds
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return void
      */
@@ -101,7 +101,7 @@ final class TagService extends Service
     /**
      * @param array|JsonSerializable|Tag $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Tag
      */
@@ -114,7 +114,7 @@ final class TagService extends Service
      * @param string $tag
      * @param array|JsonSerializable|Tag $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Tag
      */

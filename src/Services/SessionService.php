@@ -28,7 +28,7 @@ final class SessionService extends Service
      * @param string $tokenId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return Session
      */
@@ -41,7 +41,7 @@ final class SessionService extends Service
      * @param array|JsonSerializable|Session $data
      * @param string $tokenId
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Session
      */
@@ -58,7 +58,7 @@ final class SessionService extends Service
      * @param string $tokenId
      * @param array|JsonSerializable|Session $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Session
      */

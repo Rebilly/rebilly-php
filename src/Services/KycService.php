@@ -47,7 +47,7 @@ final class KycService extends Service
      * @param string $kycDocumentId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return KycDocument
      */
@@ -60,7 +60,7 @@ final class KycService extends Service
      * @param array|JsonSerializable|KycDocument $data
      * @param string $kycDocumentId
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return KycDocument
      */
@@ -77,7 +77,7 @@ final class KycService extends Service
      * @param string $kycDocumentId
      * @param array|JsonSerializable|KycDocument $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return KycDocument
      */
@@ -89,7 +89,7 @@ final class KycService extends Service
     /**
      * @param string $kycDocumentId
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return KycDocument
      */
@@ -102,7 +102,7 @@ final class KycService extends Service
      * @param string $kycDocumentId
      * @param array|JsonSerializable|RejectionReason $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return KycDocument
      */

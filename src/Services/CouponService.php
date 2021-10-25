@@ -50,7 +50,7 @@ final class CouponService extends Service
      * @param string $couponId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return Coupon
      */
@@ -63,7 +63,7 @@ final class CouponService extends Service
      * @param array|JsonSerializable|Coupon $data
      * @param string $couponId
      *
-     * @throws DataValidationException The input data is not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Coupon
      */
@@ -80,7 +80,7 @@ final class CouponService extends Service
      * @param string $couponId
      * @param array|JsonSerializable|Coupon $data
      *
-     * @throws DataValidationException The input data is not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Coupon
      */
@@ -91,9 +91,9 @@ final class CouponService extends Service
 
     /**
      * @param $couponId
-     * @param null $expiredTime Leaving $expiredTime null with expire the coupon.
+     * @param null|string $expiredTime Null or empty string will immediately expire the coupon.
      *
-     * @throws DataValidationException The input data is not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Coupon
      */

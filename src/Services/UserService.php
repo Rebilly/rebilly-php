@@ -35,7 +35,7 @@ final class UserService extends Service
     /**
      * @param array|JsonSerializable|Login $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Session
      */
@@ -47,7 +47,7 @@ final class UserService extends Service
     /**
      * @param array|JsonSerializable|Signup $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return User
      */
@@ -59,7 +59,7 @@ final class UserService extends Service
     /**
      * @param array|JsonSerializable|ForgotPassword $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return null
      */
@@ -72,7 +72,7 @@ final class UserService extends Service
      * @param string $token
      * @param array|JsonSerializable|ResetPassword $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return User
      */
@@ -105,7 +105,7 @@ final class UserService extends Service
      * @param string $userId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return User
      */
@@ -118,7 +118,7 @@ final class UserService extends Service
      * @param array|JsonSerializable|User $data
      * @param string $userId
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return User
      */
@@ -157,7 +157,7 @@ final class UserService extends Service
      * @param string $userId
      * @param array|JsonSerializable|User $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return User
      */

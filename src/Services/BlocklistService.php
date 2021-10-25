@@ -50,7 +50,7 @@ final class BlocklistService extends Service
      * @param string $blocklistId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return Blocklist
      */
@@ -63,7 +63,7 @@ final class BlocklistService extends Service
      * @param array|JsonSerializable|Blocklist $data
      * @param string $blocklistId
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Blocklist
      */

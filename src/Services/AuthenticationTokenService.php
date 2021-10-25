@@ -51,7 +51,7 @@ final class AuthenticationTokenService extends Service
      * @param string $token
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return AuthenticationToken
      */
@@ -79,7 +79,7 @@ final class AuthenticationTokenService extends Service
     /**
      * @param array|JsonSerializable|AuthenticationToken $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return AuthenticationToken
      */
@@ -100,7 +100,7 @@ final class AuthenticationTokenService extends Service
      * @param string $token
      * @param array|JsonSerializable|AuthenticationToken $data
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return Session
      */

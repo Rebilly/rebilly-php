@@ -51,7 +51,7 @@ final class InvoiceService extends Service
      * @param string $invoiceId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return Invoice
      */
@@ -64,7 +64,7 @@ final class InvoiceService extends Service
      * @param array|JsonSerializable|Invoice $data
      * @param string $invoiceId
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Invoice
      */
@@ -81,7 +81,7 @@ final class InvoiceService extends Service
      * @param string $invoiceId
      * @param array|JsonSerializable|Invoice $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Invoice
      */

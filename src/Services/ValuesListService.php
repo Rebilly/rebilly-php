@@ -49,7 +49,7 @@ final class ValuesListService extends Service
      * @param string $listId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return ValuesList
      */
@@ -63,7 +63,7 @@ final class ValuesListService extends Service
      * @param int $version
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return ValuesList
      */
@@ -76,7 +76,7 @@ final class ValuesListService extends Service
      * @param array|JsonSerializable|ValuesList $data
      * @param string $listId
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return ValuesList
      */
@@ -93,7 +93,7 @@ final class ValuesListService extends Service
      * @param string $listId
      * @param array|JsonSerializable|ValuesList $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return ValuesList
      */

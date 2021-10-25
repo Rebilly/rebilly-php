@@ -50,7 +50,7 @@ final class PaymentInstrumentService extends Service
      * @param string $paymentInstrumentId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return CommonPaymentInstrument
      */
@@ -63,7 +63,7 @@ final class PaymentInstrumentService extends Service
      * @param array|JsonSerializable|CommonPaymentInstrument $data
      * @param string $cardId
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return CommonPaymentInstrument
      */
@@ -76,7 +76,7 @@ final class PaymentInstrumentService extends Service
      * @param string|array|JsonSerializable|PaymentToken $token
      * @param array|JsonSerializable|CommonPaymentInstrument $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return CommonPaymentInstrument
      */
@@ -99,7 +99,7 @@ final class PaymentInstrumentService extends Service
      * @param string $paymentInstrumentId
      * @param array|JsonSerializable|CommonPaymentInstrument $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return CommonPaymentInstrument
      */

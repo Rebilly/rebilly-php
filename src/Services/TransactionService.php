@@ -50,7 +50,7 @@ final class TransactionService extends Service
      * @param string $transactionId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The resource data does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return Transaction
      */
@@ -65,7 +65,7 @@ final class TransactionService extends Service
      * @param null|string $description
      * @param bool $isProcessedOutside
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Transaction
      */
@@ -85,7 +85,7 @@ final class TransactionService extends Service
     /**
      * @param array|JsonSerializable|Transaction $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Transaction
      */
@@ -101,7 +101,7 @@ final class TransactionService extends Service
      * @param string $transactionId
      * @param array|JsonSerializable|Transaction $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Transaction
      */

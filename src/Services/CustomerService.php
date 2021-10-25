@@ -51,7 +51,7 @@ final class CustomerService extends Service
      * @param string $customerId
      * @param array|ArrayObject $params
      *
-     * @throws NotFoundException The customer does not exist
+     * @throws NotFoundException if resource does not exist
      *
      * @return Customer
      */
@@ -64,7 +64,7 @@ final class CustomerService extends Service
      * @param array|JsonSerializable|Customer $data
      * @param string $customerId
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Customer
      */
@@ -81,7 +81,7 @@ final class CustomerService extends Service
      * @param string $customerId
      * @param array|JsonSerializable|Customer $data
      *
-     * @throws DataValidationException The input data does not valid
+     * @throws DataValidationException if input data is not valid
      *
      * @return Customer
      */
