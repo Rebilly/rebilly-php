@@ -164,7 +164,7 @@ final class Customer extends Entity
     }
 
     /**
-     * @return Address
+     * @return null|Address
      */
     public function getPrimaryAddress()
     {
@@ -231,7 +231,7 @@ final class Customer extends Entity
     }
 
     /**
-     * @return PaymentMethodInstrument
+     * @return null|PaymentMethodInstrument
      */
     public function getDefaultPaymentInstrument()
     {
