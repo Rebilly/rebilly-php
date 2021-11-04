@@ -54,6 +54,6 @@ class RebillySignatureTest extends TestCase
         );
         $this->assertSame(RebillySignature::NONCE_LENGTH, strlen($data['REB-NONCE']));
         $this->assertSame('user', $data['REB-APIUSER']);
-        $this->assertNotContains('key', $data['REB-SIGNATURE']);
+        $this->assertStringNotContainsString('key', $data['REB-SIGNATURE']);
     }
 }

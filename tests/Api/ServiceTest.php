@@ -53,7 +53,7 @@ class ServiceTest extends BaseTestCase
                 if ($request->getMethod() === 'POST') {
                     $response = $response->withHeader(
                         'Location',
-                        $uri->withPath(rtrim($uri->getPath(), '/') . '/dummy')
+                        (string) $uri->withPath(rtrim($uri->getPath(), '/') . '/dummy')
                     );
                 }
 
@@ -251,26 +251,14 @@ class ServiceTest extends BaseTestCase
 
         /** @var CurlHandler|MockObject $handler */
         $handler = $this->createMock(CurlHandler::class);
-
         $handler
-            ->expects(self::at(0))
             ->method('__invoke')
-            ->willReturn($client->createResponse());
-
-        $handler
-            ->expects(self::at(1))
-            ->method('__invoke')
-            ->willReturn($client->createResponse()->withStatus(404));
-
-        $handler
-            ->expects(self::at(2))
-            ->method('__invoke')
-            ->willReturn($client->createResponse()->withHeader('Location', 'authentication-tokens/token'));
-
-        $handler
-            ->expects(self::at(3))
-            ->method('__invoke')
-            ->willReturn($client->createResponse());
+            ->willReturnOnConsecutiveCalls(
+                $client->createResponse(),
+                $client->createResponse()->withStatus(404),
+                $client->createResponse()->withHeader('Location', 'authentication-tokens/token'),
+                $client->createResponse()
+            );
 
         $client = new Client([
             'apiKey' => 'QWERTY',
@@ -341,21 +329,14 @@ class ServiceTest extends BaseTestCase
 
         /** @var CurlHandler|MockObject $handler */
         $handler = $this->createMock(CurlHandler::class);
-
         $handler
-            ->expects(self::at(0))
             ->method('__invoke')
-            ->willReturn($client->createResponse());
-
-        $handler
-            ->expects(self::at(1))
-            ->method('__invoke')
-            ->willReturn($client->createResponse());
-
-        $handler
-            ->expects(self::any())
-            ->method('__invoke')
-            ->willReturn($client->createResponse()->withHeader('Location', 'invoices/invoiceId/items/dummy'));
+            ->willReturnOnConsecutiveCalls(
+                $client->createResponse(),
+                $client->createResponse(),
+                $client->createResponse()->withHeader('Location', 'invoices/invoiceId/items/dummy'),
+                $client->createResponse()->withHeader('Location', 'invoices/invoiceId/items/dummy')
+            );
 
         $client = new Client([
             'apiKey' => 'QWERTY',
@@ -948,7 +929,7 @@ class ServiceTest extends BaseTestCase
                 if ($request->getMethod() === 'POST') {
                     $response = $response->withHeader(
                         'Location',
-                        $uri->withPath(rtrim($uri->getPath(), '/') . '/dummy')
+                        (string) $uri->withPath(rtrim($uri->getPath(), '/') . '/dummy')
                     );
                 }
 
@@ -992,7 +973,7 @@ class ServiceTest extends BaseTestCase
                 if ($request->getMethod() === 'POST') {
                     $response = $response->withHeader(
                         'Location',
-                        $uri->withPath(rtrim($uri->getPath(), '/') . '/dummy')
+                        (string) $uri->withPath(rtrim($uri->getPath(), '/') . '/dummy')
                     );
                 }
 
@@ -1030,7 +1011,7 @@ class ServiceTest extends BaseTestCase
                 if ($request->getMethod() === 'POST') {
                     $response = $response->withHeader(
                         'Location',
-                        $uri->withPath(rtrim($uri->getPath(), '/') . '/dummy')
+                        (string) $uri->withPath(rtrim($uri->getPath(), '/') . '/dummy')
                     );
                 }
 

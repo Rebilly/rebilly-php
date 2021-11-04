@@ -1,7 +1,7 @@
 name: Tests
 on:
   push:
-    branches: 
+    branches:
       - main
   pull_request:
 
@@ -12,10 +12,10 @@ jobs:
     strategy:
       # max-parallel: 1
       matrix:
-        php-version: ['7.1', '7.2', '7.3', '7.4']
+        php-version: ['7.1', '7.2', '7.3', '7.4', '8.0']
 
     env:
-      EXECUTE_COVERAGE: ${{ matrix.php-version == '7.3' }}
+      EXECUTE_COVERAGE: ${{ matrix.php-version == '7.4' }}
       CLOVER_PATH: "logs/clover.xml"
       COVERALLS_LOG_PATH: "logs/coverall-output.json"
       COVERALLS_RUN_LOCALLY: 1
@@ -106,4 +106,4 @@ jobs:
         run: php vendor/bin/phpunit --coverage-clover ${{ env.CLOVER_PATH }}
 
       - name: Lint code
-        run: php vendor/bin/php-cs-fixer fix -vv --dry-run
+        run: composer run cs-feature

@@ -1,6 +1,7 @@
 {
   "name": "rebilly/client-php",
   "description": "Rebilly PHP Client",
+  "type": "library",
   "keywords": [
     "payment processing",
     "api",
@@ -20,8 +21,8 @@
     "php": ">=7.1",
     "ext-curl": "*",
     "ext-json": "*",
-    "psr/http-message": "~1.0",
-    "guzzlehttp/psr7": "~1.0"
+    "psr/http-message": "^1.0",
+    "guzzlehttp/psr7": "^1.0|^2.0"
   },
   "autoload": {
     "psr-4": {
@@ -29,8 +30,8 @@
     }
   },
   "require-dev": {
-    "phpunit/phpunit": "^7.3",
-    "friendsofphp/php-cs-fixer": "^2.13",
+    "phpunit/phpunit": "^7.3|^8.0|^9.0 <9.5",
+    "friendsofphp/php-cs-fixer": "^3.2",
     "guzzlehttp/guzzle": "~6.0",
     "php-coveralls/php-coveralls": "^2.2"
   },

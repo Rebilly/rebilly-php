@@ -616,6 +616,6 @@ final class Client
      */
     public function getOption($name)
     {
-        return isset($this->config[$name]) ? $this->config[$name] : null;
+        return $this->config[$name] ?? null;
     }
 }

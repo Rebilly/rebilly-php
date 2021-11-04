@@ -175,7 +175,7 @@ class SubscriptionTest extends TestCase
         self::assertSame($data['riskMetadata'], $value->getRiskMetadata()->jsonSerialize());
         self::assertSame($data['lineItems'], $value->getLineItems());
         self::assertSame($data['lineItemSubtotal'], $value->getLineItemSubtotal());
-        self::assertInternalType('array', $value->getItems());
+        self::assertIsArray($value->getItems());
         self::assertCount(3, $value->getItems());
 
         foreach ($value->getItems() as $i => $item) {

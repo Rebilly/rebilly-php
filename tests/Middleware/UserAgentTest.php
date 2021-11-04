@@ -39,6 +39,6 @@ class UserAgentTest extends TestCase
         $result = call_user_func($middleware, $request, $response, $done);
 
         $this->assertTrue($result->hasHeader('User-Agent'));
-        $this->assertContains('RebillySDK/PHP-SDK 1.0', $result->getHeaderLine('User-Agent'));
+        $this->assertStringContainsString('RebillySDK/PHP-SDK 1.0', $result->getHeaderLine('User-Agent'));
     }
 }
