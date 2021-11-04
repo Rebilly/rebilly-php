@@ -227,7 +227,7 @@ abstract class Resource implements JsonSerializable, ArrayAccess
      */
     final protected function getLink($name)
     {
-        return isset($this->links[$name]) ? $this->links[$name] : null;
+        return $this->links[$name] ?? null;
     }
 
     /**
@@ -237,7 +237,7 @@ abstract class Resource implements JsonSerializable, ArrayAccess
      */
     final protected function getMetadata($name)
     {
-        return isset($this->metadata[$name]) ? $this->metadata[$name] : null;
+        return $this->metadata[$name] ?? null;
     }
 
     /**

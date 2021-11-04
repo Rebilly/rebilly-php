@@ -152,7 +152,7 @@ class Collection implements JsonSerializable, IteratorAggregate, ArrayAccess, Co
      */
     final protected function getMetadata($name)
     {
-        return isset($this->metadata[$name]) ? $this->metadata[$name] : null;
+        return $this->metadata[$name] ?? null;
     }
 
     /**
