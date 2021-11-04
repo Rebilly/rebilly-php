@@ -335,7 +335,7 @@ class ServiceTest extends BaseTestCase
                 $client->createResponse(),
                 $client->createResponse(),
                 $client->createResponse()->withHeader('Location', 'invoices/invoiceId/items/dummy'),
-                $client->createResponse()->withHeader('Location', 'invoices/invoiceId/items/dummy'),
+                $client->createResponse()->withHeader('Location', 'invoices/invoiceId/items/dummy')
             );
 
         $client = new Client([
