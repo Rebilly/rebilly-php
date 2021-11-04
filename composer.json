@@ -1,6 +1,7 @@
 {
   "name": "rebilly/client-php",
   "description": "Rebilly PHP Client",
+  "type": "library",
   "keywords": [
     "payment processing",
     "api",
