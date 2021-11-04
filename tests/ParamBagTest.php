@@ -35,9 +35,9 @@ class ParamBagTest extends TestCase
             ->expand(['link1'])
         ;
 
-        $this->assertContains('attr1:foo,bar', $params['filter']);
-        $this->assertContains('attr2:1..10', $params['filter']);
-        $this->assertContains('attr1,-attr2', $params['sort']);
+        $this->assertStringContainsString('attr1:foo,bar', $params['filter']);
+        $this->assertStringContainsString('attr2:1..10', $params['filter']);
+        $this->assertStringContainsString('attr1,-attr2', $params['sort']);
         $this->assertSame(10, $params['limit']);
         $this->assertSame(1, $params['offset']);
         $this->assertSame('attr1,attr2', $params['fields']);
