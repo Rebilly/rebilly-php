@@ -246,6 +246,7 @@ final class Client
         } elseif (!is_callable($middleware)) {
             throw new RuntimeException('Middleware should be callable');
         }
+        $organizationId = isset($organizationId) ? $organizationId : null;
 
         $this->config = compact(
             'apiKey',
@@ -266,7 +267,7 @@ final class Client
 
         // Prepare middleware stack
         $this->middleware = new Middleware\CompositeMiddleware(
-            new Middleware\BaseUri($this->createUri($baseUrl), isset($organizationId) ? $organizationId : null),
+            new Middleware\BaseUri($this->createUri($baseUrl), $organizationId),
             new Middleware\UserAgent(self::SDK_VERSION),
             $authentication,
             $middleware,
