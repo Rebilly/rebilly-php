@@ -25,14 +25,19 @@ final class BaseUri implements Middleware
     /** @var Uri */
     private $uri;
 
+    /** @var string|null */
+    private $organizationId;
+
     /**
      * Constructor
      *
      * @param Uri $uri
+     * @param string|null $organizationId
      */
-    public function __construct(Uri $uri = null)
+    public function __construct(Uri $uri = null, ?string $organizationId = null)
     {
         $this->uri = $uri;
+        $this->organizationId = $organizationId;
     }
 
     /**
@@ -43,7 +48,11 @@ final class BaseUri implements Middleware
         // Prepare default URL
         // TODO: Improve URI modification
         $uri = $this->uri;
-        $uri = $uri->withPath($uri->getPath() . '/' . ltrim($request->getUri()->getPath(), '/'));
+        $basePath = $uri->getPath() . '/';
+        if ($this->organizationId) {
+            $basePath .= 'organizations/' . $this->organizationId . '/';
+        }
+        $uri = $uri->withPath($basePath . ltrim($request->getUri()->getPath(), '/'));
         $uri = $uri->withQuery($request->getUri()->getQuery());
         $request = $request->withUri($uri);
 

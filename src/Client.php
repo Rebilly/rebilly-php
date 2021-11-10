@@ -22,7 +22,6 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Log\LoggerInterface as Logger;
 use Rebilly\Http\CurlHandler;
 use Rebilly\Middleware\LogHandler;
-use Rebilly\Middleware\OrganizationIdHeader;
 use Rebilly\Rest\File;
 use RuntimeException;
 
@@ -218,12 +217,6 @@ final class Client
             $sessionToken = null;
         }
 
-        if (isset($organizationId)) {
-            $organizationId = new OrganizationIdHeader($organizationId);
-        } else {
-            $organizationId = null;
-        }
-
         if (isset($baseUrl)) {
             $baseUrl = ltrim($baseUrl, '/');
         } else {
@@ -273,8 +266,7 @@ final class Client
 
         // Prepare middleware stack
         $this->middleware = new Middleware\CompositeMiddleware(
-            new Middleware\BaseUri($this->createUri($baseUrl)),
-            $organizationId,
+            new Middleware\BaseUri($this->createUri($baseUrl), isset($organizationId) ? $organizationId : null),
             new Middleware\UserAgent(self::SDK_VERSION),
             $authentication,
             $middleware,
