@@ -497,6 +497,9 @@ final class Client
         // Remove version from URI
         $uri = preg_replace('#^/' . self::CURRENT_VERSION . '#', '', $uri);
 
+        // Remove organization id from URI
+        $uri = preg_replace('#^/organizations/[^/]+/(.+)$#', '$1', $uri);
+
         // Unserialize response body
         $content = json_decode((string) $response->getBody(), true) ?: [];
 

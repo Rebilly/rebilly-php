@@ -19,7 +19,9 @@ use Psr\Http\Message\UriInterface as Uri;
 use Psr\Log\NullLogger;
 use Rebilly\ApiKeyProvider;
 use Rebilly\Client;
+use Rebilly\Entities\BankAccount;
 use Rebilly\Entities\Customer;
+use Rebilly\Entities\Organization;
 use Rebilly\Http\Exception\HttpException;
 use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Rest\Service;
@@ -110,6 +112,26 @@ final class ClientTest extends TestCase
         $this->assertInstanceOf(Uri::class, $uri);
         $this->assertStringEndsWith('v3', $uri->getPath());
         $this->assertStringEndsWith('param=value', $uri->getQuery());
+    }
+
+    /**
+     * @test
+     * @dataProvider provideLocationHeaders
+     */
+    public function handleLocationHeaderToCreateEntity(string $location, string $expectedClass): void
+    {
+        $client = new Client(['middleware' => function(Request $request, Response $response) use($location): Response {
+            $body = $response->getBody();
+            $body->write(json_encode([['id' => 'dummy']]));
+
+            return $response->withStatus(201)
+                ->withHeader('Location', $location)
+                ->withBody($body);
+        }]);
+
+        $response = $client->send('POST', [], '/foo');
+
+        self::assertInstanceOf($expectedClass, $response);
     }
 
     /**
@@ -315,7 +337,7 @@ final class ClientTest extends TestCase
         $this->assertSame('customer-1', $result->getId());
     }
 
-    public function provideHttpExceptionCodes()
+    public function provideHttpExceptionCodes(): iterable
     {
         return [
             [404],
@@ -323,6 +345,15 @@ final class ClientTest extends TestCase
             [422],
             [400],
             [500],
+        ];
+    }
+
+    public function provideLocationHeaders(): iterable
+    {
+        return [
+            ['https://example.com/organizations/foo-bar/customers/baz', Customer::class],
+            ['https://example.com/organizations/foo-bar/bank-accounts/baz', BankAccount::class],
+            ['https://example.com/organizations/foo-bar', Organization::class],
         ];
     }
 }
