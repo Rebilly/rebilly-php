@@ -16,6 +16,7 @@ Security - in case of vulnerabilities.
 ## [Unreleased]
 
 - [x] Added PHP 8.0 support
+- [x] Replaced `Organization-Id` header with `/organizations/{organizationId}` uri base path
 
 ## [2.13.0] 2021-10-21
 

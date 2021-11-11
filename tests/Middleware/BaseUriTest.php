@@ -48,4 +48,31 @@ class BaseUriTest extends TestCase
         $this->assertSame('google.com', $url->getHost());
         $this->assertSame('/map/demo', $url->getPath());
     }
+
+    /**
+     * @test
+     */
+    public function useMiddlewareWithOrganizationId()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+        $baseUrl = $client->createUri('http://google.com/map');
+
+        $middleware = new BaseUri($baseUrl, 'foo');
+
+        $done = function (Request $request) {
+            return $request;
+        };
+
+        $request = $client->createRequest('GET', '/demo', null);
+        $response = $client->createResponse();
+
+        /**
+         * @var Request $result
+         */
+        $result = call_user_func($middleware, $request, $response, $done);
+        $url = $result->getUri();
+
+        $this->assertSame('google.com', $url->getHost());
+        $this->assertSame('/map/organizations/foo/demo', $url->getPath());
+    }
 }
