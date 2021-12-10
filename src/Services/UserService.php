@@ -168,14 +168,6 @@ final class UserService extends Service
 
     /**
      * @param string $userId
-     */
-    public function delete($userId)
-    {
-        $this->client()->delete('users/{userId}', ['userId' => $userId]);
-    }
-
-    /**
-     * @param string $userId
      * @param array|JsonSerializable|UpdatePassword $data
      *
      * @return User
