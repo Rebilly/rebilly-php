@@ -15,8 +15,17 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
-- [x] Added PHP 8.0 support
-- [x] Replaced `Organization-Id` header with `/organizations/{organizationId}` uri base path
+### Added
+
+- [x] Added PHP 8.0 support.
+
+### Changed
+
+- [x] Replaced `Organization-Id` header with `/organizations/{organizationId}` uri base path.
+
+### Removed
+
+- [x] Removed `UserService::delete()` method.
 
 ## [2.13.0] 2021-10-21
 
