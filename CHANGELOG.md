@@ -18,6 +18,7 @@ Security - in case of vulnerabilities.
 ### Added
 
 - [x] Added PHP 8.0 support.
+- [x] Added `SubscriptionService::delete()` method.
 
 ### Changed
 
