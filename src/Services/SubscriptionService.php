@@ -122,6 +122,14 @@ final class SubscriptionService extends Service
     }
 
     /**
+     * @param string $subscriptionId
+     */
+    public function void($subscriptionId)
+    {
+        return $this->client()->post('subscriptions/{subscriptionId}/void', ['subscriptionId' => $subscriptionId]);
+    }
+
+    /**
      * @deprecated
      * @see changeItems
      *
