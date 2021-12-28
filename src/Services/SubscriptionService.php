@@ -118,7 +118,17 @@ final class SubscriptionService extends Service
      */
     public function delete($subscriptionId)
     {
-        return $this->client()->delete('subscriptions/{subscriptionId}', ['subscriptionId' => $subscriptionId]);
+        $this->client()->delete('subscriptions/{subscriptionId}', ['subscriptionId' => $subscriptionId]);
+    }
+
+    /**
+     * @param string $subscriptionId
+     *
+     * @return Subscription
+     */
+    public function void($subscriptionId)
+    {
+        return $this->client()->post([], 'subscriptions/{subscriptionId}/void', ['subscriptionId' => $subscriptionId]);
     }
 
     /**
