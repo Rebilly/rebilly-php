@@ -123,6 +123,8 @@ final class SubscriptionService extends Service
 
     /**
      * @param string $subscriptionId
+     *
+     * @return Subscription
      */
     public function void($subscriptionId)
     {
