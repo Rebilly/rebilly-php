@@ -128,7 +128,7 @@ final class SubscriptionService extends Service
      */
     public function void($subscriptionId)
     {
-        return $this->client()->post('subscriptions/{subscriptionId}/void', ['subscriptionId' => $subscriptionId]);
+        return $this->client()->post([], 'subscriptions/{subscriptionId}/void', ['subscriptionId' => $subscriptionId]);
     }
 
     /**
