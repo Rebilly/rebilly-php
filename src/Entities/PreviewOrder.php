@@ -96,4 +96,74 @@ class PreviewOrder extends Entity
     {
         return $this->getAttribute('discounts');
     }
+
+    /**
+     * @param array $value
+     *
+     * @return $this
+     */
+    public function setItems(array $value)
+    {
+        return $this->setAttribute('items', $value);
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setWebsiteId(array $value)
+    {
+        return $this->setAttribute('websiteId', $value);
+    }
+
+    /**
+     * @param Address|array $value
+     *
+     * @return $this
+     */
+    public function setBillingAddress($value)
+    {
+        return $this->setAttribute('billingAddress', $value);
+    }
+
+    /**
+     * @param Address|array $value
+     *
+     * @return $this
+     */
+    public function setDeliveryAddress($value)
+    {
+        return $this->setAttribute('deliveryAddress', $value);
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setShippingRateId(array $value)
+    {
+        return $this->setAttribute('shippingRateId', $value);
+    }
+
+    /**
+     * @param array $value
+     *
+     * @return $this
+     */
+    public function setCouponIds($value)
+    {
+        return $this->setAttribute('couponIds', $value);
+    }
+
+    /**
+     * @param array $value
+     *
+     * @return $this
+     */
+    public function setShipping($value)
+    {
+        return $this->setAttribute('shipping', $value);
+    }
 }

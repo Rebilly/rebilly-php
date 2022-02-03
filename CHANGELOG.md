@@ -20,6 +20,7 @@ Security - in case of vulnerabilities.
 - [x] Added PHP 8.0 support.
 - [x] Added `SubscriptionService::delete()` method.
 - [x] Added `SubscriptionService::void()` method.
+- [x] Added `SubscriptionService::previewOrder()` method.
 
 ### Changed
 

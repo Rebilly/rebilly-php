@@ -218,7 +218,7 @@ final class SubscriptionService extends Service
     }
 
     /**
-     * @param array|JsonSerializable|Subscription $data
+     * @param array|JsonSerializable|PreviewOrder $data
      *
      * @throws DataValidationException if input data is not valid
      *
