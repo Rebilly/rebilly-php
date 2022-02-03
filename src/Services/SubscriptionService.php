@@ -14,6 +14,7 @@ namespace Rebilly\Services;
 use ArrayObject;
 use JsonSerializable;
 use Rebilly\Entities\Invoice;
+use Rebilly\Entities\PreviewOrder;
 use Rebilly\Entities\Subscription;
 use Rebilly\Entities\SubscriptionCancel;
 use Rebilly\Entities\SubscriptionChangeItems;
@@ -213,6 +214,21 @@ final class SubscriptionService extends Service
             $data,
             'subscriptions/{subscriptionId}/change-items',
             ['subscriptionId' => $subscriptionId]
+        );
+    }
+
+    /**
+     * @param array|JsonSerializable|Subscription $data
+     *
+     * @throws DataValidationException if input data is not valid
+     *
+     * @return PreviewOrder
+     */
+    public function previewOrder($data)
+    {
+        return $this->client()->post(
+            $data,
+            'previews/orders'
         );
     }
 }
