@@ -112,7 +112,7 @@ class PreviewOrder extends Entity
      *
      * @return $this
      */
-    public function setWebsiteId(array $value)
+    public function setWebsiteId($value)
     {
         return $this->setAttribute('websiteId', $value);
     }
@@ -135,16 +135,6 @@ class PreviewOrder extends Entity
     public function setDeliveryAddress($value)
     {
         return $this->setAttribute('deliveryAddress', $value);
-    }
-
-    /**
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setShippingRateId(array $value)
-    {
-        return $this->setAttribute('shippingRateId', $value);
     }
 
     /**
