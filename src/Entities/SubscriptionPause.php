@@ -67,7 +67,7 @@ class SubscriptionPause extends Resource
      */
     public function getPausedBy()
     {
-        return $this->getAttribute('canceledBy');
+        return $this->getAttribute('pausedBy');
     }
 
     /**
