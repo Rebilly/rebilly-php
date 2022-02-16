@@ -137,6 +137,8 @@ class PaymentInstrumentsTest extends BaseTestCase
         self::assertSame(date('Y') + 1, $instrument->getExpYear());
         self::assertFalse(method_exists($instrument, 'getCvv'));
         self::assertFalse(method_exists($instrument, 'getPan'));
+        self::assertTrue(method_exists($instrument, 'getUseAsBackup'));
+        self::assertTrue(method_exists($instrument, 'setUseAsBackup'));
     }
 
     /**

@@ -21,6 +21,8 @@ Security - in case of vulnerabilities.
 - [x] Added `SubscriptionService::delete()` method.
 - [x] Added `SubscriptionService::void()` method.
 - [x] Added `SubscriptionService::previewOrder()` method.
+- [x] Added `PaymentInstrument::setUseAsBackup()` method.
+- [x] Added `PaymentInstrument::getUseAsBackup()` method.
 - [x] Added `SubscriptionPauseService` service.
 
 ### Changed
