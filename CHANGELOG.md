@@ -23,7 +23,7 @@ Security - in case of vulnerabilities.
 - [x] Added `SubscriptionService::previewOrder()` method.
 - [x] Added `PaymentInstrument::setUseAsBackup()` method.
 - [x] Added `PaymentInstrument::getUseAsBackup()` method.
-- [x] Added `SubscriptionPauseService` service.
+- [x] Added **Subscription Pauses API**.
 
 ### Changed
 
