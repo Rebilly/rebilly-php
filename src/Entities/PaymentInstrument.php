@@ -55,4 +55,22 @@ abstract class PaymentInstrument extends Resource
      * @return string
      */
     abstract protected function methodName();
+
+    /**
+     * @return bool
+     */
+    public function getUseAsBackup()
+    {
+        return $this->getAttribute('useAsBackup');
+    }
+
+    /**
+     * @param bool $value
+     *
+     * @return $this
+     */
+    public function setUseAsBackup($value)
+    {
+        return $this->setAttribute('useAsBackup', $value);
+    }
 }
