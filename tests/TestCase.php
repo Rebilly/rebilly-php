@@ -463,6 +463,9 @@ abstract class TestCase extends Framework\TestCase
             case 'additionalSchema':
             case 'permissions':
             case 'invoiceIds':
+            case 'couponIds':
+            case 'attempts':
+            case 'actions':
                 return [];
             case 'acceptedCurrencies':
                 return ['USD'];
@@ -485,9 +488,6 @@ abstract class TestCase extends Framework\TestCase
                 return random_int(25, 100);
             case 'duration':
                 return random_int(1, 100);
-            case 'attempts':
-            case 'actions':
-                return [];
             case 'paymentInstrument':
                 switch ($class) {
                     case Entities\Transaction::class:
