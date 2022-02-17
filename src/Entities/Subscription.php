@@ -142,6 +142,16 @@ final class Subscription extends Entity
     }
 
     /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setStartTime($value)
+    {
+        return $this->setAttribute('startTime', $value);
+    }
+
+    /**
      * @return string
      */
     public function getEndTime()
@@ -561,11 +571,31 @@ final class Subscription extends Entity
     }
 
     /**
+     * @param bool $value
+     *
+     * @return $this
+     */
+    public function setIsTrialOnly($value)
+    {
+        return $this->setAttribute('isTrialOnly', $value);
+    }
+
+    /**
      * @return null|string
      */
     public function getPoNumber()
     {
         return $this->getAttribute('poNumber');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setPoNumber($value)
+    {
+        return $this->setAttribute('poNumber', $value);
     }
 
     /**
@@ -598,5 +628,33 @@ final class Subscription extends Entity
     public function getTrialReminderNumber()
     {
         return $this->getAttribute('trialReminderNumber');
+    }
+
+    /**
+     * @param array $value
+     *
+     * @return $this
+     */
+    public function setCouponIds(array $value)
+    {
+        return $this->setAttribute('couponIds', $value);
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getNotes()
+    {
+        return $this->getAttribute('notes');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setNotes($value)
+    {
+        return $this->setAttribute('notes', $value);
     }
 }

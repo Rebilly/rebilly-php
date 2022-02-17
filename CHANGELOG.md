@@ -18,12 +18,14 @@ Security - in case of vulnerabilities.
 ### Added
 
 - [x] Added PHP 8.0 support.
+- [x] Added **Subscription Pauses API**.
 - [x] Added `SubscriptionService::delete()` method.
 - [x] Added `SubscriptionService::void()` method.
 - [x] Added `SubscriptionService::previewOrder()` method.
 - [x] Added `PaymentInstrument::setUseAsBackup()` method.
 - [x] Added `PaymentInstrument::getUseAsBackup()` method.
-- [x] Added **Subscription Pauses API**.
+- [x] Added new property to `Subscription`: `notes`
+- [x] Added property setters to `Subscription`: `startTime`, `isTrialOnly`, `poNumber`, `couponIds`
 
 ### Changed
 
