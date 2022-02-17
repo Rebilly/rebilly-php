@@ -470,6 +470,7 @@ abstract class TestCase extends Framework\TestCase
             case 'threeDSecure':
             case 'used':
             case 'useAsBackup':
+            case 'isTrialOnly':
                 return false;
             case 'paymentCardSchemes':
             case 'paymentMethods':
