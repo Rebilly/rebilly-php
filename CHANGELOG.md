@@ -15,6 +15,10 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
+_TBD_
+
+## [2.14.0] 2022-02-17
+
 ### Added
 
 - [x] Added PHP 8.0 support.
