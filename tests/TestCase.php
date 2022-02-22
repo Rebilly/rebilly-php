@@ -136,6 +136,7 @@ abstract class TestCase extends Framework\TestCase
             case 'unitPrice':
             case 'unitPriceAmount':
             case 'amount':
+            case 'price':
                 return random_int(1, 9999) / 100;
             case 'gatewayName':
             case 'organizationId':
@@ -523,6 +524,7 @@ abstract class TestCase extends Framework\TestCase
                         return self::randomElements(Entities\SubscriptionCancellation::statuses())[0];
                     case Entities\ApiTracking::class:
                         return 200;
+                    case Entities\ShippingRate::class:
                     case Entities\PaymentCard::class:
                     case Entities\RulesEngine\Bind::class:
                     case Entities\RulesEngine\Actions\AddRiskScore::class:
@@ -689,6 +691,7 @@ abstract class TestCase extends Framework\TestCase
                 ];
             case 'invoiceTimeShift':
                 return new Entities\Subscriptions\InvoiceTimeShift();
+            case 'filter':
             case 'additionalFilters':
                 return 'websiteId:website-1';
             case 'reconciliationWindowTtl':
