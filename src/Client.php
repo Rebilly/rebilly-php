@@ -66,7 +66,7 @@ use RuntimeException;
  * @method Services\SessionService sessions()
  * @method Services\UserService users()
  * @method Services\ApiTrackingService apiTracking()
- * @method Services\ShippingZoneService shippingZones()
+ * @method Services\ShippingRateService shippingRates()
  * @method Services\ApiKeyService apiKeys()
  * @method Services\DisputeService disputes()
  * @method Services\FileService files()
@@ -142,7 +142,7 @@ final class Client
         'webhookCredentials' => Services\WebhookCredentialsService::class,
         'lists' => Services\ValuesListService::class,
         'listsTracking' => Services\ValuesListTrackingService::class,
-        'shippingZones' => Services\ShippingZoneService::class,
+        'shippingRates' => Services\ShippingRateService::class,
         'webhooksTracking' => Services\WebhookTrackingService::class,
         'gatewayDowntimes' => Services\GatewayAccountDowntimeService::class,
         'gatewayLimits' => Services\GatewayAccountLimitService::class,
