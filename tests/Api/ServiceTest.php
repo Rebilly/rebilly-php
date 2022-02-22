@@ -1221,11 +1221,6 @@ class ServiceTest extends BaseTestCase
                 Entities\ValuesList::class,
             ],
             [
-                'shippingZones',
-                Services\ShippingZoneService::class,
-                Entities\Shipping\ShippingZone::class,
-            ],
-            [
                 'shippingRates',
                 Services\ShippingRateService::class,
                 Entities\ShippingRate::class,
