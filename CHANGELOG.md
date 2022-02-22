@@ -15,7 +15,13 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
-_TBD_
+Added
+ 
+- [x] Added **Shipping Rates API**.
+
+### Removed
+
+- [x] Removed **Shipping Zones API**
 
 ## [2.14.0] 2022-02-17
 
