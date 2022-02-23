@@ -466,4 +466,24 @@ final class Invoice extends Entity
     {
         return $this->getAttribute('type');
     }
+
+    /**
+     * @return array|InvoiceDiscount[]
+     */
+    public function getDiscounts()
+    {
+        return $this->getAttribute('discounts');
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return array|InvoiceDiscount[]
+     */
+    public function createDiscounts(array $data)
+    {
+        return array_map(function ($element) {
+            return new InvoiceDiscount($element);
+        }, $data);
+    }
 }

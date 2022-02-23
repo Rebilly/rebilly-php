@@ -19,6 +19,7 @@ Added
  
 - [x] Added **Shipping Rates API**.
 - [x] Added new property to `Address`: `dob`
+- [x] Added new property to `Invoice`: `discounts`
 
 ### Removed
 
