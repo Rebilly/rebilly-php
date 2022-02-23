@@ -18,6 +18,7 @@ Security - in case of vulnerabilities.
 Added
  
 - [x] Added **Shipping Rates API**.
+- [x] Added new property to `Address`: `dob`
 
 ### Removed
 

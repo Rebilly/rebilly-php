@@ -273,4 +273,22 @@ class Address extends Resource
             $data
         );
     }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setDob($value)
+    {
+        return $this->setAttribute('dob', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getDob()
+    {
+        return $this->getAttribute('dob');
+    }
 }
