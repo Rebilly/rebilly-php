@@ -55,7 +55,9 @@ abstract class TestCase extends Framework\TestCase
 
     protected const TEST_IPV4 = '127.0.0.1';
 
-    protected const DATE_FORMAT = 'Y-m-d H:i:s';
+    protected const FORMAT_DATETIME = 'Y-m-d H:i:s';
+
+    protected const FORMAT_DATE = 'Y-m-d';
 
     /**
      * {@inheritdoc}
@@ -132,7 +134,9 @@ abstract class TestCase extends Framework\TestCase
             case 'processedTime':
             case 'deactivationTime':
             case 'splitTestStartTime':
-                return date(self::DATE_FORMAT);
+                return date(self::FORMAT_DATETIME);
+            case 'dob':
+                return date(self::FORMAT_DATE);
             case 'unitPrice':
             case 'unitPriceAmount':
             case 'amount':
@@ -572,17 +576,6 @@ abstract class TestCase extends Framework\TestCase
                 ];
             case 'countries':
                 return ['US'];
-            case 'rates':
-                return [
-                    Entities\Shipping\Rate::createFromData([
-                        'name' => 'test',
-                        'minOrderSubtotal' => 4,
-                        'maxOrderSubtotal' => 10,
-                        'price' => 5,
-                        'default' => false,
-                        'currency' => 'USD',
-                    ]),
-                ];
             case 'values':
                 return [
                     self::TEST_WORD,
