@@ -173,7 +173,7 @@ class Address extends Resource
     }
 
     /**
-     * @param string $value - ISO 3166-1 Country code
+     * @param string $value Country code in ISO 3166-1 format
      *
      * @return $this
      */
@@ -275,7 +275,7 @@ class Address extends Resource
     }
 
     /**
-     * @param string $value
+     * @param string $value Date of birth in ISO-8601 format (yyyy-mm-dd)
      *
      * @return $this
      */
