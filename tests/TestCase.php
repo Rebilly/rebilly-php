@@ -757,6 +757,8 @@ abstract class TestCase extends Framework\TestCase
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
                 );
+            case 'shipping':
+                return new Entities\Shipping(['calculator' => Entities\Shipping::CALCULATOR_MANUAL, 'amount' => 1]);
         }
     }
 
