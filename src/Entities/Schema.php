@@ -18,6 +18,7 @@ use IteratorAggregate;
 use Rebilly\Entities\Coupons\Coupon;
 use Rebilly\Entities\Coupons\Redemption;
 use Rebilly\Entities\KycDocuments\KycDocument;
+use Rebilly\Entities\ReadyToPay\ReadyToPay;
 use Rebilly\Entities\RulesEngine\EventRules;
 use Rebilly\Rest\Collection;
 
@@ -349,6 +350,9 @@ final class Schema implements IteratorAggregate, ArrayAccess
             },
             'previews/orders' => function (array $content) {
                 return new PreviewOrder($content);
+            },
+            'ready-to-pay' => function (array $content) {
+                return new Collection(new ReadyToPay(), $content);
             },
         ];
     }

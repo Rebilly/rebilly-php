@@ -18,6 +18,7 @@ Security - in case of vulnerabilities.
 Added
  
 - [x] Added **Shipping Rates API**.
+- [x] Added `TransactionService::readyToPay()` method.
 - [x] Added new property to `Address`: `dob`
 - [x] Added new property to `Invoice`: `discounts`
 
