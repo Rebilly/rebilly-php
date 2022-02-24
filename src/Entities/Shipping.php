@@ -19,7 +19,7 @@ use Rebilly\Rest\Resource;
  */
 final class Shipping extends Resource
 {
-    public const UNEXPECTED_CALCULATOR = 'Unexpected calculator. Only %s calculator are supported';
+    public const UNEXPECTED_CALCULATOR = 'Unexpected calculator. Only %s calculators are supported';
 
     public const CALCULATOR_MANUAL = 'manual';
 
