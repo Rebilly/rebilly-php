@@ -20,8 +20,12 @@ Added
 - [x] Added **Shipping Rates API**.
 - [x] Added `TransactionService::readyToPay()` method.
 - [x] Added new property to `Address`: `dob`
-- [x] Added new property to `Invoice`: `discounts`
+- [x] Added new property to `Invoice`: `discounts`, `shipping`
 - [x] Added new properties to `Subscription`: `currency`, `voidTime`, `shipping`
+
+### Deprecated
+
+- [x] Deprecated `Invoice` method: `getShippingAmount`
 
 ### Removed
 
