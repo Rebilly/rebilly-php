@@ -9,8 +9,11 @@
  * @see https://www.rebilly.com
  */
 
-namespace Rebilly\Entities;
+namespace Rebilly\Entities\ReadyToPay;
 
+use Rebilly\Entities\Address;
+use Rebilly\Entities\ReadyToPay\Features\ReadyToPayFeature;
+use Rebilly\Entities\RiskMetadata;
 use Rebilly\Rest\Resource;
 
 class ReadyToPay extends Resource
@@ -54,7 +57,7 @@ class ReadyToPay extends Resource
      */
     public function createFeature(array $data)
     {
-        return new ReadyToPayFeature($data);
+        return ReadyToPayFeature::createFromData($data);
     }
 
     /**

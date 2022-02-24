@@ -13,7 +13,7 @@ namespace Rebilly\Services;
 
 use ArrayObject;
 use JsonSerializable;
-use Rebilly\Entities\ReadyToPay;
+use Rebilly\Entities\ReadyToPay\ReadyToPay;
 use Rebilly\Entities\Transaction;
 use Rebilly\Http\Exception\DataValidationException;
 use Rebilly\Http\Exception\NotFoundException;

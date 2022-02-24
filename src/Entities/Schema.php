@@ -18,6 +18,7 @@ use IteratorAggregate;
 use Rebilly\Entities\Coupons\Coupon;
 use Rebilly\Entities\Coupons\Redemption;
 use Rebilly\Entities\KycDocuments\KycDocument;
+use Rebilly\Entities\ReadyToPay\ReadyToPay;
 use Rebilly\Entities\RulesEngine\EventRules;
 use Rebilly\Rest\Collection;
 
