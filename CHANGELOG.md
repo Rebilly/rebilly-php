@@ -21,6 +21,7 @@ Added
 - [x] Added `TransactionService::readyToPay()` method.
 - [x] Added new property to `Address`: `dob`
 - [x] Added new property to `Invoice`: `discounts`
+- [x] Added new properties to `Subscription`: `currency`, `voidTime`, `shipping`
 
 ### Removed
 

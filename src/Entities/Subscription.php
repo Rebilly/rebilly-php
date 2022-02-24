@@ -657,4 +657,48 @@ final class Subscription extends Entity
     {
         return $this->setAttribute('notes', $value);
     }
+
+    /**
+     * @return string
+     */
+    public function getCurrency()
+    {
+        return $this->getAttribute('currency');
+    }
+
+    /**
+     * @return string
+     */
+    public function getVoidTime()
+    {
+        return $this->getAttribute('voidTime');
+    }
+
+    /**
+     * @return Shipping
+     */
+    public function getShipping()
+    {
+        return $this->getAttribute('shipping');
+    }
+
+    /**
+     * @param array|Shipping $value
+     *
+     * @return $this
+     */
+    public function setShipping($value)
+    {
+        return $this->setAttribute('shipping', $value);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return Shipping
+     */
+    public function createShipping(array $data)
+    {
+        return new Shipping($data);
+    }
 }
