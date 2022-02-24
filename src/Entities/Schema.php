@@ -350,6 +350,9 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'previews/orders' => function (array $content) {
                 return new PreviewOrder($content);
             },
+            'ready-to-pay' => function (array $content) {
+                return new Collection(new ReadyToPay(), $content);
+            },
         ];
     }
 

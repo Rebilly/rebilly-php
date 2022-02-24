@@ -13,6 +13,7 @@ namespace Rebilly\Services;
 
 use ArrayObject;
 use JsonSerializable;
+use Rebilly\Entities\ReadyToPay;
 use Rebilly\Entities\Transaction;
 use Rebilly\Http\Exception\DataValidationException;
 use Rebilly\Http\Exception\NotFoundException;
@@ -108,5 +109,17 @@ final class TransactionService extends Service
     public function patch($transactionId, $data)
     {
         return $this->client()->patch($data, 'transactions/{transactionId}', ['transactionId' => $transactionId]);
+    }
+
+    /**
+     * @param array|JsonSerializable|ReadyToPay $data
+     *
+     * @throws DataValidationException if input data is not valid
+     *
+     * @return ReadyToPay[]
+     */
+    public function readyToPay($data)
+    {
+        return $this->client()->post($data, 'ready-to-pay');
     }
 }
