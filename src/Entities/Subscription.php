@@ -683,7 +683,7 @@ final class Subscription extends Entity
     }
 
     /**
-     * @param $value
+     * @param array|Shipping $value
      *
      * @return $this
      */
