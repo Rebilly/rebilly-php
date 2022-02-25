@@ -198,6 +198,7 @@ class ApiTest extends TestCase
             [Entities\RiskMetadata::class],
             [Entities\WebhookTracking::class],
             [Entities\ShippingRate::class],
+            [Entities\Shipping::class],
             [Entities\InvoiceTax::class],
             [Entities\InvoiceTaxItem::class],
             [Entities\SubscriptionChangePlan::class],

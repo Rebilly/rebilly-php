@@ -759,6 +759,8 @@ abstract class TestCase extends Framework\TestCase
                 );
             case 'shipping':
                 return new Entities\Shipping(['calculator' => Entities\Shipping::CALCULATOR_MANUAL, 'amount' => 1]);
+            case 'tax':
+                return new Entities\InvoiceTax(['calculator' => Entities\InvoiceTax::CALCULATOR_REBILLY_TAXJAR]);
         }
     }
 
