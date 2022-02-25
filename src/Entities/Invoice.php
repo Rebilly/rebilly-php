@@ -206,6 +206,8 @@ final class Invoice extends Entity
     }
 
     /**
+     * @deprecated use {@see getTax()} instead
+     *
      * @return array
      */
     public function getTaxes()
@@ -515,5 +517,33 @@ final class Invoice extends Entity
     public function createShipping(array $data)
     {
         return new Shipping($data);
+    }
+
+    /**
+     * @return InvoiceTax
+     */
+    public function getTax()
+    {
+        return $this->getAttribute('tax');
+    }
+
+    /**
+     * @param array|InvoiceTax $value
+     *
+     * @return $this
+     */
+    public function setTax($value)
+    {
+        return $this->setAttribute('tax', $value);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return InvoiceTax
+     */
+    public function createTax(array $data)
+    {
+        return new InvoiceTax($data);
     }
 }

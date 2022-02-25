@@ -11,6 +11,7 @@
 
 namespace Rebilly\Entities;
 
+use DomainException;
 use Rebilly\Rest\Resource;
 
 /**
@@ -18,7 +19,48 @@ use Rebilly\Rest\Resource;
  */
 final class InvoiceTax extends Resource
 {
+    public const UNEXPECTED_CALCULATOR = 'Unexpected calculator. Only %s calculators are supported';
+
+    public const CALCULATOR_MANUAL = 'manual';
+
+    public const CALCULATOR_REBILLY_TAXJAR = 'rebilly-taxjar';
+
     /**
+     * @return array
+     */
+    public static function allowedCalculators()
+    {
+        return [
+            self::CALCULATOR_MANUAL,
+            self::CALCULATOR_REBILLY_TAXJAR,
+        ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getCalculator()
+    {
+        return $this->getAttribute('calculator');
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setCalculator($value): self
+    {
+        if (!in_array($value, self::allowedCalculators(), true)) {
+            throw new DomainException(sprintf(self::UNEXPECTED_CALCULATOR, implode(', ', self::allowedCalculators())));
+        }
+
+        return $this->setAttribute('calculator', $value);
+    }
+
+    /**
+     * @deprecated
+     *
      * @return string
      */
     public function getDescription()
@@ -27,6 +69,8 @@ final class InvoiceTax extends Resource
     }
 
     /**
+     * @deprecated
+     *
      * @param string $value
      *
      * @return $this
@@ -45,6 +89,8 @@ final class InvoiceTax extends Resource
     }
 
     /**
+     * @deprecated
+     *
      * @param float $value
      *
      * @return $this
@@ -52,5 +98,25 @@ final class InvoiceTax extends Resource
     public function setAmount($value)
     {
         return $this->setAttribute('amount', $value);
+    }
+
+    /**
+     * @return array|InvoiceTaxItem[]
+     */
+    public function getItems()
+    {
+        return $this->getAttribute('items');
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return array|InvoiceItem[]
+     */
+    public function createItems(array $data)
+    {
+        return array_map(function ($element) {
+            return new InvoiceTaxItem($element);
+        }, $data);
     }
 }

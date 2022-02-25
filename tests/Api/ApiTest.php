@@ -199,6 +199,7 @@ class ApiTest extends TestCase
             [Entities\WebhookTracking::class],
             [Entities\ShippingRate::class],
             [Entities\InvoiceTax::class],
+            [Entities\InvoiceTaxItem::class],
             [Entities\SubscriptionChangePlan::class],
             [Entities\SubscriptionInterimInvoice::class],
             [Entities\PaymentInstruments\BankAccountPaymentInstrument::class, null],
@@ -231,6 +232,11 @@ class ApiTest extends TestCase
             [Entities\RulesEngine\Actions\GatewayAccountPick\AcquirerWeights::class],
             [Entities\RulesEngine\Actions\GatewayAccountPick\AccountWeights::class],
             [Entities\SubscriptionChangeItems::class],
+            [Entities\ReadyToPay\ReadyToPay::class],
+            [Entities\ReadyToPay\Features\ApplePayFeature::class],
+            [Entities\ReadyToPay\Features\GooglePayFeature::class],
+            [Entities\ReadyToPay\Features\PlaidFeature::class],
+            [Entities\ReadyToPay\Features\PayPalBillingAgreementFeature::class],
         ];
 
         foreach ($cases as $case) {
