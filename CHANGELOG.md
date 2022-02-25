@@ -25,7 +25,8 @@ Added
 
 ### Deprecated
 
-- [x] Deprecated `Invoice` method: `getShippingAmount`
+- [x] Deprecated `Invoice` methods: `getShippingAmount`, `getTaxes`
+- [x] Deprecated `InvoiceTax` methods: `getDescription`, `setDescription`, `setAmount`
 
 ### Removed
 
