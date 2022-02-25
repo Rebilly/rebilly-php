@@ -121,7 +121,7 @@ final class InvoiceTax extends Resource
     /**
      * @param array $data
      *
-     * @return array|InvoiceItem[]
+     * @return array|InvoiceTaxItem[]
      */
     public function createItems(array $data)
     {
