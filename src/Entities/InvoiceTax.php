@@ -109,6 +109,16 @@ final class InvoiceTax extends Resource
     }
 
     /**
+     * @param array|InvoiceTaxItem[] $value
+     *
+     * @return $this
+     */
+    public function setItems($value)
+    {
+        return $this->setAttribute('items', $value);
+    }
+
+    /**
      * @param array $data
      *
      * @return array|InvoiceItem[]
