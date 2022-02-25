@@ -114,6 +114,7 @@ abstract class TestCase extends Framework\TestCase
             case 'resourceId':
             case 'alternateGatewayAccountIfRejected':
             case 'alternateGatewayAccountIfOptional':
+            case 'rateId':
                 return self::uuid();
             case 'dueTime':
             case 'expiredTime':
@@ -393,6 +394,11 @@ abstract class TestCase extends Framework\TestCase
                         return [
                             ['planId' => 'plan-1', 'quantity' => 1],
                             ['planId' => 'plan-2', 'quantity' => 2],
+                        ];
+                    case Entities\InvoiceTax::class:
+                        return [
+                            ['amount' => 1, 'description' => 'Tax 1'],
+                            ['amount' => 10, 'description' => 'Tax 2'],
                         ];
                     default:
                         throw new InvalidArgumentException(
