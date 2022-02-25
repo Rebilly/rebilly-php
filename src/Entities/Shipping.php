@@ -31,8 +31,8 @@ final class Shipping extends Resource
     public static function allowedCalculators()
     {
         return [
-            self::CALCULATOR_REBILLY,
             self::CALCULATOR_MANUAL,
+            self::CALCULATOR_REBILLY,
         ];
     }
 

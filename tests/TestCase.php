@@ -114,6 +114,7 @@ abstract class TestCase extends Framework\TestCase
             case 'resourceId':
             case 'alternateGatewayAccountIfRejected':
             case 'alternateGatewayAccountIfOptional':
+            case 'rateId':
                 return self::uuid();
             case 'dueTime':
             case 'expiredTime':
@@ -388,6 +389,16 @@ abstract class TestCase extends Framework\TestCase
                     case Entities\SubscriptionChangeItems::class:
                         return [
                             ['plan' => ['id' => 'plan-1'], 'quantity' => 1],
+                        ];
+                    case Entities\ReadyToPay\ReadyToPay::class:
+                        return [
+                            ['planId' => 'plan-1', 'quantity' => 1],
+                            ['planId' => 'plan-2', 'quantity' => 2],
+                        ];
+                    case Entities\InvoiceTax::class:
+                        return [
+                            ['amount' => 1, 'description' => 'Tax 1'],
+                            ['amount' => 10, 'description' => 'Tax 2'],
                         ];
                     default:
                         throw new InvalidArgumentException(
@@ -758,7 +769,21 @@ abstract class TestCase extends Framework\TestCase
                     sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
                 );
             case 'shipping':
-                return new Entities\Shipping(['calculator' => Entities\Shipping::CALCULATOR_MANUAL, 'amount' => 1]);
+                return new Entities\Shipping(['calculator' => Entities\Shipping::CALCULATOR_REBILLY]);
+            case 'tax':
+                return new Entities\InvoiceTax(['calculator' => Entities\InvoiceTax::CALCULATOR_REBILLY_TAXJAR]);
+            case 'calculator':
+                switch ($class) {
+                    case Entities\Shipping::class:
+                        return Entities\Shipping::CALCULATOR_REBILLY;
+                    case Entities\InvoiceTax ::class:
+                        return Entities\InvoiceTax::CALCULATOR_REBILLY_TAXJAR;
+                    default:
+                        throw new InvalidArgumentException(
+                            sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
+                        );
+                }
+            // no break
         }
     }
 

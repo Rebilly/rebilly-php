@@ -180,6 +180,8 @@ final class Invoice extends Entity
     }
 
     /**
+     * @deprecated use {@see getShipping()} instead
+     *
      * @return float
      */
     public function getShippingAmount()
@@ -204,6 +206,8 @@ final class Invoice extends Entity
     }
 
     /**
+     * @deprecated use {@see getTax()} instead
+     *
      * @return array
      */
     public function getTaxes()
@@ -485,5 +489,61 @@ final class Invoice extends Entity
         return array_map(function ($element) {
             return new InvoiceDiscount($element);
         }, $data);
+    }
+
+    /**
+     * @return Shipping
+     */
+    public function getShipping()
+    {
+        return $this->getAttribute('shipping');
+    }
+
+    /**
+     * @param array|Shipping $value
+     *
+     * @return $this
+     */
+    public function setShipping($value)
+    {
+        return $this->setAttribute('shipping', $value);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return Shipping
+     */
+    public function createShipping(array $data)
+    {
+        return new Shipping($data);
+    }
+
+    /**
+     * @return InvoiceTax
+     */
+    public function getTax()
+    {
+        return $this->getAttribute('tax');
+    }
+
+    /**
+     * @param array|InvoiceTax $value
+     *
+     * @return $this
+     */
+    public function setTax($value)
+    {
+        return $this->setAttribute('tax', $value);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return InvoiceTax
+     */
+    public function createTax(array $data)
+    {
+        return new InvoiceTax($data);
     }
 }
