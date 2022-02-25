@@ -126,6 +126,10 @@ final class InvoiceTax extends Resource
     public function createItems(array $data)
     {
         return array_map(function ($element) {
+            if ($element instanceof InvoiceTaxItem) {
+                return $element;
+            }
+
             return new InvoiceTaxItem($element);
         }, $data);
     }
