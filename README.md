@@ -38,7 +38,7 @@ Create a Rebilly Client
 ```php
 use Rebilly\Client;
 
-// Instantiate an Rebilly client.
+// Instantiate Rebilly client.
 $client = new Client([
   'apiKey' => ApiKeyProvider::env(),
   'baseUrl' => Client::SANDBOX_HOST,
@@ -54,7 +54,7 @@ $form->setLastName('Connor');
 
 try {
   $customer = $client->customers()->create($form);
-} catch (UnprocessableEntityException $e) {
+} catch (DataValidationException $e) {
   var_dump($e->getErrors());
 }
 ```
