@@ -22,8 +22,8 @@ use Rebilly\Client;
 use Rebilly\Entities\BankAccount;
 use Rebilly\Entities\Customer;
 use Rebilly\Entities\Organization;
+use Rebilly\Http\Exception\DataValidationException;
 use Rebilly\Http\Exception\HttpException;
-use Rebilly\Http\Exception\UnprocessableEntityException;
 use Rebilly\Rest\Service;
 use RuntimeException;
 
@@ -198,7 +198,7 @@ final class ClientTest extends TestCase
 
         try {
             $client->post([], 'customers');
-        } catch (UnprocessableEntityException $e) {
+        } catch (DataValidationException $e) {
             $this->assertSame($code, $e->getStatusCode());
             $this->assertEmpty($e->getErrors());
         } catch (HttpException $e) {
