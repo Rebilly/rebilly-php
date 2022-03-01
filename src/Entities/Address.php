@@ -275,6 +275,14 @@ class Address extends Resource
     }
 
     /**
+     * @return string
+     */
+    public function getDob()
+    {
+        return $this->getAttribute('dob');
+    }
+
+    /**
      * @param string $value Date of birth in ISO-8601 format (yyyy-mm-dd)
      *
      * @return $this
@@ -287,8 +295,16 @@ class Address extends Resource
     /**
      * @return string
      */
-    public function getDob()
+    public function getJobTitle()
     {
-        return $this->getAttribute('dob');
+        return $this->getAttribute('jobTitle');
+    }
+
+    /**
+     * @return $this
+     */
+    public function setJobTitle($value)
+    {
+        return $this->setAttribute('jobTitle', $value);
     }
 }

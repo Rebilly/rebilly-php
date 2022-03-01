@@ -159,6 +159,7 @@ abstract class TestCase extends Framework\TestCase
             case 'username':
             case 'message':
             case 'title':
+            case 'jobTitle':
                 return self::TEST_WORD;
             case 'redirectUrl':
             case 'notificationUrl':
