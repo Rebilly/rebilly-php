@@ -27,11 +27,7 @@ abstract class PaymentInstruction extends Resource
 
     public function __construct(array $data = [])
     {
-        if (!isset($data[$this->getAttributeName()])) {
-            throw new InvalidArgumentException(sprintf('Attribute %s is required', $this->getAttributeName()));
-        }
-
-        parent::__construct([$this->getAttributeName() => $data[$this->getAttributeName()]]);
+        parent::__construct([$this->getAttributeName() => $data[$this->getAttributeName()] ?? null]);
     }
 
     /**
