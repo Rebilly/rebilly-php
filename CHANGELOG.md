@@ -15,13 +15,17 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
-Added
+### Added
 
 - [x] Added new property to `Address`: `jobTitle`
 
+### Fixed
+
+- [x] Fixed setting `Restrictions` on `Redemption` 
+
 ## [2.15.0] 2022-02-25
 
-Added
+### Added
  
 - [x] Added **Shipping Rates API**.
 - [x] Added `TransactionService::readyToPay()` method.
