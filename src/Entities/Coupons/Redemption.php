@@ -86,7 +86,7 @@ final class Redemption extends Entity
     }
 
     /**
-     * @param array $restrictions
+     * @param array|Restriction[] $restrictions
      *
      * @throws DomainException
      *
@@ -105,8 +105,16 @@ final class Redemption extends Entity
     public function createAdditionalRestrictions(array $data)
     {
         return array_map(
-            function (array $values) {
-                return Restriction::createFromData($values);
+            function ($restriction) {
+                if ($restriction instanceof Restriction) {
+                    return $restriction;
+                }
+
+                if (!is_array($restriction)) {
+                    throw new DomainException('Incorrect restriction - it must be an array or instance of Restriction.');
+                }
+
+                return Restriction::createFromData($restriction);
             },
             $data
         );
