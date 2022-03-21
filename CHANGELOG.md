@@ -15,6 +15,10 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
+_TBD_
+
+## [2.16.0] 2022-03-21
+
 ### Added
 
 - [x] Added new property to `Address`: `jobTitle`
