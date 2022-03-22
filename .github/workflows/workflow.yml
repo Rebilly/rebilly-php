@@ -63,6 +63,7 @@ jobs:
           clover_file: ${{ env.CLOVER_PATH }}
           threshold_alert: 0
           threshold_warning: 50
+          comment_footer: false
 
       - name: Upload coverage to Coveralls
         if: env.EXECUTE_COVERAGE == 'true'
