@@ -214,7 +214,7 @@ final class SubscriptionService extends Service
         return $this->client()->post(
             $data,
             'subscriptions/{subscriptionId}/change-items',
-            ['subscriptionId' => $subscriptionId] + $params
+            ['subscriptionId' => $subscriptionId] + (array) $params
         );
     }
 
