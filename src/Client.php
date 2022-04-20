@@ -246,7 +246,7 @@ final class Client
         } elseif (!is_callable($middleware)) {
             throw new RuntimeException('Middleware should be callable');
         }
-        $organizationId = isset($organizationId) ? $organizationId : null;
+        $organizationId = $organizationId ?? null;
 
         $this->config = compact(
             'apiKey',
