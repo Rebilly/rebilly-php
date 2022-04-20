@@ -31,7 +31,7 @@ final class CustomerTimelineService extends Service
         return new Paginator(
             $this->client(),
             'customers/{customerId}/timeline',
-            ['customerId' => $customerId] + $params
+            ['customerId' => $customerId] + (array) $params
         );
     }
 
