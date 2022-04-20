@@ -777,14 +777,13 @@ abstract class TestCase extends Framework\TestCase
                 switch ($class) {
                     case Entities\Shipping::class:
                         return Entities\Shipping::CALCULATOR_REBILLY;
-                    case Entities\InvoiceTax ::class:
+                    case Entities\InvoiceTax::class:
                         return Entities\InvoiceTax::CALCULATOR_REBILLY_TAXJAR;
                     default:
                         throw new InvalidArgumentException(
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
                         );
                 }
-            // no break
         }
     }
 
