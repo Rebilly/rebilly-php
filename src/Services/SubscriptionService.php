@@ -209,7 +209,7 @@ final class SubscriptionService extends Service
      *
      * @return Subscription
      */
-    public function changeItems($subscriptionId, $data, $params)
+    public function changeItems($subscriptionId, $data, $params = [])
     {
         return $this->client()->post(
             $data,
