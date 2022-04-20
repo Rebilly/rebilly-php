@@ -11,7 +11,6 @@
 
 namespace Rebilly\Entities;
 
-use DomainException;
 use Rebilly\Rest\Resource;
 
 /**
