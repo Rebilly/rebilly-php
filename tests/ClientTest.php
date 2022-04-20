@@ -120,7 +120,7 @@ final class ClientTest extends TestCase
      */
     public function handleLocationHeaderToCreateEntity(string $location, string $expectedClass): void
     {
-        $client = new Client(['middleware' => function(Request $request, Response $response) use($location): Response {
+        $client = new Client(['middleware' => function (Request $request, Response $response) use ($location): Response {
             $body = $response->getBody();
             $body->write(json_encode([['id' => 'dummy']]));
 

@@ -17,6 +17,12 @@ Security - in case of vulnerabilities.
 
 _TBD_
 
+## [2.17.0] 2022-04-20
+
+### Added
+
+- [x] Added query parameters argument to `SubscriptionService::changeItems()` method
+
 ## [2.16.0] 2022-03-21
 
 ### Added

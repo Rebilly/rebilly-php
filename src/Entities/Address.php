@@ -301,6 +301,8 @@ class Address extends Resource
     }
 
     /**
+     * @param string $value
+     *
      * @return $this
      */
     public function setJobTitle($value)

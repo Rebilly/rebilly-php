@@ -203,17 +203,18 @@ final class SubscriptionService extends Service
     /**
      * @param string $subscriptionId
      * @param array|JsonSerializable|SubscriptionChangeItems $data
+     * @param array|ArrayObject $params
      *
      * @throws DataValidationException if input data is not valid
      *
      * @return Subscription
      */
-    public function changeItems($subscriptionId, $data)
+    public function changeItems($subscriptionId, $data, $params = [])
     {
         return $this->client()->post(
             $data,
             'subscriptions/{subscriptionId}/change-items',
-            ['subscriptionId' => $subscriptionId]
+            ['subscriptionId' => $subscriptionId] + $params
         );
     }
 

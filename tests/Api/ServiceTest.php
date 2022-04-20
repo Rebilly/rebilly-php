@@ -395,7 +395,19 @@ class ServiceTest extends BaseTestCase
         $result = $service->issueUpcomingInvoice('dummy', 'invoice-1');
         self::assertInstanceOf(Entities\Subscription::class, $result);
 
-        $result = $service->changeItems('dummy', []);
+        $handler
+            ->expects(self::any())
+            ->method('__invoke')
+            ->willReturnCallback(function ($request) use ($client) {
+                self::assertSame(
+                    'https://api.rebilly.com/subscriptions/dummy/change-items?expand=upcomingInvoice',
+                    (string) $request->getUri()
+                );
+
+                return $client->createResponse()->withHeader('Location', 'subscriptions/dummy');
+            });
+
+        $result = $service->changeItems('dummy', [], ['expand' => 'upcomingInvoice']);
         self::assertInstanceOf(Entities\Subscription::class, $result);
     }
 

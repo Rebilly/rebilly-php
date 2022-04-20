@@ -12,7 +12,6 @@
 namespace Rebilly\Entities\Transactions;
 
 use DomainException;
-use InvalidArgumentException;
 use Rebilly\Entities\Transactions\PaymentInstructions\PaymentInstrumentInstruction;
 use Rebilly\Entities\Transactions\PaymentInstructions\PaymentMethodsInstruction;
 use Rebilly\Entities\Transactions\PaymentInstructions\PaymentTokenInstruction;

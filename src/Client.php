@@ -102,7 +102,7 @@ final class Client
      */
     public const CURRENT_VERSION = 'v2.1';
 
-    public const SDK_VERSION = '2.16.0';
+    public const SDK_VERSION = '2.17.0';
 
     private static $services = [
         'authenticationOptions' => Services\AuthenticationOptionsService::class,
@@ -246,7 +246,7 @@ final class Client
         } elseif (!is_callable($middleware)) {
             throw new RuntimeException('Middleware should be callable');
         }
-        $organizationId = isset($organizationId) ? $organizationId : null;
+        $organizationId = $organizationId ?? null;
 
         $this->config = compact(
             'apiKey',
