@@ -14,6 +14,7 @@ namespace Rebilly\Tests\Entities\Subscriptions;
 use DateTimeImmutable;
 use Rebilly\Entities\Address;
 use Rebilly\Entities\Customer;
+use Rebilly\Entities\Invoice;
 use Rebilly\Entities\LeadSource;
 use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstruction;
 use Rebilly\Entities\PaymentRetryInstructions\ScheduleInstructionTypes\DateIntervalType;
@@ -81,6 +82,7 @@ class SubscriptionTest extends TestCase
                 'website' => ['id' => 'website-1'],
                 'customer' => ['id' => 'customer-1'],
                 'leadSource' => ['id' => 'leadSource-1'],
+                'upcomingInvoice' => ['id' => 'invoice-1'],
             ],
         ];
     }
@@ -187,6 +189,7 @@ class SubscriptionTest extends TestCase
         self::assertInstanceOf(Website::class, $value->getWebsite());
         self::assertInstanceOf(Customer::class, $value->getCustomer());
         self::assertInstanceOf(LeadSource::class, $value->getLeadSource());
+        self::assertInstanceOf(Invoice::class, $value->getUpcomingInvoice());
 
         $invoiceTimeShift = $value->getInvoiceTimeShift();
         self::assertInstanceOf(InvoiceTimeShift::class, $invoiceTimeShift);

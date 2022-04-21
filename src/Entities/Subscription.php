@@ -519,6 +519,18 @@ final class Subscription extends Entity
     }
 
     /**
+     * @return null|Invoice
+     */
+    public function getUpcomingInvoice()
+    {
+        $data = $this->getEmbeddedResource('upcomingInvoice');
+
+        return $data
+            ? new Invoice($data)
+            : null;
+    }
+
+    /**
      * @return null|Customer
      */
     public function getCustomer()
