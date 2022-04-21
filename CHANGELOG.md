@@ -17,6 +17,12 @@ Security - in case of vulnerabilities.
 
 _TBD_
 
+## [2.18.0] 2022-04-21
+
+### Added
+
+- [x] Added `Subscription::getUpcomingInvoice()` method
+
 ## [2.17.0] 2022-04-20
 
 ### Added
