@@ -360,7 +360,7 @@ final class Schema implements IteratorAggregate, ArrayAccess
     /**
      * {@inheritdoc}
      */
-    public function getIterator()
+    public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->builders);
     }
@@ -368,7 +368,7 @@ final class Schema implements IteratorAggregate, ArrayAccess
     /**
      * {@inheritdoc}
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->builders[$offset]);
     }
@@ -376,6 +376,7 @@ final class Schema implements IteratorAggregate, ArrayAccess
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->builders[$offset];
@@ -384,7 +385,7 @@ final class Schema implements IteratorAggregate, ArrayAccess
     /**
      * {@inheritdoc}
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if (!is_callable($value)) {
             throw new InvalidArgumentException();
@@ -396,7 +397,7 @@ final class Schema implements IteratorAggregate, ArrayAccess
     /**
      * {@inheritdoc}
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->builders[$offset]);
     }

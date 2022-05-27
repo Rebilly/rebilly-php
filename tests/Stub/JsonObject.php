@@ -25,7 +25,7 @@ final class JsonObject implements JsonSerializable
         $this->data = $data;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return (array) $this->data;
     }

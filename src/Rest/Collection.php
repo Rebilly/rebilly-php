@@ -87,7 +87,7 @@ class Collection implements JsonSerializable, IteratorAggregate, ArrayAccess, Co
      *
      * @return Iterator|ApiResource[]
      */
-    public function getIterator()
+    public function getIterator(): Iterator
     {
         return new ArrayIterator($this->items);
     }
@@ -95,7 +95,7 @@ class Collection implements JsonSerializable, IteratorAggregate, ArrayAccess, Co
     /**
      * {@inheritdoc}
      */
-    public function count()
+    public function count(): int
     {
         return count($this->items);
     }
@@ -103,7 +103,7 @@ class Collection implements JsonSerializable, IteratorAggregate, ArrayAccess, Co
     /**
      * {@inheritdoc}
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return array_map(
             function (JsonSerializable $item) {
@@ -116,7 +116,7 @@ class Collection implements JsonSerializable, IteratorAggregate, ArrayAccess, Co
     /**
      * {@inheritdoc}
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->items[$offset]);
     }
@@ -124,6 +124,7 @@ class Collection implements JsonSerializable, IteratorAggregate, ArrayAccess, Co
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->items[$offset];
@@ -132,7 +133,7 @@ class Collection implements JsonSerializable, IteratorAggregate, ArrayAccess, Co
     /**
      * {@inheritdoc}
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         throw new LogicException();
     }
@@ -140,7 +141,7 @@ class Collection implements JsonSerializable, IteratorAggregate, ArrayAccess, Co
     /**
      * {@inheritdoc}
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         throw new LogicException();
     }

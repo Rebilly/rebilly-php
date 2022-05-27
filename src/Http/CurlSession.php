@@ -77,7 +77,7 @@ class CurlSession
      *
      * @return string
      */
-    public function getErrorMessage()
+    public function getErrorMessage(): string
     {
         return curl_error($this->handle);
     }
@@ -85,7 +85,7 @@ class CurlSession
     /**
      * @return int
      */
-    public function getErrorCode()
+    public function getErrorCode(): int
     {
         return curl_errno($this->handle);
     }
@@ -93,7 +93,7 @@ class CurlSession
     /**
      * Close session.
      */
-    public function close()
+    public function close(): void
     {
         if (is_resource($this->handle)) {
             curl_close($this->handle);
