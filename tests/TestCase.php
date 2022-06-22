@@ -105,6 +105,7 @@ abstract class TestCase extends Framework\TestCase
             case 'couponId':
             case 'productId':
             case 'invoiceId':
+            case 'creditMemoId':
             case 'requestId':
             case 'stickyGatewayAccountId':
             case 'hash':
@@ -611,6 +612,7 @@ abstract class TestCase extends Framework\TestCase
                     default:
                         return self::randomElements(Entities\SubscriptionCancellation::reasons())[0];
                 }
+                // no break
             case 'canceledBy':
                 return self::randomElements(Entities\SubscriptionCancellation::canceledBySources())[0];
             case 'riskMetadata':
