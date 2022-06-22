@@ -42,7 +42,7 @@ final class CreditMemo extends Entity
     /**
      * @return string[]
      */
-    public function reasons()
+    public static function reasons()
     {
         return [
             self::REASON_RETURN,
