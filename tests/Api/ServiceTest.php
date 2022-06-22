@@ -323,6 +323,32 @@ class ServiceTest extends BaseTestCase
     /**
      * @test
      */
+    public function creditMemosService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->createMock(CurlHandler::class);
+
+        $handler
+            ->expects(self::any())
+            ->method('__invoke')
+            ->willReturn($client->createResponse()->withHeader('Location', 'credit-memos/dummy'));
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+
+        $service = $client->creditMemos();
+
+        $result = $service->void('dummy');
+        self::assertInstanceOf(Entities\CreditMemo::class, $result);
+    }
+
+    /**
+     * @test
+     */
     public function invoiceItemService()
     {
         $client = new Client(['apiKey' => 'QWERTY']);
@@ -1126,6 +1152,11 @@ class ServiceTest extends BaseTestCase
                 'invoices',
                 Services\InvoiceService::class,
                 Entities\Invoice::class,
+            ],
+            [
+                'creditMemos',
+                Services\CreditMemoService::class,
+                Entities\CreditMemo::class,
             ],
             [
                 'paymentCards',

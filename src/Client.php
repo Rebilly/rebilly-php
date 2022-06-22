@@ -47,6 +47,7 @@ use RuntimeException;
  * @method Services\CustomerService customers()
  * @method Services\InvoiceItemService invoiceItems()
  * @method Services\InvoiceService invoices()
+ * @method Services\CreditMemoService creditMemos()
  * @method Services\PaymentCardService paymentCards()
  * // TODO: Deprecated factory
  * @method Services\PaymentTokenService paymentCardTokens()
@@ -113,6 +114,7 @@ final class Client
         'customers' => Services\CustomerService::class,
         'invoiceItems' => Services\InvoiceItemService::class,
         'invoices' => Services\InvoiceService::class,
+        'creditMemos' => Services\CreditMemoService::class,
         'paymentCards' => Services\PaymentCardService::class,
         'paymentCardTokens' => Services\PaymentTokenService::class,
         'paymentTokens' => Services\PaymentTokenService::class,
