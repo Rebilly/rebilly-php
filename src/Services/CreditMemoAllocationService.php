@@ -57,17 +57,16 @@ final class CreditMemoAllocationService extends Service
     /**
      * @param string $invoiceId
      * @param string $creditMemoId
-     * @param array|ArrayObject $params
      *
      * @throws NotFoundException if resource does not exist
      *
      * @return CreditMemoAllocation
      */
-    public function load($invoiceId, $creditMemoId, $params = [])
+    public function load($invoiceId, $creditMemoId)
     {
         return $this->client()->get(
             'invoices/{invoiceId}/credit-memo-allocations/{creditMemoId}',
-            ['invoiceId' => $invoiceId, 'creditMemoId' => $creditMemoId] + (array) $params
+            ['invoiceId' => $invoiceId, 'creditMemoId' => $creditMemoId]
         );
     }
 
