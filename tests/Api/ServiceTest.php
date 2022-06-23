@@ -25,12 +25,21 @@ use Rebilly\Rest;
 use Rebilly\Services;
 use Rebilly\Tests\Stub\JsonObject;
 use Rebilly\Tests\TestCase as BaseTestCase;
+use ReflectionMethod;
 
 /**
  * Class ServiceTest.
  */
 class ServiceTest extends BaseTestCase
 {
+    private function getFakeRequiredAttributes($object, $method)
+    {
+        $testedMethod = new ReflectionMethod($object, $method);
+        $attributesCount = $testedMethod->getNumberOfRequiredParameters();
+
+        return array_fill(0, $attributesCount, 'someRequiredParameterValue');
+    }
+
     /**
      * @test
      * @dataProvider provideServiceClasses
@@ -65,22 +74,23 @@ class ServiceTest extends BaseTestCase
         self::assertInstanceOf($serviceClass, $service);
 
         if (method_exists($service, 'paginator')) {
-            $paginator = $service->paginator();
+            $paginator = $service->paginator(...$this->getFakeRequiredAttributes($service, 'paginator'));
 
             self::assertInstanceOf(Paginator::class, $paginator);
         }
 
         if (method_exists($service, 'search')) {
-            $set = $service->search();
+            $set = $service->search(...$this->getFakeRequiredAttributes($service, 'search'));
 
             self::assertInstanceOf(Rest\Collection::class, $set);
         }
 
         if (method_exists($service, 'load')) {
+            $requiredAttributes = $this->getFakeRequiredAttributes($service, 'load');
             if ($id === null) {
-                $entity = $service->load();
+                $entity = $service->load(...$requiredAttributes);
             } else {
-                $entity = $service->load($this->getFakeValue($id, $entityClass));
+                $entity = $service->load(...([$this->getFakeValue($id, $entityClass)] + $requiredAttributes));
             }
 
             self::assertInstanceOf($entityClass, $entity);
@@ -97,10 +107,11 @@ class ServiceTest extends BaseTestCase
         }
 
         if (method_exists($service, 'update')) {
+            $requiredAttributes = $this->getFakeRequiredAttributes($service, 'update');
             if ($id === null) {
-                $entity = $service->update([]);
+                $entity = $service->update(...($requiredAttributes + [[]]));
             } else {
-                $entity = $service->update($this->getFakeValue($id, $entityClass), []);
+                $entity = $service->update(...($requiredAttributes + [$this->getFakeValue($id, $entityClass), []]));
             }
 
             self::assertInstanceOf($entityClass, $entity);
@@ -117,10 +128,11 @@ class ServiceTest extends BaseTestCase
         }
 
         if (method_exists($service, 'delete')) {
+            $requiredAttributes = $this->getFakeRequiredAttributes($service, 'delete');
             if ($id === null) {
-                $service->delete();
+                $service->delete(...$requiredAttributes);
             } else {
-                $service->delete($this->getFakeValue($id, $entityClass));
+                $service->delete(...([$this->getFakeValue($id, $entityClass)] + $requiredAttributes));
             }
         }
     }
@@ -323,6 +335,32 @@ class ServiceTest extends BaseTestCase
     /**
      * @test
      */
+    public function creditMemosService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->createMock(CurlHandler::class);
+
+        $handler
+            ->expects(self::any())
+            ->method('__invoke')
+            ->willReturn($client->createResponse()->withHeader('Location', 'credit-memos/dummy'));
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+
+        $service = $client->creditMemos();
+
+        $result = $service->void('dummy');
+        self::assertInstanceOf(Entities\CreditMemo::class, $result);
+    }
+
+    /**
+     * @test
+     */
     public function invoiceItemService()
     {
         $client = new Client(['apiKey' => 'QWERTY']);
@@ -359,6 +397,48 @@ class ServiceTest extends BaseTestCase
 
         $result = $service->create([], 'invoiceId', 'dummy');
         self::assertInstanceOf(Entities\InvoiceItem::class, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function creditMemoAllocationsService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->createMock(CurlHandler::class);
+        $handler
+            ->method('__invoke')
+            ->willReturnOnConsecutiveCalls(
+                $client->createResponse(),
+                $client->createResponse(),
+                $client->createResponse()->withHeader('Location', 'invoices/invoiceId/credit-memo-allocations/dummy'),
+                $client->createResponse()->withHeader('Location', 'invoices/invoiceId/credit-memo-allocations/dummy'),
+                $client->createResponse()->withStatus(204)
+            );
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+
+        $service = $client->creditMemoAllocations();
+        self::assertInstanceOf(Services\CreditMemoAllocationService::class, $service);
+
+        $paginator = $service->paginator('invoiceId');
+        self::assertInstanceOf(Paginator::class, $paginator);
+
+        $result = $service->search('invoiceId');
+        self::assertInstanceOf(Rest\Collection::class, $result);
+
+        $result = $service->load('invoiceId', 'dummy');
+        self::assertInstanceOf(Entities\CreditMemoAllocation::class, $result);
+
+        $result = $service->update('invoiceId', 'dummy', []);
+        self::assertInstanceOf(Entities\CreditMemoAllocation::class, $result);
+
+        $service->delete('invoiceId', 'dummy');
     }
 
     /**
@@ -1126,6 +1206,16 @@ class ServiceTest extends BaseTestCase
                 'invoices',
                 Services\InvoiceService::class,
                 Entities\Invoice::class,
+            ],
+            [
+                'creditMemoAllocations',
+                Services\CreditMemoAllocationService::class,
+                Entities\CreditMemoAllocation::class,
+            ],
+            [
+                'creditMemos',
+                Services\CreditMemoService::class,
+                Entities\CreditMemo::class,
             ],
             [
                 'paymentCards',

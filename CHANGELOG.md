@@ -17,6 +17,12 @@ Security - in case of vulnerabilities.
 
 _TBD_
 
+## [2.19.0] 2022-06-22
+
+### Added
+
+- [x] Added **Credit Memos API**.
+
 ## [2.18.0] 2022-04-21
 
 ### Added

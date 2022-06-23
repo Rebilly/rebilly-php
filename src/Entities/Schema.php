@@ -102,6 +102,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'invoices/{invoiceId}/items/{invoiceItemId}' => function (array $content) {
                 return new InvoiceItem($content);
             },
+            'invoices/{invoiceId}/credit-memo-allocations' => function (array $content) {
+                return new Collection(new CreditMemoAllocation(), $content);
+            },
+            'invoices/{invoiceId}/credit-memo-allocations/{creditMemoId}' => function (array $content) {
+                return new CreditMemoAllocation($content);
+            },
             'invoices/{invoiceId}/lead-source' => function (array $content) {
                 return new LeadSource($content);
             },
@@ -353,6 +359,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             },
             'ready-to-pay' => function (array $content) {
                 return new Collection(new ReadyToPay(), $content);
+            },
+            'credit-memos' => function (array $content) {
+                return new Collection(new CreditMemo(), $content);
+            },
+            'credit-memos/{creditMemoId}' => function (array $content) {
+                return new CreditMemo($content);
             },
         ];
     }
