@@ -115,6 +115,7 @@ abstract class TestCase extends Framework\TestCase
             case 'alternateGatewayAccountIfRejected':
             case 'alternateGatewayAccountIfOptional':
             case 'rateId':
+            case 'paymentInstrumentId':
                 return self::uuid();
             case 'dueTime':
             case 'expiredTime':
