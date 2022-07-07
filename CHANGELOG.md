@@ -17,6 +17,12 @@ Security - in case of vulnerabilities.
 
 - [x] Added new property to `Subscription`: `paymentInstrumentId`
 
+## [2.19.0] 2022-06-22
+
+### Added
+
+- [x] Added **Credit Memos API**.
+
 ## [2.18.0] 2022-04-21
 
 ### Added
