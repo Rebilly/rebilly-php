@@ -38,6 +38,7 @@ class SubscriptionTest extends TestCase
             'id' => 'subscription-1',
             'status' => 'draft',
             'customerId' => 'customer-1',
+            'paymentInstrumentId' => 'payment-card-1',
             'websiteId' => 'website-1',
             'initialInvoiceId' => 'invoice-1',
             'recentInvoiceId' => 'invoice-2',
@@ -96,6 +97,7 @@ class SubscriptionTest extends TestCase
 
         $value = new Subscription();
         $value->setCustomerId($data['customerId']);
+        $value->setPaymentInstrumentId($data['paymentInstrumentId']);
         $value->setWebsiteId($data['websiteId']);
         $value->setAutopay(true);
         $value->setRenewalTime($data['renewalTime']);
