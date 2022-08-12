@@ -1,0 +1,184 @@
+name: Updates SDK based on api-definitions
+
+on: 
+  workflow_dispatch:
+    inputs:
+      trigger-reason:
+        description: |
+          The comment that will be posted to the PR if any changes are added.
+          Used to provide context about the source of the update.
+        required: false
+
+jobs:
+  build-api-definitions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout api-definitions repo
+        uses: actions/checkout@v2
+        with:
+          repository: 'Rebilly/api-definitions'
+
+      - name: Install api-definitions dependencies
+        run: npm install
+
+      - name: Build api-definitions
+        run: npm run build
+
+      - name: Upload built definitions
+        uses: actions/upload-artifact@v2
+        with:
+          name: definitions
+          path: dist
+          retention-days: 1
+          if-no-files-found: error
+
+  generate-sdk:
+    runs-on: ubuntu-latest
+    needs: build-api-definitions
+    strategy:
+      matrix:
+        api: ['core', 'user']
+    steps:
+      - name: Prepare variables
+        id: prep
+        run: |
+          OPENAPI_URI=""
+          SERVICE_NAME=""
+          MAPPING_SEGMENT="core"
+          if [[ "${{ matrix.api }}" == "core" ]]; then
+            OPENAPI_URI="/tmp/definitions/core.yaml"
+            SERVICE_NAME="CoreService"
+          fi
+          if [[ "${{ matrix.api }}" == "user" ]]; then
+            OPENAPI_URI="/tmp/definitions/users.yaml"
+            SERVICE_NAME="UserService"
+          fi
+          echo ::set-output name=openapi-uri::${OPENAPI_URI}
+          echo ::set-output name=service-name::${SERVICE_NAME}
+          echo ::set-output name=mapping-segment::${MAPPING_SEGMENT}
+          echo ::group::Variables
+          echo "OpenAPI URI: ${OPENAPI_URI}"
+          echo "Service name: ${SERVICE_NAME}"
+          echo "Mapping segment: ${MAPPING_SEGMENT}"
+          echo ::endgroup::
+
+      - name: Login to registry
+        run: |
+          echo ${{ secrets.MACHINE_USER_PAT }} | docker login ghcr.io --username ${{ github.actor }} --password-stdin
+
+      - name: Download definitions
+        uses: actions/download-artifact@v3
+        with:
+          name: definitions
+          path: /tmp/definitions/
+
+      - name: Build SDK
+        run: |
+          docker run --rm \
+            -v "/tmp/${{ matrix.api }}-sdk:/out" \
+            ghcr.io/rebilly/php-sdk-generator:latest generate \
+            -g rebilly-php \
+            -o /out \
+            -c /config.yaml \
+            -i "${{ steps.prep.outputs.openapi-uri }}" \
+            --additional-properties=serviceName=${{ steps.prep.outputs.service-name }} \
+            --additional-properties=resourceMapping=./shared/custom-resource-mapping.json \
+            --additional-properties=resourceMappingSegment=${{ steps.prep.outputs.mapping-segment }}
+
+      - name: Compress SDK
+        working-directory: /tmp
+        run: |
+          zip -r ${{ matrix.api }}-sdk.zip ${{ matrix.api }}-sdk \
+            -x ${{ matrix.api }}-sdk/.openapi-generator/\* \
+            -x ${{ matrix.api }}-sdk/.openapi-generator-ignore
+      
+      - name: Upload SDK
+        uses: actions/upload-artifact@v3
+        with:
+          name: sdk-separate
+          path: /tmp/${{ matrix.api }}-sdk.zip
+          retention-days: 1
+          if-no-files-found: error
+
+  bundle-sdk:
+    runs-on: ubuntu-latest
+    needs: generate-sdk
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: 'v3.0-dev'
+          path: 'sdk'
+
+      - uses: actions/checkout@v2
+        with:
+          path: 'generator'
+          repository: 'Rebilly/rebilly-sdk-generator'
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: mbstring, intl, curl, json
+          tools: composer:v2
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Download generated API SDKs
+        uses: actions/download-artifact@v3
+        with:
+          name: sdk-separate
+          path: /tmp/generated/
+
+      - name: Decompress SDKs
+        working-directory: /tmp/generated
+        run: unzip \*.zip
+
+      - name: Merge APIs files
+        run: |
+          rm -rf sdk/{tests,src,composer.json,.php-cs-fixer.php} && \
+          php merge-apis.php ./sdk /tmp/generated/*-sdk
+
+      - name: Install composer dependencies
+        working-directory: ./sdk
+        run: composer install --prefer-dist
+
+      - name: CS fix SDK
+        working-directory: ./sdk
+        run: composer cs-fix
+
+      - name: Create PR
+        id: cpr
+        uses: peter-evans/create-pull-request@v3
+        with:
+          # Path of the checked-out repo where we placed the generated resources  
+          path: 'sdk'
+          token: ${{ secrets.MACHINE_USER_PAT }}
+          title: 'chore: update SDK from api-definitions'
+          commit-message: update SDK from api-definitions
+          branch: automations/update-sdk-from-api-definitions
+          base: v3.0-dev
+          # Delete the branch when closing PRs or merging
+          delete-branch: true
+          body: This PR is automatically generated and updates SDK based on a change in the API definitions
+
+      - name: Comment trigger reason
+        uses: marocchino/sticky-pull-request-comment@v2
+        if: |
+          (steps.cpr.outputs.pull-request-operation == 'created' ||
+          steps.cpr.outputs.pull-request-operation == 'updated') &&
+          github.event.inputs.trigger-reason != ''
+        with:
+          GITHUB_TOKEN: ${{ secrets.MACHINE_USER_PAT }}
+          append: true
+          number: ${{ steps.cpr.outputs.pull-request-number }}
+          message: |
+            Triggered due to: ${{ github.event.inputs.trigger-reason }}
