@@ -42,7 +42,6 @@ class SubscriptionPausesApi
 
     /**
      * @return SubscriptionPause
-     *
      */
     public function get(
         string $id,
@@ -62,7 +61,6 @@ class SubscriptionPausesApi
 
     /**
      * @return SubscriptionPause[]
-     *
      */
     public function getAll(
         ?int $limit = null,
@@ -87,7 +85,6 @@ class SubscriptionPausesApi
 
     /**
      * @return SubscriptionPause
-     *
      */
     public function pause(
         SubscriptionPause $subscriptionPause,
@@ -103,7 +100,6 @@ class SubscriptionPausesApi
 
     /**
      * @return SubscriptionPause
-     *
      */
     public function update(
         string $id,

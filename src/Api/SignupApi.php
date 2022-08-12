@@ -30,7 +30,6 @@ class SignupApi
 
     /**
      * @return User
-     *
      */
     public function signUp(
         Signup $signup,

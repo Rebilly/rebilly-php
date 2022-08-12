@@ -30,7 +30,6 @@ class CouponsApi
 
     /**
      * @return Coupon
-     *
      */
     public function create(
         Coupon $coupon,
@@ -46,7 +45,6 @@ class CouponsApi
 
     /**
      * @return Coupon
-     *
      */
     public function get(
         string $id,
@@ -66,7 +64,6 @@ class CouponsApi
 
     /**
      * @return Coupon[]
-     *
      */
     public function getAll(
         ?int $limit = null,
@@ -93,7 +90,6 @@ class CouponsApi
 
     /**
      * @return Coupon
-     *
      */
     public function setExpiration(
         string $id,
@@ -114,7 +110,6 @@ class CouponsApi
 
     /**
      * @return Coupon
-     *
      */
     public function update(
         string $id,

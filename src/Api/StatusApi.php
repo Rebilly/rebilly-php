@@ -28,7 +28,6 @@ class StatusApi
 
     /**
      * @return Status
-     *
      */
     public function get(
     ): Status {

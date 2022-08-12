@@ -30,7 +30,6 @@ class SigninApi
 
     /**
      * @return Session
-     *
      */
     public function signIn(
         Signin $signin,

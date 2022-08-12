@@ -29,7 +29,6 @@ class KycRequestsApi
 
     /**
      * @return KycRequest
-     *
      */
     public function create(
         KycRequest $kycRequest,
@@ -58,7 +57,6 @@ class KycRequestsApi
 
     /**
      * @return KycRequest
-     *
      */
     public function get(
         string $id,
@@ -78,7 +76,6 @@ class KycRequestsApi
 
     /**
      * @return KycRequest[]
-     *
      */
     public function getAll(
         ?int $limit = null,
@@ -103,7 +100,6 @@ class KycRequestsApi
 
     /**
      * @return KycRequest
-     *
      */
     public function update(
         string $id,

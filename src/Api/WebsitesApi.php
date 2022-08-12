@@ -29,7 +29,6 @@ class WebsitesApi
 
     /**
      * @return Website
-     *
      */
     public function create(
         Website $website,
@@ -58,7 +57,6 @@ class WebsitesApi
 
     /**
      * @return Website
-     *
      */
     public function get(
         string $id,
@@ -78,7 +76,6 @@ class WebsitesApi
 
     /**
      * @return Website[]
-     *
      */
     public function getAll(
         ?int $limit = null,
@@ -105,7 +102,6 @@ class WebsitesApi
 
     /**
      * @return Website
-     *
      */
     public function update(
         string $id,

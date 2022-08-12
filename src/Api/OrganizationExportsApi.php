@@ -30,7 +30,6 @@ class OrganizationExportsApi
 
     /**
      * @return OrganizationExport
-     *
      */
     public function create(
         ?InlineObject $inlineObject = null,
@@ -46,7 +45,6 @@ class OrganizationExportsApi
 
     /**
      * @return OrganizationExport
-     *
      */
     public function get(
         string $id,
@@ -66,7 +64,6 @@ class OrganizationExportsApi
 
     /**
      * @return OrganizationExport[]
-     *
      */
     public function getAll(
         ?int $limit = null,

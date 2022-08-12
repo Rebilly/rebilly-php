@@ -29,7 +29,6 @@ class SubscriptionReactivationsApi
 
     /**
      * @return SubscriptionReactivation
-     *
      */
     public function get(
         string $id,
@@ -49,7 +48,6 @@ class SubscriptionReactivationsApi
 
     /**
      * @return SubscriptionReactivation[]
-     *
      */
     public function getAll(
         ?int $limit = null,
@@ -74,7 +72,6 @@ class SubscriptionReactivationsApi
 
     /**
      * @return SubscriptionReactivation
-     *
      */
     public function reactivate(
         SubscriptionReactivation $subscriptionReactivation,

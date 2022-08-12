@@ -29,7 +29,6 @@ class DisputesApi
 
     /**
      * @return Dispute
-     *
      */
     public function create(
         Dispute $dispute,
@@ -45,7 +44,6 @@ class DisputesApi
 
     /**
      * @return Dispute
-     *
      */
     public function get(
         string $id,
@@ -65,7 +63,6 @@ class DisputesApi
 
     /**
      * @return Dispute[]
-     *
      */
     public function getAll(
         ?string $filter = null,
@@ -94,7 +91,6 @@ class DisputesApi
 
     /**
      * @return Dispute
-     *
      */
     public function update(
         string $id,

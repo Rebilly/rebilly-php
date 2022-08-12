@@ -28,7 +28,6 @@ class BalanceTransactionsApi
 
     /**
      * @return BalanceTransaction
-     *
      */
     public function get(
         string $id,
@@ -48,7 +47,6 @@ class BalanceTransactionsApi
 
     /**
      * @return BalanceTransaction[]
-     *
      */
     public function getAll(
         ?int $limit = null,

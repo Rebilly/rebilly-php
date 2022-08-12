@@ -24,7 +24,6 @@ class DigitalWalletsApi
     public function __construct(protected readonly ?ClientInterface $client) {}
     /**
  * @return DigitalWalletValidation
-
  */
 public function validate(
     \Rebilly\Sdk\Model\DigitalWalletValidation $digitalWalletValidation,
@@ -45,7 +44,6 @@ public function validate(
 }
     /**
  * @return DigitalWalletOnboardingApplePay
-
  */
 public function create(
     \Rebilly\Sdk\Model\DigitalWalletOnboardingApplePay $digitalWalletOnboardingApplePay,

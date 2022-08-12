@@ -37,7 +37,6 @@ class CustomersApi
 
     /**
      * @return Customer
-     *
      */
     public function create(
         Customer $customer,
@@ -53,7 +52,6 @@ class CustomersApi
 
     /**
      * @return EddTimeline
-     *
      */
     public function createEddTimelineComment(
         string $id,
@@ -74,7 +72,6 @@ class CustomersApi
 
     /**
      * @return LeadSource
-     *
      */
     public function createLeadSource(
         string $id,
@@ -95,7 +92,6 @@ class CustomersApi
 
     /**
      * @return CustomerTimeline
-     *
      */
     public function createTimelineComment(
         string $id,
@@ -144,7 +140,6 @@ class CustomersApi
 
     /**
      * @return Customer
-     *
      */
     public function get(
         string $id,
@@ -170,7 +165,6 @@ class CustomersApi
 
     /**
      * @return Customer[]
-     *
      */
     public function getAll(
         ?int $limit = null,
@@ -201,7 +195,6 @@ class CustomersApi
 
     /**
      * @return EddSearchResult[]
-     *
      */
     public function getAllEddSearchResults(
         string $id,
@@ -221,7 +214,6 @@ class CustomersApi
 
     /**
      * @return CustomerTimeline[]
-     *
      */
     public function getAllTimelineMessages(
         string $id,
@@ -253,7 +245,6 @@ class CustomersApi
 
     /**
      * @return Invoice[]
-     *
      */
     public function getAllUpcomingInvoices(
         string $id,
@@ -277,7 +268,6 @@ class CustomersApi
 
     /**
      * @return AML[]
-     *
      */
     public function getAml(
         string $id,
@@ -297,7 +287,6 @@ class CustomersApi
 
     /**
      * @return Edd
-     *
      */
     public function getCustomerEddScore(
         string $id,
@@ -317,7 +306,6 @@ class CustomersApi
 
     /**
      * @return EddTimeline[]
-     *
      */
     public function getEddTimelineCollection(
         string $id,
@@ -349,7 +337,6 @@ class CustomersApi
 
     /**
      * @return LeadSource
-     *
      */
     public function getLeadSource(
         string $id,
@@ -369,7 +356,6 @@ class CustomersApi
 
     /**
      * @return CustomerTimeline
-     *
      */
     public function getTimelineMessage(
         string $id,
@@ -408,7 +394,6 @@ class CustomersApi
 
     /**
      * @return Edd
-     *
      */
     public function patchCustomerEddScore(
         string $id,
@@ -429,7 +414,6 @@ class CustomersApi
 
     /**
      * @return Customer
-     *
      */
     public function update(
         string $id,

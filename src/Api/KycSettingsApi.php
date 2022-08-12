@@ -29,7 +29,6 @@ class KycSettingsApi
 
     /**
      * @return KycSettings
-     *
      */
     public function getKycSettings(
     ): KycSettings {
@@ -44,7 +43,6 @@ class KycSettingsApi
 
     /**
      * @return KycSettings
-     *
      */
     public function updateKycSettings(
         KycSettings $kycSettings,

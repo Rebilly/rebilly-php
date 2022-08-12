@@ -28,7 +28,6 @@ class SearchApi
 
     /**
      * @return Search[]
-     *
      */
     public function get(
         ?array $sort = null,

@@ -29,7 +29,6 @@ class SubscriptionCancellationsApi
 
     /**
      * @return SubscriptionCancellation
-     *
      */
     public function create(
         SubscriptionCancellation $subscriptionCancellation,
@@ -58,7 +57,6 @@ class SubscriptionCancellationsApi
 
     /**
      * @return SubscriptionCancellation
-     *
      */
     public function get(
         string $id,
@@ -78,7 +76,6 @@ class SubscriptionCancellationsApi
 
     /**
      * @return SubscriptionCancellation[]
-     *
      */
     public function getAll(
         ?int $limit = null,
@@ -103,7 +100,6 @@ class SubscriptionCancellationsApi
 
     /**
      * @return SubscriptionCancellation
-     *
      */
     public function patch(
         string $id,
@@ -124,7 +120,6 @@ class SubscriptionCancellationsApi
 
     /**
      * @return SubscriptionCancellation
-     *
      */
     public function update(
         string $id,

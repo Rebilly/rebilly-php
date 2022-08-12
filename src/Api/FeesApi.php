@@ -30,7 +30,6 @@ class FeesApi
 
     /**
      * @return Fee
-     *
      */
     public function create(
         Fee $fee,
@@ -46,7 +45,6 @@ class FeesApi
 
     /**
      * @return Fee
-     *
      */
     public function get(
         string $id,
@@ -66,7 +64,6 @@ class FeesApi
 
     /**
      * @return Fee[]
-     *
      */
     public function getAll(
         ?int $limit = null,
@@ -87,7 +84,6 @@ class FeesApi
 
     /**
      * @return Fee
-     *
      */
     public function patch(
         string $id,
@@ -108,7 +104,6 @@ class FeesApi
 
     /**
      * @return Fee
-     *
      */
     public function upsert(
         string $id,

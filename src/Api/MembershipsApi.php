@@ -44,7 +44,6 @@ class MembershipsApi
 
     /**
      * @return Membership
-     *
      */
     public function get(
         string $organizationId,
@@ -66,7 +65,6 @@ class MembershipsApi
 
     /**
      * @return Membership[]
-     *
      */
     public function getAll(
         ?int $limit = null,
@@ -91,7 +89,6 @@ class MembershipsApi
 
     /**
      * @return Membership
-     *
      */
     public function update(
         string $organizationId,

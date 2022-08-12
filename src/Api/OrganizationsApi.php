@@ -29,7 +29,6 @@ class OrganizationsApi
 
     /**
      * @return Organization
-     *
      */
     public function create(
         ?Organization $organization = null,
@@ -45,7 +44,6 @@ class OrganizationsApi
 
     /**
      * @return Organization
-     *
      */
     public function get(
         string $id,
@@ -65,7 +63,6 @@ class OrganizationsApi
 
     /**
      * @return Organization[]
-     *
      */
     public function getAll(
         ?int $limit = null,
@@ -90,7 +87,6 @@ class OrganizationsApi
 
     /**
      * @return Organization
-     *
      */
     public function update(
         string $id,

@@ -29,7 +29,6 @@ class CheckoutFormsApi
 
     /**
      * @return CheckoutForm
-     *
      */
     public function create(
         ?CheckoutForm $checkoutForm = null,
@@ -58,7 +57,6 @@ class CheckoutFormsApi
 
     /**
      * @return CheckoutForm
-     *
      */
     public function get(
         string $id,
@@ -78,7 +76,6 @@ class CheckoutFormsApi
 
     /**
      * @return CheckoutForm[]
-     *
      */
     public function getAll(
         ?int $limit = null,
@@ -105,7 +102,6 @@ class CheckoutFormsApi
 
     /**
      * @return CheckoutForm
-     *
      */
     public function update(
         string $id,

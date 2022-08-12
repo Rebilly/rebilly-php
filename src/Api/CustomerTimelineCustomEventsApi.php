@@ -29,7 +29,6 @@ class CustomerTimelineCustomEventsApi
 
     /**
      * @return CustomerTimelineCustomEvent
-     *
      */
     public function create(
         CustomerTimelineCustomEvent $customerTimelineCustomEvent,
@@ -45,7 +44,6 @@ class CustomerTimelineCustomEventsApi
 
     /**
      * @return CustomerTimelineCustomEvent
-     *
      */
     public function get(
         string $id,
@@ -65,7 +63,6 @@ class CustomerTimelineCustomEventsApi
 
     /**
      * @return CustomerTimelineCustomEvent[]
-     *
      */
     public function getAll(
         ?int $limit = null,

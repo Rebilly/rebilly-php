@@ -30,7 +30,6 @@ class PermissionsEmulationApi
 
     /**
      * @return Session
-     *
      */
     public function startPermissionsEmulation(
         PostPermissionsEmulationRequest $postPermissionsEmulationRequest,
@@ -46,7 +45,6 @@ class PermissionsEmulationApi
 
     /**
      * @return Session
-     *
      */
     public function stopPermissionsEmulation(
     ): Session {

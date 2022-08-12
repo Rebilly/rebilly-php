@@ -28,7 +28,6 @@ class SendThroughAttributionApi
 
     /**
      * @return SendThroughAttribution[]
-     *
      */
     public function getAll(
         string $eventType,

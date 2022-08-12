@@ -29,7 +29,6 @@ class ProductsApi
 
     /**
      * @return Product
-     *
      */
     public function create(
         Product $product,
@@ -58,7 +57,6 @@ class ProductsApi
 
     /**
      * @return Product
-     *
      */
     public function get(
         string $id,
@@ -78,7 +76,6 @@ class ProductsApi
 
     /**
      * @return Product[]
-     *
      */
     public function getAll(
         ?string $filter = null,
@@ -105,7 +102,6 @@ class ProductsApi
 
     /**
      * @return Product
-     *
      */
     public function update(
         string $id,

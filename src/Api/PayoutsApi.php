@@ -30,7 +30,6 @@ class PayoutsApi
 
     /**
      * @return Transaction
-     *
      */
     public function create(
         PayoutRequest $payoutRequest,

@@ -29,7 +29,6 @@ class WebhooksApi
 
     /**
      * @return GlobalWebhook
-     *
      */
     public function create(
         GlobalWebhook $globalWebhook,
@@ -45,7 +44,6 @@ class WebhooksApi
 
     /**
      * @return GlobalWebhook
-     *
      */
     public function get(
         string $id,
@@ -65,7 +63,6 @@ class WebhooksApi
 
     /**
      * @return GlobalWebhook[]
-     *
      */
     public function getAll(
         ?int $limit = null,
@@ -88,7 +85,6 @@ class WebhooksApi
 
     /**
      * @return GlobalWebhook
-     *
      */
     public function update(
         string $id,

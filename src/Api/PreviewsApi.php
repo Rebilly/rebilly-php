@@ -24,7 +24,6 @@ class PreviewsApi
     public function __construct(protected readonly ?ClientInterface $client) {}
     /**
  * @return OrderPreview
-
  */
 public function order(
     ?\Rebilly\Sdk\Model\OrderPreview $orderPreview = null,
@@ -45,7 +44,6 @@ public function order(
 }
     /**
  * @return SendTestEmail
-
  */
 public function sendEmailRuleAction(
     \Rebilly\Sdk\Model\SendTestEmail $sendTestEmail,
@@ -66,7 +64,6 @@ public function sendEmailRuleAction(
 }
     /**
  * @return SendPreviewWebhook
-
  */
 public function triggerWebhookRuleAction(
     \Rebilly\Sdk\Model\SendPreviewWebhook $sendPreviewWebhook,
@@ -86,7 +83,6 @@ public function triggerWebhookRuleAction(
 
 }
     /**
-
 
  */
 public function webhook(

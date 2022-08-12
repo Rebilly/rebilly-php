@@ -28,7 +28,6 @@ class EmailNotificationsApi
 
     /**
      * @return EmailNotification[]
-     *
      */
     public function getAll(
     ): array {

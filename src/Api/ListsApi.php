@@ -29,7 +29,6 @@ class ListsApi
 
     /**
      * @return ValueList
-     *
      */
     public function create(
         ?ValueList $valueList = null,
@@ -58,7 +57,6 @@ class ListsApi
 
     /**
      * @return ValueList[]
-     *
      */
     public function getAll(
         ?int $limit = null,
@@ -87,7 +85,6 @@ class ListsApi
 
     /**
      * @return ValueList
-     *
      */
     public function getByVersion(
         string $id,
@@ -109,7 +106,6 @@ class ListsApi
 
     /**
      * @return ValueList
-     *
      */
     public function getLatestVersion(
         string $id,
@@ -129,7 +125,6 @@ class ListsApi
 
     /**
      * @return ValueList
-     *
      */
     public function update(
         string $id,

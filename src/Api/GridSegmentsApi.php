@@ -29,7 +29,6 @@ class GridSegmentsApi
 
     /**
      * @return Segment
-     *
      */
     public function create(
         Segment $segment,
@@ -58,7 +57,6 @@ class GridSegmentsApi
 
     /**
      * @return Segment
-     *
      */
     public function get(
         string $id,
@@ -78,7 +76,6 @@ class GridSegmentsApi
 
     /**
      * @return Segment[]
-     *
      */
     public function getAll(
         ?int $limit = null,
@@ -105,7 +102,6 @@ class GridSegmentsApi
 
     /**
      * @return Segment
-     *
      */
     public function update(
         string $id,

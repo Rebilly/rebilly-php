@@ -29,7 +29,6 @@ class BillingPortalsApi
 
     /**
      * @return BillingPortal
-     *
      */
     public function create(
         ?BillingPortal $billingPortal = null,
@@ -58,7 +57,6 @@ class BillingPortalsApi
 
     /**
      * @return BillingPortal
-     *
      */
     public function get(
         string $id,
@@ -78,7 +76,6 @@ class BillingPortalsApi
 
     /**
      * @return BillingPortal[]
-     *
      */
     public function getAll(
         ?int $limit = null,
@@ -105,7 +102,6 @@ class BillingPortalsApi
 
     /**
      * @return BillingPortal
-     *
      */
     public function update(
         string $id,

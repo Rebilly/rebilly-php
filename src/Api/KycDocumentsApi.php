@@ -32,7 +32,6 @@ class KycDocumentsApi
 
     /**
      * @return KycDocument
-     *
      */
     public function accept(
         string $id,
@@ -52,7 +51,6 @@ class KycDocumentsApi
 
     /**
      * @return KycDocument
-     *
      */
     public function create(
         KycDocument $kycDocument,
@@ -68,7 +66,6 @@ class KycDocumentsApi
 
     /**
      * @return KycDocument
-     *
      */
     public function get(
         string $id,
@@ -88,7 +85,6 @@ class KycDocumentsApi
 
     /**
      * @return KycDocument[]
-     *
      */
     public function getAll(
         ?int $limit = null,
@@ -127,7 +123,6 @@ class KycDocumentsApi
 
     /**
      * @return KycDocument
-     *
      */
     public function reject(
         string $id,
@@ -148,7 +143,6 @@ class KycDocumentsApi
 
     /**
      * @return KycDocument
-     *
      */
     public function review(
         string $id,
@@ -168,7 +162,6 @@ class KycDocumentsApi
 
     /**
      * @return KycDocument
-     *
      */
     public function startReview(
         string $id,
@@ -188,7 +181,6 @@ class KycDocumentsApi
 
     /**
      * @return KycDocument
-     *
      */
     public function stopReview(
         string $id,
@@ -208,7 +200,6 @@ class KycDocumentsApi
 
     /**
      * @return KycDocument
-     *
      */
     public function update(
         string $id,

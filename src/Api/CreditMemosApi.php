@@ -30,7 +30,6 @@ class CreditMemosApi
 
     /**
      * @return CreditMemo
-     *
      */
     public function create(
         CreditMemo $creditMemo,
@@ -46,7 +45,6 @@ class CreditMemosApi
 
     /**
      * @return CreditMemoTimeline
-     *
      */
     public function createTimelineComment(
         string $id,
@@ -82,7 +80,6 @@ class CreditMemosApi
 
     /**
      * @return CreditMemo
-     *
      */
     public function get(
         string $id,
@@ -106,7 +103,6 @@ class CreditMemosApi
 
     /**
      * @return CreditMemo[]
-     *
      */
     public function getAll(
         ?string $filter = null,
@@ -135,7 +131,6 @@ class CreditMemosApi
 
     /**
      * @return CreditMemoTimeline[]
-     *
      */
     public function getAllTimelineMessages(
         string $id,
@@ -167,7 +162,6 @@ class CreditMemosApi
 
     /**
      * @return CreditMemoTimeline
-     *
      */
     public function getTimelineMessage(
         string $id,
@@ -189,7 +183,6 @@ class CreditMemosApi
 
     /**
      * @return CreditMemo
-     *
      */
     public function update(
         string $id,
@@ -210,7 +203,6 @@ class CreditMemosApi
 
     /**
      * @return CreditMemo
-     *
      */
     public function void(
         string $id,

@@ -37,7 +37,6 @@ class PaymentInstrumentsApi
 
     /**
      * @return PaymentInstrument
-     *
      */
     public function create(
         PaymentInstrumentCreateToken|PaymentCardCreatePlain|BankAccountCreatePlain|PayPalAccount|AlternativeInstrument $body,
@@ -53,7 +52,6 @@ class PaymentInstrumentsApi
 
     /**
      * @return PaymentInstrument
-     *
      */
     public function deactivate(
         string $id,
@@ -73,7 +71,6 @@ class PaymentInstrumentsApi
 
     /**
      * @return PaymentInstrument
-     *
      */
     public function get(
         string $id,
@@ -93,7 +90,6 @@ class PaymentInstrumentsApi
 
     /**
      * @return PaymentInstrument[]
-     *
      */
     public function getAll(
         ?string $filter = null,
@@ -122,7 +118,6 @@ class PaymentInstrumentsApi
 
     /**
      * @return PaymentInstrument
-     *
      */
     public function update(
         string $id,

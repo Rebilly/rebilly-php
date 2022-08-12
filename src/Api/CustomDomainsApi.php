@@ -29,7 +29,6 @@ class CustomDomainsApi
 
     /**
      * @return CustomDomain
-     *
      */
     public function create(
         ?CustomDomain $customDomain = null,
@@ -58,7 +57,6 @@ class CustomDomainsApi
 
     /**
      * @return CustomDomain
-     *
      */
     public function get(
         string $domain,
@@ -78,7 +76,6 @@ class CustomDomainsApi
 
     /**
      * @return CustomDomain[]
-     *
      */
     public function getAll(
         ?int $limit = null,

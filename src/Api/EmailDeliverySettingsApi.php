@@ -29,7 +29,6 @@ class EmailDeliverySettingsApi
 
     /**
      * @return EmailDeliverySetting
-     *
      */
     public function create(
         EmailDeliverySetting $emailDeliverySetting,
@@ -58,7 +57,6 @@ class EmailDeliverySettingsApi
 
     /**
      * @return EmailDeliverySetting
-     *
      */
     public function get(
         string $id,
@@ -78,7 +76,6 @@ class EmailDeliverySettingsApi
 
     /**
      * @return EmailDeliverySetting[]
-     *
      */
     public function getAll(
         ?int $limit = null,
@@ -105,7 +102,6 @@ class EmailDeliverySettingsApi
 
     /**
      * @return EmailDeliverySetting
-     *
      */
     public function resendVerification(
         string $id,
@@ -125,7 +121,6 @@ class EmailDeliverySettingsApi
 
     /**
      * @return EmailDeliverySetting
-     *
      */
     public function update(
         string $id,

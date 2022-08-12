@@ -29,7 +29,6 @@ class IntegrationsApi
 
     /**
      * @return Integration
-     *
      */
     public function get(
         OAuth2CredentialService $label,
@@ -49,7 +48,6 @@ class IntegrationsApi
 
     /**
      * @return Integration[]
-     *
      */
     public function getAll(
     ): array {

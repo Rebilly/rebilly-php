@@ -28,7 +28,6 @@ class PaymentCardsBankNamesApi
 
     /**
      * @return InlineResponse200[]
-     *
      */
     public function getAll(
         ?int $limit = null,

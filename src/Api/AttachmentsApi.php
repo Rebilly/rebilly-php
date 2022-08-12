@@ -29,7 +29,6 @@ class AttachmentsApi
 
     /**
      * @return Attachment
-     *
      */
     public function attach(
         Attachment $attachment,
@@ -58,7 +57,6 @@ class AttachmentsApi
 
     /**
      * @return Attachment[]
-     *
      */
     public function getAllAttachments(
         ?int $limit = null,
@@ -89,7 +87,6 @@ class AttachmentsApi
 
     /**
      * @return Attachment
-     *
      */
     public function getAttachment(
         string $id,
@@ -109,7 +106,6 @@ class AttachmentsApi
 
     /**
      * @return Attachment
-     *
      */
     public function updateAttachment(
         string $id,

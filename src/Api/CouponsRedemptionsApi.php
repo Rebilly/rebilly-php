@@ -42,7 +42,6 @@ class CouponsRedemptionsApi
 
     /**
      * @return CouponRedemption[]
-     *
      */
     public function getAllRedemptions(
         ?int $limit = null,
@@ -69,7 +68,6 @@ class CouponsRedemptionsApi
 
     /**
      * @return CouponRedemption
-     *
      */
     public function getRedemption(
         string $id,
@@ -89,7 +87,6 @@ class CouponsRedemptionsApi
 
     /**
      * @return CouponRedemption
-     *
      */
     public function redeem(
         CouponRedemption $couponRedemption,

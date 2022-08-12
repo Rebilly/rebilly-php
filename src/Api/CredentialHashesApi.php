@@ -40,7 +40,6 @@ class CredentialHashesApi
 
     /**
      * @return SESCredential
-     *
      */
     public function createAWSSESCredential(
         SESCredential $sESCredential,
@@ -56,7 +55,6 @@ class CredentialHashesApi
 
     /**
      * @return SmtpCredential
-     *
      */
     public function createEmailCredential(
         SmtpCredential $smtpCredential,
@@ -72,7 +70,6 @@ class CredentialHashesApi
 
     /**
      * @return ExperianCredential
-     *
      */
     public function createExperianCredential(
         ExperianCredential $experianCredential,
@@ -88,7 +85,6 @@ class CredentialHashesApi
 
     /**
      * @return MailgunCredential
-     *
      */
     public function createMailgunCredential(
         MailgunCredential $mailgunCredential,
@@ -104,7 +100,6 @@ class CredentialHashesApi
 
     /**
      * @return OAuth2Credential
-     *
      */
     public function createOAuth2Credential(
         OAuth2Credential $oAuth2Credential,
@@ -120,7 +115,6 @@ class CredentialHashesApi
 
     /**
      * @return PlaidCredential
-     *
      */
     public function createPlaidCredential(
         PlaidCredential $plaidCredential,
@@ -136,7 +130,6 @@ class CredentialHashesApi
 
     /**
      * @return PostmarkCredential
-     *
      */
     public function createPostmarkCredential(
         PostmarkCredential $postmarkCredential,
@@ -152,7 +145,6 @@ class CredentialHashesApi
 
     /**
      * @return SendGridCredential
-     *
      */
     public function createSendGridCredential(
         SendGridCredential $sendGridCredential,
@@ -168,7 +160,6 @@ class CredentialHashesApi
 
     /**
      * @return TaxJarCredential
-     *
      */
     public function createTaxJarCredential(
         TaxJarCredential $taxJarCredential,
@@ -184,7 +175,6 @@ class CredentialHashesApi
 
     /**
      * @return WebhookCredential
-     *
      */
     public function createWebhookCredential(
         WebhookCredential $webhookCredential,
@@ -200,7 +190,6 @@ class CredentialHashesApi
 
     /**
      * @return SESCredential
-     *
      */
     public function getAWSSESCredential(
         string $hash,
@@ -220,7 +209,6 @@ class CredentialHashesApi
 
     /**
      * @return ExperianCredential[]
-     *
      */
     public function getAllExperianCredentials(
         ?string $filter = null,
@@ -247,7 +235,6 @@ class CredentialHashesApi
 
     /**
      * @return OAuth2Credential[]
-     *
      */
     public function getAllOAuth2Credentials(
         ?string $filter = null,
@@ -274,7 +261,6 @@ class CredentialHashesApi
 
     /**
      * @return PlaidCredential[]
-     *
      */
     public function getAllPlaidCredentials(
         ?string $filter = null,
@@ -301,7 +287,6 @@ class CredentialHashesApi
 
     /**
      * @return TaxJarCredential[]
-     *
      */
     public function getAllTaxJarCredentials(
         ?string $filter = null,
@@ -328,7 +313,6 @@ class CredentialHashesApi
 
     /**
      * @return SmtpCredential
-     *
      */
     public function getEmailCredential(
         string $hash,
@@ -348,7 +332,6 @@ class CredentialHashesApi
 
     /**
      * @return ExperianCredential
-     *
      */
     public function getExperianCredential(
         string $hash,
@@ -368,7 +351,6 @@ class CredentialHashesApi
 
     /**
      * @return MailgunCredential
-     *
      */
     public function getMailgunCredential(
         string $hash,
@@ -388,7 +370,6 @@ class CredentialHashesApi
 
     /**
      * @return OAuth2Credential
-     *
      */
     public function getOAuth2Credential(
         string $hash,
@@ -408,7 +389,6 @@ class CredentialHashesApi
 
     /**
      * @return GoogleSpreadsheet[]
-     *
      */
     public function getOAuth2CredentialItems(
         string $hash,
@@ -442,7 +422,6 @@ class CredentialHashesApi
 
     /**
      * @return PlaidCredential
-     *
      */
     public function getPlaidCredential(
         string $hash,
@@ -462,7 +441,6 @@ class CredentialHashesApi
 
     /**
      * @return PostmarkCredential
-     *
      */
     public function getPostmarkCredential(
         string $hash,
@@ -482,7 +460,6 @@ class CredentialHashesApi
 
     /**
      * @return SendGridCredential
-     *
      */
     public function getSendGridCredential(
         string $hash,
@@ -502,7 +479,6 @@ class CredentialHashesApi
 
     /**
      * @return TaxJarCredential
-     *
      */
     public function getTaxJarCredential(
         string $hash,
@@ -522,7 +498,6 @@ class CredentialHashesApi
 
     /**
      * @return WebhookCredential
-     *
      */
     public function getWebhookCredential(
         string $hash,
@@ -542,7 +517,6 @@ class CredentialHashesApi
 
     /**
      * @return SmtpCredential
-     *
      */
     public function patchEmailCredential(
         string $hash,
@@ -563,7 +537,6 @@ class CredentialHashesApi
 
     /**
      * @return MailgunCredential
-     *
      */
     public function patchMailgunCredential(
         string $hash,
@@ -584,7 +557,6 @@ class CredentialHashesApi
 
     /**
      * @return PostmarkCredential
-     *
      */
     public function patchPostmarkCredential(
         string $hash,
@@ -605,7 +577,6 @@ class CredentialHashesApi
 
     /**
      * @return SendGridCredential
-     *
      */
     public function patchSendGridCredential(
         string $hash,
@@ -626,7 +597,6 @@ class CredentialHashesApi
 
     /**
      * @return WebhookCredential
-     *
      */
     public function patchWebhookCredential(
         string $hash,
@@ -647,7 +617,6 @@ class CredentialHashesApi
 
     /**
      * @return SESCredential
-     *
      */
     public function updateAWSSESCredential(
         string $hash,
@@ -668,7 +637,6 @@ class CredentialHashesApi
 
     /**
      * @return ExperianCredential
-     *
      */
     public function updateExperianCredential(
         string $hash,
@@ -689,7 +657,6 @@ class CredentialHashesApi
 
     /**
      * @return OAuth2Credential
-     *
      */
     public function updateOAuth2Credential(
         string $hash,
@@ -710,7 +677,6 @@ class CredentialHashesApi
 
     /**
      * @return PlaidCredential
-     *
      */
     public function updatePlaidCredential(
         string $hash,
@@ -731,7 +697,6 @@ class CredentialHashesApi
 
     /**
      * @return TaxJarCredential
-     *
      */
     public function updateTaxJarCredential(
         string $hash,
