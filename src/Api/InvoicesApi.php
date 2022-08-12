@@ -36,7 +36,6 @@ class InvoicesApi
 
     /**
      * @return Invoice
-     *
      */
     public function abandon(
         string $id,
@@ -56,7 +55,6 @@ class InvoicesApi
 
     /**
      * @return CreditMemoAllocation
-     *
      */
     public function applyCreditMemo(
         string $id,
@@ -79,7 +77,6 @@ class InvoicesApi
 
     /**
      * @return Invoice
-     *
      */
     public function applyTransaction(
         string $id,
@@ -100,7 +97,6 @@ class InvoicesApi
 
     /**
      * @return Invoice
-     *
      */
     public function create(
         Invoice $invoice,
@@ -116,7 +112,6 @@ class InvoicesApi
 
     /**
      * @return InvoiceItem
-     *
      */
     public function createInvoiceItem(
         string $id,
@@ -137,7 +132,6 @@ class InvoicesApi
 
     /**
      * @return InvoiceTimeline
-     *
      */
     public function createTimelineComment(
         string $id,
@@ -203,7 +197,6 @@ class InvoicesApi
 
     /**
      * @return Invoice
-     *
      */
     public function get(
         string $id,
@@ -228,7 +221,6 @@ class InvoicesApi
 
     /**
      * @return Invoice[]
-     *
      */
     public function getAll(
         ?string $filter = null,
@@ -257,7 +249,6 @@ class InvoicesApi
 
     /**
      * @return CreditMemoAllocation[]
-     *
      */
     public function getAllCreditMemoAllocations(
         string $id,
@@ -283,7 +274,6 @@ class InvoicesApi
 
     /**
      * @return InvoiceItem[]
-     *
      */
     public function getAllInvoiceItems(
         string $id,
@@ -311,7 +301,6 @@ class InvoicesApi
 
     /**
      * @return InvoiceTimeline[]
-     *
      */
     public function getAllTimelineMessages(
         string $id,
@@ -343,7 +332,6 @@ class InvoicesApi
 
     /**
      * @return InvoiceTransactionAllocation[]
-     *
      */
     public function getAllTransactionAllocations(
         string $id,
@@ -369,7 +357,6 @@ class InvoicesApi
 
     /**
      * @return CreditMemoAllocation
-     *
      */
     public function getCreditMemoAllocation(
         string $id,
@@ -397,7 +384,6 @@ class InvoicesApi
 
     /**
      * @return InvoiceItem
-     *
      */
     public function getInvoiceItem(
         string $id,
@@ -419,7 +405,6 @@ class InvoicesApi
 
     /**
      * @return InvoiceTimeline
-     *
      */
     public function getTimelineMessage(
         string $id,
@@ -441,7 +426,6 @@ class InvoicesApi
 
     /**
      * @return Invoice
-     *
      */
     public function issue(
         string $id,
@@ -462,7 +446,6 @@ class InvoicesApi
 
     /**
      * @return Invoice
-     *
      */
     public function recalculate(
         string $id,
@@ -482,7 +465,6 @@ class InvoicesApi
 
     /**
      * @return Invoice
-     *
      */
     public function reissue(
         string $id,
@@ -503,7 +485,6 @@ class InvoicesApi
 
     /**
      * @return Invoice
-     *
      */
     public function update(
         string $id,
@@ -524,7 +505,6 @@ class InvoicesApi
 
     /**
      * @return InvoiceItem
-     *
      */
     public function updateInvoiceItem(
         string $id,
@@ -547,7 +527,6 @@ class InvoicesApi
 
     /**
      * @return Invoice
-     *
      */
     public function void(
         string $id,

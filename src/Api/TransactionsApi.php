@@ -35,7 +35,6 @@ class TransactionsApi
 
     /**
      * @return Transaction
-     *
      */
     public function create(
         TransactionRequest $transactionRequest,
@@ -55,7 +54,6 @@ class TransactionsApi
 
     /**
      * @return TransactionTimeline
-     *
      */
     public function createTimelineComment(
         string $id,
@@ -91,7 +89,6 @@ class TransactionsApi
 
     /**
      * @return Transaction
-     *
      */
     public function get(
         string $id,
@@ -115,7 +112,6 @@ class TransactionsApi
 
     /**
      * @return Transaction[]
-     *
      */
     public function getAll(
         ?int $limit = null,
@@ -144,7 +140,6 @@ class TransactionsApi
 
     /**
      * @return TransactionTimeline[]
-     *
      */
     public function getAllTimelineMessages(
         string $id,
@@ -172,7 +167,6 @@ class TransactionsApi
 
     /**
      * @return TransactionTimeline
-     *
      */
     public function getTimelineMessage(
         string $id,
@@ -194,7 +188,6 @@ class TransactionsApi
 
     /**
      * @return Transaction
-     *
      */
     public function patch(
         string $id,
@@ -215,7 +208,6 @@ class TransactionsApi
 
     /**
      * @return TransactionQuery
-     *
      */
     public function query(
         string $id,
@@ -235,7 +227,6 @@ class TransactionsApi
 
     /**
      * @return Transaction
-     *
      */
     public function refund(
         string $id,
@@ -256,7 +247,6 @@ class TransactionsApi
 
     /**
      * @return Transaction
-     *
      */
     public function update(
         string $id,

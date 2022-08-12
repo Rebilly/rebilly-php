@@ -28,7 +28,6 @@ class PaymentGatewaysMetadataApi
 
     /**
      * @return PaymentGatewayMetadata
-     *
      */
     public function get(
         string $apiName,
@@ -48,7 +47,6 @@ class PaymentGatewaysMetadataApi
 
     /**
      * @return PaymentGatewayMetadata[]
-     *
      */
     public function getAll(
     ): array {

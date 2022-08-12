@@ -34,7 +34,6 @@ class SubscriptionsApi
 
     /**
      * @return Subscription
-     *
      */
     public function changeItems(
         string $id,
@@ -55,7 +54,6 @@ class SubscriptionsApi
 
     /**
      * @return Subscription
-     *
      */
     public function create(
         Subscription $subscription,
@@ -75,7 +73,6 @@ class SubscriptionsApi
 
     /**
      * @return Invoice
-     *
      */
     public function createInterimInvoice(
         string $id,
@@ -96,7 +93,6 @@ class SubscriptionsApi
 
     /**
      * @return OrderTimeline
-     *
      */
     public function createTimelineComment(
         string $id,
@@ -145,7 +141,6 @@ class SubscriptionsApi
 
     /**
      * @return Subscription
-     *
      */
     public function get(
         string $id,
@@ -169,7 +164,6 @@ class SubscriptionsApi
 
     /**
      * @return Subscription[]
-     *
      */
     public function getAll(
         ?string $filter = null,
@@ -198,7 +192,6 @@ class SubscriptionsApi
 
     /**
      * @return OrderTimeline[]
-     *
      */
     public function getAllTimelineMessages(
         string $id,
@@ -230,7 +223,6 @@ class SubscriptionsApi
 
     /**
      * @return Invoice[]
-     *
      */
     public function getAllUpcomingInvoices(
         string $id,
@@ -254,7 +246,6 @@ class SubscriptionsApi
 
     /**
      * @return OrderTimeline
-     *
      */
     public function getTimelineMessage(
         string $id,
@@ -276,7 +267,6 @@ class SubscriptionsApi
 
     /**
      * @return Invoice
-     *
      */
     public function issueUpcomingInvoice(
         string $id,
@@ -299,7 +289,6 @@ class SubscriptionsApi
 
     /**
      * @return Subscription
-     *
      */
     public function update(
         string $id,
@@ -324,7 +313,6 @@ class SubscriptionsApi
 
     /**
      * @return Subscription
-     *
      */
     public function void(
         string $id,

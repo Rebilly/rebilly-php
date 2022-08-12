@@ -28,7 +28,6 @@ class EmailDeliverySettingVerificationsApi
 
     /**
      * @return EmailDeliverySetting
-     *
      */
     public function verify(
         string $token,

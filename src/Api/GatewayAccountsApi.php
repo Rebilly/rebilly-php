@@ -46,7 +46,6 @@ class GatewayAccountsApi
 
     /**
      * @return GatewayAccount
-     *
      */
     public function close(
         string $id,
@@ -66,7 +65,6 @@ class GatewayAccountsApi
 
     /**
      * @return GatewayAccount
-     *
      */
     public function create(
         GatewayAccount $gatewayAccount,
@@ -82,7 +80,6 @@ class GatewayAccountsApi
 
     /**
      * @return GatewayAccountDowntimeSchedule
-     *
      */
     public function createDowntimeSchedule(
         string $id,
@@ -103,7 +100,6 @@ class GatewayAccountsApi
 
     /**
      * @return GatewayAccountTimeline
-     *
      */
     public function createTimelineComment(
         string $id,
@@ -182,7 +178,6 @@ class GatewayAccountsApi
 
     /**
      * @return GatewayAccount
-     *
      */
     public function disable(
         string $id,
@@ -202,7 +197,6 @@ class GatewayAccountsApi
 
     /**
      * @return GatewayAccount
-     *
      */
     public function enable(
         string $id,
@@ -222,7 +216,6 @@ class GatewayAccountsApi
 
     /**
      * @return GatewayAccount
-     *
      */
     public function get(
         string $id,
@@ -242,7 +235,6 @@ class GatewayAccountsApi
 
     /**
      * @return GatewayAccount[]
-     *
      */
     public function getAll(
         ?int $limit = null,
@@ -271,7 +263,6 @@ class GatewayAccountsApi
 
     /**
      * @return GatewayAccountDowntimeSchedule[]
-     *
      */
     public function getAllDowntimeSchedules(
         string $id,
@@ -301,7 +292,6 @@ class GatewayAccountsApi
 
     /**
      * @return GatewayAccountTimeline[]
-     *
      */
     public function getAllTimelineMessages(
         string $id,
@@ -333,7 +323,6 @@ class GatewayAccountsApi
 
     /**
      * @return GatewayAccountLimit[]
-     *
      */
     public function getAllVolumeLimits(
         string $id,
@@ -353,7 +342,6 @@ class GatewayAccountsApi
 
     /**
      * @return GatewayAccountDowntimeSchedule
-     *
      */
     public function getDowntimeSchedule(
         string $id,
@@ -375,7 +363,6 @@ class GatewayAccountsApi
 
     /**
      * @return FinancialSettings
-     *
      */
     public function getFinancialSettings(
         string $id,
@@ -395,7 +382,6 @@ class GatewayAccountsApi
 
     /**
      * @return GatewayAccountTimeline
-     *
      */
     public function getTimelineMessage(
         string $id,
@@ -417,7 +403,6 @@ class GatewayAccountsApi
 
     /**
      * @return GatewayAccountLimit
-     *
      */
     public function getVolumeLimit(
         string $id,
@@ -439,7 +424,6 @@ class GatewayAccountsApi
 
     /**
      * @return FinancialSettings
-     *
      */
     public function setFinancialSettings(
         string $id,
@@ -460,7 +444,6 @@ class GatewayAccountsApi
 
     /**
      * @return GatewayAccount
-     *
      */
     public function update(
         string $id,
@@ -481,7 +464,6 @@ class GatewayAccountsApi
 
     /**
      * @return GatewayAccountDowntimeSchedule
-     *
      */
     public function updateDowntimeSchedule(
         string $id,
@@ -504,7 +486,6 @@ class GatewayAccountsApi
 
     /**
      * @return GatewayAccountLimit
-     *
      */
     public function updateVolumeLimit(
         string $id,
@@ -527,7 +508,6 @@ class GatewayAccountsApi
 
     /**
      * @return GatewayAccount
-     *
      */
     public function update_0(
         string $id,

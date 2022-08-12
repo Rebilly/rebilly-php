@@ -31,7 +31,6 @@ class UsersApi
 
     /**
      * @return User
-     *
      */
     public function create(
         User $user,
@@ -47,7 +46,6 @@ class UsersApi
 
     /**
      * @return User
-     *
      */
     public function get(
         string $id,
@@ -67,7 +65,6 @@ class UsersApi
 
     /**
      * @return User[]
-     *
      */
     public function getAll(
         ?int $limit = null,
@@ -94,7 +91,6 @@ class UsersApi
 
     /**
      * @return ProfileMfa
-     *
      */
     public function getMfa(
         string $id,
@@ -114,7 +110,6 @@ class UsersApi
 
     /**
      * @return User
-     *
      */
     public function resetTotp(
         string $id,
@@ -134,7 +129,6 @@ class UsersApi
 
     /**
      * @return User
-     *
      */
     public function update(
         string $id,
@@ -155,7 +149,6 @@ class UsersApi
 
     /**
      * @return User
-     *
      */
     public function updatePassword(
         string $id,

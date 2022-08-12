@@ -28,7 +28,6 @@ class PaymentMethodsApi
 
     /**
      * @return PaymentMethodMetadata
-     *
      */
     public function get(
         string $apiName,
@@ -48,7 +47,6 @@ class PaymentMethodsApi
 
     /**
      * @return PaymentMethodMetadata[]
-     *
      */
     public function getAll(
     ): array {

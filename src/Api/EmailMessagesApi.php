@@ -30,7 +30,6 @@ class EmailMessagesApi
 
     /**
      * @return EmailMessage
-     *
      */
     public function create(
         EmailMessage $emailMessage,
@@ -59,7 +58,6 @@ class EmailMessagesApi
 
     /**
      * @return EmailMessage
-     *
      */
     public function get(
         string $id,
@@ -79,7 +77,6 @@ class EmailMessagesApi
 
     /**
      * @return EmailMessage[]
-     *
      */
     public function getAll(
         ?int $limit = null,
@@ -106,7 +103,6 @@ class EmailMessagesApi
 
     /**
      * @return EmailMessage
-     *
      */
     public function send(
         string $id,

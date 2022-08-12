@@ -39,7 +39,6 @@ class ProfileApi
 
     /**
      * @return Profile
-     *
      */
     public function get(
     ): Profile {
@@ -54,7 +53,6 @@ class ProfileApi
 
     /**
      * @return ProfileMfa
-     *
      */
     public function getMfa(
     ): ProfileMfa {
@@ -69,7 +67,6 @@ class ProfileApi
 
     /**
      * @return Profile
-     *
      */
     public function resetTotp(
     ): Profile {
@@ -84,7 +81,6 @@ class ProfileApi
 
     /**
      * @return Profile
-     *
      */
     public function update(
         Profile $profile,
@@ -100,7 +96,6 @@ class ProfileApi
 
     /**
      * @return ProfileMfa
-     *
      */
     public function updateMfa(
     ): ProfileMfa {
@@ -115,7 +110,6 @@ class ProfileApi
 
     /**
      * @return Profile
-     *
      */
     public function updatePassword(
         UpdatePassword $updatePassword,

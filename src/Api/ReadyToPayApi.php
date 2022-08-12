@@ -30,7 +30,6 @@ class ReadyToPayApi
 
     /**
      * @return ReadyToPayMethods
-     *
      */
     public function readyToPay(
         ?CoreReadyToPay $coreReadyToPay = null,

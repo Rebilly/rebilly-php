@@ -29,7 +29,6 @@ class CustomFieldsApi
 
     /**
      * @return CustomField
-     *
      */
     public function create(
         string $resource,
@@ -52,7 +51,6 @@ class CustomFieldsApi
 
     /**
      * @return CustomField
-     *
      */
     public function get(
         string $resource,
@@ -74,7 +72,6 @@ class CustomFieldsApi
 
     /**
      * @return CustomField[]
-     *
      */
     public function getAll(
         string $resource,

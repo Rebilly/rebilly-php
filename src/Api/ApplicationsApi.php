@@ -31,7 +31,6 @@ class ApplicationsApi
 
     /**
      * @return Application
-     *
      */
     public function create(
         ?Application $application = null,
@@ -47,7 +46,6 @@ class ApplicationsApi
 
     /**
      * @return UserApplication
-     *
      */
     public function get(
         string $id,
@@ -67,7 +65,6 @@ class ApplicationsApi
 
     /**
      * @return UserApplication[]
-     *
      */
     public function getAll(
         ?int $limit = null,
@@ -98,7 +95,6 @@ class ApplicationsApi
 
     /**
      * @return OwnerApplicationInstance
-     *
      */
     public function getInstance(
         string $id,
@@ -120,7 +116,6 @@ class ApplicationsApi
 
     /**
      * @return OwnerApplicationInstance[]
-     *
      */
     public function getInstances(
         string $id,

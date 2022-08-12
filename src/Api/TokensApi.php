@@ -29,7 +29,6 @@ class TokensApi
 
     /**
      * @return CompositeToken
-     *
      */
     public function create(
         CompositeToken $compositeToken,
@@ -45,7 +44,6 @@ class TokensApi
 
     /**
      * @return CompositeToken
-     *
      */
     public function get(
         string $token,
@@ -65,7 +63,6 @@ class TokensApi
 
     /**
      * @return CompositeToken[]
-     *
      */
     public function getAll(
         ?int $limit = null,

@@ -29,7 +29,6 @@ class ApiKeysApi
 
     /**
      * @return ApiKey
-     *
      */
     public function create(
         ApiKey $apiKey,
@@ -58,7 +57,6 @@ class ApiKeysApi
 
     /**
      * @return ApiKey
-     *
      */
     public function get(
         string $id,
@@ -78,7 +76,6 @@ class ApiKeysApi
 
     /**
      * @return ApiKey[]
-     *
      */
     public function getAll(
         ?int $limit = null,
@@ -101,7 +98,6 @@ class ApiKeysApi
 
     /**
      * @return ApiKey
-     *
      */
     public function update(
         string $id,

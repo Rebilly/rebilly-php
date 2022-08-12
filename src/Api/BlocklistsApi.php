@@ -29,7 +29,6 @@ class BlocklistsApi
 
     /**
      * @return Blocklist
-     *
      */
     public function create(
         Blocklist $blocklist,
@@ -58,7 +57,6 @@ class BlocklistsApi
 
     /**
      * @return Blocklist
-     *
      */
     public function get(
         string $id,
@@ -78,7 +76,6 @@ class BlocklistsApi
 
     /**
      * @return Blocklist[]
-     *
      */
     public function getAll(
         ?int $limit = null,
@@ -105,7 +102,6 @@ class BlocklistsApi
 
     /**
      * @return Blocklist
-     *
      */
     public function update(
         string $id,

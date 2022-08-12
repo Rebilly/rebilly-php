@@ -28,7 +28,6 @@ class AmlApi
 
     /**
      * @return AML[]
-     *
      */
     public function getAll(
         string $firstName,

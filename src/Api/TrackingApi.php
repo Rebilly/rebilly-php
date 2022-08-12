@@ -30,7 +30,6 @@ class TrackingApi
 
     /**
      * @return ApiTracking[]
-     *
      */
     public function getAllApiLogs(
         ?int $limit = null,
@@ -58,7 +57,6 @@ class TrackingApi
 
     /**
      * @return ValueList[]
-     *
      */
     public function getAllListsChangesHistory(
         ?int $limit = null,
@@ -85,7 +83,6 @@ class TrackingApi
 
     /**
      * @return WebhookTracking[]
-     *
      */
     public function getAllWebhookTrackingLogs(
         ?int $limit = null,
@@ -112,7 +109,6 @@ class TrackingApi
 
     /**
      * @return ApiTracking
-     *
      */
     public function getApiLog(
         string $id,
@@ -132,7 +128,6 @@ class TrackingApi
 
     /**
      * @return WebhookTracking
-     *
      */
     public function getWebhookTrackingLog(
         string $id,

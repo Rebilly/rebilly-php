@@ -33,7 +33,6 @@ class TagsApi
 
     /**
      * @return Tag
-     *
      */
     public function create(
         Tag $tag,
@@ -62,7 +61,6 @@ class TagsApi
 
     /**
      * @return Tag
-     *
      */
     public function get(
         string $tag,
@@ -82,7 +80,6 @@ class TagsApi
 
     /**
      * @return Tag[]
-     *
      */
     public function getAll(
         ?int $limit = null,
@@ -225,7 +222,6 @@ class TagsApi
 
     /**
      * @return Tag
-     *
      */
     public function update(
         string $tag,

@@ -29,7 +29,6 @@ class BroadcastMessagesApi
 
     /**
      * @return BroadcastMessage
-     *
      */
     public function create(
         BroadcastMessage $broadcastMessage,
@@ -58,7 +57,6 @@ class BroadcastMessagesApi
 
     /**
      * @return BroadcastMessage
-     *
      */
     public function get(
         string $id,
@@ -78,7 +76,6 @@ class BroadcastMessagesApi
 
     /**
      * @return BroadcastMessage[]
-     *
      */
     public function getAll(
         ?int $limit = null,
@@ -103,7 +100,6 @@ class BroadcastMessagesApi
 
     /**
      * @return BroadcastMessage
-     *
      */
     public function update(
         string $id,

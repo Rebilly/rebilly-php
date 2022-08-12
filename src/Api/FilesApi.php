@@ -44,7 +44,6 @@ class FilesApi
     }
 
     /**
-     *
      * @return StreamInterface
      */
     public function download(
@@ -68,7 +67,6 @@ class FilesApi
 
     /**
      * @return File
-     *
      */
     public function get(
         string $id,
@@ -88,7 +86,6 @@ class FilesApi
 
     /**
      * @return File[]
-     *
      */
     public function getAll(
         ?int $limit = null,
@@ -119,7 +116,6 @@ class FilesApi
 
     /**
      * @return File
-     *
      */
     public function update(
         string $id,
@@ -140,7 +136,6 @@ class FilesApi
 
     /**
      * @return File
-     *
      */
     public function upload(
         FileCreateFromInline|FileCreateFromUrl $body,

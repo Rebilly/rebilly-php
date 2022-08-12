@@ -31,7 +31,6 @@ class AuthenticationTokensApi
 
     /**
      * @return CustomerJWT
-     *
      */
     public function exchangeToken(
         string $token,
@@ -52,7 +51,6 @@ class AuthenticationTokensApi
 
     /**
      * @return AuthenticationTokenResponse[]
-     *
      */
     public function getAllAuthTokens(
         ?int $limit = null,
@@ -73,7 +71,6 @@ class AuthenticationTokensApi
 
     /**
      * @return AuthenticationTokenResponse
-     *
      */
     public function login(
         AuthenticationToken $authenticationToken,
@@ -102,7 +99,6 @@ class AuthenticationTokensApi
 
     /**
      * @return AuthenticationTokenResponse
-     *
      */
     public function verify(
         string $token,

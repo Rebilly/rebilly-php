@@ -29,7 +29,6 @@ class RolesApi
 
     /**
      * @return Role
-     *
      */
     public function create(
         Role $role,
@@ -58,7 +57,6 @@ class RolesApi
 
     /**
      * @return Role
-     *
      */
     public function get(
         string $id,
@@ -82,7 +80,6 @@ class RolesApi
 
     /**
      * @return Role[]
-     *
      */
     public function getAll(
         ?int $limit = null,
@@ -111,7 +108,6 @@ class RolesApi
 
     /**
      * @return Role
-     *
      */
     public function update(
         string $id,

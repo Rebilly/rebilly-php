@@ -34,7 +34,6 @@ class EventsApi
 
     /**
      * @return RuleSetDraft
-     *
      */
     public function createDraftRuleset(
         string $eventType,
@@ -55,7 +54,6 @@ class EventsApi
 
     /**
      * @return RuleSet
-     *
      */
     public function createRules(
         string $eventType,
@@ -76,7 +74,6 @@ class EventsApi
 
     /**
      * @return RulesEngineTimeline
-     *
      */
     public function createTimelineComment(
         string $eventType,
@@ -127,7 +124,6 @@ class EventsApi
 
     /**
      * @return SystemEvent
-     *
      */
     public function get(
         string $eventType,
@@ -147,7 +143,6 @@ class EventsApi
 
     /**
      * @return SystemEvent[]
-     *
      */
     public function getAll(
     ): array {
@@ -162,7 +157,6 @@ class EventsApi
 
     /**
      * @return RuleSetDraft[]
-     *
      */
     public function getAllDraftRulesets(
         string $eventType,
@@ -198,7 +192,6 @@ class EventsApi
 
     /**
      * @return RulesEngineTimeline[]
-     *
      */
     public function getAllTimelineMessages(
         string $eventType,
@@ -230,7 +223,6 @@ class EventsApi
 
     /**
      * @return RuleSetDraft
-     *
      */
     public function getDraftRuleset(
         string $eventType,
@@ -258,7 +250,6 @@ class EventsApi
 
     /**
      * @return RuleSet
-     *
      */
     public function getRules(
         string $eventType,
@@ -278,7 +269,6 @@ class EventsApi
 
     /**
      * @return RuleSetHistoryItem[]
-     *
      */
     public function getRulesHistory(
         string $eventType,
@@ -314,7 +304,6 @@ class EventsApi
 
     /**
      * @return RuleSetVersion
-     *
      */
     public function getRulesVersionDetail(
         string $eventType,
@@ -342,7 +331,6 @@ class EventsApi
 
     /**
      * @return RuleSetHistoryItem
-     *
      */
     public function getRulesVersionNumber(
         string $eventType,
@@ -370,7 +358,6 @@ class EventsApi
 
     /**
      * @return RulesEngineTimeline
-     *
      */
     public function getTimelineMessage(
         string $eventType,
@@ -392,7 +379,6 @@ class EventsApi
 
     /**
      * @return RuleSetDraft
-     *
      */
     public function updateDraftRuleset(
         string $eventType,

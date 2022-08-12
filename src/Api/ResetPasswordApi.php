@@ -31,7 +31,6 @@ class ResetPasswordApi
 
     /**
      * @return ResetPasswordTokenInfo
-     *
      */
     public function getResetPasswordToken(
         string $token,
@@ -51,7 +50,6 @@ class ResetPasswordApi
 
     /**
      * @return User
-     *
      */
     public function resetPassword(
         string $token,

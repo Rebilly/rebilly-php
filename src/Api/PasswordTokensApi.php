@@ -29,7 +29,6 @@ class PasswordTokensApi
 
     /**
      * @return ResetPasswordToken
-     *
      */
     public function createResetPasswordToken(
         ResetPasswordToken $resetPasswordToken,
@@ -58,7 +57,6 @@ class PasswordTokensApi
 
     /**
      * @return ResetPasswordToken[]
-     *
      */
     public function getAllResetPasswordTokens(
         ?int $limit = null,
@@ -79,7 +77,6 @@ class PasswordTokensApi
 
     /**
      * @return ResetPasswordToken
-     *
      */
     public function getResetPasswordToken(
         string $id,

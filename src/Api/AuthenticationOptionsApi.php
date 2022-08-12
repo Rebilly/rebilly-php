@@ -29,7 +29,6 @@ class AuthenticationOptionsApi
 
     /**
      * @return AuthenticationOptions
-     *
      */
     public function getAuthOptions(
     ): AuthenticationOptions {
@@ -44,7 +43,6 @@ class AuthenticationOptionsApi
 
     /**
      * @return AuthenticationOptions
-     *
      */
     public function updateAuthOptions(
         AuthenticationOptions $authenticationOptions,

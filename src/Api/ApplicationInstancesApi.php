@@ -42,7 +42,6 @@ class ApplicationInstancesApi
 
     /**
      * @return ApplicationInstance
-     *
      */
     public function get(
         string $applicationId,
@@ -62,7 +61,6 @@ class ApplicationInstancesApi
 
     /**
      * @return ApplicationInstance
-     *
      */
     public function upsert(
         string $applicationId,

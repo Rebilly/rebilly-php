@@ -29,7 +29,6 @@ class CredentialsApi
 
     /**
      * @return CustomerCredential
-     *
      */
     public function createCredential(
         CustomerCredential $customerCredential,
@@ -58,7 +57,6 @@ class CredentialsApi
 
     /**
      * @return CustomerCredential[]
-     *
      */
     public function getAllCredentials(
         ?int $limit = null,
@@ -79,7 +77,6 @@ class CredentialsApi
 
     /**
      * @return CustomerCredential
-     *
      */
     public function getCredential(
         string $id,
@@ -99,7 +96,6 @@ class CredentialsApi
 
     /**
      * @return CustomerCredential
-     *
      */
     public function updateCredential(
         string $id,
