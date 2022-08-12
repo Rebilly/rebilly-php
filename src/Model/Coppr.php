@@ -1,0 +1,83 @@
+<?php
+/**
+ * This source file is proprietary and part of Rebilly.
+ *
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
+ *
+ * @see https://www.rebilly.com
+ */
+
+declare(strict_types=1);
+
+namespace Rebilly\Sdk\Model;
+
+class Coppr extends GatewayAccount
+{
+    private array $fields = [];
+
+    public function __construct(array $data = [])
+    {
+        parent::__construct([
+            'gatewayName' => 'Coppr',
+        ] + $data);
+
+        if (array_key_exists('credentials', $data)) {
+            $this->setCredentials($data['credentials']);
+        }
+        if (array_key_exists('settings', $data)) {
+            $this->setSettings($data['settings']);
+        }
+    }
+
+    public static function from(array $data = []): self
+    {
+        return new self($data);
+    }
+
+    public function getCredentials(): CopprCredentials
+    {
+        return $this->fields['credentials'];
+    }
+
+    public function setCredentials(CopprCredentials|array $credentials): self
+    {
+        if (!($credentials instanceof \Rebilly\Sdk\Model\CopprCredentials)) {
+            $credentials = \Rebilly\Sdk\Model\CopprCredentials::from($credentials);
+        }
+
+        $this->fields['credentials'] = $credentials;
+
+        return $this;
+    }
+
+    public function getSettings(): ?CopprSettings
+    {
+        return $this->fields['settings'] ?? null;
+    }
+
+    public function setSettings(null|CopprSettings|array $settings): self
+    {
+        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\CopprSettings)) {
+            $settings = \Rebilly\Sdk\Model\CopprSettings::from($settings);
+        }
+
+        $this->fields['settings'] = $settings;
+
+        return $this;
+    }
+
+    public function jsonSerialize(): array
+    {
+        $data = [];
+        if (array_key_exists('credentials', $this->fields)) {
+            $data['credentials'] = $this->fields['credentials']?->jsonSerialize();
+        }
+        if (array_key_exists('settings', $this->fields)) {
+            $data['settings'] = $this->fields['settings']?->jsonSerialize();
+        }
+
+        return parent::jsonSerialize() + $data;
+    }
+}

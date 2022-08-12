@@ -1,0 +1,140 @@
+<?php
+/**
+ * This source file is proprietary and part of Rebilly.
+ *
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
+ *
+ * @see https://www.rebilly.com
+ */
+
+declare(strict_types=1);
+
+namespace Rebilly\Sdk\Api;
+
+use GuzzleHttp\ClientInterface;
+
+use function GuzzleHttp\json_decode;
+use function GuzzleHttp\json_encode;
+
+use GuzzleHttp\Psr7\Request;
+use Rebilly\Sdk\Model\Application;
+use Rebilly\Sdk\Model\OwnerApplicationInstance;
+use Rebilly\Sdk\Model\UserApplication;
+
+class ApplicationsApi
+{
+    public function __construct(protected readonly ?ClientInterface $client)
+    {
+    }
+
+    /**
+     * @return Application
+     *
+     */
+    public function create(
+        ?Application $application = null,
+    ): Application {
+        $uri = '/applications';
+
+        $request = new Request('POST', $uri, body: json_encode($application));
+        $response = $this->client->send($request);
+        $data = json_decode((string) $response->getBody(), true);
+
+        return Application::from($data);
+    }
+
+    /**
+     * @return UserApplication
+     *
+     */
+    public function get(
+        string $id,
+    ): UserApplication {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/applications/{id}');
+
+        $request = new Request('GET', $uri);
+        $response = $this->client->send($request);
+        $data = json_decode((string) $response->getBody(), true);
+
+        return UserApplication::from($data);
+    }
+
+    /**
+     * @return UserApplication[]
+     *
+     */
+    public function getAll(
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $filter = null,
+        ?string $q = null,
+        ?string $expand = null,
+        ?string $fields = null,
+        ?array $sort = null,
+    ): array {
+        $queryParams = [
+            'limit' => $limit,
+            'offset' => $offset,
+            'filter' => $filter,
+            'q' => $q,
+            'expand' => $expand,
+            'fields' => $fields,
+            'sort' => $sort,
+        ];
+        $uri = '/applications' . '?' . http_build_query($queryParams);
+
+        $request = new Request('GET', $uri);
+        $response = $this->client->send($request);
+        $data = json_decode((string) $response->getBody(), true);
+
+        return array_map(fn (array $item): UserApplication => UserApplication::from($item), $data);
+    }
+
+    /**
+     * @return OwnerApplicationInstance
+     *
+     */
+    public function getInstance(
+        string $id,
+        string $organizationId,
+    ): OwnerApplicationInstance {
+        $pathParams = [
+            '{id}' => $id,
+            '{organizationId}' => $organizationId,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/applications/{id}/instances/{organizationId}');
+
+        $request = new Request('GET', $uri);
+        $response = $this->client->send($request);
+        $data = json_decode((string) $response->getBody(), true);
+
+        return OwnerApplicationInstance::from($data);
+    }
+
+    /**
+     * @return OwnerApplicationInstance[]
+     *
+     */
+    public function getInstances(
+        string $id,
+    ): array {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/applications/{id}/instances');
+
+        $request = new Request('GET', $uri);
+        $response = $this->client->send($request);
+        $data = json_decode((string) $response->getBody(), true);
+
+        return array_map(fn (array $item): OwnerApplicationInstance => OwnerApplicationInstance::from($item), $data);
+    }
+}
