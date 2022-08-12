@@ -1,0 +1,161 @@
+<?php
+/**
+ * This source file is proprietary and part of Rebilly.
+ *
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
+ *
+ * @see https://www.rebilly.com
+ */
+
+declare(strict_types=1);
+
+namespace Rebilly\Sdk\Model;
+
+class KycRequest extends CommonKycRequest
+{
+    private array $fields = [];
+
+    public function __construct(array $data = [])
+    {
+        parent::__construct($data);
+
+        if (array_key_exists('customerId', $data)) {
+            $this->setCustomerId($data['customerId']);
+        }
+        if (array_key_exists('reason', $data)) {
+            $this->setReason($data['reason']);
+        }
+        if (array_key_exists('matchLevel', $data)) {
+            $this->setMatchLevel($data['matchLevel']);
+        }
+        if (array_key_exists('revision', $data)) {
+            $this->setRevision($data['revision']);
+        }
+        if (array_key_exists('_links', $data)) {
+            $this->setLinks($data['_links']);
+        }
+        if (array_key_exists('_embedded', $data)) {
+            $this->setEmbedded($data['_embedded']);
+        }
+    }
+
+    public static function from(array $data = []): self
+    {
+        return new self($data);
+    }
+
+    public function getCustomerId(): string
+    {
+        return $this->fields['customerId'];
+    }
+
+    public function setCustomerId(string $customerId): self
+    {
+        $this->fields['customerId'] = $customerId;
+
+        return $this;
+    }
+
+    public function getReason(): ?string
+    {
+        return $this->fields['reason'] ?? null;
+    }
+
+    public function setReason(null|string $reason): self
+    {
+        $this->fields['reason'] = $reason;
+
+        return $this;
+    }
+
+    public function getMatchLevel(): ?int
+    {
+        return $this->fields['matchLevel'] ?? null;
+    }
+
+    public function setMatchLevel(null|int $matchLevel): self
+    {
+        $this->fields['matchLevel'] = $matchLevel;
+
+        return $this;
+    }
+
+    public function getRevision(): ?int
+    {
+        return $this->fields['revision'] ?? null;
+    }
+
+    /**
+     * @return null|array<\Rebilly\Sdk\Model\KycDocumentsLink|\Rebilly\Sdk\Model\KycGathererLink|\Rebilly\Sdk\Model\SelfLink>
+     */
+    public function getLinks(): ?array
+    {
+        return $this->fields['_links'] ?? null;
+    }
+
+    /**
+     * @return null|array{documents:\Rebilly\Sdk\Model\KycDocument[]}
+     */
+    public function getEmbedded(): ?array
+    {
+        return $this->fields['_embedded'] ?? null;
+    }
+
+    /**
+     * @param null|array{documents:\Rebilly\Sdk\Model\KycDocument[]} $embedded
+     */
+    public function setEmbedded(null|array $embedded): self
+    {
+        $embedded['documents'] = isset($embedded['documents']) ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\KycDocument ? $value : \Rebilly\Sdk\Model\KycDocument::from($value)) : null, $embedded['documents']) : null;
+
+        $this->fields['_embedded'] = $embedded;
+
+        return $this;
+    }
+
+    public function jsonSerialize(): array
+    {
+        $data = [];
+        if (array_key_exists('customerId', $this->fields)) {
+            $data['customerId'] = $this->fields['customerId'];
+        }
+        if (array_key_exists('reason', $this->fields)) {
+            $data['reason'] = $this->fields['reason'];
+        }
+        if (array_key_exists('matchLevel', $this->fields)) {
+            $data['matchLevel'] = $this->fields['matchLevel'];
+        }
+        if (array_key_exists('revision', $this->fields)) {
+            $data['revision'] = $this->fields['revision'];
+        }
+        if (array_key_exists('_links', $this->fields)) {
+            $data['_links'] = $this->fields['_links'];
+        }
+        if (array_key_exists('_embedded', $this->fields)) {
+            $data['_embedded'] = $this->fields['_embedded'];
+        }
+
+        return parent::jsonSerialize() + $data;
+    }
+
+    private function setRevision(null|int $revision): self
+    {
+        $this->fields['revision'] = $revision;
+
+        return $this;
+    }
+
+    /**
+     * @param null|array<\Rebilly\Sdk\Model\KycDocumentsLink|\Rebilly\Sdk\Model\KycGathererLink|\Rebilly\Sdk\Model\SelfLink> $links
+     */
+    private function setLinks(null|array $links): self
+    {
+        $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
+
+        $this->fields['_links'] = $links;
+
+        return $this;
+    }
+}

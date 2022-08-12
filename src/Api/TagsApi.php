@@ -1,0 +1,246 @@
+<?php
+/**
+ * This source file is proprietary and part of Rebilly.
+ *
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
+ *
+ * @see https://www.rebilly.com
+ */
+
+declare(strict_types=1);
+
+namespace Rebilly\Sdk\Api;
+
+use GuzzleHttp\ClientInterface;
+
+use function GuzzleHttp\json_decode;
+use function GuzzleHttp\json_encode;
+
+use GuzzleHttp\Psr7\Request;
+use Rebilly\Sdk\Model\DeleteTagCustomerCollectionRequest;
+use Rebilly\Sdk\Model\DeleteTagKycDocumentCollectionRequest;
+use Rebilly\Sdk\Model\PostTagCustomerCollectionRequest;
+use Rebilly\Sdk\Model\PostTagKycDocumentCollectionRequest;
+use Rebilly\Sdk\Model\Tag;
+
+class TagsApi
+{
+    public function __construct(protected readonly ?ClientInterface $client)
+    {
+    }
+
+    /**
+     * @return Tag
+     *
+     */
+    public function create(
+        Tag $tag,
+    ): Tag {
+        $uri = '/tags';
+
+        $request = new Request('POST', $uri, body: json_encode($tag));
+        $response = $this->client->send($request);
+        $data = json_decode((string) $response->getBody(), true);
+
+        return Tag::from($data);
+    }
+
+    public function delete(
+        string $tag,
+    ): void {
+        $pathParams = [
+            '{tag}' => $tag,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/tags/{tag}');
+
+        $request = new Request('DELETE', $uri);
+        $this->client->send($request);
+    }
+
+    /**
+     * @return Tag
+     *
+     */
+    public function get(
+        string $tag,
+    ): Tag {
+        $pathParams = [
+            '{tag}' => $tag,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/tags/{tag}');
+
+        $request = new Request('GET', $uri);
+        $response = $this->client->send($request);
+        $data = json_decode((string) $response->getBody(), true);
+
+        return Tag::from($data);
+    }
+
+    /**
+     * @return Tag[]
+     *
+     */
+    public function getAll(
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $filter = null,
+        ?string $q = null,
+        ?array $sort = null,
+    ): array {
+        $queryParams = [
+            'limit' => $limit,
+            'offset' => $offset,
+            'filter' => $filter,
+            'q' => $q,
+            'sort' => $sort,
+        ];
+        $uri = '/tags' . '?' . http_build_query($queryParams);
+
+        $request = new Request('GET', $uri);
+        $response = $this->client->send($request);
+        $data = json_decode((string) $response->getBody(), true);
+
+        return array_map(fn (array $item): Tag => Tag::from($item), $data);
+    }
+
+    public function tagCustomer(
+        string $tag,
+        string $customerId,
+    ): void {
+        $pathParams = [
+            '{tag}' => $tag,
+            '{customerId}' => $customerId,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/tags/{tag}/customers/{customerId}');
+
+        $request = new Request('POST', $uri);
+        $this->client->send($request);
+    }
+
+    public function tagCustomers(
+        string $tag,
+        PostTagCustomerCollectionRequest $postTagCustomerCollectionRequest,
+    ): void {
+        $pathParams = [
+            '{tag}' => $tag,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/tags/{tag}/customers');
+
+        $request = new Request('POST', $uri, body: json_encode($postTagCustomerCollectionRequest));
+        $this->client->send($request);
+    }
+
+    public function tagKycDocument(
+        string $tag,
+        string $kycDocumentId,
+    ): void {
+        $pathParams = [
+            '{tag}' => $tag,
+            '{kycDocumentId}' => $kycDocumentId,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/tags/{tag}/kyc-documents/{kycDocumentId}');
+
+        $request = new Request('POST', $uri);
+        $this->client->send($request);
+    }
+
+    public function tagKycDocuments(
+        string $tag,
+        PostTagKycDocumentCollectionRequest $postTagKycDocumentCollectionRequest,
+    ): void {
+        $pathParams = [
+            '{tag}' => $tag,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/tags/{tag}/kyc-documents');
+
+        $request = new Request('POST', $uri, body: json_encode($postTagKycDocumentCollectionRequest));
+        $this->client->send($request);
+    }
+
+    public function untagCustomer(
+        string $tag,
+        string $customerId,
+    ): void {
+        $pathParams = [
+            '{tag}' => $tag,
+            '{customerId}' => $customerId,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/tags/{tag}/customers/{customerId}');
+
+        $request = new Request('DELETE', $uri);
+        $this->client->send($request);
+    }
+
+    public function untagCustomers(
+        string $tag,
+        DeleteTagCustomerCollectionRequest $deleteTagCustomerCollectionRequest,
+    ): void {
+        $pathParams = [
+            '{tag}' => $tag,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/tags/{tag}/customers');
+
+        $request = new Request('DELETE', $uri, body: json_encode($deleteTagCustomerCollectionRequest));
+        $this->client->send($request);
+    }
+
+    public function untagKycDocument(
+        string $tag,
+        string $kycDocumentId,
+    ): void {
+        $pathParams = [
+            '{tag}' => $tag,
+            '{kycDocumentId}' => $kycDocumentId,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/tags/{tag}/kyc-documents/{kycDocumentId}');
+
+        $request = new Request('DELETE', $uri);
+        $this->client->send($request);
+    }
+
+    public function untagKycDocuments(
+        string $tag,
+        DeleteTagKycDocumentCollectionRequest $deleteTagKycDocumentCollectionRequest,
+    ): void {
+        $pathParams = [
+            '{tag}' => $tag,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/tags/{tag}/kyc-documents');
+
+        $request = new Request('DELETE', $uri, body: json_encode($deleteTagKycDocumentCollectionRequest));
+        $this->client->send($request);
+    }
+
+    /**
+     * @return Tag
+     *
+     */
+    public function update(
+        string $tag,
+        Tag $tag2,
+    ): Tag {
+        $pathParams = [
+            '{tag}' => $tag,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/tags/{tag}');
+
+        $request = new Request('PATCH', $uri, body: json_encode($tag2));
+        $response = $this->client->send($request);
+        $data = json_decode((string) $response->getBody(), true);
+
+        return Tag::from($data);
+    }
+}

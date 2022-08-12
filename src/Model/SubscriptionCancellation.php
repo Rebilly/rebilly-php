@@ -1,0 +1,387 @@
+<?php
+/**
+ * This source file is proprietary and part of Rebilly.
+ *
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
+ *
+ * @see https://www.rebilly.com
+ */
+
+declare(strict_types=1);
+
+namespace Rebilly\Sdk\Model;
+
+use DateTimeImmutable;
+use DateTimeInterface;
+use JsonSerializable;
+
+class SubscriptionCancellation implements JsonSerializable
+{
+    public const CANCELED_BY_MERCHANT = 'merchant';
+
+    public const CANCELED_BY_CUSTOMER = 'customer';
+
+    public const REASON_DID_NOT_USE = 'did-not-use';
+
+    public const REASON_DID_NOT_WANT = 'did-not-want';
+
+    public const REASON_MISSING_FEATURES = 'missing-features';
+
+    public const REASON_BUGS_OR_PROBLEMS = 'bugs-or-problems';
+
+    public const REASON_DO_NOT_REMEMBER = 'do-not-remember';
+
+    public const REASON_RISK_WARNING = 'risk-warning';
+
+    public const REASON_CONTRACT_EXPIRED = 'contract-expired';
+
+    public const REASON_TOO_EXPENSIVE = 'too-expensive';
+
+    public const REASON_OTHER = 'other';
+
+    public const REASON_BILLING_FAILURE = 'billing-failure';
+
+    public const STATUS_DRAFT = 'draft';
+
+    public const STATUS_CONFIRMED = 'confirmed';
+
+    public const STATUS_COMPLETED = 'completed';
+
+    public const STATUS_REVOKED = 'revoked';
+
+    private array $fields = [];
+
+    public function __construct(array $data = [])
+    {
+        if (array_key_exists('id', $data)) {
+            $this->setId($data['id']);
+        }
+        if (array_key_exists('subscriptionId', $data)) {
+            $this->setSubscriptionId($data['subscriptionId']);
+        }
+        if (array_key_exists('proratedInvoiceId', $data)) {
+            $this->setProratedInvoiceId($data['proratedInvoiceId']);
+        }
+        if (array_key_exists('appliedInvoiceId', $data)) {
+            $this->setAppliedInvoiceId($data['appliedInvoiceId']);
+        }
+        if (array_key_exists('canceledBy', $data)) {
+            $this->setCanceledBy($data['canceledBy']);
+        }
+        if (array_key_exists('reason', $data)) {
+            $this->setReason($data['reason']);
+        }
+        if (array_key_exists('description', $data)) {
+            $this->setDescription($data['description']);
+        }
+        if (array_key_exists('prorated', $data)) {
+            $this->setProrated($data['prorated']);
+        }
+        if (array_key_exists('status', $data)) {
+            $this->setStatus($data['status']);
+        }
+        if (array_key_exists('canceledTime', $data)) {
+            $this->setCanceledTime($data['canceledTime']);
+        }
+        if (array_key_exists('createdTime', $data)) {
+            $this->setCreatedTime($data['createdTime']);
+        }
+        if (array_key_exists('churnTime', $data)) {
+            $this->setChurnTime($data['churnTime']);
+        }
+        if (array_key_exists('lineItems', $data)) {
+            $this->setLineItems($data['lineItems']);
+        }
+        if (array_key_exists('lineItemSubtotal', $data)) {
+            $this->setLineItemSubtotal($data['lineItemSubtotal']);
+        }
+        if (array_key_exists('_links', $data)) {
+            $this->setLinks($data['_links']);
+        }
+    }
+
+    public static function from(array $data = []): self
+    {
+        return new self($data);
+    }
+
+    public function getId(): ?string
+    {
+        return $this->fields['id'] ?? null;
+    }
+
+    public function getSubscriptionId(): string
+    {
+        return $this->fields['subscriptionId'];
+    }
+
+    public function setSubscriptionId(string $subscriptionId): self
+    {
+        $this->fields['subscriptionId'] = $subscriptionId;
+
+        return $this;
+    }
+
+    public function getProratedInvoiceId(): ?string
+    {
+        return $this->fields['proratedInvoiceId'] ?? null;
+    }
+
+    public function getAppliedInvoiceId(): ?string
+    {
+        return $this->fields['appliedInvoiceId'] ?? null;
+    }
+
+    /**
+     * @psalm-return self::CANCELED_BY_*|null $canceledBy
+     */
+    public function getCanceledBy(): ?string
+    {
+        return $this->fields['canceledBy'] ?? null;
+    }
+
+    /**
+     * @psalm-param self::CANCELED_BY_*|null $canceledBy
+     */
+    public function setCanceledBy(null|string $canceledBy): self
+    {
+        $this->fields['canceledBy'] = $canceledBy;
+
+        return $this;
+    }
+
+    /**
+     * @psalm-return self::REASON_*|null $reason
+     */
+    public function getReason(): ?string
+    {
+        return $this->fields['reason'] ?? null;
+    }
+
+    /**
+     * @psalm-param self::REASON_*|null $reason
+     */
+    public function setReason(null|string $reason): self
+    {
+        $this->fields['reason'] = $reason;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->fields['description'] ?? null;
+    }
+
+    public function setDescription(null|string $description): self
+    {
+        $this->fields['description'] = $description;
+
+        return $this;
+    }
+
+    public function getProrated(): ?bool
+    {
+        return $this->fields['prorated'] ?? null;
+    }
+
+    public function setProrated(null|bool $prorated): self
+    {
+        $this->fields['prorated'] = $prorated;
+
+        return $this;
+    }
+
+    /**
+     * @psalm-return self::STATUS_*|null $status
+     */
+    public function getStatus(): ?string
+    {
+        return $this->fields['status'] ?? null;
+    }
+
+    /**
+     * @psalm-param self::STATUS_*|null $status
+     */
+    public function setStatus(null|string $status): self
+    {
+        $this->fields['status'] = $status;
+
+        return $this;
+    }
+
+    public function getCanceledTime(): ?DateTimeImmutable
+    {
+        return $this->fields['canceledTime'] ?? null;
+    }
+
+    public function getCreatedTime(): ?DateTimeImmutable
+    {
+        return $this->fields['createdTime'] ?? null;
+    }
+
+    public function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    {
+        if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
+            $createdTime = new DateTimeImmutable($createdTime);
+        }
+
+        $this->fields['createdTime'] = $createdTime;
+
+        return $this;
+    }
+
+    public function getChurnTime(): DateTimeImmutable
+    {
+        return $this->fields['churnTime'];
+    }
+
+    public function setChurnTime(DateTimeImmutable|string $churnTime): self
+    {
+        if (!($churnTime instanceof DateTimeImmutable)) {
+            $churnTime = new DateTimeImmutable($churnTime);
+        }
+
+        $this->fields['churnTime'] = $churnTime;
+
+        return $this;
+    }
+
+    /**
+     * @return null|UpcomingInvoiceItemCollection[]
+     */
+    public function getLineItems(): ?array
+    {
+        return $this->fields['lineItems'] ?? null;
+    }
+
+    /**
+     * @param null|UpcomingInvoiceItemCollection[] $lineItems
+     */
+    public function setLineItems(null|array $lineItems): self
+    {
+        $lineItems = $lineItems !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof UpcomingInvoiceItemCollection ? $value : UpcomingInvoiceItemCollection::from($value)) : null, $lineItems) : null;
+
+        $this->fields['lineItems'] = $lineItems;
+
+        return $this;
+    }
+
+    public function getLineItemSubtotal(): ?float
+    {
+        return $this->fields['lineItemSubtotal'] ?? null;
+    }
+
+    /**
+     * @return null|\Rebilly\Sdk\Model\SelfLink[]
+     */
+    public function getLinks(): ?array
+    {
+        return $this->fields['_links'] ?? null;
+    }
+
+    public function jsonSerialize(): array
+    {
+        $data = [];
+        if (array_key_exists('id', $this->fields)) {
+            $data['id'] = $this->fields['id'];
+        }
+        if (array_key_exists('subscriptionId', $this->fields)) {
+            $data['subscriptionId'] = $this->fields['subscriptionId'];
+        }
+        if (array_key_exists('proratedInvoiceId', $this->fields)) {
+            $data['proratedInvoiceId'] = $this->fields['proratedInvoiceId'];
+        }
+        if (array_key_exists('appliedInvoiceId', $this->fields)) {
+            $data['appliedInvoiceId'] = $this->fields['appliedInvoiceId'];
+        }
+        if (array_key_exists('canceledBy', $this->fields)) {
+            $data['canceledBy'] = $this->fields['canceledBy'];
+        }
+        if (array_key_exists('reason', $this->fields)) {
+            $data['reason'] = $this->fields['reason'];
+        }
+        if (array_key_exists('description', $this->fields)) {
+            $data['description'] = $this->fields['description'];
+        }
+        if (array_key_exists('prorated', $this->fields)) {
+            $data['prorated'] = $this->fields['prorated'];
+        }
+        if (array_key_exists('status', $this->fields)) {
+            $data['status'] = $this->fields['status'];
+        }
+        if (array_key_exists('canceledTime', $this->fields)) {
+            $data['canceledTime'] = $this->fields['canceledTime']?->format(DateTimeInterface::RFC3339);
+        }
+        if (array_key_exists('createdTime', $this->fields)) {
+            $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
+        }
+        if (array_key_exists('churnTime', $this->fields)) {
+            $data['churnTime'] = $this->fields['churnTime']?->format(DateTimeInterface::RFC3339);
+        }
+        if (array_key_exists('lineItems', $this->fields)) {
+            $data['lineItems'] = $this->fields['lineItems'];
+        }
+        if (array_key_exists('lineItemSubtotal', $this->fields)) {
+            $data['lineItemSubtotal'] = $this->fields['lineItemSubtotal'];
+        }
+        if (array_key_exists('_links', $this->fields)) {
+            $data['_links'] = $this->fields['_links'];
+        }
+
+        return $data;
+    }
+
+    private function setId(null|string $id): self
+    {
+        $this->fields['id'] = $id;
+
+        return $this;
+    }
+
+    private function setProratedInvoiceId(null|string $proratedInvoiceId): self
+    {
+        $this->fields['proratedInvoiceId'] = $proratedInvoiceId;
+
+        return $this;
+    }
+
+    private function setAppliedInvoiceId(null|string $appliedInvoiceId): self
+    {
+        $this->fields['appliedInvoiceId'] = $appliedInvoiceId;
+
+        return $this;
+    }
+
+    private function setCanceledTime(null|DateTimeImmutable|string $canceledTime): self
+    {
+        if ($canceledTime !== null && !($canceledTime instanceof DateTimeImmutable)) {
+            $canceledTime = new DateTimeImmutable($canceledTime);
+        }
+
+        $this->fields['canceledTime'] = $canceledTime;
+
+        return $this;
+    }
+
+    private function setLineItemSubtotal(null|float $lineItemSubtotal): self
+    {
+        $this->fields['lineItemSubtotal'] = $lineItemSubtotal;
+
+        return $this;
+    }
+
+    /**
+     * @param null|\Rebilly\Sdk\Model\SelfLink[] $links
+     */
+    private function setLinks(null|array $links): self
+    {
+        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\SelfLink ? $value : \Rebilly\Sdk\Model\SelfLink::from($value)) : null, $links) : null;
+
+        $this->fields['_links'] = $links;
+
+        return $this;
+    }
+}
