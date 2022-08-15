@@ -19,11 +19,13 @@ use function GuzzleHttp\json_decode;
 use function GuzzleHttp\json_encode;
 
 use GuzzleHttp\Psr7\Request;
+use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\FinancialSettings;
 use Rebilly\Sdk\Model\GatewayAccount;
 use Rebilly\Sdk\Model\GatewayAccountDowntimeSchedule;
 use Rebilly\Sdk\Model\GatewayAccountLimit;
 use Rebilly\Sdk\Model\GatewayAccountTimeline;
+use Rebilly\Sdk\Paginator;
 
 class GatewayAccountsApi
 {
@@ -234,7 +236,7 @@ class GatewayAccountsApi
     }
 
     /**
-     * @return GatewayAccount[]
+     * @return Collection<GatewayAccount>
      */
     public function getAll(
         ?int $limit = null,
@@ -243,7 +245,7 @@ class GatewayAccountsApi
         ?string $filter = null,
         ?string $q = null,
         ?string $fields = null,
-    ): array {
+    ): Collection {
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
@@ -252,17 +254,45 @@ class GatewayAccountsApi
             'q' => $q,
             'fields' => $fields,
         ];
-        $uri = '/gateway-accounts' . '?' . http_build_query($queryParams);
+        $uri = '/gateway-accounts?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): GatewayAccount => GatewayAccount::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): GatewayAccount => GatewayAccount::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllPaginator(
+        ?int $limit = null,
+        ?int $offset = null,
+        ?array $sort = null,
+        ?string $filter = null,
+        ?string $q = null,
+        ?string $fields = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAll(
+            limit: $limit,
+            offset: $offset,
+            sort: $sort,
+            filter: $filter,
+            q: $q,
+            fields: $fields,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**
-     * @return GatewayAccountDowntimeSchedule[]
+     * @return Collection<GatewayAccountDowntimeSchedule>
      */
     public function getAllDowntimeSchedules(
         string $id,
@@ -270,7 +300,7 @@ class GatewayAccountsApi
         ?int $offset = null,
         ?string $filter = null,
         ?array $sort = null,
-    ): array {
+    ): Collection {
         $pathParams = [
             '{id}' => $id,
         ];
@@ -281,17 +311,43 @@ class GatewayAccountsApi
             'filter' => $filter,
             'sort' => $sort,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}/downtime-schedules') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}/downtime-schedules?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): GatewayAccountDowntimeSchedule => GatewayAccountDowntimeSchedule::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): GatewayAccountDowntimeSchedule => GatewayAccountDowntimeSchedule::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllDowntimeSchedulesPaginator(
+        string $id,
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $filter = null,
+        ?array $sort = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllDowntimeSchedules(
+            id: $id,
+            limit: $limit,
+            offset: $offset,
+            filter: $filter,
+            sort: $sort,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**
-     * @return GatewayAccountTimeline[]
+     * @return Collection<GatewayAccountTimeline>
      */
     public function getAllTimelineMessages(
         string $id,
@@ -300,7 +356,7 @@ class GatewayAccountsApi
         ?string $filter = null,
         ?array $sort = null,
         ?string $q = null,
-    ): array {
+    ): Collection {
         $pathParams = [
             '{id}' => $id,
         ];
@@ -312,13 +368,41 @@ class GatewayAccountsApi
             'sort' => $sort,
             'q' => $q,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}/timeline') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}/timeline?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): GatewayAccountTimeline => GatewayAccountTimeline::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): GatewayAccountTimeline => GatewayAccountTimeline::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllTimelineMessagesPaginator(
+        string $id,
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $filter = null,
+        ?array $sort = null,
+        ?string $q = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllTimelineMessages(
+            id: $id,
+            limit: $limit,
+            offset: $offset,
+            filter: $filter,
+            sort: $sort,
+            q: $q,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**

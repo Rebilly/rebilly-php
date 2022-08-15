@@ -19,9 +19,11 @@ use function GuzzleHttp\json_decode;
 use function GuzzleHttp\json_encode;
 
 use GuzzleHttp\Psr7\Request;
+use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\Application;
 use Rebilly\Sdk\Model\OwnerApplicationInstance;
 use Rebilly\Sdk\Model\UserApplication;
+use Rebilly\Sdk\Paginator;
 
 class ApplicationsApi
 {
@@ -64,7 +66,7 @@ class ApplicationsApi
     }
 
     /**
-     * @return UserApplication[]
+     * @return Collection<UserApplication>
      */
     public function getAll(
         ?int $limit = null,
@@ -74,7 +76,7 @@ class ApplicationsApi
         ?string $expand = null,
         ?string $fields = null,
         ?array $sort = null,
-    ): array {
+    ): Collection {
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
@@ -84,13 +86,43 @@ class ApplicationsApi
             'fields' => $fields,
             'sort' => $sort,
         ];
-        $uri = '/applications' . '?' . http_build_query($queryParams);
+        $uri = '/applications?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): UserApplication => UserApplication::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): UserApplication => UserApplication::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllPaginator(
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $filter = null,
+        ?string $q = null,
+        ?string $expand = null,
+        ?string $fields = null,
+        ?array $sort = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAll(
+            limit: $limit,
+            offset: $offset,
+            filter: $filter,
+            q: $q,
+            expand: $expand,
+            fields: $fields,
+            sort: $sort,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**

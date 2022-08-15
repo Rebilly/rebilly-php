@@ -19,7 +19,9 @@ use function GuzzleHttp\json_decode;
 use function GuzzleHttp\json_encode;
 
 use GuzzleHttp\Psr7\Request;
+use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\CompositeToken;
+use Rebilly\Sdk\Paginator;
 
 class PaymentTokensApi
 {
@@ -62,22 +64,42 @@ class PaymentTokensApi
     }
 
     /**
-     * @return CompositeToken[]
+     * @return Collection<CompositeToken>
      */
     public function getAll(
         ?int $limit = null,
         ?int $offset = null,
-    ): array {
+    ): Collection {
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
         ];
-        $uri = '/tokens' . '?' . http_build_query($queryParams);
+        $uri = '/tokens?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): CompositeToken => CompositeToken::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): CompositeToken => CompositeToken::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllPaginator(
+        ?int $limit = null,
+        ?int $offset = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAll(
+            limit: $limit,
+            offset: $offset,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 }

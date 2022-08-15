@@ -19,8 +19,10 @@ use function GuzzleHttp\json_decode;
 use function GuzzleHttp\json_encode;
 
 use GuzzleHttp\Psr7\Request;
+use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\CreditMemo;
 use Rebilly\Sdk\Model\CreditMemoTimeline;
+use Rebilly\Sdk\Paginator;
 
 class CreditMemosApi
 {
@@ -92,7 +94,7 @@ class CreditMemosApi
         $queryParams = [
             'expand' => $expand,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credit-memos/{id}') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credit-memos/{id}?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
@@ -102,7 +104,7 @@ class CreditMemosApi
     }
 
     /**
-     * @return CreditMemo[]
+     * @return Collection<CreditMemo>
      */
     public function getAll(
         ?string $filter = null,
@@ -111,7 +113,7 @@ class CreditMemosApi
         ?int $offset = null,
         ?string $q = null,
         ?string $expand = null,
-    ): array {
+    ): Collection {
         $queryParams = [
             'filter' => $filter,
             'sort' => $sort,
@@ -120,17 +122,45 @@ class CreditMemosApi
             'q' => $q,
             'expand' => $expand,
         ];
-        $uri = '/credit-memos' . '?' . http_build_query($queryParams);
+        $uri = '/credit-memos?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): CreditMemo => CreditMemo::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): CreditMemo => CreditMemo::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllPaginator(
+        ?string $filter = null,
+        ?array $sort = null,
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $q = null,
+        ?string $expand = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAll(
+            filter: $filter,
+            sort: $sort,
+            limit: $limit,
+            offset: $offset,
+            q: $q,
+            expand: $expand,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**
-     * @return CreditMemoTimeline[]
+     * @return Collection<CreditMemoTimeline>
      */
     public function getAllTimelineMessages(
         string $id,
@@ -139,7 +169,7 @@ class CreditMemosApi
         ?string $filter = null,
         ?array $sort = null,
         ?string $q = null,
-    ): array {
+    ): Collection {
         $pathParams = [
             '{id}' => $id,
         ];
@@ -151,13 +181,41 @@ class CreditMemosApi
             'sort' => $sort,
             'q' => $q,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credit-memos/{id}/timeline') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credit-memos/{id}/timeline?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): CreditMemoTimeline => CreditMemoTimeline::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): CreditMemoTimeline => CreditMemoTimeline::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllTimelineMessagesPaginator(
+        string $id,
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $filter = null,
+        ?array $sort = null,
+        ?string $q = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllTimelineMessages(
+            id: $id,
+            limit: $limit,
+            offset: $offset,
+            filter: $filter,
+            sort: $sort,
+            q: $q,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**

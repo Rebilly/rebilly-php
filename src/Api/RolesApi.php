@@ -19,7 +19,9 @@ use function GuzzleHttp\json_decode;
 use function GuzzleHttp\json_encode;
 
 use GuzzleHttp\Psr7\Request;
+use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\Role;
+use Rebilly\Sdk\Paginator;
 
 class RolesApi
 {
@@ -69,7 +71,7 @@ class RolesApi
         $queryParams = [
             'expand' => $expand,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/roles/{id}') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/roles/{id}?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
@@ -79,7 +81,7 @@ class RolesApi
     }
 
     /**
-     * @return Role[]
+     * @return Collection<Role>
      */
     public function getAll(
         ?int $limit = null,
@@ -88,7 +90,7 @@ class RolesApi
         ?array $sort = null,
         ?string $q = null,
         ?string $expand = null,
-    ): array {
+    ): Collection {
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
@@ -97,13 +99,41 @@ class RolesApi
             'q' => $q,
             'expand' => $expand,
         ];
-        $uri = '/roles' . '?' . http_build_query($queryParams);
+        $uri = '/roles?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): Role => Role::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): Role => Role::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllPaginator(
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $filter = null,
+        ?array $sort = null,
+        ?string $q = null,
+        ?string $expand = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAll(
+            limit: $limit,
+            offset: $offset,
+            filter: $filter,
+            sort: $sort,
+            q: $q,
+            expand: $expand,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**

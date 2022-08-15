@@ -19,6 +19,7 @@ use function GuzzleHttp\json_decode;
 use function GuzzleHttp\json_encode;
 
 use GuzzleHttp\Psr7\Request;
+use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\CreditMemoAllocation;
 use Rebilly\Sdk\Model\Invoice;
 use Rebilly\Sdk\Model\InvoiceIssue;
@@ -27,6 +28,7 @@ use Rebilly\Sdk\Model\InvoiceReissue;
 use Rebilly\Sdk\Model\InvoiceTimeline;
 use Rebilly\Sdk\Model\InvoiceTransaction;
 use Rebilly\Sdk\Model\InvoiceTransactionAllocation;
+use Rebilly\Sdk\Paginator;
 
 class InvoicesApi
 {
@@ -210,7 +212,7 @@ class InvoicesApi
         $queryParams = [
             'expand' => $expand,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/invoices/{id}') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/invoices/{id}?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
@@ -220,7 +222,7 @@ class InvoicesApi
     }
 
     /**
-     * @return Invoice[]
+     * @return Collection<Invoice>
      */
     public function getAll(
         ?string $filter = null,
@@ -229,7 +231,7 @@ class InvoicesApi
         ?int $offset = null,
         ?string $q = null,
         ?string $expand = null,
-    ): array {
+    ): Collection {
         $queryParams = [
             'filter' => $filter,
             'sort' => $sort,
@@ -238,23 +240,51 @@ class InvoicesApi
             'q' => $q,
             'expand' => $expand,
         ];
-        $uri = '/invoices' . '?' . http_build_query($queryParams);
+        $uri = '/invoices?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): Invoice => Invoice::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): Invoice => Invoice::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllPaginator(
+        ?string $filter = null,
+        ?array $sort = null,
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $q = null,
+        ?string $expand = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAll(
+            filter: $filter,
+            sort: $sort,
+            limit: $limit,
+            offset: $offset,
+            q: $q,
+            expand: $expand,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**
-     * @return CreditMemoAllocation[]
+     * @return Collection<CreditMemoAllocation>
      */
     public function getAllCreditMemoAllocations(
         string $id,
         ?int $limit = null,
         ?int $offset = null,
-    ): array {
+    ): Collection {
         $pathParams = [
             '{id}' => $id,
         ];
@@ -263,24 +293,46 @@ class InvoicesApi
             'limit' => $limit,
             'offset' => $offset,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/invoices/{id}/credit-memo-allocations') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/invoices/{id}/credit-memo-allocations?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): CreditMemoAllocation => CreditMemoAllocation::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): CreditMemoAllocation => CreditMemoAllocation::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllCreditMemoAllocationsPaginator(
+        string $id,
+        ?int $limit = null,
+        ?int $offset = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllCreditMemoAllocations(
+            id: $id,
+            limit: $limit,
+            offset: $offset,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**
-     * @return InvoiceItem[]
+     * @return Collection<InvoiceItem>
      */
     public function getAllInvoiceItems(
         string $id,
         ?int $limit = null,
         ?int $offset = null,
         ?string $expand = null,
-    ): array {
+    ): Collection {
         $pathParams = [
             '{id}' => $id,
         ];
@@ -290,17 +342,41 @@ class InvoicesApi
             'offset' => $offset,
             'expand' => $expand,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/invoices/{id}/items') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/invoices/{id}/items?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): InvoiceItem => InvoiceItem::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): InvoiceItem => InvoiceItem::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllInvoiceItemsPaginator(
+        string $id,
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $expand = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllInvoiceItems(
+            id: $id,
+            limit: $limit,
+            offset: $offset,
+            expand: $expand,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**
-     * @return InvoiceTimeline[]
+     * @return Collection<InvoiceTimeline>
      */
     public function getAllTimelineMessages(
         string $id,
@@ -309,7 +385,7 @@ class InvoicesApi
         ?string $filter = null,
         ?array $sort = null,
         ?string $q = null,
-    ): array {
+    ): Collection {
         $pathParams = [
             '{id}' => $id,
         ];
@@ -321,23 +397,51 @@ class InvoicesApi
             'sort' => $sort,
             'q' => $q,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/invoices/{id}/timeline') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/invoices/{id}/timeline?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): InvoiceTimeline => InvoiceTimeline::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): InvoiceTimeline => InvoiceTimeline::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllTimelineMessagesPaginator(
+        string $id,
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $filter = null,
+        ?array $sort = null,
+        ?string $q = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllTimelineMessages(
+            id: $id,
+            limit: $limit,
+            offset: $offset,
+            filter: $filter,
+            sort: $sort,
+            q: $q,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**
-     * @return InvoiceTransactionAllocation[]
+     * @return Collection<InvoiceTransactionAllocation>
      */
     public function getAllTransactionAllocations(
         string $id,
         ?int $limit = null,
         ?int $offset = null,
-    ): array {
+    ): Collection {
         $pathParams = [
             '{id}' => $id,
         ];
@@ -346,24 +450,46 @@ class InvoicesApi
             'limit' => $limit,
             'offset' => $offset,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/invoices/{id}/transaction-allocations') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/invoices/{id}/transaction-allocations?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): InvoiceTransactionAllocation => InvoiceTransactionAllocation::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): InvoiceTransactionAllocation => InvoiceTransactionAllocation::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllTransactionAllocationsPaginator(
+        string $id,
+        ?int $limit = null,
+        ?int $offset = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllTransactionAllocations(
+            id: $id,
+            limit: $limit,
+            offset: $offset,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**
-     * @return CreditMemoAllocation
+     * @return Collection<CreditMemoAllocation>
      */
     public function getCreditMemoAllocation(
         string $id,
         string $creditMemoId,
         ?int $limit = null,
         ?int $offset = null,
-    ): CreditMemoAllocation {
+    ): Collection {
         $pathParams = [
             '{id}' => $id,
             '{creditMemoId}' => $creditMemoId,
@@ -373,13 +499,37 @@ class InvoicesApi
             'limit' => $limit,
             'offset' => $offset,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/invoices/{id}/credit-memo-allocations/{creditMemoId}') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/invoices/{id}/credit-memo-allocations/{creditMemoId}?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return CreditMemoAllocation::from($data);
+        return new Collection(
+            array_map(fn (array $item): CreditMemoAllocation => CreditMemoAllocation::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getCreditMemoAllocationPaginator(
+        string $id,
+        string $creditMemoId,
+        ?int $limit = null,
+        ?int $offset = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getCreditMemoAllocation(
+            id: $id,
+            creditMemoId: $creditMemoId,
+            limit: $limit,
+            offset: $offset,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**

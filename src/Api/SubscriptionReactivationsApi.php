@@ -19,7 +19,9 @@ use function GuzzleHttp\json_decode;
 use function GuzzleHttp\json_encode;
 
 use GuzzleHttp\Psr7\Request;
+use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\SubscriptionReactivation;
+use Rebilly\Sdk\Paginator;
 
 class SubscriptionReactivationsApi
 {
@@ -47,27 +49,51 @@ class SubscriptionReactivationsApi
     }
 
     /**
-     * @return SubscriptionReactivation[]
+     * @return Collection<SubscriptionReactivation>
      */
     public function getAll(
         ?int $limit = null,
         ?int $offset = null,
         ?string $filter = null,
         ?array $sort = null,
-    ): array {
+    ): Collection {
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
             'sort' => $sort,
         ];
-        $uri = '/subscription-reactivations' . '?' . http_build_query($queryParams);
+        $uri = '/subscription-reactivations?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): SubscriptionReactivation => SubscriptionReactivation::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): SubscriptionReactivation => SubscriptionReactivation::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllPaginator(
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $filter = null,
+        ?array $sort = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAll(
+            limit: $limit,
+            offset: $offset,
+            filter: $filter,
+            sort: $sort,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**

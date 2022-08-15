@@ -19,6 +19,7 @@ use function GuzzleHttp\json_decode;
 use function GuzzleHttp\json_encode;
 
 use GuzzleHttp\Psr7\Request;
+use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\AML;
 use Rebilly\Sdk\Model\Customer;
 use Rebilly\Sdk\Model\CustomerTimeline;
@@ -28,6 +29,7 @@ use Rebilly\Sdk\Model\EddTimeline;
 use Rebilly\Sdk\Model\Invoice;
 use Rebilly\Sdk\Model\LeadSource;
 use Rebilly\Sdk\Model\PatchCustomerEddScoreRequest;
+use Rebilly\Sdk\Paginator;
 
 class CustomersApi
 {
@@ -154,7 +156,7 @@ class CustomersApi
             'expand' => $expand,
             'fields' => $fields,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
@@ -164,7 +166,7 @@ class CustomersApi
     }
 
     /**
-     * @return Customer[]
+     * @return Collection<Customer>
      */
     public function getAll(
         ?int $limit = null,
@@ -174,7 +176,7 @@ class CustomersApi
         ?string $expand = null,
         ?string $fields = null,
         ?array $sort = null,
-    ): array {
+    ): Collection {
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
@@ -184,23 +186,53 @@ class CustomersApi
             'fields' => $fields,
             'sort' => $sort,
         ];
-        $uri = '/customers' . '?' . http_build_query($queryParams);
+        $uri = '/customers?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): Customer => Customer::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): Customer => Customer::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllPaginator(
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $filter = null,
+        ?string $q = null,
+        ?string $expand = null,
+        ?string $fields = null,
+        ?array $sort = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAll(
+            limit: $limit,
+            offset: $offset,
+            filter: $filter,
+            q: $q,
+            expand: $expand,
+            fields: $fields,
+            sort: $sort,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**
-     * @return EddSearchResult[]
+     * @return Collection<EddSearchResult>
      */
     public function getAllEddSearchResults(
         string $id,
         ?int $limit = null,
         ?int $offset = null,
-    ): array {
+    ): Collection {
         $pathParams = [
             '{id}' => $id,
         ];
@@ -209,17 +241,39 @@ class CustomersApi
             'limit' => $limit,
             'offset' => $offset,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/edd-search-results') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/edd-search-results?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): EddSearchResult => EddSearchResult::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): EddSearchResult => EddSearchResult::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllEddSearchResultsPaginator(
+        string $id,
+        ?int $limit = null,
+        ?int $offset = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllEddSearchResults(
+            id: $id,
+            limit: $limit,
+            offset: $offset,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**
-     * @return CustomerTimeline[]
+     * @return Collection<CustomerTimeline>
      */
     public function getAllTimelineMessages(
         string $id,
@@ -228,7 +282,7 @@ class CustomersApi
         ?string $filter = null,
         ?array $sort = null,
         ?string $q = null,
-    ): array {
+    ): Collection {
         $pathParams = [
             '{id}' => $id,
         ];
@@ -240,13 +294,41 @@ class CustomersApi
             'sort' => $sort,
             'q' => $q,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/timeline') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/timeline?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): CustomerTimeline => CustomerTimeline::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): CustomerTimeline => CustomerTimeline::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllTimelineMessagesPaginator(
+        string $id,
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $filter = null,
+        ?array $sort = null,
+        ?string $q = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllTimelineMessages(
+            id: $id,
+            limit: $limit,
+            offset: $offset,
+            filter: $filter,
+            sort: $sort,
+            q: $q,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**
@@ -263,7 +345,7 @@ class CustomersApi
         $queryParams = [
             'expand' => $expand,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/upcoming-invoices') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/upcoming-invoices?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
@@ -311,7 +393,7 @@ class CustomersApi
     }
 
     /**
-     * @return EddTimeline[]
+     * @return Collection<EddTimeline>
      */
     public function getEddTimelineCollection(
         string $id,
@@ -320,7 +402,7 @@ class CustomersApi
         ?string $filter = null,
         ?array $sort = null,
         ?string $q = null,
-    ): array {
+    ): Collection {
         $pathParams = [
             '{id}' => $id,
         ];
@@ -332,13 +414,41 @@ class CustomersApi
             'sort' => $sort,
             'q' => $q,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/edd-timeline') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/edd-timeline?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): EddTimeline => EddTimeline::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): EddTimeline => EddTimeline::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getEddTimelineCollectionPaginator(
+        string $id,
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $filter = null,
+        ?array $sort = null,
+        ?string $q = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getEddTimelineCollection(
+            id: $id,
+            limit: $limit,
+            offset: $offset,
+            filter: $filter,
+            sort: $sort,
+            q: $q,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**
@@ -392,7 +502,7 @@ class CustomersApi
         $queryParams = [
             'targetCustomerId' => $targetCustomerId,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}?') . http_build_query($queryParams);
 
         $request = new Request('DELETE', $uri);
         $this->client->send($request);

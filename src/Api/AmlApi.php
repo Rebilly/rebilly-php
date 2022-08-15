@@ -41,7 +41,7 @@ class AmlApi
             'dob' => $dob,
             'country' => $country,
         ];
-        $uri = '/aml' . '?' . http_build_query($queryParams);
+        $uri = '/aml?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);

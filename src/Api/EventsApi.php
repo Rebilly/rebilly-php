@@ -19,12 +19,14 @@ use function GuzzleHttp\json_decode;
 use function GuzzleHttp\json_encode;
 
 use GuzzleHttp\Psr7\Request;
+use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\RulesEngineTimeline;
 use Rebilly\Sdk\Model\RuleSet;
 use Rebilly\Sdk\Model\RuleSetDraft;
 use Rebilly\Sdk\Model\RuleSetHistoryItem;
 use Rebilly\Sdk\Model\RuleSetVersion;
 use Rebilly\Sdk\Model\SystemEvent;
+use Rebilly\Sdk\Paginator;
 
 class EventsApi
 {
@@ -156,7 +158,7 @@ class EventsApi
     }
 
     /**
-     * @return RuleSetDraft[]
+     * @return Collection<RuleSetDraft>
      */
     public function getAllDraftRulesets(
         string $eventType,
@@ -167,7 +169,7 @@ class EventsApi
         ?array $sort = null,
         ?string $fields = null,
         ?string $expand = null,
-    ): array {
+    ): Collection {
         $pathParams = [
             '{eventType}' => $eventType,
         ];
@@ -181,17 +183,49 @@ class EventsApi
             'fields' => $fields,
             'expand' => $expand,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/rules/drafts') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/rules/drafts?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): RuleSetDraft => RuleSetDraft::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): RuleSetDraft => RuleSetDraft::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllDraftRulesetsPaginator(
+        string $eventType,
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $filter = null,
+        ?string $q = null,
+        ?array $sort = null,
+        ?string $fields = null,
+        ?string $expand = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllDraftRulesets(
+            eventType: $eventType,
+            limit: $limit,
+            offset: $offset,
+            filter: $filter,
+            q: $q,
+            sort: $sort,
+            fields: $fields,
+            expand: $expand,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**
-     * @return RulesEngineTimeline[]
+     * @return Collection<RulesEngineTimeline>
      */
     public function getAllTimelineMessages(
         string $eventType,
@@ -200,7 +234,7 @@ class EventsApi
         ?string $filter = null,
         ?array $sort = null,
         ?string $q = null,
-    ): array {
+    ): Collection {
         $pathParams = [
             '{eventType}' => $eventType,
         ];
@@ -212,13 +246,41 @@ class EventsApi
             'sort' => $sort,
             'q' => $q,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/timeline') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/timeline?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): RulesEngineTimeline => RulesEngineTimeline::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): RulesEngineTimeline => RulesEngineTimeline::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllTimelineMessagesPaginator(
+        string $eventType,
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $filter = null,
+        ?array $sort = null,
+        ?string $q = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllTimelineMessages(
+            eventType: $eventType,
+            limit: $limit,
+            offset: $offset,
+            filter: $filter,
+            sort: $sort,
+            q: $q,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**
@@ -239,7 +301,7 @@ class EventsApi
             'fields' => $fields,
             'expand' => $expand,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/rules/drafts/{id}') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/rules/drafts/{id}?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
@@ -268,7 +330,7 @@ class EventsApi
     }
 
     /**
-     * @return RuleSetHistoryItem[]
+     * @return Collection<RuleSetHistoryItem>
      */
     public function getRulesHistory(
         string $eventType,
@@ -279,7 +341,7 @@ class EventsApi
         ?array $sort = null,
         ?string $fields = null,
         ?string $expand = null,
-    ): array {
+    ): Collection {
         $pathParams = [
             '{eventType}' => $eventType,
         ];
@@ -293,13 +355,45 @@ class EventsApi
             'fields' => $fields,
             'expand' => $expand,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/rules/history') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/rules/history?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): RuleSetHistoryItem => RuleSetHistoryItem::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): RuleSetHistoryItem => RuleSetHistoryItem::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getRulesHistoryPaginator(
+        string $eventType,
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $filter = null,
+        ?string $q = null,
+        ?array $sort = null,
+        ?string $fields = null,
+        ?string $expand = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getRulesHistory(
+            eventType: $eventType,
+            limit: $limit,
+            offset: $offset,
+            filter: $filter,
+            q: $q,
+            sort: $sort,
+            fields: $fields,
+            expand: $expand,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**
@@ -320,7 +414,7 @@ class EventsApi
             'fields' => $fields,
             'expand' => $expand,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/rules/versions/{version}') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/rules/versions/{version}?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
@@ -347,7 +441,7 @@ class EventsApi
             'fields' => $fields,
             'expand' => $expand,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/rules/history/{version}') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/rules/history/{version}?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);

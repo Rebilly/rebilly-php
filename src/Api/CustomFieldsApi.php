@@ -19,7 +19,9 @@ use function GuzzleHttp\json_decode;
 use function GuzzleHttp\json_encode;
 
 use GuzzleHttp\Psr7\Request;
+use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\CustomField;
+use Rebilly\Sdk\Paginator;
 
 class CustomFieldsApi
 {
@@ -71,13 +73,13 @@ class CustomFieldsApi
     }
 
     /**
-     * @return CustomField[]
+     * @return Collection<CustomField>
      */
     public function getAll(
         string $resource,
         ?int $limit = null,
         ?int $offset = null,
-    ): array {
+    ): Collection {
         $pathParams = [
             '{resource}' => $resource,
         ];
@@ -86,12 +88,34 @@ class CustomFieldsApi
             'limit' => $limit,
             'offset' => $offset,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/custom-fields/{resource}') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/custom-fields/{resource}?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): CustomField => CustomField::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): CustomField => CustomField::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllPaginator(
+        string $resource,
+        ?int $limit = null,
+        ?int $offset = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAll(
+            resource: $resource,
+            limit: $limit,
+            offset: $offset,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 }

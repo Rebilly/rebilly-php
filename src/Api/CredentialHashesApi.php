@@ -19,6 +19,7 @@ use function GuzzleHttp\json_decode;
 use function GuzzleHttp\json_encode;
 
 use GuzzleHttp\Psr7\Request;
+use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\ExperianCredential;
 use Rebilly\Sdk\Model\GoogleSpreadsheet;
 use Rebilly\Sdk\Model\MailgunCredential;
@@ -31,6 +32,7 @@ use Rebilly\Sdk\Model\SESCredential;
 use Rebilly\Sdk\Model\SmtpCredential;
 use Rebilly\Sdk\Model\TaxJarCredential;
 use Rebilly\Sdk\Model\WebhookCredential;
+use Rebilly\Sdk\Paginator;
 
 class CredentialHashesApi
 {
@@ -208,7 +210,7 @@ class CredentialHashesApi
     }
 
     /**
-     * @return ExperianCredential[]
+     * @return Collection<ExperianCredential>
      */
     public function getAllExperianCredentials(
         ?string $filter = null,
@@ -216,7 +218,7 @@ class CredentialHashesApi
         ?int $offset = null,
         ?array $sort = null,
         ?string $q = null,
-    ): array {
+    ): Collection {
         $queryParams = [
             'filter' => $filter,
             'limit' => $limit,
@@ -224,17 +226,43 @@ class CredentialHashesApi
             'sort' => $sort,
             'q' => $q,
         ];
-        $uri = '/credential-hashes/experian' . '?' . http_build_query($queryParams);
+        $uri = '/credential-hashes/experian?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): ExperianCredential => ExperianCredential::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): ExperianCredential => ExperianCredential::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllExperianCredentialsPaginator(
+        ?string $filter = null,
+        ?int $limit = null,
+        ?int $offset = null,
+        ?array $sort = null,
+        ?string $q = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllExperianCredentials(
+            filter: $filter,
+            limit: $limit,
+            offset: $offset,
+            sort: $sort,
+            q: $q,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**
-     * @return OAuth2Credential[]
+     * @return Collection<OAuth2Credential>
      */
     public function getAllOAuth2Credentials(
         ?string $filter = null,
@@ -242,7 +270,7 @@ class CredentialHashesApi
         ?int $offset = null,
         ?array $sort = null,
         ?string $q = null,
-    ): array {
+    ): Collection {
         $queryParams = [
             'filter' => $filter,
             'limit' => $limit,
@@ -250,17 +278,43 @@ class CredentialHashesApi
             'sort' => $sort,
             'q' => $q,
         ];
-        $uri = '/credential-hashes/oauth2' . '?' . http_build_query($queryParams);
+        $uri = '/credential-hashes/oauth2?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): OAuth2Credential => OAuth2Credential::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): OAuth2Credential => OAuth2Credential::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllOAuth2CredentialsPaginator(
+        ?string $filter = null,
+        ?int $limit = null,
+        ?int $offset = null,
+        ?array $sort = null,
+        ?string $q = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllOAuth2Credentials(
+            filter: $filter,
+            limit: $limit,
+            offset: $offset,
+            sort: $sort,
+            q: $q,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**
-     * @return PlaidCredential[]
+     * @return Collection<PlaidCredential>
      */
     public function getAllPlaidCredentials(
         ?string $filter = null,
@@ -268,7 +322,7 @@ class CredentialHashesApi
         ?int $offset = null,
         ?array $sort = null,
         ?string $q = null,
-    ): array {
+    ): Collection {
         $queryParams = [
             'filter' => $filter,
             'limit' => $limit,
@@ -276,17 +330,43 @@ class CredentialHashesApi
             'sort' => $sort,
             'q' => $q,
         ];
-        $uri = '/credential-hashes/plaid' . '?' . http_build_query($queryParams);
+        $uri = '/credential-hashes/plaid?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): PlaidCredential => PlaidCredential::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): PlaidCredential => PlaidCredential::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllPlaidCredentialsPaginator(
+        ?string $filter = null,
+        ?int $limit = null,
+        ?int $offset = null,
+        ?array $sort = null,
+        ?string $q = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllPlaidCredentials(
+            filter: $filter,
+            limit: $limit,
+            offset: $offset,
+            sort: $sort,
+            q: $q,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**
-     * @return TaxJarCredential[]
+     * @return Collection<TaxJarCredential>
      */
     public function getAllTaxJarCredentials(
         ?string $filter = null,
@@ -294,7 +374,7 @@ class CredentialHashesApi
         ?int $offset = null,
         ?array $sort = null,
         ?string $q = null,
-    ): array {
+    ): Collection {
         $queryParams = [
             'filter' => $filter,
             'limit' => $limit,
@@ -302,13 +382,39 @@ class CredentialHashesApi
             'sort' => $sort,
             'q' => $q,
         ];
-        $uri = '/credential-hashes/taxjar' . '?' . http_build_query($queryParams);
+        $uri = '/credential-hashes/taxjar?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): TaxJarCredential => TaxJarCredential::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): TaxJarCredential => TaxJarCredential::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllTaxJarCredentialsPaginator(
+        ?string $filter = null,
+        ?int $limit = null,
+        ?int $offset = null,
+        ?array $sort = null,
+        ?string $q = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllTaxJarCredentials(
+            filter: $filter,
+            limit: $limit,
+            offset: $offset,
+            sort: $sort,
+            q: $q,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**
@@ -388,7 +494,7 @@ class CredentialHashesApi
     }
 
     /**
-     * @return GoogleSpreadsheet[]
+     * @return Collection<GoogleSpreadsheet>
      */
     public function getOAuth2CredentialItems(
         string $hash,
@@ -398,7 +504,7 @@ class CredentialHashesApi
         ?string $q = null,
         ?string $fields = null,
         ?array $sort = null,
-    ): array {
+    ): Collection {
         $pathParams = [
             '{hash}' => $hash,
         ];
@@ -411,13 +517,43 @@ class CredentialHashesApi
             'fields' => $fields,
             'sort' => $sort,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credential-hashes/oauth2/{hash}/items') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credential-hashes/oauth2/{hash}/items?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): GoogleSpreadsheet => GoogleSpreadsheet::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): GoogleSpreadsheet => GoogleSpreadsheet::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getOAuth2CredentialItemsPaginator(
+        string $hash,
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $filter = null,
+        ?string $q = null,
+        ?string $fields = null,
+        ?array $sort = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getOAuth2CredentialItems(
+            hash: $hash,
+            limit: $limit,
+            offset: $offset,
+            filter: $filter,
+            q: $q,
+            fields: $fields,
+            sort: $sort,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**

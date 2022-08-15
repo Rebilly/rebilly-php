@@ -19,7 +19,9 @@ use function GuzzleHttp\json_decode;
 use function GuzzleHttp\json_encode;
 
 use GuzzleHttp\Psr7\Request;
+use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\Plan;
+use Rebilly\Sdk\Paginator;
 
 class PlansApi
 {
@@ -75,7 +77,7 @@ class PlansApi
     }
 
     /**
-     * @return Plan[]
+     * @return Collection<Plan>
      */
     public function getAll(
         ?string $filter = null,
@@ -83,7 +85,7 @@ class PlansApi
         ?int $limit = null,
         ?int $offset = null,
         ?string $q = null,
-    ): array {
+    ): Collection {
         $queryParams = [
             'filter' => $filter,
             'sort' => $sort,
@@ -91,13 +93,39 @@ class PlansApi
             'offset' => $offset,
             'q' => $q,
         ];
-        $uri = '/plans' . '?' . http_build_query($queryParams);
+        $uri = '/plans?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): Plan => Plan::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): Plan => Plan::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllPaginator(
+        ?string $filter = null,
+        ?array $sort = null,
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $q = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAll(
+            filter: $filter,
+            sort: $sort,
+            limit: $limit,
+            offset: $offset,
+            q: $q,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**

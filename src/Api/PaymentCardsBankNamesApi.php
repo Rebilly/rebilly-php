@@ -37,7 +37,7 @@ class PaymentCardsBankNamesApi
             'limit' => $limit,
             'q' => $q,
         ];
-        $uri = '/payment-cards-bank-names' . '?' . http_build_query($queryParams);
+        $uri = '/payment-cards-bank-names?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);

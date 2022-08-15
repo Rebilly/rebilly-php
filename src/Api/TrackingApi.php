@@ -18,9 +18,11 @@ use GuzzleHttp\ClientInterface;
 use function GuzzleHttp\json_decode;
 
 use GuzzleHttp\Psr7\Request;
+use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\ApiTracking;
 use Rebilly\Sdk\Model\ValueList;
 use Rebilly\Sdk\Model\WebhookTracking;
+use Rebilly\Sdk\Paginator;
 
 class TrackingApi
 {
@@ -29,7 +31,7 @@ class TrackingApi
     }
 
     /**
-     * @return ApiTracking[]
+     * @return Collection<ApiTracking>
      */
     public function getAllApiLogs(
         ?int $limit = null,
@@ -38,7 +40,7 @@ class TrackingApi
         ?string $filter = null,
         ?string $q = null,
         ?string $accept = 'application/json',
-    ): array {
+    ): Collection {
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
@@ -46,17 +48,45 @@ class TrackingApi
             'filter' => $filter,
             'q' => $q,
         ];
-        $uri = '/tracking/api' . '?' . http_build_query($queryParams);
+        $uri = '/tracking/api?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): ApiTracking => ApiTracking::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): ApiTracking => ApiTracking::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllApiLogsPaginator(
+        ?int $limit = null,
+        ?int $offset = null,
+        ?array $sort = null,
+        ?string $filter = null,
+        ?string $q = null,
+        ?string $accept = 'application/json',
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllApiLogs(
+            limit: $limit,
+            offset: $offset,
+            sort: $sort,
+            filter: $filter,
+            q: $q,
+            accept: $accept,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**
-     * @return ValueList[]
+     * @return Collection<ValueList>
      */
     public function getAllListsChangesHistory(
         ?int $limit = null,
@@ -64,7 +94,7 @@ class TrackingApi
         ?array $sort = null,
         ?string $filter = null,
         ?string $q = null,
-    ): array {
+    ): Collection {
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
@@ -72,17 +102,43 @@ class TrackingApi
             'filter' => $filter,
             'q' => $q,
         ];
-        $uri = '/tracking/lists' . '?' . http_build_query($queryParams);
+        $uri = '/tracking/lists?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): ValueList => ValueList::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): ValueList => ValueList::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllListsChangesHistoryPaginator(
+        ?int $limit = null,
+        ?int $offset = null,
+        ?array $sort = null,
+        ?string $filter = null,
+        ?string $q = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllListsChangesHistory(
+            limit: $limit,
+            offset: $offset,
+            sort: $sort,
+            filter: $filter,
+            q: $q,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**
-     * @return WebhookTracking[]
+     * @return Collection<WebhookTracking>
      */
     public function getAllWebhookTrackingLogs(
         ?int $limit = null,
@@ -90,7 +146,7 @@ class TrackingApi
         ?array $sort = null,
         ?string $filter = null,
         ?string $q = null,
-    ): array {
+    ): Collection {
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
@@ -98,13 +154,39 @@ class TrackingApi
             'filter' => $filter,
             'q' => $q,
         ];
-        $uri = '/tracking/webhooks' . '?' . http_build_query($queryParams);
+        $uri = '/tracking/webhooks?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): WebhookTracking => WebhookTracking::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): WebhookTracking => WebhookTracking::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllWebhookTrackingLogsPaginator(
+        ?int $limit = null,
+        ?int $offset = null,
+        ?array $sort = null,
+        ?string $filter = null,
+        ?string $q = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllWebhookTrackingLogs(
+            limit: $limit,
+            offset: $offset,
+            sort: $sort,
+            filter: $filter,
+            q: $q,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**

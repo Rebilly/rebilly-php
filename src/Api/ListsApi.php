@@ -19,7 +19,9 @@ use function GuzzleHttp\json_decode;
 use function GuzzleHttp\json_encode;
 
 use GuzzleHttp\Psr7\Request;
+use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\ValueList;
+use Rebilly\Sdk\Paginator;
 
 class ListsApi
 {
@@ -56,7 +58,7 @@ class ListsApi
     }
 
     /**
-     * @return ValueList[]
+     * @return Collection<ValueList>
      */
     public function getAll(
         ?int $limit = null,
@@ -65,7 +67,7 @@ class ListsApi
         ?array $sort = null,
         ?string $fields = null,
         ?string $q = null,
-    ): array {
+    ): Collection {
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
@@ -74,13 +76,41 @@ class ListsApi
             'fields' => $fields,
             'q' => $q,
         ];
-        $uri = '/lists' . '?' . http_build_query($queryParams);
+        $uri = '/lists?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): ValueList => ValueList::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): ValueList => ValueList::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllPaginator(
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $filter = null,
+        ?array $sort = null,
+        ?string $fields = null,
+        ?string $q = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAll(
+            limit: $limit,
+            offset: $offset,
+            filter: $filter,
+            sort: $sort,
+            fields: $fields,
+            q: $q,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**
