@@ -19,9 +19,11 @@ use function GuzzleHttp\json_decode;
 use function GuzzleHttp\json_encode;
 
 use GuzzleHttp\Psr7\Request;
+use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\Coupon;
 use Rebilly\Sdk\Model\CouponExpiration;
 use Rebilly\Sdk\Model\CouponRedemption;
+use Rebilly\Sdk\Paginator;
 
 class CouponsApi
 {
@@ -77,7 +79,7 @@ class CouponsApi
     }
 
     /**
-     * @return Coupon[]
+     * @return Collection<Coupon>
      */
     public function getAll(
         ?int $limit = null,
@@ -85,7 +87,7 @@ class CouponsApi
         ?string $filter = null,
         ?string $q = null,
         ?array $sort = null,
-    ): array {
+    ): Collection {
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
@@ -93,17 +95,43 @@ class CouponsApi
             'q' => $q,
             'sort' => $sort,
         ];
-        $uri = '/coupons' . '?' . http_build_query($queryParams);
+        $uri = '/coupons?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): Coupon => Coupon::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): Coupon => Coupon::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllPaginator(
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $filter = null,
+        ?string $q = null,
+        ?array $sort = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAll(
+            limit: $limit,
+            offset: $offset,
+            filter: $filter,
+            q: $q,
+            sort: $sort,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**
-     * @return CouponRedemption[]
+     * @return Collection<CouponRedemption>
      */
     public function getAllRedemptions(
         ?int $limit = null,
@@ -111,7 +139,7 @@ class CouponsApi
         ?string $filter = null,
         ?string $q = null,
         ?array $sort = null,
-    ): array {
+    ): Collection {
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
@@ -119,13 +147,39 @@ class CouponsApi
             'q' => $q,
             'sort' => $sort,
         ];
-        $uri = '/coupons-redemptions' . '?' . http_build_query($queryParams);
+        $uri = '/coupons-redemptions?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): CouponRedemption => CouponRedemption::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): CouponRedemption => CouponRedemption::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllRedemptionsPaginator(
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $filter = null,
+        ?string $q = null,
+        ?array $sort = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllRedemptions(
+            limit: $limit,
+            offset: $offset,
+            filter: $filter,
+            q: $q,
+            sort: $sort,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**

@@ -20,10 +20,12 @@ use function GuzzleHttp\json_encode;
 
 use GuzzleHttp\Psr7\Request;
 use Psr\Http\Message\StreamInterface;
+use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\Attachment;
 use Rebilly\Sdk\Model\File;
 use Rebilly\Sdk\Model\FileCreateFromInline;
 use Rebilly\Sdk\Model\FileCreateFromUrl;
+use Rebilly\Sdk\Paginator;
 
 class FilesApi
 {
@@ -86,7 +88,7 @@ class FilesApi
         $queryParams = [
             'imageSize' => $imageSize,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/files/{id}/download') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/files/{id}/download?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request, ['allow_redirects' => ['refer' => true]]);
@@ -114,7 +116,7 @@ class FilesApi
     }
 
     /**
-     * @return File[]
+     * @return Collection<File>
      */
     public function getAll(
         ?int $limit = null,
@@ -124,7 +126,7 @@ class FilesApi
         ?string $expand = null,
         ?string $fields = null,
         ?array $sort = null,
-    ): array {
+    ): Collection {
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
@@ -134,17 +136,47 @@ class FilesApi
             'fields' => $fields,
             'sort' => $sort,
         ];
-        $uri = '/files' . '?' . http_build_query($queryParams);
+        $uri = '/files?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): File => File::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): File => File::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllPaginator(
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $filter = null,
+        ?string $q = null,
+        ?string $expand = null,
+        ?string $fields = null,
+        ?array $sort = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAll(
+            limit: $limit,
+            offset: $offset,
+            filter: $filter,
+            q: $q,
+            expand: $expand,
+            fields: $fields,
+            sort: $sort,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**
-     * @return Attachment[]
+     * @return Collection<Attachment>
      */
     public function getAllAttachments(
         ?int $limit = null,
@@ -154,7 +186,7 @@ class FilesApi
         ?string $expand = null,
         ?string $fields = null,
         ?array $sort = null,
-    ): array {
+    ): Collection {
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
@@ -164,13 +196,43 @@ class FilesApi
             'fields' => $fields,
             'sort' => $sort,
         ];
-        $uri = '/attachments' . '?' . http_build_query($queryParams);
+        $uri = '/attachments?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): Attachment => Attachment::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): Attachment => Attachment::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllAttachmentsPaginator(
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $filter = null,
+        ?string $q = null,
+        ?string $expand = null,
+        ?string $fields = null,
+        ?array $sort = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllAttachments(
+            limit: $limit,
+            offset: $offset,
+            filter: $filter,
+            q: $q,
+            expand: $expand,
+            fields: $fields,
+            sort: $sort,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**

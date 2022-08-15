@@ -19,12 +19,14 @@ use function GuzzleHttp\json_decode;
 use function GuzzleHttp\json_encode;
 
 use GuzzleHttp\Psr7\Request;
+use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\Invoice;
 use Rebilly\Sdk\Model\InvoiceIssue;
 use Rebilly\Sdk\Model\OrderTimeline;
 use Rebilly\Sdk\Model\Subscription;
 use Rebilly\Sdk\Model\SubscriptionChange;
 use Rebilly\Sdk\Model\SubscriptionInvoice;
+use Rebilly\Sdk\Paginator;
 
 class SubscriptionsApi
 {
@@ -62,7 +64,7 @@ class SubscriptionsApi
         $queryParams = [
             'expand' => $expand,
         ];
-        $uri = '/subscriptions' . '?' . http_build_query($queryParams);
+        $uri = '/subscriptions?' . http_build_query($queryParams);
 
         $request = new Request('POST', $uri, body: json_encode($subscription));
         $response = $this->client->send($request);
@@ -153,7 +155,7 @@ class SubscriptionsApi
         $queryParams = [
             'expand' => $expand,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
@@ -163,7 +165,7 @@ class SubscriptionsApi
     }
 
     /**
-     * @return Subscription[]
+     * @return Collection<Subscription>
      */
     public function getAll(
         ?string $filter = null,
@@ -172,7 +174,7 @@ class SubscriptionsApi
         ?int $offset = null,
         ?string $q = null,
         ?string $expand = null,
-    ): array {
+    ): Collection {
         $queryParams = [
             'filter' => $filter,
             'sort' => $sort,
@@ -181,17 +183,45 @@ class SubscriptionsApi
             'q' => $q,
             'expand' => $expand,
         ];
-        $uri = '/subscriptions' . '?' . http_build_query($queryParams);
+        $uri = '/subscriptions?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): Subscription => Subscription::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): Subscription => Subscription::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllPaginator(
+        ?string $filter = null,
+        ?array $sort = null,
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $q = null,
+        ?string $expand = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAll(
+            filter: $filter,
+            sort: $sort,
+            limit: $limit,
+            offset: $offset,
+            q: $q,
+            expand: $expand,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**
-     * @return OrderTimeline[]
+     * @return Collection<OrderTimeline>
      */
     public function getAllTimelineMessages(
         string $id,
@@ -200,7 +230,7 @@ class SubscriptionsApi
         ?string $filter = null,
         ?array $sort = null,
         ?string $q = null,
-    ): array {
+    ): Collection {
         $pathParams = [
             '{id}' => $id,
         ];
@@ -212,13 +242,41 @@ class SubscriptionsApi
             'sort' => $sort,
             'q' => $q,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}/timeline') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}/timeline?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): OrderTimeline => OrderTimeline::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): OrderTimeline => OrderTimeline::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllTimelineMessagesPaginator(
+        string $id,
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $filter = null,
+        ?array $sort = null,
+        ?string $q = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllTimelineMessages(
+            id: $id,
+            limit: $limit,
+            offset: $offset,
+            filter: $filter,
+            sort: $sort,
+            q: $q,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**
@@ -235,7 +293,7 @@ class SubscriptionsApi
         $queryParams = [
             'expand' => $expand,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}/upcoming-invoices') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}/upcoming-invoices?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
@@ -302,7 +360,7 @@ class SubscriptionsApi
         $queryParams = [
             'expand' => $expand,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}?') . http_build_query($queryParams);
 
         $request = new Request('PUT', $uri, body: json_encode($subscription));
         $response = $this->client->send($request);

@@ -19,6 +19,7 @@ use function GuzzleHttp\json_decode;
 use function GuzzleHttp\json_encode;
 
 use GuzzleHttp\Psr7\Request;
+use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\AlternativeInstrument;
 use Rebilly\Sdk\Model\BankAccountCreatePlain;
 use Rebilly\Sdk\Model\BankAccountUpdatePlain;
@@ -28,6 +29,7 @@ use Rebilly\Sdk\Model\PaymentInstrument;
 use Rebilly\Sdk\Model\PaymentInstrumentCreateToken;
 use Rebilly\Sdk\Model\PaymentInstrumentUpdateToken;
 use Rebilly\Sdk\Model\PayPalAccount;
+use Rebilly\Sdk\Paginator;
 
 class PaymentInstrumentsApi
 {
@@ -89,7 +91,7 @@ class PaymentInstrumentsApi
     }
 
     /**
-     * @return PaymentInstrument[]
+     * @return Collection<PaymentInstrument>
      */
     public function getAll(
         ?string $filter = null,
@@ -98,7 +100,7 @@ class PaymentInstrumentsApi
         ?int $offset = null,
         ?string $q = null,
         ?string $expand = null,
-    ): array {
+    ): Collection {
         $queryParams = [
             'filter' => $filter,
             'sort' => $sort,
@@ -107,13 +109,41 @@ class PaymentInstrumentsApi
             'q' => $q,
             'expand' => $expand,
         ];
-        $uri = '/payment-instruments' . '?' . http_build_query($queryParams);
+        $uri = '/payment-instruments?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): PaymentInstrument => PaymentInstrument::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): PaymentInstrument => PaymentInstrument::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllPaginator(
+        ?string $filter = null,
+        ?array $sort = null,
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $q = null,
+        ?string $expand = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAll(
+            filter: $filter,
+            sort: $sort,
+            limit: $limit,
+            offset: $offset,
+            q: $q,
+            expand: $expand,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**

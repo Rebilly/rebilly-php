@@ -19,7 +19,9 @@ use function GuzzleHttp\json_decode;
 use function GuzzleHttp\json_encode;
 
 use GuzzleHttp\Psr7\Request;
+use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\CheckoutForm;
+use Rebilly\Sdk\Paginator;
 
 class CheckoutFormsApi
 {
@@ -75,7 +77,7 @@ class CheckoutFormsApi
     }
 
     /**
-     * @return CheckoutForm[]
+     * @return Collection<CheckoutForm>
      */
     public function getAll(
         ?int $limit = null,
@@ -83,7 +85,7 @@ class CheckoutFormsApi
         ?array $sort = null,
         ?string $filter = null,
         ?string $q = null,
-    ): array {
+    ): Collection {
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
@@ -91,13 +93,39 @@ class CheckoutFormsApi
             'filter' => $filter,
             'q' => $q,
         ];
-        $uri = '/checkout-forms' . '?' . http_build_query($queryParams);
+        $uri = '/checkout-forms?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): CheckoutForm => CheckoutForm::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): CheckoutForm => CheckoutForm::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllPaginator(
+        ?int $limit = null,
+        ?int $offset = null,
+        ?array $sort = null,
+        ?string $filter = null,
+        ?string $q = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAll(
+            limit: $limit,
+            offset: $offset,
+            sort: $sort,
+            filter: $filter,
+            q: $q,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**

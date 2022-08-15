@@ -19,12 +19,14 @@ use function GuzzleHttp\json_decode;
 use function GuzzleHttp\json_encode;
 
 use GuzzleHttp\Psr7\Request;
+use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\AuthenticationOptions;
 use Rebilly\Sdk\Model\AuthenticationToken;
 use Rebilly\Sdk\Model\AuthenticationTokenResponse;
 use Rebilly\Sdk\Model\CustomerCredential;
 use Rebilly\Sdk\Model\CustomerJWT;
 use Rebilly\Sdk\Model\ResetPasswordToken;
+use Rebilly\Sdk\Paginator;
 
 class CustomerAuthenticationApi
 {
@@ -109,63 +111,123 @@ class CustomerAuthenticationApi
     }
 
     /**
-     * @return AuthenticationTokenResponse[]
+     * @return Collection<AuthenticationTokenResponse>
      */
     public function getAllAuthTokens(
         ?int $limit = null,
         ?int $offset = null,
-    ): array {
+    ): Collection {
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
         ];
-        $uri = '/authentication-tokens' . '?' . http_build_query($queryParams);
+        $uri = '/authentication-tokens?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): AuthenticationTokenResponse => AuthenticationTokenResponse::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): AuthenticationTokenResponse => AuthenticationTokenResponse::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllAuthTokensPaginator(
+        ?int $limit = null,
+        ?int $offset = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllAuthTokens(
+            limit: $limit,
+            offset: $offset,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**
-     * @return CustomerCredential[]
+     * @return Collection<CustomerCredential>
      */
     public function getAllCredentials(
         ?int $limit = null,
         ?int $offset = null,
-    ): array {
+    ): Collection {
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
         ];
-        $uri = '/credentials' . '?' . http_build_query($queryParams);
+        $uri = '/credentials?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): CustomerCredential => CustomerCredential::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): CustomerCredential => CustomerCredential::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllCredentialsPaginator(
+        ?int $limit = null,
+        ?int $offset = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllCredentials(
+            limit: $limit,
+            offset: $offset,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**
-     * @return ResetPasswordToken[]
+     * @return Collection<ResetPasswordToken>
      */
     public function getAllResetPasswordTokens(
         ?int $limit = null,
         ?int $offset = null,
-    ): array {
+    ): Collection {
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
         ];
-        $uri = '/password-tokens' . '?' . http_build_query($queryParams);
+        $uri = '/password-tokens?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): ResetPasswordToken => ResetPasswordToken::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): ResetPasswordToken => ResetPasswordToken::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllResetPasswordTokensPaginator(
+        ?int $limit = null,
+        ?int $offset = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllResetPasswordTokens(
+            limit: $limit,
+            offset: $offset,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**

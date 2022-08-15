@@ -13,25 +13,30 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk;
 
-use function GuzzleHttp\choose_handler;
-
 use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\ClientInterface;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\Uri;
+use GuzzleHttp\Utils;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use Rebilly\Sdk\Middleware\ApiKeyAuthentication;
 use Rebilly\Sdk\Middleware\BaseUri;
 use Rebilly\Sdk\Middleware\BearerAuthentication;
 use Rebilly\Sdk\Middleware\ErrorHandler;
 use Rebilly\Sdk\Middleware\UserAgent;
 
-final class Client extends GuzzleClient
+final class Client implements ClientInterface, \Psr\Http\Client\ClientInterface
 {
     public const BASE_HOST = 'https://api.rebilly.com';
 
     public const SANDBOX_HOST = 'https://api-sandbox.rebilly.com';
 
     public const SDK_VERSION = '3.0.0';
+
+    private GuzzleClient $client;
 
     /**
      * @param array{
@@ -47,7 +52,7 @@ final class Client extends GuzzleClient
      */
     public function __construct(array $config = [])
     {
-        $stack = new HandlerStack(choose_handler());
+        $stack = new HandlerStack(Utils::chooseHandler());
 
         $stack->push(new ErrorHandler(), 'http_errors');
         $stack->push(Middleware::prepareBody(), 'prepare_body');
@@ -67,10 +72,12 @@ final class Client extends GuzzleClient
         }
 
         $stack->push(Middleware::redirect(), 'allow_redirects');
-        $stack->push(new BaseUri(
-            $this->createUri($config['base_uri']),
-            $config['organizationId'] ?? null
-        ));
+        $stack->push(
+            new BaseUri(
+                $this->createUri($config['base_uri']),
+                $config['organizationId'] ?? null
+            )
+        );
 
         $stack->push(new UserAgent(self::SDK_VERSION));
 
@@ -78,7 +85,7 @@ final class Client extends GuzzleClient
 
         $config['handler'] = $stack;
 
-        parent::__construct($config);
+        $this->client = new GuzzleClient($config);
     }
 
     public function createUri($uri, array $params = []): Uri
@@ -108,5 +115,38 @@ final class Client extends GuzzleClient
         }
 
         return new Uri($uri);
+    }
+
+    public function send(RequestInterface $request, array $options = []): ResponseInterface
+    {
+        return $this->client->send($request, $options);
+    }
+
+    public function sendAsync(RequestInterface $request, array $options = []): PromiseInterface
+    {
+        return $this->client->sendAsync($request, $options);
+    }
+
+    public function request(string $method, $uri, array $options = []): ResponseInterface
+    {
+        return $this->client->request($method, $uri, $options);
+    }
+
+    public function requestAsync(string $method, $uri, array $options = []): PromiseInterface
+    {
+        return $this->client->requestAsync($method, $uri, $options);
+    }
+
+    public function sendRequest(RequestInterface $request): ResponseInterface
+    {
+        return $this->client->sendRequest($request);
+    }
+
+    /**
+     * @deprecated
+     */
+    public function getConfig(?string $option = null)
+    {
+        return $this->client->getConfig($option);
     }
 }

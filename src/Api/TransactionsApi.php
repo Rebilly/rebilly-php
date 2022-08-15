@@ -19,6 +19,7 @@ use function GuzzleHttp\json_decode;
 use function GuzzleHttp\json_encode;
 
 use GuzzleHttp\Psr7\Request;
+use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\PatchTransactionRequest;
 use Rebilly\Sdk\Model\Transaction;
 use Rebilly\Sdk\Model\TransactionQuery;
@@ -26,6 +27,7 @@ use Rebilly\Sdk\Model\TransactionRefund;
 use Rebilly\Sdk\Model\TransactionRequest;
 use Rebilly\Sdk\Model\TransactionTimeline;
 use Rebilly\Sdk\Model\TransactionUpdate;
+use Rebilly\Sdk\Paginator;
 
 class TransactionsApi
 {
@@ -43,7 +45,7 @@ class TransactionsApi
         $queryParams = [
             'expand' => $expand,
         ];
-        $uri = '/transactions' . '?' . http_build_query($queryParams);
+        $uri = '/transactions?' . http_build_query($queryParams);
 
         $request = new Request('POST', $uri, body: json_encode($transactionRequest));
         $response = $this->client->send($request);
@@ -101,7 +103,7 @@ class TransactionsApi
         $queryParams = [
             'expand' => $expand,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/transactions/{id}') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/transactions/{id}?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
@@ -111,7 +113,7 @@ class TransactionsApi
     }
 
     /**
-     * @return Transaction[]
+     * @return Collection<Transaction>
      */
     public function getAll(
         ?int $limit = null,
@@ -120,7 +122,7 @@ class TransactionsApi
         ?string $q = null,
         ?array $sort = null,
         ?string $expand = null,
-    ): array {
+    ): Collection {
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
@@ -129,24 +131,52 @@ class TransactionsApi
             'sort' => $sort,
             'expand' => $expand,
         ];
-        $uri = '/transactions' . '?' . http_build_query($queryParams);
+        $uri = '/transactions?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): Transaction => Transaction::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): Transaction => Transaction::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllPaginator(
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $filter = null,
+        ?string $q = null,
+        ?array $sort = null,
+        ?string $expand = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAll(
+            limit: $limit,
+            offset: $offset,
+            filter: $filter,
+            q: $q,
+            sort: $sort,
+            expand: $expand,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**
-     * @return TransactionTimeline[]
+     * @return Collection<TransactionTimeline>
      */
     public function getAllTimelineMessages(
         string $id,
         ?int $limit = null,
         ?int $offset = null,
         ?string $filter = null,
-    ): array {
+    ): Collection {
         $pathParams = [
             '{id}' => $id,
         ];
@@ -156,13 +186,37 @@ class TransactionsApi
             'offset' => $offset,
             'filter' => $filter,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/transactions/{id}/timeline') . '?' . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/transactions/{id}/timeline?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): TransactionTimeline => TransactionTimeline::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): TransactionTimeline => TransactionTimeline::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllTimelineMessagesPaginator(
+        string $id,
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $filter = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllTimelineMessages(
+            id: $id,
+            limit: $limit,
+            offset: $offset,
+            filter: $filter,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**
