@@ -77,8 +77,6 @@ class UserService
 
     private readonly Api\StatusApi $status;
 
-    private readonly Api\TodoApi $todo;
-
     private readonly Api\TrackingApi $tracking;
 
     private readonly Api\UsersApi $users;
@@ -119,7 +117,6 @@ class UserService
         $this->segments = new Api\SegmentsApi($this->client);
         $this->sendThroughAttribution = new Api\SendThroughAttributionApi($this->client);
         $this->status = new Api\StatusApi($this->client);
-        $this->todo = new Api\TodoApi($this->client);
         $this->tracking = new Api\TrackingApi($this->client);
         $this->users = new Api\UsersApi($this->client);
         $this->webhooks = new Api\WebhooksApi($this->client);
@@ -269,11 +266,6 @@ class UserService
     public function status(): Api\StatusApi
     {
         return $this->status;
-    }
-
-    public function todo(): Api\TodoApi
-    {
-        return $this->todo;
     }
 
     public function tracking(): Api\TrackingApi
