@@ -77,8 +77,6 @@ class CoreService
 
     private readonly Api\TagsApi $tags;
 
-    private readonly Api\TodoApi $todo;
-
     private readonly Api\TransactionsApi $transactions;
 
     public function __construct(Client $client = null, array $config = [])
@@ -113,7 +111,6 @@ class CoreService
         $this->subscriptionReactivations = new Api\SubscriptionReactivationsApi($this->client);
         $this->subscriptions = new Api\SubscriptionsApi($this->client);
         $this->tags = new Api\TagsApi($this->client);
-        $this->todo = new Api\TodoApi($this->client);
         $this->transactions = new Api\TransactionsApi($this->client);
     }
 
@@ -260,11 +257,6 @@ class CoreService
     public function tags(): Api\TagsApi
     {
         return $this->tags;
-    }
-
-    public function todo(): Api\TodoApi
-    {
-        return $this->todo;
     }
 
     public function transactions(): Api\TransactionsApi
