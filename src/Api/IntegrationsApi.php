@@ -50,8 +50,14 @@ class IntegrationsApi
      * @return Integration[]
      */
     public function getAll(
+        ?int $limit = null,
+        ?int $offset = null,
     ): array {
-        $uri = '/integrations';
+        $queryParams = [
+            'limit' => $limit,
+            'offset' => $offset,
+        ];
+        $uri = '/integrations' . '?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);

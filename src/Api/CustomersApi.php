@@ -198,12 +198,18 @@ class CustomersApi
      */
     public function getAllEddSearchResults(
         string $id,
+        ?int $limit = null,
+        ?int $offset = null,
     ): array {
         $pathParams = [
             '{id}' => $id,
         ];
 
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/edd-search-results');
+        $queryParams = [
+            'limit' => $limit,
+            'offset' => $offset,
+        ];
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/edd-search-results') . '?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
