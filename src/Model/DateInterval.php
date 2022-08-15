@@ -124,7 +124,7 @@ class DateInterval extends CommonScheduleInstruction
         $candidates[] = \Rebilly\Sdk\Model\TimePluralUnit::tryFrom($data);
 
         $determined = array_reduce($candidates, function (?array $current, array $candidate) {
-            if ($current[1] < $candidate[1]) {
+            if ($current === null || $current[1] < $candidate[1]) {
                 $current = $candidate;
             }
 

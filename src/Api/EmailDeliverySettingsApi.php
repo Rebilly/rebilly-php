@@ -138,4 +138,23 @@ class EmailDeliverySettingsApi
 
         return EmailDeliverySetting::from($data);
     }
+
+    /**
+     * @return EmailDeliverySetting
+     */
+    public function verify(
+        string $token,
+    ): EmailDeliverySetting {
+        $pathParams = [
+            '{token}' => $token,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/email-delivery-setting-verifications/{token}');
+
+        $request = new Request('PUT', $uri);
+        $response = $this->client->send($request);
+        $data = json_decode((string) $response->getBody(), true);
+
+        return EmailDeliverySetting::from($data);
+    }
 }

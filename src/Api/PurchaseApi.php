@@ -22,7 +22,7 @@ use GuzzleHttp\Psr7\Request;
 use Rebilly\Sdk\Model\CoreReadyToPay;
 use Rebilly\Sdk\Model\ReadyToPayMethods;
 
-class ReadyToPayApi
+class PurchaseApi
 {
     public function __construct(protected readonly ?ClientInterface $client)
     {
