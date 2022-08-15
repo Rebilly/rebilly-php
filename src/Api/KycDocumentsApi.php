@@ -91,12 +91,14 @@ class KycDocumentsApi
         ?int $offset = null,
         ?string $filter = null,
         ?array $sort = null,
+        ?string $expand = null,
     ): array {
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
             'sort' => $sort,
+            'expand' => $expand,
         ];
         $uri = '/kyc-documents' . '?' . http_build_query($queryParams);
 
