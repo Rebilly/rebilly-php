@@ -469,6 +469,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return new DLocal($data);
             case 'eMerchantPay':
                 return new EMerchantPay($data);
+            case 'ePay':
+                return new EPay($data);
             case 'eZeeWallet':
                 return new EZeeWallet($data);
             case 'ecoPayz':

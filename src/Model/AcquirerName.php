@@ -67,6 +67,7 @@ enum AcquirerName: string
     case ECORE_PAY = 'EcorePay';
     case ELAVON = 'Elavon';
     case EMS = 'EMS';
+    case E_PAY = 'ePay';
     case EPG = 'EPG';
     case EUTELLER = 'Euteller';
     case E_ZEE_WALLET = 'eZeeWallet';
