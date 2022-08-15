@@ -1,7 +1,6 @@
 # Rebilly SDK for PHP
 
 [![Software License][ico-license]](LICENSE)
-[![GitHub Actions status][ico-github-actions]][link-github]
 
 The **Rebilly SDK for PHP** makes it easy for developers to access
 [Rebilly REST APIs][link-api-doc] in their PHP code.
