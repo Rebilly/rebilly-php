@@ -44,7 +44,7 @@ jobs:
         run: |
           OPENAPI_URI=""
           SERVICE_NAME=""
-          MAPPING_SEGMENT="core"
+          MAPPING_SEGMENT="main"
           if [[ "${{ matrix.api }}" == "core" ]]; then
             OPENAPI_URI="/definitions/core.yaml"
             SERVICE_NAME="CoreService"
