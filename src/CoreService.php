@@ -21,25 +21,15 @@ class CoreService
 
     private readonly Api\AmlApi $aml;
 
-    private readonly Api\AttachmentsApi $attachments;
-
-    private readonly Api\AuthenticationOptionsApi $authenticationOptions;
-
-    private readonly Api\AuthenticationTokensApi $authenticationTokens;
-
     private readonly Api\BlocklistsApi $blocklists;
 
     private readonly Api\CouponsApi $coupons;
-
-    private readonly Api\CouponsRedemptionsApi $couponsRedemptions;
-
-    private readonly Api\CredentialsApi $credentials;
 
     private readonly Api\CreditMemosApi $creditMemos;
 
     private readonly Api\CustomFieldsApi $customFields;
 
-    private readonly Api\CustomerTimelineCustomEventsApi $customerTimelineCustomEvents;
+    private readonly Api\CustomerAuthenticationApi $customerAuthentication;
 
     private readonly Api\CustomersApi $customers;
 
@@ -59,9 +49,9 @@ class CoreService
 
     private readonly Api\KycSettingsApi $kycSettings;
 
-    private readonly Api\PasswordTokensApi $passwordTokens;
-
     private readonly Api\PaymentInstrumentsApi $paymentInstruments;
+
+    private readonly Api\PaymentTokensApi $paymentTokens;
 
     private readonly Api\PayoutsApi $payouts;
 
@@ -71,7 +61,7 @@ class CoreService
 
     private readonly Api\ProductsApi $products;
 
-    private readonly Api\ReadyToPayApi $readyToPay;
+    private readonly Api\PurchaseApi $purchase;
 
     private readonly Api\SearchApi $search;
 
@@ -87,7 +77,7 @@ class CoreService
 
     private readonly Api\TagsApi $tags;
 
-    private readonly Api\TokensApi $tokens;
+    private readonly Api\TodoApi $todo;
 
     private readonly Api\TransactionsApi $transactions;
 
@@ -95,16 +85,11 @@ class CoreService
     {
         $this->client = $client ?? new Client($config);
         $this->aml = new Api\AmlApi($this->client);
-        $this->attachments = new Api\AttachmentsApi($this->client);
-        $this->authenticationOptions = new Api\AuthenticationOptionsApi($this->client);
-        $this->authenticationTokens = new Api\AuthenticationTokensApi($this->client);
         $this->blocklists = new Api\BlocklistsApi($this->client);
         $this->coupons = new Api\CouponsApi($this->client);
-        $this->couponsRedemptions = new Api\CouponsRedemptionsApi($this->client);
-        $this->credentials = new Api\CredentialsApi($this->client);
         $this->creditMemos = new Api\CreditMemosApi($this->client);
         $this->customFields = new Api\CustomFieldsApi($this->client);
-        $this->customerTimelineCustomEvents = new Api\CustomerTimelineCustomEventsApi($this->client);
+        $this->customerAuthentication = new Api\CustomerAuthenticationApi($this->client);
         $this->customers = new Api\CustomersApi($this->client);
         $this->digitalWallets = new Api\DigitalWalletsApi($this->client);
         $this->disputes = new Api\DisputesApi($this->client);
@@ -114,13 +99,13 @@ class CoreService
         $this->kycDocuments = new Api\KycDocumentsApi($this->client);
         $this->kycRequests = new Api\KycRequestsApi($this->client);
         $this->kycSettings = new Api\KycSettingsApi($this->client);
-        $this->passwordTokens = new Api\PasswordTokensApi($this->client);
         $this->paymentInstruments = new Api\PaymentInstrumentsApi($this->client);
+        $this->paymentTokens = new Api\PaymentTokensApi($this->client);
         $this->payouts = new Api\PayoutsApi($this->client);
         $this->plans = new Api\PlansApi($this->client);
         $this->previews = new Api\PreviewsApi($this->client);
         $this->products = new Api\ProductsApi($this->client);
-        $this->readyToPay = new Api\ReadyToPayApi($this->client);
+        $this->purchase = new Api\PurchaseApi($this->client);
         $this->search = new Api\SearchApi($this->client);
         $this->shippingRates = new Api\ShippingRatesApi($this->client);
         $this->subscriptionCancellations = new Api\SubscriptionCancellationsApi($this->client);
@@ -128,28 +113,13 @@ class CoreService
         $this->subscriptionReactivations = new Api\SubscriptionReactivationsApi($this->client);
         $this->subscriptions = new Api\SubscriptionsApi($this->client);
         $this->tags = new Api\TagsApi($this->client);
-        $this->tokens = new Api\TokensApi($this->client);
+        $this->todo = new Api\TodoApi($this->client);
         $this->transactions = new Api\TransactionsApi($this->client);
     }
 
     public function aml(): Api\AmlApi
     {
         return $this->aml;
-    }
-
-    public function attachments(): Api\AttachmentsApi
-    {
-        return $this->attachments;
-    }
-
-    public function authenticationOptions(): Api\AuthenticationOptionsApi
-    {
-        return $this->authenticationOptions;
-    }
-
-    public function authenticationTokens(): Api\AuthenticationTokensApi
-    {
-        return $this->authenticationTokens;
     }
 
     public function blocklists(): Api\BlocklistsApi
@@ -162,16 +132,6 @@ class CoreService
         return $this->coupons;
     }
 
-    public function couponsRedemptions(): Api\CouponsRedemptionsApi
-    {
-        return $this->couponsRedemptions;
-    }
-
-    public function credentials(): Api\CredentialsApi
-    {
-        return $this->credentials;
-    }
-
     public function creditMemos(): Api\CreditMemosApi
     {
         return $this->creditMemos;
@@ -182,9 +142,9 @@ class CoreService
         return $this->customFields;
     }
 
-    public function customerTimelineCustomEvents(): Api\CustomerTimelineCustomEventsApi
+    public function customerAuthentication(): Api\CustomerAuthenticationApi
     {
-        return $this->customerTimelineCustomEvents;
+        return $this->customerAuthentication;
     }
 
     public function customers(): Api\CustomersApi
@@ -232,14 +192,14 @@ class CoreService
         return $this->kycSettings;
     }
 
-    public function passwordTokens(): Api\PasswordTokensApi
-    {
-        return $this->passwordTokens;
-    }
-
     public function paymentInstruments(): Api\PaymentInstrumentsApi
     {
         return $this->paymentInstruments;
+    }
+
+    public function paymentTokens(): Api\PaymentTokensApi
+    {
+        return $this->paymentTokens;
     }
 
     public function payouts(): Api\PayoutsApi
@@ -262,9 +222,9 @@ class CoreService
         return $this->products;
     }
 
-    public function readyToPay(): Api\ReadyToPayApi
+    public function purchase(): Api\PurchaseApi
     {
-        return $this->readyToPay;
+        return $this->purchase;
     }
 
     public function search(): Api\SearchApi
@@ -302,9 +262,9 @@ class CoreService
         return $this->tags;
     }
 
-    public function tokens(): Api\TokensApi
+    public function todo(): Api\TodoApi
     {
-        return $this->tokens;
+        return $this->todo;
     }
 
     public function transactions(): Api\TransactionsApi

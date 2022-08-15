@@ -87,7 +87,7 @@ class SubscriptionChangeItems implements JsonSerializable
         $candidates[] = \Rebilly\Sdk\Model\OriginalPlan::tryFrom($data);
 
         $determined = array_reduce($candidates, function (?array $current, array $candidate) {
-            if ($current[1] < $candidate[1]) {
+            if ($current === null || $current[1] < $candidate[1]) {
                 $current = $candidate;
             }
 

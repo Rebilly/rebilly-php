@@ -21,7 +21,7 @@ use function GuzzleHttp\json_encode;
 use GuzzleHttp\Psr7\Request;
 use Rebilly\Sdk\Model\Segment;
 
-class GridSegmentsApi
+class SegmentsApi
 {
     public function __construct(protected readonly ?ClientInterface $client)
     {

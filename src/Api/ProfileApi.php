@@ -19,8 +19,10 @@ use function GuzzleHttp\json_decode;
 use function GuzzleHttp\json_encode;
 
 use GuzzleHttp\Psr7\Request;
+use Rebilly\Sdk\Model\PostPermissionsEmulationRequest;
 use Rebilly\Sdk\Model\Profile;
 use Rebilly\Sdk\Model\ProfileMfa;
+use Rebilly\Sdk\Model\Session;
 use Rebilly\Sdk\Model\UpdatePassword;
 
 class ProfileApi
@@ -77,6 +79,35 @@ class ProfileApi
         $data = json_decode((string) $response->getBody(), true);
 
         return Profile::from($data);
+    }
+
+    /**
+     * @return Session
+     */
+    public function startPermissionsEmulation(
+        PostPermissionsEmulationRequest $postPermissionsEmulationRequest,
+    ): Session {
+        $uri = '/permissions-emulation';
+
+        $request = new Request('POST', $uri, body: json_encode($postPermissionsEmulationRequest));
+        $response = $this->client->send($request);
+        $data = json_decode((string) $response->getBody(), true);
+
+        return Session::from($data);
+    }
+
+    /**
+     * @return Session
+     */
+    public function stopPermissionsEmulation(
+    ): Session {
+        $uri = '/permissions-emulation';
+
+        $request = new Request('DELETE', $uri);
+        $response = $this->client->send($request);
+        $data = json_decode((string) $response->getBody(), true);
+
+        return Session::from($data);
     }
 
     /**

@@ -19,7 +19,7 @@ class UserService
 {
     private readonly Client $client;
 
-    private readonly Api\ActivationApi $activation;
+    private readonly Api\AccountApi $account;
 
     private readonly Api\ApiKeysApi $apiKeys;
 
@@ -41,8 +41,6 @@ class UserService
 
     private readonly Api\DigitalWalletsApi $digitalWallets;
 
-    private readonly Api\EmailDeliverySettingVerificationsApi $emailDeliverySettingVerifications;
-
     private readonly Api\EmailDeliverySettingsApi $emailDeliverySettings;
 
     private readonly Api\EmailMessagesApi $emailMessages;
@@ -51,17 +49,11 @@ class UserService
 
     private readonly Api\EventsApi $events;
 
-    private readonly Api\ForgotPasswordApi $forgotPassword;
-
     private readonly Api\GatewayAccountsApi $gatewayAccounts;
-
-    private readonly Api\GridSegmentsApi $gridSegments;
 
     private readonly Api\IntegrationsApi $integrations;
 
     private readonly Api\ListsApi $lists;
-
-    private readonly Api\LogoutApi $logout;
 
     private readonly Api\MembershipsApi $memberships;
 
@@ -71,27 +63,21 @@ class UserService
 
     private readonly Api\PaymentCardsBankNamesApi $paymentCardsBankNames;
 
-    private readonly Api\PaymentGatewaysMetadataApi $paymentGatewaysMetadata;
-
     private readonly Api\PaymentMethodsApi $paymentMethods;
-
-    private readonly Api\PermissionsEmulationApi $permissionsEmulation;
 
     private readonly Api\PreviewsApi $previews;
 
     private readonly Api\ProfileApi $profile;
 
-    private readonly Api\ResetPasswordApi $resetPassword;
-
     private readonly Api\RolesApi $roles;
+
+    private readonly Api\SegmentsApi $segments;
 
     private readonly Api\SendThroughAttributionApi $sendThroughAttribution;
 
-    private readonly Api\SigninApi $signin;
-
-    private readonly Api\SignupApi $signup;
-
     private readonly Api\StatusApi $status;
+
+    private readonly Api\TodoApi $todo;
 
     private readonly Api\TrackingApi $tracking;
 
@@ -104,7 +90,7 @@ class UserService
     public function __construct(Client $client = null, array $config = [])
     {
         $this->client = $client ?? new Client($config);
-        $this->activation = new Api\ActivationApi($this->client);
+        $this->account = new Api\AccountApi($this->client);
         $this->apiKeys = new Api\ApiKeysApi($this->client);
         $this->applicationInstances = new Api\ApplicationInstancesApi($this->client);
         $this->applications = new Api\ApplicationsApi($this->client);
@@ -115,41 +101,34 @@ class UserService
         $this->credentialHashes = new Api\CredentialHashesApi($this->client);
         $this->customDomains = new Api\CustomDomainsApi($this->client);
         $this->digitalWallets = new Api\DigitalWalletsApi($this->client);
-        $this->emailDeliverySettingVerifications = new Api\EmailDeliverySettingVerificationsApi($this->client);
         $this->emailDeliverySettings = new Api\EmailDeliverySettingsApi($this->client);
         $this->emailMessages = new Api\EmailMessagesApi($this->client);
         $this->emailNotifications = new Api\EmailNotificationsApi($this->client);
         $this->events = new Api\EventsApi($this->client);
-        $this->forgotPassword = new Api\ForgotPasswordApi($this->client);
         $this->gatewayAccounts = new Api\GatewayAccountsApi($this->client);
-        $this->gridSegments = new Api\GridSegmentsApi($this->client);
         $this->integrations = new Api\IntegrationsApi($this->client);
         $this->lists = new Api\ListsApi($this->client);
-        $this->logout = new Api\LogoutApi($this->client);
         $this->memberships = new Api\MembershipsApi($this->client);
         $this->organizationExports = new Api\OrganizationExportsApi($this->client);
         $this->organizations = new Api\OrganizationsApi($this->client);
         $this->paymentCardsBankNames = new Api\PaymentCardsBankNamesApi($this->client);
-        $this->paymentGatewaysMetadata = new Api\PaymentGatewaysMetadataApi($this->client);
         $this->paymentMethods = new Api\PaymentMethodsApi($this->client);
-        $this->permissionsEmulation = new Api\PermissionsEmulationApi($this->client);
         $this->previews = new Api\PreviewsApi($this->client);
         $this->profile = new Api\ProfileApi($this->client);
-        $this->resetPassword = new Api\ResetPasswordApi($this->client);
         $this->roles = new Api\RolesApi($this->client);
+        $this->segments = new Api\SegmentsApi($this->client);
         $this->sendThroughAttribution = new Api\SendThroughAttributionApi($this->client);
-        $this->signin = new Api\SigninApi($this->client);
-        $this->signup = new Api\SignupApi($this->client);
         $this->status = new Api\StatusApi($this->client);
+        $this->todo = new Api\TodoApi($this->client);
         $this->tracking = new Api\TrackingApi($this->client);
         $this->users = new Api\UsersApi($this->client);
         $this->webhooks = new Api\WebhooksApi($this->client);
         $this->websites = new Api\WebsitesApi($this->client);
     }
 
-    public function activation(): Api\ActivationApi
+    public function account(): Api\AccountApi
     {
-        return $this->activation;
+        return $this->account;
     }
 
     public function apiKeys(): Api\ApiKeysApi
@@ -202,11 +181,6 @@ class UserService
         return $this->digitalWallets;
     }
 
-    public function emailDeliverySettingVerifications(): Api\EmailDeliverySettingVerificationsApi
-    {
-        return $this->emailDeliverySettingVerifications;
-    }
-
     public function emailDeliverySettings(): Api\EmailDeliverySettingsApi
     {
         return $this->emailDeliverySettings;
@@ -227,19 +201,9 @@ class UserService
         return $this->events;
     }
 
-    public function forgotPassword(): Api\ForgotPasswordApi
-    {
-        return $this->forgotPassword;
-    }
-
     public function gatewayAccounts(): Api\GatewayAccountsApi
     {
         return $this->gatewayAccounts;
-    }
-
-    public function gridSegments(): Api\GridSegmentsApi
-    {
-        return $this->gridSegments;
     }
 
     public function integrations(): Api\IntegrationsApi
@@ -250,11 +214,6 @@ class UserService
     public function lists(): Api\ListsApi
     {
         return $this->lists;
-    }
-
-    public function logout(): Api\LogoutApi
-    {
-        return $this->logout;
     }
 
     public function memberships(): Api\MembershipsApi
@@ -277,19 +236,9 @@ class UserService
         return $this->paymentCardsBankNames;
     }
 
-    public function paymentGatewaysMetadata(): Api\PaymentGatewaysMetadataApi
-    {
-        return $this->paymentGatewaysMetadata;
-    }
-
     public function paymentMethods(): Api\PaymentMethodsApi
     {
         return $this->paymentMethods;
-    }
-
-    public function permissionsEmulation(): Api\PermissionsEmulationApi
-    {
-        return $this->permissionsEmulation;
     }
 
     public function previews(): Api\PreviewsApi
@@ -302,14 +251,14 @@ class UserService
         return $this->profile;
     }
 
-    public function resetPassword(): Api\ResetPasswordApi
-    {
-        return $this->resetPassword;
-    }
-
     public function roles(): Api\RolesApi
     {
         return $this->roles;
+    }
+
+    public function segments(): Api\SegmentsApi
+    {
+        return $this->segments;
     }
 
     public function sendThroughAttribution(): Api\SendThroughAttributionApi
@@ -317,19 +266,14 @@ class UserService
         return $this->sendThroughAttribution;
     }
 
-    public function signin(): Api\SigninApi
-    {
-        return $this->signin;
-    }
-
-    public function signup(): Api\SignupApi
-    {
-        return $this->signup;
-    }
-
     public function status(): Api\StatusApi
     {
         return $this->status;
+    }
+
+    public function todo(): Api\TodoApi
+    {
+        return $this->todo;
     }
 
     public function tracking(): Api\TrackingApi
