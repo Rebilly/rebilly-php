@@ -83,7 +83,7 @@ jobs:
             -c /config.yaml \
             -i "${{ steps.prep.outputs.openapi-uri }}" \
             --additional-properties=serviceName=${{ steps.prep.outputs.service-name }} \
-            --additional-properties=resourceMapping=/shared/custom-resource-mapping.json \
+            --additional-properties=resourceMapping=/shared/custom-resource-names.json \
             --additional-properties=resourceMappingSegment=${{ steps.prep.outputs.mapping-segment }}
 
       - name: Compress SDK
