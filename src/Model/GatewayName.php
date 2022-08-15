@@ -66,6 +66,7 @@ enum GatewayName: string
     case EUTELLER = 'Euteller';
     case E_MERCHANT_PAY = 'eMerchantPay';
     case EMS = 'EMS';
+    case E_PAY = 'ePay';
     case EPG = 'EPG';
     case E_PRO = 'EPro';
     case E_ZEE_WALLET = 'eZeeWallet';
