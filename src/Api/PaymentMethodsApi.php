@@ -49,8 +49,14 @@ class PaymentMethodsApi
      * @return PaymentMethodMetadata[]
      */
     public function getAll(
+        ?int $limit = null,
+        ?int $offset = null,
     ): array {
-        $uri = '/payment-methods';
+        $queryParams = [
+            'limit' => $limit,
+            'offset' => $offset,
+        ];
+        $uri = '/payment-methods' . '?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);

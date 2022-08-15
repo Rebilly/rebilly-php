@@ -30,8 +30,14 @@ class EmailNotificationsApi
      * @return EmailNotification[]
      */
     public function getAll(
+        ?int $limit = null,
+        ?int $offset = null,
     ): array {
-        $uri = '/email-notifications';
+        $queryParams = [
+            'limit' => $limit,
+            'offset' => $offset,
+        ];
+        $uri = '/email-notifications' . '?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
