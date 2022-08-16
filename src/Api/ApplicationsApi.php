@@ -147,21 +147,49 @@ class ApplicationsApi
     }
 
     /**
-     * @return OwnerApplicationInstance[]
+     * @return Collection<OwnerApplicationInstance>
      */
     public function getInstances(
         string $id,
-    ): array {
+        ?int $limit = null,
+        ?int $offset = null,
+    ): Collection {
         $pathParams = [
             '{id}' => $id,
         ];
 
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/applications/{id}/instances');
+        $queryParams = [
+            'limit' => $limit,
+            'offset' => $offset,
+        ];
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/applications/{id}/instances?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): OwnerApplicationInstance => OwnerApplicationInstance::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): OwnerApplicationInstance => OwnerApplicationInstance::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getInstancesPaginator(
+        string $id,
+        ?int $limit = null,
+        ?int $offset = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getInstances(
+            id: $id,
+            limit: $limit,
+            offset: $offset,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 }
