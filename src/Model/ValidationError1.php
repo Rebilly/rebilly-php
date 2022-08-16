@@ -32,7 +32,7 @@ class ValidationError1 implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\ValidationError1InvalidFields[]
+     * @return null|ValidationError1InvalidFields[]
      */
     public function getInvalidFields(): ?array
     {
@@ -40,11 +40,11 @@ class ValidationError1 implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\ValidationError1InvalidFields[] $invalidFields
+     * @param null|ValidationError1InvalidFields[] $invalidFields
      */
     public function setInvalidFields(null|array $invalidFields): self
     {
-        $invalidFields = $invalidFields !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\ValidationError1InvalidFields ? $value : \Rebilly\Sdk\Model\ValidationError1InvalidFields::from($value)) : null, $invalidFields) : null;
+        $invalidFields = $invalidFields !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ValidationError1InvalidFields ? $value : ValidationError1InvalidFields::from($value)) : null, $invalidFields) : null;
 
         $this->fields['invalidFields'] = $invalidFields;
 

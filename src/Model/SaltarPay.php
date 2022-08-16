@@ -40,8 +40,8 @@ class SaltarPay extends GatewayAccount
 
     public function setCredentials(SaltarPayCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\SaltarPayCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\SaltarPayCredentials::from($credentials);
+        if (!($credentials instanceof SaltarPayCredentials)) {
+            $credentials = SaltarPayCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

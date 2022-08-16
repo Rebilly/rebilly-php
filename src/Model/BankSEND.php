@@ -40,8 +40,8 @@ class BankSEND extends GatewayAccount
 
     public function setCredentials(BankSENDCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\BankSENDCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\BankSENDCredentials::from($credentials);
+        if (!($credentials instanceof BankSENDCredentials)) {
+            $credentials = BankSENDCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

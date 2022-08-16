@@ -40,8 +40,8 @@ class VegaaH extends GatewayAccount
 
     public function setCredentials(VegaaHCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\VegaaHCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\VegaaHCredentials::from($credentials);
+        if (!($credentials instanceof VegaaHCredentials)) {
+            $credentials = VegaaHCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

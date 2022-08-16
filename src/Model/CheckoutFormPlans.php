@@ -38,8 +38,8 @@ class CheckoutFormPlans implements JsonSerializable
 
     public function setCheckoutFormPlans(null|CheckoutFormPlan|array $checkoutFormPlans): self
     {
-        if ($checkoutFormPlans !== null && !($checkoutFormPlans instanceof \Rebilly\Sdk\Model\CheckoutFormPlan)) {
-            $checkoutFormPlans = \Rebilly\Sdk\Model\CheckoutFormPlan::from($checkoutFormPlans);
+        if ($checkoutFormPlans !== null && !($checkoutFormPlans instanceof CheckoutFormPlan)) {
+            $checkoutFormPlans = CheckoutFormPlan::from($checkoutFormPlans);
         }
 
         $this->fields['checkoutFormPlans'] = $checkoutFormPlans;

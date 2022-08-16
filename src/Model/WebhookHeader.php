@@ -56,8 +56,8 @@ class WebhookHeader implements JsonSerializable
 
     public function setStatus(null|OnOff|string $status): self
     {
-        if ($status !== null && !($status instanceof \Rebilly\Sdk\Model\OnOff)) {
-            $status = \Rebilly\Sdk\Model\OnOff::from($status);
+        if ($status !== null && !($status instanceof OnOff)) {
+            $status = OnOff::from($status);
         }
 
         $this->fields['status'] = $status;

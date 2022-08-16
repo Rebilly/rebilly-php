@@ -40,8 +40,8 @@ class AmazonPay extends GatewayAccount
 
     public function setCredentials(AmazonPayCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\AmazonPayCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\AmazonPayCredentials::from($credentials);
+        if (!($credentials instanceof AmazonPayCredentials)) {
+            $credentials = AmazonPayCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

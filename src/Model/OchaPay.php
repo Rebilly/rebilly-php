@@ -40,8 +40,8 @@ class OchaPay extends GatewayAccount
 
     public function setCredentials(OchaPayCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\OchaPayCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\OchaPayCredentials::from($credentials);
+        if (!($credentials instanceof OchaPayCredentials)) {
+            $credentials = OchaPayCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

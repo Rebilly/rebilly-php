@@ -238,7 +238,7 @@ class InvoiceItem implements JsonSerializable
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\ProductLink|\Rebilly\Sdk\Model\SelfLink>
+     * @return null|array<ProductLink|SelfLink>
      */
     public function getLinks(): ?array
     {
@@ -246,7 +246,7 @@ class InvoiceItem implements JsonSerializable
     }
 
     /**
-     * @return null|array{product:\Rebilly\Sdk\Model\Product,plan:\Rebilly\Sdk\Model\Plan}
+     * @return null|array{product:Product,plan:Plan}
      */
     public function getEmbedded(): ?array
     {
@@ -360,7 +360,7 @@ class InvoiceItem implements JsonSerializable
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\ProductLink|\Rebilly\Sdk\Model\SelfLink> $links
+     * @param null|array<ProductLink|SelfLink> $links
      */
     private function setLinks(null|array $links): self
     {
@@ -372,12 +372,12 @@ class InvoiceItem implements JsonSerializable
     }
 
     /**
-     * @param null|array{product:\Rebilly\Sdk\Model\Product,plan:\Rebilly\Sdk\Model\Plan} $embedded
+     * @param null|array{product:Product,plan:Plan} $embedded
      */
     private function setEmbedded(null|array $embedded): self
     {
-        $embedded['product'] = isset($embedded['product']) ? ($embedded['product'] instanceof \Rebilly\Sdk\Model\Product ? $embedded['product'] : \Rebilly\Sdk\Model\Product::from($embedded['product'])) : null;
-        $embedded['plan'] = isset($embedded['plan']) ? ($embedded['plan'] instanceof \Rebilly\Sdk\Model\Plan ? $embedded['plan'] : \Rebilly\Sdk\Model\Plan::from($embedded['plan'])) : null;
+        $embedded['product'] = isset($embedded['product']) ? ($embedded['product'] instanceof Product ? $embedded['product'] : Product::from($embedded['product'])) : null;
+        $embedded['plan'] = isset($embedded['plan']) ? ($embedded['plan'] instanceof Plan ? $embedded['plan'] : Plan::from($embedded['plan'])) : null;
 
         $this->fields['_embedded'] = $embedded;
 

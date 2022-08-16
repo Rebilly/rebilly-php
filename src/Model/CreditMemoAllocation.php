@@ -93,7 +93,7 @@ class CreditMemoAllocation implements JsonSerializable
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\CreditMemoLink|\Rebilly\Sdk\Model\InvoiceLink>
+     * @return null|array<CreditMemoLink|InvoiceLink>
      */
     public function getLinks(): ?array
     {
@@ -172,7 +172,7 @@ class CreditMemoAllocation implements JsonSerializable
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\CreditMemoLink|\Rebilly\Sdk\Model\InvoiceLink> $links
+     * @param null|array<CreditMemoLink|InvoiceLink> $links
      */
     private function setLinks(null|array $links): self
     {

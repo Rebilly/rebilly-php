@@ -40,8 +40,8 @@ class Euteller extends GatewayAccount
 
     public function setCredentials(EutellerCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\EutellerCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\EutellerCredentials::from($credentials);
+        if (!($credentials instanceof EutellerCredentials)) {
+            $credentials = EutellerCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

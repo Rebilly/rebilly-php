@@ -40,8 +40,8 @@ class BraintreePayments extends GatewayAccount
 
     public function setCredentials(BraintreePaymentsCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\BraintreePaymentsCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\BraintreePaymentsCredentials::from($credentials);
+        if (!($credentials instanceof BraintreePaymentsCredentials)) {
+            $credentials = BraintreePaymentsCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

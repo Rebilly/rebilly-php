@@ -98,8 +98,8 @@ class BankAccountToken extends CompositeToken
 
     public function setPaymentInstrument(BankAccountInstrument|array $paymentInstrument): self
     {
-        if (!($paymentInstrument instanceof \Rebilly\Sdk\Model\BankAccountInstrument)) {
-            $paymentInstrument = \Rebilly\Sdk\Model\BankAccountInstrument::from($paymentInstrument);
+        if (!($paymentInstrument instanceof BankAccountInstrument)) {
+            $paymentInstrument = BankAccountInstrument::from($paymentInstrument);
         }
 
         $this->fields['paymentInstrument'] = $paymentInstrument;
@@ -219,7 +219,7 @@ class BankAccountToken extends CompositeToken
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\SelfLink[]
+     * @return null|SelfLink[]
      */
     public function getLinks(): ?array
     {
@@ -295,11 +295,11 @@ class BankAccountToken extends CompositeToken
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\SelfLink[] $links
+     * @param null|SelfLink[] $links
      */
     private function setLinks(null|array $links): self
     {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\SelfLink ? $value : \Rebilly\Sdk\Model\SelfLink::from($value)) : null, $links) : null;
+        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 
         $this->fields['_links'] = $links;
 

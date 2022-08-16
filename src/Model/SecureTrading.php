@@ -43,8 +43,8 @@ class SecureTrading extends GatewayAccount
 
     public function setCredentials(SecureTradingCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\SecureTradingCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\SecureTradingCredentials::from($credentials);
+        if (!($credentials instanceof SecureTradingCredentials)) {
+            $credentials = SecureTradingCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class SecureTrading extends GatewayAccount
 
     public function setThreeDSecureServer(null|SecureTrading3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\SecureTrading3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\SecureTrading3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof SecureTrading3dsServers)) {
+            $threeDSecureServer = SecureTrading3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

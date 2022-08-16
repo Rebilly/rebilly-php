@@ -57,7 +57,7 @@ class KycRequestDocuments implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\KycDocumentSubtypes[]
+     * @return null|KycDocumentSubtypes[]
      */
     public function getSubtypes(): ?array
     {
@@ -65,11 +65,11 @@ class KycRequestDocuments implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\KycDocumentSubtypes[] $subtypes
+     * @param null|KycDocumentSubtypes[] $subtypes
      */
     public function setSubtypes(null|array $subtypes): self
     {
-        $subtypes = $subtypes !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\KycDocumentSubtypes ? $value : \Rebilly\Sdk\Model\KycDocumentSubtypes::from($value)) : null, $subtypes) : null;
+        $subtypes = $subtypes !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof KycDocumentSubtypes ? $value : KycDocumentSubtypes::from($value)) : null, $subtypes) : null;
 
         $this->fields['subtypes'] = $subtypes;
 

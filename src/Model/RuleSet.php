@@ -51,7 +51,7 @@ class RuleSet implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\Bind[]
+     * @return null|Bind[]
      */
     public function getBinds(): ?array
     {
@@ -59,11 +59,11 @@ class RuleSet implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\Bind[] $binds
+     * @param null|Bind[] $binds
      */
     public function setBinds(null|array $binds): self
     {
-        $binds = $binds !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\Bind ? $value : \Rebilly\Sdk\Model\Bind::from($value)) : null, $binds) : null;
+        $binds = $binds !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Bind ? $value : Bind::from($value)) : null, $binds) : null;
 
         $this->fields['binds'] = $binds;
 
@@ -71,7 +71,7 @@ class RuleSet implements JsonSerializable
     }
 
     /**
-     * @return \Rebilly\Sdk\Model\Rule[]
+     * @return Rule[]
      */
     public function getRules(): array
     {
@@ -79,11 +79,11 @@ class RuleSet implements JsonSerializable
     }
 
     /**
-     * @param \Rebilly\Sdk\Model\Rule[] $rules
+     * @param Rule[] $rules
      */
     public function setRules(array $rules): self
     {
-        $rules = array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\Rule ? $value : \Rebilly\Sdk\Model\Rule::from($value)) : null, $rules);
+        $rules = array_map(fn ($value) => $value !== null ? ($value instanceof Rule ? $value : Rule::from($value)) : null, $rules);
 
         $this->fields['rules'] = $rules;
 
@@ -96,7 +96,7 @@ class RuleSet implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\SelfLink[]
+     * @return null|SelfLink[]
      */
     public function getLinks(): ?array
     {
@@ -144,11 +144,11 @@ class RuleSet implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\SelfLink[] $links
+     * @param null|SelfLink[] $links
      */
     private function setLinks(null|array $links): self
     {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\SelfLink ? $value : \Rebilly\Sdk\Model\SelfLink::from($value)) : null, $links) : null;
+        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 
         $this->fields['_links'] = $links;
 

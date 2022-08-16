@@ -46,8 +46,8 @@ class EMerchantPay extends GatewayAccount
 
     public function setCredentials(EMerchantPayCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\EMerchantPayCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\EMerchantPayCredentials::from($credentials);
+        if (!($credentials instanceof EMerchantPayCredentials)) {
+            $credentials = EMerchantPayCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -62,8 +62,8 @@ class EMerchantPay extends GatewayAccount
 
     public function setSettings(null|EMerchantPaySettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\EMerchantPaySettings)) {
-            $settings = \Rebilly\Sdk\Model\EMerchantPaySettings::from($settings);
+        if ($settings !== null && !($settings instanceof EMerchantPaySettings)) {
+            $settings = EMerchantPaySettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;
@@ -78,8 +78,8 @@ class EMerchantPay extends GatewayAccount
 
     public function setThreeDSecureServer(null|EMerchantPay3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\EMerchantPay3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\EMerchantPay3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof EMerchantPay3dsServers)) {
+            $threeDSecureServer = EMerchantPay3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

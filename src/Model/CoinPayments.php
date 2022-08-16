@@ -43,8 +43,8 @@ class CoinPayments extends GatewayAccount
 
     public function setCredentials(CoinPaymentsCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\CoinPaymentsCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\CoinPaymentsCredentials::from($credentials);
+        if (!($credentials instanceof CoinPaymentsCredentials)) {
+            $credentials = CoinPaymentsCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class CoinPayments extends GatewayAccount
 
     public function setSettings(null|CoinPaymentsSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\CoinPaymentsSettings)) {
-            $settings = \Rebilly\Sdk\Model\CoinPaymentsSettings::from($settings);
+        if ($settings !== null && !($settings instanceof CoinPaymentsSettings)) {
+            $settings = CoinPaymentsSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

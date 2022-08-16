@@ -43,8 +43,8 @@ class Coppr extends GatewayAccount
 
     public function setCredentials(CopprCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\CopprCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\CopprCredentials::from($credentials);
+        if (!($credentials instanceof CopprCredentials)) {
+            $credentials = CopprCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class Coppr extends GatewayAccount
 
     public function setSettings(null|CopprSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\CopprSettings)) {
-            $settings = \Rebilly\Sdk\Model\CopprSettings::from($settings);
+        if ($settings !== null && !($settings instanceof CopprSettings)) {
+            $settings = CopprSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

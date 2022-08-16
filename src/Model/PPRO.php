@@ -40,8 +40,8 @@ class PPRO extends GatewayAccount
 
     public function setCredentials(PPROCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\PPROCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\PPROCredentials::from($credentials);
+        if (!($credentials instanceof PPROCredentials)) {
+            $credentials = PPROCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

@@ -68,8 +68,8 @@ class Edd implements JsonSerializable
 
     public function setScore(null|EddData|array $score): self
     {
-        if ($score !== null && !($score instanceof \Rebilly\Sdk\Model\EddData)) {
-            $score = \Rebilly\Sdk\Model\EddData::from($score);
+        if ($score !== null && !($score instanceof EddData)) {
+            $score = EddData::from($score);
         }
 
         $this->fields['score'] = $score;
@@ -99,7 +99,7 @@ class Edd implements JsonSerializable
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\EddArrestSearchResultLink|\Rebilly\Sdk\Model\EddBankruptcySearchResultLink|\Rebilly\Sdk\Model\EddFraudSearchResultLink|\Rebilly\Sdk\Model\EddOccupationSearchResultLink|\Rebilly\Sdk\Model\SelfLink>
+     * @return null|array<EddArrestSearchResultLink|EddBankruptcySearchResultLink|EddFraudSearchResultLink|EddOccupationSearchResultLink|SelfLink>
      */
     public function getLinks(): ?array
     {
@@ -140,7 +140,7 @@ class Edd implements JsonSerializable
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\EddArrestSearchResultLink|\Rebilly\Sdk\Model\EddBankruptcySearchResultLink|\Rebilly\Sdk\Model\EddFraudSearchResultLink|\Rebilly\Sdk\Model\EddOccupationSearchResultLink|\Rebilly\Sdk\Model\SelfLink> $links
+     * @param null|array<EddArrestSearchResultLink|EddBankruptcySearchResultLink|EddFraudSearchResultLink|EddOccupationSearchResultLink|SelfLink> $links
      */
     private function setLinks(null|array $links): self
     {

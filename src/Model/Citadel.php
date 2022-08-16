@@ -40,8 +40,8 @@ class Citadel extends GatewayAccount
 
     public function setCredentials(CitadelCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\CitadelCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\CitadelCredentials::from($credentials);
+        if (!($credentials instanceof CitadelCredentials)) {
+            $credentials = CitadelCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

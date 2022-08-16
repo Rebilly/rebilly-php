@@ -40,8 +40,8 @@ class EPay extends GatewayAccount
 
     public function setCredentials(EPayCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\EPayCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\EPayCredentials::from($credentials);
+        if (!($credentials instanceof EPayCredentials)) {
+            $credentials = EPayCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

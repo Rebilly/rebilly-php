@@ -40,8 +40,8 @@ class Pagsmile extends GatewayAccount
 
     public function setCredentials(PagsmileCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\PagsmileCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\PagsmileCredentials::from($credentials);
+        if (!($credentials instanceof PagsmileCredentials)) {
+            $credentials = PagsmileCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

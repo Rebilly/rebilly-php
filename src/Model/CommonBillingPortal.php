@@ -97,8 +97,8 @@ abstract class CommonBillingPortal implements JsonSerializable
 
     public function setFeatures(null|CommonBillingPortalFeatures|array $features): self
     {
-        if ($features !== null && !($features instanceof \Rebilly\Sdk\Model\CommonBillingPortalFeatures)) {
-            $features = \Rebilly\Sdk\Model\CommonBillingPortalFeatures::from($features);
+        if ($features !== null && !($features instanceof CommonBillingPortalFeatures)) {
+            $features = CommonBillingPortalFeatures::from($features);
         }
 
         $this->fields['features'] = $features;
@@ -113,8 +113,8 @@ abstract class CommonBillingPortal implements JsonSerializable
 
     public function setCustomization(null|CommonBillingPortalCustomization|array $customization): self
     {
-        if ($customization !== null && !($customization instanceof \Rebilly\Sdk\Model\CommonBillingPortalCustomization)) {
-            $customization = \Rebilly\Sdk\Model\CommonBillingPortalCustomization::from($customization);
+        if ($customization !== null && !($customization instanceof CommonBillingPortalCustomization)) {
+            $customization = CommonBillingPortalCustomization::from($customization);
         }
 
         $this->fields['customization'] = $customization;

@@ -46,8 +46,8 @@ class Payvision extends GatewayAccount
 
     public function setCredentials(PayvisionCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\PayvisionCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\PayvisionCredentials::from($credentials);
+        if (!($credentials instanceof PayvisionCredentials)) {
+            $credentials = PayvisionCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -62,8 +62,8 @@ class Payvision extends GatewayAccount
 
     public function setSettings(null|PayvisionSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\PayvisionSettings)) {
-            $settings = \Rebilly\Sdk\Model\PayvisionSettings::from($settings);
+        if ($settings !== null && !($settings instanceof PayvisionSettings)) {
+            $settings = PayvisionSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;
@@ -78,8 +78,8 @@ class Payvision extends GatewayAccount
 
     public function setThreeDSecureServer(null|Payvision3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\Payvision3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\Payvision3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Payvision3dsServers)) {
+            $threeDSecureServer = Payvision3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

@@ -40,8 +40,8 @@ class EZeeWallet extends GatewayAccount
 
     public function setCredentials(EZeeWalletCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\EZeeWalletCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\EZeeWalletCredentials::from($credentials);
+        if (!($credentials instanceof EZeeWalletCredentials)) {
+            $credentials = EZeeWalletCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

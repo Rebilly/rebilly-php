@@ -41,8 +41,8 @@ class DigitalWallets implements JsonSerializable
 
     public function setApplePay(null|DigitalWalletsApplePay|array $applePay): self
     {
-        if ($applePay !== null && !($applePay instanceof \Rebilly\Sdk\Model\DigitalWalletsApplePay)) {
-            $applePay = \Rebilly\Sdk\Model\DigitalWalletsApplePay::from($applePay);
+        if ($applePay !== null && !($applePay instanceof DigitalWalletsApplePay)) {
+            $applePay = DigitalWalletsApplePay::from($applePay);
         }
 
         $this->fields['applePay'] = $applePay;
@@ -57,8 +57,8 @@ class DigitalWallets implements JsonSerializable
 
     public function setGooglePay(null|DigitalWalletsGooglePay|array $googlePay): self
     {
-        if ($googlePay !== null && !($googlePay instanceof \Rebilly\Sdk\Model\DigitalWalletsGooglePay)) {
-            $googlePay = \Rebilly\Sdk\Model\DigitalWalletsGooglePay::from($googlePay);
+        if ($googlePay !== null && !($googlePay instanceof DigitalWalletsGooglePay)) {
+            $googlePay = DigitalWalletsGooglePay::from($googlePay);
         }
 
         $this->fields['googlePay'] = $googlePay;

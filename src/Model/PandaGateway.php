@@ -40,8 +40,8 @@ class PandaGateway extends GatewayAccount
 
     public function setCredentials(PandaGatewayCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\PandaGatewayCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\PandaGatewayCredentials::from($credentials);
+        if (!($credentials instanceof PandaGatewayCredentials)) {
+            $credentials = PandaGatewayCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

@@ -40,8 +40,8 @@ class Loonie extends GatewayAccount
 
     public function setCredentials(LoonieCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\LoonieCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\LoonieCredentials::from($credentials);
+        if (!($credentials instanceof LoonieCredentials)) {
+            $credentials = LoonieCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

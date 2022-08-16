@@ -43,8 +43,8 @@ class VantivLitle extends GatewayAccount
 
     public function setCredentials(VantivLitleCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\VantivLitleCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\VantivLitleCredentials::from($credentials);
+        if (!($credentials instanceof VantivLitleCredentials)) {
+            $credentials = VantivLitleCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class VantivLitle extends GatewayAccount
 
     public function setThreeDSecureServer(null|VantivLitle3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\VantivLitle3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\VantivLitle3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof VantivLitle3dsServers)) {
+            $threeDSecureServer = VantivLitle3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

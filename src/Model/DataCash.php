@@ -46,8 +46,8 @@ class DataCash extends GatewayAccount
 
     public function setCredentials(DataCashCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\DataCashCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\DataCashCredentials::from($credentials);
+        if (!($credentials instanceof DataCashCredentials)) {
+            $credentials = DataCashCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -62,8 +62,8 @@ class DataCash extends GatewayAccount
 
     public function setSettings(null|DataCashSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\DataCashSettings)) {
-            $settings = \Rebilly\Sdk\Model\DataCashSettings::from($settings);
+        if ($settings !== null && !($settings instanceof DataCashSettings)) {
+            $settings = DataCashSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;
@@ -78,8 +78,8 @@ class DataCash extends GatewayAccount
 
     public function setThreeDSecureServer(null|DataCash3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\DataCash3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\DataCash3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof DataCash3dsServers)) {
+            $threeDSecureServer = DataCash3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

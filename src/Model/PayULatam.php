@@ -40,8 +40,8 @@ class PayULatam extends GatewayAccount
 
     public function setCredentials(PayULatamCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\PayULatamCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\PayULatamCredentials::from($credentials);
+        if (!($credentials instanceof PayULatamCredentials)) {
+            $credentials = PayULatamCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

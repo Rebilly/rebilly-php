@@ -43,8 +43,8 @@ class OnRamp extends GatewayAccount
 
     public function setCredentials(OnRampCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\OnRampCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\OnRampCredentials::from($credentials);
+        if (!($credentials instanceof OnRampCredentials)) {
+            $credentials = OnRampCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class OnRamp extends GatewayAccount
 
     public function setSettings(null|OnRampSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\OnRampSettings)) {
-            $settings = \Rebilly\Sdk\Model\OnRampSettings::from($settings);
+        if ($settings !== null && !($settings instanceof OnRampSettings)) {
+            $settings = OnRampSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

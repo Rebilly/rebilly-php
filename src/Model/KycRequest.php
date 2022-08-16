@@ -88,7 +88,7 @@ class KycRequest extends CommonKycRequest
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\KycDocumentsLink|\Rebilly\Sdk\Model\KycGathererLink|\Rebilly\Sdk\Model\SelfLink>
+     * @return null|array<KycDocumentsLink|KycGathererLink|SelfLink>
      */
     public function getLinks(): ?array
     {
@@ -96,7 +96,7 @@ class KycRequest extends CommonKycRequest
     }
 
     /**
-     * @return null|array{documents:\Rebilly\Sdk\Model\KycDocument[]}
+     * @return null|array{documents:KycDocument[]}
      */
     public function getEmbedded(): ?array
     {
@@ -104,11 +104,11 @@ class KycRequest extends CommonKycRequest
     }
 
     /**
-     * @param null|array{documents:\Rebilly\Sdk\Model\KycDocument[]} $embedded
+     * @param null|array{documents:KycDocument[]} $embedded
      */
     public function setEmbedded(null|array $embedded): self
     {
-        $embedded['documents'] = isset($embedded['documents']) ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\KycDocument ? $value : \Rebilly\Sdk\Model\KycDocument::from($value)) : null, $embedded['documents']) : null;
+        $embedded['documents'] = isset($embedded['documents']) ? array_map(fn ($value) => $value !== null ? ($value instanceof KycDocument ? $value : KycDocument::from($value)) : null, $embedded['documents']) : null;
 
         $this->fields['_embedded'] = $embedded;
 
@@ -148,7 +148,7 @@ class KycRequest extends CommonKycRequest
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\KycDocumentsLink|\Rebilly\Sdk\Model\KycGathererLink|\Rebilly\Sdk\Model\SelfLink> $links
+     * @param null|array<KycDocumentsLink|KycGathererLink|SelfLink> $links
      */
     private function setLinks(null|array $links): self
     {

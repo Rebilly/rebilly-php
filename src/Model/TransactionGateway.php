@@ -44,8 +44,8 @@ class TransactionGateway implements JsonSerializable
 
     public function setResponse(null|TransactionGatewayResponse|array $response): self
     {
-        if ($response !== null && !($response instanceof \Rebilly\Sdk\Model\TransactionGatewayResponse)) {
-            $response = \Rebilly\Sdk\Model\TransactionGatewayResponse::from($response);
+        if ($response !== null && !($response instanceof TransactionGatewayResponse)) {
+            $response = TransactionGatewayResponse::from($response);
         }
 
         $this->fields['response'] = $response;
@@ -60,8 +60,8 @@ class TransactionGateway implements JsonSerializable
 
     public function setAvsResponse(null|TransactionGatewayAvsResponse|array $avsResponse): self
     {
-        if ($avsResponse !== null && !($avsResponse instanceof \Rebilly\Sdk\Model\TransactionGatewayAvsResponse)) {
-            $avsResponse = \Rebilly\Sdk\Model\TransactionGatewayAvsResponse::from($avsResponse);
+        if ($avsResponse !== null && !($avsResponse instanceof TransactionGatewayAvsResponse)) {
+            $avsResponse = TransactionGatewayAvsResponse::from($avsResponse);
         }
 
         $this->fields['avsResponse'] = $avsResponse;
@@ -76,8 +76,8 @@ class TransactionGateway implements JsonSerializable
 
     public function setCvvResponse(null|TransactionGatewayCvvResponse|array $cvvResponse): self
     {
-        if ($cvvResponse !== null && !($cvvResponse instanceof \Rebilly\Sdk\Model\TransactionGatewayCvvResponse)) {
-            $cvvResponse = \Rebilly\Sdk\Model\TransactionGatewayCvvResponse::from($cvvResponse);
+        if ($cvvResponse !== null && !($cvvResponse instanceof TransactionGatewayCvvResponse)) {
+            $cvvResponse = TransactionGatewayCvvResponse::from($cvvResponse);
         }
 
         $this->fields['cvvResponse'] = $cvvResponse;

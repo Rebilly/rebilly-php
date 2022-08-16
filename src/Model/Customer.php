@@ -147,8 +147,8 @@ class Customer implements JsonSerializable
 
     public function setDefaultPaymentInstrument(null|PaymentInstrumentValueObject|array $defaultPaymentInstrument): self
     {
-        if ($defaultPaymentInstrument !== null && !($defaultPaymentInstrument instanceof \Rebilly\Sdk\Model\PaymentInstrumentValueObject)) {
-            $defaultPaymentInstrument = \Rebilly\Sdk\Model\PaymentInstrumentValueObject::from($defaultPaymentInstrument);
+        if ($defaultPaymentInstrument !== null && !($defaultPaymentInstrument instanceof PaymentInstrumentValueObject)) {
+            $defaultPaymentInstrument = PaymentInstrumentValueObject::from($defaultPaymentInstrument);
         }
 
         $this->fields['defaultPaymentInstrument'] = $defaultPaymentInstrument;
@@ -207,8 +207,8 @@ class Customer implements JsonSerializable
 
     public function setPrimaryAddress(null|ContactObject|array $primaryAddress): self
     {
-        if ($primaryAddress !== null && !($primaryAddress instanceof \Rebilly\Sdk\Model\ContactObject)) {
-            $primaryAddress = \Rebilly\Sdk\Model\ContactObject::from($primaryAddress);
+        if ($primaryAddress !== null && !($primaryAddress instanceof ContactObject)) {
+            $primaryAddress = ContactObject::from($primaryAddress);
         }
 
         $this->fields['primaryAddress'] = $primaryAddress;
@@ -223,8 +223,8 @@ class Customer implements JsonSerializable
 
     public function setAverageValue(null|CustomerAverageValue|array $averageValue): self
     {
-        if ($averageValue !== null && !($averageValue instanceof \Rebilly\Sdk\Model\CustomerAverageValue)) {
-            $averageValue = \Rebilly\Sdk\Model\CustomerAverageValue::from($averageValue);
+        if ($averageValue !== null && !($averageValue instanceof CustomerAverageValue)) {
+            $averageValue = CustomerAverageValue::from($averageValue);
         }
 
         $this->fields['averageValue'] = $averageValue;
@@ -260,8 +260,8 @@ class Customer implements JsonSerializable
 
     public function setLifetimeRevenue(null|CustomerLifetimeRevenue|array $lifetimeRevenue): self
     {
-        if ($lifetimeRevenue !== null && !($lifetimeRevenue instanceof \Rebilly\Sdk\Model\CustomerLifetimeRevenue)) {
-            $lifetimeRevenue = \Rebilly\Sdk\Model\CustomerLifetimeRevenue::from($lifetimeRevenue);
+        if ($lifetimeRevenue !== null && !($lifetimeRevenue instanceof CustomerLifetimeRevenue)) {
+            $lifetimeRevenue = CustomerLifetimeRevenue::from($lifetimeRevenue);
         }
 
         $this->fields['lifetimeRevenue'] = $lifetimeRevenue;
@@ -275,7 +275,7 @@ class Customer implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\Tag[]
+     * @return null|Tag[]
      */
     public function getTags(): ?array
     {
@@ -305,7 +305,7 @@ class Customer implements JsonSerializable
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\DefaultPaymentInstrumentLink|\Rebilly\Sdk\Model\LeadSourceLink|\Rebilly\Sdk\Model\SelfLink|\Rebilly\Sdk\Model\WebsiteLink>
+     * @return null|array<DefaultPaymentInstrumentLink|LeadSourceLink|SelfLink|WebsiteLink>
      */
     public function getLinks(): ?array
     {
@@ -313,7 +313,7 @@ class Customer implements JsonSerializable
     }
 
     /**
-     * @return null|array{leadSource:\Rebilly\Sdk\Model\LeadSource}
+     * @return null|array{leadSource:LeadSource}
      */
     public function getEmbedded(): ?array
     {
@@ -436,11 +436,11 @@ class Customer implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\Tag[] $tags
+     * @param null|Tag[] $tags
      */
     private function setTags(null|array $tags): self
     {
-        $tags = $tags !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\Tag ? $value : \Rebilly\Sdk\Model\Tag::from($value)) : null, $tags) : null;
+        $tags = $tags !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Tag ? $value : Tag::from($value)) : null, $tags) : null;
 
         $this->fields['tags'] = $tags;
 
@@ -462,7 +462,7 @@ class Customer implements JsonSerializable
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\DefaultPaymentInstrumentLink|\Rebilly\Sdk\Model\LeadSourceLink|\Rebilly\Sdk\Model\SelfLink|\Rebilly\Sdk\Model\WebsiteLink> $links
+     * @param null|array<DefaultPaymentInstrumentLink|LeadSourceLink|SelfLink|WebsiteLink> $links
      */
     private function setLinks(null|array $links): self
     {
@@ -474,11 +474,11 @@ class Customer implements JsonSerializable
     }
 
     /**
-     * @param null|array{leadSource:\Rebilly\Sdk\Model\LeadSource} $embedded
+     * @param null|array{leadSource:LeadSource} $embedded
      */
     private function setEmbedded(null|array $embedded): self
     {
-        $embedded['leadSource'] = isset($embedded['leadSource']) ? ($embedded['leadSource'] instanceof \Rebilly\Sdk\Model\LeadSource ? $embedded['leadSource'] : \Rebilly\Sdk\Model\LeadSource::from($embedded['leadSource'])) : null;
+        $embedded['leadSource'] = isset($embedded['leadSource']) ? ($embedded['leadSource'] instanceof LeadSource ? $embedded['leadSource'] : LeadSource::from($embedded['leadSource'])) : null;
 
         $this->fields['_embedded'] = $embedded;
 

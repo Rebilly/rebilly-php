@@ -70,7 +70,7 @@ class SendEmail extends RuleAction
     }
 
     /**
-     * @return \Rebilly\Sdk\Model\RulesEmailNotification[]
+     * @return RulesEmailNotification[]
      */
     public function getEmails(): array
     {
@@ -78,11 +78,11 @@ class SendEmail extends RuleAction
     }
 
     /**
-     * @param \Rebilly\Sdk\Model\RulesEmailNotification[] $emails
+     * @param RulesEmailNotification[] $emails
      */
     public function setEmails(array $emails): self
     {
-        $emails = array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\RulesEmailNotification ? $value : \Rebilly\Sdk\Model\RulesEmailNotification::from($value)) : null, $emails);
+        $emails = array_map(fn ($value) => $value !== null ? ($value instanceof RulesEmailNotification ? $value : RulesEmailNotification::from($value)) : null, $emails);
 
         $this->fields['emails'] = $emails;
 

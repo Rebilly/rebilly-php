@@ -77,8 +77,8 @@ class STPMexicoCredentials implements JsonSerializable
 
     public function setBankId(STPMexicoBanks|string $bankId): self
     {
-        if (!($bankId instanceof \Rebilly\Sdk\Model\STPMexicoBanks)) {
-            $bankId = \Rebilly\Sdk\Model\STPMexicoBanks::from($bankId);
+        if (!($bankId instanceof STPMexicoBanks)) {
+            $bankId = STPMexicoBanks::from($bankId);
         }
 
         $this->fields['bankId'] = $bankId;

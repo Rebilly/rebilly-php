@@ -191,7 +191,7 @@ class RulesEmailNotificationTemplates implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\RulesEmailNotificationAttachments[]
+     * @return null|RulesEmailNotificationAttachments[]
      */
     public function getAttachments(): ?array
     {
@@ -199,11 +199,11 @@ class RulesEmailNotificationTemplates implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\RulesEmailNotificationAttachments[] $attachments
+     * @param null|RulesEmailNotificationAttachments[] $attachments
      */
     public function setAttachments(null|array $attachments): self
     {
-        $attachments = $attachments !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\RulesEmailNotificationAttachments ? $value : \Rebilly\Sdk\Model\RulesEmailNotificationAttachments::from($value)) : null, $attachments) : null;
+        $attachments = $attachments !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof RulesEmailNotificationAttachments ? $value : RulesEmailNotificationAttachments::from($value)) : null, $attachments) : null;
 
         $this->fields['attachments'] = $attachments;
 

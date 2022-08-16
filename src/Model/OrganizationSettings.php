@@ -41,8 +41,8 @@ class OrganizationSettings implements JsonSerializable
 
     public function setDefaultTaxCalculator(null|OrganizationSettingsDefaultTaxCalculator|array $defaultTaxCalculator): self
     {
-        if ($defaultTaxCalculator !== null && !($defaultTaxCalculator instanceof \Rebilly\Sdk\Model\OrganizationSettingsDefaultTaxCalculator)) {
-            $defaultTaxCalculator = \Rebilly\Sdk\Model\OrganizationSettingsDefaultTaxCalculator::from($defaultTaxCalculator);
+        if ($defaultTaxCalculator !== null && !($defaultTaxCalculator instanceof OrganizationSettingsDefaultTaxCalculator)) {
+            $defaultTaxCalculator = OrganizationSettingsDefaultTaxCalculator::from($defaultTaxCalculator);
         }
 
         $this->fields['defaultTaxCalculator'] = $defaultTaxCalculator;
@@ -51,7 +51,7 @@ class OrganizationSettings implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\TaxLocation[]
+     * @return null|TaxLocation[]
      */
     public function getTaxLocations(): ?array
     {
@@ -59,11 +59,11 @@ class OrganizationSettings implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\TaxLocation[] $taxLocations
+     * @param null|TaxLocation[] $taxLocations
      */
     public function setTaxLocations(null|array $taxLocations): self
     {
-        $taxLocations = $taxLocations !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\TaxLocation ? $value : \Rebilly\Sdk\Model\TaxLocation::from($value)) : null, $taxLocations) : null;
+        $taxLocations = $taxLocations !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof TaxLocation ? $value : TaxLocation::from($value)) : null, $taxLocations) : null;
 
         $this->fields['taxLocations'] = $taxLocations;
 

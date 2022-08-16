@@ -77,7 +77,7 @@ class SendTestEmail implements JsonSerializable
     }
 
     /**
-     * @return \Rebilly\Sdk\Model\RulesEmailNotificationTemplates[]
+     * @return RulesEmailNotificationTemplates[]
      */
     public function getTemplates(): array
     {
@@ -85,11 +85,11 @@ class SendTestEmail implements JsonSerializable
     }
 
     /**
-     * @param \Rebilly\Sdk\Model\RulesEmailNotificationTemplates[] $templates
+     * @param RulesEmailNotificationTemplates[] $templates
      */
     public function setTemplates(array $templates): self
     {
-        $templates = array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\RulesEmailNotificationTemplates ? $value : \Rebilly\Sdk\Model\RulesEmailNotificationTemplates::from($value)) : null, $templates);
+        $templates = array_map(fn ($value) => $value !== null ? ($value instanceof RulesEmailNotificationTemplates ? $value : RulesEmailNotificationTemplates::from($value)) : null, $templates);
 
         $this->fields['templates'] = $templates;
 

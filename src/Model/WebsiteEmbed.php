@@ -38,8 +38,8 @@ class WebsiteEmbed implements JsonSerializable
 
     public function setWebsite(null|Website|array $website): self
     {
-        if ($website !== null && !($website instanceof \Rebilly\Sdk\Model\Website)) {
-            $website = \Rebilly\Sdk\Model\Website::from($website);
+        if ($website !== null && !($website instanceof Website)) {
+            $website = Website::from($website);
         }
 
         $this->fields['website'] = $website;

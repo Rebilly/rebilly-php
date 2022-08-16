@@ -43,8 +43,8 @@ class Clearhaus extends GatewayAccount
 
     public function setCredentials(ClearhausCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\ClearhausCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\ClearhausCredentials::from($credentials);
+        if (!($credentials instanceof ClearhausCredentials)) {
+            $credentials = ClearhausCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class Clearhaus extends GatewayAccount
 
     public function setThreeDSecureServer(null|Clearhaus3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\Clearhaus3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\Clearhaus3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Clearhaus3dsServers)) {
+            $threeDSecureServer = Clearhaus3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

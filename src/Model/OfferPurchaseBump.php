@@ -34,7 +34,7 @@ class OfferPurchaseBump extends RuleAction
     }
 
     /**
-     * @return \Rebilly\Sdk\Model\PurchaseBumpSplitVersion[]
+     * @return PurchaseBumpSplitVersion[]
      */
     public function getBumpOffers(): array
     {
@@ -42,11 +42,11 @@ class OfferPurchaseBump extends RuleAction
     }
 
     /**
-     * @param \Rebilly\Sdk\Model\PurchaseBumpSplitVersion[] $bumpOffers
+     * @param PurchaseBumpSplitVersion[] $bumpOffers
      */
     public function setBumpOffers(array $bumpOffers): self
     {
-        $bumpOffers = array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\PurchaseBumpSplitVersion ? $value : \Rebilly\Sdk\Model\PurchaseBumpSplitVersion::from($value)) : null, $bumpOffers);
+        $bumpOffers = array_map(fn ($value) => $value !== null ? ($value instanceof PurchaseBumpSplitVersion ? $value : PurchaseBumpSplitVersion::from($value)) : null, $bumpOffers);
 
         $this->fields['bumpOffers'] = $bumpOffers;
 

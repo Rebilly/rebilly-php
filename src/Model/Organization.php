@@ -189,7 +189,7 @@ class Organization implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\ContactPhoneNumbers[]
+     * @return null|ContactPhoneNumbers[]
      */
     public function getPhoneNumbers(): ?array
     {
@@ -197,11 +197,11 @@ class Organization implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\ContactPhoneNumbers[] $phoneNumbers
+     * @param null|ContactPhoneNumbers[] $phoneNumbers
      */
     public function setPhoneNumbers(null|array $phoneNumbers): self
     {
-        $phoneNumbers = $phoneNumbers !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\ContactPhoneNumbers ? $value : \Rebilly\Sdk\Model\ContactPhoneNumbers::from($value)) : null, $phoneNumbers) : null;
+        $phoneNumbers = $phoneNumbers !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ContactPhoneNumbers ? $value : ContactPhoneNumbers::from($value)) : null, $phoneNumbers) : null;
 
         $this->fields['phoneNumbers'] = $phoneNumbers;
 
@@ -209,7 +209,7 @@ class Organization implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\ContactEmails[]
+     * @return null|ContactEmails[]
      */
     public function getEmails(): ?array
     {
@@ -217,11 +217,11 @@ class Organization implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\ContactEmails[] $emails
+     * @param null|ContactEmails[] $emails
      */
     public function setEmails(null|array $emails): self
     {
-        $emails = $emails !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\ContactEmails ? $value : \Rebilly\Sdk\Model\ContactEmails::from($value)) : null, $emails) : null;
+        $emails = $emails !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ContactEmails ? $value : ContactEmails::from($value)) : null, $emails) : null;
 
         $this->fields['emails'] = $emails;
 
@@ -271,8 +271,8 @@ class Organization implements JsonSerializable
 
     public function setQuestionnaire(null|OrganizationQuestionnaire|array $questionnaire): self
     {
-        if ($questionnaire !== null && !($questionnaire instanceof \Rebilly\Sdk\Model\OrganizationQuestionnaire)) {
-            $questionnaire = \Rebilly\Sdk\Model\OrganizationQuestionnaire::from($questionnaire);
+        if ($questionnaire !== null && !($questionnaire instanceof OrganizationQuestionnaire)) {
+            $questionnaire = OrganizationQuestionnaire::from($questionnaire);
         }
 
         $this->fields['questionnaire'] = $questionnaire;
@@ -287,8 +287,8 @@ class Organization implements JsonSerializable
 
     public function setSettings(null|OrganizationSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\OrganizationSettings)) {
-            $settings = \Rebilly\Sdk\Model\OrganizationSettings::from($settings);
+        if ($settings !== null && !($settings instanceof OrganizationSettings)) {
+            $settings = OrganizationSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;
@@ -318,7 +318,7 @@ class Organization implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\SelfLink[]
+     * @return null|SelfLink[]
      */
     public function getLinks(): ?array
     {
@@ -408,11 +408,11 @@ class Organization implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\SelfLink[] $links
+     * @param null|SelfLink[] $links
      */
     private function setLinks(null|array $links): self
     {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\SelfLink ? $value : \Rebilly\Sdk\Model\SelfLink::from($value)) : null, $links) : null;
+        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 
         $this->fields['_links'] = $links;
 

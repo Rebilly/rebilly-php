@@ -43,8 +43,8 @@ class NOWPayments extends GatewayAccount
 
     public function setCredentials(NOWPaymentsCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\NOWPaymentsCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\NOWPaymentsCredentials::from($credentials);
+        if (!($credentials instanceof NOWPaymentsCredentials)) {
+            $credentials = NOWPaymentsCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class NOWPayments extends GatewayAccount
 
     public function setSettings(null|NOWPaymentsSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\NOWPaymentsSettings)) {
-            $settings = \Rebilly\Sdk\Model\NOWPaymentsSettings::from($settings);
+        if ($settings !== null && !($settings instanceof NOWPaymentsSettings)) {
+            $settings = NOWPaymentsSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

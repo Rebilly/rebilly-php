@@ -107,7 +107,7 @@ class OwnerApplicationInstance implements JsonSerializable
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\SelfLink>
+     * @return null|array<SelfLink>
      */
     public function getLinks(): ?array
     {
@@ -174,7 +174,7 @@ class OwnerApplicationInstance implements JsonSerializable
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\SelfLink> $links
+     * @param null|array<SelfLink> $links
      */
     private function setLinks(null|array $links): self
     {

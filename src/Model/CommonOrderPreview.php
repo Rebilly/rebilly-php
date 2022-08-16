@@ -81,7 +81,7 @@ abstract class CommonOrderPreview implements JsonSerializable
     }
 
     /**
-     * @return \Rebilly\Sdk\Model\CommonOrderPreviewItems[]
+     * @return CommonOrderPreviewItems[]
      */
     public function getItems(): array
     {
@@ -89,11 +89,11 @@ abstract class CommonOrderPreview implements JsonSerializable
     }
 
     /**
-     * @param \Rebilly\Sdk\Model\CommonOrderPreviewItems[] $items
+     * @param CommonOrderPreviewItems[] $items
      */
     public function setItems(array $items): self
     {
-        $items = array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\CommonOrderPreviewItems ? $value : \Rebilly\Sdk\Model\CommonOrderPreviewItems::from($value)) : null, $items);
+        $items = array_map(fn ($value) => $value !== null ? ($value instanceof CommonOrderPreviewItems ? $value : CommonOrderPreviewItems::from($value)) : null, $items);
 
         $this->fields['items'] = $items;
 
@@ -158,7 +158,7 @@ abstract class CommonOrderPreview implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\CommonOrderPreviewLineItems[]
+     * @return null|CommonOrderPreviewLineItems[]
      */
     public function getLineItems(): ?array
     {
@@ -166,7 +166,7 @@ abstract class CommonOrderPreview implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\ShippingOption[]
+     * @return null|ShippingOption[]
      */
     public function getShippingRates(): ?array
     {
@@ -174,7 +174,7 @@ abstract class CommonOrderPreview implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\CommonOrderPreviewTaxes[]
+     * @return null|CommonOrderPreviewTaxes[]
      */
     public function getTaxes(): ?array
     {
@@ -182,7 +182,7 @@ abstract class CommonOrderPreview implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\CommonOrderPreviewDiscounts[]
+     * @return null|CommonOrderPreviewDiscounts[]
      */
     public function getDiscounts(): ?array
     {
@@ -274,11 +274,11 @@ abstract class CommonOrderPreview implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\CommonOrderPreviewLineItems[] $lineItems
+     * @param null|CommonOrderPreviewLineItems[] $lineItems
      */
     private function setLineItems(null|array $lineItems): self
     {
-        $lineItems = $lineItems !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\CommonOrderPreviewLineItems ? $value : \Rebilly\Sdk\Model\CommonOrderPreviewLineItems::from($value)) : null, $lineItems) : null;
+        $lineItems = $lineItems !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof CommonOrderPreviewLineItems ? $value : CommonOrderPreviewLineItems::from($value)) : null, $lineItems) : null;
 
         $this->fields['lineItems'] = $lineItems;
 
@@ -286,11 +286,11 @@ abstract class CommonOrderPreview implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\ShippingOption[] $shippingRates
+     * @param null|ShippingOption[] $shippingRates
      */
     private function setShippingRates(null|array $shippingRates): self
     {
-        $shippingRates = $shippingRates !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\ShippingOption ? $value : \Rebilly\Sdk\Model\ShippingOption::from($value)) : null, $shippingRates) : null;
+        $shippingRates = $shippingRates !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ShippingOption ? $value : ShippingOption::from($value)) : null, $shippingRates) : null;
 
         $this->fields['shippingRates'] = $shippingRates;
 
@@ -298,11 +298,11 @@ abstract class CommonOrderPreview implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\CommonOrderPreviewTaxes[] $taxes
+     * @param null|CommonOrderPreviewTaxes[] $taxes
      */
     private function setTaxes(null|array $taxes): self
     {
-        $taxes = $taxes !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\CommonOrderPreviewTaxes ? $value : \Rebilly\Sdk\Model\CommonOrderPreviewTaxes::from($value)) : null, $taxes) : null;
+        $taxes = $taxes !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof CommonOrderPreviewTaxes ? $value : CommonOrderPreviewTaxes::from($value)) : null, $taxes) : null;
 
         $this->fields['taxes'] = $taxes;
 
@@ -310,11 +310,11 @@ abstract class CommonOrderPreview implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\CommonOrderPreviewDiscounts[] $discounts
+     * @param null|CommonOrderPreviewDiscounts[] $discounts
      */
     private function setDiscounts(null|array $discounts): self
     {
-        $discounts = $discounts !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\CommonOrderPreviewDiscounts ? $value : \Rebilly\Sdk\Model\CommonOrderPreviewDiscounts::from($value)) : null, $discounts) : null;
+        $discounts = $discounts !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof CommonOrderPreviewDiscounts ? $value : CommonOrderPreviewDiscounts::from($value)) : null, $discounts) : null;
 
         $this->fields['discounts'] = $discounts;
 

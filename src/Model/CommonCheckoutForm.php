@@ -190,7 +190,7 @@ abstract class CommonCheckoutForm implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\PaymentMethod[]
+     * @return null|PaymentMethod[]
      */
     public function getPaymentMethods(): ?array
     {
@@ -198,11 +198,11 @@ abstract class CommonCheckoutForm implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\PaymentMethod[] $paymentMethods
+     * @param null|PaymentMethod[] $paymentMethods
      */
     public function setPaymentMethods(null|array $paymentMethods): self
     {
-        $paymentMethods = $paymentMethods !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\PaymentMethod ? $value : \Rebilly\Sdk\Model\PaymentMethod::from($value)) : null, $paymentMethods) : null;
+        $paymentMethods = $paymentMethods !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof PaymentMethod ? $value : PaymentMethod::from($value)) : null, $paymentMethods) : null;
 
         $this->fields['paymentMethods'] = $paymentMethods;
 
@@ -216,8 +216,8 @@ abstract class CommonCheckoutForm implements JsonSerializable
 
     public function setCustomization(null|CommonCheckoutFormCustomization|array $customization): self
     {
-        if ($customization !== null && !($customization instanceof \Rebilly\Sdk\Model\CommonCheckoutFormCustomization)) {
-            $customization = \Rebilly\Sdk\Model\CommonCheckoutFormCustomization::from($customization);
+        if ($customization !== null && !($customization instanceof CommonCheckoutFormCustomization)) {
+            $customization = CommonCheckoutFormCustomization::from($customization);
         }
 
         $this->fields['customization'] = $customization;

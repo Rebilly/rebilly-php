@@ -43,8 +43,8 @@ class AmexVPC extends GatewayAccount
 
     public function setCredentials(AmexVPCCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\AmexVPCCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\AmexVPCCredentials::from($credentials);
+        if (!($credentials instanceof AmexVPCCredentials)) {
+            $credentials = AmexVPCCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class AmexVPC extends GatewayAccount
 
     public function setSettings(AmexVPCSettings|array $settings): self
     {
-        if (!($settings instanceof \Rebilly\Sdk\Model\AmexVPCSettings)) {
-            $settings = \Rebilly\Sdk\Model\AmexVPCSettings::from($settings);
+        if (!($settings instanceof AmexVPCSettings)) {
+            $settings = AmexVPCSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

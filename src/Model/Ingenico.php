@@ -43,8 +43,8 @@ class Ingenico extends GatewayAccount
 
     public function setCredentials(IngenicoCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\IngenicoCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\IngenicoCredentials::from($credentials);
+        if (!($credentials instanceof IngenicoCredentials)) {
+            $credentials = IngenicoCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class Ingenico extends GatewayAccount
 
     public function setThreeDSecureServer(null|Ingenico3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\Ingenico3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\Ingenico3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Ingenico3dsServers)) {
+            $threeDSecureServer = Ingenico3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

@@ -38,8 +38,8 @@ class CommonSubscriptionOrderRecurringInterval implements JsonSerializable
 
     public function setPeriodAnchorInstruction(null|ServicePeriodAnchorInstruction|array $periodAnchorInstruction): self
     {
-        if ($periodAnchorInstruction !== null && !($periodAnchorInstruction instanceof \Rebilly\Sdk\Model\ServicePeriodAnchorInstruction)) {
-            $periodAnchorInstruction = \Rebilly\Sdk\Model\ServicePeriodAnchorInstruction::from($periodAnchorInstruction);
+        if ($periodAnchorInstruction !== null && !($periodAnchorInstruction instanceof ServicePeriodAnchorInstruction)) {
+            $periodAnchorInstruction = ServicePeriodAnchorInstruction::from($periodAnchorInstruction);
         }
 
         $this->fields['periodAnchorInstruction'] = $periodAnchorInstruction;

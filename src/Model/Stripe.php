@@ -46,8 +46,8 @@ class Stripe extends GatewayAccount
 
     public function setCredentials(null|StripeCredentials|array $credentials): self
     {
-        if ($credentials !== null && !($credentials instanceof \Rebilly\Sdk\Model\StripeCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\StripeCredentials::from($credentials);
+        if ($credentials !== null && !($credentials instanceof StripeCredentials)) {
+            $credentials = StripeCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -62,8 +62,8 @@ class Stripe extends GatewayAccount
 
     public function setSettings(StripeSettings|array $settings): self
     {
-        if (!($settings instanceof \Rebilly\Sdk\Model\StripeSettings)) {
-            $settings = \Rebilly\Sdk\Model\StripeSettings::from($settings);
+        if (!($settings instanceof StripeSettings)) {
+            $settings = StripeSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;
@@ -78,8 +78,8 @@ class Stripe extends GatewayAccount
 
     public function setThreeDSecureServer(null|Stripe3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\Stripe3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\Stripe3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Stripe3dsServers)) {
+            $threeDSecureServer = Stripe3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

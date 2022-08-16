@@ -40,8 +40,8 @@ class Moneris extends GatewayAccount
 
     public function setCredentials(MonerisCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\MonerisCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\MonerisCredentials::from($credentials);
+        if (!($credentials instanceof MonerisCredentials)) {
+            $credentials = MonerisCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

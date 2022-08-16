@@ -205,8 +205,8 @@ class ProofOfPurchaseKycDocument extends KycDocument
 
     public function setRejectionReason(null|KycDocumentRejection|array $rejectionReason): self
     {
-        if ($rejectionReason !== null && !($rejectionReason instanceof \Rebilly\Sdk\Model\KycDocumentRejection)) {
-            $rejectionReason = \Rebilly\Sdk\Model\KycDocumentRejection::from($rejectionReason);
+        if ($rejectionReason !== null && !($rejectionReason instanceof KycDocumentRejection)) {
+            $rejectionReason = KycDocumentRejection::from($rejectionReason);
         }
 
         $this->fields['rejectionReason'] = $rejectionReason;
@@ -323,7 +323,7 @@ class ProofOfPurchaseKycDocument extends KycDocument
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\Tag[]
+     * @return null|Tag[]
      */
     public function getTags(): ?array
     {
@@ -378,8 +378,8 @@ class ProofOfPurchaseKycDocument extends KycDocument
 
     public function setDocumentMatches(null|ProofOfPurchaseKycDocumentDocumentMatches|array $documentMatches): self
     {
-        if ($documentMatches !== null && !($documentMatches instanceof \Rebilly\Sdk\Model\ProofOfPurchaseKycDocumentDocumentMatches)) {
-            $documentMatches = \Rebilly\Sdk\Model\ProofOfPurchaseKycDocumentDocumentMatches::from($documentMatches);
+        if ($documentMatches !== null && !($documentMatches instanceof ProofOfPurchaseKycDocumentDocumentMatches)) {
+            $documentMatches = ProofOfPurchaseKycDocumentDocumentMatches::from($documentMatches);
         }
 
         $this->fields['documentMatches'] = $documentMatches;
@@ -394,8 +394,8 @@ class ProofOfPurchaseKycDocument extends KycDocument
 
     public function setParsedData(null|ProofOfPurchaseKycDocumentDocumentMatches|array $parsedData): self
     {
-        if ($parsedData !== null && !($parsedData instanceof \Rebilly\Sdk\Model\ProofOfPurchaseKycDocumentDocumentMatches)) {
-            $parsedData = \Rebilly\Sdk\Model\ProofOfPurchaseKycDocumentDocumentMatches::from($parsedData);
+        if ($parsedData !== null && !($parsedData instanceof ProofOfPurchaseKycDocumentDocumentMatches)) {
+            $parsedData = ProofOfPurchaseKycDocumentDocumentMatches::from($parsedData);
         }
 
         $this->fields['parsedData'] = $parsedData;
@@ -404,7 +404,7 @@ class ProofOfPurchaseKycDocument extends KycDocument
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\CustomerLink|\Rebilly\Sdk\Model\PaymentInstrumentLink|\Rebilly\Sdk\Model\SelfLink>
+     * @return null|array<CustomerLink|PaymentInstrumentLink|SelfLink>
      */
     public function getLinks(): ?array
     {
@@ -412,7 +412,7 @@ class ProofOfPurchaseKycDocument extends KycDocument
     }
 
     /**
-     * @return null|array{customer:\Rebilly\Sdk\Model\Customer}
+     * @return null|array{customer:Customer}
      */
     public function getEmbedded(): ?array
     {
@@ -554,11 +554,11 @@ class ProofOfPurchaseKycDocument extends KycDocument
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\Tag[] $tags
+     * @param null|Tag[] $tags
      */
     private function setTags(null|array $tags): self
     {
-        $tags = $tags !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\Tag ? $value : \Rebilly\Sdk\Model\Tag::from($value)) : null, $tags) : null;
+        $tags = $tags !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Tag ? $value : Tag::from($value)) : null, $tags) : null;
 
         $this->fields['tags'] = $tags;
 
@@ -573,7 +573,7 @@ class ProofOfPurchaseKycDocument extends KycDocument
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\CustomerLink|\Rebilly\Sdk\Model\PaymentInstrumentLink|\Rebilly\Sdk\Model\SelfLink> $links
+     * @param null|array<CustomerLink|PaymentInstrumentLink|SelfLink> $links
      */
     private function setLinks(null|array $links): self
     {
@@ -585,11 +585,11 @@ class ProofOfPurchaseKycDocument extends KycDocument
     }
 
     /**
-     * @param null|array{customer:\Rebilly\Sdk\Model\Customer} $embedded
+     * @param null|array{customer:Customer} $embedded
      */
     private function setEmbedded(null|array $embedded): self
     {
-        $embedded['customer'] = isset($embedded['customer']) ? ($embedded['customer'] instanceof \Rebilly\Sdk\Model\Customer ? $embedded['customer'] : \Rebilly\Sdk\Model\Customer::from($embedded['customer'])) : null;
+        $embedded['customer'] = isset($embedded['customer']) ? ($embedded['customer'] instanceof Customer ? $embedded['customer'] : Customer::from($embedded['customer'])) : null;
 
         $this->fields['_embedded'] = $embedded;
 

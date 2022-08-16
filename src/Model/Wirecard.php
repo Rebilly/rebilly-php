@@ -43,8 +43,8 @@ class Wirecard extends GatewayAccount
 
     public function setCredentials(WirecardCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\WirecardCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\WirecardCredentials::from($credentials);
+        if (!($credentials instanceof WirecardCredentials)) {
+            $credentials = WirecardCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class Wirecard extends GatewayAccount
 
     public function setThreeDSecureServer(null|Wirecard3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\Wirecard3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\Wirecard3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Wirecard3dsServers)) {
+            $threeDSecureServer = Wirecard3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

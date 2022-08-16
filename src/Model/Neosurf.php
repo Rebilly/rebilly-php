@@ -40,8 +40,8 @@ class Neosurf extends GatewayAccount
 
     public function setCredentials(NeosurfCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\NeosurfCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\NeosurfCredentials::from($credentials);
+        if (!($credentials instanceof NeosurfCredentials)) {
+            $credentials = NeosurfCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

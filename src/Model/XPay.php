@@ -40,8 +40,8 @@ class XPay extends GatewayAccount
 
     public function setCredentials(XPayCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\XPayCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\XPayCredentials::from($credentials);
+        if (!($credentials instanceof XPayCredentials)) {
+            $credentials = XPayCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

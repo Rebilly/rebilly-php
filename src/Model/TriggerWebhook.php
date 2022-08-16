@@ -131,7 +131,7 @@ class TriggerWebhook extends RuleAction
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\WebhookHeader[]
+     * @return null|WebhookHeader[]
      */
     public function getHeaders(): ?array
     {
@@ -139,11 +139,11 @@ class TriggerWebhook extends RuleAction
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\WebhookHeader[] $headers
+     * @param null|WebhookHeader[] $headers
      */
     public function setHeaders(null|array $headers): self
     {
-        $headers = $headers !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\WebhookHeader ? $value : \Rebilly\Sdk\Model\WebhookHeader::from($value)) : null, $headers) : null;
+        $headers = $headers !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof WebhookHeader ? $value : WebhookHeader::from($value)) : null, $headers) : null;
 
         $this->fields['headers'] = $headers;
 

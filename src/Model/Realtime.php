@@ -40,8 +40,8 @@ class Realtime extends GatewayAccount
 
     public function setCredentials(RealtimeCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\RealtimeCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\RealtimeCredentials::from($credentials);
+        if (!($credentials instanceof RealtimeCredentials)) {
+            $credentials = RealtimeCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

@@ -40,8 +40,8 @@ class SeamlessChex extends GatewayAccount
 
     public function setCredentials(SeamlessChexCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\SeamlessChexCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\SeamlessChexCredentials::from($credentials);
+        if (!($credentials instanceof SeamlessChexCredentials)) {
+            $credentials = SeamlessChexCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

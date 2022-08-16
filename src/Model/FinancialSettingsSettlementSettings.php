@@ -66,7 +66,7 @@ class FinancialSettingsSettlementSettings implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\FinancialSettingsSettlementSettingsAdvancedSettings[]
+     * @return null|FinancialSettingsSettlementSettingsAdvancedSettings[]
      */
     public function getAdvancedSettings(): ?array
     {
@@ -74,11 +74,11 @@ class FinancialSettingsSettlementSettings implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\FinancialSettingsSettlementSettingsAdvancedSettings[] $advancedSettings
+     * @param null|FinancialSettingsSettlementSettingsAdvancedSettings[] $advancedSettings
      */
     public function setAdvancedSettings(null|array $advancedSettings): self
     {
-        $advancedSettings = $advancedSettings !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\FinancialSettingsSettlementSettingsAdvancedSettings ? $value : \Rebilly\Sdk\Model\FinancialSettingsSettlementSettingsAdvancedSettings::from($value)) : null, $advancedSettings) : null;
+        $advancedSettings = $advancedSettings !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof FinancialSettingsSettlementSettingsAdvancedSettings ? $value : FinancialSettingsSettlementSettingsAdvancedSettings::from($value)) : null, $advancedSettings) : null;
 
         $this->fields['advancedSettings'] = $advancedSettings;
 

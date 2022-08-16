@@ -49,7 +49,7 @@ class ScheduleInvoiceRetry extends RuleAction
     }
 
     /**
-     * @return \Rebilly\Sdk\Model\InvoiceRetryInstructionAttempts[]
+     * @return InvoiceRetryInstructionAttempts[]
      */
     public function getAttempts(): array
     {
@@ -57,11 +57,11 @@ class ScheduleInvoiceRetry extends RuleAction
     }
 
     /**
-     * @param \Rebilly\Sdk\Model\InvoiceRetryInstructionAttempts[] $attempts
+     * @param InvoiceRetryInstructionAttempts[] $attempts
      */
     public function setAttempts(array $attempts): self
     {
-        $attempts = array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\InvoiceRetryInstructionAttempts ? $value : \Rebilly\Sdk\Model\InvoiceRetryInstructionAttempts::from($value)) : null, $attempts);
+        $attempts = array_map(fn ($value) => $value !== null ? ($value instanceof InvoiceRetryInstructionAttempts ? $value : InvoiceRetryInstructionAttempts::from($value)) : null, $attempts);
 
         $this->fields['attempts'] = $attempts;
 

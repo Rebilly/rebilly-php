@@ -40,8 +40,8 @@ class EzyEFT extends GatewayAccount
 
     public function setCredentials(EzyEFTCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\EzyEFTCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\EzyEFTCredentials::from($credentials);
+        if (!($credentials instanceof EzyEFTCredentials)) {
+            $credentials = EzyEFTCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

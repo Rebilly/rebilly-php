@@ -32,7 +32,7 @@ class ChildTransactionsEmbed implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\Transaction[]
+     * @return null|Transaction[]
      */
     public function getChildTransactions(): ?array
     {
@@ -40,11 +40,11 @@ class ChildTransactionsEmbed implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\Transaction[] $childTransactions
+     * @param null|Transaction[] $childTransactions
      */
     public function setChildTransactions(null|array $childTransactions): self
     {
-        $childTransactions = $childTransactions !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\Transaction ? $value : \Rebilly\Sdk\Model\Transaction::from($value)) : null, $childTransactions) : null;
+        $childTransactions = $childTransactions !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Transaction ? $value : Transaction::from($value)) : null, $childTransactions) : null;
 
         $this->fields['childTransactions'] = $childTransactions;
 

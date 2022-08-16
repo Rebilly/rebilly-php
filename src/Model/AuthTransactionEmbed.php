@@ -38,8 +38,8 @@ class AuthTransactionEmbed implements JsonSerializable
 
     public function setAuthTransaction(null|Transaction|array $authTransaction): self
     {
-        if ($authTransaction !== null && !($authTransaction instanceof \Rebilly\Sdk\Model\Transaction)) {
-            $authTransaction = \Rebilly\Sdk\Model\Transaction::from($authTransaction);
+        if ($authTransaction !== null && !($authTransaction instanceof Transaction)) {
+            $authTransaction = Transaction::from($authTransaction);
         }
 
         $this->fields['authTransaction'] = $authTransaction;

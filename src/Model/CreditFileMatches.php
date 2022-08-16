@@ -97,7 +97,7 @@ class CreditFileMatches implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\CreditFileMatchesTrades[]
+     * @return null|CreditFileMatchesTrades[]
      */
     public function getTrades(): ?array
     {
@@ -183,11 +183,11 @@ class CreditFileMatches implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\CreditFileMatchesTrades[] $trades
+     * @param null|CreditFileMatchesTrades[] $trades
      */
     private function setTrades(null|array $trades): self
     {
-        $trades = $trades !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\CreditFileMatchesTrades ? $value : \Rebilly\Sdk\Model\CreditFileMatchesTrades::from($value)) : null, $trades) : null;
+        $trades = $trades !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof CreditFileMatchesTrades ? $value : CreditFileMatchesTrades::from($value)) : null, $trades) : null;
 
         $this->fields['trades'] = $trades;
 

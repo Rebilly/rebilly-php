@@ -40,8 +40,8 @@ class INOVAPAY extends GatewayAccount
 
     public function setCredentials(INOVAPAYCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\INOVAPAYCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\INOVAPAYCredentials::from($credentials);
+        if (!($credentials instanceof INOVAPAYCredentials)) {
+            $credentials = INOVAPAYCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

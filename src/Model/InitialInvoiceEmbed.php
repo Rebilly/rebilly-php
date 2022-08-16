@@ -38,8 +38,8 @@ class InitialInvoiceEmbed implements JsonSerializable
 
     public function setInitialInvoice(null|Invoice|array $initialInvoice): self
     {
-        if ($initialInvoice !== null && !($initialInvoice instanceof \Rebilly\Sdk\Model\Invoice)) {
-            $initialInvoice = \Rebilly\Sdk\Model\Invoice::from($initialInvoice);
+        if ($initialInvoice !== null && !($initialInvoice instanceof Invoice)) {
+            $initialInvoice = Invoice::from($initialInvoice);
         }
 
         $this->fields['initialInvoice'] = $initialInvoice;

@@ -40,8 +40,8 @@ class SMSVoucher extends GatewayAccount
 
     public function setCredentials(SMSVoucherCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\SMSVoucherCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\SMSVoucherCredentials::from($credentials);
+        if (!($credentials instanceof SMSVoucherCredentials)) {
+            $credentials = SMSVoucherCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

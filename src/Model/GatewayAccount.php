@@ -525,8 +525,8 @@ abstract class GatewayAccount implements JsonSerializable
 
     public function setMethod(PaymentMethod|string $method): self
     {
-        if (!($method instanceof \Rebilly\Sdk\Model\PaymentMethod)) {
-            $method = \Rebilly\Sdk\Model\PaymentMethod::from($method);
+        if (!($method instanceof PaymentMethod)) {
+            $method = PaymentMethod::from($method);
         }
 
         $this->fields['method'] = $method;
@@ -555,7 +555,7 @@ abstract class GatewayAccount implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\PaymentCardBrand[]
+     * @return null|PaymentCardBrand[]
      */
     public function getPaymentCardSchemes(): ?array
     {
@@ -563,11 +563,11 @@ abstract class GatewayAccount implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\PaymentCardBrand[] $paymentCardSchemes
+     * @param null|PaymentCardBrand[] $paymentCardSchemes
      */
     public function setPaymentCardSchemes(null|array $paymentCardSchemes): self
     {
-        $paymentCardSchemes = $paymentCardSchemes !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\PaymentCardBrand ? $value : \Rebilly\Sdk\Model\PaymentCardBrand::from($value)) : null, $paymentCardSchemes) : null;
+        $paymentCardSchemes = $paymentCardSchemes !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof PaymentCardBrand ? $value : PaymentCardBrand::from($value)) : null, $paymentCardSchemes) : null;
 
         $this->fields['paymentCardSchemes'] = $paymentCardSchemes;
 
@@ -745,8 +745,8 @@ abstract class GatewayAccount implements JsonSerializable
 
     public function setDigitalWallets(null|DigitalWallets|array $digitalWallets): self
     {
-        if ($digitalWallets !== null && !($digitalWallets instanceof \Rebilly\Sdk\Model\DigitalWallets)) {
-            $digitalWallets = \Rebilly\Sdk\Model\DigitalWallets::from($digitalWallets);
+        if ($digitalWallets !== null && !($digitalWallets instanceof DigitalWallets)) {
+            $digitalWallets = DigitalWallets::from($digitalWallets);
         }
 
         $this->fields['digitalWallets'] = $digitalWallets;
@@ -845,7 +845,7 @@ abstract class GatewayAccount implements JsonSerializable
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\DynamicIpnLink|\Rebilly\Sdk\Model\OnBoardingUrlLink|\Rebilly\Sdk\Model\SelfLink|\Rebilly\Sdk\Model\StaticIpnLink>
+     * @return null|array<DynamicIpnLink|OnBoardingUrlLink|SelfLink|StaticIpnLink>
      */
     public function getLinks(): ?array
     {
@@ -958,8 +958,8 @@ abstract class GatewayAccount implements JsonSerializable
 
     private function setGatewayName(GatewayName|string $gatewayName): self
     {
-        if (!($gatewayName instanceof \Rebilly\Sdk\Model\GatewayName)) {
-            $gatewayName = \Rebilly\Sdk\Model\GatewayName::from($gatewayName);
+        if (!($gatewayName instanceof GatewayName)) {
+            $gatewayName = GatewayName::from($gatewayName);
         }
 
         $this->fields['gatewayName'] = $gatewayName;
@@ -1010,7 +1010,7 @@ abstract class GatewayAccount implements JsonSerializable
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\DynamicIpnLink|\Rebilly\Sdk\Model\OnBoardingUrlLink|\Rebilly\Sdk\Model\SelfLink|\Rebilly\Sdk\Model\StaticIpnLink> $links
+     * @param null|array<DynamicIpnLink|OnBoardingUrlLink|SelfLink|StaticIpnLink> $links
      */
     private function setLinks(null|array $links): self
     {

@@ -40,8 +40,8 @@ class Wallet88 extends GatewayAccount
 
     public function setCredentials(Wallet88Credentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\Wallet88Credentials)) {
-            $credentials = \Rebilly\Sdk\Model\Wallet88Credentials::from($credentials);
+        if (!($credentials instanceof Wallet88Credentials)) {
+            $credentials = Wallet88Credentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

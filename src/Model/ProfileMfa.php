@@ -103,7 +103,7 @@ class ProfileMfa implements JsonSerializable
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\EnrollmentLink|\Rebilly\Sdk\Model\SelfLink>
+     * @return null|array<EnrollmentLink|SelfLink>
      */
     public function getLinks(): ?array
     {
@@ -130,7 +130,7 @@ class ProfileMfa implements JsonSerializable
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\EnrollmentLink|\Rebilly\Sdk\Model\SelfLink> $links
+     * @param null|array<EnrollmentLink|SelfLink> $links
      */
     private function setLinks(null|array $links): self
     {

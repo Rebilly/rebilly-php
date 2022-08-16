@@ -43,8 +43,8 @@ class CashToCode extends GatewayAccount
 
     public function setCredentials(CashToCodeCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\CashToCodeCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\CashToCodeCredentials::from($credentials);
+        if (!($credentials instanceof CashToCodeCredentials)) {
+            $credentials = CashToCodeCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class CashToCode extends GatewayAccount
 
     public function setSettings(null|CashToCodeSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\CashToCodeSettings)) {
-            $settings = \Rebilly\Sdk\Model\CashToCodeSettings::from($settings);
+        if ($settings !== null && !($settings instanceof CashToCodeSettings)) {
+            $settings = CashToCodeSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

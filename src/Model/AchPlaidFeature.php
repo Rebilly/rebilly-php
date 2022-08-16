@@ -46,8 +46,8 @@ class AchPlaidFeature implements JsonSerializable
 
     public function setName(null|PlaidFeatureName|string $name): self
     {
-        if ($name !== null && !($name instanceof \Rebilly\Sdk\Model\PlaidFeatureName)) {
-            $name = \Rebilly\Sdk\Model\PlaidFeatureName::from($name);
+        if ($name !== null && !($name instanceof PlaidFeatureName)) {
+            $name = PlaidFeatureName::from($name);
         }
 
         $this->fields['name'] = $name;

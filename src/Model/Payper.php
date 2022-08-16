@@ -40,8 +40,8 @@ class Payper extends GatewayAccount
 
     public function setCredentials(PayperCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\PayperCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\PayperCredentials::from($credentials);
+        if (!($credentials instanceof PayperCredentials)) {
+            $credentials = PayperCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

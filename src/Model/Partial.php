@@ -113,14 +113,14 @@ class Partial extends AmountAdjustment
     {
         if (
             $data === null
-            || $data instanceof \Rebilly\Sdk\Model\DiscountAmountRemaining
-            || $data instanceof \Rebilly\Sdk\Model\None
+            || $data instanceof DiscountAmountRemaining
+            || $data instanceof None
         ) {
             return $data;
         }
         $candidates = [];
-        $candidates[] = \Rebilly\Sdk\Model\DiscountAmountRemaining::tryFrom($data);
-        $candidates[] = \Rebilly\Sdk\Model\None::tryFrom($data);
+        $candidates[] = DiscountAmountRemaining::tryFrom($data);
+        $candidates[] = None::tryFrom($data);
 
         $determined = array_reduce($candidates, function (?array $current, array $candidate) {
             if ($current === null || $current[1] < $candidate[1]) {
@@ -132,8 +132,8 @@ class Partial extends AmountAdjustment
 
         if (
             $determined[0] === null
-            || $determined[0] instanceof \Rebilly\Sdk\Model\DiscountAmountRemaining
-            || $determined[0] instanceof \Rebilly\Sdk\Model\None
+            || $determined[0] instanceof DiscountAmountRemaining
+            || $determined[0] instanceof None
         ) {
             return $determined[0];
         }

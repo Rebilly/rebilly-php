@@ -38,8 +38,8 @@ class FileEmbed implements JsonSerializable
 
     public function setFile(null|File|array $file): self
     {
-        if ($file !== null && !($file instanceof \Rebilly\Sdk\Model\File)) {
-            $file = \Rebilly\Sdk\Model\File::from($file);
+        if ($file !== null && !($file instanceof File)) {
+            $file = File::from($file);
         }
 
         $this->fields['file'] = $file;

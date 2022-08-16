@@ -40,8 +40,8 @@ class Khelocard extends GatewayAccount
 
     public function setCredentials(KhelocardCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\KhelocardCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\KhelocardCredentials::from($credentials);
+        if (!($credentials instanceof KhelocardCredentials)) {
+            $credentials = KhelocardCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

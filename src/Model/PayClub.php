@@ -43,8 +43,8 @@ class PayClub extends GatewayAccount
 
     public function setCredentials(PayClubCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\PayClubCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\PayClubCredentials::from($credentials);
+        if (!($credentials instanceof PayClubCredentials)) {
+            $credentials = PayClubCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class PayClub extends GatewayAccount
 
     public function setSettings(null|PayClubSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\PayClubSettings)) {
-            $settings = \Rebilly\Sdk\Model\PayClubSettings::from($settings);
+        if ($settings !== null && !($settings instanceof PayClubSettings)) {
+            $settings = PayClubSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

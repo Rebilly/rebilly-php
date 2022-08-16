@@ -32,7 +32,7 @@ class JuniorRolesEmbed implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\Role[]
+     * @return null|Role[]
      */
     public function getJuniors(): ?array
     {
@@ -40,11 +40,11 @@ class JuniorRolesEmbed implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\Role[] $juniors
+     * @param null|Role[] $juniors
      */
     public function setJuniors(null|array $juniors): self
     {
-        $juniors = $juniors !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\Role ? $value : \Rebilly\Sdk\Model\Role::from($value)) : null, $juniors) : null;
+        $juniors = $juniors !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Role ? $value : Role::from($value)) : null, $juniors) : null;
 
         $this->fields['juniors'] = $juniors;
 

@@ -40,8 +40,8 @@ class Cayan extends GatewayAccount
 
     public function setCredentials(CayanCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\CayanCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\CayanCredentials::from($credentials);
+        if (!($credentials instanceof CayanCredentials)) {
+            $credentials = CayanCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

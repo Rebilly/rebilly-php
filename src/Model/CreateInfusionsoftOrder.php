@@ -46,8 +46,8 @@ class CreateInfusionsoftOrder extends RuleAction
 
     public function setContactBody(CreateContactBody|array $contactBody): self
     {
-        if (!($contactBody instanceof \Rebilly\Sdk\Model\CreateContactBody)) {
-            $contactBody = \Rebilly\Sdk\Model\CreateContactBody::from($contactBody);
+        if (!($contactBody instanceof CreateContactBody)) {
+            $contactBody = CreateContactBody::from($contactBody);
         }
 
         $this->fields['contactBody'] = $contactBody;
@@ -62,8 +62,8 @@ class CreateInfusionsoftOrder extends RuleAction
 
     public function setOrderBody(CreateOrderBody|array $orderBody): self
     {
-        if (!($orderBody instanceof \Rebilly\Sdk\Model\CreateOrderBody)) {
-            $orderBody = \Rebilly\Sdk\Model\CreateOrderBody::from($orderBody);
+        if (!($orderBody instanceof CreateOrderBody)) {
+            $orderBody = CreateOrderBody::from($orderBody);
         }
 
         $this->fields['orderBody'] = $orderBody;

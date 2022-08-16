@@ -41,8 +41,8 @@ class InvoiceTimeShift implements JsonSerializable
 
     public function setIssueTimeShift(null|IssueTimeShiftInstruction|array $issueTimeShift): self
     {
-        if ($issueTimeShift !== null && !($issueTimeShift instanceof \Rebilly\Sdk\Model\IssueTimeShiftInstruction)) {
-            $issueTimeShift = \Rebilly\Sdk\Model\IssueTimeShiftInstruction::from($issueTimeShift);
+        if ($issueTimeShift !== null && !($issueTimeShift instanceof IssueTimeShiftInstruction)) {
+            $issueTimeShift = IssueTimeShiftInstruction::from($issueTimeShift);
         }
 
         $this->fields['issueTimeShift'] = $issueTimeShift;
@@ -57,8 +57,8 @@ class InvoiceTimeShift implements JsonSerializable
 
     public function setDueTimeShift(null|DueTimeShiftInstruction|array $dueTimeShift): self
     {
-        if ($dueTimeShift !== null && !($dueTimeShift instanceof \Rebilly\Sdk\Model\DueTimeShiftInstruction)) {
-            $dueTimeShift = \Rebilly\Sdk\Model\DueTimeShiftInstruction::from($dueTimeShift);
+        if ($dueTimeShift !== null && !($dueTimeShift instanceof DueTimeShiftInstruction)) {
+            $dueTimeShift = DueTimeShiftInstruction::from($dueTimeShift);
         }
 
         $this->fields['dueTimeShift'] = $dueTimeShift;

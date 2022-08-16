@@ -43,8 +43,8 @@ class Rotessa extends GatewayAccount
 
     public function setCredentials(RotessaCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\RotessaCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\RotessaCredentials::from($credentials);
+        if (!($credentials instanceof RotessaCredentials)) {
+            $credentials = RotessaCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class Rotessa extends GatewayAccount
 
     public function setSettings(RotessaSettings|array $settings): self
     {
-        if (!($settings instanceof \Rebilly\Sdk\Model\RotessaSettings)) {
-            $settings = \Rebilly\Sdk\Model\RotessaSettings::from($settings);
+        if (!($settings instanceof RotessaSettings)) {
+            $settings = RotessaSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

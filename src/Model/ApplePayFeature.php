@@ -57,8 +57,8 @@ class ApplePayFeature implements JsonSerializable
 
     public function setName(null|ApplePayFeatureName|string $name): self
     {
-        if ($name !== null && !($name instanceof \Rebilly\Sdk\Model\ApplePayFeatureName)) {
-            $name = \Rebilly\Sdk\Model\ApplePayFeatureName::from($name);
+        if ($name !== null && !($name instanceof ApplePayFeatureName)) {
+            $name = ApplePayFeatureName::from($name);
         }
 
         $this->fields['name'] = $name;
@@ -85,8 +85,8 @@ class ApplePayFeature implements JsonSerializable
 
     public function setCountry(null|DigitalWalletCountry|array $country): self
     {
-        if ($country !== null && !($country instanceof \Rebilly\Sdk\Model\DigitalWalletCountry)) {
-            $country = \Rebilly\Sdk\Model\DigitalWalletCountry::from($country);
+        if ($country !== null && !($country instanceof DigitalWalletCountry)) {
+            $country = DigitalWalletCountry::from($country);
         }
 
         $this->fields['country'] = $country;

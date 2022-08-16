@@ -109,8 +109,8 @@ class WebhookCredential implements JsonSerializable
 
     public function setAuth(null|WebhookAuthorization|array $auth): self
     {
-        if ($auth !== null && !($auth instanceof \Rebilly\Sdk\Model\WebhookAuthorization)) {
-            $auth = \Rebilly\Sdk\Model\WebhookAuthorization::from($auth);
+        if ($auth !== null && !($auth instanceof WebhookAuthorization)) {
+            $auth = WebhookAuthorization::from($auth);
         }
 
         $this->fields['auth'] = $auth;

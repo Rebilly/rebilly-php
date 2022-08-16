@@ -38,8 +38,8 @@ class UpcomingInvoiceEmbed implements JsonSerializable
 
     public function setUpcomingInvoice(null|Invoice|array $upcomingInvoice): self
     {
-        if ($upcomingInvoice !== null && !($upcomingInvoice instanceof \Rebilly\Sdk\Model\Invoice)) {
-            $upcomingInvoice = \Rebilly\Sdk\Model\Invoice::from($upcomingInvoice);
+        if ($upcomingInvoice !== null && !($upcomingInvoice instanceof Invoice)) {
+            $upcomingInvoice = Invoice::from($upcomingInvoice);
         }
 
         $this->fields['upcomingInvoice'] = $upcomingInvoice;

@@ -53,7 +53,7 @@ class SubscriptionChange implements JsonSerializable
     }
 
     /**
-     * @return \Rebilly\Sdk\Model\SubscriptionChangeItems[]
+     * @return SubscriptionChangeItems[]
      */
     public function getItems(): array
     {
@@ -61,11 +61,11 @@ class SubscriptionChange implements JsonSerializable
     }
 
     /**
-     * @param \Rebilly\Sdk\Model\SubscriptionChangeItems[] $items
+     * @param SubscriptionChangeItems[] $items
      */
     public function setItems(array $items): self
     {
-        $items = array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\SubscriptionChangeItems ? $value : \Rebilly\Sdk\Model\SubscriptionChangeItems::from($value)) : null, $items);
+        $items = array_map(fn ($value) => $value !== null ? ($value instanceof SubscriptionChangeItems ? $value : SubscriptionChangeItems::from($value)) : null, $items);
 
         $this->fields['items'] = $items;
 

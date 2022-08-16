@@ -40,8 +40,8 @@ class MyFatoorah extends GatewayAccount
 
     public function setCredentials(MyFatoorahCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\MyFatoorahCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\MyFatoorahCredentials::from($credentials);
+        if (!($credentials instanceof MyFatoorahCredentials)) {
+            $credentials = MyFatoorahCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

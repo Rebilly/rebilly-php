@@ -38,8 +38,8 @@ class ProductEmbed implements JsonSerializable
 
     public function setProduct(null|Product|array $product): self
     {
-        if ($product !== null && !($product instanceof \Rebilly\Sdk\Model\Product)) {
-            $product = \Rebilly\Sdk\Model\Product::from($product);
+        if ($product !== null && !($product instanceof Product)) {
+            $product = Product::from($product);
         }
 
         $this->fields['product'] = $product;

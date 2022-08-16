@@ -34,7 +34,7 @@ class GatewayAcquirerWeights extends GatewayAccountPickInstruction
     }
 
     /**
-     * @return \Rebilly\Sdk\Model\GatewayWeightedList[]
+     * @return GatewayWeightedList[]
      */
     public function getWeightedList(): array
     {
@@ -42,11 +42,11 @@ class GatewayAcquirerWeights extends GatewayAccountPickInstruction
     }
 
     /**
-     * @param \Rebilly\Sdk\Model\GatewayWeightedList[] $weightedList
+     * @param GatewayWeightedList[] $weightedList
      */
     public function setWeightedList(array $weightedList): self
     {
-        $weightedList = array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\GatewayWeightedList ? $value : \Rebilly\Sdk\Model\GatewayWeightedList::from($value)) : null, $weightedList);
+        $weightedList = array_map(fn ($value) => $value !== null ? ($value instanceof GatewayWeightedList ? $value : GatewayWeightedList::from($value)) : null, $weightedList);
 
         $this->fields['weightedList'] = $weightedList;
 

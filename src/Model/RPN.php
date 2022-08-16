@@ -40,8 +40,8 @@ class RPN extends GatewayAccount
 
     public function setCredentials(RPNCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\RPNCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\RPNCredentials::from($credentials);
+        if (!($credentials instanceof RPNCredentials)) {
+            $credentials = RPNCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

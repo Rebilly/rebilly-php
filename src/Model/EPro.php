@@ -40,8 +40,8 @@ class EPro extends GatewayAccount
 
     public function setCredentials(EProCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\EProCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\EProCredentials::from($credentials);
+        if (!($credentials instanceof EProCredentials)) {
+            $credentials = EProCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

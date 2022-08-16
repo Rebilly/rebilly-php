@@ -35,7 +35,7 @@ class BalanceTransactionLinks implements JsonSerializable
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\ParentLink|\Rebilly\Sdk\Model\SelfLink|\Rebilly\Sdk\Model\TransactionLink>
+     * @return null|array<ParentLink|SelfLink|TransactionLink>
      */
     public function getLinks(): ?array
     {
@@ -43,7 +43,7 @@ class BalanceTransactionLinks implements JsonSerializable
     }
 
     /**
-     * @return null|array{transaction:\Rebilly\Sdk\Model\BalanceTransaction,transaction:\Rebilly\Sdk\Model\Transaction}
+     * @return null|array{transaction:BalanceTransaction,transaction:Transaction}
      */
     public function getEmbedded(): ?array
     {
@@ -64,7 +64,7 @@ class BalanceTransactionLinks implements JsonSerializable
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\ParentLink|\Rebilly\Sdk\Model\SelfLink|\Rebilly\Sdk\Model\TransactionLink> $links
+     * @param null|array<ParentLink|SelfLink|TransactionLink> $links
      */
     private function setLinks(null|array $links): self
     {
@@ -76,12 +76,12 @@ class BalanceTransactionLinks implements JsonSerializable
     }
 
     /**
-     * @param null|array{transaction:\Rebilly\Sdk\Model\BalanceTransaction,transaction:\Rebilly\Sdk\Model\Transaction} $embedded
+     * @param null|array{transaction:BalanceTransaction,transaction:Transaction} $embedded
      */
     private function setEmbedded(null|array $embedded): self
     {
-        $embedded['transaction'] = isset($embedded['transaction']) ? ($embedded['transaction'] instanceof \Rebilly\Sdk\Model\BalanceTransaction ? $embedded['transaction'] : \Rebilly\Sdk\Model\BalanceTransaction::from($embedded['transaction'])) : null;
-        $embedded['transaction'] = isset($embedded['transaction']) ? ($embedded['transaction'] instanceof \Rebilly\Sdk\Model\Transaction ? $embedded['transaction'] : \Rebilly\Sdk\Model\Transaction::from($embedded['transaction'])) : null;
+        $embedded['transaction'] = isset($embedded['transaction']) ? ($embedded['transaction'] instanceof BalanceTransaction ? $embedded['transaction'] : BalanceTransaction::from($embedded['transaction'])) : null;
+        $embedded['transaction'] = isset($embedded['transaction']) ? ($embedded['transaction'] instanceof Transaction ? $embedded['transaction'] : Transaction::from($embedded['transaction'])) : null;
 
         $this->fields['_embedded'] = $embedded;
 

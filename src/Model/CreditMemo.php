@@ -142,7 +142,7 @@ class CreditMemo implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\CreditMemoItems[]
+     * @return null|CreditMemoItems[]
      */
     public function getItems(): ?array
     {
@@ -150,11 +150,11 @@ class CreditMemo implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\CreditMemoItems[] $items
+     * @param null|CreditMemoItems[] $items
      */
     public function setItems(null|array $items): self
     {
-        $items = $items !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\CreditMemoItems ? $value : \Rebilly\Sdk\Model\CreditMemoItems::from($value)) : null, $items) : null;
+        $items = $items !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof CreditMemoItems ? $value : CreditMemoItems::from($value)) : null, $items) : null;
 
         $this->fields['items'] = $items;
 
@@ -280,7 +280,7 @@ class CreditMemo implements JsonSerializable
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\CustomerLink|\Rebilly\Sdk\Model\InvoiceLink|\Rebilly\Sdk\Model\SelfLink>
+     * @return null|array<CustomerLink|InvoiceLink|SelfLink>
      */
     public function getLinks(): ?array
     {
@@ -410,7 +410,7 @@ class CreditMemo implements JsonSerializable
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\CustomerLink|\Rebilly\Sdk\Model\InvoiceLink|\Rebilly\Sdk\Model\SelfLink> $links
+     * @param null|array<CustomerLink|InvoiceLink|SelfLink> $links
      */
     private function setLinks(null|array $links): self
     {

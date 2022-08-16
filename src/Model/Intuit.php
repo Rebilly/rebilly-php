@@ -40,8 +40,8 @@ class Intuit extends GatewayAccount
 
     public function setCredentials(IntuitCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\IntuitCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\IntuitCredentials::from($credentials);
+        if (!($credentials instanceof IntuitCredentials)) {
+            $credentials = IntuitCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

@@ -46,8 +46,8 @@ class CheckoutCom extends GatewayAccount
 
     public function setCredentials(CheckoutComCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\CheckoutComCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\CheckoutComCredentials::from($credentials);
+        if (!($credentials instanceof CheckoutComCredentials)) {
+            $credentials = CheckoutComCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -62,8 +62,8 @@ class CheckoutCom extends GatewayAccount
 
     public function setSettings(null|CheckoutComSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\CheckoutComSettings)) {
-            $settings = \Rebilly\Sdk\Model\CheckoutComSettings::from($settings);
+        if ($settings !== null && !($settings instanceof CheckoutComSettings)) {
+            $settings = CheckoutComSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;
@@ -78,8 +78,8 @@ class CheckoutCom extends GatewayAccount
 
     public function setThreeDSecureServer(null|CheckoutCom3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\CheckoutCom3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\CheckoutCom3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof CheckoutCom3dsServers)) {
+            $threeDSecureServer = CheckoutCom3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

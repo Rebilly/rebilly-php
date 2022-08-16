@@ -43,8 +43,8 @@ class Prosa extends GatewayAccount
 
     public function setCredentials(ProsaCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\ProsaCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\ProsaCredentials::from($credentials);
+        if (!($credentials instanceof ProsaCredentials)) {
+            $credentials = ProsaCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class Prosa extends GatewayAccount
 
     public function setThreeDSecureServer(null|Prosa3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\Prosa3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\Prosa3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Prosa3dsServers)) {
+            $threeDSecureServer = Prosa3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

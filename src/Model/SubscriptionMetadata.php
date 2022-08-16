@@ -117,7 +117,7 @@ class SubscriptionMetadata implements JsonSerializable
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\ApprovalUrlLink|\Rebilly\Sdk\Model\CustomerLink|\Rebilly\Sdk\Model\InitialInvoiceLink|\Rebilly\Sdk\Model\RecentInvoiceLink|\Rebilly\Sdk\Model\SelfLink|\Rebilly\Sdk\Model\WebsiteLink>
+     * @return null|array<ApprovalUrlLink|CustomerLink|InitialInvoiceLink|RecentInvoiceLink|SelfLink|WebsiteLink>
      */
     public function getLinks(): ?array
     {
@@ -125,7 +125,7 @@ class SubscriptionMetadata implements JsonSerializable
     }
 
     /**
-     * @return null|array{recentInvoice:\Rebilly\Sdk\Model\Invoice,initialInvoice:\Rebilly\Sdk\Model\Invoice,customer:\Rebilly\Sdk\Model\Customer,website:\Rebilly\Sdk\Model\Website,leadSource:\Rebilly\Sdk\Model\LeadSource,shippingRate:\Rebilly\Sdk\Model\ShippingRate,paymentInstrument:\Rebilly\Sdk\Model\PaymentInstrument,upcomingInvoice:\Rebilly\Sdk\Model\Invoice}
+     * @return null|array{recentInvoice:Invoice,initialInvoice:Invoice,customer:Customer,website:Website,leadSource:LeadSource,shippingRate:ShippingRate,paymentInstrument:PaymentInstrument,upcomingInvoice:Invoice}
      */
     public function getEmbedded(): ?array
     {
@@ -168,7 +168,7 @@ class SubscriptionMetadata implements JsonSerializable
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\ApprovalUrlLink|\Rebilly\Sdk\Model\CustomerLink|\Rebilly\Sdk\Model\InitialInvoiceLink|\Rebilly\Sdk\Model\RecentInvoiceLink|\Rebilly\Sdk\Model\SelfLink|\Rebilly\Sdk\Model\WebsiteLink> $links
+     * @param null|array<ApprovalUrlLink|CustomerLink|InitialInvoiceLink|RecentInvoiceLink|SelfLink|WebsiteLink> $links
      */
     private function setLinks(null|array $links): self
     {
@@ -180,18 +180,18 @@ class SubscriptionMetadata implements JsonSerializable
     }
 
     /**
-     * @param null|array{recentInvoice:\Rebilly\Sdk\Model\Invoice,initialInvoice:\Rebilly\Sdk\Model\Invoice,customer:\Rebilly\Sdk\Model\Customer,website:\Rebilly\Sdk\Model\Website,leadSource:\Rebilly\Sdk\Model\LeadSource,shippingRate:\Rebilly\Sdk\Model\ShippingRate,paymentInstrument:\Rebilly\Sdk\Model\PaymentInstrument,upcomingInvoice:\Rebilly\Sdk\Model\Invoice} $embedded
+     * @param null|array{recentInvoice:Invoice,initialInvoice:Invoice,customer:Customer,website:Website,leadSource:LeadSource,shippingRate:ShippingRate,paymentInstrument:PaymentInstrument,upcomingInvoice:Invoice} $embedded
      */
     private function setEmbedded(null|array $embedded): self
     {
-        $embedded['recentInvoice'] = isset($embedded['recentInvoice']) ? ($embedded['recentInvoice'] instanceof \Rebilly\Sdk\Model\Invoice ? $embedded['recentInvoice'] : \Rebilly\Sdk\Model\Invoice::from($embedded['recentInvoice'])) : null;
-        $embedded['initialInvoice'] = isset($embedded['initialInvoice']) ? ($embedded['initialInvoice'] instanceof \Rebilly\Sdk\Model\Invoice ? $embedded['initialInvoice'] : \Rebilly\Sdk\Model\Invoice::from($embedded['initialInvoice'])) : null;
-        $embedded['customer'] = isset($embedded['customer']) ? ($embedded['customer'] instanceof \Rebilly\Sdk\Model\Customer ? $embedded['customer'] : \Rebilly\Sdk\Model\Customer::from($embedded['customer'])) : null;
-        $embedded['website'] = isset($embedded['website']) ? ($embedded['website'] instanceof \Rebilly\Sdk\Model\Website ? $embedded['website'] : \Rebilly\Sdk\Model\Website::from($embedded['website'])) : null;
-        $embedded['leadSource'] = isset($embedded['leadSource']) ? ($embedded['leadSource'] instanceof \Rebilly\Sdk\Model\LeadSource ? $embedded['leadSource'] : \Rebilly\Sdk\Model\LeadSource::from($embedded['leadSource'])) : null;
-        $embedded['shippingRate'] = isset($embedded['shippingRate']) ? ($embedded['shippingRate'] instanceof \Rebilly\Sdk\Model\ShippingRate ? $embedded['shippingRate'] : \Rebilly\Sdk\Model\ShippingRate::from($embedded['shippingRate'])) : null;
-        $embedded['paymentInstrument'] = isset($embedded['paymentInstrument']) ? ($embedded['paymentInstrument'] instanceof \Rebilly\Sdk\Model\PaymentInstrument ? $embedded['paymentInstrument'] : \Rebilly\Sdk\Model\PaymentInstrument::from($embedded['paymentInstrument'])) : null;
-        $embedded['upcomingInvoice'] = isset($embedded['upcomingInvoice']) ? ($embedded['upcomingInvoice'] instanceof \Rebilly\Sdk\Model\Invoice ? $embedded['upcomingInvoice'] : \Rebilly\Sdk\Model\Invoice::from($embedded['upcomingInvoice'])) : null;
+        $embedded['recentInvoice'] = isset($embedded['recentInvoice']) ? ($embedded['recentInvoice'] instanceof Invoice ? $embedded['recentInvoice'] : Invoice::from($embedded['recentInvoice'])) : null;
+        $embedded['initialInvoice'] = isset($embedded['initialInvoice']) ? ($embedded['initialInvoice'] instanceof Invoice ? $embedded['initialInvoice'] : Invoice::from($embedded['initialInvoice'])) : null;
+        $embedded['customer'] = isset($embedded['customer']) ? ($embedded['customer'] instanceof Customer ? $embedded['customer'] : Customer::from($embedded['customer'])) : null;
+        $embedded['website'] = isset($embedded['website']) ? ($embedded['website'] instanceof Website ? $embedded['website'] : Website::from($embedded['website'])) : null;
+        $embedded['leadSource'] = isset($embedded['leadSource']) ? ($embedded['leadSource'] instanceof LeadSource ? $embedded['leadSource'] : LeadSource::from($embedded['leadSource'])) : null;
+        $embedded['shippingRate'] = isset($embedded['shippingRate']) ? ($embedded['shippingRate'] instanceof ShippingRate ? $embedded['shippingRate'] : ShippingRate::from($embedded['shippingRate'])) : null;
+        $embedded['paymentInstrument'] = isset($embedded['paymentInstrument']) ? ($embedded['paymentInstrument'] instanceof PaymentInstrument ? $embedded['paymentInstrument'] : PaymentInstrument::from($embedded['paymentInstrument'])) : null;
+        $embedded['upcomingInvoice'] = isset($embedded['upcomingInvoice']) ? ($embedded['upcomingInvoice'] instanceof Invoice ? $embedded['upcomingInvoice'] : Invoice::from($embedded['upcomingInvoice'])) : null;
 
         $this->fields['_embedded'] = $embedded;
 

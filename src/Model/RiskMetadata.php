@@ -167,8 +167,8 @@ class RiskMetadata implements JsonSerializable
 
     public function setBrowserData(null|BrowserData|array $browserData): self
     {
-        if ($browserData !== null && !($browserData instanceof \Rebilly\Sdk\Model\BrowserData)) {
-            $browserData = \Rebilly\Sdk\Model\BrowserData::from($browserData);
+        if ($browserData !== null && !($browserData instanceof BrowserData)) {
+            $browserData = BrowserData::from($browserData);
         }
 
         $this->fields['browserData'] = $browserData;
@@ -183,8 +183,8 @@ class RiskMetadata implements JsonSerializable
 
     public function setExtraData(null|ExtraData|array $extraData): self
     {
-        if ($extraData !== null && !($extraData instanceof \Rebilly\Sdk\Model\ExtraData)) {
-            $extraData = \Rebilly\Sdk\Model\ExtraData::from($extraData);
+        if ($extraData !== null && !($extraData instanceof ExtraData)) {
+            $extraData = ExtraData::from($extraData);
         }
 
         $this->fields['extraData'] = $extraData;

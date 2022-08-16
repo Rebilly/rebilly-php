@@ -40,8 +40,8 @@ class Payflow extends GatewayAccount
 
     public function setCredentials(PayflowCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\PayflowCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\PayflowCredentials::from($credentials);
+        if (!($credentials instanceof PayflowCredentials)) {
+            $credentials = PayflowCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

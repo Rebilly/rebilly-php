@@ -40,8 +40,8 @@ class Dragonphoenix extends GatewayAccount
 
     public function setCredentials(DragonphoenixCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\DragonphoenixCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\DragonphoenixCredentials::from($credentials);
+        if (!($credentials instanceof DragonphoenixCredentials)) {
+            $credentials = DragonphoenixCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

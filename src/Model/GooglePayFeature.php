@@ -60,8 +60,8 @@ class GooglePayFeature implements JsonSerializable
 
     public function setName(null|GooglePayFeatureName|string $name): self
     {
-        if ($name !== null && !($name instanceof \Rebilly\Sdk\Model\GooglePayFeatureName)) {
-            $name = \Rebilly\Sdk\Model\GooglePayFeatureName::from($name);
+        if ($name !== null && !($name instanceof GooglePayFeatureName)) {
+            $name = GooglePayFeatureName::from($name);
         }
 
         $this->fields['name'] = $name;
@@ -100,8 +100,8 @@ class GooglePayFeature implements JsonSerializable
 
     public function setCountry(null|DigitalWalletCountry|array $country): self
     {
-        if ($country !== null && !($country instanceof \Rebilly\Sdk\Model\DigitalWalletCountry)) {
-            $country = \Rebilly\Sdk\Model\DigitalWalletCountry::from($country);
+        if ($country !== null && !($country instanceof DigitalWalletCountry)) {
+            $country = DigitalWalletCountry::from($country);
         }
 
         $this->fields['country'] = $country;

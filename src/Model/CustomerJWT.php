@@ -116,7 +116,7 @@ class CustomerJWT implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\Acl[]
+     * @return null|Acl[]
      */
     public function getAcl(): ?array
     {
@@ -124,11 +124,11 @@ class CustomerJWT implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\Acl[] $acl
+     * @param null|Acl[] $acl
      */
     public function setAcl(null|array $acl): self
     {
-        $acl = $acl !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\Acl ? $value : \Rebilly\Sdk\Model\Acl::from($value)) : null, $acl) : null;
+        $acl = $acl !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Acl ? $value : Acl::from($value)) : null, $acl) : null;
 
         $this->fields['acl'] = $acl;
 
@@ -180,7 +180,7 @@ class CustomerJWT implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\CustomerLink[]
+     * @return null|CustomerLink[]
      */
     public function getLinks(): ?array
     {
@@ -284,11 +284,11 @@ class CustomerJWT implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\CustomerLink[] $links
+     * @param null|CustomerLink[] $links
      */
     private function setLinks(null|array $links): self
     {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\CustomerLink ? $value : \Rebilly\Sdk\Model\CustomerLink::from($value)) : null, $links) : null;
+        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof CustomerLink ? $value : CustomerLink::from($value)) : null, $links) : null;
 
         $this->fields['_links'] = $links;
 

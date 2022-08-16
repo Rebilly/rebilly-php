@@ -57,8 +57,8 @@ class ProofOfIdentityKycDocumentDocumentMatches implements JsonSerializable
 
     public function setData(null|IdentityMatches|array $data): self
     {
-        if ($data !== null && !($data instanceof \Rebilly\Sdk\Model\IdentityMatches)) {
-            $data = \Rebilly\Sdk\Model\IdentityMatches::from($data);
+        if ($data !== null && !($data instanceof IdentityMatches)) {
+            $data = IdentityMatches::from($data);
         }
 
         $this->fields['data'] = $data;

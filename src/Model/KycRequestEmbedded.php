@@ -32,7 +32,7 @@ class KycRequestEmbedded implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\KycDocument[]
+     * @return null|KycDocument[]
      */
     public function getDocuments(): ?array
     {
@@ -40,11 +40,11 @@ class KycRequestEmbedded implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\KycDocument[] $documents
+     * @param null|KycDocument[] $documents
      */
     public function setDocuments(null|array $documents): self
     {
-        $documents = $documents !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\KycDocument ? $value : \Rebilly\Sdk\Model\KycDocument::from($value)) : null, $documents) : null;
+        $documents = $documents !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof KycDocument ? $value : KycDocument::from($value)) : null, $documents) : null;
 
         $this->fields['documents'] = $documents;
 

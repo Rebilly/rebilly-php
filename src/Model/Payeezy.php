@@ -40,8 +40,8 @@ class Payeezy extends GatewayAccount
 
     public function setCredentials(PayeezyCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\PayeezyCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\PayeezyCredentials::from($credentials);
+        if (!($credentials instanceof PayeezyCredentials)) {
+            $credentials = PayeezyCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

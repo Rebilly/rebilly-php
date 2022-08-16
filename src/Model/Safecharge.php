@@ -43,8 +43,8 @@ class Safecharge extends GatewayAccount
 
     public function setCredentials(SafechargeCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\SafechargeCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\SafechargeCredentials::from($credentials);
+        if (!($credentials instanceof SafechargeCredentials)) {
+            $credentials = SafechargeCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class Safecharge extends GatewayAccount
 
     public function setThreeDSecureServer(null|Safecharge3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\Safecharge3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\Safecharge3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Safecharge3dsServers)) {
+            $threeDSecureServer = Safecharge3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

@@ -208,8 +208,8 @@ class ApiTracking implements JsonSerializable
 
     public function setUser(null|ApiTrackingUser|array $user): self
     {
-        if ($user !== null && !($user instanceof \Rebilly\Sdk\Model\ApiTrackingUser)) {
-            $user = \Rebilly\Sdk\Model\ApiTrackingUser::from($user);
+        if ($user !== null && !($user instanceof ApiTrackingUser)) {
+            $user = ApiTrackingUser::from($user);
         }
 
         $this->fields['user'] = $user;
@@ -236,8 +236,8 @@ class ApiTracking implements JsonSerializable
 
     public function setRelatedIds(null|ApiTrackingRelatedIds|array $relatedIds): self
     {
-        if ($relatedIds !== null && !($relatedIds instanceof \Rebilly\Sdk\Model\ApiTrackingRelatedIds)) {
-            $relatedIds = \Rebilly\Sdk\Model\ApiTrackingRelatedIds::from($relatedIds);
+        if ($relatedIds !== null && !($relatedIds instanceof ApiTrackingRelatedIds)) {
+            $relatedIds = ApiTrackingRelatedIds::from($relatedIds);
         }
 
         $this->fields['relatedIds'] = $relatedIds;
@@ -274,7 +274,7 @@ class ApiTracking implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\SelfLink[]
+     * @return null|SelfLink[]
      */
     public function getLinks(): ?array
     {
@@ -334,11 +334,11 @@ class ApiTracking implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\SelfLink[] $links
+     * @param null|SelfLink[] $links
      */
     private function setLinks(null|array $links): self
     {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\SelfLink ? $value : \Rebilly\Sdk\Model\SelfLink::from($value)) : null, $links) : null;
+        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 
         $this->fields['_links'] = $links;
 

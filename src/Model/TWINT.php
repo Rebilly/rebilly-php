@@ -43,8 +43,8 @@ class TWINT extends GatewayAccount
 
     public function setCredentials(TWINTCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\TWINTCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\TWINTCredentials::from($credentials);
+        if (!($credentials instanceof TWINTCredentials)) {
+            $credentials = TWINTCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class TWINT extends GatewayAccount
 
     public function setSettings(TWINTSettings|array $settings): self
     {
-        if (!($settings instanceof \Rebilly\Sdk\Model\TWINTSettings)) {
-            $settings = \Rebilly\Sdk\Model\TWINTSettings::from($settings);
+        if (!($settings instanceof TWINTSettings)) {
+            $settings = TWINTSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

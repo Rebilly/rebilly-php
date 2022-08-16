@@ -40,8 +40,8 @@ class PayPal extends GatewayAccount
 
     public function setSettings(PayPalSettings|array $settings): self
     {
-        if (!($settings instanceof \Rebilly\Sdk\Model\PayPalSettings)) {
-            $settings = \Rebilly\Sdk\Model\PayPalSettings::from($settings);
+        if (!($settings instanceof PayPalSettings)) {
+            $settings = PayPalSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

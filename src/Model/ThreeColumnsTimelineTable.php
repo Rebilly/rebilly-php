@@ -34,7 +34,7 @@ class ThreeColumnsTimelineTable extends TimelineTable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\ThreeData[]
+     * @return null|ThreeData[]
      */
     public function getData(): ?array
     {
@@ -42,11 +42,11 @@ class ThreeColumnsTimelineTable extends TimelineTable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\ThreeData[] $data
+     * @param null|ThreeData[] $data
      */
     public function setData(null|array $data): self
     {
-        $data = $data !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\ThreeData ? $value : \Rebilly\Sdk\Model\ThreeData::from($value)) : null, $data) : null;
+        $data = $data !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ThreeData ? $value : ThreeData::from($value)) : null, $data) : null;
 
         $this->fields['data'] = $data;
 

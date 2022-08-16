@@ -40,8 +40,8 @@ class GlobalOne extends GatewayAccount
 
     public function setCredentials(GlobalOneCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\GlobalOneCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\GlobalOneCredentials::from($credentials);
+        if (!($credentials instanceof GlobalOneCredentials)) {
+            $credentials = GlobalOneCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

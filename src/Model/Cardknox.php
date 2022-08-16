@@ -40,8 +40,8 @@ class Cardknox extends GatewayAccount
 
     public function setCredentials(CardknoxCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\CardknoxCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\CardknoxCredentials::from($credentials);
+        if (!($credentials instanceof CardknoxCredentials)) {
+            $credentials = CardknoxCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

@@ -46,8 +46,8 @@ class Inovio extends GatewayAccount
 
     public function setCredentials(InovioCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\InovioCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\InovioCredentials::from($credentials);
+        if (!($credentials instanceof InovioCredentials)) {
+            $credentials = InovioCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -62,8 +62,8 @@ class Inovio extends GatewayAccount
 
     public function setSettings(InovioSettings|array $settings): self
     {
-        if (!($settings instanceof \Rebilly\Sdk\Model\InovioSettings)) {
-            $settings = \Rebilly\Sdk\Model\InovioSettings::from($settings);
+        if (!($settings instanceof InovioSettings)) {
+            $settings = InovioSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;
@@ -78,8 +78,8 @@ class Inovio extends GatewayAccount
 
     public function setThreeDSecureServer(null|Inovio3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\Inovio3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\Inovio3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Inovio3dsServers)) {
+            $threeDSecureServer = Inovio3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

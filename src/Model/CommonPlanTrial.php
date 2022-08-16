@@ -57,8 +57,8 @@ class CommonPlanTrial implements JsonSerializable
 
     public function setPeriod(PlanPeriod|array $period): self
     {
-        if (!($period instanceof \Rebilly\Sdk\Model\PlanPeriod)) {
-            $period = \Rebilly\Sdk\Model\PlanPeriod::from($period);
+        if (!($period instanceof PlanPeriod)) {
+            $period = PlanPeriod::from($period);
         }
 
         $this->fields['period'] = $period;

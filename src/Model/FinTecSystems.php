@@ -43,8 +43,8 @@ class FinTecSystems extends GatewayAccount
 
     public function setCredentials(FinTecSystemsCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\FinTecSystemsCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\FinTecSystemsCredentials::from($credentials);
+        if (!($credentials instanceof FinTecSystemsCredentials)) {
+            $credentials = FinTecSystemsCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class FinTecSystems extends GatewayAccount
 
     public function setSettings(FinTecSystemsSettings|array $settings): self
     {
-        if (!($settings instanceof \Rebilly\Sdk\Model\FinTecSystemsSettings)) {
-            $settings = \Rebilly\Sdk\Model\FinTecSystemsSettings::from($settings);
+        if (!($settings instanceof FinTecSystemsSettings)) {
+            $settings = FinTecSystemsSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

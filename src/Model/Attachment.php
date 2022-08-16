@@ -183,7 +183,7 @@ class Attachment implements JsonSerializable
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\AttachmentResourceLink|\Rebilly\Sdk\Model\FileLink|\Rebilly\Sdk\Model\SelfLink>
+     * @return null|array<AttachmentResourceLink|FileLink|SelfLink>
      */
     public function getLinks(): ?array
     {
@@ -191,7 +191,7 @@ class Attachment implements JsonSerializable
     }
 
     /**
-     * @return null|array{file:\Rebilly\Sdk\Model\File}
+     * @return null|array{file:File}
      */
     public function getEmbedded(): ?array
     {
@@ -254,7 +254,7 @@ class Attachment implements JsonSerializable
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\AttachmentResourceLink|\Rebilly\Sdk\Model\FileLink|\Rebilly\Sdk\Model\SelfLink> $links
+     * @param null|array<AttachmentResourceLink|FileLink|SelfLink> $links
      */
     private function setLinks(null|array $links): self
     {
@@ -266,11 +266,11 @@ class Attachment implements JsonSerializable
     }
 
     /**
-     * @param null|array{file:\Rebilly\Sdk\Model\File} $embedded
+     * @param null|array{file:File} $embedded
      */
     private function setEmbedded(null|array $embedded): self
     {
-        $embedded['file'] = isset($embedded['file']) ? ($embedded['file'] instanceof \Rebilly\Sdk\Model\File ? $embedded['file'] : \Rebilly\Sdk\Model\File::from($embedded['file'])) : null;
+        $embedded['file'] = isset($embedded['file']) ? ($embedded['file'] instanceof File ? $embedded['file'] : File::from($embedded['file'])) : null;
 
         $this->fields['_embedded'] = $embedded;
 

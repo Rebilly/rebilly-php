@@ -32,7 +32,7 @@ class ReadyToPayItems implements JsonSerializable
     }
 
     /**
-     * @return \Rebilly\Sdk\Model\ReadyToPayItemsItems[]
+     * @return ReadyToPayItemsItems[]
      */
     public function getItems(): array
     {
@@ -40,11 +40,11 @@ class ReadyToPayItems implements JsonSerializable
     }
 
     /**
-     * @param \Rebilly\Sdk\Model\ReadyToPayItemsItems[] $items
+     * @param ReadyToPayItemsItems[] $items
      */
     public function setItems(array $items): self
     {
-        $items = array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\ReadyToPayItemsItems ? $value : \Rebilly\Sdk\Model\ReadyToPayItemsItems::from($value)) : null, $items);
+        $items = array_map(fn ($value) => $value !== null ? ($value instanceof ReadyToPayItemsItems ? $value : ReadyToPayItemsItems::from($value)) : null, $items);
 
         $this->fields['items'] = $items;
 

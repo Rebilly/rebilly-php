@@ -51,7 +51,7 @@ class Integration implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\IntegrationConfigurations[]
+     * @return null|IntegrationConfigurations[]
      */
     public function getConfigurations(): ?array
     {
@@ -59,7 +59,7 @@ class Integration implements JsonSerializable
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\OAuth2ConnectLink|\Rebilly\Sdk\Model\SelfLink>
+     * @return null|array<OAuth2ConnectLink|SelfLink>
      */
     public function getLinks(): ?array
     {
@@ -104,11 +104,11 @@ class Integration implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\IntegrationConfigurations[] $configurations
+     * @param null|IntegrationConfigurations[] $configurations
      */
     private function setConfigurations(null|array $configurations): self
     {
-        $configurations = $configurations !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\IntegrationConfigurations ? $value : \Rebilly\Sdk\Model\IntegrationConfigurations::from($value)) : null, $configurations) : null;
+        $configurations = $configurations !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof IntegrationConfigurations ? $value : IntegrationConfigurations::from($value)) : null, $configurations) : null;
 
         $this->fields['configurations'] = $configurations;
 
@@ -116,7 +116,7 @@ class Integration implements JsonSerializable
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\OAuth2ConnectLink|\Rebilly\Sdk\Model\SelfLink> $links
+     * @param null|array<OAuth2ConnectLink|SelfLink> $links
      */
     private function setLinks(null|array $links): self
     {

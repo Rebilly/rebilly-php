@@ -61,8 +61,8 @@ abstract class Discount implements JsonSerializable
 
     public function setContext(null|DiscountContext|string $context): self
     {
-        if ($context !== null && !($context instanceof \Rebilly\Sdk\Model\DiscountContext)) {
-            $context = \Rebilly\Sdk\Model\DiscountContext::from($context);
+        if ($context !== null && !($context instanceof DiscountContext)) {
+            $context = DiscountContext::from($context);
         }
 
         $this->fields['context'] = $context;

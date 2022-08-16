@@ -39,7 +39,7 @@ class ReminderSchedule implements JsonSerializable
     }
 
     /**
-     * @return \Rebilly\Sdk\Model\ReminderScheduleInstruction[]
+     * @return ReminderScheduleInstruction[]
      */
     public function getInstructions(): array
     {
@@ -47,11 +47,11 @@ class ReminderSchedule implements JsonSerializable
     }
 
     /**
-     * @param \Rebilly\Sdk\Model\ReminderScheduleInstruction[] $instructions
+     * @param ReminderScheduleInstruction[] $instructions
      */
     public function setInstructions(array $instructions): self
     {
-        $instructions = array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\ReminderScheduleInstruction ? $value : \Rebilly\Sdk\Model\ReminderScheduleInstruction::from($value)) : null, $instructions);
+        $instructions = array_map(fn ($value) => $value !== null ? ($value instanceof ReminderScheduleInstruction ? $value : ReminderScheduleInstruction::from($value)) : null, $instructions);
 
         $this->fields['instructions'] = $instructions;
 

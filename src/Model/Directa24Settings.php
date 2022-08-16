@@ -35,7 +35,7 @@ class Directa24Settings implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\Directa24Banks[]
+     * @return null|Directa24Banks[]
      */
     public function getBanks(): ?array
     {
@@ -43,11 +43,11 @@ class Directa24Settings implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\Directa24Banks[] $banks
+     * @param null|Directa24Banks[] $banks
      */
     public function setBanks(null|array $banks): self
     {
-        $banks = $banks !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\Directa24Banks ? $value : \Rebilly\Sdk\Model\Directa24Banks::from($value)) : null, $banks) : null;
+        $banks = $banks !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Directa24Banks ? $value : Directa24Banks::from($value)) : null, $banks) : null;
 
         $this->fields['banks'] = $banks;
 

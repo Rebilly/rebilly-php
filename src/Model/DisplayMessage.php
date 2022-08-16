@@ -34,7 +34,7 @@ class DisplayMessage extends RuleAction
     }
 
     /**
-     * @return \Rebilly\Sdk\Model\DisplayMessages[]
+     * @return DisplayMessages[]
      */
     public function getMessages(): array
     {
@@ -42,11 +42,11 @@ class DisplayMessage extends RuleAction
     }
 
     /**
-     * @param \Rebilly\Sdk\Model\DisplayMessages[] $messages
+     * @param DisplayMessages[] $messages
      */
     public function setMessages(array $messages): self
     {
-        $messages = array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\DisplayMessages ? $value : \Rebilly\Sdk\Model\DisplayMessages::from($value)) : null, $messages);
+        $messages = array_map(fn ($value) => $value !== null ? ($value instanceof DisplayMessages ? $value : DisplayMessages::from($value)) : null, $messages);
 
         $this->fields['messages'] = $messages;
 

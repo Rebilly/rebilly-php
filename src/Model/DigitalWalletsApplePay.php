@@ -68,8 +68,8 @@ class DigitalWalletsApplePay implements JsonSerializable
 
     public function setCountry(null|DigitalWalletCountry|array $country): self
     {
-        if ($country !== null && !($country instanceof \Rebilly\Sdk\Model\DigitalWalletCountry)) {
-            $country = \Rebilly\Sdk\Model\DigitalWalletCountry::from($country);
+        if ($country !== null && !($country instanceof DigitalWalletCountry)) {
+            $country = DigitalWalletCountry::from($country);
         }
 
         $this->fields['country'] = $country;

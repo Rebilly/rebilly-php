@@ -40,8 +40,8 @@ class ToditoCash extends GatewayAccount
 
     public function setCredentials(ToditoCashCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\ToditoCashCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\ToditoCashCredentials::from($credentials);
+        if (!($credentials instanceof ToditoCashCredentials)) {
+            $credentials = ToditoCashCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

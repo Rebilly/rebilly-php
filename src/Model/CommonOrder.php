@@ -156,7 +156,7 @@ abstract class CommonOrder implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\OrderItem[]
+     * @return null|OrderItem[]
      */
     public function getItems(): ?array
     {
@@ -164,11 +164,11 @@ abstract class CommonOrder implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\OrderItem[] $items
+     * @param null|OrderItem[] $items
      */
     public function setItems(null|array $items): self
     {
-        $items = $items !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\OrderItem ? $value : \Rebilly\Sdk\Model\OrderItem::from($value)) : null, $items) : null;
+        $items = $items !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof OrderItem ? $value : OrderItem::from($value)) : null, $items) : null;
 
         $this->fields['items'] = $items;
 
@@ -278,8 +278,8 @@ abstract class CommonOrder implements JsonSerializable
 
     public function setShipping(null|Shipping|array $shipping): self
     {
-        if ($shipping !== null && !($shipping instanceof \Rebilly\Sdk\Model\Shipping)) {
-            $shipping = \Rebilly\Sdk\Model\Shipping::from($shipping);
+        if ($shipping !== null && !($shipping instanceof Shipping)) {
+            $shipping = Shipping::from($shipping);
         }
 
         $this->fields['shipping'] = $shipping;

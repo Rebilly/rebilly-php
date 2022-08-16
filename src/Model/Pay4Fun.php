@@ -40,8 +40,8 @@ class Pay4Fun extends GatewayAccount
 
     public function setCredentials(Pay4FunCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\Pay4FunCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\Pay4FunCredentials::from($credentials);
+        if (!($credentials instanceof Pay4FunCredentials)) {
+            $credentials = Pay4FunCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

@@ -40,8 +40,8 @@ class SparkPay extends GatewayAccount
 
     public function setCredentials(SparkPayCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\SparkPayCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\SparkPayCredentials::from($credentials);
+        if (!($credentials instanceof SparkPayCredentials)) {
+            $credentials = SparkPayCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

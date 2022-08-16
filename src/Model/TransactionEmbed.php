@@ -38,8 +38,8 @@ class TransactionEmbed implements JsonSerializable
 
     public function setTransaction(null|Transaction|array $transaction): self
     {
-        if ($transaction !== null && !($transaction instanceof \Rebilly\Sdk\Model\Transaction)) {
-            $transaction = \Rebilly\Sdk\Model\Transaction::from($transaction);
+        if ($transaction !== null && !($transaction instanceof Transaction)) {
+            $transaction = Transaction::from($transaction);
         }
 
         $this->fields['transaction'] = $transaction;

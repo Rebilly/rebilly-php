@@ -32,7 +32,7 @@ class InvoicesEmbed implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\Invoice[]
+     * @return null|Invoice[]
      */
     public function getInvoices(): ?array
     {
@@ -40,11 +40,11 @@ class InvoicesEmbed implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\Invoice[] $invoices
+     * @param null|Invoice[] $invoices
      */
     public function setInvoices(null|array $invoices): self
     {
-        $invoices = $invoices !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\Invoice ? $value : \Rebilly\Sdk\Model\Invoice::from($value)) : null, $invoices) : null;
+        $invoices = $invoices !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Invoice ? $value : Invoice::from($value)) : null, $invoices) : null;
 
         $this->fields['invoices'] = $invoices;
 

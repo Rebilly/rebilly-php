@@ -43,8 +43,8 @@ class Paymero extends GatewayAccount
 
     public function setCredentials(PaymeroCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\PaymeroCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\PaymeroCredentials::from($credentials);
+        if (!($credentials instanceof PaymeroCredentials)) {
+            $credentials = PaymeroCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class Paymero extends GatewayAccount
 
     public function setSettings(null|PaymeroSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\PaymeroSettings)) {
-            $settings = \Rebilly\Sdk\Model\PaymeroSettings::from($settings);
+        if ($settings !== null && !($settings instanceof PaymeroSettings)) {
+            $settings = PaymeroSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

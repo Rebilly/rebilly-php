@@ -43,8 +43,8 @@ class Klarna extends GatewayAccount
 
     public function setCredentials(KlarnaCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\KlarnaCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\KlarnaCredentials::from($credentials);
+        if (!($credentials instanceof KlarnaCredentials)) {
+            $credentials = KlarnaCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class Klarna extends GatewayAccount
 
     public function setSettings(KlarnaSettings|array $settings): self
     {
-        if (!($settings instanceof \Rebilly\Sdk\Model\KlarnaSettings)) {
-            $settings = \Rebilly\Sdk\Model\KlarnaSettings::from($settings);
+        if (!($settings instanceof KlarnaSettings)) {
+            $settings = KlarnaSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

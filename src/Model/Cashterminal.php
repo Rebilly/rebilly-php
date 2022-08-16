@@ -40,8 +40,8 @@ class Cashterminal extends GatewayAccount
 
     public function setCredentials(CashterminalCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\CashterminalCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\CashterminalCredentials::from($credentials);
+        if (!($credentials instanceof CashterminalCredentials)) {
+            $credentials = CashterminalCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

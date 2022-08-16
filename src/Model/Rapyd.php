@@ -43,8 +43,8 @@ class Rapyd extends GatewayAccount
 
     public function setCredentials(RapydCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\RapydCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\RapydCredentials::from($credentials);
+        if (!($credentials instanceof RapydCredentials)) {
+            $credentials = RapydCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class Rapyd extends GatewayAccount
 
     public function setSettings(null|RapydSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\RapydSettings)) {
-            $settings = \Rebilly\Sdk\Model\RapydSettings::from($settings);
+        if ($settings !== null && !($settings instanceof RapydSettings)) {
+            $settings = RapydSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

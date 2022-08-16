@@ -230,7 +230,7 @@ class File implements JsonSerializable
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\FileDownloadLink|\Rebilly\Sdk\Model\PermalinkLink|\Rebilly\Sdk\Model\SelfLink|\Rebilly\Sdk\Model\SignedLinkLink>
+     * @return null|array<FileDownloadLink|PermalinkLink|SelfLink|SignedLinkLink>
      */
     public function getLinks(): ?array
     {
@@ -346,7 +346,7 @@ class File implements JsonSerializable
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\FileDownloadLink|\Rebilly\Sdk\Model\PermalinkLink|\Rebilly\Sdk\Model\SelfLink|\Rebilly\Sdk\Model\SignedLinkLink> $links
+     * @param null|array<FileDownloadLink|PermalinkLink|SelfLink|SignedLinkLink> $links
      */
     private function setLinks(null|array $links): self
     {

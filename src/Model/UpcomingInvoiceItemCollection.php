@@ -38,8 +38,8 @@ class UpcomingInvoiceItemCollection implements JsonSerializable
 
     public function setUpcomingInvoiceItemCollection(null|UpcomingInvoiceItem|array $upcomingInvoiceItemCollection): self
     {
-        if ($upcomingInvoiceItemCollection !== null && !($upcomingInvoiceItemCollection instanceof \Rebilly\Sdk\Model\UpcomingInvoiceItem)) {
-            $upcomingInvoiceItemCollection = \Rebilly\Sdk\Model\UpcomingInvoiceItem::from($upcomingInvoiceItemCollection);
+        if ($upcomingInvoiceItemCollection !== null && !($upcomingInvoiceItemCollection instanceof UpcomingInvoiceItem)) {
+            $upcomingInvoiceItemCollection = UpcomingInvoiceItem::from($upcomingInvoiceItemCollection);
         }
 
         $this->fields['upcomingInvoiceItemCollection'] = $upcomingInvoiceItemCollection;

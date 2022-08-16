@@ -43,8 +43,8 @@ class SmartInvoice extends GatewayAccount
 
     public function setCredentials(SmartInvoiceCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\SmartInvoiceCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\SmartInvoiceCredentials::from($credentials);
+        if (!($credentials instanceof SmartInvoiceCredentials)) {
+            $credentials = SmartInvoiceCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class SmartInvoice extends GatewayAccount
 
     public function setThreeDSecureServer(null|SmartInvoice3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\SmartInvoice3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\SmartInvoice3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof SmartInvoice3dsServers)) {
+            $threeDSecureServer = SmartInvoice3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

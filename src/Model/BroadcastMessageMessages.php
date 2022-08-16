@@ -77,7 +77,7 @@ class BroadcastMessageMessages implements JsonSerializable
     }
 
     /**
-     * @return \Rebilly\Sdk\Model\BroadcastMessageTemplates[]
+     * @return BroadcastMessageTemplates[]
      */
     public function getTemplates(): array
     {
@@ -85,11 +85,11 @@ class BroadcastMessageMessages implements JsonSerializable
     }
 
     /**
-     * @param \Rebilly\Sdk\Model\BroadcastMessageTemplates[] $templates
+     * @param BroadcastMessageTemplates[] $templates
      */
     public function setTemplates(array $templates): self
     {
-        $templates = array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\BroadcastMessageTemplates ? $value : \Rebilly\Sdk\Model\BroadcastMessageTemplates::from($value)) : null, $templates);
+        $templates = array_map(fn ($value) => $value !== null ? ($value instanceof BroadcastMessageTemplates ? $value : BroadcastMessageTemplates::from($value)) : null, $templates);
 
         $this->fields['templates'] = $templates;
 

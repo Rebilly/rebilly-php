@@ -141,8 +141,8 @@ abstract class CommonPlan implements JsonSerializable
 
     public function setPricing(PlanPriceFormula|array $pricing): self
     {
-        if (!($pricing instanceof \Rebilly\Sdk\Model\PlanPriceFormula)) {
-            $pricing = \Rebilly\Sdk\Model\PlanPriceFormula::from($pricing);
+        if (!($pricing instanceof PlanPriceFormula)) {
+            $pricing = PlanPriceFormula::from($pricing);
         }
 
         $this->fields['pricing'] = $pricing;
@@ -173,8 +173,8 @@ abstract class CommonPlan implements JsonSerializable
 
     public function setTrial(null|CommonPlanTrial|array $trial): self
     {
-        if ($trial !== null && !($trial instanceof \Rebilly\Sdk\Model\CommonPlanTrial)) {
-            $trial = \Rebilly\Sdk\Model\CommonPlanTrial::from($trial);
+        if ($trial !== null && !($trial instanceof CommonPlanTrial)) {
+            $trial = CommonPlanTrial::from($trial);
         }
 
         $this->fields['trial'] = $trial;
@@ -194,8 +194,8 @@ abstract class CommonPlan implements JsonSerializable
 
     public function setSetup(null|CommonPlanSetup|array $setup): self
     {
-        if ($setup !== null && !($setup instanceof \Rebilly\Sdk\Model\CommonPlanSetup)) {
-            $setup = \Rebilly\Sdk\Model\CommonPlanSetup::from($setup);
+        if ($setup !== null && !($setup instanceof CommonPlanSetup)) {
+            $setup = CommonPlanSetup::from($setup);
         }
 
         $this->fields['setup'] = $setup;

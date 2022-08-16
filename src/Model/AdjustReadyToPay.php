@@ -49,7 +49,7 @@ class AdjustReadyToPay extends RuleAction
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\AdjustPaymentMethod[]
+     * @return null|AdjustPaymentMethod[]
      */
     public function getPaymentMethods(): ?array
     {
@@ -57,11 +57,11 @@ class AdjustReadyToPay extends RuleAction
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\AdjustPaymentMethod[] $paymentMethods
+     * @param null|AdjustPaymentMethod[] $paymentMethods
      */
     public function setPaymentMethods(null|array $paymentMethods): self
     {
-        $paymentMethods = $paymentMethods !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\AdjustPaymentMethod ? $value : \Rebilly\Sdk\Model\AdjustPaymentMethod::from($value)) : null, $paymentMethods) : null;
+        $paymentMethods = $paymentMethods !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof AdjustPaymentMethod ? $value : AdjustPaymentMethod::from($value)) : null, $paymentMethods) : null;
 
         $this->fields['paymentMethods'] = $paymentMethods;
 

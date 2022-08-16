@@ -38,8 +38,8 @@ class PaymentCardEmbed implements JsonSerializable
 
     public function setPaymentCard(null|PaymentCard|array $paymentCard): self
     {
-        if ($paymentCard !== null && !($paymentCard instanceof \Rebilly\Sdk\Model\PaymentCard)) {
-            $paymentCard = \Rebilly\Sdk\Model\PaymentCard::from($paymentCard);
+        if ($paymentCard !== null && !($paymentCard instanceof PaymentCard)) {
+            $paymentCard = PaymentCard::from($paymentCard);
         }
 
         $this->fields['paymentCard'] = $paymentCard;

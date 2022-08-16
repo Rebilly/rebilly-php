@@ -58,8 +58,8 @@ class ApplePayValidation extends DigitalWalletValidation
 
     public function setValidationRequest(ApplePayValidationValidationRequest|array $validationRequest): self
     {
-        if (!($validationRequest instanceof \Rebilly\Sdk\Model\ApplePayValidationValidationRequest)) {
-            $validationRequest = \Rebilly\Sdk\Model\ApplePayValidationValidationRequest::from($validationRequest);
+        if (!($validationRequest instanceof ApplePayValidationValidationRequest)) {
+            $validationRequest = ApplePayValidationValidationRequest::from($validationRequest);
         }
 
         $this->fields['validationRequest'] = $validationRequest;

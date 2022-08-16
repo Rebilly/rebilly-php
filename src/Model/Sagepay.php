@@ -40,8 +40,8 @@ class Sagepay extends GatewayAccount
 
     public function setCredentials(SagepayCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\SagepayCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\SagepayCredentials::from($credentials);
+        if (!($credentials instanceof SagepayCredentials)) {
+            $credentials = SagepayCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

@@ -38,8 +38,8 @@ class OrganizationEmbed implements JsonSerializable
 
     public function setOrganization(null|Organization|array $organization): self
     {
-        if ($organization !== null && !($organization instanceof \Rebilly\Sdk\Model\Organization)) {
-            $organization = \Rebilly\Sdk\Model\Organization::from($organization);
+        if ($organization !== null && !($organization instanceof Organization)) {
+            $organization = Organization::from($organization);
         }
 
         $this->fields['organization'] = $organization;

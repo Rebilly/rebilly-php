@@ -41,8 +41,8 @@ class AlternativePaymentInstrument implements JsonSerializable
 
     public function setMethod(PaymentMethod|string $method): self
     {
-        if (!($method instanceof \Rebilly\Sdk\Model\PaymentMethod)) {
-            $method = \Rebilly\Sdk\Model\PaymentMethod::from($method);
+        if (!($method instanceof PaymentMethod)) {
+            $method = PaymentMethod::from($method);
         }
 
         $this->fields['method'] = $method;

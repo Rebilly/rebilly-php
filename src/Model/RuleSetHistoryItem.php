@@ -57,7 +57,7 @@ class RuleSetHistoryItem implements JsonSerializable
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\RuleSetHistoryLink|\Rebilly\Sdk\Model\RuleSetVersionLink|\Rebilly\Sdk\Model\SelfLink>
+     * @return null|array<RuleSetHistoryLink|RuleSetVersionLink|SelfLink>
      */
     public function getLinks(): ?array
     {
@@ -92,7 +92,7 @@ class RuleSetHistoryItem implements JsonSerializable
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\RuleSetHistoryLink|\Rebilly\Sdk\Model\RuleSetVersionLink|\Rebilly\Sdk\Model\SelfLink> $links
+     * @param null|array<RuleSetHistoryLink|RuleSetVersionLink|SelfLink> $links
      */
     private function setLinks(null|array $links): self
     {

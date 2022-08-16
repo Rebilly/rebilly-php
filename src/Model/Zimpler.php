@@ -40,8 +40,8 @@ class Zimpler extends GatewayAccount
 
     public function setCredentials(ZimplerCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\ZimplerCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\ZimplerCredentials::from($credentials);
+        if (!($credentials instanceof ZimplerCredentials)) {
+            $credentials = ZimplerCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

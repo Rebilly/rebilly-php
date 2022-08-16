@@ -40,8 +40,8 @@ class ICEPAY extends GatewayAccount
 
     public function setCredentials(ICEPAYCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\ICEPAYCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\ICEPAYCredentials::from($credentials);
+        if (!($credentials instanceof ICEPAYCredentials)) {
+            $credentials = ICEPAYCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

@@ -40,8 +40,8 @@ class WesternUnion extends GatewayAccount
 
     public function setCredentials(WesternUnionCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\WesternUnionCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\WesternUnionCredentials::from($credentials);
+        if (!($credentials instanceof WesternUnionCredentials)) {
+            $credentials = WesternUnionCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

@@ -76,7 +76,7 @@ class GlobalWebhook implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\GlobalWebhookEventType[]
+     * @return null|GlobalWebhookEventType[]
      */
     public function getEventsFilter(): ?array
     {
@@ -84,11 +84,11 @@ class GlobalWebhook implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\GlobalWebhookEventType[] $eventsFilter
+     * @param null|GlobalWebhookEventType[] $eventsFilter
      */
     public function setEventsFilter(null|array $eventsFilter): self
     {
-        $eventsFilter = $eventsFilter !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\GlobalWebhookEventType ? $value : \Rebilly\Sdk\Model\GlobalWebhookEventType::from($value)) : null, $eventsFilter) : null;
+        $eventsFilter = $eventsFilter !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof GlobalWebhookEventType ? $value : GlobalWebhookEventType::from($value)) : null, $eventsFilter) : null;
 
         $this->fields['eventsFilter'] = $eventsFilter;
 
@@ -102,8 +102,8 @@ class GlobalWebhook implements JsonSerializable
 
     public function setStatus(null|OnOff|string $status): self
     {
-        if ($status !== null && !($status instanceof \Rebilly\Sdk\Model\OnOff)) {
-            $status = \Rebilly\Sdk\Model\OnOff::from($status);
+        if ($status !== null && !($status instanceof OnOff)) {
+            $status = OnOff::from($status);
         }
 
         $this->fields['status'] = $status;
@@ -142,7 +142,7 @@ class GlobalWebhook implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\WebhookHeader[]
+     * @return null|WebhookHeader[]
      */
     public function getHeaders(): ?array
     {
@@ -150,11 +150,11 @@ class GlobalWebhook implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\WebhookHeader[] $headers
+     * @param null|WebhookHeader[] $headers
      */
     public function setHeaders(null|array $headers): self
     {
-        $headers = $headers !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\WebhookHeader ? $value : \Rebilly\Sdk\Model\WebhookHeader::from($value)) : null, $headers) : null;
+        $headers = $headers !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof WebhookHeader ? $value : WebhookHeader::from($value)) : null, $headers) : null;
 
         $this->fields['headers'] = $headers;
 
@@ -206,7 +206,7 @@ class GlobalWebhook implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\SelfLink[]
+     * @return null|SelfLink[]
      */
     public function getLinks(): ?array
     {
@@ -258,11 +258,11 @@ class GlobalWebhook implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\SelfLink[] $links
+     * @param null|SelfLink[] $links
      */
     private function setLinks(null|array $links): self
     {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\SelfLink ? $value : \Rebilly\Sdk\Model\SelfLink::from($value)) : null, $links) : null;
+        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 
         $this->fields['_links'] = $links;
 

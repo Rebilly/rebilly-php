@@ -38,8 +38,8 @@ class ProofOfFundsKycDocumentDocumentMatches implements JsonSerializable
 
     public function setData(null|FundsMatches|array $data): self
     {
-        if ($data !== null && !($data instanceof \Rebilly\Sdk\Model\FundsMatches)) {
-            $data = \Rebilly\Sdk\Model\FundsMatches::from($data);
+        if ($data !== null && !($data instanceof FundsMatches)) {
+            $data = FundsMatches::from($data);
         }
 
         $this->fields['data'] = $data;

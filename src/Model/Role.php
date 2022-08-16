@@ -96,7 +96,7 @@ class Role implements JsonSerializable
     }
 
     /**
-     * @return \Rebilly\Sdk\Model\Acl[]
+     * @return Acl[]
      */
     public function getAcl(): array
     {
@@ -104,11 +104,11 @@ class Role implements JsonSerializable
     }
 
     /**
-     * @param \Rebilly\Sdk\Model\Acl[] $acl
+     * @param Acl[] $acl
      */
     public function setAcl(array $acl): self
     {
-        $acl = array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\Acl ? $value : \Rebilly\Sdk\Model\Acl::from($value)) : null, $acl);
+        $acl = array_map(fn ($value) => $value !== null ? ($value instanceof Acl ? $value : Acl::from($value)) : null, $acl);
 
         $this->fields['acl'] = $acl;
 
@@ -190,7 +190,7 @@ class Role implements JsonSerializable
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\JuniorRolesLink|\Rebilly\Sdk\Model\SelfLink|\Rebilly\Sdk\Model\SeniorRolesLink>
+     * @return null|array<JuniorRolesLink|SelfLink|SeniorRolesLink>
      */
     public function getLinks(): ?array
     {
@@ -198,7 +198,7 @@ class Role implements JsonSerializable
     }
 
     /**
-     * @return null|array{juniors:\Rebilly\Sdk\Model\Role[]}
+     * @return null|array{juniors:Role[]}
      */
     public function getEmbedded(): ?array
     {
@@ -286,7 +286,7 @@ class Role implements JsonSerializable
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\JuniorRolesLink|\Rebilly\Sdk\Model\SelfLink|\Rebilly\Sdk\Model\SeniorRolesLink> $links
+     * @param null|array<JuniorRolesLink|SelfLink|SeniorRolesLink> $links
      */
     private function setLinks(null|array $links): self
     {
@@ -298,7 +298,7 @@ class Role implements JsonSerializable
     }
 
     /**
-     * @param null|array{juniors:\Rebilly\Sdk\Model\Role[]} $embedded
+     * @param null|array{juniors:Role[]} $embedded
      */
     private function setEmbedded(null|array $embedded): self
     {

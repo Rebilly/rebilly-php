@@ -43,8 +43,8 @@ class Jeton extends GatewayAccount
 
     public function setCredentials(JetonCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\JetonCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\JetonCredentials::from($credentials);
+        if (!($credentials instanceof JetonCredentials)) {
+            $credentials = JetonCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class Jeton extends GatewayAccount
 
     public function setSettings(null|JetonSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\JetonSettings)) {
-            $settings = \Rebilly\Sdk\Model\JetonSettings::from($settings);
+        if ($settings !== null && !($settings instanceof JetonSettings)) {
+            $settings = JetonSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

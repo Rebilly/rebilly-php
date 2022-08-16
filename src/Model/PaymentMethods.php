@@ -38,7 +38,7 @@ class PaymentMethods extends PaymentInstruction
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\PaymentMethod[]
+     * @return null|PaymentMethod[]
      */
     public function getMethods(): ?array
     {
@@ -46,11 +46,11 @@ class PaymentMethods extends PaymentInstruction
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\PaymentMethod[] $methods
+     * @param null|PaymentMethod[] $methods
      */
     public function setMethods(null|array $methods): self
     {
-        $methods = $methods !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\PaymentMethod ? $value : \Rebilly\Sdk\Model\PaymentMethod::from($value)) : null, $methods) : null;
+        $methods = $methods !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof PaymentMethod ? $value : PaymentMethod::from($value)) : null, $methods) : null;
 
         $this->fields['methods'] = $methods;
 

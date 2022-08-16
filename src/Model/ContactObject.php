@@ -180,7 +180,7 @@ class ContactObject implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\ContactPhoneNumbers[]
+     * @return null|ContactPhoneNumbers[]
      */
     public function getPhoneNumbers(): ?array
     {
@@ -188,11 +188,11 @@ class ContactObject implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\ContactPhoneNumbers[] $phoneNumbers
+     * @param null|ContactPhoneNumbers[] $phoneNumbers
      */
     public function setPhoneNumbers(null|array $phoneNumbers): self
     {
-        $phoneNumbers = $phoneNumbers !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\ContactPhoneNumbers ? $value : \Rebilly\Sdk\Model\ContactPhoneNumbers::from($value)) : null, $phoneNumbers) : null;
+        $phoneNumbers = $phoneNumbers !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ContactPhoneNumbers ? $value : ContactPhoneNumbers::from($value)) : null, $phoneNumbers) : null;
 
         $this->fields['phoneNumbers'] = $phoneNumbers;
 
@@ -200,7 +200,7 @@ class ContactObject implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\ContactEmails[]
+     * @return null|ContactEmails[]
      */
     public function getEmails(): ?array
     {
@@ -208,11 +208,11 @@ class ContactObject implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\ContactEmails[] $emails
+     * @param null|ContactEmails[] $emails
      */
     public function setEmails(null|array $emails): self
     {
-        $emails = $emails !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\ContactEmails ? $value : \Rebilly\Sdk\Model\ContactEmails::from($value)) : null, $emails) : null;
+        $emails = $emails !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ContactEmails ? $value : ContactEmails::from($value)) : null, $emails) : null;
 
         $this->fields['emails'] = $emails;
 

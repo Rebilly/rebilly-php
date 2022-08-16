@@ -40,8 +40,8 @@ class Netbanking extends GatewayAccount
 
     public function setCredentials(NetbankingCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\NetbankingCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\NetbankingCredentials::from($credentials);
+        if (!($credentials instanceof NetbankingCredentials)) {
+            $credentials = NetbankingCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

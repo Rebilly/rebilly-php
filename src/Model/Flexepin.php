@@ -40,8 +40,8 @@ class Flexepin extends GatewayAccount
 
     public function setCredentials(FlexepinCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\FlexepinCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\FlexepinCredentials::from($credentials);
+        if (!($credentials instanceof FlexepinCredentials)) {
+            $credentials = FlexepinCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

@@ -40,8 +40,8 @@ class Conekta extends GatewayAccount
 
     public function setCredentials(ConektaCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\ConektaCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\ConektaCredentials::from($credentials);
+        if (!($credentials instanceof ConektaCredentials)) {
+            $credentials = ConektaCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

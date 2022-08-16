@@ -40,8 +40,8 @@ class Credorax extends GatewayAccount
 
     public function setCredentials(CredoraxCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\CredoraxCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\CredoraxCredentials::from($credentials);
+        if (!($credentials instanceof CredoraxCredentials)) {
+            $credentials = CredoraxCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

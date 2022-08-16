@@ -64,8 +64,8 @@ class IntegrationConfigurations implements JsonSerializable
 
     public function setEventType(null|EventType|string $eventType): self
     {
-        if ($eventType !== null && !($eventType instanceof \Rebilly\Sdk\Model\EventType)) {
-            $eventType = \Rebilly\Sdk\Model\EventType::from($eventType);
+        if ($eventType !== null && !($eventType instanceof EventType)) {
+            $eventType = EventType::from($eventType);
         }
 
         $this->fields['eventType'] = $eventType;

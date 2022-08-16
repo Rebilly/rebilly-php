@@ -44,8 +44,8 @@ class InvoiceRetryInstructionAttempts implements JsonSerializable
 
     public function setScheduleInstruction(InvoiceRetryScheduleInstruction|array $scheduleInstruction): self
     {
-        if (!($scheduleInstruction instanceof \Rebilly\Sdk\Model\InvoiceRetryScheduleInstruction)) {
-            $scheduleInstruction = \Rebilly\Sdk\Model\InvoiceRetryScheduleInstruction::from($scheduleInstruction);
+        if (!($scheduleInstruction instanceof InvoiceRetryScheduleInstruction)) {
+            $scheduleInstruction = InvoiceRetryScheduleInstruction::from($scheduleInstruction);
         }
 
         $this->fields['scheduleInstruction'] = $scheduleInstruction;
@@ -60,8 +60,8 @@ class InvoiceRetryInstructionAttempts implements JsonSerializable
 
     public function setAmountAdjustmentInstruction(null|InvoiceRetryAmountAdjustmentInstruction|array $amountAdjustmentInstruction): self
     {
-        if ($amountAdjustmentInstruction !== null && !($amountAdjustmentInstruction instanceof \Rebilly\Sdk\Model\InvoiceRetryAmountAdjustmentInstruction)) {
-            $amountAdjustmentInstruction = \Rebilly\Sdk\Model\InvoiceRetryAmountAdjustmentInstruction::from($amountAdjustmentInstruction);
+        if ($amountAdjustmentInstruction !== null && !($amountAdjustmentInstruction instanceof InvoiceRetryAmountAdjustmentInstruction)) {
+            $amountAdjustmentInstruction = InvoiceRetryAmountAdjustmentInstruction::from($amountAdjustmentInstruction);
         }
 
         $this->fields['amountAdjustmentInstruction'] = $amountAdjustmentInstruction;

@@ -46,8 +46,8 @@ class NMI extends GatewayAccount
 
     public function setCredentials(NMICredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\NMICredentials)) {
-            $credentials = \Rebilly\Sdk\Model\NMICredentials::from($credentials);
+        if (!($credentials instanceof NMICredentials)) {
+            $credentials = NMICredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -62,8 +62,8 @@ class NMI extends GatewayAccount
 
     public function setSettings(null|NMISettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\NMISettings)) {
-            $settings = \Rebilly\Sdk\Model\NMISettings::from($settings);
+        if ($settings !== null && !($settings instanceof NMISettings)) {
+            $settings = NMISettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;
@@ -78,8 +78,8 @@ class NMI extends GatewayAccount
 
     public function setThreeDSecureServer(null|NMI3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\NMI3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\NMI3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof NMI3dsServers)) {
+            $threeDSecureServer = NMI3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

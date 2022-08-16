@@ -68,7 +68,7 @@ abstract class CommonKycRequest implements JsonSerializable
     }
 
     /**
-     * @return \Rebilly\Sdk\Model\KycRequestDocuments[]
+     * @return KycRequestDocuments[]
      */
     public function getDocuments(): array
     {
@@ -76,11 +76,11 @@ abstract class CommonKycRequest implements JsonSerializable
     }
 
     /**
-     * @param \Rebilly\Sdk\Model\KycRequestDocuments[] $documents
+     * @param KycRequestDocuments[] $documents
      */
     public function setDocuments(array $documents): self
     {
-        $documents = array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\KycRequestDocuments ? $value : \Rebilly\Sdk\Model\KycRequestDocuments::from($value)) : null, $documents);
+        $documents = array_map(fn ($value) => $value !== null ? ($value instanceof KycRequestDocuments ? $value : KycRequestDocuments::from($value)) : null, $documents);
 
         $this->fields['documents'] = $documents;
 

@@ -43,8 +43,8 @@ class Directa24 extends GatewayAccount
 
     public function setCredentials(Directa24Credentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\Directa24Credentials)) {
-            $credentials = \Rebilly\Sdk\Model\Directa24Credentials::from($credentials);
+        if (!($credentials instanceof Directa24Credentials)) {
+            $credentials = Directa24Credentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class Directa24 extends GatewayAccount
 
     public function setSettings(null|Directa24Settings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\Directa24Settings)) {
-            $settings = \Rebilly\Sdk\Model\Directa24Settings::from($settings);
+        if ($settings !== null && !($settings instanceof Directa24Settings)) {
+            $settings = Directa24Settings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

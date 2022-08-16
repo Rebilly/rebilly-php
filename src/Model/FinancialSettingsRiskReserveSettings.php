@@ -68,8 +68,8 @@ class FinancialSettingsRiskReserveSettings implements JsonSerializable
 
     public function setPeriod(RiskReservePeriod|array $period): self
     {
-        if (!($period instanceof \Rebilly\Sdk\Model\RiskReservePeriod)) {
-            $period = \Rebilly\Sdk\Model\RiskReservePeriod::from($period);
+        if (!($period instanceof RiskReservePeriod)) {
+            $period = RiskReservePeriod::from($period);
         }
 
         $this->fields['period'] = $period;

@@ -38,8 +38,8 @@ class WebsiteSettings implements JsonSerializable
 
     public function setPaymentForm(null|WebsiteSettingsPaymentForm|array $paymentForm): self
     {
-        if ($paymentForm !== null && !($paymentForm instanceof \Rebilly\Sdk\Model\WebsiteSettingsPaymentForm)) {
-            $paymentForm = \Rebilly\Sdk\Model\WebsiteSettingsPaymentForm::from($paymentForm);
+        if ($paymentForm !== null && !($paymentForm instanceof WebsiteSettingsPaymentForm)) {
+            $paymentForm = WebsiteSettingsPaymentForm::from($paymentForm);
         }
 
         $this->fields['paymentForm'] = $paymentForm;

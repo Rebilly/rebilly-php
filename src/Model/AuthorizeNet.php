@@ -40,8 +40,8 @@ class AuthorizeNet extends GatewayAccount
 
     public function setCredentials(AuthorizeNetCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\AuthorizeNetCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\AuthorizeNetCredentials::from($credentials);
+        if (!($credentials instanceof AuthorizeNetCredentials)) {
+            $credentials = AuthorizeNetCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

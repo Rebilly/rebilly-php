@@ -256,7 +256,7 @@ class Application implements JsonSerializable
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\ApplicationInstanceLink|\Rebilly\Sdk\Model\AuthorLogoUrlLink|\Rebilly\Sdk\Model\LogoUrlLink|\Rebilly\Sdk\Model\SelfLink>
+     * @return null|array<ApplicationInstanceLink|AuthorLogoUrlLink|LogoUrlLink|SelfLink>
      */
     public function getLinks(): ?array
     {
@@ -338,7 +338,7 @@ class Application implements JsonSerializable
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\ApplicationInstanceLink|\Rebilly\Sdk\Model\AuthorLogoUrlLink|\Rebilly\Sdk\Model\LogoUrlLink|\Rebilly\Sdk\Model\SelfLink> $links
+     * @param null|array<ApplicationInstanceLink|AuthorLogoUrlLink|LogoUrlLink|SelfLink> $links
      */
     private function setLinks(null|array $links): self
     {

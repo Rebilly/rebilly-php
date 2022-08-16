@@ -44,8 +44,8 @@ class GatewayWeightedList implements JsonSerializable
 
     public function setGatewayName(GatewayName|string $gatewayName): self
     {
-        if (!($gatewayName instanceof \Rebilly\Sdk\Model\GatewayName)) {
-            $gatewayName = \Rebilly\Sdk\Model\GatewayName::from($gatewayName);
+        if (!($gatewayName instanceof GatewayName)) {
+            $gatewayName = GatewayName::from($gatewayName);
         }
 
         $this->fields['gatewayName'] = $gatewayName;
@@ -60,8 +60,8 @@ class GatewayWeightedList implements JsonSerializable
 
     public function setAcquirerName(AcquirerName|string $acquirerName): self
     {
-        if (!($acquirerName instanceof \Rebilly\Sdk\Model\AcquirerName)) {
-            $acquirerName = \Rebilly\Sdk\Model\AcquirerName::from($acquirerName);
+        if (!($acquirerName instanceof AcquirerName)) {
+            $acquirerName = AcquirerName::from($acquirerName);
         }
 
         $this->fields['acquirerName'] = $acquirerName;

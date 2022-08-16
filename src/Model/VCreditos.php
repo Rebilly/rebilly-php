@@ -43,8 +43,8 @@ class VCreditos extends GatewayAccount
 
     public function setCredentials(VCreditosCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\VCreditosCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\VCreditosCredentials::from($credentials);
+        if (!($credentials instanceof VCreditosCredentials)) {
+            $credentials = VCreditosCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class VCreditos extends GatewayAccount
 
     public function setSettings(null|VCreditosSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\VCreditosSettings)) {
-            $settings = \Rebilly\Sdk\Model\VCreditosSettings::from($settings);
+        if ($settings !== null && !($settings instanceof VCreditosSettings)) {
+            $settings = VCreditosSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

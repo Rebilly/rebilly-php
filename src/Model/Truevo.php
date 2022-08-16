@@ -43,8 +43,8 @@ class Truevo extends GatewayAccount
 
     public function setCredentials(TruevoCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\TruevoCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\TruevoCredentials::from($credentials);
+        if (!($credentials instanceof TruevoCredentials)) {
+            $credentials = TruevoCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class Truevo extends GatewayAccount
 
     public function setThreeDSecureServer(null|Truevo3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\Truevo3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\Truevo3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Truevo3dsServers)) {
+            $threeDSecureServer = Truevo3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

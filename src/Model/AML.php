@@ -169,7 +169,7 @@ class AML implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\AMLAddress[]
+     * @return null|AMLAddress[]
      */
     public function getAddress(): ?array
     {
@@ -185,7 +185,7 @@ class AML implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\AMLAliases[]
+     * @return null|AMLAliases[]
      */
     public function getAliases(): ?array
     {
@@ -193,7 +193,7 @@ class AML implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\AMLPassport[]
+     * @return null|AMLPassport[]
      */
     public function getPassport(): ?array
     {
@@ -206,7 +206,7 @@ class AML implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\SelfLink[]
+     * @return null|SelfLink[]
      */
     public function getLinks(): ?array
     {
@@ -368,11 +368,11 @@ class AML implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\AMLAddress[] $address
+     * @param null|AMLAddress[] $address
      */
     private function setAddress(null|array $address): self
     {
-        $address = $address !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\AMLAddress ? $value : \Rebilly\Sdk\Model\AMLAddress::from($value)) : null, $address) : null;
+        $address = $address !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof AMLAddress ? $value : AMLAddress::from($value)) : null, $address) : null;
 
         $this->fields['address'] = $address;
 
@@ -392,11 +392,11 @@ class AML implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\AMLAliases[] $aliases
+     * @param null|AMLAliases[] $aliases
      */
     private function setAliases(null|array $aliases): self
     {
-        $aliases = $aliases !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\AMLAliases ? $value : \Rebilly\Sdk\Model\AMLAliases::from($value)) : null, $aliases) : null;
+        $aliases = $aliases !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof AMLAliases ? $value : AMLAliases::from($value)) : null, $aliases) : null;
 
         $this->fields['aliases'] = $aliases;
 
@@ -404,11 +404,11 @@ class AML implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\AMLPassport[] $passport
+     * @param null|AMLPassport[] $passport
      */
     private function setPassport(null|array $passport): self
     {
-        $passport = $passport !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\AMLPassport ? $value : \Rebilly\Sdk\Model\AMLPassport::from($value)) : null, $passport) : null;
+        $passport = $passport !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof AMLPassport ? $value : AMLPassport::from($value)) : null, $passport) : null;
 
         $this->fields['passport'] = $passport;
 
@@ -423,11 +423,11 @@ class AML implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\SelfLink[] $links
+     * @param null|SelfLink[] $links
      */
     private function setLinks(null|array $links): self
     {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\SelfLink ? $value : \Rebilly\Sdk\Model\SelfLink::from($value)) : null, $links) : null;
+        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 
         $this->fields['_links'] = $links;
 

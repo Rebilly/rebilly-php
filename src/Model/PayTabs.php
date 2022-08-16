@@ -40,8 +40,8 @@ class PayTabs extends GatewayAccount
 
     public function setCredentials(PayTabsCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\PayTabsCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\PayTabsCredentials::from($credentials);
+        if (!($credentials instanceof PayTabsCredentials)) {
+            $credentials = PayTabsCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

@@ -43,8 +43,8 @@ class CCAvenue extends GatewayAccount
 
     public function setCredentials(CCAvenueCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\CCAvenueCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\CCAvenueCredentials::from($credentials);
+        if (!($credentials instanceof CCAvenueCredentials)) {
+            $credentials = CCAvenueCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class CCAvenue extends GatewayAccount
 
     public function setSettings(null|CCAvenueSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\CCAvenueSettings)) {
-            $settings = \Rebilly\Sdk\Model\CCAvenueSettings::from($settings);
+        if ($settings !== null && !($settings instanceof CCAvenueSettings)) {
+            $settings = CCAvenueSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

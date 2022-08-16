@@ -40,8 +40,8 @@ class MiFinity extends GatewayAccount
 
     public function setCredentials(MiFinityCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\MiFinityCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\MiFinityCredentials::from($credentials);
+        if (!($credentials instanceof MiFinityCredentials)) {
+            $credentials = MiFinityCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

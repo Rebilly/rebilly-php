@@ -109,7 +109,7 @@ class Tag implements JsonSerializable
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\SelfLink>
+     * @return null|array<SelfLink>
      */
     public function getLinks(): ?array
     {
@@ -160,7 +160,7 @@ class Tag implements JsonSerializable
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\SelfLink> $links
+     * @param null|array<SelfLink> $links
      */
     private function setLinks(null|array $links): self
     {

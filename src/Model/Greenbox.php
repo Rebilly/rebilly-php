@@ -40,8 +40,8 @@ class Greenbox extends GatewayAccount
 
     public function setCredentials(GreenboxCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\GreenboxCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\GreenboxCredentials::from($credentials);
+        if (!($credentials instanceof GreenboxCredentials)) {
+            $credentials = GreenboxCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

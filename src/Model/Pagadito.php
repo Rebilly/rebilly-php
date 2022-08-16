@@ -43,8 +43,8 @@ class Pagadito extends GatewayAccount
 
     public function setCredentials(PagaditoCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\PagaditoCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\PagaditoCredentials::from($credentials);
+        if (!($credentials instanceof PagaditoCredentials)) {
+            $credentials = PagaditoCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class Pagadito extends GatewayAccount
 
     public function setSettings(null|PagaditoSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\PagaditoSettings)) {
-            $settings = \Rebilly\Sdk\Model\PagaditoSettings::from($settings);
+        if ($settings !== null && !($settings instanceof PagaditoSettings)) {
+            $settings = PagaditoSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

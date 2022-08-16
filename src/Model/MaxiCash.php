@@ -40,8 +40,8 @@ class MaxiCash extends GatewayAccount
 
     public function setCredentials(MaxiCashCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\MaxiCashCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\MaxiCashCredentials::from($credentials);
+        if (!($credentials instanceof MaxiCashCredentials)) {
+            $credentials = MaxiCashCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
