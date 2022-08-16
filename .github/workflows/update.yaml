@@ -144,10 +144,11 @@ jobs:
         working-directory: /tmp/generated
         run: unzip \*.zip
 
-      - name: Merge APIs files
+      - name: Bundle SDK
         run: |
           rm -rf sdk/{tests,src,composer.json,.php-cs-fixer.php} && \
-          php ./generator/php/merge-apis.php ./sdk /tmp/generated/*-sdk
+          php ./generator/php/merge-apis.php ./sdk /tmp/generated/*-sdk && \
+          php ./generator/php/remove-fqcns.php ./sdk
 
       - name: Install composer dependencies
         working-directory: ./sdk
