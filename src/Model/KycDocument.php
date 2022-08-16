@@ -30,14 +30,14 @@ abstract class KycDocument implements JsonSerializable
     public static function from(array $data = []): self
     {
         switch ($data['documentType']) {
+            case 'identity-proof':
+                return new ProofOfIdentityKycDocument($data);
+            case 'funds-proof':
+                return new ProofOfFundsKycDocument($data);
             case 'address-proof':
                 return new ProofOfAddressKycDocument($data);
             case 'credit-file-proof':
                 return new ProofOfCreditFileKycDocument($data);
-            case 'funds-proof':
-                return new ProofOfFundsKycDocument($data);
-            case 'identity-proof':
-                return new ProofOfIdentityKycDocument($data);
             case 'purchase-proof':
                 return new ProofOfPurchaseKycDocument($data);
         }

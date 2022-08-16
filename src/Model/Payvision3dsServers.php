@@ -30,12 +30,12 @@ abstract class Payvision3dsServers implements JsonSerializable
     public static function from(array $data = []): self
     {
         switch ($data['name']) {
-            case 'Other':
-                return new PayvisionOtherServer($data);
             case 'Payvision3dsServer':
                 return new Payvision3dsServer($data);
             case 'ThreeDSecureIO3dsServer':
                 return new PayvisionThreeDSecureIOServer($data);
+            case 'Other':
+                return new PayvisionOtherServer($data);
         }
 
         throw new InvalidArgumentException("Unsupported name value: '{$data['name']}'");

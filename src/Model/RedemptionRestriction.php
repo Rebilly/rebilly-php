@@ -44,20 +44,20 @@ abstract class RedemptionRestriction implements JsonSerializable
     public static function from(array $data = []): self
     {
         switch ($data['type']) {
-            case 'discounts-per-redemption':
-                return new DiscountsPerRedemption($data);
-            case 'minimum-order-amount':
-                return new MinimumOrderAmount($data);
-            case 'paid-by-time':
-                return new PaidByTime($data);
-            case 'restrict-to-invoices':
-                return new RestrictToInvoices($data);
-            case 'restrict-to-plans':
-                return new RestrictToPlans($data);
-            case 'restrict-to-products':
-                return new RestrictToProducts($data);
             case 'restrict-to-subscriptions':
                 return new RestrictToSubscriptions($data);
+            case 'restrict-to-invoices':
+                return new RestrictToInvoices($data);
+            case 'minimum-order-amount':
+                return new MinimumOrderAmount($data);
+            case 'restrict-to-products':
+                return new RestrictToProducts($data);
+            case 'restrict-to-plans':
+                return new RestrictToPlans($data);
+            case 'paid-by-time':
+                return new PaidByTime($data);
+            case 'discounts-per-redemption':
+                return new DiscountsPerRedemption($data);
         }
 
         throw new InvalidArgumentException("Unsupported type value: '{$data['type']}'");

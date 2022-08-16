@@ -15,8 +15,6 @@ namespace Rebilly\Sdk\Model;
 
 class PayoutRequest extends CommonTransactionRequest
 {
-    private array $fields = [];
-
     public function __construct(array $data = [])
     {
         parent::__construct($data);
@@ -25,12 +23,5 @@ class PayoutRequest extends CommonTransactionRequest
     public static function from(array $data = []): self
     {
         return new self($data);
-    }
-
-    public function jsonSerialize(): array
-    {
-        $data = [];
-
-        return parent::jsonSerialize() + $data;
     }
 }

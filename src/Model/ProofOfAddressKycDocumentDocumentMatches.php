@@ -41,7 +41,7 @@ class ProofOfAddressKycDocumentDocumentMatches implements JsonSerializable
 
     public function setScore(null|float|string $score): self
     {
-        if ($score !== null && is_string($score)) {
+        if (is_string($score)) {
             $score = (float) $score;
         }
 

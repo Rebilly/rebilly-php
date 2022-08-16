@@ -30,10 +30,10 @@ abstract class Worldpay3dsServers implements JsonSerializable
     public static function from(array $data = []): self
     {
         switch ($data['name']) {
-            case 'Other':
-                return new Other($data);
             case 'ThreeDSecureIO3dsServer':
                 return new WorldpayThreeDSecureIOServer($data);
+            case 'Other':
+                return new Other($data);
         }
 
         throw new InvalidArgumentException("Unsupported name value: '{$data['name']}'");

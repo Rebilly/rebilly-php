@@ -30,12 +30,12 @@ abstract class EMerchantPay3dsServers implements JsonSerializable
     public static function from(array $data = []): self
     {
         switch ($data['name']) {
-            case 'Other':
-                return new EMerchantPayOtherServer($data);
             case 'ThreeDSecureIO3dsServer':
                 return new EMerchantPayThreeDSecureIOServer($data);
             case 'eMerchantPay3dsServer':
                 return new EMerchantPay3dsServer($data);
+            case 'Other':
+                return new EMerchantPayOtherServer($data);
         }
 
         throw new InvalidArgumentException("Unsupported name value: '{$data['name']}'");

@@ -30,10 +30,10 @@ abstract class TestProcessor3dsServers implements JsonSerializable
     public static function from(array $data = []): self
     {
         switch ($data['name']) {
-            case 'TestSandbox3dsServer':
-                return new TestProcessor3dsServer($data);
             case 'ThreeDSecureIO3dsServer':
                 return new TestProcessorThreeDSecureIOServer($data);
+            case 'TestSandbox3dsServer':
+                return new TestProcessor3dsServer($data);
         }
 
         throw new InvalidArgumentException("Unsupported name value: '{$data['name']}'");

@@ -95,68 +95,68 @@ abstract class RuleAction implements JsonSerializable
     public static function from(array $data = []): self
     {
         switch ($data['name']) {
-            case 'add-risk-score':
-                return new AddRiskScore($data);
-            case 'adjust-ready-to-pay':
-                return new AdjustReadyToPay($data);
-            case 'blocklist':
-                return new AddBlocklist($data);
-            case 'cancel-scheduled-payments':
-                return new CancelScheduledPayments($data);
+            case 'trigger-webhook':
+                return new TriggerWebhook($data);
+            case 'create-taxjar-transaction':
+                return new CreateTaxjarTransaction($data);
+            case 'request-kyc':
+                return new RequestKyc($data);
+            case 'perform-experian-check':
+                return new PerformExperianCheck($data);
             case 'create-intuit-quickbooks-balance-transaction-entry':
                 return new CreateIntuitQuickbooksBalanceTransactionEntry($data);
-            case 'create-intuit-quickbooks-invoice':
-                return new CreateIntuitQuickbooksInvoice($data);
+            case 'update-intuit-quickbooks-invoice':
+                return new UpdateIntuitQuickbooksInvoice($data);
+            case 'decline-transaction':
+                return new DeclineTransaction($data);
+            case 'create-keap-infusionsoft-payment':
+                return new CreateInfusionsoftPayment($data);
+            case 'send-email':
+                return new SendEmail($data);
+            case 'schedule-reminder':
+                return new ScheduleReminder($data);
+            case 'display-other-choices':
+                return new DisplayOtherChoices($data);
+            case 'offer-purchase-bump':
+                return new OfferPurchaseBump($data);
+            case 'create-keap-infusionsoft-order':
+                return new CreateInfusionsoftOrder($data);
+            case 'tag-or-untag-customer':
+                return new TagOrUntagCustomer($data);
+            case 'stop-subscriptions':
+                return new StopSubscriptions($data);
+            case 'schedule-invoice-retry':
+                return new ScheduleInvoiceRetry($data);
+            case 'adjust-ready-to-pay':
+                return new AdjustReadyToPay($data);
+            case 'remove-reminder':
+                return new RemoveReminder($data);
+            case 'pick-gateway-account':
+                return new PickGatewayAccount($data);
+            case 'schedule-payment':
+                return new SchedulePayment($data);
             case 'create-intuit-quickbooks-payment':
                 return new CreateIntuitQuickbooksPayment($data);
             case 'create-intuit-quickbooks-refund-receipt':
                 return new CreateIntuitQuickbooksRefundReceipt($data);
-            case 'create-intuit-quickbooks-revenue-recognition-entry':
-                return new CreateIntuitQuickbooksRevenueRecognitionEntry($data);
-            case 'create-keap-infusionsoft-order':
-                return new CreateInfusionsoftOrder($data);
-            case 'create-keap-infusionsoft-payment':
-                return new CreateInfusionsoftPayment($data);
-            case 'create-taxjar-transaction':
-                return new CreateTaxjarTransaction($data);
-            case 'decline-transaction':
-                return new DeclineTransaction($data);
-            case 'display-message':
-                return new DisplayMessage($data);
-            case 'display-other-choices':
-                return new DisplayOtherChoices($data);
-            case 'guess-payment-card-expiration':
-                return new GuessPaymentCardExpiration($data);
-            case 'offer-purchase-bump':
-                return new OfferPurchaseBump($data);
-            case 'perform-experian-check':
-                return new PerformExperianCheck($data);
-            case 'pick-gateway-account':
-                return new PickGatewayAccount($data);
-            case 'remove-reminder':
-                return new RemoveReminder($data);
-            case 'request-kyc':
-                return new RequestKyc($data);
-            case 'reset-reminder':
-                return new ResetReminder($data);
-            case 'schedule-invoice-retry':
-                return new ScheduleInvoiceRetry($data);
-            case 'schedule-payment':
-                return new SchedulePayment($data);
-            case 'schedule-reminder':
-                return new ScheduleReminder($data);
-            case 'send-email':
-                return new SendEmail($data);
-            case 'stop-subscriptions':
-                return new StopSubscriptions($data);
-            case 'tag-or-untag-customer':
-                return new TagOrUntagCustomer($data);
-            case 'trigger-webhook':
-                return new TriggerWebhook($data);
-            case 'update-intuit-quickbooks-invoice':
-                return new UpdateIntuitQuickbooksInvoice($data);
             case 'void-intuit-quickbooks-invoice':
                 return new VoidIntuitQuickbooksInvoice($data);
+            case 'add-risk-score':
+                return new AddRiskScore($data);
+            case 'cancel-scheduled-payments':
+                return new CancelScheduledPayments($data);
+            case 'guess-payment-card-expiration':
+                return new GuessPaymentCardExpiration($data);
+            case 'blocklist':
+                return new AddBlocklist($data);
+            case 'reset-reminder':
+                return new ResetReminder($data);
+            case 'create-intuit-quickbooks-invoice':
+                return new CreateIntuitQuickbooksInvoice($data);
+            case 'display-message':
+                return new DisplayMessage($data);
+            case 'create-intuit-quickbooks-revenue-recognition-entry':
+                return new CreateIntuitQuickbooksRevenueRecognitionEntry($data);
         }
 
         throw new InvalidArgumentException("Unsupported name value: '{$data['name']}'");

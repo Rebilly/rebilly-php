@@ -178,7 +178,7 @@ class CreditMemoItems implements JsonSerializable
 
     private function setPrice(null|float|string $price): self
     {
-        if ($price !== null && is_string($price)) {
+        if (is_string($price)) {
             $price = (float) $price;
         }
 

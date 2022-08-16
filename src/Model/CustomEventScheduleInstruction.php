@@ -36,12 +36,12 @@ abstract class CustomEventScheduleInstruction implements JsonSerializable
     public static function from(array $data = []): self
     {
         switch ($data['method']) {
-            case 'date-interval':
-                return new DateInterval($data);
-            case 'day-of-month':
-                return new DayOfMonth($data);
             case 'day-of-week':
                 return new DayOfWeek($data);
+            case 'day-of-month':
+                return new DayOfMonth($data);
+            case 'date-interval':
+                return new DateInterval($data);
         }
 
         throw new InvalidArgumentException("Unsupported method value: '{$data['method']}'");

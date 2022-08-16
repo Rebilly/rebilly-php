@@ -71,18 +71,18 @@ abstract class BalanceTransaction implements JsonSerializable
     public static function from(array $data = []): self
     {
         switch ($data['type']) {
-            case 'buy-fee':
-                return new BuyFeeTransaction($data);
-            case 'charge':
-                return new ChargeTransaction($data);
-            case 'refund':
-                return new RefundTransaction($data);
-            case 'risk-reserve':
-                return new RiskReserveTransaction($data);
             case 'risk-reserve-release':
                 return new RiskReserveReleaseTransaction($data);
             case 'sell-fee':
                 return new SellFeeTransaction($data);
+            case 'charge':
+                return new ChargeTransaction($data);
+            case 'buy-fee':
+                return new BuyFeeTransaction($data);
+            case 'risk-reserve':
+                return new RiskReserveTransaction($data);
+            case 'refund':
+                return new RefundTransaction($data);
         }
 
         throw new InvalidArgumentException("Unsupported type value: '{$data['type']}'");
@@ -144,7 +144,7 @@ abstract class BalanceTransaction implements JsonSerializable
 
     public function setSettlementAmount(null|float|string $settlementAmount): self
     {
-        if ($settlementAmount !== null && is_string($settlementAmount)) {
+        if (is_string($settlementAmount)) {
             $settlementAmount = (float) $settlementAmount;
         }
 
@@ -176,7 +176,7 @@ abstract class BalanceTransaction implements JsonSerializable
 
     public function setSettlementRate(null|float|string $settlementRate): self
     {
-        if ($settlementRate !== null && is_string($settlementRate)) {
+        if (is_string($settlementRate)) {
             $settlementRate = (float) $settlementRate;
         }
 

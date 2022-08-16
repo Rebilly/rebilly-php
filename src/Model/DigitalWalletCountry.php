@@ -17,8 +17,6 @@ use JsonSerializable;
 
 class DigitalWalletCountry implements JsonSerializable
 {
-    private array $fields = [];
-
     public function __construct(array $data = [])
     {
     }
@@ -30,8 +28,6 @@ class DigitalWalletCountry implements JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
-
-        return $data;
+        return [];
     }
 }

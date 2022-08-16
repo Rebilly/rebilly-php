@@ -15,8 +15,6 @@ namespace Rebilly\Sdk\Model;
 
 class SmartInvoice3dsServer extends SmartInvoice3dsServers
 {
-    private array $fields = [];
-
     public function __construct(array $data = [])
     {
         parent::__construct([
@@ -27,12 +25,5 @@ class SmartInvoice3dsServer extends SmartInvoice3dsServers
     public static function from(array $data = []): self
     {
         return new self($data);
-    }
-
-    public function jsonSerialize(): array
-    {
-        $data = [];
-
-        return parent::jsonSerialize() + $data;
     }
 }

@@ -42,10 +42,10 @@ abstract class WebhookAuthorization implements JsonSerializable
                 return new Basic($data);
             case 'digest':
                 return new Digest($data);
-            case 'none':
-                return new WebhookAuthorizationNone($data);
             case 'oauth1':
                 return new Oauth1($data);
+            case 'none':
+                return new WebhookAuthorizationNone($data);
         }
 
         throw new InvalidArgumentException("Unsupported type value: '{$data['type']}'");

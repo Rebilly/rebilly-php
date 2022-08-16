@@ -30,10 +30,10 @@ abstract class SecureTrading3dsServers implements JsonSerializable
     public static function from(array $data = []): self
     {
         switch ($data['name']) {
-            case 'SecureTrading3dsServer':
-                return new SecureTrading3dsServer($data);
             case 'ThreeDSecureIO3dsServer':
                 return new SecureTradingThreeDSecureIOServer($data);
+            case 'SecureTrading3dsServer':
+                return new SecureTrading3dsServer($data);
         }
 
         throw new InvalidArgumentException("Unsupported name value: '{$data['name']}'");

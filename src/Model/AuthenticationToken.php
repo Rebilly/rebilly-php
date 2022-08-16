@@ -31,10 +31,10 @@ abstract class AuthenticationToken extends CommonAuthenticationToken
     public static function from(array $data = []): self
     {
         switch ($data['mode']) {
-            case 'password':
-                return new Password($data);
             case 'passwordless':
                 return new Passwordless($data);
+            case 'password':
+                return new Password($data);
         }
 
         throw new InvalidArgumentException("Unsupported mode value: '{$data['mode']}'");

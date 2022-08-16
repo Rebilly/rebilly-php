@@ -41,10 +41,10 @@ abstract class GatewayAccountPickInstruction implements JsonSerializable
     public static function from(array $data = []): self
     {
         switch ($data['method']) {
-            case 'gateway-account-weights':
-                return new GatewayAccountWeights($data);
             case 'gateway-acquirer-weights':
                 return new GatewayAcquirerWeights($data);
+            case 'gateway-account-weights':
+                return new GatewayAccountWeights($data);
         }
 
         throw new InvalidArgumentException("Unsupported method value: '{$data['method']}'");

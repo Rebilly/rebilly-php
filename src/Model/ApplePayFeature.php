@@ -37,7 +37,7 @@ class ApplePayFeature implements JsonSerializable
         return new self($data);
     }
 
-    /** @return array<0: self, 1: int> **/
+    /** @return null|array<0: self, 1: int> **/
     public static function tryFrom(array $data = []): ?array
     {
         try {

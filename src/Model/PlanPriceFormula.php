@@ -42,14 +42,14 @@ abstract class PlanPriceFormula implements JsonSerializable
         switch ($data['formula']) {
             case 'fixed-fee':
                 return new FixedFee($data);
-            case 'flat-rate':
-                return new FlatRate($data);
-            case 'stairstep':
-                return new Stairstep($data);
-            case 'tiered':
-                return new Tiered($data);
             case 'volume':
                 return new Volume($data);
+            case 'stairstep':
+                return new Stairstep($data);
+            case 'flat-rate':
+                return new FlatRate($data);
+            case 'tiered':
+                return new Tiered($data);
         }
 
         throw new InvalidArgumentException("Unsupported formula value: '{$data['formula']}'");

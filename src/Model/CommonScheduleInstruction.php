@@ -44,16 +44,16 @@ abstract class CommonScheduleInstruction implements JsonSerializable
         switch ($data['method']) {
             case 'auto':
                 return new Auto($data);
-            case 'date-interval':
-                return new DateInterval($data);
-            case 'day-of-month':
-                return new DayOfMonth($data);
-            case 'day-of-week':
-                return new DayOfWeek($data);
             case 'immediately':
                 return new Immediately($data);
+            case 'day-of-week':
+                return new DayOfWeek($data);
             case 'intelligent':
                 return new Intelligent($data);
+            case 'day-of-month':
+                return new DayOfMonth($data);
+            case 'date-interval':
+                return new DateInterval($data);
         }
 
         throw new InvalidArgumentException("Unsupported method value: '{$data['method']}'");

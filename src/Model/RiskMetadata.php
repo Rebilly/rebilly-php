@@ -495,7 +495,7 @@ class RiskMetadata implements JsonSerializable
 
     private function setLatitude(null|float|string $latitude): self
     {
-        if ($latitude !== null && is_string($latitude)) {
+        if (is_string($latitude)) {
             $latitude = (float) $latitude;
         }
 
@@ -506,7 +506,7 @@ class RiskMetadata implements JsonSerializable
 
     private function setLongitude(null|float|string $longitude): self
     {
-        if ($longitude !== null && is_string($longitude)) {
+        if (is_string($longitude)) {
             $longitude = (float) $longitude;
         }
 

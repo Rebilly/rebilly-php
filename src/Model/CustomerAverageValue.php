@@ -56,7 +56,7 @@ class CustomerAverageValue implements JsonSerializable
 
     public function setAmount(null|float|string $amount): self
     {
-        if ($amount !== null && is_string($amount)) {
+        if (is_string($amount)) {
             $amount = (float) $amount;
         }
 
@@ -72,7 +72,7 @@ class CustomerAverageValue implements JsonSerializable
 
     public function setAmountUsd(null|float|string $amountUsd): self
     {
-        if ($amountUsd !== null && is_string($amountUsd)) {
+        if (is_string($amountUsd)) {
             $amountUsd = (float) $amountUsd;
         }
 

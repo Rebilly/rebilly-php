@@ -19,6 +19,7 @@ use function GuzzleHttp\json_decode;
 use function GuzzleHttp\json_encode;
 
 use GuzzleHttp\Psr7\Request;
+use Rebilly\Sdk\Model\DigitalWalletOnboardingApplePay;
 use Rebilly\Sdk\Model\DigitalWalletValidation;
 
 class DigitalWalletsApi
@@ -46,8 +47,8 @@ class DigitalWalletsApi
      * @return DigitalWalletOnboardingApplePay
      */
     public function create(
-        \Rebilly\Sdk\Model\DigitalWalletOnboardingApplePay $digitalWalletOnboardingApplePay,
-    ): \Rebilly\Sdk\Model\DigitalWalletOnboardingApplePay {
+        DigitalWalletOnboardingApplePay $digitalWalletOnboardingApplePay,
+    ): DigitalWalletOnboardingApplePay {
         $uri = '/digital-wallets/onboarding/apple-pay';
 
         $request = new Request('POST', $uri, body: json_encode($digitalWalletOnboardingApplePay));

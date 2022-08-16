@@ -30,10 +30,10 @@ abstract class NMI3dsServers implements JsonSerializable
     public static function from(array $data = []): self
     {
         switch ($data['name']) {
-            case 'Other':
-                return new NMIOtherServer($data);
             case 'ThreeDSecureIO3dsServer':
                 return new NMIThreeDSecureIOServer($data);
+            case 'Other':
+                return new NMIOtherServer($data);
         }
 
         throw new InvalidArgumentException("Unsupported name value: '{$data['name']}'");
