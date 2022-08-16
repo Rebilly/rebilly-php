@@ -64,8 +64,8 @@ class ReadyToPayPayPalMethod implements JsonSerializable
 
     public function setFeature(null|PayPalBillingAgreementFeature|array $feature): self
     {
-        if ($feature !== null && !($feature instanceof \Rebilly\Sdk\Model\PayPalBillingAgreementFeature)) {
-            $feature = \Rebilly\Sdk\Model\PayPalBillingAgreementFeature::from($feature);
+        if ($feature !== null && !($feature instanceof PayPalBillingAgreementFeature)) {
+            $feature = PayPalBillingAgreementFeature::from($feature);
         }
 
         $this->fields['feature'] = $feature;

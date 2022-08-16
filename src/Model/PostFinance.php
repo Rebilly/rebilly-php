@@ -43,8 +43,8 @@ class PostFinance extends GatewayAccount
 
     public function setCredentials(PostFinanceCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\PostFinanceCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\PostFinanceCredentials::from($credentials);
+        if (!($credentials instanceof PostFinanceCredentials)) {
+            $credentials = PostFinanceCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class PostFinance extends GatewayAccount
 
     public function setSettings(null|PostFinanceSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\PostFinanceSettings)) {
-            $settings = \Rebilly\Sdk\Model\PostFinanceSettings::from($settings);
+        if ($settings !== null && !($settings instanceof PostFinanceSettings)) {
+            $settings = PostFinanceSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

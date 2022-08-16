@@ -104,7 +104,7 @@ class OrderItem implements JsonSerializable
     }
 
     /**
-     * @return null|array{product:\Rebilly\Sdk\Model\Product}
+     * @return null|array{product:Product}
      */
     public function getEmbedded(): ?array
     {
@@ -142,14 +142,14 @@ class OrderItem implements JsonSerializable
     protected function ensurePlan(array|FlexiblePlan|OriginalPlan $data): FlexiblePlan|OriginalPlan
     {
         if (
-            $data instanceof \Rebilly\Sdk\Model\FlexiblePlan
-            || $data instanceof \Rebilly\Sdk\Model\OriginalPlan
+            $data instanceof FlexiblePlan
+            || $data instanceof OriginalPlan
         ) {
             return $data;
         }
         $candidates = [];
-        $candidates[] = \Rebilly\Sdk\Model\FlexiblePlan::tryFrom($data);
-        $candidates[] = \Rebilly\Sdk\Model\OriginalPlan::tryFrom($data);
+        $candidates[] = FlexiblePlan::tryFrom($data);
+        $candidates[] = OriginalPlan::tryFrom($data);
 
         $determined = array_reduce($candidates, function (?array $current, array $candidate) {
             if ($current === null || $current[1] < $candidate[1]) {
@@ -160,8 +160,8 @@ class OrderItem implements JsonSerializable
         });
 
         if (
-            $determined[0] instanceof \Rebilly\Sdk\Model\FlexiblePlan
-            || $determined[0] instanceof \Rebilly\Sdk\Model\OriginalPlan
+            $determined[0] instanceof FlexiblePlan
+            || $determined[0] instanceof OriginalPlan
         ) {
             return $determined[0];
         }
@@ -191,11 +191,11 @@ class OrderItem implements JsonSerializable
     }
 
     /**
-     * @param null|array{product:\Rebilly\Sdk\Model\Product} $embedded
+     * @param null|array{product:Product} $embedded
      */
     private function setEmbedded(null|array $embedded): self
     {
-        $embedded['product'] = isset($embedded['product']) ? ($embedded['product'] instanceof \Rebilly\Sdk\Model\Product ? $embedded['product'] : \Rebilly\Sdk\Model\Product::from($embedded['product'])) : null;
+        $embedded['product'] = isset($embedded['product']) ? ($embedded['product'] instanceof Product ? $embedded['product'] : Product::from($embedded['product'])) : null;
 
         $this->fields['_embedded'] = $embedded;
 

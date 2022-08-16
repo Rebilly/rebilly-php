@@ -38,8 +38,8 @@ class LeadSourceEmbed implements JsonSerializable
 
     public function setLeadSource(null|LeadSource|array $leadSource): self
     {
-        if ($leadSource !== null && !($leadSource instanceof \Rebilly\Sdk\Model\LeadSource)) {
-            $leadSource = \Rebilly\Sdk\Model\LeadSource::from($leadSource);
+        if ($leadSource !== null && !($leadSource instanceof LeadSource)) {
+            $leadSource = LeadSource::from($leadSource);
         }
 
         $this->fields['leadSource'] = $leadSource;

@@ -93,8 +93,8 @@ class TransactionBumpOffer implements JsonSerializable
 
     public function setOutcome(null|PurchaseBumpStatus|string $outcome): self
     {
-        if ($outcome !== null && !($outcome instanceof \Rebilly\Sdk\Model\PurchaseBumpStatus)) {
-            $outcome = \Rebilly\Sdk\Model\PurchaseBumpStatus::from($outcome);
+        if ($outcome !== null && !($outcome instanceof PurchaseBumpStatus)) {
+            $outcome = PurchaseBumpStatus::from($outcome);
         }
 
         $this->fields['outcome'] = $outcome;

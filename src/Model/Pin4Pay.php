@@ -40,8 +40,8 @@ class Pin4Pay extends GatewayAccount
 
     public function setCredentials(Pin4PayCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\Pin4PayCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\Pin4PayCredentials::from($credentials);
+        if (!($credentials instanceof Pin4PayCredentials)) {
+            $credentials = Pin4PayCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

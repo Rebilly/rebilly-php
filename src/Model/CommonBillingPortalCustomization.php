@@ -56,8 +56,8 @@ class CommonBillingPortalCustomization implements JsonSerializable
 
     public function setColors(null|CommonBillingPortalCustomizationColors|array $colors): self
     {
-        if ($colors !== null && !($colors instanceof \Rebilly\Sdk\Model\CommonBillingPortalCustomizationColors)) {
-            $colors = \Rebilly\Sdk\Model\CommonBillingPortalCustomizationColors::from($colors);
+        if ($colors !== null && !($colors instanceof CommonBillingPortalCustomizationColors)) {
+            $colors = CommonBillingPortalCustomizationColors::from($colors);
         }
 
         $this->fields['colors'] = $colors;
@@ -72,8 +72,8 @@ class CommonBillingPortalCustomization implements JsonSerializable
 
     public function setLinks(null|CommonBillingPortalCustomizationLinks|array $links): self
     {
-        if ($links !== null && !($links instanceof \Rebilly\Sdk\Model\CommonBillingPortalCustomizationLinks)) {
-            $links = \Rebilly\Sdk\Model\CommonBillingPortalCustomizationLinks::from($links);
+        if ($links !== null && !($links instanceof CommonBillingPortalCustomizationLinks)) {
+            $links = CommonBillingPortalCustomizationLinks::from($links);
         }
 
         $this->fields['links'] = $links;

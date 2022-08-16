@@ -46,8 +46,8 @@ class Ilixium extends GatewayAccount
 
     public function setCredentials(IlixiumCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\IlixiumCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\IlixiumCredentials::from($credentials);
+        if (!($credentials instanceof IlixiumCredentials)) {
+            $credentials = IlixiumCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -62,8 +62,8 @@ class Ilixium extends GatewayAccount
 
     public function setSettings(null|IlixiumSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\IlixiumSettings)) {
-            $settings = \Rebilly\Sdk\Model\IlixiumSettings::from($settings);
+        if ($settings !== null && !($settings instanceof IlixiumSettings)) {
+            $settings = IlixiumSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;
@@ -78,8 +78,8 @@ class Ilixium extends GatewayAccount
 
     public function setThreeDSecureServer(null|Ilixium3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\Ilixium3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\Ilixium3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Ilixium3dsServers)) {
+            $threeDSecureServer = Ilixium3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

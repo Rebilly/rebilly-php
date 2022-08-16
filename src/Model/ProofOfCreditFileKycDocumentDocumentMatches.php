@@ -38,8 +38,8 @@ class ProofOfCreditFileKycDocumentDocumentMatches implements JsonSerializable
 
     public function setData(null|CreditFileMatches|array $data): self
     {
-        if ($data !== null && !($data instanceof \Rebilly\Sdk\Model\CreditFileMatches)) {
-            $data = \Rebilly\Sdk\Model\CreditFileMatches::from($data);
+        if ($data !== null && !($data instanceof CreditFileMatches)) {
+            $data = CreditFileMatches::from($data);
         }
 
         $this->fields['data'] = $data;

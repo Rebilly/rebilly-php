@@ -38,8 +38,8 @@ class ProofOfPurchaseKycDocumentDocumentMatches implements JsonSerializable
 
     public function setData(null|PurchaseMatches|array $data): self
     {
-        if ($data !== null && !($data instanceof \Rebilly\Sdk\Model\PurchaseMatches)) {
-            $data = \Rebilly\Sdk\Model\PurchaseMatches::from($data);
+        if ($data !== null && !($data instanceof PurchaseMatches)) {
+            $data = PurchaseMatches::from($data);
         }
 
         $this->fields['data'] = $data;

@@ -40,8 +40,8 @@ class LPG extends GatewayAccount
 
     public function setCredentials(LPGCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\LPGCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\LPGCredentials::from($credentials);
+        if (!($credentials instanceof LPGCredentials)) {
+            $credentials = LPGCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

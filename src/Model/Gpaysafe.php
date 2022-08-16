@@ -40,8 +40,8 @@ class Gpaysafe extends GatewayAccount
 
     public function setCredentials(GpaysafeCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\GpaysafeCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\GpaysafeCredentials::from($credentials);
+        if (!($credentials instanceof GpaysafeCredentials)) {
+            $credentials = GpaysafeCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

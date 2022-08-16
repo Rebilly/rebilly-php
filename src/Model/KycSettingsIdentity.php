@@ -41,8 +41,8 @@ class KycSettingsIdentity implements JsonSerializable
 
     public function setWeights(null|KycSettingsIdentityWeights|array $weights): self
     {
-        if ($weights !== null && !($weights instanceof \Rebilly\Sdk\Model\KycSettingsIdentityWeights)) {
-            $weights = \Rebilly\Sdk\Model\KycSettingsIdentityWeights::from($weights);
+        if ($weights !== null && !($weights instanceof KycSettingsIdentityWeights)) {
+            $weights = KycSettingsIdentityWeights::from($weights);
         }
 
         $this->fields['weights'] = $weights;
@@ -57,8 +57,8 @@ class KycSettingsIdentity implements JsonSerializable
 
     public function setThresholds(null|KycSettingsIdentityThresholds|array $thresholds): self
     {
-        if ($thresholds !== null && !($thresholds instanceof \Rebilly\Sdk\Model\KycSettingsIdentityThresholds)) {
-            $thresholds = \Rebilly\Sdk\Model\KycSettingsIdentityThresholds::from($thresholds);
+        if ($thresholds !== null && !($thresholds instanceof KycSettingsIdentityThresholds)) {
+            $thresholds = KycSettingsIdentityThresholds::from($thresholds);
         }
 
         $this->fields['thresholds'] = $thresholds;

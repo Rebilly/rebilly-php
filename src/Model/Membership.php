@@ -59,8 +59,8 @@ class Membership implements JsonSerializable
 
     public function setOrganization(MembershipOrganization|array $organization): self
     {
-        if (!($organization instanceof \Rebilly\Sdk\Model\MembershipOrganization)) {
-            $organization = \Rebilly\Sdk\Model\MembershipOrganization::from($organization);
+        if (!($organization instanceof MembershipOrganization)) {
+            $organization = MembershipOrganization::from($organization);
         }
 
         $this->fields['organization'] = $organization;
@@ -75,8 +75,8 @@ class Membership implements JsonSerializable
 
     public function setUser(MembershipUser|array $user): self
     {
-        if (!($user instanceof \Rebilly\Sdk\Model\MembershipUser)) {
-            $user = \Rebilly\Sdk\Model\MembershipUser::from($user);
+        if (!($user instanceof MembershipUser)) {
+            $user = MembershipUser::from($user);
         }
 
         $this->fields['user'] = $user;
@@ -162,7 +162,7 @@ class Membership implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\SelfLink[]
+     * @return null|SelfLink[]
      */
     public function getLinks(): ?array
     {
@@ -208,11 +208,11 @@ class Membership implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\SelfLink[] $links
+     * @param null|SelfLink[] $links
      */
     private function setLinks(null|array $links): self
     {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\SelfLink ? $value : \Rebilly\Sdk\Model\SelfLink::from($value)) : null, $links) : null;
+        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 
         $this->fields['_links'] = $links;
 

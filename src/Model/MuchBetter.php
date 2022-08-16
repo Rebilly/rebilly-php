@@ -43,8 +43,8 @@ class MuchBetter extends GatewayAccount
 
     public function setCredentials(MuchBetterCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\MuchBetterCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\MuchBetterCredentials::from($credentials);
+        if (!($credentials instanceof MuchBetterCredentials)) {
+            $credentials = MuchBetterCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class MuchBetter extends GatewayAccount
 
     public function setSettings(null|MuchBetterSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\MuchBetterSettings)) {
-            $settings = \Rebilly\Sdk\Model\MuchBetterSettings::from($settings);
+        if ($settings !== null && !($settings instanceof MuchBetterSettings)) {
+            $settings = MuchBetterSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

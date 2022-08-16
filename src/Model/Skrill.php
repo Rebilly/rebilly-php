@@ -43,8 +43,8 @@ class Skrill extends GatewayAccount
 
     public function setCredentials(SkrillCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\SkrillCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\SkrillCredentials::from($credentials);
+        if (!($credentials instanceof SkrillCredentials)) {
+            $credentials = SkrillCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class Skrill extends GatewayAccount
 
     public function setSettings(null|SkrillSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\SkrillSettings)) {
-            $settings = \Rebilly\Sdk\Model\SkrillSettings::from($settings);
+        if ($settings !== null && !($settings instanceof SkrillSettings)) {
+            $settings = SkrillSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

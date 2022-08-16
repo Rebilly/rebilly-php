@@ -46,8 +46,8 @@ class Adyen extends GatewayAccount
 
     public function setCredentials(AdyenCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\AdyenCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\AdyenCredentials::from($credentials);
+        if (!($credentials instanceof AdyenCredentials)) {
+            $credentials = AdyenCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -62,8 +62,8 @@ class Adyen extends GatewayAccount
 
     public function setSettings(AdyenSettings|array $settings): self
     {
-        if (!($settings instanceof \Rebilly\Sdk\Model\AdyenSettings)) {
-            $settings = \Rebilly\Sdk\Model\AdyenSettings::from($settings);
+        if (!($settings instanceof AdyenSettings)) {
+            $settings = AdyenSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;
@@ -78,8 +78,8 @@ class Adyen extends GatewayAccount
 
     public function setThreeDSecureServer(null|Adyen3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\Adyen3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\Adyen3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Adyen3dsServers)) {
+            $threeDSecureServer = Adyen3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

@@ -43,8 +43,8 @@ class IpayOptions extends GatewayAccount
 
     public function setCredentials(IpayOptionsCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\IpayOptionsCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\IpayOptionsCredentials::from($credentials);
+        if (!($credentials instanceof IpayOptionsCredentials)) {
+            $credentials = IpayOptionsCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class IpayOptions extends GatewayAccount
 
     public function setSettings(IpayOptionsSettings|array $settings): self
     {
-        if (!($settings instanceof \Rebilly\Sdk\Model\IpayOptionsSettings)) {
-            $settings = \Rebilly\Sdk\Model\IpayOptionsSettings::from($settings);
+        if (!($settings instanceof IpayOptionsSettings)) {
+            $settings = IpayOptionsSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

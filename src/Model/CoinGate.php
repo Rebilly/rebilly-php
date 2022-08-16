@@ -43,8 +43,8 @@ class CoinGate extends GatewayAccount
 
     public function setCredentials(CoinGateCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\CoinGateCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\CoinGateCredentials::from($credentials);
+        if (!($credentials instanceof CoinGateCredentials)) {
+            $credentials = CoinGateCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class CoinGate extends GatewayAccount
 
     public function setSettings(CoinGateSettings|array $settings): self
     {
-        if (!($settings instanceof \Rebilly\Sdk\Model\CoinGateSettings)) {
-            $settings = \Rebilly\Sdk\Model\CoinGateSettings::from($settings);
+        if (!($settings instanceof CoinGateSettings)) {
+            $settings = CoinGateSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

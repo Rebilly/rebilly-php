@@ -40,8 +40,8 @@ class CauriPayment extends GatewayAccount
 
     public function setCredentials(CauriPaymentCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\CauriPaymentCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\CauriPaymentCredentials::from($credentials);
+        if (!($credentials instanceof CauriPaymentCredentials)) {
+            $credentials = CauriPaymentCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

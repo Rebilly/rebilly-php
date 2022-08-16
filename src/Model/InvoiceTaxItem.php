@@ -112,8 +112,8 @@ class InvoiceTaxItem implements JsonSerializable
 
     public function setJurisdictions(null|InvoiceTaxItemJurisdictions|array $jurisdictions): self
     {
-        if ($jurisdictions !== null && !($jurisdictions instanceof \Rebilly\Sdk\Model\InvoiceTaxItemJurisdictions)) {
-            $jurisdictions = \Rebilly\Sdk\Model\InvoiceTaxItemJurisdictions::from($jurisdictions);
+        if ($jurisdictions !== null && !($jurisdictions instanceof InvoiceTaxItemJurisdictions)) {
+            $jurisdictions = InvoiceTaxItemJurisdictions::from($jurisdictions);
         }
 
         $this->fields['jurisdictions'] = $jurisdictions;

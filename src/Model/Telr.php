@@ -43,8 +43,8 @@ class Telr extends GatewayAccount
 
     public function setCredentials(TelrCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\TelrCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\TelrCredentials::from($credentials);
+        if (!($credentials instanceof TelrCredentials)) {
+            $credentials = TelrCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class Telr extends GatewayAccount
 
     public function setSettings(null|TelrSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\TelrSettings)) {
-            $settings = \Rebilly\Sdk\Model\TelrSettings::from($settings);
+        if ($settings !== null && !($settings instanceof TelrSettings)) {
+            $settings = TelrSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

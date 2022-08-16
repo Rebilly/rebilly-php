@@ -40,8 +40,8 @@ class NinjaWallet extends GatewayAccount
 
     public function setCredentials(NinjaWalletCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\NinjaWalletCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\NinjaWalletCredentials::from($credentials);
+        if (!($credentials instanceof NinjaWalletCredentials)) {
+            $credentials = NinjaWalletCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

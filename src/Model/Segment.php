@@ -73,8 +73,8 @@ class Segment implements JsonSerializable
 
     public function setOwner(SegmentOwner|array $owner): self
     {
-        if (!($owner instanceof \Rebilly\Sdk\Model\SegmentOwner)) {
-            $owner = \Rebilly\Sdk\Model\SegmentOwner::from($owner);
+        if (!($owner instanceof SegmentOwner)) {
+            $owner = SegmentOwner::from($owner);
         }
 
         $this->fields['owner'] = $owner;
@@ -139,7 +139,7 @@ class Segment implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\SegmentUsers[]
+     * @return null|SegmentUsers[]
      */
     public function getUsers(): ?array
     {
@@ -218,11 +218,11 @@ class Segment implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\SegmentUsers[] $users
+     * @param null|SegmentUsers[] $users
      */
     private function setUsers(null|array $users): self
     {
-        $users = $users !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\SegmentUsers ? $value : \Rebilly\Sdk\Model\SegmentUsers::from($value)) : null, $users) : null;
+        $users = $users !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SegmentUsers ? $value : SegmentUsers::from($value)) : null, $users) : null;
 
         $this->fields['users'] = $users;
 

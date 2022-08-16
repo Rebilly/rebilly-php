@@ -40,8 +40,8 @@ class Cashflows extends GatewayAccount
 
     public function setCredentials(CashflowsCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\CashflowsCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\CashflowsCredentials::from($credentials);
+        if (!($credentials instanceof CashflowsCredentials)) {
+            $credentials = CashflowsCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

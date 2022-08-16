@@ -40,8 +40,8 @@ class Gooney extends GatewayAccount
 
     public function setCredentials(GooneyCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\GooneyCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\GooneyCredentials::from($credentials);
+        if (!($credentials instanceof GooneyCredentials)) {
+            $credentials = GooneyCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

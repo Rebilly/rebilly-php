@@ -64,7 +64,7 @@ class EddSearchResult implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\EddScoreDetails[]
+     * @return null|EddScoreDetails[]
      */
     public function getSearchResultData(): ?array
     {
@@ -124,11 +124,11 @@ class EddSearchResult implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\EddScoreDetails[] $searchResultData
+     * @param null|EddScoreDetails[] $searchResultData
      */
     private function setSearchResultData(null|array $searchResultData): self
     {
-        $searchResultData = $searchResultData !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\EddScoreDetails ? $value : \Rebilly\Sdk\Model\EddScoreDetails::from($value)) : null, $searchResultData) : null;
+        $searchResultData = $searchResultData !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof EddScoreDetails ? $value : EddScoreDetails::from($value)) : null, $searchResultData) : null;
 
         $this->fields['searchResultData'] = $searchResultData;
 

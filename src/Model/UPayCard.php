@@ -43,8 +43,8 @@ class UPayCard extends GatewayAccount
 
     public function setCredentials(UPayCardCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\UPayCardCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\UPayCardCredentials::from($credentials);
+        if (!($credentials instanceof UPayCardCredentials)) {
+            $credentials = UPayCardCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class UPayCard extends GatewayAccount
 
     public function setSettings(null|UPayCardSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\UPayCardSettings)) {
-            $settings = \Rebilly\Sdk\Model\UPayCardSettings::from($settings);
+        if ($settings !== null && !($settings instanceof UPayCardSettings)) {
+            $settings = UPayCardSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

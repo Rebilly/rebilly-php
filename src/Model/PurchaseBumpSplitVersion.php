@@ -65,7 +65,7 @@ class PurchaseBumpSplitVersion implements JsonSerializable
     }
 
     /**
-     * @return \Rebilly\Sdk\Model\PurchaseBumpOfferList[]
+     * @return PurchaseBumpOfferList[]
      */
     public function getOffers(): array
     {
@@ -73,11 +73,11 @@ class PurchaseBumpSplitVersion implements JsonSerializable
     }
 
     /**
-     * @param \Rebilly\Sdk\Model\PurchaseBumpOfferList[] $offers
+     * @param PurchaseBumpOfferList[] $offers
      */
     public function setOffers(array $offers): self
     {
-        $offers = array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\PurchaseBumpOfferList ? $value : \Rebilly\Sdk\Model\PurchaseBumpOfferList::from($value)) : null, $offers);
+        $offers = array_map(fn ($value) => $value !== null ? ($value instanceof PurchaseBumpOfferList ? $value : PurchaseBumpOfferList::from($value)) : null, $offers);
 
         $this->fields['offers'] = $offers;
 
@@ -85,7 +85,7 @@ class PurchaseBumpSplitVersion implements JsonSerializable
     }
 
     /**
-     * @return \Rebilly\Sdk\Model\PurchaseBumpOfferContent[]
+     * @return PurchaseBumpOfferContent[]
      */
     public function getChoices(): array
     {
@@ -93,11 +93,11 @@ class PurchaseBumpSplitVersion implements JsonSerializable
     }
 
     /**
-     * @param \Rebilly\Sdk\Model\PurchaseBumpOfferContent[] $choices
+     * @param PurchaseBumpOfferContent[] $choices
      */
     public function setChoices(array $choices): self
     {
-        $choices = array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\PurchaseBumpOfferContent ? $value : \Rebilly\Sdk\Model\PurchaseBumpOfferContent::from($value)) : null, $choices);
+        $choices = array_map(fn ($value) => $value !== null ? ($value instanceof PurchaseBumpOfferContent ? $value : PurchaseBumpOfferContent::from($value)) : null, $choices);
 
         $this->fields['choices'] = $choices;
 

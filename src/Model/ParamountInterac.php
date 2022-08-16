@@ -43,8 +43,8 @@ class ParamountInterac extends GatewayAccount
 
     public function setCredentials(ParamountInteracCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\ParamountInteracCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\ParamountInteracCredentials::from($credentials);
+        if (!($credentials instanceof ParamountInteracCredentials)) {
+            $credentials = ParamountInteracCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class ParamountInterac extends GatewayAccount
 
     public function setSettings(null|ParamountInteracSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\ParamountInteracSettings)) {
-            $settings = \Rebilly\Sdk\Model\ParamountInteracSettings::from($settings);
+        if ($settings !== null && !($settings instanceof ParamountInteracSettings)) {
+            $settings = ParamountInteracSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

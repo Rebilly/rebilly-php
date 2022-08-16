@@ -38,8 +38,8 @@ class BankAccountEmbed implements JsonSerializable
 
     public function setBankAccount(null|BankAccount|array $bankAccount): self
     {
-        if ($bankAccount !== null && !($bankAccount instanceof \Rebilly\Sdk\Model\BankAccount)) {
-            $bankAccount = \Rebilly\Sdk\Model\BankAccount::from($bankAccount);
+        if ($bankAccount !== null && !($bankAccount instanceof BankAccount)) {
+            $bankAccount = BankAccount::from($bankAccount);
         }
 
         $this->fields['bankAccount'] = $bankAccount;

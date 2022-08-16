@@ -156,8 +156,8 @@ class Website implements JsonSerializable
 
     public function setSettings(null|WebsiteSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\WebsiteSettings)) {
-            $settings = \Rebilly\Sdk\Model\WebsiteSettings::from($settings);
+        if ($settings !== null && !($settings instanceof WebsiteSettings)) {
+            $settings = WebsiteSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;
@@ -171,7 +171,7 @@ class Website implements JsonSerializable
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\OrganizationLink|\Rebilly\Sdk\Model\SelfLink>
+     * @return null|array<OrganizationLink|SelfLink>
      */
     public function getLinks(): ?array
     {
@@ -244,7 +244,7 @@ class Website implements JsonSerializable
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\OrganizationLink|\Rebilly\Sdk\Model\SelfLink> $links
+     * @param null|array<OrganizationLink|SelfLink> $links
      */
     private function setLinks(null|array $links): self
     {

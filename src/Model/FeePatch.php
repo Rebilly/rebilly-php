@@ -112,8 +112,8 @@ class FeePatch implements JsonSerializable
 
     public function setFormula(null|FeeFormula|array $formula): self
     {
-        if ($formula !== null && !($formula instanceof \Rebilly\Sdk\Model\FeeFormula)) {
-            $formula = \Rebilly\Sdk\Model\FeeFormula::from($formula);
+        if ($formula !== null && !($formula instanceof FeeFormula)) {
+            $formula = FeeFormula::from($formula);
         }
 
         $this->fields['formula'] = $formula;
@@ -143,7 +143,7 @@ class FeePatch implements JsonSerializable
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\SelfLink>
+     * @return null|array<SelfLink>
      */
     public function getLinks(): ?array
     {
@@ -200,7 +200,7 @@ class FeePatch implements JsonSerializable
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\SelfLink> $links
+     * @param null|array<SelfLink> $links
      */
     private function setLinks(null|array $links): self
     {

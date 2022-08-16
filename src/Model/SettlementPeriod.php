@@ -94,8 +94,8 @@ class SettlementPeriod implements JsonSerializable
 
     public function setAnchor(null|SettlementPeriodAnchor|array $anchor): self
     {
-        if ($anchor !== null && !($anchor instanceof \Rebilly\Sdk\Model\SettlementPeriodAnchor)) {
-            $anchor = \Rebilly\Sdk\Model\SettlementPeriodAnchor::from($anchor);
+        if ($anchor !== null && !($anchor instanceof SettlementPeriodAnchor)) {
+            $anchor = SettlementPeriodAnchor::from($anchor);
         }
 
         $this->fields['anchor'] = $anchor;
@@ -125,14 +125,14 @@ class SettlementPeriod implements JsonSerializable
     protected function ensureUnit(string|TimeUnit|TimePluralUnit $data): TimeUnit|TimePluralUnit
     {
         if (
-            $data instanceof \Rebilly\Sdk\Model\TimeUnit
-            || $data instanceof \Rebilly\Sdk\Model\TimePluralUnit
+            $data instanceof TimeUnit
+            || $data instanceof TimePluralUnit
         ) {
             return $data;
         }
         $candidates = [];
-        $candidates[] = \Rebilly\Sdk\Model\TimeUnit::tryFrom($data);
-        $candidates[] = \Rebilly\Sdk\Model\TimePluralUnit::tryFrom($data);
+        $candidates[] = TimeUnit::tryFrom($data);
+        $candidates[] = TimePluralUnit::tryFrom($data);
 
         $determined = array_reduce($candidates, function (?array $current, array $candidate) {
             if ($current === null || $current[1] < $candidate[1]) {
@@ -143,8 +143,8 @@ class SettlementPeriod implements JsonSerializable
         });
 
         if (
-            $determined[0] instanceof \Rebilly\Sdk\Model\TimeUnit
-            || $determined[0] instanceof \Rebilly\Sdk\Model\TimePluralUnit
+            $determined[0] instanceof TimeUnit
+            || $determined[0] instanceof TimePluralUnit
         ) {
             return $determined[0];
         }

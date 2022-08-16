@@ -38,8 +38,8 @@ class ParentTransactionEmbed implements JsonSerializable
 
     public function setParentTransaction(null|Transaction|array $parentTransaction): self
     {
-        if ($parentTransaction !== null && !($parentTransaction instanceof \Rebilly\Sdk\Model\Transaction)) {
-            $parentTransaction = \Rebilly\Sdk\Model\Transaction::from($parentTransaction);
+        if ($parentTransaction !== null && !($parentTransaction instanceof Transaction)) {
+            $parentTransaction = Transaction::from($parentTransaction);
         }
 
         $this->fields['parentTransaction'] = $parentTransaction;

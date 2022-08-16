@@ -43,8 +43,8 @@ class Konnektive extends GatewayAccount
 
     public function setCredentials(KonnektiveCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\KonnektiveCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\KonnektiveCredentials::from($credentials);
+        if (!($credentials instanceof KonnektiveCredentials)) {
+            $credentials = KonnektiveCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class Konnektive extends GatewayAccount
 
     public function setSettings(KonnektiveSettings|array $settings): self
     {
-        if (!($settings instanceof \Rebilly\Sdk\Model\KonnektiveSettings)) {
-            $settings = \Rebilly\Sdk\Model\KonnektiveSettings::from($settings);
+        if (!($settings instanceof KonnektiveSettings)) {
+            $settings = KonnektiveSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

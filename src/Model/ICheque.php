@@ -40,8 +40,8 @@ class ICheque extends GatewayAccount
 
     public function setCredentials(IChequeCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\IChequeCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\IChequeCredentials::from($credentials);
+        if (!($credentials instanceof IChequeCredentials)) {
+            $credentials = IChequeCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

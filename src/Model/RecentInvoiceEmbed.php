@@ -38,8 +38,8 @@ class RecentInvoiceEmbed implements JsonSerializable
 
     public function setRecentInvoice(null|Invoice|array $recentInvoice): self
     {
-        if ($recentInvoice !== null && !($recentInvoice instanceof \Rebilly\Sdk\Model\Invoice)) {
-            $recentInvoice = \Rebilly\Sdk\Model\Invoice::from($recentInvoice);
+        if ($recentInvoice !== null && !($recentInvoice instanceof Invoice)) {
+            $recentInvoice = Invoice::from($recentInvoice);
         }
 
         $this->fields['recentInvoice'] = $recentInvoice;

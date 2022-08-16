@@ -46,8 +46,8 @@ class Panamerican extends GatewayAccount
 
     public function setCredentials(PanamericanCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\PanamericanCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\PanamericanCredentials::from($credentials);
+        if (!($credentials instanceof PanamericanCredentials)) {
+            $credentials = PanamericanCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -62,8 +62,8 @@ class Panamerican extends GatewayAccount
 
     public function setThreeDSecureServer(null|Panamerican3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\Panamerican3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\Panamerican3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Panamerican3dsServers)) {
+            $threeDSecureServer = Panamerican3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;
@@ -78,8 +78,8 @@ class Panamerican extends GatewayAccount
 
     public function setSettings(PanamericanSettings|array $settings): self
     {
-        if (!($settings instanceof \Rebilly\Sdk\Model\PanamericanSettings)) {
-            $settings = \Rebilly\Sdk\Model\PanamericanSettings::from($settings);
+        if (!($settings instanceof PanamericanSettings)) {
+            $settings = PanamericanSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

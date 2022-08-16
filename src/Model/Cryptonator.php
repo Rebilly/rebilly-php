@@ -40,8 +40,8 @@ class Cryptonator extends GatewayAccount
 
     public function setCredentials(CryptonatorCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\CryptonatorCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\CryptonatorCredentials::from($credentials);
+        if (!($credentials instanceof CryptonatorCredentials)) {
+            $credentials = CryptonatorCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

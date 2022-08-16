@@ -133,8 +133,8 @@ class PaymentCard extends CommonPaymentCard
 
     public function setRiskMetadata(null|RiskMetadata|array $riskMetadata): self
     {
-        if ($riskMetadata !== null && !($riskMetadata instanceof \Rebilly\Sdk\Model\RiskMetadata)) {
-            $riskMetadata = \Rebilly\Sdk\Model\RiskMetadata::from($riskMetadata);
+        if ($riskMetadata !== null && !($riskMetadata instanceof RiskMetadata)) {
+            $riskMetadata = RiskMetadata::from($riskMetadata);
         }
 
         $this->fields['riskMetadata'] = $riskMetadata;
@@ -143,7 +143,7 @@ class PaymentCard extends CommonPaymentCard
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\ApprovalUrlLink|\Rebilly\Sdk\Model\AuthTransactionLink|\Rebilly\Sdk\Model\CustomerLink|\Rebilly\Sdk\Model\SelfLink>
+     * @return null|array<ApprovalUrlLink|AuthTransactionLink|CustomerLink|SelfLink>
      */
     public function getLinks(): ?array
     {
@@ -151,7 +151,7 @@ class PaymentCard extends CommonPaymentCard
     }
 
     /**
-     * @return null|array{authTransaction:\Rebilly\Sdk\Model\Transaction,customer:\Rebilly\Sdk\Model\Customer}
+     * @return null|array{authTransaction:Transaction,customer:Customer}
      */
     public function getEmbedded(): ?array
     {
@@ -217,7 +217,7 @@ class PaymentCard extends CommonPaymentCard
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\ApprovalUrlLink|\Rebilly\Sdk\Model\AuthTransactionLink|\Rebilly\Sdk\Model\CustomerLink|\Rebilly\Sdk\Model\SelfLink> $links
+     * @param null|array<ApprovalUrlLink|AuthTransactionLink|CustomerLink|SelfLink> $links
      */
     private function setLinks(null|array $links): self
     {
@@ -229,12 +229,12 @@ class PaymentCard extends CommonPaymentCard
     }
 
     /**
-     * @param null|array{authTransaction:\Rebilly\Sdk\Model\Transaction,customer:\Rebilly\Sdk\Model\Customer} $embedded
+     * @param null|array{authTransaction:Transaction,customer:Customer} $embedded
      */
     private function setEmbedded(null|array $embedded): self
     {
-        $embedded['authTransaction'] = isset($embedded['authTransaction']) ? ($embedded['authTransaction'] instanceof \Rebilly\Sdk\Model\Transaction ? $embedded['authTransaction'] : \Rebilly\Sdk\Model\Transaction::from($embedded['authTransaction'])) : null;
-        $embedded['customer'] = isset($embedded['customer']) ? ($embedded['customer'] instanceof \Rebilly\Sdk\Model\Customer ? $embedded['customer'] : \Rebilly\Sdk\Model\Customer::from($embedded['customer'])) : null;
+        $embedded['authTransaction'] = isset($embedded['authTransaction']) ? ($embedded['authTransaction'] instanceof Transaction ? $embedded['authTransaction'] : Transaction::from($embedded['authTransaction'])) : null;
+        $embedded['customer'] = isset($embedded['customer']) ? ($embedded['customer'] instanceof Customer ? $embedded['customer'] : Customer::from($embedded['customer'])) : null;
 
         $this->fields['_embedded'] = $embedded;
 

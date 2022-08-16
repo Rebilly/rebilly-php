@@ -76,7 +76,7 @@ class ReadyToPayPaymentCardMethod implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\PaymentCardBrand[]
+     * @return null|PaymentCardBrand[]
      */
     public function getBrands(): ?array
     {
@@ -84,11 +84,11 @@ class ReadyToPayPaymentCardMethod implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\PaymentCardBrand[] $brands
+     * @param null|PaymentCardBrand[] $brands
      */
     public function setBrands(null|array $brands): self
     {
-        $brands = $brands !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\PaymentCardBrand ? $value : \Rebilly\Sdk\Model\PaymentCardBrand::from($value)) : null, $brands) : null;
+        $brands = $brands !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof PaymentCardBrand ? $value : PaymentCardBrand::from($value)) : null, $brands) : null;
 
         $this->fields['brands'] = $brands;
 
@@ -138,14 +138,14 @@ class ReadyToPayPaymentCardMethod implements JsonSerializable
     {
         if (
             $data === null
-            || $data instanceof \Rebilly\Sdk\Model\ApplePayFeature
-            || $data instanceof \Rebilly\Sdk\Model\GooglePayFeature
+            || $data instanceof ApplePayFeature
+            || $data instanceof GooglePayFeature
         ) {
             return $data;
         }
         $candidates = [];
-        $candidates[] = \Rebilly\Sdk\Model\ApplePayFeature::tryFrom($data);
-        $candidates[] = \Rebilly\Sdk\Model\GooglePayFeature::tryFrom($data);
+        $candidates[] = ApplePayFeature::tryFrom($data);
+        $candidates[] = GooglePayFeature::tryFrom($data);
 
         $determined = array_reduce($candidates, function (?array $current, array $candidate) {
             if ($current === null || $current[1] < $candidate[1]) {
@@ -157,8 +157,8 @@ class ReadyToPayPaymentCardMethod implements JsonSerializable
 
         if (
             $determined[0] === null
-            || $determined[0] instanceof \Rebilly\Sdk\Model\ApplePayFeature
-            || $determined[0] instanceof \Rebilly\Sdk\Model\GooglePayFeature
+            || $determined[0] instanceof ApplePayFeature
+            || $determined[0] instanceof GooglePayFeature
         ) {
             return $determined[0];
         }

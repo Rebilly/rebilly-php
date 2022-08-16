@@ -43,8 +43,8 @@ class A1Gateway extends GatewayAccount
 
     public function setCredentials(A1GatewayCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\A1GatewayCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\A1GatewayCredentials::from($credentials);
+        if (!($credentials instanceof A1GatewayCredentials)) {
+            $credentials = A1GatewayCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class A1Gateway extends GatewayAccount
 
     public function setThreeDSecureServer(null|A1Gateway3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\A1Gateway3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\A1Gateway3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof A1Gateway3dsServers)) {
+            $threeDSecureServer = A1Gateway3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

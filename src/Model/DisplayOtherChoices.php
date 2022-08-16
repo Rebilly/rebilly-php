@@ -34,7 +34,7 @@ class DisplayOtherChoices extends RuleAction
     }
 
     /**
-     * @return \Rebilly\Sdk\Model\DisplayMessages[]
+     * @return DisplayMessages[]
      */
     public function getChoices(): array
     {
@@ -42,11 +42,11 @@ class DisplayOtherChoices extends RuleAction
     }
 
     /**
-     * @param \Rebilly\Sdk\Model\DisplayMessages[] $choices
+     * @param DisplayMessages[] $choices
      */
     public function setChoices(array $choices): self
     {
-        $choices = array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\DisplayMessages ? $value : \Rebilly\Sdk\Model\DisplayMessages::from($value)) : null, $choices);
+        $choices = array_map(fn ($value) => $value !== null ? ($value instanceof DisplayMessages ? $value : DisplayMessages::from($value)) : null, $choices);
 
         $this->fields['choices'] = $choices;
 

@@ -43,8 +43,8 @@ class Gigadat extends GatewayAccount
 
     public function setCredentials(GigadatCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\GigadatCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\GigadatCredentials::from($credentials);
+        if (!($credentials instanceof GigadatCredentials)) {
+            $credentials = GigadatCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class Gigadat extends GatewayAccount
 
     public function setSettings(null|GigadatSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\GigadatSettings)) {
-            $settings = \Rebilly\Sdk\Model\GigadatSettings::from($settings);
+        if ($settings !== null && !($settings instanceof GigadatSettings)) {
+            $settings = GigadatSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

@@ -40,8 +40,8 @@ class EcorePay extends GatewayAccount
 
     public function setCredentials(EcorePayCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\EcorePayCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\EcorePayCredentials::from($credentials);
+        if (!($credentials instanceof EcorePayCredentials)) {
+            $credentials = EcorePayCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

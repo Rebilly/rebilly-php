@@ -114,14 +114,14 @@ class Intelligent extends CommonScheduleInstruction
     protected function ensureUnit(string|TimeUnit|TimePluralUnit $data): TimeUnit|TimePluralUnit
     {
         if (
-            $data instanceof \Rebilly\Sdk\Model\TimeUnit
-            || $data instanceof \Rebilly\Sdk\Model\TimePluralUnit
+            $data instanceof TimeUnit
+            || $data instanceof TimePluralUnit
         ) {
             return $data;
         }
         $candidates = [];
-        $candidates[] = \Rebilly\Sdk\Model\TimeUnit::tryFrom($data);
-        $candidates[] = \Rebilly\Sdk\Model\TimePluralUnit::tryFrom($data);
+        $candidates[] = TimeUnit::tryFrom($data);
+        $candidates[] = TimePluralUnit::tryFrom($data);
 
         $determined = array_reduce($candidates, function (?array $current, array $candidate) {
             if ($current === null || $current[1] < $candidate[1]) {
@@ -132,8 +132,8 @@ class Intelligent extends CommonScheduleInstruction
         });
 
         if (
-            $determined[0] instanceof \Rebilly\Sdk\Model\TimeUnit
-            || $determined[0] instanceof \Rebilly\Sdk\Model\TimePluralUnit
+            $determined[0] instanceof TimeUnit
+            || $determined[0] instanceof TimePluralUnit
         ) {
             return $determined[0];
         }

@@ -173,8 +173,8 @@ class Signup implements JsonSerializable
 
     public function setQuestionnaire(null|OrganizationQuestionnaire|array $questionnaire): self
     {
-        if ($questionnaire !== null && !($questionnaire instanceof \Rebilly\Sdk\Model\OrganizationQuestionnaire)) {
-            $questionnaire = \Rebilly\Sdk\Model\OrganizationQuestionnaire::from($questionnaire);
+        if ($questionnaire !== null && !($questionnaire instanceof OrganizationQuestionnaire)) {
+            $questionnaire = OrganizationQuestionnaire::from($questionnaire);
         }
 
         $this->fields['questionnaire'] = $questionnaire;

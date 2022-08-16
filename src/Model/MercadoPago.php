@@ -40,8 +40,8 @@ class MercadoPago extends GatewayAccount
 
     public function setCredentials(MercadoPagoCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\MercadoPagoCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\MercadoPagoCredentials::from($credentials);
+        if (!($credentials instanceof MercadoPagoCredentials)) {
+            $credentials = MercadoPagoCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

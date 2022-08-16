@@ -197,8 +197,8 @@ class TransactionTimeline implements JsonSerializable
 
     public function setExtraData(null|TimelineExtraData|array $extraData): self
     {
-        if ($extraData !== null && !($extraData instanceof \Rebilly\Sdk\Model\TimelineExtraData)) {
-            $extraData = \Rebilly\Sdk\Model\TimelineExtraData::from($extraData);
+        if ($extraData !== null && !($extraData instanceof TimelineExtraData)) {
+            $extraData = TimelineExtraData::from($extraData);
         }
 
         $this->fields['extraData'] = $extraData;
@@ -212,7 +212,7 @@ class TransactionTimeline implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\SelfLink[]
+     * @return null|SelfLink[]
      */
     public function getLinks(): ?array
     {
@@ -286,11 +286,11 @@ class TransactionTimeline implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\SelfLink[] $links
+     * @param null|SelfLink[] $links
      */
     private function setLinks(null|array $links): self
     {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\SelfLink ? $value : \Rebilly\Sdk\Model\SelfLink::from($value)) : null, $links) : null;
+        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 
         $this->fields['_links'] = $links;
 

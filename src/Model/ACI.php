@@ -46,8 +46,8 @@ class ACI extends GatewayAccount
 
     public function setCredentials(ACICredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\ACICredentials)) {
-            $credentials = \Rebilly\Sdk\Model\ACICredentials::from($credentials);
+        if (!($credentials instanceof ACICredentials)) {
+            $credentials = ACICredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -62,8 +62,8 @@ class ACI extends GatewayAccount
 
     public function setSettings(null|ACISettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\ACISettings)) {
-            $settings = \Rebilly\Sdk\Model\ACISettings::from($settings);
+        if ($settings !== null && !($settings instanceof ACISettings)) {
+            $settings = ACISettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;
@@ -78,8 +78,8 @@ class ACI extends GatewayAccount
 
     public function setThreeDSecureServer(null|ACI3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\ACI3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\ACI3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof ACI3dsServers)) {
+            $threeDSecureServer = ACI3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

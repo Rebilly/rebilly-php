@@ -38,8 +38,8 @@ class BalanceTransactionEmbed implements JsonSerializable
 
     public function setTransaction(null|BalanceTransaction|array $transaction): self
     {
-        if ($transaction !== null && !($transaction instanceof \Rebilly\Sdk\Model\BalanceTransaction)) {
-            $transaction = \Rebilly\Sdk\Model\BalanceTransaction::from($transaction);
+        if ($transaction !== null && !($transaction instanceof BalanceTransaction)) {
+            $transaction = BalanceTransaction::from($transaction);
         }
 
         $this->fields['transaction'] = $transaction;

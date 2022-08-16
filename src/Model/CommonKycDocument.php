@@ -152,8 +152,8 @@ abstract class CommonKycDocument implements JsonSerializable
 
     public function setRejectionReason(null|KycDocumentRejection|array $rejectionReason): self
     {
-        if ($rejectionReason !== null && !($rejectionReason instanceof \Rebilly\Sdk\Model\KycDocumentRejection)) {
-            $rejectionReason = \Rebilly\Sdk\Model\KycDocumentRejection::from($rejectionReason);
+        if ($rejectionReason !== null && !($rejectionReason instanceof KycDocumentRejection)) {
+            $rejectionReason = KycDocumentRejection::from($rejectionReason);
         }
 
         $this->fields['rejectionReason'] = $rejectionReason;

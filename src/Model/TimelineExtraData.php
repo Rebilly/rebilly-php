@@ -44,7 +44,7 @@ class TimelineExtraData implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\TimelineAction[]
+     * @return null|TimelineAction[]
      */
     public function getActions(): ?array
     {
@@ -52,11 +52,11 @@ class TimelineExtraData implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\TimelineAction[] $actions
+     * @param null|TimelineAction[] $actions
      */
     public function setActions(null|array $actions): self
     {
-        $actions = $actions !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\TimelineAction ? $value : \Rebilly\Sdk\Model\TimelineAction::from($value)) : null, $actions) : null;
+        $actions = $actions !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof TimelineAction ? $value : TimelineAction::from($value)) : null, $actions) : null;
 
         $this->fields['actions'] = $actions;
 
@@ -64,7 +64,7 @@ class TimelineExtraData implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\TimelineTable[]
+     * @return null|TimelineTable[]
      */
     public function getTables(): ?array
     {
@@ -72,11 +72,11 @@ class TimelineExtraData implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\TimelineTable[] $tables
+     * @param null|TimelineTable[] $tables
      */
     public function setTables(null|array $tables): self
     {
-        $tables = $tables !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\TimelineTable ? $value : \Rebilly\Sdk\Model\TimelineTable::from($value)) : null, $tables) : null;
+        $tables = $tables !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof TimelineTable ? $value : TimelineTable::from($value)) : null, $tables) : null;
 
         $this->fields['tables'] = $tables;
 
@@ -90,8 +90,8 @@ class TimelineExtraData implements JsonSerializable
 
     public function setAuthor(null|TimelineExtraDataAuthor|array $author): self
     {
-        if ($author !== null && !($author instanceof \Rebilly\Sdk\Model\TimelineExtraDataAuthor)) {
-            $author = \Rebilly\Sdk\Model\TimelineExtraDataAuthor::from($author);
+        if ($author !== null && !($author instanceof TimelineExtraDataAuthor)) {
+            $author = TimelineExtraDataAuthor::from($author);
         }
 
         $this->fields['author'] = $author;
@@ -118,7 +118,7 @@ class TimelineExtraData implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\TimelineExtraDataLinks[]
+     * @return null|TimelineExtraDataLinks[]
      */
     public function getLinks(): ?array
     {
@@ -126,11 +126,11 @@ class TimelineExtraData implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\TimelineExtraDataLinks[] $links
+     * @param null|TimelineExtraDataLinks[] $links
      */
     public function setLinks(null|array $links): self
     {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\TimelineExtraDataLinks ? $value : \Rebilly\Sdk\Model\TimelineExtraDataLinks::from($value)) : null, $links) : null;
+        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof TimelineExtraDataLinks ? $value : TimelineExtraDataLinks::from($value)) : null, $links) : null;
 
         $this->fields['links'] = $links;
 

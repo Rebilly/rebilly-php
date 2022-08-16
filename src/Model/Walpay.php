@@ -43,8 +43,8 @@ class Walpay extends GatewayAccount
 
     public function setCredentials(WalpayCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\WalpayCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\WalpayCredentials::from($credentials);
+        if (!($credentials instanceof WalpayCredentials)) {
+            $credentials = WalpayCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class Walpay extends GatewayAccount
 
     public function setThreeDSecureServer(null|Walpay3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\Walpay3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\Walpay3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Walpay3dsServers)) {
+            $threeDSecureServer = Walpay3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

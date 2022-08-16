@@ -46,8 +46,8 @@ class Worldpay extends GatewayAccount
 
     public function setCredentials(WorldpayCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\WorldpayCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\WorldpayCredentials::from($credentials);
+        if (!($credentials instanceof WorldpayCredentials)) {
+            $credentials = WorldpayCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -62,8 +62,8 @@ class Worldpay extends GatewayAccount
 
     public function setThreeDSecureServer(null|Worldpay3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\Worldpay3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\Worldpay3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Worldpay3dsServers)) {
+            $threeDSecureServer = Worldpay3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;
@@ -78,8 +78,8 @@ class Worldpay extends GatewayAccount
 
     public function setSettings(null|WorldpaySettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\WorldpaySettings)) {
-            $settings = \Rebilly\Sdk\Model\WorldpaySettings::from($settings);
+        if ($settings !== null && !($settings instanceof WorldpaySettings)) {
+            $settings = WorldpaySettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

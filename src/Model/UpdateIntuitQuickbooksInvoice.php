@@ -103,8 +103,8 @@ class UpdateIntuitQuickbooksInvoice extends RuleAction
 
     public function setTemplate(null|QuickbooksTemplate|array $template): self
     {
-        if ($template !== null && !($template instanceof \Rebilly\Sdk\Model\QuickbooksTemplate)) {
-            $template = \Rebilly\Sdk\Model\QuickbooksTemplate::from($template);
+        if ($template !== null && !($template instanceof QuickbooksTemplate)) {
+            $template = QuickbooksTemplate::from($template);
         }
 
         $this->fields['template'] = $template;

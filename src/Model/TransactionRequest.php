@@ -133,8 +133,8 @@ class TransactionRequest implements JsonSerializable
 
     public function setLimits(null|TransactionLimitAmount|array $limits): self
     {
-        if ($limits !== null && !($limits instanceof \Rebilly\Sdk\Model\TransactionLimitAmount)) {
-            $limits = \Rebilly\Sdk\Model\TransactionLimitAmount::from($limits);
+        if ($limits !== null && !($limits instanceof TransactionLimitAmount)) {
+            $limits = TransactionLimitAmount::from($limits);
         }
 
         $this->fields['limits'] = $limits;
@@ -325,8 +325,8 @@ class TransactionRequest implements JsonSerializable
 
     public function setRiskMetadata(null|RiskMetadata|array $riskMetadata): self
     {
-        if ($riskMetadata !== null && !($riskMetadata instanceof \Rebilly\Sdk\Model\RiskMetadata)) {
-            $riskMetadata = \Rebilly\Sdk\Model\RiskMetadata::from($riskMetadata);
+        if ($riskMetadata !== null && !($riskMetadata instanceof RiskMetadata)) {
+            $riskMetadata = RiskMetadata::from($riskMetadata);
         }
 
         $this->fields['riskMetadata'] = $riskMetadata;

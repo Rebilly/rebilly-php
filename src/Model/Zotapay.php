@@ -40,8 +40,8 @@ class Zotapay extends GatewayAccount
 
     public function setCredentials(ZotapayCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\ZotapayCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\ZotapayCredentials::from($credentials);
+        if (!($credentials instanceof ZotapayCredentials)) {
+            $credentials = ZotapayCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

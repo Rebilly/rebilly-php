@@ -78,7 +78,7 @@ class RuleSetDraft implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\Bind[]
+     * @return null|Bind[]
      */
     public function getBinds(): ?array
     {
@@ -86,11 +86,11 @@ class RuleSetDraft implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\Bind[] $binds
+     * @param null|Bind[] $binds
      */
     public function setBinds(null|array $binds): self
     {
-        $binds = $binds !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\Bind ? $value : \Rebilly\Sdk\Model\Bind::from($value)) : null, $binds) : null;
+        $binds = $binds !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Bind ? $value : Bind::from($value)) : null, $binds) : null;
 
         $this->fields['binds'] = $binds;
 
@@ -98,7 +98,7 @@ class RuleSetDraft implements JsonSerializable
     }
 
     /**
-     * @return \Rebilly\Sdk\Model\Rule[]
+     * @return Rule[]
      */
     public function getRules(): array
     {
@@ -106,11 +106,11 @@ class RuleSetDraft implements JsonSerializable
     }
 
     /**
-     * @param \Rebilly\Sdk\Model\Rule[] $rules
+     * @param Rule[] $rules
      */
     public function setRules(array $rules): self
     {
-        $rules = array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\Rule ? $value : \Rebilly\Sdk\Model\Rule::from($value)) : null, $rules);
+        $rules = array_map(fn ($value) => $value !== null ? ($value instanceof Rule ? $value : Rule::from($value)) : null, $rules);
 
         $this->fields['rules'] = $rules;
 
@@ -124,8 +124,8 @@ class RuleSetDraft implements JsonSerializable
 
     public function setAuthor(null|RuleSetDraftAuthor|array $author): self
     {
-        if ($author !== null && !($author instanceof \Rebilly\Sdk\Model\RuleSetDraftAuthor)) {
-            $author = \Rebilly\Sdk\Model\RuleSetDraftAuthor::from($author);
+        if ($author !== null && !($author instanceof RuleSetDraftAuthor)) {
+            $author = RuleSetDraftAuthor::from($author);
         }
 
         $this->fields['author'] = $author;
@@ -168,7 +168,7 @@ class RuleSetDraft implements JsonSerializable
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\LinkSelf|\Rebilly\Sdk\Model\LinkUser>
+     * @return null|array<LinkSelf|LinkUser>
      */
     public function getLinks(): ?array
     {
@@ -242,7 +242,7 @@ class RuleSetDraft implements JsonSerializable
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\LinkSelf|\Rebilly\Sdk\Model\LinkUser> $links
+     * @param null|array<LinkSelf|LinkUser> $links
      */
     private function setLinks(null|array $links): self
     {

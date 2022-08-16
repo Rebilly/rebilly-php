@@ -43,8 +43,8 @@ class GET extends GatewayAccount
 
     public function setCredentials(GETCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\GETCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\GETCredentials::from($credentials);
+        if (!($credentials instanceof GETCredentials)) {
+            $credentials = GETCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class GET extends GatewayAccount
 
     public function setThreeDSecureServer(null|GET3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\GET3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\GET3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof GET3dsServers)) {
+            $threeDSecureServer = GET3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

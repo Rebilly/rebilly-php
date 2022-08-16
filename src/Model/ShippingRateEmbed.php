@@ -38,8 +38,8 @@ class ShippingRateEmbed implements JsonSerializable
 
     public function setShippingRate(null|ShippingRate|array $shippingRate): self
     {
-        if ($shippingRate !== null && !($shippingRate instanceof \Rebilly\Sdk\Model\ShippingRate)) {
-            $shippingRate = \Rebilly\Sdk\Model\ShippingRate::from($shippingRate);
+        if ($shippingRate !== null && !($shippingRate instanceof ShippingRate)) {
+            $shippingRate = ShippingRate::from($shippingRate);
         }
 
         $this->fields['shippingRate'] = $shippingRate;

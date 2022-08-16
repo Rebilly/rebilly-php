@@ -182,8 +182,8 @@ class IBANType extends BankAccountCreatePlain
 
     public function setRiskMetadata(null|RiskMetadata|array $riskMetadata): self
     {
-        if ($riskMetadata !== null && !($riskMetadata instanceof \Rebilly\Sdk\Model\RiskMetadata)) {
-            $riskMetadata = \Rebilly\Sdk\Model\RiskMetadata::from($riskMetadata);
+        if ($riskMetadata !== null && !($riskMetadata instanceof RiskMetadata)) {
+            $riskMetadata = RiskMetadata::from($riskMetadata);
         }
 
         $this->fields['riskMetadata'] = $riskMetadata;

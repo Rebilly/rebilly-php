@@ -67,8 +67,8 @@ class BankAccount extends CommonBankAccount
 
     public function setRiskMetadata(null|RiskMetadata|array $riskMetadata): self
     {
-        if ($riskMetadata !== null && !($riskMetadata instanceof \Rebilly\Sdk\Model\RiskMetadata)) {
-            $riskMetadata = \Rebilly\Sdk\Model\RiskMetadata::from($riskMetadata);
+        if ($riskMetadata !== null && !($riskMetadata instanceof RiskMetadata)) {
+            $riskMetadata = RiskMetadata::from($riskMetadata);
         }
 
         $this->fields['riskMetadata'] = $riskMetadata;
@@ -77,7 +77,7 @@ class BankAccount extends CommonBankAccount
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\CustomerLink|\Rebilly\Sdk\Model\SelfLink>
+     * @return null|array<CustomerLink|SelfLink>
      */
     public function getLinks(): ?array
     {
@@ -85,7 +85,7 @@ class BankAccount extends CommonBankAccount
     }
 
     /**
-     * @return null|array{customer:\Rebilly\Sdk\Model\Customer}
+     * @return null|array{customer:Customer}
      */
     public function getEmbedded(): ?array
     {
@@ -122,7 +122,7 @@ class BankAccount extends CommonBankAccount
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\CustomerLink|\Rebilly\Sdk\Model\SelfLink> $links
+     * @param null|array<CustomerLink|SelfLink> $links
      */
     private function setLinks(null|array $links): self
     {
@@ -134,11 +134,11 @@ class BankAccount extends CommonBankAccount
     }
 
     /**
-     * @param null|array{customer:\Rebilly\Sdk\Model\Customer} $embedded
+     * @param null|array{customer:Customer} $embedded
      */
     private function setEmbedded(null|array $embedded): self
     {
-        $embedded['customer'] = isset($embedded['customer']) ? ($embedded['customer'] instanceof \Rebilly\Sdk\Model\Customer ? $embedded['customer'] : \Rebilly\Sdk\Model\Customer::from($embedded['customer'])) : null;
+        $embedded['customer'] = isset($embedded['customer']) ? ($embedded['customer'] instanceof Customer ? $embedded['customer'] : Customer::from($embedded['customer'])) : null;
 
         $this->fields['_embedded'] = $embedded;
 

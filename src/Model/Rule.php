@@ -100,8 +100,8 @@ class Rule implements JsonSerializable
 
     public function setStatus(null|OnOff|string $status): self
     {
-        if ($status !== null && !($status instanceof \Rebilly\Sdk\Model\OnOff)) {
-            $status = \Rebilly\Sdk\Model\OnOff::from($status);
+        if ($status !== null && !($status instanceof OnOff)) {
+            $status = OnOff::from($status);
         }
 
         $this->fields['status'] = $status;
@@ -122,7 +122,7 @@ class Rule implements JsonSerializable
     }
 
     /**
-     * @return \Rebilly\Sdk\Model\RuleAction[]
+     * @return RuleAction[]
      */
     public function getActions(): array
     {
@@ -130,11 +130,11 @@ class Rule implements JsonSerializable
     }
 
     /**
-     * @param \Rebilly\Sdk\Model\RuleAction[] $actions
+     * @param RuleAction[] $actions
      */
     public function setActions(array $actions): self
     {
-        $actions = array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\RuleAction ? $value : \Rebilly\Sdk\Model\RuleAction::from($value)) : null, $actions);
+        $actions = array_map(fn ($value) => $value !== null ? ($value instanceof RuleAction ? $value : RuleAction::from($value)) : null, $actions);
 
         $this->fields['actions'] = $actions;
 

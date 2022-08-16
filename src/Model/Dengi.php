@@ -40,8 +40,8 @@ class Dengi extends GatewayAccount
 
     public function setCredentials(DengiCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\DengiCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\DengiCredentials::from($credentials);
+        if (!($credentials instanceof DengiCredentials)) {
+            $credentials = DengiCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

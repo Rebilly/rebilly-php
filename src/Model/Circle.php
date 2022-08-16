@@ -40,8 +40,8 @@ class Circle extends GatewayAccount
 
     public function setCredentials(CircleCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\CircleCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\CircleCredentials::from($credentials);
+        if (!($credentials instanceof CircleCredentials)) {
+            $credentials = CircleCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

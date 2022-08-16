@@ -41,8 +41,8 @@ class KycSettings implements JsonSerializable
 
     public function setIdentityProof(null|KycSettingsIdentity|array $identityProof): self
     {
-        if ($identityProof !== null && !($identityProof instanceof \Rebilly\Sdk\Model\KycSettingsIdentity)) {
-            $identityProof = \Rebilly\Sdk\Model\KycSettingsIdentity::from($identityProof);
+        if ($identityProof !== null && !($identityProof instanceof KycSettingsIdentity)) {
+            $identityProof = KycSettingsIdentity::from($identityProof);
         }
 
         $this->fields['identityProof'] = $identityProof;
@@ -57,8 +57,8 @@ class KycSettings implements JsonSerializable
 
     public function setAddressProof(null|KycSettingsAddress|array $addressProof): self
     {
-        if ($addressProof !== null && !($addressProof instanceof \Rebilly\Sdk\Model\KycSettingsAddress)) {
-            $addressProof = \Rebilly\Sdk\Model\KycSettingsAddress::from($addressProof);
+        if ($addressProof !== null && !($addressProof instanceof KycSettingsAddress)) {
+            $addressProof = KycSettingsAddress::from($addressProof);
         }
 
         $this->fields['addressProof'] = $addressProof;

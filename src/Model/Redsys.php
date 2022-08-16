@@ -40,8 +40,8 @@ class Redsys extends GatewayAccount
 
     public function setCredentials(RedsysCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\RedsysCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\RedsysCredentials::from($credentials);
+        if (!($credentials instanceof RedsysCredentials)) {
+            $credentials = RedsysCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

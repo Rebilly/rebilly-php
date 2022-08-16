@@ -40,8 +40,8 @@ class Dimoco extends GatewayAccount
 
     public function setCredentials(DimocoCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\DimocoCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\DimocoCredentials::from($credentials);
+        if (!($credentials instanceof DimocoCredentials)) {
+            $credentials = DimocoCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

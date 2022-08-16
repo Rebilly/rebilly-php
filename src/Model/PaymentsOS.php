@@ -40,8 +40,8 @@ class PaymentsOS extends GatewayAccount
 
     public function setCredentials(PaymentsOSCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\PaymentsOSCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\PaymentsOSCredentials::from($credentials);
+        if (!($credentials instanceof PaymentsOSCredentials)) {
+            $credentials = PaymentsOSCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

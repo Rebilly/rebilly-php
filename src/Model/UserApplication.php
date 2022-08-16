@@ -259,7 +259,7 @@ class UserApplication implements JsonSerializable
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\ApplicationInstanceLink|\Rebilly\Sdk\Model\AuthorLogoUrlLink|\Rebilly\Sdk\Model\LogoUrlLink|\Rebilly\Sdk\Model\SelfLink>
+     * @return null|array<ApplicationInstanceLink|AuthorLogoUrlLink|LogoUrlLink|SelfLink>
      */
     public function getLinks(): ?array
     {
@@ -267,7 +267,7 @@ class UserApplication implements JsonSerializable
     }
 
     /**
-     * @return null|array{applicationInstance:\Rebilly\Sdk\Model\ApplicationInstance}
+     * @return null|array{applicationInstance:ApplicationInstance}
      */
     public function getEmbedded(): ?array
     {
@@ -352,7 +352,7 @@ class UserApplication implements JsonSerializable
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\ApplicationInstanceLink|\Rebilly\Sdk\Model\AuthorLogoUrlLink|\Rebilly\Sdk\Model\LogoUrlLink|\Rebilly\Sdk\Model\SelfLink> $links
+     * @param null|array<ApplicationInstanceLink|AuthorLogoUrlLink|LogoUrlLink|SelfLink> $links
      */
     private function setLinks(null|array $links): self
     {
@@ -364,11 +364,11 @@ class UserApplication implements JsonSerializable
     }
 
     /**
-     * @param null|array{applicationInstance:\Rebilly\Sdk\Model\ApplicationInstance} $embedded
+     * @param null|array{applicationInstance:ApplicationInstance} $embedded
      */
     private function setEmbedded(null|array $embedded): self
     {
-        $embedded['applicationInstance'] = isset($embedded['applicationInstance']) ? ($embedded['applicationInstance'] instanceof \Rebilly\Sdk\Model\ApplicationInstance ? $embedded['applicationInstance'] : \Rebilly\Sdk\Model\ApplicationInstance::from($embedded['applicationInstance'])) : null;
+        $embedded['applicationInstance'] = isset($embedded['applicationInstance']) ? ($embedded['applicationInstance'] instanceof ApplicationInstance ? $embedded['applicationInstance'] : ApplicationInstance::from($embedded['applicationInstance'])) : null;
 
         $this->fields['_embedded'] = $embedded;
 

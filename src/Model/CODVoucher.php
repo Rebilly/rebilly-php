@@ -40,8 +40,8 @@ class CODVoucher extends GatewayAccount
 
     public function setCredentials(CODVoucherCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\CODVoucherCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\CODVoucherCredentials::from($credentials);
+        if (!($credentials instanceof CODVoucherCredentials)) {
+            $credentials = CODVoucherCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

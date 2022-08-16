@@ -43,8 +43,8 @@ class AsiaPaymentGateway extends GatewayAccount
 
     public function setCredentials(AsiaPaymentGatewayCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\AsiaPaymentGatewayCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\AsiaPaymentGatewayCredentials::from($credentials);
+        if (!($credentials instanceof AsiaPaymentGatewayCredentials)) {
+            $credentials = AsiaPaymentGatewayCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class AsiaPaymentGateway extends GatewayAccount
 
     public function setSettings(null|AsiaPaymentGatewaySettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\AsiaPaymentGatewaySettings)) {
-            $settings = \Rebilly\Sdk\Model\AsiaPaymentGatewaySettings::from($settings);
+        if ($settings !== null && !($settings instanceof AsiaPaymentGatewaySettings)) {
+            $settings = AsiaPaymentGatewaySettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

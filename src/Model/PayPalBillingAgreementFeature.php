@@ -49,8 +49,8 @@ class PayPalBillingAgreementFeature implements JsonSerializable
 
     public function setName(PayPalBillingAgreementFeatureName|string $name): self
     {
-        if (!($name instanceof \Rebilly\Sdk\Model\PayPalBillingAgreementFeatureName)) {
-            $name = \Rebilly\Sdk\Model\PayPalBillingAgreementFeatureName::from($name);
+        if (!($name instanceof PayPalBillingAgreementFeatureName)) {
+            $name = PayPalBillingAgreementFeatureName::from($name);
         }
 
         $this->fields['name'] = $name;

@@ -40,8 +40,8 @@ class Elavon extends GatewayAccount
 
     public function setCredentials(ElavonCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\ElavonCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\ElavonCredentials::from($credentials);
+        if (!($credentials instanceof ElavonCredentials)) {
+            $credentials = ElavonCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

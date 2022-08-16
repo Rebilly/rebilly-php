@@ -40,8 +40,8 @@ class Forte extends GatewayAccount
 
     public function setCredentials(ForteCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\ForteCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\ForteCredentials::from($credentials);
+        if (!($credentials instanceof ForteCredentials)) {
+            $credentials = ForteCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

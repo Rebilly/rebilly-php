@@ -81,8 +81,8 @@ class Coupon implements JsonSerializable
 
     public function setDiscount(Discount|array $discount): self
     {
-        if (!($discount instanceof \Rebilly\Sdk\Model\Discount)) {
-            $discount = \Rebilly\Sdk\Model\Discount::from($discount);
+        if (!($discount instanceof Discount)) {
+            $discount = Discount::from($discount);
         }
 
         $this->fields['discount'] = $discount;
@@ -91,7 +91,7 @@ class Coupon implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\CouponRestriction[]
+     * @return null|CouponRestriction[]
      */
     public function getRestrictions(): ?array
     {
@@ -99,11 +99,11 @@ class Coupon implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\CouponRestriction[] $restrictions
+     * @param null|CouponRestriction[] $restrictions
      */
     public function setRestrictions(null|array $restrictions): self
     {
-        $restrictions = $restrictions !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\CouponRestriction ? $value : \Rebilly\Sdk\Model\CouponRestriction::from($value)) : null, $restrictions) : null;
+        $restrictions = $restrictions !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof CouponRestriction ? $value : CouponRestriction::from($value)) : null, $restrictions) : null;
 
         $this->fields['restrictions'] = $restrictions;
 
@@ -200,7 +200,7 @@ class Coupon implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\SelfLink[]
+     * @return null|SelfLink[]
      */
     public function getLinks(): ?array
     {
@@ -272,11 +272,11 @@ class Coupon implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\SelfLink[] $links
+     * @param null|SelfLink[] $links
      */
     private function setLinks(null|array $links): self
     {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\SelfLink ? $value : \Rebilly\Sdk\Model\SelfLink::from($value)) : null, $links) : null;
+        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 
         $this->fields['_links'] = $links;
 

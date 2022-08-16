@@ -40,8 +40,8 @@ class Awepay extends GatewayAccount
 
     public function setCredentials(AwepayCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\AwepayCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\AwepayCredentials::from($credentials);
+        if (!($credentials instanceof AwepayCredentials)) {
+            $credentials = AwepayCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

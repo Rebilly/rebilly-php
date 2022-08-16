@@ -34,7 +34,7 @@ class OneColumnTimelineTable extends TimelineTable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\TwoData[]
+     * @return null|TwoData[]
      */
     public function getData(): ?array
     {
@@ -42,11 +42,11 @@ class OneColumnTimelineTable extends TimelineTable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\TwoData[] $data
+     * @param null|TwoData[] $data
      */
     public function setData(null|array $data): self
     {
-        $data = $data !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\TwoData ? $value : \Rebilly\Sdk\Model\TwoData::from($value)) : null, $data) : null;
+        $data = $data !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof TwoData ? $value : TwoData::from($value)) : null, $data) : null;
 
         $this->fields['data'] = $data;
 

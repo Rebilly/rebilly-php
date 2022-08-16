@@ -47,8 +47,8 @@ class EddData implements JsonSerializable
 
     public function setOccupation(null|EddScore|string $occupation): self
     {
-        if ($occupation !== null && !($occupation instanceof \Rebilly\Sdk\Model\EddScore)) {
-            $occupation = \Rebilly\Sdk\Model\EddScore::from($occupation);
+        if ($occupation !== null && !($occupation instanceof EddScore)) {
+            $occupation = EddScore::from($occupation);
         }
 
         $this->fields['occupation'] = $occupation;
@@ -63,8 +63,8 @@ class EddData implements JsonSerializable
 
     public function setArrest(null|EddScore|string $arrest): self
     {
-        if ($arrest !== null && !($arrest instanceof \Rebilly\Sdk\Model\EddScore)) {
-            $arrest = \Rebilly\Sdk\Model\EddScore::from($arrest);
+        if ($arrest !== null && !($arrest instanceof EddScore)) {
+            $arrest = EddScore::from($arrest);
         }
 
         $this->fields['arrest'] = $arrest;
@@ -79,8 +79,8 @@ class EddData implements JsonSerializable
 
     public function setBankruptcy(null|EddScore|string $bankruptcy): self
     {
-        if ($bankruptcy !== null && !($bankruptcy instanceof \Rebilly\Sdk\Model\EddScore)) {
-            $bankruptcy = \Rebilly\Sdk\Model\EddScore::from($bankruptcy);
+        if ($bankruptcy !== null && !($bankruptcy instanceof EddScore)) {
+            $bankruptcy = EddScore::from($bankruptcy);
         }
 
         $this->fields['bankruptcy'] = $bankruptcy;
@@ -95,8 +95,8 @@ class EddData implements JsonSerializable
 
     public function setFraud(null|EddScore|string $fraud): self
     {
-        if ($fraud !== null && !($fraud instanceof \Rebilly\Sdk\Model\EddScore)) {
-            $fraud = \Rebilly\Sdk\Model\EddScore::from($fraud);
+        if ($fraud !== null && !($fraud instanceof EddScore)) {
+            $fraud = EddScore::from($fraud);
         }
 
         $this->fields['fraud'] = $fraud;

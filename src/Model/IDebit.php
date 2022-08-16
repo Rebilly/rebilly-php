@@ -43,8 +43,8 @@ class IDebit extends GatewayAccount
 
     public function setCredentials(IDebitCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\IDebitCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\IDebitCredentials::from($credentials);
+        if (!($credentials instanceof IDebitCredentials)) {
+            $credentials = IDebitCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class IDebit extends GatewayAccount
 
     public function setSettings(null|InstaDebitSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\InstaDebitSettings)) {
-            $settings = \Rebilly\Sdk\Model\InstaDebitSettings::from($settings);
+        if ($settings !== null && !($settings instanceof InstaDebitSettings)) {
+            $settings = InstaDebitSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

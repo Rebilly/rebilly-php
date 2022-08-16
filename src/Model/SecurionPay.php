@@ -43,8 +43,8 @@ class SecurionPay extends GatewayAccount
 
     public function setCredentials(SecurionPayCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\SecurionPayCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\SecurionPayCredentials::from($credentials);
+        if (!($credentials instanceof SecurionPayCredentials)) {
+            $credentials = SecurionPayCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class SecurionPay extends GatewayAccount
 
     public function setThreeDSecureServer(null|SecurionPay3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\SecurionPay3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\SecurionPay3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof SecurionPay3dsServers)) {
+            $threeDSecureServer = SecurionPay3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

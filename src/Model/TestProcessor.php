@@ -40,8 +40,8 @@ class TestProcessor extends GatewayAccount
 
     public function setThreeDSecureServer(null|TestProcessor3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\TestProcessor3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\TestProcessor3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof TestProcessor3dsServers)) {
+            $threeDSecureServer = TestProcessor3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

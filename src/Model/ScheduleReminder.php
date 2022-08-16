@@ -67,8 +67,8 @@ class ScheduleReminder extends RuleAction
 
     public function setSchedule(null|ReminderSchedule|array $schedule): self
     {
-        if ($schedule !== null && !($schedule instanceof \Rebilly\Sdk\Model\ReminderSchedule)) {
-            $schedule = \Rebilly\Sdk\Model\ReminderSchedule::from($schedule);
+        if ($schedule !== null && !($schedule instanceof ReminderSchedule)) {
+            $schedule = ReminderSchedule::from($schedule);
         }
 
         $this->fields['schedule'] = $schedule;

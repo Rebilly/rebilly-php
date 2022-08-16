@@ -43,8 +43,8 @@ class AstroPayCard extends GatewayAccount
 
     public function setCredentials(AstroPayCardCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\AstroPayCardCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\AstroPayCardCredentials::from($credentials);
+        if (!($credentials instanceof AstroPayCardCredentials)) {
+            $credentials = AstroPayCardCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class AstroPayCard extends GatewayAccount
 
     public function setSettings(null|AstroPayCardSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\AstroPayCardSettings)) {
-            $settings = \Rebilly\Sdk\Model\AstroPayCardSettings::from($settings);
+        if ($settings !== null && !($settings instanceof AstroPayCardSettings)) {
+            $settings = AstroPayCardSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

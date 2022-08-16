@@ -34,7 +34,7 @@ class Volume extends PlanPriceFormula
     }
 
     /**
-     * @return \Rebilly\Sdk\Model\StairstepBrackets[]
+     * @return StairstepBrackets[]
      */
     public function getBrackets(): array
     {
@@ -42,11 +42,11 @@ class Volume extends PlanPriceFormula
     }
 
     /**
-     * @param \Rebilly\Sdk\Model\StairstepBrackets[] $brackets
+     * @param StairstepBrackets[] $brackets
      */
     public function setBrackets(array $brackets): self
     {
-        $brackets = array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\StairstepBrackets ? $value : \Rebilly\Sdk\Model\StairstepBrackets::from($value)) : null, $brackets);
+        $brackets = array_map(fn ($value) => $value !== null ? ($value instanceof StairstepBrackets ? $value : StairstepBrackets::from($value)) : null, $brackets);
 
         $this->fields['brackets'] = $brackets;
 

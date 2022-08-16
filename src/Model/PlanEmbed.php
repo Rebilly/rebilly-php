@@ -38,8 +38,8 @@ class PlanEmbed implements JsonSerializable
 
     public function setPlan(null|Plan|array $plan): self
     {
-        if ($plan !== null && !($plan instanceof \Rebilly\Sdk\Model\Plan)) {
-            $plan = \Rebilly\Sdk\Model\Plan::from($plan);
+        if ($plan !== null && !($plan instanceof Plan)) {
+            $plan = Plan::from($plan);
         }
 
         $this->fields['plan'] = $plan;

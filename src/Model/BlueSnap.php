@@ -46,8 +46,8 @@ class BlueSnap extends GatewayAccount
 
     public function setCredentials(BlueSnapCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\BlueSnapCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\BlueSnapCredentials::from($credentials);
+        if (!($credentials instanceof BlueSnapCredentials)) {
+            $credentials = BlueSnapCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -62,8 +62,8 @@ class BlueSnap extends GatewayAccount
 
     public function setSettings(null|BlueSnapSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\BlueSnapSettings)) {
-            $settings = \Rebilly\Sdk\Model\BlueSnapSettings::from($settings);
+        if ($settings !== null && !($settings instanceof BlueSnapSettings)) {
+            $settings = BlueSnapSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;
@@ -78,8 +78,8 @@ class BlueSnap extends GatewayAccount
 
     public function setThreeDSecureServer(null|BlueSnap3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\BlueSnap3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\BlueSnap3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof BlueSnap3dsServers)) {
+            $threeDSecureServer = BlueSnap3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

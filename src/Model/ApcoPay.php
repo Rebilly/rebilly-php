@@ -43,8 +43,8 @@ class ApcoPay extends GatewayAccount
 
     public function setCredentials(ApcoPayCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\ApcoPayCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\ApcoPayCredentials::from($credentials);
+        if (!($credentials instanceof ApcoPayCredentials)) {
+            $credentials = ApcoPayCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class ApcoPay extends GatewayAccount
 
     public function setSettings(null|ApcoPaySettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\ApcoPaySettings)) {
-            $settings = \Rebilly\Sdk\Model\ApcoPaySettings::from($settings);
+        if ($settings !== null && !($settings instanceof ApcoPaySettings)) {
+            $settings = ApcoPaySettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

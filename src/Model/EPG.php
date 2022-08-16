@@ -40,8 +40,8 @@ class EPG extends GatewayAccount
 
     public function setCredentials(EPGCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\EPGCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\EPGCredentials::from($credentials);
+        if (!($credentials instanceof EPGCredentials)) {
+            $credentials = EPGCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

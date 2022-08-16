@@ -72,7 +72,7 @@ class RestrictToBxgy extends CouponRestriction
     }
 
     /**
-     * @return \Rebilly\Sdk\Model\RestrictBuy[]
+     * @return RestrictBuy[]
      */
     public function getBuy(): array
     {
@@ -80,11 +80,11 @@ class RestrictToBxgy extends CouponRestriction
     }
 
     /**
-     * @param \Rebilly\Sdk\Model\RestrictBuy[] $buy
+     * @param RestrictBuy[] $buy
      */
     public function setBuy(array $buy): self
     {
-        $buy = array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\RestrictBuy ? $value : \Rebilly\Sdk\Model\RestrictBuy::from($value)) : null, $buy);
+        $buy = array_map(fn ($value) => $value !== null ? ($value instanceof RestrictBuy ? $value : RestrictBuy::from($value)) : null, $buy);
 
         $this->fields['buy'] = $buy;
 
@@ -92,7 +92,7 @@ class RestrictToBxgy extends CouponRestriction
     }
 
     /**
-     * @return \Rebilly\Sdk\Model\RestrictGet[]
+     * @return RestrictGet[]
      */
     public function getGet(): array
     {
@@ -100,11 +100,11 @@ class RestrictToBxgy extends CouponRestriction
     }
 
     /**
-     * @param \Rebilly\Sdk\Model\RestrictGet[] $get
+     * @param RestrictGet[] $get
      */
     public function setGet(array $get): self
     {
-        $get = array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\RestrictGet ? $value : \Rebilly\Sdk\Model\RestrictGet::from($value)) : null, $get);
+        $get = array_map(fn ($value) => $value !== null ? ($value instanceof RestrictGet ? $value : RestrictGet::from($value)) : null, $get);
 
         $this->fields['get'] = $get;
 

@@ -131,7 +131,7 @@ class BaseKycDocument extends CommonKycDocument
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\Tag[]
+     * @return null|Tag[]
      */
     public function getTags(): ?array
     {
@@ -234,11 +234,11 @@ class BaseKycDocument extends CommonKycDocument
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\Tag[] $tags
+     * @param null|Tag[] $tags
      */
     private function setTags(null|array $tags): self
     {
-        $tags = $tags !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\Tag ? $value : \Rebilly\Sdk\Model\Tag::from($value)) : null, $tags) : null;
+        $tags = $tags !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Tag ? $value : Tag::from($value)) : null, $tags) : null;
 
         $this->fields['tags'] = $tags;
 

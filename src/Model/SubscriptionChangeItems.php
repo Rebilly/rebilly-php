@@ -77,14 +77,14 @@ class SubscriptionChangeItems implements JsonSerializable
     protected function ensurePlan(array|FlexiblePlan|OriginalPlan $data): FlexiblePlan|OriginalPlan
     {
         if (
-            $data instanceof \Rebilly\Sdk\Model\FlexiblePlan
-            || $data instanceof \Rebilly\Sdk\Model\OriginalPlan
+            $data instanceof FlexiblePlan
+            || $data instanceof OriginalPlan
         ) {
             return $data;
         }
         $candidates = [];
-        $candidates[] = \Rebilly\Sdk\Model\FlexiblePlan::tryFrom($data);
-        $candidates[] = \Rebilly\Sdk\Model\OriginalPlan::tryFrom($data);
+        $candidates[] = FlexiblePlan::tryFrom($data);
+        $candidates[] = OriginalPlan::tryFrom($data);
 
         $determined = array_reduce($candidates, function (?array $current, array $candidate) {
             if ($current === null || $current[1] < $candidate[1]) {
@@ -95,8 +95,8 @@ class SubscriptionChangeItems implements JsonSerializable
         });
 
         if (
-            $determined[0] instanceof \Rebilly\Sdk\Model\FlexiblePlan
-            || $determined[0] instanceof \Rebilly\Sdk\Model\OriginalPlan
+            $determined[0] instanceof FlexiblePlan
+            || $determined[0] instanceof OriginalPlan
         ) {
             return $determined[0];
         }

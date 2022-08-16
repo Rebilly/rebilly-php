@@ -43,8 +43,8 @@ class DLocal extends GatewayAccount
 
     public function setCredentials(DLocalCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\DLocalCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\DLocalCredentials::from($credentials);
+        if (!($credentials instanceof DLocalCredentials)) {
+            $credentials = DLocalCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class DLocal extends GatewayAccount
 
     public function setSettings(null|DLocalSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\DLocalSettings)) {
-            $settings = \Rebilly\Sdk\Model\DLocalSettings::from($settings);
+        if ($settings !== null && !($settings instanceof DLocalSettings)) {
+            $settings = DLocalSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

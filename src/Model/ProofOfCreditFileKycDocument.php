@@ -202,8 +202,8 @@ class ProofOfCreditFileKycDocument extends KycDocument
 
     public function setRejectionReason(null|KycDocumentRejection|array $rejectionReason): self
     {
-        if ($rejectionReason !== null && !($rejectionReason instanceof \Rebilly\Sdk\Model\KycDocumentRejection)) {
-            $rejectionReason = \Rebilly\Sdk\Model\KycDocumentRejection::from($rejectionReason);
+        if ($rejectionReason !== null && !($rejectionReason instanceof KycDocumentRejection)) {
+            $rejectionReason = KycDocumentRejection::from($rejectionReason);
         }
 
         $this->fields['rejectionReason'] = $rejectionReason;
@@ -320,7 +320,7 @@ class ProofOfCreditFileKycDocument extends KycDocument
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\Tag[]
+     * @return null|Tag[]
      */
     public function getTags(): ?array
     {
@@ -375,8 +375,8 @@ class ProofOfCreditFileKycDocument extends KycDocument
 
     public function setDocumentMatches(null|ProofOfCreditFileKycDocumentDocumentMatches|array $documentMatches): self
     {
-        if ($documentMatches !== null && !($documentMatches instanceof \Rebilly\Sdk\Model\ProofOfCreditFileKycDocumentDocumentMatches)) {
-            $documentMatches = \Rebilly\Sdk\Model\ProofOfCreditFileKycDocumentDocumentMatches::from($documentMatches);
+        if ($documentMatches !== null && !($documentMatches instanceof ProofOfCreditFileKycDocumentDocumentMatches)) {
+            $documentMatches = ProofOfCreditFileKycDocumentDocumentMatches::from($documentMatches);
         }
 
         $this->fields['documentMatches'] = $documentMatches;
@@ -385,7 +385,7 @@ class ProofOfCreditFileKycDocument extends KycDocument
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\CustomerLink|\Rebilly\Sdk\Model\SelfLink>
+     * @return null|array<CustomerLink|SelfLink>
      */
     public function getLinks(): ?array
     {
@@ -393,7 +393,7 @@ class ProofOfCreditFileKycDocument extends KycDocument
     }
 
     /**
-     * @return null|array{customer:\Rebilly\Sdk\Model\Customer}
+     * @return null|array{customer:Customer}
      */
     public function getEmbedded(): ?array
     {
@@ -532,11 +532,11 @@ class ProofOfCreditFileKycDocument extends KycDocument
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\Tag[] $tags
+     * @param null|Tag[] $tags
      */
     private function setTags(null|array $tags): self
     {
-        $tags = $tags !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\Tag ? $value : \Rebilly\Sdk\Model\Tag::from($value)) : null, $tags) : null;
+        $tags = $tags !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Tag ? $value : Tag::from($value)) : null, $tags) : null;
 
         $this->fields['tags'] = $tags;
 
@@ -551,7 +551,7 @@ class ProofOfCreditFileKycDocument extends KycDocument
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\CustomerLink|\Rebilly\Sdk\Model\SelfLink> $links
+     * @param null|array<CustomerLink|SelfLink> $links
      */
     private function setLinks(null|array $links): self
     {
@@ -563,11 +563,11 @@ class ProofOfCreditFileKycDocument extends KycDocument
     }
 
     /**
-     * @param null|array{customer:\Rebilly\Sdk\Model\Customer} $embedded
+     * @param null|array{customer:Customer} $embedded
      */
     private function setEmbedded(null|array $embedded): self
     {
-        $embedded['customer'] = isset($embedded['customer']) ? ($embedded['customer'] instanceof \Rebilly\Sdk\Model\Customer ? $embedded['customer'] : \Rebilly\Sdk\Model\Customer::from($embedded['customer'])) : null;
+        $embedded['customer'] = isset($embedded['customer']) ? ($embedded['customer'] instanceof Customer ? $embedded['customer'] : Customer::from($embedded['customer'])) : null;
 
         $this->fields['_embedded'] = $embedded;
 

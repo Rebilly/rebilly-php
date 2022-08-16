@@ -40,8 +40,8 @@ class TrustsPay extends GatewayAccount
 
     public function setCredentials(TrustsPayCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\TrustsPayCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\TrustsPayCredentials::from($credentials);
+        if (!($credentials instanceof TrustsPayCredentials)) {
+            $credentials = TrustsPayCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

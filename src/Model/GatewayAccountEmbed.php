@@ -38,8 +38,8 @@ class GatewayAccountEmbed implements JsonSerializable
 
     public function setGatewayAccount(null|GatewayAccount|array $gatewayAccount): self
     {
-        if ($gatewayAccount !== null && !($gatewayAccount instanceof \Rebilly\Sdk\Model\GatewayAccount)) {
-            $gatewayAccount = \Rebilly\Sdk\Model\GatewayAccount::from($gatewayAccount);
+        if ($gatewayAccount !== null && !($gatewayAccount instanceof GatewayAccount)) {
+            $gatewayAccount = GatewayAccount::from($gatewayAccount);
         }
 
         $this->fields['gatewayAccount'] = $gatewayAccount;

@@ -45,8 +45,8 @@ class SchedulePayment extends RuleAction
 
     public function setScheduleInstruction(CommonScheduleInstruction|array $scheduleInstruction): self
     {
-        if (!($scheduleInstruction instanceof \Rebilly\Sdk\Model\CommonScheduleInstruction)) {
-            $scheduleInstruction = \Rebilly\Sdk\Model\CommonScheduleInstruction::from($scheduleInstruction);
+        if (!($scheduleInstruction instanceof CommonScheduleInstruction)) {
+            $scheduleInstruction = CommonScheduleInstruction::from($scheduleInstruction);
         }
 
         $this->fields['scheduleInstruction'] = $scheduleInstruction;

@@ -40,8 +40,8 @@ class BitPay extends GatewayAccount
 
     public function setCredentials(BitPayCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\BitPayCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\BitPayCredentials::from($credentials);
+        if (!($credentials instanceof BitPayCredentials)) {
+            $credentials = BitPayCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

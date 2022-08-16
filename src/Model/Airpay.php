@@ -40,8 +40,8 @@ class Airpay extends GatewayAccount
 
     public function setCredentials(AirpayCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\AirpayCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\AirpayCredentials::from($credentials);
+        if (!($credentials instanceof AirpayCredentials)) {
+            $credentials = AirpayCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

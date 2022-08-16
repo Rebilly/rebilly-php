@@ -38,8 +38,8 @@ class CustomerEmbed implements JsonSerializable
 
     public function setCustomer(null|Customer|array $customer): self
     {
-        if ($customer !== null && !($customer instanceof \Rebilly\Sdk\Model\Customer)) {
-            $customer = \Rebilly\Sdk\Model\Customer::from($customer);
+        if ($customer !== null && !($customer instanceof Customer)) {
+            $customer = Customer::from($customer);
         }
 
         $this->fields['customer'] = $customer;

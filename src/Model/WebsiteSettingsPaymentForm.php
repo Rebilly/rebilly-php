@@ -74,8 +74,8 @@ class WebsiteSettingsPaymentForm implements JsonSerializable
 
     public function setFeatures(null|WebsiteSettingsPaymentFormFeatures|array $features): self
     {
-        if ($features !== null && !($features instanceof \Rebilly\Sdk\Model\WebsiteSettingsPaymentFormFeatures)) {
-            $features = \Rebilly\Sdk\Model\WebsiteSettingsPaymentFormFeatures::from($features);
+        if ($features !== null && !($features instanceof WebsiteSettingsPaymentFormFeatures)) {
+            $features = WebsiteSettingsPaymentFormFeatures::from($features);
         }
 
         $this->fields['features'] = $features;

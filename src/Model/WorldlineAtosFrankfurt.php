@@ -46,8 +46,8 @@ class WorldlineAtosFrankfurt extends GatewayAccount
 
     public function setThreeDSecureServer(null|WorldlineAtosFrankfurt3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\WorldlineAtosFrankfurt3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\WorldlineAtosFrankfurt3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof WorldlineAtosFrankfurt3dsServers)) {
+            $threeDSecureServer = WorldlineAtosFrankfurt3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;
@@ -62,8 +62,8 @@ class WorldlineAtosFrankfurt extends GatewayAccount
 
     public function setCredentials(WorldlineAtosFrankfurtCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\WorldlineAtosFrankfurtCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\WorldlineAtosFrankfurtCredentials::from($credentials);
+        if (!($credentials instanceof WorldlineAtosFrankfurtCredentials)) {
+            $credentials = WorldlineAtosFrankfurtCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -78,8 +78,8 @@ class WorldlineAtosFrankfurt extends GatewayAccount
 
     public function setSettings(WorldlineAtosFrankfurtSettings|array $settings): self
     {
-        if (!($settings instanceof \Rebilly\Sdk\Model\WorldlineAtosFrankfurtSettings)) {
-            $settings = \Rebilly\Sdk\Model\WorldlineAtosFrankfurtSettings::from($settings);
+        if (!($settings instanceof WorldlineAtosFrankfurtSettings)) {
+            $settings = WorldlineAtosFrankfurtSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

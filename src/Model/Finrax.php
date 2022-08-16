@@ -43,8 +43,8 @@ class Finrax extends GatewayAccount
 
     public function setCredentials(FinraxCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\FinraxCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\FinraxCredentials::from($credentials);
+        if (!($credentials instanceof FinraxCredentials)) {
+            $credentials = FinraxCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class Finrax extends GatewayAccount
 
     public function setSettings(null|FinraxSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\FinraxSettings)) {
-            $settings = \Rebilly\Sdk\Model\FinraxSettings::from($settings);
+        if ($settings !== null && !($settings instanceof FinraxSettings)) {
+            $settings = FinraxSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

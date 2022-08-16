@@ -35,7 +35,7 @@ class CreateContactBody implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\CreateContactBodyEmailAddresses[]
+     * @return null|CreateContactBodyEmailAddresses[]
      */
     public function getEmailAddresses(): ?array
     {
@@ -43,11 +43,11 @@ class CreateContactBody implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\CreateContactBodyEmailAddresses[] $emailAddresses
+     * @param null|CreateContactBodyEmailAddresses[] $emailAddresses
      */
     public function setEmailAddresses(null|array $emailAddresses): self
     {
-        $emailAddresses = $emailAddresses !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\CreateContactBodyEmailAddresses ? $value : \Rebilly\Sdk\Model\CreateContactBodyEmailAddresses::from($value)) : null, $emailAddresses) : null;
+        $emailAddresses = $emailAddresses !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof CreateContactBodyEmailAddresses ? $value : CreateContactBodyEmailAddresses::from($value)) : null, $emailAddresses) : null;
 
         $this->fields['email_addresses'] = $emailAddresses;
 
@@ -55,7 +55,7 @@ class CreateContactBody implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\CreateContactBodyPhoneNumbers[]
+     * @return null|CreateContactBodyPhoneNumbers[]
      */
     public function getPhoneNumbers(): ?array
     {
@@ -63,11 +63,11 @@ class CreateContactBody implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\CreateContactBodyPhoneNumbers[] $phoneNumbers
+     * @param null|CreateContactBodyPhoneNumbers[] $phoneNumbers
      */
     public function setPhoneNumbers(null|array $phoneNumbers): self
     {
-        $phoneNumbers = $phoneNumbers !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\CreateContactBodyPhoneNumbers ? $value : \Rebilly\Sdk\Model\CreateContactBodyPhoneNumbers::from($value)) : null, $phoneNumbers) : null;
+        $phoneNumbers = $phoneNumbers !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof CreateContactBodyPhoneNumbers ? $value : CreateContactBodyPhoneNumbers::from($value)) : null, $phoneNumbers) : null;
 
         $this->fields['phone_numbers'] = $phoneNumbers;
 

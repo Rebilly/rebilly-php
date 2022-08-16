@@ -43,8 +43,8 @@ class Onlineueberweisen extends GatewayAccount
 
     public function setCredentials(OnlineueberweisenCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\OnlineueberweisenCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\OnlineueberweisenCredentials::from($credentials);
+        if (!($credentials instanceof OnlineueberweisenCredentials)) {
+            $credentials = OnlineueberweisenCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class Onlineueberweisen extends GatewayAccount
 
     public function setSettings(OnlineueberweisenSettings|array $settings): self
     {
-        if (!($settings instanceof \Rebilly\Sdk\Model\OnlineueberweisenSettings)) {
-            $settings = \Rebilly\Sdk\Model\OnlineueberweisenSettings::from($settings);
+        if (!($settings instanceof OnlineueberweisenSettings)) {
+            $settings = OnlineueberweisenSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

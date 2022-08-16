@@ -40,8 +40,8 @@ class CASHlib extends GatewayAccount
 
     public function setCredentials(CASHlibCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\CASHlibCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\CASHlibCredentials::from($credentials);
+        if (!($credentials instanceof CASHlibCredentials)) {
+            $credentials = CASHlibCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

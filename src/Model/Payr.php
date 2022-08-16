@@ -40,8 +40,8 @@ class Payr extends GatewayAccount
 
     public function setCredentials(PayrCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\PayrCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\PayrCredentials::from($credentials);
+        if (!($credentials instanceof PayrCredentials)) {
+            $credentials = PayrCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

@@ -46,8 +46,8 @@ class Piastrix extends GatewayAccount
 
     public function setCredentials(PiastrixCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\PiastrixCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\PiastrixCredentials::from($credentials);
+        if (!($credentials instanceof PiastrixCredentials)) {
+            $credentials = PiastrixCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -62,8 +62,8 @@ class Piastrix extends GatewayAccount
 
     public function setSettings(null|PiastrixSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\PiastrixSettings)) {
-            $settings = \Rebilly\Sdk\Model\PiastrixSettings::from($settings);
+        if ($settings !== null && !($settings instanceof PiastrixSettings)) {
+            $settings = PiastrixSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;
@@ -78,8 +78,8 @@ class Piastrix extends GatewayAccount
 
     public function setThreeDSecureServer(null|Piastrix3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\Piastrix3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\Piastrix3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Piastrix3dsServers)) {
+            $threeDSecureServer = Piastrix3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

@@ -83,8 +83,8 @@ class DayOfWeek extends CommonScheduleInstruction
 
     public function setDay(DayOfWeekLong|string $day): self
     {
-        if (!($day instanceof \Rebilly\Sdk\Model\DayOfWeekLong)) {
-            $day = \Rebilly\Sdk\Model\DayOfWeekLong::from($day);
+        if (!($day instanceof DayOfWeekLong)) {
+            $day = DayOfWeekLong::from($day);
         }
 
         $this->fields['day'] = $day;

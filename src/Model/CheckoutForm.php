@@ -72,7 +72,7 @@ class CheckoutForm extends CommonCheckoutForm
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\PreviewLink|\Rebilly\Sdk\Model\SelfLink>
+     * @return null|array<PreviewLink|SelfLink>
      */
     public function getLinks(): ?array
     {
@@ -96,7 +96,7 @@ class CheckoutForm extends CommonCheckoutForm
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\PreviewLink|\Rebilly\Sdk\Model\SelfLink> $links
+     * @param null|array<PreviewLink|SelfLink> $links
      */
     private function setLinks(null|array $links): self
     {

@@ -132,7 +132,7 @@ class PaymentGatewayMetadata implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\PaymentGatewayMetadataOtherNames[]
+     * @return null|PaymentGatewayMetadataOtherNames[]
      */
     public function getOtherNames(): ?array
     {
@@ -140,11 +140,11 @@ class PaymentGatewayMetadata implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\PaymentGatewayMetadataOtherNames[] $otherNames
+     * @param null|PaymentGatewayMetadataOtherNames[] $otherNames
      */
     public function setOtherNames(null|array $otherNames): self
     {
-        $otherNames = $otherNames !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\PaymentGatewayMetadataOtherNames ? $value : \Rebilly\Sdk\Model\PaymentGatewayMetadataOtherNames::from($value)) : null, $otherNames) : null;
+        $otherNames = $otherNames !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof PaymentGatewayMetadataOtherNames ? $value : PaymentGatewayMetadataOtherNames::from($value)) : null, $otherNames) : null;
 
         $this->fields['otherNames'] = $otherNames;
 
@@ -188,7 +188,7 @@ class PaymentGatewayMetadata implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\PaymentGatewayMetadataExternalDocs[]
+     * @return null|PaymentGatewayMetadataExternalDocs[]
      */
     public function getExternalDocs(): ?array
     {
@@ -196,11 +196,11 @@ class PaymentGatewayMetadata implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\PaymentGatewayMetadataExternalDocs[] $externalDocs
+     * @param null|PaymentGatewayMetadataExternalDocs[] $externalDocs
      */
     public function setExternalDocs(null|array $externalDocs): self
     {
-        $externalDocs = $externalDocs !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\PaymentGatewayMetadataExternalDocs ? $value : \Rebilly\Sdk\Model\PaymentGatewayMetadataExternalDocs::from($value)) : null, $externalDocs) : null;
+        $externalDocs = $externalDocs !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof PaymentGatewayMetadataExternalDocs ? $value : PaymentGatewayMetadataExternalDocs::from($value)) : null, $externalDocs) : null;
 
         $this->fields['externalDocs'] = $externalDocs;
 
@@ -252,7 +252,7 @@ class PaymentGatewayMetadata implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\PaymentCardBrand[]
+     * @return null|PaymentCardBrand[]
      */
     public function getCardBrands(): ?array
     {
@@ -260,11 +260,11 @@ class PaymentGatewayMetadata implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\PaymentCardBrand[] $cardBrands
+     * @param null|PaymentCardBrand[] $cardBrands
      */
     public function setCardBrands(null|array $cardBrands): self
     {
-        $cardBrands = $cardBrands !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\PaymentCardBrand ? $value : \Rebilly\Sdk\Model\PaymentCardBrand::from($value)) : null, $cardBrands) : null;
+        $cardBrands = $cardBrands !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof PaymentCardBrand ? $value : PaymentCardBrand::from($value)) : null, $cardBrands) : null;
 
         $this->fields['cardBrands'] = $cardBrands;
 
@@ -278,8 +278,8 @@ class PaymentGatewayMetadata implements JsonSerializable
 
     public function setMerchantCountries(CountriesMetadata|array $merchantCountries): self
     {
-        if (!($merchantCountries instanceof \Rebilly\Sdk\Model\CountriesMetadata)) {
-            $merchantCountries = \Rebilly\Sdk\Model\CountriesMetadata::from($merchantCountries);
+        if (!($merchantCountries instanceof CountriesMetadata)) {
+            $merchantCountries = CountriesMetadata::from($merchantCountries);
         }
 
         $this->fields['merchantCountries'] = $merchantCountries;
@@ -294,8 +294,8 @@ class PaymentGatewayMetadata implements JsonSerializable
 
     public function setCurrencies(CurrenciesMetadata|array $currencies): self
     {
-        if (!($currencies instanceof \Rebilly\Sdk\Model\CurrenciesMetadata)) {
-            $currencies = \Rebilly\Sdk\Model\CurrenciesMetadata::from($currencies);
+        if (!($currencies instanceof CurrenciesMetadata)) {
+            $currencies = CurrenciesMetadata::from($currencies);
         }
 
         $this->fields['currencies'] = $currencies;
@@ -414,8 +414,8 @@ class PaymentGatewayMetadata implements JsonSerializable
 
     public function setIpn(null|PaymentGatewayMetadataIpn|array $ipn): self
     {
-        if ($ipn !== null && !($ipn instanceof \Rebilly\Sdk\Model\PaymentGatewayMetadataIpn)) {
-            $ipn = \Rebilly\Sdk\Model\PaymentGatewayMetadataIpn::from($ipn);
+        if ($ipn !== null && !($ipn instanceof PaymentGatewayMetadataIpn)) {
+            $ipn = PaymentGatewayMetadataIpn::from($ipn);
         }
 
         $this->fields['ipn'] = $ipn;
@@ -436,7 +436,7 @@ class PaymentGatewayMetadata implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\SelfLink[]
+     * @return null|SelfLink[]
      */
     public function getLinks(): ?array
     {
@@ -514,11 +514,11 @@ class PaymentGatewayMetadata implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\SelfLink[] $links
+     * @param null|SelfLink[] $links
      */
     private function setLinks(null|array $links): self
     {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\SelfLink ? $value : \Rebilly\Sdk\Model\SelfLink::from($value)) : null, $links) : null;
+        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 
         $this->fields['_links'] = $links;
 

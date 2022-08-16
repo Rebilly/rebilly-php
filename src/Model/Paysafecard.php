@@ -40,8 +40,8 @@ class Paysafecard extends GatewayAccount
 
     public function setCredentials(PaysafecardCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\PaysafecardCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\PaysafecardCredentials::from($credentials);
+        if (!($credentials instanceof PaysafecardCredentials)) {
+            $credentials = PaysafecardCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

@@ -40,8 +40,8 @@ class NuaPay extends GatewayAccount
 
     public function setCredentials(NuaPayCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\NuaPayCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\NuaPayCredentials::from($credentials);
+        if (!($credentials instanceof NuaPayCredentials)) {
+            $credentials = NuaPayCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

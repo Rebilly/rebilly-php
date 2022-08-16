@@ -57,8 +57,8 @@ class ProofOfAddressKycDocumentDocumentMatches implements JsonSerializable
 
     public function setData(null|AddressMatches|array $data): self
     {
-        if ($data !== null && !($data instanceof \Rebilly\Sdk\Model\AddressMatches)) {
-            $data = \Rebilly\Sdk\Model\AddressMatches::from($data);
+        if ($data !== null && !($data instanceof AddressMatches)) {
+            $data = AddressMatches::from($data);
         }
 
         $this->fields['data'] = $data;

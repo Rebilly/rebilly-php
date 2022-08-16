@@ -40,8 +40,8 @@ class PickGatewayAccount extends RuleAction
 
     public function setPickInstruction(GatewayAccountPickInstruction|array $pickInstruction): self
     {
-        if (!($pickInstruction instanceof \Rebilly\Sdk\Model\GatewayAccountPickInstruction)) {
-            $pickInstruction = \Rebilly\Sdk\Model\GatewayAccountPickInstruction::from($pickInstruction);
+        if (!($pickInstruction instanceof GatewayAccountPickInstruction)) {
+            $pickInstruction = GatewayAccountPickInstruction::from($pickInstruction);
         }
 
         $this->fields['pickInstruction'] = $pickInstruction;

@@ -87,7 +87,7 @@ class Invoice extends CommonInvoice
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\Transaction[]
+     * @return null|Transaction[]
      */
     public function getTransactions(): ?array
     {
@@ -101,8 +101,8 @@ class Invoice extends CommonInvoice
 
     public function setRetryInstruction(null|InvoiceRetryInstruction|array $retryInstruction): self
     {
-        if ($retryInstruction !== null && !($retryInstruction instanceof \Rebilly\Sdk\Model\InvoiceRetryInstruction)) {
-            $retryInstruction = \Rebilly\Sdk\Model\InvoiceRetryInstruction::from($retryInstruction);
+        if ($retryInstruction !== null && !($retryInstruction instanceof InvoiceRetryInstruction)) {
+            $retryInstruction = InvoiceRetryInstruction::from($retryInstruction);
         }
 
         $this->fields['retryInstruction'] = $retryInstruction;
@@ -145,7 +145,7 @@ class Invoice extends CommonInvoice
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\CustomerLink|\Rebilly\Sdk\Model\LeadSourceLink|\Rebilly\Sdk\Model\OrganizationLink|\Rebilly\Sdk\Model\RecalculateInvoiceLink|\Rebilly\Sdk\Model\SelfLink|\Rebilly\Sdk\Model\SubscriptionLink|\Rebilly\Sdk\Model\TransactionAllocationsLink|\Rebilly\Sdk\Model\WebsiteLink>
+     * @return null|array<CustomerLink|LeadSourceLink|OrganizationLink|RecalculateInvoiceLink|SelfLink|SubscriptionLink|TransactionAllocationsLink|WebsiteLink>
      */
     public function getLinks(): ?array
     {
@@ -153,7 +153,7 @@ class Invoice extends CommonInvoice
     }
 
     /**
-     * @return null|array{customer:\Rebilly\Sdk\Model\Customer,website:\Rebilly\Sdk\Model\Website,organization:\Rebilly\Sdk\Model\Organization,leadSource:\Rebilly\Sdk\Model\LeadSource,shippingRate:\Rebilly\Sdk\Model\ShippingRate}
+     * @return null|array{customer:Customer,website:Website,organization:Organization,leadSource:LeadSource,shippingRate:ShippingRate}
      */
     public function getEmbedded(): ?array
     {
@@ -195,11 +195,11 @@ class Invoice extends CommonInvoice
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\Transaction[] $transactions
+     * @param null|Transaction[] $transactions
      */
     private function setTransactions(null|array $transactions): self
     {
-        $transactions = $transactions !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\Transaction ? $value : \Rebilly\Sdk\Model\Transaction::from($value)) : null, $transactions) : null;
+        $transactions = $transactions !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Transaction ? $value : Transaction::from($value)) : null, $transactions) : null;
 
         $this->fields['transactions'] = $transactions;
 
@@ -231,7 +231,7 @@ class Invoice extends CommonInvoice
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\CustomerLink|\Rebilly\Sdk\Model\LeadSourceLink|\Rebilly\Sdk\Model\OrganizationLink|\Rebilly\Sdk\Model\RecalculateInvoiceLink|\Rebilly\Sdk\Model\SelfLink|\Rebilly\Sdk\Model\SubscriptionLink|\Rebilly\Sdk\Model\TransactionAllocationsLink|\Rebilly\Sdk\Model\WebsiteLink> $links
+     * @param null|array<CustomerLink|LeadSourceLink|OrganizationLink|RecalculateInvoiceLink|SelfLink|SubscriptionLink|TransactionAllocationsLink|WebsiteLink> $links
      */
     private function setLinks(null|array $links): self
     {
@@ -243,15 +243,15 @@ class Invoice extends CommonInvoice
     }
 
     /**
-     * @param null|array{customer:\Rebilly\Sdk\Model\Customer,website:\Rebilly\Sdk\Model\Website,organization:\Rebilly\Sdk\Model\Organization,leadSource:\Rebilly\Sdk\Model\LeadSource,shippingRate:\Rebilly\Sdk\Model\ShippingRate} $embedded
+     * @param null|array{customer:Customer,website:Website,organization:Organization,leadSource:LeadSource,shippingRate:ShippingRate} $embedded
      */
     private function setEmbedded(null|array $embedded): self
     {
-        $embedded['customer'] = isset($embedded['customer']) ? ($embedded['customer'] instanceof \Rebilly\Sdk\Model\Customer ? $embedded['customer'] : \Rebilly\Sdk\Model\Customer::from($embedded['customer'])) : null;
-        $embedded['website'] = isset($embedded['website']) ? ($embedded['website'] instanceof \Rebilly\Sdk\Model\Website ? $embedded['website'] : \Rebilly\Sdk\Model\Website::from($embedded['website'])) : null;
-        $embedded['organization'] = isset($embedded['organization']) ? ($embedded['organization'] instanceof \Rebilly\Sdk\Model\Organization ? $embedded['organization'] : \Rebilly\Sdk\Model\Organization::from($embedded['organization'])) : null;
-        $embedded['leadSource'] = isset($embedded['leadSource']) ? ($embedded['leadSource'] instanceof \Rebilly\Sdk\Model\LeadSource ? $embedded['leadSource'] : \Rebilly\Sdk\Model\LeadSource::from($embedded['leadSource'])) : null;
-        $embedded['shippingRate'] = isset($embedded['shippingRate']) ? ($embedded['shippingRate'] instanceof \Rebilly\Sdk\Model\ShippingRate ? $embedded['shippingRate'] : \Rebilly\Sdk\Model\ShippingRate::from($embedded['shippingRate'])) : null;
+        $embedded['customer'] = isset($embedded['customer']) ? ($embedded['customer'] instanceof Customer ? $embedded['customer'] : Customer::from($embedded['customer'])) : null;
+        $embedded['website'] = isset($embedded['website']) ? ($embedded['website'] instanceof Website ? $embedded['website'] : Website::from($embedded['website'])) : null;
+        $embedded['organization'] = isset($embedded['organization']) ? ($embedded['organization'] instanceof Organization ? $embedded['organization'] : Organization::from($embedded['organization'])) : null;
+        $embedded['leadSource'] = isset($embedded['leadSource']) ? ($embedded['leadSource'] instanceof LeadSource ? $embedded['leadSource'] : LeadSource::from($embedded['leadSource'])) : null;
+        $embedded['shippingRate'] = isset($embedded['shippingRate']) ? ($embedded['shippingRate'] instanceof ShippingRate ? $embedded['shippingRate'] : ShippingRate::from($embedded['shippingRate'])) : null;
 
         $this->fields['_embedded'] = $embedded;
 

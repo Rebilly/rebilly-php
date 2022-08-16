@@ -68,8 +68,8 @@ class FinancialSettingsSettlementSettingsAdvancedSettings implements JsonSeriali
 
     public function setSettlementPeriod(null|SettlementPeriod|array $settlementPeriod): self
     {
-        if ($settlementPeriod !== null && !($settlementPeriod instanceof \Rebilly\Sdk\Model\SettlementPeriod)) {
-            $settlementPeriod = \Rebilly\Sdk\Model\SettlementPeriod::from($settlementPeriod);
+        if ($settlementPeriod !== null && !($settlementPeriod instanceof SettlementPeriod)) {
+            $settlementPeriod = SettlementPeriod::from($settlementPeriod);
         }
 
         $this->fields['settlementPeriod'] = $settlementPeriod;

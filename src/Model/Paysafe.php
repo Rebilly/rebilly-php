@@ -43,8 +43,8 @@ class Paysafe extends GatewayAccount
 
     public function setCredentials(PaysafeCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\PaysafeCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\PaysafeCredentials::from($credentials);
+        if (!($credentials instanceof PaysafeCredentials)) {
+            $credentials = PaysafeCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class Paysafe extends GatewayAccount
 
     public function setThreeDSecureServer(null|Paysafe3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\Paysafe3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\Paysafe3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Paysafe3dsServers)) {
+            $threeDSecureServer = Paysafe3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

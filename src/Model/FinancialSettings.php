@@ -35,7 +35,7 @@ class FinancialSettings implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\FinancialSettingsRiskReserveSettings[]
+     * @return null|FinancialSettingsRiskReserveSettings[]
      */
     public function getRiskReserveSettings(): ?array
     {
@@ -43,11 +43,11 @@ class FinancialSettings implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\FinancialSettingsRiskReserveSettings[] $riskReserveSettings
+     * @param null|FinancialSettingsRiskReserveSettings[] $riskReserveSettings
      */
     public function setRiskReserveSettings(null|array $riskReserveSettings): self
     {
-        $riskReserveSettings = $riskReserveSettings !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\FinancialSettingsRiskReserveSettings ? $value : \Rebilly\Sdk\Model\FinancialSettingsRiskReserveSettings::from($value)) : null, $riskReserveSettings) : null;
+        $riskReserveSettings = $riskReserveSettings !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof FinancialSettingsRiskReserveSettings ? $value : FinancialSettingsRiskReserveSettings::from($value)) : null, $riskReserveSettings) : null;
 
         $this->fields['riskReserveSettings'] = $riskReserveSettings;
 
@@ -61,8 +61,8 @@ class FinancialSettings implements JsonSerializable
 
     public function setSettlementSettings(null|FinancialSettingsSettlementSettings|array $settlementSettings): self
     {
-        if ($settlementSettings !== null && !($settlementSettings instanceof \Rebilly\Sdk\Model\FinancialSettingsSettlementSettings)) {
-            $settlementSettings = \Rebilly\Sdk\Model\FinancialSettingsSettlementSettings::from($settlementSettings);
+        if ($settlementSettings !== null && !($settlementSettings instanceof FinancialSettingsSettlementSettings)) {
+            $settlementSettings = FinancialSettingsSettlementSettings::from($settlementSettings);
         }
 
         $this->fields['settlementSettings'] = $settlementSettings;

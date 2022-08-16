@@ -40,8 +40,8 @@ class CyberSource extends GatewayAccount
 
     public function setCredentials(CyberSourceCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\CyberSourceCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\CyberSourceCredentials::from($credentials);
+        if (!($credentials instanceof CyberSourceCredentials)) {
+            $credentials = CyberSourceCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

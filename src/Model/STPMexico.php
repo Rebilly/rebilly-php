@@ -40,8 +40,8 @@ class STPMexico extends GatewayAccount
 
     public function setCredentials(STPMexicoCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\STPMexicoCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\STPMexicoCredentials::from($credentials);
+        if (!($credentials instanceof STPMexicoCredentials)) {
+            $credentials = STPMexicoCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

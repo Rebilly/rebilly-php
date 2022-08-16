@@ -93,7 +93,7 @@ class OrganizationExport implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\OrganizationExportResource[]
+     * @return null|OrganizationExportResource[]
      */
     public function getItems(): ?array
     {
@@ -116,7 +116,7 @@ class OrganizationExport implements JsonSerializable
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\LinkSelf|\Rebilly\Sdk\Model\LinkSignedLink|\Rebilly\Sdk\Model\LinkUser>
+     * @return null|array<LinkSelf|LinkSignedLink|LinkUser>
      */
     public function getLinks(): ?array
     {
@@ -189,11 +189,11 @@ class OrganizationExport implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\OrganizationExportResource[] $items
+     * @param null|OrganizationExportResource[] $items
      */
     private function setItems(null|array $items): self
     {
-        $items = $items !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\OrganizationExportResource ? $value : \Rebilly\Sdk\Model\OrganizationExportResource::from($value)) : null, $items) : null;
+        $items = $items !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof OrganizationExportResource ? $value : OrganizationExportResource::from($value)) : null, $items) : null;
 
         $this->fields['items'] = $items;
 
@@ -234,7 +234,7 @@ class OrganizationExport implements JsonSerializable
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\LinkSelf|\Rebilly\Sdk\Model\LinkSignedLink|\Rebilly\Sdk\Model\LinkUser> $links
+     * @param null|array<LinkSelf|LinkSignedLink|LinkUser> $links
      */
     private function setLinks(null|array $links): self
     {

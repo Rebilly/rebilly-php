@@ -92,8 +92,8 @@ class CommonCheckoutFormCustomization implements JsonSerializable
 
     public function setColors(null|CommonCheckoutFormCustomizationColors|array $colors): self
     {
-        if ($colors !== null && !($colors instanceof \Rebilly\Sdk\Model\CommonCheckoutFormCustomizationColors)) {
-            $colors = \Rebilly\Sdk\Model\CommonCheckoutFormCustomizationColors::from($colors);
+        if ($colors !== null && !($colors instanceof CommonCheckoutFormCustomizationColors)) {
+            $colors = CommonCheckoutFormCustomizationColors::from($colors);
         }
 
         $this->fields['colors'] = $colors;
@@ -108,8 +108,8 @@ class CommonCheckoutFormCustomization implements JsonSerializable
 
     public function setLinks(null|CommonCheckoutFormCustomizationLinks|array $links): self
     {
-        if ($links !== null && !($links instanceof \Rebilly\Sdk\Model\CommonCheckoutFormCustomizationLinks)) {
-            $links = \Rebilly\Sdk\Model\CommonCheckoutFormCustomizationLinks::from($links);
+        if ($links !== null && !($links instanceof CommonCheckoutFormCustomizationLinks)) {
+            $links = CommonCheckoutFormCustomizationLinks::from($links);
         }
 
         $this->fields['links'] = $links;
@@ -124,8 +124,8 @@ class CommonCheckoutFormCustomization implements JsonSerializable
 
     public function setTracking(null|CommonCheckoutFormCustomizationTracking|array $tracking): self
     {
-        if ($tracking !== null && !($tracking instanceof \Rebilly\Sdk\Model\CommonCheckoutFormCustomizationTracking)) {
-            $tracking = \Rebilly\Sdk\Model\CommonCheckoutFormCustomizationTracking::from($tracking);
+        if ($tracking !== null && !($tracking instanceof CommonCheckoutFormCustomizationTracking)) {
+            $tracking = CommonCheckoutFormCustomizationTracking::from($tracking);
         }
 
         $this->fields['tracking'] = $tracking;

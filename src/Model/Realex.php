@@ -40,8 +40,8 @@ class Realex extends GatewayAccount
 
     public function setCredentials(RealexCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\RealexCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\RealexCredentials::from($credentials);
+        if (!($credentials instanceof RealexCredentials)) {
+            $credentials = RealexCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

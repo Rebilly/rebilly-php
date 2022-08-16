@@ -40,8 +40,8 @@ class Bambora extends GatewayAccount
 
     public function setCredentials(BamboraCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\BamboraCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\BamboraCredentials::from($credentials);
+        if (!($credentials instanceof BamboraCredentials)) {
+            $credentials = BamboraCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

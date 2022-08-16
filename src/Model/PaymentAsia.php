@@ -40,8 +40,8 @@ class PaymentAsia extends GatewayAccount
 
     public function setCredentials(PaymentAsiaCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\PaymentAsiaCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\PaymentAsiaCredentials::from($credentials);
+        if (!($credentials instanceof PaymentAsiaCredentials)) {
+            $credentials = PaymentAsiaCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

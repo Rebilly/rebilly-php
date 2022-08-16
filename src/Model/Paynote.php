@@ -40,8 +40,8 @@ class Paynote extends GatewayAccount
 
     public function setCredentials(PaynoteCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\PaynoteCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\PaynoteCredentials::from($credentials);
+        if (!($credentials instanceof PaynoteCredentials)) {
+            $credentials = PaynoteCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

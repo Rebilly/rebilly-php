@@ -64,8 +64,8 @@ class ReadyToPayKlarnaMethod implements JsonSerializable
 
     public function setFeature(null|KlarnaFeature|array $feature): self
     {
-        if ($feature !== null && !($feature instanceof \Rebilly\Sdk\Model\KlarnaFeature)) {
-            $feature = \Rebilly\Sdk\Model\KlarnaFeature::from($feature);
+        if ($feature !== null && !($feature instanceof KlarnaFeature)) {
+            $feature = KlarnaFeature::from($feature);
         }
 
         $this->fields['feature'] = $feature;

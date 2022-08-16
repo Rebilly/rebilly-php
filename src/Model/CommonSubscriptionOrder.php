@@ -109,8 +109,8 @@ class CommonSubscriptionOrder extends CommonOrder
 
     public function setTrial(null|CommonSubscriptionOrderTrial|array $trial): self
     {
-        if ($trial !== null && !($trial instanceof \Rebilly\Sdk\Model\CommonSubscriptionOrderTrial)) {
-            $trial = \Rebilly\Sdk\Model\CommonSubscriptionOrderTrial::from($trial);
+        if ($trial !== null && !($trial instanceof CommonSubscriptionOrderTrial)) {
+            $trial = CommonSubscriptionOrderTrial::from($trial);
         }
 
         $this->fields['trial'] = $trial;
@@ -153,8 +153,8 @@ class CommonSubscriptionOrder extends CommonOrder
 
     public function setRecurringInterval(null|CommonSubscriptionOrderRecurringInterval|array $recurringInterval): self
     {
-        if ($recurringInterval !== null && !($recurringInterval instanceof \Rebilly\Sdk\Model\CommonSubscriptionOrderRecurringInterval)) {
-            $recurringInterval = \Rebilly\Sdk\Model\CommonSubscriptionOrderRecurringInterval::from($recurringInterval);
+        if ($recurringInterval !== null && !($recurringInterval instanceof CommonSubscriptionOrderRecurringInterval)) {
+            $recurringInterval = CommonSubscriptionOrderRecurringInterval::from($recurringInterval);
         }
 
         $this->fields['recurringInterval'] = $recurringInterval;
@@ -242,8 +242,8 @@ class CommonSubscriptionOrder extends CommonOrder
 
     public function setLineItemSubtotal(null|CommonSubscriptionOrderLineItemSubtotal|array $lineItemSubtotal): self
     {
-        if ($lineItemSubtotal !== null && !($lineItemSubtotal instanceof \Rebilly\Sdk\Model\CommonSubscriptionOrderLineItemSubtotal)) {
-            $lineItemSubtotal = \Rebilly\Sdk\Model\CommonSubscriptionOrderLineItemSubtotal::from($lineItemSubtotal);
+        if ($lineItemSubtotal !== null && !($lineItemSubtotal instanceof CommonSubscriptionOrderLineItemSubtotal)) {
+            $lineItemSubtotal = CommonSubscriptionOrderLineItemSubtotal::from($lineItemSubtotal);
         }
 
         $this->fields['lineItemSubtotal'] = $lineItemSubtotal;

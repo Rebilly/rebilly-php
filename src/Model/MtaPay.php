@@ -43,8 +43,8 @@ class MtaPay extends GatewayAccount
 
     public function setCredentials(MtaPayCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\MtaPayCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\MtaPayCredentials::from($credentials);
+        if (!($credentials instanceof MtaPayCredentials)) {
+            $credentials = MtaPayCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class MtaPay extends GatewayAccount
 
     public function setSettings(MtaPaySettings|array $settings): self
     {
-        if (!($settings instanceof \Rebilly\Sdk\Model\MtaPaySettings)) {
-            $settings = \Rebilly\Sdk\Model\MtaPaySettings::from($settings);
+        if (!($settings instanceof MtaPaySettings)) {
+            $settings = MtaPaySettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

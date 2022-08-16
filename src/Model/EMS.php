@@ -46,8 +46,8 @@ class EMS extends GatewayAccount
 
     public function setSettings(null|EMSSettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\EMSSettings)) {
-            $settings = \Rebilly\Sdk\Model\EMSSettings::from($settings);
+        if ($settings !== null && !($settings instanceof EMSSettings)) {
+            $settings = EMSSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;
@@ -62,8 +62,8 @@ class EMS extends GatewayAccount
 
     public function setCredentials(EMSCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\EMSCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\EMSCredentials::from($credentials);
+        if (!($credentials instanceof EMSCredentials)) {
+            $credentials = EMSCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -78,8 +78,8 @@ class EMS extends GatewayAccount
 
     public function setThreeDSecureServer(null|EMS3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\EMS3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\EMS3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof EMS3dsServers)) {
+            $threeDSecureServer = EMS3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

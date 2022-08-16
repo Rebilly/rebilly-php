@@ -221,7 +221,7 @@ class LeadSource implements JsonSerializable
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\CustomerLink|\Rebilly\Sdk\Model\SelfLink>
+     * @return null|array<CustomerLink|SelfLink>
      */
     public function getLinks(): ?array
     {
@@ -283,7 +283,7 @@ class LeadSource implements JsonSerializable
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\CustomerLink|\Rebilly\Sdk\Model\SelfLink> $links
+     * @param null|array<CustomerLink|SelfLink> $links
      */
     private function setLinks(null|array $links): self
     {

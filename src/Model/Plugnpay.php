@@ -40,8 +40,8 @@ class Plugnpay extends GatewayAccount
 
     public function setCredentials(PlugnpayCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\PlugnpayCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\PlugnpayCredentials::from($credentials);
+        if (!($credentials instanceof PlugnpayCredentials)) {
+            $credentials = PlugnpayCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

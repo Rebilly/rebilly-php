@@ -38,8 +38,8 @@ class PurchaseBumpOfferList implements JsonSerializable
 
     public function setPurchaseBumpOfferList(null|PurchaseBumpOffer|array $purchaseBumpOfferList): self
     {
-        if ($purchaseBumpOfferList !== null && !($purchaseBumpOfferList instanceof \Rebilly\Sdk\Model\PurchaseBumpOffer)) {
-            $purchaseBumpOfferList = \Rebilly\Sdk\Model\PurchaseBumpOffer::from($purchaseBumpOfferList);
+        if ($purchaseBumpOfferList !== null && !($purchaseBumpOfferList instanceof PurchaseBumpOffer)) {
+            $purchaseBumpOfferList = PurchaseBumpOffer::from($purchaseBumpOfferList);
         }
 
         $this->fields['purchaseBumpOfferList'] = $purchaseBumpOfferList;

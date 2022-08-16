@@ -40,8 +40,8 @@ class HiPay extends GatewayAccount
 
     public function setCredentials(HiPayCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\HiPayCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\HiPayCredentials::from($credentials);
+        if (!($credentials instanceof HiPayCredentials)) {
+            $credentials = HiPayCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

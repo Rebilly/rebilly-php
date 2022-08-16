@@ -40,8 +40,8 @@ class JetPay extends GatewayAccount
 
     public function setCredentials(JetPayCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\JetPayCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\JetPayCredentials::from($credentials);
+        if (!($credentials instanceof JetPayCredentials)) {
+            $credentials = JetPayCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

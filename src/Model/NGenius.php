@@ -43,8 +43,8 @@ class NGenius extends GatewayAccount
 
     public function setCredentials(NGeniusCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\NGeniusCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\NGeniusCredentials::from($credentials);
+        if (!($credentials instanceof NGeniusCredentials)) {
+            $credentials = NGeniusCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class NGenius extends GatewayAccount
 
     public function setThreeDSecureServer(null|NGenius3dsServers|array $threeDSecureServer): self
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof \Rebilly\Sdk\Model\NGenius3dsServers)) {
-            $threeDSecureServer = \Rebilly\Sdk\Model\NGenius3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof NGenius3dsServers)) {
+            $threeDSecureServer = NGenius3dsServers::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

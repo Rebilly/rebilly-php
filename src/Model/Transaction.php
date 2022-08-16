@@ -159,8 +159,8 @@ class Transaction extends CommonTransaction
 
     public function setGateway(null|TransactionGateway|array $gateway): self
     {
-        if ($gateway !== null && !($gateway instanceof \Rebilly\Sdk\Model\TransactionGateway)) {
-            $gateway = \Rebilly\Sdk\Model\TransactionGateway::from($gateway);
+        if ($gateway !== null && !($gateway instanceof TransactionGateway)) {
+            $gateway = TransactionGateway::from($gateway);
         }
 
         $this->fields['gateway'] = $gateway;
@@ -226,8 +226,8 @@ class Transaction extends CommonTransaction
 
     public function setPaymentInstrument(null|PaymentInstrumentValueObject|array $paymentInstrument): self
     {
-        if ($paymentInstrument !== null && !($paymentInstrument instanceof \Rebilly\Sdk\Model\PaymentInstrumentValueObject)) {
-            $paymentInstrument = \Rebilly\Sdk\Model\PaymentInstrumentValueObject::from($paymentInstrument);
+        if ($paymentInstrument !== null && !($paymentInstrument instanceof PaymentInstrumentValueObject)) {
+            $paymentInstrument = PaymentInstrumentValueObject::from($paymentInstrument);
         }
 
         $this->fields['paymentInstrument'] = $paymentInstrument;
@@ -247,8 +247,8 @@ class Transaction extends CommonTransaction
 
     public function setDcc(null|TransactionDcc|array $dcc): self
     {
-        if ($dcc !== null && !($dcc instanceof \Rebilly\Sdk\Model\TransactionDcc)) {
-            $dcc = \Rebilly\Sdk\Model\TransactionDcc::from($dcc);
+        if ($dcc !== null && !($dcc instanceof TransactionDcc)) {
+            $dcc = TransactionDcc::from($dcc);
         }
 
         $this->fields['dcc'] = $dcc;
@@ -268,8 +268,8 @@ class Transaction extends CommonTransaction
 
     public function setBumpOffer(null|TransactionBumpOffer|array $bumpOffer): self
     {
-        if ($bumpOffer !== null && !($bumpOffer instanceof \Rebilly\Sdk\Model\TransactionBumpOffer)) {
-            $bumpOffer = \Rebilly\Sdk\Model\TransactionBumpOffer::from($bumpOffer);
+        if ($bumpOffer !== null && !($bumpOffer instanceof TransactionBumpOffer)) {
+            $bumpOffer = TransactionBumpOffer::from($bumpOffer);
         }
 
         $this->fields['bumpOffer'] = $bumpOffer;
@@ -406,8 +406,8 @@ class Transaction extends CommonTransaction
 
     public function setLimits(null|TransactionLimitAmount|array $limits): self
     {
-        if ($limits !== null && !($limits instanceof \Rebilly\Sdk\Model\TransactionLimitAmount)) {
-            $limits = \Rebilly\Sdk\Model\TransactionLimitAmount::from($limits);
+        if ($limits !== null && !($limits instanceof TransactionLimitAmount)) {
+            $limits = TransactionLimitAmount::from($limits);
         }
 
         $this->fields['limits'] = $limits;
@@ -416,7 +416,7 @@ class Transaction extends CommonTransaction
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\ApprovalUrlLink|\Rebilly\Sdk\Model\CustomerLink|\Rebilly\Sdk\Model\DisputeLink|\Rebilly\Sdk\Model\GatewayAccountLink|\Rebilly\Sdk\Model\InvoicesLink|\Rebilly\Sdk\Model\LeadSourceLink|\Rebilly\Sdk\Model\ParentTransactionLink|\Rebilly\Sdk\Model\PaymentCardLink|\Rebilly\Sdk\Model\QueryUrlLink|\Rebilly\Sdk\Model\RefundUrlLink|\Rebilly\Sdk\Model\SelfLink|\Rebilly\Sdk\Model\TransactionRedirectUrlLink|\Rebilly\Sdk\Model\TransactionUpdateUrlLink|\Rebilly\Sdk\Model\WebsiteLink>
+     * @return null|array<ApprovalUrlLink|CustomerLink|DisputeLink|GatewayAccountLink|InvoicesLink|LeadSourceLink|ParentTransactionLink|PaymentCardLink|QueryUrlLink|RefundUrlLink|SelfLink|TransactionRedirectUrlLink|TransactionUpdateUrlLink|WebsiteLink>
      */
     public function getLinks(): ?array
     {
@@ -424,7 +424,7 @@ class Transaction extends CommonTransaction
     }
 
     /**
-     * @return null|array{parentTransaction:\Rebilly\Sdk\Model\Transaction,gatewayAccount:\Rebilly\Sdk\Model\GatewayAccount,customer:\Rebilly\Sdk\Model\Customer,leadSource:\Rebilly\Sdk\Model\LeadSource,website:\Rebilly\Sdk\Model\Website,paymentCard:\Rebilly\Sdk\Model\PaymentCard,bankAccount:\Rebilly\Sdk\Model\BankAccount,invoices:\Rebilly\Sdk\Model\Invoice[],childTransactions:\Rebilly\Sdk\Model\Transaction[]}
+     * @return null|array{parentTransaction:Transaction,gatewayAccount:GatewayAccount,customer:Customer,leadSource:LeadSource,website:Website,paymentCard:PaymentCard,bankAccount:BankAccount,invoices:Invoice[],childTransactions:Transaction[]}
      */
     public function getEmbedded(): ?array
     {
@@ -697,7 +697,7 @@ class Transaction extends CommonTransaction
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\ApprovalUrlLink|\Rebilly\Sdk\Model\CustomerLink|\Rebilly\Sdk\Model\DisputeLink|\Rebilly\Sdk\Model\GatewayAccountLink|\Rebilly\Sdk\Model\InvoicesLink|\Rebilly\Sdk\Model\LeadSourceLink|\Rebilly\Sdk\Model\ParentTransactionLink|\Rebilly\Sdk\Model\PaymentCardLink|\Rebilly\Sdk\Model\QueryUrlLink|\Rebilly\Sdk\Model\RefundUrlLink|\Rebilly\Sdk\Model\SelfLink|\Rebilly\Sdk\Model\TransactionRedirectUrlLink|\Rebilly\Sdk\Model\TransactionUpdateUrlLink|\Rebilly\Sdk\Model\WebsiteLink> $links
+     * @param null|array<ApprovalUrlLink|CustomerLink|DisputeLink|GatewayAccountLink|InvoicesLink|LeadSourceLink|ParentTransactionLink|PaymentCardLink|QueryUrlLink|RefundUrlLink|SelfLink|TransactionRedirectUrlLink|TransactionUpdateUrlLink|WebsiteLink> $links
      */
     private function setLinks(null|array $links): self
     {
@@ -709,18 +709,18 @@ class Transaction extends CommonTransaction
     }
 
     /**
-     * @param null|array{parentTransaction:\Rebilly\Sdk\Model\Transaction,gatewayAccount:\Rebilly\Sdk\Model\GatewayAccount,customer:\Rebilly\Sdk\Model\Customer,leadSource:\Rebilly\Sdk\Model\LeadSource,website:\Rebilly\Sdk\Model\Website,paymentCard:\Rebilly\Sdk\Model\PaymentCard,bankAccount:\Rebilly\Sdk\Model\BankAccount,invoices:\Rebilly\Sdk\Model\Invoice[],childTransactions:\Rebilly\Sdk\Model\Transaction[]} $embedded
+     * @param null|array{parentTransaction:Transaction,gatewayAccount:GatewayAccount,customer:Customer,leadSource:LeadSource,website:Website,paymentCard:PaymentCard,bankAccount:BankAccount,invoices:Invoice[],childTransactions:Transaction[]} $embedded
      */
     private function setEmbedded(null|array $embedded): self
     {
         $embedded['parentTransaction'] = isset($embedded['parentTransaction']) ? ($embedded['parentTransaction'] instanceof self ? $embedded['parentTransaction'] : self::from($embedded['parentTransaction'])) : null;
-        $embedded['gatewayAccount'] = isset($embedded['gatewayAccount']) ? ($embedded['gatewayAccount'] instanceof \Rebilly\Sdk\Model\GatewayAccount ? $embedded['gatewayAccount'] : \Rebilly\Sdk\Model\GatewayAccount::from($embedded['gatewayAccount'])) : null;
-        $embedded['customer'] = isset($embedded['customer']) ? ($embedded['customer'] instanceof \Rebilly\Sdk\Model\Customer ? $embedded['customer'] : \Rebilly\Sdk\Model\Customer::from($embedded['customer'])) : null;
-        $embedded['leadSource'] = isset($embedded['leadSource']) ? ($embedded['leadSource'] instanceof \Rebilly\Sdk\Model\LeadSource ? $embedded['leadSource'] : \Rebilly\Sdk\Model\LeadSource::from($embedded['leadSource'])) : null;
-        $embedded['website'] = isset($embedded['website']) ? ($embedded['website'] instanceof \Rebilly\Sdk\Model\Website ? $embedded['website'] : \Rebilly\Sdk\Model\Website::from($embedded['website'])) : null;
-        $embedded['paymentCard'] = isset($embedded['paymentCard']) ? ($embedded['paymentCard'] instanceof \Rebilly\Sdk\Model\PaymentCard ? $embedded['paymentCard'] : \Rebilly\Sdk\Model\PaymentCard::from($embedded['paymentCard'])) : null;
-        $embedded['bankAccount'] = isset($embedded['bankAccount']) ? ($embedded['bankAccount'] instanceof \Rebilly\Sdk\Model\BankAccount ? $embedded['bankAccount'] : \Rebilly\Sdk\Model\BankAccount::from($embedded['bankAccount'])) : null;
-        $embedded['invoices'] = isset($embedded['invoices']) ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\Invoice ? $value : \Rebilly\Sdk\Model\Invoice::from($value)) : null, $embedded['invoices']) : null;
+        $embedded['gatewayAccount'] = isset($embedded['gatewayAccount']) ? ($embedded['gatewayAccount'] instanceof GatewayAccount ? $embedded['gatewayAccount'] : GatewayAccount::from($embedded['gatewayAccount'])) : null;
+        $embedded['customer'] = isset($embedded['customer']) ? ($embedded['customer'] instanceof Customer ? $embedded['customer'] : Customer::from($embedded['customer'])) : null;
+        $embedded['leadSource'] = isset($embedded['leadSource']) ? ($embedded['leadSource'] instanceof LeadSource ? $embedded['leadSource'] : LeadSource::from($embedded['leadSource'])) : null;
+        $embedded['website'] = isset($embedded['website']) ? ($embedded['website'] instanceof Website ? $embedded['website'] : Website::from($embedded['website'])) : null;
+        $embedded['paymentCard'] = isset($embedded['paymentCard']) ? ($embedded['paymentCard'] instanceof PaymentCard ? $embedded['paymentCard'] : PaymentCard::from($embedded['paymentCard'])) : null;
+        $embedded['bankAccount'] = isset($embedded['bankAccount']) ? ($embedded['bankAccount'] instanceof BankAccount ? $embedded['bankAccount'] : BankAccount::from($embedded['bankAccount'])) : null;
+        $embedded['invoices'] = isset($embedded['invoices']) ? array_map(fn ($value) => $value !== null ? ($value instanceof Invoice ? $value : Invoice::from($value)) : null, $embedded['invoices']) : null;
         $embedded['childTransactions'] = isset($embedded['childTransactions']) ? array_map(fn ($value) => $value !== null ? ($value instanceof self ? $value : self::from($value)) : null, $embedded['childTransactions']) : null;
 
         $this->fields['_embedded'] = $embedded;

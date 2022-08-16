@@ -40,8 +40,8 @@ class Sofort extends GatewayAccount
 
     public function setCredentials(SofortCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\SofortCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\SofortCredentials::from($credentials);
+        if (!($credentials instanceof SofortCredentials)) {
+            $credentials = SofortCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

@@ -40,8 +40,8 @@ class Trustly extends GatewayAccount
 
     public function setCredentials(TrustlyCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\TrustlyCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\TrustlyCredentials::from($credentials);
+        if (!($credentials instanceof TrustlyCredentials)) {
+            $credentials = TrustlyCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

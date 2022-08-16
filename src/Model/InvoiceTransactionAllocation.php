@@ -92,7 +92,7 @@ class InvoiceTransactionAllocation implements JsonSerializable
     }
 
     /**
-     * @return null|array<\Rebilly\Sdk\Model\InvoiceLink|\Rebilly\Sdk\Model\TransactionLink>
+     * @return null|array<InvoiceLink|TransactionLink>
      */
     public function getLinks(): ?array
     {
@@ -122,7 +122,7 @@ class InvoiceTransactionAllocation implements JsonSerializable
     }
 
     /**
-     * @param null|array<\Rebilly\Sdk\Model\InvoiceLink|\Rebilly\Sdk\Model\TransactionLink> $links
+     * @param null|array<InvoiceLink|TransactionLink> $links
      */
     private function setLinks(null|array $links): self
     {

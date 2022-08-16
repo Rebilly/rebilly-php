@@ -64,8 +64,8 @@ class ReadyToPayAchMethod implements JsonSerializable
 
     public function setFeature(null|AchPlaidFeature|array $feature): self
     {
-        if ($feature !== null && !($feature instanceof \Rebilly\Sdk\Model\AchPlaidFeature)) {
-            $feature = \Rebilly\Sdk\Model\AchPlaidFeature::from($feature);
+        if ($feature !== null && !($feature instanceof AchPlaidFeature)) {
+            $feature = AchPlaidFeature::from($feature);
         }
 
         $this->fields['feature'] = $feature;

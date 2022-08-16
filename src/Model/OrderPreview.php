@@ -38,8 +38,8 @@ class OrderPreview extends CommonOrderPreview
 
     public function setShipping(null|Shipping|array $shipping): self
     {
-        if ($shipping !== null && !($shipping instanceof \Rebilly\Sdk\Model\Shipping)) {
-            $shipping = \Rebilly\Sdk\Model\Shipping::from($shipping);
+        if ($shipping !== null && !($shipping instanceof Shipping)) {
+            $shipping = Shipping::from($shipping);
         }
 
         $this->fields['shipping'] = $shipping;

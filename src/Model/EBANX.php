@@ -40,8 +40,8 @@ class EBANX extends GatewayAccount
 
     public function setCredentials(EBANXCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\EBANXCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\EBANXCredentials::from($credentials);
+        if (!($credentials instanceof EBANXCredentials)) {
+            $credentials = EBANXCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

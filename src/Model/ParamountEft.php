@@ -40,8 +40,8 @@ class ParamountEft extends GatewayAccount
 
     public function setCredentials(ParamountEftCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\ParamountEftCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\ParamountEftCredentials::from($credentials);
+        if (!($credentials instanceof ParamountEftCredentials)) {
+            $credentials = ParamountEftCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

@@ -40,8 +40,8 @@ class Chase extends GatewayAccount
 
     public function setCredentials(ChaseCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\ChaseCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\ChaseCredentials::from($credentials);
+        if (!($credentials instanceof ChaseCredentials)) {
+            $credentials = ChaseCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;

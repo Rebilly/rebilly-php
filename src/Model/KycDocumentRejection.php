@@ -41,8 +41,8 @@ class KycDocumentRejection implements JsonSerializable
 
     public function setType(null|KycDocumentRejectionReasonTypes|string $type): self
     {
-        if ($type !== null && !($type instanceof \Rebilly\Sdk\Model\KycDocumentRejectionReasonTypes)) {
-            $type = \Rebilly\Sdk\Model\KycDocumentRejectionReasonTypes::from($type);
+        if ($type !== null && !($type instanceof KycDocumentRejectionReasonTypes)) {
+            $type = KycDocumentRejectionReasonTypes::from($type);
         }
 
         $this->fields['type'] = $type;

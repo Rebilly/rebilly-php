@@ -43,8 +43,8 @@ class ICanPay extends GatewayAccount
 
     public function setCredentials(ICanPayCredentials|array $credentials): self
     {
-        if (!($credentials instanceof \Rebilly\Sdk\Model\ICanPayCredentials)) {
-            $credentials = \Rebilly\Sdk\Model\ICanPayCredentials::from($credentials);
+        if (!($credentials instanceof ICanPayCredentials)) {
+            $credentials = ICanPayCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -59,8 +59,8 @@ class ICanPay extends GatewayAccount
 
     public function setSettings(null|AsiaPaymentGatewaySettings|array $settings): self
     {
-        if ($settings !== null && !($settings instanceof \Rebilly\Sdk\Model\AsiaPaymentGatewaySettings)) {
-            $settings = \Rebilly\Sdk\Model\AsiaPaymentGatewaySettings::from($settings);
+        if ($settings !== null && !($settings instanceof AsiaPaymentGatewaySettings)) {
+            $settings = AsiaPaymentGatewaySettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

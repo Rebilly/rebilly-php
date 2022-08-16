@@ -201,8 +201,8 @@ abstract class CommonInvoice implements JsonSerializable
 
     public function setShipping(null|Shipping|array $shipping): self
     {
-        if ($shipping !== null && !($shipping instanceof \Rebilly\Sdk\Model\Shipping)) {
-            $shipping = \Rebilly\Sdk\Model\Shipping::from($shipping);
+        if ($shipping !== null && !($shipping instanceof Shipping)) {
+            $shipping = Shipping::from($shipping);
         }
 
         $this->fields['shipping'] = $shipping;
@@ -217,8 +217,8 @@ abstract class CommonInvoice implements JsonSerializable
 
     public function setTax(null|InvoiceTax|array $tax): self
     {
-        if ($tax !== null && !($tax instanceof \Rebilly\Sdk\Model\InvoiceTax)) {
-            $tax = \Rebilly\Sdk\Model\InvoiceTax::from($tax);
+        if ($tax !== null && !($tax instanceof InvoiceTax)) {
+            $tax = InvoiceTax::from($tax);
         }
 
         $this->fields['tax'] = $tax;
@@ -283,7 +283,7 @@ abstract class CommonInvoice implements JsonSerializable
     }
 
     /**
-     * @return null|\Rebilly\Sdk\Model\InvoiceItem[]
+     * @return null|InvoiceItem[]
      */
     public function getItems(): ?array
     {
@@ -617,11 +617,11 @@ abstract class CommonInvoice implements JsonSerializable
     }
 
     /**
-     * @param null|\Rebilly\Sdk\Model\InvoiceItem[] $items
+     * @param null|InvoiceItem[] $items
      */
     private function setItems(null|array $items): self
     {
-        $items = $items !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof \Rebilly\Sdk\Model\InvoiceItem ? $value : \Rebilly\Sdk\Model\InvoiceItem::from($value)) : null, $items) : null;
+        $items = $items !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof InvoiceItem ? $value : InvoiceItem::from($value)) : null, $items) : null;
 
         $this->fields['items'] = $items;
 

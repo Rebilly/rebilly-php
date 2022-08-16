@@ -38,8 +38,8 @@ class ApplicationInstanceEmbed implements JsonSerializable
 
     public function setApplicationInstance(null|ApplicationInstance|array $applicationInstance): self
     {
-        if ($applicationInstance !== null && !($applicationInstance instanceof \Rebilly\Sdk\Model\ApplicationInstance)) {
-            $applicationInstance = \Rebilly\Sdk\Model\ApplicationInstance::from($applicationInstance);
+        if ($applicationInstance !== null && !($applicationInstance instanceof ApplicationInstance)) {
+            $applicationInstance = ApplicationInstance::from($applicationInstance);
         }
 
         $this->fields['applicationInstance'] = $applicationInstance;
