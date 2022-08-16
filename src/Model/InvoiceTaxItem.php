@@ -154,7 +154,7 @@ class InvoiceTaxItem implements JsonSerializable
 
     private function setRate(null|float|string $rate): self
     {
-        if ($rate !== null && is_string($rate)) {
+        if (is_string($rate)) {
             $rate = (float) $rate;
         }
 
@@ -165,7 +165,7 @@ class InvoiceTaxItem implements JsonSerializable
 
     private function setStateAmount(null|float|string $stateAmount): self
     {
-        if ($stateAmount !== null && is_string($stateAmount)) {
+        if (is_string($stateAmount)) {
             $stateAmount = (float) $stateAmount;
         }
 
@@ -176,7 +176,7 @@ class InvoiceTaxItem implements JsonSerializable
 
     private function setCountyAmount(null|float|string $countyAmount): self
     {
-        if ($countyAmount !== null && is_string($countyAmount)) {
+        if (is_string($countyAmount)) {
             $countyAmount = (float) $countyAmount;
         }
 
@@ -187,7 +187,7 @@ class InvoiceTaxItem implements JsonSerializable
 
     private function setCityAmount(null|float|string $cityAmount): self
     {
-        if ($cityAmount !== null && is_string($cityAmount)) {
+        if (is_string($cityAmount)) {
             $cityAmount = (float) $cityAmount;
         }
 
@@ -198,7 +198,7 @@ class InvoiceTaxItem implements JsonSerializable
 
     private function setSpecialDistrictAmount(null|float|string $specialDistrictAmount): self
     {
-        if ($specialDistrictAmount !== null && is_string($specialDistrictAmount)) {
+        if (is_string($specialDistrictAmount)) {
             $specialDistrictAmount = (float) $specialDistrictAmount;
         }
 

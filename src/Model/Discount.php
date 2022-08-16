@@ -37,10 +37,10 @@ abstract class Discount implements JsonSerializable
     public static function from(array $data = []): self
     {
         switch ($data['type']) {
-            case 'fixed':
-                return new Fixed($data);
             case 'percent':
                 return new Percent($data);
+            case 'fixed':
+                return new Fixed($data);
         }
 
         throw new InvalidArgumentException("Unsupported type value: '{$data['type']}'");

@@ -658,7 +658,7 @@ class Transaction extends CommonTransaction
 
     private function setReportAmount(null|float|string $reportAmount): self
     {
-        if ($reportAmount !== null && is_string($reportAmount)) {
+        if (is_string($reportAmount)) {
             $reportAmount = (float) $reportAmount;
         }
 

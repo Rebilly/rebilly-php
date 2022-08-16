@@ -218,7 +218,7 @@ class CreditMemo implements JsonSerializable
 
     public function setShippingAmount(null|float|string $shippingAmount): self
     {
-        if ($shippingAmount !== null && is_string($shippingAmount)) {
+        if (is_string($shippingAmount)) {
             $shippingAmount = (float) $shippingAmount;
         }
 
@@ -234,7 +234,7 @@ class CreditMemo implements JsonSerializable
 
     public function setTaxAmount(null|float|string $taxAmount): self
     {
-        if ($taxAmount !== null && is_string($taxAmount)) {
+        if (is_string($taxAmount)) {
             $taxAmount = (float) $taxAmount;
         }
 
@@ -371,7 +371,7 @@ class CreditMemo implements JsonSerializable
 
     private function setTotalAmount(null|float|string $totalAmount): self
     {
-        if ($totalAmount !== null && is_string($totalAmount)) {
+        if (is_string($totalAmount)) {
             $totalAmount = (float) $totalAmount;
         }
 
@@ -382,7 +382,7 @@ class CreditMemo implements JsonSerializable
 
     private function setUnusedAmount(null|float|string $unusedAmount): self
     {
-        if ($unusedAmount !== null && is_string($unusedAmount)) {
+        if (is_string($unusedAmount)) {
             $unusedAmount = (float) $unusedAmount;
         }
 

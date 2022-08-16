@@ -63,7 +63,7 @@ class OrganizationSettingsDefaultTaxCalculator implements JsonSerializable
 
     public function setRate(null|float|string $rate): self
     {
-        if ($rate !== null && is_string($rate)) {
+        if (is_string($rate)) {
             $rate = (float) $rate;
         }
 

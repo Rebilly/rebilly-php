@@ -19,7 +19,10 @@ use function GuzzleHttp\json_decode;
 use function GuzzleHttp\json_encode;
 
 use GuzzleHttp\Psr7\Request;
+use Rebilly\Sdk\Model\GlobalWebhook;
 use Rebilly\Sdk\Model\OrderPreview;
+use Rebilly\Sdk\Model\SendPreviewWebhook;
+use Rebilly\Sdk\Model\SendTestEmail;
 
 class PreviewsApi
 {
@@ -46,8 +49,8 @@ class PreviewsApi
      * @return SendTestEmail
      */
     public function sendEmailRuleAction(
-        \Rebilly\Sdk\Model\SendTestEmail $sendTestEmail,
-    ): \Rebilly\Sdk\Model\SendTestEmail {
+        SendTestEmail $sendTestEmail,
+    ): SendTestEmail {
         $uri = '/previews/rule-actions/send-email';
 
         $request = new Request('POST', $uri, body: json_encode($sendTestEmail));
@@ -61,8 +64,8 @@ class PreviewsApi
      * @return SendPreviewWebhook
      */
     public function triggerWebhookRuleAction(
-        \Rebilly\Sdk\Model\SendPreviewWebhook $sendPreviewWebhook,
-    ): \Rebilly\Sdk\Model\SendPreviewWebhook {
+        SendPreviewWebhook $sendPreviewWebhook,
+    ): SendPreviewWebhook {
         $uri = '/previews/rule-actions/trigger-webhook';
 
         $request = new Request('POST', $uri, body: json_encode($sendPreviewWebhook));
@@ -73,7 +76,7 @@ class PreviewsApi
     }
 
     public function webhook(
-        \Rebilly\Sdk\Model\GlobalWebhook $globalWebhook,
+        GlobalWebhook $globalWebhook,
     ): void {
         $uri = '/previews/webhooks';
 

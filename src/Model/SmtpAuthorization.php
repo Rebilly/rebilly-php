@@ -40,12 +40,12 @@ abstract class SmtpAuthorization implements JsonSerializable
         switch ($data['type']) {
             case 'cram-md5':
                 return new CramMd5($data);
-            case 'login':
-                return new Login($data);
-            case 'none':
-                return new SmtpAuthorizationNone($data);
             case 'plain':
                 return new Plain($data);
+            case 'none':
+                return new SmtpAuthorizationNone($data);
+            case 'login':
+                return new Login($data);
         }
 
         throw new InvalidArgumentException("Unsupported type value: '{$data['type']}'");

@@ -120,7 +120,7 @@ class PercentageFormula extends FeeFormula
 
     public function setMinAmount(null|float|string $minAmount): self
     {
-        if ($minAmount !== null && is_string($minAmount)) {
+        if (is_string($minAmount)) {
             $minAmount = (float) $minAmount;
         }
 

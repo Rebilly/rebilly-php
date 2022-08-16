@@ -36,12 +36,12 @@ abstract class SettlementPeriodAnchor implements JsonSerializable
     public static function from(array $data = []): self
     {
         switch ($data['method']) {
-            case 'day-of-month':
-                return new DayOfMonth($data);
-            case 'day-of-week':
-                return new DayOfWeek($data);
             case 'immediately':
                 return new Immediately($data);
+            case 'day-of-week':
+                return new DayOfWeek($data);
+            case 'day-of-month':
+                return new DayOfMonth($data);
         }
 
         throw new InvalidArgumentException("Unsupported method value: '{$data['method']}'");

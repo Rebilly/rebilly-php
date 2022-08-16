@@ -621,7 +621,7 @@ abstract class CommonTransaction implements JsonSerializable
 
     private function setAmount(null|float|string $amount): self
     {
-        if ($amount !== null && is_string($amount)) {
+        if (is_string($amount)) {
             $amount = (float) $amount;
         }
 
@@ -639,7 +639,7 @@ abstract class CommonTransaction implements JsonSerializable
 
     private function setPurchaseAmount(null|float|string $purchaseAmount): self
     {
-        if ($purchaseAmount !== null && is_string($purchaseAmount)) {
+        if (is_string($purchaseAmount)) {
             $purchaseAmount = (float) $purchaseAmount;
         }
 
@@ -657,7 +657,7 @@ abstract class CommonTransaction implements JsonSerializable
 
     private function setRequestAmount(null|float|string $requestAmount): self
     {
-        if ($requestAmount !== null && is_string($requestAmount)) {
+        if (is_string($requestAmount)) {
             $requestAmount = (float) $requestAmount;
         }
 

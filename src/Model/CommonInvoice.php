@@ -574,7 +574,7 @@ abstract class CommonInvoice implements JsonSerializable
 
     private function setAmount(null|float|string $amount): self
     {
-        if ($amount !== null && is_string($amount)) {
+        if (is_string($amount)) {
             $amount = (float) $amount;
         }
 
@@ -585,7 +585,7 @@ abstract class CommonInvoice implements JsonSerializable
 
     private function setAmountDue(null|float|string $amountDue): self
     {
-        if ($amountDue !== null && is_string($amountDue)) {
+        if (is_string($amountDue)) {
             $amountDue = (float) $amountDue;
         }
 
@@ -596,7 +596,7 @@ abstract class CommonInvoice implements JsonSerializable
 
     private function setSubtotalAmount(null|float|string $subtotalAmount): self
     {
-        if ($subtotalAmount !== null && is_string($subtotalAmount)) {
+        if (is_string($subtotalAmount)) {
             $subtotalAmount = (float) $subtotalAmount;
         }
 
@@ -607,7 +607,7 @@ abstract class CommonInvoice implements JsonSerializable
 
     private function setDiscountAmount(null|float|string $discountAmount): self
     {
-        if ($discountAmount !== null && is_string($discountAmount)) {
+        if (is_string($discountAmount)) {
             $discountAmount = (float) $discountAmount;
         }
 

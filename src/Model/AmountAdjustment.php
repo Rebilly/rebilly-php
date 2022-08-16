@@ -34,10 +34,10 @@ abstract class AmountAdjustment implements JsonSerializable
     public static function from(array $data = []): self
     {
         switch ($data['method']) {
-            case 'none':
-                return new None($data);
             case 'partial':
                 return new Partial($data);
+            case 'none':
+                return new None($data);
         }
 
         throw new InvalidArgumentException("Unsupported method value: '{$data['method']}'");

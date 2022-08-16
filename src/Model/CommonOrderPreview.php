@@ -323,7 +323,7 @@ abstract class CommonOrderPreview implements JsonSerializable
 
     private function setSubtotalAmount(null|float|string $subtotalAmount): self
     {
-        if ($subtotalAmount !== null && is_string($subtotalAmount)) {
+        if (is_string($subtotalAmount)) {
             $subtotalAmount = (float) $subtotalAmount;
         }
 
@@ -334,7 +334,7 @@ abstract class CommonOrderPreview implements JsonSerializable
 
     private function setTaxAmount(null|float|string $taxAmount): self
     {
-        if ($taxAmount !== null && is_string($taxAmount)) {
+        if (is_string($taxAmount)) {
             $taxAmount = (float) $taxAmount;
         }
 
@@ -345,7 +345,7 @@ abstract class CommonOrderPreview implements JsonSerializable
 
     private function setShippingAmount(null|float|string $shippingAmount): self
     {
-        if ($shippingAmount !== null && is_string($shippingAmount)) {
+        if (is_string($shippingAmount)) {
             $shippingAmount = (float) $shippingAmount;
         }
 
@@ -356,7 +356,7 @@ abstract class CommonOrderPreview implements JsonSerializable
 
     private function setDiscountsAmount(null|float|string $discountsAmount): self
     {
-        if ($discountsAmount !== null && is_string($discountsAmount)) {
+        if (is_string($discountsAmount)) {
             $discountsAmount = (float) $discountsAmount;
         }
 
@@ -367,7 +367,7 @@ abstract class CommonOrderPreview implements JsonSerializable
 
     private function setTotal(null|float|string $total): self
     {
-        if ($total !== null && is_string($total)) {
+        if (is_string($total)) {
             $total = (float) $total;
         }
 

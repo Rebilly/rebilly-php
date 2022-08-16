@@ -17,8 +17,6 @@ use JsonSerializable;
 
 class Other implements JsonSerializable
 {
-    private array $fields = [];
-
     public function __construct(array $data = [])
     {
     }
@@ -30,8 +28,6 @@ class Other implements JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
-
-        return $data;
+        return [];
     }
 }

@@ -30,10 +30,10 @@ abstract class BankAccountInstrument implements JsonSerializable
     public static function from(array $data = []): self
     {
         switch ($data['accountNumberType']) {
-            case 'BBAN':
-                return new BBANInstrument($data);
             case 'IBAN':
                 return new IBANInstrument($data);
+            case 'BBAN':
+                return new BBANInstrument($data);
         }
 
         throw new InvalidArgumentException("Unsupported accountNumberType value: '{$data['accountNumberType']}'");

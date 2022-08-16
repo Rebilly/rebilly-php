@@ -38,10 +38,10 @@ abstract class TimelineAction implements JsonSerializable
     public static function from(array $data = []): self
     {
         switch ($data['action']) {
-            case 'redemption-cancel':
-                return new RedemptionCancel($data);
             case 'resend-email':
                 return new ResendEmail($data);
+            case 'redemption-cancel':
+                return new RedemptionCancel($data);
             case 'ruleset-restore':
                 return new RulesetRestore($data);
             case 'show-edd-search-logs':

@@ -317,7 +317,7 @@ class InvoiceItem implements JsonSerializable
 
     private function setPrice(null|float|string $price): self
     {
-        if ($price !== null && is_string($price)) {
+        if (is_string($price)) {
             $price = (float) $price;
         }
 
@@ -328,7 +328,7 @@ class InvoiceItem implements JsonSerializable
 
     private function setDiscountAmount(null|float|string $discountAmount): self
     {
-        if ($discountAmount !== null && is_string($discountAmount)) {
+        if (is_string($discountAmount)) {
             $discountAmount = (float) $discountAmount;
         }
 

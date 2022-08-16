@@ -56,7 +56,7 @@ class BlueSnapSettings implements JsonSerializable
 
     public function setSalesTaxAmount(null|float|string $salesTaxAmount): self
     {
-        if ($salesTaxAmount !== null && is_string($salesTaxAmount)) {
+        if (is_string($salesTaxAmount)) {
             $salesTaxAmount = (float) $salesTaxAmount;
         }
 

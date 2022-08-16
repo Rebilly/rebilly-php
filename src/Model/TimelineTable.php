@@ -44,12 +44,12 @@ abstract class TimelineTable implements JsonSerializable
     public static function from(array $data = []): self
     {
         switch ($data['type']) {
-            case 'list':
-                return new ListTimelineTable($data);
-            case 'one-column':
-                return new OneColumnTimelineTable($data);
             case 'three-columns':
                 return new ThreeColumnsTimelineTable($data);
+            case 'one-column':
+                return new OneColumnTimelineTable($data);
+            case 'list':
+                return new ListTimelineTable($data);
             case 'two-columns':
                 return new TwoColumnsTimelineTable($data);
         }

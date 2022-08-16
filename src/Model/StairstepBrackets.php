@@ -41,7 +41,7 @@ class StairstepBrackets implements JsonSerializable
 
     public function setPrice(null|float|string $price): self
     {
-        if ($price !== null && is_string($price)) {
+        if (is_string($price)) {
             $price = (float) $price;
         }
 

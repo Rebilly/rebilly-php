@@ -149,7 +149,7 @@ class TransactionQuery implements JsonSerializable
 
     private function setAmount(null|float|string $amount): self
     {
-        if ($amount !== null && is_string($amount)) {
+        if (is_string($amount)) {
             $amount = (float) $amount;
         }
 

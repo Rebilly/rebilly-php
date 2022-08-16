@@ -34,10 +34,10 @@ abstract class FeeFormula implements JsonSerializable
     public static function from(array $data = []): self
     {
         switch ($data['type']) {
-            case 'fixed-fee':
-                return new FixedFeeFormula($data);
             case 'percentage':
                 return new PercentageFormula($data);
+            case 'fixed-fee':
+                return new FixedFeeFormula($data);
         }
 
         throw new InvalidArgumentException("Unsupported type value: '{$data['type']}'");
