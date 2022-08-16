@@ -75,7 +75,7 @@ class STPMexicoCredentials implements JsonSerializable
         return $this->fields['bankId'];
     }
 
-    public function setBankId(STPMexicoBanks|string $bankId): self
+    public function setBankId(STPMexicoBanks|int $bankId): self
     {
         if (!($bankId instanceof STPMexicoBanks)) {
             $bankId = STPMexicoBanks::from($bankId);
