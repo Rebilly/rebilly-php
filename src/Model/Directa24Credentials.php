@@ -36,6 +36,12 @@ class Directa24Credentials implements JsonSerializable
         if (array_key_exists('web_pay_tran_key', $data)) {
             $this->setWebPayTranKey($data['web_pay_tran_key']);
         }
+        if (array_key_exists('cashout_login', $data)) {
+            $this->setCashoutLogin($data['cashout_login']);
+        }
+        if (array_key_exists('cashout_password', $data)) {
+            $this->setCashoutPassword($data['cashout_password']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -103,6 +109,30 @@ class Directa24Credentials implements JsonSerializable
         return $this;
     }
 
+    public function getCashoutLogin(): ?string
+    {
+        return $this->fields['cashout_login'] ?? null;
+    }
+
+    public function setCashoutLogin(null|string $cashoutLogin): self
+    {
+        $this->fields['cashout_login'] = $cashoutLogin;
+
+        return $this;
+    }
+
+    public function getCashoutPassword(): ?string
+    {
+        return $this->fields['cashout_password'] ?? null;
+    }
+
+    public function setCashoutPassword(null|string $cashoutPassword): self
+    {
+        $this->fields['cashout_password'] = $cashoutPassword;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -120,6 +150,12 @@ class Directa24Credentials implements JsonSerializable
         }
         if (array_key_exists('web_pay_tran_key', $this->fields)) {
             $data['web_pay_tran_key'] = $this->fields['web_pay_tran_key'];
+        }
+        if (array_key_exists('cashout_login', $this->fields)) {
+            $data['cashout_login'] = $this->fields['cashout_login'];
+        }
+        if (array_key_exists('cashout_password', $this->fields)) {
+            $data['cashout_password'] = $this->fields['cashout_password'];
         }
 
         return $data;

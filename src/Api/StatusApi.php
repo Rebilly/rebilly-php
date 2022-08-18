@@ -30,7 +30,7 @@ class StatusApi
      * @return Status
      */
     public function get(
-    ): Status {
+): Status {
         $uri = '/status';
 
         $request = new Request('GET', $uri);

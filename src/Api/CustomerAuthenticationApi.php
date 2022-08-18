@@ -234,7 +234,7 @@ class CustomerAuthenticationApi
      * @return AuthenticationOptions
      */
     public function getAuthOptions(
-    ): AuthenticationOptions {
+): AuthenticationOptions {
         $uri = '/authentication-options';
 
         $request = new Request('GET', $uri);
