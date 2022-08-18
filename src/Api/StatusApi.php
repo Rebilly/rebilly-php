@@ -29,8 +29,8 @@ class StatusApi
     /**
      * @return Status
      */
-    public function get(
-): Status {
+    public function get(): Status
+    {
         $uri = '/status';
 
         $request = new Request('GET', $uri);

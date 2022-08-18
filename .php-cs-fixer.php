@@ -112,6 +112,7 @@ $rules = [
         'import_functions' => false,
         'import_classes' => true,
     ],
+    'single_space_after_construct' => true,
 ];
 
 $finder = (new Finder())

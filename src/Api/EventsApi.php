@@ -146,8 +146,8 @@ class EventsApi
     /**
      * @return SystemEvent[]
      */
-    public function getAll(
-): array {
+    public function getAll(): array
+    {
         $uri = '/events';
 
         $request = new Request('GET', $uri);
