@@ -54,7 +54,7 @@ class AccountApi
     }
 
     public function logout(
-    ): void {
+): void {
         $uri = '/logout';
 
         $request = new Request('POST', $uri);

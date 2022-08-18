@@ -31,7 +31,7 @@ class KycSettingsApi
      * @return KycSettings
      */
     public function getKycSettings(
-    ): KycSettings {
+): KycSettings {
         $uri = '/kyc-settings';
 
         $request = new Request('GET', $uri);

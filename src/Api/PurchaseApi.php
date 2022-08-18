@@ -29,17 +29,17 @@ class PurchaseApi
     }
 
     /**
-     * @return ReadyToPayMethods
+     * @return ReadyToPayMethods[]
      */
     public function readyToPay(
         ?CoreReadyToPay $coreReadyToPay = null,
-    ): ReadyToPayMethods {
+    ): array {
         $uri = '/ready-to-pay';
 
         $request = new Request('POST', $uri, body: json_encode($coreReadyToPay));
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return ReadyToPayMethods::from($data);
+        return array_map(fn (array $item): ReadyToPayMethods => ReadyToPayMethods::from($item), $data);
     }
 }

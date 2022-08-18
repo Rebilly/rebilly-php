@@ -14,9 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use InvalidArgumentException;
-use JsonSerializable;
 
-class ReadyToPayPaymentCardMethod implements JsonSerializable
+class ReadyToPayPaymentCardMethod extends ReadyToPayMethods
 {
     public const METHOD_PAYMENT_CARD = 'payment-card';
 
@@ -24,6 +23,10 @@ class ReadyToPayPaymentCardMethod implements JsonSerializable
 
     public function __construct(array $data = [])
     {
+        parent::__construct([
+            'method' => 'payment-card',
+        ] + $data);
+
         if (array_key_exists('method', $data)) {
             $this->setMethod($data['method']);
         }
@@ -131,7 +134,7 @@ class ReadyToPayPaymentCardMethod implements JsonSerializable
             $data['filters'] = $this->fields['filters'];
         }
 
-        return $data;
+        return parent::jsonSerialize() + $data;
     }
 
     protected function ensureFeature(null|array|ApplePayFeature|GooglePayFeature $data): ApplePayFeature|GooglePayFeature
