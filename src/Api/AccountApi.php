@@ -53,8 +53,8 @@ class AccountApi
         $this->client->send($request);
     }
 
-    public function logout(
-): void {
+    public function logout(): void
+    {
         $uri = '/logout';
 
         $request = new Request('POST', $uri);

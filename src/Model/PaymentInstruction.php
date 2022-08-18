@@ -40,6 +40,6 @@ abstract class PaymentInstruction
 
     public function jsonSerialize(): array
     {
-        return  [];
+        return [];
     }
 }

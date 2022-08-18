@@ -31,8 +31,8 @@ class ProfileApi
     {
     }
 
-    public function deleteMfa(
-): void {
+    public function deleteMfa(): void
+    {
         $uri = '/profile/mfa';
 
         $request = new Request('DELETE', $uri);
@@ -42,8 +42,8 @@ class ProfileApi
     /**
      * @return Profile
      */
-    public function get(
-): Profile {
+    public function get(): Profile
+    {
         $uri = '/profile';
 
         $request = new Request('GET', $uri);
@@ -56,8 +56,8 @@ class ProfileApi
     /**
      * @return ProfileMfa
      */
-    public function getMfa(
-): ProfileMfa {
+    public function getMfa(): ProfileMfa
+    {
         $uri = '/profile/mfa';
 
         $request = new Request('GET', $uri);
@@ -70,8 +70,8 @@ class ProfileApi
     /**
      * @return Profile
      */
-    public function resetTotp(
-): Profile {
+    public function resetTotp(): Profile
+    {
         $uri = '/profile/totp-reset';
 
         $request = new Request('POST', $uri);
@@ -99,8 +99,8 @@ class ProfileApi
     /**
      * @return Session
      */
-    public function stopPermissionsEmulation(
-): Session {
+    public function stopPermissionsEmulation(): Session
+    {
         $uri = '/permissions-emulation';
 
         $request = new Request('DELETE', $uri);
@@ -128,8 +128,8 @@ class ProfileApi
     /**
      * @return ProfileMfa
      */
-    public function updateMfa(
-): ProfileMfa {
+    public function updateMfa(): ProfileMfa
+    {
         $uri = '/profile/mfa';
 
         $request = new Request('POST', $uri);
