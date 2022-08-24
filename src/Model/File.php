@@ -23,6 +23,10 @@ class File implements JsonSerializable
 
     public const SOURCE_TYPE_CAMERA = 'camera';
 
+    public const SOURCE_TYPE_ORGANIZATION_EXPORT = 'organization-export';
+
+    public const SOURCE_TYPE_ORGANIZATION_CLOSURE_EXPORT = 'organization-closure-export';
+
     public const MIME_IMAGE_PNG = 'image/png';
 
     public const MIME_IMAGE_JPEG = 'image/jpeg';

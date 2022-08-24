@@ -43,6 +43,7 @@ enum AlternativePaymentMethods: string
     case CAS_HLIB = 'CASHlib';
     case CASH_TO_CODE = 'CashToCode';
     case CHINA_UNION_PAY = 'China UnionPay';
+    case CLEO = 'Cleo';
     case COD_VOUCHER = 'CODVoucher';
     case CONEKTA_OXXO = 'Conekta-oxxo';
     case CUPON_DE_PAGOS = 'Cupon-de-pagos';

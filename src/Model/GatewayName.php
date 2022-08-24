@@ -44,6 +44,7 @@ enum GatewayName: string
     case CIRCLE = 'Circle';
     case CITADEL = 'Citadel';
     case CLEARHAUS = 'Clearhaus';
+    case CLEO = 'Cleo';
     case COD_VOUCHER = 'CODVoucher';
     case COINBASE = 'Coinbase';
     case COIN_GATE = 'CoinGate';
