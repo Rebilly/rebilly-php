@@ -52,6 +52,7 @@ enum PaymentMethod: string
     case CASH_TO_CODE = 'CashToCode';
     case CC_AVENUE = 'CCAvenue';
     case CHINA_UNION_PAY = 'China UnionPay';
+    case CLEO = 'Cleo';
     case COD_VOUCHER = 'CODVoucher';
     case CONEKTA_OXXO = 'Conekta-oxxo';
     case CONEKTA_SPEI = 'Conekta-spei';

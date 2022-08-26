@@ -421,6 +421,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return new RPN($data);
             case 'PayULatam':
                 return new PayULatam($data);
+            case 'Cleo':
+                return new Cleo($data);
             case 'Skrill':
                 return new Skrill($data);
             case 'Forte':

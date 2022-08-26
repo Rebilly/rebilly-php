@@ -147,6 +147,7 @@ abstract class ReadyToPayMethods implements JsonSerializable
             case 'jpay':
             case 'bank-transfer-3':
             case 'bank-transfer-4':
+            case 'Cleo':
             case 'bank-transfer-2':
             case 'Skrill':
             case 'bank-transfer-7':
