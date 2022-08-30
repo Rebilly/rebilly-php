@@ -109,6 +109,7 @@ enum GatewayName: string
     case MONERIS = 'Moneris';
     case MTA_PAY = 'MtaPay';
     case MUCH_BETTER = 'MuchBetter';
+    case MUCH_BETTER_GATEWAY = 'MuchBetterGateway';
     case MY_FATOORAH = 'MyFatoorah';
     case NEOSURF = 'Neosurf';
     case NETBANKING = 'Netbanking';

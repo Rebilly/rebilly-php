@@ -395,6 +395,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return new CODVoucher($data);
             case 'OnRamp':
                 return new OnRamp($data);
+            case 'MuchBetterGateway':
+                return new MuchBetterGateway($data);
             case 'Pagsmile':
                 return new Pagsmile($data);
             case 'InstaDebit':
