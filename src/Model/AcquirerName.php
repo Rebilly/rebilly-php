@@ -111,6 +111,7 @@ enum AcquirerName: string
     case MI_FINITY = 'MiFinity';
     case MONERIS = 'Moneris';
     case MUCH_BETTER = 'MuchBetter';
+    case MUCH_BETTER_GATEWAY = 'MuchBetterGateway';
     case MY_FATOORAH = 'MyFatoorah';
     case NATWEST = 'NATWEST';
     case NEOSURF = 'Neosurf';
