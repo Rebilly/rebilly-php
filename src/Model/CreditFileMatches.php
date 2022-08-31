@@ -104,9 +104,20 @@ class CreditFileMatches implements JsonSerializable
         return $this->fields['trades'] ?? null;
     }
 
-    public function getReferenceData(): ?array
+    public function getReferenceData(): ?CreditFileMatchesReferenceData
     {
         return $this->fields['referenceData'] ?? null;
+    }
+
+    public function setReferenceData(null|CreditFileMatchesReferenceData|array $referenceData): self
+    {
+        if ($referenceData !== null && !($referenceData instanceof CreditFileMatchesReferenceData)) {
+            $referenceData = CreditFileMatchesReferenceData::from($referenceData);
+        }
+
+        $this->fields['referenceData'] = $referenceData;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -131,7 +142,7 @@ class CreditFileMatches implements JsonSerializable
             $data['trades'] = $this->fields['trades'];
         }
         if (array_key_exists('referenceData', $this->fields)) {
-            $data['referenceData'] = $this->fields['referenceData'];
+            $data['referenceData'] = $this->fields['referenceData']?->jsonSerialize();
         }
 
         return $data;
@@ -190,13 +201,6 @@ class CreditFileMatches implements JsonSerializable
         $trades = $trades !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof CreditFileMatchesTrades ? $value : CreditFileMatchesTrades::from($value)) : null, $trades) : null;
 
         $this->fields['trades'] = $trades;
-
-        return $this;
-    }
-
-    private function setReferenceData(null|array $referenceData): self
-    {
-        $this->fields['referenceData'] = $referenceData;
 
         return $this;
     }
