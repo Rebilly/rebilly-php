@@ -40,7 +40,7 @@ abstract class AuthenticationToken extends CommonAuthenticationToken
         throw new InvalidArgumentException("Unsupported mode value: '{$data['mode']}'");
     }
 
-    public function getMode(): mixed
+    public function getMode(): ?string
     {
         return $this->fields['mode'] ?? null;
     }
@@ -55,7 +55,7 @@ abstract class AuthenticationToken extends CommonAuthenticationToken
         return parent::jsonSerialize() + $data;
     }
 
-    private function setMode(mixed $mode): self
+    private function setMode(null|string $mode): self
     {
         $this->fields['mode'] = $mode;
 
