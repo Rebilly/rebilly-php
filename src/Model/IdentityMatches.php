@@ -32,6 +32,9 @@ class IdentityMatches implements JsonSerializable
         if (array_key_exists('isPublishedOnline', $data)) {
             $this->setIsPublishedOnline($data['isPublishedOnline']);
         }
+        if (array_key_exists('matchingImages', $data)) {
+            $this->setMatchingImages($data['matchingImages']);
+        }
         if (array_key_exists('firstName', $data)) {
             $this->setFirstName($data['firstName']);
         }
@@ -100,6 +103,14 @@ class IdentityMatches implements JsonSerializable
         $this->fields['isPublishedOnline'] = $isPublishedOnline;
 
         return $this;
+    }
+
+    /**
+     * @return null|string[]
+     */
+    public function getMatchingImages(): ?array
+    {
+        return $this->fields['matchingImages'] ?? null;
     }
 
     public function getFirstName(): ?string
@@ -231,6 +242,9 @@ class IdentityMatches implements JsonSerializable
         if (array_key_exists('isPublishedOnline', $this->fields)) {
             $data['isPublishedOnline'] = $this->fields['isPublishedOnline'];
         }
+        if (array_key_exists('matchingImages', $this->fields)) {
+            $data['matchingImages'] = $this->fields['matchingImages'];
+        }
         if (array_key_exists('firstName', $this->fields)) {
             $data['firstName'] = $this->fields['firstName'];
         }
@@ -260,6 +274,18 @@ class IdentityMatches implements JsonSerializable
         }
 
         return $data;
+    }
+
+    /**
+     * @param null|string[] $matchingImages
+     */
+    private function setMatchingImages(null|array $matchingImages): self
+    {
+        $matchingImages = $matchingImages !== null ? array_map(fn ($value) => $value ?? null, $matchingImages) : null;
+
+        $this->fields['matchingImages'] = $matchingImages;
+
+        return $this;
     }
 
     private function setHasMinimalAge(null|bool $hasMinimalAge): self
