@@ -41,7 +41,7 @@ use Rebilly\Client;
 // Instantiate Rebilly client.
 $client = new Client([
   'apiKey' => ApiKeyProvider::env(),
-  'baseUrl' => Client::SANDBOX_HOST,
+  'base_uri' => Client::SANDBOX_HOST,
 ]);
 ```
 
