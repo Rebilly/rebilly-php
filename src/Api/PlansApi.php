@@ -20,7 +20,10 @@ use function GuzzleHttp\json_encode;
 
 use GuzzleHttp\Psr7\Request;
 use Rebilly\Sdk\Collection;
+use Rebilly\Sdk\Model\OneTimeSalePlan;
 use Rebilly\Sdk\Model\Plan;
+use Rebilly\Sdk\Model\SubscriptionOrderPlan;
+use Rebilly\Sdk\Model\TrialOnlyPlan;
 use Rebilly\Sdk\Paginator;
 
 class PlansApi
@@ -33,11 +36,11 @@ class PlansApi
      * @return Plan
      */
     public function create(
-        Plan $plan,
+        OneTimeSalePlan|SubscriptionOrderPlan|TrialOnlyPlan $body,
     ): Plan {
         $uri = '/plans';
 
-        $request = new Request('POST', $uri, body: json_encode($plan));
+        $request = new Request('POST', $uri, body: json_encode($body));
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
@@ -133,7 +136,7 @@ class PlansApi
      */
     public function update(
         string $id,
-        Plan $plan,
+        OneTimeSalePlan|SubscriptionOrderPlan|TrialOnlyPlan $body,
     ): Plan {
         $pathParams = [
             '{id}' => $id,
@@ -141,7 +144,7 @@ class PlansApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/plans/{id}');
 
-        $request = new Request('PUT', $uri, body: json_encode($plan));
+        $request = new Request('PUT', $uri, body: json_encode($body));
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
