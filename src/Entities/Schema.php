@@ -366,6 +366,12 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'credit-memos/{creditMemoId}' => function (array $content) {
                 return new CreditMemo($content);
             },
+            'credit-memos/{creditMemoId}/transaction-allocations' => function (array $content) {
+                return new Collection(new CreditMemoTransactionAllocation(), $content);
+            },
+            'credit-memos/{creditMemoId}/transaction-allocations/{transactionId}' => function (array $content) {
+                return new CreditMemoTransactionAllocation($content);
+            },
         ];
     }
 

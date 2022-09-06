@@ -160,6 +160,7 @@ class ApiTest extends TestCase
             [Entities\File::class],
             [Entities\CreditMemo::class],
             [Entities\CreditMemoAllocation::class],
+            [Entities\CreditMemoTransactionAllocation::class],
             [Entities\Invoice::class],
             [Entities\InvoiceItem::class],
             [Entities\PaymentMethods\PaymentCardMethod::class, null],

@@ -47,6 +47,7 @@ use RuntimeException;
  * @method Services\CustomerService customers()
  * @method Services\InvoiceItemService invoiceItems()
  * @method Services\CreditMemoAllocationService creditMemoAllocations()
+ * @method Services\CreditMemoTransactionAllocationService creditMemoTransactionAllocations()
  * @method Services\InvoiceService invoices()
  * @method Services\CreditMemoService creditMemos()
  * @method Services\PaymentCardService paymentCards()
@@ -115,6 +116,7 @@ final class Client
         'customers' => Services\CustomerService::class,
         'invoiceItems' => Services\InvoiceItemService::class,
         'creditMemoAllocations' => Services\CreditMemoAllocationService::class,
+        'creditMemoTransactionAllocations' => Services\CreditMemoTransactionAllocationService::class,
         'invoices' => Services\InvoiceService::class,
         'creditMemos' => Services\CreditMemoService::class,
         'paymentCards' => Services\PaymentCardService::class,

@@ -444,6 +444,48 @@ class ServiceTest extends BaseTestCase
     /**
      * @test
      */
+    public function creditMemoTransactionAllocationsService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->createMock(CurlHandler::class);
+        $handler
+            ->method('__invoke')
+            ->willReturnOnConsecutiveCalls(
+                $client->createResponse(),
+                $client->createResponse(),
+                $client->createResponse()->withHeader('Location', 'credit-memos/creditMemoId/transaction-allocations/dummy'),
+                $client->createResponse()->withHeader('Location', 'credit-memos/creditMemoId/transaction-allocations/dummy'),
+                $client->createResponse()->withStatus(204)
+            );
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+
+        $service = $client->creditMemoTransactionAllocations();
+        self::assertInstanceOf(Services\CreditMemoTransactionAllocationService::class, $service);
+
+        $paginator = $service->paginator('creditMemoId');
+        self::assertInstanceOf(Paginator::class, $paginator);
+
+        $result = $service->search('creditMemoId');
+        self::assertInstanceOf(Rest\Collection::class, $result);
+
+        $result = $service->load('creditMemoId', 'dummy');
+        self::assertInstanceOf(Entities\CreditMemoTransactionAllocation::class, $result);
+
+        $result = $service->update('creditMemoId', 'dummy', []);
+        self::assertInstanceOf(Entities\CreditMemoTransactionAllocation::class, $result);
+
+        $service->delete('creditMemoId', 'dummy');
+    }
+
+    /**
+     * @test
+     */
     public function subscriptionService()
     {
         $client = new Client(['apiKey' => 'QWERTY']);
@@ -1211,6 +1253,11 @@ class ServiceTest extends BaseTestCase
                 'creditMemoAllocations',
                 Services\CreditMemoAllocationService::class,
                 Entities\CreditMemoAllocation::class,
+            ],
+            [
+                'creditMemoTransactionAllocations',
+                Services\CreditMemoTransactionAllocationService::class,
+                Entities\CreditMemoTransactionAllocation::class,
             ],
             [
                 'creditMemos',
