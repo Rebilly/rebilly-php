@@ -402,7 +402,7 @@ class ServiceTest extends BaseTestCase
     /**
      * @test
      */
-    public function creditMemoAllocationsService()
+    public function creditMemoInvoiceAllocationsService()
     {
         $client = new Client(['apiKey' => 'QWERTY']);
 
@@ -423,8 +423,8 @@ class ServiceTest extends BaseTestCase
             'httpHandler' => $handler,
         ]);
 
-        $service = $client->creditMemoAllocations();
-        self::assertInstanceOf(Services\CreditMemoAllocationService::class, $service);
+        $service = $client->creditMemoInvoiceAllocations();
+        self::assertInstanceOf(Services\CreditMemoInvoiceAllocationService::class, $service);
 
         $paginator = $service->paginator('invoiceId');
         self::assertInstanceOf(Paginator::class, $paginator);
@@ -433,10 +433,10 @@ class ServiceTest extends BaseTestCase
         self::assertInstanceOf(Rest\Collection::class, $result);
 
         $result = $service->load('invoiceId', 'dummy');
-        self::assertInstanceOf(Entities\CreditMemoAllocation::class, $result);
+        self::assertInstanceOf(Entities\CreditMemoInvoiceAllocation::class, $result);
 
         $result = $service->update('invoiceId', 'dummy', []);
-        self::assertInstanceOf(Entities\CreditMemoAllocation::class, $result);
+        self::assertInstanceOf(Entities\CreditMemoInvoiceAllocation::class, $result);
 
         $service->delete('invoiceId', 'dummy');
     }
@@ -1208,9 +1208,9 @@ class ServiceTest extends BaseTestCase
                 Entities\Invoice::class,
             ],
             [
-                'creditMemoAllocations',
-                Services\CreditMemoAllocationService::class,
-                Entities\CreditMemoAllocation::class,
+                'creditMemoInvoiceAllocations',
+                Services\CreditMemoInvoiceAllocationService::class,
+                Entities\CreditMemoInvoiceAllocation::class,
             ],
             [
                 'creditMemos',

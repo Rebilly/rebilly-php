@@ -103,10 +103,10 @@ final class Schema implements IteratorAggregate, ArrayAccess
                 return new InvoiceItem($content);
             },
             'invoices/{invoiceId}/credit-memo-allocations' => function (array $content) {
-                return new Collection(new CreditMemoAllocation(), $content);
+                return new Collection(new CreditMemoInvoiceAllocation(), $content);
             },
             'invoices/{invoiceId}/credit-memo-allocations/{creditMemoId}' => function (array $content) {
-                return new CreditMemoAllocation($content);
+                return new CreditMemoInvoiceAllocation($content);
             },
             'invoices/{invoiceId}/lead-source' => function (array $content) {
                 return new LeadSource($content);

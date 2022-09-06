@@ -13,7 +13,7 @@ namespace Rebilly\Services;
 
 use ArrayObject;
 use JsonSerializable;
-use Rebilly\Entities\CreditMemoAllocation;
+use Rebilly\Entities\CreditMemoInvoiceAllocation;
 use Rebilly\Http\Exception\DataValidationException;
 use Rebilly\Http\Exception\NotFoundException;
 use Rebilly\Paginator;
@@ -21,15 +21,15 @@ use Rebilly\Rest\Collection;
 use Rebilly\Rest\Service;
 
 /**
- * Class CreditMemoAllocationService.
+ * Class CreditMemoInvoiceAllocationService.
  */
-final class CreditMemoAllocationService extends Service
+final class CreditMemoInvoiceAllocationService extends Service
 {
     /**
      * @param string $invoiceId
      * @param array|ArrayObject $params
      *
-     * @return CreditMemoAllocation[][]|Collection[]|Paginator
+     * @return CreditMemoInvoiceAllocation[][]|Collection[]|Paginator
      */
     public function paginator($invoiceId, $params = [])
     {
@@ -44,7 +44,7 @@ final class CreditMemoAllocationService extends Service
      * @param string $invoiceId
      * @param array|ArrayObject $params
      *
-     * @return CreditMemoAllocation[]|Collection
+     * @return CreditMemoInvoiceAllocation[]|Collection
      */
     public function search($invoiceId, $params = [])
     {
@@ -58,9 +58,9 @@ final class CreditMemoAllocationService extends Service
      * @param string $invoiceId
      * @param string $creditMemoId
      *
-     * @throws NotFoundException if resource does not exist
+     * @return CreditMemoInvoiceAllocation
+     *@throws NotFoundException if resource does not exist
      *
-     * @return CreditMemoAllocation
      */
     public function load($invoiceId, $creditMemoId)
     {
@@ -73,11 +73,11 @@ final class CreditMemoAllocationService extends Service
     /**
      * @param string $invoiceId
      * @param string $creditMemoId
-     * @param array|JsonSerializable|CreditMemoAllocation $data
+     * @param array|JsonSerializable|CreditMemoInvoiceAllocation $data
      *
-     * @throws DataValidationException if input data is not valid
+     * @return CreditMemoInvoiceAllocation
+     *@throws DataValidationException if input data is not valid
      *
-     * @return CreditMemoAllocation
      */
     public function update($invoiceId, $creditMemoId, $data)
     {
