@@ -19,9 +19,9 @@ use function GuzzleHttp\json_decode;
 use function GuzzleHttp\json_encode;
 
 use GuzzleHttp\Psr7\Request;
+use InvalidArgumentException;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\OneTimeSalePlan;
-use Rebilly\Sdk\Model\Plan;
 use Rebilly\Sdk\Model\SubscriptionOrderPlan;
 use Rebilly\Sdk\Model\TrialOnlyPlan;
 use Rebilly\Sdk\Paginator;
@@ -33,18 +33,18 @@ class PlansApi
     }
 
     /**
-     * @return Plan
+     * @return OneTimeSalePlan|SubscriptionOrderPlan|TrialOnlyPlan
      */
     public function create(
         OneTimeSalePlan|SubscriptionOrderPlan|TrialOnlyPlan $body,
-    ): Plan {
+    ): OneTimeSalePlan|SubscriptionOrderPlan|TrialOnlyPlan {
         $uri = '/plans';
 
         $request = new Request('POST', $uri, body: json_encode($body));
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return Plan::from($data);
+        return $this->buildPlanResponse($data);
     }
 
     public function delete(
@@ -61,11 +61,11 @@ class PlansApi
     }
 
     /**
-     * @return Plan
+     * @return OneTimeSalePlan|SubscriptionOrderPlan|TrialOnlyPlan
      */
     public function get(
         string $id,
-    ): Plan {
+    ): OneTimeSalePlan|SubscriptionOrderPlan|TrialOnlyPlan {
         $pathParams = [
             '{id}' => $id,
         ];
@@ -76,11 +76,11 @@ class PlansApi
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return Plan::from($data);
+        return $this->buildPlanResponse($data);
     }
 
     /**
-     * @return Collection<Plan>
+     * @return Collection<OneTimeSalePlan|SubscriptionOrderPlan|TrialOnlyPlan>
      */
     public function getAll(
         ?string $filter = null,
@@ -103,7 +103,7 @@ class PlansApi
         $data = json_decode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): Plan => Plan::from($item), $data),
+            array_map(fn (array $item): OneTimeSalePlan|SubscriptionOrderPlan|TrialOnlyPlan => $this->buildPlanResponse($item), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
@@ -132,12 +132,12 @@ class PlansApi
     }
 
     /**
-     * @return Plan
+     * @return OneTimeSalePlan|SubscriptionOrderPlan|TrialOnlyPlan
      */
     public function update(
         string $id,
         OneTimeSalePlan|SubscriptionOrderPlan|TrialOnlyPlan $body,
-    ): Plan {
+    ): OneTimeSalePlan|SubscriptionOrderPlan|TrialOnlyPlan {
         $pathParams = [
             '{id}' => $id,
         ];
@@ -148,6 +148,43 @@ class PlansApi
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return Plan::from($data);
+        return $this->buildPlanResponse($data);
+    }
+
+    protected function buildPlanResponse(array $data): OneTimeSalePlan|SubscriptionOrderPlan|TrialOnlyPlan
+    {
+        $candidates = [];
+
+        try {
+            $instance = OneTimeSalePlan::from($data);
+            $candidates[] = [$instance, count(array_intersect_key($data, $instance->jsonSerialize()))];
+        } catch (InvalidArgumentException) {
+        }
+
+        try {
+            $instance = SubscriptionOrderPlan::from($data);
+            $candidates[] = [$instance, count(array_intersect_key($data, $instance->jsonSerialize()))];
+        } catch (InvalidArgumentException) {
+        }
+
+        try {
+            $instance = TrialOnlyPlan::from($data);
+            $candidates[] = [$instance, count(array_intersect_key($data, $instance->jsonSerialize()))];
+        } catch (InvalidArgumentException) {
+        }
+
+        $determined = array_reduce($candidates, function (?array $current, array $candidate) {
+            if ($current === null || $current[1] < $candidate[1]) {
+                $current = $candidate;
+            }
+
+            return $current;
+        });
+
+        if ($determined[0] === null) {
+            throw new InvalidArgumentException('Could not instantiate Plan response with the given value');
+        }
+
+        return $determined[0];
     }
 }
