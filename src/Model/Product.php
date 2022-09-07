@@ -15,22 +15,6 @@ namespace Rebilly\Sdk\Model;
 
 class Product extends CommonProduct
 {
-    public const TAX_CATEGORY_ID__00000 = '00000';
-
-    public const TAX_CATEGORY_ID__99999 = '99999';
-
-    public const TAX_CATEGORY_ID__20010 = '20010';
-
-    public const TAX_CATEGORY_ID__40030 = '40030';
-
-    public const TAX_CATEGORY_ID__51020 = '51020';
-
-    public const TAX_CATEGORY_ID__51010 = '51010';
-
-    public const TAX_CATEGORY_ID__31000 = '31000';
-
-    public const TAX_CATEGORY_ID__30070 = '30070';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -53,17 +37,11 @@ class Product extends CommonProduct
         return new self($data);
     }
 
-    /**
-     * @psalm-return self::TAX_CATEGORY_ID_*|null $taxCategoryId
-     */
     public function getTaxCategoryId(): ?string
     {
         return $this->fields['taxCategoryId'] ?? null;
     }
 
-    /**
-     * @psalm-param self::TAX_CATEGORY_ID_*|null $taxCategoryId
-     */
     public function setTaxCategoryId(null|string $taxCategoryId): self
     {
         $this->fields['taxCategoryId'] = $taxCategoryId;
