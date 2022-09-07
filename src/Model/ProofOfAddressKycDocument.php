@@ -593,7 +593,9 @@ class ProofOfAddressKycDocument extends KycDocument
      */
     private function setEmbedded(null|array $embedded): self
     {
-        $embedded['customer'] = isset($embedded['customer']) ? ($embedded['customer'] instanceof Customer ? $embedded['customer'] : Customer::from($embedded['customer'])) : null;
+        if ($embedded !== null) {
+            $embedded['customer'] = isset($embedded['customer']) ? ($embedded['customer'] instanceof Customer ? $embedded['customer'] : Customer::from($embedded['customer'])) : null;
+        }
 
         $this->fields['_embedded'] = $embedded;
 

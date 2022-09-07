@@ -368,7 +368,9 @@ class UserApplication implements JsonSerializable
      */
     private function setEmbedded(null|array $embedded): self
     {
-        $embedded['applicationInstance'] = isset($embedded['applicationInstance']) ? ($embedded['applicationInstance'] instanceof ApplicationInstance ? $embedded['applicationInstance'] : ApplicationInstance::from($embedded['applicationInstance'])) : null;
+        if ($embedded !== null) {
+            $embedded['applicationInstance'] = isset($embedded['applicationInstance']) ? ($embedded['applicationInstance'] instanceof ApplicationInstance ? $embedded['applicationInstance'] : ApplicationInstance::from($embedded['applicationInstance'])) : null;
+        }
 
         $this->fields['_embedded'] = $embedded;
 

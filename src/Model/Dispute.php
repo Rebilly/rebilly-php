@@ -806,7 +806,9 @@ class Dispute implements JsonSerializable
      */
     private function setEmbedded(null|array $embedded): self
     {
-        $embedded['transaction'] = isset($embedded['transaction']) ? ($embedded['transaction'] instanceof Transaction ? $embedded['transaction'] : Transaction::from($embedded['transaction'])) : null;
+        if ($embedded !== null) {
+            $embedded['transaction'] = isset($embedded['transaction']) ? ($embedded['transaction'] instanceof Transaction ? $embedded['transaction'] : Transaction::from($embedded['transaction'])) : null;
+        }
 
         $this->fields['_embedded'] = $embedded;
 

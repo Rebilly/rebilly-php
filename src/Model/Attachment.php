@@ -270,7 +270,9 @@ class Attachment implements JsonSerializable
      */
     private function setEmbedded(null|array $embedded): self
     {
-        $embedded['file'] = isset($embedded['file']) ? ($embedded['file'] instanceof File ? $embedded['file'] : File::from($embedded['file'])) : null;
+        if ($embedded !== null) {
+            $embedded['file'] = isset($embedded['file']) ? ($embedded['file'] instanceof File ? $embedded['file'] : File::from($embedded['file'])) : null;
+        }
 
         $this->fields['_embedded'] = $embedded;
 

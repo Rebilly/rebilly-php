@@ -302,7 +302,9 @@ class Role implements JsonSerializable
      */
     private function setEmbedded(null|array $embedded): self
     {
-        $embedded['juniors'] = isset($embedded['juniors']) ? array_map(fn ($value) => $value !== null ? ($value instanceof self ? $value : self::from($value)) : null, $embedded['juniors']) : null;
+        if ($embedded !== null) {
+            $embedded['juniors'] = isset($embedded['juniors']) ? array_map(fn ($value) => $value !== null ? ($value instanceof self ? $value : self::from($value)) : null, $embedded['juniors']) : null;
+        }
 
         $this->fields['_embedded'] = $embedded;
 

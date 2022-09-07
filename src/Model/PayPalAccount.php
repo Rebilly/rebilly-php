@@ -138,8 +138,10 @@ class PayPalAccount extends CommonPayPalAccount
      */
     private function setEmbedded(null|array $embedded): self
     {
-        $embedded['authTransaction'] = isset($embedded['authTransaction']) ? ($embedded['authTransaction'] instanceof Transaction ? $embedded['authTransaction'] : Transaction::from($embedded['authTransaction'])) : null;
-        $embedded['customer'] = isset($embedded['customer']) ? ($embedded['customer'] instanceof Customer ? $embedded['customer'] : Customer::from($embedded['customer'])) : null;
+        if ($embedded !== null) {
+            $embedded['authTransaction'] = isset($embedded['authTransaction']) ? ($embedded['authTransaction'] instanceof Transaction ? $embedded['authTransaction'] : Transaction::from($embedded['authTransaction'])) : null;
+            $embedded['customer'] = isset($embedded['customer']) ? ($embedded['customer'] instanceof Customer ? $embedded['customer'] : Customer::from($embedded['customer'])) : null;
+        }
 
         $this->fields['_embedded'] = $embedded;
 

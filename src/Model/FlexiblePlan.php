@@ -15,7 +15,9 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
+use InvalidArgumentException;
 use JsonSerializable;
+use TypeError;
 
 class FlexiblePlan implements JsonSerializable
 {
@@ -88,7 +90,7 @@ class FlexiblePlan implements JsonSerializable
             $instance = self::from($data);
 
             return [$instance, count(array_intersect_key($data, $instance->jsonSerialize()))];
-        } catch (\InvalidArgumentException) {
+        } catch (InvalidArgumentException|TypeError) {
         }
 
         return null;
