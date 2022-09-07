@@ -184,14 +184,16 @@ class SubscriptionMetadata implements JsonSerializable
      */
     private function setEmbedded(null|array $embedded): self
     {
-        $embedded['recentInvoice'] = isset($embedded['recentInvoice']) ? ($embedded['recentInvoice'] instanceof Invoice ? $embedded['recentInvoice'] : Invoice::from($embedded['recentInvoice'])) : null;
-        $embedded['initialInvoice'] = isset($embedded['initialInvoice']) ? ($embedded['initialInvoice'] instanceof Invoice ? $embedded['initialInvoice'] : Invoice::from($embedded['initialInvoice'])) : null;
-        $embedded['customer'] = isset($embedded['customer']) ? ($embedded['customer'] instanceof Customer ? $embedded['customer'] : Customer::from($embedded['customer'])) : null;
-        $embedded['website'] = isset($embedded['website']) ? ($embedded['website'] instanceof Website ? $embedded['website'] : Website::from($embedded['website'])) : null;
-        $embedded['leadSource'] = isset($embedded['leadSource']) ? ($embedded['leadSource'] instanceof LeadSource ? $embedded['leadSource'] : LeadSource::from($embedded['leadSource'])) : null;
-        $embedded['shippingRate'] = isset($embedded['shippingRate']) ? ($embedded['shippingRate'] instanceof ShippingRate ? $embedded['shippingRate'] : ShippingRate::from($embedded['shippingRate'])) : null;
-        $embedded['paymentInstrument'] = isset($embedded['paymentInstrument']) ? ($embedded['paymentInstrument'] instanceof PaymentInstrument ? $embedded['paymentInstrument'] : PaymentInstrument::from($embedded['paymentInstrument'])) : null;
-        $embedded['upcomingInvoice'] = isset($embedded['upcomingInvoice']) ? ($embedded['upcomingInvoice'] instanceof Invoice ? $embedded['upcomingInvoice'] : Invoice::from($embedded['upcomingInvoice'])) : null;
+        if ($embedded !== null) {
+            $embedded['recentInvoice'] = isset($embedded['recentInvoice']) ? ($embedded['recentInvoice'] instanceof Invoice ? $embedded['recentInvoice'] : Invoice::from($embedded['recentInvoice'])) : null;
+            $embedded['initialInvoice'] = isset($embedded['initialInvoice']) ? ($embedded['initialInvoice'] instanceof Invoice ? $embedded['initialInvoice'] : Invoice::from($embedded['initialInvoice'])) : null;
+            $embedded['customer'] = isset($embedded['customer']) ? ($embedded['customer'] instanceof Customer ? $embedded['customer'] : Customer::from($embedded['customer'])) : null;
+            $embedded['website'] = isset($embedded['website']) ? ($embedded['website'] instanceof Website ? $embedded['website'] : Website::from($embedded['website'])) : null;
+            $embedded['leadSource'] = isset($embedded['leadSource']) ? ($embedded['leadSource'] instanceof LeadSource ? $embedded['leadSource'] : LeadSource::from($embedded['leadSource'])) : null;
+            $embedded['shippingRate'] = isset($embedded['shippingRate']) ? ($embedded['shippingRate'] instanceof ShippingRate ? $embedded['shippingRate'] : ShippingRate::from($embedded['shippingRate'])) : null;
+            $embedded['paymentInstrument'] = isset($embedded['paymentInstrument']) ? ($embedded['paymentInstrument'] instanceof PaymentInstrument ? $embedded['paymentInstrument'] : PaymentInstrument::from($embedded['paymentInstrument'])) : null;
+            $embedded['upcomingInvoice'] = isset($embedded['upcomingInvoice']) ? ($embedded['upcomingInvoice'] instanceof Invoice ? $embedded['upcomingInvoice'] : Invoice::from($embedded['upcomingInvoice'])) : null;
+        }
 
         $this->fields['_embedded'] = $embedded;
 

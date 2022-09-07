@@ -68,10 +68,12 @@ class SubscriptionOrderPlan extends CommonPlan
      */
     public function setTrial(null|array $trial): self
     {
-        if (!isset($trial['price'])) {
-            throw new InvalidArgumentException('Property \'trial.price\' must be set.');
+        if ($trial !== null) {
+            if (!isset($trial['price'])) {
+                throw new InvalidArgumentException('Property \'trial.price\' must be set.');
+            }
+            $trial['period'] = $trial['period'] instanceof PlanPeriod ? $trial['period'] : PlanPeriod::from($trial['period']);
         }
-        $trial['period'] = $trial['period'] instanceof PlanPeriod ? $trial['period'] : PlanPeriod::from($trial['period']);
 
         $this->fields['trial'] = $trial;
 

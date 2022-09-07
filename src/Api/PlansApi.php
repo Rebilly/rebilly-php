@@ -25,6 +25,7 @@ use Rebilly\Sdk\Model\OneTimeSalePlan;
 use Rebilly\Sdk\Model\SubscriptionOrderPlan;
 use Rebilly\Sdk\Model\TrialOnlyPlan;
 use Rebilly\Sdk\Paginator;
+use TypeError;
 
 class PlansApi
 {
@@ -158,19 +159,19 @@ class PlansApi
         try {
             $instance = OneTimeSalePlan::from($data);
             $candidates[] = [$instance, count(array_intersect_key($data, $instance->jsonSerialize()))];
-        } catch (InvalidArgumentException) {
+        } catch (InvalidArgumentException|TypeError) {
         }
 
         try {
             $instance = SubscriptionOrderPlan::from($data);
             $candidates[] = [$instance, count(array_intersect_key($data, $instance->jsonSerialize()))];
-        } catch (InvalidArgumentException) {
+        } catch (InvalidArgumentException|TypeError) {
         }
 
         try {
             $instance = TrialOnlyPlan::from($data);
             $candidates[] = [$instance, count(array_intersect_key($data, $instance->jsonSerialize()))];
-        } catch (InvalidArgumentException) {
+        } catch (InvalidArgumentException|TypeError) {
         }
 
         $determined = array_reduce($candidates, function (?array $current, array $candidate) {

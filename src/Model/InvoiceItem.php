@@ -376,8 +376,10 @@ class InvoiceItem implements JsonSerializable
      */
     private function setEmbedded(null|array $embedded): self
     {
-        $embedded['product'] = isset($embedded['product']) ? ($embedded['product'] instanceof Product ? $embedded['product'] : Product::from($embedded['product'])) : null;
-        $embedded['plan'] = isset($embedded['plan']) ? ($embedded['plan'] instanceof Plan ? $embedded['plan'] : Plan::from($embedded['plan'])) : null;
+        if ($embedded !== null) {
+            $embedded['product'] = isset($embedded['product']) ? ($embedded['product'] instanceof Product ? $embedded['product'] : Product::from($embedded['product'])) : null;
+            $embedded['plan'] = isset($embedded['plan']) ? ($embedded['plan'] instanceof Plan ? $embedded['plan'] : Plan::from($embedded['plan'])) : null;
+        }
 
         $this->fields['_embedded'] = $embedded;
 

@@ -108,7 +108,9 @@ class KycRequest extends CommonKycRequest
      */
     public function setEmbedded(null|array $embedded): self
     {
-        $embedded['documents'] = isset($embedded['documents']) ? array_map(fn ($value) => $value !== null ? ($value instanceof KycDocument ? $value : KycDocument::from($value)) : null, $embedded['documents']) : null;
+        if ($embedded !== null) {
+            $embedded['documents'] = isset($embedded['documents']) ? array_map(fn ($value) => $value !== null ? ($value instanceof KycDocument ? $value : KycDocument::from($value)) : null, $embedded['documents']) : null;
+        }
 
         $this->fields['_embedded'] = $embedded;
 

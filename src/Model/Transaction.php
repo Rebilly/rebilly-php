@@ -713,15 +713,17 @@ class Transaction extends CommonTransaction
      */
     private function setEmbedded(null|array $embedded): self
     {
-        $embedded['parentTransaction'] = isset($embedded['parentTransaction']) ? ($embedded['parentTransaction'] instanceof self ? $embedded['parentTransaction'] : self::from($embedded['parentTransaction'])) : null;
-        $embedded['gatewayAccount'] = isset($embedded['gatewayAccount']) ? ($embedded['gatewayAccount'] instanceof GatewayAccount ? $embedded['gatewayAccount'] : GatewayAccount::from($embedded['gatewayAccount'])) : null;
-        $embedded['customer'] = isset($embedded['customer']) ? ($embedded['customer'] instanceof Customer ? $embedded['customer'] : Customer::from($embedded['customer'])) : null;
-        $embedded['leadSource'] = isset($embedded['leadSource']) ? ($embedded['leadSource'] instanceof LeadSource ? $embedded['leadSource'] : LeadSource::from($embedded['leadSource'])) : null;
-        $embedded['website'] = isset($embedded['website']) ? ($embedded['website'] instanceof Website ? $embedded['website'] : Website::from($embedded['website'])) : null;
-        $embedded['paymentCard'] = isset($embedded['paymentCard']) ? ($embedded['paymentCard'] instanceof PaymentCard ? $embedded['paymentCard'] : PaymentCard::from($embedded['paymentCard'])) : null;
-        $embedded['bankAccount'] = isset($embedded['bankAccount']) ? ($embedded['bankAccount'] instanceof BankAccount ? $embedded['bankAccount'] : BankAccount::from($embedded['bankAccount'])) : null;
-        $embedded['invoices'] = isset($embedded['invoices']) ? array_map(fn ($value) => $value !== null ? ($value instanceof Invoice ? $value : Invoice::from($value)) : null, $embedded['invoices']) : null;
-        $embedded['childTransactions'] = isset($embedded['childTransactions']) ? array_map(fn ($value) => $value !== null ? ($value instanceof self ? $value : self::from($value)) : null, $embedded['childTransactions']) : null;
+        if ($embedded !== null) {
+            $embedded['parentTransaction'] = isset($embedded['parentTransaction']) ? ($embedded['parentTransaction'] instanceof self ? $embedded['parentTransaction'] : self::from($embedded['parentTransaction'])) : null;
+            $embedded['gatewayAccount'] = isset($embedded['gatewayAccount']) ? ($embedded['gatewayAccount'] instanceof GatewayAccount ? $embedded['gatewayAccount'] : GatewayAccount::from($embedded['gatewayAccount'])) : null;
+            $embedded['customer'] = isset($embedded['customer']) ? ($embedded['customer'] instanceof Customer ? $embedded['customer'] : Customer::from($embedded['customer'])) : null;
+            $embedded['leadSource'] = isset($embedded['leadSource']) ? ($embedded['leadSource'] instanceof LeadSource ? $embedded['leadSource'] : LeadSource::from($embedded['leadSource'])) : null;
+            $embedded['website'] = isset($embedded['website']) ? ($embedded['website'] instanceof Website ? $embedded['website'] : Website::from($embedded['website'])) : null;
+            $embedded['paymentCard'] = isset($embedded['paymentCard']) ? ($embedded['paymentCard'] instanceof PaymentCard ? $embedded['paymentCard'] : PaymentCard::from($embedded['paymentCard'])) : null;
+            $embedded['bankAccount'] = isset($embedded['bankAccount']) ? ($embedded['bankAccount'] instanceof BankAccount ? $embedded['bankAccount'] : BankAccount::from($embedded['bankAccount'])) : null;
+            $embedded['invoices'] = isset($embedded['invoices']) ? array_map(fn ($value) => $value !== null ? ($value instanceof Invoice ? $value : Invoice::from($value)) : null, $embedded['invoices']) : null;
+            $embedded['childTransactions'] = isset($embedded['childTransactions']) ? array_map(fn ($value) => $value !== null ? ($value instanceof self ? $value : self::from($value)) : null, $embedded['childTransactions']) : null;
+        }
 
         $this->fields['_embedded'] = $embedded;
 

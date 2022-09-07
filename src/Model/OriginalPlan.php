@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use InvalidArgumentException;
 use JsonSerializable;
+use TypeError;
 
 class OriginalPlan implements JsonSerializable
 {
@@ -38,7 +40,7 @@ class OriginalPlan implements JsonSerializable
             $instance = self::from($data);
 
             return [$instance, count(array_intersect_key($data, $instance->jsonSerialize()))];
-        } catch (\InvalidArgumentException) {
+        } catch (InvalidArgumentException|TypeError) {
         }
 
         return null;

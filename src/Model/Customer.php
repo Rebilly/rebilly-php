@@ -478,7 +478,9 @@ class Customer implements JsonSerializable
      */
     private function setEmbedded(null|array $embedded): self
     {
-        $embedded['leadSource'] = isset($embedded['leadSource']) ? ($embedded['leadSource'] instanceof LeadSource ? $embedded['leadSource'] : LeadSource::from($embedded['leadSource'])) : null;
+        if ($embedded !== null) {
+            $embedded['leadSource'] = isset($embedded['leadSource']) ? ($embedded['leadSource'] instanceof LeadSource ? $embedded['leadSource'] : LeadSource::from($embedded['leadSource'])) : null;
+        }
 
         $this->fields['_embedded'] = $embedded;
 

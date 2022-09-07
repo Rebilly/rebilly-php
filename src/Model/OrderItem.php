@@ -195,7 +195,9 @@ class OrderItem implements JsonSerializable
      */
     private function setEmbedded(null|array $embedded): self
     {
-        $embedded['product'] = isset($embedded['product']) ? ($embedded['product'] instanceof Product ? $embedded['product'] : Product::from($embedded['product'])) : null;
+        if ($embedded !== null) {
+            $embedded['product'] = isset($embedded['product']) ? ($embedded['product'] instanceof Product ? $embedded['product'] : Product::from($embedded['product'])) : null;
+        }
 
         $this->fields['_embedded'] = $embedded;
 
