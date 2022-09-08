@@ -482,14 +482,14 @@ class InvoicesApi
     }
 
     /**
-     * @return Collection<CreditMemoAllocation>
+     * @return CreditMemoAllocation
      */
     public function getCreditMemoAllocation(
         string $id,
         string $creditMemoId,
         ?int $limit = null,
         ?int $offset = null,
-    ): Collection {
+    ): CreditMemoAllocation {
         $pathParams = [
             '{id}' => $id,
             '{creditMemoId}' => $creditMemoId,
@@ -505,31 +505,7 @@ class InvoicesApi
         $response = $this->client->send($request);
         $data = json_decode((string) $response->getBody(), true);
 
-        return new Collection(
-            array_map(fn (array $item): CreditMemoAllocation => CreditMemoAllocation::from($item), $data),
-            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
-            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
-            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
-        );
-    }
-
-    public function getCreditMemoAllocationPaginator(
-        string $id,
-        string $creditMemoId,
-        ?int $limit = null,
-        ?int $offset = null,
-    ): Paginator {
-        $closure = fn (?int $limit, ?int $offset): Collection => $this->getCreditMemoAllocation(
-            id: $id,
-            creditMemoId: $creditMemoId,
-            limit: $limit,
-            offset: $offset,
-        );
-
-        return new Paginator(
-            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
-            $closure,
-        );
+        return CreditMemoAllocation::from($data);
     }
 
     /**

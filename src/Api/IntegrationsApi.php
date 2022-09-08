@@ -36,7 +36,7 @@ class IntegrationsApi
         OAuth2CredentialService $label,
     ): Integration {
         $pathParams = [
-            '{label}' => $label,
+            '{label}' => $label->value,
         ];
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/integrations/{label}');

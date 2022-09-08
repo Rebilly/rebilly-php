@@ -44,9 +44,6 @@ class IdentityMatches implements JsonSerializable
         if (array_key_exists('dateOfBirth', $data)) {
             $this->setDateOfBirth($data['dateOfBirth']);
         }
-        if (array_key_exists('expiryDate', $data)) {
-            $this->setExpiryDate($data['expiryDate']);
-        }
         if (array_key_exists('expirationDate', $data)) {
             $this->setExpirationDate($data['expirationDate']);
         }
@@ -59,8 +56,20 @@ class IdentityMatches implements JsonSerializable
         if (array_key_exists('nationality', $data)) {
             $this->setNationality($data['nationality']);
         }
+        if (array_key_exists('issuanceCountry', $data)) {
+            $this->setIssuanceCountry($data['issuanceCountry']);
+        }
+        if (array_key_exists('issuanceRegion', $data)) {
+            $this->setIssuanceRegion($data['issuanceRegion']);
+        }
+        if (array_key_exists('documentNumber', $data)) {
+            $this->setDocumentNumber($data['documentNumber']);
+        }
         if (array_key_exists('documentSubtype', $data)) {
             $this->setDocumentSubtype($data['documentSubtype']);
+        }
+        if (array_key_exists('expiryDate', $data)) {
+            $this->setExpiryDate($data['expiryDate']);
         }
     }
 
@@ -153,22 +162,6 @@ class IdentityMatches implements JsonSerializable
         return $this;
     }
 
-    public function getExpiryDate(): ?DateTimeImmutable
-    {
-        return $this->fields['expiryDate'] ?? null;
-    }
-
-    public function setExpiryDate(null|DateTimeImmutable|string $expiryDate): self
-    {
-        if ($expiryDate !== null && !($expiryDate instanceof DateTimeImmutable)) {
-            $expiryDate = new DateTimeImmutable($expiryDate);
-        }
-
-        $this->fields['expiryDate'] = $expiryDate;
-
-        return $this;
-    }
-
     public function getExpirationDate(): ?DateTimeImmutable
     {
         return $this->fields['expirationDate'] ?? null;
@@ -218,6 +211,42 @@ class IdentityMatches implements JsonSerializable
         return $this;
     }
 
+    public function getIssuanceCountry(): ?string
+    {
+        return $this->fields['issuanceCountry'] ?? null;
+    }
+
+    public function setIssuanceCountry(null|string $issuanceCountry): self
+    {
+        $this->fields['issuanceCountry'] = $issuanceCountry;
+
+        return $this;
+    }
+
+    public function getIssuanceRegion(): ?string
+    {
+        return $this->fields['issuanceRegion'] ?? null;
+    }
+
+    public function setIssuanceRegion(null|string $issuanceRegion): self
+    {
+        $this->fields['issuanceRegion'] = $issuanceRegion;
+
+        return $this;
+    }
+
+    public function getDocumentNumber(): ?string
+    {
+        return $this->fields['documentNumber'] ?? null;
+    }
+
+    public function setDocumentNumber(null|string $documentNumber): self
+    {
+        $this->fields['documentNumber'] = $documentNumber;
+
+        return $this;
+    }
+
     public function getDocumentSubtype(): ?string
     {
         return $this->fields['documentSubtype'] ?? null;
@@ -226,6 +255,22 @@ class IdentityMatches implements JsonSerializable
     public function setDocumentSubtype(null|string $documentSubtype): self
     {
         $this->fields['documentSubtype'] = $documentSubtype;
+
+        return $this;
+    }
+
+    public function getExpiryDate(): ?DateTimeImmutable
+    {
+        return $this->fields['expiryDate'] ?? null;
+    }
+
+    public function setExpiryDate(null|DateTimeImmutable|string $expiryDate): self
+    {
+        if ($expiryDate !== null && !($expiryDate instanceof DateTimeImmutable)) {
+            $expiryDate = new DateTimeImmutable($expiryDate);
+        }
+
+        $this->fields['expiryDate'] = $expiryDate;
 
         return $this;
     }
@@ -254,9 +299,6 @@ class IdentityMatches implements JsonSerializable
         if (array_key_exists('dateOfBirth', $this->fields)) {
             $data['dateOfBirth'] = $this->fields['dateOfBirth']?->format(DateTimeInterface::RFC3339);
         }
-        if (array_key_exists('expiryDate', $this->fields)) {
-            $data['expiryDate'] = $this->fields['expiryDate']?->format(DateTimeInterface::RFC3339);
-        }
         if (array_key_exists('expirationDate', $this->fields)) {
             $data['expirationDate'] = $this->fields['expirationDate']?->format(DateTimeInterface::RFC3339);
         }
@@ -269,8 +311,20 @@ class IdentityMatches implements JsonSerializable
         if (array_key_exists('nationality', $this->fields)) {
             $data['nationality'] = $this->fields['nationality'];
         }
+        if (array_key_exists('issuanceCountry', $this->fields)) {
+            $data['issuanceCountry'] = $this->fields['issuanceCountry'];
+        }
+        if (array_key_exists('issuanceRegion', $this->fields)) {
+            $data['issuanceRegion'] = $this->fields['issuanceRegion'];
+        }
+        if (array_key_exists('documentNumber', $this->fields)) {
+            $data['documentNumber'] = $this->fields['documentNumber'];
+        }
         if (array_key_exists('documentSubtype', $this->fields)) {
             $data['documentSubtype'] = $this->fields['documentSubtype'];
+        }
+        if (array_key_exists('expiryDate', $this->fields)) {
+            $data['expiryDate'] = $this->fields['expiryDate']?->format(DateTimeInterface::RFC3339);
         }
 
         return $data;
