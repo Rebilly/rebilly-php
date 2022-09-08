@@ -487,19 +487,13 @@ class InvoicesApi
     public function getCreditMemoAllocation(
         string $id,
         string $creditMemoId,
-        ?int $limit = null,
-        ?int $offset = null,
     ): CreditMemoAllocation {
         $pathParams = [
             '{id}' => $id,
             '{creditMemoId}' => $creditMemoId,
         ];
 
-        $queryParams = [
-            'limit' => $limit,
-            'offset' => $offset,
-        ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/invoices/{id}/credit-memo-allocations/{creditMemoId}?') . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/invoices/{id}/credit-memo-allocations/{creditMemoId}');
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
