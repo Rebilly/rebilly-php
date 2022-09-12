@@ -32,7 +32,7 @@ class ValidationErrorExtensions implements JsonSerializable
     }
 
     /**
-     * @return null|ValidationError1InvalidFields[]
+     * @return null|ValidationErrorExtensionsInvalidFields[]
      */
     public function getInvalidFields(): ?array
     {
@@ -40,11 +40,11 @@ class ValidationErrorExtensions implements JsonSerializable
     }
 
     /**
-     * @param null|ValidationError1InvalidFields[] $invalidFields
+     * @param null|ValidationErrorExtensionsInvalidFields[] $invalidFields
      */
     public function setInvalidFields(null|array $invalidFields): self
     {
-        $invalidFields = $invalidFields !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ValidationError1InvalidFields ? $value : ValidationError1InvalidFields::from($value)) : null, $invalidFields) : null;
+        $invalidFields = $invalidFields !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ValidationErrorExtensionsInvalidFields ? $value : ValidationErrorExtensionsInvalidFields::from($value)) : null, $invalidFields) : null;
 
         $this->fields['invalidFields'] = $invalidFields;
 
