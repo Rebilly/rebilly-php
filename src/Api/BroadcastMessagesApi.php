@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\BroadcastMessage;
 use Rebilly\Sdk\Paginator;
@@ -37,9 +34,9 @@ class BroadcastMessagesApi
     ): BroadcastMessage {
         $uri = '/broadcast-messages';
 
-        $request = new Request('POST', $uri, body: json_encode($broadcastMessage));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($broadcastMessage));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return BroadcastMessage::from($data);
     }
@@ -71,7 +68,7 @@ class BroadcastMessagesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return BroadcastMessage::from($data);
     }
@@ -95,7 +92,7 @@ class BroadcastMessagesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): BroadcastMessage => BroadcastMessage::from($item), $data),
@@ -137,9 +134,9 @@ class BroadcastMessagesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/broadcast-messages/{id}');
 
-        $request = new Request('PATCH', $uri, body: json_encode($broadcastMessage));
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($broadcastMessage));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return BroadcastMessage::from($data);
     }

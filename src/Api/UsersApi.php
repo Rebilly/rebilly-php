@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\ProfileMfa;
 use Rebilly\Sdk\Model\ResetPassword;
@@ -41,9 +38,9 @@ class UsersApi
     ): User {
         $uri = '/users';
 
-        $request = new Request('POST', $uri, body: json_encode($user));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($user));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return User::from($data);
     }
@@ -62,7 +59,7 @@ class UsersApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return User::from($data);
     }
@@ -88,7 +85,7 @@ class UsersApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): User => User::from($item), $data),
@@ -133,7 +130,7 @@ class UsersApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ProfileMfa::from($data);
     }
@@ -152,7 +149,7 @@ class UsersApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ResetPasswordTokenInfo::from($data);
     }
@@ -170,9 +167,9 @@ class UsersApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/reset-password/{token}');
 
-        $request = new Request('POST', $uri, body: json_encode($resetPassword));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($resetPassword));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return User::from($data);
     }
@@ -191,7 +188,7 @@ class UsersApi
 
         $request = new Request('POST', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return User::from($data);
     }
@@ -209,9 +206,9 @@ class UsersApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/users/{id}');
 
-        $request = new Request('PUT', $uri, body: json_encode($user));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($user));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return User::from($data);
     }
@@ -229,9 +226,9 @@ class UsersApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/users/{id}/password');
 
-        $request = new Request('POST', $uri, body: json_encode($updatePassword));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($updatePassword));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return User::from($data);
     }

@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\ExperianCredential;
 use Rebilly\Sdk\Model\GoogleSpreadsheet;
@@ -48,9 +45,9 @@ class CredentialHashesApi
     ): SESCredential {
         $uri = '/credential-hashes/aws-ses';
 
-        $request = new Request('POST', $uri, body: json_encode($sESCredential));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($sESCredential));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return SESCredential::from($data);
     }
@@ -63,9 +60,9 @@ class CredentialHashesApi
     ): SmtpCredential {
         $uri = '/credential-hashes/emails';
 
-        $request = new Request('POST', $uri, body: json_encode($smtpCredential));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($smtpCredential));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return SmtpCredential::from($data);
     }
@@ -78,9 +75,9 @@ class CredentialHashesApi
     ): ExperianCredential {
         $uri = '/credential-hashes/experian';
 
-        $request = new Request('POST', $uri, body: json_encode($experianCredential));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($experianCredential));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ExperianCredential::from($data);
     }
@@ -93,9 +90,9 @@ class CredentialHashesApi
     ): MailgunCredential {
         $uri = '/credential-hashes/mailgun';
 
-        $request = new Request('POST', $uri, body: json_encode($mailgunCredential));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($mailgunCredential));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return MailgunCredential::from($data);
     }
@@ -108,9 +105,9 @@ class CredentialHashesApi
     ): OAuth2Credential {
         $uri = '/credential-hashes/oauth2';
 
-        $request = new Request('POST', $uri, body: json_encode($oAuth2Credential));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($oAuth2Credential));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return OAuth2Credential::from($data);
     }
@@ -123,9 +120,9 @@ class CredentialHashesApi
     ): PlaidCredential {
         $uri = '/credential-hashes/plaid';
 
-        $request = new Request('POST', $uri, body: json_encode($plaidCredential));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($plaidCredential));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return PlaidCredential::from($data);
     }
@@ -138,9 +135,9 @@ class CredentialHashesApi
     ): PostmarkCredential {
         $uri = '/credential-hashes/postmark';
 
-        $request = new Request('POST', $uri, body: json_encode($postmarkCredential));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($postmarkCredential));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return PostmarkCredential::from($data);
     }
@@ -153,9 +150,9 @@ class CredentialHashesApi
     ): SendGridCredential {
         $uri = '/credential-hashes/sendgrid';
 
-        $request = new Request('POST', $uri, body: json_encode($sendGridCredential));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($sendGridCredential));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return SendGridCredential::from($data);
     }
@@ -168,9 +165,9 @@ class CredentialHashesApi
     ): TaxJarCredential {
         $uri = '/credential-hashes/taxjar';
 
-        $request = new Request('POST', $uri, body: json_encode($taxJarCredential));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($taxJarCredential));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return TaxJarCredential::from($data);
     }
@@ -183,9 +180,9 @@ class CredentialHashesApi
     ): WebhookCredential {
         $uri = '/credential-hashes/webhooks';
 
-        $request = new Request('POST', $uri, body: json_encode($webhookCredential));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($webhookCredential));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return WebhookCredential::from($data);
     }
@@ -204,7 +201,7 @@ class CredentialHashesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return SESCredential::from($data);
     }
@@ -230,7 +227,7 @@ class CredentialHashesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): ExperianCredential => ExperianCredential::from($item), $data),
@@ -282,7 +279,7 @@ class CredentialHashesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): OAuth2Credential => OAuth2Credential::from($item), $data),
@@ -334,7 +331,7 @@ class CredentialHashesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): PlaidCredential => PlaidCredential::from($item), $data),
@@ -386,7 +383,7 @@ class CredentialHashesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): TaxJarCredential => TaxJarCredential::from($item), $data),
@@ -431,7 +428,7 @@ class CredentialHashesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return SmtpCredential::from($data);
     }
@@ -450,7 +447,7 @@ class CredentialHashesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ExperianCredential::from($data);
     }
@@ -469,7 +466,7 @@ class CredentialHashesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return MailgunCredential::from($data);
     }
@@ -488,7 +485,7 @@ class CredentialHashesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return OAuth2Credential::from($data);
     }
@@ -521,7 +518,7 @@ class CredentialHashesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): GoogleSpreadsheet => GoogleSpreadsheet::from($item), $data),
@@ -570,7 +567,7 @@ class CredentialHashesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return PlaidCredential::from($data);
     }
@@ -589,7 +586,7 @@ class CredentialHashesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return PostmarkCredential::from($data);
     }
@@ -608,7 +605,7 @@ class CredentialHashesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return SendGridCredential::from($data);
     }
@@ -627,7 +624,7 @@ class CredentialHashesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return TaxJarCredential::from($data);
     }
@@ -646,7 +643,7 @@ class CredentialHashesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return WebhookCredential::from($data);
     }
@@ -664,9 +661,9 @@ class CredentialHashesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credential-hashes/emails/{hash}');
 
-        $request = new Request('PATCH', $uri, body: json_encode($patchCredential));
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($patchCredential));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return SmtpCredential::from($data);
     }
@@ -684,9 +681,9 @@ class CredentialHashesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credential-hashes/mailgun/{hash}');
 
-        $request = new Request('PATCH', $uri, body: json_encode($patchCredential));
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($patchCredential));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return MailgunCredential::from($data);
     }
@@ -704,9 +701,9 @@ class CredentialHashesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credential-hashes/postmark/{hash}');
 
-        $request = new Request('PATCH', $uri, body: json_encode($patchCredential));
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($patchCredential));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return PostmarkCredential::from($data);
     }
@@ -724,9 +721,9 @@ class CredentialHashesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credential-hashes/sendgrid/{hash}');
 
-        $request = new Request('PATCH', $uri, body: json_encode($patchCredential));
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($patchCredential));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return SendGridCredential::from($data);
     }
@@ -744,9 +741,9 @@ class CredentialHashesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credential-hashes/webhooks/{hash}');
 
-        $request = new Request('PATCH', $uri, body: json_encode($patchCredential));
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($patchCredential));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return WebhookCredential::from($data);
     }
@@ -764,9 +761,9 @@ class CredentialHashesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credential-hashes/aws-ses/{hash}');
 
-        $request = new Request('PATCH', $uri, body: json_encode($patchCredential));
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($patchCredential));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return SESCredential::from($data);
     }
@@ -784,9 +781,9 @@ class CredentialHashesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credential-hashes/experian/{hash}');
 
-        $request = new Request('PATCH', $uri, body: json_encode($patchCredential));
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($patchCredential));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ExperianCredential::from($data);
     }
@@ -804,9 +801,9 @@ class CredentialHashesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credential-hashes/oauth2/{hash}');
 
-        $request = new Request('PATCH', $uri, body: json_encode($oAuth2Credential));
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($oAuth2Credential));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return OAuth2Credential::from($data);
     }
@@ -824,9 +821,9 @@ class CredentialHashesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credential-hashes/plaid/{hash}');
 
-        $request = new Request('PATCH', $uri, body: json_encode($patchCredential));
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($patchCredential));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return PlaidCredential::from($data);
     }
@@ -844,9 +841,9 @@ class CredentialHashesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credential-hashes/taxjar/{hash}');
 
-        $request = new Request('PATCH', $uri, body: json_encode($patchCredential));
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($patchCredential));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return TaxJarCredential::from($data);
     }

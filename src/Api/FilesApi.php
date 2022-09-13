@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Psr\Http\Message\StreamInterface;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\Attachment;
@@ -41,9 +38,9 @@ class FilesApi
     ): Attachment {
         $uri = '/attachments';
 
-        $request = new Request('POST', $uri, body: json_encode($attachment));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($attachment));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Attachment::from($data);
     }
@@ -110,7 +107,7 @@ class FilesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return File::from($data);
     }
@@ -140,7 +137,7 @@ class FilesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): File => File::from($item), $data),
@@ -200,7 +197,7 @@ class FilesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): Attachment => Attachment::from($item), $data),
@@ -249,7 +246,7 @@ class FilesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Attachment::from($data);
     }
@@ -267,9 +264,9 @@ class FilesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/files/{id}');
 
-        $request = new Request('PUT', $uri, body: json_encode($file));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($file));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return File::from($data);
     }
@@ -287,9 +284,9 @@ class FilesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/attachments/{id}');
 
-        $request = new Request('PUT', $uri, body: json_encode($attachment));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($attachment));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Attachment::from($data);
     }
@@ -302,9 +299,9 @@ class FilesApi
     ): File {
         $uri = '/files';
 
-        $request = new Request('POST', $uri, body: json_encode($body));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($body));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return File::from($data);
     }

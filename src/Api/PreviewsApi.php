@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Model\GlobalWebhook;
 use Rebilly\Sdk\Model\OrderPreview;
 use Rebilly\Sdk\Model\SendPreviewWebhook;
@@ -38,9 +35,9 @@ class PreviewsApi
     ): OrderPreview {
         $uri = '/previews/orders';
 
-        $request = new Request('POST', $uri, body: json_encode($orderPreview));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($orderPreview));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return OrderPreview::from($data);
     }
@@ -53,9 +50,9 @@ class PreviewsApi
     ): SendTestEmail {
         $uri = '/previews/rule-actions/send-email';
 
-        $request = new Request('POST', $uri, body: json_encode($sendTestEmail));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($sendTestEmail));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return SendTestEmail::from($data);
     }
@@ -68,9 +65,9 @@ class PreviewsApi
     ): SendPreviewWebhook {
         $uri = '/previews/rule-actions/trigger-webhook';
 
-        $request = new Request('POST', $uri, body: json_encode($sendPreviewWebhook));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($sendPreviewWebhook));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return SendPreviewWebhook::from($data);
     }
@@ -80,7 +77,7 @@ class PreviewsApi
     ): void {
         $uri = '/previews/webhooks';
 
-        $request = new Request('POST', $uri, body: json_encode($globalWebhook));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($globalWebhook));
         $this->client->send($request);
     }
 }

@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\AlternativeInstrument;
 use Rebilly\Sdk\Model\BankAccountCreatePlain;
@@ -45,9 +42,9 @@ class PaymentInstrumentsApi
     ): PaymentInstrument {
         $uri = '/payment-instruments';
 
-        $request = new Request('POST', $uri, body: json_encode($body));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($body));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return PaymentInstrument::from($data);
     }
@@ -66,7 +63,7 @@ class PaymentInstrumentsApi
 
         $request = new Request('POST', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return PaymentInstrument::from($data);
     }
@@ -85,7 +82,7 @@ class PaymentInstrumentsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return PaymentInstrument::from($data);
     }
@@ -113,7 +110,7 @@ class PaymentInstrumentsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): PaymentInstrument => PaymentInstrument::from($item), $data),
@@ -159,9 +156,9 @@ class PaymentInstrumentsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/payment-instruments/{id}');
 
-        $request = new Request('PATCH', $uri, body: json_encode($body));
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($body));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return PaymentInstrument::from($data);
     }

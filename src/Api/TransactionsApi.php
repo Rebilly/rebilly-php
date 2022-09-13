@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\PatchTransactionRequest;
 use Rebilly\Sdk\Model\Transaction;
@@ -47,9 +44,9 @@ class TransactionsApi
         ];
         $uri = '/transactions?' . http_build_query($queryParams);
 
-        $request = new Request('POST', $uri, body: json_encode($transactionRequest));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($transactionRequest));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Transaction::from($data);
     }
@@ -67,9 +64,9 @@ class TransactionsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/transactions/{id}/timeline');
 
-        $request = new Request('POST', $uri, body: json_encode($transactionTimeline));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($transactionTimeline));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return TransactionTimeline::from($data);
     }
@@ -107,7 +104,7 @@ class TransactionsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Transaction::from($data);
     }
@@ -135,7 +132,7 @@ class TransactionsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): Transaction => Transaction::from($item), $data),
@@ -190,7 +187,7 @@ class TransactionsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): TransactionTimeline => TransactionTimeline::from($item), $data),
@@ -235,7 +232,7 @@ class TransactionsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return TransactionTimeline::from($data);
     }
@@ -253,9 +250,9 @@ class TransactionsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/transactions/{id}');
 
-        $request = new Request('PATCH', $uri, body: json_encode($patchTransactionRequest));
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($patchTransactionRequest));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Transaction::from($data);
     }
@@ -274,7 +271,7 @@ class TransactionsApi
 
         $request = new Request('POST', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return TransactionQuery::from($data);
     }
@@ -292,9 +289,9 @@ class TransactionsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/transactions/{id}/refund');
 
-        $request = new Request('POST', $uri, body: json_encode($transactionRefund));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($transactionRefund));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Transaction::from($data);
     }
@@ -312,9 +309,9 @@ class TransactionsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/transactions/{id}/update');
 
-        $request = new Request('POST', $uri, body: json_encode($transactionUpdate));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($transactionUpdate));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Transaction::from($data);
     }

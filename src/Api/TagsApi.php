@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\DeleteTagCustomerCollectionRequest;
 use Rebilly\Sdk\Model\DeleteTagKycDocumentCollectionRequest;
@@ -41,9 +38,9 @@ class TagsApi
     ): Tag {
         $uri = '/tags';
 
-        $request = new Request('POST', $uri, body: json_encode($tag));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($tag));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Tag::from($data);
     }
@@ -75,7 +72,7 @@ class TagsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Tag::from($data);
     }
@@ -101,7 +98,7 @@ class TagsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): Tag => Tag::from($item), $data),
@@ -157,7 +154,7 @@ class TagsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/tags/{tag}/customers');
 
-        $request = new Request('POST', $uri, body: json_encode($postTagCustomerCollectionRequest));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($postTagCustomerCollectionRequest));
         $this->client->send($request);
     }
 
@@ -186,7 +183,7 @@ class TagsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/tags/{tag}/kyc-documents');
 
-        $request = new Request('POST', $uri, body: json_encode($postTagKycDocumentCollectionRequest));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($postTagKycDocumentCollectionRequest));
         $this->client->send($request);
     }
 
@@ -215,7 +212,7 @@ class TagsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/tags/{tag}/customers');
 
-        $request = new Request('DELETE', $uri, body: json_encode($deleteTagCustomerCollectionRequest));
+        $request = new Request('DELETE', $uri, body: Utils::jsonEncode($deleteTagCustomerCollectionRequest));
         $this->client->send($request);
     }
 
@@ -244,7 +241,7 @@ class TagsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/tags/{tag}/kyc-documents');
 
-        $request = new Request('DELETE', $uri, body: json_encode($deleteTagKycDocumentCollectionRequest));
+        $request = new Request('DELETE', $uri, body: Utils::jsonEncode($deleteTagKycDocumentCollectionRequest));
         $this->client->send($request);
     }
 
@@ -261,9 +258,9 @@ class TagsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/tags/{tag}');
 
-        $request = new Request('PATCH', $uri, body: json_encode($tag2));
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($tag2));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Tag::from($data);
     }

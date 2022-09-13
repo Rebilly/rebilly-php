@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\SubscriptionCancellation;
 use Rebilly\Sdk\Paginator;
@@ -37,9 +34,9 @@ class SubscriptionCancellationsApi
     ): SubscriptionCancellation {
         $uri = '/subscription-cancellations';
 
-        $request = new Request('POST', $uri, body: json_encode($subscriptionCancellation));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($subscriptionCancellation));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return SubscriptionCancellation::from($data);
     }
@@ -71,7 +68,7 @@ class SubscriptionCancellationsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return SubscriptionCancellation::from($data);
     }
@@ -95,7 +92,7 @@ class SubscriptionCancellationsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): SubscriptionCancellation => SubscriptionCancellation::from($item), $data),
@@ -137,9 +134,9 @@ class SubscriptionCancellationsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscription-cancellations/{id}');
 
-        $request = new Request('PATCH', $uri, body: json_encode($subscriptionCancellation));
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($subscriptionCancellation));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return SubscriptionCancellation::from($data);
     }
@@ -157,9 +154,9 @@ class SubscriptionCancellationsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscription-cancellations/{id}');
 
-        $request = new Request('PUT', $uri, body: json_encode($subscriptionCancellation));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($subscriptionCancellation));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return SubscriptionCancellation::from($data);
     }

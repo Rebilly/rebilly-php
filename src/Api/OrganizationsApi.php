@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\Organization;
 use Rebilly\Sdk\Paginator;
@@ -37,9 +34,9 @@ class OrganizationsApi
     ): Organization {
         $uri = '/organizations';
 
-        $request = new Request('POST', $uri, body: json_encode($organization));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($organization));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Organization::from($data);
     }
@@ -58,7 +55,7 @@ class OrganizationsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Organization::from($data);
     }
@@ -82,7 +79,7 @@ class OrganizationsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): Organization => Organization::from($item), $data),
@@ -124,9 +121,9 @@ class OrganizationsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/organizations/{id}');
 
-        $request = new Request('PATCH', $uri, body: json_encode($organization));
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($organization));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Organization::from($data);
     }

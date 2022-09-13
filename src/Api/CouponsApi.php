@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\Coupon;
 use Rebilly\Sdk\Model\CouponExpiration;
@@ -52,9 +49,9 @@ class CouponsApi
     ): Coupon {
         $uri = '/coupons';
 
-        $request = new Request('POST', $uri, body: json_encode($coupon));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($coupon));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Coupon::from($data);
     }
@@ -73,7 +70,7 @@ class CouponsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Coupon::from($data);
     }
@@ -99,7 +96,7 @@ class CouponsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): Coupon => Coupon::from($item), $data),
@@ -151,7 +148,7 @@ class CouponsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): CouponRedemption => CouponRedemption::from($item), $data),
@@ -196,7 +193,7 @@ class CouponsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CouponRedemption::from($data);
     }
@@ -209,9 +206,9 @@ class CouponsApi
     ): CouponRedemption {
         $uri = '/coupons-redemptions';
 
-        $request = new Request('POST', $uri, body: json_encode($couponRedemption));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($couponRedemption));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CouponRedemption::from($data);
     }
@@ -229,9 +226,9 @@ class CouponsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/coupons/{id}/expiration');
 
-        $request = new Request('POST', $uri, body: json_encode($couponExpiration));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($couponExpiration));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Coupon::from($data);
     }
@@ -249,9 +246,9 @@ class CouponsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/coupons/{id}');
 
-        $request = new Request('PUT', $uri, body: json_encode($coupon));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($coupon));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Coupon::from($data);
     }

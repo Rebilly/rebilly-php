@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Model\ForgotPassword;
 use Rebilly\Sdk\Model\Session;
 use Rebilly\Sdk\Model\Signin;
@@ -49,7 +46,7 @@ class AccountApi
     ): void {
         $uri = '/forgot-password';
 
-        $request = new Request('POST', $uri, body: json_encode($forgotPassword));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($forgotPassword));
         $this->client->send($request);
     }
 
@@ -69,9 +66,9 @@ class AccountApi
     ): Session {
         $uri = '/signin';
 
-        $request = new Request('POST', $uri, body: json_encode($signin));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($signin));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Session::from($data);
     }
@@ -84,9 +81,9 @@ class AccountApi
     ): User {
         $uri = '/signup';
 
-        $request = new Request('POST', $uri, body: json_encode($signup));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($signup));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return User::from($data);
     }

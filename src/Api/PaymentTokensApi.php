@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\CompositeToken;
 use Rebilly\Sdk\Paginator;
@@ -37,9 +34,9 @@ class PaymentTokensApi
     ): CompositeToken {
         $uri = '/tokens';
 
-        $request = new Request('POST', $uri, body: json_encode($compositeToken));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($compositeToken));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CompositeToken::from($data);
     }
@@ -58,7 +55,7 @@ class PaymentTokensApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CompositeToken::from($data);
     }
@@ -78,7 +75,7 @@ class PaymentTokensApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): CompositeToken => CompositeToken::from($item), $data),

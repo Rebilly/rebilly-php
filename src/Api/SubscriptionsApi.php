@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\Invoice;
 use Rebilly\Sdk\Model\InvoiceIssue;
@@ -48,9 +45,9 @@ class SubscriptionsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}/change-items');
 
-        $request = new Request('POST', $uri, body: json_encode($subscriptionChange));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($subscriptionChange));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Subscription::from($data);
     }
@@ -67,9 +64,9 @@ class SubscriptionsApi
         ];
         $uri = '/subscriptions?' . http_build_query($queryParams);
 
-        $request = new Request('POST', $uri, body: json_encode($subscription));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($subscription));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Subscription::from($data);
     }
@@ -87,9 +84,9 @@ class SubscriptionsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}/interim-invoice');
 
-        $request = new Request('POST', $uri, body: json_encode($subscriptionInvoice));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($subscriptionInvoice));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Invoice::from($data);
     }
@@ -107,9 +104,9 @@ class SubscriptionsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}/timeline');
 
-        $request = new Request('POST', $uri, body: json_encode($orderTimeline));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($orderTimeline));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return OrderTimeline::from($data);
     }
@@ -160,7 +157,7 @@ class SubscriptionsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Subscription::from($data);
     }
@@ -188,7 +185,7 @@ class SubscriptionsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): Subscription => Subscription::from($item), $data),
@@ -247,7 +244,7 @@ class SubscriptionsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): OrderTimeline => OrderTimeline::from($item), $data),
@@ -298,7 +295,7 @@ class SubscriptionsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return array_map(fn (array $item): Invoice => Invoice::from($item), $data);
     }
@@ -319,7 +316,7 @@ class SubscriptionsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return OrderTimeline::from($data);
     }
@@ -339,9 +336,9 @@ class SubscriptionsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}/upcoming-invoices/{invoiceId}/issue');
 
-        $request = new Request('POST', $uri, body: json_encode($invoiceIssue));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($invoiceIssue));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Invoice::from($data);
     }
@@ -363,9 +360,9 @@ class SubscriptionsApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}?') . http_build_query($queryParams);
 
-        $request = new Request('PUT', $uri, body: json_encode($subscription));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($subscription));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Subscription::from($data);
     }
@@ -384,7 +381,7 @@ class SubscriptionsApi
 
         $request = new Request('POST', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Subscription::from($data);
     }
@@ -403,7 +400,7 @@ class SubscriptionsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return SubscriptionSummaryMetrics::from($data);
     }

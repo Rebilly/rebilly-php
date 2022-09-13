@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\EmailDeliverySetting;
 use Rebilly\Sdk\Paginator;
@@ -37,9 +34,9 @@ class EmailDeliverySettingsApi
     ): EmailDeliverySetting {
         $uri = '/email-delivery-settings';
 
-        $request = new Request('POST', $uri, body: json_encode($emailDeliverySetting));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($emailDeliverySetting));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return EmailDeliverySetting::from($data);
     }
@@ -71,7 +68,7 @@ class EmailDeliverySettingsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return EmailDeliverySetting::from($data);
     }
@@ -97,7 +94,7 @@ class EmailDeliverySettingsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): EmailDeliverySetting => EmailDeliverySetting::from($item), $data),
@@ -142,7 +139,7 @@ class EmailDeliverySettingsApi
 
         $request = new Request('POST', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return EmailDeliverySetting::from($data);
     }
@@ -160,9 +157,9 @@ class EmailDeliverySettingsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/email-delivery-settings/{id}');
 
-        $request = new Request('PATCH', $uri, body: json_encode($emailDeliverySetting));
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($emailDeliverySetting));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return EmailDeliverySetting::from($data);
     }
@@ -181,7 +178,7 @@ class EmailDeliverySettingsApi
 
         $request = new Request('PUT', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return EmailDeliverySetting::from($data);
     }

@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\CreditMemo;
 use Rebilly\Sdk\Model\CreditMemoTimeline;
@@ -38,9 +35,9 @@ class CreditMemosApi
     ): CreditMemo {
         $uri = '/credit-memos';
 
-        $request = new Request('POST', $uri, body: json_encode($creditMemo));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($creditMemo));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CreditMemo::from($data);
     }
@@ -58,9 +55,9 @@ class CreditMemosApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credit-memos/{id}/timeline');
 
-        $request = new Request('POST', $uri, body: json_encode($creditMemoTimeline));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($creditMemoTimeline));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CreditMemoTimeline::from($data);
     }
@@ -98,7 +95,7 @@ class CreditMemosApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CreditMemo::from($data);
     }
@@ -126,7 +123,7 @@ class CreditMemosApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): CreditMemo => CreditMemo::from($item), $data),
@@ -185,7 +182,7 @@ class CreditMemosApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): CreditMemoTimeline => CreditMemoTimeline::from($item), $data),
@@ -234,7 +231,7 @@ class CreditMemosApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CreditMemoTimeline::from($data);
     }
@@ -252,9 +249,9 @@ class CreditMemosApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credit-memos/{id}');
 
-        $request = new Request('PUT', $uri, body: json_encode($creditMemo));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($creditMemo));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CreditMemo::from($data);
     }
@@ -273,7 +270,7 @@ class CreditMemosApi
 
         $request = new Request('POST', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CreditMemo::from($data);
     }

@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\CheckoutForm;
 use Rebilly\Sdk\Paginator;
@@ -37,9 +34,9 @@ class CheckoutFormsApi
     ): CheckoutForm {
         $uri = '/checkout-forms';
 
-        $request = new Request('POST', $uri, body: json_encode($checkoutForm));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($checkoutForm));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CheckoutForm::from($data);
     }
@@ -71,7 +68,7 @@ class CheckoutFormsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CheckoutForm::from($data);
     }
@@ -97,7 +94,7 @@ class CheckoutFormsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): CheckoutForm => CheckoutForm::from($item), $data),
@@ -141,9 +138,9 @@ class CheckoutFormsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/checkout-forms/{id}');
 
-        $request = new Request('PUT', $uri, body: json_encode($checkoutForm));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($checkoutForm));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CheckoutForm::from($data);
     }

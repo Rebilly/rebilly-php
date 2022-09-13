@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\KycRequest;
 use Rebilly\Sdk\Paginator;
@@ -37,9 +34,9 @@ class KycRequestsApi
     ): KycRequest {
         $uri = '/kyc-requests';
 
-        $request = new Request('POST', $uri, body: json_encode($kycRequest));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($kycRequest));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return KycRequest::from($data);
     }
@@ -71,7 +68,7 @@ class KycRequestsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return KycRequest::from($data);
     }
@@ -95,7 +92,7 @@ class KycRequestsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): KycRequest => KycRequest::from($item), $data),
@@ -137,9 +134,9 @@ class KycRequestsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/kyc-requests/{id}');
 
-        $request = new Request('PATCH', $uri, body: json_encode($kycRequest));
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($kycRequest));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return KycRequest::from($data);
     }

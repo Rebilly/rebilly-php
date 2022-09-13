@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Model\PostPermissionsEmulationRequest;
 use Rebilly\Sdk\Model\Profile;
 use Rebilly\Sdk\Model\ProfileMfa;
@@ -48,7 +45,7 @@ class ProfileApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Profile::from($data);
     }
@@ -62,7 +59,7 @@ class ProfileApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ProfileMfa::from($data);
     }
@@ -76,7 +73,7 @@ class ProfileApi
 
         $request = new Request('POST', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Profile::from($data);
     }
@@ -89,9 +86,9 @@ class ProfileApi
     ): Session {
         $uri = '/permissions-emulation';
 
-        $request = new Request('POST', $uri, body: json_encode($postPermissionsEmulationRequest));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($postPermissionsEmulationRequest));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Session::from($data);
     }
@@ -105,7 +102,7 @@ class ProfileApi
 
         $request = new Request('DELETE', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Session::from($data);
     }
@@ -118,9 +115,9 @@ class ProfileApi
     ): Profile {
         $uri = '/profile';
 
-        $request = new Request('PUT', $uri, body: json_encode($profile));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($profile));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Profile::from($data);
     }
@@ -134,7 +131,7 @@ class ProfileApi
 
         $request = new Request('POST', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ProfileMfa::from($data);
     }
@@ -147,9 +144,9 @@ class ProfileApi
     ): Profile {
         $uri = '/profile/password';
 
-        $request = new Request('POST', $uri, body: json_encode($updatePassword));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($updatePassword));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Profile::from($data);
     }

@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\CustomField;
 use Rebilly\Sdk\Paginator;
@@ -44,9 +41,9 @@ class CustomFieldsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/custom-fields/{resource}/{name}');
 
-        $request = new Request('PUT', $uri, body: json_encode($customField));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($customField));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CustomField::from($data);
     }
@@ -67,7 +64,7 @@ class CustomFieldsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CustomField::from($data);
     }
@@ -92,7 +89,7 @@ class CustomFieldsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): CustomField => CustomField::from($item), $data),

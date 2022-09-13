@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\AuthenticationOptions;
 use Rebilly\Sdk\Model\AuthenticationToken;
@@ -42,9 +39,9 @@ class CustomerAuthenticationApi
     ): CustomerCredential {
         $uri = '/credentials';
 
-        $request = new Request('POST', $uri, body: json_encode($customerCredential));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($customerCredential));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CustomerCredential::from($data);
     }
@@ -57,9 +54,9 @@ class CustomerAuthenticationApi
     ): ResetPasswordToken {
         $uri = '/password-tokens';
 
-        $request = new Request('POST', $uri, body: json_encode($resetPasswordToken));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($resetPasswordToken));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ResetPasswordToken::from($data);
     }
@@ -103,9 +100,9 @@ class CustomerAuthenticationApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/authentication-tokens/{token}/exchange');
 
-        $request = new Request('POST', $uri, body: json_encode($customerJWT));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($customerJWT));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CustomerJWT::from($data);
     }
@@ -125,7 +122,7 @@ class CustomerAuthenticationApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): AuthenticationTokenResponse => AuthenticationTokenResponse::from($item), $data),
@@ -165,7 +162,7 @@ class CustomerAuthenticationApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): CustomerCredential => CustomerCredential::from($item), $data),
@@ -205,7 +202,7 @@ class CustomerAuthenticationApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): ResetPasswordToken => ResetPasswordToken::from($item), $data),
@@ -239,7 +236,7 @@ class CustomerAuthenticationApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return AuthenticationOptions::from($data);
     }
@@ -258,7 +255,7 @@ class CustomerAuthenticationApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CustomerCredential::from($data);
     }
@@ -277,7 +274,7 @@ class CustomerAuthenticationApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ResetPasswordToken::from($data);
     }
@@ -290,9 +287,9 @@ class CustomerAuthenticationApi
     ): AuthenticationTokenResponse {
         $uri = '/authentication-tokens';
 
-        $request = new Request('POST', $uri, body: json_encode($authenticationToken));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($authenticationToken));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return AuthenticationTokenResponse::from($data);
     }
@@ -318,9 +315,9 @@ class CustomerAuthenticationApi
     ): AuthenticationOptions {
         $uri = '/authentication-options';
 
-        $request = new Request('PUT', $uri, body: json_encode($authenticationOptions));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($authenticationOptions));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return AuthenticationOptions::from($data);
     }
@@ -338,9 +335,9 @@ class CustomerAuthenticationApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credentials/{id}');
 
-        $request = new Request('PUT', $uri, body: json_encode($customerCredential));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($customerCredential));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CustomerCredential::from($data);
     }
@@ -359,7 +356,7 @@ class CustomerAuthenticationApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return AuthenticationTokenResponse::from($data);
     }
