@@ -16,6 +16,7 @@ namespace Rebilly\Sdk\Middleware;
 use Closure;
 use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\RequestInterface;
+use Rebilly\Sdk\Client;
 
 final class BaseUri
 {
@@ -28,11 +29,20 @@ final class BaseUri
         return function (RequestInterface $request, array $options) use ($next) {
             if ($request->getHeaderLine('Host') === '') {
                 $uri = $this->uri;
-                $basePath = $uri->getPath() . '/';
+                $basePath = $uri->getPath();
+                $requestPath = $request->getUri()->getPath();
+                if (
+                    str_starts_with($requestPath, Client::EXPERIMENTAL_BASE)
+                    && !str_ends_with(rtrim($basePath, '/'), ltrim(Client::EXPERIMENTAL_BASE, '/'))
+                ) {
+                    $basePath .= Client::EXPERIMENTAL_BASE;
+                    $requestPath = mb_substr($requestPath, mb_strlen(Client::EXPERIMENTAL_BASE));
+                }
+                $basePath .= '/';
                 if ($this->organizationId) {
                     $basePath .= 'organizations/' . $this->organizationId . '/';
                 }
-                $uri = $uri->withPath($basePath . ltrim($request->getUri()->getPath(), '/'));
+                $uri = $uri->withPath($basePath . ltrim($requestPath, '/'));
                 $uri = $uri->withQuery($request->getUri()->getQuery());
                 $request = $request->withUri($uri);
             }
