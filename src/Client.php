@@ -34,6 +34,8 @@ final class Client implements ClientInterface, \Psr\Http\Client\ClientInterface
 
     public const SANDBOX_HOST = 'https://api-sandbox.rebilly.com';
 
+    public const EXPERIMENTAL_BASE = '/experimental';
+
     public const SDK_VERSION = '3.0.0';
 
     private GuzzleClient $client;
