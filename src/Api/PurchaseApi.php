@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Model\CoreReadyToPay;
 use Rebilly\Sdk\Model\ReadyToPayMethods;
 
@@ -36,9 +33,9 @@ class PurchaseApi
     ): array {
         $uri = '/ready-to-pay';
 
-        $request = new Request('POST', $uri, body: json_encode($coreReadyToPay));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($coreReadyToPay));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return array_map(fn (array $item): ReadyToPayMethods => ReadyToPayMethods::from($item), $data);
     }

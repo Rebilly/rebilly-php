@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\EmailMessage;
 use Rebilly\Sdk\Model\PatchEmailMessageRequest;
@@ -38,9 +35,9 @@ class EmailMessagesApi
     ): EmailMessage {
         $uri = '/email-messages';
 
-        $request = new Request('POST', $uri, body: json_encode($emailMessage));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($emailMessage));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return EmailMessage::from($data);
     }
@@ -72,7 +69,7 @@ class EmailMessagesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return EmailMessage::from($data);
     }
@@ -98,7 +95,7 @@ class EmailMessagesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): EmailMessage => EmailMessage::from($item), $data),
@@ -142,9 +139,9 @@ class EmailMessagesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/email-messages/{id}');
 
-        $request = new Request('PATCH', $uri, body: json_encode($patchEmailMessageRequest));
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($patchEmailMessageRequest));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return EmailMessage::from($data);
     }

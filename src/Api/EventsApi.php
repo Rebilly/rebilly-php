@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\RulesEngineTimeline;
 use Rebilly\Sdk\Model\RuleSet;
@@ -47,9 +44,9 @@ class EventsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/rules/drafts');
 
-        $request = new Request('POST', $uri, body: json_encode($ruleSetDraft));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($ruleSetDraft));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return RuleSetDraft::from($data);
     }
@@ -67,9 +64,9 @@ class EventsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/rules');
 
-        $request = new Request('PUT', $uri, body: json_encode($ruleSet));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($ruleSet));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return RuleSet::from($data);
     }
@@ -87,9 +84,9 @@ class EventsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/timeline');
 
-        $request = new Request('POST', $uri, body: json_encode($rulesEngineTimeline));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($rulesEngineTimeline));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return RulesEngineTimeline::from($data);
     }
@@ -138,7 +135,7 @@ class EventsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return SystemEvent::from($data);
     }
@@ -152,7 +149,7 @@ class EventsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return array_map(fn (array $item): SystemEvent => SystemEvent::from($item), $data);
     }
@@ -187,7 +184,7 @@ class EventsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): RuleSetDraft => RuleSetDraft::from($item), $data),
@@ -250,7 +247,7 @@ class EventsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): RulesEngineTimeline => RulesEngineTimeline::from($item), $data),
@@ -305,7 +302,7 @@ class EventsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return RuleSetDraft::from($data);
     }
@@ -324,7 +321,7 @@ class EventsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return RuleSet::from($data);
     }
@@ -359,7 +356,7 @@ class EventsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): RuleSetHistoryItem => RuleSetHistoryItem::from($item), $data),
@@ -418,7 +415,7 @@ class EventsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return RuleSetVersion::from($data);
     }
@@ -445,7 +442,7 @@ class EventsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return RuleSetHistoryItem::from($data);
     }
@@ -466,7 +463,7 @@ class EventsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return RulesEngineTimeline::from($data);
     }
@@ -486,9 +483,9 @@ class EventsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/rules/drafts/{id}');
 
-        $request = new Request('PUT', $uri, body: json_encode($ruleSetDraft));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($ruleSetDraft));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return RuleSetDraft::from($data);
     }

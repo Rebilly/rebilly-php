@@ -14,10 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\ApiTracking;
 use Rebilly\Sdk\Model\ValueList;
@@ -52,7 +50,7 @@ class TrackingApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): ApiTracking => ApiTracking::from($item), $data),
@@ -106,7 +104,7 @@ class TrackingApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): ValueList => ValueList::from($item), $data),
@@ -158,7 +156,7 @@ class TrackingApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): WebhookTracking => WebhookTracking::from($item), $data),
@@ -203,7 +201,7 @@ class TrackingApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ApiTracking::from($data);
     }
@@ -222,7 +220,7 @@ class TrackingApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return WebhookTracking::from($data);
     }

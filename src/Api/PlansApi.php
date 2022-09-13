@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use InvalidArgumentException;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\OneTimeSalePlan;
@@ -41,9 +38,9 @@ class PlansApi
     ): OneTimeSalePlan|SubscriptionOrderPlan|TrialOnlyPlan {
         $uri = '/plans';
 
-        $request = new Request('POST', $uri, body: json_encode($body));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($body));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return $this->buildPlanResponse($data);
     }
@@ -75,7 +72,7 @@ class PlansApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return $this->buildPlanResponse($data);
     }
@@ -101,7 +98,7 @@ class PlansApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): OneTimeSalePlan|SubscriptionOrderPlan|TrialOnlyPlan => $this->buildPlanResponse($item), $data),
@@ -145,9 +142,9 @@ class PlansApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/plans/{id}');
 
-        $request = new Request('PUT', $uri, body: json_encode($body));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($body));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return $this->buildPlanResponse($data);
     }

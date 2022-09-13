@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\ValueList;
 use Rebilly\Sdk\Paginator;
@@ -37,9 +34,9 @@ class ListsApi
     ): ValueList {
         $uri = '/lists';
 
-        $request = new Request('POST', $uri, body: json_encode($valueList));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($valueList));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ValueList::from($data);
     }
@@ -80,7 +77,7 @@ class ListsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): ValueList => ValueList::from($item), $data),
@@ -129,7 +126,7 @@ class ListsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ValueList::from($data);
     }
@@ -148,7 +145,7 @@ class ListsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ValueList::from($data);
     }
@@ -166,9 +163,9 @@ class ListsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/lists/{id}');
 
-        $request = new Request('PUT', $uri, body: json_encode($valueList));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($valueList));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ValueList::from($data);
     }

@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Model\ApplicationInstance;
 
 class ApplicationInstancesApi
@@ -54,7 +51,7 @@ class ApplicationInstancesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ApplicationInstance::from($data);
     }
@@ -72,9 +69,9 @@ class ApplicationInstancesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/application-instances/{applicationId}');
 
-        $request = new Request('PUT', $uri, body: json_encode($applicationInstance));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($applicationInstance));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ApplicationInstance::from($data);
     }

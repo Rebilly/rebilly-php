@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\AML;
 use Rebilly\Sdk\Model\Customer;
@@ -46,9 +43,9 @@ class CustomersApi
     ): Customer {
         $uri = '/customers';
 
-        $request = new Request('POST', $uri, body: json_encode($customer));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($customer));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Customer::from($data);
     }
@@ -66,9 +63,9 @@ class CustomersApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/edd-timeline');
 
-        $request = new Request('POST', $uri, body: json_encode($eddTimeline));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($eddTimeline));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return EddTimeline::from($data);
     }
@@ -86,9 +83,9 @@ class CustomersApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/lead-source');
 
-        $request = new Request('PUT', $uri, body: json_encode($leadSource));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($leadSource));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return LeadSource::from($data);
     }
@@ -106,9 +103,9 @@ class CustomersApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/timeline');
 
-        $request = new Request('POST', $uri, body: json_encode($customerTimeline));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($customerTimeline));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CustomerTimeline::from($data);
     }
@@ -161,7 +158,7 @@ class CustomersApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Customer::from($data);
     }
@@ -191,7 +188,7 @@ class CustomersApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): Customer => Customer::from($item), $data),
@@ -246,7 +243,7 @@ class CustomersApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): EddSearchResult => EddSearchResult::from($item), $data),
@@ -299,7 +296,7 @@ class CustomersApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): CustomerTimeline => CustomerTimeline::from($item), $data),
@@ -350,7 +347,7 @@ class CustomersApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return array_map(fn (array $item): Invoice => Invoice::from($item), $data);
     }
@@ -369,7 +366,7 @@ class CustomersApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return array_map(fn (array $item): AML => AML::from($item), $data);
     }
@@ -388,7 +385,7 @@ class CustomersApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Edd::from($data);
     }
@@ -419,7 +416,7 @@ class CustomersApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): EddTimeline => EddTimeline::from($item), $data),
@@ -466,7 +463,7 @@ class CustomersApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return LeadSource::from($data);
     }
@@ -487,7 +484,7 @@ class CustomersApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CustomerTimeline::from($data);
     }
@@ -522,9 +519,9 @@ class CustomersApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/edd-score');
 
-        $request = new Request('PATCH', $uri, body: json_encode($patchCustomerEddScoreRequest));
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($patchCustomerEddScoreRequest));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Edd::from($data);
     }
@@ -542,9 +539,9 @@ class CustomersApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}');
 
-        $request = new Request('PUT', $uri, body: json_encode($customer));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($customer));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Customer::from($data);
     }
@@ -563,7 +560,7 @@ class CustomersApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CustomerInformation::from($data);
     }

@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\GlobalWebhook;
 use Rebilly\Sdk\Paginator;
@@ -37,9 +34,9 @@ class WebhooksApi
     ): GlobalWebhook {
         $uri = '/webhooks';
 
-        $request = new Request('POST', $uri, body: json_encode($globalWebhook));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($globalWebhook));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GlobalWebhook::from($data);
     }
@@ -58,7 +55,7 @@ class WebhooksApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GlobalWebhook::from($data);
     }
@@ -80,7 +77,7 @@ class WebhooksApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): GlobalWebhook => GlobalWebhook::from($item), $data),
@@ -120,9 +117,9 @@ class WebhooksApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/webhooks/{id}');
 
-        $request = new Request('PUT', $uri, body: json_encode($globalWebhook));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($globalWebhook));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GlobalWebhook::from($data);
     }

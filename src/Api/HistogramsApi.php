@@ -15,10 +15,8 @@ namespace Rebilly\Sdk\Api;
 
 use DateTimeImmutable;
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Model\HistogramData;
 
 class HistogramsApi
@@ -50,7 +48,7 @@ class HistogramsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return HistogramData::from($data);
     }

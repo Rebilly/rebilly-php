@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Model\DigitalWalletOnboardingApplePay;
 use Rebilly\Sdk\Model\DigitalWalletValidation;
 
@@ -36,9 +33,9 @@ class DigitalWalletsApi
     ): DigitalWalletValidation {
         $uri = '/digital-wallets/validation';
 
-        $request = new Request('POST', $uri, body: json_encode($digitalWalletValidation));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($digitalWalletValidation));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return DigitalWalletValidation::from($data);
     }
@@ -51,9 +48,9 @@ class DigitalWalletsApi
     ): DigitalWalletOnboardingApplePay {
         $uri = '/digital-wallets/onboarding/apple-pay';
 
-        $request = new Request('POST', $uri, body: json_encode($digitalWalletOnboardingApplePay));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($digitalWalletOnboardingApplePay));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return DigitalWalletOnboardingApplePay::from($data);
     }

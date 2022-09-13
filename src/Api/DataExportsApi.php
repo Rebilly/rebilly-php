@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\DataExport;
 use Rebilly\Sdk\Paginator;
@@ -60,7 +57,7 @@ class DataExportsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return DataExport::from($data);
     }
@@ -90,7 +87,7 @@ class DataExportsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): DataExport => DataExport::from($item), $data),
@@ -137,9 +134,9 @@ class DataExportsApi
         ];
         $uri = '/experimental/data-exports?' . http_build_query($queryParams);
 
-        $request = new Request('POST', $uri, body: json_encode($dataExport));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($dataExport));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return DataExport::from($data);
     }
@@ -161,9 +158,9 @@ class DataExportsApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/experimental/data-exports/{id}?') . http_build_query($queryParams);
 
-        $request = new Request('PUT', $uri, body: json_encode($dataExport));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($dataExport));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return DataExport::from($data);
     }

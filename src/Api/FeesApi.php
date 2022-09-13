@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\Fee;
 use Rebilly\Sdk\Model\FeePatch;
@@ -38,9 +35,9 @@ class FeesApi
     ): Fee {
         $uri = '/fees';
 
-        $request = new Request('POST', $uri, body: json_encode($fee));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($fee));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Fee::from($data);
     }
@@ -59,7 +56,7 @@ class FeesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Fee::from($data);
     }
@@ -79,7 +76,7 @@ class FeesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): Fee => Fee::from($item), $data),
@@ -117,9 +114,9 @@ class FeesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/fees/{id}');
 
-        $request = new Request('PATCH', $uri, body: json_encode($feePatch));
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($feePatch));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Fee::from($data);
     }
@@ -137,9 +134,9 @@ class FeesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/fees/{id}');
 
-        $request = new Request('PUT', $uri, body: json_encode($fee));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($fee));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Fee::from($data);
     }

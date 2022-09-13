@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\AddressMatches;
 use Rebilly\Sdk\Model\IdentityMatches;
@@ -46,7 +43,7 @@ class KycDocumentsApi
 
         $request = new Request('POST', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return KycDocument::from($data);
     }
@@ -59,9 +56,9 @@ class KycDocumentsApi
     ): KycDocument {
         $uri = '/kyc-documents';
 
-        $request = new Request('POST', $uri, body: json_encode($kycDocument));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($kycDocument));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return KycDocument::from($data);
     }
@@ -80,7 +77,7 @@ class KycDocumentsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return KycDocument::from($data);
     }
@@ -106,7 +103,7 @@ class KycDocumentsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): KycDocument => KycDocument::from($item), $data),
@@ -147,7 +144,7 @@ class KycDocumentsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/kyc-documents/{id}/matches');
 
-        $request = new Request('POST', $uri, body: json_encode($body));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($body));
         $this->client->send($request);
     }
 
@@ -164,9 +161,9 @@ class KycDocumentsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/kyc-documents/{id}/rejection');
 
-        $request = new Request('POST', $uri, body: json_encode($kycDocumentRejection));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($kycDocumentRejection));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return KycDocument::from($data);
     }
@@ -185,7 +182,7 @@ class KycDocumentsApi
 
         $request = new Request('POST', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return KycDocument::from($data);
     }
@@ -204,7 +201,7 @@ class KycDocumentsApi
 
         $request = new Request('POST', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return KycDocument::from($data);
     }
@@ -223,7 +220,7 @@ class KycDocumentsApi
 
         $request = new Request('POST', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return KycDocument::from($data);
     }
@@ -241,9 +238,9 @@ class KycDocumentsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/kyc-documents/{id}');
 
-        $request = new Request('PUT', $uri, body: json_encode($kycDocument));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($kycDocument));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return KycDocument::from($data);
     }

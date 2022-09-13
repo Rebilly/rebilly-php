@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\Application;
 use Rebilly\Sdk\Model\OwnerApplicationInstance;
@@ -39,9 +36,9 @@ class ApplicationsApi
     ): Application {
         $uri = '/applications';
 
-        $request = new Request('POST', $uri, body: json_encode($application));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($application));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Application::from($data);
     }
@@ -60,7 +57,7 @@ class ApplicationsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return UserApplication::from($data);
     }
@@ -90,7 +87,7 @@ class ApplicationsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): UserApplication => UserApplication::from($item), $data),
@@ -141,7 +138,7 @@ class ApplicationsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return OwnerApplicationInstance::from($data);
     }
@@ -166,7 +163,7 @@ class ApplicationsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): OwnerApplicationInstance => OwnerApplicationInstance::from($item), $data),

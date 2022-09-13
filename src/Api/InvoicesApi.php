@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\CreditMemoAllocation;
 use Rebilly\Sdk\Model\Invoice;
@@ -50,7 +47,7 @@ class InvoicesApi
 
         $request = new Request('POST', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Invoice::from($data);
     }
@@ -70,9 +67,9 @@ class InvoicesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/invoices/{id}/credit-memo-allocations/{creditMemoId}');
 
-        $request = new Request('PUT', $uri, body: json_encode($creditMemoAllocation));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($creditMemoAllocation));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CreditMemoAllocation::from($data);
     }
@@ -90,9 +87,9 @@ class InvoicesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/invoices/{id}/transaction');
 
-        $request = new Request('POST', $uri, body: json_encode($invoiceTransaction));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($invoiceTransaction));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Invoice::from($data);
     }
@@ -105,9 +102,9 @@ class InvoicesApi
     ): Invoice {
         $uri = '/invoices';
 
-        $request = new Request('POST', $uri, body: json_encode($invoice));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($invoice));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Invoice::from($data);
     }
@@ -125,9 +122,9 @@ class InvoicesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/invoices/{id}/items');
 
-        $request = new Request('POST', $uri, body: json_encode($invoiceItem));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($invoiceItem));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return InvoiceItem::from($data);
     }
@@ -145,9 +142,9 @@ class InvoicesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/invoices/{id}/timeline');
 
-        $request = new Request('POST', $uri, body: json_encode($invoiceTimeline));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($invoiceTimeline));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return InvoiceTimeline::from($data);
     }
@@ -216,7 +213,7 @@ class InvoicesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Invoice::from($data);
     }
@@ -244,7 +241,7 @@ class InvoicesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): Invoice => Invoice::from($item), $data),
@@ -297,7 +294,7 @@ class InvoicesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): CreditMemoAllocation => CreditMemoAllocation::from($item), $data),
@@ -346,7 +343,7 @@ class InvoicesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): InvoiceItem => InvoiceItem::from($item), $data),
@@ -401,7 +398,7 @@ class InvoicesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): InvoiceTimeline => InvoiceTimeline::from($item), $data),
@@ -454,7 +451,7 @@ class InvoicesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): InvoiceTransactionAllocation => InvoiceTransactionAllocation::from($item), $data),
@@ -497,7 +494,7 @@ class InvoicesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CreditMemoAllocation::from($data);
     }
@@ -518,7 +515,7 @@ class InvoicesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return InvoiceItem::from($data);
     }
@@ -539,7 +536,7 @@ class InvoicesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return InvoiceTimeline::from($data);
     }
@@ -557,9 +554,9 @@ class InvoicesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/invoices/{id}/issue');
 
-        $request = new Request('POST', $uri, body: json_encode($invoiceIssue));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($invoiceIssue));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Invoice::from($data);
     }
@@ -578,7 +575,7 @@ class InvoicesApi
 
         $request = new Request('POST', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Invoice::from($data);
     }
@@ -596,9 +593,9 @@ class InvoicesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/invoices/{id}/reissue');
 
-        $request = new Request('POST', $uri, body: json_encode($invoiceReissue));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($invoiceReissue));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Invoice::from($data);
     }
@@ -616,9 +613,9 @@ class InvoicesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/invoices/{id}');
 
-        $request = new Request('PUT', $uri, body: json_encode($invoice));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($invoice));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Invoice::from($data);
     }
@@ -638,9 +635,9 @@ class InvoicesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/invoices/{id}/items/{itemId}');
 
-        $request = new Request('PUT', $uri, body: json_encode($invoiceItem));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($invoiceItem));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return InvoiceItem::from($data);
     }
@@ -659,7 +656,7 @@ class InvoicesApi
 
         $request = new Request('POST', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Invoice::from($data);
     }

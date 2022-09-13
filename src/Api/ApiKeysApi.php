@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\ApiKey;
 use Rebilly\Sdk\Paginator;
@@ -37,9 +34,9 @@ class ApiKeysApi
     ): ApiKey {
         $uri = '/api-keys';
 
-        $request = new Request('POST', $uri, body: json_encode($apiKey));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($apiKey));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ApiKey::from($data);
     }
@@ -71,7 +68,7 @@ class ApiKeysApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ApiKey::from($data);
     }
@@ -93,7 +90,7 @@ class ApiKeysApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): ApiKey => ApiKey::from($item), $data),
@@ -133,9 +130,9 @@ class ApiKeysApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/api-keys/{id}');
 
-        $request = new Request('PUT', $uri, body: json_encode($apiKey));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($apiKey));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ApiKey::from($data);
     }

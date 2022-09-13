@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\FinancialSettings;
 use Rebilly\Sdk\Model\GatewayAccount;
@@ -60,7 +57,7 @@ class GatewayAccountsApi
 
         $request = new Request('POST', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GatewayAccount::from($data);
     }
@@ -73,9 +70,9 @@ class GatewayAccountsApi
     ): GatewayAccount {
         $uri = '/gateway-accounts';
 
-        $request = new Request('POST', $uri, body: json_encode($gatewayAccount));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($gatewayAccount));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GatewayAccount::from($data);
     }
@@ -93,9 +90,9 @@ class GatewayAccountsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}/downtime-schedules');
 
-        $request = new Request('POST', $uri, body: json_encode($gatewayAccountDowntimeSchedule));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($gatewayAccountDowntimeSchedule));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GatewayAccountDowntimeSchedule::from($data);
     }
@@ -113,9 +110,9 @@ class GatewayAccountsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}/timeline');
 
-        $request = new Request('POST', $uri, body: json_encode($gatewayAccountTimeline));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($gatewayAccountTimeline));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GatewayAccountTimeline::from($data);
     }
@@ -192,7 +189,7 @@ class GatewayAccountsApi
 
         $request = new Request('POST', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GatewayAccount::from($data);
     }
@@ -211,7 +208,7 @@ class GatewayAccountsApi
 
         $request = new Request('POST', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GatewayAccount::from($data);
     }
@@ -230,7 +227,7 @@ class GatewayAccountsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GatewayAccount::from($data);
     }
@@ -258,7 +255,7 @@ class GatewayAccountsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): GatewayAccount => GatewayAccount::from($item), $data),
@@ -315,7 +312,7 @@ class GatewayAccountsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): GatewayAccountDowntimeSchedule => GatewayAccountDowntimeSchedule::from($item), $data),
@@ -372,7 +369,7 @@ class GatewayAccountsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): GatewayAccountTimeline => GatewayAccountTimeline::from($item), $data),
@@ -419,7 +416,7 @@ class GatewayAccountsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return array_map(fn (array $item): GatewayAccountLimit => GatewayAccountLimit::from($item), $data);
     }
@@ -440,7 +437,7 @@ class GatewayAccountsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GatewayAccountDowntimeSchedule::from($data);
     }
@@ -459,7 +456,7 @@ class GatewayAccountsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return FinancialSettings::from($data);
     }
@@ -480,7 +477,7 @@ class GatewayAccountsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GatewayAccountTimeline::from($data);
     }
@@ -501,7 +498,7 @@ class GatewayAccountsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GatewayAccountLimit::from($data);
     }
@@ -519,9 +516,9 @@ class GatewayAccountsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}/financial-settings');
 
-        $request = new Request('PUT', $uri, body: json_encode($financialSettings));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($financialSettings));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return FinancialSettings::from($data);
     }
@@ -539,9 +536,9 @@ class GatewayAccountsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}');
 
-        $request = new Request('PUT', $uri, body: json_encode($gatewayAccount));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($gatewayAccount));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GatewayAccount::from($data);
     }
@@ -561,9 +558,9 @@ class GatewayAccountsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}/downtime-schedules/{downtimeId}');
 
-        $request = new Request('PUT', $uri, body: json_encode($gatewayAccountDowntimeSchedule));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($gatewayAccountDowntimeSchedule));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GatewayAccountDowntimeSchedule::from($data);
     }
@@ -583,9 +580,9 @@ class GatewayAccountsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}/limits/{limitId}');
 
-        $request = new Request('PUT', $uri, body: json_encode($gatewayAccountLimit));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($gatewayAccountLimit));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GatewayAccountLimit::from($data);
     }
@@ -603,9 +600,9 @@ class GatewayAccountsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}');
 
-        $request = new Request('PATCH', $uri, body: json_encode($gatewayAccount));
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($gatewayAccount));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GatewayAccount::from($data);
     }

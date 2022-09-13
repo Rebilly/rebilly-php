@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\ShippingRate;
 use Rebilly\Sdk\Paginator;
@@ -37,9 +34,9 @@ class ShippingRatesApi
     ): ShippingRate {
         $uri = '/shipping-rates';
 
-        $request = new Request('POST', $uri, body: json_encode($shippingRate));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($shippingRate));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ShippingRate::from($data);
     }
@@ -71,7 +68,7 @@ class ShippingRatesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ShippingRate::from($data);
     }
@@ -97,7 +94,7 @@ class ShippingRatesApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): ShippingRate => ShippingRate::from($item), $data),
@@ -141,9 +138,9 @@ class ShippingRatesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/shipping-rates/{id}');
 
-        $request = new Request('PUT', $uri, body: json_encode($shippingRate));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($shippingRate));
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ShippingRate::from($data);
     }

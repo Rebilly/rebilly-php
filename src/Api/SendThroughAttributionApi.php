@@ -14,10 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Api;
 
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Model\SendThroughAttribution;
 
 class SendThroughAttributionApi
@@ -40,7 +38,7 @@ class SendThroughAttributionApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return array_map(fn (array $item): SendThroughAttribution => SendThroughAttribution::from($item), $data);
     }

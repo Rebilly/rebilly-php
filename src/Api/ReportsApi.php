@@ -15,10 +15,8 @@ namespace Rebilly\Sdk\Api;
 
 use DateTimeImmutable;
 use GuzzleHttp\ClientInterface;
-
-use function GuzzleHttp\json_decode;
-
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\APILogSummary;
 use Rebilly\Sdk\Model\CumulativeSubscriptions;
@@ -71,7 +69,7 @@ class ReportsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return APILogSummary::from($data);
     }
@@ -99,7 +97,7 @@ class ReportsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CumulativeSubscriptions::from($data);
     }
@@ -123,7 +121,7 @@ class ReportsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return DashboardResponse::from($data);
     }
@@ -151,7 +149,7 @@ class ReportsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return DccMarkup::from($data);
     }
@@ -177,7 +175,7 @@ class ReportsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ReportDisputes::from($data);
     }
@@ -201,7 +199,7 @@ class ReportsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ReportEventsTriggeredSummary::from($data);
     }
@@ -225,7 +223,7 @@ class ReportsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return FutureRenewals::from($data);
     }
@@ -257,7 +255,7 @@ class ReportsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ReportJournal::from($data);
     }
@@ -277,7 +275,7 @@ class ReportsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GetKycAcceptanceSummaryResponse::from($data);
     }
@@ -297,7 +295,7 @@ class ReportsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ReportKycRejections::from($data);
     }
@@ -317,7 +315,7 @@ class ReportsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ReportKycRequests::from($data);
     }
@@ -343,7 +341,7 @@ class ReportsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ReportMonthlyRecurringRevenue::from($data);
     }
@@ -367,7 +365,7 @@ class ReportsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return RenewalSales::from($data);
     }
@@ -401,7 +399,7 @@ class ReportsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ReportRetentionPercentage::from($data);
     }
@@ -439,7 +437,7 @@ class ReportsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ReportRetentionValue::from($data);
     }
@@ -463,7 +461,7 @@ class ReportsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
             array_map(fn (array $item): RevenueEntry => RevenueEntry::from($item), $data),
@@ -511,7 +509,7 @@ class ReportsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ReportRevenueWaterfall::from($data);
     }
@@ -539,7 +537,7 @@ class ReportsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return SubscriptionCancellationReport::from($data);
     }
@@ -563,7 +561,7 @@ class ReportsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return SubscriptionRenewal::from($data);
     }
@@ -587,7 +585,7 @@ class ReportsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return TimeSeriesTransaction::from($data);
     }
@@ -615,7 +613,7 @@ class ReportsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ReportTransactions::from($data);
     }
@@ -643,7 +641,7 @@ class ReportsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ReportDisputeDelays::from($data);
     }
@@ -672,7 +670,7 @@ class ReportsApi
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ReportRulesMatchedSummary::from($data);
     }
