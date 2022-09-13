@@ -87,6 +87,7 @@ abstract class AdjustPaymentMethod implements JsonSerializable
             case 'Piastrix':
             case 'cash-deposit':
             case 'Bancontact-mobile':
+            case 'SafetyPay':
             case 'Tele2':
             case 'Perfect-money':
             case 'Khelocard':
