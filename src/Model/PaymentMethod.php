@@ -147,6 +147,7 @@ enum PaymentMethod: string
     case QQ_PAY = 'QQPay';
     case RAPYD_CHECKOUT = 'rapyd-checkout';
     case RESURS = 'Resurs';
+    case SAFETY_PAY = 'SafetyPay';
     case SEPA = 'SEPA';
     case SIIRTO = 'Siirto';
     case SKRILL = 'Skrill';

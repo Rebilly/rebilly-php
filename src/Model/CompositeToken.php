@@ -88,6 +88,7 @@ abstract class CompositeToken extends CommonPaymentToken
             case 'Piastrix':
             case 'cash-deposit':
             case 'Bancontact-mobile':
+            case 'SafetyPay':
             case 'Tele2':
             case 'Perfect-money':
             case 'Onlineueberweisen':
