@@ -1,0 +1,66 @@
+<?php
+/**
+ * This source file is proprietary and part of Rebilly.
+ *
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
+ *
+ * @see https://www.rebilly.com
+ */
+
+declare(strict_types=1);
+
+namespace Rebilly\Sdk;
+
+use Rebilly\Sdk\Api as Api;
+
+class ReportsService
+{
+    private readonly Client $client;
+
+    private readonly Api\CustomersApi $customers;
+
+    private readonly Api\DataExportsApi $dataExports;
+
+    private readonly Api\HistogramsApi $histograms;
+
+    private readonly Api\ReportsApi $reports;
+
+    private readonly Api\SubscriptionsApi $subscriptions;
+
+    public function __construct(Client $client = null, array $config = [])
+    {
+        $this->client = $client ?? new Client($config);
+        $this->customers = new Api\CustomersApi($this->client);
+        $this->dataExports = new Api\DataExportsApi($this->client);
+        $this->histograms = new Api\HistogramsApi($this->client);
+        $this->reports = new Api\ReportsApi($this->client);
+        $this->subscriptions = new Api\SubscriptionsApi($this->client);
+    }
+
+    public function customers(): Api\CustomersApi
+    {
+        return $this->customers;
+    }
+
+    public function dataExports(): Api\DataExportsApi
+    {
+        return $this->dataExports;
+    }
+
+    public function histograms(): Api\HistogramsApi
+    {
+        return $this->histograms;
+    }
+
+    public function reports(): Api\ReportsApi
+    {
+        return $this->reports;
+    }
+
+    public function subscriptions(): Api\SubscriptionsApi
+    {
+        return $this->subscriptions;
+    }
+}
