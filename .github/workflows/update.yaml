@@ -37,7 +37,7 @@ jobs:
     needs: build-api-definitions
     strategy:
       matrix:
-        api: ['core', 'user']
+        api: ['core', 'user', 'reports']
     steps:
       - name: Prepare variables
         id: prep
@@ -52,6 +52,11 @@ jobs:
           if [[ "${{ matrix.api }}" == "user" ]]; then
             OPENAPI_URI="/definitions/users.yaml"
             SERVICE_NAME="UserService"
+          fi
+          if [[ "${{ matrix.api }}" == "reports" ]]; then
+            OPENAPI_URI="/definitions/reports.yaml"
+            SERVICE_NAME="ReportsService"
+            MAPPING_SEGMENT="reports"
           fi
           echo ::set-output name=openapi-uri::${OPENAPI_URI}
           echo ::set-output name=service-name::${SERVICE_NAME}
@@ -148,7 +153,8 @@ jobs:
         run: |
           rm -rf sdk/{tests,src,composer.json,.php-cs-fixer.php} && \
           php ./generator/php/merge-apis.php ./sdk /tmp/generated/*-sdk && \
-          php ./generator/php/remove-fqcns.php ./sdk
+          php ./generator/php/remove-fqcns.php ./sdk && \
+          php ./generator/php/remove-unused-models.php ./sdk
 
       - name: Install composer dependencies
         working-directory: ./sdk
