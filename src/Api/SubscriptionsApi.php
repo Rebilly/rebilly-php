@@ -26,6 +26,7 @@ use Rebilly\Sdk\Model\OrderTimeline;
 use Rebilly\Sdk\Model\Subscription;
 use Rebilly\Sdk\Model\SubscriptionChange;
 use Rebilly\Sdk\Model\SubscriptionInvoice;
+use Rebilly\Sdk\Model\SubscriptionSummaryMetrics;
 use Rebilly\Sdk\Paginator;
 
 class SubscriptionsApi
@@ -386,5 +387,24 @@ class SubscriptionsApi
         $data = json_decode((string) $response->getBody(), true);
 
         return Subscription::from($data);
+    }
+
+    /**
+     * @return SubscriptionSummaryMetrics
+     */
+    public function getSubscriptionSummaryMetrics(
+        string $subscriptionId,
+    ): SubscriptionSummaryMetrics {
+        $pathParams = [
+            '{subscriptionId}' => $subscriptionId,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/experimental/subscriptions/{subscriptionId}/summary-metrics');
+
+        $request = new Request('GET', $uri);
+        $response = $this->client->send($request);
+        $data = json_decode((string) $response->getBody(), true);
+
+        return SubscriptionSummaryMetrics::from($data);
     }
 }

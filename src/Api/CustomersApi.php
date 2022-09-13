@@ -22,6 +22,7 @@ use GuzzleHttp\Psr7\Request;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\AML;
 use Rebilly\Sdk\Model\Customer;
+use Rebilly\Sdk\Model\CustomerInformation;
 use Rebilly\Sdk\Model\CustomerTimeline;
 use Rebilly\Sdk\Model\Edd;
 use Rebilly\Sdk\Model\EddSearchResult;
@@ -546,5 +547,24 @@ class CustomersApi
         $data = json_decode((string) $response->getBody(), true);
 
         return Customer::from($data);
+    }
+
+    /**
+     * @return CustomerInformation
+     */
+    public function getCustomerLifetimeSummaryMetrics(
+        string $customerId,
+    ): CustomerInformation {
+        $pathParams = [
+            '{customerId}' => $customerId,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/experimental/customers/{customerId}/summary-metrics');
+
+        $request = new Request('GET', $uri);
+        $response = $this->client->send($request);
+        $data = json_decode((string) $response->getBody(), true);
+
+        return CustomerInformation::from($data);
     }
 }
