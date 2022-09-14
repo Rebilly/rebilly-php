@@ -102,6 +102,9 @@ class RiskMetadata implements JsonSerializable
         if (array_key_exists('paymentInstrumentVelocity', $data)) {
             $this->setPaymentInstrumentVelocity($data['paymentInstrumentVelocity']);
         }
+        if (array_key_exists('declinedPaymentInstrumentVelocity', $data)) {
+            $this->setDeclinedPaymentInstrumentVelocity($data['declinedPaymentInstrumentVelocity']);
+        }
         if (array_key_exists('deviceVelocity', $data)) {
             $this->setDeviceVelocity($data['deviceVelocity']);
         }
@@ -302,6 +305,11 @@ class RiskMetadata implements JsonSerializable
         return $this->fields['paymentInstrumentVelocity'] ?? null;
     }
 
+    public function getDeclinedPaymentInstrumentVelocity(): ?int
+    {
+        return $this->fields['declinedPaymentInstrumentVelocity'] ?? null;
+    }
+
     public function getDeviceVelocity(): ?int
     {
         return $this->fields['deviceVelocity'] ?? null;
@@ -410,6 +418,9 @@ class RiskMetadata implements JsonSerializable
         }
         if (array_key_exists('paymentInstrumentVelocity', $this->fields)) {
             $data['paymentInstrumentVelocity'] = $this->fields['paymentInstrumentVelocity'];
+        }
+        if (array_key_exists('declinedPaymentInstrumentVelocity', $this->fields)) {
+            $data['declinedPaymentInstrumentVelocity'] = $this->fields['declinedPaymentInstrumentVelocity'];
         }
         if (array_key_exists('deviceVelocity', $this->fields)) {
             $data['deviceVelocity'] = $this->fields['deviceVelocity'];
@@ -588,6 +599,13 @@ class RiskMetadata implements JsonSerializable
     private function setPaymentInstrumentVelocity(null|int $paymentInstrumentVelocity): self
     {
         $this->fields['paymentInstrumentVelocity'] = $paymentInstrumentVelocity;
+
+        return $this;
+    }
+
+    private function setDeclinedPaymentInstrumentVelocity(null|int $declinedPaymentInstrumentVelocity): self
+    {
+        $this->fields['declinedPaymentInstrumentVelocity'] = $declinedPaymentInstrumentVelocity;
 
         return $this;
     }
