@@ -112,7 +112,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: 'v3.0-dev'
+          ref: 'v3.x'
           path: 'sdk'
 
       - uses: actions/checkout@v2
@@ -174,7 +174,7 @@ jobs:
           title: 'chore: update SDK from api-definitions'
           commit-message: update SDK from api-definitions
           branch: automations/update-sdk-from-api-definitions
-          base: v3.0-dev
+          base: v3.x
           # Delete the branch when closing PRs or merging
           delete-branch: true
           body: This PR is automatically generated and updates SDK based on a change in the API definitions
