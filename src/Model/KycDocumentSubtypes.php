@@ -35,5 +35,10 @@ enum KycDocumentSubtypes: string
     case PUBLIC_SERVICE = 'public-service';
     case EWALLET_HOLDER_DETAILS = 'ewallet-holder-details';
     case EWALLET_TRANSACTION_STATEMENT = 'ewallet-transaction-statement';
+    case MARRIAGE_CERTIFICATE = 'marriage-certificate';
+    case FIREARMS_LICENSE = 'firearms-license';
+    case INSURANCE_LETTER = 'insurance-letter';
+    case INCOME_STATEMENT = 'income-statement';
+    case DEBTORS_LETTER = 'debtors-letter';
     case OTHER = 'other';
 }

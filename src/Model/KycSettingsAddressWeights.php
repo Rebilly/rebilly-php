@@ -45,6 +45,9 @@ class KycSettingsAddressWeights implements JsonSerializable
         if (array_key_exists('phone', $data)) {
             $this->setPhone($data['phone']);
         }
+        if (array_key_exists('documentSubtype', $data)) {
+            $this->setDocumentSubtype($data['documentSubtype']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -148,6 +151,18 @@ class KycSettingsAddressWeights implements JsonSerializable
         return $this;
     }
 
+    public function getDocumentSubtype(): ?int
+    {
+        return $this->fields['documentSubtype'] ?? null;
+    }
+
+    public function setDocumentSubtype(null|int $documentSubtype): self
+    {
+        $this->fields['documentSubtype'] = $documentSubtype;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -174,6 +189,9 @@ class KycSettingsAddressWeights implements JsonSerializable
         }
         if (array_key_exists('phone', $this->fields)) {
             $data['phone'] = $this->fields['phone'];
+        }
+        if (array_key_exists('documentSubtype', $this->fields)) {
+            $data['documentSubtype'] = $this->fields['documentSubtype'];
         }
 
         return $data;
