@@ -57,6 +57,9 @@ class KycSettingsIdentityWeights implements JsonSerializable
         if (array_key_exists('nationality', $data)) {
             $this->setNationality($data['nationality']);
         }
+        if (array_key_exists('documentSubtype', $data)) {
+            $this->setDocumentSubtype($data['documentSubtype']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -208,6 +211,18 @@ class KycSettingsIdentityWeights implements JsonSerializable
         return $this;
     }
 
+    public function getDocumentSubtype(): ?int
+    {
+        return $this->fields['documentSubtype'] ?? null;
+    }
+
+    public function setDocumentSubtype(null|int $documentSubtype): self
+    {
+        $this->fields['documentSubtype'] = $documentSubtype;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -246,6 +261,9 @@ class KycSettingsIdentityWeights implements JsonSerializable
         }
         if (array_key_exists('nationality', $this->fields)) {
             $data['nationality'] = $this->fields['nationality'];
+        }
+        if (array_key_exists('documentSubtype', $this->fields)) {
+            $data['documentSubtype'] = $this->fields['documentSubtype'];
         }
 
         return $data;
