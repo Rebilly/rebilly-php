@@ -43,6 +43,7 @@ enum PaymentMethod: string
     case BEELINE = 'Beeline';
     case BELFIUS_DIRECT_NET = 'Belfius-direct-net';
     case BITCOIN = 'bitcoin';
+    case BIZUM = 'Bizum';
     case BLIK = 'Blik';
     case BOLETO = 'Boleto';
     case BOLETO_2 = 'Boleto-2';
@@ -71,6 +72,7 @@ enum PaymentMethod: string
     case E_WALLET = 'e-wallet';
     case EZY_EFT = 'ezyEFT';
     case E_ZEE_WALLET = 'eZeeWallet';
+    case FASTER_PAY = 'FasterPay';
     case FLEXEPIN = 'Flexepin';
     case GIROPAY = 'Giropay';
     case GOOGLE_PAY = 'Google Pay';
