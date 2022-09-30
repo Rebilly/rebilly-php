@@ -21,14 +21,6 @@ final class TransactionAllocation extends Entity
     /**
      * @return string
      */
-    public function getCreditMemoId()
-    {
-        return $this->getAttribute('creditMemoId');
-    }
-
-    /**
-     * @return string
-     */
     public function getTransactionId()
     {
         return $this->getAttribute('transactionId');
