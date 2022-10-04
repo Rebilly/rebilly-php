@@ -262,7 +262,7 @@ final class CreditMemo extends Entity
      *
      * @return $this
      */
-    public function setAllocations(array $value)
+    public function setAllocations($value)
     {
         return $this->setAttribute('allocations', $value);
     }
