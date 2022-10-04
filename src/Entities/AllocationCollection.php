@@ -19,6 +19,16 @@ use Rebilly\Rest\Entity;
 final class AllocationCollection extends Entity
 {
     /**
+     * @param array $data
+     *
+     * @return AllocationCollection
+     */
+    public static function createFromData(array $data)
+    {
+        return new self($data);
+    }
+
+    /**
      * @return TransactionAllocation[]
      */
     public function getTransactions()
@@ -34,5 +44,17 @@ final class AllocationCollection extends Entity
     public function setTransactions($value)
     {
         return $this->setAttribute('transactions', $value);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return array|TransactionAllocation[]
+     */
+    public function createTransactions(array $data)
+    {
+        return array_map(function ($element) {
+            return new TransactionAllocation($element);
+        }, $data);
     }
 }
