@@ -53,8 +53,12 @@ final class AllocationCollection extends Entity
      */
     public function createTransactions(array $data)
     {
-        return array_map(function ($element) {
-            return new TransactionAllocation($element);
+        return array_map(function ($item) {
+            if ($item instanceof TransactionAllocation) {
+                return $item;
+            }
+
+            return new TransactionAllocation($item);
         }, $data);
     }
 }
