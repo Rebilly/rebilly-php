@@ -801,6 +801,10 @@ abstract class TestCase extends Framework\TestCase
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
                         );
                 }
+            case 'allocations':
+                return new Entities\AllocationCollection(['transactions' => [new Entities\TransactionAllocation([
+                    'transactionId' => 'transaction-1',
+                ])]]);
         }
     }
 

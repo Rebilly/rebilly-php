@@ -250,6 +250,34 @@ final class CreditMemo extends Entity
     }
 
     /**
+     * @return AllocationCollection
+     */
+    public function getAllocations()
+    {
+        return $this->getAttribute('allocations');
+    }
+
+    /**
+     * @param AllocationCollection|array $value
+     *
+     * @return $this
+     */
+    public function setAllocations($value)
+    {
+        return $this->setAttribute('allocations', $value);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return AllocationCollection
+     */
+    public function createAllocations(array $data)
+    {
+        return AllocationCollection::createFromData($data);
+    }
+
+    /**
      * @return int
      */
     public function getRevision()

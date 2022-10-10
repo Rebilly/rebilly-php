@@ -16,6 +16,7 @@ Security - in case of vulnerabilities.
 ## [Unreleased]
 
 - [x] Added new property to `Subscription`: `paymentInstrumentId`
+- [x] Added new property to `CreditMemo`: `allocations`
 
 ## [2.19.0] 2022-06-22
 
