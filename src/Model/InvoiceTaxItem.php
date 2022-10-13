@@ -42,6 +42,18 @@ class InvoiceTaxItem implements JsonSerializable
         if (array_key_exists('specialDistrictAmount', $data)) {
             $this->setSpecialDistrictAmount($data['specialDistrictAmount']);
         }
+        if (array_key_exists('stateRate', $data)) {
+            $this->setStateRate($data['stateRate']);
+        }
+        if (array_key_exists('countyRate', $data)) {
+            $this->setCountyRate($data['countyRate']);
+        }
+        if (array_key_exists('cityRate', $data)) {
+            $this->setCityRate($data['cityRate']);
+        }
+        if (array_key_exists('specialDistrictRate', $data)) {
+            $this->setSpecialDistrictRate($data['specialDistrictRate']);
+        }
         if (array_key_exists('jurisdictions', $data)) {
             $this->setJurisdictions($data['jurisdictions']);
         }
@@ -105,6 +117,26 @@ class InvoiceTaxItem implements JsonSerializable
         return $this->fields['specialDistrictAmount'] ?? null;
     }
 
+    public function getStateRate(): ?float
+    {
+        return $this->fields['stateRate'] ?? null;
+    }
+
+    public function getCountyRate(): ?float
+    {
+        return $this->fields['countyRate'] ?? null;
+    }
+
+    public function getCityRate(): ?float
+    {
+        return $this->fields['cityRate'] ?? null;
+    }
+
+    public function getSpecialDistrictRate(): ?float
+    {
+        return $this->fields['specialDistrictRate'] ?? null;
+    }
+
     public function getJurisdictions(): ?InvoiceTaxItemJurisdictions
     {
         return $this->fields['jurisdictions'] ?? null;
@@ -144,6 +176,18 @@ class InvoiceTaxItem implements JsonSerializable
         }
         if (array_key_exists('specialDistrictAmount', $this->fields)) {
             $data['specialDistrictAmount'] = $this->fields['specialDistrictAmount'];
+        }
+        if (array_key_exists('stateRate', $this->fields)) {
+            $data['stateRate'] = $this->fields['stateRate'];
+        }
+        if (array_key_exists('countyRate', $this->fields)) {
+            $data['countyRate'] = $this->fields['countyRate'];
+        }
+        if (array_key_exists('cityRate', $this->fields)) {
+            $data['cityRate'] = $this->fields['cityRate'];
+        }
+        if (array_key_exists('specialDistrictRate', $this->fields)) {
+            $data['specialDistrictRate'] = $this->fields['specialDistrictRate'];
         }
         if (array_key_exists('jurisdictions', $this->fields)) {
             $data['jurisdictions'] = $this->fields['jurisdictions']?->jsonSerialize();
@@ -203,6 +247,50 @@ class InvoiceTaxItem implements JsonSerializable
         }
 
         $this->fields['specialDistrictAmount'] = $specialDistrictAmount;
+
+        return $this;
+    }
+
+    private function setStateRate(null|float|string $stateRate): self
+    {
+        if (is_string($stateRate)) {
+            $stateRate = (float) $stateRate;
+        }
+
+        $this->fields['stateRate'] = $stateRate;
+
+        return $this;
+    }
+
+    private function setCountyRate(null|float|string $countyRate): self
+    {
+        if (is_string($countyRate)) {
+            $countyRate = (float) $countyRate;
+        }
+
+        $this->fields['countyRate'] = $countyRate;
+
+        return $this;
+    }
+
+    private function setCityRate(null|float|string $cityRate): self
+    {
+        if (is_string($cityRate)) {
+            $cityRate = (float) $cityRate;
+        }
+
+        $this->fields['cityRate'] = $cityRate;
+
+        return $this;
+    }
+
+    private function setSpecialDistrictRate(null|float|string $specialDistrictRate): self
+    {
+        if (is_string($specialDistrictRate)) {
+            $specialDistrictRate = (float) $specialDistrictRate;
+        }
+
+        $this->fields['specialDistrictRate'] = $specialDistrictRate;
 
         return $this;
     }

@@ -79,6 +79,8 @@ class CoreService
 
     private readonly Api\TransactionsApi $transactions;
 
+    private readonly Api\UsagesApi $usages;
+
     public function __construct(Client $client = null, array $config = [])
     {
         $this->client = $client ?? new Client($config);
@@ -112,6 +114,7 @@ class CoreService
         $this->subscriptions = new Api\SubscriptionsApi($this->client);
         $this->tags = new Api\TagsApi($this->client);
         $this->transactions = new Api\TransactionsApi($this->client);
+        $this->usages = new Api\UsagesApi($this->client);
     }
 
     public function aml(): Api\AmlApi
@@ -262,5 +265,10 @@ class CoreService
     public function transactions(): Api\TransactionsApi
     {
         return $this->transactions;
+    }
+
+    public function usages(): Api\UsagesApi
+    {
+        return $this->usages;
     }
 }

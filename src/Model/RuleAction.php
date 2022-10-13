@@ -40,8 +40,6 @@ abstract class RuleAction implements JsonSerializable
 
     public const NAME_CREATE_KEAP_INFUSIONSOFT_PAYMENT = 'create-keap-infusionsoft-payment';
 
-    public const NAME_CREATE_TAXJAR_TRANSACTION = 'create-taxjar-transaction';
-
     public const NAME_DECLINE_TRANSACTION = 'decline-transaction';
 
     public const NAME_DISPLAY_MESSAGE = 'display-message';
@@ -97,8 +95,6 @@ abstract class RuleAction implements JsonSerializable
         switch ($data['name']) {
             case 'trigger-webhook':
                 return new TriggerWebhook($data);
-            case 'create-taxjar-transaction':
-                return new CreateTaxjarTransaction($data);
             case 'request-kyc':
                 return new RequestKyc($data);
             case 'perform-experian-check':

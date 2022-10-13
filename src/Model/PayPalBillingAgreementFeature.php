@@ -29,6 +29,9 @@ class PayPalBillingAgreementFeature implements JsonSerializable
         if (array_key_exists('paypalMerchantId', $data)) {
             $this->setPaypalMerchantId($data['paypalMerchantId']);
         }
+        if (array_key_exists('paypalClientId', $data)) {
+            $this->setPaypalClientId($data['paypalClientId']);
+        }
         if (array_key_exists('billingAgreementToken', $data)) {
             $this->setBillingAgreementToken($data['billingAgreementToken']);
         }
@@ -70,6 +73,18 @@ class PayPalBillingAgreementFeature implements JsonSerializable
         return $this;
     }
 
+    public function getPaypalClientId(): string
+    {
+        return $this->fields['paypalClientId'];
+    }
+
+    public function setPaypalClientId(string $paypalClientId): self
+    {
+        $this->fields['paypalClientId'] = $paypalClientId;
+
+        return $this;
+    }
+
     public function getBillingAgreementToken(): string
     {
         return $this->fields['billingAgreementToken'];
@@ -106,6 +121,9 @@ class PayPalBillingAgreementFeature implements JsonSerializable
         }
         if (array_key_exists('paypalMerchantId', $this->fields)) {
             $data['paypalMerchantId'] = $this->fields['paypalMerchantId'];
+        }
+        if (array_key_exists('paypalClientId', $this->fields)) {
+            $data['paypalClientId'] = $this->fields['paypalClientId'];
         }
         if (array_key_exists('billingAgreementToken', $this->fields)) {
             $data['billingAgreementToken'] = $this->fields['billingAgreementToken'];

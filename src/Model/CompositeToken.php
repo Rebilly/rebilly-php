@@ -141,6 +141,7 @@ abstract class CompositeToken extends CommonPaymentToken
             case 'China UnionPay':
             case 'InstaDebit':
             case 'ToditoCash-card':
+            case 'InstantPayments':
             case 'online-bank-transfer':
             case 'UPayCard':
             case 'Webmoney':

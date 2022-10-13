@@ -140,6 +140,7 @@ abstract class ReadyToPayMethods implements JsonSerializable
             case 'China UnionPay':
             case 'InstaDebit':
             case 'ToditoCash-card':
+            case 'InstantPayments':
             case 'online-bank-transfer':
             case 'UPayCard':
             case 'Webmoney':

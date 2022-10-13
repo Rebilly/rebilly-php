@@ -61,6 +61,9 @@ class CreditMemo implements JsonSerializable
         if (array_key_exists('number', $data)) {
             $this->setNumber($data['number']);
         }
+        if (array_key_exists('allocations', $data)) {
+            $this->setAllocations($data['allocations']);
+        }
         if (array_key_exists('items', $data)) {
             $this->setItems($data['items']);
         }
@@ -139,6 +142,22 @@ class CreditMemo implements JsonSerializable
     public function getNumber(): ?int
     {
         return $this->fields['number'] ?? null;
+    }
+
+    public function getAllocations(): ?CreditMemoAllocations
+    {
+        return $this->fields['allocations'] ?? null;
+    }
+
+    public function setAllocations(null|CreditMemoAllocations|array $allocations): self
+    {
+        if ($allocations !== null && !($allocations instanceof CreditMemoAllocations)) {
+            $allocations = CreditMemoAllocations::from($allocations);
+        }
+
+        $this->fields['allocations'] = $allocations;
+
+        return $this;
     }
 
     /**
@@ -301,6 +320,9 @@ class CreditMemo implements JsonSerializable
         }
         if (array_key_exists('number', $this->fields)) {
             $data['number'] = $this->fields['number'];
+        }
+        if (array_key_exists('allocations', $this->fields)) {
+            $data['allocations'] = $this->fields['allocations']?->jsonSerialize();
         }
         if (array_key_exists('items', $this->fields)) {
             $data['items'] = $this->fields['items'];

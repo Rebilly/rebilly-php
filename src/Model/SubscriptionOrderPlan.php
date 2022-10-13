@@ -29,6 +29,9 @@ class SubscriptionOrderPlan extends CommonPlan
         if (array_key_exists('trial', $data)) {
             $this->setTrial($data['trial']);
         }
+        if (array_key_exists('meteredBilling', $data)) {
+            $this->setMeteredBilling($data['meteredBilling']);
+        }
         if (array_key_exists('invoiceTimeShift', $data)) {
             $this->setInvoiceTimeShift($data['invoiceTimeShift']);
         }
@@ -80,6 +83,32 @@ class SubscriptionOrderPlan extends CommonPlan
         return $this;
     }
 
+    /**
+     * @return null|array{strategy:string,min:float,max:float}
+     */
+    public function getMeteredBilling(): ?array
+    {
+        return $this->fields['meteredBilling'] ?? null;
+    }
+
+    /**
+     * @param null|array{strategy:string,min:float,max:float} $meteredBilling
+     */
+    public function setMeteredBilling(null|array $meteredBilling): self
+    {
+        if ($meteredBilling !== null) {
+            if (!isset($meteredBilling['strategy'])) {
+                throw new InvalidArgumentException('Property \'meteredBilling.strategy\' must be set.');
+            }
+            $meteredBilling['min'] = $meteredBilling['min'] ?? null;
+            $meteredBilling['max'] = $meteredBilling['max'] ?? null;
+        }
+
+        $this->fields['meteredBilling'] = $meteredBilling;
+
+        return $this;
+    }
+
     public function getInvoiceTimeShift(): ?InvoiceTimeShift
     {
         return $this->fields['invoiceTimeShift'] ?? null;
@@ -104,6 +133,9 @@ class SubscriptionOrderPlan extends CommonPlan
         }
         if (array_key_exists('trial', $this->fields)) {
             $data['trial'] = $this->fields['trial'];
+        }
+        if (array_key_exists('meteredBilling', $this->fields)) {
+            $data['meteredBilling'] = $this->fields['meteredBilling'];
         }
         if (array_key_exists('invoiceTimeShift', $this->fields)) {
             $data['invoiceTimeShift'] = $this->fields['invoiceTimeShift']?->jsonSerialize();
