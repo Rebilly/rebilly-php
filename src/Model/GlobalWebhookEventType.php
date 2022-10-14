@@ -99,4 +99,5 @@ enum GlobalWebhookEventType: string
     case TRANSACTION_RECONCILED = 'transaction-reconciled';
     case TRANSACTION_TIMEOUT_RESOLVED = 'transaction-timeout-resolved';
     case WAITING_GATEWAY_TRANSACTION_COMPLETED = 'waiting-gateway-transaction-completed';
+    case DATA_EXPORT_COMPLETED = 'data-export-completed';
 }

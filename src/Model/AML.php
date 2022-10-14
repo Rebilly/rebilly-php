@@ -24,6 +24,8 @@ class AML implements JsonSerializable
 
     public const SOURCE_TYPE_ADVERSE_MEDIA = 'adverse-media';
 
+    public const SOURCE_TYPE_ENFORCEMENTS = 'enforcements';
+
     public const TYPE_INDIVIDUAL = 'individual';
 
     public const TYPE_ENTITY = 'entity';
@@ -114,9 +116,11 @@ class AML implements JsonSerializable
     }
 
     /**
+     * @return null|string[]
+     *
      * @psalm-return self::SOURCE_TYPE_*|null $sourceType
      */
-    public function getSourceType(): ?string
+    public function getSourceType(): ?array
     {
         return $this->fields['sourceType'] ?? null;
     }
@@ -293,10 +297,14 @@ class AML implements JsonSerializable
     }
 
     /**
+     * @param null|string[] $sourceType
+     *
      * @psalm-param self::SOURCE_TYPE_*|null $sourceType
      */
-    private function setSourceType(null|string $sourceType): self
+    private function setSourceType(null|array $sourceType): self
     {
+        $sourceType = $sourceType !== null ? array_map(fn ($value) => $value ?? null, $sourceType) : null;
+
         $this->fields['sourceType'] = $sourceType;
 
         return $this;

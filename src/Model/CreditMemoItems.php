@@ -45,6 +45,9 @@ class CreditMemoItems implements JsonSerializable
         if (array_key_exists('planId', $data)) {
             $this->setPlanId($data['planId']);
         }
+        if (array_key_exists('taxAmount', $data)) {
+            $this->setTaxAmount($data['taxAmount']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -138,6 +141,22 @@ class CreditMemoItems implements JsonSerializable
         return $this;
     }
 
+    public function getTaxAmount(): ?float
+    {
+        return $this->fields['taxAmount'] ?? null;
+    }
+
+    public function setTaxAmount(null|float|string $taxAmount): self
+    {
+        if (is_string($taxAmount)) {
+            $taxAmount = (float) $taxAmount;
+        }
+
+        $this->fields['taxAmount'] = $taxAmount;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -164,6 +183,9 @@ class CreditMemoItems implements JsonSerializable
         }
         if (array_key_exists('planId', $this->fields)) {
             $data['planId'] = $this->fields['planId'];
+        }
+        if (array_key_exists('taxAmount', $this->fields)) {
+            $data['taxAmount'] = $this->fields['taxAmount'];
         }
 
         return $data;

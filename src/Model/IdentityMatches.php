@@ -68,6 +68,9 @@ class IdentityMatches implements JsonSerializable
         if (array_key_exists('documentSubtype', $data)) {
             $this->setDocumentSubtype($data['documentSubtype']);
         }
+        if (array_key_exists('hasMatchingFaceProof', $data)) {
+            $this->setHasMatchingFaceProof($data['hasMatchingFaceProof']);
+        }
         if (array_key_exists('expiryDate', $data)) {
             $this->setExpiryDate($data['expiryDate']);
         }
@@ -259,6 +262,18 @@ class IdentityMatches implements JsonSerializable
         return $this;
     }
 
+    public function getHasMatchingFaceProof(): ?bool
+    {
+        return $this->fields['hasMatchingFaceProof'] ?? null;
+    }
+
+    public function setHasMatchingFaceProof(null|bool $hasMatchingFaceProof): self
+    {
+        $this->fields['hasMatchingFaceProof'] = $hasMatchingFaceProof;
+
+        return $this;
+    }
+
     public function getExpiryDate(): ?DateTimeImmutable
     {
         return $this->fields['expiryDate'] ?? null;
@@ -322,6 +337,9 @@ class IdentityMatches implements JsonSerializable
         }
         if (array_key_exists('documentSubtype', $this->fields)) {
             $data['documentSubtype'] = $this->fields['documentSubtype'];
+        }
+        if (array_key_exists('hasMatchingFaceProof', $this->fields)) {
+            $data['hasMatchingFaceProof'] = $this->fields['hasMatchingFaceProof'];
         }
         if (array_key_exists('expiryDate', $this->fields)) {
             $data['expiryDate'] = $this->fields['expiryDate']?->format(DateTimeInterface::RFC3339);

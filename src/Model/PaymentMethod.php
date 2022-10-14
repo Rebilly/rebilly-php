@@ -83,6 +83,7 @@ enum PaymentMethod: string
     case INOVAPAY_PIN = 'INOVAPAY-pin';
     case INOVAPAY_WALLET = 'INOVAPAY-wallet';
     case INSTA_DEBIT = 'InstaDebit';
+    case INSTANT_PAYMENTS = 'InstantPayments';
     case INSTANT_BANK_TRANSFER = 'instant-bank-transfer';
     case INTERAC_ONLINE = 'Interac-online';
     case INTERAC_E_TRANSFER = 'Interac-eTransfer';

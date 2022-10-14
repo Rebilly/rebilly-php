@@ -24,6 +24,9 @@ class BlueSnapCredentials implements JsonSerializable
         if (array_key_exists('username', $data)) {
             $this->setUsername($data['username']);
         }
+        if (array_key_exists('merchantId', $data)) {
+            $this->setMerchantId($data['merchantId']);
+        }
         if (array_key_exists('password', $data)) {
             $this->setPassword($data['password']);
         }
@@ -45,6 +48,18 @@ class BlueSnapCredentials implements JsonSerializable
     public function setUsername(string $username): self
     {
         $this->fields['username'] = $username;
+
+        return $this;
+    }
+
+    public function getMerchantId(): ?string
+    {
+        return $this->fields['merchantId'] ?? null;
+    }
+
+    public function setMerchantId(null|string $merchantId): self
+    {
+        $this->fields['merchantId'] = $merchantId;
 
         return $this;
     }
@@ -78,6 +93,9 @@ class BlueSnapCredentials implements JsonSerializable
         $data = [];
         if (array_key_exists('username', $this->fields)) {
             $data['username'] = $this->fields['username'];
+        }
+        if (array_key_exists('merchantId', $this->fields)) {
+            $data['merchantId'] = $this->fields['merchantId'];
         }
         if (array_key_exists('password', $this->fields)) {
             $data['password'] = $this->fields['password'];

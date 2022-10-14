@@ -62,9 +62,6 @@ class Organization implements JsonSerializable
         if (array_key_exists('invoiceTimeZone', $data)) {
             $this->setInvoiceTimeZone($data['invoiceTimeZone']);
         }
-        if (array_key_exists('isPrimary', $data)) {
-            $this->setIsPrimary($data['isPrimary']);
-        }
         if (array_key_exists('questionnaire', $data)) {
             $this->setQuestionnaire($data['questionnaire']);
         }
@@ -252,18 +249,6 @@ class Organization implements JsonSerializable
         return $this;
     }
 
-    public function getIsPrimary(): ?bool
-    {
-        return $this->fields['isPrimary'] ?? null;
-    }
-
-    public function setIsPrimary(null|bool $isPrimary): self
-    {
-        $this->fields['isPrimary'] = $isPrimary;
-
-        return $this;
-    }
-
     public function getQuestionnaire(): ?OrganizationQuestionnaire
     {
         return $this->fields['questionnaire'] ?? null;
@@ -366,9 +351,6 @@ class Organization implements JsonSerializable
         }
         if (array_key_exists('invoiceTimeZone', $this->fields)) {
             $data['invoiceTimeZone'] = $this->fields['invoiceTimeZone'];
-        }
-        if (array_key_exists('isPrimary', $this->fields)) {
-            $data['isPrimary'] = $this->fields['isPrimary'];
         }
         if (array_key_exists('questionnaire', $this->fields)) {
             $data['questionnaire'] = $this->fields['questionnaire']?->jsonSerialize();

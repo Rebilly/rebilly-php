@@ -23,6 +23,9 @@ class PayPal extends GatewayAccount
             'gatewayName' => 'PayPal',
         ] + $data);
 
+        if (array_key_exists('credentials', $data)) {
+            $this->setCredentials($data['credentials']);
+        }
         if (array_key_exists('settings', $data)) {
             $this->setSettings($data['settings']);
         }
@@ -31,6 +34,22 @@ class PayPal extends GatewayAccount
     public static function from(array $data = []): self
     {
         return new self($data);
+    }
+
+    public function getCredentials(): ?PayPalCredentials
+    {
+        return $this->fields['credentials'] ?? null;
+    }
+
+    public function setCredentials(null|PayPalCredentials|array $credentials): self
+    {
+        if ($credentials !== null && !($credentials instanceof PayPalCredentials)) {
+            $credentials = PayPalCredentials::from($credentials);
+        }
+
+        $this->fields['credentials'] = $credentials;
+
+        return $this;
     }
 
     public function getSettings(): PayPalSettings
@@ -52,6 +71,9 @@ class PayPal extends GatewayAccount
     public function jsonSerialize(): array
     {
         $data = [];
+        if (array_key_exists('credentials', $this->fields)) {
+            $data['credentials'] = $this->fields['credentials']?->jsonSerialize();
+        }
         if (array_key_exists('settings', $this->fields)) {
             $data['settings'] = $this->fields['settings']?->jsonSerialize();
         }

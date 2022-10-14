@@ -134,6 +134,7 @@ abstract class PaymentInstrument implements JsonSerializable
             case 'China UnionPay':
             case 'InstaDebit':
             case 'ToditoCash-card':
+            case 'InstantPayments':
             case 'Klarna':
             case 'online-bank-transfer':
             case 'UPayCard':
