@@ -87,6 +87,18 @@ final class CreditMemoService extends Service
 
     /**
      * @param string $creditMemoId
+     * @param array|JsonSerializable|CreditMemo $data
+     *
+     * @throws DataValidationException if input data is not valid
+     * @return CreditMemo
+     */
+    public function patch($creditMemoId, $data)
+    {
+        return $this->client()->patch($data, 'credit-memos/{creditMemoId}', ['creditMemoId' => $creditMemoId]);
+    }
+
+    /**
+     * @param string $creditMemoId
      *
      * @return CreditMemo
      */

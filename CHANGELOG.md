@@ -17,6 +17,7 @@ Security - in case of vulnerabilities.
 
 - [x] Added new property to `Subscription`: `paymentInstrumentId`
 - [x] Added new property to `CreditMemo`: `allocations`
+- [x] Added `CreditMemoService::patch()` method
 
 ## [2.19.0] 2022-06-22
 
