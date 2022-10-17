@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class CreditMemoItems implements JsonSerializable
+class CommonCreditMemoItems implements JsonSerializable
 {
     private array $fields = [];
 

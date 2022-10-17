@@ -56,10 +56,11 @@ enum GatewayName: string
     case CYBER_SOURCE = 'CyberSource';
     case DATA_CASH = 'DataCash';
     case DENGI = 'Dengi';
-    case DRAGONPHOENIX = 'Dragonphoenix';
     case DIMOCO = 'Dimoco';
     case DIRECTA24 = 'Directa24';
     case D_LOCAL = 'dLocal';
+    case DRAGONPHOENIX = 'Dragonphoenix';
+    case DROPAYMENT = 'Dropayment';
     case EBANX = 'EBANX';
     case ECO_PAYZ = 'ecoPayz';
     case ECORE_PAY = 'EcorePay';

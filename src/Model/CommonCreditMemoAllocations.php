@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class CreditMemoAllocations implements JsonSerializable
+class CommonCreditMemoAllocations implements JsonSerializable
 {
     private array $fields = [];
 
@@ -32,7 +32,7 @@ class CreditMemoAllocations implements JsonSerializable
     }
 
     /**
-     * @return null|CreditMemoAllocationsTransactions[]
+     * @return null|CommonCreditMemoAllocationsTransactions[]
      */
     public function getTransactions(): ?array
     {
@@ -40,11 +40,11 @@ class CreditMemoAllocations implements JsonSerializable
     }
 
     /**
-     * @param null|CreditMemoAllocationsTransactions[] $transactions
+     * @param null|CommonCreditMemoAllocationsTransactions[] $transactions
      */
     public function setTransactions(null|array $transactions): self
     {
-        $transactions = $transactions !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof CreditMemoAllocationsTransactions ? $value : CreditMemoAllocationsTransactions::from($value)) : null, $transactions) : null;
+        $transactions = $transactions !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof CommonCreditMemoAllocationsTransactions ? $value : CommonCreditMemoAllocationsTransactions::from($value)) : null, $transactions) : null;
 
         $this->fields['transactions'] = $transactions;
 

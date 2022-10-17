@@ -63,6 +63,7 @@ enum AcquirerName: string
     case DIMOCO = 'Dimoco';
     case D_LOCAL = 'dLocal';
     case DRAGONPHOENIX = 'Dragonphoenix';
+    case DROPAYMENT = 'Dropayment';
     case EBANX = 'EBANX';
     case ECO_PAYZ = 'ecoPayz';
     case ECORE_PAY = 'EcorePay';

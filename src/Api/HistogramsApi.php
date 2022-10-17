@@ -31,7 +31,6 @@ class HistogramsApi
     public function getTransactionHistogramReport(
         DateTimeImmutable $periodStart,
         DateTimeImmutable $periodEnd,
-        string $aggregationField,
         string $aggregationPeriod,
         string $metric,
         ?string $filter = null,
@@ -39,7 +38,6 @@ class HistogramsApi
         $queryParams = [
             'periodStart' => $periodStart->format('Y-m-d\TH:i:s\Z'),
             'periodEnd' => $periodEnd->format('Y-m-d\TH:i:s\Z'),
-            'aggregationField' => $aggregationField,
             'aggregationPeriod' => $aggregationPeriod,
             'metric' => $metric,
             'filter' => $filter,
