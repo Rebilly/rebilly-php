@@ -63,6 +63,9 @@ class TransactionQuery implements JsonSerializable
 
     public function __construct(array $data = [])
     {
+        if (array_key_exists('transactionId', $data)) {
+            $this->setTransactionId($data['transactionId']);
+        }
         if (array_key_exists('result', $data)) {
             $this->setResult($data['result']);
         }
@@ -80,6 +83,18 @@ class TransactionQuery implements JsonSerializable
     public static function from(array $data = []): self
     {
         return new self($data);
+    }
+
+    public function getTransactionId(): ?string
+    {
+        return $this->fields['transactionId'] ?? null;
+    }
+
+    public function setTransactionId(null|string $transactionId): self
+    {
+        $this->fields['transactionId'] = $transactionId;
+
+        return $this;
     }
 
     /**
@@ -111,6 +126,9 @@ class TransactionQuery implements JsonSerializable
     public function jsonSerialize(): array
     {
         $data = [];
+        if (array_key_exists('transactionId', $this->fields)) {
+            $data['transactionId'] = $this->fields['transactionId'];
+        }
         if (array_key_exists('result', $this->fields)) {
             $data['result'] = $this->fields['result'];
         }

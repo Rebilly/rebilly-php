@@ -17,7 +17,7 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
 
-class CreditMemoAllocationsTransactions implements JsonSerializable
+class CommonCreditMemoAllocationsTransactions implements JsonSerializable
 {
     private array $fields = [];
 

@@ -443,6 +443,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return new NOWPayments($data);
             case 'Awepay':
                 return new Awepay($data);
+            case 'Dropayment':
+                return new Dropayment($data);
             case 'HiPay':
                 return new HiPay($data);
             case 'Cryptonator':

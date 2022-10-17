@@ -17,6 +17,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
+use Rebilly\Sdk\Model\CommonCreditMemo;
 use Rebilly\Sdk\Model\CreditMemo;
 use Rebilly\Sdk\Model\CreditMemoTimeline;
 use Rebilly\Sdk\Paginator;
@@ -234,6 +235,26 @@ class CreditMemosApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CreditMemoTimeline::from($data);
+    }
+
+    /**
+     * @return CreditMemo
+     */
+    public function patch(
+        string $id,
+        CommonCreditMemo $commonCreditMemo,
+    ): CreditMemo {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credit-memos/{id}');
+
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($commonCreditMemo));
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return CreditMemo::from($data);
     }
 
     /**
