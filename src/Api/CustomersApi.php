@@ -24,7 +24,6 @@ use Rebilly\Sdk\Model\CustomerTimeline;
 use Rebilly\Sdk\Model\Edd;
 use Rebilly\Sdk\Model\EddSearchResult;
 use Rebilly\Sdk\Model\EddTimeline;
-use Rebilly\Sdk\Model\Invoice;
 use Rebilly\Sdk\Model\LeadSource;
 use Rebilly\Sdk\Model\PatchCustomerEddScoreRequest;
 use Rebilly\Sdk\Paginator;
@@ -327,29 +326,6 @@ class CustomersApi
             $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
             $closure,
         );
-    }
-
-    /**
-     * @return Invoice[]
-     */
-    public function getAllUpcomingInvoices(
-        string $id,
-        ?string $expand = null,
-    ): array {
-        $pathParams = [
-            '{id}' => $id,
-        ];
-
-        $queryParams = [
-            'expand' => $expand,
-        ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/upcoming-invoices?') . http_build_query($queryParams);
-
-        $request = new Request('GET', $uri);
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return array_map(fn (array $item): Invoice => Invoice::from($item), $data);
     }
 
     /**
