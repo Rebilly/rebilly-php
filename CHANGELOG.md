@@ -20,7 +20,6 @@ Security - in case of vulnerabilities.
 - [x] Added new property to `Subscription`: `paymentInstrumentId`
 - [x] Added new property to `CreditMemo`: `allocations`
 - [x] Added `CreditMemoService::patch()` method
-- [x] Added `CreditMemoService::patch()` method
 - [x] Added `SubscriptionService::getUpcomingInvoice()` method
 
 ### Deprecated
