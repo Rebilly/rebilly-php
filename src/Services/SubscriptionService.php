@@ -192,7 +192,7 @@ final class SubscriptionService extends Service
     public function getUpcomingInvoice($subscriptionId)
     {
         return $this->client()->get(
-            'subscriptions/{subscriptionId}/upcoming-invoices',
+            'subscriptions/{subscriptionId}/upcoming-invoice',
             ['subscriptionId' => $subscriptionId]
         );
     }
