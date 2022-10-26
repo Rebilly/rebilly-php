@@ -19,13 +19,13 @@ Security - in case of vulnerabilities.
 
 - [x] Added new property to `Subscription`: `paymentInstrumentId`
 - [x] Added new property to `CreditMemo`: `allocations`
-- [x] Added `CreditMemoService::patch()` method.
-- [x] Added `CreditMemoService::patch()` method.
-- [x] Added `SubscriptionService::getUpcomingInvoice()` method.
+- [x] Added `CreditMemoService::patch()` method
+- [x] Added `CreditMemoService::patch()` method
+- [x] Added `SubscriptionService::getUpcomingInvoice()` method
 
 ### Deprecated
 
-- [x] Deprecated `SubscriptionService::getUpcomingInvoices()` method.
+- [x] Deprecated `SubscriptionService::getUpcomingInvoices()` method
 
 ## [2.19.0] 2022-06-22
 
