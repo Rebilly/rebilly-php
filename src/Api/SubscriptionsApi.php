@@ -324,6 +324,29 @@ class SubscriptionsApi
     /**
      * @return Invoice
      */
+    public function getUpcomingInvoice(
+        string $id,
+        ?string $expand = null,
+    ): Invoice {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $queryParams = [
+            'expand' => $expand,
+        ];
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}/upcoming-invoice?') . http_build_query($queryParams);
+
+        $request = new Request('GET', $uri);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return Invoice::from($data);
+    }
+
+    /**
+     * @return Invoice
+     */
     public function issueUpcomingInvoice(
         string $id,
         string $invoiceId,
