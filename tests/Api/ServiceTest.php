@@ -519,6 +519,31 @@ class ServiceTest extends BaseTestCase
     /**
      * @test
      */
+    public function getUpcomingInvoice()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->createMock(CurlHandler::class);
+
+        $handler
+            ->expects(self::any())
+            ->method('__invoke')
+            ->willReturn($client->createResponse()->withHeader('Location', 'subscriptions/subscription-1/upcoming-invoice'));
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+        $service = $client->subscriptions();
+
+        $result = $service->getUpcomingInvoice('subscription-1');
+        self::assertInstanceOf(Entities\Invoice::class, $result);
+    }
+
+    /**
+     * @test
+     */
     public function subscriptionCancellationService()
     {
         $client = new Client(['apiKey' => 'QWERTY']);
