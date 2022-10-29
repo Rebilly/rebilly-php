@@ -42,6 +42,8 @@ abstract class RuleAction implements JsonSerializable
 
     public const NAME_DECLINE_TRANSACTION = 'decline-transaction';
 
+    public const NAME_CHECK_ONTARIO_RESTRICTION = 'check-ontario-restriction';
+
     public const NAME_DISPLAY_MESSAGE = 'display-message';
 
     public const NAME_DISPLAY_OTHER_CHOICES = 'display-other-choices';
@@ -141,6 +143,8 @@ abstract class RuleAction implements JsonSerializable
                 return new AddRiskScore($data);
             case 'cancel-scheduled-payments':
                 return new CancelScheduledPayments($data);
+            case 'check-ontario-restriction':
+                return new CheckOntarioRestriction($data);
             case 'guess-payment-card-expiration':
                 return new GuessPaymentCardExpiration($data);
             case 'blocklist':
