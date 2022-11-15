@@ -21,11 +21,23 @@ use Rebilly\Entities\PaymentMethodInstrument;
 class PaymentCardInstrument extends PaymentMethodInstrument
 {
     /**
+     * {@inheritdoc}
+     */
+    public function __construct(array $data = [])
+    {
+        if ($data['paymentCardId']) {
+            $data['paymentInstrumentId'] = $data['paymentCardId'];
+            unset($data['paymentCardId']);
+        }
+        parent::__construct(['method' => $this->methodName()] + $data);
+    }
+
+    /**
      * @return string
      */
-    public function getPaymentCardId()
+    public function getPaymentInstrumentId()
     {
-        return $this->getAttribute('paymentCardId');
+        return $this->getAttribute('paymentInstrumentId');
     }
 
     /**
@@ -33,9 +45,9 @@ class PaymentCardInstrument extends PaymentMethodInstrument
      *
      * @return $this
      */
-    public function setPaymentCardId($value)
+    public function setPaymentInstrumentId($value)
     {
-        return $this->setAttribute('paymentCardId', $value);
+        return $this->setAttribute('paymentInstrumentId', $value);
     }
 
     /**

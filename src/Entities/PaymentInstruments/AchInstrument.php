@@ -21,11 +21,23 @@ use Rebilly\Entities\PaymentMethodInstrument;
 class AchInstrument extends PaymentMethodInstrument
 {
     /**
+     * {@inheritdoc}
+     */
+    public function __construct(array $data = [])
+    {
+        if ($data['bankAccountId']) {
+            $data['paymentInstrumentId'] = $data['bankAccountId'];
+            unset($data['bankAccountId']);
+        }
+        parent::__construct(['method' => $this->methodName()] + $data);
+    }
+    
+    /**
      * @return string
      */
-    public function getBankAccountId()
+    public function getPaymentInstrumentId()
     {
-        return $this->getAttribute('bankAccountId');
+        return $this->getAttribute('paymentInstrumentId');
     }
 
     /**
@@ -33,9 +45,9 @@ class AchInstrument extends PaymentMethodInstrument
      *
      * @return $this
      */
-    public function setBankAccountId($value)
+    public function setPaymentInstrumentId($value)
     {
-        return $this->setAttribute('bankAccountId', $value);
+        return $this->setAttribute('paymentInstrumentId', $value);
     }
 
     /**
