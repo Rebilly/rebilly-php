@@ -21,11 +21,23 @@ Security - in case of vulnerabilities.
 - [x] Added new property to `CreditMemo`: `allocations`
 - [x] Added `CreditMemoService::patch()` method
 - [x] Added `SubscriptionService::getUpcomingInvoice()` method
-- [x] Use paymentInstrumentId when creating instruments.  Deprecate old methods for ACH, PayPal and payment-card.
+- [x] Use paymentInstrumentId when creating instruments.
+- [x] Added `PaymentCardInstrument::getPaymentInstrumentId` method
+- [x] Added `PaymentCardInstrument::setPaymentInstrumentId` method
+- [x] Added `AchInstrument::getPaymentInstrumentId` method
+- [x] Added `AchInstrument::setPaymentInstrumentId` method
+- [x] Added `PayPalInstrument::getPaymentInstrumentId` method
+- [x] Added `PayPalInstrument::setPaymentInstrumentId` method
 
 ### Deprecated
 
 - [x] Deprecated `SubscriptionService::getUpcomingInvoices()` method
+- [x] Deprecated `PaymentCardInstrument::getPaymentCardId` method
+- [x] Deprecated `PaymentCardInstrument::setPaymentCardId` method
+- [x] Deprecated `AchInstrument::getBankAccountId` method
+- [x] Deprecated `AchInstrument::setBankAccountId` method
+- [x] Deprecated `PayPalInstrument::getPayPalAccountId` method
+- [x] Deprecated `PayPalInstrument::setPayPalAccountId` method
 
 ## [2.19.0] 2022-06-22
 
