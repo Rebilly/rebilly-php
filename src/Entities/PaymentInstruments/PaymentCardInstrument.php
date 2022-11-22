@@ -25,7 +25,7 @@ class PaymentCardInstrument extends PaymentMethodInstrument
      */
     public function __construct(array $data = [])
     {
-        if ($data['paymentCardId']) {
+        if (isset($data['paymentCardId'])) {
             $data['paymentInstrumentId'] = $data['paymentCardId'];
             unset($data['paymentCardId']);
         }
@@ -41,6 +41,15 @@ class PaymentCardInstrument extends PaymentMethodInstrument
     }
 
     /**
+     * @deprecated
+     * @return string
+     */
+    public function getPaymentCardId()
+    {
+        return $this->getPaymentInstrumentId();
+    }
+
+    /**
      * @param string $value
      *
      * @return $this
@@ -48,6 +57,17 @@ class PaymentCardInstrument extends PaymentMethodInstrument
     public function setPaymentInstrumentId($value)
     {
         return $this->setAttribute('paymentInstrumentId', $value);
+    }
+
+    /**
+     * @deprecated 
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setPaymentCardId($value)
+    {
+        return $this->setPaymentInstrumentId($value);
     }
 
     /**

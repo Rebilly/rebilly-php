@@ -25,7 +25,7 @@ class PayPalInstrument extends PaymentMethodInstrument
      */
     public function __construct(array $data = [])
     {
-        if ($data['payPalAccountId']) {
+        if (isset($data['payPalAccountId'])) {
             $data['paymentInstrumentId'] = $data['payPalAccountId'];
             unset($data['payPalAccountId']);
         }
@@ -41,6 +41,15 @@ class PayPalInstrument extends PaymentMethodInstrument
     }
 
     /**
+     * @deprecated
+     * @return string
+     */
+    public function getPayPalAccountId()
+    {
+        return $this->getPaymentInstrumentId();
+    }
+
+    /**
      * @param string $value
      *
      * @return $this
@@ -49,6 +58,18 @@ class PayPalInstrument extends PaymentMethodInstrument
     {
         return $this->setAttribute('paymentInstrumentId', $value);
     }
+
+    /**
+     * @deprecated
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setPayPalAccountId($value)
+    {
+        return $this->setPaymentInstrumentId($value);
+    }
+
     /**
      * @return string
      */

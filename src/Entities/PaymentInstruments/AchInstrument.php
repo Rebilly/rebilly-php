@@ -25,19 +25,28 @@ class AchInstrument extends PaymentMethodInstrument
      */
     public function __construct(array $data = [])
     {
-        if ($data['bankAccountId']) {
+        if (isset($data['bankAccountId'])) {
             $data['paymentInstrumentId'] = $data['bankAccountId'];
             unset($data['bankAccountId']);
         }
         parent::__construct(['method' => $this->methodName()] + $data);
     }
-    
+
     /**
      * @return string
      */
     public function getPaymentInstrumentId()
     {
         return $this->getAttribute('paymentInstrumentId');
+    }
+
+    /**
+     * @deprecated
+     * @return string
+     */
+    public function getBankAccountId()
+    {
+        return $this->getPaymentInstrumentId();
     }
 
     /**
@@ -48,6 +57,17 @@ class AchInstrument extends PaymentMethodInstrument
     public function setPaymentInstrumentId($value)
     {
         return $this->setAttribute('paymentInstrumentId', $value);
+    }
+
+    /**
+     * @deprecated
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setBankAccountId($value)
+    {
+        return $this->setPaymentInstrumentId($value);
     }
 
     /**
