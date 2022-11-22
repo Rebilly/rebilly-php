@@ -21,7 +21,6 @@ Security - in case of vulnerabilities.
 - [x] Added new property to `CreditMemo`: `allocations`
 - [x] Added `CreditMemoService::patch()` method
 - [x] Added `SubscriptionService::getUpcomingInvoice()` method
-- [x] Use paymentInstrumentId when creating instruments.
 - [x] Added `PaymentCardInstrument::getPaymentInstrumentId` method
 - [x] Added `PaymentCardInstrument::setPaymentInstrumentId` method
 - [x] Added `AchInstrument::getPaymentInstrumentId` method
