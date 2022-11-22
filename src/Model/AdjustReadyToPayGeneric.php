@@ -52,12 +52,12 @@ class AdjustReadyToPayGeneric extends AdjustPaymentMethod
         return $this;
     }
 
-    public function getFeature(): mixed
+    public function getFeature(): string
     {
         return $this->fields['feature'];
     }
 
-    public function setFeature(mixed $feature): self
+    public function setFeature(string $feature): self
     {
         $this->fields['feature'] = $feature;
 

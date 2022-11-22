@@ -19,6 +19,8 @@ use JsonSerializable;
 
 class PayPalBillingAgreementFeature implements JsonSerializable
 {
+    public const NAME_PAY_PAL_BILLING_AGREEMENT = 'PayPal billing agreement';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -45,17 +47,19 @@ class PayPalBillingAgreementFeature implements JsonSerializable
         return new self($data);
     }
 
-    public function getName(): PayPalBillingAgreementFeatureName
+    /**
+     * @psalm-return self::NAME_* $name
+     */
+    public function getName(): string
     {
         return $this->fields['name'];
     }
 
-    public function setName(PayPalBillingAgreementFeatureName|string $name): self
+    /**
+     * @psalm-param self::NAME_* $name
+     */
+    public function setName(string $name): self
     {
-        if (!($name instanceof PayPalBillingAgreementFeatureName)) {
-            $name = PayPalBillingAgreementFeatureName::from($name);
-        }
-
         $this->fields['name'] = $name;
 
         return $this;
@@ -117,7 +121,7 @@ class PayPalBillingAgreementFeature implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('name', $this->fields)) {
-            $data['name'] = $this->fields['name']?->value;
+            $data['name'] = $this->fields['name'];
         }
         if (array_key_exists('paypalMerchantId', $this->fields)) {
             $data['paypalMerchantId'] = $this->fields['paypalMerchantId'];

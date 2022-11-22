@@ -32,6 +32,9 @@ class Edd implements JsonSerializable
         if (array_key_exists('nextUpdateTime', $data)) {
             $this->setNextUpdateTime($data['nextUpdateTime']);
         }
+        if (array_key_exists('createdTime', $data)) {
+            $this->setCreatedTime($data['createdTime']);
+        }
         if (array_key_exists('updatedTime', $data)) {
             $this->setUpdatedTime($data['updatedTime']);
         }
@@ -93,6 +96,11 @@ class Edd implements JsonSerializable
         return $this;
     }
 
+    public function getCreatedTime(): ?DateTimeImmutable
+    {
+        return $this->fields['createdTime'] ?? null;
+    }
+
     public function getUpdatedTime(): ?DateTimeImmutable
     {
         return $this->fields['updatedTime'] ?? null;
@@ -118,6 +126,9 @@ class Edd implements JsonSerializable
         if (array_key_exists('nextUpdateTime', $this->fields)) {
             $data['nextUpdateTime'] = $this->fields['nextUpdateTime']?->format(DateTimeInterface::RFC3339);
         }
+        if (array_key_exists('createdTime', $this->fields)) {
+            $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
+        }
         if (array_key_exists('updatedTime', $this->fields)) {
             $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
         }
@@ -126,6 +137,17 @@ class Edd implements JsonSerializable
         }
 
         return $data;
+    }
+
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    {
+        if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
+            $createdTime = new DateTimeImmutable($createdTime);
+        }
+
+        $this->fields['createdTime'] = $createdTime;
+
+        return $this;
     }
 
     private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self

@@ -128,17 +128,6 @@ class Invoice extends CommonInvoice
         return $this->fields['dueReminderTime'] ?? null;
     }
 
-    public function setDueReminderTime(null|DateTimeImmutable|string $dueReminderTime): self
-    {
-        if ($dueReminderTime !== null && !($dueReminderTime instanceof DateTimeImmutable)) {
-            $dueReminderTime = new DateTimeImmutable($dueReminderTime);
-        }
-
-        $this->fields['dueReminderTime'] = $dueReminderTime;
-
-        return $this;
-    }
-
     public function getDueReminderNumber(): ?int
     {
         return $this->fields['dueReminderNumber'] ?? null;
@@ -219,6 +208,17 @@ class Invoice extends CommonInvoice
     private function setType(null|string $type): self
     {
         $this->fields['type'] = $type;
+
+        return $this;
+    }
+
+    private function setDueReminderTime(null|DateTimeImmutable|string $dueReminderTime): self
+    {
+        if ($dueReminderTime !== null && !($dueReminderTime instanceof DateTimeImmutable)) {
+            $dueReminderTime = new DateTimeImmutable($dueReminderTime);
+        }
+
+        $this->fields['dueReminderTime'] = $dueReminderTime;
 
         return $this;
     }

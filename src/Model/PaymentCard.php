@@ -84,17 +84,6 @@ class PaymentCard extends CommonPaymentCard
         return $this->fields['expirationReminderTime'] ?? null;
     }
 
-    public function setExpirationReminderTime(null|DateTimeImmutable|string $expirationReminderTime): self
-    {
-        if ($expirationReminderTime !== null && !($expirationReminderTime instanceof DateTimeImmutable)) {
-            $expirationReminderTime = new DateTimeImmutable($expirationReminderTime);
-        }
-
-        $this->fields['expirationReminderTime'] = $expirationReminderTime;
-
-        return $this;
-    }
-
     public function getExpirationReminderNumber(): ?int
     {
         return $this->fields['expirationReminderNumber'] ?? null;
@@ -195,6 +184,17 @@ class PaymentCard extends CommonPaymentCard
     private function setStickyGatewayAccountId(null|string $stickyGatewayAccountId): self
     {
         $this->fields['stickyGatewayAccountId'] = $stickyGatewayAccountId;
+
+        return $this;
+    }
+
+    private function setExpirationReminderTime(null|DateTimeImmutable|string $expirationReminderTime): self
+    {
+        if ($expirationReminderTime !== null && !($expirationReminderTime instanceof DateTimeImmutable)) {
+            $expirationReminderTime = new DateTimeImmutable($expirationReminderTime);
+        }
+
+        $this->fields['expirationReminderTime'] = $expirationReminderTime;
 
         return $this;
     }

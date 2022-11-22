@@ -161,31 +161,9 @@ class Customer implements JsonSerializable
         return $this->fields['createdTime'] ?? null;
     }
 
-    public function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
-    {
-        if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
-            $createdTime = new DateTimeImmutable($createdTime);
-        }
-
-        $this->fields['createdTime'] = $createdTime;
-
-        return $this;
-    }
-
     public function getUpdatedTime(): ?DateTimeImmutable
     {
         return $this->fields['updatedTime'] ?? null;
-    }
-
-    public function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
-    {
-        if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
-            $updatedTime = new DateTimeImmutable($updatedTime);
-        }
-
-        $this->fields['updatedTime'] = $updatedTime;
-
-        return $this;
     }
 
     public function getCustomFields(): ?array
@@ -417,6 +395,28 @@ class Customer implements JsonSerializable
     private function setLastName(null|string $lastName): self
     {
         $this->fields['lastName'] = $lastName;
+
+        return $this;
+    }
+
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    {
+        if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
+            $createdTime = new DateTimeImmutable($createdTime);
+        }
+
+        $this->fields['createdTime'] = $createdTime;
+
+        return $this;
+    }
+
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    {
+        if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
+            $updatedTime = new DateTimeImmutable($updatedTime);
+        }
+
+        $this->fields['updatedTime'] = $updatedTime;
 
         return $this;
     }

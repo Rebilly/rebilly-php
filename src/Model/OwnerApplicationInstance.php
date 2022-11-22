@@ -90,17 +90,6 @@ class OwnerApplicationInstance implements JsonSerializable
         return $this->fields['createdTime'] ?? null;
     }
 
-    public function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
-    {
-        if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
-            $createdTime = new DateTimeImmutable($createdTime);
-        }
-
-        $this->fields['createdTime'] = $createdTime;
-
-        return $this;
-    }
-
     public function getUpdatedTime(): ?DateTimeImmutable
     {
         return $this->fields['updatedTime'] ?? null;
@@ -162,6 +151,17 @@ class OwnerApplicationInstance implements JsonSerializable
         return $this;
     }
 
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    {
+        if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
+            $createdTime = new DateTimeImmutable($createdTime);
+        }
+
+        $this->fields['createdTime'] = $createdTime;
+
+        return $this;
+    }
+
     private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
@@ -178,7 +178,7 @@ class OwnerApplicationInstance implements JsonSerializable
      */
     private function setLinks(null|array $links): self
     {
-        $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
+        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 
         $this->fields['_links'] = $links;
 

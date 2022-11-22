@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use InvalidArgumentException;
 use JsonSerializable;
+use TypeError;
 
 class InvoiceLink implements JsonSerializable
 {
@@ -77,5 +79,18 @@ class InvoiceLink implements JsonSerializable
         }
 
         return $data;
+    }
+
+    /** @return null|array<0: self, 1: int> **/
+    public static function tryFrom(array $data = []): ?array
+    {
+        try {
+            $instance = self::from($data);
+
+            return [$instance, count(array_intersect_key($data, $instance->jsonSerialize()))];
+        } catch (InvalidArgumentException|TypeError) {
+        }
+
+        return null;
     }
 }

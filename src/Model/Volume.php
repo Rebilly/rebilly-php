@@ -34,7 +34,7 @@ class Volume extends PlanPriceFormula
     }
 
     /**
-     * @return StairstepBrackets[]
+     * @return VolumeBrackets[]
      */
     public function getBrackets(): array
     {
@@ -42,11 +42,11 @@ class Volume extends PlanPriceFormula
     }
 
     /**
-     * @param StairstepBrackets[] $brackets
+     * @param VolumeBrackets[] $brackets
      */
     public function setBrackets(array $brackets): self
     {
-        $brackets = array_map(fn ($value) => $value !== null ? ($value instanceof StairstepBrackets ? $value : StairstepBrackets::from($value)) : null, $brackets);
+        $brackets = array_map(fn ($value) => $value !== null ? ($value instanceof VolumeBrackets ? $value : VolumeBrackets::from($value)) : null, $brackets);
 
         $this->fields['brackets'] = $brackets;
 

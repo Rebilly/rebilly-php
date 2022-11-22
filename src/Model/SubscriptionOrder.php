@@ -552,17 +552,6 @@ class SubscriptionOrder extends Subscription
         return $this->fields['endTime'] ?? null;
     }
 
-    public function setEndTime(null|DateTimeImmutable|string $endTime): self
-    {
-        if ($endTime !== null && !($endTime instanceof DateTimeImmutable)) {
-            $endTime = new DateTimeImmutable($endTime);
-        }
-
-        $this->fields['endTime'] = $endTime;
-
-        return $this;
-    }
-
     public function getRenewalTime(): ?DateTimeImmutable
     {
         return $this->fields['renewalTime'] ?? null;
@@ -637,17 +626,6 @@ class SubscriptionOrder extends Subscription
         return $this->fields['renewalReminderTime'] ?? null;
     }
 
-    public function setRenewalReminderTime(null|DateTimeImmutable|string $renewalReminderTime): self
-    {
-        if ($renewalReminderTime !== null && !($renewalReminderTime instanceof DateTimeImmutable)) {
-            $renewalReminderTime = new DateTimeImmutable($renewalReminderTime);
-        }
-
-        $this->fields['renewalReminderTime'] = $renewalReminderTime;
-
-        return $this;
-    }
-
     public function getRenewalReminderNumber(): ?int
     {
         return $this->fields['renewalReminderNumber'] ?? null;
@@ -656,17 +634,6 @@ class SubscriptionOrder extends Subscription
     public function getTrialReminderTime(): ?DateTimeImmutable
     {
         return $this->fields['trialReminderTime'] ?? null;
-    }
-
-    public function setTrialReminderTime(null|DateTimeImmutable|string $trialReminderTime): self
-    {
-        if ($trialReminderTime !== null && !($trialReminderTime instanceof DateTimeImmutable)) {
-            $trialReminderTime = new DateTimeImmutable($trialReminderTime);
-        }
-
-        $this->fields['trialReminderTime'] = $trialReminderTime;
-
-        return $this;
     }
 
     public function getTrialReminderNumber(): ?int
@@ -754,31 +721,9 @@ class SubscriptionOrder extends Subscription
         return $this->fields['createdTime'] ?? null;
     }
 
-    public function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
-    {
-        if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
-            $createdTime = new DateTimeImmutable($createdTime);
-        }
-
-        $this->fields['createdTime'] = $createdTime;
-
-        return $this;
-    }
-
     public function getUpdatedTime(): ?DateTimeImmutable
     {
         return $this->fields['updatedTime'] ?? null;
-    }
-
-    public function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
-    {
-        if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
-            $updatedTime = new DateTimeImmutable($updatedTime);
-        }
-
-        $this->fields['updatedTime'] = $updatedTime;
-
-        return $this;
     }
 
     /**
@@ -1000,6 +945,17 @@ class SubscriptionOrder extends Subscription
         return $this;
     }
 
+    private function setEndTime(null|DateTimeImmutable|string $endTime): self
+    {
+        if ($endTime !== null && !($endTime instanceof DateTimeImmutable)) {
+            $endTime = new DateTimeImmutable($endTime);
+        }
+
+        $this->fields['endTime'] = $endTime;
+
+        return $this;
+    }
+
     private function setRebillNumber(null|int $rebillNumber): self
     {
         $this->fields['rebillNumber'] = $rebillNumber;
@@ -1019,9 +975,31 @@ class SubscriptionOrder extends Subscription
         return $this;
     }
 
+    private function setRenewalReminderTime(null|DateTimeImmutable|string $renewalReminderTime): self
+    {
+        if ($renewalReminderTime !== null && !($renewalReminderTime instanceof DateTimeImmutable)) {
+            $renewalReminderTime = new DateTimeImmutable($renewalReminderTime);
+        }
+
+        $this->fields['renewalReminderTime'] = $renewalReminderTime;
+
+        return $this;
+    }
+
     private function setRenewalReminderNumber(null|int $renewalReminderNumber): self
     {
         $this->fields['renewalReminderNumber'] = $renewalReminderNumber;
+
+        return $this;
+    }
+
+    private function setTrialReminderTime(null|DateTimeImmutable|string $trialReminderTime): self
+    {
+        if ($trialReminderTime !== null && !($trialReminderTime instanceof DateTimeImmutable)) {
+            $trialReminderTime = new DateTimeImmutable($trialReminderTime);
+        }
+
+        $this->fields['trialReminderTime'] = $trialReminderTime;
 
         return $this;
     }
@@ -1070,6 +1048,28 @@ class SubscriptionOrder extends Subscription
     private function setRevision(null|int $revision): self
     {
         $this->fields['revision'] = $revision;
+
+        return $this;
+    }
+
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    {
+        if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
+            $createdTime = new DateTimeImmutable($createdTime);
+        }
+
+        $this->fields['createdTime'] = $createdTime;
+
+        return $this;
+    }
+
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    {
+        if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
+            $updatedTime = new DateTimeImmutable($updatedTime);
+        }
+
+        $this->fields['updatedTime'] = $updatedTime;
 
         return $this;
     }

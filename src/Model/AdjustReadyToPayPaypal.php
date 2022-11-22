@@ -17,6 +17,8 @@ class AdjustReadyToPayPaypal extends AdjustPaymentMethod
 {
     public const PAYMENT_METHOD_PAYPAL = 'paypal';
 
+    public const FEATURE_PAY_PAL_BILLING_AGREEMENT = 'PayPal billing agreement';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -56,17 +58,19 @@ class AdjustReadyToPayPaypal extends AdjustPaymentMethod
         return $this;
     }
 
-    public function getFeature(): PayPalBillingAgreementFeatureName
+    /**
+     * @psalm-return self::FEATURE_* $feature
+     */
+    public function getFeature(): string
     {
         return $this->fields['feature'];
     }
 
-    public function setFeature(PayPalBillingAgreementFeatureName|string $feature): self
+    /**
+     * @psalm-param self::FEATURE_* $feature
+     */
+    public function setFeature(string $feature): self
     {
-        if (!($feature instanceof PayPalBillingAgreementFeatureName)) {
-            $feature = PayPalBillingAgreementFeatureName::from($feature);
-        }
-
         $this->fields['feature'] = $feature;
 
         return $this;
@@ -79,7 +83,7 @@ class AdjustReadyToPayPaypal extends AdjustPaymentMethod
             $data['paymentMethod'] = $this->fields['paymentMethod'];
         }
         if (array_key_exists('feature', $this->fields)) {
-            $data['feature'] = $this->fields['feature']?->value;
+            $data['feature'] = $this->fields['feature'];
         }
 
         return parent::jsonSerialize() + $data;

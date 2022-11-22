@@ -28,21 +28,6 @@ class PreviewsApi
     }
 
     /**
-     * @return OrderPreview
-     */
-    public function order(
-        ?OrderPreview $orderPreview = null,
-    ): OrderPreview {
-        $uri = '/previews/orders';
-
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($orderPreview));
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return OrderPreview::from($data);
-    }
-
-    /**
      * @return SendTestEmail
      */
     public function sendEmailRuleAction(
@@ -79,5 +64,20 @@ class PreviewsApi
 
         $request = new Request('POST', $uri, body: Utils::jsonEncode($globalWebhook));
         $this->client->send($request);
+    }
+
+    /**
+     * @return OrderPreview
+     */
+    public function order(
+        ?OrderPreview $orderPreview = null,
+    ): OrderPreview {
+        $uri = '/previews/orders';
+
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($orderPreview));
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return OrderPreview::from($data);
     }
 }

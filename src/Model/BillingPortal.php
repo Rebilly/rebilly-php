@@ -100,7 +100,7 @@ class BillingPortal extends CommonBillingPortal
      */
     private function setLinks(null|array $links): self
     {
-        $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
+        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 
         $this->fields['_links'] = $links;
 

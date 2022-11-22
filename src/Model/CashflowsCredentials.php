@@ -21,8 +21,8 @@ class CashflowsCredentials implements JsonSerializable
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('authId', $data)) {
-            $this->setAuthId($data['authId']);
+        if (array_key_exists('authenticationId', $data)) {
+            $this->setAuthenticationId($data['authenticationId']);
         }
         if (array_key_exists('authPassword', $data)) {
             $this->setAuthPassword($data['authPassword']);
@@ -34,14 +34,14 @@ class CashflowsCredentials implements JsonSerializable
         return new self($data);
     }
 
-    public function getAuthId(): string
+    public function getAuthenticationId(): ?string
     {
-        return $this->fields['authId'];
+        return $this->fields['authenticationId'] ?? null;
     }
 
-    public function setAuthId(string $authId): self
+    public function setAuthenticationId(null|string $authenticationId): self
     {
-        $this->fields['authId'] = $authId;
+        $this->fields['authenticationId'] = $authenticationId;
 
         return $this;
     }
@@ -61,8 +61,8 @@ class CashflowsCredentials implements JsonSerializable
     public function jsonSerialize(): array
     {
         $data = [];
-        if (array_key_exists('authId', $this->fields)) {
-            $data['authId'] = $this->fields['authId'];
+        if (array_key_exists('authenticationId', $this->fields)) {
+            $data['authenticationId'] = $this->fields['authenticationId'];
         }
         if (array_key_exists('authPassword', $this->fields)) {
             $data['authPassword'] = $this->fields['authPassword'];

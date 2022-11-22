@@ -21,6 +21,9 @@ class CashToCodeSettings implements JsonSerializable
 
     public function __construct(array $data = [])
     {
+        if (array_key_exists('baseUrl', $data)) {
+            $this->setBaseUrl($data['baseUrl']);
+        }
         if (array_key_exists('skipAmountSelection', $data)) {
             $this->setSkipAmountSelection($data['skipAmountSelection']);
         }
@@ -32,6 +35,18 @@ class CashToCodeSettings implements JsonSerializable
     public static function from(array $data = []): self
     {
         return new self($data);
+    }
+
+    public function getBaseUrl(): ?string
+    {
+        return $this->fields['baseUrl'] ?? null;
+    }
+
+    public function setBaseUrl(null|string $baseUrl): self
+    {
+        $this->fields['baseUrl'] = $baseUrl;
+
+        return $this;
     }
 
     public function getSkipAmountSelection(): ?bool
@@ -69,6 +84,9 @@ class CashToCodeSettings implements JsonSerializable
     public function jsonSerialize(): array
     {
         $data = [];
+        if (array_key_exists('baseUrl', $this->fields)) {
+            $data['baseUrl'] = $this->fields['baseUrl'];
+        }
         if (array_key_exists('skipAmountSelection', $this->fields)) {
             $data['skipAmountSelection'] = $this->fields['skipAmountSelection'];
         }
