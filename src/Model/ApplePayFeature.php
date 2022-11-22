@@ -19,6 +19,8 @@ use TypeError;
 
 class ApplePayFeature implements JsonSerializable
 {
+    public const NAME_APPLE_PAY = 'Apple Pay';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -52,17 +54,19 @@ class ApplePayFeature implements JsonSerializable
         return null;
     }
 
-    public function getName(): ?ApplePayFeatureName
+    /**
+     * @psalm-return self::NAME_*|null $name
+     */
+    public function getName(): ?string
     {
         return $this->fields['name'] ?? null;
     }
 
-    public function setName(null|ApplePayFeatureName|string $name): self
+    /**
+     * @psalm-param self::NAME_*|null $name
+     */
+    public function setName(null|string $name): self
     {
-        if ($name !== null && !($name instanceof ApplePayFeatureName)) {
-            $name = ApplePayFeatureName::from($name);
-        }
-
         $this->fields['name'] = $name;
 
         return $this;
@@ -100,7 +104,7 @@ class ApplePayFeature implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('name', $this->fields)) {
-            $data['name'] = $this->fields['name']?->value;
+            $data['name'] = $this->fields['name'];
         }
         if (array_key_exists('displayName', $this->fields)) {
             $data['displayName'] = $this->fields['displayName'];

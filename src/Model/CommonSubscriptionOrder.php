@@ -195,17 +195,6 @@ class CommonSubscriptionOrder extends CommonOrder
         return $this->fields['endTime'] ?? null;
     }
 
-    public function setEndTime(null|DateTimeImmutable|string $endTime): self
-    {
-        if ($endTime !== null && !($endTime instanceof DateTimeImmutable)) {
-            $endTime = new DateTimeImmutable($endTime);
-        }
-
-        $this->fields['endTime'] = $endTime;
-
-        return $this;
-    }
-
     public function getRenewalTime(): ?DateTimeImmutable
     {
         return $this->fields['renewalTime'] ?? null;
@@ -325,6 +314,17 @@ class CommonSubscriptionOrder extends CommonOrder
     private function setInTrial(null|bool $inTrial): self
     {
         $this->fields['inTrial'] = $inTrial;
+
+        return $this;
+    }
+
+    private function setEndTime(null|DateTimeImmutable|string $endTime): self
+    {
+        if ($endTime !== null && !($endTime instanceof DateTimeImmutable)) {
+            $endTime = new DateTimeImmutable($endTime);
+        }
+
+        $this->fields['endTime'] = $endTime;
 
         return $this;
     }

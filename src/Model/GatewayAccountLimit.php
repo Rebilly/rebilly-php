@@ -27,9 +27,9 @@ class GatewayAccountLimit implements JsonSerializable
 
     public const FREQUENCY_MONTHLY = 'monthly';
 
-    public const TYPE_COUNT = 'count';
-
     public const TYPE_MONEY = 'money';
+
+    public const TYPE_COUNT = 'count';
 
     private array $fields = [];
 
@@ -134,17 +134,6 @@ class GatewayAccountLimit implements JsonSerializable
     public function getCreatedTime(): ?DateTimeImmutable
     {
         return $this->fields['createdTime'] ?? null;
-    }
-
-    public function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
-    {
-        if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
-            $createdTime = new DateTimeImmutable($createdTime);
-        }
-
-        $this->fields['createdTime'] = $createdTime;
-
-        return $this;
     }
 
     public function getUpdatedTime(): ?DateTimeImmutable
@@ -262,6 +251,17 @@ class GatewayAccountLimit implements JsonSerializable
     private function setUsage(null|int $usage): self
     {
         $this->fields['usage'] = $usage;
+
+        return $this;
+    }
+
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    {
+        if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
+            $createdTime = new DateTimeImmutable($createdTime);
+        }
+
+        $this->fields['createdTime'] = $createdTime;
 
         return $this;
     }

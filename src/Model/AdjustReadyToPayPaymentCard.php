@@ -17,6 +17,10 @@ class AdjustReadyToPayPaymentCard extends AdjustPaymentMethod
 {
     public const PAYMENT_METHOD_PAYMENT_CARD = 'payment-card';
 
+    public const FEATURE_APPLE_PAY = 'Apple Pay';
+
+    public const FEATURE_GOOGLE_PAY = 'Google Pay';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -56,17 +60,19 @@ class AdjustReadyToPayPaymentCard extends AdjustPaymentMethod
         return $this;
     }
 
-    public function getFeature(): ApplePayFeatureName
+    /**
+     * @psalm-return self::FEATURE_* $feature
+     */
+    public function getFeature(): string
     {
         return $this->fields['feature'];
     }
 
-    public function setFeature(ApplePayFeatureName|string $feature): self
+    /**
+     * @psalm-param self::FEATURE_* $feature
+     */
+    public function setFeature(string $feature): self
     {
-        if (!($feature instanceof ApplePayFeatureName)) {
-            $feature = ApplePayFeatureName::from($feature);
-        }
-
         $this->fields['feature'] = $feature;
 
         return $this;
@@ -79,7 +85,7 @@ class AdjustReadyToPayPaymentCard extends AdjustPaymentMethod
             $data['paymentMethod'] = $this->fields['paymentMethod'];
         }
         if (array_key_exists('feature', $this->fields)) {
-            $data['feature'] = $this->fields['feature']?->value;
+            $data['feature'] = $this->fields['feature'];
         }
 
         return parent::jsonSerialize() + $data;

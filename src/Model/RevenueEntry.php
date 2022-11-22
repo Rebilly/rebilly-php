@@ -202,47 +202,14 @@ class RevenueEntry implements JsonSerializable
         return $this->fields['scheduledTime'] ?? null;
     }
 
-    public function setScheduledTime(null|DateTimeImmutable|string $scheduledTime): self
-    {
-        if ($scheduledTime !== null && !($scheduledTime instanceof DateTimeImmutable)) {
-            $scheduledTime = new DateTimeImmutable($scheduledTime);
-        }
-
-        $this->fields['scheduledTime'] = $scheduledTime;
-
-        return $this;
-    }
-
     public function getIssuedTime(): ?DateTimeImmutable
     {
         return $this->fields['issuedTime'] ?? null;
     }
 
-    public function setIssuedTime(null|DateTimeImmutable|string $issuedTime): self
-    {
-        if ($issuedTime !== null && !($issuedTime instanceof DateTimeImmutable)) {
-            $issuedTime = new DateTimeImmutable($issuedTime);
-        }
-
-        $this->fields['issuedTime'] = $issuedTime;
-
-        return $this;
-    }
-
     public function getRecognizedTime(): ?DateTimeImmutable
     {
         return $this->fields['recognizedTime'] ?? null;
-    }
-
-    public function setRecognizedTime(null|DateTimeImmutable|string $recognizedTime): self
-    {
-        if ($recognizedTime !== null && !($recognizedTime instanceof DateTimeImmutable)) {
-            $recognizedTime = new DateTimeImmutable($recognizedTime);
-        }
-
-        $this->fields['recognizedTime'] = $recognizedTime;
-
-        return $this;
     }
 
     public function jsonSerialize(): array
@@ -297,6 +264,39 @@ class RevenueEntry implements JsonSerializable
     private function setStatus(null|string $status): self
     {
         $this->fields['status'] = $status;
+
+        return $this;
+    }
+
+    private function setScheduledTime(null|DateTimeImmutable|string $scheduledTime): self
+    {
+        if ($scheduledTime !== null && !($scheduledTime instanceof DateTimeImmutable)) {
+            $scheduledTime = new DateTimeImmutable($scheduledTime);
+        }
+
+        $this->fields['scheduledTime'] = $scheduledTime;
+
+        return $this;
+    }
+
+    private function setIssuedTime(null|DateTimeImmutable|string $issuedTime): self
+    {
+        if ($issuedTime !== null && !($issuedTime instanceof DateTimeImmutable)) {
+            $issuedTime = new DateTimeImmutable($issuedTime);
+        }
+
+        $this->fields['issuedTime'] = $issuedTime;
+
+        return $this;
+    }
+
+    private function setRecognizedTime(null|DateTimeImmutable|string $recognizedTime): self
+    {
+        if ($recognizedTime !== null && !($recognizedTime instanceof DateTimeImmutable)) {
+            $recognizedTime = new DateTimeImmutable($recognizedTime);
+        }
+
+        $this->fields['recognizedTime'] = $recognizedTime;
 
         return $this;
     }

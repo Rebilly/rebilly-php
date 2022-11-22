@@ -26,6 +26,8 @@ class AML implements JsonSerializable
 
     public const SOURCE_TYPE_ENFORCEMENTS = 'enforcements';
 
+    public const SOURCE_TYPE_STATE_OWNED_ENTERPRISE = 'state-owned-enterprise';
+
     public const TYPE_INDIVIDUAL = 'individual';
 
     public const TYPE_ENTITY = 'entity';

@@ -257,17 +257,6 @@ class FlexiblePlan implements JsonSerializable
         return $this->fields['createdTime'] ?? null;
     }
 
-    public function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
-    {
-        if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
-            $createdTime = new DateTimeImmutable($createdTime);
-        }
-
-        $this->fields['createdTime'] = $createdTime;
-
-        return $this;
-    }
-
     public function getUpdatedTime(): ?DateTimeImmutable
     {
         return $this->fields['updatedTime'] ?? null;
@@ -354,6 +343,17 @@ class FlexiblePlan implements JsonSerializable
     private function setRevision(null|int $revision): self
     {
         $this->fields['revision'] = $revision;
+
+        return $this;
+    }
+
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    {
+        if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
+            $createdTime = new DateTimeImmutable($createdTime);
+        }
+
+        $this->fields['createdTime'] = $createdTime;
 
         return $this;
     }

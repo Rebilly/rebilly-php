@@ -221,17 +221,6 @@ class ProofOfCreditFileKycDocument extends KycDocument
         return $this->fields['createdTime'] ?? null;
     }
 
-    public function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
-    {
-        if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
-            $createdTime = new DateTimeImmutable($createdTime);
-        }
-
-        $this->fields['createdTime'] = $createdTime;
-
-        return $this;
-    }
-
     public function getUpdatedTime(): ?DateTimeImmutable
     {
         return $this->fields['updatedTime'] ?? null;
@@ -240,17 +229,6 @@ class ProofOfCreditFileKycDocument extends KycDocument
     public function getProcessedTime(): ?DateTimeImmutable
     {
         return $this->fields['processedTime'] ?? null;
-    }
-
-    public function setProcessedTime(null|DateTimeImmutable|string $processedTime): self
-    {
-        if ($processedTime !== null && !($processedTime instanceof DateTimeImmutable)) {
-            $processedTime = new DateTimeImmutable($processedTime);
-        }
-
-        $this->fields['processedTime'] = $processedTime;
-
-        return $this;
     }
 
     public function getCustomerId(): string
@@ -280,31 +258,9 @@ class ProofOfCreditFileKycDocument extends KycDocument
         return $this->fields['reviewStartTime'] ?? null;
     }
 
-    public function setReviewStartTime(null|DateTimeImmutable|string $reviewStartTime): self
-    {
-        if ($reviewStartTime !== null && !($reviewStartTime instanceof DateTimeImmutable)) {
-            $reviewStartTime = new DateTimeImmutable($reviewStartTime);
-        }
-
-        $this->fields['reviewStartTime'] = $reviewStartTime;
-
-        return $this;
-    }
-
     public function getReviewTime(): ?DateTimeImmutable
     {
         return $this->fields['reviewTime'] ?? null;
-    }
-
-    public function setReviewTime(null|DateTimeImmutable|string $reviewTime): self
-    {
-        if ($reviewTime !== null && !($reviewTime instanceof DateTimeImmutable)) {
-            $reviewTime = new DateTimeImmutable($reviewTime);
-        }
-
-        $this->fields['reviewTime'] = $reviewTime;
-
-        return $this;
     }
 
     public function getNotes(): ?string
@@ -506,6 +462,17 @@ class ProofOfCreditFileKycDocument extends KycDocument
         return $this;
     }
 
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    {
+        if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
+            $createdTime = new DateTimeImmutable($createdTime);
+        }
+
+        $this->fields['createdTime'] = $createdTime;
+
+        return $this;
+    }
+
     private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
@@ -513,6 +480,17 @@ class ProofOfCreditFileKycDocument extends KycDocument
         }
 
         $this->fields['updatedTime'] = $updatedTime;
+
+        return $this;
+    }
+
+    private function setProcessedTime(null|DateTimeImmutable|string $processedTime): self
+    {
+        if ($processedTime !== null && !($processedTime instanceof DateTimeImmutable)) {
+            $processedTime = new DateTimeImmutable($processedTime);
+        }
+
+        $this->fields['processedTime'] = $processedTime;
 
         return $this;
     }
@@ -527,6 +505,28 @@ class ProofOfCreditFileKycDocument extends KycDocument
     private function setReviewerName(null|string $reviewerName): self
     {
         $this->fields['reviewerName'] = $reviewerName;
+
+        return $this;
+    }
+
+    private function setReviewStartTime(null|DateTimeImmutable|string $reviewStartTime): self
+    {
+        if ($reviewStartTime !== null && !($reviewStartTime instanceof DateTimeImmutable)) {
+            $reviewStartTime = new DateTimeImmutable($reviewStartTime);
+        }
+
+        $this->fields['reviewStartTime'] = $reviewStartTime;
+
+        return $this;
+    }
+
+    private function setReviewTime(null|DateTimeImmutable|string $reviewTime): self
+    {
+        if ($reviewTime !== null && !($reviewTime instanceof DateTimeImmutable)) {
+            $reviewTime = new DateTimeImmutable($reviewTime);
+        }
+
+        $this->fields['reviewTime'] = $reviewTime;
 
         return $this;
     }

@@ -215,17 +215,6 @@ class User implements JsonSerializable
         return $this->fields['createdTime'] ?? null;
     }
 
-    public function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
-    {
-        if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
-            $createdTime = new DateTimeImmutable($createdTime);
-        }
-
-        $this->fields['createdTime'] = $createdTime;
-
-        return $this;
-    }
-
     public function getUpdatedTime(): ?DateTimeImmutable
     {
         return $this->fields['updatedTime'] ?? null;
@@ -467,6 +456,17 @@ class User implements JsonSerializable
         $computedPermissions = $computedPermissions !== null ? array_map(fn ($value) => $value ?? null, $computedPermissions) : null;
 
         $this->fields['computedPermissions'] = $computedPermissions;
+
+        return $this;
+    }
+
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    {
+        if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
+            $createdTime = new DateTimeImmutable($createdTime);
+        }
+
+        $this->fields['createdTime'] = $createdTime;
 
         return $this;
     }

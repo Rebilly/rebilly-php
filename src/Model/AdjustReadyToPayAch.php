@@ -17,6 +17,8 @@ class AdjustReadyToPayAch extends AdjustPaymentMethod
 {
     public const PAYMENT_METHOD_ACH = 'ach';
 
+    public const FEATURE_PLAID = 'Plaid';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -56,17 +58,19 @@ class AdjustReadyToPayAch extends AdjustPaymentMethod
         return $this;
     }
 
-    public function getFeature(): PlaidFeatureName
+    /**
+     * @psalm-return self::FEATURE_* $feature
+     */
+    public function getFeature(): string
     {
         return $this->fields['feature'];
     }
 
-    public function setFeature(PlaidFeatureName|string $feature): self
+    /**
+     * @psalm-param self::FEATURE_* $feature
+     */
+    public function setFeature(string $feature): self
     {
-        if (!($feature instanceof PlaidFeatureName)) {
-            $feature = PlaidFeatureName::from($feature);
-        }
-
         $this->fields['feature'] = $feature;
 
         return $this;
@@ -79,7 +83,7 @@ class AdjustReadyToPayAch extends AdjustPaymentMethod
             $data['paymentMethod'] = $this->fields['paymentMethod'];
         }
         if (array_key_exists('feature', $this->fields)) {
-            $data['feature'] = $this->fields['feature']?->value;
+            $data['feature'] = $this->fields['feature'];
         }
 
         return parent::jsonSerialize() + $data;

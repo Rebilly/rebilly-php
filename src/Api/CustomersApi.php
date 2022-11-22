@@ -35,6 +35,25 @@ class CustomersApi
     }
 
     /**
+     * @return CustomerInformation
+     */
+    public function getCustomerLifetimeSummaryMetrics(
+        string $customerId,
+    ): CustomerInformation {
+        $pathParams = [
+            '{customerId}' => $customerId,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/experimental/customers/{customerId}/summary-metrics');
+
+        $request = new Request('GET', $uri);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return CustomerInformation::from($data);
+    }
+
+    /**
      * @return Customer
      */
     public function create(
@@ -520,24 +539,5 @@ class CustomersApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Customer::from($data);
-    }
-
-    /**
-     * @return CustomerInformation
-     */
-    public function getCustomerLifetimeSummaryMetrics(
-        string $customerId,
-    ): CustomerInformation {
-        $pathParams = [
-            '{customerId}' => $customerId,
-        ];
-
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/experimental/customers/{customerId}/summary-metrics');
-
-        $request = new Request('GET', $uri);
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return CustomerInformation::from($data);
     }
 }

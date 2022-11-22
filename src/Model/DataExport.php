@@ -267,17 +267,6 @@ abstract class DataExport implements JsonSerializable
         return $this->fields['createdTime'] ?? null;
     }
 
-    public function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
-    {
-        if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
-            $createdTime = new DateTimeImmutable($createdTime);
-        }
-
-        $this->fields['createdTime'] = $createdTime;
-
-        return $this;
-    }
-
     public function getUpdatedTime(): ?DateTimeImmutable
     {
         return $this->fields['updatedTime'] ?? null;
@@ -378,6 +367,17 @@ abstract class DataExport implements JsonSerializable
     private function setRecordCount(null|int $recordCount): self
     {
         $this->fields['recordCount'] = $recordCount;
+
+        return $this;
+    }
+
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    {
+        if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
+            $createdTime = new DateTimeImmutable($createdTime);
+        }
+
+        $this->fields['createdTime'] = $createdTime;
 
         return $this;
     }

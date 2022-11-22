@@ -35,6 +35,9 @@ class RuleSetVersion implements JsonSerializable
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
         }
+        if (array_key_exists('updatedTime', $data)) {
+            $this->setUpdatedTime($data['updatedTime']);
+        }
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
@@ -102,6 +105,11 @@ class RuleSetVersion implements JsonSerializable
         return $this->fields['createdTime'] ?? null;
     }
 
+    public function getUpdatedTime(): ?DateTimeImmutable
+    {
+        return $this->fields['updatedTime'] ?? null;
+    }
+
     /**
      * @return null|SelfLink[]
      */
@@ -125,6 +133,9 @@ class RuleSetVersion implements JsonSerializable
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
         }
+        if (array_key_exists('updatedTime', $this->fields)) {
+            $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
+        }
         if (array_key_exists('_links', $this->fields)) {
             $data['_links'] = $this->fields['_links'];
         }
@@ -139,6 +150,17 @@ class RuleSetVersion implements JsonSerializable
         }
 
         $this->fields['createdTime'] = $createdTime;
+
+        return $this;
+    }
+
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    {
+        if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
+            $updatedTime = new DateTimeImmutable($updatedTime);
+        }
+
+        $this->fields['updatedTime'] = $updatedTime;
 
         return $this;
     }

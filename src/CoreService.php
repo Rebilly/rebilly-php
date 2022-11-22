@@ -21,6 +21,8 @@ class CoreService
 
     private readonly Api\AmlApi $aml;
 
+    private readonly Api\AmlChecksApi $amlChecks;
+
     private readonly Api\BlocklistsApi $blocklists;
 
     private readonly Api\CouponsApi $coupons;
@@ -85,6 +87,7 @@ class CoreService
     {
         $this->client = $client ?? new Client($config);
         $this->aml = new Api\AmlApi($this->client);
+        $this->amlChecks = new Api\AmlChecksApi($this->client);
         $this->blocklists = new Api\BlocklistsApi($this->client);
         $this->coupons = new Api\CouponsApi($this->client);
         $this->creditMemos = new Api\CreditMemosApi($this->client);
@@ -120,6 +123,11 @@ class CoreService
     public function aml(): Api\AmlApi
     {
         return $this->aml;
+    }
+
+    public function amlChecks(): Api\AmlChecksApi
+    {
+        return $this->amlChecks;
     }
 
     public function blocklists(): Api\BlocklistsApi

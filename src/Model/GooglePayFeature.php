@@ -19,6 +19,8 @@ use TypeError;
 
 class GooglePayFeature implements JsonSerializable
 {
+    public const NAME_GOOGLE_PAY = 'Google Pay';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -55,17 +57,19 @@ class GooglePayFeature implements JsonSerializable
         return null;
     }
 
-    public function getName(): ?GooglePayFeatureName
+    /**
+     * @psalm-return self::NAME_*|null $name
+     */
+    public function getName(): ?string
     {
         return $this->fields['name'] ?? null;
     }
 
-    public function setName(null|GooglePayFeatureName|string $name): self
+    /**
+     * @psalm-param self::NAME_*|null $name
+     */
+    public function setName(null|string $name): self
     {
-        if ($name !== null && !($name instanceof GooglePayFeatureName)) {
-            $name = GooglePayFeatureName::from($name);
-        }
-
         $this->fields['name'] = $name;
 
         return $this;
@@ -115,7 +119,7 @@ class GooglePayFeature implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('name', $this->fields)) {
-            $data['name'] = $this->fields['name']?->value;
+            $data['name'] = $this->fields['name'];
         }
         if (array_key_exists('merchantName', $this->fields)) {
             $data['merchantName'] = $this->fields['merchantName'];
