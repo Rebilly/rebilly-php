@@ -21,6 +21,7 @@ Security - in case of vulnerabilities.
 - [x] Added new property to `CreditMemo`: `allocations`
 - [x] Added `CreditMemoService::patch()` method
 - [x] Added `SubscriptionService::getUpcomingInvoice()` method
+- [x] Use paymentInstrumentId when creating instruments.  Deprecate old methods for ACH, PayPal and payment-card.
 
 ### Deprecated
 
