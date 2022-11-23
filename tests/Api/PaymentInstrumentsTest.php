@@ -34,6 +34,21 @@ class PaymentInstrumentsTest extends BaseTestCase
     public function achInstrument()
     {
         $instrument = new AchInstrument();
+        $instrument->setPaymentInstrumentId('123');
+        $instrument->setGatewayAccountId('gateway-1');
+
+        self::assertInstanceOf(AchInstrument::class, $instrument);
+        self::assertSame('123', $instrument->getPaymentInstrumentId());
+        self::assertSame('gateway-1', $instrument->getGatewayAccountId());
+        self::assertSame('ach', $instrument->getMethod());
+    }
+
+    /**
+     * @test
+     */
+    public function achInstrumentBC()
+    {
+        $instrument = new AchInstrument();
         $instrument->setBankAccountId('123');
         $instrument->setGatewayAccountId('gateway-1');
 
@@ -49,6 +64,21 @@ class PaymentInstrumentsTest extends BaseTestCase
     public function paypalInstrument()
     {
         $instrument = new PayPalInstrument();
+        $instrument->setPaymentInstrumentId('123');
+        $instrument->setGatewayAccountId('gateway-1');
+
+        self::assertInstanceOf(PayPalInstrument::class, $instrument);
+        self::assertSame('123', $instrument->getPaymentInstrumentId());
+        self::assertSame('gateway-1', $instrument->getGatewayAccountId());
+        self::assertSame('paypal', $instrument->getMethod());
+    }
+
+    /**
+     * @test
+     */
+    public function paypalInstrumentBC()
+    {
+        $instrument = new PayPalInstrument();
         $instrument->setPayPalAccountId('123');
         $instrument->setGatewayAccountId('gateway-1');
 
@@ -62,6 +92,21 @@ class PaymentInstrumentsTest extends BaseTestCase
      * @test
      */
     public function paymentCardInstrument()
+    {
+        $instrument = new PaymentCardInstrument();
+        $instrument->setPaymentInstrumentId('123');
+        $instrument->setGatewayAccountId('gateway-1');
+
+        self::assertInstanceOf(PaymentCardInstrument::class, $instrument);
+        self::assertSame('123', $instrument->getPaymentInstrumentId());
+        self::assertSame('gateway-1', $instrument->getGatewayAccountId());
+        self::assertSame('payment-card', $instrument->getMethod());
+    }
+
+    /**
+     * @test
+     */
+    public function paymentCardInstrumentBC()
     {
         $instrument = new PaymentCardInstrument();
         $instrument->setPaymentCardId('123');

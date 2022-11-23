@@ -21,11 +21,32 @@ use Rebilly\Entities\PaymentMethodInstrument;
 class PayPalInstrument extends PaymentMethodInstrument
 {
     /**
+     * {@inheritdoc}
+     */
+    public function __construct(array $data = [])
+    {
+        if (isset($data['payPalAccountId'])) {
+            $data['paymentInstrumentId'] = $data['payPalAccountId'];
+            unset($data['payPalAccountId']);
+        }
+        parent::__construct(['method' => $this->methodName()] + $data);
+    }
+
+    /**
+     * @return string
+     */
+    public function getPaymentInstrumentId()
+    {
+        return $this->getAttribute('paymentInstrumentId');
+    }
+
+    /**
+     * @deprecated
      * @return string
      */
     public function getPayPalAccountId()
     {
-        return $this->getAttribute('payPalAccountId');
+        return $this->getPaymentInstrumentId();
     }
 
     /**
@@ -33,9 +54,20 @@ class PayPalInstrument extends PaymentMethodInstrument
      *
      * @return $this
      */
+    public function setPaymentInstrumentId($value)
+    {
+        return $this->setAttribute('paymentInstrumentId', $value);
+    }
+
+    /**
+     * @deprecated
+     * @param string $value
+     *
+     * @return $this
+     */
     public function setPayPalAccountId($value)
     {
-        return $this->setAttribute('payPalAccountId', $value);
+        return $this->setPaymentInstrumentId($value);
     }
 
     /**
