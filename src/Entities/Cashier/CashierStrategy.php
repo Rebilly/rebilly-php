@@ -16,7 +16,7 @@ use Rebilly\Rest\Entity;
 /**
  * Class CashierStrategy.
  */
-class CashierStrategy extends Entity
+final class CashierStrategy extends Entity
 {
     /**
      * @return string

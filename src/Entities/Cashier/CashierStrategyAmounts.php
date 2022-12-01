@@ -14,7 +14,10 @@ namespace Rebilly\Entities\Cashier;
 use DomainException;
 use Rebilly\Rest\Resource;
 
-class CashierStrategyAmounts extends Resource
+/**
+ * Class CashierStrategyAmounts.
+ */
+final class CashierStrategyAmounts extends Resource
 {
     private const UNEXPECTED_CALCULATOR = 'Unexpected calculator tyoe. Onle %s calculators are supported';
 

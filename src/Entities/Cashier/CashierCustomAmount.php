@@ -14,7 +14,10 @@ namespace Rebilly\Entities\Cashier;
 use DomainException;
 use Rebilly\Rest\Resource;
 
-class CashierCustomAmount extends Resource
+/**
+ * Class CashierCustomAmount.
+ */
+final class CashierCustomAmount extends Resource
 {
     private const NON_NUMERIC_VALUE = '%s is not a numeric value';
 
