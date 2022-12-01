@@ -18,6 +18,7 @@ use Psr\Http\Message\RequestInterface as Request;
 use Rebilly\Client;
 use Rebilly\Entities;
 use Rebilly\Entities\Cashier\CashierCustomAmount;
+use Rebilly\Entities\Cashier\CashierRequest;
 use Rebilly\Entities\Cashier\CashierStrategy;
 use Rebilly\Entities\Cashier\CashierStrategyAmounts;
 use Rebilly\Entities\Customer;
@@ -1188,6 +1189,7 @@ class ServiceTest extends BaseTestCase
      */
     public function cashierStrategyService()
     {
+
         /** @var CurlHandler|MockObject $handler */
         $handler = $this->createMock(CurlHandler::class);
 
@@ -1256,7 +1258,69 @@ class ServiceTest extends BaseTestCase
         self::assertSame($strategies[1]['id'], $result[1]->getId());
         self::assertInstanceOf(CashierStrategyAmounts::class, $result[1]->getAmounts());
         self::assertInstanceOf(CashierCustomAmount::class, $result[1]->getCustomAmount());
+    }
 
+    /**
+     * @test
+     */
+    public function cashierRequestsService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->createMock(CurlHandler::class);
+
+        $body = [
+            [
+                'id' => 'cr-1',
+                'websiteId' => 'website-1',
+                'customerId' => 'customer-1',
+                'currency' => 'USD',
+                'status' => 'created',
+                'amounts' => [1, 3.5, 10],
+                'customAmount' => [
+                    'minimum' => 1,
+                    'maximum' => 9,
+                    'multipleOf' => 2
+                ],
+            ],
+            [
+                'id' => 'cr-2',
+                'websiteId' => 'website-1',
+                'customerId' => 'customer-2',
+                'currency' => 'EUR',
+                'status' => 'expired',
+                'amounts' => [2,3,4],
+                'customAmount' => null,
+            ],
+        ];
+
+        $handler
+            ->expects(self::any())
+            ->method('__invoke')
+            ->willReturn(
+                $client->createResponse()
+                    ->withBody(Utils::streamFor(json_encode($body)))
+            );
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+        $service = $client->cashierRequests();
+
+        $result = $service->search();
+        self::assertCount(2, $result);
+
+        self::assertInstanceOf(CashierRequest::class, $result[0]);
+        self::assertSame($body[0]['id'], $result[0]->getId());
+        self::assertSame($body[0]['amounts'], $result[0]->getAmounts());
+        self::assertInstanceOf(CashierCustomAmount::class, $result[0]->getCustomAmount());
+
+        self::assertInstanceOf(CashierRequest::class, $result[1]);
+        self::assertSame($body[1]['id'], $result[1]->getId());
+        self::assertSame($body[1]['amounts'], $result[1]->getAmounts());
+        self::assertNull($result[1]->getCustomAmount());
     }
 
     /**
@@ -1491,6 +1555,16 @@ class ServiceTest extends BaseTestCase
                 'eventRules',
                 Services\RuleService::class,
                 Entities\RulesEngine\EventRules::class,
+            ],
+            [
+                'cashierRequests',
+                Services\CashierRequestService::class,
+                Entities\Cashier\CashierRequest::class,
+            ],
+            [
+                'cashierStrategies',
+                Services\CashierStrategyService::class,
+                Entities\Cashier\CashierStrategy::class,
             ],
         ];
     }

@@ -15,6 +15,7 @@ use ArrayAccess;
 use ArrayIterator;
 use InvalidArgumentException;
 use IteratorAggregate;
+use Rebilly\Entities\Cashier\CashierRequest;
 use Rebilly\Entities\Cashier\CashierStrategy;
 use Rebilly\Entities\Coupons\Coupon;
 use Rebilly\Entities\Coupons\Redemption;
@@ -375,7 +376,13 @@ final class Schema implements IteratorAggregate, ArrayAccess
             },
             'cashier-strategies/{cashierStrategyId}' => function (array $content) {
                 return new CashierStrategy($content);
-            }
+            },
+            'cashier-requests' => function (array $content) {
+                return new Collection(new CashierRequest(), $content);
+            },
+            'cashier-requests/{cashierRequestId}' => function (array $content) {
+                return new CashierRequest($content);
+            },
         ];
     }
 

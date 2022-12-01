@@ -43,6 +43,7 @@ use RuntimeException;
  * @method Services\AuthenticationTokenService authenticationTokens()
  * @method Services\BankAccountService bankAccounts()
  * @method Services\BlocklistService blocklists()
+ * @method Services\CashierRequestService cashierRequests()
  * @method Services\CashierStrategyService cashierStrategies()
  * @method Services\CustomerCredentialService customerCredentials()
  * @method Services\CustomerService customers()
@@ -112,6 +113,7 @@ final class Client
         'authenticationTokens' => Services\AuthenticationTokenService::class,
         'bankAccounts' => Services\BankAccountService::class,
         'blocklists' => Services\BlocklistService::class,
+        'cashierRequests' => Services\CashierRequestService::class,
         'cashierStrategies' => Services\CashierStrategyService::class,
         'customerCredentials' => Services\CustomerCredentialService::class,
         'customers' => Services\CustomerService::class,

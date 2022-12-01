@@ -154,6 +154,7 @@ class ApiTest extends TestCase
             [Entities\AuthenticationOptions::class, null],
             [Entities\AuthenticationToken::class, 'token'],
             [Entities\Blocklist::class],
+            [Entities\Cashier\CashierRequest::class],
             [Entities\Cashier\CashierStrategy::class],
             [Entities\Contact\Email::class],
             [Entities\Contact\PhoneNumber::class],
