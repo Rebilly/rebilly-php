@@ -43,6 +43,7 @@ use RuntimeException;
  * @method Services\AuthenticationTokenService authenticationTokens()
  * @method Services\BankAccountService bankAccounts()
  * @method Services\BlocklistService blocklists()
+ * @method Services\CashierRequestService cashierRequests()
  * @method Services\CashierStrategyService cashierStrategies()
  * @method Services\CustomerCredentialService customerCredentials()
  * @method Services\CustomerService customers()
@@ -93,7 +94,6 @@ use RuntimeException;
  * @method Services\AmlService aml()
  * @method Services\PaymentInstrumentService paymentInstruments()
  * @method Services\TagService tags()
- * @method Services\CashierRequestService cashierRequests()
  */
 final class Client
 {
@@ -113,6 +113,7 @@ final class Client
         'authenticationTokens' => Services\AuthenticationTokenService::class,
         'bankAccounts' => Services\BankAccountService::class,
         'blocklists' => Services\BlocklistService::class,
+        'cashierRequests' => Services\CashierRequestService::class,
         'cashierStrategies' => Services\CashierStrategyService::class,
         'customerCredentials' => Services\CustomerCredentialService::class,
         'customers' => Services\CustomerService::class,
@@ -162,7 +163,6 @@ final class Client
         'taxjarCredentials' => Services\TaxJarCredentialsService::class,
         'paymentInstruments' => Services\PaymentInstrumentService::class,
         'tags' => Services\TagService::class,
-        'cashierRequests' => Services\CashierRequestService::class,
     ];
 
     /** @var array */

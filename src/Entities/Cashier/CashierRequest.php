@@ -15,7 +15,7 @@ namespace Rebilly\Entities\Cashier;
 
 use Rebilly\Rest\Entity;
 
-class CashierRequest extends Entity
+final class CashierRequest extends Entity
 {
     public const STATUS_CREATED = 'created';
 
