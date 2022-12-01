@@ -28,6 +28,7 @@ Security - in case of vulnerabilities.
 - [x] Added `PayPalInstrument::getPaymentInstrumentId` method
 - [x] Added `PayPalInstrument::setPaymentInstrumentId` method
 - [x] Added **Cashier Requests API**
+- [x] Added **Cashier Strategy API**
 
 ### Deprecated
 
