@@ -81,7 +81,7 @@ final class CashierStrategy extends Entity
     }
 
     /**
-     * @param array|null $value
+     * @param CashierCustomAmount|array|null $value
      *
      * @return $this
      */

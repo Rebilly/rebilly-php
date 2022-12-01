@@ -137,7 +137,7 @@ final class CashierRequest extends Entity
     }
 
     /**
-     * @param array|null $value
+     * @param CashierCustomAmount|array|null $value
      * @return $this
      */
     public function setCustomAmount($value)
