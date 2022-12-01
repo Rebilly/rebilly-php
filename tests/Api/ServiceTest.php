@@ -12,10 +12,14 @@
 namespace Rebilly\Tests\Api;
 
 use GuzzleHttp\Psr7;
+use GuzzleHttp\Psr7\Utils;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Http\Message\RequestInterface as Request;
 use Rebilly\Client;
 use Rebilly\Entities;
+use Rebilly\Entities\Cashier\CashierCustomAmount;
+use Rebilly\Entities\Cashier\CashierStrategy;
+use Rebilly\Entities\Cashier\CashierStrategyAmounts;
 use Rebilly\Entities\Customer;
 use Rebilly\Entities\PaymentMethodInstrument;
 use Rebilly\Entities\Webhook;
@@ -1177,6 +1181,82 @@ class ServiceTest extends BaseTestCase
         self::assertNull($service->tagCustomer('dummy', 'customer-1'));
         self::assertNull($service->untagCustomer('dummy', 'customer-1'));
         self::assertNull($service->tagCustomers('dummy', ['customer-1']));
+    }
+
+    /**
+     * @test
+     */
+    public function cashierStrategyService()
+    {
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->createMock(CurlHandler::class);
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+
+        $service = $client->cashierStrategies();
+
+        $strategies = [
+            [
+                'id' => 'foo',
+                'name' => 'bar',
+                'filter' => '',
+                'amounts' => [
+                    'calculator' => 'percent',
+                    'baseAmount' => 10,
+                    'increments' => [10.5, 15, 25],
+                    'adjustBaseToLastDeposit' => false,
+                ],
+                'customAmount' => [
+                    'minimum' => 1,
+                    'maximum' => 9,
+                    'multipleOf' => 2
+                ],
+            ],
+            [
+                'id' => 'foo-2',
+                'name' => 'bar-2',
+                'filter' => 'currency:USD',
+                'amounts' => [
+                    'calculator' => 'absolute',
+                    'baseAmount' => 10.5,
+                    'increments' => [11, 15, 25.3],
+                    'adjustBaseToLastDeposit' => true,
+                ],
+                'customAmount' => [
+                    'minimum' => 1,
+                    'maximum' => 9,
+                    'multipleOf' => 2
+                ],
+            ],
+        ];
+
+        $handler
+            ->expects(self::any())
+            ->method('__invoke')
+            ->willReturn(
+                $client
+                    ->createResponse()
+                    ->withBody(Utils::streamFor(json_encode($strategies)))
+            );
+
+        $result = $service->search();
+
+        self::assertCount(2, $result);
+        self::assertInstanceOf(Rest\Collection::class, $result);
+
+        self::assertInstanceOf(CashierStrategy::class, $result[0]);
+        self::assertSame($strategies[0]['id'], $result[0]->getId());
+        self::assertInstanceOf(CashierStrategyAmounts::class, $result[0]->getAmounts());
+        self::assertInstanceOf(CashierCustomAmount::class, $result[0]->getCustomAmount());
+
+        self::assertInstanceOf(CashierStrategy::class, $result[1]);
+        self::assertSame($strategies[1]['id'], $result[1]->getId());
+        self::assertInstanceOf(CashierStrategyAmounts::class, $result[1]->getAmounts());
+        self::assertInstanceOf(CashierCustomAmount::class, $result[1]->getCustomAmount());
+
     }
 
     /**
