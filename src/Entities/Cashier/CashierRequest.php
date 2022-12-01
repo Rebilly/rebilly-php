@@ -137,7 +137,7 @@ final class CashierRequest extends Entity
     }
 
     /**
-     * @param array $value
+     * @param array|null $value
      * @return $this
      */
     public function setCustomAmount($value)
@@ -149,9 +149,9 @@ final class CashierRequest extends Entity
      * @param array $data
      * @return CashierCustomAmount
      */
-    public function createCustomAmount($data)
+    public function createCustomAmount(array $data)
     {
-        return new CashierCustomAmount($data);
+        return CashierCustomAmount::createFromData($data);
     }
 
     /**

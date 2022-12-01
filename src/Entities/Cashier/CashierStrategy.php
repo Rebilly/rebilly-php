@@ -73,7 +73,7 @@ final class CashierStrategy extends Entity
     }
 
     /**
-     * @return CashierCustomAmount
+     * @return CashierCustomAmount|null
      */
     public function getCustomAmount()
     {
@@ -81,7 +81,7 @@ final class CashierStrategy extends Entity
     }
 
     /**
-     * @param CashierCustomAmount|array $value
+     * @param array|null $value
      *
      * @return $this
      */
