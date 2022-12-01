@@ -1180,6 +1180,32 @@ class ServiceTest extends BaseTestCase
     }
 
     /**
+     * @test
+     */
+    public function cashierRequestsService()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->createMock(CurlHandler::class);
+
+        $handler
+            ->expects(self::any())
+            ->method('__invoke')
+            ->willReturn($client->createResponse()->withHeader('Location', 'cashier-requests/dummy'));
+
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+
+        $service = $client->cashierRequests();
+
+        $result = $service->load('dummy');
+        self::assertInstanceOf(Entities\Cashier\CashierRequest::class, $result);
+    }
+
+    /**
      * @return array
      */
     public function provideServiceClasses()
@@ -1411,6 +1437,11 @@ class ServiceTest extends BaseTestCase
                 'eventRules',
                 Services\RuleService::class,
                 Entities\RulesEngine\EventRules::class,
+            ],
+            [
+                'cashierRequests',
+                Services\CashierRequestService::class,
+                Entities\Cashier\CashierRequest::class,
             ],
         ];
     }

@@ -240,6 +240,7 @@ class ApiTest extends TestCase
             [Entities\ReadyToPay\Features\GooglePayFeature::class],
             [Entities\ReadyToPay\Features\PlaidFeature::class],
             [Entities\ReadyToPay\Features\PayPalBillingAgreementFeature::class],
+            [Entities\Cashier\CashierRequest::class],
         ];
 
         foreach ($cases as $case) {
