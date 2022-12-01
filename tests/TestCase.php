@@ -551,6 +551,8 @@ abstract class TestCase extends Framework\TestCase
                         return self::randomElements(Entities\SubscriptionCancellation::statuses())[0];
                     case Entities\ApiTracking::class:
                         return 200;
+                    case Entities\Cashier\CashierRequest::class:
+                        return Entities\Cashier\CashierRequest::STATUS_CREATED;
                     case Entities\ShippingRate::class:
                     case Entities\PaymentCard::class:
                     case Entities\RulesEngine\Bind::class:
@@ -808,12 +810,26 @@ abstract class TestCase extends Framework\TestCase
                     'transactionId' => 'transaction-1',
                 ])]]);
             case 'amounts':
-                return [
-                    'baseAmount' => random_int(1, 9999) / 100,
-                    'increments' => [random_int(1, 999), random_int(1, 999)],
-                    'calculator' => Entities\Cashier\CashierStrategyAmounts::CALCULATOR_PERCENT,
-                    'adjustBaseToLastDeposit' => random_int(1, 10) % 2 === 0
-                ];
+                switch ($class) {
+                    case Entities\Cashier\CashierStrategy::class:
+                        return [
+                            'baseAmount' => random_int(1, 9999) / 100,
+                            'increments' => [random_int(1, 999), random_int(1, 999)],
+                            'calculator' => Entities\Cashier\CashierStrategyAmounts::CALCULATOR_PERCENT,
+                            'adjustBaseToLastDeposit' => random_int(1, 10) % 2 === 0,
+                        ];
+                    case Entities\Cashier\CashierRequest::class:
+                        $amounts = [];
+                        for ($i = 0; $i < 4; $i++) {
+                            $amounts[] = random_int(1, 9999) / 100;
+                        }
+
+                        return $amounts;
+                    default:
+                        throw new InvalidArgumentException(
+                            sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
+                        );
+                }
             case 'customAmount':
                 return [
                     'minimum' => random_int(1, 10),

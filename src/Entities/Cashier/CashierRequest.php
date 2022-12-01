@@ -17,6 +17,14 @@ use Rebilly\Rest\Entity;
 
 class CashierRequest extends Entity
 {
+    public const STATUS_CREATED = 'created';
+
+    public const STATUS_PENDING = 'pending';
+
+    public const STATUS_COMPLETED = 'completed';
+
+    public const STATUS_EXPIRED = 'expired';
+
     /**
      * @return string
      */
