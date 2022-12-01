@@ -796,6 +796,8 @@ abstract class TestCase extends Framework\TestCase
                         return Entities\Shipping::CALCULATOR_REBILLY;
                     case Entities\InvoiceTax::class:
                         return Entities\InvoiceTax::CALCULATOR_REBILLY_TAXJAR;
+                    case Entities\Cashier\CashierStrategy::class:
+                        return Entities\Cashier\CashierStrategyAmounts::CALCULATOR_PERCENT;
                     default:
                         throw new InvalidArgumentException(
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
@@ -805,6 +807,19 @@ abstract class TestCase extends Framework\TestCase
                 return new Entities\AllocationCollection(['transactions' => [new Entities\TransactionAllocation([
                     'transactionId' => 'transaction-1',
                 ])]]);
+            case 'amounts':
+                return [
+                    'baseAmount' => random_int(1, 9999) / 100,
+                    'increments' => [random_int(1, 999), random_int(1, 999)],
+                    'calculator' => Entities\Cashier\CashierStrategyAmounts::CALCULATOR_PERCENT,
+                    'adjustBaseToLastDeposit' => random_int(1, 10) % 2 === 0
+                ];
+            case 'customAmount':
+                return [
+                    'minimum' => random_int(1, 10),
+                    'maximum' => random_int(20, 50),
+                    'multipleOf' => 1,
+                ];
         }
     }
 

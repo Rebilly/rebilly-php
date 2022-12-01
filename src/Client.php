@@ -43,6 +43,7 @@ use RuntimeException;
  * @method Services\AuthenticationTokenService authenticationTokens()
  * @method Services\BankAccountService bankAccounts()
  * @method Services\BlocklistService blocklists()
+ * @method Services\CashierStrategyService cashierStrategies()
  * @method Services\CustomerCredentialService customerCredentials()
  * @method Services\CustomerService customers()
  * @method Services\InvoiceItemService invoiceItems()
@@ -105,13 +106,14 @@ final class Client
      */
     public const CURRENT_VERSION = 'v2.1';
 
-    public const SDK_VERSION = '2.19.0';
+    public const SDK_VERSION = '2.20.0';
 
     private static $services = [
         'authenticationOptions' => Services\AuthenticationOptionsService::class,
         'authenticationTokens' => Services\AuthenticationTokenService::class,
         'bankAccounts' => Services\BankAccountService::class,
         'blocklists' => Services\BlocklistService::class,
+        'cashierStrategies' => Services\CashierStrategyService::class,
         'customerCredentials' => Services\CustomerCredentialService::class,
         'customers' => Services\CustomerService::class,
         'invoiceItems' => Services\InvoiceItemService::class,

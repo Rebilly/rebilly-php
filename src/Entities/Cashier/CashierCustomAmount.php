@@ -24,6 +24,14 @@ final class CashierCustomAmount extends Resource
     private const GREATER_THAN_ZERO = '%s should be greater than 0';
 
     /**
+     * @return CashierCustomAmount
+     */
+    public static function createFromData(array $data)
+    {
+        return new self($data);
+    }
+
+    /**
      * @return float
      */
     public function getMinimum()

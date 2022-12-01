@@ -87,6 +87,26 @@ final class CashierStrategy extends Entity
      */
     public function setCustomAmount($value)
     {
-        return $this->setAttribute('amounts', $value);
+        return $this->setAttribute('customAmount', $value);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return CashierCustomAmount
+     */
+    public function createCustomAmount(array $data)
+    {
+        return CashierCustomAmount::createFromData($data);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return CashierStrategyAmounts
+     */
+    public function createAmounts(array $data)
+    {
+        return CashierStrategyAmounts::createFromData($data);
     }
 }
