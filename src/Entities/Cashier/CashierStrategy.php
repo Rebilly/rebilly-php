@@ -87,7 +87,7 @@ final class CashierStrategy extends Entity
      */
     public function setCustomAmount($value)
     {
-        return $this->setAttribute('amounts', $value);
+        return $this->setAttribute('customAmount', $value);
     }
 
     /**
@@ -97,7 +97,7 @@ final class CashierStrategy extends Entity
      */
     public function createCustomAmount(array $data)
     {
-        return new CashierCustomAmount($data);
+        return CashierCustomAmount::createFromData($data);
     }
 
     /**
@@ -107,6 +107,6 @@ final class CashierStrategy extends Entity
      */
     public function createAmounts(array $data)
     {
-        return new CashierStrategyAmounts($data);
+        return CashierStrategyAmounts::createFromData($data);
     }
 }

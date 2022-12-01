@@ -30,6 +30,14 @@ final class CashierStrategyAmounts extends Resource
     public const CALCULATOR_ABSOLUTE = 'absolute';
 
     /**
+     * @return CashierStrategyAmounts
+     */
+    public static function createFromData(array $data)
+    {
+        return new self($data);
+    }
+
+    /**
      * @return string[]|array
      */
     public static function calculators()
