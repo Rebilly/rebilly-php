@@ -343,15 +343,15 @@ class ProofOfPurchaseKycDocument extends KycDocument
         return $this;
     }
 
-    public function getParsedData(): ?ProofOfPurchaseKycDocumentDocumentMatches
+    public function getParsedData(): ?ProofOfPurchaseKycDocumentParsedData
     {
         return $this->fields['parsedData'] ?? null;
     }
 
-    public function setParsedData(null|ProofOfPurchaseKycDocumentDocumentMatches|array $parsedData): self
+    public function setParsedData(null|ProofOfPurchaseKycDocumentParsedData|array $parsedData): self
     {
-        if ($parsedData !== null && !($parsedData instanceof ProofOfPurchaseKycDocumentDocumentMatches)) {
-            $parsedData = ProofOfPurchaseKycDocumentDocumentMatches::from($parsedData);
+        if ($parsedData !== null && !($parsedData instanceof ProofOfPurchaseKycDocumentParsedData)) {
+            $parsedData = ProofOfPurchaseKycDocumentParsedData::from($parsedData);
         }
 
         $this->fields['parsedData'] = $parsedData;

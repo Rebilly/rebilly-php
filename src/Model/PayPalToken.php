@@ -15,9 +15,9 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use InvalidArgumentException;
+use JsonSerializable;
 
-class PayPalToken extends CompositeToken
+class PayPalToken implements JsonSerializable
 {
     public const METHOD_PAYPAL = 'paypal';
 
@@ -25,10 +25,6 @@ class PayPalToken extends CompositeToken
 
     public function __construct(array $data = [])
     {
-        parent::__construct([
-            'method' => 'paypal',
-        ] + $data);
-
         if (array_key_exists('method', $data)) {
             $this->setMethod($data['method']);
         }
@@ -90,24 +86,15 @@ class PayPalToken extends CompositeToken
         return $this;
     }
 
-    /**
-     * @return array{paypalMerchantId:string,billingAgreementToken:string}
-     */
-    public function getPaymentInstrument(): array
+    public function getPaymentInstrument(): PayPalTokenPaymentInstrument
     {
         return $this->fields['paymentInstrument'];
     }
 
-    /**
-     * @param array{paypalMerchantId:string,billingAgreementToken:string} $paymentInstrument
-     */
-    public function setPaymentInstrument(array $paymentInstrument): self
+    public function setPaymentInstrument(PayPalTokenPaymentInstrument|array $paymentInstrument): self
     {
-        if (!isset($paymentInstrument['paypalMerchantId'])) {
-            throw new InvalidArgumentException('Property \'paymentInstrument.paypalMerchantId\' must be set.');
-        }
-        if (!isset($paymentInstrument['billingAgreementToken'])) {
-            throw new InvalidArgumentException('Property \'paymentInstrument.billingAgreementToken\' must be set.');
+        if (!($paymentInstrument instanceof PayPalTokenPaymentInstrument)) {
+            $paymentInstrument = PayPalTokenPaymentInstrument::from($paymentInstrument);
         }
 
         $this->fields['paymentInstrument'] = $paymentInstrument;
@@ -230,7 +217,7 @@ class PayPalToken extends CompositeToken
             $data['method'] = $this->fields['method'];
         }
         if (array_key_exists('paymentInstrument', $this->fields)) {
-            $data['paymentInstrument'] = $this->fields['paymentInstrument'];
+            $data['paymentInstrument'] = $this->fields['paymentInstrument']?->jsonSerialize();
         }
         if (array_key_exists('billingAddress', $this->fields)) {
             $data['billingAddress'] = $this->fields['billingAddress']?->jsonSerialize();
@@ -263,7 +250,7 @@ class PayPalToken extends CompositeToken
             $data['_links'] = $this->fields['_links'];
         }
 
-        return parent::jsonSerialize() + $data;
+        return $data;
     }
 
     private function setId(null|string $id): self

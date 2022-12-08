@@ -54,6 +54,12 @@ class GlobalWebhook implements JsonSerializable
         if (array_key_exists('credentialHash', $data)) {
             $this->setCredentialHash($data['credentialHash']);
         }
+        if (array_key_exists('body', $data)) {
+            $this->setBody($data['body']);
+        }
+        if (array_key_exists('filter', $data)) {
+            $this->setFilter($data['filter']);
+        }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
         }
@@ -173,6 +179,30 @@ class GlobalWebhook implements JsonSerializable
         return $this;
     }
 
+    public function getBody(): ?string
+    {
+        return $this->fields['body'] ?? null;
+    }
+
+    public function setBody(null|string $body): self
+    {
+        $this->fields['body'] = $body;
+
+        return $this;
+    }
+
+    public function getFilter(): ?string
+    {
+        return $this->fields['filter'] ?? null;
+    }
+
+    public function setFilter(null|string $filter): self
+    {
+        $this->fields['filter'] = $filter;
+
+        return $this;
+    }
+
     public function getCreatedTime(): ?DateTimeImmutable
     {
         return $this->fields['createdTime'] ?? null;
@@ -225,6 +255,12 @@ class GlobalWebhook implements JsonSerializable
         }
         if (array_key_exists('credentialHash', $this->fields)) {
             $data['credentialHash'] = $this->fields['credentialHash'];
+        }
+        if (array_key_exists('body', $this->fields)) {
+            $data['body'] = $this->fields['body'];
+        }
+        if (array_key_exists('filter', $this->fields)) {
+            $data['filter'] = $this->fields['filter'];
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);

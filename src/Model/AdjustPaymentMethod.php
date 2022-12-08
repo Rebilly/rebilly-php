@@ -191,7 +191,7 @@ abstract class AdjustPaymentMethod implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('paymentMethod', $this->fields)) {
-            $data['paymentMethod'] = $this->fields['paymentMethod'];
+            $data['paymentMethod'] = $this->fields['paymentMethod']?->value;
         }
         if (array_key_exists('feature', $this->fields)) {
             $data['feature'] = $this->fields['feature'];

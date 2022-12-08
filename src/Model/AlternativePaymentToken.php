@@ -15,17 +15,14 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
+use JsonSerializable;
 
-class AlternativePaymentToken extends CompositeToken
+class AlternativePaymentToken implements JsonSerializable
 {
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        parent::__construct([
-            'method' => 'AdvCash',
-        ] + $data);
-
         if (array_key_exists('method', $data)) {
             $this->setMethod($data['method']);
         }
@@ -227,7 +224,7 @@ class AlternativePaymentToken extends CompositeToken
             $data['_links'] = $this->fields['_links'];
         }
 
-        return parent::jsonSerialize() + $data;
+        return $data;
     }
 
     private function setId(null|string $id): self

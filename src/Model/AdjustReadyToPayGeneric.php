@@ -13,16 +13,14 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-class AdjustReadyToPayGeneric extends AdjustPaymentMethod
+use JsonSerializable;
+
+class AdjustReadyToPayGeneric implements JsonSerializable
 {
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        parent::__construct([
-            'paymentMethod' => 'AdvCash',
-        ] + $data);
-
         if (array_key_exists('paymentMethod', $data)) {
             $this->setPaymentMethod($data['paymentMethod']);
         }
@@ -36,14 +34,14 @@ class AdjustReadyToPayGeneric extends AdjustPaymentMethod
         return new self($data);
     }
 
-    public function getPaymentMethod(): AlternativePaymentMethods
+    public function getPaymentMethod(): ?AlternativePaymentMethods
     {
-        return $this->fields['paymentMethod'];
+        return $this->fields['paymentMethod'] ?? null;
     }
 
-    public function setPaymentMethod(AlternativePaymentMethods|string $paymentMethod): self
+    public function setPaymentMethod(null|AlternativePaymentMethods|string $paymentMethod): self
     {
-        if (!($paymentMethod instanceof AlternativePaymentMethods)) {
+        if ($paymentMethod !== null && !($paymentMethod instanceof AlternativePaymentMethods)) {
             $paymentMethod = AlternativePaymentMethods::from($paymentMethod);
         }
 
@@ -52,12 +50,12 @@ class AdjustReadyToPayGeneric extends AdjustPaymentMethod
         return $this;
     }
 
-    public function getFeature(): string
+    public function getFeature(): ?string
     {
-        return $this->fields['feature'];
+        return $this->fields['feature'] ?? null;
     }
 
-    public function setFeature(string $feature): self
+    public function setFeature(null|string $feature): self
     {
         $this->fields['feature'] = $feature;
 
@@ -74,6 +72,6 @@ class AdjustReadyToPayGeneric extends AdjustPaymentMethod
             $data['feature'] = $this->fields['feature'];
         }
 
-        return parent::jsonSerialize() + $data;
+        return $data;
     }
 }

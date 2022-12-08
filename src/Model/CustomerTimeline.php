@@ -25,6 +25,14 @@ class CustomerTimeline implements JsonSerializable
 
     public const TYPE_AML_LIST_WAS_POSSIBLY_MATCHED = 'aml-list-was-possibly-matched';
 
+    public const TYPE_CASHIER_REQUEST_COMPLETED = 'cashier-request-completed';
+
+    public const TYPE_CASHIER_REQUEST_CREATED = 'cashier-request-created';
+
+    public const TYPE_CASHIER_REQUEST_EXPIRED = 'cashier-request-expired';
+
+    public const TYPE_CASHIER_REQUEST_STARTED = 'cashier-request-started';
+
     public const TYPE_COUPON_APPLIED = 'coupon-applied';
 
     public const TYPE_COUPON_REDEEMED = 'coupon-redeemed';

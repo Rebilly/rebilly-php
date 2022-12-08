@@ -16,17 +16,18 @@ namespace Rebilly\Sdk\Api;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
+use InvalidArgumentException;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\AlternativeInstrument;
 use Rebilly\Sdk\Model\BankAccountCreatePlain;
 use Rebilly\Sdk\Model\BankAccountUpdatePlain;
 use Rebilly\Sdk\Model\PaymentCardCreatePlain;
 use Rebilly\Sdk\Model\PaymentCardUpdatePlain;
-use Rebilly\Sdk\Model\PaymentInstrument;
 use Rebilly\Sdk\Model\PaymentInstrumentCreateToken;
 use Rebilly\Sdk\Model\PaymentInstrumentUpdateToken;
 use Rebilly\Sdk\Model\PayPalAccount;
 use Rebilly\Sdk\Paginator;
+use TypeError;
 
 class PaymentInstrumentsApi
 {
@@ -35,26 +36,26 @@ class PaymentInstrumentsApi
     }
 
     /**
-     * @return PaymentInstrument
+     * @return AlternativeInstrument|BankAccount|KhelocardCard|PaymentCard|PayPalAccount
      */
     public function create(
         PaymentInstrumentCreateToken|PaymentCardCreatePlain|BankAccountCreatePlain|PayPalAccount|AlternativeInstrument $body,
-    ): PaymentInstrument {
+    ): PaymentCard|BankAccount|PayPalAccount|KhelocardCard|AlternativeInstrument {
         $uri = '/payment-instruments';
 
         $request = new Request('POST', $uri, body: Utils::jsonEncode($body));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return PaymentInstrument::from($data);
+        return $this->buildPaymentInstrumentResponse($data);
     }
 
     /**
-     * @return PaymentInstrument
+     * @return AlternativeInstrument|BankAccount|KhelocardCard|PaymentCard|PayPalAccount
      */
     public function deactivate(
         string $id,
-    ): PaymentInstrument {
+    ): PaymentCard|BankAccount|PayPalAccount|KhelocardCard|AlternativeInstrument {
         $pathParams = [
             '{id}' => $id,
         ];
@@ -65,15 +66,15 @@ class PaymentInstrumentsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return PaymentInstrument::from($data);
+        return $this->buildPaymentInstrumentResponse($data);
     }
 
     /**
-     * @return PaymentInstrument
+     * @return AlternativeInstrument|BankAccount|KhelocardCard|PaymentCard|PayPalAccount
      */
     public function get(
         string $id,
-    ): PaymentInstrument {
+    ): PaymentCard|BankAccount|PayPalAccount|KhelocardCard|AlternativeInstrument {
         $pathParams = [
             '{id}' => $id,
         ];
@@ -84,11 +85,11 @@ class PaymentInstrumentsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return PaymentInstrument::from($data);
+        return $this->buildPaymentInstrumentResponse($data);
     }
 
     /**
-     * @return Collection<PaymentInstrument>
+     * @return Collection<AlternativeInstrument|BankAccount|KhelocardCard|PaymentCard|PayPalAccount>
      */
     public function getAll(
         ?string $filter = null,
@@ -113,7 +114,7 @@ class PaymentInstrumentsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): PaymentInstrument => PaymentInstrument::from($item), $data),
+            array_map(fn (array $item): PaymentCard|BankAccount|PayPalAccount|KhelocardCard|AlternativeInstrument => $this->buildPaymentInstrumentResponse($item), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
@@ -144,12 +145,12 @@ class PaymentInstrumentsApi
     }
 
     /**
-     * @return PaymentInstrument
+     * @return AlternativeInstrument|BankAccount|KhelocardCard|PaymentCard|PayPalAccount
      */
     public function update(
         string $id,
         PaymentInstrumentUpdateToken|PaymentCardUpdatePlain|BankAccountUpdatePlain $body,
-    ): PaymentInstrument {
+    ): PaymentCard|BankAccount|PayPalAccount|KhelocardCard|AlternativeInstrument {
         $pathParams = [
             '{id}' => $id,
         ];
@@ -160,6 +161,55 @@ class PaymentInstrumentsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return PaymentInstrument::from($data);
+        return $this->buildPaymentInstrumentResponse($data);
+    }
+
+    protected function buildPaymentInstrumentResponse(array $data): PaymentCard|BankAccount|PayPalAccount|KhelocardCard|AlternativeInstrument
+    {
+        $candidates = [];
+
+        try {
+            $instance = PaymentCard::from($data);
+            $candidates[] = [$instance, count(array_intersect_key($data, $instance->jsonSerialize()))];
+        } catch (InvalidArgumentException|TypeError) {
+        }
+
+        try {
+            $instance = BankAccount::from($data);
+            $candidates[] = [$instance, count(array_intersect_key($data, $instance->jsonSerialize()))];
+        } catch (InvalidArgumentException|TypeError) {
+        }
+
+        try {
+            $instance = PayPalAccount::from($data);
+            $candidates[] = [$instance, count(array_intersect_key($data, $instance->jsonSerialize()))];
+        } catch (InvalidArgumentException|TypeError) {
+        }
+
+        try {
+            $instance = KhelocardCard::from($data);
+            $candidates[] = [$instance, count(array_intersect_key($data, $instance->jsonSerialize()))];
+        } catch (InvalidArgumentException|TypeError) {
+        }
+
+        try {
+            $instance = AlternativeInstrument::from($data);
+            $candidates[] = [$instance, count(array_intersect_key($data, $instance->jsonSerialize()))];
+        } catch (InvalidArgumentException|TypeError) {
+        }
+
+        $determined = array_reduce($candidates, function (?array $current, array $candidate) {
+            if ($current === null || $current[1] < $candidate[1]) {
+                $current = $candidate;
+            }
+
+            return $current;
+        });
+
+        if ($determined[0] === null) {
+            throw new InvalidArgumentException('Could not instantiate PaymentInstrument response with the given value');
+        }
+
+        return $determined[0];
     }
 }

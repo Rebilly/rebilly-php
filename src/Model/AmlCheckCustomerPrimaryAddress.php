@@ -34,9 +34,6 @@ class AmlCheckCustomerPrimaryAddress implements JsonSerializable
         if (array_key_exists('country', $data)) {
             $this->setCountry($data['country']);
         }
-        if (array_key_exists('organization', $data)) {
-            $this->setOrganization($data['organization']);
-        }
     }
 
     public static function from(array $data = []): self
@@ -64,11 +61,6 @@ class AmlCheckCustomerPrimaryAddress implements JsonSerializable
         return $this->fields['country'] ?? null;
     }
 
-    public function getOrganization(): ?string
-    {
-        return $this->fields['organization'] ?? null;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [];
@@ -83,9 +75,6 @@ class AmlCheckCustomerPrimaryAddress implements JsonSerializable
         }
         if (array_key_exists('country', $this->fields)) {
             $data['country'] = $this->fields['country'];
-        }
-        if (array_key_exists('organization', $this->fields)) {
-            $data['organization'] = $this->fields['organization'];
         }
 
         return $data;
@@ -119,13 +108,6 @@ class AmlCheckCustomerPrimaryAddress implements JsonSerializable
     private function setCountry(null|string $country): self
     {
         $this->fields['country'] = $country;
-
-        return $this;
-    }
-
-    private function setOrganization(null|string $organization): self
-    {
-        $this->fields['organization'] = $organization;
 
         return $this;
     }

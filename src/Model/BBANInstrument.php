@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-class BBANInstrument extends BankAccountInstrument
+use JsonSerializable;
+
+class BBANInstrument implements JsonSerializable
 {
     public const ACCOUNT_NUMBER_TYPE_BBAN = 'BBAN';
 
@@ -27,10 +29,6 @@ class BBANInstrument extends BankAccountInstrument
 
     public function __construct(array $data = [])
     {
-        parent::__construct([
-            'accountNumberType' => 'BBAN',
-        ] + $data);
-
         if (array_key_exists('accountNumberType', $data)) {
             $this->setAccountNumberType($data['accountNumberType']);
         }
@@ -173,7 +171,7 @@ class BBANInstrument extends BankAccountInstrument
             $data['last4'] = $this->fields['last4'];
         }
 
-        return parent::jsonSerialize() + $data;
+        return $data;
     }
 
     private function setLast4(null|string $last4): self

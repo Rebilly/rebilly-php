@@ -15,8 +15,9 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
+use JsonSerializable;
 
-class BankAccountToken extends CompositeToken
+class BankAccountToken implements JsonSerializable
 {
     public const METHOD_ACH = 'ach';
 
@@ -26,10 +27,6 @@ class BankAccountToken extends CompositeToken
 
     public function __construct(array $data = [])
     {
-        parent::__construct([
-            'method' => 'ach',
-        ] + $data);
-
         if (array_key_exists('method', $data)) {
             $this->setMethod($data['method']);
         }
@@ -255,7 +252,7 @@ class BankAccountToken extends CompositeToken
             $data['_links'] = $this->fields['_links'];
         }
 
-        return parent::jsonSerialize() + $data;
+        return $data;
     }
 
     private function setId(null|string $id): self

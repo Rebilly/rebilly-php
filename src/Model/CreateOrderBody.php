@@ -25,14 +25,14 @@ class CreateOrderBody implements JsonSerializable
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('order_date', $data)) {
-            $this->setOrderDate($data['order_date']);
+        if (array_key_exists('orderDate', $data)) {
+            $this->setOrderDate($data['orderDate']);
         }
-        if (array_key_exists('order_title', $data)) {
-            $this->setOrderTitle($data['order_title']);
+        if (array_key_exists('orderTitle', $data)) {
+            $this->setOrderTitle($data['orderTitle']);
         }
-        if (array_key_exists('order_type', $data)) {
-            $this->setOrderType($data['order_type']);
+        if (array_key_exists('orderType', $data)) {
+            $this->setOrderType($data['orderType']);
         }
     }
 
@@ -43,24 +43,24 @@ class CreateOrderBody implements JsonSerializable
 
     public function getOrderDate(): string
     {
-        return $this->fields['order_date'];
+        return $this->fields['orderDate'];
     }
 
     public function setOrderDate(string $orderDate): self
     {
-        $this->fields['order_date'] = $orderDate;
+        $this->fields['orderDate'] = $orderDate;
 
         return $this;
     }
 
     public function getOrderTitle(): string
     {
-        return $this->fields['order_title'];
+        return $this->fields['orderTitle'];
     }
 
     public function setOrderTitle(string $orderTitle): self
     {
-        $this->fields['order_title'] = $orderTitle;
+        $this->fields['orderTitle'] = $orderTitle;
 
         return $this;
     }
@@ -70,7 +70,7 @@ class CreateOrderBody implements JsonSerializable
      */
     public function getOrderType(): string
     {
-        return $this->fields['order_type'];
+        return $this->fields['orderType'];
     }
 
     /**
@@ -78,7 +78,7 @@ class CreateOrderBody implements JsonSerializable
      */
     public function setOrderType(string $orderType): self
     {
-        $this->fields['order_type'] = $orderType;
+        $this->fields['orderType'] = $orderType;
 
         return $this;
     }
@@ -86,14 +86,14 @@ class CreateOrderBody implements JsonSerializable
     public function jsonSerialize(): array
     {
         $data = [];
-        if (array_key_exists('order_date', $this->fields)) {
-            $data['order_date'] = $this->fields['order_date'];
+        if (array_key_exists('orderDate', $this->fields)) {
+            $data['orderDate'] = $this->fields['orderDate'];
         }
-        if (array_key_exists('order_title', $this->fields)) {
-            $data['order_title'] = $this->fields['order_title'];
+        if (array_key_exists('orderTitle', $this->fields)) {
+            $data['orderTitle'] = $this->fields['orderTitle'];
         }
-        if (array_key_exists('order_type', $this->fields)) {
-            $data['order_type'] = $this->fields['order_type'];
+        if (array_key_exists('orderType', $this->fields)) {
+            $data['orderType'] = $this->fields['orderType'];
         }
 
         return $data;

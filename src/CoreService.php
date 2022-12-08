@@ -25,6 +25,10 @@ class CoreService
 
     private readonly Api\BlocklistsApi $blocklists;
 
+    private readonly Api\CashierRequestsApi $cashierRequests;
+
+    private readonly Api\CashierStrategiesApi $cashierStrategies;
+
     private readonly Api\CouponsApi $coupons;
 
     private readonly Api\CreditMemosApi $creditMemos;
@@ -89,6 +93,8 @@ class CoreService
         $this->aml = new Api\AmlApi($this->client);
         $this->amlChecks = new Api\AmlChecksApi($this->client);
         $this->blocklists = new Api\BlocklistsApi($this->client);
+        $this->cashierRequests = new Api\CashierRequestsApi($this->client);
+        $this->cashierStrategies = new Api\CashierStrategiesApi($this->client);
         $this->coupons = new Api\CouponsApi($this->client);
         $this->creditMemos = new Api\CreditMemosApi($this->client);
         $this->customFields = new Api\CustomFieldsApi($this->client);
@@ -133,6 +139,16 @@ class CoreService
     public function blocklists(): Api\BlocklistsApi
     {
         return $this->blocklists;
+    }
+
+    public function cashierRequests(): Api\CashierRequestsApi
+    {
+        return $this->cashierRequests;
+    }
+
+    public function cashierStrategies(): Api\CashierStrategiesApi
+    {
+        return $this->cashierStrategies;
     }
 
     public function coupons(): Api\CouponsApi

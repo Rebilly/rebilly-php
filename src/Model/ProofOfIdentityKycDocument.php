@@ -347,15 +347,15 @@ class ProofOfIdentityKycDocument extends KycDocument
         return $this;
     }
 
-    public function getParsedData(): ?ProofOfIdentityKycDocumentDocumentMatches
+    public function getParsedData(): ?ProofOfIdentityKycDocumentParsedData
     {
         return $this->fields['parsedData'] ?? null;
     }
 
-    public function setParsedData(null|ProofOfIdentityKycDocumentDocumentMatches|array $parsedData): self
+    public function setParsedData(null|ProofOfIdentityKycDocumentParsedData|array $parsedData): self
     {
-        if ($parsedData !== null && !($parsedData instanceof ProofOfIdentityKycDocumentDocumentMatches)) {
-            $parsedData = ProofOfIdentityKycDocumentDocumentMatches::from($parsedData);
+        if ($parsedData !== null && !($parsedData instanceof ProofOfIdentityKycDocumentParsedData)) {
+            $parsedData = ProofOfIdentityKycDocumentParsedData::from($parsedData);
         }
 
         $this->fields['parsedData'] = $parsedData;

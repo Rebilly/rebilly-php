@@ -15,9 +15,9 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use InvalidArgumentException;
+use JsonSerializable;
 
-class KhelocardCardToken extends CompositeToken
+class KhelocardCardToken implements JsonSerializable
 {
     public const METHOD_KHELOCARD = 'Khelocard';
 
@@ -25,10 +25,6 @@ class KhelocardCardToken extends CompositeToken
 
     public function __construct(array $data = [])
     {
-        parent::__construct([
-            'method' => 'Khelocard',
-        ] + $data);
-
         if (array_key_exists('method', $data)) {
             $this->setMethod($data['method']);
         }
@@ -90,31 +86,15 @@ class KhelocardCardToken extends CompositeToken
         return $this;
     }
 
-    /**
-     * @return array{number:string,cvv:string,last4:string,expMonth:int,expYear:int}
-     */
-    public function getPaymentInstrument(): array
+    public function getPaymentInstrument(): KhelocardCardTokenPaymentInstrument
     {
         return $this->fields['paymentInstrument'];
     }
 
-    /**
-     * @param array{number:string,cvv:string,last4:string,expMonth:int,expYear:int} $paymentInstrument
-     */
-    public function setPaymentInstrument(array $paymentInstrument): self
+    public function setPaymentInstrument(KhelocardCardTokenPaymentInstrument|array $paymentInstrument): self
     {
-        if (!isset($paymentInstrument['number'])) {
-            throw new InvalidArgumentException('Property \'paymentInstrument.number\' must be set.');
-        }
-        if (!isset($paymentInstrument['cvv'])) {
-            throw new InvalidArgumentException('Property \'paymentInstrument.cvv\' must be set.');
-        }
-        $paymentInstrument['last4'] = $paymentInstrument['last4'] ?? null;
-        if (!isset($paymentInstrument['expMonth'])) {
-            throw new InvalidArgumentException('Property \'paymentInstrument.expMonth\' must be set.');
-        }
-        if (!isset($paymentInstrument['expYear'])) {
-            throw new InvalidArgumentException('Property \'paymentInstrument.expYear\' must be set.');
+        if (!($paymentInstrument instanceof KhelocardCardTokenPaymentInstrument)) {
+            $paymentInstrument = KhelocardCardTokenPaymentInstrument::from($paymentInstrument);
         }
 
         $this->fields['paymentInstrument'] = $paymentInstrument;
@@ -237,7 +217,7 @@ class KhelocardCardToken extends CompositeToken
             $data['method'] = $this->fields['method'];
         }
         if (array_key_exists('paymentInstrument', $this->fields)) {
-            $data['paymentInstrument'] = $this->fields['paymentInstrument'];
+            $data['paymentInstrument'] = $this->fields['paymentInstrument']?->jsonSerialize();
         }
         if (array_key_exists('billingAddress', $this->fields)) {
             $data['billingAddress'] = $this->fields['billingAddress']?->jsonSerialize();
@@ -270,7 +250,7 @@ class KhelocardCardToken extends CompositeToken
             $data['_links'] = $this->fields['_links'];
         }
 
-        return parent::jsonSerialize() + $data;
+        return $data;
     }
 
     private function setId(null|string $id): self

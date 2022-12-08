@@ -15,9 +15,9 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use InvalidArgumentException;
+use JsonSerializable;
 
-class PlaidAccountToken extends CompositeToken
+class PlaidAccountToken implements JsonSerializable
 {
     public const METHOD_PLAID_ACCOUNT = 'plaid-account';
 
@@ -25,10 +25,6 @@ class PlaidAccountToken extends CompositeToken
 
     public function __construct(array $data = [])
     {
-        parent::__construct([
-            'method' => 'plaid-account',
-        ] + $data);
-
         if (array_key_exists('method', $data)) {
             $this->setMethod($data['method']);
         }
@@ -90,27 +86,15 @@ class PlaidAccountToken extends CompositeToken
         return $this;
     }
 
-    /**
-     * @return array{linkToken:string,publicToken:string,accountId:string}
-     */
-    public function getPaymentInstrument(): array
+    public function getPaymentInstrument(): PlaidAccountTokenPaymentInstrument
     {
         return $this->fields['paymentInstrument'];
     }
 
-    /**
-     * @param array{linkToken:string,publicToken:string,accountId:string} $paymentInstrument
-     */
-    public function setPaymentInstrument(array $paymentInstrument): self
+    public function setPaymentInstrument(PlaidAccountTokenPaymentInstrument|array $paymentInstrument): self
     {
-        if (!isset($paymentInstrument['linkToken'])) {
-            throw new InvalidArgumentException('Property \'paymentInstrument.linkToken\' must be set.');
-        }
-        if (!isset($paymentInstrument['publicToken'])) {
-            throw new InvalidArgumentException('Property \'paymentInstrument.publicToken\' must be set.');
-        }
-        if (!isset($paymentInstrument['accountId'])) {
-            throw new InvalidArgumentException('Property \'paymentInstrument.accountId\' must be set.');
+        if (!($paymentInstrument instanceof PlaidAccountTokenPaymentInstrument)) {
+            $paymentInstrument = PlaidAccountTokenPaymentInstrument::from($paymentInstrument);
         }
 
         $this->fields['paymentInstrument'] = $paymentInstrument;
@@ -233,7 +217,7 @@ class PlaidAccountToken extends CompositeToken
             $data['method'] = $this->fields['method'];
         }
         if (array_key_exists('paymentInstrument', $this->fields)) {
-            $data['paymentInstrument'] = $this->fields['paymentInstrument'];
+            $data['paymentInstrument'] = $this->fields['paymentInstrument']?->jsonSerialize();
         }
         if (array_key_exists('billingAddress', $this->fields)) {
             $data['billingAddress'] = $this->fields['billingAddress']?->jsonSerialize();
@@ -266,7 +250,7 @@ class PlaidAccountToken extends CompositeToken
             $data['_links'] = $this->fields['_links'];
         }
 
-        return parent::jsonSerialize() + $data;
+        return $data;
     }
 
     private function setId(null|string $id): self

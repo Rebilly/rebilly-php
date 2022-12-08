@@ -15,9 +15,9 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use InvalidArgumentException;
+use JsonSerializable;
 
-class KlarnaToken extends CompositeToken
+class KlarnaToken implements JsonSerializable
 {
     public const METHOD_KLARNA = 'Klarna';
 
@@ -25,10 +25,6 @@ class KlarnaToken extends CompositeToken
 
     public function __construct(array $data = [])
     {
-        parent::__construct([
-            'method' => 'Klarna',
-        ] + $data);
-
         if (array_key_exists('method', $data)) {
             $this->setMethod($data['method']);
         }
@@ -90,24 +86,15 @@ class KlarnaToken extends CompositeToken
         return $this;
     }
 
-    /**
-     * @return array{klarnaAuthorizationToken:string,klarnaSessionId:string}
-     */
-    public function getPaymentInstrument(): array
+    public function getPaymentInstrument(): KlarnaTokenPaymentInstrument
     {
         return $this->fields['paymentInstrument'];
     }
 
-    /**
-     * @param array{klarnaAuthorizationToken:string,klarnaSessionId:string} $paymentInstrument
-     */
-    public function setPaymentInstrument(array $paymentInstrument): self
+    public function setPaymentInstrument(KlarnaTokenPaymentInstrument|array $paymentInstrument): self
     {
-        if (!isset($paymentInstrument['klarnaAuthorizationToken'])) {
-            throw new InvalidArgumentException('Property \'paymentInstrument.klarnaAuthorizationToken\' must be set.');
-        }
-        if (!isset($paymentInstrument['klarnaSessionId'])) {
-            throw new InvalidArgumentException('Property \'paymentInstrument.klarnaSessionId\' must be set.');
+        if (!($paymentInstrument instanceof KlarnaTokenPaymentInstrument)) {
+            $paymentInstrument = KlarnaTokenPaymentInstrument::from($paymentInstrument);
         }
 
         $this->fields['paymentInstrument'] = $paymentInstrument;
@@ -230,7 +217,7 @@ class KlarnaToken extends CompositeToken
             $data['method'] = $this->fields['method'];
         }
         if (array_key_exists('paymentInstrument', $this->fields)) {
-            $data['paymentInstrument'] = $this->fields['paymentInstrument'];
+            $data['paymentInstrument'] = $this->fields['paymentInstrument']?->jsonSerialize();
         }
         if (array_key_exists('billingAddress', $this->fields)) {
             $data['billingAddress'] = $this->fields['billingAddress']?->jsonSerialize();
@@ -263,7 +250,7 @@ class KlarnaToken extends CompositeToken
             $data['_links'] = $this->fields['_links'];
         }
 
-        return parent::jsonSerialize() + $data;
+        return $data;
     }
 
     private function setId(null|string $id): self

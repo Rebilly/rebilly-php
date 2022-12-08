@@ -17,7 +17,7 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
 
-class CreditMemoAllocation implements JsonSerializable
+class CommonCreditMemoAllocationsInvoices implements JsonSerializable
 {
     private array $fields = [];
 
@@ -25,9 +25,6 @@ class CreditMemoAllocation implements JsonSerializable
     {
         if (array_key_exists('invoiceId', $data)) {
             $this->setInvoiceId($data['invoiceId']);
-        }
-        if (array_key_exists('creditMemoId', $data)) {
-            $this->setCreditMemoId($data['creditMemoId']);
         }
         if (array_key_exists('amount', $data)) {
             $this->setAmount($data['amount']);
@@ -41,9 +38,6 @@ class CreditMemoAllocation implements JsonSerializable
         if (array_key_exists('updatedTime', $data)) {
             $this->setUpdatedTime($data['updatedTime']);
         }
-        if (array_key_exists('_links', $data)) {
-            $this->setLinks($data['_links']);
-        }
     }
 
     public static function from(array $data = []): self
@@ -56,17 +50,19 @@ class CreditMemoAllocation implements JsonSerializable
         return $this->fields['invoiceId'] ?? null;
     }
 
-    public function getCreditMemoId(): ?string
+    public function setInvoiceId(null|string $invoiceId): self
     {
-        return $this->fields['creditMemoId'] ?? null;
+        $this->fields['invoiceId'] = $invoiceId;
+
+        return $this;
     }
 
-    public function getAmount(): float
+    public function getAmount(): ?float
     {
-        return $this->fields['amount'];
+        return $this->fields['amount'] ?? null;
     }
 
-    public function setAmount(float|string $amount): self
+    public function setAmount(null|float|string $amount): self
     {
         if (is_string($amount)) {
             $amount = (float) $amount;
@@ -87,17 +83,20 @@ class CreditMemoAllocation implements JsonSerializable
         return $this->fields['createdTime'] ?? null;
     }
 
+    public function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    {
+        if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
+            $createdTime = new DateTimeImmutable($createdTime);
+        }
+
+        $this->fields['createdTime'] = $createdTime;
+
+        return $this;
+    }
+
     public function getUpdatedTime(): ?DateTimeImmutable
     {
         return $this->fields['updatedTime'] ?? null;
-    }
-
-    /**
-     * @return null|array<CreditMemoLink|InvoiceLink>
-     */
-    public function getLinks(): ?array
-    {
-        return $this->fields['_links'] ?? null;
     }
 
     public function jsonSerialize(): array
@@ -105,9 +104,6 @@ class CreditMemoAllocation implements JsonSerializable
         $data = [];
         if (array_key_exists('invoiceId', $this->fields)) {
             $data['invoiceId'] = $this->fields['invoiceId'];
-        }
-        if (array_key_exists('creditMemoId', $this->fields)) {
-            $data['creditMemoId'] = $this->fields['creditMemoId'];
         }
         if (array_key_exists('amount', $this->fields)) {
             $data['amount'] = $this->fields['amount'];
@@ -121,41 +117,13 @@ class CreditMemoAllocation implements JsonSerializable
         if (array_key_exists('updatedTime', $this->fields)) {
             $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
         }
-        if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
-        }
 
         return $data;
-    }
-
-    private function setInvoiceId(null|string $invoiceId): self
-    {
-        $this->fields['invoiceId'] = $invoiceId;
-
-        return $this;
-    }
-
-    private function setCreditMemoId(null|string $creditMemoId): self
-    {
-        $this->fields['creditMemoId'] = $creditMemoId;
-
-        return $this;
     }
 
     private function setCurrency(null|string $currency): self
     {
         $this->fields['currency'] = $currency;
-
-        return $this;
-    }
-
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
-    {
-        if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
-            $createdTime = new DateTimeImmutable($createdTime);
-        }
-
-        $this->fields['createdTime'] = $createdTime;
 
         return $this;
     }
@@ -167,18 +135,6 @@ class CreditMemoAllocation implements JsonSerializable
         }
 
         $this->fields['updatedTime'] = $updatedTime;
-
-        return $this;
-    }
-
-    /**
-     * @param null|array<CreditMemoLink|InvoiceLink> $links
-     */
-    private function setLinks(null|array $links): self
-    {
-        $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
-
-        $this->fields['_links'] = $links;
 
         return $this;
     }

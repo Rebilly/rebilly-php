@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-class AdjustReadyToPayPaypal extends AdjustPaymentMethod
+use JsonSerializable;
+
+class AdjustReadyToPayPaypal implements JsonSerializable
 {
     public const PAYMENT_METHOD_PAYPAL = 'paypal';
 
@@ -23,10 +25,6 @@ class AdjustReadyToPayPaypal extends AdjustPaymentMethod
 
     public function __construct(array $data = [])
     {
-        parent::__construct([
-            'paymentMethod' => 'paypal',
-        ] + $data);
-
         if (array_key_exists('paymentMethod', $data)) {
             $this->setPaymentMethod($data['paymentMethod']);
         }
@@ -41,17 +39,17 @@ class AdjustReadyToPayPaypal extends AdjustPaymentMethod
     }
 
     /**
-     * @psalm-return self::PAYMENT_METHOD_* $paymentMethod
+     * @psalm-return self::PAYMENT_METHOD_*|null $paymentMethod
      */
-    public function getPaymentMethod(): string
+    public function getPaymentMethod(): ?string
     {
-        return $this->fields['paymentMethod'];
+        return $this->fields['paymentMethod'] ?? null;
     }
 
     /**
-     * @psalm-param self::PAYMENT_METHOD_* $paymentMethod
+     * @psalm-param self::PAYMENT_METHOD_*|null $paymentMethod
      */
-    public function setPaymentMethod(string $paymentMethod): self
+    public function setPaymentMethod(null|string $paymentMethod): self
     {
         $this->fields['paymentMethod'] = $paymentMethod;
 
@@ -59,17 +57,17 @@ class AdjustReadyToPayPaypal extends AdjustPaymentMethod
     }
 
     /**
-     * @psalm-return self::FEATURE_* $feature
+     * @psalm-return self::FEATURE_*|null $feature
      */
-    public function getFeature(): string
+    public function getFeature(): ?string
     {
-        return $this->fields['feature'];
+        return $this->fields['feature'] ?? null;
     }
 
     /**
-     * @psalm-param self::FEATURE_* $feature
+     * @psalm-param self::FEATURE_*|null $feature
      */
-    public function setFeature(string $feature): self
+    public function setFeature(null|string $feature): self
     {
         $this->fields['feature'] = $feature;
 
@@ -86,6 +84,6 @@ class AdjustReadyToPayPaypal extends AdjustPaymentMethod
             $data['feature'] = $this->fields['feature'];
         }
 
-        return parent::jsonSerialize() + $data;
+        return $data;
     }
 }

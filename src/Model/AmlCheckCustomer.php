@@ -30,6 +30,9 @@ class AmlCheckCustomer implements JsonSerializable
         if (array_key_exists('tags', $data)) {
             $this->setTags($data['tags']);
         }
+        if (array_key_exists('organizationId', $data)) {
+            $this->setOrganizationId($data['organizationId']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -66,6 +69,11 @@ class AmlCheckCustomer implements JsonSerializable
         return $this->fields['tags'] ?? null;
     }
 
+    public function getOrganizationId(): ?string
+    {
+        return $this->fields['organizationId'] ?? null;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -77,6 +85,9 @@ class AmlCheckCustomer implements JsonSerializable
         }
         if (array_key_exists('tags', $this->fields)) {
             $data['tags'] = $this->fields['tags'];
+        }
+        if (array_key_exists('organizationId', $this->fields)) {
+            $data['organizationId'] = $this->fields['organizationId'];
         }
 
         return $data;
@@ -97,6 +108,13 @@ class AmlCheckCustomer implements JsonSerializable
         $tags = $tags !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Tag ? $value : Tag::from($value)) : null, $tags) : null;
 
         $this->fields['tags'] = $tags;
+
+        return $this;
+    }
+
+    private function setOrganizationId(null|string $organizationId): self
+    {
+        $this->fields['organizationId'] = $organizationId;
 
         return $this;
     }

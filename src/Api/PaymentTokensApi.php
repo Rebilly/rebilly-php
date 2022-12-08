@@ -16,9 +16,11 @@ namespace Rebilly\Sdk\Api;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
+use InvalidArgumentException;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\CompositeToken;
 use Rebilly\Sdk\Paginator;
+use TypeError;
 
 class PaymentTokensApi
 {
@@ -27,26 +29,26 @@ class PaymentTokensApi
     }
 
     /**
-     * @return CompositeToken
+     * @return AlternativePaymentToken|BankAccountToken|DigitalWalletToken|KhelocardCardToken|KlarnaToken|PaymentCardToken|PayPalToken|PlaidAccountToken
      */
     public function create(
         CompositeToken $compositeToken,
-    ): CompositeToken {
+    ): PaymentCardToken|PayPalToken|BankAccountToken|DigitalWalletToken|PlaidAccountToken|KhelocardCardToken|KlarnaToken|AlternativePaymentToken {
         $uri = '/tokens';
 
         $request = new Request('POST', $uri, body: Utils::jsonEncode($compositeToken));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CompositeToken::from($data);
+        return $this->buildCompositeTokenResponse($data);
     }
 
     /**
-     * @return CompositeToken
+     * @return AlternativePaymentToken|BankAccountToken|DigitalWalletToken|KhelocardCardToken|KlarnaToken|PaymentCardToken|PayPalToken|PlaidAccountToken
      */
     public function get(
         string $token,
-    ): CompositeToken {
+    ): PaymentCardToken|PayPalToken|BankAccountToken|DigitalWalletToken|PlaidAccountToken|KhelocardCardToken|KlarnaToken|AlternativePaymentToken {
         $pathParams = [
             '{token}' => $token,
         ];
@@ -57,11 +59,11 @@ class PaymentTokensApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CompositeToken::from($data);
+        return $this->buildCompositeTokenResponse($data);
     }
 
     /**
-     * @return Collection<CompositeToken>
+     * @return Collection<AlternativePaymentToken|BankAccountToken|DigitalWalletToken|KhelocardCardToken|KlarnaToken|PaymentCardToken|PayPalToken|PlaidAccountToken>
      */
     public function getAll(
         ?int $limit = null,
@@ -78,7 +80,7 @@ class PaymentTokensApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): CompositeToken => CompositeToken::from($item), $data),
+            array_map(fn (array $item): PaymentCardToken|PayPalToken|BankAccountToken|DigitalWalletToken|PlaidAccountToken|KhelocardCardToken|KlarnaToken|AlternativePaymentToken => $this->buildCompositeTokenResponse($item), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
@@ -98,5 +100,72 @@ class PaymentTokensApi
             $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
             $closure,
         );
+    }
+
+    protected function buildCompositeTokenResponse(array $data): PaymentCardToken|PayPalToken|BankAccountToken|DigitalWalletToken|PlaidAccountToken|KhelocardCardToken|KlarnaToken|AlternativePaymentToken
+    {
+        $candidates = [];
+
+        try {
+            $instance = PaymentCardToken::from($data);
+            $candidates[] = [$instance, count(array_intersect_key($data, $instance->jsonSerialize()))];
+        } catch (InvalidArgumentException|TypeError) {
+        }
+
+        try {
+            $instance = PayPalToken::from($data);
+            $candidates[] = [$instance, count(array_intersect_key($data, $instance->jsonSerialize()))];
+        } catch (InvalidArgumentException|TypeError) {
+        }
+
+        try {
+            $instance = BankAccountToken::from($data);
+            $candidates[] = [$instance, count(array_intersect_key($data, $instance->jsonSerialize()))];
+        } catch (InvalidArgumentException|TypeError) {
+        }
+
+        try {
+            $instance = DigitalWalletToken::from($data);
+            $candidates[] = [$instance, count(array_intersect_key($data, $instance->jsonSerialize()))];
+        } catch (InvalidArgumentException|TypeError) {
+        }
+
+        try {
+            $instance = PlaidAccountToken::from($data);
+            $candidates[] = [$instance, count(array_intersect_key($data, $instance->jsonSerialize()))];
+        } catch (InvalidArgumentException|TypeError) {
+        }
+
+        try {
+            $instance = KhelocardCardToken::from($data);
+            $candidates[] = [$instance, count(array_intersect_key($data, $instance->jsonSerialize()))];
+        } catch (InvalidArgumentException|TypeError) {
+        }
+
+        try {
+            $instance = KlarnaToken::from($data);
+            $candidates[] = [$instance, count(array_intersect_key($data, $instance->jsonSerialize()))];
+        } catch (InvalidArgumentException|TypeError) {
+        }
+
+        try {
+            $instance = AlternativePaymentToken::from($data);
+            $candidates[] = [$instance, count(array_intersect_key($data, $instance->jsonSerialize()))];
+        } catch (InvalidArgumentException|TypeError) {
+        }
+
+        $determined = array_reduce($candidates, function (?array $current, array $candidate) {
+            if ($current === null || $current[1] < $candidate[1]) {
+                $current = $candidate;
+            }
+
+            return $current;
+        });
+
+        if ($determined[0] === null) {
+            throw new InvalidArgumentException('Could not instantiate CompositeToken response with the given value');
+        }
+
+        return $determined[0];
     }
 }

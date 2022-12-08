@@ -68,6 +68,9 @@ class BBANType extends BankAccountCreatePlain
         if (array_key_exists('riskMetadata', $data)) {
             $this->setRiskMetadata($data['riskMetadata']);
         }
+        if (array_key_exists('useAsBackup', $data)) {
+            $this->setUseAsBackup($data['useAsBackup']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -233,6 +236,18 @@ class BBANType extends BankAccountCreatePlain
         return $this;
     }
 
+    public function getUseAsBackup(): ?bool
+    {
+        return $this->fields['useAsBackup'] ?? null;
+    }
+
+    public function setUseAsBackup(null|bool $useAsBackup): self
+    {
+        $this->fields['useAsBackup'] = $useAsBackup;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -268,6 +283,9 @@ class BBANType extends BankAccountCreatePlain
         }
         if (array_key_exists('riskMetadata', $this->fields)) {
             $data['riskMetadata'] = $this->fields['riskMetadata']?->jsonSerialize();
+        }
+        if (array_key_exists('useAsBackup', $this->fields)) {
+            $data['useAsBackup'] = $this->fields['useAsBackup'];
         }
 
         return parent::jsonSerialize() + $data;

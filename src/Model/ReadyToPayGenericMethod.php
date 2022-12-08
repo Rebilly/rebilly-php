@@ -13,16 +13,14 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-class ReadyToPayGenericMethod extends ReadyToPayMethods
+use JsonSerializable;
+
+class ReadyToPayGenericMethod implements JsonSerializable
 {
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        parent::__construct([
-            'method' => 'AdvCash',
-        ] + $data);
-
         if (array_key_exists('method', $data)) {
             $this->setMethod($data['method']);
         }
@@ -82,6 +80,6 @@ class ReadyToPayGenericMethod extends ReadyToPayMethods
             $data['filters'] = $this->fields['filters'];
         }
 
-        return parent::jsonSerialize() + $data;
+        return $data;
     }
 }

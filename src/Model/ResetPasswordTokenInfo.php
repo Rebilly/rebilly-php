@@ -23,6 +23,9 @@ class ResetPasswordTokenInfo implements JsonSerializable
 
     public function __construct(array $data = [])
     {
+        if (array_key_exists('id', $data)) {
+            $this->setId($data['id']);
+        }
         if (array_key_exists('token', $data)) {
             $this->setToken($data['token']);
         }
@@ -37,6 +40,11 @@ class ResetPasswordTokenInfo implements JsonSerializable
     public static function from(array $data = []): self
     {
         return new self($data);
+    }
+
+    public function getId(): ?string
+    {
+        return $this->fields['id'] ?? null;
     }
 
     public function getToken(): ?string
@@ -71,6 +79,9 @@ class ResetPasswordTokenInfo implements JsonSerializable
     public function jsonSerialize(): array
     {
         $data = [];
+        if (array_key_exists('id', $this->fields)) {
+            $data['id'] = $this->fields['id'];
+        }
         if (array_key_exists('token', $this->fields)) {
             $data['token'] = $this->fields['token'];
         }
@@ -82,6 +93,13 @@ class ResetPasswordTokenInfo implements JsonSerializable
         }
 
         return $data;
+    }
+
+    private function setId(null|string $id): self
+    {
+        $this->fields['id'] = $id;
+
+        return $this;
     }
 
     private function setToken(null|string $token): self

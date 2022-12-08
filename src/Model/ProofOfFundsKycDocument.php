@@ -343,15 +343,15 @@ class ProofOfFundsKycDocument extends KycDocument
         return $this;
     }
 
-    public function getParsedData(): ?ProofOfFundsKycDocumentDocumentMatches
+    public function getParsedData(): ?ProofOfFundsKycDocumentParsedData
     {
         return $this->fields['parsedData'] ?? null;
     }
 
-    public function setParsedData(null|ProofOfFundsKycDocumentDocumentMatches|array $parsedData): self
+    public function setParsedData(null|ProofOfFundsKycDocumentParsedData|array $parsedData): self
     {
-        if ($parsedData !== null && !($parsedData instanceof ProofOfFundsKycDocumentDocumentMatches)) {
-            $parsedData = ProofOfFundsKycDocumentDocumentMatches::from($parsedData);
+        if ($parsedData !== null && !($parsedData instanceof ProofOfFundsKycDocumentParsedData)) {
+            $parsedData = ProofOfFundsKycDocumentParsedData::from($parsedData);
         }
 
         $this->fields['parsedData'] = $parsedData;

@@ -24,6 +24,9 @@ class CommonCreditMemoAllocations implements JsonSerializable
         if (array_key_exists('transactions', $data)) {
             $this->setTransactions($data['transactions']);
         }
+        if (array_key_exists('invoices', $data)) {
+            $this->setInvoices($data['invoices']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -51,11 +54,34 @@ class CommonCreditMemoAllocations implements JsonSerializable
         return $this;
     }
 
+    /**
+     * @return null|CommonCreditMemoAllocationsInvoices[]
+     */
+    public function getInvoices(): ?array
+    {
+        return $this->fields['invoices'] ?? null;
+    }
+
+    /**
+     * @param null|CommonCreditMemoAllocationsInvoices[] $invoices
+     */
+    public function setInvoices(null|array $invoices): self
+    {
+        $invoices = $invoices !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof CommonCreditMemoAllocationsInvoices ? $value : CommonCreditMemoAllocationsInvoices::from($value)) : null, $invoices) : null;
+
+        $this->fields['invoices'] = $invoices;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
         if (array_key_exists('transactions', $this->fields)) {
             $data['transactions'] = $this->fields['transactions'];
+        }
+        if (array_key_exists('invoices', $this->fields)) {
+            $data['invoices'] = $this->fields['invoices'];
         }
 
         return $data;

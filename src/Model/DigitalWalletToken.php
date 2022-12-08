@@ -15,9 +15,9 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use InvalidArgumentException;
+use JsonSerializable;
 
-class DigitalWalletToken extends CompositeToken
+class DigitalWalletToken implements JsonSerializable
 {
     public const METHOD_DIGITAL_WALLET = 'digital-wallet';
 
@@ -25,10 +25,6 @@ class DigitalWalletToken extends CompositeToken
 
     public function __construct(array $data = [])
     {
-        parent::__construct([
-            'method' => 'digital-wallet',
-        ] + $data);
-
         if (array_key_exists('method', $data)) {
             $this->setMethod($data['method']);
         }
@@ -90,38 +86,15 @@ class DigitalWalletToken extends CompositeToken
         return $this;
     }
 
-    /**
-     * @return array{type:string,amount:float,currency:string,descriptor:string,bin:string,last4:string,brand:PaymentCardBrand,expMonth:int,expYear:int,payload:object}
-     */
-    public function getPaymentInstrument(): array
+    public function getPaymentInstrument(): DigitalWalletTokenPaymentInstrument
     {
         return $this->fields['paymentInstrument'];
     }
 
-    /**
-     * @param array{type:string,amount:float,currency:string,descriptor:string,bin:string,last4:string,brand:PaymentCardBrand,expMonth:int,expYear:int,payload:object} $paymentInstrument
-     */
-    public function setPaymentInstrument(array $paymentInstrument): self
+    public function setPaymentInstrument(DigitalWalletTokenPaymentInstrument|array $paymentInstrument): self
     {
-        if (!isset($paymentInstrument['type'])) {
-            throw new InvalidArgumentException('Property \'paymentInstrument.type\' must be set.');
-        }
-        if (!isset($paymentInstrument['amount'])) {
-            throw new InvalidArgumentException('Property \'paymentInstrument.amount\' must be set.');
-        }
-        if (!isset($paymentInstrument['currency'])) {
-            throw new InvalidArgumentException('Property \'paymentInstrument.currency\' must be set.');
-        }
-        if (!isset($paymentInstrument['descriptor'])) {
-            throw new InvalidArgumentException('Property \'paymentInstrument.descriptor\' must be set.');
-        }
-        $paymentInstrument['bin'] = $paymentInstrument['bin'] ?? null;
-        $paymentInstrument['last4'] = $paymentInstrument['last4'] ?? null;
-        $paymentInstrument['brand'] = isset($paymentInstrument['brand']) ? ($paymentInstrument['brand'] instanceof PaymentCardBrand ? $paymentInstrument['brand'] : PaymentCardBrand::from($paymentInstrument['brand'])) : null;
-        $paymentInstrument['expMonth'] = $paymentInstrument['expMonth'] ?? null;
-        $paymentInstrument['expYear'] = $paymentInstrument['expYear'] ?? null;
-        if (!isset($paymentInstrument['payload'])) {
-            throw new InvalidArgumentException('Property \'paymentInstrument.payload\' must be set.');
+        if (!($paymentInstrument instanceof DigitalWalletTokenPaymentInstrument)) {
+            $paymentInstrument = DigitalWalletTokenPaymentInstrument::from($paymentInstrument);
         }
 
         $this->fields['paymentInstrument'] = $paymentInstrument;
@@ -233,7 +206,7 @@ class DigitalWalletToken extends CompositeToken
             $data['method'] = $this->fields['method'];
         }
         if (array_key_exists('paymentInstrument', $this->fields)) {
-            $data['paymentInstrument'] = $this->fields['paymentInstrument'];
+            $data['paymentInstrument'] = $this->fields['paymentInstrument']?->jsonSerialize();
         }
         if (array_key_exists('billingAddress', $this->fields)) {
             $data['billingAddress'] = $this->fields['billingAddress']?->jsonSerialize();
@@ -266,7 +239,7 @@ class DigitalWalletToken extends CompositeToken
             $data['_links'] = $this->fields['_links'];
         }
 
-        return parent::jsonSerialize() + $data;
+        return $data;
     }
 
     private function setBillingAddress(null|ContactObject|array $billingAddress): self

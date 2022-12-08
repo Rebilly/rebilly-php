@@ -91,6 +91,7 @@ enum GlobalWebhookEventType: string
     case SUBSCRIPTION_TRIAL_END_REMINDER = 'subscription-trial-end-reminder';
     case SUBSCRIPTION_TRIAL_ENDED = 'subscription-trial-ended';
     case SUBSCRIPTION_UPGRADED = 'subscription-upgraded';
+    case SUBSCRIPTION_CHURNED = 'subscription-churned';
     case TRANSACTION_AMOUNT_DISCREPANCY_FOUND = 'transaction-amount-discrepancy-found';
     case TRANSACTION_DECLINED = 'transaction-declined';
     case TRANSACTION_DISCREPANCY_FOUND = 'transaction-discrepancy-found';

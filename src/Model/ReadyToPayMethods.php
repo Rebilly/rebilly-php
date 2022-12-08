@@ -18,12 +18,23 @@ use JsonSerializable;
 
 abstract class ReadyToPayMethods implements JsonSerializable
 {
+    public const METHOD_KLARNA = 'Klarna';
+
     private array $fields = [];
 
     protected function __construct(array $data = [])
     {
         if (array_key_exists('method', $data)) {
             $this->setMethod($data['method']);
+        }
+        if (array_key_exists('feature', $data)) {
+            $this->setFeature($data['feature']);
+        }
+        if (array_key_exists('brands', $data)) {
+            $this->setBrands($data['brands']);
+        }
+        if (array_key_exists('filters', $data)) {
+            $this->setFilters($data['filters']);
         }
     }
 
@@ -190,6 +201,15 @@ abstract class ReadyToPayMethods implements JsonSerializable
         $data = [];
         if (array_key_exists('method', $this->fields)) {
             $data['method'] = $this->fields['method'];
+        }
+        if (array_key_exists('feature', $this->fields)) {
+            $data['feature'] = $this->fields['feature']?->jsonSerialize();
+        }
+        if (array_key_exists('brands', $this->fields)) {
+            $data['brands'] = $this->fields['brands'];
+        }
+        if (array_key_exists('filters', $this->fields)) {
+            $data['filters'] = $this->fields['filters'];
         }
 
         return $data;

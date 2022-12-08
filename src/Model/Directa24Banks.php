@@ -72,6 +72,7 @@ enum Directa24Banks: string
     case SU = 'SU';
     case TC = 'TC';
     case TG = 'TG';
+    case TR = 'TR';
     case TY = 'TY';
     case UB = 'UB';
     case UI = 'UI';

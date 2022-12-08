@@ -17,9 +17,9 @@ use InvalidArgumentException;
 use JsonSerializable;
 use TypeError;
 
-class CreditMemoLink implements JsonSerializable
+class CashierLink implements JsonSerializable
 {
-    public const REL_CREDIT_MEMO = 'creditMemo';
+    public const REL_CASHIER = 'cashier';
 
     private array $fields = [];
 

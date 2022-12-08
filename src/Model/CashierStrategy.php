@@ -17,7 +17,7 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
 
-class CustomDomain implements JsonSerializable
+class CashierStrategy implements JsonSerializable
 {
     private array $fields = [];
 
@@ -26,20 +26,23 @@ class CustomDomain implements JsonSerializable
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
         }
-        if (array_key_exists('domain', $data)) {
-            $this->setDomain($data['domain']);
+        if (array_key_exists('name', $data)) {
+            $this->setName($data['name']);
         }
-        if (array_key_exists('isVerified', $data)) {
-            $this->setIsVerified($data['isVerified']);
+        if (array_key_exists('filter', $data)) {
+            $this->setFilter($data['filter']);
+        }
+        if (array_key_exists('amounts', $data)) {
+            $this->setAmounts($data['amounts']);
+        }
+        if (array_key_exists('customAmount', $data)) {
+            $this->setCustomAmount($data['customAmount']);
         }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
         }
         if (array_key_exists('updatedTime', $data)) {
             $this->setUpdatedTime($data['updatedTime']);
-        }
-        if (array_key_exists('_links', $data)) {
-            $this->setLinks($data['_links']);
         }
     }
 
@@ -53,21 +56,60 @@ class CustomDomain implements JsonSerializable
         return $this->fields['id'] ?? null;
     }
 
-    public function getDomain(): string
+    public function getName(): string
     {
-        return $this->fields['domain'];
+        return $this->fields['name'];
     }
 
-    public function setDomain(string $domain): self
+    public function setName(string $name): self
     {
-        $this->fields['domain'] = $domain;
+        $this->fields['name'] = $name;
 
         return $this;
     }
 
-    public function getIsVerified(): ?bool
+    public function getFilter(): string
     {
-        return $this->fields['isVerified'] ?? null;
+        return $this->fields['filter'];
+    }
+
+    public function setFilter(string $filter): self
+    {
+        $this->fields['filter'] = $filter;
+
+        return $this;
+    }
+
+    public function getAmounts(): CashierStrategyAmounts
+    {
+        return $this->fields['amounts'];
+    }
+
+    public function setAmounts(CashierStrategyAmounts|array $amounts): self
+    {
+        if (!($amounts instanceof CashierStrategyAmounts)) {
+            $amounts = CashierStrategyAmounts::from($amounts);
+        }
+
+        $this->fields['amounts'] = $amounts;
+
+        return $this;
+    }
+
+    public function getCustomAmount(): CashierStrategyCustomAmount
+    {
+        return $this->fields['customAmount'];
+    }
+
+    public function setCustomAmount(CashierStrategyCustomAmount|array $customAmount): self
+    {
+        if (!($customAmount instanceof CashierStrategyCustomAmount)) {
+            $customAmount = CashierStrategyCustomAmount::from($customAmount);
+        }
+
+        $this->fields['customAmount'] = $customAmount;
+
+        return $this;
     }
 
     public function getCreatedTime(): ?DateTimeImmutable
@@ -80,34 +122,29 @@ class CustomDomain implements JsonSerializable
         return $this->fields['updatedTime'] ?? null;
     }
 
-    /**
-     * @return null|SelfLink[]
-     */
-    public function getLinks(): ?array
-    {
-        return $this->fields['_links'] ?? null;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [];
         if (array_key_exists('id', $this->fields)) {
             $data['id'] = $this->fields['id'];
         }
-        if (array_key_exists('domain', $this->fields)) {
-            $data['domain'] = $this->fields['domain'];
+        if (array_key_exists('name', $this->fields)) {
+            $data['name'] = $this->fields['name'];
         }
-        if (array_key_exists('isVerified', $this->fields)) {
-            $data['isVerified'] = $this->fields['isVerified'];
+        if (array_key_exists('filter', $this->fields)) {
+            $data['filter'] = $this->fields['filter'];
+        }
+        if (array_key_exists('amounts', $this->fields)) {
+            $data['amounts'] = $this->fields['amounts']?->jsonSerialize();
+        }
+        if (array_key_exists('customAmount', $this->fields)) {
+            $data['customAmount'] = $this->fields['customAmount']?->jsonSerialize();
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('updatedTime', $this->fields)) {
             $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
-        }
-        if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
         }
 
         return $data;
@@ -116,13 +153,6 @@ class CustomDomain implements JsonSerializable
     private function setId(null|string $id): self
     {
         $this->fields['id'] = $id;
-
-        return $this;
-    }
-
-    private function setIsVerified(null|bool $isVerified): self
-    {
-        $this->fields['isVerified'] = $isVerified;
 
         return $this;
     }
@@ -145,18 +175,6 @@ class CustomDomain implements JsonSerializable
         }
 
         $this->fields['updatedTime'] = $updatedTime;
-
-        return $this;
-    }
-
-    /**
-     * @param null|SelfLink[] $links
-     */
-    private function setLinks(null|array $links): self
-    {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
-
-        $this->fields['_links'] = $links;
 
         return $this;
     }

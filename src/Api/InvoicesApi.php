@@ -17,7 +17,6 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
-use Rebilly\Sdk\Model\CreditMemoAllocation;
 use Rebilly\Sdk\Model\Invoice;
 use Rebilly\Sdk\Model\InvoiceIssue;
 use Rebilly\Sdk\Model\InvoiceItem;
@@ -50,28 +49,6 @@ class InvoicesApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Invoice::from($data);
-    }
-
-    /**
-     * @return CreditMemoAllocation
-     */
-    public function applyCreditMemo(
-        string $id,
-        string $creditMemoId,
-        CreditMemoAllocation $creditMemoAllocation,
-    ): CreditMemoAllocation {
-        $pathParams = [
-            '{id}' => $id,
-            '{creditMemoId}' => $creditMemoId,
-        ];
-
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/invoices/{id}/credit-memo-allocations/{creditMemoId}');
-
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($creditMemoAllocation));
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return CreditMemoAllocation::from($data);
     }
 
     /**
@@ -147,21 +124,6 @@ class InvoicesApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return InvoiceTimeline::from($data);
-    }
-
-    public function deleteCreditMemoAllocation(
-        string $id,
-        string $creditMemoId,
-    ): void {
-        $pathParams = [
-            '{id}' => $id,
-            '{creditMemoId}' => $creditMemoId,
-        ];
-
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/invoices/{id}/credit-memo-allocations/{creditMemoId}');
-
-        $request = new Request('DELETE', $uri);
-        $this->client->send($request);
     }
 
     public function deleteInvoiceItem(
@@ -266,53 +228,6 @@ class InvoicesApi
             offset: $offset,
             q: $q,
             expand: $expand,
-        );
-
-        return new Paginator(
-            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
-            $closure,
-        );
-    }
-
-    /**
-     * @return Collection<CreditMemoAllocation>
-     */
-    public function getAllCreditMemoAllocations(
-        string $id,
-        ?int $limit = null,
-        ?int $offset = null,
-    ): Collection {
-        $pathParams = [
-            '{id}' => $id,
-        ];
-
-        $queryParams = [
-            'limit' => $limit,
-            'offset' => $offset,
-        ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/invoices/{id}/credit-memo-allocations?') . http_build_query($queryParams);
-
-        $request = new Request('GET', $uri);
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return new Collection(
-            array_map(fn (array $item): CreditMemoAllocation => CreditMemoAllocation::from($item), $data),
-            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
-            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
-            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
-        );
-    }
-
-    public function getAllCreditMemoAllocationsPaginator(
-        string $id,
-        ?int $limit = null,
-        ?int $offset = null,
-    ): Paginator {
-        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllCreditMemoAllocations(
-            id: $id,
-            limit: $limit,
-            offset: $offset,
         );
 
         return new Paginator(
@@ -476,27 +391,6 @@ class InvoicesApi
             $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
             $closure,
         );
-    }
-
-    /**
-     * @return CreditMemoAllocation
-     */
-    public function getCreditMemoAllocation(
-        string $id,
-        string $creditMemoId,
-    ): CreditMemoAllocation {
-        $pathParams = [
-            '{id}' => $id,
-            '{creditMemoId}' => $creditMemoId,
-        ];
-
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/invoices/{id}/credit-memo-allocations/{creditMemoId}');
-
-        $request = new Request('GET', $uri);
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return CreditMemoAllocation::from($data);
     }
 
     /**

@@ -15,9 +15,9 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use InvalidArgumentException;
+use JsonSerializable;
 
-class PaymentCardToken extends CompositeToken
+class PaymentCardToken implements JsonSerializable
 {
     public const METHOD_PAYMENT_CARD = 'payment-card';
 
@@ -25,10 +25,6 @@ class PaymentCardToken extends CompositeToken
 
     public function __construct(array $data = [])
     {
-        parent::__construct([
-            'method' => 'payment-card',
-        ] + $data);
-
         if (array_key_exists('method', $data)) {
             $this->setMethod($data['method']);
         }
@@ -90,30 +86,16 @@ class PaymentCardToken extends CompositeToken
         return $this;
     }
 
-    /**
-     * @return array{pan:string,cvv:string,expMonth:int,expYear:int,bin:string,last4:string,brand:PaymentCardBrand}
-     */
-    public function getPaymentInstrument(): array
+    public function getPaymentInstrument(): PaymentCardTokenPaymentInstrument
     {
         return $this->fields['paymentInstrument'];
     }
 
-    /**
-     * @param array{pan:string,cvv:string,expMonth:int,expYear:int,bin:string,last4:string,brand:PaymentCardBrand} $paymentInstrument
-     */
-    public function setPaymentInstrument(array $paymentInstrument): self
+    public function setPaymentInstrument(PaymentCardTokenPaymentInstrument|array $paymentInstrument): self
     {
-        $paymentInstrument['pan'] = $paymentInstrument['pan'] ?? null;
-        $paymentInstrument['cvv'] = $paymentInstrument['cvv'] ?? null;
-        if (!isset($paymentInstrument['expMonth'])) {
-            throw new InvalidArgumentException('Property \'paymentInstrument.expMonth\' must be set.');
+        if (!($paymentInstrument instanceof PaymentCardTokenPaymentInstrument)) {
+            $paymentInstrument = PaymentCardTokenPaymentInstrument::from($paymentInstrument);
         }
-        if (!isset($paymentInstrument['expYear'])) {
-            throw new InvalidArgumentException('Property \'paymentInstrument.expYear\' must be set.');
-        }
-        $paymentInstrument['bin'] = $paymentInstrument['bin'] ?? null;
-        $paymentInstrument['last4'] = $paymentInstrument['last4'] ?? null;
-        $paymentInstrument['brand'] = isset($paymentInstrument['brand']) ? ($paymentInstrument['brand'] instanceof PaymentCardBrand ? $paymentInstrument['brand'] : PaymentCardBrand::from($paymentInstrument['brand'])) : null;
 
         $this->fields['paymentInstrument'] = $paymentInstrument;
 
@@ -235,7 +217,7 @@ class PaymentCardToken extends CompositeToken
             $data['method'] = $this->fields['method'];
         }
         if (array_key_exists('paymentInstrument', $this->fields)) {
-            $data['paymentInstrument'] = $this->fields['paymentInstrument'];
+            $data['paymentInstrument'] = $this->fields['paymentInstrument']?->jsonSerialize();
         }
         if (array_key_exists('billingAddress', $this->fields)) {
             $data['billingAddress'] = $this->fields['billingAddress']?->jsonSerialize();
@@ -268,7 +250,7 @@ class PaymentCardToken extends CompositeToken
             $data['_links'] = $this->fields['_links'];
         }
 
-        return parent::jsonSerialize() + $data;
+        return $data;
     }
 
     private function setId(null|string $id): self

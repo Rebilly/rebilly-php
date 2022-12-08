@@ -21,11 +21,11 @@ class CreateContactBody implements JsonSerializable
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('email_addresses', $data)) {
-            $this->setEmailAddresses($data['email_addresses']);
+        if (array_key_exists('emailAddresses', $data)) {
+            $this->setEmailAddresses($data['emailAddresses']);
         }
-        if (array_key_exists('phone_numbers', $data)) {
-            $this->setPhoneNumbers($data['phone_numbers']);
+        if (array_key_exists('phoneNumbers', $data)) {
+            $this->setPhoneNumbers($data['phoneNumbers']);
         }
     }
 
@@ -39,7 +39,7 @@ class CreateContactBody implements JsonSerializable
      */
     public function getEmailAddresses(): ?array
     {
-        return $this->fields['email_addresses'] ?? null;
+        return $this->fields['emailAddresses'] ?? null;
     }
 
     /**
@@ -49,7 +49,7 @@ class CreateContactBody implements JsonSerializable
     {
         $emailAddresses = $emailAddresses !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof CreateContactBodyEmailAddresses ? $value : CreateContactBodyEmailAddresses::from($value)) : null, $emailAddresses) : null;
 
-        $this->fields['email_addresses'] = $emailAddresses;
+        $this->fields['emailAddresses'] = $emailAddresses;
 
         return $this;
     }
@@ -59,7 +59,7 @@ class CreateContactBody implements JsonSerializable
      */
     public function getPhoneNumbers(): ?array
     {
-        return $this->fields['phone_numbers'] ?? null;
+        return $this->fields['phoneNumbers'] ?? null;
     }
 
     /**
@@ -69,7 +69,7 @@ class CreateContactBody implements JsonSerializable
     {
         $phoneNumbers = $phoneNumbers !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof CreateContactBodyPhoneNumbers ? $value : CreateContactBodyPhoneNumbers::from($value)) : null, $phoneNumbers) : null;
 
-        $this->fields['phone_numbers'] = $phoneNumbers;
+        $this->fields['phoneNumbers'] = $phoneNumbers;
 
         return $this;
     }
@@ -77,11 +77,11 @@ class CreateContactBody implements JsonSerializable
     public function jsonSerialize(): array
     {
         $data = [];
-        if (array_key_exists('email_addresses', $this->fields)) {
-            $data['email_addresses'] = $this->fields['email_addresses'];
+        if (array_key_exists('emailAddresses', $this->fields)) {
+            $data['emailAddresses'] = $this->fields['emailAddresses'];
         }
-        if (array_key_exists('phone_numbers', $this->fields)) {
-            $data['phone_numbers'] = $this->fields['phone_numbers'];
+        if (array_key_exists('phoneNumbers', $this->fields)) {
+            $data['phoneNumbers'] = $this->fields['phoneNumbers'];
         }
 
         return $data;

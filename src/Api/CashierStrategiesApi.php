@@ -17,60 +17,85 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
-use Rebilly\Sdk\Model\AmlCheck;
-use Rebilly\Sdk\Model\AmlCheckReview;
+use Rebilly\Sdk\Model\CashierStrategy;
 use Rebilly\Sdk\Paginator;
 
-class AmlChecksApi
+class CashierStrategiesApi
 {
     public function __construct(protected readonly ?ClientInterface $client)
     {
     }
 
     /**
-     * @return AmlCheck
+     * @return CashierStrategy
      */
-    public function get(
+    public function create(
+        CashierStrategy $cashierStrategy,
+    ): CashierStrategy {
+        $uri = '/cashier-strategies';
+
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($cashierStrategy));
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return CashierStrategy::from($data);
+    }
+
+    public function delete(
         string $id,
-    ): AmlCheck {
+    ): void {
         $pathParams = [
             '{id}' => $id,
         ];
 
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/aml-checks/{id}');
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/cashier-strategies/{id}');
+
+        $request = new Request('DELETE', $uri);
+        $this->client->send($request);
+    }
+
+    /**
+     * @return CashierStrategy
+     */
+    public function get(
+        string $id,
+    ): CashierStrategy {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/cashier-strategies/{id}');
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return AmlCheck::from($data);
+        return CashierStrategy::from($data);
     }
 
     /**
-     * @return Collection<AmlCheck>
+     * @return Collection<CashierStrategy>
      */
     public function getAll(
         ?int $limit = null,
         ?int $offset = null,
-        ?array $sort = null,
         ?string $filter = null,
-        ?string $q = null,
+        ?array $sort = null,
     ): Collection {
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
-            'sort' => $sort,
             'filter' => $filter,
-            'q' => $q,
+            'sort' => $sort,
         ];
-        $uri = '/aml-checks?' . http_build_query($queryParams);
+        $uri = '/cashier-strategies?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): AmlCheck => AmlCheck::from($item), $data),
+            array_map(fn (array $item): CashierStrategy => CashierStrategy::from($item), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
@@ -80,16 +105,14 @@ class AmlChecksApi
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
-        ?array $sort = null,
         ?string $filter = null,
-        ?string $q = null,
+        ?array $sort = null,
     ): Paginator {
         $closure = fn (?int $limit, ?int $offset): Collection => $this->getAll(
             limit: $limit,
             offset: $offset,
-            sort: $sort,
             filter: $filter,
-            q: $q,
+            sort: $sort,
         );
 
         return new Paginator(
@@ -99,22 +122,22 @@ class AmlChecksApi
     }
 
     /**
-     * @return AmlCheck
+     * @return CashierStrategy
      */
-    public function review(
+    public function update(
         string $id,
-        ?AmlCheckReview $amlCheckReview = null,
-    ): AmlCheck {
+        CashierStrategy $cashierStrategy,
+    ): CashierStrategy {
         $pathParams = [
             '{id}' => $id,
         ];
 
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/aml-checks/{id}/review');
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/cashier-strategies/{id}');
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($amlCheckReview));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($cashierStrategy));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return AmlCheck::from($data);
+        return CashierStrategy::from($data);
     }
 }

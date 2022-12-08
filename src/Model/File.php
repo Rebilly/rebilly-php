@@ -35,8 +35,6 @@ class File implements JsonSerializable
 
     public const MIME_APPLICATION_PDF = 'application/pdf';
 
-    public const MIME_AUDIO_MPEG = 'audio/mpeg';
-
     private array $fields = [];
 
     public function __construct(array $data = [])

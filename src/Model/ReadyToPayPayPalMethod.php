@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-class ReadyToPayPayPalMethod extends ReadyToPayMethods
+use JsonSerializable;
+
+class ReadyToPayPayPalMethod implements JsonSerializable
 {
     public const METHOD_PAYPAL = 'paypal';
 
@@ -21,10 +23,6 @@ class ReadyToPayPayPalMethod extends ReadyToPayMethods
 
     public function __construct(array $data = [])
     {
-        parent::__construct([
-            'method' => 'paypal',
-        ] + $data);
-
         if (array_key_exists('method', $data)) {
             $this->setMethod($data['method']);
         }
@@ -108,6 +106,6 @@ class ReadyToPayPayPalMethod extends ReadyToPayMethods
             $data['filters'] = $this->fields['filters'];
         }
 
-        return parent::jsonSerialize() + $data;
+        return $data;
     }
 }

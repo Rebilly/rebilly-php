@@ -186,13 +186,17 @@ class AddressMatches implements JsonSerializable
         return $this;
     }
 
-    public function getDocumentSubtype(): ?string
+    public function getDocumentSubtype(): ?KycDocumentSubtypes
     {
         return $this->fields['documentSubtype'] ?? null;
     }
 
-    public function setDocumentSubtype(null|string $documentSubtype): self
+    public function setDocumentSubtype(null|KycDocumentSubtypes|string $documentSubtype): self
     {
+        if ($documentSubtype !== null && !($documentSubtype instanceof KycDocumentSubtypes)) {
+            $documentSubtype = KycDocumentSubtypes::from($documentSubtype);
+        }
+
         $this->fields['documentSubtype'] = $documentSubtype;
 
         return $this;
@@ -232,7 +236,7 @@ class AddressMatches implements JsonSerializable
             $data['phone'] = $this->fields['phone'];
         }
         if (array_key_exists('documentSubtype', $this->fields)) {
-            $data['documentSubtype'] = $this->fields['documentSubtype'];
+            $data['documentSubtype'] = $this->fields['documentSubtype']?->value;
         }
 
         return $data;
