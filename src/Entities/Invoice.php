@@ -46,7 +46,7 @@ final class Invoice extends Entity
     }
 
     /**
-     * @return string
+     * @return float
      */
     public function getAmount()
     {
