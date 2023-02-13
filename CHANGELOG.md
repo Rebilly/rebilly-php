@@ -19,9 +19,9 @@ Security - in case of vulnerabilities.
 
 ### Removed
 
-- [x] Removed **UpdatePassword**
-- [x] Removed **UserService::resetTotp()** method
-- [x] Removed **ResetPassword**
+- [x] Removed `UpdatePassword`
+- [x] Removed `UserService::resetTotp()` method
+- [x] Removed `ResetPassword`
 
 ### Added
 
