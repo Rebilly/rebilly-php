@@ -15,7 +15,6 @@ use ArrayObject;
 use JsonSerializable;
 use Rebilly\Entities\ForgotPassword;
 use Rebilly\Entities\Login;
-use Rebilly\Entities\ResetPassword;
 use Rebilly\Entities\Session;
 use Rebilly\Entities\Signup;
 use Rebilly\Entities\User;
@@ -65,19 +64,6 @@ final class UserService extends Service
     public function forgotPassword($data)
     {
         return $this->client()->post($data, 'forgot-password');
-    }
-
-    /**
-     * @param string $token
-     * @param array|JsonSerializable|ResetPassword $data
-     *
-     * @throws DataValidationException if input data is not valid
-     *
-     * @return User
-     */
-    public function resetPassword($token, $data)
-    {
-        return $this->client()->post($data, 'reset-password/{token}', ['token' => $token]);
     }
 
     /**

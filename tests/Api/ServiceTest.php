@@ -815,11 +815,6 @@ class ServiceTest extends BaseTestCase
             ->method('__invoke')
             ->willReturn($client->createResponse()->withHeader('Location', 'users/userId'));
 
-        $service->forgotPassword([]);
-
-        $result = $service->resetPassword('token', []);
-        self::assertInstanceOf(Entities\User::class, $result);
-
         $result = $service->activate('token');
         self::assertInstanceOf(Entities\User::class, $result);
     }

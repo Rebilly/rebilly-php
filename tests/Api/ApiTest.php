@@ -186,7 +186,6 @@ class ApiTest extends TestCase
             [Entities\ApiTracking::class],
             [Entities\SubscriptionTracking::class],
             [Entities\Signup::class],
-            [Entities\ResetPassword::class],
             [Entities\ForgotPassword::class],
             [Entities\Login::class],
             [Entities\Dispute::class],
