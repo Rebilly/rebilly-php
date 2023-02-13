@@ -15,6 +15,14 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
+## [2.20.0] 2023-02-13
+
+### Removed
+
+- [x] Removed **UpdatePassword**
+- [x] Removed **UserService::resetTotp()** method
+- [x] Removed **ResetPassword**
+
 ### Added
 
 - [x] Added new property to `Subscription`: `paymentInstrumentId`
