@@ -820,9 +820,6 @@ class ServiceTest extends BaseTestCase
         $result = $service->resetPassword('token', []);
         self::assertInstanceOf(Entities\User::class, $result);
 
-        $result = $service->resetTotp('userId');
-        self::assertInstanceOf(Entities\User::class, $result);
-
         $result = $service->activate('token');
         self::assertInstanceOf(Entities\User::class, $result);
     }

@@ -131,16 +131,6 @@ final class UserService extends Service
     }
 
     /**
-     * @param string $userId
-     *
-     * @return User
-     */
-    public function resetTotp($userId)
-    {
-        return $this->client()->post([], 'users/{userId}/totp-reset/', ['userId' => $userId]);
-    }
-
-    /**
      * @param string $token
      *
      * @throws DataValidationException The token is not valid
