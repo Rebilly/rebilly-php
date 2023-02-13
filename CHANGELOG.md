@@ -15,8 +15,6 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
-## [2.20.0] 2023-02-13
-
 ### Removed
 
 - [x] Removed `UpdatePassword`
