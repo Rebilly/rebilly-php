@@ -18,7 +18,6 @@ use Rebilly\Entities\Login;
 use Rebilly\Entities\ResetPassword;
 use Rebilly\Entities\Session;
 use Rebilly\Entities\Signup;
-use Rebilly\Entities\UpdatePassword;
 use Rebilly\Entities\User;
 use Rebilly\Http\Exception\DataValidationException;
 use Rebilly\Http\Exception\NotFoundException;
@@ -164,22 +163,5 @@ final class UserService extends Service
     public function update($userId, $data)
     {
         return $this->client()->put($data, 'users/{userId}', ['userId' => $userId]);
-    }
-
-    /**
-     * @param string $userId
-     * @param array|JsonSerializable|UpdatePassword $data
-     *
-     * @return User
-     */
-    public function updatePassword($userId, $data)
-    {
-        return $this->client()->post(
-            $data,
-            'users/{userId}/password',
-            [
-                'userId' => $userId,
-            ]
-        );
     }
 }

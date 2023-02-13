@@ -814,13 +814,6 @@ class ServiceTest extends BaseTestCase
             ->expects(self::any())
             ->method('__invoke')
             ->willReturn($client->createResponse()->withHeader('Location', 'users/userId'));
-        $client = new Client([
-            'apiKey' => 'QWERTY',
-            'httpHandler' => $handler,
-        ]);
-        $service = $client->users();
-        $result = $service->updatePassword('userId', []);
-        self::assertInstanceOf(Entities\User::class, $result);
 
         $service->forgotPassword([]);
 
