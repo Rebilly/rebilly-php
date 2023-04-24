@@ -83,6 +83,7 @@ jobs:
             -v "/tmp/${{ matrix.api }}-sdk:/out" \
             -v "/tmp/definitions:/definitions" \
             ghcr.io/rebilly/php-sdk-generator:latest generate \
+            --skip-validate-spec \
             -g rebilly-php \
             -o /out \
             -c /config.yaml \
