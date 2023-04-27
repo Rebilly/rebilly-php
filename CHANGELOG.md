@@ -28,6 +28,10 @@ Security - in case of vulnerabilities.
 - [x] Added `PayPalInstrument::getPaymentInstrumentId` method
 - [x] Added `PayPalInstrument::setPaymentInstrumentId` method
 
+### Fixed
+
+- [x] Added missing `subscriptionPauses` service in Client
+
 ### Deprecated
 
 - [x] Deprecated `SubscriptionService::getUpcomingInvoices()` method
