@@ -15,11 +15,6 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
-### Removed
-
-- [x] Removed `UserService` methods: `resetPassword`, `resetTotp`, `updatePassword`
-- [x] Removed `ResetPassword`, `UpdatePassword` entities
-
 ### Added
 
 - [x] Added new property to `Subscription`: `paymentInstrumentId`
@@ -46,6 +41,11 @@ Security - in case of vulnerabilities.
 - [x] Deprecated `AchInstrument::setBankAccountId` method
 - [x] Deprecated `PayPalInstrument::getPayPalAccountId` method
 - [x] Deprecated `PayPalInstrument::setPayPalAccountId` method
+
+### Removed
+
+- [x] Removed `UserService` methods: `resetPassword`, `resetTotp`, `updatePassword`
+- [x] Removed `ResetPassword`, `UpdatePassword` entities
 
 ## [2.19.0] 2022-06-22
 
