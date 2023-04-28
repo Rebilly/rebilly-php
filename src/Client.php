@@ -92,6 +92,7 @@ use RuntimeException;
  * @method Services\AmlService aml()
  * @method Services\PaymentInstrumentService paymentInstruments()
  * @method Services\TagService tags()
+ * @method Services\SubscriptionPauseService subscriptionPauses()
  */
 final class Client
 {
@@ -159,6 +160,7 @@ final class Client
         'taxjarCredentials' => Services\TaxJarCredentialsService::class,
         'paymentInstruments' => Services\PaymentInstrumentService::class,
         'tags' => Services\TagService::class,
+        'subscriptionPauses' => Services\SubscriptionPauseService::class,
     ];
 
     /** @var array */
