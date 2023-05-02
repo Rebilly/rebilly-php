@@ -15,10 +15,8 @@ use ArrayObject;
 use JsonSerializable;
 use Rebilly\Entities\ForgotPassword;
 use Rebilly\Entities\Login;
-use Rebilly\Entities\ResetPassword;
 use Rebilly\Entities\Session;
 use Rebilly\Entities\Signup;
-use Rebilly\Entities\UpdatePassword;
 use Rebilly\Entities\User;
 use Rebilly\Http\Exception\DataValidationException;
 use Rebilly\Http\Exception\NotFoundException;
@@ -66,19 +64,6 @@ final class UserService extends Service
     public function forgotPassword($data)
     {
         return $this->client()->post($data, 'forgot-password');
-    }
-
-    /**
-     * @param string $token
-     * @param array|JsonSerializable|ResetPassword $data
-     *
-     * @throws DataValidationException if input data is not valid
-     *
-     * @return User
-     */
-    public function resetPassword($token, $data)
-    {
-        return $this->client()->post($data, 'reset-password/{token}', ['token' => $token]);
     }
 
     /**
@@ -132,16 +117,6 @@ final class UserService extends Service
     }
 
     /**
-     * @param string $userId
-     *
-     * @return User
-     */
-    public function resetTotp($userId)
-    {
-        return $this->client()->post([], 'users/{userId}/totp-reset/', ['userId' => $userId]);
-    }
-
-    /**
      * @param string $token
      *
      * @throws DataValidationException The token is not valid
@@ -164,22 +139,5 @@ final class UserService extends Service
     public function update($userId, $data)
     {
         return $this->client()->put($data, 'users/{userId}', ['userId' => $userId]);
-    }
-
-    /**
-     * @param string $userId
-     * @param array|JsonSerializable|UpdatePassword $data
-     *
-     * @return User
-     */
-    public function updatePassword($userId, $data)
-    {
-        return $this->client()->post(
-            $data,
-            'users/{userId}/password',
-            [
-                'userId' => $userId,
-            ]
-        );
     }
 }

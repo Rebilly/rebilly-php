@@ -42,6 +42,11 @@ Security - in case of vulnerabilities.
 - [x] Deprecated `PayPalInstrument::getPayPalAccountId` method
 - [x] Deprecated `PayPalInstrument::setPayPalAccountId` method
 
+### Removed
+
+- [x] Removed `UserService` methods: `resetPassword`, `resetTotp`, `updatePassword`
+- [x] Removed `ResetPassword`, `UpdatePassword` entities
+
 ## [2.19.0] 2022-06-22
 
 ### Added
