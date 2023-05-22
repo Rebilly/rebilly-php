@@ -15,6 +15,10 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
+_TBD_
+
+## [2.20.0] 2023-05-22
+
 ### Added
 
 - [x] Added new property to `Subscription`: `paymentInstrumentId`
