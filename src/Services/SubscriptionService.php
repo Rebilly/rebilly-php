@@ -170,6 +170,8 @@ final class SubscriptionService extends Service
     }
 
     /**
+     * @deprecated Use self::getUpcomingInvoice()
+     *
      * @param string $subscriptionId
      *
      * @return Invoice[]|Collection
@@ -178,6 +180,19 @@ final class SubscriptionService extends Service
     {
         return $this->client()->get(
             'subscriptions/{subscriptionId}/upcoming-invoices',
+            ['subscriptionId' => $subscriptionId]
+        );
+    }
+
+    /**
+     * @param string $subscriptionId
+     *
+     * @return Invoice
+     */
+    public function getUpcomingInvoice($subscriptionId)
+    {
+        return $this->client()->get(
+            'subscriptions/{subscriptionId}/upcoming-invoice',
             ['subscriptionId' => $subscriptionId]
         );
     }

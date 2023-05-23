@@ -104,6 +104,8 @@ abstract class TestCase extends Framework\TestCase
             case 'toGatewayAccountId':
             case 'couponId':
             case 'productId':
+            case 'invoiceId':
+            case 'creditMemoId':
             case 'requestId':
             case 'stickyGatewayAccountId':
             case 'hash':
@@ -115,6 +117,7 @@ abstract class TestCase extends Framework\TestCase
             case 'alternateGatewayAccountIfRejected':
             case 'alternateGatewayAccountIfOptional':
             case 'rateId':
+            case 'paymentInstrumentId':
                 return self::uuid();
             case 'dueTime':
             case 'expiredTime':
@@ -141,6 +144,10 @@ abstract class TestCase extends Framework\TestCase
             case 'unitPrice':
             case 'unitPriceAmount':
             case 'amount':
+            case 'shippingAmount':
+            case 'taxAmount':
+            case 'unusedAmount':
+            case 'totalAmount':
             case 'price':
                 return random_int(1, 9999) / 100;
             case 'gatewayName':
@@ -401,6 +408,10 @@ abstract class TestCase extends Framework\TestCase
                             ['amount' => 1, 'description' => 'Tax 1'],
                             ['amount' => 10, 'description' => 'Tax 2'],
                         ];
+                    case Entities\CreditMemo::class:
+                        return [
+                            ['unitPrice' => 1, 'description' => 'Credit memo item', 'quantity' => 1],
+                        ];
                     default:
                         throw new InvalidArgumentException(
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
@@ -596,7 +607,13 @@ abstract class TestCase extends Framework\TestCase
             case 'cancelCategory':
                 return self::randomElements(Entities\SubscriptionCancel::cancelCategories())[0];
             case 'reason':
-                return self::randomElements(Entities\SubscriptionCancellation::reasons())[0];
+                switch ($class) {
+                    case Entities\CreditMemo::class:
+                        return self::randomElements(Entities\CreditMemo::reasons())[0];
+                    default:
+                        return self::randomElements(Entities\SubscriptionCancellation::reasons())[0];
+                }
+                // no break
             case 'canceledBy':
                 return self::randomElements(Entities\SubscriptionCancellation::canceledBySources())[0];
             case 'riskMetadata':
@@ -784,6 +801,10 @@ abstract class TestCase extends Framework\TestCase
                             sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
                         );
                 }
+            case 'allocations':
+                return new Entities\AllocationCollection(['transactions' => [new Entities\TransactionAllocation([
+                    'transactionId' => 'transaction-1',
+                ])]]);
         }
     }
 

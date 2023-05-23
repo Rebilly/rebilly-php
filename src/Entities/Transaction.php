@@ -75,7 +75,7 @@ final class Transaction extends Entity
     }
 
     /**
-     * @return string
+     * @return float
      */
     public function getAmount()
     {
@@ -83,7 +83,7 @@ final class Transaction extends Entity
     }
 
     /**
-     * @param $value
+     * @param float $value
      *
      * @return $this
      */
@@ -643,7 +643,7 @@ final class Transaction extends Entity
     }
 
     /**
-     * @return string
+     * @return float
      */
     public function getRequestAmount()
     {
@@ -659,7 +659,7 @@ final class Transaction extends Entity
     }
 
     /**
-     * @return string
+     * @return float
      */
     public function getPurchaseAmount()
     {
@@ -675,7 +675,7 @@ final class Transaction extends Entity
     }
 
     /**
-     * @return string
+     * @return float
      */
     public function getReportAmount()
     {

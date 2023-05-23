@@ -77,7 +77,7 @@ final class Shipping extends Resource
     }
 
     /**
-     * @return integer
+     * @return float
      */
     public function getAmount()
     {
@@ -85,7 +85,7 @@ final class Shipping extends Resource
     }
 
     /**
-     * @param integer $value
+     * @param float $value
      *
      * @return $this
      */

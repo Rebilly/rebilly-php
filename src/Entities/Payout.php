@@ -19,7 +19,7 @@ use Rebilly\Rest\Entity;
 final class Payout extends Entity
 {
     /**
-     * @return string
+     * @return float
      */
     public function getAmount()
     {
@@ -27,7 +27,7 @@ final class Payout extends Entity
     }
 
     /**
-     * @param $value
+     * @param float $value
      *
      * @return $this
      */

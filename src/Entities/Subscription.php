@@ -611,6 +611,24 @@ final class Subscription extends Entity
     }
 
     /**
+     * @return string|null
+     */
+    public function getPaymentInstrumentId()
+    {
+        return $this->getAttribute('paymentInstrumentId');
+    }
+
+    /**
+     * @param string|null $value
+     *
+     * @return Subscription
+     */
+    public function setPaymentInstrumentId($value)
+    {
+        return $this->setAttribute('paymentInstrumentId', $value);
+    }
+
+    /**
      * @return null|string
      */
     public function getRenewalReminderTime()

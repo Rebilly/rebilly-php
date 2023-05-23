@@ -17,6 +17,46 @@ Security - in case of vulnerabilities.
 
 _TBD_
 
+## [2.20.0] 2023-05-22
+
+### Added
+
+- [x] Added new property to `Subscription`: `paymentInstrumentId`
+- [x] Added new property to `CreditMemo`: `allocations`
+- [x] Added `CreditMemoService::patch()` method
+- [x] Added `SubscriptionService::getUpcomingInvoice()` method
+- [x] Added `PaymentCardInstrument::getPaymentInstrumentId` method
+- [x] Added `PaymentCardInstrument::setPaymentInstrumentId` method
+- [x] Added `AchInstrument::getPaymentInstrumentId` method
+- [x] Added `AchInstrument::setPaymentInstrumentId` method
+- [x] Added `PayPalInstrument::getPaymentInstrumentId` method
+- [x] Added `PayPalInstrument::setPaymentInstrumentId` method
+
+### Fixed
+
+- [x] Added missing `subscriptionPauses` service in Client
+
+### Deprecated
+
+- [x] Deprecated `SubscriptionService::getUpcomingInvoices()` method
+- [x] Deprecated `PaymentCardInstrument::getPaymentCardId` method
+- [x] Deprecated `PaymentCardInstrument::setPaymentCardId` method
+- [x] Deprecated `AchInstrument::getBankAccountId` method
+- [x] Deprecated `AchInstrument::setBankAccountId` method
+- [x] Deprecated `PayPalInstrument::getPayPalAccountId` method
+- [x] Deprecated `PayPalInstrument::setPayPalAccountId` method
+
+### Removed
+
+- [x] Removed `UserService` methods: `resetPassword`, `resetTotp`, `updatePassword`
+- [x] Removed `ResetPassword`, `UpdatePassword` entities
+
+## [2.19.0] 2022-06-22
+
+### Added
+
+- [x] Added **Credit Memos API**.
+
 ## [2.18.0] 2022-04-21
 
 ### Added
