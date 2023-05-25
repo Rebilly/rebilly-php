@@ -17,7 +17,7 @@ Security - in case of vulnerabilities.
 
 _TBD_
 
-## [2.21.0]
+## [2.21.0] 2023-05-25
 
 - [x] Added PHP 8.1 support
 - [x] Added coverage report with PHP 8.1
