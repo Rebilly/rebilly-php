@@ -15,7 +15,7 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
-_TBD_
+- [x] Added PHP 8.1 support
 
 ## [2.20.0] 2023-05-22
 
