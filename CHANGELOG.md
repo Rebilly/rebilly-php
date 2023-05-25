@@ -15,7 +15,7 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
-- [x] Added support for php 8.1
+- [x] Added PHP 8.1 support
 
 ## [2.20.0] 2023-05-22
 
