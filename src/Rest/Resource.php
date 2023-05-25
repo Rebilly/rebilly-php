@@ -101,6 +101,7 @@ abstract class Resource implements JsonSerializable, ArrayAccess
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     final public function jsonSerialize()
     {
         return $this->data->getArrayCopy();
@@ -243,7 +244,7 @@ abstract class Resource implements JsonSerializable, ArrayAccess
     /**
      * {@inheritdoc}
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return $this->hasAttribute($offset) && $this->getAttribute($offset) !== null;
     }
@@ -251,6 +252,7 @@ abstract class Resource implements JsonSerializable, ArrayAccess
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         if (method_exists($this, 'get' . $offset)) {
@@ -271,6 +273,7 @@ abstract class Resource implements JsonSerializable, ArrayAccess
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (method_exists($this, 'set' . $offset)) {
@@ -291,7 +294,7 @@ abstract class Resource implements JsonSerializable, ArrayAccess
     /**
      * {@inheritdoc}
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         $this->offsetSet($offset, null);
     }

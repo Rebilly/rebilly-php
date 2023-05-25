@@ -81,6 +81,7 @@ final class Paginator implements Iterator, Countable
      *
      * @return Rest\Collection
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         if ($this->currentSegment === null) {
@@ -97,7 +98,7 @@ final class Paginator implements Iterator, Countable
     /**
      * {@inheritdoc}
      */
-    public function next()
+    public function next(): void
     {
         $this->currentSegment = null;
         $this->offset += $this->limit;
@@ -115,6 +116,7 @@ final class Paginator implements Iterator, Countable
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return (int) ceil($this->offset / $this->limit);
@@ -123,7 +125,7 @@ final class Paginator implements Iterator, Countable
     /**
      * {@inheritdoc}
      */
-    public function valid()
+    public function valid(): bool
     {
         return $this->offset >= 0 && $this->offset <= $this->totalItems;
     }
@@ -131,7 +133,7 @@ final class Paginator implements Iterator, Countable
     /**
      * {@inheritdoc}
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->currentSegment = null;
         $this->offset = 0;
@@ -140,7 +142,7 @@ final class Paginator implements Iterator, Countable
     /**
      * {@inheritdoc}
      */
-    public function count()
+    public function count(): int
     {
         return (int) ceil($this->totalItems / $this->limit);
     }
