@@ -23,7 +23,7 @@ final class ExperianCredentialsService extends Service
      */
     public function search()
     {
-        return $this->client()->get('credential-hashes/experian');
+        return $this->client()->get('service-credentials/experian');
     }
 
     /**
@@ -33,27 +33,27 @@ final class ExperianCredentialsService extends Service
      */
     public function create($data)
     {
-        return $this->client()->post($data, 'credential-hashes/experian');
+        return $this->client()->post($data, 'service-credentials/experian');
     }
 
     /**
-     * @param string $hash
+     * @param string $id
      *
      * @return ExperianCredential
      */
-    public function load($hash)
+    public function load($id)
     {
-        return $this->client()->get('credential-hashes/experian/{hash}', ['hash' => $hash]);
+        return $this->client()->get('service-credentials/experian/{id}', ['id' => $id]);
     }
 
     /**
-     * @param string $hash
+     * @param string $id
      * @param array|JsonSerializable|ExperianCredential $data
      *
      * @return ExperianCredential
      */
-    public function patch($hash, $data)
+    public function patch($id, $data)
     {
-        return $this->client()->patch($data, 'credential-hashes/experian/{hash}', ['hash' => $hash]);
+        return $this->client()->patch($data, 'service-credentials/experian/{id}', ['id' => $id]);
     }
 }

@@ -279,7 +279,7 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'previews/webhooks' => function (array $content) {
                 return new Webhook($content);
             },
-            'credential-hashes/webhooks/{hash}' => function (array $content) {
+            'service-credentials/webhook/{id}' => function (array $content) {
                 return new WebhookCredential($content);
             },
             'tracking/webhooks' => function (array $content) {
@@ -330,7 +330,7 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'aml' => function (array $content) {
                 return new Collection(new AmlEntry(), $content);
             },
-            'credential-hashes/plaid/{hash}' => function (array $content) {
+            'service-credentials/plaid/{id}' => function (array $content) {
                 return new PlaidCredential($content);
             },
             'payment-instruments' => function (array $content) {
@@ -339,16 +339,16 @@ final class Schema implements IteratorAggregate, ArrayAccess
             'payment-instruments/{paymentInstrumentId}' => function (array $content) {
                 return new CommonPaymentInstrument($content);
             },
-            'credential-hashes/experian' => function (array $content) {
+            'service-credentials/experian' => function (array $content) {
                 return new Collection(new ExperianCredential(), $content);
             },
-            'credential-hashes/experian/{hash}' => function (array $content) {
+            'service-credentials/experian/{id}' => function (array $content) {
                 return new ExperianCredential($content);
             },
-            'credential-hashes/taxjar' => function (array $content) {
+            'service-credentials/taxjar' => function (array $content) {
                 return new Collection(new TaxJarCredential(), $content);
             },
-            'credential-hashes/taxjar/{hash}' => function (array $content) {
+            'service-credentials/taxjar/{id}' => function (array $content) {
                 return new TaxJarCredential($content);
             },
             'tags' => function (array $content) {
