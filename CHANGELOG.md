@@ -17,7 +17,10 @@ Security - in case of vulnerabilities.
 
 ### Changed
 
-- [x] Changed `WebhookCredentialsService`, `TaxJarCredentialsService`, `PlaidCredentialsService`, `ExperianCredentialsService` services URI base path from `credential-hashes` to `service-credentials`
+- [x] Changed `WebhookCredentialsService` service URI base path from `credential-hashes/webhooks` to `service-credentials/webhook`
+- [x] Changed `TaxJarCredentialsService` service URI base path from `credential-hashes/taxjar` to `service-credentials/taxjar`
+- [x] Changed `PlaidCredentialsService` service URI base path from `credential-hashes/plaid` to `service-credentials/plaid` 
+- [x] Changed `ExperianCredentialsService` service URI base path from `credential-hashes/experian` to `service-credentials/experian`
 
 ### Deprecated
 
