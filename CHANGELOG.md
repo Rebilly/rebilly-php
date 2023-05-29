@@ -15,6 +15,10 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
+_TBD_
+
+## [2.22.0] 2023-05-29
+
 ### Changed
 
 - [x] Changed `WebhookCredentialsService` service URI base path from `credential-hashes/webhooks` to `service-credentials/webhook`
