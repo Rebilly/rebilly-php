@@ -15,7 +15,16 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
-_TBD_
+### Changed
+
+- [x] Changed `WebhookCredentialsService`, `TaxJarCredentialsService`, `PlaidCredentialsService`, `ExperianCredentialsService` services URI base path from `credential-hashes` to `service-credentials`
+
+### Deprecated
+
+- [x] Deprecated `WebhookCredential::getHash()` method
+- [x] Deprecated `TaxJarCredential::getHash()` method
+- [x] Deprecated `PlaidCredential::getHash()` method
+- [x] Deprecated `ExperianCredential::getHash()` method
 
 ## [2.21.0] 2023-05-25
 

@@ -24,27 +24,27 @@ final class PlaidCredentialsService extends Service
      */
     public function create($data)
     {
-        return $this->client()->post($data, 'credential-hashes/plaid');
+        return $this->client()->post($data, 'service-credentials/plaid');
     }
 
     /**
-     * @param string $hash
+     * @param string $id
      *
      * @return PlaidCredential
      */
-    public function load($hash)
+    public function load($id)
     {
-        return $this->client()->get('credential-hashes/plaid/{hash}', ['hash' => $hash]);
+        return $this->client()->get('service-credentials/plaid/{id}', ['id' => $id]);
     }
 
     /**
-     * @param string $hash
+     * @param string $id
      * @param array|JsonSerializable|PlaidCredential $data
      *
      * @return PlaidCredential
      */
-    public function patch($hash, $data)
+    public function patch($id, $data)
     {
-        return $this->client()->patch($data, 'credential-hashes/plaid/{hash}', ['hash' => $hash]);
+        return $this->client()->patch($data, 'service-credentials/plaid/{id}', ['id' => $id]);
     }
 }

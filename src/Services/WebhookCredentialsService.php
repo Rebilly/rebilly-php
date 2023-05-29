@@ -22,15 +22,15 @@ use Rebilly\Rest\Service;
 final class WebhookCredentialsService extends Service
 {
     /**
-     * @param string $hash
+     * @param string $id
      *
      * @throws NotFoundException if resource does not exist
      *
      * @return WebhookCredential
      */
-    public function load($hash)
+    public function load($id)
     {
-        return $this->client()->get('credential-hashes/webhooks/{hash}', ['hash' => $hash]);
+        return $this->client()->get('service-credentials/webhook/{id}', ['id' => $id]);
     }
 
     /**
@@ -40,6 +40,6 @@ final class WebhookCredentialsService extends Service
      */
     public function create($data)
     {
-        return $this->client()->post($data, 'credential-hashes/webhooks');
+        return $this->client()->post($data, 'service-credentials/webhook');
     }
 }

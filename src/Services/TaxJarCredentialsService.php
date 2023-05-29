@@ -23,7 +23,7 @@ final class TaxJarCredentialsService extends Service
      */
     public function search()
     {
-        return $this->client()->get('credential-hashes/taxjar');
+        return $this->client()->get('service-credentials/taxjar');
     }
 
     /**
@@ -33,27 +33,27 @@ final class TaxJarCredentialsService extends Service
      */
     public function create($data)
     {
-        return $this->client()->post($data, 'credential-hashes/taxjar');
+        return $this->client()->post($data, 'service-credentials/taxjar');
     }
 
     /**
-     * @param string $hash
+     * @param string $id
      *
      * @return TaxJarCredential
      */
-    public function load($hash)
+    public function load($id)
     {
-        return $this->client()->get('credential-hashes/taxjar/{hash}', ['hash' => $hash]);
+        return $this->client()->get('service-credentials/taxjar/{id}', ['id' => $id]);
     }
 
     /**
-     * @param string $hash
+     * @param string $id
      * @param array|JsonSerializable|TaxJarCredential $data
      *
      * @return TaxJarCredential
      */
-    public function patch($hash, $data)
+    public function patch($id, $data)
     {
-        return $this->client()->patch($data, 'credential-hashes/taxjar/{hash}', ['hash' => $hash]);
+        return $this->client()->patch($data, 'service-credentials/taxjar/{id}', ['id' => $id]);
     }
 }

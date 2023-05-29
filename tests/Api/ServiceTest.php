@@ -999,7 +999,7 @@ class ServiceTest extends BaseTestCase
     public function webhookCredentialService()
     {
         $client = new Client(['apiKey' => 'QWERTY']);
-        $response = $client->createResponse()->withHeader('Location', 'credential-hashes/webhooks/dummy');
+        $response = $client->createResponse()->withHeader('Location', 'service-credentials/webhook/dummy');
 
         /** @var CurlHandler|MockObject $handler */
         $handler = $this->createMock(CurlHandler::class);

@@ -16,19 +16,13 @@ use Rebilly\Rest\Entity;
 final class ExperianCredential extends Entity
 {
     /**
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->getHash();
-    }
-
-    /**
+     * @deprecated use {@see getId()} instead
+     *
      * @return string
      */
     public function getHash()
     {
-        return $this->getAttribute('hash');
+        return $this->getId();
     }
 
     /**
