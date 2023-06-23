@@ -376,16 +376,6 @@ abstract class TestCase extends Framework\TestCase
                         );
                 }
                 // no break
-            case 'policy':
-                switch ($class) {
-                    case Entities\SubscriptionCancel::class:
-                        return self::randomElements(Entities\SubscriptionCancel::policies())[0];
-                    default:
-                        throw new InvalidArgumentException(
-                            sprintf('Cannot generate fake value for "%s :: %s"', $class, $attribute)
-                        );
-                }
-                // no break
             case 'items':
                 switch ($class) {
                     case Entities\Subscription::class:
@@ -604,8 +594,6 @@ abstract class TestCase extends Framework\TestCase
                     self::TEST_WORD,
                     random_int(1, 100),
                 ];
-            case 'cancelCategory':
-                return self::randomElements(Entities\SubscriptionCancel::cancelCategories())[0];
             case 'reason':
                 switch ($class) {
                     case Entities\CreditMemo::class:
@@ -626,7 +614,7 @@ abstract class TestCase extends Framework\TestCase
                     'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
                 ];
             case 'renewalPolicy':
-                return self::randomElements(Entities\SubscriptionChangePlan::renewalPolicies())[0];
+                return self::randomElements(Entities\SubscriptionChangeItems::renewalPolicies())[0];
             case 'notifications':
                 return [
                     [

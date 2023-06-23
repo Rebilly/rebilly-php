@@ -16,9 +16,7 @@ use JsonSerializable;
 use Rebilly\Entities\Invoice;
 use Rebilly\Entities\PreviewOrder;
 use Rebilly\Entities\Subscription;
-use Rebilly\Entities\SubscriptionCancel;
 use Rebilly\Entities\SubscriptionChangeItems;
-use Rebilly\Entities\SubscriptionChangePlan;
 use Rebilly\Entities\SubscriptionInterimInvoice;
 use Rebilly\Http\Exception\DataValidationException;
 use Rebilly\Http\Exception\NotFoundException;
@@ -96,25 +94,6 @@ final class SubscriptionService extends Service
     }
 
     /**
-     * @deprecated Use SubscriptionCancellationService instead.
-     *
-     * @param string $subscriptionId
-     * @param array|JsonSerializable|SubscriptionCancel $data
-     *
-     * @throws DataValidationException if input data is not valid
-     *
-     * @return Subscription
-     */
-    public function cancel($subscriptionId, $data)
-    {
-        return $this->client()->post(
-            $data,
-            'subscriptions/{subscriptionId}/cancel',
-            ['subscriptionId' => $subscriptionId]
-        );
-    }
-
-    /**
      * @param string $subscriptionId
      */
     public function delete($subscriptionId)
@@ -130,26 +109,6 @@ final class SubscriptionService extends Service
     public function void($subscriptionId)
     {
         return $this->client()->post([], 'subscriptions/{subscriptionId}/void', ['subscriptionId' => $subscriptionId]);
-    }
-
-    /**
-     * @deprecated
-     * @see changeItems
-     *
-     * @param string $subscriptionId
-     * @param array|JsonSerializable|SubscriptionChangePlan $data
-     *
-     * @throws DataValidationException if input data is not valid
-     *
-     * @return Subscription
-     */
-    public function changePlan($subscriptionId, $data)
-    {
-        return $this->client()->post(
-            $data,
-            'subscriptions/{subscriptionId}/change-plan',
-            ['subscriptionId' => $subscriptionId]
-        );
     }
 
     /**

@@ -15,7 +15,11 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
-_TBD_
+### Removed
+
+- [x] Removed `SubscriptionService::cancel()` method (use `SubscriptionCancellationService` service instead).
+- [x] Removed `SubscriptionService::changePlan()` method (use `SubscriptionService::changeItems` method instead).
+- [x] Removed `SubscriptionCancel`, `SubscriptionChangePlan` classes.
 
 ## [2.22.0] 2023-05-29
 
