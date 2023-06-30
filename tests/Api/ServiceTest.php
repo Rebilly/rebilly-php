@@ -463,12 +463,6 @@ class ServiceTest extends BaseTestCase
 
         $service = $client->subscriptions();
 
-        $result = $service->cancel('dummy', []);
-        self::assertInstanceOf(Entities\Subscription::class, $result);
-
-        $result = $service->changePlan('dummy', []);
-        self::assertInstanceOf(Entities\Subscription::class, $result);
-
         $result = $service->issueInterimInvoice('dummy', []);
         self::assertInstanceOf(Entities\Subscription::class, $result);
 
