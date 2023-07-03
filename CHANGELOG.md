@@ -64,7 +64,7 @@ Security - in case of vulnerabilities.
 
 ### Fixed
 
-- [x] Added missing `subscriptionPauses` service to service factories list
+- [x] Added missing `SubscriptionPauseService` service to service factories list
 
 ### Deprecated
 
