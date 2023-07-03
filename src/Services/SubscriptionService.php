@@ -146,12 +146,32 @@ final class SubscriptionService extends Service
      *
      * @return Invoice
      */
-    public function issueUpcomingInvoice($subscriptionId)
+    public function issueEarlyUpcomingInvoice($subscriptionId)
     {
         return $this->client()->post(
             [],
             'subscriptions/{subscriptionId}/upcoming-invoice/issue',
             ['subscriptionId' => $subscriptionId]
+        );
+    }
+
+    /**
+     * @deprecated use {@see issueEarlyUpcomingInvoice()} instead
+     *
+     * @param string $subscriptionId
+     * @param string $invoiceId
+     *
+     * @return Invoice
+     */
+    public function issueUpcomingInvoice($subscriptionId, $invoiceId)
+    {
+        return $this->client()->post(
+            [],
+            'subscriptions/{subscriptionId}/upcoming-invoices/{invoiceId}/issue',
+            [
+                'subscriptionId' => $subscriptionId,
+                'invoiceId' => $invoiceId,
+            ]
         );
     }
 

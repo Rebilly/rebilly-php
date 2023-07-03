@@ -457,6 +457,7 @@ class ServiceTest extends BaseTestCase
             ->willReturnOnConsecutiveCalls(
                 $client->createResponse(),
                 $client->createResponse()->withHeader('Location', 'invoices/dummy'),
+                $client->createResponse()->withHeader('Location', 'invoices/dummy'),
                 $client->createResponse()->withHeader('Location', 'invoices/dummy')
             );
 
@@ -473,7 +474,10 @@ class ServiceTest extends BaseTestCase
         $result = $service->issueInterimInvoice('dummy', []);
         self::assertInstanceOf(Entities\Invoice::class, $result);
 
-        $result = $service->issueUpcomingInvoice('dummy');
+        $result = $service->issueEarlyUpcomingInvoice('dummy');
+        self::assertInstanceOf(Entities\Invoice::class, $result);
+
+        $result = $service->issueUpcomingInvoice('dummy', 'dummy');
         self::assertInstanceOf(Entities\Invoice::class, $result);
     }
 

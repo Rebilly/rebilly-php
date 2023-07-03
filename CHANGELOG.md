@@ -15,16 +15,15 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
-### Changed
-
-- [x] Changed `SubscriptionService::issueUpcomingInvoice` method URI path to `subscriptions/{subscriptionId}/upcoming-invoice/issue`
-- [x] Changed `SubscriptionService::issueUpcomingInvoice` method signature: removed `invoiceId` argument
-
 ### Fixed
 
 - [x] Added missing `SubscriptionCancellation::getId` method (changed parent class from `Resource` to `Entity`)
 - [x] Added missing `SubscriptionPause::getId` method (changed parent class from `Resource` to `Entity`)
 - [x] Added missing `SubscriptionReactivation::getId` method (changed parent class from `Resource` to `Entity`)
+
+### Deprecated
+
+- [x] Deprecated `SubscriptionService::issueUpcomingInvoice` method (use `SubscriptionService::issueEarlyUpcomingInvoice` method instead)
 
 ### Removed
 
