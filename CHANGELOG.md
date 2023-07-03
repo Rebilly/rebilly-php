@@ -15,6 +15,12 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
+### Fixed
+
+- [x] Added missing `SubscriptionCancellation::getId` method (changed parent class from `Resource` to `Entity`)
+- [x] Added missing `SubscriptionPause::getId` method (changed parent class from `Resource` to `Entity`)
+- [x] Added missing `SubscriptionReactivation::getId` method (changed parent class from `Resource` to `Entity`)
+
 ### Removed
 
 - [x] Removed `SubscriptionService::cancel()` method (use `SubscriptionCancellationService` service instead).
@@ -58,7 +64,7 @@ Security - in case of vulnerabilities.
 
 ### Fixed
 
-- [x] Added missing `subscriptionPauses` service in Client
+- [x] Added missing `SubscriptionPauseService` service to service factories list
 
 ### Deprecated
 

@@ -11,12 +11,12 @@
 
 namespace Rebilly\Entities;
 
-use Rebilly\Rest\Resource;
+use Rebilly\Rest\Entity;
 
 /**
  * Class SubscriptionReactivation.
  */
-class SubscriptionReactivation extends Resource
+class SubscriptionReactivation extends Entity
 {
     /**
      * @return string

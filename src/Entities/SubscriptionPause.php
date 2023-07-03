@@ -12,12 +12,12 @@
 namespace Rebilly\Entities;
 
 use DomainException;
-use Rebilly\Rest\Resource;
+use Rebilly\Rest\Entity;
 
 /**
  * Class SubscriptionPause.
  */
-class SubscriptionPause extends Resource
+class SubscriptionPause extends Entity
 {
     public const UNEXPECTED_PAUSE_SOURCE = 'Unexpected pause source. Only %s pause sources are supported';
 
@@ -164,13 +164,5 @@ class SubscriptionPause extends Resource
     public function getCreatedTime()
     {
         return $this->getAttribute('createdTime');
-    }
-
-    /**
-     * @return string
-     */
-    public function getUpdatedTime()
-    {
-        return $this->getAttribute('updatedTime');
     }
 }

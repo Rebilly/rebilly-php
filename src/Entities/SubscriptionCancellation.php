@@ -12,12 +12,12 @@
 namespace Rebilly\Entities;
 
 use DomainException;
-use Rebilly\Rest\Resource;
+use Rebilly\Rest\Entity;
 
 /**
  * Class SubscriptionCancellation.
  */
-class SubscriptionCancellation extends Resource
+class SubscriptionCancellation extends Entity
 {
     public const UNEXPECTED_STATUS = 'Unexpected status. Only %s statuses are supported';
 
