@@ -129,21 +129,6 @@ final class SubscriptionService extends Service
     }
 
     /**
-     * @deprecated Use self::getUpcomingInvoice()
-     *
-     * @param string $subscriptionId
-     *
-     * @return Invoice[]|Collection
-     */
-    public function getUpcomingInvoices($subscriptionId)
-    {
-        return $this->client()->get(
-            'subscriptions/{subscriptionId}/upcoming-invoices',
-            ['subscriptionId' => $subscriptionId]
-        );
-    }
-
-    /**
      * @param string $subscriptionId
      *
      * @return Invoice
@@ -158,19 +143,15 @@ final class SubscriptionService extends Service
 
     /**
      * @param string $subscriptionId
-     * @param string $invoiceId
      *
      * @return Invoice
      */
-    public function issueUpcomingInvoice($subscriptionId, $invoiceId)
+    public function issueUpcomingInvoice($subscriptionId)
     {
         return $this->client()->post(
             [],
-            'subscriptions/{subscriptionId}/upcoming-invoices/{invoiceId}/issue',
-            [
-                'subscriptionId' => $subscriptionId,
-                'invoiceId' => $invoiceId,
-            ]
+            'subscriptions/{subscriptionId}/upcoming-invoice/issue',
+            ['subscriptionId' => $subscriptionId]
         );
     }
 

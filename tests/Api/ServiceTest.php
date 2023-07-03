@@ -454,7 +454,11 @@ class ServiceTest extends BaseTestCase
         $handler
             ->expects(self::any())
             ->method('__invoke')
-            ->willReturn($client->createResponse()->withHeader('Location', 'subscriptions/dummy'));
+            ->willReturnOnConsecutiveCalls(
+                $client->createResponse(),
+                $client->createResponse()->withHeader('Location', 'invoices/dummy'),
+                $client->createResponse()->withHeader('Location', 'invoices/dummy')
+            );
 
         $client = new Client([
             'apiKey' => 'QWERTY',
@@ -463,14 +467,28 @@ class ServiceTest extends BaseTestCase
 
         $service = $client->subscriptions();
 
-        $result = $service->issueInterimInvoice('dummy', []);
-        self::assertInstanceOf(Entities\Subscription::class, $result);
+        $result = $service->getUpcomingInvoice('dummy');
+        self::assertInstanceOf(Entities\Invoice::class, $result);
 
-        $result = $service->issueUpcomingInvoice('dummy', 'invoice-1');
-        self::assertInstanceOf(Entities\Subscription::class, $result);
+        $result = $service->issueInterimInvoice('dummy', []);
+        self::assertInstanceOf(Entities\Invoice::class, $result);
+
+        $result = $service->issueUpcomingInvoice('dummy');
+        self::assertInstanceOf(Entities\Invoice::class, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function subscriptionServiceChangeItems()
+    {
+        $client = new Client(['apiKey' => 'QWERTY']);
+
+        /** @var CurlHandler|MockObject $handler */
+        $handler = $this->createMock(CurlHandler::class);
 
         $handler
-            ->expects(self::any())
+            ->expects(self::once())
             ->method('__invoke')
             ->willReturnCallback(function ($request) use ($client) {
                 self::assertSame(
@@ -481,58 +499,15 @@ class ServiceTest extends BaseTestCase
                 return $client->createResponse()->withHeader('Location', 'subscriptions/dummy');
             });
 
+        $client = new Client([
+            'apiKey' => 'QWERTY',
+            'httpHandler' => $handler,
+        ]);
+
+        $service = $client->subscriptions();
+
         $result = $service->changeItems('dummy', [], ['expand' => 'upcomingInvoice']);
         self::assertInstanceOf(Entities\Subscription::class, $result);
-    }
-
-    /**
-     * @test
-     */
-    public function searchUpcomingInvoices()
-    {
-        $client = new Client(['apiKey' => 'QWERTY']);
-
-        /** @var CurlHandler|MockObject $handler */
-        $handler = $this->createMock(CurlHandler::class);
-
-        $handler
-            ->expects(self::any())
-            ->method('__invoke')
-            ->willReturn($client->createResponse()->withHeader('Location', 'subscriptions/subscription-1/upcoming-invoices'));
-
-        $client = new Client([
-            'apiKey' => 'QWERTY',
-            'httpHandler' => $handler,
-        ]);
-        $service = $client->subscriptions();
-
-        $result = $service->getUpcomingInvoices('subscription-1');
-        self::assertInstanceOf(Rest\Collection::class, $result);
-    }
-
-    /**
-     * @test
-     */
-    public function getUpcomingInvoice()
-    {
-        $client = new Client(['apiKey' => 'QWERTY']);
-
-        /** @var CurlHandler|MockObject $handler */
-        $handler = $this->createMock(CurlHandler::class);
-
-        $handler
-            ->expects(self::any())
-            ->method('__invoke')
-            ->willReturn($client->createResponse()->withHeader('Location', 'subscriptions/subscription-1/upcoming-invoice'));
-
-        $client = new Client([
-            'apiKey' => 'QWERTY',
-            'httpHandler' => $handler,
-        ]);
-        $service = $client->subscriptions();
-
-        $result = $service->getUpcomingInvoice('subscription-1');
-        self::assertInstanceOf(Entities\Invoice::class, $result);
     }
 
     /**

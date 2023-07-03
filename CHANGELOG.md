@@ -15,6 +15,11 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
+### Changed
+
+- [x] Changed `SubscriptionService::issueUpcomingInvoice` method URI path to `subscriptions/{subscriptionId}/upcoming-invoice/issue`
+- [x] Changed `SubscriptionService::issueUpcomingInvoice` method signature: removed `invoiceId` argument
+
 ### Fixed
 
 - [x] Added missing `SubscriptionCancellation::getId` method (changed parent class from `Resource` to `Entity`)
@@ -26,6 +31,7 @@ Security - in case of vulnerabilities.
 - [x] Removed `SubscriptionService::cancel()` method (use `SubscriptionCancellationService` service instead).
 - [x] Removed `SubscriptionService::changePlan()` method (use `SubscriptionService::changeItems` method instead).
 - [x] Removed `SubscriptionCancel`, `SubscriptionChangePlan` classes.
+- [x] Removed `SubscriptionService::getUpcomingInvoices()` method (use `SubscriptionService::getUpcomingInvoice` method instead).
 
 ## [2.22.0] 2023-05-29
 
