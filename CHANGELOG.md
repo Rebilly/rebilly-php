@@ -15,6 +15,10 @@ Security - in case of vulnerabilities.
 
 ## [Unreleased]
 
+_TBD_
+
+## [2.23.0] 2023-07-04
+
 ### Fixed
 
 - [x] Added missing `SubscriptionCancellation::getId` method (changed parent class from `Resource` to `Entity`)
