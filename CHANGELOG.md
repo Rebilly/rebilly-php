@@ -21,11 +21,16 @@ Security - in case of vulnerabilities.
 - [x] Added missing `SubscriptionPause::getId` method (changed parent class from `Resource` to `Entity`)
 - [x] Added missing `SubscriptionReactivation::getId` method (changed parent class from `Resource` to `Entity`)
 
+### Deprecated
+
+- [x] Deprecated `SubscriptionService::issueUpcomingInvoice` method (use `SubscriptionService::issueEarlyUpcomingInvoice` method instead)
+
 ### Removed
 
 - [x] Removed `SubscriptionService::cancel()` method (use `SubscriptionCancellationService` service instead).
 - [x] Removed `SubscriptionService::changePlan()` method (use `SubscriptionService::changeItems` method instead).
 - [x] Removed `SubscriptionCancel`, `SubscriptionChangePlan` classes.
+- [x] Removed `SubscriptionService::getUpcomingInvoices()` method (use `SubscriptionService::getUpcomingInvoice` method instead).
 
 ## [2.22.0] 2023-05-29
 
