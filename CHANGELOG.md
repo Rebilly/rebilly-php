@@ -21,8 +21,8 @@ _TBD_
 
 ### Fixed
 
-- [x] Fix `InvoiceService::issue` method signature (make `issuedTime` parameter nullable)
-- [x] Fix `InvoiceService::search` method PHPDoc block
+- [x] Fixed `InvoiceService::issue` method signature (make `issuedTime` parameter nullable)
+- [x] Fixed `InvoiceService::search` method PHPDoc block
 
 ## [2.23.0] 2023-07-04
 
