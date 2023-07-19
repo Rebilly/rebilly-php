@@ -112,12 +112,12 @@ final class InvoiceService extends Service
 
     /**
      * @param string $invoiceId
-     * @param string $issuedTime
+     * @param string|null $issuedTime
      * @param string|null $dueTime
      *
      * @return Invoice
      */
-    public function issue($invoiceId, $issuedTime, $dueTime = null)
+    public function issue($invoiceId, $issuedTime = null, $dueTime = null)
     {
         return $this->client()->post(
             [
