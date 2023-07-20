@@ -17,12 +17,11 @@ Security - in case of vulnerabilities.
 
 _TBD_
 
-## [2.24.0] 2023-07-19
+## [2.23.1] 2023-07-20
 
 ### Fixed
 
 - [x] Fixed `InvoiceService::issue` method signature (make `issuedTime` parameter nullable)
-- [x] Fixed `InvoiceService::search` method PHPDoc block
 
 ## [2.23.0] 2023-07-04
 
