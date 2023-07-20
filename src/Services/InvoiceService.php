@@ -40,7 +40,7 @@ final class InvoiceService extends Service
     /**
      * @param array|ArrayObject $params
      *
-     * @return Invoice[]
+     * @return Invoice[]|Collection
      */
     public function search($params = [])
     {
