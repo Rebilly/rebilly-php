@@ -47,7 +47,7 @@ jobs:
 
       - name: Build api-definitions
         working-directory: ./api-definitions
-        run: npx redocly build all@latest -o dist/all
+        run: npx redocly bundle all@latest -o dist/all
 
       - name: Login to registry
         run: |
