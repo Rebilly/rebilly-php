@@ -20,7 +20,7 @@ use Rebilly\Sdk\Model\ApplicationInstance;
 
 class ApplicationInstancesApi
 {
-    public function __construct(protected readonly ?ClientInterface $client)
+    public function __construct(protected ?ClientInterface $client)
     {
     }
 

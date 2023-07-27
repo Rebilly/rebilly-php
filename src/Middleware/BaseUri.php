@@ -20,7 +20,7 @@ use Rebilly\Sdk\Client;
 
 final class BaseUri
 {
-    public function __construct(private readonly ?Uri $uri = null, private readonly ?string $organizationId = null)
+    public function __construct(private ?Uri $uri = null, private ?string $organizationId = null)
     {
     }
 

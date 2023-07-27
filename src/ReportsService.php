@@ -17,17 +17,17 @@ use Rebilly\Sdk\Api as Api;
 
 class ReportsService
 {
-    private readonly Client $client;
+    private Client $client;
 
-    private readonly Api\CustomersApi $customers;
+    private Api\CustomersApi $customers;
 
-    private readonly Api\DataExportsApi $dataExports;
+    private Api\DataExportsApi $dataExports;
 
-    private readonly Api\HistogramsApi $histograms;
+    private Api\HistogramsApi $histograms;
 
-    private readonly Api\ReportsApi $reports;
+    private Api\ReportsApi $reports;
 
-    private readonly Api\SubscriptionsApi $subscriptions;
+    private Api\SubscriptionsApi $subscriptions;
 
     public function __construct(Client $client = null, array $config = [])
     {

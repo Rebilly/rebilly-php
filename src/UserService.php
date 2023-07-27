@@ -17,73 +17,73 @@ use Rebilly\Sdk\Api as Api;
 
 class UserService
 {
-    private readonly Client $client;
+    private Client $client;
 
-    private readonly Api\AccountApi $account;
+    private Api\AccountApi $account;
 
-    private readonly Api\ApiKeysApi $apiKeys;
+    private Api\ApiKeysApi $apiKeys;
 
-    private readonly Api\ApplicationInstancesApi $applicationInstances;
+    private Api\ApplicationInstancesApi $applicationInstances;
 
-    private readonly Api\ApplicationsApi $applications;
+    private Api\ApplicationsApi $applications;
 
-    private readonly Api\BalanceTransactionsApi $balanceTransactions;
+    private Api\BalanceTransactionsApi $balanceTransactions;
 
-    private readonly Api\BillingPortalsApi $billingPortals;
+    private Api\BillingPortalsApi $billingPortals;
 
-    private readonly Api\BroadcastMessagesApi $broadcastMessages;
+    private Api\BroadcastMessagesApi $broadcastMessages;
 
-    private readonly Api\CheckoutFormsApi $checkoutForms;
+    private Api\CheckoutFormsApi $checkoutForms;
 
-    private readonly Api\CredentialHashesApi $credentialHashes;
+    private Api\CredentialHashesApi $credentialHashes;
 
-    private readonly Api\CustomDomainsApi $customDomains;
+    private Api\CustomDomainsApi $customDomains;
 
-    private readonly Api\DigitalWalletsApi $digitalWallets;
+    private Api\DigitalWalletsApi $digitalWallets;
 
-    private readonly Api\EmailDeliverySettingsApi $emailDeliverySettings;
+    private Api\EmailDeliverySettingsApi $emailDeliverySettings;
 
-    private readonly Api\EmailMessagesApi $emailMessages;
+    private Api\EmailMessagesApi $emailMessages;
 
-    private readonly Api\EmailNotificationsApi $emailNotifications;
+    private Api\EmailNotificationsApi $emailNotifications;
 
-    private readonly Api\EventsApi $events;
+    private Api\EventsApi $events;
 
-    private readonly Api\GatewayAccountsApi $gatewayAccounts;
+    private Api\GatewayAccountsApi $gatewayAccounts;
 
-    private readonly Api\IntegrationsApi $integrations;
+    private Api\IntegrationsApi $integrations;
 
-    private readonly Api\ListsApi $lists;
+    private Api\ListsApi $lists;
 
-    private readonly Api\MembershipsApi $memberships;
+    private Api\MembershipsApi $memberships;
 
-    private readonly Api\OrganizationExportsApi $organizationExports;
+    private Api\OrganizationExportsApi $organizationExports;
 
-    private readonly Api\OrganizationsApi $organizations;
+    private Api\OrganizationsApi $organizations;
 
-    private readonly Api\PaymentCardsBankNamesApi $paymentCardsBankNames;
+    private Api\PaymentCardsBankNamesApi $paymentCardsBankNames;
 
-    private readonly Api\PaymentMethodsApi $paymentMethods;
+    private Api\PaymentMethodsApi $paymentMethods;
 
-    private readonly Api\PreviewsApi $previews;
+    private Api\PreviewsApi $previews;
 
-    private readonly Api\ProfileApi $profile;
+    private Api\ProfileApi $profile;
 
-    private readonly Api\RolesApi $roles;
+    private Api\RolesApi $roles;
 
-    private readonly Api\SegmentsApi $segments;
+    private Api\SegmentsApi $segments;
 
-    private readonly Api\SendThroughAttributionApi $sendThroughAttribution;
+    private Api\SendThroughAttributionApi $sendThroughAttribution;
 
-    private readonly Api\StatusApi $status;
+    private Api\StatusApi $status;
 
-    private readonly Api\TrackingApi $tracking;
+    private Api\TrackingApi $tracking;
 
-    private readonly Api\UsersApi $users;
+    private Api\UsersApi $users;
 
-    private readonly Api\WebhooksApi $webhooks;
+    private Api\WebhooksApi $webhooks;
 
-    private readonly Api\WebsitesApi $websites;
+    private Api\WebsitesApi $websites;
 
     public function __construct(Client $client = null, array $config = [])
     {
