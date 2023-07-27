@@ -66,7 +66,7 @@ jobs:
             -g php-8.0-client \
             -o /out \
             -c /config.yaml \
-            -i "/api-definitions/all.yaml' \
+            -i "/api-definitions/all.yaml" \
             --additional-properties=serviceName=${{ steps.prep.outputs.service-name }} \
             --additional-properties=resourceMapping=/shared/custom-resource-names.json \
             --additional-properties=resourceMappingSegment=${{ steps.prep.outputs.mapping-segment }}
