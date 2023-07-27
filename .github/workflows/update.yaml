@@ -10,117 +10,29 @@ on:
         required: false
 
 jobs:
-  build-api-definitions:
+  generate-sdk:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout api-definitions repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
+          path: 'api-definitions'
           repository: 'Rebilly/api-definitions'
 
-      - name: Install api-definitions dependencies
-        run: npm install
-
-      - name: Build api-definitions
-        run: npm run build
-
-      - name: Upload built definitions
-        uses: actions/upload-artifact@v2
-        with:
-          name: definitions
-          path: dist
-          retention-days: 1
-          if-no-files-found: error
-
-  generate-sdk:
-    runs-on: ubuntu-latest
-    needs: build-api-definitions
-    strategy:
-      matrix:
-        api: ['core', 'user', 'reports']
-    steps:
-      - name: Prepare variables
-        id: prep
-        run: |
-          OPENAPI_URI=""
-          SERVICE_NAME=""
-          MAPPING_SEGMENT="main"
-          if [[ "${{ matrix.api }}" == "core" ]]; then
-            OPENAPI_URI="/definitions/core.yaml"
-            SERVICE_NAME="CoreService"
-          fi
-          if [[ "${{ matrix.api }}" == "user" ]]; then
-            OPENAPI_URI="/definitions/users.yaml"
-            SERVICE_NAME="UserService"
-          fi
-          if [[ "${{ matrix.api }}" == "reports" ]]; then
-            OPENAPI_URI="/definitions/reports.yaml"
-            SERVICE_NAME="ReportsService"
-            MAPPING_SEGMENT="reports"
-          fi
-          echo ::set-output name=openapi-uri::${OPENAPI_URI}
-          echo ::set-output name=service-name::${SERVICE_NAME}
-          echo ::set-output name=mapping-segment::${MAPPING_SEGMENT}
-          echo ::group::Variables
-          echo "OpenAPI URI: ${OPENAPI_URI}"
-          echo "Service name: ${SERVICE_NAME}"
-          echo "Mapping segment: ${MAPPING_SEGMENT}"
-          echo ::endgroup::
-
-      - name: Login to registry
-        run: |
-          echo ${{ secrets.MACHINE_USER_PAT }} | docker login ghcr.io --username ${{ github.actor }} --password-stdin
-
-      - name: Download definitions
-        uses: actions/download-artifact@v3
-        with:
-          name: definitions
-          path: /tmp/definitions/
-
-      - name: Build SDK
-        run: |
-          docker run --rm \
-            -v "/tmp/${{ matrix.api }}-sdk:/out" \
-            -v "/tmp/definitions:/definitions" \
-            ghcr.io/rebilly/php-sdk-generator:latest generate \
-            --skip-validate-spec \
-            -g rebilly-php \
-            -o /out \
-            -c /config.yaml \
-            -i "${{ steps.prep.outputs.openapi-uri }}" \
-            --additional-properties=serviceName=${{ steps.prep.outputs.service-name }} \
-            --additional-properties=resourceMapping=/shared/custom-resource-names.json \
-            --additional-properties=resourceMappingSegment=${{ steps.prep.outputs.mapping-segment }}
-
-      - name: Compress SDK
-        working-directory: /tmp
-        run: |
-          zip -r ${{ matrix.api }}-sdk.zip ${{ matrix.api }}-sdk \
-            -x ${{ matrix.api }}-sdk/.openapi-generator/\* \
-            -x ${{ matrix.api }}-sdk/.openapi-generator-ignore
-      
-      - name: Upload SDK
-        uses: actions/upload-artifact@v3
-        with:
-          name: sdk-separate
-          path: /tmp/${{ matrix.api }}-sdk.zip
-          retention-days: 1
-          if-no-files-found: error
-
-  bundle-sdk:
-    runs-on: ubuntu-latest
-    needs: generate-sdk
-    steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           ref: 'v3.x'
           path: 'sdk'
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           token: '${{ secrets.MACHINE_USER_PAT }}'
           path: 'generator'
-          repository: 'Rebilly/rebilly-sdk-generator'
+          repository: 'Rebilly/rebilly'
+          sparse-checkout: |
+            backend/php-sdk-generator/remove-fqcns.php
+            backend/php-sdk-generator/remove-unused-models.php
+          sparse-checkout-cone-mode: true
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -129,9 +41,39 @@ jobs:
           extensions: mbstring, intl, curl, json
           tools: composer:v2
 
+      - name: Install api-definitions dependencies
+        working-directory: ./api-definitions
+        run: npm install
+
+      - name: Build api-definitions
+        working-directory: ./api-definitions
+        run: npx redocly build all@latest -o dist/all
+
+      - name: Login to registry
+        run: |
+          echo ${{ secrets.MACHINE_USER_PAT }} | docker login ghcr.io --username ${{ github.actor }} --password-stdin
+
+      - name: Build SDK
+        run: |
+          mkdir /tmp/sdk
+          docker run --rm \
+            -u $(id -u ${USER}):$(id -g ${USER}) \
+            -v "/tmp/sdk:/out" \
+            -v "./api-definitions/dist:/api-definitions" \
+            -v "./api-definitions/plugins/products-bundler/mapping:/bundle-mapping" \
+            ghcr.io/rebilly/php-sdk-generator:latest generate \
+            --skip-validate-spec \
+            -g php-8.0-client \
+            -o /out \
+            -c /config.yaml \
+            -i "/api-definitions/all.yaml' \
+            --additional-properties=serviceName=${{ steps.prep.outputs.service-name }} \
+            --additional-properties=resourceMapping=/shared/custom-resource-names.json \
+            --additional-properties=resourceMappingSegment=${{ steps.prep.outputs.mapping-segment }}
+
       - name: Get composer cache directory
         id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
       - name: Cache dependencies
         uses: actions/cache@v2
@@ -140,22 +82,12 @@ jobs:
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-
 
-      - name: Download generated API SDKs
-        uses: actions/download-artifact@v3
-        with:
-          name: sdk-separate
-          path: /tmp/generated/
-
-      - name: Decompress SDKs
-        working-directory: /tmp/generated
-        run: unzip \*.zip
-
       - name: Bundle SDK
         run: |
-          rm -rf sdk/{tests,src,composer.json,.php-cs-fixer.php} && \
-          php ./generator/php/merge-apis.php ./sdk /tmp/generated/*-sdk && \
-          php ./generator/php/remove-fqcns.php ./sdk && \
-          php ./generator/php/remove-unused-models.php ./sdk
+          rm -rf ./sdk/{tests,src,composer.json,.php-cs-fixer.php} && \
+          cp -r /tmp/sdk/{tests,src,composer.json,.php-cs-fixer.php} ./sdk/
+          php ./generator/backend/php-sdk-generator/remove-fqcns.php ./sdk && \
+          php ./generator/backend/php-sdk-generator/remove-unused-models.php ./sdk
 
       - name: Install composer dependencies
         working-directory: ./sdk
