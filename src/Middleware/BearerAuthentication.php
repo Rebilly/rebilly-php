@@ -20,7 +20,7 @@ class BearerAuthentication
 {
     public const HEADER = 'Authorization';
 
-    public function __construct(private readonly string $sessionToken)
+    public function __construct(private string $sessionToken)
     {
     }
 

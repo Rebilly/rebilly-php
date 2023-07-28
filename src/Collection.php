@@ -41,10 +41,10 @@ class Collection implements JsonSerializable, IteratorAggregate, ArrayAccess, Co
      * @param int $total
      */
     public function __construct(
-        private readonly array $items,
-        private readonly int $limit,
-        private readonly int $offset,
-        private readonly int $total,
+        private array $items,
+        private int $limit,
+        private int $offset,
+        private int $total,
     ) {
     }
 

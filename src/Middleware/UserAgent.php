@@ -18,7 +18,7 @@ use Psr\Http\Message\RequestInterface;
 
 final class UserAgent
 {
-    public function __construct(private readonly ?string $sdkVersion)
+    public function __construct(private ?string $sdkVersion)
     {
     }
 

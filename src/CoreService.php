@@ -17,71 +17,71 @@ use Rebilly\Sdk\Api as Api;
 
 class CoreService
 {
-    private readonly Client $client;
+    private Client $client;
 
-    private readonly Api\AmlApi $aml;
+    private Api\AmlApi $aml;
 
-    private readonly Api\AmlChecksApi $amlChecks;
+    private Api\AmlChecksApi $amlChecks;
 
-    private readonly Api\BlocklistsApi $blocklists;
+    private Api\BlocklistsApi $blocklists;
 
-    private readonly Api\CouponsApi $coupons;
+    private Api\CouponsApi $coupons;
 
-    private readonly Api\CreditMemosApi $creditMemos;
+    private Api\CreditMemosApi $creditMemos;
 
-    private readonly Api\CustomFieldsApi $customFields;
+    private Api\CustomFieldsApi $customFields;
 
-    private readonly Api\CustomerAuthenticationApi $customerAuthentication;
+    private Api\CustomerAuthenticationApi $customerAuthentication;
 
-    private readonly Api\CustomersApi $customers;
+    private Api\CustomersApi $customers;
 
-    private readonly Api\DigitalWalletsApi $digitalWallets;
+    private Api\DigitalWalletsApi $digitalWallets;
 
-    private readonly Api\DisputesApi $disputes;
+    private Api\DisputesApi $disputes;
 
-    private readonly Api\FeesApi $fees;
+    private Api\FeesApi $fees;
 
-    private readonly Api\FilesApi $files;
+    private Api\FilesApi $files;
 
-    private readonly Api\InvoicesApi $invoices;
+    private Api\InvoicesApi $invoices;
 
-    private readonly Api\KycDocumentsApi $kycDocuments;
+    private Api\KycDocumentsApi $kycDocuments;
 
-    private readonly Api\KycRequestsApi $kycRequests;
+    private Api\KycRequestsApi $kycRequests;
 
-    private readonly Api\KycSettingsApi $kycSettings;
+    private Api\KycSettingsApi $kycSettings;
 
-    private readonly Api\PaymentInstrumentsApi $paymentInstruments;
+    private Api\PaymentInstrumentsApi $paymentInstruments;
 
-    private readonly Api\PaymentTokensApi $paymentTokens;
+    private Api\PaymentTokensApi $paymentTokens;
 
-    private readonly Api\PayoutsApi $payouts;
+    private Api\PayoutsApi $payouts;
 
-    private readonly Api\PlansApi $plans;
+    private Api\PlansApi $plans;
 
-    private readonly Api\PreviewsApi $previews;
+    private Api\PreviewsApi $previews;
 
-    private readonly Api\ProductsApi $products;
+    private Api\ProductsApi $products;
 
-    private readonly Api\PurchaseApi $purchase;
+    private Api\PurchaseApi $purchase;
 
-    private readonly Api\SearchApi $search;
+    private Api\SearchApi $search;
 
-    private readonly Api\ShippingRatesApi $shippingRates;
+    private Api\ShippingRatesApi $shippingRates;
 
-    private readonly Api\SubscriptionCancellationsApi $subscriptionCancellations;
+    private Api\SubscriptionCancellationsApi $subscriptionCancellations;
 
-    private readonly Api\SubscriptionPausesApi $subscriptionPauses;
+    private Api\SubscriptionPausesApi $subscriptionPauses;
 
-    private readonly Api\SubscriptionReactivationsApi $subscriptionReactivations;
+    private Api\SubscriptionReactivationsApi $subscriptionReactivations;
 
-    private readonly Api\SubscriptionsApi $subscriptions;
+    private Api\SubscriptionsApi $subscriptions;
 
-    private readonly Api\TagsApi $tags;
+    private Api\TagsApi $tags;
 
-    private readonly Api\TransactionsApi $transactions;
+    private Api\TransactionsApi $transactions;
 
-    private readonly Api\UsagesApi $usages;
+    private Api\UsagesApi $usages;
 
     public function __construct(Client $client = null, array $config = [])
     {

@@ -20,7 +20,7 @@ final class ApiKeyAuthentication
 {
     public const HEADER = 'REB-APIKEY';
 
-    public function __construct(private readonly string $key)
+    public function __construct(private string $key)
     {
     }
 

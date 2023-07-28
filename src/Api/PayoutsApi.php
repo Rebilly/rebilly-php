@@ -21,7 +21,7 @@ use Rebilly\Sdk\Model\Transaction;
 
 class PayoutsApi
 {
-    public function __construct(protected readonly ?ClientInterface $client)
+    public function __construct(protected ?ClientInterface $client)
     {
     }
 

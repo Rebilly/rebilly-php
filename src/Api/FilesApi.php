@@ -26,7 +26,7 @@ use Rebilly\Sdk\Paginator;
 
 class FilesApi
 {
-    public function __construct(protected readonly ?ClientInterface $client)
+    public function __construct(protected ?ClientInterface $client)
     {
     }
 

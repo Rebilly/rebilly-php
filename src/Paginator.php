@@ -39,7 +39,7 @@ final class Paginator implements Iterator, Countable
      */
     public function __construct(
         private ?Collection $currentSegment,
-        private readonly Closure $query,
+        private Closure $query,
     ) {
         $this->limit = $this->currentSegment?->getLimit() ?? self::DEFAULT_SIZE;
         $this->offset = $this->currentSegment?->getOffset() ?? 0;

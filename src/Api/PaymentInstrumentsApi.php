@@ -30,7 +30,7 @@ use Rebilly\Sdk\Paginator;
 
 class PaymentInstrumentsApi
 {
-    public function __construct(protected readonly ?ClientInterface $client)
+    public function __construct(protected ?ClientInterface $client)
     {
     }
 
