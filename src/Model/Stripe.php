@@ -44,7 +44,7 @@ class Stripe extends GatewayAccount
         return $this->fields['credentials'] ?? null;
     }
 
-    public function setCredentials(null|StripeCredentials|array $credentials): self
+    public function setCredentials(null|StripeCredentials|array $credentials): static
     {
         if ($credentials !== null && !($credentials instanceof StripeCredentials)) {
             $credentials = StripeCredentials::from($credentials);
@@ -60,7 +60,7 @@ class Stripe extends GatewayAccount
         return $this->fields['settings'];
     }
 
-    public function setSettings(StripeSettings|array $settings): self
+    public function setSettings(StripeSettings|array $settings): static
     {
         if (!($settings instanceof StripeSettings)) {
             $settings = StripeSettings::from($settings);
@@ -76,7 +76,7 @@ class Stripe extends GatewayAccount
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|Stripe3dsServers|array $threeDSecureServer): self
+    public function setThreeDSecureServer(null|Stripe3dsServers|array $threeDSecureServer): static
     {
         if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Stripe3dsServers)) {
             $threeDSecureServer = Stripe3dsServers::from($threeDSecureServer);

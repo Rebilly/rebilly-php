@@ -47,7 +47,7 @@ class RuleSetHistoryItem implements JsonSerializable
         return $this->fields['version'] ?? null;
     }
 
-    public function setVersion(null|int $version): self
+    public function setVersion(null|int $version): static
     {
         $this->fields['version'] = $version;
 
@@ -91,7 +91,7 @@ class RuleSetHistoryItem implements JsonSerializable
         return $data;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -102,7 +102,7 @@ class RuleSetHistoryItem implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -116,7 +116,7 @@ class RuleSetHistoryItem implements JsonSerializable
     /**
      * @param null|array<RuleSetHistoryLink|RuleSetVersionLink|SelfLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 

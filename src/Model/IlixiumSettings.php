@@ -49,7 +49,7 @@ class IlixiumSettings implements JsonSerializable
         return $this->fields['useIpFrame'] ?? null;
     }
 
-    public function setUseIpFrame(null|bool $useIpFrame): self
+    public function setUseIpFrame(null|bool $useIpFrame): static
     {
         $this->fields['useIpFrame'] = $useIpFrame;
 
@@ -61,7 +61,7 @@ class IlixiumSettings implements JsonSerializable
         return $this->fields['useCreditEndpoint'] ?? null;
     }
 
-    public function setUseCreditEndpoint(null|bool $useCreditEndpoint): self
+    public function setUseCreditEndpoint(null|bool $useCreditEndpoint): static
     {
         $this->fields['useCreditEndpoint'] = $useCreditEndpoint;
 
@@ -73,7 +73,7 @@ class IlixiumSettings implements JsonSerializable
         return $this->fields['useStandaloneCreditEndpoint'] ?? null;
     }
 
-    public function setUseStandaloneCreditEndpoint(null|bool $useStandaloneCreditEndpoint): self
+    public function setUseStandaloneCreditEndpoint(null|bool $useStandaloneCreditEndpoint): static
     {
         $this->fields['useStandaloneCreditEndpoint'] = $useStandaloneCreditEndpoint;
 
@@ -91,7 +91,7 @@ class IlixiumSettings implements JsonSerializable
     /**
      * @psalm-param self::PLATFORM_*|null $platform
      */
-    public function setPlatform(null|string $platform): self
+    public function setPlatform(null|string $platform): static
     {
         $this->fields['platform'] = $platform;
 

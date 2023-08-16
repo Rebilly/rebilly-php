@@ -36,7 +36,7 @@ class NOWPaymentsSettings implements JsonSerializable
         return $this->fields['tolerancePercentage'];
     }
 
-    public function setTolerancePercentage(int $tolerancePercentage): self
+    public function setTolerancePercentage(int $tolerancePercentage): static
     {
         $this->fields['tolerancePercentage'] = $tolerancePercentage;
 

@@ -38,7 +38,7 @@ class Citadel extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(CitadelCredentials|array $credentials): self
+    public function setCredentials(CitadelCredentials|array $credentials): static
     {
         if (!($credentials instanceof CitadelCredentials)) {
             $credentials = CitadelCredentials::from($credentials);

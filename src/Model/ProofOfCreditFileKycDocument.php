@@ -128,7 +128,7 @@ class ProofOfCreditFileKycDocument extends KycDocument
         return $this->fields['fileId'] ?? null;
     }
 
-    public function setFileId(null|string $fileId): self
+    public function setFileId(null|string $fileId): static
     {
         $this->fields['fileId'] = $fileId;
 
@@ -146,7 +146,7 @@ class ProofOfCreditFileKycDocument extends KycDocument
     /**
      * @param null|string[] $fileIds
      */
-    public function setFileIds(null|array $fileIds): self
+    public function setFileIds(null|array $fileIds): static
     {
         $fileIds = $fileIds !== null ? array_map(fn ($value) => $value ?? null, $fileIds) : null;
 
@@ -160,7 +160,7 @@ class ProofOfCreditFileKycDocument extends KycDocument
         return $this->fields['documentType'];
     }
 
-    public function setDocumentType(KycDocumentTypes|string $documentType): self
+    public function setDocumentType(KycDocumentTypes|string $documentType): static
     {
         if (!($documentType instanceof KycDocumentTypes)) {
             $documentType = KycDocumentTypes::from($documentType);
@@ -176,7 +176,7 @@ class ProofOfCreditFileKycDocument extends KycDocument
         return $this->fields['documentSubtype'] ?? null;
     }
 
-    public function setDocumentSubtype(null|KycDocumentSubtypes|string $documentSubtype): self
+    public function setDocumentSubtype(null|KycDocumentSubtypes|string $documentSubtype): static
     {
         if ($documentSubtype !== null && !($documentSubtype instanceof KycDocumentSubtypes)) {
             $documentSubtype = KycDocumentSubtypes::from($documentSubtype);
@@ -200,7 +200,7 @@ class ProofOfCreditFileKycDocument extends KycDocument
         return $this->fields['rejectionReason'] ?? null;
     }
 
-    public function setRejectionReason(null|KycDocumentRejection|array $rejectionReason): self
+    public function setRejectionReason(null|KycDocumentRejection|array $rejectionReason): static
     {
         if ($rejectionReason !== null && !($rejectionReason instanceof KycDocumentRejection)) {
             $rejectionReason = KycDocumentRejection::from($rejectionReason);
@@ -236,7 +236,7 @@ class ProofOfCreditFileKycDocument extends KycDocument
         return $this->fields['customerId'];
     }
 
-    public function setCustomerId(string $customerId): self
+    public function setCustomerId(string $customerId): static
     {
         $this->fields['customerId'] = $customerId;
 
@@ -268,7 +268,7 @@ class ProofOfCreditFileKycDocument extends KycDocument
         return $this->fields['notes'] ?? null;
     }
 
-    public function setNotes(null|string $notes): self
+    public function setNotes(null|string $notes): static
     {
         $this->fields['notes'] = $notes;
 
@@ -288,7 +288,7 @@ class ProofOfCreditFileKycDocument extends KycDocument
         return $this->fields['reason'] ?? null;
     }
 
-    public function setReason(null|string $reason): self
+    public function setReason(null|string $reason): static
     {
         $this->fields['reason'] = $reason;
 
@@ -300,7 +300,7 @@ class ProofOfCreditFileKycDocument extends KycDocument
         return $this->fields['matchLevel'] ?? null;
     }
 
-    public function setMatchLevel(null|int $matchLevel): self
+    public function setMatchLevel(null|int $matchLevel): static
     {
         $this->fields['matchLevel'] = $matchLevel;
 
@@ -312,7 +312,7 @@ class ProofOfCreditFileKycDocument extends KycDocument
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|array $settings): self
+    public function setSettings(null|array $settings): static
     {
         $this->fields['settings'] = $settings;
 
@@ -329,7 +329,7 @@ class ProofOfCreditFileKycDocument extends KycDocument
         return $this->fields['documentMatches'] ?? null;
     }
 
-    public function setDocumentMatches(null|ProofOfCreditFileKycDocumentDocumentMatches|array $documentMatches): self
+    public function setDocumentMatches(null|ProofOfCreditFileKycDocumentDocumentMatches|array $documentMatches): static
     {
         if ($documentMatches !== null && !($documentMatches instanceof ProofOfCreditFileKycDocumentDocumentMatches)) {
             $documentMatches = ProofOfCreditFileKycDocumentDocumentMatches::from($documentMatches);
@@ -438,7 +438,7 @@ class ProofOfCreditFileKycDocument extends KycDocument
         return parent::jsonSerialize() + $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -448,21 +448,21 @@ class ProofOfCreditFileKycDocument extends KycDocument
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    private function setStatus(null|string $status): self
+    private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
         return $this;
     }
 
-    private function setRequestId(null|string $requestId): self
+    private function setRequestId(null|string $requestId): static
     {
         $this->fields['requestId'] = $requestId;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -473,7 +473,7 @@ class ProofOfCreditFileKycDocument extends KycDocument
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -484,7 +484,7 @@ class ProofOfCreditFileKycDocument extends KycDocument
         return $this;
     }
 
-    private function setProcessedTime(null|DateTimeImmutable|string $processedTime): self
+    private function setProcessedTime(null|DateTimeImmutable|string $processedTime): static
     {
         if ($processedTime !== null && !($processedTime instanceof DateTimeImmutable)) {
             $processedTime = new DateTimeImmutable($processedTime);
@@ -495,21 +495,21 @@ class ProofOfCreditFileKycDocument extends KycDocument
         return $this;
     }
 
-    private function setReviewerId(null|string $reviewerId): self
+    private function setReviewerId(null|string $reviewerId): static
     {
         $this->fields['reviewerId'] = $reviewerId;
 
         return $this;
     }
 
-    private function setReviewerName(null|string $reviewerName): self
+    private function setReviewerName(null|string $reviewerName): static
     {
         $this->fields['reviewerName'] = $reviewerName;
 
         return $this;
     }
 
-    private function setReviewStartTime(null|DateTimeImmutable|string $reviewStartTime): self
+    private function setReviewStartTime(null|DateTimeImmutable|string $reviewStartTime): static
     {
         if ($reviewStartTime !== null && !($reviewStartTime instanceof DateTimeImmutable)) {
             $reviewStartTime = new DateTimeImmutable($reviewStartTime);
@@ -520,7 +520,7 @@ class ProofOfCreditFileKycDocument extends KycDocument
         return $this;
     }
 
-    private function setReviewTime(null|DateTimeImmutable|string $reviewTime): self
+    private function setReviewTime(null|DateTimeImmutable|string $reviewTime): static
     {
         if ($reviewTime !== null && !($reviewTime instanceof DateTimeImmutable)) {
             $reviewTime = new DateTimeImmutable($reviewTime);
@@ -534,7 +534,7 @@ class ProofOfCreditFileKycDocument extends KycDocument
     /**
      * @param null|Tag[] $tags
      */
-    private function setTags(null|array $tags): self
+    private function setTags(null|array $tags): static
     {
         $tags = $tags !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Tag ? $value : Tag::from($value)) : null, $tags) : null;
 
@@ -543,7 +543,7 @@ class ProofOfCreditFileKycDocument extends KycDocument
         return $this;
     }
 
-    private function setRevision(null|int $revision): self
+    private function setRevision(null|int $revision): static
     {
         $this->fields['revision'] = $revision;
 
@@ -553,7 +553,7 @@ class ProofOfCreditFileKycDocument extends KycDocument
     /**
      * @param null|array<CustomerLink|SelfLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 
@@ -565,7 +565,7 @@ class ProofOfCreditFileKycDocument extends KycDocument
     /**
      * @param null|array{customer:Customer} $embedded
      */
-    private function setEmbedded(null|array $embedded): self
+    private function setEmbedded(null|array $embedded): static
     {
         if ($embedded !== null) {
             $embedded['customer'] = isset($embedded['customer']) ? ($embedded['customer'] instanceof Customer ? $embedded['customer'] : Customer::from($embedded['customer'])) : null;

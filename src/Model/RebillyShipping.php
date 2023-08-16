@@ -41,7 +41,7 @@ class RebillyShipping extends Shipping
         return $this->fields['rateId'] ?? null;
     }
 
-    public function setRateId(null|string $rateId): self
+    public function setRateId(null|string $rateId): static
     {
         $this->fields['rateId'] = $rateId;
 
@@ -66,7 +66,7 @@ class RebillyShipping extends Shipping
         return parent::jsonSerialize() + $data;
     }
 
-    private function setAmount(null|int $amount): self
+    private function setAmount(null|int $amount): static
     {
         $this->fields['amount'] = $amount;
 

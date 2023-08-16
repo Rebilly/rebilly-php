@@ -36,7 +36,7 @@ class ProofOfPurchaseKycDocumentDocumentMatches implements JsonSerializable
         return $this->fields['data'] ?? null;
     }
 
-    public function setData(null|PurchaseMatches|array $data): self
+    public function setData(null|PurchaseMatches|array $data): static
     {
         if ($data !== null && !($data instanceof PurchaseMatches)) {
             $data = PurchaseMatches::from($data);

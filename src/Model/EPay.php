@@ -38,7 +38,7 @@ class EPay extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(EPayCredentials|array $credentials): self
+    public function setCredentials(EPayCredentials|array $credentials): static
     {
         if (!($credentials instanceof EPayCredentials)) {
             $credentials = EPayCredentials::from($credentials);

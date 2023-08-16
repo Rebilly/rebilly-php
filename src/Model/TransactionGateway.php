@@ -42,7 +42,7 @@ class TransactionGateway implements JsonSerializable
         return $this->fields['response'] ?? null;
     }
 
-    public function setResponse(null|TransactionGatewayResponse|array $response): self
+    public function setResponse(null|TransactionGatewayResponse|array $response): static
     {
         if ($response !== null && !($response instanceof TransactionGatewayResponse)) {
             $response = TransactionGatewayResponse::from($response);
@@ -58,7 +58,7 @@ class TransactionGateway implements JsonSerializable
         return $this->fields['avsResponse'] ?? null;
     }
 
-    public function setAvsResponse(null|TransactionGatewayAvsResponse|array $avsResponse): self
+    public function setAvsResponse(null|TransactionGatewayAvsResponse|array $avsResponse): static
     {
         if ($avsResponse !== null && !($avsResponse instanceof TransactionGatewayAvsResponse)) {
             $avsResponse = TransactionGatewayAvsResponse::from($avsResponse);
@@ -74,7 +74,7 @@ class TransactionGateway implements JsonSerializable
         return $this->fields['cvvResponse'] ?? null;
     }
 
-    public function setCvvResponse(null|TransactionGatewayCvvResponse|array $cvvResponse): self
+    public function setCvvResponse(null|TransactionGatewayCvvResponse|array $cvvResponse): static
     {
         if ($cvvResponse !== null && !($cvvResponse instanceof TransactionGatewayCvvResponse)) {
             $cvvResponse = TransactionGatewayCvvResponse::from($cvvResponse);

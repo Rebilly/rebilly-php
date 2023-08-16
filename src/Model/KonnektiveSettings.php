@@ -39,7 +39,7 @@ class KonnektiveSettings implements JsonSerializable
         return $this->fields['campaignId'];
     }
 
-    public function setCampaignId(string $campaignId): self
+    public function setCampaignId(string $campaignId): static
     {
         $this->fields['campaignId'] = $campaignId;
 
@@ -51,7 +51,7 @@ class KonnektiveSettings implements JsonSerializable
         return $this->fields['productId'];
     }
 
-    public function setProductId(string $productId): self
+    public function setProductId(string $productId): static
     {
         $this->fields['productId'] = $productId;
 

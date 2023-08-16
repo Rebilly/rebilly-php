@@ -45,7 +45,7 @@ class GetKycAcceptanceSummaryResponseStatusStatistics implements JsonSerializabl
         return $this->fields['accepted'] ?? null;
     }
 
-    public function setAccepted(null|GetKycAcceptanceSummaryResponseStatusStatisticsAccepted|array $accepted): self
+    public function setAccepted(null|GetKycAcceptanceSummaryResponseStatusStatisticsAccepted|array $accepted): static
     {
         if ($accepted !== null && !($accepted instanceof GetKycAcceptanceSummaryResponseStatusStatisticsAccepted)) {
             $accepted = GetKycAcceptanceSummaryResponseStatusStatisticsAccepted::from($accepted);
@@ -61,7 +61,7 @@ class GetKycAcceptanceSummaryResponseStatusStatistics implements JsonSerializabl
         return $this->fields['rejected'] ?? null;
     }
 
-    public function setRejected(null|GetKycAcceptanceSummaryResponseStatusStatisticsRejected|array $rejected): self
+    public function setRejected(null|GetKycAcceptanceSummaryResponseStatusStatisticsRejected|array $rejected): static
     {
         if ($rejected !== null && !($rejected instanceof GetKycAcceptanceSummaryResponseStatusStatisticsRejected)) {
             $rejected = GetKycAcceptanceSummaryResponseStatusStatisticsRejected::from($rejected);
@@ -77,7 +77,7 @@ class GetKycAcceptanceSummaryResponseStatusStatistics implements JsonSerializabl
         return $this->fields['pending'] ?? null;
     }
 
-    public function setPending(null|GetKycAcceptanceSummaryResponseStatusStatisticsPending|array $pending): self
+    public function setPending(null|GetKycAcceptanceSummaryResponseStatusStatisticsPending|array $pending): static
     {
         if ($pending !== null && !($pending instanceof GetKycAcceptanceSummaryResponseStatusStatisticsPending)) {
             $pending = GetKycAcceptanceSummaryResponseStatusStatisticsPending::from($pending);
@@ -93,7 +93,7 @@ class GetKycAcceptanceSummaryResponseStatusStatistics implements JsonSerializabl
         return $this->fields['archived'] ?? null;
     }
 
-    public function setArchived(null|GetKycAcceptanceSummaryResponseStatusStatisticsArchived|array $archived): self
+    public function setArchived(null|GetKycAcceptanceSummaryResponseStatusStatisticsArchived|array $archived): static
     {
         if ($archived !== null && !($archived instanceof GetKycAcceptanceSummaryResponseStatusStatisticsArchived)) {
             $archived = GetKycAcceptanceSummaryResponseStatusStatisticsArchived::from($archived);

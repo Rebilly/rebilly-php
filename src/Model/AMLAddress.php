@@ -101,42 +101,42 @@ class AMLAddress implements JsonSerializable
         return $data;
     }
 
-    private function setAddress(null|string $address): self
+    private function setAddress(null|string $address): static
     {
         $this->fields['address'] = $address;
 
         return $this;
     }
 
-    private function setAddress2(null|string $address2): self
+    private function setAddress2(null|string $address2): static
     {
         $this->fields['address2'] = $address2;
 
         return $this;
     }
 
-    private function setCity(null|string $city): self
+    private function setCity(null|string $city): static
     {
         $this->fields['city'] = $city;
 
         return $this;
     }
 
-    private function setRegion(null|string $region): self
+    private function setRegion(null|string $region): static
     {
         $this->fields['region'] = $region;
 
         return $this;
     }
 
-    private function setCountry(null|string $country): self
+    private function setCountry(null|string $country): static
     {
         $this->fields['country'] = $country;
 
         return $this;
     }
 
-    private function setBirthplace(null|bool $birthplace): self
+    private function setBirthplace(null|bool $birthplace): static
     {
         $this->fields['birthplace'] = $birthplace;
 

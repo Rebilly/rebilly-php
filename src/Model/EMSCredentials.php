@@ -63,7 +63,7 @@ class EMSCredentials implements JsonSerializable
         return $this->fields['storeId'];
     }
 
-    public function setStoreId(string $storeId): self
+    public function setStoreId(string $storeId): static
     {
         $this->fields['storeId'] = $storeId;
 
@@ -75,7 +75,7 @@ class EMSCredentials implements JsonSerializable
         return $this->fields['userId'];
     }
 
-    public function setUserId(string $userId): self
+    public function setUserId(string $userId): static
     {
         $this->fields['userId'] = $userId;
 
@@ -87,7 +87,7 @@ class EMSCredentials implements JsonSerializable
         return $this->fields['password'];
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password): static
     {
         $this->fields['password'] = $password;
 
@@ -99,7 +99,7 @@ class EMSCredentials implements JsonSerializable
         return $this->fields['privateKey'];
     }
 
-    public function setPrivateKey(string $privateKey): self
+    public function setPrivateKey(string $privateKey): static
     {
         $this->fields['privateKey'] = $privateKey;
 
@@ -111,7 +111,7 @@ class EMSCredentials implements JsonSerializable
         return $this->fields['privateKeyPassword'];
     }
 
-    public function setPrivateKeyPassword(string $privateKeyPassword): self
+    public function setPrivateKeyPassword(string $privateKeyPassword): static
     {
         $this->fields['privateKeyPassword'] = $privateKeyPassword;
 
@@ -123,7 +123,7 @@ class EMSCredentials implements JsonSerializable
         return $this->fields['clientCertificate'];
     }
 
-    public function setClientCertificate(string $clientCertificate): self
+    public function setClientCertificate(string $clientCertificate): static
     {
         $this->fields['clientCertificate'] = $clientCertificate;
 
@@ -135,7 +135,7 @@ class EMSCredentials implements JsonSerializable
         return $this->fields['clientCertificatePassword'];
     }
 
-    public function setClientCertificatePassword(string $clientCertificatePassword): self
+    public function setClientCertificatePassword(string $clientCertificatePassword): static
     {
         $this->fields['clientCertificatePassword'] = $clientCertificatePassword;
 
@@ -147,7 +147,7 @@ class EMSCredentials implements JsonSerializable
         return $this->fields['serverCertificate'];
     }
 
-    public function setServerCertificate(string $serverCertificate): self
+    public function setServerCertificate(string $serverCertificate): static
     {
         $this->fields['serverCertificate'] = $serverCertificate;
 
@@ -159,7 +159,7 @@ class EMSCredentials implements JsonSerializable
         return $this->fields['merchantName'] ?? null;
     }
 
-    public function setMerchantName(null|string $merchantName): self
+    public function setMerchantName(null|string $merchantName): static
     {
         $this->fields['merchantName'] = $merchantName;
 
@@ -171,7 +171,7 @@ class EMSCredentials implements JsonSerializable
         return $this->fields['sftpPrivateKey'] ?? null;
     }
 
-    public function setSftpPrivateKey(null|string $sftpPrivateKey): self
+    public function setSftpPrivateKey(null|string $sftpPrivateKey): static
     {
         $this->fields['sftpPrivateKey'] = $sftpPrivateKey;
 

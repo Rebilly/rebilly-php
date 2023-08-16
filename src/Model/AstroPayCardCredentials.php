@@ -45,7 +45,7 @@ class AstroPayCardCredentials implements JsonSerializable
         return $this->fields['x_login'];
     }
 
-    public function setXLogin(string $xLogin): self
+    public function setXLogin(string $xLogin): static
     {
         $this->fields['x_login'] = $xLogin;
 
@@ -57,7 +57,7 @@ class AstroPayCardCredentials implements JsonSerializable
         return $this->fields['x_tran_key'];
     }
 
-    public function setXTranKey(string $xTranKey): self
+    public function setXTranKey(string $xTranKey): static
     {
         $this->fields['x_tran_key'] = $xTranKey;
 
@@ -69,7 +69,7 @@ class AstroPayCardCredentials implements JsonSerializable
         return $this->fields['secret_key'];
     }
 
-    public function setSecretKey(string $secretKey): self
+    public function setSecretKey(string $secretKey): static
     {
         $this->fields['secret_key'] = $secretKey;
 
@@ -81,7 +81,7 @@ class AstroPayCardCredentials implements JsonSerializable
         return $this->fields['api_key'] ?? null;
     }
 
-    public function setApiKey(null|string $apiKey): self
+    public function setApiKey(null|string $apiKey): static
     {
         $this->fields['api_key'] = $apiKey;
 

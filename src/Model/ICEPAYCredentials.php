@@ -39,7 +39,7 @@ class ICEPAYCredentials implements JsonSerializable
         return $this->fields['merchantId'];
     }
 
-    public function setMerchantId(string $merchantId): self
+    public function setMerchantId(string $merchantId): static
     {
         $this->fields['merchantId'] = $merchantId;
 
@@ -51,7 +51,7 @@ class ICEPAYCredentials implements JsonSerializable
         return $this->fields['secretKey'];
     }
 
-    public function setSecretKey(string $secretKey): self
+    public function setSecretKey(string $secretKey): static
     {
         $this->fields['secretKey'] = $secretKey;
 

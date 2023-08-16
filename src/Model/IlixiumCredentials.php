@@ -42,7 +42,7 @@ class IlixiumCredentials implements JsonSerializable
         return $this->fields['merchantId'];
     }
 
-    public function setMerchantId(string $merchantId): self
+    public function setMerchantId(string $merchantId): static
     {
         $this->fields['merchantId'] = $merchantId;
 
@@ -54,7 +54,7 @@ class IlixiumCredentials implements JsonSerializable
         return $this->fields['accountId'];
     }
 
-    public function setAccountId(string $accountId): self
+    public function setAccountId(string $accountId): static
     {
         $this->fields['accountId'] = $accountId;
 
@@ -66,7 +66,7 @@ class IlixiumCredentials implements JsonSerializable
         return $this->fields['digestPassword'];
     }
 
-    public function setDigestPassword(string $digestPassword): self
+    public function setDigestPassword(string $digestPassword): static
     {
         $this->fields['digestPassword'] = $digestPassword;
 

@@ -36,7 +36,7 @@ class RapydSettings implements JsonSerializable
         return $this->fields['ipnUrl'] ?? null;
     }
 
-    public function setIpnUrl(null|string $ipnUrl): self
+    public function setIpnUrl(null|string $ipnUrl): static
     {
         $this->fields['ipnUrl'] = $ipnUrl;
 

@@ -39,7 +39,7 @@ class CredoraxCredentials implements JsonSerializable
         return $this->fields['merchantId'];
     }
 
-    public function setMerchantId(string $merchantId): self
+    public function setMerchantId(string $merchantId): static
     {
         $this->fields['merchantId'] = $merchantId;
 
@@ -51,7 +51,7 @@ class CredoraxCredentials implements JsonSerializable
         return $this->fields['merchantMd5Signature'];
     }
 
-    public function setMerchantMd5Signature(string $merchantMd5Signature): self
+    public function setMerchantMd5Signature(string $merchantMd5Signature): static
     {
         $this->fields['merchantMd5Signature'] = $merchantMd5Signature;
 

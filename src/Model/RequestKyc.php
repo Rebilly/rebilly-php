@@ -93,7 +93,7 @@ class RequestKyc extends RuleAction
     /**
      * @param KycRequestDocuments[] $documents
      */
-    public function setDocuments(array $documents): self
+    public function setDocuments(array $documents): static
     {
         $documents = array_map(fn ($value) => $value !== null ? ($value instanceof KycRequestDocuments ? $value : KycRequestDocuments::from($value)) : null, $documents);
 
@@ -113,7 +113,7 @@ class RequestKyc extends RuleAction
     /**
      * @psalm-param self::EXCLUDE_POLICY_* $excludePolicy
      */
-    public function setExcludePolicy(string $excludePolicy): self
+    public function setExcludePolicy(string $excludePolicy): static
     {
         $this->fields['excludePolicy'] = $excludePolicy;
 
@@ -125,7 +125,7 @@ class RequestKyc extends RuleAction
         return $this->fields['isMandatory'];
     }
 
-    public function setIsMandatory(bool $isMandatory): self
+    public function setIsMandatory(bool $isMandatory): static
     {
         $this->fields['isMandatory'] = $isMandatory;
 
@@ -143,7 +143,7 @@ class RequestKyc extends RuleAction
     /**
      * @psalm-param self::PROMPT_POLICY_* $promptPolicy
      */
-    public function setPromptPolicy(string $promptPolicy): self
+    public function setPromptPolicy(string $promptPolicy): static
     {
         $this->fields['promptPolicy'] = $promptPolicy;
 
@@ -161,7 +161,7 @@ class RequestKyc extends RuleAction
     /**
      * @psalm-param self::REJECTED_BEFORE_TRANSACTION_PROCESS_POLICY_* $rejectedBeforeTransactionProcessPolicy
      */
-    public function setRejectedBeforeTransactionProcessPolicy(string $rejectedBeforeTransactionProcessPolicy): self
+    public function setRejectedBeforeTransactionProcessPolicy(string $rejectedBeforeTransactionProcessPolicy): static
     {
         $this->fields['rejectedBeforeTransactionProcessPolicy'] = $rejectedBeforeTransactionProcessPolicy;
 
@@ -173,7 +173,7 @@ class RequestKyc extends RuleAction
         return $this->fields['alternateGatewayAccountIfRejected'] ?? null;
     }
 
-    public function setAlternateGatewayAccountIfRejected(null|string $alternateGatewayAccountIfRejected): self
+    public function setAlternateGatewayAccountIfRejected(null|string $alternateGatewayAccountIfRejected): static
     {
         $this->fields['alternateGatewayAccountIfRejected'] = $alternateGatewayAccountIfRejected;
 
@@ -191,7 +191,7 @@ class RequestKyc extends RuleAction
     /**
      * @psalm-param self::REJECTED_AFTER_TRANSACTION_PROCESS_POLICY_* $rejectedAfterTransactionProcessPolicy
      */
-    public function setRejectedAfterTransactionProcessPolicy(string $rejectedAfterTransactionProcessPolicy): self
+    public function setRejectedAfterTransactionProcessPolicy(string $rejectedAfterTransactionProcessPolicy): static
     {
         $this->fields['rejectedAfterTransactionProcessPolicy'] = $rejectedAfterTransactionProcessPolicy;
 
@@ -209,7 +209,7 @@ class RequestKyc extends RuleAction
     /**
      * @psalm-param self::OPTIONAL_POLICY_* $optionalPolicy
      */
-    public function setOptionalPolicy(string $optionalPolicy): self
+    public function setOptionalPolicy(string $optionalPolicy): static
     {
         $this->fields['optionalPolicy'] = $optionalPolicy;
 
@@ -221,7 +221,7 @@ class RequestKyc extends RuleAction
         return $this->fields['alternateGatewayAccountIfOptional'] ?? null;
     }
 
-    public function setAlternateGatewayAccountIfOptional(null|string $alternateGatewayAccountIfOptional): self
+    public function setAlternateGatewayAccountIfOptional(null|string $alternateGatewayAccountIfOptional): static
     {
         $this->fields['alternateGatewayAccountIfOptional'] = $alternateGatewayAccountIfOptional;
 
@@ -233,7 +233,7 @@ class RequestKyc extends RuleAction
         return $this->fields['bypassCurrencyToDisplay'] ?? null;
     }
 
-    public function setBypassCurrencyToDisplay(null|string $bypassCurrencyToDisplay): self
+    public function setBypassCurrencyToDisplay(null|string $bypassCurrencyToDisplay): static
     {
         $this->fields['bypassCurrencyToDisplay'] = $bypassCurrencyToDisplay;
 

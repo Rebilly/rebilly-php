@@ -81,7 +81,7 @@ abstract class CommonTransactionRequest implements JsonSerializable
         return $this->fields['websiteId'];
     }
 
-    public function setWebsiteId(string $websiteId): self
+    public function setWebsiteId(string $websiteId): static
     {
         $this->fields['websiteId'] = $websiteId;
 
@@ -93,7 +93,7 @@ abstract class CommonTransactionRequest implements JsonSerializable
         return $this->fields['customerId'];
     }
 
-    public function setCustomerId(string $customerId): self
+    public function setCustomerId(string $customerId): static
     {
         $this->fields['customerId'] = $customerId;
 
@@ -105,7 +105,7 @@ abstract class CommonTransactionRequest implements JsonSerializable
         return $this->fields['currency'];
     }
 
-    public function setCurrency(string $currency): self
+    public function setCurrency(string $currency): static
     {
         $this->fields['currency'] = $currency;
 
@@ -117,7 +117,7 @@ abstract class CommonTransactionRequest implements JsonSerializable
         return $this->fields['amount'];
     }
 
-    public function setAmount(float|string $amount): self
+    public function setAmount(float|string $amount): static
     {
         if (is_string($amount)) {
             $amount = (float) $amount;
@@ -139,7 +139,7 @@ abstract class CommonTransactionRequest implements JsonSerializable
     /**
      * @param null|string[] $invoiceIds
      */
-    public function setInvoiceIds(null|array $invoiceIds): self
+    public function setInvoiceIds(null|array $invoiceIds): static
     {
         $invoiceIds = $invoiceIds !== null ? array_map(fn ($value) => $value ?? null, $invoiceIds) : null;
 
@@ -153,7 +153,7 @@ abstract class CommonTransactionRequest implements JsonSerializable
         return $this->fields['paymentInstruction'] ?? null;
     }
 
-    public function setPaymentInstruction(null|PaymentInstruction|array $paymentInstruction): self
+    public function setPaymentInstruction(null|PaymentInstruction|array $paymentInstruction): static
     {
         if ($paymentInstruction !== null && !($paymentInstruction instanceof PaymentInstruction)) {
             $paymentInstruction = PaymentInstruction::from($paymentInstruction);
@@ -169,7 +169,7 @@ abstract class CommonTransactionRequest implements JsonSerializable
         return $this->fields['billingAddress'] ?? null;
     }
 
-    public function setBillingAddress(null|ContactObject|array $billingAddress): self
+    public function setBillingAddress(null|ContactObject|array $billingAddress): static
     {
         if ($billingAddress !== null && !($billingAddress instanceof ContactObject)) {
             $billingAddress = ContactObject::from($billingAddress);
@@ -185,7 +185,7 @@ abstract class CommonTransactionRequest implements JsonSerializable
         return $this->fields['requestId'] ?? null;
     }
 
-    public function setRequestId(null|string $requestId): self
+    public function setRequestId(null|string $requestId): static
     {
         $this->fields['requestId'] = $requestId;
 
@@ -197,7 +197,7 @@ abstract class CommonTransactionRequest implements JsonSerializable
         return $this->fields['gatewayAccountId'] ?? null;
     }
 
-    public function setGatewayAccountId(null|string $gatewayAccountId): self
+    public function setGatewayAccountId(null|string $gatewayAccountId): static
     {
         $this->fields['gatewayAccountId'] = $gatewayAccountId;
 
@@ -209,7 +209,7 @@ abstract class CommonTransactionRequest implements JsonSerializable
         return $this->fields['description'] ?? null;
     }
 
-    public function setDescription(null|string $description): self
+    public function setDescription(null|string $description): static
     {
         $this->fields['description'] = $description;
 
@@ -221,7 +221,7 @@ abstract class CommonTransactionRequest implements JsonSerializable
         return $this->fields['notificationUrl'] ?? null;
     }
 
-    public function setNotificationUrl(null|string $notificationUrl): self
+    public function setNotificationUrl(null|string $notificationUrl): static
     {
         $this->fields['notificationUrl'] = $notificationUrl;
 
@@ -233,7 +233,7 @@ abstract class CommonTransactionRequest implements JsonSerializable
         return $this->fields['redirectUrl'] ?? null;
     }
 
-    public function setRedirectUrl(null|string $redirectUrl): self
+    public function setRedirectUrl(null|string $redirectUrl): static
     {
         $this->fields['redirectUrl'] = $redirectUrl;
 
@@ -245,7 +245,7 @@ abstract class CommonTransactionRequest implements JsonSerializable
         return $this->fields['customFields'] ?? null;
     }
 
-    public function setCustomFields(null|array $customFields): self
+    public function setCustomFields(null|array $customFields): static
     {
         $this->fields['customFields'] = $customFields;
 
@@ -257,7 +257,7 @@ abstract class CommonTransactionRequest implements JsonSerializable
         return $this->fields['riskMetadata'] ?? null;
     }
 
-    public function setRiskMetadata(null|RiskMetadata|array $riskMetadata): self
+    public function setRiskMetadata(null|RiskMetadata|array $riskMetadata): static
     {
         if ($riskMetadata !== null && !($riskMetadata instanceof RiskMetadata)) {
             $riskMetadata = RiskMetadata::from($riskMetadata);
@@ -273,7 +273,7 @@ abstract class CommonTransactionRequest implements JsonSerializable
         return $this->fields['isProcessedOutside'] ?? null;
     }
 
-    public function setIsProcessedOutside(null|bool $isProcessedOutside): self
+    public function setIsProcessedOutside(null|bool $isProcessedOutside): static
     {
         $this->fields['isProcessedOutside'] = $isProcessedOutside;
 
@@ -285,7 +285,7 @@ abstract class CommonTransactionRequest implements JsonSerializable
         return $this->fields['isMerchantInitiated'] ?? null;
     }
 
-    public function setIsMerchantInitiated(null|bool $isMerchantInitiated): self
+    public function setIsMerchantInitiated(null|bool $isMerchantInitiated): static
     {
         $this->fields['isMerchantInitiated'] = $isMerchantInitiated;
 
@@ -297,7 +297,7 @@ abstract class CommonTransactionRequest implements JsonSerializable
         return $this->fields['processedTime'] ?? null;
     }
 
-    public function setProcessedTime(null|DateTimeImmutable|string $processedTime): self
+    public function setProcessedTime(null|DateTimeImmutable|string $processedTime): static
     {
         if ($processedTime !== null && !($processedTime instanceof DateTimeImmutable)) {
             $processedTime = new DateTimeImmutable($processedTime);

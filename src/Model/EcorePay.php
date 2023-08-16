@@ -38,7 +38,7 @@ class EcorePay extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(EcorePayCredentials|array $credentials): self
+    public function setCredentials(EcorePayCredentials|array $credentials): static
     {
         if (!($credentials instanceof EcorePayCredentials)) {
             $credentials = EcorePayCredentials::from($credentials);

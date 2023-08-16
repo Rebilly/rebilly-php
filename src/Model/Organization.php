@@ -94,7 +94,7 @@ class Organization implements JsonSerializable
         return $this->fields['name'];
     }
 
-    public function setName(string $name): self
+    public function setName(string $name): static
     {
         $this->fields['name'] = $name;
 
@@ -106,7 +106,7 @@ class Organization implements JsonSerializable
         return $this->fields['website'] ?? null;
     }
 
-    public function setWebsite(null|string $website): self
+    public function setWebsite(null|string $website): static
     {
         $this->fields['website'] = $website;
 
@@ -118,7 +118,7 @@ class Organization implements JsonSerializable
         return $this->fields['address'] ?? null;
     }
 
-    public function setAddress(null|string $address): self
+    public function setAddress(null|string $address): static
     {
         $this->fields['address'] = $address;
 
@@ -130,7 +130,7 @@ class Organization implements JsonSerializable
         return $this->fields['address2'] ?? null;
     }
 
-    public function setAddress2(null|string $address2): self
+    public function setAddress2(null|string $address2): static
     {
         $this->fields['address2'] = $address2;
 
@@ -142,7 +142,7 @@ class Organization implements JsonSerializable
         return $this->fields['city'] ?? null;
     }
 
-    public function setCity(null|string $city): self
+    public function setCity(null|string $city): static
     {
         $this->fields['city'] = $city;
 
@@ -154,7 +154,7 @@ class Organization implements JsonSerializable
         return $this->fields['region'] ?? null;
     }
 
-    public function setRegion(null|string $region): self
+    public function setRegion(null|string $region): static
     {
         $this->fields['region'] = $region;
 
@@ -166,7 +166,7 @@ class Organization implements JsonSerializable
         return $this->fields['country'];
     }
 
-    public function setCountry(string $country): self
+    public function setCountry(string $country): static
     {
         $this->fields['country'] = $country;
 
@@ -178,7 +178,7 @@ class Organization implements JsonSerializable
         return $this->fields['postalCode'] ?? null;
     }
 
-    public function setPostalCode(null|string $postalCode): self
+    public function setPostalCode(null|string $postalCode): static
     {
         $this->fields['postalCode'] = $postalCode;
 
@@ -196,7 +196,7 @@ class Organization implements JsonSerializable
     /**
      * @param null|ContactPhoneNumbers[] $phoneNumbers
      */
-    public function setPhoneNumbers(null|array $phoneNumbers): self
+    public function setPhoneNumbers(null|array $phoneNumbers): static
     {
         $phoneNumbers = $phoneNumbers !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ContactPhoneNumbers ? $value : ContactPhoneNumbers::from($value)) : null, $phoneNumbers) : null;
 
@@ -216,7 +216,7 @@ class Organization implements JsonSerializable
     /**
      * @param null|ContactEmails[] $emails
      */
-    public function setEmails(null|array $emails): self
+    public function setEmails(null|array $emails): static
     {
         $emails = $emails !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ContactEmails ? $value : ContactEmails::from($value)) : null, $emails) : null;
 
@@ -230,7 +230,7 @@ class Organization implements JsonSerializable
         return $this->fields['taxDescriptor'] ?? null;
     }
 
-    public function setTaxDescriptor(null|string $taxDescriptor): self
+    public function setTaxDescriptor(null|string $taxDescriptor): static
     {
         $this->fields['taxDescriptor'] = $taxDescriptor;
 
@@ -242,7 +242,7 @@ class Organization implements JsonSerializable
         return $this->fields['invoiceTimeZone'] ?? null;
     }
 
-    public function setInvoiceTimeZone(null|string $invoiceTimeZone): self
+    public function setInvoiceTimeZone(null|string $invoiceTimeZone): static
     {
         $this->fields['invoiceTimeZone'] = $invoiceTimeZone;
 
@@ -254,7 +254,7 @@ class Organization implements JsonSerializable
         return $this->fields['questionnaire'] ?? null;
     }
 
-    public function setQuestionnaire(null|OrganizationQuestionnaire|array $questionnaire): self
+    public function setQuestionnaire(null|OrganizationQuestionnaire|array $questionnaire): static
     {
         if ($questionnaire !== null && !($questionnaire instanceof OrganizationQuestionnaire)) {
             $questionnaire = OrganizationQuestionnaire::from($questionnaire);
@@ -270,7 +270,7 @@ class Organization implements JsonSerializable
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|OrganizationSettings|array $settings): self
+    public function setSettings(null|OrganizationSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof OrganizationSettings)) {
             $settings = OrganizationSettings::from($settings);
@@ -360,14 +360,14 @@ class Organization implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -378,7 +378,7 @@ class Organization implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -392,7 +392,7 @@ class Organization implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

@@ -39,7 +39,7 @@ class CommonOrderPreviewItems implements JsonSerializable
         return $this->fields['planId'];
     }
 
-    public function setPlanId(string $planId): self
+    public function setPlanId(string $planId): static
     {
         $this->fields['planId'] = $planId;
 
@@ -51,7 +51,7 @@ class CommonOrderPreviewItems implements JsonSerializable
         return $this->fields['quantity'] ?? null;
     }
 
-    public function setQuantity(null|int $quantity): self
+    public function setQuantity(null|int $quantity): static
     {
         $this->fields['quantity'] = $quantity;
 

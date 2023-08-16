@@ -42,7 +42,7 @@ class FutureRenewalsData implements JsonSerializable
         return $this->fields['date'] ?? null;
     }
 
-    public function setDate(null|string $date): self
+    public function setDate(null|string $date): static
     {
         $this->fields['date'] = $date;
 
@@ -54,7 +54,7 @@ class FutureRenewalsData implements JsonSerializable
         return $this->fields['sum'] ?? null;
     }
 
-    public function setSum(null|float|string $sum): self
+    public function setSum(null|float|string $sum): static
     {
         if (is_string($sum)) {
             $sum = (float) $sum;
@@ -76,7 +76,7 @@ class FutureRenewalsData implements JsonSerializable
     /**
      * @param null|FutureRenewalsPlansCount[] $plansCount
      */
-    public function setPlansCount(null|array $plansCount): self
+    public function setPlansCount(null|array $plansCount): static
     {
         $plansCount = $plansCount !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof FutureRenewalsPlansCount ? $value : FutureRenewalsPlansCount::from($value)) : null, $plansCount) : null;
 

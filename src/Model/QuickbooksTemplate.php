@@ -57,7 +57,7 @@ class QuickbooksTemplate implements JsonSerializable
         return $this->fields['itemName'] ?? null;
     }
 
-    public function setItemName(null|string $itemName): self
+    public function setItemName(null|string $itemName): static
     {
         $this->fields['itemName'] = $itemName;
 
@@ -69,7 +69,7 @@ class QuickbooksTemplate implements JsonSerializable
         return $this->fields['itemDescription'] ?? null;
     }
 
-    public function setItemDescription(null|string $itemDescription): self
+    public function setItemDescription(null|string $itemDescription): static
     {
         $this->fields['itemDescription'] = $itemDescription;
 
@@ -81,7 +81,7 @@ class QuickbooksTemplate implements JsonSerializable
         return $this->fields['itemSku'] ?? null;
     }
 
-    public function setItemSku(null|string $itemSku): self
+    public function setItemSku(null|string $itemSku): static
     {
         $this->fields['itemSku'] = $itemSku;
 
@@ -93,7 +93,7 @@ class QuickbooksTemplate implements JsonSerializable
         return $this->fields['itemLineDescription'] ?? null;
     }
 
-    public function setItemLineDescription(null|string $itemLineDescription): self
+    public function setItemLineDescription(null|string $itemLineDescription): static
     {
         $this->fields['itemLineDescription'] = $itemLineDescription;
 
@@ -105,7 +105,7 @@ class QuickbooksTemplate implements JsonSerializable
         return $this->fields['taxName'] ?? null;
     }
 
-    public function setTaxName(null|string $taxName): self
+    public function setTaxName(null|string $taxName): static
     {
         $this->fields['taxName'] = $taxName;
 
@@ -117,7 +117,7 @@ class QuickbooksTemplate implements JsonSerializable
         return $this->fields['taxDescription'] ?? null;
     }
 
-    public function setTaxDescription(null|string $taxDescription): self
+    public function setTaxDescription(null|string $taxDescription): static
     {
         $this->fields['taxDescription'] = $taxDescription;
 
@@ -129,7 +129,7 @@ class QuickbooksTemplate implements JsonSerializable
         return $this->fields['taxSku'] ?? null;
     }
 
-    public function setTaxSku(null|string $taxSku): self
+    public function setTaxSku(null|string $taxSku): static
     {
         $this->fields['taxSku'] = $taxSku;
 
@@ -141,7 +141,7 @@ class QuickbooksTemplate implements JsonSerializable
         return $this->fields['taxLineDescription'] ?? null;
     }
 
-    public function setTaxLineDescription(null|string $taxLineDescription): self
+    public function setTaxLineDescription(null|string $taxLineDescription): static
     {
         $this->fields['taxLineDescription'] = $taxLineDescription;
 

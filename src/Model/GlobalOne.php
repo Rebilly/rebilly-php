@@ -38,7 +38,7 @@ class GlobalOne extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(GlobalOneCredentials|array $credentials): self
+    public function setCredentials(GlobalOneCredentials|array $credentials): static
     {
         if (!($credentials instanceof GlobalOneCredentials)) {
             $credentials = GlobalOneCredentials::from($credentials);

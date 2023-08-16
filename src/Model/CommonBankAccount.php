@@ -105,7 +105,7 @@ abstract class CommonBankAccount extends PaymentInstrument
         return $this->fields['bankName'] ?? null;
     }
 
-    public function setBankName(null|string $bankName): self
+    public function setBankName(null|string $bankName): static
     {
         $this->fields['bankName'] = $bankName;
 
@@ -117,7 +117,7 @@ abstract class CommonBankAccount extends PaymentInstrument
         return $this->fields['routingNumber'] ?? null;
     }
 
-    public function setRoutingNumber(null|string $routingNumber): self
+    public function setRoutingNumber(null|string $routingNumber): static
     {
         $this->fields['routingNumber'] = $routingNumber;
 
@@ -135,7 +135,7 @@ abstract class CommonBankAccount extends PaymentInstrument
     /**
      * @psalm-param self::ACCOUNT_NUMBER_TYPE_*|null $accountNumberType
      */
-    public function setAccountNumberType(null|string $accountNumberType): self
+    public function setAccountNumberType(null|string $accountNumberType): static
     {
         $this->fields['accountNumberType'] = $accountNumberType;
 
@@ -153,7 +153,7 @@ abstract class CommonBankAccount extends PaymentInstrument
     /**
      * @psalm-param self::ACCOUNT_TYPE_*|null $accountType
      */
-    public function setAccountType(null|string $accountType): self
+    public function setAccountType(null|string $accountType): static
     {
         $this->fields['accountType'] = $accountType;
 
@@ -165,7 +165,7 @@ abstract class CommonBankAccount extends PaymentInstrument
         return $this->fields['bic'] ?? null;
     }
 
-    public function setBic(null|string $bic): self
+    public function setBic(null|string $bic): static
     {
         $this->fields['bic'] = $bic;
 
@@ -177,7 +177,7 @@ abstract class CommonBankAccount extends PaymentInstrument
         return $this->fields['billingAddress'] ?? null;
     }
 
-    public function setBillingAddress(null|ContactObject|array $billingAddress): self
+    public function setBillingAddress(null|ContactObject|array $billingAddress): static
     {
         if ($billingAddress !== null && !($billingAddress instanceof ContactObject)) {
             $billingAddress = ContactObject::from($billingAddress);
@@ -211,7 +211,7 @@ abstract class CommonBankAccount extends PaymentInstrument
         return $this->fields['useAsBackup'] ?? null;
     }
 
-    public function setUseAsBackup(null|bool $useAsBackup): self
+    public function setUseAsBackup(null|bool $useAsBackup): static
     {
         $this->fields['useAsBackup'] = $useAsBackup;
 
@@ -233,7 +233,7 @@ abstract class CommonBankAccount extends PaymentInstrument
         return $this->fields['customFields'] ?? null;
     }
 
-    public function setCustomFields(null|array $customFields): self
+    public function setCustomFields(null|array $customFields): static
     {
         $this->fields['customFields'] = $customFields;
 
@@ -292,7 +292,7 @@ abstract class CommonBankAccount extends PaymentInstrument
         return parent::jsonSerialize() + $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -302,21 +302,21 @@ abstract class CommonBankAccount extends PaymentInstrument
     /**
      * @psalm-param self::METHOD_*|null $method
      */
-    private function setMethod(null|string $method): self
+    private function setMethod(null|string $method): static
     {
         $this->fields['method'] = $method;
 
         return $this;
     }
 
-    private function setFingerprint(null|string $fingerprint): self
+    private function setFingerprint(null|string $fingerprint): static
     {
         $this->fields['fingerprint'] = $fingerprint;
 
         return $this;
     }
 
-    private function setLast4(null|string $last4): self
+    private function setLast4(null|string $last4): static
     {
         $this->fields['last4'] = $last4;
 
@@ -326,14 +326,14 @@ abstract class CommonBankAccount extends PaymentInstrument
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    private function setStatus(null|string $status): self
+    private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -344,7 +344,7 @@ abstract class CommonBankAccount extends PaymentInstrument
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);

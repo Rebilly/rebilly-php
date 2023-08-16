@@ -38,7 +38,7 @@ class Circle extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(CircleCredentials|array $credentials): self
+    public function setCredentials(CircleCredentials|array $credentials): static
     {
         if (!($credentials instanceof CircleCredentials)) {
             $credentials = CircleCredentials::from($credentials);

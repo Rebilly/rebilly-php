@@ -50,7 +50,7 @@ class SendEmail extends RuleAction
         return $this->fields['id'] ?? null;
     }
 
-    public function setId(null|string $id): self
+    public function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -62,7 +62,7 @@ class SendEmail extends RuleAction
         return $this->fields['title'] ?? null;
     }
 
-    public function setTitle(null|string $title): self
+    public function setTitle(null|string $title): static
     {
         $this->fields['title'] = $title;
 
@@ -80,7 +80,7 @@ class SendEmail extends RuleAction
     /**
      * @param RulesEmailNotification[] $emails
      */
-    public function setEmails(array $emails): self
+    public function setEmails(array $emails): static
     {
         $emails = array_map(fn ($value) => $value !== null ? ($value instanceof RulesEmailNotification ? $value : RulesEmailNotification::from($value)) : null, $emails);
 
@@ -94,7 +94,7 @@ class SendEmail extends RuleAction
         return $this->fields['splitTestStartTime'] ?? null;
     }
 
-    public function setSplitTestStartTime(null|DateTimeImmutable|string $splitTestStartTime): self
+    public function setSplitTestStartTime(null|DateTimeImmutable|string $splitTestStartTime): static
     {
         if ($splitTestStartTime !== null && !($splitTestStartTime instanceof DateTimeImmutable)) {
             $splitTestStartTime = new DateTimeImmutable($splitTestStartTime);

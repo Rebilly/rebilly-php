@@ -82,7 +82,7 @@ class SmtpCredential implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    public function setStatus(null|string $status): self
+    public function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
@@ -94,7 +94,7 @@ class SmtpCredential implements JsonSerializable
         return $this->fields['deactivationTime'] ?? null;
     }
 
-    public function setDeactivationTime(null|DateTimeImmutable|string $deactivationTime): self
+    public function setDeactivationTime(null|DateTimeImmutable|string $deactivationTime): static
     {
         if ($deactivationTime !== null && !($deactivationTime instanceof DateTimeImmutable)) {
             $deactivationTime = new DateTimeImmutable($deactivationTime);
@@ -110,7 +110,7 @@ class SmtpCredential implements JsonSerializable
         return $this->fields['host'];
     }
 
-    public function setHost(string $host): self
+    public function setHost(string $host): static
     {
         $this->fields['host'] = $host;
 
@@ -122,7 +122,7 @@ class SmtpCredential implements JsonSerializable
         return $this->fields['port'] ?? null;
     }
 
-    public function setPort(null|int $port): self
+    public function setPort(null|int $port): static
     {
         $this->fields['port'] = $port;
 
@@ -140,7 +140,7 @@ class SmtpCredential implements JsonSerializable
     /**
      * @psalm-param self::ENCRYPTION_*|null $encryption
      */
-    public function setEncryption(null|string $encryption): self
+    public function setEncryption(null|string $encryption): static
     {
         $this->fields['encryption'] = $encryption;
 
@@ -152,7 +152,7 @@ class SmtpCredential implements JsonSerializable
         return $this->fields['auth'] ?? null;
     }
 
-    public function setAuth(null|SmtpAuthorization|array $auth): self
+    public function setAuth(null|SmtpAuthorization|array $auth): static
     {
         if ($auth !== null && !($auth instanceof SmtpAuthorization)) {
             $auth = SmtpAuthorization::from($auth);
@@ -202,7 +202,7 @@ class SmtpCredential implements JsonSerializable
         return $data;
     }
 
-    private function setHash(null|string $hash): self
+    private function setHash(null|string $hash): static
     {
         $this->fields['hash'] = $hash;
 
@@ -212,7 +212,7 @@ class SmtpCredential implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

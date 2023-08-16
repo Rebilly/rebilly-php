@@ -44,7 +44,7 @@ class Payvision extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(PayvisionCredentials|array $credentials): self
+    public function setCredentials(PayvisionCredentials|array $credentials): static
     {
         if (!($credentials instanceof PayvisionCredentials)) {
             $credentials = PayvisionCredentials::from($credentials);
@@ -60,7 +60,7 @@ class Payvision extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|PayvisionSettings|array $settings): self
+    public function setSettings(null|PayvisionSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof PayvisionSettings)) {
             $settings = PayvisionSettings::from($settings);
@@ -76,7 +76,7 @@ class Payvision extends GatewayAccount
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|Payvision3dsServers|array $threeDSecureServer): self
+    public function setThreeDSecureServer(null|Payvision3dsServers|array $threeDSecureServer): static
     {
         if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Payvision3dsServers)) {
             $threeDSecureServer = Payvision3dsServers::from($threeDSecureServer);

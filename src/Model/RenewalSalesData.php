@@ -48,7 +48,7 @@ class RenewalSalesData implements JsonSerializable
         return $this->fields['aggregationValue'] ?? null;
     }
 
-    public function setAggregationValue(null|string $aggregationValue): self
+    public function setAggregationValue(null|string $aggregationValue): static
     {
         $this->fields['aggregationValue'] = $aggregationValue;
 
@@ -60,7 +60,7 @@ class RenewalSalesData implements JsonSerializable
         return $this->fields['newSales'] ?? null;
     }
 
-    public function setNewSales(null|float|string $newSales): self
+    public function setNewSales(null|float|string $newSales): static
     {
         if (is_string($newSales)) {
             $newSales = (float) $newSales;
@@ -76,7 +76,7 @@ class RenewalSalesData implements JsonSerializable
         return $this->fields['newRefunds'] ?? null;
     }
 
-    public function setNewRefunds(null|float|string $newRefunds): self
+    public function setNewRefunds(null|float|string $newRefunds): static
     {
         if (is_string($newRefunds)) {
             $newRefunds = (float) $newRefunds;
@@ -92,7 +92,7 @@ class RenewalSalesData implements JsonSerializable
         return $this->fields['renewalSales'] ?? null;
     }
 
-    public function setRenewalSales(null|float|string $renewalSales): self
+    public function setRenewalSales(null|float|string $renewalSales): static
     {
         if (is_string($renewalSales)) {
             $renewalSales = (float) $renewalSales;
@@ -108,7 +108,7 @@ class RenewalSalesData implements JsonSerializable
         return $this->fields['renewalRefunds'] ?? null;
     }
 
-    public function setRenewalRefunds(null|float|string $renewalRefunds): self
+    public function setRenewalRefunds(null|float|string $renewalRefunds): static
     {
         if (is_string($renewalRefunds)) {
             $renewalRefunds = (float) $renewalRefunds;

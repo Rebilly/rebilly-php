@@ -38,7 +38,7 @@ class STPMexico extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(STPMexicoCredentials|array $credentials): self
+    public function setCredentials(STPMexicoCredentials|array $credentials): static
     {
         if (!($credentials instanceof STPMexicoCredentials)) {
             $credentials = STPMexicoCredentials::from($credentials);

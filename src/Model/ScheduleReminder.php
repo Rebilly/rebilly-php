@@ -53,7 +53,7 @@ class ScheduleReminder extends RuleAction
     /**
      * @psalm-param self::ROLE_* $role
      */
-    public function setRole(string $role): self
+    public function setRole(string $role): static
     {
         $this->fields['role'] = $role;
 
@@ -65,7 +65,7 @@ class ScheduleReminder extends RuleAction
         return $this->fields['schedule'] ?? null;
     }
 
-    public function setSchedule(null|ReminderSchedule|array $schedule): self
+    public function setSchedule(null|ReminderSchedule|array $schedule): static
     {
         if ($schedule !== null && !($schedule instanceof ReminderSchedule)) {
             $schedule = ReminderSchedule::from($schedule);

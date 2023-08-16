@@ -59,7 +59,7 @@ class None implements JsonSerializable
     /**
      * @psalm-param self::METHOD_*|null $method
      */
-    public function setMethod(null|string $method): self
+    public function setMethod(null|string $method): static
     {
         $this->fields['method'] = $method;
 

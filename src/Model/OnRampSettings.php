@@ -39,7 +39,7 @@ class OnRampSettings implements JsonSerializable
         return $this->fields['useServerToServerApi'] ?? null;
     }
 
-    public function setUseServerToServerApi(null|bool $useServerToServerApi): self
+    public function setUseServerToServerApi(null|bool $useServerToServerApi): static
     {
         $this->fields['useServerToServerApi'] = $useServerToServerApi;
 
@@ -51,7 +51,7 @@ class OnRampSettings implements JsonSerializable
         return $this->fields['logoUrl'] ?? null;
     }
 
-    public function setLogoUrl(null|string $logoUrl): self
+    public function setLogoUrl(null|string $logoUrl): static
     {
         $this->fields['logoUrl'] = $logoUrl;
 

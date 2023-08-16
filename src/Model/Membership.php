@@ -57,7 +57,7 @@ class Membership implements JsonSerializable
         return $this->fields['organization'];
     }
 
-    public function setOrganization(MembershipOrganization|array $organization): self
+    public function setOrganization(MembershipOrganization|array $organization): static
     {
         if (!($organization instanceof MembershipOrganization)) {
             $organization = MembershipOrganization::from($organization);
@@ -73,7 +73,7 @@ class Membership implements JsonSerializable
         return $this->fields['user'];
     }
 
-    public function setUser(MembershipUser|array $user): self
+    public function setUser(MembershipUser|array $user): static
     {
         if (!($user instanceof MembershipUser)) {
             $user = MembershipUser::from($user);
@@ -95,7 +95,7 @@ class Membership implements JsonSerializable
     /**
      * @param null|string[] $allowedIps
      */
-    public function setAllowedIps(null|array $allowedIps): self
+    public function setAllowedIps(null|array $allowedIps): static
     {
         $allowedIps = $allowedIps !== null ? array_map(fn ($value) => $value ?? null, $allowedIps) : null;
 
@@ -115,7 +115,7 @@ class Membership implements JsonSerializable
     /**
      * @param null|string[] $permissions
      */
-    public function setPermissions(null|array $permissions): self
+    public function setPermissions(null|array $permissions): static
     {
         $permissions = $permissions !== null ? array_map(fn ($value) => $value ?? null, $permissions) : null;
 
@@ -129,7 +129,7 @@ class Membership implements JsonSerializable
         return $this->fields['isOwner'] ?? null;
     }
 
-    public function setIsOwner(null|bool $isOwner): self
+    public function setIsOwner(null|bool $isOwner): static
     {
         $this->fields['isOwner'] = $isOwner;
 
@@ -152,7 +152,7 @@ class Membership implements JsonSerializable
     /**
      * @param null|string[] $roleIds
      */
-    public function setRoleIds(null|array $roleIds): self
+    public function setRoleIds(null|array $roleIds): static
     {
         $roleIds = $roleIds !== null ? array_map(fn ($value) => $value ?? null, $roleIds) : null;
 
@@ -200,7 +200,7 @@ class Membership implements JsonSerializable
         return $data;
     }
 
-    private function setIsDefault(null|bool $isDefault): self
+    private function setIsDefault(null|bool $isDefault): static
     {
         $this->fields['isDefault'] = $isDefault;
 
@@ -210,7 +210,7 @@ class Membership implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

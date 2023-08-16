@@ -51,7 +51,7 @@ class BrowserData implements JsonSerializable
         return $this->fields['colorDepth'];
     }
 
-    public function setColorDepth(int $colorDepth): self
+    public function setColorDepth(int $colorDepth): static
     {
         $this->fields['colorDepth'] = $colorDepth;
 
@@ -63,7 +63,7 @@ class BrowserData implements JsonSerializable
         return $this->fields['isJavaEnabled'];
     }
 
-    public function setIsJavaEnabled(bool $isJavaEnabled): self
+    public function setIsJavaEnabled(bool $isJavaEnabled): static
     {
         $this->fields['isJavaEnabled'] = $isJavaEnabled;
 
@@ -75,7 +75,7 @@ class BrowserData implements JsonSerializable
         return $this->fields['language'];
     }
 
-    public function setLanguage(string $language): self
+    public function setLanguage(string $language): static
     {
         $this->fields['language'] = $language;
 
@@ -87,7 +87,7 @@ class BrowserData implements JsonSerializable
         return $this->fields['screenWidth'];
     }
 
-    public function setScreenWidth(int $screenWidth): self
+    public function setScreenWidth(int $screenWidth): static
     {
         $this->fields['screenWidth'] = $screenWidth;
 
@@ -99,7 +99,7 @@ class BrowserData implements JsonSerializable
         return $this->fields['screenHeight'];
     }
 
-    public function setScreenHeight(int $screenHeight): self
+    public function setScreenHeight(int $screenHeight): static
     {
         $this->fields['screenHeight'] = $screenHeight;
 
@@ -111,7 +111,7 @@ class BrowserData implements JsonSerializable
         return $this->fields['timeZoneOffset'];
     }
 
-    public function setTimeZoneOffset(int $timeZoneOffset): self
+    public function setTimeZoneOffset(int $timeZoneOffset): static
     {
         $this->fields['timeZoneOffset'] = $timeZoneOffset;
 

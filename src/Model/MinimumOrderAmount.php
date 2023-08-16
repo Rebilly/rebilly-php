@@ -64,7 +64,7 @@ class MinimumOrderAmount extends CouponRestriction
     /**
      * @psalm-param self::TYPE_* $type
      */
-    public function setType(string $type): self
+    public function setType(string $type): static
     {
         $this->fields['type'] = $type;
 
@@ -76,7 +76,7 @@ class MinimumOrderAmount extends CouponRestriction
         return $this->fields['amount'];
     }
 
-    public function setAmount(int $amount): self
+    public function setAmount(int $amount): static
     {
         $this->fields['amount'] = $amount;
 
@@ -88,7 +88,7 @@ class MinimumOrderAmount extends CouponRestriction
         return $this->fields['currency'];
     }
 
-    public function setCurrency(string $currency): self
+    public function setCurrency(string $currency): static
     {
         $this->fields['currency'] = $currency;
 

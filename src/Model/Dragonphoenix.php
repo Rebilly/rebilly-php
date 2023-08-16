@@ -38,7 +38,7 @@ class Dragonphoenix extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(DragonphoenixCredentials|array $credentials): self
+    public function setCredentials(DragonphoenixCredentials|array $credentials): static
     {
         if (!($credentials instanceof DragonphoenixCredentials)) {
             $credentials = DragonphoenixCredentials::from($credentials);

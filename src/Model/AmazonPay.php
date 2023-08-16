@@ -38,7 +38,7 @@ class AmazonPay extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(AmazonPayCredentials|array $credentials): self
+    public function setCredentials(AmazonPayCredentials|array $credentials): static
     {
         if (!($credentials instanceof AmazonPayCredentials)) {
             $credentials = AmazonPayCredentials::from($credentials);

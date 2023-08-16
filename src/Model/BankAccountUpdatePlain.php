@@ -57,7 +57,7 @@ class BankAccountUpdatePlain implements JsonSerializable
         return $this->fields['bankName'] ?? null;
     }
 
-    public function setBankName(null|string $bankName): self
+    public function setBankName(null|string $bankName): static
     {
         $this->fields['bankName'] = $bankName;
 
@@ -75,7 +75,7 @@ class BankAccountUpdatePlain implements JsonSerializable
     /**
      * @psalm-param self::ACCOUNT_TYPE_*|null $accountType
      */
-    public function setAccountType(null|string $accountType): self
+    public function setAccountType(null|string $accountType): static
     {
         $this->fields['accountType'] = $accountType;
 
@@ -87,7 +87,7 @@ class BankAccountUpdatePlain implements JsonSerializable
         return $this->fields['billingAddress'] ?? null;
     }
 
-    public function setBillingAddress(null|ContactObject|array $billingAddress): self
+    public function setBillingAddress(null|ContactObject|array $billingAddress): static
     {
         if ($billingAddress !== null && !($billingAddress instanceof ContactObject)) {
             $billingAddress = ContactObject::from($billingAddress);
@@ -103,7 +103,7 @@ class BankAccountUpdatePlain implements JsonSerializable
         return $this->fields['stickyGatewayAccountId'] ?? null;
     }
 
-    public function setStickyGatewayAccountId(null|string $stickyGatewayAccountId): self
+    public function setStickyGatewayAccountId(null|string $stickyGatewayAccountId): static
     {
         $this->fields['stickyGatewayAccountId'] = $stickyGatewayAccountId;
 
@@ -115,7 +115,7 @@ class BankAccountUpdatePlain implements JsonSerializable
         return $this->fields['customFields'] ?? null;
     }
 
-    public function setCustomFields(null|array $customFields): self
+    public function setCustomFields(null|array $customFields): static
     {
         $this->fields['customFields'] = $customFields;
 
@@ -127,7 +127,7 @@ class BankAccountUpdatePlain implements JsonSerializable
         return $this->fields['useAsBackup'] ?? null;
     }
 
-    public function setUseAsBackup(null|bool $useAsBackup): self
+    public function setUseAsBackup(null|bool $useAsBackup): static
     {
         $this->fields['useAsBackup'] = $useAsBackup;
 

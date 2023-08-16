@@ -39,7 +39,7 @@ class HiPayCredentials implements JsonSerializable
         return $this->fields['apiUsername'];
     }
 
-    public function setApiUsername(string $apiUsername): self
+    public function setApiUsername(string $apiUsername): static
     {
         $this->fields['apiUsername'] = $apiUsername;
 
@@ -51,7 +51,7 @@ class HiPayCredentials implements JsonSerializable
         return $this->fields['apiPassword'];
     }
 
-    public function setApiPassword(string $apiPassword): self
+    public function setApiPassword(string $apiPassword): static
     {
         $this->fields['apiPassword'] = $apiPassword;
 

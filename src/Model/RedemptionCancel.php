@@ -38,7 +38,7 @@ class RedemptionCancel extends TimelineAction
         return $this->fields['redemptionId'] ?? null;
     }
 
-    public function setRedemptionId(null|string $redemptionId): self
+    public function setRedemptionId(null|string $redemptionId): static
     {
         $this->fields['redemptionId'] = $redemptionId;
 

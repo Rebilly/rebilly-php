@@ -61,7 +61,7 @@ class RestrictToSubscriptions extends CouponRestriction
     /**
      * @psalm-param self::TYPE_* $type
      */
-    public function setType(string $type): self
+    public function setType(string $type): static
     {
         $this->fields['type'] = $type;
 
@@ -79,7 +79,7 @@ class RestrictToSubscriptions extends CouponRestriction
     /**
      * @param string[] $subscriptionIds
      */
-    public function setSubscriptionIds(array $subscriptionIds): self
+    public function setSubscriptionIds(array $subscriptionIds): static
     {
         $subscriptionIds = array_map(fn ($value) => $value ?? null, $subscriptionIds);
 

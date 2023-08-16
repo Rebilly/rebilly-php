@@ -54,7 +54,7 @@ class Directa24Credentials implements JsonSerializable
         return $this->fields['x_login'];
     }
 
-    public function setXLogin(string $xLogin): self
+    public function setXLogin(string $xLogin): static
     {
         $this->fields['x_login'] = $xLogin;
 
@@ -66,7 +66,7 @@ class Directa24Credentials implements JsonSerializable
         return $this->fields['x_tran_key'];
     }
 
-    public function setXTranKey(string $xTranKey): self
+    public function setXTranKey(string $xTranKey): static
     {
         $this->fields['x_tran_key'] = $xTranKey;
 
@@ -78,7 +78,7 @@ class Directa24Credentials implements JsonSerializable
         return $this->fields['secret_key'];
     }
 
-    public function setSecretKey(string $secretKey): self
+    public function setSecretKey(string $secretKey): static
     {
         $this->fields['secret_key'] = $secretKey;
 
@@ -90,7 +90,7 @@ class Directa24Credentials implements JsonSerializable
         return $this->fields['web_pay_login'];
     }
 
-    public function setWebPayLogin(string $webPayLogin): self
+    public function setWebPayLogin(string $webPayLogin): static
     {
         $this->fields['web_pay_login'] = $webPayLogin;
 
@@ -102,7 +102,7 @@ class Directa24Credentials implements JsonSerializable
         return $this->fields['web_pay_tran_key'];
     }
 
-    public function setWebPayTranKey(string $webPayTranKey): self
+    public function setWebPayTranKey(string $webPayTranKey): static
     {
         $this->fields['web_pay_tran_key'] = $webPayTranKey;
 
@@ -114,7 +114,7 @@ class Directa24Credentials implements JsonSerializable
         return $this->fields['cashout_login'] ?? null;
     }
 
-    public function setCashoutLogin(null|string $cashoutLogin): self
+    public function setCashoutLogin(null|string $cashoutLogin): static
     {
         $this->fields['cashout_login'] = $cashoutLogin;
 
@@ -126,7 +126,7 @@ class Directa24Credentials implements JsonSerializable
         return $this->fields['cashout_password'] ?? null;
     }
 
-    public function setCashoutPassword(null|string $cashoutPassword): self
+    public function setCashoutPassword(null|string $cashoutPassword): static
     {
         $this->fields['cashout_password'] = $cashoutPassword;
 

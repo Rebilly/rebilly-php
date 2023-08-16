@@ -36,7 +36,7 @@ class SkrillSettings implements JsonSerializable
         return $this->fields['merchantFields'] ?? null;
     }
 
-    public function setMerchantFields(null|string $merchantFields): self
+    public function setMerchantFields(null|string $merchantFields): static
     {
         $this->fields['merchantFields'] = $merchantFields;
 

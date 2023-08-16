@@ -39,7 +39,7 @@ class KycSettings implements JsonSerializable
         return $this->fields['identityProof'] ?? null;
     }
 
-    public function setIdentityProof(null|KycSettingsIdentity|array $identityProof): self
+    public function setIdentityProof(null|KycSettingsIdentity|array $identityProof): static
     {
         if ($identityProof !== null && !($identityProof instanceof KycSettingsIdentity)) {
             $identityProof = KycSettingsIdentity::from($identityProof);
@@ -55,7 +55,7 @@ class KycSettings implements JsonSerializable
         return $this->fields['addressProof'] ?? null;
     }
 
-    public function setAddressProof(null|KycSettingsAddress|array $addressProof): self
+    public function setAddressProof(null|KycSettingsAddress|array $addressProof): static
     {
         if ($addressProof !== null && !($addressProof instanceof KycSettingsAddress)) {
             $addressProof = KycSettingsAddress::from($addressProof);

@@ -41,7 +41,7 @@ class Redsys extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(RedsysCredentials|array $credentials): self
+    public function setCredentials(RedsysCredentials|array $credentials): static
     {
         if (!($credentials instanceof RedsysCredentials)) {
             $credentials = RedsysCredentials::from($credentials);
@@ -57,7 +57,7 @@ class Redsys extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|RedsysSettings|array $settings): self
+    public function setSettings(null|RedsysSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof RedsysSettings)) {
             $settings = RedsysSettings::from($settings);

@@ -38,7 +38,7 @@ class Pay4Fun extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(Pay4FunCredentials|array $credentials): self
+    public function setCredentials(Pay4FunCredentials|array $credentials): static
     {
         if (!($credentials instanceof Pay4FunCredentials)) {
             $credentials = Pay4FunCredentials::from($credentials);

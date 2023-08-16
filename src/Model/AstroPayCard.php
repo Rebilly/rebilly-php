@@ -41,7 +41,7 @@ class AstroPayCard extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(AstroPayCardCredentials|array $credentials): self
+    public function setCredentials(AstroPayCardCredentials|array $credentials): static
     {
         if (!($credentials instanceof AstroPayCardCredentials)) {
             $credentials = AstroPayCardCredentials::from($credentials);
@@ -57,7 +57,7 @@ class AstroPayCard extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|AstroPayCardSettings|array $settings): self
+    public function setSettings(null|AstroPayCardSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof AstroPayCardSettings)) {
             $settings = AstroPayCardSettings::from($settings);

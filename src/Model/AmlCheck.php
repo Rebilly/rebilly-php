@@ -92,7 +92,7 @@ class AmlCheck implements JsonSerializable
         return $this->fields['customer'] ?? null;
     }
 
-    public function setCustomer(null|AmlCheckCustomer|array $customer): self
+    public function setCustomer(null|AmlCheckCustomer|array $customer): static
     {
         if ($customer !== null && !($customer instanceof AmlCheckCustomer)) {
             $customer = AmlCheckCustomer::from($customer);
@@ -153,14 +153,14 @@ class AmlCheck implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -171,7 +171,7 @@ class AmlCheck implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -182,21 +182,21 @@ class AmlCheck implements JsonSerializable
         return $this;
     }
 
-    private function setWebsiteId(null|string $websiteId): self
+    private function setWebsiteId(null|string $websiteId): static
     {
         $this->fields['websiteId'] = $websiteId;
 
         return $this;
     }
 
-    private function setReviewerId(null|string $reviewerId): self
+    private function setReviewerId(null|string $reviewerId): static
     {
         $this->fields['reviewerId'] = $reviewerId;
 
         return $this;
     }
 
-    private function setReviewTime(null|DateTimeImmutable|string $reviewTime): self
+    private function setReviewTime(null|DateTimeImmutable|string $reviewTime): static
     {
         if ($reviewTime !== null && !($reviewTime instanceof DateTimeImmutable)) {
             $reviewTime = new DateTimeImmutable($reviewTime);
@@ -210,7 +210,7 @@ class AmlCheck implements JsonSerializable
     /**
      * @param null|AML[] $hits
      */
-    private function setHits(null|array $hits): self
+    private function setHits(null|array $hits): static
     {
         $hits = $hits !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof AML ? $value : AML::from($value)) : null, $hits) : null;
 
@@ -222,7 +222,7 @@ class AmlCheck implements JsonSerializable
     /**
      * @param null|array<CustomerLink|SelfLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 

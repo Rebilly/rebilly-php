@@ -45,7 +45,7 @@ class EddData implements JsonSerializable
         return $this->fields['occupation'] ?? null;
     }
 
-    public function setOccupation(null|EddScore|string $occupation): self
+    public function setOccupation(null|EddScore|string $occupation): static
     {
         if ($occupation !== null && !($occupation instanceof EddScore)) {
             $occupation = EddScore::from($occupation);
@@ -61,7 +61,7 @@ class EddData implements JsonSerializable
         return $this->fields['arrest'] ?? null;
     }
 
-    public function setArrest(null|EddScore|string $arrest): self
+    public function setArrest(null|EddScore|string $arrest): static
     {
         if ($arrest !== null && !($arrest instanceof EddScore)) {
             $arrest = EddScore::from($arrest);
@@ -77,7 +77,7 @@ class EddData implements JsonSerializable
         return $this->fields['bankruptcy'] ?? null;
     }
 
-    public function setBankruptcy(null|EddScore|string $bankruptcy): self
+    public function setBankruptcy(null|EddScore|string $bankruptcy): static
     {
         if ($bankruptcy !== null && !($bankruptcy instanceof EddScore)) {
             $bankruptcy = EddScore::from($bankruptcy);
@@ -93,7 +93,7 @@ class EddData implements JsonSerializable
         return $this->fields['fraud'] ?? null;
     }
 
-    public function setFraud(null|EddScore|string $fraud): self
+    public function setFraud(null|EddScore|string $fraud): static
     {
         if ($fraud !== null && !($fraud instanceof EddScore)) {
             $fraud = EddScore::from($fraud);

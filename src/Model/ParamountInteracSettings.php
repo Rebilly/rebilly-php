@@ -39,7 +39,7 @@ class ParamountInteracSettings implements JsonSerializable
         return $this->fields['sandbox'] ?? null;
     }
 
-    public function setSandbox(null|bool $sandbox): self
+    public function setSandbox(null|bool $sandbox): static
     {
         $this->fields['sandbox'] = $sandbox;
 
@@ -51,7 +51,7 @@ class ParamountInteracSettings implements JsonSerializable
         return $this->fields['merchantSubId'] ?? null;
     }
 
-    public function setMerchantSubId(null|int $merchantSubId): self
+    public function setMerchantSubId(null|int $merchantSubId): static
     {
         $this->fields['merchantSubId'] = $merchantSubId;
 

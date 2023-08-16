@@ -39,7 +39,7 @@ class PlugnpayCredentials implements JsonSerializable
         return $this->fields['publisher-name'];
     }
 
-    public function setPublisherName(string $publisherName): self
+    public function setPublisherName(string $publisherName): static
     {
         $this->fields['publisher-name'] = $publisherName;
 
@@ -51,7 +51,7 @@ class PlugnpayCredentials implements JsonSerializable
         return $this->fields['publisher-password'];
     }
 
-    public function setPublisherPassword(string $publisherPassword): self
+    public function setPublisherPassword(string $publisherPassword): static
     {
         $this->fields['publisher-password'] = $publisherPassword;
 

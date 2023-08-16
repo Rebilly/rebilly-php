@@ -45,7 +45,7 @@ class PayPalSettings implements JsonSerializable
         return $this->fields['redirectUrl'];
     }
 
-    public function setRedirectUrl(string $redirectUrl): self
+    public function setRedirectUrl(string $redirectUrl): static
     {
         $this->fields['redirectUrl'] = $redirectUrl;
 
@@ -57,7 +57,7 @@ class PayPalSettings implements JsonSerializable
         return $this->fields['enableGuestCheckout'] ?? null;
     }
 
-    public function setEnableGuestCheckout(null|bool $enableGuestCheckout): self
+    public function setEnableGuestCheckout(null|bool $enableGuestCheckout): static
     {
         $this->fields['enableGuestCheckout'] = $enableGuestCheckout;
 
@@ -69,7 +69,7 @@ class PayPalSettings implements JsonSerializable
         return $this->fields['useHostedCheckoutForm'] ?? null;
     }
 
-    public function setUseHostedCheckoutForm(null|bool $useHostedCheckoutForm): self
+    public function setUseHostedCheckoutForm(null|bool $useHostedCheckoutForm): static
     {
         $this->fields['useHostedCheckoutForm'] = $useHostedCheckoutForm;
 
@@ -81,7 +81,7 @@ class PayPalSettings implements JsonSerializable
         return $this->fields['forceGuestCheckout'] ?? null;
     }
 
-    public function setForceGuestCheckout(null|bool $forceGuestCheckout): self
+    public function setForceGuestCheckout(null|bool $forceGuestCheckout): static
     {
         $this->fields['forceGuestCheckout'] = $forceGuestCheckout;
 

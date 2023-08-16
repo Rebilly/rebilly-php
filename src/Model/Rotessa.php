@@ -41,7 +41,7 @@ class Rotessa extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(RotessaCredentials|array $credentials): self
+    public function setCredentials(RotessaCredentials|array $credentials): static
     {
         if (!($credentials instanceof RotessaCredentials)) {
             $credentials = RotessaCredentials::from($credentials);
@@ -57,7 +57,7 @@ class Rotessa extends GatewayAccount
         return $this->fields['settings'];
     }
 
-    public function setSettings(RotessaSettings|array $settings): self
+    public function setSettings(RotessaSettings|array $settings): static
     {
         if (!($settings instanceof RotessaSettings)) {
             $settings = RotessaSettings::from($settings);

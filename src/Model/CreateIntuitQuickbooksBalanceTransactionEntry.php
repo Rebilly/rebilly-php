@@ -47,7 +47,7 @@ class CreateIntuitQuickbooksBalanceTransactionEntry extends RuleAction
         return $this->fields['debitAccount'];
     }
 
-    public function setDebitAccount(string $debitAccount): self
+    public function setDebitAccount(string $debitAccount): static
     {
         $this->fields['debitAccount'] = $debitAccount;
 
@@ -59,7 +59,7 @@ class CreateIntuitQuickbooksBalanceTransactionEntry extends RuleAction
         return $this->fields['creditAccount'];
     }
 
-    public function setCreditAccount(string $creditAccount): self
+    public function setCreditAccount(string $creditAccount): static
     {
         $this->fields['creditAccount'] = $creditAccount;
 
@@ -71,7 +71,7 @@ class CreateIntuitQuickbooksBalanceTransactionEntry extends RuleAction
         return $this->fields['description'];
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(string $description): static
     {
         $this->fields['description'] = $description;
 
@@ -83,7 +83,7 @@ class CreateIntuitQuickbooksBalanceTransactionEntry extends RuleAction
         return $this->fields['credentialHash'];
     }
 
-    public function setCredentialHash(string $credentialHash): self
+    public function setCredentialHash(string $credentialHash): static
     {
         $this->fields['credentialHash'] = $credentialHash;
 

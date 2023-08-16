@@ -45,7 +45,7 @@ class CreateContactBodyEmailAddresses implements JsonSerializable
         return $this->fields['email'] ?? null;
     }
 
-    public function setEmail(null|string $email): self
+    public function setEmail(null|string $email): static
     {
         $this->fields['email'] = $email;
 
@@ -63,7 +63,7 @@ class CreateContactBodyEmailAddresses implements JsonSerializable
     /**
      * @psalm-param self::FIELD_*|null $field
      */
-    public function setField(null|string $field): self
+    public function setField(null|string $field): static
     {
         $this->fields['field'] = $field;
 

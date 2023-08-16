@@ -44,7 +44,7 @@ class GatewayAccountWeights extends GatewayAccountPickInstruction
     /**
      * @param GatewayWeightedList[] $weightedList
      */
-    public function setWeightedList(array $weightedList): self
+    public function setWeightedList(array $weightedList): static
     {
         $weightedList = array_map(fn ($value) => $value !== null ? ($value instanceof GatewayWeightedList ? $value : GatewayWeightedList::from($value)) : null, $weightedList);
 

@@ -38,7 +38,7 @@ class Awepay extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(AwepayCredentials|array $credentials): self
+    public function setCredentials(AwepayCredentials|array $credentials): static
     {
         if (!($credentials instanceof AwepayCredentials)) {
             $credentials = AwepayCredentials::from($credentials);

@@ -58,7 +58,7 @@ class WorldpaySettings implements JsonSerializable
         return $this->fields['delay'] ?? null;
     }
 
-    public function setDelay(null|int $delay): self
+    public function setDelay(null|int $delay): static
     {
         $this->fields['delay'] = $delay;
 
@@ -70,7 +70,7 @@ class WorldpaySettings implements JsonSerializable
         return $this->fields['enableStoredCredentials'] ?? null;
     }
 
-    public function setEnableStoredCredentials(null|bool $enableStoredCredentials): self
+    public function setEnableStoredCredentials(null|bool $enableStoredCredentials): static
     {
         $this->fields['enableStoredCredentials'] = $enableStoredCredentials;
 
@@ -88,7 +88,7 @@ class WorldpaySettings implements JsonSerializable
     /**
      * @psalm-param self::MERCHANT_INITIATED_REASON_*|null $merchantInitiatedReason
      */
-    public function setMerchantInitiatedReason(null|string $merchantInitiatedReason): self
+    public function setMerchantInitiatedReason(null|string $merchantInitiatedReason): static
     {
         $this->fields['merchantInitiatedReason'] = $merchantInitiatedReason;
 

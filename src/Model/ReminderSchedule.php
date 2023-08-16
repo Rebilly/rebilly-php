@@ -49,7 +49,7 @@ class ReminderSchedule implements JsonSerializable
     /**
      * @param ReminderScheduleInstruction[] $instructions
      */
-    public function setInstructions(array $instructions): self
+    public function setInstructions(array $instructions): static
     {
         $instructions = array_map(fn ($value) => $value !== null ? ($value instanceof ReminderScheduleInstruction ? $value : ReminderScheduleInstruction::from($value)) : null, $instructions);
 
@@ -69,7 +69,7 @@ class ReminderSchedule implements JsonSerializable
     /**
      * @psalm-param self::CHRONOLOGY_* $chronology
      */
-    public function setChronology(string $chronology): self
+    public function setChronology(string $chronology): static
     {
         $this->fields['chronology'] = $chronology;
 

@@ -78,7 +78,7 @@ abstract class CommonKycRequest implements JsonSerializable
     /**
      * @param KycRequestDocuments[] $documents
      */
-    public function setDocuments(array $documents): self
+    public function setDocuments(array $documents): static
     {
         $documents = array_map(fn ($value) => $value !== null ? ($value instanceof KycRequestDocuments ? $value : KycRequestDocuments::from($value)) : null, $documents);
 
@@ -100,7 +100,7 @@ abstract class CommonKycRequest implements JsonSerializable
         return $this->fields['redirectUrl'] ?? null;
     }
 
-    public function setRedirectUrl(null|string $redirectUrl): self
+    public function setRedirectUrl(null|string $redirectUrl): static
     {
         $this->fields['redirectUrl'] = $redirectUrl;
 
@@ -112,7 +112,7 @@ abstract class CommonKycRequest implements JsonSerializable
         return $this->fields['expirationTime'] ?? null;
     }
 
-    public function setExpirationTime(null|DateTimeImmutable|string $expirationTime): self
+    public function setExpirationTime(null|DateTimeImmutable|string $expirationTime): static
     {
         if ($expirationTime !== null && !($expirationTime instanceof DateTimeImmutable)) {
             $expirationTime = new DateTimeImmutable($expirationTime);
@@ -161,7 +161,7 @@ abstract class CommonKycRequest implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -171,14 +171,14 @@ abstract class CommonKycRequest implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    private function setStatus(null|string $status): self
+    private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -189,7 +189,7 @@ abstract class CommonKycRequest implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);

@@ -64,7 +64,7 @@ class PercentageFormula extends FeeFormula
     /**
      * @psalm-param self::TYPE_* $type
      */
-    public function setType(string $type): self
+    public function setType(string $type): static
     {
         $this->fields['type'] = $type;
 
@@ -76,7 +76,7 @@ class PercentageFormula extends FeeFormula
         return $this->fields['currency'];
     }
 
-    public function setCurrency(string $currency): self
+    public function setCurrency(string $currency): static
     {
         $this->fields['currency'] = $currency;
 
@@ -88,7 +88,7 @@ class PercentageFormula extends FeeFormula
         return $this->fields['bips'];
     }
 
-    public function setBips(float $bips): self
+    public function setBips(float $bips): static
     {
         $this->fields['bips'] = $bips;
 
@@ -106,7 +106,7 @@ class PercentageFormula extends FeeFormula
     /**
      * @psalm-param self::ROUND_*|null $round
      */
-    public function setRound(null|string $round): self
+    public function setRound(null|string $round): static
     {
         $this->fields['round'] = $round;
 
@@ -118,7 +118,7 @@ class PercentageFormula extends FeeFormula
         return $this->fields['minAmount'] ?? null;
     }
 
-    public function setMinAmount(null|float|string $minAmount): self
+    public function setMinAmount(null|float|string $minAmount): static
     {
         if (is_string($minAmount)) {
             $minAmount = (float) $minAmount;

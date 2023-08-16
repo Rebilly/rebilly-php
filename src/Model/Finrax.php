@@ -41,7 +41,7 @@ class Finrax extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(FinraxCredentials|array $credentials): self
+    public function setCredentials(FinraxCredentials|array $credentials): static
     {
         if (!($credentials instanceof FinraxCredentials)) {
             $credentials = FinraxCredentials::from($credentials);
@@ -57,7 +57,7 @@ class Finrax extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|FinraxSettings|array $settings): self
+    public function setSettings(null|FinraxSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof FinraxSettings)) {
             $settings = FinraxSettings::from($settings);

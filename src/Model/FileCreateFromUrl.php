@@ -55,7 +55,7 @@ class FileCreateFromUrl implements JsonSerializable
         return $this->fields['url'];
     }
 
-    public function setUrl(string $url): self
+    public function setUrl(string $url): static
     {
         $this->fields['url'] = $url;
 
@@ -67,7 +67,7 @@ class FileCreateFromUrl implements JsonSerializable
         return $this->fields['isPublic'] ?? null;
     }
 
-    public function setIsPublic(null|bool $isPublic): self
+    public function setIsPublic(null|bool $isPublic): static
     {
         $this->fields['isPublic'] = $isPublic;
 
@@ -79,7 +79,7 @@ class FileCreateFromUrl implements JsonSerializable
         return $this->fields['name'] ?? null;
     }
 
-    public function setName(null|string $name): self
+    public function setName(null|string $name): static
     {
         $this->fields['name'] = $name;
 
@@ -91,7 +91,7 @@ class FileCreateFromUrl implements JsonSerializable
         return $this->fields['description'] ?? null;
     }
 
-    public function setDescription(null|string $description): self
+    public function setDescription(null|string $description): static
     {
         $this->fields['description'] = $description;
 
@@ -109,7 +109,7 @@ class FileCreateFromUrl implements JsonSerializable
     /**
      * @psalm-param self::SOURCE_TYPE_*|null $sourceType
      */
-    public function setSourceType(null|string $sourceType): self
+    public function setSourceType(null|string $sourceType): static
     {
         $this->fields['sourceType'] = $sourceType;
 
@@ -127,7 +127,7 @@ class FileCreateFromUrl implements JsonSerializable
     /**
      * @param null|string[] $tags
      */
-    public function setTags(null|array $tags): self
+    public function setTags(null|array $tags): static
     {
         $tags = $tags !== null ? array_map(fn ($value) => $value ?? null, $tags) : null;
 

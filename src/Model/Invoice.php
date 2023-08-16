@@ -79,7 +79,7 @@ class Invoice extends CommonInvoice
         return $this->fields['customerId'];
     }
 
-    public function setCustomerId(string $customerId): self
+    public function setCustomerId(string $customerId): static
     {
         $this->fields['customerId'] = $customerId;
 
@@ -99,7 +99,7 @@ class Invoice extends CommonInvoice
         return $this->fields['retryInstruction'] ?? null;
     }
 
-    public function setRetryInstruction(null|InvoiceRetryInstruction|array $retryInstruction): self
+    public function setRetryInstruction(null|InvoiceRetryInstruction|array $retryInstruction): static
     {
         if ($retryInstruction !== null && !($retryInstruction instanceof InvoiceRetryInstruction)) {
             $retryInstruction = InvoiceRetryInstruction::from($retryInstruction);
@@ -186,7 +186,7 @@ class Invoice extends CommonInvoice
     /**
      * @param null|Transaction[] $transactions
      */
-    private function setTransactions(null|array $transactions): self
+    private function setTransactions(null|array $transactions): static
     {
         $transactions = $transactions !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Transaction ? $value : Transaction::from($value)) : null, $transactions) : null;
 
@@ -195,7 +195,7 @@ class Invoice extends CommonInvoice
         return $this;
     }
 
-    private function setRevision(null|int $revision): self
+    private function setRevision(null|int $revision): static
     {
         $this->fields['revision'] = $revision;
 
@@ -205,14 +205,14 @@ class Invoice extends CommonInvoice
     /**
      * @psalm-param self::TYPE_*|null $type
      */
-    private function setType(null|string $type): self
+    private function setType(null|string $type): static
     {
         $this->fields['type'] = $type;
 
         return $this;
     }
 
-    private function setDueReminderTime(null|DateTimeImmutable|string $dueReminderTime): self
+    private function setDueReminderTime(null|DateTimeImmutable|string $dueReminderTime): static
     {
         if ($dueReminderTime !== null && !($dueReminderTime instanceof DateTimeImmutable)) {
             $dueReminderTime = new DateTimeImmutable($dueReminderTime);
@@ -223,7 +223,7 @@ class Invoice extends CommonInvoice
         return $this;
     }
 
-    private function setDueReminderNumber(null|int $dueReminderNumber): self
+    private function setDueReminderNumber(null|int $dueReminderNumber): static
     {
         $this->fields['dueReminderNumber'] = $dueReminderNumber;
 
@@ -233,7 +233,7 @@ class Invoice extends CommonInvoice
     /**
      * @param null|array<CustomerLink|LeadSourceLink|OrganizationLink|RecalculateInvoiceLink|SelfLink|SubscriptionLink|TransactionAllocationsLink|WebsiteLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 
@@ -245,7 +245,7 @@ class Invoice extends CommonInvoice
     /**
      * @param null|array{customer:Customer,website:Website,organization:Organization,leadSource:LeadSource,shippingRate:ShippingRate} $embedded
      */
-    private function setEmbedded(null|array $embedded): self
+    private function setEmbedded(null|array $embedded): static
     {
         if ($embedded !== null) {
             $embedded['customer'] = isset($embedded['customer']) ? ($embedded['customer'] instanceof Customer ? $embedded['customer'] : Customer::from($embedded['customer'])) : null;

@@ -38,7 +38,7 @@ class Cashflows extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(CashflowsCredentials|array $credentials): self
+    public function setCredentials(CashflowsCredentials|array $credentials): static
     {
         if (!($credentials instanceof CashflowsCredentials)) {
             $credentials = CashflowsCredentials::from($credentials);

@@ -38,7 +38,7 @@ class JetPay extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(JetPayCredentials|array $credentials): self
+    public function setCredentials(JetPayCredentials|array $credentials): static
     {
         if (!($credentials instanceof JetPayCredentials)) {
             $credentials = JetPayCredentials::from($credentials);

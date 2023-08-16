@@ -45,7 +45,7 @@ class CitadelCredentials implements JsonSerializable
         return $this->fields['storeName'];
     }
 
-    public function setStoreName(string $storeName): self
+    public function setStoreName(string $storeName): static
     {
         $this->fields['storeName'] = $storeName;
 
@@ -57,7 +57,7 @@ class CitadelCredentials implements JsonSerializable
         return $this->fields['storeId'];
     }
 
-    public function setStoreId(string $storeId): self
+    public function setStoreId(string $storeId): static
     {
         $this->fields['storeId'] = $storeId;
 
@@ -69,7 +69,7 @@ class CitadelCredentials implements JsonSerializable
         return $this->fields['username'];
     }
 
-    public function setUsername(string $username): self
+    public function setUsername(string $username): static
     {
         $this->fields['username'] = $username;
 
@@ -81,7 +81,7 @@ class CitadelCredentials implements JsonSerializable
         return $this->fields['password'];
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password): static
     {
         $this->fields['password'] = $password;
 

@@ -36,7 +36,7 @@ class CleoCredentials implements JsonSerializable
         return $this->fields['accessToken'];
     }
 
-    public function setAccessToken(string $accessToken): self
+    public function setAccessToken(string $accessToken): static
     {
         $this->fields['accessToken'] = $accessToken;
 

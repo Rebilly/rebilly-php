@@ -38,7 +38,7 @@ class Loonie extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(LoonieCredentials|array $credentials): self
+    public function setCredentials(LoonieCredentials|array $credentials): static
     {
         if (!($credentials instanceof LoonieCredentials)) {
             $credentials = LoonieCredentials::from($credentials);

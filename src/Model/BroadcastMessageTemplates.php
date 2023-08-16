@@ -48,7 +48,7 @@ class BroadcastMessageTemplates implements JsonSerializable
         return $this->fields['from'];
     }
 
-    public function setFrom(string $from): self
+    public function setFrom(string $from): static
     {
         $this->fields['from'] = $from;
 
@@ -60,7 +60,7 @@ class BroadcastMessageTemplates implements JsonSerializable
         return $this->fields['subject'];
     }
 
-    public function setSubject(string $subject): self
+    public function setSubject(string $subject): static
     {
         $this->fields['subject'] = $subject;
 
@@ -72,7 +72,7 @@ class BroadcastMessageTemplates implements JsonSerializable
         return $this->fields['text'];
     }
 
-    public function setText(string $text): self
+    public function setText(string $text): static
     {
         $this->fields['text'] = $text;
 
@@ -84,7 +84,7 @@ class BroadcastMessageTemplates implements JsonSerializable
         return $this->fields['html'];
     }
 
-    public function setHtml(string $html): self
+    public function setHtml(string $html): static
     {
         $this->fields['html'] = $html;
 
@@ -96,7 +96,7 @@ class BroadcastMessageTemplates implements JsonSerializable
         return $this->fields['locale'];
     }
 
-    public function setLocale(string $locale): self
+    public function setLocale(string $locale): static
     {
         $this->fields['locale'] = $locale;
 

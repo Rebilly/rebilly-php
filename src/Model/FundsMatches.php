@@ -42,7 +42,7 @@ class FundsMatches implements JsonSerializable
         return $this->fields['firstName'] ?? null;
     }
 
-    public function setFirstName(null|string $firstName): self
+    public function setFirstName(null|string $firstName): static
     {
         $this->fields['firstName'] = $firstName;
 
@@ -54,7 +54,7 @@ class FundsMatches implements JsonSerializable
         return $this->fields['lastName'] ?? null;
     }
 
-    public function setLastName(null|string $lastName): self
+    public function setLastName(null|string $lastName): static
     {
         $this->fields['lastName'] = $lastName;
 
@@ -66,7 +66,7 @@ class FundsMatches implements JsonSerializable
         return $this->fields['documentSubtype'] ?? null;
     }
 
-    public function setDocumentSubtype(null|string $documentSubtype): self
+    public function setDocumentSubtype(null|string $documentSubtype): static
     {
         $this->fields['documentSubtype'] = $documentSubtype;
 

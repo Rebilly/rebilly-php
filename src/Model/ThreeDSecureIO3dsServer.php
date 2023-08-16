@@ -104,7 +104,7 @@ class ThreeDSecureIO3dsServer implements JsonSerializable
         return $this->fields['acquirerMerchantIdVisa'];
     }
 
-    public function setAcquirerMerchantIdVisa(string $acquirerMerchantIdVisa): self
+    public function setAcquirerMerchantIdVisa(string $acquirerMerchantIdVisa): static
     {
         $this->fields['acquirerMerchantIdVisa'] = $acquirerMerchantIdVisa;
 
@@ -116,7 +116,7 @@ class ThreeDSecureIO3dsServer implements JsonSerializable
         return $this->fields['acquirerMerchantIdMastercard'];
     }
 
-    public function setAcquirerMerchantIdMastercard(string $acquirerMerchantIdMastercard): self
+    public function setAcquirerMerchantIdMastercard(string $acquirerMerchantIdMastercard): static
     {
         $this->fields['acquirerMerchantIdMastercard'] = $acquirerMerchantIdMastercard;
 
@@ -128,7 +128,7 @@ class ThreeDSecureIO3dsServer implements JsonSerializable
         return $this->fields['merchantName'];
     }
 
-    public function setMerchantName(string $merchantName): self
+    public function setMerchantName(string $merchantName): static
     {
         $this->fields['merchantName'] = $merchantName;
 
@@ -140,7 +140,7 @@ class ThreeDSecureIO3dsServer implements JsonSerializable
         return $this->fields['merchantAcquirerBinVisa'];
     }
 
-    public function setMerchantAcquirerBinVisa(string $merchantAcquirerBinVisa): self
+    public function setMerchantAcquirerBinVisa(string $merchantAcquirerBinVisa): static
     {
         $this->fields['merchantAcquirerBinVisa'] = $merchantAcquirerBinVisa;
 
@@ -152,7 +152,7 @@ class ThreeDSecureIO3dsServer implements JsonSerializable
         return $this->fields['merchantAcquirerBinMastercard'];
     }
 
-    public function setMerchantAcquirerBinMastercard(string $merchantAcquirerBinMastercard): self
+    public function setMerchantAcquirerBinMastercard(string $merchantAcquirerBinMastercard): static
     {
         $this->fields['merchantAcquirerBinMastercard'] = $merchantAcquirerBinMastercard;
 
@@ -164,7 +164,7 @@ class ThreeDSecureIO3dsServer implements JsonSerializable
         return $this->fields['merchantCountry'];
     }
 
-    public function setMerchantCountry(string $merchantCountry): self
+    public function setMerchantCountry(string $merchantCountry): static
     {
         $this->fields['merchantCountry'] = $merchantCountry;
 
@@ -176,7 +176,7 @@ class ThreeDSecureIO3dsServer implements JsonSerializable
         return $this->fields['merchantUrl'];
     }
 
-    public function setMerchantUrl(string $merchantUrl): self
+    public function setMerchantUrl(string $merchantUrl): static
     {
         $this->fields['merchantUrl'] = $merchantUrl;
 
@@ -188,7 +188,7 @@ class ThreeDSecureIO3dsServer implements JsonSerializable
         return $this->fields['v1'] ?? null;
     }
 
-    public function setV1(null|bool $v1): self
+    public function setV1(null|bool $v1): static
     {
         $this->fields['v1'] = $v1;
 
@@ -200,7 +200,7 @@ class ThreeDSecureIO3dsServer implements JsonSerializable
         return $this->fields['v2'] ?? null;
     }
 
-    public function setV2(null|bool $v2): self
+    public function setV2(null|bool $v2): static
     {
         $this->fields['v2'] = $v2;
 
@@ -218,7 +218,7 @@ class ThreeDSecureIO3dsServer implements JsonSerializable
     /**
      * @psalm-param self::TRANSACTION_TYPE_*|null $transactionType
      */
-    public function setTransactionType(null|string $transactionType): self
+    public function setTransactionType(null|string $transactionType): static
     {
         $this->fields['transactionType'] = $transactionType;
 
@@ -230,7 +230,7 @@ class ThreeDSecureIO3dsServer implements JsonSerializable
         return $this->fields['declineNotEnrolled'] ?? null;
     }
 
-    public function setDeclineNotEnrolled(null|bool $declineNotEnrolled): self
+    public function setDeclineNotEnrolled(null|bool $declineNotEnrolled): static
     {
         $this->fields['declineNotEnrolled'] = $declineNotEnrolled;
 
@@ -242,7 +242,7 @@ class ThreeDSecureIO3dsServer implements JsonSerializable
         return $this->fields['use3dsForMerchantInitiated'] ?? null;
     }
 
-    public function setUse3dsForMerchantInitiated(null|bool $use3dsForMerchantInitiated): self
+    public function setUse3dsForMerchantInitiated(null|bool $use3dsForMerchantInitiated): static
     {
         $this->fields['use3dsForMerchantInitiated'] = $use3dsForMerchantInitiated;
 
@@ -260,7 +260,7 @@ class ThreeDSecureIO3dsServer implements JsonSerializable
     /**
      * @psalm-param self::THREE_RI_IND_*|null $threeRIInd
      */
-    public function setThreeRIInd(null|string $threeRIInd): self
+    public function setThreeRIInd(null|string $threeRIInd): static
     {
         $this->fields['threeRIInd'] = $threeRIInd;
 

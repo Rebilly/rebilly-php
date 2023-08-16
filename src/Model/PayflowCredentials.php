@@ -42,7 +42,7 @@ class PayflowCredentials implements JsonSerializable
         return $this->fields['user'];
     }
 
-    public function setUser(string $user): self
+    public function setUser(string $user): static
     {
         $this->fields['user'] = $user;
 
@@ -54,7 +54,7 @@ class PayflowCredentials implements JsonSerializable
         return $this->fields['vendor'];
     }
 
-    public function setVendor(string $vendor): self
+    public function setVendor(string $vendor): static
     {
         $this->fields['vendor'] = $vendor;
 
@@ -66,7 +66,7 @@ class PayflowCredentials implements JsonSerializable
         return $this->fields['password'];
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password): static
     {
         $this->fields['password'] = $password;
 

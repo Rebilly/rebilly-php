@@ -44,7 +44,7 @@ class CreateIntuitQuickbooksRefundReceipt extends RuleAction
         return $this->fields['depositAccount'];
     }
 
-    public function setDepositAccount(string $depositAccount): self
+    public function setDepositAccount(string $depositAccount): static
     {
         $this->fields['depositAccount'] = $depositAccount;
 
@@ -56,7 +56,7 @@ class CreateIntuitQuickbooksRefundReceipt extends RuleAction
         return $this->fields['department'] ?? null;
     }
 
-    public function setDepartment(null|string $department): self
+    public function setDepartment(null|string $department): static
     {
         $this->fields['department'] = $department;
 
@@ -68,7 +68,7 @@ class CreateIntuitQuickbooksRefundReceipt extends RuleAction
         return $this->fields['credentialHash'];
     }
 
-    public function setCredentialHash(string $credentialHash): self
+    public function setCredentialHash(string $credentialHash): static
     {
         $this->fields['credentialHash'] = $credentialHash;
 

@@ -38,7 +38,7 @@ class Sofort extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(SofortCredentials|array $credentials): self
+    public function setCredentials(SofortCredentials|array $credentials): static
     {
         if (!($credentials instanceof SofortCredentials)) {
             $credentials = SofortCredentials::from($credentials);

@@ -38,7 +38,7 @@ class CouponExpiration implements JsonSerializable
         return $this->fields['expiredTime'];
     }
 
-    public function setExpiredTime(DateTimeImmutable|string $expiredTime): self
+    public function setExpiredTime(DateTimeImmutable|string $expiredTime): static
     {
         if (!($expiredTime instanceof DateTimeImmutable)) {
             $expiredTime = new DateTimeImmutable($expiredTime);

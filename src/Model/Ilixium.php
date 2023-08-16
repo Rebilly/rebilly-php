@@ -44,7 +44,7 @@ class Ilixium extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(IlixiumCredentials|array $credentials): self
+    public function setCredentials(IlixiumCredentials|array $credentials): static
     {
         if (!($credentials instanceof IlixiumCredentials)) {
             $credentials = IlixiumCredentials::from($credentials);
@@ -60,7 +60,7 @@ class Ilixium extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|IlixiumSettings|array $settings): self
+    public function setSettings(null|IlixiumSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof IlixiumSettings)) {
             $settings = IlixiumSettings::from($settings);
@@ -76,7 +76,7 @@ class Ilixium extends GatewayAccount
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|Ilixium3dsServers|array $threeDSecureServer): self
+    public function setThreeDSecureServer(null|Ilixium3dsServers|array $threeDSecureServer): static
     {
         if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Ilixium3dsServers)) {
             $threeDSecureServer = Ilixium3dsServers::from($threeDSecureServer);

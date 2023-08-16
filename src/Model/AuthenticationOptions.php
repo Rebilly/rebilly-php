@@ -48,7 +48,7 @@ class AuthenticationOptions implements JsonSerializable
         return $this->fields['passwordPattern'] ?? null;
     }
 
-    public function setPasswordPattern(null|string $passwordPattern): self
+    public function setPasswordPattern(null|string $passwordPattern): static
     {
         $this->fields['passwordPattern'] = $passwordPattern;
 
@@ -60,7 +60,7 @@ class AuthenticationOptions implements JsonSerializable
         return $this->fields['credentialTtl'] ?? null;
     }
 
-    public function setCredentialTtl(null|int $credentialTtl): self
+    public function setCredentialTtl(null|int $credentialTtl): static
     {
         $this->fields['credentialTtl'] = $credentialTtl;
 
@@ -72,7 +72,7 @@ class AuthenticationOptions implements JsonSerializable
         return $this->fields['authTokenTtl'] ?? null;
     }
 
-    public function setAuthTokenTtl(null|int $authTokenTtl): self
+    public function setAuthTokenTtl(null|int $authTokenTtl): static
     {
         $this->fields['authTokenTtl'] = $authTokenTtl;
 
@@ -84,7 +84,7 @@ class AuthenticationOptions implements JsonSerializable
         return $this->fields['resetTokenTtl'] ?? null;
     }
 
-    public function setResetTokenTtl(null|int $resetTokenTtl): self
+    public function setResetTokenTtl(null|int $resetTokenTtl): static
     {
         $this->fields['resetTokenTtl'] = $resetTokenTtl;
 
@@ -96,7 +96,7 @@ class AuthenticationOptions implements JsonSerializable
         return $this->fields['otpRequired'] ?? null;
     }
 
-    public function setOtpRequired(null|bool $otpRequired): self
+    public function setOtpRequired(null|bool $otpRequired): static
     {
         $this->fields['otpRequired'] = $otpRequired;
 

@@ -38,7 +38,7 @@ class Flexepin extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(FlexepinCredentials|array $credentials): self
+    public function setCredentials(FlexepinCredentials|array $credentials): static
     {
         if (!($credentials instanceof FlexepinCredentials)) {
             $credentials = FlexepinCredentials::from($credentials);

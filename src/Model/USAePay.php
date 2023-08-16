@@ -38,7 +38,7 @@ class USAePay extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(USAePayCredentials|array $credentials): self
+    public function setCredentials(USAePayCredentials|array $credentials): static
     {
         if (!($credentials instanceof USAePayCredentials)) {
             $credentials = USAePayCredentials::from($credentials);

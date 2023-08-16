@@ -36,7 +36,7 @@ class AsiaPaymentGatewaySettings implements JsonSerializable
         return $this->fields['use3DSEndpoint'] ?? null;
     }
 
-    public function setUse3DSEndpoint(null|bool $use3DSEndpoint): self
+    public function setUse3DSEndpoint(null|bool $use3DSEndpoint): static
     {
         $this->fields['use3DSEndpoint'] = $use3DSEndpoint;
 

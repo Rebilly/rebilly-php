@@ -38,7 +38,7 @@ class ResendEmail extends TimelineAction
         return $this->fields['messageId'] ?? null;
     }
 
-    public function setMessageId(null|string $messageId): self
+    public function setMessageId(null|string $messageId): static
     {
         $this->fields['messageId'] = $messageId;
 

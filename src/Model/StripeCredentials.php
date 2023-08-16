@@ -39,7 +39,7 @@ class StripeCredentials implements JsonSerializable
         return $this->fields['stripeClientId'] ?? null;
     }
 
-    public function setStripeClientId(null|string $stripeClientId): self
+    public function setStripeClientId(null|string $stripeClientId): static
     {
         $this->fields['stripeClientId'] = $stripeClientId;
 
@@ -51,7 +51,7 @@ class StripeCredentials implements JsonSerializable
         return $this->fields['stripeSecret'] ?? null;
     }
 
-    public function setStripeSecret(null|string $stripeSecret): self
+    public function setStripeSecret(null|string $stripeSecret): static
     {
         $this->fields['stripeSecret'] = $stripeSecret;
 

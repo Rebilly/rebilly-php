@@ -39,7 +39,7 @@ class MembershipUser implements JsonSerializable
         return $this->fields['id'] ?? null;
     }
 
-    public function setId(null|string $id): self
+    public function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -51,7 +51,7 @@ class MembershipUser implements JsonSerializable
         return $this->fields['name'] ?? null;
     }
 
-    public function setName(null|string $name): self
+    public function setName(null|string $name): static
     {
         $this->fields['name'] = $name;
 

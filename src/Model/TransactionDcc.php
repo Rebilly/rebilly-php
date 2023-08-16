@@ -51,7 +51,7 @@ class TransactionDcc implements JsonSerializable
         return $this->fields['base'] ?? null;
     }
 
-    public function setBase(null|Money|array $base): self
+    public function setBase(null|Money|array $base): static
     {
         if ($base !== null && !($base instanceof Money)) {
             $base = Money::from($base);
@@ -67,7 +67,7 @@ class TransactionDcc implements JsonSerializable
         return $this->fields['quote'] ?? null;
     }
 
-    public function setQuote(null|Money|array $quote): self
+    public function setQuote(null|Money|array $quote): static
     {
         if ($quote !== null && !($quote instanceof Money)) {
             $quote = Money::from($quote);
@@ -83,7 +83,7 @@ class TransactionDcc implements JsonSerializable
         return $this->fields['usdMarkup'] ?? null;
     }
 
-    public function setUsdMarkup(null|float $usdMarkup): self
+    public function setUsdMarkup(null|float $usdMarkup): static
     {
         $this->fields['usdMarkup'] = $usdMarkup;
 
@@ -101,7 +101,7 @@ class TransactionDcc implements JsonSerializable
     /**
      * @psalm-param self::OUTCOME_*|null $outcome
      */
-    public function setOutcome(null|string $outcome): self
+    public function setOutcome(null|string $outcome): static
     {
         $this->fields['outcome'] = $outcome;
 

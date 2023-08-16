@@ -53,7 +53,7 @@ class CheckoutFormPlan implements JsonSerializable
         return $this->fields['planId'];
     }
 
-    public function setPlanId(string $planId): self
+    public function setPlanId(string $planId): static
     {
         $this->fields['planId'] = $planId;
 
@@ -71,7 +71,7 @@ class CheckoutFormPlan implements JsonSerializable
     /**
      * @psalm-param self::TYPE_* $type
      */
-    public function setType(string $type): self
+    public function setType(string $type): static
     {
         $this->fields['type'] = $type;
 
@@ -83,7 +83,7 @@ class CheckoutFormPlan implements JsonSerializable
         return $this->fields['quantity'];
     }
 
-    public function setQuantity(int $quantity): self
+    public function setQuantity(int $quantity): static
     {
         $this->fields['quantity'] = $quantity;
 
@@ -95,7 +95,7 @@ class CheckoutFormPlan implements JsonSerializable
         return $this->fields['minimum'] ?? null;
     }
 
-    public function setMinimum(null|int $minimum): self
+    public function setMinimum(null|int $minimum): static
     {
         $this->fields['minimum'] = $minimum;
 
@@ -107,7 +107,7 @@ class CheckoutFormPlan implements JsonSerializable
         return $this->fields['multipleOf'] ?? null;
     }
 
-    public function setMultipleOf(null|int $multipleOf): self
+    public function setMultipleOf(null|int $multipleOf): static
     {
         $this->fields['multipleOf'] = $multipleOf;
 
@@ -119,7 +119,7 @@ class CheckoutFormPlan implements JsonSerializable
         return $this->fields['maximum'] ?? null;
     }
 
-    public function setMaximum(null|int $maximum): self
+    public function setMaximum(null|int $maximum): static
     {
         $this->fields['maximum'] = $maximum;
 

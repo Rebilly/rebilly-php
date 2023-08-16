@@ -77,7 +77,7 @@ abstract class CommonPayPalAccount extends PaymentInstrument
     /**
      * @psalm-param self::METHOD_*|null $method
      */
-    public function setMethod(null|string $method): self
+    public function setMethod(null|string $method): static
     {
         $this->fields['method'] = $method;
 
@@ -89,7 +89,7 @@ abstract class CommonPayPalAccount extends PaymentInstrument
         return $this->fields['billingAddress'] ?? null;
     }
 
-    public function setBillingAddress(null|ContactObject|array $billingAddress): self
+    public function setBillingAddress(null|ContactObject|array $billingAddress): static
     {
         if ($billingAddress !== null && !($billingAddress instanceof ContactObject)) {
             $billingAddress = ContactObject::from($billingAddress);
@@ -118,7 +118,7 @@ abstract class CommonPayPalAccount extends PaymentInstrument
         return $this->fields['useAsBackup'] ?? null;
     }
 
-    public function setUseAsBackup(null|bool $useAsBackup): self
+    public function setUseAsBackup(null|bool $useAsBackup): static
     {
         $this->fields['useAsBackup'] = $useAsBackup;
 
@@ -140,7 +140,7 @@ abstract class CommonPayPalAccount extends PaymentInstrument
         return $this->fields['customFields'] ?? null;
     }
 
-    public function setCustomFields(null|array $customFields): self
+    public function setCustomFields(null|array $customFields): static
     {
         $this->fields['customFields'] = $customFields;
 
@@ -181,14 +181,14 @@ abstract class CommonPayPalAccount extends PaymentInstrument
         return parent::jsonSerialize() + $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setUsername(null|string $username): self
+    private function setUsername(null|string $username): static
     {
         $this->fields['username'] = $username;
 
@@ -198,14 +198,14 @@ abstract class CommonPayPalAccount extends PaymentInstrument
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    private function setStatus(null|string $status): self
+    private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -216,7 +216,7 @@ abstract class CommonPayPalAccount extends PaymentInstrument
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);

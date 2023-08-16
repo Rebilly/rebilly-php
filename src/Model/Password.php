@@ -67,7 +67,7 @@ class Password extends AuthenticationToken
         return $this->fields['username'];
     }
 
-    public function setUsername(string $username): self
+    public function setUsername(string $username): static
     {
         $this->fields['username'] = $username;
 
@@ -79,7 +79,7 @@ class Password extends AuthenticationToken
         return $this->fields['password'];
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password): static
     {
         $this->fields['password'] = $password;
 
@@ -97,7 +97,7 @@ class Password extends AuthenticationToken
     /**
      * @psalm-param self::MODE_*|null $mode
      */
-    public function setMode(null|string $mode): self
+    public function setMode(null|string $mode): static
     {
         $this->fields['mode'] = $mode;
 
@@ -114,7 +114,7 @@ class Password extends AuthenticationToken
         return $this->fields['expiredTime'] ?? null;
     }
 
-    public function setExpiredTime(null|DateTimeImmutable|string $expiredTime): self
+    public function setExpiredTime(null|DateTimeImmutable|string $expiredTime): static
     {
         if ($expiredTime !== null && !($expiredTime instanceof DateTimeImmutable)) {
             $expiredTime = new DateTimeImmutable($expiredTime);
@@ -143,7 +143,7 @@ class Password extends AuthenticationToken
         return $this->fields['otpRequired'] ?? null;
     }
 
-    public function setOtpRequired(null|bool $otpRequired): self
+    public function setOtpRequired(null|bool $otpRequired): static
     {
         $this->fields['otpRequired'] = $otpRequired;
 
@@ -189,7 +189,7 @@ class Password extends AuthenticationToken
         return parent::jsonSerialize() + $data;
     }
 
-    private function setCustomerId(null|string $customerId): self
+    private function setCustomerId(null|string $customerId): static
     {
         $this->fields['customerId'] = $customerId;
 
@@ -199,7 +199,7 @@ class Password extends AuthenticationToken
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 
@@ -208,14 +208,14 @@ class Password extends AuthenticationToken
         return $this;
     }
 
-    private function setToken(null|string $token): self
+    private function setToken(null|string $token): static
     {
         $this->fields['token'] = $token;
 
         return $this;
     }
 
-    private function setCredentialId(null|string $credentialId): self
+    private function setCredentialId(null|string $credentialId): static
     {
         $this->fields['credentialId'] = $credentialId;
 

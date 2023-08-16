@@ -52,7 +52,7 @@ class AchPlaidFeature implements JsonSerializable
     /**
      * @psalm-param self::NAME_*|null $name
      */
-    public function setName(null|string $name): self
+    public function setName(null|string $name): static
     {
         $this->fields['name'] = $name;
 
@@ -64,7 +64,7 @@ class AchPlaidFeature implements JsonSerializable
         return $this->fields['linkToken'] ?? null;
     }
 
-    public function setLinkToken(null|string $linkToken): self
+    public function setLinkToken(null|string $linkToken): static
     {
         $this->fields['linkToken'] = $linkToken;
 
@@ -76,7 +76,7 @@ class AchPlaidFeature implements JsonSerializable
         return $this->fields['expirationTime'] ?? null;
     }
 
-    public function setExpirationTime(null|DateTimeImmutable|string $expirationTime): self
+    public function setExpirationTime(null|DateTimeImmutable|string $expirationTime): static
     {
         if ($expirationTime !== null && !($expirationTime instanceof DateTimeImmutable)) {
             $expirationTime = new DateTimeImmutable($expirationTime);

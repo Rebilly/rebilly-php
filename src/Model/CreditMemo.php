@@ -42,7 +42,7 @@ class CreditMemo extends CommonCreditMemo
         return $this->fields['customerId'];
     }
 
-    public function setCustomerId(string $customerId): self
+    public function setCustomerId(string $customerId): static
     {
         $this->fields['customerId'] = $customerId;
 
@@ -54,7 +54,7 @@ class CreditMemo extends CommonCreditMemo
         return $this->fields['currency'];
     }
 
-    public function setCurrency(string $currency): self
+    public function setCurrency(string $currency): static
     {
         $this->fields['currency'] = $currency;
 
@@ -66,7 +66,7 @@ class CreditMemo extends CommonCreditMemo
         return $this->fields['invoiceId'] ?? null;
     }
 
-    public function setInvoiceId(null|string $invoiceId): self
+    public function setInvoiceId(null|string $invoiceId): static
     {
         $this->fields['invoiceId'] = $invoiceId;
 

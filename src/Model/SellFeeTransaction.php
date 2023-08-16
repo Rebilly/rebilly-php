@@ -44,7 +44,7 @@ class SellFeeTransaction extends BalanceTransaction
         return $this->fields['feeDetails'] ?? null;
     }
 
-    public function setFeeDetails(null|FeeDetails|array $feeDetails): self
+    public function setFeeDetails(null|FeeDetails|array $feeDetails): static
     {
         if ($feeDetails !== null && !($feeDetails instanceof FeeDetails)) {
             $feeDetails = FeeDetails::from($feeDetails);
@@ -90,7 +90,7 @@ class SellFeeTransaction extends BalanceTransaction
     /**
      * @param null|array<ParentLink|SelfLink|TransactionLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 
@@ -102,7 +102,7 @@ class SellFeeTransaction extends BalanceTransaction
     /**
      * @param null|array{transaction:BalanceTransaction,transaction:Transaction} $embedded
      */
-    private function setEmbedded(null|array $embedded): self
+    private function setEmbedded(null|array $embedded): static
     {
         if ($embedded !== null) {
             $embedded['transaction'] = isset($embedded['transaction']) ? ($embedded['transaction'] instanceof BalanceTransaction ? $embedded['transaction'] : BalanceTransaction::from($embedded['transaction'])) : null;

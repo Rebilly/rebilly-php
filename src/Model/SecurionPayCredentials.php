@@ -36,7 +36,7 @@ class SecurionPayCredentials implements JsonSerializable
         return $this->fields['secretApiKey'];
     }
 
-    public function setSecretApiKey(string $secretApiKey): self
+    public function setSecretApiKey(string $secretApiKey): static
     {
         $this->fields['secretApiKey'] = $secretApiKey;
 

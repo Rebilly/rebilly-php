@@ -54,7 +54,7 @@ class SettlementPeriod implements JsonSerializable
     /**
      * @psalm-param self::METHOD_* $method
      */
-    public function setMethod(string $method): self
+    public function setMethod(string $method): static
     {
         $this->fields['method'] = $method;
 
@@ -66,7 +66,7 @@ class SettlementPeriod implements JsonSerializable
         return $this->fields['duration'];
     }
 
-    public function setDuration(int $duration): self
+    public function setDuration(int $duration): static
     {
         $this->fields['duration'] = $duration;
 
@@ -78,7 +78,7 @@ class SettlementPeriod implements JsonSerializable
         return $this->fields['unit'];
     }
 
-    public function setUnit(string|TimeUnit|TimePluralUnit $unit): self
+    public function setUnit(string|TimeUnit|TimePluralUnit $unit): static
     {
         $unit = $this->ensureUnit($unit);
 
@@ -92,7 +92,7 @@ class SettlementPeriod implements JsonSerializable
         return $this->fields['anchor'] ?? null;
     }
 
-    public function setAnchor(null|SettlementPeriodAnchor|array $anchor): self
+    public function setAnchor(null|SettlementPeriodAnchor|array $anchor): static
     {
         if ($anchor !== null && !($anchor instanceof SettlementPeriodAnchor)) {
             $anchor = SettlementPeriodAnchor::from($anchor);

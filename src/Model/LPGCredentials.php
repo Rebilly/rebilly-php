@@ -45,7 +45,7 @@ class LPGCredentials implements JsonSerializable
         return $this->fields['publicKey'];
     }
 
-    public function setPublicKey(string $publicKey): self
+    public function setPublicKey(string $publicKey): static
     {
         $this->fields['publicKey'] = $publicKey;
 
@@ -57,7 +57,7 @@ class LPGCredentials implements JsonSerializable
         return $this->fields['secureKey'];
     }
 
-    public function setSecureKey(string $secureKey): self
+    public function setSecureKey(string $secureKey): static
     {
         $this->fields['secureKey'] = $secureKey;
 
@@ -69,7 +69,7 @@ class LPGCredentials implements JsonSerializable
         return $this->fields['payoutUsername'] ?? null;
     }
 
-    public function setPayoutUsername(null|string $payoutUsername): self
+    public function setPayoutUsername(null|string $payoutUsername): static
     {
         $this->fields['payoutUsername'] = $payoutUsername;
 
@@ -81,7 +81,7 @@ class LPGCredentials implements JsonSerializable
         return $this->fields['payoutPassword'] ?? null;
     }
 
-    public function setPayoutPassword(null|string $payoutPassword): self
+    public function setPayoutPassword(null|string $payoutPassword): static
     {
         $this->fields['payoutPassword'] = $payoutPassword;
 

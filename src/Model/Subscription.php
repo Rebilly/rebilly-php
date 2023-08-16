@@ -64,7 +64,7 @@ abstract class Subscription implements JsonSerializable
     /**
      * @psalm-param self::ORDER_TYPE_*|null $orderType
      */
-    private function setOrderType(null|string $orderType): self
+    private function setOrderType(null|string $orderType): static
     {
         $this->fields['orderType'] = $orderType;
 

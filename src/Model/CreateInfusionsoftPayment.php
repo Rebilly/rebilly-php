@@ -41,7 +41,7 @@ class CreateInfusionsoftPayment extends RuleAction
         return $this->fields['paymentBody'] ?? null;
     }
 
-    public function setPaymentBody(null|array $paymentBody): self
+    public function setPaymentBody(null|array $paymentBody): static
     {
         $this->fields['paymentBody'] = $paymentBody;
 
@@ -53,7 +53,7 @@ class CreateInfusionsoftPayment extends RuleAction
         return $this->fields['credentialHash'];
     }
 
-    public function setCredentialHash(string $credentialHash): self
+    public function setCredentialHash(string $credentialHash): static
     {
         $this->fields['credentialHash'] = $credentialHash;
 

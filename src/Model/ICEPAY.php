@@ -38,7 +38,7 @@ class ICEPAY extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(ICEPAYCredentials|array $credentials): self
+    public function setCredentials(ICEPAYCredentials|array $credentials): static
     {
         if (!($credentials instanceof ICEPAYCredentials)) {
             $credentials = ICEPAYCredentials::from($credentials);

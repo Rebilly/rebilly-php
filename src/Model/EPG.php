@@ -38,7 +38,7 @@ class EPG extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(EPGCredentials|array $credentials): self
+    public function setCredentials(EPGCredentials|array $credentials): static
     {
         if (!($credentials instanceof EPGCredentials)) {
             $credentials = EPGCredentials::from($credentials);

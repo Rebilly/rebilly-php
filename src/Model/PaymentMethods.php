@@ -48,7 +48,7 @@ class PaymentMethods extends PaymentInstruction
     /**
      * @param null|PaymentMethod[] $methods
      */
-    public function setMethods(null|array $methods): self
+    public function setMethods(null|array $methods): static
     {
         $methods = $methods !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof PaymentMethod ? $value : PaymentMethod::from($value)) : null, $methods) : null;
 
@@ -62,7 +62,7 @@ class PaymentMethods extends PaymentInstruction
         return $this->fields['receivedBy'] ?? null;
     }
 
-    public function setReceivedBy(null|string $receivedBy): self
+    public function setReceivedBy(null|string $receivedBy): static
     {
         $this->fields['receivedBy'] = $receivedBy;
 
@@ -74,7 +74,7 @@ class PaymentMethods extends PaymentInstruction
         return $this->fields['reference'] ?? null;
     }
 
-    public function setReference(null|string $reference): self
+    public function setReference(null|string $reference): static
     {
         $this->fields['reference'] = $reference;
 

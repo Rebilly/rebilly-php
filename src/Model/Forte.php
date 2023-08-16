@@ -38,7 +38,7 @@ class Forte extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(ForteCredentials|array $credentials): self
+    public function setCredentials(ForteCredentials|array $credentials): static
     {
         if (!($credentials instanceof ForteCredentials)) {
             $credentials = ForteCredentials::from($credentials);

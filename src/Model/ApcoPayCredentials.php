@@ -45,7 +45,7 @@ class ApcoPayCredentials implements JsonSerializable
         return $this->fields['profileID'];
     }
 
-    public function setProfileID(string $profileID): self
+    public function setProfileID(string $profileID): static
     {
         $this->fields['profileID'] = $profileID;
 
@@ -57,7 +57,7 @@ class ApcoPayCredentials implements JsonSerializable
         return $this->fields['secretWord'];
     }
 
-    public function setSecretWord(string $secretWord): self
+    public function setSecretWord(string $secretWord): static
     {
         $this->fields['secretWord'] = $secretWord;
 
@@ -69,7 +69,7 @@ class ApcoPayCredentials implements JsonSerializable
         return $this->fields['MerchantID'];
     }
 
-    public function setMerchantID(string $merchantID): self
+    public function setMerchantID(string $merchantID): static
     {
         $this->fields['MerchantID'] = $merchantID;
 
@@ -81,7 +81,7 @@ class ApcoPayCredentials implements JsonSerializable
         return $this->fields['MerchantPassword'];
     }
 
-    public function setMerchantPassword(string $merchantPassword): self
+    public function setMerchantPassword(string $merchantPassword): static
     {
         $this->fields['MerchantPassword'] = $merchantPassword;
 

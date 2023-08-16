@@ -45,7 +45,7 @@ class RealexCredentials implements JsonSerializable
         return $this->fields['merchantId'];
     }
 
-    public function setMerchantId(string $merchantId): self
+    public function setMerchantId(string $merchantId): static
     {
         $this->fields['merchantId'] = $merchantId;
 
@@ -57,7 +57,7 @@ class RealexCredentials implements JsonSerializable
         return $this->fields['secretKey'];
     }
 
-    public function setSecretKey(string $secretKey): self
+    public function setSecretKey(string $secretKey): static
     {
         $this->fields['secretKey'] = $secretKey;
 
@@ -69,7 +69,7 @@ class RealexCredentials implements JsonSerializable
         return $this->fields['rebatePassword'];
     }
 
-    public function setRebatePassword(string $rebatePassword): self
+    public function setRebatePassword(string $rebatePassword): static
     {
         $this->fields['rebatePassword'] = $rebatePassword;
 
@@ -81,7 +81,7 @@ class RealexCredentials implements JsonSerializable
         return $this->fields['account'];
     }
 
-    public function setAccount(string $account): self
+    public function setAccount(string $account): static
     {
         $this->fields['account'] = $account;
 

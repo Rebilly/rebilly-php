@@ -36,7 +36,7 @@ class CreateIntuitQuickbooksInvoice extends UpdateIntuitQuickbooksInvoice
         return $this->fields['customerDisplayName'];
     }
 
-    public function setCustomerDisplayName(string $customerDisplayName): self
+    public function setCustomerDisplayName(string $customerDisplayName): static
     {
         $this->fields['customerDisplayName'] = $customerDisplayName;
 

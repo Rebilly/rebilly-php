@@ -111,7 +111,7 @@ abstract class CommonCreditMemo implements JsonSerializable
         return $this->fields['allocations'] ?? null;
     }
 
-    public function setAllocations(null|CommonCreditMemoAllocations|array $allocations): self
+    public function setAllocations(null|CommonCreditMemoAllocations|array $allocations): static
     {
         if ($allocations !== null && !($allocations instanceof CommonCreditMemoAllocations)) {
             $allocations = CommonCreditMemoAllocations::from($allocations);
@@ -133,7 +133,7 @@ abstract class CommonCreditMemo implements JsonSerializable
     /**
      * @param null|CommonCreditMemoItems[] $items
      */
-    public function setItems(null|array $items): self
+    public function setItems(null|array $items): static
     {
         $items = $items !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof CommonCreditMemoItems ? $value : CommonCreditMemoItems::from($value)) : null, $items) : null;
 
@@ -161,7 +161,7 @@ abstract class CommonCreditMemo implements JsonSerializable
     /**
      * @psalm-param self::REASON_*|null $reason
      */
-    public function setReason(null|string $reason): self
+    public function setReason(null|string $reason): static
     {
         $this->fields['reason'] = $reason;
 
@@ -173,7 +173,7 @@ abstract class CommonCreditMemo implements JsonSerializable
         return $this->fields['description'] ?? null;
     }
 
-    public function setDescription(null|string $description): self
+    public function setDescription(null|string $description): static
     {
         $this->fields['description'] = $description;
 
@@ -185,7 +185,7 @@ abstract class CommonCreditMemo implements JsonSerializable
         return $this->fields['shippingAmount'] ?? null;
     }
 
-    public function setShippingAmount(null|float|string $shippingAmount): self
+    public function setShippingAmount(null|float|string $shippingAmount): static
     {
         if (is_string($shippingAmount)) {
             $shippingAmount = (float) $shippingAmount;
@@ -201,7 +201,7 @@ abstract class CommonCreditMemo implements JsonSerializable
         return $this->fields['taxAmount'] ?? null;
     }
 
-    public function setTaxAmount(null|float|string $taxAmount): self
+    public function setTaxAmount(null|float|string $taxAmount): static
     {
         if (is_string($taxAmount)) {
             $taxAmount = (float) $taxAmount;
@@ -297,14 +297,14 @@ abstract class CommonCreditMemo implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setNumber(null|int $number): self
+    private function setNumber(null|int $number): static
     {
         $this->fields['number'] = $number;
 
@@ -314,14 +314,14 @@ abstract class CommonCreditMemo implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    private function setStatus(null|string $status): self
+    private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
         return $this;
     }
 
-    private function setTotalAmount(null|float|string $totalAmount): self
+    private function setTotalAmount(null|float|string $totalAmount): static
     {
         if (is_string($totalAmount)) {
             $totalAmount = (float) $totalAmount;
@@ -332,7 +332,7 @@ abstract class CommonCreditMemo implements JsonSerializable
         return $this;
     }
 
-    private function setUnusedAmount(null|float|string $unusedAmount): self
+    private function setUnusedAmount(null|float|string $unusedAmount): static
     {
         if (is_string($unusedAmount)) {
             $unusedAmount = (float) $unusedAmount;
@@ -343,14 +343,14 @@ abstract class CommonCreditMemo implements JsonSerializable
         return $this;
     }
 
-    private function setRevision(null|int $revision): self
+    private function setRevision(null|int $revision): static
     {
         $this->fields['revision'] = $revision;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -361,7 +361,7 @@ abstract class CommonCreditMemo implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -375,7 +375,7 @@ abstract class CommonCreditMemo implements JsonSerializable
     /**
      * @param null|array<CustomerLink|InvoiceLink|SelfLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 

@@ -36,7 +36,7 @@ class RotessaCredentials implements JsonSerializable
         return $this->fields['apiKey'];
     }
 
-    public function setApiKey(string $apiKey): self
+    public function setApiKey(string $apiKey): static
     {
         $this->fields['apiKey'] = $apiKey;
 

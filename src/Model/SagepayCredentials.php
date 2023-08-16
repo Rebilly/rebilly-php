@@ -39,7 +39,7 @@ class SagepayCredentials implements JsonSerializable
         return $this->fields['M_ID'];
     }
 
-    public function setMID(string $mID): self
+    public function setMID(string $mID): static
     {
         $this->fields['M_ID'] = $mID;
 
@@ -51,7 +51,7 @@ class SagepayCredentials implements JsonSerializable
         return $this->fields['M_KEY'];
     }
 
-    public function setMKEY(string $mKEY): self
+    public function setMKEY(string $mKEY): static
     {
         $this->fields['M_KEY'] = $mKEY;
 

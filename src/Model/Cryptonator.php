@@ -38,7 +38,7 @@ class Cryptonator extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(CryptonatorCredentials|array $credentials): self
+    public function setCredentials(CryptonatorCredentials|array $credentials): static
     {
         if (!($credentials instanceof CryptonatorCredentials)) {
             $credentials = CryptonatorCredentials::from($credentials);

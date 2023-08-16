@@ -42,7 +42,7 @@ class PayClubCredentials implements JsonSerializable
         return $this->fields['merchantId'] ?? null;
     }
 
-    public function setMerchantId(null|string $merchantId): self
+    public function setMerchantId(null|string $merchantId): static
     {
         $this->fields['merchantId'] = $merchantId;
 
@@ -54,7 +54,7 @@ class PayClubCredentials implements JsonSerializable
         return $this->fields['accountNumber'];
     }
 
-    public function setAccountNumber(string $accountNumber): self
+    public function setAccountNumber(string $accountNumber): static
     {
         $this->fields['accountNumber'] = $accountNumber;
 
@@ -66,7 +66,7 @@ class PayClubCredentials implements JsonSerializable
         return $this->fields['signKey'];
     }
 
-    public function setSignKey(string $signKey): self
+    public function setSignKey(string $signKey): static
     {
         $this->fields['signKey'] = $signKey;
 

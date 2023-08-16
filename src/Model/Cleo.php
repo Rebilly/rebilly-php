@@ -38,7 +38,7 @@ class Cleo extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(CleoCredentials|array $credentials): self
+    public function setCredentials(CleoCredentials|array $credentials): static
     {
         if (!($credentials instanceof CleoCredentials)) {
             $credentials = CleoCredentials::from($credentials);

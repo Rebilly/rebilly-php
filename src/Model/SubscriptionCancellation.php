@@ -120,7 +120,7 @@ class SubscriptionCancellation implements JsonSerializable
         return $this->fields['subscriptionId'];
     }
 
-    public function setSubscriptionId(string $subscriptionId): self
+    public function setSubscriptionId(string $subscriptionId): static
     {
         $this->fields['subscriptionId'] = $subscriptionId;
 
@@ -148,7 +148,7 @@ class SubscriptionCancellation implements JsonSerializable
     /**
      * @psalm-param self::CANCELED_BY_*|null $canceledBy
      */
-    public function setCanceledBy(null|string $canceledBy): self
+    public function setCanceledBy(null|string $canceledBy): static
     {
         $this->fields['canceledBy'] = $canceledBy;
 
@@ -166,7 +166,7 @@ class SubscriptionCancellation implements JsonSerializable
     /**
      * @psalm-param self::REASON_*|null $reason
      */
-    public function setReason(null|string $reason): self
+    public function setReason(null|string $reason): static
     {
         $this->fields['reason'] = $reason;
 
@@ -178,7 +178,7 @@ class SubscriptionCancellation implements JsonSerializable
         return $this->fields['description'] ?? null;
     }
 
-    public function setDescription(null|string $description): self
+    public function setDescription(null|string $description): static
     {
         $this->fields['description'] = $description;
 
@@ -190,7 +190,7 @@ class SubscriptionCancellation implements JsonSerializable
         return $this->fields['prorated'] ?? null;
     }
 
-    public function setProrated(null|bool $prorated): self
+    public function setProrated(null|bool $prorated): static
     {
         $this->fields['prorated'] = $prorated;
 
@@ -208,7 +208,7 @@ class SubscriptionCancellation implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    public function setStatus(null|string $status): self
+    public function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
@@ -235,7 +235,7 @@ class SubscriptionCancellation implements JsonSerializable
         return $this->fields['churnTime'];
     }
 
-    public function setChurnTime(DateTimeImmutable|string $churnTime): self
+    public function setChurnTime(DateTimeImmutable|string $churnTime): static
     {
         if (!($churnTime instanceof DateTimeImmutable)) {
             $churnTime = new DateTimeImmutable($churnTime);
@@ -257,7 +257,7 @@ class SubscriptionCancellation implements JsonSerializable
     /**
      * @param null|UpcomingInvoiceItemCollection[] $lineItems
      */
-    public function setLineItems(null|array $lineItems): self
+    public function setLineItems(null|array $lineItems): static
     {
         $lineItems = $lineItems !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof UpcomingInvoiceItemCollection ? $value : UpcomingInvoiceItemCollection::from($value)) : null, $lineItems) : null;
 
@@ -334,28 +334,28 @@ class SubscriptionCancellation implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setProratedInvoiceId(null|string $proratedInvoiceId): self
+    private function setProratedInvoiceId(null|string $proratedInvoiceId): static
     {
         $this->fields['proratedInvoiceId'] = $proratedInvoiceId;
 
         return $this;
     }
 
-    private function setAppliedInvoiceId(null|string $appliedInvoiceId): self
+    private function setAppliedInvoiceId(null|string $appliedInvoiceId): static
     {
         $this->fields['appliedInvoiceId'] = $appliedInvoiceId;
 
         return $this;
     }
 
-    private function setCanceledTime(null|DateTimeImmutable|string $canceledTime): self
+    private function setCanceledTime(null|DateTimeImmutable|string $canceledTime): static
     {
         if ($canceledTime !== null && !($canceledTime instanceof DateTimeImmutable)) {
             $canceledTime = new DateTimeImmutable($canceledTime);
@@ -366,7 +366,7 @@ class SubscriptionCancellation implements JsonSerializable
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -377,7 +377,7 @@ class SubscriptionCancellation implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -388,7 +388,7 @@ class SubscriptionCancellation implements JsonSerializable
         return $this;
     }
 
-    private function setLineItemSubtotal(null|float $lineItemSubtotal): self
+    private function setLineItemSubtotal(null|float $lineItemSubtotal): static
     {
         $this->fields['lineItemSubtotal'] = $lineItemSubtotal;
 
@@ -398,7 +398,7 @@ class SubscriptionCancellation implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

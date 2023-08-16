@@ -70,7 +70,7 @@ class RuleSetDraft implements JsonSerializable
         return $this->fields['baseVersion'];
     }
 
-    public function setBaseVersion(int $baseVersion): self
+    public function setBaseVersion(int $baseVersion): static
     {
         $this->fields['baseVersion'] = $baseVersion;
 
@@ -88,7 +88,7 @@ class RuleSetDraft implements JsonSerializable
     /**
      * @param null|Bind[] $binds
      */
-    public function setBinds(null|array $binds): self
+    public function setBinds(null|array $binds): static
     {
         $binds = $binds !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Bind ? $value : Bind::from($value)) : null, $binds) : null;
 
@@ -108,7 +108,7 @@ class RuleSetDraft implements JsonSerializable
     /**
      * @param Rule[] $rules
      */
-    public function setRules(array $rules): self
+    public function setRules(array $rules): static
     {
         $rules = array_map(fn ($value) => $value !== null ? ($value instanceof Rule ? $value : Rule::from($value)) : null, $rules);
 
@@ -122,7 +122,7 @@ class RuleSetDraft implements JsonSerializable
         return $this->fields['author'] ?? null;
     }
 
-    public function setAuthor(null|RuleSetDraftAuthor|array $author): self
+    public function setAuthor(null|RuleSetDraftAuthor|array $author): static
     {
         if ($author !== null && !($author instanceof RuleSetDraftAuthor)) {
             $author = RuleSetDraftAuthor::from($author);
@@ -138,7 +138,7 @@ class RuleSetDraft implements JsonSerializable
         return $this->fields['name'];
     }
 
-    public function setName(string $name): self
+    public function setName(string $name): static
     {
         $this->fields['name'] = $name;
 
@@ -150,7 +150,7 @@ class RuleSetDraft implements JsonSerializable
         return $this->fields['description'] ?? null;
     }
 
-    public function setDescription(null|string $description): self
+    public function setDescription(null|string $description): static
     {
         $this->fields['description'] = $description;
 
@@ -212,14 +212,14 @@ class RuleSetDraft implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -230,7 +230,7 @@ class RuleSetDraft implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -244,7 +244,7 @@ class RuleSetDraft implements JsonSerializable
     /**
      * @param null|array<LinkSelf|LinkUser> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 

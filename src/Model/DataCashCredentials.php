@@ -60,7 +60,7 @@ class DataCashCredentials implements JsonSerializable
         return $this->fields['client'];
     }
 
-    public function setClient(string $client): self
+    public function setClient(string $client): static
     {
         $this->fields['client'] = $client;
 
@@ -72,7 +72,7 @@ class DataCashCredentials implements JsonSerializable
         return $this->fields['password'];
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password): static
     {
         $this->fields['password'] = $password;
 
@@ -84,7 +84,7 @@ class DataCashCredentials implements JsonSerializable
         return $this->fields['reportGroup'] ?? null;
     }
 
-    public function setReportGroup(null|string $reportGroup): self
+    public function setReportGroup(null|string $reportGroup): static
     {
         $this->fields['reportGroup'] = $reportGroup;
 
@@ -96,7 +96,7 @@ class DataCashCredentials implements JsonSerializable
         return $this->fields['reportUser'] ?? null;
     }
 
-    public function setReportUser(null|string $reportUser): self
+    public function setReportUser(null|string $reportUser): static
     {
         $this->fields['reportUser'] = $reportUser;
 
@@ -108,7 +108,7 @@ class DataCashCredentials implements JsonSerializable
         return $this->fields['reportPassword'] ?? null;
     }
 
-    public function setReportPassword(null|string $reportPassword): self
+    public function setReportPassword(null|string $reportPassword): static
     {
         $this->fields['reportPassword'] = $reportPassword;
 
@@ -120,7 +120,7 @@ class DataCashCredentials implements JsonSerializable
         return $this->fields['visaPayoutsClient'] ?? null;
     }
 
-    public function setVisaPayoutsClient(null|string $visaPayoutsClient): self
+    public function setVisaPayoutsClient(null|string $visaPayoutsClient): static
     {
         $this->fields['visaPayoutsClient'] = $visaPayoutsClient;
 
@@ -132,7 +132,7 @@ class DataCashCredentials implements JsonSerializable
         return $this->fields['visaPayoutsPassword'] ?? null;
     }
 
-    public function setVisaPayoutsPassword(null|string $visaPayoutsPassword): self
+    public function setVisaPayoutsPassword(null|string $visaPayoutsPassword): static
     {
         $this->fields['visaPayoutsPassword'] = $visaPayoutsPassword;
 
@@ -144,7 +144,7 @@ class DataCashCredentials implements JsonSerializable
         return $this->fields['masterCardPayoutsClient'] ?? null;
     }
 
-    public function setMasterCardPayoutsClient(null|string $masterCardPayoutsClient): self
+    public function setMasterCardPayoutsClient(null|string $masterCardPayoutsClient): static
     {
         $this->fields['masterCardPayoutsClient'] = $masterCardPayoutsClient;
 
@@ -156,7 +156,7 @@ class DataCashCredentials implements JsonSerializable
         return $this->fields['masterCardPayoutsPassword'] ?? null;
     }
 
-    public function setMasterCardPayoutsPassword(null|string $masterCardPayoutsPassword): self
+    public function setMasterCardPayoutsPassword(null|string $masterCardPayoutsPassword): static
     {
         $this->fields['masterCardPayoutsPassword'] = $masterCardPayoutsPassword;
 

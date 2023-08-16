@@ -85,7 +85,7 @@ class SubscriptionPause implements JsonSerializable
         return $this->fields['subscriptionId'];
     }
 
-    public function setSubscriptionId(string $subscriptionId): self
+    public function setSubscriptionId(string $subscriptionId): static
     {
         $this->fields['subscriptionId'] = $subscriptionId;
 
@@ -111,7 +111,7 @@ class SubscriptionPause implements JsonSerializable
     /**
      * @psalm-param self::PAUSED_BY_*|null $pausedBy
      */
-    public function setPausedBy(null|string $pausedBy): self
+    public function setPausedBy(null|string $pausedBy): static
     {
         $this->fields['pausedBy'] = $pausedBy;
 
@@ -123,7 +123,7 @@ class SubscriptionPause implements JsonSerializable
         return $this->fields['description'] ?? null;
     }
 
-    public function setDescription(null|string $description): self
+    public function setDescription(null|string $description): static
     {
         $this->fields['description'] = $description;
 
@@ -135,7 +135,7 @@ class SubscriptionPause implements JsonSerializable
         return $this->fields['effectiveTime'] ?? null;
     }
 
-    public function setEffectiveTime(null|DateTimeImmutable|string $effectiveTime): self
+    public function setEffectiveTime(null|DateTimeImmutable|string $effectiveTime): static
     {
         if ($effectiveTime !== null && !($effectiveTime instanceof DateTimeImmutable)) {
             $effectiveTime = new DateTimeImmutable($effectiveTime);
@@ -151,7 +151,7 @@ class SubscriptionPause implements JsonSerializable
         return $this->fields['endTime'] ?? null;
     }
 
-    public function setEndTime(null|DateTimeImmutable|string $endTime): self
+    public function setEndTime(null|DateTimeImmutable|string $endTime): static
     {
         if ($endTime !== null && !($endTime instanceof DateTimeImmutable)) {
             $endTime = new DateTimeImmutable($endTime);
@@ -167,7 +167,7 @@ class SubscriptionPause implements JsonSerializable
         return $this->fields['timeRemaining'] ?? null;
     }
 
-    public function setTimeRemaining(null|string $timeRemaining): self
+    public function setTimeRemaining(null|string $timeRemaining): static
     {
         $this->fields['timeRemaining'] = $timeRemaining;
 
@@ -232,7 +232,7 @@ class SubscriptionPause implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -242,14 +242,14 @@ class SubscriptionPause implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    private function setStatus(null|string $status): self
+    private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -260,7 +260,7 @@ class SubscriptionPause implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -274,7 +274,7 @@ class SubscriptionPause implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

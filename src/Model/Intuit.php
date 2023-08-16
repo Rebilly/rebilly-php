@@ -38,7 +38,7 @@ class Intuit extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(IntuitCredentials|array $credentials): self
+    public function setCredentials(IntuitCredentials|array $credentials): static
     {
         if (!($credentials instanceof IntuitCredentials)) {
             $credentials = IntuitCredentials::from($credentials);

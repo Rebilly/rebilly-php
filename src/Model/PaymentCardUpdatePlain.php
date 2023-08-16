@@ -54,7 +54,7 @@ class PaymentCardUpdatePlain implements JsonSerializable
         return $this->fields['cvv'] ?? null;
     }
 
-    public function setCvv(null|string $cvv): self
+    public function setCvv(null|string $cvv): static
     {
         $this->fields['cvv'] = $cvv;
 
@@ -66,7 +66,7 @@ class PaymentCardUpdatePlain implements JsonSerializable
         return $this->fields['expMonth'] ?? null;
     }
 
-    public function setExpMonth(null|int $expMonth): self
+    public function setExpMonth(null|int $expMonth): static
     {
         $this->fields['expMonth'] = $expMonth;
 
@@ -78,7 +78,7 @@ class PaymentCardUpdatePlain implements JsonSerializable
         return $this->fields['expYear'] ?? null;
     }
 
-    public function setExpYear(null|int $expYear): self
+    public function setExpYear(null|int $expYear): static
     {
         $this->fields['expYear'] = $expYear;
 
@@ -90,7 +90,7 @@ class PaymentCardUpdatePlain implements JsonSerializable
         return $this->fields['billingAddress'] ?? null;
     }
 
-    public function setBillingAddress(null|ContactObject|array $billingAddress): self
+    public function setBillingAddress(null|ContactObject|array $billingAddress): static
     {
         if ($billingAddress !== null && !($billingAddress instanceof ContactObject)) {
             $billingAddress = ContactObject::from($billingAddress);
@@ -106,7 +106,7 @@ class PaymentCardUpdatePlain implements JsonSerializable
         return $this->fields['stickyGatewayAccountId'] ?? null;
     }
 
-    public function setStickyGatewayAccountId(null|string $stickyGatewayAccountId): self
+    public function setStickyGatewayAccountId(null|string $stickyGatewayAccountId): static
     {
         $this->fields['stickyGatewayAccountId'] = $stickyGatewayAccountId;
 
@@ -118,7 +118,7 @@ class PaymentCardUpdatePlain implements JsonSerializable
         return $this->fields['customFields'] ?? null;
     }
 
-    public function setCustomFields(null|array $customFields): self
+    public function setCustomFields(null|array $customFields): static
     {
         $this->fields['customFields'] = $customFields;
 
@@ -130,7 +130,7 @@ class PaymentCardUpdatePlain implements JsonSerializable
         return $this->fields['useAsBackup'] ?? null;
     }
 
-    public function setUseAsBackup(null|bool $useAsBackup): self
+    public function setUseAsBackup(null|bool $useAsBackup): static
     {
         $this->fields['useAsBackup'] = $useAsBackup;
 

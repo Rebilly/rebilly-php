@@ -54,7 +54,7 @@ class RebillyTaxjar extends InvoiceTax
     /**
      * @param null|InvoiceTaxItem[] $items
      */
-    private function setItems(null|array $items): self
+    private function setItems(null|array $items): static
     {
         $items = $items !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof InvoiceTaxItem ? $value : InvoiceTaxItem::from($value)) : null, $items) : null;
 

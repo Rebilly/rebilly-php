@@ -38,7 +38,7 @@ class MyFatoorah extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(MyFatoorahCredentials|array $credentials): self
+    public function setCredentials(MyFatoorahCredentials|array $credentials): static
     {
         if (!($credentials instanceof MyFatoorahCredentials)) {
             $credentials = MyFatoorahCredentials::from($credentials);

@@ -38,7 +38,7 @@ class AddRiskScore extends RuleAction
         return $this->fields['score'] ?? null;
     }
 
-    public function setScore(null|int $score): self
+    public function setScore(null|int $score): static
     {
         $this->fields['score'] = $score;
 

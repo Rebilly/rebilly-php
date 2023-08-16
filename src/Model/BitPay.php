@@ -38,7 +38,7 @@ class BitPay extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(BitPayCredentials|array $credentials): self
+    public function setCredentials(BitPayCredentials|array $credentials): static
     {
         if (!($credentials instanceof BitPayCredentials)) {
             $credentials = BitPayCredentials::from($credentials);

@@ -70,7 +70,7 @@ abstract class TimelineTable implements JsonSerializable
         return $this->fields['title'] ?? null;
     }
 
-    public function setTitle(null|string $title): self
+    public function setTitle(null|string $title): static
     {
         $this->fields['title'] = $title;
 
@@ -82,7 +82,7 @@ abstract class TimelineTable implements JsonSerializable
         return $this->fields['footer'] ?? null;
     }
 
-    public function setFooter(null|string $footer): self
+    public function setFooter(null|string $footer): static
     {
         $this->fields['footer'] = $footer;
 
@@ -108,7 +108,7 @@ abstract class TimelineTable implements JsonSerializable
     /**
      * @psalm-param self::TYPE_*|null $type
      */
-    private function setType(null|string $type): self
+    private function setType(null|string $type): static
     {
         $this->fields['type'] = $type;
 

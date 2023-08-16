@@ -36,7 +36,7 @@ class PaymentInstructionInstrument extends PaymentInstruction
         return $this->fields['paymentInstrumentId'];
     }
 
-    public function setPaymentInstrumentId(string $paymentInstrumentId): self
+    public function setPaymentInstrumentId(string $paymentInstrumentId): static
     {
         $this->fields['paymentInstrumentId'] = $paymentInstrumentId;
 

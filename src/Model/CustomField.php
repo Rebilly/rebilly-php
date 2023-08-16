@@ -73,7 +73,7 @@ class CustomField implements JsonSerializable
     /**
      * @psalm-param self::TYPE_* $type
      */
-    public function setType(string $type): self
+    public function setType(string $type): static
     {
         $this->fields['type'] = $type;
 
@@ -85,7 +85,7 @@ class CustomField implements JsonSerializable
         return $this->fields['description'] ?? null;
     }
 
-    public function setDescription(null|string $description): self
+    public function setDescription(null|string $description): static
     {
         $this->fields['description'] = $description;
 
@@ -97,7 +97,7 @@ class CustomField implements JsonSerializable
         return $this->fields['additionalSchema'] ?? null;
     }
 
-    public function setAdditionalSchema(mixed $additionalSchema): self
+    public function setAdditionalSchema(mixed $additionalSchema): static
     {
         $this->fields['additionalSchema'] = $additionalSchema;
 
@@ -134,7 +134,7 @@ class CustomField implements JsonSerializable
         return $data;
     }
 
-    private function setName(null|string $name): self
+    private function setName(null|string $name): static
     {
         $this->fields['name'] = $name;
 
@@ -144,7 +144,7 @@ class CustomField implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

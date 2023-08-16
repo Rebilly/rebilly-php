@@ -73,7 +73,7 @@ class Website implements JsonSerializable
         return $this->fields['name'];
     }
 
-    public function setName(string $name): self
+    public function setName(string $name): static
     {
         $this->fields['name'] = $name;
 
@@ -85,7 +85,7 @@ class Website implements JsonSerializable
         return $this->fields['url'];
     }
 
-    public function setUrl(string $url): self
+    public function setUrl(string $url): static
     {
         $this->fields['url'] = $url;
 
@@ -97,7 +97,7 @@ class Website implements JsonSerializable
         return $this->fields['servicePhone'];
     }
 
-    public function setServicePhone(string $servicePhone): self
+    public function setServicePhone(string $servicePhone): static
     {
         $this->fields['servicePhone'] = $servicePhone;
 
@@ -109,7 +109,7 @@ class Website implements JsonSerializable
         return $this->fields['serviceEmail'];
     }
 
-    public function setServiceEmail(string $serviceEmail): self
+    public function setServiceEmail(string $serviceEmail): static
     {
         $this->fields['serviceEmail'] = $serviceEmail;
 
@@ -131,7 +131,7 @@ class Website implements JsonSerializable
         return $this->fields['customFields'] ?? null;
     }
 
-    public function setCustomFields(null|array $customFields): self
+    public function setCustomFields(null|array $customFields): static
     {
         $this->fields['customFields'] = $customFields;
 
@@ -143,7 +143,7 @@ class Website implements JsonSerializable
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|WebsiteSettings|array $settings): self
+    public function setSettings(null|WebsiteSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof WebsiteSettings)) {
             $settings = WebsiteSettings::from($settings);
@@ -207,14 +207,14 @@ class Website implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -225,7 +225,7 @@ class Website implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -236,7 +236,7 @@ class Website implements JsonSerializable
         return $this;
     }
 
-    private function setOrganizationId(null|string $organizationId): self
+    private function setOrganizationId(null|string $organizationId): static
     {
         $this->fields['organizationId'] = $organizationId;
 
@@ -246,7 +246,7 @@ class Website implements JsonSerializable
     /**
      * @param null|array<OrganizationLink|SelfLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 

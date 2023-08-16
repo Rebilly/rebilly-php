@@ -45,7 +45,7 @@ class EmailNotificationNotifications implements JsonSerializable
     /**
      * @param null|string[] $labels
      */
-    public function setLabels(null|array $labels): self
+    public function setLabels(null|array $labels): static
     {
         $labels = $labels !== null ? array_map(fn ($value) => $value ?? null, $labels) : null;
 
@@ -59,7 +59,7 @@ class EmailNotificationNotifications implements JsonSerializable
         return $this->fields['title'] ?? null;
     }
 
-    public function setTitle(null|string $title): self
+    public function setTitle(null|string $title): static
     {
         $this->fields['title'] = $title;
 

@@ -48,7 +48,7 @@ class KhelocardCard extends CommonKhelocardCard
         return $this->fields['customerId'] ?? null;
     }
 
-    public function setCustomerId(null|string $customerId): self
+    public function setCustomerId(null|string $customerId): static
     {
         $this->fields['customerId'] = $customerId;
 
@@ -65,7 +65,7 @@ class KhelocardCard extends CommonKhelocardCard
         return $this->fields['riskMetadata'] ?? null;
     }
 
-    public function setRiskMetadata(null|RiskMetadata|array $riskMetadata): self
+    public function setRiskMetadata(null|RiskMetadata|array $riskMetadata): static
     {
         if ($riskMetadata !== null && !($riskMetadata instanceof RiskMetadata)) {
             $riskMetadata = RiskMetadata::from($riskMetadata);
@@ -114,7 +114,7 @@ class KhelocardCard extends CommonKhelocardCard
         return parent::jsonSerialize() + $data;
     }
 
-    private function setStickyGatewayAccountId(null|string $stickyGatewayAccountId): self
+    private function setStickyGatewayAccountId(null|string $stickyGatewayAccountId): static
     {
         $this->fields['stickyGatewayAccountId'] = $stickyGatewayAccountId;
 
@@ -124,7 +124,7 @@ class KhelocardCard extends CommonKhelocardCard
     /**
      * @param null|array<CustomerLink|SelfLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 
@@ -136,7 +136,7 @@ class KhelocardCard extends CommonKhelocardCard
     /**
      * @param null|array{customer:Customer} $embedded
      */
-    private function setEmbedded(null|array $embedded): self
+    private function setEmbedded(null|array $embedded): static
     {
         if ($embedded !== null) {
             $embedded['customer'] = isset($embedded['customer']) ? ($embedded['customer'] instanceof Customer ? $embedded['customer'] : Customer::from($embedded['customer'])) : null;

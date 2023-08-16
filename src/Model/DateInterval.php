@@ -62,7 +62,7 @@ class DateInterval extends CommonScheduleInstruction
     /**
      * @psalm-param self::METHOD_* $method
      */
-    public function setMethod(string $method): self
+    public function setMethod(string $method): static
     {
         $this->fields['method'] = $method;
 
@@ -74,7 +74,7 @@ class DateInterval extends CommonScheduleInstruction
         return $this->fields['duration'];
     }
 
-    public function setDuration(int $duration): self
+    public function setDuration(int $duration): static
     {
         $this->fields['duration'] = $duration;
 
@@ -86,7 +86,7 @@ class DateInterval extends CommonScheduleInstruction
         return $this->fields['unit'];
     }
 
-    public function setUnit(string|TimeUnit|TimePluralUnit $unit): self
+    public function setUnit(string|TimeUnit|TimePluralUnit $unit): static
     {
         $unit = $this->ensureUnit($unit);
 

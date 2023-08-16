@@ -42,7 +42,7 @@ class DimocoCredentials implements JsonSerializable
         return $this->fields['merchantId'];
     }
 
-    public function setMerchantId(string $merchantId): self
+    public function setMerchantId(string $merchantId): static
     {
         $this->fields['merchantId'] = $merchantId;
 
@@ -54,7 +54,7 @@ class DimocoCredentials implements JsonSerializable
         return $this->fields['orderId'];
     }
 
-    public function setOrderId(string $orderId): self
+    public function setOrderId(string $orderId): static
     {
         $this->fields['orderId'] = $orderId;
 
@@ -66,7 +66,7 @@ class DimocoCredentials implements JsonSerializable
         return $this->fields['password'];
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password): static
     {
         $this->fields['password'] = $password;
 

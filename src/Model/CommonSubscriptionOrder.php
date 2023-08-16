@@ -107,7 +107,7 @@ class CommonSubscriptionOrder extends CommonOrder
         return $this->fields['trial'] ?? null;
     }
 
-    public function setTrial(null|CommonSubscriptionOrderTrial|array $trial): self
+    public function setTrial(null|CommonSubscriptionOrderTrial|array $trial): static
     {
         if ($trial !== null && !($trial instanceof CommonSubscriptionOrderTrial)) {
             $trial = CommonSubscriptionOrderTrial::from($trial);
@@ -123,7 +123,7 @@ class CommonSubscriptionOrder extends CommonOrder
         return $this->fields['isTrialOnly'] ?? null;
     }
 
-    public function setIsTrialOnly(null|bool $isTrialOnly): self
+    public function setIsTrialOnly(null|bool $isTrialOnly): static
     {
         $this->fields['isTrialOnly'] = $isTrialOnly;
 
@@ -135,7 +135,7 @@ class CommonSubscriptionOrder extends CommonOrder
         return $this->fields['invoiceTimeShift'] ?? null;
     }
 
-    public function setInvoiceTimeShift(null|InvoiceTimeShift|array $invoiceTimeShift): self
+    public function setInvoiceTimeShift(null|InvoiceTimeShift|array $invoiceTimeShift): static
     {
         if ($invoiceTimeShift !== null && !($invoiceTimeShift instanceof InvoiceTimeShift)) {
             $invoiceTimeShift = InvoiceTimeShift::from($invoiceTimeShift);
@@ -151,7 +151,7 @@ class CommonSubscriptionOrder extends CommonOrder
         return $this->fields['recurringInterval'] ?? null;
     }
 
-    public function setRecurringInterval(null|CommonSubscriptionOrderRecurringInterval|array $recurringInterval): self
+    public function setRecurringInterval(null|CommonSubscriptionOrderRecurringInterval|array $recurringInterval): static
     {
         if ($recurringInterval !== null && !($recurringInterval instanceof CommonSubscriptionOrderRecurringInterval)) {
             $recurringInterval = CommonSubscriptionOrderRecurringInterval::from($recurringInterval);
@@ -167,7 +167,7 @@ class CommonSubscriptionOrder extends CommonOrder
         return $this->fields['autopay'] ?? null;
     }
 
-    public function setAutopay(null|bool $autopay): self
+    public function setAutopay(null|bool $autopay): static
     {
         $this->fields['autopay'] = $autopay;
 
@@ -179,7 +179,7 @@ class CommonSubscriptionOrder extends CommonOrder
         return $this->fields['startTime'] ?? null;
     }
 
-    public function setStartTime(null|DateTimeImmutable|string $startTime): self
+    public function setStartTime(null|DateTimeImmutable|string $startTime): static
     {
         if ($startTime !== null && !($startTime instanceof DateTimeImmutable)) {
             $startTime = new DateTimeImmutable($startTime);
@@ -200,7 +200,7 @@ class CommonSubscriptionOrder extends CommonOrder
         return $this->fields['renewalTime'] ?? null;
     }
 
-    public function setRenewalTime(null|DateTimeImmutable|string $renewalTime): self
+    public function setRenewalTime(null|DateTimeImmutable|string $renewalTime): static
     {
         if ($renewalTime !== null && !($renewalTime instanceof DateTimeImmutable)) {
             $renewalTime = new DateTimeImmutable($renewalTime);
@@ -229,7 +229,7 @@ class CommonSubscriptionOrder extends CommonOrder
         return $this->fields['lineItemSubtotal'] ?? null;
     }
 
-    public function setLineItemSubtotal(null|CommonSubscriptionOrderLineItemSubtotal|array $lineItemSubtotal): self
+    public function setLineItemSubtotal(null|CommonSubscriptionOrderLineItemSubtotal|array $lineItemSubtotal): static
     {
         if ($lineItemSubtotal !== null && !($lineItemSubtotal instanceof CommonSubscriptionOrderLineItemSubtotal)) {
             $lineItemSubtotal = CommonSubscriptionOrderLineItemSubtotal::from($lineItemSubtotal);
@@ -245,7 +245,7 @@ class CommonSubscriptionOrder extends CommonOrder
         return $this->fields['paymentInstrumentId'] ?? null;
     }
 
-    public function setPaymentInstrumentId(null|string $paymentInstrumentId): self
+    public function setPaymentInstrumentId(null|string $paymentInstrumentId): static
     {
         $this->fields['paymentInstrumentId'] = $paymentInstrumentId;
 
@@ -304,21 +304,21 @@ class CommonSubscriptionOrder extends CommonOrder
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    private function setStatus(null|string $status): self
+    private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
         return $this;
     }
 
-    private function setInTrial(null|bool $inTrial): self
+    private function setInTrial(null|bool $inTrial): static
     {
         $this->fields['inTrial'] = $inTrial;
 
         return $this;
     }
 
-    private function setEndTime(null|DateTimeImmutable|string $endTime): self
+    private function setEndTime(null|DateTimeImmutable|string $endTime): static
     {
         if ($endTime !== null && !($endTime instanceof DateTimeImmutable)) {
             $endTime = new DateTimeImmutable($endTime);
@@ -329,7 +329,7 @@ class CommonSubscriptionOrder extends CommonOrder
         return $this;
     }
 
-    private function setRebillNumber(null|int $rebillNumber): self
+    private function setRebillNumber(null|int $rebillNumber): static
     {
         $this->fields['rebillNumber'] = $rebillNumber;
 
@@ -339,7 +339,7 @@ class CommonSubscriptionOrder extends CommonOrder
     /**
      * @param null|UpcomingInvoiceItemCollection[] $lineItems
      */
-    private function setLineItems(null|array $lineItems): self
+    private function setLineItems(null|array $lineItems): static
     {
         $lineItems = $lineItems !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof UpcomingInvoiceItemCollection ? $value : UpcomingInvoiceItemCollection::from($value)) : null, $lineItems) : null;
 

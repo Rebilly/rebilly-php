@@ -38,7 +38,7 @@ class Wallet88 extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(Wallet88Credentials|array $credentials): self
+    public function setCredentials(Wallet88Credentials|array $credentials): static
     {
         if (!($credentials instanceof Wallet88Credentials)) {
             $credentials = Wallet88Credentials::from($credentials);

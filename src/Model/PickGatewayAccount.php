@@ -38,7 +38,7 @@ class PickGatewayAccount extends RuleAction
         return $this->fields['pickInstruction'];
     }
 
-    public function setPickInstruction(GatewayAccountPickInstruction|array $pickInstruction): self
+    public function setPickInstruction(GatewayAccountPickInstruction|array $pickInstruction): static
     {
         if (!($pickInstruction instanceof GatewayAccountPickInstruction)) {
             $pickInstruction = GatewayAccountPickInstruction::from($pickInstruction);

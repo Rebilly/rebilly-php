@@ -36,7 +36,7 @@ class GetKycAcceptanceSummaryResponseStatusStatisticsPending implements JsonSeri
         return $this->fields['total'] ?? null;
     }
 
-    public function setTotal(null|int $total): self
+    public function setTotal(null|int $total): static
     {
         $this->fields['total'] = $total;
 

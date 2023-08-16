@@ -38,7 +38,7 @@ class Realex extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(RealexCredentials|array $credentials): self
+    public function setCredentials(RealexCredentials|array $credentials): static
     {
         if (!($credentials instanceof RealexCredentials)) {
             $credentials = RealexCredentials::from($credentials);

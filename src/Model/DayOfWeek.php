@@ -69,7 +69,7 @@ class DayOfWeek extends CommonScheduleInstruction
     /**
      * @psalm-param self::METHOD_* $method
      */
-    public function setMethod(string $method): self
+    public function setMethod(string $method): static
     {
         $this->fields['method'] = $method;
 
@@ -81,7 +81,7 @@ class DayOfWeek extends CommonScheduleInstruction
         return $this->fields['day'];
     }
 
-    public function setDay(DayOfWeekLong|string $day): self
+    public function setDay(DayOfWeekLong|string $day): static
     {
         if (!($day instanceof DayOfWeekLong)) {
             $day = DayOfWeekLong::from($day);
@@ -103,7 +103,7 @@ class DayOfWeek extends CommonScheduleInstruction
     /**
      * @psalm-param self::WEEK_*|null $week
      */
-    public function setWeek(null|string $week): self
+    public function setWeek(null|string $week): static
     {
         $this->fields['week'] = $week;
 
@@ -115,7 +115,7 @@ class DayOfWeek extends CommonScheduleInstruction
         return $this->fields['time'] ?? null;
     }
 
-    public function setTime(null|string $time): self
+    public function setTime(null|string $time): static
     {
         $this->fields['time'] = $time;
 

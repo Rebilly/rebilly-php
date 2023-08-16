@@ -48,7 +48,7 @@ class ReportMonthlyRecurringRevenueBreakdown implements JsonSerializable
         return $this->fields['new'] ?? null;
     }
 
-    public function setNew(null|float|string $new): self
+    public function setNew(null|float|string $new): static
     {
         if (is_string($new)) {
             $new = (float) $new;
@@ -64,7 +64,7 @@ class ReportMonthlyRecurringRevenueBreakdown implements JsonSerializable
         return $this->fields['reactivation'] ?? null;
     }
 
-    public function setReactivation(null|float|string $reactivation): self
+    public function setReactivation(null|float|string $reactivation): static
     {
         if (is_string($reactivation)) {
             $reactivation = (float) $reactivation;
@@ -80,7 +80,7 @@ class ReportMonthlyRecurringRevenueBreakdown implements JsonSerializable
         return $this->fields['churned'] ?? null;
     }
 
-    public function setChurned(null|float|string $churned): self
+    public function setChurned(null|float|string $churned): static
     {
         if (is_string($churned)) {
             $churned = (float) $churned;
@@ -96,7 +96,7 @@ class ReportMonthlyRecurringRevenueBreakdown implements JsonSerializable
         return $this->fields['contraction'] ?? null;
     }
 
-    public function setContraction(null|float|string $contraction): self
+    public function setContraction(null|float|string $contraction): static
     {
         if (is_string($contraction)) {
             $contraction = (float) $contraction;
@@ -112,7 +112,7 @@ class ReportMonthlyRecurringRevenueBreakdown implements JsonSerializable
         return $this->fields['expansion'] ?? null;
     }
 
-    public function setExpansion(null|float|string $expansion): self
+    public function setExpansion(null|float|string $expansion): static
     {
         if (is_string($expansion)) {
             $expansion = (float) $expansion;

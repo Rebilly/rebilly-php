@@ -45,7 +45,7 @@ class TelrCredentials implements JsonSerializable
         return $this->fields['storeId'];
     }
 
-    public function setStoreId(string $storeId): self
+    public function setStoreId(string $storeId): static
     {
         $this->fields['storeId'] = $storeId;
 
@@ -57,7 +57,7 @@ class TelrCredentials implements JsonSerializable
         return $this->fields['hostedPageAuthenticationKey'];
     }
 
-    public function setHostedPageAuthenticationKey(string $hostedPageAuthenticationKey): self
+    public function setHostedPageAuthenticationKey(string $hostedPageAuthenticationKey): static
     {
         $this->fields['hostedPageAuthenticationKey'] = $hostedPageAuthenticationKey;
 
@@ -69,7 +69,7 @@ class TelrCredentials implements JsonSerializable
         return $this->fields['merchantId'];
     }
 
-    public function setMerchantId(string $merchantId): self
+    public function setMerchantId(string $merchantId): static
     {
         $this->fields['merchantId'] = $merchantId;
 
@@ -81,7 +81,7 @@ class TelrCredentials implements JsonSerializable
         return $this->fields['serviceApiKey'];
     }
 
-    public function setServiceApiKey(string $serviceApiKey): self
+    public function setServiceApiKey(string $serviceApiKey): static
     {
         $this->fields['serviceApiKey'] = $serviceApiKey;
 

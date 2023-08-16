@@ -45,7 +45,7 @@ class EPGCredentials implements JsonSerializable
         return $this->fields['merchantId'];
     }
 
-    public function setMerchantId(string $merchantId): self
+    public function setMerchantId(string $merchantId): static
     {
         $this->fields['merchantId'] = $merchantId;
 
@@ -57,7 +57,7 @@ class EPGCredentials implements JsonSerializable
         return $this->fields['productId'];
     }
 
-    public function setProductId(string $productId): self
+    public function setProductId(string $productId): static
     {
         $this->fields['productId'] = $productId;
 
@@ -69,7 +69,7 @@ class EPGCredentials implements JsonSerializable
         return $this->fields['merchantPassword'];
     }
 
-    public function setMerchantPassword(string $merchantPassword): self
+    public function setMerchantPassword(string $merchantPassword): static
     {
         $this->fields['merchantPassword'] = $merchantPassword;
 
@@ -81,7 +81,7 @@ class EPGCredentials implements JsonSerializable
         return $this->fields['merchantKey'];
     }
 
-    public function setMerchantKey(string $merchantKey): self
+    public function setMerchantKey(string $merchantKey): static
     {
         $this->fields['merchantKey'] = $merchantKey;
 

@@ -50,7 +50,7 @@ class Partial extends AmountAdjustment
         return $this->fields['value'];
     }
 
-    public function setValue(float|string $value): self
+    public function setValue(float|string $value): static
     {
         if (is_string($value)) {
             $value = (float) $value;
@@ -72,7 +72,7 @@ class Partial extends AmountAdjustment
     /**
      * @psalm-param self::TYPE_* $type
      */
-    public function setType(string $type): self
+    public function setType(string $type): static
     {
         $this->fields['type'] = $type;
 
@@ -84,7 +84,7 @@ class Partial extends AmountAdjustment
         return $this->fields['afterApprovalPolicy'] ?? null;
     }
 
-    public function setAfterApprovalPolicy(null|array|DiscountAmountRemaining|None $afterApprovalPolicy): self
+    public function setAfterApprovalPolicy(null|array|DiscountAmountRemaining|None $afterApprovalPolicy): static
     {
         $afterApprovalPolicy = $this->ensureAfterApprovalPolicy($afterApprovalPolicy);
 

@@ -72,7 +72,7 @@ class CommonPaymentToken implements JsonSerializable
         return $this->fields['riskMetadata'] ?? null;
     }
 
-    public function setRiskMetadata(null|RiskMetadata|array $riskMetadata): self
+    public function setRiskMetadata(null|RiskMetadata|array $riskMetadata): static
     {
         if ($riskMetadata !== null && !($riskMetadata instanceof RiskMetadata)) {
             $riskMetadata = RiskMetadata::from($riskMetadata);
@@ -88,7 +88,7 @@ class CommonPaymentToken implements JsonSerializable
         return $this->fields['leadSource'] ?? null;
     }
 
-    public function setLeadSource(null|LeadSource|array $leadSource): self
+    public function setLeadSource(null|LeadSource|array $leadSource): static
     {
         if ($leadSource !== null && !($leadSource instanceof LeadSource)) {
             $leadSource = LeadSource::from($leadSource);
@@ -114,7 +114,7 @@ class CommonPaymentToken implements JsonSerializable
         return $this->fields['usageTime'] ?? null;
     }
 
-    public function setUsageTime(null|DateTimeImmutable|string $usageTime): self
+    public function setUsageTime(null|DateTimeImmutable|string $usageTime): static
     {
         if ($usageTime !== null && !($usageTime instanceof DateTimeImmutable)) {
             $usageTime = new DateTimeImmutable($usageTime);
@@ -130,7 +130,7 @@ class CommonPaymentToken implements JsonSerializable
         return $this->fields['expirationTime'] ?? null;
     }
 
-    public function setExpirationTime(null|DateTimeImmutable|string $expirationTime): self
+    public function setExpirationTime(null|DateTimeImmutable|string $expirationTime): static
     {
         if ($expirationTime !== null && !($expirationTime instanceof DateTimeImmutable)) {
             $expirationTime = new DateTimeImmutable($expirationTime);
@@ -183,21 +183,21 @@ class CommonPaymentToken implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setIsUsed(null|bool $isUsed): self
+    private function setIsUsed(null|bool $isUsed): static
     {
         $this->fields['isUsed'] = $isUsed;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -208,7 +208,7 @@ class CommonPaymentToken implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -222,7 +222,7 @@ class CommonPaymentToken implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

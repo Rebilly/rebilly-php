@@ -38,7 +38,7 @@ class ICheque extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(IChequeCredentials|array $credentials): self
+    public function setCredentials(IChequeCredentials|array $credentials): static
     {
         if (!($credentials instanceof IChequeCredentials)) {
             $credentials = IChequeCredentials::from($credentials);

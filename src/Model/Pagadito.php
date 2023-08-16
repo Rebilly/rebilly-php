@@ -41,7 +41,7 @@ class Pagadito extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(PagaditoCredentials|array $credentials): self
+    public function setCredentials(PagaditoCredentials|array $credentials): static
     {
         if (!($credentials instanceof PagaditoCredentials)) {
             $credentials = PagaditoCredentials::from($credentials);
@@ -57,7 +57,7 @@ class Pagadito extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|PagaditoSettings|array $settings): self
+    public function setSettings(null|PagaditoSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof PagaditoSettings)) {
             $settings = PagaditoSettings::from($settings);

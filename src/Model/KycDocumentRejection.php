@@ -39,7 +39,7 @@ class KycDocumentRejection implements JsonSerializable
         return $this->fields['type'] ?? null;
     }
 
-    public function setType(null|KycDocumentRejectionReasonTypes|string $type): self
+    public function setType(null|KycDocumentRejectionReasonTypes|string $type): static
     {
         if ($type !== null && !($type instanceof KycDocumentRejectionReasonTypes)) {
             $type = KycDocumentRejectionReasonTypes::from($type);
@@ -55,7 +55,7 @@ class KycDocumentRejection implements JsonSerializable
         return $this->fields['message'] ?? null;
     }
 
-    public function setMessage(null|string $message): self
+    public function setMessage(null|string $message): static
     {
         $this->fields['message'] = $message;
 

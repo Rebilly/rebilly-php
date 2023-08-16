@@ -36,7 +36,7 @@ class PayperCredentials implements JsonSerializable
         return $this->fields['secretKey'];
     }
 
-    public function setSecretKey(string $secretKey): self
+    public function setSecretKey(string $secretKey): static
     {
         $this->fields['secretKey'] = $secretKey;
 

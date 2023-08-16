@@ -86,7 +86,7 @@ class IdentityMatches implements JsonSerializable
         return $this->fields['containsImage'] ?? null;
     }
 
-    public function setContainsImage(null|bool $containsImage): self
+    public function setContainsImage(null|bool $containsImage): static
     {
         $this->fields['containsImage'] = $containsImage;
 
@@ -98,7 +98,7 @@ class IdentityMatches implements JsonSerializable
         return $this->fields['isIdentityDocument'] ?? null;
     }
 
-    public function setIsIdentityDocument(null|bool $isIdentityDocument): self
+    public function setIsIdentityDocument(null|bool $isIdentityDocument): static
     {
         $this->fields['isIdentityDocument'] = $isIdentityDocument;
 
@@ -110,7 +110,7 @@ class IdentityMatches implements JsonSerializable
         return $this->fields['isPublishedOnline'] ?? null;
     }
 
-    public function setIsPublishedOnline(null|bool $isPublishedOnline): self
+    public function setIsPublishedOnline(null|bool $isPublishedOnline): static
     {
         $this->fields['isPublishedOnline'] = $isPublishedOnline;
 
@@ -130,7 +130,7 @@ class IdentityMatches implements JsonSerializable
         return $this->fields['firstName'] ?? null;
     }
 
-    public function setFirstName(null|string $firstName): self
+    public function setFirstName(null|string $firstName): static
     {
         $this->fields['firstName'] = $firstName;
 
@@ -142,7 +142,7 @@ class IdentityMatches implements JsonSerializable
         return $this->fields['lastName'] ?? null;
     }
 
-    public function setLastName(null|string $lastName): self
+    public function setLastName(null|string $lastName): static
     {
         $this->fields['lastName'] = $lastName;
 
@@ -154,7 +154,7 @@ class IdentityMatches implements JsonSerializable
         return $this->fields['dateOfBirth'] ?? null;
     }
 
-    public function setDateOfBirth(null|DateTimeImmutable|string $dateOfBirth): self
+    public function setDateOfBirth(null|DateTimeImmutable|string $dateOfBirth): static
     {
         if ($dateOfBirth !== null && !($dateOfBirth instanceof DateTimeImmutable)) {
             $dateOfBirth = new DateTimeImmutable($dateOfBirth);
@@ -170,7 +170,7 @@ class IdentityMatches implements JsonSerializable
         return $this->fields['expirationDate'] ?? null;
     }
 
-    public function setExpirationDate(null|DateTimeImmutable|string $expirationDate): self
+    public function setExpirationDate(null|DateTimeImmutable|string $expirationDate): static
     {
         if ($expirationDate !== null && !($expirationDate instanceof DateTimeImmutable)) {
             $expirationDate = new DateTimeImmutable($expirationDate);
@@ -186,7 +186,7 @@ class IdentityMatches implements JsonSerializable
         return $this->fields['issueDate'] ?? null;
     }
 
-    public function setIssueDate(null|DateTimeImmutable|string $issueDate): self
+    public function setIssueDate(null|DateTimeImmutable|string $issueDate): static
     {
         if ($issueDate !== null && !($issueDate instanceof DateTimeImmutable)) {
             $issueDate = new DateTimeImmutable($issueDate);
@@ -207,7 +207,7 @@ class IdentityMatches implements JsonSerializable
         return $this->fields['nationality'] ?? null;
     }
 
-    public function setNationality(null|string $nationality): self
+    public function setNationality(null|string $nationality): static
     {
         $this->fields['nationality'] = $nationality;
 
@@ -219,7 +219,7 @@ class IdentityMatches implements JsonSerializable
         return $this->fields['issuanceCountry'] ?? null;
     }
 
-    public function setIssuanceCountry(null|string $issuanceCountry): self
+    public function setIssuanceCountry(null|string $issuanceCountry): static
     {
         $this->fields['issuanceCountry'] = $issuanceCountry;
 
@@ -231,7 +231,7 @@ class IdentityMatches implements JsonSerializable
         return $this->fields['issuanceRegion'] ?? null;
     }
 
-    public function setIssuanceRegion(null|string $issuanceRegion): self
+    public function setIssuanceRegion(null|string $issuanceRegion): static
     {
         $this->fields['issuanceRegion'] = $issuanceRegion;
 
@@ -243,7 +243,7 @@ class IdentityMatches implements JsonSerializable
         return $this->fields['documentNumber'] ?? null;
     }
 
-    public function setDocumentNumber(null|string $documentNumber): self
+    public function setDocumentNumber(null|string $documentNumber): static
     {
         $this->fields['documentNumber'] = $documentNumber;
 
@@ -255,7 +255,7 @@ class IdentityMatches implements JsonSerializable
         return $this->fields['documentSubtype'] ?? null;
     }
 
-    public function setDocumentSubtype(null|string $documentSubtype): self
+    public function setDocumentSubtype(null|string $documentSubtype): static
     {
         $this->fields['documentSubtype'] = $documentSubtype;
 
@@ -267,7 +267,7 @@ class IdentityMatches implements JsonSerializable
         return $this->fields['hasMatchingFaceProof'] ?? null;
     }
 
-    public function setHasMatchingFaceProof(null|bool $hasMatchingFaceProof): self
+    public function setHasMatchingFaceProof(null|bool $hasMatchingFaceProof): static
     {
         $this->fields['hasMatchingFaceProof'] = $hasMatchingFaceProof;
 
@@ -279,7 +279,7 @@ class IdentityMatches implements JsonSerializable
         return $this->fields['expiryDate'] ?? null;
     }
 
-    public function setExpiryDate(null|DateTimeImmutable|string $expiryDate): self
+    public function setExpiryDate(null|DateTimeImmutable|string $expiryDate): static
     {
         if ($expiryDate !== null && !($expiryDate instanceof DateTimeImmutable)) {
             $expiryDate = new DateTimeImmutable($expiryDate);
@@ -351,7 +351,7 @@ class IdentityMatches implements JsonSerializable
     /**
      * @param null|string[] $matchingImages
      */
-    private function setMatchingImages(null|array $matchingImages): self
+    private function setMatchingImages(null|array $matchingImages): static
     {
         $matchingImages = $matchingImages !== null ? array_map(fn ($value) => $value ?? null, $matchingImages) : null;
 
@@ -360,7 +360,7 @@ class IdentityMatches implements JsonSerializable
         return $this;
     }
 
-    private function setHasMinimalAge(null|bool $hasMinimalAge): self
+    private function setHasMinimalAge(null|bool $hasMinimalAge): static
     {
         $this->fields['hasMinimalAge'] = $hasMinimalAge;
 

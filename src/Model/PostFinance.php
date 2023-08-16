@@ -41,7 +41,7 @@ class PostFinance extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(PostFinanceCredentials|array $credentials): self
+    public function setCredentials(PostFinanceCredentials|array $credentials): static
     {
         if (!($credentials instanceof PostFinanceCredentials)) {
             $credentials = PostFinanceCredentials::from($credentials);
@@ -57,7 +57,7 @@ class PostFinance extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|PostFinanceSettings|array $settings): self
+    public function setSettings(null|PostFinanceSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof PostFinanceSettings)) {
             $settings = PostFinanceSettings::from($settings);

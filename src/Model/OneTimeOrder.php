@@ -157,7 +157,7 @@ class OneTimeOrder extends Subscription
     /**
      * @psalm-param self::ORDER_TYPE_* $orderType
      */
-    public function setOrderType(string $orderType): self
+    public function setOrderType(string $orderType): static
     {
         $this->fields['orderType'] = $orderType;
 
@@ -177,7 +177,7 @@ class OneTimeOrder extends Subscription
         return $this->fields['websiteId'];
     }
 
-    public function setWebsiteId(string $websiteId): self
+    public function setWebsiteId(string $websiteId): static
     {
         $this->fields['websiteId'] = $websiteId;
 
@@ -210,7 +210,7 @@ class OneTimeOrder extends Subscription
     /**
      * @param OrderItem[] $items
      */
-    public function setItems(array $items): self
+    public function setItems(array $items): static
     {
         $items = array_map(fn ($value) => $value !== null ? ($value instanceof OrderItem ? $value : OrderItem::from($value)) : null, $items);
 
@@ -224,7 +224,7 @@ class OneTimeOrder extends Subscription
         return $this->fields['deliveryAddress'] ?? null;
     }
 
-    public function setDeliveryAddress(null|ContactObject|array $deliveryAddress): self
+    public function setDeliveryAddress(null|ContactObject|array $deliveryAddress): static
     {
         if ($deliveryAddress !== null && !($deliveryAddress instanceof ContactObject)) {
             $deliveryAddress = ContactObject::from($deliveryAddress);
@@ -240,7 +240,7 @@ class OneTimeOrder extends Subscription
         return $this->fields['billingAddress'] ?? null;
     }
 
-    public function setBillingAddress(null|ContactObject|array $billingAddress): self
+    public function setBillingAddress(null|ContactObject|array $billingAddress): static
     {
         if ($billingAddress !== null && !($billingAddress instanceof ContactObject)) {
             $billingAddress = ContactObject::from($billingAddress);
@@ -256,7 +256,7 @@ class OneTimeOrder extends Subscription
         return $this->fields['activationTime'] ?? null;
     }
 
-    public function setActivationTime(null|DateTimeImmutable|string $activationTime): self
+    public function setActivationTime(null|DateTimeImmutable|string $activationTime): static
     {
         if ($activationTime !== null && !($activationTime instanceof DateTimeImmutable)) {
             $activationTime = new DateTimeImmutable($activationTime);
@@ -272,7 +272,7 @@ class OneTimeOrder extends Subscription
         return $this->fields['voidTime'] ?? null;
     }
 
-    public function setVoidTime(null|DateTimeImmutable|string $voidTime): self
+    public function setVoidTime(null|DateTimeImmutable|string $voidTime): static
     {
         if ($voidTime !== null && !($voidTime instanceof DateTimeImmutable)) {
             $voidTime = new DateTimeImmutable($voidTime);
@@ -294,7 +294,7 @@ class OneTimeOrder extends Subscription
     /**
      * @param null|string[] $couponIds
      */
-    public function setCouponIds(null|array $couponIds): self
+    public function setCouponIds(null|array $couponIds): static
     {
         $couponIds = $couponIds !== null ? array_map(fn ($value) => $value ?? null, $couponIds) : null;
 
@@ -308,7 +308,7 @@ class OneTimeOrder extends Subscription
         return $this->fields['poNumber'] ?? null;
     }
 
-    public function setPoNumber(null|string $poNumber): self
+    public function setPoNumber(null|string $poNumber): static
     {
         $this->fields['poNumber'] = $poNumber;
 
@@ -320,7 +320,7 @@ class OneTimeOrder extends Subscription
         return $this->fields['shipping'] ?? null;
     }
 
-    public function setShipping(null|Shipping|array $shipping): self
+    public function setShipping(null|Shipping|array $shipping): static
     {
         if ($shipping !== null && !($shipping instanceof Shipping)) {
             $shipping = Shipping::from($shipping);
@@ -336,7 +336,7 @@ class OneTimeOrder extends Subscription
         return $this->fields['notes'] ?? null;
     }
 
-    public function setNotes(null|string $notes): self
+    public function setNotes(null|string $notes): static
     {
         $this->fields['notes'] = $notes;
 
@@ -356,7 +356,7 @@ class OneTimeOrder extends Subscription
         return $this->fields['customerId'];
     }
 
-    public function setCustomerId(string $customerId): self
+    public function setCustomerId(string $customerId): static
     {
         $this->fields['customerId'] = $customerId;
 
@@ -378,7 +378,7 @@ class OneTimeOrder extends Subscription
         return $this->fields['riskMetadata'] ?? null;
     }
 
-    public function setRiskMetadata(null|RiskMetadata|array $riskMetadata): self
+    public function setRiskMetadata(null|RiskMetadata|array $riskMetadata): static
     {
         if ($riskMetadata !== null && !($riskMetadata instanceof RiskMetadata)) {
             $riskMetadata = RiskMetadata::from($riskMetadata);
@@ -394,7 +394,7 @@ class OneTimeOrder extends Subscription
         return $this->fields['customFields'] ?? null;
     }
 
-    public function setCustomFields(null|array $customFields): self
+    public function setCustomFields(null|array $customFields): static
     {
         $this->fields['customFields'] = $customFields;
 
@@ -512,7 +512,7 @@ class OneTimeOrder extends Subscription
         return parent::jsonSerialize() + $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -522,28 +522,28 @@ class OneTimeOrder extends Subscription
     /**
      * @psalm-param self::BILLING_STATUS_*|null $billingStatus
      */
-    private function setBillingStatus(null|string $billingStatus): self
+    private function setBillingStatus(null|string $billingStatus): static
     {
         $this->fields['billingStatus'] = $billingStatus;
 
         return $this;
     }
 
-    private function setCurrency(null|string $currency): self
+    private function setCurrency(null|string $currency): static
     {
         $this->fields['currency'] = $currency;
 
         return $this;
     }
 
-    private function setInitialInvoiceId(null|string $initialInvoiceId): self
+    private function setInitialInvoiceId(null|string $initialInvoiceId): static
     {
         $this->fields['initialInvoiceId'] = $initialInvoiceId;
 
         return $this;
     }
 
-    private function setRecentInvoiceId(null|string $recentInvoiceId): self
+    private function setRecentInvoiceId(null|string $recentInvoiceId): static
     {
         $this->fields['recentInvoiceId'] = $recentInvoiceId;
 
@@ -553,28 +553,28 @@ class OneTimeOrder extends Subscription
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    private function setStatus(null|string $status): self
+    private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
         return $this;
     }
 
-    private function setOrganizationId(null|string $organizationId): self
+    private function setOrganizationId(null|string $organizationId): static
     {
         $this->fields['organizationId'] = $organizationId;
 
         return $this;
     }
 
-    private function setRevision(null|int $revision): self
+    private function setRevision(null|int $revision): static
     {
         $this->fields['revision'] = $revision;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -585,7 +585,7 @@ class OneTimeOrder extends Subscription
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -599,7 +599,7 @@ class OneTimeOrder extends Subscription
     /**
      * @param null|array<ApprovalUrlLink|CustomerLink|InitialInvoiceLink|RecentInvoiceLink|SelfLink|WebsiteLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 
@@ -611,7 +611,7 @@ class OneTimeOrder extends Subscription
     /**
      * @param null|array{recentInvoice:Invoice,initialInvoice:Invoice,customer:Customer,website:Website,leadSource:LeadSource,shippingRate:ShippingRate,paymentInstrument:PaymentInstrument,upcomingInvoice:Invoice} $embedded
      */
-    private function setEmbedded(null|array $embedded): self
+    private function setEmbedded(null|array $embedded): static
     {
         if ($embedded !== null) {
             $embedded['recentInvoice'] = isset($embedded['recentInvoice']) ? ($embedded['recentInvoice'] instanceof Invoice ? $embedded['recentInvoice'] : Invoice::from($embedded['recentInvoice'])) : null;

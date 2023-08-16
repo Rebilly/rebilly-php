@@ -124,7 +124,7 @@ class PaymentGatewayMetadata implements JsonSerializable
         return $this->fields['apiName'];
     }
 
-    public function setApiName(string $apiName): self
+    public function setApiName(string $apiName): static
     {
         $this->fields['apiName'] = $apiName;
 
@@ -142,7 +142,7 @@ class PaymentGatewayMetadata implements JsonSerializable
     /**
      * @param null|PaymentGatewayMetadataOtherNames[] $otherNames
      */
-    public function setOtherNames(null|array $otherNames): self
+    public function setOtherNames(null|array $otherNames): static
     {
         $otherNames = $otherNames !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof PaymentGatewayMetadataOtherNames ? $value : PaymentGatewayMetadataOtherNames::from($value)) : null, $otherNames) : null;
 
@@ -156,7 +156,7 @@ class PaymentGatewayMetadata implements JsonSerializable
         return $this->fields['logo'];
     }
 
-    public function setLogo(string $logo): self
+    public function setLogo(string $logo): static
     {
         $this->fields['logo'] = $logo;
 
@@ -168,7 +168,7 @@ class PaymentGatewayMetadata implements JsonSerializable
         return $this->fields['summary'] ?? null;
     }
 
-    public function setSummary(null|string $summary): self
+    public function setSummary(null|string $summary): static
     {
         $this->fields['summary'] = $summary;
 
@@ -180,7 +180,7 @@ class PaymentGatewayMetadata implements JsonSerializable
         return $this->fields['homepage'] ?? null;
     }
 
-    public function setHomepage(null|string $homepage): self
+    public function setHomepage(null|string $homepage): static
     {
         $this->fields['homepage'] = $homepage;
 
@@ -198,7 +198,7 @@ class PaymentGatewayMetadata implements JsonSerializable
     /**
      * @param null|PaymentGatewayMetadataExternalDocs[] $externalDocs
      */
-    public function setExternalDocs(null|array $externalDocs): self
+    public function setExternalDocs(null|array $externalDocs): static
     {
         $externalDocs = $externalDocs !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof PaymentGatewayMetadataExternalDocs ? $value : PaymentGatewayMetadataExternalDocs::from($value)) : null, $externalDocs) : null;
 
@@ -212,7 +212,7 @@ class PaymentGatewayMetadata implements JsonSerializable
         return $this->fields['publishedPricing'] ?? null;
     }
 
-    public function setPublishedPricing(null|string $publishedPricing): self
+    public function setPublishedPricing(null|string $publishedPricing): static
     {
         $this->fields['publishedPricing'] = $publishedPricing;
 
@@ -224,7 +224,7 @@ class PaymentGatewayMetadata implements JsonSerializable
         return $this->fields['setupInstructions'] ?? null;
     }
 
-    public function setSetupInstructions(null|string $setupInstructions): self
+    public function setSetupInstructions(null|string $setupInstructions): static
     {
         $this->fields['setupInstructions'] = $setupInstructions;
 
@@ -242,7 +242,7 @@ class PaymentGatewayMetadata implements JsonSerializable
     /**
      * @param string[] $paymentMethods
      */
-    public function setPaymentMethods(array $paymentMethods): self
+    public function setPaymentMethods(array $paymentMethods): static
     {
         $paymentMethods = array_map(fn ($value) => $value ?? null, $paymentMethods);
 
@@ -262,7 +262,7 @@ class PaymentGatewayMetadata implements JsonSerializable
     /**
      * @param null|PaymentCardBrand[] $cardBrands
      */
-    public function setCardBrands(null|array $cardBrands): self
+    public function setCardBrands(null|array $cardBrands): static
     {
         $cardBrands = $cardBrands !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof PaymentCardBrand ? $value : PaymentCardBrand::from($value)) : null, $cardBrands) : null;
 
@@ -276,7 +276,7 @@ class PaymentGatewayMetadata implements JsonSerializable
         return $this->fields['merchantCountries'];
     }
 
-    public function setMerchantCountries(CountriesMetadata|array $merchantCountries): self
+    public function setMerchantCountries(CountriesMetadata|array $merchantCountries): static
     {
         if (!($merchantCountries instanceof CountriesMetadata)) {
             $merchantCountries = CountriesMetadata::from($merchantCountries);
@@ -292,7 +292,7 @@ class PaymentGatewayMetadata implements JsonSerializable
         return $this->fields['currencies'];
     }
 
-    public function setCurrencies(CurrenciesMetadata|array $currencies): self
+    public function setCurrencies(CurrenciesMetadata|array $currencies): static
     {
         if (!($currencies instanceof CurrenciesMetadata)) {
             $currencies = CurrenciesMetadata::from($currencies);
@@ -318,7 +318,7 @@ class PaymentGatewayMetadata implements JsonSerializable
      *
      * @psalm-param self::OPERATIONS_*|null $operations
      */
-    public function setOperations(null|array $operations): self
+    public function setOperations(null|array $operations): static
     {
         $operations = $operations !== null ? array_map(fn ($value) => $value ?? null, $operations) : null;
 
@@ -338,7 +338,7 @@ class PaymentGatewayMetadata implements JsonSerializable
     /**
      * @param null|string[] $supported3dsServers
      */
-    public function setSupported3dsServers(null|array $supported3dsServers): self
+    public function setSupported3dsServers(null|array $supported3dsServers): static
     {
         $supported3dsServers = $supported3dsServers !== null ? array_map(fn ($value) => $value ?? null, $supported3dsServers) : null;
 
@@ -362,7 +362,7 @@ class PaymentGatewayMetadata implements JsonSerializable
      *
      * @psalm-param self::SUPPORTED_PAYMENT_INSTRUMENT_SETUP_INSTRUCTIONS_*|null $supportedPaymentInstrumentSetupInstructions
      */
-    public function setSupportedPaymentInstrumentSetupInstructions(null|array $supportedPaymentInstrumentSetupInstructions): self
+    public function setSupportedPaymentInstrumentSetupInstructions(null|array $supportedPaymentInstrumentSetupInstructions): static
     {
         $supportedPaymentInstrumentSetupInstructions = $supportedPaymentInstrumentSetupInstructions !== null ? array_map(fn ($value) => $value ?? null, $supportedPaymentInstrumentSetupInstructions) : null;
 
@@ -376,7 +376,7 @@ class PaymentGatewayMetadata implements JsonSerializable
         return $this->fields['reconciliationSupport'] ?? null;
     }
 
-    public function setReconciliationSupport(null|bool $reconciliationSupport): self
+    public function setReconciliationSupport(null|bool $reconciliationSupport): static
     {
         $this->fields['reconciliationSupport'] = $reconciliationSupport;
 
@@ -388,7 +388,7 @@ class PaymentGatewayMetadata implements JsonSerializable
         return $this->fields['disputeSupport'] ?? null;
     }
 
-    public function setDisputeSupport(null|bool $disputeSupport): self
+    public function setDisputeSupport(null|bool $disputeSupport): static
     {
         $this->fields['disputeSupport'] = $disputeSupport;
 
@@ -400,7 +400,7 @@ class PaymentGatewayMetadata implements JsonSerializable
         return $this->fields['offsite'] ?? null;
     }
 
-    public function setOffsite(null|bool $offsite): self
+    public function setOffsite(null|bool $offsite): static
     {
         $this->fields['offsite'] = $offsite;
 
@@ -412,7 +412,7 @@ class PaymentGatewayMetadata implements JsonSerializable
         return $this->fields['ipn'] ?? null;
     }
 
-    public function setIpn(null|PaymentGatewayMetadataIpn|array $ipn): self
+    public function setIpn(null|PaymentGatewayMetadataIpn|array $ipn): static
     {
         if ($ipn !== null && !($ipn instanceof PaymentGatewayMetadataIpn)) {
             $ipn = PaymentGatewayMetadataIpn::from($ipn);
@@ -428,7 +428,7 @@ class PaymentGatewayMetadata implements JsonSerializable
         return $this->fields['recommendedWaitingApprovalTtl'] ?? null;
     }
 
-    public function setRecommendedWaitingApprovalTtl(null|int $recommendedWaitingApprovalTtl): self
+    public function setRecommendedWaitingApprovalTtl(null|int $recommendedWaitingApprovalTtl): static
     {
         $this->fields['recommendedWaitingApprovalTtl'] = $recommendedWaitingApprovalTtl;
 
@@ -516,7 +516,7 @@ class PaymentGatewayMetadata implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

@@ -58,7 +58,7 @@ class SystemEvent implements JsonSerializable
         return $this->fields['eventType'] ?? null;
     }
 
-    public function setEventType(null|EventType|string $eventType): self
+    public function setEventType(null|EventType|string $eventType): static
     {
         if ($eventType !== null && !($eventType instanceof EventType)) {
             $eventType = EventType::from($eventType);
@@ -74,7 +74,7 @@ class SystemEvent implements JsonSerializable
         return $this->fields['title'] ?? null;
     }
 
-    public function setTitle(null|string $title): self
+    public function setTitle(null|string $title): static
     {
         $this->fields['title'] = $title;
 
@@ -86,7 +86,7 @@ class SystemEvent implements JsonSerializable
         return $this->fields['description'] ?? null;
     }
 
-    public function setDescription(null|string $description): self
+    public function setDescription(null|string $description): static
     {
         $this->fields['description'] = $description;
 
@@ -104,7 +104,7 @@ class SystemEvent implements JsonSerializable
     /**
      * @psalm-param self::CATEGORY_*|null $category
      */
-    public function setCategory(null|string $category): self
+    public function setCategory(null|string $category): static
     {
         $this->fields['category'] = $category;
 
@@ -157,14 +157,14 @@ class SystemEvent implements JsonSerializable
         return $data;
     }
 
-    private function setRulesCount(null|int $rulesCount): self
+    private function setRulesCount(null|int $rulesCount): static
     {
         $this->fields['rulesCount'] = $rulesCount;
 
         return $this;
     }
 
-    private function setBindsCount(null|int $bindsCount): self
+    private function setBindsCount(null|int $bindsCount): static
     {
         $this->fields['bindsCount'] = $bindsCount;
 
@@ -174,7 +174,7 @@ class SystemEvent implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

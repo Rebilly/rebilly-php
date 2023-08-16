@@ -36,7 +36,7 @@ class CoinGateCredentials implements JsonSerializable
         return $this->fields['authToken'];
     }
 
-    public function setAuthToken(string $authToken): self
+    public function setAuthToken(string $authToken): static
     {
         $this->fields['authToken'] = $authToken;
 

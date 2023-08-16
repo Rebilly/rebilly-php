@@ -39,7 +39,7 @@ class RestrictBuy implements JsonSerializable
         return $this->fields['planId'];
     }
 
-    public function setPlanId(string $planId): self
+    public function setPlanId(string $planId): static
     {
         $this->fields['planId'] = $planId;
 
@@ -51,7 +51,7 @@ class RestrictBuy implements JsonSerializable
         return $this->fields['quantity'];
     }
 
-    public function setQuantity(int $quantity): self
+    public function setQuantity(int $quantity): static
     {
         $this->fields['quantity'] = $quantity;
 

@@ -39,7 +39,7 @@ class KycSettingsIdentity implements JsonSerializable
         return $this->fields['weights'] ?? null;
     }
 
-    public function setWeights(null|KycSettingsIdentityWeights|array $weights): self
+    public function setWeights(null|KycSettingsIdentityWeights|array $weights): static
     {
         if ($weights !== null && !($weights instanceof KycSettingsIdentityWeights)) {
             $weights = KycSettingsIdentityWeights::from($weights);
@@ -55,7 +55,7 @@ class KycSettingsIdentity implements JsonSerializable
         return $this->fields['thresholds'] ?? null;
     }
 
-    public function setThresholds(null|KycSettingsIdentityThresholds|array $thresholds): self
+    public function setThresholds(null|KycSettingsIdentityThresholds|array $thresholds): static
     {
         if ($thresholds !== null && !($thresholds instanceof KycSettingsIdentityThresholds)) {
             $thresholds = KycSettingsIdentityThresholds::from($thresholds);

@@ -80,7 +80,7 @@ abstract class CommonScheduleInstruction implements JsonSerializable
     /**
      * @psalm-param self::METHOD_* $method
      */
-    private function setMethod(string $method): self
+    private function setMethod(string $method): static
     {
         $this->fields['method'] = $method;
 

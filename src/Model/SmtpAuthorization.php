@@ -72,7 +72,7 @@ abstract class SmtpAuthorization implements JsonSerializable
     /**
      * @psalm-param self::TYPE_*|null $type
      */
-    private function setType(null|string $type): self
+    private function setType(null|string $type): static
     {
         $this->fields['type'] = $type;
 

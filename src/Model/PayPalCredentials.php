@@ -45,7 +45,7 @@ class PayPalCredentials implements JsonSerializable
         return $this->fields['partnerId'] ?? null;
     }
 
-    public function setPartnerId(null|string $partnerId): self
+    public function setPartnerId(null|string $partnerId): static
     {
         $this->fields['partnerId'] = $partnerId;
 
@@ -57,7 +57,7 @@ class PayPalCredentials implements JsonSerializable
         return $this->fields['partnerClientId'] ?? null;
     }
 
-    public function setPartnerClientId(null|string $partnerClientId): self
+    public function setPartnerClientId(null|string $partnerClientId): static
     {
         $this->fields['partnerClientId'] = $partnerClientId;
 
@@ -69,7 +69,7 @@ class PayPalCredentials implements JsonSerializable
         return $this->fields['partnerSecret'] ?? null;
     }
 
-    public function setPartnerSecret(null|string $partnerSecret): self
+    public function setPartnerSecret(null|string $partnerSecret): static
     {
         $this->fields['partnerSecret'] = $partnerSecret;
 
@@ -81,7 +81,7 @@ class PayPalCredentials implements JsonSerializable
         return $this->fields['partnerBnCode'] ?? null;
     }
 
-    public function setPartnerBnCode(null|string $partnerBnCode): self
+    public function setPartnerBnCode(null|string $partnerBnCode): static
     {
         $this->fields['partnerBnCode'] = $partnerBnCode;
 

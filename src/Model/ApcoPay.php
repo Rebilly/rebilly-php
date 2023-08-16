@@ -41,7 +41,7 @@ class ApcoPay extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(ApcoPayCredentials|array $credentials): self
+    public function setCredentials(ApcoPayCredentials|array $credentials): static
     {
         if (!($credentials instanceof ApcoPayCredentials)) {
             $credentials = ApcoPayCredentials::from($credentials);
@@ -57,7 +57,7 @@ class ApcoPay extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|ApcoPaySettings|array $settings): self
+    public function setSettings(null|ApcoPaySettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof ApcoPaySettings)) {
             $settings = ApcoPaySettings::from($settings);

@@ -38,7 +38,7 @@ class RiskReserveDetails implements JsonSerializable
         return $this->fields['releaseTime'] ?? null;
     }
 
-    public function setReleaseTime(null|DateTimeImmutable|string $releaseTime): self
+    public function setReleaseTime(null|DateTimeImmutable|string $releaseTime): static
     {
         if ($releaseTime !== null && !($releaseTime instanceof DateTimeImmutable)) {
             $releaseTime = new DateTimeImmutable($releaseTime);

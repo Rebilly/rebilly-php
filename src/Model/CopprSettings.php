@@ -36,7 +36,7 @@ class CopprSettings implements JsonSerializable
         return $this->fields['rebillyPublishableKey'] ?? null;
     }
 
-    public function setRebillyPublishableKey(null|string $rebillyPublishableKey): self
+    public function setRebillyPublishableKey(null|string $rebillyPublishableKey): static
     {
         $this->fields['rebillyPublishableKey'] = $rebillyPublishableKey;
 

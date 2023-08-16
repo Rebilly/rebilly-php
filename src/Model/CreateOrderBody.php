@@ -46,7 +46,7 @@ class CreateOrderBody implements JsonSerializable
         return $this->fields['order_date'];
     }
 
-    public function setOrderDate(string $orderDate): self
+    public function setOrderDate(string $orderDate): static
     {
         $this->fields['order_date'] = $orderDate;
 
@@ -58,7 +58,7 @@ class CreateOrderBody implements JsonSerializable
         return $this->fields['order_title'];
     }
 
-    public function setOrderTitle(string $orderTitle): self
+    public function setOrderTitle(string $orderTitle): static
     {
         $this->fields['order_title'] = $orderTitle;
 
@@ -76,7 +76,7 @@ class CreateOrderBody implements JsonSerializable
     /**
      * @psalm-param self::ORDER_TYPE_* $orderType
      */
-    public function setOrderType(string $orderType): self
+    public function setOrderType(string $orderType): static
     {
         $this->fields['order_type'] = $orderType;
 

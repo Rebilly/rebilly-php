@@ -39,7 +39,7 @@ class RPNCredentials implements JsonSerializable
         return $this->fields['mid'];
     }
 
-    public function setMid(string $mid): self
+    public function setMid(string $mid): static
     {
         $this->fields['mid'] = $mid;
 
@@ -51,7 +51,7 @@ class RPNCredentials implements JsonSerializable
         return $this->fields['key'];
     }
 
-    public function setKey(string $key): self
+    public function setKey(string $key): static
     {
         $this->fields['key'] = $key;
 

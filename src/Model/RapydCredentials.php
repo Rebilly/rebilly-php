@@ -39,7 +39,7 @@ class RapydCredentials implements JsonSerializable
         return $this->fields['accessKey'];
     }
 
-    public function setAccessKey(string $accessKey): self
+    public function setAccessKey(string $accessKey): static
     {
         $this->fields['accessKey'] = $accessKey;
 
@@ -51,7 +51,7 @@ class RapydCredentials implements JsonSerializable
         return $this->fields['secretKey'];
     }
 
-    public function setSecretKey(string $secretKey): self
+    public function setSecretKey(string $secretKey): static
     {
         $this->fields['secretKey'] = $secretKey;
 

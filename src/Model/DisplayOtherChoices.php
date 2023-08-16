@@ -44,7 +44,7 @@ class DisplayOtherChoices extends RuleAction
     /**
      * @param DisplayMessages[] $choices
      */
-    public function setChoices(array $choices): self
+    public function setChoices(array $choices): static
     {
         $choices = array_map(fn ($value) => $value !== null ? ($value instanceof DisplayMessages ? $value : DisplayMessages::from($value)) : null, $choices);
 

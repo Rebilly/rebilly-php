@@ -63,7 +63,7 @@ class SubscriptionChange implements JsonSerializable
     /**
      * @param SubscriptionChangeItems[] $items
      */
-    public function setItems(array $items): self
+    public function setItems(array $items): static
     {
         $items = array_map(fn ($value) => $value !== null ? ($value instanceof SubscriptionChangeItems ? $value : SubscriptionChangeItems::from($value)) : null, $items);
 
@@ -83,7 +83,7 @@ class SubscriptionChange implements JsonSerializable
     /**
      * @psalm-param self::RENEWAL_POLICY_* $renewalPolicy
      */
-    public function setRenewalPolicy(string $renewalPolicy): self
+    public function setRenewalPolicy(string $renewalPolicy): static
     {
         $this->fields['renewalPolicy'] = $renewalPolicy;
 
@@ -95,7 +95,7 @@ class SubscriptionChange implements JsonSerializable
         return $this->fields['prorated'];
     }
 
-    public function setProrated(bool $prorated): self
+    public function setProrated(bool $prorated): static
     {
         $this->fields['prorated'] = $prorated;
 
@@ -107,7 +107,7 @@ class SubscriptionChange implements JsonSerializable
         return $this->fields['effectiveTime'] ?? null;
     }
 
-    public function setEffectiveTime(null|DateTimeImmutable|string $effectiveTime): self
+    public function setEffectiveTime(null|DateTimeImmutable|string $effectiveTime): static
     {
         if ($effectiveTime !== null && !($effectiveTime instanceof DateTimeImmutable)) {
             $effectiveTime = new DateTimeImmutable($effectiveTime);
@@ -123,7 +123,7 @@ class SubscriptionChange implements JsonSerializable
         return $this->fields['preview'] ?? null;
     }
 
-    public function setPreview(null|bool $preview): self
+    public function setPreview(null|bool $preview): static
     {
         $this->fields['preview'] = $preview;
 
@@ -135,7 +135,7 @@ class SubscriptionChange implements JsonSerializable
         return $this->fields['keepTrial'] ?? null;
     }
 
-    public function setKeepTrial(null|bool $keepTrial): self
+    public function setKeepTrial(null|bool $keepTrial): static
     {
         $this->fields['keepTrial'] = $keepTrial;
 

@@ -42,7 +42,7 @@ class SofortCredentials implements JsonSerializable
         return $this->fields['configKey'];
     }
 
-    public function setConfigKey(string $configKey): self
+    public function setConfigKey(string $configKey): static
     {
         $this->fields['configKey'] = $configKey;
 
@@ -54,7 +54,7 @@ class SofortCredentials implements JsonSerializable
         return $this->fields['nuaPayApiKey'] ?? null;
     }
 
-    public function setNuaPayApiKey(null|string $nuaPayApiKey): self
+    public function setNuaPayApiKey(null|string $nuaPayApiKey): static
     {
         $this->fields['nuaPayApiKey'] = $nuaPayApiKey;
 
@@ -66,7 +66,7 @@ class SofortCredentials implements JsonSerializable
         return $this->fields['nuaPayAccountId'] ?? null;
     }
 
-    public function setNuaPayAccountId(null|string $nuaPayAccountId): self
+    public function setNuaPayAccountId(null|string $nuaPayAccountId): static
     {
         $this->fields['nuaPayAccountId'] = $nuaPayAccountId;
 

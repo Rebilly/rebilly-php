@@ -36,7 +36,7 @@ class PurchaseBumpOfferList implements JsonSerializable
         return $this->fields['purchaseBumpOfferList'] ?? null;
     }
 
-    public function setPurchaseBumpOfferList(null|PurchaseBumpOffer|array $purchaseBumpOfferList): self
+    public function setPurchaseBumpOfferList(null|PurchaseBumpOffer|array $purchaseBumpOfferList): static
     {
         if ($purchaseBumpOfferList !== null && !($purchaseBumpOfferList instanceof PurchaseBumpOffer)) {
             $purchaseBumpOfferList = PurchaseBumpOffer::from($purchaseBumpOfferList);

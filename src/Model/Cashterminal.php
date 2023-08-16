@@ -38,7 +38,7 @@ class Cashterminal extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(CashterminalCredentials|array $credentials): self
+    public function setCredentials(CashterminalCredentials|array $credentials): static
     {
         if (!($credentials instanceof CashterminalCredentials)) {
             $credentials = CashterminalCredentials::from($credentials);

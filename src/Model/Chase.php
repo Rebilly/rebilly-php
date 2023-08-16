@@ -38,7 +38,7 @@ class Chase extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(ChaseCredentials|array $credentials): self
+    public function setCredentials(ChaseCredentials|array $credentials): static
     {
         if (!($credentials instanceof ChaseCredentials)) {
             $credentials = ChaseCredentials::from($credentials);

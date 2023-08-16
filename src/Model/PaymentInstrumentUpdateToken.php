@@ -48,7 +48,7 @@ class PaymentInstrumentUpdateToken implements JsonSerializable
         return $this->fields['token'] ?? null;
     }
 
-    public function setToken(null|string $token): self
+    public function setToken(null|string $token): static
     {
         $this->fields['token'] = $token;
 
@@ -60,7 +60,7 @@ class PaymentInstrumentUpdateToken implements JsonSerializable
         return $this->fields['billingAddress'] ?? null;
     }
 
-    public function setBillingAddress(null|ContactObject|array $billingAddress): self
+    public function setBillingAddress(null|ContactObject|array $billingAddress): static
     {
         if ($billingAddress !== null && !($billingAddress instanceof ContactObject)) {
             $billingAddress = ContactObject::from($billingAddress);
@@ -76,7 +76,7 @@ class PaymentInstrumentUpdateToken implements JsonSerializable
         return $this->fields['stickyGatewayAccountId'] ?? null;
     }
 
-    public function setStickyGatewayAccountId(null|string $stickyGatewayAccountId): self
+    public function setStickyGatewayAccountId(null|string $stickyGatewayAccountId): static
     {
         $this->fields['stickyGatewayAccountId'] = $stickyGatewayAccountId;
 
@@ -88,7 +88,7 @@ class PaymentInstrumentUpdateToken implements JsonSerializable
         return $this->fields['customFields'] ?? null;
     }
 
-    public function setCustomFields(null|array $customFields): self
+    public function setCustomFields(null|array $customFields): static
     {
         $this->fields['customFields'] = $customFields;
 
@@ -100,7 +100,7 @@ class PaymentInstrumentUpdateToken implements JsonSerializable
         return $this->fields['useAsBackup'] ?? null;
     }
 
-    public function setUseAsBackup(null|bool $useAsBackup): self
+    public function setUseAsBackup(null|bool $useAsBackup): static
     {
         $this->fields['useAsBackup'] = $useAsBackup;
 

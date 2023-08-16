@@ -38,7 +38,7 @@ class CODVoucher extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(CODVoucherCredentials|array $credentials): self
+    public function setCredentials(CODVoucherCredentials|array $credentials): static
     {
         if (!($credentials instanceof CODVoucherCredentials)) {
             $credentials = CODVoucherCredentials::from($credentials);

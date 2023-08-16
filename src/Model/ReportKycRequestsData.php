@@ -39,7 +39,7 @@ class ReportKycRequestsData implements JsonSerializable
         return $this->fields['rejectionReason'] ?? null;
     }
 
-    public function setRejectionReason(null|KycDocumentRequestStatuses|string $rejectionReason): self
+    public function setRejectionReason(null|KycDocumentRequestStatuses|string $rejectionReason): static
     {
         if ($rejectionReason !== null && !($rejectionReason instanceof KycDocumentRequestStatuses)) {
             $rejectionReason = KycDocumentRequestStatuses::from($rejectionReason);
@@ -55,7 +55,7 @@ class ReportKycRequestsData implements JsonSerializable
         return $this->fields['count'] ?? null;
     }
 
-    public function setCount(null|int $count): self
+    public function setCount(null|int $count): static
     {
         $this->fields['count'] = $count;
 

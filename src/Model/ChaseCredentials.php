@@ -48,7 +48,7 @@ class ChaseCredentials implements JsonSerializable
         return $this->fields['username'];
     }
 
-    public function setUsername(string $username): self
+    public function setUsername(string $username): static
     {
         $this->fields['username'] = $username;
 
@@ -60,7 +60,7 @@ class ChaseCredentials implements JsonSerializable
         return $this->fields['password'];
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password): static
     {
         $this->fields['password'] = $password;
 
@@ -72,7 +72,7 @@ class ChaseCredentials implements JsonSerializable
         return $this->fields['coNumber'];
     }
 
-    public function setCoNumber(string $coNumber): self
+    public function setCoNumber(string $coNumber): static
     {
         $this->fields['coNumber'] = $coNumber;
 
@@ -84,7 +84,7 @@ class ChaseCredentials implements JsonSerializable
         return $this->fields['divisionId'];
     }
 
-    public function setDivisionId(string $divisionId): self
+    public function setDivisionId(string $divisionId): static
     {
         $this->fields['divisionId'] = $divisionId;
 
@@ -96,7 +96,7 @@ class ChaseCredentials implements JsonSerializable
         return $this->fields['partialAuth'];
     }
 
-    public function setPartialAuth(bool $partialAuth): self
+    public function setPartialAuth(bool $partialAuth): static
     {
         $this->fields['partialAuth'] = $partialAuth;
 

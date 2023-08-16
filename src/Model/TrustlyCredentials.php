@@ -45,7 +45,7 @@ class TrustlyCredentials implements JsonSerializable
         return $this->fields['username'] ?? null;
     }
 
-    public function setUsername(null|string $username): self
+    public function setUsername(null|string $username): static
     {
         $this->fields['username'] = $username;
 
@@ -57,7 +57,7 @@ class TrustlyCredentials implements JsonSerializable
         return $this->fields['password'];
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password): static
     {
         $this->fields['password'] = $password;
 
@@ -69,7 +69,7 @@ class TrustlyCredentials implements JsonSerializable
         return $this->fields['publicKey'];
     }
 
-    public function setPublicKey(string $publicKey): self
+    public function setPublicKey(string $publicKey): static
     {
         $this->fields['publicKey'] = $publicKey;
 
@@ -81,7 +81,7 @@ class TrustlyCredentials implements JsonSerializable
         return $this->fields['privateKey'];
     }
 
-    public function setPrivateKey(string $privateKey): self
+    public function setPrivateKey(string $privateKey): static
     {
         $this->fields['privateKey'] = $privateKey;
 

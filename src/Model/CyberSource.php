@@ -38,7 +38,7 @@ class CyberSource extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(CyberSourceCredentials|array $credentials): self
+    public function setCredentials(CyberSourceCredentials|array $credentials): static
     {
         if (!($credentials instanceof CyberSourceCredentials)) {
             $credentials = CyberSourceCredentials::from($credentials);

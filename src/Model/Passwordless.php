@@ -61,7 +61,7 @@ class Passwordless extends AuthenticationToken
         return $this->fields['customerId'];
     }
 
-    public function setCustomerId(string $customerId): self
+    public function setCustomerId(string $customerId): static
     {
         $this->fields['customerId'] = $customerId;
 
@@ -79,7 +79,7 @@ class Passwordless extends AuthenticationToken
     /**
      * @psalm-param self::MODE_*|null $mode
      */
-    public function setMode(null|string $mode): self
+    public function setMode(null|string $mode): static
     {
         $this->fields['mode'] = $mode;
 
@@ -91,7 +91,7 @@ class Passwordless extends AuthenticationToken
         return $this->fields['expiredTime'] ?? null;
     }
 
-    public function setExpiredTime(null|DateTimeImmutable|string $expiredTime): self
+    public function setExpiredTime(null|DateTimeImmutable|string $expiredTime): static
     {
         if ($expiredTime !== null && !($expiredTime instanceof DateTimeImmutable)) {
             $expiredTime = new DateTimeImmutable($expiredTime);
@@ -120,7 +120,7 @@ class Passwordless extends AuthenticationToken
         return $this->fields['otpRequired'] ?? null;
     }
 
-    public function setOtpRequired(null|bool $otpRequired): self
+    public function setOtpRequired(null|bool $otpRequired): static
     {
         $this->fields['otpRequired'] = $otpRequired;
 
@@ -163,7 +163,7 @@ class Passwordless extends AuthenticationToken
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 
@@ -172,14 +172,14 @@ class Passwordless extends AuthenticationToken
         return $this;
     }
 
-    private function setToken(null|string $token): self
+    private function setToken(null|string $token): static
     {
         $this->fields['token'] = $token;
 
         return $this;
     }
 
-    private function setCredentialId(null|string $credentialId): self
+    private function setCredentialId(null|string $credentialId): static
     {
         $this->fields['credentialId'] = $credentialId;
 

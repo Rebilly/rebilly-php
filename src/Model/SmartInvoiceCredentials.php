@@ -39,7 +39,7 @@ class SmartInvoiceCredentials implements JsonSerializable
         return $this->fields['merchantId'];
     }
 
-    public function setMerchantId(string $merchantId): self
+    public function setMerchantId(string $merchantId): static
     {
         $this->fields['merchantId'] = $merchantId;
 
@@ -51,7 +51,7 @@ class SmartInvoiceCredentials implements JsonSerializable
         return $this->fields['applicationId'];
     }
 
-    public function setApplicationId(string $applicationId): self
+    public function setApplicationId(string $applicationId): static
     {
         $this->fields['applicationId'] = $applicationId;
 

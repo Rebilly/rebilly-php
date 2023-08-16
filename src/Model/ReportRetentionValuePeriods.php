@@ -45,7 +45,7 @@ class ReportRetentionValuePeriods implements JsonSerializable
         return $this->fields['period'] ?? null;
     }
 
-    public function setPeriod(null|int $period): self
+    public function setPeriod(null|int $period): static
     {
         $this->fields['period'] = $period;
 
@@ -57,7 +57,7 @@ class ReportRetentionValuePeriods implements JsonSerializable
         return $this->fields['retentionAverage'] ?? null;
     }
 
-    public function setRetentionAverage(null|float|string $retentionAverage): self
+    public function setRetentionAverage(null|float|string $retentionAverage): static
     {
         if (is_string($retentionAverage)) {
             $retentionAverage = (float) $retentionAverage;
@@ -73,7 +73,7 @@ class ReportRetentionValuePeriods implements JsonSerializable
         return $this->fields['transactionsCount'] ?? null;
     }
 
-    public function setTransactionsCount(null|int $transactionsCount): self
+    public function setTransactionsCount(null|int $transactionsCount): static
     {
         $this->fields['transactionsCount'] = $transactionsCount;
 
@@ -85,7 +85,7 @@ class ReportRetentionValuePeriods implements JsonSerializable
         return $this->fields['transactionsValue'] ?? null;
     }
 
-    public function setTransactionsValue(null|float|string $transactionsValue): self
+    public function setTransactionsValue(null|float|string $transactionsValue): static
     {
         if (is_string($transactionsValue)) {
             $transactionsValue = (float) $transactionsValue;

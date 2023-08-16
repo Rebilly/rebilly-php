@@ -126,7 +126,7 @@ class UserApplication implements JsonSerializable
         return $this->fields['name'];
     }
 
-    public function setName(string $name): self
+    public function setName(string $name): static
     {
         $this->fields['name'] = $name;
 
@@ -138,7 +138,7 @@ class UserApplication implements JsonSerializable
         return $this->fields['logoId'];
     }
 
-    public function setLogoId(string $logoId): self
+    public function setLogoId(string $logoId): static
     {
         $this->fields['logoId'] = $logoId;
 
@@ -150,7 +150,7 @@ class UserApplication implements JsonSerializable
         return $this->fields['authorName'];
     }
 
-    public function setAuthorName(string $authorName): self
+    public function setAuthorName(string $authorName): static
     {
         $this->fields['authorName'] = $authorName;
 
@@ -162,7 +162,7 @@ class UserApplication implements JsonSerializable
         return $this->fields['authorLogoId'] ?? null;
     }
 
-    public function setAuthorLogoId(null|string $authorLogoId): self
+    public function setAuthorLogoId(null|string $authorLogoId): static
     {
         $this->fields['authorLogoId'] = $authorLogoId;
 
@@ -174,7 +174,7 @@ class UserApplication implements JsonSerializable
         return $this->fields['tagline'];
     }
 
-    public function setTagline(string $tagline): self
+    public function setTagline(string $tagline): static
     {
         $this->fields['tagline'] = $tagline;
 
@@ -186,7 +186,7 @@ class UserApplication implements JsonSerializable
         return $this->fields['description'];
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(string $description): static
     {
         $this->fields['description'] = $description;
 
@@ -216,7 +216,7 @@ class UserApplication implements JsonSerializable
      *
      * @psalm-param self::PERMISSIONS_* $permissions
      */
-    public function setPermissions(array $permissions): self
+    public function setPermissions(array $permissions): static
     {
         $permissions = array_map(fn ($value) => $value ?? null, $permissions);
 
@@ -230,7 +230,7 @@ class UserApplication implements JsonSerializable
         return $this->fields['properties'] ?? null;
     }
 
-    public function setProperties(null|array $properties): self
+    public function setProperties(null|array $properties): static
     {
         $this->fields['properties'] = $properties;
 
@@ -312,7 +312,7 @@ class UserApplication implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -322,14 +322,14 @@ class UserApplication implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    private function setStatus(null|string $status): self
+    private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -340,7 +340,7 @@ class UserApplication implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -354,7 +354,7 @@ class UserApplication implements JsonSerializable
     /**
      * @param null|array<ApplicationInstanceLink|AuthorLogoUrlLink|LogoUrlLink|SelfLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 
@@ -366,7 +366,7 @@ class UserApplication implements JsonSerializable
     /**
      * @param null|array{applicationInstance:ApplicationInstance} $embedded
      */
-    private function setEmbedded(null|array $embedded): self
+    private function setEmbedded(null|array $embedded): static
     {
         if ($embedded !== null) {
             $embedded['applicationInstance'] = isset($embedded['applicationInstance']) ? ($embedded['applicationInstance'] instanceof ApplicationInstance ? $embedded['applicationInstance'] : ApplicationInstance::from($embedded['applicationInstance'])) : null;

@@ -42,7 +42,7 @@ class GatewayWeightedList implements JsonSerializable
         return $this->fields['gatewayName'];
     }
 
-    public function setGatewayName(GatewayName|string $gatewayName): self
+    public function setGatewayName(GatewayName|string $gatewayName): static
     {
         if (!($gatewayName instanceof GatewayName)) {
             $gatewayName = GatewayName::from($gatewayName);
@@ -58,7 +58,7 @@ class GatewayWeightedList implements JsonSerializable
         return $this->fields['acquirerName'];
     }
 
-    public function setAcquirerName(AcquirerName|string $acquirerName): self
+    public function setAcquirerName(AcquirerName|string $acquirerName): static
     {
         if (!($acquirerName instanceof AcquirerName)) {
             $acquirerName = AcquirerName::from($acquirerName);
@@ -74,7 +74,7 @@ class GatewayWeightedList implements JsonSerializable
         return $this->fields['weight'];
     }
 
-    public function setWeight(int $weight): self
+    public function setWeight(int $weight): static
     {
         $this->fields['weight'] = $weight;
 

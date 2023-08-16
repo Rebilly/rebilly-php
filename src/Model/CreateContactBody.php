@@ -45,7 +45,7 @@ class CreateContactBody implements JsonSerializable
     /**
      * @param null|CreateContactBodyEmailAddresses[] $emailAddresses
      */
-    public function setEmailAddresses(null|array $emailAddresses): self
+    public function setEmailAddresses(null|array $emailAddresses): static
     {
         $emailAddresses = $emailAddresses !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof CreateContactBodyEmailAddresses ? $value : CreateContactBodyEmailAddresses::from($value)) : null, $emailAddresses) : null;
 
@@ -65,7 +65,7 @@ class CreateContactBody implements JsonSerializable
     /**
      * @param null|CreateContactBodyPhoneNumbers[] $phoneNumbers
      */
-    public function setPhoneNumbers(null|array $phoneNumbers): self
+    public function setPhoneNumbers(null|array $phoneNumbers): static
     {
         $phoneNumbers = $phoneNumbers !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof CreateContactBodyPhoneNumbers ? $value : CreateContactBodyPhoneNumbers::from($value)) : null, $phoneNumbers) : null;
 

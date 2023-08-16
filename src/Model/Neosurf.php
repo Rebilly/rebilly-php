@@ -38,7 +38,7 @@ class Neosurf extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(NeosurfCredentials|array $credentials): self
+    public function setCredentials(NeosurfCredentials|array $credentials): static
     {
         if (!($credentials instanceof NeosurfCredentials)) {
             $credentials = NeosurfCredentials::from($credentials);

@@ -45,7 +45,7 @@ class FinancialSettings implements JsonSerializable
     /**
      * @param null|FinancialSettingsRiskReserveSettings[] $riskReserveSettings
      */
-    public function setRiskReserveSettings(null|array $riskReserveSettings): self
+    public function setRiskReserveSettings(null|array $riskReserveSettings): static
     {
         $riskReserveSettings = $riskReserveSettings !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof FinancialSettingsRiskReserveSettings ? $value : FinancialSettingsRiskReserveSettings::from($value)) : null, $riskReserveSettings) : null;
 
@@ -59,7 +59,7 @@ class FinancialSettings implements JsonSerializable
         return $this->fields['settlementSettings'] ?? null;
     }
 
-    public function setSettlementSettings(null|FinancialSettingsSettlementSettings|array $settlementSettings): self
+    public function setSettlementSettings(null|FinancialSettingsSettlementSettings|array $settlementSettings): static
     {
         if ($settlementSettings !== null && !($settlementSettings instanceof FinancialSettingsSettlementSettings)) {
             $settlementSettings = FinancialSettingsSettlementSettings::from($settlementSettings);

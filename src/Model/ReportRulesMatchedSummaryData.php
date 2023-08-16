@@ -42,7 +42,7 @@ class ReportRulesMatchedSummaryData implements JsonSerializable
         return $this->fields['rule'] ?? null;
     }
 
-    public function setRule(null|string $rule): self
+    public function setRule(null|string $rule): static
     {
         $this->fields['rule'] = $rule;
 
@@ -54,7 +54,7 @@ class ReportRulesMatchedSummaryData implements JsonSerializable
         return $this->fields['count'] ?? null;
     }
 
-    public function setCount(null|int $count): self
+    public function setCount(null|int $count): static
     {
         $this->fields['count'] = $count;
 
@@ -66,7 +66,7 @@ class ReportRulesMatchedSummaryData implements JsonSerializable
         return $this->fields['approvalRate'] ?? null;
     }
 
-    public function setApprovalRate(null|float|string $approvalRate): self
+    public function setApprovalRate(null|float|string $approvalRate): static
     {
         if (is_string($approvalRate)) {
             $approvalRate = (float) $approvalRate;

@@ -67,7 +67,7 @@ class WebhookCredential implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    public function setStatus(null|string $status): self
+    public function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
@@ -79,7 +79,7 @@ class WebhookCredential implements JsonSerializable
         return $this->fields['deactivationTime'] ?? null;
     }
 
-    public function setDeactivationTime(null|DateTimeImmutable|string $deactivationTime): self
+    public function setDeactivationTime(null|DateTimeImmutable|string $deactivationTime): static
     {
         if ($deactivationTime !== null && !($deactivationTime instanceof DateTimeImmutable)) {
             $deactivationTime = new DateTimeImmutable($deactivationTime);
@@ -95,7 +95,7 @@ class WebhookCredential implements JsonSerializable
         return $this->fields['host'];
     }
 
-    public function setHost(string $host): self
+    public function setHost(string $host): static
     {
         $this->fields['host'] = $host;
 
@@ -107,7 +107,7 @@ class WebhookCredential implements JsonSerializable
         return $this->fields['auth'] ?? null;
     }
 
-    public function setAuth(null|WebhookAuthorization|array $auth): self
+    public function setAuth(null|WebhookAuthorization|array $auth): static
     {
         if ($auth !== null && !($auth instanceof WebhookAuthorization)) {
             $auth = WebhookAuthorization::from($auth);
@@ -140,7 +140,7 @@ class WebhookCredential implements JsonSerializable
         return $data;
     }
 
-    private function setHash(null|string $hash): self
+    private function setHash(null|string $hash): static
     {
         $this->fields['hash'] = $hash;
 

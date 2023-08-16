@@ -39,7 +39,7 @@ class Money implements JsonSerializable
         return $this->fields['amount'];
     }
 
-    public function setAmount(float|string $amount): self
+    public function setAmount(float|string $amount): static
     {
         if (is_string($amount)) {
             $amount = (float) $amount;
@@ -55,7 +55,7 @@ class Money implements JsonSerializable
         return $this->fields['currency'];
     }
 
-    public function setCurrency(string $currency): self
+    public function setCurrency(string $currency): static
     {
         $this->fields['currency'] = $currency;
 

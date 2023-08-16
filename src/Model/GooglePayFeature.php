@@ -68,7 +68,7 @@ class GooglePayFeature implements JsonSerializable
     /**
      * @psalm-param self::NAME_*|null $name
      */
-    public function setName(null|string $name): self
+    public function setName(null|string $name): static
     {
         $this->fields['name'] = $name;
 
@@ -80,7 +80,7 @@ class GooglePayFeature implements JsonSerializable
         return $this->fields['merchantName'] ?? null;
     }
 
-    public function setMerchantName(null|string $merchantName): self
+    public function setMerchantName(null|string $merchantName): static
     {
         $this->fields['merchantName'] = $merchantName;
 
@@ -92,7 +92,7 @@ class GooglePayFeature implements JsonSerializable
         return $this->fields['merchantOrigin'] ?? null;
     }
 
-    public function setMerchantOrigin(null|string $merchantOrigin): self
+    public function setMerchantOrigin(null|string $merchantOrigin): static
     {
         $this->fields['merchantOrigin'] = $merchantOrigin;
 
@@ -104,7 +104,7 @@ class GooglePayFeature implements JsonSerializable
         return $this->fields['country'] ?? null;
     }
 
-    public function setCountry(null|DigitalWalletCountry|array $country): self
+    public function setCountry(null|DigitalWalletCountry|array $country): static
     {
         if ($country !== null && !($country instanceof DigitalWalletCountry)) {
             $country = DigitalWalletCountry::from($country);

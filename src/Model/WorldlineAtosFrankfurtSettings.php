@@ -42,7 +42,7 @@ class WorldlineAtosFrankfurtSettings implements JsonSerializable
         return $this->fields['cardAcceptorName'];
     }
 
-    public function setCardAcceptorName(string $cardAcceptorName): self
+    public function setCardAcceptorName(string $cardAcceptorName): static
     {
         $this->fields['cardAcceptorName'] = $cardAcceptorName;
 
@@ -54,7 +54,7 @@ class WorldlineAtosFrankfurtSettings implements JsonSerializable
         return $this->fields['cardAcceptorLocation'];
     }
 
-    public function setCardAcceptorLocation(string $cardAcceptorLocation): self
+    public function setCardAcceptorLocation(string $cardAcceptorLocation): static
     {
         $this->fields['cardAcceptorLocation'] = $cardAcceptorLocation;
 
@@ -66,7 +66,7 @@ class WorldlineAtosFrankfurtSettings implements JsonSerializable
         return $this->fields['cardAcceptorCountryCode'];
     }
 
-    public function setCardAcceptorCountryCode(string $cardAcceptorCountryCode): self
+    public function setCardAcceptorCountryCode(string $cardAcceptorCountryCode): static
     {
         $this->fields['cardAcceptorCountryCode'] = $cardAcceptorCountryCode;
 

@@ -51,7 +51,7 @@ class CommonCheckoutFormCustomizationTracking implements JsonSerializable
         return $this->fields['googleAnalytics'] ?? null;
     }
 
-    public function setGoogleAnalytics(null|string $googleAnalytics): self
+    public function setGoogleAnalytics(null|string $googleAnalytics): static
     {
         $this->fields['googleAnalytics'] = $googleAnalytics;
 
@@ -63,7 +63,7 @@ class CommonCheckoutFormCustomizationTracking implements JsonSerializable
         return $this->fields['googleTagManager'] ?? null;
     }
 
-    public function setGoogleTagManager(null|string $googleTagManager): self
+    public function setGoogleTagManager(null|string $googleTagManager): static
     {
         $this->fields['googleTagManager'] = $googleTagManager;
 
@@ -75,7 +75,7 @@ class CommonCheckoutFormCustomizationTracking implements JsonSerializable
         return $this->fields['gtagJs'] ?? null;
     }
 
-    public function setGtagJs(null|string $gtagJs): self
+    public function setGtagJs(null|string $gtagJs): static
     {
         $this->fields['gtagJs'] = $gtagJs;
 
@@ -87,7 +87,7 @@ class CommonCheckoutFormCustomizationTracking implements JsonSerializable
         return $this->fields['facebookPixel'] ?? null;
     }
 
-    public function setFacebookPixel(null|string $facebookPixel): self
+    public function setFacebookPixel(null|string $facebookPixel): static
     {
         $this->fields['facebookPixel'] = $facebookPixel;
 
@@ -99,7 +99,7 @@ class CommonCheckoutFormCustomizationTracking implements JsonSerializable
         return $this->fields['segmentAnalytics'] ?? null;
     }
 
-    public function setSegmentAnalytics(null|string $segmentAnalytics): self
+    public function setSegmentAnalytics(null|string $segmentAnalytics): static
     {
         $this->fields['segmentAnalytics'] = $segmentAnalytics;
 
@@ -111,7 +111,7 @@ class CommonCheckoutFormCustomizationTracking implements JsonSerializable
         return $this->fields['heapIo'] ?? null;
     }
 
-    public function setHeapIo(null|string $heapIo): self
+    public function setHeapIo(null|string $heapIo): static
     {
         $this->fields['heapIo'] = $heapIo;
 

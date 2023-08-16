@@ -50,7 +50,7 @@ class KlarnaFeature implements JsonSerializable
     /**
      * @psalm-param self::NAME_* $name
      */
-    public function setName(string $name): self
+    public function setName(string $name): static
     {
         $this->fields['name'] = $name;
 
@@ -62,7 +62,7 @@ class KlarnaFeature implements JsonSerializable
         return $this->fields['clientToken'];
     }
 
-    public function setClientToken(string $clientToken): self
+    public function setClientToken(string $clientToken): static
     {
         $this->fields['clientToken'] = $clientToken;
 
@@ -74,7 +74,7 @@ class KlarnaFeature implements JsonSerializable
         return $this->fields['sessionId'];
     }
 
-    public function setSessionId(string $sessionId): self
+    public function setSessionId(string $sessionId): static
     {
         $this->fields['sessionId'] = $sessionId;
 

@@ -45,7 +45,7 @@ class PaymentInstrumentCreateToken implements JsonSerializable
         return $this->fields['customerId'];
     }
 
-    public function setCustomerId(string $customerId): self
+    public function setCustomerId(string $customerId): static
     {
         $this->fields['customerId'] = $customerId;
 
@@ -57,7 +57,7 @@ class PaymentInstrumentCreateToken implements JsonSerializable
         return $this->fields['token'];
     }
 
-    public function setToken(string $token): self
+    public function setToken(string $token): static
     {
         $this->fields['token'] = $token;
 
@@ -69,7 +69,7 @@ class PaymentInstrumentCreateToken implements JsonSerializable
         return $this->fields['customFields'] ?? null;
     }
 
-    public function setCustomFields(null|array $customFields): self
+    public function setCustomFields(null|array $customFields): static
     {
         $this->fields['customFields'] = $customFields;
 
@@ -81,7 +81,7 @@ class PaymentInstrumentCreateToken implements JsonSerializable
         return $this->fields['useAsBackup'] ?? null;
     }
 
-    public function setUseAsBackup(null|bool $useAsBackup): self
+    public function setUseAsBackup(null|bool $useAsBackup): static
     {
         $this->fields['useAsBackup'] = $useAsBackup;
 

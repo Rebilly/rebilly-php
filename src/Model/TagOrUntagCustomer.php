@@ -47,7 +47,7 @@ class TagOrUntagCustomer extends RuleAction
     /**
      * @param string[] $addingTags
      */
-    public function setAddingTags(array $addingTags): self
+    public function setAddingTags(array $addingTags): static
     {
         $addingTags = array_map(fn ($value) => $value ?? null, $addingTags);
 
@@ -67,7 +67,7 @@ class TagOrUntagCustomer extends RuleAction
     /**
      * @param string[] $removingTags
      */
-    public function setRemovingTags(array $removingTags): self
+    public function setRemovingTags(array $removingTags): static
     {
         $removingTags = array_map(fn ($value) => $value ?? null, $removingTags);
 

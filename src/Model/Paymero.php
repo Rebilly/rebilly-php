@@ -41,7 +41,7 @@ class Paymero extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(PaymeroCredentials|array $credentials): self
+    public function setCredentials(PaymeroCredentials|array $credentials): static
     {
         if (!($credentials instanceof PaymeroCredentials)) {
             $credentials = PaymeroCredentials::from($credentials);
@@ -57,7 +57,7 @@ class Paymero extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|PaymeroSettings|array $settings): self
+    public function setSettings(null|PaymeroSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof PaymeroSettings)) {
             $settings = PaymeroSettings::from($settings);

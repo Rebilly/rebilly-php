@@ -41,7 +41,7 @@ class AmexVPC extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(AmexVPCCredentials|array $credentials): self
+    public function setCredentials(AmexVPCCredentials|array $credentials): static
     {
         if (!($credentials instanceof AmexVPCCredentials)) {
             $credentials = AmexVPCCredentials::from($credentials);
@@ -57,7 +57,7 @@ class AmexVPC extends GatewayAccount
         return $this->fields['settings'];
     }
 
-    public function setSettings(AmexVPCSettings|array $settings): self
+    public function setSettings(AmexVPCSettings|array $settings): static
     {
         if (!($settings instanceof AmexVPCSettings)) {
             $settings = AmexVPCSettings::from($settings);

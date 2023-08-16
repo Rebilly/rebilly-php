@@ -39,7 +39,7 @@ class KonnektiveCredentials implements JsonSerializable
         return $this->fields['loginId'];
     }
 
-    public function setLoginId(string $loginId): self
+    public function setLoginId(string $loginId): static
     {
         $this->fields['loginId'] = $loginId;
 
@@ -51,7 +51,7 @@ class KonnektiveCredentials implements JsonSerializable
         return $this->fields['password'];
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password): static
     {
         $this->fields['password'] = $password;
 

@@ -36,7 +36,7 @@ class CoinPaymentsSettings implements JsonSerializable
         return $this->fields['useCallbackAddress'] ?? null;
     }
 
-    public function setUseCallbackAddress(null|bool $useCallbackAddress): self
+    public function setUseCallbackAddress(null|bool $useCallbackAddress): static
     {
         $this->fields['useCallbackAddress'] = $useCallbackAddress;
 

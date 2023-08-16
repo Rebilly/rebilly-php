@@ -38,7 +38,7 @@ class PayCash extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(PayCashCredentials|array $credentials): self
+    public function setCredentials(PayCashCredentials|array $credentials): static
     {
         if (!($credentials instanceof PayCashCredentials)) {
             $credentials = PayCashCredentials::from($credentials);

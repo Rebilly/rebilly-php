@@ -41,7 +41,7 @@ class NOWPayments extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(NOWPaymentsCredentials|array $credentials): self
+    public function setCredentials(NOWPaymentsCredentials|array $credentials): static
     {
         if (!($credentials instanceof NOWPaymentsCredentials)) {
             $credentials = NOWPaymentsCredentials::from($credentials);
@@ -57,7 +57,7 @@ class NOWPayments extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|NOWPaymentsSettings|array $settings): self
+    public function setSettings(null|NOWPaymentsSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof NOWPaymentsSettings)) {
             $settings = NOWPaymentsSettings::from($settings);

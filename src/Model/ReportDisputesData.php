@@ -54,7 +54,7 @@ class ReportDisputesData implements JsonSerializable
         return $this->fields['aggregationValue'] ?? null;
     }
 
-    public function setAggregationValue(null|string $aggregationValue): self
+    public function setAggregationValue(null|string $aggregationValue): static
     {
         $this->fields['aggregationValue'] = $aggregationValue;
 
@@ -66,7 +66,7 @@ class ReportDisputesData implements JsonSerializable
         return $this->fields['countVisa'] ?? null;
     }
 
-    public function setCountVisa(null|int $countVisa): self
+    public function setCountVisa(null|int $countVisa): static
     {
         $this->fields['countVisa'] = $countVisa;
 
@@ -78,7 +78,7 @@ class ReportDisputesData implements JsonSerializable
         return $this->fields['ratioCountVisa'] ?? null;
     }
 
-    public function setRatioCountVisa(null|float|string $ratioCountVisa): self
+    public function setRatioCountVisa(null|float|string $ratioCountVisa): static
     {
         if (is_string($ratioCountVisa)) {
             $ratioCountVisa = (float) $ratioCountVisa;
@@ -94,7 +94,7 @@ class ReportDisputesData implements JsonSerializable
         return $this->fields['ratioAmountVisa'] ?? null;
     }
 
-    public function setRatioAmountVisa(null|float|string $ratioAmountVisa): self
+    public function setRatioAmountVisa(null|float|string $ratioAmountVisa): static
     {
         if (is_string($ratioAmountVisa)) {
             $ratioAmountVisa = (float) $ratioAmountVisa;
@@ -110,7 +110,7 @@ class ReportDisputesData implements JsonSerializable
         return $this->fields['countMastercard'] ?? null;
     }
 
-    public function setCountMastercard(null|int $countMastercard): self
+    public function setCountMastercard(null|int $countMastercard): static
     {
         $this->fields['countMastercard'] = $countMastercard;
 
@@ -122,7 +122,7 @@ class ReportDisputesData implements JsonSerializable
         return $this->fields['ratioCountMastercard'] ?? null;
     }
 
-    public function setRatioCountMastercard(null|float|string $ratioCountMastercard): self
+    public function setRatioCountMastercard(null|float|string $ratioCountMastercard): static
     {
         if (is_string($ratioCountMastercard)) {
             $ratioCountMastercard = (float) $ratioCountMastercard;
@@ -138,7 +138,7 @@ class ReportDisputesData implements JsonSerializable
         return $this->fields['ratioAmountMastercard'] ?? null;
     }
 
-    public function setRatioAmountMastercard(null|float|string $ratioAmountMastercard): self
+    public function setRatioAmountMastercard(null|float|string $ratioAmountMastercard): static
     {
         if (is_string($ratioAmountMastercard)) {
             $ratioAmountMastercard = (float) $ratioAmountMastercard;

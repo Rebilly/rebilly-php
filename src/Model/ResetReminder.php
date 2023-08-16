@@ -50,7 +50,7 @@ class ResetReminder extends RuleAction
     /**
      * @psalm-param self::ROLE_* $role
      */
-    public function setRole(string $role): self
+    public function setRole(string $role): static
     {
         $this->fields['role'] = $role;
 

@@ -38,7 +38,7 @@ class MiFinity extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(MiFinityCredentials|array $credentials): self
+    public function setCredentials(MiFinityCredentials|array $credentials): static
     {
         if (!($credentials instanceof MiFinityCredentials)) {
             $credentials = MiFinityCredentials::from($credentials);

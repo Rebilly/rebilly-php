@@ -41,7 +41,7 @@ class NGenius extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(NGeniusCredentials|array $credentials): self
+    public function setCredentials(NGeniusCredentials|array $credentials): static
     {
         if (!($credentials instanceof NGeniusCredentials)) {
             $credentials = NGeniusCredentials::from($credentials);
@@ -57,7 +57,7 @@ class NGenius extends GatewayAccount
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|NGenius3dsServers|array $threeDSecureServer): self
+    public function setThreeDSecureServer(null|NGenius3dsServers|array $threeDSecureServer): static
     {
         if ($threeDSecureServer !== null && !($threeDSecureServer instanceof NGenius3dsServers)) {
             $threeDSecureServer = NGenius3dsServers::from($threeDSecureServer);

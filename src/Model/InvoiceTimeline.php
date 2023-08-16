@@ -143,7 +143,7 @@ class InvoiceTimeline implements JsonSerializable
         return $this->fields['message'] ?? null;
     }
 
-    public function setMessage(null|string $message): self
+    public function setMessage(null|string $message): static
     {
         $this->fields['message'] = $message;
 
@@ -155,7 +155,7 @@ class InvoiceTimeline implements JsonSerializable
         return $this->fields['extraData'] ?? null;
     }
 
-    public function setExtraData(null|TimelineExtraData|array $extraData): self
+    public function setExtraData(null|TimelineExtraData|array $extraData): static
     {
         if ($extraData !== null && !($extraData instanceof TimelineExtraData)) {
             $extraData = TimelineExtraData::from($extraData);
@@ -207,7 +207,7 @@ class InvoiceTimeline implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -217,7 +217,7 @@ class InvoiceTimeline implements JsonSerializable
     /**
      * @psalm-param self::TYPE_*|null $type
      */
-    private function setType(null|string $type): self
+    private function setType(null|string $type): static
     {
         $this->fields['type'] = $type;
 
@@ -227,14 +227,14 @@ class InvoiceTimeline implements JsonSerializable
     /**
      * @psalm-param self::TRIGGERED_BY_*|null $triggeredBy
      */
-    private function setTriggeredBy(null|string $triggeredBy): self
+    private function setTriggeredBy(null|string $triggeredBy): static
     {
         $this->fields['triggeredBy'] = $triggeredBy;
 
         return $this;
     }
 
-    private function setOccurredTime(null|DateTimeImmutable|string $occurredTime): self
+    private function setOccurredTime(null|DateTimeImmutable|string $occurredTime): static
     {
         if ($occurredTime !== null && !($occurredTime instanceof DateTimeImmutable)) {
             $occurredTime = new DateTimeImmutable($occurredTime);
@@ -248,7 +248,7 @@ class InvoiceTimeline implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

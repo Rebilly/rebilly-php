@@ -63,7 +63,7 @@ class SubscriptionRenewalData implements JsonSerializable
         return $this->fields['planId'] ?? null;
     }
 
-    public function setPlanId(null|string $planId): self
+    public function setPlanId(null|string $planId): static
     {
         $this->fields['planId'] = $planId;
 
@@ -75,7 +75,7 @@ class SubscriptionRenewalData implements JsonSerializable
         return $this->fields['allRenewalCount'] ?? null;
     }
 
-    public function setAllRenewalCount(null|int $allRenewalCount): self
+    public function setAllRenewalCount(null|int $allRenewalCount): static
     {
         $this->fields['allRenewalCount'] = $allRenewalCount;
 
@@ -87,7 +87,7 @@ class SubscriptionRenewalData implements JsonSerializable
         return $this->fields['allDunningCount'] ?? null;
     }
 
-    public function setAllDunningCount(null|int $allDunningCount): self
+    public function setAllDunningCount(null|int $allDunningCount): static
     {
         $this->fields['allDunningCount'] = $allDunningCount;
 
@@ -99,7 +99,7 @@ class SubscriptionRenewalData implements JsonSerializable
         return $this->fields['abandonedCount'] ?? null;
     }
 
-    public function setAbandonedCount(null|int $abandonedCount): self
+    public function setAbandonedCount(null|int $abandonedCount): static
     {
         $this->fields['abandonedCount'] = $abandonedCount;
 
@@ -111,7 +111,7 @@ class SubscriptionRenewalData implements JsonSerializable
         return $this->fields['paidRenewalCount'] ?? null;
     }
 
-    public function setPaidRenewalCount(null|int $paidRenewalCount): self
+    public function setPaidRenewalCount(null|int $paidRenewalCount): static
     {
         $this->fields['paidRenewalCount'] = $paidRenewalCount;
 
@@ -123,7 +123,7 @@ class SubscriptionRenewalData implements JsonSerializable
         return $this->fields['paidDunningCount'] ?? null;
     }
 
-    public function setPaidDunningCount(null|int $paidDunningCount): self
+    public function setPaidDunningCount(null|int $paidDunningCount): static
     {
         $this->fields['paidDunningCount'] = $paidDunningCount;
 
@@ -135,7 +135,7 @@ class SubscriptionRenewalData implements JsonSerializable
         return $this->fields['refundedRenewalCount'] ?? null;
     }
 
-    public function setRefundedRenewalCount(null|int $refundedRenewalCount): self
+    public function setRefundedRenewalCount(null|int $refundedRenewalCount): static
     {
         $this->fields['refundedRenewalCount'] = $refundedRenewalCount;
 
@@ -147,7 +147,7 @@ class SubscriptionRenewalData implements JsonSerializable
         return $this->fields['refundedDunningCount'] ?? null;
     }
 
-    public function setRefundedDunningCount(null|int $refundedDunningCount): self
+    public function setRefundedDunningCount(null|int $refundedDunningCount): static
     {
         $this->fields['refundedDunningCount'] = $refundedDunningCount;
 
@@ -159,7 +159,7 @@ class SubscriptionRenewalData implements JsonSerializable
         return $this->fields['chargebackRenewalCount'] ?? null;
     }
 
-    public function setChargebackRenewalCount(null|int $chargebackRenewalCount): self
+    public function setChargebackRenewalCount(null|int $chargebackRenewalCount): static
     {
         $this->fields['chargebackRenewalCount'] = $chargebackRenewalCount;
 
@@ -171,7 +171,7 @@ class SubscriptionRenewalData implements JsonSerializable
         return $this->fields['chargebackDunningCount'] ?? null;
     }
 
-    public function setChargebackDunningCount(null|int $chargebackDunningCount): self
+    public function setChargebackDunningCount(null|int $chargebackDunningCount): static
     {
         $this->fields['chargebackDunningCount'] = $chargebackDunningCount;
 

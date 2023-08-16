@@ -48,7 +48,7 @@ class ReportJournalData implements JsonSerializable
         return $this->fields['aggregationValue'] ?? null;
     }
 
-    public function setAggregationValue(null|string $aggregationValue): self
+    public function setAggregationValue(null|string $aggregationValue): static
     {
         $this->fields['aggregationValue'] = $aggregationValue;
 
@@ -60,7 +60,7 @@ class ReportJournalData implements JsonSerializable
         return $this->fields['bookedMonth'] ?? null;
     }
 
-    public function setBookedMonth(null|string $bookedMonth): self
+    public function setBookedMonth(null|string $bookedMonth): static
     {
         $this->fields['bookedMonth'] = $bookedMonth;
 
@@ -72,7 +72,7 @@ class ReportJournalData implements JsonSerializable
         return $this->fields['bookedAmount'] ?? null;
     }
 
-    public function setBookedAmount(null|float|string $bookedAmount): self
+    public function setBookedAmount(null|float|string $bookedAmount): static
     {
         if (is_string($bookedAmount)) {
             $bookedAmount = (float) $bookedAmount;
@@ -88,7 +88,7 @@ class ReportJournalData implements JsonSerializable
         return $this->fields['recognizedAmount'] ?? null;
     }
 
-    public function setRecognizedAmount(null|float|string $recognizedAmount): self
+    public function setRecognizedAmount(null|float|string $recognizedAmount): static
     {
         if (is_string($recognizedAmount)) {
             $recognizedAmount = (float) $recognizedAmount;
@@ -104,7 +104,7 @@ class ReportJournalData implements JsonSerializable
         return $this->fields['remainingAmount'] ?? null;
     }
 
-    public function setRemainingAmount(null|float|string $remainingAmount): self
+    public function setRemainingAmount(null|float|string $remainingAmount): static
     {
         if (is_string($remainingAmount)) {
             $remainingAmount = (float) $remainingAmount;

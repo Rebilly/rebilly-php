@@ -42,7 +42,7 @@ class FinancialSettingsSettlementSettings implements JsonSerializable
         return $this->fields['settlementCurrency'];
     }
 
-    public function setSettlementCurrency(string $settlementCurrency): self
+    public function setSettlementCurrency(string $settlementCurrency): static
     {
         $this->fields['settlementCurrency'] = $settlementCurrency;
 
@@ -54,7 +54,7 @@ class FinancialSettingsSettlementSettings implements JsonSerializable
         return $this->fields['settlementPeriod'];
     }
 
-    public function setSettlementPeriod(SettlementPeriod|array $settlementPeriod): self
+    public function setSettlementPeriod(SettlementPeriod|array $settlementPeriod): static
     {
         if (!($settlementPeriod instanceof SettlementPeriod)) {
             $settlementPeriod = SettlementPeriod::from($settlementPeriod);
@@ -76,7 +76,7 @@ class FinancialSettingsSettlementSettings implements JsonSerializable
     /**
      * @param null|FinancialSettingsSettlementSettingsAdvancedSettings[] $advancedSettings
      */
-    public function setAdvancedSettings(null|array $advancedSettings): self
+    public function setAdvancedSettings(null|array $advancedSettings): static
     {
         $advancedSettings = $advancedSettings !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof FinancialSettingsSettlementSettingsAdvancedSettings ? $value : FinancialSettingsSettlementSettingsAdvancedSettings::from($value)) : null, $advancedSettings) : null;
 

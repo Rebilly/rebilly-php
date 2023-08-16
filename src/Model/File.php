@@ -103,7 +103,7 @@ class File implements JsonSerializable
         return $this->fields['name'] ?? null;
     }
 
-    public function setName(null|string $name): self
+    public function setName(null|string $name): static
     {
         $this->fields['name'] = $name;
 
@@ -115,7 +115,7 @@ class File implements JsonSerializable
         return $this->fields['extension'] ?? null;
     }
 
-    public function setExtension(null|string $extension): self
+    public function setExtension(null|string $extension): static
     {
         $this->fields['extension'] = $extension;
 
@@ -127,7 +127,7 @@ class File implements JsonSerializable
         return $this->fields['description'] ?? null;
     }
 
-    public function setDescription(null|string $description): self
+    public function setDescription(null|string $description): static
     {
         $this->fields['description'] = $description;
 
@@ -145,7 +145,7 @@ class File implements JsonSerializable
     /**
      * @psalm-param self::SOURCE_TYPE_*|null $sourceType
      */
-    public function setSourceType(null|string $sourceType): self
+    public function setSourceType(null|string $sourceType): static
     {
         $this->fields['sourceType'] = $sourceType;
 
@@ -163,7 +163,7 @@ class File implements JsonSerializable
     /**
      * @param null|string[] $tags
      */
-    public function setTags(null|array $tags): self
+    public function setTags(null|array $tags): static
     {
         $tags = $tags !== null ? array_map(fn ($value) => $value ?? null, $tags) : null;
 
@@ -215,7 +215,7 @@ class File implements JsonSerializable
         return $this->fields['isPublic'] ?? null;
     }
 
-    public function setIsPublic(null|bool $isPublic): self
+    public function setIsPublic(null|bool $isPublic): static
     {
         $this->fields['isPublic'] = $isPublic;
 
@@ -282,7 +282,7 @@ class File implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -292,42 +292,42 @@ class File implements JsonSerializable
     /**
      * @psalm-param self::MIME_*|null $mime
      */
-    private function setMime(null|string $mime): self
+    private function setMime(null|string $mime): static
     {
         $this->fields['mime'] = $mime;
 
         return $this;
     }
 
-    private function setSize(null|int $size): self
+    private function setSize(null|int $size): static
     {
         $this->fields['size'] = $size;
 
         return $this;
     }
 
-    private function setWidth(null|int $width): self
+    private function setWidth(null|int $width): static
     {
         $this->fields['width'] = $width;
 
         return $this;
     }
 
-    private function setHeight(null|int $height): self
+    private function setHeight(null|int $height): static
     {
         $this->fields['height'] = $height;
 
         return $this;
     }
 
-    private function setSha1(null|string $sha1): self
+    private function setSha1(null|string $sha1): static
     {
         $this->fields['sha1'] = $sha1;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -338,7 +338,7 @@ class File implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -352,7 +352,7 @@ class File implements JsonSerializable
     /**
      * @param null|array<FileDownloadLink|PermalinkLink|SelfLink|SignedLinkLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 

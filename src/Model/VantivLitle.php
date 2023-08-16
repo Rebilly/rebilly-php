@@ -41,7 +41,7 @@ class VantivLitle extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(VantivLitleCredentials|array $credentials): self
+    public function setCredentials(VantivLitleCredentials|array $credentials): static
     {
         if (!($credentials instanceof VantivLitleCredentials)) {
             $credentials = VantivLitleCredentials::from($credentials);
@@ -57,7 +57,7 @@ class VantivLitle extends GatewayAccount
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|VantivLitle3dsServers|array $threeDSecureServer): self
+    public function setThreeDSecureServer(null|VantivLitle3dsServers|array $threeDSecureServer): static
     {
         if ($threeDSecureServer !== null && !($threeDSecureServer instanceof VantivLitle3dsServers)) {
             $threeDSecureServer = VantivLitle3dsServers::from($threeDSecureServer);

@@ -42,7 +42,7 @@ class DataExportDateRange implements JsonSerializable
         return $this->fields['start'];
     }
 
-    public function setStart(string $start): self
+    public function setStart(string $start): static
     {
         $this->fields['start'] = $start;
 
@@ -54,7 +54,7 @@ class DataExportDateRange implements JsonSerializable
         return $this->fields['end'];
     }
 
-    public function setEnd(string $end): self
+    public function setEnd(string $end): static
     {
         $this->fields['end'] = $end;
 
@@ -66,7 +66,7 @@ class DataExportDateRange implements JsonSerializable
         return $this->fields['field'] ?? null;
     }
 
-    public function setField(null|string $field): self
+    public function setField(null|string $field): static
     {
         $this->fields['field'] = $field;
 

@@ -67,7 +67,7 @@ class SubscriptionReactivation implements JsonSerializable
         return $this->fields['subscriptionId'];
     }
 
-    public function setSubscriptionId(string $subscriptionId): self
+    public function setSubscriptionId(string $subscriptionId): static
     {
         $this->fields['subscriptionId'] = $subscriptionId;
 
@@ -84,7 +84,7 @@ class SubscriptionReactivation implements JsonSerializable
         return $this->fields['description'] ?? null;
     }
 
-    public function setDescription(null|string $description): self
+    public function setDescription(null|string $description): static
     {
         $this->fields['description'] = $description;
 
@@ -96,7 +96,7 @@ class SubscriptionReactivation implements JsonSerializable
         return $this->fields['effectiveTime'] ?? null;
     }
 
-    public function setEffectiveTime(null|DateTimeImmutable|string $effectiveTime): self
+    public function setEffectiveTime(null|DateTimeImmutable|string $effectiveTime): static
     {
         if ($effectiveTime !== null && !($effectiveTime instanceof DateTimeImmutable)) {
             $effectiveTime = new DateTimeImmutable($effectiveTime);
@@ -112,7 +112,7 @@ class SubscriptionReactivation implements JsonSerializable
         return $this->fields['renewalTime'] ?? null;
     }
 
-    public function setRenewalTime(null|DateTimeImmutable|string $renewalTime): self
+    public function setRenewalTime(null|DateTimeImmutable|string $renewalTime): static
     {
         if ($renewalTime !== null && !($renewalTime instanceof DateTimeImmutable)) {
             $renewalTime = new DateTimeImmutable($renewalTime);
@@ -175,21 +175,21 @@ class SubscriptionReactivation implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setCancellationId(null|string $cancellationId): self
+    private function setCancellationId(null|string $cancellationId): static
     {
         $this->fields['cancellationId'] = $cancellationId;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -200,7 +200,7 @@ class SubscriptionReactivation implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -214,7 +214,7 @@ class SubscriptionReactivation implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

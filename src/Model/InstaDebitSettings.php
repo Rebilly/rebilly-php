@@ -36,7 +36,7 @@ class InstaDebitSettings implements JsonSerializable
         return $this->fields['merchantSubId'] ?? null;
     }
 
-    public function setMerchantSubId(null|int $merchantSubId): self
+    public function setMerchantSubId(null|int $merchantSubId): static
     {
         $this->fields['merchantSubId'] = $merchantSubId;
 

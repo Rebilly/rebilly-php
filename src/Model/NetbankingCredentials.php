@@ -39,7 +39,7 @@ class NetbankingCredentials implements JsonSerializable
         return $this->fields['midcode'];
     }
 
-    public function setMidcode(string $midcode): self
+    public function setMidcode(string $midcode): static
     {
         $this->fields['midcode'] = $midcode;
 
@@ -51,7 +51,7 @@ class NetbankingCredentials implements JsonSerializable
         return $this->fields['midsecret'];
     }
 
-    public function setMidsecret(string $midsecret): self
+    public function setMidsecret(string $midsecret): static
     {
         $this->fields['midsecret'] = $midsecret;
 

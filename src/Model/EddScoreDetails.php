@@ -39,7 +39,7 @@ class EddScoreDetails implements JsonSerializable
         return $this->fields['url'] ?? null;
     }
 
-    public function setUrl(null|string $url): self
+    public function setUrl(null|string $url): static
     {
         $this->fields['url'] = $url;
 
@@ -51,7 +51,7 @@ class EddScoreDetails implements JsonSerializable
         return $this->fields['details'] ?? null;
     }
 
-    public function setDetails(null|string $details): self
+    public function setDetails(null|string $details): static
     {
         $this->fields['details'] = $details;
 

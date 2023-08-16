@@ -59,7 +59,7 @@ class Usage implements JsonSerializable
         return $this->fields['subscriptionId'];
     }
 
-    public function setSubscriptionId(string $subscriptionId): self
+    public function setSubscriptionId(string $subscriptionId): static
     {
         $this->fields['subscriptionId'] = $subscriptionId;
 
@@ -71,7 +71,7 @@ class Usage implements JsonSerializable
         return $this->fields['planId'];
     }
 
-    public function setPlanId(string $planId): self
+    public function setPlanId(string $planId): static
     {
         $this->fields['planId'] = $planId;
 
@@ -93,7 +93,7 @@ class Usage implements JsonSerializable
         return $this->fields['quantity'];
     }
 
-    public function setQuantity(float|string $quantity): self
+    public function setQuantity(float|string $quantity): static
     {
         if (is_string($quantity)) {
             $quantity = (float) $quantity;
@@ -109,7 +109,7 @@ class Usage implements JsonSerializable
         return $this->fields['usageTime'] ?? null;
     }
 
-    public function setUsageTime(null|DateTimeImmutable|string $usageTime): self
+    public function setUsageTime(null|DateTimeImmutable|string $usageTime): static
     {
         if ($usageTime !== null && !($usageTime instanceof DateTimeImmutable)) {
             $usageTime = new DateTimeImmutable($usageTime);
@@ -161,21 +161,21 @@ class Usage implements JsonSerializable
         return $data;
     }
 
-    private function setInvoiceId(null|string $invoiceId): self
+    private function setInvoiceId(null|string $invoiceId): static
     {
         $this->fields['invoiceId'] = $invoiceId;
 
         return $this;
     }
 
-    private function setInvoiceItemId(null|string $invoiceItemId): self
+    private function setInvoiceItemId(null|string $invoiceItemId): static
     {
         $this->fields['invoiceItemId'] = $invoiceItemId;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -186,7 +186,7 @@ class Usage implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);

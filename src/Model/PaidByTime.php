@@ -64,7 +64,7 @@ class PaidByTime extends CouponRestriction
     /**
      * @psalm-param self::TYPE_* $type
      */
-    public function setType(string $type): self
+    public function setType(string $type): static
     {
         $this->fields['type'] = $type;
 
@@ -76,7 +76,7 @@ class PaidByTime extends CouponRestriction
         return $this->fields['time'];
     }
 
-    public function setTime(DateTimeImmutable|string $time): self
+    public function setTime(DateTimeImmutable|string $time): static
     {
         if (!($time instanceof DateTimeImmutable)) {
             $time = new DateTimeImmutable($time);

@@ -55,7 +55,7 @@ class ResetPasswordToken implements JsonSerializable
         return $this->fields['username'];
     }
 
-    public function setUsername(string $username): self
+    public function setUsername(string $username): static
     {
         $this->fields['username'] = $username;
 
@@ -72,7 +72,7 @@ class ResetPasswordToken implements JsonSerializable
         return $this->fields['expiredTime'] ?? null;
     }
 
-    public function setExpiredTime(null|DateTimeImmutable|string $expiredTime): self
+    public function setExpiredTime(null|DateTimeImmutable|string $expiredTime): static
     {
         if ($expiredTime !== null && !($expiredTime instanceof DateTimeImmutable)) {
             $expiredTime = new DateTimeImmutable($expiredTime);
@@ -113,14 +113,14 @@ class ResetPasswordToken implements JsonSerializable
         return $data;
     }
 
-    private function setToken(null|string $token): self
+    private function setToken(null|string $token): static
     {
         $this->fields['token'] = $token;
 
         return $this;
     }
 
-    private function setCredentialId(null|string $credentialId): self
+    private function setCredentialId(null|string $credentialId): static
     {
         $this->fields['credentialId'] = $credentialId;
 
@@ -130,7 +130,7 @@ class ResetPasswordToken implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

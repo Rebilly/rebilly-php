@@ -95,7 +95,7 @@ class ApiTracking implements JsonSerializable
         return $this->fields['id'] ?? null;
     }
 
-    public function setId(null|string $id): self
+    public function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -107,7 +107,7 @@ class ApiTracking implements JsonSerializable
         return $this->fields['status'] ?? null;
     }
 
-    public function setStatus(null|int $status): self
+    public function setStatus(null|int $status): static
     {
         $this->fields['status'] = $status;
 
@@ -119,7 +119,7 @@ class ApiTracking implements JsonSerializable
         return $this->fields['url'] ?? null;
     }
 
-    public function setUrl(null|string $url): self
+    public function setUrl(null|string $url): static
     {
         $this->fields['url'] = $url;
 
@@ -131,7 +131,7 @@ class ApiTracking implements JsonSerializable
         return $this->fields['route'] ?? null;
     }
 
-    public function setRoute(null|string $route): self
+    public function setRoute(null|string $route): static
     {
         $this->fields['route'] = $route;
 
@@ -149,7 +149,7 @@ class ApiTracking implements JsonSerializable
     /**
      * @psalm-param self::METHOD_*|null $method
      */
-    public function setMethod(null|string $method): self
+    public function setMethod(null|string $method): static
     {
         $this->fields['method'] = $method;
 
@@ -161,7 +161,7 @@ class ApiTracking implements JsonSerializable
         return $this->fields['request'] ?? null;
     }
 
-    public function setRequest(null|string $request): self
+    public function setRequest(null|string $request): static
     {
         $this->fields['request'] = $request;
 
@@ -173,7 +173,7 @@ class ApiTracking implements JsonSerializable
         return $this->fields['response'] ?? null;
     }
 
-    public function setResponse(null|string $response): self
+    public function setResponse(null|string $response): static
     {
         $this->fields['response'] = $response;
 
@@ -185,7 +185,7 @@ class ApiTracking implements JsonSerializable
         return $this->fields['requestHeaders'] ?? null;
     }
 
-    public function setRequestHeaders(null|array $requestHeaders): self
+    public function setRequestHeaders(null|array $requestHeaders): static
     {
         $this->fields['requestHeaders'] = $requestHeaders;
 
@@ -197,7 +197,7 @@ class ApiTracking implements JsonSerializable
         return $this->fields['responseHeaders'] ?? null;
     }
 
-    public function setResponseHeaders(null|array $responseHeaders): self
+    public function setResponseHeaders(null|array $responseHeaders): static
     {
         $this->fields['responseHeaders'] = $responseHeaders;
 
@@ -209,7 +209,7 @@ class ApiTracking implements JsonSerializable
         return $this->fields['user'] ?? null;
     }
 
-    public function setUser(null|ApiTrackingUser|array $user): self
+    public function setUser(null|ApiTrackingUser|array $user): static
     {
         if ($user !== null && !($user instanceof ApiTrackingUser)) {
             $user = ApiTrackingUser::from($user);
@@ -225,7 +225,7 @@ class ApiTracking implements JsonSerializable
         return $this->fields['ipAddress'] ?? null;
     }
 
-    public function setIpAddress(null|string $ipAddress): self
+    public function setIpAddress(null|string $ipAddress): static
     {
         $this->fields['ipAddress'] = $ipAddress;
 
@@ -237,7 +237,7 @@ class ApiTracking implements JsonSerializable
         return $this->fields['relatedIds'] ?? null;
     }
 
-    public function setRelatedIds(null|ApiTrackingRelatedIds|array $relatedIds): self
+    public function setRelatedIds(null|ApiTrackingRelatedIds|array $relatedIds): static
     {
         if ($relatedIds !== null && !($relatedIds instanceof ApiTrackingRelatedIds)) {
             $relatedIds = ApiTrackingRelatedIds::from($relatedIds);
@@ -253,7 +253,7 @@ class ApiTracking implements JsonSerializable
         return $this->fields['duration'] ?? null;
     }
 
-    public function setDuration(null|int $duration): self
+    public function setDuration(null|int $duration): static
     {
         $this->fields['duration'] = $duration;
 
@@ -333,7 +333,7 @@ class ApiTracking implements JsonSerializable
         return $data;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -344,7 +344,7 @@ class ApiTracking implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -358,7 +358,7 @@ class ApiTracking implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

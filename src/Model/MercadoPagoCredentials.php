@@ -39,7 +39,7 @@ class MercadoPagoCredentials implements JsonSerializable
         return $this->fields['publicKey'];
     }
 
-    public function setPublicKey(string $publicKey): self
+    public function setPublicKey(string $publicKey): static
     {
         $this->fields['publicKey'] = $publicKey;
 
@@ -51,7 +51,7 @@ class MercadoPagoCredentials implements JsonSerializable
         return $this->fields['accessToken'];
     }
 
-    public function setAccessToken(string $accessToken): self
+    public function setAccessToken(string $accessToken): static
     {
         $this->fields['accessToken'] = $accessToken;
 

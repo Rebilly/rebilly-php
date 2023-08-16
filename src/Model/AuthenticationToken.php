@@ -55,7 +55,7 @@ abstract class AuthenticationToken extends CommonAuthenticationToken
         return parent::jsonSerialize() + $data;
     }
 
-    private function setMode(null|string $mode): self
+    private function setMode(null|string $mode): static
     {
         $this->fields['mode'] = $mode;
 

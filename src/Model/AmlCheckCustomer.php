@@ -47,7 +47,7 @@ class AmlCheckCustomer implements JsonSerializable
         return $this->fields['primaryAddress'] ?? null;
     }
 
-    public function setPrimaryAddress(null|AmlCheckCustomerPrimaryAddress|array $primaryAddress): self
+    public function setPrimaryAddress(null|AmlCheckCustomerPrimaryAddress|array $primaryAddress): static
     {
         if ($primaryAddress !== null && !($primaryAddress instanceof AmlCheckCustomerPrimaryAddress)) {
             $primaryAddress = AmlCheckCustomerPrimaryAddress::from($primaryAddress);
@@ -82,7 +82,7 @@ class AmlCheckCustomer implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -92,7 +92,7 @@ class AmlCheckCustomer implements JsonSerializable
     /**
      * @param null|Tag[] $tags
      */
-    private function setTags(null|array $tags): self
+    private function setTags(null|array $tags): static
     {
         $tags = $tags !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Tag ? $value : Tag::from($value)) : null, $tags) : null;
 

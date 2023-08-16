@@ -38,7 +38,7 @@ class PaymentAsia extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(PaymentAsiaCredentials|array $credentials): self
+    public function setCredentials(PaymentAsiaCredentials|array $credentials): static
     {
         if (!($credentials instanceof PaymentAsiaCredentials)) {
             $credentials = PaymentAsiaCredentials::from($credentials);

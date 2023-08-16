@@ -41,7 +41,7 @@ class SmartInvoice extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(SmartInvoiceCredentials|array $credentials): self
+    public function setCredentials(SmartInvoiceCredentials|array $credentials): static
     {
         if (!($credentials instanceof SmartInvoiceCredentials)) {
             $credentials = SmartInvoiceCredentials::from($credentials);
@@ -57,7 +57,7 @@ class SmartInvoice extends GatewayAccount
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|SmartInvoice3dsServers|array $threeDSecureServer): self
+    public function setThreeDSecureServer(null|SmartInvoice3dsServers|array $threeDSecureServer): static
     {
         if ($threeDSecureServer !== null && !($threeDSecureServer instanceof SmartInvoice3dsServers)) {
             $threeDSecureServer = SmartInvoice3dsServers::from($threeDSecureServer);

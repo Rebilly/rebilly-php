@@ -41,7 +41,7 @@ class ReadyToPayGenericMethod extends ReadyToPayMethods
         return $this->fields['method'];
     }
 
-    public function setMethod(AlternativePaymentMethods|string $method): self
+    public function setMethod(AlternativePaymentMethods|string $method): static
     {
         if (!($method instanceof AlternativePaymentMethods)) {
             $method = AlternativePaymentMethods::from($method);
@@ -63,7 +63,7 @@ class ReadyToPayGenericMethod extends ReadyToPayMethods
     /**
      * @param null|string[] $filters
      */
-    public function setFilters(null|array $filters): self
+    public function setFilters(null|array $filters): static
     {
         $filters = $filters !== null ? array_map(fn ($value) => $value ?? null, $filters) : null;
 

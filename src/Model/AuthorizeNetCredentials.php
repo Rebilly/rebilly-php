@@ -39,7 +39,7 @@ class AuthorizeNetCredentials implements JsonSerializable
         return $this->fields['apiLoginId'];
     }
 
-    public function setApiLoginId(string $apiLoginId): self
+    public function setApiLoginId(string $apiLoginId): static
     {
         $this->fields['apiLoginId'] = $apiLoginId;
 
@@ -51,7 +51,7 @@ class AuthorizeNetCredentials implements JsonSerializable
         return $this->fields['transactionKey'];
     }
 
-    public function setTransactionKey(string $transactionKey): self
+    public function setTransactionKey(string $transactionKey): static
     {
         $this->fields['transactionKey'] = $transactionKey;
 

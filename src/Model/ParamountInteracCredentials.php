@@ -42,7 +42,7 @@ class ParamountInteracCredentials implements JsonSerializable
         return $this->fields['merchantId'];
     }
 
-    public function setMerchantId(string $merchantId): self
+    public function setMerchantId(string $merchantId): static
     {
         $this->fields['merchantId'] = $merchantId;
 
@@ -54,7 +54,7 @@ class ParamountInteracCredentials implements JsonSerializable
         return $this->fields['encryptionKey'];
     }
 
-    public function setEncryptionKey(string $encryptionKey): self
+    public function setEncryptionKey(string $encryptionKey): static
     {
         $this->fields['encryptionKey'] = $encryptionKey;
 
@@ -66,7 +66,7 @@ class ParamountInteracCredentials implements JsonSerializable
         return $this->fields['password'];
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password): static
     {
         $this->fields['password'] = $password;
 

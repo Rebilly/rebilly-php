@@ -41,7 +41,7 @@ class InvoiceIssue implements JsonSerializable
         return $this->fields['issuedTime'] ?? null;
     }
 
-    public function setIssuedTime(null|DateTimeImmutable|string $issuedTime): self
+    public function setIssuedTime(null|DateTimeImmutable|string $issuedTime): static
     {
         if ($issuedTime !== null && !($issuedTime instanceof DateTimeImmutable)) {
             $issuedTime = new DateTimeImmutable($issuedTime);
@@ -57,7 +57,7 @@ class InvoiceIssue implements JsonSerializable
         return $this->fields['dueTime'] ?? null;
     }
 
-    public function setDueTime(null|DateTimeImmutable|string $dueTime): self
+    public function setDueTime(null|DateTimeImmutable|string $dueTime): static
     {
         if ($dueTime !== null && !($dueTime instanceof DateTimeImmutable)) {
             $dueTime = new DateTimeImmutable($dueTime);

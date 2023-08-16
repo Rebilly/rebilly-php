@@ -42,7 +42,7 @@ class APILogSummary implements JsonSerializable
     /**
      * @param null|APILogSummaryData[] $data
      */
-    public function setData(null|array $data): self
+    public function setData(null|array $data): static
     {
         $data = $data !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof APILogSummaryData ? $value : APILogSummaryData::from($value)) : null, $data) : null;
 

@@ -39,7 +39,7 @@ class USAePayCredentials implements JsonSerializable
         return $this->fields['sourceKey'];
     }
 
-    public function setSourceKey(string $sourceKey): self
+    public function setSourceKey(string $sourceKey): static
     {
         $this->fields['sourceKey'] = $sourceKey;
 
@@ -51,7 +51,7 @@ class USAePayCredentials implements JsonSerializable
         return $this->fields['pin'];
     }
 
-    public function setPin(string $pin): self
+    public function setPin(string $pin): static
     {
         $this->fields['pin'] = $pin;
 

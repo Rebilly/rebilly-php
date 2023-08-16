@@ -58,7 +58,7 @@ class IBANInstrument extends BankAccountInstrument
     /**
      * @psalm-param self::ACCOUNT_NUMBER_TYPE_* $accountNumberType
      */
-    public function setAccountNumberType(string $accountNumberType): self
+    public function setAccountNumberType(string $accountNumberType): static
     {
         $this->fields['accountNumberType'] = $accountNumberType;
 
@@ -70,7 +70,7 @@ class IBANInstrument extends BankAccountInstrument
         return $this->fields['accountNumber'];
     }
 
-    public function setAccountNumber(string $accountNumber): self
+    public function setAccountNumber(string $accountNumber): static
     {
         $this->fields['accountNumber'] = $accountNumber;
 
@@ -82,7 +82,7 @@ class IBANInstrument extends BankAccountInstrument
         return $this->fields['bic'] ?? null;
     }
 
-    public function setBic(null|string $bic): self
+    public function setBic(null|string $bic): static
     {
         $this->fields['bic'] = $bic;
 
@@ -94,7 +94,7 @@ class IBANInstrument extends BankAccountInstrument
         return $this->fields['bankName'] ?? null;
     }
 
-    public function setBankName(null|string $bankName): self
+    public function setBankName(null|string $bankName): static
     {
         $this->fields['bankName'] = $bankName;
 
@@ -128,7 +128,7 @@ class IBANInstrument extends BankAccountInstrument
         return parent::jsonSerialize() + $data;
     }
 
-    private function setLast4(null|string $last4): self
+    private function setLast4(null|string $last4): static
     {
         $this->fields['last4'] = $last4;
 

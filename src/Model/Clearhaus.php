@@ -41,7 +41,7 @@ class Clearhaus extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(ClearhausCredentials|array $credentials): self
+    public function setCredentials(ClearhausCredentials|array $credentials): static
     {
         if (!($credentials instanceof ClearhausCredentials)) {
             $credentials = ClearhausCredentials::from($credentials);
@@ -57,7 +57,7 @@ class Clearhaus extends GatewayAccount
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|Clearhaus3dsServers|array $threeDSecureServer): self
+    public function setThreeDSecureServer(null|Clearhaus3dsServers|array $threeDSecureServer): static
     {
         if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Clearhaus3dsServers)) {
             $threeDSecureServer = Clearhaus3dsServers::from($threeDSecureServer);

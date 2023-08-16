@@ -38,7 +38,7 @@ class NuaPay extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(NuaPayCredentials|array $credentials): self
+    public function setCredentials(NuaPayCredentials|array $credentials): static
     {
         if (!($credentials instanceof NuaPayCredentials)) {
             $credentials = NuaPayCredentials::from($credentials);

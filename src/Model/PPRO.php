@@ -38,7 +38,7 @@ class PPRO extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(PPROCredentials|array $credentials): self
+    public function setCredentials(PPROCredentials|array $credentials): static
     {
         if (!($credentials instanceof PPROCredentials)) {
             $credentials = PPROCredentials::from($credentials);

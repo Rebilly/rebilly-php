@@ -51,7 +51,7 @@ class AdjustReadyToPayAch extends AdjustPaymentMethod
     /**
      * @psalm-param self::PAYMENT_METHOD_* $paymentMethod
      */
-    public function setPaymentMethod(string $paymentMethod): self
+    public function setPaymentMethod(string $paymentMethod): static
     {
         $this->fields['paymentMethod'] = $paymentMethod;
 
@@ -69,7 +69,7 @@ class AdjustReadyToPayAch extends AdjustPaymentMethod
     /**
      * @psalm-param self::FEATURE_* $feature
      */
-    public function setFeature(string $feature): self
+    public function setFeature(string $feature): static
     {
         $this->fields['feature'] = $feature;
 

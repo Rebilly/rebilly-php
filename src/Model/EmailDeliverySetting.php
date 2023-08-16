@@ -83,7 +83,7 @@ class EmailDeliverySetting implements JsonSerializable
         return $this->fields['from'];
     }
 
-    public function setFrom(string $from): self
+    public function setFrom(string $from): static
     {
         $this->fields['from'] = $from;
 
@@ -95,7 +95,7 @@ class EmailDeliverySetting implements JsonSerializable
         return $this->fields['name'];
     }
 
-    public function setName(string $name): self
+    public function setName(string $name): static
     {
         $this->fields['name'] = $name;
 
@@ -115,7 +115,7 @@ class EmailDeliverySetting implements JsonSerializable
         return $this->fields['credentialId'] ?? null;
     }
 
-    public function setCredentialId(null|string $credentialId): self
+    public function setCredentialId(null|string $credentialId): static
     {
         $this->fields['credentialId'] = $credentialId;
 
@@ -135,7 +135,7 @@ class EmailDeliverySetting implements JsonSerializable
         return $this->fields['isDefault'] ?? null;
     }
 
-    public function setIsDefault(null|bool $isDefault): self
+    public function setIsDefault(null|bool $isDefault): static
     {
         $this->fields['isDefault'] = $isDefault;
 
@@ -186,7 +186,7 @@ class EmailDeliverySetting implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -196,7 +196,7 @@ class EmailDeliverySetting implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    private function setStatus(null|string $status): self
+    private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
@@ -206,14 +206,14 @@ class EmailDeliverySetting implements JsonSerializable
     /**
      * @psalm-param self::PROVIDER_*|null $provider
      */
-    private function setProvider(null|string $provider): self
+    private function setProvider(null|string $provider): static
     {
         $this->fields['provider'] = $provider;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -224,7 +224,7 @@ class EmailDeliverySetting implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);

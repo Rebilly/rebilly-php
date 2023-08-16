@@ -36,7 +36,7 @@ class PiastrixSettings implements JsonSerializable
         return $this->fields['tolerancePercentage'] ?? null;
     }
 
-    public function setTolerancePercentage(null|int $tolerancePercentage): self
+    public function setTolerancePercentage(null|int $tolerancePercentage): static
     {
         $this->fields['tolerancePercentage'] = $tolerancePercentage;
 

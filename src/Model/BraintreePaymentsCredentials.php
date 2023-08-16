@@ -45,7 +45,7 @@ class BraintreePaymentsCredentials implements JsonSerializable
         return $this->fields['publicKey'];
     }
 
-    public function setPublicKey(string $publicKey): self
+    public function setPublicKey(string $publicKey): static
     {
         $this->fields['publicKey'] = $publicKey;
 
@@ -57,7 +57,7 @@ class BraintreePaymentsCredentials implements JsonSerializable
         return $this->fields['privateKey'];
     }
 
-    public function setPrivateKey(string $privateKey): self
+    public function setPrivateKey(string $privateKey): static
     {
         $this->fields['privateKey'] = $privateKey;
 
@@ -69,7 +69,7 @@ class BraintreePaymentsCredentials implements JsonSerializable
         return $this->fields['merchantId'];
     }
 
-    public function setMerchantId(string $merchantId): self
+    public function setMerchantId(string $merchantId): static
     {
         $this->fields['merchantId'] = $merchantId;
 
@@ -81,7 +81,7 @@ class BraintreePaymentsCredentials implements JsonSerializable
         return $this->fields['merchantAccountId'];
     }
 
-    public function setMerchantAccountId(string $merchantAccountId): self
+    public function setMerchantAccountId(string $merchantAccountId): static
     {
         $this->fields['merchantAccountId'] = $merchantAccountId;
 

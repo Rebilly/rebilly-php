@@ -36,7 +36,7 @@ class AmexVPCSettings implements JsonSerializable
         return $this->fields['url'];
     }
 
-    public function setUrl(string $url): self
+    public function setUrl(string $url): static
     {
         $this->fields['url'] = $url;
 

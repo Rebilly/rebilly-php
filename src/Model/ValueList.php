@@ -66,7 +66,7 @@ class ValueList implements JsonSerializable
         return $this->fields['description'];
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(string $description): static
     {
         $this->fields['description'] = $description;
 
@@ -84,7 +84,7 @@ class ValueList implements JsonSerializable
     /**
      * @param string[] $values
      */
-    public function setValues(array $values): self
+    public function setValues(array $values): static
     {
         $values = array_map(fn ($value) => $value ?? null, $values);
 
@@ -139,21 +139,21 @@ class ValueList implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setVersion(null|int $version): self
+    private function setVersion(null|int $version): static
     {
         $this->fields['version'] = $version;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -164,7 +164,7 @@ class ValueList implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -178,7 +178,7 @@ class ValueList implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

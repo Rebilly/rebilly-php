@@ -42,7 +42,7 @@ class TrustsPayCredentials implements JsonSerializable
         return $this->fields['merchantNo'];
     }
 
-    public function setMerchantNo(string $merchantNo): self
+    public function setMerchantNo(string $merchantNo): static
     {
         $this->fields['merchantNo'] = $merchantNo;
 
@@ -54,7 +54,7 @@ class TrustsPayCredentials implements JsonSerializable
         return $this->fields['gatewayNo'];
     }
 
-    public function setGatewayNo(string $gatewayNo): self
+    public function setGatewayNo(string $gatewayNo): static
     {
         $this->fields['gatewayNo'] = $gatewayNo;
 
@@ -66,7 +66,7 @@ class TrustsPayCredentials implements JsonSerializable
         return $this->fields['signkey'];
     }
 
-    public function setSignkey(string $signkey): self
+    public function setSignkey(string $signkey): static
     {
         $this->fields['signkey'] = $signkey;
 

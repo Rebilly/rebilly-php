@@ -36,7 +36,7 @@ class CCAvenueSettings implements JsonSerializable
         return $this->fields['useStandingInstructionApi'] ?? null;
     }
 
-    public function setUseStandingInstructionApi(null|bool $useStandingInstructionApi): self
+    public function setUseStandingInstructionApi(null|bool $useStandingInstructionApi): static
     {
         $this->fields['useStandingInstructionApi'] = $useStandingInstructionApi;
 

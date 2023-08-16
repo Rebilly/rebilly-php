@@ -78,7 +78,7 @@ class RevenueEntry implements JsonSerializable
         return $this->fields['customerId'] ?? null;
     }
 
-    public function setCustomerId(null|string $customerId): self
+    public function setCustomerId(null|string $customerId): static
     {
         $this->fields['customerId'] = $customerId;
 
@@ -90,7 +90,7 @@ class RevenueEntry implements JsonSerializable
         return $this->fields['invoiceId'] ?? null;
     }
 
-    public function setInvoiceId(null|string $invoiceId): self
+    public function setInvoiceId(null|string $invoiceId): static
     {
         $this->fields['invoiceId'] = $invoiceId;
 
@@ -102,7 +102,7 @@ class RevenueEntry implements JsonSerializable
         return $this->fields['invoiceItemId'] ?? null;
     }
 
-    public function setInvoiceItemId(null|string $invoiceItemId): self
+    public function setInvoiceItemId(null|string $invoiceItemId): static
     {
         $this->fields['invoiceItemId'] = $invoiceItemId;
 
@@ -114,7 +114,7 @@ class RevenueEntry implements JsonSerializable
         return $this->fields['productId'] ?? null;
     }
 
-    public function setProductId(null|string $productId): self
+    public function setProductId(null|string $productId): static
     {
         $this->fields['productId'] = $productId;
 
@@ -126,7 +126,7 @@ class RevenueEntry implements JsonSerializable
         return $this->fields['planId'] ?? null;
     }
 
-    public function setPlanId(null|string $planId): self
+    public function setPlanId(null|string $planId): static
     {
         $this->fields['planId'] = $planId;
 
@@ -138,7 +138,7 @@ class RevenueEntry implements JsonSerializable
         return $this->fields['accountingCode'] ?? null;
     }
 
-    public function setAccountingCode(null|string $accountingCode): self
+    public function setAccountingCode(null|string $accountingCode): static
     {
         $this->fields['accountingCode'] = $accountingCode;
 
@@ -150,7 +150,7 @@ class RevenueEntry implements JsonSerializable
         return $this->fields['currency'] ?? null;
     }
 
-    public function setCurrency(null|string $currency): self
+    public function setCurrency(null|string $currency): static
     {
         $this->fields['currency'] = $currency;
 
@@ -170,7 +170,7 @@ class RevenueEntry implements JsonSerializable
         return $this->fields['estimatedAmount'] ?? null;
     }
 
-    public function setEstimatedAmount(null|float|string $estimatedAmount): self
+    public function setEstimatedAmount(null|float|string $estimatedAmount): static
     {
         if (is_string($estimatedAmount)) {
             $estimatedAmount = (float) $estimatedAmount;
@@ -186,7 +186,7 @@ class RevenueEntry implements JsonSerializable
         return $this->fields['recognizedAmount'] ?? null;
     }
 
-    public function setRecognizedAmount(null|float|string $recognizedAmount): self
+    public function setRecognizedAmount(null|float|string $recognizedAmount): static
     {
         if (is_string($recognizedAmount)) {
             $recognizedAmount = (float) $recognizedAmount;
@@ -261,14 +261,14 @@ class RevenueEntry implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    private function setStatus(null|string $status): self
+    private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
         return $this;
     }
 
-    private function setScheduledTime(null|DateTimeImmutable|string $scheduledTime): self
+    private function setScheduledTime(null|DateTimeImmutable|string $scheduledTime): static
     {
         if ($scheduledTime !== null && !($scheduledTime instanceof DateTimeImmutable)) {
             $scheduledTime = new DateTimeImmutable($scheduledTime);
@@ -279,7 +279,7 @@ class RevenueEntry implements JsonSerializable
         return $this;
     }
 
-    private function setIssuedTime(null|DateTimeImmutable|string $issuedTime): self
+    private function setIssuedTime(null|DateTimeImmutable|string $issuedTime): static
     {
         if ($issuedTime !== null && !($issuedTime instanceof DateTimeImmutable)) {
             $issuedTime = new DateTimeImmutable($issuedTime);
@@ -290,7 +290,7 @@ class RevenueEntry implements JsonSerializable
         return $this;
     }
 
-    private function setRecognizedTime(null|DateTimeImmutable|string $recognizedTime): self
+    private function setRecognizedTime(null|DateTimeImmutable|string $recognizedTime): static
     {
         if ($recognizedTime !== null && !($recognizedTime instanceof DateTimeImmutable)) {
             $recognizedTime = new DateTimeImmutable($recognizedTime);

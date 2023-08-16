@@ -44,7 +44,7 @@ class Worldpay extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(WorldpayCredentials|array $credentials): self
+    public function setCredentials(WorldpayCredentials|array $credentials): static
     {
         if (!($credentials instanceof WorldpayCredentials)) {
             $credentials = WorldpayCredentials::from($credentials);
@@ -60,7 +60,7 @@ class Worldpay extends GatewayAccount
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|Worldpay3dsServers|array $threeDSecureServer): self
+    public function setThreeDSecureServer(null|Worldpay3dsServers|array $threeDSecureServer): static
     {
         if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Worldpay3dsServers)) {
             $threeDSecureServer = Worldpay3dsServers::from($threeDSecureServer);
@@ -76,7 +76,7 @@ class Worldpay extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|WorldpaySettings|array $settings): self
+    public function setSettings(null|WorldpaySettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof WorldpaySettings)) {
             $settings = WorldpaySettings::from($settings);

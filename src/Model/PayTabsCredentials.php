@@ -42,7 +42,7 @@ class PayTabsCredentials implements JsonSerializable
         return $this->fields['profileId'];
     }
 
-    public function setProfileId(string $profileId): self
+    public function setProfileId(string $profileId): static
     {
         $this->fields['profileId'] = $profileId;
 
@@ -54,7 +54,7 @@ class PayTabsCredentials implements JsonSerializable
         return $this->fields['clientKey'];
     }
 
-    public function setClientKey(string $clientKey): self
+    public function setClientKey(string $clientKey): static
     {
         $this->fields['clientKey'] = $clientKey;
 
@@ -66,7 +66,7 @@ class PayTabsCredentials implements JsonSerializable
         return $this->fields['serverKey'];
     }
 
-    public function setServerKey(string $serverKey): self
+    public function setServerKey(string $serverKey): static
     {
         $this->fields['serverKey'] = $serverKey;
 

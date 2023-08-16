@@ -78,7 +78,7 @@ abstract class CommonKycDocument implements JsonSerializable
         return $this->fields['fileId'] ?? null;
     }
 
-    public function setFileId(null|string $fileId): self
+    public function setFileId(null|string $fileId): static
     {
         $this->fields['fileId'] = $fileId;
 
@@ -96,7 +96,7 @@ abstract class CommonKycDocument implements JsonSerializable
     /**
      * @param null|string[] $fileIds
      */
-    public function setFileIds(null|array $fileIds): self
+    public function setFileIds(null|array $fileIds): static
     {
         $fileIds = $fileIds !== null ? array_map(fn ($value) => $value ?? null, $fileIds) : null;
 
@@ -110,7 +110,7 @@ abstract class CommonKycDocument implements JsonSerializable
         return $this->fields['documentType'];
     }
 
-    public function setDocumentType(KycDocumentTypes|string $documentType): self
+    public function setDocumentType(KycDocumentTypes|string $documentType): static
     {
         if (!($documentType instanceof KycDocumentTypes)) {
             $documentType = KycDocumentTypes::from($documentType);
@@ -126,7 +126,7 @@ abstract class CommonKycDocument implements JsonSerializable
         return $this->fields['documentSubtype'] ?? null;
     }
 
-    public function setDocumentSubtype(null|KycDocumentSubtypes|string $documentSubtype): self
+    public function setDocumentSubtype(null|KycDocumentSubtypes|string $documentSubtype): static
     {
         if ($documentSubtype !== null && !($documentSubtype instanceof KycDocumentSubtypes)) {
             $documentSubtype = KycDocumentSubtypes::from($documentSubtype);
@@ -150,7 +150,7 @@ abstract class CommonKycDocument implements JsonSerializable
         return $this->fields['rejectionReason'] ?? null;
     }
 
-    public function setRejectionReason(null|KycDocumentRejection|array $rejectionReason): self
+    public function setRejectionReason(null|KycDocumentRejection|array $rejectionReason): static
     {
         if ($rejectionReason !== null && !($rejectionReason instanceof KycDocumentRejection)) {
             $rejectionReason = KycDocumentRejection::from($rejectionReason);
@@ -221,7 +221,7 @@ abstract class CommonKycDocument implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -231,21 +231,21 @@ abstract class CommonKycDocument implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    private function setStatus(null|string $status): self
+    private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
         return $this;
     }
 
-    private function setRequestId(null|string $requestId): self
+    private function setRequestId(null|string $requestId): static
     {
         $this->fields['requestId'] = $requestId;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -256,7 +256,7 @@ abstract class CommonKycDocument implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -267,7 +267,7 @@ abstract class CommonKycDocument implements JsonSerializable
         return $this;
     }
 
-    private function setProcessedTime(null|DateTimeImmutable|string $processedTime): self
+    private function setProcessedTime(null|DateTimeImmutable|string $processedTime): static
     {
         if ($processedTime !== null && !($processedTime instanceof DateTimeImmutable)) {
             $processedTime = new DateTimeImmutable($processedTime);

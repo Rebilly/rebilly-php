@@ -47,7 +47,7 @@ class Subset implements JsonSerializable
     /**
      * @psalm-param self::MODE_*|null $mode
      */
-    public function setMode(null|string $mode): self
+    public function setMode(null|string $mode): static
     {
         $this->fields['mode'] = $mode;
 
@@ -65,7 +65,7 @@ class Subset implements JsonSerializable
     /**
      * @param string[] $values
      */
-    public function setValues(array $values): self
+    public function setValues(array $values): static
     {
         $values = array_map(fn ($value) => $value ?? null, $values);
 

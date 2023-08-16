@@ -60,7 +60,7 @@ class APILogSummaryData implements JsonSerializable
         return $this->fields['route'] ?? null;
     }
 
-    public function setRoute(null|string $route): self
+    public function setRoute(null|string $route): static
     {
         $this->fields['route'] = $route;
 
@@ -72,7 +72,7 @@ class APILogSummaryData implements JsonSerializable
         return $this->fields['total'] ?? null;
     }
 
-    public function setTotal(null|int $total): self
+    public function setTotal(null|int $total): static
     {
         $this->fields['total'] = $total;
 
@@ -84,7 +84,7 @@ class APILogSummaryData implements JsonSerializable
         return $this->fields['get'] ?? null;
     }
 
-    public function setGet(null|int $get): self
+    public function setGet(null|int $get): static
     {
         $this->fields['get'] = $get;
 
@@ -96,7 +96,7 @@ class APILogSummaryData implements JsonSerializable
         return $this->fields['post'] ?? null;
     }
 
-    public function setPost(null|int $post): self
+    public function setPost(null|int $post): static
     {
         $this->fields['post'] = $post;
 
@@ -108,7 +108,7 @@ class APILogSummaryData implements JsonSerializable
         return $this->fields['put'] ?? null;
     }
 
-    public function setPut(null|int $put): self
+    public function setPut(null|int $put): static
     {
         $this->fields['put'] = $put;
 
@@ -120,7 +120,7 @@ class APILogSummaryData implements JsonSerializable
         return $this->fields['patch'] ?? null;
     }
 
-    public function setPatch(null|int $patch): self
+    public function setPatch(null|int $patch): static
     {
         $this->fields['patch'] = $patch;
 
@@ -132,7 +132,7 @@ class APILogSummaryData implements JsonSerializable
         return $this->fields['delete'] ?? null;
     }
 
-    public function setDelete(null|int $delete): self
+    public function setDelete(null|int $delete): static
     {
         $this->fields['delete'] = $delete;
 
@@ -144,7 +144,7 @@ class APILogSummaryData implements JsonSerializable
         return $this->fields['head'] ?? null;
     }
 
-    public function setHead(null|int $head): self
+    public function setHead(null|int $head): static
     {
         $this->fields['head'] = $head;
 
@@ -156,7 +156,7 @@ class APILogSummaryData implements JsonSerializable
         return $this->fields['options'] ?? null;
     }
 
-    public function setOptions(null|int $options): self
+    public function setOptions(null|int $options): static
     {
         $this->fields['options'] = $options;
 

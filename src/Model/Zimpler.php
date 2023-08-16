@@ -38,7 +38,7 @@ class Zimpler extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(ZimplerCredentials|array $credentials): self
+    public function setCredentials(ZimplerCredentials|array $credentials): static
     {
         if (!($credentials instanceof ZimplerCredentials)) {
             $credentials = ZimplerCredentials::from($credentials);

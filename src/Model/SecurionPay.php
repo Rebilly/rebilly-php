@@ -41,7 +41,7 @@ class SecurionPay extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(SecurionPayCredentials|array $credentials): self
+    public function setCredentials(SecurionPayCredentials|array $credentials): static
     {
         if (!($credentials instanceof SecurionPayCredentials)) {
             $credentials = SecurionPayCredentials::from($credentials);
@@ -57,7 +57,7 @@ class SecurionPay extends GatewayAccount
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|SecurionPay3dsServers|array $threeDSecureServer): self
+    public function setThreeDSecureServer(null|SecurionPay3dsServers|array $threeDSecureServer): static
     {
         if ($threeDSecureServer !== null && !($threeDSecureServer instanceof SecurionPay3dsServers)) {
             $threeDSecureServer = SecurionPay3dsServers::from($threeDSecureServer);

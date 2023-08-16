@@ -38,7 +38,7 @@ class SaltarPay extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(SaltarPayCredentials|array $credentials): self
+    public function setCredentials(SaltarPayCredentials|array $credentials): static
     {
         if (!($credentials instanceof SaltarPayCredentials)) {
             $credentials = SaltarPayCredentials::from($credentials);

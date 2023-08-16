@@ -49,7 +49,7 @@ class CreateContactBodyPhoneNumbers implements JsonSerializable
         return $this->fields['number'] ?? null;
     }
 
-    public function setNumber(null|string $number): self
+    public function setNumber(null|string $number): static
     {
         $this->fields['number'] = $number;
 
@@ -67,7 +67,7 @@ class CreateContactBodyPhoneNumbers implements JsonSerializable
     /**
      * @psalm-param self::FIELD_*|null $field
      */
-    public function setField(null|string $field): self
+    public function setField(null|string $field): static
     {
         $this->fields['field'] = $field;
 

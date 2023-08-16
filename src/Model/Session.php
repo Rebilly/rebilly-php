@@ -67,7 +67,7 @@ class Session implements JsonSerializable
         return $this->fields['token'] ?? null;
     }
 
-    public function setToken(null|string $token): self
+    public function setToken(null|string $token): static
     {
         $this->fields['token'] = $token;
 
@@ -85,7 +85,7 @@ class Session implements JsonSerializable
     /**
      * @param string[] $permissions
      */
-    public function setPermissions(array $permissions): self
+    public function setPermissions(array $permissions): static
     {
         $permissions = array_map(fn ($value) => $value ?? null, $permissions);
 
@@ -105,7 +105,7 @@ class Session implements JsonSerializable
     /**
      * @param null|Membership[] $memberships
      */
-    public function setMemberships(null|array $memberships): self
+    public function setMemberships(null|array $memberships): static
     {
         $memberships = $memberships !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Membership ? $value : Membership::from($value)) : null, $memberships) : null;
 
@@ -134,7 +134,7 @@ class Session implements JsonSerializable
         return $this->fields['expiredTime'] ?? null;
     }
 
-    public function setExpiredTime(null|DateTimeImmutable|string $expiredTime): self
+    public function setExpiredTime(null|DateTimeImmutable|string $expiredTime): static
     {
         if ($expiredTime !== null && !($expiredTime instanceof DateTimeImmutable)) {
             $expiredTime = new DateTimeImmutable($expiredTime);
@@ -187,21 +187,21 @@ class Session implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setUserId(null|string $userId): self
+    private function setUserId(null|string $userId): static
     {
         $this->fields['userId'] = $userId;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -212,7 +212,7 @@ class Session implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -226,7 +226,7 @@ class Session implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

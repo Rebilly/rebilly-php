@@ -48,7 +48,7 @@ class IntegrationConfigurations implements JsonSerializable
     /**
      * @param null|string[] $labels
      */
-    public function setLabels(null|array $labels): self
+    public function setLabels(null|array $labels): static
     {
         $labels = $labels !== null ? array_map(fn ($value) => $value ?? null, $labels) : null;
 
@@ -62,7 +62,7 @@ class IntegrationConfigurations implements JsonSerializable
         return $this->fields['eventType'] ?? null;
     }
 
-    public function setEventType(null|EventType|string $eventType): self
+    public function setEventType(null|EventType|string $eventType): static
     {
         if ($eventType !== null && !($eventType instanceof EventType)) {
             $eventType = EventType::from($eventType);
@@ -78,7 +78,7 @@ class IntegrationConfigurations implements JsonSerializable
         return $this->fields['title'] ?? null;
     }
 
-    public function setTitle(null|string $title): self
+    public function setTitle(null|string $title): static
     {
         $this->fields['title'] = $title;
 

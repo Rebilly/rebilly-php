@@ -38,7 +38,7 @@ class Greenbox extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(GreenboxCredentials|array $credentials): self
+    public function setCredentials(GreenboxCredentials|array $credentials): static
     {
         if (!($credentials instanceof GreenboxCredentials)) {
             $credentials = GreenboxCredentials::from($credentials);

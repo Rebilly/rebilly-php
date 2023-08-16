@@ -91,21 +91,21 @@ class AmlCheckCustomerPrimaryAddress implements JsonSerializable
         return $data;
     }
 
-    private function setFirstName(null|string $firstName): self
+    private function setFirstName(null|string $firstName): static
     {
         $this->fields['firstName'] = $firstName;
 
         return $this;
     }
 
-    private function setLastName(null|string $lastName): self
+    private function setLastName(null|string $lastName): static
     {
         $this->fields['lastName'] = $lastName;
 
         return $this;
     }
 
-    private function setDob(null|DateTimeImmutable|string $dob): self
+    private function setDob(null|DateTimeImmutable|string $dob): static
     {
         if ($dob !== null && !($dob instanceof DateTimeImmutable)) {
             $dob = new DateTimeImmutable($dob);
@@ -116,14 +116,14 @@ class AmlCheckCustomerPrimaryAddress implements JsonSerializable
         return $this;
     }
 
-    private function setCountry(null|string $country): self
+    private function setCountry(null|string $country): static
     {
         $this->fields['country'] = $country;
 
         return $this;
     }
 
-    private function setOrganization(null|string $organization): self
+    private function setOrganization(null|string $organization): static
     {
         $this->fields['organization'] = $organization;
 

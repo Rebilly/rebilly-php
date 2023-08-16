@@ -41,7 +41,7 @@ class FinTecSystems extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(FinTecSystemsCredentials|array $credentials): self
+    public function setCredentials(FinTecSystemsCredentials|array $credentials): static
     {
         if (!($credentials instanceof FinTecSystemsCredentials)) {
             $credentials = FinTecSystemsCredentials::from($credentials);
@@ -57,7 +57,7 @@ class FinTecSystems extends GatewayAccount
         return $this->fields['settings'];
     }
 
-    public function setSettings(FinTecSystemsSettings|array $settings): self
+    public function setSettings(FinTecSystemsSettings|array $settings): static
     {
         if (!($settings instanceof FinTecSystemsSettings)) {
             $settings = FinTecSystemsSettings::from($settings);

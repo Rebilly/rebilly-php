@@ -44,7 +44,7 @@ class CreateInfusionsoftOrder extends RuleAction
         return $this->fields['contactBody'];
     }
 
-    public function setContactBody(CreateContactBody|array $contactBody): self
+    public function setContactBody(CreateContactBody|array $contactBody): static
     {
         if (!($contactBody instanceof CreateContactBody)) {
             $contactBody = CreateContactBody::from($contactBody);
@@ -60,7 +60,7 @@ class CreateInfusionsoftOrder extends RuleAction
         return $this->fields['orderBody'];
     }
 
-    public function setOrderBody(CreateOrderBody|array $orderBody): self
+    public function setOrderBody(CreateOrderBody|array $orderBody): static
     {
         if (!($orderBody instanceof CreateOrderBody)) {
             $orderBody = CreateOrderBody::from($orderBody);
@@ -76,7 +76,7 @@ class CreateInfusionsoftOrder extends RuleAction
         return $this->fields['credentialHash'];
     }
 
-    public function setCredentialHash(string $credentialHash): self
+    public function setCredentialHash(string $credentialHash): static
     {
         $this->fields['credentialHash'] = $credentialHash;
 

@@ -42,7 +42,7 @@ class TimeSeriesTransaction implements JsonSerializable
     /**
      * @param null|TimeSeriesTransactionData[] $data
      */
-    public function setData(null|array $data): self
+    public function setData(null|array $data): static
     {
         $data = $data !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof TimeSeriesTransactionData ? $value : TimeSeriesTransactionData::from($value)) : null, $data) : null;
 

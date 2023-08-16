@@ -69,7 +69,7 @@ class InvoiceTaxItem implements JsonSerializable
         return $this->fields['amount'];
     }
 
-    public function setAmount(float|string $amount): self
+    public function setAmount(float|string $amount): static
     {
         if (is_string($amount)) {
             $amount = (float) $amount;
@@ -85,7 +85,7 @@ class InvoiceTaxItem implements JsonSerializable
         return $this->fields['description'];
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(string $description): static
     {
         $this->fields['description'] = $description;
 
@@ -142,7 +142,7 @@ class InvoiceTaxItem implements JsonSerializable
         return $this->fields['jurisdictions'] ?? null;
     }
 
-    public function setJurisdictions(null|InvoiceTaxItemJurisdictions|array $jurisdictions): self
+    public function setJurisdictions(null|InvoiceTaxItemJurisdictions|array $jurisdictions): static
     {
         if ($jurisdictions !== null && !($jurisdictions instanceof InvoiceTaxItemJurisdictions)) {
             $jurisdictions = InvoiceTaxItemJurisdictions::from($jurisdictions);
@@ -196,7 +196,7 @@ class InvoiceTaxItem implements JsonSerializable
         return $data;
     }
 
-    private function setRate(null|float|string $rate): self
+    private function setRate(null|float|string $rate): static
     {
         if (is_string($rate)) {
             $rate = (float) $rate;
@@ -207,7 +207,7 @@ class InvoiceTaxItem implements JsonSerializable
         return $this;
     }
 
-    private function setStateAmount(null|float|string $stateAmount): self
+    private function setStateAmount(null|float|string $stateAmount): static
     {
         if (is_string($stateAmount)) {
             $stateAmount = (float) $stateAmount;
@@ -218,7 +218,7 @@ class InvoiceTaxItem implements JsonSerializable
         return $this;
     }
 
-    private function setCountyAmount(null|float|string $countyAmount): self
+    private function setCountyAmount(null|float|string $countyAmount): static
     {
         if (is_string($countyAmount)) {
             $countyAmount = (float) $countyAmount;
@@ -229,7 +229,7 @@ class InvoiceTaxItem implements JsonSerializable
         return $this;
     }
 
-    private function setCityAmount(null|float|string $cityAmount): self
+    private function setCityAmount(null|float|string $cityAmount): static
     {
         if (is_string($cityAmount)) {
             $cityAmount = (float) $cityAmount;
@@ -240,7 +240,7 @@ class InvoiceTaxItem implements JsonSerializable
         return $this;
     }
 
-    private function setSpecialDistrictAmount(null|float|string $specialDistrictAmount): self
+    private function setSpecialDistrictAmount(null|float|string $specialDistrictAmount): static
     {
         if (is_string($specialDistrictAmount)) {
             $specialDistrictAmount = (float) $specialDistrictAmount;
@@ -251,7 +251,7 @@ class InvoiceTaxItem implements JsonSerializable
         return $this;
     }
 
-    private function setStateRate(null|float|string $stateRate): self
+    private function setStateRate(null|float|string $stateRate): static
     {
         if (is_string($stateRate)) {
             $stateRate = (float) $stateRate;
@@ -262,7 +262,7 @@ class InvoiceTaxItem implements JsonSerializable
         return $this;
     }
 
-    private function setCountyRate(null|float|string $countyRate): self
+    private function setCountyRate(null|float|string $countyRate): static
     {
         if (is_string($countyRate)) {
             $countyRate = (float) $countyRate;
@@ -273,7 +273,7 @@ class InvoiceTaxItem implements JsonSerializable
         return $this;
     }
 
-    private function setCityRate(null|float|string $cityRate): self
+    private function setCityRate(null|float|string $cityRate): static
     {
         if (is_string($cityRate)) {
             $cityRate = (float) $cityRate;
@@ -284,7 +284,7 @@ class InvoiceTaxItem implements JsonSerializable
         return $this;
     }
 
-    private function setSpecialDistrictRate(null|float|string $specialDistrictRate): self
+    private function setSpecialDistrictRate(null|float|string $specialDistrictRate): static
     {
         if (is_string($specialDistrictRate)) {
             $specialDistrictRate = (float) $specialDistrictRate;

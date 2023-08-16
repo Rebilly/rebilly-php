@@ -45,7 +45,7 @@ class ForteCredentials implements JsonSerializable
         return $this->fields['accountId'];
     }
 
-    public function setAccountId(string $accountId): self
+    public function setAccountId(string $accountId): static
     {
         $this->fields['accountId'] = $accountId;
 
@@ -57,7 +57,7 @@ class ForteCredentials implements JsonSerializable
         return $this->fields['locationId'];
     }
 
-    public function setLocationId(string $locationId): self
+    public function setLocationId(string $locationId): static
     {
         $this->fields['locationId'] = $locationId;
 
@@ -69,7 +69,7 @@ class ForteCredentials implements JsonSerializable
         return $this->fields['apiAccessId'];
     }
 
-    public function setApiAccessId(string $apiAccessId): self
+    public function setApiAccessId(string $apiAccessId): static
     {
         $this->fields['apiAccessId'] = $apiAccessId;
 
@@ -81,7 +81,7 @@ class ForteCredentials implements JsonSerializable
         return $this->fields['apiSecretKey'];
     }
 
-    public function setApiSecretKey(string $apiSecretKey): self
+    public function setApiSecretKey(string $apiSecretKey): static
     {
         $this->fields['apiSecretKey'] = $apiSecretKey;
 

@@ -36,7 +36,7 @@ class UpcomingInvoiceItemCollection implements JsonSerializable
         return $this->fields['upcomingInvoiceItemCollection'] ?? null;
     }
 
-    public function setUpcomingInvoiceItemCollection(null|UpcomingInvoiceItem|array $upcomingInvoiceItemCollection): self
+    public function setUpcomingInvoiceItemCollection(null|UpcomingInvoiceItem|array $upcomingInvoiceItemCollection): static
     {
         if ($upcomingInvoiceItemCollection !== null && !($upcomingInvoiceItemCollection instanceof UpcomingInvoiceItem)) {
             $upcomingInvoiceItemCollection = UpcomingInvoiceItem::from($upcomingInvoiceItemCollection);

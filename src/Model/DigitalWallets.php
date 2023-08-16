@@ -39,7 +39,7 @@ class DigitalWallets implements JsonSerializable
         return $this->fields['applePay'] ?? null;
     }
 
-    public function setApplePay(null|DigitalWalletsApplePay|array $applePay): self
+    public function setApplePay(null|DigitalWalletsApplePay|array $applePay): static
     {
         if ($applePay !== null && !($applePay instanceof DigitalWalletsApplePay)) {
             $applePay = DigitalWalletsApplePay::from($applePay);
@@ -55,7 +55,7 @@ class DigitalWallets implements JsonSerializable
         return $this->fields['googlePay'] ?? null;
     }
 
-    public function setGooglePay(null|DigitalWalletsGooglePay|array $googlePay): self
+    public function setGooglePay(null|DigitalWalletsGooglePay|array $googlePay): static
     {
         if ($googlePay !== null && !($googlePay instanceof DigitalWalletsGooglePay)) {
             $googlePay = DigitalWalletsGooglePay::from($googlePay);

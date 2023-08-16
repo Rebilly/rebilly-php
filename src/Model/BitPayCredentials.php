@@ -36,7 +36,7 @@ class BitPayCredentials implements JsonSerializable
         return $this->fields['token'];
     }
 
-    public function setToken(string $token): self
+    public function setToken(string $token): static
     {
         $this->fields['token'] = $token;
 

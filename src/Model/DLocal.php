@@ -41,7 +41,7 @@ class DLocal extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(DLocalCredentials|array $credentials): self
+    public function setCredentials(DLocalCredentials|array $credentials): static
     {
         if (!($credentials instanceof DLocalCredentials)) {
             $credentials = DLocalCredentials::from($credentials);
@@ -57,7 +57,7 @@ class DLocal extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|DLocalSettings|array $settings): self
+    public function setSettings(null|DLocalSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof DLocalSettings)) {
             $settings = DLocalSettings::from($settings);

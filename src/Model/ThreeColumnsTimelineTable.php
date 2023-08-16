@@ -44,7 +44,7 @@ class ThreeColumnsTimelineTable extends TimelineTable
     /**
      * @param null|ThreeData[] $data
      */
-    public function setData(null|array $data): self
+    public function setData(null|array $data): static
     {
         $data = $data !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ThreeData ? $value : ThreeData::from($value)) : null, $data) : null;
 

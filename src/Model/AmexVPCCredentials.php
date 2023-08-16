@@ -45,7 +45,7 @@ class AmexVPCCredentials implements JsonSerializable
         return $this->fields['merchantId'];
     }
 
-    public function setMerchantId(string $merchantId): self
+    public function setMerchantId(string $merchantId): static
     {
         $this->fields['merchantId'] = $merchantId;
 
@@ -57,7 +57,7 @@ class AmexVPCCredentials implements JsonSerializable
         return $this->fields['accessCode'];
     }
 
-    public function setAccessCode(string $accessCode): self
+    public function setAccessCode(string $accessCode): static
     {
         $this->fields['accessCode'] = $accessCode;
 
@@ -69,7 +69,7 @@ class AmexVPCCredentials implements JsonSerializable
         return $this->fields['user'];
     }
 
-    public function setUser(string $user): self
+    public function setUser(string $user): static
     {
         $this->fields['user'] = $user;
 
@@ -81,7 +81,7 @@ class AmexVPCCredentials implements JsonSerializable
         return $this->fields['password'];
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password): static
     {
         $this->fields['password'] = $password;
 

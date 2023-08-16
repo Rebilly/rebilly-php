@@ -41,7 +41,7 @@ class GET extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(GETCredentials|array $credentials): self
+    public function setCredentials(GETCredentials|array $credentials): static
     {
         if (!($credentials instanceof GETCredentials)) {
             $credentials = GETCredentials::from($credentials);
@@ -57,7 +57,7 @@ class GET extends GatewayAccount
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|GET3dsServers|array $threeDSecureServer): self
+    public function setThreeDSecureServer(null|GET3dsServers|array $threeDSecureServer): static
     {
         if ($threeDSecureServer !== null && !($threeDSecureServer instanceof GET3dsServers)) {
             $threeDSecureServer = GET3dsServers::from($threeDSecureServer);

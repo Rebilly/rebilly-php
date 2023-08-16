@@ -60,7 +60,7 @@ class PPROCredentials implements JsonSerializable
         return $this->fields['login'];
     }
 
-    public function setLogin(string $login): self
+    public function setLogin(string $login): static
     {
         $this->fields['login'] = $login;
 
@@ -72,7 +72,7 @@ class PPROCredentials implements JsonSerializable
         return $this->fields['password'];
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password): static
     {
         $this->fields['password'] = $password;
 
@@ -84,7 +84,7 @@ class PPROCredentials implements JsonSerializable
         return $this->fields['contractId'];
     }
 
-    public function setContractId(string $contractId): self
+    public function setContractId(string $contractId): static
     {
         $this->fields['contractId'] = $contractId;
 
@@ -96,7 +96,7 @@ class PPROCredentials implements JsonSerializable
         return $this->fields['privateKey'];
     }
 
-    public function setPrivateKey(string $privateKey): self
+    public function setPrivateKey(string $privateKey): static
     {
         $this->fields['privateKey'] = $privateKey;
 
@@ -108,7 +108,7 @@ class PPROCredentials implements JsonSerializable
         return $this->fields['privateKeyPassword'];
     }
 
-    public function setPrivateKeyPassword(string $privateKeyPassword): self
+    public function setPrivateKeyPassword(string $privateKeyPassword): static
     {
         $this->fields['privateKeyPassword'] = $privateKeyPassword;
 
@@ -120,7 +120,7 @@ class PPROCredentials implements JsonSerializable
         return $this->fields['clientCertificate'];
     }
 
-    public function setClientCertificate(string $clientCertificate): self
+    public function setClientCertificate(string $clientCertificate): static
     {
         $this->fields['clientCertificate'] = $clientCertificate;
 
@@ -132,7 +132,7 @@ class PPROCredentials implements JsonSerializable
         return $this->fields['serverCertificate'];
     }
 
-    public function setServerCertificate(string $serverCertificate): self
+    public function setServerCertificate(string $serverCertificate): static
     {
         $this->fields['serverCertificate'] = $serverCertificate;
 
@@ -144,7 +144,7 @@ class PPROCredentials implements JsonSerializable
         return $this->fields['notificationSecret'];
     }
 
-    public function setNotificationSecret(string $notificationSecret): self
+    public function setNotificationSecret(string $notificationSecret): static
     {
         $this->fields['notificationSecret'] = $notificationSecret;
 
@@ -156,7 +156,7 @@ class PPROCredentials implements JsonSerializable
         return $this->fields['sharedSecret'];
     }
 
-    public function setSharedSecret(string $sharedSecret): self
+    public function setSharedSecret(string $sharedSecret): static
     {
         $this->fields['sharedSecret'] = $sharedSecret;
 

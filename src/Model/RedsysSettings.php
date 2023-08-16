@@ -36,7 +36,7 @@ class RedsysSettings implements JsonSerializable
         return $this->fields['terminal'] ?? null;
     }
 
-    public function setTerminal(null|string $terminal): self
+    public function setTerminal(null|string $terminal): static
     {
         $this->fields['terminal'] = $terminal;
 

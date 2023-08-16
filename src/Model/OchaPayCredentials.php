@@ -42,7 +42,7 @@ class OchaPayCredentials implements JsonSerializable
         return $this->fields['apiUsername'];
     }
 
-    public function setApiUsername(string $apiUsername): self
+    public function setApiUsername(string $apiUsername): static
     {
         $this->fields['apiUsername'] = $apiUsername;
 
@@ -54,7 +54,7 @@ class OchaPayCredentials implements JsonSerializable
         return $this->fields['apiPassword'];
     }
 
-    public function setApiPassword(string $apiPassword): self
+    public function setApiPassword(string $apiPassword): static
     {
         $this->fields['apiPassword'] = $apiPassword;
 
@@ -66,7 +66,7 @@ class OchaPayCredentials implements JsonSerializable
         return $this->fields['secretWord'];
     }
 
-    public function setSecretWord(string $secretWord): self
+    public function setSecretWord(string $secretWord): static
     {
         $this->fields['secretWord'] = $secretWord;
 

@@ -64,7 +64,7 @@ class RuleSet implements JsonSerializable
     /**
      * @param null|Bind[] $binds
      */
-    public function setBinds(null|array $binds): self
+    public function setBinds(null|array $binds): static
     {
         $binds = $binds !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Bind ? $value : Bind::from($value)) : null, $binds) : null;
 
@@ -84,7 +84,7 @@ class RuleSet implements JsonSerializable
     /**
      * @param Rule[] $rules
      */
-    public function setRules(array $rules): self
+    public function setRules(array $rules): static
     {
         $rules = array_map(fn ($value) => $value !== null ? ($value instanceof Rule ? $value : Rule::from($value)) : null, $rules);
 
@@ -136,14 +136,14 @@ class RuleSet implements JsonSerializable
         return $data;
     }
 
-    private function setVersion(null|int $version): self
+    private function setVersion(null|int $version): static
     {
         $this->fields['version'] = $version;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -154,7 +154,7 @@ class RuleSet implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -168,7 +168,7 @@ class RuleSet implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

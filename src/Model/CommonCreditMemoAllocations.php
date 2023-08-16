@@ -42,7 +42,7 @@ class CommonCreditMemoAllocations implements JsonSerializable
     /**
      * @param null|CommonCreditMemoAllocationsTransactions[] $transactions
      */
-    public function setTransactions(null|array $transactions): self
+    public function setTransactions(null|array $transactions): static
     {
         $transactions = $transactions !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof CommonCreditMemoAllocationsTransactions ? $value : CommonCreditMemoAllocationsTransactions::from($value)) : null, $transactions) : null;
 

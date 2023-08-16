@@ -45,7 +45,7 @@ class CoinPaymentsCredentials implements JsonSerializable
         return $this->fields['publicKey'];
     }
 
-    public function setPublicKey(string $publicKey): self
+    public function setPublicKey(string $publicKey): static
     {
         $this->fields['publicKey'] = $publicKey;
 
@@ -57,7 +57,7 @@ class CoinPaymentsCredentials implements JsonSerializable
         return $this->fields['privateKey'];
     }
 
-    public function setPrivateKey(string $privateKey): self
+    public function setPrivateKey(string $privateKey): static
     {
         $this->fields['privateKey'] = $privateKey;
 
@@ -69,7 +69,7 @@ class CoinPaymentsCredentials implements JsonSerializable
         return $this->fields['ipnSecret'];
     }
 
-    public function setIpnSecret(string $ipnSecret): self
+    public function setIpnSecret(string $ipnSecret): static
     {
         $this->fields['ipnSecret'] = $ipnSecret;
 
@@ -81,7 +81,7 @@ class CoinPaymentsCredentials implements JsonSerializable
         return $this->fields['merchantId'] ?? null;
     }
 
-    public function setMerchantId(null|string $merchantId): self
+    public function setMerchantId(null|string $merchantId): static
     {
         $this->fields['merchantId'] = $merchantId;
 

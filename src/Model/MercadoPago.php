@@ -38,7 +38,7 @@ class MercadoPago extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(MercadoPagoCredentials|array $credentials): self
+    public function setCredentials(MercadoPagoCredentials|array $credentials): static
     {
         if (!($credentials instanceof MercadoPagoCredentials)) {
             $credentials = MercadoPagoCredentials::from($credentials);

@@ -41,7 +41,7 @@ class Directa24 extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(Directa24Credentials|array $credentials): self
+    public function setCredentials(Directa24Credentials|array $credentials): static
     {
         if (!($credentials instanceof Directa24Credentials)) {
             $credentials = Directa24Credentials::from($credentials);
@@ -57,7 +57,7 @@ class Directa24 extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|Directa24Settings|array $settings): self
+    public function setSettings(null|Directa24Settings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof Directa24Settings)) {
             $settings = Directa24Settings::from($settings);

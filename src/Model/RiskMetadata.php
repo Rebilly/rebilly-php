@@ -132,7 +132,7 @@ class RiskMetadata implements JsonSerializable
         return $this->fields['ipAddress'] ?? null;
     }
 
-    public function setIpAddress(null|string $ipAddress): self
+    public function setIpAddress(null|string $ipAddress): static
     {
         $this->fields['ipAddress'] = $ipAddress;
 
@@ -144,7 +144,7 @@ class RiskMetadata implements JsonSerializable
         return $this->fields['fingerprint'] ?? null;
     }
 
-    public function setFingerprint(null|string $fingerprint): self
+    public function setFingerprint(null|string $fingerprint): static
     {
         $this->fields['fingerprint'] = $fingerprint;
 
@@ -156,7 +156,7 @@ class RiskMetadata implements JsonSerializable
         return $this->fields['httpHeaders'] ?? null;
     }
 
-    public function setHttpHeaders(null|array $httpHeaders): self
+    public function setHttpHeaders(null|array $httpHeaders): static
     {
         $this->fields['httpHeaders'] = $httpHeaders;
 
@@ -168,7 +168,7 @@ class RiskMetadata implements JsonSerializable
         return $this->fields['browserData'] ?? null;
     }
 
-    public function setBrowserData(null|BrowserData|array $browserData): self
+    public function setBrowserData(null|BrowserData|array $browserData): static
     {
         if ($browserData !== null && !($browserData instanceof BrowserData)) {
             $browserData = BrowserData::from($browserData);
@@ -184,7 +184,7 @@ class RiskMetadata implements JsonSerializable
         return $this->fields['extraData'] ?? null;
     }
 
-    public function setExtraData(null|ExtraData|array $extraData): self
+    public function setExtraData(null|ExtraData|array $extraData): static
     {
         if ($extraData !== null && !($extraData instanceof ExtraData)) {
             $extraData = ExtraData::from($extraData);
@@ -441,70 +441,70 @@ class RiskMetadata implements JsonSerializable
         return $data;
     }
 
-    private function setIsProxy(null|bool $isProxy): self
+    private function setIsProxy(null|bool $isProxy): static
     {
         $this->fields['isProxy'] = $isProxy;
 
         return $this;
     }
 
-    private function setIsVpn(null|bool $isVpn): self
+    private function setIsVpn(null|bool $isVpn): static
     {
         $this->fields['isVpn'] = $isVpn;
 
         return $this;
     }
 
-    private function setIsTor(null|bool $isTor): self
+    private function setIsTor(null|bool $isTor): static
     {
         $this->fields['isTor'] = $isTor;
 
         return $this;
     }
 
-    private function setIsHosting(null|bool $isHosting): self
+    private function setIsHosting(null|bool $isHosting): static
     {
         $this->fields['isHosting'] = $isHosting;
 
         return $this;
     }
 
-    private function setVpnServiceName(null|string $vpnServiceName): self
+    private function setVpnServiceName(null|string $vpnServiceName): static
     {
         $this->fields['vpnServiceName'] = $vpnServiceName;
 
         return $this;
     }
 
-    private function setIsp(null|string $isp): self
+    private function setIsp(null|string $isp): static
     {
         $this->fields['isp'] = $isp;
 
         return $this;
     }
 
-    private function setCountry(null|string $country): self
+    private function setCountry(null|string $country): static
     {
         $this->fields['country'] = $country;
 
         return $this;
     }
 
-    private function setRegion(null|string $region): self
+    private function setRegion(null|string $region): static
     {
         $this->fields['region'] = $region;
 
         return $this;
     }
 
-    private function setCity(null|string $city): self
+    private function setCity(null|string $city): static
     {
         $this->fields['city'] = $city;
 
         return $this;
     }
 
-    private function setLatitude(null|float|string $latitude): self
+    private function setLatitude(null|float|string $latitude): static
     {
         if (is_string($latitude)) {
             $latitude = (float) $latitude;
@@ -515,7 +515,7 @@ class RiskMetadata implements JsonSerializable
         return $this;
     }
 
-    private function setLongitude(null|float|string $longitude): self
+    private function setLongitude(null|float|string $longitude): static
     {
         if (is_string($longitude)) {
             $longitude = (float) $longitude;
@@ -526,119 +526,119 @@ class RiskMetadata implements JsonSerializable
         return $this;
     }
 
-    private function setPostalCode(null|string $postalCode): self
+    private function setPostalCode(null|string $postalCode): static
     {
         $this->fields['postalCode'] = $postalCode;
 
         return $this;
     }
 
-    private function setTimeZone(null|string $timeZone): self
+    private function setTimeZone(null|string $timeZone): static
     {
         $this->fields['timeZone'] = $timeZone;
 
         return $this;
     }
 
-    private function setAccuracyRadius(null|int $accuracyRadius): self
+    private function setAccuracyRadius(null|int $accuracyRadius): static
     {
         $this->fields['accuracyRadius'] = $accuracyRadius;
 
         return $this;
     }
 
-    private function setDistance(null|int $distance): self
+    private function setDistance(null|int $distance): static
     {
         $this->fields['distance'] = $distance;
 
         return $this;
     }
 
-    private function setHasMismatchedBillingAddressCountry(null|bool $hasMismatchedBillingAddressCountry): self
+    private function setHasMismatchedBillingAddressCountry(null|bool $hasMismatchedBillingAddressCountry): static
     {
         $this->fields['hasMismatchedBillingAddressCountry'] = $hasMismatchedBillingAddressCountry;
 
         return $this;
     }
 
-    private function setHasMismatchedBankCountry(null|bool $hasMismatchedBankCountry): self
+    private function setHasMismatchedBankCountry(null|bool $hasMismatchedBankCountry): static
     {
         $this->fields['hasMismatchedBankCountry'] = $hasMismatchedBankCountry;
 
         return $this;
     }
 
-    private function setHasMismatchedTimeZone(null|bool $hasMismatchedTimeZone): self
+    private function setHasMismatchedTimeZone(null|bool $hasMismatchedTimeZone): static
     {
         $this->fields['hasMismatchedTimeZone'] = $hasMismatchedTimeZone;
 
         return $this;
     }
 
-    private function setHasMismatchedHolderName(null|bool $hasMismatchedHolderName): self
+    private function setHasMismatchedHolderName(null|bool $hasMismatchedHolderName): static
     {
         $this->fields['hasMismatchedHolderName'] = $hasMismatchedHolderName;
 
         return $this;
     }
 
-    private function setHasFakeName(null|bool $hasFakeName): self
+    private function setHasFakeName(null|bool $hasFakeName): static
     {
         $this->fields['hasFakeName'] = $hasFakeName;
 
         return $this;
     }
 
-    private function setIsHighRiskCountry(null|bool $isHighRiskCountry): self
+    private function setIsHighRiskCountry(null|bool $isHighRiskCountry): static
     {
         $this->fields['isHighRiskCountry'] = $isHighRiskCountry;
 
         return $this;
     }
 
-    private function setPaymentInstrumentVelocity(null|int $paymentInstrumentVelocity): self
+    private function setPaymentInstrumentVelocity(null|int $paymentInstrumentVelocity): static
     {
         $this->fields['paymentInstrumentVelocity'] = $paymentInstrumentVelocity;
 
         return $this;
     }
 
-    private function setDeclinedPaymentInstrumentVelocity(null|int $declinedPaymentInstrumentVelocity): self
+    private function setDeclinedPaymentInstrumentVelocity(null|int $declinedPaymentInstrumentVelocity): static
     {
         $this->fields['declinedPaymentInstrumentVelocity'] = $declinedPaymentInstrumentVelocity;
 
         return $this;
     }
 
-    private function setDeviceVelocity(null|int $deviceVelocity): self
+    private function setDeviceVelocity(null|int $deviceVelocity): static
     {
         $this->fields['deviceVelocity'] = $deviceVelocity;
 
         return $this;
     }
 
-    private function setIpVelocity(null|int $ipVelocity): self
+    private function setIpVelocity(null|int $ipVelocity): static
     {
         $this->fields['ipVelocity'] = $ipVelocity;
 
         return $this;
     }
 
-    private function setEmailVelocity(null|int $emailVelocity): self
+    private function setEmailVelocity(null|int $emailVelocity): static
     {
         $this->fields['emailVelocity'] = $emailVelocity;
 
         return $this;
     }
 
-    private function setBillingAddressVelocity(null|int $billingAddressVelocity): self
+    private function setBillingAddressVelocity(null|int $billingAddressVelocity): static
     {
         $this->fields['billingAddressVelocity'] = $billingAddressVelocity;
 
         return $this;
     }
 
-    private function setScore(null|int $score): self
+    private function setScore(null|int $score): static
     {
         $this->fields['score'] = $score;
 

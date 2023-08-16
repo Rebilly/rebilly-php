@@ -36,7 +36,7 @@ class CommonSubscriptionOrderRecurringInterval implements JsonSerializable
         return $this->fields['periodAnchorInstruction'] ?? null;
     }
 
-    public function setPeriodAnchorInstruction(null|ServicePeriodAnchorInstruction|array $periodAnchorInstruction): self
+    public function setPeriodAnchorInstruction(null|ServicePeriodAnchorInstruction|array $periodAnchorInstruction): static
     {
         if ($periodAnchorInstruction !== null && !($periodAnchorInstruction instanceof ServicePeriodAnchorInstruction)) {
             $periodAnchorInstruction = ServicePeriodAnchorInstruction::from($periodAnchorInstruction);

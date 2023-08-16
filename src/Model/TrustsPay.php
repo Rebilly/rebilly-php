@@ -38,7 +38,7 @@ class TrustsPay extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(TrustsPayCredentials|array $credentials): self
+    public function setCredentials(TrustsPayCredentials|array $credentials): static
     {
         if (!($credentials instanceof TrustsPayCredentials)) {
             $credentials = TrustsPayCredentials::from($credentials);

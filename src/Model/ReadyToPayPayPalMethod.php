@@ -52,7 +52,7 @@ class ReadyToPayPayPalMethod extends ReadyToPayMethods
     /**
      * @psalm-param self::METHOD_* $method
      */
-    public function setMethod(string $method): self
+    public function setMethod(string $method): static
     {
         $this->fields['method'] = $method;
 
@@ -64,7 +64,7 @@ class ReadyToPayPayPalMethod extends ReadyToPayMethods
         return $this->fields['feature'] ?? null;
     }
 
-    public function setFeature(null|PayPalBillingAgreementFeature|array $feature): self
+    public function setFeature(null|PayPalBillingAgreementFeature|array $feature): static
     {
         if ($feature !== null && !($feature instanceof PayPalBillingAgreementFeature)) {
             $feature = PayPalBillingAgreementFeature::from($feature);
@@ -86,7 +86,7 @@ class ReadyToPayPayPalMethod extends ReadyToPayMethods
     /**
      * @param null|string[] $filters
      */
-    public function setFilters(null|array $filters): self
+    public function setFilters(null|array $filters): static
     {
         $filters = $filters !== null ? array_map(fn ($value) => $value ?? null, $filters) : null;
 

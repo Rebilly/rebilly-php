@@ -42,7 +42,7 @@ class PaymentsOSCredentials implements JsonSerializable
         return $this->fields['appId'];
     }
 
-    public function setAppId(string $appId): self
+    public function setAppId(string $appId): static
     {
         $this->fields['appId'] = $appId;
 
@@ -54,7 +54,7 @@ class PaymentsOSCredentials implements JsonSerializable
         return $this->fields['publicKey'];
     }
 
-    public function setPublicKey(string $publicKey): self
+    public function setPublicKey(string $publicKey): static
     {
         $this->fields['publicKey'] = $publicKey;
 
@@ -66,7 +66,7 @@ class PaymentsOSCredentials implements JsonSerializable
         return $this->fields['privateKey'];
     }
 
-    public function setPrivateKey(string $privateKey): self
+    public function setPrivateKey(string $privateKey): static
     {
         $this->fields['privateKey'] = $privateKey;
 

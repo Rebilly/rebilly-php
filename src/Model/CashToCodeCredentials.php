@@ -48,7 +48,7 @@ class CashToCodeCredentials implements JsonSerializable
         return $this->fields['cashToCodeUsername'];
     }
 
-    public function setCashToCodeUsername(string $cashToCodeUsername): self
+    public function setCashToCodeUsername(string $cashToCodeUsername): static
     {
         $this->fields['cashToCodeUsername'] = $cashToCodeUsername;
 
@@ -60,7 +60,7 @@ class CashToCodeCredentials implements JsonSerializable
         return $this->fields['cashToCodePassword'];
     }
 
-    public function setCashToCodePassword(string $cashToCodePassword): self
+    public function setCashToCodePassword(string $cashToCodePassword): static
     {
         $this->fields['cashToCodePassword'] = $cashToCodePassword;
 
@@ -72,7 +72,7 @@ class CashToCodeCredentials implements JsonSerializable
         return $this->fields['merchantUsername'];
     }
 
-    public function setMerchantUsername(string $merchantUsername): self
+    public function setMerchantUsername(string $merchantUsername): static
     {
         $this->fields['merchantUsername'] = $merchantUsername;
 
@@ -84,7 +84,7 @@ class CashToCodeCredentials implements JsonSerializable
         return $this->fields['merchantPassword'];
     }
 
-    public function setMerchantPassword(string $merchantPassword): self
+    public function setMerchantPassword(string $merchantPassword): static
     {
         $this->fields['merchantPassword'] = $merchantPassword;
 
@@ -96,7 +96,7 @@ class CashToCodeCredentials implements JsonSerializable
         return $this->fields['mid'] ?? null;
     }
 
-    public function setMid(null|string $mid): self
+    public function setMid(null|string $mid): static
     {
         $this->fields['mid'] = $mid;
 

@@ -36,7 +36,7 @@ class PatchCustomerEddScoreRequest implements JsonSerializable
         return $this->fields['score'];
     }
 
-    public function setScore(EddData|array $score): self
+    public function setScore(EddData|array $score): static
     {
         if (!($score instanceof EddData)) {
             $score = EddData::from($score);

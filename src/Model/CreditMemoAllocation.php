@@ -66,7 +66,7 @@ class CreditMemoAllocation implements JsonSerializable
         return $this->fields['amount'];
     }
 
-    public function setAmount(float|string $amount): self
+    public function setAmount(float|string $amount): static
     {
         if (is_string($amount)) {
             $amount = (float) $amount;
@@ -128,28 +128,28 @@ class CreditMemoAllocation implements JsonSerializable
         return $data;
     }
 
-    private function setInvoiceId(null|string $invoiceId): self
+    private function setInvoiceId(null|string $invoiceId): static
     {
         $this->fields['invoiceId'] = $invoiceId;
 
         return $this;
     }
 
-    private function setCreditMemoId(null|string $creditMemoId): self
+    private function setCreditMemoId(null|string $creditMemoId): static
     {
         $this->fields['creditMemoId'] = $creditMemoId;
 
         return $this;
     }
 
-    private function setCurrency(null|string $currency): self
+    private function setCurrency(null|string $currency): static
     {
         $this->fields['currency'] = $currency;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -160,7 +160,7 @@ class CreditMemoAllocation implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -174,7 +174,7 @@ class CreditMemoAllocation implements JsonSerializable
     /**
      * @param null|array<CreditMemoLink|InvoiceLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 

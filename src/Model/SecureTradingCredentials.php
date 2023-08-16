@@ -42,7 +42,7 @@ class SecureTradingCredentials implements JsonSerializable
         return $this->fields['websiteId'];
     }
 
-    public function setWebsiteId(string $websiteId): self
+    public function setWebsiteId(string $websiteId): static
     {
         $this->fields['websiteId'] = $websiteId;
 
@@ -54,7 +54,7 @@ class SecureTradingCredentials implements JsonSerializable
         return $this->fields['username'];
     }
 
-    public function setUsername(string $username): self
+    public function setUsername(string $username): static
     {
         $this->fields['username'] = $username;
 
@@ -66,7 +66,7 @@ class SecureTradingCredentials implements JsonSerializable
         return $this->fields['password'];
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password): static
     {
         $this->fields['password'] = $password;
 

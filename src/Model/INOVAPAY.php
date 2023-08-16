@@ -38,7 +38,7 @@ class INOVAPAY extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(INOVAPAYCredentials|array $credentials): self
+    public function setCredentials(INOVAPAYCredentials|array $credentials): static
     {
         if (!($credentials instanceof INOVAPAYCredentials)) {
             $credentials = INOVAPAYCredentials::from($credentials);

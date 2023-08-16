@@ -86,7 +86,7 @@ class ThreeDSecureResult implements JsonSerializable
         return $this->fields['server'] ?? null;
     }
 
-    public function setServer(null|string $server): self
+    public function setServer(null|string $server): static
     {
         $this->fields['server'] = $server;
 
@@ -104,7 +104,7 @@ class ThreeDSecureResult implements JsonSerializable
     /**
      * @psalm-param self::VERSION_*|null $version
      */
-    public function setVersion(null|string $version): self
+    public function setVersion(null|string $version): static
     {
         $this->fields['version'] = $version;
 
@@ -122,7 +122,7 @@ class ThreeDSecureResult implements JsonSerializable
     /**
      * @psalm-param self::ENROLLED_*|null $enrolled
      */
-    public function setEnrolled(null|string $enrolled): self
+    public function setEnrolled(null|string $enrolled): static
     {
         $this->fields['enrolled'] = $enrolled;
 
@@ -140,7 +140,7 @@ class ThreeDSecureResult implements JsonSerializable
     /**
      * @psalm-param self::AUTHENTICATED_*|null $authenticated
      */
-    public function setAuthenticated(null|string $authenticated): self
+    public function setAuthenticated(null|string $authenticated): static
     {
         $this->fields['authenticated'] = $authenticated;
 
@@ -158,7 +158,7 @@ class ThreeDSecureResult implements JsonSerializable
     /**
      * @psalm-param self::LIABILITY_*|null $liability
      */
-    public function setLiability(null|string $liability): self
+    public function setLiability(null|string $liability): static
     {
         $this->fields['liability'] = $liability;
 
@@ -176,7 +176,7 @@ class ThreeDSecureResult implements JsonSerializable
     /**
      * @psalm-param self::FLOW_*|null $flow
      */
-    public function setFlow(null|string $flow): self
+    public function setFlow(null|string $flow): static
     {
         $this->fields['flow'] = $flow;
 
@@ -188,7 +188,7 @@ class ThreeDSecureResult implements JsonSerializable
         return $this->fields['isDowngraded'] ?? null;
     }
 
-    public function setIsDowngraded(null|bool $isDowngraded): self
+    public function setIsDowngraded(null|bool $isDowngraded): static
     {
         $this->fields['isDowngraded'] = $isDowngraded;
 

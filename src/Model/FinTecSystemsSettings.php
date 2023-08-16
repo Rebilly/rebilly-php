@@ -51,7 +51,7 @@ class FinTecSystemsSettings implements JsonSerializable
         return $this->fields['recipientIBAN'];
     }
 
-    public function setRecipientIBAN(string $recipientIBAN): self
+    public function setRecipientIBAN(string $recipientIBAN): static
     {
         $this->fields['recipientIBAN'] = $recipientIBAN;
 
@@ -63,7 +63,7 @@ class FinTecSystemsSettings implements JsonSerializable
         return $this->fields['recipientBIC'];
     }
 
-    public function setRecipientBIC(string $recipientBIC): self
+    public function setRecipientBIC(string $recipientBIC): static
     {
         $this->fields['recipientBIC'] = $recipientBIC;
 
@@ -81,7 +81,7 @@ class FinTecSystemsSettings implements JsonSerializable
     /**
      * @psalm-param self::RECIPIENT_COUNTRY_* $recipientCountry
      */
-    public function setRecipientCountry(string $recipientCountry): self
+    public function setRecipientCountry(string $recipientCountry): static
     {
         $this->fields['recipientCountry'] = $recipientCountry;
 
@@ -93,7 +93,7 @@ class FinTecSystemsSettings implements JsonSerializable
         return $this->fields['recipientHolder'];
     }
 
-    public function setRecipientHolder(string $recipientHolder): self
+    public function setRecipientHolder(string $recipientHolder): static
     {
         $this->fields['recipientHolder'] = $recipientHolder;
 

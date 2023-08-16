@@ -41,7 +41,7 @@ class MuchBetter extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(MuchBetterCredentials|array $credentials): self
+    public function setCredentials(MuchBetterCredentials|array $credentials): static
     {
         if (!($credentials instanceof MuchBetterCredentials)) {
             $credentials = MuchBetterCredentials::from($credentials);
@@ -57,7 +57,7 @@ class MuchBetter extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|MuchBetterSettings|array $settings): self
+    public function setSettings(null|MuchBetterSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof MuchBetterSettings)) {
             $settings = MuchBetterSettings::from($settings);

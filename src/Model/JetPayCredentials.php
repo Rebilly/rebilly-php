@@ -36,7 +36,7 @@ class JetPayCredentials implements JsonSerializable
         return $this->fields['TerminalID'];
     }
 
-    public function setTerminalID(string $terminalID): self
+    public function setTerminalID(string $terminalID): static
     {
         $this->fields['TerminalID'] = $terminalID;
 

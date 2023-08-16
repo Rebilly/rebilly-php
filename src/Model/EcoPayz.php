@@ -41,7 +41,7 @@ class EcoPayz extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(EcoPayzCredentials|array $credentials): self
+    public function setCredentials(EcoPayzCredentials|array $credentials): static
     {
         if (!($credentials instanceof EcoPayzCredentials)) {
             $credentials = EcoPayzCredentials::from($credentials);
@@ -57,7 +57,7 @@ class EcoPayz extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|EcoPayzSettings|array $settings): self
+    public function setSettings(null|EcoPayzSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof EcoPayzSettings)) {
             $settings = EcoPayzSettings::from($settings);

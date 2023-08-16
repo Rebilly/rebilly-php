@@ -42,7 +42,7 @@ class PaymentGatewayMetadataOtherNames implements JsonSerializable
         return $this->fields['name'];
     }
 
-    public function setName(string $name): self
+    public function setName(string $name): static
     {
         $this->fields['name'] = $name;
 
@@ -54,7 +54,7 @@ class PaymentGatewayMetadataOtherNames implements JsonSerializable
         return $this->fields['description'] ?? null;
     }
 
-    public function setDescription(null|string $description): self
+    public function setDescription(null|string $description): static
     {
         $this->fields['description'] = $description;
 
@@ -66,7 +66,7 @@ class PaymentGatewayMetadataOtherNames implements JsonSerializable
         return $this->fields['logo'] ?? null;
     }
 
-    public function setLogo(null|string $logo): self
+    public function setLogo(null|string $logo): static
     {
         $this->fields['logo'] = $logo;
 

@@ -36,7 +36,7 @@ class OnlineueberweisenSettings implements JsonSerializable
         return $this->fields['payformCode'] ?? null;
     }
 
-    public function setPayformCode(null|string $payformCode): self
+    public function setPayformCode(null|string $payformCode): static
     {
         $this->fields['payformCode'] = $payformCode;
 

@@ -41,7 +41,7 @@ class Konnektive extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(KonnektiveCredentials|array $credentials): self
+    public function setCredentials(KonnektiveCredentials|array $credentials): static
     {
         if (!($credentials instanceof KonnektiveCredentials)) {
             $credentials = KonnektiveCredentials::from($credentials);
@@ -57,7 +57,7 @@ class Konnektive extends GatewayAccount
         return $this->fields['settings'];
     }
 
-    public function setSettings(KonnektiveSettings|array $settings): self
+    public function setSettings(KonnektiveSettings|array $settings): static
     {
         if (!($settings instanceof KonnektiveSettings)) {
             $settings = KonnektiveSettings::from($settings);

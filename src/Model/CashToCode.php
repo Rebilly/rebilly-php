@@ -41,7 +41,7 @@ class CashToCode extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(CashToCodeCredentials|array $credentials): self
+    public function setCredentials(CashToCodeCredentials|array $credentials): static
     {
         if (!($credentials instanceof CashToCodeCredentials)) {
             $credentials = CashToCodeCredentials::from($credentials);
@@ -57,7 +57,7 @@ class CashToCode extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|CashToCodeSettings|array $settings): self
+    public function setSettings(null|CashToCodeSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof CashToCodeSettings)) {
             $settings = CashToCodeSettings::from($settings);

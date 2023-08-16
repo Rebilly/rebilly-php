@@ -38,7 +38,7 @@ class ManualShipping extends Shipping
         return $this->fields['amount'];
     }
 
-    public function setAmount(int $amount): self
+    public function setAmount(int $amount): static
     {
         $this->fields['amount'] = $amount;
 

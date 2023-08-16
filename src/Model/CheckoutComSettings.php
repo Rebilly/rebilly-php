@@ -36,7 +36,7 @@ class CheckoutComSettings implements JsonSerializable
         return $this->fields['markAsWaitingGatewayOnPendingPayout'] ?? null;
     }
 
-    public function setMarkAsWaitingGatewayOnPendingPayout(null|bool $markAsWaitingGatewayOnPendingPayout): self
+    public function setMarkAsWaitingGatewayOnPendingPayout(null|bool $markAsWaitingGatewayOnPendingPayout): static
     {
         $this->fields['markAsWaitingGatewayOnPendingPayout'] = $markAsWaitingGatewayOnPendingPayout;
 

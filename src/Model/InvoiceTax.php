@@ -75,14 +75,14 @@ abstract class InvoiceTax implements JsonSerializable
     /**
      * @psalm-param self::CALCULATOR_* $calculator
      */
-    private function setCalculator(string $calculator): self
+    private function setCalculator(string $calculator): static
     {
         $this->fields['calculator'] = $calculator;
 
         return $this;
     }
 
-    private function setAmount(null|int $amount): self
+    private function setAmount(null|int $amount): static
     {
         $this->fields['amount'] = $amount;
 

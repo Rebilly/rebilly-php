@@ -38,7 +38,7 @@ class Sagepay extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(SagepayCredentials|array $credentials): self
+    public function setCredentials(SagepayCredentials|array $credentials): static
     {
         if (!($credentials instanceof SagepayCredentials)) {
             $credentials = SagepayCredentials::from($credentials);

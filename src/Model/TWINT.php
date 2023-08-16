@@ -41,7 +41,7 @@ class TWINT extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(TWINTCredentials|array $credentials): self
+    public function setCredentials(TWINTCredentials|array $credentials): static
     {
         if (!($credentials instanceof TWINTCredentials)) {
             $credentials = TWINTCredentials::from($credentials);
@@ -57,7 +57,7 @@ class TWINT extends GatewayAccount
         return $this->fields['settings'];
     }
 
-    public function setSettings(TWINTSettings|array $settings): self
+    public function setSettings(TWINTSettings|array $settings): static
     {
         if (!($settings instanceof TWINTSettings)) {
             $settings = TWINTSettings::from($settings);

@@ -39,7 +39,7 @@ class CommonBillingPortalCustomizationColors implements JsonSerializable
         return $this->fields['primary'] ?? null;
     }
 
-    public function setPrimary(null|string $primary): self
+    public function setPrimary(null|string $primary): static
     {
         $this->fields['primary'] = $primary;
 
@@ -51,7 +51,7 @@ class CommonBillingPortalCustomizationColors implements JsonSerializable
         return $this->fields['secondary'] ?? null;
     }
 
-    public function setSecondary(null|string $secondary): self
+    public function setSecondary(null|string $secondary): static
     {
         $this->fields['secondary'] = $secondary;
 

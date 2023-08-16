@@ -61,7 +61,7 @@ class Credential implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    public function setStatus(null|string $status): self
+    public function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
@@ -73,7 +73,7 @@ class Credential implements JsonSerializable
         return $this->fields['deactivationTime'] ?? null;
     }
 
-    public function setDeactivationTime(null|DateTimeImmutable|string $deactivationTime): self
+    public function setDeactivationTime(null|DateTimeImmutable|string $deactivationTime): static
     {
         if ($deactivationTime !== null && !($deactivationTime instanceof DateTimeImmutable)) {
             $deactivationTime = new DateTimeImmutable($deactivationTime);
@@ -100,7 +100,7 @@ class Credential implements JsonSerializable
         return $data;
     }
 
-    private function setHash(null|string $hash): self
+    private function setHash(null|string $hash): static
     {
         $this->fields['hash'] = $hash;
 

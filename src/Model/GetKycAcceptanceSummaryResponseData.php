@@ -51,7 +51,7 @@ class GetKycAcceptanceSummaryResponseData implements JsonSerializable
         return $this->fields['documentType'] ?? null;
     }
 
-    public function setDocumentType(mixed $documentType): self
+    public function setDocumentType(mixed $documentType): static
     {
         $this->fields['documentType'] = $documentType;
 
@@ -63,7 +63,7 @@ class GetKycAcceptanceSummaryResponseData implements JsonSerializable
         return $this->fields['statusStatistics'] ?? null;
     }
 
-    public function setStatusStatistics(null|GetKycAcceptanceSummaryResponseStatusStatistics|array $statusStatistics): self
+    public function setStatusStatistics(null|GetKycAcceptanceSummaryResponseStatusStatistics|array $statusStatistics): static
     {
         if ($statusStatistics !== null && !($statusStatistics instanceof GetKycAcceptanceSummaryResponseStatusStatistics)) {
             $statusStatistics = GetKycAcceptanceSummaryResponseStatusStatistics::from($statusStatistics);
@@ -79,7 +79,7 @@ class GetKycAcceptanceSummaryResponseData implements JsonSerializable
         return $this->fields['total'] ?? null;
     }
 
-    public function setTotal(null|int $total): self
+    public function setTotal(null|int $total): static
     {
         $this->fields['total'] = $total;
 
@@ -91,7 +91,7 @@ class GetKycAcceptanceSummaryResponseData implements JsonSerializable
         return $this->fields['accuracyRate'] ?? null;
     }
 
-    public function setAccuracyRate(null|float $accuracyRate): self
+    public function setAccuracyRate(null|float $accuracyRate): static
     {
         $this->fields['accuracyRate'] = $accuracyRate;
 
@@ -103,7 +103,7 @@ class GetKycAcceptanceSummaryResponseData implements JsonSerializable
         return $this->fields['acceptanceRate'] ?? null;
     }
 
-    public function setAcceptanceRate(null|float $acceptanceRate): self
+    public function setAcceptanceRate(null|float $acceptanceRate): static
     {
         $this->fields['acceptanceRate'] = $acceptanceRate;
 
@@ -115,7 +115,7 @@ class GetKycAcceptanceSummaryResponseData implements JsonSerializable
         return $this->fields['manualReviewTime'] ?? null;
     }
 
-    public function setManualReviewTime(null|float $manualReviewTime): self
+    public function setManualReviewTime(null|float $manualReviewTime): static
     {
         $this->fields['manualReviewTime'] = $manualReviewTime;
 

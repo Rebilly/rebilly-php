@@ -39,7 +39,7 @@ class CashflowsCredentials implements JsonSerializable
         return $this->fields['authenticationId'] ?? null;
     }
 
-    public function setAuthenticationId(null|string $authenticationId): self
+    public function setAuthenticationId(null|string $authenticationId): static
     {
         $this->fields['authenticationId'] = $authenticationId;
 
@@ -51,7 +51,7 @@ class CashflowsCredentials implements JsonSerializable
         return $this->fields['authPassword'];
     }
 
-    public function setAuthPassword(string $authPassword): self
+    public function setAuthPassword(string $authPassword): static
     {
         $this->fields['authPassword'] = $authPassword;
 

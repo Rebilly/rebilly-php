@@ -36,7 +36,7 @@ class Link implements JsonSerializable
         return $this->fields['href'];
     }
 
-    public function setHref(string $href): self
+    public function setHref(string $href): static
     {
         $this->fields['href'] = $href;
 

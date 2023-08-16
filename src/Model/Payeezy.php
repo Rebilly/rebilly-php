@@ -38,7 +38,7 @@ class Payeezy extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(PayeezyCredentials|array $credentials): self
+    public function setCredentials(PayeezyCredentials|array $credentials): static
     {
         if (!($credentials instanceof PayeezyCredentials)) {
             $credentials = PayeezyCredentials::from($credentials);

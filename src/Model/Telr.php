@@ -41,7 +41,7 @@ class Telr extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(TelrCredentials|array $credentials): self
+    public function setCredentials(TelrCredentials|array $credentials): static
     {
         if (!($credentials instanceof TelrCredentials)) {
             $credentials = TelrCredentials::from($credentials);
@@ -57,7 +57,7 @@ class Telr extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|TelrSettings|array $settings): self
+    public function setSettings(null|TelrSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof TelrSettings)) {
             $settings = TelrSettings::from($settings);

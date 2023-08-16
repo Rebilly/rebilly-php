@@ -42,7 +42,7 @@ class CommonBillingPortalCustomization implements JsonSerializable
         return $this->fields['logoId'] ?? null;
     }
 
-    public function setLogoId(null|string $logoId): self
+    public function setLogoId(null|string $logoId): static
     {
         $this->fields['logoId'] = $logoId;
 
@@ -54,7 +54,7 @@ class CommonBillingPortalCustomization implements JsonSerializable
         return $this->fields['colors'] ?? null;
     }
 
-    public function setColors(null|CommonBillingPortalCustomizationColors|array $colors): self
+    public function setColors(null|CommonBillingPortalCustomizationColors|array $colors): static
     {
         if ($colors !== null && !($colors instanceof CommonBillingPortalCustomizationColors)) {
             $colors = CommonBillingPortalCustomizationColors::from($colors);
@@ -70,7 +70,7 @@ class CommonBillingPortalCustomization implements JsonSerializable
         return $this->fields['links'] ?? null;
     }
 
-    public function setLinks(null|CommonBillingPortalCustomizationLinks|array $links): self
+    public function setLinks(null|CommonBillingPortalCustomizationLinks|array $links): static
     {
         if ($links !== null && !($links instanceof CommonBillingPortalCustomizationLinks)) {
             $links = CommonBillingPortalCustomizationLinks::from($links);

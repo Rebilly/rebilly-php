@@ -44,7 +44,7 @@ class Manual extends InvoiceTax
     /**
      * @param InvoiceTaxItem[] $items
      */
-    public function setItems(array $items): self
+    public function setItems(array $items): static
     {
         $items = array_map(fn ($value) => $value !== null ? ($value instanceof InvoiceTaxItem ? $value : InvoiceTaxItem::from($value)) : null, $items);
 

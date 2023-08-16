@@ -38,7 +38,7 @@ class Zotapay extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(ZotapayCredentials|array $credentials): self
+    public function setCredentials(ZotapayCredentials|array $credentials): static
     {
         if (!($credentials instanceof ZotapayCredentials)) {
             $credentials = ZotapayCredentials::from($credentials);

@@ -42,7 +42,7 @@ class HistogramData implements JsonSerializable
     /**
      * @param null|HistogramDataData[] $data
      */
-    public function setData(null|array $data): self
+    public function setData(null|array $data): static
     {
         $data = $data !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof HistogramDataData ? $value : HistogramDataData::from($value)) : null, $data) : null;
 

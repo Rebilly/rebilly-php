@@ -48,7 +48,7 @@ class ReportRevenueWaterfall implements JsonSerializable
         return $this->fields['issuedMonth'] ?? null;
     }
 
-    public function setIssuedMonth(null|string $issuedMonth): self
+    public function setIssuedMonth(null|string $issuedMonth): static
     {
         $this->fields['issuedMonth'] = $issuedMonth;
 
@@ -60,7 +60,7 @@ class ReportRevenueWaterfall implements JsonSerializable
         return $this->fields['booked'] ?? null;
     }
 
-    public function setBooked(null|float|string $booked): self
+    public function setBooked(null|float|string $booked): static
     {
         if (is_string($booked)) {
             $booked = (float) $booked;
@@ -76,7 +76,7 @@ class ReportRevenueWaterfall implements JsonSerializable
         return $this->fields['recognized'] ?? null;
     }
 
-    public function setRecognized(null|float|string $recognized): self
+    public function setRecognized(null|float|string $recognized): static
     {
         if (is_string($recognized)) {
             $recognized = (float) $recognized;
@@ -92,7 +92,7 @@ class ReportRevenueWaterfall implements JsonSerializable
         return $this->fields['remaining'] ?? null;
     }
 
-    public function setRemaining(null|float|string $remaining): self
+    public function setRemaining(null|float|string $remaining): static
     {
         if (is_string($remaining)) {
             $remaining = (float) $remaining;
@@ -114,7 +114,7 @@ class ReportRevenueWaterfall implements JsonSerializable
     /**
      * @param null|object[] $waterfall
      */
-    public function setWaterfall(null|array $waterfall): self
+    public function setWaterfall(null|array $waterfall): static
     {
         $waterfall = $waterfall !== null ? array_map(fn ($value) => $value ?? null, $waterfall) : null;
 

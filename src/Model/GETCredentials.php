@@ -36,7 +36,7 @@ class GETCredentials implements JsonSerializable
         return $this->fields['accountId'];
     }
 
-    public function setAccountId(string $accountId): self
+    public function setAccountId(string $accountId): static
     {
         $this->fields['accountId'] = $accountId;
 

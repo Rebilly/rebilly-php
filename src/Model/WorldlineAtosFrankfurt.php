@@ -44,7 +44,7 @@ class WorldlineAtosFrankfurt extends GatewayAccount
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|WorldlineAtosFrankfurt3dsServers|array $threeDSecureServer): self
+    public function setThreeDSecureServer(null|WorldlineAtosFrankfurt3dsServers|array $threeDSecureServer): static
     {
         if ($threeDSecureServer !== null && !($threeDSecureServer instanceof WorldlineAtosFrankfurt3dsServers)) {
             $threeDSecureServer = WorldlineAtosFrankfurt3dsServers::from($threeDSecureServer);
@@ -60,7 +60,7 @@ class WorldlineAtosFrankfurt extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(WorldlineAtosFrankfurtCredentials|array $credentials): self
+    public function setCredentials(WorldlineAtosFrankfurtCredentials|array $credentials): static
     {
         if (!($credentials instanceof WorldlineAtosFrankfurtCredentials)) {
             $credentials = WorldlineAtosFrankfurtCredentials::from($credentials);
@@ -76,7 +76,7 @@ class WorldlineAtosFrankfurt extends GatewayAccount
         return $this->fields['settings'];
     }
 
-    public function setSettings(WorldlineAtosFrankfurtSettings|array $settings): self
+    public function setSettings(WorldlineAtosFrankfurtSettings|array $settings): static
     {
         if (!($settings instanceof WorldlineAtosFrankfurtSettings)) {
             $settings = WorldlineAtosFrankfurtSettings::from($settings);

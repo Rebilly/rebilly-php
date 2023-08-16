@@ -38,7 +38,7 @@ class TestProcessor extends GatewayAccount
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|TestProcessor3dsServers|array $threeDSecureServer): self
+    public function setThreeDSecureServer(null|TestProcessor3dsServers|array $threeDSecureServer): static
     {
         if ($threeDSecureServer !== null && !($threeDSecureServer instanceof TestProcessor3dsServers)) {
             $threeDSecureServer = TestProcessor3dsServers::from($threeDSecureServer);

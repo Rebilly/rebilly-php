@@ -41,7 +41,7 @@ class ICanPay extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(ICanPayCredentials|array $credentials): self
+    public function setCredentials(ICanPayCredentials|array $credentials): static
     {
         if (!($credentials instanceof ICanPayCredentials)) {
             $credentials = ICanPayCredentials::from($credentials);
@@ -57,7 +57,7 @@ class ICanPay extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|AsiaPaymentGatewaySettings|array $settings): self
+    public function setSettings(null|AsiaPaymentGatewaySettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof AsiaPaymentGatewaySettings)) {
             $settings = AsiaPaymentGatewaySettings::from($settings);

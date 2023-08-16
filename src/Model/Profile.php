@@ -123,7 +123,7 @@ class Profile implements JsonSerializable
     /**
      * @param null|Membership[] $memberships
      */
-    public function setMemberships(null|array $memberships): self
+    public function setMemberships(null|array $memberships): static
     {
         $memberships = $memberships !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Membership ? $value : Membership::from($value)) : null, $memberships) : null;
 
@@ -145,7 +145,7 @@ class Profile implements JsonSerializable
         return $this->fields['reportingCurrency'] ?? null;
     }
 
-    public function setReportingCurrency(null|string $reportingCurrency): self
+    public function setReportingCurrency(null|string $reportingCurrency): static
     {
         $this->fields['reportingCurrency'] = $reportingCurrency;
 
@@ -157,7 +157,7 @@ class Profile implements JsonSerializable
         return $this->fields['totpRequired'] ?? null;
     }
 
-    public function setTotpRequired(null|bool $totpRequired): self
+    public function setTotpRequired(null|bool $totpRequired): static
     {
         $this->fields['totpRequired'] = $totpRequired;
 
@@ -179,7 +179,7 @@ class Profile implements JsonSerializable
         return $this->fields['oneTimePassword'] ?? null;
     }
 
-    public function setOneTimePassword(null|string $oneTimePassword): self
+    public function setOneTimePassword(null|string $oneTimePassword): static
     {
         $this->fields['oneTimePassword'] = $oneTimePassword;
 
@@ -196,7 +196,7 @@ class Profile implements JsonSerializable
         return $this->fields['preferences'] ?? null;
     }
 
-    public function setPreferences(null|array $preferences): self
+    public function setPreferences(null|array $preferences): static
     {
         $this->fields['preferences'] = $preferences;
 
@@ -208,7 +208,7 @@ class Profile implements JsonSerializable
         return $this->fields['hasPermissionsEmulation'] ?? null;
     }
 
-    public function setHasPermissionsEmulation(null|bool $hasPermissionsEmulation): self
+    public function setHasPermissionsEmulation(null|bool $hasPermissionsEmulation): static
     {
         $this->fields['hasPermissionsEmulation'] = $hasPermissionsEmulation;
 
@@ -220,7 +220,7 @@ class Profile implements JsonSerializable
         return $this->fields['displayName'] ?? null;
     }
 
-    public function setDisplayName(null|string $displayName): self
+    public function setDisplayName(null|string $displayName): static
     {
         $this->fields['displayName'] = $displayName;
 
@@ -232,7 +232,7 @@ class Profile implements JsonSerializable
         return $this->fields['hash'] ?? null;
     }
 
-    public function setHash(null|string $hash): self
+    public function setHash(null|string $hash): static
     {
         $this->fields['hash'] = $hash;
 
@@ -300,42 +300,42 @@ class Profile implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setEmail(null|string $email): self
+    private function setEmail(null|string $email): static
     {
         $this->fields['email'] = $email;
 
         return $this;
     }
 
-    private function setFirstName(null|string $firstName): self
+    private function setFirstName(null|string $firstName): static
     {
         $this->fields['firstName'] = $firstName;
 
         return $this;
     }
 
-    private function setLastName(null|string $lastName): self
+    private function setLastName(null|string $lastName): static
     {
         $this->fields['lastName'] = $lastName;
 
         return $this;
     }
 
-    private function setBusinessPhone(null|string $businessPhone): self
+    private function setBusinessPhone(null|string $businessPhone): static
     {
         $this->fields['businessPhone'] = $businessPhone;
 
         return $this;
     }
 
-    private function setMobilePhone(null|string $mobilePhone): self
+    private function setMobilePhone(null|string $mobilePhone): static
     {
         $this->fields['mobilePhone'] = $mobilePhone;
 
@@ -345,7 +345,7 @@ class Profile implements JsonSerializable
     /**
      * @param null|string[] $availableCurrencies
      */
-    private function setAvailableCurrencies(null|array $availableCurrencies): self
+    private function setAvailableCurrencies(null|array $availableCurrencies): static
     {
         $availableCurrencies = $availableCurrencies !== null ? array_map(fn ($value) => $value ?? null, $availableCurrencies) : null;
 
@@ -354,21 +354,21 @@ class Profile implements JsonSerializable
         return $this;
     }
 
-    private function setTotpSecret(null|string $totpSecret): self
+    private function setTotpSecret(null|string $totpSecret): static
     {
         $this->fields['totpSecret'] = $totpSecret;
 
         return $this;
     }
 
-    private function setTotpUrl(null|string $totpUrl): self
+    private function setTotpUrl(null|string $totpUrl): static
     {
         $this->fields['totpUrl'] = $totpUrl;
 
         return $this;
     }
 
-    private function setCountry(null|string $country): self
+    private function setCountry(null|string $country): static
     {
         $this->fields['country'] = $country;
 

@@ -36,7 +36,7 @@ class EMSSettings implements JsonSerializable
         return $this->fields['delay'] ?? null;
     }
 
-    public function setDelay(null|int $delay): self
+    public function setDelay(null|int $delay): static
     {
         $this->fields['delay'] = $delay;
 

@@ -52,7 +52,7 @@ class ReadyToPayKlarnaMethod extends ReadyToPayMethods
     /**
      * @psalm-param self::METHOD_* $method
      */
-    public function setMethod(string $method): self
+    public function setMethod(string $method): static
     {
         $this->fields['method'] = $method;
 
@@ -64,7 +64,7 @@ class ReadyToPayKlarnaMethod extends ReadyToPayMethods
         return $this->fields['feature'] ?? null;
     }
 
-    public function setFeature(null|KlarnaFeature|array $feature): self
+    public function setFeature(null|KlarnaFeature|array $feature): static
     {
         if ($feature !== null && !($feature instanceof KlarnaFeature)) {
             $feature = KlarnaFeature::from($feature);
@@ -86,7 +86,7 @@ class ReadyToPayKlarnaMethod extends ReadyToPayMethods
     /**
      * @param null|string[] $filters
      */
-    public function setFilters(null|array $filters): self
+    public function setFilters(null|array $filters): static
     {
         $filters = $filters !== null ? array_map(fn ($value) => $value ?? null, $filters) : null;
 

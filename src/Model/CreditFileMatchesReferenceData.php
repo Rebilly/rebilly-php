@@ -79,7 +79,7 @@ class CreditFileMatchesReferenceData implements JsonSerializable
         return $this->fields['singleDecision'] ?? null;
     }
 
-    public function setSingleDecision(null|CreditFileCommonDecisionData|array $singleDecision): self
+    public function setSingleDecision(null|CreditFileCommonDecisionData|array $singleDecision): static
     {
         if ($singleDecision !== null && !($singleDecision instanceof CreditFileCommonDecisionData)) {
             $singleDecision = CreditFileCommonDecisionData::from($singleDecision);
@@ -101,7 +101,7 @@ class CreditFileMatchesReferenceData implements JsonSerializable
     /**
      * @param null|CreditFileCommonDecisionData[] $dualDecision
      */
-    public function setDualDecision(null|array $dualDecision): self
+    public function setDualDecision(null|array $dualDecision): static
     {
         $dualDecision = $dualDecision !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof CreditFileCommonDecisionData ? $value : CreditFileCommonDecisionData::from($value)) : null, $dualDecision) : null;
 
@@ -138,35 +138,35 @@ class CreditFileMatchesReferenceData implements JsonSerializable
         return $data;
     }
 
-    private function setSingleSourceHit(null|string $singleSourceHit): self
+    private function setSingleSourceHit(null|string $singleSourceHit): static
     {
         $this->fields['singleSourceHit'] = $singleSourceHit;
 
         return $this;
     }
 
-    private function setDualSourceHit(null|string $dualSourceHit): self
+    private function setDualSourceHit(null|string $dualSourceHit): static
     {
         $this->fields['dualSourceHit'] = $dualSourceHit;
 
         return $this;
     }
 
-    private function setWaterfallProcess(null|string $waterfallProcess): self
+    private function setWaterfallProcess(null|string $waterfallProcess): static
     {
         $this->fields['waterfallProcess'] = $waterfallProcess;
 
         return $this;
     }
 
-    private function setCreditFileCreatedDate(null|string $creditFileCreatedDate): self
+    private function setCreditFileCreatedDate(null|string $creditFileCreatedDate): static
     {
         $this->fields['creditFileCreatedDate'] = $creditFileCreatedDate;
 
         return $this;
     }
 
-    private function setNumberOfTradesOnFile(null|string $numberOfTradesOnFile): self
+    private function setNumberOfTradesOnFile(null|string $numberOfTradesOnFile): static
     {
         $this->fields['numberOfTradesOnFile'] = $numberOfTradesOnFile;
 

@@ -41,7 +41,7 @@ class Onlineueberweisen extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(OnlineueberweisenCredentials|array $credentials): self
+    public function setCredentials(OnlineueberweisenCredentials|array $credentials): static
     {
         if (!($credentials instanceof OnlineueberweisenCredentials)) {
             $credentials = OnlineueberweisenCredentials::from($credentials);
@@ -57,7 +57,7 @@ class Onlineueberweisen extends GatewayAccount
         return $this->fields['settings'];
     }
 
-    public function setSettings(OnlineueberweisenSettings|array $settings): self
+    public function setSettings(OnlineueberweisenSettings|array $settings): static
     {
         if (!($settings instanceof OnlineueberweisenSettings)) {
             $settings = OnlineueberweisenSettings::from($settings);

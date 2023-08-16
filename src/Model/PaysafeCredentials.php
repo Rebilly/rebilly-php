@@ -42,7 +42,7 @@ class PaysafeCredentials implements JsonSerializable
         return $this->fields['storeId'];
     }
 
-    public function setStoreId(string $storeId): self
+    public function setStoreId(string $storeId): static
     {
         $this->fields['storeId'] = $storeId;
 
@@ -54,7 +54,7 @@ class PaysafeCredentials implements JsonSerializable
         return $this->fields['storePwd'];
     }
 
-    public function setStorePwd(string $storePwd): self
+    public function setStorePwd(string $storePwd): static
     {
         $this->fields['storePwd'] = $storePwd;
 
@@ -66,7 +66,7 @@ class PaysafeCredentials implements JsonSerializable
         return $this->fields['accountNum'];
     }
 
-    public function setAccountNum(string $accountNum): self
+    public function setAccountNum(string $accountNum): static
     {
         $this->fields['accountNum'] = $accountNum;
 

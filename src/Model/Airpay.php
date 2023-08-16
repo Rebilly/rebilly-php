@@ -38,7 +38,7 @@ class Airpay extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(AirpayCredentials|array $credentials): self
+    public function setCredentials(AirpayCredentials|array $credentials): static
     {
         if (!($credentials instanceof AirpayCredentials)) {
             $credentials = AirpayCredentials::from($credentials);

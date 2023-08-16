@@ -63,7 +63,7 @@ class ReportJournal implements JsonSerializable
     /**
      * @psalm-param self::AGGREGATION_FIELD_*|null $aggregationField
      */
-    public function setAggregationField(null|string $aggregationField): self
+    public function setAggregationField(null|string $aggregationField): static
     {
         $this->fields['aggregationField'] = $aggregationField;
 
@@ -75,7 +75,7 @@ class ReportJournal implements JsonSerializable
         return $this->fields['currency'] ?? null;
     }
 
-    public function setCurrency(null|string $currency): self
+    public function setCurrency(null|string $currency): static
     {
         $this->fields['currency'] = $currency;
 
@@ -87,7 +87,7 @@ class ReportJournal implements JsonSerializable
         return $this->fields['bookedFrom'] ?? null;
     }
 
-    public function setBookedFrom(null|string $bookedFrom): self
+    public function setBookedFrom(null|string $bookedFrom): static
     {
         $this->fields['bookedFrom'] = $bookedFrom;
 
@@ -99,7 +99,7 @@ class ReportJournal implements JsonSerializable
         return $this->fields['bookedTo'] ?? null;
     }
 
-    public function setBookedTo(null|string $bookedTo): self
+    public function setBookedTo(null|string $bookedTo): static
     {
         $this->fields['bookedTo'] = $bookedTo;
 
@@ -111,7 +111,7 @@ class ReportJournal implements JsonSerializable
         return $this->fields['recognizedAt'] ?? null;
     }
 
-    public function setRecognizedAt(null|string $recognizedAt): self
+    public function setRecognizedAt(null|string $recognizedAt): static
     {
         $this->fields['recognizedAt'] = $recognizedAt;
 
@@ -129,7 +129,7 @@ class ReportJournal implements JsonSerializable
     /**
      * @param null|ReportJournalData[] $data
      */
-    public function setData(null|array $data): self
+    public function setData(null|array $data): static
     {
         $data = $data !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ReportJournalData ? $value : ReportJournalData::from($value)) : null, $data) : null;
 

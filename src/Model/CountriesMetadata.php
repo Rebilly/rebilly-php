@@ -51,7 +51,7 @@ class CountriesMetadata implements JsonSerializable
     /**
      * @psalm-param self::MODE_* $mode
      */
-    public function setMode(string $mode): self
+    public function setMode(string $mode): static
     {
         $this->fields['mode'] = $mode;
 
@@ -69,7 +69,7 @@ class CountriesMetadata implements JsonSerializable
     /**
      * @param string[] $values
      */
-    public function setValues(array $values): self
+    public function setValues(array $values): static
     {
         $values = array_map(fn ($value) => $value ?? null, $values);
 

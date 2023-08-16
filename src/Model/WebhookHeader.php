@@ -42,7 +42,7 @@ class WebhookHeader implements JsonSerializable
         return $this->fields['name'];
     }
 
-    public function setName(string $name): self
+    public function setName(string $name): static
     {
         $this->fields['name'] = $name;
 
@@ -54,7 +54,7 @@ class WebhookHeader implements JsonSerializable
         return $this->fields['status'] ?? null;
     }
 
-    public function setStatus(null|OnOff|string $status): self
+    public function setStatus(null|OnOff|string $status): static
     {
         if ($status !== null && !($status instanceof OnOff)) {
             $status = OnOff::from($status);
@@ -70,7 +70,7 @@ class WebhookHeader implements JsonSerializable
         return $this->fields['value'];
     }
 
-    public function setValue(string $value): self
+    public function setValue(string $value): static
     {
         $this->fields['value'] = $value;
 

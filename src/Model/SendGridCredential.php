@@ -67,7 +67,7 @@ class SendGridCredential implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    public function setStatus(null|string $status): self
+    public function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
@@ -79,7 +79,7 @@ class SendGridCredential implements JsonSerializable
         return $this->fields['deactivationTime'] ?? null;
     }
 
-    public function setDeactivationTime(null|DateTimeImmutable|string $deactivationTime): self
+    public function setDeactivationTime(null|DateTimeImmutable|string $deactivationTime): static
     {
         if ($deactivationTime !== null && !($deactivationTime instanceof DateTimeImmutable)) {
             $deactivationTime = new DateTimeImmutable($deactivationTime);
@@ -95,7 +95,7 @@ class SendGridCredential implements JsonSerializable
         return $this->fields['apiKey'];
     }
 
-    public function setApiKey(string $apiKey): self
+    public function setApiKey(string $apiKey): static
     {
         $this->fields['apiKey'] = $apiKey;
 
@@ -132,7 +132,7 @@ class SendGridCredential implements JsonSerializable
         return $data;
     }
 
-    private function setHash(null|string $hash): self
+    private function setHash(null|string $hash): static
     {
         $this->fields['hash'] = $hash;
 
@@ -142,7 +142,7 @@ class SendGridCredential implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

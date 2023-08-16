@@ -106,7 +106,7 @@ class EddSearchResult implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -116,7 +116,7 @@ class EddSearchResult implements JsonSerializable
     /**
      * @psalm-param self::TYPE_*|null $type
      */
-    private function setType(null|string $type): self
+    private function setType(null|string $type): static
     {
         $this->fields['type'] = $type;
 
@@ -126,7 +126,7 @@ class EddSearchResult implements JsonSerializable
     /**
      * @param null|EddScoreDetails[] $searchResultData
      */
-    private function setSearchResultData(null|array $searchResultData): self
+    private function setSearchResultData(null|array $searchResultData): static
     {
         $searchResultData = $searchResultData !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof EddScoreDetails ? $value : EddScoreDetails::from($value)) : null, $searchResultData) : null;
 
@@ -135,7 +135,7 @@ class EddSearchResult implements JsonSerializable
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -146,7 +146,7 @@ class EddSearchResult implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);

@@ -36,7 +36,7 @@ class ACISettings implements JsonSerializable
         return $this->fields['url'] ?? null;
     }
 
-    public function setUrl(null|string $url): self
+    public function setUrl(null|string $url): static
     {
         $this->fields['url'] = $url;
 

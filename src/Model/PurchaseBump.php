@@ -42,7 +42,7 @@ class PurchaseBump implements JsonSerializable
     /**
      * @param null|PurchaseBumpSplitVersion[] $bumpOffers
      */
-    public function setBumpOffers(null|array $bumpOffers): self
+    public function setBumpOffers(null|array $bumpOffers): static
     {
         $bumpOffers = $bumpOffers !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof PurchaseBumpSplitVersion ? $value : PurchaseBumpSplitVersion::from($value)) : null, $bumpOffers) : null;
 

@@ -38,7 +38,7 @@ class NinjaWallet extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(NinjaWalletCredentials|array $credentials): self
+    public function setCredentials(NinjaWalletCredentials|array $credentials): static
     {
         if (!($credentials instanceof NinjaWalletCredentials)) {
             $credentials = NinjaWalletCredentials::from($credentials);

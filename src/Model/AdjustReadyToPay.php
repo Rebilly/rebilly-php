@@ -41,7 +41,7 @@ class AdjustReadyToPay extends RuleAction
         return $this->fields['prioritizeActivePaymentInstruments'] ?? null;
     }
 
-    public function setPrioritizeActivePaymentInstruments(null|bool $prioritizeActivePaymentInstruments): self
+    public function setPrioritizeActivePaymentInstruments(null|bool $prioritizeActivePaymentInstruments): static
     {
         $this->fields['prioritizeActivePaymentInstruments'] = $prioritizeActivePaymentInstruments;
 
@@ -59,7 +59,7 @@ class AdjustReadyToPay extends RuleAction
     /**
      * @param null|AdjustPaymentMethod[] $paymentMethods
      */
-    public function setPaymentMethods(null|array $paymentMethods): self
+    public function setPaymentMethods(null|array $paymentMethods): static
     {
         $paymentMethods = $paymentMethods !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof AdjustPaymentMethod ? $value : AdjustPaymentMethod::from($value)) : null, $paymentMethods) : null;
 

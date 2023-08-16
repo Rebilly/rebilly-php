@@ -39,7 +39,7 @@ class GlobalOneCredentials implements JsonSerializable
         return $this->fields['terminalId'];
     }
 
-    public function setTerminalId(string $terminalId): self
+    public function setTerminalId(string $terminalId): static
     {
         $this->fields['terminalId'] = $terminalId;
 
@@ -51,7 +51,7 @@ class GlobalOneCredentials implements JsonSerializable
         return $this->fields['sharedSecret'];
     }
 
-    public function setSharedSecret(string $sharedSecret): self
+    public function setSharedSecret(string $sharedSecret): static
     {
         $this->fields['sharedSecret'] = $sharedSecret;
 

@@ -41,7 +41,7 @@ class Ingenico extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(IngenicoCredentials|array $credentials): self
+    public function setCredentials(IngenicoCredentials|array $credentials): static
     {
         if (!($credentials instanceof IngenicoCredentials)) {
             $credentials = IngenicoCredentials::from($credentials);
@@ -57,7 +57,7 @@ class Ingenico extends GatewayAccount
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|Ingenico3dsServers|array $threeDSecureServer): self
+    public function setThreeDSecureServer(null|Ingenico3dsServers|array $threeDSecureServer): static
     {
         if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Ingenico3dsServers)) {
             $threeDSecureServer = Ingenico3dsServers::from($threeDSecureServer);

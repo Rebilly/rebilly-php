@@ -38,7 +38,7 @@ class Dropayment extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(DropaymentCredentials|array $credentials): self
+    public function setCredentials(DropaymentCredentials|array $credentials): static
     {
         if (!($credentials instanceof DropaymentCredentials)) {
             $credentials = DropaymentCredentials::from($credentials);

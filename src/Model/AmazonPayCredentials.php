@@ -45,7 +45,7 @@ class AmazonPayCredentials implements JsonSerializable
         return $this->fields['merchantId'];
     }
 
-    public function setMerchantId(string $merchantId): self
+    public function setMerchantId(string $merchantId): static
     {
         $this->fields['merchantId'] = $merchantId;
 
@@ -57,7 +57,7 @@ class AmazonPayCredentials implements JsonSerializable
         return $this->fields['storeId'];
     }
 
-    public function setStoreId(string $storeId): self
+    public function setStoreId(string $storeId): static
     {
         $this->fields['storeId'] = $storeId;
 
@@ -69,7 +69,7 @@ class AmazonPayCredentials implements JsonSerializable
         return $this->fields['publicKeyId'];
     }
 
-    public function setPublicKeyId(string $publicKeyId): self
+    public function setPublicKeyId(string $publicKeyId): static
     {
         $this->fields['publicKeyId'] = $publicKeyId;
 
@@ -81,7 +81,7 @@ class AmazonPayCredentials implements JsonSerializable
         return $this->fields['privateKey'];
     }
 
-    public function setPrivateKey(string $privateKey): self
+    public function setPrivateKey(string $privateKey): static
     {
         $this->fields['privateKey'] = $privateKey;
 

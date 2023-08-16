@@ -41,7 +41,7 @@ class PayPal extends GatewayAccount
         return $this->fields['credentials'] ?? null;
     }
 
-    public function setCredentials(null|PayPalCredentials|array $credentials): self
+    public function setCredentials(null|PayPalCredentials|array $credentials): static
     {
         if ($credentials !== null && !($credentials instanceof PayPalCredentials)) {
             $credentials = PayPalCredentials::from($credentials);
@@ -57,7 +57,7 @@ class PayPal extends GatewayAccount
         return $this->fields['settings'];
     }
 
-    public function setSettings(PayPalSettings|array $settings): self
+    public function setSettings(PayPalSettings|array $settings): static
     {
         if (!($settings instanceof PayPalSettings)) {
             $settings = PayPalSettings::from($settings);

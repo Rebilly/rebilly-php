@@ -55,7 +55,7 @@ class OrderItem implements JsonSerializable
         return $this->fields['planId'] ?? null;
     }
 
-    public function setPlanId(null|string $planId): self
+    public function setPlanId(null|string $planId): static
     {
         $this->fields['planId'] = $planId;
 
@@ -67,7 +67,7 @@ class OrderItem implements JsonSerializable
         return $this->fields['quantity'] ?? null;
     }
 
-    public function setQuantity(null|int $quantity): self
+    public function setQuantity(null|int $quantity): static
     {
         $this->fields['quantity'] = $quantity;
 
@@ -79,7 +79,7 @@ class OrderItem implements JsonSerializable
         return $this->fields['plan'];
     }
 
-    public function setPlan(array|FlexiblePlan|OriginalPlan $plan): self
+    public function setPlan(array|FlexiblePlan|OriginalPlan $plan): static
     {
         $plan = $this->ensurePlan($plan);
 
@@ -169,21 +169,21 @@ class OrderItem implements JsonSerializable
         throw new InvalidArgumentException('Could not instantiate plan with the given value');
     }
 
-    private function setRevision(null|int $revision): self
+    private function setRevision(null|int $revision): static
     {
         $this->fields['revision'] = $revision;
 
         return $this;
     }
 
-    private function setIsModified(null|bool $isModified): self
+    private function setIsModified(null|bool $isModified): static
     {
         $this->fields['isModified'] = $isModified;
 
         return $this;
     }
 
-    private function setIsGrandfathered(null|bool $isGrandfathered): self
+    private function setIsGrandfathered(null|bool $isGrandfathered): static
     {
         $this->fields['isGrandfathered'] = $isGrandfathered;
 
@@ -193,7 +193,7 @@ class OrderItem implements JsonSerializable
     /**
      * @param null|array{product:Product} $embedded
      */
-    private function setEmbedded(null|array $embedded): self
+    private function setEmbedded(null|array $embedded): static
     {
         if ($embedded !== null) {
             $embedded['product'] = isset($embedded['product']) ? ($embedded['product'] instanceof Product ? $embedded['product'] : Product::from($embedded['product'])) : null;

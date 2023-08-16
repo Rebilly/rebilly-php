@@ -115,7 +115,7 @@ class User implements JsonSerializable
         return $this->fields['email'];
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(string $email): static
     {
         $this->fields['email'] = $email;
 
@@ -127,7 +127,7 @@ class User implements JsonSerializable
         return $this->fields['firstName'];
     }
 
-    public function setFirstName(string $firstName): self
+    public function setFirstName(string $firstName): static
     {
         $this->fields['firstName'] = $firstName;
 
@@ -139,7 +139,7 @@ class User implements JsonSerializable
         return $this->fields['lastName'];
     }
 
-    public function setLastName(string $lastName): self
+    public function setLastName(string $lastName): static
     {
         $this->fields['lastName'] = $lastName;
 
@@ -151,7 +151,7 @@ class User implements JsonSerializable
         return $this->fields['businessPhone'] ?? null;
     }
 
-    public function setBusinessPhone(null|string $businessPhone): self
+    public function setBusinessPhone(null|string $businessPhone): static
     {
         $this->fields['businessPhone'] = $businessPhone;
 
@@ -163,7 +163,7 @@ class User implements JsonSerializable
         return $this->fields['mobilePhone'] ?? null;
     }
 
-    public function setMobilePhone(null|string $mobilePhone): self
+    public function setMobilePhone(null|string $mobilePhone): static
     {
         $this->fields['mobilePhone'] = $mobilePhone;
 
@@ -175,7 +175,7 @@ class User implements JsonSerializable
         return $this->fields['password'] ?? null;
     }
 
-    public function setPassword(null|string $password): self
+    public function setPassword(null|string $password): static
     {
         $this->fields['password'] = $password;
 
@@ -193,7 +193,7 @@ class User implements JsonSerializable
     /**
      * @param null|string[] $permissions
      */
-    public function setPermissions(null|array $permissions): self
+    public function setPermissions(null|array $permissions): static
     {
         $permissions = $permissions !== null ? array_map(fn ($value) => $value ?? null, $permissions) : null;
 
@@ -225,7 +225,7 @@ class User implements JsonSerializable
         return $this->fields['loginTime'] ?? null;
     }
 
-    public function setLoginTime(null|DateTimeImmutable|string $loginTime): self
+    public function setLoginTime(null|DateTimeImmutable|string $loginTime): static
     {
         if ($loginTime !== null && !($loginTime instanceof DateTimeImmutable)) {
             $loginTime = new DateTimeImmutable($loginTime);
@@ -254,7 +254,7 @@ class User implements JsonSerializable
         return $this->fields['totpRequired'] ?? null;
     }
 
-    public function setTotpRequired(null|bool $totpRequired): self
+    public function setTotpRequired(null|bool $totpRequired): static
     {
         $this->fields['totpRequired'] = $totpRequired;
 
@@ -266,7 +266,7 @@ class User implements JsonSerializable
         return $this->fields['totpSecret'] ?? null;
     }
 
-    public function setTotpSecret(null|string $totpSecret): self
+    public function setTotpSecret(null|string $totpSecret): static
     {
         $this->fields['totpSecret'] = $totpSecret;
 
@@ -278,7 +278,7 @@ class User implements JsonSerializable
         return $this->fields['totpUrl'] ?? null;
     }
 
-    public function setTotpUrl(null|string $totpUrl): self
+    public function setTotpUrl(null|string $totpUrl): static
     {
         $this->fields['totpUrl'] = $totpUrl;
 
@@ -298,7 +298,7 @@ class User implements JsonSerializable
         return $this->fields['country'] ?? null;
     }
 
-    public function setCountry(null|string $country): self
+    public function setCountry(null|string $country): static
     {
         $this->fields['country'] = $country;
 
@@ -310,7 +310,7 @@ class User implements JsonSerializable
         return $this->fields['preferences'] ?? null;
     }
 
-    public function setPreferences(null|array $preferences): self
+    public function setPreferences(null|array $preferences): static
     {
         $this->fields['preferences'] = $preferences;
 
@@ -328,7 +328,7 @@ class User implements JsonSerializable
     /**
      * @param null|string[] $roleIds
      */
-    public function setRoleIds(null|array $roleIds): self
+    public function setRoleIds(null|array $roleIds): static
     {
         $roleIds = $roleIds !== null ? array_map(fn ($value) => $value ?? null, $roleIds) : null;
 
@@ -348,7 +348,7 @@ class User implements JsonSerializable
     /**
      * @param null|string[] $allowedIps
      */
-    public function setAllowedIps(null|array $allowedIps): self
+    public function setAllowedIps(null|array $allowedIps): static
     {
         $allowedIps = $allowedIps !== null ? array_map(fn ($value) => $value ?? null, $allowedIps) : null;
 
@@ -441,7 +441,7 @@ class User implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -451,7 +451,7 @@ class User implements JsonSerializable
     /**
      * @param null|string[] $computedPermissions
      */
-    private function setComputedPermissions(null|array $computedPermissions): self
+    private function setComputedPermissions(null|array $computedPermissions): static
     {
         $computedPermissions = $computedPermissions !== null ? array_map(fn ($value) => $value ?? null, $computedPermissions) : null;
 
@@ -460,7 +460,7 @@ class User implements JsonSerializable
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -471,7 +471,7 @@ class User implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -482,7 +482,7 @@ class User implements JsonSerializable
         return $this;
     }
 
-    private function setReportingCurrency(null|string $reportingCurrency): self
+    private function setReportingCurrency(null|string $reportingCurrency): static
     {
         $this->fields['reportingCurrency'] = $reportingCurrency;
 
@@ -492,7 +492,7 @@ class User implements JsonSerializable
     /**
      * @param null|string[] $availableCurrencies
      */
-    private function setAvailableCurrencies(null|array $availableCurrencies): self
+    private function setAvailableCurrencies(null|array $availableCurrencies): static
     {
         $availableCurrencies = $availableCurrencies !== null ? array_map(fn ($value) => $value ?? null, $availableCurrencies) : null;
 
@@ -504,7 +504,7 @@ class User implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    private function setStatus(null|string $status): self
+    private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
@@ -514,7 +514,7 @@ class User implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

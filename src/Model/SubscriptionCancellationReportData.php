@@ -45,7 +45,7 @@ class SubscriptionCancellationReportData implements JsonSerializable
         return $this->fields['aggregationValue'] ?? null;
     }
 
-    public function setAggregationValue(null|string $aggregationValue): self
+    public function setAggregationValue(null|string $aggregationValue): static
     {
         $this->fields['aggregationValue'] = $aggregationValue;
 
@@ -57,7 +57,7 @@ class SubscriptionCancellationReportData implements JsonSerializable
         return $this->fields['count'] ?? null;
     }
 
-    public function setCount(null|int $count): self
+    public function setCount(null|int $count): static
     {
         $this->fields['count'] = $count;
 
@@ -69,7 +69,7 @@ class SubscriptionCancellationReportData implements JsonSerializable
         return $this->fields['averageLength'] ?? null;
     }
 
-    public function setAverageLength(null|float|string $averageLength): self
+    public function setAverageLength(null|float|string $averageLength): static
     {
         if (is_string($averageLength)) {
             $averageLength = (float) $averageLength;
@@ -85,7 +85,7 @@ class SubscriptionCancellationReportData implements JsonSerializable
         return $this->fields['medianLength'] ?? null;
     }
 
-    public function setMedianLength(null|float|string $medianLength): self
+    public function setMedianLength(null|float|string $medianLength): static
     {
         if (is_string($medianLength)) {
             $medianLength = (float) $medianLength;

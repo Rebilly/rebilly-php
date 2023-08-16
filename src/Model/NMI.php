@@ -44,7 +44,7 @@ class NMI extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(NMICredentials|array $credentials): self
+    public function setCredentials(NMICredentials|array $credentials): static
     {
         if (!($credentials instanceof NMICredentials)) {
             $credentials = NMICredentials::from($credentials);
@@ -60,7 +60,7 @@ class NMI extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|NMISettings|array $settings): self
+    public function setSettings(null|NMISettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof NMISettings)) {
             $settings = NMISettings::from($settings);
@@ -76,7 +76,7 @@ class NMI extends GatewayAccount
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|NMI3dsServers|array $threeDSecureServer): self
+    public function setThreeDSecureServer(null|NMI3dsServers|array $threeDSecureServer): static
     {
         if ($threeDSecureServer !== null && !($threeDSecureServer instanceof NMI3dsServers)) {
             $threeDSecureServer = NMI3dsServers::from($threeDSecureServer);

@@ -76,7 +76,7 @@ class ExperianCredential implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    public function setStatus(null|string $status): self
+    public function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
@@ -88,7 +88,7 @@ class ExperianCredential implements JsonSerializable
         return $this->fields['deactivationTime'] ?? null;
     }
 
-    public function setDeactivationTime(null|DateTimeImmutable|string $deactivationTime): self
+    public function setDeactivationTime(null|DateTimeImmutable|string $deactivationTime): static
     {
         if ($deactivationTime !== null && !($deactivationTime instanceof DateTimeImmutable)) {
             $deactivationTime = new DateTimeImmutable($deactivationTime);
@@ -104,7 +104,7 @@ class ExperianCredential implements JsonSerializable
         return $this->fields['username'];
     }
 
-    public function setUsername(string $username): self
+    public function setUsername(string $username): static
     {
         $this->fields['username'] = $username;
 
@@ -116,7 +116,7 @@ class ExperianCredential implements JsonSerializable
         return $this->fields['password'];
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password): static
     {
         $this->fields['password'] = $password;
 
@@ -128,7 +128,7 @@ class ExperianCredential implements JsonSerializable
         return $this->fields['hmacKey'];
     }
 
-    public function setHmacKey(string $hmacKey): self
+    public function setHmacKey(string $hmacKey): static
     {
         $this->fields['hmacKey'] = $hmacKey;
 
@@ -140,7 +140,7 @@ class ExperianCredential implements JsonSerializable
         return $this->fields['publicKey'];
     }
 
-    public function setPublicKey(string $publicKey): self
+    public function setPublicKey(string $publicKey): static
     {
         $this->fields['publicKey'] = $publicKey;
 
@@ -186,7 +186,7 @@ class ExperianCredential implements JsonSerializable
         return $data;
     }
 
-    private function setHash(null|string $hash): self
+    private function setHash(null|string $hash): static
     {
         $this->fields['hash'] = $hash;
 
@@ -196,7 +196,7 @@ class ExperianCredential implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

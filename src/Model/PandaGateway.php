@@ -38,7 +38,7 @@ class PandaGateway extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(PandaGatewayCredentials|array $credentials): self
+    public function setCredentials(PandaGatewayCredentials|array $credentials): static
     {
         if (!($credentials instanceof PandaGatewayCredentials)) {
             $credentials = PandaGatewayCredentials::from($credentials);

@@ -79,14 +79,14 @@ class SubscriptionSummaryMetrics implements JsonSerializable
         return $data;
     }
 
-    private function setCurrency(null|string $currency): self
+    private function setCurrency(null|string $currency): static
     {
         $this->fields['currency'] = $currency;
 
         return $this;
     }
 
-    private function setInvoicedAmount(null|float|string $invoicedAmount): self
+    private function setInvoicedAmount(null|float|string $invoicedAmount): static
     {
         if (is_string($invoicedAmount)) {
             $invoicedAmount = (float) $invoicedAmount;
@@ -97,7 +97,7 @@ class SubscriptionSummaryMetrics implements JsonSerializable
         return $this;
     }
 
-    private function setCollectedAmount(null|float|string $collectedAmount): self
+    private function setCollectedAmount(null|float|string $collectedAmount): static
     {
         if (is_string($collectedAmount)) {
             $collectedAmount = (float) $collectedAmount;
@@ -108,7 +108,7 @@ class SubscriptionSummaryMetrics implements JsonSerializable
         return $this;
     }
 
-    private function setInvoiceCount(null|int $invoiceCount): self
+    private function setInvoiceCount(null|int $invoiceCount): static
     {
         $this->fields['invoiceCount'] = $invoiceCount;
 

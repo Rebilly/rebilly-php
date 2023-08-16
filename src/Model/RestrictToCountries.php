@@ -61,7 +61,7 @@ class RestrictToCountries extends CouponRestriction
     /**
      * @psalm-param self::TYPE_* $type
      */
-    public function setType(string $type): self
+    public function setType(string $type): static
     {
         $this->fields['type'] = $type;
 
@@ -79,7 +79,7 @@ class RestrictToCountries extends CouponRestriction
     /**
      * @param string[] $countries
      */
-    public function setCountries(array $countries): self
+    public function setCountries(array $countries): static
     {
         $countries = array_map(fn ($value) => $value ?? null, $countries);
 

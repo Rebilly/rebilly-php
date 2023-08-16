@@ -38,7 +38,7 @@ class HiPay extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(HiPayCredentials|array $credentials): self
+    public function setCredentials(HiPayCredentials|array $credentials): static
     {
         if (!($credentials instanceof HiPayCredentials)) {
             $credentials = HiPayCredentials::from($credentials);

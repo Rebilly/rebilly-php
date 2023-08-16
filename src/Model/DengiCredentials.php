@@ -42,7 +42,7 @@ class DengiCredentials implements JsonSerializable
         return $this->fields['projectId'];
     }
 
-    public function setProjectId(string $projectId): self
+    public function setProjectId(string $projectId): static
     {
         $this->fields['projectId'] = $projectId;
 
@@ -54,7 +54,7 @@ class DengiCredentials implements JsonSerializable
         return $this->fields['publicKey'];
     }
 
-    public function setPublicKey(string $publicKey): self
+    public function setPublicKey(string $publicKey): static
     {
         $this->fields['publicKey'] = $publicKey;
 
@@ -66,7 +66,7 @@ class DengiCredentials implements JsonSerializable
         return $this->fields['refundKey'];
     }
 
-    public function setRefundKey(string $refundKey): self
+    public function setRefundKey(string $refundKey): static
     {
         $this->fields['refundKey'] = $refundKey;
 

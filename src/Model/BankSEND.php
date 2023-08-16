@@ -38,7 +38,7 @@ class BankSEND extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(BankSENDCredentials|array $credentials): self
+    public function setCredentials(BankSENDCredentials|array $credentials): static
     {
         if (!($credentials instanceof BankSENDCredentials)) {
             $credentials = BankSENDCredentials::from($credentials);

@@ -167,84 +167,84 @@ class CreditFileCommonDecisionData implements JsonSerializable
         return $data;
     }
 
-    private function setLastNameMatch(null|string $lastNameMatch): self
+    private function setLastNameMatch(null|string $lastNameMatch): static
     {
         $this->fields['lastNameMatch'] = $lastNameMatch;
 
         return $this;
     }
 
-    private function setFirstNameMatch(null|string $firstNameMatch): self
+    private function setFirstNameMatch(null|string $firstNameMatch): static
     {
         $this->fields['firstNameMatch'] = $firstNameMatch;
 
         return $this;
     }
 
-    private function setCivicNumberMatch(null|string $civicNumberMatch): self
+    private function setCivicNumberMatch(null|string $civicNumberMatch): static
     {
         $this->fields['civicNumberMatch'] = $civicNumberMatch;
 
         return $this;
     }
 
-    private function setStreetNameMatch(null|string $streetNameMatch): self
+    private function setStreetNameMatch(null|string $streetNameMatch): static
     {
         $this->fields['streetNameMatch'] = $streetNameMatch;
 
         return $this;
     }
 
-    private function setCityMatch(null|string $cityMatch): self
+    private function setCityMatch(null|string $cityMatch): static
     {
         $this->fields['cityMatch'] = $cityMatch;
 
         return $this;
     }
 
-    private function setPostalCodeMatch(null|string $postalCodeMatch): self
+    private function setPostalCodeMatch(null|string $postalCodeMatch): static
     {
         $this->fields['postalCodeMatch'] = $postalCodeMatch;
 
         return $this;
     }
 
-    private function setProvinceMatch(null|string $provinceMatch): self
+    private function setProvinceMatch(null|string $provinceMatch): static
     {
         $this->fields['provinceMatch'] = $provinceMatch;
 
         return $this;
     }
 
-    private function setDateOfBirthMatch(null|string $dateOfBirthMatch): self
+    private function setDateOfBirthMatch(null|string $dateOfBirthMatch): static
     {
         $this->fields['dateOfBirthMatch'] = $dateOfBirthMatch;
 
         return $this;
     }
 
-    private function setAgeOfCreditFileThreeOrMoreYearsOld(null|string $ageOfCreditFileThreeOrMoreYearsOld): self
+    private function setAgeOfCreditFileThreeOrMoreYearsOld(null|string $ageOfCreditFileThreeOrMoreYearsOld): static
     {
         $this->fields['ageOfCreditFileThreeOrMoreYearsOld'] = $ageOfCreditFileThreeOrMoreYearsOld;
 
         return $this;
     }
 
-    private function setAddressAsReported(null|string $addressAsReported): self
+    private function setAddressAsReported(null|string $addressAsReported): static
     {
         $this->fields['addressAsReported'] = $addressAsReported;
 
         return $this;
     }
 
-    private function setNameAsReported(null|string $nameAsReported): self
+    private function setNameAsReported(null|string $nameAsReported): static
     {
         $this->fields['nameAsReported'] = $nameAsReported;
 
         return $this;
     }
 
-    private function setDateOfBirthAsReported(null|string $dateOfBirthAsReported): self
+    private function setDateOfBirthAsReported(null|string $dateOfBirthAsReported): static
     {
         $this->fields['dateOfBirthAsReported'] = $dateOfBirthAsReported;
 

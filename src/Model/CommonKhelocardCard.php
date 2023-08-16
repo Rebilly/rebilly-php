@@ -76,7 +76,7 @@ abstract class CommonKhelocardCard extends PaymentInstrument
         return $this->fields['id'] ?? null;
     }
 
-    public function setId(null|string $id): self
+    public function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -94,7 +94,7 @@ abstract class CommonKhelocardCard extends PaymentInstrument
     /**
      * @psalm-param self::METHOD_*|null $method
      */
-    public function setMethod(null|string $method): self
+    public function setMethod(null|string $method): static
     {
         $this->fields['method'] = $method;
 
@@ -106,7 +106,7 @@ abstract class CommonKhelocardCard extends PaymentInstrument
         return $this->fields['fingerprint'] ?? null;
     }
 
-    public function setFingerprint(null|string $fingerprint): self
+    public function setFingerprint(null|string $fingerprint): static
     {
         $this->fields['fingerprint'] = $fingerprint;
 
@@ -118,7 +118,7 @@ abstract class CommonKhelocardCard extends PaymentInstrument
         return $this->fields['number'] ?? null;
     }
 
-    public function setNumber(null|string $number): self
+    public function setNumber(null|string $number): static
     {
         $this->fields['number'] = $number;
 
@@ -130,7 +130,7 @@ abstract class CommonKhelocardCard extends PaymentInstrument
         return $this->fields['last4'] ?? null;
     }
 
-    public function setLast4(null|string $last4): self
+    public function setLast4(null|string $last4): static
     {
         $this->fields['last4'] = $last4;
 
@@ -142,7 +142,7 @@ abstract class CommonKhelocardCard extends PaymentInstrument
         return $this->fields['expYear'] ?? null;
     }
 
-    public function setExpYear(null|int $expYear): self
+    public function setExpYear(null|int $expYear): static
     {
         $this->fields['expYear'] = $expYear;
 
@@ -154,7 +154,7 @@ abstract class CommonKhelocardCard extends PaymentInstrument
         return $this->fields['expMonth'] ?? null;
     }
 
-    public function setExpMonth(null|int $expMonth): self
+    public function setExpMonth(null|int $expMonth): static
     {
         $this->fields['expMonth'] = $expMonth;
 
@@ -166,7 +166,7 @@ abstract class CommonKhelocardCard extends PaymentInstrument
         return $this->fields['billingAddress'] ?? null;
     }
 
-    public function setBillingAddress(null|ContactObject|array $billingAddress): self
+    public function setBillingAddress(null|ContactObject|array $billingAddress): static
     {
         if ($billingAddress !== null && !($billingAddress instanceof ContactObject)) {
             $billingAddress = ContactObject::from($billingAddress);
@@ -188,7 +188,7 @@ abstract class CommonKhelocardCard extends PaymentInstrument
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    public function setStatus(null|string $status): self
+    public function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
@@ -200,7 +200,7 @@ abstract class CommonKhelocardCard extends PaymentInstrument
         return $this->fields['useAsBackup'] ?? null;
     }
 
-    public function setUseAsBackup(null|bool $useAsBackup): self
+    public function setUseAsBackup(null|bool $useAsBackup): static
     {
         $this->fields['useAsBackup'] = $useAsBackup;
 
@@ -222,7 +222,7 @@ abstract class CommonKhelocardCard extends PaymentInstrument
         return $this->fields['customFields'] ?? null;
     }
 
-    public function setCustomFields(null|array $customFields): self
+    public function setCustomFields(null|array $customFields): static
     {
         $this->fields['customFields'] = $customFields;
 
@@ -275,7 +275,7 @@ abstract class CommonKhelocardCard extends PaymentInstrument
         return parent::jsonSerialize() + $data;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -286,7 +286,7 @@ abstract class CommonKhelocardCard extends PaymentInstrument
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);

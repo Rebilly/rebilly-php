@@ -36,7 +36,7 @@ class InlineObject implements JsonSerializable
         return $this->fields['includeFiles'] ?? null;
     }
 
-    public function setIncludeFiles(null|bool $includeFiles): self
+    public function setIncludeFiles(null|bool $includeFiles): static
     {
         $this->fields['includeFiles'] = $includeFiles;
 

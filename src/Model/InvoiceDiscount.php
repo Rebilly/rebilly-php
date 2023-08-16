@@ -48,7 +48,7 @@ class InvoiceDiscount implements JsonSerializable
         return $this->fields['couponId'] ?? null;
     }
 
-    public function setCouponId(null|string $couponId): self
+    public function setCouponId(null|string $couponId): static
     {
         $this->fields['couponId'] = $couponId;
 
@@ -60,7 +60,7 @@ class InvoiceDiscount implements JsonSerializable
         return $this->fields['redemptionId'] ?? null;
     }
 
-    public function setRedemptionId(null|string $redemptionId): self
+    public function setRedemptionId(null|string $redemptionId): static
     {
         $this->fields['redemptionId'] = $redemptionId;
 
@@ -72,7 +72,7 @@ class InvoiceDiscount implements JsonSerializable
         return $this->fields['amount'] ?? null;
     }
 
-    public function setAmount(null|float|string $amount): self
+    public function setAmount(null|float|string $amount): static
     {
         if (is_string($amount)) {
             $amount = (float) $amount;
@@ -88,7 +88,7 @@ class InvoiceDiscount implements JsonSerializable
         return $this->fields['description'] ?? null;
     }
 
-    public function setDescription(null|string $description): self
+    public function setDescription(null|string $description): static
     {
         $this->fields['description'] = $description;
 
@@ -100,7 +100,7 @@ class InvoiceDiscount implements JsonSerializable
         return $this->fields['context'] ?? null;
     }
 
-    public function setContext(null|DiscountContext|string $context): self
+    public function setContext(null|DiscountContext|string $context): static
     {
         if ($context !== null && !($context instanceof DiscountContext)) {
             $context = DiscountContext::from($context);

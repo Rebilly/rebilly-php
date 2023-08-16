@@ -38,7 +38,7 @@ class SeamlessChex extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(SeamlessChexCredentials|array $credentials): self
+    public function setCredentials(SeamlessChexCredentials|array $credentials): static
     {
         if (!($credentials instanceof SeamlessChexCredentials)) {
             $credentials = SeamlessChexCredentials::from($credentials);

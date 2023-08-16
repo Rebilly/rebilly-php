@@ -42,7 +42,7 @@ class GigadatCredentials implements JsonSerializable
         return $this->fields['campaignId'];
     }
 
-    public function setCampaignId(string $campaignId): self
+    public function setCampaignId(string $campaignId): static
     {
         $this->fields['campaignId'] = $campaignId;
 
@@ -54,7 +54,7 @@ class GigadatCredentials implements JsonSerializable
         return $this->fields['accessToken'];
     }
 
-    public function setAccessToken(string $accessToken): self
+    public function setAccessToken(string $accessToken): static
     {
         $this->fields['accessToken'] = $accessToken;
 
@@ -66,7 +66,7 @@ class GigadatCredentials implements JsonSerializable
         return $this->fields['securityToken'];
     }
 
-    public function setSecurityToken(string $securityToken): self
+    public function setSecurityToken(string $securityToken): static
     {
         $this->fields['securityToken'] = $securityToken;
 

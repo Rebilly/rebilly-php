@@ -53,7 +53,7 @@ class UpdateIntuitQuickbooksInvoice extends RuleAction
         return $this->fields['unearnedRevenueAccount'];
     }
 
-    public function setUnearnedRevenueAccount(string $unearnedRevenueAccount): self
+    public function setUnearnedRevenueAccount(string $unearnedRevenueAccount): static
     {
         $this->fields['unearnedRevenueAccount'] = $unearnedRevenueAccount;
 
@@ -65,7 +65,7 @@ class UpdateIntuitQuickbooksInvoice extends RuleAction
         return $this->fields['taxesAccount'] ?? null;
     }
 
-    public function setTaxesAccount(null|string $taxesAccount): self
+    public function setTaxesAccount(null|string $taxesAccount): static
     {
         $this->fields['taxesAccount'] = $taxesAccount;
 
@@ -77,7 +77,7 @@ class UpdateIntuitQuickbooksInvoice extends RuleAction
         return $this->fields['discountsAccount'] ?? null;
     }
 
-    public function setDiscountsAccount(null|string $discountsAccount): self
+    public function setDiscountsAccount(null|string $discountsAccount): static
     {
         $this->fields['discountsAccount'] = $discountsAccount;
 
@@ -89,7 +89,7 @@ class UpdateIntuitQuickbooksInvoice extends RuleAction
         return $this->fields['department'] ?? null;
     }
 
-    public function setDepartment(null|string $department): self
+    public function setDepartment(null|string $department): static
     {
         $this->fields['department'] = $department;
 
@@ -101,7 +101,7 @@ class UpdateIntuitQuickbooksInvoice extends RuleAction
         return $this->fields['template'] ?? null;
     }
 
-    public function setTemplate(null|QuickbooksTemplate|array $template): self
+    public function setTemplate(null|QuickbooksTemplate|array $template): static
     {
         if ($template !== null && !($template instanceof QuickbooksTemplate)) {
             $template = QuickbooksTemplate::from($template);
@@ -117,7 +117,7 @@ class UpdateIntuitQuickbooksInvoice extends RuleAction
         return $this->fields['credentialHash'];
     }
 
-    public function setCredentialHash(string $credentialHash): self
+    public function setCredentialHash(string $credentialHash): static
     {
         $this->fields['credentialHash'] = $credentialHash;
 

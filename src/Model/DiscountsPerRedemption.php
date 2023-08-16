@@ -61,7 +61,7 @@ class DiscountsPerRedemption extends CouponRestriction
     /**
      * @psalm-param self::TYPE_* $type
      */
-    public function setType(string $type): self
+    public function setType(string $type): static
     {
         $this->fields['type'] = $type;
 
@@ -73,7 +73,7 @@ class DiscountsPerRedemption extends CouponRestriction
         return $this->fields['quantity'];
     }
 
-    public function setQuantity(int $quantity): self
+    public function setQuantity(int $quantity): static
     {
         $this->fields['quantity'] = $quantity;
 

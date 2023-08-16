@@ -44,7 +44,7 @@ class Adyen extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(AdyenCredentials|array $credentials): self
+    public function setCredentials(AdyenCredentials|array $credentials): static
     {
         if (!($credentials instanceof AdyenCredentials)) {
             $credentials = AdyenCredentials::from($credentials);
@@ -60,7 +60,7 @@ class Adyen extends GatewayAccount
         return $this->fields['settings'];
     }
 
-    public function setSettings(AdyenSettings|array $settings): self
+    public function setSettings(AdyenSettings|array $settings): static
     {
         if (!($settings instanceof AdyenSettings)) {
             $settings = AdyenSettings::from($settings);
@@ -76,7 +76,7 @@ class Adyen extends GatewayAccount
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|Adyen3dsServers|array $threeDSecureServer): self
+    public function setThreeDSecureServer(null|Adyen3dsServers|array $threeDSecureServer): static
     {
         if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Adyen3dsServers)) {
             $threeDSecureServer = Adyen3dsServers::from($threeDSecureServer);

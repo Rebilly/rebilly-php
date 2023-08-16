@@ -39,7 +39,7 @@ class AdyenCredentials implements JsonSerializable
         return $this->fields['merchantAccount'];
     }
 
-    public function setMerchantAccount(string $merchantAccount): self
+    public function setMerchantAccount(string $merchantAccount): static
     {
         $this->fields['merchantAccount'] = $merchantAccount;
 
@@ -51,7 +51,7 @@ class AdyenCredentials implements JsonSerializable
         return $this->fields['apiKey'];
     }
 
-    public function setApiKey(string $apiKey): self
+    public function setApiKey(string $apiKey): static
     {
         $this->fields['apiKey'] = $apiKey;
 

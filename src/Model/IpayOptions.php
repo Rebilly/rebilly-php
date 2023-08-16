@@ -41,7 +41,7 @@ class IpayOptions extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(IpayOptionsCredentials|array $credentials): self
+    public function setCredentials(IpayOptionsCredentials|array $credentials): static
     {
         if (!($credentials instanceof IpayOptionsCredentials)) {
             $credentials = IpayOptionsCredentials::from($credentials);
@@ -57,7 +57,7 @@ class IpayOptions extends GatewayAccount
         return $this->fields['settings'];
     }
 
-    public function setSettings(IpayOptionsSettings|array $settings): self
+    public function setSettings(IpayOptionsSettings|array $settings): static
     {
         if (!($settings instanceof IpayOptionsSettings)) {
             $settings = IpayOptionsSettings::from($settings);

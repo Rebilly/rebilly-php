@@ -38,7 +38,7 @@ class Cardknox extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(CardknoxCredentials|array $credentials): self
+    public function setCredentials(CardknoxCredentials|array $credentials): static
     {
         if (!($credentials instanceof CardknoxCredentials)) {
             $credentials = CardknoxCredentials::from($credentials);

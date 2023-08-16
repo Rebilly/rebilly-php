@@ -77,14 +77,14 @@ class AMLAliases implements JsonSerializable
         return $data;
     }
 
-    private function setFirstName(null|string $firstName): self
+    private function setFirstName(null|string $firstName): static
     {
         $this->fields['firstName'] = $firstName;
 
         return $this;
     }
 
-    private function setLastName(null|string $lastName): self
+    private function setLastName(null|string $lastName): static
     {
         $this->fields['lastName'] = $lastName;
 
@@ -94,7 +94,7 @@ class AMLAliases implements JsonSerializable
     /**
      * @psalm-param self::AUTHENTICITY_*|null $authenticity
      */
-    private function setAuthenticity(null|string $authenticity): self
+    private function setAuthenticity(null|string $authenticity): static
     {
         $this->fields['authenticity'] = $authenticity;
 

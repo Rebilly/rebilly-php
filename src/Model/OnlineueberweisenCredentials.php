@@ -42,7 +42,7 @@ class OnlineueberweisenCredentials implements JsonSerializable
         return $this->fields['apiKey'];
     }
 
-    public function setApiKey(string $apiKey): self
+    public function setApiKey(string $apiKey): static
     {
         $this->fields['apiKey'] = $apiKey;
 
@@ -54,7 +54,7 @@ class OnlineueberweisenCredentials implements JsonSerializable
         return $this->fields['nuaPayApiKey'] ?? null;
     }
 
-    public function setNuaPayApiKey(null|string $nuaPayApiKey): self
+    public function setNuaPayApiKey(null|string $nuaPayApiKey): static
     {
         $this->fields['nuaPayApiKey'] = $nuaPayApiKey;
 
@@ -66,7 +66,7 @@ class OnlineueberweisenCredentials implements JsonSerializable
         return $this->fields['nuaPayAccountId'] ?? null;
     }
 
-    public function setNuaPayAccountId(null|string $nuaPayAccountId): self
+    public function setNuaPayAccountId(null|string $nuaPayAccountId): static
     {
         $this->fields['nuaPayAccountId'] = $nuaPayAccountId;
 

@@ -42,7 +42,7 @@ class FinancialSettingsRiskReserveSettings implements JsonSerializable
         return $this->fields['filter'];
     }
 
-    public function setFilter(string $filter): self
+    public function setFilter(string $filter): static
     {
         $this->fields['filter'] = $filter;
 
@@ -54,7 +54,7 @@ class FinancialSettingsRiskReserveSettings implements JsonSerializable
         return $this->fields['bips'];
     }
 
-    public function setBips(float $bips): self
+    public function setBips(float $bips): static
     {
         $this->fields['bips'] = $bips;
 
@@ -66,7 +66,7 @@ class FinancialSettingsRiskReserveSettings implements JsonSerializable
         return $this->fields['period'];
     }
 
-    public function setPeriod(RiskReservePeriod|array $period): self
+    public function setPeriod(RiskReservePeriod|array $period): static
     {
         if (!($period instanceof RiskReservePeriod)) {
             $period = RiskReservePeriod::from($period);

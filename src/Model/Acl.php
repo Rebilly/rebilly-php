@@ -39,7 +39,7 @@ class Acl implements JsonSerializable
         return $this->fields['scope'];
     }
 
-    public function setScope(ApiKeyScope|array $scope): self
+    public function setScope(ApiKeyScope|array $scope): static
     {
         if (!($scope instanceof ApiKeyScope)) {
             $scope = ApiKeyScope::from($scope);
@@ -61,7 +61,7 @@ class Acl implements JsonSerializable
     /**
      * @param string[] $permissions
      */
-    public function setPermissions(array $permissions): self
+    public function setPermissions(array $permissions): static
     {
         $permissions = array_map(fn ($value) => $value ?? null, $permissions);
 

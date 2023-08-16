@@ -86,7 +86,7 @@ class GlobalWebhook implements JsonSerializable
     /**
      * @param null|GlobalWebhookEventType[] $eventsFilter
      */
-    public function setEventsFilter(null|array $eventsFilter): self
+    public function setEventsFilter(null|array $eventsFilter): static
     {
         $eventsFilter = $eventsFilter !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof GlobalWebhookEventType ? $value : GlobalWebhookEventType::from($value)) : null, $eventsFilter) : null;
 
@@ -100,7 +100,7 @@ class GlobalWebhook implements JsonSerializable
         return $this->fields['status'] ?? null;
     }
 
-    public function setStatus(null|OnOff|string $status): self
+    public function setStatus(null|OnOff|string $status): static
     {
         if ($status !== null && !($status instanceof OnOff)) {
             $status = OnOff::from($status);
@@ -122,7 +122,7 @@ class GlobalWebhook implements JsonSerializable
     /**
      * @psalm-param self::METHOD_* $method
      */
-    public function setMethod(string $method): self
+    public function setMethod(string $method): static
     {
         $this->fields['method'] = $method;
 
@@ -134,7 +134,7 @@ class GlobalWebhook implements JsonSerializable
         return $this->fields['url'];
     }
 
-    public function setUrl(string $url): self
+    public function setUrl(string $url): static
     {
         $this->fields['url'] = $url;
 
@@ -152,7 +152,7 @@ class GlobalWebhook implements JsonSerializable
     /**
      * @param null|WebhookHeader[] $headers
      */
-    public function setHeaders(null|array $headers): self
+    public function setHeaders(null|array $headers): static
     {
         $headers = $headers !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof WebhookHeader ? $value : WebhookHeader::from($value)) : null, $headers) : null;
 
@@ -166,7 +166,7 @@ class GlobalWebhook implements JsonSerializable
         return $this->fields['credentialHash'];
     }
 
-    public function setCredentialHash(string $credentialHash): self
+    public function setCredentialHash(string $credentialHash): static
     {
         $this->fields['credentialHash'] = $credentialHash;
 
@@ -183,7 +183,7 @@ class GlobalWebhook implements JsonSerializable
         return $this->fields['updatedTime'] ?? null;
     }
 
-    public function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    public function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -239,14 +239,14 @@ class GlobalWebhook implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -260,7 +260,7 @@ class GlobalWebhook implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

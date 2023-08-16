@@ -38,7 +38,7 @@ class RedemptionsPerCustomer extends CouponRestriction
         return $this->fields['quantity'];
     }
 
-    public function setQuantity(int $quantity): self
+    public function setQuantity(int $quantity): static
     {
         $this->fields['quantity'] = $quantity;
 

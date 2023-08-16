@@ -45,7 +45,7 @@ class PayrCredentials implements JsonSerializable
         return $this->fields['clientId'];
     }
 
-    public function setClientId(string $clientId): self
+    public function setClientId(string $clientId): static
     {
         $this->fields['clientId'] = $clientId;
 
@@ -57,7 +57,7 @@ class PayrCredentials implements JsonSerializable
         return $this->fields['secretWord'];
     }
 
-    public function setSecretWord(string $secretWord): self
+    public function setSecretWord(string $secretWord): static
     {
         $this->fields['secretWord'] = $secretWord;
 
@@ -69,7 +69,7 @@ class PayrCredentials implements JsonSerializable
         return $this->fields['apiUserId'] ?? null;
     }
 
-    public function setApiUserId(null|string $apiUserId): self
+    public function setApiUserId(null|string $apiUserId): static
     {
         $this->fields['apiUserId'] = $apiUserId;
 
@@ -81,7 +81,7 @@ class PayrCredentials implements JsonSerializable
         return $this->fields['apiSecurityToken'] ?? null;
     }
 
-    public function setApiSecurityToken(null|string $apiSecurityToken): self
+    public function setApiSecurityToken(null|string $apiSecurityToken): static
     {
         $this->fields['apiSecurityToken'] = $apiSecurityToken;
 

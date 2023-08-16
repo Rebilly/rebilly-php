@@ -38,7 +38,7 @@ class Payr extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(PayrCredentials|array $credentials): self
+    public function setCredentials(PayrCredentials|array $credentials): static
     {
         if (!($credentials instanceof PayrCredentials)) {
             $credentials = PayrCredentials::from($credentials);

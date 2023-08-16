@@ -38,7 +38,7 @@ class Conekta extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(ConektaCredentials|array $credentials): self
+    public function setCredentials(ConektaCredentials|array $credentials): static
     {
         if (!($credentials instanceof ConektaCredentials)) {
             $credentials = ConektaCredentials::from($credentials);

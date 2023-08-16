@@ -64,7 +64,7 @@ class RestrictToBxgy extends CouponRestriction
     /**
      * @psalm-param self::TYPE_* $type
      */
-    public function setType(string $type): self
+    public function setType(string $type): static
     {
         $this->fields['type'] = $type;
 
@@ -82,7 +82,7 @@ class RestrictToBxgy extends CouponRestriction
     /**
      * @param RestrictBuy[] $buy
      */
-    public function setBuy(array $buy): self
+    public function setBuy(array $buy): static
     {
         $buy = array_map(fn ($value) => $value !== null ? ($value instanceof RestrictBuy ? $value : RestrictBuy::from($value)) : null, $buy);
 
@@ -102,7 +102,7 @@ class RestrictToBxgy extends CouponRestriction
     /**
      * @param RestrictGet[] $get
      */
-    public function setGet(array $get): self
+    public function setGet(array $get): static
     {
         $get = array_map(fn ($value) => $value !== null ? ($value instanceof RestrictGet ? $value : RestrictGet::from($value)) : null, $get);
 

@@ -64,7 +64,7 @@ abstract class FeeFormula implements JsonSerializable
     /**
      * @psalm-param self::TYPE_* $type
      */
-    private function setType(string $type): self
+    private function setType(string $type): static
     {
         $this->fields['type'] = $type;
 

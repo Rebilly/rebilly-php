@@ -38,7 +38,7 @@ class ParamountEft extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(ParamountEftCredentials|array $credentials): self
+    public function setCredentials(ParamountEftCredentials|array $credentials): static
     {
         if (!($credentials instanceof ParamountEftCredentials)) {
             $credentials = ParamountEftCredentials::from($credentials);

@@ -113,7 +113,7 @@ abstract class CommonOrder implements JsonSerializable
     /**
      * @psalm-param self::ORDER_TYPE_*|null $orderType
      */
-    public function setOrderType(null|string $orderType): self
+    public function setOrderType(null|string $orderType): static
     {
         $this->fields['orderType'] = $orderType;
 
@@ -133,7 +133,7 @@ abstract class CommonOrder implements JsonSerializable
         return $this->fields['websiteId'] ?? null;
     }
 
-    public function setWebsiteId(null|string $websiteId): self
+    public function setWebsiteId(null|string $websiteId): static
     {
         $this->fields['websiteId'] = $websiteId;
 
@@ -166,7 +166,7 @@ abstract class CommonOrder implements JsonSerializable
     /**
      * @param null|OrderItem[] $items
      */
-    public function setItems(null|array $items): self
+    public function setItems(null|array $items): static
     {
         $items = $items !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof OrderItem ? $value : OrderItem::from($value)) : null, $items) : null;
 
@@ -180,7 +180,7 @@ abstract class CommonOrder implements JsonSerializable
         return $this->fields['deliveryAddress'] ?? null;
     }
 
-    public function setDeliveryAddress(null|ContactObject|array $deliveryAddress): self
+    public function setDeliveryAddress(null|ContactObject|array $deliveryAddress): static
     {
         if ($deliveryAddress !== null && !($deliveryAddress instanceof ContactObject)) {
             $deliveryAddress = ContactObject::from($deliveryAddress);
@@ -196,7 +196,7 @@ abstract class CommonOrder implements JsonSerializable
         return $this->fields['billingAddress'] ?? null;
     }
 
-    public function setBillingAddress(null|ContactObject|array $billingAddress): self
+    public function setBillingAddress(null|ContactObject|array $billingAddress): static
     {
         if ($billingAddress !== null && !($billingAddress instanceof ContactObject)) {
             $billingAddress = ContactObject::from($billingAddress);
@@ -212,7 +212,7 @@ abstract class CommonOrder implements JsonSerializable
         return $this->fields['activationTime'] ?? null;
     }
 
-    public function setActivationTime(null|DateTimeImmutable|string $activationTime): self
+    public function setActivationTime(null|DateTimeImmutable|string $activationTime): static
     {
         if ($activationTime !== null && !($activationTime instanceof DateTimeImmutable)) {
             $activationTime = new DateTimeImmutable($activationTime);
@@ -228,7 +228,7 @@ abstract class CommonOrder implements JsonSerializable
         return $this->fields['voidTime'] ?? null;
     }
 
-    public function setVoidTime(null|DateTimeImmutable|string $voidTime): self
+    public function setVoidTime(null|DateTimeImmutable|string $voidTime): static
     {
         if ($voidTime !== null && !($voidTime instanceof DateTimeImmutable)) {
             $voidTime = new DateTimeImmutable($voidTime);
@@ -250,7 +250,7 @@ abstract class CommonOrder implements JsonSerializable
     /**
      * @param null|string[] $couponIds
      */
-    public function setCouponIds(null|array $couponIds): self
+    public function setCouponIds(null|array $couponIds): static
     {
         $couponIds = $couponIds !== null ? array_map(fn ($value) => $value ?? null, $couponIds) : null;
 
@@ -264,7 +264,7 @@ abstract class CommonOrder implements JsonSerializable
         return $this->fields['poNumber'] ?? null;
     }
 
-    public function setPoNumber(null|string $poNumber): self
+    public function setPoNumber(null|string $poNumber): static
     {
         $this->fields['poNumber'] = $poNumber;
 
@@ -276,7 +276,7 @@ abstract class CommonOrder implements JsonSerializable
         return $this->fields['shipping'] ?? null;
     }
 
-    public function setShipping(null|Shipping|array $shipping): self
+    public function setShipping(null|Shipping|array $shipping): static
     {
         if ($shipping !== null && !($shipping instanceof Shipping)) {
             $shipping = Shipping::from($shipping);
@@ -292,7 +292,7 @@ abstract class CommonOrder implements JsonSerializable
         return $this->fields['notes'] ?? null;
     }
 
-    public function setNotes(null|string $notes): self
+    public function setNotes(null|string $notes): static
     {
         $this->fields['notes'] = $notes;
 
@@ -354,7 +354,7 @@ abstract class CommonOrder implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -364,28 +364,28 @@ abstract class CommonOrder implements JsonSerializable
     /**
      * @psalm-param self::BILLING_STATUS_*|null $billingStatus
      */
-    private function setBillingStatus(null|string $billingStatus): self
+    private function setBillingStatus(null|string $billingStatus): static
     {
         $this->fields['billingStatus'] = $billingStatus;
 
         return $this;
     }
 
-    private function setCurrency(null|string $currency): self
+    private function setCurrency(null|string $currency): static
     {
         $this->fields['currency'] = $currency;
 
         return $this;
     }
 
-    private function setInitialInvoiceId(null|string $initialInvoiceId): self
+    private function setInitialInvoiceId(null|string $initialInvoiceId): static
     {
         $this->fields['initialInvoiceId'] = $initialInvoiceId;
 
         return $this;
     }
 
-    private function setRecentInvoiceId(null|string $recentInvoiceId): self
+    private function setRecentInvoiceId(null|string $recentInvoiceId): static
     {
         $this->fields['recentInvoiceId'] = $recentInvoiceId;
 

@@ -52,7 +52,7 @@ abstract class Stripe3dsServers implements JsonSerializable
         return $data;
     }
 
-    private function setName(null|ThreeDSecureServerName|string $name): self
+    private function setName(null|ThreeDSecureServerName|string $name): static
     {
         if ($name !== null && !($name instanceof ThreeDSecureServerName)) {
             $name = ThreeDSecureServerName::from($name);

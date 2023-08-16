@@ -53,7 +53,7 @@ class Edd implements JsonSerializable
         return $this->fields['parsedScore'] ?? null;
     }
 
-    public function setParsedScore(null|EddData|array $parsedScore): self
+    public function setParsedScore(null|EddData|array $parsedScore): static
     {
         if ($parsedScore !== null && !($parsedScore instanceof EddData)) {
             $parsedScore = EddData::from($parsedScore);
@@ -69,7 +69,7 @@ class Edd implements JsonSerializable
         return $this->fields['score'] ?? null;
     }
 
-    public function setScore(null|EddData|array $score): self
+    public function setScore(null|EddData|array $score): static
     {
         if ($score !== null && !($score instanceof EddData)) {
             $score = EddData::from($score);
@@ -85,7 +85,7 @@ class Edd implements JsonSerializable
         return $this->fields['nextUpdateTime'] ?? null;
     }
 
-    public function setNextUpdateTime(null|DateTimeImmutable|string $nextUpdateTime): self
+    public function setNextUpdateTime(null|DateTimeImmutable|string $nextUpdateTime): static
     {
         if ($nextUpdateTime !== null && !($nextUpdateTime instanceof DateTimeImmutable)) {
             $nextUpdateTime = new DateTimeImmutable($nextUpdateTime);
@@ -139,7 +139,7 @@ class Edd implements JsonSerializable
         return $data;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -150,7 +150,7 @@ class Edd implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -164,7 +164,7 @@ class Edd implements JsonSerializable
     /**
      * @param null|array<EddArrestSearchResultLink|EddBankruptcySearchResultLink|EddFraudSearchResultLink|EddOccupationSearchResultLink|SelfLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 

@@ -41,7 +41,7 @@ class DataExportRecurring implements JsonSerializable
         return $this->fields['instruction'];
     }
 
-    public function setInstruction(string $instruction): self
+    public function setInstruction(string $instruction): static
     {
         $this->fields['instruction'] = $instruction;
 
@@ -53,7 +53,7 @@ class DataExportRecurring implements JsonSerializable
         return $this->fields['start'] ?? null;
     }
 
-    public function setStart(null|DateTimeImmutable|string $start): self
+    public function setStart(null|DateTimeImmutable|string $start): static
     {
         if ($start !== null && !($start instanceof DateTimeImmutable)) {
             $start = new DateTimeImmutable($start);

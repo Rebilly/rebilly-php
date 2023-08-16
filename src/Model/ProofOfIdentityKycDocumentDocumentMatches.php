@@ -39,7 +39,7 @@ class ProofOfIdentityKycDocumentDocumentMatches implements JsonSerializable
         return $this->fields['score'] ?? null;
     }
 
-    public function setScore(null|float|string $score): self
+    public function setScore(null|float|string $score): static
     {
         if (is_string($score)) {
             $score = (float) $score;
@@ -55,7 +55,7 @@ class ProofOfIdentityKycDocumentDocumentMatches implements JsonSerializable
         return $this->fields['data'] ?? null;
     }
 
-    public function setData(null|IdentityMatches|array $data): self
+    public function setData(null|IdentityMatches|array $data): static
     {
         if ($data !== null && !($data instanceof IdentityMatches)) {
             $data = IdentityMatches::from($data);

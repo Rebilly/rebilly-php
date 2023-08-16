@@ -42,7 +42,7 @@ class ReportRetentionValueData implements JsonSerializable
         return $this->fields['aggregationValue'] ?? null;
     }
 
-    public function setAggregationValue(null|string $aggregationValue): self
+    public function setAggregationValue(null|string $aggregationValue): static
     {
         $this->fields['aggregationValue'] = $aggregationValue;
 
@@ -54,7 +54,7 @@ class ReportRetentionValueData implements JsonSerializable
         return $this->fields['customersCount'] ?? null;
     }
 
-    public function setCustomersCount(null|int $customersCount): self
+    public function setCustomersCount(null|int $customersCount): static
     {
         $this->fields['customersCount'] = $customersCount;
 
@@ -72,7 +72,7 @@ class ReportRetentionValueData implements JsonSerializable
     /**
      * @param null|ReportRetentionValuePeriods[] $periods
      */
-    public function setPeriods(null|array $periods): self
+    public function setPeriods(null|array $periods): static
     {
         $periods = $periods !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ReportRetentionValuePeriods ? $value : ReportRetentionValuePeriods::from($value)) : null, $periods) : null;
 

@@ -60,7 +60,7 @@ class PaymentMethodMetadata implements JsonSerializable
         return $this->fields['apiName'];
     }
 
-    public function setApiName(string $apiName): self
+    public function setApiName(string $apiName): static
     {
         $this->fields['apiName'] = $apiName;
 
@@ -72,7 +72,7 @@ class PaymentMethodMetadata implements JsonSerializable
         return $this->fields['name'];
     }
 
-    public function setName(string $name): self
+    public function setName(string $name): static
     {
         $this->fields['name'] = $name;
 
@@ -84,7 +84,7 @@ class PaymentMethodMetadata implements JsonSerializable
         return $this->fields['landscapeLogo'] ?? null;
     }
 
-    public function setLandscapeLogo(null|string $landscapeLogo): self
+    public function setLandscapeLogo(null|string $landscapeLogo): static
     {
         $this->fields['landscapeLogo'] = $landscapeLogo;
 
@@ -96,7 +96,7 @@ class PaymentMethodMetadata implements JsonSerializable
         return $this->fields['portraitLogo'] ?? null;
     }
 
-    public function setPortraitLogo(null|string $portraitLogo): self
+    public function setPortraitLogo(null|string $portraitLogo): static
     {
         $this->fields['portraitLogo'] = $portraitLogo;
 
@@ -108,7 +108,7 @@ class PaymentMethodMetadata implements JsonSerializable
         return $this->fields['summary'];
     }
 
-    public function setSummary(string $summary): self
+    public function setSummary(string $summary): static
     {
         $this->fields['summary'] = $summary;
 
@@ -120,7 +120,7 @@ class PaymentMethodMetadata implements JsonSerializable
         return $this->fields['description'];
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(string $description): static
     {
         $this->fields['description'] = $description;
 
@@ -132,7 +132,7 @@ class PaymentMethodMetadata implements JsonSerializable
         return $this->fields['countries'];
     }
 
-    public function setCountries(CountriesMetadata|array $countries): self
+    public function setCountries(CountriesMetadata|array $countries): static
     {
         if (!($countries instanceof CountriesMetadata)) {
             $countries = CountriesMetadata::from($countries);
@@ -148,7 +148,7 @@ class PaymentMethodMetadata implements JsonSerializable
         return $this->fields['storefrontEnabled'] ?? null;
     }
 
-    public function setStorefrontEnabled(null|bool $storefrontEnabled): self
+    public function setStorefrontEnabled(null|bool $storefrontEnabled): static
     {
         $this->fields['storefrontEnabled'] = $storefrontEnabled;
 
@@ -200,7 +200,7 @@ class PaymentMethodMetadata implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

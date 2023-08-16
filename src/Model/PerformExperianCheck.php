@@ -47,7 +47,7 @@ class PerformExperianCheck extends RuleAction
         return $this->fields['experianCredentialHash'];
     }
 
-    public function setExperianCredentialHash(string $experianCredentialHash): self
+    public function setExperianCredentialHash(string $experianCredentialHash): static
     {
         $this->fields['experianCredentialHash'] = $experianCredentialHash;
 
@@ -59,7 +59,7 @@ class PerformExperianCheck extends RuleAction
         return $this->fields['tagOnApprove'] ?? null;
     }
 
-    public function setTagOnApprove(null|string $tagOnApprove): self
+    public function setTagOnApprove(null|string $tagOnApprove): static
     {
         $this->fields['tagOnApprove'] = $tagOnApprove;
 
@@ -71,7 +71,7 @@ class PerformExperianCheck extends RuleAction
         return $this->fields['tagOnReject'] ?? null;
     }
 
-    public function setTagOnReject(null|string $tagOnReject): self
+    public function setTagOnReject(null|string $tagOnReject): static
     {
         $this->fields['tagOnReject'] = $tagOnReject;
 
@@ -83,7 +83,7 @@ class PerformExperianCheck extends RuleAction
         return $this->fields['tagOnUnknown'] ?? null;
     }
 
-    public function setTagOnUnknown(null|string $tagOnUnknown): self
+    public function setTagOnUnknown(null|string $tagOnUnknown): static
     {
         $this->fields['tagOnUnknown'] = $tagOnUnknown;
 

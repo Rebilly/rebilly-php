@@ -36,7 +36,7 @@ class FeeDetails implements JsonSerializable
         return $this->fields['name'] ?? null;
     }
 
-    public function setName(null|string $name): self
+    public function setName(null|string $name): static
     {
         $this->fields['name'] = $name;
 

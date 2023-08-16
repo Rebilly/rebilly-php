@@ -39,7 +39,7 @@ class MuchBetterCredentials implements JsonSerializable
         return $this->fields['merchantAccountId'];
     }
 
-    public function setMerchantAccountId(string $merchantAccountId): self
+    public function setMerchantAccountId(string $merchantAccountId): static
     {
         $this->fields['merchantAccountId'] = $merchantAccountId;
 
@@ -51,7 +51,7 @@ class MuchBetterCredentials implements JsonSerializable
         return $this->fields['apiKey'];
     }
 
-    public function setApiKey(string $apiKey): self
+    public function setApiKey(string $apiKey): static
     {
         $this->fields['apiKey'] = $apiKey;
 

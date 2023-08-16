@@ -44,7 +44,7 @@ class BlueSnap extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(BlueSnapCredentials|array $credentials): self
+    public function setCredentials(BlueSnapCredentials|array $credentials): static
     {
         if (!($credentials instanceof BlueSnapCredentials)) {
             $credentials = BlueSnapCredentials::from($credentials);
@@ -60,7 +60,7 @@ class BlueSnap extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|BlueSnapSettings|array $settings): self
+    public function setSettings(null|BlueSnapSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof BlueSnapSettings)) {
             $settings = BlueSnapSettings::from($settings);
@@ -76,7 +76,7 @@ class BlueSnap extends GatewayAccount
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|BlueSnap3dsServers|array $threeDSecureServer): self
+    public function setThreeDSecureServer(null|BlueSnap3dsServers|array $threeDSecureServer): static
     {
         if ($threeDSecureServer !== null && !($threeDSecureServer instanceof BlueSnap3dsServers)) {
             $threeDSecureServer = BlueSnap3dsServers::from($threeDSecureServer);

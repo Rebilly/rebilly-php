@@ -41,7 +41,7 @@ class Klarna extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(KlarnaCredentials|array $credentials): self
+    public function setCredentials(KlarnaCredentials|array $credentials): static
     {
         if (!($credentials instanceof KlarnaCredentials)) {
             $credentials = KlarnaCredentials::from($credentials);
@@ -57,7 +57,7 @@ class Klarna extends GatewayAccount
         return $this->fields['settings'];
     }
 
-    public function setSettings(KlarnaSettings|array $settings): self
+    public function setSettings(KlarnaSettings|array $settings): static
     {
         if (!($settings instanceof KlarnaSettings)) {
             $settings = KlarnaSettings::from($settings);

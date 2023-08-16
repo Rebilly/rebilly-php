@@ -145,7 +145,7 @@ abstract class CommonInvoice implements JsonSerializable
         return $this->fields['websiteId'];
     }
 
-    public function setWebsiteId(string $websiteId): self
+    public function setWebsiteId(string $websiteId): static
     {
         $this->fields['websiteId'] = $websiteId;
 
@@ -167,7 +167,7 @@ abstract class CommonInvoice implements JsonSerializable
         return $this->fields['currency'];
     }
 
-    public function setCurrency(string $currency): self
+    public function setCurrency(string $currency): static
     {
         $this->fields['currency'] = $currency;
 
@@ -199,7 +199,7 @@ abstract class CommonInvoice implements JsonSerializable
         return $this->fields['shipping'] ?? null;
     }
 
-    public function setShipping(null|Shipping|array $shipping): self
+    public function setShipping(null|Shipping|array $shipping): static
     {
         if ($shipping !== null && !($shipping instanceof Shipping)) {
             $shipping = Shipping::from($shipping);
@@ -215,7 +215,7 @@ abstract class CommonInvoice implements JsonSerializable
         return $this->fields['tax'] ?? null;
     }
 
-    public function setTax(null|InvoiceTax|array $tax): self
+    public function setTax(null|InvoiceTax|array $tax): static
     {
         if ($tax !== null && !($tax instanceof InvoiceTax)) {
             $tax = InvoiceTax::from($tax);
@@ -231,7 +231,7 @@ abstract class CommonInvoice implements JsonSerializable
         return $this->fields['billingAddress'] ?? null;
     }
 
-    public function setBillingAddress(null|ContactObject|array $billingAddress): self
+    public function setBillingAddress(null|ContactObject|array $billingAddress): static
     {
         if ($billingAddress !== null && !($billingAddress instanceof ContactObject)) {
             $billingAddress = ContactObject::from($billingAddress);
@@ -247,7 +247,7 @@ abstract class CommonInvoice implements JsonSerializable
         return $this->fields['deliveryAddress'] ?? null;
     }
 
-    public function setDeliveryAddress(null|ContactObject|array $deliveryAddress): self
+    public function setDeliveryAddress(null|ContactObject|array $deliveryAddress): static
     {
         if ($deliveryAddress !== null && !($deliveryAddress instanceof ContactObject)) {
             $deliveryAddress = ContactObject::from($deliveryAddress);
@@ -263,7 +263,7 @@ abstract class CommonInvoice implements JsonSerializable
         return $this->fields['poNumber'] ?? null;
     }
 
-    public function setPoNumber(null|string $poNumber): self
+    public function setPoNumber(null|string $poNumber): static
     {
         $this->fields['poNumber'] = $poNumber;
 
@@ -275,7 +275,7 @@ abstract class CommonInvoice implements JsonSerializable
         return $this->fields['notes'] ?? null;
     }
 
-    public function setNotes(null|string $notes): self
+    public function setNotes(null|string $notes): static
     {
         $this->fields['notes'] = $notes;
 
@@ -303,7 +303,7 @@ abstract class CommonInvoice implements JsonSerializable
         return $this->fields['autopayScheduledTime'] ?? null;
     }
 
-    public function setAutopayScheduledTime(null|DateTimeImmutable|string $autopayScheduledTime): self
+    public function setAutopayScheduledTime(null|DateTimeImmutable|string $autopayScheduledTime): static
     {
         if ($autopayScheduledTime !== null && !($autopayScheduledTime instanceof DateTimeImmutable)) {
             $autopayScheduledTime = new DateTimeImmutable($autopayScheduledTime);
@@ -342,7 +342,7 @@ abstract class CommonInvoice implements JsonSerializable
         return $this->fields['abandonedTime'] ?? null;
     }
 
-    public function setAbandonedTime(null|DateTimeImmutable|string $abandonedTime): self
+    public function setAbandonedTime(null|DateTimeImmutable|string $abandonedTime): static
     {
         if ($abandonedTime !== null && !($abandonedTime instanceof DateTimeImmutable)) {
             $abandonedTime = new DateTimeImmutable($abandonedTime);
@@ -358,7 +358,7 @@ abstract class CommonInvoice implements JsonSerializable
         return $this->fields['voidedTime'] ?? null;
     }
 
-    public function setVoidedTime(null|DateTimeImmutable|string $voidedTime): self
+    public function setVoidedTime(null|DateTimeImmutable|string $voidedTime): static
     {
         if ($voidedTime !== null && !($voidedTime instanceof DateTimeImmutable)) {
             $voidedTime = new DateTimeImmutable($voidedTime);
@@ -374,7 +374,7 @@ abstract class CommonInvoice implements JsonSerializable
         return $this->fields['paidTime'] ?? null;
     }
 
-    public function setPaidTime(null|DateTimeImmutable|string $paidTime): self
+    public function setPaidTime(null|DateTimeImmutable|string $paidTime): static
     {
         if ($paidTime !== null && !($paidTime instanceof DateTimeImmutable)) {
             $paidTime = new DateTimeImmutable($paidTime);
@@ -390,7 +390,7 @@ abstract class CommonInvoice implements JsonSerializable
         return $this->fields['dueTime'] ?? null;
     }
 
-    public function setDueTime(null|DateTimeImmutable|string $dueTime): self
+    public function setDueTime(null|DateTimeImmutable|string $dueTime): static
     {
         if ($dueTime !== null && !($dueTime instanceof DateTimeImmutable)) {
             $dueTime = new DateTimeImmutable($dueTime);
@@ -406,7 +406,7 @@ abstract class CommonInvoice implements JsonSerializable
         return $this->fields['issuedTime'] ?? null;
     }
 
-    public function setIssuedTime(null|DateTimeImmutable|string $issuedTime): self
+    public function setIssuedTime(null|DateTimeImmutable|string $issuedTime): static
     {
         if ($issuedTime !== null && !($issuedTime instanceof DateTimeImmutable)) {
             $issuedTime = new DateTimeImmutable($issuedTime);
@@ -529,28 +529,28 @@ abstract class CommonInvoice implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setInvoiceNumber(null|int $invoiceNumber): self
+    private function setInvoiceNumber(null|int $invoiceNumber): static
     {
         $this->fields['invoiceNumber'] = $invoiceNumber;
 
         return $this;
     }
 
-    private function setSubscriptionId(null|string $subscriptionId): self
+    private function setSubscriptionId(null|string $subscriptionId): static
     {
         $this->fields['subscriptionId'] = $subscriptionId;
 
         return $this;
     }
 
-    private function setAmount(null|float|string $amount): self
+    private function setAmount(null|float|string $amount): static
     {
         if (is_string($amount)) {
             $amount = (float) $amount;
@@ -561,7 +561,7 @@ abstract class CommonInvoice implements JsonSerializable
         return $this;
     }
 
-    private function setAmountDue(null|float|string $amountDue): self
+    private function setAmountDue(null|float|string $amountDue): static
     {
         if (is_string($amountDue)) {
             $amountDue = (float) $amountDue;
@@ -572,7 +572,7 @@ abstract class CommonInvoice implements JsonSerializable
         return $this;
     }
 
-    private function setSubtotalAmount(null|float|string $subtotalAmount): self
+    private function setSubtotalAmount(null|float|string $subtotalAmount): static
     {
         if (is_string($subtotalAmount)) {
             $subtotalAmount = (float) $subtotalAmount;
@@ -583,7 +583,7 @@ abstract class CommonInvoice implements JsonSerializable
         return $this;
     }
 
-    private function setDiscountAmount(null|float|string $discountAmount): self
+    private function setDiscountAmount(null|float|string $discountAmount): static
     {
         if (is_string($discountAmount)) {
             $discountAmount = (float) $discountAmount;
@@ -597,7 +597,7 @@ abstract class CommonInvoice implements JsonSerializable
     /**
      * @param null|InvoiceItem[] $items
      */
-    private function setItems(null|array $items): self
+    private function setItems(null|array $items): static
     {
         $items = $items !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof InvoiceItem ? $value : InvoiceItem::from($value)) : null, $items) : null;
 
@@ -609,7 +609,7 @@ abstract class CommonInvoice implements JsonSerializable
     /**
      * @param null|InvoiceDiscount[] $discounts
      */
-    private function setDiscounts(null|array $discounts): self
+    private function setDiscounts(null|array $discounts): static
     {
         $discounts = $discounts !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof InvoiceDiscount ? $value : InvoiceDiscount::from($value)) : null, $discounts) : null;
 
@@ -618,7 +618,7 @@ abstract class CommonInvoice implements JsonSerializable
         return $this;
     }
 
-    private function setAutopayRetryNumber(null|int $autopayRetryNumber): self
+    private function setAutopayRetryNumber(null|int $autopayRetryNumber): static
     {
         $this->fields['autopayRetryNumber'] = $autopayRetryNumber;
 
@@ -628,28 +628,28 @@ abstract class CommonInvoice implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    private function setStatus(null|string $status): self
+    private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
         return $this;
     }
 
-    private function setDelinquentCollectionPeriod(null|int $delinquentCollectionPeriod): self
+    private function setDelinquentCollectionPeriod(null|int $delinquentCollectionPeriod): static
     {
         $this->fields['delinquentCollectionPeriod'] = $delinquentCollectionPeriod;
 
         return $this;
     }
 
-    private function setCollectionPeriod(null|int $collectionPeriod): self
+    private function setCollectionPeriod(null|int $collectionPeriod): static
     {
         $this->fields['collectionPeriod'] = $collectionPeriod;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -660,7 +660,7 @@ abstract class CommonInvoice implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -671,7 +671,7 @@ abstract class CommonInvoice implements JsonSerializable
         return $this;
     }
 
-    private function setPaymentFormUrl(null|string $paymentFormUrl): self
+    private function setPaymentFormUrl(null|string $paymentFormUrl): static
     {
         $this->fields['paymentFormUrl'] = $paymentFormUrl;
 

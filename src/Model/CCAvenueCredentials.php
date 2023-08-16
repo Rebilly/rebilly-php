@@ -42,7 +42,7 @@ class CCAvenueCredentials implements JsonSerializable
         return $this->fields['merchantId'];
     }
 
-    public function setMerchantId(string $merchantId): self
+    public function setMerchantId(string $merchantId): static
     {
         $this->fields['merchantId'] = $merchantId;
 
@@ -54,7 +54,7 @@ class CCAvenueCredentials implements JsonSerializable
         return $this->fields['accessCode'];
     }
 
-    public function setAccessCode(string $accessCode): self
+    public function setAccessCode(string $accessCode): static
     {
         $this->fields['accessCode'] = $accessCode;
 
@@ -66,7 +66,7 @@ class CCAvenueCredentials implements JsonSerializable
         return $this->fields['workingKey'];
     }
 
-    public function setWorkingKey(string $workingKey): self
+    public function setWorkingKey(string $workingKey): static
     {
         $this->fields['workingKey'] = $workingKey;
 

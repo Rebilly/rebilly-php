@@ -39,7 +39,7 @@ class TwoData implements JsonSerializable
         return $this->fields['attribute'] ?? null;
     }
 
-    public function setAttribute(null|string $attribute): self
+    public function setAttribute(null|string $attribute): static
     {
         $this->fields['attribute'] = $attribute;
 
@@ -51,7 +51,7 @@ class TwoData implements JsonSerializable
         return $this->fields['value'] ?? null;
     }
 
-    public function setValue(null|string $value): self
+    public function setValue(null|string $value): static
     {
         $this->fields['value'] = $value;
 

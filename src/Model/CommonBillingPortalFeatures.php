@@ -51,7 +51,7 @@ class CommonBillingPortalFeatures implements JsonSerializable
         return $this->fields['authenticateWithPassword'] ?? null;
     }
 
-    public function setAuthenticateWithPassword(null|bool $authenticateWithPassword): self
+    public function setAuthenticateWithPassword(null|bool $authenticateWithPassword): static
     {
         $this->fields['authenticateWithPassword'] = $authenticateWithPassword;
 
@@ -63,7 +63,7 @@ class CommonBillingPortalFeatures implements JsonSerializable
         return $this->fields['orderCancel'] ?? null;
     }
 
-    public function setOrderCancel(null|bool $orderCancel): self
+    public function setOrderCancel(null|bool $orderCancel): static
     {
         $this->fields['orderCancel'] = $orderCancel;
 
@@ -75,7 +75,7 @@ class CommonBillingPortalFeatures implements JsonSerializable
         return $this->fields['orderAddressEdit'] ?? null;
     }
 
-    public function setOrderAddressEdit(null|bool $orderAddressEdit): self
+    public function setOrderAddressEdit(null|bool $orderAddressEdit): static
     {
         $this->fields['orderAddressEdit'] = $orderAddressEdit;
 
@@ -87,7 +87,7 @@ class CommonBillingPortalFeatures implements JsonSerializable
         return $this->fields['paymentInstrumentAdd'] ?? null;
     }
 
-    public function setPaymentInstrumentAdd(null|bool $paymentInstrumentAdd): self
+    public function setPaymentInstrumentAdd(null|bool $paymentInstrumentAdd): static
     {
         $this->fields['paymentInstrumentAdd'] = $paymentInstrumentAdd;
 
@@ -99,7 +99,7 @@ class CommonBillingPortalFeatures implements JsonSerializable
         return $this->fields['paymentInstrumentUpdate'] ?? null;
     }
 
-    public function setPaymentInstrumentUpdate(null|bool $paymentInstrumentUpdate): self
+    public function setPaymentInstrumentUpdate(null|bool $paymentInstrumentUpdate): static
     {
         $this->fields['paymentInstrumentUpdate'] = $paymentInstrumentUpdate;
 
@@ -111,7 +111,7 @@ class CommonBillingPortalFeatures implements JsonSerializable
         return $this->fields['paymentInstrumentDeactivate'] ?? null;
     }
 
-    public function setPaymentInstrumentDeactivate(null|bool $paymentInstrumentDeactivate): self
+    public function setPaymentInstrumentDeactivate(null|bool $paymentInstrumentDeactivate): static
     {
         $this->fields['paymentInstrumentDeactivate'] = $paymentInstrumentDeactivate;
 

@@ -39,7 +39,7 @@ class ValidationError1InvalidFields implements JsonSerializable
         return $this->fields['field'] ?? null;
     }
 
-    public function setField(null|string $field): self
+    public function setField(null|string $field): static
     {
         $this->fields['field'] = $field;
 
@@ -51,7 +51,7 @@ class ValidationError1InvalidFields implements JsonSerializable
         return $this->fields['message'] ?? null;
     }
 
-    public function setMessage(null|string $message): self
+    public function setMessage(null|string $message): static
     {
         $this->fields['message'] = $message;
 

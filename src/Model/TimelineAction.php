@@ -72,7 +72,7 @@ abstract class TimelineAction implements JsonSerializable
     /**
      * @psalm-param self::ACTION_*|null $action
      */
-    private function setAction(null|string $action): self
+    private function setAction(null|string $action): static
     {
         $this->fields['action'] = $action;
 

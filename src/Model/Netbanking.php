@@ -38,7 +38,7 @@ class Netbanking extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(NetbankingCredentials|array $credentials): self
+    public function setCredentials(NetbankingCredentials|array $credentials): static
     {
         if (!($credentials instanceof NetbankingCredentials)) {
             $credentials = NetbankingCredentials::from($credentials);

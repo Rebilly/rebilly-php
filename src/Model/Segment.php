@@ -71,7 +71,7 @@ class Segment implements JsonSerializable
         return $this->fields['owner'];
     }
 
-    public function setOwner(SegmentOwner|array $owner): self
+    public function setOwner(SegmentOwner|array $owner): static
     {
         if (!($owner instanceof SegmentOwner)) {
             $owner = SegmentOwner::from($owner);
@@ -87,7 +87,7 @@ class Segment implements JsonSerializable
         return $this->fields['data'];
     }
 
-    public function setData(array $data): self
+    public function setData(array $data): static
     {
         $this->fields['data'] = $data;
 
@@ -99,7 +99,7 @@ class Segment implements JsonSerializable
         return $this->fields['isStarred'] ?? null;
     }
 
-    public function setIsStarred(null|bool $isStarred): self
+    public function setIsStarred(null|bool $isStarred): static
     {
         $this->fields['isStarred'] = $isStarred;
 
@@ -111,7 +111,7 @@ class Segment implements JsonSerializable
         return $this->fields['isVisible'] ?? null;
     }
 
-    public function setIsVisible(null|bool $isVisible): self
+    public function setIsVisible(null|bool $isVisible): static
     {
         $this->fields['isVisible'] = $isVisible;
 
@@ -129,7 +129,7 @@ class Segment implements JsonSerializable
     /**
      * @param null|string[] $userIds
      */
-    public function setUserIds(null|array $userIds): self
+    public function setUserIds(null|array $userIds): static
     {
         $userIds = $userIds !== null ? array_map(fn ($value) => $value ?? null, $userIds) : null;
 
@@ -157,7 +157,7 @@ class Segment implements JsonSerializable
     /**
      * @psalm-param self::SCOPE_* $scope
      */
-    public function setScope(string $scope): self
+    public function setScope(string $scope): static
     {
         $this->fields['scope'] = $scope;
 
@@ -169,7 +169,7 @@ class Segment implements JsonSerializable
         return $this->fields['systemId'] ?? null;
     }
 
-    public function setSystemId(null|string $systemId): self
+    public function setSystemId(null|string $systemId): static
     {
         $this->fields['systemId'] = $systemId;
 
@@ -210,7 +210,7 @@ class Segment implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -220,7 +220,7 @@ class Segment implements JsonSerializable
     /**
      * @param null|SegmentUsers[] $users
      */
-    private function setUsers(null|array $users): self
+    private function setUsers(null|array $users): static
     {
         $users = $users !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SegmentUsers ? $value : SegmentUsers::from($value)) : null, $users) : null;
 

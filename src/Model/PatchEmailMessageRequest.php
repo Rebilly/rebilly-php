@@ -44,7 +44,7 @@ class PatchEmailMessageRequest implements JsonSerializable
     /**
      * @psalm-param self::STATUS_* $status
      */
-    public function setStatus(string $status): self
+    public function setStatus(string $status): static
     {
         $this->fields['status'] = $status;
 

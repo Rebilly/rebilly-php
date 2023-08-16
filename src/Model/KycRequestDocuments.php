@@ -45,7 +45,7 @@ class KycRequestDocuments implements JsonSerializable
         return $this->fields['type'];
     }
 
-    public function setType(KycDocumentTypes|string $type): self
+    public function setType(KycDocumentTypes|string $type): static
     {
         if (!($type instanceof KycDocumentTypes)) {
             $type = KycDocumentTypes::from($type);
@@ -67,7 +67,7 @@ class KycRequestDocuments implements JsonSerializable
     /**
      * @param null|KycDocumentSubtypes[] $subtypes
      */
-    public function setSubtypes(null|array $subtypes): self
+    public function setSubtypes(null|array $subtypes): static
     {
         $subtypes = $subtypes !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof KycDocumentSubtypes ? $value : KycDocumentSubtypes::from($value)) : null, $subtypes) : null;
 
@@ -81,7 +81,7 @@ class KycRequestDocuments implements JsonSerializable
         return $this->fields['maxAttempts'] ?? null;
     }
 
-    public function setMaxAttempts(null|int $maxAttempts): self
+    public function setMaxAttempts(null|int $maxAttempts): static
     {
         $this->fields['maxAttempts'] = $maxAttempts;
 
@@ -93,7 +93,7 @@ class KycRequestDocuments implements JsonSerializable
         return $this->fields['faceProofRequired'] ?? null;
     }
 
-    public function setFaceProofRequired(null|bool $faceProofRequired): self
+    public function setFaceProofRequired(null|bool $faceProofRequired): static
     {
         $this->fields['faceProofRequired'] = $faceProofRequired;
 

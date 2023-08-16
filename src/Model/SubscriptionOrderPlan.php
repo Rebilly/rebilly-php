@@ -47,7 +47,7 @@ class SubscriptionOrderPlan extends CommonPlan
         return $this->fields['recurringInterval'];
     }
 
-    public function setRecurringInterval(PlanPeriod|array $recurringInterval): self
+    public function setRecurringInterval(PlanPeriod|array $recurringInterval): static
     {
         if (!($recurringInterval instanceof PlanPeriod)) {
             $recurringInterval = PlanPeriod::from($recurringInterval);
@@ -69,7 +69,7 @@ class SubscriptionOrderPlan extends CommonPlan
     /**
      * @param null|array{price:float,period:PlanPeriod} $trial
      */
-    public function setTrial(null|array $trial): self
+    public function setTrial(null|array $trial): static
     {
         if ($trial !== null) {
             if (!isset($trial['price'])) {
@@ -94,7 +94,7 @@ class SubscriptionOrderPlan extends CommonPlan
     /**
      * @param null|array{strategy:string,min:float,max:float} $meteredBilling
      */
-    public function setMeteredBilling(null|array $meteredBilling): self
+    public function setMeteredBilling(null|array $meteredBilling): static
     {
         if ($meteredBilling !== null) {
             if (!isset($meteredBilling['strategy'])) {
@@ -114,7 +114,7 @@ class SubscriptionOrderPlan extends CommonPlan
         return $this->fields['invoiceTimeShift'] ?? null;
     }
 
-    public function setInvoiceTimeShift(null|InvoiceTimeShift|array $invoiceTimeShift): self
+    public function setInvoiceTimeShift(null|InvoiceTimeShift|array $invoiceTimeShift): static
     {
         if ($invoiceTimeShift !== null && !($invoiceTimeShift instanceof InvoiceTimeShift)) {
             $invoiceTimeShift = InvoiceTimeShift::from($invoiceTimeShift);

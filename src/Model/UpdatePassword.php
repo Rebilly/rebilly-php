@@ -39,7 +39,7 @@ class UpdatePassword implements JsonSerializable
         return $this->fields['currentPassword'];
     }
 
-    public function setCurrentPassword(string $currentPassword): self
+    public function setCurrentPassword(string $currentPassword): static
     {
         $this->fields['currentPassword'] = $currentPassword;
 
@@ -51,7 +51,7 @@ class UpdatePassword implements JsonSerializable
         return $this->fields['newPassword'];
     }
 
-    public function setNewPassword(string $newPassword): self
+    public function setNewPassword(string $newPassword): static
     {
         $this->fields['newPassword'] = $newPassword;
 

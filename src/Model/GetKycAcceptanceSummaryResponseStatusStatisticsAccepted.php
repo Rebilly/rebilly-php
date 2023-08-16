@@ -45,7 +45,7 @@ class GetKycAcceptanceSummaryResponseStatusStatisticsAccepted implements JsonSer
         return $this->fields['total'] ?? null;
     }
 
-    public function setTotal(null|int $total): self
+    public function setTotal(null|int $total): static
     {
         $this->fields['total'] = $total;
 
@@ -57,7 +57,7 @@ class GetKycAcceptanceSummaryResponseStatusStatisticsAccepted implements JsonSer
         return $this->fields['automatically'] ?? null;
     }
 
-    public function setAutomatically(null|int $automatically): self
+    public function setAutomatically(null|int $automatically): static
     {
         $this->fields['automatically'] = $automatically;
 
@@ -69,7 +69,7 @@ class GetKycAcceptanceSummaryResponseStatusStatisticsAccepted implements JsonSer
         return $this->fields['manually'] ?? null;
     }
 
-    public function setManually(null|int $manually): self
+    public function setManually(null|int $manually): static
     {
         $this->fields['manually'] = $manually;
 
@@ -81,7 +81,7 @@ class GetKycAcceptanceSummaryResponseStatusStatisticsAccepted implements JsonSer
         return $this->fields['afterAutoRejected'] ?? null;
     }
 
-    public function setAfterAutoRejected(null|int $afterAutoRejected): self
+    public function setAfterAutoRejected(null|int $afterAutoRejected): static
     {
         $this->fields['afterAutoRejected'] = $afterAutoRejected;
 

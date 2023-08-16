@@ -45,7 +45,7 @@ class CumulativeSubscriptionsData implements JsonSerializable
         return $this->fields['aggregationValue'] ?? null;
     }
 
-    public function setAggregationValue(null|string $aggregationValue): self
+    public function setAggregationValue(null|string $aggregationValue): static
     {
         $this->fields['aggregationValue'] = $aggregationValue;
 
@@ -57,7 +57,7 @@ class CumulativeSubscriptionsData implements JsonSerializable
         return $this->fields['newCount'] ?? null;
     }
 
-    public function setNewCount(null|int $newCount): self
+    public function setNewCount(null|int $newCount): static
     {
         $this->fields['newCount'] = $newCount;
 
@@ -69,7 +69,7 @@ class CumulativeSubscriptionsData implements JsonSerializable
         return $this->fields['canceledCount'] ?? null;
     }
 
-    public function setCanceledCount(null|int $canceledCount): self
+    public function setCanceledCount(null|int $canceledCount): static
     {
         $this->fields['canceledCount'] = $canceledCount;
 
@@ -81,7 +81,7 @@ class CumulativeSubscriptionsData implements JsonSerializable
         return $this->fields['cumulativeCount'] ?? null;
     }
 
-    public function setCumulativeCount(null|int $cumulativeCount): self
+    public function setCumulativeCount(null|int $cumulativeCount): static
     {
         $this->fields['cumulativeCount'] = $cumulativeCount;
 

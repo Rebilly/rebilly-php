@@ -87,7 +87,7 @@ class WebhookTracking implements JsonSerializable
         return $this->fields['id'] ?? null;
     }
 
-    public function setId(null|string $id): self
+    public function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -99,7 +99,7 @@ class WebhookTracking implements JsonSerializable
         return $this->fields['eventType'] ?? null;
     }
 
-    public function setEventType(null|EventType|string $eventType): self
+    public function setEventType(null|EventType|string $eventType): static
     {
         if ($eventType !== null && !($eventType instanceof EventType)) {
             $eventType = EventType::from($eventType);
@@ -115,7 +115,7 @@ class WebhookTracking implements JsonSerializable
         return $this->fields['entityId'] ?? null;
     }
 
-    public function setEntityId(null|string $entityId): self
+    public function setEntityId(null|string $entityId): static
     {
         $this->fields['entityId'] = $entityId;
 
@@ -127,7 +127,7 @@ class WebhookTracking implements JsonSerializable
         return $this->fields['url'] ?? null;
     }
 
-    public function setUrl(null|string $url): self
+    public function setUrl(null|string $url): static
     {
         $this->fields['url'] = $url;
 
@@ -139,7 +139,7 @@ class WebhookTracking implements JsonSerializable
         return $this->fields['method'] ?? null;
     }
 
-    public function setMethod(null|string $method): self
+    public function setMethod(null|string $method): static
     {
         $this->fields['method'] = $method;
 
@@ -157,7 +157,7 @@ class WebhookTracking implements JsonSerializable
     /**
      * @param null|array<string,string> $headers
      */
-    public function setHeaders(null|array $headers): self
+    public function setHeaders(null|array $headers): static
     {
         $this->fields['headers'] = $headers;
 
@@ -169,7 +169,7 @@ class WebhookTracking implements JsonSerializable
         return $this->fields['responseCode'] ?? null;
     }
 
-    public function setResponseCode(null|int $responseCode): self
+    public function setResponseCode(null|int $responseCode): static
     {
         $this->fields['responseCode'] = $responseCode;
 
@@ -181,7 +181,7 @@ class WebhookTracking implements JsonSerializable
         return $this->fields['responseBody'] ?? null;
     }
 
-    public function setResponseBody(null|string $responseBody): self
+    public function setResponseBody(null|string $responseBody): static
     {
         $this->fields['responseBody'] = $responseBody;
 
@@ -193,7 +193,7 @@ class WebhookTracking implements JsonSerializable
         return $this->fields['payload'] ?? null;
     }
 
-    public function setPayload(null|string $payload): self
+    public function setPayload(null|string $payload): static
     {
         $this->fields['payload'] = $payload;
 
@@ -211,7 +211,7 @@ class WebhookTracking implements JsonSerializable
     /**
      * @psalm-param self::SOURCE_*|null $source
      */
-    public function setSource(null|string $source): self
+    public function setSource(null|string $source): static
     {
         $this->fields['source'] = $source;
 
@@ -223,7 +223,7 @@ class WebhookTracking implements JsonSerializable
         return $this->fields['attempt'] ?? null;
     }
 
-    public function setAttempt(null|int $attempt): self
+    public function setAttempt(null|int $attempt): static
     {
         $this->fields['attempt'] = $attempt;
 
@@ -235,7 +235,7 @@ class WebhookTracking implements JsonSerializable
         return $this->fields['sentTime'] ?? null;
     }
 
-    public function setSentTime(null|DateTimeImmutable|string $sentTime): self
+    public function setSentTime(null|DateTimeImmutable|string $sentTime): static
     {
         if ($sentTime !== null && !($sentTime instanceof DateTimeImmutable)) {
             $sentTime = new DateTimeImmutable($sentTime);
@@ -251,7 +251,7 @@ class WebhookTracking implements JsonSerializable
         return $this->fields['initiatedTime'] ?? null;
     }
 
-    public function setInitiatedTime(null|DateTimeImmutable|string $initiatedTime): self
+    public function setInitiatedTime(null|DateTimeImmutable|string $initiatedTime): static
     {
         if ($initiatedTime !== null && !($initiatedTime instanceof DateTimeImmutable)) {
             $initiatedTime = new DateTimeImmutable($initiatedTime);
@@ -335,7 +335,7 @@ class WebhookTracking implements JsonSerializable
         return $data;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -346,7 +346,7 @@ class WebhookTracking implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -360,7 +360,7 @@ class WebhookTracking implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

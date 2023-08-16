@@ -44,7 +44,7 @@ class TwoColumnsTimelineTable extends TimelineTable
     /**
      * @param null|TwoData[] $data
      */
-    public function setData(null|array $data): self
+    public function setData(null|array $data): static
     {
         $data = $data !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof TwoData ? $value : TwoData::from($value)) : null, $data) : null;
 

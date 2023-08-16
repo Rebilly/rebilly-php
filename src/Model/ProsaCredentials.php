@@ -39,7 +39,7 @@ class ProsaCredentials implements JsonSerializable
         return $this->fields['entityId'];
     }
 
-    public function setEntityId(string $entityId): self
+    public function setEntityId(string $entityId): static
     {
         $this->fields['entityId'] = $entityId;
 
@@ -51,7 +51,7 @@ class ProsaCredentials implements JsonSerializable
         return $this->fields['accessToken'];
     }
 
-    public function setAccessToken(string $accessToken): self
+    public function setAccessToken(string $accessToken): static
     {
         $this->fields['accessToken'] = $accessToken;
 

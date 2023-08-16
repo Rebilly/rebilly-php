@@ -39,7 +39,7 @@ class CoinGateSettings implements JsonSerializable
         return $this->fields['targetCurrency'] ?? null;
     }
 
-    public function setTargetCurrency(null|string $targetCurrency): self
+    public function setTargetCurrency(null|string $targetCurrency): static
     {
         $this->fields['targetCurrency'] = $targetCurrency;
 
@@ -51,7 +51,7 @@ class CoinGateSettings implements JsonSerializable
         return $this->fields['tolerancePercentage'] ?? null;
     }
 
-    public function setTolerancePercentage(null|int $tolerancePercentage): self
+    public function setTolerancePercentage(null|int $tolerancePercentage): static
     {
         $this->fields['tolerancePercentage'] = $tolerancePercentage;
 

@@ -98,7 +98,7 @@ class InvoiceItem implements JsonSerializable
     /**
      * @psalm-param self::TYPE_* $type
      */
-    public function setType(string $type): self
+    public function setType(string $type): static
     {
         $this->fields['type'] = $type;
 
@@ -110,7 +110,7 @@ class InvoiceItem implements JsonSerializable
         return $this->fields['description'] ?? null;
     }
 
-    public function setDescription(null|string $description): self
+    public function setDescription(null|string $description): static
     {
         $this->fields['description'] = $description;
 
@@ -122,7 +122,7 @@ class InvoiceItem implements JsonSerializable
         return $this->fields['unitPrice'];
     }
 
-    public function setUnitPrice(float|string $unitPrice): self
+    public function setUnitPrice(float|string $unitPrice): static
     {
         if (is_string($unitPrice)) {
             $unitPrice = (float) $unitPrice;
@@ -138,7 +138,7 @@ class InvoiceItem implements JsonSerializable
         return $this->fields['quantity'] ?? null;
     }
 
-    public function setQuantity(null|int $quantity): self
+    public function setQuantity(null|int $quantity): static
     {
         $this->fields['quantity'] = $quantity;
 
@@ -155,7 +155,7 @@ class InvoiceItem implements JsonSerializable
         return $this->fields['productId'] ?? null;
     }
 
-    public function setProductId(null|string $productId): self
+    public function setProductId(null|string $productId): static
     {
         $this->fields['productId'] = $productId;
 
@@ -172,7 +172,7 @@ class InvoiceItem implements JsonSerializable
         return $this->fields['periodStartTime'] ?? null;
     }
 
-    public function setPeriodStartTime(null|DateTimeImmutable|string $periodStartTime): self
+    public function setPeriodStartTime(null|DateTimeImmutable|string $periodStartTime): static
     {
         if ($periodStartTime !== null && !($periodStartTime instanceof DateTimeImmutable)) {
             $periodStartTime = new DateTimeImmutable($periodStartTime);
@@ -188,7 +188,7 @@ class InvoiceItem implements JsonSerializable
         return $this->fields['periodEndTime'] ?? null;
     }
 
-    public function setPeriodEndTime(null|DateTimeImmutable|string $periodEndTime): self
+    public function setPeriodEndTime(null|DateTimeImmutable|string $periodEndTime): static
     {
         if ($periodEndTime !== null && !($periodEndTime instanceof DateTimeImmutable)) {
             $periodEndTime = new DateTimeImmutable($periodEndTime);
@@ -204,7 +204,7 @@ class InvoiceItem implements JsonSerializable
         return $this->fields['periodNumber'] ?? null;
     }
 
-    public function setPeriodNumber(null|int $periodNumber): self
+    public function setPeriodNumber(null|int $periodNumber): static
     {
         $this->fields['periodNumber'] = $periodNumber;
 
@@ -297,14 +297,14 @@ class InvoiceItem implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setPrice(null|float|string $price): self
+    private function setPrice(null|float|string $price): static
     {
         if (is_string($price)) {
             $price = (float) $price;
@@ -315,7 +315,7 @@ class InvoiceItem implements JsonSerializable
         return $this;
     }
 
-    private function setDiscountAmount(null|float|string $discountAmount): self
+    private function setDiscountAmount(null|float|string $discountAmount): static
     {
         if (is_string($discountAmount)) {
             $discountAmount = (float) $discountAmount;
@@ -326,7 +326,7 @@ class InvoiceItem implements JsonSerializable
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -337,7 +337,7 @@ class InvoiceItem implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -348,7 +348,7 @@ class InvoiceItem implements JsonSerializable
         return $this;
     }
 
-    private function setTax(null|InvoiceTaxItem|array $tax): self
+    private function setTax(null|InvoiceTaxItem|array $tax): static
     {
         if ($tax !== null && !($tax instanceof InvoiceTaxItem)) {
             $tax = InvoiceTaxItem::from($tax);
@@ -362,7 +362,7 @@ class InvoiceItem implements JsonSerializable
     /**
      * @param null|array<ProductLink|SelfLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 
@@ -374,7 +374,7 @@ class InvoiceItem implements JsonSerializable
     /**
      * @param null|array{product:Product,plan:Plan} $embedded
      */
-    private function setEmbedded(null|array $embedded): self
+    private function setEmbedded(null|array $embedded): static
     {
         if ($embedded !== null) {
             $embedded['product'] = isset($embedded['product']) ? ($embedded['product'] instanceof Product ? $embedded['product'] : Product::from($embedded['product'])) : null;

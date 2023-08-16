@@ -39,7 +39,7 @@ class CopprCredentials implements JsonSerializable
         return $this->fields['organizationId'];
     }
 
-    public function setOrganizationId(string $organizationId): self
+    public function setOrganizationId(string $organizationId): static
     {
         $this->fields['organizationId'] = $organizationId;
 
@@ -51,7 +51,7 @@ class CopprCredentials implements JsonSerializable
         return $this->fields['apiKey'];
     }
 
-    public function setApiKey(string $apiKey): self
+    public function setApiKey(string $apiKey): static
     {
         $this->fields['apiKey'] = $apiKey;
 

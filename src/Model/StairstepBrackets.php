@@ -39,7 +39,7 @@ class StairstepBrackets implements JsonSerializable
         return $this->fields['price'] ?? null;
     }
 
-    public function setPrice(null|float|string $price): self
+    public function setPrice(null|float|string $price): static
     {
         if (is_string($price)) {
             $price = (float) $price;
@@ -55,7 +55,7 @@ class StairstepBrackets implements JsonSerializable
         return $this->fields['maxQuantity'] ?? null;
     }
 
-    public function setMaxQuantity(null|int $maxQuantity): self
+    public function setMaxQuantity(null|int $maxQuantity): static
     {
         $this->fields['maxQuantity'] = $maxQuantity;
 

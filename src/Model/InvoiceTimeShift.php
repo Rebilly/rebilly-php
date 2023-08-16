@@ -39,7 +39,7 @@ class InvoiceTimeShift implements JsonSerializable
         return $this->fields['issueTimeShift'] ?? null;
     }
 
-    public function setIssueTimeShift(null|IssueTimeShiftInstruction|array $issueTimeShift): self
+    public function setIssueTimeShift(null|IssueTimeShiftInstruction|array $issueTimeShift): static
     {
         if ($issueTimeShift !== null && !($issueTimeShift instanceof IssueTimeShiftInstruction)) {
             $issueTimeShift = IssueTimeShiftInstruction::from($issueTimeShift);
@@ -55,7 +55,7 @@ class InvoiceTimeShift implements JsonSerializable
         return $this->fields['dueTimeShift'] ?? null;
     }
 
-    public function setDueTimeShift(null|DueTimeShiftInstruction|array $dueTimeShift): self
+    public function setDueTimeShift(null|DueTimeShiftInstruction|array $dueTimeShift): static
     {
         if ($dueTimeShift !== null && !($dueTimeShift instanceof DueTimeShiftInstruction)) {
             $dueTimeShift = DueTimeShiftInstruction::from($dueTimeShift);

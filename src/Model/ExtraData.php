@@ -42,7 +42,7 @@ class ExtraData implements JsonSerializable
         return $this->fields['kountFraudSessionId'] ?? null;
     }
 
-    public function setKountFraudSessionId(null|string $kountFraudSessionId): self
+    public function setKountFraudSessionId(null|string $kountFraudSessionId): static
     {
         $this->fields['kountFraudSessionId'] = $kountFraudSessionId;
 
@@ -54,7 +54,7 @@ class ExtraData implements JsonSerializable
         return $this->fields['payPalMerchantSessionId'] ?? null;
     }
 
-    public function setPayPalMerchantSessionId(null|string $payPalMerchantSessionId): self
+    public function setPayPalMerchantSessionId(null|string $payPalMerchantSessionId): static
     {
         $this->fields['payPalMerchantSessionId'] = $payPalMerchantSessionId;
 
@@ -66,7 +66,7 @@ class ExtraData implements JsonSerializable
         return $this->fields['threatMetrixSessionId'] ?? null;
     }
 
-    public function setThreatMetrixSessionId(null|string $threatMetrixSessionId): self
+    public function setThreatMetrixSessionId(null|string $threatMetrixSessionId): static
     {
         $this->fields['threatMetrixSessionId'] = $threatMetrixSessionId;
 

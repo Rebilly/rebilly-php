@@ -119,7 +119,7 @@ class GatewayAccountLimit implements JsonSerializable
         return $this->fields['cap'];
     }
 
-    public function setCap(int $cap): self
+    public function setCap(int $cap): static
     {
         $this->fields['cap'] = $cap;
 
@@ -189,7 +189,7 @@ class GatewayAccountLimit implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -199,14 +199,14 @@ class GatewayAccountLimit implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    private function setStatus(null|string $status): self
+    private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
         return $this;
     }
 
-    private function setStartTime(null|DateTimeImmutable|string $startTime): self
+    private function setStartTime(null|DateTimeImmutable|string $startTime): static
     {
         if ($startTime !== null && !($startTime instanceof DateTimeImmutable)) {
             $startTime = new DateTimeImmutable($startTime);
@@ -217,7 +217,7 @@ class GatewayAccountLimit implements JsonSerializable
         return $this;
     }
 
-    private function setEndTime(null|DateTimeImmutable|string $endTime): self
+    private function setEndTime(null|DateTimeImmutable|string $endTime): static
     {
         if ($endTime !== null && !($endTime instanceof DateTimeImmutable)) {
             $endTime = new DateTimeImmutable($endTime);
@@ -231,7 +231,7 @@ class GatewayAccountLimit implements JsonSerializable
     /**
      * @psalm-param self::FREQUENCY_*|null $frequency
      */
-    private function setFrequency(null|string $frequency): self
+    private function setFrequency(null|string $frequency): static
     {
         $this->fields['frequency'] = $frequency;
 
@@ -241,21 +241,21 @@ class GatewayAccountLimit implements JsonSerializable
     /**
      * @psalm-param self::TYPE_*|null $type
      */
-    private function setType(null|string $type): self
+    private function setType(null|string $type): static
     {
         $this->fields['type'] = $type;
 
         return $this;
     }
 
-    private function setUsage(null|int $usage): self
+    private function setUsage(null|int $usage): static
     {
         $this->fields['usage'] = $usage;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -266,7 +266,7 @@ class GatewayAccountLimit implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -280,7 +280,7 @@ class GatewayAccountLimit implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

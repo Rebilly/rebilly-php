@@ -57,7 +57,7 @@ class PostFinanceCredentials implements JsonSerializable
         return $this->fields['pspId'];
     }
 
-    public function setPspId(string $pspId): self
+    public function setPspId(string $pspId): static
     {
         $this->fields['pspId'] = $pspId;
 
@@ -69,7 +69,7 @@ class PostFinanceCredentials implements JsonSerializable
         return $this->fields['merchantId'];
     }
 
-    public function setMerchantId(string $merchantId): self
+    public function setMerchantId(string $merchantId): static
     {
         $this->fields['merchantId'] = $merchantId;
 
@@ -81,7 +81,7 @@ class PostFinanceCredentials implements JsonSerializable
         return $this->fields['sftpUsername'];
     }
 
-    public function setSftpUsername(string $sftpUsername): self
+    public function setSftpUsername(string $sftpUsername): static
     {
         $this->fields['sftpUsername'] = $sftpUsername;
 
@@ -93,7 +93,7 @@ class PostFinanceCredentials implements JsonSerializable
         return $this->fields['publicKey'];
     }
 
-    public function setPublicKey(string $publicKey): self
+    public function setPublicKey(string $publicKey): static
     {
         $this->fields['publicKey'] = $publicKey;
 
@@ -105,7 +105,7 @@ class PostFinanceCredentials implements JsonSerializable
         return $this->fields['privateKey'];
     }
 
-    public function setPrivateKey(string $privateKey): self
+    public function setPrivateKey(string $privateKey): static
     {
         $this->fields['privateKey'] = $privateKey;
 
@@ -117,7 +117,7 @@ class PostFinanceCredentials implements JsonSerializable
         return $this->fields['keyPassphrase'];
     }
 
-    public function setKeyPassphrase(string $keyPassphrase): self
+    public function setKeyPassphrase(string $keyPassphrase): static
     {
         $this->fields['keyPassphrase'] = $keyPassphrase;
 
@@ -129,7 +129,7 @@ class PostFinanceCredentials implements JsonSerializable
         return $this->fields['sftpPrivateKey'];
     }
 
-    public function setSftpPrivateKey(string $sftpPrivateKey): self
+    public function setSftpPrivateKey(string $sftpPrivateKey): static
     {
         $this->fields['sftpPrivateKey'] = $sftpPrivateKey;
 
@@ -141,7 +141,7 @@ class PostFinanceCredentials implements JsonSerializable
         return $this->fields['sftpKeyPassphrase'];
     }
 
-    public function setSftpKeyPassphrase(string $sftpKeyPassphrase): self
+    public function setSftpKeyPassphrase(string $sftpKeyPassphrase): static
     {
         $this->fields['sftpKeyPassphrase'] = $sftpKeyPassphrase;
 

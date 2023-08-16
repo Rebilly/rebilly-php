@@ -38,7 +38,7 @@ class ToditoCash extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(ToditoCashCredentials|array $credentials): self
+    public function setCredentials(ToditoCashCredentials|array $credentials): static
     {
         if (!($credentials instanceof ToditoCashCredentials)) {
             $credentials = ToditoCashCredentials::from($credentials);

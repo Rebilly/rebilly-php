@@ -51,7 +51,7 @@ class KycRequest extends CommonKycRequest
         return $this->fields['customerId'];
     }
 
-    public function setCustomerId(string $customerId): self
+    public function setCustomerId(string $customerId): static
     {
         $this->fields['customerId'] = $customerId;
 
@@ -63,7 +63,7 @@ class KycRequest extends CommonKycRequest
         return $this->fields['reason'] ?? null;
     }
 
-    public function setReason(null|string $reason): self
+    public function setReason(null|string $reason): static
     {
         $this->fields['reason'] = $reason;
 
@@ -75,7 +75,7 @@ class KycRequest extends CommonKycRequest
         return $this->fields['matchLevel'] ?? null;
     }
 
-    public function setMatchLevel(null|int $matchLevel): self
+    public function setMatchLevel(null|int $matchLevel): static
     {
         $this->fields['matchLevel'] = $matchLevel;
 
@@ -106,7 +106,7 @@ class KycRequest extends CommonKycRequest
     /**
      * @param null|array{documents:KycDocument[]} $embedded
      */
-    public function setEmbedded(null|array $embedded): self
+    public function setEmbedded(null|array $embedded): static
     {
         if ($embedded !== null) {
             $embedded['documents'] = isset($embedded['documents']) ? array_map(fn ($value) => $value !== null ? ($value instanceof KycDocument ? $value : KycDocument::from($value)) : null, $embedded['documents']) : null;
@@ -142,7 +142,7 @@ class KycRequest extends CommonKycRequest
         return parent::jsonSerialize() + $data;
     }
 
-    private function setRevision(null|int $revision): self
+    private function setRevision(null|int $revision): static
     {
         $this->fields['revision'] = $revision;
 
@@ -152,7 +152,7 @@ class KycRequest extends CommonKycRequest
     /**
      * @param null|array<KycDocumentsLink|KycGathererLink|SelfLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 

@@ -38,7 +38,7 @@ class LPG extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(LPGCredentials|array $credentials): self
+    public function setCredentials(LPGCredentials|array $credentials): static
     {
         if (!($credentials instanceof LPGCredentials)) {
             $credentials = LPGCredentials::from($credentials);

@@ -45,7 +45,7 @@ class Pin4PayCredentials implements JsonSerializable
         return $this->fields['username'];
     }
 
-    public function setUsername(string $username): self
+    public function setUsername(string $username): static
     {
         $this->fields['username'] = $username;
 
@@ -57,7 +57,7 @@ class Pin4PayCredentials implements JsonSerializable
         return $this->fields['requestOrigin'];
     }
 
-    public function setRequestOrigin(string $requestOrigin): self
+    public function setRequestOrigin(string $requestOrigin): static
     {
         $this->fields['requestOrigin'] = $requestOrigin;
 
@@ -69,7 +69,7 @@ class Pin4PayCredentials implements JsonSerializable
         return $this->fields['codigoCliente'];
     }
 
-    public function setCodigoCliente(string $codigoCliente): self
+    public function setCodigoCliente(string $codigoCliente): static
     {
         $this->fields['codigoCliente'] = $codigoCliente;
 
@@ -81,7 +81,7 @@ class Pin4PayCredentials implements JsonSerializable
         return $this->fields['keyValue'];
     }
 
-    public function setKeyValue(string $keyValue): self
+    public function setKeyValue(string $keyValue): static
     {
         $this->fields['keyValue'] = $keyValue;
 

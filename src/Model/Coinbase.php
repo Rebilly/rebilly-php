@@ -41,7 +41,7 @@ class Coinbase extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(CoinbaseCredentials|array $credentials): self
+    public function setCredentials(CoinbaseCredentials|array $credentials): static
     {
         if (!($credentials instanceof CoinbaseCredentials)) {
             $credentials = CoinbaseCredentials::from($credentials);
@@ -57,7 +57,7 @@ class Coinbase extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|CoinbaseSettings|array $settings): self
+    public function setSettings(null|CoinbaseSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof CoinbaseSettings)) {
             $settings = CoinbaseSettings::from($settings);

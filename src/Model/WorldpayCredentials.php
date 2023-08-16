@@ -51,7 +51,7 @@ class WorldpayCredentials implements JsonSerializable
         return $this->fields['merchantCode'];
     }
 
-    public function setMerchantCode(string $merchantCode): self
+    public function setMerchantCode(string $merchantCode): static
     {
         $this->fields['merchantCode'] = $merchantCode;
 
@@ -63,7 +63,7 @@ class WorldpayCredentials implements JsonSerializable
         return $this->fields['merchantPassword'];
     }
 
-    public function setMerchantPassword(string $merchantPassword): self
+    public function setMerchantPassword(string $merchantPassword): static
     {
         $this->fields['merchantPassword'] = $merchantPassword;
 
@@ -75,7 +75,7 @@ class WorldpayCredentials implements JsonSerializable
         return $this->fields['payoutMerchantCode'] ?? null;
     }
 
-    public function setPayoutMerchantCode(null|string $payoutMerchantCode): self
+    public function setPayoutMerchantCode(null|string $payoutMerchantCode): static
     {
         $this->fields['payoutMerchantCode'] = $payoutMerchantCode;
 
@@ -87,7 +87,7 @@ class WorldpayCredentials implements JsonSerializable
         return $this->fields['payoutMerchantPassword'] ?? null;
     }
 
-    public function setPayoutMerchantPassword(null|string $payoutMerchantPassword): self
+    public function setPayoutMerchantPassword(null|string $payoutMerchantPassword): static
     {
         $this->fields['payoutMerchantPassword'] = $payoutMerchantPassword;
 
@@ -99,7 +99,7 @@ class WorldpayCredentials implements JsonSerializable
         return $this->fields['alternativePaymentsUsername'] ?? null;
     }
 
-    public function setAlternativePaymentsUsername(null|string $alternativePaymentsUsername): self
+    public function setAlternativePaymentsUsername(null|string $alternativePaymentsUsername): static
     {
         $this->fields['alternativePaymentsUsername'] = $alternativePaymentsUsername;
 
@@ -111,7 +111,7 @@ class WorldpayCredentials implements JsonSerializable
         return $this->fields['alternativePaymentsPassword'] ?? null;
     }
 
-    public function setAlternativePaymentsPassword(null|string $alternativePaymentsPassword): self
+    public function setAlternativePaymentsPassword(null|string $alternativePaymentsPassword): static
     {
         $this->fields['alternativePaymentsPassword'] = $alternativePaymentsPassword;
 

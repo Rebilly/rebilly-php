@@ -42,7 +42,7 @@ class ParamountEftCredentials implements JsonSerializable
         return $this->fields['merchant_id'];
     }
 
-    public function setMerchantId(string $merchantId): self
+    public function setMerchantId(string $merchantId): static
     {
         $this->fields['merchant_id'] = $merchantId;
 
@@ -54,7 +54,7 @@ class ParamountEftCredentials implements JsonSerializable
         return $this->fields['merchant_pass'];
     }
 
-    public function setMerchantPass(string $merchantPass): self
+    public function setMerchantPass(string $merchantPass): static
     {
         $this->fields['merchant_pass'] = $merchantPass;
 
@@ -66,7 +66,7 @@ class ParamountEftCredentials implements JsonSerializable
         return $this->fields['payee'];
     }
 
-    public function setPayee(string $payee): self
+    public function setPayee(string $payee): static
     {
         $this->fields['payee'] = $payee;
 

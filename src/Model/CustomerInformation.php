@@ -79,14 +79,14 @@ class CustomerInformation implements JsonSerializable
         return $data;
     }
 
-    private function setCurrency(null|string $currency): self
+    private function setCurrency(null|string $currency): static
     {
         $this->fields['currency'] = $currency;
 
         return $this;
     }
 
-    private function setRefundsAmount(null|float|string $refundsAmount): self
+    private function setRefundsAmount(null|float|string $refundsAmount): static
     {
         if (is_string($refundsAmount)) {
             $refundsAmount = (float) $refundsAmount;
@@ -97,7 +97,7 @@ class CustomerInformation implements JsonSerializable
         return $this;
     }
 
-    private function setRevenueAmount(null|float|string $revenueAmount): self
+    private function setRevenueAmount(null|float|string $revenueAmount): static
     {
         if (is_string($revenueAmount)) {
             $revenueAmount = (float) $revenueAmount;
@@ -108,7 +108,7 @@ class CustomerInformation implements JsonSerializable
         return $this;
     }
 
-    private function setDisputesAmount(null|float|string $disputesAmount): self
+    private function setDisputesAmount(null|float|string $disputesAmount): static
     {
         if (is_string($disputesAmount)) {
             $disputesAmount = (float) $disputesAmount;

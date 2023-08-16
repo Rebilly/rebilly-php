@@ -42,7 +42,7 @@ class UPayCardCredentials implements JsonSerializable
         return $this->fields['receiver_account'];
     }
 
-    public function setReceiverAccount(string $receiverAccount): self
+    public function setReceiverAccount(string $receiverAccount): static
     {
         $this->fields['receiver_account'] = $receiverAccount;
 
@@ -54,7 +54,7 @@ class UPayCardCredentials implements JsonSerializable
         return $this->fields['key'];
     }
 
-    public function setKey(string $key): self
+    public function setKey(string $key): static
     {
         $this->fields['key'] = $key;
 
@@ -66,7 +66,7 @@ class UPayCardCredentials implements JsonSerializable
         return $this->fields['secret'];
     }
 
-    public function setSecret(string $secret): self
+    public function setSecret(string $secret): static
     {
         $this->fields['secret'] = $secret;
 

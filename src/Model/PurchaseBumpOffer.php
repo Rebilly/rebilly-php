@@ -48,7 +48,7 @@ class PurchaseBumpOffer implements JsonSerializable
         return $this->fields['offerId'];
     }
 
-    public function setOfferId(string $offerId): self
+    public function setOfferId(string $offerId): static
     {
         $this->fields['offerId'] = $offerId;
 
@@ -60,7 +60,7 @@ class PurchaseBumpOffer implements JsonSerializable
         return $this->fields['offerType'];
     }
 
-    public function setOfferType(string $offerType): self
+    public function setOfferType(string $offerType): static
     {
         $this->fields['offerType'] = $offerType;
 
@@ -72,7 +72,7 @@ class PurchaseBumpOffer implements JsonSerializable
         return $this->fields['bumpAmount'];
     }
 
-    public function setBumpAmount(float $bumpAmount): self
+    public function setBumpAmount(float $bumpAmount): static
     {
         $this->fields['bumpAmount'] = $bumpAmount;
 
@@ -89,7 +89,7 @@ class PurchaseBumpOffer implements JsonSerializable
         return $this->fields['customFields'] ?? null;
     }
 
-    public function setCustomFields(null|array $customFields): self
+    public function setCustomFields(null|array $customFields): static
     {
         $this->fields['customFields'] = $customFields;
 
@@ -118,7 +118,7 @@ class PurchaseBumpOffer implements JsonSerializable
         return $data;
     }
 
-    private function setBumpAmountInUsd(null|float $bumpAmountInUsd): self
+    private function setBumpAmountInUsd(null|float $bumpAmountInUsd): static
     {
         $this->fields['bumpAmountInUsd'] = $bumpAmountInUsd;
 

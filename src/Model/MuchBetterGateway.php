@@ -38,7 +38,7 @@ class MuchBetterGateway extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(MuchBetterGatewayCredentials|array $credentials): self
+    public function setCredentials(MuchBetterGatewayCredentials|array $credentials): static
     {
         if (!($credentials instanceof MuchBetterGatewayCredentials)) {
             $credentials = MuchBetterGatewayCredentials::from($credentials);

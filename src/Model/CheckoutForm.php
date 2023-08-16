@@ -46,7 +46,7 @@ class CheckoutForm extends CommonCheckoutForm
         return $this->fields['name'];
     }
 
-    public function setName(string $name): self
+    public function setName(string $name): static
     {
         $this->fields['name'] = $name;
 
@@ -64,7 +64,7 @@ class CheckoutForm extends CommonCheckoutForm
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    public function setStatus(null|string $status): self
+    public function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
@@ -98,7 +98,7 @@ class CheckoutForm extends CommonCheckoutForm
     /**
      * @param null|array<PreviewLink|SelfLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 

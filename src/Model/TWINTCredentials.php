@@ -48,7 +48,7 @@ class TWINTCredentials implements JsonSerializable
         return $this->fields['storeUuid'];
     }
 
-    public function setStoreUuid(string $storeUuid): self
+    public function setStoreUuid(string $storeUuid): static
     {
         $this->fields['storeUuid'] = $storeUuid;
 
@@ -60,7 +60,7 @@ class TWINTCredentials implements JsonSerializable
         return $this->fields['cashRegisterId'];
     }
 
-    public function setCashRegisterId(string $cashRegisterId): self
+    public function setCashRegisterId(string $cashRegisterId): static
     {
         $this->fields['cashRegisterId'] = $cashRegisterId;
 
@@ -72,7 +72,7 @@ class TWINTCredentials implements JsonSerializable
         return $this->fields['publicKey'];
     }
 
-    public function setPublicKey(string $publicKey): self
+    public function setPublicKey(string $publicKey): static
     {
         $this->fields['publicKey'] = $publicKey;
 
@@ -84,7 +84,7 @@ class TWINTCredentials implements JsonSerializable
         return $this->fields['privateKey'];
     }
 
-    public function setPrivateKey(string $privateKey): self
+    public function setPrivateKey(string $privateKey): static
     {
         $this->fields['privateKey'] = $privateKey;
 
@@ -96,7 +96,7 @@ class TWINTCredentials implements JsonSerializable
         return $this->fields['keyPassphrase'];
     }
 
-    public function setKeyPassphrase(string $keyPassphrase): self
+    public function setKeyPassphrase(string $keyPassphrase): static
     {
         $this->fields['keyPassphrase'] = $keyPassphrase;
 

@@ -59,7 +59,7 @@ abstract class CommonBillingPortal implements JsonSerializable
         return $this->fields['slug'];
     }
 
-    public function setSlug(string $slug): self
+    public function setSlug(string $slug): static
     {
         $this->fields['slug'] = $slug;
 
@@ -71,7 +71,7 @@ abstract class CommonBillingPortal implements JsonSerializable
         return $this->fields['websiteId'];
     }
 
-    public function setWebsiteId(string $websiteId): self
+    public function setWebsiteId(string $websiteId): static
     {
         $this->fields['websiteId'] = $websiteId;
 
@@ -83,7 +83,7 @@ abstract class CommonBillingPortal implements JsonSerializable
         return $this->fields['customDomain'] ?? null;
     }
 
-    public function setCustomDomain(null|string $customDomain): self
+    public function setCustomDomain(null|string $customDomain): static
     {
         $this->fields['customDomain'] = $customDomain;
 
@@ -95,7 +95,7 @@ abstract class CommonBillingPortal implements JsonSerializable
         return $this->fields['features'] ?? null;
     }
 
-    public function setFeatures(null|CommonBillingPortalFeatures|array $features): self
+    public function setFeatures(null|CommonBillingPortalFeatures|array $features): static
     {
         if ($features !== null && !($features instanceof CommonBillingPortalFeatures)) {
             $features = CommonBillingPortalFeatures::from($features);
@@ -111,7 +111,7 @@ abstract class CommonBillingPortal implements JsonSerializable
         return $this->fields['customization'] ?? null;
     }
 
-    public function setCustomization(null|CommonBillingPortalCustomization|array $customization): self
+    public function setCustomization(null|CommonBillingPortalCustomization|array $customization): static
     {
         if ($customization !== null && !($customization instanceof CommonBillingPortalCustomization)) {
             $customization = CommonBillingPortalCustomization::from($customization);
@@ -163,14 +163,14 @@ abstract class CommonBillingPortal implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -181,7 +181,7 @@ abstract class CommonBillingPortal implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);

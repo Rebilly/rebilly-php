@@ -86,7 +86,7 @@ abstract class CommonPlan implements JsonSerializable
         return $this->fields['name'];
     }
 
-    public function setName(string $name): self
+    public function setName(string $name): static
     {
         $this->fields['name'] = $name;
 
@@ -98,7 +98,7 @@ abstract class CommonPlan implements JsonSerializable
         return $this->fields['description'] ?? null;
     }
 
-    public function setDescription(null|string $description): self
+    public function setDescription(null|string $description): static
     {
         $this->fields['description'] = $description;
 
@@ -110,7 +110,7 @@ abstract class CommonPlan implements JsonSerializable
         return $this->fields['richDescription'] ?? null;
     }
 
-    public function setRichDescription(null|string $richDescription): self
+    public function setRichDescription(null|string $richDescription): static
     {
         $this->fields['richDescription'] = $richDescription;
 
@@ -122,7 +122,7 @@ abstract class CommonPlan implements JsonSerializable
         return $this->fields['productId'];
     }
 
-    public function setProductId(string $productId): self
+    public function setProductId(string $productId): static
     {
         $this->fields['productId'] = $productId;
 
@@ -140,7 +140,7 @@ abstract class CommonPlan implements JsonSerializable
     /**
      * @param null|array<string,string> $productOptions
      */
-    public function setProductOptions(null|array $productOptions): self
+    public function setProductOptions(null|array $productOptions): static
     {
         $this->fields['productOptions'] = $productOptions;
 
@@ -152,7 +152,7 @@ abstract class CommonPlan implements JsonSerializable
         return $this->fields['currency'];
     }
 
-    public function setCurrency(string $currency): self
+    public function setCurrency(string $currency): static
     {
         $this->fields['currency'] = $currency;
 
@@ -169,7 +169,7 @@ abstract class CommonPlan implements JsonSerializable
         return $this->fields['pricing'];
     }
 
-    public function setPricing(PlanPriceFormula|array $pricing): self
+    public function setPricing(PlanPriceFormula|array $pricing): static
     {
         if (!($pricing instanceof PlanPriceFormula)) {
             $pricing = PlanPriceFormula::from($pricing);
@@ -185,7 +185,7 @@ abstract class CommonPlan implements JsonSerializable
         return $this->fields['setup'] ?? null;
     }
 
-    public function setSetup(null|CommonPlanSetup|array $setup): self
+    public function setSetup(null|CommonPlanSetup|array $setup): static
     {
         if ($setup !== null && !($setup instanceof CommonPlanSetup)) {
             $setup = CommonPlanSetup::from($setup);
@@ -201,7 +201,7 @@ abstract class CommonPlan implements JsonSerializable
         return $this->fields['customFields'] ?? null;
     }
 
-    public function setCustomFields(null|array $customFields): self
+    public function setCustomFields(null|array $customFields): static
     {
         $this->fields['customFields'] = $customFields;
 
@@ -213,7 +213,7 @@ abstract class CommonPlan implements JsonSerializable
         return $this->fields['isActive'] ?? null;
     }
 
-    public function setIsActive(null|bool $isActive): self
+    public function setIsActive(null|bool $isActive): static
     {
         $this->fields['isActive'] = $isActive;
 
@@ -306,28 +306,28 @@ abstract class CommonPlan implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setCurrencySign(null|string $currencySign): self
+    private function setCurrencySign(null|string $currencySign): static
     {
         $this->fields['currencySign'] = $currencySign;
 
         return $this;
     }
 
-    private function setRevision(null|int $revision): self
+    private function setRevision(null|int $revision): static
     {
         $this->fields['revision'] = $revision;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -338,7 +338,7 @@ abstract class CommonPlan implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -349,7 +349,7 @@ abstract class CommonPlan implements JsonSerializable
         return $this;
     }
 
-    private function setIsTrialOnly(null|bool $isTrialOnly): self
+    private function setIsTrialOnly(null|bool $isTrialOnly): static
     {
         $this->fields['isTrialOnly'] = $isTrialOnly;
 
@@ -359,7 +359,7 @@ abstract class CommonPlan implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

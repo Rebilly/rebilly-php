@@ -38,7 +38,7 @@ class Bambora extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(BamboraCredentials|array $credentials): self
+    public function setCredentials(BamboraCredentials|array $credentials): static
     {
         if (!($credentials instanceof BamboraCredentials)) {
             $credentials = BamboraCredentials::from($credentials);

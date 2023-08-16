@@ -51,7 +51,7 @@ class NuaPayCredentials implements JsonSerializable
         return $this->fields['nuaPayCommonName'];
     }
 
-    public function setNuaPayCommonName(string $nuaPayCommonName): self
+    public function setNuaPayCommonName(string $nuaPayCommonName): static
     {
         $this->fields['nuaPayCommonName'] = $nuaPayCommonName;
 
@@ -63,7 +63,7 @@ class NuaPayCredentials implements JsonSerializable
         return $this->fields['nuaPaySerialNumber'];
     }
 
-    public function setNuaPaySerialNumber(string $nuaPaySerialNumber): self
+    public function setNuaPaySerialNumber(string $nuaPaySerialNumber): static
     {
         $this->fields['nuaPaySerialNumber'] = $nuaPaySerialNumber;
 
@@ -75,7 +75,7 @@ class NuaPayCredentials implements JsonSerializable
         return $this->fields['nuaPayAccountId'];
     }
 
-    public function setNuaPayAccountId(string $nuaPayAccountId): self
+    public function setNuaPayAccountId(string $nuaPayAccountId): static
     {
         $this->fields['nuaPayAccountId'] = $nuaPayAccountId;
 
@@ -87,7 +87,7 @@ class NuaPayCredentials implements JsonSerializable
         return $this->fields['nuaPayOriginatorIban'];
     }
 
-    public function setNuaPayOriginatorIban(string $nuaPayOriginatorIban): self
+    public function setNuaPayOriginatorIban(string $nuaPayOriginatorIban): static
     {
         $this->fields['nuaPayOriginatorIban'] = $nuaPayOriginatorIban;
 
@@ -99,7 +99,7 @@ class NuaPayCredentials implements JsonSerializable
         return $this->fields['nuaPayApiKey'];
     }
 
-    public function setNuaPayApiKey(string $nuaPayApiKey): self
+    public function setNuaPayApiKey(string $nuaPayApiKey): static
     {
         $this->fields['nuaPayApiKey'] = $nuaPayApiKey;
 
@@ -111,7 +111,7 @@ class NuaPayCredentials implements JsonSerializable
         return $this->fields['nuaPayPrivateKey'];
     }
 
-    public function setNuaPayPrivateKey(string $nuaPayPrivateKey): self
+    public function setNuaPayPrivateKey(string $nuaPayPrivateKey): static
     {
         $this->fields['nuaPayPrivateKey'] = $nuaPayPrivateKey;
 

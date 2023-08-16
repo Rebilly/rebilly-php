@@ -42,7 +42,7 @@ class WesternUnionCredentials implements JsonSerializable
         return $this->fields['clientId'];
     }
 
-    public function setClientId(string $clientId): self
+    public function setClientId(string $clientId): static
     {
         $this->fields['clientId'] = $clientId;
 
@@ -54,7 +54,7 @@ class WesternUnionCredentials implements JsonSerializable
         return $this->fields['certificateCommonName'];
     }
 
-    public function setCertificateCommonName(string $certificateCommonName): self
+    public function setCertificateCommonName(string $certificateCommonName): static
     {
         $this->fields['certificateCommonName'] = $certificateCommonName;
 
@@ -66,7 +66,7 @@ class WesternUnionCredentials implements JsonSerializable
         return $this->fields['certificateSerialNumber'];
     }
 
-    public function setCertificateSerialNumber(string $certificateSerialNumber): self
+    public function setCertificateSerialNumber(string $certificateSerialNumber): static
     {
         $this->fields['certificateSerialNumber'] = $certificateSerialNumber;
 

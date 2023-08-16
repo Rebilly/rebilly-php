@@ -200,7 +200,7 @@ abstract class CommonTransaction implements JsonSerializable
         return $this->fields['customerId'] ?? null;
     }
 
-    public function setCustomerId(null|string $customerId): self
+    public function setCustomerId(null|string $customerId): static
     {
         $this->fields['customerId'] = $customerId;
 
@@ -313,7 +313,7 @@ abstract class CommonTransaction implements JsonSerializable
         return $this->fields['billingAddress'] ?? null;
     }
 
-    public function setBillingAddress(null|ContactObject|array $billingAddress): self
+    public function setBillingAddress(null|ContactObject|array $billingAddress): static
     {
         if ($billingAddress !== null && !($billingAddress instanceof ContactObject)) {
             $billingAddress = ContactObject::from($billingAddress);
@@ -334,7 +334,7 @@ abstract class CommonTransaction implements JsonSerializable
         return $this->fields['3ds'] ?? null;
     }
 
-    public function set3ds(null|ThreeDSecureResult|array $_3ds): self
+    public function set3ds(null|ThreeDSecureResult|array $_3ds): static
     {
         if ($_3ds !== null && !($_3ds instanceof ThreeDSecureResult)) {
             $_3ds = ThreeDSecureResult::from($_3ds);
@@ -350,7 +350,7 @@ abstract class CommonTransaction implements JsonSerializable
         return $this->fields['redirectUrl'] ?? null;
     }
 
-    public function setRedirectUrl(null|string $redirectUrl): self
+    public function setRedirectUrl(null|string $redirectUrl): static
     {
         $this->fields['redirectUrl'] = $redirectUrl;
 
@@ -377,7 +377,7 @@ abstract class CommonTransaction implements JsonSerializable
         return $this->fields['description'] ?? null;
     }
 
-    public function setDescription(null|string $description): self
+    public function setDescription(null|string $description): static
     {
         $this->fields['description'] = $description;
 
@@ -389,7 +389,7 @@ abstract class CommonTransaction implements JsonSerializable
         return $this->fields['requestId'] ?? null;
     }
 
-    public function setRequestId(null|string $requestId): self
+    public function setRequestId(null|string $requestId): static
     {
         $this->fields['requestId'] = $requestId;
 
@@ -411,7 +411,7 @@ abstract class CommonTransaction implements JsonSerializable
         return $this->fields['customFields'] ?? null;
     }
 
-    public function setCustomFields(null|array $customFields): self
+    public function setCustomFields(null|array $customFields): static
     {
         $this->fields['customFields'] = $customFields;
 
@@ -423,7 +423,7 @@ abstract class CommonTransaction implements JsonSerializable
         return $this->fields['processedTime'] ?? null;
     }
 
-    public function setProcessedTime(null|DateTimeImmutable|string $processedTime): self
+    public function setProcessedTime(null|DateTimeImmutable|string $processedTime): static
     {
         if ($processedTime !== null && !($processedTime instanceof DateTimeImmutable)) {
             $processedTime = new DateTimeImmutable($processedTime);
@@ -553,14 +553,14 @@ abstract class CommonTransaction implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setWebsiteId(null|string $websiteId): self
+    private function setWebsiteId(null|string $websiteId): static
     {
         $this->fields['websiteId'] = $websiteId;
 
@@ -570,7 +570,7 @@ abstract class CommonTransaction implements JsonSerializable
     /**
      * @psalm-param self::TYPE_*|null $type
      */
-    private function setType(null|string $type): self
+    private function setType(null|string $type): static
     {
         $this->fields['type'] = $type;
 
@@ -580,7 +580,7 @@ abstract class CommonTransaction implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    private function setStatus(null|string $status): self
+    private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
@@ -590,14 +590,14 @@ abstract class CommonTransaction implements JsonSerializable
     /**
      * @psalm-param self::RESULT_*|null $result
      */
-    private function setResult(null|string $result): self
+    private function setResult(null|string $result): static
     {
         $this->fields['result'] = $result;
 
         return $this;
     }
 
-    private function setAmount(null|float|string $amount): self
+    private function setAmount(null|float|string $amount): static
     {
         if (is_string($amount)) {
             $amount = (float) $amount;
@@ -608,14 +608,14 @@ abstract class CommonTransaction implements JsonSerializable
         return $this;
     }
 
-    private function setCurrency(null|string $currency): self
+    private function setCurrency(null|string $currency): static
     {
         $this->fields['currency'] = $currency;
 
         return $this;
     }
 
-    private function setPurchaseAmount(null|float|string $purchaseAmount): self
+    private function setPurchaseAmount(null|float|string $purchaseAmount): static
     {
         if (is_string($purchaseAmount)) {
             $purchaseAmount = (float) $purchaseAmount;
@@ -626,14 +626,14 @@ abstract class CommonTransaction implements JsonSerializable
         return $this;
     }
 
-    private function setPurchaseCurrency(null|string $purchaseCurrency): self
+    private function setPurchaseCurrency(null|string $purchaseCurrency): static
     {
         $this->fields['purchaseCurrency'] = $purchaseCurrency;
 
         return $this;
     }
 
-    private function setRequestAmount(null|float|string $requestAmount): self
+    private function setRequestAmount(null|float|string $requestAmount): static
     {
         if (is_string($requestAmount)) {
             $requestAmount = (float) $requestAmount;
@@ -644,14 +644,14 @@ abstract class CommonTransaction implements JsonSerializable
         return $this;
     }
 
-    private function setRequestCurrency(null|string $requestCurrency): self
+    private function setRequestCurrency(null|string $requestCurrency): static
     {
         $this->fields['requestCurrency'] = $requestCurrency;
 
         return $this;
     }
 
-    private function setParentTransactionId(null|string $parentTransactionId): self
+    private function setParentTransactionId(null|string $parentTransactionId): static
     {
         $this->fields['parentTransactionId'] = $parentTransactionId;
 
@@ -661,7 +661,7 @@ abstract class CommonTransaction implements JsonSerializable
     /**
      * @param null|string[] $childTransactions
      */
-    private function setChildTransactions(null|array $childTransactions): self
+    private function setChildTransactions(null|array $childTransactions): static
     {
         $childTransactions = $childTransactions !== null ? array_map(fn ($value) => $value ?? null, $childTransactions) : null;
 
@@ -673,7 +673,7 @@ abstract class CommonTransaction implements JsonSerializable
     /**
      * @param null|string[] $invoiceIds
      */
-    private function setInvoiceIds(null|array $invoiceIds): self
+    private function setInvoiceIds(null|array $invoiceIds): static
     {
         $invoiceIds = $invoiceIds !== null ? array_map(fn ($value) => $value ?? null, $invoiceIds) : null;
 
@@ -685,7 +685,7 @@ abstract class CommonTransaction implements JsonSerializable
     /**
      * @param null|string[] $subscriptionIds
      */
-    private function setSubscriptionIds(null|array $subscriptionIds): self
+    private function setSubscriptionIds(null|array $subscriptionIds): static
     {
         $subscriptionIds = $subscriptionIds !== null ? array_map(fn ($value) => $value ?? null, $subscriptionIds) : null;
 
@@ -697,7 +697,7 @@ abstract class CommonTransaction implements JsonSerializable
     /**
      * @param null|string[] $planIds
      */
-    private function setPlanIds(null|array $planIds): self
+    private function setPlanIds(null|array $planIds): static
     {
         $planIds = $planIds !== null ? array_map(fn ($value) => $value ?? null, $planIds) : null;
 
@@ -706,56 +706,56 @@ abstract class CommonTransaction implements JsonSerializable
         return $this;
     }
 
-    private function setIsRebill(null|bool $isRebill): self
+    private function setIsRebill(null|bool $isRebill): static
     {
         $this->fields['isRebill'] = $isRebill;
 
         return $this;
     }
 
-    private function setRebillNumber(null|int $rebillNumber): self
+    private function setRebillNumber(null|int $rebillNumber): static
     {
         $this->fields['rebillNumber'] = $rebillNumber;
 
         return $this;
     }
 
-    private function setHas3ds(null|bool $has3ds): self
+    private function setHas3ds(null|bool $has3ds): static
     {
         $this->fields['has3ds'] = $has3ds;
 
         return $this;
     }
 
-    private function setRetryNumber(null|int $retryNumber): self
+    private function setRetryNumber(null|int $retryNumber): static
     {
         $this->fields['retryNumber'] = $retryNumber;
 
         return $this;
     }
 
-    private function setIsRetry(null|bool $isRetry): self
+    private function setIsRetry(null|bool $isRetry): static
     {
         $this->fields['isRetry'] = $isRetry;
 
         return $this;
     }
 
-    private function setBillingDescriptor(null|string $billingDescriptor): self
+    private function setBillingDescriptor(null|string $billingDescriptor): static
     {
         $this->fields['billingDescriptor'] = $billingDescriptor;
 
         return $this;
     }
 
-    private function setHasAmountAdjustment(null|bool $hasAmountAdjustment): self
+    private function setHasAmountAdjustment(null|bool $hasAmountAdjustment): static
     {
         $this->fields['hasAmountAdjustment'] = $hasAmountAdjustment;
 
         return $this;
     }
 
-    private function setGatewayName(null|GatewayName|string $gatewayName): self
+    private function setGatewayName(null|GatewayName|string $gatewayName): static
     {
         if ($gatewayName !== null && !($gatewayName instanceof GatewayName)) {
             $gatewayName = GatewayName::from($gatewayName);
@@ -766,7 +766,7 @@ abstract class CommonTransaction implements JsonSerializable
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -777,7 +777,7 @@ abstract class CommonTransaction implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);

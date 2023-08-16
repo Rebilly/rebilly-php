@@ -67,7 +67,7 @@ class TimelineExtraDataLinks implements JsonSerializable
     /**
      * @psalm-param self::RESOURCE_TYPE_*|null $resourceType
      */
-    public function setResourceType(null|string $resourceType): self
+    public function setResourceType(null|string $resourceType): static
     {
         $this->fields['resourceType'] = $resourceType;
 
@@ -79,7 +79,7 @@ class TimelineExtraDataLinks implements JsonSerializable
         return $this->fields['resourceId'] ?? null;
     }
 
-    public function setResourceId(null|string $resourceId): self
+    public function setResourceId(null|string $resourceId): static
     {
         $this->fields['resourceId'] = $resourceId;
 
@@ -91,7 +91,7 @@ class TimelineExtraDataLinks implements JsonSerializable
         return $this->fields['placeholder'] ?? null;
     }
 
-    public function setPlaceholder(null|string $placeholder): self
+    public function setPlaceholder(null|string $placeholder): static
     {
         $this->fields['placeholder'] = $placeholder;
 
@@ -103,7 +103,7 @@ class TimelineExtraDataLinks implements JsonSerializable
         return $this->fields['externalUrl'] ?? null;
     }
 
-    public function setExternalUrl(null|string $externalUrl): self
+    public function setExternalUrl(null|string $externalUrl): static
     {
         $this->fields['externalUrl'] = $externalUrl;
 

@@ -41,7 +41,7 @@ class PaymenTechnologies extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(PaymenTechnologiesCredentials|array $credentials): self
+    public function setCredentials(PaymenTechnologiesCredentials|array $credentials): static
     {
         if (!($credentials instanceof PaymenTechnologiesCredentials)) {
             $credentials = PaymenTechnologiesCredentials::from($credentials);
@@ -57,7 +57,7 @@ class PaymenTechnologies extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|AsiaPaymentGatewaySettings|array $settings): self
+    public function setSettings(null|AsiaPaymentGatewaySettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof AsiaPaymentGatewaySettings)) {
             $settings = AsiaPaymentGatewaySettings::from($settings);

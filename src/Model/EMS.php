@@ -44,7 +44,7 @@ class EMS extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|EMSSettings|array $settings): self
+    public function setSettings(null|EMSSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof EMSSettings)) {
             $settings = EMSSettings::from($settings);
@@ -60,7 +60,7 @@ class EMS extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(EMSCredentials|array $credentials): self
+    public function setCredentials(EMSCredentials|array $credentials): static
     {
         if (!($credentials instanceof EMSCredentials)) {
             $credentials = EMSCredentials::from($credentials);
@@ -76,7 +76,7 @@ class EMS extends GatewayAccount
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|EMS3dsServers|array $threeDSecureServer): self
+    public function setThreeDSecureServer(null|EMS3dsServers|array $threeDSecureServer): static
     {
         if ($threeDSecureServer !== null && !($threeDSecureServer instanceof EMS3dsServers)) {
             $threeDSecureServer = EMS3dsServers::from($threeDSecureServer);

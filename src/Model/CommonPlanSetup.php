@@ -36,7 +36,7 @@ class CommonPlanSetup implements JsonSerializable
         return $this->fields['price'];
     }
 
-    public function setPrice(float|string $price): self
+    public function setPrice(float|string $price): static
     {
         if (is_string($price)) {
             $price = (float) $price;

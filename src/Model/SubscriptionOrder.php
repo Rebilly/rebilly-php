@@ -260,7 +260,7 @@ class SubscriptionOrder extends Subscription
     /**
      * @psalm-param self::ORDER_TYPE_* $orderType
      */
-    public function setOrderType(string $orderType): self
+    public function setOrderType(string $orderType): static
     {
         $this->fields['orderType'] = $orderType;
 
@@ -280,7 +280,7 @@ class SubscriptionOrder extends Subscription
         return $this->fields['websiteId'];
     }
 
-    public function setWebsiteId(string $websiteId): self
+    public function setWebsiteId(string $websiteId): static
     {
         $this->fields['websiteId'] = $websiteId;
 
@@ -313,7 +313,7 @@ class SubscriptionOrder extends Subscription
     /**
      * @param OrderItem[] $items
      */
-    public function setItems(array $items): self
+    public function setItems(array $items): static
     {
         $items = array_map(fn ($value) => $value !== null ? ($value instanceof OrderItem ? $value : OrderItem::from($value)) : null, $items);
 
@@ -327,7 +327,7 @@ class SubscriptionOrder extends Subscription
         return $this->fields['deliveryAddress'] ?? null;
     }
 
-    public function setDeliveryAddress(null|ContactObject|array $deliveryAddress): self
+    public function setDeliveryAddress(null|ContactObject|array $deliveryAddress): static
     {
         if ($deliveryAddress !== null && !($deliveryAddress instanceof ContactObject)) {
             $deliveryAddress = ContactObject::from($deliveryAddress);
@@ -343,7 +343,7 @@ class SubscriptionOrder extends Subscription
         return $this->fields['billingAddress'] ?? null;
     }
 
-    public function setBillingAddress(null|ContactObject|array $billingAddress): self
+    public function setBillingAddress(null|ContactObject|array $billingAddress): static
     {
         if ($billingAddress !== null && !($billingAddress instanceof ContactObject)) {
             $billingAddress = ContactObject::from($billingAddress);
@@ -359,7 +359,7 @@ class SubscriptionOrder extends Subscription
         return $this->fields['activationTime'] ?? null;
     }
 
-    public function setActivationTime(null|DateTimeImmutable|string $activationTime): self
+    public function setActivationTime(null|DateTimeImmutable|string $activationTime): static
     {
         if ($activationTime !== null && !($activationTime instanceof DateTimeImmutable)) {
             $activationTime = new DateTimeImmutable($activationTime);
@@ -375,7 +375,7 @@ class SubscriptionOrder extends Subscription
         return $this->fields['voidTime'] ?? null;
     }
 
-    public function setVoidTime(null|DateTimeImmutable|string $voidTime): self
+    public function setVoidTime(null|DateTimeImmutable|string $voidTime): static
     {
         if ($voidTime !== null && !($voidTime instanceof DateTimeImmutable)) {
             $voidTime = new DateTimeImmutable($voidTime);
@@ -397,7 +397,7 @@ class SubscriptionOrder extends Subscription
     /**
      * @param null|string[] $couponIds
      */
-    public function setCouponIds(null|array $couponIds): self
+    public function setCouponIds(null|array $couponIds): static
     {
         $couponIds = $couponIds !== null ? array_map(fn ($value) => $value ?? null, $couponIds) : null;
 
@@ -411,7 +411,7 @@ class SubscriptionOrder extends Subscription
         return $this->fields['poNumber'] ?? null;
     }
 
-    public function setPoNumber(null|string $poNumber): self
+    public function setPoNumber(null|string $poNumber): static
     {
         $this->fields['poNumber'] = $poNumber;
 
@@ -423,7 +423,7 @@ class SubscriptionOrder extends Subscription
         return $this->fields['shipping'] ?? null;
     }
 
-    public function setShipping(null|Shipping|array $shipping): self
+    public function setShipping(null|Shipping|array $shipping): static
     {
         if ($shipping !== null && !($shipping instanceof Shipping)) {
             $shipping = Shipping::from($shipping);
@@ -439,7 +439,7 @@ class SubscriptionOrder extends Subscription
         return $this->fields['notes'] ?? null;
     }
 
-    public function setNotes(null|string $notes): self
+    public function setNotes(null|string $notes): static
     {
         $this->fields['notes'] = $notes;
 
@@ -464,7 +464,7 @@ class SubscriptionOrder extends Subscription
         return $this->fields['trial'] ?? null;
     }
 
-    public function setTrial(null|CommonSubscriptionOrderTrial|array $trial): self
+    public function setTrial(null|CommonSubscriptionOrderTrial|array $trial): static
     {
         if ($trial !== null && !($trial instanceof CommonSubscriptionOrderTrial)) {
             $trial = CommonSubscriptionOrderTrial::from($trial);
@@ -480,7 +480,7 @@ class SubscriptionOrder extends Subscription
         return $this->fields['isTrialOnly'] ?? null;
     }
 
-    public function setIsTrialOnly(null|bool $isTrialOnly): self
+    public function setIsTrialOnly(null|bool $isTrialOnly): static
     {
         $this->fields['isTrialOnly'] = $isTrialOnly;
 
@@ -492,7 +492,7 @@ class SubscriptionOrder extends Subscription
         return $this->fields['invoiceTimeShift'] ?? null;
     }
 
-    public function setInvoiceTimeShift(null|InvoiceTimeShift|array $invoiceTimeShift): self
+    public function setInvoiceTimeShift(null|InvoiceTimeShift|array $invoiceTimeShift): static
     {
         if ($invoiceTimeShift !== null && !($invoiceTimeShift instanceof InvoiceTimeShift)) {
             $invoiceTimeShift = InvoiceTimeShift::from($invoiceTimeShift);
@@ -508,7 +508,7 @@ class SubscriptionOrder extends Subscription
         return $this->fields['recurringInterval'] ?? null;
     }
 
-    public function setRecurringInterval(null|CommonSubscriptionOrderRecurringInterval|array $recurringInterval): self
+    public function setRecurringInterval(null|CommonSubscriptionOrderRecurringInterval|array $recurringInterval): static
     {
         if ($recurringInterval !== null && !($recurringInterval instanceof CommonSubscriptionOrderRecurringInterval)) {
             $recurringInterval = CommonSubscriptionOrderRecurringInterval::from($recurringInterval);
@@ -524,7 +524,7 @@ class SubscriptionOrder extends Subscription
         return $this->fields['autopay'] ?? null;
     }
 
-    public function setAutopay(null|bool $autopay): self
+    public function setAutopay(null|bool $autopay): static
     {
         $this->fields['autopay'] = $autopay;
 
@@ -536,7 +536,7 @@ class SubscriptionOrder extends Subscription
         return $this->fields['startTime'] ?? null;
     }
 
-    public function setStartTime(null|DateTimeImmutable|string $startTime): self
+    public function setStartTime(null|DateTimeImmutable|string $startTime): static
     {
         if ($startTime !== null && !($startTime instanceof DateTimeImmutable)) {
             $startTime = new DateTimeImmutable($startTime);
@@ -557,7 +557,7 @@ class SubscriptionOrder extends Subscription
         return $this->fields['renewalTime'] ?? null;
     }
 
-    public function setRenewalTime(null|DateTimeImmutable|string $renewalTime): self
+    public function setRenewalTime(null|DateTimeImmutable|string $renewalTime): static
     {
         if ($renewalTime !== null && !($renewalTime instanceof DateTimeImmutable)) {
             $renewalTime = new DateTimeImmutable($renewalTime);
@@ -586,7 +586,7 @@ class SubscriptionOrder extends Subscription
         return $this->fields['lineItemSubtotal'] ?? null;
     }
 
-    public function setLineItemSubtotal(null|CommonSubscriptionOrderLineItemSubtotal|array $lineItemSubtotal): self
+    public function setLineItemSubtotal(null|CommonSubscriptionOrderLineItemSubtotal|array $lineItemSubtotal): static
     {
         if ($lineItemSubtotal !== null && !($lineItemSubtotal instanceof CommonSubscriptionOrderLineItemSubtotal)) {
             $lineItemSubtotal = CommonSubscriptionOrderLineItemSubtotal::from($lineItemSubtotal);
@@ -602,7 +602,7 @@ class SubscriptionOrder extends Subscription
         return $this->fields['paymentInstrumentId'] ?? null;
     }
 
-    public function setPaymentInstrumentId(null|string $paymentInstrumentId): self
+    public function setPaymentInstrumentId(null|string $paymentInstrumentId): static
     {
         $this->fields['paymentInstrumentId'] = $paymentInstrumentId;
 
@@ -614,7 +614,7 @@ class SubscriptionOrder extends Subscription
         return $this->fields['customerId'];
     }
 
-    public function setCustomerId(string $customerId): self
+    public function setCustomerId(string $customerId): static
     {
         $this->fields['customerId'] = $customerId;
 
@@ -651,7 +651,7 @@ class SubscriptionOrder extends Subscription
         return $this->fields['canceledTime'] ?? null;
     }
 
-    public function setCanceledTime(null|DateTimeImmutable|string $canceledTime): self
+    public function setCanceledTime(null|DateTimeImmutable|string $canceledTime): static
     {
         if ($canceledTime !== null && !($canceledTime instanceof DateTimeImmutable)) {
             $canceledTime = new DateTimeImmutable($canceledTime);
@@ -693,7 +693,7 @@ class SubscriptionOrder extends Subscription
         return $this->fields['riskMetadata'] ?? null;
     }
 
-    public function setRiskMetadata(null|RiskMetadata|array $riskMetadata): self
+    public function setRiskMetadata(null|RiskMetadata|array $riskMetadata): static
     {
         if ($riskMetadata !== null && !($riskMetadata instanceof RiskMetadata)) {
             $riskMetadata = RiskMetadata::from($riskMetadata);
@@ -709,7 +709,7 @@ class SubscriptionOrder extends Subscription
         return $this->fields['customFields'] ?? null;
     }
 
-    public function setCustomFields(null|array $customFields): self
+    public function setCustomFields(null|array $customFields): static
     {
         $this->fields['customFields'] = $customFields;
 
@@ -890,7 +890,7 @@ class SubscriptionOrder extends Subscription
         return parent::jsonSerialize() + $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -900,28 +900,28 @@ class SubscriptionOrder extends Subscription
     /**
      * @psalm-param self::BILLING_STATUS_*|null $billingStatus
      */
-    private function setBillingStatus(null|string $billingStatus): self
+    private function setBillingStatus(null|string $billingStatus): static
     {
         $this->fields['billingStatus'] = $billingStatus;
 
         return $this;
     }
 
-    private function setCurrency(null|string $currency): self
+    private function setCurrency(null|string $currency): static
     {
         $this->fields['currency'] = $currency;
 
         return $this;
     }
 
-    private function setInitialInvoiceId(null|string $initialInvoiceId): self
+    private function setInitialInvoiceId(null|string $initialInvoiceId): static
     {
         $this->fields['initialInvoiceId'] = $initialInvoiceId;
 
         return $this;
     }
 
-    private function setRecentInvoiceId(null|string $recentInvoiceId): self
+    private function setRecentInvoiceId(null|string $recentInvoiceId): static
     {
         $this->fields['recentInvoiceId'] = $recentInvoiceId;
 
@@ -931,21 +931,21 @@ class SubscriptionOrder extends Subscription
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    private function setStatus(null|string $status): self
+    private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
         return $this;
     }
 
-    private function setInTrial(null|bool $inTrial): self
+    private function setInTrial(null|bool $inTrial): static
     {
         $this->fields['inTrial'] = $inTrial;
 
         return $this;
     }
 
-    private function setEndTime(null|DateTimeImmutable|string $endTime): self
+    private function setEndTime(null|DateTimeImmutable|string $endTime): static
     {
         if ($endTime !== null && !($endTime instanceof DateTimeImmutable)) {
             $endTime = new DateTimeImmutable($endTime);
@@ -956,7 +956,7 @@ class SubscriptionOrder extends Subscription
         return $this;
     }
 
-    private function setRebillNumber(null|int $rebillNumber): self
+    private function setRebillNumber(null|int $rebillNumber): static
     {
         $this->fields['rebillNumber'] = $rebillNumber;
 
@@ -966,7 +966,7 @@ class SubscriptionOrder extends Subscription
     /**
      * @param null|UpcomingInvoiceItemCollection[] $lineItems
      */
-    private function setLineItems(null|array $lineItems): self
+    private function setLineItems(null|array $lineItems): static
     {
         $lineItems = $lineItems !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof UpcomingInvoiceItemCollection ? $value : UpcomingInvoiceItemCollection::from($value)) : null, $lineItems) : null;
 
@@ -975,7 +975,7 @@ class SubscriptionOrder extends Subscription
         return $this;
     }
 
-    private function setRenewalReminderTime(null|DateTimeImmutable|string $renewalReminderTime): self
+    private function setRenewalReminderTime(null|DateTimeImmutable|string $renewalReminderTime): static
     {
         if ($renewalReminderTime !== null && !($renewalReminderTime instanceof DateTimeImmutable)) {
             $renewalReminderTime = new DateTimeImmutable($renewalReminderTime);
@@ -986,14 +986,14 @@ class SubscriptionOrder extends Subscription
         return $this;
     }
 
-    private function setRenewalReminderNumber(null|int $renewalReminderNumber): self
+    private function setRenewalReminderNumber(null|int $renewalReminderNumber): static
     {
         $this->fields['renewalReminderNumber'] = $renewalReminderNumber;
 
         return $this;
     }
 
-    private function setTrialReminderTime(null|DateTimeImmutable|string $trialReminderTime): self
+    private function setTrialReminderTime(null|DateTimeImmutable|string $trialReminderTime): static
     {
         if ($trialReminderTime !== null && !($trialReminderTime instanceof DateTimeImmutable)) {
             $trialReminderTime = new DateTimeImmutable($trialReminderTime);
@@ -1004,14 +1004,14 @@ class SubscriptionOrder extends Subscription
         return $this;
     }
 
-    private function setTrialReminderNumber(null|int $trialReminderNumber): self
+    private function setTrialReminderNumber(null|int $trialReminderNumber): static
     {
         $this->fields['trialReminderNumber'] = $trialReminderNumber;
 
         return $this;
     }
 
-    private function setOrganizationId(null|string $organizationId): self
+    private function setOrganizationId(null|string $organizationId): static
     {
         $this->fields['organizationId'] = $organizationId;
 
@@ -1021,7 +1021,7 @@ class SubscriptionOrder extends Subscription
     /**
      * @psalm-param self::CANCELED_BY_*|null $canceledBy
      */
-    private function setCanceledBy(null|string $canceledBy): self
+    private function setCanceledBy(null|string $canceledBy): static
     {
         $this->fields['canceledBy'] = $canceledBy;
 
@@ -1031,28 +1031,28 @@ class SubscriptionOrder extends Subscription
     /**
      * @psalm-param self::CANCEL_CATEGORY_*|null $cancelCategory
      */
-    private function setCancelCategory(null|string $cancelCategory): self
+    private function setCancelCategory(null|string $cancelCategory): static
     {
         $this->fields['cancelCategory'] = $cancelCategory;
 
         return $this;
     }
 
-    private function setCancelDescription(null|string $cancelDescription): self
+    private function setCancelDescription(null|string $cancelDescription): static
     {
         $this->fields['cancelDescription'] = $cancelDescription;
 
         return $this;
     }
 
-    private function setRevision(null|int $revision): self
+    private function setRevision(null|int $revision): static
     {
         $this->fields['revision'] = $revision;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -1063,7 +1063,7 @@ class SubscriptionOrder extends Subscription
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -1077,7 +1077,7 @@ class SubscriptionOrder extends Subscription
     /**
      * @param null|array<ApprovalUrlLink|CustomerLink|InitialInvoiceLink|RecentInvoiceLink|SelfLink|WebsiteLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 
@@ -1089,7 +1089,7 @@ class SubscriptionOrder extends Subscription
     /**
      * @param null|array{recentInvoice:Invoice,initialInvoice:Invoice,customer:Customer,website:Website,leadSource:LeadSource,shippingRate:ShippingRate,paymentInstrument:PaymentInstrument,upcomingInvoice:Invoice} $embedded
      */
-    private function setEmbedded(null|array $embedded): self
+    private function setEmbedded(null|array $embedded): static
     {
         if ($embedded !== null) {
             $embedded['recentInvoice'] = isset($embedded['recentInvoice']) ? ($embedded['recentInvoice'] instanceof Invoice ? $embedded['recentInvoice'] : Invoice::from($embedded['recentInvoice'])) : null;

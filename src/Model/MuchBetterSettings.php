@@ -39,7 +39,7 @@ class MuchBetterSettings implements JsonSerializable
         return $this->fields['brandName'] ?? null;
     }
 
-    public function setBrandName(null|string $brandName): self
+    public function setBrandName(null|string $brandName): static
     {
         $this->fields['brandName'] = $brandName;
 
@@ -51,7 +51,7 @@ class MuchBetterSettings implements JsonSerializable
         return $this->fields['hasPhoneNumberRequest'] ?? null;
     }
 
-    public function setHasPhoneNumberRequest(null|bool $hasPhoneNumberRequest): self
+    public function setHasPhoneNumberRequest(null|bool $hasPhoneNumberRequest): static
     {
         $this->fields['hasPhoneNumberRequest'] = $hasPhoneNumberRequest;
 

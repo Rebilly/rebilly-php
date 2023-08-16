@@ -63,7 +63,7 @@ class Signup implements JsonSerializable
         return $this->fields['email'];
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(string $email): static
     {
         $this->fields['email'] = $email;
 
@@ -75,7 +75,7 @@ class Signup implements JsonSerializable
         return $this->fields['company'];
     }
 
-    public function setCompany(string $company): self
+    public function setCompany(string $company): static
     {
         $this->fields['company'] = $company;
 
@@ -87,7 +87,7 @@ class Signup implements JsonSerializable
         return $this->fields['firstName'];
     }
 
-    public function setFirstName(string $firstName): self
+    public function setFirstName(string $firstName): static
     {
         $this->fields['firstName'] = $firstName;
 
@@ -99,7 +99,7 @@ class Signup implements JsonSerializable
         return $this->fields['lastName'];
     }
 
-    public function setLastName(string $lastName): self
+    public function setLastName(string $lastName): static
     {
         $this->fields['lastName'] = $lastName;
 
@@ -111,7 +111,7 @@ class Signup implements JsonSerializable
         return $this->fields['businessPhone'];
     }
 
-    public function setBusinessPhone(string $businessPhone): self
+    public function setBusinessPhone(string $businessPhone): static
     {
         $this->fields['businessPhone'] = $businessPhone;
 
@@ -123,7 +123,7 @@ class Signup implements JsonSerializable
         return $this->fields['password'];
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password): static
     {
         $this->fields['password'] = $password;
 
@@ -135,7 +135,7 @@ class Signup implements JsonSerializable
         return $this->fields['website'];
     }
 
-    public function setWebsite(string $website): self
+    public function setWebsite(string $website): static
     {
         $this->fields['website'] = $website;
 
@@ -147,7 +147,7 @@ class Signup implements JsonSerializable
         return $this->fields['country'] ?? null;
     }
 
-    public function setCountry(null|string $country): self
+    public function setCountry(null|string $country): static
     {
         $this->fields['country'] = $country;
 
@@ -159,7 +159,7 @@ class Signup implements JsonSerializable
         return $this->fields['reportingCurrency'] ?? null;
     }
 
-    public function setReportingCurrency(null|string $reportingCurrency): self
+    public function setReportingCurrency(null|string $reportingCurrency): static
     {
         $this->fields['reportingCurrency'] = $reportingCurrency;
 
@@ -171,7 +171,7 @@ class Signup implements JsonSerializable
         return $this->fields['questionnaire'] ?? null;
     }
 
-    public function setQuestionnaire(null|OrganizationQuestionnaire|array $questionnaire): self
+    public function setQuestionnaire(null|OrganizationQuestionnaire|array $questionnaire): static
     {
         if ($questionnaire !== null && !($questionnaire instanceof OrganizationQuestionnaire)) {
             $questionnaire = OrganizationQuestionnaire::from($questionnaire);

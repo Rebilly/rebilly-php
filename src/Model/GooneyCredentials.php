@@ -45,7 +45,7 @@ class GooneyCredentials implements JsonSerializable
         return $this->fields['apiUser'] ?? null;
     }
 
-    public function setApiUser(null|string $apiUser): self
+    public function setApiUser(null|string $apiUser): static
     {
         $this->fields['apiUser'] = $apiUser;
 
@@ -57,7 +57,7 @@ class GooneyCredentials implements JsonSerializable
         return $this->fields['apiPassword'] ?? null;
     }
 
-    public function setApiPassword(null|string $apiPassword): self
+    public function setApiPassword(null|string $apiPassword): static
     {
         $this->fields['apiPassword'] = $apiPassword;
 
@@ -69,7 +69,7 @@ class GooneyCredentials implements JsonSerializable
         return $this->fields['apiKey'];
     }
 
-    public function setApiKey(string $apiKey): self
+    public function setApiKey(string $apiKey): static
     {
         $this->fields['apiKey'] = $apiKey;
 
@@ -81,7 +81,7 @@ class GooneyCredentials implements JsonSerializable
         return $this->fields['apiSecret'];
     }
 
-    public function setApiSecret(string $apiSecret): self
+    public function setApiSecret(string $apiSecret): static
     {
         $this->fields['apiSecret'] = $apiSecret;
 

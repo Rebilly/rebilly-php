@@ -54,7 +54,7 @@ class TimelineExtraData implements JsonSerializable
     /**
      * @param null|TimelineAction[] $actions
      */
-    public function setActions(null|array $actions): self
+    public function setActions(null|array $actions): static
     {
         $actions = $actions !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof TimelineAction ? $value : TimelineAction::from($value)) : null, $actions) : null;
 
@@ -74,7 +74,7 @@ class TimelineExtraData implements JsonSerializable
     /**
      * @param null|TimelineTable[] $tables
      */
-    public function setTables(null|array $tables): self
+    public function setTables(null|array $tables): static
     {
         $tables = $tables !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof TimelineTable ? $value : TimelineTable::from($value)) : null, $tables) : null;
 
@@ -88,7 +88,7 @@ class TimelineExtraData implements JsonSerializable
         return $this->fields['author'] ?? null;
     }
 
-    public function setAuthor(null|TimelineExtraDataAuthor|array $author): self
+    public function setAuthor(null|TimelineExtraDataAuthor|array $author): static
     {
         if ($author !== null && !($author instanceof TimelineExtraDataAuthor)) {
             $author = TimelineExtraDataAuthor::from($author);
@@ -110,7 +110,7 @@ class TimelineExtraData implements JsonSerializable
     /**
      * @param null|array<string,string> $mentions
      */
-    public function setMentions(null|array $mentions): self
+    public function setMentions(null|array $mentions): static
     {
         $this->fields['mentions'] = $mentions;
 
@@ -128,7 +128,7 @@ class TimelineExtraData implements JsonSerializable
     /**
      * @param null|TimelineExtraDataLinks[] $links
      */
-    public function setLinks(null|array $links): self
+    public function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof TimelineExtraDataLinks ? $value : TimelineExtraDataLinks::from($value)) : null, $links) : null;
 

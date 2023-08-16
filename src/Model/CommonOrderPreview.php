@@ -73,7 +73,7 @@ abstract class CommonOrderPreview implements JsonSerializable
         return $this->fields['websiteId'];
     }
 
-    public function setWebsiteId(string $websiteId): self
+    public function setWebsiteId(string $websiteId): static
     {
         $this->fields['websiteId'] = $websiteId;
 
@@ -91,7 +91,7 @@ abstract class CommonOrderPreview implements JsonSerializable
     /**
      * @param CommonOrderPreviewItems[] $items
      */
-    public function setItems(array $items): self
+    public function setItems(array $items): static
     {
         $items = array_map(fn ($value) => $value !== null ? ($value instanceof CommonOrderPreviewItems ? $value : CommonOrderPreviewItems::from($value)) : null, $items);
 
@@ -105,7 +105,7 @@ abstract class CommonOrderPreview implements JsonSerializable
         return $this->fields['billingAddress'] ?? null;
     }
 
-    public function setBillingAddress(null|ContactObject|array $billingAddress): self
+    public function setBillingAddress(null|ContactObject|array $billingAddress): static
     {
         if ($billingAddress !== null && !($billingAddress instanceof ContactObject)) {
             $billingAddress = ContactObject::from($billingAddress);
@@ -121,7 +121,7 @@ abstract class CommonOrderPreview implements JsonSerializable
         return $this->fields['deliveryAddress'] ?? null;
     }
 
-    public function setDeliveryAddress(null|ContactObject|array $deliveryAddress): self
+    public function setDeliveryAddress(null|ContactObject|array $deliveryAddress): static
     {
         if ($deliveryAddress !== null && !($deliveryAddress instanceof ContactObject)) {
             $deliveryAddress = ContactObject::from($deliveryAddress);
@@ -143,7 +143,7 @@ abstract class CommonOrderPreview implements JsonSerializable
     /**
      * @param null|string[] $couponIds
      */
-    public function setCouponIds(null|array $couponIds): self
+    public function setCouponIds(null|array $couponIds): static
     {
         $couponIds = $couponIds !== null ? array_map(fn ($value) => $value ?? null, $couponIds) : null;
 
@@ -266,7 +266,7 @@ abstract class CommonOrderPreview implements JsonSerializable
         return $data;
     }
 
-    private function setCurrency(null|string $currency): self
+    private function setCurrency(null|string $currency): static
     {
         $this->fields['currency'] = $currency;
 
@@ -276,7 +276,7 @@ abstract class CommonOrderPreview implements JsonSerializable
     /**
      * @param null|CommonOrderPreviewLineItems[] $lineItems
      */
-    private function setLineItems(null|array $lineItems): self
+    private function setLineItems(null|array $lineItems): static
     {
         $lineItems = $lineItems !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof CommonOrderPreviewLineItems ? $value : CommonOrderPreviewLineItems::from($value)) : null, $lineItems) : null;
 
@@ -288,7 +288,7 @@ abstract class CommonOrderPreview implements JsonSerializable
     /**
      * @param null|ShippingOption[] $shippingRates
      */
-    private function setShippingRates(null|array $shippingRates): self
+    private function setShippingRates(null|array $shippingRates): static
     {
         $shippingRates = $shippingRates !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ShippingOption ? $value : ShippingOption::from($value)) : null, $shippingRates) : null;
 
@@ -300,7 +300,7 @@ abstract class CommonOrderPreview implements JsonSerializable
     /**
      * @param null|CommonOrderPreviewTaxes[] $taxes
      */
-    private function setTaxes(null|array $taxes): self
+    private function setTaxes(null|array $taxes): static
     {
         $taxes = $taxes !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof CommonOrderPreviewTaxes ? $value : CommonOrderPreviewTaxes::from($value)) : null, $taxes) : null;
 
@@ -312,7 +312,7 @@ abstract class CommonOrderPreview implements JsonSerializable
     /**
      * @param null|CommonOrderPreviewDiscounts[] $discounts
      */
-    private function setDiscounts(null|array $discounts): self
+    private function setDiscounts(null|array $discounts): static
     {
         $discounts = $discounts !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof CommonOrderPreviewDiscounts ? $value : CommonOrderPreviewDiscounts::from($value)) : null, $discounts) : null;
 
@@ -321,7 +321,7 @@ abstract class CommonOrderPreview implements JsonSerializable
         return $this;
     }
 
-    private function setSubtotalAmount(null|float|string $subtotalAmount): self
+    private function setSubtotalAmount(null|float|string $subtotalAmount): static
     {
         if (is_string($subtotalAmount)) {
             $subtotalAmount = (float) $subtotalAmount;
@@ -332,7 +332,7 @@ abstract class CommonOrderPreview implements JsonSerializable
         return $this;
     }
 
-    private function setTaxAmount(null|float|string $taxAmount): self
+    private function setTaxAmount(null|float|string $taxAmount): static
     {
         if (is_string($taxAmount)) {
             $taxAmount = (float) $taxAmount;
@@ -343,7 +343,7 @@ abstract class CommonOrderPreview implements JsonSerializable
         return $this;
     }
 
-    private function setShippingAmount(null|float|string $shippingAmount): self
+    private function setShippingAmount(null|float|string $shippingAmount): static
     {
         if (is_string($shippingAmount)) {
             $shippingAmount = (float) $shippingAmount;
@@ -354,7 +354,7 @@ abstract class CommonOrderPreview implements JsonSerializable
         return $this;
     }
 
-    private function setDiscountsAmount(null|float|string $discountsAmount): self
+    private function setDiscountsAmount(null|float|string $discountsAmount): static
     {
         if (is_string($discountsAmount)) {
             $discountsAmount = (float) $discountsAmount;
@@ -365,7 +365,7 @@ abstract class CommonOrderPreview implements JsonSerializable
         return $this;
     }
 
-    private function setTotal(null|float|string $total): self
+    private function setTotal(null|float|string $total): static
     {
         if (is_string($total)) {
             $total = (float) $total;

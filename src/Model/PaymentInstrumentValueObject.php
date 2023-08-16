@@ -53,7 +53,7 @@ class PaymentInstrumentValueObject implements JsonSerializable
     /**
      * @psalm-param self::METHOD_* $method
      */
-    public function setMethod(string $method): self
+    public function setMethod(string $method): static
     {
         $this->fields['method'] = $method;
 
@@ -65,7 +65,7 @@ class PaymentInstrumentValueObject implements JsonSerializable
         return $this->fields['paymentInstrumentId'];
     }
 
-    public function setPaymentInstrumentId(string $paymentInstrumentId): self
+    public function setPaymentInstrumentId(string $paymentInstrumentId): static
     {
         $this->fields['paymentInstrumentId'] = $paymentInstrumentId;
 
@@ -77,7 +77,7 @@ class PaymentInstrumentValueObject implements JsonSerializable
         return $this->fields['receivedBy'] ?? null;
     }
 
-    public function setReceivedBy(null|string $receivedBy): self
+    public function setReceivedBy(null|string $receivedBy): static
     {
         $this->fields['receivedBy'] = $receivedBy;
 
@@ -89,7 +89,7 @@ class PaymentInstrumentValueObject implements JsonSerializable
         return $this->fields['reference'] ?? null;
     }
 
-    public function setReference(null|string $reference): self
+    public function setReference(null|string $reference): static
     {
         $this->fields['reference'] = $reference;
 

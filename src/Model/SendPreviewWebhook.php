@@ -67,7 +67,7 @@ class SendPreviewWebhook implements JsonSerializable
     /**
      * @psalm-param self::METHOD_* $method
      */
-    public function setMethod(string $method): self
+    public function setMethod(string $method): static
     {
         $this->fields['method'] = $method;
 
@@ -79,7 +79,7 @@ class SendPreviewWebhook implements JsonSerializable
         return $this->fields['url'];
     }
 
-    public function setUrl(string $url): self
+    public function setUrl(string $url): static
     {
         $this->fields['url'] = $url;
 
@@ -97,7 +97,7 @@ class SendPreviewWebhook implements JsonSerializable
     /**
      * @param null|array<string,string> $query
      */
-    public function setQuery(null|array $query): self
+    public function setQuery(null|array $query): static
     {
         $this->fields['query'] = $query;
 
@@ -109,7 +109,7 @@ class SendPreviewWebhook implements JsonSerializable
         return $this->fields['body'] ?? null;
     }
 
-    public function setBody(null|string $body): self
+    public function setBody(null|string $body): static
     {
         $this->fields['body'] = $body;
 
@@ -121,7 +121,7 @@ class SendPreviewWebhook implements JsonSerializable
         return $this->fields['credentialHash'] ?? null;
     }
 
-    public function setCredentialHash(null|string $credentialHash): self
+    public function setCredentialHash(null|string $credentialHash): static
     {
         $this->fields['credentialHash'] = $credentialHash;
 
@@ -139,7 +139,7 @@ class SendPreviewWebhook implements JsonSerializable
     /**
      * @param null|WebhookHeader[] $headers
      */
-    public function setHeaders(null|array $headers): self
+    public function setHeaders(null|array $headers): static
     {
         $headers = $headers !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof WebhookHeader ? $value : WebhookHeader::from($value)) : null, $headers) : null;
 

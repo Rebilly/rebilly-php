@@ -41,7 +41,7 @@ class UPayCard extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(UPayCardCredentials|array $credentials): self
+    public function setCredentials(UPayCardCredentials|array $credentials): static
     {
         if (!($credentials instanceof UPayCardCredentials)) {
             $credentials = UPayCardCredentials::from($credentials);
@@ -57,7 +57,7 @@ class UPayCard extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|UPayCardSettings|array $settings): self
+    public function setSettings(null|UPayCardSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof UPayCardSettings)) {
             $settings = UPayCardSettings::from($settings);

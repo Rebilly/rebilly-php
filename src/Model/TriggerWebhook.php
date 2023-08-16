@@ -69,7 +69,7 @@ class TriggerWebhook extends RuleAction
     /**
      * @psalm-param self::METHOD_* $method
      */
-    public function setMethod(string $method): self
+    public function setMethod(string $method): static
     {
         $this->fields['method'] = $method;
 
@@ -81,7 +81,7 @@ class TriggerWebhook extends RuleAction
         return $this->fields['url'];
     }
 
-    public function setUrl(string $url): self
+    public function setUrl(string $url): static
     {
         $this->fields['url'] = $url;
 
@@ -99,7 +99,7 @@ class TriggerWebhook extends RuleAction
     /**
      * @param null|array<string,string> $query
      */
-    public function setQuery(null|array $query): self
+    public function setQuery(null|array $query): static
     {
         $this->fields['query'] = $query;
 
@@ -111,7 +111,7 @@ class TriggerWebhook extends RuleAction
         return $this->fields['body'] ?? null;
     }
 
-    public function setBody(null|string $body): self
+    public function setBody(null|string $body): static
     {
         $this->fields['body'] = $body;
 
@@ -123,7 +123,7 @@ class TriggerWebhook extends RuleAction
         return $this->fields['credentialHash'] ?? null;
     }
 
-    public function setCredentialHash(null|string $credentialHash): self
+    public function setCredentialHash(null|string $credentialHash): static
     {
         $this->fields['credentialHash'] = $credentialHash;
 
@@ -141,7 +141,7 @@ class TriggerWebhook extends RuleAction
     /**
      * @param null|WebhookHeader[] $headers
      */
-    public function setHeaders(null|array $headers): self
+    public function setHeaders(null|array $headers): static
     {
         $headers = $headers !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof WebhookHeader ? $value : WebhookHeader::from($value)) : null, $headers) : null;
 

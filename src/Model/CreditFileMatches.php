@@ -109,7 +109,7 @@ class CreditFileMatches implements JsonSerializable
         return $this->fields['referenceData'] ?? null;
     }
 
-    public function setReferenceData(null|CreditFileMatchesReferenceData|array $referenceData): self
+    public function setReferenceData(null|CreditFileMatchesReferenceData|array $referenceData): static
     {
         if ($referenceData !== null && !($referenceData instanceof CreditFileMatchesReferenceData)) {
             $referenceData = CreditFileMatchesReferenceData::from($referenceData);
@@ -151,28 +151,28 @@ class CreditFileMatches implements JsonSerializable
     /**
      * @psalm-param self::CREDIT_BUREAU_*|null $creditBureau
      */
-    private function setCreditBureau(null|string $creditBureau): self
+    private function setCreditBureau(null|string $creditBureau): static
     {
         $this->fields['creditBureau'] = $creditBureau;
 
         return $this;
     }
 
-    private function setCreditFileNumber(null|string $creditFileNumber): self
+    private function setCreditFileNumber(null|string $creditFileNumber): static
     {
         $this->fields['creditFileNumber'] = $creditFileNumber;
 
         return $this;
     }
 
-    private function setName(null|string $name): self
+    private function setName(null|string $name): static
     {
         $this->fields['name'] = $name;
 
         return $this;
     }
 
-    private function setConsultedDate(null|DateTimeImmutable|string $consultedDate): self
+    private function setConsultedDate(null|DateTimeImmutable|string $consultedDate): static
     {
         if ($consultedDate !== null && !($consultedDate instanceof DateTimeImmutable)) {
             $consultedDate = new DateTimeImmutable($consultedDate);
@@ -186,7 +186,7 @@ class CreditFileMatches implements JsonSerializable
     /**
      * @psalm-param self::DECISION_*|null $decision
      */
-    private function setDecision(null|string $decision): self
+    private function setDecision(null|string $decision): static
     {
         $this->fields['decision'] = $decision;
 
@@ -196,7 +196,7 @@ class CreditFileMatches implements JsonSerializable
     /**
      * @param null|CreditFileMatchesTrades[] $trades
      */
-    private function setTrades(null|array $trades): self
+    private function setTrades(null|array $trades): static
     {
         $trades = $trades !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof CreditFileMatchesTrades ? $value : CreditFileMatchesTrades::from($value)) : null, $trades) : null;
 

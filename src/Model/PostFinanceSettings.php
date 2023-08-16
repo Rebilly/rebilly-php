@@ -39,7 +39,7 @@ class PostFinanceSettings implements JsonSerializable
         return $this->fields['skipPaymentFileUpload'] ?? null;
     }
 
-    public function setSkipPaymentFileUpload(null|bool $skipPaymentFileUpload): self
+    public function setSkipPaymentFileUpload(null|bool $skipPaymentFileUpload): static
     {
         $this->fields['skipPaymentFileUpload'] = $skipPaymentFileUpload;
 
@@ -51,7 +51,7 @@ class PostFinanceSettings implements JsonSerializable
         return $this->fields['enableAliasAuthentication'] ?? null;
     }
 
-    public function setEnableAliasAuthentication(null|bool $enableAliasAuthentication): self
+    public function setEnableAliasAuthentication(null|bool $enableAliasAuthentication): static
     {
         $this->fields['enableAliasAuthentication'] = $enableAliasAuthentication;
 

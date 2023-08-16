@@ -39,7 +39,7 @@ class EmailMessageAttachments implements JsonSerializable
         return $this->fields['resourceType'];
     }
 
-    public function setResourceType(string $resourceType): self
+    public function setResourceType(string $resourceType): static
     {
         $this->fields['resourceType'] = $resourceType;
 
@@ -51,7 +51,7 @@ class EmailMessageAttachments implements JsonSerializable
         return $this->fields['resourceId'];
     }
 
-    public function setResourceId(string $resourceId): self
+    public function setResourceId(string $resourceId): static
     {
         $this->fields['resourceId'] = $resourceId;
 

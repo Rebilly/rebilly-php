@@ -42,7 +42,7 @@ class ContactEmails implements JsonSerializable
         return $this->fields['label'];
     }
 
-    public function setLabel(string $label): self
+    public function setLabel(string $label): static
     {
         $this->fields['label'] = $label;
 
@@ -54,7 +54,7 @@ class ContactEmails implements JsonSerializable
         return $this->fields['value'];
     }
 
-    public function setValue(string $value): self
+    public function setValue(string $value): static
     {
         $this->fields['value'] = $value;
 
@@ -66,7 +66,7 @@ class ContactEmails implements JsonSerializable
         return $this->fields['primary'] ?? null;
     }
 
-    public function setPrimary(null|bool $primary): self
+    public function setPrimary(null|bool $primary): static
     {
         $this->fields['primary'] = $primary;
 

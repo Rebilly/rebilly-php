@@ -41,7 +41,7 @@ class Gigadat extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(GigadatCredentials|array $credentials): self
+    public function setCredentials(GigadatCredentials|array $credentials): static
     {
         if (!($credentials instanceof GigadatCredentials)) {
             $credentials = GigadatCredentials::from($credentials);
@@ -57,7 +57,7 @@ class Gigadat extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|GigadatSettings|array $settings): self
+    public function setSettings(null|GigadatSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof GigadatSettings)) {
             $settings = GigadatSettings::from($settings);

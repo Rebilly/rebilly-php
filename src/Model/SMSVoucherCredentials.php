@@ -36,7 +36,7 @@ class SMSVoucherCredentials implements JsonSerializable
         return $this->fields['AppId'];
     }
 
-    public function setAppId(string $appId): self
+    public function setAppId(string $appId): static
     {
         $this->fields['AppId'] = $appId;
 

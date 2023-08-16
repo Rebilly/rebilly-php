@@ -53,7 +53,7 @@ class PlanPeriod implements JsonSerializable
     /**
      * @psalm-param self::UNIT_* $unit
      */
-    public function setUnit(string $unit): self
+    public function setUnit(string $unit): static
     {
         $this->fields['unit'] = $unit;
 
@@ -65,7 +65,7 @@ class PlanPeriod implements JsonSerializable
         return $this->fields['length'];
     }
 
-    public function setLength(int $length): self
+    public function setLength(int $length): static
     {
         $this->fields['length'] = $length;
 

@@ -42,7 +42,7 @@ class ValidationError1 implements JsonSerializable
     /**
      * @param null|ValidationError1InvalidFields[] $invalidFields
      */
-    public function setInvalidFields(null|array $invalidFields): self
+    public function setInvalidFields(null|array $invalidFields): static
     {
         $invalidFields = $invalidFields !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ValidationError1InvalidFields ? $value : ValidationError1InvalidFields::from($value)) : null, $invalidFields) : null;
 

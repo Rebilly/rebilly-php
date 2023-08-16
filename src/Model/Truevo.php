@@ -41,7 +41,7 @@ class Truevo extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(TruevoCredentials|array $credentials): self
+    public function setCredentials(TruevoCredentials|array $credentials): static
     {
         if (!($credentials instanceof TruevoCredentials)) {
             $credentials = TruevoCredentials::from($credentials);
@@ -57,7 +57,7 @@ class Truevo extends GatewayAccount
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|Truevo3dsServers|array $threeDSecureServer): self
+    public function setThreeDSecureServer(null|Truevo3dsServers|array $threeDSecureServer): static
     {
         if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Truevo3dsServers)) {
             $threeDSecureServer = Truevo3dsServers::from($threeDSecureServer);

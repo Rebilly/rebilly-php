@@ -42,7 +42,7 @@ class Product extends CommonProduct
         return $this->fields['taxCategoryId'] ?? null;
     }
 
-    public function setTaxCategoryId(null|string $taxCategoryId): self
+    public function setTaxCategoryId(null|string $taxCategoryId): static
     {
         $this->fields['taxCategoryId'] = $taxCategoryId;
 
@@ -54,7 +54,7 @@ class Product extends CommonProduct
         return $this->fields['accountingCode'] ?? null;
     }
 
-    public function setAccountingCode(null|string $accountingCode): self
+    public function setAccountingCode(null|string $accountingCode): static
     {
         $this->fields['accountingCode'] = $accountingCode;
 
@@ -88,7 +88,7 @@ class Product extends CommonProduct
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

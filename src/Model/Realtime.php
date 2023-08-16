@@ -38,7 +38,7 @@ class Realtime extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(RealtimeCredentials|array $credentials): self
+    public function setCredentials(RealtimeCredentials|array $credentials): static
     {
         if (!($credentials instanceof RealtimeCredentials)) {
             $credentials = RealtimeCredentials::from($credentials);

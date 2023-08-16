@@ -36,7 +36,7 @@ class PayClubSettings implements JsonSerializable
         return $this->fields['use3DSChannel'] ?? null;
     }
 
-    public function setUse3DSChannel(null|bool $use3DSChannel): self
+    public function setUse3DSChannel(null|bool $use3DSChannel): static
     {
         $this->fields['use3DSChannel'] = $use3DSChannel;
 

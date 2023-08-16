@@ -48,7 +48,7 @@ class SendThroughAttribution implements JsonSerializable
         return $this->fields['eventType'] ?? null;
     }
 
-    public function setEventType(null|EventType|string $eventType): self
+    public function setEventType(null|EventType|string $eventType): static
     {
         if ($eventType !== null && !($eventType instanceof EventType)) {
             $eventType = EventType::from($eventType);
@@ -64,7 +64,7 @@ class SendThroughAttribution implements JsonSerializable
         return $this->fields['actionId'] ?? null;
     }
 
-    public function setActionId(null|string $actionId): self
+    public function setActionId(null|string $actionId): static
     {
         $this->fields['actionId'] = $actionId;
 
@@ -76,7 +76,7 @@ class SendThroughAttribution implements JsonSerializable
         return $this->fields['versionId'] ?? null;
     }
 
-    public function setVersionId(null|string $versionId): self
+    public function setVersionId(null|string $versionId): static
     {
         $this->fields['versionId'] = $versionId;
 
@@ -88,7 +88,7 @@ class SendThroughAttribution implements JsonSerializable
         return $this->fields['sent'] ?? null;
     }
 
-    public function setSent(null|int $sent): self
+    public function setSent(null|int $sent): static
     {
         $this->fields['sent'] = $sent;
 
@@ -100,7 +100,7 @@ class SendThroughAttribution implements JsonSerializable
         return $this->fields['goal'] ?? null;
     }
 
-    public function setGoal(null|int $goal): self
+    public function setGoal(null|int $goal): static
     {
         $this->fields['goal'] = $goal;
 

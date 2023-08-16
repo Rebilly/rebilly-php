@@ -45,7 +45,7 @@ class BroadcastMessageMessages implements JsonSerializable
         return $this->fields['id'] ?? null;
     }
 
-    public function setId(null|string $id): self
+    public function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -57,7 +57,7 @@ class BroadcastMessageMessages implements JsonSerializable
         return $this->fields['version'] ?? null;
     }
 
-    public function setVersion(null|string $version): self
+    public function setVersion(null|string $version): static
     {
         $this->fields['version'] = $version;
 
@@ -69,7 +69,7 @@ class BroadcastMessageMessages implements JsonSerializable
         return $this->fields['weight'] ?? null;
     }
 
-    public function setWeight(null|int $weight): self
+    public function setWeight(null|int $weight): static
     {
         $this->fields['weight'] = $weight;
 
@@ -87,7 +87,7 @@ class BroadcastMessageMessages implements JsonSerializable
     /**
      * @param BroadcastMessageTemplates[] $templates
      */
-    public function setTemplates(array $templates): self
+    public function setTemplates(array $templates): static
     {
         $templates = array_map(fn ($value) => $value !== null ? ($value instanceof BroadcastMessageTemplates ? $value : BroadcastMessageTemplates::from($value)) : null, $templates);
 

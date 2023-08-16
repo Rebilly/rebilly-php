@@ -39,7 +39,7 @@ class SeamlessChexCredentials implements JsonSerializable
         return $this->fields['publicKey'];
     }
 
-    public function setPublicKey(string $publicKey): self
+    public function setPublicKey(string $publicKey): static
     {
         $this->fields['publicKey'] = $publicKey;
 
@@ -51,7 +51,7 @@ class SeamlessChexCredentials implements JsonSerializable
         return $this->fields['secretKey'];
     }
 
-    public function setSecretKey(string $secretKey): self
+    public function setSecretKey(string $secretKey): static
     {
         $this->fields['secretKey'] = $secretKey;
 

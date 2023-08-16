@@ -39,7 +39,7 @@ class NOWPaymentsCredentials implements JsonSerializable
         return $this->fields['apiKey'];
     }
 
-    public function setApiKey(string $apiKey): self
+    public function setApiKey(string $apiKey): static
     {
         $this->fields['apiKey'] = $apiKey;
 
@@ -51,7 +51,7 @@ class NOWPaymentsCredentials implements JsonSerializable
         return $this->fields['ipnSecret'];
     }
 
-    public function setIpnSecret(string $ipnSecret): self
+    public function setIpnSecret(string $ipnSecret): static
     {
         $this->fields['ipnSecret'] = $ipnSecret;
 

@@ -39,7 +39,7 @@ class A1GatewayCredentials implements JsonSerializable
         return $this->fields['accountId'];
     }
 
-    public function setAccountId(string $accountId): self
+    public function setAccountId(string $accountId): static
     {
         $this->fields['accountId'] = $accountId;
 
@@ -51,7 +51,7 @@ class A1GatewayCredentials implements JsonSerializable
         return $this->fields['password'];
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password): static
     {
         $this->fields['password'] = $password;
 

@@ -54,7 +54,7 @@ abstract class BankAccountInstrument implements JsonSerializable
         return $data;
     }
 
-    private function setAccountNumberType(null|string $accountNumberType): self
+    private function setAccountNumberType(null|string $accountNumberType): static
     {
         $this->fields['accountNumberType'] = $accountNumberType;
 

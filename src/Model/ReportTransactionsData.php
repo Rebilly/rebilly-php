@@ -75,7 +75,7 @@ class ReportTransactionsData implements JsonSerializable
         return $this->fields['aggregationFieldValue'] ?? null;
     }
 
-    public function setAggregationFieldValue(null|string $aggregationFieldValue): self
+    public function setAggregationFieldValue(null|string $aggregationFieldValue): static
     {
         $this->fields['aggregationFieldValue'] = $aggregationFieldValue;
 
@@ -87,7 +87,7 @@ class ReportTransactionsData implements JsonSerializable
         return $this->fields['authApprovedThroughput'] ?? null;
     }
 
-    public function setAuthApprovedThroughput(null|float|string $authApprovedThroughput): self
+    public function setAuthApprovedThroughput(null|float|string $authApprovedThroughput): static
     {
         if (is_string($authApprovedThroughput)) {
             $authApprovedThroughput = (float) $authApprovedThroughput;
@@ -103,7 +103,7 @@ class ReportTransactionsData implements JsonSerializable
         return $this->fields['approvedThroughput'] ?? null;
     }
 
-    public function setApprovedThroughput(null|float|string $approvedThroughput): self
+    public function setApprovedThroughput(null|float|string $approvedThroughput): static
     {
         if (is_string($approvedThroughput)) {
             $approvedThroughput = (float) $approvedThroughput;
@@ -119,7 +119,7 @@ class ReportTransactionsData implements JsonSerializable
         return $this->fields['authApprovalCount'] ?? null;
     }
 
-    public function setAuthApprovalCount(null|int $authApprovalCount): self
+    public function setAuthApprovalCount(null|int $authApprovalCount): static
     {
         $this->fields['authApprovalCount'] = $authApprovalCount;
 
@@ -131,7 +131,7 @@ class ReportTransactionsData implements JsonSerializable
         return $this->fields['disputesRate'] ?? null;
     }
 
-    public function setDisputesRate(null|float|string $disputesRate): self
+    public function setDisputesRate(null|float|string $disputesRate): static
     {
         if (is_string($disputesRate)) {
             $disputesRate = (float) $disputesRate;
@@ -147,7 +147,7 @@ class ReportTransactionsData implements JsonSerializable
         return $this->fields['disputesCount'] ?? null;
     }
 
-    public function setDisputesCount(null|int $disputesCount): self
+    public function setDisputesCount(null|int $disputesCount): static
     {
         $this->fields['disputesCount'] = $disputesCount;
 
@@ -159,7 +159,7 @@ class ReportTransactionsData implements JsonSerializable
         return $this->fields['salesCount'] ?? null;
     }
 
-    public function setSalesCount(null|int $salesCount): self
+    public function setSalesCount(null|int $salesCount): static
     {
         $this->fields['salesCount'] = $salesCount;
 
@@ -171,7 +171,7 @@ class ReportTransactionsData implements JsonSerializable
         return $this->fields['salesValue'] ?? null;
     }
 
-    public function setSalesValue(null|float|string $salesValue): self
+    public function setSalesValue(null|float|string $salesValue): static
     {
         if (is_string($salesValue)) {
             $salesValue = (float) $salesValue;
@@ -187,7 +187,7 @@ class ReportTransactionsData implements JsonSerializable
         return $this->fields['salesAverage'] ?? null;
     }
 
-    public function setSalesAverage(null|float|string $salesAverage): self
+    public function setSalesAverage(null|float|string $salesAverage): static
     {
         if (is_string($salesAverage)) {
             $salesAverage = (float) $salesAverage;
@@ -203,7 +203,7 @@ class ReportTransactionsData implements JsonSerializable
         return $this->fields['refundsCount'] ?? null;
     }
 
-    public function setRefundsCount(null|int $refundsCount): self
+    public function setRefundsCount(null|int $refundsCount): static
     {
         $this->fields['refundsCount'] = $refundsCount;
 
@@ -215,7 +215,7 @@ class ReportTransactionsData implements JsonSerializable
         return $this->fields['refundsValue'] ?? null;
     }
 
-    public function setRefundsValue(null|float|string $refundsValue): self
+    public function setRefundsValue(null|float|string $refundsValue): static
     {
         if (is_string($refundsValue)) {
             $refundsValue = (float) $refundsValue;
@@ -231,7 +231,7 @@ class ReportTransactionsData implements JsonSerializable
         return $this->fields['amount'] ?? null;
     }
 
-    public function setAmount(null|float|string $amount): self
+    public function setAmount(null|float|string $amount): static
     {
         if (is_string($amount)) {
             $amount = (float) $amount;
@@ -247,7 +247,7 @@ class ReportTransactionsData implements JsonSerializable
         return $this->fields['count'] ?? null;
     }
 
-    public function setCount(null|float|string $count): self
+    public function setCount(null|float|string $count): static
     {
         if (is_string($count)) {
             $count = (float) $count;
@@ -263,7 +263,7 @@ class ReportTransactionsData implements JsonSerializable
         return $this->fields['unapprovedCount'] ?? null;
     }
 
-    public function setUnapprovedCount(null|float|string $unapprovedCount): self
+    public function setUnapprovedCount(null|float|string $unapprovedCount): static
     {
         if (is_string($unapprovedCount)) {
             $unapprovedCount = (float) $unapprovedCount;

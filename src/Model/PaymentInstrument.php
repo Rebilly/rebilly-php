@@ -199,7 +199,7 @@ abstract class PaymentInstrument implements JsonSerializable
         return $data;
     }
 
-    private function setMethod(mixed $method): self
+    private function setMethod(mixed $method): static
     {
         $this->fields['method'] = $method;
 

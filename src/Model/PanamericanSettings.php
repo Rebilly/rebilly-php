@@ -39,7 +39,7 @@ class PanamericanSettings implements JsonSerializable
         return $this->fields['extraStep'];
     }
 
-    public function setExtraStep(bool $extraStep): self
+    public function setExtraStep(bool $extraStep): static
     {
         $this->fields['extraStep'] = $extraStep;
 
@@ -51,7 +51,7 @@ class PanamericanSettings implements JsonSerializable
         return $this->fields['convertToAscii'] ?? null;
     }
 
-    public function setConvertToAscii(null|bool $convertToAscii): self
+    public function setConvertToAscii(null|bool $convertToAscii): static
     {
         $this->fields['convertToAscii'] = $convertToAscii;
 

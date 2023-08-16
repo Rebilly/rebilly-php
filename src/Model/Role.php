@@ -76,7 +76,7 @@ class Role implements JsonSerializable
         return $this->fields['name'];
     }
 
-    public function setName(string $name): self
+    public function setName(string $name): static
     {
         $this->fields['name'] = $name;
 
@@ -88,7 +88,7 @@ class Role implements JsonSerializable
         return $this->fields['description'] ?? null;
     }
 
-    public function setDescription(null|string $description): self
+    public function setDescription(null|string $description): static
     {
         $this->fields['description'] = $description;
 
@@ -106,7 +106,7 @@ class Role implements JsonSerializable
     /**
      * @param Acl[] $acl
      */
-    public function setAcl(array $acl): self
+    public function setAcl(array $acl): static
     {
         $acl = array_map(fn ($value) => $value !== null ? ($value instanceof Acl ? $value : Acl::from($value)) : null, $acl);
 
@@ -126,7 +126,7 @@ class Role implements JsonSerializable
     /**
      * @param null|string[] $allowedIps
      */
-    public function setAllowedIps(null|array $allowedIps): self
+    public function setAllowedIps(null|array $allowedIps): static
     {
         $allowedIps = $allowedIps !== null ? array_map(fn ($value) => $value ?? null, $allowedIps) : null;
 
@@ -154,7 +154,7 @@ class Role implements JsonSerializable
     /**
      * @param null|string[] $juniorIds
      */
-    public function setJuniorIds(null|array $juniorIds): self
+    public function setJuniorIds(null|array $juniorIds): static
     {
         $juniorIds = $juniorIds !== null ? array_map(fn ($value) => $value ?? null, $juniorIds) : null;
 
@@ -237,7 +237,7 @@ class Role implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -247,7 +247,7 @@ class Role implements JsonSerializable
     /**
      * @param null|string[] $seniorIds
      */
-    private function setSeniorIds(null|array $seniorIds): self
+    private function setSeniorIds(null|array $seniorIds): static
     {
         $seniorIds = $seniorIds !== null ? array_map(fn ($value) => $value ?? null, $seniorIds) : null;
 
@@ -256,14 +256,14 @@ class Role implements JsonSerializable
         return $this;
     }
 
-    private function setUsersCount(null|int $usersCount): self
+    private function setUsersCount(null|int $usersCount): static
     {
         $this->fields['usersCount'] = $usersCount;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -274,7 +274,7 @@ class Role implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -288,7 +288,7 @@ class Role implements JsonSerializable
     /**
      * @param null|array<JuniorRolesLink|SelfLink|SeniorRolesLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 
@@ -300,7 +300,7 @@ class Role implements JsonSerializable
     /**
      * @param null|array{juniors:Role[]} $embedded
      */
-    private function setEmbedded(null|array $embedded): self
+    private function setEmbedded(null|array $embedded): static
     {
         if ($embedded !== null) {
             $embedded['juniors'] = isset($embedded['juniors']) ? array_map(fn ($value) => $value !== null ? ($value instanceof self ? $value : self::from($value)) : null, $embedded['juniors']) : null;

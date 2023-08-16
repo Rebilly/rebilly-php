@@ -92,7 +92,7 @@ class GatewayAccountDowntimeSchedule implements JsonSerializable
         return $this->fields['startTime'];
     }
 
-    public function setStartTime(DateTimeImmutable|string $startTime): self
+    public function setStartTime(DateTimeImmutable|string $startTime): static
     {
         if (!($startTime instanceof DateTimeImmutable)) {
             $startTime = new DateTimeImmutable($startTime);
@@ -108,7 +108,7 @@ class GatewayAccountDowntimeSchedule implements JsonSerializable
         return $this->fields['endTime'];
     }
 
-    public function setEndTime(DateTimeImmutable|string $endTime): self
+    public function setEndTime(DateTimeImmutable|string $endTime): static
     {
         if (!($endTime instanceof DateTimeImmutable)) {
             $endTime = new DateTimeImmutable($endTime);
@@ -168,7 +168,7 @@ class GatewayAccountDowntimeSchedule implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -178,7 +178,7 @@ class GatewayAccountDowntimeSchedule implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    private function setStatus(null|string $status): self
+    private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
@@ -188,14 +188,14 @@ class GatewayAccountDowntimeSchedule implements JsonSerializable
     /**
      * @psalm-param self::REASON_*|null $reason
      */
-    private function setReason(null|string $reason): self
+    private function setReason(null|string $reason): static
     {
         $this->fields['reason'] = $reason;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -206,7 +206,7 @@ class GatewayAccountDowntimeSchedule implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -220,7 +220,7 @@ class GatewayAccountDowntimeSchedule implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

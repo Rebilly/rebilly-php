@@ -36,7 +36,7 @@ class ProofOfFundsKycDocumentDocumentMatches implements JsonSerializable
         return $this->fields['data'] ?? null;
     }
 
-    public function setData(null|FundsMatches|array $data): self
+    public function setData(null|FundsMatches|array $data): static
     {
         if ($data !== null && !($data instanceof FundsMatches)) {
             $data = FundsMatches::from($data);

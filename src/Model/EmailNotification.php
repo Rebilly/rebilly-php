@@ -45,7 +45,7 @@ class EmailNotification implements JsonSerializable
         return $this->fields['eventType'] ?? null;
     }
 
-    public function setEventType(null|EventType|string $eventType): self
+    public function setEventType(null|EventType|string $eventType): static
     {
         if ($eventType !== null && !($eventType instanceof EventType)) {
             $eventType = EventType::from($eventType);
@@ -96,7 +96,7 @@ class EmailNotification implements JsonSerializable
         return $data;
     }
 
-    private function setCount(null|int $count): self
+    private function setCount(null|int $count): static
     {
         $this->fields['count'] = $count;
 
@@ -106,7 +106,7 @@ class EmailNotification implements JsonSerializable
     /**
      * @param null|EmailNotificationNotifications[] $notifications
      */
-    private function setNotifications(null|array $notifications): self
+    private function setNotifications(null|array $notifications): static
     {
         $notifications = $notifications !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof EmailNotificationNotifications ? $value : EmailNotificationNotifications::from($value)) : null, $notifications) : null;
 
@@ -118,7 +118,7 @@ class EmailNotification implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

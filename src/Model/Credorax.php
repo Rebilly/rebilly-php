@@ -38,7 +38,7 @@ class Credorax extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(CredoraxCredentials|array $credentials): self
+    public function setCredentials(CredoraxCredentials|array $credentials): static
     {
         if (!($credentials instanceof CredoraxCredentials)) {
             $credentials = CredoraxCredentials::from($credentials);

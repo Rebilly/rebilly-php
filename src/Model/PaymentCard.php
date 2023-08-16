@@ -67,7 +67,7 @@ class PaymentCard extends CommonPaymentCard
         return $this->fields['customerId'] ?? null;
     }
 
-    public function setCustomerId(null|string $customerId): self
+    public function setCustomerId(null|string $customerId): static
     {
         $this->fields['customerId'] = $customerId;
 
@@ -100,7 +100,7 @@ class PaymentCard extends CommonPaymentCard
     /**
      * @param null|array<string,string> $referenceData
      */
-    public function setReferenceData(null|array $referenceData): self
+    public function setReferenceData(null|array $referenceData): static
     {
         $this->fields['referenceData'] = $referenceData;
 
@@ -120,7 +120,7 @@ class PaymentCard extends CommonPaymentCard
         return $this->fields['riskMetadata'] ?? null;
     }
 
-    public function setRiskMetadata(null|RiskMetadata|array $riskMetadata): self
+    public function setRiskMetadata(null|RiskMetadata|array $riskMetadata): static
     {
         if ($riskMetadata !== null && !($riskMetadata instanceof RiskMetadata)) {
             $riskMetadata = RiskMetadata::from($riskMetadata);
@@ -181,14 +181,14 @@ class PaymentCard extends CommonPaymentCard
         return parent::jsonSerialize() + $data;
     }
 
-    private function setStickyGatewayAccountId(null|string $stickyGatewayAccountId): self
+    private function setStickyGatewayAccountId(null|string $stickyGatewayAccountId): static
     {
         $this->fields['stickyGatewayAccountId'] = $stickyGatewayAccountId;
 
         return $this;
     }
 
-    private function setExpirationReminderTime(null|DateTimeImmutable|string $expirationReminderTime): self
+    private function setExpirationReminderTime(null|DateTimeImmutable|string $expirationReminderTime): static
     {
         if ($expirationReminderTime !== null && !($expirationReminderTime instanceof DateTimeImmutable)) {
             $expirationReminderTime = new DateTimeImmutable($expirationReminderTime);
@@ -199,7 +199,7 @@ class PaymentCard extends CommonPaymentCard
         return $this;
     }
 
-    private function setExpirationReminderNumber(null|int $expirationReminderNumber): self
+    private function setExpirationReminderNumber(null|int $expirationReminderNumber): static
     {
         $this->fields['expirationReminderNumber'] = $expirationReminderNumber;
 
@@ -209,7 +209,7 @@ class PaymentCard extends CommonPaymentCard
     /**
      * @psalm-param self::DIGITAL_WALLET_*|null $digitalWallet
      */
-    private function setDigitalWallet(null|string $digitalWallet): self
+    private function setDigitalWallet(null|string $digitalWallet): static
     {
         $this->fields['digitalWallet'] = $digitalWallet;
 
@@ -219,7 +219,7 @@ class PaymentCard extends CommonPaymentCard
     /**
      * @param null|array<ApprovalUrlLink|AuthTransactionLink|CustomerLink|SelfLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 
@@ -231,7 +231,7 @@ class PaymentCard extends CommonPaymentCard
     /**
      * @param null|array{authTransaction:Transaction,customer:Customer} $embedded
      */
-    private function setEmbedded(null|array $embedded): self
+    private function setEmbedded(null|array $embedded): static
     {
         if ($embedded !== null) {
             $embedded['authTransaction'] = isset($embedded['authTransaction']) ? ($embedded['authTransaction'] instanceof Transaction ? $embedded['authTransaction'] : Transaction::from($embedded['authTransaction'])) : null;

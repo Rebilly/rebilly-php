@@ -36,7 +36,7 @@ class ForgotPassword implements JsonSerializable
         return $this->fields['email'];
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(string $email): static
     {
         $this->fields['email'] = $email;
 

@@ -78,7 +78,7 @@ class BroadcastMessage implements JsonSerializable
         return $this->fields['filter'] ?? null;
     }
 
-    public function setFilter(null|string $filter): self
+    public function setFilter(null|string $filter): static
     {
         $this->fields['filter'] = $filter;
 
@@ -90,7 +90,7 @@ class BroadcastMessage implements JsonSerializable
         return $this->fields['title'] ?? null;
     }
 
-    public function setTitle(null|string $title): self
+    public function setTitle(null|string $title): static
     {
         $this->fields['title'] = $title;
 
@@ -108,7 +108,7 @@ class BroadcastMessage implements JsonSerializable
     /**
      * @param null|BroadcastMessageMessages[] $messages
      */
-    public function setMessages(null|array $messages): self
+    public function setMessages(null|array $messages): static
     {
         $messages = $messages !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof BroadcastMessageMessages ? $value : BroadcastMessageMessages::from($value)) : null, $messages) : null;
 
@@ -127,7 +127,7 @@ class BroadcastMessage implements JsonSerializable
         return $this->fields['startSendingTime'];
     }
 
-    public function setStartSendingTime(DateTimeImmutable|string $startSendingTime): self
+    public function setStartSendingTime(DateTimeImmutable|string $startSendingTime): static
     {
         if (!($startSendingTime instanceof DateTimeImmutable)) {
             $startSendingTime = new DateTimeImmutable($startSendingTime);
@@ -201,14 +201,14 @@ class BroadcastMessage implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setSplitTestStartTime(null|DateTimeImmutable|string $splitTestStartTime): self
+    private function setSplitTestStartTime(null|DateTimeImmutable|string $splitTestStartTime): static
     {
         if ($splitTestStartTime !== null && !($splitTestStartTime instanceof DateTimeImmutable)) {
             $splitTestStartTime = new DateTimeImmutable($splitTestStartTime);
@@ -222,14 +222,14 @@ class BroadcastMessage implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    private function setStatus(null|string $status): self
+    private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -240,7 +240,7 @@ class BroadcastMessage implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -254,7 +254,7 @@ class BroadcastMessage implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

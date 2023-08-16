@@ -39,7 +39,7 @@ class FutureRenewalsPlansCount implements JsonSerializable
         return $this->fields['planId'] ?? null;
     }
 
-    public function setPlanId(null|string $planId): self
+    public function setPlanId(null|string $planId): static
     {
         $this->fields['planId'] = $planId;
 
@@ -51,7 +51,7 @@ class FutureRenewalsPlansCount implements JsonSerializable
         return $this->fields['count'] ?? null;
     }
 
-    public function setCount(null|int $count): self
+    public function setCount(null|int $count): static
     {
         $this->fields['count'] = $count;
 

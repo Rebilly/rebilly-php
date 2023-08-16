@@ -38,7 +38,7 @@ class EZeeWallet extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(EZeeWalletCredentials|array $credentials): self
+    public function setCredentials(EZeeWalletCredentials|array $credentials): static
     {
         if (!($credentials instanceof EZeeWalletCredentials)) {
             $credentials = EZeeWalletCredentials::from($credentials);

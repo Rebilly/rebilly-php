@@ -76,7 +76,7 @@ abstract class PlanPriceFormula implements JsonSerializable
     /**
      * @psalm-param self::FORMULA_* $formula
      */
-    private function setFormula(string $formula): self
+    private function setFormula(string $formula): static
     {
         $this->fields['formula'] = $formula;
 

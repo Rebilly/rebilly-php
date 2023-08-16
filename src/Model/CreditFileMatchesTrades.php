@@ -43,7 +43,7 @@ class CreditFileMatchesTrades implements JsonSerializable
         return $this->fields['name'] ?? null;
     }
 
-    public function setName(null|string $name): self
+    public function setName(null|string $name): static
     {
         $this->fields['name'] = $name;
 
@@ -55,7 +55,7 @@ class CreditFileMatchesTrades implements JsonSerializable
         return $this->fields['accountNumber'] ?? null;
     }
 
-    public function setAccountNumber(null|string $accountNumber): self
+    public function setAccountNumber(null|string $accountNumber): static
     {
         $this->fields['accountNumber'] = $accountNumber;
 
@@ -67,7 +67,7 @@ class CreditFileMatchesTrades implements JsonSerializable
         return $this->fields['dateOpened'] ?? null;
     }
 
-    public function setDateOpened(null|DateTimeImmutable|string $dateOpened): self
+    public function setDateOpened(null|DateTimeImmutable|string $dateOpened): static
     {
         if ($dateOpened !== null && !($dateOpened instanceof DateTimeImmutable)) {
             $dateOpened = new DateTimeImmutable($dateOpened);

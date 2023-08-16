@@ -39,7 +39,7 @@ class RedsysCredentials implements JsonSerializable
         return $this->fields['merchantCode'];
     }
 
-    public function setMerchantCode(string $merchantCode): self
+    public function setMerchantCode(string $merchantCode): static
     {
         $this->fields['merchantCode'] = $merchantCode;
 
@@ -51,7 +51,7 @@ class RedsysCredentials implements JsonSerializable
         return $this->fields['secretCode'];
     }
 
-    public function setSecretCode(string $secretCode): self
+    public function setSecretCode(string $secretCode): static
     {
         $this->fields['secretCode'] = $secretCode;
 

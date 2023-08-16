@@ -42,7 +42,7 @@ class SafechargeCredentials implements JsonSerializable
         return $this->fields['merchantId'];
     }
 
-    public function setMerchantId(string $merchantId): self
+    public function setMerchantId(string $merchantId): static
     {
         $this->fields['merchantId'] = $merchantId;
 
@@ -54,7 +54,7 @@ class SafechargeCredentials implements JsonSerializable
         return $this->fields['siteId'];
     }
 
-    public function setSiteId(string $siteId): self
+    public function setSiteId(string $siteId): static
     {
         $this->fields['siteId'] = $siteId;
 
@@ -66,7 +66,7 @@ class SafechargeCredentials implements JsonSerializable
         return $this->fields['secretKey'];
     }
 
-    public function setSecretKey(string $secretKey): self
+    public function setSecretKey(string $secretKey): static
     {
         $this->fields['secretKey'] = $secretKey;
 

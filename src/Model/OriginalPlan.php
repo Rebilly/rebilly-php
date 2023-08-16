@@ -51,7 +51,7 @@ class OriginalPlan implements JsonSerializable
         return $this->fields['id'];
     }
 
-    public function setId(string $id): self
+    public function setId(string $id): static
     {
         $this->fields['id'] = $id;
 

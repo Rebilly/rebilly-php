@@ -64,7 +64,7 @@ class RestrictToProducts extends CouponRestriction
     /**
      * @psalm-param self::TYPE_* $type
      */
-    public function setType(string $type): self
+    public function setType(string $type): static
     {
         $this->fields['type'] = $type;
 
@@ -82,7 +82,7 @@ class RestrictToProducts extends CouponRestriction
     /**
      * @param string[] $productIds
      */
-    public function setProductIds(array $productIds): self
+    public function setProductIds(array $productIds): static
     {
         $productIds = array_map(fn ($value) => $value ?? null, $productIds);
 
@@ -96,7 +96,7 @@ class RestrictToProducts extends CouponRestriction
         return $this->fields['minimumQuantity'] ?? null;
     }
 
-    public function setMinimumQuantity(null|int $minimumQuantity): self
+    public function setMinimumQuantity(null|int $minimumQuantity): static
     {
         $this->fields['minimumQuantity'] = $minimumQuantity;
 

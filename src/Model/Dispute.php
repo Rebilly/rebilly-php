@@ -472,7 +472,7 @@ class Dispute implements JsonSerializable
         return $this->fields['transactionId'];
     }
 
-    public function setTransactionId(string $transactionId): self
+    public function setTransactionId(string $transactionId): static
     {
         $this->fields['transactionId'] = $transactionId;
 
@@ -484,7 +484,7 @@ class Dispute implements JsonSerializable
         return $this->fields['currency'];
     }
 
-    public function setCurrency(string $currency): self
+    public function setCurrency(string $currency): static
     {
         $this->fields['currency'] = $currency;
 
@@ -496,7 +496,7 @@ class Dispute implements JsonSerializable
         return $this->fields['amount'];
     }
 
-    public function setAmount(float|string $amount): self
+    public function setAmount(float|string $amount): static
     {
         if (is_string($amount)) {
             $amount = (float) $amount;
@@ -512,7 +512,7 @@ class Dispute implements JsonSerializable
         return $this->fields['acquirerReferenceNumber'] ?? null;
     }
 
-    public function setAcquirerReferenceNumber(null|string $acquirerReferenceNumber): self
+    public function setAcquirerReferenceNumber(null|string $acquirerReferenceNumber): static
     {
         $this->fields['acquirerReferenceNumber'] = $acquirerReferenceNumber;
 
@@ -524,7 +524,7 @@ class Dispute implements JsonSerializable
         return $this->fields['caseId'] ?? null;
     }
 
-    public function setCaseId(null|string $caseId): self
+    public function setCaseId(null|string $caseId): static
     {
         $this->fields['caseId'] = $caseId;
 
@@ -542,7 +542,7 @@ class Dispute implements JsonSerializable
     /**
      * @psalm-param self::REASON_CODE_* $reasonCode
      */
-    public function setReasonCode(string $reasonCode): self
+    public function setReasonCode(string $reasonCode): static
     {
         $this->fields['reasonCode'] = $reasonCode;
 
@@ -568,7 +568,7 @@ class Dispute implements JsonSerializable
     /**
      * @psalm-param self::TYPE_* $type
      */
-    public function setType(string $type): self
+    public function setType(string $type): static
     {
         $this->fields['type'] = $type;
 
@@ -586,7 +586,7 @@ class Dispute implements JsonSerializable
     /**
      * @psalm-param self::STATUS_* $status
      */
-    public function setStatus(string $status): self
+    public function setStatus(string $status): static
     {
         $this->fields['status'] = $status;
 
@@ -598,7 +598,7 @@ class Dispute implements JsonSerializable
         return $this->fields['postedTime'];
     }
 
-    public function setPostedTime(DateTimeImmutable|string $postedTime): self
+    public function setPostedTime(DateTimeImmutable|string $postedTime): static
     {
         if (!($postedTime instanceof DateTimeImmutable)) {
             $postedTime = new DateTimeImmutable($postedTime);
@@ -614,7 +614,7 @@ class Dispute implements JsonSerializable
         return $this->fields['deadlineTime'] ?? null;
     }
 
-    public function setDeadlineTime(null|DateTimeImmutable|string $deadlineTime): self
+    public function setDeadlineTime(null|DateTimeImmutable|string $deadlineTime): static
     {
         if ($deadlineTime !== null && !($deadlineTime instanceof DateTimeImmutable)) {
             $deadlineTime = new DateTimeImmutable($deadlineTime);
@@ -635,7 +635,7 @@ class Dispute implements JsonSerializable
         return $this->fields['resolvedTime'] ?? null;
     }
 
-    public function setResolvedTime(null|DateTimeImmutable|string $resolvedTime): self
+    public function setResolvedTime(null|DateTimeImmutable|string $resolvedTime): static
     {
         if ($resolvedTime !== null && !($resolvedTime instanceof DateTimeImmutable)) {
             $resolvedTime = new DateTimeImmutable($resolvedTime);
@@ -736,14 +736,14 @@ class Dispute implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setCustomerId(null|string $customerId): self
+    private function setCustomerId(null|string $customerId): static
     {
         $this->fields['customerId'] = $customerId;
 
@@ -753,21 +753,21 @@ class Dispute implements JsonSerializable
     /**
      * @psalm-param self::CATEGORY_*|null $category
      */
-    private function setCategory(null|string $category): self
+    private function setCategory(null|string $category): static
     {
         $this->fields['category'] = $category;
 
         return $this;
     }
 
-    private function setRawResponse(null|string $rawResponse): self
+    private function setRawResponse(null|string $rawResponse): static
     {
         $this->fields['rawResponse'] = $rawResponse;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -778,7 +778,7 @@ class Dispute implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -792,7 +792,7 @@ class Dispute implements JsonSerializable
     /**
      * @param null|array<SelfLink|TransactionLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 
@@ -804,7 +804,7 @@ class Dispute implements JsonSerializable
     /**
      * @param null|array{transaction:Transaction} $embedded
      */
-    private function setEmbedded(null|array $embedded): self
+    private function setEmbedded(null|array $embedded): static
     {
         if ($embedded !== null) {
             $embedded['transaction'] = isset($embedded['transaction']) ? ($embedded['transaction'] instanceof Transaction ? $embedded['transaction'] : Transaction::from($embedded['transaction'])) : null;

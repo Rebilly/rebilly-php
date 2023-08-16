@@ -45,7 +45,7 @@ class DigitalWalletOnboardingApplePay implements JsonSerializable
         return $this->fields['domain'];
     }
 
-    public function setDomain(string $domain): self
+    public function setDomain(string $domain): static
     {
         $this->fields['domain'] = $domain;
 
@@ -76,7 +76,7 @@ class DigitalWalletOnboardingApplePay implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    private function setStatus(null|string $status): self
+    private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 

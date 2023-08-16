@@ -513,7 +513,7 @@ abstract class GatewayAccount implements JsonSerializable
         return $this->fields['acquirerName'] ?? null;
     }
 
-    public function setAcquirerName(null|AcquirerName|string $acquirerName): self
+    public function setAcquirerName(null|AcquirerName|string $acquirerName): static
     {
         if ($acquirerName !== null && !($acquirerName instanceof AcquirerName)) {
             $acquirerName = AcquirerName::from($acquirerName);
@@ -529,7 +529,7 @@ abstract class GatewayAccount implements JsonSerializable
         return $this->fields['method'];
     }
 
-    public function setMethod(PaymentMethod|string $method): self
+    public function setMethod(PaymentMethod|string $method): static
     {
         if (!($method instanceof PaymentMethod)) {
             $method = PaymentMethod::from($method);
@@ -551,7 +551,7 @@ abstract class GatewayAccount implements JsonSerializable
     /**
      * @param string[] $acceptedCurrencies
      */
-    public function setAcceptedCurrencies(array $acceptedCurrencies): self
+    public function setAcceptedCurrencies(array $acceptedCurrencies): static
     {
         $acceptedCurrencies = array_map(fn ($value) => $value ?? null, $acceptedCurrencies);
 
@@ -571,7 +571,7 @@ abstract class GatewayAccount implements JsonSerializable
     /**
      * @param null|PaymentCardBrand[] $paymentCardSchemes
      */
-    public function setPaymentCardSchemes(null|array $paymentCardSchemes): self
+    public function setPaymentCardSchemes(null|array $paymentCardSchemes): static
     {
         $paymentCardSchemes = $paymentCardSchemes !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof PaymentCardBrand ? $value : PaymentCardBrand::from($value)) : null, $paymentCardSchemes) : null;
 
@@ -593,7 +593,7 @@ abstract class GatewayAccount implements JsonSerializable
         return $this->fields['merchantCategoryCode'] ?? null;
     }
 
-    public function setMerchantCategoryCode(null|string $merchantCategoryCode): self
+    public function setMerchantCategoryCode(null|string $merchantCategoryCode): static
     {
         $this->fields['merchantCategoryCode'] = $merchantCategoryCode;
 
@@ -605,7 +605,7 @@ abstract class GatewayAccount implements JsonSerializable
         return $this->fields['dccMarkup'] ?? null;
     }
 
-    public function setDccMarkup(null|int $dccMarkup): self
+    public function setDccMarkup(null|int $dccMarkup): static
     {
         $this->fields['dccMarkup'] = $dccMarkup;
 
@@ -617,7 +617,7 @@ abstract class GatewayAccount implements JsonSerializable
         return $this->fields['dccForceCurrency'] ?? null;
     }
 
-    public function setDccForceCurrency(null|string $dccForceCurrency): self
+    public function setDccForceCurrency(null|string $dccForceCurrency): static
     {
         $this->fields['dccForceCurrency'] = $dccForceCurrency;
 
@@ -629,7 +629,7 @@ abstract class GatewayAccount implements JsonSerializable
         return $this->fields['descriptor'] ?? null;
     }
 
-    public function setDescriptor(null|string $descriptor): self
+    public function setDescriptor(null|string $descriptor): static
     {
         $this->fields['descriptor'] = $descriptor;
 
@@ -641,7 +641,7 @@ abstract class GatewayAccount implements JsonSerializable
         return $this->fields['cityField'] ?? null;
     }
 
-    public function setCityField(null|string $cityField): self
+    public function setCityField(null|string $cityField): static
     {
         $this->fields['cityField'] = $cityField;
 
@@ -659,7 +659,7 @@ abstract class GatewayAccount implements JsonSerializable
     /**
      * @param null|string[] $excludedDccQuoteCurrencies
      */
-    public function setExcludedDccQuoteCurrencies(null|array $excludedDccQuoteCurrencies): self
+    public function setExcludedDccQuoteCurrencies(null|array $excludedDccQuoteCurrencies): static
     {
         $excludedDccQuoteCurrencies = $excludedDccQuoteCurrencies !== null ? array_map(fn ($value) => $value ?? null, $excludedDccQuoteCurrencies) : null;
 
@@ -673,7 +673,7 @@ abstract class GatewayAccount implements JsonSerializable
         return $this->fields['monthlyLimit'] ?? null;
     }
 
-    public function setMonthlyLimit(null|float|string $monthlyLimit): self
+    public function setMonthlyLimit(null|float|string $monthlyLimit): static
     {
         if (is_string($monthlyLimit)) {
             $monthlyLimit = (float) $monthlyLimit;
@@ -689,7 +689,7 @@ abstract class GatewayAccount implements JsonSerializable
         return $this->fields['approvalWindowTtl'] ?? null;
     }
 
-    public function setApprovalWindowTtl(null|int $approvalWindowTtl): self
+    public function setApprovalWindowTtl(null|int $approvalWindowTtl): static
     {
         $this->fields['approvalWindowTtl'] = $approvalWindowTtl;
 
@@ -701,7 +701,7 @@ abstract class GatewayAccount implements JsonSerializable
         return $this->fields['reconciliationWindowEnabled'] ?? null;
     }
 
-    public function setReconciliationWindowEnabled(null|bool $reconciliationWindowEnabled): self
+    public function setReconciliationWindowEnabled(null|bool $reconciliationWindowEnabled): static
     {
         $this->fields['reconciliationWindowEnabled'] = $reconciliationWindowEnabled;
 
@@ -713,7 +713,7 @@ abstract class GatewayAccount implements JsonSerializable
         return $this->fields['reconciliationWindowTtl'] ?? null;
     }
 
-    public function setReconciliationWindowTtl(null|int $reconciliationWindowTtl): self
+    public function setReconciliationWindowTtl(null|int $reconciliationWindowTtl): static
     {
         $this->fields['reconciliationWindowTtl'] = $reconciliationWindowTtl;
 
@@ -725,7 +725,7 @@ abstract class GatewayAccount implements JsonSerializable
         return $this->fields['threeDSecure'] ?? null;
     }
 
-    public function setThreeDSecure(null|bool $threeDSecure): self
+    public function setThreeDSecure(null|bool $threeDSecure): static
     {
         $this->fields['threeDSecure'] = $threeDSecure;
 
@@ -737,7 +737,7 @@ abstract class GatewayAccount implements JsonSerializable
         return $this->fields['dynamicDescriptor'] ?? null;
     }
 
-    public function setDynamicDescriptor(null|bool $dynamicDescriptor): self
+    public function setDynamicDescriptor(null|bool $dynamicDescriptor): static
     {
         $this->fields['dynamicDescriptor'] = $dynamicDescriptor;
 
@@ -749,7 +749,7 @@ abstract class GatewayAccount implements JsonSerializable
         return $this->fields['digitalWallets'] ?? null;
     }
 
-    public function setDigitalWallets(null|DigitalWallets|array $digitalWallets): self
+    public function setDigitalWallets(null|DigitalWallets|array $digitalWallets): static
     {
         if ($digitalWallets !== null && !($digitalWallets instanceof DigitalWallets)) {
             $digitalWallets = DigitalWallets::from($digitalWallets);
@@ -770,7 +770,7 @@ abstract class GatewayAccount implements JsonSerializable
         return $this->fields['additionalFilters'] ?? null;
     }
 
-    public function setAdditionalFilters(null|string $additionalFilters): self
+    public function setAdditionalFilters(null|string $additionalFilters): static
     {
         $this->fields['additionalFilters'] = $additionalFilters;
 
@@ -782,7 +782,7 @@ abstract class GatewayAccount implements JsonSerializable
         return $this->fields['timeout'] ?? null;
     }
 
-    public function setTimeout(null|int $timeout): self
+    public function setTimeout(null|int $timeout): static
     {
         $this->fields['timeout'] = $timeout;
 
@@ -799,7 +799,7 @@ abstract class GatewayAccount implements JsonSerializable
         return $this->fields['sticky'] ?? null;
     }
 
-    public function setSticky(null|bool $sticky): self
+    public function setSticky(null|bool $sticky): static
     {
         $this->fields['sticky'] = $sticky;
 
@@ -817,7 +817,7 @@ abstract class GatewayAccount implements JsonSerializable
     /**
      * @psalm-param self::SETUP_INSTRUCTION_*|null $setupInstruction
      */
-    public function setSetupInstruction(null|string $setupInstruction): self
+    public function setSetupInstruction(null|string $setupInstruction): static
     {
         $this->fields['setupInstruction'] = $setupInstruction;
 
@@ -944,14 +944,14 @@ abstract class GatewayAccount implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setGatewayName(GatewayName|string $gatewayName): self
+    private function setGatewayName(GatewayName|string $gatewayName): static
     {
         if (!($gatewayName instanceof GatewayName)) {
             $gatewayName = GatewayName::from($gatewayName);
@@ -965,28 +965,28 @@ abstract class GatewayAccount implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    private function setStatus(null|string $status): self
+    private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
         return $this;
     }
 
-    private function setIsDown(null|bool $isDown): self
+    private function setIsDown(null|bool $isDown): static
     {
         $this->fields['isDown'] = $isDown;
 
         return $this;
     }
 
-    private function setToken(null|string $token): self
+    private function setToken(null|string $token): static
     {
         $this->fields['token'] = $token;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -997,7 +997,7 @@ abstract class GatewayAccount implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -1008,7 +1008,7 @@ abstract class GatewayAccount implements JsonSerializable
         return $this;
     }
 
-    private function setOrganizationId(null|string $organizationId): self
+    private function setOrganizationId(null|string $organizationId): static
     {
         $this->fields['organizationId'] = $organizationId;
 
@@ -1018,7 +1018,7 @@ abstract class GatewayAccount implements JsonSerializable
     /**
      * @param null|array<DynamicIpnLink|OnBoardingUrlLink|SelfLink|StaticIpnLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 

@@ -64,7 +64,7 @@ abstract class CommonAlternativeInstrument extends PaymentInstrument
         return $this->fields['method'] ?? null;
     }
 
-    public function setMethod(null|AlternativePaymentMethods|string $method): self
+    public function setMethod(null|AlternativePaymentMethods|string $method): static
     {
         if ($method !== null && !($method instanceof AlternativePaymentMethods)) {
             $method = AlternativePaymentMethods::from($method);
@@ -80,7 +80,7 @@ abstract class CommonAlternativeInstrument extends PaymentInstrument
         return $this->fields['billingAddress'] ?? null;
     }
 
-    public function setBillingAddress(null|ContactObject|array $billingAddress): self
+    public function setBillingAddress(null|ContactObject|array $billingAddress): static
     {
         if ($billingAddress !== null && !($billingAddress instanceof ContactObject)) {
             $billingAddress = ContactObject::from($billingAddress);
@@ -104,7 +104,7 @@ abstract class CommonAlternativeInstrument extends PaymentInstrument
         return $this->fields['useAsBackup'] ?? null;
     }
 
-    public function setUseAsBackup(null|bool $useAsBackup): self
+    public function setUseAsBackup(null|bool $useAsBackup): static
     {
         $this->fields['useAsBackup'] = $useAsBackup;
 
@@ -126,7 +126,7 @@ abstract class CommonAlternativeInstrument extends PaymentInstrument
         return $this->fields['customFields'] ?? null;
     }
 
-    public function setCustomFields(null|array $customFields): self
+    public function setCustomFields(null|array $customFields): static
     {
         $this->fields['customFields'] = $customFields;
 
@@ -164,7 +164,7 @@ abstract class CommonAlternativeInstrument extends PaymentInstrument
         return parent::jsonSerialize() + $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -174,14 +174,14 @@ abstract class CommonAlternativeInstrument extends PaymentInstrument
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    private function setStatus(null|string $status): self
+    private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -192,7 +192,7 @@ abstract class CommonAlternativeInstrument extends PaymentInstrument
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);

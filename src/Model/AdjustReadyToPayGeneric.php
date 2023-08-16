@@ -41,7 +41,7 @@ class AdjustReadyToPayGeneric extends AdjustPaymentMethod
         return $this->fields['paymentMethod'];
     }
 
-    public function setPaymentMethod(AlternativePaymentMethods|string $paymentMethod): self
+    public function setPaymentMethod(AlternativePaymentMethods|string $paymentMethod): static
     {
         if (!($paymentMethod instanceof AlternativePaymentMethods)) {
             $paymentMethod = AlternativePaymentMethods::from($paymentMethod);
@@ -57,7 +57,7 @@ class AdjustReadyToPayGeneric extends AdjustPaymentMethod
         return $this->fields['feature'];
     }
 
-    public function setFeature(string $feature): self
+    public function setFeature(string $feature): static
     {
         $this->fields['feature'] = $feature;
 

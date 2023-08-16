@@ -119,7 +119,7 @@ abstract class CommonPaymentCard extends PaymentInstrument
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    public function setStatus(null|string $status): self
+    public function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
@@ -146,7 +146,7 @@ abstract class CommonPaymentCard extends PaymentInstrument
         return $this->fields['pan'] ?? null;
     }
 
-    public function setPan(null|string $pan): self
+    public function setPan(null|string $pan): static
     {
         $this->fields['pan'] = $pan;
 
@@ -158,7 +158,7 @@ abstract class CommonPaymentCard extends PaymentInstrument
         return $this->fields['expYear'] ?? null;
     }
 
-    public function setExpYear(null|int $expYear): self
+    public function setExpYear(null|int $expYear): static
     {
         $this->fields['expYear'] = $expYear;
 
@@ -170,7 +170,7 @@ abstract class CommonPaymentCard extends PaymentInstrument
         return $this->fields['expMonth'] ?? null;
     }
 
-    public function setExpMonth(null|int $expMonth): self
+    public function setExpMonth(null|int $expMonth): static
     {
         $this->fields['expMonth'] = $expMonth;
 
@@ -182,7 +182,7 @@ abstract class CommonPaymentCard extends PaymentInstrument
         return $this->fields['cvv'] ?? null;
     }
 
-    public function setCvv(null|string $cvv): self
+    public function setCvv(null|string $cvv): static
     {
         $this->fields['cvv'] = $cvv;
 
@@ -209,7 +209,7 @@ abstract class CommonPaymentCard extends PaymentInstrument
         return $this->fields['billingAddress'] ?? null;
     }
 
-    public function setBillingAddress(null|ContactObject|array $billingAddress): self
+    public function setBillingAddress(null|ContactObject|array $billingAddress): static
     {
         if ($billingAddress !== null && !($billingAddress instanceof ContactObject)) {
             $billingAddress = ContactObject::from($billingAddress);
@@ -225,7 +225,7 @@ abstract class CommonPaymentCard extends PaymentInstrument
         return $this->fields['useAsBackup'] ?? null;
     }
 
-    public function setUseAsBackup(null|bool $useAsBackup): self
+    public function setUseAsBackup(null|bool $useAsBackup): static
     {
         $this->fields['useAsBackup'] = $useAsBackup;
 
@@ -252,7 +252,7 @@ abstract class CommonPaymentCard extends PaymentInstrument
         return $this->fields['customFields'] ?? null;
     }
 
-    public function setCustomFields(null|array $customFields): self
+    public function setCustomFields(null|array $customFields): static
     {
         $this->fields['customFields'] = $customFields;
 
@@ -323,7 +323,7 @@ abstract class CommonPaymentCard extends PaymentInstrument
         return parent::jsonSerialize() + $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -333,35 +333,35 @@ abstract class CommonPaymentCard extends PaymentInstrument
     /**
      * @psalm-param self::METHOD_*|null $method
      */
-    private function setMethod(null|string $method): self
+    private function setMethod(null|string $method): static
     {
         $this->fields['method'] = $method;
 
         return $this;
     }
 
-    private function setFingerprint(null|string $fingerprint): self
+    private function setFingerprint(null|string $fingerprint): static
     {
         $this->fields['fingerprint'] = $fingerprint;
 
         return $this;
     }
 
-    private function setBin(null|string $bin): self
+    private function setBin(null|string $bin): static
     {
         $this->fields['bin'] = $bin;
 
         return $this;
     }
 
-    private function setLast4(null|string $last4): self
+    private function setLast4(null|string $last4): static
     {
         $this->fields['last4'] = $last4;
 
         return $this;
     }
 
-    private function setBrand(null|PaymentCardBrand|string $brand): self
+    private function setBrand(null|PaymentCardBrand|string $brand): static
     {
         if ($brand !== null && !($brand instanceof PaymentCardBrand)) {
             $brand = PaymentCardBrand::from($brand);
@@ -372,28 +372,28 @@ abstract class CommonPaymentCard extends PaymentInstrument
         return $this;
     }
 
-    private function setBankCountry(null|string $bankCountry): self
+    private function setBankCountry(null|string $bankCountry): static
     {
         $this->fields['bankCountry'] = $bankCountry;
 
         return $this;
     }
 
-    private function setBankName(null|string $bankName): self
+    private function setBankName(null|string $bankName): static
     {
         $this->fields['bankName'] = $bankName;
 
         return $this;
     }
 
-    private function setBillingPortalUrl(null|string $billingPortalUrl): self
+    private function setBillingPortalUrl(null|string $billingPortalUrl): static
     {
         $this->fields['billingPortalUrl'] = $billingPortalUrl;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -404,7 +404,7 @@ abstract class CommonPaymentCard extends PaymentInstrument
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);

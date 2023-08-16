@@ -57,7 +57,7 @@ class ReadyToPayPaymentCardMethod extends ReadyToPayMethods
     /**
      * @psalm-param self::METHOD_* $method
      */
-    public function setMethod(string $method): self
+    public function setMethod(string $method): static
     {
         $this->fields['method'] = $method;
 
@@ -69,7 +69,7 @@ class ReadyToPayPaymentCardMethod extends ReadyToPayMethods
         return $this->fields['feature'] ?? null;
     }
 
-    public function setFeature(null|array|ApplePayFeature|GooglePayFeature $feature): self
+    public function setFeature(null|array|ApplePayFeature|GooglePayFeature $feature): static
     {
         $feature = $this->ensureFeature($feature);
 
@@ -89,7 +89,7 @@ class ReadyToPayPaymentCardMethod extends ReadyToPayMethods
     /**
      * @param null|PaymentCardBrand[] $brands
      */
-    public function setBrands(null|array $brands): self
+    public function setBrands(null|array $brands): static
     {
         $brands = $brands !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof PaymentCardBrand ? $value : PaymentCardBrand::from($value)) : null, $brands) : null;
 
@@ -109,7 +109,7 @@ class ReadyToPayPaymentCardMethod extends ReadyToPayMethods
     /**
      * @param null|string[] $filters
      */
-    public function setFilters(null|array $filters): self
+    public function setFilters(null|array $filters): static
     {
         $filters = $filters !== null ? array_map(fn ($value) => $value ?? null, $filters) : null;
 

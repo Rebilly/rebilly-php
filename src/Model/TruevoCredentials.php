@@ -51,7 +51,7 @@ class TruevoCredentials implements JsonSerializable
         return $this->fields['mid'];
     }
 
-    public function setMid(string $mid): self
+    public function setMid(string $mid): static
     {
         $this->fields['mid'] = $mid;
 
@@ -63,7 +63,7 @@ class TruevoCredentials implements JsonSerializable
         return $this->fields['tid'];
     }
 
-    public function setTid(string $tid): self
+    public function setTid(string $tid): static
     {
         $this->fields['tid'] = $tid;
 
@@ -75,7 +75,7 @@ class TruevoCredentials implements JsonSerializable
         return $this->fields['token'];
     }
 
-    public function setToken(string $token): self
+    public function setToken(string $token): static
     {
         $this->fields['token'] = $token;
 
@@ -87,7 +87,7 @@ class TruevoCredentials implements JsonSerializable
         return $this->fields['merchantName'] ?? null;
     }
 
-    public function setMerchantName(null|string $merchantName): self
+    public function setMerchantName(null|string $merchantName): static
     {
         $this->fields['merchantName'] = $merchantName;
 
@@ -99,7 +99,7 @@ class TruevoCredentials implements JsonSerializable
         return $this->fields['sftpUsername'] ?? null;
     }
 
-    public function setSftpUsername(null|string $sftpUsername): self
+    public function setSftpUsername(null|string $sftpUsername): static
     {
         $this->fields['sftpUsername'] = $sftpUsername;
 
@@ -111,7 +111,7 @@ class TruevoCredentials implements JsonSerializable
         return $this->fields['sftpPrivateKey'] ?? null;
     }
 
-    public function setSftpPrivateKey(null|string $sftpPrivateKey): self
+    public function setSftpPrivateKey(null|string $sftpPrivateKey): static
     {
         $this->fields['sftpPrivateKey'] = $sftpPrivateKey;
 

@@ -42,7 +42,7 @@ class ElavonCredentials implements JsonSerializable
         return $this->fields['ssl_merchant_id'];
     }
 
-    public function setSslMerchantId(string $sslMerchantId): self
+    public function setSslMerchantId(string $sslMerchantId): static
     {
         $this->fields['ssl_merchant_id'] = $sslMerchantId;
 
@@ -54,7 +54,7 @@ class ElavonCredentials implements JsonSerializable
         return $this->fields['ssl_user_id'];
     }
 
-    public function setSslUserId(string $sslUserId): self
+    public function setSslUserId(string $sslUserId): static
     {
         $this->fields['ssl_user_id'] = $sslUserId;
 
@@ -66,7 +66,7 @@ class ElavonCredentials implements JsonSerializable
         return $this->fields['ssl_pin'];
     }
 
-    public function setSslPin(string $sslPin): self
+    public function setSslPin(string $sslPin): static
     {
         $this->fields['ssl_pin'] = $sslPin;
 

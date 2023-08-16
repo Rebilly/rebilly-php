@@ -65,7 +65,7 @@ abstract class BankAccountCreatePlain extends PaymentInstruction
     /**
      * @psalm-param self::ACCOUNT_NUMBER_TYPE_* $accountNumberType
      */
-    private function setAccountNumberType(string $accountNumberType): self
+    private function setAccountNumberType(string $accountNumberType): static
     {
         $this->fields['accountNumberType'] = $accountNumberType;
 

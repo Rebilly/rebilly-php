@@ -48,7 +48,7 @@ class InvoiceTransactionAllocation implements JsonSerializable
         return $this->fields['invoiceId'] ?? null;
     }
 
-    public function setInvoiceId(null|string $invoiceId): self
+    public function setInvoiceId(null|string $invoiceId): static
     {
         $this->fields['invoiceId'] = $invoiceId;
 
@@ -60,7 +60,7 @@ class InvoiceTransactionAllocation implements JsonSerializable
         return $this->fields['transactionId'] ?? null;
     }
 
-    public function setTransactionId(null|string $transactionId): self
+    public function setTransactionId(null|string $transactionId): static
     {
         $this->fields['transactionId'] = $transactionId;
 
@@ -72,7 +72,7 @@ class InvoiceTransactionAllocation implements JsonSerializable
         return $this->fields['amount'] ?? null;
     }
 
-    public function setAmount(null|float $amount): self
+    public function setAmount(null|float $amount): static
     {
         $this->fields['amount'] = $amount;
 
@@ -84,7 +84,7 @@ class InvoiceTransactionAllocation implements JsonSerializable
         return $this->fields['currency'] ?? null;
     }
 
-    public function setCurrency(null|string $currency): self
+    public function setCurrency(null|string $currency): static
     {
         $this->fields['currency'] = $currency;
 
@@ -124,7 +124,7 @@ class InvoiceTransactionAllocation implements JsonSerializable
     /**
      * @param null|array<InvoiceLink|TransactionLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 

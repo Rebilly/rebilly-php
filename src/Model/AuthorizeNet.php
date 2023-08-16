@@ -38,7 +38,7 @@ class AuthorizeNet extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(AuthorizeNetCredentials|array $credentials): self
+    public function setCredentials(AuthorizeNetCredentials|array $credentials): static
     {
         if (!($credentials instanceof AuthorizeNetCredentials)) {
             $credentials = AuthorizeNetCredentials::from($credentials);

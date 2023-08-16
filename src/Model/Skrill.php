@@ -41,7 +41,7 @@ class Skrill extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(SkrillCredentials|array $credentials): self
+    public function setCredentials(SkrillCredentials|array $credentials): static
     {
         if (!($credentials instanceof SkrillCredentials)) {
             $credentials = SkrillCredentials::from($credentials);
@@ -57,7 +57,7 @@ class Skrill extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|SkrillSettings|array $settings): self
+    public function setSettings(null|SkrillSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof SkrillSettings)) {
             $settings = SkrillSettings::from($settings);

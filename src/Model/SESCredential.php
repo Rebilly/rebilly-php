@@ -76,7 +76,7 @@ class SESCredential implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    public function setStatus(null|string $status): self
+    public function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
@@ -88,7 +88,7 @@ class SESCredential implements JsonSerializable
         return $this->fields['deactivationTime'] ?? null;
     }
 
-    public function setDeactivationTime(null|DateTimeImmutable|string $deactivationTime): self
+    public function setDeactivationTime(null|DateTimeImmutable|string $deactivationTime): static
     {
         if ($deactivationTime !== null && !($deactivationTime instanceof DateTimeImmutable)) {
             $deactivationTime = new DateTimeImmutable($deactivationTime);
@@ -104,7 +104,7 @@ class SESCredential implements JsonSerializable
         return $this->fields['key'];
     }
 
-    public function setKey(string $key): self
+    public function setKey(string $key): static
     {
         $this->fields['key'] = $key;
 
@@ -116,7 +116,7 @@ class SESCredential implements JsonSerializable
         return $this->fields['secret'];
     }
 
-    public function setSecret(string $secret): self
+    public function setSecret(string $secret): static
     {
         $this->fields['secret'] = $secret;
 
@@ -128,7 +128,7 @@ class SESCredential implements JsonSerializable
         return $this->fields['region'];
     }
 
-    public function setRegion(string $region): self
+    public function setRegion(string $region): static
     {
         $this->fields['region'] = $region;
 
@@ -140,7 +140,7 @@ class SESCredential implements JsonSerializable
         return $this->fields['configurationSetName'] ?? null;
     }
 
-    public function setConfigurationSetName(null|string $configurationSetName): self
+    public function setConfigurationSetName(null|string $configurationSetName): static
     {
         $this->fields['configurationSetName'] = $configurationSetName;
 
@@ -186,7 +186,7 @@ class SESCredential implements JsonSerializable
         return $data;
     }
 
-    private function setHash(null|string $hash): self
+    private function setHash(null|string $hash): static
     {
         $this->fields['hash'] = $hash;
 
@@ -196,7 +196,7 @@ class SESCredential implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

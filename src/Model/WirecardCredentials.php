@@ -51,7 +51,7 @@ class WirecardCredentials implements JsonSerializable
         return $this->fields['merchantUsername'];
     }
 
-    public function setMerchantUsername(string $merchantUsername): self
+    public function setMerchantUsername(string $merchantUsername): static
     {
         $this->fields['merchantUsername'] = $merchantUsername;
 
@@ -63,7 +63,7 @@ class WirecardCredentials implements JsonSerializable
         return $this->fields['merchantPassword'];
     }
 
-    public function setMerchantPassword(string $merchantPassword): self
+    public function setMerchantPassword(string $merchantPassword): static
     {
         $this->fields['merchantPassword'] = $merchantPassword;
 
@@ -75,7 +75,7 @@ class WirecardCredentials implements JsonSerializable
         return $this->fields['businessSignature'];
     }
 
-    public function setBusinessSignature(string $businessSignature): self
+    public function setBusinessSignature(string $businessSignature): static
     {
         $this->fields['businessSignature'] = $businessSignature;
 
@@ -87,7 +87,7 @@ class WirecardCredentials implements JsonSerializable
         return $this->fields['delay'];
     }
 
-    public function setDelay(int $delay): self
+    public function setDelay(int $delay): static
     {
         $this->fields['delay'] = $delay;
 
@@ -99,7 +99,7 @@ class WirecardCredentials implements JsonSerializable
         return $this->fields['sftpUsername'] ?? null;
     }
 
-    public function setSftpUsername(null|string $sftpUsername): self
+    public function setSftpUsername(null|string $sftpUsername): static
     {
         $this->fields['sftpUsername'] = $sftpUsername;
 
@@ -111,7 +111,7 @@ class WirecardCredentials implements JsonSerializable
         return $this->fields['sftpPrivateKey'] ?? null;
     }
 
-    public function setSftpPrivateKey(null|string $sftpPrivateKey): self
+    public function setSftpPrivateKey(null|string $sftpPrivateKey): static
     {
         $this->fields['sftpPrivateKey'] = $sftpPrivateKey;
 

@@ -42,7 +42,7 @@ class Pay4FunCredentials implements JsonSerializable
         return $this->fields['merchantId'];
     }
 
-    public function setMerchantId(string $merchantId): self
+    public function setMerchantId(string $merchantId): static
     {
         $this->fields['merchantId'] = $merchantId;
 
@@ -54,7 +54,7 @@ class Pay4FunCredentials implements JsonSerializable
         return $this->fields['merchantSecret'];
     }
 
-    public function setMerchantSecret(string $merchantSecret): self
+    public function setMerchantSecret(string $merchantSecret): static
     {
         $this->fields['merchantSecret'] = $merchantSecret;
 
@@ -66,7 +66,7 @@ class Pay4FunCredentials implements JsonSerializable
         return $this->fields['merchantKey'];
     }
 
-    public function setMerchantKey(string $merchantKey): self
+    public function setMerchantKey(string $merchantKey): static
     {
         $this->fields['merchantKey'] = $merchantKey;
 

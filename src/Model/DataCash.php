@@ -44,7 +44,7 @@ class DataCash extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(DataCashCredentials|array $credentials): self
+    public function setCredentials(DataCashCredentials|array $credentials): static
     {
         if (!($credentials instanceof DataCashCredentials)) {
             $credentials = DataCashCredentials::from($credentials);
@@ -60,7 +60,7 @@ class DataCash extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|DataCashSettings|array $settings): self
+    public function setSettings(null|DataCashSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof DataCashSettings)) {
             $settings = DataCashSettings::from($settings);
@@ -76,7 +76,7 @@ class DataCash extends GatewayAccount
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|DataCash3dsServers|array $threeDSecureServer): self
+    public function setThreeDSecureServer(null|DataCash3dsServers|array $threeDSecureServer): static
     {
         if ($threeDSecureServer !== null && !($threeDSecureServer instanceof DataCash3dsServers)) {
             $threeDSecureServer = DataCash3dsServers::from($threeDSecureServer);

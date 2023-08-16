@@ -42,7 +42,7 @@ class CommonBillingPortalCustomizationLinks implements JsonSerializable
         return $this->fields['refundPolicy'] ?? null;
     }
 
-    public function setRefundPolicy(null|string $refundPolicy): self
+    public function setRefundPolicy(null|string $refundPolicy): static
     {
         $this->fields['refundPolicy'] = $refundPolicy;
 
@@ -54,7 +54,7 @@ class CommonBillingPortalCustomizationLinks implements JsonSerializable
         return $this->fields['privacyPolicy'] ?? null;
     }
 
-    public function setPrivacyPolicy(null|string $privacyPolicy): self
+    public function setPrivacyPolicy(null|string $privacyPolicy): static
     {
         $this->fields['privacyPolicy'] = $privacyPolicy;
 
@@ -66,7 +66,7 @@ class CommonBillingPortalCustomizationLinks implements JsonSerializable
         return $this->fields['termsOfService'] ?? null;
     }
 
-    public function setTermsOfService(null|string $termsOfService): self
+    public function setTermsOfService(null|string $termsOfService): static
     {
         $this->fields['termsOfService'] = $termsOfService;
 

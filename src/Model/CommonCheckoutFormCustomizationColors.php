@@ -39,7 +39,7 @@ class CommonCheckoutFormCustomizationColors implements JsonSerializable
         return $this->fields['primary'] ?? null;
     }
 
-    public function setPrimary(null|string $primary): self
+    public function setPrimary(null|string $primary): static
     {
         $this->fields['primary'] = $primary;
 
@@ -51,7 +51,7 @@ class CommonCheckoutFormCustomizationColors implements JsonSerializable
         return $this->fields['buttonText'] ?? null;
     }
 
-    public function setButtonText(null|string $buttonText): self
+    public function setButtonText(null|string $buttonText): static
     {
         $this->fields['buttonText'] = $buttonText;
 

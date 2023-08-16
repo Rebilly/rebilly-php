@@ -42,7 +42,7 @@ class NinjaWalletCredentials implements JsonSerializable
         return $this->fields['apiKey'];
     }
 
-    public function setApiKey(string $apiKey): self
+    public function setApiKey(string $apiKey): static
     {
         $this->fields['apiKey'] = $apiKey;
 
@@ -54,7 +54,7 @@ class NinjaWalletCredentials implements JsonSerializable
         return $this->fields['secret'];
     }
 
-    public function setSecret(string $secret): self
+    public function setSecret(string $secret): static
     {
         $this->fields['secret'] = $secret;
 
@@ -66,7 +66,7 @@ class NinjaWalletCredentials implements JsonSerializable
         return $this->fields['passphrase'];
     }
 
-    public function setPassphrase(string $passphrase): self
+    public function setPassphrase(string $passphrase): static
     {
         $this->fields['passphrase'] = $passphrase;
 

@@ -51,7 +51,7 @@ class Bind implements JsonSerializable
         return $this->fields['id'] ?? null;
     }
 
-    public function setId(null|string $id): self
+    public function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -63,7 +63,7 @@ class Bind implements JsonSerializable
         return $this->fields['name'];
     }
 
-    public function setName(string $name): self
+    public function setName(string $name): static
     {
         $this->fields['name'] = $name;
 
@@ -81,7 +81,7 @@ class Bind implements JsonSerializable
     /**
      * @param null|string[] $labels
      */
-    public function setLabels(null|array $labels): self
+    public function setLabels(null|array $labels): static
     {
         $labels = $labels !== null ? array_map(fn ($value) => $value ?? null, $labels) : null;
 
@@ -95,7 +95,7 @@ class Bind implements JsonSerializable
         return $this->fields['status'] ?? null;
     }
 
-    public function setStatus(null|OnOff|string $status): self
+    public function setStatus(null|OnOff|string $status): static
     {
         if ($status !== null && !($status instanceof OnOff)) {
             $status = OnOff::from($status);
@@ -111,7 +111,7 @@ class Bind implements JsonSerializable
         return $this->fields['filter'] ?? null;
     }
 
-    public function setFilter(null|string $filter): self
+    public function setFilter(null|string $filter): static
     {
         $this->fields['filter'] = $filter;
 
@@ -129,7 +129,7 @@ class Bind implements JsonSerializable
     /**
      * @param RuleAction[] $actions
      */
-    public function setActions(array $actions): self
+    public function setActions(array $actions): static
     {
         $actions = array_map(fn ($value) => $value !== null ? ($value instanceof RuleAction ? $value : RuleAction::from($value)) : null, $actions);
 

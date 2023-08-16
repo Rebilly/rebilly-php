@@ -38,7 +38,7 @@ class Gpaysafe extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(GpaysafeCredentials|array $credentials): self
+    public function setCredentials(GpaysafeCredentials|array $credentials): static
     {
         if (!($credentials instanceof GpaysafeCredentials)) {
             $credentials = GpaysafeCredentials::from($credentials);

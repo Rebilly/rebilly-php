@@ -39,7 +39,7 @@ class NGeniusCredentials implements JsonSerializable
         return $this->fields['outletId'];
     }
 
-    public function setOutletId(string $outletId): self
+    public function setOutletId(string $outletId): static
     {
         $this->fields['outletId'] = $outletId;
 
@@ -51,7 +51,7 @@ class NGeniusCredentials implements JsonSerializable
         return $this->fields['apiKey'];
     }
 
-    public function setApiKey(string $apiKey): self
+    public function setApiKey(string $apiKey): static
     {
         $this->fields['apiKey'] = $apiKey;
 

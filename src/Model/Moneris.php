@@ -38,7 +38,7 @@ class Moneris extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(MonerisCredentials|array $credentials): self
+    public function setCredentials(MonerisCredentials|array $credentials): static
     {
         if (!($credentials instanceof MonerisCredentials)) {
             $credentials = MonerisCredentials::from($credentials);

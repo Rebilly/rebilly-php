@@ -36,7 +36,7 @@ class TransactionEmbed implements JsonSerializable
         return $this->fields['transaction'] ?? null;
     }
 
-    public function setTransaction(null|Transaction|array $transaction): self
+    public function setTransaction(null|Transaction|array $transaction): static
     {
         if ($transaction !== null && !($transaction instanceof Transaction)) {
             $transaction = Transaction::from($transaction);

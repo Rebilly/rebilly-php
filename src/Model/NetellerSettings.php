@@ -36,7 +36,7 @@ class NetellerSettings implements JsonSerializable
         return $this->fields['populateCustomerEmail'] ?? null;
     }
 
-    public function setPopulateCustomerEmail(null|bool $populateCustomerEmail): self
+    public function setPopulateCustomerEmail(null|bool $populateCustomerEmail): static
     {
         $this->fields['populateCustomerEmail'] = $populateCustomerEmail;
 

@@ -44,7 +44,7 @@ class OfferPurchaseBump extends RuleAction
     /**
      * @param PurchaseBumpSplitVersion[] $bumpOffers
      */
-    public function setBumpOffers(array $bumpOffers): self
+    public function setBumpOffers(array $bumpOffers): static
     {
         $bumpOffers = array_map(fn ($value) => $value !== null ? ($value instanceof PurchaseBumpSplitVersion ? $value : PurchaseBumpSplitVersion::from($value)) : null, $bumpOffers);
 

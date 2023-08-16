@@ -38,7 +38,7 @@ class FundSend extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(FundSendCredentials|array $credentials): self
+    public function setCredentials(FundSendCredentials|array $credentials): static
     {
         if (!($credentials instanceof FundSendCredentials)) {
             $credentials = FundSendCredentials::from($credentials);

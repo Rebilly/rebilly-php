@@ -71,7 +71,7 @@ class PaymentCardCreatePlain extends PaymentInstruction
     /**
      * @psalm-param self::METHOD_* $method
      */
-    public function setMethod(string $method): self
+    public function setMethod(string $method): static
     {
         $this->fields['method'] = $method;
 
@@ -83,7 +83,7 @@ class PaymentCardCreatePlain extends PaymentInstruction
         return $this->fields['customerId'];
     }
 
-    public function setCustomerId(string $customerId): self
+    public function setCustomerId(string $customerId): static
     {
         $this->fields['customerId'] = $customerId;
 
@@ -95,7 +95,7 @@ class PaymentCardCreatePlain extends PaymentInstruction
         return $this->fields['pan'];
     }
 
-    public function setPan(string $pan): self
+    public function setPan(string $pan): static
     {
         $this->fields['pan'] = $pan;
 
@@ -107,7 +107,7 @@ class PaymentCardCreatePlain extends PaymentInstruction
         return $this->fields['expYear'];
     }
 
-    public function setExpYear(int $expYear): self
+    public function setExpYear(int $expYear): static
     {
         $this->fields['expYear'] = $expYear;
 
@@ -119,7 +119,7 @@ class PaymentCardCreatePlain extends PaymentInstruction
         return $this->fields['expMonth'];
     }
 
-    public function setExpMonth(int $expMonth): self
+    public function setExpMonth(int $expMonth): static
     {
         $this->fields['expMonth'] = $expMonth;
 
@@ -131,7 +131,7 @@ class PaymentCardCreatePlain extends PaymentInstruction
         return $this->fields['cvv'] ?? null;
     }
 
-    public function setCvv(null|string $cvv): self
+    public function setCvv(null|string $cvv): static
     {
         $this->fields['cvv'] = $cvv;
 
@@ -143,7 +143,7 @@ class PaymentCardCreatePlain extends PaymentInstruction
         return $this->fields['billingAddress'];
     }
 
-    public function setBillingAddress(ContactObject|array $billingAddress): self
+    public function setBillingAddress(ContactObject|array $billingAddress): static
     {
         if (!($billingAddress instanceof ContactObject)) {
             $billingAddress = ContactObject::from($billingAddress);
@@ -159,7 +159,7 @@ class PaymentCardCreatePlain extends PaymentInstruction
         return $this->fields['customFields'] ?? null;
     }
 
-    public function setCustomFields(null|array $customFields): self
+    public function setCustomFields(null|array $customFields): static
     {
         $this->fields['customFields'] = $customFields;
 
@@ -171,7 +171,7 @@ class PaymentCardCreatePlain extends PaymentInstruction
         return $this->fields['riskMetadata'] ?? null;
     }
 
-    public function setRiskMetadata(null|RiskMetadata|array $riskMetadata): self
+    public function setRiskMetadata(null|RiskMetadata|array $riskMetadata): static
     {
         if ($riskMetadata !== null && !($riskMetadata instanceof RiskMetadata)) {
             $riskMetadata = RiskMetadata::from($riskMetadata);
@@ -187,7 +187,7 @@ class PaymentCardCreatePlain extends PaymentInstruction
         return $this->fields['useAsBackup'] ?? null;
     }
 
-    public function setUseAsBackup(null|bool $useAsBackup): self
+    public function setUseAsBackup(null|bool $useAsBackup): static
     {
         $this->fields['useAsBackup'] = $useAsBackup;
 

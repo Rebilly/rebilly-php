@@ -91,7 +91,7 @@ class CustomerJWT implements JsonSerializable
         return $this->fields['invalidate'] ?? null;
     }
 
-    public function setInvalidate(null|bool $invalidate): self
+    public function setInvalidate(null|bool $invalidate): static
     {
         $this->fields['invalidate'] = $invalidate;
 
@@ -103,7 +103,7 @@ class CustomerJWT implements JsonSerializable
         return $this->fields['oneTimePassword'] ?? null;
     }
 
-    public function setOneTimePassword(null|string $oneTimePassword): self
+    public function setOneTimePassword(null|string $oneTimePassword): static
     {
         $this->fields['oneTimePassword'] = $oneTimePassword;
 
@@ -126,7 +126,7 @@ class CustomerJWT implements JsonSerializable
     /**
      * @param null|Acl[] $acl
      */
-    public function setAcl(null|array $acl): self
+    public function setAcl(null|array $acl): static
     {
         $acl = $acl !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Acl ? $value : Acl::from($value)) : null, $acl) : null;
 
@@ -146,7 +146,7 @@ class CustomerJWT implements JsonSerializable
     /**
      * @param null|array<string,object> $customClaims
      */
-    public function setCustomClaims(null|array $customClaims): self
+    public function setCustomClaims(null|array $customClaims): static
     {
         $this->fields['customClaims'] = $customClaims;
 
@@ -168,7 +168,7 @@ class CustomerJWT implements JsonSerializable
         return $this->fields['expiredTime'] ?? null;
     }
 
-    public function setExpiredTime(null|DateTimeImmutable|string $expiredTime): self
+    public function setExpiredTime(null|DateTimeImmutable|string $expiredTime): static
     {
         if ($expiredTime !== null && !($expiredTime instanceof DateTimeImmutable)) {
             $expiredTime = new DateTimeImmutable($expiredTime);
@@ -230,7 +230,7 @@ class CustomerJWT implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -240,28 +240,28 @@ class CustomerJWT implements JsonSerializable
     /**
      * @psalm-param self::TYPE_*|null $type
      */
-    private function setType(null|string $type): self
+    private function setType(null|string $type): static
     {
         $this->fields['type'] = $type;
 
         return $this;
     }
 
-    private function setToken(null|string $token): self
+    private function setToken(null|string $token): static
     {
         $this->fields['token'] = $token;
 
         return $this;
     }
 
-    private function setCustomerId(null|string $customerId): self
+    private function setCustomerId(null|string $customerId): static
     {
         $this->fields['customerId'] = $customerId;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -272,7 +272,7 @@ class CustomerJWT implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -286,7 +286,7 @@ class CustomerJWT implements JsonSerializable
     /**
      * @param null|CustomerLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof CustomerLink ? $value : CustomerLink::from($value)) : null, $links) : null;
 

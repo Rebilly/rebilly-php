@@ -42,7 +42,7 @@ class DeleteTagCustomerCollectionRequest implements JsonSerializable
     /**
      * @param string[] $customerIds
      */
-    public function setCustomerIds(array $customerIds): self
+    public function setCustomerIds(array $customerIds): static
     {
         $customerIds = array_map(fn ($value) => $value ?? null, $customerIds);
 

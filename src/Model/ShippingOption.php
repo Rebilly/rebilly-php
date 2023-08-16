@@ -53,7 +53,7 @@ class ShippingOption implements JsonSerializable
         return $this->fields['name'];
     }
 
-    public function setName(string $name): self
+    public function setName(string $name): static
     {
         $this->fields['name'] = $name;
 
@@ -65,7 +65,7 @@ class ShippingOption implements JsonSerializable
         return $this->fields['descriptions'] ?? null;
     }
 
-    public function setDescriptions(null|string $descriptions): self
+    public function setDescriptions(null|string $descriptions): static
     {
         $this->fields['descriptions'] = $descriptions;
 
@@ -77,7 +77,7 @@ class ShippingOption implements JsonSerializable
         return $this->fields['price'];
     }
 
-    public function setPrice(float|string $price): self
+    public function setPrice(float|string $price): static
     {
         if (is_string($price)) {
             $price = (float) $price;
@@ -93,7 +93,7 @@ class ShippingOption implements JsonSerializable
         return $this->fields['currency'];
     }
 
-    public function setCurrency(string $currency): self
+    public function setCurrency(string $currency): static
     {
         $this->fields['currency'] = $currency;
 
@@ -122,7 +122,7 @@ class ShippingOption implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 

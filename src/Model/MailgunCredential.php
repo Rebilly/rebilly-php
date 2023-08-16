@@ -73,7 +73,7 @@ class MailgunCredential implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    public function setStatus(null|string $status): self
+    public function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
@@ -85,7 +85,7 @@ class MailgunCredential implements JsonSerializable
         return $this->fields['deactivationTime'] ?? null;
     }
 
-    public function setDeactivationTime(null|DateTimeImmutable|string $deactivationTime): self
+    public function setDeactivationTime(null|DateTimeImmutable|string $deactivationTime): static
     {
         if ($deactivationTime !== null && !($deactivationTime instanceof DateTimeImmutable)) {
             $deactivationTime = new DateTimeImmutable($deactivationTime);
@@ -101,7 +101,7 @@ class MailgunCredential implements JsonSerializable
         return $this->fields['emailFrom'];
     }
 
-    public function setEmailFrom(string $emailFrom): self
+    public function setEmailFrom(string $emailFrom): static
     {
         $this->fields['emailFrom'] = $emailFrom;
 
@@ -113,7 +113,7 @@ class MailgunCredential implements JsonSerializable
         return $this->fields['apiKey'];
     }
 
-    public function setApiKey(string $apiKey): self
+    public function setApiKey(string $apiKey): static
     {
         $this->fields['apiKey'] = $apiKey;
 
@@ -125,7 +125,7 @@ class MailgunCredential implements JsonSerializable
         return $this->fields['domain'];
     }
 
-    public function setDomain(string $domain): self
+    public function setDomain(string $domain): static
     {
         $this->fields['domain'] = $domain;
 
@@ -168,7 +168,7 @@ class MailgunCredential implements JsonSerializable
         return $data;
     }
 
-    private function setHash(null|string $hash): self
+    private function setHash(null|string $hash): static
     {
         $this->fields['hash'] = $hash;
 
@@ -178,7 +178,7 @@ class MailgunCredential implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

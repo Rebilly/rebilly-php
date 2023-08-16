@@ -47,7 +47,7 @@ class CommonAuthenticationToken implements JsonSerializable
         return $this->fields['otpRequired'] ?? null;
     }
 
-    public function setOtpRequired(null|bool $otpRequired): self
+    public function setOtpRequired(null|bool $otpRequired): static
     {
         $this->fields['otpRequired'] = $otpRequired;
 
@@ -75,14 +75,14 @@ class CommonAuthenticationToken implements JsonSerializable
         return $data;
     }
 
-    private function setToken(null|string $token): self
+    private function setToken(null|string $token): static
     {
         $this->fields['token'] = $token;
 
         return $this;
     }
 
-    private function setCredentialId(null|string $credentialId): self
+    private function setCredentialId(null|string $credentialId): static
     {
         $this->fields['credentialId'] = $credentialId;
 

@@ -41,7 +41,7 @@ class Jeton extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(JetonCredentials|array $credentials): self
+    public function setCredentials(JetonCredentials|array $credentials): static
     {
         if (!($credentials instanceof JetonCredentials)) {
             $credentials = JetonCredentials::from($credentials);
@@ -57,7 +57,7 @@ class Jeton extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|JetonSettings|array $settings): self
+    public function setSettings(null|JetonSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof JetonSettings)) {
             $settings = JetonSettings::from($settings);

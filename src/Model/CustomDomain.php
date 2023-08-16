@@ -47,7 +47,7 @@ class CustomDomain implements JsonSerializable
         return $this->fields['domain'];
     }
 
-    public function setDomain(string $domain): self
+    public function setDomain(string $domain): static
     {
         $this->fields['domain'] = $domain;
 
@@ -88,14 +88,14 @@ class CustomDomain implements JsonSerializable
         return $data;
     }
 
-    private function setIsVerified(null|bool $isVerified): self
+    private function setIsVerified(null|bool $isVerified): static
     {
         $this->fields['isVerified'] = $isVerified;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -106,7 +106,7 @@ class CustomDomain implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);

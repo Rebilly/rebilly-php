@@ -42,7 +42,7 @@ class PayvisionSettings implements JsonSerializable
         return $this->fields['avs'] ?? null;
     }
 
-    public function setAvs(null|bool $avs): self
+    public function setAvs(null|bool $avs): static
     {
         $this->fields['avs'] = $avs;
 
@@ -54,7 +54,7 @@ class PayvisionSettings implements JsonSerializable
         return $this->fields['delay'] ?? null;
     }
 
-    public function setDelay(null|int $delay): self
+    public function setDelay(null|int $delay): static
     {
         $this->fields['delay'] = $delay;
 
@@ -66,7 +66,7 @@ class PayvisionSettings implements JsonSerializable
         return $this->fields['merchantAccountType'];
     }
 
-    public function setMerchantAccountType(int $merchantAccountType): self
+    public function setMerchantAccountType(int $merchantAccountType): static
     {
         $this->fields['merchantAccountType'] = $merchantAccountType;
 

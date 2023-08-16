@@ -38,7 +38,7 @@ class EzyEFT extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(EzyEFTCredentials|array $credentials): self
+    public function setCredentials(EzyEFTCredentials|array $credentials): static
     {
         if (!($credentials instanceof EzyEFTCredentials)) {
             $credentials = EzyEFTCredentials::from($credentials);

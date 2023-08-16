@@ -38,7 +38,7 @@ class RulesetRestore extends TimelineAction
         return $this->fields['version'] ?? null;
     }
 
-    public function setVersion(null|int $version): self
+    public function setVersion(null|int $version): static
     {
         $this->fields['version'] = $version;
 

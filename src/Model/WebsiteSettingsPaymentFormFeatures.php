@@ -42,7 +42,7 @@ class WebsiteSettingsPaymentFormFeatures implements JsonSerializable
     /**
      * @param null|string[] $showCoupons
      */
-    public function setShowCoupons(null|array $showCoupons): self
+    public function setShowCoupons(null|array $showCoupons): static
     {
         $showCoupons = $showCoupons !== null ? array_map(fn ($value) => $value ?? null, $showCoupons) : null;
 

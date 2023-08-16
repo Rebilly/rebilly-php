@@ -36,7 +36,7 @@ class EBANXCredentials implements JsonSerializable
         return $this->fields['integrationKey'];
     }
 
-    public function setIntegrationKey(string $integrationKey): self
+    public function setIntegrationKey(string $integrationKey): static
     {
         $this->fields['integrationKey'] = $integrationKey;
 

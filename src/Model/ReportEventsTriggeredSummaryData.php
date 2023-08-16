@@ -63,7 +63,7 @@ class ReportEventsTriggeredSummaryData implements JsonSerializable
     /**
      * @psalm-param self::EVENT_NAME_*|null $eventName
      */
-    public function setEventName(null|string $eventName): self
+    public function setEventName(null|string $eventName): static
     {
         $this->fields['eventName'] = $eventName;
 
@@ -75,7 +75,7 @@ class ReportEventsTriggeredSummaryData implements JsonSerializable
         return $this->fields['count'] ?? null;
     }
 
-    public function setCount(null|int $count): self
+    public function setCount(null|int $count): static
     {
         $this->fields['count'] = $count;
 

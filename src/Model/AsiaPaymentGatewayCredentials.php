@@ -39,7 +39,7 @@ class AsiaPaymentGatewayCredentials implements JsonSerializable
         return $this->fields['merchantNumber'];
     }
 
-    public function setMerchantNumber(string $merchantNumber): self
+    public function setMerchantNumber(string $merchantNumber): static
     {
         $this->fields['merchantNumber'] = $merchantNumber;
 
@@ -51,7 +51,7 @@ class AsiaPaymentGatewayCredentials implements JsonSerializable
         return $this->fields['secretKey'];
     }
 
-    public function setSecretKey(string $secretKey): self
+    public function setSecretKey(string $secretKey): static
     {
         $this->fields['secretKey'] = $secretKey;
 

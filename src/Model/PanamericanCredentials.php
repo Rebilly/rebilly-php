@@ -39,7 +39,7 @@ class PanamericanCredentials implements JsonSerializable
         return $this->fields['key'];
     }
 
-    public function setKey(string $key): self
+    public function setKey(string $key): static
     {
         $this->fields['key'] = $key;
 
@@ -51,7 +51,7 @@ class PanamericanCredentials implements JsonSerializable
         return $this->fields['password'];
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password): static
     {
         $this->fields['password'] = $password;
 

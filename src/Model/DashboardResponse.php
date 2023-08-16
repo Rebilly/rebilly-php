@@ -51,7 +51,7 @@ class DashboardResponse implements JsonSerializable
     /**
      * @psalm-param self::METRIC_*|null $metric
      */
-    public function setMetric(null|string $metric): self
+    public function setMetric(null|string $metric): static
     {
         $this->fields['metric'] = $metric;
 
@@ -63,7 +63,7 @@ class DashboardResponse implements JsonSerializable
         return $this->fields['humanName'] ?? null;
     }
 
-    public function setHumanName(null|string $humanName): self
+    public function setHumanName(null|string $humanName): static
     {
         $this->fields['humanName'] = $humanName;
 
@@ -75,7 +75,7 @@ class DashboardResponse implements JsonSerializable
         return $this->fields['increaseIsGood'] ?? null;
     }
 
-    public function setIncreaseIsGood(null|bool $increaseIsGood): self
+    public function setIncreaseIsGood(null|bool $increaseIsGood): static
     {
         $this->fields['increaseIsGood'] = $increaseIsGood;
 
@@ -93,7 +93,7 @@ class DashboardResponse implements JsonSerializable
     /**
      * @param null|object[] $segments
      */
-    public function setSegments(null|array $segments): self
+    public function setSegments(null|array $segments): static
     {
         $segments = $segments !== null ? array_map(fn ($value) => $value ?? null, $segments) : null;
 

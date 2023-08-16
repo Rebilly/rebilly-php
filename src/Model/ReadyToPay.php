@@ -51,7 +51,7 @@ class ReadyToPay implements JsonSerializable
         return $this->fields['websiteId'];
     }
 
-    public function setWebsiteId(string $websiteId): self
+    public function setWebsiteId(string $websiteId): static
     {
         $this->fields['websiteId'] = $websiteId;
 
@@ -63,7 +63,7 @@ class ReadyToPay implements JsonSerializable
         return $this->fields['billingAddress'] ?? null;
     }
 
-    public function setBillingAddress(null|ContactObject|array $billingAddress): self
+    public function setBillingAddress(null|ContactObject|array $billingAddress): static
     {
         if ($billingAddress !== null && !($billingAddress instanceof ContactObject)) {
             $billingAddress = ContactObject::from($billingAddress);
@@ -79,7 +79,7 @@ class ReadyToPay implements JsonSerializable
         return $this->fields['riskMetadata'];
     }
 
-    public function setRiskMetadata(RiskMetadata|array $riskMetadata): self
+    public function setRiskMetadata(RiskMetadata|array $riskMetadata): static
     {
         if (!($riskMetadata instanceof RiskMetadata)) {
             $riskMetadata = RiskMetadata::from($riskMetadata);
@@ -95,7 +95,7 @@ class ReadyToPay implements JsonSerializable
         return $this->fields['currency'];
     }
 
-    public function setCurrency(string $currency): self
+    public function setCurrency(string $currency): static
     {
         $this->fields['currency'] = $currency;
 
@@ -107,7 +107,7 @@ class ReadyToPay implements JsonSerializable
         return $this->fields['amount'];
     }
 
-    public function setAmount(float|string $amount): self
+    public function setAmount(float|string $amount): static
     {
         if (is_string($amount)) {
             $amount = (float) $amount;
@@ -129,7 +129,7 @@ class ReadyToPay implements JsonSerializable
     /**
      * @param ReadyToPayItemsItems[] $items
      */
-    public function setItems(array $items): self
+    public function setItems(array $items): static
     {
         $items = array_map(fn ($value) => $value !== null ? ($value instanceof ReadyToPayItemsItems ? $value : ReadyToPayItemsItems::from($value)) : null, $items);
 

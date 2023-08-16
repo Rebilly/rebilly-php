@@ -38,7 +38,7 @@ class Percent extends Discount
         return $this->fields['value'];
     }
 
-    public function setValue(float|string $value): self
+    public function setValue(float|string $value): static
     {
         if (is_string($value)) {
             $value = (float) $value;

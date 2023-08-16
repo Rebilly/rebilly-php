@@ -39,7 +39,7 @@ class MonerisCredentials implements JsonSerializable
         return $this->fields['apiToken'];
     }
 
-    public function setApiToken(string $apiToken): self
+    public function setApiToken(string $apiToken): static
     {
         $this->fields['apiToken'] = $apiToken;
 
@@ -51,7 +51,7 @@ class MonerisCredentials implements JsonSerializable
         return $this->fields['storeId'];
     }
 
-    public function setStoreId(string $storeId): self
+    public function setStoreId(string $storeId): static
     {
         $this->fields['storeId'] = $storeId;
 

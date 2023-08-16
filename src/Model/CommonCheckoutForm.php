@@ -74,7 +74,7 @@ abstract class CommonCheckoutForm implements JsonSerializable
         return $this->fields['websiteId'];
     }
 
-    public function setWebsiteId(string $websiteId): self
+    public function setWebsiteId(string $websiteId): static
     {
         $this->fields['websiteId'] = $websiteId;
 
@@ -86,7 +86,7 @@ abstract class CommonCheckoutForm implements JsonSerializable
         return $this->fields['customDomain'] ?? null;
     }
 
-    public function setCustomDomain(null|string $customDomain): self
+    public function setCustomDomain(null|string $customDomain): static
     {
         $this->fields['customDomain'] = $customDomain;
 
@@ -104,7 +104,7 @@ abstract class CommonCheckoutForm implements JsonSerializable
     /**
      * @param CheckoutFormPlans[] $plans
      */
-    public function setPlans(array $plans): self
+    public function setPlans(array $plans): static
     {
         $plans = array_map(fn ($value) => $value !== null ? ($value instanceof CheckoutFormPlans ? $value : CheckoutFormPlans::from($value)) : null, $plans);
 
@@ -124,7 +124,7 @@ abstract class CommonCheckoutForm implements JsonSerializable
     /**
      * @param null|CheckoutFormPlans[] $addonPlans
      */
-    public function setAddonPlans(null|array $addonPlans): self
+    public function setAddonPlans(null|array $addonPlans): static
     {
         $addonPlans = $addonPlans !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof CheckoutFormPlans ? $value : CheckoutFormPlans::from($value)) : null, $addonPlans) : null;
 
@@ -144,7 +144,7 @@ abstract class CommonCheckoutForm implements JsonSerializable
     /**
      * @param null|CheckoutFormPlans[] $bumpPlans
      */
-    public function setBumpPlans(null|array $bumpPlans): self
+    public function setBumpPlans(null|array $bumpPlans): static
     {
         $bumpPlans = $bumpPlans !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof CheckoutFormPlans ? $value : CheckoutFormPlans::from($value)) : null, $bumpPlans) : null;
 
@@ -158,7 +158,7 @@ abstract class CommonCheckoutForm implements JsonSerializable
         return $this->fields['accountsEnabled'] ?? null;
     }
 
-    public function setAccountsEnabled(null|bool $accountsEnabled): self
+    public function setAccountsEnabled(null|bool $accountsEnabled): static
     {
         $this->fields['accountsEnabled'] = $accountsEnabled;
 
@@ -170,7 +170,7 @@ abstract class CommonCheckoutForm implements JsonSerializable
         return $this->fields['couponsEnabled'] ?? null;
     }
 
-    public function setCouponsEnabled(null|bool $couponsEnabled): self
+    public function setCouponsEnabled(null|bool $couponsEnabled): static
     {
         $this->fields['couponsEnabled'] = $couponsEnabled;
 
@@ -182,7 +182,7 @@ abstract class CommonCheckoutForm implements JsonSerializable
         return $this->fields['purchaseLimit'] ?? null;
     }
 
-    public function setPurchaseLimit(null|int $purchaseLimit): self
+    public function setPurchaseLimit(null|int $purchaseLimit): static
     {
         $this->fields['purchaseLimit'] = $purchaseLimit;
 
@@ -200,7 +200,7 @@ abstract class CommonCheckoutForm implements JsonSerializable
     /**
      * @param null|PaymentMethod[] $paymentMethods
      */
-    public function setPaymentMethods(null|array $paymentMethods): self
+    public function setPaymentMethods(null|array $paymentMethods): static
     {
         $paymentMethods = $paymentMethods !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof PaymentMethod ? $value : PaymentMethod::from($value)) : null, $paymentMethods) : null;
 
@@ -214,7 +214,7 @@ abstract class CommonCheckoutForm implements JsonSerializable
         return $this->fields['customization'] ?? null;
     }
 
-    public function setCustomization(null|CommonCheckoutFormCustomization|array $customization): self
+    public function setCustomization(null|CommonCheckoutFormCustomization|array $customization): static
     {
         if ($customization !== null && !($customization instanceof CommonCheckoutFormCustomization)) {
             $customization = CommonCheckoutFormCustomization::from($customization);
@@ -281,14 +281,14 @@ abstract class CommonCheckoutForm implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -299,7 +299,7 @@ abstract class CommonCheckoutForm implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);

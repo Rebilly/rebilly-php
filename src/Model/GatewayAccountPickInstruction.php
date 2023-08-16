@@ -61,7 +61,7 @@ abstract class GatewayAccountPickInstruction implements JsonSerializable
     /**
      * @psalm-param self::STRATEGY_*|null $strategy
      */
-    public function setStrategy(null|string $strategy): self
+    public function setStrategy(null|string $strategy): static
     {
         $this->fields['strategy'] = $strategy;
 
@@ -92,7 +92,7 @@ abstract class GatewayAccountPickInstruction implements JsonSerializable
     /**
      * @psalm-param self::METHOD_* $method
      */
-    private function setMethod(string $method): self
+    private function setMethod(string $method): static
     {
         $this->fields['method'] = $method;
 

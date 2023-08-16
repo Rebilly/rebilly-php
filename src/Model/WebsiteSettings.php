@@ -36,7 +36,7 @@ class WebsiteSettings implements JsonSerializable
         return $this->fields['paymentForm'] ?? null;
     }
 
-    public function setPaymentForm(null|WebsiteSettingsPaymentForm|array $paymentForm): self
+    public function setPaymentForm(null|WebsiteSettingsPaymentForm|array $paymentForm): static
     {
         if ($paymentForm !== null && !($paymentForm instanceof WebsiteSettingsPaymentForm)) {
             $paymentForm = WebsiteSettingsPaymentForm::from($paymentForm);

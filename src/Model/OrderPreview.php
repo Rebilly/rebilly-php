@@ -36,7 +36,7 @@ class OrderPreview extends CommonOrderPreview
         return $this->fields['shipping'] ?? null;
     }
 
-    public function setShipping(null|Shipping|array $shipping): self
+    public function setShipping(null|Shipping|array $shipping): static
     {
         if ($shipping !== null && !($shipping instanceof Shipping)) {
             $shipping = Shipping::from($shipping);

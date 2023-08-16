@@ -45,7 +45,7 @@ class DigitalWalletsGooglePay implements JsonSerializable
         return $this->fields['isEnabled'];
     }
 
-    public function setIsEnabled(bool $isEnabled): self
+    public function setIsEnabled(bool $isEnabled): static
     {
         $this->fields['isEnabled'] = $isEnabled;
 
@@ -57,7 +57,7 @@ class DigitalWalletsGooglePay implements JsonSerializable
         return $this->fields['merchantName'] ?? null;
     }
 
-    public function setMerchantName(null|string $merchantName): self
+    public function setMerchantName(null|string $merchantName): static
     {
         $this->fields['merchantName'] = $merchantName;
 
@@ -69,7 +69,7 @@ class DigitalWalletsGooglePay implements JsonSerializable
         return $this->fields['merchantOrigin'] ?? null;
     }
 
-    public function setMerchantOrigin(null|string $merchantOrigin): self
+    public function setMerchantOrigin(null|string $merchantOrigin): static
     {
         $this->fields['merchantOrigin'] = $merchantOrigin;
 
@@ -81,7 +81,7 @@ class DigitalWalletsGooglePay implements JsonSerializable
         return $this->fields['country'] ?? null;
     }
 
-    public function setCountry(null|DigitalWalletCountry|array $country): self
+    public function setCountry(null|DigitalWalletCountry|array $country): static
     {
         if ($country !== null && !($country instanceof DigitalWalletCountry)) {
             $country = DigitalWalletCountry::from($country);

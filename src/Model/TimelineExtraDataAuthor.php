@@ -39,7 +39,7 @@ class TimelineExtraDataAuthor implements JsonSerializable
         return $this->fields['userFullName'] ?? null;
     }
 
-    public function setUserFullName(null|string $userFullName): self
+    public function setUserFullName(null|string $userFullName): static
     {
         $this->fields['userFullName'] = $userFullName;
 
@@ -51,7 +51,7 @@ class TimelineExtraDataAuthor implements JsonSerializable
         return $this->fields['userId'] ?? null;
     }
 
-    public function setUserId(null|string $userId): self
+    public function setUserId(null|string $userId): static
     {
         $this->fields['userId'] = $userId;
 

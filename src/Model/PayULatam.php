@@ -38,7 +38,7 @@ class PayULatam extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(PayULatamCredentials|array $credentials): self
+    public function setCredentials(PayULatamCredentials|array $credentials): static
     {
         if (!($credentials instanceof PayULatamCredentials)) {
             $credentials = PayULatamCredentials::from($credentials);

@@ -80,7 +80,7 @@ class LeadSource implements JsonSerializable
         return $this->fields['medium'] ?? null;
     }
 
-    public function setMedium(null|string $medium): self
+    public function setMedium(null|string $medium): static
     {
         $this->fields['medium'] = $medium;
 
@@ -92,7 +92,7 @@ class LeadSource implements JsonSerializable
         return $this->fields['source'] ?? null;
     }
 
-    public function setSource(null|string $source): self
+    public function setSource(null|string $source): static
     {
         $this->fields['source'] = $source;
 
@@ -104,7 +104,7 @@ class LeadSource implements JsonSerializable
         return $this->fields['campaign'] ?? null;
     }
 
-    public function setCampaign(null|string $campaign): self
+    public function setCampaign(null|string $campaign): static
     {
         $this->fields['campaign'] = $campaign;
 
@@ -116,7 +116,7 @@ class LeadSource implements JsonSerializable
         return $this->fields['term'] ?? null;
     }
 
-    public function setTerm(null|string $term): self
+    public function setTerm(null|string $term): static
     {
         $this->fields['term'] = $term;
 
@@ -128,7 +128,7 @@ class LeadSource implements JsonSerializable
         return $this->fields['content'] ?? null;
     }
 
-    public function setContent(null|string $content): self
+    public function setContent(null|string $content): static
     {
         $this->fields['content'] = $content;
 
@@ -140,7 +140,7 @@ class LeadSource implements JsonSerializable
         return $this->fields['affiliate'] ?? null;
     }
 
-    public function setAffiliate(null|string $affiliate): self
+    public function setAffiliate(null|string $affiliate): static
     {
         $this->fields['affiliate'] = $affiliate;
 
@@ -152,7 +152,7 @@ class LeadSource implements JsonSerializable
         return $this->fields['subAffiliate'] ?? null;
     }
 
-    public function setSubAffiliate(null|string $subAffiliate): self
+    public function setSubAffiliate(null|string $subAffiliate): static
     {
         $this->fields['subAffiliate'] = $subAffiliate;
 
@@ -164,7 +164,7 @@ class LeadSource implements JsonSerializable
         return $this->fields['salesAgent'] ?? null;
     }
 
-    public function setSalesAgent(null|string $salesAgent): self
+    public function setSalesAgent(null|string $salesAgent): static
     {
         $this->fields['salesAgent'] = $salesAgent;
 
@@ -176,7 +176,7 @@ class LeadSource implements JsonSerializable
         return $this->fields['clickId'] ?? null;
     }
 
-    public function setClickId(null|string $clickId): self
+    public function setClickId(null|string $clickId): static
     {
         $this->fields['clickId'] = $clickId;
 
@@ -188,7 +188,7 @@ class LeadSource implements JsonSerializable
         return $this->fields['path'] ?? null;
     }
 
-    public function setPath(null|string $path): self
+    public function setPath(null|string $path): static
     {
         $this->fields['path'] = $path;
 
@@ -200,7 +200,7 @@ class LeadSource implements JsonSerializable
         return $this->fields['referrer'] ?? null;
     }
 
-    public function setReferrer(null|string $referrer): self
+    public function setReferrer(null|string $referrer): static
     {
         $this->fields['referrer'] = $referrer;
 
@@ -282,7 +282,7 @@ class LeadSource implements JsonSerializable
         return $data;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -293,7 +293,7 @@ class LeadSource implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -307,7 +307,7 @@ class LeadSource implements JsonSerializable
     /**
      * @param null|array<CustomerLink|SelfLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 
@@ -316,7 +316,7 @@ class LeadSource implements JsonSerializable
         return $this;
     }
 
-    private function setOriginal(null|LeadSourceData|array $original): self
+    private function setOriginal(null|LeadSourceData|array $original): static
     {
         if ($original !== null && !($original instanceof LeadSourceData)) {
             $original = LeadSourceData::from($original);

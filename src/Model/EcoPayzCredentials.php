@@ -42,7 +42,7 @@ class EcoPayzCredentials implements JsonSerializable
         return $this->fields['paymentPageId'];
     }
 
-    public function setPaymentPageId(string $paymentPageId): self
+    public function setPaymentPageId(string $paymentPageId): static
     {
         $this->fields['paymentPageId'] = $paymentPageId;
 
@@ -54,7 +54,7 @@ class EcoPayzCredentials implements JsonSerializable
         return $this->fields['merchantAccountNumber'];
     }
 
-    public function setMerchantAccountNumber(string $merchantAccountNumber): self
+    public function setMerchantAccountNumber(string $merchantAccountNumber): static
     {
         $this->fields['merchantAccountNumber'] = $merchantAccountNumber;
 
@@ -66,7 +66,7 @@ class EcoPayzCredentials implements JsonSerializable
         return $this->fields['merchantPassword'];
     }
 
-    public function setMerchantPassword(string $merchantPassword): self
+    public function setMerchantPassword(string $merchantPassword): static
     {
         $this->fields['merchantPassword'] = $merchantPassword;
 

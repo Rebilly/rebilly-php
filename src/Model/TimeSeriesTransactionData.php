@@ -42,7 +42,7 @@ class TimeSeriesTransactionData implements JsonSerializable
         return $this->fields['date'] ?? null;
     }
 
-    public function setDate(null|string $date): self
+    public function setDate(null|string $date): static
     {
         $this->fields['date'] = $date;
 
@@ -54,7 +54,7 @@ class TimeSeriesTransactionData implements JsonSerializable
         return $this->fields['total'] ?? null;
     }
 
-    public function setTotal(null|float|string $total): self
+    public function setTotal(null|float|string $total): static
     {
         if (is_string($total)) {
             $total = (float) $total;
@@ -70,7 +70,7 @@ class TimeSeriesTransactionData implements JsonSerializable
         return $this->fields['subaggregates'] ?? null;
     }
 
-    public function setSubaggregates(null|TimeSeriesTransactionSubaggregates|array $subaggregates): self
+    public function setSubaggregates(null|TimeSeriesTransactionSubaggregates|array $subaggregates): static
     {
         if ($subaggregates !== null && !($subaggregates instanceof TimeSeriesTransactionSubaggregates)) {
             $subaggregates = TimeSeriesTransactionSubaggregates::from($subaggregates);

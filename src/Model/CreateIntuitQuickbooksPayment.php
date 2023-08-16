@@ -41,7 +41,7 @@ class CreateIntuitQuickbooksPayment extends RuleAction
         return $this->fields['depositAccount'];
     }
 
-    public function setDepositAccount(string $depositAccount): self
+    public function setDepositAccount(string $depositAccount): static
     {
         $this->fields['depositAccount'] = $depositAccount;
 
@@ -53,7 +53,7 @@ class CreateIntuitQuickbooksPayment extends RuleAction
         return $this->fields['credentialHash'];
     }
 
-    public function setCredentialHash(string $credentialHash): self
+    public function setCredentialHash(string $credentialHash): static
     {
         $this->fields['credentialHash'] = $credentialHash;
 

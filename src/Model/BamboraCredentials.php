@@ -39,7 +39,7 @@ class BamboraCredentials implements JsonSerializable
         return $this->fields['merchantId'];
     }
 
-    public function setMerchantId(string $merchantId): self
+    public function setMerchantId(string $merchantId): static
     {
         $this->fields['merchantId'] = $merchantId;
 
@@ -51,7 +51,7 @@ class BamboraCredentials implements JsonSerializable
         return $this->fields['apiPasscode'];
     }
 
-    public function setApiPasscode(string $apiPasscode): self
+    public function setApiPasscode(string $apiPasscode): static
     {
         $this->fields['apiPasscode'] = $apiPasscode;
 

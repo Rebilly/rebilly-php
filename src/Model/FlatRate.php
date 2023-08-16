@@ -41,7 +41,7 @@ class FlatRate extends PlanPriceFormula
         return $this->fields['price'];
     }
 
-    public function setPrice(float|string $price): self
+    public function setPrice(float|string $price): static
     {
         if (is_string($price)) {
             $price = (float) $price;
@@ -57,7 +57,7 @@ class FlatRate extends PlanPriceFormula
         return $this->fields['maxQuantity'] ?? null;
     }
 
-    public function setMaxQuantity(null|int $maxQuantity): self
+    public function setMaxQuantity(null|int $maxQuantity): static
     {
         $this->fields['maxQuantity'] = $maxQuantity;
 

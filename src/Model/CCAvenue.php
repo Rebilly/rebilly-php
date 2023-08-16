@@ -41,7 +41,7 @@ class CCAvenue extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(CCAvenueCredentials|array $credentials): self
+    public function setCredentials(CCAvenueCredentials|array $credentials): static
     {
         if (!($credentials instanceof CCAvenueCredentials)) {
             $credentials = CCAvenueCredentials::from($credentials);
@@ -57,7 +57,7 @@ class CCAvenue extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|CCAvenueSettings|array $settings): self
+    public function setSettings(null|CCAvenueSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof CCAvenueSettings)) {
             $settings = CCAvenueSettings::from($settings);

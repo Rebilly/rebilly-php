@@ -41,7 +41,7 @@ class Coppr extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(CopprCredentials|array $credentials): self
+    public function setCredentials(CopprCredentials|array $credentials): static
     {
         if (!($credentials instanceof CopprCredentials)) {
             $credentials = CopprCredentials::from($credentials);
@@ -57,7 +57,7 @@ class Coppr extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|CopprSettings|array $settings): self
+    public function setSettings(null|CopprSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof CopprSettings)) {
             $settings = CopprSettings::from($settings);

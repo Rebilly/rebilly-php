@@ -44,7 +44,7 @@ class ACI extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(ACICredentials|array $credentials): self
+    public function setCredentials(ACICredentials|array $credentials): static
     {
         if (!($credentials instanceof ACICredentials)) {
             $credentials = ACICredentials::from($credentials);
@@ -60,7 +60,7 @@ class ACI extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|ACISettings|array $settings): self
+    public function setSettings(null|ACISettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof ACISettings)) {
             $settings = ACISettings::from($settings);
@@ -76,7 +76,7 @@ class ACI extends GatewayAccount
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|ACI3dsServers|array $threeDSecureServer): self
+    public function setThreeDSecureServer(null|ACI3dsServers|array $threeDSecureServer): static
     {
         if ($threeDSecureServer !== null && !($threeDSecureServer instanceof ACI3dsServers)) {
             $threeDSecureServer = ACI3dsServers::from($threeDSecureServer);

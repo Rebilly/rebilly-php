@@ -44,7 +44,7 @@ class Clearhaus3dsServer extends Clearhaus3dsServers
         return $this->fields['merchantId'];
     }
 
-    public function setMerchantId(string $merchantId): self
+    public function setMerchantId(string $merchantId): static
     {
         $this->fields['merchantId'] = $merchantId;
 
@@ -56,7 +56,7 @@ class Clearhaus3dsServer extends Clearhaus3dsServers
         return $this->fields['acquirerBin'];
     }
 
-    public function setAcquirerBin(string $acquirerBin): self
+    public function setAcquirerBin(string $acquirerBin): static
     {
         $this->fields['acquirerBin'] = $acquirerBin;
 
@@ -68,7 +68,7 @@ class Clearhaus3dsServer extends Clearhaus3dsServers
         return $this->fields['apiKey'];
     }
 
-    public function setApiKey(string $apiKey): self
+    public function setApiKey(string $apiKey): static
     {
         $this->fields['apiKey'] = $apiKey;
 

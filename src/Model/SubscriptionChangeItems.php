@@ -40,7 +40,7 @@ class SubscriptionChangeItems implements JsonSerializable
         return $this->fields['plan'];
     }
 
-    public function setPlan(array|FlexiblePlan|OriginalPlan $plan): self
+    public function setPlan(array|FlexiblePlan|OriginalPlan $plan): static
     {
         $plan = $this->ensurePlan($plan);
 
@@ -54,7 +54,7 @@ class SubscriptionChangeItems implements JsonSerializable
         return $this->fields['quantity'];
     }
 
-    public function setQuantity(int $quantity): self
+    public function setQuantity(int $quantity): static
     {
         $this->fields['quantity'] = $quantity;
 

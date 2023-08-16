@@ -39,7 +39,7 @@ class VegaaHCredentials implements JsonSerializable
         return $this->fields['terminalId'];
     }
 
-    public function setTerminalId(string $terminalId): self
+    public function setTerminalId(string $terminalId): static
     {
         $this->fields['terminalId'] = $terminalId;
 
@@ -51,7 +51,7 @@ class VegaaHCredentials implements JsonSerializable
         return $this->fields['password'];
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password): static
     {
         $this->fields['password'] = $password;
 

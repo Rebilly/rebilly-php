@@ -42,7 +42,7 @@ class ReportRetentionPercentagePeriods implements JsonSerializable
         return $this->fields['period'] ?? null;
     }
 
-    public function setPeriod(null|int $period): self
+    public function setPeriod(null|int $period): static
     {
         $this->fields['period'] = $period;
 
@@ -54,7 +54,7 @@ class ReportRetentionPercentagePeriods implements JsonSerializable
         return $this->fields['retentionRatio'] ?? null;
     }
 
-    public function setRetentionRatio(null|float|string $retentionRatio): self
+    public function setRetentionRatio(null|float|string $retentionRatio): static
     {
         if (is_string($retentionRatio)) {
             $retentionRatio = (float) $retentionRatio;
@@ -70,7 +70,7 @@ class ReportRetentionPercentagePeriods implements JsonSerializable
         return $this->fields['canceledSubscriptionsCount'] ?? null;
     }
 
-    public function setCanceledSubscriptionsCount(null|int $canceledSubscriptionsCount): self
+    public function setCanceledSubscriptionsCount(null|int $canceledSubscriptionsCount): static
     {
         $this->fields['canceledSubscriptionsCount'] = $canceledSubscriptionsCount;
 

@@ -38,7 +38,7 @@ class SMSVoucher extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(SMSVoucherCredentials|array $credentials): self
+    public function setCredentials(SMSVoucherCredentials|array $credentials): static
     {
         if (!($credentials instanceof SMSVoucherCredentials)) {
             $credentials = SMSVoucherCredentials::from($credentials);

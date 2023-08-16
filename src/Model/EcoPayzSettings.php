@@ -50,7 +50,7 @@ class EcoPayzSettings implements JsonSerializable
     /**
      * @psalm-param self::VALID_CURRENCY_* $validCurrency
      */
-    public function setValidCurrency(string $validCurrency): self
+    public function setValidCurrency(string $validCurrency): static
     {
         $this->fields['validCurrency'] = $validCurrency;
 

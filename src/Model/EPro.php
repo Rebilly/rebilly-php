@@ -38,7 +38,7 @@ class EPro extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(EProCredentials|array $credentials): self
+    public function setCredentials(EProCredentials|array $credentials): static
     {
         if (!($credentials instanceof EProCredentials)) {
             $credentials = EProCredentials::from($credentials);

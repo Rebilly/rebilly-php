@@ -42,7 +42,7 @@ class TransactionRefund implements JsonSerializable
         return $this->fields['amount'];
     }
 
-    public function setAmount(float|string $amount): self
+    public function setAmount(float|string $amount): static
     {
         if (is_string($amount)) {
             $amount = (float) $amount;
@@ -58,7 +58,7 @@ class TransactionRefund implements JsonSerializable
         return $this->fields['description'] ?? null;
     }
 
-    public function setDescription(null|string $description): self
+    public function setDescription(null|string $description): static
     {
         $this->fields['description'] = $description;
 
@@ -70,7 +70,7 @@ class TransactionRefund implements JsonSerializable
         return $this->fields['isProcessedOutside'] ?? null;
     }
 
-    public function setIsProcessedOutside(null|bool $isProcessedOutside): self
+    public function setIsProcessedOutside(null|bool $isProcessedOutside): static
     {
         $this->fields['isProcessedOutside'] = $isProcessedOutside;
 

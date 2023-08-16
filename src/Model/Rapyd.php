@@ -41,7 +41,7 @@ class Rapyd extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(RapydCredentials|array $credentials): self
+    public function setCredentials(RapydCredentials|array $credentials): static
     {
         if (!($credentials instanceof RapydCredentials)) {
             $credentials = RapydCredentials::from($credentials);
@@ -57,7 +57,7 @@ class Rapyd extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|RapydSettings|array $settings): self
+    public function setSettings(null|RapydSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof RapydSettings)) {
             $settings = RapydSettings::from($settings);

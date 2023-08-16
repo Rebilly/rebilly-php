@@ -38,7 +38,7 @@ class Cayan extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(CayanCredentials|array $credentials): self
+    public function setCredentials(CayanCredentials|array $credentials): static
     {
         if (!($credentials instanceof CayanCredentials)) {
             $credentials = CayanCredentials::from($credentials);

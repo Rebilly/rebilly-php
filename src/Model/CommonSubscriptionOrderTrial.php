@@ -41,7 +41,7 @@ class CommonSubscriptionOrderTrial implements JsonSerializable
         return $this->fields['enabled'] ?? null;
     }
 
-    public function setEnabled(null|bool $enabled): self
+    public function setEnabled(null|bool $enabled): static
     {
         $this->fields['enabled'] = $enabled;
 
@@ -53,7 +53,7 @@ class CommonSubscriptionOrderTrial implements JsonSerializable
         return $this->fields['endTime'] ?? null;
     }
 
-    public function setEndTime(null|DateTimeImmutable|string $endTime): self
+    public function setEndTime(null|DateTimeImmutable|string $endTime): static
     {
         if ($endTime !== null && !($endTime instanceof DateTimeImmutable)) {
             $endTime = new DateTimeImmutable($endTime);

@@ -41,7 +41,7 @@ class Prosa extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(ProsaCredentials|array $credentials): self
+    public function setCredentials(ProsaCredentials|array $credentials): static
     {
         if (!($credentials instanceof ProsaCredentials)) {
             $credentials = ProsaCredentials::from($credentials);
@@ -57,7 +57,7 @@ class Prosa extends GatewayAccount
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|Prosa3dsServers|array $threeDSecureServer): self
+    public function setThreeDSecureServer(null|Prosa3dsServers|array $threeDSecureServer): static
     {
         if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Prosa3dsServers)) {
             $threeDSecureServer = Prosa3dsServers::from($threeDSecureServer);

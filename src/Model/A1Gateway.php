@@ -41,7 +41,7 @@ class A1Gateway extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(A1GatewayCredentials|array $credentials): self
+    public function setCredentials(A1GatewayCredentials|array $credentials): static
     {
         if (!($credentials instanceof A1GatewayCredentials)) {
             $credentials = A1GatewayCredentials::from($credentials);
@@ -57,7 +57,7 @@ class A1Gateway extends GatewayAccount
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|A1Gateway3dsServers|array $threeDSecureServer): self
+    public function setThreeDSecureServer(null|A1Gateway3dsServers|array $threeDSecureServer): static
     {
         if ($threeDSecureServer !== null && !($threeDSecureServer instanceof A1Gateway3dsServers)) {
             $threeDSecureServer = A1Gateway3dsServers::from($threeDSecureServer);

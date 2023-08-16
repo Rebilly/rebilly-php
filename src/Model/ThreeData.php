@@ -42,7 +42,7 @@ class ThreeData implements JsonSerializable
         return $this->fields['attribute'] ?? null;
     }
 
-    public function setAttribute(null|string $attribute): self
+    public function setAttribute(null|string $attribute): static
     {
         $this->fields['attribute'] = $attribute;
 
@@ -54,7 +54,7 @@ class ThreeData implements JsonSerializable
         return $this->fields['previousValue'] ?? null;
     }
 
-    public function setPreviousValue(null|string $previousValue): self
+    public function setPreviousValue(null|string $previousValue): static
     {
         $this->fields['previousValue'] = $previousValue;
 
@@ -66,7 +66,7 @@ class ThreeData implements JsonSerializable
         return $this->fields['newValue'] ?? null;
     }
 
-    public function setNewValue(null|string $newValue): self
+    public function setNewValue(null|string $newValue): static
     {
         $this->fields['newValue'] = $newValue;
 

@@ -38,7 +38,7 @@ class MaxiCash extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(MaxiCashCredentials|array $credentials): self
+    public function setCredentials(MaxiCashCredentials|array $credentials): static
     {
         if (!($credentials instanceof MaxiCashCredentials)) {
             $credentials = MaxiCashCredentials::from($credentials);

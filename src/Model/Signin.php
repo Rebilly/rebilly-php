@@ -47,7 +47,7 @@ class Signin implements JsonSerializable
         return $this->fields['email'];
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(string $email): static
     {
         $this->fields['email'] = $email;
 
@@ -59,7 +59,7 @@ class Signin implements JsonSerializable
         return $this->fields['password'];
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password): static
     {
         $this->fields['password'] = $password;
 
@@ -71,7 +71,7 @@ class Signin implements JsonSerializable
         return $this->fields['oneTimePassword'] ?? null;
     }
 
-    public function setOneTimePassword(null|string $oneTimePassword): self
+    public function setOneTimePassword(null|string $oneTimePassword): static
     {
         $this->fields['oneTimePassword'] = $oneTimePassword;
 
@@ -83,7 +83,7 @@ class Signin implements JsonSerializable
         return $this->fields['expiredTime'] ?? null;
     }
 
-    public function setExpiredTime(null|DateTimeImmutable|string $expiredTime): self
+    public function setExpiredTime(null|DateTimeImmutable|string $expiredTime): static
     {
         if ($expiredTime !== null && !($expiredTime instanceof DateTimeImmutable)) {
             $expiredTime = new DateTimeImmutable($expiredTime);

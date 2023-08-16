@@ -38,7 +38,7 @@ class Euteller extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(EutellerCredentials|array $credentials): self
+    public function setCredentials(EutellerCredentials|array $credentials): static
     {
         if (!($credentials instanceof EutellerCredentials)) {
             $credentials = EutellerCredentials::from($credentials);

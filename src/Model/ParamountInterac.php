@@ -41,7 +41,7 @@ class ParamountInterac extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(ParamountInteracCredentials|array $credentials): self
+    public function setCredentials(ParamountInteracCredentials|array $credentials): static
     {
         if (!($credentials instanceof ParamountInteracCredentials)) {
             $credentials = ParamountInteracCredentials::from($credentials);
@@ -57,7 +57,7 @@ class ParamountInterac extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|ParamountInteracSettings|array $settings): self
+    public function setSettings(null|ParamountInteracSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof ParamountInteracSettings)) {
             $settings = ParamountInteracSettings::from($settings);

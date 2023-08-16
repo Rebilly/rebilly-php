@@ -42,7 +42,7 @@ class InvoiceRetryInstructionAttempts implements JsonSerializable
         return $this->fields['scheduleInstruction'];
     }
 
-    public function setScheduleInstruction(InvoiceRetryScheduleInstruction|array $scheduleInstruction): self
+    public function setScheduleInstruction(InvoiceRetryScheduleInstruction|array $scheduleInstruction): static
     {
         if (!($scheduleInstruction instanceof InvoiceRetryScheduleInstruction)) {
             $scheduleInstruction = InvoiceRetryScheduleInstruction::from($scheduleInstruction);
@@ -58,7 +58,7 @@ class InvoiceRetryInstructionAttempts implements JsonSerializable
         return $this->fields['amountAdjustmentInstruction'] ?? null;
     }
 
-    public function setAmountAdjustmentInstruction(null|InvoiceRetryAmountAdjustmentInstruction|array $amountAdjustmentInstruction): self
+    public function setAmountAdjustmentInstruction(null|InvoiceRetryAmountAdjustmentInstruction|array $amountAdjustmentInstruction): static
     {
         if ($amountAdjustmentInstruction !== null && !($amountAdjustmentInstruction instanceof InvoiceRetryAmountAdjustmentInstruction)) {
             $amountAdjustmentInstruction = InvoiceRetryAmountAdjustmentInstruction::from($amountAdjustmentInstruction);
@@ -74,7 +74,7 @@ class InvoiceRetryInstructionAttempts implements JsonSerializable
         return $this->fields['tryBackupInstruments'] ?? null;
     }
 
-    public function setTryBackupInstruments(null|bool $tryBackupInstruments): self
+    public function setTryBackupInstruments(null|bool $tryBackupInstruments): static
     {
         $this->fields['tryBackupInstruments'] = $tryBackupInstruments;
 

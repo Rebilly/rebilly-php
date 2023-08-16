@@ -45,7 +45,7 @@ class MiFinityCredentials implements JsonSerializable
         return $this->fields['apiKey'];
     }
 
-    public function setApiKey(string $apiKey): self
+    public function setApiKey(string $apiKey): static
     {
         $this->fields['apiKey'] = $apiKey;
 
@@ -57,7 +57,7 @@ class MiFinityCredentials implements JsonSerializable
         return $this->fields['mifinityAccountNumber'];
     }
 
-    public function setMifinityAccountNumber(string $mifinityAccountNumber): self
+    public function setMifinityAccountNumber(string $mifinityAccountNumber): static
     {
         $this->fields['mifinityAccountNumber'] = $mifinityAccountNumber;
 
@@ -69,7 +69,7 @@ class MiFinityCredentials implements JsonSerializable
         return $this->fields['accountHolderId'];
     }
 
-    public function setAccountHolderId(string $accountHolderId): self
+    public function setAccountHolderId(string $accountHolderId): static
     {
         $this->fields['accountHolderId'] = $accountHolderId;
 
@@ -81,7 +81,7 @@ class MiFinityCredentials implements JsonSerializable
         return $this->fields['brandId'] ?? null;
     }
 
-    public function setBrandId(null|string $brandId): self
+    public function setBrandId(null|string $brandId): static
     {
         $this->fields['brandId'] = $brandId;
 

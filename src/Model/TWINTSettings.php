@@ -36,7 +36,7 @@ class TWINTSettings implements JsonSerializable
         return $this->fields['cashRegisterType'];
     }
 
-    public function setCashRegisterType(string $cashRegisterType): self
+    public function setCashRegisterType(string $cashRegisterType): static
     {
         $this->fields['cashRegisterType'] = $cashRegisterType;
 

@@ -36,7 +36,7 @@ class DLocalSettings implements JsonSerializable
         return $this->fields['createInstallmentPlan'] ?? null;
     }
 
-    public function setCreateInstallmentPlan(null|bool $createInstallmentPlan): self
+    public function setCreateInstallmentPlan(null|bool $createInstallmentPlan): static
     {
         $this->fields['createInstallmentPlan'] = $createInstallmentPlan;
 

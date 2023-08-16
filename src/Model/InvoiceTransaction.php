@@ -39,7 +39,7 @@ class InvoiceTransaction implements JsonSerializable
         return $this->fields['transactionId'];
     }
 
-    public function setTransactionId(string $transactionId): self
+    public function setTransactionId(string $transactionId): static
     {
         $this->fields['transactionId'] = $transactionId;
 
@@ -51,7 +51,7 @@ class InvoiceTransaction implements JsonSerializable
         return $this->fields['amount'] ?? null;
     }
 
-    public function setAmount(null|float|string $amount): self
+    public function setAmount(null|float|string $amount): static
     {
         if (is_string($amount)) {
             $amount = (float) $amount;

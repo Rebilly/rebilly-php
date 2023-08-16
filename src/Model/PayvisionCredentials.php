@@ -39,7 +39,7 @@ class PayvisionCredentials implements JsonSerializable
         return $this->fields['memberId'];
     }
 
-    public function setMemberId(string $memberId): self
+    public function setMemberId(string $memberId): static
     {
         $this->fields['memberId'] = $memberId;
 
@@ -51,7 +51,7 @@ class PayvisionCredentials implements JsonSerializable
         return $this->fields['memberGuid'];
     }
 
-    public function setMemberGuid(string $memberGuid): self
+    public function setMemberGuid(string $memberGuid): static
     {
         $this->fields['memberGuid'] = $memberGuid;
 

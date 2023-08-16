@@ -36,7 +36,7 @@ class CardknoxCredentials implements JsonSerializable
         return $this->fields['xKey'];
     }
 
-    public function setXKey(string $xKey): self
+    public function setXKey(string $xKey): static
     {
         $this->fields['xKey'] = $xKey;
 

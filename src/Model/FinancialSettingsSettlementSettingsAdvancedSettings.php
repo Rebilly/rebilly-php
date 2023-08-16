@@ -42,7 +42,7 @@ class FinancialSettingsSettlementSettingsAdvancedSettings implements JsonSeriali
         return $this->fields['filter'];
     }
 
-    public function setFilter(string $filter): self
+    public function setFilter(string $filter): static
     {
         $this->fields['filter'] = $filter;
 
@@ -54,7 +54,7 @@ class FinancialSettingsSettlementSettingsAdvancedSettings implements JsonSeriali
         return $this->fields['settlementCurrency'] ?? null;
     }
 
-    public function setSettlementCurrency(null|string $settlementCurrency): self
+    public function setSettlementCurrency(null|string $settlementCurrency): static
     {
         $this->fields['settlementCurrency'] = $settlementCurrency;
 
@@ -66,7 +66,7 @@ class FinancialSettingsSettlementSettingsAdvancedSettings implements JsonSeriali
         return $this->fields['settlementPeriod'] ?? null;
     }
 
-    public function setSettlementPeriod(null|SettlementPeriod|array $settlementPeriod): self
+    public function setSettlementPeriod(null|SettlementPeriod|array $settlementPeriod): static
     {
         if ($settlementPeriod !== null && !($settlementPeriod instanceof SettlementPeriod)) {
             $settlementPeriod = SettlementPeriod::from($settlementPeriod);

@@ -38,7 +38,7 @@ class WesternUnion extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(WesternUnionCredentials|array $credentials): self
+    public function setCredentials(WesternUnionCredentials|array $credentials): static
     {
         if (!($credentials instanceof WesternUnionCredentials)) {
             $credentials = WesternUnionCredentials::from($credentials);

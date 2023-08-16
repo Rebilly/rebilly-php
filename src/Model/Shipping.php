@@ -64,7 +64,7 @@ abstract class Shipping implements JsonSerializable
     /**
      * @psalm-param self::CALCULATOR_* $calculator
      */
-    private function setCalculator(string $calculator): self
+    private function setCalculator(string $calculator): static
     {
         $this->fields['calculator'] = $calculator;
 

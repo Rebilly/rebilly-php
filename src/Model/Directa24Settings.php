@@ -45,7 +45,7 @@ class Directa24Settings implements JsonSerializable
     /**
      * @param null|Directa24Banks[] $banks
      */
-    public function setBanks(null|array $banks): self
+    public function setBanks(null|array $banks): static
     {
         $banks = $banks !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Directa24Banks ? $value : Directa24Banks::from($value)) : null, $banks) : null;
 
@@ -59,7 +59,7 @@ class Directa24Settings implements JsonSerializable
         return $this->fields['skipStep'] ?? null;
     }
 
-    public function setSkipStep(null|bool $skipStep): self
+    public function setSkipStep(null|bool $skipStep): static
     {
         $this->fields['skipStep'] = $skipStep;
 

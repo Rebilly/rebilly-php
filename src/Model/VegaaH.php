@@ -38,7 +38,7 @@ class VegaaH extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(VegaaHCredentials|array $credentials): self
+    public function setCredentials(VegaaHCredentials|array $credentials): static
     {
         if (!($credentials instanceof VegaaHCredentials)) {
             $credentials = VegaaHCredentials::from($credentials);

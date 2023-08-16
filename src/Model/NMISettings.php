@@ -36,7 +36,7 @@ class NMISettings implements JsonSerializable
         return $this->fields['disableStoredCredentials'] ?? null;
     }
 
-    public function setDisableStoredCredentials(null|bool $disableStoredCredentials): self
+    public function setDisableStoredCredentials(null|bool $disableStoredCredentials): static
     {
         $this->fields['disableStoredCredentials'] = $disableStoredCredentials;
 

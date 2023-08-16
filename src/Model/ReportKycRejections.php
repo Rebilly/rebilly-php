@@ -42,7 +42,7 @@ class ReportKycRejections implements JsonSerializable
     /**
      * @param null|ReportKycRejectionsData[] $data
      */
-    public function setData(null|array $data): self
+    public function setData(null|array $data): static
     {
         $data = $data !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ReportKycRejectionsData ? $value : ReportKycRejectionsData::from($value)) : null, $data) : null;
 

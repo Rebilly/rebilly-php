@@ -60,7 +60,7 @@ class DayOfMonth extends CommonScheduleInstruction
     /**
      * @psalm-param self::METHOD_* $method
      */
-    public function setMethod(string $method): self
+    public function setMethod(string $method): static
     {
         $this->fields['method'] = $method;
 
@@ -72,7 +72,7 @@ class DayOfMonth extends CommonScheduleInstruction
         return $this->fields['day'];
     }
 
-    public function setDay(int $day): self
+    public function setDay(int $day): static
     {
         $this->fields['day'] = $day;
 
@@ -84,7 +84,7 @@ class DayOfMonth extends CommonScheduleInstruction
         return $this->fields['time'] ?? null;
     }
 
-    public function setTime(null|string $time): self
+    public function setTime(null|string $time): static
     {
         $this->fields['time'] = $time;
 

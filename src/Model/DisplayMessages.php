@@ -39,7 +39,7 @@ class DisplayMessages implements JsonSerializable
         return $this->fields['langIso'];
     }
 
-    public function setLangIso(string $langIso): self
+    public function setLangIso(string $langIso): static
     {
         $this->fields['langIso'] = $langIso;
 
@@ -51,7 +51,7 @@ class DisplayMessages implements JsonSerializable
         return $this->fields['content'];
     }
 
-    public function setContent(string $content): self
+    public function setContent(string $content): static
     {
         $this->fields['content'] = $content;
 

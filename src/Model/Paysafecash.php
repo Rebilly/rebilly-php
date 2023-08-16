@@ -38,7 +38,7 @@ class Paysafecash extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(PaysafecashCredentials|array $credentials): self
+    public function setCredentials(PaysafecashCredentials|array $credentials): static
     {
         if (!($credentials instanceof PaysafecashCredentials)) {
             $credentials = PaysafecashCredentials::from($credentials);

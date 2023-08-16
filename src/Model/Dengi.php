@@ -38,7 +38,7 @@ class Dengi extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(DengiCredentials|array $credentials): self
+    public function setCredentials(DengiCredentials|array $credentials): static
     {
         if (!($credentials instanceof DengiCredentials)) {
             $credentials = DengiCredentials::from($credentials);

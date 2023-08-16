@@ -42,7 +42,7 @@ class DeleteTagKycDocumentCollectionRequest implements JsonSerializable
     /**
      * @param string[] $kycDocumentIds
      */
-    public function setKycDocumentIds(array $kycDocumentIds): self
+    public function setKycDocumentIds(array $kycDocumentIds): static
     {
         $kycDocumentIds = array_map(fn ($value) => $value ?? null, $kycDocumentIds);
 

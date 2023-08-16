@@ -74,7 +74,7 @@ class FeePatch implements JsonSerializable
     /**
      * @psalm-param self::TYPE_*|null $type
      */
-    public function setType(null|string $type): self
+    public function setType(null|string $type): static
     {
         $this->fields['type'] = $type;
 
@@ -86,7 +86,7 @@ class FeePatch implements JsonSerializable
         return $this->fields['name'] ?? null;
     }
 
-    public function setName(null|string $name): self
+    public function setName(null|string $name): static
     {
         $this->fields['name'] = $name;
 
@@ -98,7 +98,7 @@ class FeePatch implements JsonSerializable
         return $this->fields['filter'] ?? null;
     }
 
-    public function setFilter(null|string $filter): self
+    public function setFilter(null|string $filter): static
     {
         $this->fields['filter'] = $filter;
 
@@ -110,7 +110,7 @@ class FeePatch implements JsonSerializable
         return $this->fields['formula'] ?? null;
     }
 
-    public function setFormula(null|FeeFormula|array $formula): self
+    public function setFormula(null|FeeFormula|array $formula): static
     {
         if ($formula !== null && !($formula instanceof FeeFormula)) {
             $formula = FeeFormula::from($formula);
@@ -170,14 +170,14 @@ class FeePatch implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -188,7 +188,7 @@ class FeePatch implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -202,7 +202,7 @@ class FeePatch implements JsonSerializable
     /**
      * @param null|array<SelfLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

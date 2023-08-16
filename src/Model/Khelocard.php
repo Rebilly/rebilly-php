@@ -38,7 +38,7 @@ class Khelocard extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(KhelocardCredentials|array $credentials): self
+    public function setCredentials(KhelocardCredentials|array $credentials): static
     {
         if (!($credentials instanceof KhelocardCredentials)) {
             $credentials = KhelocardCredentials::from($credentials);

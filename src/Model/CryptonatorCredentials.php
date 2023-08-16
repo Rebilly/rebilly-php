@@ -39,7 +39,7 @@ class CryptonatorCredentials implements JsonSerializable
         return $this->fields['merchant_id'];
     }
 
-    public function setMerchantId(string $merchantId): self
+    public function setMerchantId(string $merchantId): static
     {
         $this->fields['merchant_id'] = $merchantId;
 
@@ -51,7 +51,7 @@ class CryptonatorCredentials implements JsonSerializable
         return $this->fields['secret'];
     }
 
-    public function setSecret(string $secret): self
+    public function setSecret(string $secret): static
     {
         $this->fields['secret'] = $secret;
 

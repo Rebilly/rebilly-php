@@ -42,7 +42,7 @@ class DigitalWalletsApplePay implements JsonSerializable
         return $this->fields['isEnabled'];
     }
 
-    public function setIsEnabled(bool $isEnabled): self
+    public function setIsEnabled(bool $isEnabled): static
     {
         $this->fields['isEnabled'] = $isEnabled;
 
@@ -54,7 +54,7 @@ class DigitalWalletsApplePay implements JsonSerializable
         return $this->fields['displayName'] ?? null;
     }
 
-    public function setDisplayName(null|string $displayName): self
+    public function setDisplayName(null|string $displayName): static
     {
         $this->fields['displayName'] = $displayName;
 
@@ -66,7 +66,7 @@ class DigitalWalletsApplePay implements JsonSerializable
         return $this->fields['country'] ?? null;
     }
 
-    public function setCountry(null|DigitalWalletCountry|array $country): self
+    public function setCountry(null|DigitalWalletCountry|array $country): static
     {
         if ($country !== null && !($country instanceof DigitalWalletCountry)) {
             $country = DigitalWalletCountry::from($country);

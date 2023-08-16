@@ -38,7 +38,7 @@ class XPay extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(XPayCredentials|array $credentials): self
+    public function setCredentials(XPayCredentials|array $credentials): static
     {
         if (!($credentials instanceof XPayCredentials)) {
             $credentials = XPayCredentials::from($credentials);

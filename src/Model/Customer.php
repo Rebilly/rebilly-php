@@ -121,7 +121,7 @@ class Customer implements JsonSerializable
         return $this->fields['websiteId'] ?? null;
     }
 
-    public function setWebsiteId(null|string $websiteId): self
+    public function setWebsiteId(null|string $websiteId): static
     {
         $this->fields['websiteId'] = $websiteId;
 
@@ -133,7 +133,7 @@ class Customer implements JsonSerializable
         return $this->fields['paymentToken'] ?? null;
     }
 
-    public function setPaymentToken(null|string $paymentToken): self
+    public function setPaymentToken(null|string $paymentToken): static
     {
         $this->fields['paymentToken'] = $paymentToken;
 
@@ -145,7 +145,7 @@ class Customer implements JsonSerializable
         return $this->fields['defaultPaymentInstrument'] ?? null;
     }
 
-    public function setDefaultPaymentInstrument(null|PaymentInstrumentValueObject|array $defaultPaymentInstrument): self
+    public function setDefaultPaymentInstrument(null|PaymentInstrumentValueObject|array $defaultPaymentInstrument): static
     {
         if ($defaultPaymentInstrument !== null && !($defaultPaymentInstrument instanceof PaymentInstrumentValueObject)) {
             $defaultPaymentInstrument = PaymentInstrumentValueObject::from($defaultPaymentInstrument);
@@ -171,7 +171,7 @@ class Customer implements JsonSerializable
         return $this->fields['customFields'] ?? null;
     }
 
-    public function setCustomFields(null|array $customFields): self
+    public function setCustomFields(null|array $customFields): static
     {
         $this->fields['customFields'] = $customFields;
 
@@ -183,7 +183,7 @@ class Customer implements JsonSerializable
         return $this->fields['primaryAddress'] ?? null;
     }
 
-    public function setPrimaryAddress(null|ContactObject|array $primaryAddress): self
+    public function setPrimaryAddress(null|ContactObject|array $primaryAddress): static
     {
         if ($primaryAddress !== null && !($primaryAddress instanceof ContactObject)) {
             $primaryAddress = ContactObject::from($primaryAddress);
@@ -199,7 +199,7 @@ class Customer implements JsonSerializable
         return $this->fields['averageValue'] ?? null;
     }
 
-    public function setAverageValue(null|CustomerAverageValue|array $averageValue): self
+    public function setAverageValue(null|CustomerAverageValue|array $averageValue): static
     {
         if ($averageValue !== null && !($averageValue instanceof CustomerAverageValue)) {
             $averageValue = CustomerAverageValue::from($averageValue);
@@ -220,7 +220,7 @@ class Customer implements JsonSerializable
         return $this->fields['lastPaymentTime'] ?? null;
     }
 
-    public function setLastPaymentTime(null|DateTimeImmutable|string $lastPaymentTime): self
+    public function setLastPaymentTime(null|DateTimeImmutable|string $lastPaymentTime): static
     {
         if ($lastPaymentTime !== null && !($lastPaymentTime instanceof DateTimeImmutable)) {
             $lastPaymentTime = new DateTimeImmutable($lastPaymentTime);
@@ -236,7 +236,7 @@ class Customer implements JsonSerializable
         return $this->fields['lifetimeRevenue'] ?? null;
     }
 
-    public function setLifetimeRevenue(null|CustomerLifetimeRevenue|array $lifetimeRevenue): self
+    public function setLifetimeRevenue(null|CustomerLifetimeRevenue|array $lifetimeRevenue): static
     {
         if ($lifetimeRevenue !== null && !($lifetimeRevenue instanceof CustomerLifetimeRevenue)) {
             $lifetimeRevenue = CustomerLifetimeRevenue::from($lifetimeRevenue);
@@ -270,7 +270,7 @@ class Customer implements JsonSerializable
         return $this->fields['isEddRequired'] ?? null;
     }
 
-    public function setIsEddRequired(null|bool $isEddRequired): self
+    public function setIsEddRequired(null|bool $isEddRequired): static
     {
         $this->fields['isEddRequired'] = $isEddRequired;
 
@@ -371,35 +371,35 @@ class Customer implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setEmail(null|string $email): self
+    private function setEmail(null|string $email): static
     {
         $this->fields['email'] = $email;
 
         return $this;
     }
 
-    private function setFirstName(null|string $firstName): self
+    private function setFirstName(null|string $firstName): static
     {
         $this->fields['firstName'] = $firstName;
 
         return $this;
     }
 
-    private function setLastName(null|string $lastName): self
+    private function setLastName(null|string $lastName): static
     {
         $this->fields['lastName'] = $lastName;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -410,7 +410,7 @@ class Customer implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -421,14 +421,14 @@ class Customer implements JsonSerializable
         return $this;
     }
 
-    private function setPaymentCount(null|int $paymentCount): self
+    private function setPaymentCount(null|int $paymentCount): static
     {
         $this->fields['paymentCount'] = $paymentCount;
 
         return $this;
     }
 
-    private function setInvoiceCount(null|int $invoiceCount): self
+    private function setInvoiceCount(null|int $invoiceCount): static
     {
         $this->fields['invoiceCount'] = $invoiceCount;
 
@@ -438,7 +438,7 @@ class Customer implements JsonSerializable
     /**
      * @param null|Tag[] $tags
      */
-    private function setTags(null|array $tags): self
+    private function setTags(null|array $tags): static
     {
         $tags = $tags !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Tag ? $value : Tag::from($value)) : null, $tags) : null;
 
@@ -447,14 +447,14 @@ class Customer implements JsonSerializable
         return $this;
     }
 
-    private function setRevision(null|int $revision): self
+    private function setRevision(null|int $revision): static
     {
         $this->fields['revision'] = $revision;
 
         return $this;
     }
 
-    private function setHasFulfilledKyc(null|bool $hasFulfilledKyc): self
+    private function setHasFulfilledKyc(null|bool $hasFulfilledKyc): static
     {
         $this->fields['hasFulfilledKyc'] = $hasFulfilledKyc;
 
@@ -464,7 +464,7 @@ class Customer implements JsonSerializable
     /**
      * @param null|array<DefaultPaymentInstrumentLink|LeadSourceLink|SelfLink|WebsiteLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 
@@ -476,7 +476,7 @@ class Customer implements JsonSerializable
     /**
      * @param null|array{leadSource:LeadSource} $embedded
      */
-    private function setEmbedded(null|array $embedded): self
+    private function setEmbedded(null|array $embedded): static
     {
         if ($embedded !== null) {
             $embedded['leadSource'] = isset($embedded['leadSource']) ? ($embedded['leadSource'] instanceof LeadSource ? $embedded['leadSource'] : LeadSource::from($embedded['leadSource'])) : null;

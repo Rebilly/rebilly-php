@@ -49,7 +49,7 @@ class InvoiceLink implements JsonSerializable
     /**
      * @psalm-param self::REL_* $rel
      */
-    public function setRel(string $rel): self
+    public function setRel(string $rel): static
     {
         $this->fields['rel'] = $rel;
 
@@ -61,7 +61,7 @@ class InvoiceLink implements JsonSerializable
         return $this->fields['href'];
     }
 
-    public function setHref(string $href): self
+    public function setHref(string $href): static
     {
         $this->fields['href'] = $href;
 

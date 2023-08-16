@@ -157,21 +157,21 @@ class OrganizationExport implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setUserId(null|string $userId): self
+    private function setUserId(null|string $userId): static
     {
         $this->fields['userId'] = $userId;
 
         return $this;
     }
 
-    private function setFileId(null|string $fileId): self
+    private function setFileId(null|string $fileId): static
     {
         $this->fields['fileId'] = $fileId;
 
@@ -181,7 +181,7 @@ class OrganizationExport implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    private function setStatus(null|string $status): self
+    private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
@@ -191,7 +191,7 @@ class OrganizationExport implements JsonSerializable
     /**
      * @param null|OrganizationExportResource[] $items
      */
-    private function setItems(null|array $items): self
+    private function setItems(null|array $items): static
     {
         $items = $items !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof OrganizationExportResource ? $value : OrganizationExportResource::from($value)) : null, $items) : null;
 
@@ -200,7 +200,7 @@ class OrganizationExport implements JsonSerializable
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -211,7 +211,7 @@ class OrganizationExport implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -222,7 +222,7 @@ class OrganizationExport implements JsonSerializable
         return $this;
     }
 
-    private function setRetentionTime(null|DateTimeImmutable|string $retentionTime): self
+    private function setRetentionTime(null|DateTimeImmutable|string $retentionTime): static
     {
         if ($retentionTime !== null && !($retentionTime instanceof DateTimeImmutable)) {
             $retentionTime = new DateTimeImmutable($retentionTime);
@@ -236,7 +236,7 @@ class OrganizationExport implements JsonSerializable
     /**
      * @param null|array<LinkSelf|LinkSignedLink|LinkUser> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 

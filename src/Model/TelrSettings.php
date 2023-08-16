@@ -36,7 +36,7 @@ class TelrSettings implements JsonSerializable
         return $this->fields['transactionDescription'] ?? null;
     }
 
-    public function setTransactionDescription(null|string $transactionDescription): self
+    public function setTransactionDescription(null|string $transactionDescription): static
     {
         $this->fields['transactionDescription'] = $transactionDescription;
 

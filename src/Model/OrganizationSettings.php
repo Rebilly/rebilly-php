@@ -39,7 +39,7 @@ class OrganizationSettings implements JsonSerializable
         return $this->fields['defaultTaxCalculator'] ?? null;
     }
 
-    public function setDefaultTaxCalculator(null|OrganizationSettingsDefaultTaxCalculator|array $defaultTaxCalculator): self
+    public function setDefaultTaxCalculator(null|OrganizationSettingsDefaultTaxCalculator|array $defaultTaxCalculator): static
     {
         if ($defaultTaxCalculator !== null && !($defaultTaxCalculator instanceof OrganizationSettingsDefaultTaxCalculator)) {
             $defaultTaxCalculator = OrganizationSettingsDefaultTaxCalculator::from($defaultTaxCalculator);
@@ -61,7 +61,7 @@ class OrganizationSettings implements JsonSerializable
     /**
      * @param null|TaxLocation[] $taxLocations
      */
-    public function setTaxLocations(null|array $taxLocations): self
+    public function setTaxLocations(null|array $taxLocations): static
     {
         $taxLocations = $taxLocations !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof TaxLocation ? $value : TaxLocation::from($value)) : null, $taxLocations) : null;
 

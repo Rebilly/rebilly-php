@@ -38,7 +38,7 @@ class Pin4Pay extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(Pin4PayCredentials|array $credentials): self
+    public function setCredentials(Pin4PayCredentials|array $credentials): static
     {
         if (!($credentials instanceof Pin4PayCredentials)) {
             $credentials = Pin4PayCredentials::from($credentials);

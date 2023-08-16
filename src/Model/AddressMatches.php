@@ -67,7 +67,7 @@ class AddressMatches implements JsonSerializable
         return $this->fields['firstName'] ?? null;
     }
 
-    public function setFirstName(null|string $firstName): self
+    public function setFirstName(null|string $firstName): static
     {
         $this->fields['firstName'] = $firstName;
 
@@ -79,7 +79,7 @@ class AddressMatches implements JsonSerializable
         return $this->fields['lastName'] ?? null;
     }
 
-    public function setLastName(null|string $lastName): self
+    public function setLastName(null|string $lastName): static
     {
         $this->fields['lastName'] = $lastName;
 
@@ -91,7 +91,7 @@ class AddressMatches implements JsonSerializable
         return $this->fields['line1'] ?? null;
     }
 
-    public function setLine1(null|string $line1): self
+    public function setLine1(null|string $line1): static
     {
         $this->fields['line1'] = $line1;
 
@@ -103,7 +103,7 @@ class AddressMatches implements JsonSerializable
         return $this->fields['city'] ?? null;
     }
 
-    public function setCity(null|string $city): self
+    public function setCity(null|string $city): static
     {
         $this->fields['city'] = $city;
 
@@ -115,7 +115,7 @@ class AddressMatches implements JsonSerializable
         return $this->fields['region'] ?? null;
     }
 
-    public function setRegion(null|string $region): self
+    public function setRegion(null|string $region): static
     {
         $this->fields['region'] = $region;
 
@@ -127,7 +127,7 @@ class AddressMatches implements JsonSerializable
         return $this->fields['postalCode'] ?? null;
     }
 
-    public function setPostalCode(null|string $postalCode): self
+    public function setPostalCode(null|string $postalCode): static
     {
         $this->fields['postalCode'] = $postalCode;
 
@@ -139,7 +139,7 @@ class AddressMatches implements JsonSerializable
         return $this->fields['wordCount'] ?? null;
     }
 
-    public function setWordCount(null|int $wordCount): self
+    public function setWordCount(null|int $wordCount): static
     {
         $this->fields['wordCount'] = $wordCount;
 
@@ -151,7 +151,7 @@ class AddressMatches implements JsonSerializable
         return $this->fields['uniqueWords'] ?? null;
     }
 
-    public function setUniqueWords(null|int $uniqueWords): self
+    public function setUniqueWords(null|int $uniqueWords): static
     {
         $this->fields['uniqueWords'] = $uniqueWords;
 
@@ -163,7 +163,7 @@ class AddressMatches implements JsonSerializable
         return $this->fields['date'] ?? null;
     }
 
-    public function setDate(null|DateTimeImmutable|string $date): self
+    public function setDate(null|DateTimeImmutable|string $date): static
     {
         if ($date !== null && !($date instanceof DateTimeImmutable)) {
             $date = new DateTimeImmutable($date);
@@ -179,7 +179,7 @@ class AddressMatches implements JsonSerializable
         return $this->fields['phone'] ?? null;
     }
 
-    public function setPhone(null|string $phone): self
+    public function setPhone(null|string $phone): static
     {
         $this->fields['phone'] = $phone;
 
@@ -191,7 +191,7 @@ class AddressMatches implements JsonSerializable
         return $this->fields['documentSubtype'] ?? null;
     }
 
-    public function setDocumentSubtype(null|string $documentSubtype): self
+    public function setDocumentSubtype(null|string $documentSubtype): static
     {
         $this->fields['documentSubtype'] = $documentSubtype;
 

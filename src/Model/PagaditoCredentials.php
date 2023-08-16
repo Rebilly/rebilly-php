@@ -39,7 +39,7 @@ class PagaditoCredentials implements JsonSerializable
         return $this->fields['uid'];
     }
 
-    public function setUid(string $uid): self
+    public function setUid(string $uid): static
     {
         $this->fields['uid'] = $uid;
 
@@ -51,7 +51,7 @@ class PagaditoCredentials implements JsonSerializable
         return $this->fields['wsk'];
     }
 
-    public function setWsk(string $wsk): self
+    public function setWsk(string $wsk): static
     {
         $this->fields['wsk'] = $wsk;
 

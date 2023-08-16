@@ -54,7 +54,7 @@ class DccMarkupData implements JsonSerializable
         return $this->fields['aggregationValue'] ?? null;
     }
 
-    public function setAggregationValue(null|string $aggregationValue): self
+    public function setAggregationValue(null|string $aggregationValue): static
     {
         $this->fields['aggregationValue'] = $aggregationValue;
 
@@ -66,7 +66,7 @@ class DccMarkupData implements JsonSerializable
         return $this->fields['selectedCount'] ?? null;
     }
 
-    public function setSelectedCount(null|int $selectedCount): self
+    public function setSelectedCount(null|int $selectedCount): static
     {
         $this->fields['selectedCount'] = $selectedCount;
 
@@ -78,7 +78,7 @@ class DccMarkupData implements JsonSerializable
         return $this->fields['selectedSum'] ?? null;
     }
 
-    public function setSelectedSum(null|float|string $selectedSum): self
+    public function setSelectedSum(null|float|string $selectedSum): static
     {
         if (is_string($selectedSum)) {
             $selectedSum = (float) $selectedSum;
@@ -94,7 +94,7 @@ class DccMarkupData implements JsonSerializable
         return $this->fields['rejectedCount'] ?? null;
     }
 
-    public function setRejectedCount(null|int $rejectedCount): self
+    public function setRejectedCount(null|int $rejectedCount): static
     {
         $this->fields['rejectedCount'] = $rejectedCount;
 
@@ -106,7 +106,7 @@ class DccMarkupData implements JsonSerializable
         return $this->fields['rejectedSum'] ?? null;
     }
 
-    public function setRejectedSum(null|float|string $rejectedSum): self
+    public function setRejectedSum(null|float|string $rejectedSum): static
     {
         if (is_string($rejectedSum)) {
             $rejectedSum = (float) $rejectedSum;
@@ -122,7 +122,7 @@ class DccMarkupData implements JsonSerializable
         return $this->fields['unknownCount'] ?? null;
     }
 
-    public function setUnknownCount(null|int $unknownCount): self
+    public function setUnknownCount(null|int $unknownCount): static
     {
         $this->fields['unknownCount'] = $unknownCount;
 
@@ -134,7 +134,7 @@ class DccMarkupData implements JsonSerializable
         return $this->fields['unknownSum'] ?? null;
     }
 
-    public function setUnknownSum(null|float|string $unknownSum): self
+    public function setUnknownSum(null|float|string $unknownSum): static
     {
         if (is_string($unknownSum)) {
             $unknownSum = (float) $unknownSum;

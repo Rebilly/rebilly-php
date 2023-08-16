@@ -97,14 +97,14 @@ class OrganizationExportResource implements JsonSerializable
     /**
      * @psalm-param self::NAME_*|null $name
      */
-    private function setName(null|string $name): self
+    private function setName(null|string $name): static
     {
         $this->fields['name'] = $name;
 
         return $this;
     }
 
-    private function setRecordCount(null|int $recordCount): self
+    private function setRecordCount(null|int $recordCount): static
     {
         $this->fields['recordCount'] = $recordCount;
 

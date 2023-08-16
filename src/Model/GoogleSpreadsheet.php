@@ -57,14 +57,14 @@ class GoogleSpreadsheet implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setName(null|string $name): self
+    private function setName(null|string $name): static
     {
         $this->fields['name'] = $name;
 

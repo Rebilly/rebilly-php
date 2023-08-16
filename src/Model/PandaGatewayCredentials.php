@@ -42,7 +42,7 @@ class PandaGatewayCredentials implements JsonSerializable
         return $this->fields['merchantCode'];
     }
 
-    public function setMerchantCode(string $merchantCode): self
+    public function setMerchantCode(string $merchantCode): static
     {
         $this->fields['merchantCode'] = $merchantCode;
 
@@ -54,7 +54,7 @@ class PandaGatewayCredentials implements JsonSerializable
         return $this->fields['apiCode'];
     }
 
-    public function setApiCode(string $apiCode): self
+    public function setApiCode(string $apiCode): static
     {
         $this->fields['apiCode'] = $apiCode;
 
@@ -66,7 +66,7 @@ class PandaGatewayCredentials implements JsonSerializable
         return $this->fields['signKey'];
     }
 
-    public function setSignKey(string $signKey): self
+    public function setSignKey(string $signKey): static
     {
         $this->fields['signKey'] = $signKey;
 

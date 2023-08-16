@@ -42,7 +42,7 @@ class ApplePayValidationValidationRequest implements JsonSerializable
         return $this->fields['validationUrl'] ?? null;
     }
 
-    public function setValidationUrl(null|string $validationUrl): self
+    public function setValidationUrl(null|string $validationUrl): static
     {
         $this->fields['validationUrl'] = $validationUrl;
 
@@ -54,7 +54,7 @@ class ApplePayValidationValidationRequest implements JsonSerializable
         return $this->fields['domainName'] ?? null;
     }
 
-    public function setDomainName(null|string $domainName): self
+    public function setDomainName(null|string $domainName): static
     {
         $this->fields['domainName'] = $domainName;
 
@@ -66,7 +66,7 @@ class ApplePayValidationValidationRequest implements JsonSerializable
         return $this->fields['displayName'] ?? null;
     }
 
-    public function setDisplayName(null|string $displayName): self
+    public function setDisplayName(null|string $displayName): static
     {
         $this->fields['displayName'] = $displayName;
 

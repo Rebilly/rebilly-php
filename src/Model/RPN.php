@@ -38,7 +38,7 @@ class RPN extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(RPNCredentials|array $credentials): self
+    public function setCredentials(RPNCredentials|array $credentials): static
     {
         if (!($credentials instanceof RPNCredentials)) {
             $credentials = RPNCredentials::from($credentials);

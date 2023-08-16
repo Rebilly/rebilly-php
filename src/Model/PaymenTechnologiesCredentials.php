@@ -48,7 +48,7 @@ class PaymenTechnologiesCredentials implements JsonSerializable
         return $this->fields['authenticateId'];
     }
 
-    public function setAuthenticateId(string $authenticateId): self
+    public function setAuthenticateId(string $authenticateId): static
     {
         $this->fields['authenticateId'] = $authenticateId;
 
@@ -60,7 +60,7 @@ class PaymenTechnologiesCredentials implements JsonSerializable
         return $this->fields['authenticatePw'];
     }
 
-    public function setAuthenticatePw(string $authenticatePw): self
+    public function setAuthenticatePw(string $authenticatePw): static
     {
         $this->fields['authenticatePw'] = $authenticatePw;
 
@@ -72,7 +72,7 @@ class PaymenTechnologiesCredentials implements JsonSerializable
         return $this->fields['publicKey'];
     }
 
-    public function setPublicKey(string $publicKey): self
+    public function setPublicKey(string $publicKey): static
     {
         $this->fields['publicKey'] = $publicKey;
 
@@ -84,7 +84,7 @@ class PaymenTechnologiesCredentials implements JsonSerializable
         return $this->fields['secretKey'];
     }
 
-    public function setSecretKey(string $secretKey): self
+    public function setSecretKey(string $secretKey): static
     {
         $this->fields['secretKey'] = $secretKey;
 
@@ -96,7 +96,7 @@ class PaymenTechnologiesCredentials implements JsonSerializable
         return $this->fields['apiKey'];
     }
 
-    public function setApiKey(string $apiKey): self
+    public function setApiKey(string $apiKey): static
     {
         $this->fields['apiKey'] = $apiKey;
 

@@ -38,7 +38,7 @@ class Payflow extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(PayflowCredentials|array $credentials): self
+    public function setCredentials(PayflowCredentials|array $credentials): static
     {
         if (!($credentials instanceof PayflowCredentials)) {
             $credentials = PayflowCredentials::from($credentials);

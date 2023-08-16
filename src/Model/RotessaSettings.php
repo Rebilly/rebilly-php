@@ -36,7 +36,7 @@ class RotessaSettings implements JsonSerializable
         return $this->fields['delay'];
     }
 
-    public function setDelay(int $delay): self
+    public function setDelay(int $delay): static
     {
         $this->fields['delay'] = $delay;
 

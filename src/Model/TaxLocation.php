@@ -48,7 +48,7 @@ class TaxLocation implements JsonSerializable
         return $this->fields['address'] ?? null;
     }
 
-    public function setAddress(null|string $address): self
+    public function setAddress(null|string $address): static
     {
         $this->fields['address'] = $address;
 
@@ -60,7 +60,7 @@ class TaxLocation implements JsonSerializable
         return $this->fields['city'] ?? null;
     }
 
-    public function setCity(null|string $city): self
+    public function setCity(null|string $city): static
     {
         $this->fields['city'] = $city;
 
@@ -72,7 +72,7 @@ class TaxLocation implements JsonSerializable
         return $this->fields['region'] ?? null;
     }
 
-    public function setRegion(null|string $region): self
+    public function setRegion(null|string $region): static
     {
         $this->fields['region'] = $region;
 
@@ -84,7 +84,7 @@ class TaxLocation implements JsonSerializable
         return $this->fields['country'];
     }
 
-    public function setCountry(string $country): self
+    public function setCountry(string $country): static
     {
         $this->fields['country'] = $country;
 
@@ -96,7 +96,7 @@ class TaxLocation implements JsonSerializable
         return $this->fields['postalCode'] ?? null;
     }
 
-    public function setPostalCode(null|string $postalCode): self
+    public function setPostalCode(null|string $postalCode): static
     {
         $this->fields['postalCode'] = $postalCode;
 

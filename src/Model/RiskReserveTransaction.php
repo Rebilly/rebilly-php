@@ -44,7 +44,7 @@ class RiskReserveTransaction extends BalanceTransaction
         return $this->fields['riskReserveDetails'] ?? null;
     }
 
-    public function setRiskReserveDetails(null|RiskReserveDetails|array $riskReserveDetails): self
+    public function setRiskReserveDetails(null|RiskReserveDetails|array $riskReserveDetails): static
     {
         if ($riskReserveDetails !== null && !($riskReserveDetails instanceof RiskReserveDetails)) {
             $riskReserveDetails = RiskReserveDetails::from($riskReserveDetails);
@@ -90,7 +90,7 @@ class RiskReserveTransaction extends BalanceTransaction
     /**
      * @param null|array<ParentLink|SelfLink|TransactionLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 
@@ -102,7 +102,7 @@ class RiskReserveTransaction extends BalanceTransaction
     /**
      * @param null|array{transaction:BalanceTransaction,transaction:Transaction} $embedded
      */
-    private function setEmbedded(null|array $embedded): self
+    private function setEmbedded(null|array $embedded): static
     {
         if ($embedded !== null) {
             $embedded['transaction'] = isset($embedded['transaction']) ? ($embedded['transaction'] instanceof BalanceTransaction ? $embedded['transaction'] : BalanceTransaction::from($embedded['transaction'])) : null;

@@ -41,7 +41,7 @@ class PayClub extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(PayClubCredentials|array $credentials): self
+    public function setCredentials(PayClubCredentials|array $credentials): static
     {
         if (!($credentials instanceof PayClubCredentials)) {
             $credentials = PayClubCredentials::from($credentials);
@@ -57,7 +57,7 @@ class PayClub extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|PayClubSettings|array $settings): self
+    public function setSettings(null|PayClubSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof PayClubSettings)) {
             $settings = PayClubSettings::from($settings);

@@ -42,7 +42,7 @@ class MtaPayCredentials implements JsonSerializable
         return $this->fields['accountId'];
     }
 
-    public function setAccountId(string $accountId): self
+    public function setAccountId(string $accountId): static
     {
         $this->fields['accountId'] = $accountId;
 
@@ -54,7 +54,7 @@ class MtaPayCredentials implements JsonSerializable
         return $this->fields['partyId'];
     }
 
-    public function setPartyId(string $partyId): self
+    public function setPartyId(string $partyId): static
     {
         $this->fields['partyId'] = $partyId;
 
@@ -66,7 +66,7 @@ class MtaPayCredentials implements JsonSerializable
         return $this->fields['md5key'];
     }
 
-    public function setMd5key(string $md5key): self
+    public function setMd5key(string $md5key): static
     {
         $this->fields['md5key'] = $md5key;
 

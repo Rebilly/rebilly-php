@@ -45,7 +45,7 @@ class PurchaseMatches implements JsonSerializable
         return $this->fields['firstName'] ?? null;
     }
 
-    public function setFirstName(null|string $firstName): self
+    public function setFirstName(null|string $firstName): static
     {
         $this->fields['firstName'] = $firstName;
 
@@ -57,7 +57,7 @@ class PurchaseMatches implements JsonSerializable
         return $this->fields['lastName'] ?? null;
     }
 
-    public function setLastName(null|string $lastName): self
+    public function setLastName(null|string $lastName): static
     {
         $this->fields['lastName'] = $lastName;
 
@@ -69,7 +69,7 @@ class PurchaseMatches implements JsonSerializable
         return $this->fields['paymentInstrumentId'] ?? null;
     }
 
-    public function setPaymentInstrumentId(null|string $paymentInstrumentId): self
+    public function setPaymentInstrumentId(null|string $paymentInstrumentId): static
     {
         $this->fields['paymentInstrumentId'] = $paymentInstrumentId;
 
@@ -81,7 +81,7 @@ class PurchaseMatches implements JsonSerializable
         return $this->fields['documentSubtype'] ?? null;
     }
 
-    public function setDocumentSubtype(null|string $documentSubtype): self
+    public function setDocumentSubtype(null|string $documentSubtype): static
     {
         $this->fields['documentSubtype'] = $documentSubtype;
 

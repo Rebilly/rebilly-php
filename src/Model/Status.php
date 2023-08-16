@@ -51,7 +51,7 @@ class Status implements JsonSerializable
         return $this->fields['time'] ?? null;
     }
 
-    public function setTime(null|DateTimeImmutable|string $time): self
+    public function setTime(null|DateTimeImmutable|string $time): static
     {
         if ($time !== null && !($time instanceof DateTimeImmutable)) {
             $time = new DateTimeImmutable($time);
@@ -78,7 +78,7 @@ class Status implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    private function setStatus(null|string $status): self
+    private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 

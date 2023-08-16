@@ -42,7 +42,7 @@ class WebsiteSettingsPaymentForm implements JsonSerializable
         return $this->fields['css'] ?? null;
     }
 
-    public function setCss(null|string $css): self
+    public function setCss(null|string $css): static
     {
         $this->fields['css'] = $css;
 
@@ -60,7 +60,7 @@ class WebsiteSettingsPaymentForm implements JsonSerializable
     /**
      * @param null|array<string,string> $theme
      */
-    public function setTheme(null|array $theme): self
+    public function setTheme(null|array $theme): static
     {
         $this->fields['theme'] = $theme;
 
@@ -72,7 +72,7 @@ class WebsiteSettingsPaymentForm implements JsonSerializable
         return $this->fields['features'] ?? null;
     }
 
-    public function setFeatures(null|WebsiteSettingsPaymentFormFeatures|array $features): self
+    public function setFeatures(null|WebsiteSettingsPaymentFormFeatures|array $features): static
     {
         if ($features !== null && !($features instanceof WebsiteSettingsPaymentFormFeatures)) {
             $features = WebsiteSettingsPaymentFormFeatures::from($features);

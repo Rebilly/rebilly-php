@@ -39,7 +39,7 @@ class IntuitCredentials implements JsonSerializable
         return $this->fields['clientId'];
     }
 
-    public function setClientId(string $clientId): self
+    public function setClientId(string $clientId): static
     {
         $this->fields['clientId'] = $clientId;
 
@@ -51,7 +51,7 @@ class IntuitCredentials implements JsonSerializable
         return $this->fields['clientSecret'];
     }
 
-    public function setClientSecret(string $clientSecret): self
+    public function setClientSecret(string $clientSecret): static
     {
         $this->fields['clientSecret'] = $clientSecret;
 

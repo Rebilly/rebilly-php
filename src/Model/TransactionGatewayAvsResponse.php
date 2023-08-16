@@ -45,7 +45,7 @@ class TransactionGatewayAvsResponse implements JsonSerializable
         return $this->fields['code'] ?? null;
     }
 
-    public function setCode(null|string $code): self
+    public function setCode(null|string $code): static
     {
         $this->fields['code'] = $code;
 
@@ -57,7 +57,7 @@ class TransactionGatewayAvsResponse implements JsonSerializable
         return $this->fields['message'] ?? null;
     }
 
-    public function setMessage(null|string $message): self
+    public function setMessage(null|string $message): static
     {
         $this->fields['message'] = $message;
 
@@ -69,7 +69,7 @@ class TransactionGatewayAvsResponse implements JsonSerializable
         return $this->fields['originalCode'] ?? null;
     }
 
-    public function setOriginalCode(null|string $originalCode): self
+    public function setOriginalCode(null|string $originalCode): static
     {
         $this->fields['originalCode'] = $originalCode;
 
@@ -81,7 +81,7 @@ class TransactionGatewayAvsResponse implements JsonSerializable
         return $this->fields['originalMessage'] ?? null;
     }
 
-    public function setOriginalMessage(null|string $originalMessage): self
+    public function setOriginalMessage(null|string $originalMessage): static
     {
         $this->fields['originalMessage'] = $originalMessage;
 

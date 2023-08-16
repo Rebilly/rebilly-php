@@ -38,7 +38,7 @@ class PayTabs extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(PayTabsCredentials|array $credentials): self
+    public function setCredentials(PayTabsCredentials|array $credentials): static
     {
         if (!($credentials instanceof PayTabsCredentials)) {
             $credentials = PayTabsCredentials::from($credentials);

@@ -39,7 +39,7 @@ class IpayOptionsCredentials implements JsonSerializable
         return $this->fields['sid'];
     }
 
-    public function setSid(string $sid): self
+    public function setSid(string $sid): static
     {
         $this->fields['sid'] = $sid;
 
@@ -51,7 +51,7 @@ class IpayOptionsCredentials implements JsonSerializable
         return $this->fields['rcode'];
     }
 
-    public function setRcode(string $rcode): self
+    public function setRcode(string $rcode): static
     {
         $this->fields['rcode'] = $rcode;
 

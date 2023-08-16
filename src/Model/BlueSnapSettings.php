@@ -42,7 +42,7 @@ class BlueSnapSettings implements JsonSerializable
         return $this->fields['enableMoto'] ?? null;
     }
 
-    public function setEnableMoto(null|bool $enableMoto): self
+    public function setEnableMoto(null|bool $enableMoto): static
     {
         $this->fields['enableMoto'] = $enableMoto;
 
@@ -54,7 +54,7 @@ class BlueSnapSettings implements JsonSerializable
         return $this->fields['salesTaxAmount'] ?? null;
     }
 
-    public function setSalesTaxAmount(null|float|string $salesTaxAmount): self
+    public function setSalesTaxAmount(null|float|string $salesTaxAmount): static
     {
         if (is_string($salesTaxAmount)) {
             $salesTaxAmount = (float) $salesTaxAmount;
@@ -70,7 +70,7 @@ class BlueSnapSettings implements JsonSerializable
         return $this->fields['metadataCustomField'] ?? null;
     }
 
-    public function setMetadataCustomField(null|string $metadataCustomField): self
+    public function setMetadataCustomField(null|string $metadataCustomField): static
     {
         $this->fields['metadataCustomField'] = $metadataCustomField;
 

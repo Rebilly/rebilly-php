@@ -41,7 +41,7 @@ class CoinGate extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(CoinGateCredentials|array $credentials): self
+    public function setCredentials(CoinGateCredentials|array $credentials): static
     {
         if (!($credentials instanceof CoinGateCredentials)) {
             $credentials = CoinGateCredentials::from($credentials);
@@ -57,7 +57,7 @@ class CoinGate extends GatewayAccount
         return $this->fields['settings'];
     }
 
-    public function setSettings(CoinGateSettings|array $settings): self
+    public function setSettings(CoinGateSettings|array $settings): static
     {
         if (!($settings instanceof CoinGateSettings)) {
             $settings = CoinGateSettings::from($settings);

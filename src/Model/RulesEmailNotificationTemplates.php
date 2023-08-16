@@ -63,7 +63,7 @@ class RulesEmailNotificationTemplates implements JsonSerializable
         return $this->fields['locale'];
     }
 
-    public function setLocale(string $locale): self
+    public function setLocale(string $locale): static
     {
         $this->fields['locale'] = $locale;
 
@@ -75,7 +75,7 @@ class RulesEmailNotificationTemplates implements JsonSerializable
         return $this->fields['from'];
     }
 
-    public function setFrom(string $from): self
+    public function setFrom(string $from): static
     {
         $this->fields['from'] = $from;
 
@@ -93,7 +93,7 @@ class RulesEmailNotificationTemplates implements JsonSerializable
     /**
      * @param string[] $to
      */
-    public function setTo(array $to): self
+    public function setTo(array $to): static
     {
         $to = array_map(fn ($value) => $value ?? null, $to);
 
@@ -113,7 +113,7 @@ class RulesEmailNotificationTemplates implements JsonSerializable
     /**
      * @param null|string[] $cc
      */
-    public function setCc(null|array $cc): self
+    public function setCc(null|array $cc): static
     {
         $cc = $cc !== null ? array_map(fn ($value) => $value ?? null, $cc) : null;
 
@@ -133,7 +133,7 @@ class RulesEmailNotificationTemplates implements JsonSerializable
     /**
      * @param null|string[] $bcc
      */
-    public function setBcc(null|array $bcc): self
+    public function setBcc(null|array $bcc): static
     {
         $bcc = $bcc !== null ? array_map(fn ($value) => $value ?? null, $bcc) : null;
 
@@ -147,7 +147,7 @@ class RulesEmailNotificationTemplates implements JsonSerializable
         return $this->fields['subject'];
     }
 
-    public function setSubject(string $subject): self
+    public function setSubject(string $subject): static
     {
         $this->fields['subject'] = $subject;
 
@@ -159,7 +159,7 @@ class RulesEmailNotificationTemplates implements JsonSerializable
         return $this->fields['text'];
     }
 
-    public function setText(string $text): self
+    public function setText(string $text): static
     {
         $this->fields['text'] = $text;
 
@@ -171,7 +171,7 @@ class RulesEmailNotificationTemplates implements JsonSerializable
         return $this->fields['html'];
     }
 
-    public function setHtml(string $html): self
+    public function setHtml(string $html): static
     {
         $this->fields['html'] = $html;
 
@@ -183,7 +183,7 @@ class RulesEmailNotificationTemplates implements JsonSerializable
         return $this->fields['editor'] ?? null;
     }
 
-    public function setEditor(null|string $editor): self
+    public function setEditor(null|string $editor): static
     {
         $this->fields['editor'] = $editor;
 
@@ -201,7 +201,7 @@ class RulesEmailNotificationTemplates implements JsonSerializable
     /**
      * @param null|RulesEmailNotificationAttachments[] $attachments
      */
-    public function setAttachments(null|array $attachments): self
+    public function setAttachments(null|array $attachments): static
     {
         $attachments = $attachments !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof RulesEmailNotificationAttachments ? $value : RulesEmailNotificationAttachments::from($value)) : null, $attachments) : null;
 

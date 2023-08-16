@@ -50,7 +50,7 @@ class CommonCreditMemoAllocationsTransactions implements JsonSerializable
         return $this->fields['transactionId'] ?? null;
     }
 
-    public function setTransactionId(null|string $transactionId): self
+    public function setTransactionId(null|string $transactionId): static
     {
         $this->fields['transactionId'] = $transactionId;
 
@@ -62,7 +62,7 @@ class CommonCreditMemoAllocationsTransactions implements JsonSerializable
         return $this->fields['amount'] ?? null;
     }
 
-    public function setAmount(null|float|string $amount): self
+    public function setAmount(null|float|string $amount): static
     {
         if (is_string($amount)) {
             $amount = (float) $amount;
@@ -110,14 +110,14 @@ class CommonCreditMemoAllocationsTransactions implements JsonSerializable
         return $data;
     }
 
-    private function setCurrency(null|string $currency): self
+    private function setCurrency(null|string $currency): static
     {
         $this->fields['currency'] = $currency;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -128,7 +128,7 @@ class CommonCreditMemoAllocationsTransactions implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);

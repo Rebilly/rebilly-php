@@ -51,7 +51,7 @@ class DLocalCredentials implements JsonSerializable
         return $this->fields['xLogin'];
     }
 
-    public function setXLogin(string $xLogin): self
+    public function setXLogin(string $xLogin): static
     {
         $this->fields['xLogin'] = $xLogin;
 
@@ -63,7 +63,7 @@ class DLocalCredentials implements JsonSerializable
         return $this->fields['xTransKey'];
     }
 
-    public function setXTransKey(string $xTransKey): self
+    public function setXTransKey(string $xTransKey): static
     {
         $this->fields['xTransKey'] = $xTransKey;
 
@@ -75,7 +75,7 @@ class DLocalCredentials implements JsonSerializable
         return $this->fields['secretKey'];
     }
 
-    public function setSecretKey(string $secretKey): self
+    public function setSecretKey(string $secretKey): static
     {
         $this->fields['secretKey'] = $secretKey;
 
@@ -87,7 +87,7 @@ class DLocalCredentials implements JsonSerializable
         return $this->fields['xPayoutLogin'] ?? null;
     }
 
-    public function setXPayoutLogin(null|string $xPayoutLogin): self
+    public function setXPayoutLogin(null|string $xPayoutLogin): static
     {
         $this->fields['xPayoutLogin'] = $xPayoutLogin;
 
@@ -99,7 +99,7 @@ class DLocalCredentials implements JsonSerializable
         return $this->fields['xPayoutTransKey'] ?? null;
     }
 
-    public function setXPayoutTransKey(null|string $xPayoutTransKey): self
+    public function setXPayoutTransKey(null|string $xPayoutTransKey): static
     {
         $this->fields['xPayoutTransKey'] = $xPayoutTransKey;
 
@@ -111,7 +111,7 @@ class DLocalCredentials implements JsonSerializable
         return $this->fields['payoutSecretKey'] ?? null;
     }
 
-    public function setPayoutSecretKey(null|string $payoutSecretKey): self
+    public function setPayoutSecretKey(null|string $payoutSecretKey): static
     {
         $this->fields['payoutSecretKey'] = $payoutSecretKey;
 

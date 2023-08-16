@@ -38,7 +38,7 @@ class Elavon extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(ElavonCredentials|array $credentials): self
+    public function setCredentials(ElavonCredentials|array $credentials): static
     {
         if (!($credentials instanceof ElavonCredentials)) {
             $credentials = ElavonCredentials::from($credentials);

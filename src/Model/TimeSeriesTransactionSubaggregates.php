@@ -39,7 +39,7 @@ class TimeSeriesTransactionSubaggregates implements JsonSerializable
         return $this->fields['subaggregate'] ?? null;
     }
 
-    public function setSubaggregate(null|string $subaggregate): self
+    public function setSubaggregate(null|string $subaggregate): static
     {
         $this->fields['subaggregate'] = $subaggregate;
 
@@ -51,7 +51,7 @@ class TimeSeriesTransactionSubaggregates implements JsonSerializable
         return $this->fields['value'] ?? null;
     }
 
-    public function setValue(null|float|string $value): self
+    public function setValue(null|float|string $value): static
     {
         if (is_string($value)) {
             $value = (float) $value;

@@ -42,7 +42,7 @@ class DropaymentCredentials implements JsonSerializable
         return $this->fields['login'];
     }
 
-    public function setLogin(string $login): self
+    public function setLogin(string $login): static
     {
         $this->fields['login'] = $login;
 
@@ -54,7 +54,7 @@ class DropaymentCredentials implements JsonSerializable
         return $this->fields['endpointId'];
     }
 
-    public function setEndpointId(string $endpointId): self
+    public function setEndpointId(string $endpointId): static
     {
         $this->fields['endpointId'] = $endpointId;
 
@@ -66,7 +66,7 @@ class DropaymentCredentials implements JsonSerializable
         return $this->fields['secretKey'];
     }
 
-    public function setSecretKey(string $secretKey): self
+    public function setSecretKey(string $secretKey): static
     {
         $this->fields['secretKey'] = $secretKey;
 

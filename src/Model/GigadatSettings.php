@@ -36,7 +36,7 @@ class GigadatSettings implements JsonSerializable
         return $this->fields['sandbox'];
     }
 
-    public function setSandbox(bool $sandbox): self
+    public function setSandbox(bool $sandbox): static
     {
         $this->fields['sandbox'] = $sandbox;
 

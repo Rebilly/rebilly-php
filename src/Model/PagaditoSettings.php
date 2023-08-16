@@ -36,7 +36,7 @@ class PagaditoSettings implements JsonSerializable
         return $this->fields['useRecurringApi'] ?? null;
     }
 
-    public function setUseRecurringApi(null|bool $useRecurringApi): self
+    public function setUseRecurringApi(null|bool $useRecurringApi): static
     {
         $this->fields['useRecurringApi'] = $useRecurringApi;
 

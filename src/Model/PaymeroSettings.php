@@ -46,7 +46,7 @@ class PaymeroSettings implements JsonSerializable
         return $this->fields['targetCurrency'] ?? null;
     }
 
-    public function setTargetCurrency(null|string $targetCurrency): self
+    public function setTargetCurrency(null|string $targetCurrency): static
     {
         $this->fields['targetCurrency'] = $targetCurrency;
 
@@ -64,7 +64,7 @@ class PaymeroSettings implements JsonSerializable
     /**
      * @psalm-param self::MAIN_CURRENCY_*|null $mainCurrency
      */
-    public function setMainCurrency(null|string $mainCurrency): self
+    public function setMainCurrency(null|string $mainCurrency): static
     {
         $this->fields['mainCurrency'] = $mainCurrency;
 
@@ -76,7 +76,7 @@ class PaymeroSettings implements JsonSerializable
         return $this->fields['amountExceeded'] ?? null;
     }
 
-    public function setAmountExceeded(null|bool $amountExceeded): self
+    public function setAmountExceeded(null|bool $amountExceeded): static
     {
         $this->fields['amountExceeded'] = $amountExceeded;
 

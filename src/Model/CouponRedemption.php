@@ -64,7 +64,7 @@ class CouponRedemption implements JsonSerializable
         return $this->fields['couponId'] ?? null;
     }
 
-    public function setCouponId(null|string $couponId): self
+    public function setCouponId(null|string $couponId): static
     {
         $this->fields['couponId'] = $couponId;
 
@@ -76,7 +76,7 @@ class CouponRedemption implements JsonSerializable
         return $this->fields['customerId'] ?? null;
     }
 
-    public function setCustomerId(null|string $customerId): self
+    public function setCustomerId(null|string $customerId): static
     {
         $this->fields['customerId'] = $customerId;
 
@@ -94,7 +94,7 @@ class CouponRedemption implements JsonSerializable
     /**
      * @param null|RedemptionRestriction[] $additionalRestrictions
      */
-    public function setAdditionalRestrictions(null|array $additionalRestrictions): self
+    public function setAdditionalRestrictions(null|array $additionalRestrictions): static
     {
         $additionalRestrictions = $additionalRestrictions !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof RedemptionRestriction ? $value : RedemptionRestriction::from($value)) : null, $additionalRestrictions) : null;
 
@@ -157,14 +157,14 @@ class CouponRedemption implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -175,7 +175,7 @@ class CouponRedemption implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -186,7 +186,7 @@ class CouponRedemption implements JsonSerializable
         return $this;
     }
 
-    private function setCanceledTime(null|DateTimeImmutable|string $canceledTime): self
+    private function setCanceledTime(null|DateTimeImmutable|string $canceledTime): static
     {
         if ($canceledTime !== null && !($canceledTime instanceof DateTimeImmutable)) {
             $canceledTime = new DateTimeImmutable($canceledTime);
@@ -200,7 +200,7 @@ class CouponRedemption implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

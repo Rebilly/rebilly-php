@@ -39,7 +39,7 @@ class ReportKycRejectionsData implements JsonSerializable
         return $this->fields['documentType'] ?? null;
     }
 
-    public function setDocumentType(null|KycDocumentTypes|string $documentType): self
+    public function setDocumentType(null|KycDocumentTypes|string $documentType): static
     {
         if ($documentType !== null && !($documentType instanceof KycDocumentTypes)) {
             $documentType = KycDocumentTypes::from($documentType);
@@ -61,7 +61,7 @@ class ReportKycRejectionsData implements JsonSerializable
     /**
      * @param null|ReportKycRejectionsRejectionReasons[] $rejectionReasons
      */
-    public function setRejectionReasons(null|array $rejectionReasons): self
+    public function setRejectionReasons(null|array $rejectionReasons): static
     {
         $rejectionReasons = $rejectionReasons !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ReportKycRejectionsRejectionReasons ? $value : ReportKycRejectionsRejectionReasons::from($value)) : null, $rejectionReasons) : null;
 

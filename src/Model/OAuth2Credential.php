@@ -79,7 +79,7 @@ class OAuth2Credential implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    public function setStatus(null|string $status): self
+    public function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
@@ -91,7 +91,7 @@ class OAuth2Credential implements JsonSerializable
         return $this->fields['deactivationTime'] ?? null;
     }
 
-    public function setDeactivationTime(null|DateTimeImmutable|string $deactivationTime): self
+    public function setDeactivationTime(null|DateTimeImmutable|string $deactivationTime): static
     {
         if ($deactivationTime !== null && !($deactivationTime instanceof DateTimeImmutable)) {
             $deactivationTime = new DateTimeImmutable($deactivationTime);
@@ -107,7 +107,7 @@ class OAuth2Credential implements JsonSerializable
         return $this->fields['service'];
     }
 
-    public function setService(OAuth2CredentialService|string $service): self
+    public function setService(OAuth2CredentialService|string $service): static
     {
         if (!($service instanceof OAuth2CredentialService)) {
             $service = OAuth2CredentialService::from($service);
@@ -123,7 +123,7 @@ class OAuth2Credential implements JsonSerializable
         return $this->fields['code'];
     }
 
-    public function setCode(string $code): self
+    public function setCode(string $code): static
     {
         $this->fields['code'] = $code;
 
@@ -151,7 +151,7 @@ class OAuth2Credential implements JsonSerializable
     /**
      * @param string[] $scopes
      */
-    public function setScopes(array $scopes): self
+    public function setScopes(array $scopes): static
     {
         $scopes = array_map(fn ($value) => $value ?? null, $scopes);
 
@@ -202,21 +202,21 @@ class OAuth2Credential implements JsonSerializable
         return $data;
     }
 
-    private function setHash(null|string $hash): self
+    private function setHash(null|string $hash): static
     {
         $this->fields['hash'] = $hash;
 
         return $this;
     }
 
-    private function setAccessToken(null|string $accessToken): self
+    private function setAccessToken(null|string $accessToken): static
     {
         $this->fields['accessToken'] = $accessToken;
 
         return $this;
     }
 
-    private function setRefreshToken(null|string $refreshToken): self
+    private function setRefreshToken(null|string $refreshToken): static
     {
         $this->fields['refreshToken'] = $refreshToken;
 
@@ -226,7 +226,7 @@ class OAuth2Credential implements JsonSerializable
     /**
      * @param null|array<SelfLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

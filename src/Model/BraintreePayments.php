@@ -38,7 +38,7 @@ class BraintreePayments extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(BraintreePaymentsCredentials|array $credentials): self
+    public function setCredentials(BraintreePaymentsCredentials|array $credentials): static
     {
         if (!($credentials instanceof BraintreePaymentsCredentials)) {
             $credentials = BraintreePaymentsCredentials::from($credentials);

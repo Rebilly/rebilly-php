@@ -44,7 +44,7 @@ class Inovio extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(InovioCredentials|array $credentials): self
+    public function setCredentials(InovioCredentials|array $credentials): static
     {
         if (!($credentials instanceof InovioCredentials)) {
             $credentials = InovioCredentials::from($credentials);
@@ -60,7 +60,7 @@ class Inovio extends GatewayAccount
         return $this->fields['settings'];
     }
 
-    public function setSettings(InovioSettings|array $settings): self
+    public function setSettings(InovioSettings|array $settings): static
     {
         if (!($settings instanceof InovioSettings)) {
             $settings = InovioSettings::from($settings);
@@ -76,7 +76,7 @@ class Inovio extends GatewayAccount
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|Inovio3dsServers|array $threeDSecureServer): self
+    public function setThreeDSecureServer(null|Inovio3dsServers|array $threeDSecureServer): static
     {
         if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Inovio3dsServers)) {
             $threeDSecureServer = Inovio3dsServers::from($threeDSecureServer);

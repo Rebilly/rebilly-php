@@ -42,7 +42,7 @@ class CyberSourceCredentials implements JsonSerializable
         return $this->fields['accessKey'];
     }
 
-    public function setAccessKey(string $accessKey): self
+    public function setAccessKey(string $accessKey): static
     {
         $this->fields['accessKey'] = $accessKey;
 
@@ -54,7 +54,7 @@ class CyberSourceCredentials implements JsonSerializable
         return $this->fields['profileId'];
     }
 
-    public function setProfileId(string $profileId): self
+    public function setProfileId(string $profileId): static
     {
         $this->fields['profileId'] = $profileId;
 
@@ -66,7 +66,7 @@ class CyberSourceCredentials implements JsonSerializable
         return $this->fields['secretKey'];
     }
 
-    public function setSecretKey(string $secretKey): self
+    public function setSecretKey(string $secretKey): static
     {
         $this->fields['secretKey'] = $secretKey;
 

@@ -39,7 +39,7 @@ class MtaPaySettings implements JsonSerializable
         return $this->fields['goods'];
     }
 
-    public function setGoods(string $goods): self
+    public function setGoods(string $goods): static
     {
         $this->fields['goods'] = $goods;
 
@@ -51,7 +51,7 @@ class MtaPaySettings implements JsonSerializable
         return $this->fields['mobilePay'];
     }
 
-    public function setMobilePay(string $mobilePay): self
+    public function setMobilePay(string $mobilePay): static
     {
         $this->fields['mobilePay'] = $mobilePay;
 

@@ -38,7 +38,7 @@ class Plugnpay extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(PlugnpayCredentials|array $credentials): self
+    public function setCredentials(PlugnpayCredentials|array $credentials): static
     {
         if (!($credentials instanceof PlugnpayCredentials)) {
             $credentials = PlugnpayCredentials::from($credentials);

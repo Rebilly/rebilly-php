@@ -42,7 +42,7 @@ class ReportMonthlyRecurringRevenueData implements JsonSerializable
         return $this->fields['period'] ?? null;
     }
 
-    public function setPeriod(null|string $period): self
+    public function setPeriod(null|string $period): static
     {
         $this->fields['period'] = $period;
 
@@ -54,7 +54,7 @@ class ReportMonthlyRecurringRevenueData implements JsonSerializable
         return $this->fields['total'] ?? null;
     }
 
-    public function setTotal(null|float|string $total): self
+    public function setTotal(null|float|string $total): static
     {
         if (is_string($total)) {
             $total = (float) $total;
@@ -70,7 +70,7 @@ class ReportMonthlyRecurringRevenueData implements JsonSerializable
         return $this->fields['breakdown'] ?? null;
     }
 
-    public function setBreakdown(null|ReportMonthlyRecurringRevenueBreakdown|array $breakdown): self
+    public function setBreakdown(null|ReportMonthlyRecurringRevenueBreakdown|array $breakdown): static
     {
         if ($breakdown !== null && !($breakdown instanceof ReportMonthlyRecurringRevenueBreakdown)) {
             $breakdown = ReportMonthlyRecurringRevenueBreakdown::from($breakdown);

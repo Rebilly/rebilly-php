@@ -45,7 +45,7 @@ class Problem implements JsonSerializable
         return $this->fields['type'] ?? null;
     }
 
-    public function setType(null|string $type): self
+    public function setType(null|string $type): static
     {
         $this->fields['type'] = $type;
 
@@ -57,7 +57,7 @@ class Problem implements JsonSerializable
         return $this->fields['status'] ?? null;
     }
 
-    public function setStatus(null|int $status): self
+    public function setStatus(null|int $status): static
     {
         $this->fields['status'] = $status;
 
@@ -69,7 +69,7 @@ class Problem implements JsonSerializable
         return $this->fields['title'] ?? null;
     }
 
-    public function setTitle(null|string $title): self
+    public function setTitle(null|string $title): static
     {
         $this->fields['title'] = $title;
 
@@ -81,7 +81,7 @@ class Problem implements JsonSerializable
         return $this->fields['detail'] ?? null;
     }
 
-    public function setDetail(null|string $detail): self
+    public function setDetail(null|string $detail): static
     {
         $this->fields['detail'] = $detail;
 

@@ -53,7 +53,7 @@ class PaymentGatewayMetadataIpn implements JsonSerializable
     /**
      * @psalm-param self::TYPE_* $type
      */
-    public function setType(string $type): self
+    public function setType(string $type): static
     {
         $this->fields['type'] = $type;
 
@@ -71,7 +71,7 @@ class PaymentGatewayMetadataIpn implements JsonSerializable
     /**
      * @psalm-param self::VERIFICATION_METHOD_*|null $verificationMethod
      */
-    public function setVerificationMethod(null|string $verificationMethod): self
+    public function setVerificationMethod(null|string $verificationMethod): static
     {
         $this->fields['verificationMethod'] = $verificationMethod;
 

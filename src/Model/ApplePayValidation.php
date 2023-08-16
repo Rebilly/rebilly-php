@@ -44,7 +44,7 @@ class ApplePayValidation extends DigitalWalletValidation
         return $this->fields['type'];
     }
 
-    public function setType(string $type): self
+    public function setType(string $type): static
     {
         $this->fields['type'] = $type;
 
@@ -56,7 +56,7 @@ class ApplePayValidation extends DigitalWalletValidation
         return $this->fields['validationRequest'];
     }
 
-    public function setValidationRequest(ApplePayValidationValidationRequest|array $validationRequest): self
+    public function setValidationRequest(ApplePayValidationValidationRequest|array $validationRequest): static
     {
         if (!($validationRequest instanceof ApplePayValidationValidationRequest)) {
             $validationRequest = ApplePayValidationValidationRequest::from($validationRequest);
@@ -88,7 +88,7 @@ class ApplePayValidation extends DigitalWalletValidation
         return parent::jsonSerialize() + $data;
     }
 
-    private function setValidationResponse(null|array $validationResponse): self
+    private function setValidationResponse(null|array $validationResponse): static
     {
         $this->fields['validationResponse'] = $validationResponse;
 

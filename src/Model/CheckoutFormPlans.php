@@ -36,7 +36,7 @@ class CheckoutFormPlans implements JsonSerializable
         return $this->fields['checkoutFormPlans'] ?? null;
     }
 
-    public function setCheckoutFormPlans(null|CheckoutFormPlan|array $checkoutFormPlans): self
+    public function setCheckoutFormPlans(null|CheckoutFormPlan|array $checkoutFormPlans): static
     {
         if ($checkoutFormPlans !== null && !($checkoutFormPlans instanceof CheckoutFormPlan)) {
             $checkoutFormPlans = CheckoutFormPlan::from($checkoutFormPlans);

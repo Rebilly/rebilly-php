@@ -40,7 +40,7 @@ class DueTimeShiftInstruction implements JsonSerializable
         return $this->fields['duration'];
     }
 
-    public function setDuration(int $duration): self
+    public function setDuration(int $duration): static
     {
         $this->fields['duration'] = $duration;
 
@@ -52,7 +52,7 @@ class DueTimeShiftInstruction implements JsonSerializable
         return $this->fields['unit'];
     }
 
-    public function setUnit(string|TimeUnit|TimePluralUnit $unit): self
+    public function setUnit(string|TimeUnit|TimePluralUnit $unit): static
     {
         $unit = $this->ensureUnit($unit);
 

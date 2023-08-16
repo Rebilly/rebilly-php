@@ -58,14 +58,14 @@ class AMLPassport implements JsonSerializable
         return $data;
     }
 
-    private function setNumber(null|string $number): self
+    private function setNumber(null|string $number): static
     {
         $this->fields['number'] = $number;
 
         return $this;
     }
 
-    private function setRegistrationDate(null|DateTimeImmutable|string $registrationDate): self
+    private function setRegistrationDate(null|DateTimeImmutable|string $registrationDate): static
     {
         if ($registrationDate !== null && !($registrationDate instanceof DateTimeImmutable)) {
             $registrationDate = new DateTimeImmutable($registrationDate);

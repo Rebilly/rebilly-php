@@ -65,7 +65,7 @@ class ApplePayFeature implements JsonSerializable
     /**
      * @psalm-param self::NAME_*|null $name
      */
-    public function setName(null|string $name): self
+    public function setName(null|string $name): static
     {
         $this->fields['name'] = $name;
 
@@ -77,7 +77,7 @@ class ApplePayFeature implements JsonSerializable
         return $this->fields['displayName'] ?? null;
     }
 
-    public function setDisplayName(null|string $displayName): self
+    public function setDisplayName(null|string $displayName): static
     {
         $this->fields['displayName'] = $displayName;
 
@@ -89,7 +89,7 @@ class ApplePayFeature implements JsonSerializable
         return $this->fields['country'] ?? null;
     }
 
-    public function setCountry(null|DigitalWalletCountry|array $country): self
+    public function setCountry(null|DigitalWalletCountry|array $country): static
     {
         if ($country !== null && !($country instanceof DigitalWalletCountry)) {
             $country = DigitalWalletCountry::from($country);

@@ -52,7 +52,7 @@ abstract class A1Gateway3dsServers implements JsonSerializable
         return $data;
     }
 
-    private function setName(ThreeDSecureServerName|string $name): self
+    private function setName(ThreeDSecureServerName|string $name): static
     {
         if (!($name instanceof ThreeDSecureServerName)) {
             $name = ThreeDSecureServerName::from($name);

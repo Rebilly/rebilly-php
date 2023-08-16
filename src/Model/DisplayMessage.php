@@ -44,7 +44,7 @@ class DisplayMessage extends RuleAction
     /**
      * @param DisplayMessages[] $messages
      */
-    public function setMessages(array $messages): self
+    public function setMessages(array $messages): static
     {
         $messages = array_map(fn ($value) => $value !== null ? ($value instanceof DisplayMessages ? $value : DisplayMessages::from($value)) : null, $messages);
 

@@ -41,7 +41,7 @@ class Safecharge extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(SafechargeCredentials|array $credentials): self
+    public function setCredentials(SafechargeCredentials|array $credentials): static
     {
         if (!($credentials instanceof SafechargeCredentials)) {
             $credentials = SafechargeCredentials::from($credentials);
@@ -57,7 +57,7 @@ class Safecharge extends GatewayAccount
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|Safecharge3dsServers|array $threeDSecureServer): self
+    public function setThreeDSecureServer(null|Safecharge3dsServers|array $threeDSecureServer): static
     {
         if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Safecharge3dsServers)) {
             $threeDSecureServer = Safecharge3dsServers::from($threeDSecureServer);

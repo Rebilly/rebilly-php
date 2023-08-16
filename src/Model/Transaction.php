@@ -157,7 +157,7 @@ class Transaction extends CommonTransaction
         return $this->fields['gateway'] ?? null;
     }
 
-    public function setGateway(null|TransactionGateway|array $gateway): self
+    public function setGateway(null|TransactionGateway|array $gateway): static
     {
         if ($gateway !== null && !($gateway instanceof TransactionGateway)) {
             $gateway = TransactionGateway::from($gateway);
@@ -178,7 +178,7 @@ class Transaction extends CommonTransaction
         return $this->fields['method'] ?? null;
     }
 
-    public function setMethod(null|PaymentMethod|string $method): self
+    public function setMethod(null|PaymentMethod|string $method): static
     {
         if ($method !== null && !($method instanceof PaymentMethod)) {
             $method = PaymentMethod::from($method);
@@ -194,7 +194,7 @@ class Transaction extends CommonTransaction
         return $this->fields['velocity'] ?? null;
     }
 
-    public function setVelocity(null|int $velocity): self
+    public function setVelocity(null|int $velocity): static
     {
         $this->fields['velocity'] = $velocity;
 
@@ -224,7 +224,7 @@ class Transaction extends CommonTransaction
         return $this->fields['paymentInstrument'] ?? null;
     }
 
-    public function setPaymentInstrument(null|PaymentInstrumentValueObject|array $paymentInstrument): self
+    public function setPaymentInstrument(null|PaymentInstrumentValueObject|array $paymentInstrument): static
     {
         if ($paymentInstrument !== null && !($paymentInstrument instanceof PaymentInstrumentValueObject)) {
             $paymentInstrument = PaymentInstrumentValueObject::from($paymentInstrument);
@@ -245,7 +245,7 @@ class Transaction extends CommonTransaction
         return $this->fields['dcc'] ?? null;
     }
 
-    public function setDcc(null|TransactionDcc|array $dcc): self
+    public function setDcc(null|TransactionDcc|array $dcc): static
     {
         if ($dcc !== null && !($dcc instanceof TransactionDcc)) {
             $dcc = TransactionDcc::from($dcc);
@@ -266,7 +266,7 @@ class Transaction extends CommonTransaction
         return $this->fields['bumpOffer'] ?? null;
     }
 
-    public function setBumpOffer(null|TransactionBumpOffer|array $bumpOffer): self
+    public function setBumpOffer(null|TransactionBumpOffer|array $bumpOffer): static
     {
         if ($bumpOffer !== null && !($bumpOffer instanceof TransactionBumpOffer)) {
             $bumpOffer = TransactionBumpOffer::from($bumpOffer);
@@ -287,7 +287,7 @@ class Transaction extends CommonTransaction
         return $this->fields['riskMetadata'] ?? null;
     }
 
-    public function setRiskMetadata(null|RiskMetadata|array $riskMetadata): self
+    public function setRiskMetadata(null|RiskMetadata|array $riskMetadata): static
     {
         if ($riskMetadata !== null && !($riskMetadata instanceof RiskMetadata)) {
             $riskMetadata = RiskMetadata::from($riskMetadata);
@@ -303,7 +303,7 @@ class Transaction extends CommonTransaction
         return $this->fields['notificationUrl'] ?? null;
     }
 
-    public function setNotificationUrl(null|string $notificationUrl): self
+    public function setNotificationUrl(null|string $notificationUrl): static
     {
         $this->fields['notificationUrl'] = $notificationUrl;
 
@@ -338,7 +338,7 @@ class Transaction extends CommonTransaction
         return $this->fields['isProcessedOutside'] ?? null;
     }
 
-    public function setIsProcessedOutside(null|bool $isProcessedOutside): self
+    public function setIsProcessedOutside(null|bool $isProcessedOutside): static
     {
         $this->fields['isProcessedOutside'] = $isProcessedOutside;
 
@@ -350,7 +350,7 @@ class Transaction extends CommonTransaction
         return $this->fields['isMerchantInitiated'] ?? null;
     }
 
-    public function setIsMerchantInitiated(null|bool $isMerchantInitiated): self
+    public function setIsMerchantInitiated(null|bool $isMerchantInitiated): static
     {
         $this->fields['isMerchantInitiated'] = $isMerchantInitiated;
 
@@ -367,7 +367,7 @@ class Transaction extends CommonTransaction
         return $this->fields['orderId'] ?? null;
     }
 
-    public function setOrderId(null|string $orderId): self
+    public function setOrderId(null|string $orderId): static
     {
         $this->fields['orderId'] = $orderId;
 
@@ -404,7 +404,7 @@ class Transaction extends CommonTransaction
         return $this->fields['limits'] ?? null;
     }
 
-    public function setLimits(null|TransactionLimitAmount|array $limits): self
+    public function setLimits(null|TransactionLimitAmount|array $limits): static
     {
         if ($limits !== null && !($limits instanceof TransactionLimitAmount)) {
             $limits = TransactionLimitAmount::from($limits);
@@ -537,21 +537,21 @@ class Transaction extends CommonTransaction
         return parent::jsonSerialize() + $data;
     }
 
-    private function setGatewayAccountId(null|string $gatewayAccountId): self
+    private function setGatewayAccountId(null|string $gatewayAccountId): static
     {
         $this->fields['gatewayAccountId'] = $gatewayAccountId;
 
         return $this;
     }
 
-    private function setGatewayTransactionId(null|string $gatewayTransactionId): self
+    private function setGatewayTransactionId(null|string $gatewayTransactionId): static
     {
         $this->fields['gatewayTransactionId'] = $gatewayTransactionId;
 
         return $this;
     }
 
-    private function setAcquirerName(null|AcquirerName|string $acquirerName): self
+    private function setAcquirerName(null|AcquirerName|string $acquirerName): static
     {
         if ($acquirerName !== null && !($acquirerName instanceof AcquirerName)) {
             $acquirerName = AcquirerName::from($acquirerName);
@@ -562,7 +562,7 @@ class Transaction extends CommonTransaction
         return $this;
     }
 
-    private function setRevision(null|int $revision): self
+    private function setRevision(null|int $revision): static
     {
         $this->fields['revision'] = $revision;
 
@@ -572,49 +572,49 @@ class Transaction extends CommonTransaction
     /**
      * @param null|array<string,string> $referenceData
      */
-    private function setReferenceData(null|array $referenceData): self
+    private function setReferenceData(null|array $referenceData): static
     {
         $this->fields['referenceData'] = $referenceData;
 
         return $this;
     }
 
-    private function setBin(null|string $bin): self
+    private function setBin(null|string $bin): static
     {
         $this->fields['bin'] = $bin;
 
         return $this;
     }
 
-    private function setHasDcc(null|bool $hasDcc): self
+    private function setHasDcc(null|bool $hasDcc): static
     {
         $this->fields['hasDcc'] = $hasDcc;
 
         return $this;
     }
 
-    private function setHasBumpOffer(null|bool $hasBumpOffer): self
+    private function setHasBumpOffer(null|bool $hasBumpOffer): static
     {
         $this->fields['hasBumpOffer'] = $hasBumpOffer;
 
         return $this;
     }
 
-    private function setRiskScore(null|int $riskScore): self
+    private function setRiskScore(null|int $riskScore): static
     {
         $this->fields['riskScore'] = $riskScore;
 
         return $this;
     }
 
-    private function setIsDisputed(null|bool $isDisputed): self
+    private function setIsDisputed(null|bool $isDisputed): static
     {
         $this->fields['isDisputed'] = $isDisputed;
 
         return $this;
     }
 
-    private function setDisputeTime(null|DateTimeImmutable|string $disputeTime): self
+    private function setDisputeTime(null|DateTimeImmutable|string $disputeTime): static
     {
         if ($disputeTime !== null && !($disputeTime instanceof DateTimeImmutable)) {
             $disputeTime = new DateTimeImmutable($disputeTime);
@@ -628,35 +628,35 @@ class Transaction extends CommonTransaction
     /**
      * @psalm-param self::DISPUTE_STATUS_*|null $disputeStatus
      */
-    private function setDisputeStatus(null|string $disputeStatus): self
+    private function setDisputeStatus(null|string $disputeStatus): static
     {
         $this->fields['disputeStatus'] = $disputeStatus;
 
         return $this;
     }
 
-    private function setIsReconciled(null|bool $isReconciled): self
+    private function setIsReconciled(null|bool $isReconciled): static
     {
         $this->fields['isReconciled'] = $isReconciled;
 
         return $this;
     }
 
-    private function setHadDiscrepancy(null|bool $hadDiscrepancy): self
+    private function setHadDiscrepancy(null|bool $hadDiscrepancy): static
     {
         $this->fields['hadDiscrepancy'] = $hadDiscrepancy;
 
         return $this;
     }
 
-    private function setArn(null|string $arn): self
+    private function setArn(null|string $arn): static
     {
         $this->fields['arn'] = $arn;
 
         return $this;
     }
 
-    private function setReportAmount(null|float|string $reportAmount): self
+    private function setReportAmount(null|float|string $reportAmount): static
     {
         if (is_string($reportAmount)) {
             $reportAmount = (float) $reportAmount;
@@ -667,14 +667,14 @@ class Transaction extends CommonTransaction
         return $this;
     }
 
-    private function setReportCurrency(null|string $reportCurrency): self
+    private function setReportCurrency(null|string $reportCurrency): static
     {
         $this->fields['reportCurrency'] = $reportCurrency;
 
         return $this;
     }
 
-    private function setSettlementTime(null|DateTimeImmutable|string $settlementTime): self
+    private function setSettlementTime(null|DateTimeImmutable|string $settlementTime): static
     {
         if ($settlementTime !== null && !($settlementTime instanceof DateTimeImmutable)) {
             $settlementTime = new DateTimeImmutable($settlementTime);
@@ -685,7 +685,7 @@ class Transaction extends CommonTransaction
         return $this;
     }
 
-    private function setDiscrepancyTime(null|DateTimeImmutable|string $discrepancyTime): self
+    private function setDiscrepancyTime(null|DateTimeImmutable|string $discrepancyTime): static
     {
         if ($discrepancyTime !== null && !($discrepancyTime instanceof DateTimeImmutable)) {
             $discrepancyTime = new DateTimeImmutable($discrepancyTime);
@@ -699,7 +699,7 @@ class Transaction extends CommonTransaction
     /**
      * @param null|array<ApprovalUrlLink|CustomerLink|DisputeLink|GatewayAccountLink|InvoicesLink|LeadSourceLink|ParentTransactionLink|PaymentCardLink|QueryUrlLink|RefundUrlLink|SelfLink|TransactionRedirectUrlLink|TransactionUpdateUrlLink|WebsiteLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 
@@ -711,7 +711,7 @@ class Transaction extends CommonTransaction
     /**
      * @param null|array{parentTransaction:Transaction,gatewayAccount:GatewayAccount,customer:Customer,leadSource:LeadSource,website:Website,paymentCard:PaymentCard,bankAccount:BankAccount,invoices:Invoice[],childTransactions:Transaction[]} $embedded
      */
-    private function setEmbedded(null|array $embedded): self
+    private function setEmbedded(null|array $embedded): static
     {
         if ($embedded !== null) {
             $embedded['parentTransaction'] = isset($embedded['parentTransaction']) ? ($embedded['parentTransaction'] instanceof self ? $embedded['parentTransaction'] : self::from($embedded['parentTransaction'])) : null;

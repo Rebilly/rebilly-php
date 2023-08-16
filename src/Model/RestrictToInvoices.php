@@ -61,7 +61,7 @@ class RestrictToInvoices extends CouponRestriction
     /**
      * @psalm-param self::TYPE_* $type
      */
-    public function setType(string $type): self
+    public function setType(string $type): static
     {
         $this->fields['type'] = $type;
 
@@ -79,7 +79,7 @@ class RestrictToInvoices extends CouponRestriction
     /**
      * @param string[] $invoiceIds
      */
-    public function setInvoiceIds(array $invoiceIds): self
+    public function setInvoiceIds(array $invoiceIds): static
     {
         $invoiceIds = array_map(fn ($value) => $value ?? null, $invoiceIds);
 

@@ -76,7 +76,7 @@ class ContactObject implements JsonSerializable
         return $this->fields['firstName'] ?? null;
     }
 
-    public function setFirstName(null|string $firstName): self
+    public function setFirstName(null|string $firstName): static
     {
         $this->fields['firstName'] = $firstName;
 
@@ -88,7 +88,7 @@ class ContactObject implements JsonSerializable
         return $this->fields['lastName'] ?? null;
     }
 
-    public function setLastName(null|string $lastName): self
+    public function setLastName(null|string $lastName): static
     {
         $this->fields['lastName'] = $lastName;
 
@@ -100,7 +100,7 @@ class ContactObject implements JsonSerializable
         return $this->fields['organization'] ?? null;
     }
 
-    public function setOrganization(null|string $organization): self
+    public function setOrganization(null|string $organization): static
     {
         $this->fields['organization'] = $organization;
 
@@ -112,7 +112,7 @@ class ContactObject implements JsonSerializable
         return $this->fields['address'] ?? null;
     }
 
-    public function setAddress(null|string $address): self
+    public function setAddress(null|string $address): static
     {
         $this->fields['address'] = $address;
 
@@ -124,7 +124,7 @@ class ContactObject implements JsonSerializable
         return $this->fields['address2'] ?? null;
     }
 
-    public function setAddress2(null|string $address2): self
+    public function setAddress2(null|string $address2): static
     {
         $this->fields['address2'] = $address2;
 
@@ -136,7 +136,7 @@ class ContactObject implements JsonSerializable
         return $this->fields['city'] ?? null;
     }
 
-    public function setCity(null|string $city): self
+    public function setCity(null|string $city): static
     {
         $this->fields['city'] = $city;
 
@@ -148,7 +148,7 @@ class ContactObject implements JsonSerializable
         return $this->fields['region'] ?? null;
     }
 
-    public function setRegion(null|string $region): self
+    public function setRegion(null|string $region): static
     {
         $this->fields['region'] = $region;
 
@@ -160,7 +160,7 @@ class ContactObject implements JsonSerializable
         return $this->fields['country'] ?? null;
     }
 
-    public function setCountry(null|string $country): self
+    public function setCountry(null|string $country): static
     {
         $this->fields['country'] = $country;
 
@@ -172,7 +172,7 @@ class ContactObject implements JsonSerializable
         return $this->fields['postalCode'] ?? null;
     }
 
-    public function setPostalCode(null|string $postalCode): self
+    public function setPostalCode(null|string $postalCode): static
     {
         $this->fields['postalCode'] = $postalCode;
 
@@ -190,7 +190,7 @@ class ContactObject implements JsonSerializable
     /**
      * @param null|ContactPhoneNumbers[] $phoneNumbers
      */
-    public function setPhoneNumbers(null|array $phoneNumbers): self
+    public function setPhoneNumbers(null|array $phoneNumbers): static
     {
         $phoneNumbers = $phoneNumbers !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ContactPhoneNumbers ? $value : ContactPhoneNumbers::from($value)) : null, $phoneNumbers) : null;
 
@@ -210,7 +210,7 @@ class ContactObject implements JsonSerializable
     /**
      * @param null|ContactEmails[] $emails
      */
-    public function setEmails(null|array $emails): self
+    public function setEmails(null|array $emails): static
     {
         $emails = $emails !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ContactEmails ? $value : ContactEmails::from($value)) : null, $emails) : null;
 
@@ -224,7 +224,7 @@ class ContactObject implements JsonSerializable
         return $this->fields['dob'] ?? null;
     }
 
-    public function setDob(null|DateTimeImmutable|string $dob): self
+    public function setDob(null|DateTimeImmutable|string $dob): static
     {
         if ($dob !== null && !($dob instanceof DateTimeImmutable)) {
             $dob = new DateTimeImmutable($dob);
@@ -240,7 +240,7 @@ class ContactObject implements JsonSerializable
         return $this->fields['jobTitle'] ?? null;
     }
 
-    public function setJobTitle(null|string $jobTitle): self
+    public function setJobTitle(null|string $jobTitle): static
     {
         $this->fields['jobTitle'] = $jobTitle;
 
@@ -301,7 +301,7 @@ class ContactObject implements JsonSerializable
         return $data;
     }
 
-    private function setHash(null|string $hash): self
+    private function setHash(null|string $hash): static
     {
         $this->fields['hash'] = $hash;
 

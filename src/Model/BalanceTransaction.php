@@ -106,7 +106,7 @@ abstract class BalanceTransaction implements JsonSerializable
         return $this->fields['parentId'] ?? null;
     }
 
-    public function setParentId(null|string $parentId): self
+    public function setParentId(null|string $parentId): static
     {
         $this->fields['parentId'] = $parentId;
 
@@ -118,7 +118,7 @@ abstract class BalanceTransaction implements JsonSerializable
         return $this->fields['transactionId'] ?? null;
     }
 
-    public function setTransactionId(null|string $transactionId): self
+    public function setTransactionId(null|string $transactionId): static
     {
         $this->fields['transactionId'] = $transactionId;
 
@@ -130,7 +130,7 @@ abstract class BalanceTransaction implements JsonSerializable
         return $this->fields['settlementCurrency'] ?? null;
     }
 
-    public function setSettlementCurrency(null|string $settlementCurrency): self
+    public function setSettlementCurrency(null|string $settlementCurrency): static
     {
         $this->fields['settlementCurrency'] = $settlementCurrency;
 
@@ -142,7 +142,7 @@ abstract class BalanceTransaction implements JsonSerializable
         return $this->fields['settlementAmount'] ?? null;
     }
 
-    public function setSettlementAmount(null|float|string $settlementAmount): self
+    public function setSettlementAmount(null|float|string $settlementAmount): static
     {
         if (is_string($settlementAmount)) {
             $settlementAmount = (float) $settlementAmount;
@@ -158,7 +158,7 @@ abstract class BalanceTransaction implements JsonSerializable
         return $this->fields['settlementTime'] ?? null;
     }
 
-    public function setSettlementTime(null|DateTimeImmutable|string $settlementTime): self
+    public function setSettlementTime(null|DateTimeImmutable|string $settlementTime): static
     {
         if ($settlementTime !== null && !($settlementTime instanceof DateTimeImmutable)) {
             $settlementTime = new DateTimeImmutable($settlementTime);
@@ -174,7 +174,7 @@ abstract class BalanceTransaction implements JsonSerializable
         return $this->fields['settlementRate'] ?? null;
     }
 
-    public function setSettlementRate(null|float|string $settlementRate): self
+    public function setSettlementRate(null|float|string $settlementRate): static
     {
         if (is_string($settlementRate)) {
             $settlementRate = (float) $settlementRate;
@@ -232,7 +232,7 @@ abstract class BalanceTransaction implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -242,14 +242,14 @@ abstract class BalanceTransaction implements JsonSerializable
     /**
      * @psalm-param self::TYPE_*|null $type
      */
-    private function setType(null|string $type): self
+    private function setType(null|string $type): static
     {
         $this->fields['type'] = $type;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -260,7 +260,7 @@ abstract class BalanceTransaction implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);

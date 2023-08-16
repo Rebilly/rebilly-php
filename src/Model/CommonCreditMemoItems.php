@@ -65,7 +65,7 @@ class CommonCreditMemoItems implements JsonSerializable
         return $this->fields['invoiceItemId'] ?? null;
     }
 
-    public function setInvoiceItemId(null|string $invoiceItemId): self
+    public function setInvoiceItemId(null|string $invoiceItemId): static
     {
         $this->fields['invoiceItemId'] = $invoiceItemId;
 
@@ -77,7 +77,7 @@ class CommonCreditMemoItems implements JsonSerializable
         return $this->fields['description'] ?? null;
     }
 
-    public function setDescription(null|string $description): self
+    public function setDescription(null|string $description): static
     {
         $this->fields['description'] = $description;
 
@@ -89,7 +89,7 @@ class CommonCreditMemoItems implements JsonSerializable
         return $this->fields['unitPrice'];
     }
 
-    public function setUnitPrice(float|string $unitPrice): self
+    public function setUnitPrice(float|string $unitPrice): static
     {
         if (is_string($unitPrice)) {
             $unitPrice = (float) $unitPrice;
@@ -105,7 +105,7 @@ class CommonCreditMemoItems implements JsonSerializable
         return $this->fields['quantity'];
     }
 
-    public function setQuantity(int $quantity): self
+    public function setQuantity(int $quantity): static
     {
         $this->fields['quantity'] = $quantity;
 
@@ -122,7 +122,7 @@ class CommonCreditMemoItems implements JsonSerializable
         return $this->fields['productId'] ?? null;
     }
 
-    public function setProductId(null|string $productId): self
+    public function setProductId(null|string $productId): static
     {
         $this->fields['productId'] = $productId;
 
@@ -134,7 +134,7 @@ class CommonCreditMemoItems implements JsonSerializable
         return $this->fields['planId'] ?? null;
     }
 
-    public function setPlanId(null|string $planId): self
+    public function setPlanId(null|string $planId): static
     {
         $this->fields['planId'] = $planId;
 
@@ -146,7 +146,7 @@ class CommonCreditMemoItems implements JsonSerializable
         return $this->fields['taxAmount'] ?? null;
     }
 
-    public function setTaxAmount(null|float|string $taxAmount): self
+    public function setTaxAmount(null|float|string $taxAmount): static
     {
         if (is_string($taxAmount)) {
             $taxAmount = (float) $taxAmount;
@@ -191,14 +191,14 @@ class CommonCreditMemoItems implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setPrice(null|float|string $price): self
+    private function setPrice(null|float|string $price): static
     {
         if (is_string($price)) {
             $price = (float) $price;

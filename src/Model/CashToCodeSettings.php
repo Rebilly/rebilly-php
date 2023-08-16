@@ -42,7 +42,7 @@ class CashToCodeSettings implements JsonSerializable
         return $this->fields['baseUrl'] ?? null;
     }
 
-    public function setBaseUrl(null|string $baseUrl): self
+    public function setBaseUrl(null|string $baseUrl): static
     {
         $this->fields['baseUrl'] = $baseUrl;
 
@@ -54,7 +54,7 @@ class CashToCodeSettings implements JsonSerializable
         return $this->fields['skipAmountSelection'] ?? null;
     }
 
-    public function setSkipAmountSelection(null|bool $skipAmountSelection): self
+    public function setSkipAmountSelection(null|bool $skipAmountSelection): static
     {
         $this->fields['skipAmountSelection'] = $skipAmountSelection;
 
@@ -72,7 +72,7 @@ class CashToCodeSettings implements JsonSerializable
     /**
      * @param null|float[] $amounts
      */
-    public function setAmounts(null|array $amounts): self
+    public function setAmounts(null|array $amounts): static
     {
         $amounts = $amounts !== null ? array_map(fn ($value) => $value ?? null, $amounts) : null;
 

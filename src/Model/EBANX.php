@@ -38,7 +38,7 @@ class EBANX extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(EBANXCredentials|array $credentials): self
+    public function setCredentials(EBANXCredentials|array $credentials): static
     {
         if (!($credentials instanceof EBANXCredentials)) {
             $credentials = EBANXCredentials::from($credentials);

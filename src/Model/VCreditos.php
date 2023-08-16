@@ -41,7 +41,7 @@ class VCreditos extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(VCreditosCredentials|array $credentials): self
+    public function setCredentials(VCreditosCredentials|array $credentials): static
     {
         if (!($credentials instanceof VCreditosCredentials)) {
             $credentials = VCreditosCredentials::from($credentials);
@@ -57,7 +57,7 @@ class VCreditos extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|VCreditosSettings|array $settings): self
+    public function setSettings(null|VCreditosSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof VCreditosSettings)) {
             $settings = VCreditosSettings::from($settings);

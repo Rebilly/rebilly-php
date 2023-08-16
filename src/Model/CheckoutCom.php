@@ -44,7 +44,7 @@ class CheckoutCom extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(CheckoutComCredentials|array $credentials): self
+    public function setCredentials(CheckoutComCredentials|array $credentials): static
     {
         if (!($credentials instanceof CheckoutComCredentials)) {
             $credentials = CheckoutComCredentials::from($credentials);
@@ -60,7 +60,7 @@ class CheckoutCom extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|CheckoutComSettings|array $settings): self
+    public function setSettings(null|CheckoutComSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof CheckoutComSettings)) {
             $settings = CheckoutComSettings::from($settings);
@@ -76,7 +76,7 @@ class CheckoutCom extends GatewayAccount
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|CheckoutCom3dsServers|array $threeDSecureServer): self
+    public function setThreeDSecureServer(null|CheckoutCom3dsServers|array $threeDSecureServer): static
     {
         if ($threeDSecureServer !== null && !($threeDSecureServer instanceof CheckoutCom3dsServers)) {
             $threeDSecureServer = CheckoutCom3dsServers::from($threeDSecureServer);

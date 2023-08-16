@@ -61,7 +61,7 @@ class IpayOptionsSettings implements JsonSerializable
         return $this->fields['extraStep'] ?? null;
     }
 
-    public function setExtraStep(null|bool $extraStep): self
+    public function setExtraStep(null|bool $extraStep): static
     {
         $this->fields['extraStep'] = $extraStep;
 
@@ -79,7 +79,7 @@ class IpayOptionsSettings implements JsonSerializable
     /**
      * @psalm-param self::SUBDOMAIN_*|null $subdomain
      */
-    public function setSubdomain(null|string $subdomain): self
+    public function setSubdomain(null|string $subdomain): static
     {
         $this->fields['subdomain'] = $subdomain;
 
@@ -97,7 +97,7 @@ class IpayOptionsSettings implements JsonSerializable
     /**
      * @psalm-param self::PLATFORM_*|null $platform
      */
-    public function setPlatform(null|string $platform): self
+    public function setPlatform(null|string $platform): static
     {
         $this->fields['platform'] = $platform;
 
@@ -115,7 +115,7 @@ class IpayOptionsSettings implements JsonSerializable
     /**
      * @psalm-param self::CARD_TYPE_*|null $cardType
      */
-    public function setCardType(null|string $cardType): self
+    public function setCardType(null|string $cardType): static
     {
         $this->fields['cardType'] = $cardType;
 

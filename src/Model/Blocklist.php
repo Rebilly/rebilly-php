@@ -87,7 +87,7 @@ class Blocklist implements JsonSerializable
     /**
      * @psalm-param self::TYPE_* $type
      */
-    public function setType(string $type): self
+    public function setType(string $type): static
     {
         $this->fields['type'] = $type;
 
@@ -99,7 +99,7 @@ class Blocklist implements JsonSerializable
         return $this->fields['value'];
     }
 
-    public function setValue(string $value): self
+    public function setValue(string $value): static
     {
         $this->fields['value'] = $value;
 
@@ -111,7 +111,7 @@ class Blocklist implements JsonSerializable
         return $this->fields['expirationTime'] ?? null;
     }
 
-    public function setExpirationTime(null|DateTimeImmutable|string $expirationTime): self
+    public function setExpirationTime(null|DateTimeImmutable|string $expirationTime): static
     {
         if ($expirationTime !== null && !($expirationTime instanceof DateTimeImmutable)) {
             $expirationTime = new DateTimeImmutable($expirationTime);
@@ -168,14 +168,14 @@ class Blocklist implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -186,7 +186,7 @@ class Blocklist implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -200,7 +200,7 @@ class Blocklist implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

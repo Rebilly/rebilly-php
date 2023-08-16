@@ -205,7 +205,7 @@ abstract class CompositeToken extends CommonPaymentToken
         return parent::jsonSerialize() + $data;
     }
 
-    private function setMethod(mixed $method): self
+    private function setMethod(mixed $method): static
     {
         $this->fields['method'] = $method;
 

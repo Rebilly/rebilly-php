@@ -45,7 +45,7 @@ class PayULatamCredentials implements JsonSerializable
         return $this->fields['merchantId'];
     }
 
-    public function setMerchantId(string $merchantId): self
+    public function setMerchantId(string $merchantId): static
     {
         $this->fields['merchantId'] = $merchantId;
 
@@ -57,7 +57,7 @@ class PayULatamCredentials implements JsonSerializable
         return $this->fields['accountId'];
     }
 
-    public function setAccountId(string $accountId): self
+    public function setAccountId(string $accountId): static
     {
         $this->fields['accountId'] = $accountId;
 
@@ -69,7 +69,7 @@ class PayULatamCredentials implements JsonSerializable
         return $this->fields['apiLogin'];
     }
 
-    public function setApiLogin(string $apiLogin): self
+    public function setApiLogin(string $apiLogin): static
     {
         $this->fields['apiLogin'] = $apiLogin;
 
@@ -81,7 +81,7 @@ class PayULatamCredentials implements JsonSerializable
         return $this->fields['apiKey'];
     }
 
-    public function setApiKey(string $apiKey): self
+    public function setApiKey(string $apiKey): static
     {
         $this->fields['apiKey'] = $apiKey;
 

@@ -175,7 +175,7 @@ abstract class RuleAction implements JsonSerializable
         return $this->fields['status'] ?? null;
     }
 
-    public function setStatus(null|OnOff|string $status): self
+    public function setStatus(null|OnOff|string $status): static
     {
         if ($status !== null && !($status instanceof OnOff)) {
             $status = OnOff::from($status);
@@ -202,7 +202,7 @@ abstract class RuleAction implements JsonSerializable
     /**
      * @psalm-param self::NAME_* $name
      */
-    private function setName(string $name): self
+    private function setName(string $name): static
     {
         $this->fields['name'] = $name;
 

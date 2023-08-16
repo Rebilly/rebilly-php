@@ -42,7 +42,7 @@ class CommonOrderPreviewDiscounts implements JsonSerializable
         return $this->fields['couponId'] ?? null;
     }
 
-    public function setCouponId(null|string $couponId): self
+    public function setCouponId(null|string $couponId): static
     {
         $this->fields['couponId'] = $couponId;
 
@@ -54,7 +54,7 @@ class CommonOrderPreviewDiscounts implements JsonSerializable
         return $this->fields['amount'] ?? null;
     }
 
-    public function setAmount(null|float $amount): self
+    public function setAmount(null|float $amount): static
     {
         $this->fields['amount'] = $amount;
 
@@ -66,7 +66,7 @@ class CommonOrderPreviewDiscounts implements JsonSerializable
         return $this->fields['description'] ?? null;
     }
 
-    public function setDescription(null|string $description): self
+    public function setDescription(null|string $description): static
     {
         $this->fields['description'] = $description;
 

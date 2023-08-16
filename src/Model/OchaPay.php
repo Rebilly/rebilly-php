@@ -38,7 +38,7 @@ class OchaPay extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(OchaPayCredentials|array $credentials): self
+    public function setCredentials(OchaPayCredentials|array $credentials): static
     {
         if (!($credentials instanceof OchaPayCredentials)) {
             $credentials = OchaPayCredentials::from($credentials);

@@ -49,7 +49,7 @@ class ResetPasswordTokenInfo implements JsonSerializable
         return $this->fields['sentTime'] ?? null;
     }
 
-    public function setSentTime(null|DateTimeImmutable|string $sentTime): self
+    public function setSentTime(null|DateTimeImmutable|string $sentTime): static
     {
         if ($sentTime !== null && !($sentTime instanceof DateTimeImmutable)) {
             $sentTime = new DateTimeImmutable($sentTime);
@@ -84,7 +84,7 @@ class ResetPasswordTokenInfo implements JsonSerializable
         return $data;
     }
 
-    private function setToken(null|string $token): self
+    private function setToken(null|string $token): static
     {
         $this->fields['token'] = $token;
 
@@ -94,7 +94,7 @@ class ResetPasswordTokenInfo implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

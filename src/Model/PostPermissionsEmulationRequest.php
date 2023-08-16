@@ -42,7 +42,7 @@ class PostPermissionsEmulationRequest implements JsonSerializable
     /**
      * @param string[] $permissions
      */
-    public function setPermissions(array $permissions): self
+    public function setPermissions(array $permissions): static
     {
         $permissions = array_map(fn ($value) => $value ?? null, $permissions);
 

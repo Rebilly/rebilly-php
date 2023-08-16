@@ -38,7 +38,7 @@ class CASHlib extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(CASHlibCredentials|array $credentials): self
+    public function setCredentials(CASHlibCredentials|array $credentials): static
     {
         if (!($credentials instanceof CASHlibCredentials)) {
             $credentials = CASHlibCredentials::from($credentials);

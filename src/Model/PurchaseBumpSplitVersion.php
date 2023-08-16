@@ -45,7 +45,7 @@ class PurchaseBumpSplitVersion implements JsonSerializable
         return $this->fields['name'];
     }
 
-    public function setName(string $name): self
+    public function setName(string $name): static
     {
         $this->fields['name'] = $name;
 
@@ -57,7 +57,7 @@ class PurchaseBumpSplitVersion implements JsonSerializable
         return $this->fields['weight'];
     }
 
-    public function setWeight(int $weight): self
+    public function setWeight(int $weight): static
     {
         $this->fields['weight'] = $weight;
 
@@ -75,7 +75,7 @@ class PurchaseBumpSplitVersion implements JsonSerializable
     /**
      * @param PurchaseBumpOfferList[] $offers
      */
-    public function setOffers(array $offers): self
+    public function setOffers(array $offers): static
     {
         $offers = array_map(fn ($value) => $value !== null ? ($value instanceof PurchaseBumpOfferList ? $value : PurchaseBumpOfferList::from($value)) : null, $offers);
 
@@ -95,7 +95,7 @@ class PurchaseBumpSplitVersion implements JsonSerializable
     /**
      * @param PurchaseBumpOfferContent[] $choices
      */
-    public function setChoices(array $choices): self
+    public function setChoices(array $choices): static
     {
         $choices = array_map(fn ($value) => $value !== null ? ($value instanceof PurchaseBumpOfferContent ? $value : PurchaseBumpOfferContent::from($value)) : null, $choices);
 

@@ -45,7 +45,7 @@ class StripeSettings implements JsonSerializable
         return $this->fields['redirectUrl'];
     }
 
-    public function setRedirectUrl(string $redirectUrl): self
+    public function setRedirectUrl(string $redirectUrl): static
     {
         $this->fields['redirectUrl'] = $redirectUrl;
 
@@ -57,7 +57,7 @@ class StripeSettings implements JsonSerializable
         return $this->fields['disablePaymentIntents'] ?? null;
     }
 
-    public function setDisablePaymentIntents(null|bool $disablePaymentIntents): self
+    public function setDisablePaymentIntents(null|bool $disablePaymentIntents): static
     {
         $this->fields['disablePaymentIntents'] = $disablePaymentIntents;
 
@@ -69,7 +69,7 @@ class StripeSettings implements JsonSerializable
         return $this->fields['enforceOffSession'] ?? null;
     }
 
-    public function setEnforceOffSession(null|bool $enforceOffSession): self
+    public function setEnforceOffSession(null|bool $enforceOffSession): static
     {
         $this->fields['enforceOffSession'] = $enforceOffSession;
 
@@ -81,7 +81,7 @@ class StripeSettings implements JsonSerializable
         return $this->fields['copyCredentialsFrom'] ?? null;
     }
 
-    public function setCopyCredentialsFrom(null|string $copyCredentialsFrom): self
+    public function setCopyCredentialsFrom(null|string $copyCredentialsFrom): static
     {
         $this->fields['copyCredentialsFrom'] = $copyCredentialsFrom;
 

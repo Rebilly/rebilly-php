@@ -74,7 +74,7 @@ class IBANType extends BankAccountCreatePlain
     /**
      * @psalm-param self::METHOD_* $method
      */
-    public function setMethod(string $method): self
+    public function setMethod(string $method): static
     {
         $this->fields['method'] = $method;
 
@@ -86,7 +86,7 @@ class IBANType extends BankAccountCreatePlain
         return $this->fields['customerId'];
     }
 
-    public function setCustomerId(string $customerId): self
+    public function setCustomerId(string $customerId): static
     {
         $this->fields['customerId'] = $customerId;
 
@@ -104,7 +104,7 @@ class IBANType extends BankAccountCreatePlain
     /**
      * @psalm-param self::ACCOUNT_NUMBER_TYPE_* $accountNumberType
      */
-    public function setAccountNumberType(string $accountNumberType): self
+    public function setAccountNumberType(string $accountNumberType): static
     {
         $this->fields['accountNumberType'] = $accountNumberType;
 
@@ -116,7 +116,7 @@ class IBANType extends BankAccountCreatePlain
         return $this->fields['accountNumber'];
     }
 
-    public function setAccountNumber(string $accountNumber): self
+    public function setAccountNumber(string $accountNumber): static
     {
         $this->fields['accountNumber'] = $accountNumber;
 
@@ -128,7 +128,7 @@ class IBANType extends BankAccountCreatePlain
         return $this->fields['bankName'] ?? null;
     }
 
-    public function setBankName(null|string $bankName): self
+    public function setBankName(null|string $bankName): static
     {
         $this->fields['bankName'] = $bankName;
 
@@ -140,7 +140,7 @@ class IBANType extends BankAccountCreatePlain
         return $this->fields['bic'] ?? null;
     }
 
-    public function setBic(null|string $bic): self
+    public function setBic(null|string $bic): static
     {
         $this->fields['bic'] = $bic;
 
@@ -152,7 +152,7 @@ class IBANType extends BankAccountCreatePlain
         return $this->fields['billingAddress'];
     }
 
-    public function setBillingAddress(ContactObject|array $billingAddress): self
+    public function setBillingAddress(ContactObject|array $billingAddress): static
     {
         if (!($billingAddress instanceof ContactObject)) {
             $billingAddress = ContactObject::from($billingAddress);
@@ -168,7 +168,7 @@ class IBANType extends BankAccountCreatePlain
         return $this->fields['customFields'] ?? null;
     }
 
-    public function setCustomFields(null|array $customFields): self
+    public function setCustomFields(null|array $customFields): static
     {
         $this->fields['customFields'] = $customFields;
 
@@ -180,7 +180,7 @@ class IBANType extends BankAccountCreatePlain
         return $this->fields['riskMetadata'] ?? null;
     }
 
-    public function setRiskMetadata(null|RiskMetadata|array $riskMetadata): self
+    public function setRiskMetadata(null|RiskMetadata|array $riskMetadata): static
     {
         if ($riskMetadata !== null && !($riskMetadata instanceof RiskMetadata)) {
             $riskMetadata = RiskMetadata::from($riskMetadata);

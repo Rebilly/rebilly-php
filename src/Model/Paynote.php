@@ -38,7 +38,7 @@ class Paynote extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(PaynoteCredentials|array $credentials): self
+    public function setCredentials(PaynoteCredentials|array $credentials): static
     {
         if (!($credentials instanceof PaynoteCredentials)) {
             $credentials = PaynoteCredentials::from($credentials);

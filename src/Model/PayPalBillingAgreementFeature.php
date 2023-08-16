@@ -58,7 +58,7 @@ class PayPalBillingAgreementFeature implements JsonSerializable
     /**
      * @psalm-param self::NAME_* $name
      */
-    public function setName(string $name): self
+    public function setName(string $name): static
     {
         $this->fields['name'] = $name;
 
@@ -70,7 +70,7 @@ class PayPalBillingAgreementFeature implements JsonSerializable
         return $this->fields['paypalMerchantId'];
     }
 
-    public function setPaypalMerchantId(string $paypalMerchantId): self
+    public function setPaypalMerchantId(string $paypalMerchantId): static
     {
         $this->fields['paypalMerchantId'] = $paypalMerchantId;
 
@@ -82,7 +82,7 @@ class PayPalBillingAgreementFeature implements JsonSerializable
         return $this->fields['paypalClientId'];
     }
 
-    public function setPaypalClientId(string $paypalClientId): self
+    public function setPaypalClientId(string $paypalClientId): static
     {
         $this->fields['paypalClientId'] = $paypalClientId;
 
@@ -94,7 +94,7 @@ class PayPalBillingAgreementFeature implements JsonSerializable
         return $this->fields['billingAgreementToken'];
     }
 
-    public function setBillingAgreementToken(string $billingAgreementToken): self
+    public function setBillingAgreementToken(string $billingAgreementToken): static
     {
         $this->fields['billingAgreementToken'] = $billingAgreementToken;
 
@@ -106,7 +106,7 @@ class PayPalBillingAgreementFeature implements JsonSerializable
         return $this->fields['expirationTime'];
     }
 
-    public function setExpirationTime(DateTimeImmutable|string $expirationTime): self
+    public function setExpirationTime(DateTimeImmutable|string $expirationTime): static
     {
         if (!($expirationTime instanceof DateTimeImmutable)) {
             $expirationTime = new DateTimeImmutable($expirationTime);

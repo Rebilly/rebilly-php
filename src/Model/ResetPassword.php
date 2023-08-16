@@ -36,7 +36,7 @@ class ResetPassword implements JsonSerializable
         return $this->fields['newPassword'];
     }
 
-    public function setNewPassword(string $newPassword): self
+    public function setNewPassword(string $newPassword): static
     {
         $this->fields['newPassword'] = $newPassword;
 

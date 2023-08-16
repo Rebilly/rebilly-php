@@ -38,7 +38,7 @@ class Gooney extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(GooneyCredentials|array $credentials): self
+    public function setCredentials(GooneyCredentials|array $credentials): static
     {
         if (!($credentials instanceof GooneyCredentials)) {
             $credentials = GooneyCredentials::from($credentials);

@@ -51,7 +51,7 @@ class STPMexicoCredentials implements JsonSerializable
         return $this->fields['companyName'];
     }
 
-    public function setCompanyName(string $companyName): self
+    public function setCompanyName(string $companyName): static
     {
         $this->fields['companyName'] = $companyName;
 
@@ -63,7 +63,7 @@ class STPMexicoCredentials implements JsonSerializable
         return $this->fields['beneficiaryName'];
     }
 
-    public function setBeneficiaryName(string $beneficiaryName): self
+    public function setBeneficiaryName(string $beneficiaryName): static
     {
         $this->fields['beneficiaryName'] = $beneficiaryName;
 
@@ -75,7 +75,7 @@ class STPMexicoCredentials implements JsonSerializable
         return $this->fields['bankId'];
     }
 
-    public function setBankId(STPMexicoBanks|int $bankId): self
+    public function setBankId(STPMexicoBanks|int $bankId): static
     {
         if (!($bankId instanceof STPMexicoBanks)) {
             $bankId = STPMexicoBanks::from($bankId);
@@ -91,7 +91,7 @@ class STPMexicoCredentials implements JsonSerializable
         return $this->fields['bankAccountNumber'];
     }
 
-    public function setBankAccountNumber(string $bankAccountNumber): self
+    public function setBankAccountNumber(string $bankAccountNumber): static
     {
         $this->fields['bankAccountNumber'] = $bankAccountNumber;
 
@@ -103,7 +103,7 @@ class STPMexicoCredentials implements JsonSerializable
         return $this->fields['privateKey'];
     }
 
-    public function setPrivateKey(string $privateKey): self
+    public function setPrivateKey(string $privateKey): static
     {
         $this->fields['privateKey'] = $privateKey;
 
@@ -115,7 +115,7 @@ class STPMexicoCredentials implements JsonSerializable
         return $this->fields['keyPassphrase'];
     }
 
-    public function setKeyPassphrase(string $keyPassphrase): self
+    public function setKeyPassphrase(string $keyPassphrase): static
     {
         $this->fields['keyPassphrase'] = $keyPassphrase;
 

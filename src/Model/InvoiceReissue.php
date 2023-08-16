@@ -38,7 +38,7 @@ class InvoiceReissue implements JsonSerializable
         return $this->fields['dueTime'] ?? null;
     }
 
-    public function setDueTime(null|DateTimeImmutable|string $dueTime): self
+    public function setDueTime(null|DateTimeImmutable|string $dueTime): static
     {
         if ($dueTime !== null && !($dueTime instanceof DateTimeImmutable)) {
             $dueTime = new DateTimeImmutable($dueTime);

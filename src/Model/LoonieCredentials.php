@@ -39,7 +39,7 @@ class LoonieCredentials implements JsonSerializable
         return $this->fields['merchantId'];
     }
 
-    public function setMerchantId(string $merchantId): self
+    public function setMerchantId(string $merchantId): static
     {
         $this->fields['merchantId'] = $merchantId;
 
@@ -51,7 +51,7 @@ class LoonieCredentials implements JsonSerializable
         return $this->fields['merchantToken'];
     }
 
-    public function setMerchantToken(string $merchantToken): self
+    public function setMerchantToken(string $merchantToken): static
     {
         $this->fields['merchantToken'] = $merchantToken;
 

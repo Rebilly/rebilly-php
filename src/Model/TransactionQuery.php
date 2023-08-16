@@ -90,7 +90,7 @@ class TransactionQuery implements JsonSerializable
         return $this->fields['transactionId'] ?? null;
     }
 
-    public function setTransactionId(null|string $transactionId): self
+    public function setTransactionId(null|string $transactionId): static
     {
         $this->fields['transactionId'] = $transactionId;
 
@@ -148,7 +148,7 @@ class TransactionQuery implements JsonSerializable
     /**
      * @psalm-param self::RESULT_*|null $result
      */
-    private function setResult(null|string $result): self
+    private function setResult(null|string $result): static
     {
         $this->fields['result'] = $result;
 
@@ -158,14 +158,14 @@ class TransactionQuery implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    private function setStatus(null|string $status): self
+    private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
         return $this;
     }
 
-    private function setAmount(null|float|string $amount): self
+    private function setAmount(null|float|string $amount): static
     {
         if (is_string($amount)) {
             $amount = (float) $amount;
@@ -176,7 +176,7 @@ class TransactionQuery implements JsonSerializable
         return $this;
     }
 
-    private function setCurrency(null|string $currency): self
+    private function setCurrency(null|string $currency): static
     {
         $this->fields['currency'] = $currency;
 

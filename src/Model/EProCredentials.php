@@ -36,7 +36,7 @@ class EProCredentials implements JsonSerializable
         return $this->fields['apiSecretKey'];
     }
 
-    public function setApiSecretKey(string $apiSecretKey): self
+    public function setApiSecretKey(string $apiSecretKey): static
     {
         $this->fields['apiSecretKey'] = $apiSecretKey;
 

@@ -39,7 +39,7 @@ class KycSettingsIdentityThresholds implements JsonSerializable
         return $this->fields['rejectBelow'] ?? null;
     }
 
-    public function setRejectBelow(null|int $rejectBelow): self
+    public function setRejectBelow(null|int $rejectBelow): static
     {
         $this->fields['rejectBelow'] = $rejectBelow;
 
@@ -51,7 +51,7 @@ class KycSettingsIdentityThresholds implements JsonSerializable
         return $this->fields['acceptAbove'] ?? null;
     }
 
-    public function setAcceptAbove(null|int $acceptAbove): self
+    public function setAcceptAbove(null|int $acceptAbove): static
     {
         $this->fields['acceptAbove'] = $acceptAbove;
 

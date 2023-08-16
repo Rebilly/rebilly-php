@@ -108,7 +108,7 @@ class Search implements JsonSerializable
     /**
      * @param null|Customer[] $customers
      */
-    private function setCustomers(null|array $customers): self
+    private function setCustomers(null|array $customers): static
     {
         $customers = $customers !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Customer ? $value : Customer::from($value)) : null, $customers) : null;
 
@@ -120,7 +120,7 @@ class Search implements JsonSerializable
     /**
      * @param null|Invoice[] $invoices
      */
-    private function setInvoices(null|array $invoices): self
+    private function setInvoices(null|array $invoices): static
     {
         $invoices = $invoices !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Invoice ? $value : Invoice::from($value)) : null, $invoices) : null;
 
@@ -132,7 +132,7 @@ class Search implements JsonSerializable
     /**
      * @param null|Subscription[] $orders
      */
-    private function setOrders(null|array $orders): self
+    private function setOrders(null|array $orders): static
     {
         $orders = $orders !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Subscription ? $value : Subscription::from($value)) : null, $orders) : null;
 
@@ -144,7 +144,7 @@ class Search implements JsonSerializable
     /**
      * @param null|Transaction[] $transactions
      */
-    private function setTransactions(null|array $transactions): self
+    private function setTransactions(null|array $transactions): static
     {
         $transactions = $transactions !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Transaction ? $value : Transaction::from($value)) : null, $transactions) : null;
 
@@ -156,7 +156,7 @@ class Search implements JsonSerializable
     /**
      * @param null|string[] $searched
      */
-    private function setSearched(null|array $searched): self
+    private function setSearched(null|array $searched): static
     {
         $searched = $searched !== null ? array_map(fn ($value) => $value ?? null, $searched) : null;
 

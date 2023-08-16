@@ -44,7 +44,7 @@ class Stairstep extends PlanPriceFormula
     /**
      * @param StairstepBrackets[] $brackets
      */
-    public function setBrackets(array $brackets): self
+    public function setBrackets(array $brackets): static
     {
         $brackets = array_map(fn ($value) => $value !== null ? ($value instanceof StairstepBrackets ? $value : StairstepBrackets::from($value)) : null, $brackets);
 

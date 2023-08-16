@@ -47,7 +47,7 @@ class Oauth1 extends WebhookAuthorization
         return $this->fields['consumerKey'];
     }
 
-    public function setConsumerKey(string $consumerKey): self
+    public function setConsumerKey(string $consumerKey): static
     {
         $this->fields['consumerKey'] = $consumerKey;
 
@@ -59,7 +59,7 @@ class Oauth1 extends WebhookAuthorization
         return $this->fields['consumerSecret'];
     }
 
-    public function setConsumerSecret(string $consumerSecret): self
+    public function setConsumerSecret(string $consumerSecret): static
     {
         $this->fields['consumerSecret'] = $consumerSecret;
 
@@ -71,7 +71,7 @@ class Oauth1 extends WebhookAuthorization
         return $this->fields['token'];
     }
 
-    public function setToken(string $token): self
+    public function setToken(string $token): static
     {
         $this->fields['token'] = $token;
 
@@ -83,7 +83,7 @@ class Oauth1 extends WebhookAuthorization
         return $this->fields['tokenSecret'];
     }
 
-    public function setTokenSecret(string $tokenSecret): self
+    public function setTokenSecret(string $tokenSecret): static
     {
         $this->fields['tokenSecret'] = $tokenSecret;
 

@@ -64,7 +64,7 @@ class CommonOrderPreviewLineItems implements JsonSerializable
     /**
      * @psalm-param self::TYPE_*|null $type
      */
-    public function setType(null|string $type): self
+    public function setType(null|string $type): static
     {
         $this->fields['type'] = $type;
 
@@ -76,7 +76,7 @@ class CommonOrderPreviewLineItems implements JsonSerializable
         return $this->fields['description'] ?? null;
     }
 
-    public function setDescription(null|string $description): self
+    public function setDescription(null|string $description): static
     {
         $this->fields['description'] = $description;
 
@@ -88,7 +88,7 @@ class CommonOrderPreviewLineItems implements JsonSerializable
         return $this->fields['unitPrice'] ?? null;
     }
 
-    public function setUnitPrice(null|float|string $unitPrice): self
+    public function setUnitPrice(null|float|string $unitPrice): static
     {
         if (is_string($unitPrice)) {
             $unitPrice = (float) $unitPrice;
@@ -104,7 +104,7 @@ class CommonOrderPreviewLineItems implements JsonSerializable
         return $this->fields['quantity'] ?? null;
     }
 
-    public function setQuantity(null|float $quantity): self
+    public function setQuantity(null|float $quantity): static
     {
         $this->fields['quantity'] = $quantity;
 
@@ -116,7 +116,7 @@ class CommonOrderPreviewLineItems implements JsonSerializable
         return $this->fields['price'] ?? null;
     }
 
-    public function setPrice(null|float|string $price): self
+    public function setPrice(null|float|string $price): static
     {
         if (is_string($price)) {
             $price = (float) $price;
@@ -132,7 +132,7 @@ class CommonOrderPreviewLineItems implements JsonSerializable
         return $this->fields['planId'] ?? null;
     }
 
-    public function setPlanId(null|string $planId): self
+    public function setPlanId(null|string $planId): static
     {
         $this->fields['planId'] = $planId;
 
@@ -144,7 +144,7 @@ class CommonOrderPreviewLineItems implements JsonSerializable
         return $this->fields['productId'] ?? null;
     }
 
-    public function setProductId(null|string $productId): self
+    public function setProductId(null|string $productId): static
     {
         $this->fields['productId'] = $productId;
 

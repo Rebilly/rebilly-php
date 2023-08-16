@@ -45,7 +45,7 @@ class ReportDisputeDelaysData implements JsonSerializable
         return $this->fields['aggregationFieldValue'] ?? null;
     }
 
-    public function setAggregationFieldValue(null|string $aggregationFieldValue): self
+    public function setAggregationFieldValue(null|string $aggregationFieldValue): static
     {
         $this->fields['aggregationFieldValue'] = $aggregationFieldValue;
 
@@ -57,7 +57,7 @@ class ReportDisputeDelaysData implements JsonSerializable
         return $this->fields['25th'] ?? null;
     }
 
-    public function set25th(null|int $_25th): self
+    public function set25th(null|int $_25th): static
     {
         $this->fields['25th'] = $_25th;
 
@@ -69,7 +69,7 @@ class ReportDisputeDelaysData implements JsonSerializable
         return $this->fields['50th'] ?? null;
     }
 
-    public function set50th(null|int $_50th): self
+    public function set50th(null|int $_50th): static
     {
         $this->fields['50th'] = $_50th;
 
@@ -81,7 +81,7 @@ class ReportDisputeDelaysData implements JsonSerializable
         return $this->fields['75th'] ?? null;
     }
 
-    public function set75th(null|int $_75th): self
+    public function set75th(null|int $_75th): static
     {
         $this->fields['75th'] = $_75th;
 

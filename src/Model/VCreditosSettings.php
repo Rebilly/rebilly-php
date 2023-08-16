@@ -39,7 +39,7 @@ class VCreditosSettings implements JsonSerializable
         return $this->fields['merchantWebsiteLoginLabel'] ?? null;
     }
 
-    public function setMerchantWebsiteLoginLabel(null|string $merchantWebsiteLoginLabel): self
+    public function setMerchantWebsiteLoginLabel(null|string $merchantWebsiteLoginLabel): static
     {
         $this->fields['merchantWebsiteLoginLabel'] = $merchantWebsiteLoginLabel;
 
@@ -51,7 +51,7 @@ class VCreditosSettings implements JsonSerializable
         return $this->fields['merchantWebsiteLoginDescription'] ?? null;
     }
 
-    public function setMerchantWebsiteLoginDescription(null|string $merchantWebsiteLoginDescription): self
+    public function setMerchantWebsiteLoginDescription(null|string $merchantWebsiteLoginDescription): static
     {
         $this->fields['merchantWebsiteLoginDescription'] = $merchantWebsiteLoginDescription;
 

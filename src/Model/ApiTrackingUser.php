@@ -60,7 +60,7 @@ class ApiTrackingUser implements JsonSerializable
         return $this->fields['userId'] ?? null;
     }
 
-    public function setUserId(null|string $userId): self
+    public function setUserId(null|string $userId): static
     {
         $this->fields['userId'] = $userId;
 
@@ -72,7 +72,7 @@ class ApiTrackingUser implements JsonSerializable
         return $this->fields['apiKeyId'] ?? null;
     }
 
-    public function setApiKeyId(null|string $apiKeyId): self
+    public function setApiKeyId(null|string $apiKeyId): static
     {
         $this->fields['apiKeyId'] = $apiKeyId;
 
@@ -84,7 +84,7 @@ class ApiTrackingUser implements JsonSerializable
         return $this->fields['email'] ?? null;
     }
 
-    public function setEmail(null|string $email): self
+    public function setEmail(null|string $email): static
     {
         $this->fields['email'] = $email;
 
@@ -96,7 +96,7 @@ class ApiTrackingUser implements JsonSerializable
         return $this->fields['firstName'] ?? null;
     }
 
-    public function setFirstName(null|string $firstName): self
+    public function setFirstName(null|string $firstName): static
     {
         $this->fields['firstName'] = $firstName;
 
@@ -108,7 +108,7 @@ class ApiTrackingUser implements JsonSerializable
         return $this->fields['lastName'] ?? null;
     }
 
-    public function setLastName(null|string $lastName): self
+    public function setLastName(null|string $lastName): static
     {
         $this->fields['lastName'] = $lastName;
 
@@ -120,7 +120,7 @@ class ApiTrackingUser implements JsonSerializable
         return $this->fields['ipAddress'] ?? null;
     }
 
-    public function setIpAddress(null|string $ipAddress): self
+    public function setIpAddress(null|string $ipAddress): static
     {
         $this->fields['ipAddress'] = $ipAddress;
 
@@ -132,7 +132,7 @@ class ApiTrackingUser implements JsonSerializable
         return $this->fields['userAgent'] ?? null;
     }
 
-    public function setUserAgent(null|string $userAgent): self
+    public function setUserAgent(null|string $userAgent): static
     {
         $this->fields['userAgent'] = $userAgent;
 
@@ -144,7 +144,7 @@ class ApiTrackingUser implements JsonSerializable
         return $this->fields['fingerprint'] ?? null;
     }
 
-    public function setFingerprint(null|string $fingerprint): self
+    public function setFingerprint(null|string $fingerprint): static
     {
         $this->fields['fingerprint'] = $fingerprint;
 
@@ -156,7 +156,7 @@ class ApiTrackingUser implements JsonSerializable
         return $this->fields['isSupport'] ?? null;
     }
 
-    public function setIsSupport(null|bool $isSupport): self
+    public function setIsSupport(null|bool $isSupport): static
     {
         $this->fields['isSupport'] = $isSupport;
 

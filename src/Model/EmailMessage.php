@@ -101,7 +101,7 @@ class EmailMessage implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    public function setStatus(null|string $status): self
+    public function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
@@ -119,7 +119,7 @@ class EmailMessage implements JsonSerializable
     /**
      * @param null|array<string,string> $metadata
      */
-    public function setMetadata(null|array $metadata): self
+    public function setMetadata(null|array $metadata): static
     {
         $this->fields['metadata'] = $metadata;
 
@@ -131,7 +131,7 @@ class EmailMessage implements JsonSerializable
         return $this->fields['credentialHash'] ?? null;
     }
 
-    public function setCredentialHash(null|string $credentialHash): self
+    public function setCredentialHash(null|string $credentialHash): static
     {
         $this->fields['credentialHash'] = $credentialHash;
 
@@ -143,7 +143,7 @@ class EmailMessage implements JsonSerializable
         return $this->fields['from'];
     }
 
-    public function setFrom(string $from): self
+    public function setFrom(string $from): static
     {
         $this->fields['from'] = $from;
 
@@ -161,7 +161,7 @@ class EmailMessage implements JsonSerializable
     /**
      * @param string[] $to
      */
-    public function setTo(array $to): self
+    public function setTo(array $to): static
     {
         $to = array_map(fn ($value) => $value ?? null, $to);
 
@@ -181,7 +181,7 @@ class EmailMessage implements JsonSerializable
     /**
      * @param null|string[] $cc
      */
-    public function setCc(null|array $cc): self
+    public function setCc(null|array $cc): static
     {
         $cc = $cc !== null ? array_map(fn ($value) => $value ?? null, $cc) : null;
 
@@ -201,7 +201,7 @@ class EmailMessage implements JsonSerializable
     /**
      * @param null|string[] $bcc
      */
-    public function setBcc(null|array $bcc): self
+    public function setBcc(null|array $bcc): static
     {
         $bcc = $bcc !== null ? array_map(fn ($value) => $value ?? null, $bcc) : null;
 
@@ -215,7 +215,7 @@ class EmailMessage implements JsonSerializable
         return $this->fields['subject'];
     }
 
-    public function setSubject(string $subject): self
+    public function setSubject(string $subject): static
     {
         $this->fields['subject'] = $subject;
 
@@ -227,7 +227,7 @@ class EmailMessage implements JsonSerializable
         return $this->fields['text'];
     }
 
-    public function setText(string $text): self
+    public function setText(string $text): static
     {
         $this->fields['text'] = $text;
 
@@ -239,7 +239,7 @@ class EmailMessage implements JsonSerializable
         return $this->fields['html'];
     }
 
-    public function setHtml(string $html): self
+    public function setHtml(string $html): static
     {
         $this->fields['html'] = $html;
 
@@ -257,7 +257,7 @@ class EmailMessage implements JsonSerializable
     /**
      * @param null|EmailMessageAttachments[] $attachments
      */
-    public function setAttachments(null|array $attachments): self
+    public function setAttachments(null|array $attachments): static
     {
         $attachments = $attachments !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof EmailMessageAttachments ? $value : EmailMessageAttachments::from($value)) : null, $attachments) : null;
 
@@ -336,14 +336,14 @@ class EmailMessage implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -354,7 +354,7 @@ class EmailMessage implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -368,7 +368,7 @@ class EmailMessage implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

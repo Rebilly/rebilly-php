@@ -277,21 +277,21 @@ class AML implements JsonSerializable
         return $data;
     }
 
-    private function setFirstName(null|string $firstName): self
+    private function setFirstName(null|string $firstName): static
     {
         $this->fields['firstName'] = $firstName;
 
         return $this;
     }
 
-    private function setLastName(null|string $lastName): self
+    private function setLastName(null|string $lastName): static
     {
         $this->fields['lastName'] = $lastName;
 
         return $this;
     }
 
-    private function setSource(null|string $source): self
+    private function setSource(null|string $source): static
     {
         $this->fields['source'] = $source;
 
@@ -303,7 +303,7 @@ class AML implements JsonSerializable
      *
      * @psalm-param self::SOURCE_TYPE_*|null $sourceType
      */
-    private function setSourceType(null|array $sourceType): self
+    private function setSourceType(null|array $sourceType): static
     {
         $sourceType = $sourceType !== null ? array_map(fn ($value) => $value ?? null, $sourceType) : null;
 
@@ -312,7 +312,7 @@ class AML implements JsonSerializable
         return $this;
     }
 
-    private function setGender(null|string $gender): self
+    private function setGender(null|string $gender): static
     {
         $this->fields['gender'] = $gender;
 
@@ -322,7 +322,7 @@ class AML implements JsonSerializable
     /**
      * @param null|string[] $title
      */
-    private function setTitle(null|array $title): self
+    private function setTitle(null|array $title): static
     {
         $title = $title !== null ? array_map(fn ($value) => $value ?? null, $title) : null;
 
@@ -334,7 +334,7 @@ class AML implements JsonSerializable
     /**
      * @psalm-param self::TYPE_*|null $type
      */
-    private function setType(null|string $type): self
+    private function setType(null|string $type): static
     {
         $this->fields['type'] = $type;
 
@@ -344,7 +344,7 @@ class AML implements JsonSerializable
     /**
      * @param null|string[] $legalBasis
      */
-    private function setLegalBasis(null|array $legalBasis): self
+    private function setLegalBasis(null|array $legalBasis): static
     {
         $legalBasis = $legalBasis !== null ? array_map(fn ($value) => $value ?? null, $legalBasis) : null;
 
@@ -353,7 +353,7 @@ class AML implements JsonSerializable
         return $this;
     }
 
-    private function setRegime(null|string $regime): self
+    private function setRegime(null|string $regime): static
     {
         $this->fields['regime'] = $regime;
 
@@ -363,14 +363,14 @@ class AML implements JsonSerializable
     /**
      * @psalm-param self::CONFIDENCE_*|null $confidence
      */
-    private function setConfidence(null|string $confidence): self
+    private function setConfidence(null|string $confidence): static
     {
         $this->fields['confidence'] = $confidence;
 
         return $this;
     }
 
-    private function setNationality(null|string $nationality): self
+    private function setNationality(null|string $nationality): static
     {
         $this->fields['nationality'] = $nationality;
 
@@ -380,7 +380,7 @@ class AML implements JsonSerializable
     /**
      * @param null|AMLAddress[] $address
      */
-    private function setAddress(null|array $address): self
+    private function setAddress(null|array $address): static
     {
         $address = $address !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof AMLAddress ? $value : AMLAddress::from($value)) : null, $address) : null;
 
@@ -392,7 +392,7 @@ class AML implements JsonSerializable
     /**
      * @param null|DateTimeImmutable[] $dob
      */
-    private function setDob(null|array $dob): self
+    private function setDob(null|array $dob): static
     {
         $dob = $dob !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof DateTimeImmutable ? $value : new DateTimeImmutable($value)) : null, $dob) : null;
 
@@ -404,7 +404,7 @@ class AML implements JsonSerializable
     /**
      * @param null|AMLAliases[] $aliases
      */
-    private function setAliases(null|array $aliases): self
+    private function setAliases(null|array $aliases): static
     {
         $aliases = $aliases !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof AMLAliases ? $value : AMLAliases::from($value)) : null, $aliases) : null;
 
@@ -416,7 +416,7 @@ class AML implements JsonSerializable
     /**
      * @param null|AMLPassport[] $passport
      */
-    private function setPassport(null|array $passport): self
+    private function setPassport(null|array $passport): static
     {
         $passport = $passport !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof AMLPassport ? $value : AMLPassport::from($value)) : null, $passport) : null;
 
@@ -425,7 +425,7 @@ class AML implements JsonSerializable
         return $this;
     }
 
-    private function setComments(null|string $comments): self
+    private function setComments(null|string $comments): static
     {
         $this->fields['comments'] = $comments;
 
@@ -435,7 +435,7 @@ class AML implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

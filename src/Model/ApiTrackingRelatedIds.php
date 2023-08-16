@@ -42,7 +42,7 @@ class ApiTrackingRelatedIds implements JsonSerializable
         return $this->fields['customerId'] ?? null;
     }
 
-    public function setCustomerId(null|string $customerId): self
+    public function setCustomerId(null|string $customerId): static
     {
         $this->fields['customerId'] = $customerId;
 
@@ -54,7 +54,7 @@ class ApiTrackingRelatedIds implements JsonSerializable
         return $this->fields['transactionId'] ?? null;
     }
 
-    public function setTransactionId(null|string $transactionId): self
+    public function setTransactionId(null|string $transactionId): static
     {
         $this->fields['transactionId'] = $transactionId;
 
@@ -66,7 +66,7 @@ class ApiTrackingRelatedIds implements JsonSerializable
         return $this->fields['tokenId'] ?? null;
     }
 
-    public function setTokenId(null|string $tokenId): self
+    public function setTokenId(null|string $tokenId): static
     {
         $this->fields['tokenId'] = $tokenId;
 

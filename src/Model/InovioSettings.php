@@ -42,7 +42,7 @@ class InovioSettings implements JsonSerializable
         return $this->fields['websiteId'];
     }
 
-    public function setWebsiteId(string $websiteId): self
+    public function setWebsiteId(string $websiteId): static
     {
         $this->fields['websiteId'] = $websiteId;
 
@@ -54,7 +54,7 @@ class InovioSettings implements JsonSerializable
         return $this->fields['merchantAccountId'];
     }
 
-    public function setMerchantAccountId(string $merchantAccountId): self
+    public function setMerchantAccountId(string $merchantAccountId): static
     {
         $this->fields['merchantAccountId'] = $merchantAccountId;
 
@@ -66,7 +66,7 @@ class InovioSettings implements JsonSerializable
         return $this->fields['productId'];
     }
 
-    public function setProductId(string $productId): self
+    public function setProductId(string $productId): static
     {
         $this->fields['productId'] = $productId;
 

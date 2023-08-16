@@ -45,7 +45,7 @@ class AstroPayCardSettings implements JsonSerializable
         return $this->fields['oneTouchApi'] ?? null;
     }
 
-    public function setOneTouchApi(null|bool $oneTouchApi): self
+    public function setOneTouchApi(null|bool $oneTouchApi): static
     {
         $this->fields['oneTouchApi'] = $oneTouchApi;
 
@@ -57,7 +57,7 @@ class AstroPayCardSettings implements JsonSerializable
         return $this->fields['useOneTouchSdk'] ?? null;
     }
 
-    public function setUseOneTouchSdk(null|bool $useOneTouchSdk): self
+    public function setUseOneTouchSdk(null|bool $useOneTouchSdk): static
     {
         $this->fields['useOneTouchSdk'] = $useOneTouchSdk;
 
@@ -69,7 +69,7 @@ class AstroPayCardSettings implements JsonSerializable
         return $this->fields['merchantName'] ?? null;
     }
 
-    public function setMerchantName(null|string $merchantName): self
+    public function setMerchantName(null|string $merchantName): static
     {
         $this->fields['merchantName'] = $merchantName;
 
@@ -81,7 +81,7 @@ class AstroPayCardSettings implements JsonSerializable
         return $this->fields['merchantLogoUrl'] ?? null;
     }
 
-    public function setMerchantLogoUrl(null|string $merchantLogoUrl): self
+    public function setMerchantLogoUrl(null|string $merchantLogoUrl): static
     {
         $this->fields['merchantLogoUrl'] = $merchantLogoUrl;
 

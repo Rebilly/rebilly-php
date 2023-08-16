@@ -51,7 +51,7 @@ class ValidationError implements JsonSerializable
         return $this->fields['status'] ?? null;
     }
 
-    public function setStatus(null|int $status): self
+    public function setStatus(null|int $status): static
     {
         $this->fields['status'] = $status;
 
@@ -63,7 +63,7 @@ class ValidationError implements JsonSerializable
         return $this->fields['type'] ?? null;
     }
 
-    public function setType(null|string $type): self
+    public function setType(null|string $type): static
     {
         $this->fields['type'] = $type;
 
@@ -75,7 +75,7 @@ class ValidationError implements JsonSerializable
         return $this->fields['title'] ?? null;
     }
 
-    public function setTitle(null|string $title): self
+    public function setTitle(null|string $title): static
     {
         $this->fields['title'] = $title;
 
@@ -87,7 +87,7 @@ class ValidationError implements JsonSerializable
         return $this->fields['detail'] ?? null;
     }
 
-    public function setDetail(null|string $detail): self
+    public function setDetail(null|string $detail): static
     {
         $this->fields['detail'] = $detail;
 
@@ -99,7 +99,7 @@ class ValidationError implements JsonSerializable
         return $this->fields['instance'] ?? null;
     }
 
-    public function setInstance(null|string $instance): self
+    public function setInstance(null|string $instance): static
     {
         $this->fields['instance'] = $instance;
 
@@ -117,7 +117,7 @@ class ValidationError implements JsonSerializable
     /**
      * @param null|ValidationError1InvalidFields[] $invalidFields
      */
-    public function setInvalidFields(null|array $invalidFields): self
+    public function setInvalidFields(null|array $invalidFields): static
     {
         $invalidFields = $invalidFields !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ValidationError1InvalidFields ? $value : ValidationError1InvalidFields::from($value)) : null, $invalidFields) : null;
 

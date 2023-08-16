@@ -39,7 +39,7 @@ class PayCashCredentials implements JsonSerializable
         return $this->fields['emisor'];
     }
 
-    public function setEmisor(string $emisor): self
+    public function setEmisor(string $emisor): static
     {
         $this->fields['emisor'] = $emisor;
 
@@ -51,7 +51,7 @@ class PayCashCredentials implements JsonSerializable
         return $this->fields['token'];
     }
 
-    public function setToken(string $token): self
+    public function setToken(string $token): static
     {
         $this->fields['token'] = $token;
 

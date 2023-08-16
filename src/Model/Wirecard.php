@@ -41,7 +41,7 @@ class Wirecard extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(WirecardCredentials|array $credentials): self
+    public function setCredentials(WirecardCredentials|array $credentials): static
     {
         if (!($credentials instanceof WirecardCredentials)) {
             $credentials = WirecardCredentials::from($credentials);
@@ -57,7 +57,7 @@ class Wirecard extends GatewayAccount
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|Wirecard3dsServers|array $threeDSecureServer): self
+    public function setThreeDSecureServer(null|Wirecard3dsServers|array $threeDSecureServer): static
     {
         if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Wirecard3dsServers)) {
             $threeDSecureServer = Wirecard3dsServers::from($threeDSecureServer);

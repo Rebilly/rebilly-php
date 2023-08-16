@@ -42,7 +42,7 @@ class PagsmileCredentials implements JsonSerializable
         return $this->fields['merchantId'];
     }
 
-    public function setMerchantId(string $merchantId): self
+    public function setMerchantId(string $merchantId): static
     {
         $this->fields['merchantId'] = $merchantId;
 
@@ -54,7 +54,7 @@ class PagsmileCredentials implements JsonSerializable
         return $this->fields['appId'];
     }
 
-    public function setAppId(string $appId): self
+    public function setAppId(string $appId): static
     {
         $this->fields['appId'] = $appId;
 
@@ -66,7 +66,7 @@ class PagsmileCredentials implements JsonSerializable
         return $this->fields['secretKey'];
     }
 
-    public function setSecretKey(string $secretKey): self
+    public function setSecretKey(string $secretKey): static
     {
         $this->fields['secretKey'] = $secretKey;
 

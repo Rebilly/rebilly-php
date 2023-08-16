@@ -74,7 +74,7 @@ class ApiKey implements JsonSerializable
         return $this->fields['description'];
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(string $description): static
     {
         $this->fields['description'] = $description;
 
@@ -92,7 +92,7 @@ class ApiKey implements JsonSerializable
     /**
      * @psalm-param self::TYPE_*|null $type
      */
-    public function setType(null|string $type): self
+    public function setType(null|string $type): static
     {
         $this->fields['type'] = $type;
 
@@ -110,7 +110,7 @@ class ApiKey implements JsonSerializable
     /**
      * @param null|Acl[] $acl
      */
-    public function setAcl(null|array $acl): self
+    public function setAcl(null|array $acl): static
     {
         $acl = $acl !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Acl ? $value : Acl::from($value)) : null, $acl) : null;
 
@@ -130,7 +130,7 @@ class ApiKey implements JsonSerializable
     /**
      * @param null|string[] $allowedIps
      */
-    public function setAllowedIps(null|array $allowedIps): self
+    public function setAllowedIps(null|array $allowedIps): static
     {
         $allowedIps = $allowedIps !== null ? array_map(fn ($value) => $value ?? null, $allowedIps) : null;
 
@@ -204,28 +204,28 @@ class ApiKey implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setApiUser(null|string $apiUser): self
+    private function setApiUser(null|string $apiUser): static
     {
         $this->fields['apiUser'] = $apiUser;
 
         return $this;
     }
 
-    private function setSecretKey(null|string $secretKey): self
+    private function setSecretKey(null|string $secretKey): static
     {
         $this->fields['secretKey'] = $secretKey;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -236,7 +236,7 @@ class ApiKey implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -250,7 +250,7 @@ class ApiKey implements JsonSerializable
     /**
      * @param null|SelfLink[] $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 

@@ -42,7 +42,7 @@ class ZotapayCredentials implements JsonSerializable
         return $this->fields['endpointId'];
     }
 
-    public function setEndpointId(string $endpointId): self
+    public function setEndpointId(string $endpointId): static
     {
         $this->fields['endpointId'] = $endpointId;
 
@@ -54,7 +54,7 @@ class ZotapayCredentials implements JsonSerializable
         return $this->fields['merchantId'];
     }
 
-    public function setMerchantId(string $merchantId): self
+    public function setMerchantId(string $merchantId): static
     {
         $this->fields['merchantId'] = $merchantId;
 
@@ -66,7 +66,7 @@ class ZotapayCredentials implements JsonSerializable
         return $this->fields['merchantSecretKey'];
     }
 
-    public function setMerchantSecretKey(string $merchantSecretKey): self
+    public function setMerchantSecretKey(string $merchantSecretKey): static
     {
         $this->fields['merchantSecretKey'] = $merchantSecretKey;
 

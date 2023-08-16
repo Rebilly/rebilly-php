@@ -51,7 +51,7 @@ class AlternativeInstrument extends CommonAlternativeInstrument
         return $this->fields['customerId'];
     }
 
-    public function setCustomerId(string $customerId): self
+    public function setCustomerId(string $customerId): static
     {
         $this->fields['customerId'] = $customerId;
 
@@ -74,7 +74,7 @@ class AlternativeInstrument extends CommonAlternativeInstrument
     /**
      * @param null|array<string,string> $referenceData
      */
-    public function setReferenceData(null|array $referenceData): self
+    public function setReferenceData(null|array $referenceData): static
     {
         $this->fields['referenceData'] = $referenceData;
 
@@ -86,7 +86,7 @@ class AlternativeInstrument extends CommonAlternativeInstrument
         return $this->fields['riskMetadata'] ?? null;
     }
 
-    public function setRiskMetadata(null|RiskMetadata|array $riskMetadata): self
+    public function setRiskMetadata(null|RiskMetadata|array $riskMetadata): static
     {
         if ($riskMetadata !== null && !($riskMetadata instanceof RiskMetadata)) {
             $riskMetadata = RiskMetadata::from($riskMetadata);
@@ -138,7 +138,7 @@ class AlternativeInstrument extends CommonAlternativeInstrument
         return parent::jsonSerialize() + $data;
     }
 
-    private function setStickyGatewayAccountId(null|string $stickyGatewayAccountId): self
+    private function setStickyGatewayAccountId(null|string $stickyGatewayAccountId): static
     {
         $this->fields['stickyGatewayAccountId'] = $stickyGatewayAccountId;
 
@@ -148,7 +148,7 @@ class AlternativeInstrument extends CommonAlternativeInstrument
     /**
      * @param null|array<CustomerLink|SelfLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 
@@ -160,7 +160,7 @@ class AlternativeInstrument extends CommonAlternativeInstrument
     /**
      * @param null|array{customer:Customer} $embedded
      */
-    private function setEmbedded(null|array $embedded): self
+    private function setEmbedded(null|array $embedded): static
     {
         if ($embedded !== null) {
             $embedded['customer'] = isset($embedded['customer']) ? ($embedded['customer'] instanceof Customer ? $embedded['customer'] : Customer::from($embedded['customer'])) : null;

@@ -38,7 +38,7 @@ class SparkPay extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(SparkPayCredentials|array $credentials): self
+    public function setCredentials(SparkPayCredentials|array $credentials): static
     {
         if (!($credentials instanceof SparkPayCredentials)) {
             $credentials = SparkPayCredentials::from($credentials);

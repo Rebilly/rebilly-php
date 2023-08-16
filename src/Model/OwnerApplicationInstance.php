@@ -78,7 +78,7 @@ class OwnerApplicationInstance implements JsonSerializable
     /**
      * @param array<string,string> $settings
      */
-    public function setSettings(array $settings): self
+    public function setSettings(array $settings): static
     {
         $this->fields['settings'] = $settings;
 
@@ -144,14 +144,14 @@ class OwnerApplicationInstance implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    private function setStatus(null|string $status): self
+    private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -162,7 +162,7 @@ class OwnerApplicationInstance implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -176,7 +176,7 @@ class OwnerApplicationInstance implements JsonSerializable
     /**
      * @param null|array<SelfLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
 
@@ -185,14 +185,14 @@ class OwnerApplicationInstance implements JsonSerializable
         return $this;
     }
 
-    private function setOrganizationId(null|string $organizationId): self
+    private function setOrganizationId(null|string $organizationId): static
     {
         $this->fields['organizationId'] = $organizationId;
 
         return $this;
     }
 
-    private function setToken(null|string $token): self
+    private function setToken(null|string $token): static
     {
         $this->fields['token'] = $token;
 

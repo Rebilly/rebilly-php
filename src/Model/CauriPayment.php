@@ -38,7 +38,7 @@ class CauriPayment extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(CauriPaymentCredentials|array $credentials): self
+    public function setCredentials(CauriPaymentCredentials|array $credentials): static
     {
         if (!($credentials instanceof CauriPaymentCredentials)) {
             $credentials = CauriPaymentCredentials::from($credentials);

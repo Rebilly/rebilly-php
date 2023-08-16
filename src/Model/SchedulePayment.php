@@ -43,7 +43,7 @@ class SchedulePayment extends RuleAction
         return $this->fields['scheduleInstruction'];
     }
 
-    public function setScheduleInstruction(CommonScheduleInstruction|array $scheduleInstruction): self
+    public function setScheduleInstruction(CommonScheduleInstruction|array $scheduleInstruction): static
     {
         if (!($scheduleInstruction instanceof CommonScheduleInstruction)) {
             $scheduleInstruction = CommonScheduleInstruction::from($scheduleInstruction);
@@ -65,7 +65,7 @@ class SchedulePayment extends RuleAction
     /**
      * @psalm-param self::AMOUNT_POLICY_* $amountPolicy
      */
-    public function setAmountPolicy(string $amountPolicy): self
+    public function setAmountPolicy(string $amountPolicy): static
     {
         $this->fields['amountPolicy'] = $amountPolicy;
 

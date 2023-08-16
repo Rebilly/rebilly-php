@@ -62,7 +62,7 @@ abstract class CommonProduct implements JsonSerializable
         return $this->fields['name'];
     }
 
-    public function setName(string $name): self
+    public function setName(string $name): static
     {
         $this->fields['name'] = $name;
 
@@ -74,7 +74,7 @@ abstract class CommonProduct implements JsonSerializable
         return $this->fields['unitLabel'] ?? null;
     }
 
-    public function setUnitLabel(null|string $unitLabel): self
+    public function setUnitLabel(null|string $unitLabel): static
     {
         $this->fields['unitLabel'] = $unitLabel;
 
@@ -86,7 +86,7 @@ abstract class CommonProduct implements JsonSerializable
         return $this->fields['description'] ?? null;
     }
 
-    public function setDescription(null|string $description): self
+    public function setDescription(null|string $description): static
     {
         $this->fields['description'] = $description;
 
@@ -98,7 +98,7 @@ abstract class CommonProduct implements JsonSerializable
         return $this->fields['requiresShipping'] ?? null;
     }
 
-    public function setRequiresShipping(null|bool $requiresShipping): self
+    public function setRequiresShipping(null|bool $requiresShipping): static
     {
         $this->fields['requiresShipping'] = $requiresShipping;
 
@@ -116,7 +116,7 @@ abstract class CommonProduct implements JsonSerializable
     /**
      * @param null|string[] $options
      */
-    public function setOptions(null|array $options): self
+    public function setOptions(null|array $options): static
     {
         $options = $options !== null ? array_map(fn ($value) => $value ?? null, $options) : null;
 
@@ -130,7 +130,7 @@ abstract class CommonProduct implements JsonSerializable
         return $this->fields['customFields'] ?? null;
     }
 
-    public function setCustomFields(null|array $customFields): self
+    public function setCustomFields(null|array $customFields): static
     {
         $this->fields['customFields'] = $customFields;
 
@@ -181,14 +181,14 @@ abstract class CommonProduct implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -199,7 +199,7 @@ abstract class CommonProduct implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);

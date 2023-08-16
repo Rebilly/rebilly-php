@@ -70,7 +70,7 @@ class BBANInstrument extends BankAccountInstrument
     /**
      * @psalm-param self::ACCOUNT_NUMBER_TYPE_* $accountNumberType
      */
-    public function setAccountNumberType(string $accountNumberType): self
+    public function setAccountNumberType(string $accountNumberType): static
     {
         $this->fields['accountNumberType'] = $accountNumberType;
 
@@ -82,7 +82,7 @@ class BBANInstrument extends BankAccountInstrument
         return $this->fields['accountNumber'];
     }
 
-    public function setAccountNumber(string $accountNumber): self
+    public function setAccountNumber(string $accountNumber): static
     {
         $this->fields['accountNumber'] = $accountNumber;
 
@@ -94,7 +94,7 @@ class BBANInstrument extends BankAccountInstrument
         return $this->fields['routingNumber'];
     }
 
-    public function setRoutingNumber(string $routingNumber): self
+    public function setRoutingNumber(string $routingNumber): static
     {
         $this->fields['routingNumber'] = $routingNumber;
 
@@ -112,7 +112,7 @@ class BBANInstrument extends BankAccountInstrument
     /**
      * @psalm-param self::ACCOUNT_TYPE_* $accountType
      */
-    public function setAccountType(string $accountType): self
+    public function setAccountType(string $accountType): static
     {
         $this->fields['accountType'] = $accountType;
 
@@ -124,7 +124,7 @@ class BBANInstrument extends BankAccountInstrument
         return $this->fields['bic'] ?? null;
     }
 
-    public function setBic(null|string $bic): self
+    public function setBic(null|string $bic): static
     {
         $this->fields['bic'] = $bic;
 
@@ -136,7 +136,7 @@ class BBANInstrument extends BankAccountInstrument
         return $this->fields['bankName'] ?? null;
     }
 
-    public function setBankName(null|string $bankName): self
+    public function setBankName(null|string $bankName): static
     {
         $this->fields['bankName'] = $bankName;
 
@@ -176,7 +176,7 @@ class BBANInstrument extends BankAccountInstrument
         return parent::jsonSerialize() + $data;
     }
 
-    private function setLast4(null|string $last4): self
+    private function setLast4(null|string $last4): static
     {
         $this->fields['last4'] = $last4;
 

@@ -42,7 +42,7 @@ class SubscriptionCancellationReport implements JsonSerializable
     /**
      * @param null|SubscriptionCancellationReportData[] $data
      */
-    public function setData(null|array $data): self
+    public function setData(null|array $data): static
     {
         $data = $data !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SubscriptionCancellationReportData ? $value : SubscriptionCancellationReportData::from($value)) : null, $data) : null;
 

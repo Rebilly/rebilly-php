@@ -38,7 +38,7 @@ class Transactions extends DataExport
         return $this->fields['dateRange'] ?? null;
     }
 
-    public function setDateRange(null|DataExportDateRange|array $dateRange): self
+    public function setDateRange(null|DataExportDateRange|array $dateRange): static
     {
         if ($dateRange !== null && !($dateRange instanceof DataExportDateRange)) {
             $dateRange = DataExportDateRange::from($dateRange);

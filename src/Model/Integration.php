@@ -85,7 +85,7 @@ class Integration implements JsonSerializable
         return $data;
     }
 
-    private function setService(null|OAuth2CredentialService|string $service): self
+    private function setService(null|OAuth2CredentialService|string $service): static
     {
         if ($service !== null && !($service instanceof OAuth2CredentialService)) {
             $service = OAuth2CredentialService::from($service);
@@ -96,7 +96,7 @@ class Integration implements JsonSerializable
         return $this;
     }
 
-    private function setCount(null|int $count): self
+    private function setCount(null|int $count): static
     {
         $this->fields['count'] = $count;
 
@@ -106,7 +106,7 @@ class Integration implements JsonSerializable
     /**
      * @param null|IntegrationConfigurations[] $configurations
      */
-    private function setConfigurations(null|array $configurations): self
+    private function setConfigurations(null|array $configurations): static
     {
         $configurations = $configurations !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof IntegrationConfigurations ? $value : IntegrationConfigurations::from($value)) : null, $configurations) : null;
 
@@ -118,7 +118,7 @@ class Integration implements JsonSerializable
     /**
      * @param null|array<OAuth2ConnectLink|SelfLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 

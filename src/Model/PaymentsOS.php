@@ -38,7 +38,7 @@ class PaymentsOS extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(PaymentsOSCredentials|array $credentials): self
+    public function setCredentials(PaymentsOSCredentials|array $credentials): static
     {
         if (!($credentials instanceof PaymentsOSCredentials)) {
             $credentials = PaymentsOSCredentials::from($credentials);

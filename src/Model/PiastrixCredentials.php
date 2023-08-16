@@ -39,7 +39,7 @@ class PiastrixCredentials implements JsonSerializable
         return $this->fields['shopId'];
     }
 
-    public function setShopId(string $shopId): self
+    public function setShopId(string $shopId): static
     {
         $this->fields['shopId'] = $shopId;
 
@@ -51,7 +51,7 @@ class PiastrixCredentials implements JsonSerializable
         return $this->fields['secretKey'];
     }
 
-    public function setSecretKey(string $secretKey): self
+    public function setSecretKey(string $secretKey): static
     {
         $this->fields['secretKey'] = $secretKey;
 

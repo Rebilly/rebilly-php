@@ -38,7 +38,7 @@ class Pagsmile extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(PagsmileCredentials|array $credentials): self
+    public function setCredentials(PagsmileCredentials|array $credentials): static
     {
         if (!($credentials instanceof PagsmileCredentials)) {
             $credentials = PagsmileCredentials::from($credentials);

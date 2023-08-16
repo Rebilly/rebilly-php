@@ -68,7 +68,7 @@ class RefundTransaction extends BalanceTransaction
     /**
      * @param null|array<ParentLink|SelfLink|TransactionLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 
@@ -80,7 +80,7 @@ class RefundTransaction extends BalanceTransaction
     /**
      * @param null|array{transaction:BalanceTransaction,transaction:Transaction} $embedded
      */
-    private function setEmbedded(null|array $embedded): self
+    private function setEmbedded(null|array $embedded): static
     {
         if ($embedded !== null) {
             $embedded['transaction'] = isset($embedded['transaction']) ? ($embedded['transaction'] instanceof BalanceTransaction ? $embedded['transaction'] : BalanceTransaction::from($embedded['transaction'])) : null;

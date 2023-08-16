@@ -42,7 +42,7 @@ class ReadyToPayItems implements JsonSerializable
     /**
      * @param ReadyToPayItemsItems[] $items
      */
-    public function setItems(array $items): self
+    public function setItems(array $items): static
     {
         $items = array_map(fn ($value) => $value !== null ? ($value instanceof ReadyToPayItemsItems ? $value : ReadyToPayItemsItems::from($value)) : null, $items);
 

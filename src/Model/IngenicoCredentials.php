@@ -45,7 +45,7 @@ class IngenicoCredentials implements JsonSerializable
         return $this->fields['merchantId'];
     }
 
-    public function setMerchantId(string $merchantId): self
+    public function setMerchantId(string $merchantId): static
     {
         $this->fields['merchantId'] = $merchantId;
 
@@ -57,7 +57,7 @@ class IngenicoCredentials implements JsonSerializable
         return $this->fields['apiKeyId'];
     }
 
-    public function setApiKeyId(string $apiKeyId): self
+    public function setApiKeyId(string $apiKeyId): static
     {
         $this->fields['apiKeyId'] = $apiKeyId;
 
@@ -69,7 +69,7 @@ class IngenicoCredentials implements JsonSerializable
         return $this->fields['apiSecretKey'];
     }
 
-    public function setApiSecretKey(string $apiSecretKey): self
+    public function setApiSecretKey(string $apiSecretKey): static
     {
         $this->fields['apiSecretKey'] = $apiSecretKey;
 
@@ -81,7 +81,7 @@ class IngenicoCredentials implements JsonSerializable
         return $this->fields['skipFraudService'] ?? null;
     }
 
-    public function setSkipFraudService(null|bool $skipFraudService): self
+    public function setSkipFraudService(null|bool $skipFraudService): static
     {
         $this->fields['skipFraudService'] = $skipFraudService;
 

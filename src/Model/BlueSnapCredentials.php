@@ -45,7 +45,7 @@ class BlueSnapCredentials implements JsonSerializable
         return $this->fields['username'];
     }
 
-    public function setUsername(string $username): self
+    public function setUsername(string $username): static
     {
         $this->fields['username'] = $username;
 
@@ -57,7 +57,7 @@ class BlueSnapCredentials implements JsonSerializable
         return $this->fields['merchantId'] ?? null;
     }
 
-    public function setMerchantId(null|string $merchantId): self
+    public function setMerchantId(null|string $merchantId): static
     {
         $this->fields['merchantId'] = $merchantId;
 
@@ -69,7 +69,7 @@ class BlueSnapCredentials implements JsonSerializable
         return $this->fields['password'];
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password): static
     {
         $this->fields['password'] = $password;
 
@@ -81,7 +81,7 @@ class BlueSnapCredentials implements JsonSerializable
         return $this->fields['dataProtectionKey'] ?? null;
     }
 
-    public function setDataProtectionKey(null|string $dataProtectionKey): self
+    public function setDataProtectionKey(null|string $dataProtectionKey): static
     {
         $this->fields['dataProtectionKey'] = $dataProtectionKey;
 

@@ -49,7 +49,7 @@ class ShowEddSearchLogs extends TimelineAction
         return $this->fields['searchLogId'] ?? null;
     }
 
-    public function setSearchLogId(null|string $searchLogId): self
+    public function setSearchLogId(null|string $searchLogId): static
     {
         $this->fields['searchLogId'] = $searchLogId;
 
@@ -67,7 +67,7 @@ class ShowEddSearchLogs extends TimelineAction
     /**
      * @psalm-param self::TYPE_*|null $type
      */
-    public function setType(null|string $type): self
+    public function setType(null|string $type): static
     {
         $this->fields['type'] = $type;
 

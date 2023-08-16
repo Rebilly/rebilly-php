@@ -59,7 +59,7 @@ abstract class Discount implements JsonSerializable
         return $this->fields['context'] ?? null;
     }
 
-    public function setContext(null|DiscountContext|string $context): self
+    public function setContext(null|DiscountContext|string $context): static
     {
         if ($context !== null && !($context instanceof DiscountContext)) {
             $context = DiscountContext::from($context);
@@ -86,7 +86,7 @@ abstract class Discount implements JsonSerializable
     /**
      * @psalm-param self::TYPE_*|null $type
      */
-    private function setType(null|string $type): self
+    private function setType(null|string $type): static
     {
         $this->fields['type'] = $type;
 

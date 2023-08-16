@@ -39,7 +39,7 @@ class HistogramDataData implements JsonSerializable
         return $this->fields['date'] ?? null;
     }
 
-    public function setDate(null|string $date): self
+    public function setDate(null|string $date): static
     {
         $this->fields['date'] = $date;
 
@@ -51,7 +51,7 @@ class HistogramDataData implements JsonSerializable
         return $this->fields['value'] ?? null;
     }
 
-    public function setValue(null|float $value): self
+    public function setValue(null|float $value): static
     {
         $this->fields['value'] = $value;
 

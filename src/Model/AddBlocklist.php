@@ -57,7 +57,7 @@ class AddBlocklist extends RuleAction
     /**
      * @psalm-param self::TYPE_* $type
      */
-    public function setType(string $type): self
+    public function setType(string $type): static
     {
         $this->fields['type'] = $type;
 
@@ -69,7 +69,7 @@ class AddBlocklist extends RuleAction
         return $this->fields['ttl'] ?? null;
     }
 
-    public function setTtl(null|int $ttl): self
+    public function setTtl(null|int $ttl): static
     {
         $this->fields['ttl'] = $ttl;
 

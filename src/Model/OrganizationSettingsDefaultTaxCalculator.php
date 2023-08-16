@@ -49,7 +49,7 @@ class OrganizationSettingsDefaultTaxCalculator implements JsonSerializable
     /**
      * @psalm-param self::TYPE_* $type
      */
-    public function setType(string $type): self
+    public function setType(string $type): static
     {
         $this->fields['type'] = $type;
 
@@ -61,7 +61,7 @@ class OrganizationSettingsDefaultTaxCalculator implements JsonSerializable
         return $this->fields['rate'] ?? null;
     }
 
-    public function setRate(null|float|string $rate): self
+    public function setRate(null|float|string $rate): static
     {
         if (is_string($rate)) {
             $rate = (float) $rate;

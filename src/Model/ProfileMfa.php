@@ -61,7 +61,7 @@ class ProfileMfa implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    public function setStatus(null|string $status): self
+    public function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
@@ -79,7 +79,7 @@ class ProfileMfa implements JsonSerializable
     /**
      * @psalm-param self::TYPE_*|null $type
      */
-    public function setType(null|string $type): self
+    public function setType(null|string $type): static
     {
         $this->fields['type'] = $type;
 
@@ -91,7 +91,7 @@ class ProfileMfa implements JsonSerializable
         return $this->fields['lastAuthTime'] ?? null;
     }
 
-    public function setLastAuthTime(null|DateTimeImmutable|string $lastAuthTime): self
+    public function setLastAuthTime(null|DateTimeImmutable|string $lastAuthTime): static
     {
         if ($lastAuthTime !== null && !($lastAuthTime instanceof DateTimeImmutable)) {
             $lastAuthTime = new DateTimeImmutable($lastAuthTime);
@@ -132,7 +132,7 @@ class ProfileMfa implements JsonSerializable
     /**
      * @param null|array<EnrollmentLink|SelfLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 

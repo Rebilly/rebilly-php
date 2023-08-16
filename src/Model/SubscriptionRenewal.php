@@ -42,7 +42,7 @@ class SubscriptionRenewal implements JsonSerializable
     /**
      * @param null|SubscriptionRenewalData[] $data
      */
-    public function setData(null|array $data): self
+    public function setData(null|array $data): static
     {
         $data = $data !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SubscriptionRenewalData ? $value : SubscriptionRenewalData::from($value)) : null, $data) : null;
 

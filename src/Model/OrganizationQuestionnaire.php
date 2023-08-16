@@ -48,7 +48,7 @@ class OrganizationQuestionnaire implements JsonSerializable
         return $this->fields['role'] ?? null;
     }
 
-    public function setRole(null|string $role): self
+    public function setRole(null|string $role): static
     {
         $this->fields['role'] = $role;
 
@@ -60,7 +60,7 @@ class OrganizationQuestionnaire implements JsonSerializable
         return $this->fields['monthlyTransactions'] ?? null;
     }
 
-    public function setMonthlyTransactions(null|string $monthlyTransactions): self
+    public function setMonthlyTransactions(null|string $monthlyTransactions): static
     {
         $this->fields['monthlyTransactions'] = $monthlyTransactions;
 
@@ -78,7 +78,7 @@ class OrganizationQuestionnaire implements JsonSerializable
     /**
      * @param null|string[] $products
      */
-    public function setProducts(null|array $products): self
+    public function setProducts(null|array $products): static
     {
         $products = $products !== null ? array_map(fn ($value) => $value ?? null, $products) : null;
 
@@ -92,7 +92,7 @@ class OrganizationQuestionnaire implements JsonSerializable
         return $this->fields['integrationType'] ?? null;
     }
 
-    public function setIntegrationType(null|string $integrationType): self
+    public function setIntegrationType(null|string $integrationType): static
     {
         $this->fields['integrationType'] = $integrationType;
 
@@ -104,7 +104,7 @@ class OrganizationQuestionnaire implements JsonSerializable
         return $this->fields['launchTiming'] ?? null;
     }
 
-    public function setLaunchTiming(null|string $launchTiming): self
+    public function setLaunchTiming(null|string $launchTiming): static
     {
         $this->fields['launchTiming'] = $launchTiming;
 

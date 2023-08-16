@@ -38,7 +38,7 @@ class Dimoco extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(DimocoCredentials|array $credentials): self
+    public function setCredentials(DimocoCredentials|array $credentials): static
     {
         if (!($credentials instanceof DimocoCredentials)) {
             $credentials = DimocoCredentials::from($credentials);

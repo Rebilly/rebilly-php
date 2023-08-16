@@ -60,7 +60,7 @@ class KycSettingsAddressWeights implements JsonSerializable
         return $this->fields['firstName'] ?? null;
     }
 
-    public function setFirstName(null|int $firstName): self
+    public function setFirstName(null|int $firstName): static
     {
         $this->fields['firstName'] = $firstName;
 
@@ -72,7 +72,7 @@ class KycSettingsAddressWeights implements JsonSerializable
         return $this->fields['lastName'] ?? null;
     }
 
-    public function setLastName(null|int $lastName): self
+    public function setLastName(null|int $lastName): static
     {
         $this->fields['lastName'] = $lastName;
 
@@ -84,7 +84,7 @@ class KycSettingsAddressWeights implements JsonSerializable
         return $this->fields['line1'] ?? null;
     }
 
-    public function setLine1(null|int $line1): self
+    public function setLine1(null|int $line1): static
     {
         $this->fields['line1'] = $line1;
 
@@ -96,7 +96,7 @@ class KycSettingsAddressWeights implements JsonSerializable
         return $this->fields['city'] ?? null;
     }
 
-    public function setCity(null|int $city): self
+    public function setCity(null|int $city): static
     {
         $this->fields['city'] = $city;
 
@@ -108,7 +108,7 @@ class KycSettingsAddressWeights implements JsonSerializable
         return $this->fields['region'] ?? null;
     }
 
-    public function setRegion(null|int $region): self
+    public function setRegion(null|int $region): static
     {
         $this->fields['region'] = $region;
 
@@ -120,7 +120,7 @@ class KycSettingsAddressWeights implements JsonSerializable
         return $this->fields['postalCode'] ?? null;
     }
 
-    public function setPostalCode(null|int $postalCode): self
+    public function setPostalCode(null|int $postalCode): static
     {
         $this->fields['postalCode'] = $postalCode;
 
@@ -132,7 +132,7 @@ class KycSettingsAddressWeights implements JsonSerializable
         return $this->fields['date'] ?? null;
     }
 
-    public function setDate(null|int $date): self
+    public function setDate(null|int $date): static
     {
         $this->fields['date'] = $date;
 
@@ -144,7 +144,7 @@ class KycSettingsAddressWeights implements JsonSerializable
         return $this->fields['phone'] ?? null;
     }
 
-    public function setPhone(null|int $phone): self
+    public function setPhone(null|int $phone): static
     {
         $this->fields['phone'] = $phone;
 
@@ -156,7 +156,7 @@ class KycSettingsAddressWeights implements JsonSerializable
         return $this->fields['documentSubtype'] ?? null;
     }
 
-    public function setDocumentSubtype(null|int $documentSubtype): self
+    public function setDocumentSubtype(null|int $documentSubtype): static
     {
         $this->fields['documentSubtype'] = $documentSubtype;
 

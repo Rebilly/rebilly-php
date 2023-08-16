@@ -51,7 +51,7 @@ class ApiKeyScope implements JsonSerializable
     /**
      * @param null|string[] $organizationId
      */
-    public function setOrganizationId(null|array $organizationId): self
+    public function setOrganizationId(null|array $organizationId): static
     {
         $organizationId = $organizationId !== null ? array_map(fn ($value) => $value ?? null, $organizationId) : null;
 
@@ -71,7 +71,7 @@ class ApiKeyScope implements JsonSerializable
     /**
      * @param null|string[] $productId
      */
-    public function setProductId(null|array $productId): self
+    public function setProductId(null|array $productId): static
     {
         $productId = $productId !== null ? array_map(fn ($value) => $value ?? null, $productId) : null;
 
@@ -91,7 +91,7 @@ class ApiKeyScope implements JsonSerializable
     /**
      * @param null|string[] $planId
      */
-    public function setPlanId(null|array $planId): self
+    public function setPlanId(null|array $planId): static
     {
         $planId = $planId !== null ? array_map(fn ($value) => $value ?? null, $planId) : null;
 
@@ -111,7 +111,7 @@ class ApiKeyScope implements JsonSerializable
     /**
      * @param null|string[] $customFieldName
      */
-    public function setCustomFieldName(null|array $customFieldName): self
+    public function setCustomFieldName(null|array $customFieldName): static
     {
         $customFieldName = $customFieldName !== null ? array_map(fn ($value) => $value ?? null, $customFieldName) : null;
 

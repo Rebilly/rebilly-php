@@ -41,7 +41,7 @@ class MtaPay extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(MtaPayCredentials|array $credentials): self
+    public function setCredentials(MtaPayCredentials|array $credentials): static
     {
         if (!($credentials instanceof MtaPayCredentials)) {
             $credentials = MtaPayCredentials::from($credentials);
@@ -57,7 +57,7 @@ class MtaPay extends GatewayAccount
         return $this->fields['settings'];
     }
 
-    public function setSettings(MtaPaySettings|array $settings): self
+    public function setSettings(MtaPaySettings|array $settings): static
     {
         if (!($settings instanceof MtaPaySettings)) {
             $settings = MtaPaySettings::from($settings);

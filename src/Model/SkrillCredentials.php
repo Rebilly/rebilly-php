@@ -42,7 +42,7 @@ class SkrillCredentials implements JsonSerializable
         return $this->fields['accountEmail'];
     }
 
-    public function setAccountEmail(string $accountEmail): self
+    public function setAccountEmail(string $accountEmail): static
     {
         $this->fields['accountEmail'] = $accountEmail;
 
@@ -54,7 +54,7 @@ class SkrillCredentials implements JsonSerializable
         return $this->fields['secretWord'];
     }
 
-    public function setSecretWord(string $secretWord): self
+    public function setSecretWord(string $secretWord): static
     {
         $this->fields['secretWord'] = $secretWord;
 
@@ -66,7 +66,7 @@ class SkrillCredentials implements JsonSerializable
         return $this->fields['mqiPassword'] ?? null;
     }
 
-    public function setMqiPassword(null|string $mqiPassword): self
+    public function setMqiPassword(null|string $mqiPassword): static
     {
         $this->fields['mqiPassword'] = $mqiPassword;
 

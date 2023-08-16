@@ -42,7 +42,7 @@ class DataExportArguments implements JsonSerializable
         return $this->fields['filter'] ?? null;
     }
 
-    public function setFilter(null|string $filter): self
+    public function setFilter(null|string $filter): static
     {
         $this->fields['filter'] = $filter;
 
@@ -54,7 +54,7 @@ class DataExportArguments implements JsonSerializable
         return $this->fields['sort'] ?? null;
     }
 
-    public function setSort(null|string $sort): self
+    public function setSort(null|string $sort): static
     {
         $this->fields['sort'] = $sort;
 
@@ -66,7 +66,7 @@ class DataExportArguments implements JsonSerializable
         return $this->fields['q'] ?? null;
     }
 
-    public function setQ(null|string $q): self
+    public function setQ(null|string $q): static
     {
         $this->fields['q'] = $q;
 

@@ -54,7 +54,7 @@ class CommonCheckoutFormCustomization implements JsonSerializable
         return $this->fields['logoId'] ?? null;
     }
 
-    public function setLogoId(null|string $logoId): self
+    public function setLogoId(null|string $logoId): static
     {
         $this->fields['logoId'] = $logoId;
 
@@ -66,7 +66,7 @@ class CommonCheckoutFormCustomization implements JsonSerializable
         return $this->fields['summary'] ?? null;
     }
 
-    public function setSummary(null|string $summary): self
+    public function setSummary(null|string $summary): static
     {
         $this->fields['summary'] = $summary;
 
@@ -78,7 +78,7 @@ class CommonCheckoutFormCustomization implements JsonSerializable
         return $this->fields['buttonText'] ?? null;
     }
 
-    public function setButtonText(null|string $buttonText): self
+    public function setButtonText(null|string $buttonText): static
     {
         $this->fields['buttonText'] = $buttonText;
 
@@ -90,7 +90,7 @@ class CommonCheckoutFormCustomization implements JsonSerializable
         return $this->fields['colors'] ?? null;
     }
 
-    public function setColors(null|CommonCheckoutFormCustomizationColors|array $colors): self
+    public function setColors(null|CommonCheckoutFormCustomizationColors|array $colors): static
     {
         if ($colors !== null && !($colors instanceof CommonCheckoutFormCustomizationColors)) {
             $colors = CommonCheckoutFormCustomizationColors::from($colors);
@@ -106,7 +106,7 @@ class CommonCheckoutFormCustomization implements JsonSerializable
         return $this->fields['links'] ?? null;
     }
 
-    public function setLinks(null|CommonCheckoutFormCustomizationLinks|array $links): self
+    public function setLinks(null|CommonCheckoutFormCustomizationLinks|array $links): static
     {
         if ($links !== null && !($links instanceof CommonCheckoutFormCustomizationLinks)) {
             $links = CommonCheckoutFormCustomizationLinks::from($links);
@@ -122,7 +122,7 @@ class CommonCheckoutFormCustomization implements JsonSerializable
         return $this->fields['tracking'] ?? null;
     }
 
-    public function setTracking(null|CommonCheckoutFormCustomizationTracking|array $tracking): self
+    public function setTracking(null|CommonCheckoutFormCustomizationTracking|array $tracking): static
     {
         if ($tracking !== null && !($tracking instanceof CommonCheckoutFormCustomizationTracking)) {
             $tracking = CommonCheckoutFormCustomizationTracking::from($tracking);
@@ -144,7 +144,7 @@ class CommonCheckoutFormCustomization implements JsonSerializable
     /**
      * @param null|string[] $requiredAdditionalFields
      */
-    public function setRequiredAdditionalFields(null|array $requiredAdditionalFields): self
+    public function setRequiredAdditionalFields(null|array $requiredAdditionalFields): static
     {
         $requiredAdditionalFields = $requiredAdditionalFields !== null ? array_map(fn ($value) => $value ?? null, $requiredAdditionalFields) : null;
 

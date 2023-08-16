@@ -41,7 +41,7 @@ class InstaDebit extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(InstaDebitCredentials|array $credentials): self
+    public function setCredentials(InstaDebitCredentials|array $credentials): static
     {
         if (!($credentials instanceof InstaDebitCredentials)) {
             $credentials = InstaDebitCredentials::from($credentials);
@@ -57,7 +57,7 @@ class InstaDebit extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|InstaDebitSettings|array $settings): self
+    public function setSettings(null|InstaDebitSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof InstaDebitSettings)) {
             $settings = InstaDebitSettings::from($settings);

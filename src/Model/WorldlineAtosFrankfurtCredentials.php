@@ -39,7 +39,7 @@ class WorldlineAtosFrankfurtCredentials implements JsonSerializable
         return $this->fields['cardAcceptorIdCode'];
     }
 
-    public function setCardAcceptorIdCode(string $cardAcceptorIdCode): self
+    public function setCardAcceptorIdCode(string $cardAcceptorIdCode): static
     {
         $this->fields['cardAcceptorIdCode'] = $cardAcceptorIdCode;
 
@@ -51,7 +51,7 @@ class WorldlineAtosFrankfurtCredentials implements JsonSerializable
         return $this->fields['acquiringInstitutionIdentificationCode'];
     }
 
-    public function setAcquiringInstitutionIdentificationCode(string $acquiringInstitutionIdentificationCode): self
+    public function setAcquiringInstitutionIdentificationCode(string $acquiringInstitutionIdentificationCode): static
     {
         $this->fields['acquiringInstitutionIdentificationCode'] = $acquiringInstitutionIdentificationCode;
 

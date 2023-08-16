@@ -131,7 +131,7 @@ abstract class DataExport implements JsonSerializable
         return $this->fields['name'];
     }
 
-    public function setName(string $name): self
+    public function setName(string $name): static
     {
         $this->fields['name'] = $name;
 
@@ -157,7 +157,7 @@ abstract class DataExport implements JsonSerializable
     /**
      * @psalm-param self::FORMAT_* $format
      */
-    public function setFormat(string $format): self
+    public function setFormat(string $format): static
     {
         $this->fields['format'] = $format;
 
@@ -169,7 +169,7 @@ abstract class DataExport implements JsonSerializable
         return $this->fields['arguments'] ?? null;
     }
 
-    public function setArguments(null|DataExportArguments|array $arguments): self
+    public function setArguments(null|DataExportArguments|array $arguments): static
     {
         if ($arguments !== null && !($arguments instanceof DataExportArguments)) {
             $arguments = DataExportArguments::from($arguments);
@@ -191,7 +191,7 @@ abstract class DataExport implements JsonSerializable
     /**
      * @param null|string[] $emailNotification
      */
-    public function setEmailNotification(null|array $emailNotification): self
+    public function setEmailNotification(null|array $emailNotification): static
     {
         $emailNotification = $emailNotification !== null ? array_map(fn ($value) => $value ?? null, $emailNotification) : null;
 
@@ -211,7 +211,7 @@ abstract class DataExport implements JsonSerializable
     /**
      * @param null|string[] $fields
      */
-    public function setFields(null|array $fields): self
+    public function setFields(null|array $fields): static
     {
         $fields = $fields !== null ? array_map(fn ($value) => $value ?? null, $fields) : null;
 
@@ -225,7 +225,7 @@ abstract class DataExport implements JsonSerializable
         return $this->fields['recurring'] ?? null;
     }
 
-    public function setRecurring(null|DataExportRecurring|array $recurring): self
+    public function setRecurring(null|DataExportRecurring|array $recurring): static
     {
         if ($recurring !== null && !($recurring instanceof DataExportRecurring)) {
             $recurring = DataExportRecurring::from($recurring);
@@ -251,7 +251,7 @@ abstract class DataExport implements JsonSerializable
         return $this->fields['scheduledTime'] ?? null;
     }
 
-    public function setScheduledTime(null|DateTimeImmutable|string $scheduledTime): self
+    public function setScheduledTime(null|DateTimeImmutable|string $scheduledTime): static
     {
         if ($scheduledTime !== null && !($scheduledTime instanceof DateTimeImmutable)) {
             $scheduledTime = new DateTimeImmutable($scheduledTime);
@@ -340,7 +340,7 @@ abstract class DataExport implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -350,28 +350,28 @@ abstract class DataExport implements JsonSerializable
     /**
      * @psalm-param self::RESOURCE_* $resource
      */
-    private function setResource(string $resource): self
+    private function setResource(string $resource): static
     {
         $this->fields['resource'] = $resource;
 
         return $this;
     }
 
-    private function setUserId(null|string $userId): self
+    private function setUserId(null|string $userId): static
     {
         $this->fields['userId'] = $userId;
 
         return $this;
     }
 
-    private function setRecordCount(null|int $recordCount): self
+    private function setRecordCount(null|int $recordCount): static
     {
         $this->fields['recordCount'] = $recordCount;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -382,7 +382,7 @@ abstract class DataExport implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -396,7 +396,7 @@ abstract class DataExport implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    private function setStatus(null|string $status): self
+    private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
@@ -406,7 +406,7 @@ abstract class DataExport implements JsonSerializable
     /**
      * @param null|array<LinkFileDownload|LinkSelf|LinkSignedLink|LinkUser> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 

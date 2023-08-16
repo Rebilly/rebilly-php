@@ -46,7 +46,7 @@ class Unrestricted implements JsonSerializable
     /**
      * @psalm-param self::MODE_*|null $mode
      */
-    public function setMode(null|string $mode): self
+    public function setMode(null|string $mode): static
     {
         $this->fields['mode'] = $mode;
 

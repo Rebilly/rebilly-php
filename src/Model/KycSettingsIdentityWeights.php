@@ -72,7 +72,7 @@ class KycSettingsIdentityWeights implements JsonSerializable
         return $this->fields['containsImage'] ?? null;
     }
 
-    public function setContainsImage(null|int $containsImage): self
+    public function setContainsImage(null|int $containsImage): static
     {
         $this->fields['containsImage'] = $containsImage;
 
@@ -84,7 +84,7 @@ class KycSettingsIdentityWeights implements JsonSerializable
         return $this->fields['isIdentityDocument'] ?? null;
     }
 
-    public function setIsIdentityDocument(null|int $isIdentityDocument): self
+    public function setIsIdentityDocument(null|int $isIdentityDocument): static
     {
         $this->fields['isIdentityDocument'] = $isIdentityDocument;
 
@@ -96,7 +96,7 @@ class KycSettingsIdentityWeights implements JsonSerializable
         return $this->fields['isPublishedOnline'] ?? null;
     }
 
-    public function setIsPublishedOnline(null|int $isPublishedOnline): self
+    public function setIsPublishedOnline(null|int $isPublishedOnline): static
     {
         $this->fields['isPublishedOnline'] = $isPublishedOnline;
 
@@ -108,7 +108,7 @@ class KycSettingsIdentityWeights implements JsonSerializable
         return $this->fields['firstName'] ?? null;
     }
 
-    public function setFirstName(null|int $firstName): self
+    public function setFirstName(null|int $firstName): static
     {
         $this->fields['firstName'] = $firstName;
 
@@ -120,7 +120,7 @@ class KycSettingsIdentityWeights implements JsonSerializable
         return $this->fields['lastName'] ?? null;
     }
 
-    public function setLastName(null|int $lastName): self
+    public function setLastName(null|int $lastName): static
     {
         $this->fields['lastName'] = $lastName;
 
@@ -132,7 +132,7 @@ class KycSettingsIdentityWeights implements JsonSerializable
         return $this->fields['expirationDate'] ?? null;
     }
 
-    public function setExpirationDate(null|int $expirationDate): self
+    public function setExpirationDate(null|int $expirationDate): static
     {
         $this->fields['expirationDate'] = $expirationDate;
 
@@ -144,7 +144,7 @@ class KycSettingsIdentityWeights implements JsonSerializable
         return $this->fields['dateOfBirth'] ?? null;
     }
 
-    public function setDateOfBirth(null|int $dateOfBirth): self
+    public function setDateOfBirth(null|int $dateOfBirth): static
     {
         $this->fields['dateOfBirth'] = $dateOfBirth;
 
@@ -156,7 +156,7 @@ class KycSettingsIdentityWeights implements JsonSerializable
         return $this->fields['matchesDateOfBirth'] ?? null;
     }
 
-    public function setMatchesDateOfBirth(null|int $matchesDateOfBirth): self
+    public function setMatchesDateOfBirth(null|int $matchesDateOfBirth): static
     {
         $this->fields['matchesDateOfBirth'] = $matchesDateOfBirth;
 
@@ -168,7 +168,7 @@ class KycSettingsIdentityWeights implements JsonSerializable
         return $this->fields['issueDate'] ?? null;
     }
 
-    public function setIssueDate(null|int $issueDate): self
+    public function setIssueDate(null|int $issueDate): static
     {
         $this->fields['issueDate'] = $issueDate;
 
@@ -180,7 +180,7 @@ class KycSettingsIdentityWeights implements JsonSerializable
         return $this->fields['hasMinimalAge'] ?? null;
     }
 
-    public function setHasMinimalAge(null|int $hasMinimalAge): self
+    public function setHasMinimalAge(null|int $hasMinimalAge): static
     {
         $this->fields['hasMinimalAge'] = $hasMinimalAge;
 
@@ -192,7 +192,7 @@ class KycSettingsIdentityWeights implements JsonSerializable
         return $this->fields['hasMatchingFaceProof'] ?? null;
     }
 
-    public function setHasMatchingFaceProof(null|int $hasMatchingFaceProof): self
+    public function setHasMatchingFaceProof(null|int $hasMatchingFaceProof): static
     {
         $this->fields['hasMatchingFaceProof'] = $hasMatchingFaceProof;
 
@@ -204,7 +204,7 @@ class KycSettingsIdentityWeights implements JsonSerializable
         return $this->fields['nationality'] ?? null;
     }
 
-    public function setNationality(null|int $nationality): self
+    public function setNationality(null|int $nationality): static
     {
         $this->fields['nationality'] = $nationality;
 
@@ -216,7 +216,7 @@ class KycSettingsIdentityWeights implements JsonSerializable
         return $this->fields['documentSubtype'] ?? null;
     }
 
-    public function setDocumentSubtype(null|int $documentSubtype): self
+    public function setDocumentSubtype(null|int $documentSubtype): static
     {
         $this->fields['documentSubtype'] = $documentSubtype;
 

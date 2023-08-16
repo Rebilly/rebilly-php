@@ -39,7 +39,7 @@ class RealtimeCredentials implements JsonSerializable
         return $this->fields['clientId'];
     }
 
-    public function setClientId(string $clientId): self
+    public function setClientId(string $clientId): static
     {
         $this->fields['clientId'] = $clientId;
 
@@ -51,7 +51,7 @@ class RealtimeCredentials implements JsonSerializable
         return $this->fields['secretWord'];
     }
 
-    public function setSecretWord(string $secretWord): self
+    public function setSecretWord(string $secretWord): static
     {
         $this->fields['secretWord'] = $secretWord;
 

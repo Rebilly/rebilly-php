@@ -38,7 +38,7 @@ class Trustly extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(TrustlyCredentials|array $credentials): self
+    public function setCredentials(TrustlyCredentials|array $credentials): static
     {
         if (!($credentials instanceof TrustlyCredentials)) {
             $credentials = TrustlyCredentials::from($credentials);

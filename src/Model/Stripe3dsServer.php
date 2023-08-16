@@ -38,7 +38,7 @@ class Stripe3dsServer extends Stripe3dsServers
         return $this->fields['enforceThreeDSecure'] ?? null;
     }
 
-    public function setEnforceThreeDSecure(null|bool $enforceThreeDSecure): self
+    public function setEnforceThreeDSecure(null|bool $enforceThreeDSecure): static
     {
         $this->fields['enforceThreeDSecure'] = $enforceThreeDSecure;
 

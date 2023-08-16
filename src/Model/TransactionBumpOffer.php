@@ -51,7 +51,7 @@ class TransactionBumpOffer implements JsonSerializable
         return $this->fields['order'] ?? null;
     }
 
-    public function setOrder(null|Money|array $order): self
+    public function setOrder(null|Money|array $order): static
     {
         if ($order !== null && !($order instanceof Money)) {
             $order = Money::from($order);
@@ -67,7 +67,7 @@ class TransactionBumpOffer implements JsonSerializable
         return $this->fields['version'] ?? null;
     }
 
-    public function setVersion(null|string $version): self
+    public function setVersion(null|string $version): static
     {
         $this->fields['version'] = $version;
 
@@ -79,7 +79,7 @@ class TransactionBumpOffer implements JsonSerializable
         return $this->fields['language'] ?? null;
     }
 
-    public function setLanguage(null|string $language): self
+    public function setLanguage(null|string $language): static
     {
         $this->fields['language'] = $language;
 
@@ -91,7 +91,7 @@ class TransactionBumpOffer implements JsonSerializable
         return $this->fields['outcome'] ?? null;
     }
 
-    public function setOutcome(null|PurchaseBumpStatus|string $outcome): self
+    public function setOutcome(null|PurchaseBumpStatus|string $outcome): static
     {
         if ($outcome !== null && !($outcome instanceof PurchaseBumpStatus)) {
             $outcome = PurchaseBumpStatus::from($outcome);
@@ -113,7 +113,7 @@ class TransactionBumpOffer implements JsonSerializable
     /**
      * @param null|PurchaseBumpOfferList[] $presentedOffers
      */
-    public function setPresentedOffers(null|array $presentedOffers): self
+    public function setPresentedOffers(null|array $presentedOffers): static
     {
         $presentedOffers = $presentedOffers !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof PurchaseBumpOfferList ? $value : PurchaseBumpOfferList::from($value)) : null, $presentedOffers) : null;
 
@@ -127,7 +127,7 @@ class TransactionBumpOffer implements JsonSerializable
         return $this->fields['selectedOffer'] ?? null;
     }
 
-    public function setSelectedOffer(null|PurchaseBumpOffer|array $selectedOffer): self
+    public function setSelectedOffer(null|PurchaseBumpOffer|array $selectedOffer): static
     {
         if ($selectedOffer !== null && !($selectedOffer instanceof PurchaseBumpOffer)) {
             $selectedOffer = PurchaseBumpOffer::from($selectedOffer);

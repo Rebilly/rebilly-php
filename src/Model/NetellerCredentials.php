@@ -39,7 +39,7 @@ class NetellerCredentials implements JsonSerializable
         return $this->fields['paysafePaymentsApiUsername'];
     }
 
-    public function setPaysafePaymentsApiUsername(string $paysafePaymentsApiUsername): self
+    public function setPaysafePaymentsApiUsername(string $paysafePaymentsApiUsername): static
     {
         $this->fields['paysafePaymentsApiUsername'] = $paysafePaymentsApiUsername;
 
@@ -51,7 +51,7 @@ class NetellerCredentials implements JsonSerializable
         return $this->fields['paysafePaymentsApiPassword'];
     }
 
-    public function setPaysafePaymentsApiPassword(string $paysafePaymentsApiPassword): self
+    public function setPaysafePaymentsApiPassword(string $paysafePaymentsApiPassword): static
     {
         $this->fields['paysafePaymentsApiPassword'] = $paysafePaymentsApiPassword;
 

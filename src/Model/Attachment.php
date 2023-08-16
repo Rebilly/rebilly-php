@@ -100,7 +100,7 @@ class Attachment implements JsonSerializable
         return $this->fields['fileId'];
     }
 
-    public function setFileId(string $fileId): self
+    public function setFileId(string $fileId): static
     {
         $this->fields['fileId'] = $fileId;
 
@@ -118,7 +118,7 @@ class Attachment implements JsonSerializable
     /**
      * @psalm-param self::RELATED_TYPE_* $relatedType
      */
-    public function setRelatedType(string $relatedType): self
+    public function setRelatedType(string $relatedType): static
     {
         $this->fields['relatedType'] = $relatedType;
 
@@ -130,7 +130,7 @@ class Attachment implements JsonSerializable
         return $this->fields['relatedId'];
     }
 
-    public function setRelatedId(string $relatedId): self
+    public function setRelatedId(string $relatedId): static
     {
         $this->fields['relatedId'] = $relatedId;
 
@@ -142,7 +142,7 @@ class Attachment implements JsonSerializable
         return $this->fields['name'] ?? null;
     }
 
-    public function setName(null|string $name): self
+    public function setName(null|string $name): static
     {
         $this->fields['name'] = $name;
 
@@ -154,7 +154,7 @@ class Attachment implements JsonSerializable
         return $this->fields['description'] ?? null;
     }
 
-    public function setDescription(null|string $description): self
+    public function setDescription(null|string $description): static
     {
         $this->fields['description'] = $description;
 
@@ -224,14 +224,14 @@ class Attachment implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -242,7 +242,7 @@ class Attachment implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);
@@ -256,7 +256,7 @@ class Attachment implements JsonSerializable
     /**
      * @param null|array<AttachmentResourceLink|FileLink|SelfLink> $links
      */
-    private function setLinks(null|array $links): self
+    private function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
 
@@ -268,7 +268,7 @@ class Attachment implements JsonSerializable
     /**
      * @param null|array{file:File} $embedded
      */
-    private function setEmbedded(null|array $embedded): self
+    private function setEmbedded(null|array $embedded): static
     {
         if ($embedded !== null) {
             $embedded['file'] = isset($embedded['file']) ? ($embedded['file'] instanceof File ? $embedded['file'] : File::from($embedded['file'])) : null;

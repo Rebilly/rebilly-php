@@ -38,7 +38,7 @@ class CancelScheduledPayments extends RuleAction
         return $this->fields['skipStartedServicePeriod'] ?? null;
     }
 
-    public function setSkipStartedServicePeriod(null|bool $skipStartedServicePeriod): self
+    public function setSkipStartedServicePeriod(null|bool $skipStartedServicePeriod): static
     {
         $this->fields['skipStartedServicePeriod'] = $skipStartedServicePeriod;
 

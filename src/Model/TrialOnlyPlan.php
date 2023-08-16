@@ -47,7 +47,7 @@ class TrialOnlyPlan extends CommonPlan
     /**
      * @param array{price:float,period:PlanPeriod} $trial
      */
-    public function setTrial(array $trial): self
+    public function setTrial(array $trial): static
     {
         if (!isset($trial['price'])) {
             throw new InvalidArgumentException('Property \'trial.price\' must be set.');
@@ -64,7 +64,7 @@ class TrialOnlyPlan extends CommonPlan
         return $this->fields['invoiceTimeShift'] ?? null;
     }
 
-    public function setInvoiceTimeShift(null|InvoiceTimeShift|array $invoiceTimeShift): self
+    public function setInvoiceTimeShift(null|InvoiceTimeShift|array $invoiceTimeShift): static
     {
         if ($invoiceTimeShift !== null && !($invoiceTimeShift instanceof InvoiceTimeShift)) {
             $invoiceTimeShift = InvoiceTimeShift::from($invoiceTimeShift);

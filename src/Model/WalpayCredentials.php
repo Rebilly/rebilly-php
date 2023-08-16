@@ -39,7 +39,7 @@ class WalpayCredentials implements JsonSerializable
         return $this->fields['merchantName'];
     }
 
-    public function setMerchantName(string $merchantName): self
+    public function setMerchantName(string $merchantName): static
     {
         $this->fields['merchantName'] = $merchantName;
 
@@ -51,7 +51,7 @@ class WalpayCredentials implements JsonSerializable
         return $this->fields['merchantPin'];
     }
 
-    public function setMerchantPin(string $merchantPin): self
+    public function setMerchantPin(string $merchantPin): static
     {
         $this->fields['merchantPin'] = $merchantPin;
 

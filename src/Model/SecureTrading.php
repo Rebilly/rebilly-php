@@ -41,7 +41,7 @@ class SecureTrading extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(SecureTradingCredentials|array $credentials): self
+    public function setCredentials(SecureTradingCredentials|array $credentials): static
     {
         if (!($credentials instanceof SecureTradingCredentials)) {
             $credentials = SecureTradingCredentials::from($credentials);
@@ -57,7 +57,7 @@ class SecureTrading extends GatewayAccount
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|SecureTrading3dsServers|array $threeDSecureServer): self
+    public function setThreeDSecureServer(null|SecureTrading3dsServers|array $threeDSecureServer): static
     {
         if ($threeDSecureServer !== null && !($threeDSecureServer instanceof SecureTrading3dsServers)) {
             $threeDSecureServer = SecureTrading3dsServers::from($threeDSecureServer);

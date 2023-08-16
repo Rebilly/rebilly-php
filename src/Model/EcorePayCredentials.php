@@ -39,7 +39,7 @@ class EcorePayCredentials implements JsonSerializable
         return $this->fields['accountId'];
     }
 
-    public function setAccountId(string $accountId): self
+    public function setAccountId(string $accountId): static
     {
         $this->fields['accountId'] = $accountId;
 
@@ -51,7 +51,7 @@ class EcorePayCredentials implements JsonSerializable
         return $this->fields['accountAuth'];
     }
 
-    public function setAccountAuth(string $accountAuth): self
+    public function setAccountAuth(string $accountAuth): static
     {
         $this->fields['accountAuth'] = $accountAuth;
 

@@ -71,7 +71,7 @@ class ShippingRate implements JsonSerializable
         return $this->fields['name'];
     }
 
-    public function setName(string $name): self
+    public function setName(string $name): static
     {
         $this->fields['name'] = $name;
 
@@ -83,7 +83,7 @@ class ShippingRate implements JsonSerializable
         return $this->fields['descriptions'] ?? null;
     }
 
-    public function setDescriptions(null|string $descriptions): self
+    public function setDescriptions(null|string $descriptions): static
     {
         $this->fields['descriptions'] = $descriptions;
 
@@ -95,7 +95,7 @@ class ShippingRate implements JsonSerializable
         return $this->fields['price'];
     }
 
-    public function setPrice(float|string $price): self
+    public function setPrice(float|string $price): static
     {
         if (is_string($price)) {
             $price = (float) $price;
@@ -111,7 +111,7 @@ class ShippingRate implements JsonSerializable
         return $this->fields['currency'];
     }
 
-    public function setCurrency(string $currency): self
+    public function setCurrency(string $currency): static
     {
         $this->fields['currency'] = $currency;
 
@@ -123,7 +123,7 @@ class ShippingRate implements JsonSerializable
         return $this->fields['filter'] ?? null;
     }
 
-    public function setFilter(null|string $filter): self
+    public function setFilter(null|string $filter): static
     {
         $this->fields['filter'] = $filter;
 
@@ -141,7 +141,7 @@ class ShippingRate implements JsonSerializable
     /**
      * @psalm-param self::STATUS_*|null $status
      */
-    public function setStatus(null|string $status): self
+    public function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
 
@@ -192,14 +192,14 @@ class ShippingRate implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): self
+    private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): self
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
             $createdTime = new DateTimeImmutable($createdTime);
@@ -210,7 +210,7 @@ class ShippingRate implements JsonSerializable
         return $this;
     }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): self
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
     {
         if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
             $updatedTime = new DateTimeImmutable($updatedTime);

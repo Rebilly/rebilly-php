@@ -36,7 +36,7 @@ class ProofOfCreditFileKycDocumentDocumentMatches implements JsonSerializable
         return $this->fields['data'] ?? null;
     }
 
-    public function setData(null|CreditFileMatches|array $data): self
+    public function setData(null|CreditFileMatches|array $data): static
     {
         if ($data !== null && !($data instanceof CreditFileMatches)) {
             $data = CreditFileMatches::from($data);

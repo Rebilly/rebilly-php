@@ -41,7 +41,7 @@ class Paysafe extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(PaysafeCredentials|array $credentials): self
+    public function setCredentials(PaysafeCredentials|array $credentials): static
     {
         if (!($credentials instanceof PaysafeCredentials)) {
             $credentials = PaysafeCredentials::from($credentials);
@@ -57,7 +57,7 @@ class Paysafe extends GatewayAccount
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|Paysafe3dsServers|array $threeDSecureServer): self
+    public function setThreeDSecureServer(null|Paysafe3dsServers|array $threeDSecureServer): static
     {
         if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Paysafe3dsServers)) {
             $threeDSecureServer = Paysafe3dsServers::from($threeDSecureServer);

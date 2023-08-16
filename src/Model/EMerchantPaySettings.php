@@ -36,7 +36,7 @@ class EMerchantPaySettings implements JsonSerializable
         return $this->fields['useGenesisPlatform'] ?? null;
     }
 
-    public function setUseGenesisPlatform(null|bool $useGenesisPlatform): self
+    public function setUseGenesisPlatform(null|bool $useGenesisPlatform): static
     {
         $this->fields['useGenesisPlatform'] = $useGenesisPlatform;
 

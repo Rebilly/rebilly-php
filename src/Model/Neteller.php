@@ -41,7 +41,7 @@ class Neteller extends GatewayAccount
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(NetellerCredentials|array $credentials): self
+    public function setCredentials(NetellerCredentials|array $credentials): static
     {
         if (!($credentials instanceof NetellerCredentials)) {
             $credentials = NetellerCredentials::from($credentials);
@@ -57,7 +57,7 @@ class Neteller extends GatewayAccount
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|NetellerSettings|array $settings): self
+    public function setSettings(null|NetellerSettings|array $settings): static
     {
         if ($settings !== null && !($settings instanceof NetellerSettings)) {
             $settings = NetellerSettings::from($settings);

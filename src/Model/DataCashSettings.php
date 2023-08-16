@@ -39,7 +39,7 @@ class DataCashSettings implements JsonSerializable
         return $this->fields['policy'] ?? null;
     }
 
-    public function setPolicy(null|int $policy): self
+    public function setPolicy(null|int $policy): static
     {
         $this->fields['policy'] = $policy;
 
@@ -51,7 +51,7 @@ class DataCashSettings implements JsonSerializable
         return $this->fields['delay'] ?? null;
     }
 
-    public function setDelay(null|int $delay): self
+    public function setDelay(null|int $delay): static
     {
         $this->fields['delay'] = $delay;
 

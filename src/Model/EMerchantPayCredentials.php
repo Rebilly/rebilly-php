@@ -48,7 +48,7 @@ class EMerchantPayCredentials implements JsonSerializable
         return $this->fields['clientId'] ?? null;
     }
 
-    public function setClientId(null|string $clientId): self
+    public function setClientId(null|string $clientId): static
     {
         $this->fields['clientId'] = $clientId;
 
@@ -60,7 +60,7 @@ class EMerchantPayCredentials implements JsonSerializable
         return $this->fields['apiKey'] ?? null;
     }
 
-    public function setApiKey(null|string $apiKey): self
+    public function setApiKey(null|string $apiKey): static
     {
         $this->fields['apiKey'] = $apiKey;
 
@@ -72,7 +72,7 @@ class EMerchantPayCredentials implements JsonSerializable
         return $this->fields['username'] ?? null;
     }
 
-    public function setUsername(null|string $username): self
+    public function setUsername(null|string $username): static
     {
         $this->fields['username'] = $username;
 
@@ -84,7 +84,7 @@ class EMerchantPayCredentials implements JsonSerializable
         return $this->fields['token'] ?? null;
     }
 
-    public function setToken(null|string $token): self
+    public function setToken(null|string $token): static
     {
         $this->fields['token'] = $token;
 
@@ -96,7 +96,7 @@ class EMerchantPayCredentials implements JsonSerializable
         return $this->fields['password'] ?? null;
     }
 
-    public function setPassword(null|string $password): self
+    public function setPassword(null|string $password): static
     {
         $this->fields['password'] = $password;
 

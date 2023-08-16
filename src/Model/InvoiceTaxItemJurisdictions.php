@@ -79,28 +79,28 @@ class InvoiceTaxItemJurisdictions implements JsonSerializable
         return $data;
     }
 
-    private function setCountry(null|string $country): self
+    private function setCountry(null|string $country): static
     {
         $this->fields['country'] = $country;
 
         return $this;
     }
 
-    private function setState(null|string $state): self
+    private function setState(null|string $state): static
     {
         $this->fields['state'] = $state;
 
         return $this;
     }
 
-    private function setCounty(null|string $county): self
+    private function setCounty(null|string $county): static
     {
         $this->fields['county'] = $county;
 
         return $this;
     }
 
-    private function setCity(null|string $city): self
+    private function setCity(null|string $city): static
     {
         $this->fields['city'] = $city;
 
