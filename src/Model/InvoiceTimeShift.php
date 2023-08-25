@@ -34,15 +34,15 @@ class InvoiceTimeShift implements JsonSerializable
         return new self($data);
     }
 
-    public function getIssueTimeShift(): ?IssueTimeShiftInstruction
+    public function getIssueTimeShift(): ?InvoiceTimeShiftIssueTimeShift
     {
         return $this->fields['issueTimeShift'] ?? null;
     }
 
-    public function setIssueTimeShift(null|IssueTimeShiftInstruction|array $issueTimeShift): static
+    public function setIssueTimeShift(null|InvoiceTimeShiftIssueTimeShift|array $issueTimeShift): static
     {
-        if ($issueTimeShift !== null && !($issueTimeShift instanceof IssueTimeShiftInstruction)) {
-            $issueTimeShift = IssueTimeShiftInstruction::from($issueTimeShift);
+        if ($issueTimeShift !== null && !($issueTimeShift instanceof InvoiceTimeShiftIssueTimeShift)) {
+            $issueTimeShift = InvoiceTimeShiftIssueTimeShift::from($issueTimeShift);
         }
 
         $this->fields['issueTimeShift'] = $issueTimeShift;
@@ -50,15 +50,15 @@ class InvoiceTimeShift implements JsonSerializable
         return $this;
     }
 
-    public function getDueTimeShift(): ?DueTimeShiftInstruction
+    public function getDueTimeShift(): ?InvoiceTimeShiftDueTimeShift
     {
         return $this->fields['dueTimeShift'] ?? null;
     }
 
-    public function setDueTimeShift(null|DueTimeShiftInstruction|array $dueTimeShift): static
+    public function setDueTimeShift(null|InvoiceTimeShiftDueTimeShift|array $dueTimeShift): static
     {
-        if ($dueTimeShift !== null && !($dueTimeShift instanceof DueTimeShiftInstruction)) {
-            $dueTimeShift = DueTimeShiftInstruction::from($dueTimeShift);
+        if ($dueTimeShift !== null && !($dueTimeShift instanceof InvoiceTimeShiftDueTimeShift)) {
+            $dueTimeShift = InvoiceTimeShiftDueTimeShift::from($dueTimeShift);
         }
 
         $this->fields['dueTimeShift'] = $dueTimeShift;

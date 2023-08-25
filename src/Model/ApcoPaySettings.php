@@ -53,17 +53,11 @@ class ApcoPaySettings implements JsonSerializable
         return new self($data);
     }
 
-    /**
-     * @psalm-return self::METHOD_* $method
-     */
     public function getMethod(): string
     {
         return $this->fields['method'];
     }
 
-    /**
-     * @psalm-param self::METHOD_* $method
-     */
     public function setMethod(string $method): static
     {
         $this->fields['method'] = $method;

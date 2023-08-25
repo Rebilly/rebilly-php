@@ -34,17 +34,13 @@ class KycDocumentRejection implements JsonSerializable
         return new self($data);
     }
 
-    public function getType(): ?KycDocumentRejectionReasonTypes
+    public function getType(): ?string
     {
         return $this->fields['type'] ?? null;
     }
 
-    public function setType(null|KycDocumentRejectionReasonTypes|string $type): static
+    public function setType(null|string $type): static
     {
-        if ($type !== null && !($type instanceof KycDocumentRejectionReasonTypes)) {
-            $type = KycDocumentRejectionReasonTypes::from($type);
-        }
-
         $this->fields['type'] = $type;
 
         return $this;
@@ -66,7 +62,7 @@ class KycDocumentRejection implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('type', $this->fields)) {
-            $data['type'] = $this->fields['type']?->value;
+            $data['type'] = $this->fields['type'];
         }
         if (array_key_exists('message', $this->fields)) {
             $data['message'] = $this->fields['message'];

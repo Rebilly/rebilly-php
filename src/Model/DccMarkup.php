@@ -40,11 +40,14 @@ class DccMarkup implements JsonSerializable
     }
 
     /**
-     * @param null|DccMarkupData[] $data
+     * @param null|array[]|DccMarkupData[] $data
      */
     public function setData(null|array $data): static
     {
-        $data = $data !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof DccMarkupData ? $value : DccMarkupData::from($value)) : null, $data) : null;
+        $data = $data !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof DccMarkupData ? $value : DccMarkupData::from($value)) : null,
+            $data,
+        ) : null;
 
         $this->fields['data'] = $data;
 

@@ -65,7 +65,7 @@ class RuleSetHistoryItem implements JsonSerializable
     }
 
     /**
-     * @return null|array<RuleSetHistoryLink|RuleSetVersionLink|SelfLink>
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
@@ -114,11 +114,14 @@ class RuleSetHistoryItem implements JsonSerializable
     }
 
     /**
-     * @param null|array<RuleSetHistoryLink|RuleSetVersionLink|SelfLink> $links
+     * @param null|array[]|ResourceLink[] $links
      */
     private function setLinks(null|array $links): static
     {
-        $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
+        $links = $links !== null ? array_map(
+            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+            $links,
+        ) : null;
 
         $this->fields['_links'] = $links;
 

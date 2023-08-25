@@ -97,17 +97,11 @@ class TransactionQuery implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-return self::RESULT_*|null $result
-     */
     public function getResult(): ?string
     {
         return $this->fields['result'] ?? null;
     }
 
-    /**
-     * @psalm-return self::STATUS_*|null $status
-     */
     public function getStatus(): ?string
     {
         return $this->fields['status'] ?? null;
@@ -121,6 +115,13 @@ class TransactionQuery implements JsonSerializable
     public function getCurrency(): ?string
     {
         return $this->fields['currency'] ?? null;
+    }
+
+    public function setCurrency(null|string $currency): static
+    {
+        $this->fields['currency'] = $currency;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -145,9 +146,6 @@ class TransactionQuery implements JsonSerializable
         return $data;
     }
 
-    /**
-     * @psalm-param self::RESULT_*|null $result
-     */
     private function setResult(null|string $result): static
     {
         $this->fields['result'] = $result;
@@ -155,9 +153,6 @@ class TransactionQuery implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-param self::STATUS_*|null $status
-     */
     private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
@@ -172,13 +167,6 @@ class TransactionQuery implements JsonSerializable
         }
 
         $this->fields['amount'] = $amount;
-
-        return $this;
-    }
-
-    private function setCurrency(null|string $currency): static
-    {
-        $this->fields['currency'] = $currency;
 
         return $this;
     }

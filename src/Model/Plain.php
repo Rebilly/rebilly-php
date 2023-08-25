@@ -13,21 +13,24 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-class Plain extends SmtpAuthorization
+use JsonSerializable;
+
+class Plain implements SmtpAuthorization, JsonSerializable
 {
+    public const TYPE_PLAIN = 'plain';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        parent::__construct([
-            'type' => 'plain',
-        ] + $data);
-
         if (array_key_exists('username', $data)) {
             $this->setUsername($data['username']);
         }
         if (array_key_exists('password', $data)) {
             $this->setPassword($data['password']);
+        }
+        if (array_key_exists('type', $data)) {
+            $this->setType($data['type']);
         }
     }
 
@@ -60,6 +63,18 @@ class Plain extends SmtpAuthorization
         return $this;
     }
 
+    public function getType(): string
+    {
+        return $this->fields['type'];
+    }
+
+    public function setType(string $type): static
+    {
+        $this->fields['type'] = $type;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -69,7 +84,10 @@ class Plain extends SmtpAuthorization
         if (array_key_exists('password', $this->fields)) {
             $data['password'] = $this->fields['password'];
         }
+        if (array_key_exists('type', $this->fields)) {
+            $data['type'] = $this->fields['type'];
+        }
 
-        return parent::jsonSerialize() + $data;
+        return $data;
     }
 }

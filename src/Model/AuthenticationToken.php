@@ -13,52 +13,35 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use InvalidArgumentException;
+use DateTimeImmutable;
 
-abstract class AuthenticationToken extends CommonAuthenticationToken
+interface AuthenticationToken
 {
-    private array $fields = [];
+    public function getMode(): ?string;
 
-    protected function __construct(array $data = [])
-    {
-        parent::__construct($data);
+    public function setMode(null|string $mode): static;
 
-        if (array_key_exists('mode', $data)) {
-            $this->setMode($data['mode']);
-        }
-    }
+    public function getToken(): ?string;
 
-    public static function from(array $data = []): self
-    {
-        switch ($data['mode']) {
-            case 'passwordless':
-                return new Passwordless($data);
-            case 'password':
-                return new Password($data);
-        }
+    public function getOtpRequired(): ?bool;
 
-        throw new InvalidArgumentException("Unsupported mode value: '{$data['mode']}'");
-    }
+    public function setOtpRequired(null|bool $otpRequired): static;
 
-    public function getMode(): ?string
-    {
-        return $this->fields['mode'] ?? null;
-    }
+    public function getCredentialId(): ?string;
 
-    public function jsonSerialize(): array
-    {
-        $data = [];
-        if (array_key_exists('mode', $this->fields)) {
-            $data['mode'] = $this->fields['mode'];
-        }
+    public function setCredentialId(null|string $credentialId): static;
 
-        return parent::jsonSerialize() + $data;
-    }
+    public function getExpiredTime(): ?DateTimeImmutable;
 
-    private function setMode(null|string $mode): static
-    {
-        $this->fields['mode'] = $mode;
+    public function setExpiredTime(null|DateTimeImmutable|string $expiredTime): static;
 
-        return $this;
-    }
+    /**
+     * @return null|ResourceLink[]
+     */
+    public function getLinks(): ?array;
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    public function setLinks(null|array $links): static;
 }

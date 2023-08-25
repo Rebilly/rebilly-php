@@ -13,51 +13,19 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use InvalidArgumentException;
-use JsonSerializable;
-
-abstract class BankAccountInstrument implements JsonSerializable
+interface BankAccountInstrument
 {
-    private array $fields = [];
+    public function getAccountNumberType(): string;
 
-    protected function __construct(array $data = [])
-    {
-        if (array_key_exists('accountNumberType', $data)) {
-            $this->setAccountNumberType($data['accountNumberType']);
-        }
-    }
+    public function setAccountNumberType(string $accountNumberType): static;
 
-    public static function from(array $data = []): self
-    {
-        switch ($data['accountNumberType']) {
-            case 'IBAN':
-                return new IBANInstrument($data);
-            case 'BBAN':
-                return new BBANInstrument($data);
-        }
+    public function getBic(): ?string;
 
-        throw new InvalidArgumentException("Unsupported accountNumberType value: '{$data['accountNumberType']}'");
-    }
+    public function setBic(null|string $bic): static;
 
-    public function getAccountNumberType(): ?string
-    {
-        return $this->fields['accountNumberType'] ?? null;
-    }
+    public function getBankName(): ?string;
 
-    public function jsonSerialize(): array
-    {
-        $data = [];
-        if (array_key_exists('accountNumberType', $this->fields)) {
-            $data['accountNumberType'] = $this->fields['accountNumberType'];
-        }
+    public function setBankName(null|string $bankName): static;
 
-        return $data;
-    }
-
-    private function setAccountNumberType(null|string $accountNumberType): static
-    {
-        $this->fields['accountNumberType'] = $accountNumberType;
-
-        return $this;
-    }
+    public function getLast4(): ?string;
 }

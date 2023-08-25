@@ -163,15 +163,15 @@ class RiskMetadata implements JsonSerializable
         return $this;
     }
 
-    public function getBrowserData(): ?BrowserData
+    public function getBrowserData(): ?RiskMetadataBrowserData
     {
         return $this->fields['browserData'] ?? null;
     }
 
-    public function setBrowserData(null|BrowserData|array $browserData): static
+    public function setBrowserData(null|RiskMetadataBrowserData|array $browserData): static
     {
-        if ($browserData !== null && !($browserData instanceof BrowserData)) {
-            $browserData = BrowserData::from($browserData);
+        if ($browserData !== null && !($browserData instanceof RiskMetadataBrowserData)) {
+            $browserData = RiskMetadataBrowserData::from($browserData);
         }
 
         $this->fields['browserData'] = $browserData;
@@ -179,15 +179,15 @@ class RiskMetadata implements JsonSerializable
         return $this;
     }
 
-    public function getExtraData(): ?ExtraData
+    public function getExtraData(): ?RiskMetadataExtraData
     {
         return $this->fields['extraData'] ?? null;
     }
 
-    public function setExtraData(null|ExtraData|array $extraData): static
+    public function setExtraData(null|RiskMetadataExtraData|array $extraData): static
     {
-        if ($extraData !== null && !($extraData instanceof ExtraData)) {
-            $extraData = ExtraData::from($extraData);
+        if ($extraData !== null && !($extraData instanceof RiskMetadataExtraData)) {
+            $extraData = RiskMetadataExtraData::from($extraData);
         }
 
         $this->fields['extraData'] = $extraData;

@@ -61,28 +61,25 @@ class SubscriptionChange implements JsonSerializable
     }
 
     /**
-     * @param SubscriptionChangeItems[] $items
+     * @param array[]|SubscriptionChangeItems[] $items
      */
     public function setItems(array $items): static
     {
-        $items = array_map(fn ($value) => $value !== null ? ($value instanceof SubscriptionChangeItems ? $value : SubscriptionChangeItems::from($value)) : null, $items);
+        $items = array_map(
+            fn ($value) => $value !== null ? ($value instanceof SubscriptionChangeItems ? $value : SubscriptionChangeItems::from($value)) : null,
+            $items,
+        );
 
         $this->fields['items'] = $items;
 
         return $this;
     }
 
-    /**
-     * @psalm-return self::RENEWAL_POLICY_* $renewalPolicy
-     */
     public function getRenewalPolicy(): string
     {
         return $this->fields['renewalPolicy'];
     }
 
-    /**
-     * @psalm-param self::RENEWAL_POLICY_* $renewalPolicy
-     */
     public function setRenewalPolicy(string $renewalPolicy): static
     {
         $this->fields['renewalPolicy'] = $renewalPolicy;

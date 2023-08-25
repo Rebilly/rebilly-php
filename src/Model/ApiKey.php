@@ -81,17 +81,11 @@ class ApiKey implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-return self::TYPE_*|null $type
-     */
     public function getType(): ?string
     {
         return $this->fields['type'] ?? null;
     }
 
-    /**
-     * @psalm-param self::TYPE_*|null $type
-     */
     public function setType(null|string $type): static
     {
         $this->fields['type'] = $type;
@@ -99,21 +93,13 @@ class ApiKey implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @return null|Acl[]
-     */
-    public function getAcl(): ?array
+    public function getAcl(): ?Acl
     {
         return $this->fields['acl'] ?? null;
     }
 
-    /**
-     * @param null|Acl[] $acl
-     */
-    public function setAcl(null|array $acl): static
+    public function setAcl(null|Acl $acl): static
     {
-        $acl = $acl !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Acl ? $value : Acl::from($value)) : null, $acl) : null;
-
         $this->fields['acl'] = $acl;
 
         return $this;
@@ -132,7 +118,10 @@ class ApiKey implements JsonSerializable
      */
     public function setAllowedIps(null|array $allowedIps): static
     {
-        $allowedIps = $allowedIps !== null ? array_map(fn ($value) => $value ?? null, $allowedIps) : null;
+        $allowedIps = $allowedIps !== null ? array_map(
+            fn ($value) => $value,
+            $allowedIps,
+        ) : null;
 
         $this->fields['allowedIps'] = $allowedIps;
 
@@ -160,11 +149,21 @@ class ApiKey implements JsonSerializable
     }
 
     /**
-     * @return null|SelfLink[]
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    public function setLinks(null|array $links): static
+    {
+        $this->fields['_links'] = $links;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -243,18 +242,6 @@ class ApiKey implements JsonSerializable
         }
 
         $this->fields['updatedTime'] = $updatedTime;
-
-        return $this;
-    }
-
-    /**
-     * @param null|SelfLink[] $links
-     */
-    private function setLinks(null|array $links): static
-    {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
-
-        $this->fields['_links'] = $links;
 
         return $this;
     }

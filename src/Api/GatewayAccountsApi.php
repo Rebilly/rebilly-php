@@ -17,9 +17,9 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
-use Rebilly\Sdk\Model\FinancialSettings;
 use Rebilly\Sdk\Model\GatewayAccount;
 use Rebilly\Sdk\Model\GatewayAccountDowntimeSchedule;
+use Rebilly\Sdk\Model\GatewayAccountFinancialSettings;
 use Rebilly\Sdk\Model\GatewayAccountLimit;
 use Rebilly\Sdk\Model\GatewayAccountTimeline;
 use Rebilly\Sdk\Paginator;
@@ -443,11 +443,11 @@ class GatewayAccountsApi
     }
 
     /**
-     * @return FinancialSettings
+     * @return GatewayAccountFinancialSettings
      */
     public function getFinancialSettings(
         string $id,
-    ): FinancialSettings {
+    ): GatewayAccountFinancialSettings {
         $pathParams = [
             '{id}' => $id,
         ];
@@ -458,7 +458,7 @@ class GatewayAccountsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return FinancialSettings::from($data);
+        return GatewayAccountFinancialSettings::from($data);
     }
 
     /**
@@ -504,23 +504,23 @@ class GatewayAccountsApi
     }
 
     /**
-     * @return FinancialSettings
+     * @return GatewayAccountFinancialSettings
      */
     public function setFinancialSettings(
         string $id,
-        ?FinancialSettings $financialSettings = null,
-    ): FinancialSettings {
+        ?GatewayAccountFinancialSettings $gatewayAccountFinancialSettings = null,
+    ): GatewayAccountFinancialSettings {
         $pathParams = [
             '{id}' => $id,
         ];
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}/financial-settings');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($financialSettings));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($gatewayAccountFinancialSettings));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return FinancialSettings::from($data);
+        return GatewayAccountFinancialSettings::from($data);
     }
 
     /**

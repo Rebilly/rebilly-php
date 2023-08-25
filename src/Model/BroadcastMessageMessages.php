@@ -77,7 +77,7 @@ class BroadcastMessageMessages implements JsonSerializable
     }
 
     /**
-     * @return BroadcastMessageTemplates[]
+     * @return BroadcastMessageMessagesTemplates[]
      */
     public function getTemplates(): array
     {
@@ -85,11 +85,14 @@ class BroadcastMessageMessages implements JsonSerializable
     }
 
     /**
-     * @param BroadcastMessageTemplates[] $templates
+     * @param array[]|BroadcastMessageMessagesTemplates[] $templates
      */
     public function setTemplates(array $templates): static
     {
-        $templates = array_map(fn ($value) => $value !== null ? ($value instanceof BroadcastMessageTemplates ? $value : BroadcastMessageTemplates::from($value)) : null, $templates);
+        $templates = array_map(
+            fn ($value) => $value !== null ? ($value instanceof BroadcastMessageMessagesTemplates ? $value : BroadcastMessageMessagesTemplates::from($value)) : null,
+            $templates,
+        );
 
         $this->fields['templates'] = $templates;
 

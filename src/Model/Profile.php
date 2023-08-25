@@ -13,10 +13,18 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use DateTimeImmutable;
+use DateTimeInterface;
 use JsonSerializable;
 
 class Profile implements JsonSerializable
 {
+    public const STATUS_ACTIVE = 'active';
+
+    public const STATUS_INACTIVE = 'inactive';
+
+    public const STATUS_PENDING_CONFIRMATION = 'pending-confirmation';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -39,14 +47,26 @@ class Profile implements JsonSerializable
         if (array_key_exists('mobilePhone', $data)) {
             $this->setMobilePhone($data['mobilePhone']);
         }
+        if (array_key_exists('permissions', $data)) {
+            $this->setPermissions($data['permissions']);
+        }
         if (array_key_exists('memberships', $data)) {
             $this->setMemberships($data['memberships']);
+        }
+        if (array_key_exists('createdTime', $data)) {
+            $this->setCreatedTime($data['createdTime']);
+        }
+        if (array_key_exists('updatedTime', $data)) {
+            $this->setUpdatedTime($data['updatedTime']);
         }
         if (array_key_exists('availableCurrencies', $data)) {
             $this->setAvailableCurrencies($data['availableCurrencies']);
         }
         if (array_key_exists('reportingCurrency', $data)) {
             $this->setReportingCurrency($data['reportingCurrency']);
+        }
+        if (array_key_exists('loginTime', $data)) {
+            $this->setLoginTime($data['loginTime']);
         }
         if (array_key_exists('totpRequired', $data)) {
             $this->setTotpRequired($data['totpRequired']);
@@ -56,6 +76,9 @@ class Profile implements JsonSerializable
         }
         if (array_key_exists('totpUrl', $data)) {
             $this->setTotpUrl($data['totpUrl']);
+        }
+        if (array_key_exists('status', $data)) {
+            $this->setStatus($data['status']);
         }
         if (array_key_exists('oneTimePassword', $data)) {
             $this->setOneTimePassword($data['oneTimePassword']);
@@ -75,6 +98,9 @@ class Profile implements JsonSerializable
         if (array_key_exists('hash', $data)) {
             $this->setHash($data['hash']);
         }
+        if (array_key_exists('_links', $data)) {
+            $this->setLinks($data['_links']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -85,6 +111,13 @@ class Profile implements JsonSerializable
     public function getId(): ?string
     {
         return $this->fields['id'] ?? null;
+    }
+
+    public function setId(null|string $id): static
+    {
+        $this->fields['id'] = $id;
+
+        return $this;
     }
 
     public function getEmail(): ?string
@@ -113,6 +146,29 @@ class Profile implements JsonSerializable
     }
 
     /**
+     * @return null|string[]
+     */
+    public function getPermissions(): ?array
+    {
+        return $this->fields['permissions'] ?? null;
+    }
+
+    /**
+     * @param null|string[] $permissions
+     */
+    public function setPermissions(null|array $permissions): static
+    {
+        $permissions = $permissions !== null ? array_map(
+            fn ($value) => $value,
+            $permissions,
+        ) : null;
+
+        $this->fields['permissions'] = $permissions;
+
+        return $this;
+    }
+
+    /**
      * @return null|Membership[]
      */
     public function getMemberships(): ?array
@@ -120,16 +176,14 @@ class Profile implements JsonSerializable
         return $this->fields['memberships'] ?? null;
     }
 
-    /**
-     * @param null|Membership[] $memberships
-     */
-    public function setMemberships(null|array $memberships): static
+    public function getCreatedTime(): ?DateTimeImmutable
     {
-        $memberships = $memberships !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Membership ? $value : Membership::from($value)) : null, $memberships) : null;
+        return $this->fields['createdTime'] ?? null;
+    }
 
-        $this->fields['memberships'] = $memberships;
-
-        return $this;
+    public function getUpdatedTime(): ?DateTimeImmutable
+    {
+        return $this->fields['updatedTime'] ?? null;
     }
 
     /**
@@ -145,11 +199,9 @@ class Profile implements JsonSerializable
         return $this->fields['reportingCurrency'] ?? null;
     }
 
-    public function setReportingCurrency(null|string $reportingCurrency): static
+    public function getLoginTime(): ?DateTimeImmutable
     {
-        $this->fields['reportingCurrency'] = $reportingCurrency;
-
-        return $this;
+        return $this->fields['loginTime'] ?? null;
     }
 
     public function getTotpRequired(): ?bool
@@ -174,6 +226,11 @@ class Profile implements JsonSerializable
         return $this->fields['totpUrl'] ?? null;
     }
 
+    public function getStatus(): ?string
+    {
+        return $this->fields['status'] ?? null;
+    }
+
     public function getOneTimePassword(): ?string
     {
         return $this->fields['oneTimePassword'] ?? null;
@@ -191,12 +248,12 @@ class Profile implements JsonSerializable
         return $this->fields['country'] ?? null;
     }
 
-    public function getPreferences(): ?array
+    public function getPreferences(): ?object
     {
         return $this->fields['preferences'] ?? null;
     }
 
-    public function setPreferences(null|array $preferences): static
+    public function setPreferences(null|object $preferences): static
     {
         $this->fields['preferences'] = $preferences;
 
@@ -208,23 +265,9 @@ class Profile implements JsonSerializable
         return $this->fields['hasPermissionsEmulation'] ?? null;
     }
 
-    public function setHasPermissionsEmulation(null|bool $hasPermissionsEmulation): static
-    {
-        $this->fields['hasPermissionsEmulation'] = $hasPermissionsEmulation;
-
-        return $this;
-    }
-
     public function getDisplayName(): ?string
     {
         return $this->fields['displayName'] ?? null;
-    }
-
-    public function setDisplayName(null|string $displayName): static
-    {
-        $this->fields['displayName'] = $displayName;
-
-        return $this;
     }
 
     public function getHash(): ?string
@@ -232,9 +275,20 @@ class Profile implements JsonSerializable
         return $this->fields['hash'] ?? null;
     }
 
-    public function setHash(null|string $hash): static
+    /**
+     * @return null|ResourceLink[]
+     */
+    public function getLinks(): ?array
     {
-        $this->fields['hash'] = $hash;
+        return $this->fields['_links'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    public function setLinks(null|array $links): static
+    {
+        $this->fields['_links'] = $links;
 
         return $this;
     }
@@ -260,14 +314,26 @@ class Profile implements JsonSerializable
         if (array_key_exists('mobilePhone', $this->fields)) {
             $data['mobilePhone'] = $this->fields['mobilePhone'];
         }
+        if (array_key_exists('permissions', $this->fields)) {
+            $data['permissions'] = $this->fields['permissions'];
+        }
         if (array_key_exists('memberships', $this->fields)) {
             $data['memberships'] = $this->fields['memberships'];
+        }
+        if (array_key_exists('createdTime', $this->fields)) {
+            $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
+        }
+        if (array_key_exists('updatedTime', $this->fields)) {
+            $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('availableCurrencies', $this->fields)) {
             $data['availableCurrencies'] = $this->fields['availableCurrencies'];
         }
         if (array_key_exists('reportingCurrency', $this->fields)) {
             $data['reportingCurrency'] = $this->fields['reportingCurrency'];
+        }
+        if (array_key_exists('loginTime', $this->fields)) {
+            $data['loginTime'] = $this->fields['loginTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('totpRequired', $this->fields)) {
             $data['totpRequired'] = $this->fields['totpRequired'];
@@ -277,6 +343,9 @@ class Profile implements JsonSerializable
         }
         if (array_key_exists('totpUrl', $this->fields)) {
             $data['totpUrl'] = $this->fields['totpUrl'];
+        }
+        if (array_key_exists('status', $this->fields)) {
+            $data['status'] = $this->fields['status'];
         }
         if (array_key_exists('oneTimePassword', $this->fields)) {
             $data['oneTimePassword'] = $this->fields['oneTimePassword'];
@@ -296,15 +365,11 @@ class Profile implements JsonSerializable
         if (array_key_exists('hash', $this->fields)) {
             $data['hash'] = $this->fields['hash'];
         }
+        if (array_key_exists('_links', $this->fields)) {
+            $data['_links'] = $this->fields['_links'];
+        }
 
         return $data;
-    }
-
-    private function setId(null|string $id): static
-    {
-        $this->fields['id'] = $id;
-
-        return $this;
     }
 
     private function setEmail(null|string $email): static
@@ -343,13 +408,71 @@ class Profile implements JsonSerializable
     }
 
     /**
+     * @param null|array[]|Membership[] $memberships
+     */
+    private function setMemberships(null|array $memberships): static
+    {
+        $memberships = $memberships !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof Membership ? $value : Membership::from($value)) : null,
+            $memberships,
+        ) : null;
+
+        $this->fields['memberships'] = $memberships;
+
+        return $this;
+    }
+
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
+    {
+        if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
+            $createdTime = new DateTimeImmutable($createdTime);
+        }
+
+        $this->fields['createdTime'] = $createdTime;
+
+        return $this;
+    }
+
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
+    {
+        if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
+            $updatedTime = new DateTimeImmutable($updatedTime);
+        }
+
+        $this->fields['updatedTime'] = $updatedTime;
+
+        return $this;
+    }
+
+    /**
      * @param null|string[] $availableCurrencies
      */
     private function setAvailableCurrencies(null|array $availableCurrencies): static
     {
-        $availableCurrencies = $availableCurrencies !== null ? array_map(fn ($value) => $value ?? null, $availableCurrencies) : null;
+        $availableCurrencies = $availableCurrencies !== null ? array_map(
+            fn ($value) => $value,
+            $availableCurrencies,
+        ) : null;
 
         $this->fields['availableCurrencies'] = $availableCurrencies;
+
+        return $this;
+    }
+
+    private function setReportingCurrency(null|string $reportingCurrency): static
+    {
+        $this->fields['reportingCurrency'] = $reportingCurrency;
+
+        return $this;
+    }
+
+    private function setLoginTime(null|DateTimeImmutable|string $loginTime): static
+    {
+        if ($loginTime !== null && !($loginTime instanceof DateTimeImmutable)) {
+            $loginTime = new DateTimeImmutable($loginTime);
+        }
+
+        $this->fields['loginTime'] = $loginTime;
 
         return $this;
     }
@@ -368,9 +491,37 @@ class Profile implements JsonSerializable
         return $this;
     }
 
+    private function setStatus(null|string $status): static
+    {
+        $this->fields['status'] = $status;
+
+        return $this;
+    }
+
     private function setCountry(null|string $country): static
     {
         $this->fields['country'] = $country;
+
+        return $this;
+    }
+
+    private function setHasPermissionsEmulation(null|bool $hasPermissionsEmulation): static
+    {
+        $this->fields['hasPermissionsEmulation'] = $hasPermissionsEmulation;
+
+        return $this;
+    }
+
+    private function setDisplayName(null|string $displayName): static
+    {
+        $this->fields['displayName'] = $displayName;
+
+        return $this;
+    }
+
+    private function setHash(null|string $hash): static
+    {
+        $this->fields['hash'] = $hash;
 
         return $this;
     }

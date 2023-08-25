@@ -34,7 +34,7 @@ class ThreeColumnsTimelineTable extends TimelineTable
     }
 
     /**
-     * @return null|ThreeData[]
+     * @return null|ThreeColumnsTimelineTableData[]
      */
     public function getData(): ?array
     {
@@ -42,11 +42,14 @@ class ThreeColumnsTimelineTable extends TimelineTable
     }
 
     /**
-     * @param null|ThreeData[] $data
+     * @param null|array[]|ThreeColumnsTimelineTableData[] $data
      */
     public function setData(null|array $data): static
     {
-        $data = $data !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ThreeData ? $value : ThreeData::from($value)) : null, $data) : null;
+        $data = $data !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof ThreeColumnsTimelineTableData ? $value : ThreeColumnsTimelineTableData::from($value)) : null,
+            $data,
+        ) : null;
 
         $this->fields['data'] = $data;
 

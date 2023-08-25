@@ -30,6 +30,9 @@ class AmlCheckCustomer implements JsonSerializable
         if (array_key_exists('tags', $data)) {
             $this->setTags($data['tags']);
         }
+        if (array_key_exists('organizationId', $data)) {
+            $this->setOrganizationId($data['organizationId']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -40,6 +43,13 @@ class AmlCheckCustomer implements JsonSerializable
     public function getId(): ?string
     {
         return $this->fields['id'] ?? null;
+    }
+
+    public function setId(null|string $id): static
+    {
+        $this->fields['id'] = $id;
+
+        return $this;
     }
 
     public function getPrimaryAddress(): ?AmlCheckCustomerPrimaryAddress
@@ -66,6 +76,33 @@ class AmlCheckCustomer implements JsonSerializable
         return $this->fields['tags'] ?? null;
     }
 
+    /**
+     * @param null|array[]|Tag[] $tags
+     */
+    public function setTags(null|array $tags): static
+    {
+        $tags = $tags !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof Tag ? $value : Tag::from($value)) : null,
+            $tags,
+        ) : null;
+
+        $this->fields['tags'] = $tags;
+
+        return $this;
+    }
+
+    public function getOrganizationId(): ?string
+    {
+        return $this->fields['organizationId'] ?? null;
+    }
+
+    public function setOrganizationId(null|string $organizationId): static
+    {
+        $this->fields['organizationId'] = $organizationId;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -78,26 +115,10 @@ class AmlCheckCustomer implements JsonSerializable
         if (array_key_exists('tags', $this->fields)) {
             $data['tags'] = $this->fields['tags'];
         }
+        if (array_key_exists('organizationId', $this->fields)) {
+            $data['organizationId'] = $this->fields['organizationId'];
+        }
 
         return $data;
-    }
-
-    private function setId(null|string $id): static
-    {
-        $this->fields['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * @param null|Tag[] $tags
-     */
-    private function setTags(null|array $tags): static
-    {
-        $tags = $tags !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Tag ? $value : Tag::from($value)) : null, $tags) : null;
-
-        $this->fields['tags'] = $tags;
-
-        return $this;
     }
 }

@@ -23,6 +23,8 @@ class SubscriptionCancellation implements JsonSerializable
 
     public const CANCELED_BY_CUSTOMER = 'customer';
 
+    public const CANCELED_BY_REBILLY = 'rebilly';
+
     public const REASON_DID_NOT_USE = 'did-not-use';
 
     public const REASON_DID_NOT_WANT = 'did-not-want';
@@ -137,17 +139,11 @@ class SubscriptionCancellation implements JsonSerializable
         return $this->fields['appliedInvoiceId'] ?? null;
     }
 
-    /**
-     * @psalm-return self::CANCELED_BY_*|null $canceledBy
-     */
     public function getCanceledBy(): ?string
     {
         return $this->fields['canceledBy'] ?? null;
     }
 
-    /**
-     * @psalm-param self::CANCELED_BY_*|null $canceledBy
-     */
     public function setCanceledBy(null|string $canceledBy): static
     {
         $this->fields['canceledBy'] = $canceledBy;
@@ -155,17 +151,11 @@ class SubscriptionCancellation implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-return self::REASON_*|null $reason
-     */
     public function getReason(): ?string
     {
         return $this->fields['reason'] ?? null;
     }
 
-    /**
-     * @psalm-param self::REASON_*|null $reason
-     */
     public function setReason(null|string $reason): static
     {
         $this->fields['reason'] = $reason;
@@ -197,17 +187,11 @@ class SubscriptionCancellation implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-return self::STATUS_*|null $status
-     */
     public function getStatus(): ?string
     {
         return $this->fields['status'] ?? null;
     }
 
-    /**
-     * @psalm-param self::STATUS_*|null $status
-     */
     public function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
@@ -247,7 +231,7 @@ class SubscriptionCancellation implements JsonSerializable
     }
 
     /**
-     * @return null|UpcomingInvoiceItemCollection[]
+     * @return null|SubscriptionCancellationLineItems[]
      */
     public function getLineItems(): ?array
     {
@@ -255,28 +239,52 @@ class SubscriptionCancellation implements JsonSerializable
     }
 
     /**
-     * @param null|UpcomingInvoiceItemCollection[] $lineItems
+     * @param null|array[]|SubscriptionCancellationLineItems[] $lineItems
      */
     public function setLineItems(null|array $lineItems): static
     {
-        $lineItems = $lineItems !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof UpcomingInvoiceItemCollection ? $value : UpcomingInvoiceItemCollection::from($value)) : null, $lineItems) : null;
+        $lineItems = $lineItems !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof SubscriptionCancellationLineItems ? $value : SubscriptionCancellationLineItems::from($value)) : null,
+            $lineItems,
+        ) : null;
 
         $this->fields['lineItems'] = $lineItems;
 
         return $this;
     }
 
-    public function getLineItemSubtotal(): ?float
+    public function getLineItemSubtotal(): ?SubscriptionCancellationLineItemSubtotal
     {
         return $this->fields['lineItemSubtotal'] ?? null;
     }
 
+    public function setLineItemSubtotal(null|SubscriptionCancellationLineItemSubtotal|array $lineItemSubtotal): static
+    {
+        if ($lineItemSubtotal !== null && !($lineItemSubtotal instanceof SubscriptionCancellationLineItemSubtotal)) {
+            $lineItemSubtotal = SubscriptionCancellationLineItemSubtotal::from($lineItemSubtotal);
+        }
+
+        $this->fields['lineItemSubtotal'] = $lineItemSubtotal;
+
+        return $this;
+    }
+
     /**
-     * @return null|SelfLink[]
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    public function setLinks(null|array $links): static
+    {
+        $this->fields['_links'] = $links;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -325,7 +333,7 @@ class SubscriptionCancellation implements JsonSerializable
             $data['lineItems'] = $this->fields['lineItems'];
         }
         if (array_key_exists('lineItemSubtotal', $this->fields)) {
-            $data['lineItemSubtotal'] = $this->fields['lineItemSubtotal'];
+            $data['lineItemSubtotal'] = $this->fields['lineItemSubtotal']?->jsonSerialize();
         }
         if (array_key_exists('_links', $this->fields)) {
             $data['_links'] = $this->fields['_links'];
@@ -384,25 +392,6 @@ class SubscriptionCancellation implements JsonSerializable
         }
 
         $this->fields['updatedTime'] = $updatedTime;
-
-        return $this;
-    }
-
-    private function setLineItemSubtotal(null|float $lineItemSubtotal): static
-    {
-        $this->fields['lineItemSubtotal'] = $lineItemSubtotal;
-
-        return $this;
-    }
-
-    /**
-     * @param null|SelfLink[] $links
-     */
-    private function setLinks(null|array $links): static
-    {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
-
-        $this->fields['_links'] = $links;
 
         return $this;
     }

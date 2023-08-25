@@ -69,11 +69,14 @@ class RuleSetVersion implements JsonSerializable
     }
 
     /**
-     * @param null|Bind[] $binds
+     * @param null|array[]|Bind[] $binds
      */
     public function setBinds(null|array $binds): static
     {
-        $binds = $binds !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Bind ? $value : Bind::from($value)) : null, $binds) : null;
+        $binds = $binds !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof Bind ? $value : Bind::from($value)) : null,
+            $binds,
+        ) : null;
 
         $this->fields['binds'] = $binds;
 
@@ -89,11 +92,14 @@ class RuleSetVersion implements JsonSerializable
     }
 
     /**
-     * @param null|Rule[] $rules
+     * @param null|array[]|Rule[] $rules
      */
     public function setRules(null|array $rules): static
     {
-        $rules = $rules !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Rule ? $value : Rule::from($value)) : null, $rules) : null;
+        $rules = $rules !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof Rule ? $value : Rule::from($value)) : null,
+            $rules,
+        ) : null;
 
         $this->fields['rules'] = $rules;
 
@@ -111,11 +117,21 @@ class RuleSetVersion implements JsonSerializable
     }
 
     /**
-     * @return null|SelfLink[]
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    public function setLinks(null|array $links): static
+    {
+        $this->fields['_links'] = $links;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -161,18 +177,6 @@ class RuleSetVersion implements JsonSerializable
         }
 
         $this->fields['updatedTime'] = $updatedTime;
-
-        return $this;
-    }
-
-    /**
-     * @param null|SelfLink[] $links
-     */
-    private function setLinks(null|array $links): static
-    {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
-
-        $this->fields['_links'] = $links;
 
         return $this;
     }

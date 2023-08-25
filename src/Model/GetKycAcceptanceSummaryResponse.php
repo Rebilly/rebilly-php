@@ -40,11 +40,14 @@ class GetKycAcceptanceSummaryResponse implements JsonSerializable
     }
 
     /**
-     * @param null|GetKycAcceptanceSummaryResponseData[] $data
+     * @param null|array[]|GetKycAcceptanceSummaryResponseData[] $data
      */
     public function setData(null|array $data): static
     {
-        $data = $data !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof GetKycAcceptanceSummaryResponseData ? $value : GetKycAcceptanceSummaryResponseData::from($value)) : null, $data) : null;
+        $data = $data !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof GetKycAcceptanceSummaryResponseData ? $value : GetKycAcceptanceSummaryResponseData::from($value)) : null,
+            $data,
+        ) : null;
 
         $this->fields['data'] = $data;
 

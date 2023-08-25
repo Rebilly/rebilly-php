@@ -23,9 +23,6 @@ class ApplePayValidation extends DigitalWalletValidation
             'type' => 'Apple Pay',
         ] + $data);
 
-        if (array_key_exists('type', $data)) {
-            $this->setType($data['type']);
-        }
         if (array_key_exists('validationRequest', $data)) {
             $this->setValidationRequest($data['validationRequest']);
         }
@@ -37,18 +34,6 @@ class ApplePayValidation extends DigitalWalletValidation
     public static function from(array $data = []): self
     {
         return new self($data);
-    }
-
-    public function getType(): string
-    {
-        return $this->fields['type'];
-    }
-
-    public function setType(string $type): static
-    {
-        $this->fields['type'] = $type;
-
-        return $this;
     }
 
     public function getValidationRequest(): ApplePayValidationValidationRequest
@@ -67,7 +52,7 @@ class ApplePayValidation extends DigitalWalletValidation
         return $this;
     }
 
-    public function getValidationResponse(): ?array
+    public function getValidationResponse(): ?object
     {
         return $this->fields['validationResponse'] ?? null;
     }
@@ -75,9 +60,6 @@ class ApplePayValidation extends DigitalWalletValidation
     public function jsonSerialize(): array
     {
         $data = [];
-        if (array_key_exists('type', $this->fields)) {
-            $data['type'] = $this->fields['type'];
-        }
         if (array_key_exists('validationRequest', $this->fields)) {
             $data['validationRequest'] = $this->fields['validationRequest']?->jsonSerialize();
         }
@@ -88,7 +70,7 @@ class ApplePayValidation extends DigitalWalletValidation
         return parent::jsonSerialize() + $data;
     }
 
-    private function setValidationResponse(null|array $validationResponse): static
+    private function setValidationResponse(null|object $validationResponse): static
     {
         $this->fields['validationResponse'] = $validationResponse;
 

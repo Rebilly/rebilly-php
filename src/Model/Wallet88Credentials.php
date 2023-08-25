@@ -21,11 +21,11 @@ class Wallet88Credentials implements JsonSerializable
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('username', $data)) {
-            $this->setUsername($data['username']);
+        if (array_key_exists('sid', $data)) {
+            $this->setSid($data['sid']);
         }
-        if (array_key_exists('password', $data)) {
-            $this->setPassword($data['password']);
+        if (array_key_exists('rcode', $data)) {
+            $this->setRcode($data['rcode']);
         }
     }
 
@@ -34,26 +34,26 @@ class Wallet88Credentials implements JsonSerializable
         return new self($data);
     }
 
-    public function getUsername(): string
+    public function getSid(): string
     {
-        return $this->fields['username'];
+        return $this->fields['sid'];
     }
 
-    public function setUsername(string $username): static
+    public function setSid(string $sid): static
     {
-        $this->fields['username'] = $username;
+        $this->fields['sid'] = $sid;
 
         return $this;
     }
 
-    public function getPassword(): string
+    public function getRcode(): string
     {
-        return $this->fields['password'];
+        return $this->fields['rcode'];
     }
 
-    public function setPassword(string $password): static
+    public function setRcode(string $rcode): static
     {
-        $this->fields['password'] = $password;
+        $this->fields['rcode'] = $rcode;
 
         return $this;
     }
@@ -61,11 +61,11 @@ class Wallet88Credentials implements JsonSerializable
     public function jsonSerialize(): array
     {
         $data = [];
-        if (array_key_exists('username', $this->fields)) {
-            $data['username'] = $this->fields['username'];
+        if (array_key_exists('sid', $this->fields)) {
+            $data['sid'] = $this->fields['sid'];
         }
-        if (array_key_exists('password', $this->fields)) {
-            $data['password'] = $this->fields['password'];
+        if (array_key_exists('rcode', $this->fields)) {
+            $data['rcode'] = $this->fields['rcode'];
         }
 
         return $data;

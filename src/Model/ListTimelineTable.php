@@ -46,7 +46,10 @@ class ListTimelineTable extends TimelineTable
      */
     public function setData(null|array $data): static
     {
-        $data = $data !== null ? array_map(fn ($value) => $value ?? null, $data) : null;
+        $data = $data !== null ? array_map(
+            fn ($value) => $value,
+            $data,
+        ) : null;
 
         $this->fields['data'] = $data;
 

@@ -17,6 +17,98 @@ use JsonSerializable;
 
 class DashboardResponse implements JsonSerializable
 {
+    public const METRIC_APPROVAL_RATE = 'approvalRate';
+
+    public const METRIC_SALES_COUNT = 'salesCount';
+
+    public const METRIC_SALES_VALUE = 'salesValue';
+
+    public const METRIC_REFUNDS_VALUE = 'refundsValue';
+
+    public const METRIC_CHARGEBACKS_COUNT = 'chargebacksCount';
+
+    public const METRIC_CHARGEBACKS_VALUE = 'chargebacksValue';
+
+    public const METRIC_TRANSACTIONS_COUNT = 'transactionsCount';
+
+    public const METRIC_REDEEMED_COUPONS_COUNT = 'redeemedCouponsCount';
+
+    public const METRIC_NEW_LEADS_COUNT = 'newLeadsCount';
+
+    public const METRIC_NEW_CUSTOMERS_COUNT = 'newCustomersCount';
+
+    public const METRIC_APPLIED_COUPONS_COUNT = 'appliedCouponsCount';
+
+    public const METRIC_TRIAL_CONVERSIONS_COUNT = 'trialConversionsCount';
+
+    public const METRIC_TRIAL_CONVERSIONS_RATE = 'trialConversionsRate';
+
+    public const METRIC_RENEWAL_SUCCESS_RATE = 'renewalSuccessRate';
+
+    public const METRIC_RENEWALS_COUNT = 'renewalsCount';
+
+    public const METRIC_NEW_TRIALS_COUNT = 'newTrialsCount';
+
+    public const METRIC_REACTIVATIONS_COUNT = 'reactivationsCount';
+
+    public const METRIC_SUCCESSFUL_RETRIES_COUNT = 'successfulRetriesCount';
+
+    public const METRIC_INVOICED_REVENUE = 'invoicedRevenue';
+
+    public const METRIC_CHURN_COUNT = 'churnCount';
+
+    public const METRIC_CHURN_RATE = 'churnRate';
+
+    public const METRIC_CANCELLATIONS_COUNT = 'cancellationsCount';
+
+    public const METRIC_CANCELLATIONS_RATE = 'cancellationsRate';
+
+    public const METRIC_ACTIVE_SUBSCRIPTIONS_COUNT = 'activeSubscriptionsCount';
+
+    public const METRIC_NEW_SUBSCRIPTIONS_COUNT = 'newSubscriptionsCount';
+
+    public const METRIC_UPGRADES_COUNT = 'upgradesCount';
+
+    public const METRIC_DOWNGRADES_COUNT = 'downgradesCount';
+
+    public const METRIC_MONTHLY_RECURRING_REVENUE = 'monthlyRecurringRevenue';
+
+    public const METRIC_AVERAGE_REVENUE_PER_CUSTOMER = 'averageRevenuePerCustomer';
+
+    public const METRIC_CUSTOMER_LIFETIME_VALUE = 'customerLifetimeValue';
+
+    public const METRIC_ADDRESS_PROOF_ACCEPTANCE_RATE = 'addressProofAcceptanceRate';
+
+    public const METRIC_IDENTITY_PROOF_ACCEPTANCE_RATE = 'identityProofAcceptanceRate';
+
+    public const METRIC_FUNDS_PROOF_ACCEPTANCE_RATE = 'fundsProofAcceptanceRate';
+
+    public const METRIC_PURCHASE_PROOF_ACCEPTANCE_RATE = 'purchaseProofAcceptanceRate';
+
+    public const METRIC_CREDIT_FILE_PROOF_ACCEPTANCE_RATE = 'creditFileProofAcceptanceRate';
+
+    public const METRIC_KYC_REJECTION_RATE = 'kycRejectionRate';
+
+    public const METRIC_KYC_ACCURACY_RATE = 'kycAccuracyRate';
+
+    public const METRIC_ADDRESS_PROOF_ACCURACY_RATE = 'addressProofAccuracyRate';
+
+    public const METRIC_IDENTITY_PROOF_ACCURACY_RATE = 'identityProofAccuracyRate';
+
+    public const METRIC_CREDIT_FILE_PROOF_ACCURACY_RATE = 'creditFileProofAccuracyRate';
+
+    public const METRIC_KYC_REQUEST_COUNT = 'kycRequestCount';
+
+    public const METRIC_KYC_REQUEST_ABANDONMENT_RATE = 'kycRequestAbandonmentRate';
+
+    public const METRIC_KYC_REQUEST_ATTEMPTED_RATE = 'kycRequestAttemptedRate';
+
+    public const METRIC_KYC_REQUEST_FAILURE_RATE = 'kycRequestFailureRate';
+
+    public const METRIC_KYC_REQUEST_FULFILLMENT_RATE = 'kycRequestFulfillmentRate';
+
+    public const METRIC_KYC_REQUEST_EXPIRATION_RATE = 'kycRequestExpirationRate';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -40,17 +132,11 @@ class DashboardResponse implements JsonSerializable
         return new self($data);
     }
 
-    /**
-     * @psalm-return self::METRIC_*|null $metric
-     */
     public function getMetric(): ?string
     {
         return $this->fields['metric'] ?? null;
     }
 
-    /**
-     * @psalm-param self::METRIC_*|null $metric
-     */
     public function setMetric(null|string $metric): static
     {
         $this->fields['metric'] = $metric;
@@ -83,7 +169,7 @@ class DashboardResponse implements JsonSerializable
     }
 
     /**
-     * @return null|object[]
+     * @return null|DashboardResponseSegments[]
      */
     public function getSegments(): ?array
     {
@@ -91,11 +177,14 @@ class DashboardResponse implements JsonSerializable
     }
 
     /**
-     * @param null|object[] $segments
+     * @param null|array[]|DashboardResponseSegments[] $segments
      */
     public function setSegments(null|array $segments): static
     {
-        $segments = $segments !== null ? array_map(fn ($value) => $value ?? null, $segments) : null;
+        $segments = $segments !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof DashboardResponseSegments ? $value : DashboardResponseSegments::from($value)) : null,
+            $segments,
+        ) : null;
 
         $this->fields['segments'] = $segments;
 

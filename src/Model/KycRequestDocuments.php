@@ -40,24 +40,20 @@ class KycRequestDocuments implements JsonSerializable
         return new self($data);
     }
 
-    public function getType(): KycDocumentTypes
+    public function getType(): string
     {
         return $this->fields['type'];
     }
 
-    public function setType(KycDocumentTypes|string $type): static
+    public function setType(string $type): static
     {
-        if (!($type instanceof KycDocumentTypes)) {
-            $type = KycDocumentTypes::from($type);
-        }
-
         $this->fields['type'] = $type;
 
         return $this;
     }
 
     /**
-     * @return null|KycDocumentSubtypes[]
+     * @return null|string[]
      */
     public function getSubtypes(): ?array
     {
@@ -65,11 +61,14 @@ class KycRequestDocuments implements JsonSerializable
     }
 
     /**
-     * @param null|KycDocumentSubtypes[] $subtypes
+     * @param null|string[] $subtypes
      */
     public function setSubtypes(null|array $subtypes): static
     {
-        $subtypes = $subtypes !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof KycDocumentSubtypes ? $value : KycDocumentSubtypes::from($value)) : null, $subtypes) : null;
+        $subtypes = $subtypes !== null ? array_map(
+            fn ($value) => $value,
+            $subtypes,
+        ) : null;
 
         $this->fields['subtypes'] = $subtypes;
 
@@ -104,7 +103,7 @@ class KycRequestDocuments implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('type', $this->fields)) {
-            $data['type'] = $this->fields['type']?->value;
+            $data['type'] = $this->fields['type'];
         }
         if (array_key_exists('subtypes', $this->fields)) {
             $data['subtypes'] = $this->fields['subtypes'];

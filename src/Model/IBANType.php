@@ -17,10 +17,6 @@ class IBANType extends BankAccountCreatePlain
 {
     public const METHOD_ACH = 'ach';
 
-    public const ACCOUNT_NUMBER_TYPE_IBAN = 'IBAN';
-
-    public const ACCOUNT_NUMBER_TYPE_BBAN = 'BBAN';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -34,9 +30,6 @@ class IBANType extends BankAccountCreatePlain
         }
         if (array_key_exists('customerId', $data)) {
             $this->setCustomerId($data['customerId']);
-        }
-        if (array_key_exists('accountNumberType', $data)) {
-            $this->setAccountNumberType($data['accountNumberType']);
         }
         if (array_key_exists('accountNumber', $data)) {
             $this->setAccountNumber($data['accountNumber']);
@@ -56,6 +49,9 @@ class IBANType extends BankAccountCreatePlain
         if (array_key_exists('riskMetadata', $data)) {
             $this->setRiskMetadata($data['riskMetadata']);
         }
+        if (array_key_exists('useAsBackup', $data)) {
+            $this->setUseAsBackup($data['useAsBackup']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -63,17 +59,11 @@ class IBANType extends BankAccountCreatePlain
         return new self($data);
     }
 
-    /**
-     * @psalm-return self::METHOD_* $method
-     */
     public function getMethod(): string
     {
         return $this->fields['method'];
     }
 
-    /**
-     * @psalm-param self::METHOD_* $method
-     */
     public function setMethod(string $method): static
     {
         $this->fields['method'] = $method;
@@ -89,24 +79,6 @@ class IBANType extends BankAccountCreatePlain
     public function setCustomerId(string $customerId): static
     {
         $this->fields['customerId'] = $customerId;
-
-        return $this;
-    }
-
-    /**
-     * @psalm-return self::ACCOUNT_NUMBER_TYPE_* $accountNumberType
-     */
-    public function getAccountNumberType(): string
-    {
-        return $this->fields['accountNumberType'];
-    }
-
-    /**
-     * @psalm-param self::ACCOUNT_NUMBER_TYPE_* $accountNumberType
-     */
-    public function setAccountNumberType(string $accountNumberType): static
-    {
-        $this->fields['accountNumberType'] = $accountNumberType;
 
         return $this;
     }
@@ -191,6 +163,18 @@ class IBANType extends BankAccountCreatePlain
         return $this;
     }
 
+    public function getUseAsBackup(): ?bool
+    {
+        return $this->fields['useAsBackup'] ?? null;
+    }
+
+    public function setUseAsBackup(null|bool $useAsBackup): static
+    {
+        $this->fields['useAsBackup'] = $useAsBackup;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -199,9 +183,6 @@ class IBANType extends BankAccountCreatePlain
         }
         if (array_key_exists('customerId', $this->fields)) {
             $data['customerId'] = $this->fields['customerId'];
-        }
-        if (array_key_exists('accountNumberType', $this->fields)) {
-            $data['accountNumberType'] = $this->fields['accountNumberType'];
         }
         if (array_key_exists('accountNumber', $this->fields)) {
             $data['accountNumber'] = $this->fields['accountNumber'];
@@ -220,6 +201,9 @@ class IBANType extends BankAccountCreatePlain
         }
         if (array_key_exists('riskMetadata', $this->fields)) {
             $data['riskMetadata'] = $this->fields['riskMetadata']?->jsonSerialize();
+        }
+        if (array_key_exists('useAsBackup', $this->fields)) {
+            $data['useAsBackup'] = $this->fields['useAsBackup'];
         }
 
         return parent::jsonSerialize() + $data;

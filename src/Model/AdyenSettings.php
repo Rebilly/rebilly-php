@@ -21,14 +21,32 @@ class AdyenSettings implements JsonSerializable
 
     public function __construct(array $data = [])
     {
+        if (array_key_exists('store', $data)) {
+            $this->setStore($data['store']);
+        }
         if (array_key_exists('url', $data)) {
             $this->setUrl($data['url']);
+        }
+        if (array_key_exists('splitPayments', $data)) {
+            $this->setSplitPayments($data['splitPayments']);
         }
     }
 
     public static function from(array $data = []): self
     {
         return new self($data);
+    }
+
+    public function getStore(): ?string
+    {
+        return $this->fields['store'] ?? null;
+    }
+
+    public function setStore(null|string $store): static
+    {
+        $this->fields['store'] = $store;
+
+        return $this;
     }
 
     public function getUrl(): string
@@ -43,11 +61,40 @@ class AdyenSettings implements JsonSerializable
         return $this;
     }
 
+    /**
+     * @return null|AdyenSettingsSplitPayments[]
+     */
+    public function getSplitPayments(): ?array
+    {
+        return $this->fields['splitPayments'] ?? null;
+    }
+
+    /**
+     * @param null|AdyenSettingsSplitPayments[]|array[] $splitPayments
+     */
+    public function setSplitPayments(null|array $splitPayments): static
+    {
+        $splitPayments = $splitPayments !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof AdyenSettingsSplitPayments ? $value : AdyenSettingsSplitPayments::from($value)) : null,
+            $splitPayments,
+        ) : null;
+
+        $this->fields['splitPayments'] = $splitPayments;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
+        if (array_key_exists('store', $this->fields)) {
+            $data['store'] = $this->fields['store'];
+        }
         if (array_key_exists('url', $this->fields)) {
             $data['url'] = $this->fields['url'];
+        }
+        if (array_key_exists('splitPayments', $this->fields)) {
+            $data['splitPayments'] = $this->fields['splitPayments'];
         }
 
         return $data;

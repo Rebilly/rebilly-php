@@ -80,17 +80,11 @@ class IlixiumSettings implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-return self::PLATFORM_*|null $platform
-     */
     public function getPlatform(): ?string
     {
         return $this->fields['platform'] ?? null;
     }
 
-    /**
-     * @psalm-param self::PLATFORM_*|null $platform
-     */
     public function setPlatform(null|string $platform): static
     {
         $this->fields['platform'] = $platform;

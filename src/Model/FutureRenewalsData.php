@@ -66,7 +66,7 @@ class FutureRenewalsData implements JsonSerializable
     }
 
     /**
-     * @return null|FutureRenewalsPlansCount[]
+     * @return null|FutureRenewalsDataPlansCount[]
      */
     public function getPlansCount(): ?array
     {
@@ -74,11 +74,14 @@ class FutureRenewalsData implements JsonSerializable
     }
 
     /**
-     * @param null|FutureRenewalsPlansCount[] $plansCount
+     * @param null|array[]|FutureRenewalsDataPlansCount[] $plansCount
      */
     public function setPlansCount(null|array $plansCount): static
     {
-        $plansCount = $plansCount !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof FutureRenewalsPlansCount ? $value : FutureRenewalsPlansCount::from($value)) : null, $plansCount) : null;
+        $plansCount = $plansCount !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof FutureRenewalsDataPlansCount ? $value : FutureRenewalsDataPlansCount::from($value)) : null,
+            $plansCount,
+        ) : null;
 
         $this->fields['plansCount'] = $plansCount;
 

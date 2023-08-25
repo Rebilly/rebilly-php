@@ -31,15 +31,15 @@ class PatchCustomerEddScoreRequest implements JsonSerializable
         return new self($data);
     }
 
-    public function getScore(): EddData
+    public function getScore(): PatchCustomerEddScoreRequestScore
     {
         return $this->fields['score'];
     }
 
-    public function setScore(EddData|array $score): static
+    public function setScore(PatchCustomerEddScoreRequestScore|array $score): static
     {
-        if (!($score instanceof EddData)) {
-            $score = EddData::from($score);
+        if (!($score instanceof PatchCustomerEddScoreRequestScore)) {
+            $score = PatchCustomerEddScoreRequestScore::from($score);
         }
 
         $this->fields['score'] = $score;

@@ -18,6 +18,8 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\Organization;
+use Rebilly\Sdk\Model\PatchOrganizationRequest;
+use Rebilly\Sdk\Model\PostOrganizationRequest;
 use Rebilly\Sdk\Paginator;
 
 class OrganizationsApi
@@ -30,11 +32,11 @@ class OrganizationsApi
      * @return Organization
      */
     public function create(
-        ?Organization $organization = null,
+        ?PostOrganizationRequest $postOrganizationRequest = null,
     ): Organization {
         $uri = '/organizations';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($organization));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($postOrganizationRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -67,12 +69,14 @@ class OrganizationsApi
         ?int $limit = null,
         ?int $offset = null,
         ?string $filter = null,
+        ?array $sort = null,
         ?string $q = null,
     ): Collection {
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
+            'sort' => $sort,
             'q' => $q,
         ];
         $uri = '/organizations?' . http_build_query($queryParams);
@@ -93,12 +97,14 @@ class OrganizationsApi
         ?int $limit = null,
         ?int $offset = null,
         ?string $filter = null,
+        ?array $sort = null,
         ?string $q = null,
     ): Paginator {
         $closure = fn (?int $limit, ?int $offset): Collection => $this->getAll(
             limit: $limit,
             offset: $offset,
             filter: $filter,
+            sort: $sort,
             q: $q,
         );
 
@@ -113,7 +119,7 @@ class OrganizationsApi
      */
     public function update(
         string $id,
-        ?Organization $organization = null,
+        ?PatchOrganizationRequest $patchOrganizationRequest = null,
     ): Organization {
         $pathParams = [
             '{id}' => $id,
@@ -121,7 +127,7 @@ class OrganizationsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/organizations/{id}');
 
-        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($organization));
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($patchOrganizationRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

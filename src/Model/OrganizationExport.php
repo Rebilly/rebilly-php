@@ -47,8 +47,8 @@ class OrganizationExport implements JsonSerializable
         if (array_key_exists('status', $data)) {
             $this->setStatus($data['status']);
         }
-        if (array_key_exists('items', $data)) {
-            $this->setItems($data['items']);
+        if (array_key_exists('resources', $data)) {
+            $this->setResources($data['resources']);
         }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
@@ -84,20 +84,17 @@ class OrganizationExport implements JsonSerializable
         return $this->fields['fileId'] ?? null;
     }
 
-    /**
-     * @psalm-return self::STATUS_*|null $status
-     */
     public function getStatus(): ?string
     {
         return $this->fields['status'] ?? null;
     }
 
     /**
-     * @return null|OrganizationExportResource[]
+     * @return null|OrganizationExportResources[]
      */
-    public function getItems(): ?array
+    public function getResources(): ?array
     {
-        return $this->fields['items'] ?? null;
+        return $this->fields['resources'] ?? null;
     }
 
     public function getCreatedTime(): ?DateTimeImmutable
@@ -116,7 +113,7 @@ class OrganizationExport implements JsonSerializable
     }
 
     /**
-     * @return null|array<LinkSelf|LinkSignedLink|LinkUser>
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
@@ -138,8 +135,8 @@ class OrganizationExport implements JsonSerializable
         if (array_key_exists('status', $this->fields)) {
             $data['status'] = $this->fields['status'];
         }
-        if (array_key_exists('items', $this->fields)) {
-            $data['items'] = $this->fields['items'];
+        if (array_key_exists('resources', $this->fields)) {
+            $data['resources'] = $this->fields['resources'];
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
@@ -178,9 +175,6 @@ class OrganizationExport implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-param self::STATUS_*|null $status
-     */
     private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
@@ -189,13 +183,16 @@ class OrganizationExport implements JsonSerializable
     }
 
     /**
-     * @param null|OrganizationExportResource[] $items
+     * @param null|array[]|OrganizationExportResources[] $resources
      */
-    private function setItems(null|array $items): static
+    private function setResources(null|array $resources): static
     {
-        $items = $items !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof OrganizationExportResource ? $value : OrganizationExportResource::from($value)) : null, $items) : null;
+        $resources = $resources !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof OrganizationExportResources ? $value : OrganizationExportResources::from($value)) : null,
+            $resources,
+        ) : null;
 
-        $this->fields['items'] = $items;
+        $this->fields['resources'] = $resources;
 
         return $this;
     }
@@ -234,11 +231,14 @@ class OrganizationExport implements JsonSerializable
     }
 
     /**
-     * @param null|array<LinkSelf|LinkSignedLink|LinkUser> $links
+     * @param null|array[]|ResourceLink[] $links
      */
     private function setLinks(null|array $links): static
     {
-        $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
+        $links = $links !== null ? array_map(
+            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+            $links,
+        ) : null;
 
         $this->fields['_links'] = $links;
 

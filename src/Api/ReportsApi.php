@@ -22,7 +22,6 @@ use Rebilly\Sdk\Model\APILogSummary;
 use Rebilly\Sdk\Model\CumulativeSubscriptions;
 use Rebilly\Sdk\Model\DashboardResponse;
 use Rebilly\Sdk\Model\DccMarkup;
-use Rebilly\Sdk\Model\EventType;
 use Rebilly\Sdk\Model\FutureRenewals;
 use Rebilly\Sdk\Model\GetKycAcceptanceSummaryResponse;
 use Rebilly\Sdk\Model\RenewalSales;
@@ -37,6 +36,7 @@ use Rebilly\Sdk\Model\ReportRetentionPercentage;
 use Rebilly\Sdk\Model\ReportRetentionValue;
 use Rebilly\Sdk\Model\ReportRevenueWaterfall;
 use Rebilly\Sdk\Model\ReportRulesMatchedSummary;
+use Rebilly\Sdk\Model\ReportTax;
 use Rebilly\Sdk\Model\ReportTransactions;
 use Rebilly\Sdk\Model\RevenueEntry;
 use Rebilly\Sdk\Model\SubscriptionCancellationReport;
@@ -567,6 +567,32 @@ class ReportsApi
     }
 
     /**
+     * @return ReportTax
+     */
+    public function getTax(
+        DateTimeImmutable $periodStart,
+        DateTimeImmutable $periodEnd,
+        string $accountingMethod,
+        ?int $limit = null,
+        ?int $offset = null,
+    ): ReportTax {
+        $queryParams = [
+            'periodStart' => $periodStart->format('Y-m-d\TH:i:s\Z'),
+            'periodEnd' => $periodEnd->format('Y-m-d\TH:i:s\Z'),
+            'accountingMethod' => $accountingMethod,
+            'limit' => $limit,
+            'offset' => $offset,
+        ];
+        $uri = '/experimental/reports/tax?' . http_build_query($queryParams);
+
+        $request = new Request('GET', $uri);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return ReportTax::from($data);
+    }
+
+    /**
      * @return TimeSeriesTransaction
      */
     public function getTimeSeriesTransaction(
@@ -574,12 +600,16 @@ class ReportsApi
         string $subaggregate,
         DateTimeImmutable $periodStart,
         DateTimeImmutable $periodEnd,
+        ?int $limit = null,
+        ?int $offset = null,
     ): TimeSeriesTransaction {
         $queryParams = [
             'type' => $type,
             'subaggregate' => $subaggregate,
             'periodStart' => $periodStart->format('Y-m-d\TH:i:s\Z'),
             'periodEnd' => $periodEnd->format('Y-m-d\TH:i:s\Z'),
+            'limit' => $limit,
+            'offset' => $offset,
         ];
         $uri = '/experimental/reports/time-series-transaction?' . http_build_query($queryParams);
 
@@ -650,14 +680,14 @@ class ReportsApi
      * @return ReportRulesMatchedSummary
      */
     public function getTriggeredEventRuleReport(
-        EventType $eventType,
+        string $eventType,
         DateTimeImmutable $periodStart,
         DateTimeImmutable $periodEnd,
         ?int $limit = null,
         ?int $offset = null,
     ): ReportRulesMatchedSummary {
         $pathParams = [
-            '{eventType}' => $eventType->value,
+            '{eventType}' => $eventType,
         ];
 
         $queryParams = [

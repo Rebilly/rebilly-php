@@ -27,6 +27,8 @@ class File implements JsonSerializable
 
     public const SOURCE_TYPE_ORGANIZATION_CLOSURE_EXPORT = 'organization-closure-export';
 
+    public const SOURCE_TYPE_NULL = 'null';
+
     public const MIME_IMAGE_PNG = 'image/png';
 
     public const MIME_IMAGE_JPEG = 'image/jpeg';
@@ -34,8 +36,6 @@ class File implements JsonSerializable
     public const MIME_IMAGE_GIF = 'image/gif';
 
     public const MIME_APPLICATION_PDF = 'application/pdf';
-
-    public const MIME_AUDIO_MPEG = 'audio/mpeg';
 
     private array $fields = [];
 
@@ -73,6 +73,9 @@ class File implements JsonSerializable
         }
         if (array_key_exists('sha1', $data)) {
             $this->setSha1($data['sha1']);
+        }
+        if (array_key_exists('exifData', $data)) {
+            $this->setExifData($data['exifData']);
         }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
@@ -134,17 +137,11 @@ class File implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-return self::SOURCE_TYPE_*|null $sourceType
-     */
     public function getSourceType(): ?string
     {
         return $this->fields['sourceType'] ?? null;
     }
 
-    /**
-     * @psalm-param self::SOURCE_TYPE_*|null $sourceType
-     */
     public function setSourceType(null|string $sourceType): static
     {
         $this->fields['sourceType'] = $sourceType;
@@ -165,16 +162,16 @@ class File implements JsonSerializable
      */
     public function setTags(null|array $tags): static
     {
-        $tags = $tags !== null ? array_map(fn ($value) => $value ?? null, $tags) : null;
+        $tags = $tags !== null ? array_map(
+            fn ($value) => $value,
+            $tags,
+        ) : null;
 
         $this->fields['tags'] = $tags;
 
         return $this;
     }
 
-    /**
-     * @psalm-return self::MIME_*|null $mime
-     */
     public function getMime(): ?string
     {
         return $this->fields['mime'] ?? null;
@@ -200,6 +197,11 @@ class File implements JsonSerializable
         return $this->fields['sha1'] ?? null;
     }
 
+    public function getExifData(): ?object
+    {
+        return $this->fields['exifData'] ?? null;
+    }
+
     public function getCreatedTime(): ?DateTimeImmutable
     {
         return $this->fields['createdTime'] ?? null;
@@ -223,7 +225,7 @@ class File implements JsonSerializable
     }
 
     /**
-     * @return null|array<FileDownloadLink|PermalinkLink|SelfLink|SignedLinkLink>
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
@@ -266,6 +268,9 @@ class File implements JsonSerializable
         if (array_key_exists('sha1', $this->fields)) {
             $data['sha1'] = $this->fields['sha1'];
         }
+        if (array_key_exists('exifData', $this->fields)) {
+            $data['exifData'] = $this->fields['exifData'];
+        }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
         }
@@ -289,9 +294,6 @@ class File implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-param self::MIME_*|null $mime
-     */
     private function setMime(null|string $mime): static
     {
         $this->fields['mime'] = $mime;
@@ -327,6 +329,13 @@ class File implements JsonSerializable
         return $this;
     }
 
+    private function setExifData(null|object $exifData): static
+    {
+        $this->fields['exifData'] = $exifData;
+
+        return $this;
+    }
+
     private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
@@ -350,11 +359,14 @@ class File implements JsonSerializable
     }
 
     /**
-     * @param null|array<FileDownloadLink|PermalinkLink|SelfLink|SignedLinkLink> $links
+     * @param null|array[]|ResourceLink[] $links
      */
     private function setLinks(null|array $links): static
     {
-        $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
+        $links = $links !== null ? array_map(
+            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+            $links,
+        ) : null;
 
         $this->fields['_links'] = $links;
 

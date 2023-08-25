@@ -18,9 +18,6 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\ProfileMfa;
-use Rebilly\Sdk\Model\ResetPassword;
-use Rebilly\Sdk\Model\ResetPasswordTokenInfo;
-use Rebilly\Sdk\Model\UpdatePassword;
 use Rebilly\Sdk\Model\User;
 use Rebilly\Sdk\Paginator;
 
@@ -136,64 +133,6 @@ class UsersApi
     }
 
     /**
-     * @return ResetPasswordTokenInfo
-     */
-    public function getResetPasswordToken(
-        string $token,
-    ): ResetPasswordTokenInfo {
-        $pathParams = [
-            '{token}' => $token,
-        ];
-
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/reset-password/{token}');
-
-        $request = new Request('GET', $uri);
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return ResetPasswordTokenInfo::from($data);
-    }
-
-    /**
-     * @return User
-     */
-    public function resetPassword(
-        string $token,
-        ResetPassword $resetPassword,
-    ): User {
-        $pathParams = [
-            '{token}' => $token,
-        ];
-
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/reset-password/{token}');
-
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($resetPassword));
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return User::from($data);
-    }
-
-    /**
-     * @return User
-     */
-    public function resetTotp(
-        string $id,
-    ): User {
-        $pathParams = [
-            '{id}' => $id,
-        ];
-
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/users/{id}/totp-reset');
-
-        $request = new Request('POST', $uri);
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return User::from($data);
-    }
-
-    /**
      * @return User
      */
     public function update(
@@ -207,26 +146,6 @@ class UsersApi
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/users/{id}');
 
         $request = new Request('PUT', $uri, body: Utils::jsonEncode($user));
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return User::from($data);
-    }
-
-    /**
-     * @return User
-     */
-    public function updatePassword(
-        string $id,
-        UpdatePassword $updatePassword,
-    ): User {
-        $pathParams = [
-            '{id}' => $id,
-        ];
-
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/users/{id}/password');
-
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($updatePassword));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

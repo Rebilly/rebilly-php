@@ -17,15 +17,10 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
-use Rebilly\Sdk\Model\AlternativeInstrument;
-use Rebilly\Sdk\Model\BankAccountCreatePlain;
-use Rebilly\Sdk\Model\BankAccountUpdatePlain;
-use Rebilly\Sdk\Model\PaymentCardCreatePlain;
-use Rebilly\Sdk\Model\PaymentCardUpdatePlain;
+use Rebilly\Sdk\Model\PatchPaymentInstrumentRequest;
 use Rebilly\Sdk\Model\PaymentInstrument;
-use Rebilly\Sdk\Model\PaymentInstrumentCreateToken;
-use Rebilly\Sdk\Model\PaymentInstrumentUpdateToken;
-use Rebilly\Sdk\Model\PayPalAccount;
+use Rebilly\Sdk\Model\PaymentInstrumentFactory;
+use Rebilly\Sdk\Model\PostPaymentInstrumentRequest;
 use Rebilly\Sdk\Paginator;
 
 class PaymentInstrumentsApi
@@ -38,15 +33,15 @@ class PaymentInstrumentsApi
      * @return PaymentInstrument
      */
     public function create(
-        PaymentInstrumentCreateToken|PaymentCardCreatePlain|BankAccountCreatePlain|PayPalAccount|AlternativeInstrument $body,
+        PostPaymentInstrumentRequest $postPaymentInstrumentRequest,
     ): PaymentInstrument {
         $uri = '/payment-instruments';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($body));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($postPaymentInstrumentRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return PaymentInstrument::from($data);
+        return PaymentInstrumentFactory::from($data);
     }
 
     /**
@@ -65,7 +60,7 @@ class PaymentInstrumentsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return PaymentInstrument::from($data);
+        return PaymentInstrumentFactory::from($data);
     }
 
     /**
@@ -84,7 +79,7 @@ class PaymentInstrumentsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return PaymentInstrument::from($data);
+        return PaymentInstrumentFactory::from($data);
     }
 
     /**
@@ -113,7 +108,7 @@ class PaymentInstrumentsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): PaymentInstrument => PaymentInstrument::from($item), $data),
+            array_map(fn (array $item): PaymentInstrument => PaymentInstrumentFactory::from($item), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
@@ -148,7 +143,7 @@ class PaymentInstrumentsApi
      */
     public function update(
         string $id,
-        PaymentInstrumentUpdateToken|PaymentCardUpdatePlain|BankAccountUpdatePlain $body,
+        PatchPaymentInstrumentRequest $patchPaymentInstrumentRequest,
     ): PaymentInstrument {
         $pathParams = [
             '{id}' => $id,
@@ -156,10 +151,10 @@ class PaymentInstrumentsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/payment-instruments/{id}');
 
-        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($body));
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($patchPaymentInstrumentRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return PaymentInstrument::from($data);
+        return PaymentInstrumentFactory::from($data);
     }
 }

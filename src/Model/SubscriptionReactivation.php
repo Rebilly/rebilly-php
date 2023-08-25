@@ -41,6 +41,9 @@ class SubscriptionReactivation implements JsonSerializable
         if (array_key_exists('renewalTime', $data)) {
             $this->setRenewalTime($data['renewalTime']);
         }
+        if (array_key_exists('paymentInstrumentId', $data)) {
+            $this->setPaymentInstrumentId($data['paymentInstrumentId']);
+        }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
         }
@@ -123,6 +126,18 @@ class SubscriptionReactivation implements JsonSerializable
         return $this;
     }
 
+    public function getPaymentInstrumentId(): ?string
+    {
+        return $this->fields['paymentInstrumentId'] ?? null;
+    }
+
+    public function setPaymentInstrumentId(null|string $paymentInstrumentId): static
+    {
+        $this->fields['paymentInstrumentId'] = $paymentInstrumentId;
+
+        return $this;
+    }
+
     public function getCreatedTime(): ?DateTimeImmutable
     {
         return $this->fields['createdTime'] ?? null;
@@ -134,11 +149,21 @@ class SubscriptionReactivation implements JsonSerializable
     }
 
     /**
-     * @return null|SelfLink[]
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    public function setLinks(null|array $links): static
+    {
+        $this->fields['_links'] = $links;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -161,6 +186,9 @@ class SubscriptionReactivation implements JsonSerializable
         }
         if (array_key_exists('renewalTime', $this->fields)) {
             $data['renewalTime'] = $this->fields['renewalTime']?->format(DateTimeInterface::RFC3339);
+        }
+        if (array_key_exists('paymentInstrumentId', $this->fields)) {
+            $data['paymentInstrumentId'] = $this->fields['paymentInstrumentId'];
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
@@ -207,18 +235,6 @@ class SubscriptionReactivation implements JsonSerializable
         }
 
         $this->fields['updatedTime'] = $updatedTime;
-
-        return $this;
-    }
-
-    /**
-     * @param null|SelfLink[] $links
-     */
-    private function setLinks(null|array $links): static
-    {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
-
-        $this->fields['_links'] = $links;
 
         return $this;
     }

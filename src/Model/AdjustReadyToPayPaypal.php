@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-class AdjustReadyToPayPaypal extends AdjustPaymentMethod
+use JsonSerializable;
+
+class AdjustReadyToPayPaypal implements AdjustPaymentMethod, JsonSerializable
 {
     public const PAYMENT_METHOD_PAYPAL = 'paypal';
 
@@ -23,10 +25,6 @@ class AdjustReadyToPayPaypal extends AdjustPaymentMethod
 
     public function __construct(array $data = [])
     {
-        parent::__construct([
-            'paymentMethod' => 'paypal',
-        ] + $data);
-
         if (array_key_exists('paymentMethod', $data)) {
             $this->setPaymentMethod($data['paymentMethod']);
         }
@@ -40,36 +38,24 @@ class AdjustReadyToPayPaypal extends AdjustPaymentMethod
         return new self($data);
     }
 
-    /**
-     * @psalm-return self::PAYMENT_METHOD_* $paymentMethod
-     */
-    public function getPaymentMethod(): string
+    public function getPaymentMethod(): ?string
     {
-        return $this->fields['paymentMethod'];
+        return $this->fields['paymentMethod'] ?? null;
     }
 
-    /**
-     * @psalm-param self::PAYMENT_METHOD_* $paymentMethod
-     */
-    public function setPaymentMethod(string $paymentMethod): static
+    public function setPaymentMethod(null|string $paymentMethod): static
     {
         $this->fields['paymentMethod'] = $paymentMethod;
 
         return $this;
     }
 
-    /**
-     * @psalm-return self::FEATURE_* $feature
-     */
-    public function getFeature(): string
+    public function getFeature(): ?string
     {
-        return $this->fields['feature'];
+        return $this->fields['feature'] ?? null;
     }
 
-    /**
-     * @psalm-param self::FEATURE_* $feature
-     */
-    public function setFeature(string $feature): static
+    public function setFeature(null|string $feature): static
     {
         $this->fields['feature'] = $feature;
 
@@ -86,6 +72,6 @@ class AdjustReadyToPayPaypal extends AdjustPaymentMethod
             $data['feature'] = $this->fields['feature'];
         }
 
-        return parent::jsonSerialize() + $data;
+        return $data;
     }
 }

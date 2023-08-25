@@ -68,11 +68,17 @@ class ApiTracking implements JsonSerializable
         if (array_key_exists('ipAddress', $data)) {
             $this->setIpAddress($data['ipAddress']);
         }
+        if (array_key_exists('relatedResourceIds', $data)) {
+            $this->setRelatedResourceIds($data['relatedResourceIds']);
+        }
         if (array_key_exists('relatedIds', $data)) {
             $this->setRelatedIds($data['relatedIds']);
         }
         if (array_key_exists('duration', $data)) {
             $this->setDuration($data['duration']);
+        }
+        if (array_key_exists('organizationId', $data)) {
+            $this->setOrganizationId($data['organizationId']);
         }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
@@ -82,6 +88,9 @@ class ApiTracking implements JsonSerializable
         }
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
+        }
+        if (array_key_exists('_embedded', $data)) {
+            $this->setEmbedded($data['_embedded']);
         }
     }
 
@@ -138,17 +147,11 @@ class ApiTracking implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-return self::METHOD_*|null $method
-     */
     public function getMethod(): ?string
     {
         return $this->fields['method'] ?? null;
     }
 
-    /**
-     * @psalm-param self::METHOD_*|null $method
-     */
     public function setMethod(null|string $method): static
     {
         $this->fields['method'] = $method;
@@ -232,6 +235,14 @@ class ApiTracking implements JsonSerializable
         return $this;
     }
 
+    /**
+     * @return null|string[]
+     */
+    public function getRelatedResourceIds(): ?array
+    {
+        return $this->fields['relatedResourceIds'] ?? null;
+    }
+
     public function getRelatedIds(): ?ApiTrackingRelatedIds
     {
         return $this->fields['relatedIds'] ?? null;
@@ -260,6 +271,18 @@ class ApiTracking implements JsonSerializable
         return $this;
     }
 
+    public function getOrganizationId(): ?string
+    {
+        return $this->fields['organizationId'] ?? null;
+    }
+
+    public function setOrganizationId(null|string $organizationId): static
+    {
+        $this->fields['organizationId'] = $organizationId;
+
+        return $this;
+    }
+
     public function getCreatedTime(): ?DateTimeImmutable
     {
         return $this->fields['createdTime'] ?? null;
@@ -271,11 +294,37 @@ class ApiTracking implements JsonSerializable
     }
 
     /**
-     * @return null|SelfLink[]
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    public function setLinks(null|array $links): static
+    {
+        $this->fields['_links'] = $links;
+
+        return $this;
+    }
+
+    public function getEmbedded(): ?ApiTrackingEmbedded
+    {
+        return $this->fields['_embedded'] ?? null;
+    }
+
+    public function setEmbedded(null|ApiTrackingEmbedded|array $embedded): static
+    {
+        if ($embedded !== null && !($embedded instanceof ApiTrackingEmbedded)) {
+            $embedded = ApiTrackingEmbedded::from($embedded);
+        }
+
+        $this->fields['_embedded'] = $embedded;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -314,11 +363,17 @@ class ApiTracking implements JsonSerializable
         if (array_key_exists('ipAddress', $this->fields)) {
             $data['ipAddress'] = $this->fields['ipAddress'];
         }
+        if (array_key_exists('relatedResourceIds', $this->fields)) {
+            $data['relatedResourceIds'] = $this->fields['relatedResourceIds'];
+        }
         if (array_key_exists('relatedIds', $this->fields)) {
             $data['relatedIds'] = $this->fields['relatedIds']?->jsonSerialize();
         }
         if (array_key_exists('duration', $this->fields)) {
             $data['duration'] = $this->fields['duration'];
+        }
+        if (array_key_exists('organizationId', $this->fields)) {
+            $data['organizationId'] = $this->fields['organizationId'];
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
@@ -329,8 +384,26 @@ class ApiTracking implements JsonSerializable
         if (array_key_exists('_links', $this->fields)) {
             $data['_links'] = $this->fields['_links'];
         }
+        if (array_key_exists('_embedded', $this->fields)) {
+            $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();
+        }
 
         return $data;
+    }
+
+    /**
+     * @param null|string[] $relatedResourceIds
+     */
+    private function setRelatedResourceIds(null|array $relatedResourceIds): static
+    {
+        $relatedResourceIds = $relatedResourceIds !== null ? array_map(
+            fn ($value) => $value,
+            $relatedResourceIds,
+        ) : null;
+
+        $this->fields['relatedResourceIds'] = $relatedResourceIds;
+
+        return $this;
     }
 
     private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
@@ -351,18 +424,6 @@ class ApiTracking implements JsonSerializable
         }
 
         $this->fields['updatedTime'] = $updatedTime;
-
-        return $this;
-    }
-
-    /**
-     * @param null|SelfLink[] $links
-     */
-    private function setLinks(null|array $links): static
-    {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
-
-        $this->fields['_links'] = $links;
 
         return $this;
     }

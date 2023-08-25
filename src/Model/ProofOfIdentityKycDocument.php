@@ -15,8 +15,9 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
+use JsonSerializable;
 
-class ProofOfIdentityKycDocument extends KycDocument
+class ProofOfIdentityKycDocument implements KycDocument, JsonSerializable
 {
     public const STATUS_PENDING = 'pending';
 
@@ -32,10 +33,6 @@ class ProofOfIdentityKycDocument extends KycDocument
 
     public function __construct(array $data = [])
     {
-        parent::__construct([
-            'documentType' => 'identity-proof',
-        ] + $data);
-
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
         }
@@ -139,63 +136,55 @@ class ProofOfIdentityKycDocument extends KycDocument
     }
 
     /**
-     * @return null|string[]
+     * @return string[]
      */
-    public function getFileIds(): ?array
+    public function getFileIds(): array
     {
-        return $this->fields['fileIds'] ?? null;
+        return $this->fields['fileIds'];
     }
 
     /**
-     * @param null|string[] $fileIds
+     * @param string[] $fileIds
      */
-    public function setFileIds(null|array $fileIds): static
+    public function setFileIds(array $fileIds): static
     {
-        $fileIds = $fileIds !== null ? array_map(fn ($value) => $value ?? null, $fileIds) : null;
+        $fileIds = array_map(
+            fn ($value) => $value,
+            $fileIds,
+        );
 
         $this->fields['fileIds'] = $fileIds;
 
         return $this;
     }
 
-    public function getDocumentType(): KycDocumentTypes
+    public function getDocumentType(): string
     {
         return $this->fields['documentType'];
     }
 
-    public function setDocumentType(KycDocumentTypes|string $documentType): static
+    public function setDocumentType(string $documentType): static
     {
-        if (!($documentType instanceof KycDocumentTypes)) {
-            $documentType = KycDocumentTypes::from($documentType);
-        }
-
         $this->fields['documentType'] = $documentType;
 
         return $this;
     }
 
-    public function getDocumentSubtype(): ?KycDocumentSubtypes
+    public function getDocumentSubtype(): ?string
     {
         return $this->fields['documentSubtype'] ?? null;
     }
 
-    public function setDocumentSubtype(null|KycDocumentSubtypes|string $documentSubtype): static
+    public function setDocumentSubtype(null|string $documentSubtype): static
     {
-        if ($documentSubtype !== null && !($documentSubtype instanceof KycDocumentSubtypes)) {
-            $documentSubtype = KycDocumentSubtypes::from($documentSubtype);
-        }
-
         $this->fields['documentSubtype'] = $documentSubtype;
 
         return $this;
     }
 
-    /**
-     * @psalm-return self::STATUS_*|null $status
-     */
-    public function getStatus(): ?string
+    public function getStatus(): string
     {
-        return $this->fields['status'] ?? null;
+        return $this->fields['status'];
     }
 
     public function getRejectionReason(): ?KycDocumentRejection
@@ -347,15 +336,15 @@ class ProofOfIdentityKycDocument extends KycDocument
         return $this;
     }
 
-    public function getParsedData(): ?ProofOfIdentityKycDocumentDocumentMatches
+    public function getParsedData(): ?ProofOfIdentityKycDocumentParsedData
     {
         return $this->fields['parsedData'] ?? null;
     }
 
-    public function setParsedData(null|ProofOfIdentityKycDocumentDocumentMatches|array $parsedData): static
+    public function setParsedData(null|ProofOfIdentityKycDocumentParsedData|array $parsedData): static
     {
-        if ($parsedData !== null && !($parsedData instanceof ProofOfIdentityKycDocumentDocumentMatches)) {
-            $parsedData = ProofOfIdentityKycDocumentDocumentMatches::from($parsedData);
+        if ($parsedData !== null && !($parsedData instanceof ProofOfIdentityKycDocumentParsedData)) {
+            $parsedData = ProofOfIdentityKycDocumentParsedData::from($parsedData);
         }
 
         $this->fields['parsedData'] = $parsedData;
@@ -364,19 +353,27 @@ class ProofOfIdentityKycDocument extends KycDocument
     }
 
     /**
-     * @return null|array<CustomerLink|SelfLink>
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
     }
 
-    /**
-     * @return null|array{customer:Customer}
-     */
-    public function getEmbedded(): ?array
+    public function getEmbedded(): ?ProofOfIdentityKycDocumentEmbedded
     {
         return $this->fields['_embedded'] ?? null;
+    }
+
+    public function setEmbedded(null|ProofOfIdentityKycDocumentEmbedded|array $embedded): static
+    {
+        if ($embedded !== null && !($embedded instanceof ProofOfIdentityKycDocumentEmbedded)) {
+            $embedded = ProofOfIdentityKycDocumentEmbedded::from($embedded);
+        }
+
+        $this->fields['_embedded'] = $embedded;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -392,10 +389,10 @@ class ProofOfIdentityKycDocument extends KycDocument
             $data['fileIds'] = $this->fields['fileIds'];
         }
         if (array_key_exists('documentType', $this->fields)) {
-            $data['documentType'] = $this->fields['documentType']?->value;
+            $data['documentType'] = $this->fields['documentType'];
         }
         if (array_key_exists('documentSubtype', $this->fields)) {
-            $data['documentSubtype'] = $this->fields['documentSubtype']?->value;
+            $data['documentSubtype'] = $this->fields['documentSubtype'];
         }
         if (array_key_exists('status', $this->fields)) {
             $data['status'] = $this->fields['status'];
@@ -458,10 +455,10 @@ class ProofOfIdentityKycDocument extends KycDocument
             $data['_links'] = $this->fields['_links'];
         }
         if (array_key_exists('_embedded', $this->fields)) {
-            $data['_embedded'] = $this->fields['_embedded'];
+            $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();
         }
 
-        return parent::jsonSerialize() + $data;
+        return $data;
     }
 
     private function setId(null|string $id): static
@@ -471,10 +468,7 @@ class ProofOfIdentityKycDocument extends KycDocument
         return $this;
     }
 
-    /**
-     * @psalm-param self::STATUS_*|null $status
-     */
-    private function setStatus(null|string $status): static
+    private function setStatus(string $status): static
     {
         $this->fields['status'] = $status;
 
@@ -558,11 +552,14 @@ class ProofOfIdentityKycDocument extends KycDocument
     }
 
     /**
-     * @param null|Tag[] $tags
+     * @param null|array[]|Tag[] $tags
      */
     private function setTags(null|array $tags): static
     {
-        $tags = $tags !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Tag ? $value : Tag::from($value)) : null, $tags) : null;
+        $tags = $tags !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof Tag ? $value : Tag::from($value)) : null,
+            $tags,
+        ) : null;
 
         $this->fields['tags'] = $tags;
 
@@ -577,27 +574,16 @@ class ProofOfIdentityKycDocument extends KycDocument
     }
 
     /**
-     * @param null|array<CustomerLink|SelfLink> $links
+     * @param null|array[]|ResourceLink[] $links
      */
     private function setLinks(null|array $links): static
     {
-        $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
+        $links = $links !== null ? array_map(
+            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+            $links,
+        ) : null;
 
         $this->fields['_links'] = $links;
-
-        return $this;
-    }
-
-    /**
-     * @param null|array{customer:Customer} $embedded
-     */
-    private function setEmbedded(null|array $embedded): static
-    {
-        if ($embedded !== null) {
-            $embedded['customer'] = isset($embedded['customer']) ? ($embedded['customer'] instanceof Customer ? $embedded['customer'] : Customer::from($embedded['customer'])) : null;
-        }
-
-        $this->fields['_embedded'] = $embedded;
 
         return $this;
     }

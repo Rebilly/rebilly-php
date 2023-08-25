@@ -165,7 +165,6 @@ class EventsApi
         ?string $q = null,
         ?array $sort = null,
         ?string $fields = null,
-        ?string $expand = null,
     ): Collection {
         $pathParams = [
             '{eventType}' => $eventType,
@@ -178,7 +177,6 @@ class EventsApi
             'q' => $q,
             'sort' => $sort,
             'fields' => $fields,
-            'expand' => $expand,
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/rules/drafts?') . http_build_query($queryParams);
 
@@ -202,7 +200,6 @@ class EventsApi
         ?string $q = null,
         ?array $sort = null,
         ?string $fields = null,
-        ?string $expand = null,
     ): Paginator {
         $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllDraftRulesets(
             eventType: $eventType,
@@ -212,7 +209,6 @@ class EventsApi
             q: $q,
             sort: $sort,
             fields: $fields,
-            expand: $expand,
         );
 
         return new Paginator(
@@ -287,7 +283,6 @@ class EventsApi
         string $eventType,
         string $id,
         ?string $fields = null,
-        ?string $expand = null,
     ): RuleSetDraft {
         $pathParams = [
             '{eventType}' => $eventType,
@@ -296,7 +291,6 @@ class EventsApi
 
         $queryParams = [
             'fields' => $fields,
-            'expand' => $expand,
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/rules/drafts/{id}?') . http_build_query($queryParams);
 
@@ -337,7 +331,6 @@ class EventsApi
         ?string $q = null,
         ?array $sort = null,
         ?string $fields = null,
-        ?string $expand = null,
     ): Collection {
         $pathParams = [
             '{eventType}' => $eventType,
@@ -350,7 +343,6 @@ class EventsApi
             'q' => $q,
             'sort' => $sort,
             'fields' => $fields,
-            'expand' => $expand,
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/rules/history?') . http_build_query($queryParams);
 
@@ -374,7 +366,6 @@ class EventsApi
         ?string $q = null,
         ?array $sort = null,
         ?string $fields = null,
-        ?string $expand = null,
     ): Paginator {
         $closure = fn (?int $limit, ?int $offset): Collection => $this->getRulesHistory(
             eventType: $eventType,
@@ -384,7 +375,6 @@ class EventsApi
             q: $q,
             sort: $sort,
             fields: $fields,
-            expand: $expand,
         );
 
         return new Paginator(
@@ -400,7 +390,6 @@ class EventsApi
         string $eventType,
         int $version,
         ?string $fields = null,
-        ?string $expand = null,
     ): RuleSetVersion {
         $pathParams = [
             '{eventType}' => $eventType,
@@ -409,7 +398,6 @@ class EventsApi
 
         $queryParams = [
             'fields' => $fields,
-            'expand' => $expand,
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/rules/versions/{version}?') . http_build_query($queryParams);
 
@@ -427,7 +415,6 @@ class EventsApi
         string $eventType,
         int $version,
         ?string $fields = null,
-        ?string $expand = null,
     ): RuleSetHistoryItem {
         $pathParams = [
             '{eventType}' => $eventType,
@@ -436,7 +423,6 @@ class EventsApi
 
         $queryParams = [
             'fields' => $fields,
-            'expand' => $expand,
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/rules/history/{version}?') . http_build_query($queryParams);
 

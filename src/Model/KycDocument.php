@@ -13,45 +13,85 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use InvalidArgumentException;
-use JsonSerializable;
+use DateTimeImmutable;
 
-abstract class KycDocument implements JsonSerializable
+interface KycDocument
 {
-    private array $fields = [];
+    public function getId(): ?string;
 
-    protected function __construct(array $data = [])
-    {
-        if (array_key_exists('documentType', $data)) {
-            $this->setDocumentType($data['documentType']);
-        }
-    }
+    public function getFileId(): ?string;
 
-    public static function from(array $data = []): self
-    {
-        switch ($data['documentType']) {
-            case 'identity-proof':
-                return new ProofOfIdentityKycDocument($data);
-            case 'funds-proof':
-                return new ProofOfFundsKycDocument($data);
-            case 'address-proof':
-                return new ProofOfAddressKycDocument($data);
-            case 'credit-file-proof':
-                return new ProofOfCreditFileKycDocument($data);
-            case 'purchase-proof':
-                return new ProofOfPurchaseKycDocument($data);
-        }
+    public function setFileId(null|string $fileId): static;
 
-        throw new InvalidArgumentException("Unsupported documentType value: '{$data['documentType']}'");
-    }
+    /**
+     * @return string[]
+     */
+    public function getFileIds(): array;
 
-    public function jsonSerialize(): array
-    {
-        $data = [];
-        if (array_key_exists('documentType', $this->fields)) {
-            $data['documentType'] = $this->fields['documentType'];
-        }
+    /**
+     * @param string[] $fileIds
+     */
+    public function setFileIds(array $fileIds): static;
 
-        return $data;
-    }
+    public function getDocumentType(): string;
+
+    public function setDocumentType(string $documentType): static;
+
+    public function getDocumentSubtype(): ?string;
+
+    public function setDocumentSubtype(null|string $documentSubtype): static;
+
+    public function getStatus(): string;
+
+    public function getRejectionReason(): ?KycDocumentRejection;
+
+    public function setRejectionReason(null|KycDocumentRejection|array $rejectionReason): static;
+
+    public function getRequestId(): ?string;
+
+    public function getCreatedTime(): ?DateTimeImmutable;
+
+    public function getUpdatedTime(): ?DateTimeImmutable;
+
+    public function getProcessedTime(): ?DateTimeImmutable;
+
+    public function getCustomerId(): string;
+
+    public function setCustomerId(string $customerId): static;
+
+    public function getReviewerId(): ?string;
+
+    public function getReviewerName(): ?string;
+
+    public function getReviewStartTime(): ?DateTimeImmutable;
+
+    public function getReviewTime(): ?DateTimeImmutable;
+
+    public function getNotes(): ?string;
+
+    public function setNotes(null|string $notes): static;
+
+    /**
+     * @return null|Tag[]
+     */
+    public function getTags(): ?array;
+
+    public function getReason(): ?string;
+
+    public function setReason(null|string $reason): static;
+
+    public function getMatchLevel(): ?int;
+
+    public function setMatchLevel(null|int $matchLevel): static;
+
+    public function getRevision(): ?int;
+
+    /**
+     * @return null|ResourceLink[]
+     */
+    public function getLinks(): ?array;
+
+    public function getEmbedded(): ?ProofOfIdentityKycDocumentEmbedded;
+
+    public function setEmbedded(null|ProofOfIdentityKycDocumentEmbedded|array $embedded): static;
 }

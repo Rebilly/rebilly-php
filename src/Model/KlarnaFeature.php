@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class KlarnaFeature implements JsonSerializable
+class KlarnaFeature implements ReadyToPayKlarnaMethodFeature, JsonSerializable
 {
     public const NAME_KLARNA = 'Klarna';
 
@@ -39,17 +39,11 @@ class KlarnaFeature implements JsonSerializable
         return new self($data);
     }
 
-    /**
-     * @psalm-return self::NAME_* $name
-     */
     public function getName(): string
     {
         return $this->fields['name'];
     }
 
-    /**
-     * @psalm-param self::NAME_* $name
-     */
     public function setName(string $name): static
     {
         $this->fields['name'] = $name;

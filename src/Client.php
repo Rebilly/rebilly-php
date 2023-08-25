@@ -14,12 +14,13 @@ declare(strict_types=1);
 namespace Rebilly\Sdk;
 
 use GuzzleHttp\Client as GuzzleClient;
-use GuzzleHttp\ClientInterface;
+use GuzzleHttp\ClientInterface as GuzzleClientInterface;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\Uri;
 use GuzzleHttp\Utils;
+use Psr\Http\Client\ClientInterface as PsrClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Rebilly\Sdk\Middleware\ApiKeyAuthentication;
@@ -28,7 +29,7 @@ use Rebilly\Sdk\Middleware\BearerAuthentication;
 use Rebilly\Sdk\Middleware\ErrorHandler;
 use Rebilly\Sdk\Middleware\UserAgent;
 
-final class Client implements ClientInterface, \Psr\Http\Client\ClientInterface
+final class Client implements GuzzleClientInterface, PsrClientInterface
 {
     public const BASE_HOST = 'https://api.rebilly.com';
 

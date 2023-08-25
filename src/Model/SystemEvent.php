@@ -53,17 +53,13 @@ class SystemEvent implements JsonSerializable
         return new self($data);
     }
 
-    public function getEventType(): ?EventType
+    public function getEventType(): ?string
     {
         return $this->fields['eventType'] ?? null;
     }
 
-    public function setEventType(null|EventType|string $eventType): static
+    public function setEventType(null|string $eventType): static
     {
-        if ($eventType !== null && !($eventType instanceof EventType)) {
-            $eventType = EventType::from($eventType);
-        }
-
         $this->fields['eventType'] = $eventType;
 
         return $this;
@@ -93,17 +89,11 @@ class SystemEvent implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-return self::CATEGORY_*|null $category
-     */
     public function getCategory(): ?string
     {
         return $this->fields['category'] ?? null;
     }
 
-    /**
-     * @psalm-param self::CATEGORY_*|null $category
-     */
     public function setCategory(null|string $category): static
     {
         $this->fields['category'] = $category;
@@ -122,7 +112,7 @@ class SystemEvent implements JsonSerializable
     }
 
     /**
-     * @return null|SelfLink[]
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
@@ -133,7 +123,7 @@ class SystemEvent implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('eventType', $this->fields)) {
-            $data['eventType'] = $this->fields['eventType']?->value;
+            $data['eventType'] = $this->fields['eventType'];
         }
         if (array_key_exists('title', $this->fields)) {
             $data['title'] = $this->fields['title'];
@@ -172,11 +162,14 @@ class SystemEvent implements JsonSerializable
     }
 
     /**
-     * @param null|SelfLink[] $links
+     * @param null|array[]|ResourceLink[] $links
      */
     private function setLinks(null|array $links): static
     {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
+        $links = $links !== null ? array_map(
+            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+            $links,
+        ) : null;
 
         $this->fields['_links'] = $links;
 

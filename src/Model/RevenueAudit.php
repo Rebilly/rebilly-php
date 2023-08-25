@@ -33,15 +33,15 @@ class RevenueAudit extends DataExport
         return new self($data);
     }
 
-    public function getDateRange(): ?DataExportDateRange
+    public function getDateRange(): ?RevenueAuditDateRange
     {
         return $this->fields['dateRange'] ?? null;
     }
 
-    public function setDateRange(null|DataExportDateRange|array $dateRange): static
+    public function setDateRange(null|RevenueAuditDateRange|array $dateRange): static
     {
-        if ($dateRange !== null && !($dateRange instanceof DataExportDateRange)) {
-            $dateRange = DataExportDateRange::from($dateRange);
+        if ($dateRange !== null && !($dateRange instanceof RevenueAuditDateRange)) {
+            $dateRange = RevenueAuditDateRange::from($dateRange);
         }
 
         $this->fields['dateRange'] = $dateRange;

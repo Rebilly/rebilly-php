@@ -24,6 +24,9 @@ class SkrillSettings implements JsonSerializable
         if (array_key_exists('merchantFields', $data)) {
             $this->setMerchantFields($data['merchantFields']);
         }
+        if (array_key_exists('useSPX', $data)) {
+            $this->setUseSPX($data['useSPX']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -43,11 +46,26 @@ class SkrillSettings implements JsonSerializable
         return $this;
     }
 
+    public function getUseSPX(): ?bool
+    {
+        return $this->fields['useSPX'] ?? null;
+    }
+
+    public function setUseSPX(null|bool $useSPX): static
+    {
+        $this->fields['useSPX'] = $useSPX;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
         if (array_key_exists('merchantFields', $this->fields)) {
             $data['merchantFields'] = $this->fields['merchantFields'];
+        }
+        if (array_key_exists('useSPX', $this->fields)) {
+            $data['useSPX'] = $this->fields['useSPX'];
         }
 
         return $data;

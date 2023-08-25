@@ -68,6 +68,13 @@ class AuthenticationTokenResponse implements JsonSerializable
         return $this->fields['customerId'] ?? null;
     }
 
+    public function setCustomerId(null|string $customerId): static
+    {
+        $this->fields['customerId'] = $customerId;
+
+        return $this;
+    }
+
     public function getToken(): ?string
     {
         return $this->fields['token'] ?? null;
@@ -90,6 +97,13 @@ class AuthenticationTokenResponse implements JsonSerializable
         return $this->fields['credentialId'] ?? null;
     }
 
+    public function setCredentialId(null|string $credentialId): static
+    {
+        $this->fields['credentialId'] = $credentialId;
+
+        return $this;
+    }
+
     public function getExpiredTime(): ?DateTimeImmutable
     {
         return $this->fields['expiredTime'] ?? null;
@@ -107,11 +121,21 @@ class AuthenticationTokenResponse implements JsonSerializable
     }
 
     /**
-     * @return null|SelfLink[]
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    public function setLinks(null|array $links): static
+    {
+        $this->fields['_links'] = $links;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -142,35 +166,9 @@ class AuthenticationTokenResponse implements JsonSerializable
         return $data;
     }
 
-    private function setCustomerId(null|string $customerId): static
-    {
-        $this->fields['customerId'] = $customerId;
-
-        return $this;
-    }
-
     private function setToken(null|string $token): static
     {
         $this->fields['token'] = $token;
-
-        return $this;
-    }
-
-    private function setCredentialId(null|string $credentialId): static
-    {
-        $this->fields['credentialId'] = $credentialId;
-
-        return $this;
-    }
-
-    /**
-     * @param null|SelfLink[] $links
-     */
-    private function setLinks(null|array $links): static
-    {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
-
-        $this->fields['_links'] = $links;
 
         return $this;
     }

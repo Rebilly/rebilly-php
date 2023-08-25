@@ -22,33 +22,16 @@ use Rebilly\Sdk\Model\InvoiceIssue;
 use Rebilly\Sdk\Model\OrderTimeline;
 use Rebilly\Sdk\Model\Subscription;
 use Rebilly\Sdk\Model\SubscriptionChange;
+use Rebilly\Sdk\Model\SubscriptionFactory;
 use Rebilly\Sdk\Model\SubscriptionInvoice;
 use Rebilly\Sdk\Model\SubscriptionSummaryMetrics;
+use Rebilly\Sdk\Model\UpcomingInvoice;
 use Rebilly\Sdk\Paginator;
 
 class SubscriptionsApi
 {
     public function __construct(protected ?ClientInterface $client)
     {
-    }
-
-    /**
-     * @return SubscriptionSummaryMetrics
-     */
-    public function getSubscriptionSummaryMetrics(
-        string $subscriptionId,
-    ): SubscriptionSummaryMetrics {
-        $pathParams = [
-            '{subscriptionId}' => $subscriptionId,
-        ];
-
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/experimental/subscriptions/{subscriptionId}/summary-metrics');
-
-        $request = new Request('GET', $uri);
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return SubscriptionSummaryMetrics::from($data);
     }
 
     /**
@@ -68,7 +51,7 @@ class SubscriptionsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Subscription::from($data);
+        return SubscriptionFactory::from($data);
     }
 
     /**
@@ -87,7 +70,7 @@ class SubscriptionsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Subscription::from($data);
+        return SubscriptionFactory::from($data);
     }
 
     /**
@@ -178,7 +161,7 @@ class SubscriptionsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Subscription::from($data);
+        return SubscriptionFactory::from($data);
     }
 
     /**
@@ -207,7 +190,7 @@ class SubscriptionsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): Subscription => Subscription::from($item), $data),
+            array_map(fn (array $item): Subscription => SubscriptionFactory::from($item), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
@@ -297,7 +280,7 @@ class SubscriptionsApi
     }
 
     /**
-     * @return Invoice[]
+     * @return UpcomingInvoice[]
      */
     public function getAllUpcomingInvoices(
         string $id,
@@ -316,7 +299,26 @@ class SubscriptionsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): Invoice => Invoice::from($item), $data);
+        return array_map(fn (array $item): UpcomingInvoice => UpcomingInvoice::from($item), $data);
+    }
+
+    /**
+     * @return SubscriptionSummaryMetrics
+     */
+    public function getSubscriptionSummaryMetrics(
+        string $subscriptionId,
+    ): SubscriptionSummaryMetrics {
+        $pathParams = [
+            '{subscriptionId}' => $subscriptionId,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/experimental/subscriptions/{subscriptionId}/summary-metrics');
+
+        $request = new Request('GET', $uri);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return SubscriptionSummaryMetrics::from($data);
     }
 
     /**
@@ -341,12 +343,12 @@ class SubscriptionsApi
     }
 
     /**
-     * @return Invoice
+     * @return UpcomingInvoice
      */
     public function getUpcomingInvoice(
         string $id,
         ?string $expand = null,
-    ): Invoice {
+    ): UpcomingInvoice {
         $pathParams = [
             '{id}' => $id,
         ];
@@ -360,17 +362,37 @@ class SubscriptionsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Invoice::from($data);
+        return UpcomingInvoice::from($data);
     }
 
     /**
-     * @return Invoice
+     * @return UpcomingInvoice
+     */
+    public function issueEarlyUpcomingInvoice(
+        string $id,
+        InvoiceIssue $invoiceIssue,
+    ): UpcomingInvoice {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}/upcoming-invoice/issue');
+
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($invoiceIssue));
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return UpcomingInvoice::from($data);
+    }
+
+    /**
+     * @return UpcomingInvoice
      */
     public function issueUpcomingInvoice(
         string $id,
         string $invoiceId,
         InvoiceIssue $invoiceIssue,
-    ): Invoice {
+    ): UpcomingInvoice {
         $pathParams = [
             '{id}' => $id,
             '{invoiceId}' => $invoiceId,
@@ -382,7 +404,7 @@ class SubscriptionsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Invoice::from($data);
+        return UpcomingInvoice::from($data);
     }
 
     /**
@@ -406,7 +428,7 @@ class SubscriptionsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Subscription::from($data);
+        return SubscriptionFactory::from($data);
     }
 
     /**
@@ -425,6 +447,6 @@ class SubscriptionsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Subscription::from($data);
+        return SubscriptionFactory::from($data);
     }
 }

@@ -52,17 +52,11 @@ class ReportEventsTriggeredSummaryData implements JsonSerializable
         return new self($data);
     }
 
-    /**
-     * @psalm-return self::EVENT_NAME_*|null $eventName
-     */
     public function getEventName(): ?string
     {
         return $this->fields['eventName'] ?? null;
     }
 
-    /**
-     * @psalm-param self::EVENT_NAME_*|null $eventName
-     */
     public function setEventName(null|string $eventName): static
     {
         $this->fields['eventName'] = $eventName;

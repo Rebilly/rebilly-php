@@ -13,21 +13,25 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-class ReadyToPayGenericMethod extends ReadyToPayMethods
+use JsonSerializable;
+
+class ReadyToPayGenericMethod implements ReadyToPayMethods, JsonSerializable
 {
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        parent::__construct([
-            'method' => 'AdvCash',
-        ] + $data);
-
         if (array_key_exists('method', $data)) {
             $this->setMethod($data['method']);
         }
         if (array_key_exists('filters', $data)) {
             $this->setFilters($data['filters']);
+        }
+        if (array_key_exists('brands', $data)) {
+            $this->setBrands($data['brands']);
+        }
+        if (array_key_exists('feature', $data)) {
+            $this->setFeature($data['feature']);
         }
     }
 
@@ -36,17 +40,13 @@ class ReadyToPayGenericMethod extends ReadyToPayMethods
         return new self($data);
     }
 
-    public function getMethod(): AlternativePaymentMethods
+    public function getMethod(): string
     {
         return $this->fields['method'];
     }
 
-    public function setMethod(AlternativePaymentMethods|string $method): static
+    public function setMethod(string $method): static
     {
-        if (!($method instanceof AlternativePaymentMethods)) {
-            $method = AlternativePaymentMethods::from($method);
-        }
-
         $this->fields['method'] = $method;
 
         return $this;
@@ -65,9 +65,51 @@ class ReadyToPayGenericMethod extends ReadyToPayMethods
      */
     public function setFilters(null|array $filters): static
     {
-        $filters = $filters !== null ? array_map(fn ($value) => $value ?? null, $filters) : null;
+        $filters = $filters !== null ? array_map(
+            fn ($value) => $value,
+            $filters,
+        ) : null;
 
         $this->fields['filters'] = $filters;
+
+        return $this;
+    }
+
+    /**
+     * @return null|string[]
+     */
+    public function getBrands(): ?array
+    {
+        return $this->fields['brands'] ?? null;
+    }
+
+    /**
+     * @param null|string[] $brands
+     */
+    public function setBrands(null|array $brands): static
+    {
+        $brands = $brands !== null ? array_map(
+            fn ($value) => $value,
+            $brands,
+        ) : null;
+
+        $this->fields['brands'] = $brands;
+
+        return $this;
+    }
+
+    public function getFeature(): ?ReadyToPayKlarnaMethodFeature
+    {
+        return $this->fields['feature'] ?? null;
+    }
+
+    public function setFeature(null|ReadyToPayKlarnaMethodFeature|array $feature): static
+    {
+        if ($feature !== null && !($feature instanceof ReadyToPayKlarnaMethodFeature)) {
+            $feature = ReadyToPayKlarnaMethodFeatureFactory::from($feature);
+        }
+
+        $this->fields['feature'] = $feature;
 
         return $this;
     }
@@ -76,12 +118,18 @@ class ReadyToPayGenericMethod extends ReadyToPayMethods
     {
         $data = [];
         if (array_key_exists('method', $this->fields)) {
-            $data['method'] = $this->fields['method']?->value;
+            $data['method'] = $this->fields['method'];
         }
         if (array_key_exists('filters', $this->fields)) {
             $data['filters'] = $this->fields['filters'];
         }
+        if (array_key_exists('brands', $this->fields)) {
+            $data['brands'] = $this->fields['brands'];
+        }
+        if (array_key_exists('feature', $this->fields)) {
+            $data['feature'] = $this->fields['feature']?->jsonSerialize();
+        }
 
-        return parent::jsonSerialize() + $data;
+        return $data;
     }
 }

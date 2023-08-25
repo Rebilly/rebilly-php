@@ -106,11 +106,14 @@ class Search implements JsonSerializable
     }
 
     /**
-     * @param null|Customer[] $customers
+     * @param null|array[]|Customer[] $customers
      */
     private function setCustomers(null|array $customers): static
     {
-        $customers = $customers !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Customer ? $value : Customer::from($value)) : null, $customers) : null;
+        $customers = $customers !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof Customer ? $value : Customer::from($value)) : null,
+            $customers,
+        ) : null;
 
         $this->fields['customers'] = $customers;
 
@@ -118,11 +121,14 @@ class Search implements JsonSerializable
     }
 
     /**
-     * @param null|Invoice[] $invoices
+     * @param null|array[]|Invoice[] $invoices
      */
     private function setInvoices(null|array $invoices): static
     {
-        $invoices = $invoices !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Invoice ? $value : Invoice::from($value)) : null, $invoices) : null;
+        $invoices = $invoices !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof Invoice ? $value : Invoice::from($value)) : null,
+            $invoices,
+        ) : null;
 
         $this->fields['invoices'] = $invoices;
 
@@ -130,11 +136,14 @@ class Search implements JsonSerializable
     }
 
     /**
-     * @param null|Subscription[] $orders
+     * @param null|array[]|Subscription[] $orders
      */
     private function setOrders(null|array $orders): static
     {
-        $orders = $orders !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Subscription ? $value : Subscription::from($value)) : null, $orders) : null;
+        $orders = $orders !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof Subscription ? $value : SubscriptionFactory::from($value)) : null,
+            $orders,
+        ) : null;
 
         $this->fields['orders'] = $orders;
 
@@ -142,11 +151,14 @@ class Search implements JsonSerializable
     }
 
     /**
-     * @param null|Transaction[] $transactions
+     * @param null|array[]|Transaction[] $transactions
      */
     private function setTransactions(null|array $transactions): static
     {
-        $transactions = $transactions !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Transaction ? $value : Transaction::from($value)) : null, $transactions) : null;
+        $transactions = $transactions !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof Transaction ? $value : Transaction::from($value)) : null,
+            $transactions,
+        ) : null;
 
         $this->fields['transactions'] = $transactions;
 
@@ -158,7 +170,10 @@ class Search implements JsonSerializable
      */
     private function setSearched(null|array $searched): static
     {
-        $searched = $searched !== null ? array_map(fn ($value) => $value ?? null, $searched) : null;
+        $searched = $searched !== null ? array_map(
+            fn ($value) => $value,
+            $searched,
+        ) : null;
 
         $this->fields['searched'] = $searched;
 

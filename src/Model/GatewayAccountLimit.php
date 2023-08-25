@@ -80,9 +80,13 @@ class GatewayAccountLimit implements JsonSerializable
         return $this->fields['id'] ?? null;
     }
 
-    /**
-     * @psalm-return self::STATUS_*|null $status
-     */
+    public function setId(null|string $id): static
+    {
+        $this->fields['id'] = $id;
+
+        return $this;
+    }
+
     public function getStatus(): ?string
     {
         return $this->fields['status'] ?? null;
@@ -98,17 +102,11 @@ class GatewayAccountLimit implements JsonSerializable
         return $this->fields['endTime'] ?? null;
     }
 
-    /**
-     * @psalm-return self::FREQUENCY_*|null $frequency
-     */
     public function getFrequency(): ?string
     {
         return $this->fields['frequency'] ?? null;
     }
 
-    /**
-     * @psalm-return self::TYPE_*|null $type
-     */
     public function getType(): ?string
     {
         return $this->fields['type'] ?? null;
@@ -142,11 +140,21 @@ class GatewayAccountLimit implements JsonSerializable
     }
 
     /**
-     * @return null|SelfLink[]
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    public function setLinks(null|array $links): static
+    {
+        $this->fields['_links'] = $links;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -189,16 +197,6 @@ class GatewayAccountLimit implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): static
-    {
-        $this->fields['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * @psalm-param self::STATUS_*|null $status
-     */
     private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
@@ -228,9 +226,6 @@ class GatewayAccountLimit implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-param self::FREQUENCY_*|null $frequency
-     */
     private function setFrequency(null|string $frequency): static
     {
         $this->fields['frequency'] = $frequency;
@@ -238,9 +233,6 @@ class GatewayAccountLimit implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-param self::TYPE_*|null $type
-     */
     private function setType(null|string $type): static
     {
         $this->fields['type'] = $type;
@@ -273,18 +265,6 @@ class GatewayAccountLimit implements JsonSerializable
         }
 
         $this->fields['updatedTime'] = $updatedTime;
-
-        return $this;
-    }
-
-    /**
-     * @param null|SelfLink[] $links
-     */
-    private function setLinks(null|array $links): static
-    {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
-
-        $this->fields['_links'] = $links;
 
         return $this;
     }

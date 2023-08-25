@@ -18,6 +18,7 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\AmlCheck;
+use Rebilly\Sdk\Model\AmlCheckReview;
 use Rebilly\Sdk\Paginator;
 
 class AmlChecksApi
@@ -95,5 +96,25 @@ class AmlChecksApi
             $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
             $closure,
         );
+    }
+
+    /**
+     * @return AmlCheck
+     */
+    public function review(
+        string $id,
+        ?AmlCheckReview $amlCheckReview = null,
+    ): AmlCheck {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/aml-checks/{id}/review');
+
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($amlCheckReview));
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return AmlCheck::from($data);
     }
 }

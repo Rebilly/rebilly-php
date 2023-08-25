@@ -18,52 +18,12 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Model\GlobalWebhook;
 use Rebilly\Sdk\Model\OrderPreview;
-use Rebilly\Sdk\Model\SendPreviewWebhook;
-use Rebilly\Sdk\Model\SendTestEmail;
+use Rebilly\Sdk\Model\RulesEmailNotification;
 
 class PreviewsApi
 {
     public function __construct(protected ?ClientInterface $client)
     {
-    }
-
-    /**
-     * @return SendTestEmail
-     */
-    public function sendEmailRuleAction(
-        SendTestEmail $sendTestEmail,
-    ): SendTestEmail {
-        $uri = '/previews/rule-actions/send-email';
-
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($sendTestEmail));
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return SendTestEmail::from($data);
-    }
-
-    /**
-     * @return SendPreviewWebhook
-     */
-    public function triggerWebhookRuleAction(
-        SendPreviewWebhook $sendPreviewWebhook,
-    ): SendPreviewWebhook {
-        $uri = '/previews/rule-actions/trigger-webhook';
-
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($sendPreviewWebhook));
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return SendPreviewWebhook::from($data);
-    }
-
-    public function webhook(
-        GlobalWebhook $globalWebhook,
-    ): void {
-        $uri = '/previews/webhooks';
-
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($globalWebhook));
-        $this->client->send($request);
     }
 
     /**
@@ -79,5 +39,29 @@ class PreviewsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return OrderPreview::from($data);
+    }
+
+    /**
+     * @return RulesEmailNotification
+     */
+    public function sendEmailRuleAction(
+        RulesEmailNotification $rulesEmailNotification,
+    ): RulesEmailNotification {
+        $uri = '/previews/rule-actions/send-email';
+
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($rulesEmailNotification));
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return RulesEmailNotification::from($data);
+    }
+
+    public function webhook(
+        GlobalWebhook $globalWebhook,
+    ): void {
+        $uri = '/previews/webhooks';
+
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($globalWebhook));
+        $this->client->send($request);
     }
 }

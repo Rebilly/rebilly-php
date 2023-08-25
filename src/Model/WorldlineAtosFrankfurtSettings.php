@@ -30,6 +30,9 @@ class WorldlineAtosFrankfurtSettings implements JsonSerializable
         if (array_key_exists('cardAcceptorCountryCode', $data)) {
             $this->setCardAcceptorCountryCode($data['cardAcceptorCountryCode']);
         }
+        if (array_key_exists('terminalIds', $data)) {
+            $this->setTerminalIds($data['terminalIds']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -73,6 +76,18 @@ class WorldlineAtosFrankfurtSettings implements JsonSerializable
         return $this;
     }
 
+    public function getTerminalIds(): ?string
+    {
+        return $this->fields['terminalIds'] ?? null;
+    }
+
+    public function setTerminalIds(null|string $terminalIds): static
+    {
+        $this->fields['terminalIds'] = $terminalIds;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -84,6 +99,9 @@ class WorldlineAtosFrankfurtSettings implements JsonSerializable
         }
         if (array_key_exists('cardAcceptorCountryCode', $this->fields)) {
             $data['cardAcceptorCountryCode'] = $this->fields['cardAcceptorCountryCode'];
+        }
+        if (array_key_exists('terminalIds', $this->fields)) {
+            $data['terminalIds'] = $this->fields['terminalIds'];
         }
 
         return $data;

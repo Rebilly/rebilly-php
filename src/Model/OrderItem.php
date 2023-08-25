@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use InvalidArgumentException;
 use JsonSerializable;
 
 class OrderItem implements JsonSerializable
@@ -22,6 +21,9 @@ class OrderItem implements JsonSerializable
 
     public function __construct(array $data = [])
     {
+        if (array_key_exists('id', $data)) {
+            $this->setId($data['id']);
+        }
         if (array_key_exists('planId', $data)) {
             $this->setPlanId($data['planId']);
         }
@@ -50,6 +52,11 @@ class OrderItem implements JsonSerializable
         return new self($data);
     }
 
+    public function getId(): ?string
+    {
+        return $this->fields['id'] ?? null;
+    }
+
     public function getPlanId(): ?string
     {
         return $this->fields['planId'] ?? null;
@@ -74,14 +81,16 @@ class OrderItem implements JsonSerializable
         return $this;
     }
 
-    public function getPlan(): FlexiblePlan|OriginalPlan
+    public function getPlan(): OrderItemPlan
     {
         return $this->fields['plan'];
     }
 
-    public function setPlan(array|FlexiblePlan|OriginalPlan $plan): static
+    public function setPlan(OrderItemPlan|array $plan): static
     {
-        $plan = $this->ensurePlan($plan);
+        if (!($plan instanceof OrderItemPlan)) {
+            $plan = OrderItemPlan::from($plan);
+        }
 
         $this->fields['plan'] = $plan;
 
@@ -103,17 +112,28 @@ class OrderItem implements JsonSerializable
         return $this->fields['isGrandfathered'] ?? null;
     }
 
-    /**
-     * @return null|array{product:Product}
-     */
-    public function getEmbedded(): ?array
+    public function getEmbedded(): ?QuoteItemsEmbedded
     {
         return $this->fields['_embedded'] ?? null;
+    }
+
+    public function setEmbedded(null|QuoteItemsEmbedded|array $embedded): static
+    {
+        if ($embedded !== null && !($embedded instanceof QuoteItemsEmbedded)) {
+            $embedded = QuoteItemsEmbedded::from($embedded);
+        }
+
+        $this->fields['_embedded'] = $embedded;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
     {
         $data = [];
+        if (array_key_exists('id', $this->fields)) {
+            $data['id'] = $this->fields['id'];
+        }
         if (array_key_exists('planId', $this->fields)) {
             $data['planId'] = $this->fields['planId'];
         }
@@ -121,7 +141,7 @@ class OrderItem implements JsonSerializable
             $data['quantity'] = $this->fields['quantity'];
         }
         if (array_key_exists('plan', $this->fields)) {
-            $data['plan'] = $this->fields['plan'];
+            $data['plan'] = $this->fields['plan']?->jsonSerialize();
         }
         if (array_key_exists('revision', $this->fields)) {
             $data['revision'] = $this->fields['revision'];
@@ -133,40 +153,17 @@ class OrderItem implements JsonSerializable
             $data['isGrandfathered'] = $this->fields['isGrandfathered'];
         }
         if (array_key_exists('_embedded', $this->fields)) {
-            $data['_embedded'] = $this->fields['_embedded'];
+            $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();
         }
 
         return $data;
     }
 
-    protected function ensurePlan(array|FlexiblePlan|OriginalPlan $data): FlexiblePlan|OriginalPlan
+    private function setId(null|string $id): static
     {
-        if (
-            $data instanceof FlexiblePlan
-            || $data instanceof OriginalPlan
-        ) {
-            return $data;
-        }
-        $candidates = [];
-        $candidates[] = FlexiblePlan::tryFrom($data);
-        $candidates[] = OriginalPlan::tryFrom($data);
+        $this->fields['id'] = $id;
 
-        $determined = array_reduce($candidates, function (?array $current, array $candidate) {
-            if ($current === null || $current[1] < $candidate[1]) {
-                $current = $candidate;
-            }
-
-            return $current;
-        });
-
-        if (
-            $determined[0] instanceof FlexiblePlan
-            || $determined[0] instanceof OriginalPlan
-        ) {
-            return $determined[0];
-        }
-
-        throw new InvalidArgumentException('Could not instantiate plan with the given value');
+        return $this;
     }
 
     private function setRevision(null|int $revision): static
@@ -186,20 +183,6 @@ class OrderItem implements JsonSerializable
     private function setIsGrandfathered(null|bool $isGrandfathered): static
     {
         $this->fields['isGrandfathered'] = $isGrandfathered;
-
-        return $this;
-    }
-
-    /**
-     * @param null|array{product:Product} $embedded
-     */
-    private function setEmbedded(null|array $embedded): static
-    {
-        if ($embedded !== null) {
-            $embedded['product'] = isset($embedded['product']) ? ($embedded['product'] instanceof Product ? $embedded['product'] : Product::from($embedded['product'])) : null;
-        }
-
-        $this->fields['_embedded'] = $embedded;
 
         return $this;
     }

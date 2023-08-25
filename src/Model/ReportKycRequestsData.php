@@ -34,17 +34,13 @@ class ReportKycRequestsData implements JsonSerializable
         return new self($data);
     }
 
-    public function getRejectionReason(): ?KycDocumentRequestStatuses
+    public function getRejectionReason(): ?string
     {
         return $this->fields['rejectionReason'] ?? null;
     }
 
-    public function setRejectionReason(null|KycDocumentRequestStatuses|string $rejectionReason): static
+    public function setRejectionReason(null|string $rejectionReason): static
     {
-        if ($rejectionReason !== null && !($rejectionReason instanceof KycDocumentRequestStatuses)) {
-            $rejectionReason = KycDocumentRequestStatuses::from($rejectionReason);
-        }
-
         $this->fields['rejectionReason'] = $rejectionReason;
 
         return $this;
@@ -66,7 +62,7 @@ class ReportKycRequestsData implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('rejectionReason', $this->fields)) {
-            $data['rejectionReason'] = $this->fields['rejectionReason']?->value;
+            $data['rejectionReason'] = $this->fields['rejectionReason'];
         }
         if (array_key_exists('count', $this->fields)) {
             $data['count'] = $this->fields['count'];

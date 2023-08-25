@@ -104,7 +104,7 @@ class ReportRevenueWaterfall implements JsonSerializable
     }
 
     /**
-     * @return null|object[]
+     * @return null|ReportRevenueWaterfallWaterfall[]
      */
     public function getWaterfall(): ?array
     {
@@ -112,11 +112,14 @@ class ReportRevenueWaterfall implements JsonSerializable
     }
 
     /**
-     * @param null|object[] $waterfall
+     * @param null|array[]|ReportRevenueWaterfallWaterfall[] $waterfall
      */
     public function setWaterfall(null|array $waterfall): static
     {
-        $waterfall = $waterfall !== null ? array_map(fn ($value) => $value ?? null, $waterfall) : null;
+        $waterfall = $waterfall !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof ReportRevenueWaterfallWaterfall ? $value : ReportRevenueWaterfallWaterfall::from($value)) : null,
+            $waterfall,
+        ) : null;
 
         $this->fields['waterfall'] = $waterfall;
 

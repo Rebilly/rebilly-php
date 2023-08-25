@@ -218,7 +218,7 @@ class LeadSource implements JsonSerializable
     }
 
     /**
-     * @return null|array<CustomerLink|SelfLink>
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
@@ -228,6 +228,17 @@ class LeadSource implements JsonSerializable
     public function getOriginal(): ?LeadSourceData
     {
         return $this->fields['original'] ?? null;
+    }
+
+    public function setOriginal(null|LeadSourceData|array $original): static
+    {
+        if ($original !== null && !($original instanceof LeadSourceData)) {
+            $original = LeadSourceData::from($original);
+        }
+
+        $this->fields['original'] = $original;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -305,24 +316,16 @@ class LeadSource implements JsonSerializable
     }
 
     /**
-     * @param null|array<CustomerLink|SelfLink> $links
+     * @param null|array[]|ResourceLink[] $links
      */
     private function setLinks(null|array $links): static
     {
-        $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
+        $links = $links !== null ? array_map(
+            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+            $links,
+        ) : null;
 
         $this->fields['_links'] = $links;
-
-        return $this;
-    }
-
-    private function setOriginal(null|LeadSourceData|array $original): static
-    {
-        if ($original !== null && !($original instanceof LeadSourceData)) {
-            $original = LeadSourceData::from($original);
-        }
-
-        $this->fields['original'] = $original;
 
         return $this;
     }

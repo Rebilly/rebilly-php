@@ -17,7 +17,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
-use Rebilly\Sdk\Model\Segment;
+use Rebilly\Sdk\Model\GridSegment;
 use Rebilly\Sdk\Paginator;
 
 class SegmentsApi
@@ -27,18 +27,18 @@ class SegmentsApi
     }
 
     /**
-     * @return Segment
+     * @return GridSegment
      */
     public function create(
-        Segment $segment,
-    ): Segment {
+        GridSegment $gridSegment,
+    ): GridSegment {
         $uri = '/grid-segments';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($segment));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($gridSegment));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Segment::from($data);
+        return GridSegment::from($data);
     }
 
     public function delete(
@@ -55,11 +55,11 @@ class SegmentsApi
     }
 
     /**
-     * @return Segment
+     * @return GridSegment
      */
     public function get(
         string $id,
-    ): Segment {
+    ): GridSegment {
         $pathParams = [
             '{id}' => $id,
         ];
@@ -70,11 +70,11 @@ class SegmentsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Segment::from($data);
+        return GridSegment::from($data);
     }
 
     /**
-     * @return Collection<Segment>
+     * @return Collection<GridSegment>
      */
     public function getAll(
         ?int $limit = null,
@@ -97,7 +97,7 @@ class SegmentsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): Segment => Segment::from($item), $data),
+            array_map(fn (array $item): GridSegment => GridSegment::from($item), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
@@ -126,22 +126,22 @@ class SegmentsApi
     }
 
     /**
-     * @return Segment
+     * @return GridSegment
      */
     public function update(
         string $id,
-        ?Segment $segment = null,
-    ): Segment {
+        ?GridSegment $gridSegment = null,
+    ): GridSegment {
         $pathParams = [
             '{id}' => $id,
         ];
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/grid-segments/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($segment));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($gridSegment));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Segment::from($data);
+        return GridSegment::from($data);
     }
 }

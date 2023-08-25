@@ -72,8 +72,12 @@ class PurchaseBumpOffer implements JsonSerializable
         return $this->fields['bumpAmount'];
     }
 
-    public function setBumpAmount(float $bumpAmount): static
+    public function setBumpAmount(float|string $bumpAmount): static
     {
+        if (is_string($bumpAmount)) {
+            $bumpAmount = (float) $bumpAmount;
+        }
+
         $this->fields['bumpAmount'] = $bumpAmount;
 
         return $this;
@@ -82,6 +86,17 @@ class PurchaseBumpOffer implements JsonSerializable
     public function getBumpAmountInUsd(): ?float
     {
         return $this->fields['bumpAmountInUsd'] ?? null;
+    }
+
+    public function setBumpAmountInUsd(null|float|string $bumpAmountInUsd): static
+    {
+        if (is_string($bumpAmountInUsd)) {
+            $bumpAmountInUsd = (float) $bumpAmountInUsd;
+        }
+
+        $this->fields['bumpAmountInUsd'] = $bumpAmountInUsd;
+
+        return $this;
     }
 
     public function getCustomFields(): ?array
@@ -116,12 +131,5 @@ class PurchaseBumpOffer implements JsonSerializable
         }
 
         return $data;
-    }
-
-    private function setBumpAmountInUsd(null|float $bumpAmountInUsd): static
-    {
-        $this->fields['bumpAmountInUsd'] = $bumpAmountInUsd;
-
-        return $this;
     }
 }

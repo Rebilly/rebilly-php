@@ -40,11 +40,14 @@ class RenewalSales implements JsonSerializable
     }
 
     /**
-     * @param null|RenewalSalesData[] $data
+     * @param null|array[]|RenewalSalesData[] $data
      */
     public function setData(null|array $data): static
     {
-        $data = $data !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof RenewalSalesData ? $value : RenewalSalesData::from($value)) : null, $data) : null;
+        $data = $data !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof RenewalSalesData ? $value : RenewalSalesData::from($value)) : null,
+            $data,
+        ) : null;
 
         $this->fields['data'] = $data;
 

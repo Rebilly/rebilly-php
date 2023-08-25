@@ -42,6 +42,9 @@ class Fee implements JsonSerializable
         if (array_key_exists('formula', $data)) {
             $this->setFormula($data['formula']);
         }
+        if (array_key_exists('settlementSettings', $data)) {
+            $this->setSettlementSettings($data['settlementSettings']);
+        }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
         }
@@ -63,17 +66,11 @@ class Fee implements JsonSerializable
         return $this->fields['id'] ?? null;
     }
 
-    /**
-     * @psalm-return self::TYPE_* $type
-     */
     public function getType(): string
     {
         return $this->fields['type'];
     }
 
-    /**
-     * @psalm-param self::TYPE_* $type
-     */
     public function setType(string $type): static
     {
         $this->fields['type'] = $type;
@@ -113,10 +110,26 @@ class Fee implements JsonSerializable
     public function setFormula(FeeFormula|array $formula): static
     {
         if (!($formula instanceof FeeFormula)) {
-            $formula = FeeFormula::from($formula);
+            $formula = FeeFormulaFactory::from($formula);
         }
 
         $this->fields['formula'] = $formula;
+
+        return $this;
+    }
+
+    public function getSettlementSettings(): ?SettlementSettings
+    {
+        return $this->fields['settlementSettings'] ?? null;
+    }
+
+    public function setSettlementSettings(null|SettlementSettings|array $settlementSettings): static
+    {
+        if ($settlementSettings !== null && !($settlementSettings instanceof SettlementSettings)) {
+            $settlementSettings = SettlementSettings::from($settlementSettings);
+        }
+
+        $this->fields['settlementSettings'] = $settlementSettings;
 
         return $this;
     }
@@ -132,11 +145,21 @@ class Fee implements JsonSerializable
     }
 
     /**
-     * @return null|array<SelfLink>
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    public function setLinks(null|array $links): static
+    {
+        $this->fields['_links'] = $links;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -156,6 +179,9 @@ class Fee implements JsonSerializable
         }
         if (array_key_exists('formula', $this->fields)) {
             $data['formula'] = $this->fields['formula']?->jsonSerialize();
+        }
+        if (array_key_exists('settlementSettings', $this->fields)) {
+            $data['settlementSettings'] = $this->fields['settlementSettings']?->jsonSerialize();
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
@@ -195,18 +221,6 @@ class Fee implements JsonSerializable
         }
 
         $this->fields['updatedTime'] = $updatedTime;
-
-        return $this;
-    }
-
-    /**
-     * @param null|array<SelfLink> $links
-     */
-    private function setLinks(null|array $links): static
-    {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
-
-        $this->fields['_links'] = $links;
 
         return $this;
     }

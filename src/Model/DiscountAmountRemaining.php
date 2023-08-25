@@ -13,11 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use InvalidArgumentException;
 use JsonSerializable;
-use TypeError;
 
-class DiscountAmountRemaining implements JsonSerializable
+class DiscountAmountRemaining implements PartialAfterApprovalPolicy, JsonSerializable
 {
     public const METHOD_DISCOUNT_AMOUNT_REMAINING = 'discount-amount-remaining';
 
@@ -35,30 +33,11 @@ class DiscountAmountRemaining implements JsonSerializable
         return new self($data);
     }
 
-    /** @return null|array<0: self, 1: int> **/
-    public static function tryFrom(array $data = []): ?array
-    {
-        try {
-            $instance = self::from($data);
-
-            return [$instance, count(array_intersect_key($data, $instance->jsonSerialize()))];
-        } catch (InvalidArgumentException|TypeError) {
-        }
-
-        return null;
-    }
-
-    /**
-     * @psalm-return self::METHOD_*|null $method
-     */
     public function getMethod(): ?string
     {
         return $this->fields['method'] ?? null;
     }
 
-    /**
-     * @psalm-param self::METHOD_*|null $method
-     */
     public function setMethod(null|string $method): static
     {
         $this->fields['method'] = $method;

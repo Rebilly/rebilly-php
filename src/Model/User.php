@@ -195,7 +195,10 @@ class User implements JsonSerializable
      */
     public function setPermissions(null|array $permissions): static
     {
-        $permissions = $permissions !== null ? array_map(fn ($value) => $value ?? null, $permissions) : null;
+        $permissions = $permissions !== null ? array_map(
+            fn ($value) => $value,
+            $permissions,
+        ) : null;
 
         $this->fields['permissions'] = $permissions;
 
@@ -208,6 +211,21 @@ class User implements JsonSerializable
     public function getComputedPermissions(): ?array
     {
         return $this->fields['computedPermissions'] ?? null;
+    }
+
+    /**
+     * @param null|string[] $computedPermissions
+     */
+    public function setComputedPermissions(null|array $computedPermissions): static
+    {
+        $computedPermissions = $computedPermissions !== null ? array_map(
+            fn ($value) => $value,
+            $computedPermissions,
+        ) : null;
+
+        $this->fields['computedPermissions'] = $computedPermissions;
+
+        return $this;
     }
 
     public function getCreatedTime(): ?DateTimeImmutable
@@ -223,17 +241,6 @@ class User implements JsonSerializable
     public function getLoginTime(): ?DateTimeImmutable
     {
         return $this->fields['loginTime'] ?? null;
-    }
-
-    public function setLoginTime(null|DateTimeImmutable|string $loginTime): static
-    {
-        if ($loginTime !== null && !($loginTime instanceof DateTimeImmutable)) {
-            $loginTime = new DateTimeImmutable($loginTime);
-        }
-
-        $this->fields['loginTime'] = $loginTime;
-
-        return $this;
     }
 
     public function getReportingCurrency(): ?string
@@ -285,9 +292,6 @@ class User implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-return self::STATUS_*|null $status
-     */
     public function getStatus(): ?string
     {
         return $this->fields['status'] ?? null;
@@ -305,12 +309,12 @@ class User implements JsonSerializable
         return $this;
     }
 
-    public function getPreferences(): ?array
+    public function getPreferences(): ?object
     {
         return $this->fields['preferences'] ?? null;
     }
 
-    public function setPreferences(null|array $preferences): static
+    public function setPreferences(null|object $preferences): static
     {
         $this->fields['preferences'] = $preferences;
 
@@ -330,7 +334,10 @@ class User implements JsonSerializable
      */
     public function setRoleIds(null|array $roleIds): static
     {
-        $roleIds = $roleIds !== null ? array_map(fn ($value) => $value ?? null, $roleIds) : null;
+        $roleIds = $roleIds !== null ? array_map(
+            fn ($value) => $value,
+            $roleIds,
+        ) : null;
 
         $this->fields['roleIds'] = $roleIds;
 
@@ -350,7 +357,10 @@ class User implements JsonSerializable
      */
     public function setAllowedIps(null|array $allowedIps): static
     {
-        $allowedIps = $allowedIps !== null ? array_map(fn ($value) => $value ?? null, $allowedIps) : null;
+        $allowedIps = $allowedIps !== null ? array_map(
+            fn ($value) => $value,
+            $allowedIps,
+        ) : null;
 
         $this->fields['allowedIps'] = $allowedIps;
 
@@ -358,11 +368,21 @@ class User implements JsonSerializable
     }
 
     /**
-     * @return null|SelfLink[]
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    public function setLinks(null|array $links): static
+    {
+        $this->fields['_links'] = $links;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -448,18 +468,6 @@ class User implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @param null|string[] $computedPermissions
-     */
-    private function setComputedPermissions(null|array $computedPermissions): static
-    {
-        $computedPermissions = $computedPermissions !== null ? array_map(fn ($value) => $value ?? null, $computedPermissions) : null;
-
-        $this->fields['computedPermissions'] = $computedPermissions;
-
-        return $this;
-    }
-
     private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
@@ -482,6 +490,17 @@ class User implements JsonSerializable
         return $this;
     }
 
+    private function setLoginTime(null|DateTimeImmutable|string $loginTime): static
+    {
+        if ($loginTime !== null && !($loginTime instanceof DateTimeImmutable)) {
+            $loginTime = new DateTimeImmutable($loginTime);
+        }
+
+        $this->fields['loginTime'] = $loginTime;
+
+        return $this;
+    }
+
     private function setReportingCurrency(null|string $reportingCurrency): static
     {
         $this->fields['reportingCurrency'] = $reportingCurrency;
@@ -494,31 +513,19 @@ class User implements JsonSerializable
      */
     private function setAvailableCurrencies(null|array $availableCurrencies): static
     {
-        $availableCurrencies = $availableCurrencies !== null ? array_map(fn ($value) => $value ?? null, $availableCurrencies) : null;
+        $availableCurrencies = $availableCurrencies !== null ? array_map(
+            fn ($value) => $value,
+            $availableCurrencies,
+        ) : null;
 
         $this->fields['availableCurrencies'] = $availableCurrencies;
 
         return $this;
     }
 
-    /**
-     * @psalm-param self::STATUS_*|null $status
-     */
     private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
-
-        return $this;
-    }
-
-    /**
-     * @param null|SelfLink[] $links
-     */
-    private function setLinks(null|array $links): static
-    {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
-
-        $this->fields['_links'] = $links;
 
         return $this;
     }

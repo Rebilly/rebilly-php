@@ -16,13 +16,10 @@ namespace Rebilly\Sdk\Api;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
-use InvalidArgumentException;
 use Rebilly\Sdk\Collection;
-use Rebilly\Sdk\Model\OneTimeSalePlan;
-use Rebilly\Sdk\Model\SubscriptionOrderPlan;
-use Rebilly\Sdk\Model\TrialOnlyPlan;
+use Rebilly\Sdk\Model\Plan;
+use Rebilly\Sdk\Model\PostPlanRequest;
 use Rebilly\Sdk\Paginator;
-use TypeError;
 
 class PlansApi
 {
@@ -31,18 +28,18 @@ class PlansApi
     }
 
     /**
-     * @return OneTimeSalePlan|SubscriptionOrderPlan|TrialOnlyPlan
+     * @return Plan
      */
     public function create(
-        OneTimeSalePlan|SubscriptionOrderPlan|TrialOnlyPlan $body,
-    ): OneTimeSalePlan|SubscriptionOrderPlan|TrialOnlyPlan {
+        PostPlanRequest $postPlanRequest,
+    ): Plan {
         $uri = '/plans';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($body));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($postPlanRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return $this->buildPlanResponse($data);
+        return Plan::from($data);
     }
 
     public function delete(
@@ -59,11 +56,11 @@ class PlansApi
     }
 
     /**
-     * @return OneTimeSalePlan|SubscriptionOrderPlan|TrialOnlyPlan
+     * @return Plan
      */
     public function get(
         string $id,
-    ): OneTimeSalePlan|SubscriptionOrderPlan|TrialOnlyPlan {
+    ): Plan {
         $pathParams = [
             '{id}' => $id,
         ];
@@ -74,11 +71,11 @@ class PlansApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return $this->buildPlanResponse($data);
+        return Plan::from($data);
     }
 
     /**
-     * @return Collection<OneTimeSalePlan|SubscriptionOrderPlan|TrialOnlyPlan>
+     * @return Collection<Plan>
      */
     public function getAll(
         ?string $filter = null,
@@ -101,7 +98,7 @@ class PlansApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): OneTimeSalePlan|SubscriptionOrderPlan|TrialOnlyPlan => $this->buildPlanResponse($item), $data),
+            array_map(fn (array $item): Plan => Plan::from($item), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
@@ -130,59 +127,22 @@ class PlansApi
     }
 
     /**
-     * @return OneTimeSalePlan|SubscriptionOrderPlan|TrialOnlyPlan
+     * @return Plan
      */
     public function update(
         string $id,
-        OneTimeSalePlan|SubscriptionOrderPlan|TrialOnlyPlan $body,
-    ): OneTimeSalePlan|SubscriptionOrderPlan|TrialOnlyPlan {
+        PostPlanRequest $postPlanRequest,
+    ): Plan {
         $pathParams = [
             '{id}' => $id,
         ];
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/plans/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($body));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($postPlanRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return $this->buildPlanResponse($data);
-    }
-
-    protected function buildPlanResponse(array $data): OneTimeSalePlan|SubscriptionOrderPlan|TrialOnlyPlan
-    {
-        $candidates = [];
-
-        try {
-            $instance = OneTimeSalePlan::from($data);
-            $candidates[] = [$instance, count(array_intersect_key($data, $instance->jsonSerialize()))];
-        } catch (InvalidArgumentException|TypeError) {
-        }
-
-        try {
-            $instance = SubscriptionOrderPlan::from($data);
-            $candidates[] = [$instance, count(array_intersect_key($data, $instance->jsonSerialize()))];
-        } catch (InvalidArgumentException|TypeError) {
-        }
-
-        try {
-            $instance = TrialOnlyPlan::from($data);
-            $candidates[] = [$instance, count(array_intersect_key($data, $instance->jsonSerialize()))];
-        } catch (InvalidArgumentException|TypeError) {
-        }
-
-        $determined = array_reduce($candidates, function (?array $current, array $candidate) {
-            if ($current === null || $current[1] < $candidate[1]) {
-                $current = $candidate;
-            }
-
-            return $current;
-        });
-
-        if ($determined[0] === null) {
-            throw new InvalidArgumentException('Could not instantiate Plan response with the given value');
-        }
-
-        return $determined[0];
+        return Plan::from($data);
     }
 }

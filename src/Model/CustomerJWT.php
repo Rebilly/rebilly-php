@@ -73,9 +73,6 @@ class CustomerJWT implements JsonSerializable
         return $this->fields['id'] ?? null;
     }
 
-    /**
-     * @psalm-return self::TYPE_*|null $type
-     */
     public function getType(): ?string
     {
         return $this->fields['type'] ?? null;
@@ -115,28 +112,27 @@ class CustomerJWT implements JsonSerializable
         return $this->fields['customerId'] ?? null;
     }
 
-    /**
-     * @return null|Acl[]
-     */
-    public function getAcl(): ?array
+    public function setCustomerId(null|string $customerId): static
+    {
+        $this->fields['customerId'] = $customerId;
+
+        return $this;
+    }
+
+    public function getAcl(): ?Acl
     {
         return $this->fields['acl'] ?? null;
     }
 
-    /**
-     * @param null|Acl[] $acl
-     */
-    public function setAcl(null|array $acl): static
+    public function setAcl(null|Acl $acl): static
     {
-        $acl = $acl !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Acl ? $value : Acl::from($value)) : null, $acl) : null;
-
         $this->fields['acl'] = $acl;
 
         return $this;
     }
 
     /**
-     * @return null|array<string,object>
+     * @return null|array<string,mixed>
      */
     public function getCustomClaims(): ?array
     {
@@ -144,7 +140,7 @@ class CustomerJWT implements JsonSerializable
     }
 
     /**
-     * @param null|array<string,object> $customClaims
+     * @param null|array<string,mixed> $customClaims
      */
     public function setCustomClaims(null|array $customClaims): static
     {
@@ -180,7 +176,7 @@ class CustomerJWT implements JsonSerializable
     }
 
     /**
-     * @return null|CustomerLink[]
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
@@ -237,9 +233,6 @@ class CustomerJWT implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-param self::TYPE_*|null $type
-     */
     private function setType(null|string $type): static
     {
         $this->fields['type'] = $type;
@@ -250,13 +243,6 @@ class CustomerJWT implements JsonSerializable
     private function setToken(null|string $token): static
     {
         $this->fields['token'] = $token;
-
-        return $this;
-    }
-
-    private function setCustomerId(null|string $customerId): static
-    {
-        $this->fields['customerId'] = $customerId;
 
         return $this;
     }
@@ -284,11 +270,14 @@ class CustomerJWT implements JsonSerializable
     }
 
     /**
-     * @param null|CustomerLink[] $links
+     * @param null|array[]|ResourceLink[] $links
      */
     private function setLinks(null|array $links): static
     {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof CustomerLink ? $value : CustomerLink::from($value)) : null, $links) : null;
+        $links = $links !== null ? array_map(
+            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+            $links,
+        ) : null;
 
         $this->fields['_links'] = $links;
 

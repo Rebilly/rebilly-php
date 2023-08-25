@@ -70,17 +70,13 @@ class STPMexicoCredentials implements JsonSerializable
         return $this;
     }
 
-    public function getBankId(): STPMexicoBanks
+    public function getBankId(): string
     {
         return $this->fields['bankId'];
     }
 
-    public function setBankId(STPMexicoBanks|int $bankId): static
+    public function setBankId(string $bankId): static
     {
-        if (!($bankId instanceof STPMexicoBanks)) {
-            $bankId = STPMexicoBanks::from($bankId);
-        }
-
         $this->fields['bankId'] = $bankId;
 
         return $this;
@@ -132,7 +128,7 @@ class STPMexicoCredentials implements JsonSerializable
             $data['beneficiaryName'] = $this->fields['beneficiaryName'];
         }
         if (array_key_exists('bankId', $this->fields)) {
-            $data['bankId'] = $this->fields['bankId']?->value;
+            $data['bankId'] = $this->fields['bankId'];
         }
         if (array_key_exists('bankAccountNumber', $this->fields)) {
             $data['bankAccountNumber'] = $this->fields['bankAccountNumber'];

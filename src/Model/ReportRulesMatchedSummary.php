@@ -40,11 +40,14 @@ class ReportRulesMatchedSummary implements JsonSerializable
     }
 
     /**
-     * @param null|ReportRulesMatchedSummaryData[] $data
+     * @param null|array[]|ReportRulesMatchedSummaryData[] $data
      */
     public function setData(null|array $data): static
     {
-        $data = $data !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ReportRulesMatchedSummaryData ? $value : ReportRulesMatchedSummaryData::from($value)) : null, $data) : null;
+        $data = $data !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof ReportRulesMatchedSummaryData ? $value : ReportRulesMatchedSummaryData::from($value)) : null,
+            $data,
+        ) : null;
 
         $this->fields['data'] = $data;
 

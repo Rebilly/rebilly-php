@@ -61,17 +61,13 @@ class DigitalWalletsApplePay implements JsonSerializable
         return $this;
     }
 
-    public function getCountry(): ?DigitalWalletCountry
+    public function getCountry(): ?string
     {
         return $this->fields['country'] ?? null;
     }
 
-    public function setCountry(null|DigitalWalletCountry|array $country): static
+    public function setCountry(null|string $country): static
     {
-        if ($country !== null && !($country instanceof DigitalWalletCountry)) {
-            $country = DigitalWalletCountry::from($country);
-        }
-
         $this->fields['country'] = $country;
 
         return $this;
@@ -87,7 +83,7 @@ class DigitalWalletsApplePay implements JsonSerializable
             $data['displayName'] = $this->fields['displayName'];
         }
         if (array_key_exists('country', $this->fields)) {
-            $data['country'] = $this->fields['country']?->jsonSerialize();
+            $data['country'] = $this->fields['country'];
         }
 
         return $data;

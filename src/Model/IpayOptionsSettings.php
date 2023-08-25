@@ -68,17 +68,11 @@ class IpayOptionsSettings implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-return self::SUBDOMAIN_*|null $subdomain
-     */
     public function getSubdomain(): ?string
     {
         return $this->fields['subdomain'] ?? null;
     }
 
-    /**
-     * @psalm-param self::SUBDOMAIN_*|null $subdomain
-     */
     public function setSubdomain(null|string $subdomain): static
     {
         $this->fields['subdomain'] = $subdomain;
@@ -86,17 +80,11 @@ class IpayOptionsSettings implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-return self::PLATFORM_*|null $platform
-     */
     public function getPlatform(): ?string
     {
         return $this->fields['platform'] ?? null;
     }
 
-    /**
-     * @psalm-param self::PLATFORM_*|null $platform
-     */
     public function setPlatform(null|string $platform): static
     {
         $this->fields['platform'] = $platform;
@@ -104,17 +92,11 @@ class IpayOptionsSettings implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-return self::CARD_TYPE_*|null $cardType
-     */
     public function getCardType(): ?string
     {
         return $this->fields['cardType'] ?? null;
     }
 
-    /**
-     * @psalm-param self::CARD_TYPE_*|null $cardType
-     */
     public function setCardType(null|string $cardType): static
     {
         $this->fields['cardType'] = $cardType;

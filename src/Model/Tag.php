@@ -23,6 +23,8 @@ class Tag implements JsonSerializable
 
     public const TYPE_KYC_DOCUMENT = 'kyc-document';
 
+    public const TYPE_AML_CHECK = 'aml-check';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -57,6 +59,13 @@ class Tag implements JsonSerializable
         return $this->fields['id'] ?? null;
     }
 
+    public function setId(null|string $id): static
+    {
+        $this->fields['id'] = $id;
+
+        return $this;
+    }
+
     public function getName(): string
     {
         return $this->fields['name'];
@@ -69,17 +78,11 @@ class Tag implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-return self::TYPE_* $type
-     */
     public function getType(): string
     {
         return $this->fields['type'];
     }
 
-    /**
-     * @psalm-param self::TYPE_* $type
-     */
     public function setType(string $type): static
     {
         $this->fields['type'] = $type;
@@ -98,11 +101,21 @@ class Tag implements JsonSerializable
     }
 
     /**
-     * @return null|array<SelfLink>
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    public function setLinks(null|array $links): static
+    {
+        $this->fields['_links'] = $links;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -130,13 +143,6 @@ class Tag implements JsonSerializable
         return $data;
     }
 
-    private function setId(null|string $id): static
-    {
-        $this->fields['id'] = $id;
-
-        return $this;
-    }
-
     private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
@@ -155,18 +161,6 @@ class Tag implements JsonSerializable
         }
 
         $this->fields['updatedTime'] = $updatedTime;
-
-        return $this;
-    }
-
-    /**
-     * @param null|array<SelfLink> $links
-     */
-    private function setLinks(null|array $links): static
-    {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
-
-        $this->fields['_links'] = $links;
 
         return $this;
     }

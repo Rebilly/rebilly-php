@@ -99,11 +99,14 @@ class CreditFileMatchesReferenceData implements JsonSerializable
     }
 
     /**
-     * @param null|CreditFileCommonDecisionData[] $dualDecision
+     * @param null|array[]|CreditFileCommonDecisionData[] $dualDecision
      */
     public function setDualDecision(null|array $dualDecision): static
     {
-        $dualDecision = $dualDecision !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof CreditFileCommonDecisionData ? $value : CreditFileCommonDecisionData::from($value)) : null, $dualDecision) : null;
+        $dualDecision = $dualDecision !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof CreditFileCommonDecisionData ? $value : CreditFileCommonDecisionData::from($value)) : null,
+            $dualDecision,
+        ) : null;
 
         $this->fields['dualDecision'] = $dualDecision;
 

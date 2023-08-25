@@ -53,7 +53,10 @@ class ApiKeyScope implements JsonSerializable
      */
     public function setOrganizationId(null|array $organizationId): static
     {
-        $organizationId = $organizationId !== null ? array_map(fn ($value) => $value ?? null, $organizationId) : null;
+        $organizationId = $organizationId !== null ? array_map(
+            fn ($value) => $value,
+            $organizationId,
+        ) : null;
 
         $this->fields['organizationId'] = $organizationId;
 
@@ -73,7 +76,10 @@ class ApiKeyScope implements JsonSerializable
      */
     public function setProductId(null|array $productId): static
     {
-        $productId = $productId !== null ? array_map(fn ($value) => $value ?? null, $productId) : null;
+        $productId = $productId !== null ? array_map(
+            fn ($value) => $value,
+            $productId,
+        ) : null;
 
         $this->fields['productId'] = $productId;
 
@@ -93,7 +99,10 @@ class ApiKeyScope implements JsonSerializable
      */
     public function setPlanId(null|array $planId): static
     {
-        $planId = $planId !== null ? array_map(fn ($value) => $value ?? null, $planId) : null;
+        $planId = $planId !== null ? array_map(
+            fn ($value) => $value,
+            $planId,
+        ) : null;
 
         $this->fields['planId'] = $planId;
 
@@ -113,7 +122,10 @@ class ApiKeyScope implements JsonSerializable
      */
     public function setCustomFieldName(null|array $customFieldName): static
     {
-        $customFieldName = $customFieldName !== null ? array_map(fn ($value) => $value ?? null, $customFieldName) : null;
+        $customFieldName = $customFieldName !== null ? array_map(
+            fn ($value) => $value,
+            $customFieldName,
+        ) : null;
 
         $this->fields['customFieldName'] = $customFieldName;
 

@@ -50,15 +50,15 @@ class ProofOfIdentityKycDocumentDocumentMatches implements JsonSerializable
         return $this;
     }
 
-    public function getData(): ?IdentityMatches
+    public function getData(): ?KycIdentityMatches
     {
         return $this->fields['data'] ?? null;
     }
 
-    public function setData(null|IdentityMatches|array $data): static
+    public function setData(null|KycIdentityMatches|array $data): static
     {
-        if ($data !== null && !($data instanceof IdentityMatches)) {
-            $data = IdentityMatches::from($data);
+        if ($data !== null && !($data instanceof KycIdentityMatches)) {
+            $data = KycIdentityMatches::from($data);
         }
 
         $this->fields['data'] = $data;

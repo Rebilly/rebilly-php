@@ -15,9 +15,9 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use InvalidArgumentException;
+use JsonSerializable;
 
-class DigitalWalletToken extends CompositeToken
+class DigitalWalletToken implements CompositeToken, JsonSerializable
 {
     public const METHOD_DIGITAL_WALLET = 'digital-wallet';
 
@@ -25,10 +25,6 @@ class DigitalWalletToken extends CompositeToken
 
     public function __construct(array $data = [])
     {
-        parent::__construct([
-            'method' => 'digital-wallet',
-        ] + $data);
-
         if (array_key_exists('method', $data)) {
             $this->setMethod($data['method']);
         }
@@ -72,17 +68,11 @@ class DigitalWalletToken extends CompositeToken
         return new self($data);
     }
 
-    /**
-     * @psalm-return self::METHOD_* $method
-     */
     public function getMethod(): string
     {
         return $this->fields['method'];
     }
 
-    /**
-     * @psalm-param self::METHOD_* $method
-     */
     public function setMethod(string $method): static
     {
         $this->fields['method'] = $method;
@@ -90,38 +80,15 @@ class DigitalWalletToken extends CompositeToken
         return $this;
     }
 
-    /**
-     * @return array{type:string,amount:float,currency:string,descriptor:string,bin:string,last4:string,brand:PaymentCardBrand,expMonth:int,expYear:int,payload:object}
-     */
-    public function getPaymentInstrument(): array
+    public function getPaymentInstrument(): DigitalWalletTokenPaymentInstrument
     {
         return $this->fields['paymentInstrument'];
     }
 
-    /**
-     * @param array{type:string,amount:float,currency:string,descriptor:string,bin:string,last4:string,brand:PaymentCardBrand,expMonth:int,expYear:int,payload:object} $paymentInstrument
-     */
-    public function setPaymentInstrument(array $paymentInstrument): static
+    public function setPaymentInstrument(DigitalWalletTokenPaymentInstrument|array $paymentInstrument): static
     {
-        if (!isset($paymentInstrument['type'])) {
-            throw new InvalidArgumentException('Property \'paymentInstrument.type\' must be set.');
-        }
-        if (!isset($paymentInstrument['amount'])) {
-            throw new InvalidArgumentException('Property \'paymentInstrument.amount\' must be set.');
-        }
-        if (!isset($paymentInstrument['currency'])) {
-            throw new InvalidArgumentException('Property \'paymentInstrument.currency\' must be set.');
-        }
-        if (!isset($paymentInstrument['descriptor'])) {
-            throw new InvalidArgumentException('Property \'paymentInstrument.descriptor\' must be set.');
-        }
-        $paymentInstrument['bin'] = $paymentInstrument['bin'] ?? null;
-        $paymentInstrument['last4'] = $paymentInstrument['last4'] ?? null;
-        $paymentInstrument['brand'] = isset($paymentInstrument['brand']) ? ($paymentInstrument['brand'] instanceof PaymentCardBrand ? $paymentInstrument['brand'] : PaymentCardBrand::from($paymentInstrument['brand'])) : null;
-        $paymentInstrument['expMonth'] = $paymentInstrument['expMonth'] ?? null;
-        $paymentInstrument['expYear'] = $paymentInstrument['expYear'] ?? null;
-        if (!isset($paymentInstrument['payload'])) {
-            throw new InvalidArgumentException('Property \'paymentInstrument.payload\' must be set.');
+        if (!($paymentInstrument instanceof DigitalWalletTokenPaymentInstrument)) {
+            $paymentInstrument = DigitalWalletTokenPaymentInstrument::from($paymentInstrument);
         }
 
         $this->fields['paymentInstrument'] = $paymentInstrument;
@@ -134,9 +101,27 @@ class DigitalWalletToken extends CompositeToken
         return $this->fields['billingAddress'] ?? null;
     }
 
+    public function setBillingAddress(null|ContactObject|array $billingAddress): static
+    {
+        if ($billingAddress !== null && !($billingAddress instanceof ContactObject)) {
+            $billingAddress = ContactObject::from($billingAddress);
+        }
+
+        $this->fields['billingAddress'] = $billingAddress;
+
+        return $this;
+    }
+
     public function getId(): ?string
     {
         return $this->fields['id'] ?? null;
+    }
+
+    public function setId(null|string $id): static
+    {
+        $this->fields['id'] = $id;
+
+        return $this;
     }
 
     public function getIsUsed(): ?bool
@@ -191,39 +176,27 @@ class DigitalWalletToken extends CompositeToken
         return $this->fields['usageTime'] ?? null;
     }
 
-    public function setUsageTime(null|DateTimeImmutable|string $usageTime): static
-    {
-        if ($usageTime !== null && !($usageTime instanceof DateTimeImmutable)) {
-            $usageTime = new DateTimeImmutable($usageTime);
-        }
-
-        $this->fields['usageTime'] = $usageTime;
-
-        return $this;
-    }
-
     public function getExpirationTime(): ?DateTimeImmutable
     {
         return $this->fields['expirationTime'] ?? null;
     }
 
-    public function setExpirationTime(null|DateTimeImmutable|string $expirationTime): static
-    {
-        if ($expirationTime !== null && !($expirationTime instanceof DateTimeImmutable)) {
-            $expirationTime = new DateTimeImmutable($expirationTime);
-        }
-
-        $this->fields['expirationTime'] = $expirationTime;
-
-        return $this;
-    }
-
     /**
-     * @return null|SelfLink[]
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    public function setLinks(null|array $links): static
+    {
+        $this->fields['_links'] = $links;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -233,7 +206,7 @@ class DigitalWalletToken extends CompositeToken
             $data['method'] = $this->fields['method'];
         }
         if (array_key_exists('paymentInstrument', $this->fields)) {
-            $data['paymentInstrument'] = $this->fields['paymentInstrument'];
+            $data['paymentInstrument'] = $this->fields['paymentInstrument']?->jsonSerialize();
         }
         if (array_key_exists('billingAddress', $this->fields)) {
             $data['billingAddress'] = $this->fields['billingAddress']?->jsonSerialize();
@@ -266,25 +239,7 @@ class DigitalWalletToken extends CompositeToken
             $data['_links'] = $this->fields['_links'];
         }
 
-        return parent::jsonSerialize() + $data;
-    }
-
-    private function setBillingAddress(null|ContactObject|array $billingAddress): static
-    {
-        if ($billingAddress !== null && !($billingAddress instanceof ContactObject)) {
-            $billingAddress = ContactObject::from($billingAddress);
-        }
-
-        $this->fields['billingAddress'] = $billingAddress;
-
-        return $this;
-    }
-
-    private function setId(null|string $id): static
-    {
-        $this->fields['id'] = $id;
-
-        return $this;
+        return $data;
     }
 
     private function setIsUsed(null|bool $isUsed): static
@@ -316,14 +271,24 @@ class DigitalWalletToken extends CompositeToken
         return $this;
     }
 
-    /**
-     * @param null|SelfLink[] $links
-     */
-    private function setLinks(null|array $links): static
+    private function setUsageTime(null|DateTimeImmutable|string $usageTime): static
     {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
+        if ($usageTime !== null && !($usageTime instanceof DateTimeImmutable)) {
+            $usageTime = new DateTimeImmutable($usageTime);
+        }
 
-        $this->fields['_links'] = $links;
+        $this->fields['usageTime'] = $usageTime;
+
+        return $this;
+    }
+
+    private function setExpirationTime(null|DateTimeImmutable|string $expirationTime): static
+    {
+        if ($expirationTime !== null && !($expirationTime instanceof DateTimeImmutable)) {
+            $expirationTime = new DateTimeImmutable($expirationTime);
+        }
+
+        $this->fields['expirationTime'] = $expirationTime;
 
         return $this;
     }

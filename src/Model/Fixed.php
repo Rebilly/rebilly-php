@@ -13,21 +13,30 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-class Fixed extends Discount
+use JsonSerializable;
+
+class Fixed implements Discount, JsonSerializable
 {
+    public const TYPE_FIXED = 'fixed';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        parent::__construct([
-            'type' => 'fixed',
-        ] + $data);
-
         if (array_key_exists('amount', $data)) {
             $this->setAmount($data['amount']);
         }
         if (array_key_exists('currency', $data)) {
             $this->setCurrency($data['currency']);
+        }
+        if (array_key_exists('type', $data)) {
+            $this->setType($data['type']);
+        }
+        if (array_key_exists('context', $data)) {
+            $this->setContext($data['context']);
+        }
+        if (array_key_exists('value', $data)) {
+            $this->setValue($data['value']);
         }
     }
 
@@ -64,6 +73,46 @@ class Fixed extends Discount
         return $this;
     }
 
+    public function getType(): string
+    {
+        return $this->fields['type'];
+    }
+
+    public function setType(string $type): static
+    {
+        $this->fields['type'] = $type;
+
+        return $this;
+    }
+
+    public function getContext(): ?string
+    {
+        return $this->fields['context'] ?? null;
+    }
+
+    public function setContext(null|string $context): static
+    {
+        $this->fields['context'] = $context;
+
+        return $this;
+    }
+
+    public function getValue(): float
+    {
+        return $this->fields['value'];
+    }
+
+    public function setValue(float|string $value): static
+    {
+        if (is_string($value)) {
+            $value = (float) $value;
+        }
+
+        $this->fields['value'] = $value;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -73,7 +122,16 @@ class Fixed extends Discount
         if (array_key_exists('currency', $this->fields)) {
             $data['currency'] = $this->fields['currency'];
         }
+        if (array_key_exists('type', $this->fields)) {
+            $data['type'] = $this->fields['type'];
+        }
+        if (array_key_exists('context', $this->fields)) {
+            $data['context'] = $this->fields['context'];
+        }
+        if (array_key_exists('value', $this->fields)) {
+            $data['value'] = $this->fields['value'];
+        }
 
-        return parent::jsonSerialize() + $data;
+        return $data;
     }
 }

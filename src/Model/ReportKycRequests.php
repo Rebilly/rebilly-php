@@ -40,11 +40,14 @@ class ReportKycRequests implements JsonSerializable
     }
 
     /**
-     * @param null|ReportKycRequestsData[] $data
+     * @param null|array[]|ReportKycRequestsData[] $data
      */
     public function setData(null|array $data): static
     {
-        $data = $data !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ReportKycRequestsData ? $value : ReportKycRequestsData::from($value)) : null, $data) : null;
+        $data = $data !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof ReportKycRequestsData ? $value : ReportKycRequestsData::from($value)) : null,
+            $data,
+        ) : null;
 
         $this->fields['data'] = $data;
 

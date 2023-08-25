@@ -13,24 +13,16 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-class PercentageFormula extends FeeFormula
+use JsonSerializable;
+
+class PercentageFormula implements FeeFormula, JsonSerializable
 {
     public const TYPE_PERCENTAGE = 'percentage';
-
-    public const ROUND_REGULAR = 'regular';
-
-    public const ROUND_UP = 'up';
-
-    public const ROUND_DOWN = 'down';
 
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        parent::__construct([
-            'type' => 'percentage',
-        ] + $data);
-
         if (array_key_exists('type', $data)) {
             $this->setType($data['type']);
         }
@@ -40,11 +32,11 @@ class PercentageFormula extends FeeFormula
         if (array_key_exists('bips', $data)) {
             $this->setBips($data['bips']);
         }
-        if (array_key_exists('round', $data)) {
-            $this->setRound($data['round']);
-        }
         if (array_key_exists('minAmount', $data)) {
             $this->setMinAmount($data['minAmount']);
+        }
+        if (array_key_exists('amount', $data)) {
+            $this->setAmount($data['amount']);
         }
     }
 
@@ -53,17 +45,11 @@ class PercentageFormula extends FeeFormula
         return new self($data);
     }
 
-    /**
-     * @psalm-return self::TYPE_* $type
-     */
     public function getType(): string
     {
         return $this->fields['type'];
     }
 
-    /**
-     * @psalm-param self::TYPE_* $type
-     */
     public function setType(string $type): static
     {
         $this->fields['type'] = $type;
@@ -95,24 +81,6 @@ class PercentageFormula extends FeeFormula
         return $this;
     }
 
-    /**
-     * @psalm-return self::ROUND_*|null $round
-     */
-    public function getRound(): ?string
-    {
-        return $this->fields['round'] ?? null;
-    }
-
-    /**
-     * @psalm-param self::ROUND_*|null $round
-     */
-    public function setRound(null|string $round): static
-    {
-        $this->fields['round'] = $round;
-
-        return $this;
-    }
-
     public function getMinAmount(): ?float
     {
         return $this->fields['minAmount'] ?? null;
@@ -129,6 +97,22 @@ class PercentageFormula extends FeeFormula
         return $this;
     }
 
+    public function getAmount(): float
+    {
+        return $this->fields['amount'];
+    }
+
+    public function setAmount(float|string $amount): static
+    {
+        if (is_string($amount)) {
+            $amount = (float) $amount;
+        }
+
+        $this->fields['amount'] = $amount;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -141,13 +125,13 @@ class PercentageFormula extends FeeFormula
         if (array_key_exists('bips', $this->fields)) {
             $data['bips'] = $this->fields['bips'];
         }
-        if (array_key_exists('round', $this->fields)) {
-            $data['round'] = $this->fields['round'];
-        }
         if (array_key_exists('minAmount', $this->fields)) {
             $data['minAmount'] = $this->fields['minAmount'];
         }
+        if (array_key_exists('amount', $this->fields)) {
+            $data['amount'] = $this->fields['amount'];
+        }
 
-        return parent::jsonSerialize() + $data;
+        return $data;
     }
 }

@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-class ReadyToPayKlarnaMethod extends ReadyToPayMethods
+use JsonSerializable;
+
+class ReadyToPayKlarnaMethod implements ReadyToPayMethods, JsonSerializable
 {
     public const METHOD_KLARNA = 'Klarna';
 
@@ -21,10 +23,6 @@ class ReadyToPayKlarnaMethod extends ReadyToPayMethods
 
     public function __construct(array $data = [])
     {
-        parent::__construct([
-            'method' => 'Klarna',
-        ] + $data);
-
         if (array_key_exists('method', $data)) {
             $this->setMethod($data['method']);
         }
@@ -34,6 +32,9 @@ class ReadyToPayKlarnaMethod extends ReadyToPayMethods
         if (array_key_exists('filters', $data)) {
             $this->setFilters($data['filters']);
         }
+        if (array_key_exists('brands', $data)) {
+            $this->setBrands($data['brands']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -41,17 +42,11 @@ class ReadyToPayKlarnaMethod extends ReadyToPayMethods
         return new self($data);
     }
 
-    /**
-     * @psalm-return self::METHOD_* $method
-     */
     public function getMethod(): string
     {
         return $this->fields['method'];
     }
 
-    /**
-     * @psalm-param self::METHOD_* $method
-     */
     public function setMethod(string $method): static
     {
         $this->fields['method'] = $method;
@@ -59,15 +54,15 @@ class ReadyToPayKlarnaMethod extends ReadyToPayMethods
         return $this;
     }
 
-    public function getFeature(): ?KlarnaFeature
+    public function getFeature(): ?ReadyToPayKlarnaMethodFeature
     {
         return $this->fields['feature'] ?? null;
     }
 
-    public function setFeature(null|KlarnaFeature|array $feature): static
+    public function setFeature(null|ReadyToPayKlarnaMethodFeature|array $feature): static
     {
-        if ($feature !== null && !($feature instanceof KlarnaFeature)) {
-            $feature = KlarnaFeature::from($feature);
+        if ($feature !== null && !($feature instanceof ReadyToPayKlarnaMethodFeature)) {
+            $feature = ReadyToPayKlarnaMethodFeatureFactory::from($feature);
         }
 
         $this->fields['feature'] = $feature;
@@ -88,9 +83,35 @@ class ReadyToPayKlarnaMethod extends ReadyToPayMethods
      */
     public function setFilters(null|array $filters): static
     {
-        $filters = $filters !== null ? array_map(fn ($value) => $value ?? null, $filters) : null;
+        $filters = $filters !== null ? array_map(
+            fn ($value) => $value,
+            $filters,
+        ) : null;
 
         $this->fields['filters'] = $filters;
+
+        return $this;
+    }
+
+    /**
+     * @return null|string[]
+     */
+    public function getBrands(): ?array
+    {
+        return $this->fields['brands'] ?? null;
+    }
+
+    /**
+     * @param null|string[] $brands
+     */
+    public function setBrands(null|array $brands): static
+    {
+        $brands = $brands !== null ? array_map(
+            fn ($value) => $value,
+            $brands,
+        ) : null;
+
+        $this->fields['brands'] = $brands;
 
         return $this;
     }
@@ -107,7 +128,10 @@ class ReadyToPayKlarnaMethod extends ReadyToPayMethods
         if (array_key_exists('filters', $this->fields)) {
             $data['filters'] = $this->fields['filters'];
         }
+        if (array_key_exists('brands', $this->fields)) {
+            $data['brands'] = $this->fields['brands'];
+        }
 
-        return parent::jsonSerialize() + $data;
+        return $data;
     }
 }

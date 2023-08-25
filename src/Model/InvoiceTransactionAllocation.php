@@ -92,7 +92,7 @@ class InvoiceTransactionAllocation implements JsonSerializable
     }
 
     /**
-     * @return null|array<InvoiceLink|TransactionLink>
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
@@ -122,11 +122,14 @@ class InvoiceTransactionAllocation implements JsonSerializable
     }
 
     /**
-     * @param null|array<InvoiceLink|TransactionLink> $links
+     * @param null|array[]|ResourceLink[] $links
      */
     private function setLinks(null|array $links): static
     {
-        $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
+        $links = $links !== null ? array_map(
+            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+            $links,
+        ) : null;
 
         $this->fields['_links'] = $links;
 

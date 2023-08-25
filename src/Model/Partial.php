@@ -13,10 +13,12 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use InvalidArgumentException;
+use JsonSerializable;
 
-class Partial extends AmountAdjustment
+class Partial implements InvoiceRetryAmountAdjustmentInstruction, JsonSerializable
 {
+    public const METHOD_PARTIAL = 'partial';
+
     public const TYPE_PERCENT = 'percent';
 
     public const TYPE_FIXED = 'fixed';
@@ -25,10 +27,9 @@ class Partial extends AmountAdjustment
 
     public function __construct(array $data = [])
     {
-        parent::__construct([
-            'method' => 'partial',
-        ] + $data);
-
+        if (array_key_exists('method', $data)) {
+            $this->setMethod($data['method']);
+        }
         if (array_key_exists('value', $data)) {
             $this->setValue($data['value']);
         }
@@ -43,6 +44,18 @@ class Partial extends AmountAdjustment
     public static function from(array $data = []): self
     {
         return new self($data);
+    }
+
+    public function getMethod(): string
+    {
+        return $this->fields['method'];
+    }
+
+    public function setMethod(string $method): static
+    {
+        $this->fields['method'] = $method;
+
+        return $this;
     }
 
     public function getValue(): float
@@ -61,17 +74,11 @@ class Partial extends AmountAdjustment
         return $this;
     }
 
-    /**
-     * @psalm-return self::TYPE_* $type
-     */
     public function getType(): string
     {
         return $this->fields['type'];
     }
 
-    /**
-     * @psalm-param self::TYPE_* $type
-     */
     public function setType(string $type): static
     {
         $this->fields['type'] = $type;
@@ -79,14 +86,16 @@ class Partial extends AmountAdjustment
         return $this;
     }
 
-    public function getAfterApprovalPolicy(): null|DiscountAmountRemaining|None
+    public function getAfterApprovalPolicy(): ?PartialAfterApprovalPolicy
     {
         return $this->fields['afterApprovalPolicy'] ?? null;
     }
 
-    public function setAfterApprovalPolicy(null|array|DiscountAmountRemaining|None $afterApprovalPolicy): static
+    public function setAfterApprovalPolicy(null|PartialAfterApprovalPolicy|array $afterApprovalPolicy): static
     {
-        $afterApprovalPolicy = $this->ensureAfterApprovalPolicy($afterApprovalPolicy);
+        if ($afterApprovalPolicy !== null && !($afterApprovalPolicy instanceof PartialAfterApprovalPolicy)) {
+            $afterApprovalPolicy = PartialAfterApprovalPolicyFactory::from($afterApprovalPolicy);
+        }
 
         $this->fields['afterApprovalPolicy'] = $afterApprovalPolicy;
 
@@ -96,6 +105,9 @@ class Partial extends AmountAdjustment
     public function jsonSerialize(): array
     {
         $data = [];
+        if (array_key_exists('method', $this->fields)) {
+            $data['method'] = $this->fields['method'];
+        }
         if (array_key_exists('value', $this->fields)) {
             $data['value'] = $this->fields['value'];
         }
@@ -103,41 +115,9 @@ class Partial extends AmountAdjustment
             $data['type'] = $this->fields['type'];
         }
         if (array_key_exists('afterApprovalPolicy', $this->fields)) {
-            $data['afterApprovalPolicy'] = $this->fields['afterApprovalPolicy'];
+            $data['afterApprovalPolicy'] = $this->fields['afterApprovalPolicy']?->jsonSerialize();
         }
 
-        return parent::jsonSerialize() + $data;
-    }
-
-    protected function ensureAfterApprovalPolicy(null|array|DiscountAmountRemaining|None $data): DiscountAmountRemaining|None
-    {
-        if (
-            $data === null
-            || $data instanceof DiscountAmountRemaining
-            || $data instanceof None
-        ) {
-            return $data;
-        }
-        $candidates = [];
-        $candidates[] = DiscountAmountRemaining::tryFrom($data);
-        $candidates[] = None::tryFrom($data);
-
-        $determined = array_reduce($candidates, function (?array $current, array $candidate) {
-            if ($current === null || $current[1] < $candidate[1]) {
-                $current = $candidate;
-            }
-
-            return $current;
-        });
-
-        if (
-            $determined[0] === null
-            || $determined[0] instanceof DiscountAmountRemaining
-            || $determined[0] instanceof None
-        ) {
-            return $determined[0];
-        }
-
-        throw new InvalidArgumentException('Could not instantiate afterApprovalPolicy with the given value');
+        return $data;
     }
 }

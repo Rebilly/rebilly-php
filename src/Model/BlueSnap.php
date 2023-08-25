@@ -71,15 +71,15 @@ class BlueSnap extends GatewayAccount
         return $this;
     }
 
-    public function getThreeDSecureServer(): ?BlueSnap3dsServers
+    public function getThreeDSecureServer(): ?ThreeDSecureIO3dsServer
     {
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|BlueSnap3dsServers|array $threeDSecureServer): static
+    public function setThreeDSecureServer(null|ThreeDSecureIO3dsServer|array $threeDSecureServer): static
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof BlueSnap3dsServers)) {
-            $threeDSecureServer = BlueSnap3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof ThreeDSecureIO3dsServer)) {
+            $threeDSecureServer = ThreeDSecureIO3dsServer::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

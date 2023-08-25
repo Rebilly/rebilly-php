@@ -25,11 +25,9 @@ class Application implements JsonSerializable
 
     public const STATUS_DISABLED = 'disabled';
 
-    public const PERMISSIONS_POST_WEBHOOK_CREDENTIAL_HASH = 'PostWebhookCredentialHash';
+    public const PERMISSIONS_DELETE_APPLICATION_INSTANCE = 'DeleteApplicationInstance';
 
-    public const PERMISSIONS_POST_WEBHOOK = 'PostWebhook';
-
-    public const PERMISSIONS_GET_WEBHOOK = 'GetWebhook';
+    public const PERMISSIONS_GET_APPLICATION_INSTANCE_CONFIGURATION = 'GetApplicationInstanceConfiguration';
 
     public const PERMISSIONS_GET_CUSTOMER = 'GetCustomer';
 
@@ -55,13 +53,33 @@ class Application implements JsonSerializable
 
     public const PERMISSIONS_GET_TRANSACTION_COLLECTION = 'GetTransactionCollection';
 
+    public const PERMISSIONS_GET_WEBHOOK = 'GetWebhook';
+
     public const PERMISSIONS_GET_WEBSITE = 'GetWebsite';
 
     public const PERMISSIONS_GET_WEBSITE_COLLECTION = 'GetWebsiteCollection';
 
     public const PERMISSIONS_POST_COUPON = 'PostCoupon';
 
+    public const PERMISSIONS_POST_COUPON_REDEMPTION = 'PostCouponRedemption';
+
+    public const PERMISSIONS_POST_GATEWAY_ACCOUNT_DOWNTIME_SCHEDULE = 'PostGatewayAccountDowntimeSchedule';
+
+    public const PERMISSIONS_POST_PAYOUT = 'PostPayout';
+
+    public const PERMISSIONS_POST_SERVICE_CREDENTIAL = 'PostServiceCredential';
+
+    public const PERMISSIONS_POST_WEBHOOK = 'PostWebhook';
+
+    public const PERMISSIONS_POST_WEBHOOK_CREDENTIAL_HASH = 'PostWebhookCredentialHash';
+
+    public const PERMISSIONS_PUT_APPLICATION_INSTANCE_CONFIGURATION = 'PutApplicationInstanceConfiguration';
+
     public const PERMISSIONS_PUT_COUPON = 'PutCoupon';
+
+    public const CONFIGURED_BY_USER = 'user';
+
+    public const CONFIGURED_BY_APPLICATION = 'application';
 
     private array $fields = [];
 
@@ -93,6 +111,12 @@ class Application implements JsonSerializable
         }
         if (array_key_exists('permissions', $data)) {
             $this->setPermissions($data['permissions']);
+        }
+        if (array_key_exists('configurationUrl', $data)) {
+            $this->setConfigurationUrl($data['configurationUrl']);
+        }
+        if (array_key_exists('configuredBy', $data)) {
+            $this->setConfiguredBy($data['configuredBy']);
         }
         if (array_key_exists('properties', $data)) {
             $this->setProperties($data['properties']);
@@ -130,12 +154,12 @@ class Application implements JsonSerializable
         return $this;
     }
 
-    public function getLogoId(): string
+    public function getLogoId(): mixed
     {
         return $this->fields['logoId'];
     }
 
-    public function setLogoId(string $logoId): static
+    public function setLogoId(mixed $logoId): static
     {
         $this->fields['logoId'] = $logoId;
 
@@ -190,9 +214,6 @@ class Application implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-return self::STATUS_*|null $status
-     */
     public function getStatus(): ?string
     {
         return $this->fields['status'] ?? null;
@@ -200,8 +221,6 @@ class Application implements JsonSerializable
 
     /**
      * @return string[]
-     *
-     * @psalm-return self::PERMISSIONS_* $permissions
      */
     public function getPermissions(): array
     {
@@ -210,24 +229,42 @@ class Application implements JsonSerializable
 
     /**
      * @param string[] $permissions
-     *
-     * @psalm-param self::PERMISSIONS_* $permissions
      */
     public function setPermissions(array $permissions): static
     {
-        $permissions = array_map(fn ($value) => $value ?? null, $permissions);
+        $permissions = array_map(
+            fn ($value) => $value,
+            $permissions,
+        );
 
         $this->fields['permissions'] = $permissions;
 
         return $this;
     }
 
-    public function getProperties(): ?array
+    public function getConfigurationUrl(): ?string
+    {
+        return $this->fields['configurationUrl'] ?? null;
+    }
+
+    public function setConfigurationUrl(null|string $configurationUrl): static
+    {
+        $this->fields['configurationUrl'] = $configurationUrl;
+
+        return $this;
+    }
+
+    public function getConfiguredBy(): ?string
+    {
+        return $this->fields['configuredBy'] ?? null;
+    }
+
+    public function getProperties(): ?object
     {
         return $this->fields['properties'] ?? null;
     }
 
-    public function setProperties(null|array $properties): static
+    public function setProperties(null|object $properties): static
     {
         $this->fields['properties'] = $properties;
 
@@ -245,7 +282,7 @@ class Application implements JsonSerializable
     }
 
     /**
-     * @return null|array<ApplicationInstanceLink|AuthorLogoUrlLink|LogoUrlLink|SelfLink>
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
@@ -282,6 +319,12 @@ class Application implements JsonSerializable
         if (array_key_exists('permissions', $this->fields)) {
             $data['permissions'] = $this->fields['permissions'];
         }
+        if (array_key_exists('configurationUrl', $this->fields)) {
+            $data['configurationUrl'] = $this->fields['configurationUrl'];
+        }
+        if (array_key_exists('configuredBy', $this->fields)) {
+            $data['configuredBy'] = $this->fields['configuredBy'];
+        }
         if (array_key_exists('properties', $this->fields)) {
             $data['properties'] = $this->fields['properties'];
         }
@@ -305,12 +348,16 @@ class Application implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-param self::STATUS_*|null $status
-     */
     private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
+
+        return $this;
+    }
+
+    private function setConfiguredBy(null|string $configuredBy): static
+    {
+        $this->fields['configuredBy'] = $configuredBy;
 
         return $this;
     }
@@ -338,11 +385,14 @@ class Application implements JsonSerializable
     }
 
     /**
-     * @param null|array<ApplicationInstanceLink|AuthorLogoUrlLink|LogoUrlLink|SelfLink> $links
+     * @param null|array[]|ResourceLink[] $links
      */
     private function setLinks(null|array $links): static
     {
-        $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
+        $links = $links !== null ? array_map(
+            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+            $links,
+        ) : null;
 
         $this->fields['_links'] = $links;
 

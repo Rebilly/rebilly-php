@@ -44,7 +44,10 @@ class PostTagCustomerCollectionRequest implements JsonSerializable
      */
     public function setCustomerIds(array $customerIds): static
     {
-        $customerIds = array_map(fn ($value) => $value ?? null, $customerIds);
+        $customerIds = array_map(
+            fn ($value) => $value,
+            $customerIds,
+        );
 
         $this->fields['customerIds'] = $customerIds;
 

@@ -21,12 +21,6 @@ class InvoiceTaxItem implements JsonSerializable
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('amount', $data)) {
-            $this->setAmount($data['amount']);
-        }
-        if (array_key_exists('description', $data)) {
-            $this->setDescription($data['description']);
-        }
         if (array_key_exists('rate', $data)) {
             $this->setRate($data['rate']);
         }
@@ -57,11 +51,177 @@ class InvoiceTaxItem implements JsonSerializable
         if (array_key_exists('jurisdictions', $data)) {
             $this->setJurisdictions($data['jurisdictions']);
         }
+        if (array_key_exists('amount', $data)) {
+            $this->setAmount($data['amount']);
+        }
+        if (array_key_exists('description', $data)) {
+            $this->setDescription($data['description']);
+        }
     }
 
     public static function from(array $data = []): self
     {
         return new self($data);
+    }
+
+    public function getRate(): ?float
+    {
+        return $this->fields['rate'] ?? null;
+    }
+
+    public function setRate(null|float|string $rate): static
+    {
+        if (is_string($rate)) {
+            $rate = (float) $rate;
+        }
+
+        $this->fields['rate'] = $rate;
+
+        return $this;
+    }
+
+    public function getStateAmount(): ?float
+    {
+        return $this->fields['stateAmount'] ?? null;
+    }
+
+    public function setStateAmount(null|float|string $stateAmount): static
+    {
+        if (is_string($stateAmount)) {
+            $stateAmount = (float) $stateAmount;
+        }
+
+        $this->fields['stateAmount'] = $stateAmount;
+
+        return $this;
+    }
+
+    public function getCountyAmount(): ?float
+    {
+        return $this->fields['countyAmount'] ?? null;
+    }
+
+    public function setCountyAmount(null|float|string $countyAmount): static
+    {
+        if (is_string($countyAmount)) {
+            $countyAmount = (float) $countyAmount;
+        }
+
+        $this->fields['countyAmount'] = $countyAmount;
+
+        return $this;
+    }
+
+    public function getCityAmount(): ?float
+    {
+        return $this->fields['cityAmount'] ?? null;
+    }
+
+    public function setCityAmount(null|float|string $cityAmount): static
+    {
+        if (is_string($cityAmount)) {
+            $cityAmount = (float) $cityAmount;
+        }
+
+        $this->fields['cityAmount'] = $cityAmount;
+
+        return $this;
+    }
+
+    public function getSpecialDistrictAmount(): ?float
+    {
+        return $this->fields['specialDistrictAmount'] ?? null;
+    }
+
+    public function setSpecialDistrictAmount(null|float|string $specialDistrictAmount): static
+    {
+        if (is_string($specialDistrictAmount)) {
+            $specialDistrictAmount = (float) $specialDistrictAmount;
+        }
+
+        $this->fields['specialDistrictAmount'] = $specialDistrictAmount;
+
+        return $this;
+    }
+
+    public function getStateRate(): ?float
+    {
+        return $this->fields['stateRate'] ?? null;
+    }
+
+    public function setStateRate(null|float|string $stateRate): static
+    {
+        if (is_string($stateRate)) {
+            $stateRate = (float) $stateRate;
+        }
+
+        $this->fields['stateRate'] = $stateRate;
+
+        return $this;
+    }
+
+    public function getCountyRate(): ?float
+    {
+        return $this->fields['countyRate'] ?? null;
+    }
+
+    public function setCountyRate(null|float|string $countyRate): static
+    {
+        if (is_string($countyRate)) {
+            $countyRate = (float) $countyRate;
+        }
+
+        $this->fields['countyRate'] = $countyRate;
+
+        return $this;
+    }
+
+    public function getCityRate(): ?float
+    {
+        return $this->fields['cityRate'] ?? null;
+    }
+
+    public function setCityRate(null|float|string $cityRate): static
+    {
+        if (is_string($cityRate)) {
+            $cityRate = (float) $cityRate;
+        }
+
+        $this->fields['cityRate'] = $cityRate;
+
+        return $this;
+    }
+
+    public function getSpecialDistrictRate(): ?float
+    {
+        return $this->fields['specialDistrictRate'] ?? null;
+    }
+
+    public function setSpecialDistrictRate(null|float|string $specialDistrictRate): static
+    {
+        if (is_string($specialDistrictRate)) {
+            $specialDistrictRate = (float) $specialDistrictRate;
+        }
+
+        $this->fields['specialDistrictRate'] = $specialDistrictRate;
+
+        return $this;
+    }
+
+    public function getJurisdictions(): ?TaxItemJurisdictions
+    {
+        return $this->fields['jurisdictions'] ?? null;
+    }
+
+    public function setJurisdictions(null|TaxItemJurisdictions|array $jurisdictions): static
+    {
+        if ($jurisdictions !== null && !($jurisdictions instanceof TaxItemJurisdictions)) {
+            $jurisdictions = TaxItemJurisdictions::from($jurisdictions);
+        }
+
+        $this->fields['jurisdictions'] = $jurisdictions;
+
+        return $this;
     }
 
     public function getAmount(): float
@@ -92,76 +252,9 @@ class InvoiceTaxItem implements JsonSerializable
         return $this;
     }
 
-    public function getRate(): ?float
-    {
-        return $this->fields['rate'] ?? null;
-    }
-
-    public function getStateAmount(): ?float
-    {
-        return $this->fields['stateAmount'] ?? null;
-    }
-
-    public function getCountyAmount(): ?float
-    {
-        return $this->fields['countyAmount'] ?? null;
-    }
-
-    public function getCityAmount(): ?float
-    {
-        return $this->fields['cityAmount'] ?? null;
-    }
-
-    public function getSpecialDistrictAmount(): ?float
-    {
-        return $this->fields['specialDistrictAmount'] ?? null;
-    }
-
-    public function getStateRate(): ?float
-    {
-        return $this->fields['stateRate'] ?? null;
-    }
-
-    public function getCountyRate(): ?float
-    {
-        return $this->fields['countyRate'] ?? null;
-    }
-
-    public function getCityRate(): ?float
-    {
-        return $this->fields['cityRate'] ?? null;
-    }
-
-    public function getSpecialDistrictRate(): ?float
-    {
-        return $this->fields['specialDistrictRate'] ?? null;
-    }
-
-    public function getJurisdictions(): ?InvoiceTaxItemJurisdictions
-    {
-        return $this->fields['jurisdictions'] ?? null;
-    }
-
-    public function setJurisdictions(null|InvoiceTaxItemJurisdictions|array $jurisdictions): static
-    {
-        if ($jurisdictions !== null && !($jurisdictions instanceof InvoiceTaxItemJurisdictions)) {
-            $jurisdictions = InvoiceTaxItemJurisdictions::from($jurisdictions);
-        }
-
-        $this->fields['jurisdictions'] = $jurisdictions;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [];
-        if (array_key_exists('amount', $this->fields)) {
-            $data['amount'] = $this->fields['amount'];
-        }
-        if (array_key_exists('description', $this->fields)) {
-            $data['description'] = $this->fields['description'];
-        }
         if (array_key_exists('rate', $this->fields)) {
             $data['rate'] = $this->fields['rate'];
         }
@@ -192,106 +285,13 @@ class InvoiceTaxItem implements JsonSerializable
         if (array_key_exists('jurisdictions', $this->fields)) {
             $data['jurisdictions'] = $this->fields['jurisdictions']?->jsonSerialize();
         }
+        if (array_key_exists('amount', $this->fields)) {
+            $data['amount'] = $this->fields['amount'];
+        }
+        if (array_key_exists('description', $this->fields)) {
+            $data['description'] = $this->fields['description'];
+        }
 
         return $data;
-    }
-
-    private function setRate(null|float|string $rate): static
-    {
-        if (is_string($rate)) {
-            $rate = (float) $rate;
-        }
-
-        $this->fields['rate'] = $rate;
-
-        return $this;
-    }
-
-    private function setStateAmount(null|float|string $stateAmount): static
-    {
-        if (is_string($stateAmount)) {
-            $stateAmount = (float) $stateAmount;
-        }
-
-        $this->fields['stateAmount'] = $stateAmount;
-
-        return $this;
-    }
-
-    private function setCountyAmount(null|float|string $countyAmount): static
-    {
-        if (is_string($countyAmount)) {
-            $countyAmount = (float) $countyAmount;
-        }
-
-        $this->fields['countyAmount'] = $countyAmount;
-
-        return $this;
-    }
-
-    private function setCityAmount(null|float|string $cityAmount): static
-    {
-        if (is_string($cityAmount)) {
-            $cityAmount = (float) $cityAmount;
-        }
-
-        $this->fields['cityAmount'] = $cityAmount;
-
-        return $this;
-    }
-
-    private function setSpecialDistrictAmount(null|float|string $specialDistrictAmount): static
-    {
-        if (is_string($specialDistrictAmount)) {
-            $specialDistrictAmount = (float) $specialDistrictAmount;
-        }
-
-        $this->fields['specialDistrictAmount'] = $specialDistrictAmount;
-
-        return $this;
-    }
-
-    private function setStateRate(null|float|string $stateRate): static
-    {
-        if (is_string($stateRate)) {
-            $stateRate = (float) $stateRate;
-        }
-
-        $this->fields['stateRate'] = $stateRate;
-
-        return $this;
-    }
-
-    private function setCountyRate(null|float|string $countyRate): static
-    {
-        if (is_string($countyRate)) {
-            $countyRate = (float) $countyRate;
-        }
-
-        $this->fields['countyRate'] = $countyRate;
-
-        return $this;
-    }
-
-    private function setCityRate(null|float|string $cityRate): static
-    {
-        if (is_string($cityRate)) {
-            $cityRate = (float) $cityRate;
-        }
-
-        $this->fields['cityRate'] = $cityRate;
-
-        return $this;
-    }
-
-    private function setSpecialDistrictRate(null|float|string $specialDistrictRate): static
-    {
-        if (is_string($specialDistrictRate)) {
-            $specialDistrictRate = (float) $specialDistrictRate;
-        }
-
-        $this->fields['specialDistrictRate'] = $specialDistrictRate;
-
-        return $this;
     }
 }

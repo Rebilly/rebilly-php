@@ -20,18 +20,6 @@ use JsonSerializable;
 
 abstract class DataExport implements JsonSerializable
 {
-    public const RESOURCE_TRANSACTIONS = 'transactions';
-
-    public const RESOURCE_CUSTOMERS = 'customers';
-
-    public const RESOURCE_SUBSCRIPTIONS = 'subscriptions';
-
-    public const RESOURCE_INVOICES = 'invoices';
-
-    public const RESOURCE_INVOICE_ITEMS = 'invoiceItems';
-
-    public const RESOURCE_REVENUE_AUDIT = 'revenueAudit';
-
     public const FORMAT_CSV = 'csv';
 
     public const FORMAT_JSON = 'json';
@@ -81,6 +69,9 @@ abstract class DataExport implements JsonSerializable
         if (array_key_exists('userId', $data)) {
             $this->setUserId($data['userId']);
         }
+        if (array_key_exists('fileId', $data)) {
+            $this->setFileId($data['fileId']);
+        }
         if (array_key_exists('recordCount', $data)) {
             $this->setRecordCount($data['recordCount']);
         }
@@ -99,23 +90,28 @@ abstract class DataExport implements JsonSerializable
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
+        if (array_key_exists('_embedded', $data)) {
+            $this->setEmbedded($data['_embedded']);
+        }
     }
 
     public static function from(array $data = []): self
     {
         switch ($data['resource']) {
-            case 'transactions':
-                return new Transactions($data);
-            case 'subscriptions':
-                return new Subscriptions($data);
+            case 'amlChecks':
+                return new AmlChecks($data);
             case 'customers':
                 return new Customers($data);
-            case 'revenueAudit':
-                return new RevenueAudit($data);
             case 'invoiceItems':
                 return new InvoiceItems($data);
             case 'invoices':
                 return new Invoices($data);
+            case 'revenueAudit':
+                return new RevenueAudit($data);
+            case 'subscriptions':
+                return new Subscriptions($data);
+            case 'transactions':
+                return new Transactions($data);
         }
 
         throw new InvalidArgumentException("Unsupported resource value: '{$data['resource']}'");
@@ -138,25 +134,16 @@ abstract class DataExport implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-return self::RESOURCE_* $resource
-     */
     public function getResource(): string
     {
         return $this->fields['resource'];
     }
 
-    /**
-     * @psalm-return self::FORMAT_* $format
-     */
     public function getFormat(): string
     {
         return $this->fields['format'];
     }
 
-    /**
-     * @psalm-param self::FORMAT_* $format
-     */
     public function setFormat(string $format): static
     {
         $this->fields['format'] = $format;
@@ -193,7 +180,10 @@ abstract class DataExport implements JsonSerializable
      */
     public function setEmailNotification(null|array $emailNotification): static
     {
-        $emailNotification = $emailNotification !== null ? array_map(fn ($value) => $value ?? null, $emailNotification) : null;
+        $emailNotification = $emailNotification !== null ? array_map(
+            fn ($value) => $value,
+            $emailNotification,
+        ) : null;
 
         $this->fields['emailNotification'] = $emailNotification;
 
@@ -213,7 +203,10 @@ abstract class DataExport implements JsonSerializable
      */
     public function setFields(null|array $fields): static
     {
-        $fields = $fields !== null ? array_map(fn ($value) => $value ?? null, $fields) : null;
+        $fields = $fields !== null ? array_map(
+            fn ($value) => $value,
+            $fields,
+        ) : null;
 
         $this->fields['fields'] = $fields;
 
@@ -241,6 +234,11 @@ abstract class DataExport implements JsonSerializable
         return $this->fields['userId'] ?? null;
     }
 
+    public function getFileId(): ?string
+    {
+        return $this->fields['fileId'] ?? null;
+    }
+
     public function getRecordCount(): ?int
     {
         return $this->fields['recordCount'] ?? null;
@@ -249,17 +247,6 @@ abstract class DataExport implements JsonSerializable
     public function getScheduledTime(): ?DateTimeImmutable
     {
         return $this->fields['scheduledTime'] ?? null;
-    }
-
-    public function setScheduledTime(null|DateTimeImmutable|string $scheduledTime): static
-    {
-        if ($scheduledTime !== null && !($scheduledTime instanceof DateTimeImmutable)) {
-            $scheduledTime = new DateTimeImmutable($scheduledTime);
-        }
-
-        $this->fields['scheduledTime'] = $scheduledTime;
-
-        return $this;
     }
 
     public function getCreatedTime(): ?DateTimeImmutable
@@ -272,20 +259,33 @@ abstract class DataExport implements JsonSerializable
         return $this->fields['updatedTime'] ?? null;
     }
 
-    /**
-     * @psalm-return self::STATUS_*|null $status
-     */
     public function getStatus(): ?string
     {
         return $this->fields['status'] ?? null;
     }
 
     /**
-     * @return null|array<LinkFileDownload|LinkSelf|LinkSignedLink|LinkUser>
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
+    }
+
+    public function getEmbedded(): ?DataExportEmbedded
+    {
+        return $this->fields['_embedded'] ?? null;
+    }
+
+    public function setEmbedded(null|DataExportEmbedded|array $embedded): static
+    {
+        if ($embedded !== null && !($embedded instanceof DataExportEmbedded)) {
+            $embedded = DataExportEmbedded::from($embedded);
+        }
+
+        $this->fields['_embedded'] = $embedded;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -318,6 +318,9 @@ abstract class DataExport implements JsonSerializable
         if (array_key_exists('userId', $this->fields)) {
             $data['userId'] = $this->fields['userId'];
         }
+        if (array_key_exists('fileId', $this->fields)) {
+            $data['fileId'] = $this->fields['fileId'];
+        }
         if (array_key_exists('recordCount', $this->fields)) {
             $data['recordCount'] = $this->fields['recordCount'];
         }
@@ -336,6 +339,9 @@ abstract class DataExport implements JsonSerializable
         if (array_key_exists('_links', $this->fields)) {
             $data['_links'] = $this->fields['_links'];
         }
+        if (array_key_exists('_embedded', $this->fields)) {
+            $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();
+        }
 
         return $data;
     }
@@ -347,9 +353,6 @@ abstract class DataExport implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-param self::RESOURCE_* $resource
-     */
     private function setResource(string $resource): static
     {
         $this->fields['resource'] = $resource;
@@ -364,9 +367,27 @@ abstract class DataExport implements JsonSerializable
         return $this;
     }
 
+    private function setFileId(null|string $fileId): static
+    {
+        $this->fields['fileId'] = $fileId;
+
+        return $this;
+    }
+
     private function setRecordCount(null|int $recordCount): static
     {
         $this->fields['recordCount'] = $recordCount;
+
+        return $this;
+    }
+
+    private function setScheduledTime(null|DateTimeImmutable|string $scheduledTime): static
+    {
+        if ($scheduledTime !== null && !($scheduledTime instanceof DateTimeImmutable)) {
+            $scheduledTime = new DateTimeImmutable($scheduledTime);
+        }
+
+        $this->fields['scheduledTime'] = $scheduledTime;
 
         return $this;
     }
@@ -393,9 +414,6 @@ abstract class DataExport implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-param self::STATUS_*|null $status
-     */
     private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
@@ -404,11 +422,14 @@ abstract class DataExport implements JsonSerializable
     }
 
     /**
-     * @param null|array<LinkFileDownload|LinkSelf|LinkSignedLink|LinkUser> $links
+     * @param null|array[]|ResourceLink[] $links
      */
     private function setLinks(null|array $links): static
     {
-        $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
+        $links = $links !== null ? array_map(
+            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+            $links,
+        ) : null;
 
         $this->fields['_links'] = $links;
 

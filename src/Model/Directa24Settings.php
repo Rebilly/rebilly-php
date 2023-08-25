@@ -27,6 +27,12 @@ class Directa24Settings implements JsonSerializable
         if (array_key_exists('skipStep', $data)) {
             $this->setSkipStep($data['skipStep']);
         }
+        if (array_key_exists('useV3Api', $data)) {
+            $this->setUseV3Api($data['useV3Api']);
+        }
+        if (array_key_exists('storeIdNumber', $data)) {
+            $this->setStoreIdNumber($data['storeIdNumber']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -35,7 +41,7 @@ class Directa24Settings implements JsonSerializable
     }
 
     /**
-     * @return null|Directa24Banks[]
+     * @return null|string[]
      */
     public function getBanks(): ?array
     {
@@ -43,11 +49,14 @@ class Directa24Settings implements JsonSerializable
     }
 
     /**
-     * @param null|Directa24Banks[] $banks
+     * @param null|string[] $banks
      */
     public function setBanks(null|array $banks): static
     {
-        $banks = $banks !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Directa24Banks ? $value : Directa24Banks::from($value)) : null, $banks) : null;
+        $banks = $banks !== null ? array_map(
+            fn ($value) => $value,
+            $banks,
+        ) : null;
 
         $this->fields['banks'] = $banks;
 
@@ -66,6 +75,30 @@ class Directa24Settings implements JsonSerializable
         return $this;
     }
 
+    public function getUseV3Api(): ?bool
+    {
+        return $this->fields['useV3Api'] ?? null;
+    }
+
+    public function setUseV3Api(null|bool $useV3Api): static
+    {
+        $this->fields['useV3Api'] = $useV3Api;
+
+        return $this;
+    }
+
+    public function getStoreIdNumber(): ?bool
+    {
+        return $this->fields['storeIdNumber'] ?? null;
+    }
+
+    public function setStoreIdNumber(null|bool $storeIdNumber): static
+    {
+        $this->fields['storeIdNumber'] = $storeIdNumber;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -74,6 +107,12 @@ class Directa24Settings implements JsonSerializable
         }
         if (array_key_exists('skipStep', $this->fields)) {
             $data['skipStep'] = $this->fields['skipStep'];
+        }
+        if (array_key_exists('useV3Api', $this->fields)) {
+            $data['useV3Api'] = $this->fields['useV3Api'];
+        }
+        if (array_key_exists('storeIdNumber', $this->fields)) {
+            $data['storeIdNumber'] = $this->fields['storeIdNumber'];
         }
 
         return $data;

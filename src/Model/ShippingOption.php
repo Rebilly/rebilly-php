@@ -27,8 +27,8 @@ class ShippingOption implements JsonSerializable
         if (array_key_exists('name', $data)) {
             $this->setName($data['name']);
         }
-        if (array_key_exists('descriptions', $data)) {
-            $this->setDescriptions($data['descriptions']);
+        if (array_key_exists('description', $data)) {
+            $this->setDescription($data['description']);
         }
         if (array_key_exists('price', $data)) {
             $this->setPrice($data['price']);
@@ -60,14 +60,14 @@ class ShippingOption implements JsonSerializable
         return $this;
     }
 
-    public function getDescriptions(): ?string
+    public function getDescription(): ?string
     {
-        return $this->fields['descriptions'] ?? null;
+        return $this->fields['description'] ?? null;
     }
 
-    public function setDescriptions(null|string $descriptions): static
+    public function setDescription(null|string $description): static
     {
-        $this->fields['descriptions'] = $descriptions;
+        $this->fields['description'] = $description;
 
         return $this;
     }
@@ -109,8 +109,8 @@ class ShippingOption implements JsonSerializable
         if (array_key_exists('name', $this->fields)) {
             $data['name'] = $this->fields['name'];
         }
-        if (array_key_exists('descriptions', $this->fields)) {
-            $data['descriptions'] = $this->fields['descriptions'];
+        if (array_key_exists('description', $this->fields)) {
+            $data['description'] = $this->fields['description'];
         }
         if (array_key_exists('price', $this->fields)) {
             $data['price'] = $this->fields['price'];

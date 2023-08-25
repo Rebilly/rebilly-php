@@ -107,17 +107,11 @@ class Attachment implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-return self::RELATED_TYPE_* $relatedType
-     */
     public function getRelatedType(): string
     {
         return $this->fields['relatedType'];
     }
 
-    /**
-     * @psalm-param self::RELATED_TYPE_* $relatedType
-     */
     public function setRelatedType(string $relatedType): static
     {
         $this->fields['relatedType'] = $relatedType;
@@ -172,19 +166,27 @@ class Attachment implements JsonSerializable
     }
 
     /**
-     * @return null|array<AttachmentResourceLink|FileLink|SelfLink>
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
     }
 
-    /**
-     * @return null|array{file:File}
-     */
-    public function getEmbedded(): ?array
+    public function getEmbedded(): ?AttachmentEmbedded
     {
         return $this->fields['_embedded'] ?? null;
+    }
+
+    public function setEmbedded(null|AttachmentEmbedded|array $embedded): static
+    {
+        if ($embedded !== null && !($embedded instanceof AttachmentEmbedded)) {
+            $embedded = AttachmentEmbedded::from($embedded);
+        }
+
+        $this->fields['_embedded'] = $embedded;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -218,7 +220,7 @@ class Attachment implements JsonSerializable
             $data['_links'] = $this->fields['_links'];
         }
         if (array_key_exists('_embedded', $this->fields)) {
-            $data['_embedded'] = $this->fields['_embedded'];
+            $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();
         }
 
         return $data;
@@ -254,27 +256,16 @@ class Attachment implements JsonSerializable
     }
 
     /**
-     * @param null|array<AttachmentResourceLink|FileLink|SelfLink> $links
+     * @param null|array[]|ResourceLink[] $links
      */
     private function setLinks(null|array $links): static
     {
-        $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
+        $links = $links !== null ? array_map(
+            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+            $links,
+        ) : null;
 
         $this->fields['_links'] = $links;
-
-        return $this;
-    }
-
-    /**
-     * @param null|array{file:File} $embedded
-     */
-    private function setEmbedded(null|array $embedded): static
-    {
-        if ($embedded !== null) {
-            $embedded['file'] = isset($embedded['file']) ? ($embedded['file'] instanceof File ? $embedded['file'] : File::from($embedded['file'])) : null;
-        }
-
-        $this->fields['_embedded'] = $embedded;
 
         return $this;
     }

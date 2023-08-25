@@ -20,8 +20,7 @@ use Psr\Http\Message\StreamInterface;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\Attachment;
 use Rebilly\Sdk\Model\File;
-use Rebilly\Sdk\Model\FileCreateFromInline;
-use Rebilly\Sdk\Model\FileCreateFromUrl;
+use Rebilly\Sdk\Model\PostFileRequest;
 use Rebilly\Sdk\Paginator;
 
 class FilesApi
@@ -120,7 +119,6 @@ class FilesApi
         ?int $offset = null,
         ?string $filter = null,
         ?string $q = null,
-        ?string $expand = null,
         ?string $fields = null,
         ?array $sort = null,
     ): Collection {
@@ -129,7 +127,6 @@ class FilesApi
             'offset' => $offset,
             'filter' => $filter,
             'q' => $q,
-            'expand' => $expand,
             'fields' => $fields,
             'sort' => $sort,
         ];
@@ -152,7 +149,6 @@ class FilesApi
         ?int $offset = null,
         ?string $filter = null,
         ?string $q = null,
-        ?string $expand = null,
         ?string $fields = null,
         ?array $sort = null,
     ): Paginator {
@@ -161,7 +157,6 @@ class FilesApi
             offset: $offset,
             filter: $filter,
             q: $q,
-            expand: $expand,
             fields: $fields,
             sort: $sort,
         );
@@ -295,11 +290,11 @@ class FilesApi
      * @return File
      */
     public function upload(
-        FileCreateFromInline|FileCreateFromUrl $body,
+        PostFileRequest $postFileRequest,
     ): File {
         $uri = '/files';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($body));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($postFileRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

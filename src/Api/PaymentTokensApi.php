@@ -18,6 +18,7 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\CompositeToken;
+use Rebilly\Sdk\Model\CompositeTokenFactory;
 use Rebilly\Sdk\Paginator;
 
 class PaymentTokensApi
@@ -38,7 +39,7 @@ class PaymentTokensApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CompositeToken::from($data);
+        return CompositeTokenFactory::from($data);
     }
 
     /**
@@ -57,7 +58,7 @@ class PaymentTokensApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CompositeToken::from($data);
+        return CompositeTokenFactory::from($data);
     }
 
     /**
@@ -78,7 +79,7 @@ class PaymentTokensApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): CompositeToken => CompositeToken::from($item), $data),
+            array_map(fn (array $item): CompositeToken => CompositeTokenFactory::from($item), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),

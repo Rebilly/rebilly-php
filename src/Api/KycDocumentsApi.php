@@ -17,10 +17,10 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
-use Rebilly\Sdk\Model\AddressMatches;
-use Rebilly\Sdk\Model\IdentityMatches;
 use Rebilly\Sdk\Model\KycDocument;
+use Rebilly\Sdk\Model\KycDocumentFactory;
 use Rebilly\Sdk\Model\KycDocumentRejection;
+use Rebilly\Sdk\Model\PostKycDocumentMatchesRequest;
 use Rebilly\Sdk\Paginator;
 
 class KycDocumentsApi
@@ -45,7 +45,7 @@ class KycDocumentsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return KycDocument::from($data);
+        return KycDocumentFactory::from($data);
     }
 
     /**
@@ -60,7 +60,7 @@ class KycDocumentsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return KycDocument::from($data);
+        return KycDocumentFactory::from($data);
     }
 
     /**
@@ -79,7 +79,7 @@ class KycDocumentsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return KycDocument::from($data);
+        return KycDocumentFactory::from($data);
     }
 
     /**
@@ -106,7 +106,7 @@ class KycDocumentsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): KycDocument => KycDocument::from($item), $data),
+            array_map(fn (array $item): KycDocument => KycDocumentFactory::from($item), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
@@ -136,7 +136,7 @@ class KycDocumentsApi
 
     public function matches(
         string $id,
-        IdentityMatches|AddressMatches $body,
+        PostKycDocumentMatchesRequest $postKycDocumentMatchesRequest,
     ): void {
         $pathParams = [
             '{id}' => $id,
@@ -144,7 +144,7 @@ class KycDocumentsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/kyc-documents/{id}/matches');
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($body));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($postKycDocumentMatchesRequest));
         $this->client->send($request);
     }
 
@@ -165,7 +165,7 @@ class KycDocumentsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return KycDocument::from($data);
+        return KycDocumentFactory::from($data);
     }
 
     /**
@@ -184,7 +184,7 @@ class KycDocumentsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return KycDocument::from($data);
+        return KycDocumentFactory::from($data);
     }
 
     /**
@@ -203,7 +203,7 @@ class KycDocumentsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return KycDocument::from($data);
+        return KycDocumentFactory::from($data);
     }
 
     /**
@@ -222,7 +222,7 @@ class KycDocumentsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return KycDocument::from($data);
+        return KycDocumentFactory::from($data);
     }
 
     /**
@@ -242,6 +242,6 @@ class KycDocumentsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return KycDocument::from($data);
+        return KycDocumentFactory::from($data);
     }
 }

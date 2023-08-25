@@ -50,6 +50,9 @@ class Website implements JsonSerializable
         if (array_key_exists('settings', $data)) {
             $this->setSettings($data['settings']);
         }
+        if (array_key_exists('logoId', $data)) {
+            $this->setLogoId($data['logoId']);
+        }
         if (array_key_exists('organizationId', $data)) {
             $this->setOrganizationId($data['organizationId']);
         }
@@ -66,6 +69,13 @@ class Website implements JsonSerializable
     public function getId(): ?string
     {
         return $this->fields['id'] ?? null;
+    }
+
+    public function setId(null|string $id): static
+    {
+        $this->fields['id'] = $id;
+
+        return $this;
     }
 
     public function getName(): string
@@ -154,13 +164,32 @@ class Website implements JsonSerializable
         return $this;
     }
 
+    public function getLogoId(): ?string
+    {
+        return $this->fields['logoId'] ?? null;
+    }
+
+    public function setLogoId(null|string $logoId): static
+    {
+        $this->fields['logoId'] = $logoId;
+
+        return $this;
+    }
+
     public function getOrganizationId(): ?string
     {
         return $this->fields['organizationId'] ?? null;
     }
 
+    public function setOrganizationId(null|string $organizationId): static
+    {
+        $this->fields['organizationId'] = $organizationId;
+
+        return $this;
+    }
+
     /**
-     * @return null|array<OrganizationLink|SelfLink>
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
@@ -197,6 +226,9 @@ class Website implements JsonSerializable
         if (array_key_exists('settings', $this->fields)) {
             $data['settings'] = $this->fields['settings']?->jsonSerialize();
         }
+        if (array_key_exists('logoId', $this->fields)) {
+            $data['logoId'] = $this->fields['logoId'];
+        }
         if (array_key_exists('organizationId', $this->fields)) {
             $data['organizationId'] = $this->fields['organizationId'];
         }
@@ -205,13 +237,6 @@ class Website implements JsonSerializable
         }
 
         return $data;
-    }
-
-    private function setId(null|string $id): static
-    {
-        $this->fields['id'] = $id;
-
-        return $this;
     }
 
     private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
@@ -236,19 +261,15 @@ class Website implements JsonSerializable
         return $this;
     }
 
-    private function setOrganizationId(null|string $organizationId): static
-    {
-        $this->fields['organizationId'] = $organizationId;
-
-        return $this;
-    }
-
     /**
-     * @param null|array<OrganizationLink|SelfLink> $links
+     * @param null|array[]|ResourceLink[] $links
      */
     private function setLinks(null|array $links): static
     {
-        $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
+        $links = $links !== null ? array_map(
+            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+            $links,
+        ) : null;
 
         $this->fields['_links'] = $links;
 

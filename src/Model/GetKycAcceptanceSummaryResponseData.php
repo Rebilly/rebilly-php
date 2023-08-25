@@ -46,27 +46,27 @@ class GetKycAcceptanceSummaryResponseData implements JsonSerializable
         return new self($data);
     }
 
-    public function getDocumentType(): mixed
+    public function getDocumentType(): ?string
     {
         return $this->fields['documentType'] ?? null;
     }
 
-    public function setDocumentType(mixed $documentType): static
+    public function setDocumentType(null|string $documentType): static
     {
         $this->fields['documentType'] = $documentType;
 
         return $this;
     }
 
-    public function getStatusStatistics(): ?GetKycAcceptanceSummaryResponseStatusStatistics
+    public function getStatusStatistics(): ?GetKycAcceptanceSummaryResponseDataStatusStatistics
     {
         return $this->fields['statusStatistics'] ?? null;
     }
 
-    public function setStatusStatistics(null|GetKycAcceptanceSummaryResponseStatusStatistics|array $statusStatistics): static
+    public function setStatusStatistics(null|GetKycAcceptanceSummaryResponseDataStatusStatistics|array $statusStatistics): static
     {
-        if ($statusStatistics !== null && !($statusStatistics instanceof GetKycAcceptanceSummaryResponseStatusStatistics)) {
-            $statusStatistics = GetKycAcceptanceSummaryResponseStatusStatistics::from($statusStatistics);
+        if ($statusStatistics !== null && !($statusStatistics instanceof GetKycAcceptanceSummaryResponseDataStatusStatistics)) {
+            $statusStatistics = GetKycAcceptanceSummaryResponseDataStatusStatistics::from($statusStatistics);
         }
 
         $this->fields['statusStatistics'] = $statusStatistics;

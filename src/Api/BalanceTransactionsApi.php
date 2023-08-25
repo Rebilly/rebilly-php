@@ -18,6 +18,7 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\BalanceTransaction;
+use Rebilly\Sdk\Model\BalanceTransactionFactory;
 use Rebilly\Sdk\Paginator;
 
 class BalanceTransactionsApi
@@ -42,7 +43,7 @@ class BalanceTransactionsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return BalanceTransaction::from($data);
+        return BalanceTransactionFactory::from($data);
     }
 
     /**
@@ -51,10 +52,14 @@ class BalanceTransactionsApi
     public function getAll(
         ?int $limit = null,
         ?int $offset = null,
+        ?string $filter = null,
+        ?array $sort = null,
     ): Collection {
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
+            'filter' => $filter,
+            'sort' => $sort,
         ];
         $uri = '/balance-transactions?' . http_build_query($queryParams);
 
@@ -63,7 +68,7 @@ class BalanceTransactionsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): BalanceTransaction => BalanceTransaction::from($item), $data),
+            array_map(fn (array $item): BalanceTransaction => BalanceTransactionFactory::from($item), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
@@ -73,10 +78,14 @@ class BalanceTransactionsApi
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
+        ?string $filter = null,
+        ?array $sort = null,
     ): Paginator {
         $closure = fn (?int $limit, ?int $offset): Collection => $this->getAll(
             limit: $limit,
             offset: $offset,
+            filter: $filter,
+            sort: $sort,
         );
 
         return new Paginator(

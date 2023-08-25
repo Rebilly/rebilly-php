@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-class FixedFeeFormula extends FeeFormula
+use JsonSerializable;
+
+class FixedFeeFormula implements FeeFormula, JsonSerializable
 {
     public const TYPE_FIXED_FEE = 'fixed-fee';
 
@@ -21,10 +23,6 @@ class FixedFeeFormula extends FeeFormula
 
     public function __construct(array $data = [])
     {
-        parent::__construct([
-            'type' => 'fixed-fee',
-        ] + $data);
-
         if (array_key_exists('type', $data)) {
             $this->setType($data['type']);
         }
@@ -34,6 +32,12 @@ class FixedFeeFormula extends FeeFormula
         if (array_key_exists('amount', $data)) {
             $this->setAmount($data['amount']);
         }
+        if (array_key_exists('minAmount', $data)) {
+            $this->setMinAmount($data['minAmount']);
+        }
+        if (array_key_exists('bips', $data)) {
+            $this->setBips($data['bips']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -41,17 +45,11 @@ class FixedFeeFormula extends FeeFormula
         return new self($data);
     }
 
-    /**
-     * @psalm-return self::TYPE_* $type
-     */
     public function getType(): string
     {
         return $this->fields['type'];
     }
 
-    /**
-     * @psalm-param self::TYPE_* $type
-     */
     public function setType(string $type): static
     {
         $this->fields['type'] = $type;
@@ -87,6 +85,34 @@ class FixedFeeFormula extends FeeFormula
         return $this;
     }
 
+    public function getMinAmount(): ?float
+    {
+        return $this->fields['minAmount'] ?? null;
+    }
+
+    public function setMinAmount(null|float|string $minAmount): static
+    {
+        if (is_string($minAmount)) {
+            $minAmount = (float) $minAmount;
+        }
+
+        $this->fields['minAmount'] = $minAmount;
+
+        return $this;
+    }
+
+    public function getBips(): float
+    {
+        return $this->fields['bips'];
+    }
+
+    public function setBips(float $bips): static
+    {
+        $this->fields['bips'] = $bips;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -99,7 +125,13 @@ class FixedFeeFormula extends FeeFormula
         if (array_key_exists('amount', $this->fields)) {
             $data['amount'] = $this->fields['amount'];
         }
+        if (array_key_exists('minAmount', $this->fields)) {
+            $data['minAmount'] = $this->fields['minAmount'];
+        }
+        if (array_key_exists('bips', $this->fields)) {
+            $data['bips'] = $this->fields['bips'];
+        }
 
-        return parent::jsonSerialize() + $data;
+        return $data;
     }
 }

@@ -71,15 +71,15 @@ class Stripe extends GatewayAccount
         return $this;
     }
 
-    public function getThreeDSecureServer(): ?Stripe3dsServers
+    public function getThreeDSecureServer(): ?StripeThreeDSecureServer
     {
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|Stripe3dsServers|array $threeDSecureServer): static
+    public function setThreeDSecureServer(null|StripeThreeDSecureServer|array $threeDSecureServer): static
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Stripe3dsServers)) {
-            $threeDSecureServer = Stripe3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof StripeThreeDSecureServer)) {
+            $threeDSecureServer = StripeThreeDSecureServer::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

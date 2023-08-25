@@ -56,6 +56,9 @@ class Customer implements JsonSerializable
         if (array_key_exists('primaryAddress', $data)) {
             $this->setPrimaryAddress($data['primaryAddress']);
         }
+        if (array_key_exists('company', $data)) {
+            $this->setCompany($data['company']);
+        }
         if (array_key_exists('averageValue', $data)) {
             $this->setAverageValue($data['averageValue']);
         }
@@ -82,6 +85,12 @@ class Customer implements JsonSerializable
         }
         if (array_key_exists('hasFulfilledKyc', $data)) {
             $this->setHasFulfilledKyc($data['hasFulfilledKyc']);
+        }
+        if (array_key_exists('organizationId', $data)) {
+            $this->setOrganizationId($data['organizationId']);
+        }
+        if (array_key_exists('taxNumbers', $data)) {
+            $this->setTaxNumbers($data['taxNumbers']);
         }
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
@@ -140,15 +149,15 @@ class Customer implements JsonSerializable
         return $this;
     }
 
-    public function getDefaultPaymentInstrument(): ?PaymentInstrumentValueObject
+    public function getDefaultPaymentInstrument(): ?CustomerDefaultPaymentInstrument
     {
         return $this->fields['defaultPaymentInstrument'] ?? null;
     }
 
-    public function setDefaultPaymentInstrument(null|PaymentInstrumentValueObject|array $defaultPaymentInstrument): static
+    public function setDefaultPaymentInstrument(null|CustomerDefaultPaymentInstrument|array $defaultPaymentInstrument): static
     {
-        if ($defaultPaymentInstrument !== null && !($defaultPaymentInstrument instanceof PaymentInstrumentValueObject)) {
-            $defaultPaymentInstrument = PaymentInstrumentValueObject::from($defaultPaymentInstrument);
+        if ($defaultPaymentInstrument !== null && !($defaultPaymentInstrument instanceof CustomerDefaultPaymentInstrument)) {
+            $defaultPaymentInstrument = CustomerDefaultPaymentInstrument::from($defaultPaymentInstrument);
         }
 
         $this->fields['defaultPaymentInstrument'] = $defaultPaymentInstrument;
@@ -194,6 +203,22 @@ class Customer implements JsonSerializable
         return $this;
     }
 
+    public function getCompany(): ?Company
+    {
+        return $this->fields['company'] ?? null;
+    }
+
+    public function setCompany(null|Company|array $company): static
+    {
+        if ($company !== null && !($company instanceof Company)) {
+            $company = Company::from($company);
+        }
+
+        $this->fields['company'] = $company;
+
+        return $this;
+    }
+
     public function getAverageValue(): ?CustomerAverageValue
     {
         return $this->fields['averageValue'] ?? null;
@@ -218,17 +243,6 @@ class Customer implements JsonSerializable
     public function getLastPaymentTime(): ?DateTimeImmutable
     {
         return $this->fields['lastPaymentTime'] ?? null;
-    }
-
-    public function setLastPaymentTime(null|DateTimeImmutable|string $lastPaymentTime): static
-    {
-        if ($lastPaymentTime !== null && !($lastPaymentTime instanceof DateTimeImmutable)) {
-            $lastPaymentTime = new DateTimeImmutable($lastPaymentTime);
-        }
-
-        $this->fields['lastPaymentTime'] = $lastPaymentTime;
-
-        return $this;
     }
 
     public function getLifetimeRevenue(): ?CustomerLifetimeRevenue
@@ -282,20 +296,63 @@ class Customer implements JsonSerializable
         return $this->fields['hasFulfilledKyc'] ?? null;
     }
 
+    public function getOrganizationId(): ?string
+    {
+        return $this->fields['organizationId'] ?? null;
+    }
+
+    public function setOrganizationId(null|string $organizationId): static
+    {
+        $this->fields['organizationId'] = $organizationId;
+
+        return $this;
+    }
+
     /**
-     * @return null|array<DefaultPaymentInstrumentLink|LeadSourceLink|SelfLink|WebsiteLink>
+     * @return null|TaxNumber[]
+     */
+    public function getTaxNumbers(): ?array
+    {
+        return $this->fields['taxNumbers'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|TaxNumber[] $taxNumbers
+     */
+    public function setTaxNumbers(null|array $taxNumbers): static
+    {
+        $taxNumbers = $taxNumbers !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof TaxNumber ? $value : TaxNumber::from($value)) : null,
+            $taxNumbers,
+        ) : null;
+
+        $this->fields['taxNumbers'] = $taxNumbers;
+
+        return $this;
+    }
+
+    /**
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
     }
 
-    /**
-     * @return null|array{leadSource:LeadSource}
-     */
-    public function getEmbedded(): ?array
+    public function getEmbedded(): ?CustomerEmbedded
     {
         return $this->fields['_embedded'] ?? null;
+    }
+
+    public function setEmbedded(null|CustomerEmbedded|array $embedded): static
+    {
+        if ($embedded !== null && !($embedded instanceof CustomerEmbedded)) {
+            $embedded = CustomerEmbedded::from($embedded);
+        }
+
+        $this->fields['_embedded'] = $embedded;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -334,6 +391,9 @@ class Customer implements JsonSerializable
         if (array_key_exists('primaryAddress', $this->fields)) {
             $data['primaryAddress'] = $this->fields['primaryAddress']?->jsonSerialize();
         }
+        if (array_key_exists('company', $this->fields)) {
+            $data['company'] = $this->fields['company']?->jsonSerialize();
+        }
         if (array_key_exists('averageValue', $this->fields)) {
             $data['averageValue'] = $this->fields['averageValue']?->jsonSerialize();
         }
@@ -361,11 +421,17 @@ class Customer implements JsonSerializable
         if (array_key_exists('hasFulfilledKyc', $this->fields)) {
             $data['hasFulfilledKyc'] = $this->fields['hasFulfilledKyc'];
         }
+        if (array_key_exists('organizationId', $this->fields)) {
+            $data['organizationId'] = $this->fields['organizationId'];
+        }
+        if (array_key_exists('taxNumbers', $this->fields)) {
+            $data['taxNumbers'] = $this->fields['taxNumbers'];
+        }
         if (array_key_exists('_links', $this->fields)) {
             $data['_links'] = $this->fields['_links'];
         }
         if (array_key_exists('_embedded', $this->fields)) {
-            $data['_embedded'] = $this->fields['_embedded'];
+            $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();
         }
 
         return $data;
@@ -428,6 +494,17 @@ class Customer implements JsonSerializable
         return $this;
     }
 
+    private function setLastPaymentTime(null|DateTimeImmutable|string $lastPaymentTime): static
+    {
+        if ($lastPaymentTime !== null && !($lastPaymentTime instanceof DateTimeImmutable)) {
+            $lastPaymentTime = new DateTimeImmutable($lastPaymentTime);
+        }
+
+        $this->fields['lastPaymentTime'] = $lastPaymentTime;
+
+        return $this;
+    }
+
     private function setInvoiceCount(null|int $invoiceCount): static
     {
         $this->fields['invoiceCount'] = $invoiceCount;
@@ -436,11 +513,14 @@ class Customer implements JsonSerializable
     }
 
     /**
-     * @param null|Tag[] $tags
+     * @param null|array[]|Tag[] $tags
      */
     private function setTags(null|array $tags): static
     {
-        $tags = $tags !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Tag ? $value : Tag::from($value)) : null, $tags) : null;
+        $tags = $tags !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof Tag ? $value : Tag::from($value)) : null,
+            $tags,
+        ) : null;
 
         $this->fields['tags'] = $tags;
 
@@ -462,27 +542,16 @@ class Customer implements JsonSerializable
     }
 
     /**
-     * @param null|array<DefaultPaymentInstrumentLink|LeadSourceLink|SelfLink|WebsiteLink> $links
+     * @param null|array[]|ResourceLink[] $links
      */
     private function setLinks(null|array $links): static
     {
-        $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
+        $links = $links !== null ? array_map(
+            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+            $links,
+        ) : null;
 
         $this->fields['_links'] = $links;
-
-        return $this;
-    }
-
-    /**
-     * @param null|array{leadSource:LeadSource} $embedded
-     */
-    private function setEmbedded(null|array $embedded): static
-    {
-        if ($embedded !== null) {
-            $embedded['leadSource'] = isset($embedded['leadSource']) ? ($embedded['leadSource'] instanceof LeadSource ? $embedded['leadSource'] : LeadSource::from($embedded['leadSource'])) : null;
-        }
-
-        $this->fields['_embedded'] = $embedded;
 
         return $this;
     }
