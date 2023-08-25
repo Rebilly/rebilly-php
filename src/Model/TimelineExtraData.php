@@ -52,11 +52,14 @@ class TimelineExtraData implements JsonSerializable
     }
 
     /**
-     * @param null|TimelineAction[] $actions
+     * @param null|array[]|TimelineAction[] $actions
      */
     public function setActions(null|array $actions): static
     {
-        $actions = $actions !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof TimelineAction ? $value : TimelineAction::from($value)) : null, $actions) : null;
+        $actions = $actions !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof TimelineAction ? $value : TimelineActionFactory::from($value)) : null,
+            $actions,
+        ) : null;
 
         $this->fields['actions'] = $actions;
 
@@ -72,11 +75,14 @@ class TimelineExtraData implements JsonSerializable
     }
 
     /**
-     * @param null|TimelineTable[] $tables
+     * @param null|array[]|TimelineTable[] $tables
      */
     public function setTables(null|array $tables): static
     {
-        $tables = $tables !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof TimelineTable ? $value : TimelineTable::from($value)) : null, $tables) : null;
+        $tables = $tables !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof TimelineTable ? $value : TimelineTable::from($value)) : null,
+            $tables,
+        ) : null;
 
         $this->fields['tables'] = $tables;
 
@@ -126,11 +132,14 @@ class TimelineExtraData implements JsonSerializable
     }
 
     /**
-     * @param null|TimelineExtraDataLinks[] $links
+     * @param null|array[]|TimelineExtraDataLinks[] $links
      */
     public function setLinks(null|array $links): static
     {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof TimelineExtraDataLinks ? $value : TimelineExtraDataLinks::from($value)) : null, $links) : null;
+        $links = $links !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof TimelineExtraDataLinks ? $value : TimelineExtraDataLinks::from($value)) : null,
+            $links,
+        ) : null;
 
         $this->fields['links'] = $links;
 

@@ -13,61 +13,104 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use InvalidArgumentException;
-use JsonSerializable;
+use DateTimeImmutable;
 
-abstract class Subscription implements JsonSerializable
+interface Subscription
 {
-    public const ORDER_TYPE_SUBSCRIPTION_ORDER = 'subscription-order';
+    public function getId(): ?string;
 
-    public const ORDER_TYPE_ONE_TIME_ORDER = 'one-time-order';
+    public function getOrderType(): string;
 
-    private array $fields = [];
+    public function setOrderType(string $orderType): static;
 
-    protected function __construct(array $data = [])
-    {
-        if (array_key_exists('orderType', $data)) {
-            $this->setOrderType($data['orderType']);
-        }
-    }
+    public function getCustomerId(): string;
 
-    public static function from(array $data = []): self
-    {
-        switch ($data['orderType']) {
-            case 'one-time-order':
-                return new OneTimeOrder($data);
-            case 'subscription-order':
-                return new SubscriptionOrder($data);
-        }
+    public function setCustomerId(string $customerId): static;
 
-        throw new InvalidArgumentException("Unsupported orderType value: '{$data['orderType']}'");
-    }
+    public function getOrganizationId(): ?string;
 
-    /**
-     * @psalm-return self::ORDER_TYPE_*|null $orderType
-     */
-    public function getOrderType(): ?string
-    {
-        return $this->fields['orderType'] ?? null;
-    }
+    public function setOrganizationId(null|string $organizationId): static;
 
-    public function jsonSerialize(): array
-    {
-        $data = [];
-        if (array_key_exists('orderType', $this->fields)) {
-            $data['orderType'] = $this->fields['orderType'];
-        }
+    public function getStatus(): ?string;
 
-        return $data;
-    }
+    public function getBillingStatus(): ?string;
+
+    public function getWebsiteId(): string;
+
+    public function setWebsiteId(string $websiteId): static;
+
+    public function getCurrency(): ?string;
+
+    public function setCurrency(null|string $currency): static;
+
+    public function getInitialInvoiceId(): ?string;
+
+    public function getRecentInvoiceId(): ?string;
 
     /**
-     * @psalm-param self::ORDER_TYPE_*|null $orderType
+     * @return OrderItem[]
      */
-    private function setOrderType(null|string $orderType): static
-    {
-        $this->fields['orderType'] = $orderType;
+    public function getItems(): array;
 
-        return $this;
-    }
+    /**
+     * @param array[]|OrderItem[] $items
+     */
+    public function setItems(array $items): static;
+
+    public function getDeliveryAddress(): ?ContactObject;
+
+    public function setDeliveryAddress(null|ContactObject|array $deliveryAddress): static;
+
+    public function getBillingAddress(): ?ContactObject;
+
+    public function setBillingAddress(null|ContactObject|array $billingAddress): static;
+
+    public function getActivationTime(): ?DateTimeImmutable;
+
+    public function getVoidTime(): ?DateTimeImmutable;
+
+    public function getAbandonTime(): ?DateTimeImmutable;
+
+    public function setAbandonTime(null|DateTimeImmutable|string $abandonTime): static;
+
+    /**
+     * @return null|string[]
+     */
+    public function getCouponIds(): ?array;
+
+    /**
+     * @param null|string[] $couponIds
+     */
+    public function setCouponIds(null|array $couponIds): static;
+
+    public function getPoNumber(): ?string;
+
+    public function setPoNumber(null|string $poNumber): static;
+
+    public function getShipping(): ?Shipping;
+
+    public function setShipping(null|Shipping|array $shipping): static;
+
+    public function getNotes(): ?string;
+
+    public function setNotes(null|string $notes): static;
+
+    public function getRevision(): ?int;
+
+    public function getRiskMetadata(): ?RiskMetadata;
+
+    public function setRiskMetadata(null|RiskMetadata|array $riskMetadata): static;
+
+    public function getCustomFields(): ?array;
+
+    public function setCustomFields(null|array $customFields): static;
+
+    public function getCreatedTime(): ?DateTimeImmutable;
+
+    public function getUpdatedTime(): ?DateTimeImmutable;
+
+    /**
+     * @return null|ResourceLink[]
+     */
+    public function getLinks(): ?array;
 }

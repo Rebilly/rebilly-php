@@ -22,10 +22,6 @@ abstract class GatewayAccountPickInstruction implements JsonSerializable
 
     public const STRATEGY_ROUND_ROBIN = 'round-robin';
 
-    public const METHOD_ACCOUNT_WEIGHTS = 'gateway-account-weights';
-
-    public const METHOD_ACQUIRER_WEIGHTS = 'gateway-acquirer-weights';
-
     private array $fields = [];
 
     protected function __construct(array $data = [])
@@ -41,26 +37,20 @@ abstract class GatewayAccountPickInstruction implements JsonSerializable
     public static function from(array $data = []): self
     {
         switch ($data['method']) {
-            case 'gateway-acquirer-weights':
-                return new GatewayAcquirerWeights($data);
             case 'gateway-account-weights':
-                return new GatewayAccountWeights($data);
+                return new PickInstructionGatewayAccountWeights($data);
+            case 'gateway-acquirer-weights':
+                return new PickInstructionGatewayAcquirerWeights($data);
         }
 
         throw new InvalidArgumentException("Unsupported method value: '{$data['method']}'");
     }
 
-    /**
-     * @psalm-return self::STRATEGY_*|null $strategy
-     */
     public function getStrategy(): ?string
     {
         return $this->fields['strategy'] ?? null;
     }
 
-    /**
-     * @psalm-param self::STRATEGY_*|null $strategy
-     */
     public function setStrategy(null|string $strategy): static
     {
         $this->fields['strategy'] = $strategy;
@@ -68,9 +58,6 @@ abstract class GatewayAccountPickInstruction implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-return self::METHOD_* $method
-     */
     public function getMethod(): string
     {
         return $this->fields['method'];
@@ -89,9 +76,6 @@ abstract class GatewayAccountPickInstruction implements JsonSerializable
         return $data;
     }
 
-    /**
-     * @psalm-param self::METHOD_* $method
-     */
     private function setMethod(string $method): static
     {
         $this->fields['method'] = $method;

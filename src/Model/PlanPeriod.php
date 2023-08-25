@@ -42,17 +42,11 @@ class PlanPeriod implements JsonSerializable
         return new self($data);
     }
 
-    /**
-     * @psalm-return self::UNIT_* $unit
-     */
     public function getUnit(): string
     {
         return $this->fields['unit'];
     }
 
-    /**
-     * @psalm-param self::UNIT_* $unit
-     */
     public function setUnit(string $unit): static
     {
         $this->fields['unit'] = $unit;

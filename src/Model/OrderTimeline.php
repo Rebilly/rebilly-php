@@ -85,6 +85,8 @@ class OrderTimeline implements JsonSerializable
 
     public const TYPE_ORDER_VOIDED = 'order-voided';
 
+    public const TYPE_ORDER_ABANDONED = 'order-abandoned';
+
     public const TYPE_SUBSCRIPTION_PAUSED = 'subscription-paused';
 
     public const TYPE_SUBSCRIPTION_PAUSE_CREATED = 'subscription-pause-created';
@@ -142,17 +144,11 @@ class OrderTimeline implements JsonSerializable
         return $this->fields['id'] ?? null;
     }
 
-    /**
-     * @psalm-return self::TYPE_*|null $type
-     */
     public function getType(): ?string
     {
         return $this->fields['type'] ?? null;
     }
 
-    /**
-     * @psalm-return self::TRIGGERED_BY_*|null $triggeredBy
-     */
     public function getTriggeredBy(): ?string
     {
         return $this->fields['triggeredBy'] ?? null;
@@ -192,11 +188,21 @@ class OrderTimeline implements JsonSerializable
     }
 
     /**
-     * @return null|SelfLink[]
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    public function setLinks(null|array $links): static
+    {
+        $this->fields['_links'] = $links;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -234,9 +240,6 @@ class OrderTimeline implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-param self::TYPE_*|null $type
-     */
     private function setType(null|string $type): static
     {
         $this->fields['type'] = $type;
@@ -244,9 +247,6 @@ class OrderTimeline implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-param self::TRIGGERED_BY_*|null $triggeredBy
-     */
     private function setTriggeredBy(null|string $triggeredBy): static
     {
         $this->fields['triggeredBy'] = $triggeredBy;
@@ -261,18 +261,6 @@ class OrderTimeline implements JsonSerializable
         }
 
         $this->fields['occurredTime'] = $occurredTime;
-
-        return $this;
-    }
-
-    /**
-     * @param null|SelfLink[] $links
-     */
-    private function setLinks(null|array $links): static
-    {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
-
-        $this->fields['_links'] = $links;
 
         return $this;
     }

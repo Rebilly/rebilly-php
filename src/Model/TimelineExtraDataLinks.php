@@ -56,17 +56,11 @@ class TimelineExtraDataLinks implements JsonSerializable
         return new self($data);
     }
 
-    /**
-     * @psalm-return self::RESOURCE_TYPE_*|null $resourceType
-     */
     public function getResourceType(): ?string
     {
         return $this->fields['resourceType'] ?? null;
     }
 
-    /**
-     * @psalm-param self::RESOURCE_TYPE_*|null $resourceType
-     */
     public function setResourceType(null|string $resourceType): static
     {
         $this->fields['resourceType'] = $resourceType;

@@ -53,9 +53,6 @@ class AMLAliases implements JsonSerializable
         return $this->fields['lastName'] ?? null;
     }
 
-    /**
-     * @psalm-return self::AUTHENTICITY_*|null $authenticity
-     */
     public function getAuthenticity(): ?string
     {
         return $this->fields['authenticity'] ?? null;
@@ -91,9 +88,6 @@ class AMLAliases implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-param self::AUTHENTICITY_*|null $authenticity
-     */
     private function setAuthenticity(null|string $authenticity): static
     {
         $this->fields['authenticity'] = $authenticity;

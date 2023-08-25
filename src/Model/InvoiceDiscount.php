@@ -95,17 +95,13 @@ class InvoiceDiscount implements JsonSerializable
         return $this;
     }
 
-    public function getContext(): ?DiscountContext
+    public function getContext(): ?string
     {
         return $this->fields['context'] ?? null;
     }
 
-    public function setContext(null|DiscountContext|string $context): static
+    public function setContext(null|string $context): static
     {
-        if ($context !== null && !($context instanceof DiscountContext)) {
-            $context = DiscountContext::from($context);
-        }
-
         $this->fields['context'] = $context;
 
         return $this;
@@ -127,7 +123,7 @@ class InvoiceDiscount implements JsonSerializable
             $data['description'] = $this->fields['description'];
         }
         if (array_key_exists('context', $this->fields)) {
-            $data['context'] = $this->fields['context']?->value;
+            $data['context'] = $this->fields['context'];
         }
 
         return $data;

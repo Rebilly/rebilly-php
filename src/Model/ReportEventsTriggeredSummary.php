@@ -40,11 +40,14 @@ class ReportEventsTriggeredSummary implements JsonSerializable
     }
 
     /**
-     * @param null|ReportEventsTriggeredSummaryData[] $data
+     * @param null|array[]|ReportEventsTriggeredSummaryData[] $data
      */
     public function setData(null|array $data): static
     {
-        $data = $data !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ReportEventsTriggeredSummaryData ? $value : ReportEventsTriggeredSummaryData::from($value)) : null, $data) : null;
+        $data = $data !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof ReportEventsTriggeredSummaryData ? $value : ReportEventsTriggeredSummaryData::from($value)) : null,
+            $data,
+        ) : null;
 
         $this->fields['data'] = $data;
 

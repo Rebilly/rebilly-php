@@ -40,11 +40,14 @@ class ReportDisputeDelays implements JsonSerializable
     }
 
     /**
-     * @param null|ReportDisputeDelaysData[] $data
+     * @param null|array[]|ReportDisputeDelaysData[] $data
      */
     public function setData(null|array $data): static
     {
-        $data = $data !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ReportDisputeDelaysData ? $value : ReportDisputeDelaysData::from($value)) : null, $data) : null;
+        $data = $data !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof ReportDisputeDelaysData ? $value : ReportDisputeDelaysData::from($value)) : null,
+            $data,
+        ) : null;
 
         $this->fields['data'] = $data;
 

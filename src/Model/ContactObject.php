@@ -179,41 +179,25 @@ class ContactObject implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @return null|ContactPhoneNumbers[]
-     */
-    public function getPhoneNumbers(): ?array
+    public function getPhoneNumbers(): ?ContactPhoneNumbers
     {
         return $this->fields['phoneNumbers'] ?? null;
     }
 
-    /**
-     * @param null|ContactPhoneNumbers[] $phoneNumbers
-     */
-    public function setPhoneNumbers(null|array $phoneNumbers): static
+    public function setPhoneNumbers(null|ContactPhoneNumbers $phoneNumbers): static
     {
-        $phoneNumbers = $phoneNumbers !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ContactPhoneNumbers ? $value : ContactPhoneNumbers::from($value)) : null, $phoneNumbers) : null;
-
         $this->fields['phoneNumbers'] = $phoneNumbers;
 
         return $this;
     }
 
-    /**
-     * @return null|ContactEmails[]
-     */
-    public function getEmails(): ?array
+    public function getEmails(): ?ContactEmails
     {
         return $this->fields['emails'] ?? null;
     }
 
-    /**
-     * @param null|ContactEmails[] $emails
-     */
-    public function setEmails(null|array $emails): static
+    public function setEmails(null|ContactEmails $emails): static
     {
-        $emails = $emails !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ContactEmails ? $value : ContactEmails::from($value)) : null, $emails) : null;
-
         $this->fields['emails'] = $emails;
 
         return $this;

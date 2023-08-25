@@ -84,11 +84,21 @@ class ResetPasswordToken implements JsonSerializable
     }
 
     /**
-     * @return null|SelfLink[]
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    public function setLinks(null|array $links): static
+    {
+        $this->fields['_links'] = $links;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -123,18 +133,6 @@ class ResetPasswordToken implements JsonSerializable
     private function setCredentialId(null|string $credentialId): static
     {
         $this->fields['credentialId'] = $credentialId;
-
-        return $this;
-    }
-
-    /**
-     * @param null|SelfLink[] $links
-     */
-    private function setLinks(null|array $links): static
-    {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
-
-        $this->fields['_links'] = $links;
 
         return $this;
     }

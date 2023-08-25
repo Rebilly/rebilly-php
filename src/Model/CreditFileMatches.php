@@ -65,9 +65,6 @@ class CreditFileMatches implements JsonSerializable
         return new self($data);
     }
 
-    /**
-     * @psalm-return self::CREDIT_BUREAU_*|null $creditBureau
-     */
     public function getCreditBureau(): ?string
     {
         return $this->fields['creditBureau'] ?? null;
@@ -88,9 +85,6 @@ class CreditFileMatches implements JsonSerializable
         return $this->fields['consultedDate'] ?? null;
     }
 
-    /**
-     * @psalm-return self::DECISION_*|null $decision
-     */
     public function getDecision(): ?string
     {
         return $this->fields['decision'] ?? null;
@@ -148,9 +142,6 @@ class CreditFileMatches implements JsonSerializable
         return $data;
     }
 
-    /**
-     * @psalm-param self::CREDIT_BUREAU_*|null $creditBureau
-     */
     private function setCreditBureau(null|string $creditBureau): static
     {
         $this->fields['creditBureau'] = $creditBureau;
@@ -183,9 +174,6 @@ class CreditFileMatches implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-param self::DECISION_*|null $decision
-     */
     private function setDecision(null|string $decision): static
     {
         $this->fields['decision'] = $decision;
@@ -194,11 +182,14 @@ class CreditFileMatches implements JsonSerializable
     }
 
     /**
-     * @param null|CreditFileMatchesTrades[] $trades
+     * @param null|array[]|CreditFileMatchesTrades[] $trades
      */
     private function setTrades(null|array $trades): static
     {
-        $trades = $trades !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof CreditFileMatchesTrades ? $value : CreditFileMatchesTrades::from($value)) : null, $trades) : null;
+        $trades = $trades !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof CreditFileMatchesTrades ? $value : CreditFileMatchesTrades::from($value)) : null,
+            $trades,
+        ) : null;
 
         $this->fields['trades'] = $trades;
 

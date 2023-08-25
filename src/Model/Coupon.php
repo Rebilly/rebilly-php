@@ -82,7 +82,7 @@ class Coupon implements JsonSerializable
     public function setDiscount(Discount|array $discount): static
     {
         if (!($discount instanceof Discount)) {
-            $discount = Discount::from($discount);
+            $discount = DiscountFactory::from($discount);
         }
 
         $this->fields['discount'] = $discount;
@@ -99,11 +99,14 @@ class Coupon implements JsonSerializable
     }
 
     /**
-     * @param null|CouponRestriction[] $restrictions
+     * @param null|array[]|CouponRestriction[] $restrictions
      */
     public function setRestrictions(null|array $restrictions): static
     {
-        $restrictions = $restrictions !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof CouponRestriction ? $value : CouponRestriction::from($value)) : null, $restrictions) : null;
+        $restrictions = $restrictions !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof CouponRestriction ? $value : CouponRestrictionFactory::from($value)) : null,
+            $restrictions,
+        ) : null;
 
         $this->fields['restrictions'] = $restrictions;
 
@@ -115,9 +118,6 @@ class Coupon implements JsonSerializable
         return $this->fields['redemptionsCount'] ?? null;
     }
 
-    /**
-     * @psalm-return self::STATUS_*|null $status
-     */
     public function getStatus(): ?string
     {
         return $this->fields['status'] ?? null;
@@ -178,11 +178,21 @@ class Coupon implements JsonSerializable
     }
 
     /**
-     * @return null|SelfLink[]
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    public function setLinks(null|array $links): static
+    {
+        $this->fields['_links'] = $links;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -239,9 +249,6 @@ class Coupon implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-param self::STATUS_*|null $status
-     */
     private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
@@ -267,18 +274,6 @@ class Coupon implements JsonSerializable
         }
 
         $this->fields['updatedTime'] = $updatedTime;
-
-        return $this;
-    }
-
-    /**
-     * @param null|SelfLink[] $links
-     */
-    private function setLinks(null|array $links): static
-    {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
-
-        $this->fields['_links'] = $links;
 
         return $this;
     }

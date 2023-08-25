@@ -34,7 +34,7 @@ class OneColumnTimelineTable extends TimelineTable
     }
 
     /**
-     * @return null|TwoData[]
+     * @return null|TwoColumnsTimelineTableData[]
      */
     public function getData(): ?array
     {
@@ -42,11 +42,14 @@ class OneColumnTimelineTable extends TimelineTable
     }
 
     /**
-     * @param null|TwoData[] $data
+     * @param null|array[]|TwoColumnsTimelineTableData[] $data
      */
     public function setData(null|array $data): static
     {
-        $data = $data !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof TwoData ? $value : TwoData::from($value)) : null, $data) : null;
+        $data = $data !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof TwoColumnsTimelineTableData ? $value : TwoColumnsTimelineTableData::from($value)) : null,
+            $data,
+        ) : null;
 
         $this->fields['data'] = $data;
 

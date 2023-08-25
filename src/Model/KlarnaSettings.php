@@ -37,17 +37,11 @@ class KlarnaSettings implements JsonSerializable
         return new self($data);
     }
 
-    /**
-     * @psalm-return self::REGION_* $region
-     */
     public function getRegion(): string
     {
         return $this->fields['region'];
     }
 
-    /**
-     * @psalm-param self::REGION_* $region
-     */
     public function setRegion(string $region): static
     {
         $this->fields['region'] = $region;

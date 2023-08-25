@@ -135,7 +135,7 @@ class PaymentMethodMetadata implements JsonSerializable
     public function setCountries(CountriesMetadata|array $countries): static
     {
         if (!($countries instanceof CountriesMetadata)) {
-            $countries = CountriesMetadata::from($countries);
+            $countries = CountriesMetadataFactory::from($countries);
         }
 
         $this->fields['countries'] = $countries;
@@ -156,11 +156,21 @@ class PaymentMethodMetadata implements JsonSerializable
     }
 
     /**
-     * @return null|SelfLink[]
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    public function setLinks(null|array $links): static
+    {
+        $this->fields['_links'] = $links;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -195,17 +205,5 @@ class PaymentMethodMetadata implements JsonSerializable
         }
 
         return $data;
-    }
-
-    /**
-     * @param null|SelfLink[] $links
-     */
-    private function setLinks(null|array $links): static
-    {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
-
-        $this->fields['_links'] = $links;
-
-        return $this;
     }
 }

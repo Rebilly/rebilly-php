@@ -19,6 +19,8 @@ class OrganizationSettingsDefaultTaxCalculator implements JsonSerializable
 {
     public const TYPE_TAXJAR = 'taxjar';
 
+    public const TYPE_AVALARA = 'avalara';
+
     public const TYPE_FLAT = 'flat';
 
     private array $fields = [];
@@ -38,17 +40,11 @@ class OrganizationSettingsDefaultTaxCalculator implements JsonSerializable
         return new self($data);
     }
 
-    /**
-     * @psalm-return self::TYPE_* $type
-     */
     public function getType(): string
     {
         return $this->fields['type'];
     }
 
-    /**
-     * @psalm-param self::TYPE_* $type
-     */
     public function setType(string $type): static
     {
         $this->fields['type'] = $type;

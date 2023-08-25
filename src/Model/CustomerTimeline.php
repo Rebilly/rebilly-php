@@ -25,6 +25,14 @@ class CustomerTimeline implements JsonSerializable
 
     public const TYPE_AML_LIST_WAS_POSSIBLY_MATCHED = 'aml-list-was-possibly-matched';
 
+    public const TYPE_CASHIER_REQUEST_COMPLETED = 'cashier-request-completed';
+
+    public const TYPE_CASHIER_REQUEST_CREATED = 'cashier-request-created';
+
+    public const TYPE_CASHIER_REQUEST_EXPIRED = 'cashier-request-expired';
+
+    public const TYPE_CASHIER_REQUEST_STARTED = 'cashier-request-started';
+
     public const TYPE_COUPON_APPLIED = 'coupon-applied';
 
     public const TYPE_COUPON_REDEEMED = 'coupon-redeemed';
@@ -133,6 +141,10 @@ class CustomerTimeline implements JsonSerializable
 
     public const TYPE_QUICKBOOKS_CUSTOMER_TASK_FAILED = 'quickbooks-customer-task-failed';
 
+    public const TYPE_QUOTE_ORDER_ATTACHED = 'quote-order-attached';
+
+    public const TYPE_QUOTE_REJECTED = 'quote-rejected';
+
     public const TYPE_REFUND_WAS_REFLECTED_IN_INVOICES = 'refund-was-reflected-in-invoices';
 
     public const TYPE_SUBSCRIPTION_PAUSED = 'subscription-paused';
@@ -212,17 +224,11 @@ class CustomerTimeline implements JsonSerializable
         return $this->fields['id'] ?? null;
     }
 
-    /**
-     * @psalm-return self::TYPE_*|null $type
-     */
     public function getType(): ?string
     {
         return $this->fields['type'] ?? null;
     }
 
-    /**
-     * @psalm-param self::TYPE_*|null $type
-     */
     public function setType(null|string $type): static
     {
         $this->fields['type'] = $type;
@@ -242,21 +248,18 @@ class CustomerTimeline implements JsonSerializable
         return $this;
     }
 
-    public function getCustomData(): ?array
+    public function getCustomData(): ?object
     {
         return $this->fields['customData'] ?? null;
     }
 
-    public function setCustomData(null|array $customData): static
+    public function setCustomData(null|object $customData): static
     {
         $this->fields['customData'] = $customData;
 
         return $this;
     }
 
-    /**
-     * @psalm-return self::TRIGGERED_BY_*|null $triggeredBy
-     */
     public function getTriggeredBy(): ?string
     {
         return $this->fields['triggeredBy'] ?? null;
@@ -295,23 +298,22 @@ class CustomerTimeline implements JsonSerializable
         return $this->fields['occurredTime'] ?? null;
     }
 
-    public function setOccurredTime(null|DateTimeImmutable|string $occurredTime): static
-    {
-        if ($occurredTime !== null && !($occurredTime instanceof DateTimeImmutable)) {
-            $occurredTime = new DateTimeImmutable($occurredTime);
-        }
-
-        $this->fields['occurredTime'] = $occurredTime;
-
-        return $this;
-    }
-
     /**
-     * @return null|SelfLink[]
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    public function setLinks(null|array $links): static
+    {
+        $this->fields['_links'] = $links;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -355,9 +357,6 @@ class CustomerTimeline implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-param self::TRIGGERED_BY_*|null $triggeredBy
-     */
     private function setTriggeredBy(null|string $triggeredBy): static
     {
         $this->fields['triggeredBy'] = $triggeredBy;
@@ -365,14 +364,13 @@ class CustomerTimeline implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @param null|SelfLink[] $links
-     */
-    private function setLinks(null|array $links): static
+    private function setOccurredTime(null|DateTimeImmutable|string $occurredTime): static
     {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
+        if ($occurredTime !== null && !($occurredTime instanceof DateTimeImmutable)) {
+            $occurredTime = new DateTimeImmutable($occurredTime);
+        }
 
-        $this->fields['_links'] = $links;
+        $this->fields['occurredTime'] = $occurredTime;
 
         return $this;
     }

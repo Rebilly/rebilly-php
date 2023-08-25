@@ -17,6 +17,14 @@ use JsonSerializable;
 
 class TransactionBumpOffer implements JsonSerializable
 {
+    public const OUTCOME_PRESENTED = 'presented';
+
+    public const OUTCOME_REJECTED = 'rejected';
+
+    public const OUTCOME_SELECTED = 'selected';
+
+    public const OUTCOME_UNKNOWN = 'unknown';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -86,40 +94,17 @@ class TransactionBumpOffer implements JsonSerializable
         return $this;
     }
 
-    public function getOutcome(): ?PurchaseBumpStatus
+    public function getOutcome(): ?string
     {
         return $this->fields['outcome'] ?? null;
     }
 
-    public function setOutcome(null|PurchaseBumpStatus|string $outcome): static
-    {
-        if ($outcome !== null && !($outcome instanceof PurchaseBumpStatus)) {
-            $outcome = PurchaseBumpStatus::from($outcome);
-        }
-
-        $this->fields['outcome'] = $outcome;
-
-        return $this;
-    }
-
     /**
-     * @return null|PurchaseBumpOfferList[]
+     * @return null|PurchaseBumpOffer[]
      */
     public function getPresentedOffers(): ?array
     {
         return $this->fields['presentedOffers'] ?? null;
-    }
-
-    /**
-     * @param null|PurchaseBumpOfferList[] $presentedOffers
-     */
-    public function setPresentedOffers(null|array $presentedOffers): static
-    {
-        $presentedOffers = $presentedOffers !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof PurchaseBumpOfferList ? $value : PurchaseBumpOfferList::from($value)) : null, $presentedOffers) : null;
-
-        $this->fields['presentedOffers'] = $presentedOffers;
-
-        return $this;
     }
 
     public function getSelectedOffer(): ?PurchaseBumpOffer
@@ -151,7 +136,7 @@ class TransactionBumpOffer implements JsonSerializable
             $data['language'] = $this->fields['language'];
         }
         if (array_key_exists('outcome', $this->fields)) {
-            $data['outcome'] = $this->fields['outcome']?->value;
+            $data['outcome'] = $this->fields['outcome'];
         }
         if (array_key_exists('presentedOffers', $this->fields)) {
             $data['presentedOffers'] = $this->fields['presentedOffers'];
@@ -161,5 +146,27 @@ class TransactionBumpOffer implements JsonSerializable
         }
 
         return $data;
+    }
+
+    private function setOutcome(null|string $outcome): static
+    {
+        $this->fields['outcome'] = $outcome;
+
+        return $this;
+    }
+
+    /**
+     * @param null|array[]|PurchaseBumpOffer[] $presentedOffers
+     */
+    private function setPresentedOffers(null|array $presentedOffers): static
+    {
+        $presentedOffers = $presentedOffers !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof PurchaseBumpOffer ? $value : PurchaseBumpOffer::from($value)) : null,
+            $presentedOffers,
+        ) : null;
+
+        $this->fields['presentedOffers'] = $presentedOffers;
+
+        return $this;
     }
 }

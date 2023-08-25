@@ -135,364 +135,394 @@ abstract class GatewayAccount implements JsonSerializable
     public static function from(array $data = []): self
     {
         switch ($data['gatewayName']) {
-            case 'ePay':
-                return new EPay($data);
-            case 'CoinGate':
-                return new CoinGate($data);
-            case 'PaymentsOS':
-                return new PaymentsOS($data);
-            case 'Prosa':
-                return new Prosa($data);
-            case 'Rotessa':
-                return new Rotessa($data);
-            case 'Pagadito':
-                return new Pagadito($data);
-            case 'MiFinity':
-                return new MiFinity($data);
-            case 'EPro':
-                return new EPro($data);
-            case 'Paymero':
-                return new Paymero($data);
-            case 'Pay4Fun':
-                return new Pay4Fun($data);
-            case 'SecurionPay':
-                return new SecurionPay($data);
-            case 'Zotapay':
-                return new Zotapay($data);
-            case 'Wirecard':
-                return new Wirecard($data);
-            case 'AsiaPaymentGateway':
-                return new AsiaPaymentGateway($data);
-            case 'SparkPay':
-                return new SparkPay($data);
-            case 'Redsys':
-                return new Redsys($data);
-            case 'PPRO':
-                return new PPRO($data);
-            case 'CauriPayment':
-                return new CauriPayment($data);
-            case 'XPay':
-                return new XPay($data);
-            case 'SmartInvoice':
-                return new SmartInvoice($data);
-            case 'Paysafecash':
-                return new Paysafecash($data);
-            case 'PaymenTechnologies':
-                return new PaymenTechnologies($data);
-            case 'Conekta':
-                return new Conekta($data);
-            case 'Greenbox':
-                return new Greenbox($data);
-            case 'PayClub':
-                return new PayClub($data);
+            case 'A1Gateway':
+                return new A1Gateway($data);
+            case 'ACI':
+                return new ACI($data);
+            case 'Adyen':
+                return new Adyen($data);
+            case 'Aircash':
+                return new Aircash($data);
+            case 'Airpay':
+                return new Airpay($data);
+            case 'Airwallex':
+                return new Airwallex($data);
             case 'AmazonPay':
                 return new AmazonPay($data);
-            case 'SaltarPay':
-                return new SaltarPay($data);
-            case 'MuchBetter':
-                return new MuchBetter($data);
-            case 'FundSend':
-                return new FundSend($data);
-            case 'Bambora':
-                return new Bambora($data);
-            case 'MercadoPago':
-                return new MercadoPago($data);
-            case 'Coinbase':
-                return new Coinbase($data);
-            case 'CheckoutCom':
-                return new CheckoutCom($data);
-            case 'MyFatoorah':
-                return new MyFatoorah($data);
-            case 'Plugnpay':
-                return new Plugnpay($data);
-            case 'iCheque':
-                return new ICheque($data);
-            case 'Chase':
-                return new Chase($data);
-            case 'Realtime':
-                return new Realtime($data);
-            case 'Paynote':
-                return new Paynote($data);
-            case 'vegaaH':
-                return new VegaaH($data);
-            case 'WesternUnion':
-                return new WesternUnion($data);
-            case 'Finrax':
-                return new Finrax($data);
-            case 'FinTecSystems':
-                return new FinTecSystems($data);
-            case 'USAePay':
-                return new USAePay($data);
-            case 'GlobalOne':
-                return new GlobalOne($data);
-            case 'Truevo':
-                return new Truevo($data);
-            case 'Payeezy':
-                return new Payeezy($data);
-            case 'GET':
-                return new GET($data);
-            case 'MtaPay':
-                return new MtaPay($data);
-            case 'Ilixium':
-                return new Ilixium($data);
-            case 'EcorePay':
-                return new EcorePay($data);
-            case 'PaymentAsia':
-                return new PaymentAsia($data);
-            case 'Panamerican':
-                return new Panamerican($data);
-            case 'Paysafe':
-                return new Paysafe($data);
-            case 'LPG':
-                return new LPG($data);
-            case 'Citadel':
-                return new Citadel($data);
-            case 'Cashterminal':
-                return new Cashterminal($data);
-            case 'TestProcessor':
-                return new TestProcessor($data);
-            case 'Credorax':
-                return new Credorax($data);
-            case 'CashToCode':
-                return new CashToCode($data);
-            case 'NuaPay':
-                return new NuaPay($data);
             case 'AmexVPC':
                 return new AmexVPC($data);
-            case 'Stripe':
-                return new Stripe($data);
-            case 'Netbanking':
-                return new Netbanking($data);
-            case 'Walpay':
-                return new Walpay($data);
-            case 'Sagepay':
-                return new Sagepay($data);
-            case 'Jeton':
-                return new Jeton($data);
-            case 'Realex':
-                return new Realex($data);
+            case 'ApcoPay':
+                return new ApcoPay($data);
+            case 'AsiaPaymentGateway':
+                return new AsiaPaymentGateway($data);
+            case 'AstroPayCard':
+                return new AstroPayCard($data);
+            case 'AuthorizeNet':
+                return new AuthorizeNet($data);
+            case 'Awepay':
+                return new Awepay($data);
+            case 'Bambora':
+                return new Bambora($data);
+            case 'BankSEND':
+                return new BankSEND($data);
+            case 'BitPay':
+                return new BitPay($data);
+            case 'BlueSnap':
+                return new BlueSnap($data);
+            case 'BraintreePayments':
+                return new BraintreePayments($data);
+            case 'Buckaroo':
+                return new Buckaroo($data);
+            case 'CASHlib':
+                return new CASHlib($data);
+            case 'CCAvenue':
+                return new CCAvenue($data);
+            case 'CODVoucher':
+                return new CODVoucher($data);
+            case 'Cardknox':
+                return new Cardknox($data);
+            case 'CashToCode':
+                return new CashToCode($data);
+            case 'Cashflows':
+                return new Cashflows($data);
+            case 'Cashterminal':
+                return new Cashterminal($data);
+            case 'CauriPayment':
+                return new CauriPayment($data);
+            case 'Cayan':
+                return new Cayan($data);
+            case 'Chase':
+                return new Chase($data);
+            case 'CheckoutCom':
+                return new CheckoutCom($data);
+            case 'Chillstock':
+                return new Chillstock($data);
+            case 'Circle':
+                return new Circle($data);
+            case 'Citadel':
+                return new Citadel($data);
+            case 'Clearhaus':
+                return new Clearhaus($data);
+            case 'Cleo':
+                return new Cleo($data);
+            case 'CoinGate':
+                return new CoinGate($data);
+            case 'CoinPayments':
+                return new CoinPayments($data);
+            case 'Coinbase':
+                return new Coinbase($data);
+            case 'Conekta':
+                return new Conekta($data);
+            case 'Coppr':
+                return new Coppr($data);
+            case 'Credorax':
+                return new Credorax($data);
+            case 'Cryptonator':
+                return new Cryptonator($data);
+            case 'CyberSource':
+                return new CyberSource($data);
+            case 'DataCash':
+                return new DataCash($data);
+            case 'Dengi':
+                return new Dengi($data);
+            case 'Dimoco':
+                return new Dimoco($data);
+            case 'Directa24':
+                return new Directa24($data);
+            case 'Dragonphoenix':
+                return new Dragonphoenix($data);
+            case 'Dropayment':
+                return new Dropayment($data);
+            case 'EBANX':
+                return new EBANX($data);
+            case 'EMS':
+                return new EMS($data);
+            case 'EPG':
+                return new EPG($data);
+            case 'EPro':
+                return new EPro($data);
+            case 'EcorePay':
+                return new EcorePay($data);
+            case 'Elavon':
+                return new Elavon($data);
+            case 'Euteller':
+                return new Euteller($data);
+            case 'Ezeebill':
+                return new Ezeebill($data);
+            case 'FinTecSystems':
+                return new FinTecSystems($data);
+            case 'Finrax':
+                return new Finrax($data);
+            case 'Flexepin':
+                return new Flexepin($data);
+            case 'Forte':
+                return new Forte($data);
+            case 'FundSend':
+                return new FundSend($data);
+            case 'GET':
+                return new GET($data);
             case 'Gigadat':
                 return new Gigadat($data);
+            case 'GlobalOne':
+                return new GlobalOne($data);
+            case 'Gooney':
+                return new Gooney($data);
+            case 'Gpaysafe':
+                return new Gpaysafe($data);
+            case 'Greenbox':
+                return new Greenbox($data);
+            case 'HiPay':
+                return new HiPay($data);
+            case 'ICEPAY':
+                return new ICEPAY($data);
+            case 'INOVAPAY':
+                return new INOVAPAY($data);
+            case 'Ilixium':
+                return new Ilixium($data);
+            case 'Ingenico':
+                return new Ingenico($data);
+            case 'Inovio':
+                return new Inovio($data);
+            case 'InstaDebit':
+                return new InstaDebit($data);
+            case 'Intuit':
+                return new Intuit($data);
+            case 'IpayOptions':
+                return new IpayOptions($data);
+            case 'JPMOrbital':
+                return new JPMOrbital($data);
+            case 'JetPay':
+                return new JetPay($data);
+            case 'Jeton':
+                return new Jeton($data);
+            case 'Khelocard':
+                return new Khelocard($data);
+            case 'Klarna':
+                return new Klarna($data);
+            case 'Konnektive':
+                return new Konnektive($data);
+            case 'LPG':
+                return new LPG($data);
+            case 'MaxiCash':
+                return new MaxiCash($data);
+            case 'MercadoPago':
+                return new MercadoPago($data);
+            case 'MiFinity':
+                return new MiFinity($data);
+            case 'MobilePay':
+                return new MobilePay($data);
+            case 'Moneris':
+                return new Moneris($data);
+            case 'MtaPay':
+                return new MtaPay($data);
+            case 'MuchBetter':
+                return new MuchBetter($data);
+            case 'MuchBetterGateway':
+                return new MuchBetterGateway($data);
+            case 'MyFatoorah':
+                return new MyFatoorah($data);
+            case 'NGenius':
+                return new NGenius($data);
+            case 'NMI':
+                return new NMI($data);
+            case 'NOWPayments':
+                return new NOWPayments($data);
+            case 'Neosurf':
+                return new Neosurf($data);
+            case 'Netbanking':
+                return new Netbanking($data);
+            case 'Neteller':
+                return new Neteller($data);
+            case 'NinjaWallet':
+                return new NinjaWallet($data);
+            case 'NordikCoin':
+                return new NordikCoin($data);
+            case 'NuaPay':
+                return new NuaPay($data);
+            case 'OchaPay':
+                return new OchaPay($data);
+            case 'OnRamp':
+                return new OnRamp($data);
+            case 'Onlineueberweisen':
+                return new Onlineueberweisen($data);
+            case 'Orbital':
+                return new Orbital($data);
+            case 'PPRO':
+                return new PPRO($data);
+            case 'PSiGate':
+                return new PSiGate($data);
+            case 'Pagadito':
+                return new Pagadito($data);
+            case 'Pagsmile':
+                return new Pagsmile($data);
+            case 'Panamerican':
+                return new Panamerican($data);
+            case 'PandaGateway':
+                return new PandaGateway($data);
+            case 'ParamountCommerce':
+                return new ParamountCommerce($data);
+            case 'ParamountEft':
+                return new ParamountEft($data);
+            case 'ParamountInterac':
+                return new ParamountInterac($data);
+            case 'Pay4Fun':
+                return new Pay4Fun($data);
+            case 'PayCash':
+                return new PayCash($data);
+            case 'PayClub':
+                return new PayClub($data);
+            case 'PayEcards':
+                return new PayEcards($data);
+            case 'PayPal':
+                return new PayPal($data);
+            case 'PayRetailers':
+                return new PayRetailers($data);
+            case 'PayTabs':
+                return new PayTabs($data);
+            case 'PayULatam':
+                return new PayULatam($data);
+            case 'Payeezy':
+                return new Payeezy($data);
+            case 'Payflow':
+                return new Payflow($data);
+            case 'PaymenTechnologies':
+                return new PaymenTechnologies($data);
+            case 'PaymentAsia':
+                return new PaymentAsia($data);
+            case 'PaymentsOS':
+                return new PaymentsOS($data);
+            case 'Paymero':
+                return new Paymero($data);
+            case 'Paynote':
+                return new Paynote($data);
+            case 'Payper':
+                return new Payper($data);
+            case 'Payr':
+                return new Payr($data);
+            case 'Paysafe':
+                return new Paysafe($data);
+            case 'Paysafecard':
+                return new Paysafecard($data);
+            case 'Paysafecash':
+                return new Paysafecash($data);
+            case 'Payvision':
+                return new Payvision($data);
+            case 'PharosPayments':
+                return new PharosPayments($data);
+            case 'Piastrix':
+                return new Piastrix($data);
+            case 'Pin4Pay':
+                return new Pin4Pay($data);
+            case 'Plugnpay':
+                return new Plugnpay($data);
+            case 'PostFinance':
+                return new PostFinance($data);
+            case 'Prosa':
+                return new Prosa($data);
+            case 'RPN':
+                return new RPN($data);
+            case 'Rapyd':
+                return new Rapyd($data);
+            case 'Realex':
+                return new Realex($data);
+            case 'Realtime':
+                return new Realtime($data);
+            case 'Redsys':
+                return new Redsys($data);
+            case 'Rotessa':
+                return new Rotessa($data);
+            case 'SMSVoucher':
+                return new SMSVoucher($data);
+            case 'STPMexico':
+                return new STPMexico($data);
+            case 'Safecharge':
+                return new Safecharge($data);
+            case 'Sagepay':
+                return new Sagepay($data);
+            case 'SaltarPay':
+                return new SaltarPay($data);
+            case 'SeamlessChex':
+                return new SeamlessChex($data);
+            case 'SecureTrading':
+                return new SecureTrading($data);
+            case 'SecurionPay':
+                return new SecurionPay($data);
+            case 'Skrill':
+                return new Skrill($data);
+            case 'SmartInvoice':
+                return new SmartInvoice($data);
+            case 'Sofort':
+                return new Sofort($data);
+            case 'SparkPay':
+                return new SparkPay($data);
+            case 'StaticGateway':
+                return new StaticGateway($data);
+            case 'Stripe':
+                return new Stripe($data);
+            case 'TWINT':
+                return new TWINT($data);
+            case 'Telr':
+                return new Telr($data);
+            case 'TestProcessor':
+                return new TestProcessor($data);
+            case 'ToditoCash':
+                return new ToditoCash($data);
+            case 'Truevo':
+                return new Truevo($data);
+            case 'Trustly':
+                return new Trustly($data);
+            case 'TrustsPay':
+                return new TrustsPay($data);
+            case 'UPayCard':
+                return new UPayCard($data);
+            case 'USAePay':
+                return new USAePay($data);
+            case 'VCreditos':
+                return new VCreditos($data);
+            case 'VantivLitle':
+                return new VantivLitle($data);
+            case 'VegaWallet':
+                return new VegaWallet($data);
+            case 'Wallet88':
+                return new Wallet88($data);
+            case 'Walpay':
+                return new Walpay($data);
+            case 'WesternUnion':
+                return new WesternUnion($data);
+            case 'Wirecard':
+                return new Wirecard($data);
+            case 'WorldlineAtosFrankfurt':
+                return new WorldlineAtosFrankfurt($data);
+            case 'Worldpay':
+                return new Worldpay($data);
+            case 'XPay':
+                return new XPay($data);
+            case 'Zimpler':
+                return new Zimpler($data);
+            case 'Zotapay':
+                return new Zotapay($data);
+            case 'dLocal':
+                return new DLocal($data);
+            case 'eMerchantPay':
+                return new EMerchantPay($data);
+            case 'ePay':
+                return new EPay($data);
+            case 'eZeeWallet':
+                return new EZeeWallet($data);
+            case 'ecoPayz':
+                return new EcoPayz($data);
+            case 'ezyEFT':
+                return new EzyEFT($data);
+            case 'iCanPay':
+                return new ICanPay($data);
+            case 'iCheque':
+                return new ICheque($data);
             case 'iDebit':
                 return new IDebit($data);
             case 'loonie':
                 return new Loonie($data);
-            case 'Neosurf':
-                return new Neosurf($data);
-            case 'ICEPAY':
-                return new ICEPAY($data);
-            case 'WorldlineAtosFrankfurt':
-                return new WorldlineAtosFrankfurt($data);
-            case 'Dengi':
-                return new Dengi($data);
-            case 'Ingenico':
-                return new Ingenico($data);
-            case 'Moneris':
-                return new Moneris($data);
-            case 'JetPay':
-                return new JetPay($data);
-            case 'Piastrix':
-                return new Piastrix($data);
-            case 'ACI':
-                return new ACI($data);
-            case 'DataCash':
-                return new DataCash($data);
-            case 'Onlineueberweisen':
-                return new Onlineueberweisen($data);
-            case 'Khelocard':
-                return new Khelocard($data);
-            case 'NMI':
-                return new NMI($data);
-            case 'VCreditos':
-                return new VCreditos($data);
-            case 'PayTabs':
-                return new PayTabs($data);
-            case 'VantivLitle':
-                return new VantivLitle($data);
-            case 'Euteller':
-                return new Euteller($data);
-            case 'NGenius':
-                return new NGenius($data);
-            case 'Paysafecard':
-                return new Paysafecard($data);
-            case 'ParamountEft':
-                return new ParamountEft($data);
-            case 'INOVAPAY':
-                return new INOVAPAY($data);
-            case 'ParamountInterac':
-                return new ParamountInterac($data);
-            case 'A1Gateway':
-                return new A1Gateway($data);
-            case 'Adyen':
-                return new Adyen($data);
-            case 'Rapyd':
-                return new Rapyd($data);
-            case 'Cashflows':
-                return new Cashflows($data);
-            case 'BraintreePayments':
-                return new BraintreePayments($data);
-            case 'Flexepin':
-                return new Flexepin($data);
-            case 'Trustly':
-                return new Trustly($data);
-            case 'SeamlessChex':
-                return new SeamlessChex($data);
-            case 'Coppr':
-                return new Coppr($data);
-            case 'Safecharge':
-                return new Safecharge($data);
-            case 'Payper':
-                return new Payper($data);
-            case 'PostFinance':
-                return new PostFinance($data);
-            case 'CoinPayments':
-                return new CoinPayments($data);
-            case 'Pin4Pay':
-                return new Pin4Pay($data);
-            case 'Payvision':
-                return new Payvision($data);
-            case 'PandaGateway':
-                return new PandaGateway($data);
-            case 'Neteller':
-                return new Neteller($data);
-            case 'CASHlib':
-                return new CASHlib($data);
-            case 'STPMexico':
-                return new STPMexico($data);
-            case 'ApcoPay':
-                return new ApcoPay($data);
-            case 'OchaPay':
-                return new OchaPay($data);
-            case 'PayCash':
-                return new PayCash($data);
-            case 'Konnektive':
-                return new Konnektive($data);
-            case 'Gpaysafe':
-                return new Gpaysafe($data);
-            case 'Circle':
-                return new Circle($data);
-            case 'ezyEFT':
-                return new EzyEFT($data);
-            case 'CyberSource':
-                return new CyberSource($data);
-            case 'Gooney':
-                return new Gooney($data);
-            case 'TWINT':
-                return new TWINT($data);
-            case 'TrustsPay':
-                return new TrustsPay($data);
-            case 'Directa24':
-                return new Directa24($data);
-            case 'Sofort':
-                return new Sofort($data);
-            case 'EMS':
-                return new EMS($data);
-            case 'IpayOptions':
-                return new IpayOptions($data);
-            case 'NinjaWallet':
-                return new NinjaWallet($data);
-            case 'CODVoucher':
-                return new CODVoucher($data);
-            case 'OnRamp':
-                return new OnRamp($data);
-            case 'MuchBetterGateway':
-                return new MuchBetterGateway($data);
-            case 'Pagsmile':
-                return new Pagsmile($data);
-            case 'InstaDebit':
-                return new InstaDebit($data);
-            case 'Dimoco':
-                return new Dimoco($data);
-            case 'Klarna':
-                return new Klarna($data);
-            case 'Clearhaus':
-                return new Clearhaus($data);
-            case 'eMerchantPay':
-                return new EMerchantPay($data);
-            case 'Elavon':
-                return new Elavon($data);
-            case 'AstroPayCard':
-                return new AstroPayCard($data);
-            case 'UPayCard':
-                return new UPayCard($data);
-            case 'Inovio':
-                return new Inovio($data);
-            case 'Payr':
-                return new Payr($data);
-            case 'RPN':
-                return new RPN($data);
-            case 'PayULatam':
-                return new PayULatam($data);
-            case 'Cleo':
-                return new Cleo($data);
-            case 'Skrill':
-                return new Skrill($data);
-            case 'Forte':
-                return new Forte($data);
-            case 'Airpay':
-                return new Airpay($data);
-            case 'StaticGateway':
-                return new StaticGateway($data);
-            case 'Cardknox':
-                return new Cardknox($data);
-            case 'ecoPayz':
-                return new EcoPayz($data);
-            case 'MaxiCash':
-                return new MaxiCash($data);
-            case 'NOWPayments':
-                return new NOWPayments($data);
-            case 'Awepay':
-                return new Awepay($data);
-            case 'Dropayment':
-                return new Dropayment($data);
-            case 'HiPay':
-                return new HiPay($data);
-            case 'Cryptonator':
-                return new Cryptonator($data);
-            case 'PayPal':
-                return new PayPal($data);
-            case 'iCanPay':
-                return new ICanPay($data);
-            case 'EBANX':
-                return new EBANX($data);
-            case 'AuthorizeNet':
-                return new AuthorizeNet($data);
-            case 'BitPay':
-                return new BitPay($data);
-            case 'Payflow':
-                return new Payflow($data);
-            case 'Intuit':
-                return new Intuit($data);
-            case 'CCAvenue':
-                return new CCAvenue($data);
-            case 'BlueSnap':
-                return new BlueSnap($data);
-            case 'eZeeWallet':
-                return new EZeeWallet($data);
-            case 'dLocal':
-                return new DLocal($data);
-            case 'BankSEND':
-                return new BankSEND($data);
-            case 'Telr':
-                return new Telr($data);
-            case 'SMSVoucher':
-                return new SMSVoucher($data);
-            case 'Dragonphoenix':
-                return new Dragonphoenix($data);
-            case 'Zimpler':
-                return new Zimpler($data);
-            case 'Worldpay':
-                return new Worldpay($data);
-            case 'Wallet88':
-                return new Wallet88($data);
-            case 'Cayan':
-                return new Cayan($data);
-            case 'SecureTrading':
-                return new SecureTrading($data);
-            case 'ToditoCash':
-                return new ToditoCash($data);
-            case 'EPG':
-                return new EPG($data);
+            case 'vegaaH':
+                return new VegaaH($data);
         }
 
         throw new InvalidArgumentException("Unsupported gatewayName value: '{$data['gatewayName']}'");
@@ -503,38 +533,30 @@ abstract class GatewayAccount implements JsonSerializable
         return $this->fields['id'] ?? null;
     }
 
-    public function getGatewayName(): GatewayName
+    public function getGatewayName(): string
     {
         return $this->fields['gatewayName'];
     }
 
-    public function getAcquirerName(): ?AcquirerName
+    public function getAcquirerName(): ?string
     {
         return $this->fields['acquirerName'] ?? null;
     }
 
-    public function setAcquirerName(null|AcquirerName|string $acquirerName): static
+    public function setAcquirerName(null|string $acquirerName): static
     {
-        if ($acquirerName !== null && !($acquirerName instanceof AcquirerName)) {
-            $acquirerName = AcquirerName::from($acquirerName);
-        }
-
         $this->fields['acquirerName'] = $acquirerName;
 
         return $this;
     }
 
-    public function getMethod(): PaymentMethod
+    public function getMethod(): string
     {
         return $this->fields['method'];
     }
 
-    public function setMethod(PaymentMethod|string $method): static
+    public function setMethod(string $method): static
     {
-        if (!($method instanceof PaymentMethod)) {
-            $method = PaymentMethod::from($method);
-        }
-
         $this->fields['method'] = $method;
 
         return $this;
@@ -553,7 +575,10 @@ abstract class GatewayAccount implements JsonSerializable
      */
     public function setAcceptedCurrencies(array $acceptedCurrencies): static
     {
-        $acceptedCurrencies = array_map(fn ($value) => $value ?? null, $acceptedCurrencies);
+        $acceptedCurrencies = array_map(
+            fn ($value) => $value,
+            $acceptedCurrencies,
+        );
 
         $this->fields['acceptedCurrencies'] = $acceptedCurrencies;
 
@@ -561,7 +586,7 @@ abstract class GatewayAccount implements JsonSerializable
     }
 
     /**
-     * @return null|PaymentCardBrand[]
+     * @return null|string[]
      */
     public function getPaymentCardSchemes(): ?array
     {
@@ -569,20 +594,20 @@ abstract class GatewayAccount implements JsonSerializable
     }
 
     /**
-     * @param null|PaymentCardBrand[] $paymentCardSchemes
+     * @param null|string[] $paymentCardSchemes
      */
     public function setPaymentCardSchemes(null|array $paymentCardSchemes): static
     {
-        $paymentCardSchemes = $paymentCardSchemes !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof PaymentCardBrand ? $value : PaymentCardBrand::from($value)) : null, $paymentCardSchemes) : null;
+        $paymentCardSchemes = $paymentCardSchemes !== null ? array_map(
+            fn ($value) => $value,
+            $paymentCardSchemes,
+        ) : null;
 
         $this->fields['paymentCardSchemes'] = $paymentCardSchemes;
 
         return $this;
     }
 
-    /**
-     * @psalm-return self::STATUS_*|null $status
-     */
     public function getStatus(): ?string
     {
         return $this->fields['status'] ?? null;
@@ -661,7 +686,10 @@ abstract class GatewayAccount implements JsonSerializable
      */
     public function setExcludedDccQuoteCurrencies(null|array $excludedDccQuoteCurrencies): static
     {
-        $excludedDccQuoteCurrencies = $excludedDccQuoteCurrencies !== null ? array_map(fn ($value) => $value ?? null, $excludedDccQuoteCurrencies) : null;
+        $excludedDccQuoteCurrencies = $excludedDccQuoteCurrencies !== null ? array_map(
+            fn ($value) => $value,
+            $excludedDccQuoteCurrencies,
+        ) : null;
 
         $this->fields['excludedDccQuoteCurrencies'] = $excludedDccQuoteCurrencies;
 
@@ -806,17 +834,11 @@ abstract class GatewayAccount implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-return self::SETUP_INSTRUCTION_*|null $setupInstruction
-     */
     public function getSetupInstruction(): ?string
     {
         return $this->fields['setupInstruction'] ?? null;
     }
 
-    /**
-     * @psalm-param self::SETUP_INSTRUCTION_*|null $setupInstruction
-     */
     public function setSetupInstruction(null|string $setupInstruction): static
     {
         $this->fields['setupInstruction'] = $setupInstruction;
@@ -839,8 +861,15 @@ abstract class GatewayAccount implements JsonSerializable
         return $this->fields['organizationId'] ?? null;
     }
 
+    public function setOrganizationId(null|string $organizationId): static
+    {
+        $this->fields['organizationId'] = $organizationId;
+
+        return $this;
+    }
+
     /**
-     * @return null|array<DynamicIpnLink|OnBoardingUrlLink|SelfLink|StaticIpnLink>
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
@@ -854,13 +883,13 @@ abstract class GatewayAccount implements JsonSerializable
             $data['id'] = $this->fields['id'];
         }
         if (array_key_exists('gatewayName', $this->fields)) {
-            $data['gatewayName'] = $this->fields['gatewayName']?->value;
+            $data['gatewayName'] = $this->fields['gatewayName'];
         }
         if (array_key_exists('acquirerName', $this->fields)) {
-            $data['acquirerName'] = $this->fields['acquirerName']?->value;
+            $data['acquirerName'] = $this->fields['acquirerName'];
         }
         if (array_key_exists('method', $this->fields)) {
-            $data['method'] = $this->fields['method']?->value;
+            $data['method'] = $this->fields['method'];
         }
         if (array_key_exists('acceptedCurrencies', $this->fields)) {
             $data['acceptedCurrencies'] = $this->fields['acceptedCurrencies'];
@@ -951,20 +980,13 @@ abstract class GatewayAccount implements JsonSerializable
         return $this;
     }
 
-    private function setGatewayName(GatewayName|string $gatewayName): static
+    private function setGatewayName(string $gatewayName): static
     {
-        if (!($gatewayName instanceof GatewayName)) {
-            $gatewayName = GatewayName::from($gatewayName);
-        }
-
         $this->fields['gatewayName'] = $gatewayName;
 
         return $this;
     }
 
-    /**
-     * @psalm-param self::STATUS_*|null $status
-     */
     private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
@@ -1008,19 +1030,15 @@ abstract class GatewayAccount implements JsonSerializable
         return $this;
     }
 
-    private function setOrganizationId(null|string $organizationId): static
-    {
-        $this->fields['organizationId'] = $organizationId;
-
-        return $this;
-    }
-
     /**
-     * @param null|array<DynamicIpnLink|OnBoardingUrlLink|SelfLink|StaticIpnLink> $links
+     * @param null|array[]|ResourceLink[] $links
      */
     private function setLinks(null|array $links): static
     {
-        $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
+        $links = $links !== null ? array_map(
+            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+            $links,
+        ) : null;
 
         $this->fields['_links'] = $links;
 

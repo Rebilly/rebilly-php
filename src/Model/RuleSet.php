@@ -62,11 +62,14 @@ class RuleSet implements JsonSerializable
     }
 
     /**
-     * @param null|Bind[] $binds
+     * @param null|array[]|Bind[] $binds
      */
     public function setBinds(null|array $binds): static
     {
-        $binds = $binds !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Bind ? $value : Bind::from($value)) : null, $binds) : null;
+        $binds = $binds !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof Bind ? $value : Bind::from($value)) : null,
+            $binds,
+        ) : null;
 
         $this->fields['binds'] = $binds;
 
@@ -82,11 +85,14 @@ class RuleSet implements JsonSerializable
     }
 
     /**
-     * @param Rule[] $rules
+     * @param array[]|Rule[] $rules
      */
     public function setRules(array $rules): static
     {
-        $rules = array_map(fn ($value) => $value !== null ? ($value instanceof Rule ? $value : Rule::from($value)) : null, $rules);
+        $rules = array_map(
+            fn ($value) => $value !== null ? ($value instanceof Rule ? $value : Rule::from($value)) : null,
+            $rules,
+        );
 
         $this->fields['rules'] = $rules;
 
@@ -104,11 +110,21 @@ class RuleSet implements JsonSerializable
     }
 
     /**
-     * @return null|SelfLink[]
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    public function setLinks(null|array $links): static
+    {
+        $this->fields['_links'] = $links;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -161,18 +177,6 @@ class RuleSet implements JsonSerializable
         }
 
         $this->fields['updatedTime'] = $updatedTime;
-
-        return $this;
-    }
-
-    /**
-     * @param null|SelfLink[] $links
-     */
-    private function setLinks(null|array $links): static
-    {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
-
-        $this->fields['_links'] = $links;
 
         return $this;
     }

@@ -17,9 +17,9 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
-use Rebilly\Sdk\Model\CommonCreditMemo;
 use Rebilly\Sdk\Model\CreditMemo;
 use Rebilly\Sdk\Model\CreditMemoTimeline;
+use Rebilly\Sdk\Model\PatchCreditMemo;
 use Rebilly\Sdk\Paginator;
 
 class CreditMemosApi
@@ -83,16 +83,12 @@ class CreditMemosApi
      */
     public function get(
         string $id,
-        ?string $expand = null,
     ): CreditMemo {
         $pathParams = [
             '{id}' => $id,
         ];
 
-        $queryParams = [
-            'expand' => $expand,
-        ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credit-memos/{id}?') . http_build_query($queryParams);
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credit-memos/{id}');
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
@@ -110,7 +106,6 @@ class CreditMemosApi
         ?int $limit = null,
         ?int $offset = null,
         ?string $q = null,
-        ?string $expand = null,
     ): Collection {
         $queryParams = [
             'filter' => $filter,
@@ -118,7 +113,6 @@ class CreditMemosApi
             'limit' => $limit,
             'offset' => $offset,
             'q' => $q,
-            'expand' => $expand,
         ];
         $uri = '/credit-memos?' . http_build_query($queryParams);
 
@@ -140,7 +134,6 @@ class CreditMemosApi
         ?int $limit = null,
         ?int $offset = null,
         ?string $q = null,
-        ?string $expand = null,
     ): Paginator {
         $closure = fn (?int $limit, ?int $offset): Collection => $this->getAll(
             filter: $filter,
@@ -148,7 +141,6 @@ class CreditMemosApi
             limit: $limit,
             offset: $offset,
             q: $q,
-            expand: $expand,
         );
 
         return new Paginator(
@@ -242,7 +234,7 @@ class CreditMemosApi
      */
     public function patch(
         string $id,
-        CommonCreditMemo $commonCreditMemo,
+        PatchCreditMemo $patchCreditMemo,
     ): CreditMemo {
         $pathParams = [
             '{id}' => $id,
@@ -250,7 +242,7 @@ class CreditMemosApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credit-memos/{id}');
 
-        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($commonCreditMemo));
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($patchCreditMemo));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

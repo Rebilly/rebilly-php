@@ -40,11 +40,14 @@ class ReportRetentionValue implements JsonSerializable
     }
 
     /**
-     * @param null|ReportRetentionValueData[] $data
+     * @param null|array[]|ReportRetentionValueData[] $data
      */
     public function setData(null|array $data): static
     {
-        $data = $data !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ReportRetentionValueData ? $value : ReportRetentionValueData::from($value)) : null, $data) : null;
+        $data = $data !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof ReportRetentionValueData ? $value : ReportRetentionValueData::from($value)) : null,
+            $data,
+        ) : null;
 
         $this->fields['data'] = $data;
 

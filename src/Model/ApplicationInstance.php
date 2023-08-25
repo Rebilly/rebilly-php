@@ -34,6 +34,9 @@ class ApplicationInstance implements JsonSerializable
         if (array_key_exists('status', $data)) {
             $this->setStatus($data['status']);
         }
+        if (array_key_exists('isConfigured', $data)) {
+            $this->setIsConfigured($data['isConfigured']);
+        }
         if (array_key_exists('settings', $data)) {
             $this->setSettings($data['settings']);
         }
@@ -53,30 +56,22 @@ class ApplicationInstance implements JsonSerializable
         return new self($data);
     }
 
-    /**
-     * @psalm-return self::STATUS_*|null $status
-     */
     public function getStatus(): ?string
     {
         return $this->fields['status'] ?? null;
     }
 
-    /**
-     * @return array<string,string>
-     */
-    public function getSettings(): array
+    public function getIsConfigured(): ?bool
     {
-        return $this->fields['settings'];
+        return $this->fields['isConfigured'] ?? null;
     }
 
     /**
-     * @param array<string,string> $settings
+     * @return null|array<string,string>
      */
-    public function setSettings(array $settings): static
+    public function getSettings(): ?array
     {
-        $this->fields['settings'] = $settings;
-
-        return $this;
+        return $this->fields['settings'] ?? null;
     }
 
     public function getCreatedTime(): ?DateTimeImmutable
@@ -90,11 +85,21 @@ class ApplicationInstance implements JsonSerializable
     }
 
     /**
-     * @return null|array<SelfLink>
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    public function setLinks(null|array $links): static
+    {
+        $this->fields['_links'] = $links;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -102,6 +107,9 @@ class ApplicationInstance implements JsonSerializable
         $data = [];
         if (array_key_exists('status', $this->fields)) {
             $data['status'] = $this->fields['status'];
+        }
+        if (array_key_exists('isConfigured', $this->fields)) {
+            $data['isConfigured'] = $this->fields['isConfigured'];
         }
         if (array_key_exists('settings', $this->fields)) {
             $data['settings'] = $this->fields['settings'];
@@ -119,12 +127,26 @@ class ApplicationInstance implements JsonSerializable
         return $data;
     }
 
-    /**
-     * @psalm-param self::STATUS_*|null $status
-     */
     private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
+
+        return $this;
+    }
+
+    private function setIsConfigured(null|bool $isConfigured): static
+    {
+        $this->fields['isConfigured'] = $isConfigured;
+
+        return $this;
+    }
+
+    /**
+     * @param null|array<string,string> $settings
+     */
+    private function setSettings(null|array $settings): static
+    {
+        $this->fields['settings'] = $settings;
 
         return $this;
     }
@@ -147,18 +169,6 @@ class ApplicationInstance implements JsonSerializable
         }
 
         $this->fields['updatedTime'] = $updatedTime;
-
-        return $this;
-    }
-
-    /**
-     * @param null|array<SelfLink> $links
-     */
-    private function setLinks(null|array $links): static
-    {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
-
-        $this->fields['_links'] = $links;
 
         return $this;
     }

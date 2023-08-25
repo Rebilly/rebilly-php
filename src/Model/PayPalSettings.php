@@ -33,6 +33,9 @@ class PayPalSettings implements JsonSerializable
         if (array_key_exists('forceGuestCheckout', $data)) {
             $this->setForceGuestCheckout($data['forceGuestCheckout']);
         }
+        if (array_key_exists('enableAlternativePaymentMethods', $data)) {
+            $this->setEnableAlternativePaymentMethods($data['enableAlternativePaymentMethods']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -88,6 +91,18 @@ class PayPalSettings implements JsonSerializable
         return $this;
     }
 
+    public function getEnableAlternativePaymentMethods(): ?bool
+    {
+        return $this->fields['enableAlternativePaymentMethods'] ?? null;
+    }
+
+    public function setEnableAlternativePaymentMethods(null|bool $enableAlternativePaymentMethods): static
+    {
+        $this->fields['enableAlternativePaymentMethods'] = $enableAlternativePaymentMethods;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -102,6 +117,9 @@ class PayPalSettings implements JsonSerializable
         }
         if (array_key_exists('forceGuestCheckout', $this->fields)) {
             $data['forceGuestCheckout'] = $this->fields['forceGuestCheckout'];
+        }
+        if (array_key_exists('enableAlternativePaymentMethods', $this->fields)) {
+            $data['enableAlternativePaymentMethods'] = $this->fields['enableAlternativePaymentMethods'];
         }
 
         return $data;

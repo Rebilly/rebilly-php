@@ -52,6 +52,13 @@ final class ErrorHandler
                         );
                     }
 
+                    if ($code >= 500) {
+                        throw new Exception\ServerException(
+                            $response->getStatusCode(),
+                            $response->getReasonPhrase(),
+                        );
+                    }
+
                     throw RequestException::create($request, $response);
                 });
         };

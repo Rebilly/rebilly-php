@@ -33,15 +33,15 @@ class InvoiceItems extends DataExport
         return new self($data);
     }
 
-    public function getDateRange(): ?DataExportDateRange
+    public function getDateRange(): ?InvoicesDateRange
     {
         return $this->fields['dateRange'] ?? null;
     }
 
-    public function setDateRange(null|DataExportDateRange|array $dateRange): static
+    public function setDateRange(null|InvoicesDateRange|array $dateRange): static
     {
-        if ($dateRange !== null && !($dateRange instanceof DataExportDateRange)) {
-            $dateRange = DataExportDateRange::from($dateRange);
+        if ($dateRange !== null && !($dateRange instanceof InvoicesDateRange)) {
+            $dateRange = InvoicesDateRange::from($dateRange);
         }
 
         $this->fields['dateRange'] = $dateRange;

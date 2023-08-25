@@ -71,8 +71,6 @@ class Dispute implements JsonSerializable
 
     public const REASON_CODE__13_9 = '13.9';
 
-    public const REASON_CODE__2 = '2';
-
     public const REASON_CODE__30 = '30';
 
     public const REASON_CODE__31 = '31';
@@ -109,8 +107,6 @@ class Dispute implements JsonSerializable
 
     public const REASON_CODE__62 = '62';
 
-    public const REASON_CODE__7 = '7';
-
     public const REASON_CODE__70 = '70';
 
     public const REASON_CODE__71 = '71';
@@ -128,8 +124,6 @@ class Dispute implements JsonSerializable
     public const REASON_CODE__77 = '77';
 
     public const REASON_CODE__79 = '79';
-
-    public const REASON_CODE__8 = '8';
 
     public const REASON_CODE__80 = '80';
 
@@ -331,6 +325,8 @@ class Dispute implements JsonSerializable
 
     public const REASON_CODE__1 = '1';
 
+    public const REASON_CODE__2 = '2';
+
     public const REASON_CODE__3 = '3';
 
     public const REASON_CODE__4 = '4';
@@ -338,6 +334,10 @@ class Dispute implements JsonSerializable
     public const REASON_CODE__5 = '5';
 
     public const REASON_CODE__6 = '6';
+
+    public const REASON_CODE__7 = '7';
+
+    public const REASON_CODE__8 = '8';
 
     public const REASON_CODE__9 = '9';
 
@@ -349,17 +349,11 @@ class Dispute implements JsonSerializable
 
     public const CATEGORY_FRAUD = 'fraud';
 
-    public const CATEGORY_UNRECOGNIZED = 'unrecognized';
+    public const CATEGORY_AUTHORIZATION = 'authorization';
 
-    public const CATEGORY_PRODUCT_NOT_RECEIVED = 'product-not-received';
+    public const CATEGORY_PROCESSING_ERRORS = 'processing-errors';
 
-    public const CATEGORY_PRODUCT_UNACCEPTABLE = 'product-unacceptable';
-
-    public const CATEGORY_PRODUCT_NOT_REFUNDED = 'product-not-refunded';
-
-    public const CATEGORY_DUPLICATE = 'duplicate';
-
-    public const CATEGORY_SUBSCRIPTION_CANCELED = 'subscription-canceled';
+    public const CATEGORY_CONSUMER_DISPUTES = 'consumer-disputes';
 
     public const CATEGORY_UNCATEGORIZED = 'uncategorized';
 
@@ -531,17 +525,11 @@ class Dispute implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-return self::REASON_CODE_* $reasonCode
-     */
     public function getReasonCode(): string
     {
         return $this->fields['reasonCode'];
     }
 
-    /**
-     * @psalm-param self::REASON_CODE_* $reasonCode
-     */
     public function setReasonCode(string $reasonCode): static
     {
         $this->fields['reasonCode'] = $reasonCode;
@@ -549,25 +537,16 @@ class Dispute implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-return self::CATEGORY_*|null $category
-     */
     public function getCategory(): ?string
     {
         return $this->fields['category'] ?? null;
     }
 
-    /**
-     * @psalm-return self::TYPE_* $type
-     */
     public function getType(): string
     {
         return $this->fields['type'];
     }
 
-    /**
-     * @psalm-param self::TYPE_* $type
-     */
     public function setType(string $type): static
     {
         $this->fields['type'] = $type;
@@ -575,17 +554,11 @@ class Dispute implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-return self::STATUS_* $status
-     */
     public function getStatus(): string
     {
         return $this->fields['status'];
     }
 
-    /**
-     * @psalm-param self::STATUS_* $status
-     */
     public function setStatus(string $status): static
     {
         $this->fields['status'] = $status;
@@ -635,17 +608,6 @@ class Dispute implements JsonSerializable
         return $this->fields['resolvedTime'] ?? null;
     }
 
-    public function setResolvedTime(null|DateTimeImmutable|string $resolvedTime): static
-    {
-        if ($resolvedTime !== null && !($resolvedTime instanceof DateTimeImmutable)) {
-            $resolvedTime = new DateTimeImmutable($resolvedTime);
-        }
-
-        $this->fields['resolvedTime'] = $resolvedTime;
-
-        return $this;
-    }
-
     public function getCreatedTime(): ?DateTimeImmutable
     {
         return $this->fields['createdTime'] ?? null;
@@ -657,19 +619,27 @@ class Dispute implements JsonSerializable
     }
 
     /**
-     * @return null|array<SelfLink|TransactionLink>
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
     }
 
-    /**
-     * @return null|array{transaction:Transaction}
-     */
-    public function getEmbedded(): ?array
+    public function getEmbedded(): ?DisputeEmbedded
     {
         return $this->fields['_embedded'] ?? null;
+    }
+
+    public function setEmbedded(null|DisputeEmbedded|array $embedded): static
+    {
+        if ($embedded !== null && !($embedded instanceof DisputeEmbedded)) {
+            $embedded = DisputeEmbedded::from($embedded);
+        }
+
+        $this->fields['_embedded'] = $embedded;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -730,7 +700,7 @@ class Dispute implements JsonSerializable
             $data['_links'] = $this->fields['_links'];
         }
         if (array_key_exists('_embedded', $this->fields)) {
-            $data['_embedded'] = $this->fields['_embedded'];
+            $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();
         }
 
         return $data;
@@ -750,9 +720,6 @@ class Dispute implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-param self::CATEGORY_*|null $category
-     */
     private function setCategory(null|string $category): static
     {
         $this->fields['category'] = $category;
@@ -763,6 +730,17 @@ class Dispute implements JsonSerializable
     private function setRawResponse(null|string $rawResponse): static
     {
         $this->fields['rawResponse'] = $rawResponse;
+
+        return $this;
+    }
+
+    private function setResolvedTime(null|DateTimeImmutable|string $resolvedTime): static
+    {
+        if ($resolvedTime !== null && !($resolvedTime instanceof DateTimeImmutable)) {
+            $resolvedTime = new DateTimeImmutable($resolvedTime);
+        }
+
+        $this->fields['resolvedTime'] = $resolvedTime;
 
         return $this;
     }
@@ -790,27 +768,16 @@ class Dispute implements JsonSerializable
     }
 
     /**
-     * @param null|array<SelfLink|TransactionLink> $links
+     * @param null|array[]|ResourceLink[] $links
      */
     private function setLinks(null|array $links): static
     {
-        $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
+        $links = $links !== null ? array_map(
+            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+            $links,
+        ) : null;
 
         $this->fields['_links'] = $links;
-
-        return $this;
-    }
-
-    /**
-     * @param null|array{transaction:Transaction} $embedded
-     */
-    private function setEmbedded(null|array $embedded): static
-    {
-        if ($embedded !== null) {
-            $embedded['transaction'] = isset($embedded['transaction']) ? ($embedded['transaction'] instanceof Transaction ? $embedded['transaction'] : Transaction::from($embedded['transaction'])) : null;
-        }
-
-        $this->fields['_embedded'] = $embedded;
 
         return $this;
     }

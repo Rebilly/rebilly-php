@@ -18,7 +18,6 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\Integration;
-use Rebilly\Sdk\Model\OAuth2CredentialService;
 use Rebilly\Sdk\Paginator;
 
 class IntegrationsApi
@@ -31,10 +30,10 @@ class IntegrationsApi
      * @return Integration
      */
     public function get(
-        OAuth2CredentialService $label,
+        string $label,
     ): Integration {
         $pathParams = [
-            '{label}' => $label->value,
+            '{label}' => $label,
         ];
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/integrations/{label}');

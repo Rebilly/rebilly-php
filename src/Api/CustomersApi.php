@@ -35,25 +35,6 @@ class CustomersApi
     }
 
     /**
-     * @return CustomerInformation
-     */
-    public function getCustomerLifetimeSummaryMetrics(
-        string $customerId,
-    ): CustomerInformation {
-        $pathParams = [
-            '{customerId}' => $customerId,
-        ];
-
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/experimental/customers/{customerId}/summary-metrics');
-
-        $request = new Request('GET', $uri);
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return CustomerInformation::from($data);
-    }
-
-    /**
      * @return Customer
      */
     public function create(
@@ -126,6 +107,21 @@ class CustomersApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CustomerTimeline::from($data);
+    }
+
+    public function deleteEddTimelineMessage(
+        string $id,
+        string $messageId,
+    ): void {
+        $pathParams = [
+            '{id}' => $id,
+            '{messageId}' => $messageId,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/edd-timeline/{messageId}');
+
+        $request = new Request('DELETE', $uri);
+        $this->client->send($request);
     }
 
     public function deleteLeadSource(
@@ -386,6 +382,46 @@ class CustomersApi
     }
 
     /**
+     * @return CustomerInformation
+     */
+    public function getCustomerLifetimeSummaryMetrics(
+        string $customerId,
+    ): CustomerInformation {
+        $pathParams = [
+            '{customerId}' => $customerId,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/experimental/customers/{customerId}/summary-metrics');
+
+        $request = new Request('GET', $uri);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return CustomerInformation::from($data);
+    }
+
+    /**
+     * @return EddSearchResult
+     */
+    public function getEddSearchResult(
+        string $id,
+        string $searchResultId,
+    ): EddSearchResult {
+        $pathParams = [
+            '{id}' => $id,
+            '{searchResultId}' => $searchResultId,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/edd-search-results/{searchResultId}');
+
+        $request = new Request('GET', $uri);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return EddSearchResult::from($data);
+    }
+
+    /**
      * @return Collection<EddTimeline>
      */
     public function getEddTimelineCollection(
@@ -442,6 +478,27 @@ class CustomersApi
             $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
             $closure,
         );
+    }
+
+    /**
+     * @return EddTimeline
+     */
+    public function getEddTimelineMessage(
+        string $id,
+        string $messageId,
+    ): EddTimeline {
+        $pathParams = [
+            '{id}' => $id,
+            '{messageId}' => $messageId,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/edd-timeline/{messageId}');
+
+        $request = new Request('GET', $uri);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return EddTimeline::from($data);
     }
 
     /**

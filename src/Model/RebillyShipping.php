@@ -13,16 +13,19 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-class RebillyShipping extends Shipping
+use JsonSerializable;
+
+class RebillyShipping implements Shipping, JsonSerializable
 {
+    public const CALCULATOR_REBILLY = 'rebilly';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        parent::__construct([
-            'calculator' => 'rebilly',
-        ] + $data);
-
+        if (array_key_exists('calculator', $data)) {
+            $this->setCalculator($data['calculator']);
+        }
         if (array_key_exists('rateId', $data)) {
             $this->setRateId($data['rateId']);
         }
@@ -34,6 +37,18 @@ class RebillyShipping extends Shipping
     public static function from(array $data = []): self
     {
         return new self($data);
+    }
+
+    public function getCalculator(): string
+    {
+        return $this->fields['calculator'];
+    }
+
+    public function setCalculator(string $calculator): static
+    {
+        $this->fields['calculator'] = $calculator;
+
+        return $this;
     }
 
     public function getRateId(): ?string
@@ -56,6 +71,9 @@ class RebillyShipping extends Shipping
     public function jsonSerialize(): array
     {
         $data = [];
+        if (array_key_exists('calculator', $this->fields)) {
+            $data['calculator'] = $this->fields['calculator'];
+        }
         if (array_key_exists('rateId', $this->fields)) {
             $data['rateId'] = $this->fields['rateId'];
         }
@@ -63,7 +81,7 @@ class RebillyShipping extends Shipping
             $data['amount'] = $this->fields['amount'];
         }
 
-        return parent::jsonSerialize() + $data;
+        return $data;
     }
 
     private function setAmount(null|int $amount): static

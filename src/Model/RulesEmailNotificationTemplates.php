@@ -95,7 +95,10 @@ class RulesEmailNotificationTemplates implements JsonSerializable
      */
     public function setTo(array $to): static
     {
-        $to = array_map(fn ($value) => $value ?? null, $to);
+        $to = array_map(
+            fn ($value) => $value,
+            $to,
+        );
 
         $this->fields['to'] = $to;
 
@@ -115,7 +118,10 @@ class RulesEmailNotificationTemplates implements JsonSerializable
      */
     public function setCc(null|array $cc): static
     {
-        $cc = $cc !== null ? array_map(fn ($value) => $value ?? null, $cc) : null;
+        $cc = $cc !== null ? array_map(
+            fn ($value) => $value,
+            $cc,
+        ) : null;
 
         $this->fields['cc'] = $cc;
 
@@ -135,7 +141,10 @@ class RulesEmailNotificationTemplates implements JsonSerializable
      */
     public function setBcc(null|array $bcc): static
     {
-        $bcc = $bcc !== null ? array_map(fn ($value) => $value ?? null, $bcc) : null;
+        $bcc = $bcc !== null ? array_map(
+            fn ($value) => $value,
+            $bcc,
+        ) : null;
 
         $this->fields['bcc'] = $bcc;
 
@@ -191,7 +200,7 @@ class RulesEmailNotificationTemplates implements JsonSerializable
     }
 
     /**
-     * @return null|RulesEmailNotificationAttachments[]
+     * @return null|RulesEmailNotificationTemplatesAttachments[]
      */
     public function getAttachments(): ?array
     {
@@ -199,11 +208,14 @@ class RulesEmailNotificationTemplates implements JsonSerializable
     }
 
     /**
-     * @param null|RulesEmailNotificationAttachments[] $attachments
+     * @param null|array[]|RulesEmailNotificationTemplatesAttachments[] $attachments
      */
     public function setAttachments(null|array $attachments): static
     {
-        $attachments = $attachments !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof RulesEmailNotificationAttachments ? $value : RulesEmailNotificationAttachments::from($value)) : null, $attachments) : null;
+        $attachments = $attachments !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof RulesEmailNotificationTemplatesAttachments ? $value : RulesEmailNotificationTemplatesAttachments::from($value)) : null,
+            $attachments,
+        ) : null;
 
         $this->fields['attachments'] = $attachments;
 

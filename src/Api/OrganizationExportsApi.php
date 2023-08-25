@@ -17,8 +17,8 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
-use Rebilly\Sdk\Model\InlineObject;
 use Rebilly\Sdk\Model\OrganizationExport;
+use Rebilly\Sdk\Model\PostOrganizationExportRequest;
 use Rebilly\Sdk\Paginator;
 
 class OrganizationExportsApi
@@ -31,11 +31,11 @@ class OrganizationExportsApi
      * @return OrganizationExport
      */
     public function create(
-        ?InlineObject $inlineObject = null,
+        ?PostOrganizationExportRequest $postOrganizationExportRequest = null,
     ): OrganizationExport {
         $uri = '/organization-exports';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($inlineObject));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($postOrganizationExportRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

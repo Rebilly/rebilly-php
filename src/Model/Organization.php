@@ -62,11 +62,20 @@ class Organization implements JsonSerializable
         if (array_key_exists('invoiceTimeZone', $data)) {
             $this->setInvoiceTimeZone($data['invoiceTimeZone']);
         }
+        if (array_key_exists('reportCurrency', $data)) {
+            $this->setReportCurrency($data['reportCurrency']);
+        }
         if (array_key_exists('questionnaire', $data)) {
             $this->setQuestionnaire($data['questionnaire']);
         }
         if (array_key_exists('settings', $data)) {
             $this->setSettings($data['settings']);
+        }
+        if (array_key_exists('taxNumbers', $data)) {
+            $this->setTaxNumbers($data['taxNumbers']);
+        }
+        if (array_key_exists('features', $data)) {
+            $this->setFeatures($data['features']);
         }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
@@ -185,41 +194,25 @@ class Organization implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @return null|ContactPhoneNumbers[]
-     */
-    public function getPhoneNumbers(): ?array
+    public function getPhoneNumbers(): ?ContactPhoneNumbers
     {
         return $this->fields['phoneNumbers'] ?? null;
     }
 
-    /**
-     * @param null|ContactPhoneNumbers[] $phoneNumbers
-     */
-    public function setPhoneNumbers(null|array $phoneNumbers): static
+    public function setPhoneNumbers(null|ContactPhoneNumbers $phoneNumbers): static
     {
-        $phoneNumbers = $phoneNumbers !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ContactPhoneNumbers ? $value : ContactPhoneNumbers::from($value)) : null, $phoneNumbers) : null;
-
         $this->fields['phoneNumbers'] = $phoneNumbers;
 
         return $this;
     }
 
-    /**
-     * @return null|ContactEmails[]
-     */
-    public function getEmails(): ?array
+    public function getEmails(): ?ContactEmails
     {
         return $this->fields['emails'] ?? null;
     }
 
-    /**
-     * @param null|ContactEmails[] $emails
-     */
-    public function setEmails(null|array $emails): static
+    public function setEmails(null|ContactEmails $emails): static
     {
-        $emails = $emails !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ContactEmails ? $value : ContactEmails::from($value)) : null, $emails) : null;
-
         $this->fields['emails'] = $emails;
 
         return $this;
@@ -245,6 +238,18 @@ class Organization implements JsonSerializable
     public function setInvoiceTimeZone(null|string $invoiceTimeZone): static
     {
         $this->fields['invoiceTimeZone'] = $invoiceTimeZone;
+
+        return $this;
+    }
+
+    public function getReportCurrency(): ?string
+    {
+        return $this->fields['reportCurrency'] ?? null;
+    }
+
+    public function setReportCurrency(null|string $reportCurrency): static
+    {
+        $this->fields['reportCurrency'] = $reportCurrency;
 
         return $this;
     }
@@ -281,6 +286,37 @@ class Organization implements JsonSerializable
         return $this;
     }
 
+    /**
+     * @return null|TaxNumber[]
+     */
+    public function getTaxNumbers(): ?array
+    {
+        return $this->fields['taxNumbers'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|TaxNumber[] $taxNumbers
+     */
+    public function setTaxNumbers(null|array $taxNumbers): static
+    {
+        $taxNumbers = $taxNumbers !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof TaxNumber ? $value : TaxNumber::from($value)) : null,
+            $taxNumbers,
+        ) : null;
+
+        $this->fields['taxNumbers'] = $taxNumbers;
+
+        return $this;
+    }
+
+    /**
+     * @return null|OrganizationFeatures[]
+     */
+    public function getFeatures(): ?array
+    {
+        return $this->fields['features'] ?? null;
+    }
+
     public function getCreatedTime(): ?DateTimeImmutable
     {
         return $this->fields['createdTime'] ?? null;
@@ -292,7 +328,7 @@ class Organization implements JsonSerializable
     }
 
     /**
-     * @return null|SelfLink[]
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
@@ -341,11 +377,20 @@ class Organization implements JsonSerializable
         if (array_key_exists('invoiceTimeZone', $this->fields)) {
             $data['invoiceTimeZone'] = $this->fields['invoiceTimeZone'];
         }
+        if (array_key_exists('reportCurrency', $this->fields)) {
+            $data['reportCurrency'] = $this->fields['reportCurrency'];
+        }
         if (array_key_exists('questionnaire', $this->fields)) {
             $data['questionnaire'] = $this->fields['questionnaire']?->jsonSerialize();
         }
         if (array_key_exists('settings', $this->fields)) {
             $data['settings'] = $this->fields['settings']?->jsonSerialize();
+        }
+        if (array_key_exists('taxNumbers', $this->fields)) {
+            $data['taxNumbers'] = $this->fields['taxNumbers'];
+        }
+        if (array_key_exists('features', $this->fields)) {
+            $data['features'] = $this->fields['features'];
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
@@ -363,6 +408,21 @@ class Organization implements JsonSerializable
     private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * @param null|array[]|OrganizationFeatures[] $features
+     */
+    private function setFeatures(null|array $features): static
+    {
+        $features = $features !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof OrganizationFeatures ? $value : OrganizationFeatures::from($value)) : null,
+            $features,
+        ) : null;
+
+        $this->fields['features'] = $features;
 
         return $this;
     }
@@ -390,11 +450,14 @@ class Organization implements JsonSerializable
     }
 
     /**
-     * @param null|SelfLink[] $links
+     * @param null|array[]|ResourceLink[] $links
      */
     private function setLinks(null|array $links): static
     {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
+        $links = $links !== null ? array_map(
+            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+            $links,
+        ) : null;
 
         $this->fields['_links'] = $links;
 

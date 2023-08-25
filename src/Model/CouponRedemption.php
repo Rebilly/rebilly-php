@@ -92,11 +92,14 @@ class CouponRedemption implements JsonSerializable
     }
 
     /**
-     * @param null|RedemptionRestriction[] $additionalRestrictions
+     * @param null|array[]|RedemptionRestriction[] $additionalRestrictions
      */
     public function setAdditionalRestrictions(null|array $additionalRestrictions): static
     {
-        $additionalRestrictions = $additionalRestrictions !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof RedemptionRestriction ? $value : RedemptionRestriction::from($value)) : null, $additionalRestrictions) : null;
+        $additionalRestrictions = $additionalRestrictions !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof RedemptionRestriction ? $value : RedemptionRestrictionFactory::from($value)) : null,
+            $additionalRestrictions,
+        ) : null;
 
         $this->fields['additionalRestrictions'] = $additionalRestrictions;
 
@@ -119,7 +122,7 @@ class CouponRedemption implements JsonSerializable
     }
 
     /**
-     * @return null|SelfLink[]
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
@@ -198,11 +201,14 @@ class CouponRedemption implements JsonSerializable
     }
 
     /**
-     * @param null|SelfLink[] $links
+     * @param null|array[]|ResourceLink[] $links
      */
     private function setLinks(null|array $links): static
     {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
+        $links = $links !== null ? array_map(
+            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+            $links,
+        ) : null;
 
         $this->fields['_links'] = $links;
 

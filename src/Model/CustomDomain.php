@@ -23,6 +23,9 @@ class CustomDomain implements JsonSerializable
 
     public function __construct(array $data = [])
     {
+        if (array_key_exists('id', $data)) {
+            $this->setId($data['id']);
+        }
         if (array_key_exists('domain', $data)) {
             $this->setDomain($data['domain']);
         }
@@ -35,11 +38,19 @@ class CustomDomain implements JsonSerializable
         if (array_key_exists('updatedTime', $data)) {
             $this->setUpdatedTime($data['updatedTime']);
         }
+        if (array_key_exists('_links', $data)) {
+            $this->setLinks($data['_links']);
+        }
     }
 
     public static function from(array $data = []): self
     {
         return new self($data);
+    }
+
+    public function getId(): ?string
+    {
+        return $this->fields['id'] ?? null;
     }
 
     public function getDomain(): string
@@ -69,9 +80,30 @@ class CustomDomain implements JsonSerializable
         return $this->fields['updatedTime'] ?? null;
     }
 
+    /**
+     * @return null|ResourceLink[]
+     */
+    public function getLinks(): ?array
+    {
+        return $this->fields['_links'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    public function setLinks(null|array $links): static
+    {
+        $this->fields['_links'] = $links;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
+        if (array_key_exists('id', $this->fields)) {
+            $data['id'] = $this->fields['id'];
+        }
         if (array_key_exists('domain', $this->fields)) {
             $data['domain'] = $this->fields['domain'];
         }
@@ -84,8 +116,18 @@ class CustomDomain implements JsonSerializable
         if (array_key_exists('updatedTime', $this->fields)) {
             $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
         }
+        if (array_key_exists('_links', $this->fields)) {
+            $data['_links'] = $this->fields['_links'];
+        }
 
         return $data;
+    }
+
+    private function setId(null|string $id): static
+    {
+        $this->fields['id'] = $id;
+
+        return $this;
     }
 
     private function setIsVerified(null|bool $isVerified): static

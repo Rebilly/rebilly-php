@@ -18,6 +18,7 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\KycRequest;
+use Rebilly\Sdk\Model\PatchKycRequestRequest;
 use Rebilly\Sdk\Paginator;
 
 class KycRequestsApi
@@ -126,7 +127,7 @@ class KycRequestsApi
      */
     public function update(
         string $id,
-        ?KycRequest $kycRequest = null,
+        ?PatchKycRequestRequest $patchKycRequestRequest = null,
     ): KycRequest {
         $pathParams = [
             '{id}' => $id,
@@ -134,7 +135,7 @@ class KycRequestsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/kyc-requests/{id}');
 
-        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($kycRequest));
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($patchKycRequestRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

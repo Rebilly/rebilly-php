@@ -30,11 +30,14 @@ class WebhookTracking implements JsonSerializable
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
         }
-        if (array_key_exists('eventType', $data)) {
-            $this->setEventType($data['eventType']);
+        if (array_key_exists('status', $data)) {
+            $this->setStatus($data['status']);
         }
-        if (array_key_exists('entityId', $data)) {
-            $this->setEntityId($data['entityId']);
+        if (array_key_exists('duration', $data)) {
+            $this->setDuration($data['duration']);
+        }
+        if (array_key_exists('initiatedTime', $data)) {
+            $this->setInitiatedTime($data['initiatedTime']);
         }
         if (array_key_exists('url', $data)) {
             $this->setUrl($data['url']);
@@ -42,17 +45,26 @@ class WebhookTracking implements JsonSerializable
         if (array_key_exists('method', $data)) {
             $this->setMethod($data['method']);
         }
-        if (array_key_exists('headers', $data)) {
-            $this->setHeaders($data['headers']);
+        if (array_key_exists('request', $data)) {
+            $this->setRequest($data['request']);
         }
-        if (array_key_exists('responseCode', $data)) {
-            $this->setResponseCode($data['responseCode']);
+        if (array_key_exists('response', $data)) {
+            $this->setResponse($data['response']);
         }
-        if (array_key_exists('responseBody', $data)) {
-            $this->setResponseBody($data['responseBody']);
+        if (array_key_exists('requestHeaders', $data)) {
+            $this->setRequestHeaders($data['requestHeaders']);
         }
-        if (array_key_exists('payload', $data)) {
-            $this->setPayload($data['payload']);
+        if (array_key_exists('responseHeaders', $data)) {
+            $this->setResponseHeaders($data['responseHeaders']);
+        }
+        if (array_key_exists('entityId', $data)) {
+            $this->setEntityId($data['entityId']);
+        }
+        if (array_key_exists('organizationId', $data)) {
+            $this->setOrganizationId($data['organizationId']);
+        }
+        if (array_key_exists('eventType', $data)) {
+            $this->setEventType($data['eventType']);
         }
         if (array_key_exists('source', $data)) {
             $this->setSource($data['source']);
@@ -62,9 +74,6 @@ class WebhookTracking implements JsonSerializable
         }
         if (array_key_exists('sentTime', $data)) {
             $this->setSentTime($data['sentTime']);
-        }
-        if (array_key_exists('initiatedTime', $data)) {
-            $this->setInitiatedTime($data['initiatedTime']);
         }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
@@ -94,32 +103,33 @@ class WebhookTracking implements JsonSerializable
         return $this;
     }
 
-    public function getEventType(): ?EventType
+    public function getStatus(): ?int
     {
-        return $this->fields['eventType'] ?? null;
+        return $this->fields['status'] ?? null;
     }
 
-    public function setEventType(null|EventType|string $eventType): static
+    public function setStatus(null|int $status): static
     {
-        if ($eventType !== null && !($eventType instanceof EventType)) {
-            $eventType = EventType::from($eventType);
-        }
-
-        $this->fields['eventType'] = $eventType;
+        $this->fields['status'] = $status;
 
         return $this;
     }
 
-    public function getEntityId(): ?string
+    public function getDuration(): ?int
     {
-        return $this->fields['entityId'] ?? null;
+        return $this->fields['duration'] ?? null;
     }
 
-    public function setEntityId(null|string $entityId): static
+    public function setDuration(null|int $duration): static
     {
-        $this->fields['entityId'] = $entityId;
+        $this->fields['duration'] = $duration;
 
         return $this;
+    }
+
+    public function getInitiatedTime(): ?DateTimeImmutable
+    {
+        return $this->fields['initiatedTime'] ?? null;
     }
 
     public function getUrl(): ?string
@@ -146,71 +156,95 @@ class WebhookTracking implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @return null|array<string,string>
-     */
-    public function getHeaders(): ?array
+    public function getRequest(): ?string
     {
-        return $this->fields['headers'] ?? null;
+        return $this->fields['request'] ?? null;
     }
 
-    /**
-     * @param null|array<string,string> $headers
-     */
-    public function setHeaders(null|array $headers): static
+    public function setRequest(null|string $request): static
     {
-        $this->fields['headers'] = $headers;
+        $this->fields['request'] = $request;
 
         return $this;
     }
 
-    public function getResponseCode(): ?int
+    public function getResponse(): ?string
     {
-        return $this->fields['responseCode'] ?? null;
+        return $this->fields['response'] ?? null;
     }
 
-    public function setResponseCode(null|int $responseCode): static
+    public function setResponse(null|string $response): static
     {
-        $this->fields['responseCode'] = $responseCode;
+        $this->fields['response'] = $response;
 
         return $this;
     }
 
-    public function getResponseBody(): ?string
+    public function getRequestHeaders(): ?array
     {
-        return $this->fields['responseBody'] ?? null;
+        return $this->fields['requestHeaders'] ?? null;
     }
 
-    public function setResponseBody(null|string $responseBody): static
+    public function setRequestHeaders(null|array $requestHeaders): static
     {
-        $this->fields['responseBody'] = $responseBody;
+        $this->fields['requestHeaders'] = $requestHeaders;
 
         return $this;
     }
 
-    public function getPayload(): ?string
+    public function getResponseHeaders(): ?array
     {
-        return $this->fields['payload'] ?? null;
+        return $this->fields['responseHeaders'] ?? null;
     }
 
-    public function setPayload(null|string $payload): static
+    public function setResponseHeaders(null|array $responseHeaders): static
     {
-        $this->fields['payload'] = $payload;
+        $this->fields['responseHeaders'] = $responseHeaders;
 
         return $this;
     }
 
-    /**
-     * @psalm-return self::SOURCE_*|null $source
-     */
+    public function getEntityId(): ?string
+    {
+        return $this->fields['entityId'] ?? null;
+    }
+
+    public function setEntityId(null|string $entityId): static
+    {
+        $this->fields['entityId'] = $entityId;
+
+        return $this;
+    }
+
+    public function getOrganizationId(): ?string
+    {
+        return $this->fields['organizationId'] ?? null;
+    }
+
+    public function setOrganizationId(null|string $organizationId): static
+    {
+        $this->fields['organizationId'] = $organizationId;
+
+        return $this;
+    }
+
+    public function getEventType(): ?string
+    {
+        return $this->fields['eventType'] ?? null;
+    }
+
+    public function setEventType(null|string $eventType): static
+    {
+        $this->fields['eventType'] = $eventType;
+
+        return $this;
+    }
+
     public function getSource(): ?string
     {
         return $this->fields['source'] ?? null;
     }
 
-    /**
-     * @psalm-param self::SOURCE_*|null $source
-     */
     public function setSource(null|string $source): static
     {
         $this->fields['source'] = $source;
@@ -235,33 +269,6 @@ class WebhookTracking implements JsonSerializable
         return $this->fields['sentTime'] ?? null;
     }
 
-    public function setSentTime(null|DateTimeImmutable|string $sentTime): static
-    {
-        if ($sentTime !== null && !($sentTime instanceof DateTimeImmutable)) {
-            $sentTime = new DateTimeImmutable($sentTime);
-        }
-
-        $this->fields['sentTime'] = $sentTime;
-
-        return $this;
-    }
-
-    public function getInitiatedTime(): ?DateTimeImmutable
-    {
-        return $this->fields['initiatedTime'] ?? null;
-    }
-
-    public function setInitiatedTime(null|DateTimeImmutable|string $initiatedTime): static
-    {
-        if ($initiatedTime !== null && !($initiatedTime instanceof DateTimeImmutable)) {
-            $initiatedTime = new DateTimeImmutable($initiatedTime);
-        }
-
-        $this->fields['initiatedTime'] = $initiatedTime;
-
-        return $this;
-    }
-
     public function getCreatedTime(): ?DateTimeImmutable
     {
         return $this->fields['createdTime'] ?? null;
@@ -273,11 +280,21 @@ class WebhookTracking implements JsonSerializable
     }
 
     /**
-     * @return null|SelfLink[]
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    public function setLinks(null|array $links): static
+    {
+        $this->fields['_links'] = $links;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -286,11 +303,14 @@ class WebhookTracking implements JsonSerializable
         if (array_key_exists('id', $this->fields)) {
             $data['id'] = $this->fields['id'];
         }
-        if (array_key_exists('eventType', $this->fields)) {
-            $data['eventType'] = $this->fields['eventType']?->value;
+        if (array_key_exists('status', $this->fields)) {
+            $data['status'] = $this->fields['status'];
         }
-        if (array_key_exists('entityId', $this->fields)) {
-            $data['entityId'] = $this->fields['entityId'];
+        if (array_key_exists('duration', $this->fields)) {
+            $data['duration'] = $this->fields['duration'];
+        }
+        if (array_key_exists('initiatedTime', $this->fields)) {
+            $data['initiatedTime'] = $this->fields['initiatedTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('url', $this->fields)) {
             $data['url'] = $this->fields['url'];
@@ -298,17 +318,26 @@ class WebhookTracking implements JsonSerializable
         if (array_key_exists('method', $this->fields)) {
             $data['method'] = $this->fields['method'];
         }
-        if (array_key_exists('headers', $this->fields)) {
-            $data['headers'] = $this->fields['headers'];
+        if (array_key_exists('request', $this->fields)) {
+            $data['request'] = $this->fields['request'];
         }
-        if (array_key_exists('responseCode', $this->fields)) {
-            $data['responseCode'] = $this->fields['responseCode'];
+        if (array_key_exists('response', $this->fields)) {
+            $data['response'] = $this->fields['response'];
         }
-        if (array_key_exists('responseBody', $this->fields)) {
-            $data['responseBody'] = $this->fields['responseBody'];
+        if (array_key_exists('requestHeaders', $this->fields)) {
+            $data['requestHeaders'] = $this->fields['requestHeaders'];
         }
-        if (array_key_exists('payload', $this->fields)) {
-            $data['payload'] = $this->fields['payload'];
+        if (array_key_exists('responseHeaders', $this->fields)) {
+            $data['responseHeaders'] = $this->fields['responseHeaders'];
+        }
+        if (array_key_exists('entityId', $this->fields)) {
+            $data['entityId'] = $this->fields['entityId'];
+        }
+        if (array_key_exists('organizationId', $this->fields)) {
+            $data['organizationId'] = $this->fields['organizationId'];
+        }
+        if (array_key_exists('eventType', $this->fields)) {
+            $data['eventType'] = $this->fields['eventType'];
         }
         if (array_key_exists('source', $this->fields)) {
             $data['source'] = $this->fields['source'];
@@ -318,9 +347,6 @@ class WebhookTracking implements JsonSerializable
         }
         if (array_key_exists('sentTime', $this->fields)) {
             $data['sentTime'] = $this->fields['sentTime']?->format(DateTimeInterface::RFC3339);
-        }
-        if (array_key_exists('initiatedTime', $this->fields)) {
-            $data['initiatedTime'] = $this->fields['initiatedTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
@@ -333,6 +359,28 @@ class WebhookTracking implements JsonSerializable
         }
 
         return $data;
+    }
+
+    private function setInitiatedTime(null|DateTimeImmutable|string $initiatedTime): static
+    {
+        if ($initiatedTime !== null && !($initiatedTime instanceof DateTimeImmutable)) {
+            $initiatedTime = new DateTimeImmutable($initiatedTime);
+        }
+
+        $this->fields['initiatedTime'] = $initiatedTime;
+
+        return $this;
+    }
+
+    private function setSentTime(null|DateTimeImmutable|string $sentTime): static
+    {
+        if ($sentTime !== null && !($sentTime instanceof DateTimeImmutable)) {
+            $sentTime = new DateTimeImmutable($sentTime);
+        }
+
+        $this->fields['sentTime'] = $sentTime;
+
+        return $this;
     }
 
     private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
@@ -353,18 +401,6 @@ class WebhookTracking implements JsonSerializable
         }
 
         $this->fields['updatedTime'] = $updatedTime;
-
-        return $this;
-    }
-
-    /**
-     * @param null|SelfLink[] $links
-     */
-    private function setLinks(null|array $links): static
-    {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
-
-        $this->fields['_links'] = $links;
 
         return $this;
     }

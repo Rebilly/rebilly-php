@@ -15,8 +15,10 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class ThreeDSecureIO3dsServer implements JsonSerializable
+class ThreeDSecureIO3dsServer implements TestProcessor3dsServers, JsonSerializable
 {
+    public const NAME_THREE_D_SECURE_IO3DS_SERVER = 'ThreeDSecureIO3dsServer';
+
     public const TRANSACTION_TYPE__01 = '01';
 
     public const TRANSACTION_TYPE__03 = '03';
@@ -53,11 +55,23 @@ class ThreeDSecureIO3dsServer implements JsonSerializable
 
     public function __construct(array $data = [])
     {
+        if (array_key_exists('name', $data)) {
+            $this->setName($data['name']);
+        }
         if (array_key_exists('acquirerMerchantIdVisa', $data)) {
             $this->setAcquirerMerchantIdVisa($data['acquirerMerchantIdVisa']);
         }
         if (array_key_exists('acquirerMerchantIdMastercard', $data)) {
             $this->setAcquirerMerchantIdMastercard($data['acquirerMerchantIdMastercard']);
+        }
+        if (array_key_exists('acquirerMerchantIdAmex', $data)) {
+            $this->setAcquirerMerchantIdAmex($data['acquirerMerchantIdAmex']);
+        }
+        if (array_key_exists('acquirerMerchantIdDiscover', $data)) {
+            $this->setAcquirerMerchantIdDiscover($data['acquirerMerchantIdDiscover']);
+        }
+        if (array_key_exists('acquirerMerchantIdJcb', $data)) {
+            $this->setAcquirerMerchantIdJcb($data['acquirerMerchantIdJcb']);
         }
         if (array_key_exists('merchantName', $data)) {
             $this->setMerchantName($data['merchantName']);
@@ -68,17 +82,20 @@ class ThreeDSecureIO3dsServer implements JsonSerializable
         if (array_key_exists('merchantAcquirerBinMastercard', $data)) {
             $this->setMerchantAcquirerBinMastercard($data['merchantAcquirerBinMastercard']);
         }
+        if (array_key_exists('merchantAcquirerBinAmex', $data)) {
+            $this->setMerchantAcquirerBinAmex($data['merchantAcquirerBinAmex']);
+        }
+        if (array_key_exists('merchantAcquirerBinDiscover', $data)) {
+            $this->setMerchantAcquirerBinDiscover($data['merchantAcquirerBinDiscover']);
+        }
+        if (array_key_exists('merchantAcquirerBinJcb', $data)) {
+            $this->setMerchantAcquirerBinJcb($data['merchantAcquirerBinJcb']);
+        }
         if (array_key_exists('merchantCountry', $data)) {
             $this->setMerchantCountry($data['merchantCountry']);
         }
         if (array_key_exists('merchantUrl', $data)) {
             $this->setMerchantUrl($data['merchantUrl']);
-        }
-        if (array_key_exists('v1', $data)) {
-            $this->setV1($data['v1']);
-        }
-        if (array_key_exists('v2', $data)) {
-            $this->setV2($data['v2']);
         }
         if (array_key_exists('transactionType', $data)) {
             $this->setTransactionType($data['transactionType']);
@@ -97,6 +114,18 @@ class ThreeDSecureIO3dsServer implements JsonSerializable
     public static function from(array $data = []): self
     {
         return new self($data);
+    }
+
+    public function getName(): string
+    {
+        return $this->fields['name'];
+    }
+
+    public function setName(string $name): static
+    {
+        $this->fields['name'] = $name;
+
+        return $this;
     }
 
     public function getAcquirerMerchantIdVisa(): string
@@ -119,6 +148,42 @@ class ThreeDSecureIO3dsServer implements JsonSerializable
     public function setAcquirerMerchantIdMastercard(string $acquirerMerchantIdMastercard): static
     {
         $this->fields['acquirerMerchantIdMastercard'] = $acquirerMerchantIdMastercard;
+
+        return $this;
+    }
+
+    public function getAcquirerMerchantIdAmex(): ?string
+    {
+        return $this->fields['acquirerMerchantIdAmex'] ?? null;
+    }
+
+    public function setAcquirerMerchantIdAmex(null|string $acquirerMerchantIdAmex): static
+    {
+        $this->fields['acquirerMerchantIdAmex'] = $acquirerMerchantIdAmex;
+
+        return $this;
+    }
+
+    public function getAcquirerMerchantIdDiscover(): ?string
+    {
+        return $this->fields['acquirerMerchantIdDiscover'] ?? null;
+    }
+
+    public function setAcquirerMerchantIdDiscover(null|string $acquirerMerchantIdDiscover): static
+    {
+        $this->fields['acquirerMerchantIdDiscover'] = $acquirerMerchantIdDiscover;
+
+        return $this;
+    }
+
+    public function getAcquirerMerchantIdJcb(): ?string
+    {
+        return $this->fields['acquirerMerchantIdJcb'] ?? null;
+    }
+
+    public function setAcquirerMerchantIdJcb(null|string $acquirerMerchantIdJcb): static
+    {
+        $this->fields['acquirerMerchantIdJcb'] = $acquirerMerchantIdJcb;
 
         return $this;
     }
@@ -159,6 +224,42 @@ class ThreeDSecureIO3dsServer implements JsonSerializable
         return $this;
     }
 
+    public function getMerchantAcquirerBinAmex(): ?string
+    {
+        return $this->fields['merchantAcquirerBinAmex'] ?? null;
+    }
+
+    public function setMerchantAcquirerBinAmex(null|string $merchantAcquirerBinAmex): static
+    {
+        $this->fields['merchantAcquirerBinAmex'] = $merchantAcquirerBinAmex;
+
+        return $this;
+    }
+
+    public function getMerchantAcquirerBinDiscover(): ?string
+    {
+        return $this->fields['merchantAcquirerBinDiscover'] ?? null;
+    }
+
+    public function setMerchantAcquirerBinDiscover(null|string $merchantAcquirerBinDiscover): static
+    {
+        $this->fields['merchantAcquirerBinDiscover'] = $merchantAcquirerBinDiscover;
+
+        return $this;
+    }
+
+    public function getMerchantAcquirerBinJcb(): ?string
+    {
+        return $this->fields['merchantAcquirerBinJcb'] ?? null;
+    }
+
+    public function setMerchantAcquirerBinJcb(null|string $merchantAcquirerBinJcb): static
+    {
+        $this->fields['merchantAcquirerBinJcb'] = $merchantAcquirerBinJcb;
+
+        return $this;
+    }
+
     public function getMerchantCountry(): string
     {
         return $this->fields['merchantCountry'];
@@ -183,42 +284,12 @@ class ThreeDSecureIO3dsServer implements JsonSerializable
         return $this;
     }
 
-    public function getV1(): ?bool
+    public function getTransactionType(): string
     {
-        return $this->fields['v1'] ?? null;
+        return $this->fields['transactionType'];
     }
 
-    public function setV1(null|bool $v1): static
-    {
-        $this->fields['v1'] = $v1;
-
-        return $this;
-    }
-
-    public function getV2(): ?bool
-    {
-        return $this->fields['v2'] ?? null;
-    }
-
-    public function setV2(null|bool $v2): static
-    {
-        $this->fields['v2'] = $v2;
-
-        return $this;
-    }
-
-    /**
-     * @psalm-return self::TRANSACTION_TYPE_*|null $transactionType
-     */
-    public function getTransactionType(): ?string
-    {
-        return $this->fields['transactionType'] ?? null;
-    }
-
-    /**
-     * @psalm-param self::TRANSACTION_TYPE_*|null $transactionType
-     */
-    public function setTransactionType(null|string $transactionType): static
+    public function setTransactionType(string $transactionType): static
     {
         $this->fields['transactionType'] = $transactionType;
 
@@ -249,17 +320,11 @@ class ThreeDSecureIO3dsServer implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-return self::THREE_RI_IND_*|null $threeRIInd
-     */
     public function getThreeRIInd(): ?string
     {
         return $this->fields['threeRIInd'] ?? null;
     }
 
-    /**
-     * @psalm-param self::THREE_RI_IND_*|null $threeRIInd
-     */
     public function setThreeRIInd(null|string $threeRIInd): static
     {
         $this->fields['threeRIInd'] = $threeRIInd;
@@ -270,11 +335,23 @@ class ThreeDSecureIO3dsServer implements JsonSerializable
     public function jsonSerialize(): array
     {
         $data = [];
+        if (array_key_exists('name', $this->fields)) {
+            $data['name'] = $this->fields['name'];
+        }
         if (array_key_exists('acquirerMerchantIdVisa', $this->fields)) {
             $data['acquirerMerchantIdVisa'] = $this->fields['acquirerMerchantIdVisa'];
         }
         if (array_key_exists('acquirerMerchantIdMastercard', $this->fields)) {
             $data['acquirerMerchantIdMastercard'] = $this->fields['acquirerMerchantIdMastercard'];
+        }
+        if (array_key_exists('acquirerMerchantIdAmex', $this->fields)) {
+            $data['acquirerMerchantIdAmex'] = $this->fields['acquirerMerchantIdAmex'];
+        }
+        if (array_key_exists('acquirerMerchantIdDiscover', $this->fields)) {
+            $data['acquirerMerchantIdDiscover'] = $this->fields['acquirerMerchantIdDiscover'];
+        }
+        if (array_key_exists('acquirerMerchantIdJcb', $this->fields)) {
+            $data['acquirerMerchantIdJcb'] = $this->fields['acquirerMerchantIdJcb'];
         }
         if (array_key_exists('merchantName', $this->fields)) {
             $data['merchantName'] = $this->fields['merchantName'];
@@ -285,17 +362,20 @@ class ThreeDSecureIO3dsServer implements JsonSerializable
         if (array_key_exists('merchantAcquirerBinMastercard', $this->fields)) {
             $data['merchantAcquirerBinMastercard'] = $this->fields['merchantAcquirerBinMastercard'];
         }
+        if (array_key_exists('merchantAcquirerBinAmex', $this->fields)) {
+            $data['merchantAcquirerBinAmex'] = $this->fields['merchantAcquirerBinAmex'];
+        }
+        if (array_key_exists('merchantAcquirerBinDiscover', $this->fields)) {
+            $data['merchantAcquirerBinDiscover'] = $this->fields['merchantAcquirerBinDiscover'];
+        }
+        if (array_key_exists('merchantAcquirerBinJcb', $this->fields)) {
+            $data['merchantAcquirerBinJcb'] = $this->fields['merchantAcquirerBinJcb'];
+        }
         if (array_key_exists('merchantCountry', $this->fields)) {
             $data['merchantCountry'] = $this->fields['merchantCountry'];
         }
         if (array_key_exists('merchantUrl', $this->fields)) {
             $data['merchantUrl'] = $this->fields['merchantUrl'];
-        }
-        if (array_key_exists('v1', $this->fields)) {
-            $data['v1'] = $this->fields['v1'];
-        }
-        if (array_key_exists('v2', $this->fields)) {
-            $data['v2'] = $this->fields['v2'];
         }
         if (array_key_exists('transactionType', $this->fields)) {
             $data['transactionType'] = $this->fields['transactionType'];

@@ -27,6 +27,9 @@ class MembershipUser implements JsonSerializable
         if (array_key_exists('name', $data)) {
             $this->setName($data['name']);
         }
+        if (array_key_exists('email', $data)) {
+            $this->setEmail($data['email']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -58,6 +61,18 @@ class MembershipUser implements JsonSerializable
         return $this;
     }
 
+    public function getEmail(): ?string
+    {
+        return $this->fields['email'] ?? null;
+    }
+
+    public function setEmail(null|string $email): static
+    {
+        $this->fields['email'] = $email;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -66,6 +81,9 @@ class MembershipUser implements JsonSerializable
         }
         if (array_key_exists('name', $this->fields)) {
             $data['name'] = $this->fields['name'];
+        }
+        if (array_key_exists('email', $this->fields)) {
+            $data['email'] = $this->fields['email'];
         }
 
         return $data;

@@ -18,7 +18,7 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\Fee;
-use Rebilly\Sdk\Model\FeePatch;
+use Rebilly\Sdk\Model\PatchFee;
 use Rebilly\Sdk\Paginator;
 
 class FeesApi
@@ -40,6 +40,19 @@ class FeesApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Fee::from($data);
+    }
+
+    public function delete(
+        string $id,
+    ): void {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/fees/{id}');
+
+        $request = new Request('DELETE', $uri);
+        $this->client->send($request);
     }
 
     /**
@@ -67,10 +80,14 @@ class FeesApi
     public function getAll(
         ?int $limit = null,
         ?int $offset = null,
+        ?string $filter = null,
+        ?array $sort = null,
     ): Collection {
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
+            'filter' => $filter,
+            'sort' => $sort,
         ];
         $uri = '/fees?' . http_build_query($queryParams);
 
@@ -89,10 +106,14 @@ class FeesApi
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
+        ?string $filter = null,
+        ?array $sort = null,
     ): Paginator {
         $closure = fn (?int $limit, ?int $offset): Collection => $this->getAll(
             limit: $limit,
             offset: $offset,
+            filter: $filter,
+            sort: $sort,
         );
 
         return new Paginator(
@@ -106,7 +127,7 @@ class FeesApi
      */
     public function patch(
         string $id,
-        FeePatch $feePatch,
+        PatchFee $patchFee,
     ): Fee {
         $pathParams = [
             '{id}' => $id,
@@ -114,7 +135,7 @@ class FeesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/fees/{id}');
 
-        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($feePatch));
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($patchFee));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

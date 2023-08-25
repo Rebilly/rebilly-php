@@ -40,11 +40,14 @@ class ReportRetentionPercentage implements JsonSerializable
     }
 
     /**
-     * @param null|ReportRetentionPercentageData[] $data
+     * @param null|array[]|ReportRetentionPercentageData[] $data
      */
     public function setData(null|array $data): static
     {
-        $data = $data !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ReportRetentionPercentageData ? $value : ReportRetentionPercentageData::from($value)) : null, $data) : null;
+        $data = $data !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof ReportRetentionPercentageData ? $value : ReportRetentionPercentageData::from($value)) : null,
+            $data,
+        ) : null;
 
         $this->fields['data'] = $data;
 

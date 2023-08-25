@@ -18,10 +18,10 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\PatchTransactionRequest;
+use Rebilly\Sdk\Model\PostTransactionRequest;
 use Rebilly\Sdk\Model\Transaction;
 use Rebilly\Sdk\Model\TransactionQuery;
 use Rebilly\Sdk\Model\TransactionRefund;
-use Rebilly\Sdk\Model\TransactionRequest;
 use Rebilly\Sdk\Model\TransactionTimeline;
 use Rebilly\Sdk\Model\TransactionUpdate;
 use Rebilly\Sdk\Paginator;
@@ -36,7 +36,7 @@ class TransactionsApi
      * @return Transaction
      */
     public function create(
-        TransactionRequest $transactionRequest,
+        PostTransactionRequest $postTransactionRequest,
         ?string $expand = null,
     ): Transaction {
         $queryParams = [
@@ -44,7 +44,7 @@ class TransactionsApi
         ];
         $uri = '/transactions?' . http_build_query($queryParams);
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($transactionRequest));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($postTransactionRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -173,6 +173,8 @@ class TransactionsApi
         ?int $limit = null,
         ?int $offset = null,
         ?string $filter = null,
+        ?array $sort = null,
+        ?string $q = null,
     ): Collection {
         $pathParams = [
             '{id}' => $id,
@@ -182,6 +184,8 @@ class TransactionsApi
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
+            'sort' => $sort,
+            'q' => $q,
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/transactions/{id}/timeline?') . http_build_query($queryParams);
 
@@ -202,12 +206,16 @@ class TransactionsApi
         ?int $limit = null,
         ?int $offset = null,
         ?string $filter = null,
+        ?array $sort = null,
+        ?string $q = null,
     ): Paginator {
         $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllTimelineMessages(
             id: $id,
             limit: $limit,
             offset: $offset,
             filter: $filter,
+            sort: $sort,
+            q: $q,
         );
 
         return new Paginator(

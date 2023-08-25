@@ -48,15 +48,15 @@ class Edd implements JsonSerializable
         return new self($data);
     }
 
-    public function getParsedScore(): ?EddData
+    public function getParsedScore(): ?EddParsedScore
     {
         return $this->fields['parsedScore'] ?? null;
     }
 
-    public function setParsedScore(null|EddData|array $parsedScore): static
+    public function setParsedScore(null|EddParsedScore|array $parsedScore): static
     {
-        if ($parsedScore !== null && !($parsedScore instanceof EddData)) {
-            $parsedScore = EddData::from($parsedScore);
+        if ($parsedScore !== null && !($parsedScore instanceof EddParsedScore)) {
+            $parsedScore = EddParsedScore::from($parsedScore);
         }
 
         $this->fields['parsedScore'] = $parsedScore;
@@ -64,15 +64,15 @@ class Edd implements JsonSerializable
         return $this;
     }
 
-    public function getScore(): ?EddData
+    public function getScore(): ?EddScore
     {
         return $this->fields['score'] ?? null;
     }
 
-    public function setScore(null|EddData|array $score): static
+    public function setScore(null|EddScore|array $score): static
     {
-        if ($score !== null && !($score instanceof EddData)) {
-            $score = EddData::from($score);
+        if ($score !== null && !($score instanceof EddScore)) {
+            $score = EddScore::from($score);
         }
 
         $this->fields['score'] = $score;
@@ -107,7 +107,7 @@ class Edd implements JsonSerializable
     }
 
     /**
-     * @return null|array<EddArrestSearchResultLink|EddBankruptcySearchResultLink|EddFraudSearchResultLink|EddOccupationSearchResultLink|SelfLink>
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
@@ -162,11 +162,14 @@ class Edd implements JsonSerializable
     }
 
     /**
-     * @param null|array<EddArrestSearchResultLink|EddBankruptcySearchResultLink|EddFraudSearchResultLink|EddOccupationSearchResultLink|SelfLink> $links
+     * @param null|array[]|ResourceLink[] $links
      */
     private function setLinks(null|array $links): static
     {
-        $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
+        $links = $links !== null ? array_map(
+            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+            $links,
+        ) : null;
 
         $this->fields['_links'] = $links;
 

@@ -95,21 +95,13 @@ class Role implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @return Acl[]
-     */
-    public function getAcl(): array
+    public function getAcl(): Acl
     {
         return $this->fields['acl'];
     }
 
-    /**
-     * @param Acl[] $acl
-     */
-    public function setAcl(array $acl): static
+    public function setAcl(Acl $acl): static
     {
-        $acl = array_map(fn ($value) => $value !== null ? ($value instanceof Acl ? $value : Acl::from($value)) : null, $acl);
-
         $this->fields['acl'] = $acl;
 
         return $this;
@@ -128,7 +120,10 @@ class Role implements JsonSerializable
      */
     public function setAllowedIps(null|array $allowedIps): static
     {
-        $allowedIps = $allowedIps !== null ? array_map(fn ($value) => $value ?? null, $allowedIps) : null;
+        $allowedIps = $allowedIps !== null ? array_map(
+            fn ($value) => $value,
+            $allowedIps,
+        ) : null;
 
         $this->fields['allowedIps'] = $allowedIps;
 
@@ -156,7 +151,10 @@ class Role implements JsonSerializable
      */
     public function setJuniorIds(null|array $juniorIds): static
     {
-        $juniorIds = $juniorIds !== null ? array_map(fn ($value) => $value ?? null, $juniorIds) : null;
+        $juniorIds = $juniorIds !== null ? array_map(
+            fn ($value) => $value,
+            $juniorIds,
+        ) : null;
 
         $this->fields['juniorIds'] = $juniorIds;
 
@@ -179,19 +177,27 @@ class Role implements JsonSerializable
     }
 
     /**
-     * @return null|array<JuniorRolesLink|SelfLink|SeniorRolesLink>
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
     }
 
-    /**
-     * @return null|array{juniors:Role[]}
-     */
-    public function getEmbedded(): ?array
+    public function getEmbedded(): ?RoleEmbedded
     {
         return $this->fields['_embedded'] ?? null;
+    }
+
+    public function setEmbedded(null|RoleEmbedded|array $embedded): static
+    {
+        if ($embedded !== null && !($embedded instanceof RoleEmbedded)) {
+            $embedded = RoleEmbedded::from($embedded);
+        }
+
+        $this->fields['_embedded'] = $embedded;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -231,7 +237,7 @@ class Role implements JsonSerializable
             $data['_links'] = $this->fields['_links'];
         }
         if (array_key_exists('_embedded', $this->fields)) {
-            $data['_embedded'] = $this->fields['_embedded'];
+            $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();
         }
 
         return $data;
@@ -249,7 +255,10 @@ class Role implements JsonSerializable
      */
     private function setSeniorIds(null|array $seniorIds): static
     {
-        $seniorIds = $seniorIds !== null ? array_map(fn ($value) => $value ?? null, $seniorIds) : null;
+        $seniorIds = $seniorIds !== null ? array_map(
+            fn ($value) => $value,
+            $seniorIds,
+        ) : null;
 
         $this->fields['seniorIds'] = $seniorIds;
 
@@ -286,27 +295,16 @@ class Role implements JsonSerializable
     }
 
     /**
-     * @param null|array<JuniorRolesLink|SelfLink|SeniorRolesLink> $links
+     * @param null|array[]|ResourceLink[] $links
      */
     private function setLinks(null|array $links): static
     {
-        $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
+        $links = $links !== null ? array_map(
+            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+            $links,
+        ) : null;
 
         $this->fields['_links'] = $links;
-
-        return $this;
-    }
-
-    /**
-     * @param null|array{juniors:Role[]} $embedded
-     */
-    private function setEmbedded(null|array $embedded): static
-    {
-        if ($embedded !== null) {
-            $embedded['juniors'] = isset($embedded['juniors']) ? array_map(fn ($value) => $value !== null ? ($value instanceof self ? $value : self::from($value)) : null, $embedded['juniors']) : null;
-        }
-
-        $this->fields['_embedded'] = $embedded;
 
         return $this;
     }

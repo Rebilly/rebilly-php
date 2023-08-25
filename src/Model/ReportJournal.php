@@ -52,17 +52,11 @@ class ReportJournal implements JsonSerializable
         return new self($data);
     }
 
-    /**
-     * @psalm-return self::AGGREGATION_FIELD_*|null $aggregationField
-     */
     public function getAggregationField(): ?string
     {
         return $this->fields['aggregationField'] ?? null;
     }
 
-    /**
-     * @psalm-param self::AGGREGATION_FIELD_*|null $aggregationField
-     */
     public function setAggregationField(null|string $aggregationField): static
     {
         $this->fields['aggregationField'] = $aggregationField;
@@ -127,11 +121,14 @@ class ReportJournal implements JsonSerializable
     }
 
     /**
-     * @param null|ReportJournalData[] $data
+     * @param null|array[]|ReportJournalData[] $data
      */
     public function setData(null|array $data): static
     {
-        $data = $data !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ReportJournalData ? $value : ReportJournalData::from($value)) : null, $data) : null;
+        $data = $data !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof ReportJournalData ? $value : ReportJournalData::from($value)) : null,
+            $data,
+        ) : null;
 
         $this->fields['data'] = $data;
 

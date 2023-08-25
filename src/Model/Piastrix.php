@@ -29,9 +29,6 @@ class Piastrix extends GatewayAccount
         if (array_key_exists('settings', $data)) {
             $this->setSettings($data['settings']);
         }
-        if (array_key_exists('threeDSecureServer', $data)) {
-            $this->setThreeDSecureServer($data['threeDSecureServer']);
-        }
     }
 
     public static function from(array $data = []): self
@@ -71,22 +68,6 @@ class Piastrix extends GatewayAccount
         return $this;
     }
 
-    public function getThreeDSecureServer(): ?Piastrix3dsServers
-    {
-        return $this->fields['threeDSecureServer'] ?? null;
-    }
-
-    public function setThreeDSecureServer(null|Piastrix3dsServers|array $threeDSecureServer): static
-    {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Piastrix3dsServers)) {
-            $threeDSecureServer = Piastrix3dsServers::from($threeDSecureServer);
-        }
-
-        $this->fields['threeDSecureServer'] = $threeDSecureServer;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [];
@@ -95,9 +76,6 @@ class Piastrix extends GatewayAccount
         }
         if (array_key_exists('settings', $this->fields)) {
             $data['settings'] = $this->fields['settings']?->jsonSerialize();
-        }
-        if (array_key_exists('threeDSecureServer', $this->fields)) {
-            $data['threeDSecureServer'] = $this->fields['threeDSecureServer']?->jsonSerialize();
         }
 
         return parent::jsonSerialize() + $data;

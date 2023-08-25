@@ -77,17 +77,11 @@ class WorldpaySettings implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-return self::MERCHANT_INITIATED_REASON_*|null $merchantInitiatedReason
-     */
     public function getMerchantInitiatedReason(): ?string
     {
         return $this->fields['merchantInitiatedReason'] ?? null;
     }
 
-    /**
-     * @psalm-param self::MERCHANT_INITIATED_REASON_*|null $merchantInitiatedReason
-     */
     public function setMerchantInitiatedReason(null|string $merchantInitiatedReason): static
     {
         $this->fields['merchantInitiatedReason'] = $merchantInitiatedReason;

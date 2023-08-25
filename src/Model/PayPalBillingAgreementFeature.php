@@ -17,7 +17,7 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
 
-class PayPalBillingAgreementFeature implements JsonSerializable
+class PayPalBillingAgreementFeature implements ReadyToPayPayPalMethodFeature, JsonSerializable
 {
     public const NAME_PAY_PAL_BILLING_AGREEMENT = 'PayPal billing agreement';
 
@@ -47,17 +47,11 @@ class PayPalBillingAgreementFeature implements JsonSerializable
         return new self($data);
     }
 
-    /**
-     * @psalm-return self::NAME_* $name
-     */
     public function getName(): string
     {
         return $this->fields['name'];
     }
 
-    /**
-     * @psalm-param self::NAME_* $name
-     */
     public function setName(string $name): static
     {
         $this->fields['name'] = $name;

@@ -27,6 +27,8 @@ class ProfileMfa implements JsonSerializable
 
     public const TYPE_GUARDIAN = 'guardian';
 
+    public const TYPE_NULL = 'null';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -50,17 +52,11 @@ class ProfileMfa implements JsonSerializable
         return new self($data);
     }
 
-    /**
-     * @psalm-return self::STATUS_*|null $status
-     */
     public function getStatus(): ?string
     {
         return $this->fields['status'] ?? null;
     }
 
-    /**
-     * @psalm-param self::STATUS_*|null $status
-     */
     public function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
@@ -68,17 +64,11 @@ class ProfileMfa implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-return self::TYPE_*|null $type
-     */
     public function getType(): ?string
     {
         return $this->fields['type'] ?? null;
     }
 
-    /**
-     * @psalm-param self::TYPE_*|null $type
-     */
     public function setType(null|string $type): static
     {
         $this->fields['type'] = $type;
@@ -91,19 +81,8 @@ class ProfileMfa implements JsonSerializable
         return $this->fields['lastAuthTime'] ?? null;
     }
 
-    public function setLastAuthTime(null|DateTimeImmutable|string $lastAuthTime): static
-    {
-        if ($lastAuthTime !== null && !($lastAuthTime instanceof DateTimeImmutable)) {
-            $lastAuthTime = new DateTimeImmutable($lastAuthTime);
-        }
-
-        $this->fields['lastAuthTime'] = $lastAuthTime;
-
-        return $this;
-    }
-
     /**
-     * @return null|array<EnrollmentLink|SelfLink>
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
@@ -129,12 +108,26 @@ class ProfileMfa implements JsonSerializable
         return $data;
     }
 
+    private function setLastAuthTime(null|DateTimeImmutable|string $lastAuthTime): static
+    {
+        if ($lastAuthTime !== null && !($lastAuthTime instanceof DateTimeImmutable)) {
+            $lastAuthTime = new DateTimeImmutable($lastAuthTime);
+        }
+
+        $this->fields['lastAuthTime'] = $lastAuthTime;
+
+        return $this;
+    }
+
     /**
-     * @param null|array<EnrollmentLink|SelfLink> $links
+     * @param null|array[]|ResourceLink[] $links
      */
     private function setLinks(null|array $links): static
     {
-        $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
+        $links = $links !== null ? array_map(
+            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+            $links,
+        ) : null;
 
         $this->fields['_links'] = $links;
 

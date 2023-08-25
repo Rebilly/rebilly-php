@@ -30,6 +30,9 @@ class PagsmileCredentials implements JsonSerializable
         if (array_key_exists('secretKey', $data)) {
             $this->setSecretKey($data['secretKey']);
         }
+        if (array_key_exists('apiSecretKey', $data)) {
+            $this->setApiSecretKey($data['apiSecretKey']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -73,6 +76,18 @@ class PagsmileCredentials implements JsonSerializable
         return $this;
     }
 
+    public function getApiSecretKey(): ?string
+    {
+        return $this->fields['apiSecretKey'] ?? null;
+    }
+
+    public function setApiSecretKey(null|string $apiSecretKey): static
+    {
+        $this->fields['apiSecretKey'] = $apiSecretKey;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -84,6 +99,9 @@ class PagsmileCredentials implements JsonSerializable
         }
         if (array_key_exists('secretKey', $this->fields)) {
             $data['secretKey'] = $this->fields['secretKey'];
+        }
+        if (array_key_exists('apiSecretKey', $this->fields)) {
+            $data['apiSecretKey'] = $this->fields['apiSecretKey'];
         }
 
         return $data;

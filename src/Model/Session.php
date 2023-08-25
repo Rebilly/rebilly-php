@@ -87,7 +87,10 @@ class Session implements JsonSerializable
      */
     public function setPermissions(array $permissions): static
     {
-        $permissions = array_map(fn ($value) => $value ?? null, $permissions);
+        $permissions = array_map(
+            fn ($value) => $value,
+            $permissions,
+        );
 
         $this->fields['permissions'] = $permissions;
 
@@ -103,11 +106,14 @@ class Session implements JsonSerializable
     }
 
     /**
-     * @param null|Membership[] $memberships
+     * @param null|array[]|Membership[] $memberships
      */
     public function setMemberships(null|array $memberships): static
     {
-        $memberships = $memberships !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof Membership ? $value : Membership::from($value)) : null, $memberships) : null;
+        $memberships = $memberships !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof Membership ? $value : Membership::from($value)) : null,
+            $memberships,
+        ) : null;
 
         $this->fields['memberships'] = $memberships;
 
@@ -146,11 +152,21 @@ class Session implements JsonSerializable
     }
 
     /**
-     * @return null|SelfLink[]
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    public function setLinks(null|array $links): static
+    {
+        $this->fields['_links'] = $links;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -219,18 +235,6 @@ class Session implements JsonSerializable
         }
 
         $this->fields['updatedTime'] = $updatedTime;
-
-        return $this;
-    }
-
-    /**
-     * @param null|SelfLink[] $links
-     */
-    private function setLinks(null|array $links): static
-    {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
-
-        $this->fields['_links'] = $links;
 
         return $this;
     }

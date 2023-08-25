@@ -13,16 +13,22 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-class RebillyTaxjar extends InvoiceTax
+use JsonSerializable;
+
+class RebillyTaxjar implements InvoiceTax, JsonSerializable
 {
+    public const CALCULATOR_REBILLY_TAXJAR = 'rebilly-taxjar';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        parent::__construct([
-            'calculator' => 'rebilly-taxjar',
-        ] + $data);
-
+        if (array_key_exists('calculator', $data)) {
+            $this->setCalculator($data['calculator']);
+        }
+        if (array_key_exists('amount', $data)) {
+            $this->setAmount($data['amount']);
+        }
         if (array_key_exists('items', $data)) {
             $this->setItems($data['items']);
         }
@@ -33,6 +39,23 @@ class RebillyTaxjar extends InvoiceTax
         return new self($data);
     }
 
+    public function getCalculator(): string
+    {
+        return $this->fields['calculator'];
+    }
+
+    public function setCalculator(string $calculator): static
+    {
+        $this->fields['calculator'] = $calculator;
+
+        return $this;
+    }
+
+    public function getAmount(): ?int
+    {
+        return $this->fields['amount'] ?? null;
+    }
+
     /**
      * @return null|InvoiceTaxItem[]
      */
@@ -41,24 +64,40 @@ class RebillyTaxjar extends InvoiceTax
         return $this->fields['items'] ?? null;
     }
 
+    /**
+     * @param null|array[]|InvoiceTaxItem[] $items
+     */
+    public function setItems(null|array $items): static
+    {
+        $items = $items !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof InvoiceTaxItem ? $value : InvoiceTaxItem::from($value)) : null,
+            $items,
+        ) : null;
+
+        $this->fields['items'] = $items;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
+        if (array_key_exists('calculator', $this->fields)) {
+            $data['calculator'] = $this->fields['calculator'];
+        }
+        if (array_key_exists('amount', $this->fields)) {
+            $data['amount'] = $this->fields['amount'];
+        }
         if (array_key_exists('items', $this->fields)) {
             $data['items'] = $this->fields['items'];
         }
 
-        return parent::jsonSerialize() + $data;
+        return $data;
     }
 
-    /**
-     * @param null|InvoiceTaxItem[] $items
-     */
-    private function setItems(null|array $items): static
+    private function setAmount(null|int $amount): static
     {
-        $items = $items !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof InvoiceTaxItem ? $value : InvoiceTaxItem::from($value)) : null, $items) : null;
-
-        $this->fields['items'] = $items;
+        $this->fields['amount'] = $amount;
 
         return $this;
     }

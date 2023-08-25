@@ -13,55 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use InvalidArgumentException;
-use JsonSerializable;
-
-abstract class TestProcessor3dsServers implements JsonSerializable
+interface TestProcessor3dsServers
 {
-    private array $fields = [];
+    public function getName(): string;
 
-    protected function __construct(array $data = [])
-    {
-        if (array_key_exists('name', $data)) {
-            $this->setName($data['name']);
-        }
-    }
-
-    public static function from(array $data = []): self
-    {
-        switch ($data['name']) {
-            case 'ThreeDSecureIO3dsServer':
-                return new TestProcessorThreeDSecureIOServer($data);
-            case 'TestSandbox3dsServer':
-                return new TestProcessor3dsServer($data);
-        }
-
-        throw new InvalidArgumentException("Unsupported name value: '{$data['name']}'");
-    }
-
-    public function getName(): ThreeDSecureServerName
-    {
-        return $this->fields['name'];
-    }
-
-    public function jsonSerialize(): array
-    {
-        $data = [];
-        if (array_key_exists('name', $this->fields)) {
-            $data['name'] = $this->fields['name']?->value;
-        }
-
-        return $data;
-    }
-
-    private function setName(ThreeDSecureServerName|string $name): static
-    {
-        if (!($name instanceof ThreeDSecureServerName)) {
-            $name = ThreeDSecureServerName::from($name);
-        }
-
-        $this->fields['name'] = $name;
-
-        return $this;
-    }
+    public function setName(string $name): static;
 }

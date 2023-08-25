@@ -15,9 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use InvalidArgumentException;
 use JsonSerializable;
-use TypeError;
 
 class FlexiblePlan implements JsonSerializable
 {
@@ -64,17 +62,29 @@ class FlexiblePlan implements JsonSerializable
         if (array_key_exists('revision', $data)) {
             $this->setRevision($data['revision']);
         }
+        if (array_key_exists('isTrialOnly', $data)) {
+            $this->setIsTrialOnly($data['isTrialOnly']);
+        }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
         }
         if (array_key_exists('updatedTime', $data)) {
             $this->setUpdatedTime($data['updatedTime']);
         }
-        if (array_key_exists('isTrialOnly', $data)) {
-            $this->setIsTrialOnly($data['isTrialOnly']);
-        }
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
+        }
+        if (array_key_exists('recurringInterval', $data)) {
+            $this->setRecurringInterval($data['recurringInterval']);
+        }
+        if (array_key_exists('trial', $data)) {
+            $this->setTrial($data['trial']);
+        }
+        if (array_key_exists('meteredBilling', $data)) {
+            $this->setMeteredBilling($data['meteredBilling']);
+        }
+        if (array_key_exists('invoiceTimeShift', $data)) {
+            $this->setInvoiceTimeShift($data['invoiceTimeShift']);
         }
     }
 
@@ -83,25 +93,12 @@ class FlexiblePlan implements JsonSerializable
         return new self($data);
     }
 
-    /** @return null|array<0: self, 1: int> **/
-    public static function tryFrom(array $data = []): ?array
+    public function getId(): string
     {
-        try {
-            $instance = self::from($data);
-
-            return [$instance, count(array_intersect_key($data, $instance->jsonSerialize()))];
-        } catch (InvalidArgumentException|TypeError) {
-        }
-
-        return null;
+        return $this->fields['id'];
     }
 
-    public function getId(): ?string
-    {
-        return $this->fields['id'] ?? null;
-    }
-
-    public function setId(null|string $id): static
+    public function setId(string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -199,7 +196,7 @@ class FlexiblePlan implements JsonSerializable
     public function setPricing(PlanPriceFormula|array $pricing): static
     {
         if (!($pricing instanceof PlanPriceFormula)) {
-            $pricing = PlanPriceFormula::from($pricing);
+            $pricing = PlanPriceFormulaFactory::from($pricing);
         }
 
         $this->fields['pricing'] = $pricing;
@@ -207,15 +204,15 @@ class FlexiblePlan implements JsonSerializable
         return $this;
     }
 
-    public function getSetup(): ?CommonPlanSetup
+    public function getSetup(): ?OneTimeSalePlanSetup
     {
         return $this->fields['setup'] ?? null;
     }
 
-    public function setSetup(null|CommonPlanSetup|array $setup): static
+    public function setSetup(null|OneTimeSalePlanSetup|array $setup): static
     {
-        if ($setup !== null && !($setup instanceof CommonPlanSetup)) {
-            $setup = CommonPlanSetup::from($setup);
+        if ($setup !== null && !($setup instanceof OneTimeSalePlanSetup)) {
+            $setup = OneTimeSalePlanSetup::from($setup);
         }
 
         $this->fields['setup'] = $setup;
@@ -252,6 +249,11 @@ class FlexiblePlan implements JsonSerializable
         return $this->fields['revision'] ?? null;
     }
 
+    public function getIsTrialOnly(): ?bool
+    {
+        return $this->fields['isTrialOnly'] ?? null;
+    }
+
     public function getCreatedTime(): ?DateTimeImmutable
     {
         return $this->fields['createdTime'] ?? null;
@@ -262,17 +264,91 @@ class FlexiblePlan implements JsonSerializable
         return $this->fields['updatedTime'] ?? null;
     }
 
-    public function getIsTrialOnly(): ?bool
-    {
-        return $this->fields['isTrialOnly'] ?? null;
-    }
-
     /**
-     * @return null|SelfLink[]
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    public function setLinks(null|array $links): static
+    {
+        $links = $links !== null ? array_map(
+            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+            $links,
+        ) : null;
+
+        $this->fields['_links'] = $links;
+
+        return $this;
+    }
+
+    public function getRecurringInterval(): SubscriptionOrderPlanRecurringInterval
+    {
+        return $this->fields['recurringInterval'];
+    }
+
+    public function setRecurringInterval(SubscriptionOrderPlanRecurringInterval|array $recurringInterval): static
+    {
+        if (!($recurringInterval instanceof SubscriptionOrderPlanRecurringInterval)) {
+            $recurringInterval = SubscriptionOrderPlanRecurringInterval::from($recurringInterval);
+        }
+
+        $this->fields['recurringInterval'] = $recurringInterval;
+
+        return $this;
+    }
+
+    public function getTrial(): TrialOnlyPlanTrial
+    {
+        return $this->fields['trial'];
+    }
+
+    public function setTrial(TrialOnlyPlanTrial|array $trial): static
+    {
+        if (!($trial instanceof TrialOnlyPlanTrial)) {
+            $trial = TrialOnlyPlanTrial::from($trial);
+        }
+
+        $this->fields['trial'] = $trial;
+
+        return $this;
+    }
+
+    public function getMeteredBilling(): ?SubscriptionOrderPlanMeteredBilling
+    {
+        return $this->fields['meteredBilling'] ?? null;
+    }
+
+    public function setMeteredBilling(null|SubscriptionOrderPlanMeteredBilling|array $meteredBilling): static
+    {
+        if ($meteredBilling !== null && !($meteredBilling instanceof SubscriptionOrderPlanMeteredBilling)) {
+            $meteredBilling = SubscriptionOrderPlanMeteredBilling::from($meteredBilling);
+        }
+
+        $this->fields['meteredBilling'] = $meteredBilling;
+
+        return $this;
+    }
+
+    public function getInvoiceTimeShift(): ?InvoiceTimeShift
+    {
+        return $this->fields['invoiceTimeShift'] ?? null;
+    }
+
+    public function setInvoiceTimeShift(null|InvoiceTimeShift|array $invoiceTimeShift): static
+    {
+        if ($invoiceTimeShift !== null && !($invoiceTimeShift instanceof InvoiceTimeShift)) {
+            $invoiceTimeShift = InvoiceTimeShift::from($invoiceTimeShift);
+        }
+
+        $this->fields['invoiceTimeShift'] = $invoiceTimeShift;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -317,17 +393,29 @@ class FlexiblePlan implements JsonSerializable
         if (array_key_exists('revision', $this->fields)) {
             $data['revision'] = $this->fields['revision'];
         }
+        if (array_key_exists('isTrialOnly', $this->fields)) {
+            $data['isTrialOnly'] = $this->fields['isTrialOnly'];
+        }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('updatedTime', $this->fields)) {
             $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
         }
-        if (array_key_exists('isTrialOnly', $this->fields)) {
-            $data['isTrialOnly'] = $this->fields['isTrialOnly'];
-        }
         if (array_key_exists('_links', $this->fields)) {
             $data['_links'] = $this->fields['_links'];
+        }
+        if (array_key_exists('recurringInterval', $this->fields)) {
+            $data['recurringInterval'] = $this->fields['recurringInterval']?->jsonSerialize();
+        }
+        if (array_key_exists('trial', $this->fields)) {
+            $data['trial'] = $this->fields['trial']?->jsonSerialize();
+        }
+        if (array_key_exists('meteredBilling', $this->fields)) {
+            $data['meteredBilling'] = $this->fields['meteredBilling']?->jsonSerialize();
+        }
+        if (array_key_exists('invoiceTimeShift', $this->fields)) {
+            $data['invoiceTimeShift'] = $this->fields['invoiceTimeShift']?->jsonSerialize();
         }
 
         return $data;
@@ -343,6 +431,13 @@ class FlexiblePlan implements JsonSerializable
     private function setRevision(null|int $revision): static
     {
         $this->fields['revision'] = $revision;
+
+        return $this;
+    }
+
+    private function setIsTrialOnly(null|bool $isTrialOnly): static
+    {
+        $this->fields['isTrialOnly'] = $isTrialOnly;
 
         return $this;
     }
@@ -365,25 +460,6 @@ class FlexiblePlan implements JsonSerializable
         }
 
         $this->fields['updatedTime'] = $updatedTime;
-
-        return $this;
-    }
-
-    private function setIsTrialOnly(null|bool $isTrialOnly): static
-    {
-        $this->fields['isTrialOnly'] = $isTrialOnly;
-
-        return $this;
-    }
-
-    /**
-     * @param null|SelfLink[] $links
-     */
-    private function setLinks(null|array $links): static
-    {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
-
-        $this->fields['_links'] = $links;
 
         return $this;
     }

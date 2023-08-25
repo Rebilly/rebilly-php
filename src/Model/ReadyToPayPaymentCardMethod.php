@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use InvalidArgumentException;
+use JsonSerializable;
 
-class ReadyToPayPaymentCardMethod extends ReadyToPayMethods
+class ReadyToPayPaymentCardMethod implements ReadyToPayMethods, JsonSerializable
 {
     public const METHOD_PAYMENT_CARD = 'payment-card';
 
@@ -23,10 +23,6 @@ class ReadyToPayPaymentCardMethod extends ReadyToPayMethods
 
     public function __construct(array $data = [])
     {
-        parent::__construct([
-            'method' => 'payment-card',
-        ] + $data);
-
         if (array_key_exists('method', $data)) {
             $this->setMethod($data['method']);
         }
@@ -46,17 +42,11 @@ class ReadyToPayPaymentCardMethod extends ReadyToPayMethods
         return new self($data);
     }
 
-    /**
-     * @psalm-return self::METHOD_* $method
-     */
     public function getMethod(): string
     {
         return $this->fields['method'];
     }
 
-    /**
-     * @psalm-param self::METHOD_* $method
-     */
     public function setMethod(string $method): static
     {
         $this->fields['method'] = $method;
@@ -64,14 +54,16 @@ class ReadyToPayPaymentCardMethod extends ReadyToPayMethods
         return $this;
     }
 
-    public function getFeature(): null|ApplePayFeature|GooglePayFeature
+    public function getFeature(): ?PaymentCardFeature
     {
         return $this->fields['feature'] ?? null;
     }
 
-    public function setFeature(null|array|ApplePayFeature|GooglePayFeature $feature): static
+    public function setFeature(null|PaymentCardFeature|array $feature): static
     {
-        $feature = $this->ensureFeature($feature);
+        if ($feature !== null && !($feature instanceof PaymentCardFeature)) {
+            $feature = PaymentCardFeatureFactory::from($feature);
+        }
 
         $this->fields['feature'] = $feature;
 
@@ -79,7 +71,7 @@ class ReadyToPayPaymentCardMethod extends ReadyToPayMethods
     }
 
     /**
-     * @return null|PaymentCardBrand[]
+     * @return null|string[]
      */
     public function getBrands(): ?array
     {
@@ -87,11 +79,14 @@ class ReadyToPayPaymentCardMethod extends ReadyToPayMethods
     }
 
     /**
-     * @param null|PaymentCardBrand[] $brands
+     * @param null|string[] $brands
      */
     public function setBrands(null|array $brands): static
     {
-        $brands = $brands !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof PaymentCardBrand ? $value : PaymentCardBrand::from($value)) : null, $brands) : null;
+        $brands = $brands !== null ? array_map(
+            fn ($value) => $value,
+            $brands,
+        ) : null;
 
         $this->fields['brands'] = $brands;
 
@@ -111,7 +106,10 @@ class ReadyToPayPaymentCardMethod extends ReadyToPayMethods
      */
     public function setFilters(null|array $filters): static
     {
-        $filters = $filters !== null ? array_map(fn ($value) => $value ?? null, $filters) : null;
+        $filters = $filters !== null ? array_map(
+            fn ($value) => $value,
+            $filters,
+        ) : null;
 
         $this->fields['filters'] = $filters;
 
@@ -125,7 +123,7 @@ class ReadyToPayPaymentCardMethod extends ReadyToPayMethods
             $data['method'] = $this->fields['method'];
         }
         if (array_key_exists('feature', $this->fields)) {
-            $data['feature'] = $this->fields['feature'];
+            $data['feature'] = $this->fields['feature']?->jsonSerialize();
         }
         if (array_key_exists('brands', $this->fields)) {
             $data['brands'] = $this->fields['brands'];
@@ -134,38 +132,6 @@ class ReadyToPayPaymentCardMethod extends ReadyToPayMethods
             $data['filters'] = $this->fields['filters'];
         }
 
-        return parent::jsonSerialize() + $data;
-    }
-
-    protected function ensureFeature(null|array|ApplePayFeature|GooglePayFeature $data): ApplePayFeature|GooglePayFeature
-    {
-        if (
-            $data === null
-            || $data instanceof ApplePayFeature
-            || $data instanceof GooglePayFeature
-        ) {
-            return $data;
-        }
-        $candidates = [];
-        $candidates[] = ApplePayFeature::tryFrom($data);
-        $candidates[] = GooglePayFeature::tryFrom($data);
-
-        $determined = array_reduce($candidates, function (?array $current, array $candidate) {
-            if ($current === null || $current[1] < $candidate[1]) {
-                $current = $candidate;
-            }
-
-            return $current;
-        });
-
-        if (
-            $determined[0] === null
-            || $determined[0] instanceof ApplePayFeature
-            || $determined[0] instanceof GooglePayFeature
-        ) {
-            return $determined[0];
-        }
-
-        throw new InvalidArgumentException('Could not instantiate feature with the given value');
+        return $data;
     }
 }

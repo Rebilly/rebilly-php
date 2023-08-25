@@ -58,9 +58,6 @@ class EddSearchResult implements JsonSerializable
         return $this->fields['id'] ?? null;
     }
 
-    /**
-     * @psalm-return self::TYPE_*|null $type
-     */
     public function getType(): ?string
     {
         return $this->fields['type'] ?? null;
@@ -113,9 +110,6 @@ class EddSearchResult implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-param self::TYPE_*|null $type
-     */
     private function setType(null|string $type): static
     {
         $this->fields['type'] = $type;
@@ -124,11 +118,14 @@ class EddSearchResult implements JsonSerializable
     }
 
     /**
-     * @param null|EddScoreDetails[] $searchResultData
+     * @param null|array[]|EddScoreDetails[] $searchResultData
      */
     private function setSearchResultData(null|array $searchResultData): static
     {
-        $searchResultData = $searchResultData !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof EddScoreDetails ? $value : EddScoreDetails::from($value)) : null, $searchResultData) : null;
+        $searchResultData = $searchResultData !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof EddScoreDetails ? $value : EddScoreDetails::from($value)) : null,
+            $searchResultData,
+        ) : null;
 
         $this->fields['searchResultData'] = $searchResultData;
 

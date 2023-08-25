@@ -83,24 +83,22 @@ class TransactionDcc implements JsonSerializable
         return $this->fields['usdMarkup'] ?? null;
     }
 
-    public function setUsdMarkup(null|float $usdMarkup): static
+    public function setUsdMarkup(null|float|string $usdMarkup): static
     {
+        if (is_string($usdMarkup)) {
+            $usdMarkup = (float) $usdMarkup;
+        }
+
         $this->fields['usdMarkup'] = $usdMarkup;
 
         return $this;
     }
 
-    /**
-     * @psalm-return self::OUTCOME_*|null $outcome
-     */
     public function getOutcome(): ?string
     {
         return $this->fields['outcome'] ?? null;
     }
 
-    /**
-     * @psalm-param self::OUTCOME_*|null $outcome
-     */
     public function setOutcome(null|string $outcome): static
     {
         $this->fields['outcome'] = $outcome;

@@ -18,14 +18,6 @@ use JsonSerializable;
 
 abstract class TimelineTable implements JsonSerializable
 {
-    public const TYPE__LIST = 'list';
-
-    public const TYPE_ONE_COLUMNS = 'one-columns';
-
-    public const TYPE_TWO_COLUMNS = 'two-columns';
-
-    public const TYPE_THREE_COLUMNS = 'three-columns';
-
     private array $fields = [];
 
     protected function __construct(array $data = [])
@@ -44,12 +36,12 @@ abstract class TimelineTable implements JsonSerializable
     public static function from(array $data = []): self
     {
         switch ($data['type']) {
-            case 'three-columns':
-                return new ThreeColumnsTimelineTable($data);
-            case 'one-column':
-                return new OneColumnTimelineTable($data);
             case 'list':
                 return new ListTimelineTable($data);
+            case 'one-column':
+                return new OneColumnTimelineTable($data);
+            case 'three-columns':
+                return new ThreeColumnsTimelineTable($data);
             case 'two-columns':
                 return new TwoColumnsTimelineTable($data);
         }
@@ -57,9 +49,6 @@ abstract class TimelineTable implements JsonSerializable
         throw new InvalidArgumentException("Unsupported type value: '{$data['type']}'");
     }
 
-    /**
-     * @psalm-return self::TYPE_*|null $type
-     */
     public function getType(): ?string
     {
         return $this->fields['type'] ?? null;
@@ -105,9 +94,6 @@ abstract class TimelineTable implements JsonSerializable
         return $data;
     }
 
-    /**
-     * @psalm-param self::TYPE_*|null $type
-     */
     private function setType(null|string $type): static
     {
         $this->fields['type'] = $type;

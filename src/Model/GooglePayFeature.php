@@ -13,11 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use InvalidArgumentException;
 use JsonSerializable;
-use TypeError;
 
-class GooglePayFeature implements JsonSerializable
+class GooglePayFeature implements PaymentCardFeature, JsonSerializable
 {
     public const NAME_GOOGLE_PAY = 'Google Pay';
 
@@ -37,6 +35,9 @@ class GooglePayFeature implements JsonSerializable
         if (array_key_exists('country', $data)) {
             $this->setCountry($data['country']);
         }
+        if (array_key_exists('displayName', $data)) {
+            $this->setDisplayName($data['displayName']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -44,30 +45,11 @@ class GooglePayFeature implements JsonSerializable
         return new self($data);
     }
 
-    /** @return null|array<0: self, 1: int> **/
-    public static function tryFrom(array $data = []): ?array
-    {
-        try {
-            $instance = self::from($data);
-
-            return [$instance, count(array_intersect_key($data, $instance->jsonSerialize()))];
-        } catch (InvalidArgumentException|TypeError) {
-        }
-
-        return null;
-    }
-
-    /**
-     * @psalm-return self::NAME_*|null $name
-     */
     public function getName(): ?string
     {
         return $this->fields['name'] ?? null;
     }
 
-    /**
-     * @psalm-param self::NAME_*|null $name
-     */
     public function setName(null|string $name): static
     {
         $this->fields['name'] = $name;
@@ -99,18 +81,26 @@ class GooglePayFeature implements JsonSerializable
         return $this;
     }
 
-    public function getCountry(): ?DigitalWalletCountry
+    public function getCountry(): ?string
     {
         return $this->fields['country'] ?? null;
     }
 
-    public function setCountry(null|DigitalWalletCountry|array $country): static
+    public function setCountry(null|string $country): static
     {
-        if ($country !== null && !($country instanceof DigitalWalletCountry)) {
-            $country = DigitalWalletCountry::from($country);
-        }
-
         $this->fields['country'] = $country;
+
+        return $this;
+    }
+
+    public function getDisplayName(): ?string
+    {
+        return $this->fields['displayName'] ?? null;
+    }
+
+    public function setDisplayName(null|string $displayName): static
+    {
+        $this->fields['displayName'] = $displayName;
 
         return $this;
     }
@@ -128,7 +118,10 @@ class GooglePayFeature implements JsonSerializable
             $data['merchantOrigin'] = $this->fields['merchantOrigin'];
         }
         if (array_key_exists('country', $this->fields)) {
-            $data['country'] = $this->fields['country']?->jsonSerialize();
+            $data['country'] = $this->fields['country'];
+        }
+        if (array_key_exists('displayName', $this->fields)) {
+            $data['displayName'] = $this->fields['displayName'];
         }
 
         return $data;

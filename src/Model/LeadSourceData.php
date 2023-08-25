@@ -215,7 +215,7 @@ class LeadSourceData implements JsonSerializable
     }
 
     /**
-     * @return null|array<CustomerLink|SelfLink>
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
@@ -294,11 +294,14 @@ class LeadSourceData implements JsonSerializable
     }
 
     /**
-     * @param null|array<CustomerLink|SelfLink> $links
+     * @param null|array[]|ResourceLink[] $links
      */
     private function setLinks(null|array $links): static
     {
-        $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
+        $links = $links !== null ? array_map(
+            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+            $links,
+        ) : null;
 
         $this->fields['_links'] = $links;
 

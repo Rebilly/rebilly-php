@@ -13,30 +13,18 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-class RestrictToBxgy extends CouponRestriction
+use DateTimeImmutable;
+use DateTimeInterface;
+use JsonSerializable;
+
+class RestrictToBxgy implements CouponRestriction, JsonSerializable
 {
-    public const TYPE_DISCOUNTS_PER_REDEMPTION = 'discounts-per-redemption';
-
-    public const TYPE_MINIMUM_ORDER_AMOUNT = 'minimum-order-amount';
-
-    public const TYPE_RESTRICT_TO_INVOICES = 'restrict-to-invoices';
-
-    public const TYPE_RESTRICT_TO_PLANS = 'restrict-to-plans';
-
-    public const TYPE_RESTRICT_TO_SUBSCRIPTIONS = 'restrict-to-subscriptions';
-
-    public const TYPE_RESTRICT_TO_PRODUCTS = 'restrict-to-products';
-
-    public const TYPE_PAID_BY_TIME = 'paid-by-time';
+    public const TYPE_RESTRICT_TO_BXGY = 'restrict-to-bxgy';
 
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        parent::__construct([
-            'type' => 'restrict-to-bxgy',
-        ] + $data);
-
         if (array_key_exists('type', $data)) {
             $this->setType($data['type']);
         }
@@ -46,6 +34,36 @@ class RestrictToBxgy extends CouponRestriction
         if (array_key_exists('get', $data)) {
             $this->setGet($data['get']);
         }
+        if (array_key_exists('planIds', $data)) {
+            $this->setPlanIds($data['planIds']);
+        }
+        if (array_key_exists('amount', $data)) {
+            $this->setAmount($data['amount']);
+        }
+        if (array_key_exists('quantity', $data)) {
+            $this->setQuantity($data['quantity']);
+        }
+        if (array_key_exists('countries', $data)) {
+            $this->setCountries($data['countries']);
+        }
+        if (array_key_exists('productIds', $data)) {
+            $this->setProductIds($data['productIds']);
+        }
+        if (array_key_exists('subscriptionIds', $data)) {
+            $this->setSubscriptionIds($data['subscriptionIds']);
+        }
+        if (array_key_exists('currency', $data)) {
+            $this->setCurrency($data['currency']);
+        }
+        if (array_key_exists('time', $data)) {
+            $this->setTime($data['time']);
+        }
+        if (array_key_exists('minimumQuantity', $data)) {
+            $this->setMinimumQuantity($data['minimumQuantity']);
+        }
+        if (array_key_exists('invoiceIds', $data)) {
+            $this->setInvoiceIds($data['invoiceIds']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -53,17 +71,11 @@ class RestrictToBxgy extends CouponRestriction
         return new self($data);
     }
 
-    /**
-     * @psalm-return self::TYPE_* $type
-     */
     public function getType(): string
     {
         return $this->fields['type'];
     }
 
-    /**
-     * @psalm-param self::TYPE_* $type
-     */
     public function setType(string $type): static
     {
         $this->fields['type'] = $type;
@@ -72,7 +84,7 @@ class RestrictToBxgy extends CouponRestriction
     }
 
     /**
-     * @return RestrictBuy[]
+     * @return RestrictToBxgyBuy[]
      */
     public function getBuy(): array
     {
@@ -80,11 +92,14 @@ class RestrictToBxgy extends CouponRestriction
     }
 
     /**
-     * @param RestrictBuy[] $buy
+     * @param array[]|RestrictToBxgyBuy[] $buy
      */
     public function setBuy(array $buy): static
     {
-        $buy = array_map(fn ($value) => $value !== null ? ($value instanceof RestrictBuy ? $value : RestrictBuy::from($value)) : null, $buy);
+        $buy = array_map(
+            fn ($value) => $value !== null ? ($value instanceof RestrictToBxgyBuy ? $value : RestrictToBxgyBuy::from($value)) : null,
+            $buy,
+        );
 
         $this->fields['buy'] = $buy;
 
@@ -92,7 +107,7 @@ class RestrictToBxgy extends CouponRestriction
     }
 
     /**
-     * @return RestrictGet[]
+     * @return RestrictToBxgyGet[]
      */
     public function getGet(): array
     {
@@ -100,13 +115,195 @@ class RestrictToBxgy extends CouponRestriction
     }
 
     /**
-     * @param RestrictGet[] $get
+     * @param array[]|RestrictToBxgyGet[] $get
      */
     public function setGet(array $get): static
     {
-        $get = array_map(fn ($value) => $value !== null ? ($value instanceof RestrictGet ? $value : RestrictGet::from($value)) : null, $get);
+        $get = array_map(
+            fn ($value) => $value !== null ? ($value instanceof RestrictToBxgyGet ? $value : RestrictToBxgyGet::from($value)) : null,
+            $get,
+        );
 
         $this->fields['get'] = $get;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getPlanIds(): array
+    {
+        return $this->fields['planIds'];
+    }
+
+    /**
+     * @param string[] $planIds
+     */
+    public function setPlanIds(array $planIds): static
+    {
+        $planIds = array_map(
+            fn ($value) => $value,
+            $planIds,
+        );
+
+        $this->fields['planIds'] = $planIds;
+
+        return $this;
+    }
+
+    public function getAmount(): int
+    {
+        return $this->fields['amount'];
+    }
+
+    public function setAmount(int $amount): static
+    {
+        $this->fields['amount'] = $amount;
+
+        return $this;
+    }
+
+    public function getQuantity(): int
+    {
+        return $this->fields['quantity'];
+    }
+
+    public function setQuantity(int $quantity): static
+    {
+        $this->fields['quantity'] = $quantity;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getCountries(): array
+    {
+        return $this->fields['countries'];
+    }
+
+    /**
+     * @param string[] $countries
+     */
+    public function setCountries(array $countries): static
+    {
+        $countries = array_map(
+            fn ($value) => $value,
+            $countries,
+        );
+
+        $this->fields['countries'] = $countries;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getProductIds(): array
+    {
+        return $this->fields['productIds'];
+    }
+
+    /**
+     * @param string[] $productIds
+     */
+    public function setProductIds(array $productIds): static
+    {
+        $productIds = array_map(
+            fn ($value) => $value,
+            $productIds,
+        );
+
+        $this->fields['productIds'] = $productIds;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getSubscriptionIds(): array
+    {
+        return $this->fields['subscriptionIds'];
+    }
+
+    /**
+     * @param string[] $subscriptionIds
+     */
+    public function setSubscriptionIds(array $subscriptionIds): static
+    {
+        $subscriptionIds = array_map(
+            fn ($value) => $value,
+            $subscriptionIds,
+        );
+
+        $this->fields['subscriptionIds'] = $subscriptionIds;
+
+        return $this;
+    }
+
+    public function getCurrency(): string
+    {
+        return $this->fields['currency'];
+    }
+
+    public function setCurrency(string $currency): static
+    {
+        $this->fields['currency'] = $currency;
+
+        return $this;
+    }
+
+    public function getTime(): DateTimeImmutable
+    {
+        return $this->fields['time'];
+    }
+
+    public function setTime(DateTimeImmutable|string $time): static
+    {
+        if (!($time instanceof DateTimeImmutable)) {
+            $time = new DateTimeImmutable($time);
+        }
+
+        $this->fields['time'] = $time;
+
+        return $this;
+    }
+
+    public function getMinimumQuantity(): ?int
+    {
+        return $this->fields['minimumQuantity'] ?? null;
+    }
+
+    public function setMinimumQuantity(null|int $minimumQuantity): static
+    {
+        $this->fields['minimumQuantity'] = $minimumQuantity;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getInvoiceIds(): array
+    {
+        return $this->fields['invoiceIds'];
+    }
+
+    /**
+     * @param string[] $invoiceIds
+     */
+    public function setInvoiceIds(array $invoiceIds): static
+    {
+        $invoiceIds = array_map(
+            fn ($value) => $value,
+            $invoiceIds,
+        );
+
+        $this->fields['invoiceIds'] = $invoiceIds;
 
         return $this;
     }
@@ -123,7 +320,37 @@ class RestrictToBxgy extends CouponRestriction
         if (array_key_exists('get', $this->fields)) {
             $data['get'] = $this->fields['get'];
         }
+        if (array_key_exists('planIds', $this->fields)) {
+            $data['planIds'] = $this->fields['planIds'];
+        }
+        if (array_key_exists('amount', $this->fields)) {
+            $data['amount'] = $this->fields['amount'];
+        }
+        if (array_key_exists('quantity', $this->fields)) {
+            $data['quantity'] = $this->fields['quantity'];
+        }
+        if (array_key_exists('countries', $this->fields)) {
+            $data['countries'] = $this->fields['countries'];
+        }
+        if (array_key_exists('productIds', $this->fields)) {
+            $data['productIds'] = $this->fields['productIds'];
+        }
+        if (array_key_exists('subscriptionIds', $this->fields)) {
+            $data['subscriptionIds'] = $this->fields['subscriptionIds'];
+        }
+        if (array_key_exists('currency', $this->fields)) {
+            $data['currency'] = $this->fields['currency'];
+        }
+        if (array_key_exists('time', $this->fields)) {
+            $data['time'] = $this->fields['time']?->format(DateTimeInterface::RFC3339);
+        }
+        if (array_key_exists('minimumQuantity', $this->fields)) {
+            $data['minimumQuantity'] = $this->fields['minimumQuantity'];
+        }
+        if (array_key_exists('invoiceIds', $this->fields)) {
+            $data['invoiceIds'] = $this->fields['invoiceIds'];
+        }
 
-        return parent::jsonSerialize() + $data;
+        return $data;
     }
 }

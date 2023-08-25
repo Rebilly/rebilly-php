@@ -71,15 +71,15 @@ class Ilixium extends GatewayAccount
         return $this;
     }
 
-    public function getThreeDSecureServer(): ?Ilixium3dsServers
+    public function getThreeDSecureServer(): ?IlixiumThreeDSecureServer
     {
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|Ilixium3dsServers|array $threeDSecureServer): static
+    public function setThreeDSecureServer(null|IlixiumThreeDSecureServer|array $threeDSecureServer): static
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof Ilixium3dsServers)) {
-            $threeDSecureServer = Ilixium3dsServers::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof IlixiumThreeDSecureServer)) {
+            $threeDSecureServer = IlixiumThreeDSecureServer::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

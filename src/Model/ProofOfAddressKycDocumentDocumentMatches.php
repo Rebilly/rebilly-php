@@ -50,15 +50,15 @@ class ProofOfAddressKycDocumentDocumentMatches implements JsonSerializable
         return $this;
     }
 
-    public function getData(): ?AddressMatches
+    public function getData(): ?KycAddressMatches
     {
         return $this->fields['data'] ?? null;
     }
 
-    public function setData(null|AddressMatches|array $data): static
+    public function setData(null|KycAddressMatches|array $data): static
     {
-        if ($data !== null && !($data instanceof AddressMatches)) {
-            $data = AddressMatches::from($data);
+        if ($data !== null && !($data instanceof KycAddressMatches)) {
+            $data = KycAddressMatches::from($data);
         }
 
         $this->fields['data'] = $data;

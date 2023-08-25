@@ -21,6 +21,9 @@ class WebsiteSettings implements JsonSerializable
 
     public function __construct(array $data = [])
     {
+        if (array_key_exists('cashierForm', $data)) {
+            $this->setCashierForm($data['cashierForm']);
+        }
         if (array_key_exists('paymentForm', $data)) {
             $this->setPaymentForm($data['paymentForm']);
         }
@@ -29,6 +32,22 @@ class WebsiteSettings implements JsonSerializable
     public static function from(array $data = []): self
     {
         return new self($data);
+    }
+
+    public function getCashierForm(): ?WebsiteSettingsCashierForm
+    {
+        return $this->fields['cashierForm'] ?? null;
+    }
+
+    public function setCashierForm(null|WebsiteSettingsCashierForm|array $cashierForm): static
+    {
+        if ($cashierForm !== null && !($cashierForm instanceof WebsiteSettingsCashierForm)) {
+            $cashierForm = WebsiteSettingsCashierForm::from($cashierForm);
+        }
+
+        $this->fields['cashierForm'] = $cashierForm;
+
+        return $this;
     }
 
     public function getPaymentForm(): ?WebsiteSettingsPaymentForm
@@ -50,6 +69,9 @@ class WebsiteSettings implements JsonSerializable
     public function jsonSerialize(): array
     {
         $data = [];
+        if (array_key_exists('cashierForm', $this->fields)) {
+            $data['cashierForm'] = $this->fields['cashierForm']?->jsonSerialize();
+        }
         if (array_key_exists('paymentForm', $this->fields)) {
             $data['paymentForm'] = $this->fields['paymentForm']?->jsonSerialize();
         }

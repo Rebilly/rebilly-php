@@ -74,7 +74,10 @@ class CashToCodeSettings implements JsonSerializable
      */
     public function setAmounts(null|array $amounts): static
     {
-        $amounts = $amounts !== null ? array_map(fn ($value) => $value ?? null, $amounts) : null;
+        $amounts = $amounts !== null ? array_map(
+            fn ($value) => $value,
+            $amounts,
+        ) : null;
 
         $this->fields['amounts'] = $amounts;
 

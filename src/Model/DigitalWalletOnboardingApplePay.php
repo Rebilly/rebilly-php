@@ -52,9 +52,6 @@ class DigitalWalletOnboardingApplePay implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-return self::STATUS_*|null $status
-     */
     public function getStatus(): ?string
     {
         return $this->fields['status'] ?? null;
@@ -73,9 +70,6 @@ class DigitalWalletOnboardingApplePay implements JsonSerializable
         return $data;
     }
 
-    /**
-     * @psalm-param self::STATUS_*|null $status
-     */
     private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;

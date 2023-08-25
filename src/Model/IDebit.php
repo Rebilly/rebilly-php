@@ -52,15 +52,15 @@ class IDebit extends GatewayAccount
         return $this;
     }
 
-    public function getSettings(): ?InstaDebitSettings
+    public function getSettings(): ?IDebitSettings
     {
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|InstaDebitSettings|array $settings): static
+    public function setSettings(null|IDebitSettings|array $settings): static
     {
-        if ($settings !== null && !($settings instanceof InstaDebitSettings)) {
-            $settings = InstaDebitSettings::from($settings);
+        if ($settings !== null && !($settings instanceof IDebitSettings)) {
+            $settings = IDebitSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

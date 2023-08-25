@@ -53,17 +53,11 @@ class PaymeroSettings implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-return self::MAIN_CURRENCY_*|null $mainCurrency
-     */
     public function getMainCurrency(): ?string
     {
         return $this->fields['mainCurrency'] ?? null;
     }
 
-    /**
-     * @psalm-param self::MAIN_CURRENCY_*|null $mainCurrency
-     */
     public function setMainCurrency(null|string $mainCurrency): static
     {
         $this->fields['mainCurrency'] = $mainCurrency;

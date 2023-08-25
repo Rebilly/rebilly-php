@@ -17,6 +17,10 @@ use JsonSerializable;
 
 class Rule implements JsonSerializable
 {
+    public const STATUS_ACTIVE = 'active';
+
+    public const STATUS_INACTIVE = 'inactive';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -86,24 +90,23 @@ class Rule implements JsonSerializable
      */
     public function setLabels(null|array $labels): static
     {
-        $labels = $labels !== null ? array_map(fn ($value) => $value ?? null, $labels) : null;
+        $labels = $labels !== null ? array_map(
+            fn ($value) => $value,
+            $labels,
+        ) : null;
 
         $this->fields['labels'] = $labels;
 
         return $this;
     }
 
-    public function getStatus(): ?OnOff
+    public function getStatus(): ?string
     {
         return $this->fields['status'] ?? null;
     }
 
-    public function setStatus(null|OnOff|string $status): static
+    public function setStatus(null|string $status): static
     {
-        if ($status !== null && !($status instanceof OnOff)) {
-            $status = OnOff::from($status);
-        }
-
         $this->fields['status'] = $status;
 
         return $this;
@@ -130,11 +133,14 @@ class Rule implements JsonSerializable
     }
 
     /**
-     * @param RuleAction[] $actions
+     * @param array[]|RuleAction[] $actions
      */
     public function setActions(array $actions): static
     {
-        $actions = array_map(fn ($value) => $value !== null ? ($value instanceof RuleAction ? $value : RuleAction::from($value)) : null, $actions);
+        $actions = array_map(
+            fn ($value) => $value !== null ? ($value instanceof RuleAction ? $value : RuleAction::from($value)) : null,
+            $actions,
+        );
 
         $this->fields['actions'] = $actions;
 
@@ -166,7 +172,7 @@ class Rule implements JsonSerializable
             $data['labels'] = $this->fields['labels'];
         }
         if (array_key_exists('status', $this->fields)) {
-            $data['status'] = $this->fields['status']?->value;
+            $data['status'] = $this->fields['status'];
         }
         if (array_key_exists('filter', $this->fields)) {
             $data['filter'] = $this->fields['filter'];

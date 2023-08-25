@@ -52,11 +52,14 @@ class InvoiceRetryInstruction implements JsonSerializable
     }
 
     /**
-     * @param InvoiceRetryInstructionAttempts[] $attempts
+     * @param array[]|InvoiceRetryInstructionAttempts[] $attempts
      */
     public function setAttempts(array $attempts): static
     {
-        $attempts = array_map(fn ($value) => $value !== null ? ($value instanceof InvoiceRetryInstructionAttempts ? $value : InvoiceRetryInstructionAttempts::from($value)) : null, $attempts);
+        $attempts = array_map(
+            fn ($value) => $value !== null ? ($value instanceof InvoiceRetryInstructionAttempts ? $value : InvoiceRetryInstructionAttempts::from($value)) : null,
+            $attempts,
+        );
 
         $this->fields['attempts'] = $attempts;
 
@@ -65,8 +68,6 @@ class InvoiceRetryInstruction implements JsonSerializable
 
     /**
      * @return string[]
-     *
-     * @psalm-return self::AFTER_ATTEMPT_POLICIES_* $afterAttemptPolicies
      */
     public function getAfterAttemptPolicies(): array
     {
@@ -75,12 +76,13 @@ class InvoiceRetryInstruction implements JsonSerializable
 
     /**
      * @param string[] $afterAttemptPolicies
-     *
-     * @psalm-param self::AFTER_ATTEMPT_POLICIES_* $afterAttemptPolicies
      */
     public function setAfterAttemptPolicies(array $afterAttemptPolicies): static
     {
-        $afterAttemptPolicies = array_map(fn ($value) => $value ?? null, $afterAttemptPolicies);
+        $afterAttemptPolicies = array_map(
+            fn ($value) => $value,
+            $afterAttemptPolicies,
+        );
 
         $this->fields['afterAttemptPolicies'] = $afterAttemptPolicies;
 
@@ -89,8 +91,6 @@ class InvoiceRetryInstruction implements JsonSerializable
 
     /**
      * @return string[]
-     *
-     * @psalm-return self::AFTER_RETRY_END_POLICIES_* $afterRetryEndPolicies
      */
     public function getAfterRetryEndPolicies(): array
     {
@@ -99,12 +99,13 @@ class InvoiceRetryInstruction implements JsonSerializable
 
     /**
      * @param string[] $afterRetryEndPolicies
-     *
-     * @psalm-param self::AFTER_RETRY_END_POLICIES_* $afterRetryEndPolicies
      */
     public function setAfterRetryEndPolicies(array $afterRetryEndPolicies): static
     {
-        $afterRetryEndPolicies = array_map(fn ($value) => $value ?? null, $afterRetryEndPolicies);
+        $afterRetryEndPolicies = array_map(
+            fn ($value) => $value,
+            $afterRetryEndPolicies,
+        );
 
         $this->fields['afterRetryEndPolicies'] = $afterRetryEndPolicies;
 

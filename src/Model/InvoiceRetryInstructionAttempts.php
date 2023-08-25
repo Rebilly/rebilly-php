@@ -45,7 +45,7 @@ class InvoiceRetryInstructionAttempts implements JsonSerializable
     public function setScheduleInstruction(InvoiceRetryScheduleInstruction|array $scheduleInstruction): static
     {
         if (!($scheduleInstruction instanceof InvoiceRetryScheduleInstruction)) {
-            $scheduleInstruction = InvoiceRetryScheduleInstruction::from($scheduleInstruction);
+            $scheduleInstruction = InvoiceRetryScheduleInstructionFactory::from($scheduleInstruction);
         }
 
         $this->fields['scheduleInstruction'] = $scheduleInstruction;
@@ -61,7 +61,7 @@ class InvoiceRetryInstructionAttempts implements JsonSerializable
     public function setAmountAdjustmentInstruction(null|InvoiceRetryAmountAdjustmentInstruction|array $amountAdjustmentInstruction): static
     {
         if ($amountAdjustmentInstruction !== null && !($amountAdjustmentInstruction instanceof InvoiceRetryAmountAdjustmentInstruction)) {
-            $amountAdjustmentInstruction = InvoiceRetryAmountAdjustmentInstruction::from($amountAdjustmentInstruction);
+            $amountAdjustmentInstruction = InvoiceRetryAmountAdjustmentInstructionFactory::from($amountAdjustmentInstruction);
         }
 
         $this->fields['amountAdjustmentInstruction'] = $amountAdjustmentInstruction;

@@ -70,17 +70,11 @@ class FinTecSystemsSettings implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-return self::RECIPIENT_COUNTRY_* $recipientCountry
-     */
     public function getRecipientCountry(): string
     {
         return $this->fields['recipientCountry'];
     }
 
-    /**
-     * @psalm-param self::RECIPIENT_COUNTRY_* $recipientCountry
-     */
     public function setRecipientCountry(string $recipientCountry): static
     {
         $this->fields['recipientCountry'] = $recipientCountry;

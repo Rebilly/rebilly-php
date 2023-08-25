@@ -50,11 +50,14 @@ class ReportTransactions implements JsonSerializable
     }
 
     /**
-     * @param null|ReportTransactionsData[] $data
+     * @param null|array[]|ReportTransactionsData[] $data
      */
     private function setData(null|array $data): static
     {
-        $data = $data !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ReportTransactionsData ? $value : ReportTransactionsData::from($value)) : null, $data) : null;
+        $data = $data !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof ReportTransactionsData ? $value : ReportTransactionsData::from($value)) : null,
+            $data,
+        ) : null;
 
         $this->fields['data'] = $data;
 

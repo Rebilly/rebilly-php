@@ -68,7 +68,7 @@ $rules = [
     'no_singleline_whitespace_before_semicolons' => true,
     'no_spaces_around_offset' => true,
     'no_superfluous_elseif' => true,
-    'no_trailing_comma_in_singleline_array' => true,
+    'no_trailing_comma_in_singleline' => true,
     'no_unneeded_control_parentheses' => true,
     'no_unneeded_curly_braces' => true,
     'no_unneeded_final_method' => true,
@@ -112,7 +112,7 @@ $rules = [
         'import_functions' => false,
         'import_classes' => true,
     ],
-    'single_space_after_construct' => true,
+    'single_space_around_construct' => true,
 ];
 
 $finder = (new Finder())

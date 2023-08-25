@@ -13,18 +13,27 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-class Volume extends PlanPriceFormula
+use JsonSerializable;
+
+class Volume implements PlanPriceFormula, JsonSerializable
 {
+    public const FORMULA_VOLUME = 'volume';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        parent::__construct([
-            'formula' => 'volume',
-        ] + $data);
-
+        if (array_key_exists('formula', $data)) {
+            $this->setFormula($data['formula']);
+        }
         if (array_key_exists('brackets', $data)) {
             $this->setBrackets($data['brackets']);
+        }
+        if (array_key_exists('maxQuantity', $data)) {
+            $this->setMaxQuantity($data['maxQuantity']);
+        }
+        if (array_key_exists('price', $data)) {
+            $this->setPrice($data['price']);
         }
     }
 
@@ -33,8 +42,20 @@ class Volume extends PlanPriceFormula
         return new self($data);
     }
 
+    public function getFormula(): string
+    {
+        return $this->fields['formula'];
+    }
+
+    public function setFormula(string $formula): static
+    {
+        $this->fields['formula'] = $formula;
+
+        return $this;
+    }
+
     /**
-     * @return VolumeBrackets[]
+     * @return StairstepBrackets[]
      */
     public function getBrackets(): array
     {
@@ -42,13 +63,44 @@ class Volume extends PlanPriceFormula
     }
 
     /**
-     * @param VolumeBrackets[] $brackets
+     * @param array[]|StairstepBrackets[] $brackets
      */
     public function setBrackets(array $brackets): static
     {
-        $brackets = array_map(fn ($value) => $value !== null ? ($value instanceof VolumeBrackets ? $value : VolumeBrackets::from($value)) : null, $brackets);
+        $brackets = array_map(
+            fn ($value) => $value !== null ? ($value instanceof StairstepBrackets ? $value : StairstepBrackets::from($value)) : null,
+            $brackets,
+        );
 
         $this->fields['brackets'] = $brackets;
+
+        return $this;
+    }
+
+    public function getMaxQuantity(): ?int
+    {
+        return $this->fields['maxQuantity'] ?? null;
+    }
+
+    public function setMaxQuantity(null|int $maxQuantity): static
+    {
+        $this->fields['maxQuantity'] = $maxQuantity;
+
+        return $this;
+    }
+
+    public function getPrice(): float
+    {
+        return $this->fields['price'];
+    }
+
+    public function setPrice(float|string $price): static
+    {
+        if (is_string($price)) {
+            $price = (float) $price;
+        }
+
+        $this->fields['price'] = $price;
 
         return $this;
     }
@@ -56,10 +108,19 @@ class Volume extends PlanPriceFormula
     public function jsonSerialize(): array
     {
         $data = [];
+        if (array_key_exists('formula', $this->fields)) {
+            $data['formula'] = $this->fields['formula'];
+        }
         if (array_key_exists('brackets', $this->fields)) {
             $data['brackets'] = $this->fields['brackets'];
         }
+        if (array_key_exists('maxQuantity', $this->fields)) {
+            $data['maxQuantity'] = $this->fields['maxQuantity'];
+        }
+        if (array_key_exists('price', $this->fields)) {
+            $data['price'] = $this->fields['price'];
+        }
 
-        return parent::jsonSerialize() + $data;
+        return $data;
     }
 }

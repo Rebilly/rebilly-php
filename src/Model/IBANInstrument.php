@@ -13,18 +13,22 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-class IBANInstrument extends BankAccountInstrument
+use JsonSerializable;
+
+class IBANInstrument implements BankAccountInstrument, JsonSerializable
 {
     public const ACCOUNT_NUMBER_TYPE_IBAN = 'IBAN';
+
+    public const ACCOUNT_TYPE_CHECKING = 'checking';
+
+    public const ACCOUNT_TYPE_SAVINGS = 'savings';
+
+    public const ACCOUNT_TYPE_OTHER = 'other';
 
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        parent::__construct([
-            'accountNumberType' => 'IBAN',
-        ] + $data);
-
         if (array_key_exists('accountNumberType', $data)) {
             $this->setAccountNumberType($data['accountNumberType']);
         }
@@ -40,6 +44,12 @@ class IBANInstrument extends BankAccountInstrument
         if (array_key_exists('last4', $data)) {
             $this->setLast4($data['last4']);
         }
+        if (array_key_exists('routingNumber', $data)) {
+            $this->setRoutingNumber($data['routingNumber']);
+        }
+        if (array_key_exists('accountType', $data)) {
+            $this->setAccountType($data['accountType']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -47,17 +57,11 @@ class IBANInstrument extends BankAccountInstrument
         return new self($data);
     }
 
-    /**
-     * @psalm-return self::ACCOUNT_NUMBER_TYPE_* $accountNumberType
-     */
     public function getAccountNumberType(): string
     {
         return $this->fields['accountNumberType'];
     }
 
-    /**
-     * @psalm-param self::ACCOUNT_NUMBER_TYPE_* $accountNumberType
-     */
     public function setAccountNumberType(string $accountNumberType): static
     {
         $this->fields['accountNumberType'] = $accountNumberType;
@@ -106,6 +110,30 @@ class IBANInstrument extends BankAccountInstrument
         return $this->fields['last4'] ?? null;
     }
 
+    public function getRoutingNumber(): string
+    {
+        return $this->fields['routingNumber'];
+    }
+
+    public function setRoutingNumber(string $routingNumber): static
+    {
+        $this->fields['routingNumber'] = $routingNumber;
+
+        return $this;
+    }
+
+    public function getAccountType(): string
+    {
+        return $this->fields['accountType'];
+    }
+
+    public function setAccountType(string $accountType): static
+    {
+        $this->fields['accountType'] = $accountType;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -124,8 +152,14 @@ class IBANInstrument extends BankAccountInstrument
         if (array_key_exists('last4', $this->fields)) {
             $data['last4'] = $this->fields['last4'];
         }
+        if (array_key_exists('routingNumber', $this->fields)) {
+            $data['routingNumber'] = $this->fields['routingNumber'];
+        }
+        if (array_key_exists('accountType', $this->fields)) {
+            $data['accountType'] = $this->fields['accountType'];
+        }
 
-        return parent::jsonSerialize() + $data;
+        return $data;
     }
 
     private function setLast4(null|string $last4): static

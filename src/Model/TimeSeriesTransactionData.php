@@ -65,15 +65,15 @@ class TimeSeriesTransactionData implements JsonSerializable
         return $this;
     }
 
-    public function getSubaggregates(): ?TimeSeriesTransactionSubaggregates
+    public function getSubaggregates(): ?TimeSeriesTransactionDataSubaggregates
     {
         return $this->fields['subaggregates'] ?? null;
     }
 
-    public function setSubaggregates(null|TimeSeriesTransactionSubaggregates|array $subaggregates): static
+    public function setSubaggregates(null|TimeSeriesTransactionDataSubaggregates|array $subaggregates): static
     {
-        if ($subaggregates !== null && !($subaggregates instanceof TimeSeriesTransactionSubaggregates)) {
-            $subaggregates = TimeSeriesTransactionSubaggregates::from($subaggregates);
+        if ($subaggregates !== null && !($subaggregates instanceof TimeSeriesTransactionDataSubaggregates)) {
+            $subaggregates = TimeSeriesTransactionDataSubaggregates::from($subaggregates);
         }
 
         $this->fields['subaggregates'] = $subaggregates;

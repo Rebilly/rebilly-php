@@ -62,7 +62,7 @@ class ReportRetentionValueData implements JsonSerializable
     }
 
     /**
-     * @return null|ReportRetentionValuePeriods[]
+     * @return null|ReportRetentionValueDataPeriods[]
      */
     public function getPeriods(): ?array
     {
@@ -70,11 +70,14 @@ class ReportRetentionValueData implements JsonSerializable
     }
 
     /**
-     * @param null|ReportRetentionValuePeriods[] $periods
+     * @param null|array[]|ReportRetentionValueDataPeriods[] $periods
      */
     public function setPeriods(null|array $periods): static
     {
-        $periods = $periods !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ReportRetentionValuePeriods ? $value : ReportRetentionValuePeriods::from($value)) : null, $periods) : null;
+        $periods = $periods !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof ReportRetentionValueDataPeriods ? $value : ReportRetentionValueDataPeriods::from($value)) : null,
+            $periods,
+        ) : null;
 
         $this->fields['periods'] = $periods;
 

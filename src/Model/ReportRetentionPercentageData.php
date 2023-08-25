@@ -62,7 +62,7 @@ class ReportRetentionPercentageData implements JsonSerializable
     }
 
     /**
-     * @return null|ReportRetentionPercentagePeriods[]
+     * @return null|ReportRetentionPercentageDataPeriods[]
      */
     public function getPeriods(): ?array
     {
@@ -70,11 +70,14 @@ class ReportRetentionPercentageData implements JsonSerializable
     }
 
     /**
-     * @param null|ReportRetentionPercentagePeriods[] $periods
+     * @param null|array[]|ReportRetentionPercentageDataPeriods[] $periods
      */
     public function setPeriods(null|array $periods): static
     {
-        $periods = $periods !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ReportRetentionPercentagePeriods ? $value : ReportRetentionPercentagePeriods::from($value)) : null, $periods) : null;
+        $periods = $periods !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof ReportRetentionPercentageDataPeriods ? $value : ReportRetentionPercentageDataPeriods::from($value)) : null,
+            $periods,
+        ) : null;
 
         $this->fields['periods'] = $periods;
 

@@ -40,9 +40,16 @@ class Integration implements JsonSerializable
         return new self($data);
     }
 
-    public function getService(): ?OAuth2CredentialService
+    public function getService(): ?string
     {
         return $this->fields['service'] ?? null;
+    }
+
+    public function setService(null|string $service): static
+    {
+        $this->fields['service'] = $service;
+
+        return $this;
     }
 
     public function getCount(): ?int
@@ -59,7 +66,7 @@ class Integration implements JsonSerializable
     }
 
     /**
-     * @return null|array<OAuth2ConnectLink|SelfLink>
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
@@ -70,7 +77,7 @@ class Integration implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('service', $this->fields)) {
-            $data['service'] = $this->fields['service']?->value;
+            $data['service'] = $this->fields['service'];
         }
         if (array_key_exists('count', $this->fields)) {
             $data['count'] = $this->fields['count'];
@@ -85,17 +92,6 @@ class Integration implements JsonSerializable
         return $data;
     }
 
-    private function setService(null|OAuth2CredentialService|string $service): static
-    {
-        if ($service !== null && !($service instanceof OAuth2CredentialService)) {
-            $service = OAuth2CredentialService::from($service);
-        }
-
-        $this->fields['service'] = $service;
-
-        return $this;
-    }
-
     private function setCount(null|int $count): static
     {
         $this->fields['count'] = $count;
@@ -104,11 +100,14 @@ class Integration implements JsonSerializable
     }
 
     /**
-     * @param null|IntegrationConfigurations[] $configurations
+     * @param null|array[]|IntegrationConfigurations[] $configurations
      */
     private function setConfigurations(null|array $configurations): static
     {
-        $configurations = $configurations !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof IntegrationConfigurations ? $value : IntegrationConfigurations::from($value)) : null, $configurations) : null;
+        $configurations = $configurations !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof IntegrationConfigurations ? $value : IntegrationConfigurations::from($value)) : null,
+            $configurations,
+        ) : null;
 
         $this->fields['configurations'] = $configurations;
 
@@ -116,11 +115,14 @@ class Integration implements JsonSerializable
     }
 
     /**
-     * @param null|array<OAuth2ConnectLink|SelfLink> $links
+     * @param null|array[]|ResourceLink[] $links
      */
     private function setLinks(null|array $links): static
     {
-        $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
+        $links = $links !== null ? array_map(
+            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+            $links,
+        ) : null;
 
         $this->fields['_links'] = $links;
 

@@ -65,15 +65,15 @@ class ReportMonthlyRecurringRevenueData implements JsonSerializable
         return $this;
     }
 
-    public function getBreakdown(): ?ReportMonthlyRecurringRevenueBreakdown
+    public function getBreakdown(): ?ReportMonthlyRecurringRevenueDataBreakdown
     {
         return $this->fields['breakdown'] ?? null;
     }
 
-    public function setBreakdown(null|ReportMonthlyRecurringRevenueBreakdown|array $breakdown): static
+    public function setBreakdown(null|ReportMonthlyRecurringRevenueDataBreakdown|array $breakdown): static
     {
-        if ($breakdown !== null && !($breakdown instanceof ReportMonthlyRecurringRevenueBreakdown)) {
-            $breakdown = ReportMonthlyRecurringRevenueBreakdown::from($breakdown);
+        if ($breakdown !== null && !($breakdown instanceof ReportMonthlyRecurringRevenueDataBreakdown)) {
+            $breakdown = ReportMonthlyRecurringRevenueDataBreakdown::from($breakdown);
         }
 
         $this->fields['breakdown'] = $breakdown;

@@ -17,6 +17,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Model\ApplicationInstance;
+use Rebilly\Sdk\Model\ApplicationInstanceConfiguration;
 
 class ApplicationInstancesApi
 {
@@ -57,6 +58,25 @@ class ApplicationInstancesApi
     }
 
     /**
+     * @return ApplicationInstanceConfiguration
+     */
+    public function getConfiguration(
+        string $applicationId,
+    ): ApplicationInstanceConfiguration {
+        $pathParams = [
+            '{applicationId}' => $applicationId,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/application-instances/{applicationId}/configuration');
+
+        $request = new Request('GET', $uri);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return ApplicationInstanceConfiguration::from($data);
+    }
+
+    /**
      * @return ApplicationInstance
      */
     public function upsert(
@@ -74,5 +94,25 @@ class ApplicationInstancesApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ApplicationInstance::from($data);
+    }
+
+    /**
+     * @return ApplicationInstanceConfiguration
+     */
+    public function upsertConfiguration(
+        string $applicationId,
+        ?ApplicationInstanceConfiguration $applicationInstanceConfiguration = null,
+    ): ApplicationInstanceConfiguration {
+        $pathParams = [
+            '{applicationId}' => $applicationId,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/application-instances/{applicationId}/configuration');
+
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($applicationInstanceConfiguration));
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return ApplicationInstanceConfiguration::from($data);
     }
 }

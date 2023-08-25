@@ -17,7 +17,7 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
 
-class AchPlaidFeature implements JsonSerializable
+class AchPlaidFeature implements ReadyToPayAchMethodFeature, JsonSerializable
 {
     public const NAME_PLAID = 'Plaid';
 
@@ -41,44 +41,38 @@ class AchPlaidFeature implements JsonSerializable
         return new self($data);
     }
 
-    /**
-     * @psalm-return self::NAME_*|null $name
-     */
-    public function getName(): ?string
+    public function getName(): string
     {
-        return $this->fields['name'] ?? null;
+        return $this->fields['name'];
     }
 
-    /**
-     * @psalm-param self::NAME_*|null $name
-     */
-    public function setName(null|string $name): static
+    public function setName(string $name): static
     {
         $this->fields['name'] = $name;
 
         return $this;
     }
 
-    public function getLinkToken(): ?string
+    public function getLinkToken(): string
     {
-        return $this->fields['linkToken'] ?? null;
+        return $this->fields['linkToken'];
     }
 
-    public function setLinkToken(null|string $linkToken): static
+    public function setLinkToken(string $linkToken): static
     {
         $this->fields['linkToken'] = $linkToken;
 
         return $this;
     }
 
-    public function getExpirationTime(): ?DateTimeImmutable
+    public function getExpirationTime(): DateTimeImmutable
     {
-        return $this->fields['expirationTime'] ?? null;
+        return $this->fields['expirationTime'];
     }
 
-    public function setExpirationTime(null|DateTimeImmutable|string $expirationTime): static
+    public function setExpirationTime(DateTimeImmutable|string $expirationTime): static
     {
-        if ($expirationTime !== null && !($expirationTime instanceof DateTimeImmutable)) {
+        if (!($expirationTime instanceof DateTimeImmutable)) {
             $expirationTime = new DateTimeImmutable($expirationTime);
         }
 

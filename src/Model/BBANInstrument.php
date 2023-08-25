@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-class BBANInstrument extends BankAccountInstrument
+use JsonSerializable;
+
+class BBANInstrument implements BankAccountInstrument, JsonSerializable
 {
     public const ACCOUNT_NUMBER_TYPE_BBAN = 'BBAN';
 
@@ -27,10 +29,6 @@ class BBANInstrument extends BankAccountInstrument
 
     public function __construct(array $data = [])
     {
-        parent::__construct([
-            'accountNumberType' => 'BBAN',
-        ] + $data);
-
         if (array_key_exists('accountNumberType', $data)) {
             $this->setAccountNumberType($data['accountNumberType']);
         }
@@ -59,17 +57,11 @@ class BBANInstrument extends BankAccountInstrument
         return new self($data);
     }
 
-    /**
-     * @psalm-return self::ACCOUNT_NUMBER_TYPE_* $accountNumberType
-     */
     public function getAccountNumberType(): string
     {
         return $this->fields['accountNumberType'];
     }
 
-    /**
-     * @psalm-param self::ACCOUNT_NUMBER_TYPE_* $accountNumberType
-     */
     public function setAccountNumberType(string $accountNumberType): static
     {
         $this->fields['accountNumberType'] = $accountNumberType;
@@ -101,17 +93,11 @@ class BBANInstrument extends BankAccountInstrument
         return $this;
     }
 
-    /**
-     * @psalm-return self::ACCOUNT_TYPE_* $accountType
-     */
     public function getAccountType(): string
     {
         return $this->fields['accountType'];
     }
 
-    /**
-     * @psalm-param self::ACCOUNT_TYPE_* $accountType
-     */
     public function setAccountType(string $accountType): static
     {
         $this->fields['accountType'] = $accountType;
@@ -173,7 +159,7 @@ class BBANInstrument extends BankAccountInstrument
             $data['last4'] = $this->fields['last4'];
         }
 
-        return parent::jsonSerialize() + $data;
+        return $data;
     }
 
     private function setLast4(null|string $last4): static

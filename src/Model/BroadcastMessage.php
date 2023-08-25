@@ -98,19 +98,22 @@ class BroadcastMessage implements JsonSerializable
     }
 
     /**
-     * @return null|BroadcastMessageMessages[]
+     * @return BroadcastMessageMessages[]
      */
-    public function getMessages(): ?array
+    public function getMessages(): array
     {
-        return $this->fields['messages'] ?? null;
+        return $this->fields['messages'];
     }
 
     /**
-     * @param null|BroadcastMessageMessages[] $messages
+     * @param array[]|BroadcastMessageMessages[] $messages
      */
-    public function setMessages(null|array $messages): static
+    public function setMessages(array $messages): static
     {
-        $messages = $messages !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof BroadcastMessageMessages ? $value : BroadcastMessageMessages::from($value)) : null, $messages) : null;
+        $messages = array_map(
+            fn ($value) => $value !== null ? ($value instanceof BroadcastMessageMessages ? $value : BroadcastMessageMessages::from($value)) : null,
+            $messages,
+        );
 
         $this->fields['messages'] = $messages;
 
@@ -138,9 +141,6 @@ class BroadcastMessage implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-return self::STATUS_*|null $status
-     */
     public function getStatus(): ?string
     {
         return $this->fields['status'] ?? null;
@@ -157,11 +157,21 @@ class BroadcastMessage implements JsonSerializable
     }
 
     /**
-     * @return null|SelfLink[]
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    public function setLinks(null|array $links): static
+    {
+        $this->fields['_links'] = $links;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -219,9 +229,6 @@ class BroadcastMessage implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-param self::STATUS_*|null $status
-     */
     private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
@@ -247,18 +254,6 @@ class BroadcastMessage implements JsonSerializable
         }
 
         $this->fields['updatedTime'] = $updatedTime;
-
-        return $this;
-    }
-
-    /**
-     * @param null|SelfLink[] $links
-     */
-    private function setLinks(null|array $links): static
-    {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
-
-        $this->fields['_links'] = $links;
 
         return $this;
     }

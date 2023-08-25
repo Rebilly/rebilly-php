@@ -40,17 +40,13 @@ class EmailNotification implements JsonSerializable
         return new self($data);
     }
 
-    public function getEventType(): ?EventType
+    public function getEventType(): ?string
     {
         return $this->fields['eventType'] ?? null;
     }
 
-    public function setEventType(null|EventType|string $eventType): static
+    public function setEventType(null|string $eventType): static
     {
-        if ($eventType !== null && !($eventType instanceof EventType)) {
-            $eventType = EventType::from($eventType);
-        }
-
         $this->fields['eventType'] = $eventType;
 
         return $this;
@@ -70,18 +66,28 @@ class EmailNotification implements JsonSerializable
     }
 
     /**
-     * @return null|SelfLink[]
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
     }
 
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    public function setLinks(null|array $links): static
+    {
+        $this->fields['_links'] = $links;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
         if (array_key_exists('eventType', $this->fields)) {
-            $data['eventType'] = $this->fields['eventType']?->value;
+            $data['eventType'] = $this->fields['eventType'];
         }
         if (array_key_exists('count', $this->fields)) {
             $data['count'] = $this->fields['count'];
@@ -104,25 +110,16 @@ class EmailNotification implements JsonSerializable
     }
 
     /**
-     * @param null|EmailNotificationNotifications[] $notifications
+     * @param null|array[]|EmailNotificationNotifications[] $notifications
      */
     private function setNotifications(null|array $notifications): static
     {
-        $notifications = $notifications !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof EmailNotificationNotifications ? $value : EmailNotificationNotifications::from($value)) : null, $notifications) : null;
+        $notifications = $notifications !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof EmailNotificationNotifications ? $value : EmailNotificationNotifications::from($value)) : null,
+            $notifications,
+        ) : null;
 
         $this->fields['notifications'] = $notifications;
-
-        return $this;
-    }
-
-    /**
-     * @param null|SelfLink[] $links
-     */
-    private function setLinks(null|array $links): static
-    {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
-
-        $this->fields['_links'] = $links;
 
         return $this;
     }

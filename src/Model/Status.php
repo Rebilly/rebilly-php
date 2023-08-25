@@ -38,9 +38,6 @@ class Status implements JsonSerializable
         return new self($data);
     }
 
-    /**
-     * @psalm-return self::STATUS_*|null $status
-     */
     public function getStatus(): ?string
     {
         return $this->fields['status'] ?? null;
@@ -49,17 +46,6 @@ class Status implements JsonSerializable
     public function getTime(): ?DateTimeImmutable
     {
         return $this->fields['time'] ?? null;
-    }
-
-    public function setTime(null|DateTimeImmutable|string $time): static
-    {
-        if ($time !== null && !($time instanceof DateTimeImmutable)) {
-            $time = new DateTimeImmutable($time);
-        }
-
-        $this->fields['time'] = $time;
-
-        return $this;
     }
 
     public function jsonSerialize(): array
@@ -75,12 +61,20 @@ class Status implements JsonSerializable
         return $data;
     }
 
-    /**
-     * @psalm-param self::STATUS_*|null $status
-     */
     private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
+
+        return $this;
+    }
+
+    private function setTime(null|DateTimeImmutable|string $time): static
+    {
+        if ($time !== null && !($time instanceof DateTimeImmutable)) {
+            $time = new DateTimeImmutable($time);
+        }
+
+        $this->fields['time'] = $time;
 
         return $this;
     }

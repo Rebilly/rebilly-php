@@ -26,6 +26,9 @@ class Flexepin extends GatewayAccount
         if (array_key_exists('credentials', $data)) {
             $this->setCredentials($data['credentials']);
         }
+        if (array_key_exists('settings', $data)) {
+            $this->setSettings($data['settings']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -49,11 +52,30 @@ class Flexepin extends GatewayAccount
         return $this;
     }
 
+    public function getSettings(): ?FlexepinSettings
+    {
+        return $this->fields['settings'] ?? null;
+    }
+
+    public function setSettings(null|FlexepinSettings|array $settings): static
+    {
+        if ($settings !== null && !($settings instanceof FlexepinSettings)) {
+            $settings = FlexepinSettings::from($settings);
+        }
+
+        $this->fields['settings'] = $settings;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
         if (array_key_exists('credentials', $this->fields)) {
             $data['credentials'] = $this->fields['credentials']?->jsonSerialize();
+        }
+        if (array_key_exists('settings', $this->fields)) {
+            $data['settings'] = $this->fields['settings']?->jsonSerialize();
         }
 
         return parent::jsonSerialize() + $data;

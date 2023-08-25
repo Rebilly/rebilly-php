@@ -34,24 +34,20 @@ class ReportKycRejectionsData implements JsonSerializable
         return new self($data);
     }
 
-    public function getDocumentType(): ?KycDocumentTypes
+    public function getDocumentType(): ?string
     {
         return $this->fields['documentType'] ?? null;
     }
 
-    public function setDocumentType(null|KycDocumentTypes|string $documentType): static
+    public function setDocumentType(null|string $documentType): static
     {
-        if ($documentType !== null && !($documentType instanceof KycDocumentTypes)) {
-            $documentType = KycDocumentTypes::from($documentType);
-        }
-
         $this->fields['documentType'] = $documentType;
 
         return $this;
     }
 
     /**
-     * @return null|ReportKycRejectionsRejectionReasons[]
+     * @return null|ReportKycRejectionsDataRejectionReasons[]
      */
     public function getRejectionReasons(): ?array
     {
@@ -59,11 +55,14 @@ class ReportKycRejectionsData implements JsonSerializable
     }
 
     /**
-     * @param null|ReportKycRejectionsRejectionReasons[] $rejectionReasons
+     * @param null|array[]|ReportKycRejectionsDataRejectionReasons[] $rejectionReasons
      */
     public function setRejectionReasons(null|array $rejectionReasons): static
     {
-        $rejectionReasons = $rejectionReasons !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof ReportKycRejectionsRejectionReasons ? $value : ReportKycRejectionsRejectionReasons::from($value)) : null, $rejectionReasons) : null;
+        $rejectionReasons = $rejectionReasons !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof ReportKycRejectionsDataRejectionReasons ? $value : ReportKycRejectionsDataRejectionReasons::from($value)) : null,
+            $rejectionReasons,
+        ) : null;
 
         $this->fields['rejectionReasons'] = $rejectionReasons;
 
@@ -74,7 +73,7 @@ class ReportKycRejectionsData implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('documentType', $this->fields)) {
-            $data['documentType'] = $this->fields['documentType']?->value;
+            $data['documentType'] = $this->fields['documentType'];
         }
         if (array_key_exists('rejectionReasons', $this->fields)) {
             $data['rejectionReasons'] = $this->fields['rejectionReasons'];

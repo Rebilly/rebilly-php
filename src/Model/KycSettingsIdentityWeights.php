@@ -60,6 +60,9 @@ class KycSettingsIdentityWeights implements JsonSerializable
         if (array_key_exists('documentSubtype', $data)) {
             $this->setDocumentSubtype($data['documentSubtype']);
         }
+        if (array_key_exists('isTampered', $data)) {
+            $this->setIsTampered($data['isTampered']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -223,6 +226,18 @@ class KycSettingsIdentityWeights implements JsonSerializable
         return $this;
     }
 
+    public function getIsTampered(): ?int
+    {
+        return $this->fields['isTampered'] ?? null;
+    }
+
+    public function setIsTampered(null|int $isTampered): static
+    {
+        $this->fields['isTampered'] = $isTampered;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -264,6 +279,9 @@ class KycSettingsIdentityWeights implements JsonSerializable
         }
         if (array_key_exists('documentSubtype', $this->fields)) {
             $data['documentSubtype'] = $this->fields['documentSubtype'];
+        }
+        if (array_key_exists('isTampered', $this->fields)) {
+            $data['isTampered'] = $this->fields['isTampered'];
         }
 
         return $data;

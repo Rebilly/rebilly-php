@@ -39,17 +39,11 @@ class EcoPayzSettings implements JsonSerializable
         return new self($data);
     }
 
-    /**
-     * @psalm-return self::VALID_CURRENCY_* $validCurrency
-     */
     public function getValidCurrency(): string
     {
         return $this->fields['validCurrency'];
     }
 
-    /**
-     * @psalm-param self::VALID_CURRENCY_* $validCurrency
-     */
     public function setValidCurrency(string $validCurrency): static
     {
         $this->fields['validCurrency'] = $validCurrency;

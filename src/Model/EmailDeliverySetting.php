@@ -66,6 +66,9 @@ class EmailDeliverySetting implements JsonSerializable
         if (array_key_exists('updatedTime', $data)) {
             $this->setUpdatedTime($data['updatedTime']);
         }
+        if (array_key_exists('_links', $data)) {
+            $this->setLinks($data['_links']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -102,9 +105,6 @@ class EmailDeliverySetting implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-return self::STATUS_*|null $status
-     */
     public function getStatus(): ?string
     {
         return $this->fields['status'] ?? null;
@@ -122,9 +122,6 @@ class EmailDeliverySetting implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-return self::PROVIDER_*|null $provider
-     */
     public function getProvider(): ?string
     {
         return $this->fields['provider'] ?? null;
@@ -150,6 +147,24 @@ class EmailDeliverySetting implements JsonSerializable
     public function getUpdatedTime(): ?DateTimeImmutable
     {
         return $this->fields['updatedTime'] ?? null;
+    }
+
+    /**
+     * @return null|ResourceLink[]
+     */
+    public function getLinks(): ?array
+    {
+        return $this->fields['_links'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    public function setLinks(null|array $links): static
+    {
+        $this->fields['_links'] = $links;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -182,6 +197,9 @@ class EmailDeliverySetting implements JsonSerializable
         if (array_key_exists('updatedTime', $this->fields)) {
             $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
         }
+        if (array_key_exists('_links', $this->fields)) {
+            $data['_links'] = $this->fields['_links'];
+        }
 
         return $data;
     }
@@ -193,9 +211,6 @@ class EmailDeliverySetting implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-param self::STATUS_*|null $status
-     */
     private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
@@ -203,9 +218,6 @@ class EmailDeliverySetting implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-param self::PROVIDER_*|null $provider
-     */
     private function setProvider(null|string $provider): static
     {
         $this->fields['provider'] = $provider;

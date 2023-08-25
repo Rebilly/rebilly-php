@@ -20,7 +20,6 @@ use Rebilly\Sdk\Model\PostPermissionsEmulationRequest;
 use Rebilly\Sdk\Model\Profile;
 use Rebilly\Sdk\Model\ProfileMfa;
 use Rebilly\Sdk\Model\Session;
-use Rebilly\Sdk\Model\UpdatePassword;
 
 class ProfileApi
 {
@@ -62,20 +61,6 @@ class ProfileApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ProfileMfa::from($data);
-    }
-
-    /**
-     * @return Profile
-     */
-    public function resetTotp(): Profile
-    {
-        $uri = '/profile/totp-reset';
-
-        $request = new Request('POST', $uri);
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return Profile::from($data);
     }
 
     /**
@@ -134,20 +119,5 @@ class ProfileApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ProfileMfa::from($data);
-    }
-
-    /**
-     * @return Profile
-     */
-    public function updatePassword(
-        UpdatePassword $updatePassword,
-    ): Profile {
-        $uri = '/profile/password';
-
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($updatePassword));
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return Profile::from($data);
     }
 }

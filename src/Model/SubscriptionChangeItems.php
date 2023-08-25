@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use InvalidArgumentException;
 use JsonSerializable;
 
 class SubscriptionChangeItems implements JsonSerializable
@@ -35,14 +34,16 @@ class SubscriptionChangeItems implements JsonSerializable
         return new self($data);
     }
 
-    public function getPlan(): FlexiblePlan|OriginalPlan
+    public function getPlan(): FlexiblePlan
     {
         return $this->fields['plan'];
     }
 
-    public function setPlan(array|FlexiblePlan|OriginalPlan $plan): static
+    public function setPlan(FlexiblePlan|array $plan): static
     {
-        $plan = $this->ensurePlan($plan);
+        if (!($plan instanceof FlexiblePlan)) {
+            $plan = FlexiblePlan::from($plan);
+        }
 
         $this->fields['plan'] = $plan;
 
@@ -65,42 +66,12 @@ class SubscriptionChangeItems implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('plan', $this->fields)) {
-            $data['plan'] = $this->fields['plan'];
+            $data['plan'] = $this->fields['plan']?->jsonSerialize();
         }
         if (array_key_exists('quantity', $this->fields)) {
             $data['quantity'] = $this->fields['quantity'];
         }
 
         return $data;
-    }
-
-    protected function ensurePlan(array|FlexiblePlan|OriginalPlan $data): FlexiblePlan|OriginalPlan
-    {
-        if (
-            $data instanceof FlexiblePlan
-            || $data instanceof OriginalPlan
-        ) {
-            return $data;
-        }
-        $candidates = [];
-        $candidates[] = FlexiblePlan::tryFrom($data);
-        $candidates[] = OriginalPlan::tryFrom($data);
-
-        $determined = array_reduce($candidates, function (?array $current, array $candidate) {
-            if ($current === null || $current[1] < $candidate[1]) {
-                $current = $candidate;
-            }
-
-            return $current;
-        });
-
-        if (
-            $determined[0] instanceof FlexiblePlan
-            || $determined[0] instanceof OriginalPlan
-        ) {
-            return $determined[0];
-        }
-
-        throw new InvalidArgumentException('Could not instantiate plan with the given value');
     }
 }

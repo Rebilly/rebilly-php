@@ -18,6 +18,7 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\CustomField;
+use Rebilly\Sdk\Model\CustomFieldFactory;
 use Rebilly\Sdk\Paginator;
 
 class CustomFieldsApi
@@ -45,7 +46,7 @@ class CustomFieldsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CustomField::from($data);
+        return CustomFieldFactory::from($data);
     }
 
     /**
@@ -66,7 +67,7 @@ class CustomFieldsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CustomField::from($data);
+        return CustomFieldFactory::from($data);
     }
 
     /**
@@ -92,7 +93,7 @@ class CustomFieldsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): CustomField => CustomField::from($item), $data),
+            array_map(fn (array $item): CustomField => CustomFieldFactory::from($item), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),

@@ -92,25 +92,16 @@ class SubscriptionPause implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-return self::STATUS_*|null $status
-     */
     public function getStatus(): ?string
     {
         return $this->fields['status'] ?? null;
     }
 
-    /**
-     * @psalm-return self::PAUSED_BY_*|null $pausedBy
-     */
     public function getPausedBy(): ?string
     {
         return $this->fields['pausedBy'] ?? null;
     }
 
-    /**
-     * @psalm-param self::PAUSED_BY_*|null $pausedBy
-     */
     public function setPausedBy(null|string $pausedBy): static
     {
         $this->fields['pausedBy'] = $pausedBy;
@@ -185,11 +176,21 @@ class SubscriptionPause implements JsonSerializable
     }
 
     /**
-     * @return null|SelfLink[]
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    public function setLinks(null|array $links): static
+    {
+        $this->fields['_links'] = $links;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -239,9 +240,6 @@ class SubscriptionPause implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-param self::STATUS_*|null $status
-     */
     private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
@@ -267,18 +265,6 @@ class SubscriptionPause implements JsonSerializable
         }
 
         $this->fields['updatedTime'] = $updatedTime;
-
-        return $this;
-    }
-
-    /**
-     * @param null|SelfLink[] $links
-     */
-    private function setLinks(null|array $links): static
-    {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
-
-        $this->fields['_links'] = $links;
 
         return $this;
     }

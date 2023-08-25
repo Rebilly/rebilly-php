@@ -42,8 +42,14 @@ class Membership implements JsonSerializable
         if (array_key_exists('roleIds', $data)) {
             $this->setRoleIds($data['roleIds']);
         }
+        if (array_key_exists('acl', $data)) {
+            $this->setAcl($data['acl']);
+        }
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
+        }
+        if (array_key_exists('_embedded', $data)) {
+            $this->setEmbedded($data['_embedded']);
         }
     }
 
@@ -97,7 +103,10 @@ class Membership implements JsonSerializable
      */
     public function setAllowedIps(null|array $allowedIps): static
     {
-        $allowedIps = $allowedIps !== null ? array_map(fn ($value) => $value ?? null, $allowedIps) : null;
+        $allowedIps = $allowedIps !== null ? array_map(
+            fn ($value) => $value,
+            $allowedIps,
+        ) : null;
 
         $this->fields['allowedIps'] = $allowedIps;
 
@@ -117,7 +126,10 @@ class Membership implements JsonSerializable
      */
     public function setPermissions(null|array $permissions): static
     {
-        $permissions = $permissions !== null ? array_map(fn ($value) => $value ?? null, $permissions) : null;
+        $permissions = $permissions !== null ? array_map(
+            fn ($value) => $value,
+            $permissions,
+        ) : null;
 
         $this->fields['permissions'] = $permissions;
 
@@ -154,19 +166,60 @@ class Membership implements JsonSerializable
      */
     public function setRoleIds(null|array $roleIds): static
     {
-        $roleIds = $roleIds !== null ? array_map(fn ($value) => $value ?? null, $roleIds) : null;
+        $roleIds = $roleIds !== null ? array_map(
+            fn ($value) => $value,
+            $roleIds,
+        ) : null;
 
         $this->fields['roleIds'] = $roleIds;
 
         return $this;
     }
 
+    public function getAcl(): ?Acl
+    {
+        return $this->fields['acl'] ?? null;
+    }
+
+    public function setAcl(null|Acl $acl): static
+    {
+        $this->fields['acl'] = $acl;
+
+        return $this;
+    }
+
     /**
-     * @return null|SelfLink[]
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    public function setLinks(null|array $links): static
+    {
+        $this->fields['_links'] = $links;
+
+        return $this;
+    }
+
+    public function getEmbedded(): ?MembershipEmbedded
+    {
+        return $this->fields['_embedded'] ?? null;
+    }
+
+    public function setEmbedded(null|MembershipEmbedded|array $embedded): static
+    {
+        if ($embedded !== null && !($embedded instanceof MembershipEmbedded)) {
+            $embedded = MembershipEmbedded::from($embedded);
+        }
+
+        $this->fields['_embedded'] = $embedded;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -193,8 +246,14 @@ class Membership implements JsonSerializable
         if (array_key_exists('roleIds', $this->fields)) {
             $data['roleIds'] = $this->fields['roleIds'];
         }
+        if (array_key_exists('acl', $this->fields)) {
+            $data['acl'] = $this->fields['acl'];
+        }
         if (array_key_exists('_links', $this->fields)) {
             $data['_links'] = $this->fields['_links'];
+        }
+        if (array_key_exists('_embedded', $this->fields)) {
+            $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();
         }
 
         return $data;
@@ -203,18 +262,6 @@ class Membership implements JsonSerializable
     private function setIsDefault(null|bool $isDefault): static
     {
         $this->fields['isDefault'] = $isDefault;
-
-        return $this;
-    }
-
-    /**
-     * @param null|SelfLink[] $links
-     */
-    private function setLinks(null|array $links): static
-    {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
-
-        $this->fields['_links'] = $links;
 
         return $this;
     }

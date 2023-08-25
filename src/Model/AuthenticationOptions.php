@@ -36,6 +36,9 @@ class AuthenticationOptions implements JsonSerializable
         if (array_key_exists('otpRequired', $data)) {
             $this->setOtpRequired($data['otpRequired']);
         }
+        if (array_key_exists('_links', $data)) {
+            $this->setLinks($data['_links']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -103,6 +106,24 @@ class AuthenticationOptions implements JsonSerializable
         return $this;
     }
 
+    /**
+     * @return null|ResourceLink[]
+     */
+    public function getLinks(): ?array
+    {
+        return $this->fields['_links'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    public function setLinks(null|array $links): static
+    {
+        $this->fields['_links'] = $links;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -120,6 +141,9 @@ class AuthenticationOptions implements JsonSerializable
         }
         if (array_key_exists('otpRequired', $this->fields)) {
             $data['otpRequired'] = $this->fields['otpRequired'];
+        }
+        if (array_key_exists('_links', $this->fields)) {
+            $data['_links'] = $this->fields['_links'];
         }
 
         return $data;

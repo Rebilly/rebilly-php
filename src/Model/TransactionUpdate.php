@@ -45,17 +45,11 @@ class TransactionUpdate implements JsonSerializable
         return new self($data);
     }
 
-    /**
-     * @psalm-return self::RESULT_* $result
-     */
     public function getResult(): string
     {
         return $this->fields['result'];
     }
 
-    /**
-     * @psalm-param self::RESULT_* $result
-     */
     public function setResult(string $result): static
     {
         $this->fields['result'] = $result;

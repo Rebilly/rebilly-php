@@ -119,8 +119,6 @@ class AML implements JsonSerializable
 
     /**
      * @return null|string[]
-     *
-     * @psalm-return self::SOURCE_TYPE_*|null $sourceType
      */
     public function getSourceType(): ?array
     {
@@ -140,9 +138,6 @@ class AML implements JsonSerializable
         return $this->fields['title'] ?? null;
     }
 
-    /**
-     * @psalm-return self::TYPE_*|null $type
-     */
     public function getType(): ?string
     {
         return $this->fields['type'] ?? null;
@@ -161,9 +156,6 @@ class AML implements JsonSerializable
         return $this->fields['regime'] ?? null;
     }
 
-    /**
-     * @psalm-return self::CONFIDENCE_*|null $confidence
-     */
     public function getConfidence(): ?string
     {
         return $this->fields['confidence'] ?? null;
@@ -212,11 +204,21 @@ class AML implements JsonSerializable
     }
 
     /**
-     * @return null|SelfLink[]
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    public function setLinks(null|array $links): static
+    {
+        $this->fields['_links'] = $links;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -300,12 +302,13 @@ class AML implements JsonSerializable
 
     /**
      * @param null|string[] $sourceType
-     *
-     * @psalm-param self::SOURCE_TYPE_*|null $sourceType
      */
     private function setSourceType(null|array $sourceType): static
     {
-        $sourceType = $sourceType !== null ? array_map(fn ($value) => $value ?? null, $sourceType) : null;
+        $sourceType = $sourceType !== null ? array_map(
+            fn ($value) => $value,
+            $sourceType,
+        ) : null;
 
         $this->fields['sourceType'] = $sourceType;
 
@@ -324,16 +327,16 @@ class AML implements JsonSerializable
      */
     private function setTitle(null|array $title): static
     {
-        $title = $title !== null ? array_map(fn ($value) => $value ?? null, $title) : null;
+        $title = $title !== null ? array_map(
+            fn ($value) => $value,
+            $title,
+        ) : null;
 
         $this->fields['title'] = $title;
 
         return $this;
     }
 
-    /**
-     * @psalm-param self::TYPE_*|null $type
-     */
     private function setType(null|string $type): static
     {
         $this->fields['type'] = $type;
@@ -346,7 +349,10 @@ class AML implements JsonSerializable
      */
     private function setLegalBasis(null|array $legalBasis): static
     {
-        $legalBasis = $legalBasis !== null ? array_map(fn ($value) => $value ?? null, $legalBasis) : null;
+        $legalBasis = $legalBasis !== null ? array_map(
+            fn ($value) => $value,
+            $legalBasis,
+        ) : null;
 
         $this->fields['legalBasis'] = $legalBasis;
 
@@ -360,9 +366,6 @@ class AML implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @psalm-param self::CONFIDENCE_*|null $confidence
-     */
     private function setConfidence(null|string $confidence): static
     {
         $this->fields['confidence'] = $confidence;
@@ -378,11 +381,14 @@ class AML implements JsonSerializable
     }
 
     /**
-     * @param null|AMLAddress[] $address
+     * @param null|AMLAddress[]|array[] $address
      */
     private function setAddress(null|array $address): static
     {
-        $address = $address !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof AMLAddress ? $value : AMLAddress::from($value)) : null, $address) : null;
+        $address = $address !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof AMLAddress ? $value : AMLAddress::from($value)) : null,
+            $address,
+        ) : null;
 
         $this->fields['address'] = $address;
 
@@ -394,7 +400,10 @@ class AML implements JsonSerializable
      */
     private function setDob(null|array $dob): static
     {
-        $dob = $dob !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof DateTimeImmutable ? $value : new DateTimeImmutable($value)) : null, $dob) : null;
+        $dob = $dob !== null ? array_map(
+            fn ($value) => $value,
+            $dob,
+        ) : null;
 
         $this->fields['dob'] = $dob;
 
@@ -402,11 +411,14 @@ class AML implements JsonSerializable
     }
 
     /**
-     * @param null|AMLAliases[] $aliases
+     * @param null|AMLAliases[]|array[] $aliases
      */
     private function setAliases(null|array $aliases): static
     {
-        $aliases = $aliases !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof AMLAliases ? $value : AMLAliases::from($value)) : null, $aliases) : null;
+        $aliases = $aliases !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof AMLAliases ? $value : AMLAliases::from($value)) : null,
+            $aliases,
+        ) : null;
 
         $this->fields['aliases'] = $aliases;
 
@@ -414,11 +426,14 @@ class AML implements JsonSerializable
     }
 
     /**
-     * @param null|AMLPassport[] $passport
+     * @param null|AMLPassport[]|array[] $passport
      */
     private function setPassport(null|array $passport): static
     {
-        $passport = $passport !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof AMLPassport ? $value : AMLPassport::from($value)) : null, $passport) : null;
+        $passport = $passport !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof AMLPassport ? $value : AMLPassport::from($value)) : null,
+            $passport,
+        ) : null;
 
         $this->fields['passport'] = $passport;
 
@@ -428,18 +443,6 @@ class AML implements JsonSerializable
     private function setComments(null|string $comments): static
     {
         $this->fields['comments'] = $comments;
-
-        return $this;
-    }
-
-    /**
-     * @param null|SelfLink[] $links
-     */
-    private function setLinks(null|array $links): static
-    {
-        $links = $links !== null ? array_map(fn ($value) => $value !== null ? ($value instanceof SelfLink ? $value : SelfLink::from($value)) : null, $links) : null;
-
-        $this->fields['_links'] = $links;
 
         return $this;
     }

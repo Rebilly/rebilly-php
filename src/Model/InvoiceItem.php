@@ -48,6 +48,12 @@ class InvoiceItem implements JsonSerializable
         if (array_key_exists('productId', $data)) {
             $this->setProductId($data['productId']);
         }
+        if (array_key_exists('planId', $data)) {
+            $this->setPlanId($data['planId']);
+        }
+        if (array_key_exists('subscriptionId', $data)) {
+            $this->setSubscriptionId($data['subscriptionId']);
+        }
         if (array_key_exists('discountAmount', $data)) {
             $this->setDiscountAmount($data['discountAmount']);
         }
@@ -87,17 +93,11 @@ class InvoiceItem implements JsonSerializable
         return $this->fields['id'] ?? null;
     }
 
-    /**
-     * @psalm-return self::TYPE_* $type
-     */
     public function getType(): string
     {
         return $this->fields['type'];
     }
 
-    /**
-     * @psalm-param self::TYPE_* $type
-     */
     public function setType(string $type): static
     {
         $this->fields['type'] = $type;
@@ -160,6 +160,16 @@ class InvoiceItem implements JsonSerializable
         $this->fields['productId'] = $productId;
 
         return $this;
+    }
+
+    public function getPlanId(): ?string
+    {
+        return $this->fields['planId'] ?? null;
+    }
+
+    public function getSubscriptionId(): ?string
+    {
+        return $this->fields['subscriptionId'] ?? null;
     }
 
     public function getDiscountAmount(): ?float
@@ -226,20 +236,39 @@ class InvoiceItem implements JsonSerializable
         return $this->fields['tax'] ?? null;
     }
 
+    public function setTax(null|InvoiceTaxItem|array $tax): static
+    {
+        if ($tax !== null && !($tax instanceof InvoiceTaxItem)) {
+            $tax = InvoiceTaxItem::from($tax);
+        }
+
+        $this->fields['tax'] = $tax;
+
+        return $this;
+    }
+
     /**
-     * @return null|array<ProductLink|SelfLink>
+     * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
     }
 
-    /**
-     * @return null|array{product:Product,plan:Plan}
-     */
-    public function getEmbedded(): ?array
+    public function getEmbedded(): ?InvoiceItemEmbedded
     {
         return $this->fields['_embedded'] ?? null;
+    }
+
+    public function setEmbedded(null|InvoiceItemEmbedded|array $embedded): static
+    {
+        if ($embedded !== null && !($embedded instanceof InvoiceItemEmbedded)) {
+            $embedded = InvoiceItemEmbedded::from($embedded);
+        }
+
+        $this->fields['_embedded'] = $embedded;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -266,6 +295,12 @@ class InvoiceItem implements JsonSerializable
         if (array_key_exists('productId', $this->fields)) {
             $data['productId'] = $this->fields['productId'];
         }
+        if (array_key_exists('planId', $this->fields)) {
+            $data['planId'] = $this->fields['planId'];
+        }
+        if (array_key_exists('subscriptionId', $this->fields)) {
+            $data['subscriptionId'] = $this->fields['subscriptionId'];
+        }
         if (array_key_exists('discountAmount', $this->fields)) {
             $data['discountAmount'] = $this->fields['discountAmount'];
         }
@@ -291,7 +326,7 @@ class InvoiceItem implements JsonSerializable
             $data['_links'] = $this->fields['_links'];
         }
         if (array_key_exists('_embedded', $this->fields)) {
-            $data['_embedded'] = $this->fields['_embedded'];
+            $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();
         }
 
         return $data;
@@ -311,6 +346,20 @@ class InvoiceItem implements JsonSerializable
         }
 
         $this->fields['price'] = $price;
+
+        return $this;
+    }
+
+    private function setPlanId(null|string $planId): static
+    {
+        $this->fields['planId'] = $planId;
+
+        return $this;
+    }
+
+    private function setSubscriptionId(null|string $subscriptionId): static
+    {
+        $this->fields['subscriptionId'] = $subscriptionId;
 
         return $this;
     }
@@ -348,40 +397,17 @@ class InvoiceItem implements JsonSerializable
         return $this;
     }
 
-    private function setTax(null|InvoiceTaxItem|array $tax): static
-    {
-        if ($tax !== null && !($tax instanceof InvoiceTaxItem)) {
-            $tax = InvoiceTaxItem::from($tax);
-        }
-
-        $this->fields['tax'] = $tax;
-
-        return $this;
-    }
-
     /**
-     * @param null|array<ProductLink|SelfLink> $links
+     * @param null|array[]|ResourceLink[] $links
      */
     private function setLinks(null|array $links): static
     {
-        $links = $links !== null ? array_map(fn ($value) => $value ?? null, $links) : null;
+        $links = $links !== null ? array_map(
+            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+            $links,
+        ) : null;
 
         $this->fields['_links'] = $links;
-
-        return $this;
-    }
-
-    /**
-     * @param null|array{product:Product,plan:Plan} $embedded
-     */
-    private function setEmbedded(null|array $embedded): static
-    {
-        if ($embedded !== null) {
-            $embedded['product'] = isset($embedded['product']) ? ($embedded['product'] instanceof Product ? $embedded['product'] : Product::from($embedded['product'])) : null;
-            $embedded['plan'] = isset($embedded['plan']) ? ($embedded['plan'] instanceof Plan ? $embedded['plan'] : Plan::from($embedded['plan'])) : null;
-        }
-
-        $this->fields['_embedded'] = $embedded;
 
         return $this;
     }

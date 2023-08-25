@@ -17,6 +17,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
+use Rebilly\Sdk\Model\PatchSubscriptionCancellationRequest;
 use Rebilly\Sdk\Model\SubscriptionCancellation;
 use Rebilly\Sdk\Paginator;
 
@@ -126,7 +127,7 @@ class SubscriptionCancellationsApi
      */
     public function patch(
         string $id,
-        SubscriptionCancellation $subscriptionCancellation,
+        PatchSubscriptionCancellationRequest $patchSubscriptionCancellationRequest,
     ): SubscriptionCancellation {
         $pathParams = [
             '{id}' => $id,
@@ -134,7 +135,7 @@ class SubscriptionCancellationsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscription-cancellations/{id}');
 
-        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($subscriptionCancellation));
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($patchSubscriptionCancellationRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
