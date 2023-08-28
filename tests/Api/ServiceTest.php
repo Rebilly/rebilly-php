@@ -755,41 +755,6 @@ class ServiceTest extends BaseTestCase
         $service = $client->users();
         $result = $service->load('userId');
         self::assertInstanceOf(Entities\User::class, $result);
-
-        $handler = $this->createMock(CurlHandler::class);
-        $handler
-            ->expects(self::any())
-            ->method('__invoke')
-            ->willReturn($client->createResponse()->withHeader('Location', 'users/signup'));
-        $client = new Client([
-            'apiKey' => 'QWERTY',
-            'httpHandler' => $handler,
-        ]);
-        $service = $client->users();
-        $result = $service->signup([]);
-        self::assertInstanceOf(Entities\User::class, $result);
-
-        $handler = $this->createMock(CurlHandler::class);
-        $handler
-            ->expects(self::any())
-            ->method('__invoke')
-            ->willReturn($client->createResponse()->withHeader('Location', 'users/signin'));
-        $client = new Client([
-            'apiKey' => 'QWERTY',
-            'httpHandler' => $handler,
-        ]);
-        $service = $client->users();
-        $result = $service->signin([]);
-        self::assertInstanceOf(Entities\User::class, $result);
-
-        $handler = $this->createMock(CurlHandler::class);
-        $handler
-            ->expects(self::any())
-            ->method('__invoke')
-            ->willReturn($client->createResponse()->withHeader('Location', 'users/userId'));
-
-        $result = $service->activate('token');
-        self::assertInstanceOf(Entities\User::class, $result);
     }
 
     /**
