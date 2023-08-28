@@ -1266,11 +1266,6 @@ class ServiceTest extends BaseTestCase
                 Entities\PayPalAccount::class,
             ],
             [
-                'sessions',
-                Services\SessionService::class,
-                Entities\Session::class,
-            ],
-            [
                 'users',
                 Services\UserService::class,
                 Entities\User::class,
