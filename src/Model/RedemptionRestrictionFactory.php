@@ -20,13 +20,13 @@ class RedemptionRestrictionFactory
     public static function from(array $data = []): RedemptionRestriction
     {
         return match ($data['type']) {
-            'discounts-per-redemption' => DiscountsPerRedemption::from($data),
-            'minimum-order-amount' => MinimumOrderAmount::from($data),
-            'paid-by-time' => PaidByTime::from($data),
-            'restrict-to-invoices' => RestrictToInvoices::from($data),
-            'restrict-to-plans' => RestrictToPlans::from($data),
-            'restrict-to-products' => RestrictToProducts::from($data),
-            'restrict-to-subscriptions' => RestrictToSubscriptions::from($data),
+            'discounts-per-redemption' => CouponRestrictionDiscountPerRedemption::from($data),
+            'minimum-order-amount' => CouponRestrictionMinimumOrderAmount::from($data),
+            'paid-by-time' => CouponRestrictionPaidByTime::from($data),
+            'restrict-to-invoices' => CouponRestrictionRestrictToInvoices::from($data),
+            'restrict-to-plans' => CouponRestrictionRestrictToPlans::from($data),
+            'restrict-to-products' => CouponRestrictionRestrictToProducts::from($data),
+            'restrict-to-subscriptions' => CouponRestrictionRestrictToSubscriptions::from($data),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

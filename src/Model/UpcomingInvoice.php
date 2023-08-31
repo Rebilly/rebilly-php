@@ -345,7 +345,7 @@ class UpcomingInvoice implements JsonSerializable
     }
 
     /**
-     * @return null|InvoiceDiscount[]
+     * @return null|InvoiceDiscounts[]
      */
     public function getDiscounts(): ?array
     {
@@ -569,12 +569,12 @@ class UpcomingInvoice implements JsonSerializable
     }
 
     /**
-     * @param null|array[]|InvoiceDiscount[] $discounts
+     * @param null|array[]|InvoiceDiscounts[] $discounts
      */
     private function setDiscounts(null|array $discounts): static
     {
         $discounts = $discounts !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof InvoiceDiscount ? $value : InvoiceDiscount::from($value)) : null,
+            fn ($value) => $value !== null ? ($value instanceof InvoiceDiscounts ? $value : InvoiceDiscounts::from($value)) : null,
             $discounts,
         ) : null;
 

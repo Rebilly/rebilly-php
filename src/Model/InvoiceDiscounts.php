@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class InvoiceDiscount implements JsonSerializable
+class InvoiceDiscounts implements JsonSerializable
 {
     private array $fields = [];
 

@@ -72,8 +72,12 @@ class InvoiceTransactionAllocation implements JsonSerializable
         return $this->fields['amount'] ?? null;
     }
 
-    public function setAmount(null|float $amount): static
+    public function setAmount(null|float|string $amount): static
     {
+        if (is_string($amount)) {
+            $amount = (float) $amount;
+        }
+
         $this->fields['amount'] = $amount;
 
         return $this;

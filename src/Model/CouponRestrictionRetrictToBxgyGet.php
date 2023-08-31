@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class RestrictToBxgyBuy implements JsonSerializable
+class CouponRestrictionRetrictToBxgyGet implements JsonSerializable
 {
     private array $fields = [];
 

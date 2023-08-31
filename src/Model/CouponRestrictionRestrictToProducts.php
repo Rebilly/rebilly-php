@@ -17,9 +17,9 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
 
-class RestrictToPlans implements CouponRestriction, RedemptionRestriction, JsonSerializable
+class CouponRestrictionRestrictToProducts implements CouponRestriction, RedemptionRestriction, JsonSerializable
 {
-    public const TYPE_RESTRICT_TO_PLANS = 'restrict-to-plans';
+    public const TYPE_RESTRICT_TO_PRODUCTS = 'restrict-to-products';
 
     private array $fields = [];
 
@@ -28,11 +28,14 @@ class RestrictToPlans implements CouponRestriction, RedemptionRestriction, JsonS
         if (array_key_exists('type', $data)) {
             $this->setType($data['type']);
         }
-        if (array_key_exists('planIds', $data)) {
-            $this->setPlanIds($data['planIds']);
+        if (array_key_exists('productIds', $data)) {
+            $this->setProductIds($data['productIds']);
         }
         if (array_key_exists('minimumQuantity', $data)) {
             $this->setMinimumQuantity($data['minimumQuantity']);
+        }
+        if (array_key_exists('planIds', $data)) {
+            $this->setPlanIds($data['planIds']);
         }
         if (array_key_exists('amount', $data)) {
             $this->setAmount($data['amount']);
@@ -45,9 +48,6 @@ class RestrictToPlans implements CouponRestriction, RedemptionRestriction, JsonS
         }
         if (array_key_exists('countries', $data)) {
             $this->setCountries($data['countries']);
-        }
-        if (array_key_exists('productIds', $data)) {
-            $this->setProductIds($data['productIds']);
         }
         if (array_key_exists('subscriptionIds', $data)) {
             $this->setSubscriptionIds($data['subscriptionIds']);
@@ -86,6 +86,41 @@ class RestrictToPlans implements CouponRestriction, RedemptionRestriction, JsonS
     /**
      * @return string[]
      */
+    public function getProductIds(): array
+    {
+        return $this->fields['productIds'];
+    }
+
+    /**
+     * @param string[] $productIds
+     */
+    public function setProductIds(array $productIds): static
+    {
+        $productIds = array_map(
+            fn ($value) => $value,
+            $productIds,
+        );
+
+        $this->fields['productIds'] = $productIds;
+
+        return $this;
+    }
+
+    public function getMinimumQuantity(): ?int
+    {
+        return $this->fields['minimumQuantity'] ?? null;
+    }
+
+    public function setMinimumQuantity(null|int $minimumQuantity): static
+    {
+        $this->fields['minimumQuantity'] = $minimumQuantity;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]
+     */
     public function getPlanIds(): array
     {
         return $this->fields['planIds'];
@@ -102,18 +137,6 @@ class RestrictToPlans implements CouponRestriction, RedemptionRestriction, JsonS
         );
 
         $this->fields['planIds'] = $planIds;
-
-        return $this;
-    }
-
-    public function getMinimumQuantity(): ?int
-    {
-        return $this->fields['minimumQuantity'] ?? null;
-    }
-
-    public function setMinimumQuantity(null|int $minimumQuantity): static
-    {
-        $this->fields['minimumQuantity'] = $minimumQuantity;
 
         return $this;
     }
@@ -143,7 +166,7 @@ class RestrictToPlans implements CouponRestriction, RedemptionRestriction, JsonS
     }
 
     /**
-     * @return RestrictToBxgyBuy[]
+     * @return CouponRestrictionRetrictToBxgyBuy[]
      */
     public function getBuy(): array
     {
@@ -151,12 +174,12 @@ class RestrictToPlans implements CouponRestriction, RedemptionRestriction, JsonS
     }
 
     /**
-     * @param array[]|RestrictToBxgyBuy[] $buy
+     * @param array[]|CouponRestrictionRetrictToBxgyBuy[] $buy
      */
     public function setBuy(array $buy): static
     {
         $buy = array_map(
-            fn ($value) => $value !== null ? ($value instanceof RestrictToBxgyBuy ? $value : RestrictToBxgyBuy::from($value)) : null,
+            fn ($value) => $value !== null ? ($value instanceof CouponRestrictionRetrictToBxgyBuy ? $value : CouponRestrictionRetrictToBxgyBuy::from($value)) : null,
             $buy,
         );
 
@@ -191,29 +214,6 @@ class RestrictToPlans implements CouponRestriction, RedemptionRestriction, JsonS
     /**
      * @return string[]
      */
-    public function getProductIds(): array
-    {
-        return $this->fields['productIds'];
-    }
-
-    /**
-     * @param string[] $productIds
-     */
-    public function setProductIds(array $productIds): static
-    {
-        $productIds = array_map(
-            fn ($value) => $value,
-            $productIds,
-        );
-
-        $this->fields['productIds'] = $productIds;
-
-        return $this;
-    }
-
-    /**
-     * @return string[]
-     */
     public function getSubscriptionIds(): array
     {
         return $this->fields['subscriptionIds'];
@@ -235,7 +235,7 @@ class RestrictToPlans implements CouponRestriction, RedemptionRestriction, JsonS
     }
 
     /**
-     * @return RestrictToBxgyGet[]
+     * @return CouponRestrictionRetrictToBxgyGet[]
      */
     public function getGet(): array
     {
@@ -243,12 +243,12 @@ class RestrictToPlans implements CouponRestriction, RedemptionRestriction, JsonS
     }
 
     /**
-     * @param array[]|RestrictToBxgyGet[] $get
+     * @param array[]|CouponRestrictionRetrictToBxgyGet[] $get
      */
     public function setGet(array $get): static
     {
         $get = array_map(
-            fn ($value) => $value !== null ? ($value instanceof RestrictToBxgyGet ? $value : RestrictToBxgyGet::from($value)) : null,
+            fn ($value) => $value !== null ? ($value instanceof CouponRestrictionRetrictToBxgyGet ? $value : CouponRestrictionRetrictToBxgyGet::from($value)) : null,
             $get,
         );
 
@@ -314,11 +314,14 @@ class RestrictToPlans implements CouponRestriction, RedemptionRestriction, JsonS
         if (array_key_exists('type', $this->fields)) {
             $data['type'] = $this->fields['type'];
         }
-        if (array_key_exists('planIds', $this->fields)) {
-            $data['planIds'] = $this->fields['planIds'];
+        if (array_key_exists('productIds', $this->fields)) {
+            $data['productIds'] = $this->fields['productIds'];
         }
         if (array_key_exists('minimumQuantity', $this->fields)) {
             $data['minimumQuantity'] = $this->fields['minimumQuantity'];
+        }
+        if (array_key_exists('planIds', $this->fields)) {
+            $data['planIds'] = $this->fields['planIds'];
         }
         if (array_key_exists('amount', $this->fields)) {
             $data['amount'] = $this->fields['amount'];
@@ -331,9 +334,6 @@ class RestrictToPlans implements CouponRestriction, RedemptionRestriction, JsonS
         }
         if (array_key_exists('countries', $this->fields)) {
             $data['countries'] = $this->fields['countries'];
-        }
-        if (array_key_exists('productIds', $this->fields)) {
-            $data['productIds'] = $this->fields['productIds'];
         }
         if (array_key_exists('subscriptionIds', $this->fields)) {
             $data['subscriptionIds'] = $this->fields['subscriptionIds'];

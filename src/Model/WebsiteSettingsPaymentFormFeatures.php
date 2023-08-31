@@ -24,6 +24,9 @@ class WebsiteSettingsPaymentFormFeatures implements JsonSerializable
         if (array_key_exists('showCoupons', $data)) {
             $this->setShowCoupons($data['showCoupons']);
         }
+        if (array_key_exists('fullPageRedirect', $data)) {
+            $this->setFullPageRedirect($data['fullPageRedirect']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -54,11 +57,26 @@ class WebsiteSettingsPaymentFormFeatures implements JsonSerializable
         return $this;
     }
 
+    public function getFullPageRedirect(): ?bool
+    {
+        return $this->fields['fullPageRedirect'] ?? null;
+    }
+
+    public function setFullPageRedirect(null|bool $fullPageRedirect): static
+    {
+        $this->fields['fullPageRedirect'] = $fullPageRedirect;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
         if (array_key_exists('showCoupons', $this->fields)) {
             $data['showCoupons'] = $this->fields['showCoupons'];
+        }
+        if (array_key_exists('fullPageRedirect', $this->fields)) {
+            $data['fullPageRedirect'] = $this->fields['fullPageRedirect'];
         }
 
         return $data;

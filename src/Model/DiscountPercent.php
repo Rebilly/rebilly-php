@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class Percent implements Discount, JsonSerializable
+class DiscountPercent implements Discount, JsonSerializable
 {
     public const TYPE_PERCENT = 'percent';
 

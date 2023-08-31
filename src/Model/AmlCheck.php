@@ -25,6 +25,14 @@ class AmlCheck implements JsonSerializable
 
     public const SOURCE_PURCHASE = 'purchase';
 
+    public const STATUS_PENDING_REVIEW = 'pending-review';
+
+    public const STATUS_NO_MATCH = 'no-match';
+
+    public const STATUS_CONFIRMED_MATCH = 'confirmed-match';
+
+    public const STATUS_FALSE_POSITIVE = 'false-positive';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -55,6 +63,9 @@ class AmlCheck implements JsonSerializable
         }
         if (array_key_exists('source', $data)) {
             $this->setSource($data['source']);
+        }
+        if (array_key_exists('status', $data)) {
+            $this->setStatus($data['status']);
         }
         if (array_key_exists('customer', $data)) {
             $this->setCustomer($data['customer']);
@@ -173,6 +184,11 @@ class AmlCheck implements JsonSerializable
         return $this;
     }
 
+    public function getStatus(): ?string
+    {
+        return $this->fields['status'] ?? null;
+    }
+
     public function getCustomer(): ?AmlCheckCustomer
     {
         return $this->fields['customer'] ?? null;
@@ -273,6 +289,9 @@ class AmlCheck implements JsonSerializable
         if (array_key_exists('source', $this->fields)) {
             $data['source'] = $this->fields['source'];
         }
+        if (array_key_exists('status', $this->fields)) {
+            $data['status'] = $this->fields['status'];
+        }
         if (array_key_exists('customer', $this->fields)) {
             $data['customer'] = $this->fields['customer']?->jsonSerialize();
         }
@@ -307,6 +326,13 @@ class AmlCheck implements JsonSerializable
         }
 
         $this->fields['updatedTime'] = $updatedTime;
+
+        return $this;
+    }
+
+    private function setStatus(null|string $status): static
+    {
+        $this->fields['status'] = $status;
 
         return $this;
     }

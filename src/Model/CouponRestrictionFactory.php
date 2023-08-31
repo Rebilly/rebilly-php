@@ -20,17 +20,17 @@ class CouponRestrictionFactory
     public static function from(array $data = []): CouponRestriction
     {
         return match ($data['type']) {
-            'discounts-per-redemption' => DiscountsPerRedemption::from($data),
-            'minimum-order-amount' => MinimumOrderAmount::from($data),
-            'paid-by-time' => PaidByTime::from($data),
-            'redemptions-per-customer' => RedemptionsPerCustomer::from($data),
-            'restrict-to-bxgy' => RestrictToBxgy::from($data),
-            'restrict-to-countries' => RestrictToCountries::from($data),
-            'restrict-to-invoices' => RestrictToInvoices::from($data),
-            'restrict-to-plans' => RestrictToPlans::from($data),
-            'restrict-to-products' => RestrictToProducts::from($data),
-            'restrict-to-subscriptions' => RestrictToSubscriptions::from($data),
-            'total-redemptions' => TotalRedemptions::from($data),
+            'discounts-per-redemption' => CouponRestrictionDiscountPerRedemption::from($data),
+            'minimum-order-amount' => CouponRestrictionMinimumOrderAmount::from($data),
+            'paid-by-time' => CouponRestrictionPaidByTime::from($data),
+            'redemptions-per-customer' => CouponRestrictionRedemptionsPerCustomer::from($data),
+            'restrict-to-bxgy' => CouponRestrictionRetrictToBxgy::from($data),
+            'restrict-to-countries' => CouponRestrictionRestrictToCountries::from($data),
+            'restrict-to-invoices' => CouponRestrictionRestrictToInvoices::from($data),
+            'restrict-to-plans' => CouponRestrictionRestrictToPlans::from($data),
+            'restrict-to-products' => CouponRestrictionRestrictToProducts::from($data),
+            'restrict-to-subscriptions' => CouponRestrictionRestrictToSubscriptions::from($data),
+            'total-redemptions' => CouponRestrictionTotalRedemptions::from($data),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

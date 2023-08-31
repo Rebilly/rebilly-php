@@ -17,9 +17,9 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
 
-class RestrictToBxgy implements CouponRestriction, JsonSerializable
+class CouponRestrictionDiscountPerRedemption implements CouponRestriction, RedemptionRestriction, JsonSerializable
 {
-    public const TYPE_RESTRICT_TO_BXGY = 'restrict-to-bxgy';
+    public const TYPE_DISCOUNTS_PER_REDEMPTION = 'discounts-per-redemption';
 
     private array $fields = [];
 
@@ -28,11 +28,8 @@ class RestrictToBxgy implements CouponRestriction, JsonSerializable
         if (array_key_exists('type', $data)) {
             $this->setType($data['type']);
         }
-        if (array_key_exists('buy', $data)) {
-            $this->setBuy($data['buy']);
-        }
-        if (array_key_exists('get', $data)) {
-            $this->setGet($data['get']);
+        if (array_key_exists('quantity', $data)) {
+            $this->setQuantity($data['quantity']);
         }
         if (array_key_exists('planIds', $data)) {
             $this->setPlanIds($data['planIds']);
@@ -40,8 +37,8 @@ class RestrictToBxgy implements CouponRestriction, JsonSerializable
         if (array_key_exists('amount', $data)) {
             $this->setAmount($data['amount']);
         }
-        if (array_key_exists('quantity', $data)) {
-            $this->setQuantity($data['quantity']);
+        if (array_key_exists('buy', $data)) {
+            $this->setBuy($data['buy']);
         }
         if (array_key_exists('countries', $data)) {
             $this->setCountries($data['countries']);
@@ -51,6 +48,9 @@ class RestrictToBxgy implements CouponRestriction, JsonSerializable
         }
         if (array_key_exists('subscriptionIds', $data)) {
             $this->setSubscriptionIds($data['subscriptionIds']);
+        }
+        if (array_key_exists('get', $data)) {
+            $this->setGet($data['get']);
         }
         if (array_key_exists('currency', $data)) {
             $this->setCurrency($data['currency']);
@@ -83,48 +83,14 @@ class RestrictToBxgy implements CouponRestriction, JsonSerializable
         return $this;
     }
 
-    /**
-     * @return RestrictToBxgyBuy[]
-     */
-    public function getBuy(): array
+    public function getQuantity(): int
     {
-        return $this->fields['buy'];
+        return $this->fields['quantity'];
     }
 
-    /**
-     * @param array[]|RestrictToBxgyBuy[] $buy
-     */
-    public function setBuy(array $buy): static
+    public function setQuantity(int $quantity): static
     {
-        $buy = array_map(
-            fn ($value) => $value !== null ? ($value instanceof RestrictToBxgyBuy ? $value : RestrictToBxgyBuy::from($value)) : null,
-            $buy,
-        );
-
-        $this->fields['buy'] = $buy;
-
-        return $this;
-    }
-
-    /**
-     * @return RestrictToBxgyGet[]
-     */
-    public function getGet(): array
-    {
-        return $this->fields['get'];
-    }
-
-    /**
-     * @param array[]|RestrictToBxgyGet[] $get
-     */
-    public function setGet(array $get): static
-    {
-        $get = array_map(
-            fn ($value) => $value !== null ? ($value instanceof RestrictToBxgyGet ? $value : RestrictToBxgyGet::from($value)) : null,
-            $get,
-        );
-
-        $this->fields['get'] = $get;
+        $this->fields['quantity'] = $quantity;
 
         return $this;
     }
@@ -164,14 +130,25 @@ class RestrictToBxgy implements CouponRestriction, JsonSerializable
         return $this;
     }
 
-    public function getQuantity(): int
+    /**
+     * @return CouponRestrictionRetrictToBxgyBuy[]
+     */
+    public function getBuy(): array
     {
-        return $this->fields['quantity'];
+        return $this->fields['buy'];
     }
 
-    public function setQuantity(int $quantity): static
+    /**
+     * @param array[]|CouponRestrictionRetrictToBxgyBuy[] $buy
+     */
+    public function setBuy(array $buy): static
     {
-        $this->fields['quantity'] = $quantity;
+        $buy = array_map(
+            fn ($value) => $value !== null ? ($value instanceof CouponRestrictionRetrictToBxgyBuy ? $value : CouponRestrictionRetrictToBxgyBuy::from($value)) : null,
+            $buy,
+        );
+
+        $this->fields['buy'] = $buy;
 
         return $this;
     }
@@ -245,6 +222,29 @@ class RestrictToBxgy implements CouponRestriction, JsonSerializable
         return $this;
     }
 
+    /**
+     * @return CouponRestrictionRetrictToBxgyGet[]
+     */
+    public function getGet(): array
+    {
+        return $this->fields['get'];
+    }
+
+    /**
+     * @param array[]|CouponRestrictionRetrictToBxgyGet[] $get
+     */
+    public function setGet(array $get): static
+    {
+        $get = array_map(
+            fn ($value) => $value !== null ? ($value instanceof CouponRestrictionRetrictToBxgyGet ? $value : CouponRestrictionRetrictToBxgyGet::from($value)) : null,
+            $get,
+        );
+
+        $this->fields['get'] = $get;
+
+        return $this;
+    }
+
     public function getCurrency(): string
     {
         return $this->fields['currency'];
@@ -314,11 +314,8 @@ class RestrictToBxgy implements CouponRestriction, JsonSerializable
         if (array_key_exists('type', $this->fields)) {
             $data['type'] = $this->fields['type'];
         }
-        if (array_key_exists('buy', $this->fields)) {
-            $data['buy'] = $this->fields['buy'];
-        }
-        if (array_key_exists('get', $this->fields)) {
-            $data['get'] = $this->fields['get'];
+        if (array_key_exists('quantity', $this->fields)) {
+            $data['quantity'] = $this->fields['quantity'];
         }
         if (array_key_exists('planIds', $this->fields)) {
             $data['planIds'] = $this->fields['planIds'];
@@ -326,8 +323,8 @@ class RestrictToBxgy implements CouponRestriction, JsonSerializable
         if (array_key_exists('amount', $this->fields)) {
             $data['amount'] = $this->fields['amount'];
         }
-        if (array_key_exists('quantity', $this->fields)) {
-            $data['quantity'] = $this->fields['quantity'];
+        if (array_key_exists('buy', $this->fields)) {
+            $data['buy'] = $this->fields['buy'];
         }
         if (array_key_exists('countries', $this->fields)) {
             $data['countries'] = $this->fields['countries'];
@@ -337,6 +334,9 @@ class RestrictToBxgy implements CouponRestriction, JsonSerializable
         }
         if (array_key_exists('subscriptionIds', $this->fields)) {
             $data['subscriptionIds'] = $this->fields['subscriptionIds'];
+        }
+        if (array_key_exists('get', $this->fields)) {
+            $data['get'] = $this->fields['get'];
         }
         if (array_key_exists('currency', $this->fields)) {
             $data['currency'] = $this->fields['currency'];

@@ -63,7 +63,7 @@ class RebillyShipping implements Shipping, JsonSerializable
         return $this;
     }
 
-    public function getAmount(): ?int
+    public function getAmount(): ?float
     {
         return $this->fields['amount'] ?? null;
     }
@@ -84,8 +84,12 @@ class RebillyShipping implements Shipping, JsonSerializable
         return $data;
     }
 
-    private function setAmount(null|int $amount): static
+    private function setAmount(null|float|string $amount): static
     {
+        if (is_string($amount)) {
+            $amount = (float) $amount;
+        }
+
         $this->fields['amount'] = $amount;
 
         return $this;

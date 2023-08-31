@@ -39,13 +39,17 @@ class ManualShipping implements Shipping, JsonSerializable
         return new self($data);
     }
 
-    public function getAmount(): int
+    public function getAmount(): float
     {
         return $this->fields['amount'];
     }
 
-    public function setAmount(int $amount): static
+    public function setAmount(float|string $amount): static
     {
+        if (is_string($amount)) {
+            $amount = (float) $amount;
+        }
+
         $this->fields['amount'] = $amount;
 
         return $this;

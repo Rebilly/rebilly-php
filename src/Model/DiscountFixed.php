@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class Fixed implements Discount, JsonSerializable
+class DiscountFixed implements Discount, JsonSerializable
 {
     public const TYPE_FIXED = 'fixed';
 
