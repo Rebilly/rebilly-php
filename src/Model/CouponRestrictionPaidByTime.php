@@ -17,9 +17,9 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
 
-class RedemptionsPerCustomer implements CouponRestriction, JsonSerializable
+class CouponRestrictionPaidByTime implements CouponRestriction, RedemptionRestriction, JsonSerializable
 {
-    public const TYPE_REDEMPTIONS_PER_CUSTOMER = 'redemptions-per-customer';
+    public const TYPE_PAID_BY_TIME = 'paid-by-time';
 
     private array $fields = [];
 
@@ -28,14 +28,17 @@ class RedemptionsPerCustomer implements CouponRestriction, JsonSerializable
         if (array_key_exists('type', $data)) {
             $this->setType($data['type']);
         }
-        if (array_key_exists('quantity', $data)) {
-            $this->setQuantity($data['quantity']);
+        if (array_key_exists('time', $data)) {
+            $this->setTime($data['time']);
         }
         if (array_key_exists('planIds', $data)) {
             $this->setPlanIds($data['planIds']);
         }
         if (array_key_exists('amount', $data)) {
             $this->setAmount($data['amount']);
+        }
+        if (array_key_exists('quantity', $data)) {
+            $this->setQuantity($data['quantity']);
         }
         if (array_key_exists('buy', $data)) {
             $this->setBuy($data['buy']);
@@ -54,9 +57,6 @@ class RedemptionsPerCustomer implements CouponRestriction, JsonSerializable
         }
         if (array_key_exists('currency', $data)) {
             $this->setCurrency($data['currency']);
-        }
-        if (array_key_exists('time', $data)) {
-            $this->setTime($data['time']);
         }
         if (array_key_exists('minimumQuantity', $data)) {
             $this->setMinimumQuantity($data['minimumQuantity']);
@@ -83,14 +83,18 @@ class RedemptionsPerCustomer implements CouponRestriction, JsonSerializable
         return $this;
     }
 
-    public function getQuantity(): int
+    public function getTime(): DateTimeImmutable
     {
-        return $this->fields['quantity'];
+        return $this->fields['time'];
     }
 
-    public function setQuantity(int $quantity): static
+    public function setTime(DateTimeImmutable|string $time): static
     {
-        $this->fields['quantity'] = $quantity;
+        if (!($time instanceof DateTimeImmutable)) {
+            $time = new DateTimeImmutable($time);
+        }
+
+        $this->fields['time'] = $time;
 
         return $this;
     }
@@ -130,8 +134,20 @@ class RedemptionsPerCustomer implements CouponRestriction, JsonSerializable
         return $this;
     }
 
+    public function getQuantity(): int
+    {
+        return $this->fields['quantity'];
+    }
+
+    public function setQuantity(int $quantity): static
+    {
+        $this->fields['quantity'] = $quantity;
+
+        return $this;
+    }
+
     /**
-     * @return RestrictToBxgyBuy[]
+     * @return CouponRestrictionRetrictToBxgyBuy[]
      */
     public function getBuy(): array
     {
@@ -139,12 +155,12 @@ class RedemptionsPerCustomer implements CouponRestriction, JsonSerializable
     }
 
     /**
-     * @param array[]|RestrictToBxgyBuy[] $buy
+     * @param array[]|CouponRestrictionRetrictToBxgyBuy[] $buy
      */
     public function setBuy(array $buy): static
     {
         $buy = array_map(
-            fn ($value) => $value !== null ? ($value instanceof RestrictToBxgyBuy ? $value : RestrictToBxgyBuy::from($value)) : null,
+            fn ($value) => $value !== null ? ($value instanceof CouponRestrictionRetrictToBxgyBuy ? $value : CouponRestrictionRetrictToBxgyBuy::from($value)) : null,
             $buy,
         );
 
@@ -223,7 +239,7 @@ class RedemptionsPerCustomer implements CouponRestriction, JsonSerializable
     }
 
     /**
-     * @return RestrictToBxgyGet[]
+     * @return CouponRestrictionRetrictToBxgyGet[]
      */
     public function getGet(): array
     {
@@ -231,12 +247,12 @@ class RedemptionsPerCustomer implements CouponRestriction, JsonSerializable
     }
 
     /**
-     * @param array[]|RestrictToBxgyGet[] $get
+     * @param array[]|CouponRestrictionRetrictToBxgyGet[] $get
      */
     public function setGet(array $get): static
     {
         $get = array_map(
-            fn ($value) => $value !== null ? ($value instanceof RestrictToBxgyGet ? $value : RestrictToBxgyGet::from($value)) : null,
+            fn ($value) => $value !== null ? ($value instanceof CouponRestrictionRetrictToBxgyGet ? $value : CouponRestrictionRetrictToBxgyGet::from($value)) : null,
             $get,
         );
 
@@ -253,22 +269,6 @@ class RedemptionsPerCustomer implements CouponRestriction, JsonSerializable
     public function setCurrency(string $currency): static
     {
         $this->fields['currency'] = $currency;
-
-        return $this;
-    }
-
-    public function getTime(): DateTimeImmutable
-    {
-        return $this->fields['time'];
-    }
-
-    public function setTime(DateTimeImmutable|string $time): static
-    {
-        if (!($time instanceof DateTimeImmutable)) {
-            $time = new DateTimeImmutable($time);
-        }
-
-        $this->fields['time'] = $time;
 
         return $this;
     }
@@ -314,14 +314,17 @@ class RedemptionsPerCustomer implements CouponRestriction, JsonSerializable
         if (array_key_exists('type', $this->fields)) {
             $data['type'] = $this->fields['type'];
         }
-        if (array_key_exists('quantity', $this->fields)) {
-            $data['quantity'] = $this->fields['quantity'];
+        if (array_key_exists('time', $this->fields)) {
+            $data['time'] = $this->fields['time']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('planIds', $this->fields)) {
             $data['planIds'] = $this->fields['planIds'];
         }
         if (array_key_exists('amount', $this->fields)) {
             $data['amount'] = $this->fields['amount'];
+        }
+        if (array_key_exists('quantity', $this->fields)) {
+            $data['quantity'] = $this->fields['quantity'];
         }
         if (array_key_exists('buy', $this->fields)) {
             $data['buy'] = $this->fields['buy'];
@@ -340,9 +343,6 @@ class RedemptionsPerCustomer implements CouponRestriction, JsonSerializable
         }
         if (array_key_exists('currency', $this->fields)) {
             $data['currency'] = $this->fields['currency'];
-        }
-        if (array_key_exists('time', $this->fields)) {
-            $data['time'] = $this->fields['time']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('minimumQuantity', $this->fields)) {
             $data['minimumQuantity'] = $this->fields['minimumQuantity'];

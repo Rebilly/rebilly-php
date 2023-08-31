@@ -17,9 +17,9 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
 
-class RestrictToSubscriptions implements CouponRestriction, RedemptionRestriction, JsonSerializable
+class CouponRestrictionMinimumOrderAmount implements CouponRestriction, RedemptionRestriction, JsonSerializable
 {
-    public const TYPE_RESTRICT_TO_SUBSCRIPTIONS = 'restrict-to-subscriptions';
+    public const TYPE_MINIMUM_ORDER_AMOUNT = 'minimum-order-amount';
 
     private array $fields = [];
 
@@ -28,14 +28,14 @@ class RestrictToSubscriptions implements CouponRestriction, RedemptionRestrictio
         if (array_key_exists('type', $data)) {
             $this->setType($data['type']);
         }
-        if (array_key_exists('subscriptionIds', $data)) {
-            $this->setSubscriptionIds($data['subscriptionIds']);
+        if (array_key_exists('amount', $data)) {
+            $this->setAmount($data['amount']);
+        }
+        if (array_key_exists('currency', $data)) {
+            $this->setCurrency($data['currency']);
         }
         if (array_key_exists('planIds', $data)) {
             $this->setPlanIds($data['planIds']);
-        }
-        if (array_key_exists('amount', $data)) {
-            $this->setAmount($data['amount']);
         }
         if (array_key_exists('quantity', $data)) {
             $this->setQuantity($data['quantity']);
@@ -49,11 +49,11 @@ class RestrictToSubscriptions implements CouponRestriction, RedemptionRestrictio
         if (array_key_exists('productIds', $data)) {
             $this->setProductIds($data['productIds']);
         }
+        if (array_key_exists('subscriptionIds', $data)) {
+            $this->setSubscriptionIds($data['subscriptionIds']);
+        }
         if (array_key_exists('get', $data)) {
             $this->setGet($data['get']);
-        }
-        if (array_key_exists('currency', $data)) {
-            $this->setCurrency($data['currency']);
         }
         if (array_key_exists('time', $data)) {
             $this->setTime($data['time']);
@@ -83,25 +83,26 @@ class RestrictToSubscriptions implements CouponRestriction, RedemptionRestrictio
         return $this;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getSubscriptionIds(): array
+    public function getAmount(): int
     {
-        return $this->fields['subscriptionIds'];
+        return $this->fields['amount'];
     }
 
-    /**
-     * @param string[] $subscriptionIds
-     */
-    public function setSubscriptionIds(array $subscriptionIds): static
+    public function setAmount(int $amount): static
     {
-        $subscriptionIds = array_map(
-            fn ($value) => $value,
-            $subscriptionIds,
-        );
+        $this->fields['amount'] = $amount;
 
-        $this->fields['subscriptionIds'] = $subscriptionIds;
+        return $this;
+    }
+
+    public function getCurrency(): string
+    {
+        return $this->fields['currency'];
+    }
+
+    public function setCurrency(string $currency): static
+    {
+        $this->fields['currency'] = $currency;
 
         return $this;
     }
@@ -129,18 +130,6 @@ class RestrictToSubscriptions implements CouponRestriction, RedemptionRestrictio
         return $this;
     }
 
-    public function getAmount(): int
-    {
-        return $this->fields['amount'];
-    }
-
-    public function setAmount(int $amount): static
-    {
-        $this->fields['amount'] = $amount;
-
-        return $this;
-    }
-
     public function getQuantity(): int
     {
         return $this->fields['quantity'];
@@ -154,7 +143,7 @@ class RestrictToSubscriptions implements CouponRestriction, RedemptionRestrictio
     }
 
     /**
-     * @return RestrictToBxgyBuy[]
+     * @return CouponRestrictionRetrictToBxgyBuy[]
      */
     public function getBuy(): array
     {
@@ -162,12 +151,12 @@ class RestrictToSubscriptions implements CouponRestriction, RedemptionRestrictio
     }
 
     /**
-     * @param array[]|RestrictToBxgyBuy[] $buy
+     * @param array[]|CouponRestrictionRetrictToBxgyBuy[] $buy
      */
     public function setBuy(array $buy): static
     {
         $buy = array_map(
-            fn ($value) => $value !== null ? ($value instanceof RestrictToBxgyBuy ? $value : RestrictToBxgyBuy::from($value)) : null,
+            fn ($value) => $value !== null ? ($value instanceof CouponRestrictionRetrictToBxgyBuy ? $value : CouponRestrictionRetrictToBxgyBuy::from($value)) : null,
             $buy,
         );
 
@@ -223,7 +212,30 @@ class RestrictToSubscriptions implements CouponRestriction, RedemptionRestrictio
     }
 
     /**
-     * @return RestrictToBxgyGet[]
+     * @return string[]
+     */
+    public function getSubscriptionIds(): array
+    {
+        return $this->fields['subscriptionIds'];
+    }
+
+    /**
+     * @param string[] $subscriptionIds
+     */
+    public function setSubscriptionIds(array $subscriptionIds): static
+    {
+        $subscriptionIds = array_map(
+            fn ($value) => $value,
+            $subscriptionIds,
+        );
+
+        $this->fields['subscriptionIds'] = $subscriptionIds;
+
+        return $this;
+    }
+
+    /**
+     * @return CouponRestrictionRetrictToBxgyGet[]
      */
     public function getGet(): array
     {
@@ -231,28 +243,16 @@ class RestrictToSubscriptions implements CouponRestriction, RedemptionRestrictio
     }
 
     /**
-     * @param array[]|RestrictToBxgyGet[] $get
+     * @param array[]|CouponRestrictionRetrictToBxgyGet[] $get
      */
     public function setGet(array $get): static
     {
         $get = array_map(
-            fn ($value) => $value !== null ? ($value instanceof RestrictToBxgyGet ? $value : RestrictToBxgyGet::from($value)) : null,
+            fn ($value) => $value !== null ? ($value instanceof CouponRestrictionRetrictToBxgyGet ? $value : CouponRestrictionRetrictToBxgyGet::from($value)) : null,
             $get,
         );
 
         $this->fields['get'] = $get;
-
-        return $this;
-    }
-
-    public function getCurrency(): string
-    {
-        return $this->fields['currency'];
-    }
-
-    public function setCurrency(string $currency): static
-    {
-        $this->fields['currency'] = $currency;
 
         return $this;
     }
@@ -314,14 +314,14 @@ class RestrictToSubscriptions implements CouponRestriction, RedemptionRestrictio
         if (array_key_exists('type', $this->fields)) {
             $data['type'] = $this->fields['type'];
         }
-        if (array_key_exists('subscriptionIds', $this->fields)) {
-            $data['subscriptionIds'] = $this->fields['subscriptionIds'];
+        if (array_key_exists('amount', $this->fields)) {
+            $data['amount'] = $this->fields['amount'];
+        }
+        if (array_key_exists('currency', $this->fields)) {
+            $data['currency'] = $this->fields['currency'];
         }
         if (array_key_exists('planIds', $this->fields)) {
             $data['planIds'] = $this->fields['planIds'];
-        }
-        if (array_key_exists('amount', $this->fields)) {
-            $data['amount'] = $this->fields['amount'];
         }
         if (array_key_exists('quantity', $this->fields)) {
             $data['quantity'] = $this->fields['quantity'];
@@ -335,11 +335,11 @@ class RestrictToSubscriptions implements CouponRestriction, RedemptionRestrictio
         if (array_key_exists('productIds', $this->fields)) {
             $data['productIds'] = $this->fields['productIds'];
         }
+        if (array_key_exists('subscriptionIds', $this->fields)) {
+            $data['subscriptionIds'] = $this->fields['subscriptionIds'];
+        }
         if (array_key_exists('get', $this->fields)) {
             $data['get'] = $this->fields['get'];
-        }
-        if (array_key_exists('currency', $this->fields)) {
-            $data['currency'] = $this->fields['currency'];
         }
         if (array_key_exists('time', $this->fields)) {
             $data['time'] = $this->fields['time']?->format(DateTimeInterface::RFC3339);

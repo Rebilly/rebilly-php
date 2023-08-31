@@ -17,9 +17,9 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
 
-class RestrictToCountries implements CouponRestriction, JsonSerializable
+class CouponRestrictionRetrictToBxgy implements CouponRestriction, JsonSerializable
 {
-    public const TYPE_RESTRICT_TO_COUNTRIES = 'restrict-to-countries';
+    public const TYPE_RESTRICT_TO_BXGY = 'restrict-to-bxgy';
 
     private array $fields = [];
 
@@ -28,8 +28,11 @@ class RestrictToCountries implements CouponRestriction, JsonSerializable
         if (array_key_exists('type', $data)) {
             $this->setType($data['type']);
         }
-        if (array_key_exists('countries', $data)) {
-            $this->setCountries($data['countries']);
+        if (array_key_exists('buy', $data)) {
+            $this->setBuy($data['buy']);
+        }
+        if (array_key_exists('get', $data)) {
+            $this->setGet($data['get']);
         }
         if (array_key_exists('planIds', $data)) {
             $this->setPlanIds($data['planIds']);
@@ -40,17 +43,14 @@ class RestrictToCountries implements CouponRestriction, JsonSerializable
         if (array_key_exists('quantity', $data)) {
             $this->setQuantity($data['quantity']);
         }
-        if (array_key_exists('buy', $data)) {
-            $this->setBuy($data['buy']);
+        if (array_key_exists('countries', $data)) {
+            $this->setCountries($data['countries']);
         }
         if (array_key_exists('productIds', $data)) {
             $this->setProductIds($data['productIds']);
         }
         if (array_key_exists('subscriptionIds', $data)) {
             $this->setSubscriptionIds($data['subscriptionIds']);
-        }
-        if (array_key_exists('get', $data)) {
-            $this->setGet($data['get']);
         }
         if (array_key_exists('currency', $data)) {
             $this->setCurrency($data['currency']);
@@ -84,24 +84,47 @@ class RestrictToCountries implements CouponRestriction, JsonSerializable
     }
 
     /**
-     * @return string[]
+     * @return CouponRestrictionRetrictToBxgyBuy[]
      */
-    public function getCountries(): array
+    public function getBuy(): array
     {
-        return $this->fields['countries'];
+        return $this->fields['buy'];
     }
 
     /**
-     * @param string[] $countries
+     * @param array[]|CouponRestrictionRetrictToBxgyBuy[] $buy
      */
-    public function setCountries(array $countries): static
+    public function setBuy(array $buy): static
     {
-        $countries = array_map(
-            fn ($value) => $value,
-            $countries,
+        $buy = array_map(
+            fn ($value) => $value !== null ? ($value instanceof CouponRestrictionRetrictToBxgyBuy ? $value : CouponRestrictionRetrictToBxgyBuy::from($value)) : null,
+            $buy,
         );
 
-        $this->fields['countries'] = $countries;
+        $this->fields['buy'] = $buy;
+
+        return $this;
+    }
+
+    /**
+     * @return CouponRestrictionRetrictToBxgyGet[]
+     */
+    public function getGet(): array
+    {
+        return $this->fields['get'];
+    }
+
+    /**
+     * @param array[]|CouponRestrictionRetrictToBxgyGet[] $get
+     */
+    public function setGet(array $get): static
+    {
+        $get = array_map(
+            fn ($value) => $value !== null ? ($value instanceof CouponRestrictionRetrictToBxgyGet ? $value : CouponRestrictionRetrictToBxgyGet::from($value)) : null,
+            $get,
+        );
+
+        $this->fields['get'] = $get;
 
         return $this;
     }
@@ -154,24 +177,24 @@ class RestrictToCountries implements CouponRestriction, JsonSerializable
     }
 
     /**
-     * @return RestrictToBxgyBuy[]
+     * @return string[]
      */
-    public function getBuy(): array
+    public function getCountries(): array
     {
-        return $this->fields['buy'];
+        return $this->fields['countries'];
     }
 
     /**
-     * @param array[]|RestrictToBxgyBuy[] $buy
+     * @param string[] $countries
      */
-    public function setBuy(array $buy): static
+    public function setCountries(array $countries): static
     {
-        $buy = array_map(
-            fn ($value) => $value !== null ? ($value instanceof RestrictToBxgyBuy ? $value : RestrictToBxgyBuy::from($value)) : null,
-            $buy,
+        $countries = array_map(
+            fn ($value) => $value,
+            $countries,
         );
 
-        $this->fields['buy'] = $buy;
+        $this->fields['countries'] = $countries;
 
         return $this;
     }
@@ -218,29 +241,6 @@ class RestrictToCountries implements CouponRestriction, JsonSerializable
         );
 
         $this->fields['subscriptionIds'] = $subscriptionIds;
-
-        return $this;
-    }
-
-    /**
-     * @return RestrictToBxgyGet[]
-     */
-    public function getGet(): array
-    {
-        return $this->fields['get'];
-    }
-
-    /**
-     * @param array[]|RestrictToBxgyGet[] $get
-     */
-    public function setGet(array $get): static
-    {
-        $get = array_map(
-            fn ($value) => $value !== null ? ($value instanceof RestrictToBxgyGet ? $value : RestrictToBxgyGet::from($value)) : null,
-            $get,
-        );
-
-        $this->fields['get'] = $get;
 
         return $this;
     }
@@ -314,8 +314,11 @@ class RestrictToCountries implements CouponRestriction, JsonSerializable
         if (array_key_exists('type', $this->fields)) {
             $data['type'] = $this->fields['type'];
         }
-        if (array_key_exists('countries', $this->fields)) {
-            $data['countries'] = $this->fields['countries'];
+        if (array_key_exists('buy', $this->fields)) {
+            $data['buy'] = $this->fields['buy'];
+        }
+        if (array_key_exists('get', $this->fields)) {
+            $data['get'] = $this->fields['get'];
         }
         if (array_key_exists('planIds', $this->fields)) {
             $data['planIds'] = $this->fields['planIds'];
@@ -326,17 +329,14 @@ class RestrictToCountries implements CouponRestriction, JsonSerializable
         if (array_key_exists('quantity', $this->fields)) {
             $data['quantity'] = $this->fields['quantity'];
         }
-        if (array_key_exists('buy', $this->fields)) {
-            $data['buy'] = $this->fields['buy'];
+        if (array_key_exists('countries', $this->fields)) {
+            $data['countries'] = $this->fields['countries'];
         }
         if (array_key_exists('productIds', $this->fields)) {
             $data['productIds'] = $this->fields['productIds'];
         }
         if (array_key_exists('subscriptionIds', $this->fields)) {
             $data['subscriptionIds'] = $this->fields['subscriptionIds'];
-        }
-        if (array_key_exists('get', $this->fields)) {
-            $data['get'] = $this->fields['get'];
         }
         if (array_key_exists('currency', $this->fields)) {
             $data['currency'] = $this->fields['currency'];

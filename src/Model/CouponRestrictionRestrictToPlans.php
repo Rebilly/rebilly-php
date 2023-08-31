@@ -17,9 +17,9 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
 
-class MinimumOrderAmount implements CouponRestriction, RedemptionRestriction, JsonSerializable
+class CouponRestrictionRestrictToPlans implements CouponRestriction, RedemptionRestriction, JsonSerializable
 {
-    public const TYPE_MINIMUM_ORDER_AMOUNT = 'minimum-order-amount';
+    public const TYPE_RESTRICT_TO_PLANS = 'restrict-to-plans';
 
     private array $fields = [];
 
@@ -28,14 +28,14 @@ class MinimumOrderAmount implements CouponRestriction, RedemptionRestriction, Js
         if (array_key_exists('type', $data)) {
             $this->setType($data['type']);
         }
-        if (array_key_exists('amount', $data)) {
-            $this->setAmount($data['amount']);
-        }
-        if (array_key_exists('currency', $data)) {
-            $this->setCurrency($data['currency']);
-        }
         if (array_key_exists('planIds', $data)) {
             $this->setPlanIds($data['planIds']);
+        }
+        if (array_key_exists('minimumQuantity', $data)) {
+            $this->setMinimumQuantity($data['minimumQuantity']);
+        }
+        if (array_key_exists('amount', $data)) {
+            $this->setAmount($data['amount']);
         }
         if (array_key_exists('quantity', $data)) {
             $this->setQuantity($data['quantity']);
@@ -55,11 +55,11 @@ class MinimumOrderAmount implements CouponRestriction, RedemptionRestriction, Js
         if (array_key_exists('get', $data)) {
             $this->setGet($data['get']);
         }
+        if (array_key_exists('currency', $data)) {
+            $this->setCurrency($data['currency']);
+        }
         if (array_key_exists('time', $data)) {
             $this->setTime($data['time']);
-        }
-        if (array_key_exists('minimumQuantity', $data)) {
-            $this->setMinimumQuantity($data['minimumQuantity']);
         }
         if (array_key_exists('invoiceIds', $data)) {
             $this->setInvoiceIds($data['invoiceIds']);
@@ -79,30 +79,6 @@ class MinimumOrderAmount implements CouponRestriction, RedemptionRestriction, Js
     public function setType(string $type): static
     {
         $this->fields['type'] = $type;
-
-        return $this;
-    }
-
-    public function getAmount(): int
-    {
-        return $this->fields['amount'];
-    }
-
-    public function setAmount(int $amount): static
-    {
-        $this->fields['amount'] = $amount;
-
-        return $this;
-    }
-
-    public function getCurrency(): string
-    {
-        return $this->fields['currency'];
-    }
-
-    public function setCurrency(string $currency): static
-    {
-        $this->fields['currency'] = $currency;
 
         return $this;
     }
@@ -130,6 +106,30 @@ class MinimumOrderAmount implements CouponRestriction, RedemptionRestriction, Js
         return $this;
     }
 
+    public function getMinimumQuantity(): ?int
+    {
+        return $this->fields['minimumQuantity'] ?? null;
+    }
+
+    public function setMinimumQuantity(null|int $minimumQuantity): static
+    {
+        $this->fields['minimumQuantity'] = $minimumQuantity;
+
+        return $this;
+    }
+
+    public function getAmount(): int
+    {
+        return $this->fields['amount'];
+    }
+
+    public function setAmount(int $amount): static
+    {
+        $this->fields['amount'] = $amount;
+
+        return $this;
+    }
+
     public function getQuantity(): int
     {
         return $this->fields['quantity'];
@@ -143,7 +143,7 @@ class MinimumOrderAmount implements CouponRestriction, RedemptionRestriction, Js
     }
 
     /**
-     * @return RestrictToBxgyBuy[]
+     * @return CouponRestrictionRetrictToBxgyBuy[]
      */
     public function getBuy(): array
     {
@@ -151,12 +151,12 @@ class MinimumOrderAmount implements CouponRestriction, RedemptionRestriction, Js
     }
 
     /**
-     * @param array[]|RestrictToBxgyBuy[] $buy
+     * @param array[]|CouponRestrictionRetrictToBxgyBuy[] $buy
      */
     public function setBuy(array $buy): static
     {
         $buy = array_map(
-            fn ($value) => $value !== null ? ($value instanceof RestrictToBxgyBuy ? $value : RestrictToBxgyBuy::from($value)) : null,
+            fn ($value) => $value !== null ? ($value instanceof CouponRestrictionRetrictToBxgyBuy ? $value : CouponRestrictionRetrictToBxgyBuy::from($value)) : null,
             $buy,
         );
 
@@ -235,7 +235,7 @@ class MinimumOrderAmount implements CouponRestriction, RedemptionRestriction, Js
     }
 
     /**
-     * @return RestrictToBxgyGet[]
+     * @return CouponRestrictionRetrictToBxgyGet[]
      */
     public function getGet(): array
     {
@@ -243,16 +243,28 @@ class MinimumOrderAmount implements CouponRestriction, RedemptionRestriction, Js
     }
 
     /**
-     * @param array[]|RestrictToBxgyGet[] $get
+     * @param array[]|CouponRestrictionRetrictToBxgyGet[] $get
      */
     public function setGet(array $get): static
     {
         $get = array_map(
-            fn ($value) => $value !== null ? ($value instanceof RestrictToBxgyGet ? $value : RestrictToBxgyGet::from($value)) : null,
+            fn ($value) => $value !== null ? ($value instanceof CouponRestrictionRetrictToBxgyGet ? $value : CouponRestrictionRetrictToBxgyGet::from($value)) : null,
             $get,
         );
 
         $this->fields['get'] = $get;
+
+        return $this;
+    }
+
+    public function getCurrency(): string
+    {
+        return $this->fields['currency'];
+    }
+
+    public function setCurrency(string $currency): static
+    {
+        $this->fields['currency'] = $currency;
 
         return $this;
     }
@@ -269,18 +281,6 @@ class MinimumOrderAmount implements CouponRestriction, RedemptionRestriction, Js
         }
 
         $this->fields['time'] = $time;
-
-        return $this;
-    }
-
-    public function getMinimumQuantity(): ?int
-    {
-        return $this->fields['minimumQuantity'] ?? null;
-    }
-
-    public function setMinimumQuantity(null|int $minimumQuantity): static
-    {
-        $this->fields['minimumQuantity'] = $minimumQuantity;
 
         return $this;
     }
@@ -314,14 +314,14 @@ class MinimumOrderAmount implements CouponRestriction, RedemptionRestriction, Js
         if (array_key_exists('type', $this->fields)) {
             $data['type'] = $this->fields['type'];
         }
-        if (array_key_exists('amount', $this->fields)) {
-            $data['amount'] = $this->fields['amount'];
-        }
-        if (array_key_exists('currency', $this->fields)) {
-            $data['currency'] = $this->fields['currency'];
-        }
         if (array_key_exists('planIds', $this->fields)) {
             $data['planIds'] = $this->fields['planIds'];
+        }
+        if (array_key_exists('minimumQuantity', $this->fields)) {
+            $data['minimumQuantity'] = $this->fields['minimumQuantity'];
+        }
+        if (array_key_exists('amount', $this->fields)) {
+            $data['amount'] = $this->fields['amount'];
         }
         if (array_key_exists('quantity', $this->fields)) {
             $data['quantity'] = $this->fields['quantity'];
@@ -341,11 +341,11 @@ class MinimumOrderAmount implements CouponRestriction, RedemptionRestriction, Js
         if (array_key_exists('get', $this->fields)) {
             $data['get'] = $this->fields['get'];
         }
+        if (array_key_exists('currency', $this->fields)) {
+            $data['currency'] = $this->fields['currency'];
+        }
         if (array_key_exists('time', $this->fields)) {
             $data['time'] = $this->fields['time']?->format(DateTimeInterface::RFC3339);
-        }
-        if (array_key_exists('minimumQuantity', $this->fields)) {
-            $data['minimumQuantity'] = $this->fields['minimumQuantity'];
         }
         if (array_key_exists('invoiceIds', $this->fields)) {
             $data['invoiceIds'] = $this->fields['invoiceIds'];

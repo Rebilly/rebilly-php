@@ -17,9 +17,9 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
 
-class DiscountsPerRedemption implements CouponRestriction, RedemptionRestriction, JsonSerializable
+class CouponRestrictionTotalRedemptions implements CouponRestriction, JsonSerializable
 {
-    public const TYPE_DISCOUNTS_PER_REDEMPTION = 'discounts-per-redemption';
+    public const TYPE_TOTAL_REDEMPTIONS = 'total-redemptions';
 
     private array $fields = [];
 
@@ -131,7 +131,7 @@ class DiscountsPerRedemption implements CouponRestriction, RedemptionRestriction
     }
 
     /**
-     * @return RestrictToBxgyBuy[]
+     * @return CouponRestrictionRetrictToBxgyBuy[]
      */
     public function getBuy(): array
     {
@@ -139,12 +139,12 @@ class DiscountsPerRedemption implements CouponRestriction, RedemptionRestriction
     }
 
     /**
-     * @param array[]|RestrictToBxgyBuy[] $buy
+     * @param array[]|CouponRestrictionRetrictToBxgyBuy[] $buy
      */
     public function setBuy(array $buy): static
     {
         $buy = array_map(
-            fn ($value) => $value !== null ? ($value instanceof RestrictToBxgyBuy ? $value : RestrictToBxgyBuy::from($value)) : null,
+            fn ($value) => $value !== null ? ($value instanceof CouponRestrictionRetrictToBxgyBuy ? $value : CouponRestrictionRetrictToBxgyBuy::from($value)) : null,
             $buy,
         );
 
@@ -223,7 +223,7 @@ class DiscountsPerRedemption implements CouponRestriction, RedemptionRestriction
     }
 
     /**
-     * @return RestrictToBxgyGet[]
+     * @return CouponRestrictionRetrictToBxgyGet[]
      */
     public function getGet(): array
     {
@@ -231,12 +231,12 @@ class DiscountsPerRedemption implements CouponRestriction, RedemptionRestriction
     }
 
     /**
-     * @param array[]|RestrictToBxgyGet[] $get
+     * @param array[]|CouponRestrictionRetrictToBxgyGet[] $get
      */
     public function setGet(array $get): static
     {
         $get = array_map(
-            fn ($value) => $value !== null ? ($value instanceof RestrictToBxgyGet ? $value : RestrictToBxgyGet::from($value)) : null,
+            fn ($value) => $value !== null ? ($value instanceof CouponRestrictionRetrictToBxgyGet ? $value : CouponRestrictionRetrictToBxgyGet::from($value)) : null,
             $get,
         );
 

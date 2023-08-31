@@ -20,8 +20,8 @@ class DiscountFactory
     public static function from(array $data = []): Discount
     {
         return match ($data['type']) {
-            'fixed' => Fixed::from($data),
-            'percent' => Percent::from($data),
+            'fixed' => DiscountFixed::from($data),
+            'percent' => DiscountPercent::from($data),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }
