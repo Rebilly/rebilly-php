@@ -31,30 +31,6 @@ use Rebilly\Rest\Service;
 final class UserService extends Service
 {
     /**
-     * @param array|JsonSerializable|Login $data
-     *
-     * @throws DataValidationException if input data is not valid
-     *
-     * @return Session
-     */
-    public function signin($data)
-    {
-        return $this->client()->post($data, 'signin');
-    }
-
-    /**
-     * @param array|JsonSerializable|Signup $data
-     *
-     * @throws DataValidationException if input data is not valid
-     *
-     * @return User
-     */
-    public function signup($data)
-    {
-        return $this->client()->post($data, 'signup');
-    }
-
-    /**
      * @param array|JsonSerializable|ForgotPassword $data
      *
      * @throws DataValidationException if input data is not valid
@@ -116,17 +92,6 @@ final class UserService extends Service
         return $this->client()->post($data, 'users');
     }
 
-    /**
-     * @param string $token
-     *
-     * @throws DataValidationException The token is not valid
-     *
-     * @return User
-     */
-    public function activate($token)
-    {
-        return $this->client()->post([], 'activation/{token}', ['token' => $token]);
-    }
 
     /**
      * @param string $userId

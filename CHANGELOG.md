@@ -17,6 +17,13 @@ Security - in case of vulnerabilities.
 
 _TBD_
 
+## [2.24.0] 2023-08-28
+
+### Removed
+
+- [x] Removed `UserService` methods: `signin`, `signup`, `activate`
+- [x] Removed `SessionService` service
+
 ## [2.23.1] 2023-07-20
 
 ### Fixed

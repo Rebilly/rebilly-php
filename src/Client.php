@@ -65,7 +65,6 @@ use RuntimeException;
  * @method Services\OrganizationService organizations()
  * @method Services\CustomFieldService customFields()
  * @method Services\GatewayAccountService gatewayAccounts()
- * @method Services\SessionService sessions()
  * @method Services\UserService users()
  * @method Services\ApiTrackingService apiTracking()
  * @method Services\ShippingRateService shippingRates()
@@ -105,7 +104,7 @@ final class Client
      */
     public const CURRENT_VERSION = 'v2.1';
 
-    public const SDK_VERSION = '2.23.1';
+    public const SDK_VERSION = '2.24.0';
 
     private static $services = [
         'authenticationOptions' => Services\AuthenticationOptionsService::class,
@@ -136,7 +135,6 @@ final class Client
         'organizations' => Services\OrganizationService::class,
         'customFields' => Services\CustomFieldService::class,
         'gatewayAccounts' => Services\GatewayAccountService::class,
-        'sessions' => Services\SessionService::class,
         'users' => Services\UserService::class,
         'apiTracking' => Services\ApiTrackingService::class,
         'apiKeys' => Services\ApiKeyService::class,
