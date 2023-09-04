@@ -411,6 +411,9 @@ class Dispute implements JsonSerializable
         if (array_key_exists('reasonCode', $data)) {
             $this->setReasonCode($data['reasonCode']);
         }
+        if (array_key_exists('reasonDescription', $data)) {
+            $this->setReasonDescription($data['reasonDescription']);
+        }
         if (array_key_exists('category', $data)) {
             $this->setCategory($data['category']);
         }
@@ -535,6 +538,11 @@ class Dispute implements JsonSerializable
         $this->fields['reasonCode'] = $reasonCode;
 
         return $this;
+    }
+
+    public function getReasonDescription(): ?string
+    {
+        return $this->fields['reasonDescription'] ?? null;
     }
 
     public function getCategory(): ?string
@@ -669,6 +677,9 @@ class Dispute implements JsonSerializable
         if (array_key_exists('reasonCode', $this->fields)) {
             $data['reasonCode'] = $this->fields['reasonCode'];
         }
+        if (array_key_exists('reasonDescription', $this->fields)) {
+            $data['reasonDescription'] = $this->fields['reasonDescription'];
+        }
         if (array_key_exists('category', $this->fields)) {
             $data['category'] = $this->fields['category'];
         }
@@ -716,6 +727,13 @@ class Dispute implements JsonSerializable
     private function setCustomerId(null|string $customerId): static
     {
         $this->fields['customerId'] = $customerId;
+
+        return $this;
+    }
+
+    private function setReasonDescription(null|string $reasonDescription): static
+    {
+        $this->fields['reasonDescription'] = $reasonDescription;
 
         return $this;
     }

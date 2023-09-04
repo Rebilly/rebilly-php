@@ -45,7 +45,7 @@ final class Client implements GuzzleClientInterface, PsrClientInterface
      * @param array{
      *     apiKey?: string,
      *     sessionToken?: string,
-     *     base_uri?: string,
+     *     baseUrl?: string,
      *     organizationId ?: string,
      *     timeout?: int,
      *     allow_redirects?: bool,
@@ -68,23 +68,23 @@ final class Client implements GuzzleClientInterface, PsrClientInterface
             $stack->push($authentication);
         }
 
-        if (isset($config['base_uri'])) {
-            $config['base_uri'] = ltrim($config['base_uri'], '/');
+        if (isset($config['baseUrl'])) {
+            $config['baseUrl'] = ltrim($config['baseUrl'], '/');
         } else {
-            $config['base_uri'] = self::BASE_HOST;
+            $config['baseUrl'] = self::BASE_HOST;
         }
 
         $stack->push(Middleware::redirect(), 'allow_redirects');
         $stack->push(
             new BaseUri(
-                $this->createUri($config['base_uri']),
+                $this->createUri($config['baseUrl']),
                 $config['organizationId'] ?? null
             )
         );
 
         $stack->push(new UserAgent(self::SDK_VERSION));
 
-        unset($config['base_uri'], $config['apiKey'], $config['sessionToken'], $config['organizationId']);
+        unset($config['baseUrl'], $config['apiKey'], $config['sessionToken'], $config['organizationId']);
 
         $config['handler'] = $stack;
 

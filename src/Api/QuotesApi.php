@@ -16,6 +16,7 @@ namespace Rebilly\Sdk\Api;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
+use Psr\Http\Message\StreamInterface;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\Quote;
 use Rebilly\Sdk\Model\QuoteTimeline;
@@ -120,7 +121,6 @@ class QuotesApi
      */
     public function get(
         string $id,
-        string $accept = 'application/json',
         ?string $expand = null,
     ): Quote {
         $pathParams = [
@@ -133,12 +133,33 @@ class QuotesApi
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/quotes/{id}?') . http_build_query($queryParams);
 
         $request = new Request('GET', $uri, headers: [
-            'Accept' => $accept,
+            'Accept' => 'application/json',
         ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Quote::from($data);
+    }
+
+    public function getPdf(
+        string $id,
+        ?string $expand = null,
+    ): StreamInterface {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $queryParams = [
+            'expand' => $expand,
+        ];
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/quotes/{id}?') . http_build_query($queryParams);
+
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/pdf',
+        ]);
+        $response = $this->client->send($request, ['allow_redirects' => ['refer' => true]]);
+
+        return $response->getBody();
     }
 
     /**
