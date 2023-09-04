@@ -159,13 +159,6 @@ class KhelocardCard implements PaymentInstrument, JsonSerializable
         return $this->fields['id'] ?? null;
     }
 
-    public function setId(null|string $id): static
-    {
-        $this->fields['id'] = $id;
-
-        return $this;
-    }
-
     public function getCustomerId(): ?string
     {
         return $this->fields['customerId'] ?? null;
@@ -613,6 +606,13 @@ class KhelocardCard implements PaymentInstrument, JsonSerializable
         }
 
         return $data;
+    }
+
+    private function setId(null|string $id): static
+    {
+        $this->fields['id'] = $id;
+
+        return $this;
     }
 
     private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static

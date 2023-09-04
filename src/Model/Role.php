@@ -95,13 +95,24 @@ class Role implements JsonSerializable
         return $this;
     }
 
-    public function getAcl(): Acl
+    /**
+     * @return Acl[]
+     */
+    public function getAcl(): array
     {
         return $this->fields['acl'];
     }
 
-    public function setAcl(Acl $acl): static
+    /**
+     * @param Acl[]|array[] $acl
+     */
+    public function setAcl(array $acl): static
     {
+        $acl = array_map(
+            fn ($value) => $value !== null ? ($value instanceof Acl ? $value : Acl::from($value)) : null,
+            $acl,
+        );
+
         $this->fields['acl'] = $acl;
 
         return $this;
