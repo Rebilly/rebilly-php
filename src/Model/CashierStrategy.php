@@ -71,12 +71,12 @@ class CashierStrategy implements JsonSerializable
         return $this;
     }
 
-    public function getFilter(): string
+    public function getFilter(): ?string
     {
-        return $this->fields['filter'];
+        return $this->fields['filter'] ?? null;
     }
 
-    public function setFilter(string $filter): static
+    public function setFilter(null|string $filter): static
     {
         $this->fields['filter'] = $filter;
 

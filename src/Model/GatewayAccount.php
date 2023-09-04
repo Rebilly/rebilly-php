@@ -241,6 +241,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return new EPG($data);
             case 'EPro':
                 return new EPro($data);
+            case 'EasyPayDirect':
+                return new EasyPayDirect($data);
             case 'EcorePay':
                 return new EcorePay($data);
             case 'Elavon':

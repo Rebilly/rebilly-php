@@ -19,6 +19,8 @@ class CoreService
 {
     private Client $client;
 
+    private Api\AllowlistsApi $allowlists;
+
     private Api\AmlApi $aml;
 
     private Api\AmlChecksApi $amlChecks;
@@ -108,6 +110,7 @@ class CoreService
     public function __construct(Client $client = null, array $config = [])
     {
         $this->client = $client ?? new Client($config);
+        $this->allowlists = new Api\AllowlistsApi($this->client);
         $this->aml = new Api\AmlApi($this->client);
         $this->amlChecks = new Api\AmlChecksApi($this->client);
         $this->amlSettings = new Api\AmlSettingsApi($this->client);
@@ -151,6 +154,11 @@ class CoreService
         $this->tagsRules = new Api\TagsRulesApi($this->client);
         $this->transactions = new Api\TransactionsApi($this->client);
         $this->usages = new Api\UsagesApi($this->client);
+    }
+
+    public function allowlists(): Api\AllowlistsApi
+    {
+        return $this->allowlists;
     }
 
     public function aml(): Api\AmlApi

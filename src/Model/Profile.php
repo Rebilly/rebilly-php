@@ -50,9 +50,6 @@ class Profile implements JsonSerializable
         if (array_key_exists('permissions', $data)) {
             $this->setPermissions($data['permissions']);
         }
-        if (array_key_exists('memberships', $data)) {
-            $this->setMemberships($data['memberships']);
-        }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
         }
@@ -166,14 +163,6 @@ class Profile implements JsonSerializable
         $this->fields['permissions'] = $permissions;
 
         return $this;
-    }
-
-    /**
-     * @return null|Membership[]
-     */
-    public function getMemberships(): ?array
-    {
-        return $this->fields['memberships'] ?? null;
     }
 
     public function getCreatedTime(): ?DateTimeImmutable
@@ -317,9 +306,6 @@ class Profile implements JsonSerializable
         if (array_key_exists('permissions', $this->fields)) {
             $data['permissions'] = $this->fields['permissions'];
         }
-        if (array_key_exists('memberships', $this->fields)) {
-            $data['memberships'] = $this->fields['memberships'];
-        }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
         }
@@ -403,21 +389,6 @@ class Profile implements JsonSerializable
     private function setMobilePhone(null|string $mobilePhone): static
     {
         $this->fields['mobilePhone'] = $mobilePhone;
-
-        return $this;
-    }
-
-    /**
-     * @param null|array[]|Membership[] $memberships
-     */
-    private function setMemberships(null|array $memberships): static
-    {
-        $memberships = $memberships !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof Membership ? $value : Membership::from($value)) : null,
-            $memberships,
-        ) : null;
-
-        $this->fields['memberships'] = $memberships;
 
         return $this;
     }
