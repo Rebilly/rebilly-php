@@ -21,6 +21,8 @@ class CombinedService
 
     private Api\AccountApi $account;
 
+    private Api\AllowlistsApi $allowlists;
+
     private Api\AmlApi $aml;
 
     private Api\AmlChecksApi $amlChecks;
@@ -179,6 +181,7 @@ class CombinedService
     {
         $this->client = $client ?? new Client($config);
         $this->account = new Api\AccountApi($this->client);
+        $this->allowlists = new Api\AllowlistsApi($this->client);
         $this->aml = new Api\AmlApi($this->client);
         $this->amlChecks = new Api\AmlChecksApi($this->client);
         $this->amlSettings = new Api\AmlSettingsApi($this->client);
@@ -261,6 +264,11 @@ class CombinedService
     public function account(): Api\AccountApi
     {
         return $this->account;
+    }
+
+    public function allowlists(): Api\AllowlistsApi
+    {
+        return $this->allowlists;
     }
 
     public function aml(): Api\AmlApi

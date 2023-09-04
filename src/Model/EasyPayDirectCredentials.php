@@ -15,14 +15,14 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class PatchTagRequest implements JsonSerializable
+class EasyPayDirectCredentials implements JsonSerializable
 {
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('name', $data)) {
-            $this->setName($data['name']);
+        if (array_key_exists('secretKey', $data)) {
+            $this->setSecretKey($data['secretKey']);
         }
     }
 
@@ -31,14 +31,14 @@ class PatchTagRequest implements JsonSerializable
         return new self($data);
     }
 
-    public function getName(): string
+    public function getSecretKey(): string
     {
-        return $this->fields['name'];
+        return $this->fields['secretKey'];
     }
 
-    public function setName(string $name): static
+    public function setSecretKey(string $secretKey): static
     {
-        $this->fields['name'] = $name;
+        $this->fields['secretKey'] = $secretKey;
 
         return $this;
     }
@@ -46,8 +46,8 @@ class PatchTagRequest implements JsonSerializable
     public function jsonSerialize(): array
     {
         $data = [];
-        if (array_key_exists('name', $this->fields)) {
-            $data['name'] = $this->fields['name'];
+        if (array_key_exists('secretKey', $this->fields)) {
+            $data['secretKey'] = $this->fields['secretKey'];
         }
 
         return $data;
