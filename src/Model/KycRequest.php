@@ -102,13 +102,24 @@ class KycRequest implements JsonSerializable
         return $this;
     }
 
-    public function getDocuments(): KycRequestDocuments
+    /**
+     * @return KycRequestDocuments[]
+     */
+    public function getDocuments(): array
     {
         return $this->fields['documents'];
     }
 
-    public function setDocuments(KycRequestDocuments $documents): static
+    /**
+     * @param array[]|KycRequestDocuments[] $documents
+     */
+    public function setDocuments(array $documents): static
     {
+        $documents = array_map(
+            fn ($value) => $value !== null ? ($value instanceof KycRequestDocuments ? $value : KycRequestDocuments::from($value)) : null,
+            $documents,
+        );
+
         $this->fields['documents'] = $documents;
 
         return $this;

@@ -17,6 +17,8 @@ use DateTimeImmutable;
 
 interface PaymentInstrument
 {
+    public function getId(): ?string;
+
     public function getUseAsBackup(): ?bool;
 
     public function setUseAsBackup(null|bool $useAsBackup): static;

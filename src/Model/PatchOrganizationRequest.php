@@ -187,25 +187,47 @@ class PatchOrganizationRequest implements JsonSerializable
         return $this;
     }
 
-    public function getPhoneNumbers(): ?ContactPhoneNumbers
+    /**
+     * @return null|ContactPhoneNumbers[]
+     */
+    public function getPhoneNumbers(): ?array
     {
         return $this->fields['phoneNumbers'] ?? null;
     }
 
-    public function setPhoneNumbers(null|ContactPhoneNumbers $phoneNumbers): static
+    /**
+     * @param null|array[]|ContactPhoneNumbers[] $phoneNumbers
+     */
+    public function setPhoneNumbers(null|array $phoneNumbers): static
     {
+        $phoneNumbers = $phoneNumbers !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof ContactPhoneNumbers ? $value : ContactPhoneNumbers::from($value)) : null,
+            $phoneNumbers,
+        ) : null;
+
         $this->fields['phoneNumbers'] = $phoneNumbers;
 
         return $this;
     }
 
-    public function getEmails(): ?ContactEmails
+    /**
+     * @return null|ContactEmails[]
+     */
+    public function getEmails(): ?array
     {
         return $this->fields['emails'] ?? null;
     }
 
-    public function setEmails(null|ContactEmails $emails): static
+    /**
+     * @param null|array[]|ContactEmails[] $emails
+     */
+    public function setEmails(null|array $emails): static
     {
+        $emails = $emails !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof ContactEmails ? $value : ContactEmails::from($value)) : null,
+            $emails,
+        ) : null;
+
         $this->fields['emails'] = $emails;
 
         return $this;

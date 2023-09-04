@@ -93,13 +93,24 @@ class ApiKey implements JsonSerializable
         return $this;
     }
 
-    public function getAcl(): ?Acl
+    /**
+     * @return null|Acl[]
+     */
+    public function getAcl(): ?array
     {
         return $this->fields['acl'] ?? null;
     }
 
-    public function setAcl(null|Acl $acl): static
+    /**
+     * @param null|Acl[]|array[] $acl
+     */
+    public function setAcl(null|array $acl): static
     {
+        $acl = $acl !== null ? array_map(
+            fn ($value) => $value !== null ? ($value instanceof Acl ? $value : Acl::from($value)) : null,
+            $acl,
+        ) : null;
+
         $this->fields['acl'] = $acl;
 
         return $this;
