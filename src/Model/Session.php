@@ -32,9 +32,6 @@ class Session implements JsonSerializable
         if (array_key_exists('permissions', $data)) {
             $this->setPermissions($data['permissions']);
         }
-        if (array_key_exists('memberships', $data)) {
-            $this->setMemberships($data['memberships']);
-        }
         if (array_key_exists('userId', $data)) {
             $this->setUserId($data['userId']);
         }
@@ -93,29 +90,6 @@ class Session implements JsonSerializable
         );
 
         $this->fields['permissions'] = $permissions;
-
-        return $this;
-    }
-
-    /**
-     * @return null|Membership[]
-     */
-    public function getMemberships(): ?array
-    {
-        return $this->fields['memberships'] ?? null;
-    }
-
-    /**
-     * @param null|array[]|Membership[] $memberships
-     */
-    public function setMemberships(null|array $memberships): static
-    {
-        $memberships = $memberships !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof Membership ? $value : Membership::from($value)) : null,
-            $memberships,
-        ) : null;
-
-        $this->fields['memberships'] = $memberships;
 
         return $this;
     }
@@ -180,9 +154,6 @@ class Session implements JsonSerializable
         }
         if (array_key_exists('permissions', $this->fields)) {
             $data['permissions'] = $this->fields['permissions'];
-        }
-        if (array_key_exists('memberships', $this->fields)) {
-            $data['memberships'] = $this->fields['memberships'];
         }
         if (array_key_exists('userId', $this->fields)) {
             $data['userId'] = $this->fields['userId'];
