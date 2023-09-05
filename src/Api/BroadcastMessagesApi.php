@@ -85,7 +85,7 @@ class BroadcastMessagesApi
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
             'filter' => $filter,
         ];
         $uri = '/broadcast-messages?' . http_build_query($queryParams);

@@ -246,7 +246,7 @@ class GatewayAccountsApi
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
             'filter' => $filter,
             'q' => $q,
             'fields' => $fields,
@@ -306,7 +306,7 @@ class GatewayAccountsApi
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}/downtime-schedules?') . http_build_query($queryParams);
 
@@ -362,7 +362,7 @@ class GatewayAccountsApi
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
             'q' => $q,
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}/timeline?') . http_build_query($queryParams);

@@ -174,7 +174,7 @@ class QuotesApi
     ): Collection {
         $queryParams = [
             'filter' => $filter,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
             'limit' => $limit,
             'offset' => $offset,
             'expand' => $expand,
@@ -233,7 +233,7 @@ class QuotesApi
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
             'q' => $q,
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/quotes/{id}/timeline?') . http_build_query($queryParams);

@@ -86,7 +86,7 @@ class CashierStrategiesApi
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
         ];
         $uri = '/cashier-strategies?' . http_build_query($queryParams);
 

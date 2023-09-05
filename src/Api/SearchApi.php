@@ -36,7 +36,7 @@ class SearchApi
         ?string $q = null,
     ): Collection {
         $queryParams = [
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
             'limit' => $limit,
             'offset' => $offset,
             'q' => $q,

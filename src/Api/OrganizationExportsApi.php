@@ -76,7 +76,7 @@ class OrganizationExportsApi
             'offset' => $offset,
             'filter' => $filter,
             'q' => $q,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
         ];
         $uri = '/organization-exports?' . http_build_query($queryParams);
 

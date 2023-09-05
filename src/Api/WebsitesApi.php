@@ -88,7 +88,7 @@ class WebsitesApi
             'offset' => $offset,
             'q' => $q,
             'filter' => $filter,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
         ];
         $uri = '/websites?' . http_build_query($queryParams);
 

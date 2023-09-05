@@ -69,7 +69,7 @@ class ListsApi
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
             'fields' => $fields,
             'q' => $q,
         ];

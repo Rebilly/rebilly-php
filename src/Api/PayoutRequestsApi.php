@@ -74,7 +74,7 @@ class PayoutRequestsApi
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
         ];
         $uri = '/payout-requests?' . http_build_query($queryParams);
 

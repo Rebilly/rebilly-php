@@ -77,7 +77,7 @@ class DataExportsApi
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
             'expand' => $expand,
             'filter' => $filter,
             'q' => $q,

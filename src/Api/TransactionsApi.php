@@ -125,7 +125,7 @@ class TransactionsApi
             'offset' => $offset,
             'filter' => $filter,
             'q' => $q,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
             'expand' => $expand,
         ];
         $uri = '/transactions?' . http_build_query($queryParams);
@@ -184,7 +184,7 @@ class TransactionsApi
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
             'q' => $q,
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/transactions/{id}/timeline?') . http_build_query($queryParams);

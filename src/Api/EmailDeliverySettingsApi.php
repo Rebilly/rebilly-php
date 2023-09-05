@@ -87,7 +87,7 @@ class EmailDeliverySettingsApi
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
             'q' => $q,
         ];
         $uri = '/email-delivery-settings?' . http_build_query($queryParams);

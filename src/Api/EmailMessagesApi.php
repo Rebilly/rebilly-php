@@ -88,7 +88,7 @@ class EmailMessagesApi
             'limit' => $limit,
             'offset' => $offset,
             'q' => $q,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
             'filter' => $filter,
         ];
         $uri = '/email-messages?' . http_build_query($queryParams);

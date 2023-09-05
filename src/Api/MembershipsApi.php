@@ -75,7 +75,7 @@ class MembershipsApi
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
         ];
         $uri = '/memberships?' . http_build_query($queryParams);
 

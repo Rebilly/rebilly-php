@@ -71,7 +71,7 @@ class SubscriptionPausesApi
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
         ];
         $uri = '/subscription-pauses?' . http_build_query($queryParams);
 

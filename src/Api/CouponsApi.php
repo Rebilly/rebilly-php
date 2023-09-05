@@ -90,7 +90,7 @@ class CouponsApi
             'offset' => $offset,
             'filter' => $filter,
             'q' => $q,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
         ];
         $uri = '/coupons?' . http_build_query($queryParams);
 
@@ -142,7 +142,7 @@ class CouponsApi
             'offset' => $offset,
             'filter' => $filter,
             'q' => $q,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
         ];
         $uri = '/coupons-redemptions?' . http_build_query($queryParams);
 

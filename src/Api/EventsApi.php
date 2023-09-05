@@ -175,7 +175,7 @@ class EventsApi
             'offset' => $offset,
             'filter' => $filter,
             'q' => $q,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
             'fields' => $fields,
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/rules/drafts?') . http_build_query($queryParams);
@@ -236,7 +236,7 @@ class EventsApi
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
             'q' => $q,
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/timeline?') . http_build_query($queryParams);
@@ -341,7 +341,7 @@ class EventsApi
             'offset' => $offset,
             'filter' => $filter,
             'q' => $q,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
             'fields' => $fields,
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/rules/history?') . http_build_query($queryParams);

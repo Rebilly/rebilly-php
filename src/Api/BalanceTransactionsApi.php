@@ -59,7 +59,7 @@ class BalanceTransactionsApi
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
         ];
         $uri = '/balance-transactions?' . http_build_query($queryParams);
 

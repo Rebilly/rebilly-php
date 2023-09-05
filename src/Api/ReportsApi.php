@@ -430,7 +430,7 @@ class ReportsApi
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
             'criteria' => $criteria,
         ];
         $uri = '/experimental/reports/retention-value?' . http_build_query($queryParams);
@@ -453,7 +453,7 @@ class ReportsApi
     ): Collection {
         $queryParams = [
             'filter' => $filter,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
             'limit' => $limit,
             'offset' => $offset,
         ];

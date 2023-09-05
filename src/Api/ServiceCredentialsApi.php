@@ -90,7 +90,7 @@ class ServiceCredentialsApi
             'filter' => $filter,
             'limit' => $limit,
             'offset' => $offset,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
             'q' => $q,
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/service-credentials/{type}?') . http_build_query($queryParams);
@@ -154,7 +154,7 @@ class ServiceCredentialsApi
             'filter' => $filter,
             'q' => $q,
             'fields' => $fields,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/service-credentials/{type}/{id}/items?') . http_build_query($queryParams);
 

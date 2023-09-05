@@ -96,7 +96,7 @@ class KycDocumentsApi
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
             'expand' => $expand,
         ];
         $uri = '/kyc-documents?' . http_build_query($queryParams);

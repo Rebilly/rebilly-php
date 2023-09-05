@@ -81,7 +81,7 @@ class ApplicationsApi
             'q' => $q,
             'expand' => $expand,
             'fields' => $fields,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
         ];
         $uri = '/applications?' . http_build_query($queryParams);
 

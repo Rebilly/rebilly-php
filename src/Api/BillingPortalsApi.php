@@ -86,7 +86,7 @@ class BillingPortalsApi
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
             'filter' => $filter,
             'q' => $q,
         ];

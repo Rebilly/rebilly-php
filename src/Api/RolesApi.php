@@ -92,7 +92,7 @@ class RolesApi
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
             'q' => $q,
             'expand' => $expand,
         ];
