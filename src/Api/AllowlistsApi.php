@@ -16,7 +16,9 @@ namespace Rebilly\Sdk\Api;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
+use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\Allowlist;
+use Rebilly\Sdk\Paginator;
 
 class AllowlistsApi
 {
@@ -57,17 +59,51 @@ class AllowlistsApi
     }
 
     /**
-     * @return Allowlist[]
+     * @return Collection<Allowlist>
      */
-    public function getAllowlistCollection(): array
-    {
-        $uri = '/allowlists';
+    public function getAllowlistCollection(
+        ?string $filter = null,
+        ?array $sort = null,
+        ?int $limit = null,
+        ?int $offset = null,
+    ): Collection {
+        $queryParams = [
+            'filter' => $filter,
+            'sort' => $sort ? implode(',', $sort) : null,
+            'limit' => $limit,
+            'offset' => $offset,
+        ];
+        $uri = '/allowlists?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): Allowlist => Allowlist::from($item), $data);
+        return new Collection(
+            array_map(fn (array $item): Allowlist => Allowlist::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    public function getAllowlistCollectionPaginator(
+        ?string $filter = null,
+        ?array $sort = null,
+        ?int $limit = null,
+        ?int $offset = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllowlistCollection(
+            filter: $filter,
+            sort: $sort,
+            limit: $limit,
+            offset: $offset,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
     }
 
     /**
