@@ -216,7 +216,7 @@ class InvoicesApi
     ): Collection {
         $queryParams = [
             'filter' => $filter,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
             'limit' => $limit,
             'offset' => $offset,
             'q' => $q,
@@ -329,7 +329,7 @@ class InvoicesApi
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
             'q' => $q,
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/invoices/{id}/timeline?') . http_build_query($queryParams);

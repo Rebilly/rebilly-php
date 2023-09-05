@@ -84,7 +84,7 @@ class ApiKeysApi
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
         ];
         $uri = '/api-keys?' . http_build_query($queryParams);
 

@@ -58,7 +58,7 @@ class SubscriptionReactivationsApi
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
         ];
         $uri = '/subscription-reactivations?' . http_build_query($queryParams);
 

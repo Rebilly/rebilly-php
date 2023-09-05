@@ -90,7 +90,7 @@ class JournalEntriesApi
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
         ];
         $uri = '/journal-entries?' . http_build_query($queryParams);
 
@@ -144,7 +144,7 @@ class JournalEntriesApi
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
             'expand' => $expand,
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/journal-entries/{id}/records?') . http_build_query($queryParams);

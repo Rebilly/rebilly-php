@@ -85,7 +85,7 @@ class ProductsApi
     ): Collection {
         $queryParams = [
             'filter' => $filter,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
             'limit' => $limit,
             'offset' => $offset,
             'q' => $q,

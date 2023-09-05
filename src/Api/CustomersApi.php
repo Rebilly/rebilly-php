@@ -196,7 +196,7 @@ class CustomersApi
             'q' => $q,
             'expand' => $expand,
             'fields' => $fields,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
         ];
         $uri = '/customers?' . http_build_query($queryParams);
 
@@ -303,7 +303,7 @@ class CustomersApi
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
             'q' => $q,
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/timeline?') . http_build_query($queryParams);
@@ -440,7 +440,7 @@ class CustomersApi
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
             'q' => $q,
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/edd-timeline?') . http_build_query($queryParams);

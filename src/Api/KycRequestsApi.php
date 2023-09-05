@@ -87,7 +87,7 @@ class KycRequestsApi
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
         ];
         $uri = '/kyc-requests?' . http_build_query($queryParams);
 

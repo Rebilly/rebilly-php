@@ -92,7 +92,7 @@ class TagsApi
             'offset' => $offset,
             'filter' => $filter,
             'q' => $q,
-            'sort' => $sort,
+            'sort' => $sort ? implode(',', $sort) : null,
         ];
         $uri = '/tags?' . http_build_query($queryParams);
 
