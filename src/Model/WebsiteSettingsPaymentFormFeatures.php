@@ -27,6 +27,9 @@ class WebsiteSettingsPaymentFormFeatures implements JsonSerializable
         if (array_key_exists('fullPageRedirect', $data)) {
             $this->setFullPageRedirect($data['fullPageRedirect']);
         }
+        if (array_key_exists('skipRedirectOnPaymentComplete', $data)) {
+            $this->setSkipRedirectOnPaymentComplete($data['skipRedirectOnPaymentComplete']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -69,6 +72,18 @@ class WebsiteSettingsPaymentFormFeatures implements JsonSerializable
         return $this;
     }
 
+    public function getSkipRedirectOnPaymentComplete(): ?bool
+    {
+        return $this->fields['skipRedirectOnPaymentComplete'] ?? null;
+    }
+
+    public function setSkipRedirectOnPaymentComplete(null|bool $skipRedirectOnPaymentComplete): static
+    {
+        $this->fields['skipRedirectOnPaymentComplete'] = $skipRedirectOnPaymentComplete;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -77,6 +92,9 @@ class WebsiteSettingsPaymentFormFeatures implements JsonSerializable
         }
         if (array_key_exists('fullPageRedirect', $this->fields)) {
             $data['fullPageRedirect'] = $this->fields['fullPageRedirect'];
+        }
+        if (array_key_exists('skipRedirectOnPaymentComplete', $this->fields)) {
+            $data['skipRedirectOnPaymentComplete'] = $this->fields['skipRedirectOnPaymentComplete'];
         }
 
         return $data;

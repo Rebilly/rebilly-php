@@ -118,6 +118,9 @@ abstract class GatewayAccount implements JsonSerializable
         if (array_key_exists('setupInstruction', $data)) {
             $this->setSetupInstruction($data['setupInstruction']);
         }
+        if (array_key_exists('customFields', $data)) {
+            $this->setCustomFields($data['customFields']);
+        }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
         }
@@ -848,6 +851,18 @@ abstract class GatewayAccount implements JsonSerializable
         return $this;
     }
 
+    public function getCustomFields(): ?array
+    {
+        return $this->fields['customFields'] ?? null;
+    }
+
+    public function setCustomFields(null|array $customFields): static
+    {
+        $this->fields['customFields'] = $customFields;
+
+        return $this;
+    }
+
     public function getCreatedTime(): ?DateTimeImmutable
     {
         return $this->fields['createdTime'] ?? null;
@@ -958,6 +973,9 @@ abstract class GatewayAccount implements JsonSerializable
         }
         if (array_key_exists('setupInstruction', $this->fields)) {
             $data['setupInstruction'] = $this->fields['setupInstruction'];
+        }
+        if (array_key_exists('customFields', $this->fields)) {
+            $data['customFields'] = $this->fields['customFields'];
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
