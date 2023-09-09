@@ -18,10 +18,10 @@ use Rebilly\Sdk\Model\Product;
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $client = new Client([
-     'baseUrl' => Client::SANDBOX_HOST,
-     'organizationId' => 'AddHereOrganizationId',
-     'apiKey' => 'sk_sandbox_add_here_your_api_key',
- ]);
+    'baseUrl' => Client::SANDBOX_HOST,
+    'organizationId' => 'AddHereOrganizationId',
+    'apiKey' => 'sk_sandbox_add_here_your_api_key',
+]);
 $coreService = new CoreService(client: $client);
 
 function printProduct(Product $product): void

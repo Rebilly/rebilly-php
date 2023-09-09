@@ -29,13 +29,15 @@ use Rebilly\Sdk\Model\SubscriptionOrderPlanRecurringInterval;
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $client = new Client([
-     'baseUrl' => Client::SANDBOX_HOST,
-     'organizationId' => 'AddHereOrganizationId',
-     'apiKey' => 'sk_sandbox_add_here_your_api_key',
- ]);
+    'baseUrl' => Client::SANDBOX_HOST,
+    'organizationId' => 'AddHereOrganizationId',
+    'apiKey' => 'sk_sandbox_add_here_your_api_key',
+]);
 $coreService = new CoreService(client: $client);
 
 $websiteId = 'staging.add-your-website-id.com';
+
+// Create customer
 
 $customer = Customer::from()
     ->setWebsiteId($websiteId)
@@ -44,20 +46,29 @@ $customer = Customer::from()
             ->setFirstName('John')
             ->setLastName('Doe'),
     );
+
 echo json_encode($customer, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . PHP_EOL;
 $customer = $coreService->customers()->create($customer);
+
 echo 'Customer: ' . $customer->getId() . PHP_EOL;
 echo json_encode($customer, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . PHP_EOL;
 echo str_repeat('=', 80) . PHP_EOL . PHP_EOL;
 
+// Create product
+
 $product = new Product([
     'name' => 'Test product',
 ]);
+
 echo json_encode($product, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . PHP_EOL;
+
 $product = $coreService->products()->create($product);
+
 echo 'Product: ' . $product->getId() . PHP_EOL;
 echo json_encode($product, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . PHP_EOL;
 echo str_repeat('=', 80) . PHP_EOL . PHP_EOL;
+
+// Create plan
 
 $plan = PostPlanRequest::from([])
     ->setProductId($product->getId())
@@ -73,11 +84,16 @@ $plan = PostPlanRequest::from([])
             ->setUnit(SubscriptionOrderPlanRecurringInterval::UNIT_MONTH)
             ->setLength(1),
     );
+
 echo json_encode($plan, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . PHP_EOL;
+
 $plan = $coreService->plans()->create($plan);
+
 echo 'Plan: ' . $plan->getId() . PHP_EOL;
 echo json_encode($plan, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . PHP_EOL;
 echo str_repeat('=', 80) . PHP_EOL . PHP_EOL;
+
+// Create subscription order
 
 $order = SubscriptionOrder::from()
     ->setWebsiteId($websiteId)
@@ -90,16 +106,22 @@ $order = SubscriptionOrder::from()
             )
         ->setQuantity(1),
     ]);
+
 echo json_encode($order, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . PHP_EOL;
+
 /** @var SubscriptionOrder $order */
 $order = $coreService->subscriptions()->create($order);
+
 echo 'Order: ' . $order->getId() . PHP_EOL;
 echo json_encode($order, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . PHP_EOL;
 echo str_repeat('=', 80) . PHP_EOL . PHP_EOL;
 
 $invoice = $coreService->invoices()->get($order->getInitialInvoiceId());
+
 echo json_encode($invoice, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . PHP_EOL;
 echo str_repeat('=', 80) . PHP_EOL . PHP_EOL;
+
+// Create payment token
 
 $token = AlternativePaymentToken::from([])
     ->setPaymentInstrument([
@@ -110,11 +132,16 @@ $token = AlternativePaymentToken::from([])
     ])
     ->setMethod(PaymentCardToken::METHOD_PAYMENT_CARD)
     ->setBillingAddress($customer->getPrimaryAddress());
+
 echo json_encode($token, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . PHP_EOL;
+
 $token = $coreService->paymentTokens()->create($token);
+
 echo 'Token: ' . $token->getId() . PHP_EOL;
 echo json_encode($token, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . PHP_EOL;
 echo str_repeat('=', 80) . PHP_EOL . PHP_EOL;
+
+// Create transaction
 
 $transactionRequest = PostTransactionRequest::from()
     ->setWebsiteId($websiteId)
@@ -130,12 +157,16 @@ $transactionRequest = PostTransactionRequest::from()
             ->setMethods([AdjustReadyToPayGeneric::PAYMENT_METHOD_GOOGLE_PAY]),
     )
     ->setInvoiceIds([$invoice->getId()]);
+
 echo json_encode($transactionRequest, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . PHP_EOL;
+
 $transaction = $coreService->transactions()->create($transactionRequest);
+
 echo 'Transaction: ' . $transaction->getId() . PHP_EOL;
 echo json_encode($transaction, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . PHP_EOL;
 echo str_repeat('=', 80) . PHP_EOL . PHP_EOL;
 
 $order = $coreService->subscriptions()->get($order->getId());
+
 echo json_encode($order, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . PHP_EOL;
 echo str_repeat('=', 80) . PHP_EOL . PHP_EOL;
