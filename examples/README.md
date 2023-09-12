@@ -1,6 +1,6 @@
 # Examples of Rebilly SDK for PHP
 
-This directory contains examples of how to use the **Rebilly PHP SDK for PHP** version v3.0. Below, you will find the instructions for running the examples.
+This directory contains examples of how to use the **Rebilly PHP SDK for PHP** version v3.0. Below, there are instructions for running the code examples. Check out the [Rebilly API](https://api-reference.rebilly.com/) for more SDK examples.
 
 ## Requirements
 
@@ -10,9 +10,16 @@ This directory contains examples of how to use the **Rebilly PHP SDK for PHP** v
 
 ## Running the examples
 
-1. Go to the examples directory `cd ./examples`.
-1. Run `composer install`.
-1. Add your keys to the top of the files `purchase.php` and `pagination.php`. It should look like the following:
+1. Go to the examples directory:
+   ```bash
+   cd ./examples
+   ```
+1. Install the package via Composer:
+   ```bash
+   composer install
+   ```
+1. Add the API key and organization ID to the client parameters in the **purchase.php** and **pagination.php** files.  
+    This is the code area that should be updated:
     ```php
     $client = new Client([
         'baseUrl' => Client::SANDBOX_HOST,
@@ -20,9 +27,13 @@ This directory contains examples of how to use the **Rebilly PHP SDK for PHP** v
         'apiKey' => '{secretKey}',
     ]);
     ```
-    In the `purchase.php` file, you also need to include the `websiteId`.  
+    In the **purchase.php** file, it is also required to include the **websiteId**.  
     See [Organizations and websites](https://www.rebilly.com/docs/dev-docs/organizations-and-websites/#websites) for more information.
-1. Run `php purchase.php`.   
-   This script execute different operations to complete a purchase, check out the code to see the details.
-1. Run `php pagination.php`.   
-   This script list the products in the organization using pagination. 
+1. Run the purchase script:
+   ```bash
+   php purchase.php
+   ```
+1. Run the pagination script:
+   ```bash
+   php pagination.php
+   ```   
