@@ -12,8 +12,6 @@
 use Rebilly\Sdk\Client;
 use Rebilly\Sdk\CoreService;
 use Rebilly\Sdk\Exception\DataValidationException;
-use Rebilly\Sdk\Model\AdjustReadyToPayGeneric;
-use Rebilly\Sdk\Model\AlternativePaymentToken;
 use Rebilly\Sdk\Model\ContactObject;
 use Rebilly\Sdk\Model\Customer;
 use Rebilly\Sdk\Model\FlatRate;
@@ -137,7 +135,7 @@ try {
 
     // Create payment token
 
-    $token = AlternativePaymentToken::from([])
+    $token = PaymentCardToken::from([])
         ->setPaymentInstrument([
             'pan' => '4111111111111111',
             'expMonth' => 12,
@@ -168,7 +166,7 @@ try {
         ->setIsProcessedOutside(true)
         ->setPaymentInstruction(
             PaymentToken::from()
-                ->setMethods([AdjustReadyToPayGeneric::PAYMENT_METHOD_GOOGLE_PAY]),
+                ->setToken($token->getId()),
         )
         ->setInvoiceIds([$invoice->getId()]);
 
