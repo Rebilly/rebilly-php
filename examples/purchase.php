@@ -26,16 +26,16 @@ use Rebilly\Sdk\Model\Product;
 use Rebilly\Sdk\Model\SubscriptionOrder;
 use Rebilly\Sdk\Model\SubscriptionOrderPlanRecurringInterval;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 $client = new Client([
     'baseUrl' => Client::SANDBOX_HOST,
-    'organizationId' => 'AddHereOrganizationId',
-    'apiKey' => 'sk_sandbox_add_here_your_api_key',
+    'organizationId' => '{organizationId}',
+    'apiKey' => '{secretKey}',
 ]);
 $coreService = new CoreService(client: $client);
 
-$websiteId = 'staging.add-your-website-id.com';
+$websiteId = '{websiteId}';
 
 // Create customer
 

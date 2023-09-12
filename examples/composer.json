@@ -1,0 +1,5 @@
+{
+    "require": {
+        "rebilly/client-php": "^v3.x-dev"
+    }
+}
