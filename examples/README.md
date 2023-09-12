@@ -27,8 +27,6 @@ This directory contains examples of how to use the **Rebilly PHP SDK for PHP** v
         'apiKey' => '{secretKey}',
     ]);
     ```
-    In the **purchase.php** file, it is also required to include the **websiteId**.  
-    See [Organizations and websites](https://www.rebilly.com/docs/dev-docs/organizations-and-websites/#websites) for more information.
 1. Run the purchase script:
    ```bash
    php purchase.php
