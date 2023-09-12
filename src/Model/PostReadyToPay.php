@@ -24,11 +24,20 @@ class PostReadyToPay implements JsonSerializable
         if (array_key_exists('customerId', $data)) {
             $this->setCustomerId($data['customerId']);
         }
+        if (array_key_exists('websiteId', $data)) {
+            $this->setWebsiteId($data['websiteId']);
+        }
         if (array_key_exists('currency', $data)) {
             $this->setCurrency($data['currency']);
         }
         if (array_key_exists('amount', $data)) {
             $this->setAmount($data['amount']);
+        }
+        if (array_key_exists('billingAddress', $data)) {
+            $this->setBillingAddress($data['billingAddress']);
+        }
+        if (array_key_exists('riskMetadata', $data)) {
+            $this->setRiskMetadata($data['riskMetadata']);
         }
         if (array_key_exists('items', $data)) {
             $this->setItems($data['items']);
@@ -48,6 +57,18 @@ class PostReadyToPay implements JsonSerializable
     public function setCustomerId(null|string $customerId): static
     {
         $this->fields['customerId'] = $customerId;
+
+        return $this;
+    }
+
+    public function getWebsiteId(): string
+    {
+        return $this->fields['websiteId'];
+    }
+
+    public function setWebsiteId(string $websiteId): static
+    {
+        $this->fields['websiteId'] = $websiteId;
 
         return $this;
     }
@@ -76,6 +97,38 @@ class PostReadyToPay implements JsonSerializable
         }
 
         $this->fields['amount'] = $amount;
+
+        return $this;
+    }
+
+    public function getBillingAddress(): ?ContactObject
+    {
+        return $this->fields['billingAddress'] ?? null;
+    }
+
+    public function setBillingAddress(null|ContactObject|array $billingAddress): static
+    {
+        if ($billingAddress !== null && !($billingAddress instanceof ContactObject)) {
+            $billingAddress = ContactObject::from($billingAddress);
+        }
+
+        $this->fields['billingAddress'] = $billingAddress;
+
+        return $this;
+    }
+
+    public function getRiskMetadata(): RiskMetadata
+    {
+        return $this->fields['riskMetadata'];
+    }
+
+    public function setRiskMetadata(RiskMetadata|array $riskMetadata): static
+    {
+        if (!($riskMetadata instanceof RiskMetadata)) {
+            $riskMetadata = RiskMetadata::from($riskMetadata);
+        }
+
+        $this->fields['riskMetadata'] = $riskMetadata;
 
         return $this;
     }
@@ -109,11 +162,20 @@ class PostReadyToPay implements JsonSerializable
         if (array_key_exists('customerId', $this->fields)) {
             $data['customerId'] = $this->fields['customerId'];
         }
+        if (array_key_exists('websiteId', $this->fields)) {
+            $data['websiteId'] = $this->fields['websiteId'];
+        }
         if (array_key_exists('currency', $this->fields)) {
             $data['currency'] = $this->fields['currency'];
         }
         if (array_key_exists('amount', $this->fields)) {
             $data['amount'] = $this->fields['amount'];
+        }
+        if (array_key_exists('billingAddress', $this->fields)) {
+            $data['billingAddress'] = $this->fields['billingAddress']?->jsonSerialize();
+        }
+        if (array_key_exists('riskMetadata', $this->fields)) {
+            $data['riskMetadata'] = $this->fields['riskMetadata']?->jsonSerialize();
         }
         if (array_key_exists('items', $this->fields)) {
             $data['items'] = $this->fields['items'];

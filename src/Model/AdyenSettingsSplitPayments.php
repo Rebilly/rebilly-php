@@ -41,6 +41,9 @@ class AdyenSettingsSplitPayments implements JsonSerializable
         if (array_key_exists('account', $data)) {
             $this->setAccount($data['account']);
         }
+        if (array_key_exists('merchantCountry', $data)) {
+            $this->setMerchantCountry($data['merchantCountry']);
+        }
         if (array_key_exists('type', $data)) {
             $this->setType($data['type']);
         }
@@ -103,6 +106,18 @@ class AdyenSettingsSplitPayments implements JsonSerializable
         return $this;
     }
 
+    public function getMerchantCountry(): ?string
+    {
+        return $this->fields['merchantCountry'] ?? null;
+    }
+
+    public function setMerchantCountry(null|string $merchantCountry): static
+    {
+        $this->fields['merchantCountry'] = $merchantCountry;
+
+        return $this;
+    }
+
     public function getType(): ?string
     {
         return $this->fields['type'] ?? null;
@@ -129,6 +144,9 @@ class AdyenSettingsSplitPayments implements JsonSerializable
         }
         if (array_key_exists('account', $this->fields)) {
             $data['account'] = $this->fields['account'];
+        }
+        if (array_key_exists('merchantCountry', $this->fields)) {
+            $data['merchantCountry'] = $this->fields['merchantCountry'];
         }
         if (array_key_exists('type', $this->fields)) {
             $data['type'] = $this->fields['type'];
