@@ -435,6 +435,9 @@ class Dispute implements JsonSerializable
         if (array_key_exists('resolvedTime', $data)) {
             $this->setResolvedTime($data['resolvedTime']);
         }
+        if (array_key_exists('revision', $data)) {
+            $this->setRevision($data['revision']);
+        }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
         }
@@ -616,6 +619,11 @@ class Dispute implements JsonSerializable
         return $this->fields['resolvedTime'] ?? null;
     }
 
+    public function getRevision(): ?int
+    {
+        return $this->fields['revision'] ?? null;
+    }
+
     public function getCreatedTime(): ?DateTimeImmutable
     {
         return $this->fields['createdTime'] ?? null;
@@ -701,6 +709,9 @@ class Dispute implements JsonSerializable
         if (array_key_exists('resolvedTime', $this->fields)) {
             $data['resolvedTime'] = $this->fields['resolvedTime']?->format(DateTimeInterface::RFC3339);
         }
+        if (array_key_exists('revision', $this->fields)) {
+            $data['revision'] = $this->fields['revision'];
+        }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
         }
@@ -759,6 +770,13 @@ class Dispute implements JsonSerializable
         }
 
         $this->fields['resolvedTime'] = $resolvedTime;
+
+        return $this;
+    }
+
+    private function setRevision(null|int $revision): static
+    {
+        $this->fields['revision'] = $revision;
 
         return $this;
     }
