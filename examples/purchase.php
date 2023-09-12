@@ -60,6 +60,7 @@ try {
         );
 
     echo json_encode($customer, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . PHP_EOL;
+
     $customer = $coreService->customers()->create($customer);
 
     echo 'Customer: ' . $customer->getId() . PHP_EOL;
