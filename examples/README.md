@@ -22,7 +22,7 @@ This directory contains examples of how to use the **Rebilly PHP SDK for PHP** v
    composer install
    ```
 
-1. Add the API key and organization ID to the client parameters in the **purchase.php** and **pagination.php** files.  
+1. Add the API key and organization ID to the client parameters in the *[purchase.php](./purchase.php)* and *[pagination.php](./pagination.php)* files.
 
     ```php
     $client = new Client([
