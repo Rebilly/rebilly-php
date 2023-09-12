@@ -10,16 +10,20 @@ This directory contains examples of how to use the **Rebilly PHP SDK for PHP** v
 
 ## Running the examples
 
-1. Go to the examples directory:
+1. Go to the examples directory:  
+
    ```bash
    cd ./examples
    ```
-1. Install the package via Composer:
+
+1. Install the package via Composer:  
+
    ```bash
    composer install
    ```
+
 1. Add the API key and organization ID to the client parameters in the **purchase.php** and **pagination.php** files.  
-    This is the code area that should be updated:
+
     ```php
     $client = new Client([
         'baseUrl' => Client::SANDBOX_HOST,
@@ -27,11 +31,15 @@ This directory contains examples of how to use the **Rebilly PHP SDK for PHP** v
         'apiKey' => '{secretKey}',
     ]);
     ```
-1. Run the purchase script:
+
+1. Run the purchase script:  
+
    ```bash
    php purchase.php
    ```
-1. Run the pagination script:
+
+1. Run the pagination script:  
    ```bash
    php pagination.php
-   ```   
+   ```
+
