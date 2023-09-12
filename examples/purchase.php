@@ -40,11 +40,11 @@ $usersService = new UsersService($client);
 try {
     // Create website
 
-    $website = new Website();
-    $website->setName('Website example');
-    $website->setUrl('https://website.example.test');
-    $website->setServicePhone('1234567890');
-    $website->setServiceEmail('mail@example.test');
+    $website = Website::from()
+        ->setName('Website example')
+        ->setUrl('https://website.example.test')
+        ->setServicePhone('1234567890')
+        ->setServiceEmail('mail@example.test');
 
     $website = $usersService->websites()->create($website);
     $websiteId = $website->getId();
