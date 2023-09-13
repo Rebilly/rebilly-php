@@ -18,7 +18,6 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\Plan;
-use Rebilly\Sdk\Model\PostPlanRequest;
 use Rebilly\Sdk\Paginator;
 
 class PlansApi
@@ -31,11 +30,11 @@ class PlansApi
      * @return Plan
      */
     public function create(
-        PostPlanRequest $postPlanRequest,
+        Plan $plan,
     ): Plan {
         $uri = '/plans';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($postPlanRequest));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($plan));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -131,7 +130,7 @@ class PlansApi
      */
     public function update(
         string $id,
-        PostPlanRequest $postPlanRequest,
+        Plan $plan,
     ): Plan {
         $pathParams = [
             '{id}' => $id,
@@ -139,7 +138,7 @@ class PlansApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/plans/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($postPlanRequest));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($plan));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
