@@ -82,13 +82,24 @@ class RuleActionRequestKyc extends RuleAction
         return new self($data);
     }
 
-    public function getDocuments(): KycRequestDocuments
+    /**
+     * @return KycRequestDocument[]
+     */
+    public function getDocuments(): array
     {
         return $this->fields['documents'];
     }
 
-    public function setDocuments(KycRequestDocuments $documents): static
+    /**
+     * @param array[]|KycRequestDocument[] $documents
+     */
+    public function setDocuments(array $documents): static
     {
+        $documents = array_map(
+            fn ($value) => $value !== null ? ($value instanceof KycRequestDocument ? $value : KycRequestDocument::from($value)) : null,
+            $documents,
+        );
+
         $this->fields['documents'] = $documents;
 
         return $this;
