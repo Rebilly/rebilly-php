@@ -17,7 +17,5 @@ interface InvoiceTax
 {
     public function getCalculator(): string;
 
-    public function setCalculator(string $calculator): static;
-
     public function getAmount(): ?int;
 }

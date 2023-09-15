@@ -17,15 +17,10 @@ use JsonSerializable;
 
 class RebillyTaxjar implements InvoiceTax, JsonSerializable
 {
-    public const CALCULATOR_REBILLY_TAXJAR = 'rebilly-taxjar';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('calculator', $data)) {
-            $this->setCalculator($data['calculator']);
-        }
         if (array_key_exists('amount', $data)) {
             $this->setAmount($data['amount']);
         }
@@ -41,14 +36,7 @@ class RebillyTaxjar implements InvoiceTax, JsonSerializable
 
     public function getCalculator(): string
     {
-        return $this->fields['calculator'];
-    }
-
-    public function setCalculator(string $calculator): static
-    {
-        $this->fields['calculator'] = $calculator;
-
-        return $this;
+        return 'rebilly-taxjar';
     }
 
     public function getAmount(): ?int
@@ -81,10 +69,9 @@ class RebillyTaxjar implements InvoiceTax, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('calculator', $this->fields)) {
-            $data['calculator'] = $this->fields['calculator'];
-        }
+        $data = [
+            'calculator' => 'rebilly-taxjar',
+        ];
         if (array_key_exists('amount', $this->fields)) {
             $data['amount'] = $this->fields['amount'];
         }

@@ -25,8 +25,6 @@ class MailgunCredential implements ServiceCredential, JsonSerializable
 
     public const STATUS_DEACTIVATED = 'deactivated';
 
-    public const TYPE_MAILGUN = 'mailgun';
-
     public const ENCRYPTION_NONE = 'none';
 
     public const ENCRYPTION_TLS = 'tls';
@@ -48,9 +46,6 @@ class MailgunCredential implements ServiceCredential, JsonSerializable
         }
         if (array_key_exists('deactivationTime', $data)) {
             $this->setDeactivationTime($data['deactivationTime']);
-        }
-        if (array_key_exists('type', $data)) {
-            $this->setType($data['type']);
         }
         if (array_key_exists('emailFrom', $data)) {
             $this->setEmailFrom($data['emailFrom']);
@@ -149,6 +144,11 @@ class MailgunCredential implements ServiceCredential, JsonSerializable
         return new self($data);
     }
 
+    public function getType(): string
+    {
+        return 'mailgun';
+    }
+
     public function getId(): ?string
     {
         return $this->fields['id'] ?? null;
@@ -174,11 +174,6 @@ class MailgunCredential implements ServiceCredential, JsonSerializable
     public function getDeactivationTime(): ?DateTimeImmutable
     {
         return $this->fields['deactivationTime'] ?? null;
-    }
-
-    public function getType(): string
-    {
-        return $this->fields['type'];
     }
 
     public function getEmailFrom(): string
@@ -550,7 +545,9 @@ class MailgunCredential implements ServiceCredential, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
+        $data = [
+            'type' => 'mailgun',
+        ];
         if (array_key_exists('id', $this->fields)) {
             $data['id'] = $this->fields['id'];
         }
@@ -562,9 +559,6 @@ class MailgunCredential implements ServiceCredential, JsonSerializable
         }
         if (array_key_exists('deactivationTime', $this->fields)) {
             $data['deactivationTime'] = $this->fields['deactivationTime']?->format(DateTimeInterface::RFC3339);
-        }
-        if (array_key_exists('type', $this->fields)) {
-            $data['type'] = $this->fields['type'];
         }
         if (array_key_exists('emailFrom', $this->fields)) {
             $data['emailFrom'] = $this->fields['emailFrom'];
@@ -681,13 +675,6 @@ class MailgunCredential implements ServiceCredential, JsonSerializable
         }
 
         $this->fields['deactivationTime'] = $deactivationTime;
-
-        return $this;
-    }
-
-    private function setType(string $type): static
-    {
-        $this->fields['type'] = $type;
 
         return $this;
     }

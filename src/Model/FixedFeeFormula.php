@@ -17,15 +17,10 @@ use JsonSerializable;
 
 class FixedFeeFormula implements FeeFormula, JsonSerializable
 {
-    public const TYPE_FIXED_FEE = 'fixed-fee';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('type', $data)) {
-            $this->setType($data['type']);
-        }
         if (array_key_exists('currency', $data)) {
             $this->setCurrency($data['currency']);
         }
@@ -47,14 +42,7 @@ class FixedFeeFormula implements FeeFormula, JsonSerializable
 
     public function getType(): string
     {
-        return $this->fields['type'];
-    }
-
-    public function setType(string $type): static
-    {
-        $this->fields['type'] = $type;
-
-        return $this;
+        return 'fixed-fee';
     }
 
     public function getCurrency(): string
@@ -115,10 +103,9 @@ class FixedFeeFormula implements FeeFormula, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('type', $this->fields)) {
-            $data['type'] = $this->fields['type'];
-        }
+        $data = [
+            'type' => 'fixed-fee',
+        ];
         if (array_key_exists('currency', $this->fields)) {
             $data['currency'] = $this->fields['currency'];
         }

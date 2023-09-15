@@ -19,8 +19,6 @@ interface CustomField
 
     public function getType(): string;
 
-    public function setType(string $type): static;
-
     public function getDescription(): ?string;
 
     public function setDescription(null|string $description): static;

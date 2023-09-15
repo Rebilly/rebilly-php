@@ -19,15 +19,10 @@ use JsonSerializable;
 
 class CouponRestrictionRestrictToProducts implements CouponRestriction, RedemptionRestriction, JsonSerializable
 {
-    public const TYPE_RESTRICT_TO_PRODUCTS = 'restrict-to-products';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('type', $data)) {
-            $this->setType($data['type']);
-        }
         if (array_key_exists('productIds', $data)) {
             $this->setProductIds($data['productIds']);
         }
@@ -73,14 +68,7 @@ class CouponRestrictionRestrictToProducts implements CouponRestriction, Redempti
 
     public function getType(): string
     {
-        return $this->fields['type'];
-    }
-
-    public function setType(string $type): static
-    {
-        $this->fields['type'] = $type;
-
-        return $this;
+        return 'restrict-to-products';
     }
 
     /**
@@ -310,10 +298,9 @@ class CouponRestrictionRestrictToProducts implements CouponRestriction, Redempti
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('type', $this->fields)) {
-            $data['type'] = $this->fields['type'];
-        }
+        $data = [
+            'type' => 'restrict-to-products',
+        ];
         if (array_key_exists('productIds', $this->fields)) {
             $data['productIds'] = $this->fields['productIds'];
         }

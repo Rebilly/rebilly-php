@@ -21,8 +21,6 @@ class CoreService
 
     private Api\AllowlistsApi $allowlists;
 
-    private Api\AmlApi $aml;
-
     private Api\AmlChecksApi $amlChecks;
 
     private Api\AmlSettingsApi $amlSettings;
@@ -111,7 +109,6 @@ class CoreService
     {
         $this->client = $client ?? new Client($config);
         $this->allowlists = new Api\AllowlistsApi($this->client);
-        $this->aml = new Api\AmlApi($this->client);
         $this->amlChecks = new Api\AmlChecksApi($this->client);
         $this->amlSettings = new Api\AmlSettingsApi($this->client);
         $this->blocklists = new Api\BlocklistsApi($this->client);
@@ -159,11 +156,6 @@ class CoreService
     public function allowlists(): Api\AllowlistsApi
     {
         return $this->allowlists;
-    }
-
-    public function aml(): Api\AmlApi
-    {
-        return $this->aml;
     }
 
     public function amlChecks(): Api\AmlChecksApi

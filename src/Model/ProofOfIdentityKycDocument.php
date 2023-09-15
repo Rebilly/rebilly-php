@@ -42,9 +42,6 @@ class ProofOfIdentityKycDocument implements KycDocument, JsonSerializable
         if (array_key_exists('fileIds', $data)) {
             $this->setFileIds($data['fileIds']);
         }
-        if (array_key_exists('documentType', $data)) {
-            $this->setDocumentType($data['documentType']);
-        }
         if (array_key_exists('documentSubtype', $data)) {
             $this->setDocumentSubtype($data['documentSubtype']);
         }
@@ -118,6 +115,11 @@ class ProofOfIdentityKycDocument implements KycDocument, JsonSerializable
         return new self($data);
     }
 
+    public function getDocumentType(): string
+    {
+        return 'identity-proof';
+    }
+
     public function getId(): ?string
     {
         return $this->fields['id'] ?? null;
@@ -154,18 +156,6 @@ class ProofOfIdentityKycDocument implements KycDocument, JsonSerializable
         );
 
         $this->fields['fileIds'] = $fileIds;
-
-        return $this;
-    }
-
-    public function getDocumentType(): string
-    {
-        return $this->fields['documentType'];
-    }
-
-    public function setDocumentType(string $documentType): static
-    {
-        $this->fields['documentType'] = $documentType;
 
         return $this;
     }
@@ -378,7 +368,9 @@ class ProofOfIdentityKycDocument implements KycDocument, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
+        $data = [
+            'documentType' => 'identity-proof',
+        ];
         if (array_key_exists('id', $this->fields)) {
             $data['id'] = $this->fields['id'];
         }
@@ -387,9 +379,6 @@ class ProofOfIdentityKycDocument implements KycDocument, JsonSerializable
         }
         if (array_key_exists('fileIds', $this->fields)) {
             $data['fileIds'] = $this->fields['fileIds'];
-        }
-        if (array_key_exists('documentType', $this->fields)) {
-            $data['documentType'] = $this->fields['documentType'];
         }
         if (array_key_exists('documentSubtype', $this->fields)) {
             $data['documentSubtype'] = $this->fields['documentSubtype'];

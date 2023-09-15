@@ -17,8 +17,6 @@ interface BankAccountInstrument
 {
     public function getAccountNumberType(): string;
 
-    public function setAccountNumberType(string $accountNumberType): static;
-
     public function getBic(): ?string;
 
     public function setBic(null|string $bic): static;

@@ -19,15 +19,10 @@ use JsonSerializable;
 
 class CouponRestrictionRedemptionsPerCustomer implements CouponRestriction, JsonSerializable
 {
-    public const TYPE_REDEMPTIONS_PER_CUSTOMER = 'redemptions-per-customer';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('type', $data)) {
-            $this->setType($data['type']);
-        }
         if (array_key_exists('quantity', $data)) {
             $this->setQuantity($data['quantity']);
         }
@@ -73,14 +68,7 @@ class CouponRestrictionRedemptionsPerCustomer implements CouponRestriction, Json
 
     public function getType(): string
     {
-        return $this->fields['type'];
-    }
-
-    public function setType(string $type): static
-    {
-        $this->fields['type'] = $type;
-
-        return $this;
+        return 'redemptions-per-customer';
     }
 
     public function getQuantity(): int
@@ -310,10 +298,9 @@ class CouponRestrictionRedemptionsPerCustomer implements CouponRestriction, Json
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('type', $this->fields)) {
-            $data['type'] = $this->fields['type'];
-        }
+        $data = [
+            'type' => 'redemptions-per-customer',
+        ];
         if (array_key_exists('quantity', $this->fields)) {
             $data['quantity'] = $this->fields['quantity'];
         }

@@ -17,15 +17,10 @@ use JsonSerializable;
 
 class Volume implements PlanPriceFormula, JsonSerializable
 {
-    public const FORMULA_VOLUME = 'volume';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('formula', $data)) {
-            $this->setFormula($data['formula']);
-        }
         if (array_key_exists('brackets', $data)) {
             $this->setBrackets($data['brackets']);
         }
@@ -44,14 +39,7 @@ class Volume implements PlanPriceFormula, JsonSerializable
 
     public function getFormula(): string
     {
-        return $this->fields['formula'];
-    }
-
-    public function setFormula(string $formula): static
-    {
-        $this->fields['formula'] = $formula;
-
-        return $this;
+        return 'volume';
     }
 
     /**
@@ -107,10 +95,9 @@ class Volume implements PlanPriceFormula, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('formula', $this->fields)) {
-            $data['formula'] = $this->fields['formula'];
-        }
+        $data = [
+            'formula' => 'volume',
+        ];
         if (array_key_exists('brackets', $this->fields)) {
             $data['brackets'] = $this->fields['brackets'];
         }

@@ -17,17 +17,12 @@ use JsonSerializable;
 
 class ManualShipping implements Shipping, JsonSerializable
 {
-    public const CALCULATOR_MANUAL = 'manual';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
         if (array_key_exists('amount', $data)) {
             $this->setAmount($data['amount']);
-        }
-        if (array_key_exists('calculator', $data)) {
-            $this->setCalculator($data['calculator']);
         }
         if (array_key_exists('rateId', $data)) {
             $this->setRateId($data['rateId']);
@@ -37,6 +32,11 @@ class ManualShipping implements Shipping, JsonSerializable
     public static function from(array $data = []): self
     {
         return new self($data);
+    }
+
+    public function getCalculator(): string
+    {
+        return 'manual';
     }
 
     public function getAmount(): float
@@ -55,18 +55,6 @@ class ManualShipping implements Shipping, JsonSerializable
         return $this;
     }
 
-    public function getCalculator(): string
-    {
-        return $this->fields['calculator'];
-    }
-
-    public function setCalculator(string $calculator): static
-    {
-        $this->fields['calculator'] = $calculator;
-
-        return $this;
-    }
-
     public function getRateId(): ?string
     {
         return $this->fields['rateId'] ?? null;
@@ -81,12 +69,11 @@ class ManualShipping implements Shipping, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
+        $data = [
+            'calculator' => 'manual',
+        ];
         if (array_key_exists('amount', $this->fields)) {
             $data['amount'] = $this->fields['amount'];
-        }
-        if (array_key_exists('calculator', $this->fields)) {
-            $data['calculator'] = $this->fields['calculator'];
         }
         if (array_key_exists('rateId', $this->fields)) {
             $data['rateId'] = $this->fields['rateId'];

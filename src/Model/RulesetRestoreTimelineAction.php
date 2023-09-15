@@ -17,8 +17,6 @@ use JsonSerializable;
 
 class RulesetRestoreTimelineAction implements TimelineAction, JsonSerializable
 {
-    public const ACTION_RULESET_RESTORE = 'ruleset-restore';
-
     public const TYPE_ARREST = 'arrest';
 
     public const TYPE_BANKRUPTCY = 'bankruptcy';
@@ -31,9 +29,6 @@ class RulesetRestoreTimelineAction implements TimelineAction, JsonSerializable
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('action', $data)) {
-            $this->setAction($data['action']);
-        }
         if (array_key_exists('version', $data)) {
             $this->setVersion($data['version']);
         }
@@ -56,16 +51,9 @@ class RulesetRestoreTimelineAction implements TimelineAction, JsonSerializable
         return new self($data);
     }
 
-    public function getAction(): ?string
+    public function getAction(): string
     {
-        return $this->fields['action'] ?? null;
-    }
-
-    public function setAction(null|string $action): static
-    {
-        $this->fields['action'] = $action;
-
-        return $this;
+        return 'ruleset-restore';
     }
 
     public function getVersion(): ?int
@@ -130,10 +118,9 @@ class RulesetRestoreTimelineAction implements TimelineAction, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('action', $this->fields)) {
-            $data['action'] = $this->fields['action'];
-        }
+        $data = [
+            'action' => 'ruleset-restore',
+        ];
         if (array_key_exists('version', $this->fields)) {
             $data['version'] = $this->fields['version'];
         }

@@ -16,6 +16,4 @@ namespace Rebilly\Sdk\Model;
 interface SmtpAuthorization
 {
     public function getType(): string;
-
-    public function setType(string $type): static;
 }

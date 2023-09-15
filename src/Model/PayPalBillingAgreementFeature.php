@@ -19,15 +19,10 @@ use JsonSerializable;
 
 class PayPalBillingAgreementFeature implements ReadyToPayPayPalMethodFeature, JsonSerializable
 {
-    public const NAME_PAY_PAL_BILLING_AGREEMENT = 'PayPal billing agreement';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('name', $data)) {
-            $this->setName($data['name']);
-        }
         if (array_key_exists('paypalMerchantId', $data)) {
             $this->setPaypalMerchantId($data['paypalMerchantId']);
         }
@@ -49,14 +44,7 @@ class PayPalBillingAgreementFeature implements ReadyToPayPayPalMethodFeature, Js
 
     public function getName(): string
     {
-        return $this->fields['name'];
-    }
-
-    public function setName(string $name): static
-    {
-        $this->fields['name'] = $name;
-
-        return $this;
+        return 'PayPal billing agreement';
     }
 
     public function getPaypalMerchantId(): string
@@ -113,10 +101,9 @@ class PayPalBillingAgreementFeature implements ReadyToPayPayPalMethodFeature, Js
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('name', $this->fields)) {
-            $data['name'] = $this->fields['name'];
-        }
+        $data = [
+            'name' => 'PayPal billing agreement',
+        ];
         if (array_key_exists('paypalMerchantId', $this->fields)) {
             $data['paypalMerchantId'] = $this->fields['paypalMerchantId'];
         }

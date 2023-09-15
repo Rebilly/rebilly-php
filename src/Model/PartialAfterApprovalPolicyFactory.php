@@ -20,7 +20,7 @@ class PartialAfterApprovalPolicyFactory
     public static function from(array $data = []): PartialAfterApprovalPolicy
     {
         return match ($data['method']) {
-            'discount-amount-remaining' => DiscountAmountRemaining::from($data),
+            'discount-amount-remaining' => DiscountAmountRemaining::from(),
             'none' => None::from($data),
             default => throw new UnknownDiscriminatorValueException(),
         };

@@ -19,8 +19,6 @@ use JsonSerializable;
 
 class AuthenticationTokenPasswordMode implements AuthenticationToken, JsonSerializable
 {
-    public const MODE_PASSWORD = 'password';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -30,9 +28,6 @@ class AuthenticationTokenPasswordMode implements AuthenticationToken, JsonSerial
         }
         if (array_key_exists('password', $data)) {
             $this->setPassword($data['password']);
-        }
-        if (array_key_exists('mode', $data)) {
-            $this->setMode($data['mode']);
         }
         if (array_key_exists('customerId', $data)) {
             $this->setCustomerId($data['customerId']);
@@ -59,6 +54,11 @@ class AuthenticationTokenPasswordMode implements AuthenticationToken, JsonSerial
         return new self($data);
     }
 
+    public function getMode(): string
+    {
+        return 'password';
+    }
+
     public function getUsername(): string
     {
         return $this->fields['username'];
@@ -79,18 +79,6 @@ class AuthenticationTokenPasswordMode implements AuthenticationToken, JsonSerial
     public function setPassword(string $password): static
     {
         $this->fields['password'] = $password;
-
-        return $this;
-    }
-
-    public function getMode(): ?string
-    {
-        return $this->fields['mode'] ?? null;
-    }
-
-    public function setMode(null|string $mode): static
-    {
-        $this->fields['mode'] = $mode;
 
         return $this;
     }
@@ -172,15 +160,14 @@ class AuthenticationTokenPasswordMode implements AuthenticationToken, JsonSerial
 
     public function jsonSerialize(): array
     {
-        $data = [];
+        $data = [
+            'mode' => 'password',
+        ];
         if (array_key_exists('username', $this->fields)) {
             $data['username'] = $this->fields['username'];
         }
         if (array_key_exists('password', $this->fields)) {
             $data['password'] = $this->fields['password'];
-        }
-        if (array_key_exists('mode', $this->fields)) {
-            $data['mode'] = $this->fields['mode'];
         }
         if (array_key_exists('customerId', $this->fields)) {
             $data['customerId'] = $this->fields['customerId'];

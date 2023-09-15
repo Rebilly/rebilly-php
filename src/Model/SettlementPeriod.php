@@ -16,6 +16,4 @@ namespace Rebilly\Sdk\Model;
 interface SettlementPeriod
 {
     public function getMethod(): string;
-
-    public function setMethod(string $method): static;
 }

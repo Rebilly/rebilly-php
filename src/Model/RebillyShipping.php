@@ -17,15 +17,10 @@ use JsonSerializable;
 
 class RebillyShipping implements Shipping, JsonSerializable
 {
-    public const CALCULATOR_REBILLY = 'rebilly';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('calculator', $data)) {
-            $this->setCalculator($data['calculator']);
-        }
         if (array_key_exists('rateId', $data)) {
             $this->setRateId($data['rateId']);
         }
@@ -41,14 +36,7 @@ class RebillyShipping implements Shipping, JsonSerializable
 
     public function getCalculator(): string
     {
-        return $this->fields['calculator'];
-    }
-
-    public function setCalculator(string $calculator): static
-    {
-        $this->fields['calculator'] = $calculator;
-
-        return $this;
+        return 'rebilly';
     }
 
     public function getRateId(): ?string
@@ -70,10 +58,9 @@ class RebillyShipping implements Shipping, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('calculator', $this->fields)) {
-            $data['calculator'] = $this->fields['calculator'];
-        }
+        $data = [
+            'calculator' => 'rebilly',
+        ];
         if (array_key_exists('rateId', $this->fields)) {
             $data['rateId'] = $this->fields['rateId'];
         }

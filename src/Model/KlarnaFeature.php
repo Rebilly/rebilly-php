@@ -17,15 +17,10 @@ use JsonSerializable;
 
 class KlarnaFeature implements ReadyToPayKlarnaMethodFeature, JsonSerializable
 {
-    public const NAME_KLARNA = 'Klarna';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('name', $data)) {
-            $this->setName($data['name']);
-        }
         if (array_key_exists('clientToken', $data)) {
             $this->setClientToken($data['clientToken']);
         }
@@ -41,14 +36,7 @@ class KlarnaFeature implements ReadyToPayKlarnaMethodFeature, JsonSerializable
 
     public function getName(): string
     {
-        return $this->fields['name'];
-    }
-
-    public function setName(string $name): static
-    {
-        $this->fields['name'] = $name;
-
-        return $this;
+        return 'Klarna';
     }
 
     public function getClientToken(): string
@@ -77,10 +65,9 @@ class KlarnaFeature implements ReadyToPayKlarnaMethodFeature, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('name', $this->fields)) {
-            $data['name'] = $this->fields['name'];
-        }
+        $data = [
+            'name' => 'Klarna',
+        ];
         if (array_key_exists('clientToken', $this->fields)) {
             $data['clientToken'] = $this->fields['clientToken'];
         }

@@ -17,8 +17,6 @@ use JsonSerializable;
 
 class BBANInstrument implements BankAccountInstrument, JsonSerializable
 {
-    public const ACCOUNT_NUMBER_TYPE_BBAN = 'BBAN';
-
     public const ACCOUNT_TYPE_CHECKING = 'checking';
 
     public const ACCOUNT_TYPE_SAVINGS = 'savings';
@@ -29,9 +27,6 @@ class BBANInstrument implements BankAccountInstrument, JsonSerializable
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('accountNumberType', $data)) {
-            $this->setAccountNumberType($data['accountNumberType']);
-        }
         if (array_key_exists('accountNumber', $data)) {
             $this->setAccountNumber($data['accountNumber']);
         }
@@ -59,14 +54,7 @@ class BBANInstrument implements BankAccountInstrument, JsonSerializable
 
     public function getAccountNumberType(): string
     {
-        return $this->fields['accountNumberType'];
-    }
-
-    public function setAccountNumberType(string $accountNumberType): static
-    {
-        $this->fields['accountNumberType'] = $accountNumberType;
-
-        return $this;
+        return 'BBAN';
     }
 
     public function getAccountNumber(): string
@@ -136,10 +124,9 @@ class BBANInstrument implements BankAccountInstrument, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('accountNumberType', $this->fields)) {
-            $data['accountNumberType'] = $this->fields['accountNumberType'];
-        }
+        $data = [
+            'accountNumberType' => 'BBAN',
+        ];
         if (array_key_exists('accountNumber', $this->fields)) {
             $data['accountNumber'] = $this->fields['accountNumber'];
         }

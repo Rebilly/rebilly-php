@@ -19,17 +19,12 @@ use JsonSerializable;
 
 class AuthenticationTokenPasswordlessMode implements AuthenticationToken, JsonSerializable
 {
-    public const MODE_PASSWORDLESS = 'passwordless';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
         if (array_key_exists('customerId', $data)) {
             $this->setCustomerId($data['customerId']);
-        }
-        if (array_key_exists('mode', $data)) {
-            $this->setMode($data['mode']);
         }
         if (array_key_exists('token', $data)) {
             $this->setToken($data['token']);
@@ -59,6 +54,11 @@ class AuthenticationTokenPasswordlessMode implements AuthenticationToken, JsonSe
         return new self($data);
     }
 
+    public function getMode(): string
+    {
+        return 'passwordless';
+    }
+
     public function getCustomerId(): string
     {
         return $this->fields['customerId'];
@@ -67,18 +67,6 @@ class AuthenticationTokenPasswordlessMode implements AuthenticationToken, JsonSe
     public function setCustomerId(string $customerId): static
     {
         $this->fields['customerId'] = $customerId;
-
-        return $this;
-    }
-
-    public function getMode(): ?string
-    {
-        return $this->fields['mode'] ?? null;
-    }
-
-    public function setMode(null|string $mode): static
-    {
-        $this->fields['mode'] = $mode;
 
         return $this;
     }
@@ -172,12 +160,11 @@ class AuthenticationTokenPasswordlessMode implements AuthenticationToken, JsonSe
 
     public function jsonSerialize(): array
     {
-        $data = [];
+        $data = [
+            'mode' => 'passwordless',
+        ];
         if (array_key_exists('customerId', $this->fields)) {
             $data['customerId'] = $this->fields['customerId'];
-        }
-        if (array_key_exists('mode', $this->fields)) {
-            $data['mode'] = $this->fields['mode'];
         }
         if (array_key_exists('token', $this->fields)) {
             $data['token'] = $this->fields['token'];

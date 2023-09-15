@@ -19,15 +19,10 @@ use JsonSerializable;
 
 class PaymentCardToken implements CompositeToken, JsonSerializable
 {
-    public const METHOD_PAYMENT_CARD = 'payment-card';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('method', $data)) {
-            $this->setMethod($data['method']);
-        }
         if (array_key_exists('paymentInstrument', $data)) {
             $this->setPaymentInstrument($data['paymentInstrument']);
         }
@@ -70,14 +65,7 @@ class PaymentCardToken implements CompositeToken, JsonSerializable
 
     public function getMethod(): string
     {
-        return $this->fields['method'];
-    }
-
-    public function setMethod(string $method): static
-    {
-        $this->fields['method'] = $method;
-
-        return $this;
+        return 'payment-card';
     }
 
     public function getPaymentInstrument(): PaymentCardTokenPaymentInstrument
@@ -201,10 +189,9 @@ class PaymentCardToken implements CompositeToken, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('method', $this->fields)) {
-            $data['method'] = $this->fields['method'];
-        }
+        $data = [
+            'method' => 'payment-card',
+        ];
         if (array_key_exists('paymentInstrument', $this->fields)) {
             $data['paymentInstrument'] = $this->fields['paymentInstrument']?->jsonSerialize();
         }

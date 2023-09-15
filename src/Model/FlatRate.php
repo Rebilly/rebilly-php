@@ -17,15 +17,10 @@ use JsonSerializable;
 
 class FlatRate implements PlanPriceFormula, JsonSerializable
 {
-    public const FORMULA_FLAT_RATE = 'flat-rate';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('formula', $data)) {
-            $this->setFormula($data['formula']);
-        }
         if (array_key_exists('price', $data)) {
             $this->setPrice($data['price']);
         }
@@ -44,14 +39,7 @@ class FlatRate implements PlanPriceFormula, JsonSerializable
 
     public function getFormula(): string
     {
-        return $this->fields['formula'];
-    }
-
-    public function setFormula(string $formula): static
-    {
-        $this->fields['formula'] = $formula;
-
-        return $this;
+        return 'flat-rate';
     }
 
     public function getPrice(): float
@@ -107,10 +95,9 @@ class FlatRate implements PlanPriceFormula, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('formula', $this->fields)) {
-            $data['formula'] = $this->fields['formula'];
-        }
+        $data = [
+            'formula' => 'flat-rate',
+        ];
         if (array_key_exists('price', $this->fields)) {
             $data['price'] = $this->fields['price'];
         }

@@ -19,8 +19,6 @@ interface AuthenticationToken
 {
     public function getMode(): ?string;
 
-    public function setMode(null|string $mode): static;
-
     public function getToken(): ?string;
 
     public function getOtpRequired(): ?bool;

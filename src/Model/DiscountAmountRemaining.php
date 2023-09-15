@@ -17,41 +17,24 @@ use JsonSerializable;
 
 class DiscountAmountRemaining implements PartialAfterApprovalPolicy, JsonSerializable
 {
-    public const METHOD_DISCOUNT_AMOUNT_REMAINING = 'discount-amount-remaining';
-
-    private array $fields = [];
-
-    public function __construct(array $data = [])
+    public function __construct()
     {
-        if (array_key_exists('method', $data)) {
-            $this->setMethod($data['method']);
-        }
     }
 
-    public static function from(array $data = []): self
+    public static function from(): self
     {
-        return new self($data);
+        return new self();
     }
 
-    public function getMethod(): ?string
+    public function getMethod(): string
     {
-        return $this->fields['method'] ?? null;
-    }
-
-    public function setMethod(null|string $method): static
-    {
-        $this->fields['method'] = $method;
-
-        return $this;
+        return 'discount-amount-remaining';
     }
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('method', $this->fields)) {
-            $data['method'] = $this->fields['method'];
-        }
-
-        return $data;
+        return [
+            'method' => 'discount-amount-remaining',
+        ];
     }
 }

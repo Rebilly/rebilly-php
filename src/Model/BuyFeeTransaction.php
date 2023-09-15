@@ -19,17 +19,12 @@ use JsonSerializable;
 
 class BuyFeeTransaction implements BalanceTransaction, JsonSerializable
 {
-    public const TYPE_BUY_FEE = 'buy-fee';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
-        }
-        if (array_key_exists('type', $data)) {
-            $this->setType($data['type']);
         }
         if (array_key_exists('fee', $data)) {
             $this->setFee($data['fee']);
@@ -71,14 +66,14 @@ class BuyFeeTransaction implements BalanceTransaction, JsonSerializable
         return new self($data);
     }
 
+    public function getType(): string
+    {
+        return 'buy-fee';
+    }
+
     public function getId(): ?string
     {
         return $this->fields['id'] ?? null;
-    }
-
-    public function getType(): string
-    {
-        return $this->fields['type'];
     }
 
     public function getFee(): ?BuyFeeTransactionFee
@@ -216,12 +211,11 @@ class BuyFeeTransaction implements BalanceTransaction, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
+        $data = [
+            'type' => 'buy-fee',
+        ];
         if (array_key_exists('id', $this->fields)) {
             $data['id'] = $this->fields['id'];
-        }
-        if (array_key_exists('type', $this->fields)) {
-            $data['type'] = $this->fields['type'];
         }
         if (array_key_exists('fee', $this->fields)) {
             $data['fee'] = $this->fields['fee']?->jsonSerialize();
@@ -263,13 +257,6 @@ class BuyFeeTransaction implements BalanceTransaction, JsonSerializable
     private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
-
-        return $this;
-    }
-
-    private function setType(string $type): static
-    {
-        $this->fields['type'] = $type;
 
         return $this;
     }

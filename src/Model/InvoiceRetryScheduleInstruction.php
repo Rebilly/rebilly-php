@@ -15,7 +15,4 @@ namespace Rebilly\Sdk\Model;
 
 interface InvoiceRetryScheduleInstruction
 {
-    public function getMethod(): string;
-
-    public function setMethod(string $method): static;
 }
