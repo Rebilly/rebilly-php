@@ -17,15 +17,10 @@ use JsonSerializable;
 
 class Oauth1 implements WebhookAuthorization, JsonSerializable
 {
-    public const TYPE_OAUTH1 = 'oauth1';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('type', $data)) {
-            $this->setType($data['type']);
-        }
         if (array_key_exists('consumerKey', $data)) {
             $this->setConsumerKey($data['consumerKey']);
         }
@@ -53,14 +48,7 @@ class Oauth1 implements WebhookAuthorization, JsonSerializable
 
     public function getType(): string
     {
-        return $this->fields['type'];
-    }
-
-    public function setType(string $type): static
-    {
-        $this->fields['type'] = $type;
-
-        return $this;
+        return 'oauth1';
     }
 
     public function getConsumerKey(): string
@@ -137,10 +125,9 @@ class Oauth1 implements WebhookAuthorization, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('type', $this->fields)) {
-            $data['type'] = $this->fields['type'];
-        }
+        $data = [
+            'type' => 'oauth1',
+        ];
         if (array_key_exists('consumerKey', $this->fields)) {
             $data['consumerKey'] = $this->fields['consumerKey'];
         }

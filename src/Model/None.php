@@ -17,8 +17,6 @@ use JsonSerializable;
 
 class None implements InvoiceRetryAmountAdjustmentInstruction, PartialAfterApprovalPolicy, JsonSerializable
 {
-    public const METHOD_NONE = 'none';
-
     public const TYPE_PERCENT = 'percent';
 
     public const TYPE_FIXED = 'fixed';
@@ -27,9 +25,6 @@ class None implements InvoiceRetryAmountAdjustmentInstruction, PartialAfterAppro
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('method', $data)) {
-            $this->setMethod($data['method']);
-        }
         if (array_key_exists('afterApprovalPolicy', $data)) {
             $this->setAfterApprovalPolicy($data['afterApprovalPolicy']);
         }
@@ -48,14 +43,7 @@ class None implements InvoiceRetryAmountAdjustmentInstruction, PartialAfterAppro
 
     public function getMethod(): string
     {
-        return $this->fields['method'];
-    }
-
-    public function setMethod(string $method): static
-    {
-        $this->fields['method'] = $method;
-
-        return $this;
+        return 'none';
     }
 
     public function getAfterApprovalPolicy(): ?PartialAfterApprovalPolicy
@@ -104,10 +92,9 @@ class None implements InvoiceRetryAmountAdjustmentInstruction, PartialAfterAppro
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('method', $this->fields)) {
-            $data['method'] = $this->fields['method'];
-        }
+        $data = [
+            'method' => 'none',
+        ];
         if (array_key_exists('afterApprovalPolicy', $this->fields)) {
             $data['afterApprovalPolicy'] = $this->fields['afterApprovalPolicy']?->jsonSerialize();
         }

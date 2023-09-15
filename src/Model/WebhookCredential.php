@@ -25,8 +25,6 @@ class WebhookCredential implements ServiceCredential, JsonSerializable
 
     public const STATUS_DEACTIVATED = 'deactivated';
 
-    public const TYPE_WEBHOOK = 'webhook';
-
     public const ENCRYPTION_NONE = 'none';
 
     public const ENCRYPTION_TLS = 'tls';
@@ -48,9 +46,6 @@ class WebhookCredential implements ServiceCredential, JsonSerializable
         }
         if (array_key_exists('deactivationTime', $data)) {
             $this->setDeactivationTime($data['deactivationTime']);
-        }
-        if (array_key_exists('type', $data)) {
-            $this->setType($data['type']);
         }
         if (array_key_exists('host', $data)) {
             $this->setHost($data['host']);
@@ -149,6 +144,11 @@ class WebhookCredential implements ServiceCredential, JsonSerializable
         return new self($data);
     }
 
+    public function getType(): string
+    {
+        return 'webhook';
+    }
+
     public function getId(): ?string
     {
         return $this->fields['id'] ?? null;
@@ -174,18 +174,6 @@ class WebhookCredential implements ServiceCredential, JsonSerializable
     public function getDeactivationTime(): ?DateTimeImmutable
     {
         return $this->fields['deactivationTime'] ?? null;
-    }
-
-    public function getType(): string
-    {
-        return $this->fields['type'];
-    }
-
-    public function setType(string $type): static
-    {
-        $this->fields['type'] = $type;
-
-        return $this;
     }
 
     public function getHost(): string
@@ -557,7 +545,9 @@ class WebhookCredential implements ServiceCredential, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
+        $data = [
+            'type' => 'webhook',
+        ];
         if (array_key_exists('id', $this->fields)) {
             $data['id'] = $this->fields['id'];
         }
@@ -569,9 +559,6 @@ class WebhookCredential implements ServiceCredential, JsonSerializable
         }
         if (array_key_exists('deactivationTime', $this->fields)) {
             $data['deactivationTime'] = $this->fields['deactivationTime']?->format(DateTimeInterface::RFC3339);
-        }
-        if (array_key_exists('type', $this->fields)) {
-            $data['type'] = $this->fields['type'];
         }
         if (array_key_exists('host', $this->fields)) {
             $data['host'] = $this->fields['host'];

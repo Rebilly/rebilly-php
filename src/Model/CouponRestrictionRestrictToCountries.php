@@ -19,15 +19,10 @@ use JsonSerializable;
 
 class CouponRestrictionRestrictToCountries implements CouponRestriction, JsonSerializable
 {
-    public const TYPE_RESTRICT_TO_COUNTRIES = 'restrict-to-countries';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('type', $data)) {
-            $this->setType($data['type']);
-        }
         if (array_key_exists('countries', $data)) {
             $this->setCountries($data['countries']);
         }
@@ -73,14 +68,7 @@ class CouponRestrictionRestrictToCountries implements CouponRestriction, JsonSer
 
     public function getType(): string
     {
-        return $this->fields['type'];
-    }
-
-    public function setType(string $type): static
-    {
-        $this->fields['type'] = $type;
-
-        return $this;
+        return 'restrict-to-countries';
     }
 
     /**
@@ -310,10 +298,9 @@ class CouponRestrictionRestrictToCountries implements CouponRestriction, JsonSer
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('type', $this->fields)) {
-            $data['type'] = $this->fields['type'];
-        }
+        $data = [
+            'type' => 'restrict-to-countries',
+        ];
         if (array_key_exists('countries', $this->fields)) {
             $data['countries'] = $this->fields['countries'];
         }

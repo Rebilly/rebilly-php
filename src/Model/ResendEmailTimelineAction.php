@@ -17,8 +17,6 @@ use JsonSerializable;
 
 class ResendEmailTimelineAction implements TimelineAction, JsonSerializable
 {
-    public const ACTION_RESEND_EMAIL = 'resend-email';
-
     public const TYPE_ARREST = 'arrest';
 
     public const TYPE_BANKRUPTCY = 'bankruptcy';
@@ -31,9 +29,6 @@ class ResendEmailTimelineAction implements TimelineAction, JsonSerializable
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('action', $data)) {
-            $this->setAction($data['action']);
-        }
         if (array_key_exists('messageId', $data)) {
             $this->setMessageId($data['messageId']);
         }
@@ -56,16 +51,9 @@ class ResendEmailTimelineAction implements TimelineAction, JsonSerializable
         return new self($data);
     }
 
-    public function getAction(): ?string
+    public function getAction(): string
     {
-        return $this->fields['action'] ?? null;
-    }
-
-    public function setAction(null|string $action): static
-    {
-        $this->fields['action'] = $action;
-
-        return $this;
+        return 'resend-email';
     }
 
     public function getMessageId(): ?string
@@ -130,10 +118,9 @@ class ResendEmailTimelineAction implements TimelineAction, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('action', $this->fields)) {
-            $data['action'] = $this->fields['action'];
-        }
+        $data = [
+            'action' => 'resend-email',
+        ];
         if (array_key_exists('messageId', $this->fields)) {
             $data['messageId'] = $this->fields['messageId'];
         }

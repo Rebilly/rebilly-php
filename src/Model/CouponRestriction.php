@@ -16,6 +16,4 @@ namespace Rebilly\Sdk\Model;
 interface CouponRestriction
 {
     public function getType(): string;
-
-    public function setType(string $type): static;
 }

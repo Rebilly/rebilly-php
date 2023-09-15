@@ -16,6 +16,4 @@ namespace Rebilly\Sdk\Model;
 interface CountriesMetadata
 {
     public function getMode(): string;
-
-    public function setMode(string $mode): static;
 }

@@ -17,8 +17,6 @@ use JsonSerializable;
 
 class AdjustReadyToPayPaymentCard implements AdjustPaymentMethod, JsonSerializable
 {
-    public const PAYMENT_METHOD_PAYMENT_CARD = 'payment-card';
-
     public const FEATURE_APPLE_PAY = 'Apple Pay';
 
     public const FEATURE_GOOGLE_PAY = 'Google Pay';
@@ -27,9 +25,6 @@ class AdjustReadyToPayPaymentCard implements AdjustPaymentMethod, JsonSerializab
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('paymentMethod', $data)) {
-            $this->setPaymentMethod($data['paymentMethod']);
-        }
         if (array_key_exists('feature', $data)) {
             $this->setFeature($data['feature']);
         }
@@ -40,16 +35,9 @@ class AdjustReadyToPayPaymentCard implements AdjustPaymentMethod, JsonSerializab
         return new self($data);
     }
 
-    public function getPaymentMethod(): ?string
+    public function getPaymentMethod(): string
     {
-        return $this->fields['paymentMethod'] ?? null;
-    }
-
-    public function setPaymentMethod(null|string $paymentMethod): static
-    {
-        $this->fields['paymentMethod'] = $paymentMethod;
-
-        return $this;
+        return 'payment-card';
     }
 
     public function getFeature(): ?string
@@ -66,10 +54,9 @@ class AdjustReadyToPayPaymentCard implements AdjustPaymentMethod, JsonSerializab
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('paymentMethod', $this->fields)) {
-            $data['paymentMethod'] = $this->fields['paymentMethod'];
-        }
+        $data = [
+            'paymentMethod' => 'payment-card',
+        ];
         if (array_key_exists('feature', $this->fields)) {
             $data['feature'] = $this->fields['feature'];
         }

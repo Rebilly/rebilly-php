@@ -17,8 +17,6 @@ use JsonSerializable;
 
 class SchedulingMethodDayOfWeek implements InvoiceRetryScheduleInstruction, PeriodAnchor, ReminderScheduleInstruction, ScheduleInstruction, ServicePeriodAnchorInstruction, JsonSerializable
 {
-    public const METHOD_DAY_OF_WEEK = 'day-of-week';
-
     public const DAY_SUNDAY = 'Sunday';
 
     public const DAY_MONDAY = 'Monday';
@@ -43,9 +41,6 @@ class SchedulingMethodDayOfWeek implements InvoiceRetryScheduleInstruction, Peri
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('method', $data)) {
-            $this->setMethod($data['method']);
-        }
         if (array_key_exists('day', $data)) {
             $this->setDay($data['day']);
         }
@@ -73,14 +68,7 @@ class SchedulingMethodDayOfWeek implements InvoiceRetryScheduleInstruction, Peri
 
     public function getMethod(): string
     {
-        return $this->fields['method'];
-    }
-
-    public function setMethod(string $method): static
-    {
-        $this->fields['method'] = $method;
-
-        return $this;
+        return 'day-of-week';
     }
 
     public function getDay(): string
@@ -161,10 +149,9 @@ class SchedulingMethodDayOfWeek implements InvoiceRetryScheduleInstruction, Peri
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('method', $this->fields)) {
-            $data['method'] = $this->fields['method'];
-        }
+        $data = [
+            'method' => 'day-of-week',
+        ];
         if (array_key_exists('day', $this->fields)) {
             $data['day'] = $this->fields['day'];
         }

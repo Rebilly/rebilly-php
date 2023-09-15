@@ -17,8 +17,6 @@ interface Discount
 {
     public function getType(): string;
 
-    public function setType(string $type): static;
-
     public function getContext(): ?string;
 
     public function setContext(null|string $context): static;

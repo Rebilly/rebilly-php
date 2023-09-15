@@ -25,8 +25,6 @@ class TaxJarCredential implements ServiceCredential, JsonSerializable
 
     public const STATUS_DEACTIVATED = 'deactivated';
 
-    public const TYPE_TAXJAR = 'taxjar';
-
     public const ENCRYPTION_NONE = 'none';
 
     public const ENCRYPTION_TLS = 'tls';
@@ -48,9 +46,6 @@ class TaxJarCredential implements ServiceCredential, JsonSerializable
         }
         if (array_key_exists('deactivationTime', $data)) {
             $this->setDeactivationTime($data['deactivationTime']);
-        }
-        if (array_key_exists('type', $data)) {
-            $this->setType($data['type']);
         }
         if (array_key_exists('apiToken', $data)) {
             $this->setApiToken($data['apiToken']);
@@ -149,6 +144,11 @@ class TaxJarCredential implements ServiceCredential, JsonSerializable
         return new self($data);
     }
 
+    public function getType(): string
+    {
+        return 'taxjar';
+    }
+
     public function getId(): ?string
     {
         return $this->fields['id'] ?? null;
@@ -174,11 +174,6 @@ class TaxJarCredential implements ServiceCredential, JsonSerializable
     public function getDeactivationTime(): ?DateTimeImmutable
     {
         return $this->fields['deactivationTime'] ?? null;
-    }
-
-    public function getType(): string
-    {
-        return $this->fields['type'];
     }
 
     public function getApiToken(): string
@@ -550,7 +545,9 @@ class TaxJarCredential implements ServiceCredential, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
+        $data = [
+            'type' => 'taxjar',
+        ];
         if (array_key_exists('id', $this->fields)) {
             $data['id'] = $this->fields['id'];
         }
@@ -562,9 +559,6 @@ class TaxJarCredential implements ServiceCredential, JsonSerializable
         }
         if (array_key_exists('deactivationTime', $this->fields)) {
             $data['deactivationTime'] = $this->fields['deactivationTime']?->format(DateTimeInterface::RFC3339);
-        }
-        if (array_key_exists('type', $this->fields)) {
-            $data['type'] = $this->fields['type'];
         }
         if (array_key_exists('apiToken', $this->fields)) {
             $data['apiToken'] = $this->fields['apiToken'];
@@ -681,13 +675,6 @@ class TaxJarCredential implements ServiceCredential, JsonSerializable
         }
 
         $this->fields['deactivationTime'] = $deactivationTime;
-
-        return $this;
-    }
-
-    private function setType(string $type): static
-    {
-        $this->fields['type'] = $type;
 
         return $this;
     }

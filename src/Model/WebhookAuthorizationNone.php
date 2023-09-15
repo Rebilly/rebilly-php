@@ -17,15 +17,10 @@ use JsonSerializable;
 
 class WebhookAuthorizationNone implements WebhookAuthorization, JsonSerializable
 {
-    public const TYPE_NONE = 'none';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('type', $data)) {
-            $this->setType($data['type']);
-        }
         if (array_key_exists('consumerSecret', $data)) {
             $this->setConsumerSecret($data['consumerSecret']);
         }
@@ -53,14 +48,7 @@ class WebhookAuthorizationNone implements WebhookAuthorization, JsonSerializable
 
     public function getType(): string
     {
-        return $this->fields['type'];
-    }
-
-    public function setType(string $type): static
-    {
-        $this->fields['type'] = $type;
-
-        return $this;
+        return 'none';
     }
 
     public function getConsumerSecret(): string
@@ -137,10 +125,9 @@ class WebhookAuthorizationNone implements WebhookAuthorization, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('type', $this->fields)) {
-            $data['type'] = $this->fields['type'];
-        }
+        $data = [
+            'type' => 'none',
+        ];
         if (array_key_exists('consumerSecret', $this->fields)) {
             $data['consumerSecret'] = $this->fields['consumerSecret'];
         }

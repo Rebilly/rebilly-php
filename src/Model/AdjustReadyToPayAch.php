@@ -17,17 +17,12 @@ use JsonSerializable;
 
 class AdjustReadyToPayAch implements AdjustPaymentMethod, JsonSerializable
 {
-    public const PAYMENT_METHOD_ACH = 'ach';
-
     public const FEATURE_PLAID = 'Plaid';
 
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('paymentMethod', $data)) {
-            $this->setPaymentMethod($data['paymentMethod']);
-        }
         if (array_key_exists('feature', $data)) {
             $this->setFeature($data['feature']);
         }
@@ -38,16 +33,9 @@ class AdjustReadyToPayAch implements AdjustPaymentMethod, JsonSerializable
         return new self($data);
     }
 
-    public function getPaymentMethod(): ?string
+    public function getPaymentMethod(): string
     {
-        return $this->fields['paymentMethod'] ?? null;
-    }
-
-    public function setPaymentMethod(null|string $paymentMethod): static
-    {
-        $this->fields['paymentMethod'] = $paymentMethod;
-
-        return $this;
+        return 'ach';
     }
 
     public function getFeature(): ?string
@@ -64,10 +52,9 @@ class AdjustReadyToPayAch implements AdjustPaymentMethod, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('paymentMethod', $this->fields)) {
-            $data['paymentMethod'] = $this->fields['paymentMethod'];
-        }
+        $data = [
+            'paymentMethod' => 'ach',
+        ];
         if (array_key_exists('feature', $this->fields)) {
             $data['feature'] = $this->fields['feature'];
         }

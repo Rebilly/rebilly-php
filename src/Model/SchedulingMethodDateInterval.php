@@ -17,8 +17,6 @@ use JsonSerializable;
 
 class SchedulingMethodDateInterval implements InvoiceRetryScheduleInstruction, ReminderScheduleInstruction, ScheduleInstruction, SettlementPeriod, JsonSerializable
 {
-    public const METHOD_DATE_INTERVAL = 'date-interval';
-
     public const WEEK_NEXT = 'next';
 
     public const WEEK_FIRST_IN_MONTH = 'first-in-month';
@@ -43,9 +41,6 @@ class SchedulingMethodDateInterval implements InvoiceRetryScheduleInstruction, R
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('method', $data)) {
-            $this->setMethod($data['method']);
-        }
         if (array_key_exists('duration', $data)) {
             $this->setDuration($data['duration']);
         }
@@ -73,14 +68,7 @@ class SchedulingMethodDateInterval implements InvoiceRetryScheduleInstruction, R
 
     public function getMethod(): string
     {
-        return $this->fields['method'];
-    }
-
-    public function setMethod(string $method): static
-    {
-        $this->fields['method'] = $method;
-
-        return $this;
+        return 'date-interval';
     }
 
     public function getDuration(): int
@@ -161,10 +149,9 @@ class SchedulingMethodDateInterval implements InvoiceRetryScheduleInstruction, R
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('method', $this->fields)) {
-            $data['method'] = $this->fields['method'];
-        }
+        $data = [
+            'method' => 'date-interval',
+        ];
         if (array_key_exists('duration', $this->fields)) {
             $data['duration'] = $this->fields['duration'];
         }

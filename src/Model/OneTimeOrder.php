@@ -19,8 +19,6 @@ use JsonSerializable;
 
 class OneTimeOrder implements Subscription, JsonSerializable
 {
-    public const ORDER_TYPE_ONE_TIME_ORDER = 'one-time-order';
-
     public const STATUS_PENDING = 'pending';
 
     public const STATUS_ABANDONED = 'abandoned';
@@ -89,9 +87,6 @@ class OneTimeOrder implements Subscription, JsonSerializable
     {
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
-        }
-        if (array_key_exists('orderType', $data)) {
-            $this->setOrderType($data['orderType']);
         }
         if (array_key_exists('customerId', $data)) {
             $this->setCustomerId($data['customerId']);
@@ -241,21 +236,14 @@ class OneTimeOrder implements Subscription, JsonSerializable
         return new self($data);
     }
 
+    public function getOrderType(): string
+    {
+        return 'one-time-order';
+    }
+
     public function getId(): ?string
     {
         return $this->fields['id'] ?? null;
-    }
-
-    public function getOrderType(): string
-    {
-        return $this->fields['orderType'];
-    }
-
-    public function setOrderType(string $orderType): static
-    {
-        $this->fields['orderType'] = $orderType;
-
-        return $this;
     }
 
     public function getCustomerId(): string
@@ -739,12 +727,11 @@ class OneTimeOrder implements Subscription, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
+        $data = [
+            'orderType' => 'one-time-order',
+        ];
         if (array_key_exists('id', $this->fields)) {
             $data['id'] = $this->fields['id'];
-        }
-        if (array_key_exists('orderType', $this->fields)) {
-            $data['orderType'] = $this->fields['orderType'];
         }
         if (array_key_exists('customerId', $this->fields)) {
             $data['customerId'] = $this->fields['customerId'];

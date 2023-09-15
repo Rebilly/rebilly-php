@@ -16,6 +16,4 @@ namespace Rebilly\Sdk\Model;
 interface TestProcessor3dsServers
 {
     public function getName(): string;
-
-    public function setName(string $name): static;
 }

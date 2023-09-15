@@ -17,8 +17,6 @@ interface PeriodAnchor
 {
     public function getMethod(): string;
 
-    public function setMethod(string $method): static;
-
     public function getTime(): ?string;
 
     public function setTime(null|string $time): static;

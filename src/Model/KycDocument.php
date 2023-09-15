@@ -35,8 +35,6 @@ interface KycDocument
 
     public function getDocumentType(): string;
 
-    public function setDocumentType(string $documentType): static;
-
     public function getDocumentSubtype(): ?string;
 
     public function setDocumentSubtype(null|string $documentSubtype): static;

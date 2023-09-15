@@ -19,15 +19,10 @@ use JsonSerializable;
 
 class CouponRestrictionMinimumOrderAmount implements CouponRestriction, RedemptionRestriction, JsonSerializable
 {
-    public const TYPE_MINIMUM_ORDER_AMOUNT = 'minimum-order-amount';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('type', $data)) {
-            $this->setType($data['type']);
-        }
         if (array_key_exists('amount', $data)) {
             $this->setAmount($data['amount']);
         }
@@ -73,14 +68,7 @@ class CouponRestrictionMinimumOrderAmount implements CouponRestriction, Redempti
 
     public function getType(): string
     {
-        return $this->fields['type'];
-    }
-
-    public function setType(string $type): static
-    {
-        $this->fields['type'] = $type;
-
-        return $this;
+        return 'minimum-order-amount';
     }
 
     public function getAmount(): int
@@ -310,10 +298,9 @@ class CouponRestrictionMinimumOrderAmount implements CouponRestriction, Redempti
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('type', $this->fields)) {
-            $data['type'] = $this->fields['type'];
-        }
+        $data = [
+            'type' => 'minimum-order-amount',
+        ];
         if (array_key_exists('amount', $this->fields)) {
             $data['amount'] = $this->fields['amount'];
         }

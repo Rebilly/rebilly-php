@@ -17,8 +17,6 @@ use JsonSerializable;
 
 class Partial implements InvoiceRetryAmountAdjustmentInstruction, JsonSerializable
 {
-    public const METHOD_PARTIAL = 'partial';
-
     public const TYPE_PERCENT = 'percent';
 
     public const TYPE_FIXED = 'fixed';
@@ -27,9 +25,6 @@ class Partial implements InvoiceRetryAmountAdjustmentInstruction, JsonSerializab
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('method', $data)) {
-            $this->setMethod($data['method']);
-        }
         if (array_key_exists('value', $data)) {
             $this->setValue($data['value']);
         }
@@ -48,14 +43,7 @@ class Partial implements InvoiceRetryAmountAdjustmentInstruction, JsonSerializab
 
     public function getMethod(): string
     {
-        return $this->fields['method'];
-    }
-
-    public function setMethod(string $method): static
-    {
-        $this->fields['method'] = $method;
-
-        return $this;
+        return 'partial';
     }
 
     public function getValue(): float
@@ -104,10 +92,9 @@ class Partial implements InvoiceRetryAmountAdjustmentInstruction, JsonSerializab
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('method', $this->fields)) {
-            $data['method'] = $this->fields['method'];
-        }
+        $data = [
+            'method' => 'partial',
+        ];
         if (array_key_exists('value', $this->fields)) {
             $data['value'] = $this->fields['value'];
         }

@@ -17,17 +17,12 @@ use JsonSerializable;
 
 class DiscountPercent implements Discount, JsonSerializable
 {
-    public const TYPE_PERCENT = 'percent';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
         if (array_key_exists('value', $data)) {
             $this->setValue($data['value']);
-        }
-        if (array_key_exists('type', $data)) {
-            $this->setType($data['type']);
         }
         if (array_key_exists('context', $data)) {
             $this->setContext($data['context']);
@@ -45,6 +40,11 @@ class DiscountPercent implements Discount, JsonSerializable
         return new self($data);
     }
 
+    public function getType(): string
+    {
+        return 'percent';
+    }
+
     public function getValue(): float
     {
         return $this->fields['value'];
@@ -57,18 +57,6 @@ class DiscountPercent implements Discount, JsonSerializable
         }
 
         $this->fields['value'] = $value;
-
-        return $this;
-    }
-
-    public function getType(): string
-    {
-        return $this->fields['type'];
-    }
-
-    public function setType(string $type): static
-    {
-        $this->fields['type'] = $type;
 
         return $this;
     }
@@ -115,12 +103,11 @@ class DiscountPercent implements Discount, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
+        $data = [
+            'type' => 'percent',
+        ];
         if (array_key_exists('value', $this->fields)) {
             $data['value'] = $this->fields['value'];
-        }
-        if (array_key_exists('type', $this->fields)) {
-            $data['type'] = $this->fields['type'];
         }
         if (array_key_exists('context', $this->fields)) {
             $data['context'] = $this->fields['context'];

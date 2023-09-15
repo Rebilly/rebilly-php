@@ -17,15 +17,10 @@ use JsonSerializable;
 
 class CountriesSubsetMetadata implements CountriesMetadata, JsonSerializable
 {
-    public const MODE_SUBSET = 'subset';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('mode', $data)) {
-            $this->setMode($data['mode']);
-        }
         if (array_key_exists('values', $data)) {
             $this->setValues($data['values']);
         }
@@ -38,14 +33,7 @@ class CountriesSubsetMetadata implements CountriesMetadata, JsonSerializable
 
     public function getMode(): string
     {
-        return $this->fields['mode'];
-    }
-
-    public function setMode(string $mode): static
-    {
-        $this->fields['mode'] = $mode;
-
-        return $this;
+        return 'subset';
     }
 
     /**
@@ -73,10 +61,9 @@ class CountriesSubsetMetadata implements CountriesMetadata, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('mode', $this->fields)) {
-            $data['mode'] = $this->fields['mode'];
-        }
+        $data = [
+            'mode' => 'subset',
+        ];
         if (array_key_exists('values', $this->fields)) {
             $data['values'] = $this->fields['values'];
         }

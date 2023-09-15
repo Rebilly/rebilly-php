@@ -19,17 +19,12 @@ use JsonSerializable;
 
 class RiskReserveTransaction implements BalanceTransaction, JsonSerializable
 {
-    public const TYPE_RISK_RESERVE = 'risk-reserve';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
-        }
-        if (array_key_exists('type', $data)) {
-            $this->setType($data['type']);
         }
         if (array_key_exists('riskReserve', $data)) {
             $this->setRiskReserve($data['riskReserve']);
@@ -71,14 +66,14 @@ class RiskReserveTransaction implements BalanceTransaction, JsonSerializable
         return new self($data);
     }
 
+    public function getType(): string
+    {
+        return 'risk-reserve';
+    }
+
     public function getId(): ?string
     {
         return $this->fields['id'] ?? null;
-    }
-
-    public function getType(): string
-    {
-        return $this->fields['type'];
     }
 
     public function getRiskReserve(): ?RiskReserveTransactionRiskReserve
@@ -216,12 +211,11 @@ class RiskReserveTransaction implements BalanceTransaction, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
+        $data = [
+            'type' => 'risk-reserve',
+        ];
         if (array_key_exists('id', $this->fields)) {
             $data['id'] = $this->fields['id'];
-        }
-        if (array_key_exists('type', $this->fields)) {
-            $data['type'] = $this->fields['type'];
         }
         if (array_key_exists('riskReserve', $this->fields)) {
             $data['riskReserve'] = $this->fields['riskReserve']?->jsonSerialize();
@@ -263,13 +257,6 @@ class RiskReserveTransaction implements BalanceTransaction, JsonSerializable
     private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
-
-        return $this;
-    }
-
-    private function setType(string $type): static
-    {
-        $this->fields['type'] = $type;
 
         return $this;
     }

@@ -17,8 +17,6 @@ use JsonSerializable;
 
 class SchedulingMethodAuto implements ScheduleInstruction, JsonSerializable
 {
-    public const METHOD_AUTO = 'auto';
-
     public const WEEK_NEXT = 'next';
 
     public const WEEK_FIRST_IN_MONTH = 'first-in-month';
@@ -43,9 +41,6 @@ class SchedulingMethodAuto implements ScheduleInstruction, JsonSerializable
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('method', $data)) {
-            $this->setMethod($data['method']);
-        }
         if (array_key_exists('duration', $data)) {
             $this->setDuration($data['duration']);
         }
@@ -73,14 +68,7 @@ class SchedulingMethodAuto implements ScheduleInstruction, JsonSerializable
 
     public function getMethod(): string
     {
-        return $this->fields['method'];
-    }
-
-    public function setMethod(string $method): static
-    {
-        $this->fields['method'] = $method;
-
-        return $this;
+        return 'auto';
     }
 
     public function getDuration(): int
@@ -161,10 +149,9 @@ class SchedulingMethodAuto implements ScheduleInstruction, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('method', $this->fields)) {
-            $data['method'] = $this->fields['method'];
-        }
+        $data = [
+            'method' => 'auto',
+        ];
         if (array_key_exists('duration', $this->fields)) {
             $data['duration'] = $this->fields['duration'];
         }
