@@ -20,7 +20,7 @@ class A1Gateway extends GatewayAccount
     public function __construct(array $data = [])
     {
         parent::__construct([
-            'gatewayName' => 'A1Gateway',
+        'gatewayName' => 'A1Gateway'
         ] + $data);
 
         if (array_key_exists('credentials', $data)) {
@@ -30,7 +30,7 @@ class A1Gateway extends GatewayAccount
 
     public static function from(array $data = []): self
     {
-        return new self($data);
+        return new self($data, 'foo');
     }
 
     public function getCredentials(): A1GatewayCredentials
