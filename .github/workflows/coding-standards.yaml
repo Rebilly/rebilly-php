@@ -46,4 +46,4 @@ jobs:
         run: composer install --no-interaction --no-scripts --no-suggest
 
       - name: "Run tests"
-        run: composer run cs
+        run: vendor/bin/php-cs-fixer fix -vv --dry-run
