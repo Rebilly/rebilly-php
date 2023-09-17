@@ -37,7 +37,7 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
           restore-keys: |
             ${{ runner.os }}-composer-
 
@@ -77,9 +77,12 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
           restore-keys: |
             ${{ runner.os }}-composer-
+
+      - name: "Install dependencies"
+        run: composer install --no-interaction --no-scripts --no-suggest
 
       - uses: actions/cache@v3
         with:
@@ -87,9 +90,6 @@ jobs:
           key: ${{ runner.os }}-cs-fixer-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
             ${{ runner.os }}-cs-fixer-
-
-      - name: "Install dependencies"
-        run: composer install --no-interaction --no-scripts --no-suggest
 
       - name: "Run tests"
         run: vendor/bin/php-cs-fixer fix -vv --dry-run
