@@ -19,7 +19,7 @@ use Rebilly\Sdk\Model\OrderItem;
 use Rebilly\Sdk\Model\OrderItemPlan;
 use Rebilly\Sdk\Model\PaymentCardToken;
 use Rebilly\Sdk\Model\PaymentToken;
-use Rebilly\Sdk\Model\PostPlanRequest;
+use Rebilly\Sdk\Model\Plan;
 use Rebilly\Sdk\Model\PostTransactionRequest;
 use Rebilly\Sdk\Model\Product;
 use Rebilly\Sdk\Model\SubscriptionOrder;
@@ -35,7 +35,13 @@ $client = new Client([
     'apiKey' => '{secretKey}',
 ]);
 $coreService = new CoreService(client: $client);
-$usersService = new UsersService($client);
+$usersService = new UsersService(client: $client);
+
+function printEntity(mixed $entity): void
+{
+    echo json_encode($entity, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . PHP_EOL;
+    echo str_repeat('=', 80) . PHP_EOL . PHP_EOL;
+}
 
 try {
     // Create website
@@ -59,13 +65,12 @@ try {
                 ->setLastName('Doe'),
         );
 
-    echo json_encode($customer, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . PHP_EOL;
+    printEntity($customer);
 
     $customer = $coreService->customers()->create($customer);
 
     echo 'Customer: ' . $customer->getId() . PHP_EOL;
-    echo json_encode($customer, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . PHP_EOL;
-    echo str_repeat('=', 80) . PHP_EOL . PHP_EOL;
+    printEntity($customer);
 
     // Create product
 
@@ -73,23 +78,21 @@ try {
         'name' => 'Test product',
     ]);
 
-    echo json_encode($product, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . PHP_EOL;
+    printEntity($product);
 
     $product = $coreService->products()->create($product);
 
     echo 'Product: ' . $product->getId() . PHP_EOL;
-    echo json_encode($product, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . PHP_EOL;
-    echo str_repeat('=', 80) . PHP_EOL . PHP_EOL;
+    printEntity($product);
 
     // Create plan
 
-    $plan = PostPlanRequest::from([])
+    $plan = Plan::from([])
         ->setProductId($product->getId())
         ->setName('Test plan')
         ->setCurrency('USD')
         ->setPricing(
             FlatRate::from()
-                ->setFormula(FlatRate::FORMULA_FLAT_RATE)
                 ->setPrice(9.99),
         )
         ->setRecurringInterval(
@@ -98,13 +101,12 @@ try {
                 ->setLength(1),
         );
 
-    echo json_encode($plan, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . PHP_EOL;
+    printEntity($plan);
 
     $plan = $coreService->plans()->create($plan);
 
     echo 'Plan: ' . $plan->getId() . PHP_EOL;
-    echo json_encode($plan, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . PHP_EOL;
-    echo str_repeat('=', 80) . PHP_EOL . PHP_EOL;
+    printEntity($plan);
 
     // Create subscription order
 
@@ -120,19 +122,18 @@ try {
             ->setQuantity(1),
         ]);
 
-    echo json_encode($order, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . PHP_EOL;
+    printEntity($order);
 
     /** @var SubscriptionOrder $order */
     $order = $coreService->subscriptions()->create($order);
 
     echo 'Order: ' . $order->getId() . PHP_EOL;
-    echo json_encode($order, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . PHP_EOL;
-    echo str_repeat('=', 80) . PHP_EOL . PHP_EOL;
+    printEntity($order);
 
     $invoice = $coreService->invoices()->get($order->getInitialInvoiceId());
 
-    echo json_encode($invoice, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . PHP_EOL;
-    echo str_repeat('=', 80) . PHP_EOL . PHP_EOL;
+    echo 'Initial invoice: ' . $invoice->getId() . PHP_EOL;
+    printEntity($invoice);
 
     // Create payment token
 
@@ -143,16 +144,14 @@ try {
             'expYear' => 2024,
             'cvv' => '111',
         ])
-        ->setMethod(PaymentCardToken::METHOD_PAYMENT_CARD)
         ->setBillingAddress($customer->getPrimaryAddress());
 
-    echo json_encode($token, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . PHP_EOL;
+    printEntity($token);
 
     $token = $coreService->paymentTokens()->create($token);
 
     echo 'Token: ' . $token->getId() . PHP_EOL;
-    echo json_encode($token, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . PHP_EOL;
-    echo str_repeat('=', 80) . PHP_EOL . PHP_EOL;
+    printEntity($token);
 
     // Create transaction
 
@@ -169,20 +168,18 @@ try {
             PaymentToken::from()
                 ->setToken($token->getId()),
         )
-        ->setInvoiceIds([$invoice->getId()]);
+        ->setInvoiceIds([(string) $invoice->getId()]);
 
-    echo json_encode($transactionRequest, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . PHP_EOL;
+    printEntity($transactionRequest);
 
     $transaction = $coreService->transactions()->create($transactionRequest);
 
     echo 'Transaction: ' . $transaction->getId() . PHP_EOL;
-    echo json_encode($transaction, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . PHP_EOL;
-    echo str_repeat('=', 80) . PHP_EOL . PHP_EOL;
+    printEntity($transaction);
 
     $order = $coreService->subscriptions()->get($order->getId());
 
-    echo json_encode($order, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR) . PHP_EOL;
-    echo str_repeat('=', 80) . PHP_EOL . PHP_EOL;
+    printEntity($order);
 } catch (DataValidationException $e) {
     var_dump($e->getValidationErrors());
 }
