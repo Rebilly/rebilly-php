@@ -16,6 +16,4 @@ namespace Rebilly\Sdk\Model;
 interface PlanPriceFormula
 {
     public function getFormula(): string;
-
-    public function setFormula(string $formula): static;
 }

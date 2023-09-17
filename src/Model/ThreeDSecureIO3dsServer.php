@@ -17,8 +17,6 @@ use JsonSerializable;
 
 class ThreeDSecureIO3dsServer implements TestProcessor3dsServers, JsonSerializable
 {
-    public const NAME_THREE_D_SECURE_IO3DS_SERVER = 'ThreeDSecureIO3dsServer';
-
     public const TRANSACTION_TYPE__01 = '01';
 
     public const TRANSACTION_TYPE__03 = '03';
@@ -55,9 +53,6 @@ class ThreeDSecureIO3dsServer implements TestProcessor3dsServers, JsonSerializab
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('name', $data)) {
-            $this->setName($data['name']);
-        }
         if (array_key_exists('acquirerMerchantIdVisa', $data)) {
             $this->setAcquirerMerchantIdVisa($data['acquirerMerchantIdVisa']);
         }
@@ -118,14 +113,7 @@ class ThreeDSecureIO3dsServer implements TestProcessor3dsServers, JsonSerializab
 
     public function getName(): string
     {
-        return $this->fields['name'];
-    }
-
-    public function setName(string $name): static
-    {
-        $this->fields['name'] = $name;
-
-        return $this;
+        return 'ThreeDSecureIO3dsServer';
     }
 
     public function getAcquirerMerchantIdVisa(): string
@@ -334,10 +322,9 @@ class ThreeDSecureIO3dsServer implements TestProcessor3dsServers, JsonSerializab
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('name', $this->fields)) {
-            $data['name'] = $this->fields['name'];
-        }
+        $data = [
+            'name' => 'ThreeDSecureIO3dsServer',
+        ];
         if (array_key_exists('acquirerMerchantIdVisa', $this->fields)) {
             $data['acquirerMerchantIdVisa'] = $this->fields['acquirerMerchantIdVisa'];
         }

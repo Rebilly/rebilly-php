@@ -19,15 +19,10 @@ use JsonSerializable;
 
 class CouponRestrictionRestrictToInvoices implements CouponRestriction, RedemptionRestriction, JsonSerializable
 {
-    public const TYPE_RESTRICT_TO_INVOICES = 'restrict-to-invoices';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('type', $data)) {
-            $this->setType($data['type']);
-        }
         if (array_key_exists('invoiceIds', $data)) {
             $this->setInvoiceIds($data['invoiceIds']);
         }
@@ -73,14 +68,7 @@ class CouponRestrictionRestrictToInvoices implements CouponRestriction, Redempti
 
     public function getType(): string
     {
-        return $this->fields['type'];
-    }
-
-    public function setType(string $type): static
-    {
-        $this->fields['type'] = $type;
-
-        return $this;
+        return 'restrict-to-invoices';
     }
 
     /**
@@ -310,10 +298,9 @@ class CouponRestrictionRestrictToInvoices implements CouponRestriction, Redempti
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('type', $this->fields)) {
-            $data['type'] = $this->fields['type'];
-        }
+        $data = [
+            'type' => 'restrict-to-invoices',
+        ];
         if (array_key_exists('invoiceIds', $this->fields)) {
             $data['invoiceIds'] = $this->fields['invoiceIds'];
         }

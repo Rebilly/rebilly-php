@@ -16,6 +16,4 @@ namespace Rebilly\Sdk\Model;
 interface Shipping
 {
     public function getCalculator(): string;
-
-    public function setCalculator(string $calculator): static;
 }

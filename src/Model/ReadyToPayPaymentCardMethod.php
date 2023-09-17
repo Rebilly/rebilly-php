@@ -17,15 +17,10 @@ use JsonSerializable;
 
 class ReadyToPayPaymentCardMethod implements ReadyToPayMethods, JsonSerializable
 {
-    public const METHOD_PAYMENT_CARD = 'payment-card';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('method', $data)) {
-            $this->setMethod($data['method']);
-        }
         if (array_key_exists('feature', $data)) {
             $this->setFeature($data['feature']);
         }
@@ -44,14 +39,7 @@ class ReadyToPayPaymentCardMethod implements ReadyToPayMethods, JsonSerializable
 
     public function getMethod(): string
     {
-        return $this->fields['method'];
-    }
-
-    public function setMethod(string $method): static
-    {
-        $this->fields['method'] = $method;
-
-        return $this;
+        return 'payment-card';
     }
 
     public function getFeature(): ?PaymentCardFeature
@@ -118,10 +106,9 @@ class ReadyToPayPaymentCardMethod implements ReadyToPayMethods, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('method', $this->fields)) {
-            $data['method'] = $this->fields['method'];
-        }
+        $data = [
+            'method' => 'payment-card',
+        ];
         if (array_key_exists('feature', $this->fields)) {
             $data['feature'] = $this->fields['feature']?->jsonSerialize();
         }

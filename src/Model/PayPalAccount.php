@@ -19,8 +19,6 @@ use JsonSerializable;
 
 class PayPalAccount implements PaymentInstrument, PostPaymentInstrumentRequest, JsonSerializable
 {
-    public const METHOD_PAYPAL = 'paypal';
-
     public const STATUS_INACTIVE = 'inactive';
 
     public const STATUS_ACTIVE = 'active';
@@ -52,9 +50,6 @@ class PayPalAccount implements PaymentInstrument, PostPaymentInstrumentRequest, 
         }
         if (array_key_exists('customerId', $data)) {
             $this->setCustomerId($data['customerId']);
-        }
-        if (array_key_exists('method', $data)) {
-            $this->setMethod($data['method']);
         }
         if (array_key_exists('billingAddress', $data)) {
             $this->setBillingAddress($data['billingAddress']);
@@ -159,6 +154,11 @@ class PayPalAccount implements PaymentInstrument, PostPaymentInstrumentRequest, 
         return new self($data);
     }
 
+    public function getMethod(): string
+    {
+        return 'paypal';
+    }
+
     public function getId(): ?string
     {
         return $this->fields['id'] ?? null;
@@ -172,18 +172,6 @@ class PayPalAccount implements PaymentInstrument, PostPaymentInstrumentRequest, 
     public function setCustomerId(string $customerId): static
     {
         $this->fields['customerId'] = $customerId;
-
-        return $this;
-    }
-
-    public function getMethod(): string
-    {
-        return $this->fields['method'];
-    }
-
-    public function setMethod(string $method): static
-    {
-        $this->fields['method'] = $method;
 
         return $this;
     }
@@ -511,15 +499,14 @@ class PayPalAccount implements PaymentInstrument, PostPaymentInstrumentRequest, 
 
     public function jsonSerialize(): array
     {
-        $data = [];
+        $data = [
+            'method' => 'paypal',
+        ];
         if (array_key_exists('id', $this->fields)) {
             $data['id'] = $this->fields['id'];
         }
         if (array_key_exists('customerId', $this->fields)) {
             $data['customerId'] = $this->fields['customerId'];
-        }
-        if (array_key_exists('method', $this->fields)) {
-            $data['method'] = $this->fields['method'];
         }
         if (array_key_exists('billingAddress', $this->fields)) {
             $data['billingAddress'] = $this->fields['billingAddress']?->jsonSerialize();

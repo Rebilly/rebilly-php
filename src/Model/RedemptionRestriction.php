@@ -15,7 +15,4 @@ namespace Rebilly\Sdk\Model;
 
 interface RedemptionRestriction
 {
-    public function getType(): string;
-
-    public function setType(string $type): static;
 }

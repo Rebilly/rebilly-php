@@ -17,15 +17,10 @@ use JsonSerializable;
 
 class ApplePayFeature implements PaymentCardFeature, JsonSerializable
 {
-    public const NAME_APPLE_PAY = 'Apple Pay';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('name', $data)) {
-            $this->setName($data['name']);
-        }
         if (array_key_exists('displayName', $data)) {
             $this->setDisplayName($data['displayName']);
         }
@@ -45,16 +40,9 @@ class ApplePayFeature implements PaymentCardFeature, JsonSerializable
         return new self($data);
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
-        return $this->fields['name'] ?? null;
-    }
-
-    public function setName(null|string $name): static
-    {
-        $this->fields['name'] = $name;
-
-        return $this;
+        return 'Apple Pay';
     }
 
     public function getDisplayName(): ?string
@@ -107,10 +95,9 @@ class ApplePayFeature implements PaymentCardFeature, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('name', $this->fields)) {
-            $data['name'] = $this->fields['name'];
-        }
+        $data = [
+            'name' => 'Apple Pay',
+        ];
         if (array_key_exists('displayName', $this->fields)) {
             $data['displayName'] = $this->fields['displayName'];
         }

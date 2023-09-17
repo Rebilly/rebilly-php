@@ -17,8 +17,6 @@ interface ReadyToPayKlarnaMethodFeature
 {
     public function getName(): string;
 
-    public function setName(string $name): static;
-
     public function getClientToken(): string;
 
     public function setClientToken(string $clientToken): static;

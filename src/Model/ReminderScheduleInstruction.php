@@ -15,7 +15,4 @@ namespace Rebilly\Sdk\Model;
 
 interface ReminderScheduleInstruction
 {
-    public function getMethod(): string;
-
-    public function setMethod(string $method): static;
 }

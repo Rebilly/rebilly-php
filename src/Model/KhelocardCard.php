@@ -19,8 +19,6 @@ use JsonSerializable;
 
 class KhelocardCard implements PaymentInstrument, JsonSerializable
 {
-    public const METHOD_KHELOCARD = 'Khelocard';
-
     public const STATUS_ACTIVE = 'active';
 
     public const STATUS_DEACTIVATED = 'deactivated';
@@ -50,9 +48,6 @@ class KhelocardCard implements PaymentInstrument, JsonSerializable
         }
         if (array_key_exists('customerId', $data)) {
             $this->setCustomerId($data['customerId']);
-        }
-        if (array_key_exists('method', $data)) {
-            $this->setMethod($data['method']);
         }
         if (array_key_exists('fingerprint', $data)) {
             $this->setFingerprint($data['fingerprint']);
@@ -154,6 +149,11 @@ class KhelocardCard implements PaymentInstrument, JsonSerializable
         return new self($data);
     }
 
+    public function getMethod(): string
+    {
+        return 'Khelocard';
+    }
+
     public function getId(): ?string
     {
         return $this->fields['id'] ?? null;
@@ -167,18 +167,6 @@ class KhelocardCard implements PaymentInstrument, JsonSerializable
     public function setCustomerId(null|string $customerId): static
     {
         $this->fields['customerId'] = $customerId;
-
-        return $this;
-    }
-
-    public function getMethod(): string
-    {
-        return $this->fields['method'];
-    }
-
-    public function setMethod(string $method): static
-    {
-        $this->fields['method'] = $method;
 
         return $this;
     }
@@ -501,15 +489,14 @@ class KhelocardCard implements PaymentInstrument, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
+        $data = [
+            'method' => 'Khelocard',
+        ];
         if (array_key_exists('id', $this->fields)) {
             $data['id'] = $this->fields['id'];
         }
         if (array_key_exists('customerId', $this->fields)) {
             $data['customerId'] = $this->fields['customerId'];
-        }
-        if (array_key_exists('method', $this->fields)) {
-            $data['method'] = $this->fields['method'];
         }
         if (array_key_exists('fingerprint', $this->fields)) {
             $data['fingerprint'] = $this->fields['fingerprint'];

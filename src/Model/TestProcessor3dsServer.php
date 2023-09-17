@@ -17,8 +17,6 @@ use JsonSerializable;
 
 class TestProcessor3dsServer implements TestProcessor3dsServers, JsonSerializable
 {
-    public const NAME_TEST_SANDBOX3DS_SERVER = 'TestSandbox3dsServer';
-
     public const THREE_RI_IND__01 = '01';
 
     public const THREE_RI_IND__02 = '02';
@@ -55,9 +53,6 @@ class TestProcessor3dsServer implements TestProcessor3dsServers, JsonSerializabl
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('name', $data)) {
-            $this->setName($data['name']);
-        }
         if (array_key_exists('acquirerMerchantIdDiscover', $data)) {
             $this->setAcquirerMerchantIdDiscover($data['acquirerMerchantIdDiscover']);
         }
@@ -118,14 +113,7 @@ class TestProcessor3dsServer implements TestProcessor3dsServers, JsonSerializabl
 
     public function getName(): string
     {
-        return $this->fields['name'];
-    }
-
-    public function setName(string $name): static
-    {
-        $this->fields['name'] = $name;
-
-        return $this;
+        return 'TestSandbox3dsServer';
     }
 
     public function getAcquirerMerchantIdDiscover(): ?string
@@ -334,10 +322,9 @@ class TestProcessor3dsServer implements TestProcessor3dsServers, JsonSerializabl
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('name', $this->fields)) {
-            $data['name'] = $this->fields['name'];
-        }
+        $data = [
+            'name' => 'TestSandbox3dsServer',
+        ];
         if (array_key_exists('acquirerMerchantIdDiscover', $this->fields)) {
             $data['acquirerMerchantIdDiscover'] = $this->fields['acquirerMerchantIdDiscover'];
         }

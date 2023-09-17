@@ -103,7 +103,7 @@ class PatchKycRequestRequest implements JsonSerializable
     }
 
     /**
-     * @return KycRequestDocuments[]
+     * @return KycRequestDocument[]
      */
     public function getDocuments(): array
     {
@@ -111,12 +111,12 @@ class PatchKycRequestRequest implements JsonSerializable
     }
 
     /**
-     * @param array[]|KycRequestDocuments[] $documents
+     * @param array[]|KycRequestDocument[] $documents
      */
     public function setDocuments(array $documents): static
     {
         $documents = array_map(
-            fn ($value) => $value !== null ? ($value instanceof KycRequestDocuments ? $value : KycRequestDocuments::from($value)) : null,
+            fn ($value) => $value !== null ? ($value instanceof KycRequestDocument ? $value : KycRequestDocument::from($value)) : null,
             $documents,
         );
 

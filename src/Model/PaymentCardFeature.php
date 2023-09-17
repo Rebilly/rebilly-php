@@ -17,8 +17,6 @@ interface PaymentCardFeature
 {
     public function getName(): ?string;
 
-    public function setName(null|string $name): static;
-
     public function getCountry(): ?string;
 
     public function setCountry(null|string $country): static;

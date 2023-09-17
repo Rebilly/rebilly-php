@@ -25,8 +25,6 @@ class SESCredential implements ServiceCredential, JsonSerializable
 
     public const STATUS_DEACTIVATED = 'deactivated';
 
-    public const TYPE_AWS_SES = 'aws-ses';
-
     public const ENCRYPTION_NONE = 'none';
 
     public const ENCRYPTION_TLS = 'tls';
@@ -48,9 +46,6 @@ class SESCredential implements ServiceCredential, JsonSerializable
         }
         if (array_key_exists('deactivationTime', $data)) {
             $this->setDeactivationTime($data['deactivationTime']);
-        }
-        if (array_key_exists('type', $data)) {
-            $this->setType($data['type']);
         }
         if (array_key_exists('key', $data)) {
             $this->setKey($data['key']);
@@ -149,6 +144,11 @@ class SESCredential implements ServiceCredential, JsonSerializable
         return new self($data);
     }
 
+    public function getType(): string
+    {
+        return 'aws-ses';
+    }
+
     public function getId(): ?string
     {
         return $this->fields['id'] ?? null;
@@ -174,11 +174,6 @@ class SESCredential implements ServiceCredential, JsonSerializable
     public function getDeactivationTime(): ?DateTimeImmutable
     {
         return $this->fields['deactivationTime'] ?? null;
-    }
-
-    public function getType(): string
-    {
-        return $this->fields['type'];
     }
 
     public function getKey(): string
@@ -550,7 +545,9 @@ class SESCredential implements ServiceCredential, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
+        $data = [
+            'type' => 'aws-ses',
+        ];
         if (array_key_exists('id', $this->fields)) {
             $data['id'] = $this->fields['id'];
         }
@@ -562,9 +559,6 @@ class SESCredential implements ServiceCredential, JsonSerializable
         }
         if (array_key_exists('deactivationTime', $this->fields)) {
             $data['deactivationTime'] = $this->fields['deactivationTime']?->format(DateTimeInterface::RFC3339);
-        }
-        if (array_key_exists('type', $this->fields)) {
-            $data['type'] = $this->fields['type'];
         }
         if (array_key_exists('key', $this->fields)) {
             $data['key'] = $this->fields['key'];
@@ -681,13 +675,6 @@ class SESCredential implements ServiceCredential, JsonSerializable
         }
 
         $this->fields['deactivationTime'] = $deactivationTime;
-
-        return $this;
-    }
-
-    private function setType(string $type): static
-    {
-        $this->fields['type'] = $type;
 
         return $this;
     }

@@ -17,17 +17,12 @@ use JsonSerializable;
 
 class CheckoutFormFixedPlan implements CheckoutFormPlan, JsonSerializable
 {
-    public const TYPE_FIXED = 'fixed';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
         if (array_key_exists('planId', $data)) {
             $this->setPlanId($data['planId']);
-        }
-        if (array_key_exists('type', $data)) {
-            $this->setType($data['type']);
         }
         if (array_key_exists('quantity', $data)) {
             $this->setQuantity($data['quantity']);
@@ -48,6 +43,11 @@ class CheckoutFormFixedPlan implements CheckoutFormPlan, JsonSerializable
         return new self($data);
     }
 
+    public function getType(): string
+    {
+        return 'fixed';
+    }
+
     public function getPlanId(): string
     {
         return $this->fields['planId'];
@@ -56,18 +56,6 @@ class CheckoutFormFixedPlan implements CheckoutFormPlan, JsonSerializable
     public function setPlanId(string $planId): static
     {
         $this->fields['planId'] = $planId;
-
-        return $this;
-    }
-
-    public function getType(): string
-    {
-        return $this->fields['type'];
-    }
-
-    public function setType(string $type): static
-    {
-        $this->fields['type'] = $type;
 
         return $this;
     }
@@ -122,12 +110,11 @@ class CheckoutFormFixedPlan implements CheckoutFormPlan, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
+        $data = [
+            'type' => 'fixed',
+        ];
         if (array_key_exists('planId', $this->fields)) {
             $data['planId'] = $this->fields['planId'];
-        }
-        if (array_key_exists('type', $this->fields)) {
-            $data['type'] = $this->fields['type'];
         }
         if (array_key_exists('quantity', $this->fields)) {
             $data['quantity'] = $this->fields['quantity'];

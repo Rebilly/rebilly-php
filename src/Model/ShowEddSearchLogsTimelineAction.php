@@ -17,8 +17,6 @@ use JsonSerializable;
 
 class ShowEddSearchLogsTimelineAction implements TimelineAction, JsonSerializable
 {
-    public const ACTION_SHOW_EDD_SEARCH_LOGS = 'show-edd-search-logs';
-
     public const TYPE_ARREST = 'arrest';
 
     public const TYPE_BANKRUPTCY = 'bankruptcy';
@@ -31,9 +29,6 @@ class ShowEddSearchLogsTimelineAction implements TimelineAction, JsonSerializabl
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('action', $data)) {
-            $this->setAction($data['action']);
-        }
         if (array_key_exists('searchLogId', $data)) {
             $this->setSearchLogId($data['searchLogId']);
         }
@@ -56,16 +51,9 @@ class ShowEddSearchLogsTimelineAction implements TimelineAction, JsonSerializabl
         return new self($data);
     }
 
-    public function getAction(): ?string
+    public function getAction(): string
     {
-        return $this->fields['action'] ?? null;
-    }
-
-    public function setAction(null|string $action): static
-    {
-        $this->fields['action'] = $action;
-
-        return $this;
+        return 'show-edd-search-logs';
     }
 
     public function getSearchLogId(): ?string
@@ -130,10 +118,9 @@ class ShowEddSearchLogsTimelineAction implements TimelineAction, JsonSerializabl
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('action', $this->fields)) {
-            $data['action'] = $this->fields['action'];
-        }
+        $data = [
+            'action' => 'show-edd-search-logs',
+        ];
         if (array_key_exists('searchLogId', $this->fields)) {
             $data['searchLogId'] = $this->fields['searchLogId'];
         }

@@ -19,15 +19,10 @@ use JsonSerializable;
 
 class AchPlaidFeature implements ReadyToPayAchMethodFeature, JsonSerializable
 {
-    public const NAME_PLAID = 'Plaid';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('name', $data)) {
-            $this->setName($data['name']);
-        }
         if (array_key_exists('linkToken', $data)) {
             $this->setLinkToken($data['linkToken']);
         }
@@ -43,14 +38,7 @@ class AchPlaidFeature implements ReadyToPayAchMethodFeature, JsonSerializable
 
     public function getName(): string
     {
-        return $this->fields['name'];
-    }
-
-    public function setName(string $name): static
-    {
-        $this->fields['name'] = $name;
-
-        return $this;
+        return 'Plaid';
     }
 
     public function getLinkToken(): string
@@ -83,10 +71,9 @@ class AchPlaidFeature implements ReadyToPayAchMethodFeature, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('name', $this->fields)) {
-            $data['name'] = $this->fields['name'];
-        }
+        $data = [
+            'name' => 'Plaid',
+        ];
         if (array_key_exists('linkToken', $this->fields)) {
             $data['linkToken'] = $this->fields['linkToken'];
         }

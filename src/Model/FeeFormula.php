@@ -17,8 +17,6 @@ interface FeeFormula
 {
     public function getType(): string;
 
-    public function setType(string $type): static;
-
     public function getCurrency(): string;
 
     public function setCurrency(string $currency): static;

@@ -19,8 +19,6 @@ use JsonSerializable;
 
 class BankAccount implements PaymentInstrument, JsonSerializable
 {
-    public const METHOD_ACH = 'ach';
-
     public const ACCOUNT_NUMBER_TYPE_BBAN = 'BBAN';
 
     public const ACCOUNT_NUMBER_TYPE_IBAN = 'IBAN';
@@ -50,9 +48,6 @@ class BankAccount implements PaymentInstrument, JsonSerializable
         }
         if (array_key_exists('customerId', $data)) {
             $this->setCustomerId($data['customerId']);
-        }
-        if (array_key_exists('method', $data)) {
-            $this->setMethod($data['method']);
         }
         if (array_key_exists('bankName', $data)) {
             $this->setBankName($data['bankName']);
@@ -154,6 +149,11 @@ class BankAccount implements PaymentInstrument, JsonSerializable
         return new self($data);
     }
 
+    public function getMethod(): string
+    {
+        return 'ach';
+    }
+
     public function getId(): ?string
     {
         return $this->fields['id'] ?? null;
@@ -169,11 +169,6 @@ class BankAccount implements PaymentInstrument, JsonSerializable
         $this->fields['customerId'] = $customerId;
 
         return $this;
-    }
-
-    public function getMethod(): string
-    {
-        return $this->fields['method'];
     }
 
     public function getBankName(): ?string
@@ -473,15 +468,14 @@ class BankAccount implements PaymentInstrument, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
+        $data = [
+            'method' => 'ach',
+        ];
         if (array_key_exists('id', $this->fields)) {
             $data['id'] = $this->fields['id'];
         }
         if (array_key_exists('customerId', $this->fields)) {
             $data['customerId'] = $this->fields['customerId'];
-        }
-        if (array_key_exists('method', $this->fields)) {
-            $data['method'] = $this->fields['method'];
         }
         if (array_key_exists('bankName', $this->fields)) {
             $data['bankName'] = $this->fields['bankName'];
@@ -583,13 +577,6 @@ class BankAccount implements PaymentInstrument, JsonSerializable
     private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
-
-        return $this;
-    }
-
-    private function setMethod(string $method): static
-    {
-        $this->fields['method'] = $method;
 
         return $this;
     }

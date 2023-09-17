@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class KycRequestDocuments implements JsonSerializable
+class KycRequestDocument implements JsonSerializable
 {
     private array $fields = [];
 

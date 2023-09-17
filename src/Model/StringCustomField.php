@@ -17,17 +17,12 @@ use JsonSerializable;
 
 class StringCustomField implements CustomField, JsonSerializable
 {
-    public const TYPE_STRING = 'string';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
         if (array_key_exists('name', $data)) {
             $this->setName($data['name']);
-        }
-        if (array_key_exists('type', $data)) {
-            $this->setType($data['type']);
         }
         if (array_key_exists('description', $data)) {
             $this->setDescription($data['description']);
@@ -45,21 +40,14 @@ class StringCustomField implements CustomField, JsonSerializable
         return new self($data);
     }
 
+    public function getType(): string
+    {
+        return 'string';
+    }
+
     public function getName(): ?string
     {
         return $this->fields['name'] ?? null;
-    }
-
-    public function getType(): string
-    {
-        return $this->fields['type'];
-    }
-
-    public function setType(string $type): static
-    {
-        $this->fields['type'] = $type;
-
-        return $this;
     }
 
     public function getDescription(): ?string
@@ -110,12 +98,11 @@ class StringCustomField implements CustomField, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
+        $data = [
+            'type' => 'string',
+        ];
         if (array_key_exists('name', $this->fields)) {
             $data['name'] = $this->fields['name'];
-        }
-        if (array_key_exists('type', $this->fields)) {
-            $data['type'] = $this->fields['type'];
         }
         if (array_key_exists('description', $this->fields)) {
             $data['description'] = $this->fields['description'];

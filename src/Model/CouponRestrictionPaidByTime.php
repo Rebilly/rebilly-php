@@ -19,15 +19,10 @@ use JsonSerializable;
 
 class CouponRestrictionPaidByTime implements CouponRestriction, RedemptionRestriction, JsonSerializable
 {
-    public const TYPE_PAID_BY_TIME = 'paid-by-time';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('type', $data)) {
-            $this->setType($data['type']);
-        }
         if (array_key_exists('time', $data)) {
             $this->setTime($data['time']);
         }
@@ -73,14 +68,7 @@ class CouponRestrictionPaidByTime implements CouponRestriction, RedemptionRestri
 
     public function getType(): string
     {
-        return $this->fields['type'];
-    }
-
-    public function setType(string $type): static
-    {
-        $this->fields['type'] = $type;
-
-        return $this;
+        return 'paid-by-time';
     }
 
     public function getTime(): DateTimeImmutable
@@ -310,10 +298,9 @@ class CouponRestrictionPaidByTime implements CouponRestriction, RedemptionRestri
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('type', $this->fields)) {
-            $data['type'] = $this->fields['type'];
-        }
+        $data = [
+            'type' => 'paid-by-time',
+        ];
         if (array_key_exists('time', $this->fields)) {
             $data['time'] = $this->fields['time']?->format(DateTimeInterface::RFC3339);
         }

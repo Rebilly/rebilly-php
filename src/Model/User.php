@@ -47,9 +47,6 @@ class User implements JsonSerializable
         if (array_key_exists('mobilePhone', $data)) {
             $this->setMobilePhone($data['mobilePhone']);
         }
-        if (array_key_exists('password', $data)) {
-            $this->setPassword($data['password']);
-        }
         if (array_key_exists('permissions', $data)) {
             $this->setPermissions($data['permissions']);
         }
@@ -70,15 +67,6 @@ class User implements JsonSerializable
         }
         if (array_key_exists('availableCurrencies', $data)) {
             $this->setAvailableCurrencies($data['availableCurrencies']);
-        }
-        if (array_key_exists('totpRequired', $data)) {
-            $this->setTotpRequired($data['totpRequired']);
-        }
-        if (array_key_exists('totpSecret', $data)) {
-            $this->setTotpSecret($data['totpSecret']);
-        }
-        if (array_key_exists('totpUrl', $data)) {
-            $this->setTotpUrl($data['totpUrl']);
         }
         if (array_key_exists('status', $data)) {
             $this->setStatus($data['status']);
@@ -170,18 +158,6 @@ class User implements JsonSerializable
         return $this;
     }
 
-    public function getPassword(): ?string
-    {
-        return $this->fields['password'] ?? null;
-    }
-
-    public function setPassword(null|string $password): static
-    {
-        $this->fields['password'] = $password;
-
-        return $this;
-    }
-
     /**
      * @return null|string[]
      */
@@ -254,42 +230,6 @@ class User implements JsonSerializable
     public function getAvailableCurrencies(): ?array
     {
         return $this->fields['availableCurrencies'] ?? null;
-    }
-
-    public function getTotpRequired(): ?bool
-    {
-        return $this->fields['totpRequired'] ?? null;
-    }
-
-    public function setTotpRequired(null|bool $totpRequired): static
-    {
-        $this->fields['totpRequired'] = $totpRequired;
-
-        return $this;
-    }
-
-    public function getTotpSecret(): ?string
-    {
-        return $this->fields['totpSecret'] ?? null;
-    }
-
-    public function setTotpSecret(null|string $totpSecret): static
-    {
-        $this->fields['totpSecret'] = $totpSecret;
-
-        return $this;
-    }
-
-    public function getTotpUrl(): ?string
-    {
-        return $this->fields['totpUrl'] ?? null;
-    }
-
-    public function setTotpUrl(null|string $totpUrl): static
-    {
-        $this->fields['totpUrl'] = $totpUrl;
-
-        return $this;
     }
 
     public function getStatus(): ?string
@@ -406,9 +346,6 @@ class User implements JsonSerializable
         if (array_key_exists('mobilePhone', $this->fields)) {
             $data['mobilePhone'] = $this->fields['mobilePhone'];
         }
-        if (array_key_exists('password', $this->fields)) {
-            $data['password'] = $this->fields['password'];
-        }
         if (array_key_exists('permissions', $this->fields)) {
             $data['permissions'] = $this->fields['permissions'];
         }
@@ -429,15 +366,6 @@ class User implements JsonSerializable
         }
         if (array_key_exists('availableCurrencies', $this->fields)) {
             $data['availableCurrencies'] = $this->fields['availableCurrencies'];
-        }
-        if (array_key_exists('totpRequired', $this->fields)) {
-            $data['totpRequired'] = $this->fields['totpRequired'];
-        }
-        if (array_key_exists('totpSecret', $this->fields)) {
-            $data['totpSecret'] = $this->fields['totpSecret'];
-        }
-        if (array_key_exists('totpUrl', $this->fields)) {
-            $data['totpUrl'] = $this->fields['totpUrl'];
         }
         if (array_key_exists('status', $this->fields)) {
             $data['status'] = $this->fields['status'];

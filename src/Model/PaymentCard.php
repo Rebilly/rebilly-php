@@ -19,8 +19,6 @@ use JsonSerializable;
 
 class PaymentCard implements PaymentInstrument, JsonSerializable
 {
-    public const METHOD_PAYMENT_CARD = 'payment-card';
-
     public const STATUS_ACTIVE = 'active';
 
     public const STATUS_INACTIVE = 'inactive';
@@ -56,9 +54,6 @@ class PaymentCard implements PaymentInstrument, JsonSerializable
         }
         if (array_key_exists('customerId', $data)) {
             $this->setCustomerId($data['customerId']);
-        }
-        if (array_key_exists('method', $data)) {
-            $this->setMethod($data['method']);
         }
         if (array_key_exists('status', $data)) {
             $this->setStatus($data['status']);
@@ -160,6 +155,11 @@ class PaymentCard implements PaymentInstrument, JsonSerializable
         return new self($data);
     }
 
+    public function getMethod(): string
+    {
+        return 'payment-card';
+    }
+
     public function getId(): ?string
     {
         return $this->fields['id'] ?? null;
@@ -175,11 +175,6 @@ class PaymentCard implements PaymentInstrument, JsonSerializable
         $this->fields['customerId'] = $customerId;
 
         return $this;
-    }
-
-    public function getMethod(): string
-    {
-        return $this->fields['method'];
     }
 
     public function getStatus(): ?string
@@ -479,15 +474,14 @@ class PaymentCard implements PaymentInstrument, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
+        $data = [
+            'method' => 'payment-card',
+        ];
         if (array_key_exists('id', $this->fields)) {
             $data['id'] = $this->fields['id'];
         }
         if (array_key_exists('customerId', $this->fields)) {
             $data['customerId'] = $this->fields['customerId'];
-        }
-        if (array_key_exists('method', $this->fields)) {
-            $data['method'] = $this->fields['method'];
         }
         if (array_key_exists('status', $this->fields)) {
             $data['status'] = $this->fields['status'];
@@ -589,13 +583,6 @@ class PaymentCard implements PaymentInstrument, JsonSerializable
     private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
-
-        return $this;
-    }
-
-    private function setMethod(string $method): static
-    {
-        $this->fields['method'] = $method;
 
         return $this;
     }

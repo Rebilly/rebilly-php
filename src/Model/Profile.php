@@ -65,20 +65,8 @@ class Profile implements JsonSerializable
         if (array_key_exists('loginTime', $data)) {
             $this->setLoginTime($data['loginTime']);
         }
-        if (array_key_exists('totpRequired', $data)) {
-            $this->setTotpRequired($data['totpRequired']);
-        }
-        if (array_key_exists('totpSecret', $data)) {
-            $this->setTotpSecret($data['totpSecret']);
-        }
-        if (array_key_exists('totpUrl', $data)) {
-            $this->setTotpUrl($data['totpUrl']);
-        }
         if (array_key_exists('status', $data)) {
             $this->setStatus($data['status']);
-        }
-        if (array_key_exists('oneTimePassword', $data)) {
-            $this->setOneTimePassword($data['oneTimePassword']);
         }
         if (array_key_exists('country', $data)) {
             $this->setCountry($data['country']);
@@ -193,43 +181,9 @@ class Profile implements JsonSerializable
         return $this->fields['loginTime'] ?? null;
     }
 
-    public function getTotpRequired(): ?bool
-    {
-        return $this->fields['totpRequired'] ?? null;
-    }
-
-    public function setTotpRequired(null|bool $totpRequired): static
-    {
-        $this->fields['totpRequired'] = $totpRequired;
-
-        return $this;
-    }
-
-    public function getTotpSecret(): ?string
-    {
-        return $this->fields['totpSecret'] ?? null;
-    }
-
-    public function getTotpUrl(): ?string
-    {
-        return $this->fields['totpUrl'] ?? null;
-    }
-
     public function getStatus(): ?string
     {
         return $this->fields['status'] ?? null;
-    }
-
-    public function getOneTimePassword(): ?string
-    {
-        return $this->fields['oneTimePassword'] ?? null;
-    }
-
-    public function setOneTimePassword(null|string $oneTimePassword): static
-    {
-        $this->fields['oneTimePassword'] = $oneTimePassword;
-
-        return $this;
     }
 
     public function getCountry(): ?string
@@ -321,20 +275,8 @@ class Profile implements JsonSerializable
         if (array_key_exists('loginTime', $this->fields)) {
             $data['loginTime'] = $this->fields['loginTime']?->format(DateTimeInterface::RFC3339);
         }
-        if (array_key_exists('totpRequired', $this->fields)) {
-            $data['totpRequired'] = $this->fields['totpRequired'];
-        }
-        if (array_key_exists('totpSecret', $this->fields)) {
-            $data['totpSecret'] = $this->fields['totpSecret'];
-        }
-        if (array_key_exists('totpUrl', $this->fields)) {
-            $data['totpUrl'] = $this->fields['totpUrl'];
-        }
         if (array_key_exists('status', $this->fields)) {
             $data['status'] = $this->fields['status'];
-        }
-        if (array_key_exists('oneTimePassword', $this->fields)) {
-            $data['oneTimePassword'] = $this->fields['oneTimePassword'];
         }
         if (array_key_exists('country', $this->fields)) {
             $data['country'] = $this->fields['country'];
@@ -444,20 +386,6 @@ class Profile implements JsonSerializable
         }
 
         $this->fields['loginTime'] = $loginTime;
-
-        return $this;
-    }
-
-    private function setTotpSecret(null|string $totpSecret): static
-    {
-        $this->fields['totpSecret'] = $totpSecret;
-
-        return $this;
-    }
-
-    private function setTotpUrl(null|string $totpUrl): static
-    {
-        $this->fields['totpUrl'] = $totpUrl;
 
         return $this;
     }

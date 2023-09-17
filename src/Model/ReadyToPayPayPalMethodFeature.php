@@ -19,8 +19,6 @@ interface ReadyToPayPayPalMethodFeature
 {
     public function getName(): string;
 
-    public function setName(string $name): static;
-
     public function getPaypalMerchantId(): string;
 
     public function setPaypalMerchantId(string $paypalMerchantId): static;

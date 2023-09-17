@@ -20,6 +20,4 @@ interface CheckoutFormPlan
     public function setPlanId(string $planId): static;
 
     public function getType(): string;
-
-    public function setType(string $type): static;
 }

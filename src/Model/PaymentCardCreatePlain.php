@@ -19,8 +19,6 @@ use JsonSerializable;
 
 class PaymentCardCreatePlain implements PaymentInstruction, PostPaymentInstrumentRequest, JsonSerializable
 {
-    public const METHOD_PAYMENT_CARD = 'payment-card';
-
     public const STATUS_ACTIVE = 'active';
 
     public const STATUS_DEACTIVATED = 'deactivated';
@@ -29,9 +27,6 @@ class PaymentCardCreatePlain implements PaymentInstruction, PostPaymentInstrumen
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('method', $data)) {
-            $this->setMethod($data['method']);
-        }
         if (array_key_exists('customerId', $data)) {
             $this->setCustomerId($data['customerId']);
         }
@@ -110,14 +105,7 @@ class PaymentCardCreatePlain implements PaymentInstruction, PostPaymentInstrumen
 
     public function getMethod(): string
     {
-        return $this->fields['method'];
-    }
-
-    public function setMethod(string $method): static
-    {
-        $this->fields['method'] = $method;
-
-        return $this;
+        return 'payment-card';
     }
 
     public function getCustomerId(): string
@@ -381,10 +369,9 @@ class PaymentCardCreatePlain implements PaymentInstruction, PostPaymentInstrumen
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('method', $this->fields)) {
-            $data['method'] = $this->fields['method'];
-        }
+        $data = [
+            'method' => 'payment-card',
+        ];
         if (array_key_exists('customerId', $this->fields)) {
             $data['customerId'] = $this->fields['customerId'];
         }

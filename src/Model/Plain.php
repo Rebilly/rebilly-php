@@ -17,8 +17,6 @@ use JsonSerializable;
 
 class Plain implements SmtpAuthorization, JsonSerializable
 {
-    public const TYPE_PLAIN = 'plain';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -29,14 +27,16 @@ class Plain implements SmtpAuthorization, JsonSerializable
         if (array_key_exists('password', $data)) {
             $this->setPassword($data['password']);
         }
-        if (array_key_exists('type', $data)) {
-            $this->setType($data['type']);
-        }
     }
 
     public static function from(array $data = []): self
     {
         return new self($data);
+    }
+
+    public function getType(): string
+    {
+        return 'plain';
     }
 
     public function getUsername(): string
@@ -63,29 +63,16 @@ class Plain implements SmtpAuthorization, JsonSerializable
         return $this;
     }
 
-    public function getType(): string
-    {
-        return $this->fields['type'];
-    }
-
-    public function setType(string $type): static
-    {
-        $this->fields['type'] = $type;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
-        $data = [];
+        $data = [
+            'type' => 'plain',
+        ];
         if (array_key_exists('username', $this->fields)) {
             $data['username'] = $this->fields['username'];
         }
         if (array_key_exists('password', $this->fields)) {
             $data['password'] = $this->fields['password'];
-        }
-        if (array_key_exists('type', $this->fields)) {
-            $data['type'] = $this->fields['type'];
         }
 
         return $data;

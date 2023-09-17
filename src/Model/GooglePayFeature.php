@@ -17,15 +17,10 @@ use JsonSerializable;
 
 class GooglePayFeature implements PaymentCardFeature, JsonSerializable
 {
-    public const NAME_GOOGLE_PAY = 'Google Pay';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('name', $data)) {
-            $this->setName($data['name']);
-        }
         if (array_key_exists('merchantName', $data)) {
             $this->setMerchantName($data['merchantName']);
         }
@@ -45,16 +40,9 @@ class GooglePayFeature implements PaymentCardFeature, JsonSerializable
         return new self($data);
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
-        return $this->fields['name'] ?? null;
-    }
-
-    public function setName(null|string $name): static
-    {
-        $this->fields['name'] = $name;
-
-        return $this;
+        return 'Google Pay';
     }
 
     public function getMerchantName(): ?string
@@ -107,10 +95,9 @@ class GooglePayFeature implements PaymentCardFeature, JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $data = [];
-        if (array_key_exists('name', $this->fields)) {
-            $data['name'] = $this->fields['name'];
-        }
+        $data = [
+            'name' => 'Google Pay',
+        ];
         if (array_key_exists('merchantName', $this->fields)) {
             $data['merchantName'] = $this->fields['merchantName'];
         }

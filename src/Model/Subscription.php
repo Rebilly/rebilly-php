@@ -21,8 +21,6 @@ interface Subscription
 
     public function getOrderType(): string;
 
-    public function setOrderType(string $orderType): static;
-
     public function getCustomerId(): string;
 
     public function setCustomerId(string $customerId): static;
