@@ -84,7 +84,7 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: .php-cs-fixer.cache
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          key: ${{ runner.os }}-cs-fixer-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
             ${{ runner.os }}-cs-fixer-
 
