@@ -17,7 +17,6 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
-use Rebilly\Sdk\Model\AML;
 use Rebilly\Sdk\Model\Customer;
 use Rebilly\Sdk\Model\CustomerInformation;
 use Rebilly\Sdk\Model\CustomerTimeline;
@@ -341,25 +340,6 @@ class CustomersApi
             $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
             $closure,
         );
-    }
-
-    /**
-     * @return AML[]
-     */
-    public function getAml(
-        string $id,
-    ): array {
-        $pathParams = [
-            '{id}' => $id,
-        ];
-
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/aml');
-
-        $request = new Request('GET', $uri);
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return array_map(fn (array $item): AML => AML::from($item), $data);
     }
 
     /**
