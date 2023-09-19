@@ -43,3 +43,8 @@ This directory contains examples of how to use the **Rebilly PHP SDK for PHP** v
    php pagination.php
    ```
 
+### Additional examples
+
+- [authJwt.php](./authJwt.php): This example shows how to use the JWT authentication method. The result should be the list of products for the given organization as in the [pagination.php](./pagination.php); the difference is that when creating the client object, the parameter `sessionToken` is provided.
+
+- [createEntity.php](./createEntity.php): This example shows how to create a new entity in two ways, one through the setters methods and another with the `from` array method. 
