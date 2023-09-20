@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-interface PartialAfterApprovalPolicy
+interface AmountAdjustmentInstructionPartialAfterApprovalPolicy
 {
+    public function getMethod(): ?string;
 }

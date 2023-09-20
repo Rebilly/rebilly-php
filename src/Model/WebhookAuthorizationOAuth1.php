@@ -15,29 +15,29 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class Basic implements WebhookAuthorization, JsonSerializable
+class WebhookAuthorizationOAuth1 implements WebhookAuthorization, JsonSerializable
 {
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('username', $data)) {
-            $this->setUsername($data['username']);
-        }
-        if (array_key_exists('password', $data)) {
-            $this->setPassword($data['password']);
+        if (array_key_exists('consumerKey', $data)) {
+            $this->setConsumerKey($data['consumerKey']);
         }
         if (array_key_exists('consumerSecret', $data)) {
             $this->setConsumerSecret($data['consumerSecret']);
         }
-        if (array_key_exists('consumerKey', $data)) {
-            $this->setConsumerKey($data['consumerKey']);
+        if (array_key_exists('token', $data)) {
+            $this->setToken($data['token']);
         }
         if (array_key_exists('tokenSecret', $data)) {
             $this->setTokenSecret($data['tokenSecret']);
         }
-        if (array_key_exists('token', $data)) {
-            $this->setToken($data['token']);
+        if (array_key_exists('password', $data)) {
+            $this->setPassword($data['password']);
+        }
+        if (array_key_exists('username', $data)) {
+            $this->setUsername($data['username']);
         }
     }
 
@@ -48,29 +48,17 @@ class Basic implements WebhookAuthorization, JsonSerializable
 
     public function getType(): string
     {
-        return 'basic';
+        return 'oauth1';
     }
 
-    public function getUsername(): string
+    public function getConsumerKey(): string
     {
-        return $this->fields['username'];
+        return $this->fields['consumerKey'];
     }
 
-    public function setUsername(string $username): static
+    public function setConsumerKey(string $consumerKey): static
     {
-        $this->fields['username'] = $username;
-
-        return $this;
-    }
-
-    public function getPassword(): string
-    {
-        return $this->fields['password'];
-    }
-
-    public function setPassword(string $password): static
-    {
-        $this->fields['password'] = $password;
+        $this->fields['consumerKey'] = $consumerKey;
 
         return $this;
     }
@@ -87,14 +75,14 @@ class Basic implements WebhookAuthorization, JsonSerializable
         return $this;
     }
 
-    public function getConsumerKey(): string
+    public function getToken(): string
     {
-        return $this->fields['consumerKey'];
+        return $this->fields['token'];
     }
 
-    public function setConsumerKey(string $consumerKey): static
+    public function setToken(string $token): static
     {
-        $this->fields['consumerKey'] = $consumerKey;
+        $this->fields['token'] = $token;
 
         return $this;
     }
@@ -111,14 +99,26 @@ class Basic implements WebhookAuthorization, JsonSerializable
         return $this;
     }
 
-    public function getToken(): string
+    public function getPassword(): string
     {
-        return $this->fields['token'];
+        return $this->fields['password'];
     }
 
-    public function setToken(string $token): static
+    public function setPassword(string $password): static
     {
-        $this->fields['token'] = $token;
+        $this->fields['password'] = $password;
+
+        return $this;
+    }
+
+    public function getUsername(): string
+    {
+        return $this->fields['username'];
+    }
+
+    public function setUsername(string $username): static
+    {
+        $this->fields['username'] = $username;
 
         return $this;
     }
@@ -126,25 +126,25 @@ class Basic implements WebhookAuthorization, JsonSerializable
     public function jsonSerialize(): array
     {
         $data = [
-            'type' => 'basic',
+            'type' => 'oauth1',
         ];
-        if (array_key_exists('username', $this->fields)) {
-            $data['username'] = $this->fields['username'];
-        }
-        if (array_key_exists('password', $this->fields)) {
-            $data['password'] = $this->fields['password'];
+        if (array_key_exists('consumerKey', $this->fields)) {
+            $data['consumerKey'] = $this->fields['consumerKey'];
         }
         if (array_key_exists('consumerSecret', $this->fields)) {
             $data['consumerSecret'] = $this->fields['consumerSecret'];
         }
-        if (array_key_exists('consumerKey', $this->fields)) {
-            $data['consumerKey'] = $this->fields['consumerKey'];
+        if (array_key_exists('token', $this->fields)) {
+            $data['token'] = $this->fields['token'];
         }
         if (array_key_exists('tokenSecret', $this->fields)) {
             $data['tokenSecret'] = $this->fields['tokenSecret'];
         }
-        if (array_key_exists('token', $this->fields)) {
-            $data['token'] = $this->fields['token'];
+        if (array_key_exists('password', $this->fields)) {
+            $data['password'] = $this->fields['password'];
+        }
+        if (array_key_exists('username', $this->fields)) {
+            $data['username'] = $this->fields['username'];
         }
 
         return $data;

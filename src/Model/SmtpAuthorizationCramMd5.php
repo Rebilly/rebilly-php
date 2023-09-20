@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class Login implements SmtpAuthorization, JsonSerializable
+class SmtpAuthorizationCramMd5 implements SmtpAuthorization, JsonSerializable
 {
     private array $fields = [];
 
@@ -36,7 +36,7 @@ class Login implements SmtpAuthorization, JsonSerializable
 
     public function getType(): string
     {
-        return 'login';
+        return 'cram-md5';
     }
 
     public function getUsername(): string
@@ -66,7 +66,7 @@ class Login implements SmtpAuthorization, JsonSerializable
     public function jsonSerialize(): array
     {
         $data = [
-            'type' => 'login',
+            'type' => 'cram-md5',
         ];
         if (array_key_exists('username', $this->fields)) {
             $data['username'] = $this->fields['username'];

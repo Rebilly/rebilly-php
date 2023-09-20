@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class Digest implements WebhookAuthorization, JsonSerializable
+class WebhookAuthorizationDigest implements WebhookAuthorization, JsonSerializable
 {
     private array $fields = [];
 

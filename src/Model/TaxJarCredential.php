@@ -31,6 +31,12 @@ class TaxJarCredential implements ServiceCredential, JsonSerializable
 
     public const ENCRYPTION_SSL = 'ssl';
 
+    public const SERVICE_GOOGLE_SHEETS = 'google-sheets';
+
+    public const SERVICE_KEAP_INFUSIONSOFT = 'keap-infusionsoft';
+
+    public const SERVICE_INTUIT_QUICKBOOKS = 'intuit-quickbooks';
+
     private array $fields = [];
 
     public function __construct(array $data = [])

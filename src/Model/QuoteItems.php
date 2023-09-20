@@ -32,6 +32,12 @@ class QuoteItems implements JsonSerializable
         if (array_key_exists('plan', $data)) {
             $this->setPlan($data['plan']);
         }
+        if (array_key_exists('description', $data)) {
+            $this->setDescription($data['description']);
+        }
+        if (array_key_exists('priceDescription', $data)) {
+            $this->setPriceDescription($data['priceDescription']);
+        }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
         }
@@ -81,6 +87,30 @@ class QuoteItems implements JsonSerializable
         return $this;
     }
 
+    public function getDescription(): ?string
+    {
+        return $this->fields['description'] ?? null;
+    }
+
+    public function setDescription(null|string $description): static
+    {
+        $this->fields['description'] = $description;
+
+        return $this;
+    }
+
+    public function getPriceDescription(): ?string
+    {
+        return $this->fields['priceDescription'] ?? null;
+    }
+
+    public function setPriceDescription(null|string $priceDescription): static
+    {
+        $this->fields['priceDescription'] = $priceDescription;
+
+        return $this;
+    }
+
     public function getCreatedTime(): ?DateTimeImmutable
     {
         return $this->fields['createdTime'] ?? null;
@@ -118,6 +148,12 @@ class QuoteItems implements JsonSerializable
         }
         if (array_key_exists('plan', $this->fields)) {
             $data['plan'] = $this->fields['plan']?->jsonSerialize();
+        }
+        if (array_key_exists('description', $this->fields)) {
+            $data['description'] = $this->fields['description'];
+        }
+        if (array_key_exists('priceDescription', $this->fields)) {
+            $data['priceDescription'] = $this->fields['priceDescription'];
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);

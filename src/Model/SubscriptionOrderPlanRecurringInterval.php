@@ -25,6 +25,10 @@ class SubscriptionOrderPlanRecurringInterval implements JsonSerializable
 
     public const UNIT_YEAR = 'year';
 
+    public const BILLING_TIMING_PREPAID = 'prepaid';
+
+    public const BILLING_TIMING_POSTPAID = 'postpaid';
+
     private array $fields = [];
 
     public function __construct(array $data = [])

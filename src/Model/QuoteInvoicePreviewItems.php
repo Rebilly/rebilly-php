@@ -30,8 +30,14 @@ class QuoteInvoicePreviewItems implements JsonSerializable
         if (array_key_exists('type', $data)) {
             $this->setType($data['type']);
         }
+        if (array_key_exists('name', $data)) {
+            $this->setName($data['name']);
+        }
         if (array_key_exists('description', $data)) {
             $this->setDescription($data['description']);
+        }
+        if (array_key_exists('priceDescription', $data)) {
+            $this->setPriceDescription($data['priceDescription']);
         }
         if (array_key_exists('unitPrice', $data)) {
             $this->setUnitPrice($data['unitPrice']);
@@ -70,6 +76,18 @@ class QuoteInvoicePreviewItems implements JsonSerializable
         return $this;
     }
 
+    public function getName(): ?string
+    {
+        return $this->fields['name'] ?? null;
+    }
+
+    public function setName(null|string $name): static
+    {
+        $this->fields['name'] = $name;
+
+        return $this;
+    }
+
     public function getDescription(): ?string
     {
         return $this->fields['description'] ?? null;
@@ -78,6 +96,18 @@ class QuoteInvoicePreviewItems implements JsonSerializable
     public function setDescription(null|string $description): static
     {
         $this->fields['description'] = $description;
+
+        return $this;
+    }
+
+    public function getPriceDescription(): ?string
+    {
+        return $this->fields['priceDescription'] ?? null;
+    }
+
+    public function setPriceDescription(null|string $priceDescription): static
+    {
+        $this->fields['priceDescription'] = $priceDescription;
 
         return $this;
     }
@@ -169,8 +199,14 @@ class QuoteInvoicePreviewItems implements JsonSerializable
         if (array_key_exists('type', $this->fields)) {
             $data['type'] = $this->fields['type'];
         }
+        if (array_key_exists('name', $this->fields)) {
+            $data['name'] = $this->fields['name'];
+        }
         if (array_key_exists('description', $this->fields)) {
             $data['description'] = $this->fields['description'];
+        }
+        if (array_key_exists('priceDescription', $this->fields)) {
+            $data['priceDescription'] = $this->fields['priceDescription'];
         }
         if (array_key_exists('unitPrice', $this->fields)) {
             $data['unitPrice'] = $this->fields['unitPrice'];

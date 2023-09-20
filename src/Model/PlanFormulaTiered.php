@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class Stairstep implements PlanPriceFormula, JsonSerializable
+class PlanFormulaTiered implements PlanPriceFormula, JsonSerializable
 {
     private array $fields = [];
 
@@ -39,11 +39,11 @@ class Stairstep implements PlanPriceFormula, JsonSerializable
 
     public function getFormula(): string
     {
-        return 'stairstep';
+        return 'tiered';
     }
 
     /**
-     * @return StairstepBrackets[]
+     * @return PlanFormulaStairstepBrackets[]
      */
     public function getBrackets(): array
     {
@@ -51,12 +51,12 @@ class Stairstep implements PlanPriceFormula, JsonSerializable
     }
 
     /**
-     * @param array[]|StairstepBrackets[] $brackets
+     * @param array[]|PlanFormulaStairstepBrackets[] $brackets
      */
     public function setBrackets(array $brackets): static
     {
         $brackets = array_map(
-            fn ($value) => $value !== null ? ($value instanceof StairstepBrackets ? $value : StairstepBrackets::from($value)) : null,
+            fn ($value) => $value !== null ? ($value instanceof PlanFormulaStairstepBrackets ? $value : PlanFormulaStairstepBrackets::from($value)) : null,
             $brackets,
         );
 
@@ -96,7 +96,7 @@ class Stairstep implements PlanPriceFormula, JsonSerializable
     public function jsonSerialize(): array
     {
         $data = [
-            'formula' => 'stairstep',
+            'formula' => 'tiered',
         ];
         if (array_key_exists('brackets', $this->fields)) {
             $data['brackets'] = $this->fields['brackets'];

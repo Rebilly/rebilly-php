@@ -15,13 +15,13 @@ namespace Rebilly\Sdk\Model;
 
 use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
-class PartialAfterApprovalPolicyFactory
+class AmountAdjustmentInstructionPartialAfterApprovalPolicyFactory
 {
-    public static function from(array $data = []): PartialAfterApprovalPolicy
+    public static function from(array $data = []): AmountAdjustmentInstructionPartialAfterApprovalPolicy
     {
         return match ($data['method']) {
-            'discount-amount-remaining' => DiscountAmountRemaining::from(),
-            'none' => None::from($data),
+            'discount-amount-remaining' => AmountAdjustmentPoliciesDiscountAmountRemaining::from(),
+            'none' => AmountAdjustmentPoliciesNone::from(),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

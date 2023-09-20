@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class StairstepBrackets implements JsonSerializable
+class PlanFormulaFlatRate implements PlanPriceFormula, JsonSerializable
 {
     private array $fields = [];
 
@@ -27,6 +27,9 @@ class StairstepBrackets implements JsonSerializable
         if (array_key_exists('maxQuantity', $data)) {
             $this->setMaxQuantity($data['maxQuantity']);
         }
+        if (array_key_exists('brackets', $data)) {
+            $this->setBrackets($data['brackets']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -34,12 +37,17 @@ class StairstepBrackets implements JsonSerializable
         return new self($data);
     }
 
-    public function getPrice(): ?float
+    public function getFormula(): string
     {
-        return $this->fields['price'] ?? null;
+        return 'flat-rate';
     }
 
-    public function setPrice(null|float|string $price): static
+    public function getPrice(): float
+    {
+        return $this->fields['price'];
+    }
+
+    public function setPrice(float|string $price): static
     {
         if (is_string($price)) {
             $price = (float) $price;
@@ -62,14 +70,42 @@ class StairstepBrackets implements JsonSerializable
         return $this;
     }
 
+    /**
+     * @return PlanFormulaStairstepBrackets[]
+     */
+    public function getBrackets(): array
+    {
+        return $this->fields['brackets'];
+    }
+
+    /**
+     * @param array[]|PlanFormulaStairstepBrackets[] $brackets
+     */
+    public function setBrackets(array $brackets): static
+    {
+        $brackets = array_map(
+            fn ($value) => $value !== null ? ($value instanceof PlanFormulaStairstepBrackets ? $value : PlanFormulaStairstepBrackets::from($value)) : null,
+            $brackets,
+        );
+
+        $this->fields['brackets'] = $brackets;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
-        $data = [];
+        $data = [
+            'formula' => 'flat-rate',
+        ];
         if (array_key_exists('price', $this->fields)) {
             $data['price'] = $this->fields['price'];
         }
         if (array_key_exists('maxQuantity', $this->fields)) {
             $data['maxQuantity'] = $this->fields['maxQuantity'];
+        }
+        if (array_key_exists('brackets', $this->fields)) {
+            $data['brackets'] = $this->fields['brackets'];
         }
 
         return $data;

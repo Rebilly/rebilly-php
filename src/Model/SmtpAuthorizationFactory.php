@@ -20,10 +20,10 @@ class SmtpAuthorizationFactory
     public static function from(array $data = []): SmtpAuthorization
     {
         return match ($data['type']) {
-            'cram-md5' => CramMd5::from($data),
-            'login' => Login::from($data),
+            'cram-md5' => SmtpAuthorizationCramMd5::from($data),
+            'login' => SmtpAuthorizationLogin::from($data),
             'none' => SmtpAuthorizationNone::from($data),
-            'plain' => Plain::from($data),
+            'plain' => SmtpAuthorizationPlain::from($data),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }
