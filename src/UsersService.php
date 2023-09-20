@@ -132,6 +132,11 @@ class UsersService
         $this->websites = new Api\WebsitesApi($this->client);
     }
 
+    public function getClient(): Client
+    {
+        return $this->client;
+    }
+
     public function account(): Api\AccountApi
     {
         return $this->account;
