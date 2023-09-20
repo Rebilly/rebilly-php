@@ -10,7 +10,7 @@ This directory contains examples of how to use the **Rebilly PHP SDK for PHP** v
 
 ## Running the examples
 
-1. Install the package via Composer:  
+1. Install package dependencies via Composer:  
 
    ```bash
    composer install
