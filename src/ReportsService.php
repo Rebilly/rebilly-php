@@ -51,6 +51,11 @@ class ReportsService
         $this->subscriptions = new Api\SubscriptionsApi($this->client);
     }
 
+    public function getClient(): Client
+    {
+        return $this->client;
+    }
+
     public function customers(): Api\CustomersApi
     {
         return $this->customers;

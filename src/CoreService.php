@@ -153,6 +153,11 @@ class CoreService
         $this->usages = new Api\UsagesApi($this->client);
     }
 
+    public function getClient(): Client
+    {
+        return $this->client;
+    }
+
     public function allowlists(): Api\AllowlistsApi
     {
         return $this->allowlists;
