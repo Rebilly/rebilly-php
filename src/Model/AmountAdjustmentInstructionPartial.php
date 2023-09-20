@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class Partial implements InvoiceRetryAmountAdjustmentInstruction, JsonSerializable
+class AmountAdjustmentInstructionPartial implements InvoiceRetryAmountAdjustmentInstruction, JsonSerializable
 {
     public const TYPE_PERCENT = 'percent';
 
@@ -74,15 +74,15 @@ class Partial implements InvoiceRetryAmountAdjustmentInstruction, JsonSerializab
         return $this;
     }
 
-    public function getAfterApprovalPolicy(): ?PartialAfterApprovalPolicy
+    public function getAfterApprovalPolicy(): ?AmountAdjustmentInstructionPartialAfterApprovalPolicy
     {
         return $this->fields['afterApprovalPolicy'] ?? null;
     }
 
-    public function setAfterApprovalPolicy(null|PartialAfterApprovalPolicy|array $afterApprovalPolicy): static
+    public function setAfterApprovalPolicy(null|AmountAdjustmentInstructionPartialAfterApprovalPolicy|array $afterApprovalPolicy): static
     {
-        if ($afterApprovalPolicy !== null && !($afterApprovalPolicy instanceof PartialAfterApprovalPolicy)) {
-            $afterApprovalPolicy = PartialAfterApprovalPolicyFactory::from($afterApprovalPolicy);
+        if ($afterApprovalPolicy !== null && !($afterApprovalPolicy instanceof AmountAdjustmentInstructionPartialAfterApprovalPolicy)) {
+            $afterApprovalPolicy = AmountAdjustmentInstructionPartialAfterApprovalPolicyFactory::from($afterApprovalPolicy);
         }
 
         $this->fields['afterApprovalPolicy'] = $afterApprovalPolicy;

@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class Volume implements PlanPriceFormula, JsonSerializable
+class PlanFormulaVolume implements PlanPriceFormula, JsonSerializable
 {
     private array $fields = [];
 
@@ -43,7 +43,7 @@ class Volume implements PlanPriceFormula, JsonSerializable
     }
 
     /**
-     * @return StairstepBrackets[]
+     * @return PlanFormulaStairstepBrackets[]
      */
     public function getBrackets(): array
     {
@@ -51,12 +51,12 @@ class Volume implements PlanPriceFormula, JsonSerializable
     }
 
     /**
-     * @param array[]|StairstepBrackets[] $brackets
+     * @param array[]|PlanFormulaStairstepBrackets[] $brackets
      */
     public function setBrackets(array $brackets): static
     {
         $brackets = array_map(
-            fn ($value) => $value !== null ? ($value instanceof StairstepBrackets ? $value : StairstepBrackets::from($value)) : null,
+            fn ($value) => $value !== null ? ($value instanceof PlanFormulaStairstepBrackets ? $value : PlanFormulaStairstepBrackets::from($value)) : null,
             $brackets,
         );
 

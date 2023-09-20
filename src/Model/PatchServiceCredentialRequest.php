@@ -30,9 +30,6 @@ class PatchServiceCredentialRequest implements JsonSerializable
         if (array_key_exists('status', $data)) {
             $this->setStatus($data['status']);
         }
-        if (array_key_exists('omitFromAddress', $data)) {
-            $this->setOmitFromAddress($data['omitFromAddress']);
-        }
         if (array_key_exists('websiteId', $data)) {
             $this->setWebsiteId($data['websiteId']);
         }
@@ -44,6 +41,9 @@ class PatchServiceCredentialRequest implements JsonSerializable
         }
         if (array_key_exists('useStripe', $data)) {
             $this->setUseStripe($data['useStripe']);
+        }
+        if (array_key_exists('omitFromAddress', $data)) {
+            $this->setOmitFromAddress($data['omitFromAddress']);
         }
     }
 
@@ -60,18 +60,6 @@ class PatchServiceCredentialRequest implements JsonSerializable
     public function setStatus(string $status): static
     {
         $this->fields['status'] = $status;
-
-        return $this;
-    }
-
-    public function getOmitFromAddress(): ?bool
-    {
-        return $this->fields['omitFromAddress'] ?? null;
-    }
-
-    public function setOmitFromAddress(null|bool $omitFromAddress): static
-    {
-        $this->fields['omitFromAddress'] = $omitFromAddress;
 
         return $this;
     }
@@ -124,14 +112,23 @@ class PatchServiceCredentialRequest implements JsonSerializable
         return $this;
     }
 
+    public function getOmitFromAddress(): ?bool
+    {
+        return $this->fields['omitFromAddress'] ?? null;
+    }
+
+    public function setOmitFromAddress(null|bool $omitFromAddress): static
+    {
+        $this->fields['omitFromAddress'] = $omitFromAddress;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
         if (array_key_exists('status', $this->fields)) {
             $data['status'] = $this->fields['status'];
-        }
-        if (array_key_exists('omitFromAddress', $this->fields)) {
-            $data['omitFromAddress'] = $this->fields['omitFromAddress'];
         }
         if (array_key_exists('websiteId', $this->fields)) {
             $data['websiteId'] = $this->fields['websiteId'];
@@ -144,6 +141,9 @@ class PatchServiceCredentialRequest implements JsonSerializable
         }
         if (array_key_exists('useStripe', $this->fields)) {
             $data['useStripe'] = $this->fields['useStripe'];
+        }
+        if (array_key_exists('omitFromAddress', $this->fields)) {
+            $data['omitFromAddress'] = $this->fields['omitFromAddress'];
         }
 
         return $data;

@@ -17,6 +17,12 @@ use JsonSerializable;
 
 class Integration implements JsonSerializable
 {
+    public const SERVICE_GOOGLE_SHEETS = 'google-sheets';
+
+    public const SERVICE_KEAP_INFUSIONSOFT = 'keap-infusionsoft';
+
+    public const SERVICE_INTUIT_QUICKBOOKS = 'intuit-quickbooks';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -43,13 +49,6 @@ class Integration implements JsonSerializable
     public function getService(): ?string
     {
         return $this->fields['service'] ?? null;
-    }
-
-    public function setService(null|string $service): static
-    {
-        $this->fields['service'] = $service;
-
-        return $this;
     }
 
     public function getCount(): ?int
@@ -90,6 +89,13 @@ class Integration implements JsonSerializable
         }
 
         return $data;
+    }
+
+    private function setService(null|string $service): static
+    {
+        $this->fields['service'] = $service;
+
+        return $this;
     }
 
     private function setCount(null|int $count): static

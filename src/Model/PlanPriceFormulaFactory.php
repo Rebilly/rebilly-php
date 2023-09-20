@@ -20,11 +20,11 @@ class PlanPriceFormulaFactory
     public static function from(array $data = []): PlanPriceFormula
     {
         return match ($data['formula']) {
-            'fixed-fee' => FixedFee::from($data),
-            'flat-rate' => FlatRate::from($data),
-            'stairstep' => Stairstep::from($data),
-            'tiered' => Tiered::from($data),
-            'volume' => Volume::from($data),
+            'fixed-fee' => PlanFormulaFixedFee::from($data),
+            'flat-rate' => PlanFormulaFlatRate::from($data),
+            'stairstep' => PlanFormulaStairstep::from($data),
+            'tiered' => PlanFormulaTiered::from($data),
+            'volume' => PlanFormulaVolume::from($data),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

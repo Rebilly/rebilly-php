@@ -25,6 +25,12 @@ class OAuth2Credential implements ServiceCredential, JsonSerializable
 
     public const STATUS_DEACTIVATED = 'deactivated';
 
+    public const SERVICE_GOOGLE_SHEETS = 'google-sheets';
+
+    public const SERVICE_KEAP_INFUSIONSOFT = 'keap-infusionsoft';
+
+    public const SERVICE_INTUIT_QUICKBOOKS = 'intuit-quickbooks';
+
     public const ENCRYPTION_NONE = 'none';
 
     public const ENCRYPTION_TLS = 'tls';

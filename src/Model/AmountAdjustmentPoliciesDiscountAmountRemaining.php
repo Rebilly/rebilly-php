@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class DiscountAmountRemaining implements PartialAfterApprovalPolicy, JsonSerializable
+class AmountAdjustmentPoliciesDiscountAmountRemaining implements AmountAdjustmentInstructionPartialAfterApprovalPolicy, JsonSerializable
 {
     public function __construct()
     {

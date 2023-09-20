@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class PlanPeriod implements JsonSerializable
+class SubscriptionOrderPlanTrialPeriod implements JsonSerializable
 {
     public const UNIT_DAY = 'day';
 

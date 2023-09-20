@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class FlatRate implements PlanPriceFormula, JsonSerializable
+class PlanFormulaFixedFee implements PlanPriceFormula, JsonSerializable
 {
     private array $fields = [];
 
@@ -39,7 +39,7 @@ class FlatRate implements PlanPriceFormula, JsonSerializable
 
     public function getFormula(): string
     {
-        return 'flat-rate';
+        return 'fixed-fee';
     }
 
     public function getPrice(): float
@@ -71,7 +71,7 @@ class FlatRate implements PlanPriceFormula, JsonSerializable
     }
 
     /**
-     * @return StairstepBrackets[]
+     * @return PlanFormulaStairstepBrackets[]
      */
     public function getBrackets(): array
     {
@@ -79,12 +79,12 @@ class FlatRate implements PlanPriceFormula, JsonSerializable
     }
 
     /**
-     * @param array[]|StairstepBrackets[] $brackets
+     * @param array[]|PlanFormulaStairstepBrackets[] $brackets
      */
     public function setBrackets(array $brackets): static
     {
         $brackets = array_map(
-            fn ($value) => $value !== null ? ($value instanceof StairstepBrackets ? $value : StairstepBrackets::from($value)) : null,
+            fn ($value) => $value !== null ? ($value instanceof PlanFormulaStairstepBrackets ? $value : PlanFormulaStairstepBrackets::from($value)) : null,
             $brackets,
         );
 
@@ -96,7 +96,7 @@ class FlatRate implements PlanPriceFormula, JsonSerializable
     public function jsonSerialize(): array
     {
         $data = [
-            'formula' => 'flat-rate',
+            'formula' => 'fixed-fee',
         ];
         if (array_key_exists('price', $this->fields)) {
             $data['price'] = $this->fields['price'];

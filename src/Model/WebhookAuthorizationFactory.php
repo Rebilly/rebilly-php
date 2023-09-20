@@ -20,10 +20,10 @@ class WebhookAuthorizationFactory
     public static function from(array $data = []): WebhookAuthorization
     {
         return match ($data['type']) {
-            'basic' => Basic::from($data),
-            'digest' => Digest::from($data),
+            'basic' => WebhookAuthorizationBasic::from($data),
+            'digest' => WebhookAuthorizationDigest::from($data),
             'none' => WebhookAuthorizationNone::from($data),
-            'oauth1' => Oauth1::from($data),
+            'oauth1' => WebhookAuthorizationOAuth1::from($data),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

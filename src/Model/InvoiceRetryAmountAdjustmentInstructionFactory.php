@@ -20,8 +20,8 @@ class InvoiceRetryAmountAdjustmentInstructionFactory
     public static function from(array $data = []): InvoiceRetryAmountAdjustmentInstruction
     {
         return match ($data['method']) {
-            'none' => None::from($data),
-            'partial' => Partial::from($data),
+            'none' => AmountAdjustmentInstructionNone::from($data),
+            'partial' => AmountAdjustmentInstructionPartial::from($data),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }
