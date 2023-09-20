@@ -17,6 +17,10 @@ use JsonSerializable;
 
 class StripeSettings implements JsonSerializable
 {
+    public const SETUP_FUTURE_USAGE_OFF_SESSION = 'off_session';
+
+    public const SETUP_FUTURE_USAGE_ON_SESSION = 'on_session';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -32,6 +36,9 @@ class StripeSettings implements JsonSerializable
         }
         if (array_key_exists('copyCredentialsFrom', $data)) {
             $this->setCopyCredentialsFrom($data['copyCredentialsFrom']);
+        }
+        if (array_key_exists('setupFutureUsage', $data)) {
+            $this->setSetupFutureUsage($data['setupFutureUsage']);
         }
     }
 
@@ -88,6 +95,18 @@ class StripeSettings implements JsonSerializable
         return $this;
     }
 
+    public function getSetupFutureUsage(): ?string
+    {
+        return $this->fields['setupFutureUsage'] ?? null;
+    }
+
+    public function setSetupFutureUsage(null|string $setupFutureUsage): static
+    {
+        $this->fields['setupFutureUsage'] = $setupFutureUsage;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -102,6 +121,9 @@ class StripeSettings implements JsonSerializable
         }
         if (array_key_exists('copyCredentialsFrom', $this->fields)) {
             $data['copyCredentialsFrom'] = $this->fields['copyCredentialsFrom'];
+        }
+        if (array_key_exists('setupFutureUsage', $this->fields)) {
+            $data['setupFutureUsage'] = $this->fields['setupFutureUsage'];
         }
 
         return $data;
