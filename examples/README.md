@@ -10,16 +10,16 @@ This directory contains examples of how to use the **Rebilly PHP SDK for PHP** v
 
 ## Running the examples
 
-1. Go to the examples directory:  
-
-   ```bash
-   cd ./examples
-   ```
-
 1. Install the package via Composer:  
 
    ```bash
    composer install
+   ```
+
+1. Go to the examples directory:  
+
+   ```bash
+   cd ./examples
    ```
 
 1. Add the API key and organization ID to the client parameters in the *[purchase.php](./purchase.php)* and *[pagination.php](./pagination.php)* files.

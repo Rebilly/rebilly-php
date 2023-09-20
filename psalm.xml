@@ -10,6 +10,7 @@
 >
     <projectFiles>
         <directory name="src" />
+        <directory name="examples" />
         <ignoreFiles>
             <directory name="vendor" />
         </ignoreFiles>
@@ -26,5 +27,6 @@
         <PossiblyUnusedMethod errorLevel="suppress"/>
         <UnusedMethod errorLevel="suppress"/>
         <PossiblyUnusedReturnValue errorLevel="suppress"/>
+        <ForbiddenCode errorLevel="suppress"/>
     </issueHandlers>
 </psalm>
