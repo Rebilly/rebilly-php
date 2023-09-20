@@ -83,8 +83,8 @@ jobs:
 
       - name: Bundle SDK
         run: |
-          rm -rf ./sdk/{src,composer.json,.php-cs-fixer.php} && \
-          cp -r /tmp/sdk/{src,composer.json,.php-cs-fixer.php} ./sdk/
+          rm -rf ./sdk/{src,composer.json,.php-cs-fixer.php,psalm.xml} && \
+          cp -r /tmp/sdk/{src,composer.json,.php-cs-fixer.php,psalm.xml} ./sdk/
           php ./generator/backend/php-sdk-generator/remove-fqcns.php ./sdk && \
           php ./generator/backend/php-sdk-generator/remove-unused-models.php ./sdk
 

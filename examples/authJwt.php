@@ -15,7 +15,7 @@ use Rebilly\Sdk\Client;
 use Rebilly\Sdk\CoreService;
 use Rebilly\Sdk\Model\Product;
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 $client = new Client([
     'baseUrl' => Client::SANDBOX_HOST,

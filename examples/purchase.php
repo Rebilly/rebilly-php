@@ -14,12 +14,12 @@ use Rebilly\Sdk\CoreService;
 use Rebilly\Sdk\Exception\DataValidationException;
 use Rebilly\Sdk\Model\ContactObject;
 use Rebilly\Sdk\Model\Customer;
-use Rebilly\Sdk\Model\FlatRate;
 use Rebilly\Sdk\Model\OrderItem;
 use Rebilly\Sdk\Model\OrderItemPlan;
 use Rebilly\Sdk\Model\PaymentCardToken;
 use Rebilly\Sdk\Model\PaymentToken;
 use Rebilly\Sdk\Model\Plan;
+use Rebilly\Sdk\Model\PlanFormulaFlatRate;
 use Rebilly\Sdk\Model\PostTransactionRequest;
 use Rebilly\Sdk\Model\Product;
 use Rebilly\Sdk\Model\SubscriptionOrder;
@@ -27,7 +27,7 @@ use Rebilly\Sdk\Model\SubscriptionOrderPlanRecurringInterval;
 use Rebilly\Sdk\Model\Website;
 use Rebilly\Sdk\UsersService;
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 $client = new Client([
     'baseUrl' => Client::SANDBOX_HOST,
@@ -92,7 +92,7 @@ try {
         ->setName('Test plan')
         ->setCurrency('USD')
         ->setPricing(
-            FlatRate::from()
+            PlanFormulaFlatRate::from()
                 ->setPrice(9.99),
         )
         ->setRecurringInterval(

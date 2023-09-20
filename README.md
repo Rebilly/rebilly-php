@@ -46,11 +46,13 @@ $customer = Customer::from([])
     );
 
 try {
-  $customer = $client->customers()->create($form);
+  $customer = $coreService->customers()->create($form);
 } catch (DataValidationException $e) {
   var_dump($e->getValidationErrors());
 }
 ```
+
+For more see [examples directory](./examples/).
 
 ## Documentation
 
