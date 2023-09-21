@@ -21,6 +21,22 @@ class TagUntagRule implements JsonSerializable
 {
     public const EVENT_TYPE_AML_LIST_POSSIBLY_MATCHED = 'aml-list-possibly-matched';
 
+    public const EVENT_TYPE_COUPON_APPLICATION_REMOVED = 'coupon-application-removed';
+
+    public const EVENT_TYPE_COUPON_APPLIED = 'coupon-applied';
+
+    public const EVENT_TYPE_COUPON_EXPIRATION_MODIFIED = 'coupon-expiration-modified';
+
+    public const EVENT_TYPE_COUPON_EXPIRED = 'coupon-expired';
+
+    public const EVENT_TYPE_COUPON_ISSUED = 'coupon-issued';
+
+    public const EVENT_TYPE_COUPON_MODIFIED = 'coupon-modified';
+
+    public const EVENT_TYPE_COUPON_REDEEMED = 'coupon-redeemed';
+
+    public const EVENT_TYPE_COUPON_REDEMPTION_CANCELED = 'coupon-redemption-canceled';
+
     public const EVENT_TYPE_CUSTOMER_CREATED = 'customer-created';
 
     public const EVENT_TYPE_CUSTOMER_MERGED = 'customer-merged';
@@ -51,6 +67,8 @@ class TagUntagRule implements JsonSerializable
 
     public const EVENT_TYPE_KYC_DOCUMENT_ACCEPTED = 'kyc-document-accepted';
 
+    public const EVENT_TYPE_KYC_DOCUMENT_ARCHIVED = 'kyc-document-archived';
+
     public const EVENT_TYPE_KYC_DOCUMENT_CREATED = 'kyc-document-created';
 
     public const EVENT_TYPE_KYC_DOCUMENT_MODIFIED = 'kyc-document-modified';
@@ -58,8 +76,6 @@ class TagUntagRule implements JsonSerializable
     public const EVENT_TYPE_KYC_DOCUMENT_REJECTED = 'kyc-document-rejected';
 
     public const EVENT_TYPE_KYC_DOCUMENT_REVIEWED = 'kyc-document-reviewed';
-
-    public const EVENT_TYPE_KYC_DOCUMENT_ARCHIVED = 'kyc-document-archived';
 
     public const EVENT_TYPE_KYC_REQUEST_ATTEMPTED = 'kyc-request-attempted';
 
@@ -89,6 +105,8 @@ class TagUntagRule implements JsonSerializable
 
     public const EVENT_TYPE_SUBSCRIPTION_CANCELED = 'subscription-canceled';
 
+    public const EVENT_TYPE_SUBSCRIPTION_CHURNED = 'subscription-churned';
+
     public const EVENT_TYPE_SUBSCRIPTION_DOWNGRADED = 'subscription-downgraded';
 
     public const EVENT_TYPE_SUBSCRIPTION_PAUSED = 'subscription-paused';
@@ -100,8 +118,6 @@ class TagUntagRule implements JsonSerializable
     public const EVENT_TYPE_SUBSCRIPTION_RESUMED = 'subscription-resumed';
 
     public const EVENT_TYPE_SUBSCRIPTION_UPGRADED = 'subscription-upgraded';
-
-    public const EVENT_TYPE_SUBSCRIPTION_CHURNED = 'subscription-churned';
 
     public const EVENT_TYPE_TRANSACTION_AMOUNT_DISCREPANCY_FOUND = 'transaction-amount-discrepancy-found';
 
