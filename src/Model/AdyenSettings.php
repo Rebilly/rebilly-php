@@ -33,6 +33,9 @@ class AdyenSettings implements JsonSerializable
         if (array_key_exists('totalTaxAmount', $data)) {
             $this->setTotalTaxAmount($data['totalTaxAmount']);
         }
+        if (array_key_exists('enableMoto', $data)) {
+            $this->setEnableMoto($data['enableMoto']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -103,6 +106,18 @@ class AdyenSettings implements JsonSerializable
         return $this;
     }
 
+    public function getEnableMoto(): ?bool
+    {
+        return $this->fields['enableMoto'] ?? null;
+    }
+
+    public function setEnableMoto(null|bool $enableMoto): static
+    {
+        $this->fields['enableMoto'] = $enableMoto;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -117,6 +132,9 @@ class AdyenSettings implements JsonSerializable
         }
         if (array_key_exists('totalTaxAmount', $this->fields)) {
             $data['totalTaxAmount'] = $this->fields['totalTaxAmount'];
+        }
+        if (array_key_exists('enableMoto', $this->fields)) {
+            $data['enableMoto'] = $this->fields['enableMoto'];
         }
 
         return $data;
