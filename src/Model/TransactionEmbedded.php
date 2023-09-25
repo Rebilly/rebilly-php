@@ -45,6 +45,9 @@ class TransactionEmbedded implements JsonSerializable
         if (array_key_exists('organization', $data)) {
             $this->setOrganization($data['organization']);
         }
+        if (array_key_exists('dispute', $data)) {
+            $this->setDispute($data['dispute']);
+        }
         if (array_key_exists('paymentCard', $data)) {
             $this->setPaymentCard($data['paymentCard']);
         }
@@ -154,6 +157,18 @@ class TransactionEmbedded implements JsonSerializable
         return $this;
     }
 
+    public function getDispute(): ?object
+    {
+        return $this->fields['dispute'] ?? null;
+    }
+
+    public function setDispute(null|object $dispute): static
+    {
+        $this->fields['dispute'] = $dispute;
+
+        return $this;
+    }
+
     public function getPaymentCard(): ?object
     {
         return $this->fields['paymentCard'] ?? null;
@@ -204,6 +219,9 @@ class TransactionEmbedded implements JsonSerializable
         }
         if (array_key_exists('organization', $this->fields)) {
             $data['organization'] = $this->fields['organization'];
+        }
+        if (array_key_exists('dispute', $this->fields)) {
+            $data['dispute'] = $this->fields['dispute'];
         }
         if (array_key_exists('paymentCard', $this->fields)) {
             $data['paymentCard'] = $this->fields['paymentCard'];
