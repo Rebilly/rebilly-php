@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk;
 
+use Error;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\ClientInterface as GuzzleClientInterface;
 use GuzzleHttp\HandlerStack;
@@ -29,6 +30,9 @@ use Rebilly\Sdk\Middleware\BearerAuthentication;
 use Rebilly\Sdk\Middleware\ErrorHandler;
 use Rebilly\Sdk\Middleware\UserAgent;
 
+/**
+ * @mixin CombinedService
+ */
 final class Client implements GuzzleClientInterface, PsrClientInterface
 {
     public const BASE_HOST = 'https://api.rebilly.com';
@@ -89,6 +93,35 @@ final class Client implements GuzzleClientInterface, PsrClientInterface
         $config['handler'] = $stack;
 
         $this->client = new GuzzleClient($config);
+    }
+
+    public function __call(string $name, array $arguments): mixed
+    {
+        if (is_callable([$this->combined(), $name])) {
+            return $this->combined()->{$name}(...$arguments);
+        }
+
+        throw new Error(sprintf('Call to undefined method %s::%s().', __CLASS__, $name));
+    }
+
+    public function combined(): CombinedService
+    {
+        return new CombinedService(client: $this);
+    }
+
+    public function core(): CoreService
+    {
+        return new CoreService(client: $this);
+    }
+
+    public function users(): UsersService
+    {
+        return new UsersService(client: $this);
+    }
+
+    public function reports(): ReportsService
+    {
+        return new ReportsService(client: $this);
     }
 
     public function createUri($uri, array $params = []): Uri
