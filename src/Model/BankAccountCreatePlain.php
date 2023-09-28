@@ -52,6 +52,9 @@ abstract class BankAccountCreatePlain implements PaymentInstruction, PostPayment
         if (array_key_exists('token', $data)) {
             $this->setToken($data['token']);
         }
+        if (array_key_exists('revision', $data)) {
+            $this->setRevision($data['revision']);
+        }
         if (array_key_exists('reference', $data)) {
             $this->setReference($data['reference']);
         }
@@ -207,6 +210,11 @@ abstract class BankAccountCreatePlain implements PaymentInstruction, PostPayment
         $this->fields['token'] = $token;
 
         return $this;
+    }
+
+    public function getRevision(): ?int
+    {
+        return $this->fields['revision'] ?? null;
     }
 
     public function getReference(): ?string
@@ -393,6 +401,9 @@ abstract class BankAccountCreatePlain implements PaymentInstruction, PostPayment
         if (array_key_exists('token', $this->fields)) {
             $data['token'] = $this->fields['token'];
         }
+        if (array_key_exists('revision', $this->fields)) {
+            $data['revision'] = $this->fields['revision'];
+        }
         if (array_key_exists('reference', $this->fields)) {
             $data['reference'] = $this->fields['reference'];
         }
@@ -456,6 +467,13 @@ abstract class BankAccountCreatePlain implements PaymentInstruction, PostPayment
         }
 
         $this->fields['updatedTime'] = $updatedTime;
+
+        return $this;
+    }
+
+    private function setRevision(null|int $revision): static
+    {
+        $this->fields['revision'] = $revision;
 
         return $this;
     }

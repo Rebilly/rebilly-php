@@ -342,6 +342,9 @@ class PaymentInstrumentCreateToken implements PostPaymentInstrumentRequest, Json
         if (array_key_exists('method', $data)) {
             $this->setMethod($data['method']);
         }
+        if (array_key_exists('revision', $data)) {
+            $this->setRevision($data['revision']);
+        }
         if (array_key_exists('referenceData', $data)) {
             $this->setReferenceData($data['referenceData']);
         }
@@ -460,6 +463,11 @@ class PaymentInstrumentCreateToken implements PostPaymentInstrumentRequest, Json
         $this->fields['method'] = $method;
 
         return $this;
+    }
+
+    public function getRevision(): ?int
+    {
+        return $this->fields['revision'] ?? null;
     }
 
     /**
@@ -605,6 +613,9 @@ class PaymentInstrumentCreateToken implements PostPaymentInstrumentRequest, Json
         if (array_key_exists('method', $this->fields)) {
             $data['method'] = $this->fields['method'];
         }
+        if (array_key_exists('revision', $this->fields)) {
+            $data['revision'] = $this->fields['revision'];
+        }
         if (array_key_exists('referenceData', $this->fields)) {
             $data['referenceData'] = $this->fields['referenceData'];
         }
@@ -652,6 +663,13 @@ class PaymentInstrumentCreateToken implements PostPaymentInstrumentRequest, Json
         }
 
         $this->fields['updatedTime'] = $updatedTime;
+
+        return $this;
+    }
+
+    private function setRevision(null|int $revision): static
+    {
+        $this->fields['revision'] = $revision;
 
         return $this;
     }

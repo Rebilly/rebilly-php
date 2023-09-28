@@ -36,4 +36,6 @@ interface PaymentInstrument
     public function getRiskMetadata(): ?RiskMetadata;
 
     public function setRiskMetadata(null|RiskMetadata|array $riskMetadata): static;
+
+    public function getRevision(): ?int;
 }

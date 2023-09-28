@@ -78,6 +78,9 @@ class PayPalAccount implements PaymentInstrument, PostPaymentInstrumentRequest, 
         if (array_key_exists('riskMetadata', $data)) {
             $this->setRiskMetadata($data['riskMetadata']);
         }
+        if (array_key_exists('revision', $data)) {
+            $this->setRevision($data['revision']);
+        }
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
@@ -255,6 +258,11 @@ class PayPalAccount implements PaymentInstrument, PostPaymentInstrumentRequest, 
         $this->fields['riskMetadata'] = $riskMetadata;
 
         return $this;
+    }
+
+    public function getRevision(): ?int
+    {
+        return $this->fields['revision'] ?? null;
     }
 
     /**
@@ -535,6 +543,9 @@ class PayPalAccount implements PaymentInstrument, PostPaymentInstrumentRequest, 
         if (array_key_exists('riskMetadata', $this->fields)) {
             $data['riskMetadata'] = $this->fields['riskMetadata']?->jsonSerialize();
         }
+        if (array_key_exists('revision', $this->fields)) {
+            $data['revision'] = $this->fields['revision'];
+        }
         if (array_key_exists('_links', $this->fields)) {
             $data['_links'] = $this->fields['_links'];
         }
@@ -654,6 +665,13 @@ class PayPalAccount implements PaymentInstrument, PostPaymentInstrumentRequest, 
     private function setStickyGatewayAccountId(null|string $stickyGatewayAccountId): static
     {
         $this->fields['stickyGatewayAccountId'] = $stickyGatewayAccountId;
+
+        return $this;
+    }
+
+    private function setRevision(null|int $revision): static
+    {
+        $this->fields['revision'] = $revision;
 
         return $this;
     }

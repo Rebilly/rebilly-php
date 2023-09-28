@@ -30,8 +30,8 @@ class AdyenSettings implements JsonSerializable
         if (array_key_exists('splitPayments', $data)) {
             $this->setSplitPayments($data['splitPayments']);
         }
-        if (array_key_exists('totalTaxAmount', $data)) {
-            $this->setTotalTaxAmount($data['totalTaxAmount']);
+        if (array_key_exists('totalTaxRate', $data)) {
+            $this->setTotalTaxRate($data['totalTaxRate']);
         }
         if (array_key_exists('enableMoto', $data)) {
             $this->setEnableMoto($data['enableMoto']);
@@ -90,18 +90,18 @@ class AdyenSettings implements JsonSerializable
         return $this;
     }
 
-    public function getTotalTaxAmount(): ?float
+    public function getTotalTaxRate(): ?float
     {
-        return $this->fields['totalTaxAmount'] ?? null;
+        return $this->fields['totalTaxRate'] ?? null;
     }
 
-    public function setTotalTaxAmount(null|float|string $totalTaxAmount): static
+    public function setTotalTaxRate(null|float|string $totalTaxRate): static
     {
-        if (is_string($totalTaxAmount)) {
-            $totalTaxAmount = (float) $totalTaxAmount;
+        if (is_string($totalTaxRate)) {
+            $totalTaxRate = (float) $totalTaxRate;
         }
 
-        $this->fields['totalTaxAmount'] = $totalTaxAmount;
+        $this->fields['totalTaxRate'] = $totalTaxRate;
 
         return $this;
     }
@@ -130,8 +130,8 @@ class AdyenSettings implements JsonSerializable
         if (array_key_exists('splitPayments', $this->fields)) {
             $data['splitPayments'] = $this->fields['splitPayments'];
         }
-        if (array_key_exists('totalTaxAmount', $this->fields)) {
-            $data['totalTaxAmount'] = $this->fields['totalTaxAmount'];
+        if (array_key_exists('totalTaxRate', $this->fields)) {
+            $data['totalTaxRate'] = $this->fields['totalTaxRate'];
         }
         if (array_key_exists('enableMoto', $this->fields)) {
             $data['enableMoto'] = $this->fields['enableMoto'];

@@ -117,4 +117,42 @@ class AmlChecksApi
 
         return AmlCheck::from($data);
     }
+
+    /**
+     * @return AmlCheck
+     */
+    public function startReview(
+        string $id,
+    ): AmlCheck {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/aml-checks/{id}/start-review');
+
+        $request = new Request('POST', $uri);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return AmlCheck::from($data);
+    }
+
+    /**
+     * @return AmlCheck
+     */
+    public function stopAmlCheckReview(
+        string $id,
+    ): AmlCheck {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/aml-checks/{id}/stop-review');
+
+        $request = new Request('POST', $uri);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return AmlCheck::from($data);
+    }
 }

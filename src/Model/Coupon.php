@@ -53,6 +53,9 @@ class Coupon implements JsonSerializable
         if (array_key_exists('expiredTime', $data)) {
             $this->setExpiredTime($data['expiredTime']);
         }
+        if (array_key_exists('revision', $data)) {
+            $this->setRevision($data['revision']);
+        }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
         }
@@ -167,6 +170,11 @@ class Coupon implements JsonSerializable
         return $this;
     }
 
+    public function getRevision(): ?int
+    {
+        return $this->fields['revision'] ?? null;
+    }
+
     public function getCreatedTime(): ?DateTimeImmutable
     {
         return $this->fields['createdTime'] ?? null;
@@ -222,6 +230,9 @@ class Coupon implements JsonSerializable
         if (array_key_exists('expiredTime', $this->fields)) {
             $data['expiredTime'] = $this->fields['expiredTime']?->format(DateTimeInterface::RFC3339);
         }
+        if (array_key_exists('revision', $this->fields)) {
+            $data['revision'] = $this->fields['revision'];
+        }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
         }
@@ -252,6 +263,13 @@ class Coupon implements JsonSerializable
     private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
+
+        return $this;
+    }
+
+    private function setRevision(null|int $revision): static
+    {
+        $this->fields['revision'] = $revision;
 
         return $this;
     }
