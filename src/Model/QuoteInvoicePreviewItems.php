@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use DateTimeImmutable;
-use DateTimeInterface;
 use JsonSerializable;
 
 class QuoteInvoicePreviewItems implements JsonSerializable
@@ -45,17 +43,26 @@ class QuoteInvoicePreviewItems implements JsonSerializable
         if (array_key_exists('quantity', $data)) {
             $this->setQuantity($data['quantity']);
         }
-        if (array_key_exists('price', $data)) {
-            $this->setPrice($data['price']);
+        if (array_key_exists('period', $data)) {
+            $this->setPeriod($data['period']);
         }
-        if (array_key_exists('periodStartTime', $data)) {
-            $this->setPeriodStartTime($data['periodStartTime']);
+        if (array_key_exists('setupUnitPrice', $data)) {
+            $this->setSetupUnitPrice($data['setupUnitPrice']);
         }
-        if (array_key_exists('periodEndTime', $data)) {
-            $this->setPeriodEndTime($data['periodEndTime']);
+        if (array_key_exists('trialUnitPrice', $data)) {
+            $this->setTrialUnitPrice($data['trialUnitPrice']);
         }
-        if (array_key_exists('tax', $data)) {
-            $this->setTax($data['tax']);
+        if (array_key_exists('trialPeriod', $data)) {
+            $this->setTrialPeriod($data['trialPeriod']);
+        }
+        if (array_key_exists('taxAmount', $data)) {
+            $this->setTaxAmount($data['taxAmount']);
+        }
+        if (array_key_exists('setupTaxAmount', $data)) {
+            $this->setSetupTaxAmount($data['setupTaxAmount']);
+        }
+        if (array_key_exists('trialTaxAmount', $data)) {
+            $this->setTrialTaxAmount($data['trialTaxAmount']);
         }
     }
 
@@ -140,55 +147,106 @@ class QuoteInvoicePreviewItems implements JsonSerializable
         return $this;
     }
 
-    public function getPrice(): ?float
+    public function getPeriod(): ?string
     {
-        return $this->fields['price'] ?? null;
+        return $this->fields['period'] ?? null;
     }
 
-    public function getPeriodStartTime(): ?DateTimeImmutable
+    public function setPeriod(null|string $period): static
     {
-        return $this->fields['periodStartTime'] ?? null;
-    }
-
-    public function setPeriodStartTime(null|DateTimeImmutable|string $periodStartTime): static
-    {
-        if ($periodStartTime !== null && !($periodStartTime instanceof DateTimeImmutable)) {
-            $periodStartTime = new DateTimeImmutable($periodStartTime);
-        }
-
-        $this->fields['periodStartTime'] = $periodStartTime;
+        $this->fields['period'] = $period;
 
         return $this;
     }
 
-    public function getPeriodEndTime(): ?DateTimeImmutable
+    public function getSetupUnitPrice(): ?float
     {
-        return $this->fields['periodEndTime'] ?? null;
+        return $this->fields['setupUnitPrice'] ?? null;
     }
 
-    public function setPeriodEndTime(null|DateTimeImmutable|string $periodEndTime): static
+    public function setSetupUnitPrice(null|float|string $setupUnitPrice): static
     {
-        if ($periodEndTime !== null && !($periodEndTime instanceof DateTimeImmutable)) {
-            $periodEndTime = new DateTimeImmutable($periodEndTime);
+        if (is_string($setupUnitPrice)) {
+            $setupUnitPrice = (float) $setupUnitPrice;
         }
 
-        $this->fields['periodEndTime'] = $periodEndTime;
+        $this->fields['setupUnitPrice'] = $setupUnitPrice;
 
         return $this;
     }
 
-    public function getTax(): ?InvoiceTaxItem
+    public function getTrialUnitPrice(): ?float
     {
-        return $this->fields['tax'] ?? null;
+        return $this->fields['trialUnitPrice'] ?? null;
     }
 
-    public function setTax(null|InvoiceTaxItem|array $tax): static
+    public function setTrialUnitPrice(null|float|string $trialUnitPrice): static
     {
-        if ($tax !== null && !($tax instanceof InvoiceTaxItem)) {
-            $tax = InvoiceTaxItem::from($tax);
+        if (is_string($trialUnitPrice)) {
+            $trialUnitPrice = (float) $trialUnitPrice;
         }
 
-        $this->fields['tax'] = $tax;
+        $this->fields['trialUnitPrice'] = $trialUnitPrice;
+
+        return $this;
+    }
+
+    public function getTrialPeriod(): ?string
+    {
+        return $this->fields['trialPeriod'] ?? null;
+    }
+
+    public function setTrialPeriod(null|string $trialPeriod): static
+    {
+        $this->fields['trialPeriod'] = $trialPeriod;
+
+        return $this;
+    }
+
+    public function getTaxAmount(): ?float
+    {
+        return $this->fields['taxAmount'] ?? null;
+    }
+
+    public function setTaxAmount(null|float|string $taxAmount): static
+    {
+        if (is_string($taxAmount)) {
+            $taxAmount = (float) $taxAmount;
+        }
+
+        $this->fields['taxAmount'] = $taxAmount;
+
+        return $this;
+    }
+
+    public function getSetupTaxAmount(): ?float
+    {
+        return $this->fields['setupTaxAmount'] ?? null;
+    }
+
+    public function setSetupTaxAmount(null|float|string $setupTaxAmount): static
+    {
+        if (is_string($setupTaxAmount)) {
+            $setupTaxAmount = (float) $setupTaxAmount;
+        }
+
+        $this->fields['setupTaxAmount'] = $setupTaxAmount;
+
+        return $this;
+    }
+
+    public function getTrialTaxAmount(): ?float
+    {
+        return $this->fields['trialTaxAmount'] ?? null;
+    }
+
+    public function setTrialTaxAmount(null|float|string $trialTaxAmount): static
+    {
+        if (is_string($trialTaxAmount)) {
+            $trialTaxAmount = (float) $trialTaxAmount;
+        }
+
+        $this->fields['trialTaxAmount'] = $trialTaxAmount;
 
         return $this;
     }
@@ -214,30 +272,28 @@ class QuoteInvoicePreviewItems implements JsonSerializable
         if (array_key_exists('quantity', $this->fields)) {
             $data['quantity'] = $this->fields['quantity'];
         }
-        if (array_key_exists('price', $this->fields)) {
-            $data['price'] = $this->fields['price'];
+        if (array_key_exists('period', $this->fields)) {
+            $data['period'] = $this->fields['period'];
         }
-        if (array_key_exists('periodStartTime', $this->fields)) {
-            $data['periodStartTime'] = $this->fields['periodStartTime']?->format(DateTimeInterface::RFC3339);
+        if (array_key_exists('setupUnitPrice', $this->fields)) {
+            $data['setupUnitPrice'] = $this->fields['setupUnitPrice'];
         }
-        if (array_key_exists('periodEndTime', $this->fields)) {
-            $data['periodEndTime'] = $this->fields['periodEndTime']?->format(DateTimeInterface::RFC3339);
+        if (array_key_exists('trialUnitPrice', $this->fields)) {
+            $data['trialUnitPrice'] = $this->fields['trialUnitPrice'];
         }
-        if (array_key_exists('tax', $this->fields)) {
-            $data['tax'] = $this->fields['tax']?->jsonSerialize();
+        if (array_key_exists('trialPeriod', $this->fields)) {
+            $data['trialPeriod'] = $this->fields['trialPeriod'];
+        }
+        if (array_key_exists('taxAmount', $this->fields)) {
+            $data['taxAmount'] = $this->fields['taxAmount'];
+        }
+        if (array_key_exists('setupTaxAmount', $this->fields)) {
+            $data['setupTaxAmount'] = $this->fields['setupTaxAmount'];
+        }
+        if (array_key_exists('trialTaxAmount', $this->fields)) {
+            $data['trialTaxAmount'] = $this->fields['trialTaxAmount'];
         }
 
         return $data;
-    }
-
-    private function setPrice(null|float|string $price): static
-    {
-        if (is_string($price)) {
-            $price = (float) $price;
-        }
-
-        $this->fields['price'] = $price;
-
-        return $this;
     }
 }
