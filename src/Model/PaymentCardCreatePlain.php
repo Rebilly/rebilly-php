@@ -54,26 +54,11 @@ class PaymentCardCreatePlain implements PaymentInstruction, PostPaymentInstrumen
         if (array_key_exists('useAsBackup', $data)) {
             $this->setUseAsBackup($data['useAsBackup']);
         }
-        if (array_key_exists('receivedBy', $data)) {
-            $this->setReceivedBy($data['receivedBy']);
-        }
-        if (array_key_exists('updatedTime', $data)) {
-            $this->setUpdatedTime($data['updatedTime']);
-        }
         if (array_key_exists('methods', $data)) {
             $this->setMethods($data['methods']);
         }
-        if (array_key_exists('paymentInstrumentId', $data)) {
-            $this->setPaymentInstrumentId($data['paymentInstrumentId']);
-        }
-        if (array_key_exists('token', $data)) {
-            $this->setToken($data['token']);
-        }
         if (array_key_exists('reference', $data)) {
             $this->setReference($data['reference']);
-        }
-        if (array_key_exists('referenceData', $data)) {
-            $this->setReferenceData($data['referenceData']);
         }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
@@ -84,11 +69,29 @@ class PaymentCardCreatePlain implements PaymentInstruction, PostPaymentInstrumen
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
         }
-        if (array_key_exists('stickyGatewayAccountId', $data)) {
-            $this->setStickyGatewayAccountId($data['stickyGatewayAccountId']);
-        }
         if (array_key_exists('_embedded', $data)) {
             $this->setEmbedded($data['_embedded']);
+        }
+        if (array_key_exists('receivedBy', $data)) {
+            $this->setReceivedBy($data['receivedBy']);
+        }
+        if (array_key_exists('updatedTime', $data)) {
+            $this->setUpdatedTime($data['updatedTime']);
+        }
+        if (array_key_exists('paymentInstrumentId', $data)) {
+            $this->setPaymentInstrumentId($data['paymentInstrumentId']);
+        }
+        if (array_key_exists('token', $data)) {
+            $this->setToken($data['token']);
+        }
+        if (array_key_exists('revision', $data)) {
+            $this->setRevision($data['revision']);
+        }
+        if (array_key_exists('referenceData', $data)) {
+            $this->setReferenceData($data['referenceData']);
+        }
+        if (array_key_exists('stickyGatewayAccountId', $data)) {
+            $this->setStickyGatewayAccountId($data['stickyGatewayAccountId']);
         }
         if (array_key_exists('username', $data)) {
             $this->setUsername($data['username']);
@@ -224,23 +227,6 @@ class PaymentCardCreatePlain implements PaymentInstruction, PostPaymentInstrumen
         return $this;
     }
 
-    public function getReceivedBy(): ?string
-    {
-        return $this->fields['receivedBy'] ?? null;
-    }
-
-    public function setReceivedBy(null|string $receivedBy): static
-    {
-        $this->fields['receivedBy'] = $receivedBy;
-
-        return $this;
-    }
-
-    public function getUpdatedTime(): ?DateTimeImmutable
-    {
-        return $this->fields['updatedTime'] ?? null;
-    }
-
     /**
      * @return null|string[]
      */
@@ -262,6 +248,69 @@ class PaymentCardCreatePlain implements PaymentInstruction, PostPaymentInstrumen
         $this->fields['methods'] = $methods;
 
         return $this;
+    }
+
+    public function getReference(): ?string
+    {
+        return $this->fields['reference'] ?? null;
+    }
+
+    public function setReference(null|string $reference): static
+    {
+        $this->fields['reference'] = $reference;
+
+        return $this;
+    }
+
+    public function getCreatedTime(): ?DateTimeImmutable
+    {
+        return $this->fields['createdTime'] ?? null;
+    }
+
+    /**
+     * @return null|ResourceLink[]
+     */
+    public function getLinks(): ?array
+    {
+        return $this->fields['_links'] ?? null;
+    }
+
+    public function getId(): ?string
+    {
+        return $this->fields['id'] ?? null;
+    }
+
+    public function getEmbedded(): ?BankAccountEmbedded
+    {
+        return $this->fields['_embedded'] ?? null;
+    }
+
+    public function setEmbedded(null|BankAccountEmbedded|array $embedded): static
+    {
+        if ($embedded !== null && !($embedded instanceof BankAccountEmbedded)) {
+            $embedded = BankAccountEmbedded::from($embedded);
+        }
+
+        $this->fields['_embedded'] = $embedded;
+
+        return $this;
+    }
+
+    public function getReceivedBy(): ?string
+    {
+        return $this->fields['receivedBy'] ?? null;
+    }
+
+    public function setReceivedBy(null|string $receivedBy): static
+    {
+        $this->fields['receivedBy'] = $receivedBy;
+
+        return $this;
+    }
+
+    public function getUpdatedTime(): ?DateTimeImmutable
+    {
+        return $this->fields['updatedTime'] ?? null;
     }
 
     public function getPaymentInstrumentId(): string
@@ -288,16 +337,9 @@ class PaymentCardCreatePlain implements PaymentInstruction, PostPaymentInstrumen
         return $this;
     }
 
-    public function getReference(): ?string
+    public function getRevision(): ?int
     {
-        return $this->fields['reference'] ?? null;
-    }
-
-    public function setReference(null|string $reference): static
-    {
-        $this->fields['reference'] = $reference;
-
-        return $this;
+        return $this->fields['revision'] ?? null;
     }
 
     /**
@@ -318,43 +360,9 @@ class PaymentCardCreatePlain implements PaymentInstruction, PostPaymentInstrumen
         return $this;
     }
 
-    public function getCreatedTime(): ?DateTimeImmutable
-    {
-        return $this->fields['createdTime'] ?? null;
-    }
-
-    /**
-     * @return null|ResourceLink[]
-     */
-    public function getLinks(): ?array
-    {
-        return $this->fields['_links'] ?? null;
-    }
-
-    public function getId(): ?string
-    {
-        return $this->fields['id'] ?? null;
-    }
-
     public function getStickyGatewayAccountId(): ?string
     {
         return $this->fields['stickyGatewayAccountId'] ?? null;
-    }
-
-    public function getEmbedded(): ?BankAccountEmbedded
-    {
-        return $this->fields['_embedded'] ?? null;
-    }
-
-    public function setEmbedded(null|BankAccountEmbedded|array $embedded): static
-    {
-        if ($embedded !== null && !($embedded instanceof BankAccountEmbedded)) {
-            $embedded = BankAccountEmbedded::from($embedded);
-        }
-
-        $this->fields['_embedded'] = $embedded;
-
-        return $this;
     }
 
     public function getUsername(): ?string
@@ -399,26 +407,11 @@ class PaymentCardCreatePlain implements PaymentInstruction, PostPaymentInstrumen
         if (array_key_exists('useAsBackup', $this->fields)) {
             $data['useAsBackup'] = $this->fields['useAsBackup'];
         }
-        if (array_key_exists('receivedBy', $this->fields)) {
-            $data['receivedBy'] = $this->fields['receivedBy'];
-        }
-        if (array_key_exists('updatedTime', $this->fields)) {
-            $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
-        }
         if (array_key_exists('methods', $this->fields)) {
             $data['methods'] = $this->fields['methods'];
         }
-        if (array_key_exists('paymentInstrumentId', $this->fields)) {
-            $data['paymentInstrumentId'] = $this->fields['paymentInstrumentId'];
-        }
-        if (array_key_exists('token', $this->fields)) {
-            $data['token'] = $this->fields['token'];
-        }
         if (array_key_exists('reference', $this->fields)) {
             $data['reference'] = $this->fields['reference'];
-        }
-        if (array_key_exists('referenceData', $this->fields)) {
-            $data['referenceData'] = $this->fields['referenceData'];
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
@@ -429,11 +422,29 @@ class PaymentCardCreatePlain implements PaymentInstruction, PostPaymentInstrumen
         if (array_key_exists('id', $this->fields)) {
             $data['id'] = $this->fields['id'];
         }
-        if (array_key_exists('stickyGatewayAccountId', $this->fields)) {
-            $data['stickyGatewayAccountId'] = $this->fields['stickyGatewayAccountId'];
-        }
         if (array_key_exists('_embedded', $this->fields)) {
             $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();
+        }
+        if (array_key_exists('receivedBy', $this->fields)) {
+            $data['receivedBy'] = $this->fields['receivedBy'];
+        }
+        if (array_key_exists('updatedTime', $this->fields)) {
+            $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
+        }
+        if (array_key_exists('paymentInstrumentId', $this->fields)) {
+            $data['paymentInstrumentId'] = $this->fields['paymentInstrumentId'];
+        }
+        if (array_key_exists('token', $this->fields)) {
+            $data['token'] = $this->fields['token'];
+        }
+        if (array_key_exists('revision', $this->fields)) {
+            $data['revision'] = $this->fields['revision'];
+        }
+        if (array_key_exists('referenceData', $this->fields)) {
+            $data['referenceData'] = $this->fields['referenceData'];
+        }
+        if (array_key_exists('stickyGatewayAccountId', $this->fields)) {
+            $data['stickyGatewayAccountId'] = $this->fields['stickyGatewayAccountId'];
         }
         if (array_key_exists('username', $this->fields)) {
             $data['username'] = $this->fields['username'];
@@ -443,17 +454,6 @@ class PaymentCardCreatePlain implements PaymentInstruction, PostPaymentInstrumen
         }
 
         return $data;
-    }
-
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
-    {
-        if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
-            $updatedTime = new DateTimeImmutable($updatedTime);
-        }
-
-        $this->fields['updatedTime'] = $updatedTime;
-
-        return $this;
     }
 
     private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
@@ -485,6 +485,24 @@ class PaymentCardCreatePlain implements PaymentInstruction, PostPaymentInstrumen
     private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
+
+        return $this;
+    }
+
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
+    {
+        if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
+            $updatedTime = new DateTimeImmutable($updatedTime);
+        }
+
+        $this->fields['updatedTime'] = $updatedTime;
+
+        return $this;
+    }
+
+    private function setRevision(null|int $revision): static
+    {
+        $this->fields['revision'] = $revision;
 
         return $this;
     }

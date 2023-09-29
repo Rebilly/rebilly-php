@@ -27,6 +27,8 @@ class AmlCheck implements JsonSerializable
 
     public const STATUS_PENDING_REVIEW = 'pending-review';
 
+    public const STATUS_IN_REVIEW = 'in-review';
+
     public const STATUS_NO_MATCH = 'no-match';
 
     public const STATUS_CONFIRMED_MATCH = 'confirmed-match';
@@ -54,6 +56,9 @@ class AmlCheck implements JsonSerializable
         }
         if (array_key_exists('reviewerName', $data)) {
             $this->setReviewerName($data['reviewerName']);
+        }
+        if (array_key_exists('reviewStartTime', $data)) {
+            $this->setReviewStartTime($data['reviewStartTime']);
         }
         if (array_key_exists('reviewTime', $data)) {
             $this->setReviewTime($data['reviewTime']);
@@ -140,6 +145,22 @@ class AmlCheck implements JsonSerializable
     public function setReviewerName(null|string $reviewerName): static
     {
         $this->fields['reviewerName'] = $reviewerName;
+
+        return $this;
+    }
+
+    public function getReviewStartTime(): ?DateTimeImmutable
+    {
+        return $this->fields['reviewStartTime'] ?? null;
+    }
+
+    public function setReviewStartTime(null|DateTimeImmutable|string $reviewStartTime): static
+    {
+        if ($reviewStartTime !== null && !($reviewStartTime instanceof DateTimeImmutable)) {
+            $reviewStartTime = new DateTimeImmutable($reviewStartTime);
+        }
+
+        $this->fields['reviewStartTime'] = $reviewStartTime;
 
         return $this;
     }
@@ -279,6 +300,9 @@ class AmlCheck implements JsonSerializable
         }
         if (array_key_exists('reviewerName', $this->fields)) {
             $data['reviewerName'] = $this->fields['reviewerName'];
+        }
+        if (array_key_exists('reviewStartTime', $this->fields)) {
+            $data['reviewStartTime'] = $this->fields['reviewStartTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('reviewTime', $this->fields)) {
             $data['reviewTime'] = $this->fields['reviewTime']?->format(DateTimeInterface::RFC3339);

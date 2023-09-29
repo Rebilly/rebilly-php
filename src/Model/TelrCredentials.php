@@ -33,6 +33,9 @@ class TelrCredentials implements JsonSerializable
         if (array_key_exists('serviceApiKey', $data)) {
             $this->setServiceApiKey($data['serviceApiKey']);
         }
+        if (array_key_exists('remoteApiKey', $data)) {
+            $this->setRemoteApiKey($data['remoteApiKey']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -88,6 +91,18 @@ class TelrCredentials implements JsonSerializable
         return $this;
     }
 
+    public function getRemoteApiKey(): ?string
+    {
+        return $this->fields['remoteApiKey'] ?? null;
+    }
+
+    public function setRemoteApiKey(null|string $remoteApiKey): static
+    {
+        $this->fields['remoteApiKey'] = $remoteApiKey;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -102,6 +117,9 @@ class TelrCredentials implements JsonSerializable
         }
         if (array_key_exists('serviceApiKey', $this->fields)) {
             $data['serviceApiKey'] = $this->fields['serviceApiKey'];
+        }
+        if (array_key_exists('remoteApiKey', $this->fields)) {
+            $data['remoteApiKey'] = $this->fields['remoteApiKey'];
         }
 
         return $data;
