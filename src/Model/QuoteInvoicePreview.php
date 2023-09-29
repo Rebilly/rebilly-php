@@ -24,20 +24,11 @@ class QuoteInvoicePreview implements JsonSerializable
         if (array_key_exists('currency', $data)) {
             $this->setCurrency($data['currency']);
         }
-        if (array_key_exists('amount', $data)) {
-            $this->setAmount($data['amount']);
+        if (array_key_exists('initialAmounts', $data)) {
+            $this->setInitialAmounts($data['initialAmounts']);
         }
-        if (array_key_exists('subtotalAmount', $data)) {
-            $this->setSubtotalAmount($data['subtotalAmount']);
-        }
-        if (array_key_exists('discountAmount', $data)) {
-            $this->setDiscountAmount($data['discountAmount']);
-        }
-        if (array_key_exists('shippingAmount', $data)) {
-            $this->setShippingAmount($data['shippingAmount']);
-        }
-        if (array_key_exists('taxAmount', $data)) {
-            $this->setTaxAmount($data['taxAmount']);
+        if (array_key_exists('recurringAmounts', $data)) {
+            $this->setRecurringAmounts($data['recurringAmounts']);
         }
         if (array_key_exists('items', $data)) {
             $this->setItems($data['items']);
@@ -61,82 +52,34 @@ class QuoteInvoicePreview implements JsonSerializable
         return $this;
     }
 
-    public function getAmount(): ?float
+    public function getInitialAmounts(): ?QuoteInvoicePreviewInitialAmounts
     {
-        return $this->fields['amount'] ?? null;
+        return $this->fields['initialAmounts'] ?? null;
     }
 
-    public function setAmount(null|float|string $amount): static
+    public function setInitialAmounts(null|QuoteInvoicePreviewInitialAmounts|array $initialAmounts): static
     {
-        if (is_string($amount)) {
-            $amount = (float) $amount;
+        if ($initialAmounts !== null && !($initialAmounts instanceof QuoteInvoicePreviewInitialAmounts)) {
+            $initialAmounts = QuoteInvoicePreviewInitialAmounts::from($initialAmounts);
         }
 
-        $this->fields['amount'] = $amount;
+        $this->fields['initialAmounts'] = $initialAmounts;
 
         return $this;
     }
 
-    public function getSubtotalAmount(): ?float
+    public function getRecurringAmounts(): ?QuoteInvoicePreviewRecurringAmounts
     {
-        return $this->fields['subtotalAmount'] ?? null;
+        return $this->fields['recurringAmounts'] ?? null;
     }
 
-    public function setSubtotalAmount(null|float|string $subtotalAmount): static
+    public function setRecurringAmounts(null|QuoteInvoicePreviewRecurringAmounts|array $recurringAmounts): static
     {
-        if (is_string($subtotalAmount)) {
-            $subtotalAmount = (float) $subtotalAmount;
+        if ($recurringAmounts !== null && !($recurringAmounts instanceof QuoteInvoicePreviewRecurringAmounts)) {
+            $recurringAmounts = QuoteInvoicePreviewRecurringAmounts::from($recurringAmounts);
         }
 
-        $this->fields['subtotalAmount'] = $subtotalAmount;
-
-        return $this;
-    }
-
-    public function getDiscountAmount(): ?float
-    {
-        return $this->fields['discountAmount'] ?? null;
-    }
-
-    public function setDiscountAmount(null|float|string $discountAmount): static
-    {
-        if (is_string($discountAmount)) {
-            $discountAmount = (float) $discountAmount;
-        }
-
-        $this->fields['discountAmount'] = $discountAmount;
-
-        return $this;
-    }
-
-    public function getShippingAmount(): ?float
-    {
-        return $this->fields['shippingAmount'] ?? null;
-    }
-
-    public function setShippingAmount(null|float|string $shippingAmount): static
-    {
-        if (is_string($shippingAmount)) {
-            $shippingAmount = (float) $shippingAmount;
-        }
-
-        $this->fields['shippingAmount'] = $shippingAmount;
-
-        return $this;
-    }
-
-    public function getTaxAmount(): ?float
-    {
-        return $this->fields['taxAmount'] ?? null;
-    }
-
-    public function setTaxAmount(null|float|string $taxAmount): static
-    {
-        if (is_string($taxAmount)) {
-            $taxAmount = (float) $taxAmount;
-        }
-
-        $this->fields['taxAmount'] = $taxAmount;
+        $this->fields['recurringAmounts'] = $recurringAmounts;
 
         return $this;
     }
@@ -170,20 +113,11 @@ class QuoteInvoicePreview implements JsonSerializable
         if (array_key_exists('currency', $this->fields)) {
             $data['currency'] = $this->fields['currency'];
         }
-        if (array_key_exists('amount', $this->fields)) {
-            $data['amount'] = $this->fields['amount'];
+        if (array_key_exists('initialAmounts', $this->fields)) {
+            $data['initialAmounts'] = $this->fields['initialAmounts']?->jsonSerialize();
         }
-        if (array_key_exists('subtotalAmount', $this->fields)) {
-            $data['subtotalAmount'] = $this->fields['subtotalAmount'];
-        }
-        if (array_key_exists('discountAmount', $this->fields)) {
-            $data['discountAmount'] = $this->fields['discountAmount'];
-        }
-        if (array_key_exists('shippingAmount', $this->fields)) {
-            $data['shippingAmount'] = $this->fields['shippingAmount'];
-        }
-        if (array_key_exists('taxAmount', $this->fields)) {
-            $data['taxAmount'] = $this->fields['taxAmount'];
+        if (array_key_exists('recurringAmounts', $this->fields)) {
+            $data['recurringAmounts'] = $this->fields['recurringAmounts']?->jsonSerialize();
         }
         if (array_key_exists('items', $this->fields)) {
             $data['items'] = $this->fields['items'];
