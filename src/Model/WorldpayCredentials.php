@@ -45,6 +45,9 @@ class WorldpayCredentials implements JsonSerializable
         if (array_key_exists('sftpPrivateKey', $data)) {
             $this->setSftpPrivateKey($data['sftpPrivateKey']);
         }
+        if (array_key_exists('sftpPrivateKeyPassword', $data)) {
+            $this->setSftpPrivateKeyPassword($data['sftpPrivateKeyPassword']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -148,6 +151,18 @@ class WorldpayCredentials implements JsonSerializable
         return $this;
     }
 
+    public function getSftpPrivateKeyPassword(): ?string
+    {
+        return $this->fields['sftpPrivateKeyPassword'] ?? null;
+    }
+
+    public function setSftpPrivateKeyPassword(null|string $sftpPrivateKeyPassword): static
+    {
+        $this->fields['sftpPrivateKeyPassword'] = $sftpPrivateKeyPassword;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -174,6 +189,9 @@ class WorldpayCredentials implements JsonSerializable
         }
         if (array_key_exists('sftpPrivateKey', $this->fields)) {
             $data['sftpPrivateKey'] = $this->fields['sftpPrivateKey'];
+        }
+        if (array_key_exists('sftpPrivateKeyPassword', $this->fields)) {
+            $data['sftpPrivateKeyPassword'] = $this->fields['sftpPrivateKeyPassword'];
         }
 
         return $data;
