@@ -140,7 +140,7 @@ class AmlChecksApi
     /**
      * @return AmlCheck
      */
-    public function stopAmlCheckReview(
+    public function stopReview(
         string $id,
     ): AmlCheck {
         $pathParams = [
