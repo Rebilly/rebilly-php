@@ -71,9 +71,6 @@ class ApiTracking implements JsonSerializable
         if (array_key_exists('relatedResourceIds', $data)) {
             $this->setRelatedResourceIds($data['relatedResourceIds']);
         }
-        if (array_key_exists('relatedIds', $data)) {
-            $this->setRelatedIds($data['relatedIds']);
-        }
         if (array_key_exists('duration', $data)) {
             $this->setDuration($data['duration']);
         }
@@ -243,22 +240,6 @@ class ApiTracking implements JsonSerializable
         return $this->fields['relatedResourceIds'] ?? null;
     }
 
-    public function getRelatedIds(): ?ApiTrackingRelatedIds
-    {
-        return $this->fields['relatedIds'] ?? null;
-    }
-
-    public function setRelatedIds(null|ApiTrackingRelatedIds|array $relatedIds): static
-    {
-        if ($relatedIds !== null && !($relatedIds instanceof ApiTrackingRelatedIds)) {
-            $relatedIds = ApiTrackingRelatedIds::from($relatedIds);
-        }
-
-        $this->fields['relatedIds'] = $relatedIds;
-
-        return $this;
-    }
-
     public function getDuration(): ?int
     {
         return $this->fields['duration'] ?? null;
@@ -365,9 +346,6 @@ class ApiTracking implements JsonSerializable
         }
         if (array_key_exists('relatedResourceIds', $this->fields)) {
             $data['relatedResourceIds'] = $this->fields['relatedResourceIds'];
-        }
-        if (array_key_exists('relatedIds', $this->fields)) {
-            $data['relatedIds'] = $this->fields['relatedIds']?->jsonSerialize();
         }
         if (array_key_exists('duration', $this->fields)) {
             $data['duration'] = $this->fields['duration'];
