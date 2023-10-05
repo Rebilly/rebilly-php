@@ -5,12 +5,9 @@
 The **Rebilly SDK for PHP** makes it easy for developers to access
 [Rebilly REST APIs][link-api-doc] in their PHP code.
 
-## Important note
-This branch contains an alpha version of the Rebilly PHP SDK v3.0. It is a major breaking change which is incompatible with the previous version.
-
 ## Requirements
 
-* PHP 8.1+.
+* PHP 8.0+.
 * CURL (verify peer requires a root certificate authority -- if you have not configured php curl to use one, and your system libs aren't linked to one, you may need to do a [manual configuration](http://stackoverflow.com/questions/17478283/paypal-access-ssl-certificate-unable-to-get-local-issuer-certificate/19149687#19149687) to use the appropriate certificate authority)
 
 ## Quick Examples
