@@ -54,8 +54,8 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-main": "3.x-dev",
-      "dev-v2.x": "2.x-dev"
+      "dev-main": "2.0.x-dev",
+      "dev-v3.0": "v3.0-dev"
     }
   }
 }
