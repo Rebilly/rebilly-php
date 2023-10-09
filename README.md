@@ -86,7 +86,10 @@ This new major version brings several new helper classes to communicate with Reb
 
 - Now, a service class can be explicitly created to make the API calls instead of using only the `Client`. The service is a helper class that encapsulates the API calls for a specific context. It means that `CoreService` is responsible for the API calls related to the [core API][link-api-doc], `UsersService` for the [users API][link-api-doc-user], and `ReportsService` for the [reports API][link-api-doc-reports]. `CombinedService` can be used to make calls to any of the contexts.
 
-- To simplify the migration from the previous version, the `Client` object can be used to make calls to any API context directly. For example, instead of instantiating a service class, one can use `$client->customers()->create($form)`.
+- To simplify the migration from the previous version, the `Client` object can be used to make calls to any API context directly. For example, instead of instantiating a service class, one can use:
+  ```php
+  $client->customers()->create($form);
+  ```
 
 - The namespace changed from `Rebilly\Entities` to `Rebilly\Sdk\Model`. Now, the `src` is `Rebilly\Sdk`.
 
