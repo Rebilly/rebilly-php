@@ -30,10 +30,10 @@ and other best-practices for defining dependencies at [getcomposer.org](http://g
 
 The previous version of the SDK can be outdated and won't provide all (or the correct) specifications to communicate with the REST APIs. Only the latest version is constantly supported.
 
-| Version                | Supported   | Documentation                         |
-|------------------------|-------------|---------------------------------------|
-| [2.x][link-github-v2x] | ❌ (legacy)  | ✅ [See tab SDK][link-api-doc]         |
-| 3.x                    | ✅ (current) | ✅ [See tab PHP-SDK-3.0][link-api-doc] |
+| Version                | Supported                | Documentation                         |
+|------------------------|--------------------------|---------------------------------------|
+| [2.x][link-github-v2x] | ⚠️ (security fixes only) | ✅ [See tab SDK][link-api-doc]         |
+| 3.x                    | ✅ (current)              | ✅ [See tab PHP-SDK-3.0][link-api-doc] |
 
 ## Quick Examples
 
