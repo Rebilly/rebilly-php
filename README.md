@@ -32,8 +32,8 @@ The previous version of the SDK can be outdated and won't provide all (or the co
 
 | Version                | Supported                | Documentation                         |
 |------------------------|--------------------------|---------------------------------------|
-| [2.x][link-github-v2x] | ⚠️ (security fixes only)  | ✅ [See tab SDK][link-api-doc]         |
-| 3.x                    | ✅ (current)              | ✅ [See tab PHP-SDK-3.0][link-api-doc] |
+| [2.x][link-github-v2x] | ⚠️ (security fixes only)  | ✅ [See tab PHP-SDK-2.0][link-api-doc] |
+| 3.x                    | ✅ (current)              | ✅ [See tab SDK][link-api-doc]         |
 
 ## Quick Examples
 
