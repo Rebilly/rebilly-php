@@ -74,7 +74,7 @@ jobs:
           cp -r /tmp/sdk/{src,composer.json,.php-cs-fixer.php,psalm.xml} ./sdk/
           php ./generator/backend/php-sdk-generator/remove-fqcns.php ./sdk && \
           php ./generator/backend/php-sdk-generator/remove-unused-models.php ./sdk && \
-          cd ./sdk && node ./scripts/bump-sdk-version.js
+          cd ./sdk && node ./scripts/update-sdk-version.js
 
       - name: Get composer cache directory
         working-directory: /tmp/sdk
