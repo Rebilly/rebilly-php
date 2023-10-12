@@ -1,0 +1,39 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency: 
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Create Release Pull Request
+        uses: changesets/action@v1
+        with:
+          commit: 'chore: 🔖 release new version'
+          title: 'chore: 🔖 release new version'
+          version: |
+            npx changeset version
+            npm i
+            node scripts/post-changeset.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.MACHINE_USER_PAT }}

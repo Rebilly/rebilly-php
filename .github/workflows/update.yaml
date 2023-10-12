@@ -68,6 +68,14 @@ jobs:
             -i "/api-definitions/all.yaml"
           ls -lAh /tmp/ /tmp/sdk/
 
+      - name: Bundle SDK
+        run: |
+          rm -rf ./sdk/{src,composer.json,.php-cs-fixer.php,psalm.xml} && \
+          cp -r /tmp/sdk/{src,composer.json,.php-cs-fixer.php,psalm.xml} ./sdk/
+          php ./generator/backend/php-sdk-generator/remove-fqcns.php ./sdk && \
+          php ./generator/backend/php-sdk-generator/remove-unused-models.php ./sdk && \
+          cd ./sdk && node ./scripts/bump-sdk-version.js
+
       - name: Get composer cache directory
         working-directory: /tmp/sdk
         id: composer-cache
@@ -77,15 +85,8 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ runner.os }}-composer-
-
-      - name: Bundle SDK
-        run: |
-          rm -rf ./sdk/{src,composer.json,.php-cs-fixer.php,psalm.xml} && \
-          cp -r /tmp/sdk/{src,composer.json,.php-cs-fixer.php,psalm.xml} ./sdk/
-          php ./generator/backend/php-sdk-generator/remove-fqcns.php ./sdk && \
-          php ./generator/backend/php-sdk-generator/remove-unused-models.php ./sdk
 
       - name: Install composer dependencies
         working-directory: ./sdk
