@@ -111,4 +111,4 @@ jobs:
         run: npm ci
 
       - name: Check Changesets
-        run: npx changeset status --since main
+        run: npx changeset status --since origin/main
