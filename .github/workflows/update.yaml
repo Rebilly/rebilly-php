@@ -8,22 +8,24 @@ on:
           The comment that will be posted to the PR if any changes are added.
           Used to provide context about the source of the update.
         required: false
+  pull_request:
 
 jobs:
   generate-sdk:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout api-definitions repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: 'api-definitions'
           repository: 'Rebilly/api-definitions'
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           path: 'sdk'
+          fetch-depth: 0
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           token: '${{ secrets.MACHINE_USER_PAT }}'
           path: 'generator'
@@ -103,7 +105,8 @@ jobs:
       
       - name: Add changeset
         id: changeset
-        if: github.event.inputs.trigger-reason != ''
+        if: github.event.inputs.trigger-reason != '' || github.event.trigger == 'pull_request'
+        working-directory: ./sdk
         run: |
           if [[ `git status --porcelain` ]]; then
             echo "No changes found, skipping changeset creation"
@@ -116,6 +119,7 @@ jobs:
       - name: Create PR
         id: cpr
         uses: peter-evans/create-pull-request@v5
+        if: github.event.trigger != 'pull_request'
         with:
           # Path of the checked-out repo where we placed the generated resources  
           path: 'sdk'
