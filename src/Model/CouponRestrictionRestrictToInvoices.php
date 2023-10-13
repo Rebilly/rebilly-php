@@ -53,6 +53,9 @@ class CouponRestrictionRestrictToInvoices implements CouponRestriction, Redempti
         if (array_key_exists('currency', $data)) {
             $this->setCurrency($data['currency']);
         }
+        if (array_key_exists('customerIds', $data)) {
+            $this->setCustomerIds($data['customerIds']);
+        }
         if (array_key_exists('time', $data)) {
             $this->setTime($data['time']);
         }
@@ -142,7 +145,7 @@ class CouponRestrictionRestrictToInvoices implements CouponRestriction, Redempti
     }
 
     /**
-     * @return CouponRestrictionRetrictToBxgyBuy[]
+     * @return CouponRestrictionRestrictToBxgyBuy[]
      */
     public function getBuy(): array
     {
@@ -150,12 +153,12 @@ class CouponRestrictionRestrictToInvoices implements CouponRestriction, Redempti
     }
 
     /**
-     * @param array[]|CouponRestrictionRetrictToBxgyBuy[] $buy
+     * @param array[]|CouponRestrictionRestrictToBxgyBuy[] $buy
      */
     public function setBuy(array $buy): static
     {
         $buy = array_map(
-            fn ($value) => $value !== null ? ($value instanceof CouponRestrictionRetrictToBxgyBuy ? $value : CouponRestrictionRetrictToBxgyBuy::from($value)) : null,
+            fn ($value) => $value !== null ? ($value instanceof CouponRestrictionRestrictToBxgyBuy ? $value : CouponRestrictionRestrictToBxgyBuy::from($value)) : null,
             $buy,
         );
 
@@ -234,7 +237,7 @@ class CouponRestrictionRestrictToInvoices implements CouponRestriction, Redempti
     }
 
     /**
-     * @return CouponRestrictionRetrictToBxgyGet[]
+     * @return CouponRestrictionRestrictToBxgyGet[]
      */
     public function getGet(): array
     {
@@ -242,12 +245,12 @@ class CouponRestrictionRestrictToInvoices implements CouponRestriction, Redempti
     }
 
     /**
-     * @param array[]|CouponRestrictionRetrictToBxgyGet[] $get
+     * @param array[]|CouponRestrictionRestrictToBxgyGet[] $get
      */
     public function setGet(array $get): static
     {
         $get = array_map(
-            fn ($value) => $value !== null ? ($value instanceof CouponRestrictionRetrictToBxgyGet ? $value : CouponRestrictionRetrictToBxgyGet::from($value)) : null,
+            fn ($value) => $value !== null ? ($value instanceof CouponRestrictionRestrictToBxgyGet ? $value : CouponRestrictionRestrictToBxgyGet::from($value)) : null,
             $get,
         );
 
@@ -264,6 +267,29 @@ class CouponRestrictionRestrictToInvoices implements CouponRestriction, Redempti
     public function setCurrency(string $currency): static
     {
         $this->fields['currency'] = $currency;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getCustomerIds(): array
+    {
+        return $this->fields['customerIds'];
+    }
+
+    /**
+     * @param string[] $customerIds
+     */
+    public function setCustomerIds(array $customerIds): static
+    {
+        $customerIds = array_map(
+            fn ($value) => $value,
+            $customerIds,
+        );
+
+        $this->fields['customerIds'] = $customerIds;
 
         return $this;
     }
@@ -330,6 +356,9 @@ class CouponRestrictionRestrictToInvoices implements CouponRestriction, Redempti
         }
         if (array_key_exists('currency', $this->fields)) {
             $data['currency'] = $this->fields['currency'];
+        }
+        if (array_key_exists('customerIds', $this->fields)) {
+            $data['customerIds'] = $this->fields['customerIds'];
         }
         if (array_key_exists('time', $this->fields)) {
             $data['time'] = $this->fields['time']?->format(DateTimeInterface::RFC3339);

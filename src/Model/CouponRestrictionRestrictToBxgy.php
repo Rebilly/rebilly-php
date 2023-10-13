@@ -17,7 +17,7 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
 
-class CouponRestrictionRetrictToBxgy implements CouponRestriction, JsonSerializable
+class CouponRestrictionRestrictToBxgy implements CouponRestriction, JsonSerializable
 {
     private array $fields = [];
 
@@ -50,6 +50,9 @@ class CouponRestrictionRetrictToBxgy implements CouponRestriction, JsonSerializa
         if (array_key_exists('currency', $data)) {
             $this->setCurrency($data['currency']);
         }
+        if (array_key_exists('customerIds', $data)) {
+            $this->setCustomerIds($data['customerIds']);
+        }
         if (array_key_exists('time', $data)) {
             $this->setTime($data['time']);
         }
@@ -72,7 +75,7 @@ class CouponRestrictionRetrictToBxgy implements CouponRestriction, JsonSerializa
     }
 
     /**
-     * @return CouponRestrictionRetrictToBxgyBuy[]
+     * @return CouponRestrictionRestrictToBxgyBuy[]
      */
     public function getBuy(): array
     {
@@ -80,12 +83,12 @@ class CouponRestrictionRetrictToBxgy implements CouponRestriction, JsonSerializa
     }
 
     /**
-     * @param array[]|CouponRestrictionRetrictToBxgyBuy[] $buy
+     * @param array[]|CouponRestrictionRestrictToBxgyBuy[] $buy
      */
     public function setBuy(array $buy): static
     {
         $buy = array_map(
-            fn ($value) => $value !== null ? ($value instanceof CouponRestrictionRetrictToBxgyBuy ? $value : CouponRestrictionRetrictToBxgyBuy::from($value)) : null,
+            fn ($value) => $value !== null ? ($value instanceof CouponRestrictionRestrictToBxgyBuy ? $value : CouponRestrictionRestrictToBxgyBuy::from($value)) : null,
             $buy,
         );
 
@@ -95,7 +98,7 @@ class CouponRestrictionRetrictToBxgy implements CouponRestriction, JsonSerializa
     }
 
     /**
-     * @return CouponRestrictionRetrictToBxgyGet[]
+     * @return CouponRestrictionRestrictToBxgyGet[]
      */
     public function getGet(): array
     {
@@ -103,12 +106,12 @@ class CouponRestrictionRetrictToBxgy implements CouponRestriction, JsonSerializa
     }
 
     /**
-     * @param array[]|CouponRestrictionRetrictToBxgyGet[] $get
+     * @param array[]|CouponRestrictionRestrictToBxgyGet[] $get
      */
     public function setGet(array $get): static
     {
         $get = array_map(
-            fn ($value) => $value !== null ? ($value instanceof CouponRestrictionRetrictToBxgyGet ? $value : CouponRestrictionRetrictToBxgyGet::from($value)) : null,
+            fn ($value) => $value !== null ? ($value instanceof CouponRestrictionRestrictToBxgyGet ? $value : CouponRestrictionRestrictToBxgyGet::from($value)) : null,
             $get,
         );
 
@@ -245,6 +248,29 @@ class CouponRestrictionRetrictToBxgy implements CouponRestriction, JsonSerializa
         return $this;
     }
 
+    /**
+     * @return string[]
+     */
+    public function getCustomerIds(): array
+    {
+        return $this->fields['customerIds'];
+    }
+
+    /**
+     * @param string[] $customerIds
+     */
+    public function setCustomerIds(array $customerIds): static
+    {
+        $customerIds = array_map(
+            fn ($value) => $value,
+            $customerIds,
+        );
+
+        $this->fields['customerIds'] = $customerIds;
+
+        return $this;
+    }
+
     public function getTime(): DateTimeImmutable
     {
         return $this->fields['time'];
@@ -327,6 +353,9 @@ class CouponRestrictionRetrictToBxgy implements CouponRestriction, JsonSerializa
         }
         if (array_key_exists('currency', $this->fields)) {
             $data['currency'] = $this->fields['currency'];
+        }
+        if (array_key_exists('customerIds', $this->fields)) {
+            $data['customerIds'] = $this->fields['customerIds'];
         }
         if (array_key_exists('time', $this->fields)) {
             $data['time'] = $this->fields['time']?->format(DateTimeInterface::RFC3339);

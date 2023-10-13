@@ -24,6 +24,9 @@ class PlanFormulaTiered implements PlanPriceFormula, JsonSerializable
         if (array_key_exists('brackets', $data)) {
             $this->setBrackets($data['brackets']);
         }
+        if (array_key_exists('minQuantity', $data)) {
+            $this->setMinQuantity($data['minQuantity']);
+        }
         if (array_key_exists('maxQuantity', $data)) {
             $this->setMaxQuantity($data['maxQuantity']);
         }
@@ -65,6 +68,18 @@ class PlanFormulaTiered implements PlanPriceFormula, JsonSerializable
         return $this;
     }
 
+    public function getMinQuantity(): ?int
+    {
+        return $this->fields['minQuantity'] ?? null;
+    }
+
+    public function setMinQuantity(null|int $minQuantity): static
+    {
+        $this->fields['minQuantity'] = $minQuantity;
+
+        return $this;
+    }
+
     public function getMaxQuantity(): ?int
     {
         return $this->fields['maxQuantity'] ?? null;
@@ -100,6 +115,9 @@ class PlanFormulaTiered implements PlanPriceFormula, JsonSerializable
         ];
         if (array_key_exists('brackets', $this->fields)) {
             $data['brackets'] = $this->fields['brackets'];
+        }
+        if (array_key_exists('minQuantity', $this->fields)) {
+            $data['minQuantity'] = $this->fields['minQuantity'];
         }
         if (array_key_exists('maxQuantity', $this->fields)) {
             $data['maxQuantity'] = $this->fields['maxQuantity'];

@@ -17,14 +17,14 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
 
-class CouponRestrictionRestrictToCountries implements CouponRestriction, JsonSerializable
+class CouponRestrictionRestrictToCustomers implements CouponRestriction, JsonSerializable
 {
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('countries', $data)) {
-            $this->setCountries($data['countries']);
+        if (array_key_exists('customerIds', $data)) {
+            $this->setCustomerIds($data['customerIds']);
         }
         if (array_key_exists('planIds', $data)) {
             $this->setPlanIds($data['planIds']);
@@ -38,6 +38,9 @@ class CouponRestrictionRestrictToCountries implements CouponRestriction, JsonSer
         if (array_key_exists('buy', $data)) {
             $this->setBuy($data['buy']);
         }
+        if (array_key_exists('countries', $data)) {
+            $this->setCountries($data['countries']);
+        }
         if (array_key_exists('productIds', $data)) {
             $this->setProductIds($data['productIds']);
         }
@@ -49,9 +52,6 @@ class CouponRestrictionRestrictToCountries implements CouponRestriction, JsonSer
         }
         if (array_key_exists('currency', $data)) {
             $this->setCurrency($data['currency']);
-        }
-        if (array_key_exists('customerIds', $data)) {
-            $this->setCustomerIds($data['customerIds']);
         }
         if (array_key_exists('time', $data)) {
             $this->setTime($data['time']);
@@ -71,28 +71,28 @@ class CouponRestrictionRestrictToCountries implements CouponRestriction, JsonSer
 
     public function getType(): string
     {
-        return 'restrict-to-countries';
+        return 'restrict-to-customers';
     }
 
     /**
      * @return string[]
      */
-    public function getCountries(): array
+    public function getCustomerIds(): array
     {
-        return $this->fields['countries'];
+        return $this->fields['customerIds'];
     }
 
     /**
-     * @param string[] $countries
+     * @param string[] $customerIds
      */
-    public function setCountries(array $countries): static
+    public function setCustomerIds(array $customerIds): static
     {
-        $countries = array_map(
+        $customerIds = array_map(
             fn ($value) => $value,
-            $countries,
+            $customerIds,
         );
 
-        $this->fields['countries'] = $countries;
+        $this->fields['customerIds'] = $customerIds;
 
         return $this;
     }
@@ -163,6 +163,29 @@ class CouponRestrictionRestrictToCountries implements CouponRestriction, JsonSer
         );
 
         $this->fields['buy'] = $buy;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getCountries(): array
+    {
+        return $this->fields['countries'];
+    }
+
+    /**
+     * @param string[] $countries
+     */
+    public function setCountries(array $countries): static
+    {
+        $countries = array_map(
+            fn ($value) => $value,
+            $countries,
+        );
+
+        $this->fields['countries'] = $countries;
 
         return $this;
     }
@@ -248,29 +271,6 @@ class CouponRestrictionRestrictToCountries implements CouponRestriction, JsonSer
         return $this;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getCustomerIds(): array
-    {
-        return $this->fields['customerIds'];
-    }
-
-    /**
-     * @param string[] $customerIds
-     */
-    public function setCustomerIds(array $customerIds): static
-    {
-        $customerIds = array_map(
-            fn ($value) => $value,
-            $customerIds,
-        );
-
-        $this->fields['customerIds'] = $customerIds;
-
-        return $this;
-    }
-
     public function getTime(): DateTimeImmutable
     {
         return $this->fields['time'];
@@ -325,10 +325,10 @@ class CouponRestrictionRestrictToCountries implements CouponRestriction, JsonSer
     public function jsonSerialize(): array
     {
         $data = [
-            'type' => 'restrict-to-countries',
+            'type' => 'restrict-to-customers',
         ];
-        if (array_key_exists('countries', $this->fields)) {
-            $data['countries'] = $this->fields['countries'];
+        if (array_key_exists('customerIds', $this->fields)) {
+            $data['customerIds'] = $this->fields['customerIds'];
         }
         if (array_key_exists('planIds', $this->fields)) {
             $data['planIds'] = $this->fields['planIds'];
@@ -342,6 +342,9 @@ class CouponRestrictionRestrictToCountries implements CouponRestriction, JsonSer
         if (array_key_exists('buy', $this->fields)) {
             $data['buy'] = $this->fields['buy'];
         }
+        if (array_key_exists('countries', $this->fields)) {
+            $data['countries'] = $this->fields['countries'];
+        }
         if (array_key_exists('productIds', $this->fields)) {
             $data['productIds'] = $this->fields['productIds'];
         }
@@ -353,9 +356,6 @@ class CouponRestrictionRestrictToCountries implements CouponRestriction, JsonSer
         }
         if (array_key_exists('currency', $this->fields)) {
             $data['currency'] = $this->fields['currency'];
-        }
-        if (array_key_exists('customerIds', $this->fields)) {
-            $data['customerIds'] = $this->fields['customerIds'];
         }
         if (array_key_exists('time', $this->fields)) {
             $data['time'] = $this->fields['time']?->format(DateTimeInterface::RFC3339);

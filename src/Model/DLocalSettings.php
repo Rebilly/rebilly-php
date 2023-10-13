@@ -24,6 +24,9 @@ class DLocalSettings implements JsonSerializable
         if (array_key_exists('createInstallmentPlan', $data)) {
             $this->setCreateInstallmentPlan($data['createInstallmentPlan']);
         }
+        if (array_key_exists('customerDocumentCustomField', $data)) {
+            $this->setCustomerDocumentCustomField($data['customerDocumentCustomField']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -43,11 +46,26 @@ class DLocalSettings implements JsonSerializable
         return $this;
     }
 
+    public function getCustomerDocumentCustomField(): ?string
+    {
+        return $this->fields['customerDocumentCustomField'] ?? null;
+    }
+
+    public function setCustomerDocumentCustomField(null|string $customerDocumentCustomField): static
+    {
+        $this->fields['customerDocumentCustomField'] = $customerDocumentCustomField;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
         if (array_key_exists('createInstallmentPlan', $this->fields)) {
             $data['createInstallmentPlan'] = $this->fields['createInstallmentPlan'];
+        }
+        if (array_key_exists('customerDocumentCustomField', $this->fields)) {
+            $data['customerDocumentCustomField'] = $this->fields['customerDocumentCustomField'];
         }
 
         return $data;

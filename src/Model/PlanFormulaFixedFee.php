@@ -24,6 +24,9 @@ class PlanFormulaFixedFee implements PlanPriceFormula, JsonSerializable
         if (array_key_exists('price', $data)) {
             $this->setPrice($data['price']);
         }
+        if (array_key_exists('minQuantity', $data)) {
+            $this->setMinQuantity($data['minQuantity']);
+        }
         if (array_key_exists('maxQuantity', $data)) {
             $this->setMaxQuantity($data['maxQuantity']);
         }
@@ -54,6 +57,18 @@ class PlanFormulaFixedFee implements PlanPriceFormula, JsonSerializable
         }
 
         $this->fields['price'] = $price;
+
+        return $this;
+    }
+
+    public function getMinQuantity(): ?int
+    {
+        return $this->fields['minQuantity'] ?? null;
+    }
+
+    public function setMinQuantity(null|int $minQuantity): static
+    {
+        $this->fields['minQuantity'] = $minQuantity;
 
         return $this;
     }
@@ -100,6 +115,9 @@ class PlanFormulaFixedFee implements PlanPriceFormula, JsonSerializable
         ];
         if (array_key_exists('price', $this->fields)) {
             $data['price'] = $this->fields['price'];
+        }
+        if (array_key_exists('minQuantity', $this->fields)) {
+            $data['minQuantity'] = $this->fields['minQuantity'];
         }
         if (array_key_exists('maxQuantity', $this->fields)) {
             $data['maxQuantity'] = $this->fields['maxQuantity'];
