@@ -71,7 +71,7 @@ jobs:
       - name: Try checkout current revision
         working-directory: ./sdk
         run: |
-          git checkount origin/automations/update-sdk-from-api-definitions || true
+          git checkout origin/automations/update-sdk-from-api-definitions || true
 
       - name: Bundle SDK
         run: |
