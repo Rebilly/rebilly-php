@@ -116,6 +116,7 @@ jobs:
         if: github.event.inputs.trigger-reason != '' || github.event_name == 'pull_request'
         working-directory: ./sdk
         run: |
+          git add .
           git status
           if [[ `git status --porcelain` ]]; then
             echo "No changes found, skipping changeset creation"
