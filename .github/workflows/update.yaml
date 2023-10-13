@@ -20,12 +20,25 @@ jobs:
           path: 'api-definitions'
           repository: 'Rebilly/api-definitions'
 
-      - uses: actions/checkout@v4
+      - name: Checkout PHP SDK repo
+        uses: actions/checkout@v4
         with:
           path: 'sdk'
           fetch-depth: 0
 
-      - uses: actions/checkout@v4
+      - name: Keep changesets
+        working-directory: ./sdk
+        run: |
+          mkdir ../existing-changesets
+          git checkout automations/update-sdk-from-api-definitions || true
+          ls -lAh .changeset
+          cp .changeset/* ../existing-changesets/
+          git checkout main || true
+          rm .changeset/*
+          cp ../existing-changesets/* .changeset/
+
+      - name: Checkout generator repo
+        uses: actions/checkout@v4
         with:
           token: '${{ secrets.MACHINE_USER_PAT }}'
           path: 'generator'
@@ -70,11 +83,6 @@ jobs:
             -i "/api-definitions/all.yaml"
           ls -lAh /tmp/ /tmp/sdk/
 
-      - name: Try checkout current revision
-        working-directory: ./sdk
-        run: |
-          git checkout origin/automations/update-sdk-from-api-definitions || true
-
       - name: Bundle SDK
         run: |
           rm -rf ./sdk/{src,composer.json,.php-cs-fixer.php,psalm.xml} && \
@@ -105,13 +113,14 @@ jobs:
       
       - name: Add changeset
         id: changeset
-        if: github.event.inputs.trigger-reason != '' || github.event.trigger == 'pull_request'
+        if: github.event.inputs.trigger-reason != '' || github.event_name == 'pull_request'
         working-directory: ./sdk
         run: |
+          git status
           if [[ `git status --porcelain` ]]; then
             echo "No changes found, skipping changeset creation"
           else
-            export CHANGESET_ID=$(node ./scripts/add-changeset.js patch "${{ github.event.inputs.trigger-reason }}")
+            export CHANGESET_ID=$(node ./scripts/add-changeset.js patch "Test ${{ github.event.inputs.trigger-reason }}")
             echo "Added a patch changeset `${CHANGESET_ID}`: '${{ github.event.inputs.trigger-reason }}'"
             echo "id=${CHANGESET_ID}" >> $GITHUB_OUTPUT
           fi
@@ -119,7 +128,7 @@ jobs:
       - name: Create PR
         id: cpr
         uses: peter-evans/create-pull-request@v5
-        if: github.event.trigger != 'pull_request'
+        if: github.event_name == 'pull_request'
         with:
           # Path of the checked-out repo where we placed the generated resources  
           path: 'sdk'
@@ -137,7 +146,8 @@ jobs:
         if: |
           (steps.cpr.outputs.pull-request-operation == 'created' ||
           steps.cpr.outputs.pull-request-operation == 'updated') &&
-          github.event.inputs.trigger-reason != ''
+          github.event.inputs.trigger-reason != '' &&
+          github.event_name != 'pull_request'
         with:
           GITHUB_TOKEN: ${{ secrets.MACHINE_USER_PAT }}
           append: true
