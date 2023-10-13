@@ -102,13 +102,16 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Node.js 20
+        if: ${{ ! startsWith(github.ref, 'refs/heads/changeset-release') }}
         uses: actions/setup-node@v3
         with:
           node-version: 20
           cache: 'npm'
 
       - name: Install Dependencies
+        if: ${{ ! startsWith(github.ref, 'refs/heads/changeset-release') }}
         run: npm ci
 
       - name: Check Changesets
+        if: ${{ ! startsWith(github.ref, 'refs/heads/changeset-release') }}
         run: npx changeset status --since origin/main
