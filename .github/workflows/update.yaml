@@ -68,6 +68,11 @@ jobs:
             -i "/api-definitions/all.yaml"
           ls -lAh /tmp/ /tmp/sdk/
 
+      - name: Try checkout current revision
+        working-directory: ./sdk
+        run: |
+          git checkount origin/automations/update-sdk-from-api-definitions || true
+
       - name: Bundle SDK
         run: |
           rm -rf ./sdk/{src,composer.json,.php-cs-fixer.php,psalm.xml} && \
@@ -95,10 +100,22 @@ jobs:
       - name: CS fix SDK
         working-directory: ./sdk
         run: composer cs-fix
+      
+      - name: Add changeset
+        id: changeset
+        if: github.event.inputs.trigger-reason != ''
+        run: |
+          if [[ `git status --porcelain` ]]; then
+            echo "No changes found, skipping changeset creation"
+          else
+            export CHANGESET_ID=$(node ./scripts/add-changeset.js patch "${{ github.event.inputs.trigger-reason }}")
+            echo "Added a patch changeset `${CHANGESET_ID}`: '${{ github.event.inputs.trigger-reason }}'"
+            echo "id=${CHANGESET_ID}" >> $GITHUB_OUTPUT
+          fi
 
       - name: Create PR
         id: cpr
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v5
         with:
           # Path of the checked-out repo where we placed the generated resources  
           path: 'sdk'
@@ -122,4 +139,4 @@ jobs:
           append: true
           number: ${{ steps.cpr.outputs.pull-request-number }}
           message: |
-            Triggered due to: ${{ github.event.inputs.trigger-reason }}
+            - ${{ github.event.inputs.trigger-reason }} [edit changeset](https://github.com/Rebilly/rebilly-php/edit/automations/update-sdk-from-api-definitions/.changeset/${{ steps.changeset.outputs.id }}.md?pr=%2FRebilly%2Frebilly-php%2Fpull%2F${{ steps.cpr.outputs.pull-request-number }})
