@@ -50,6 +50,9 @@ class CouponRestrictionMinimumOrderAmount implements CouponRestriction, Redempti
         if (array_key_exists('get', $data)) {
             $this->setGet($data['get']);
         }
+        if (array_key_exists('customerIds', $data)) {
+            $this->setCustomerIds($data['customerIds']);
+        }
         if (array_key_exists('time', $data)) {
             $this->setTime($data['time']);
         }
@@ -131,7 +134,7 @@ class CouponRestrictionMinimumOrderAmount implements CouponRestriction, Redempti
     }
 
     /**
-     * @return CouponRestrictionRetrictToBxgyBuy[]
+     * @return CouponRestrictionRestrictToBxgyBuy[]
      */
     public function getBuy(): array
     {
@@ -139,12 +142,12 @@ class CouponRestrictionMinimumOrderAmount implements CouponRestriction, Redempti
     }
 
     /**
-     * @param array[]|CouponRestrictionRetrictToBxgyBuy[] $buy
+     * @param array[]|CouponRestrictionRestrictToBxgyBuy[] $buy
      */
     public function setBuy(array $buy): static
     {
         $buy = array_map(
-            fn ($value) => $value !== null ? ($value instanceof CouponRestrictionRetrictToBxgyBuy ? $value : CouponRestrictionRetrictToBxgyBuy::from($value)) : null,
+            fn ($value) => $value !== null ? ($value instanceof CouponRestrictionRestrictToBxgyBuy ? $value : CouponRestrictionRestrictToBxgyBuy::from($value)) : null,
             $buy,
         );
 
@@ -223,7 +226,7 @@ class CouponRestrictionMinimumOrderAmount implements CouponRestriction, Redempti
     }
 
     /**
-     * @return CouponRestrictionRetrictToBxgyGet[]
+     * @return CouponRestrictionRestrictToBxgyGet[]
      */
     public function getGet(): array
     {
@@ -231,16 +234,39 @@ class CouponRestrictionMinimumOrderAmount implements CouponRestriction, Redempti
     }
 
     /**
-     * @param array[]|CouponRestrictionRetrictToBxgyGet[] $get
+     * @param array[]|CouponRestrictionRestrictToBxgyGet[] $get
      */
     public function setGet(array $get): static
     {
         $get = array_map(
-            fn ($value) => $value !== null ? ($value instanceof CouponRestrictionRetrictToBxgyGet ? $value : CouponRestrictionRetrictToBxgyGet::from($value)) : null,
+            fn ($value) => $value !== null ? ($value instanceof CouponRestrictionRestrictToBxgyGet ? $value : CouponRestrictionRestrictToBxgyGet::from($value)) : null,
             $get,
         );
 
         $this->fields['get'] = $get;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getCustomerIds(): array
+    {
+        return $this->fields['customerIds'];
+    }
+
+    /**
+     * @param string[] $customerIds
+     */
+    public function setCustomerIds(array $customerIds): static
+    {
+        $customerIds = array_map(
+            fn ($value) => $value,
+            $customerIds,
+        );
+
+        $this->fields['customerIds'] = $customerIds;
 
         return $this;
     }
@@ -327,6 +353,9 @@ class CouponRestrictionMinimumOrderAmount implements CouponRestriction, Redempti
         }
         if (array_key_exists('get', $this->fields)) {
             $data['get'] = $this->fields['get'];
+        }
+        if (array_key_exists('customerIds', $this->fields)) {
+            $data['customerIds'] = $this->fields['customerIds'];
         }
         if (array_key_exists('time', $this->fields)) {
             $data['time'] = $this->fields['time']?->format(DateTimeInterface::RFC3339);

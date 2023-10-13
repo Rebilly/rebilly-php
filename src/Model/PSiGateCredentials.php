@@ -33,6 +33,12 @@ class PSiGateCredentials implements JsonSerializable
         if (array_key_exists('clientApiKey', $data)) {
             $this->setClientApiKey($data['clientApiKey']);
         }
+        if (array_key_exists('disputeUsername', $data)) {
+            $this->setDisputeUsername($data['disputeUsername']);
+        }
+        if (array_key_exists('disputePassword', $data)) {
+            $this->setDisputePassword($data['disputePassword']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -88,6 +94,30 @@ class PSiGateCredentials implements JsonSerializable
         return $this;
     }
 
+    public function getDisputeUsername(): ?string
+    {
+        return $this->fields['disputeUsername'] ?? null;
+    }
+
+    public function setDisputeUsername(null|string $disputeUsername): static
+    {
+        $this->fields['disputeUsername'] = $disputeUsername;
+
+        return $this;
+    }
+
+    public function getDisputePassword(): ?string
+    {
+        return $this->fields['disputePassword'] ?? null;
+    }
+
+    public function setDisputePassword(null|string $disputePassword): static
+    {
+        $this->fields['disputePassword'] = $disputePassword;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -102,6 +132,12 @@ class PSiGateCredentials implements JsonSerializable
         }
         if (array_key_exists('clientApiKey', $this->fields)) {
             $data['clientApiKey'] = $this->fields['clientApiKey'];
+        }
+        if (array_key_exists('disputeUsername', $this->fields)) {
+            $data['disputeUsername'] = $this->fields['disputeUsername'];
+        }
+        if (array_key_exists('disputePassword', $this->fields)) {
+            $data['disputePassword'] = $this->fields['disputePassword'];
         }
 
         return $data;

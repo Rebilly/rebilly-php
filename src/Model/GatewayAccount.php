@@ -380,6 +380,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return new PayEcards($data);
             case 'PayPal':
                 return new PayPal($data);
+            case 'PayRedeem':
+                return new PayRedeem($data);
             case 'PayRetailers':
                 return new PayRetailers($data);
             case 'PayTabs':
