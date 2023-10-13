@@ -2,4 +2,4 @@
 "@rebilly/client-php": patch
 ---
 
-Add dispute credentials for PSiGate
+Add quote events to customer timeline
