@@ -31,9 +31,6 @@ jobs:
         with:
           commit: 'chore: 🔖 release new version'
           title: 'chore: 🔖 release new version'
-          version: |
-            npx changeset version
-            npm i
-            node scripts/update-sdk-version.js
+          version: npm run version
         env:
           GITHUB_TOKEN: ${{ secrets.MACHINE_USER_PAT }}
