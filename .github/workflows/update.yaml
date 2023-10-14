@@ -14,16 +14,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout api-definitions repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: 'api-definitions'
           repository: 'Rebilly/api-definitions'
 
-      - uses: actions/checkout@v3
+      - name: Checkout PHP SDK repo
+        uses: actions/checkout@v4
         with:
           path: 'sdk'
+          fetch-depth: 0
 
-      - uses: actions/checkout@v3
+      - name: Keep changesets
+        working-directory: ./sdk
+        run: |
+          mkdir ../existing-changesets
+          git checkout automations/update-sdk-from-api-definitions || true
+          ls -lAh .changeset
+          cp .changeset/* ../existing-changesets/
+          git checkout main || true
+          rm .changeset/*
+          cp ../existing-changesets/* .changeset/
+
+      - name: Checkout generator repo
+        uses: actions/checkout@v4
         with:
           token: '${{ secrets.MACHINE_USER_PAT }}'
           path: 'generator'
@@ -68,11 +82,6 @@ jobs:
             -i "/api-definitions/all.yaml"
           ls -lAh /tmp/ /tmp/sdk/
 
-      - name: Try checkout current revision
-        working-directory: ./sdk
-        run: |
-          git checkout origin/automations/update-sdk-from-api-definitions || true
-
       - name: Bundle SDK
         run: |
           rm -rf ./sdk/{src,composer.json,.php-cs-fixer.php,psalm.xml} && \
@@ -104,7 +113,10 @@ jobs:
       - name: Add changeset
         id: changeset
         if: github.event.inputs.trigger-reason != ''
+        working-directory: ./sdk
         run: |
+          git add .
+          git status
           if [[ `git status --porcelain` ]]; then
             echo "No changes found, skipping changeset creation"
           else
