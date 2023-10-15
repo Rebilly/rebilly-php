@@ -118,8 +118,6 @@ jobs:
           git add .
           git status
           if [[ `git status --porcelain` ]]; then
-            echo "No changes found, skipping changeset creation"
-          else
             export CHANGESET_ID=$(node ./scripts/add-changeset.js patch "${{ github.event.inputs.trigger-reason }}")
             echo "Added a patch changeset `${CHANGESET_ID}`: '${{ github.event.inputs.trigger-reason }}'"
             echo "id=${CHANGESET_ID}" >> $GITHUB_OUTPUT
