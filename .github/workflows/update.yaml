@@ -8,7 +8,6 @@ on:
           The comment that will be posted to the PR if any changes are added.
           Used to provide context about the source of the update.
         required: false
-  pull_request:
 
 jobs:
   generate-sdk:
@@ -119,7 +118,7 @@ jobs:
       
       - name: Add changeset
         id: changeset
-        if: github.event.inputs.trigger-reason != '' || github.event_name == 'pull_request'
+        if: github.event.inputs.trigger-reason != ''
         working-directory: ./sdk
         run: |
           git add .
@@ -130,13 +129,10 @@ jobs:
             echo "Added a patch changeset '${CHANGESET_ID}': '${{ github.event.inputs.trigger-reason }}'"
             echo "id=${CHANGESET_ID}" >> $GITHUB_OUTPUT
           fi
-          ls -lAh .changeset
-          for i in .changeset/*.md; do echo "$i"; echo ; cat "$i"; echo ; done ;
 
       - name: Create PR
         id: cpr
         uses: peter-evans/create-pull-request@v5
-        if: github.event_name != 'pull_request'
         with:
           # Path of the checked-out repo where we placed the generated resources  
           path: 'sdk'
@@ -154,7 +150,7 @@ jobs:
         if: |
           (steps.cpr.outputs.pull-request-operation == 'created' ||
           steps.cpr.outputs.pull-request-operation == 'updated') &&
-          github.event.inputs.trigger-reason != '' && github.event_name != 'pull_request'
+          github.event.inputs.trigger-reason != ''
         with:
           GITHUB_TOKEN: ${{ secrets.MACHINE_USER_PAT }}
           append: true
