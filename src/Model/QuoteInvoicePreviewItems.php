@@ -25,6 +25,9 @@ class QuoteInvoicePreviewItems implements JsonSerializable
 
     public function __construct(array $data = [])
     {
+        if (array_key_exists('quoteItemId', $data)) {
+            $this->setQuoteItemId($data['quoteItemId']);
+        }
         if (array_key_exists('type', $data)) {
             $this->setType($data['type']);
         }
@@ -69,6 +72,18 @@ class QuoteInvoicePreviewItems implements JsonSerializable
     public static function from(array $data = []): self
     {
         return new self($data);
+    }
+
+    public function getQuoteItemId(): ?string
+    {
+        return $this->fields['quoteItemId'] ?? null;
+    }
+
+    public function setQuoteItemId(null|string $quoteItemId): static
+    {
+        $this->fields['quoteItemId'] = $quoteItemId;
+
+        return $this;
     }
 
     public function getType(): ?string
@@ -254,6 +269,9 @@ class QuoteInvoicePreviewItems implements JsonSerializable
     public function jsonSerialize(): array
     {
         $data = [];
+        if (array_key_exists('quoteItemId', $this->fields)) {
+            $data['quoteItemId'] = $this->fields['quoteItemId'];
+        }
         if (array_key_exists('type', $this->fields)) {
             $data['type'] = $this->fields['type'];
         }
