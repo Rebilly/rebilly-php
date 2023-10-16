@@ -16,6 +16,9 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.MACHINE_USER_PAT }}
 
       - name: Setup Node.js 20
         uses: actions/setup-node@v3
