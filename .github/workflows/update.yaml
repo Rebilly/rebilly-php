@@ -33,7 +33,6 @@ jobs:
           ls -lAh .changeset
           cp .changeset/* ../existing-changesets/
           git checkout main || true
-          rm .changeset/*
           cp ../existing-changesets/* .changeset/
 
       - name: Checkout generator repo
@@ -95,12 +94,19 @@ jobs:
         id: composer-cache
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
-      - name: Cache dependencies
+      - name: Cache composer dependencies
         uses: actions/cache@v2
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ runner.os }}-composer-
+
+      - name: Cache npm dependencies
+        uses: actions/cache@v2
+        with:
+          path: '~/.npm'
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-node-
 
       - name: Install composer dependencies
         working-directory: ./sdk
@@ -118,8 +124,9 @@ jobs:
           git add .
           git status
           if [[ `git status --porcelain` ]]; then
+            npm ci
             export CHANGESET_ID=$(node ./scripts/add-changeset.js patch "${{ github.event.inputs.trigger-reason }}")
-            echo "Added a patch changeset `${CHANGESET_ID}`: '${{ github.event.inputs.trigger-reason }}'"
+            echo "Added a patch changeset '${CHANGESET_ID}': '${{ github.event.inputs.trigger-reason }}'"
             echo "id=${CHANGESET_ID}" >> $GITHUB_OUTPUT
           fi
 
