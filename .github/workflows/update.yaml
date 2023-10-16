@@ -127,11 +127,11 @@ jobs:
           if [[ `git status --porcelain` ]]; then
             npm ci
             export CHANGESET_ID=$(node ./scripts/add-changeset.js patch "${{ github.event.inputs.trigger-reason }}")
-            echo "Added a patch changeset `${CHANGESET_ID}`: '${{ github.event.inputs.trigger-reason }}'"
+            echo "Added a patch changeset '${CHANGESET_ID}': '${{ github.event.inputs.trigger-reason }}'"
             echo "id=${CHANGESET_ID}" >> $GITHUB_OUTPUT
           fi
           ls -lAh .changeset
-          cfor i in .changeset/*.md; do echo "$i"; echo ; cat "$i"; echo ; done ;
+          for i in .changeset/*.md; do echo "$i"; echo ; cat "$i"; echo ; done ;
 
       - name: Create PR
         id: cpr
