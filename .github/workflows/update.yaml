@@ -14,16 +14,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout api-definitions repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: 'api-definitions'
           repository: 'Rebilly/api-definitions'
 
-      - uses: actions/checkout@v3
+      - name: Checkout PHP SDK repo
+        uses: actions/checkout@v4
         with:
           path: 'sdk'
+          fetch-depth: 0
 
-      - uses: actions/checkout@v3
+      - name: Keep changesets
+        working-directory: ./sdk
+        run: |
+          mkdir ../existing-changesets
+          git checkout automations/update-sdk-from-api-definitions || true
+          ls -lAh .changeset
+          cp .changeset/* ../existing-changesets/
+          git checkout main || true
+          cp ../existing-changesets/* .changeset/
+
+      - name: Checkout generator repo
+        uses: actions/checkout@v4
         with:
           token: '${{ secrets.MACHINE_USER_PAT }}'
           path: 'generator'
@@ -68,24 +81,32 @@ jobs:
             -i "/api-definitions/all.yaml"
           ls -lAh /tmp/ /tmp/sdk/
 
-      - name: Get composer cache directory
-        working-directory: /tmp/sdk
-        id: composer-cache
-        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-
-      - name: Cache dependencies
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
-
       - name: Bundle SDK
         run: |
           rm -rf ./sdk/{src,composer.json,.php-cs-fixer.php,psalm.xml} && \
           cp -r /tmp/sdk/{src,composer.json,.php-cs-fixer.php,psalm.xml} ./sdk/
           php ./generator/backend/php-sdk-generator/remove-fqcns.php ./sdk && \
-          php ./generator/backend/php-sdk-generator/remove-unused-models.php ./sdk
+          php ./generator/backend/php-sdk-generator/remove-unused-models.php ./sdk && \
+          cd ./sdk && node ./scripts/update-sdk-version.js
+
+      - name: Get composer cache directory
+        working-directory: /tmp/sdk
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Cache npm dependencies
+        uses: actions/cache@v2
+        with:
+          path: '~/.npm'
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-node-
 
       - name: Install composer dependencies
         working-directory: ./sdk
@@ -94,10 +115,24 @@ jobs:
       - name: CS fix SDK
         working-directory: ./sdk
         run: composer cs-fix
+      
+      - name: Add changeset
+        id: changeset
+        if: github.event.inputs.trigger-reason != ''
+        working-directory: ./sdk
+        run: |
+          git add .
+          git status
+          if [[ `git status --porcelain` ]]; then
+            npm ci
+            export CHANGESET_ID=$(node ./scripts/add-changeset.js patch "${{ github.event.inputs.trigger-reason }}")
+            echo "Added a patch changeset '${CHANGESET_ID}': '${{ github.event.inputs.trigger-reason }}'"
+            echo "id=${CHANGESET_ID}" >> $GITHUB_OUTPUT
+          fi
 
       - name: Create PR
         id: cpr
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v5
         with:
           # Path of the checked-out repo where we placed the generated resources  
           path: 'sdk'
@@ -121,4 +156,4 @@ jobs:
           append: true
           number: ${{ steps.cpr.outputs.pull-request-number }}
           message: |
-            Triggered due to: ${{ github.event.inputs.trigger-reason }}
+            - ${{ github.event.inputs.trigger-reason }} [edit changeset](https://github.com/Rebilly/rebilly-php/edit/automations/update-sdk-from-api-definitions/.changeset/${{ steps.changeset.outputs.id }}.md?pr=%2FRebilly%2Frebilly-php%2Fpull%2F${{ steps.cpr.outputs.pull-request-number }})
