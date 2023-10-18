@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-interface InvoiceTax
+interface Taxes
 {
     public function getCalculator(): string;
 

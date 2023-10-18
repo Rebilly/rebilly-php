@@ -96,6 +96,9 @@ class Quote implements JsonSerializable
         if (array_key_exists('shipping', $data)) {
             $this->setShipping($data['shipping']);
         }
+        if (array_key_exists('tax', $data)) {
+            $this->setTax($data['tax']);
+        }
         if (array_key_exists('couponIds', $data)) {
             $this->setCouponIds($data['couponIds']);
         }
@@ -319,6 +322,22 @@ class Quote implements JsonSerializable
         return $this;
     }
 
+    public function getTax(): ?Taxes
+    {
+        return $this->fields['tax'] ?? null;
+    }
+
+    public function setTax(null|Taxes|array $tax): static
+    {
+        if ($tax !== null && !($tax instanceof Taxes)) {
+            $tax = TaxesFactory::from($tax);
+        }
+
+        $this->fields['tax'] = $tax;
+
+        return $this;
+    }
+
     /**
      * @return null|string[]
      */
@@ -425,6 +444,9 @@ class Quote implements JsonSerializable
         }
         if (array_key_exists('shipping', $this->fields)) {
             $data['shipping'] = $this->fields['shipping']?->jsonSerialize();
+        }
+        if (array_key_exists('tax', $this->fields)) {
+            $data['tax'] = $this->fields['tax']?->jsonSerialize();
         }
         if (array_key_exists('couponIds', $this->fields)) {
             $data['couponIds'] = $this->fields['couponIds'];

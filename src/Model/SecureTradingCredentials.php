@@ -30,6 +30,9 @@ class SecureTradingCredentials implements JsonSerializable
         if (array_key_exists('password', $data)) {
             $this->setPassword($data['password']);
         }
+        if (array_key_exists('notificationPassword', $data)) {
+            $this->setNotificationPassword($data['notificationPassword']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -73,6 +76,18 @@ class SecureTradingCredentials implements JsonSerializable
         return $this;
     }
 
+    public function getNotificationPassword(): ?string
+    {
+        return $this->fields['notificationPassword'] ?? null;
+    }
+
+    public function setNotificationPassword(null|string $notificationPassword): static
+    {
+        $this->fields['notificationPassword'] = $notificationPassword;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -84,6 +99,9 @@ class SecureTradingCredentials implements JsonSerializable
         }
         if (array_key_exists('password', $this->fields)) {
             $data['password'] = $this->fields['password'];
+        }
+        if (array_key_exists('notificationPassword', $this->fields)) {
+            $data['notificationPassword'] = $this->fields['notificationPassword'];
         }
 
         return $data;

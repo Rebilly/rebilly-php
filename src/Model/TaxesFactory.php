@@ -15,9 +15,9 @@ namespace Rebilly\Sdk\Model;
 
 use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
-class InvoiceTaxFactory
+class TaxesFactory
 {
-    public static function from(array $data = []): InvoiceTax
+    public static function from(array $data = []): Taxes
     {
         return match ($data['calculator']) {
             'manual' => Manual::from($data),

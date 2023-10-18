@@ -240,15 +240,15 @@ class UpcomingInvoice implements JsonSerializable
         return $this;
     }
 
-    public function getTax(): ?InvoiceTax
+    public function getTax(): ?Taxes
     {
         return $this->fields['tax'] ?? null;
     }
 
-    public function setTax(null|InvoiceTax|array $tax): static
+    public function setTax(null|Taxes|array $tax): static
     {
-        if ($tax !== null && !($tax instanceof InvoiceTax)) {
-            $tax = InvoiceTaxFactory::from($tax);
+        if ($tax !== null && !($tax instanceof Taxes)) {
+            $tax = TaxesFactory::from($tax);
         }
 
         $this->fields['tax'] = $tax;

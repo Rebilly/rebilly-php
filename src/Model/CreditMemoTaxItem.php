@@ -15,12 +15,18 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class InvoiceTaxItem implements JsonSerializable
+class CreditMemoTaxItem implements JsonSerializable
 {
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
+        if (array_key_exists('amount', $data)) {
+            $this->setAmount($data['amount']);
+        }
+        if (array_key_exists('description', $data)) {
+            $this->setDescription($data['description']);
+        }
         if (array_key_exists('rate', $data)) {
             $this->setRate($data['rate']);
         }
@@ -51,17 +57,39 @@ class InvoiceTaxItem implements JsonSerializable
         if (array_key_exists('jurisdictions', $data)) {
             $this->setJurisdictions($data['jurisdictions']);
         }
-        if (array_key_exists('amount', $data)) {
-            $this->setAmount($data['amount']);
-        }
-        if (array_key_exists('description', $data)) {
-            $this->setDescription($data['description']);
-        }
     }
 
     public static function from(array $data = []): self
     {
         return new self($data);
+    }
+
+    public function getAmount(): float
+    {
+        return $this->fields['amount'];
+    }
+
+    public function setAmount(float|string $amount): static
+    {
+        if (is_string($amount)) {
+            $amount = (float) $amount;
+        }
+
+        $this->fields['amount'] = $amount;
+
+        return $this;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->fields['description'];
+    }
+
+    public function setDescription(string $description): static
+    {
+        $this->fields['description'] = $description;
+
+        return $this;
     }
 
     public function getRate(): ?float
@@ -208,15 +236,15 @@ class InvoiceTaxItem implements JsonSerializable
         return $this;
     }
 
-    public function getJurisdictions(): ?TaxItemJurisdictions
+    public function getJurisdictions(): ?CreditMemoTaxItemJurisdictions
     {
         return $this->fields['jurisdictions'] ?? null;
     }
 
-    public function setJurisdictions(null|TaxItemJurisdictions|array $jurisdictions): static
+    public function setJurisdictions(null|CreditMemoTaxItemJurisdictions|array $jurisdictions): static
     {
-        if ($jurisdictions !== null && !($jurisdictions instanceof TaxItemJurisdictions)) {
-            $jurisdictions = TaxItemJurisdictions::from($jurisdictions);
+        if ($jurisdictions !== null && !($jurisdictions instanceof CreditMemoTaxItemJurisdictions)) {
+            $jurisdictions = CreditMemoTaxItemJurisdictions::from($jurisdictions);
         }
 
         $this->fields['jurisdictions'] = $jurisdictions;
@@ -224,37 +252,15 @@ class InvoiceTaxItem implements JsonSerializable
         return $this;
     }
 
-    public function getAmount(): float
-    {
-        return $this->fields['amount'];
-    }
-
-    public function setAmount(float|string $amount): static
-    {
-        if (is_string($amount)) {
-            $amount = (float) $amount;
-        }
-
-        $this->fields['amount'] = $amount;
-
-        return $this;
-    }
-
-    public function getDescription(): string
-    {
-        return $this->fields['description'];
-    }
-
-    public function setDescription(string $description): static
-    {
-        $this->fields['description'] = $description;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [];
+        if (array_key_exists('amount', $this->fields)) {
+            $data['amount'] = $this->fields['amount'];
+        }
+        if (array_key_exists('description', $this->fields)) {
+            $data['description'] = $this->fields['description'];
+        }
         if (array_key_exists('rate', $this->fields)) {
             $data['rate'] = $this->fields['rate'];
         }
@@ -284,12 +290,6 @@ class InvoiceTaxItem implements JsonSerializable
         }
         if (array_key_exists('jurisdictions', $this->fields)) {
             $data['jurisdictions'] = $this->fields['jurisdictions']?->jsonSerialize();
-        }
-        if (array_key_exists('amount', $this->fields)) {
-            $data['amount'] = $this->fields['amount'];
-        }
-        if (array_key_exists('description', $this->fields)) {
-            $data['description'] = $this->fields['description'];
         }
 
         return $data;

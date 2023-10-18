@@ -27,6 +27,7 @@ class CouponRestrictionFactory
             'restrict-to-bxgy' => CouponRestrictionRestrictToBxgy::from($data),
             'restrict-to-countries' => CouponRestrictionRestrictToCountries::from($data),
             'restrict-to-customers' => CouponRestrictionRestrictToCustomers::from($data),
+            'restrict-to-exclusive-application' => CouponRestrictionExclusiveApplication::from($data),
             'restrict-to-invoices' => CouponRestrictionRestrictToInvoices::from($data),
             'restrict-to-plans' => CouponRestrictionRestrictToPlans::from($data),
             'restrict-to-products' => CouponRestrictionRestrictToProducts::from($data),
