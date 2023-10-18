@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class TaxItemJurisdictions implements JsonSerializable
+class CreditMemoTaxItemJurisdictions implements JsonSerializable
 {
     private array $fields = [];
 
@@ -45,9 +45,23 @@ class TaxItemJurisdictions implements JsonSerializable
         return $this->fields['country'] ?? null;
     }
 
+    public function setCountry(null|string $country): static
+    {
+        $this->fields['country'] = $country;
+
+        return $this;
+    }
+
     public function getState(): ?string
     {
         return $this->fields['state'] ?? null;
+    }
+
+    public function setState(null|string $state): static
+    {
+        $this->fields['state'] = $state;
+
+        return $this;
     }
 
     public function getCounty(): ?string
@@ -55,9 +69,23 @@ class TaxItemJurisdictions implements JsonSerializable
         return $this->fields['county'] ?? null;
     }
 
+    public function setCounty(null|string $county): static
+    {
+        $this->fields['county'] = $county;
+
+        return $this;
+    }
+
     public function getCity(): ?string
     {
         return $this->fields['city'] ?? null;
+    }
+
+    public function setCity(null|string $city): static
+    {
+        $this->fields['city'] = $city;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -77,33 +105,5 @@ class TaxItemJurisdictions implements JsonSerializable
         }
 
         return $data;
-    }
-
-    private function setCountry(null|string $country): static
-    {
-        $this->fields['country'] = $country;
-
-        return $this;
-    }
-
-    private function setState(null|string $state): static
-    {
-        $this->fields['state'] = $state;
-
-        return $this;
-    }
-
-    private function setCounty(null|string $county): static
-    {
-        $this->fields['county'] = $county;
-
-        return $this;
-    }
-
-    private function setCity(null|string $city): static
-    {
-        $this->fields['city'] = $city;
-
-        return $this;
     }
 }

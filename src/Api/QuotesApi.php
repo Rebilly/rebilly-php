@@ -18,6 +18,7 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Psr\Http\Message\StreamInterface;
 use Rebilly\Sdk\Collection;
+use Rebilly\Sdk\Model\PatchQuote;
 use Rebilly\Sdk\Model\Quote;
 use Rebilly\Sdk\Model\QuoteTimeline;
 use Rebilly\Sdk\Paginator;
@@ -307,6 +308,26 @@ class QuotesApi
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/quotes/{id}/issue');
 
         $request = new Request('POST', $uri);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return Quote::from($data);
+    }
+
+    /**
+     * @return Quote
+     */
+    public function patch(
+        string $id,
+        PatchQuote $patchQuote,
+    ): Quote {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/quotes/{id}');
+
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($patchQuote));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

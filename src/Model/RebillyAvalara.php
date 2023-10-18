@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class RebillyAvalara implements InvoiceTax, JsonSerializable
+class RebillyAvalara implements Taxes, JsonSerializable
 {
     private array $fields = [];
 
@@ -45,7 +45,7 @@ class RebillyAvalara implements InvoiceTax, JsonSerializable
     }
 
     /**
-     * @return null|InvoiceTaxItem[]
+     * @return null|TaxItem[]
      */
     public function getItems(): ?array
     {
@@ -53,12 +53,12 @@ class RebillyAvalara implements InvoiceTax, JsonSerializable
     }
 
     /**
-     * @param null|array[]|InvoiceTaxItem[] $items
+     * @param null|array[]|TaxItem[] $items
      */
     public function setItems(null|array $items): static
     {
         $items = $items !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof InvoiceTaxItem ? $value : InvoiceTaxItem::from($value)) : null,
+            fn ($value) => $value !== null ? ($value instanceof TaxItem ? $value : TaxItem::from($value)) : null,
             $items,
         ) : null;
 

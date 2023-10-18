@@ -141,15 +141,15 @@ class CreditMemoItems implements JsonSerializable
         return $this;
     }
 
-    public function getTax(): ?TaxItem
+    public function getTax(): ?CreditMemoTaxItem
     {
         return $this->fields['tax'] ?? null;
     }
 
-    public function setTax(null|TaxItem|array $tax): static
+    public function setTax(null|CreditMemoTaxItem|array $tax): static
     {
-        if ($tax !== null && !($tax instanceof TaxItem)) {
-            $tax = TaxItem::from($tax);
+        if ($tax !== null && !($tax instanceof CreditMemoTaxItem)) {
+            $tax = CreditMemoTaxItem::from($tax);
         }
 
         $this->fields['tax'] = $tax;

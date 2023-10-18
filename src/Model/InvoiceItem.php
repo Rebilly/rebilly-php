@@ -231,15 +231,15 @@ class InvoiceItem implements JsonSerializable
         return $this->fields['updatedTime'] ?? null;
     }
 
-    public function getTax(): ?InvoiceTaxItem
+    public function getTax(): ?TaxItem
     {
         return $this->fields['tax'] ?? null;
     }
 
-    public function setTax(null|InvoiceTaxItem|array $tax): static
+    public function setTax(null|TaxItem|array $tax): static
     {
-        if ($tax !== null && !($tax instanceof InvoiceTaxItem)) {
-            $tax = InvoiceTaxItem::from($tax);
+        if ($tax !== null && !($tax instanceof TaxItem)) {
+            $tax = TaxItem::from($tax);
         }
 
         $this->fields['tax'] = $tax;
