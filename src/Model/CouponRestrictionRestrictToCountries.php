@@ -19,6 +19,10 @@ use JsonSerializable;
 
 class CouponRestrictionRestrictToCountries implements CouponRestriction, JsonSerializable
 {
+    public const REQUIRE_ALL_TAGS_TRUE = 'true';
+
+    public const REQUIRE_ALL_TAGS_FALSE = 'false';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -38,6 +42,9 @@ class CouponRestrictionRestrictToCountries implements CouponRestriction, JsonSer
         if (array_key_exists('buy', $data)) {
             $this->setBuy($data['buy']);
         }
+        if (array_key_exists('tags', $data)) {
+            $this->setTags($data['tags']);
+        }
         if (array_key_exists('productIds', $data)) {
             $this->setProductIds($data['productIds']);
         }
@@ -55,6 +62,9 @@ class CouponRestrictionRestrictToCountries implements CouponRestriction, JsonSer
         }
         if (array_key_exists('time', $data)) {
             $this->setTime($data['time']);
+        }
+        if (array_key_exists('requireAllTags', $data)) {
+            $this->setRequireAllTags($data['requireAllTags']);
         }
         if (array_key_exists('minimumQuantity', $data)) {
             $this->setMinimumQuantity($data['minimumQuantity']);
@@ -163,6 +173,29 @@ class CouponRestrictionRestrictToCountries implements CouponRestriction, JsonSer
         );
 
         $this->fields['buy'] = $buy;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getTags(): array
+    {
+        return $this->fields['tags'];
+    }
+
+    /**
+     * @param string[] $tags
+     */
+    public function setTags(array $tags): static
+    {
+        $tags = array_map(
+            fn ($value) => $value,
+            $tags,
+        );
+
+        $this->fields['tags'] = $tags;
 
         return $this;
     }
@@ -287,6 +320,18 @@ class CouponRestrictionRestrictToCountries implements CouponRestriction, JsonSer
         return $this;
     }
 
+    public function getRequireAllTags(): string
+    {
+        return $this->fields['requireAllTags'];
+    }
+
+    public function setRequireAllTags(string $requireAllTags): static
+    {
+        $this->fields['requireAllTags'] = $requireAllTags;
+
+        return $this;
+    }
+
     public function getMinimumQuantity(): ?int
     {
         return $this->fields['minimumQuantity'] ?? null;
@@ -342,6 +387,9 @@ class CouponRestrictionRestrictToCountries implements CouponRestriction, JsonSer
         if (array_key_exists('buy', $this->fields)) {
             $data['buy'] = $this->fields['buy'];
         }
+        if (array_key_exists('tags', $this->fields)) {
+            $data['tags'] = $this->fields['tags'];
+        }
         if (array_key_exists('productIds', $this->fields)) {
             $data['productIds'] = $this->fields['productIds'];
         }
@@ -359,6 +407,9 @@ class CouponRestrictionRestrictToCountries implements CouponRestriction, JsonSer
         }
         if (array_key_exists('time', $this->fields)) {
             $data['time'] = $this->fields['time']?->format(DateTimeInterface::RFC3339);
+        }
+        if (array_key_exists('requireAllTags', $this->fields)) {
+            $data['requireAllTags'] = $this->fields['requireAllTags'];
         }
         if (array_key_exists('minimumQuantity', $this->fields)) {
             $data['minimumQuantity'] = $this->fields['minimumQuantity'];

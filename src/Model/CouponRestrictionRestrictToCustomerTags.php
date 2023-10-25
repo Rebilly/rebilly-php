@@ -17,7 +17,7 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
 
-class CouponRestrictionMinimumOrderAmount implements CouponRestriction, RedemptionRestriction, JsonSerializable
+class CouponRestrictionRestrictToCustomerTags implements CouponRestriction, JsonSerializable
 {
     public const REQUIRE_ALL_TAGS_TRUE = 'true';
 
@@ -27,14 +27,17 @@ class CouponRestrictionMinimumOrderAmount implements CouponRestriction, Redempti
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('amount', $data)) {
-            $this->setAmount($data['amount']);
+        if (array_key_exists('tags', $data)) {
+            $this->setTags($data['tags']);
         }
-        if (array_key_exists('currency', $data)) {
-            $this->setCurrency($data['currency']);
+        if (array_key_exists('requireAllTags', $data)) {
+            $this->setRequireAllTags($data['requireAllTags']);
         }
         if (array_key_exists('planIds', $data)) {
             $this->setPlanIds($data['planIds']);
+        }
+        if (array_key_exists('amount', $data)) {
+            $this->setAmount($data['amount']);
         }
         if (array_key_exists('quantity', $data)) {
             $this->setQuantity($data['quantity']);
@@ -45,9 +48,6 @@ class CouponRestrictionMinimumOrderAmount implements CouponRestriction, Redempti
         if (array_key_exists('countries', $data)) {
             $this->setCountries($data['countries']);
         }
-        if (array_key_exists('tags', $data)) {
-            $this->setTags($data['tags']);
-        }
         if (array_key_exists('productIds', $data)) {
             $this->setProductIds($data['productIds']);
         }
@@ -57,14 +57,14 @@ class CouponRestrictionMinimumOrderAmount implements CouponRestriction, Redempti
         if (array_key_exists('get', $data)) {
             $this->setGet($data['get']);
         }
+        if (array_key_exists('currency', $data)) {
+            $this->setCurrency($data['currency']);
+        }
         if (array_key_exists('customerIds', $data)) {
             $this->setCustomerIds($data['customerIds']);
         }
         if (array_key_exists('time', $data)) {
             $this->setTime($data['time']);
-        }
-        if (array_key_exists('requireAllTags', $data)) {
-            $this->setRequireAllTags($data['requireAllTags']);
         }
         if (array_key_exists('minimumQuantity', $data)) {
             $this->setMinimumQuantity($data['minimumQuantity']);
@@ -81,29 +81,40 @@ class CouponRestrictionMinimumOrderAmount implements CouponRestriction, Redempti
 
     public function getType(): string
     {
-        return 'minimum-order-amount';
+        return 'restrict-to-customer-tags';
     }
 
-    public function getAmount(): int
+    /**
+     * @return string[]
+     */
+    public function getTags(): array
     {
-        return $this->fields['amount'];
+        return $this->fields['tags'];
     }
 
-    public function setAmount(int $amount): static
+    /**
+     * @param string[] $tags
+     */
+    public function setTags(array $tags): static
     {
-        $this->fields['amount'] = $amount;
+        $tags = array_map(
+            fn ($value) => $value,
+            $tags,
+        );
+
+        $this->fields['tags'] = $tags;
 
         return $this;
     }
 
-    public function getCurrency(): string
+    public function getRequireAllTags(): string
     {
-        return $this->fields['currency'];
+        return $this->fields['requireAllTags'];
     }
 
-    public function setCurrency(string $currency): static
+    public function setRequireAllTags(string $requireAllTags): static
     {
-        $this->fields['currency'] = $currency;
+        $this->fields['requireAllTags'] = $requireAllTags;
 
         return $this;
     }
@@ -127,6 +138,18 @@ class CouponRestrictionMinimumOrderAmount implements CouponRestriction, Redempti
         );
 
         $this->fields['planIds'] = $planIds;
+
+        return $this;
+    }
+
+    public function getAmount(): int
+    {
+        return $this->fields['amount'];
+    }
+
+    public function setAmount(int $amount): static
+    {
+        $this->fields['amount'] = $amount;
 
         return $this;
     }
@@ -185,29 +208,6 @@ class CouponRestrictionMinimumOrderAmount implements CouponRestriction, Redempti
         );
 
         $this->fields['countries'] = $countries;
-
-        return $this;
-    }
-
-    /**
-     * @return string[]
-     */
-    public function getTags(): array
-    {
-        return $this->fields['tags'];
-    }
-
-    /**
-     * @param string[] $tags
-     */
-    public function setTags(array $tags): static
-    {
-        $tags = array_map(
-            fn ($value) => $value,
-            $tags,
-        );
-
-        $this->fields['tags'] = $tags;
 
         return $this;
     }
@@ -281,6 +281,18 @@ class CouponRestrictionMinimumOrderAmount implements CouponRestriction, Redempti
         return $this;
     }
 
+    public function getCurrency(): string
+    {
+        return $this->fields['currency'];
+    }
+
+    public function setCurrency(string $currency): static
+    {
+        $this->fields['currency'] = $currency;
+
+        return $this;
+    }
+
     /**
      * @return string[]
      */
@@ -316,18 +328,6 @@ class CouponRestrictionMinimumOrderAmount implements CouponRestriction, Redempti
         }
 
         $this->fields['time'] = $time;
-
-        return $this;
-    }
-
-    public function getRequireAllTags(): string
-    {
-        return $this->fields['requireAllTags'];
-    }
-
-    public function setRequireAllTags(string $requireAllTags): static
-    {
-        $this->fields['requireAllTags'] = $requireAllTags;
 
         return $this;
     }
@@ -370,16 +370,19 @@ class CouponRestrictionMinimumOrderAmount implements CouponRestriction, Redempti
     public function jsonSerialize(): array
     {
         $data = [
-            'type' => 'minimum-order-amount',
+            'type' => 'restrict-to-customer-tags',
         ];
-        if (array_key_exists('amount', $this->fields)) {
-            $data['amount'] = $this->fields['amount'];
+        if (array_key_exists('tags', $this->fields)) {
+            $data['tags'] = $this->fields['tags'];
         }
-        if (array_key_exists('currency', $this->fields)) {
-            $data['currency'] = $this->fields['currency'];
+        if (array_key_exists('requireAllTags', $this->fields)) {
+            $data['requireAllTags'] = $this->fields['requireAllTags'];
         }
         if (array_key_exists('planIds', $this->fields)) {
             $data['planIds'] = $this->fields['planIds'];
+        }
+        if (array_key_exists('amount', $this->fields)) {
+            $data['amount'] = $this->fields['amount'];
         }
         if (array_key_exists('quantity', $this->fields)) {
             $data['quantity'] = $this->fields['quantity'];
@@ -390,9 +393,6 @@ class CouponRestrictionMinimumOrderAmount implements CouponRestriction, Redempti
         if (array_key_exists('countries', $this->fields)) {
             $data['countries'] = $this->fields['countries'];
         }
-        if (array_key_exists('tags', $this->fields)) {
-            $data['tags'] = $this->fields['tags'];
-        }
         if (array_key_exists('productIds', $this->fields)) {
             $data['productIds'] = $this->fields['productIds'];
         }
@@ -402,14 +402,14 @@ class CouponRestrictionMinimumOrderAmount implements CouponRestriction, Redempti
         if (array_key_exists('get', $this->fields)) {
             $data['get'] = $this->fields['get'];
         }
+        if (array_key_exists('currency', $this->fields)) {
+            $data['currency'] = $this->fields['currency'];
+        }
         if (array_key_exists('customerIds', $this->fields)) {
             $data['customerIds'] = $this->fields['customerIds'];
         }
         if (array_key_exists('time', $this->fields)) {
             $data['time'] = $this->fields['time']?->format(DateTimeInterface::RFC3339);
-        }
-        if (array_key_exists('requireAllTags', $this->fields)) {
-            $data['requireAllTags'] = $this->fields['requireAllTags'];
         }
         if (array_key_exists('minimumQuantity', $this->fields)) {
             $data['minimumQuantity'] = $this->fields['minimumQuantity'];

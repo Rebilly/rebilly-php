@@ -19,6 +19,10 @@ use JsonSerializable;
 
 class CouponRestrictionPaidByTime implements CouponRestriction, RedemptionRestriction, JsonSerializable
 {
+    public const REQUIRE_ALL_TAGS_TRUE = 'true';
+
+    public const REQUIRE_ALL_TAGS_FALSE = 'false';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -41,6 +45,9 @@ class CouponRestrictionPaidByTime implements CouponRestriction, RedemptionRestri
         if (array_key_exists('countries', $data)) {
             $this->setCountries($data['countries']);
         }
+        if (array_key_exists('tags', $data)) {
+            $this->setTags($data['tags']);
+        }
         if (array_key_exists('productIds', $data)) {
             $this->setProductIds($data['productIds']);
         }
@@ -55,6 +62,9 @@ class CouponRestrictionPaidByTime implements CouponRestriction, RedemptionRestri
         }
         if (array_key_exists('customerIds', $data)) {
             $this->setCustomerIds($data['customerIds']);
+        }
+        if (array_key_exists('requireAllTags', $data)) {
+            $this->setRequireAllTags($data['requireAllTags']);
         }
         if (array_key_exists('minimumQuantity', $data)) {
             $this->setMinimumQuantity($data['minimumQuantity']);
@@ -186,6 +196,29 @@ class CouponRestrictionPaidByTime implements CouponRestriction, RedemptionRestri
     /**
      * @return string[]
      */
+    public function getTags(): array
+    {
+        return $this->fields['tags'];
+    }
+
+    /**
+     * @param string[] $tags
+     */
+    public function setTags(array $tags): static
+    {
+        $tags = array_map(
+            fn ($value) => $value,
+            $tags,
+        );
+
+        $this->fields['tags'] = $tags;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]
+     */
     public function getProductIds(): array
     {
         return $this->fields['productIds'];
@@ -287,6 +320,18 @@ class CouponRestrictionPaidByTime implements CouponRestriction, RedemptionRestri
         return $this;
     }
 
+    public function getRequireAllTags(): string
+    {
+        return $this->fields['requireAllTags'];
+    }
+
+    public function setRequireAllTags(string $requireAllTags): static
+    {
+        $this->fields['requireAllTags'] = $requireAllTags;
+
+        return $this;
+    }
+
     public function getMinimumQuantity(): ?int
     {
         return $this->fields['minimumQuantity'] ?? null;
@@ -345,6 +390,9 @@ class CouponRestrictionPaidByTime implements CouponRestriction, RedemptionRestri
         if (array_key_exists('countries', $this->fields)) {
             $data['countries'] = $this->fields['countries'];
         }
+        if (array_key_exists('tags', $this->fields)) {
+            $data['tags'] = $this->fields['tags'];
+        }
         if (array_key_exists('productIds', $this->fields)) {
             $data['productIds'] = $this->fields['productIds'];
         }
@@ -359,6 +407,9 @@ class CouponRestrictionPaidByTime implements CouponRestriction, RedemptionRestri
         }
         if (array_key_exists('customerIds', $this->fields)) {
             $data['customerIds'] = $this->fields['customerIds'];
+        }
+        if (array_key_exists('requireAllTags', $this->fields)) {
+            $data['requireAllTags'] = $this->fields['requireAllTags'];
         }
         if (array_key_exists('minimumQuantity', $this->fields)) {
             $data['minimumQuantity'] = $this->fields['minimumQuantity'];

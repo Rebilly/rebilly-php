@@ -26,6 +26,7 @@ class CouponRestrictionFactory
             'redemptions-per-customer' => CouponRestrictionRedemptionsPerCustomer::from($data),
             'restrict-to-bxgy' => CouponRestrictionRestrictToBxgy::from($data),
             'restrict-to-countries' => CouponRestrictionRestrictToCountries::from($data),
+            'restrict-to-customer-tags' => CouponRestrictionRestrictToCustomerTags::from($data),
             'restrict-to-customers' => CouponRestrictionRestrictToCustomers::from($data),
             'restrict-to-exclusive-application' => CouponRestrictionExclusiveApplication::from($data),
             'restrict-to-invoices' => CouponRestrictionRestrictToInvoices::from($data),
