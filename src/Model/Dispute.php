@@ -357,6 +357,8 @@ class Dispute implements JsonSerializable
 
     public const CATEGORY_UNCATEGORIZED = 'uncategorized';
 
+    public const CATEGORY_BANK_RETURN = 'bank-return';
+
     public const TYPE_INFORMATION_REQUEST = 'information-request';
 
     public const TYPE_FIRST_CHARGEBACK = 'first-chargeback';
@@ -370,6 +372,8 @@ class Dispute implements JsonSerializable
     public const TYPE_ETHOCA_ALERT = 'ethoca-alert';
 
     public const TYPE_VERIFI_ALERT = 'verifi-alert';
+
+    public const TYPE_BANK_RETURN = 'bank-return';
 
     public const STATUS_RESPONSE_NEEDED = 'response-needed';
 

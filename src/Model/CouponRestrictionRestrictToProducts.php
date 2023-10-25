@@ -19,6 +19,10 @@ use JsonSerializable;
 
 class CouponRestrictionRestrictToProducts implements CouponRestriction, RedemptionRestriction, JsonSerializable
 {
+    public const REQUIRE_ALL_TAGS_TRUE = 'true';
+
+    public const REQUIRE_ALL_TAGS_FALSE = 'false';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -44,6 +48,9 @@ class CouponRestrictionRestrictToProducts implements CouponRestriction, Redempti
         if (array_key_exists('countries', $data)) {
             $this->setCountries($data['countries']);
         }
+        if (array_key_exists('tags', $data)) {
+            $this->setTags($data['tags']);
+        }
         if (array_key_exists('subscriptionIds', $data)) {
             $this->setSubscriptionIds($data['subscriptionIds']);
         }
@@ -58,6 +65,9 @@ class CouponRestrictionRestrictToProducts implements CouponRestriction, Redempti
         }
         if (array_key_exists('time', $data)) {
             $this->setTime($data['time']);
+        }
+        if (array_key_exists('requireAllTags', $data)) {
+            $this->setRequireAllTags($data['requireAllTags']);
         }
         if (array_key_exists('invoiceIds', $data)) {
             $this->setInvoiceIds($data['invoiceIds']);
@@ -205,6 +215,29 @@ class CouponRestrictionRestrictToProducts implements CouponRestriction, Redempti
     /**
      * @return string[]
      */
+    public function getTags(): array
+    {
+        return $this->fields['tags'];
+    }
+
+    /**
+     * @param string[] $tags
+     */
+    public function setTags(array $tags): static
+    {
+        $tags = array_map(
+            fn ($value) => $value,
+            $tags,
+        );
+
+        $this->fields['tags'] = $tags;
+
+        return $this;
+    }
+
+    /**
+     * @return string[]
+     */
     public function getSubscriptionIds(): array
     {
         return $this->fields['subscriptionIds'];
@@ -299,6 +332,18 @@ class CouponRestrictionRestrictToProducts implements CouponRestriction, Redempti
         return $this;
     }
 
+    public function getRequireAllTags(): string
+    {
+        return $this->fields['requireAllTags'];
+    }
+
+    public function setRequireAllTags(string $requireAllTags): static
+    {
+        $this->fields['requireAllTags'] = $requireAllTags;
+
+        return $this;
+    }
+
     /**
      * @return string[]
      */
@@ -348,6 +393,9 @@ class CouponRestrictionRestrictToProducts implements CouponRestriction, Redempti
         if (array_key_exists('countries', $this->fields)) {
             $data['countries'] = $this->fields['countries'];
         }
+        if (array_key_exists('tags', $this->fields)) {
+            $data['tags'] = $this->fields['tags'];
+        }
         if (array_key_exists('subscriptionIds', $this->fields)) {
             $data['subscriptionIds'] = $this->fields['subscriptionIds'];
         }
@@ -362,6 +410,9 @@ class CouponRestrictionRestrictToProducts implements CouponRestriction, Redempti
         }
         if (array_key_exists('time', $this->fields)) {
             $data['time'] = $this->fields['time']?->format(DateTimeInterface::RFC3339);
+        }
+        if (array_key_exists('requireAllTags', $this->fields)) {
+            $data['requireAllTags'] = $this->fields['requireAllTags'];
         }
         if (array_key_exists('invoiceIds', $this->fields)) {
             $data['invoiceIds'] = $this->fields['invoiceIds'];
