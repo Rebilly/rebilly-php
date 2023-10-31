@@ -17,7 +17,7 @@ use Rebilly\Sdk\Model\Customer;
 use Rebilly\Sdk\Model\OrderItem;
 use Rebilly\Sdk\Model\OrderItemPlan;
 use Rebilly\Sdk\Model\PaymentCardToken;
-use Rebilly\Sdk\Model\PaymentToken;
+use Rebilly\Sdk\Model\PaymentInstructionToken;
 use Rebilly\Sdk\Model\Plan;
 use Rebilly\Sdk\Model\PlanFormulaFlatRate;
 use Rebilly\Sdk\Model\PostTransactionRequest;
@@ -165,7 +165,7 @@ try {
         ->setIsMerchantInitiated(true)
         ->setIsProcessedOutside(true)
         ->setPaymentInstruction(
-            PaymentToken::from()
+            PaymentInstructionToken::from()
                 ->setToken($token->getId()),
         )
         ->setInvoiceIds([(string) $invoice->getId()]);
