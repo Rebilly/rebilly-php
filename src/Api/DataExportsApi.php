@@ -18,6 +18,7 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\DataExport;
+use Rebilly\Sdk\Model\DataExportFactory;
 use Rebilly\Sdk\Paginator;
 
 class DataExportsApi
@@ -59,7 +60,7 @@ class DataExportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return DataExport::from($data);
+        return DataExportFactory::from($data);
     }
 
     /**
@@ -90,7 +91,7 @@ class DataExportsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): DataExport => DataExport::from($item), $data),
+            array_map(fn (array $item): DataExport => DataExportFactory::from($item), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
@@ -138,7 +139,7 @@ class DataExportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return DataExport::from($data);
+        return DataExportFactory::from($data);
     }
 
     /**
@@ -162,6 +163,6 @@ class DataExportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return DataExport::from($data);
+        return DataExportFactory::from($data);
     }
 }

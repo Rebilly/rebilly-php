@@ -15,4 +15,5 @@ namespace Rebilly\Sdk\Model;
 
 interface ServicePeriodAnchorInstruction
 {
+    public function getMethod(): string;
 }
