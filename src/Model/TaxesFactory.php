@@ -20,9 +20,9 @@ class TaxesFactory
     public static function from(array $data = []): Taxes
     {
         return match ($data['calculator']) {
-            'manual' => Manual::from($data),
-            'rebilly-avalara' => RebillyAvalara::from($data),
-            'rebilly-taxjar' => RebillyTaxjar::from($data),
+            'manual' => ManualTax::from($data),
+            'rebilly-avalara' => RebillyAvalaraTax::from($data),
+            'rebilly-taxjar' => RebillyTaxJarTax::from($data),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

@@ -18,7 +18,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
-use Rebilly\Sdk\Model\APILogSummary;
+use Rebilly\Sdk\Model\ApiLogSummary;
 use Rebilly\Sdk\Model\CumulativeSubscriptions;
 use Rebilly\Sdk\Model\DashboardResponse;
 use Rebilly\Sdk\Model\DccMarkup;
@@ -51,14 +51,14 @@ class ReportsApi
     }
 
     /**
-     * @return APILogSummary
+     * @return ApiLogSummary
      */
     public function getApiLogSummary(
         DateTimeImmutable $periodStart,
         DateTimeImmutable $periodEnd,
         ?int $limit = null,
         ?int $offset = null,
-    ): APILogSummary {
+    ): ApiLogSummary {
         $queryParams = [
             'periodStart' => $periodStart->format('Y-m-d\TH:i:s\Z'),
             'periodEnd' => $periodEnd->format('Y-m-d\TH:i:s\Z'),
@@ -71,7 +71,7 @@ class ReportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return APILogSummary::from($data);
+        return ApiLogSummary::from($data);
     }
 
     /**

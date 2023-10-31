@@ -21,7 +21,7 @@ class FeeFormulaFactory
     {
         return match ($data['type']) {
             'fixed-fee' => FixedFeeFormula::from($data),
-            'percentage' => PercentageFormula::from($data),
+            'percentage' => PercentageFeeFormula::from($data),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class PaymentToken implements PaymentInstruction, JsonSerializable
+class PaymentInstructionMethods implements PaymentInstruction, JsonSerializable
 {
     public const METHOD_PAYMENT_CARD = 'payment-card';
 
@@ -23,11 +23,14 @@ class PaymentToken implements PaymentInstruction, JsonSerializable
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('token', $data)) {
-            $this->setToken($data['token']);
+        if (array_key_exists('methods', $data)) {
+            $this->setMethods($data['methods']);
         }
         if (array_key_exists('receivedBy', $data)) {
             $this->setReceivedBy($data['receivedBy']);
+        }
+        if (array_key_exists('reference', $data)) {
+            $this->setReference($data['reference']);
         }
         if (array_key_exists('cvv', $data)) {
             $this->setCvv($data['cvv']);
@@ -35,17 +38,14 @@ class PaymentToken implements PaymentInstruction, JsonSerializable
         if (array_key_exists('method', $data)) {
             $this->setMethod($data['method']);
         }
-        if (array_key_exists('methods', $data)) {
-            $this->setMethods($data['methods']);
-        }
         if (array_key_exists('customFields', $data)) {
             $this->setCustomFields($data['customFields']);
         }
         if (array_key_exists('paymentInstrumentId', $data)) {
             $this->setPaymentInstrumentId($data['paymentInstrumentId']);
         }
-        if (array_key_exists('reference', $data)) {
-            $this->setReference($data['reference']);
+        if (array_key_exists('token', $data)) {
+            $this->setToken($data['token']);
         }
         if (array_key_exists('expMonth', $data)) {
             $this->setExpMonth($data['expMonth']);
@@ -75,14 +75,25 @@ class PaymentToken implements PaymentInstruction, JsonSerializable
         return new self($data);
     }
 
-    public function getToken(): string
+    /**
+     * @return null|string[]
+     */
+    public function getMethods(): ?array
     {
-        return $this->fields['token'];
+        return $this->fields['methods'] ?? null;
     }
 
-    public function setToken(string $token): static
+    /**
+     * @param null|string[] $methods
+     */
+    public function setMethods(null|array $methods): static
     {
-        $this->fields['token'] = $token;
+        $methods = $methods !== null ? array_map(
+            fn ($value) => $value,
+            $methods,
+        ) : null;
+
+        $this->fields['methods'] = $methods;
 
         return $this;
     }
@@ -95,6 +106,18 @@ class PaymentToken implements PaymentInstruction, JsonSerializable
     public function setReceivedBy(null|string $receivedBy): static
     {
         $this->fields['receivedBy'] = $receivedBy;
+
+        return $this;
+    }
+
+    public function getReference(): ?string
+    {
+        return $this->fields['reference'] ?? null;
+    }
+
+    public function setReference(null|string $reference): static
+    {
+        $this->fields['reference'] = $reference;
 
         return $this;
     }
@@ -123,29 +146,6 @@ class PaymentToken implements PaymentInstruction, JsonSerializable
         return $this;
     }
 
-    /**
-     * @return null|string[]
-     */
-    public function getMethods(): ?array
-    {
-        return $this->fields['methods'] ?? null;
-    }
-
-    /**
-     * @param null|string[] $methods
-     */
-    public function setMethods(null|array $methods): static
-    {
-        $methods = $methods !== null ? array_map(
-            fn ($value) => $value,
-            $methods,
-        ) : null;
-
-        $this->fields['methods'] = $methods;
-
-        return $this;
-    }
-
     public function getCustomFields(): ?array
     {
         return $this->fields['customFields'] ?? null;
@@ -170,14 +170,14 @@ class PaymentToken implements PaymentInstruction, JsonSerializable
         return $this;
     }
 
-    public function getReference(): ?string
+    public function getToken(): string
     {
-        return $this->fields['reference'] ?? null;
+        return $this->fields['token'];
     }
 
-    public function setReference(null|string $reference): static
+    public function setToken(string $token): static
     {
-        $this->fields['reference'] = $reference;
+        $this->fields['token'] = $token;
 
         return $this;
     }
@@ -277,11 +277,14 @@ class PaymentToken implements PaymentInstruction, JsonSerializable
     public function jsonSerialize(): array
     {
         $data = [];
-        if (array_key_exists('token', $this->fields)) {
-            $data['token'] = $this->fields['token'];
+        if (array_key_exists('methods', $this->fields)) {
+            $data['methods'] = $this->fields['methods'];
         }
         if (array_key_exists('receivedBy', $this->fields)) {
             $data['receivedBy'] = $this->fields['receivedBy'];
+        }
+        if (array_key_exists('reference', $this->fields)) {
+            $data['reference'] = $this->fields['reference'];
         }
         if (array_key_exists('cvv', $this->fields)) {
             $data['cvv'] = $this->fields['cvv'];
@@ -289,17 +292,14 @@ class PaymentToken implements PaymentInstruction, JsonSerializable
         if (array_key_exists('method', $this->fields)) {
             $data['method'] = $this->fields['method'];
         }
-        if (array_key_exists('methods', $this->fields)) {
-            $data['methods'] = $this->fields['methods'];
-        }
         if (array_key_exists('customFields', $this->fields)) {
             $data['customFields'] = $this->fields['customFields'];
         }
         if (array_key_exists('paymentInstrumentId', $this->fields)) {
             $data['paymentInstrumentId'] = $this->fields['paymentInstrumentId'];
         }
-        if (array_key_exists('reference', $this->fields)) {
-            $data['reference'] = $this->fields['reference'];
+        if (array_key_exists('token', $this->fields)) {
+            $data['token'] = $this->fields['token'];
         }
         if (array_key_exists('expMonth', $this->fields)) {
             $data['expMonth'] = $this->fields['expMonth'];

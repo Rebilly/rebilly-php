@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class RebillyTaxjar implements Taxes, JsonSerializable
+class ManualTax implements Taxes, JsonSerializable
 {
     private array $fields = [];
 
@@ -36,7 +36,7 @@ class RebillyTaxjar implements Taxes, JsonSerializable
 
     public function getCalculator(): string
     {
-        return 'rebilly-taxjar';
+        return 'manual';
     }
 
     public function getAmount(): ?int
@@ -45,22 +45,22 @@ class RebillyTaxjar implements Taxes, JsonSerializable
     }
 
     /**
-     * @return null|TaxItem[]
+     * @return TaxItem[]
      */
-    public function getItems(): ?array
+    public function getItems(): array
     {
-        return $this->fields['items'] ?? null;
+        return $this->fields['items'];
     }
 
     /**
-     * @param null|array[]|TaxItem[] $items
+     * @param array[]|TaxItem[] $items
      */
-    public function setItems(null|array $items): static
+    public function setItems(array $items): static
     {
-        $items = $items !== null ? array_map(
+        $items = array_map(
             fn ($value) => $value !== null ? ($value instanceof TaxItem ? $value : TaxItem::from($value)) : null,
             $items,
-        ) : null;
+        );
 
         $this->fields['items'] = $items;
 
@@ -70,7 +70,7 @@ class RebillyTaxjar implements Taxes, JsonSerializable
     public function jsonSerialize(): array
     {
         $data = [
-            'calculator' => 'rebilly-taxjar',
+            'calculator' => 'manual',
         ];
         if (array_key_exists('amount', $this->fields)) {
             $data['amount'] = $this->fields['amount'];

@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class APILogSummaryData implements JsonSerializable
+class ApiLogSummaryData implements JsonSerializable
 {
     private array $fields = [];
 
