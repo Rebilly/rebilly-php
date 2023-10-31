@@ -287,14 +287,14 @@ class OrderItemPlan implements JsonSerializable
         return $this;
     }
 
-    public function getRecurringInterval(): ?SubscriptionOrderPlanRecurringInterval
+    public function getRecurringInterval(): SubscriptionOrderPlanRecurringInterval
     {
-        return $this->fields['recurringInterval'] ?? null;
+        return $this->fields['recurringInterval'];
     }
 
-    public function setRecurringInterval(null|SubscriptionOrderPlanRecurringInterval|array $recurringInterval): static
+    public function setRecurringInterval(SubscriptionOrderPlanRecurringInterval|array $recurringInterval): static
     {
-        if ($recurringInterval !== null && !($recurringInterval instanceof SubscriptionOrderPlanRecurringInterval)) {
+        if (!($recurringInterval instanceof SubscriptionOrderPlanRecurringInterval)) {
             $recurringInterval = SubscriptionOrderPlanRecurringInterval::from($recurringInterval);
         }
 
@@ -303,15 +303,15 @@ class OrderItemPlan implements JsonSerializable
         return $this;
     }
 
-    public function getTrial(): ?PlanTrial
+    public function getTrial(): TrialOnlyPlanTrial
     {
-        return $this->fields['trial'] ?? null;
+        return $this->fields['trial'];
     }
 
-    public function setTrial(null|PlanTrial|array $trial): static
+    public function setTrial(TrialOnlyPlanTrial|array $trial): static
     {
-        if ($trial !== null && !($trial instanceof PlanTrial)) {
-            $trial = PlanTrial::from($trial);
+        if (!($trial instanceof TrialOnlyPlanTrial)) {
+            $trial = TrialOnlyPlanTrial::from($trial);
         }
 
         $this->fields['trial'] = $trial;
