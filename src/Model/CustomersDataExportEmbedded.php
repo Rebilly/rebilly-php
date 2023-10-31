@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class DataExportEmbedded implements JsonSerializable
+class CustomersDataExportEmbedded implements JsonSerializable
 {
     private array $fields = [];
 

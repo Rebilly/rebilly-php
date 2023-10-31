@@ -19,10 +19,6 @@ interface KycDocument
 {
     public function getId(): ?string;
 
-    public function getFileId(): ?string;
-
-    public function setFileId(null|string $fileId): static;
-
     /**
      * @return string[]
      */
@@ -83,11 +79,6 @@ interface KycDocument
     public function setMatchLevel(null|int $matchLevel): static;
 
     public function getRevision(): ?int;
-
-    /**
-     * @return null|ResourceLink[]
-     */
-    public function getLinks(): ?array;
 
     public function getEmbedded(): ?ProofOfIdentityKycDocumentEmbedded;
 
