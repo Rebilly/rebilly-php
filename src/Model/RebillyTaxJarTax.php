@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class RebillyAvalara implements Taxes, JsonSerializable
+class RebillyTaxJarTax implements Taxes, JsonSerializable
 {
     private array $fields = [];
 
@@ -36,7 +36,7 @@ class RebillyAvalara implements Taxes, JsonSerializable
 
     public function getCalculator(): string
     {
-        return 'rebilly-avalara';
+        return 'rebilly-taxjar';
     }
 
     public function getAmount(): ?int
@@ -70,7 +70,7 @@ class RebillyAvalara implements Taxes, JsonSerializable
     public function jsonSerialize(): array
     {
         $data = [
-            'calculator' => 'rebilly-avalara',
+            'calculator' => 'rebilly-taxjar',
         ];
         if (array_key_exists('amount', $this->fields)) {
             $data['amount'] = $this->fields['amount'];

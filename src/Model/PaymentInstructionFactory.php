@@ -20,13 +20,13 @@ class PaymentInstructionFactory
     public static function from(array $data = []): PaymentInstruction
     {
         if (isset($data['token'])) {
-            return PaymentToken::from($data);
+            return PaymentInstructionToken::from($data);
         }
         if (isset($data['paymentInstrumentId'])) {
             return PaymentInstructionInstrument::from($data);
         }
         if (isset($data['methods'])) {
-            return PaymentMethods::from($data);
+            return PaymentInstructionMethods::from($data);
         }
 
         return match ($data['method']) {

@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class APILogSummary implements JsonSerializable
+class ApiLogSummary implements JsonSerializable
 {
     private array $fields = [];
 
@@ -32,7 +32,7 @@ class APILogSummary implements JsonSerializable
     }
 
     /**
-     * @return null|APILogSummaryData[]
+     * @return null|ApiLogSummaryData[]
      */
     public function getData(): ?array
     {
@@ -40,12 +40,12 @@ class APILogSummary implements JsonSerializable
     }
 
     /**
-     * @param null|APILogSummaryData[]|array[] $data
+     * @param null|ApiLogSummaryData[]|array[] $data
      */
     public function setData(null|array $data): static
     {
         $data = $data !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof APILogSummaryData ? $value : APILogSummaryData::from($value)) : null,
+            fn ($value) => $value !== null ? ($value instanceof ApiLogSummaryData ? $value : ApiLogSummaryData::from($value)) : null,
             $data,
         ) : null;
 
