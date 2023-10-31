@@ -40,9 +40,6 @@ class CashierRequest implements JsonSerializable
         if (array_key_exists('customerId', $data)) {
             $this->setCustomerId($data['customerId']);
         }
-        if (array_key_exists('strategyId', $data)) {
-            $this->setStrategyId($data['strategyId']);
-        }
         if (array_key_exists('transactionId', $data)) {
             $this->setTransactionId($data['transactionId']);
         }
@@ -63,9 +60,6 @@ class CashierRequest implements JsonSerializable
         }
         if (array_key_exists('expirationTime', $data)) {
             $this->setExpirationTime($data['expirationTime']);
-        }
-        if (array_key_exists('customPropertySetId', $data)) {
-            $this->setCustomPropertySetId($data['customPropertySetId']);
         }
         if (array_key_exists('propertiesSchema', $data)) {
             $this->setPropertiesSchema($data['propertiesSchema']);
@@ -117,18 +111,6 @@ class CashierRequest implements JsonSerializable
     public function setCustomerId(string $customerId): static
     {
         $this->fields['customerId'] = $customerId;
-
-        return $this;
-    }
-
-    public function getStrategyId(): ?string
-    {
-        return $this->fields['strategyId'] ?? null;
-    }
-
-    public function setStrategyId(null|string $strategyId): static
-    {
-        $this->fields['strategyId'] = $strategyId;
 
         return $this;
     }
@@ -222,18 +204,6 @@ class CashierRequest implements JsonSerializable
         return $this;
     }
 
-    public function getCustomPropertySetId(): ?string
-    {
-        return $this->fields['customPropertySetId'] ?? null;
-    }
-
-    public function setCustomPropertySetId(null|string $customPropertySetId): static
-    {
-        $this->fields['customPropertySetId'] = $customPropertySetId;
-
-        return $this;
-    }
-
     public function getPropertiesSchema(): ?object
     {
         return $this->fields['propertiesSchema'] ?? null;
@@ -293,9 +263,6 @@ class CashierRequest implements JsonSerializable
         if (array_key_exists('customerId', $this->fields)) {
             $data['customerId'] = $this->fields['customerId'];
         }
-        if (array_key_exists('strategyId', $this->fields)) {
-            $data['strategyId'] = $this->fields['strategyId'];
-        }
         if (array_key_exists('transactionId', $this->fields)) {
             $data['transactionId'] = $this->fields['transactionId'];
         }
@@ -316,9 +283,6 @@ class CashierRequest implements JsonSerializable
         }
         if (array_key_exists('expirationTime', $this->fields)) {
             $data['expirationTime'] = $this->fields['expirationTime']?->format(DateTimeInterface::RFC3339);
-        }
-        if (array_key_exists('customPropertySetId', $this->fields)) {
-            $data['customPropertySetId'] = $this->fields['customPropertySetId'];
         }
         if (array_key_exists('propertiesSchema', $this->fields)) {
             $data['propertiesSchema'] = $this->fields['propertiesSchema'];
