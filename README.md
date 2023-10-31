@@ -14,7 +14,7 @@ The **Rebilly SDK for PHP** makes it easy for developers to access
 
 ## Installation
 
-> [!NOTE]  
+> [!WARNING]  
 > This package does not follow semantic versioning, so minor version updates can cause backward compatibility breaks. It is recommended to install a fixed full version without a release operator such as tilde (~) or a caret (^); for example, `composer require rebilly/client-php:3.0.0`.
 
 Using [Composer](http://getcomposer.org/) is the recommended way to install the Rebilly SDK for PHP.
