@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class CustomersDateRange implements JsonSerializable
+class RevenueAuditDataExportDateRange implements JsonSerializable
 {
     private array $fields = [];
 

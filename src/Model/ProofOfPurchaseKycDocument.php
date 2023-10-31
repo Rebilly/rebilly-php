@@ -36,9 +36,6 @@ class ProofOfPurchaseKycDocument implements KycDocument, JsonSerializable
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
         }
-        if (array_key_exists('fileId', $data)) {
-            $this->setFileId($data['fileId']);
-        }
         if (array_key_exists('fileIds', $data)) {
             $this->setFileIds($data['fileIds']);
         }
@@ -123,18 +120,6 @@ class ProofOfPurchaseKycDocument implements KycDocument, JsonSerializable
     public function getId(): ?string
     {
         return $this->fields['id'] ?? null;
-    }
-
-    public function getFileId(): ?string
-    {
-        return $this->fields['fileId'] ?? null;
-    }
-
-    public function setFileId(null|string $fileId): static
-    {
-        $this->fields['fileId'] = $fileId;
-
-        return $this;
     }
 
     /**
@@ -369,9 +354,6 @@ class ProofOfPurchaseKycDocument implements KycDocument, JsonSerializable
         ];
         if (array_key_exists('id', $this->fields)) {
             $data['id'] = $this->fields['id'];
-        }
-        if (array_key_exists('fileId', $this->fields)) {
-            $data['fileId'] = $this->fields['fileId'];
         }
         if (array_key_exists('fileIds', $this->fields)) {
             $data['fileIds'] = $this->fields['fileIds'];

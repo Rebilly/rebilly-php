@@ -36,9 +36,6 @@ class ProofOfAddressKycDocument implements KycDocument, JsonSerializable
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
         }
-        if (array_key_exists('fileId', $data)) {
-            $this->setFileId($data['fileId']);
-        }
         if (array_key_exists('fileIds', $data)) {
             $this->setFileIds($data['fileIds']);
         }
@@ -90,9 +87,6 @@ class ProofOfAddressKycDocument implements KycDocument, JsonSerializable
         if (array_key_exists('matchLevel', $data)) {
             $this->setMatchLevel($data['matchLevel']);
         }
-        if (array_key_exists('settings', $data)) {
-            $this->setSettings($data['settings']);
-        }
         if (array_key_exists('revision', $data)) {
             $this->setRevision($data['revision']);
         }
@@ -101,6 +95,9 @@ class ProofOfAddressKycDocument implements KycDocument, JsonSerializable
         }
         if (array_key_exists('parsedData', $data)) {
             $this->setParsedData($data['parsedData']);
+        }
+        if (array_key_exists('settings', $data)) {
+            $this->setSettings($data['settings']);
         }
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
@@ -123,18 +120,6 @@ class ProofOfAddressKycDocument implements KycDocument, JsonSerializable
     public function getId(): ?string
     {
         return $this->fields['id'] ?? null;
-    }
-
-    public function getFileId(): ?string
-    {
-        return $this->fields['fileId'] ?? null;
-    }
-
-    public function setFileId(null|string $fileId): static
-    {
-        $this->fields['fileId'] = $fileId;
-
-        return $this;
     }
 
     /**
@@ -289,22 +274,6 @@ class ProofOfAddressKycDocument implements KycDocument, JsonSerializable
         return $this;
     }
 
-    public function getSettings(): ?KycSettingsAddress
-    {
-        return $this->fields['settings'] ?? null;
-    }
-
-    public function setSettings(null|KycSettingsAddress|array $settings): static
-    {
-        if ($settings !== null && !($settings instanceof KycSettingsAddress)) {
-            $settings = KycSettingsAddress::from($settings);
-        }
-
-        $this->fields['settings'] = $settings;
-
-        return $this;
-    }
-
     public function getRevision(): ?int
     {
         return $this->fields['revision'] ?? null;
@@ -342,6 +311,22 @@ class ProofOfAddressKycDocument implements KycDocument, JsonSerializable
         return $this;
     }
 
+    public function getSettings(): ?KycSettingsAddress
+    {
+        return $this->fields['settings'] ?? null;
+    }
+
+    public function setSettings(null|KycSettingsAddress|array $settings): static
+    {
+        if ($settings !== null && !($settings instanceof KycSettingsAddress)) {
+            $settings = KycSettingsAddress::from($settings);
+        }
+
+        $this->fields['settings'] = $settings;
+
+        return $this;
+    }
+
     /**
      * @return null|ResourceLink[]
      */
@@ -373,9 +358,6 @@ class ProofOfAddressKycDocument implements KycDocument, JsonSerializable
         ];
         if (array_key_exists('id', $this->fields)) {
             $data['id'] = $this->fields['id'];
-        }
-        if (array_key_exists('fileId', $this->fields)) {
-            $data['fileId'] = $this->fields['fileId'];
         }
         if (array_key_exists('fileIds', $this->fields)) {
             $data['fileIds'] = $this->fields['fileIds'];
@@ -428,9 +410,6 @@ class ProofOfAddressKycDocument implements KycDocument, JsonSerializable
         if (array_key_exists('matchLevel', $this->fields)) {
             $data['matchLevel'] = $this->fields['matchLevel'];
         }
-        if (array_key_exists('settings', $this->fields)) {
-            $data['settings'] = $this->fields['settings']?->jsonSerialize();
-        }
         if (array_key_exists('revision', $this->fields)) {
             $data['revision'] = $this->fields['revision'];
         }
@@ -439,6 +418,9 @@ class ProofOfAddressKycDocument implements KycDocument, JsonSerializable
         }
         if (array_key_exists('parsedData', $this->fields)) {
             $data['parsedData'] = $this->fields['parsedData']?->jsonSerialize();
+        }
+        if (array_key_exists('settings', $this->fields)) {
+            $data['settings'] = $this->fields['settings']?->jsonSerialize();
         }
         if (array_key_exists('_links', $this->fields)) {
             $data['_links'] = $this->fields['_links'];
