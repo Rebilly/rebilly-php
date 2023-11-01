@@ -14,6 +14,9 @@ The **Rebilly SDK for PHP** makes it easy for developers to access
 
 ## Installation
 
+> [!WARNING]  
+> This package does not follow semantic versioning, so minor version updates can cause backward compatibility breaks. Updates to the package should be tested before switching versions.
+
 Using [Composer](http://getcomposer.org/) is the recommended way to install the Rebilly SDK for PHP.
 To get started, you need run the Composer commands (assume you're in the project's root directory).
 
