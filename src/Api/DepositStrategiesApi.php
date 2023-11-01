@@ -17,56 +17,64 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
-use Rebilly\Sdk\Model\CashierRequest;
-use Rebilly\Sdk\Model\PostCashierRequest;
+use Rebilly\Sdk\Model\DepositStrategy;
 use Rebilly\Sdk\Paginator;
 
-class CashierRequestsApi
+class DepositStrategiesApi
 {
     public function __construct(protected ?ClientInterface $client)
     {
     }
 
     /**
-     * @return CashierRequest
+     * @return DepositStrategy
      */
     public function create(
-        PostCashierRequest $postCashierRequest,
-    ): CashierRequest {
-        $uri = '/cashier-requests';
+        DepositStrategy $depositStrategy,
+    ): DepositStrategy {
+        $uri = '/deposit-strategies';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($postCashierRequest));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($depositStrategy));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CashierRequest::from($data);
+        return DepositStrategy::from($data);
     }
 
-    /**
-     * @return CashierRequest
-     */
-    public function get(
+    public function delete(
         string $id,
-        ?string $expand = null,
-    ): CashierRequest {
+    ): void {
         $pathParams = [
             '{id}' => $id,
         ];
 
-        $queryParams = [
-            'expand' => $expand,
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/deposit-strategies/{id}');
+
+        $request = new Request('DELETE', $uri);
+        $this->client->send($request);
+    }
+
+    /**
+     * @return DepositStrategy
+     */
+    public function get(
+        string $id,
+    ): DepositStrategy {
+        $pathParams = [
+            '{id}' => $id,
         ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/cashier-requests/{id}?') . http_build_query($queryParams);
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/deposit-strategies/{id}');
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CashierRequest::from($data);
+        return DepositStrategy::from($data);
     }
 
     /**
-     * @return Collection<CashierRequest>
+     * @return Collection<DepositStrategy>
      */
     public function getAll(
         ?int $limit = null,
@@ -80,14 +88,14 @@ class CashierRequestsApi
             'filter' => $filter,
             'sort' => $sort ? implode(',', $sort) : null,
         ];
-        $uri = '/cashier-requests?' . http_build_query($queryParams);
+        $uri = '/deposit-strategies?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): CashierRequest => CashierRequest::from($item), $data),
+            array_map(fn (array $item): DepositStrategy => DepositStrategy::from($item), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
@@ -111,5 +119,25 @@ class CashierRequestsApi
             $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
             $closure,
         );
+    }
+
+    /**
+     * @return DepositStrategy
+     */
+    public function update(
+        string $id,
+        DepositStrategy $depositStrategy,
+    ): DepositStrategy {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/deposit-strategies/{id}');
+
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($depositStrategy));
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return DepositStrategy::from($data);
     }
 }

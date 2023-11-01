@@ -17,7 +17,7 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
 
-class CashierRequest implements JsonSerializable
+class DepositRequest implements JsonSerializable
 {
     public const STATUS_CREATED = 'created';
 
@@ -160,15 +160,15 @@ class CashierRequest implements JsonSerializable
         return $this;
     }
 
-    public function getCustomAmount(): ?CashierRequestCustomAmount
+    public function getCustomAmount(): ?DepositRequestCustomAmount
     {
         return $this->fields['customAmount'] ?? null;
     }
 
-    public function setCustomAmount(null|CashierRequestCustomAmount|array $customAmount): static
+    public function setCustomAmount(null|DepositRequestCustomAmount|array $customAmount): static
     {
-        if ($customAmount !== null && !($customAmount instanceof CashierRequestCustomAmount)) {
-            $customAmount = CashierRequestCustomAmount::from($customAmount);
+        if ($customAmount !== null && !($customAmount instanceof DepositRequestCustomAmount)) {
+            $customAmount = DepositRequestCustomAmount::from($customAmount);
         }
 
         $this->fields['customAmount'] = $customAmount;
@@ -235,15 +235,15 @@ class CashierRequest implements JsonSerializable
         return $this->fields['_links'] ?? null;
     }
 
-    public function getEmbedded(): ?CashierRequestEmbedded
+    public function getEmbedded(): ?DepositRequestEmbedded
     {
         return $this->fields['_embedded'] ?? null;
     }
 
-    public function setEmbedded(null|CashierRequestEmbedded|array $embedded): static
+    public function setEmbedded(null|DepositRequestEmbedded|array $embedded): static
     {
-        if ($embedded !== null && !($embedded instanceof CashierRequestEmbedded)) {
-            $embedded = CashierRequestEmbedded::from($embedded);
+        if ($embedded !== null && !($embedded instanceof DepositRequestEmbedded)) {
+            $embedded = DepositRequestEmbedded::from($embedded);
         }
 
         $this->fields['_embedded'] = $embedded;

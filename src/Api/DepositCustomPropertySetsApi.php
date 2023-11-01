@@ -17,28 +17,28 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
-use Rebilly\Sdk\Model\CashierCustomPropertySet;
+use Rebilly\Sdk\Model\DepositCustomPropertySet;
 use Rebilly\Sdk\Paginator;
 
-class CashierCustomPropertySetsApi
+class DepositCustomPropertySetsApi
 {
     public function __construct(protected ?ClientInterface $client)
     {
     }
 
     /**
-     * @return CashierCustomPropertySet
+     * @return DepositCustomPropertySet
      */
     public function create(
-        CashierCustomPropertySet $cashierCustomPropertySet,
-    ): CashierCustomPropertySet {
-        $uri = '/cashier-custom-property-sets';
+        DepositCustomPropertySet $depositCustomPropertySet,
+    ): DepositCustomPropertySet {
+        $uri = '/deposit-custom-property-sets';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($cashierCustomPropertySet));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($depositCustomPropertySet));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CashierCustomPropertySet::from($data);
+        return DepositCustomPropertySet::from($data);
     }
 
     public function delete(
@@ -48,33 +48,33 @@ class CashierCustomPropertySetsApi
             '{id}' => $id,
         ];
 
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/cashier-custom-property-sets/{id}');
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/deposit-custom-property-sets/{id}');
 
         $request = new Request('DELETE', $uri);
         $this->client->send($request);
     }
 
     /**
-     * @return CashierCustomPropertySet
+     * @return DepositCustomPropertySet
      */
     public function get(
         string $id,
-    ): CashierCustomPropertySet {
+    ): DepositCustomPropertySet {
         $pathParams = [
             '{id}' => $id,
         ];
 
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/cashier-custom-property-sets/{id}');
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/deposit-custom-property-sets/{id}');
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CashierCustomPropertySet::from($data);
+        return DepositCustomPropertySet::from($data);
     }
 
     /**
-     * @return Collection<CashierCustomPropertySet>
+     * @return Collection<DepositCustomPropertySet>
      */
     public function getAll(
         ?int $limit = null,
@@ -88,14 +88,14 @@ class CashierCustomPropertySetsApi
             'filter' => $filter,
             'sort' => $sort ? implode(',', $sort) : null,
         ];
-        $uri = '/cashier-custom-property-sets?' . http_build_query($queryParams);
+        $uri = '/deposit-custom-property-sets?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): CashierCustomPropertySet => CashierCustomPropertySet::from($item), $data),
+            array_map(fn (array $item): DepositCustomPropertySet => DepositCustomPropertySet::from($item), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
@@ -122,22 +122,22 @@ class CashierCustomPropertySetsApi
     }
 
     /**
-     * @return CashierCustomPropertySet
+     * @return DepositCustomPropertySet
      */
     public function update(
         string $id,
-        CashierCustomPropertySet $cashierCustomPropertySet,
-    ): CashierCustomPropertySet {
+        DepositCustomPropertySet $depositCustomPropertySet,
+    ): DepositCustomPropertySet {
         $pathParams = [
             '{id}' => $id,
         ];
 
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/cashier-custom-property-sets/{id}');
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/deposit-custom-property-sets/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($cashierCustomPropertySet));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($depositCustomPropertySet));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CashierCustomPropertySet::from($data);
+        return DepositCustomPropertySet::from($data);
     }
 }

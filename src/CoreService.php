@@ -27,12 +27,6 @@ class CoreService
 
     private Api\BlocklistsApi $blocklists;
 
-    private Api\CashierCustomPropertySetsApi $cashierCustomPropertySets;
-
-    private Api\CashierRequestsApi $cashierRequests;
-
-    private Api\CashierStrategiesApi $cashierStrategies;
-
     private Api\CouponsApi $coupons;
 
     private Api\CreditMemosApi $creditMemos;
@@ -42,6 +36,12 @@ class CoreService
     private Api\CustomerAuthenticationApi $customerAuthentication;
 
     private Api\CustomersApi $customers;
+
+    private Api\DepositCustomPropertySetsApi $depositCustomPropertySets;
+
+    private Api\DepositRequestsApi $depositRequests;
+
+    private Api\DepositStrategiesApi $depositStrategies;
 
     private Api\DigitalWalletsApi $digitalWallets;
 
@@ -112,14 +112,14 @@ class CoreService
         $this->amlChecks = new Api\AmlChecksApi($this->client);
         $this->amlSettings = new Api\AmlSettingsApi($this->client);
         $this->blocklists = new Api\BlocklistsApi($this->client);
-        $this->cashierCustomPropertySets = new Api\CashierCustomPropertySetsApi($this->client);
-        $this->cashierRequests = new Api\CashierRequestsApi($this->client);
-        $this->cashierStrategies = new Api\CashierStrategiesApi($this->client);
         $this->coupons = new Api\CouponsApi($this->client);
         $this->creditMemos = new Api\CreditMemosApi($this->client);
         $this->customFields = new Api\CustomFieldsApi($this->client);
         $this->customerAuthentication = new Api\CustomerAuthenticationApi($this->client);
         $this->customers = new Api\CustomersApi($this->client);
+        $this->depositCustomPropertySets = new Api\DepositCustomPropertySetsApi($this->client);
+        $this->depositRequests = new Api\DepositRequestsApi($this->client);
+        $this->depositStrategies = new Api\DepositStrategiesApi($this->client);
         $this->digitalWallets = new Api\DigitalWalletsApi($this->client);
         $this->disputes = new Api\DisputesApi($this->client);
         $this->fees = new Api\FeesApi($this->client);
@@ -178,21 +178,6 @@ class CoreService
         return $this->blocklists;
     }
 
-    public function cashierCustomPropertySets(): Api\CashierCustomPropertySetsApi
-    {
-        return $this->cashierCustomPropertySets;
-    }
-
-    public function cashierRequests(): Api\CashierRequestsApi
-    {
-        return $this->cashierRequests;
-    }
-
-    public function cashierStrategies(): Api\CashierStrategiesApi
-    {
-        return $this->cashierStrategies;
-    }
-
     public function coupons(): Api\CouponsApi
     {
         return $this->coupons;
@@ -216,6 +201,21 @@ class CoreService
     public function customers(): Api\CustomersApi
     {
         return $this->customers;
+    }
+
+    public function depositCustomPropertySets(): Api\DepositCustomPropertySetsApi
+    {
+        return $this->depositCustomPropertySets;
+    }
+
+    public function depositRequests(): Api\DepositRequestsApi
+    {
+        return $this->depositRequests;
+    }
+
+    public function depositStrategies(): Api\DepositStrategiesApi
+    {
+        return $this->depositStrategies;
     }
 
     public function digitalWallets(): Api\DigitalWalletsApi
