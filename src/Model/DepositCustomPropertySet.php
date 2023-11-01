@@ -17,7 +17,7 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
 
-class CashierStrategy implements JsonSerializable
+class DepositCustomPropertySet implements JsonSerializable
 {
     private array $fields = [];
 
@@ -29,14 +29,8 @@ class CashierStrategy implements JsonSerializable
         if (array_key_exists('name', $data)) {
             $this->setName($data['name']);
         }
-        if (array_key_exists('filter', $data)) {
-            $this->setFilter($data['filter']);
-        }
-        if (array_key_exists('amounts', $data)) {
-            $this->setAmounts($data['amounts']);
-        }
-        if (array_key_exists('customAmount', $data)) {
-            $this->setCustomAmount($data['customAmount']);
+        if (array_key_exists('properties', $data)) {
+            $this->setProperties($data['properties']);
         }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
@@ -71,46 +65,14 @@ class CashierStrategy implements JsonSerializable
         return $this;
     }
 
-    public function getFilter(): ?string
+    public function getProperties(): object
     {
-        return $this->fields['filter'] ?? null;
+        return $this->fields['properties'];
     }
 
-    public function setFilter(null|string $filter): static
+    public function setProperties(object $properties): static
     {
-        $this->fields['filter'] = $filter;
-
-        return $this;
-    }
-
-    public function getAmounts(): CashierStrategyAmounts
-    {
-        return $this->fields['amounts'];
-    }
-
-    public function setAmounts(CashierStrategyAmounts|array $amounts): static
-    {
-        if (!($amounts instanceof CashierStrategyAmounts)) {
-            $amounts = CashierStrategyAmounts::from($amounts);
-        }
-
-        $this->fields['amounts'] = $amounts;
-
-        return $this;
-    }
-
-    public function getCustomAmount(): CashierRequestCustomAmount
-    {
-        return $this->fields['customAmount'];
-    }
-
-    public function setCustomAmount(CashierRequestCustomAmount|array $customAmount): static
-    {
-        if (!($customAmount instanceof CashierRequestCustomAmount)) {
-            $customAmount = CashierRequestCustomAmount::from($customAmount);
-        }
-
-        $this->fields['customAmount'] = $customAmount;
+        $this->fields['properties'] = $properties;
 
         return $this;
     }
@@ -152,14 +114,8 @@ class CashierStrategy implements JsonSerializable
         if (array_key_exists('name', $this->fields)) {
             $data['name'] = $this->fields['name'];
         }
-        if (array_key_exists('filter', $this->fields)) {
-            $data['filter'] = $this->fields['filter'];
-        }
-        if (array_key_exists('amounts', $this->fields)) {
-            $data['amounts'] = $this->fields['amounts']?->jsonSerialize();
-        }
-        if (array_key_exists('customAmount', $this->fields)) {
-            $data['customAmount'] = $this->fields['customAmount']?->jsonSerialize();
+        if (array_key_exists('properties', $this->fields)) {
+            $data['properties'] = $this->fields['properties'];
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);

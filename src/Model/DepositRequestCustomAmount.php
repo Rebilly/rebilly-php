@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class CashierRequestCustomAmount implements JsonSerializable
+class DepositRequestCustomAmount implements JsonSerializable
 {
     private array $fields = [];
 

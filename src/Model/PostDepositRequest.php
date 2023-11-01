@@ -17,7 +17,7 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
 
-class PostCashierRequest implements JsonSerializable
+class PostDepositRequest implements JsonSerializable
 {
     private array $fields = [];
 
@@ -128,15 +128,15 @@ class PostCashierRequest implements JsonSerializable
         return $this;
     }
 
-    public function getCustomAmount(): ?CashierRequestCustomAmount
+    public function getCustomAmount(): ?DepositRequestCustomAmount
     {
         return $this->fields['customAmount'] ?? null;
     }
 
-    public function setCustomAmount(null|CashierRequestCustomAmount|array $customAmount): static
+    public function setCustomAmount(null|DepositRequestCustomAmount|array $customAmount): static
     {
-        if ($customAmount !== null && !($customAmount instanceof CashierRequestCustomAmount)) {
-            $customAmount = CashierRequestCustomAmount::from($customAmount);
+        if ($customAmount !== null && !($customAmount instanceof DepositRequestCustomAmount)) {
+            $customAmount = DepositRequestCustomAmount::from($customAmount);
         }
 
         $this->fields['customAmount'] = $customAmount;

@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class CashierStrategyAmounts implements JsonSerializable
+class DepositStrategyAmounts implements JsonSerializable
 {
     public const CALCULATOR_ABSOLUTE = 'absolute';
 

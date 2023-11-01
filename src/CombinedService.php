@@ -41,12 +41,6 @@ class CombinedService
 
     private Api\BroadcastMessagesApi $broadcastMessages;
 
-    private Api\CashierCustomPropertySetsApi $cashierCustomPropertySets;
-
-    private Api\CashierRequestsApi $cashierRequests;
-
-    private Api\CashierStrategiesApi $cashierStrategies;
-
     private Api\CheckoutFormsApi $checkoutForms;
 
     private Api\CouponsApi $coupons;
@@ -62,6 +56,12 @@ class CombinedService
     private Api\CustomersApi $customers;
 
     private Api\DataExportsApi $dataExports;
+
+    private Api\DepositCustomPropertySetsApi $depositCustomPropertySets;
+
+    private Api\DepositRequestsApi $depositRequests;
+
+    private Api\DepositStrategiesApi $depositStrategies;
 
     private Api\DigitalWalletsApi $digitalWallets;
 
@@ -189,9 +189,6 @@ class CombinedService
         $this->billingPortals = new Api\BillingPortalsApi($this->client);
         $this->blocklists = new Api\BlocklistsApi($this->client);
         $this->broadcastMessages = new Api\BroadcastMessagesApi($this->client);
-        $this->cashierCustomPropertySets = new Api\CashierCustomPropertySetsApi($this->client);
-        $this->cashierRequests = new Api\CashierRequestsApi($this->client);
-        $this->cashierStrategies = new Api\CashierStrategiesApi($this->client);
         $this->checkoutForms = new Api\CheckoutFormsApi($this->client);
         $this->coupons = new Api\CouponsApi($this->client);
         $this->creditMemos = new Api\CreditMemosApi($this->client);
@@ -200,6 +197,9 @@ class CombinedService
         $this->customerAuthentication = new Api\CustomerAuthenticationApi($this->client);
         $this->customers = new Api\CustomersApi($this->client);
         $this->dataExports = new Api\DataExportsApi($this->client);
+        $this->depositCustomPropertySets = new Api\DepositCustomPropertySetsApi($this->client);
+        $this->depositRequests = new Api\DepositRequestsApi($this->client);
+        $this->depositStrategies = new Api\DepositStrategiesApi($this->client);
         $this->digitalWallets = new Api\DigitalWalletsApi($this->client);
         $this->disputes = new Api\DisputesApi($this->client);
         $this->emailDeliverySettings = new Api\EmailDeliverySettingsApi($this->client);
@@ -318,21 +318,6 @@ class CombinedService
         return $this->broadcastMessages;
     }
 
-    public function cashierCustomPropertySets(): Api\CashierCustomPropertySetsApi
-    {
-        return $this->cashierCustomPropertySets;
-    }
-
-    public function cashierRequests(): Api\CashierRequestsApi
-    {
-        return $this->cashierRequests;
-    }
-
-    public function cashierStrategies(): Api\CashierStrategiesApi
-    {
-        return $this->cashierStrategies;
-    }
-
     public function checkoutForms(): Api\CheckoutFormsApi
     {
         return $this->checkoutForms;
@@ -371,6 +356,21 @@ class CombinedService
     public function dataExports(): Api\DataExportsApi
     {
         return $this->dataExports;
+    }
+
+    public function depositCustomPropertySets(): Api\DepositCustomPropertySetsApi
+    {
+        return $this->depositCustomPropertySets;
+    }
+
+    public function depositRequests(): Api\DepositRequestsApi
+    {
+        return $this->depositRequests;
+    }
+
+    public function depositStrategies(): Api\DepositStrategiesApi
+    {
+        return $this->depositStrategies;
     }
 
     public function digitalWallets(): Api\DigitalWalletsApi

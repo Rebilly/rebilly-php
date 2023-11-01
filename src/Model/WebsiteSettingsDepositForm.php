@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class WebsiteSettingsCashierForm implements JsonSerializable
+class WebsiteSettingsDepositForm implements JsonSerializable
 {
     private array $fields = [];
 
@@ -31,15 +31,15 @@ class WebsiteSettingsCashierForm implements JsonSerializable
         return new self($data);
     }
 
-    public function getTheme(): ?WebsiteSettingsCashierFormTheme
+    public function getTheme(): ?WebsiteSettingsDepositFormTheme
     {
         return $this->fields['theme'] ?? null;
     }
 
-    public function setTheme(null|WebsiteSettingsCashierFormTheme|array $theme): static
+    public function setTheme(null|WebsiteSettingsDepositFormTheme|array $theme): static
     {
-        if ($theme !== null && !($theme instanceof WebsiteSettingsCashierFormTheme)) {
-            $theme = WebsiteSettingsCashierFormTheme::from($theme);
+        if ($theme !== null && !($theme instanceof WebsiteSettingsDepositFormTheme)) {
+            $theme = WebsiteSettingsDepositFormTheme::from($theme);
         }
 
         $this->fields['theme'] = $theme;

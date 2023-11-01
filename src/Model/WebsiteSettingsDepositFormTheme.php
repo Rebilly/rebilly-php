@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class WebsiteSettingsCashierFormTheme implements JsonSerializable
+class WebsiteSettingsDepositFormTheme implements JsonSerializable
 {
     private array $fields = [];
 

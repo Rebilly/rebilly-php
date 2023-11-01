@@ -21,8 +21,8 @@ class WebsiteSettings implements JsonSerializable
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('cashierForm', $data)) {
-            $this->setCashierForm($data['cashierForm']);
+        if (array_key_exists('depositForm', $data)) {
+            $this->setDepositForm($data['depositForm']);
         }
         if (array_key_exists('paymentForm', $data)) {
             $this->setPaymentForm($data['paymentForm']);
@@ -34,18 +34,18 @@ class WebsiteSettings implements JsonSerializable
         return new self($data);
     }
 
-    public function getCashierForm(): ?WebsiteSettingsCashierForm
+    public function getDepositForm(): ?WebsiteSettingsDepositForm
     {
-        return $this->fields['cashierForm'] ?? null;
+        return $this->fields['depositForm'] ?? null;
     }
 
-    public function setCashierForm(null|WebsiteSettingsCashierForm|array $cashierForm): static
+    public function setDepositForm(null|WebsiteSettingsDepositForm|array $depositForm): static
     {
-        if ($cashierForm !== null && !($cashierForm instanceof WebsiteSettingsCashierForm)) {
-            $cashierForm = WebsiteSettingsCashierForm::from($cashierForm);
+        if ($depositForm !== null && !($depositForm instanceof WebsiteSettingsDepositForm)) {
+            $depositForm = WebsiteSettingsDepositForm::from($depositForm);
         }
 
-        $this->fields['cashierForm'] = $cashierForm;
+        $this->fields['depositForm'] = $depositForm;
 
         return $this;
     }
@@ -69,8 +69,8 @@ class WebsiteSettings implements JsonSerializable
     public function jsonSerialize(): array
     {
         $data = [];
-        if (array_key_exists('cashierForm', $this->fields)) {
-            $data['cashierForm'] = $this->fields['cashierForm']?->jsonSerialize();
+        if (array_key_exists('depositForm', $this->fields)) {
+            $data['depositForm'] = $this->fields['depositForm']?->jsonSerialize();
         }
         if (array_key_exists('paymentForm', $this->fields)) {
             $data['paymentForm'] = $this->fields['paymentForm']?->jsonSerialize();
