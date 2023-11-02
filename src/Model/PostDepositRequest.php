@@ -38,6 +38,9 @@ class PostDepositRequest implements JsonSerializable
         if (array_key_exists('amounts', $data)) {
             $this->setAmounts($data['amounts']);
         }
+        if (array_key_exists('amountLimits', $data)) {
+            $this->setAmountLimits($data['amountLimits']);
+        }
         if (array_key_exists('customAmount', $data)) {
             $this->setCustomAmount($data['customAmount']);
         }
@@ -128,6 +131,22 @@ class PostDepositRequest implements JsonSerializable
         return $this;
     }
 
+    public function getAmountLimits(): ?PostDepositRequestAmountLimits
+    {
+        return $this->fields['amountLimits'] ?? null;
+    }
+
+    public function setAmountLimits(null|PostDepositRequestAmountLimits|array $amountLimits): static
+    {
+        if ($amountLimits !== null && !($amountLimits instanceof PostDepositRequestAmountLimits)) {
+            $amountLimits = PostDepositRequestAmountLimits::from($amountLimits);
+        }
+
+        $this->fields['amountLimits'] = $amountLimits;
+
+        return $this;
+    }
+
     public function getCustomAmount(): ?DepositRequestCustomAmount
     {
         return $this->fields['customAmount'] ?? null;
@@ -201,6 +220,9 @@ class PostDepositRequest implements JsonSerializable
         }
         if (array_key_exists('amounts', $this->fields)) {
             $data['amounts'] = $this->fields['amounts'];
+        }
+        if (array_key_exists('amountLimits', $this->fields)) {
+            $data['amountLimits'] = $this->fields['amountLimits']?->jsonSerialize();
         }
         if (array_key_exists('customAmount', $this->fields)) {
             $data['customAmount'] = $this->fields['customAmount']?->jsonSerialize();
