@@ -59,7 +59,7 @@ jobs:
 
       - name: Build api-definitions
         working-directory: ./api-definitions
-        run: npx redocly bundle all@latest -o dist/all
+        run: npx redocly bundle all@3.0 -o dist/all-3.0.yaml
 
       - name: Login to registry
         run: |
@@ -78,7 +78,7 @@ jobs:
             -g php-8.0-client \
             -o /out \
             -c /config.yaml \
-            -i "/api-definitions/all.yaml"
+            -i "/api-definitions/all-3.0.yaml"
           ls -lAh /tmp/ /tmp/sdk/
 
       - name: Bundle SDK
