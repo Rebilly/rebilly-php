@@ -157,12 +157,12 @@ class UserApplication implements JsonSerializable
         return $this;
     }
 
-    public function getLogoId(): mixed
+    public function getLogoId(): string
     {
         return $this->fields['logoId'];
     }
 
-    public function setLogoId(mixed $logoId): static
+    public function setLogoId(string $logoId): static
     {
         $this->fields['logoId'] = $logoId;
 
