@@ -25,6 +25,7 @@ use Rebilly\Sdk\Model\DccMarkup;
 use Rebilly\Sdk\Model\FutureRenewals;
 use Rebilly\Sdk\Model\GetKycAcceptanceSummaryResponse;
 use Rebilly\Sdk\Model\RenewalSales;
+use Rebilly\Sdk\Model\ReportDeclinedTransactions;
 use Rebilly\Sdk\Model\ReportDisputeDelays;
 use Rebilly\Sdk\Model\ReportDisputes;
 use Rebilly\Sdk\Model\ReportEventsTriggeredSummary;
@@ -152,6 +153,34 @@ class ReportsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return DccMarkup::from($data);
+    }
+
+    /**
+     * @return ReportDeclinedTransactions
+     */
+    public function getDeclinedTransactions(
+        string $aggregationField,
+        DateTimeImmutable $periodStart,
+        DateTimeImmutable $periodEnd,
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $filter = null,
+    ): ReportDeclinedTransactions {
+        $queryParams = [
+            'aggregationField' => $aggregationField,
+            'periodStart' => $periodStart->format('Y-m-d\TH:i:s\Z'),
+            'periodEnd' => $periodEnd->format('Y-m-d\TH:i:s\Z'),
+            'limit' => $limit,
+            'offset' => $offset,
+            'filter' => $filter,
+        ];
+        $uri = '/experimental/reports/declined-transactions?' . http_build_query($queryParams);
+
+        $request = new Request('GET', $uri);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return ReportDeclinedTransactions::from($data);
     }
 
     /**
