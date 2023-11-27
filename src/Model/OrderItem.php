@@ -33,6 +33,9 @@ class OrderItem implements JsonSerializable
         if (array_key_exists('plan', $data)) {
             $this->setPlan($data['plan']);
         }
+        if (array_key_exists('usageLimits', $data)) {
+            $this->setUsageLimits($data['usageLimits']);
+        }
         if (array_key_exists('revision', $data)) {
             $this->setRevision($data['revision']);
         }
@@ -97,6 +100,22 @@ class OrderItem implements JsonSerializable
         return $this;
     }
 
+    public function getUsageLimits(): ?OrderItemUsageLimits
+    {
+        return $this->fields['usageLimits'] ?? null;
+    }
+
+    public function setUsageLimits(null|OrderItemUsageLimits|array $usageLimits): static
+    {
+        if ($usageLimits !== null && !($usageLimits instanceof OrderItemUsageLimits)) {
+            $usageLimits = OrderItemUsageLimits::from($usageLimits);
+        }
+
+        $this->fields['usageLimits'] = $usageLimits;
+
+        return $this;
+    }
+
     public function getRevision(): ?int
     {
         return $this->fields['revision'] ?? null;
@@ -142,6 +161,9 @@ class OrderItem implements JsonSerializable
         }
         if (array_key_exists('plan', $this->fields)) {
             $data['plan'] = $this->fields['plan']?->jsonSerialize();
+        }
+        if (array_key_exists('usageLimits', $this->fields)) {
+            $data['usageLimits'] = $this->fields['usageLimits']?->jsonSerialize();
         }
         if (array_key_exists('revision', $this->fields)) {
             $data['revision'] = $this->fields['revision'];

@@ -27,6 +27,9 @@ class SubscriptionChangeItems implements JsonSerializable
         if (array_key_exists('quantity', $data)) {
             $this->setQuantity($data['quantity']);
         }
+        if (array_key_exists('usageLimits', $data)) {
+            $this->setUsageLimits($data['usageLimits']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -62,6 +65,22 @@ class SubscriptionChangeItems implements JsonSerializable
         return $this;
     }
 
+    public function getUsageLimits(): ?OrderItemUsageLimits
+    {
+        return $this->fields['usageLimits'] ?? null;
+    }
+
+    public function setUsageLimits(null|OrderItemUsageLimits|array $usageLimits): static
+    {
+        if ($usageLimits !== null && !($usageLimits instanceof OrderItemUsageLimits)) {
+            $usageLimits = OrderItemUsageLimits::from($usageLimits);
+        }
+
+        $this->fields['usageLimits'] = $usageLimits;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -70,6 +89,9 @@ class SubscriptionChangeItems implements JsonSerializable
         }
         if (array_key_exists('quantity', $this->fields)) {
             $data['quantity'] = $this->fields['quantity'];
+        }
+        if (array_key_exists('usageLimits', $this->fields)) {
+            $data['usageLimits'] = $this->fields['usageLimits']?->jsonSerialize();
         }
 
         return $data;
