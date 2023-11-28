@@ -247,16 +247,6 @@ class OAuth2Credential implements ServiceCredential, JsonSerializable
         return $this->fields['_links'] ?? null;
     }
 
-    /**
-     * @param null|array[]|ResourceLink[] $links
-     */
-    public function setLinks(null|array $links): static
-    {
-        $this->fields['_links'] = $links;
-
-        return $this;
-    }
-
     public function getApiKey(): string
     {
         return $this->fields['apiKey'];
@@ -695,6 +685,21 @@ class OAuth2Credential implements ServiceCredential, JsonSerializable
     private function setRefreshToken(null|string $refreshToken): static
     {
         $this->fields['refreshToken'] = $refreshToken;
+
+        return $this;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    private function setLinks(null|array $links): static
+    {
+        $links = $links !== null ? array_map(
+            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+            $links,
+        ) : null;
+
+        $this->fields['_links'] = $links;
 
         return $this;
     }

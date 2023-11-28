@@ -247,16 +247,6 @@ class PostServiceCredentialRequest implements JsonSerializable
         return $this->fields['_links'] ?? null;
     }
 
-    /**
-     * @param null|array[]|ResourceLink[] $links
-     */
-    public function setLinks(null|array $links): static
-    {
-        $this->fields['_links'] = $links;
-
-        return $this;
-    }
-
     public function getUsername(): string
     {
         return $this->fields['username'];
@@ -694,6 +684,21 @@ class PostServiceCredentialRequest implements JsonSerializable
     private function setType(string $type): static
     {
         $this->fields['type'] = $type;
+
+        return $this;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    private function setLinks(null|array $links): static
+    {
+        $links = $links !== null ? array_map(
+            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+            $links,
+        ) : null;
+
+        $this->fields['_links'] = $links;
 
         return $this;
     }
