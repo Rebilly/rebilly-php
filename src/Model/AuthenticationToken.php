@@ -37,9 +37,4 @@ interface AuthenticationToken
      * @return null|ResourceLink[]
      */
     public function getLinks(): ?array;
-
-    /**
-     * @param null|array[]|ResourceLink[] $links
-     */
-    public function setLinks(null|array $links): static;
 }

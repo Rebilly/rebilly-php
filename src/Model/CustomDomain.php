@@ -88,16 +88,6 @@ class CustomDomain implements JsonSerializable
         return $this->fields['_links'] ?? null;
     }
 
-    /**
-     * @param null|array[]|ResourceLink[] $links
-     */
-    public function setLinks(null|array $links): static
-    {
-        $this->fields['_links'] = $links;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [];
@@ -155,6 +145,21 @@ class CustomDomain implements JsonSerializable
         }
 
         $this->fields['updatedTime'] = $updatedTime;
+
+        return $this;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    private function setLinks(null|array $links): static
+    {
+        $links = $links !== null ? array_map(
+            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+            $links,
+        ) : null;
+
+        $this->fields['_links'] = $links;
 
         return $this;
     }
