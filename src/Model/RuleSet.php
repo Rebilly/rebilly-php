@@ -67,7 +67,7 @@ class RuleSet implements JsonSerializable
     public function setBinds(null|array $binds): static
     {
         $binds = $binds !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof Bind ? $value : Bind::from($value)) : null,
+            fn ($value) => $value instanceof Bind ? $value : Bind::from($value),
             $binds,
         ) : null;
 
@@ -90,7 +90,7 @@ class RuleSet implements JsonSerializable
     public function setRules(array $rules): static
     {
         $rules = array_map(
-            fn ($value) => $value !== null ? ($value instanceof Rule ? $value : Rule::from($value)) : null,
+            fn ($value) => $value instanceof Rule ? $value : Rule::from($value),
             $rules,
         );
 

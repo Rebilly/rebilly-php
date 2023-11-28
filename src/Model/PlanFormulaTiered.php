@@ -59,7 +59,7 @@ class PlanFormulaTiered implements PlanPriceFormula, JsonSerializable
     public function setBrackets(array $brackets): static
     {
         $brackets = array_map(
-            fn ($value) => $value !== null ? ($value instanceof PlanFormulaStairstepBrackets ? $value : PlanFormulaStairstepBrackets::from($value)) : null,
+            fn ($value) => $value instanceof PlanFormulaStairstepBrackets ? $value : PlanFormulaStairstepBrackets::from($value),
             $brackets,
         );
 

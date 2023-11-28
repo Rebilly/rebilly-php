@@ -131,11 +131,6 @@ class GridSegment implements JsonSerializable
      */
     public function setUserIds(null|array $userIds): static
     {
-        $userIds = $userIds !== null ? array_map(
-            fn ($value) => $value,
-            $userIds,
-        ) : null;
-
         $this->fields['userIds'] = $userIds;
 
         return $this;
@@ -220,7 +215,7 @@ class GridSegment implements JsonSerializable
     private function setUsers(null|array $users): static
     {
         $users = $users !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof GridSegmentUsers ? $value : GridSegmentUsers::from($value)) : null,
+            fn ($value) => $value instanceof GridSegmentUsers ? $value : GridSegmentUsers::from($value),
             $users,
         ) : null;
 

@@ -105,7 +105,7 @@ class EmailNotification implements JsonSerializable
     private function setNotifications(null|array $notifications): static
     {
         $notifications = $notifications !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof EmailNotificationNotifications ? $value : EmailNotificationNotifications::from($value)) : null,
+            fn ($value) => $value instanceof EmailNotificationNotifications ? $value : EmailNotificationNotifications::from($value),
             $notifications,
         ) : null;
 

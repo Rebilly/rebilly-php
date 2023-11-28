@@ -85,11 +85,6 @@ class DepositStrategyAmounts implements JsonSerializable
      */
     public function setIncrements(array $increments): static
     {
-        $increments = array_map(
-            fn ($value) => $value,
-            $increments,
-        );
-
         $this->fields['increments'] = $increments;
 
         return $this;

@@ -169,11 +169,6 @@ class EmailMessage implements JsonSerializable
      */
     public function setTo(array $to): static
     {
-        $to = array_map(
-            fn ($value) => $value,
-            $to,
-        );
-
         $this->fields['to'] = $to;
 
         return $this;
@@ -192,11 +187,6 @@ class EmailMessage implements JsonSerializable
      */
     public function setCc(null|array $cc): static
     {
-        $cc = $cc !== null ? array_map(
-            fn ($value) => $value,
-            $cc,
-        ) : null;
-
         $this->fields['cc'] = $cc;
 
         return $this;
@@ -215,11 +205,6 @@ class EmailMessage implements JsonSerializable
      */
     public function setBcc(null|array $bcc): static
     {
-        $bcc = $bcc !== null ? array_map(
-            fn ($value) => $value,
-            $bcc,
-        ) : null;
-
         $this->fields['bcc'] = $bcc;
 
         return $this;
@@ -275,7 +260,7 @@ class EmailMessage implements JsonSerializable
     public function setAttachments(null|array $attachments): static
     {
         $attachments = $attachments !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof EmailMessageAttachments ? $value : EmailMessageAttachments::from($value)) : null,
+            fn ($value) => $value instanceof EmailMessageAttachments ? $value : EmailMessageAttachments::from($value),
             $attachments,
         ) : null;
 

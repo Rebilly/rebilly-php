@@ -322,7 +322,7 @@ class Customer implements JsonSerializable
     public function setTaxNumbers(null|array $taxNumbers): static
     {
         $taxNumbers = $taxNumbers !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof TaxNumber ? $value : TaxNumber::from($value)) : null,
+            fn ($value) => $value instanceof TaxNumber ? $value : TaxNumber::from($value),
             $taxNumbers,
         ) : null;
 
@@ -518,7 +518,7 @@ class Customer implements JsonSerializable
     private function setTags(null|array $tags): static
     {
         $tags = $tags !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof Tag ? $value : Tag::from($value)) : null,
+            fn ($value) => $value instanceof Tag ? $value : Tag::from($value),
             $tags,
         ) : null;
 

@@ -240,11 +240,6 @@ class PaymentCardCreatePlain implements PaymentInstruction, PostPaymentInstrumen
      */
     public function setMethods(null|array $methods): static
     {
-        $methods = $methods !== null ? array_map(
-            fn ($value) => $value,
-            $methods,
-        ) : null;
-
         $this->fields['methods'] = $methods;
 
         return $this;

@@ -66,7 +66,7 @@ class SubscriptionChange implements JsonSerializable
     public function setItems(array $items): static
     {
         $items = array_map(
-            fn ($value) => $value !== null ? ($value instanceof SubscriptionChangeItems ? $value : SubscriptionChangeItems::from($value)) : null,
+            fn ($value) => $value instanceof SubscriptionChangeItems ? $value : SubscriptionChangeItems::from($value),
             $items,
         );
 

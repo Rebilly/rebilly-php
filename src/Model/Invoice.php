@@ -770,7 +770,7 @@ class Invoice implements JsonSerializable
     private function setItems(null|array $items): static
     {
         $items = $items !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof InvoiceItem ? $value : InvoiceItem::from($value)) : null,
+            fn ($value) => $value instanceof InvoiceItem ? $value : InvoiceItem::from($value),
             $items,
         ) : null;
 
@@ -785,7 +785,7 @@ class Invoice implements JsonSerializable
     private function setDiscounts(null|array $discounts): static
     {
         $discounts = $discounts !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof InvoiceDiscounts ? $value : InvoiceDiscounts::from($value)) : null,
+            fn ($value) => $value instanceof InvoiceDiscounts ? $value : InvoiceDiscounts::from($value),
             $discounts,
         ) : null;
 
@@ -901,7 +901,7 @@ class Invoice implements JsonSerializable
     private function setTransactions(null|array $transactions): static
     {
         $transactions = $transactions !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof Transaction ? $value : Transaction::from($value)) : null,
+            fn ($value) => $value instanceof Transaction ? $value : Transaction::from($value),
             $transactions,
         ) : null;
 

@@ -86,7 +86,7 @@ class OrganizationSettings implements JsonSerializable
     public function setTaxLocations(null|array $taxLocations): static
     {
         $taxLocations = $taxLocations !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof OrganizationSettingsTaxLocations ? $value : OrganizationSettingsTaxLocations::from($value)) : null,
+            fn ($value) => $value instanceof OrganizationSettingsTaxLocations ? $value : OrganizationSettingsTaxLocations::from($value),
             $taxLocations,
         ) : null;
 

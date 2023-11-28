@@ -111,7 +111,7 @@ class Search implements JsonSerializable
     private function setCustomers(null|array $customers): static
     {
         $customers = $customers !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof Customer ? $value : Customer::from($value)) : null,
+            fn ($value) => $value instanceof Customer ? $value : Customer::from($value),
             $customers,
         ) : null;
 
@@ -126,7 +126,7 @@ class Search implements JsonSerializable
     private function setInvoices(null|array $invoices): static
     {
         $invoices = $invoices !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof Invoice ? $value : Invoice::from($value)) : null,
+            fn ($value) => $value instanceof Invoice ? $value : Invoice::from($value),
             $invoices,
         ) : null;
 
@@ -141,7 +141,7 @@ class Search implements JsonSerializable
     private function setOrders(null|array $orders): static
     {
         $orders = $orders !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof Subscription ? $value : SubscriptionFactory::from($value)) : null,
+            fn ($value) => $value instanceof Subscription ? $value : SubscriptionFactory::from($value),
             $orders,
         ) : null;
 
@@ -156,7 +156,7 @@ class Search implements JsonSerializable
     private function setTransactions(null|array $transactions): static
     {
         $transactions = $transactions !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof Transaction ? $value : Transaction::from($value)) : null,
+            fn ($value) => $value instanceof Transaction ? $value : Transaction::from($value),
             $transactions,
         ) : null;
 
@@ -170,11 +170,6 @@ class Search implements JsonSerializable
      */
     private function setSearched(null|array $searched): static
     {
-        $searched = $searched !== null ? array_map(
-            fn ($value) => $value,
-            $searched,
-        ) : null;
-
         $this->fields['searched'] = $searched;
 
         return $this;

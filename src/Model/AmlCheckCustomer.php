@@ -82,7 +82,7 @@ class AmlCheckCustomer implements JsonSerializable
     public function setTags(null|array $tags): static
     {
         $tags = $tags !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof Tag ? $value : Tag::from($value)) : null,
+            fn ($value) => $value instanceof Tag ? $value : Tag::from($value),
             $tags,
         ) : null;
 

@@ -75,7 +75,7 @@ class ReportRetentionPercentageData implements JsonSerializable
     public function setPeriods(null|array $periods): static
     {
         $periods = $periods !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof ReportRetentionPercentageDataPeriods ? $value : ReportRetentionPercentageDataPeriods::from($value)) : null,
+            fn ($value) => $value instanceof ReportRetentionPercentageDataPeriods ? $value : ReportRetentionPercentageDataPeriods::from($value),
             $periods,
         ) : null;
 

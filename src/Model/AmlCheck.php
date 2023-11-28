@@ -240,7 +240,7 @@ class AmlCheck implements JsonSerializable
     public function setHits(null|array $hits): static
     {
         $hits = $hits !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof AML ? $value : AML::from($value)) : null,
+            fn ($value) => $value instanceof AML ? $value : AML::from($value),
             $hits,
         ) : null;
 
@@ -352,7 +352,7 @@ class AmlCheck implements JsonSerializable
     private function setTags(null|array $tags): static
     {
         $tags = $tags !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof Tag ? $value : Tag::from($value)) : null,
+            fn ($value) => $value instanceof Tag ? $value : Tag::from($value),
             $tags,
         ) : null;
 

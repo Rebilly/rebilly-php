@@ -50,11 +50,6 @@ class ArrayCustomFieldAdditionalSchema implements JsonSerializable
      */
     public function setAllowedValues(null|array $allowedValues): static
     {
-        $allowedValues = $allowedValues !== null ? array_map(
-            fn ($value) => $value,
-            $allowedValues,
-        ) : null;
-
         $this->fields['allowedValues'] = $allowedValues;
 
         return $this;
@@ -85,11 +80,6 @@ class ArrayCustomFieldAdditionalSchema implements JsonSerializable
      */
     public function setDefault(null|array $default): static
     {
-        $default = $default !== null ? array_map(
-            fn ($value) => $value,
-            $default,
-        ) : null;
-
         $this->fields['default'] = $default;
 
         return $this;

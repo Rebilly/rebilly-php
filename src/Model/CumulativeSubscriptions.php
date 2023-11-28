@@ -45,7 +45,7 @@ class CumulativeSubscriptions implements JsonSerializable
     public function setData(null|array $data): static
     {
         $data = $data !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof CumulativeSubscriptionsData ? $value : CumulativeSubscriptionsData::from($value)) : null,
+            fn ($value) => $value instanceof CumulativeSubscriptionsData ? $value : CumulativeSubscriptionsData::from($value),
             $data,
         ) : null;
 

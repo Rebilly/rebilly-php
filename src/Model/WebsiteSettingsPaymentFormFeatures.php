@@ -50,11 +50,6 @@ class WebsiteSettingsPaymentFormFeatures implements JsonSerializable
      */
     public function setShowCoupons(null|array $showCoupons): static
     {
-        $showCoupons = $showCoupons !== null ? array_map(
-            fn ($value) => $value,
-            $showCoupons,
-        ) : null;
-
         $this->fields['showCoupons'] = $showCoupons;
 
         return $this;

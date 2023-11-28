@@ -125,7 +125,7 @@ class CheckoutForm implements JsonSerializable
     public function setPlans(array $plans): static
     {
         $plans = array_map(
-            fn ($value) => $value !== null ? ($value instanceof CheckoutFormPlan ? $value : CheckoutFormPlanFactory::from($value)) : null,
+            fn ($value) => $value instanceof CheckoutFormPlan ? $value : CheckoutFormPlanFactory::from($value),
             $plans,
         );
 
@@ -148,7 +148,7 @@ class CheckoutForm implements JsonSerializable
     public function setAddonPlans(null|array $addonPlans): static
     {
         $addonPlans = $addonPlans !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof CheckoutFormPlan ? $value : CheckoutFormPlanFactory::from($value)) : null,
+            fn ($value) => $value instanceof CheckoutFormPlan ? $value : CheckoutFormPlanFactory::from($value),
             $addonPlans,
         ) : null;
 
@@ -171,7 +171,7 @@ class CheckoutForm implements JsonSerializable
     public function setBumpPlans(null|array $bumpPlans): static
     {
         $bumpPlans = $bumpPlans !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof CheckoutFormPlan ? $value : CheckoutFormPlanFactory::from($value)) : null,
+            fn ($value) => $value instanceof CheckoutFormPlan ? $value : CheckoutFormPlanFactory::from($value),
             $bumpPlans,
         ) : null;
 
@@ -229,11 +229,6 @@ class CheckoutForm implements JsonSerializable
      */
     public function setPaymentMethods(null|array $paymentMethods): static
     {
-        $paymentMethods = $paymentMethods !== null ? array_map(
-            fn ($value) => $value,
-            $paymentMethods,
-        ) : null;
-
         $this->fields['paymentMethods'] = $paymentMethods;
 
         return $this;

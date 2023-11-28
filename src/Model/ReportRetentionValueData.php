@@ -75,7 +75,7 @@ class ReportRetentionValueData implements JsonSerializable
     public function setPeriods(null|array $periods): static
     {
         $periods = $periods !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof ReportRetentionValueDataPeriods ? $value : ReportRetentionValueDataPeriods::from($value)) : null,
+            fn ($value) => $value instanceof ReportRetentionValueDataPeriods ? $value : ReportRetentionValueDataPeriods::from($value),
             $periods,
         ) : null;
 

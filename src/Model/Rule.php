@@ -90,11 +90,6 @@ class Rule implements JsonSerializable
      */
     public function setLabels(null|array $labels): static
     {
-        $labels = $labels !== null ? array_map(
-            fn ($value) => $value,
-            $labels,
-        ) : null;
-
         $this->fields['labels'] = $labels;
 
         return $this;
@@ -138,7 +133,7 @@ class Rule implements JsonSerializable
     public function setActions(array $actions): static
     {
         $actions = array_map(
-            fn ($value) => $value !== null ? ($value instanceof RuleAction ? $value : RuleAction::from($value)) : null,
+            fn ($value) => $value instanceof RuleAction ? $value : RuleAction::from($value),
             $actions,
         );
 

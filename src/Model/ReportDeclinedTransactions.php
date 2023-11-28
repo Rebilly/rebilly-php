@@ -60,7 +60,7 @@ class ReportDeclinedTransactions implements JsonSerializable
     public function setData(null|array $data): static
     {
         $data = $data !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof ReportDeclinedTransactionsData ? $value : ReportDeclinedTransactionsData::from($value)) : null,
+            fn ($value) => $value instanceof ReportDeclinedTransactionsData ? $value : ReportDeclinedTransactionsData::from($value),
             $data,
         ) : null;
 

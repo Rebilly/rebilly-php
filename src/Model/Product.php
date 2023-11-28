@@ -135,11 +135,6 @@ class Product implements JsonSerializable
      */
     public function setOptions(null|array $options): static
     {
-        $options = $options !== null ? array_map(
-            fn ($value) => $value,
-            $options,
-        ) : null;
-
         $this->fields['options'] = $options;
 
         return $this;

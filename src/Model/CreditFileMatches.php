@@ -187,7 +187,7 @@ class CreditFileMatches implements JsonSerializable
     private function setTrades(null|array $trades): static
     {
         $trades = $trades !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof CreditFileMatchesTrades ? $value : CreditFileMatchesTrades::from($value)) : null,
+            fn ($value) => $value instanceof CreditFileMatchesTrades ? $value : CreditFileMatchesTrades::from($value),
             $trades,
         ) : null;
 

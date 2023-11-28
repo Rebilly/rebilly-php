@@ -80,11 +80,6 @@ class OrganizationQuestionnaire implements JsonSerializable
      */
     public function setProducts(null|array $products): static
     {
-        $products = $products !== null ? array_map(
-            fn ($value) => $value,
-            $products,
-        ) : null;
-
         $this->fields['products'] = $products;
 
         return $this;

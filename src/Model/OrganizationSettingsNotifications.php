@@ -74,11 +74,6 @@ class OrganizationSettingsNotifications implements JsonSerializable
      */
     public function setNotificationEmailAddresses(null|array $notificationEmailAddresses): static
     {
-        $notificationEmailAddresses = $notificationEmailAddresses !== null ? array_map(
-            fn ($value) => $value,
-            $notificationEmailAddresses,
-        ) : null;
-
         $this->fields['notificationEmailAddresses'] = $notificationEmailAddresses;
 
         return $this;

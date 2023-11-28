@@ -103,11 +103,6 @@ class Membership implements JsonSerializable
      */
     public function setAllowedIps(null|array $allowedIps): static
     {
-        $allowedIps = $allowedIps !== null ? array_map(
-            fn ($value) => $value,
-            $allowedIps,
-        ) : null;
-
         $this->fields['allowedIps'] = $allowedIps;
 
         return $this;
@@ -126,11 +121,6 @@ class Membership implements JsonSerializable
      */
     public function setPermissions(null|array $permissions): static
     {
-        $permissions = $permissions !== null ? array_map(
-            fn ($value) => $value,
-            $permissions,
-        ) : null;
-
         $this->fields['permissions'] = $permissions;
 
         return $this;
@@ -166,11 +156,6 @@ class Membership implements JsonSerializable
      */
     public function setRoleIds(null|array $roleIds): static
     {
-        $roleIds = $roleIds !== null ? array_map(
-            fn ($value) => $value,
-            $roleIds,
-        ) : null;
-
         $this->fields['roleIds'] = $roleIds;
 
         return $this;
@@ -190,7 +175,7 @@ class Membership implements JsonSerializable
     public function setAcl(null|array $acl): static
     {
         $acl = $acl !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof Acl ? $value : Acl::from($value)) : null,
+            fn ($value) => $value instanceof Acl ? $value : Acl::from($value),
             $acl,
         ) : null;
 

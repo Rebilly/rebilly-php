@@ -97,7 +97,7 @@ class CouponRedemption implements JsonSerializable
     public function setAdditionalRestrictions(null|array $additionalRestrictions): static
     {
         $additionalRestrictions = $additionalRestrictions !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof RedemptionRestriction ? $value : RedemptionRestrictionFactory::from($value)) : null,
+            fn ($value) => $value instanceof RedemptionRestriction ? $value : RedemptionRestrictionFactory::from($value),
             $additionalRestrictions,
         ) : null;
 

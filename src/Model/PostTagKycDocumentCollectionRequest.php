@@ -44,11 +44,6 @@ class PostTagKycDocumentCollectionRequest implements JsonSerializable
      */
     public function setKycDocumentIds(array $kycDocumentIds): static
     {
-        $kycDocumentIds = array_map(
-            fn ($value) => $value,
-            $kycDocumentIds,
-        );
-
         $this->fields['kycDocumentIds'] = $kycDocumentIds;
 
         return $this;

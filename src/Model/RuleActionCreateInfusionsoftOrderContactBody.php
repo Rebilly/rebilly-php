@@ -48,7 +48,7 @@ class RuleActionCreateInfusionsoftOrderContactBody implements JsonSerializable
     public function setEmailAddresses(null|array $emailAddresses): static
     {
         $emailAddresses = $emailAddresses !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof RuleActionCreateInfusionsoftOrderContactBodyEmailAddresses ? $value : RuleActionCreateInfusionsoftOrderContactBodyEmailAddresses::from($value)) : null,
+            fn ($value) => $value instanceof RuleActionCreateInfusionsoftOrderContactBodyEmailAddresses ? $value : RuleActionCreateInfusionsoftOrderContactBodyEmailAddresses::from($value),
             $emailAddresses,
         ) : null;
 
@@ -71,7 +71,7 @@ class RuleActionCreateInfusionsoftOrderContactBody implements JsonSerializable
     public function setPhoneNumbers(null|array $phoneNumbers): static
     {
         $phoneNumbers = $phoneNumbers !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof RuleActionCreateInfusionsoftOrderContactBodyPhoneNumbers ? $value : RuleActionCreateInfusionsoftOrderContactBodyPhoneNumbers::from($value)) : null,
+            fn ($value) => $value instanceof RuleActionCreateInfusionsoftOrderContactBodyPhoneNumbers ? $value : RuleActionCreateInfusionsoftOrderContactBodyPhoneNumbers::from($value),
             $phoneNumbers,
         ) : null;
 

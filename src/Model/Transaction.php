@@ -1178,11 +1178,6 @@ class Transaction implements JsonSerializable
      */
     private function setChildTransactions(null|array $childTransactions): static
     {
-        $childTransactions = $childTransactions !== null ? array_map(
-            fn ($value) => $value,
-            $childTransactions,
-        ) : null;
-
         $this->fields['childTransactions'] = $childTransactions;
 
         return $this;
@@ -1193,11 +1188,6 @@ class Transaction implements JsonSerializable
      */
     private function setInvoiceIds(null|array $invoiceIds): static
     {
-        $invoiceIds = $invoiceIds !== null ? array_map(
-            fn ($value) => $value,
-            $invoiceIds,
-        ) : null;
-
         $this->fields['invoiceIds'] = $invoiceIds;
 
         return $this;
@@ -1208,11 +1198,6 @@ class Transaction implements JsonSerializable
      */
     private function setSubscriptionIds(null|array $subscriptionIds): static
     {
-        $subscriptionIds = $subscriptionIds !== null ? array_map(
-            fn ($value) => $value,
-            $subscriptionIds,
-        ) : null;
-
         $this->fields['subscriptionIds'] = $subscriptionIds;
 
         return $this;
@@ -1223,11 +1208,6 @@ class Transaction implements JsonSerializable
      */
     private function setPlanIds(null|array $planIds): static
     {
-        $planIds = $planIds !== null ? array_map(
-            fn ($value) => $value,
-            $planIds,
-        ) : null;
-
         $this->fields['planIds'] = $planIds;
 
         return $this;

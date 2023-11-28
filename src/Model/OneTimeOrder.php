@@ -328,7 +328,7 @@ class OneTimeOrder implements Subscription, JsonSerializable
     public function setItems(array $items): static
     {
         $items = array_map(
-            fn ($value) => $value !== null ? ($value instanceof OrderItem ? $value : OrderItem::from($value)) : null,
+            fn ($value) => $value instanceof OrderItem ? $value : OrderItem::from($value),
             $items,
         );
 
@@ -408,11 +408,6 @@ class OneTimeOrder implements Subscription, JsonSerializable
      */
     public function setCouponIds(null|array $couponIds): static
     {
-        $couponIds = $couponIds !== null ? array_map(
-            fn ($value) => $value,
-            $couponIds,
-        ) : null;
-
         $this->fields['couponIds'] = $couponIds;
 
         return $this;
@@ -992,7 +987,7 @@ class OneTimeOrder implements Subscription, JsonSerializable
     private function setLineItems(null|array $lineItems): static
     {
         $lineItems = $lineItems !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof SubscriptionOrderLineItems ? $value : SubscriptionOrderLineItems::from($value)) : null,
+            fn ($value) => $value instanceof SubscriptionOrderLineItems ? $value : SubscriptionOrderLineItems::from($value),
             $lineItems,
         ) : null;
 

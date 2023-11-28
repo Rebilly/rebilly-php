@@ -44,11 +44,6 @@ class PostTagAmlCheckCollectionRequest implements JsonSerializable
      */
     public function setAmlCheckIds(array $amlCheckIds): static
     {
-        $amlCheckIds = array_map(
-            fn ($value) => $value,
-            $amlCheckIds,
-        );
-
         $this->fields['amlCheckIds'] = $amlCheckIds;
 
         return $this;

@@ -146,11 +146,6 @@ class CheckoutFormCustomization implements JsonSerializable
      */
     public function setRequiredAdditionalFields(null|array $requiredAdditionalFields): static
     {
-        $requiredAdditionalFields = $requiredAdditionalFields !== null ? array_map(
-            fn ($value) => $value,
-            $requiredAdditionalFields,
-        ) : null;
-
         $this->fields['requiredAdditionalFields'] = $requiredAdditionalFields;
 
         return $this;

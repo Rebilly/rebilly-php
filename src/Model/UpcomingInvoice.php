@@ -195,7 +195,7 @@ class UpcomingInvoice implements JsonSerializable
     public function setItems(null|array $items): static
     {
         $items = $items !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof UpcomingInvoiceItem ? $value : UpcomingInvoiceItem::from($value)) : null,
+            fn ($value) => $value instanceof UpcomingInvoiceItem ? $value : UpcomingInvoiceItem::from($value),
             $items,
         ) : null;
 
@@ -559,7 +559,7 @@ class UpcomingInvoice implements JsonSerializable
     private function setDiscounts(null|array $discounts): static
     {
         $discounts = $discounts !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof InvoiceDiscounts ? $value : InvoiceDiscounts::from($value)) : null,
+            fn ($value) => $value instanceof InvoiceDiscounts ? $value : InvoiceDiscounts::from($value),
             $discounts,
         ) : null;
 

@@ -57,7 +57,7 @@ class InvoiceRetryInstruction implements JsonSerializable
     public function setAttempts(array $attempts): static
     {
         $attempts = array_map(
-            fn ($value) => $value !== null ? ($value instanceof InvoiceRetryInstructionAttempts ? $value : InvoiceRetryInstructionAttempts::from($value)) : null,
+            fn ($value) => $value instanceof InvoiceRetryInstructionAttempts ? $value : InvoiceRetryInstructionAttempts::from($value),
             $attempts,
         );
 
@@ -79,11 +79,6 @@ class InvoiceRetryInstruction implements JsonSerializable
      */
     public function setAfterAttemptPolicies(array $afterAttemptPolicies): static
     {
-        $afterAttemptPolicies = array_map(
-            fn ($value) => $value,
-            $afterAttemptPolicies,
-        );
-
         $this->fields['afterAttemptPolicies'] = $afterAttemptPolicies;
 
         return $this;
@@ -102,11 +97,6 @@ class InvoiceRetryInstruction implements JsonSerializable
      */
     public function setAfterRetryEndPolicies(array $afterRetryEndPolicies): static
     {
-        $afterRetryEndPolicies = array_map(
-            fn ($value) => $value,
-            $afterRetryEndPolicies,
-        );
-
         $this->fields['afterRetryEndPolicies'] = $afterRetryEndPolicies;
 
         return $this;

@@ -83,7 +83,7 @@ class RuleActionSendEmail extends RuleAction
     public function setEmails(array $emails): static
     {
         $emails = array_map(
-            fn ($value) => $value !== null ? ($value instanceof RulesEmailNotification ? $value : RulesEmailNotification::from($value)) : null,
+            fn ($value) => $value instanceof RulesEmailNotification ? $value : RulesEmailNotification::from($value),
             $emails,
         );
 

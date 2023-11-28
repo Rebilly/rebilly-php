@@ -45,7 +45,7 @@ class RenewalSales implements JsonSerializable
     public function setData(null|array $data): static
     {
         $data = $data !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof RenewalSalesData ? $value : RenewalSalesData::from($value)) : null,
+            fn ($value) => $value instanceof RenewalSalesData ? $value : RenewalSalesData::from($value),
             $data,
         ) : null;
 

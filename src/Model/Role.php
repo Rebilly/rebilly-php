@@ -109,7 +109,7 @@ class Role implements JsonSerializable
     public function setAcl(array $acl): static
     {
         $acl = array_map(
-            fn ($value) => $value !== null ? ($value instanceof Acl ? $value : Acl::from($value)) : null,
+            fn ($value) => $value instanceof Acl ? $value : Acl::from($value),
             $acl,
         );
 
@@ -131,11 +131,6 @@ class Role implements JsonSerializable
      */
     public function setAllowedIps(null|array $allowedIps): static
     {
-        $allowedIps = $allowedIps !== null ? array_map(
-            fn ($value) => $value,
-            $allowedIps,
-        ) : null;
-
         $this->fields['allowedIps'] = $allowedIps;
 
         return $this;
@@ -162,11 +157,6 @@ class Role implements JsonSerializable
      */
     public function setJuniorIds(null|array $juniorIds): static
     {
-        $juniorIds = $juniorIds !== null ? array_map(
-            fn ($value) => $value,
-            $juniorIds,
-        ) : null;
-
         $this->fields['juniorIds'] = $juniorIds;
 
         return $this;
@@ -266,11 +256,6 @@ class Role implements JsonSerializable
      */
     private function setSeniorIds(null|array $seniorIds): static
     {
-        $seniorIds = $seniorIds !== null ? array_map(
-            fn ($value) => $value,
-            $seniorIds,
-        ) : null;
-
         $this->fields['seniorIds'] = $seniorIds;
 
         return $this;

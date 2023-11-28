@@ -57,7 +57,7 @@ class TimelineExtraData implements JsonSerializable
     public function setActions(null|array $actions): static
     {
         $actions = $actions !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof TimelineAction ? $value : TimelineActionFactory::from($value)) : null,
+            fn ($value) => $value instanceof TimelineAction ? $value : TimelineActionFactory::from($value),
             $actions,
         ) : null;
 
@@ -80,7 +80,7 @@ class TimelineExtraData implements JsonSerializable
     public function setTables(null|array $tables): static
     {
         $tables = $tables !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof TimelineTable ? $value : TimelineTable::from($value)) : null,
+            fn ($value) => $value instanceof TimelineTable ? $value : TimelineTable::from($value),
             $tables,
         ) : null;
 
@@ -137,7 +137,7 @@ class TimelineExtraData implements JsonSerializable
     public function setLinks(null|array $links): static
     {
         $links = $links !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof TimelineExtraDataLinks ? $value : TimelineExtraDataLinks::from($value)) : null,
+            fn ($value) => $value instanceof TimelineExtraDataLinks ? $value : TimelineExtraDataLinks::from($value),
             $links,
         ) : null;
 

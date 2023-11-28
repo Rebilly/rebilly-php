@@ -64,7 +64,7 @@ class GatewayAccountFinancialSettings implements JsonSerializable
     public function setRiskReserveSettings(null|array $riskReserveSettings): static
     {
         $riskReserveSettings = $riskReserveSettings !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof GatewayAccountFinancialSettingsRiskReserveSettings ? $value : GatewayAccountFinancialSettingsRiskReserveSettings::from($value)) : null,
+            fn ($value) => $value instanceof GatewayAccountFinancialSettingsRiskReserveSettings ? $value : GatewayAccountFinancialSettingsRiskReserveSettings::from($value),
             $riskReserveSettings,
         ) : null;
 

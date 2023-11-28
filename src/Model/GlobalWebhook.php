@@ -98,11 +98,6 @@ class GlobalWebhook implements JsonSerializable
      */
     public function setEventsFilter(null|array $eventsFilter): static
     {
-        $eventsFilter = $eventsFilter !== null ? array_map(
-            fn ($value) => $value,
-            $eventsFilter,
-        ) : null;
-
         $this->fields['eventsFilter'] = $eventsFilter;
 
         return $this;
@@ -158,7 +153,7 @@ class GlobalWebhook implements JsonSerializable
     public function setHeaders(null|array $headers): static
     {
         $headers = $headers !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof GlobalWebhookHeaders ? $value : GlobalWebhookHeaders::from($value)) : null,
+            fn ($value) => $value instanceof GlobalWebhookHeaders ? $value : GlobalWebhookHeaders::from($value),
             $headers,
         ) : null;
 

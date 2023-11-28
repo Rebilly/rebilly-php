@@ -188,7 +188,7 @@ class OrganizationExport implements JsonSerializable
     private function setResources(null|array $resources): static
     {
         $resources = $resources !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof OrganizationExportResources ? $value : OrganizationExportResources::from($value)) : null,
+            fn ($value) => $value instanceof OrganizationExportResources ? $value : OrganizationExportResources::from($value),
             $resources,
         ) : null;
 

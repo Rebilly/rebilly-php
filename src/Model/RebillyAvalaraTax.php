@@ -58,7 +58,7 @@ class RebillyAvalaraTax implements Taxes, JsonSerializable
     public function setItems(null|array $items): static
     {
         $items = $items !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof TaxItem ? $value : TaxItem::from($value)) : null,
+            fn ($value) => $value instanceof TaxItem ? $value : TaxItem::from($value),
             $items,
         ) : null;
 

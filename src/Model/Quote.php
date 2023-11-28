@@ -173,7 +173,7 @@ class Quote implements JsonSerializable
     public function setItems(array $items): static
     {
         $items = array_map(
-            fn ($value) => $value !== null ? ($value instanceof QuoteItems ? $value : QuoteItems::from($value)) : null,
+            fn ($value) => $value instanceof QuoteItems ? $value : QuoteItems::from($value),
             $items,
         );
 
@@ -351,11 +351,6 @@ class Quote implements JsonSerializable
      */
     public function setCouponIds(null|array $couponIds): static
     {
-        $couponIds = $couponIds !== null ? array_map(
-            fn ($value) => $value,
-            $couponIds,
-        ) : null;
-
         $this->fields['couponIds'] = $couponIds;
 
         return $this;

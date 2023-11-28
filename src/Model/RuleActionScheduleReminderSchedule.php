@@ -52,7 +52,7 @@ class RuleActionScheduleReminderSchedule implements JsonSerializable
     public function setInstructions(array $instructions): static
     {
         $instructions = array_map(
-            fn ($value) => $value !== null ? ($value instanceof ReminderScheduleInstruction ? $value : ReminderScheduleInstructionFactory::from($value)) : null,
+            fn ($value) => $value instanceof ReminderScheduleInstruction ? $value : ReminderScheduleInstructionFactory::from($value),
             $instructions,
         );
 

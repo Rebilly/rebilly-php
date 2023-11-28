@@ -45,7 +45,7 @@ class FutureRenewals implements JsonSerializable
     public function setData(null|array $data): static
     {
         $data = $data !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof FutureRenewalsData ? $value : FutureRenewalsData::from($value)) : null,
+            fn ($value) => $value instanceof FutureRenewalsData ? $value : FutureRenewalsData::from($value),
             $data,
         ) : null;
 

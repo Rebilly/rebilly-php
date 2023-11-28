@@ -48,7 +48,7 @@ class CreditMemoAllocations implements JsonSerializable
     public function setTransactions(null|array $transactions): static
     {
         $transactions = $transactions !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof CreditMemoAllocationsTransactions ? $value : CreditMemoAllocationsTransactions::from($value)) : null,
+            fn ($value) => $value instanceof CreditMemoAllocationsTransactions ? $value : CreditMemoAllocationsTransactions::from($value),
             $transactions,
         ) : null;
 
@@ -71,7 +71,7 @@ class CreditMemoAllocations implements JsonSerializable
     public function setInvoices(null|array $invoices): static
     {
         $invoices = $invoices !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof CreditMemoAllocationsInvoices ? $value : CreditMemoAllocationsInvoices::from($value)) : null,
+            fn ($value) => $value instanceof CreditMemoAllocationsInvoices ? $value : CreditMemoAllocationsInvoices::from($value),
             $invoices,
         ) : null;
 

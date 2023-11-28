@@ -295,11 +295,6 @@ class AML implements JsonSerializable
      */
     private function setSourceType(null|array $sourceType): static
     {
-        $sourceType = $sourceType !== null ? array_map(
-            fn ($value) => $value,
-            $sourceType,
-        ) : null;
-
         $this->fields['sourceType'] = $sourceType;
 
         return $this;
@@ -317,11 +312,6 @@ class AML implements JsonSerializable
      */
     private function setTitle(null|array $title): static
     {
-        $title = $title !== null ? array_map(
-            fn ($value) => $value,
-            $title,
-        ) : null;
-
         $this->fields['title'] = $title;
 
         return $this;
@@ -339,11 +329,6 @@ class AML implements JsonSerializable
      */
     private function setLegalBasis(null|array $legalBasis): static
     {
-        $legalBasis = $legalBasis !== null ? array_map(
-            fn ($value) => $value,
-            $legalBasis,
-        ) : null;
-
         $this->fields['legalBasis'] = $legalBasis;
 
         return $this;
@@ -376,7 +361,7 @@ class AML implements JsonSerializable
     private function setAddress(null|array $address): static
     {
         $address = $address !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof AMLAddress ? $value : AMLAddress::from($value)) : null,
+            fn ($value) => $value instanceof AMLAddress ? $value : AMLAddress::from($value),
             $address,
         ) : null;
 
@@ -390,11 +375,6 @@ class AML implements JsonSerializable
      */
     private function setDob(null|array $dob): static
     {
-        $dob = $dob !== null ? array_map(
-            fn ($value) => $value,
-            $dob,
-        ) : null;
-
         $this->fields['dob'] = $dob;
 
         return $this;
@@ -406,7 +386,7 @@ class AML implements JsonSerializable
     private function setAliases(null|array $aliases): static
     {
         $aliases = $aliases !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof AMLAliases ? $value : AMLAliases::from($value)) : null,
+            fn ($value) => $value instanceof AMLAliases ? $value : AMLAliases::from($value),
             $aliases,
         ) : null;
 
@@ -421,7 +401,7 @@ class AML implements JsonSerializable
     private function setPassport(null|array $passport): static
     {
         $passport = $passport !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof AMLPassport ? $value : AMLPassport::from($value)) : null,
+            fn ($value) => $value instanceof AMLPassport ? $value : AMLPassport::from($value),
             $passport,
         ) : null;
 

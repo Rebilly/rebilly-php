@@ -161,7 +161,7 @@ class TransactionBumpOffer implements JsonSerializable
     private function setPresentedOffers(null|array $presentedOffers): static
     {
         $presentedOffers = $presentedOffers !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof PurchaseBumpOffer ? $value : PurchaseBumpOffer::from($value)) : null,
+            fn ($value) => $value instanceof PurchaseBumpOffer ? $value : PurchaseBumpOffer::from($value),
             $presentedOffers,
         ) : null;
 
