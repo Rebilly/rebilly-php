@@ -36,6 +36,14 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const SETUP_INSTRUCTION_DO_NOTHING = 'do-nothing';
 
+    public const READY_TO_PAYOUT_INSTRUCTION_ALL = 'all';
+
+    public const READY_TO_PAYOUT_INSTRUCTION_COVERED_PAYOUT = 'covered-payout';
+
+    public const READY_TO_PAYOUT_INSTRUCTION_APPROVED_PAYMENT = 'approved-payment';
+
+    public const READY_TO_PAYOUT_INSTRUCTION_NONE = 'none';
+
     private array $fields = [];
 
     protected function __construct(array $data = [])
@@ -117,6 +125,9 @@ abstract class GatewayAccount implements JsonSerializable
         }
         if (array_key_exists('setupInstruction', $data)) {
             $this->setSetupInstruction($data['setupInstruction']);
+        }
+        if (array_key_exists('readyToPayoutInstruction', $data)) {
+            $this->setReadyToPayoutInstruction($data['readyToPayoutInstruction']);
         }
         if (array_key_exists('customFields', $data)) {
             $this->setCustomFields($data['customFields']);
@@ -838,6 +849,18 @@ abstract class GatewayAccount implements JsonSerializable
         return $this;
     }
 
+    public function getReadyToPayoutInstruction(): ?string
+    {
+        return $this->fields['readyToPayoutInstruction'] ?? null;
+    }
+
+    public function setReadyToPayoutInstruction(null|string $readyToPayoutInstruction): static
+    {
+        $this->fields['readyToPayoutInstruction'] = $readyToPayoutInstruction;
+
+        return $this;
+    }
+
     public function getCustomFields(): ?array
     {
         return $this->fields['customFields'] ?? null;
@@ -960,6 +983,9 @@ abstract class GatewayAccount implements JsonSerializable
         }
         if (array_key_exists('setupInstruction', $this->fields)) {
             $data['setupInstruction'] = $this->fields['setupInstruction'];
+        }
+        if (array_key_exists('readyToPayoutInstruction', $this->fields)) {
+            $data['readyToPayoutInstruction'] = $this->fields['readyToPayoutInstruction'];
         }
         if (array_key_exists('customFields', $this->fields)) {
             $data['customFields'] = $this->fields['customFields'];
