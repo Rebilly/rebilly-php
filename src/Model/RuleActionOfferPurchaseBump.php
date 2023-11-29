@@ -47,7 +47,7 @@ class RuleActionOfferPurchaseBump extends RuleAction
     public function setBumpOffers(array $bumpOffers): static
     {
         $bumpOffers = array_map(
-            fn ($value) => $value !== null ? ($value instanceof RuleActionOfferPurchaseBumpBumpOffers ? $value : RuleActionOfferPurchaseBumpBumpOffers::from($value)) : null,
+            fn ($value) => $value instanceof RuleActionOfferPurchaseBumpBumpOffers ? $value : RuleActionOfferPurchaseBumpBumpOffers::from($value),
             $bumpOffers,
         );
 

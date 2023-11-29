@@ -208,7 +208,7 @@ class PostOrganizationRequest implements JsonSerializable
     public function setPhoneNumbers(null|array $phoneNumbers): static
     {
         $phoneNumbers = $phoneNumbers !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof ContactPhoneNumbers ? $value : ContactPhoneNumbers::from($value)) : null,
+            fn ($value) => $value instanceof ContactPhoneNumbers ? $value : ContactPhoneNumbers::from($value),
             $phoneNumbers,
         ) : null;
 
@@ -231,7 +231,7 @@ class PostOrganizationRequest implements JsonSerializable
     public function setEmails(null|array $emails): static
     {
         $emails = $emails !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof ContactEmails ? $value : ContactEmails::from($value)) : null,
+            fn ($value) => $value instanceof ContactEmails ? $value : ContactEmails::from($value),
             $emails,
         ) : null;
 
@@ -322,7 +322,7 @@ class PostOrganizationRequest implements JsonSerializable
     public function setTaxNumbers(null|array $taxNumbers): static
     {
         $taxNumbers = $taxNumbers !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof TaxNumber ? $value : TaxNumber::from($value)) : null,
+            fn ($value) => $value instanceof TaxNumber ? $value : TaxNumber::from($value),
             $taxNumbers,
         ) : null;
 
@@ -440,7 +440,7 @@ class PostOrganizationRequest implements JsonSerializable
     private function setFeatures(null|array $features): static
     {
         $features = $features !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof OrganizationFeatures ? $value : OrganizationFeatures::from($value)) : null,
+            fn ($value) => $value instanceof OrganizationFeatures ? $value : OrganizationFeatures::from($value),
             $features,
         ) : null;
 

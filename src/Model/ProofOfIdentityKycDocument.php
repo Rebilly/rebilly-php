@@ -135,11 +135,6 @@ class ProofOfIdentityKycDocument implements KycDocument, JsonSerializable
      */
     public function setFileIds(array $fileIds): static
     {
-        $fileIds = array_map(
-            fn ($value) => $value,
-            $fileIds,
-        );
-
         $this->fields['fileIds'] = $fileIds;
 
         return $this;
@@ -528,7 +523,7 @@ class ProofOfIdentityKycDocument implements KycDocument, JsonSerializable
     private function setTags(null|array $tags): static
     {
         $tags = $tags !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof Tag ? $value : Tag::from($value)) : null,
+            fn ($value) => $value instanceof Tag ? $value : Tag::from($value),
             $tags,
         ) : null;
 

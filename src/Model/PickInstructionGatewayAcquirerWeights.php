@@ -47,7 +47,7 @@ class PickInstructionGatewayAcquirerWeights extends GatewayAccountPickInstructio
     public function setWeightedList(array $weightedList): static
     {
         $weightedList = array_map(
-            fn ($value) => $value !== null ? ($value instanceof PickInstructionGatewayAcquirerWeightsWeightedList ? $value : PickInstructionGatewayAcquirerWeightsWeightedList::from($value)) : null,
+            fn ($value) => $value instanceof PickInstructionGatewayAcquirerWeightsWeightedList ? $value : PickInstructionGatewayAcquirerWeightsWeightedList::from($value),
             $weightedList,
         );
 

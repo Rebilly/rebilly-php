@@ -512,11 +512,6 @@ class SESCredential implements ServiceCredential, JsonSerializable
      */
     public function setScopes(array $scopes): static
     {
-        $scopes = array_map(
-            fn ($value) => $value,
-            $scopes,
-        );
-
         $this->fields['scopes'] = $scopes;
 
         return $this;

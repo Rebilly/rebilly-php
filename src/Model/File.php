@@ -162,11 +162,6 @@ class File implements JsonSerializable
      */
     public function setTags(null|array $tags): static
     {
-        $tags = $tags !== null ? array_map(
-            fn ($value) => $value,
-            $tags,
-        ) : null;
-
         $this->fields['tags'] = $tags;
 
         return $this;

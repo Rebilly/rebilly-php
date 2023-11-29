@@ -79,7 +79,7 @@ class SettlementSettings implements JsonSerializable
     public function setAdvancedSettings(null|array $advancedSettings): static
     {
         $advancedSettings = $advancedSettings !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof SettlementSettingsAdvancedSettings ? $value : SettlementSettingsAdvancedSettings::from($value)) : null,
+            fn ($value) => $value instanceof SettlementSettingsAdvancedSettings ? $value : SettlementSettingsAdvancedSettings::from($value),
             $advancedSettings,
         ) : null;
 

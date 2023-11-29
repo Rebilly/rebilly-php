@@ -123,7 +123,7 @@ class EddSearchResult implements JsonSerializable
     private function setSearchResultData(null|array $searchResultData): static
     {
         $searchResultData = $searchResultData !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof EddScoreDetails ? $value : EddScoreDetails::from($value)) : null,
+            fn ($value) => $value instanceof EddScoreDetails ? $value : EddScoreDetails::from($value),
             $searchResultData,
         ) : null;
 

@@ -117,7 +117,7 @@ class ReportRevenueWaterfall implements JsonSerializable
     public function setWaterfall(null|array $waterfall): static
     {
         $waterfall = $waterfall !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof ReportRevenueWaterfallWaterfall ? $value : ReportRevenueWaterfallWaterfall::from($value)) : null,
+            fn ($value) => $value instanceof ReportRevenueWaterfallWaterfall ? $value : ReportRevenueWaterfallWaterfall::from($value),
             $waterfall,
         ) : null;
 

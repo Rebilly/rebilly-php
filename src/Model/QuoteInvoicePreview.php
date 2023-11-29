@@ -98,7 +98,7 @@ class QuoteInvoicePreview implements JsonSerializable
     public function setItems(null|array $items): static
     {
         $items = $items !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof QuoteInvoicePreviewItems ? $value : QuoteInvoicePreviewItems::from($value)) : null,
+            fn ($value) => $value instanceof QuoteInvoicePreviewItems ? $value : QuoteInvoicePreviewItems::from($value),
             $items,
         ) : null;
 

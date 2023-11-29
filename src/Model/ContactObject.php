@@ -193,7 +193,7 @@ class ContactObject implements JsonSerializable
     public function setPhoneNumbers(null|array $phoneNumbers): static
     {
         $phoneNumbers = $phoneNumbers !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof ContactPhoneNumbers ? $value : ContactPhoneNumbers::from($value)) : null,
+            fn ($value) => $value instanceof ContactPhoneNumbers ? $value : ContactPhoneNumbers::from($value),
             $phoneNumbers,
         ) : null;
 
@@ -216,7 +216,7 @@ class ContactObject implements JsonSerializable
     public function setEmails(null|array $emails): static
     {
         $emails = $emails !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof ContactEmails ? $value : ContactEmails::from($value)) : null,
+            fn ($value) => $value instanceof ContactEmails ? $value : ContactEmails::from($value),
             $emails,
         ) : null;
 

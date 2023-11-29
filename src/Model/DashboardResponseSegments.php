@@ -147,7 +147,7 @@ class DashboardResponseSegments implements JsonSerializable
     public function setTimeseries(null|array $timeseries): static
     {
         $timeseries = $timeseries !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof DashboardResponseSegmentsTimeseries ? $value : DashboardResponseSegmentsTimeseries::from($value)) : null,
+            fn ($value) => $value instanceof DashboardResponseSegmentsTimeseries ? $value : DashboardResponseSegmentsTimeseries::from($value),
             $timeseries,
         ) : null;
 

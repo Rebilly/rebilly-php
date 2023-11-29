@@ -107,7 +107,7 @@ class Coupon implements JsonSerializable
     public function setRestrictions(null|array $restrictions): static
     {
         $restrictions = $restrictions !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof CouponRestriction ? $value : CouponRestrictionFactory::from($value)) : null,
+            fn ($value) => $value instanceof CouponRestriction ? $value : CouponRestrictionFactory::from($value),
             $restrictions,
         ) : null;
 

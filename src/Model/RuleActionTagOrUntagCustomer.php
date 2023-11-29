@@ -49,11 +49,6 @@ class RuleActionTagOrUntagCustomer extends RuleAction
      */
     public function setAddingTags(array $addingTags): static
     {
-        $addingTags = array_map(
-            fn ($value) => $value,
-            $addingTags,
-        );
-
         $this->fields['addingTags'] = $addingTags;
 
         return $this;
@@ -72,11 +67,6 @@ class RuleActionTagOrUntagCustomer extends RuleAction
      */
     public function setRemovingTags(array $removingTags): static
     {
-        $removingTags = array_map(
-            fn ($value) => $value,
-            $removingTags,
-        );
-
         $this->fields['removingTags'] = $removingTags;
 
         return $this;

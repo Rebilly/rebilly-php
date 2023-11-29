@@ -107,7 +107,7 @@ class ApiKey implements JsonSerializable
     public function setAcl(null|array $acl): static
     {
         $acl = $acl !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof Acl ? $value : Acl::from($value)) : null,
+            fn ($value) => $value instanceof Acl ? $value : Acl::from($value),
             $acl,
         ) : null;
 
@@ -129,11 +129,6 @@ class ApiKey implements JsonSerializable
      */
     public function setAllowedIps(null|array $allowedIps): static
     {
-        $allowedIps = $allowedIps !== null ? array_map(
-            fn ($value) => $value,
-            $allowedIps,
-        ) : null;
-
         $this->fields['allowedIps'] = $allowedIps;
 
         return $this;

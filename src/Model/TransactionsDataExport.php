@@ -160,11 +160,6 @@ class TransactionsDataExport implements DataExport, JsonSerializable
      */
     public function setEmailNotification(null|array $emailNotification): static
     {
-        $emailNotification = $emailNotification !== null ? array_map(
-            fn ($value) => $value,
-            $emailNotification,
-        ) : null;
-
         $this->fields['emailNotification'] = $emailNotification;
 
         return $this;
@@ -183,11 +178,6 @@ class TransactionsDataExport implements DataExport, JsonSerializable
      */
     public function setFields(null|array $fields): static
     {
-        $fields = $fields !== null ? array_map(
-            fn ($value) => $value,
-            $fields,
-        ) : null;
-
         $this->fields['fields'] = $fields;
 
         return $this;

@@ -45,7 +45,7 @@ class ReportTax implements JsonSerializable
     public function setData(null|array $data): static
     {
         $data = $data !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof ReportTaxData ? $value : ReportTaxData::from($value)) : null,
+            fn ($value) => $value instanceof ReportTaxData ? $value : ReportTaxData::from($value),
             $data,
         ) : null;
 

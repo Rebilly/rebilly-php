@@ -63,11 +63,6 @@ class CountriesUnrestrictedMetadata implements CountriesMetadata, JsonSerializab
      */
     public function setValues(null|array $values): static
     {
-        $values = $values !== null ? array_map(
-            fn ($value) => $value,
-            $values,
-        ) : null;
-
         $this->fields['values'] = $values;
 
         return $this;

@@ -147,7 +147,7 @@ class PostReadyToPay implements JsonSerializable
     public function setItems(array $items): static
     {
         $items = array_map(
-            fn ($value) => $value !== null ? ($value instanceof ReadyToPayItemsItems ? $value : ReadyToPayItemsItems::from($value)) : null,
+            fn ($value) => $value instanceof ReadyToPayItemsItems ? $value : ReadyToPayItemsItems::from($value),
             $items,
         );
 

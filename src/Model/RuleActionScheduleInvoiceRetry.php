@@ -62,7 +62,7 @@ class RuleActionScheduleInvoiceRetry extends RuleAction
     public function setAttempts(array $attempts): static
     {
         $attempts = array_map(
-            fn ($value) => $value !== null ? ($value instanceof RuleActionScheduleInvoiceRetryAttempts ? $value : RuleActionScheduleInvoiceRetryAttempts::from($value)) : null,
+            fn ($value) => $value instanceof RuleActionScheduleInvoiceRetryAttempts ? $value : RuleActionScheduleInvoiceRetryAttempts::from($value),
             $attempts,
         );
 
@@ -84,11 +84,6 @@ class RuleActionScheduleInvoiceRetry extends RuleAction
      */
     public function setAfterAttemptPolicies(array $afterAttemptPolicies): static
     {
-        $afterAttemptPolicies = array_map(
-            fn ($value) => $value,
-            $afterAttemptPolicies,
-        );
-
         $this->fields['afterAttemptPolicies'] = $afterAttemptPolicies;
 
         return $this;
@@ -107,11 +102,6 @@ class RuleActionScheduleInvoiceRetry extends RuleAction
      */
     public function setAfterRetryEndPolicies(array $afterRetryEndPolicies): static
     {
-        $afterRetryEndPolicies = array_map(
-            fn ($value) => $value,
-            $afterRetryEndPolicies,
-        );
-
         $this->fields['afterRetryEndPolicies'] = $afterRetryEndPolicies;
 
         return $this;

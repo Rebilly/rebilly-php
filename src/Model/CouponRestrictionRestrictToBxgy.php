@@ -98,7 +98,7 @@ class CouponRestrictionRestrictToBxgy implements CouponRestriction, JsonSerializ
     public function setBuy(array $buy): static
     {
         $buy = array_map(
-            fn ($value) => $value !== null ? ($value instanceof CouponRestrictionRestrictToBxgyBuy ? $value : CouponRestrictionRestrictToBxgyBuy::from($value)) : null,
+            fn ($value) => $value instanceof CouponRestrictionRestrictToBxgyBuy ? $value : CouponRestrictionRestrictToBxgyBuy::from($value),
             $buy,
         );
 
@@ -121,7 +121,7 @@ class CouponRestrictionRestrictToBxgy implements CouponRestriction, JsonSerializ
     public function setGet(array $get): static
     {
         $get = array_map(
-            fn ($value) => $value !== null ? ($value instanceof CouponRestrictionRestrictToBxgyGet ? $value : CouponRestrictionRestrictToBxgyGet::from($value)) : null,
+            fn ($value) => $value instanceof CouponRestrictionRestrictToBxgyGet ? $value : CouponRestrictionRestrictToBxgyGet::from($value),
             $get,
         );
 
@@ -143,11 +143,6 @@ class CouponRestrictionRestrictToBxgy implements CouponRestriction, JsonSerializ
      */
     public function setPlanIds(array $planIds): static
     {
-        $planIds = array_map(
-            fn ($value) => $value,
-            $planIds,
-        );
-
         $this->fields['planIds'] = $planIds;
 
         return $this;
@@ -190,11 +185,6 @@ class CouponRestrictionRestrictToBxgy implements CouponRestriction, JsonSerializ
      */
     public function setCountries(array $countries): static
     {
-        $countries = array_map(
-            fn ($value) => $value,
-            $countries,
-        );
-
         $this->fields['countries'] = $countries;
 
         return $this;
@@ -213,11 +203,6 @@ class CouponRestrictionRestrictToBxgy implements CouponRestriction, JsonSerializ
      */
     public function setTags(array $tags): static
     {
-        $tags = array_map(
-            fn ($value) => $value,
-            $tags,
-        );
-
         $this->fields['tags'] = $tags;
 
         return $this;
@@ -236,11 +221,6 @@ class CouponRestrictionRestrictToBxgy implements CouponRestriction, JsonSerializ
      */
     public function setProductIds(array $productIds): static
     {
-        $productIds = array_map(
-            fn ($value) => $value,
-            $productIds,
-        );
-
         $this->fields['productIds'] = $productIds;
 
         return $this;
@@ -259,11 +239,6 @@ class CouponRestrictionRestrictToBxgy implements CouponRestriction, JsonSerializ
      */
     public function setSubscriptionIds(array $subscriptionIds): static
     {
-        $subscriptionIds = array_map(
-            fn ($value) => $value,
-            $subscriptionIds,
-        );
-
         $this->fields['subscriptionIds'] = $subscriptionIds;
 
         return $this;
@@ -294,11 +269,6 @@ class CouponRestrictionRestrictToBxgy implements CouponRestriction, JsonSerializ
      */
     public function setCustomerIds(array $customerIds): static
     {
-        $customerIds = array_map(
-            fn ($value) => $value,
-            $customerIds,
-        );
-
         $this->fields['customerIds'] = $customerIds;
 
         return $this;
@@ -357,11 +327,6 @@ class CouponRestrictionRestrictToBxgy implements CouponRestriction, JsonSerializ
      */
     public function setInvoiceIds(array $invoiceIds): static
     {
-        $invoiceIds = array_map(
-            fn ($value) => $value,
-            $invoiceIds,
-        );
-
         $this->fields['invoiceIds'] = $invoiceIds;
 
         return $this;

@@ -65,11 +65,6 @@ class KycRequestDocument implements JsonSerializable
      */
     public function setSubtypes(null|array $subtypes): static
     {
-        $subtypes = $subtypes !== null ? array_map(
-            fn ($value) => $value,
-            $subtypes,
-        ) : null;
-
         $this->fields['subtypes'] = $subtypes;
 
         return $this;

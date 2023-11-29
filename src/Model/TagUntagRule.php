@@ -224,11 +224,6 @@ class TagUntagRule implements JsonSerializable
      */
     public function setAddTags(array $addTags): static
     {
-        $addTags = array_map(
-            fn ($value) => $value,
-            $addTags,
-        );
-
         $this->fields['addTags'] = $addTags;
 
         return $this;
@@ -247,11 +242,6 @@ class TagUntagRule implements JsonSerializable
      */
     public function setRemoveTags(array $removeTags): static
     {
-        $removeTags = array_map(
-            fn ($value) => $value,
-            $removeTags,
-        );
-
         $this->fields['removeTags'] = $removeTags;
 
         return $this;

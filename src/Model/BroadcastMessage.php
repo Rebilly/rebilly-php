@@ -111,7 +111,7 @@ class BroadcastMessage implements JsonSerializable
     public function setMessages(array $messages): static
     {
         $messages = array_map(
-            fn ($value) => $value !== null ? ($value instanceof BroadcastMessageMessages ? $value : BroadcastMessageMessages::from($value)) : null,
+            fn ($value) => $value instanceof BroadcastMessageMessages ? $value : BroadcastMessageMessages::from($value),
             $messages,
         );
 

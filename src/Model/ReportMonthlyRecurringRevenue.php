@@ -45,7 +45,7 @@ class ReportMonthlyRecurringRevenue implements JsonSerializable
     public function setData(null|array $data): static
     {
         $data = $data !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof ReportMonthlyRecurringRevenueData ? $value : ReportMonthlyRecurringRevenueData::from($value)) : null,
+            fn ($value) => $value instanceof ReportMonthlyRecurringRevenueData ? $value : ReportMonthlyRecurringRevenueData::from($value),
             $data,
         ) : null;
 

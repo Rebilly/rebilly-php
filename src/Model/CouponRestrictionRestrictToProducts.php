@@ -97,11 +97,6 @@ class CouponRestrictionRestrictToProducts implements CouponRestriction, Redempti
      */
     public function setProductIds(array $productIds): static
     {
-        $productIds = array_map(
-            fn ($value) => $value,
-            $productIds,
-        );
-
         $this->fields['productIds'] = $productIds;
 
         return $this;
@@ -132,11 +127,6 @@ class CouponRestrictionRestrictToProducts implements CouponRestriction, Redempti
      */
     public function setPlanIds(array $planIds): static
     {
-        $planIds = array_map(
-            fn ($value) => $value,
-            $planIds,
-        );
-
         $this->fields['planIds'] = $planIds;
 
         return $this;
@@ -180,7 +170,7 @@ class CouponRestrictionRestrictToProducts implements CouponRestriction, Redempti
     public function setBuy(array $buy): static
     {
         $buy = array_map(
-            fn ($value) => $value !== null ? ($value instanceof CouponRestrictionRestrictToBxgyBuy ? $value : CouponRestrictionRestrictToBxgyBuy::from($value)) : null,
+            fn ($value) => $value instanceof CouponRestrictionRestrictToBxgyBuy ? $value : CouponRestrictionRestrictToBxgyBuy::from($value),
             $buy,
         );
 
@@ -202,11 +192,6 @@ class CouponRestrictionRestrictToProducts implements CouponRestriction, Redempti
      */
     public function setCountries(array $countries): static
     {
-        $countries = array_map(
-            fn ($value) => $value,
-            $countries,
-        );
-
         $this->fields['countries'] = $countries;
 
         return $this;
@@ -225,11 +210,6 @@ class CouponRestrictionRestrictToProducts implements CouponRestriction, Redempti
      */
     public function setTags(array $tags): static
     {
-        $tags = array_map(
-            fn ($value) => $value,
-            $tags,
-        );
-
         $this->fields['tags'] = $tags;
 
         return $this;
@@ -248,11 +228,6 @@ class CouponRestrictionRestrictToProducts implements CouponRestriction, Redempti
      */
     public function setSubscriptionIds(array $subscriptionIds): static
     {
-        $subscriptionIds = array_map(
-            fn ($value) => $value,
-            $subscriptionIds,
-        );
-
         $this->fields['subscriptionIds'] = $subscriptionIds;
 
         return $this;
@@ -272,7 +247,7 @@ class CouponRestrictionRestrictToProducts implements CouponRestriction, Redempti
     public function setGet(array $get): static
     {
         $get = array_map(
-            fn ($value) => $value !== null ? ($value instanceof CouponRestrictionRestrictToBxgyGet ? $value : CouponRestrictionRestrictToBxgyGet::from($value)) : null,
+            fn ($value) => $value instanceof CouponRestrictionRestrictToBxgyGet ? $value : CouponRestrictionRestrictToBxgyGet::from($value),
             $get,
         );
 
@@ -306,11 +281,6 @@ class CouponRestrictionRestrictToProducts implements CouponRestriction, Redempti
      */
     public function setCustomerIds(array $customerIds): static
     {
-        $customerIds = array_map(
-            fn ($value) => $value,
-            $customerIds,
-        );
-
         $this->fields['customerIds'] = $customerIds;
 
         return $this;
@@ -357,11 +327,6 @@ class CouponRestrictionRestrictToProducts implements CouponRestriction, Redempti
      */
     public function setInvoiceIds(array $invoiceIds): static
     {
-        $invoiceIds = array_map(
-            fn ($value) => $value,
-            $invoiceIds,
-        );
-
         $this->fields['invoiceIds'] = $invoiceIds;
 
         return $this;

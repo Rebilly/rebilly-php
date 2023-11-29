@@ -519,11 +519,6 @@ class PostKycDocumentMatchesRequest implements JsonSerializable
      */
     private function setMatchingImages(null|array $matchingImages): static
     {
-        $matchingImages = $matchingImages !== null ? array_map(
-            fn ($value) => $value,
-            $matchingImages,
-        ) : null;
-
         $this->fields['matchingImages'] = $matchingImages;
 
         return $this;

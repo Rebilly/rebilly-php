@@ -171,11 +171,6 @@ class User implements JsonSerializable
      */
     public function setPermissions(null|array $permissions): static
     {
-        $permissions = $permissions !== null ? array_map(
-            fn ($value) => $value,
-            $permissions,
-        ) : null;
-
         $this->fields['permissions'] = $permissions;
 
         return $this;
@@ -194,11 +189,6 @@ class User implements JsonSerializable
      */
     public function setComputedPermissions(null|array $computedPermissions): static
     {
-        $computedPermissions = $computedPermissions !== null ? array_map(
-            fn ($value) => $value,
-            $computedPermissions,
-        ) : null;
-
         $this->fields['computedPermissions'] = $computedPermissions;
 
         return $this;
@@ -274,11 +264,6 @@ class User implements JsonSerializable
      */
     public function setRoleIds(null|array $roleIds): static
     {
-        $roleIds = $roleIds !== null ? array_map(
-            fn ($value) => $value,
-            $roleIds,
-        ) : null;
-
         $this->fields['roleIds'] = $roleIds;
 
         return $this;
@@ -297,11 +282,6 @@ class User implements JsonSerializable
      */
     public function setAllowedIps(null|array $allowedIps): static
     {
-        $allowedIps = $allowedIps !== null ? array_map(
-            fn ($value) => $value,
-            $allowedIps,
-        ) : null;
-
         $this->fields['allowedIps'] = $allowedIps;
 
         return $this;
@@ -431,11 +411,6 @@ class User implements JsonSerializable
      */
     private function setAvailableCurrencies(null|array $availableCurrencies): static
     {
-        $availableCurrencies = $availableCurrencies !== null ? array_map(
-            fn ($value) => $value,
-            $availableCurrencies,
-        ) : null;
-
         $this->fields['availableCurrencies'] = $availableCurrencies;
 
         return $this;

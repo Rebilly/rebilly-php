@@ -90,7 +90,7 @@ class BroadcastMessageMessages implements JsonSerializable
     public function setTemplates(array $templates): static
     {
         $templates = array_map(
-            fn ($value) => $value !== null ? ($value instanceof BroadcastMessageMessagesTemplates ? $value : BroadcastMessageMessagesTemplates::from($value)) : null,
+            fn ($value) => $value instanceof BroadcastMessageMessagesTemplates ? $value : BroadcastMessageMessagesTemplates::from($value),
             $templates,
         );
 

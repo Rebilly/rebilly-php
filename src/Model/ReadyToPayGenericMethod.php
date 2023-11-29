@@ -65,11 +65,6 @@ class ReadyToPayGenericMethod implements ReadyToPayMethods, JsonSerializable
      */
     public function setFilters(null|array $filters): static
     {
-        $filters = $filters !== null ? array_map(
-            fn ($value) => $value,
-            $filters,
-        ) : null;
-
         $this->fields['filters'] = $filters;
 
         return $this;
@@ -88,11 +83,6 @@ class ReadyToPayGenericMethod implements ReadyToPayMethods, JsonSerializable
      */
     public function setBrands(null|array $brands): static
     {
-        $brands = $brands !== null ? array_map(
-            fn ($value) => $value,
-            $brands,
-        ) : null;
-
         $this->fields['brands'] = $brands;
 
         return $this;

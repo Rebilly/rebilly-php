@@ -53,11 +53,6 @@ class Directa24Settings implements JsonSerializable
      */
     public function setBanks(null|array $banks): static
     {
-        $banks = $banks !== null ? array_map(
-            fn ($value) => $value,
-            $banks,
-        ) : null;
-
         $this->fields['banks'] = $banks;
 
         return $this;

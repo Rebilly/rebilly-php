@@ -307,7 +307,7 @@ class PayoutRequest implements JsonSerializable
     private function setAllocations(null|array $allocations): static
     {
         $allocations = $allocations !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof PayoutRequestAllocations ? $value : PayoutRequestAllocations::from($value)) : null,
+            fn ($value) => $value instanceof PayoutRequestAllocations ? $value : PayoutRequestAllocations::from($value),
             $allocations,
         ) : null;
 

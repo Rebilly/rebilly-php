@@ -78,7 +78,7 @@ class RuleActionOfferPurchaseBumpBumpOffers implements JsonSerializable
     public function setOffers(array $offers): static
     {
         $offers = array_map(
-            fn ($value) => $value !== null ? ($value instanceof PurchaseBumpOffer ? $value : PurchaseBumpOffer::from($value)) : null,
+            fn ($value) => $value instanceof PurchaseBumpOffer ? $value : PurchaseBumpOffer::from($value),
             $offers,
         );
 
@@ -101,7 +101,7 @@ class RuleActionOfferPurchaseBumpBumpOffers implements JsonSerializable
     public function setChoices(array $choices): static
     {
         $choices = array_map(
-            fn ($value) => $value !== null ? ($value instanceof RuleActionOfferPurchaseBumpChoices ? $value : RuleActionOfferPurchaseBumpChoices::from($value)) : null,
+            fn ($value) => $value instanceof RuleActionOfferPurchaseBumpChoices ? $value : RuleActionOfferPurchaseBumpChoices::from($value),
             $choices,
         );
 

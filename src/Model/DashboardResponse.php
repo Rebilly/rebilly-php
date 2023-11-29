@@ -182,7 +182,7 @@ class DashboardResponse implements JsonSerializable
     public function setSegments(null|array $segments): static
     {
         $segments = $segments !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof DashboardResponseSegments ? $value : DashboardResponseSegments::from($value)) : null,
+            fn ($value) => $value instanceof DashboardResponseSegments ? $value : DashboardResponseSegments::from($value),
             $segments,
         ) : null;
 

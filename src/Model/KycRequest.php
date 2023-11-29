@@ -116,7 +116,7 @@ class KycRequest implements JsonSerializable
     public function setDocuments(array $documents): static
     {
         $documents = array_map(
-            fn ($value) => $value !== null ? ($value instanceof KycRequestDocument ? $value : KycRequestDocument::from($value)) : null,
+            fn ($value) => $value instanceof KycRequestDocument ? $value : KycRequestDocument::from($value),
             $documents,
         );
 

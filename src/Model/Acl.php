@@ -63,11 +63,6 @@ class Acl implements JsonSerializable
      */
     public function setPermissions(array $permissions): static
     {
-        $permissions = array_map(
-            fn ($value) => $value,
-            $permissions,
-        );
-
         $this->fields['permissions'] = $permissions;
 
         return $this;

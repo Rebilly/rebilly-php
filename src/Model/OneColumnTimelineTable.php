@@ -47,7 +47,7 @@ class OneColumnTimelineTable extends TimelineTable
     public function setData(null|array $data): static
     {
         $data = $data !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof TwoColumnsTimelineTableData ? $value : TwoColumnsTimelineTableData::from($value)) : null,
+            fn ($value) => $value instanceof TwoColumnsTimelineTableData ? $value : TwoColumnsTimelineTableData::from($value),
             $data,
         ) : null;
 

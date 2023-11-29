@@ -143,11 +143,6 @@ class Profile implements JsonSerializable
      */
     public function setPermissions(null|array $permissions): static
     {
-        $permissions = $permissions !== null ? array_map(
-            fn ($value) => $value,
-            $permissions,
-        ) : null;
-
         $this->fields['permissions'] = $permissions;
 
         return $this;
@@ -352,11 +347,6 @@ class Profile implements JsonSerializable
      */
     private function setAvailableCurrencies(null|array $availableCurrencies): static
     {
-        $availableCurrencies = $availableCurrencies !== null ? array_map(
-            fn ($value) => $value,
-            $availableCurrencies,
-        ) : null;
-
         $this->fields['availableCurrencies'] = $availableCurrencies;
 
         return $this;

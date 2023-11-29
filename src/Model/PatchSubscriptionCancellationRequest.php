@@ -244,7 +244,7 @@ class PatchSubscriptionCancellationRequest implements JsonSerializable
     public function setLineItems(null|array $lineItems): static
     {
         $lineItems = $lineItems !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof SubscriptionCancellationLineItems ? $value : SubscriptionCancellationLineItems::from($value)) : null,
+            fn ($value) => $value instanceof SubscriptionCancellationLineItems ? $value : SubscriptionCancellationLineItems::from($value),
             $lineItems,
         ) : null;
 

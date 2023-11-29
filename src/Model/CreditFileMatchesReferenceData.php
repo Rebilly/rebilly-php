@@ -104,7 +104,7 @@ class CreditFileMatchesReferenceData implements JsonSerializable
     public function setDualDecision(null|array $dualDecision): static
     {
         $dualDecision = $dualDecision !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof CreditFileCommonDecisionData ? $value : CreditFileCommonDecisionData::from($value)) : null,
+            fn ($value) => $value instanceof CreditFileCommonDecisionData ? $value : CreditFileCommonDecisionData::from($value),
             $dualDecision,
         ) : null;
 

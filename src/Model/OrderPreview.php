@@ -102,7 +102,7 @@ class OrderPreview implements JsonSerializable
     public function setItems(array $items): static
     {
         $items = array_map(
-            fn ($value) => $value !== null ? ($value instanceof OrderPreviewItems ? $value : OrderPreviewItems::from($value)) : null,
+            fn ($value) => $value instanceof OrderPreviewItems ? $value : OrderPreviewItems::from($value),
             $items,
         );
 
@@ -156,11 +156,6 @@ class OrderPreview implements JsonSerializable
      */
     public function setCouponIds(null|array $couponIds): static
     {
-        $couponIds = $couponIds !== null ? array_map(
-            fn ($value) => $value,
-            $couponIds,
-        ) : null;
-
         $this->fields['couponIds'] = $couponIds;
 
         return $this;
@@ -312,7 +307,7 @@ class OrderPreview implements JsonSerializable
     private function setLineItems(null|array $lineItems): static
     {
         $lineItems = $lineItems !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof OrderPreviewLineItems ? $value : OrderPreviewLineItems::from($value)) : null,
+            fn ($value) => $value instanceof OrderPreviewLineItems ? $value : OrderPreviewLineItems::from($value),
             $lineItems,
         ) : null;
 
@@ -327,7 +322,7 @@ class OrderPreview implements JsonSerializable
     private function setShippingRates(null|array $shippingRates): static
     {
         $shippingRates = $shippingRates !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof ShippingOption ? $value : ShippingOption::from($value)) : null,
+            fn ($value) => $value instanceof ShippingOption ? $value : ShippingOption::from($value),
             $shippingRates,
         ) : null;
 
@@ -342,7 +337,7 @@ class OrderPreview implements JsonSerializable
     private function setTaxes(null|array $taxes): static
     {
         $taxes = $taxes !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof OrderPreviewTaxes ? $value : OrderPreviewTaxes::from($value)) : null,
+            fn ($value) => $value instanceof OrderPreviewTaxes ? $value : OrderPreviewTaxes::from($value),
             $taxes,
         ) : null;
 
@@ -357,7 +352,7 @@ class OrderPreview implements JsonSerializable
     private function setDiscounts(null|array $discounts): static
     {
         $discounts = $discounts !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof OrderPreviewDiscounts ? $value : OrderPreviewDiscounts::from($value)) : null,
+            fn ($value) => $value instanceof OrderPreviewDiscounts ? $value : OrderPreviewDiscounts::from($value),
             $discounts,
         ) : null;
 

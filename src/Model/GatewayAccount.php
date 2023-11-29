@@ -582,11 +582,6 @@ abstract class GatewayAccount implements JsonSerializable
      */
     public function setAcceptedCurrencies(array $acceptedCurrencies): static
     {
-        $acceptedCurrencies = array_map(
-            fn ($value) => $value,
-            $acceptedCurrencies,
-        );
-
         $this->fields['acceptedCurrencies'] = $acceptedCurrencies;
 
         return $this;
@@ -605,11 +600,6 @@ abstract class GatewayAccount implements JsonSerializable
      */
     public function setPaymentCardSchemes(null|array $paymentCardSchemes): static
     {
-        $paymentCardSchemes = $paymentCardSchemes !== null ? array_map(
-            fn ($value) => $value,
-            $paymentCardSchemes,
-        ) : null;
-
         $this->fields['paymentCardSchemes'] = $paymentCardSchemes;
 
         return $this;
@@ -693,11 +683,6 @@ abstract class GatewayAccount implements JsonSerializable
      */
     public function setExcludedDccQuoteCurrencies(null|array $excludedDccQuoteCurrencies): static
     {
-        $excludedDccQuoteCurrencies = $excludedDccQuoteCurrencies !== null ? array_map(
-            fn ($value) => $value,
-            $excludedDccQuoteCurrencies,
-        ) : null;
-
         $this->fields['excludedDccQuoteCurrencies'] = $excludedDccQuoteCurrencies;
 
         return $this;

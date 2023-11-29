@@ -121,11 +121,6 @@ class PostDepositRequest implements JsonSerializable
      */
     public function setAmounts(null|array $amounts): static
     {
-        $amounts = $amounts !== null ? array_map(
-            fn ($value) => $value,
-            $amounts,
-        ) : null;
-
         $this->fields['amounts'] = $amounts;
 
         return $this;

@@ -49,11 +49,6 @@ class CountriesSubsetMetadata implements CountriesMetadata, JsonSerializable
      */
     public function setValues(array $values): static
     {
-        $values = array_map(
-            fn ($value) => $value,
-            $values,
-        );
-
         $this->fields['values'] = $values;
 
         return $this;

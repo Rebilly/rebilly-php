@@ -62,7 +62,7 @@ class RuleActionAdjustReadyToPay extends RuleAction
     public function setPaymentMethods(null|array $paymentMethods): static
     {
         $paymentMethods = $paymentMethods !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof AdjustPaymentMethod ? $value : AdjustPaymentMethodFactory::from($value)) : null,
+            fn ($value) => $value instanceof AdjustPaymentMethod ? $value : AdjustPaymentMethodFactory::from($value),
             $paymentMethods,
         ) : null;
 

@@ -111,7 +111,7 @@ class Integration implements JsonSerializable
     private function setConfigurations(null|array $configurations): static
     {
         $configurations = $configurations !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof IntegrationConfigurations ? $value : IntegrationConfigurations::from($value)) : null,
+            fn ($value) => $value instanceof IntegrationConfigurations ? $value : IntegrationConfigurations::from($value),
             $configurations,
         ) : null;
 

@@ -81,7 +81,7 @@ class AdyenSettings implements JsonSerializable
     public function setSplitPayments(null|array $splitPayments): static
     {
         $splitPayments = $splitPayments !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof AdyenSettingsSplitPayments ? $value : AdyenSettingsSplitPayments::from($value)) : null,
+            fn ($value) => $value instanceof AdyenSettingsSplitPayments ? $value : AdyenSettingsSplitPayments::from($value),
             $splitPayments,
         ) : null;
 

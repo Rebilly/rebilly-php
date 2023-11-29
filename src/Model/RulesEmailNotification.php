@@ -90,7 +90,7 @@ class RulesEmailNotification implements JsonSerializable
     public function setTemplates(array $templates): static
     {
         $templates = array_map(
-            fn ($value) => $value !== null ? ($value instanceof RulesEmailNotificationTemplates ? $value : RulesEmailNotificationTemplates::from($value)) : null,
+            fn ($value) => $value instanceof RulesEmailNotificationTemplates ? $value : RulesEmailNotificationTemplates::from($value),
             $templates,
         );
 

@@ -201,11 +201,6 @@ class PostTransactionRequest implements JsonSerializable
      */
     public function setInvoiceIds(null|array $invoiceIds): static
     {
-        $invoiceIds = $invoiceIds !== null ? array_map(
-            fn ($value) => $value,
-            $invoiceIds,
-        ) : null;
-
         $this->fields['invoiceIds'] = $invoiceIds;
 
         return $this;

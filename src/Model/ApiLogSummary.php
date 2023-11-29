@@ -45,7 +45,7 @@ class ApiLogSummary implements JsonSerializable
     public function setData(null|array $data): static
     {
         $data = $data !== null ? array_map(
-            fn ($value) => $value !== null ? ($value instanceof ApiLogSummaryData ? $value : ApiLogSummaryData::from($value)) : null,
+            fn ($value) => $value instanceof ApiLogSummaryData ? $value : ApiLogSummaryData::from($value),
             $data,
         ) : null;
 

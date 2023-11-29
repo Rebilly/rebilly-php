@@ -47,11 +47,6 @@ class EmailNotificationNotifications implements JsonSerializable
      */
     public function setLabels(null|array $labels): static
     {
-        $labels = $labels !== null ? array_map(
-            fn ($value) => $value,
-            $labels,
-        ) : null;
-
         $this->fields['labels'] = $labels;
 
         return $this;

@@ -56,11 +56,6 @@ class StringCustomFieldAdditionalSchema implements JsonSerializable
      */
     public function setAllowedValues(null|array $allowedValues): static
     {
-        $allowedValues = $allowedValues !== null ? array_map(
-            fn ($value) => $value,
-            $allowedValues,
-        ) : null;
-
         $this->fields['allowedValues'] = $allowedValues;
 
         return $this;

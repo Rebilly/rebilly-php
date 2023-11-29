@@ -364,11 +364,6 @@ class ApiTracking implements JsonSerializable
      */
     private function setRelatedResourceIds(null|array $relatedResourceIds): static
     {
-        $relatedResourceIds = $relatedResourceIds !== null ? array_map(
-            fn ($value) => $value,
-            $relatedResourceIds,
-        ) : null;
-
         $this->fields['relatedResourceIds'] = $relatedResourceIds;
 
         return $this;
