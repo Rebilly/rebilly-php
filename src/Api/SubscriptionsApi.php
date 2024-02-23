@@ -19,11 +19,13 @@ use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\Invoice;
 use Rebilly\Sdk\Model\InvoiceIssue;
+use Rebilly\Sdk\Model\OrderItem;
 use Rebilly\Sdk\Model\OrderTimeline;
-use Rebilly\Sdk\Model\Subscription;
 use Rebilly\Sdk\Model\SubscriptionChange;
-use Rebilly\Sdk\Model\SubscriptionFactory;
 use Rebilly\Sdk\Model\SubscriptionInvoice;
+use Rebilly\Sdk\Model\SubscriptionItemUpdate;
+use Rebilly\Sdk\Model\SubscriptionOrOneTimeSale;
+use Rebilly\Sdk\Model\SubscriptionOrOneTimeSaleFactory;
 use Rebilly\Sdk\Model\SubscriptionSummaryMetrics;
 use Rebilly\Sdk\Model\UpcomingInvoice;
 use Rebilly\Sdk\Paginator;
@@ -35,42 +37,46 @@ class SubscriptionsApi
     }
 
     /**
-     * @return Subscription
+     * @return SubscriptionOrOneTimeSale
      */
     public function changeItems(
         string $id,
         SubscriptionChange $subscriptionChange,
-    ): Subscription {
+        ?string $expand = null,
+    ): SubscriptionOrOneTimeSale {
         $pathParams = [
             '{id}' => $id,
         ];
 
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}/change-items');
+        $queryParams = [
+            'expand' => $expand,
+        ];
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}/change-items?') . http_build_query($queryParams);
 
         $request = new Request('POST', $uri, body: Utils::jsonEncode($subscriptionChange));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return SubscriptionFactory::from($data);
+        return SubscriptionOrOneTimeSaleFactory::from($data);
     }
 
     /**
-     * @return Subscription
+     * @return SubscriptionOrOneTimeSale
      */
     public function create(
-        Subscription $subscription,
+        SubscriptionOrOneTimeSale $subscriptionOrOneTimeSale,
         ?string $expand = null,
-    ): Subscription {
+    ): SubscriptionOrOneTimeSale {
         $queryParams = [
             'expand' => $expand,
         ];
         $uri = '/subscriptions?' . http_build_query($queryParams);
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($subscription));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($subscriptionOrOneTimeSale));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return SubscriptionFactory::from($data);
+        return SubscriptionOrOneTimeSaleFactory::from($data);
     }
 
     /**
@@ -142,12 +148,12 @@ class SubscriptionsApi
     }
 
     /**
-     * @return Subscription
+     * @return SubscriptionOrOneTimeSale
      */
     public function get(
         string $id,
         ?string $expand = null,
-    ): Subscription {
+    ): SubscriptionOrOneTimeSale {
         $pathParams = [
             '{id}' => $id,
         ];
@@ -161,11 +167,11 @@ class SubscriptionsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return SubscriptionFactory::from($data);
+        return SubscriptionOrOneTimeSaleFactory::from($data);
     }
 
     /**
-     * @return Collection<Subscription>
+     * @return Collection<SubscriptionOrOneTimeSale>
      */
     public function getAll(
         ?string $filter = null,
@@ -190,7 +196,7 @@ class SubscriptionsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): Subscription => SubscriptionFactory::from($item), $data),
+            array_map(fn (array $item): SubscriptionOrOneTimeSale => SubscriptionOrOneTimeSaleFactory::from($item), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
@@ -408,13 +414,13 @@ class SubscriptionsApi
     }
 
     /**
-     * @return Subscription
+     * @return SubscriptionOrOneTimeSale
      */
     public function update(
         string $id,
-        Subscription $subscription,
+        SubscriptionOrOneTimeSale $subscriptionOrOneTimeSale,
         ?string $expand = null,
-    ): Subscription {
+    ): SubscriptionOrOneTimeSale {
         $pathParams = [
             '{id}' => $id,
         ];
@@ -424,19 +430,41 @@ class SubscriptionsApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}?') . http_build_query($queryParams);
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($subscription));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($subscriptionOrOneTimeSale));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return SubscriptionFactory::from($data);
+        return SubscriptionOrOneTimeSaleFactory::from($data);
     }
 
     /**
-     * @return Subscription
+     * @return OrderItem
+     */
+    public function updateItem(
+        string $id,
+        string $itemId,
+        SubscriptionItemUpdate $subscriptionItemUpdate,
+    ): OrderItem {
+        $pathParams = [
+            '{id}' => $id,
+            '{itemId}' => $itemId,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}/items/{itemId}');
+
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($subscriptionItemUpdate));
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return OrderItem::from($data);
+    }
+
+    /**
+     * @return SubscriptionOrOneTimeSale
      */
     public function void(
         string $id,
-    ): Subscription {
+    ): SubscriptionOrOneTimeSale {
         $pathParams = [
             '{id}' => $id,
         ];
@@ -447,6 +475,6 @@ class SubscriptionsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return SubscriptionFactory::from($data);
+        return SubscriptionOrOneTimeSaleFactory::from($data);
     }
 }

@@ -53,6 +53,9 @@ class PostDepositRequest implements JsonSerializable
         if (array_key_exists('customPropertySetId', $data)) {
             $this->setCustomPropertySetId($data['customPropertySetId']);
         }
+        if (array_key_exists('notificationUrl', $data)) {
+            $this->setNotificationUrl($data['notificationUrl']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -142,15 +145,15 @@ class PostDepositRequest implements JsonSerializable
         return $this;
     }
 
-    public function getCustomAmount(): ?DepositRequestCustomAmount
+    public function getCustomAmount(): ?PostDepositRequestCustomAmount
     {
         return $this->fields['customAmount'] ?? null;
     }
 
-    public function setCustomAmount(null|DepositRequestCustomAmount|array $customAmount): static
+    public function setCustomAmount(null|PostDepositRequestCustomAmount|array $customAmount): static
     {
-        if ($customAmount !== null && !($customAmount instanceof DepositRequestCustomAmount)) {
-            $customAmount = DepositRequestCustomAmount::from($customAmount);
+        if ($customAmount !== null && !($customAmount instanceof PostDepositRequestCustomAmount)) {
+            $customAmount = PostDepositRequestCustomAmount::from($customAmount);
         }
 
         $this->fields['customAmount'] = $customAmount;
@@ -198,6 +201,18 @@ class PostDepositRequest implements JsonSerializable
         return $this;
     }
 
+    public function getNotificationUrl(): ?string
+    {
+        return $this->fields['notificationUrl'] ?? null;
+    }
+
+    public function setNotificationUrl(null|string $notificationUrl): static
+    {
+        $this->fields['notificationUrl'] = $notificationUrl;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -230,6 +245,9 @@ class PostDepositRequest implements JsonSerializable
         }
         if (array_key_exists('customPropertySetId', $this->fields)) {
             $data['customPropertySetId'] = $this->fields['customPropertySetId'];
+        }
+        if (array_key_exists('notificationUrl', $this->fields)) {
+            $data['notificationUrl'] = $this->fields['notificationUrl'];
         }
 
         return $data;

@@ -213,6 +213,8 @@ class PaymentInstrumentCreateToken implements PostPaymentInstrumentRequest, Json
 
     public const METHOD_PIASTRIX = 'Piastrix';
 
+    public const METHOD_PIX = 'PIX';
+
     public const METHOD_PAY_TABS = 'PayTabs';
 
     public const METHOD_PAYSAFECARD = 'Paysafecard';
@@ -302,6 +304,8 @@ class PaymentInstrumentCreateToken implements PostPaymentInstrumentRequest, Json
     public const METHOD_WEBPAY_CARD = 'Webpay Card';
 
     public const METHOD_WE_CHAT_PAY = 'WeChat Pay';
+
+    public const METHOD_WIRE = 'wire';
 
     public const METHOD_X_PAY_P2_P = 'XPay-P2P';
 

@@ -18,6 +18,7 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\Dispute;
+use Rebilly\Sdk\Model\PostDisputeRequest;
 use Rebilly\Sdk\Paginator;
 
 class DisputesApi
@@ -30,11 +31,11 @@ class DisputesApi
      * @return Dispute
      */
     public function create(
-        Dispute $dispute,
+        PostDisputeRequest $postDisputeRequest,
     ): Dispute {
         $uri = '/disputes';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($dispute));
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($postDisputeRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -121,7 +122,7 @@ class DisputesApi
      */
     public function update(
         string $id,
-        Dispute $dispute,
+        PostDisputeRequest $postDisputeRequest,
     ): Dispute {
         $pathParams = [
             '{id}' => $id,
@@ -129,7 +130,7 @@ class DisputesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/disputes/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($dispute));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($postDisputeRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

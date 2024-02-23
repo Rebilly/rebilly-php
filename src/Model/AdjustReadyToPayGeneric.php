@@ -211,6 +211,8 @@ class AdjustReadyToPayGeneric implements AdjustPaymentMethod, JsonSerializable
 
     public const PAYMENT_METHOD_PIASTRIX = 'Piastrix';
 
+    public const PAYMENT_METHOD_PIX = 'PIX';
+
     public const PAYMENT_METHOD_PAY_TABS = 'PayTabs';
 
     public const PAYMENT_METHOD_PAYSAFECARD = 'Paysafecard';
@@ -300,6 +302,8 @@ class AdjustReadyToPayGeneric implements AdjustPaymentMethod, JsonSerializable
     public const PAYMENT_METHOD_WEBPAY_CARD = 'Webpay Card';
 
     public const PAYMENT_METHOD_WE_CHAT_PAY = 'WeChat Pay';
+
+    public const PAYMENT_METHOD_WIRE = 'wire';
 
     public const PAYMENT_METHOD_X_PAY_P2_P = 'XPay-P2P';
 

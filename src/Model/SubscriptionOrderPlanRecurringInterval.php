@@ -55,13 +55,17 @@ class SubscriptionOrderPlanRecurringInterval implements JsonSerializable
         return new self($data);
     }
 
-    public function getPeriodAnchorInstruction(): ?string
+    public function getPeriodAnchorInstruction(): ?ServicePeriodAnchorInstruction
     {
         return $this->fields['periodAnchorInstruction'] ?? null;
     }
 
-    public function setPeriodAnchorInstruction(null|string $periodAnchorInstruction): static
+    public function setPeriodAnchorInstruction(null|ServicePeriodAnchorInstruction|array $periodAnchorInstruction): static
     {
+        if ($periodAnchorInstruction !== null && !($periodAnchorInstruction instanceof ServicePeriodAnchorInstruction)) {
+            $periodAnchorInstruction = ServicePeriodAnchorInstructionFactory::from($periodAnchorInstruction);
+        }
+
         $this->fields['periodAnchorInstruction'] = $periodAnchorInstruction;
 
         return $this;
@@ -119,7 +123,7 @@ class SubscriptionOrderPlanRecurringInterval implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('periodAnchorInstruction', $this->fields)) {
-            $data['periodAnchorInstruction'] = $this->fields['periodAnchorInstruction'];
+            $data['periodAnchorInstruction'] = $this->fields['periodAnchorInstruction']?->jsonSerialize();
         }
         if (array_key_exists('unit', $this->fields)) {
             $data['unit'] = $this->fields['unit'];

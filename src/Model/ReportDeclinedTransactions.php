@@ -21,9 +21,6 @@ class ReportDeclinedTransactions implements JsonSerializable
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('totalCount', $data)) {
-            $this->setTotalCount($data['totalCount']);
-        }
         if (array_key_exists('data', $data)) {
             $this->setData($data['data']);
         }
@@ -32,18 +29,6 @@ class ReportDeclinedTransactions implements JsonSerializable
     public static function from(array $data = []): self
     {
         return new self($data);
-    }
-
-    public function getTotalCount(): ?int
-    {
-        return $this->fields['totalCount'] ?? null;
-    }
-
-    public function setTotalCount(null|int $totalCount): static
-    {
-        $this->fields['totalCount'] = $totalCount;
-
-        return $this;
     }
 
     /**
@@ -72,9 +57,6 @@ class ReportDeclinedTransactions implements JsonSerializable
     public function jsonSerialize(): array
     {
         $data = [];
-        if (array_key_exists('totalCount', $this->fields)) {
-            $data['totalCount'] = $this->fields['totalCount'];
-        }
         if (array_key_exists('data', $this->fields)) {
             $data['data'] = $this->fields['data'];
         }

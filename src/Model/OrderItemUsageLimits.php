@@ -34,15 +34,15 @@ class OrderItemUsageLimits implements JsonSerializable
         return new self($data);
     }
 
-    public function getSoftLimit(): ?OrderItemUsageLimitsSoftLimit
+    public function getSoftLimit(): ?QuoteCreateOrderItemsUsageLimitsSoftLimit
     {
         return $this->fields['softLimit'] ?? null;
     }
 
-    public function setSoftLimit(null|OrderItemUsageLimitsSoftLimit|array $softLimit): static
+    public function setSoftLimit(null|QuoteCreateOrderItemsUsageLimitsSoftLimit|array $softLimit): static
     {
-        if ($softLimit !== null && !($softLimit instanceof OrderItemUsageLimitsSoftLimit)) {
-            $softLimit = OrderItemUsageLimitsSoftLimit::from($softLimit);
+        if ($softLimit !== null && !($softLimit instanceof QuoteCreateOrderItemsUsageLimitsSoftLimit)) {
+            $softLimit = QuoteCreateOrderItemsUsageLimitsSoftLimit::from($softLimit);
         }
 
         $this->fields['softLimit'] = $softLimit;
@@ -50,15 +50,15 @@ class OrderItemUsageLimits implements JsonSerializable
         return $this;
     }
 
-    public function getHardLimit(): ?OrderItemUsageLimitsHardLimit
+    public function getHardLimit(): ?QuoteCreateOrderItemsUsageLimitsHardLimit
     {
         return $this->fields['hardLimit'] ?? null;
     }
 
-    public function setHardLimit(null|OrderItemUsageLimitsHardLimit|array $hardLimit): static
+    public function setHardLimit(null|QuoteCreateOrderItemsUsageLimitsHardLimit|array $hardLimit): static
     {
-        if ($hardLimit !== null && !($hardLimit instanceof OrderItemUsageLimitsHardLimit)) {
-            $hardLimit = OrderItemUsageLimitsHardLimit::from($hardLimit);
+        if ($hardLimit !== null && !($hardLimit instanceof QuoteCreateOrderItemsUsageLimitsHardLimit)) {
+            $hardLimit = QuoteCreateOrderItemsUsageLimitsHardLimit::from($hardLimit);
         }
 
         $this->fields['hardLimit'] = $hardLimit;

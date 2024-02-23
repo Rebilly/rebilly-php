@@ -17,6 +17,12 @@ use JsonSerializable;
 
 class WorldpaySettings implements JsonSerializable
 {
+    public const ENFORCE_STORED_CREDENTIALS_DISABLED = 'disabled';
+
+    public const ENFORCE_STORED_CREDENTIALS_MIT_ENABLED = 'mit-enabled';
+
+    public const ENFORCE_STORED_CREDENTIALS_ALWAYS_ENABLED = 'always-enabled';
+
     public const MERCHANT_INITIATED_REASON_UNSCHEDULED = 'UNSCHEDULED';
 
     public const MERCHANT_INITIATED_REASON_RECURRING = 'RECURRING';
@@ -40,8 +46,8 @@ class WorldpaySettings implements JsonSerializable
         if (array_key_exists('delay', $data)) {
             $this->setDelay($data['delay']);
         }
-        if (array_key_exists('enableStoredCredentials', $data)) {
-            $this->setEnableStoredCredentials($data['enableStoredCredentials']);
+        if (array_key_exists('enforceStoredCredentials', $data)) {
+            $this->setEnforceStoredCredentials($data['enforceStoredCredentials']);
         }
         if (array_key_exists('merchantInitiatedReason', $data)) {
             $this->setMerchantInitiatedReason($data['merchantInitiatedReason']);
@@ -65,14 +71,14 @@ class WorldpaySettings implements JsonSerializable
         return $this;
     }
 
-    public function getEnableStoredCredentials(): ?bool
+    public function getEnforceStoredCredentials(): ?string
     {
-        return $this->fields['enableStoredCredentials'] ?? null;
+        return $this->fields['enforceStoredCredentials'] ?? null;
     }
 
-    public function setEnableStoredCredentials(null|bool $enableStoredCredentials): static
+    public function setEnforceStoredCredentials(null|string $enforceStoredCredentials): static
     {
-        $this->fields['enableStoredCredentials'] = $enableStoredCredentials;
+        $this->fields['enforceStoredCredentials'] = $enforceStoredCredentials;
 
         return $this;
     }
@@ -95,8 +101,8 @@ class WorldpaySettings implements JsonSerializable
         if (array_key_exists('delay', $this->fields)) {
             $data['delay'] = $this->fields['delay'];
         }
-        if (array_key_exists('enableStoredCredentials', $this->fields)) {
-            $data['enableStoredCredentials'] = $this->fields['enableStoredCredentials'];
+        if (array_key_exists('enforceStoredCredentials', $this->fields)) {
+            $data['enforceStoredCredentials'] = $this->fields['enforceStoredCredentials'];
         }
         if (array_key_exists('merchantInitiatedReason', $this->fields)) {
             $data['merchantInitiatedReason'] = $this->fields['merchantInitiatedReason'];

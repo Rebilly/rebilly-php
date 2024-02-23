@@ -97,6 +97,22 @@ class TagUntagRule implements JsonSerializable
 
     public const EVENT_TYPE_PAYOUT_REQUEST_MODIFIED = 'payout-request-modified';
 
+    public const EVENT_TYPE_QUOTE_ACCEPTED = 'quote-accepted';
+
+    public const EVENT_TYPE_QUOTE_CANCELED = 'quote-canceled';
+
+    public const EVENT_TYPE_QUOTE_CREATED = 'quote-created';
+
+    public const EVENT_TYPE_QUOTE_EXPIRED = 'quote-expired';
+
+    public const EVENT_TYPE_QUOTE_ISSUED = 'quote-issued';
+
+    public const EVENT_TYPE_QUOTE_RECALLED = 'quote-recalled';
+
+    public const EVENT_TYPE_QUOTE_REJECTED = 'quote-rejected';
+
+    public const EVENT_TYPE_QUOTE_UPDATED = 'quote-updated';
+
     public const EVENT_TYPE_RENEWAL_INVOICE_ISSUED = 'renewal-invoice-issued';
 
     public const EVENT_TYPE_RENEWAL_INVOICE_PAYMENT_DECLINED = 'renewal-invoice-payment-declined';
@@ -108,6 +124,8 @@ class TagUntagRule implements JsonSerializable
     public const EVENT_TYPE_SUBSCRIPTION_CHURNED = 'subscription-churned';
 
     public const EVENT_TYPE_SUBSCRIPTION_DOWNGRADED = 'subscription-downgraded';
+
+    public const EVENT_TYPE_SUBSCRIPTION_ITEMS_CHANGED = 'subscription-items-changed';
 
     public const EVENT_TYPE_SUBSCRIPTION_PAUSED = 'subscription-paused';
 
@@ -124,6 +142,8 @@ class TagUntagRule implements JsonSerializable
     public const EVENT_TYPE_TRANSACTION_DECLINED = 'transaction-declined';
 
     public const EVENT_TYPE_TRANSACTION_DISCREPANCY_FOUND = 'transaction-discrepancy-found';
+
+    public const EVENT_TYPE_ORDER_DELINQUENCY_REACHED = 'order-delinquency-reached';
 
     public const STATUS_ACTIVE = 'active';
 

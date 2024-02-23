@@ -21,6 +21,8 @@ class Invoice implements JsonSerializable
 {
     public const STATUS_DRAFT = 'draft';
 
+    public const STATUS_QUOTATION = 'quotation';
+
     public const STATUS_UNPAID = 'unpaid';
 
     public const STATUS_PAID = 'paid';
@@ -70,6 +72,9 @@ class Invoice implements JsonSerializable
         }
         if (array_key_exists('subscriptionId', $data)) {
             $this->setSubscriptionId($data['subscriptionId']);
+        }
+        if (array_key_exists('quoteId', $data)) {
+            $this->setQuoteId($data['quoteId']);
         }
         if (array_key_exists('currency', $data)) {
             $this->setCurrency($data['currency']);
@@ -179,6 +184,9 @@ class Invoice implements JsonSerializable
         if (array_key_exists('organizationId', $data)) {
             $this->setOrganizationId($data['organizationId']);
         }
+        if (array_key_exists('delinquencyTime', $data)) {
+            $this->setDelinquencyTime($data['delinquencyTime']);
+        }
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
@@ -217,6 +225,11 @@ class Invoice implements JsonSerializable
     public function getSubscriptionId(): ?string
     {
         return $this->fields['subscriptionId'] ?? null;
+    }
+
+    public function getQuoteId(): ?string
+    {
+        return $this->fields['quoteId'] ?? null;
     }
 
     public function getCurrency(): string
@@ -542,6 +555,22 @@ class Invoice implements JsonSerializable
         return $this;
     }
 
+    public function getDelinquencyTime(): ?DateTimeImmutable
+    {
+        return $this->fields['delinquencyTime'] ?? null;
+    }
+
+    public function setDelinquencyTime(null|DateTimeImmutable|string $delinquencyTime): static
+    {
+        if ($delinquencyTime !== null && !($delinquencyTime instanceof DateTimeImmutable)) {
+            $delinquencyTime = new DateTimeImmutable($delinquencyTime);
+        }
+
+        $this->fields['delinquencyTime'] = $delinquencyTime;
+
+        return $this;
+    }
+
     /**
      * @return null|ResourceLink[]
      */
@@ -580,6 +609,9 @@ class Invoice implements JsonSerializable
         }
         if (array_key_exists('subscriptionId', $this->fields)) {
             $data['subscriptionId'] = $this->fields['subscriptionId'];
+        }
+        if (array_key_exists('quoteId', $this->fields)) {
+            $data['quoteId'] = $this->fields['quoteId'];
         }
         if (array_key_exists('currency', $this->fields)) {
             $data['currency'] = $this->fields['currency'];
@@ -689,6 +721,9 @@ class Invoice implements JsonSerializable
         if (array_key_exists('organizationId', $this->fields)) {
             $data['organizationId'] = $this->fields['organizationId'];
         }
+        if (array_key_exists('delinquencyTime', $this->fields)) {
+            $data['delinquencyTime'] = $this->fields['delinquencyTime']?->format(DateTimeInterface::RFC3339);
+        }
         if (array_key_exists('_links', $this->fields)) {
             $data['_links'] = $this->fields['_links'];
         }
@@ -716,6 +751,13 @@ class Invoice implements JsonSerializable
     private function setSubscriptionId(null|string $subscriptionId): static
     {
         $this->fields['subscriptionId'] = $subscriptionId;
+
+        return $this;
+    }
+
+    private function setQuoteId(null|string $quoteId): static
+    {
+        $this->fields['quoteId'] = $quoteId;
 
         return $this;
     }

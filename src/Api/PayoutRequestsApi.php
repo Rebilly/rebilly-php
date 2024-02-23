@@ -19,12 +19,33 @@ use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\GetPayoutRequestPaymentInstruments200Response;
 use Rebilly\Sdk\Model\PayoutRequest;
+use Rebilly\Sdk\Model\PayoutRequestCancellation;
 use Rebilly\Sdk\Paginator;
 
 class PayoutRequestsApi
 {
     public function __construct(protected ?ClientInterface $client)
     {
+    }
+
+    /**
+     * @return PayoutRequest
+     */
+    public function cancel(
+        string $id,
+        PayoutRequestCancellation $payoutRequestCancellation,
+    ): PayoutRequest {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/payout-requests/{id}/cancel');
+
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($payoutRequestCancellation));
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return PayoutRequest::from($data);
     }
 
     /**

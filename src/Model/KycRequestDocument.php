@@ -33,6 +33,9 @@ class KycRequestDocument implements JsonSerializable
         if (array_key_exists('faceProofRequired', $data)) {
             $this->setFaceProofRequired($data['faceProofRequired']);
         }
+        if (array_key_exists('faceLivenessRequired', $data)) {
+            $this->setFaceLivenessRequired($data['faceLivenessRequired']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -94,6 +97,18 @@ class KycRequestDocument implements JsonSerializable
         return $this;
     }
 
+    public function getFaceLivenessRequired(): ?bool
+    {
+        return $this->fields['faceLivenessRequired'] ?? null;
+    }
+
+    public function setFaceLivenessRequired(null|bool $faceLivenessRequired): static
+    {
+        $this->fields['faceLivenessRequired'] = $faceLivenessRequired;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -108,6 +123,9 @@ class KycRequestDocument implements JsonSerializable
         }
         if (array_key_exists('faceProofRequired', $this->fields)) {
             $data['faceProofRequired'] = $this->fields['faceProofRequired'];
+        }
+        if (array_key_exists('faceLivenessRequired', $this->fields)) {
+            $data['faceLivenessRequired'] = $this->fields['faceLivenessRequired'];
         }
 
         return $data;

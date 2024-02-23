@@ -30,6 +30,9 @@ class KlarnaSettings implements JsonSerializable
         if (array_key_exists('region', $data)) {
             $this->setRegion($data['region']);
         }
+        if (array_key_exists('usePayNowStandalone', $data)) {
+            $this->setUsePayNowStandalone($data['usePayNowStandalone']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -49,11 +52,26 @@ class KlarnaSettings implements JsonSerializable
         return $this;
     }
 
+    public function getUsePayNowStandalone(): ?bool
+    {
+        return $this->fields['usePayNowStandalone'] ?? null;
+    }
+
+    public function setUsePayNowStandalone(null|bool $usePayNowStandalone): static
+    {
+        $this->fields['usePayNowStandalone'] = $usePayNowStandalone;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
         if (array_key_exists('region', $this->fields)) {
             $data['region'] = $this->fields['region'];
+        }
+        if (array_key_exists('usePayNowStandalone', $this->fields)) {
+            $data['usePayNowStandalone'] = $this->fields['usePayNowStandalone'];
         }
 
         return $data;

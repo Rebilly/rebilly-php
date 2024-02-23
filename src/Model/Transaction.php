@@ -291,6 +291,12 @@ class Transaction implements JsonSerializable
         if (array_key_exists('organizationId', $data)) {
             $this->setOrganizationId($data['organizationId']);
         }
+        if (array_key_exists('depositRequestId', $data)) {
+            $this->setDepositRequestId($data['depositRequestId']);
+        }
+        if (array_key_exists('payoutRequestId', $data)) {
+            $this->setPayoutRequestId($data['payoutRequestId']);
+        }
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
@@ -884,6 +890,16 @@ class Transaction implements JsonSerializable
         return $this;
     }
 
+    public function getDepositRequestId(): ?string
+    {
+        return $this->fields['depositRequestId'] ?? null;
+    }
+
+    public function getPayoutRequestId(): ?string
+    {
+        return $this->fields['payoutRequestId'] ?? null;
+    }
+
     /**
      * @return null|ResourceLink[]
      */
@@ -1108,6 +1124,12 @@ class Transaction implements JsonSerializable
         }
         if (array_key_exists('organizationId', $this->fields)) {
             $data['organizationId'] = $this->fields['organizationId'];
+        }
+        if (array_key_exists('depositRequestId', $this->fields)) {
+            $data['depositRequestId'] = $this->fields['depositRequestId'];
+        }
+        if (array_key_exists('payoutRequestId', $this->fields)) {
+            $data['payoutRequestId'] = $this->fields['payoutRequestId'];
         }
         if (array_key_exists('_links', $this->fields)) {
             $data['_links'] = $this->fields['_links'];
@@ -1429,6 +1451,20 @@ class Transaction implements JsonSerializable
         }
 
         $this->fields['discrepancyTime'] = $discrepancyTime;
+
+        return $this;
+    }
+
+    private function setDepositRequestId(null|string $depositRequestId): static
+    {
+        $this->fields['depositRequestId'] = $depositRequestId;
+
+        return $this;
+    }
+
+    private function setPayoutRequestId(null|string $payoutRequestId): static
+    {
+        $this->fields['payoutRequestId'] = $payoutRequestId;
 
         return $this;
     }

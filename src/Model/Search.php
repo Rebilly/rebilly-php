@@ -60,7 +60,7 @@ class Search implements JsonSerializable
     }
 
     /**
-     * @return null|Subscription[]
+     * @return null|SubscriptionOrOneTimeSale[]
      */
     public function getOrders(): ?array
     {
@@ -136,12 +136,12 @@ class Search implements JsonSerializable
     }
 
     /**
-     * @param null|array[]|Subscription[] $orders
+     * @param null|array[]|SubscriptionOrOneTimeSale[] $orders
      */
     private function setOrders(null|array $orders): static
     {
         $orders = $orders !== null ? array_map(
-            fn ($value) => $value instanceof Subscription ? $value : SubscriptionFactory::from($value),
+            fn ($value) => $value instanceof SubscriptionOrOneTimeSale ? $value : SubscriptionOrOneTimeSaleFactory::from($value),
             $orders,
         ) : null;
 

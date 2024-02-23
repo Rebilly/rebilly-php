@@ -27,8 +27,8 @@ class DepositRequestEmbedded implements JsonSerializable
         if (array_key_exists('website', $data)) {
             $this->setWebsite($data['website']);
         }
-        if (array_key_exists('transaction', $data)) {
-            $this->setTransaction($data['transaction']);
+        if (array_key_exists('transactions', $data)) {
+            $this->setTransactions($data['transactions']);
         }
     }
 
@@ -61,14 +61,14 @@ class DepositRequestEmbedded implements JsonSerializable
         return $this;
     }
 
-    public function getTransaction(): ?object
+    public function getTransactions(): ?array
     {
-        return $this->fields['transaction'] ?? null;
+        return $this->fields['transactions'] ?? null;
     }
 
-    public function setTransaction(null|object $transaction): static
+    public function setTransactions(null|array $transactions): static
     {
-        $this->fields['transaction'] = $transaction;
+        $this->fields['transactions'] = $transactions;
 
         return $this;
     }
@@ -82,8 +82,8 @@ class DepositRequestEmbedded implements JsonSerializable
         if (array_key_exists('website', $this->fields)) {
             $data['website'] = $this->fields['website'];
         }
-        if (array_key_exists('transaction', $this->fields)) {
-            $data['transaction'] = $this->fields['transaction'];
+        if (array_key_exists('transactions', $this->fields)) {
+            $data['transactions'] = $this->fields['transactions'];
         }
 
         return $data;
