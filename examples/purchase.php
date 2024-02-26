@@ -22,7 +22,7 @@ use Rebilly\Sdk\Model\Plan;
 use Rebilly\Sdk\Model\PlanFormulaFlatRate;
 use Rebilly\Sdk\Model\PostTransactionRequest;
 use Rebilly\Sdk\Model\Product;
-use Rebilly\Sdk\Model\SubscriptionOrder;
+use Rebilly\Sdk\Model\Subscription;
 use Rebilly\Sdk\Model\SubscriptionOrderPlanRecurringInterval;
 use Rebilly\Sdk\Model\Website;
 use Rebilly\Sdk\UsersService;
@@ -108,9 +108,9 @@ try {
     echo 'Plan: ' . $plan->getId() . PHP_EOL;
     printEntity($plan);
 
-    // Create subscription order
+    // Create subscription
 
-    $order = SubscriptionOrder::from()
+    $subscription = Subscription::from()
         ->setWebsiteId($websiteId)
         ->setCustomerId($customer->getId())
         ->setItems([
@@ -122,15 +122,15 @@ try {
             ->setQuantity(1),
         ]);
 
-    printEntity($order);
+    printEntity($subscription);
 
-    /** @var SubscriptionOrder $order */
-    $order = $coreService->subscriptions()->create($order);
+    /** @var Subscription $subscription */
+    $subscription = $coreService->subscriptions()->create($subscription);
 
-    echo 'Order: ' . $order->getId() . PHP_EOL;
-    printEntity($order);
+    echo 'Subscription: ' . $subscription->getId() . PHP_EOL;
+    printEntity($subscription);
 
-    $invoice = $coreService->invoices()->get($order->getInitialInvoiceId());
+    $invoice = $coreService->invoices()->get($subscription->getInitialInvoiceId());
 
     echo 'Initial invoice: ' . $invoice->getId() . PHP_EOL;
     printEntity($invoice);
@@ -177,9 +177,9 @@ try {
     echo 'Transaction: ' . $transaction->getId() . PHP_EOL;
     printEntity($transaction);
 
-    $order = $coreService->subscriptions()->get($order->getId());
+    $subscription = $coreService->subscriptions()->get($subscription->getId());
 
-    printEntity($order);
+    printEntity($subscription);
 } catch (DataValidationException $e) {
     var_dump($e->getValidationErrors());
 }
