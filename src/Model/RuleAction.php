@@ -41,6 +41,8 @@ abstract class RuleAction implements JsonSerializable
                 return new RuleActionAddRiskScore($data);
             case 'adjust-ready-to-pay':
                 return new RuleActionAdjustReadyToPay($data);
+            case 'adjust-ready-to-payout':
+                return new RuleActionAdjustReadyToPayout($data);
             case 'blocklist':
                 return new RuleActionAddBlockList($data);
             case 'cancel-scheduled-payments':

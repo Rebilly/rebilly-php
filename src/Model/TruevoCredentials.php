@@ -39,6 +39,9 @@ class TruevoCredentials implements JsonSerializable
         if (array_key_exists('sftpPrivateKey', $data)) {
             $this->setSftpPrivateKey($data['sftpPrivateKey']);
         }
+        if (array_key_exists('sftpKeyPassphrase', $data)) {
+            $this->setSftpKeyPassphrase($data['sftpKeyPassphrase']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -118,6 +121,18 @@ class TruevoCredentials implements JsonSerializable
         return $this;
     }
 
+    public function getSftpKeyPassphrase(): ?string
+    {
+        return $this->fields['sftpKeyPassphrase'] ?? null;
+    }
+
+    public function setSftpKeyPassphrase(null|string $sftpKeyPassphrase): static
+    {
+        $this->fields['sftpKeyPassphrase'] = $sftpKeyPassphrase;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -138,6 +153,9 @@ class TruevoCredentials implements JsonSerializable
         }
         if (array_key_exists('sftpPrivateKey', $this->fields)) {
             $data['sftpPrivateKey'] = $this->fields['sftpPrivateKey'];
+        }
+        if (array_key_exists('sftpKeyPassphrase', $this->fields)) {
+            $data['sftpKeyPassphrase'] = $this->fields['sftpKeyPassphrase'];
         }
 
         return $data;

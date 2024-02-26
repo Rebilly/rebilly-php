@@ -48,8 +48,8 @@ class RiskMetadata implements JsonSerializable
         if (array_key_exists('isHosting', $data)) {
             $this->setIsHosting($data['isHosting']);
         }
-        if (array_key_exists('vpnServiceName', $data)) {
-            $this->setVpnServiceName($data['vpnServiceName']);
+        if (array_key_exists('hostingName', $data)) {
+            $this->setHostingName($data['hostingName']);
         }
         if (array_key_exists('isp', $data)) {
             $this->setIsp($data['isp']);
@@ -215,9 +215,9 @@ class RiskMetadata implements JsonSerializable
         return $this->fields['isHosting'] ?? null;
     }
 
-    public function getVpnServiceName(): ?string
+    public function getHostingName(): ?string
     {
-        return $this->fields['vpnServiceName'] ?? null;
+        return $this->fields['hostingName'] ?? null;
     }
 
     public function getIsp(): ?string
@@ -365,8 +365,8 @@ class RiskMetadata implements JsonSerializable
         if (array_key_exists('isHosting', $this->fields)) {
             $data['isHosting'] = $this->fields['isHosting'];
         }
-        if (array_key_exists('vpnServiceName', $this->fields)) {
-            $data['vpnServiceName'] = $this->fields['vpnServiceName'];
+        if (array_key_exists('hostingName', $this->fields)) {
+            $data['hostingName'] = $this->fields['hostingName'];
         }
         if (array_key_exists('isp', $this->fields)) {
             $data['isp'] = $this->fields['isp'];
@@ -469,9 +469,9 @@ class RiskMetadata implements JsonSerializable
         return $this;
     }
 
-    private function setVpnServiceName(null|string $vpnServiceName): static
+    private function setHostingName(null|string $hostingName): static
     {
-        $this->fields['vpnServiceName'] = $vpnServiceName;
+        $this->fields['hostingName'] = $hostingName;
 
         return $this;
     }

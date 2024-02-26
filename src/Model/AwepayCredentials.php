@@ -27,6 +27,9 @@ class AwepayCredentials implements JsonSerializable
         if (array_key_exists('rcode', $data)) {
             $this->setRcode($data['rcode']);
         }
+        if (array_key_exists('secretKey', $data)) {
+            $this->setSecretKey($data['secretKey']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -58,6 +61,18 @@ class AwepayCredentials implements JsonSerializable
         return $this;
     }
 
+    public function getSecretKey(): ?string
+    {
+        return $this->fields['secretKey'] ?? null;
+    }
+
+    public function setSecretKey(null|string $secretKey): static
+    {
+        $this->fields['secretKey'] = $secretKey;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -66,6 +81,9 @@ class AwepayCredentials implements JsonSerializable
         }
         if (array_key_exists('rcode', $this->fields)) {
             $data['rcode'] = $this->fields['rcode'];
+        }
+        if (array_key_exists('secretKey', $this->fields)) {
+            $data['secretKey'] = $this->fields['secretKey'];
         }
 
         return $data;

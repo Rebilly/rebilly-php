@@ -27,6 +27,8 @@ class PayoutRequest implements JsonSerializable
 
     public const STATUS_FULFILLED = 'fulfilled';
 
+    public const STATUS_CANCELED = 'canceled';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -66,6 +68,9 @@ class PayoutRequest implements JsonSerializable
         }
         if (array_key_exists('selectedPaymentInstrumentRedirectUrl', $data)) {
             $this->setSelectedPaymentInstrumentRedirectUrl($data['selectedPaymentInstrumentRedirectUrl']);
+        }
+        if (array_key_exists('cancellationReason', $data)) {
+            $this->setCancellationReason($data['cancellationReason']);
         }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
@@ -199,6 +204,22 @@ class PayoutRequest implements JsonSerializable
         return $this;
     }
 
+    public function getCancellationReason(): ?PayoutRequestCancellation
+    {
+        return $this->fields['cancellationReason'] ?? null;
+    }
+
+    public function setCancellationReason(null|PayoutRequestCancellation|array $cancellationReason): static
+    {
+        if ($cancellationReason !== null && !($cancellationReason instanceof PayoutRequestCancellation)) {
+            $cancellationReason = PayoutRequestCancellation::from($cancellationReason);
+        }
+
+        $this->fields['cancellationReason'] = $cancellationReason;
+
+        return $this;
+    }
+
     public function getCreatedTime(): ?DateTimeImmutable
     {
         return $this->fields['createdTime'] ?? null;
@@ -255,6 +276,9 @@ class PayoutRequest implements JsonSerializable
         }
         if (array_key_exists('selectedPaymentInstrumentRedirectUrl', $this->fields)) {
             $data['selectedPaymentInstrumentRedirectUrl'] = $this->fields['selectedPaymentInstrumentRedirectUrl'];
+        }
+        if (array_key_exists('cancellationReason', $this->fields)) {
+            $data['cancellationReason'] = $this->fields['cancellationReason']?->jsonSerialize();
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);

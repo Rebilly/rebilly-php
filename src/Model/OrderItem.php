@@ -30,6 +30,9 @@ class OrderItem implements JsonSerializable
         if (array_key_exists('quantity', $data)) {
             $this->setQuantity($data['quantity']);
         }
+        if (array_key_exists('quantityFilled', $data)) {
+            $this->setQuantityFilled($data['quantityFilled']);
+        }
         if (array_key_exists('plan', $data)) {
             $this->setPlan($data['plan']);
         }
@@ -84,6 +87,18 @@ class OrderItem implements JsonSerializable
         return $this;
     }
 
+    public function getQuantityFilled(): ?int
+    {
+        return $this->fields['quantityFilled'] ?? null;
+    }
+
+    public function setQuantityFilled(null|int $quantityFilled): static
+    {
+        $this->fields['quantityFilled'] = $quantityFilled;
+
+        return $this;
+    }
+
     public function getPlan(): OrderItemPlan
     {
         return $this->fields['plan'];
@@ -131,15 +146,15 @@ class OrderItem implements JsonSerializable
         return $this->fields['isGrandfathered'] ?? null;
     }
 
-    public function getEmbedded(): ?QuoteItemsEmbedded
+    public function getEmbedded(): ?QuoteCreateOrderItemsEmbedded
     {
         return $this->fields['_embedded'] ?? null;
     }
 
-    public function setEmbedded(null|QuoteItemsEmbedded|array $embedded): static
+    public function setEmbedded(null|QuoteCreateOrderItemsEmbedded|array $embedded): static
     {
-        if ($embedded !== null && !($embedded instanceof QuoteItemsEmbedded)) {
-            $embedded = QuoteItemsEmbedded::from($embedded);
+        if ($embedded !== null && !($embedded instanceof QuoteCreateOrderItemsEmbedded)) {
+            $embedded = QuoteCreateOrderItemsEmbedded::from($embedded);
         }
 
         $this->fields['_embedded'] = $embedded;
@@ -158,6 +173,9 @@ class OrderItem implements JsonSerializable
         }
         if (array_key_exists('quantity', $this->fields)) {
             $data['quantity'] = $this->fields['quantity'];
+        }
+        if (array_key_exists('quantityFilled', $this->fields)) {
+            $data['quantityFilled'] = $this->fields['quantityFilled'];
         }
         if (array_key_exists('plan', $this->fields)) {
             $data['plan'] = $this->fields['plan']?->jsonSerialize();

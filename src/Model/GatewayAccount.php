@@ -78,6 +78,9 @@ abstract class GatewayAccount implements JsonSerializable
         if (array_key_exists('dccForceCurrency', $data)) {
             $this->setDccForceCurrency($data['dccForceCurrency']);
         }
+        if (array_key_exists('dccForceRounding', $data)) {
+            $this->setDccForceRounding($data['dccForceRounding']);
+        }
         if (array_key_exists('descriptor', $data)) {
             $this->setDescriptor($data['descriptor']);
         }
@@ -657,6 +660,18 @@ abstract class GatewayAccount implements JsonSerializable
         return $this;
     }
 
+    public function getDccForceRounding(): ?bool
+    {
+        return $this->fields['dccForceRounding'] ?? null;
+    }
+
+    public function setDccForceRounding(null|bool $dccForceRounding): static
+    {
+        $this->fields['dccForceRounding'] = $dccForceRounding;
+
+        return $this;
+    }
+
     public function getDescriptor(): ?string
     {
         return $this->fields['descriptor'] ?? null;
@@ -935,6 +950,9 @@ abstract class GatewayAccount implements JsonSerializable
         }
         if (array_key_exists('dccForceCurrency', $this->fields)) {
             $data['dccForceCurrency'] = $this->fields['dccForceCurrency'];
+        }
+        if (array_key_exists('dccForceRounding', $this->fields)) {
+            $data['dccForceRounding'] = $this->fields['dccForceRounding'];
         }
         if (array_key_exists('descriptor', $this->fields)) {
             $data['descriptor'] = $this->fields['descriptor'];

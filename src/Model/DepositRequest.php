@@ -23,6 +23,8 @@ class DepositRequest implements JsonSerializable
 
     public const STATUS_PENDING = 'pending';
 
+    public const STATUS_INITIATED = 'initiated';
+
     public const STATUS_COMPLETED = 'completed';
 
     public const STATUS_EXPIRED = 'expired';
@@ -42,6 +44,9 @@ class DepositRequest implements JsonSerializable
         }
         if (array_key_exists('transactionId', $data)) {
             $this->setTransactionId($data['transactionId']);
+        }
+        if (array_key_exists('transactionIds', $data)) {
+            $this->setTransactionIds($data['transactionIds']);
         }
         if (array_key_exists('status', $data)) {
             $this->setStatus($data['status']);
@@ -66,6 +71,9 @@ class DepositRequest implements JsonSerializable
         }
         if (array_key_exists('properties', $data)) {
             $this->setProperties($data['properties']);
+        }
+        if (array_key_exists('notificationUrl', $data)) {
+            $this->setNotificationUrl($data['notificationUrl']);
         }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
@@ -118,6 +126,24 @@ class DepositRequest implements JsonSerializable
     public function getTransactionId(): ?string
     {
         return $this->fields['transactionId'] ?? null;
+    }
+
+    /**
+     * @return null|string[]
+     */
+    public function getTransactionIds(): ?array
+    {
+        return $this->fields['transactionIds'] ?? null;
+    }
+
+    /**
+     * @param null|string[] $transactionIds
+     */
+    public function setTransactionIds(null|array $transactionIds): static
+    {
+        $this->fields['transactionIds'] = $transactionIds;
+
+        return $this;
     }
 
     public function getStatus(): ?string
@@ -212,6 +238,18 @@ class DepositRequest implements JsonSerializable
         return $this->fields['properties'] ?? null;
     }
 
+    public function getNotificationUrl(): ?string
+    {
+        return $this->fields['notificationUrl'] ?? null;
+    }
+
+    public function setNotificationUrl(null|string $notificationUrl): static
+    {
+        $this->fields['notificationUrl'] = $notificationUrl;
+
+        return $this;
+    }
+
     public function getCreatedTime(): ?DateTimeImmutable
     {
         return $this->fields['createdTime'] ?? null;
@@ -261,6 +299,9 @@ class DepositRequest implements JsonSerializable
         if (array_key_exists('transactionId', $this->fields)) {
             $data['transactionId'] = $this->fields['transactionId'];
         }
+        if (array_key_exists('transactionIds', $this->fields)) {
+            $data['transactionIds'] = $this->fields['transactionIds'];
+        }
         if (array_key_exists('status', $this->fields)) {
             $data['status'] = $this->fields['status'];
         }
@@ -284,6 +325,9 @@ class DepositRequest implements JsonSerializable
         }
         if (array_key_exists('properties', $this->fields)) {
             $data['properties'] = $this->fields['properties'];
+        }
+        if (array_key_exists('notificationUrl', $this->fields)) {
+            $data['notificationUrl'] = $this->fields['notificationUrl'];
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
