@@ -61,12 +61,12 @@ class TransactionEmbedded implements JsonSerializable
         return new self($data);
     }
 
-    public function getParentTransaction(): ?object
+    public function getParentTransaction():null|object|array
     {
         return $this->fields['parentTransaction'] ?? null;
     }
 
-    public function setParentTransaction(null|object $parentTransaction): static
+    public function setParentTransaction(null|object|array $parentTransaction): static
     {
         $this->fields['parentTransaction'] = $parentTransaction;
 
@@ -85,48 +85,48 @@ class TransactionEmbedded implements JsonSerializable
         return $this;
     }
 
-    public function getGatewayAccount(): ?object
+    public function getGatewayAccount(): null|object|array
     {
         return $this->fields['gatewayAccount'] ?? null;
     }
 
-    public function setGatewayAccount(null|object $gatewayAccount): static
+    public function setGatewayAccount(null|object|array $gatewayAccount): static
     {
         $this->fields['gatewayAccount'] = $gatewayAccount;
 
         return $this;
     }
 
-    public function getCustomer(): ?object
+    public function getCustomer(): null|object|array
     {
         return $this->fields['customer'] ?? null;
     }
 
-    public function setCustomer(null|object $customer): static
+    public function setCustomer(null|object|array $customer): static
     {
         $this->fields['customer'] = $customer;
 
         return $this;
     }
 
-    public function getLeadSource(): ?object
+    public function getLeadSource(): null|object|array
     {
         return $this->fields['leadSource'] ?? null;
     }
 
-    public function setLeadSource(null|object $leadSource): static
+    public function setLeadSource(null|object|array $leadSource): static
     {
         $this->fields['leadSource'] = $leadSource;
 
         return $this;
     }
 
-    public function getWebsite(): ?object
+    public function getWebsite(): null|object|array
     {
         return $this->fields['website'] ?? null;
     }
 
-    public function setWebsite(null|object $website): static
+    public function setWebsite(null|object|array $website): static
     {
         $this->fields['website'] = $website;
 
@@ -145,48 +145,48 @@ class TransactionEmbedded implements JsonSerializable
         return $this;
     }
 
-    public function getOrganization(): ?object
+    public function getOrganization(): null|object|array
     {
         return $this->fields['organization'] ?? null;
     }
 
-    public function setOrganization(null|object $organization): static
+    public function setOrganization(null|object|array $organization): static
     {
         $this->fields['organization'] = $organization;
 
         return $this;
     }
 
-    public function getDispute(): ?object
+    public function getDispute(): null|object|array
     {
         return $this->fields['dispute'] ?? null;
     }
 
-    public function setDispute(null|object $dispute): static
+    public function setDispute(null|object|array $dispute): static
     {
         $this->fields['dispute'] = $dispute;
 
         return $this;
     }
 
-    public function getPaymentCard(): ?object
+    public function getPaymentCard(): null|object|array
     {
         return $this->fields['paymentCard'] ?? null;
     }
 
-    public function setPaymentCard(null|object $paymentCard): static
+    public function setPaymentCard(null|object|array $paymentCard): static
     {
         $this->fields['paymentCard'] = $paymentCard;
 
         return $this;
     }
 
-    public function getBankAccount(): ?object
+    public function getBankAccount(): null|object|array
     {
         return $this->fields['bankAccount'] ?? null;
     }
 
-    public function setBankAccount(null|object $bankAccount): static
+    public function setBankAccount(null|object|array $bankAccount): static
     {
         $this->fields['bankAccount'] = $bankAccount;
 

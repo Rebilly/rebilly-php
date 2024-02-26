@@ -42,7 +42,7 @@ class SubscriptionOrderEmbedded implements JsonSerializable
         if (array_key_exists('paymentInstrument', $data)) {
             $this->setPaymentInstrument($data['paymentInstrument']);
         }
-        if (array_key_exists('upcomingInvoice', $data)) {
+        if (array_key_exists('upcomingInvoiceupcomingInvoice', $data)) {
             $this->setUpcomingInvoice($data['upcomingInvoice']);
         }
     }
@@ -52,96 +52,96 @@ class SubscriptionOrderEmbedded implements JsonSerializable
         return new self($data);
     }
 
-    public function getRecentInvoice(): ?object
+    public function getRecentInvoice(): null|object|array
     {
         return $this->fields['recentInvoice'] ?? null;
     }
 
-    public function setRecentInvoice(null|object $recentInvoice): static
+    public function setRecentInvoice(null|object|array $recentInvoice): static
     {
         $this->fields['recentInvoice'] = $recentInvoice;
 
         return $this;
     }
 
-    public function getInitialInvoice(): ?object
+    public function getInitialInvoice(): null|object|array
     {
         return $this->fields['initialInvoice'] ?? null;
     }
 
-    public function setInitialInvoice(null|object $initialInvoice): static
+    public function setInitialInvoice(null|object|array $initialInvoice): static
     {
         $this->fields['initialInvoice'] = $initialInvoice;
 
         return $this;
     }
 
-    public function getCustomer(): ?object
+    public function getCustomer(): null|object|array
     {
         return $this->fields['customer'] ?? null;
     }
 
-    public function setCustomer(null|object $customer): static
+    public function setCustomer(null|object|array $customer): static
     {
         $this->fields['customer'] = $customer;
 
         return $this;
     }
 
-    public function getWebsite(): ?object
+    public function getWebsite(): null|object|array
     {
         return $this->fields['website'] ?? null;
     }
 
-    public function setWebsite(null|object $website): static
+    public function setWebsite(null|object|array $website): static
     {
         $this->fields['website'] = $website;
 
         return $this;
     }
 
-    public function getLeadSource(): ?object
+    public function getLeadSource(): null|object|array
     {
         return $this->fields['leadSource'] ?? null;
     }
 
-    public function setLeadSource(null|object $leadSource): static
+    public function setLeadSource(null|object|array $leadSource): static
     {
         $this->fields['leadSource'] = $leadSource;
 
         return $this;
     }
 
-    public function getShippingRate(): ?object
+    public function getShippingRate(): null|object|array
     {
         return $this->fields['shippingRate'] ?? null;
     }
 
-    public function setShippingRate(null|object $shippingRate): static
+    public function setShippingRate(null|object|array $shippingRate): static
     {
         $this->fields['shippingRate'] = $shippingRate;
 
         return $this;
     }
 
-    public function getPaymentInstrument(): ?object
+    public function getPaymentInstrument(): null|object|array
     {
         return $this->fields['paymentInstrument'] ?? null;
     }
 
-    public function setPaymentInstrument(null|object $paymentInstrument): static
+    public function setPaymentInstrument(null|object|array $paymentInstrument): static
     {
         $this->fields['paymentInstrument'] = $paymentInstrument;
 
         return $this;
     }
 
-    public function getUpcomingInvoice(): ?object
+    public function getUpcomingInvoice(): null|object|array
     {
         return $this->fields['upcomingInvoice'] ?? null;
     }
 
-    public function setUpcomingInvoice(null|object $upcomingInvoice): static
+    public function setUpcomingInvoice(null|object|array $upcomingInvoice): static
     {
         $this->fields['upcomingInvoice'] = $upcomingInvoice;
 

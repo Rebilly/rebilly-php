@@ -43,60 +43,60 @@ class InvoiceEmbedded implements JsonSerializable
         return new self($data);
     }
 
-    public function getCustomer(): ?object
+    public function getCustomer(): null|object|array
     {
         return $this->fields['customer'] ?? null;
     }
 
-    public function setCustomer(null|object $customer): static
+    public function setCustomer(null|object|array $customer): static
     {
         $this->fields['customer'] = $customer;
 
         return $this;
     }
 
-    public function getWebsite(): ?object
+    public function getWebsite(): null|object|array
     {
         return $this->fields['website'] ?? null;
     }
 
-    public function setWebsite(null|object $website): static
+    public function setWebsite(null|object|array $website): static
     {
         $this->fields['website'] = $website;
 
         return $this;
     }
 
-    public function getOrganization(): ?object
+    public function getOrganization(): null|object|array
     {
         return $this->fields['organization'] ?? null;
     }
 
-    public function setOrganization(null|object $organization): static
+    public function setOrganization(null|object|array $organization): static
     {
         $this->fields['organization'] = $organization;
 
         return $this;
     }
 
-    public function getLeadSource(): ?object
+    public function getLeadSource(): null|object|array
     {
         return $this->fields['leadSource'] ?? null;
     }
 
-    public function setLeadSource(null|object $leadSource): static
+    public function setLeadSource(null|object|array $leadSource): static
     {
         $this->fields['leadSource'] = $leadSource;
 
         return $this;
     }
 
-    public function getShippingRate(): ?object
+    public function getShippingRate(): null|object|array
     {
         return $this->fields['shippingRate'] ?? null;
     }
 
-    public function setShippingRate(null|object $shippingRate): static
+    public function setShippingRate(null|object|array $shippingRate): static
     {
         $this->fields['shippingRate'] = $shippingRate;
 
