@@ -37,36 +37,36 @@ class CashierRequestEmbedded implements JsonSerializable
         return new self($data);
     }
 
-    public function getCustomer(): ?object
+    public function getCustomer(): null|object|array
     {
         return $this->fields['customer'] ?? null;
     }
 
-    public function setCustomer(null|object $customer): static
+    public function setCustomer(null|object|array $customer): static
     {
         $this->fields['customer'] = $customer;
 
         return $this;
     }
 
-    public function getWebsite(): ?object
+    public function getWebsite(): null|object|array
     {
         return $this->fields['website'] ?? null;
     }
 
-    public function setWebsite(null|object $website): static
+    public function setWebsite(null|object|array $website): static
     {
         $this->fields['website'] = $website;
 
         return $this;
     }
 
-    public function getTransaction(): ?object
+    public function getTransaction(): null|object|array
     {
         return $this->fields['transaction'] ?? null;
     }
 
-    public function setTransaction(null|object $transaction): static
+    public function setTransaction(null|object|array $transaction): static
     {
         $this->fields['transaction'] = $transaction;
 

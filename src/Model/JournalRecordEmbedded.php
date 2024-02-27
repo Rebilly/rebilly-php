@@ -43,60 +43,60 @@ class JournalRecordEmbedded implements JsonSerializable
         return new self($data);
     }
 
-    public function getCustomer(): ?object
+    public function getCustomer(): null|object|array
     {
         return $this->fields['customer'] ?? null;
     }
 
-    public function setCustomer(null|object $customer): static
+    public function setCustomer(null|object|array $customer): static
     {
         $this->fields['customer'] = $customer;
 
         return $this;
     }
 
-    public function getInvoice(): ?object
+    public function getInvoice(): null|object|array
     {
         return $this->fields['invoice'] ?? null;
     }
 
-    public function setInvoice(null|object $invoice): static
+    public function setInvoice(null|object|array $invoice): static
     {
         $this->fields['invoice'] = $invoice;
 
         return $this;
     }
 
-    public function getInvoiceItem(): ?object
+    public function getInvoiceItem(): null|object|array
     {
         return $this->fields['invoiceItem'] ?? null;
     }
 
-    public function setInvoiceItem(null|object $invoiceItem): static
+    public function setInvoiceItem(null|object|array $invoiceItem): static
     {
         $this->fields['invoiceItem'] = $invoiceItem;
 
         return $this;
     }
 
-    public function getDebitAccount(): ?object
+    public function getDebitAccount(): null|object|array
     {
         return $this->fields['debitAccount'] ?? null;
     }
 
-    public function setDebitAccount(null|object $debitAccount): static
+    public function setDebitAccount(null|object|array $debitAccount): static
     {
         $this->fields['debitAccount'] = $debitAccount;
 
         return $this;
     }
 
-    public function getCreditAccount(): ?object
+    public function getCreditAccount(): null|object|array
     {
         return $this->fields['creditAccount'] ?? null;
     }
 
-    public function setCreditAccount(null|object $creditAccount): static
+    public function setCreditAccount(null|object|array $creditAccount): static
     {
         $this->fields['creditAccount'] = $creditAccount;
 

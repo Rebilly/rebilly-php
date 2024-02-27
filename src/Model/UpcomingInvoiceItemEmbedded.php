@@ -34,12 +34,12 @@ class UpcomingInvoiceItemEmbedded implements JsonSerializable
         return new self($data);
     }
 
-    public function getProduct(): ?object
+    public function getProduct(): null|object|array
     {
         return $this->fields['product'] ?? null;
     }
 
-    public function setProduct(null|object $product): static
+    public function setProduct(null|object|array $product): static
     {
         $this->fields['product'] = $product;
 

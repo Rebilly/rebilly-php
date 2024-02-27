@@ -37,36 +37,36 @@ class QuoteEmbedded implements JsonSerializable
         return new self($data);
     }
 
-    public function getCustomer(): ?object
+    public function getCustomer(): null|object|array
     {
         return $this->fields['customer'] ?? null;
     }
 
-    public function setCustomer(null|object $customer): static
+    public function setCustomer(null|object|array $customer): static
     {
         $this->fields['customer'] = $customer;
 
         return $this;
     }
 
-    public function getWebsite(): ?object
+    public function getWebsite(): null|object|array
     {
         return $this->fields['website'] ?? null;
     }
 
-    public function setWebsite(null|object $website): static
+    public function setWebsite(null|object|array $website): static
     {
         $this->fields['website'] = $website;
 
         return $this;
     }
 
-    public function getOrder(): ?object
+    public function getOrder(): null|object|array
     {
         return $this->fields['order'] ?? null;
     }
 
-    public function setOrder(null|object $order): static
+    public function setOrder(null|object|array $order): static
     {
         $this->fields['order'] = $order;
 

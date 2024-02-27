@@ -31,12 +31,12 @@ class DisputeEmbedded implements JsonSerializable
         return new self($data);
     }
 
-    public function getTransaction(): ?object
+    public function getTransaction(): null|object|array
     {
         return $this->fields['transaction'] ?? null;
     }
 
-    public function setTransaction(null|object $transaction): static
+    public function setTransaction(null|object|array $transaction): static
     {
         $this->fields['transaction'] = $transaction;
 

@@ -34,24 +34,24 @@ class DataExportEmbedded implements JsonSerializable
         return new self($data);
     }
 
-    public function getFile(): ?object
+    public function getFile(): null|object|array
     {
         return $this->fields['file'] ?? null;
     }
 
-    public function setFile(null|object $file): static
+    public function setFile(null|object|array $file): static
     {
         $this->fields['file'] = $file;
 
         return $this;
     }
 
-    public function getUser(): ?object
+    public function getUser(): null|object|array
     {
         return $this->fields['user'] ?? null;
     }
 
-    public function setUser(null|object $user): static
+    public function setUser(null|object|array $user): static
     {
         $this->fields['user'] = $user;
 

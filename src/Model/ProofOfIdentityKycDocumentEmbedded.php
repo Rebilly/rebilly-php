@@ -34,12 +34,12 @@ class ProofOfIdentityKycDocumentEmbedded implements JsonSerializable
         return new self($data);
     }
 
-    public function getCustomer(): ?object
+    public function getCustomer(): null|object|array
     {
         return $this->fields['customer'] ?? null;
     }
 
-    public function setCustomer(null|object $customer): static
+    public function setCustomer(null|object|array $customer): static
     {
         $this->fields['customer'] = $customer;
 
