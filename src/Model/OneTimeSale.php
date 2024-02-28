@@ -172,9 +172,6 @@ class OneTimeSale implements SubscriptionOrOneTimeSale, JsonSerializable
         if (array_key_exists('lineItems', $data)) {
             $this->setLineItems($data['lineItems']);
         }
-        if (array_key_exists('billingPortalId', $data)) {
-            $this->setBillingPortalId($data['billingPortalId']);
-        }
         if (array_key_exists('delinquencyPeriod', $data)) {
             $this->setDelinquencyPeriod($data['delinquencyPeriod']);
         }
@@ -558,18 +555,6 @@ class OneTimeSale implements SubscriptionOrOneTimeSale, JsonSerializable
         return $this->fields['lineItems'] ?? null;
     }
 
-    public function getBillingPortalId(): ?string
-    {
-        return $this->fields['billingPortalId'] ?? null;
-    }
-
-    public function setBillingPortalId(null|string $billingPortalId): static
-    {
-        $this->fields['billingPortalId'] = $billingPortalId;
-
-        return $this;
-    }
-
     public function getDelinquencyPeriod(): ?string
     {
         return $this->fields['delinquencyPeriod'] ?? null;
@@ -849,9 +834,6 @@ class OneTimeSale implements SubscriptionOrOneTimeSale, JsonSerializable
         }
         if (array_key_exists('lineItems', $this->fields)) {
             $data['lineItems'] = $this->fields['lineItems'];
-        }
-        if (array_key_exists('billingPortalId', $this->fields)) {
-            $data['billingPortalId'] = $this->fields['billingPortalId'];
         }
         if (array_key_exists('delinquencyPeriod', $this->fields)) {
             $data['delinquencyPeriod'] = $this->fields['delinquencyPeriod'];

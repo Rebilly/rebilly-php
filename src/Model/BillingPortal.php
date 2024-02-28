@@ -51,12 +51,6 @@ class BillingPortal implements JsonSerializable
         if (array_key_exists('status', $data)) {
             $this->setStatus($data['status']);
         }
-        if (array_key_exists('plans', $data)) {
-            $this->setPlans($data['plans']);
-        }
-        if (array_key_exists('addons', $data)) {
-            $this->setAddons($data['addons']);
-        }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
         }
@@ -170,52 +164,6 @@ class BillingPortal implements JsonSerializable
         return $this;
     }
 
-    /**
-     * @return null|BillingPortalPlans[]
-     */
-    public function getPlans(): ?array
-    {
-        return $this->fields['plans'] ?? null;
-    }
-
-    /**
-     * @param null|array[]|BillingPortalPlans[] $plans
-     */
-    public function setPlans(null|array $plans): static
-    {
-        $plans = $plans !== null ? array_map(
-            fn ($value) => $value instanceof BillingPortalPlans ? $value : BillingPortalPlans::from($value),
-            $plans,
-        ) : null;
-
-        $this->fields['plans'] = $plans;
-
-        return $this;
-    }
-
-    /**
-     * @return null|BillingPortalAddons[]
-     */
-    public function getAddons(): ?array
-    {
-        return $this->fields['addons'] ?? null;
-    }
-
-    /**
-     * @param null|array[]|BillingPortalAddons[] $addons
-     */
-    public function setAddons(null|array $addons): static
-    {
-        $addons = $addons !== null ? array_map(
-            fn ($value) => $value instanceof BillingPortalAddons ? $value : BillingPortalAddons::from($value),
-            $addons,
-        ) : null;
-
-        $this->fields['addons'] = $addons;
-
-        return $this;
-    }
-
     public function getCreatedTime(): ?DateTimeImmutable
     {
         return $this->fields['createdTime'] ?? null;
@@ -260,12 +208,6 @@ class BillingPortal implements JsonSerializable
         }
         if (array_key_exists('status', $this->fields)) {
             $data['status'] = $this->fields['status'];
-        }
-        if (array_key_exists('plans', $this->fields)) {
-            $data['plans'] = $this->fields['plans'];
-        }
-        if (array_key_exists('addons', $this->fields)) {
-            $data['addons'] = $this->fields['addons'];
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
