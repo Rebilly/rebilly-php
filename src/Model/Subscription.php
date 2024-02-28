@@ -230,9 +230,6 @@ class Subscription implements SubscriptionOrOneTimeSale, JsonSerializable
         if (array_key_exists('riskMetadata', $data)) {
             $this->setRiskMetadata($data['riskMetadata']);
         }
-        if (array_key_exists('billingPortalId', $data)) {
-            $this->setBillingPortalId($data['billingPortalId']);
-        }
         if (array_key_exists('customFields', $data)) {
             $this->setCustomFields($data['customFields']);
         }
@@ -710,18 +707,6 @@ class Subscription implements SubscriptionOrOneTimeSale, JsonSerializable
         return $this;
     }
 
-    public function getBillingPortalId(): ?string
-    {
-        return $this->fields['billingPortalId'] ?? null;
-    }
-
-    public function setBillingPortalId(null|string $billingPortalId): static
-    {
-        $this->fields['billingPortalId'] = $billingPortalId;
-
-        return $this;
-    }
-
     public function getCustomFields(): ?array
     {
         return $this->fields['customFields'] ?? null;
@@ -907,9 +892,6 @@ class Subscription implements SubscriptionOrOneTimeSale, JsonSerializable
         }
         if (array_key_exists('riskMetadata', $this->fields)) {
             $data['riskMetadata'] = $this->fields['riskMetadata']?->jsonSerialize();
-        }
-        if (array_key_exists('billingPortalId', $this->fields)) {
-            $data['billingPortalId'] = $this->fields['billingPortalId'];
         }
         if (array_key_exists('customFields', $this->fields)) {
             $data['customFields'] = $this->fields['customFields'];
