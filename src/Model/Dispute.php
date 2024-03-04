@@ -59,6 +59,16 @@ class Dispute implements JsonSerializable
 
     public const STATUS_UNKNOWN = 'unknown';
 
+    public const SOURCE_NULL = 'null';
+
+    public const SOURCE_API = 'api';
+
+    public const SOURCE_MANUAL = 'manual';
+
+    public const SOURCE_SFTP = 'sftp';
+
+    public const SOURCE_WEBHOOK = 'webhook';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -110,6 +120,9 @@ class Dispute implements JsonSerializable
         }
         if (array_key_exists('resolvedTime', $data)) {
             $this->setResolvedTime($data['resolvedTime']);
+        }
+        if (array_key_exists('source', $data)) {
+            $this->setSource($data['source']);
         }
         if (array_key_exists('revision', $data)) {
             $this->setRevision($data['revision']);
@@ -295,6 +308,11 @@ class Dispute implements JsonSerializable
         return $this->fields['resolvedTime'] ?? null;
     }
 
+    public function getSource(): ?string
+    {
+        return $this->fields['source'] ?? null;
+    }
+
     public function getRevision(): ?int
     {
         return $this->fields['revision'] ?? null;
@@ -385,6 +403,9 @@ class Dispute implements JsonSerializable
         if (array_key_exists('resolvedTime', $this->fields)) {
             $data['resolvedTime'] = $this->fields['resolvedTime']?->format(DateTimeInterface::RFC3339);
         }
+        if (array_key_exists('source', $this->fields)) {
+            $data['source'] = $this->fields['source'];
+        }
         if (array_key_exists('revision', $this->fields)) {
             $data['revision'] = $this->fields['revision'];
         }
@@ -446,6 +467,13 @@ class Dispute implements JsonSerializable
         }
 
         $this->fields['resolvedTime'] = $resolvedTime;
+
+        return $this;
+    }
+
+    private function setSource(null|string $source): static
+    {
+        $this->fields['source'] = $source;
 
         return $this;
     }
