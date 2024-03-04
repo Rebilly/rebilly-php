@@ -25,6 +25,8 @@ class DepositRequest implements JsonSerializable
 
     public const STATUS_INITIATED = 'initiated';
 
+    public const STATUS_ATTEMPTED = 'attempted';
+
     public const STATUS_COMPLETED = 'completed';
 
     public const STATUS_EXPIRED = 'expired';

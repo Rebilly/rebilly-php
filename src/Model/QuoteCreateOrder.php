@@ -86,6 +86,9 @@ class QuoteCreateOrder implements Quote, JsonSerializable
         if (array_key_exists('invoicePreview', $data)) {
             $this->setInvoicePreview($data['invoicePreview']);
         }
+        if (array_key_exists('autopay', $data)) {
+            $this->setAutopay($data['autopay']);
+        }
         if (array_key_exists('paymentTerms', $data)) {
             $this->setPaymentTerms($data['paymentTerms']);
         }
@@ -297,6 +300,18 @@ class QuoteCreateOrder implements Quote, JsonSerializable
         }
 
         $this->fields['invoicePreview'] = $invoicePreview;
+
+        return $this;
+    }
+
+    public function getAutopay(): ?bool
+    {
+        return $this->fields['autopay'] ?? null;
+    }
+
+    public function setAutopay(null|bool $autopay): static
+    {
+        $this->fields['autopay'] = $autopay;
 
         return $this;
     }
@@ -574,6 +589,9 @@ class QuoteCreateOrder implements Quote, JsonSerializable
         }
         if (array_key_exists('invoicePreview', $this->fields)) {
             $data['invoicePreview'] = $this->fields['invoicePreview']?->jsonSerialize();
+        }
+        if (array_key_exists('autopay', $this->fields)) {
+            $data['autopay'] = $this->fields['autopay'];
         }
         if (array_key_exists('paymentTerms', $this->fields)) {
             $data['paymentTerms'] = $this->fields['paymentTerms'];

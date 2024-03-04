@@ -70,6 +70,9 @@ class Invoice implements JsonSerializable
         if (array_key_exists('invoiceNumber', $data)) {
             $this->setInvoiceNumber($data['invoiceNumber']);
         }
+        if (array_key_exists('orderId', $data)) {
+            $this->setOrderId($data['orderId']);
+        }
         if (array_key_exists('subscriptionId', $data)) {
             $this->setSubscriptionId($data['subscriptionId']);
         }
@@ -220,6 +223,11 @@ class Invoice implements JsonSerializable
     public function getInvoiceNumber(): ?int
     {
         return $this->fields['invoiceNumber'] ?? null;
+    }
+
+    public function getOrderId(): ?string
+    {
+        return $this->fields['orderId'] ?? null;
     }
 
     public function getSubscriptionId(): ?string
@@ -607,6 +615,9 @@ class Invoice implements JsonSerializable
         if (array_key_exists('invoiceNumber', $this->fields)) {
             $data['invoiceNumber'] = $this->fields['invoiceNumber'];
         }
+        if (array_key_exists('orderId', $this->fields)) {
+            $data['orderId'] = $this->fields['orderId'];
+        }
         if (array_key_exists('subscriptionId', $this->fields)) {
             $data['subscriptionId'] = $this->fields['subscriptionId'];
         }
@@ -744,6 +755,13 @@ class Invoice implements JsonSerializable
     private function setInvoiceNumber(null|int $invoiceNumber): static
     {
         $this->fields['invoiceNumber'] = $invoiceNumber;
+
+        return $this;
+    }
+
+    private function setOrderId(null|string $orderId): static
+    {
+        $this->fields['orderId'] = $orderId;
 
         return $this;
     }
