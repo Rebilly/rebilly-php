@@ -61,7 +61,7 @@ class TransactionEmbedded implements JsonSerializable
         return new self($data);
     }
 
-    public function getParentTransaction():null|object|array
+    public function getParentTransaction(): null|object|array
     {
         return $this->fields['parentTransaction'] ?? null;
     }
