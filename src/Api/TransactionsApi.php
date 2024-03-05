@@ -290,12 +290,17 @@ class TransactionsApi
     public function refund(
         string $id,
         TransactionRefund $transactionRefund,
+        ?string $expand = null,
     ): Transaction {
         $pathParams = [
             '{id}' => $id,
         ];
+        $queryParams = [
+            'expand' => $expand,
+        ];
 
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/transactions/{id}/refund');
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/transactions/{id}/refund?')
+            . http_build_query($queryParams);
 
         $request = new Request('POST', $uri, body: Utils::jsonEncode($transactionRefund));
         $response = $this->client->send($request);
