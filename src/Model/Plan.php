@@ -265,15 +265,15 @@ class Plan implements JsonSerializable
         return $this->fields['_links'] ?? null;
     }
 
-    public function getRecurringInterval(): SubscriptionOrderPlanRecurringInterval
+    public function getRecurringInterval(): SubscriptionPlanRecurringInterval
     {
         return $this->fields['recurringInterval'];
     }
 
-    public function setRecurringInterval(SubscriptionOrderPlanRecurringInterval|array $recurringInterval): static
+    public function setRecurringInterval(SubscriptionPlanRecurringInterval|array $recurringInterval): static
     {
-        if (!($recurringInterval instanceof SubscriptionOrderPlanRecurringInterval)) {
-            $recurringInterval = SubscriptionOrderPlanRecurringInterval::from($recurringInterval);
+        if (!($recurringInterval instanceof SubscriptionPlanRecurringInterval)) {
+            $recurringInterval = SubscriptionPlanRecurringInterval::from($recurringInterval);
         }
 
         $this->fields['recurringInterval'] = $recurringInterval;
@@ -297,15 +297,15 @@ class Plan implements JsonSerializable
         return $this;
     }
 
-    public function getMeteredBilling(): ?SubscriptionOrderPlanMeteredBilling
+    public function getMeteredBilling(): ?SubscriptionPlanMeteredBilling
     {
         return $this->fields['meteredBilling'] ?? null;
     }
 
-    public function setMeteredBilling(null|SubscriptionOrderPlanMeteredBilling|array $meteredBilling): static
+    public function setMeteredBilling(null|SubscriptionPlanMeteredBilling|array $meteredBilling): static
     {
-        if ($meteredBilling !== null && !($meteredBilling instanceof SubscriptionOrderPlanMeteredBilling)) {
-            $meteredBilling = SubscriptionOrderPlanMeteredBilling::from($meteredBilling);
+        if ($meteredBilling !== null && !($meteredBilling instanceof SubscriptionPlanMeteredBilling)) {
+            $meteredBilling = SubscriptionPlanMeteredBilling::from($meteredBilling);
         }
 
         $this->fields['meteredBilling'] = $meteredBilling;

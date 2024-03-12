@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class OrderItem implements JsonSerializable
+class SubscriptionOrOneTimeSaleItem implements JsonSerializable
 {
     private array $fields = [];
 
@@ -99,15 +99,15 @@ class OrderItem implements JsonSerializable
         return $this;
     }
 
-    public function getPlan(): OrderItemPlan
+    public function getPlan(): SubscriptionOrOneTimeSaleItemPlan
     {
         return $this->fields['plan'];
     }
 
-    public function setPlan(OrderItemPlan|array $plan): static
+    public function setPlan(SubscriptionOrOneTimeSaleItemPlan|array $plan): static
     {
-        if (!($plan instanceof OrderItemPlan)) {
-            $plan = OrderItemPlan::from($plan);
+        if (!($plan instanceof SubscriptionOrOneTimeSaleItemPlan)) {
+            $plan = SubscriptionOrOneTimeSaleItemPlan::from($plan);
         }
 
         $this->fields['plan'] = $plan;
@@ -115,15 +115,15 @@ class OrderItem implements JsonSerializable
         return $this;
     }
 
-    public function getUsageLimits(): ?OrderItemUsageLimits
+    public function getUsageLimits(): ?SubscriptionOrOneTimeSaleItemUsageLimits
     {
         return $this->fields['usageLimits'] ?? null;
     }
 
-    public function setUsageLimits(null|OrderItemUsageLimits|array $usageLimits): static
+    public function setUsageLimits(null|SubscriptionOrOneTimeSaleItemUsageLimits|array $usageLimits): static
     {
-        if ($usageLimits !== null && !($usageLimits instanceof OrderItemUsageLimits)) {
-            $usageLimits = OrderItemUsageLimits::from($usageLimits);
+        if ($usageLimits !== null && !($usageLimits instanceof SubscriptionOrOneTimeSaleItemUsageLimits)) {
+            $usageLimits = SubscriptionOrOneTimeSaleItemUsageLimits::from($usageLimits);
         }
 
         $this->fields['usageLimits'] = $usageLimits;

@@ -521,7 +521,7 @@ class Subscription implements SubscriptionOrOneTimeSale, JsonSerializable
     }
 
     /**
-     * @return OrderItem[]
+     * @return SubscriptionOrOneTimeSaleItem[]
      */
     public function getItems(): array
     {
@@ -529,12 +529,12 @@ class Subscription implements SubscriptionOrOneTimeSale, JsonSerializable
     }
 
     /**
-     * @param array[]|OrderItem[] $items
+     * @param array[]|SubscriptionOrOneTimeSaleItem[] $items
      */
     public function setItems(array $items): static
     {
         $items = array_map(
-            fn ($value) => $value instanceof OrderItem ? $value : OrderItem::from($value),
+            fn ($value) => $value instanceof SubscriptionOrOneTimeSaleItem ? $value : SubscriptionOrOneTimeSaleItem::from($value),
             $items,
         );
 

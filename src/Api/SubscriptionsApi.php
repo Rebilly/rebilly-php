@@ -19,13 +19,13 @@ use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\Invoice;
 use Rebilly\Sdk\Model\InvoiceIssue;
-use Rebilly\Sdk\Model\OrderItem;
 use Rebilly\Sdk\Model\OrderTimeline;
 use Rebilly\Sdk\Model\SubscriptionChange;
 use Rebilly\Sdk\Model\SubscriptionInvoice;
 use Rebilly\Sdk\Model\SubscriptionItemUpdate;
 use Rebilly\Sdk\Model\SubscriptionOrOneTimeSale;
 use Rebilly\Sdk\Model\SubscriptionOrOneTimeSaleFactory;
+use Rebilly\Sdk\Model\SubscriptionOrOneTimeSaleItem;
 use Rebilly\Sdk\Model\SubscriptionSummaryMetrics;
 use Rebilly\Sdk\Model\UpcomingInvoice;
 use Rebilly\Sdk\Paginator;
@@ -438,13 +438,13 @@ class SubscriptionsApi
     }
 
     /**
-     * @return OrderItem
+     * @return SubscriptionOrOneTimeSaleItem
      */
     public function updateItem(
         string $id,
         string $itemId,
         SubscriptionItemUpdate $subscriptionItemUpdate,
-    ): OrderItem {
+    ): SubscriptionOrOneTimeSaleItem {
         $pathParams = [
             '{id}' => $id,
             '{itemId}' => $itemId,
@@ -456,7 +456,7 @@ class SubscriptionsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return OrderItem::from($data);
+        return SubscriptionOrOneTimeSaleItem::from($data);
     }
 
     /**
