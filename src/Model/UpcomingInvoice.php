@@ -65,12 +65,6 @@ class UpcomingInvoice implements JsonSerializable
         if (array_key_exists('tax', $data)) {
             $this->setTax($data['tax']);
         }
-        if (array_key_exists('organizationTaxIdNumber', $data)) {
-            $this->setOrganizationTaxIdNumber($data['organizationTaxIdNumber']);
-        }
-        if (array_key_exists('customerTaxIdNumber', $data)) {
-            $this->setCustomerTaxIdNumber($data['customerTaxIdNumber']);
-        }
         if (array_key_exists('billingAddress', $data)) {
             $this->setBillingAddress($data['billingAddress']);
         }
@@ -256,38 +250,6 @@ class UpcomingInvoice implements JsonSerializable
         return $this;
     }
 
-    public function getOrganizationTaxIdNumber(): ?InvoiceOrganizationTaxIdNumber
-    {
-        return $this->fields['organizationTaxIdNumber'] ?? null;
-    }
-
-    public function setOrganizationTaxIdNumber(null|InvoiceOrganizationTaxIdNumber|array $organizationTaxIdNumber): static
-    {
-        if ($organizationTaxIdNumber !== null && !($organizationTaxIdNumber instanceof InvoiceOrganizationTaxIdNumber)) {
-            $organizationTaxIdNumber = InvoiceOrganizationTaxIdNumber::from($organizationTaxIdNumber);
-        }
-
-        $this->fields['organizationTaxIdNumber'] = $organizationTaxIdNumber;
-
-        return $this;
-    }
-
-    public function getCustomerTaxIdNumber(): ?InvoiceCustomerTaxIdNumber
-    {
-        return $this->fields['customerTaxIdNumber'] ?? null;
-    }
-
-    public function setCustomerTaxIdNumber(null|InvoiceCustomerTaxIdNumber|array $customerTaxIdNumber): static
-    {
-        if ($customerTaxIdNumber !== null && !($customerTaxIdNumber instanceof InvoiceCustomerTaxIdNumber)) {
-            $customerTaxIdNumber = InvoiceCustomerTaxIdNumber::from($customerTaxIdNumber);
-        }
-
-        $this->fields['customerTaxIdNumber'] = $customerTaxIdNumber;
-
-        return $this;
-    }
-
     public function getBillingAddress(): ?ContactObject
     {
         return $this->fields['billingAddress'] ?? null;
@@ -451,12 +413,6 @@ class UpcomingInvoice implements JsonSerializable
         }
         if (array_key_exists('tax', $this->fields)) {
             $data['tax'] = $this->fields['tax']?->jsonSerialize();
-        }
-        if (array_key_exists('organizationTaxIdNumber', $this->fields)) {
-            $data['organizationTaxIdNumber'] = $this->fields['organizationTaxIdNumber']?->jsonSerialize();
-        }
-        if (array_key_exists('customerTaxIdNumber', $this->fields)) {
-            $data['customerTaxIdNumber'] = $this->fields['customerTaxIdNumber']?->jsonSerialize();
         }
         if (array_key_exists('billingAddress', $this->fields)) {
             $data['billingAddress'] = $this->fields['billingAddress']?->jsonSerialize();

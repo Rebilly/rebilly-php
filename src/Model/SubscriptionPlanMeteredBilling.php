@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class SubscriptionOrderPlanMeteredBilling implements JsonSerializable
+class SubscriptionPlanMeteredBilling implements JsonSerializable
 {
     public const STRATEGY_SUM = 'sum';
 

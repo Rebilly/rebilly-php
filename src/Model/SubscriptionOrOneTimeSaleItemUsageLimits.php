@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class OrderItemUsageLimits implements JsonSerializable
+class SubscriptionOrOneTimeSaleItemUsageLimits implements JsonSerializable
 {
     private array $fields = [];
 

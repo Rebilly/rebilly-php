@@ -50,15 +50,15 @@ class TrialOnlyPlanTrial implements JsonSerializable
         return $this;
     }
 
-    public function getPeriod(): SubscriptionOrderPlanTrialPeriod
+    public function getPeriod(): SubscriptionPlanTrialPeriod
     {
         return $this->fields['period'];
     }
 
-    public function setPeriod(SubscriptionOrderPlanTrialPeriod|array $period): static
+    public function setPeriod(SubscriptionPlanTrialPeriod|array $period): static
     {
-        if (!($period instanceof SubscriptionOrderPlanTrialPeriod)) {
-            $period = SubscriptionOrderPlanTrialPeriod::from($period);
+        if (!($period instanceof SubscriptionPlanTrialPeriod)) {
+            $period = SubscriptionPlanTrialPeriod::from($period);
         }
 
         $this->fields['period'] = $period;

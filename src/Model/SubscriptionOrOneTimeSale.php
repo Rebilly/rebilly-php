@@ -46,12 +46,12 @@ interface SubscriptionOrOneTimeSale
     public function getRecentInvoiceId(): ?string;
 
     /**
-     * @return OrderItem[]
+     * @return SubscriptionOrOneTimeSaleItem[]
      */
     public function getItems(): array;
 
     /**
-     * @param array[]|OrderItem[] $items
+     * @param array[]|SubscriptionOrOneTimeSaleItem[] $items
      */
     public function setItems(array $items): static;
 

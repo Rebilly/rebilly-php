@@ -27,6 +27,9 @@ class CoinGateSettings implements JsonSerializable
         if (array_key_exists('tolerancePercentage', $data)) {
             $this->setTolerancePercentage($data['tolerancePercentage']);
         }
+        if (array_key_exists('adjustAmount', $data)) {
+            $this->setAdjustAmount($data['adjustAmount']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -58,6 +61,18 @@ class CoinGateSettings implements JsonSerializable
         return $this;
     }
 
+    public function getAdjustAmount(): ?bool
+    {
+        return $this->fields['adjustAmount'] ?? null;
+    }
+
+    public function setAdjustAmount(null|bool $adjustAmount): static
+    {
+        $this->fields['adjustAmount'] = $adjustAmount;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -66,6 +81,9 @@ class CoinGateSettings implements JsonSerializable
         }
         if (array_key_exists('tolerancePercentage', $this->fields)) {
             $data['tolerancePercentage'] = $this->fields['tolerancePercentage'];
+        }
+        if (array_key_exists('adjustAmount', $this->fields)) {
+            $data['adjustAmount'] = $this->fields['adjustAmount'];
         }
 
         return $data;
