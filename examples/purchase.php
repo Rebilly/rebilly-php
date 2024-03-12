@@ -14,8 +14,6 @@ use Rebilly\Sdk\CoreService;
 use Rebilly\Sdk\Exception\DataValidationException;
 use Rebilly\Sdk\Model\ContactObject;
 use Rebilly\Sdk\Model\Customer;
-use Rebilly\Sdk\Model\OrderItem;
-use Rebilly\Sdk\Model\OrderItemPlan;
 use Rebilly\Sdk\Model\PaymentCardToken;
 use Rebilly\Sdk\Model\PaymentInstructionToken;
 use Rebilly\Sdk\Model\Plan;
@@ -23,7 +21,9 @@ use Rebilly\Sdk\Model\PlanFormulaFlatRate;
 use Rebilly\Sdk\Model\PostTransactionRequest;
 use Rebilly\Sdk\Model\Product;
 use Rebilly\Sdk\Model\Subscription;
-use Rebilly\Sdk\Model\SubscriptionOrderPlanRecurringInterval;
+use Rebilly\Sdk\Model\SubscriptionOrOneTimeSaleItem;
+use Rebilly\Sdk\Model\SubscriptionOrOneTimeSaleItemPlan;
+use Rebilly\Sdk\Model\SubscriptionPlanRecurringInterval;
 use Rebilly\Sdk\Model\Website;
 use Rebilly\Sdk\UsersService;
 
@@ -96,8 +96,8 @@ try {
                 ->setPrice(9.99),
         )
         ->setRecurringInterval(
-            SubscriptionOrderPlanRecurringInterval::from()
-                ->setUnit(SubscriptionOrderPlanRecurringInterval::UNIT_MONTH)
+            SubscriptionPlanRecurringInterval::from()
+                ->setUnit(SubscriptionPlanRecurringInterval::UNIT_MONTH)
                 ->setLength(1),
         );
 
@@ -114,9 +114,9 @@ try {
         ->setWebsiteId($websiteId)
         ->setCustomerId($customer->getId())
         ->setItems([
-            OrderItem::from()
+            SubscriptionOrOneTimeSaleItem::from()
                 ->setPlan(
-                    OrderItemPlan::from()
+                    SubscriptionOrOneTimeSaleItemPlan::from()
                         ->setId($plan->getId())
                 )
             ->setQuantity(1),
