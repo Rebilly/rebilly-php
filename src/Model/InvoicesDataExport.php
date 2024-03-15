@@ -185,15 +185,15 @@ class InvoicesDataExport implements DataExport, JsonSerializable
         return $this;
     }
 
-    public function getRecurring(): ?CustomersDataExportRecurring
+    public function getRecurring(): ?DataExportRecurring
     {
         return $this->fields['recurring'] ?? null;
     }
 
-    public function setRecurring(null|CustomersDataExportRecurring|array $recurring): static
+    public function setRecurring(null|DataExportRecurring|array $recurring): static
     {
-        if ($recurring !== null && !($recurring instanceof CustomersDataExportRecurring)) {
-            $recurring = CustomersDataExportRecurring::from($recurring);
+        if ($recurring !== null && !($recurring instanceof DataExportRecurring)) {
+            $recurring = DataExportRecurring::from($recurring);
         }
 
         $this->fields['recurring'] = $recurring;
