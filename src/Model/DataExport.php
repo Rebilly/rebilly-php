@@ -53,9 +53,9 @@ interface DataExport
      */
     public function setFields(null|array $fields): static;
 
-    public function getRecurring(): ?CustomersDataExportRecurring;
+    public function getRecurring(): ?DataExportRecurring;
 
-    public function setRecurring(null|CustomersDataExportRecurring|array $recurring): static;
+    public function setRecurring(null|DataExportRecurring|array $recurring): static;
 
     public function getUserId(): ?string;
 

@@ -17,7 +17,7 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
 
-class CustomersDataExportRecurring implements JsonSerializable
+class DataExportRecurring implements JsonSerializable
 {
     private array $fields = [];
 
