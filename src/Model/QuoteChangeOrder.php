@@ -92,6 +92,9 @@ class QuoteChangeOrder implements Quote, JsonSerializable
         if (array_key_exists('interimOnly', $data)) {
             $this->setInterimOnly($data['interimOnly']);
         }
+        if (array_key_exists('usageSettings', $data)) {
+            $this->setUsageSettings($data['usageSettings']);
+        }
         if (array_key_exists('invoicePreview', $data)) {
             $this->setInvoicePreview($data['invoicePreview']);
         }
@@ -326,6 +329,29 @@ class QuoteChangeOrder implements Quote, JsonSerializable
     public function setInterimOnly(null|bool $interimOnly): static
     {
         $this->fields['interimOnly'] = $interimOnly;
+
+        return $this;
+    }
+
+    /**
+     * @return null|QuoteChangeOrderUsageSettings[]
+     */
+    public function getUsageSettings(): ?array
+    {
+        return $this->fields['usageSettings'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|QuoteChangeOrderUsageSettings[] $usageSettings
+     */
+    public function setUsageSettings(null|array $usageSettings): static
+    {
+        $usageSettings = $usageSettings !== null ? array_map(
+            fn ($value) => $value instanceof QuoteChangeOrderUsageSettings ? $value : QuoteChangeOrderUsageSettings::from($value),
+            $usageSettings,
+        ) : null;
+
+        $this->fields['usageSettings'] = $usageSettings;
 
         return $this;
     }
@@ -617,6 +643,9 @@ class QuoteChangeOrder implements Quote, JsonSerializable
         }
         if (array_key_exists('interimOnly', $this->fields)) {
             $data['interimOnly'] = $this->fields['interimOnly'];
+        }
+        if (array_key_exists('usageSettings', $this->fields)) {
+            $data['usageSettings'] = $this->fields['usageSettings'];
         }
         if (array_key_exists('invoicePreview', $this->fields)) {
             $data['invoicePreview'] = $this->fields['invoicePreview']?->jsonSerialize();

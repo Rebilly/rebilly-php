@@ -140,6 +140,9 @@ class QuoteTrialConversionOrder implements Quote, JsonSerializable
         if (array_key_exists('prorated', $data)) {
             $this->setProrated($data['prorated']);
         }
+        if (array_key_exists('usageSettings', $data)) {
+            $this->setUsageSettings($data['usageSettings']);
+        }
         if (array_key_exists('paymentInstrumentId', $data)) {
             $this->setPaymentInstrumentId($data['paymentInstrumentId']);
         }
@@ -528,6 +531,29 @@ class QuoteTrialConversionOrder implements Quote, JsonSerializable
         return $this;
     }
 
+    /**
+     * @return null|QuoteChangeOrderUsageSettings[]
+     */
+    public function getUsageSettings(): ?array
+    {
+        return $this->fields['usageSettings'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|QuoteChangeOrderUsageSettings[] $usageSettings
+     */
+    public function setUsageSettings(null|array $usageSettings): static
+    {
+        $usageSettings = $usageSettings !== null ? array_map(
+            fn ($value) => $value instanceof QuoteChangeOrderUsageSettings ? $value : QuoteChangeOrderUsageSettings::from($value),
+            $usageSettings,
+        ) : null;
+
+        $this->fields['usageSettings'] = $usageSettings;
+
+        return $this;
+    }
+
     public function getPaymentInstrumentId(): ?string
     {
         return $this->fields['paymentInstrumentId'] ?? null;
@@ -665,6 +691,9 @@ class QuoteTrialConversionOrder implements Quote, JsonSerializable
         }
         if (array_key_exists('prorated', $this->fields)) {
             $data['prorated'] = $this->fields['prorated'];
+        }
+        if (array_key_exists('usageSettings', $this->fields)) {
+            $data['usageSettings'] = $this->fields['usageSettings'];
         }
         if (array_key_exists('paymentInstrumentId', $this->fields)) {
             $data['paymentInstrumentId'] = $this->fields['paymentInstrumentId'];
