@@ -26,4 +26,6 @@ interface ServiceCredential
     public function setStatus(null|string $status): static;
 
     public function getDeactivationTime(): ?DateTimeImmutable;
+
+    public function getType(): string;
 }

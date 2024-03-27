@@ -149,8 +149,8 @@ class Subscription implements SubscriptionOrOneTimeSale, JsonSerializable
         if (array_key_exists('startTime', $data)) {
             $this->setStartTime($data['startTime']);
         }
-        if (array_key_exists('endTime', $data)) {
-            $this->setEndTime($data['endTime']);
+        if (array_key_exists('churnTime', $data)) {
+            $this->setChurnTime($data['churnTime']);
         }
         if (array_key_exists('renewalTime', $data)) {
             $this->setRenewalTime($data['renewalTime']);
@@ -229,6 +229,9 @@ class Subscription implements SubscriptionOrOneTimeSale, JsonSerializable
         }
         if (array_key_exists('riskMetadata', $data)) {
             $this->setRiskMetadata($data['riskMetadata']);
+        }
+        if (array_key_exists('billingPortalToken', $data)) {
+            $this->setBillingPortalToken($data['billingPortalToken']);
         }
         if (array_key_exists('customFields', $data)) {
             $this->setCustomFields($data['customFields']);
@@ -419,9 +422,9 @@ class Subscription implements SubscriptionOrOneTimeSale, JsonSerializable
         return $this;
     }
 
-    public function getEndTime(): ?DateTimeImmutable
+    public function getChurnTime(): ?DateTimeImmutable
     {
-        return $this->fields['endTime'] ?? null;
+        return $this->fields['churnTime'] ?? null;
     }
 
     public function getRenewalTime(): ?DateTimeImmutable
@@ -707,6 +710,11 @@ class Subscription implements SubscriptionOrOneTimeSale, JsonSerializable
         return $this;
     }
 
+    public function getBillingPortalToken(): ?string
+    {
+        return $this->fields['billingPortalToken'] ?? null;
+    }
+
     public function getCustomFields(): ?array
     {
         return $this->fields['customFields'] ?? null;
@@ -812,8 +820,8 @@ class Subscription implements SubscriptionOrOneTimeSale, JsonSerializable
         if (array_key_exists('startTime', $this->fields)) {
             $data['startTime'] = $this->fields['startTime']?->format(DateTimeInterface::RFC3339);
         }
-        if (array_key_exists('endTime', $this->fields)) {
-            $data['endTime'] = $this->fields['endTime']?->format(DateTimeInterface::RFC3339);
+        if (array_key_exists('churnTime', $this->fields)) {
+            $data['churnTime'] = $this->fields['churnTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('renewalTime', $this->fields)) {
             $data['renewalTime'] = $this->fields['renewalTime']?->format(DateTimeInterface::RFC3339);
@@ -892,6 +900,9 @@ class Subscription implements SubscriptionOrOneTimeSale, JsonSerializable
         }
         if (array_key_exists('riskMetadata', $this->fields)) {
             $data['riskMetadata'] = $this->fields['riskMetadata']?->jsonSerialize();
+        }
+        if (array_key_exists('billingPortalToken', $this->fields)) {
+            $data['billingPortalToken'] = $this->fields['billingPortalToken'];
         }
         if (array_key_exists('customFields', $this->fields)) {
             $data['customFields'] = $this->fields['customFields'];
@@ -994,13 +1005,13 @@ class Subscription implements SubscriptionOrOneTimeSale, JsonSerializable
         return $this;
     }
 
-    private function setEndTime(null|DateTimeImmutable|string $endTime): static
+    private function setChurnTime(null|DateTimeImmutable|string $churnTime): static
     {
-        if ($endTime !== null && !($endTime instanceof DateTimeImmutable)) {
-            $endTime = new DateTimeImmutable($endTime);
+        if ($churnTime !== null && !($churnTime instanceof DateTimeImmutable)) {
+            $churnTime = new DateTimeImmutable($churnTime);
         }
 
-        $this->fields['endTime'] = $endTime;
+        $this->fields['churnTime'] = $churnTime;
 
         return $this;
     }
@@ -1094,6 +1105,13 @@ class Subscription implements SubscriptionOrOneTimeSale, JsonSerializable
     private function setRevision(null|int $revision): static
     {
         $this->fields['revision'] = $revision;
+
+        return $this;
+    }
+
+    private function setBillingPortalToken(null|string $billingPortalToken): static
+    {
+        $this->fields['billingPortalToken'] = $billingPortalToken;
 
         return $this;
     }

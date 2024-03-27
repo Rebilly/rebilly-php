@@ -89,6 +89,9 @@ class QuoteChangeOrder implements Quote, JsonSerializable
         if (array_key_exists('keepTrial', $data)) {
             $this->setKeepTrial($data['keepTrial']);
         }
+        if (array_key_exists('interimOnly', $data)) {
+            $this->setInterimOnly($data['interimOnly']);
+        }
         if (array_key_exists('invoicePreview', $data)) {
             $this->setInvoicePreview($data['invoicePreview']);
         }
@@ -311,6 +314,18 @@ class QuoteChangeOrder implements Quote, JsonSerializable
     public function setKeepTrial(null|bool $keepTrial): static
     {
         $this->fields['keepTrial'] = $keepTrial;
+
+        return $this;
+    }
+
+    public function getInterimOnly(): ?bool
+    {
+        return $this->fields['interimOnly'] ?? null;
+    }
+
+    public function setInterimOnly(null|bool $interimOnly): static
+    {
+        $this->fields['interimOnly'] = $interimOnly;
 
         return $this;
     }
@@ -599,6 +614,9 @@ class QuoteChangeOrder implements Quote, JsonSerializable
         }
         if (array_key_exists('keepTrial', $this->fields)) {
             $data['keepTrial'] = $this->fields['keepTrial'];
+        }
+        if (array_key_exists('interimOnly', $this->fields)) {
+            $data['interimOnly'] = $this->fields['interimOnly'];
         }
         if (array_key_exists('invoicePreview', $this->fields)) {
             $data['invoicePreview'] = $this->fields['invoicePreview']?->jsonSerialize();

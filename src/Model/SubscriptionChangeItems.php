@@ -53,12 +53,12 @@ class SubscriptionChangeItems implements JsonSerializable
         return $this;
     }
 
-    public function getQuantity(): int
+    public function getQuantity(): ?int
     {
-        return $this->fields['quantity'];
+        return $this->fields['quantity'] ?? null;
     }
 
-    public function setQuantity(int $quantity): static
+    public function setQuantity(null|int $quantity): static
     {
         $this->fields['quantity'] = $quantity;
 

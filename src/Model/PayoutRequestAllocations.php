@@ -39,6 +39,9 @@ class PayoutRequestAllocations implements JsonSerializable
         if (array_key_exists('transactionResult', $data)) {
             $this->setTransactionResult($data['transactionResult']);
         }
+        if (array_key_exists('method', $data)) {
+            $this->setMethod($data['method']);
+        }
         if (array_key_exists('gatewayName', $data)) {
             $this->setGatewayName($data['gatewayName']);
         }
@@ -76,6 +79,18 @@ class PayoutRequestAllocations implements JsonSerializable
     public function getTransactionResult(): ?string
     {
         return $this->fields['transactionResult'] ?? null;
+    }
+
+    public function getMethod(): ?string
+    {
+        return $this->fields['method'] ?? null;
+    }
+
+    public function setMethod(null|string $method): static
+    {
+        $this->fields['method'] = $method;
+
+        return $this;
     }
 
     public function getGatewayName(): ?string
@@ -136,6 +151,9 @@ class PayoutRequestAllocations implements JsonSerializable
         }
         if (array_key_exists('transactionResult', $this->fields)) {
             $data['transactionResult'] = $this->fields['transactionResult'];
+        }
+        if (array_key_exists('method', $this->fields)) {
+            $data['method'] = $this->fields['method'];
         }
         if (array_key_exists('gatewayName', $this->fields)) {
             $data['gatewayName'] = $this->fields['gatewayName'];
