@@ -19,10 +19,6 @@ interface PatchPaymentInstrumentRequest
 
     public function setBillingAddress(null|ContactObject|array $billingAddress): static;
 
-    public function getStickyGatewayAccountId(): ?string;
-
-    public function setStickyGatewayAccountId(null|string $stickyGatewayAccountId): static;
-
     public function getCustomFields(): ?array;
 
     public function setCustomFields(null|array $customFields): static;

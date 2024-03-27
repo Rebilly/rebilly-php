@@ -184,6 +184,9 @@ class OneTimeSale implements SubscriptionOrOneTimeSale, JsonSerializable
         if (array_key_exists('trialReminderNumber', $data)) {
             $this->setTrialReminderNumber($data['trialReminderNumber']);
         }
+        if (array_key_exists('churnTime', $data)) {
+            $this->setChurnTime($data['churnTime']);
+        }
         if (array_key_exists('lineItemSubtotal', $data)) {
             $this->setLineItemSubtotal($data['lineItemSubtotal']);
         }
@@ -223,14 +226,14 @@ class OneTimeSale implements SubscriptionOrOneTimeSale, JsonSerializable
         if (array_key_exists('renewalReminderNumber', $data)) {
             $this->setRenewalReminderNumber($data['renewalReminderNumber']);
         }
+        if (array_key_exists('billingPortalToken', $data)) {
+            $this->setBillingPortalToken($data['billingPortalToken']);
+        }
         if (array_key_exists('abandonReminderTime', $data)) {
             $this->setAbandonReminderTime($data['abandonReminderTime']);
         }
         if (array_key_exists('isTrialConverted', $data)) {
             $this->setIsTrialConverted($data['isTrialConverted']);
-        }
-        if (array_key_exists('endTime', $data)) {
-            $this->setEndTime($data['endTime']);
         }
         if (array_key_exists('cancelCategory', $data)) {
             $this->setCancelCategory($data['cancelCategory']);
@@ -589,6 +592,11 @@ class OneTimeSale implements SubscriptionOrOneTimeSale, JsonSerializable
         return $this->fields['trialReminderNumber'] ?? null;
     }
 
+    public function getChurnTime(): ?DateTimeImmutable
+    {
+        return $this->fields['churnTime'] ?? null;
+    }
+
     public function getLineItemSubtotal(): ?SubscriptionLineItemSubtotal
     {
         return $this->fields['lineItemSubtotal'] ?? null;
@@ -723,6 +731,11 @@ class OneTimeSale implements SubscriptionOrOneTimeSale, JsonSerializable
         return $this->fields['renewalReminderNumber'] ?? null;
     }
 
+    public function getBillingPortalToken(): ?string
+    {
+        return $this->fields['billingPortalToken'] ?? null;
+    }
+
     public function getAbandonReminderTime(): ?DateTimeImmutable
     {
         return $this->fields['abandonReminderTime'] ?? null;
@@ -731,11 +744,6 @@ class OneTimeSale implements SubscriptionOrOneTimeSale, JsonSerializable
     public function getIsTrialConverted(): ?bool
     {
         return $this->fields['isTrialConverted'] ?? null;
-    }
-
-    public function getEndTime(): ?DateTimeImmutable
-    {
-        return $this->fields['endTime'] ?? null;
     }
 
     public function getCancelCategory(): ?string
@@ -847,6 +855,9 @@ class OneTimeSale implements SubscriptionOrOneTimeSale, JsonSerializable
         if (array_key_exists('trialReminderNumber', $this->fields)) {
             $data['trialReminderNumber'] = $this->fields['trialReminderNumber'];
         }
+        if (array_key_exists('churnTime', $this->fields)) {
+            $data['churnTime'] = $this->fields['churnTime']?->format(DateTimeInterface::RFC3339);
+        }
         if (array_key_exists('lineItemSubtotal', $this->fields)) {
             $data['lineItemSubtotal'] = $this->fields['lineItemSubtotal']?->jsonSerialize();
         }
@@ -886,14 +897,14 @@ class OneTimeSale implements SubscriptionOrOneTimeSale, JsonSerializable
         if (array_key_exists('renewalReminderNumber', $this->fields)) {
             $data['renewalReminderNumber'] = $this->fields['renewalReminderNumber'];
         }
+        if (array_key_exists('billingPortalToken', $this->fields)) {
+            $data['billingPortalToken'] = $this->fields['billingPortalToken'];
+        }
         if (array_key_exists('abandonReminderTime', $this->fields)) {
             $data['abandonReminderTime'] = $this->fields['abandonReminderTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('isTrialConverted', $this->fields)) {
             $data['isTrialConverted'] = $this->fields['isTrialConverted'];
-        }
-        if (array_key_exists('endTime', $this->fields)) {
-            $data['endTime'] = $this->fields['endTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('cancelCategory', $this->fields)) {
             $data['cancelCategory'] = $this->fields['cancelCategory'];
@@ -1039,6 +1050,17 @@ class OneTimeSale implements SubscriptionOrOneTimeSale, JsonSerializable
         return $this;
     }
 
+    private function setChurnTime(null|DateTimeImmutable|string $churnTime): static
+    {
+        if ($churnTime !== null && !($churnTime instanceof DateTimeImmutable)) {
+            $churnTime = new DateTimeImmutable($churnTime);
+        }
+
+        $this->fields['churnTime'] = $churnTime;
+
+        return $this;
+    }
+
     private function setTrialReminderTime(null|DateTimeImmutable|string $trialReminderTime): static
     {
         if ($trialReminderTime !== null && !($trialReminderTime instanceof DateTimeImmutable)) {
@@ -1089,6 +1111,13 @@ class OneTimeSale implements SubscriptionOrOneTimeSale, JsonSerializable
         return $this;
     }
 
+    private function setBillingPortalToken(null|string $billingPortalToken): static
+    {
+        $this->fields['billingPortalToken'] = $billingPortalToken;
+
+        return $this;
+    }
+
     private function setAbandonReminderTime(null|DateTimeImmutable|string $abandonReminderTime): static
     {
         if ($abandonReminderTime !== null && !($abandonReminderTime instanceof DateTimeImmutable)) {
@@ -1103,17 +1132,6 @@ class OneTimeSale implements SubscriptionOrOneTimeSale, JsonSerializable
     private function setIsTrialConverted(null|bool $isTrialConverted): static
     {
         $this->fields['isTrialConverted'] = $isTrialConverted;
-
-        return $this;
-    }
-
-    private function setEndTime(null|DateTimeImmutable|string $endTime): static
-    {
-        if ($endTime !== null && !($endTime instanceof DateTimeImmutable)) {
-            $endTime = new DateTimeImmutable($endTime);
-        }
-
-        $this->fields['endTime'] = $endTime;
 
         return $this;
     }

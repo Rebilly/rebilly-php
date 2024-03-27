@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class TrialOnlyPlanTrial implements JsonSerializable
+class PlanTrial implements JsonSerializable
 {
     private array $fields = [];
 
@@ -50,15 +50,15 @@ class TrialOnlyPlanTrial implements JsonSerializable
         return $this;
     }
 
-    public function getPeriod(): SubscriptionPlanTrialPeriod
+    public function getPeriod(): PlanTrialPeriod
     {
         return $this->fields['period'];
     }
 
-    public function setPeriod(SubscriptionPlanTrialPeriod|array $period): static
+    public function setPeriod(PlanTrialPeriod|array $period): static
     {
-        if (!($period instanceof SubscriptionPlanTrialPeriod)) {
-            $period = SubscriptionPlanTrialPeriod::from($period);
+        if (!($period instanceof PlanTrialPeriod)) {
+            $period = PlanTrialPeriod::from($period);
         }
 
         $this->fields['period'] = $period;

@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class OneTimeSalePlanSetup implements JsonSerializable
+class PlanSetup implements JsonSerializable
 {
     private array $fields = [];
 

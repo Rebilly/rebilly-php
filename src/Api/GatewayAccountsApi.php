@@ -536,7 +536,7 @@ class GatewayAccountsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($gatewayAccount));
+        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($gatewayAccount));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -590,7 +590,7 @@ class GatewayAccountsApi
     /**
      * @return GatewayAccount
      */
-    public function update_0(
+    public function upsert(
         string $id,
         GatewayAccount $gatewayAccount,
     ): GatewayAccount {
@@ -600,7 +600,7 @@ class GatewayAccountsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}');
 
-        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($gatewayAccount));
+        $request = new Request('PUT', $uri, body: Utils::jsonEncode($gatewayAccount));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

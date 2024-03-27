@@ -197,15 +197,15 @@ class Plan implements JsonSerializable
         return $this;
     }
 
-    public function getSetup(): ?OneTimeSalePlanSetup
+    public function getSetup(): ?PlanSetup
     {
         return $this->fields['setup'] ?? null;
     }
 
-    public function setSetup(null|OneTimeSalePlanSetup|array $setup): static
+    public function setSetup(null|PlanSetup|array $setup): static
     {
-        if ($setup !== null && !($setup instanceof OneTimeSalePlanSetup)) {
-            $setup = OneTimeSalePlanSetup::from($setup);
+        if ($setup !== null && !($setup instanceof PlanSetup)) {
+            $setup = PlanSetup::from($setup);
         }
 
         $this->fields['setup'] = $setup;
@@ -281,15 +281,15 @@ class Plan implements JsonSerializable
         return $this;
     }
 
-    public function getTrial(): TrialOnlyPlanTrial
+    public function getTrial(): PlanTrial
     {
         return $this->fields['trial'];
     }
 
-    public function setTrial(TrialOnlyPlanTrial|array $trial): static
+    public function setTrial(PlanTrial|array $trial): static
     {
-        if (!($trial instanceof TrialOnlyPlanTrial)) {
-            $trial = TrialOnlyPlanTrial::from($trial);
+        if (!($trial instanceof PlanTrial)) {
+            $trial = PlanTrial::from($trial);
         }
 
         $this->fields['trial'] = $trial;

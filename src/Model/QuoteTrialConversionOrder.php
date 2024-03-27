@@ -122,6 +122,9 @@ class QuoteTrialConversionOrder implements Quote, JsonSerializable
         if (array_key_exists('_embedded', $data)) {
             $this->setEmbedded($data['_embedded']);
         }
+        if (array_key_exists('interimOnly', $data)) {
+            $this->setInterimOnly($data['interimOnly']);
+        }
         if (array_key_exists('effectiveTime', $data)) {
             $this->setEffectiveTime($data['effectiveTime']);
         }
@@ -441,6 +444,18 @@ class QuoteTrialConversionOrder implements Quote, JsonSerializable
         return $this;
     }
 
+    public function getInterimOnly(): ?bool
+    {
+        return $this->fields['interimOnly'] ?? null;
+    }
+
+    public function setInterimOnly(null|bool $interimOnly): static
+    {
+        $this->fields['interimOnly'] = $interimOnly;
+
+        return $this;
+    }
+
     public function getEffectiveTime(): ?DateTimeImmutable
     {
         return $this->fields['effectiveTime'] ?? null;
@@ -632,6 +647,9 @@ class QuoteTrialConversionOrder implements Quote, JsonSerializable
         }
         if (array_key_exists('_embedded', $this->fields)) {
             $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();
+        }
+        if (array_key_exists('interimOnly', $this->fields)) {
+            $data['interimOnly'] = $this->fields['interimOnly'];
         }
         if (array_key_exists('effectiveTime', $this->fields)) {
             $data['effectiveTime'] = $this->fields['effectiveTime']?->format(DateTimeInterface::RFC3339);

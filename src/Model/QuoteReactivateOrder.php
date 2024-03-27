@@ -131,6 +131,9 @@ class QuoteReactivateOrder implements Quote, JsonSerializable
         if (array_key_exists('_embedded', $data)) {
             $this->setEmbedded($data['_embedded']);
         }
+        if (array_key_exists('interimOnly', $data)) {
+            $this->setInterimOnly($data['interimOnly']);
+        }
         if (array_key_exists('renewalPolicy', $data)) {
             $this->setRenewalPolicy($data['renewalPolicy']);
         }
@@ -485,6 +488,18 @@ class QuoteReactivateOrder implements Quote, JsonSerializable
         return $this;
     }
 
+    public function getInterimOnly(): ?bool
+    {
+        return $this->fields['interimOnly'] ?? null;
+    }
+
+    public function setInterimOnly(null|bool $interimOnly): static
+    {
+        $this->fields['interimOnly'] = $interimOnly;
+
+        return $this;
+    }
+
     public function getRenewalPolicy(): ?string
     {
         return $this->fields['renewalPolicy'] ?? null;
@@ -641,6 +656,9 @@ class QuoteReactivateOrder implements Quote, JsonSerializable
         }
         if (array_key_exists('_embedded', $this->fields)) {
             $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();
+        }
+        if (array_key_exists('interimOnly', $this->fields)) {
+            $data['interimOnly'] = $this->fields['interimOnly'];
         }
         if (array_key_exists('renewalPolicy', $this->fields)) {
             $data['renewalPolicy'] = $this->fields['renewalPolicy'];
