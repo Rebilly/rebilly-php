@@ -1,1 +1,138 @@
 # @rebilly/client-php
+
+## 3.0.1
+
+### Patch Changes
+
+- Add depositRequestId to Transaction response Rebilly/api-definitions#1762
+- Fix GatewayAccount PUT SDK operation name Rebilly/api-definitions#1845
+- Add subscription billingPortalToken Rebilly/api-definitions#1834
+- Add paypal-claim dispute type Rebilly/api-definitions#1825
+- Add round amount after DCC to gateway account setting Rebilly/api-definitions#1714
+- Add pricing min quantity
+- Readme updated Rebilly/api-definitions#1793
+- Bump @redocly/portal from 0.65.7 to 0.67.1 Rebilly/api-definitions#1723
+- Add interimOnly for ChangeQuote Rebilly/api-definitions#1819
+- Billing Portal cleanup Rebilly/api-definitions#1813
+- Add orderId to invoice Rebilly/api-definitions#1807
+- SDK Generator updated
+- Add expand to param to StorefrontGetExperimentalBillingPortal Rebilly/api-definitions#1803
+- Use FQCN in PHP SDK 3.x code samples Rebilly/api-definitions#1725
+- Add quote for change items/reactivate order Rebilly/api-definitions#1784
+- Migrate rich billing portals to common billing portals Rebilly/api-definitions#1796
+- Bump @redocly/cli from 1.10.5 to 1.10.6 Rebilly/api-definitions#1847
+- Add StorefrontPostSubscriptionReactivation Rebilly/api-definitions#1830
+- Set up catalog with permalinks and replace products bundler Rebilly/api-definitions#1667
+- Rename risk metadata vpnServiceName to hostingName Rebilly/api-definitions#1724
+- Add Restrict to customer coupon restriction type
+- Add Storefront update usage limits Rebilly/api-definitions#1775
+- Remove build command Rebilly/api-definitions#1792
+- Fix billing portal id prefix Rebilly/api-definitions#1805
+- Add payout-request-canceled webhook Rebilly/api-definitions#1806
+- Add Invoice delinquencyTime Rebilly/api-definitions#1746
+- Rename Storefront tags Rebilly/api-definitions#1738
+- Remove unused upcoming invoice fields Rebilly/api-definitions#1823
+- Add missing security for Storefront operations Rebilly/api-definitions#1740
+- feat(experimental): Add declined transactions report Rebilly/api-definitions#1570
+- Add missing Application.logoId type Rebilly/api-definitions#1698
+- Rename Storefront POST Order to Subscriptions Rebilly/api-definitions#1777
+- add faceLivenessRequired Rebilly/api-definitions#1774
+- Make Plan.id readOnly Rebilly/api-definitions#1651
+- Make WebhookCredential type readonly Rebilly/api-definitions#1832
+- Add quantityFilled and its update Rebilly/api-definitions#1754
+- Add Klarna payNowStandalone to settings Rebilly/api-definitions#1718
+- Add setting to CoinGate to adjust amount Rebilly/api-definitions#1822
+- Add PostPayoutRequestCancellation operation Rebilly/api-definitions#1798
+- Update description for authorize-and-void setup instruction Rebilly/api-definitions#1790
+- Add amount limits to deposit request Rebilly/api-definitions#1666
+- Add isTrialConverted field to subscription Rebilly/api-definitions#1795
+- Fix dispute schema Rebilly/api-definitions#1716
+- Make cashier request fields nullable Rebilly/api-definitions#1654
+- Add KYC links to Storefront transaction Rebilly/api-definitions#1850
+- Add readyToPayoutInstruction property Rebilly/api-definitions#1707
+- Add usage limits events Rebilly/api-definitions#1701
+- Add payoutRequestId to Transaction Rebilly/api-definitions#1768
+- Bump @redocly/cli from 1.8.0 to 1.8.1 Rebilly/api-definitions#1758
+- Add default values for cashier request Rebilly/api-definitions#1656
+- Add source to dispute Rebilly/api-definitions#1816
+- Bump @redocly/cli from 1.7.0 to 1.8.0 Rebilly/api-definitions#1756
+- Adjust SubscriptionChange items-quantity Rebilly/api-definitions#1829
+- Add deposit-request transactionIds Rebilly/api-definitions#1772
+- Remove Subscription from upcoming invoice Rebilly/api-definitions#1781
+- Add dispute credentials for PSiGate
+- Extract multiple times duplicated data export recurring value object Rebilly/api-definitions#1828
+- Add expand parameter to Storefront invoices Rebilly/api-definitions#1770
+- Add Restrict to exclusive application coupon restriction type Rebilly/api-definitions#1639
+- Fis Storefront get order expand Rebilly/api-definitions#1785
+- Add PO box to StorefrontPurchase Rebilly/api-definitions#1743
+- Remove Worldpay enableStoredCredentials in favour of enforceStoredCredentails Rebilly/api-definitions#1747
+- Add autopay to quotes Rebilly/api-definitions#1814
+- Add autopay to Storefront Order PATCH Rebilly/api-definitions#1804
+- Update README links Rebilly/api-definitions#1739
+- Update sample Rebilly/api-definitions#1780
+- Fix DepositRequest.customAmount description Rebilly/api-definitions#1664
+- Fix Plan periodAnchorInstruction Rebilly/api-definitions#1759
+- Flatten plan related schemas Rebilly/api-definitions#1838
+- fix(dependancy): Override typesense axios version Rebilly/api-definitions#1737
+- Add and to StorefrontTransaction Rebilly/api-definitions#1745
+- Add delinquencyPeriod property to Subscription resource Rebilly/api-definitions#1722
+- Remove BaseKycDocument schema Rebilly/api-definitions#1658
+- Add usage limits configuration to the change items operation Rebilly/api-definitions#1706
+- Fix broken links Rebilly/api-definitions#1787
+- Add attempted deposit-request status Rebilly/api-definitions#1771
+- Simplify service credential Rebilly/api-definitions#1831
+- Add subscription-items-changed event Rebilly/api-definitions#1794
+- Add setting and credentials to Awepay Rebilly/api-definitions#1719
+- Allow resetTime to be null Rebilly/api-definitions#1696
+- Add Trial conversion quote in Storefront change order items Rebilly/api-definitions#1820
+- Add method to payout request allocation Rebilly/api-definitions#1833
+- Update score description Rebilly/api-definitions#1749
+- add parameters to GetEventCollection Rebilly/api-definitions#1835
+- Add customerDocumentCustomField setting to dLocal
+- Add PayRedeem gateway config
+- Add query collection parameter to GetEventCollection Rebilly/api-definitions#1837
+- Bump @redocly/cli from 1.8.1 to 1.8.2 Rebilly/api-definitions#1773
+- Rename cashier to deposit Rebilly/api-definitions#1661
+- bump deps and remove extra deps Rebilly/api-definitions#1842
+- Add Storefront Order expand Rebilly/api-definitions#1782
+- Add rich billing portal Rebilly/api-definitions#1686
+- Add three3dsIO to Airwallex Rebilly/api-definitions#1647
+- Remove deprecated fileId property from KycDocument Rebilly/api-definitions#1662
+- Add Storefront change-items endpoint Rebilly/api-definitions#1769
+- SDK Generator updated
+- Add quote taxes Rebilly/api-definitions#1635
+- Add Ready To Payout operations Rebilly/api-definitions#1649
+- Add expand parameter PostSubscriptionItemsChange Rebilly/api-definitions#1800
+- Add usage limit configuration Rebilly/api-definitions#1650
+- Update references and readme Rebilly/api-definitions#1731
+- Add enforceStoredCredentials setting for Worldpay Rebilly/api-definitions#1741
+- Make \_links of plan schemas read only Rebilly/api-definitions#1744
+- Add meteredBilling field to StorefrontPlan Rebilly/api-definitions#1815
+- add new status to deposit request Rebilly/api-definitions#1765
+- Add dispute type Rebilly/api-definitions#1646
+- Add Checkout.com processing channel ID Rebilly/api-definitions#1687
+- Add quote for change items/reactivate order Rebilly/api-definitions#1727
+- Bump @redocly/cli from 1.5.0 to 1.7.0 Rebilly/api-definitions#1750
+- Add expand param to Storefront rich billing portals Rebilly/api-definitions#1779
+- Add specification for UpcomingInvoice Rebilly/api-definitions#1748
+- Rename subscription yaml files Rebilly/api-definitions#1735
+- Fix UpcomingInvoice \_links Rebilly/api-definitions#1753
+- Add SecureTrading notificationPassword credential Rebilly/api-definitions#1632
+- Rename Subscription endTime to churnTime Rebilly/api-definitions#1836
+- Add depositRequestId to storefront transaction Rebilly/api-definitions#1767
+- Upgrade to @redocly/realm.v0.76.1. Rebilly/api-definitions#1788
+- Add detail to face liveness description Rebilly/api-definitions#1776
+- Remove invalid property from declined report Rebilly/api-definitions#1712
+- Add gateway object to StorefrontTransaction Rebilly/api-definitions#1736
+- refactor: Flatten schema directory tree Rebilly/api-definitions#1655
+- Add address-based and refactor AML confidence settings Rebilly/api-definitions#1697
+- feat: Allow clearing sticky gateway from payment instrument by sending value Rebilly/api-definitions#1786
+- Add sftpKeyPassphrase to Truevo Rebilly/api-definitions#1733
+- Add example for regex pattern properties Rebilly/api-definitions#1720
+- Update outdated subscription code examples Rebilly/api-definitions#1742
+- Update notificationUrl descriptions Rebilly/api-definitions#1764
+- Add Quote webhooks Rebilly/api-definitions#1802
+- Add quote item id to preview items (Rebilly/api-definitions#1630)
+- Add acceptance conditions to quotes Rebilly/api-definitions#1760
+- Refactor subscriptions related files Rebilly/api-definitions#1734
+- Add quote events to customer timeline
