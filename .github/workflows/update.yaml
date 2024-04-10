@@ -59,7 +59,7 @@ jobs:
 
       - name: Build api-definitions
         working-directory: ./api-definitions
-        run: npx redocly bundle all -o dist/all.yaml
+        run: npx redocly bundle all@latest -o dist/all.yaml
 
       - name: Login to GitHub Registry
         uses: docker/login-action@v3
