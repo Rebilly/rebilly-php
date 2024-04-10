@@ -543,7 +543,7 @@ class CustomersApi
      */
     public function patchCustomerEddScore(
         string $id,
-        ?PatchCustomerEddScoreRequest $patchCustomerEddScoreRequest = null,
+        PatchCustomerEddScoreRequest $patchCustomerEddScoreRequest,
     ): Edd {
         $pathParams = [
             '{id}' => $id,

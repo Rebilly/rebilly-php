@@ -192,7 +192,7 @@ class File implements JsonSerializable
         return $this->fields['sha1'] ?? null;
     }
 
-    public function getExifData(): ?object
+    public function getExifData(): ?array
     {
         return $this->fields['exifData'] ?? null;
     }
@@ -324,7 +324,7 @@ class File implements JsonSerializable
         return $this;
     }
 
-    private function setExifData(null|object $exifData): static
+    private function setExifData(null|array $exifData): static
     {
         $this->fields['exifData'] = $exifData;
 

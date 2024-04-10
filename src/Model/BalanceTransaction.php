@@ -17,9 +17,13 @@ use DateTimeImmutable;
 
 interface BalanceTransaction
 {
+    public function getType(): string;
+
     public function getId(): ?string;
 
-    public function getType(): string;
+    public function getParentId(): ?string;
+
+    public function setParentId(null|string $parentId): static;
 
     public function getTransactionId(): ?string;
 

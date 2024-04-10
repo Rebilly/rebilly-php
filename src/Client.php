@@ -31,7 +31,7 @@ use Rebilly\Sdk\Middleware\ErrorHandler;
 use Rebilly\Sdk\Middleware\UserAgent;
 
 /**
- * @mixin CombinedService
+ * @mixin Service
  */
 final class Client implements GuzzleClientInterface, PsrClientInterface
 {
@@ -98,30 +98,23 @@ final class Client implements GuzzleClientInterface, PsrClientInterface
     public function __call(string $name, array $arguments): mixed
     {
         if (is_callable([$this->combined(), $name])) {
-            return $this->combined()->{$name}(...$arguments);
+            return $this->service()->{$name}(...$arguments);
         }
 
         throw new Error(sprintf('Call to undefined method %s::%s().', __CLASS__, $name));
     }
 
+    /**
+     * @deprecated
+     */
     public function combined(): CombinedService
     {
         return new CombinedService(client: $this);
     }
 
-    public function core(): CoreService
+    public function service(): Service
     {
-        return new CoreService(client: $this);
-    }
-
-    public function users(): UsersService
-    {
-        return new UsersService(client: $this);
-    }
-
-    public function reports(): ReportsService
-    {
-        return new ReportsService(client: $this);
+        return new Service(client: $this);
     }
 
     public function createUri($uri, array $params = []): Uri

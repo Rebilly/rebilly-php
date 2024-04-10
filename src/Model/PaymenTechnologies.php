@@ -52,15 +52,15 @@ class PaymenTechnologies extends GatewayAccount
         return $this;
     }
 
-    public function getSettings(): ?AsiaPaymentGatewaySettings
+    public function getSettings(): ?PaymenTechnologiesSettings
     {
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|AsiaPaymentGatewaySettings|array $settings): static
+    public function setSettings(null|PaymenTechnologiesSettings|array $settings): static
     {
-        if ($settings !== null && !($settings instanceof AsiaPaymentGatewaySettings)) {
-            $settings = AsiaPaymentGatewaySettings::from($settings);
+        if ($settings !== null && !($settings instanceof PaymenTechnologiesSettings)) {
+            $settings = PaymenTechnologiesSettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

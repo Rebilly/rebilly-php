@@ -53,6 +53,12 @@ class PatchSubscriptionCancellationRequest implements JsonSerializable
 
     public const REASON_BILLING_FAILURE = 'billing-failure';
 
+    public const CHURN_TIME_POLICY_NULL = 'null';
+
+    public const CHURN_TIME_POLICY_NOW = 'now';
+
+    public const CHURN_TIME_POLICY_AT_NEXT_RENEWAL = 'at-next-renewal';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -62,9 +68,6 @@ class PatchSubscriptionCancellationRequest implements JsonSerializable
         }
         if (array_key_exists('status', $data)) {
             $this->setStatus($data['status']);
-        }
-        if (array_key_exists('churnTime', $data)) {
-            $this->setChurnTime($data['churnTime']);
         }
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
@@ -96,6 +99,12 @@ class PatchSubscriptionCancellationRequest implements JsonSerializable
         if (array_key_exists('updatedTime', $data)) {
             $this->setUpdatedTime($data['updatedTime']);
         }
+        if (array_key_exists('churnTime', $data)) {
+            $this->setChurnTime($data['churnTime']);
+        }
+        if (array_key_exists('churnTimePolicy', $data)) {
+            $this->setChurnTimePolicy($data['churnTimePolicy']);
+        }
         if (array_key_exists('lineItems', $data)) {
             $this->setLineItems($data['lineItems']);
         }
@@ -117,39 +126,9 @@ class PatchSubscriptionCancellationRequest implements JsonSerializable
         return $this->fields['canceledBy'] ?? null;
     }
 
-    public function setCanceledBy(null|string $canceledBy): static
-    {
-        $this->fields['canceledBy'] = $canceledBy;
-
-        return $this;
-    }
-
     public function getStatus(): ?string
     {
         return $this->fields['status'] ?? null;
-    }
-
-    public function setStatus(null|string $status): static
-    {
-        $this->fields['status'] = $status;
-
-        return $this;
-    }
-
-    public function getChurnTime(): DateTimeImmutable
-    {
-        return $this->fields['churnTime'];
-    }
-
-    public function setChurnTime(DateTimeImmutable|string $churnTime): static
-    {
-        if (!($churnTime instanceof DateTimeImmutable)) {
-            $churnTime = new DateTimeImmutable($churnTime);
-        }
-
-        $this->fields['churnTime'] = $churnTime;
-
-        return $this;
     }
 
     public function getId(): ?string
@@ -230,6 +209,34 @@ class PatchSubscriptionCancellationRequest implements JsonSerializable
         return $this->fields['updatedTime'] ?? null;
     }
 
+    public function getChurnTime(): ?DateTimeImmutable
+    {
+        return $this->fields['churnTime'] ?? null;
+    }
+
+    public function setChurnTime(null|DateTimeImmutable|string $churnTime): static
+    {
+        if ($churnTime !== null && !($churnTime instanceof DateTimeImmutable)) {
+            $churnTime = new DateTimeImmutable($churnTime);
+        }
+
+        $this->fields['churnTime'] = $churnTime;
+
+        return $this;
+    }
+
+    public function getChurnTimePolicy(): ?string
+    {
+        return $this->fields['churnTimePolicy'] ?? null;
+    }
+
+    public function setChurnTimePolicy(null|string $churnTimePolicy): static
+    {
+        $this->fields['churnTimePolicy'] = $churnTimePolicy;
+
+        return $this;
+    }
+
     /**
      * @return null|SubscriptionCancellationLineItems[]
      */
@@ -286,9 +293,6 @@ class PatchSubscriptionCancellationRequest implements JsonSerializable
         if (array_key_exists('status', $this->fields)) {
             $data['status'] = $this->fields['status'];
         }
-        if (array_key_exists('churnTime', $this->fields)) {
-            $data['churnTime'] = $this->fields['churnTime']?->format(DateTimeInterface::RFC3339);
-        }
         if (array_key_exists('id', $this->fields)) {
             $data['id'] = $this->fields['id'];
         }
@@ -319,6 +323,12 @@ class PatchSubscriptionCancellationRequest implements JsonSerializable
         if (array_key_exists('updatedTime', $this->fields)) {
             $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
         }
+        if (array_key_exists('churnTime', $this->fields)) {
+            $data['churnTime'] = $this->fields['churnTime']?->format(DateTimeInterface::RFC3339);
+        }
+        if (array_key_exists('churnTimePolicy', $this->fields)) {
+            $data['churnTimePolicy'] = $this->fields['churnTimePolicy'];
+        }
         if (array_key_exists('lineItems', $this->fields)) {
             $data['lineItems'] = $this->fields['lineItems'];
         }
@@ -330,6 +340,20 @@ class PatchSubscriptionCancellationRequest implements JsonSerializable
         }
 
         return $data;
+    }
+
+    private function setCanceledBy(null|string $canceledBy): static
+    {
+        $this->fields['canceledBy'] = $canceledBy;
+
+        return $this;
+    }
+
+    private function setStatus(null|string $status): static
+    {
+        $this->fields['status'] = $status;
+
+        return $this;
     }
 
     private function setId(null|string $id): static

@@ -184,16 +184,6 @@ class User implements JsonSerializable
         return $this->fields['computedPermissions'] ?? null;
     }
 
-    /**
-     * @param null|string[] $computedPermissions
-     */
-    public function setComputedPermissions(null|array $computedPermissions): static
-    {
-        $this->fields['computedPermissions'] = $computedPermissions;
-
-        return $this;
-    }
-
     public function getCreatedTime(): ?DateTimeImmutable
     {
         return $this->fields['createdTime'] ?? null;
@@ -239,12 +229,12 @@ class User implements JsonSerializable
         return $this;
     }
 
-    public function getPreferences(): ?object
+    public function getPreferences(): ?array
     {
         return $this->fields['preferences'] ?? null;
     }
 
-    public function setPreferences(null|object $preferences): static
+    public function setPreferences(null|array $preferences): static
     {
         $this->fields['preferences'] = $preferences;
 
@@ -362,6 +352,16 @@ class User implements JsonSerializable
     private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * @param null|string[] $computedPermissions
+     */
+    private function setComputedPermissions(null|array $computedPermissions): static
+    {
+        $this->fields['computedPermissions'] = $computedPermissions;
 
         return $this;
     }

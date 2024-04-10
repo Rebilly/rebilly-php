@@ -17,11 +17,11 @@ use DateTimeImmutable;
 
 interface Quote
 {
+    public function getAction(): string;
+
     public function getId(): ?string;
 
     public function getType(): ?string;
-
-    public function getAction(): string;
 
     /**
      * @return null|string[]
@@ -33,12 +33,11 @@ interface Quote
      */
     public function setAcceptanceConditions(null|array $acceptanceConditions): static;
 
-    /**
-     * @return null|QuoteCreateOrderAcceptanceFulfillment[]
-     */
-    public function getAcceptanceFulfillment(): ?array;
+    public function getSubscriptionId(): ?string;
 
     public function getInvoiceId(): ?string;
+
+    public function getStatus(): ?string;
 
     public function getWebsiteId(): string;
 
@@ -48,19 +47,9 @@ interface Quote
 
     public function setCustomerId(string $customerId): static;
 
-    /**
-     * @return QuoteCreateOrderItems[]
-     */
-    public function getItems(): array;
+    public function getAutopay(): ?bool;
 
-    /**
-     * @param array[]|QuoteCreateOrderItems[] $items
-     */
-    public function setItems(array $items): static;
-
-    public function getInvoicePreview(): ?QuoteCreateOrderInvoicePreview;
-
-    public function setInvoicePreview(null|QuoteCreateOrderInvoicePreview|array $invoicePreview): static;
+    public function setAutopay(null|bool $autopay): static;
 
     public function getPaymentTerms(): ?string;
 
@@ -81,10 +70,6 @@ interface Quote
     public function getRedirectUrl(): ?string;
 
     public function setRedirectUrl(null|string $redirectUrl): static;
-
-    public function getSignature(): ?QuoteCreateOrderSignature;
-
-    public function setSignature(null|QuoteCreateOrderSignature|array $signature): static;
 
     public function getShipping(): ?Shipping;
 
@@ -108,8 +93,4 @@ interface Quote
      * @return null|ResourceLink[]
      */
     public function getLinks(): ?array;
-
-    public function getEmbedded(): ?QuoteCreateOrderEmbedded;
-
-    public function setEmbedded(null|QuoteCreateOrderEmbedded|array $embedded): static;
 }

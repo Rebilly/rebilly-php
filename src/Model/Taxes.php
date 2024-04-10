@@ -18,4 +18,14 @@ interface Taxes
     public function getCalculator(): string;
 
     public function getAmount(): ?int;
+
+    /**
+     * @return null|TaxItem[]
+     */
+    public function getItems(): ?array;
+
+    /**
+     * @param array[]|TaxItem[] $items
+     */
+    public function setItems(array $items): static;
 }

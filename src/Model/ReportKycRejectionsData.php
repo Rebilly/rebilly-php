@@ -17,6 +17,16 @@ use JsonSerializable;
 
 class ReportKycRejectionsData implements JsonSerializable
 {
+    public const DOCUMENT_TYPE_IDENTITY_PROOF = 'identity-proof';
+
+    public const DOCUMENT_TYPE_ADDRESS_PROOF = 'address-proof';
+
+    public const DOCUMENT_TYPE_FUNDS_PROOF = 'funds-proof';
+
+    public const DOCUMENT_TYPE_PURCHASE_PROOF = 'purchase-proof';
+
+    public const DOCUMENT_TYPE_CREDIT_FILE_PROOF = 'credit-file-proof';
+
     private array $fields = [];
 
     public function __construct(array $data = [])

@@ -17,7 +17,7 @@ use JsonSerializable;
 
 class PatchCreditMemo implements JsonSerializable
 {
-    public const REASON__RETURN = 'return';
+    public const REASON_RETURN = 'return';
 
     public const REASON_PRODUCT_UNSATISFACTORY = 'product-unsatisfactory';
 
@@ -61,15 +61,15 @@ class PatchCreditMemo implements JsonSerializable
         return new self($data);
     }
 
-    public function getAllocations(): ?CreditMemoAllocations
+    public function getAllocations(): ?PatchCreditMemoAllocations
     {
         return $this->fields['allocations'] ?? null;
     }
 
-    public function setAllocations(null|CreditMemoAllocations|array $allocations): static
+    public function setAllocations(null|PatchCreditMemoAllocations|array $allocations): static
     {
-        if ($allocations !== null && !($allocations instanceof CreditMemoAllocations)) {
-            $allocations = CreditMemoAllocations::from($allocations);
+        if ($allocations !== null && !($allocations instanceof PatchCreditMemoAllocations)) {
+            $allocations = PatchCreditMemoAllocations::from($allocations);
         }
 
         $this->fields['allocations'] = $allocations;
@@ -78,7 +78,7 @@ class PatchCreditMemo implements JsonSerializable
     }
 
     /**
-     * @return null|CreditMemoItems[]
+     * @return null|PatchCreditMemoItems[]
      */
     public function getItems(): ?array
     {
@@ -86,12 +86,12 @@ class PatchCreditMemo implements JsonSerializable
     }
 
     /**
-     * @param null|array[]|CreditMemoItems[] $items
+     * @param null|array[]|PatchCreditMemoItems[] $items
      */
     public function setItems(null|array $items): static
     {
         $items = $items !== null ? array_map(
-            fn ($value) => $value instanceof CreditMemoItems ? $value : CreditMemoItems::from($value),
+            fn ($value) => $value instanceof PatchCreditMemoItems ? $value : PatchCreditMemoItems::from($value),
             $items,
         ) : null;
 

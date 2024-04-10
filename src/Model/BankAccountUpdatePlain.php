@@ -45,18 +45,6 @@ class BankAccountUpdatePlain implements PatchPaymentInstrumentRequest, JsonSeria
         if (array_key_exists('useAsBackup', $data)) {
             $this->setUseAsBackup($data['useAsBackup']);
         }
-        if (array_key_exists('expMonth', $data)) {
-            $this->setExpMonth($data['expMonth']);
-        }
-        if (array_key_exists('cvv', $data)) {
-            $this->setCvv($data['cvv']);
-        }
-        if (array_key_exists('expYear', $data)) {
-            $this->setExpYear($data['expYear']);
-        }
-        if (array_key_exists('token', $data)) {
-            $this->setToken($data['token']);
-        }
     }
 
     public static function from(array $data = []): self
@@ -140,54 +128,6 @@ class BankAccountUpdatePlain implements PatchPaymentInstrumentRequest, JsonSeria
         return $this;
     }
 
-    public function getExpMonth(): ?int
-    {
-        return $this->fields['expMonth'] ?? null;
-    }
-
-    public function setExpMonth(null|int $expMonth): static
-    {
-        $this->fields['expMonth'] = $expMonth;
-
-        return $this;
-    }
-
-    public function getCvv(): ?string
-    {
-        return $this->fields['cvv'] ?? null;
-    }
-
-    public function setCvv(null|string $cvv): static
-    {
-        $this->fields['cvv'] = $cvv;
-
-        return $this;
-    }
-
-    public function getExpYear(): ?int
-    {
-        return $this->fields['expYear'] ?? null;
-    }
-
-    public function setExpYear(null|int $expYear): static
-    {
-        $this->fields['expYear'] = $expYear;
-
-        return $this;
-    }
-
-    public function getToken(): ?string
-    {
-        return $this->fields['token'] ?? null;
-    }
-
-    public function setToken(null|string $token): static
-    {
-        $this->fields['token'] = $token;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [];
@@ -208,18 +148,6 @@ class BankAccountUpdatePlain implements PatchPaymentInstrumentRequest, JsonSeria
         }
         if (array_key_exists('useAsBackup', $this->fields)) {
             $data['useAsBackup'] = $this->fields['useAsBackup'];
-        }
-        if (array_key_exists('expMonth', $this->fields)) {
-            $data['expMonth'] = $this->fields['expMonth'];
-        }
-        if (array_key_exists('cvv', $this->fields)) {
-            $data['cvv'] = $this->fields['cvv'];
-        }
-        if (array_key_exists('expYear', $this->fields)) {
-            $data['expYear'] = $this->fields['expYear'];
-        }
-        if (array_key_exists('token', $this->fields)) {
-            $data['token'] = $this->fields['token'];
         }
 
         return $data;

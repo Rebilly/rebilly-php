@@ -17,6 +17,38 @@ use JsonSerializable;
 
 class AmlSettingsPriorityEnforcements implements JsonSerializable
 {
+    public const VERY_STRONG_P0 = 'p0';
+
+    public const VERY_STRONG_P1 = 'p1';
+
+    public const VERY_STRONG_P2 = 'p2';
+
+    public const VERY_STRONG_P3 = 'p3';
+
+    public const STRONG_P0 = 'p0';
+
+    public const STRONG_P1 = 'p1';
+
+    public const STRONG_P2 = 'p2';
+
+    public const STRONG_P3 = 'p3';
+
+    public const MEDIUM_P0 = 'p0';
+
+    public const MEDIUM_P1 = 'p1';
+
+    public const MEDIUM_P2 = 'p2';
+
+    public const MEDIUM_P3 = 'p3';
+
+    public const WEAK_P0 = 'p0';
+
+    public const WEAK_P1 = 'p1';
+
+    public const WEAK_P2 = 'p2';
+
+    public const WEAK_P3 = 'p3';
+
     private array $fields = [];
 
     public function __construct(array $data = [])

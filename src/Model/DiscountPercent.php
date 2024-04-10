@@ -17,6 +17,12 @@ use JsonSerializable;
 
 class DiscountPercent implements Discount, JsonSerializable
 {
+    public const CONTEXT_ITEMS = 'items';
+
+    public const CONTEXT_SHIPPING = 'shipping';
+
+    public const CONTEXT_ITEMS_AND_SHIPPING = 'items-and-shipping';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -26,12 +32,6 @@ class DiscountPercent implements Discount, JsonSerializable
         }
         if (array_key_exists('context', $data)) {
             $this->setContext($data['context']);
-        }
-        if (array_key_exists('amount', $data)) {
-            $this->setAmount($data['amount']);
-        }
-        if (array_key_exists('currency', $data)) {
-            $this->setCurrency($data['currency']);
         }
     }
 
@@ -73,34 +73,6 @@ class DiscountPercent implements Discount, JsonSerializable
         return $this;
     }
 
-    public function getAmount(): float
-    {
-        return $this->fields['amount'];
-    }
-
-    public function setAmount(float|string $amount): static
-    {
-        if (is_string($amount)) {
-            $amount = (float) $amount;
-        }
-
-        $this->fields['amount'] = $amount;
-
-        return $this;
-    }
-
-    public function getCurrency(): string
-    {
-        return $this->fields['currency'];
-    }
-
-    public function setCurrency(string $currency): static
-    {
-        $this->fields['currency'] = $currency;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [
@@ -111,12 +83,6 @@ class DiscountPercent implements Discount, JsonSerializable
         }
         if (array_key_exists('context', $this->fields)) {
             $data['context'] = $this->fields['context'];
-        }
-        if (array_key_exists('amount', $this->fields)) {
-            $data['amount'] = $this->fields['amount'];
-        }
-        if (array_key_exists('currency', $this->fields)) {
-            $data['currency'] = $this->fields['currency'];
         }
 
         return $data;

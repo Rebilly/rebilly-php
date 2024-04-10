@@ -17,37 +17,37 @@ use JsonSerializable;
 
 class ThreeDSecureIO3dsServer implements TestProcessor3dsServers, JsonSerializable
 {
-    public const TRANSACTION_TYPE__01 = '01';
+    public const TRANSACTION_TYPE_01 = '01';
 
-    public const TRANSACTION_TYPE__03 = '03';
+    public const TRANSACTION_TYPE_03 = '03';
 
-    public const TRANSACTION_TYPE__10 = '10';
+    public const TRANSACTION_TYPE_10 = '10';
 
-    public const TRANSACTION_TYPE__11 = '11';
+    public const TRANSACTION_TYPE_11 = '11';
 
-    public const TRANSACTION_TYPE__28 = '28';
+    public const TRANSACTION_TYPE_28 = '28';
 
-    public const THREE_RI_IND__01 = '01';
+    public const THREE_RI_IND_01 = '01';
 
-    public const THREE_RI_IND__02 = '02';
+    public const THREE_RI_IND_02 = '02';
 
-    public const THREE_RI_IND__03 = '03';
+    public const THREE_RI_IND_03 = '03';
 
-    public const THREE_RI_IND__04 = '04';
+    public const THREE_RI_IND_04 = '04';
 
-    public const THREE_RI_IND__05 = '05';
+    public const THREE_RI_IND_05 = '05';
 
-    public const THREE_RI_IND__06 = '06';
+    public const THREE_RI_IND_06 = '06';
 
-    public const THREE_RI_IND__07 = '07';
+    public const THREE_RI_IND_07 = '07';
 
-    public const THREE_RI_IND__08 = '08';
+    public const THREE_RI_IND_08 = '08';
 
-    public const THREE_RI_IND__09 = '09';
+    public const THREE_RI_IND_09 = '09';
 
-    public const THREE_RI_IND__10 = '10';
+    public const THREE_RI_IND_10 = '10';
 
-    public const THREE_RI_IND__11 = '11';
+    public const THREE_RI_IND_11 = '11';
 
     private array $fields = [];
 

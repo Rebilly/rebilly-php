@@ -234,15 +234,15 @@ class InvoiceItemsDataExport implements DataExport, JsonSerializable
         return $this->fields['status'] ?? null;
     }
 
-    public function getDateRange(): ?InvoicesDataExportDateRange
+    public function getDateRange(): ?DataExportDateRange
     {
         return $this->fields['dateRange'] ?? null;
     }
 
-    public function setDateRange(null|InvoicesDataExportDateRange|array $dateRange): static
+    public function setDateRange(null|DataExportDateRange|array $dateRange): static
     {
-        if ($dateRange !== null && !($dateRange instanceof InvoicesDataExportDateRange)) {
-            $dateRange = InvoicesDataExportDateRange::from($dateRange);
+        if ($dateRange !== null && !($dateRange instanceof DataExportDateRange)) {
+            $dateRange = DataExportDateRange::from($dateRange);
         }
 
         $this->fields['dateRange'] = $dateRange;
@@ -258,15 +258,15 @@ class InvoiceItemsDataExport implements DataExport, JsonSerializable
         return $this->fields['_links'] ?? null;
     }
 
-    public function getEmbedded(): ?CustomersDataExportEmbedded
+    public function getEmbedded(): ?InvoiceItemsDataExportEmbedded
     {
         return $this->fields['_embedded'] ?? null;
     }
 
-    public function setEmbedded(null|CustomersDataExportEmbedded|array $embedded): static
+    public function setEmbedded(null|InvoiceItemsDataExportEmbedded|array $embedded): static
     {
-        if ($embedded !== null && !($embedded instanceof CustomersDataExportEmbedded)) {
-            $embedded = CustomersDataExportEmbedded::from($embedded);
+        if ($embedded !== null && !($embedded instanceof InvoiceItemsDataExportEmbedded)) {
+            $embedded = InvoiceItemsDataExportEmbedded::from($embedded);
         }
 
         $this->fields['_embedded'] = $embedded;

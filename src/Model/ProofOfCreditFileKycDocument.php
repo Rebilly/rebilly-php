@@ -19,6 +19,60 @@ use JsonSerializable;
 
 class ProofOfCreditFileKycDocument implements KycDocument, JsonSerializable
 {
+    public const DOCUMENT_SUBTYPE_PASSPORT = 'passport';
+
+    public const DOCUMENT_SUBTYPE_ID_CARD = 'id-card';
+
+    public const DOCUMENT_SUBTYPE_DRIVER_LICENSE = 'driver-license';
+
+    public const DOCUMENT_SUBTYPE_BIRTH_CERTIFICATE = 'birth-certificate';
+
+    public const DOCUMENT_SUBTYPE_UTILITY_BILL = 'utility-bill';
+
+    public const DOCUMENT_SUBTYPE_RENTAL_RECEIPT = 'rental-receipt';
+
+    public const DOCUMENT_SUBTYPE_LEASE_AGREEMENT = 'lease-agreement';
+
+    public const DOCUMENT_SUBTYPE_COPY_CREDIT_CARD = 'copy-credit-card';
+
+    public const DOCUMENT_SUBTYPE_CREDIT_CARD_STATEMENT = 'credit-card-statement';
+
+    public const DOCUMENT_SUBTYPE_BANK_STATEMENT = 'bank-statement';
+
+    public const DOCUMENT_SUBTYPE_INHERITANCE_DOCUMENTATION = 'inheritance-documentation';
+
+    public const DOCUMENT_SUBTYPE_TAX_RETURN = 'tax-return';
+
+    public const DOCUMENT_SUBTYPE_SALARY_SLIP = 'salary-slip';
+
+    public const DOCUMENT_SUBTYPE_SALE_OF_ASSETS = 'sale-of-assets';
+
+    public const DOCUMENT_SUBTYPE_PUBLIC_HEALTH_CARD = 'public-health-card';
+
+    public const DOCUMENT_SUBTYPE_PROOF_OF_AGE_CARD = 'proof-of-age-card';
+
+    public const DOCUMENT_SUBTYPE_REVERSE_OF_ID = 'reverse-of-id';
+
+    public const DOCUMENT_SUBTYPE_PUBLIC_SERVICE = 'public-service';
+
+    public const DOCUMENT_SUBTYPE_EWALLET_HOLDER_DETAILS = 'ewallet-holder-details';
+
+    public const DOCUMENT_SUBTYPE_EWALLET_TRANSACTION_STATEMENT = 'ewallet-transaction-statement';
+
+    public const DOCUMENT_SUBTYPE_MARRIAGE_CERTIFICATE = 'marriage-certificate';
+
+    public const DOCUMENT_SUBTYPE_FIREARMS_LICENSE = 'firearms-license';
+
+    public const DOCUMENT_SUBTYPE_INSURANCE_LETTER = 'insurance-letter';
+
+    public const DOCUMENT_SUBTYPE_INCOME_STATEMENT = 'income-statement';
+
+    public const DOCUMENT_SUBTYPE_DEBTORS_LETTER = 'debtors-letter';
+
+    public const DOCUMENT_SUBTYPE_OTHER = 'other';
+
+    public const DOCUMENT_SUBTYPE_NULL = 'null';
+
     public const STATUS_PENDING = 'pending';
 
     public const STATUS_IN_PROGRESS = 'in-progress';
@@ -101,9 +155,6 @@ class ProofOfCreditFileKycDocument implements KycDocument, JsonSerializable
         }
         if (array_key_exists('_embedded', $data)) {
             $this->setEmbedded($data['_embedded']);
-        }
-        if (array_key_exists('parsedData', $data)) {
-            $this->setParsedData($data['parsedData']);
         }
     }
 
@@ -269,12 +320,12 @@ class ProofOfCreditFileKycDocument implements KycDocument, JsonSerializable
         return $this;
     }
 
-    public function getSettings(): ?object
+    public function getSettings(): ?array
     {
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|object $settings): static
+    public function setSettings(null|array $settings): static
     {
         $this->fields['settings'] = $settings;
 
@@ -310,34 +361,18 @@ class ProofOfCreditFileKycDocument implements KycDocument, JsonSerializable
         return $this->fields['_links'] ?? null;
     }
 
-    public function getEmbedded(): ?ProofOfIdentityKycDocumentEmbedded
+    public function getEmbedded(): ?ProofOfCreditFileKycDocumentEmbedded
     {
         return $this->fields['_embedded'] ?? null;
     }
 
-    public function setEmbedded(null|ProofOfIdentityKycDocumentEmbedded|array $embedded): static
+    public function setEmbedded(null|ProofOfCreditFileKycDocumentEmbedded|array $embedded): static
     {
-        if ($embedded !== null && !($embedded instanceof ProofOfIdentityKycDocumentEmbedded)) {
-            $embedded = ProofOfIdentityKycDocumentEmbedded::from($embedded);
+        if ($embedded !== null && !($embedded instanceof ProofOfCreditFileKycDocumentEmbedded)) {
+            $embedded = ProofOfCreditFileKycDocumentEmbedded::from($embedded);
         }
 
         $this->fields['_embedded'] = $embedded;
-
-        return $this;
-    }
-
-    public function getParsedData(): ?ProofOfPurchaseKycDocumentParsedData
-    {
-        return $this->fields['parsedData'] ?? null;
-    }
-
-    public function setParsedData(null|ProofOfPurchaseKycDocumentParsedData|array $parsedData): static
-    {
-        if ($parsedData !== null && !($parsedData instanceof ProofOfPurchaseKycDocumentParsedData)) {
-            $parsedData = ProofOfPurchaseKycDocumentParsedData::from($parsedData);
-        }
-
-        $this->fields['parsedData'] = $parsedData;
 
         return $this;
     }
@@ -415,9 +450,6 @@ class ProofOfCreditFileKycDocument implements KycDocument, JsonSerializable
         }
         if (array_key_exists('_embedded', $this->fields)) {
             $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();
-        }
-        if (array_key_exists('parsedData', $this->fields)) {
-            $data['parsedData'] = $this->fields['parsedData']?->jsonSerialize();
         }
 
         return $data;

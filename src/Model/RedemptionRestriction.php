@@ -15,4 +15,5 @@ namespace Rebilly\Sdk\Model;
 
 interface RedemptionRestriction
 {
+    public function getType(): string;
 }

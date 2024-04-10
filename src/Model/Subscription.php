@@ -98,6 +98,9 @@ class Subscription implements SubscriptionOrOneTimeSale, JsonSerializable
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
         }
+        if (array_key_exists('orderId', $data)) {
+            $this->setOrderId($data['orderId']);
+        }
         if (array_key_exists('customerId', $data)) {
             $this->setCustomerId($data['customerId']);
         }
@@ -265,6 +268,11 @@ class Subscription implements SubscriptionOrOneTimeSale, JsonSerializable
         return $this->fields['id'] ?? null;
     }
 
+    public function getOrderId(): ?string
+    {
+        return $this->fields['orderId'] ?? null;
+    }
+
     public function getCustomerId(): string
     {
         return $this->fields['customerId'];
@@ -310,13 +318,6 @@ class Subscription implements SubscriptionOrOneTimeSale, JsonSerializable
     public function getOrganizationId(): ?string
     {
         return $this->fields['organizationId'] ?? null;
-    }
-
-    public function setOrganizationId(null|string $organizationId): static
-    {
-        $this->fields['organizationId'] = $organizationId;
-
-        return $this;
     }
 
     public function getStatus(): ?string
@@ -504,13 +505,6 @@ class Subscription implements SubscriptionOrOneTimeSale, JsonSerializable
     public function getCurrency(): ?string
     {
         return $this->fields['currency'] ?? null;
-    }
-
-    public function setCurrency(null|string $currency): static
-    {
-        $this->fields['currency'] = $currency;
-
-        return $this;
     }
 
     public function getInitialInvoiceId(): ?string
@@ -769,6 +763,9 @@ class Subscription implements SubscriptionOrOneTimeSale, JsonSerializable
         if (array_key_exists('id', $this->fields)) {
             $data['id'] = $this->fields['id'];
         }
+        if (array_key_exists('orderId', $this->fields)) {
+            $data['orderId'] = $this->fields['orderId'];
+        }
         if (array_key_exists('customerId', $this->fields)) {
             $data['customerId'] = $this->fields['customerId'];
         }
@@ -930,6 +927,13 @@ class Subscription implements SubscriptionOrOneTimeSale, JsonSerializable
         return $this;
     }
 
+    private function setOrderId(null|string $orderId): static
+    {
+        $this->fields['orderId'] = $orderId;
+
+        return $this;
+    }
+
     private function setRenewalReminderTime(null|DateTimeImmutable|string $renewalReminderTime): static
     {
         if ($renewalReminderTime !== null && !($renewalReminderTime instanceof DateTimeImmutable)) {
@@ -980,6 +984,13 @@ class Subscription implements SubscriptionOrOneTimeSale, JsonSerializable
     private function setAbandonReminderNumber(null|int $abandonReminderNumber): static
     {
         $this->fields['abandonReminderNumber'] = $abandonReminderNumber;
+
+        return $this;
+    }
+
+    private function setOrganizationId(null|string $organizationId): static
+    {
+        $this->fields['organizationId'] = $organizationId;
 
         return $this;
     }
@@ -1041,6 +1052,13 @@ class Subscription implements SubscriptionOrOneTimeSale, JsonSerializable
     private function setBillingStatus(null|string $billingStatus): static
     {
         $this->fields['billingStatus'] = $billingStatus;
+
+        return $this;
+    }
+
+    private function setCurrency(null|string $currency): static
+    {
+        $this->fields['currency'] = $currency;
 
         return $this;
     }

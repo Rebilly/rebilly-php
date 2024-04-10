@@ -52,7 +52,7 @@ class ApplePayValidation extends DigitalWalletValidation
         return $this;
     }
 
-    public function getValidationResponse(): ?object
+    public function getValidationResponse(): ?array
     {
         return $this->fields['validationResponse'] ?? null;
     }
@@ -70,7 +70,7 @@ class ApplePayValidation extends DigitalWalletValidation
         return parent::jsonSerialize() + $data;
     }
 
-    private function setValidationResponse(null|object $validationResponse): static
+    private function setValidationResponse(null|array $validationResponse): static
     {
         $this->fields['validationResponse'] = $validationResponse;
 

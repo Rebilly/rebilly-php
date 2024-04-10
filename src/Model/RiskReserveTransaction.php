@@ -56,9 +56,6 @@ class RiskReserveTransaction implements BalanceTransaction, JsonSerializable
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
-        if (array_key_exists('fee', $data)) {
-            $this->setFee($data['fee']);
-        }
     }
 
     public static function from(array $data = []): self
@@ -183,22 +180,6 @@ class RiskReserveTransaction implements BalanceTransaction, JsonSerializable
         return $this->fields['_links'] ?? null;
     }
 
-    public function getFee(): ?BuyFeeTransactionFee
-    {
-        return $this->fields['fee'] ?? null;
-    }
-
-    public function setFee(null|BuyFeeTransactionFee|array $fee): static
-    {
-        if ($fee !== null && !($fee instanceof BuyFeeTransactionFee)) {
-            $fee = BuyFeeTransactionFee::from($fee);
-        }
-
-        $this->fields['fee'] = $fee;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [
@@ -236,9 +217,6 @@ class RiskReserveTransaction implements BalanceTransaction, JsonSerializable
         }
         if (array_key_exists('_links', $this->fields)) {
             $data['_links'] = $this->fields['_links'];
-        }
-        if (array_key_exists('fee', $this->fields)) {
-            $data['fee'] = $this->fields['fee']?->jsonSerialize();
         }
 
         return $data;

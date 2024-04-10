@@ -127,7 +127,7 @@ class KycRequestsApi
      */
     public function update(
         string $id,
-        ?PatchKycRequestRequest $patchKycRequestRequest = null,
+        PatchKycRequestRequest $patchKycRequestRequest,
     ): KycRequest {
         $pathParams = [
             '{id}' => $id,

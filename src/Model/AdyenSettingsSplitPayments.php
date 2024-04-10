@@ -75,8 +75,12 @@ class AdyenSettingsSplitPayments implements JsonSerializable
         return $this->fields['commissionAmount'] ?? null;
     }
 
-    public function setCommissionAmount(null|float $commissionAmount): static
+    public function setCommissionAmount(null|float|string $commissionAmount): static
     {
+        if (is_string($commissionAmount)) {
+            $commissionAmount = (float) $commissionAmount;
+        }
+
         $this->fields['commissionAmount'] = $commissionAmount;
 
         return $this;

@@ -22,6 +22,10 @@ abstract class GatewayAccountPickInstruction implements JsonSerializable
 
     public const STRATEGY_ROUND_ROBIN = 'round-robin';
 
+    public const METHOD_ACCOUNT_WEIGHTS = 'gateway-account-weights';
+
+    public const METHOD_ACQUIRER_WEIGHTS = 'gateway-acquirer-weights';
+
     private array $fields = [];
 
     protected function __construct(array $data = [])
@@ -38,9 +42,9 @@ abstract class GatewayAccountPickInstruction implements JsonSerializable
     {
         switch ($data['method']) {
             case 'gateway-account-weights':
-                return new PickInstructionGatewayAccountWeights($data);
+                return PickInstructionGatewayAccountWeights::from($data);
             case 'gateway-acquirer-weights':
-                return new PickInstructionGatewayAcquirerWeights($data);
+                return PickInstructionGatewayAcquirerWeights::from($data);
         }
 
         throw new InvalidArgumentException("Unsupported method value: '{$data['method']}'");

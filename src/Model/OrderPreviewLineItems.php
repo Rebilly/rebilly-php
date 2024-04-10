@@ -98,8 +98,12 @@ class OrderPreviewLineItems implements JsonSerializable
         return $this->fields['quantity'] ?? null;
     }
 
-    public function setQuantity(null|float $quantity): static
+    public function setQuantity(null|float|string $quantity): static
     {
+        if (is_string($quantity)) {
+            $quantity = (float) $quantity;
+        }
+
         $this->fields['quantity'] = $quantity;
 
         return $this;

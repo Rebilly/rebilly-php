@@ -31,7 +31,7 @@ class OrganizationExportsApi
      * @return OrganizationExport
      */
     public function create(
-        ?PostOrganizationExportRequest $postOrganizationExportRequest = null,
+        PostOrganizationExportRequest $postOrganizationExportRequest,
     ): OrganizationExport {
         $uri = '/organization-exports';
 

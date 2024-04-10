@@ -77,6 +77,9 @@ class DepositRequest implements JsonSerializable
         if (array_key_exists('notificationUrl', $data)) {
             $this->setNotificationUrl($data['notificationUrl']);
         }
+        if (array_key_exists('customFields', $data)) {
+            $this->setCustomFields($data['customFields']);
+        }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
         }
@@ -174,10 +177,15 @@ class DepositRequest implements JsonSerializable
     }
 
     /**
-     * @param null|float[] $amounts
+     * @param null|float[]|string[] $amounts
      */
     public function setAmounts(null|array $amounts): static
     {
+        $amounts = $amounts !== null ? array_map(
+            fn ($value) => is_string($value) ? (float) $value : $value,
+            $amounts,
+        ) : null;
+
         $this->fields['amounts'] = $amounts;
 
         return $this;
@@ -227,7 +235,7 @@ class DepositRequest implements JsonSerializable
         return $this;
     }
 
-    public function getPropertiesSchema(): ?object
+    public function getPropertiesSchema(): ?array
     {
         return $this->fields['propertiesSchema'] ?? null;
     }
@@ -248,6 +256,18 @@ class DepositRequest implements JsonSerializable
     public function setNotificationUrl(null|string $notificationUrl): static
     {
         $this->fields['notificationUrl'] = $notificationUrl;
+
+        return $this;
+    }
+
+    public function getCustomFields(): ?array
+    {
+        return $this->fields['customFields'] ?? null;
+    }
+
+    public function setCustomFields(null|array $customFields): static
+    {
+        $this->fields['customFields'] = $customFields;
 
         return $this;
     }
@@ -327,98 +347,101 @@ class DepositRequest implements JsonSerializable
         }
         if (array_key_exists('properties', $this->fields)) {
             $data['properties'] = $this->fields['properties'];
-        }
-        if (array_key_exists('notificationUrl', $this->fields)) {
-            $data['notificationUrl'] = $this->fields['notificationUrl'];
-        }
-        if (array_key_exists('createdTime', $this->fields)) {
-            $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
-        }
-        if (array_key_exists('updatedTime', $this->fields)) {
-            $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
-        }
-        if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
-        }
-        if (array_key_exists('_embedded', $this->fields)) {
-            $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();
-        }
+            }
+            if (array_key_exists('notificationUrl', $this->fields)) {
+                $data['notificationUrl'] = $this->fields['notificationUrl'];
+            }
+            if (array_key_exists('customFields', $this->fields)) {
+                $data['customFields'] = $this->fields['customFields'];
+            }
+            if (array_key_exists('createdTime', $this->fields)) {
+                $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
+            }
+            if (array_key_exists('updatedTime', $this->fields)) {
+                $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
+            }
+            if (array_key_exists('_links', $this->fields)) {
+                $data['_links'] = $this->fields['_links'];
+            }
+            if (array_key_exists('_embedded', $this->fields)) {
+                $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();
+            }
 
-        return $data;
-    }
+            return $data;
+            }
 
-    private function setId(null|string $id): static
-    {
-        $this->fields['id'] = $id;
+            private function setId(null|string $id): static
+            {
+                $this->fields['id'] = $id;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setTransactionId(null|string $transactionId): static
-    {
-        $this->fields['transactionId'] = $transactionId;
+            private function setTransactionId(null|string $transactionId): static
+            {
+                $this->fields['transactionId'] = $transactionId;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setStatus(null|string $status): static
-    {
-        $this->fields['status'] = $status;
+            private function setStatus(null|string $status): static
+            {
+                $this->fields['status'] = $status;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setPropertiesSchema(null|object $propertiesSchema): static
-    {
-        $this->fields['propertiesSchema'] = $propertiesSchema;
+            private function setPropertiesSchema(null|array $propertiesSchema): static
+            {
+                $this->fields['propertiesSchema'] = $propertiesSchema;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    /**
-     * @param null|array<string,string> $properties
-     */
-    private function setProperties(null|array $properties): static
-    {
-        $this->fields['properties'] = $properties;
+            /**
+             * @param null|array<string,string> $properties
+             */
+            private function setProperties(null|array $properties): static
+            {
+                $this->fields['properties'] = $properties;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
-    {
-        if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
-            $createdTime = new DateTimeImmutable($createdTime);
-        }
+            private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
+            {
+                if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
+                    $createdTime = new DateTimeImmutable($createdTime);
+                }
 
-        $this->fields['createdTime'] = $createdTime;
+                $this->fields['createdTime'] = $createdTime;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
-    {
-        if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
-            $updatedTime = new DateTimeImmutable($updatedTime);
-        }
+            private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
+            {
+                if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
+                    $updatedTime = new DateTimeImmutable($updatedTime);
+                }
 
-        $this->fields['updatedTime'] = $updatedTime;
+                $this->fields['updatedTime'] = $updatedTime;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    /**
-     * @param null|array[]|ResourceLink[] $links
-     */
-    private function setLinks(null|array $links): static
-    {
-        $links = $links !== null ? array_map(
-            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
-            $links,
-        ) : null;
+            /**
+             * @param null|array[]|ResourceLink[] $links
+             */
+            private function setLinks(null|array $links): static
+            {
+                $links = $links !== null ? array_map(
+                    fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+                    $links,
+                ) : null;
 
-        $this->fields['_links'] = $links;
+                $this->fields['_links'] = $links;
 
-        return $this;
-    }
+                return $this;
+            }
 }

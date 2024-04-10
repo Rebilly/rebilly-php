@@ -27,8 +27,8 @@ class QuoteCreateOrderEmbedded implements JsonSerializable
         if (array_key_exists('website', $data)) {
             $this->setWebsite($data['website']);
         }
-        if (array_key_exists('order', $data)) {
-            $this->setOrder($data['order']);
+        if (array_key_exists('subscription', $data)) {
+            $this->setSubscription($data['subscription']);
         }
         if (array_key_exists('invoice', $data)) {
             $this->setInvoice($data['invoice']);
@@ -40,49 +40,65 @@ class QuoteCreateOrderEmbedded implements JsonSerializable
         return new self($data);
     }
 
-    public function getCustomer(): ?object
+    public function getCustomer(): ?Customer
     {
         return $this->fields['customer'] ?? null;
     }
 
-    public function setCustomer(null|object $customer): static
+    public function setCustomer(null|Customer|array $customer): static
     {
+        if ($customer !== null && !($customer instanceof Customer)) {
+            $customer = Customer::from($customer);
+        }
+
         $this->fields['customer'] = $customer;
 
         return $this;
     }
 
-    public function getWebsite(): ?object
+    public function getWebsite(): ?Website
     {
         return $this->fields['website'] ?? null;
     }
 
-    public function setWebsite(null|object $website): static
+    public function setWebsite(null|Website|array $website): static
     {
+        if ($website !== null && !($website instanceof Website)) {
+            $website = Website::from($website);
+        }
+
         $this->fields['website'] = $website;
 
         return $this;
     }
 
-    public function getOrder(): ?object
+    public function getSubscription(): ?Subscription
     {
-        return $this->fields['order'] ?? null;
+        return $this->fields['subscription'] ?? null;
     }
 
-    public function setOrder(null|object $order): static
+    public function setSubscription(null|Subscription|array $subscription): static
     {
-        $this->fields['order'] = $order;
+        if ($subscription !== null && !($subscription instanceof Subscription)) {
+            $subscription = Subscription::from($subscription);
+        }
+
+        $this->fields['subscription'] = $subscription;
 
         return $this;
     }
 
-    public function getInvoice(): ?object
+    public function getInvoice(): ?Invoice
     {
         return $this->fields['invoice'] ?? null;
     }
 
-    public function setInvoice(null|object $invoice): static
+    public function setInvoice(null|Invoice|array $invoice): static
     {
+        if ($invoice !== null && !($invoice instanceof Invoice)) {
+            $invoice = Invoice::from($invoice);
+        }
+
         $this->fields['invoice'] = $invoice;
 
         return $this;
@@ -92,16 +108,16 @@ class QuoteCreateOrderEmbedded implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('customer', $this->fields)) {
-            $data['customer'] = $this->fields['customer'];
+            $data['customer'] = $this->fields['customer']?->jsonSerialize();
         }
         if (array_key_exists('website', $this->fields)) {
-            $data['website'] = $this->fields['website'];
+            $data['website'] = $this->fields['website']?->jsonSerialize();
         }
-        if (array_key_exists('order', $this->fields)) {
-            $data['order'] = $this->fields['order'];
+        if (array_key_exists('subscription', $this->fields)) {
+            $data['subscription'] = $this->fields['subscription']?->jsonSerialize();
         }
         if (array_key_exists('invoice', $this->fields)) {
-            $data['invoice'] = $this->fields['invoice'];
+            $data['invoice'] = $this->fields['invoice']?->jsonSerialize();
         }
 
         return $data;

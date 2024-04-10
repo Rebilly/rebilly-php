@@ -21,6 +21,34 @@ class DigitalWalletTokenPaymentInstrument implements JsonSerializable
 
     public const TYPE_GOOGLE_PAY = 'Google Pay';
 
+    public const BRAND_VISA = 'Visa';
+
+    public const BRAND_MASTER_CARD = 'MasterCard';
+
+    public const BRAND_AMERICAN_EXPRESS = 'American Express';
+
+    public const BRAND_DISCOVER = 'Discover';
+
+    public const BRAND_MAESTRO = 'Maestro';
+
+    public const BRAND_SOLO = 'Solo';
+
+    public const BRAND_ELECTRON = 'Electron';
+
+    public const BRAND_JCB = 'JCB';
+
+    public const BRAND_VOYAGER = 'Voyager';
+
+    public const BRAND_DINERS_CLUB = 'Diners Club';
+
+    public const BRAND_SWITCH = 'Switch';
+
+    public const BRAND_LASER = 'Laser';
+
+    public const BRAND_CHINA_UNION_PAY = 'China UnionPay';
+
+    public const BRAND_ASTRO_PAY_CARD = 'AstroPay Card';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -129,13 +157,6 @@ class DigitalWalletTokenPaymentInstrument implements JsonSerializable
         return $this->fields['brand'] ?? null;
     }
 
-    public function setBrand(null|string $brand): static
-    {
-        $this->fields['brand'] = $brand;
-
-        return $this;
-    }
-
     public function getExpMonth(): ?int
     {
         return $this->fields['expMonth'] ?? null;
@@ -146,12 +167,12 @@ class DigitalWalletTokenPaymentInstrument implements JsonSerializable
         return $this->fields['expYear'] ?? null;
     }
 
-    public function getPayload(): object
+    public function getPayload(): array
     {
         return $this->fields['payload'];
     }
 
-    public function setPayload(object $payload): static
+    public function setPayload(array $payload): static
     {
         $this->fields['payload'] = $payload;
 
@@ -205,6 +226,13 @@ class DigitalWalletTokenPaymentInstrument implements JsonSerializable
     private function setLast4(null|string $last4): static
     {
         $this->fields['last4'] = $last4;
+
+        return $this;
+    }
+
+    private function setBrand(null|string $brand): static
+    {
+        $this->fields['brand'] = $brand;
 
         return $this;
     }

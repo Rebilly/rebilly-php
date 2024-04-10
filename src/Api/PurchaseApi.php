@@ -30,7 +30,7 @@ class PurchaseApi
      * @return ReadyToPayMethods[]
      */
     public function readyToPay(
-        ?PostReadyToPay $postReadyToPay = null,
+        PostReadyToPay $postReadyToPay,
     ): array {
         $uri = '/ready-to-pay';
 

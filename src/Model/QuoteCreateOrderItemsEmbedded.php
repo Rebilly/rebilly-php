@@ -31,13 +31,17 @@ class QuoteCreateOrderItemsEmbedded implements JsonSerializable
         return new self($data);
     }
 
-    public function getProduct(): ?object
+    public function getProduct(): ?Product
     {
         return $this->fields['product'] ?? null;
     }
 
-    public function setProduct(null|object $product): static
+    public function setProduct(null|Product|array $product): static
     {
+        if ($product !== null && !($product instanceof Product)) {
+            $product = Product::from($product);
+        }
+
         $this->fields['product'] = $product;
 
         return $this;
@@ -47,7 +51,7 @@ class QuoteCreateOrderItemsEmbedded implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('product', $this->fields)) {
-            $data['product'] = $this->fields['product'];
+            $data['product'] = $this->fields['product']?->jsonSerialize();
         }
 
         return $data;

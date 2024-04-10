@@ -39,10 +39,6 @@ class QuoteCreateOrder implements Quote, JsonSerializable
 
     public const STATUS_EXPIRED = 'expired';
 
-    public const RENEWAL_POLICY_RESET = 'reset';
-
-    public const RENEWAL_POLICY_RETAIN = 'retain';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -59,8 +55,8 @@ class QuoteCreateOrder implements Quote, JsonSerializable
         if (array_key_exists('acceptanceFulfillment', $data)) {
             $this->setAcceptanceFulfillment($data['acceptanceFulfillment']);
         }
-        if (array_key_exists('orderId', $data)) {
-            $this->setOrderId($data['orderId']);
+        if (array_key_exists('subscriptionId', $data)) {
+            $this->setSubscriptionId($data['subscriptionId']);
         }
         if (array_key_exists('invoiceId', $data)) {
             $this->setInvoiceId($data['invoiceId']);
@@ -128,30 +124,6 @@ class QuoteCreateOrder implements Quote, JsonSerializable
         if (array_key_exists('_embedded', $data)) {
             $this->setEmbedded($data['_embedded']);
         }
-        if (array_key_exists('interimOnly', $data)) {
-            $this->setInterimOnly($data['interimOnly']);
-        }
-        if (array_key_exists('effectiveTime', $data)) {
-            $this->setEffectiveTime($data['effectiveTime']);
-        }
-        if (array_key_exists('renewalPolicy', $data)) {
-            $this->setRenewalPolicy($data['renewalPolicy']);
-        }
-        if (array_key_exists('renewalTime', $data)) {
-            $this->setRenewalTime($data['renewalTime']);
-        }
-        if (array_key_exists('prorated', $data)) {
-            $this->setProrated($data['prorated']);
-        }
-        if (array_key_exists('usageSettings', $data)) {
-            $this->setUsageSettings($data['usageSettings']);
-        }
-        if (array_key_exists('paymentInstrumentId', $data)) {
-            $this->setPaymentInstrumentId($data['paymentInstrumentId']);
-        }
-        if (array_key_exists('keepTrial', $data)) {
-            $this->setKeepTrial($data['keepTrial']);
-        }
     }
 
     public static function from(array $data = []): self
@@ -200,9 +172,9 @@ class QuoteCreateOrder implements Quote, JsonSerializable
         return $this->fields['acceptanceFulfillment'] ?? null;
     }
 
-    public function getOrderId(): ?string
+    public function getSubscriptionId(): ?string
     {
-        return $this->fields['orderId'] ?? null;
+        return $this->fields['subscriptionId'] ?? null;
     }
 
     public function getInvoiceId(): ?string
@@ -472,121 +444,6 @@ class QuoteCreateOrder implements Quote, JsonSerializable
         return $this;
     }
 
-    public function getInterimOnly(): ?bool
-    {
-        return $this->fields['interimOnly'] ?? null;
-    }
-
-    public function setInterimOnly(null|bool $interimOnly): static
-    {
-        $this->fields['interimOnly'] = $interimOnly;
-
-        return $this;
-    }
-
-    public function getEffectiveTime(): ?DateTimeImmutable
-    {
-        return $this->fields['effectiveTime'] ?? null;
-    }
-
-    public function setEffectiveTime(null|DateTimeImmutable|string $effectiveTime): static
-    {
-        if ($effectiveTime !== null && !($effectiveTime instanceof DateTimeImmutable)) {
-            $effectiveTime = new DateTimeImmutable($effectiveTime);
-        }
-
-        $this->fields['effectiveTime'] = $effectiveTime;
-
-        return $this;
-    }
-
-    public function getRenewalPolicy(): ?string
-    {
-        return $this->fields['renewalPolicy'] ?? null;
-    }
-
-    public function setRenewalPolicy(null|string $renewalPolicy): static
-    {
-        $this->fields['renewalPolicy'] = $renewalPolicy;
-
-        return $this;
-    }
-
-    public function getRenewalTime(): ?DateTimeImmutable
-    {
-        return $this->fields['renewalTime'] ?? null;
-    }
-
-    public function setRenewalTime(null|DateTimeImmutable|string $renewalTime): static
-    {
-        if ($renewalTime !== null && !($renewalTime instanceof DateTimeImmutable)) {
-            $renewalTime = new DateTimeImmutable($renewalTime);
-        }
-
-        $this->fields['renewalTime'] = $renewalTime;
-
-        return $this;
-    }
-
-    public function getProrated(): ?bool
-    {
-        return $this->fields['prorated'] ?? null;
-    }
-
-    public function setProrated(null|bool $prorated): static
-    {
-        $this->fields['prorated'] = $prorated;
-
-        return $this;
-    }
-
-    /**
-     * @return null|QuoteChangeOrderUsageSettings[]
-     */
-    public function getUsageSettings(): ?array
-    {
-        return $this->fields['usageSettings'] ?? null;
-    }
-
-    /**
-     * @param null|array[]|QuoteChangeOrderUsageSettings[] $usageSettings
-     */
-    public function setUsageSettings(null|array $usageSettings): static
-    {
-        $usageSettings = $usageSettings !== null ? array_map(
-            fn ($value) => $value instanceof QuoteChangeOrderUsageSettings ? $value : QuoteChangeOrderUsageSettings::from($value),
-            $usageSettings,
-        ) : null;
-
-        $this->fields['usageSettings'] = $usageSettings;
-
-        return $this;
-    }
-
-    public function getPaymentInstrumentId(): ?string
-    {
-        return $this->fields['paymentInstrumentId'] ?? null;
-    }
-
-    public function setPaymentInstrumentId(null|string $paymentInstrumentId): static
-    {
-        $this->fields['paymentInstrumentId'] = $paymentInstrumentId;
-
-        return $this;
-    }
-
-    public function getKeepTrial(): ?bool
-    {
-        return $this->fields['keepTrial'] ?? null;
-    }
-
-    public function setKeepTrial(null|bool $keepTrial): static
-    {
-        $this->fields['keepTrial'] = $keepTrial;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [
@@ -604,8 +461,8 @@ class QuoteCreateOrder implements Quote, JsonSerializable
         if (array_key_exists('acceptanceFulfillment', $this->fields)) {
             $data['acceptanceFulfillment'] = $this->fields['acceptanceFulfillment'];
         }
-        if (array_key_exists('orderId', $this->fields)) {
-            $data['orderId'] = $this->fields['orderId'];
+        if (array_key_exists('subscriptionId', $this->fields)) {
+            $data['subscriptionId'] = $this->fields['subscriptionId'];
         }
         if (array_key_exists('invoiceId', $this->fields)) {
             $data['invoiceId'] = $this->fields['invoiceId'];
@@ -673,30 +530,6 @@ class QuoteCreateOrder implements Quote, JsonSerializable
         if (array_key_exists('_embedded', $this->fields)) {
             $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();
         }
-        if (array_key_exists('interimOnly', $this->fields)) {
-            $data['interimOnly'] = $this->fields['interimOnly'];
-        }
-        if (array_key_exists('effectiveTime', $this->fields)) {
-            $data['effectiveTime'] = $this->fields['effectiveTime']?->format(DateTimeInterface::RFC3339);
-        }
-        if (array_key_exists('renewalPolicy', $this->fields)) {
-            $data['renewalPolicy'] = $this->fields['renewalPolicy'];
-        }
-        if (array_key_exists('renewalTime', $this->fields)) {
-            $data['renewalTime'] = $this->fields['renewalTime']?->format(DateTimeInterface::RFC3339);
-        }
-        if (array_key_exists('prorated', $this->fields)) {
-            $data['prorated'] = $this->fields['prorated'];
-        }
-        if (array_key_exists('usageSettings', $this->fields)) {
-            $data['usageSettings'] = $this->fields['usageSettings'];
-        }
-        if (array_key_exists('paymentInstrumentId', $this->fields)) {
-            $data['paymentInstrumentId'] = $this->fields['paymentInstrumentId'];
-        }
-        if (array_key_exists('keepTrial', $this->fields)) {
-            $data['keepTrial'] = $this->fields['keepTrial'];
-        }
 
         return $data;
     }
@@ -730,9 +563,9 @@ class QuoteCreateOrder implements Quote, JsonSerializable
         return $this;
     }
 
-    private function setOrderId(null|string $orderId): static
+    private function setSubscriptionId(null|string $subscriptionId): static
     {
-        $this->fields['orderId'] = $orderId;
+        $this->fields['subscriptionId'] = $subscriptionId;
 
         return $this;
     }

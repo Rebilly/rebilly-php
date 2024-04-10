@@ -27,15 +27,6 @@ class CheckoutFormFixedPlan implements CheckoutFormPlan, JsonSerializable
         if (array_key_exists('quantity', $data)) {
             $this->setQuantity($data['quantity']);
         }
-        if (array_key_exists('multipleOf', $data)) {
-            $this->setMultipleOf($data['multipleOf']);
-        }
-        if (array_key_exists('maximum', $data)) {
-            $this->setMaximum($data['maximum']);
-        }
-        if (array_key_exists('minimum', $data)) {
-            $this->setMinimum($data['minimum']);
-        }
     }
 
     public static function from(array $data = []): self
@@ -72,42 +63,6 @@ class CheckoutFormFixedPlan implements CheckoutFormPlan, JsonSerializable
         return $this;
     }
 
-    public function getMultipleOf(): ?int
-    {
-        return $this->fields['multipleOf'] ?? null;
-    }
-
-    public function setMultipleOf(null|int $multipleOf): static
-    {
-        $this->fields['multipleOf'] = $multipleOf;
-
-        return $this;
-    }
-
-    public function getMaximum(): ?int
-    {
-        return $this->fields['maximum'] ?? null;
-    }
-
-    public function setMaximum(null|int $maximum): static
-    {
-        $this->fields['maximum'] = $maximum;
-
-        return $this;
-    }
-
-    public function getMinimum(): ?int
-    {
-        return $this->fields['minimum'] ?? null;
-    }
-
-    public function setMinimum(null|int $minimum): static
-    {
-        $this->fields['minimum'] = $minimum;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [
@@ -118,15 +73,6 @@ class CheckoutFormFixedPlan implements CheckoutFormPlan, JsonSerializable
         }
         if (array_key_exists('quantity', $this->fields)) {
             $data['quantity'] = $this->fields['quantity'];
-        }
-        if (array_key_exists('multipleOf', $this->fields)) {
-            $data['multipleOf'] = $this->fields['multipleOf'];
-        }
-        if (array_key_exists('maximum', $this->fields)) {
-            $data['maximum'] = $this->fields['maximum'];
-        }
-        if (array_key_exists('minimum', $this->fields)) {
-            $data['minimum'] = $this->fields['minimum'];
         }
 
         return $data;

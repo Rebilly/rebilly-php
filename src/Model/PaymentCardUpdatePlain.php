@@ -17,12 +17,6 @@ use JsonSerializable;
 
 class PaymentCardUpdatePlain implements PatchPaymentInstrumentRequest, JsonSerializable
 {
-    public const ACCOUNT_TYPE_CHECKING = 'checking';
-
-    public const ACCOUNT_TYPE_SAVINGS = 'savings';
-
-    public const ACCOUNT_TYPE_OTHER = 'other';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -47,15 +41,6 @@ class PaymentCardUpdatePlain implements PatchPaymentInstrumentRequest, JsonSeria
         }
         if (array_key_exists('useAsBackup', $data)) {
             $this->setUseAsBackup($data['useAsBackup']);
-        }
-        if (array_key_exists('accountType', $data)) {
-            $this->setAccountType($data['accountType']);
-        }
-        if (array_key_exists('bankName', $data)) {
-            $this->setBankName($data['bankName']);
-        }
-        if (array_key_exists('token', $data)) {
-            $this->setToken($data['token']);
         }
     }
 
@@ -152,42 +137,6 @@ class PaymentCardUpdatePlain implements PatchPaymentInstrumentRequest, JsonSeria
         return $this;
     }
 
-    public function getAccountType(): ?string
-    {
-        return $this->fields['accountType'] ?? null;
-    }
-
-    public function setAccountType(null|string $accountType): static
-    {
-        $this->fields['accountType'] = $accountType;
-
-        return $this;
-    }
-
-    public function getBankName(): ?string
-    {
-        return $this->fields['bankName'] ?? null;
-    }
-
-    public function setBankName(null|string $bankName): static
-    {
-        $this->fields['bankName'] = $bankName;
-
-        return $this;
-    }
-
-    public function getToken(): ?string
-    {
-        return $this->fields['token'] ?? null;
-    }
-
-    public function setToken(null|string $token): static
-    {
-        $this->fields['token'] = $token;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [];
@@ -211,15 +160,6 @@ class PaymentCardUpdatePlain implements PatchPaymentInstrumentRequest, JsonSeria
         }
         if (array_key_exists('useAsBackup', $this->fields)) {
             $data['useAsBackup'] = $this->fields['useAsBackup'];
-        }
-        if (array_key_exists('accountType', $this->fields)) {
-            $data['accountType'] = $this->fields['accountType'];
-        }
-        if (array_key_exists('bankName', $this->fields)) {
-            $data['bankName'] = $this->fields['bankName'];
-        }
-        if (array_key_exists('token', $this->fields)) {
-            $data['token'] = $this->fields['token'];
         }
 
         return $data;

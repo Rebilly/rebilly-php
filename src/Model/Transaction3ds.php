@@ -17,11 +17,11 @@ use JsonSerializable;
 
 class Transaction3ds implements JsonSerializable
 {
-    public const VERSION__1_0_2 = '1.0.2';
+    public const VERSION_1_0_2 = '1.0.2';
 
-    public const VERSION__2_1_0 = '2.1.0';
+    public const VERSION_2_1_0 = '2.1.0';
 
-    public const VERSION__2_2_0 = '2.2.0';
+    public const VERSION_2_2_0 = '2.2.0';
 
     public const ENROLLED_YES = 'yes';
 
@@ -39,11 +39,11 @@ class Transaction3ds implements JsonSerializable
 
     public const AUTHENTICATED_ATTEMPTED = 'attempted';
 
-    public const LIABILITY__PROTECTED = 'protected';
+    public const LIABILITY_PROTECTED = 'protected';
 
     public const LIABILITY_NOT_PROTECTED = 'not protected';
 
-    public const LIABILITY_PROTECTED__ATTEMPT = 'protected (attempt)';
+    public const LIABILITY_PROTECTED_ATTEMPT_ = 'protected (attempt)';
 
     public const FLOW_FRICTIONLESS = 'frictionless';
 

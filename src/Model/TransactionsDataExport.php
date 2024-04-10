@@ -234,15 +234,15 @@ class TransactionsDataExport implements DataExport, JsonSerializable
         return $this->fields['status'] ?? null;
     }
 
-    public function getDateRange(): ?TransactionsDataExportDateRange
+    public function getDateRange(): ?DataExportDateRange
     {
         return $this->fields['dateRange'] ?? null;
     }
 
-    public function setDateRange(null|TransactionsDataExportDateRange|array $dateRange): static
+    public function setDateRange(null|DataExportDateRange|array $dateRange): static
     {
-        if ($dateRange !== null && !($dateRange instanceof TransactionsDataExportDateRange)) {
-            $dateRange = TransactionsDataExportDateRange::from($dateRange);
+        if ($dateRange !== null && !($dateRange instanceof DataExportDateRange)) {
+            $dateRange = DataExportDateRange::from($dateRange);
         }
 
         $this->fields['dateRange'] = $dateRange;
@@ -258,15 +258,15 @@ class TransactionsDataExport implements DataExport, JsonSerializable
         return $this->fields['_links'] ?? null;
     }
 
-    public function getEmbedded(): ?CustomersDataExportEmbedded
+    public function getEmbedded(): ?TransactionsDataExportEmbedded
     {
         return $this->fields['_embedded'] ?? null;
     }
 
-    public function setEmbedded(null|CustomersDataExportEmbedded|array $embedded): static
+    public function setEmbedded(null|TransactionsDataExportEmbedded|array $embedded): static
     {
-        if ($embedded !== null && !($embedded instanceof CustomersDataExportEmbedded)) {
-            $embedded = CustomersDataExportEmbedded::from($embedded);
+        if ($embedded !== null && !($embedded instanceof TransactionsDataExportEmbedded)) {
+            $embedded = TransactionsDataExportEmbedded::from($embedded);
         }
 
         $this->fields['_embedded'] = $embedded;

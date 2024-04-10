@@ -180,11 +180,17 @@ class ApiTracking implements JsonSerializable
         return $this;
     }
 
+    /**
+     * @return null|array<string,string>
+     */
     public function getRequestHeaders(): ?array
     {
         return $this->fields['requestHeaders'] ?? null;
     }
 
+    /**
+     * @param null|array<string,string> $requestHeaders
+     */
     public function setRequestHeaders(null|array $requestHeaders): static
     {
         $this->fields['requestHeaders'] = $requestHeaders;
@@ -192,11 +198,17 @@ class ApiTracking implements JsonSerializable
         return $this;
     }
 
+    /**
+     * @return null|array<string,string>
+     */
     public function getResponseHeaders(): ?array
     {
         return $this->fields['responseHeaders'] ?? null;
     }
 
+    /**
+     * @param null|array<string,string> $responseHeaders
+     */
     public function setResponseHeaders(null|array $responseHeaders): static
     {
         $this->fields['responseHeaders'] = $responseHeaders;

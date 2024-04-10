@@ -257,12 +257,12 @@ class UserApplication implements JsonSerializable
         return $this->fields['configuredBy'] ?? null;
     }
 
-    public function getProperties(): ?object
+    public function getProperties(): ?array
     {
         return $this->fields['properties'] ?? null;
     }
 
-    public function setProperties(null|object $properties): static
+    public function setProperties(null|array $properties): static
     {
         $this->fields['properties'] = $properties;
 

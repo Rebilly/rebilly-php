@@ -17,16 +17,8 @@ use JsonSerializable;
 
 class SmtpAuthorizationNone implements SmtpAuthorization, JsonSerializable
 {
-    private array $fields = [];
-
     public function __construct(array $data = [])
     {
-        if (array_key_exists('password', $data)) {
-            $this->setPassword($data['password']);
-        }
-        if (array_key_exists('username', $data)) {
-            $this->setUsername($data['username']);
-        }
     }
 
     public static function from(array $data = []): self
@@ -39,41 +31,11 @@ class SmtpAuthorizationNone implements SmtpAuthorization, JsonSerializable
         return 'none';
     }
 
-    public function getPassword(): string
-    {
-        return $this->fields['password'];
-    }
-
-    public function setPassword(string $password): static
-    {
-        $this->fields['password'] = $password;
-
-        return $this;
-    }
-
-    public function getUsername(): string
-    {
-        return $this->fields['username'];
-    }
-
-    public function setUsername(string $username): static
-    {
-        $this->fields['username'] = $username;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [
             'type' => 'none',
         ];
-        if (array_key_exists('password', $this->fields)) {
-            $data['password'] = $this->fields['password'];
-        }
-        if (array_key_exists('username', $this->fields)) {
-            $data['username'] = $this->fields['username'];
-        }
 
         return $data;
     }

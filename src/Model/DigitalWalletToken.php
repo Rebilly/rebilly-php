@@ -89,27 +89,9 @@ class DigitalWalletToken implements CompositeToken, JsonSerializable
         return $this->fields['billingAddress'] ?? null;
     }
 
-    public function setBillingAddress(null|ContactObject|array $billingAddress): static
-    {
-        if ($billingAddress !== null && !($billingAddress instanceof ContactObject)) {
-            $billingAddress = ContactObject::from($billingAddress);
-        }
-
-        $this->fields['billingAddress'] = $billingAddress;
-
-        return $this;
-    }
-
     public function getId(): ?string
     {
         return $this->fields['id'] ?? null;
-    }
-
-    public function setId(null|string $id): static
-    {
-        $this->fields['id'] = $id;
-
-        return $this;
     }
 
     public function getIsUsed(): ?bool
@@ -217,6 +199,24 @@ class DigitalWalletToken implements CompositeToken, JsonSerializable
         }
 
         return $data;
+    }
+
+    private function setBillingAddress(null|ContactObject|array $billingAddress): static
+    {
+        if ($billingAddress !== null && !($billingAddress instanceof ContactObject)) {
+            $billingAddress = ContactObject::from($billingAddress);
+        }
+
+        $this->fields['billingAddress'] = $billingAddress;
+
+        return $this;
+    }
+
+    private function setId(null|string $id): static
+    {
+        $this->fields['id'] = $id;
+
+        return $this;
     }
 
     private function setIsUsed(null|bool $isUsed): static

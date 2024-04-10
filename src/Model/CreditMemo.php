@@ -27,7 +27,7 @@ class CreditMemo implements JsonSerializable
 
     public const STATUS_VOIDED = 'voided';
 
-    public const REASON__RETURN = 'return';
+    public const REASON_RETURN = 'return';
 
     public const REASON_PRODUCT_UNSATISFACTORY = 'product-unsatisfactory';
 
@@ -229,23 +229,9 @@ class CreditMemo implements JsonSerializable
         return $this->fields['customerId'];
     }
 
-    public function setCustomerId(string $customerId): static
-    {
-        $this->fields['customerId'] = $customerId;
-
-        return $this;
-    }
-
     public function getCurrency(): string
     {
         return $this->fields['currency'];
-    }
-
-    public function setCurrency(string $currency): static
-    {
-        $this->fields['currency'] = $currency;
-
-        return $this;
     }
 
     public function getInvoiceId(): ?string
@@ -344,96 +330,110 @@ class CreditMemo implements JsonSerializable
         $this->fields['id'] = $id;
 
         return $this;
-    }
-
-    private function setNumber(null|int $number): static
-    {
-        $this->fields['number'] = $number;
-
-        return $this;
-    }
-
-    private function setStatus(null|string $status): static
-    {
-        $this->fields['status'] = $status;
-
-        return $this;
-    }
-
-    private function setTaxAmount(null|float|string $taxAmount): static
-    {
-        if (is_string($taxAmount)) {
-            $taxAmount = (float) $taxAmount;
         }
 
-        $this->fields['taxAmount'] = $taxAmount;
+        private function setNumber(null|int $number): static
+        {
+            $this->fields['number'] = $number;
 
-        return $this;
-    }
-
-    private function setTotalAmount(null|float|string $totalAmount): static
-    {
-        if (is_string($totalAmount)) {
-            $totalAmount = (float) $totalAmount;
+            return $this;
         }
 
-        $this->fields['totalAmount'] = $totalAmount;
+        private function setStatus(null|string $status): static
+        {
+            $this->fields['status'] = $status;
 
-        return $this;
-    }
-
-    private function setUnusedAmount(null|float|string $unusedAmount): static
-    {
-        if (is_string($unusedAmount)) {
-            $unusedAmount = (float) $unusedAmount;
+            return $this;
         }
 
-        $this->fields['unusedAmount'] = $unusedAmount;
+        private function setTaxAmount(null|float|string $taxAmount): static
+        {
+            if (is_string($taxAmount)) {
+                $taxAmount = (float) $taxAmount;
+            }
 
-        return $this;
-    }
+            $this->fields['taxAmount'] = $taxAmount;
 
-    private function setRevision(null|int $revision): static
-    {
-        $this->fields['revision'] = $revision;
-
-        return $this;
-    }
-
-    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
-    {
-        if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
-            $createdTime = new DateTimeImmutable($createdTime);
+            return $this;
         }
 
-        $this->fields['createdTime'] = $createdTime;
+        private function setTotalAmount(null|float|string $totalAmount): static
+        {
+            if (is_string($totalAmount)) {
+                $totalAmount = (float) $totalAmount;
+            }
 
-        return $this;
-    }
+            $this->fields['totalAmount'] = $totalAmount;
 
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
-    {
-        if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
-            $updatedTime = new DateTimeImmutable($updatedTime);
+            return $this;
         }
 
-        $this->fields['updatedTime'] = $updatedTime;
+        private function setUnusedAmount(null|float|string $unusedAmount): static
+        {
+            if (is_string($unusedAmount)) {
+                $unusedAmount = (float) $unusedAmount;
+            }
 
-        return $this;
-    }
+            $this->fields['unusedAmount'] = $unusedAmount;
 
-    /**
-     * @param null|array[]|ResourceLink[] $links
-     */
-    private function setLinks(null|array $links): static
-    {
-        $links = $links !== null ? array_map(
-            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
-            $links,
-        ) : null;
+            return $this;
+        }
 
-        $this->fields['_links'] = $links;
+        private function setRevision(null|int $revision): static
+        {
+            $this->fields['revision'] = $revision;
 
-        return $this;
-    }
+            return $this;
+        }
+
+        private function setCustomerId(string $customerId): static
+        {
+            $this->fields['customerId'] = $customerId;
+
+            return $this;
+        }
+
+        private function setCurrency(string $currency): static
+        {
+            $this->fields['currency'] = $currency;
+
+            return $this;
+        }
+
+        private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
+        {
+            if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
+                $createdTime = new DateTimeImmutable($createdTime);
+            }
+
+            $this->fields['createdTime'] = $createdTime;
+
+            return $this;
+        }
+
+        private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
+        {
+            if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
+                $updatedTime = new DateTimeImmutable($updatedTime);
+            }
+
+            $this->fields['updatedTime'] = $updatedTime;
+
+            return $this;
+        }
+
+        /**
+         * @param null|array[]|ResourceLink[] $links
+         */
+        private function setLinks(null|array $links): static
+        {
+            $links = $links !== null ? array_map(
+                fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+                $links,
+            ) : null;
+
+            $this->fields['_links'] = $links;
+
+            return $this;
+        }
 }

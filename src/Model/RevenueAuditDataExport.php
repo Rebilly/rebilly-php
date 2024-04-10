@@ -234,15 +234,15 @@ class RevenueAuditDataExport implements DataExport, JsonSerializable
         return $this->fields['status'] ?? null;
     }
 
-    public function getDateRange(): ?RevenueAuditDataExportDateRange
+    public function getDateRange(): ?DataExportDateRange
     {
         return $this->fields['dateRange'] ?? null;
     }
 
-    public function setDateRange(null|RevenueAuditDataExportDateRange|array $dateRange): static
+    public function setDateRange(null|DataExportDateRange|array $dateRange): static
     {
-        if ($dateRange !== null && !($dateRange instanceof RevenueAuditDataExportDateRange)) {
-            $dateRange = RevenueAuditDataExportDateRange::from($dateRange);
+        if ($dateRange !== null && !($dateRange instanceof DataExportDateRange)) {
+            $dateRange = DataExportDateRange::from($dateRange);
         }
 
         $this->fields['dateRange'] = $dateRange;
@@ -258,15 +258,15 @@ class RevenueAuditDataExport implements DataExport, JsonSerializable
         return $this->fields['_links'] ?? null;
     }
 
-    public function getEmbedded(): ?CustomersDataExportEmbedded
+    public function getEmbedded(): ?RevenueAuditDataExportEmbedded
     {
         return $this->fields['_embedded'] ?? null;
     }
 
-    public function setEmbedded(null|CustomersDataExportEmbedded|array $embedded): static
+    public function setEmbedded(null|RevenueAuditDataExportEmbedded|array $embedded): static
     {
-        if ($embedded !== null && !($embedded instanceof CustomersDataExportEmbedded)) {
-            $embedded = CustomersDataExportEmbedded::from($embedded);
+        if ($embedded !== null && !($embedded instanceof RevenueAuditDataExportEmbedded)) {
+            $embedded = RevenueAuditDataExportEmbedded::from($embedded);
         }
 
         $this->fields['_embedded'] = $embedded;

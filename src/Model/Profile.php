@@ -98,13 +98,6 @@ class Profile implements JsonSerializable
         return $this->fields['id'] ?? null;
     }
 
-    public function setId(null|string $id): static
-    {
-        $this->fields['id'] = $id;
-
-        return $this;
-    }
-
     public function getEmail(): ?string
     {
         return $this->fields['email'] ?? null;
@@ -136,16 +129,6 @@ class Profile implements JsonSerializable
     public function getPermissions(): ?array
     {
         return $this->fields['permissions'] ?? null;
-    }
-
-    /**
-     * @param null|string[] $permissions
-     */
-    public function setPermissions(null|array $permissions): static
-    {
-        $this->fields['permissions'] = $permissions;
-
-        return $this;
     }
 
     public function getCreatedTime(): ?DateTimeImmutable
@@ -186,12 +169,12 @@ class Profile implements JsonSerializable
         return $this->fields['country'] ?? null;
     }
 
-    public function getPreferences(): ?object
+    public function getPreferences(): ?array
     {
         return $this->fields['preferences'] ?? null;
     }
 
-    public function setPreferences(null|object $preferences): static
+    public function setPreferences(null|array $preferences): static
     {
         $this->fields['preferences'] = $preferences;
 
@@ -285,6 +268,13 @@ class Profile implements JsonSerializable
         return $data;
     }
 
+    private function setId(null|string $id): static
+    {
+        $this->fields['id'] = $id;
+
+        return $this;
+    }
+
     private function setEmail(null|string $email): static
     {
         $this->fields['email'] = $email;
@@ -316,6 +306,16 @@ class Profile implements JsonSerializable
     private function setMobilePhone(null|string $mobilePhone): static
     {
         $this->fields['mobilePhone'] = $mobilePhone;
+
+        return $this;
+    }
+
+    /**
+     * @param null|string[] $permissions
+     */
+    private function setPermissions(null|array $permissions): static
+    {
+        $this->fields['permissions'] = $permissions;
 
         return $this;
     }

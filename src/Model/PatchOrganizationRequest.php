@@ -110,7 +110,7 @@ class PatchOrganizationRequest implements JsonSerializable
         return $this;
     }
 
-    public function getWebsite(): mixed
+    public function getWebsite(): ?string
     {
         return $this->fields['website'] ?? null;
     }
@@ -163,12 +163,12 @@ class PatchOrganizationRequest implements JsonSerializable
         return $this;
     }
 
-    public function getCountry(): string
+    public function getCountry(): ?string
     {
-        return $this->fields['country'];
+        return $this->fields['country'] ?? null;
     }
 
-    public function setCountry(string $country): static
+    public function setCountry(null|string $country): static
     {
         $this->fields['country'] = $country;
 
@@ -257,7 +257,7 @@ class PatchOrganizationRequest implements JsonSerializable
         return $this;
     }
 
-    public function getReportCurrency(): mixed
+    public function getReportCurrency(): ?string
     {
         return $this->fields['reportCurrency'] ?? null;
     }
@@ -420,14 +420,14 @@ class PatchOrganizationRequest implements JsonSerializable
         return $this;
     }
 
-    private function setWebsite(mixed $website): static
+    private function setWebsite(null|string $website): static
     {
         $this->fields['website'] = $website;
 
         return $this;
     }
 
-    private function setReportCurrency(mixed $reportCurrency): static
+    private function setReportCurrency(null|string $reportCurrency): static
     {
         $this->fields['reportCurrency'] = $reportCurrency;
 

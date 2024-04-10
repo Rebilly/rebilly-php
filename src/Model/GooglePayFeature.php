@@ -30,9 +30,6 @@ class GooglePayFeature implements PaymentCardFeature, JsonSerializable
         if (array_key_exists('country', $data)) {
             $this->setCountry($data['country']);
         }
-        if (array_key_exists('displayName', $data)) {
-            $this->setDisplayName($data['displayName']);
-        }
     }
 
     public static function from(array $data = []): self
@@ -81,18 +78,6 @@ class GooglePayFeature implements PaymentCardFeature, JsonSerializable
         return $this;
     }
 
-    public function getDisplayName(): ?string
-    {
-        return $this->fields['displayName'] ?? null;
-    }
-
-    public function setDisplayName(null|string $displayName): static
-    {
-        $this->fields['displayName'] = $displayName;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [
@@ -106,9 +91,6 @@ class GooglePayFeature implements PaymentCardFeature, JsonSerializable
         }
         if (array_key_exists('country', $this->fields)) {
             $data['country'] = $this->fields['country'];
-        }
-        if (array_key_exists('displayName', $this->fields)) {
-            $data['displayName'] = $this->fields['displayName'];
         }
 
         return $data;

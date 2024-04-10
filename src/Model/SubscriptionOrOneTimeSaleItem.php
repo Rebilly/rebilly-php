@@ -99,15 +99,15 @@ class SubscriptionOrOneTimeSaleItem implements JsonSerializable
         return $this;
     }
 
-    public function getPlan(): SubscriptionOrOneTimeSaleItemPlan
+    public function getPlan(): ConfigurablePlan
     {
         return $this->fields['plan'];
     }
 
-    public function setPlan(SubscriptionOrOneTimeSaleItemPlan|array $plan): static
+    public function setPlan(ConfigurablePlan|array $plan): static
     {
-        if (!($plan instanceof SubscriptionOrOneTimeSaleItemPlan)) {
-            $plan = SubscriptionOrOneTimeSaleItemPlan::from($plan);
+        if (!($plan instanceof ConfigurablePlan)) {
+            $plan = ConfigurablePlanFactory::from($plan);
         }
 
         $this->fields['plan'] = $plan;
@@ -146,15 +146,15 @@ class SubscriptionOrOneTimeSaleItem implements JsonSerializable
         return $this->fields['isGrandfathered'] ?? null;
     }
 
-    public function getEmbedded(): ?QuoteCreateOrderItemsEmbedded
+    public function getEmbedded(): ?SubscriptionOrOneTimeSaleItemEmbedded
     {
         return $this->fields['_embedded'] ?? null;
     }
 
-    public function setEmbedded(null|QuoteCreateOrderItemsEmbedded|array $embedded): static
+    public function setEmbedded(null|SubscriptionOrOneTimeSaleItemEmbedded|array $embedded): static
     {
-        if ($embedded !== null && !($embedded instanceof QuoteCreateOrderItemsEmbedded)) {
-            $embedded = QuoteCreateOrderItemsEmbedded::from($embedded);
+        if ($embedded !== null && !($embedded instanceof SubscriptionOrOneTimeSaleItemEmbedded)) {
+            $embedded = SubscriptionOrOneTimeSaleItemEmbedded::from($embedded);
         }
 
         $this->fields['_embedded'] = $embedded;

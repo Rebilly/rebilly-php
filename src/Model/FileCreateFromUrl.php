@@ -43,9 +43,6 @@ class FileCreateFromUrl implements PostFileRequest, JsonSerializable
         if (array_key_exists('tags', $data)) {
             $this->setTags($data['tags']);
         }
-        if (array_key_exists('file', $data)) {
-            $this->setFile($data['file']);
-        }
     }
 
     public static function from(array $data = []): self
@@ -131,18 +128,6 @@ class FileCreateFromUrl implements PostFileRequest, JsonSerializable
         return $this;
     }
 
-    public function getFile(): string
-    {
-        return $this->fields['file'];
-    }
-
-    public function setFile(string $file): static
-    {
-        $this->fields['file'] = $file;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [];
@@ -163,9 +148,6 @@ class FileCreateFromUrl implements PostFileRequest, JsonSerializable
         }
         if (array_key_exists('tags', $this->fields)) {
             $data['tags'] = $this->fields['tags'];
-        }
-        if (array_key_exists('file', $this->fields)) {
-            $data['file'] = $this->fields['file'];
         }
 
         return $data;

@@ -16,4 +16,14 @@ namespace Rebilly\Sdk\Model;
 interface CountriesMetadata
 {
     public function getMode(): string;
+
+    /**
+     * @return null|string[]
+     */
+    public function getValues(): ?array;
+
+    /**
+     * @param string[] $values
+     */
+    public function setValues(array $values): static;
 }

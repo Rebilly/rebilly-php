@@ -130,7 +130,7 @@ class SegmentsApi
      */
     public function update(
         string $id,
-        ?GridSegment $gridSegment = null,
+        GridSegment $gridSegment,
     ): GridSegment {
         $pathParams = [
             '{id}' => $id,

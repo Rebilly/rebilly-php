@@ -103,13 +103,6 @@ class OwnerApplicationInstance implements JsonSerializable
         return $this->fields['organizationId'] ?? null;
     }
 
-    public function setOrganizationId(null|string $organizationId): static
-    {
-        $this->fields['organizationId'] = $organizationId;
-
-        return $this;
-    }
-
     public function getToken(): ?string
     {
         return $this->fields['token'] ?? null;
@@ -203,6 +196,13 @@ class OwnerApplicationInstance implements JsonSerializable
         ) : null;
 
         $this->fields['_links'] = $links;
+
+        return $this;
+    }
+
+    private function setOrganizationId(null|string $organizationId): static
+    {
+        $this->fields['organizationId'] = $organizationId;
 
         return $this;
     }

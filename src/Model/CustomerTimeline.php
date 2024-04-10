@@ -260,12 +260,12 @@ class CustomerTimeline implements JsonSerializable
         return $this;
     }
 
-    public function getCustomData(): ?object
+    public function getCustomData(): ?array
     {
         return $this->fields['customData'] ?? null;
     }
 
-    public function setCustomData(null|object $customData): static
+    public function setCustomData(null|array $customData): static
     {
         $this->fields['customData'] = $customData;
 

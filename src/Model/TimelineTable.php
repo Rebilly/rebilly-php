@@ -18,6 +18,14 @@ use JsonSerializable;
 
 abstract class TimelineTable implements JsonSerializable
 {
+    public const TYPE_LIST = 'list';
+
+    public const TYPE_ONE_COLUMNS = 'one-columns';
+
+    public const TYPE_TWO_COLUMNS = 'two-columns';
+
+    public const TYPE_THREE_COLUMNS = 'three-columns';
+
     private array $fields = [];
 
     protected function __construct(array $data = [])
@@ -37,13 +45,13 @@ abstract class TimelineTable implements JsonSerializable
     {
         switch ($data['type']) {
             case 'list':
-                return new ListTimelineTable($data);
+                return ListTimelineTable::from($data);
             case 'one-column':
-                return new OneColumnTimelineTable($data);
+                return OneColumnTimelineTable::from($data);
             case 'three-columns':
-                return new ThreeColumnsTimelineTable($data);
+                return ThreeColumnsTimelineTable::from($data);
             case 'two-columns':
-                return new TwoColumnsTimelineTable($data);
+                return TwoColumnsTimelineTable::from($data);
         }
 
         throw new InvalidArgumentException("Unsupported type value: '{$data['type']}'");

@@ -15,6 +15,8 @@ namespace Rebilly\Sdk\Model;
 
 interface ReadyToPayMethods
 {
+    public function getMethod(): string;
+
     /**
      * @return null|string[]
      */

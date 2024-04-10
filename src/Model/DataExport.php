@@ -17,17 +17,13 @@ use DateTimeImmutable;
 
 interface DataExport
 {
+    public function getResource(): string;
+
     public function getId(): ?string;
 
     public function getName(): string;
 
     public function setName(string $name): static;
-
-    public function getResource(): string;
-
-    public function getFormat(): string;
-
-    public function setFormat(string $format): static;
 
     public function getArguments(): ?DataExportArguments;
 
@@ -71,12 +67,12 @@ interface DataExport
 
     public function getStatus(): ?string;
 
+    public function getDateRange(): ?DataExportDateRange;
+
+    public function setDateRange(null|DataExportDateRange|array $dateRange): static;
+
     /**
      * @return null|ResourceLink[]
      */
     public function getLinks(): ?array;
-
-    public function getEmbedded(): ?CustomersDataExportEmbedded;
-
-    public function setEmbedded(null|CustomersDataExportEmbedded|array $embedded): static;
 }

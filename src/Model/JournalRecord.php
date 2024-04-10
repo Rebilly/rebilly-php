@@ -166,24 +166,24 @@ class JournalRecord implements JsonSerializable
         return $this;
     }
 
-    public function getDebitAccountId(): string
+    public function getDebitAccountId(): ?string
     {
-        return $this->fields['debitAccountId'];
+        return $this->fields['debitAccountId'] ?? null;
     }
 
-    public function setDebitAccountId(string $debitAccountId): static
+    public function setDebitAccountId(null|string $debitAccountId): static
     {
         $this->fields['debitAccountId'] = $debitAccountId;
 
         return $this;
     }
 
-    public function getCreditAccountId(): string
+    public function getCreditAccountId(): ?string
     {
-        return $this->fields['creditAccountId'];
+        return $this->fields['creditAccountId'] ?? null;
     }
 
-    public function setCreditAccountId(string $creditAccountId): static
+    public function setCreditAccountId(null|string $creditAccountId): static
     {
         $this->fields['creditAccountId'] = $creditAccountId;
 

@@ -17,6 +17,38 @@ use JsonSerializable;
 
 class ReportKycRejectionsDataRejectionReasons implements JsonSerializable
 {
+    public const REJECTION_REASON_DOCUMENT_UNREADABLE = 'document-unreadable';
+
+    public const REJECTION_REASON_DOCUMENT_EXPIRED = 'document-expired';
+
+    public const REJECTION_REASON_DOCUMENT_NOT_MATCHING = 'document-not-matching';
+
+    public const REJECTION_REASON_DOCUMENT_DUPLICATE = 'document-duplicate';
+
+    public const REJECTION_REASON_DOCUMENT_INVALID = 'document-invalid';
+
+    public const REJECTION_REASON_DOCUMENT_NOT_OPEN = 'document-not-open';
+
+    public const REJECTION_REASON_UNDERAGE_PERSON = 'underage-person';
+
+    public const REJECTION_REASON_THIRD_PARTY_OR_MISMATCH = 'third-party-or-mismatch';
+
+    public const REJECTION_REASON_EXPIRATION_DATE_MISSING = 'expiration-date-missing';
+
+    public const REJECTION_REASON_ISSUE_DATE_MISSING = 'issue-date-missing';
+
+    public const REJECTION_REASON_DOB_MISMATCH = 'dob-mismatch';
+
+    public const REJECTION_REASON_NAME_MISMATCH = 'name-mismatch';
+
+    public const REJECTION_REASON_CRITICAL_INFO_MISSING = 'critical-info-missing';
+
+    public const REJECTION_REASON_OLD_ADDRESS_ON_ID = 'old-address-on-id';
+
+    public const REJECTION_REASON_TAMPERED_DOCUMENT = 'tampered-document';
+
+    public const REJECTION_REASON_OTHER = 'other';
+
     private array $fields = [];
 
     public function __construct(array $data = [])

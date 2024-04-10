@@ -30,9 +30,6 @@ class PlanFormulaFlatRate implements PlanPriceFormula, JsonSerializable
         if (array_key_exists('maxQuantity', $data)) {
             $this->setMaxQuantity($data['maxQuantity']);
         }
-        if (array_key_exists('brackets', $data)) {
-            $this->setBrackets($data['brackets']);
-        }
     }
 
     public static function from(array $data = []): self
@@ -85,29 +82,6 @@ class PlanFormulaFlatRate implements PlanPriceFormula, JsonSerializable
         return $this;
     }
 
-    /**
-     * @return PlanFormulaStairstepBrackets[]
-     */
-    public function getBrackets(): array
-    {
-        return $this->fields['brackets'];
-    }
-
-    /**
-     * @param array[]|PlanFormulaStairstepBrackets[] $brackets
-     */
-    public function setBrackets(array $brackets): static
-    {
-        $brackets = array_map(
-            fn ($value) => $value instanceof PlanFormulaStairstepBrackets ? $value : PlanFormulaStairstepBrackets::from($value),
-            $brackets,
-        );
-
-        $this->fields['brackets'] = $brackets;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [
@@ -121,9 +95,6 @@ class PlanFormulaFlatRate implements PlanPriceFormula, JsonSerializable
         }
         if (array_key_exists('maxQuantity', $this->fields)) {
             $data['maxQuantity'] = $this->fields['maxQuantity'];
-        }
-        if (array_key_exists('brackets', $this->fields)) {
-            $data['brackets'] = $this->fields['brackets'];
         }
 
         return $data;

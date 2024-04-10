@@ -117,13 +117,6 @@ class TransactionQuery implements JsonSerializable
         return $this->fields['currency'] ?? null;
     }
 
-    public function setCurrency(null|string $currency): static
-    {
-        $this->fields['currency'] = $currency;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [];
@@ -167,6 +160,13 @@ class TransactionQuery implements JsonSerializable
         }
 
         $this->fields['amount'] = $amount;
+
+        return $this;
+    }
+
+    private function setCurrency(null|string $currency): static
+    {
+        $this->fields['currency'] = $currency;
 
         return $this;
     }

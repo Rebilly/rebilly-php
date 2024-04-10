@@ -81,8 +81,12 @@ class Company implements JsonSerializable
         return $this->fields['yearFounded'] ?? null;
     }
 
-    public function setYearFounded(null|float $yearFounded): static
+    public function setYearFounded(null|float|string $yearFounded): static
     {
+        if (is_string($yearFounded)) {
+            $yearFounded = (float) $yearFounded;
+        }
+
         $this->fields['yearFounded'] = $yearFounded;
 
         return $this;
@@ -105,8 +109,12 @@ class Company implements JsonSerializable
         return $this->fields['employeesCount'] ?? null;
     }
 
-    public function setEmployeesCount(null|float $employeesCount): static
+    public function setEmployeesCount(null|float|string $employeesCount): static
     {
+        if (is_string($employeesCount)) {
+            $employeesCount = (float) $employeesCount;
+        }
+
         $this->fields['employeesCount'] = $employeesCount;
 
         return $this;

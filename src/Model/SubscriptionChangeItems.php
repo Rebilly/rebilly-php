@@ -37,15 +37,15 @@ class SubscriptionChangeItems implements JsonSerializable
         return new self($data);
     }
 
-    public function getPlan(): FlexiblePlan
+    public function getPlan(): ConfigurablePlan
     {
         return $this->fields['plan'];
     }
 
-    public function setPlan(FlexiblePlan|array $plan): static
+    public function setPlan(ConfigurablePlan|array $plan): static
     {
-        if (!($plan instanceof FlexiblePlan)) {
-            $plan = FlexiblePlan::from($plan);
+        if (!($plan instanceof ConfigurablePlan)) {
+            $plan = ConfigurablePlanFactory::from($plan);
         }
 
         $this->fields['plan'] = $plan;
@@ -65,15 +65,15 @@ class SubscriptionChangeItems implements JsonSerializable
         return $this;
     }
 
-    public function getUsageLimits(): ?SubscriptionOrOneTimeSaleItemUsageLimits
+    public function getUsageLimits(): ?SubscriptionChangeItemsUsageLimits
     {
         return $this->fields['usageLimits'] ?? null;
     }
 
-    public function setUsageLimits(null|SubscriptionOrOneTimeSaleItemUsageLimits|array $usageLimits): static
+    public function setUsageLimits(null|SubscriptionChangeItemsUsageLimits|array $usageLimits): static
     {
-        if ($usageLimits !== null && !($usageLimits instanceof SubscriptionOrOneTimeSaleItemUsageLimits)) {
-            $usageLimits = SubscriptionOrOneTimeSaleItemUsageLimits::from($usageLimits);
+        if ($usageLimits !== null && !($usageLimits instanceof SubscriptionChangeItemsUsageLimits)) {
+            $usageLimits = SubscriptionChangeItemsUsageLimits::from($usageLimits);
         }
 
         $this->fields['usageLimits'] = $usageLimits;

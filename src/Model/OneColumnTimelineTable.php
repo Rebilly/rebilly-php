@@ -34,7 +34,7 @@ class OneColumnTimelineTable extends TimelineTable
     }
 
     /**
-     * @return null|TwoColumnsTimelineTableData[]
+     * @return null|OneColumnTimelineTableData[]
      */
     public function getData(): ?array
     {
@@ -42,12 +42,12 @@ class OneColumnTimelineTable extends TimelineTable
     }
 
     /**
-     * @param null|array[]|TwoColumnsTimelineTableData[] $data
+     * @param null|array[]|OneColumnTimelineTableData[] $data
      */
     public function setData(null|array $data): static
     {
         $data = $data !== null ? array_map(
-            fn ($value) => $value instanceof TwoColumnsTimelineTableData ? $value : TwoColumnsTimelineTableData::from($value),
+            fn ($value) => $value instanceof OneColumnTimelineTableData ? $value : OneColumnTimelineTableData::from($value),
             $data,
         ) : null;
 

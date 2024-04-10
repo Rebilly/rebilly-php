@@ -19,12 +19,14 @@
         <UnusedClass>
             <errorLevel type="suppress">
                 <file name="src/CombinedService.php" />
-                <file name="src/CoreService.php" />
-                <file name="src/ReportsService.php" />
-                <file name="src/UsersService.php" />
+                <file name="src/Service.php" />
+                <file name="src/Model/AuthenticationTokenFactory.php" />
+                <file name="src/Model/PostFileRequestFactory.php" />
+                <file name="src/Model/PostPaymentInstrumentRequestFactory.php" />
             </errorLevel>
         </UnusedClass>
         <PossiblyUnusedMethod errorLevel="suppress"/>
+        <PossiblyUnusedParam errorLevel="suppress"/>
         <UnusedMethod errorLevel="suppress"/>
         <PossiblyUnusedReturnValue errorLevel="suppress"/>
         <ForbiddenCode errorLevel="suppress"/>

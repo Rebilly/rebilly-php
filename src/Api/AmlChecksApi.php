@@ -103,7 +103,7 @@ class AmlChecksApi
      */
     public function review(
         string $id,
-        ?AmlCheckReview $amlCheckReview = null,
+        AmlCheckReview $amlCheckReview,
     ): AmlCheck {
         $pathParams = [
             '{id}' => $id,

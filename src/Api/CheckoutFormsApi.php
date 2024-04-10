@@ -30,7 +30,7 @@ class CheckoutFormsApi
      * @return CheckoutForm
      */
     public function create(
-        ?CheckoutForm $checkoutForm = null,
+        CheckoutForm $checkoutForm,
     ): CheckoutForm {
         $uri = '/checkout-forms';
 
@@ -130,7 +130,7 @@ class CheckoutFormsApi
      */
     public function update(
         string $id,
-        ?CheckoutForm $checkoutForm = null,
+        CheckoutForm $checkoutForm,
     ): CheckoutForm {
         $pathParams = [
             '{id}' => $id,

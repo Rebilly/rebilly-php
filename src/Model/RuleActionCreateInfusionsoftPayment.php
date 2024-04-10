@@ -36,12 +36,12 @@ class RuleActionCreateInfusionsoftPayment extends RuleAction
         return new self($data);
     }
 
-    public function getPaymentBody(): ?object
+    public function getPaymentBody(): ?array
     {
         return $this->fields['paymentBody'] ?? null;
     }
 
-    public function setPaymentBody(null|object $paymentBody): static
+    public function setPaymentBody(null|array $paymentBody): static
     {
         $this->fields['paymentBody'] = $paymentBody;
 

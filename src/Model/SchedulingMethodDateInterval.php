@@ -15,27 +15,31 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class SchedulingMethodDateInterval implements InvoiceRetryScheduleInstruction, ReminderScheduleInstruction, ScheduleInstruction, SettlementPeriod, JsonSerializable
+class SchedulingMethodDateInterval implements InvoiceRetryScheduleInstruction, SettlementPeriod, ScheduleInstruction, ReminderScheduleInstruction, JsonSerializable
 {
-    public const WEEK_NEXT = 'next';
+    public const UNIT_SECOND = 'second';
 
-    public const WEEK_FIRST_IN_MONTH = 'first-in-month';
+    public const UNIT_MINUTE = 'minute';
 
-    public const WEEK_LAST_IN_MONTH = 'last-in-month';
+    public const UNIT_HOUR = 'hour';
 
-    public const DAY_SUNDAY = 'Sunday';
+    public const UNIT_DAY = 'day';
 
-    public const DAY_MONDAY = 'Monday';
+    public const UNIT_MONTH = 'month';
 
-    public const DAY_TUESDAY = 'Tuesday';
+    public const UNIT_YEAR = 'year';
 
-    public const DAY_WEDNESDAY = 'Wednesday';
+    public const UNIT_SECONDS = 'seconds';
 
-    public const DAY_THURSDAY = 'Thursday';
+    public const UNIT_MINUTES = 'minutes';
 
-    public const DAY_FRIDAY = 'Friday';
+    public const UNIT_HOURS = 'hours';
 
-    public const DAY_SATURDAY = 'Saturday';
+    public const UNIT_DAYS = 'days';
+
+    public const UNIT_MONTHS = 'months';
+
+    public const UNIT_YEARS = 'years';
 
     private array $fields = [];
 
@@ -49,15 +53,6 @@ class SchedulingMethodDateInterval implements InvoiceRetryScheduleInstruction, R
         }
         if (array_key_exists('anchor', $data)) {
             $this->setAnchor($data['anchor']);
-        }
-        if (array_key_exists('week', $data)) {
-            $this->setWeek($data['week']);
-        }
-        if (array_key_exists('time', $data)) {
-            $this->setTime($data['time']);
-        }
-        if (array_key_exists('day', $data)) {
-            $this->setDay($data['day']);
         }
     }
 
@@ -111,42 +106,6 @@ class SchedulingMethodDateInterval implements InvoiceRetryScheduleInstruction, R
         return $this;
     }
 
-    public function getWeek(): string
-    {
-        return $this->fields['week'];
-    }
-
-    public function setWeek(string $week): static
-    {
-        $this->fields['week'] = $week;
-
-        return $this;
-    }
-
-    public function getTime(): ?string
-    {
-        return $this->fields['time'] ?? null;
-    }
-
-    public function setTime(null|string $time): static
-    {
-        $this->fields['time'] = $time;
-
-        return $this;
-    }
-
-    public function getDay(): string
-    {
-        return $this->fields['day'];
-    }
-
-    public function setDay(string $day): static
-    {
-        $this->fields['day'] = $day;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [
@@ -160,15 +119,6 @@ class SchedulingMethodDateInterval implements InvoiceRetryScheduleInstruction, R
         }
         if (array_key_exists('anchor', $this->fields)) {
             $data['anchor'] = $this->fields['anchor']?->jsonSerialize();
-        }
-        if (array_key_exists('week', $this->fields)) {
-            $data['week'] = $this->fields['week'];
-        }
-        if (array_key_exists('time', $this->fields)) {
-            $data['time'] = $this->fields['time'];
-        }
-        if (array_key_exists('day', $this->fields)) {
-            $data['day'] = $this->fields['day'];
         }
 
         return $data;

@@ -17,6 +17,30 @@ use JsonSerializable;
 
 class InvoiceTimeShiftDueTimeShift implements JsonSerializable
 {
+    public const UNIT_SECOND = 'second';
+
+    public const UNIT_MINUTE = 'minute';
+
+    public const UNIT_HOUR = 'hour';
+
+    public const UNIT_DAY = 'day';
+
+    public const UNIT_MONTH = 'month';
+
+    public const UNIT_YEAR = 'year';
+
+    public const UNIT_SECONDS = 'seconds';
+
+    public const UNIT_MINUTES = 'minutes';
+
+    public const UNIT_HOURS = 'hours';
+
+    public const UNIT_DAYS = 'days';
+
+    public const UNIT_MONTHS = 'months';
+
+    public const UNIT_YEARS = 'years';
+
     private array $fields = [];
 
     public function __construct(array $data = [])

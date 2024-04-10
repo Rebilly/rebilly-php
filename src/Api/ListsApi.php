@@ -30,7 +30,7 @@ class ListsApi
      * @return ValueList
      */
     public function create(
-        ?ValueList $valueList = null,
+        ValueList $valueList,
     ): ValueList {
         $uri = '/lists';
 

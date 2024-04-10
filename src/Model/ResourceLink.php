@@ -39,7 +39,7 @@ class ResourceLink implements JsonSerializable
         return $this->fields['href'] ?? null;
     }
 
-    public function setHref(?string $href): self
+    public function setHref(null|string $href): static
     {
         $this->fields['href'] = $href;
 
@@ -51,7 +51,7 @@ class ResourceLink implements JsonSerializable
         return $this->fields['rel'] ?? null;
     }
 
-    public function setRel(?string $rel): self
+    public function setRel(null|string $rel): static
     {
         $this->fields['rel'] = $rel;
 

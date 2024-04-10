@@ -17,6 +17,8 @@ use DateTimeImmutable;
 
 interface KycDocument
 {
+    public function getDocumentType(): string;
+
     public function getId(): ?string;
 
     /**
@@ -28,8 +30,6 @@ interface KycDocument
      * @param string[] $fileIds
      */
     public function setFileIds(array $fileIds): static;
-
-    public function getDocumentType(): string;
 
     public function getDocumentSubtype(): ?string;
 
@@ -80,7 +80,8 @@ interface KycDocument
 
     public function getRevision(): ?int;
 
-    public function getEmbedded(): ?ProofOfIdentityKycDocumentEmbedded;
-
-    public function setEmbedded(null|ProofOfIdentityKycDocumentEmbedded|array $embedded): static;
+    /**
+     * @return null|ResourceLink[]
+     */
+    public function getLinks(): ?array;
 }

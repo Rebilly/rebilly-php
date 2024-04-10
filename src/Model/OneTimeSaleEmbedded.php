@@ -46,73 +46,97 @@ class OneTimeSaleEmbedded implements JsonSerializable
         return new self($data);
     }
 
-    public function getRecentInvoice(): ?object
+    public function getRecentInvoice(): ?Invoice
     {
         return $this->fields['recentInvoice'] ?? null;
     }
 
-    public function setRecentInvoice(null|object $recentInvoice): static
+    public function setRecentInvoice(null|Invoice|array $recentInvoice): static
     {
+        if ($recentInvoice !== null && !($recentInvoice instanceof Invoice)) {
+            $recentInvoice = Invoice::from($recentInvoice);
+        }
+
         $this->fields['recentInvoice'] = $recentInvoice;
 
         return $this;
     }
 
-    public function getCustomer(): ?object
+    public function getCustomer(): ?Customer
     {
         return $this->fields['customer'] ?? null;
     }
 
-    public function setCustomer(null|object $customer): static
+    public function setCustomer(null|Customer|array $customer): static
     {
+        if ($customer !== null && !($customer instanceof Customer)) {
+            $customer = Customer::from($customer);
+        }
+
         $this->fields['customer'] = $customer;
 
         return $this;
     }
 
-    public function getWebsite(): ?object
+    public function getWebsite(): ?Website
     {
         return $this->fields['website'] ?? null;
     }
 
-    public function setWebsite(null|object $website): static
+    public function setWebsite(null|Website|array $website): static
     {
+        if ($website !== null && !($website instanceof Website)) {
+            $website = Website::from($website);
+        }
+
         $this->fields['website'] = $website;
 
         return $this;
     }
 
-    public function getLeadSource(): ?object
+    public function getLeadSource(): ?LeadSource
     {
         return $this->fields['leadSource'] ?? null;
     }
 
-    public function setLeadSource(null|object $leadSource): static
+    public function setLeadSource(null|LeadSource|array $leadSource): static
     {
+        if ($leadSource !== null && !($leadSource instanceof LeadSource)) {
+            $leadSource = LeadSource::from($leadSource);
+        }
+
         $this->fields['leadSource'] = $leadSource;
 
         return $this;
     }
 
-    public function getShippingRate(): ?object
+    public function getShippingRate(): ?ShippingRate
     {
         return $this->fields['shippingRate'] ?? null;
     }
 
-    public function setShippingRate(null|object $shippingRate): static
+    public function setShippingRate(null|ShippingRate|array $shippingRate): static
     {
+        if ($shippingRate !== null && !($shippingRate instanceof ShippingRate)) {
+            $shippingRate = ShippingRate::from($shippingRate);
+        }
+
         $this->fields['shippingRate'] = $shippingRate;
 
         return $this;
     }
 
-    public function getPaymentInstrument(): ?object
+    public function getPaymentInstrument(): ?PaymentInstrument
     {
         return $this->fields['paymentInstrument'] ?? null;
     }
 
-    public function setPaymentInstrument(null|object $paymentInstrument): static
+    public function setPaymentInstrument(null|PaymentInstrument|array $paymentInstrument): static
     {
+        if ($paymentInstrument !== null && !($paymentInstrument instanceof PaymentInstrument)) {
+            $paymentInstrument = PaymentInstrumentFactory::from($paymentInstrument);
+        }
+
         $this->fields['paymentInstrument'] = $paymentInstrument;
 
         return $this;
@@ -122,22 +146,22 @@ class OneTimeSaleEmbedded implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('recentInvoice', $this->fields)) {
-            $data['recentInvoice'] = $this->fields['recentInvoice'];
+            $data['recentInvoice'] = $this->fields['recentInvoice']?->jsonSerialize();
         }
         if (array_key_exists('customer', $this->fields)) {
-            $data['customer'] = $this->fields['customer'];
+            $data['customer'] = $this->fields['customer']?->jsonSerialize();
         }
         if (array_key_exists('website', $this->fields)) {
-            $data['website'] = $this->fields['website'];
+            $data['website'] = $this->fields['website']?->jsonSerialize();
         }
         if (array_key_exists('leadSource', $this->fields)) {
-            $data['leadSource'] = $this->fields['leadSource'];
+            $data['leadSource'] = $this->fields['leadSource']?->jsonSerialize();
         }
         if (array_key_exists('shippingRate', $this->fields)) {
-            $data['shippingRate'] = $this->fields['shippingRate'];
+            $data['shippingRate'] = $this->fields['shippingRate']?->jsonSerialize();
         }
         if (array_key_exists('paymentInstrument', $this->fields)) {
-            $data['paymentInstrument'] = $this->fields['paymentInstrument'];
+            $data['paymentInstrument'] = $this->fields['paymentInstrument']?->jsonSerialize();
         }
 
         return $data;

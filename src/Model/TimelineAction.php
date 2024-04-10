@@ -15,5 +15,5 @@ namespace Rebilly\Sdk\Model;
 
 interface TimelineAction
 {
-    public function getAction(): ?string;
+    public function getAction(): string;
 }

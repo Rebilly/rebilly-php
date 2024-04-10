@@ -34,25 +34,33 @@ class PaymentCardEmbedded implements JsonSerializable
         return new self($data);
     }
 
-    public function getAuthTransaction(): ?object
+    public function getAuthTransaction(): ?Transaction
     {
         return $this->fields['authTransaction'] ?? null;
     }
 
-    public function setAuthTransaction(null|object $authTransaction): static
+    public function setAuthTransaction(null|Transaction|array $authTransaction): static
     {
+        if ($authTransaction !== null && !($authTransaction instanceof Transaction)) {
+            $authTransaction = Transaction::from($authTransaction);
+        }
+
         $this->fields['authTransaction'] = $authTransaction;
 
         return $this;
     }
 
-    public function getCustomer(): ?object
+    public function getCustomer(): ?Customer
     {
         return $this->fields['customer'] ?? null;
     }
 
-    public function setCustomer(null|object $customer): static
+    public function setCustomer(null|Customer|array $customer): static
     {
+        if ($customer !== null && !($customer instanceof Customer)) {
+            $customer = Customer::from($customer);
+        }
+
         $this->fields['customer'] = $customer;
 
         return $this;
@@ -62,10 +70,10 @@ class PaymentCardEmbedded implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('authTransaction', $this->fields)) {
-            $data['authTransaction'] = $this->fields['authTransaction'];
+            $data['authTransaction'] = $this->fields['authTransaction']?->jsonSerialize();
         }
         if (array_key_exists('customer', $this->fields)) {
-            $data['customer'] = $this->fields['customer'];
+            $data['customer'] = $this->fields['customer']?->jsonSerialize();
         }
 
         return $data;

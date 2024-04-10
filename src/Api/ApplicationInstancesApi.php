@@ -81,7 +81,7 @@ class ApplicationInstancesApi
      */
     public function upsert(
         string $applicationId,
-        ?ApplicationInstance $applicationInstance = null,
+        ApplicationInstance $applicationInstance,
     ): ApplicationInstance {
         $pathParams = [
             '{applicationId}' => $applicationId,
@@ -101,7 +101,7 @@ class ApplicationInstancesApi
      */
     public function upsertConfiguration(
         string $applicationId,
-        ?ApplicationInstanceConfiguration $applicationInstanceConfiguration = null,
+        ApplicationInstanceConfiguration $applicationInstanceConfiguration,
     ): ApplicationInstanceConfiguration {
         $pathParams = [
             '{applicationId}' => $applicationId,

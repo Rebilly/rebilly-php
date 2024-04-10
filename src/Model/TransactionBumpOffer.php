@@ -112,17 +112,6 @@ class TransactionBumpOffer implements JsonSerializable
         return $this->fields['selectedOffer'] ?? null;
     }
 
-    public function setSelectedOffer(null|PurchaseBumpOffer|array $selectedOffer): static
-    {
-        if ($selectedOffer !== null && !($selectedOffer instanceof PurchaseBumpOffer)) {
-            $selectedOffer = PurchaseBumpOffer::from($selectedOffer);
-        }
-
-        $this->fields['selectedOffer'] = $selectedOffer;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [];
@@ -166,6 +155,17 @@ class TransactionBumpOffer implements JsonSerializable
         ) : null;
 
         $this->fields['presentedOffers'] = $presentedOffers;
+
+        return $this;
+    }
+
+    private function setSelectedOffer(null|PurchaseBumpOffer|array $selectedOffer): static
+    {
+        if ($selectedOffer !== null && !($selectedOffer instanceof PurchaseBumpOffer)) {
+            $selectedOffer = PurchaseBumpOffer::from($selectedOffer);
+        }
+
+        $this->fields['selectedOffer'] = $selectedOffer;
 
         return $this;
     }

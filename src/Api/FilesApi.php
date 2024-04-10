@@ -92,6 +92,27 @@ class FilesApi
         return $response->getBody();
     }
 
+    public function downloadPdf(
+        string $id,
+        ?string $imageSize = null,
+    ): StreamInterface {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $queryParams = [
+            'imageSize' => $imageSize,
+        ];
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/files/{id}/download?') . http_build_query($queryParams);
+
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/pdf',
+        ]);
+        $response = $this->client->send($request, ['allow_redirects' => ['refer' => true]]);
+
+        return $response->getBody();
+    }
+
     /**
      * @return File
      */

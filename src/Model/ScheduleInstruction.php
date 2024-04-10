@@ -15,4 +15,5 @@ namespace Rebilly\Sdk\Model;
 
 interface ScheduleInstruction
 {
+    public function getMethod(): string;
 }

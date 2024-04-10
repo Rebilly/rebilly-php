@@ -23,7 +23,7 @@ use Rebilly\Sdk\Model\CumulativeSubscriptions;
 use Rebilly\Sdk\Model\DashboardResponse;
 use Rebilly\Sdk\Model\DccMarkup;
 use Rebilly\Sdk\Model\FutureRenewals;
-use Rebilly\Sdk\Model\GetKycAcceptanceSummaryResponse;
+use Rebilly\Sdk\Model\GetKycAcceptanceSummaryReportResponse;
 use Rebilly\Sdk\Model\RenewalSales;
 use Rebilly\Sdk\Model\ReportDeclinedTransactions;
 use Rebilly\Sdk\Model\ReportDisputeDelays;
@@ -272,10 +272,10 @@ class ReportsApi
     ): ReportJournal {
         $queryParams = [
             'currency' => $currency,
-            'bookedFrom' => $bookedFrom,
-            'bookedTo' => $bookedTo,
             'recognizedAt' => $recognizedAt,
             'aggregationField' => $aggregationField,
+            'bookedFrom' => $bookedFrom,
+            'bookedTo' => $bookedTo,
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
@@ -290,12 +290,12 @@ class ReportsApi
     }
 
     /**
-     * @return GetKycAcceptanceSummaryResponse
+     * @return GetKycAcceptanceSummaryReportResponse
      */
     public function getKycAcceptanceSummary(
         DateTimeImmutable $periodStart,
         DateTimeImmutable $periodEnd,
-    ): GetKycAcceptanceSummaryResponse {
+    ): GetKycAcceptanceSummaryReportResponse {
         $queryParams = [
             'periodStart' => $periodStart->format('Y-m-d\TH:i:s\Z'),
             'periodEnd' => $periodEnd->format('Y-m-d\TH:i:s\Z'),
@@ -306,7 +306,7 @@ class ReportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return GetKycAcceptanceSummaryResponse::from($data);
+        return GetKycAcceptanceSummaryReportResponse::from($data);
     }
 
     /**
@@ -416,9 +416,9 @@ class ReportsApi
         $queryParams = [
             'aggregationField' => $aggregationField,
             'aggregationPeriod' => $aggregationPeriod,
-            'includeSwitchedSubscriptions' => $includeSwitchedSubscriptions,
             'periodStart' => $periodStart->format('Y-m-d\TH:i:s\Z'),
             'periodEnd' => $periodEnd->format('Y-m-d\TH:i:s\Z'),
+            'includeSwitchedSubscriptions' => $includeSwitchedSubscriptions,
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
@@ -452,10 +452,10 @@ class ReportsApi
         $queryParams = [
             'aggregationField' => $aggregationField,
             'aggregationPeriod' => $aggregationPeriod,
-            'includeRefunds' => $includeRefunds,
-            'includeDisputes' => $includeDisputes,
             'periodStart' => $periodStart->format('Y-m-d\TH:i:s\Z'),
             'periodEnd' => $periodEnd->format('Y-m-d\TH:i:s\Z'),
+            'includeRefunds' => $includeRefunds,
+            'includeDisputes' => $includeDisputes,
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,

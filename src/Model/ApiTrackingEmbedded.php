@@ -31,13 +31,17 @@ class ApiTrackingEmbedded implements JsonSerializable
         return new self($data);
     }
 
-    public function getOrganization(): ?object
+    public function getOrganization(): ?Organization
     {
         return $this->fields['organization'] ?? null;
     }
 
-    public function setOrganization(null|object $organization): static
+    public function setOrganization(null|Organization|array $organization): static
     {
+        if ($organization !== null && !($organization instanceof Organization)) {
+            $organization = Organization::from($organization);
+        }
+
         $this->fields['organization'] = $organization;
 
         return $this;
@@ -47,7 +51,7 @@ class ApiTrackingEmbedded implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('organization', $this->fields)) {
-            $data['organization'] = $this->fields['organization'];
+            $data['organization'] = $this->fields['organization']?->jsonSerialize();
         }
 
         return $data;

@@ -88,7 +88,7 @@ class RuleActionOfferPurchaseBumpBumpOffers implements JsonSerializable
     }
 
     /**
-     * @return RuleActionOfferPurchaseBumpChoices[]
+     * @return RuleActionOfferPurchaseBumpBumpOffersChoices[]
      */
     public function getChoices(): array
     {
@@ -96,12 +96,12 @@ class RuleActionOfferPurchaseBumpBumpOffers implements JsonSerializable
     }
 
     /**
-     * @param array[]|RuleActionOfferPurchaseBumpChoices[] $choices
+     * @param array[]|RuleActionOfferPurchaseBumpBumpOffersChoices[] $choices
      */
     public function setChoices(array $choices): static
     {
         $choices = array_map(
-            fn ($value) => $value instanceof RuleActionOfferPurchaseBumpChoices ? $value : RuleActionOfferPurchaseBumpChoices::from($value),
+            fn ($value) => $value instanceof RuleActionOfferPurchaseBumpBumpOffersChoices ? $value : RuleActionOfferPurchaseBumpBumpOffersChoices::from($value),
             $choices,
         );
 

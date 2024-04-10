@@ -17,6 +17,46 @@ use JsonSerializable;
 
 class EddParsedScore implements JsonSerializable
 {
+    public const OCCUPATION_NOT_FOUND = 'not-found';
+
+    public const OCCUPATION_UNLIKELY = 'unlikely';
+
+    public const OCCUPATION_UNCLEAR = 'unclear';
+
+    public const OCCUPATION_PROBABLE = 'probable';
+
+    public const OCCUPATION_CONFIRMED = 'confirmed';
+
+    public const ARREST_NOT_FOUND = 'not-found';
+
+    public const ARREST_UNLIKELY = 'unlikely';
+
+    public const ARREST_UNCLEAR = 'unclear';
+
+    public const ARREST_PROBABLE = 'probable';
+
+    public const ARREST_CONFIRMED = 'confirmed';
+
+    public const BANKRUPTCY_NOT_FOUND = 'not-found';
+
+    public const BANKRUPTCY_UNLIKELY = 'unlikely';
+
+    public const BANKRUPTCY_UNCLEAR = 'unclear';
+
+    public const BANKRUPTCY_PROBABLE = 'probable';
+
+    public const BANKRUPTCY_CONFIRMED = 'confirmed';
+
+    public const FRAUD_NOT_FOUND = 'not-found';
+
+    public const FRAUD_UNLIKELY = 'unlikely';
+
+    public const FRAUD_UNCLEAR = 'unclear';
+
+    public const FRAUD_PROBABLE = 'probable';
+
+    public const FRAUD_CONFIRMED = 'confirmed';
+
     private array $fields = [];
 
     public function __construct(array $data = [])

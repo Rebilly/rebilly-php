@@ -50,15 +50,15 @@ class KycSettingsAddress implements JsonSerializable
         return $this;
     }
 
-    public function getThresholds(): ?KycSettingsIdentityThresholds
+    public function getThresholds(): ?KycSettingsAddressThresholds
     {
         return $this->fields['thresholds'] ?? null;
     }
 
-    public function setThresholds(null|KycSettingsIdentityThresholds|array $thresholds): static
+    public function setThresholds(null|KycSettingsAddressThresholds|array $thresholds): static
     {
-        if ($thresholds !== null && !($thresholds instanceof KycSettingsIdentityThresholds)) {
-            $thresholds = KycSettingsIdentityThresholds::from($thresholds);
+        if ($thresholds !== null && !($thresholds instanceof KycSettingsAddressThresholds)) {
+            $thresholds = KycSettingsAddressThresholds::from($thresholds);
         }
 
         $this->fields['thresholds'] = $thresholds;

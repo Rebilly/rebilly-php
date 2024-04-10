@@ -20,8 +20,8 @@ class CountriesMetadataFactory
     public static function from(array $data = []): CountriesMetadata
     {
         return match ($data['mode']) {
-            'all' => CountriesUnrestrictedMetadata::from($data),
             'subset' => CountriesSubsetMetadata::from($data),
+            'all' => CountriesUnrestrictedMetadata::from($data),
             'unknown' => CountriesUnrestrictedMetadata::from($data),
             default => throw new UnknownDiscriminatorValueException(),
         };

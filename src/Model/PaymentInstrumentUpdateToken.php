@@ -17,12 +17,6 @@ use JsonSerializable;
 
 class PaymentInstrumentUpdateToken implements PatchPaymentInstrumentRequest, JsonSerializable
 {
-    public const ACCOUNT_TYPE_CHECKING = 'checking';
-
-    public const ACCOUNT_TYPE_SAVINGS = 'savings';
-
-    public const ACCOUNT_TYPE_OTHER = 'other';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -41,21 +35,6 @@ class PaymentInstrumentUpdateToken implements PatchPaymentInstrumentRequest, Jso
         }
         if (array_key_exists('useAsBackup', $data)) {
             $this->setUseAsBackup($data['useAsBackup']);
-        }
-        if (array_key_exists('expMonth', $data)) {
-            $this->setExpMonth($data['expMonth']);
-        }
-        if (array_key_exists('cvv', $data)) {
-            $this->setCvv($data['cvv']);
-        }
-        if (array_key_exists('expYear', $data)) {
-            $this->setExpYear($data['expYear']);
-        }
-        if (array_key_exists('accountType', $data)) {
-            $this->setAccountType($data['accountType']);
-        }
-        if (array_key_exists('bankName', $data)) {
-            $this->setBankName($data['bankName']);
         }
     }
 
@@ -128,66 +107,6 @@ class PaymentInstrumentUpdateToken implements PatchPaymentInstrumentRequest, Jso
         return $this;
     }
 
-    public function getExpMonth(): ?int
-    {
-        return $this->fields['expMonth'] ?? null;
-    }
-
-    public function setExpMonth(null|int $expMonth): static
-    {
-        $this->fields['expMonth'] = $expMonth;
-
-        return $this;
-    }
-
-    public function getCvv(): ?string
-    {
-        return $this->fields['cvv'] ?? null;
-    }
-
-    public function setCvv(null|string $cvv): static
-    {
-        $this->fields['cvv'] = $cvv;
-
-        return $this;
-    }
-
-    public function getExpYear(): ?int
-    {
-        return $this->fields['expYear'] ?? null;
-    }
-
-    public function setExpYear(null|int $expYear): static
-    {
-        $this->fields['expYear'] = $expYear;
-
-        return $this;
-    }
-
-    public function getAccountType(): ?string
-    {
-        return $this->fields['accountType'] ?? null;
-    }
-
-    public function setAccountType(null|string $accountType): static
-    {
-        $this->fields['accountType'] = $accountType;
-
-        return $this;
-    }
-
-    public function getBankName(): ?string
-    {
-        return $this->fields['bankName'] ?? null;
-    }
-
-    public function setBankName(null|string $bankName): static
-    {
-        $this->fields['bankName'] = $bankName;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [];
@@ -205,21 +124,6 @@ class PaymentInstrumentUpdateToken implements PatchPaymentInstrumentRequest, Jso
         }
         if (array_key_exists('useAsBackup', $this->fields)) {
             $data['useAsBackup'] = $this->fields['useAsBackup'];
-        }
-        if (array_key_exists('expMonth', $this->fields)) {
-            $data['expMonth'] = $this->fields['expMonth'];
-        }
-        if (array_key_exists('cvv', $this->fields)) {
-            $data['cvv'] = $this->fields['cvv'];
-        }
-        if (array_key_exists('expYear', $this->fields)) {
-            $data['expYear'] = $this->fields['expYear'];
-        }
-        if (array_key_exists('accountType', $this->fields)) {
-            $data['accountType'] = $this->fields['accountType'];
-        }
-        if (array_key_exists('bankName', $this->fields)) {
-            $data['bankName'] = $this->fields['bankName'];
         }
 
         return $data;

@@ -119,13 +119,6 @@ class BankAccountToken implements CompositeToken, JsonSerializable
         return $this->fields['id'] ?? null;
     }
 
-    public function setId(null|string $id): static
-    {
-        $this->fields['id'] = $id;
-
-        return $this;
-    }
-
     public function getIsUsed(): ?bool
     {
         return $this->fields['isUsed'] ?? null;
@@ -232,6 +225,13 @@ class BankAccountToken implements CompositeToken, JsonSerializable
         }
 
         return $data;
+    }
+
+    private function setId(null|string $id): static
+    {
+        $this->fields['id'] = $id;
+
+        return $this;
     }
 
     private function setIsUsed(null|bool $isUsed): static
