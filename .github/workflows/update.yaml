@@ -59,11 +59,14 @@ jobs:
 
       - name: Build api-definitions
         working-directory: ./api-definitions
-        run: npx redocly bundle all@3.0 -o dist/all-3.0.yaml
+        run: npx redocly bundle all -o dist/all.yaml
 
-      - name: Login to registry
-        run: |
-          echo ${{ secrets.MACHINE_USER_PAT }} | docker login ghcr.io --username ${{ github.actor }} --password-stdin
+      - name: Login to GitHub Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.MACHINE_USER_PAT }}
 
       - name: Build SDK
         run: |
@@ -72,21 +75,18 @@ jobs:
             -u $(id -u ${USER}):$(id -g ${USER}) \
             -v "/tmp/sdk:/out" \
             -v "$(pwd)/api-definitions/dist:/api-definitions" \
-            -v "$(pwd)/api-definitions/plugins/products-bundler/mapping:/bundle-mapping" \
-            ghcr.io/rebilly/php-sdk-generator:latest generate \
-            --skip-validate-spec \
-            -g php-8.0-client \
+            ghcr.io/rebilly/regenerator:latest  generate \
+            -g rebilly-php \
+            -D /out/openapi.json \
             -o /out \
-            -c /config.yaml \
-            -i "/api-definitions/all-3.0.yaml"
+            -C '{"rootNameSpace": "Rebilly.Sdk", "customOperationGroupMapping": "/shared/custom-resource-names.json"}' \
+            "/api-definitions/all.yaml"
           ls -lAh /tmp/ /tmp/sdk/
 
       - name: Bundle SDK
         run: |
           rm -rf ./sdk/{src,composer.json,.php-cs-fixer.php,psalm.xml} && \
           cp -r /tmp/sdk/{src,composer.json,.php-cs-fixer.php,psalm.xml} ./sdk/
-          php ./generator/backend/php-sdk-generator/remove-fqcns.php ./sdk && \
-          php ./generator/backend/php-sdk-generator/remove-unused-models.php ./sdk && \
           cd ./sdk && node ./scripts/update-sdk-version.js
 
       - name: Get composer cache directory
