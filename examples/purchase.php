@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This source file is proprietary and part of Rebilly.
  *
@@ -10,22 +11,21 @@
  */
 
 use Rebilly\Sdk\Client;
-use Rebilly\Sdk\CoreService;
 use Rebilly\Sdk\Exception\DataValidationException;
 use Rebilly\Sdk\Model\ContactObject;
 use Rebilly\Sdk\Model\Customer;
+use Rebilly\Sdk\Model\OriginalPlan;
 use Rebilly\Sdk\Model\PaymentCardToken;
 use Rebilly\Sdk\Model\PaymentInstructionToken;
-use Rebilly\Sdk\Model\Plan;
 use Rebilly\Sdk\Model\PlanFormulaFlatRate;
 use Rebilly\Sdk\Model\PostTransactionRequest;
 use Rebilly\Sdk\Model\Product;
 use Rebilly\Sdk\Model\Subscription;
 use Rebilly\Sdk\Model\SubscriptionOrOneTimeSaleItem;
-use Rebilly\Sdk\Model\SubscriptionOrOneTimeSaleItemPlan;
+use Rebilly\Sdk\Model\SubscriptionPlan;
 use Rebilly\Sdk\Model\SubscriptionPlanRecurringInterval;
 use Rebilly\Sdk\Model\Website;
-use Rebilly\Sdk\UsersService;
+use Rebilly\Sdk\Service;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -34,8 +34,7 @@ $client = new Client([
     'organizationId' => '{organizationId}',
     'apiKey' => '{secretKey}',
 ]);
-$coreService = new CoreService(client: $client);
-$usersService = new UsersService(client: $client);
+$service = new Service(client: $client);
 
 function printEntity(mixed $entity): void
 {
@@ -52,7 +51,7 @@ try {
         ->setServicePhone('1234567890')
         ->setServiceEmail('mail@example.test');
 
-    $website = $usersService->websites()->create($website);
+    $website = $service->websites()->create($website);
     $websiteId = $website->getId();
 
     // Create customer
@@ -67,7 +66,7 @@ try {
 
     printEntity($customer);
 
-    $customer = $coreService->customers()->create($customer);
+    $customer = $service->customers()->create($customer);
 
     echo 'Customer: ' . $customer->getId() . PHP_EOL;
     printEntity($customer);
@@ -80,14 +79,14 @@ try {
 
     printEntity($product);
 
-    $product = $coreService->products()->create($product);
+    $product = $service->products()->create($product);
 
     echo 'Product: ' . $product->getId() . PHP_EOL;
     printEntity($product);
 
     // Create plan
 
-    $plan = Plan::from([])
+    $plan = SubscriptionPlan::from([])
         ->setProductId($product->getId())
         ->setName('Test plan')
         ->setCurrency('USD')
@@ -103,7 +102,7 @@ try {
 
     printEntity($plan);
 
-    $plan = $coreService->plans()->create($plan);
+    $plan = $service->plans()->create($plan);
 
     echo 'Plan: ' . $plan->getId() . PHP_EOL;
     printEntity($plan);
@@ -116,21 +115,21 @@ try {
         ->setItems([
             SubscriptionOrOneTimeSaleItem::from()
                 ->setPlan(
-                    SubscriptionOrOneTimeSaleItemPlan::from()
+                    OriginalPlan::from()
                         ->setId($plan->getId())
                 )
-            ->setQuantity(1),
+                ->setQuantity(1),
         ]);
 
     printEntity($subscription);
 
     /** @var Subscription $subscription */
-    $subscription = $coreService->subscriptions()->create($subscription);
+    $subscription = $service->subscriptions()->create($subscription);
 
     echo 'Subscription: ' . $subscription->getId() . PHP_EOL;
     printEntity($subscription);
 
-    $invoice = $coreService->invoices()->get($subscription->getInitialInvoiceId());
+    $invoice = $service->invoices()->get($subscription->getInitialInvoiceId());
 
     echo 'Initial invoice: ' . $invoice->getId() . PHP_EOL;
     printEntity($invoice);
@@ -148,7 +147,7 @@ try {
 
     printEntity($token);
 
-    $token = $coreService->paymentTokens()->create($token);
+    $token = $service->paymentTokens()->create($token);
 
     echo 'Token: ' . $token->getId() . PHP_EOL;
     printEntity($token);
@@ -172,12 +171,12 @@ try {
 
     printEntity($transactionRequest);
 
-    $transaction = $coreService->transactions()->create($transactionRequest);
+    $transaction = $service->transactions()->create($transactionRequest);
 
     echo 'Transaction: ' . $transaction->getId() . PHP_EOL;
     printEntity($transaction);
 
-    $subscription = $coreService->subscriptions()->get($subscription->getId());
+    $subscription = $service->subscriptions()->get($subscription->getId());
 
     printEntity($subscription);
 } catch (DataValidationException $e) {

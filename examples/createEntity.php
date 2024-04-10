@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This source file is proprietary and part of Rebilly.
  *
@@ -12,8 +13,8 @@
 declare(strict_types=1);
 
 use Rebilly\Sdk\Client;
-use Rebilly\Sdk\CoreService;
 use Rebilly\Sdk\Model\Product;
+use Rebilly\Sdk\Service;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -22,7 +23,7 @@ $client = new Client([
     'organizationId' => '{organizationId}',
     'apiKey' => '{secretKey}',
 ]);
-$coreService = new CoreService(client: $client);
+$service = new Service(client: $client);
 
 // Create entity using setters
 
@@ -30,7 +31,7 @@ $product1 = Product::from()
     ->setName('Test setters product')
     ->setDescription('Test setters description');
 
-$coreService->products()->create($product1);
+$service->products()->create($product1);
 
 printEntity($product1);
 
@@ -41,7 +42,7 @@ $product2 = Product::from([
     'description' => 'Test fromArray description',
 ]);
 
-$coreService->products()->create($product2);
+$service->products()->create($product2);
 
 printEntity($product2);
 
