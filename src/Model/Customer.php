@@ -157,7 +157,7 @@ class Customer implements JsonSerializable
     public function setDefaultPaymentInstrument(null|CustomerDefaultPaymentInstrument|array $defaultPaymentInstrument): static
     {
         if ($defaultPaymentInstrument !== null && !($defaultPaymentInstrument instanceof CustomerDefaultPaymentInstrument)) {
-            $defaultPaymentInstrument = CustomerDefaultPaymentInstrument::from($defaultPaymentInstrument);
+            $defaultPaymentInstrument = CustomerDefaultPaymentInstrumentFactory::from($defaultPaymentInstrument);
         }
 
         $this->fields['defaultPaymentInstrument'] = $defaultPaymentInstrument;
@@ -299,13 +299,6 @@ class Customer implements JsonSerializable
     public function getOrganizationId(): ?string
     {
         return $this->fields['organizationId'] ?? null;
-    }
-
-    public function setOrganizationId(null|string $organizationId): static
-    {
-        $this->fields['organizationId'] = $organizationId;
-
-        return $this;
     }
 
     /**
@@ -537,6 +530,13 @@ class Customer implements JsonSerializable
     private function setHasFulfilledKyc(null|bool $hasFulfilledKyc): static
     {
         $this->fields['hasFulfilledKyc'] = $hasFulfilledKyc;
+
+        return $this;
+    }
+
+    private function setOrganizationId(null|string $organizationId): static
+    {
+        $this->fields['organizationId'] = $organizationId;
 
         return $this;
     }

@@ -59,13 +59,6 @@ class Tag implements JsonSerializable
         return $this->fields['id'] ?? null;
     }
 
-    public function setId(null|string $id): static
-    {
-        $this->fields['id'] = $id;
-
-        return $this;
-    }
-
     public function getName(): string
     {
         return $this->fields['name'];
@@ -131,6 +124,13 @@ class Tag implements JsonSerializable
         }
 
         return $data;
+    }
+
+    private function setId(null|string $id): static
+    {
+        $this->fields['id'] = $id;
+
+        return $this;
     }
 
     private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static

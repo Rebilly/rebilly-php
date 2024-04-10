@@ -31,13 +31,24 @@ class MembershipEmbedded implements JsonSerializable
         return new self($data);
     }
 
+    /**
+     * @return null|Role[]
+     */
     public function getRoles(): ?array
     {
         return $this->fields['roles'] ?? null;
     }
 
+    /**
+     * @param null|array[]|Role[] $roles
+     */
     public function setRoles(null|array $roles): static
     {
+        $roles = $roles !== null ? array_map(
+            fn ($value) => $value instanceof Role ? $value : Role::from($value),
+            $roles,
+        ) : null;
+
         $this->fields['roles'] = $roles;
 
         return $this;

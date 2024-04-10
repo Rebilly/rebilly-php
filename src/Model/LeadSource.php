@@ -230,17 +230,6 @@ class LeadSource implements JsonSerializable
         return $this->fields['original'] ?? null;
     }
 
-    public function setOriginal(null|LeadSourceData|array $original): static
-    {
-        if ($original !== null && !($original instanceof LeadSourceData)) {
-            $original = LeadSourceData::from($original);
-        }
-
-        $this->fields['original'] = $original;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [];
@@ -326,6 +315,17 @@ class LeadSource implements JsonSerializable
         ) : null;
 
         $this->fields['_links'] = $links;
+
+        return $this;
+    }
+
+    private function setOriginal(null|LeadSourceData|array $original): static
+    {
+        if ($original !== null && !($original instanceof LeadSourceData)) {
+            $original = LeadSourceData::from($original);
+        }
+
+        $this->fields['original'] = $original;
 
         return $this;
     }

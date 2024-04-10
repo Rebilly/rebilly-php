@@ -99,15 +99,15 @@ class DepositStrategy implements JsonSerializable
         return $this;
     }
 
-    public function getCustomAmount(): PostDepositRequestCustomAmount
+    public function getCustomAmount(): DepositStrategyCustomAmount
     {
         return $this->fields['customAmount'];
     }
 
-    public function setCustomAmount(PostDepositRequestCustomAmount|array $customAmount): static
+    public function setCustomAmount(DepositStrategyCustomAmount|array $customAmount): static
     {
-        if (!($customAmount instanceof PostDepositRequestCustomAmount)) {
-            $customAmount = PostDepositRequestCustomAmount::from($customAmount);
+        if (!($customAmount instanceof DepositStrategyCustomAmount)) {
+            $customAmount = DepositStrategyCustomAmount::from($customAmount);
         }
 
         $this->fields['customAmount'] = $customAmount;

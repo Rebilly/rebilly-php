@@ -17,6 +17,9 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
+use Rebilly\Sdk\Model\DeleteTagAmlCheckCollectionRequest;
+use Rebilly\Sdk\Model\DeleteTagCustomerCollectionRequest;
+use Rebilly\Sdk\Model\DeleteTagKycDocumentCollectionRequest;
 use Rebilly\Sdk\Model\PatchTagRequest;
 use Rebilly\Sdk\Model\PostTagAmlCheckCollectionRequest;
 use Rebilly\Sdk\Model\PostTagCustomerCollectionRequest;
@@ -233,7 +236,7 @@ class TagsApi
 
     public function untagAmlChecks(
         string $tag,
-        PostTagAmlCheckCollectionRequest $postTagAmlCheckCollectionRequest,
+        DeleteTagAmlCheckCollectionRequest $deleteTagAmlCheckCollectionRequest,
     ): void {
         $pathParams = [
             '{tag}' => $tag,
@@ -241,7 +244,7 @@ class TagsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/tags/{tag}/aml-checks');
 
-        $request = new Request('DELETE', $uri, body: Utils::jsonEncode($postTagAmlCheckCollectionRequest));
+        $request = new Request('DELETE', $uri, body: Utils::jsonEncode($deleteTagAmlCheckCollectionRequest));
         $this->client->send($request);
     }
 
@@ -262,7 +265,7 @@ class TagsApi
 
     public function untagCustomers(
         string $tag,
-        PostTagCustomerCollectionRequest $postTagCustomerCollectionRequest,
+        DeleteTagCustomerCollectionRequest $deleteTagCustomerCollectionRequest,
     ): void {
         $pathParams = [
             '{tag}' => $tag,
@@ -270,7 +273,7 @@ class TagsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/tags/{tag}/customers');
 
-        $request = new Request('DELETE', $uri, body: Utils::jsonEncode($postTagCustomerCollectionRequest));
+        $request = new Request('DELETE', $uri, body: Utils::jsonEncode($deleteTagCustomerCollectionRequest));
         $this->client->send($request);
     }
 
@@ -291,7 +294,7 @@ class TagsApi
 
     public function untagKycDocuments(
         string $tag,
-        PostTagKycDocumentCollectionRequest $postTagKycDocumentCollectionRequest,
+        DeleteTagKycDocumentCollectionRequest $deleteTagKycDocumentCollectionRequest,
     ): void {
         $pathParams = [
             '{tag}' => $tag,
@@ -299,7 +302,7 @@ class TagsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/tags/{tag}/kyc-documents');
 
-        $request = new Request('DELETE', $uri, body: Utils::jsonEncode($postTagKycDocumentCollectionRequest));
+        $request = new Request('DELETE', $uri, body: Utils::jsonEncode($deleteTagKycDocumentCollectionRequest));
         $this->client->send($request);
     }
 

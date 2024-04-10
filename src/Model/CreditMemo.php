@@ -27,7 +27,7 @@ class CreditMemo implements JsonSerializable
 
     public const STATUS_VOIDED = 'voided';
 
-    public const REASON__RETURN = 'return';
+    public const REASON_RETURN = 'return';
 
     public const REASON_PRODUCT_UNSATISFACTORY = 'product-unsatisfactory';
 
@@ -229,23 +229,9 @@ class CreditMemo implements JsonSerializable
         return $this->fields['customerId'];
     }
 
-    public function setCustomerId(string $customerId): static
-    {
-        $this->fields['customerId'] = $customerId;
-
-        return $this;
-    }
-
     public function getCurrency(): string
     {
         return $this->fields['currency'];
-    }
-
-    public function setCurrency(string $currency): static
-    {
-        $this->fields['currency'] = $currency;
-
-        return $this;
     }
 
     public function getInvoiceId(): ?string
@@ -396,6 +382,20 @@ class CreditMemo implements JsonSerializable
     private function setRevision(null|int $revision): static
     {
         $this->fields['revision'] = $revision;
+
+        return $this;
+    }
+
+    private function setCustomerId(string $customerId): static
+    {
+        $this->fields['customerId'] = $customerId;
+
+        return $this;
+    }
+
+    private function setCurrency(string $currency): static
+    {
+        $this->fields['currency'] = $currency;
 
         return $this;
     }

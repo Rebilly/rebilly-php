@@ -90,13 +90,6 @@ class PatchKycRequestRequest implements JsonSerializable
         return $this->fields['customerId'];
     }
 
-    public function setCustomerId(string $customerId): static
-    {
-        $this->fields['customerId'] = $customerId;
-
-        return $this;
-    }
-
     public function getId(): ?string
     {
         return $this->fields['id'] ?? null;
@@ -265,6 +258,13 @@ class PatchKycRequestRequest implements JsonSerializable
         }
 
         return $data;
+    }
+
+    private function setCustomerId(string $customerId): static
+    {
+        $this->fields['customerId'] = $customerId;
+
+        return $this;
     }
 
     private function setId(null|string $id): static

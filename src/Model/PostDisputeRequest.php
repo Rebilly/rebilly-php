@@ -19,161 +19,161 @@ use JsonSerializable;
 
 class PostDisputeRequest implements JsonSerializable
 {
-    public const REASON_CODE__0 = '0';
+    public const REASON_CODE_0 = '0';
 
-    public const REASON_CODE__00 = '00';
+    public const REASON_CODE_00 = '00';
 
-    public const REASON_CODE__1 = '1';
+    public const REASON_CODE_1 = '1';
 
-    public const REASON_CODE__2 = '2';
+    public const REASON_CODE_2 = '2';
 
-    public const REASON_CODE__3 = '3';
+    public const REASON_CODE_3 = '3';
 
-    public const REASON_CODE__4 = '4';
+    public const REASON_CODE_4 = '4';
 
-    public const REASON_CODE__5 = '5';
+    public const REASON_CODE_5 = '5';
 
-    public const REASON_CODE__6 = '6';
+    public const REASON_CODE_6 = '6';
 
-    public const REASON_CODE__7 = '7';
+    public const REASON_CODE_7 = '7';
 
-    public const REASON_CODE__8 = '8';
+    public const REASON_CODE_8 = '8';
 
-    public const REASON_CODE__9 = '9';
+    public const REASON_CODE_9 = '9';
 
-    public const REASON_CODE__10_1 = '10.1';
+    public const REASON_CODE_10_1 = '10.1';
 
-    public const REASON_CODE__10_2 = '10.2';
+    public const REASON_CODE_10_2 = '10.2';
 
-    public const REASON_CODE__10_3 = '10.3';
+    public const REASON_CODE_10_3 = '10.3';
 
-    public const REASON_CODE__10_4 = '10.4';
+    public const REASON_CODE_10_4 = '10.4';
 
-    public const REASON_CODE__10_5 = '10.5';
+    public const REASON_CODE_10_5 = '10.5';
 
-    public const REASON_CODE__11_1 = '11.1';
+    public const REASON_CODE_11_1 = '11.1';
 
-    public const REASON_CODE__11_2 = '11.2';
+    public const REASON_CODE_11_2 = '11.2';
 
-    public const REASON_CODE__11_3 = '11.3';
+    public const REASON_CODE_11_3 = '11.3';
 
-    public const REASON_CODE__12 = '12';
+    public const REASON_CODE_12 = '12';
 
-    public const REASON_CODE__12_1 = '12.1';
+    public const REASON_CODE_12_1 = '12.1';
 
-    public const REASON_CODE__12_2 = '12.2';
+    public const REASON_CODE_12_2 = '12.2';
 
-    public const REASON_CODE__12_3 = '12.3';
+    public const REASON_CODE_12_3 = '12.3';
 
-    public const REASON_CODE__12_4 = '12.4';
+    public const REASON_CODE_12_4 = '12.4';
 
-    public const REASON_CODE__12_5 = '12.5';
+    public const REASON_CODE_12_5 = '12.5';
 
-    public const REASON_CODE__12_6 = '12.6';
+    public const REASON_CODE_12_6 = '12.6';
 
-    public const REASON_CODE__12_7 = '12.7';
+    public const REASON_CODE_12_7 = '12.7';
 
-    public const REASON_CODE__13_1 = '13.1';
+    public const REASON_CODE_13_1 = '13.1';
 
-    public const REASON_CODE__13_2 = '13.2';
+    public const REASON_CODE_13_2 = '13.2';
 
-    public const REASON_CODE__13_3 = '13.3';
+    public const REASON_CODE_13_3 = '13.3';
 
-    public const REASON_CODE__13_4 = '13.4';
+    public const REASON_CODE_13_4 = '13.4';
 
-    public const REASON_CODE__13_5 = '13.5';
+    public const REASON_CODE_13_5 = '13.5';
 
-    public const REASON_CODE__13_6 = '13.6';
+    public const REASON_CODE_13_6 = '13.6';
 
-    public const REASON_CODE__13_7 = '13.7';
+    public const REASON_CODE_13_7 = '13.7';
 
-    public const REASON_CODE__13_8 = '13.8';
+    public const REASON_CODE_13_8 = '13.8';
 
-    public const REASON_CODE__13_9 = '13.9';
+    public const REASON_CODE_13_9 = '13.9';
 
-    public const REASON_CODE__30 = '30';
+    public const REASON_CODE_30 = '30';
 
-    public const REASON_CODE__31 = '31';
+    public const REASON_CODE_31 = '31';
 
-    public const REASON_CODE__34 = '34';
+    public const REASON_CODE_34 = '34';
 
-    public const REASON_CODE__35 = '35';
+    public const REASON_CODE_35 = '35';
 
-    public const REASON_CODE__37 = '37';
+    public const REASON_CODE_37 = '37';
 
-    public const REASON_CODE__40 = '40';
+    public const REASON_CODE_40 = '40';
 
-    public const REASON_CODE__41 = '41';
+    public const REASON_CODE_41 = '41';
 
-    public const REASON_CODE__42 = '42';
+    public const REASON_CODE_42 = '42';
 
-    public const REASON_CODE__46 = '46';
+    public const REASON_CODE_46 = '46';
 
-    public const REASON_CODE__47 = '47';
+    public const REASON_CODE_47 = '47';
 
-    public const REASON_CODE__49 = '49';
+    public const REASON_CODE_49 = '49';
 
-    public const REASON_CODE__50 = '50';
+    public const REASON_CODE_50 = '50';
 
-    public const REASON_CODE__51 = '51';
+    public const REASON_CODE_51 = '51';
 
-    public const REASON_CODE__53 = '53';
+    public const REASON_CODE_53 = '53';
 
-    public const REASON_CODE__54 = '54';
+    public const REASON_CODE_54 = '54';
 
-    public const REASON_CODE__55 = '55';
+    public const REASON_CODE_55 = '55';
 
-    public const REASON_CODE__57 = '57';
+    public const REASON_CODE_57 = '57';
 
-    public const REASON_CODE__59 = '59';
+    public const REASON_CODE_59 = '59';
 
-    public const REASON_CODE__60 = '60';
+    public const REASON_CODE_60 = '60';
 
-    public const REASON_CODE__62 = '62';
+    public const REASON_CODE_62 = '62';
 
-    public const REASON_CODE__63 = '63';
+    public const REASON_CODE_63 = '63';
 
-    public const REASON_CODE__70 = '70';
+    public const REASON_CODE_70 = '70';
 
-    public const REASON_CODE__71 = '71';
+    public const REASON_CODE_71 = '71';
 
-    public const REASON_CODE__72 = '72';
+    public const REASON_CODE_72 = '72';
 
-    public const REASON_CODE__73 = '73';
+    public const REASON_CODE_73 = '73';
 
-    public const REASON_CODE__74 = '74';
+    public const REASON_CODE_74 = '74';
 
-    public const REASON_CODE__75 = '75';
+    public const REASON_CODE_75 = '75';
 
-    public const REASON_CODE__76 = '76';
+    public const REASON_CODE_76 = '76';
 
-    public const REASON_CODE__77 = '77';
+    public const REASON_CODE_77 = '77';
 
-    public const REASON_CODE__78 = '78';
+    public const REASON_CODE_78 = '78';
 
-    public const REASON_CODE__79 = '79';
+    public const REASON_CODE_79 = '79';
 
-    public const REASON_CODE__80 = '80';
+    public const REASON_CODE_80 = '80';
 
-    public const REASON_CODE__81 = '81';
+    public const REASON_CODE_81 = '81';
 
-    public const REASON_CODE__82 = '82';
+    public const REASON_CODE_82 = '82';
 
-    public const REASON_CODE__83 = '83';
+    public const REASON_CODE_83 = '83';
 
-    public const REASON_CODE__85 = '85';
+    public const REASON_CODE_85 = '85';
 
-    public const REASON_CODE__86 = '86';
+    public const REASON_CODE_86 = '86';
 
-    public const REASON_CODE__93 = '93';
+    public const REASON_CODE_93 = '93';
 
-    public const REASON_CODE__98 = '98';
+    public const REASON_CODE_98 = '98';
 
-    public const REASON_CODE__1000 = '1000';
+    public const REASON_CODE_1000 = '1000';
 
-    public const REASON_CODE__2700 = '2700';
+    public const REASON_CODE_2700 = '2700';
 
-    public const REASON_CODE__2702 = '2702';
+    public const REASON_CODE_2702 = '2702';
 
     public const REASON_CODE_A = 'A';
 

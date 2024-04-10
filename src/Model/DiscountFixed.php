@@ -17,6 +17,12 @@ use JsonSerializable;
 
 class DiscountFixed implements Discount, JsonSerializable
 {
+    public const CONTEXT_ITEMS = 'items';
+
+    public const CONTEXT_SHIPPING = 'shipping';
+
+    public const CONTEXT_ITEMS_AND_SHIPPING = 'items-and-shipping';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -29,9 +35,6 @@ class DiscountFixed implements Discount, JsonSerializable
         }
         if (array_key_exists('context', $data)) {
             $this->setContext($data['context']);
-        }
-        if (array_key_exists('value', $data)) {
-            $this->setValue($data['value']);
         }
     }
 
@@ -85,22 +88,6 @@ class DiscountFixed implements Discount, JsonSerializable
         return $this;
     }
 
-    public function getValue(): float
-    {
-        return $this->fields['value'];
-    }
-
-    public function setValue(float|string $value): static
-    {
-        if (is_string($value)) {
-            $value = (float) $value;
-        }
-
-        $this->fields['value'] = $value;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [
@@ -114,9 +101,6 @@ class DiscountFixed implements Discount, JsonSerializable
         }
         if (array_key_exists('context', $this->fields)) {
             $data['context'] = $this->fields['context'];
-        }
-        if (array_key_exists('value', $this->fields)) {
-            $data['value'] = $this->fields['value'];
         }
 
         return $data;

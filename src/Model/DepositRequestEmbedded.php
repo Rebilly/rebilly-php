@@ -37,37 +37,56 @@ class DepositRequestEmbedded implements JsonSerializable
         return new self($data);
     }
 
-    public function getCustomer(): ?object
+    public function getCustomer(): ?Customer
     {
         return $this->fields['customer'] ?? null;
     }
 
-    public function setCustomer(null|object $customer): static
+    public function setCustomer(null|Customer|array $customer): static
     {
+        if ($customer !== null && !($customer instanceof Customer)) {
+            $customer = Customer::from($customer);
+        }
+
         $this->fields['customer'] = $customer;
 
         return $this;
     }
 
-    public function getWebsite(): ?object
+    public function getWebsite(): ?Website
     {
         return $this->fields['website'] ?? null;
     }
 
-    public function setWebsite(null|object $website): static
+    public function setWebsite(null|Website|array $website): static
     {
+        if ($website !== null && !($website instanceof Website)) {
+            $website = Website::from($website);
+        }
+
         $this->fields['website'] = $website;
 
         return $this;
     }
 
+    /**
+     * @return null|Transaction[]
+     */
     public function getTransactions(): ?array
     {
         return $this->fields['transactions'] ?? null;
     }
 
+    /**
+     * @param null|array[]|Transaction[] $transactions
+     */
     public function setTransactions(null|array $transactions): static
     {
+        $transactions = $transactions !== null ? array_map(
+            fn ($value) => $value instanceof Transaction ? $value : Transaction::from($value),
+            $transactions,
+        ) : null;
+
         $this->fields['transactions'] = $transactions;
 
         return $this;
@@ -77,10 +96,10 @@ class DepositRequestEmbedded implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('customer', $this->fields)) {
-            $data['customer'] = $this->fields['customer'];
+            $data['customer'] = $this->fields['customer']?->jsonSerialize();
         }
         if (array_key_exists('website', $this->fields)) {
-            $data['website'] = $this->fields['website'];
+            $data['website'] = $this->fields['website']?->jsonSerialize();
         }
         if (array_key_exists('transactions', $this->fields)) {
             $data['transactions'] = $this->fields['transactions'];

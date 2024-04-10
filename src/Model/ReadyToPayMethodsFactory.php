@@ -20,6 +20,7 @@ class ReadyToPayMethodsFactory
     public static function from(array $data = []): ReadyToPayMethods
     {
         return match ($data['method']) {
+            'ach' => ReadyToPayAchMethod::from($data),
             'AdvCash' => ReadyToPayGenericMethod::from($data),
             'Alfa-click' => ReadyToPayGenericMethod::from($data),
             'Alipay' => ReadyToPayGenericMethod::from($data),
@@ -58,7 +59,6 @@ class ReadyToPayMethodsFactory
             'Jeton' => ReadyToPayGenericMethod::from($data),
             'KNOT' => ReadyToPayGenericMethod::from($data),
             'Khelocard' => ReadyToPayGenericMethod::from($data),
-            'Klarna' => ReadyToPayKlarnaMethod::from($data),
             'MTS' => ReadyToPayGenericMethod::from($data),
             'Matrix' => ReadyToPayGenericMethod::from($data),
             'MaxiCash' => ReadyToPayGenericMethod::from($data),
@@ -124,7 +124,6 @@ class ReadyToPayMethodsFactory
             'Yandex-money' => ReadyToPayGenericMethod::from($data),
             'Zimpler' => ReadyToPayGenericMethod::from($data),
             'Zotapay' => ReadyToPayGenericMethod::from($data),
-            'ach' => ReadyToPayAchMethod::from($data),
             'bank-transfer' => ReadyToPayGenericMethod::from($data),
             'bank-transfer-2' => ReadyToPayGenericMethod::from($data),
             'bank-transfer-3' => ReadyToPayGenericMethod::from($data),
@@ -155,8 +154,6 @@ class ReadyToPayMethodsFactory
             'miscellaneous' => ReadyToPayGenericMethod::from($data),
             'online-bank-transfer' => ReadyToPayGenericMethod::from($data),
             'oriental-wallet' => ReadyToPayGenericMethod::from($data),
-            'payment-card' => ReadyToPayPaymentCardMethod::from($data),
-            'paypal' => ReadyToPayPayPalMethod::from($data),
             'phone' => ReadyToPayGenericMethod::from($data),
             'plaid-account' => ReadyToPayGenericMethod::from($data),
             'rapyd-checkout' => ReadyToPayGenericMethod::from($data),
@@ -165,6 +162,9 @@ class ReadyToPayMethodsFactory
             'voucher-2' => ReadyToPayGenericMethod::from($data),
             'voucher-3' => ReadyToPayGenericMethod::from($data),
             'voucher-4' => ReadyToPayGenericMethod::from($data),
+            'Klarna' => ReadyToPayKlarnaMethod::from($data),
+            'payment-card' => ReadyToPayPaymentCardMethod::from($data),
+            'paypal' => ReadyToPayPayPalMethod::from($data),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

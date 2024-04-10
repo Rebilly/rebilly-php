@@ -30,9 +30,6 @@ class PercentageFeeFormula implements FeeFormula, JsonSerializable
         if (array_key_exists('minAmount', $data)) {
             $this->setMinAmount($data['minAmount']);
         }
-        if (array_key_exists('amount', $data)) {
-            $this->setAmount($data['amount']);
-        }
     }
 
     public static function from(array $data = []): self
@@ -62,8 +59,12 @@ class PercentageFeeFormula implements FeeFormula, JsonSerializable
         return $this->fields['bips'];
     }
 
-    public function setBips(float $bips): static
+    public function setBips(float|string $bips): static
     {
+        if (is_string($bips)) {
+            $bips = (float) $bips;
+        }
+
         $this->fields['bips'] = $bips;
 
         return $this;
@@ -85,22 +86,6 @@ class PercentageFeeFormula implements FeeFormula, JsonSerializable
         return $this;
     }
 
-    public function getAmount(): float
-    {
-        return $this->fields['amount'];
-    }
-
-    public function setAmount(float|string $amount): static
-    {
-        if (is_string($amount)) {
-            $amount = (float) $amount;
-        }
-
-        $this->fields['amount'] = $amount;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [
@@ -114,9 +99,6 @@ class PercentageFeeFormula implements FeeFormula, JsonSerializable
         }
         if (array_key_exists('minAmount', $this->fields)) {
             $data['minAmount'] = $this->fields['minAmount'];
-        }
-        if (array_key_exists('amount', $this->fields)) {
-            $data['amount'] = $this->fields['amount'];
         }
 
         return $data;

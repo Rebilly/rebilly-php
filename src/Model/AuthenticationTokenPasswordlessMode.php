@@ -41,12 +41,6 @@ class AuthenticationTokenPasswordlessMode implements AuthenticationToken, JsonSe
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
-        if (array_key_exists('password', $data)) {
-            $this->setPassword($data['password']);
-        }
-        if (array_key_exists('username', $data)) {
-            $this->setUsername($data['username']);
-        }
     }
 
     public static function from(array $data = []): self
@@ -93,13 +87,6 @@ class AuthenticationTokenPasswordlessMode implements AuthenticationToken, JsonSe
         return $this->fields['credentialId'] ?? null;
     }
 
-    public function setCredentialId(null|string $credentialId): static
-    {
-        $this->fields['credentialId'] = $credentialId;
-
-        return $this;
-    }
-
     public function getExpiredTime(): ?DateTimeImmutable
     {
         return $this->fields['expiredTime'] ?? null;
@@ -122,30 +109,6 @@ class AuthenticationTokenPasswordlessMode implements AuthenticationToken, JsonSe
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
-    }
-
-    public function getPassword(): string
-    {
-        return $this->fields['password'];
-    }
-
-    public function setPassword(string $password): static
-    {
-        $this->fields['password'] = $password;
-
-        return $this;
-    }
-
-    public function getUsername(): string
-    {
-        return $this->fields['username'];
-    }
-
-    public function setUsername(string $username): static
-    {
-        $this->fields['username'] = $username;
-
-        return $this;
     }
 
     public function jsonSerialize(): array
@@ -171,12 +134,6 @@ class AuthenticationTokenPasswordlessMode implements AuthenticationToken, JsonSe
         if (array_key_exists('_links', $this->fields)) {
             $data['_links'] = $this->fields['_links'];
         }
-        if (array_key_exists('password', $this->fields)) {
-            $data['password'] = $this->fields['password'];
-        }
-        if (array_key_exists('username', $this->fields)) {
-            $data['username'] = $this->fields['username'];
-        }
 
         return $data;
     }
@@ -184,6 +141,13 @@ class AuthenticationTokenPasswordlessMode implements AuthenticationToken, JsonSe
     private function setToken(null|string $token): static
     {
         $this->fields['token'] = $token;
+
+        return $this;
+    }
+
+    private function setCredentialId(null|string $credentialId): static
+    {
+        $this->fields['credentialId'] = $credentialId;
 
         return $this;
     }

@@ -17,6 +17,34 @@ use JsonSerializable;
 
 class ReadyToPayPaymentCardMethod implements ReadyToPayMethods, JsonSerializable
 {
+    public const BRANDS_VISA = 'Visa';
+
+    public const BRANDS_MASTER_CARD = 'MasterCard';
+
+    public const BRANDS_AMERICAN_EXPRESS = 'American Express';
+
+    public const BRANDS_DISCOVER = 'Discover';
+
+    public const BRANDS_MAESTRO = 'Maestro';
+
+    public const BRANDS_SOLO = 'Solo';
+
+    public const BRANDS_ELECTRON = 'Electron';
+
+    public const BRANDS_JCB = 'JCB';
+
+    public const BRANDS_VOYAGER = 'Voyager';
+
+    public const BRANDS_DINERS_CLUB = 'Diners Club';
+
+    public const BRANDS_SWITCH = 'Switch';
+
+    public const BRANDS_LASER = 'Laser';
+
+    public const BRANDS_CHINA_UNION_PAY = 'China UnionPay';
+
+    public const BRANDS_ASTRO_PAY_CARD = 'AstroPay Card';
+
     private array $fields = [];
 
     public function __construct(array $data = [])

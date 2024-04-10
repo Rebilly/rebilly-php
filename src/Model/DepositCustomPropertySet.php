@@ -65,12 +65,12 @@ class DepositCustomPropertySet implements JsonSerializable
         return $this;
     }
 
-    public function getProperties(): object
+    public function getProperties(): array
     {
         return $this->fields['properties'];
     }
 
-    public function setProperties(object $properties): static
+    public function setProperties(array $properties): static
     {
         $this->fields['properties'] = $properties;
 

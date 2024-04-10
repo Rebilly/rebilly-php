@@ -231,7 +231,7 @@ class AlternativePaymentToken implements CompositeToken, JsonSerializable
 
     public const METHOD_PHONE_PE = 'PhonePe';
 
-    public const METHOD_POLI = 'POLi';
+    public const METHOD_PO_LI = 'POLi';
 
     public const METHOD_POST_FINANCE_CARD = 'PostFinance-card';
 
@@ -354,9 +354,6 @@ class AlternativePaymentToken implements CompositeToken, JsonSerializable
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
-        if (array_key_exists('paymentInstrument', $data)) {
-            $this->setPaymentInstrument($data['paymentInstrument']);
-        }
     }
 
     public static function from(array $data = []): self
@@ -395,13 +392,6 @@ class AlternativePaymentToken implements CompositeToken, JsonSerializable
     public function getId(): ?string
     {
         return $this->fields['id'] ?? null;
-    }
-
-    public function setId(null|string $id): static
-    {
-        $this->fields['id'] = $id;
-
-        return $this;
     }
 
     public function getIsUsed(): ?bool
@@ -469,22 +459,6 @@ class AlternativePaymentToken implements CompositeToken, JsonSerializable
         return $this->fields['_links'] ?? null;
     }
 
-    public function getPaymentInstrument(): KlarnaTokenPaymentInstrument
-    {
-        return $this->fields['paymentInstrument'];
-    }
-
-    public function setPaymentInstrument(KlarnaTokenPaymentInstrument|array $paymentInstrument): static
-    {
-        if (!($paymentInstrument instanceof KlarnaTokenPaymentInstrument)) {
-            $paymentInstrument = KlarnaTokenPaymentInstrument::from($paymentInstrument);
-        }
-
-        $this->fields['paymentInstrument'] = $paymentInstrument;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [];
@@ -521,11 +495,15 @@ class AlternativePaymentToken implements CompositeToken, JsonSerializable
         if (array_key_exists('_links', $this->fields)) {
             $data['_links'] = $this->fields['_links'];
         }
-        if (array_key_exists('paymentInstrument', $this->fields)) {
-            $data['paymentInstrument'] = $this->fields['paymentInstrument']?->jsonSerialize();
-        }
 
         return $data;
+    }
+
+    private function setId(null|string $id): static
+    {
+        $this->fields['id'] = $id;
+
+        return $this;
     }
 
     private function setIsUsed(null|bool $isUsed): static

@@ -24,8 +24,8 @@ class BalanceTransactionFactory
             'charge' => ChargeTransaction::from($data),
             'refund' => RefundTransaction::from($data),
             'reverse' => ReverseTransaction::from($data),
-            'risk-reserve' => RiskReserveTransaction::from($data),
             'risk-reserve-release' => RiskReserveReleaseTransaction::from($data),
+            'risk-reserve' => RiskReserveTransaction::from($data),
             'sell-fee' => SellFeeTransaction::from($data),
             default => throw new UnknownDiscriminatorValueException(),
         };

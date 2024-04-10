@@ -170,12 +170,12 @@ class PostOrganizationRequest implements JsonSerializable
         return $this;
     }
 
-    public function getCountry(): string
+    public function getCountry(): ?string
     {
-        return $this->fields['country'];
+        return $this->fields['country'] ?? null;
     }
 
-    public function setCountry(string $country): static
+    public function setCountry(null|string $country): static
     {
         $this->fields['country'] = $country;
 

@@ -34,15 +34,15 @@ class SubscriptionOrOneTimeSaleItemUsageLimits implements JsonSerializable
         return new self($data);
     }
 
-    public function getSoftLimit(): ?QuoteCreateOrderItemsUsageLimitsSoftLimit
+    public function getSoftLimit(): ?SubscriptionOrOneTimeSaleItemUsageLimitsSoftLimit
     {
         return $this->fields['softLimit'] ?? null;
     }
 
-    public function setSoftLimit(null|QuoteCreateOrderItemsUsageLimitsSoftLimit|array $softLimit): static
+    public function setSoftLimit(null|SubscriptionOrOneTimeSaleItemUsageLimitsSoftLimit|array $softLimit): static
     {
-        if ($softLimit !== null && !($softLimit instanceof QuoteCreateOrderItemsUsageLimitsSoftLimit)) {
-            $softLimit = QuoteCreateOrderItemsUsageLimitsSoftLimit::from($softLimit);
+        if ($softLimit !== null && !($softLimit instanceof SubscriptionOrOneTimeSaleItemUsageLimitsSoftLimit)) {
+            $softLimit = SubscriptionOrOneTimeSaleItemUsageLimitsSoftLimit::from($softLimit);
         }
 
         $this->fields['softLimit'] = $softLimit;
@@ -50,15 +50,15 @@ class SubscriptionOrOneTimeSaleItemUsageLimits implements JsonSerializable
         return $this;
     }
 
-    public function getHardLimit(): ?QuoteCreateOrderItemsUsageLimitsHardLimit
+    public function getHardLimit(): ?SubscriptionOrOneTimeSaleItemUsageLimitsHardLimit
     {
         return $this->fields['hardLimit'] ?? null;
     }
 
-    public function setHardLimit(null|QuoteCreateOrderItemsUsageLimitsHardLimit|array $hardLimit): static
+    public function setHardLimit(null|SubscriptionOrOneTimeSaleItemUsageLimitsHardLimit|array $hardLimit): static
     {
-        if ($hardLimit !== null && !($hardLimit instanceof QuoteCreateOrderItemsUsageLimitsHardLimit)) {
-            $hardLimit = QuoteCreateOrderItemsUsageLimitsHardLimit::from($hardLimit);
+        if ($hardLimit !== null && !($hardLimit instanceof SubscriptionOrOneTimeSaleItemUsageLimitsHardLimit)) {
+            $hardLimit = SubscriptionOrOneTimeSaleItemUsageLimitsHardLimit::from($hardLimit);
         }
 
         $this->fields['hardLimit'] = $hardLimit;

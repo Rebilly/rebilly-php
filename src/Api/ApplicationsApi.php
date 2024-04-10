@@ -32,7 +32,7 @@ class ApplicationsApi
      * @return Application
      */
     public function create(
-        ?Application $application = null,
+        Application $application,
     ): Application {
         $uri = '/applications';
 

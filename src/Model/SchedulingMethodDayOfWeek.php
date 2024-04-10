@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class SchedulingMethodDayOfWeek implements InvoiceRetryScheduleInstruction, PeriodAnchor, ReminderScheduleInstruction, ScheduleInstruction, ServicePeriodAnchorInstruction, JsonSerializable
+class SchedulingMethodDayOfWeek implements ServicePeriodAnchorInstruction, InvoiceRetryScheduleInstruction, PeriodAnchor, ScheduleInstruction, ReminderScheduleInstruction, JsonSerializable
 {
     public const DAY_SUNDAY = 'Sunday';
 
@@ -49,15 +49,6 @@ class SchedulingMethodDayOfWeek implements InvoiceRetryScheduleInstruction, Peri
         }
         if (array_key_exists('time', $data)) {
             $this->setTime($data['time']);
-        }
-        if (array_key_exists('duration', $data)) {
-            $this->setDuration($data['duration']);
-        }
-        if (array_key_exists('unit', $data)) {
-            $this->setUnit($data['unit']);
-        }
-        if (array_key_exists('anchor', $data)) {
-            $this->setAnchor($data['anchor']);
         }
     }
 
@@ -107,46 +98,6 @@ class SchedulingMethodDayOfWeek implements InvoiceRetryScheduleInstruction, Peri
         return $this;
     }
 
-    public function getDuration(): int
-    {
-        return $this->fields['duration'];
-    }
-
-    public function setDuration(int $duration): static
-    {
-        $this->fields['duration'] = $duration;
-
-        return $this;
-    }
-
-    public function getUnit(): string
-    {
-        return $this->fields['unit'];
-    }
-
-    public function setUnit(string $unit): static
-    {
-        $this->fields['unit'] = $unit;
-
-        return $this;
-    }
-
-    public function getAnchor(): ?PeriodAnchor
-    {
-        return $this->fields['anchor'] ?? null;
-    }
-
-    public function setAnchor(null|PeriodAnchor|array $anchor): static
-    {
-        if ($anchor !== null && !($anchor instanceof PeriodAnchor)) {
-            $anchor = PeriodAnchorFactory::from($anchor);
-        }
-
-        $this->fields['anchor'] = $anchor;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [
@@ -160,15 +111,6 @@ class SchedulingMethodDayOfWeek implements InvoiceRetryScheduleInstruction, Peri
         }
         if (array_key_exists('time', $this->fields)) {
             $data['time'] = $this->fields['time'];
-        }
-        if (array_key_exists('duration', $this->fields)) {
-            $data['duration'] = $this->fields['duration'];
-        }
-        if (array_key_exists('unit', $this->fields)) {
-            $data['unit'] = $this->fields['unit'];
-        }
-        if (array_key_exists('anchor', $this->fields)) {
-            $data['anchor'] = $this->fields['anchor']?->jsonSerialize();
         }
 
         return $data;

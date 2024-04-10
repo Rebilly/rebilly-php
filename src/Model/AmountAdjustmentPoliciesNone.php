@@ -17,13 +17,13 @@ use JsonSerializable;
 
 class AmountAdjustmentPoliciesNone implements AmountAdjustmentInstructionPartialAfterApprovalPolicy, JsonSerializable
 {
-    public function __construct()
+    public function __construct(array $data = [])
     {
     }
 
-    public static function from(): self
+    public static function from(array $data = []): self
     {
-        return new self();
+        return new self($data);
     }
 
     public function getMethod(): string
@@ -33,8 +33,10 @@ class AmountAdjustmentPoliciesNone implements AmountAdjustmentInstructionPartial
 
     public function jsonSerialize(): array
     {
-        return [
+        $data = [
             'method' => 'none',
         ];
+
+        return $data;
     }
 }

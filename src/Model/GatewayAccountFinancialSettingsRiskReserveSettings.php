@@ -54,8 +54,12 @@ class GatewayAccountFinancialSettingsRiskReserveSettings implements JsonSerializ
         return $this->fields['bips'];
     }
 
-    public function setBips(float $bips): static
+    public function setBips(float|string $bips): static
     {
+        if (is_string($bips)) {
+            $bips = (float) $bips;
+        }
+
         $this->fields['bips'] = $bips;
 
         return $this;

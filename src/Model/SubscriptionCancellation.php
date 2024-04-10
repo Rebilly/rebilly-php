@@ -53,6 +53,12 @@ class SubscriptionCancellation implements JsonSerializable
 
     public const STATUS_REVOKED = 'revoked';
 
+    public const CHURN_TIME_POLICY_NULL = 'null';
+
+    public const CHURN_TIME_POLICY_NOW = 'now';
+
+    public const CHURN_TIME_POLICY_AT_NEXT_RENEWAL = 'at-next-renewal';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -95,6 +101,9 @@ class SubscriptionCancellation implements JsonSerializable
         }
         if (array_key_exists('churnTime', $data)) {
             $this->setChurnTime($data['churnTime']);
+        }
+        if (array_key_exists('churnTimePolicy', $data)) {
+            $this->setChurnTimePolicy($data['churnTimePolicy']);
         }
         if (array_key_exists('lineItems', $data)) {
             $this->setLineItems($data['lineItems']);
@@ -214,18 +223,30 @@ class SubscriptionCancellation implements JsonSerializable
         return $this->fields['updatedTime'] ?? null;
     }
 
-    public function getChurnTime(): DateTimeImmutable
+    public function getChurnTime(): ?DateTimeImmutable
     {
-        return $this->fields['churnTime'];
+        return $this->fields['churnTime'] ?? null;
     }
 
-    public function setChurnTime(DateTimeImmutable|string $churnTime): static
+    public function setChurnTime(null|DateTimeImmutable|string $churnTime): static
     {
-        if (!($churnTime instanceof DateTimeImmutable)) {
+        if ($churnTime !== null && !($churnTime instanceof DateTimeImmutable)) {
             $churnTime = new DateTimeImmutable($churnTime);
         }
 
         $this->fields['churnTime'] = $churnTime;
+
+        return $this;
+    }
+
+    public function getChurnTimePolicy(): ?string
+    {
+        return $this->fields['churnTimePolicy'] ?? null;
+    }
+
+    public function setChurnTimePolicy(null|string $churnTimePolicy): static
+    {
+        $this->fields['churnTimePolicy'] = $churnTimePolicy;
 
         return $this;
     }
@@ -318,6 +339,9 @@ class SubscriptionCancellation implements JsonSerializable
         }
         if (array_key_exists('churnTime', $this->fields)) {
             $data['churnTime'] = $this->fields['churnTime']?->format(DateTimeInterface::RFC3339);
+        }
+        if (array_key_exists('churnTimePolicy', $this->fields)) {
+            $data['churnTimePolicy'] = $this->fields['churnTimePolicy'];
         }
         if (array_key_exists('lineItems', $this->fields)) {
             $data['lineItems'] = $this->fields['lineItems'];

@@ -51,8 +51,12 @@ class HistogramDataData implements JsonSerializable
         return $this->fields['value'] ?? null;
     }
 
-    public function setValue(null|float $value): static
+    public function setValue(null|float|string $value): static
     {
+        if (is_string($value)) {
+            $value = (float) $value;
+        }
+
         $this->fields['value'] = $value;
 
         return $this;

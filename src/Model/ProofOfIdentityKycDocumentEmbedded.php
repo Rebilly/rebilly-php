@@ -34,25 +34,40 @@ class ProofOfIdentityKycDocumentEmbedded implements JsonSerializable
         return new self($data);
     }
 
-    public function getCustomer(): ?object
+    public function getCustomer(): ?Customer
     {
         return $this->fields['customer'] ?? null;
     }
 
-    public function setCustomer(null|object $customer): static
+    public function setCustomer(null|Customer|array $customer): static
     {
+        if ($customer !== null && !($customer instanceof Customer)) {
+            $customer = Customer::from($customer);
+        }
+
         $this->fields['customer'] = $customer;
 
         return $this;
     }
 
+    /**
+     * @return null|File[]
+     */
     public function getFiles(): ?array
     {
         return $this->fields['files'] ?? null;
     }
 
+    /**
+     * @param null|array[]|File[] $files
+     */
     public function setFiles(null|array $files): static
     {
+        $files = $files !== null ? array_map(
+            fn ($value) => $value instanceof File ? $value : File::from($value),
+            $files,
+        ) : null;
+
         $this->fields['files'] = $files;
 
         return $this;
@@ -62,7 +77,7 @@ class ProofOfIdentityKycDocumentEmbedded implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('customer', $this->fields)) {
-            $data['customer'] = $this->fields['customer'];
+            $data['customer'] = $this->fields['customer']?->jsonSerialize();
         }
         if (array_key_exists('files', $this->fields)) {
             $data['files'] = $this->fields['files'];

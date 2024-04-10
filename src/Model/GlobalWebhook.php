@@ -19,6 +19,132 @@ use JsonSerializable;
 
 class GlobalWebhook implements JsonSerializable
 {
+    public const EVENTS_FILTER_AML_LIST_POSSIBLY_MATCHED = 'aml-list-possibly-matched';
+
+    public const EVENTS_FILTER_COUPON_APPLICATION_REMOVED = 'coupon-application-removed';
+
+    public const EVENTS_FILTER_COUPON_APPLIED = 'coupon-applied';
+
+    public const EVENTS_FILTER_COUPON_EXPIRATION_MODIFIED = 'coupon-expiration-modified';
+
+    public const EVENTS_FILTER_COUPON_EXPIRED = 'coupon-expired';
+
+    public const EVENTS_FILTER_COUPON_ISSUED = 'coupon-issued';
+
+    public const EVENTS_FILTER_COUPON_MODIFIED = 'coupon-modified';
+
+    public const EVENTS_FILTER_COUPON_REDEEMED = 'coupon-redeemed';
+
+    public const EVENTS_FILTER_COUPON_REDEMPTION_CANCELED = 'coupon-redemption-canceled';
+
+    public const EVENTS_FILTER_CUSTOMER_CREATED = 'customer-created';
+
+    public const EVENTS_FILTER_CUSTOMER_MERGED = 'customer-merged';
+
+    public const EVENTS_FILTER_CUSTOMER_ONE_TIME_PASSWORD_REQUESTED = 'customer-one-time-password-requested';
+
+    public const EVENTS_FILTER_CUSTOMER_UPDATED = 'customer-updated';
+
+    public const EVENTS_FILTER_EXPERIAN_CHECK_PERFORMED = 'experian-check-performed';
+
+    public const EVENTS_FILTER_INVOICE_ABANDONED = 'invoice-abandoned';
+
+    public const EVENTS_FILTER_INVOICE_ISSUED = 'invoice-issued';
+
+    public const EVENTS_FILTER_INVOICE_PAID = 'invoice-paid';
+
+    public const EVENTS_FILTER_INVOICE_PARTIALLY_PAID = 'invoice-partially-paid';
+
+    public const EVENTS_FILTER_INVOICE_PARTIALLY_REFUNDED = 'invoice-partially-refunded';
+
+    public const EVENTS_FILTER_INVOICE_PAST_DUE = 'invoice-past-due';
+
+    public const EVENTS_FILTER_INVOICE_REFUNDED = 'invoice-refunded';
+
+    public const EVENTS_FILTER_INVOICE_REISSUED = 'invoice-reissued';
+
+    public const EVENTS_FILTER_INVOICE_VOIDED = 'invoice-voided';
+
+    public const EVENTS_FILTER_KYC_DOCUMENT_ACCEPTED = 'kyc-document-accepted';
+
+    public const EVENTS_FILTER_KYC_DOCUMENT_ARCHIVED = 'kyc-document-archived';
+
+    public const EVENTS_FILTER_KYC_DOCUMENT_CREATED = 'kyc-document-created';
+
+    public const EVENTS_FILTER_KYC_DOCUMENT_MODIFIED = 'kyc-document-modified';
+
+    public const EVENTS_FILTER_KYC_DOCUMENT_REJECTED = 'kyc-document-rejected';
+
+    public const EVENTS_FILTER_KYC_DOCUMENT_REVIEWED = 'kyc-document-reviewed';
+
+    public const EVENTS_FILTER_KYC_REQUEST_ATTEMPTED = 'kyc-request-attempted';
+
+    public const EVENTS_FILTER_KYC_REQUEST_FAILED = 'kyc-request-failed';
+
+    public const EVENTS_FILTER_KYC_REQUEST_FULFILLED = 'kyc-request-fulfilled';
+
+    public const EVENTS_FILTER_KYC_REQUEST_PARTIALLY_FULFILLED = 'kyc-request-partially-fulfilled';
+
+    public const EVENTS_FILTER_LEAD_SOURCE_CHANGED = 'lead-source-changed';
+
+    public const EVENTS_FILTER_ORDER_ABANDONED = 'order-abandoned';
+
+    public const EVENTS_FILTER_ORDER_COMPLETED = 'order-completed';
+
+    public const EVENTS_FILTER_PAYMENT_CARD_EXPIRED = 'payment-card-expired';
+
+    public const EVENTS_FILTER_PAYOUT_REQUEST_CREATED = 'payout-request-created';
+
+    public const EVENTS_FILTER_PAYOUT_REQUEST_MODIFIED = 'payout-request-modified';
+
+    public const EVENTS_FILTER_QUOTE_ACCEPTED = 'quote-accepted';
+
+    public const EVENTS_FILTER_QUOTE_CANCELED = 'quote-canceled';
+
+    public const EVENTS_FILTER_QUOTE_CREATED = 'quote-created';
+
+    public const EVENTS_FILTER_QUOTE_EXPIRED = 'quote-expired';
+
+    public const EVENTS_FILTER_QUOTE_ISSUED = 'quote-issued';
+
+    public const EVENTS_FILTER_QUOTE_RECALLED = 'quote-recalled';
+
+    public const EVENTS_FILTER_QUOTE_REJECTED = 'quote-rejected';
+
+    public const EVENTS_FILTER_QUOTE_UPDATED = 'quote-updated';
+
+    public const EVENTS_FILTER_RENEWAL_INVOICE_ISSUED = 'renewal-invoice-issued';
+
+    public const EVENTS_FILTER_RENEWAL_INVOICE_PAYMENT_DECLINED = 'renewal-invoice-payment-declined';
+
+    public const EVENTS_FILTER_SUBSCRIPTION_ACTIVATED = 'subscription-activated';
+
+    public const EVENTS_FILTER_SUBSCRIPTION_CANCELED = 'subscription-canceled';
+
+    public const EVENTS_FILTER_SUBSCRIPTION_CHURNED = 'subscription-churned';
+
+    public const EVENTS_FILTER_SUBSCRIPTION_DOWNGRADED = 'subscription-downgraded';
+
+    public const EVENTS_FILTER_SUBSCRIPTION_ITEMS_CHANGED = 'subscription-items-changed';
+
+    public const EVENTS_FILTER_SUBSCRIPTION_PAUSED = 'subscription-paused';
+
+    public const EVENTS_FILTER_SUBSCRIPTION_REACTIVATED = 'subscription-reactivated';
+
+    public const EVENTS_FILTER_SUBSCRIPTION_RENEWED = 'subscription-renewed';
+
+    public const EVENTS_FILTER_SUBSCRIPTION_RESUMED = 'subscription-resumed';
+
+    public const EVENTS_FILTER_SUBSCRIPTION_UPGRADED = 'subscription-upgraded';
+
+    public const EVENTS_FILTER_TRANSACTION_AMOUNT_DISCREPANCY_FOUND = 'transaction-amount-discrepancy-found';
+
+    public const EVENTS_FILTER_TRANSACTION_DECLINED = 'transaction-declined';
+
+    public const EVENTS_FILTER_TRANSACTION_DISCREPANCY_FOUND = 'transaction-discrepancy-found';
+
+    public const EVENTS_FILTER_ORDER_DELINQUENCY_REACHED = 'order-delinquency-reached';
+
     public const STATUS_ACTIVE = 'active';
 
     public const STATUS_INACTIVE = 'inactive';

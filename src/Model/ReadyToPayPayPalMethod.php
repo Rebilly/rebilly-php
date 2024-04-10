@@ -27,9 +27,6 @@ class ReadyToPayPayPalMethod implements ReadyToPayMethods, JsonSerializable
         if (array_key_exists('filters', $data)) {
             $this->setFilters($data['filters']);
         }
-        if (array_key_exists('brands', $data)) {
-            $this->setBrands($data['brands']);
-        }
     }
 
     public static function from(array $data = []): self
@@ -76,24 +73,6 @@ class ReadyToPayPayPalMethod implements ReadyToPayMethods, JsonSerializable
         return $this;
     }
 
-    /**
-     * @return null|string[]
-     */
-    public function getBrands(): ?array
-    {
-        return $this->fields['brands'] ?? null;
-    }
-
-    /**
-     * @param null|string[] $brands
-     */
-    public function setBrands(null|array $brands): static
-    {
-        $this->fields['brands'] = $brands;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [
@@ -104,9 +83,6 @@ class ReadyToPayPayPalMethod implements ReadyToPayMethods, JsonSerializable
         }
         if (array_key_exists('filters', $this->fields)) {
             $data['filters'] = $this->fields['filters'];
-        }
-        if (array_key_exists('brands', $this->fields)) {
-            $data['brands'] = $this->fields['brands'];
         }
 
         return $data;

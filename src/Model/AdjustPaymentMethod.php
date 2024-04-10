@@ -15,5 +15,5 @@ namespace Rebilly\Sdk\Model;
 
 interface AdjustPaymentMethod
 {
-    public function getPaymentMethod(): ?string;
+    public function getPaymentMethod(): string;
 }

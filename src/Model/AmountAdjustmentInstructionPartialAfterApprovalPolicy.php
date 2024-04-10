@@ -15,5 +15,5 @@ namespace Rebilly\Sdk\Model;
 
 interface AmountAdjustmentInstructionPartialAfterApprovalPolicy
 {
-    public function getMethod(): ?string;
+    public function getMethod(): string;
 }

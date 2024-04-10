@@ -229,7 +229,7 @@ class AdjustReadyToPayGeneric implements AdjustPaymentMethod, JsonSerializable
 
     public const PAYMENT_METHOD_PHONE_PE = 'PhonePe';
 
-    public const PAYMENT_METHOD_POLI = 'POLi';
+    public const PAYMENT_METHOD_PO_LI = 'POLi';
 
     public const PAYMENT_METHOD_POST_FINANCE_CARD = 'PostFinance-card';
 
@@ -332,12 +332,12 @@ class AdjustReadyToPayGeneric implements AdjustPaymentMethod, JsonSerializable
         return new self($data);
     }
 
-    public function getPaymentMethod(): ?string
+    public function getPaymentMethod(): string
     {
-        return $this->fields['paymentMethod'] ?? null;
+        return $this->fields['paymentMethod'];
     }
 
-    public function setPaymentMethod(null|string $paymentMethod): static
+    public function setPaymentMethod(string $paymentMethod): static
     {
         $this->fields['paymentMethod'] = $paymentMethod;
 

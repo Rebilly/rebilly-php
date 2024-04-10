@@ -88,13 +88,6 @@ class AuthenticationTokenPasswordMode implements AuthenticationToken, JsonSerial
         return $this->fields['customerId'] ?? null;
     }
 
-    public function setCustomerId(null|string $customerId): static
-    {
-        $this->fields['customerId'] = $customerId;
-
-        return $this;
-    }
-
     public function getToken(): ?string
     {
         return $this->fields['token'] ?? null;
@@ -115,13 +108,6 @@ class AuthenticationTokenPasswordMode implements AuthenticationToken, JsonSerial
     public function getCredentialId(): ?string
     {
         return $this->fields['credentialId'] ?? null;
-    }
-
-    public function setCredentialId(null|string $credentialId): static
-    {
-        $this->fields['credentialId'] = $credentialId;
-
-        return $this;
     }
 
     public function getExpiredTime(): ?DateTimeImmutable
@@ -181,9 +167,23 @@ class AuthenticationTokenPasswordMode implements AuthenticationToken, JsonSerial
         return $data;
     }
 
+    private function setCustomerId(null|string $customerId): static
+    {
+        $this->fields['customerId'] = $customerId;
+
+        return $this;
+    }
+
     private function setToken(null|string $token): static
     {
         $this->fields['token'] = $token;
+
+        return $this;
+    }
+
+    private function setCredentialId(null|string $credentialId): static
+    {
+        $this->fields['credentialId'] = $credentialId;
 
         return $this;
     }

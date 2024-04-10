@@ -16,7 +16,7 @@ namespace Rebilly\Sdk\Api;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
-use Rebilly\Sdk\Model\GetPaymentCardsBankNamesResponse;
+use Rebilly\Sdk\Model\GetPaymentCardBankNameCollectionResponse;
 
 class PaymentCardsBankNamesApi
 {
@@ -25,7 +25,7 @@ class PaymentCardsBankNamesApi
     }
 
     /**
-     * @return GetPaymentCardsBankNamesResponse[]
+     * @return GetPaymentCardBankNameCollectionResponse[]
      */
     public function getAll(
         ?int $limit = null,
@@ -41,6 +41,6 @@ class PaymentCardsBankNamesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): GetPaymentCardsBankNamesResponse => GetPaymentCardsBankNamesResponse::from($item), $data);
+        return array_map(fn (array $item): GetPaymentCardBankNameCollectionResponse => GetPaymentCardBankNameCollectionResponse::from($item), $data);
     }
 }

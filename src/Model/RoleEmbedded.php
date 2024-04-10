@@ -31,13 +31,17 @@ class RoleEmbedded implements JsonSerializable
         return new self($data);
     }
 
-    public function getJuniorRoles(): ?object
+    public function getJuniorRoles(): ?Role
     {
         return $this->fields['juniorRoles'] ?? null;
     }
 
-    public function setJuniorRoles(null|object $juniorRoles): static
+    public function setJuniorRoles(null|Role|array $juniorRoles): static
     {
+        if ($juniorRoles !== null && !($juniorRoles instanceof Role)) {
+            $juniorRoles = Role::from($juniorRoles);
+        }
+
         $this->fields['juniorRoles'] = $juniorRoles;
 
         return $this;
@@ -47,7 +51,7 @@ class RoleEmbedded implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('juniorRoles', $this->fields)) {
-            $data['juniorRoles'] = $this->fields['juniorRoles'];
+            $data['juniorRoles'] = $this->fields['juniorRoles']?->jsonSerialize();
         }
 
         return $data;

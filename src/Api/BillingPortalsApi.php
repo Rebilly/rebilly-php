@@ -30,7 +30,7 @@ class BillingPortalsApi
      * @return BillingPortal
      */
     public function create(
-        ?BillingPortal $billingPortal = null,
+        BillingPortal $billingPortal,
     ): BillingPortal {
         $uri = '/billing-portals';
 
@@ -130,7 +130,7 @@ class BillingPortalsApi
      */
     public function update(
         string $id,
-        ?BillingPortal $billingPortal = null,
+        BillingPortal $billingPortal,
     ): BillingPortal {
         $pathParams = [
             '{id}' => $id,

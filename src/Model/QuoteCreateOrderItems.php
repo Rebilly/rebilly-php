@@ -74,15 +74,15 @@ class QuoteCreateOrderItems implements JsonSerializable
         return $this;
     }
 
-    public function getPlan(): FlexiblePlan
+    public function getPlan(): ConfigurablePlan
     {
         return $this->fields['plan'];
     }
 
-    public function setPlan(FlexiblePlan|array $plan): static
+    public function setPlan(ConfigurablePlan|array $plan): static
     {
-        if (!($plan instanceof FlexiblePlan)) {
-            $plan = FlexiblePlan::from($plan);
+        if (!($plan instanceof ConfigurablePlan)) {
+            $plan = ConfigurablePlanFactory::from($plan);
         }
 
         $this->fields['plan'] = $plan;

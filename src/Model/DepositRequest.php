@@ -77,6 +77,9 @@ class DepositRequest implements JsonSerializable
         if (array_key_exists('notificationUrl', $data)) {
             $this->setNotificationUrl($data['notificationUrl']);
         }
+        if (array_key_exists('customFields', $data)) {
+            $this->setCustomFields($data['customFields']);
+        }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
         }
@@ -174,10 +177,15 @@ class DepositRequest implements JsonSerializable
     }
 
     /**
-     * @param null|float[] $amounts
+     * @param null|float[]|string[] $amounts
      */
     public function setAmounts(null|array $amounts): static
     {
+        $amounts = $amounts !== null ? array_map(
+            fn ($value) => is_string($value) ? (float) $value : $value,
+            $amounts,
+        ) : null;
+
         $this->fields['amounts'] = $amounts;
 
         return $this;
@@ -227,7 +235,7 @@ class DepositRequest implements JsonSerializable
         return $this;
     }
 
-    public function getPropertiesSchema(): ?object
+    public function getPropertiesSchema(): ?array
     {
         return $this->fields['propertiesSchema'] ?? null;
     }
@@ -248,6 +256,18 @@ class DepositRequest implements JsonSerializable
     public function setNotificationUrl(null|string $notificationUrl): static
     {
         $this->fields['notificationUrl'] = $notificationUrl;
+
+        return $this;
+    }
+
+    public function getCustomFields(): ?array
+    {
+        return $this->fields['customFields'] ?? null;
+    }
+
+    public function setCustomFields(null|array $customFields): static
+    {
+        $this->fields['customFields'] = $customFields;
 
         return $this;
     }
@@ -331,6 +351,9 @@ class DepositRequest implements JsonSerializable
         if (array_key_exists('notificationUrl', $this->fields)) {
             $data['notificationUrl'] = $this->fields['notificationUrl'];
         }
+        if (array_key_exists('customFields', $this->fields)) {
+            $data['customFields'] = $this->fields['customFields'];
+        }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
         }
@@ -368,7 +391,7 @@ class DepositRequest implements JsonSerializable
         return $this;
     }
 
-    private function setPropertiesSchema(null|object $propertiesSchema): static
+    private function setPropertiesSchema(null|array $propertiesSchema): static
     {
         $this->fields['propertiesSchema'] = $propertiesSchema;
 

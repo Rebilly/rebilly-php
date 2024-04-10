@@ -17,6 +17,16 @@ use JsonSerializable;
 
 class ReportKycRequestsData implements JsonSerializable
 {
+    public const REJECTION_REASON_ABANDONED = 'abandoned';
+
+    public const REJECTION_REASON_EXPIRED = 'expired';
+
+    public const REJECTION_REASON_FAILED = 'failed';
+
+    public const REJECTION_REASON_FULFILLED = 'fulfilled';
+
+    public const REJECTION_REASON_PENDING_REVIEW = 'pending-review';
+
     private array $fields = [];
 
     public function __construct(array $data = [])

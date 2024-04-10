@@ -556,13 +556,6 @@ class Invoice implements JsonSerializable
         return $this->fields['organizationId'] ?? null;
     }
 
-    public function setOrganizationId(null|string $organizationId): static
-    {
-        $this->fields['organizationId'] = $organizationId;
-
-        return $this;
-    }
-
     public function getDelinquencyTime(): ?DateTimeImmutable
     {
         return $this->fields['delinquencyTime'] ?? null;
@@ -998,6 +991,13 @@ class Invoice implements JsonSerializable
     private function setDueReminderNumber(null|int $dueReminderNumber): static
     {
         $this->fields['dueReminderNumber'] = $dueReminderNumber;
+
+        return $this;
+    }
+
+    private function setOrganizationId(null|string $organizationId): static
+    {
+        $this->fields['organizationId'] = $organizationId;
 
         return $this;
     }

@@ -17,12 +17,6 @@ use JsonSerializable;
 
 class IBANInstrument implements BankAccountInstrument, JsonSerializable
 {
-    public const ACCOUNT_TYPE_CHECKING = 'checking';
-
-    public const ACCOUNT_TYPE_SAVINGS = 'savings';
-
-    public const ACCOUNT_TYPE_OTHER = 'other';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -38,12 +32,6 @@ class IBANInstrument implements BankAccountInstrument, JsonSerializable
         }
         if (array_key_exists('last4', $data)) {
             $this->setLast4($data['last4']);
-        }
-        if (array_key_exists('routingNumber', $data)) {
-            $this->setRoutingNumber($data['routingNumber']);
-        }
-        if (array_key_exists('accountType', $data)) {
-            $this->setAccountType($data['accountType']);
         }
     }
 
@@ -98,30 +86,6 @@ class IBANInstrument implements BankAccountInstrument, JsonSerializable
         return $this->fields['last4'] ?? null;
     }
 
-    public function getRoutingNumber(): string
-    {
-        return $this->fields['routingNumber'];
-    }
-
-    public function setRoutingNumber(string $routingNumber): static
-    {
-        $this->fields['routingNumber'] = $routingNumber;
-
-        return $this;
-    }
-
-    public function getAccountType(): string
-    {
-        return $this->fields['accountType'];
-    }
-
-    public function setAccountType(string $accountType): static
-    {
-        $this->fields['accountType'] = $accountType;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [
@@ -138,12 +102,6 @@ class IBANInstrument implements BankAccountInstrument, JsonSerializable
         }
         if (array_key_exists('last4', $this->fields)) {
             $data['last4'] = $this->fields['last4'];
-        }
-        if (array_key_exists('routingNumber', $this->fields)) {
-            $data['routingNumber'] = $this->fields['routingNumber'];
-        }
-        if (array_key_exists('accountType', $this->fields)) {
-            $data['accountType'] = $this->fields['accountType'];
         }
 
         return $data;

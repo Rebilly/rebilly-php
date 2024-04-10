@@ -56,9 +56,6 @@ class SellFeeTransaction implements BalanceTransaction, JsonSerializable
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
-        if (array_key_exists('riskReserve', $data)) {
-            $this->setRiskReserve($data['riskReserve']);
-        }
     }
 
     public static function from(array $data = []): self
@@ -76,15 +73,15 @@ class SellFeeTransaction implements BalanceTransaction, JsonSerializable
         return $this->fields['id'] ?? null;
     }
 
-    public function getFee(): ?BuyFeeTransactionFee
+    public function getFee(): ?SellFeeTransactionFee
     {
         return $this->fields['fee'] ?? null;
     }
 
-    public function setFee(null|BuyFeeTransactionFee|array $fee): static
+    public function setFee(null|SellFeeTransactionFee|array $fee): static
     {
-        if ($fee !== null && !($fee instanceof BuyFeeTransactionFee)) {
-            $fee = BuyFeeTransactionFee::from($fee);
+        if ($fee !== null && !($fee instanceof SellFeeTransactionFee)) {
+            $fee = SellFeeTransactionFee::from($fee);
         }
 
         $this->fields['fee'] = $fee;
@@ -183,22 +180,6 @@ class SellFeeTransaction implements BalanceTransaction, JsonSerializable
         return $this->fields['_links'] ?? null;
     }
 
-    public function getRiskReserve(): ?RiskReserveTransactionRiskReserve
-    {
-        return $this->fields['riskReserve'] ?? null;
-    }
-
-    public function setRiskReserve(null|RiskReserveTransactionRiskReserve|array $riskReserve): static
-    {
-        if ($riskReserve !== null && !($riskReserve instanceof RiskReserveTransactionRiskReserve)) {
-            $riskReserve = RiskReserveTransactionRiskReserve::from($riskReserve);
-        }
-
-        $this->fields['riskReserve'] = $riskReserve;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [
@@ -236,9 +217,6 @@ class SellFeeTransaction implements BalanceTransaction, JsonSerializable
         }
         if (array_key_exists('_links', $this->fields)) {
             $data['_links'] = $this->fields['_links'];
-        }
-        if (array_key_exists('riskReserve', $this->fields)) {
-            $data['riskReserve'] = $this->fields['riskReserve']?->jsonSerialize();
         }
 
         return $data;

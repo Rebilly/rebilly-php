@@ -20,8 +20,8 @@ class AmountAdjustmentInstructionPartialAfterApprovalPolicyFactory
     public static function from(array $data = []): AmountAdjustmentInstructionPartialAfterApprovalPolicy
     {
         return match ($data['method']) {
-            'discount-amount-remaining' => AmountAdjustmentPoliciesDiscountAmountRemaining::from(),
-            'none' => AmountAdjustmentPoliciesNone::from(),
+            'discount-amount-remaining' => AmountAdjustmentPoliciesDiscountAmountRemaining::from($data),
+            'none' => AmountAdjustmentPoliciesNone::from($data),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

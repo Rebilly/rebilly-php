@@ -80,13 +80,6 @@ class GatewayAccountLimit implements JsonSerializable
         return $this->fields['id'] ?? null;
     }
 
-    public function setId(null|string $id): static
-    {
-        $this->fields['id'] = $id;
-
-        return $this;
-    }
-
     public function getStatus(): ?string
     {
         return $this->fields['status'] ?? null;
@@ -185,6 +178,13 @@ class GatewayAccountLimit implements JsonSerializable
         }
 
         return $data;
+    }
+
+    private function setId(null|string $id): static
+    {
+        $this->fields['id'] = $id;
+
+        return $this;
     }
 
     private function setStatus(null|string $status): static

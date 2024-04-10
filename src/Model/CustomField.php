@@ -15,9 +15,9 @@ namespace Rebilly\Sdk\Model;
 
 interface CustomField
 {
-    public function getName(): ?string;
-
     public function getType(): string;
+
+    public function getName(): ?string;
 
     public function getDescription(): ?string;
 

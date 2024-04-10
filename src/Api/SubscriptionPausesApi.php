@@ -126,7 +126,7 @@ class SubscriptionPausesApi
      */
     public function update(
         string $id,
-        ?SubscriptionPause $subscriptionPause = null,
+        SubscriptionPause $subscriptionPause,
     ): SubscriptionPause {
         $pathParams = [
             '{id}' => $id,

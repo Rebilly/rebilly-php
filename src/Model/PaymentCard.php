@@ -29,21 +29,39 @@ class PaymentCard implements PaymentInstrument, JsonSerializable
 
     public const STATUS_VERIFICATION_NEEDED = 'verification-needed';
 
+    public const BRAND_VISA = 'Visa';
+
+    public const BRAND_MASTER_CARD = 'MasterCard';
+
+    public const BRAND_AMERICAN_EXPRESS = 'American Express';
+
+    public const BRAND_DISCOVER = 'Discover';
+
+    public const BRAND_MAESTRO = 'Maestro';
+
+    public const BRAND_SOLO = 'Solo';
+
+    public const BRAND_ELECTRON = 'Electron';
+
+    public const BRAND_JCB = 'JCB';
+
+    public const BRAND_VOYAGER = 'Voyager';
+
+    public const BRAND_DINERS_CLUB = 'Diners Club';
+
+    public const BRAND_SWITCH = 'Switch';
+
+    public const BRAND_LASER = 'Laser';
+
+    public const BRAND_CHINA_UNION_PAY = 'China UnionPay';
+
+    public const BRAND_ASTRO_PAY_CARD = 'AstroPay Card';
+
     public const DIGITAL_WALLET_APPLE_PAY = 'Apple Pay';
 
     public const DIGITAL_WALLET_GOOGLE_PAY = 'Google Pay';
 
     public const DIGITAL_WALLET_NULL = 'null';
-
-    public const ACCOUNT_NUMBER_TYPE_BBAN = 'BBAN';
-
-    public const ACCOUNT_NUMBER_TYPE_IBAN = 'IBAN';
-
-    public const ACCOUNT_TYPE_CHECKING = 'checking';
-
-    public const ACCOUNT_TYPE_SAVINGS = 'savings';
-
-    public const ACCOUNT_TYPE_OTHER = 'other';
 
     private array $fields = [];
 
@@ -132,24 +150,6 @@ class PaymentCard implements PaymentInstrument, JsonSerializable
         }
         if (array_key_exists('_embedded', $data)) {
             $this->setEmbedded($data['_embedded']);
-        }
-        if (array_key_exists('number', $data)) {
-            $this->setNumber($data['number']);
-        }
-        if (array_key_exists('accountNumberType', $data)) {
-            $this->setAccountNumberType($data['accountNumberType']);
-        }
-        if (array_key_exists('accountType', $data)) {
-            $this->setAccountType($data['accountType']);
-        }
-        if (array_key_exists('routingNumber', $data)) {
-            $this->setRoutingNumber($data['routingNumber']);
-        }
-        if (array_key_exists('bic', $data)) {
-            $this->setBic($data['bic']);
-        }
-        if (array_key_exists('username', $data)) {
-            $this->setUsername($data['username']);
         }
     }
 
@@ -258,13 +258,6 @@ class PaymentCard implements PaymentInstrument, JsonSerializable
     public function getBrand(): ?string
     {
         return $this->fields['brand'] ?? null;
-    }
-
-    public function setBrand(null|string $brand): static
-    {
-        $this->fields['brand'] = $brand;
-
-        return $this;
     }
 
     public function getBankCountry(): ?string
@@ -415,71 +408,6 @@ class PaymentCard implements PaymentInstrument, JsonSerializable
         return $this;
     }
 
-    public function getNumber(): ?string
-    {
-        return $this->fields['number'] ?? null;
-    }
-
-    public function setNumber(null|string $number): static
-    {
-        $this->fields['number'] = $number;
-
-        return $this;
-    }
-
-    public function getAccountNumberType(): ?string
-    {
-        return $this->fields['accountNumberType'] ?? null;
-    }
-
-    public function setAccountNumberType(null|string $accountNumberType): static
-    {
-        $this->fields['accountNumberType'] = $accountNumberType;
-
-        return $this;
-    }
-
-    public function getAccountType(): ?string
-    {
-        return $this->fields['accountType'] ?? null;
-    }
-
-    public function setAccountType(null|string $accountType): static
-    {
-        $this->fields['accountType'] = $accountType;
-
-        return $this;
-    }
-
-    public function getRoutingNumber(): ?string
-    {
-        return $this->fields['routingNumber'] ?? null;
-    }
-
-    public function setRoutingNumber(null|string $routingNumber): static
-    {
-        $this->fields['routingNumber'] = $routingNumber;
-
-        return $this;
-    }
-
-    public function getBic(): ?string
-    {
-        return $this->fields['bic'] ?? null;
-    }
-
-    public function setBic(null|string $bic): static
-    {
-        $this->fields['bic'] = $bic;
-
-        return $this;
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->fields['username'] ?? null;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [
@@ -569,24 +497,6 @@ class PaymentCard implements PaymentInstrument, JsonSerializable
         if (array_key_exists('_embedded', $this->fields)) {
             $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();
         }
-        if (array_key_exists('number', $this->fields)) {
-            $data['number'] = $this->fields['number'];
-        }
-        if (array_key_exists('accountNumberType', $this->fields)) {
-            $data['accountNumberType'] = $this->fields['accountNumberType'];
-        }
-        if (array_key_exists('accountType', $this->fields)) {
-            $data['accountType'] = $this->fields['accountType'];
-        }
-        if (array_key_exists('routingNumber', $this->fields)) {
-            $data['routingNumber'] = $this->fields['routingNumber'];
-        }
-        if (array_key_exists('bic', $this->fields)) {
-            $data['bic'] = $this->fields['bic'];
-        }
-        if (array_key_exists('username', $this->fields)) {
-            $data['username'] = $this->fields['username'];
-        }
 
         return $data;
     }
@@ -615,6 +525,13 @@ class PaymentCard implements PaymentInstrument, JsonSerializable
     private function setLast4(null|string $last4): static
     {
         $this->fields['last4'] = $last4;
+
+        return $this;
+    }
+
+    private function setBrand(null|string $brand): static
+    {
+        $this->fields['brand'] = $brand;
 
         return $this;
     }
@@ -712,13 +629,6 @@ class PaymentCard implements PaymentInstrument, JsonSerializable
         ) : null;
 
         $this->fields['_links'] = $links;
-
-        return $this;
-    }
-
-    private function setUsername(null|string $username): static
-    {
-        $this->fields['username'] = $username;
 
         return $this;
     }

@@ -15,4 +15,5 @@ namespace Rebilly\Sdk\Model;
 
 interface ReminderScheduleInstruction
 {
+    public function getMethod(): string;
 }

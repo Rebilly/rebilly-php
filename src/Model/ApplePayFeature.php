@@ -27,12 +27,6 @@ class ApplePayFeature implements PaymentCardFeature, JsonSerializable
         if (array_key_exists('country', $data)) {
             $this->setCountry($data['country']);
         }
-        if (array_key_exists('merchantOrigin', $data)) {
-            $this->setMerchantOrigin($data['merchantOrigin']);
-        }
-        if (array_key_exists('merchantName', $data)) {
-            $this->setMerchantName($data['merchantName']);
-        }
     }
 
     public static function from(array $data = []): self
@@ -69,30 +63,6 @@ class ApplePayFeature implements PaymentCardFeature, JsonSerializable
         return $this;
     }
 
-    public function getMerchantOrigin(): ?string
-    {
-        return $this->fields['merchantOrigin'] ?? null;
-    }
-
-    public function setMerchantOrigin(null|string $merchantOrigin): static
-    {
-        $this->fields['merchantOrigin'] = $merchantOrigin;
-
-        return $this;
-    }
-
-    public function getMerchantName(): ?string
-    {
-        return $this->fields['merchantName'] ?? null;
-    }
-
-    public function setMerchantName(null|string $merchantName): static
-    {
-        $this->fields['merchantName'] = $merchantName;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [
@@ -103,12 +73,6 @@ class ApplePayFeature implements PaymentCardFeature, JsonSerializable
         }
         if (array_key_exists('country', $this->fields)) {
             $data['country'] = $this->fields['country'];
-        }
-        if (array_key_exists('merchantOrigin', $this->fields)) {
-            $data['merchantOrigin'] = $this->fields['merchantOrigin'];
-        }
-        if (array_key_exists('merchantName', $this->fields)) {
-            $data['merchantName'] = $this->fields['merchantName'];
         }
 
         return $data;

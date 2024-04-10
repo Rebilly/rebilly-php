@@ -30,7 +30,7 @@ class CustomDomainsApi
      * @return CustomDomain
      */
     public function create(
-        ?CustomDomain $customDomain = null,
+        CustomDomain $customDomain,
     ): CustomDomain {
         $uri = '/custom-domains';
 

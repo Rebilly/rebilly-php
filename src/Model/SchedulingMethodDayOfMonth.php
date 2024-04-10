@@ -15,14 +15,8 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class SchedulingMethodDayOfMonth implements InvoiceRetryScheduleInstruction, PeriodAnchor, ReminderScheduleInstruction, ScheduleInstruction, ServicePeriodAnchorInstruction, JsonSerializable
+class SchedulingMethodDayOfMonth implements ServicePeriodAnchorInstruction, InvoiceRetryScheduleInstruction, PeriodAnchor, ScheduleInstruction, ReminderScheduleInstruction, JsonSerializable
 {
-    public const WEEK_NEXT = 'next';
-
-    public const WEEK_FIRST_IN_MONTH = 'first-in-month';
-
-    public const WEEK_LAST_IN_MONTH = 'last-in-month';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -32,18 +26,6 @@ class SchedulingMethodDayOfMonth implements InvoiceRetryScheduleInstruction, Per
         }
         if (array_key_exists('time', $data)) {
             $this->setTime($data['time']);
-        }
-        if (array_key_exists('duration', $data)) {
-            $this->setDuration($data['duration']);
-        }
-        if (array_key_exists('unit', $data)) {
-            $this->setUnit($data['unit']);
-        }
-        if (array_key_exists('week', $data)) {
-            $this->setWeek($data['week']);
-        }
-        if (array_key_exists('anchor', $data)) {
-            $this->setAnchor($data['anchor']);
         }
     }
 
@@ -81,58 +63,6 @@ class SchedulingMethodDayOfMonth implements InvoiceRetryScheduleInstruction, Per
         return $this;
     }
 
-    public function getDuration(): int
-    {
-        return $this->fields['duration'];
-    }
-
-    public function setDuration(int $duration): static
-    {
-        $this->fields['duration'] = $duration;
-
-        return $this;
-    }
-
-    public function getUnit(): string
-    {
-        return $this->fields['unit'];
-    }
-
-    public function setUnit(string $unit): static
-    {
-        $this->fields['unit'] = $unit;
-
-        return $this;
-    }
-
-    public function getWeek(): string
-    {
-        return $this->fields['week'];
-    }
-
-    public function setWeek(string $week): static
-    {
-        $this->fields['week'] = $week;
-
-        return $this;
-    }
-
-    public function getAnchor(): ?PeriodAnchor
-    {
-        return $this->fields['anchor'] ?? null;
-    }
-
-    public function setAnchor(null|PeriodAnchor|array $anchor): static
-    {
-        if ($anchor !== null && !($anchor instanceof PeriodAnchor)) {
-            $anchor = PeriodAnchorFactory::from($anchor);
-        }
-
-        $this->fields['anchor'] = $anchor;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [
@@ -143,18 +73,6 @@ class SchedulingMethodDayOfMonth implements InvoiceRetryScheduleInstruction, Per
         }
         if (array_key_exists('time', $this->fields)) {
             $data['time'] = $this->fields['time'];
-        }
-        if (array_key_exists('duration', $this->fields)) {
-            $data['duration'] = $this->fields['duration'];
-        }
-        if (array_key_exists('unit', $this->fields)) {
-            $data['unit'] = $this->fields['unit'];
-        }
-        if (array_key_exists('week', $this->fields)) {
-            $data['week'] = $this->fields['week'];
-        }
-        if (array_key_exists('anchor', $this->fields)) {
-            $data['anchor'] = $this->fields['anchor']?->jsonSerialize();
         }
 
         return $data;

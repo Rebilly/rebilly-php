@@ -508,7 +508,7 @@ class GatewayAccountsApi
      */
     public function setFinancialSettings(
         string $id,
-        ?GatewayAccountFinancialSettings $gatewayAccountFinancialSettings = null,
+        GatewayAccountFinancialSettings $gatewayAccountFinancialSettings,
     ): GatewayAccountFinancialSettings {
         $pathParams = [
             '{id}' => $id,
@@ -571,7 +571,7 @@ class GatewayAccountsApi
     public function updateVolumeLimit(
         string $id,
         string $limitId,
-        ?GatewayAccountLimit $gatewayAccountLimit = null,
+        GatewayAccountLimit $gatewayAccountLimit,
     ): GatewayAccountLimit {
         $pathParams = [
             '{id}' => $id,

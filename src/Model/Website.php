@@ -71,13 +71,6 @@ class Website implements JsonSerializable
         return $this->fields['id'] ?? null;
     }
 
-    public function setId(null|string $id): static
-    {
-        $this->fields['id'] = $id;
-
-        return $this;
-    }
-
     public function getName(): string
     {
         return $this->fields['name'];
@@ -181,13 +174,6 @@ class Website implements JsonSerializable
         return $this->fields['organizationId'] ?? null;
     }
 
-    public function setOrganizationId(null|string $organizationId): static
-    {
-        $this->fields['organizationId'] = $organizationId;
-
-        return $this;
-    }
-
     /**
      * @return null|ResourceLink[]
      */
@@ -239,6 +225,13 @@ class Website implements JsonSerializable
         return $data;
     }
 
+    private function setId(null|string $id): static
+    {
+        $this->fields['id'] = $id;
+
+        return $this;
+    }
+
     private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
     {
         if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
@@ -257,6 +250,13 @@ class Website implements JsonSerializable
         }
 
         $this->fields['updatedTime'] = $updatedTime;
+
+        return $this;
+    }
+
+    private function setOrganizationId(null|string $organizationId): static
+    {
+        $this->fields['organizationId'] = $organizationId;
 
         return $this;
     }

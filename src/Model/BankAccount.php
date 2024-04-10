@@ -33,12 +33,6 @@ class BankAccount implements PaymentInstrument, JsonSerializable
 
     public const STATUS_DEACTIVATED = 'deactivated';
 
-    public const DIGITAL_WALLET_APPLE_PAY = 'Apple Pay';
-
-    public const DIGITAL_WALLET_GOOGLE_PAY = 'Google Pay';
-
-    public const DIGITAL_WALLET_NULL = 'null';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -102,48 +96,6 @@ class BankAccount implements PaymentInstrument, JsonSerializable
         }
         if (array_key_exists('_embedded', $data)) {
             $this->setEmbedded($data['_embedded']);
-        }
-        if (array_key_exists('bin', $data)) {
-            $this->setBin($data['bin']);
-        }
-        if (array_key_exists('billingPortalUrl', $data)) {
-            $this->setBillingPortalUrl($data['billingPortalUrl']);
-        }
-        if (array_key_exists('bankCountry', $data)) {
-            $this->setBankCountry($data['bankCountry']);
-        }
-        if (array_key_exists('number', $data)) {
-            $this->setNumber($data['number']);
-        }
-        if (array_key_exists('digitalWallet', $data)) {
-            $this->setDigitalWallet($data['digitalWallet']);
-        }
-        if (array_key_exists('expYear', $data)) {
-            $this->setExpYear($data['expYear']);
-        }
-        if (array_key_exists('expirationReminderTime', $data)) {
-            $this->setExpirationReminderTime($data['expirationReminderTime']);
-        }
-        if (array_key_exists('pan', $data)) {
-            $this->setPan($data['pan']);
-        }
-        if (array_key_exists('brand', $data)) {
-            $this->setBrand($data['brand']);
-        }
-        if (array_key_exists('cvv', $data)) {
-            $this->setCvv($data['cvv']);
-        }
-        if (array_key_exists('referenceData', $data)) {
-            $this->setReferenceData($data['referenceData']);
-        }
-        if (array_key_exists('expMonth', $data)) {
-            $this->setExpMonth($data['expMonth']);
-        }
-        if (array_key_exists('expirationReminderNumber', $data)) {
-            $this->setExpirationReminderNumber($data['expirationReminderNumber']);
-        }
-        if (array_key_exists('username', $data)) {
-            $this->setUsername($data['username']);
         }
     }
 
@@ -349,131 +301,6 @@ class BankAccount implements PaymentInstrument, JsonSerializable
         return $this;
     }
 
-    public function getBin(): ?string
-    {
-        return $this->fields['bin'] ?? null;
-    }
-
-    public function getBillingPortalUrl(): ?string
-    {
-        return $this->fields['billingPortalUrl'] ?? null;
-    }
-
-    public function getBankCountry(): ?string
-    {
-        return $this->fields['bankCountry'] ?? null;
-    }
-
-    public function getNumber(): ?string
-    {
-        return $this->fields['number'] ?? null;
-    }
-
-    public function setNumber(null|string $number): static
-    {
-        $this->fields['number'] = $number;
-
-        return $this;
-    }
-
-    public function getDigitalWallet(): ?string
-    {
-        return $this->fields['digitalWallet'] ?? null;
-    }
-
-    public function getExpYear(): ?int
-    {
-        return $this->fields['expYear'] ?? null;
-    }
-
-    public function setExpYear(null|int $expYear): static
-    {
-        $this->fields['expYear'] = $expYear;
-
-        return $this;
-    }
-
-    public function getExpirationReminderTime(): ?DateTimeImmutable
-    {
-        return $this->fields['expirationReminderTime'] ?? null;
-    }
-
-    public function getPan(): ?string
-    {
-        return $this->fields['pan'] ?? null;
-    }
-
-    public function setPan(null|string $pan): static
-    {
-        $this->fields['pan'] = $pan;
-
-        return $this;
-    }
-
-    public function getBrand(): ?string
-    {
-        return $this->fields['brand'] ?? null;
-    }
-
-    public function setBrand(null|string $brand): static
-    {
-        $this->fields['brand'] = $brand;
-
-        return $this;
-    }
-
-    public function getCvv(): ?string
-    {
-        return $this->fields['cvv'] ?? null;
-    }
-
-    public function setCvv(null|string $cvv): static
-    {
-        $this->fields['cvv'] = $cvv;
-
-        return $this;
-    }
-
-    /**
-     * @return null|array<string,string>
-     */
-    public function getReferenceData(): ?array
-    {
-        return $this->fields['referenceData'] ?? null;
-    }
-
-    /**
-     * @param null|array<string,string> $referenceData
-     */
-    public function setReferenceData(null|array $referenceData): static
-    {
-        $this->fields['referenceData'] = $referenceData;
-
-        return $this;
-    }
-
-    public function getExpMonth(): ?int
-    {
-        return $this->fields['expMonth'] ?? null;
-    }
-
-    public function setExpMonth(null|int $expMonth): static
-    {
-        $this->fields['expMonth'] = $expMonth;
-
-        return $this;
-    }
-
-    public function getExpirationReminderNumber(): ?int
-    {
-        return $this->fields['expirationReminderNumber'] ?? null;
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->fields['username'] ?? null;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [
@@ -538,48 +365,6 @@ class BankAccount implements PaymentInstrument, JsonSerializable
         }
         if (array_key_exists('_embedded', $this->fields)) {
             $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();
-        }
-        if (array_key_exists('bin', $this->fields)) {
-            $data['bin'] = $this->fields['bin'];
-        }
-        if (array_key_exists('billingPortalUrl', $this->fields)) {
-            $data['billingPortalUrl'] = $this->fields['billingPortalUrl'];
-        }
-        if (array_key_exists('bankCountry', $this->fields)) {
-            $data['bankCountry'] = $this->fields['bankCountry'];
-        }
-        if (array_key_exists('number', $this->fields)) {
-            $data['number'] = $this->fields['number'];
-        }
-        if (array_key_exists('digitalWallet', $this->fields)) {
-            $data['digitalWallet'] = $this->fields['digitalWallet'];
-        }
-        if (array_key_exists('expYear', $this->fields)) {
-            $data['expYear'] = $this->fields['expYear'];
-        }
-        if (array_key_exists('expirationReminderTime', $this->fields)) {
-            $data['expirationReminderTime'] = $this->fields['expirationReminderTime']?->format(DateTimeInterface::RFC3339);
-        }
-        if (array_key_exists('pan', $this->fields)) {
-            $data['pan'] = $this->fields['pan'];
-        }
-        if (array_key_exists('brand', $this->fields)) {
-            $data['brand'] = $this->fields['brand'];
-        }
-        if (array_key_exists('cvv', $this->fields)) {
-            $data['cvv'] = $this->fields['cvv'];
-        }
-        if (array_key_exists('referenceData', $this->fields)) {
-            $data['referenceData'] = $this->fields['referenceData'];
-        }
-        if (array_key_exists('expMonth', $this->fields)) {
-            $data['expMonth'] = $this->fields['expMonth'];
-        }
-        if (array_key_exists('expirationReminderNumber', $this->fields)) {
-            $data['expirationReminderNumber'] = $this->fields['expirationReminderNumber'];
-        }
-        if (array_key_exists('username', $this->fields)) {
-            $data['username'] = $this->fields['username'];
         }
 
         return $data;
@@ -660,59 +445,6 @@ class BankAccount implements PaymentInstrument, JsonSerializable
         ) : null;
 
         $this->fields['_links'] = $links;
-
-        return $this;
-    }
-
-    private function setBin(null|string $bin): static
-    {
-        $this->fields['bin'] = $bin;
-
-        return $this;
-    }
-
-    private function setBillingPortalUrl(null|string $billingPortalUrl): static
-    {
-        $this->fields['billingPortalUrl'] = $billingPortalUrl;
-
-        return $this;
-    }
-
-    private function setBankCountry(null|string $bankCountry): static
-    {
-        $this->fields['bankCountry'] = $bankCountry;
-
-        return $this;
-    }
-
-    private function setDigitalWallet(null|string $digitalWallet): static
-    {
-        $this->fields['digitalWallet'] = $digitalWallet;
-
-        return $this;
-    }
-
-    private function setExpirationReminderTime(null|DateTimeImmutable|string $expirationReminderTime): static
-    {
-        if ($expirationReminderTime !== null && !($expirationReminderTime instanceof DateTimeImmutable)) {
-            $expirationReminderTime = new DateTimeImmutable($expirationReminderTime);
-        }
-
-        $this->fields['expirationReminderTime'] = $expirationReminderTime;
-
-        return $this;
-    }
-
-    private function setExpirationReminderNumber(null|int $expirationReminderNumber): static
-    {
-        $this->fields['expirationReminderNumber'] = $expirationReminderNumber;
-
-        return $this;
-    }
-
-    private function setUsername(null|string $username): static
-    {
-        $this->fields['username'] = $username;
 
         return $this;
     }

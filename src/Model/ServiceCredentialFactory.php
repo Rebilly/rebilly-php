@@ -21,13 +21,13 @@ class ServiceCredentialFactory
     {
         return match ($data['type']) {
             'avalara' => AvalaraCredential::from($data),
-            'aws-ses' => SESCredential::from($data),
             'experian' => ExperianCredential::from($data),
             'mailgun' => MailgunCredential::from($data),
             'oauth2' => OAuth2Credential::from($data),
             'plaid' => PlaidCredential::from($data),
             'postmark' => PostmarkCredential::from($data),
             'sendgrid' => SendGridCredential::from($data),
+            'aws-ses' => SESCredential::from($data),
             'smtp' => SmtpCredential::from($data),
             'taxjar' => TaxJarCredential::from($data),
             'webhook' => WebhookCredential::from($data),

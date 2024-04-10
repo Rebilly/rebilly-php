@@ -78,13 +78,6 @@ class CreditMemoAllocationsTransactions implements JsonSerializable
         return $this->fields['currency'] ?? null;
     }
 
-    public function setCurrency(null|string $currency): static
-    {
-        $this->fields['currency'] = $currency;
-
-        return $this;
-    }
-
     public function getCreatedTime(): ?DateTimeImmutable
     {
         return $this->fields['createdTime'] ?? null;
@@ -115,6 +108,13 @@ class CreditMemoAllocationsTransactions implements JsonSerializable
         }
 
         return $data;
+    }
+
+    private function setCurrency(null|string $currency): static
+    {
+        $this->fields['currency'] = $currency;
+
+        return $this;
     }
 
     private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static

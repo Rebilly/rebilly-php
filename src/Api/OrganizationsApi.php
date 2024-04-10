@@ -32,7 +32,7 @@ class OrganizationsApi
      * @return Organization
      */
     public function create(
-        ?PostOrganizationRequest $postOrganizationRequest = null,
+        PostOrganizationRequest $postOrganizationRequest,
     ): Organization {
         $uri = '/organizations';
 
@@ -119,7 +119,7 @@ class OrganizationsApi
      */
     public function update(
         string $id,
-        ?PatchOrganizationRequest $patchOrganizationRequest = null,
+        PatchOrganizationRequest $patchOrganizationRequest,
     ): Organization {
         $pathParams = [
             '{id}' => $id,

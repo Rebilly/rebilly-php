@@ -23,7 +23,7 @@ class TaxTracking implements JsonSerializable
 
     public const TAX_SERVICE_AVALARA = 'avalara';
 
-    public const TAX_SERVICE_CREDENTIAL_SOURCE__DEFAULT = 'default';
+    public const TAX_SERVICE_CREDENTIAL_SOURCE_DEFAULT = 'default';
 
     public const TAX_SERVICE_CREDENTIAL_SOURCE_MERCHANT = 'merchant';
 
@@ -175,11 +175,17 @@ class TaxTracking implements JsonSerializable
         return $this;
     }
 
+    /**
+     * @return null|array<string,string>
+     */
     public function getRequestHeaders(): ?array
     {
         return $this->fields['requestHeaders'] ?? null;
     }
 
+    /**
+     * @param null|array<string,string> $requestHeaders
+     */
     public function setRequestHeaders(null|array $requestHeaders): static
     {
         $this->fields['requestHeaders'] = $requestHeaders;
@@ -187,11 +193,17 @@ class TaxTracking implements JsonSerializable
         return $this;
     }
 
+    /**
+     * @return null|array<string,string>
+     */
     public function getResponseHeaders(): ?array
     {
         return $this->fields['responseHeaders'] ?? null;
     }
 
+    /**
+     * @param null|array<string,string> $responseHeaders
+     */
     public function setResponseHeaders(null|array $responseHeaders): static
     {
         $this->fields['responseHeaders'] = $responseHeaders;

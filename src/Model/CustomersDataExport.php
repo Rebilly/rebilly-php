@@ -234,15 +234,15 @@ class CustomersDataExport implements DataExport, JsonSerializable
         return $this->fields['status'] ?? null;
     }
 
-    public function getDateRange(): ?CustomersDataExportDateRange
+    public function getDateRange(): ?DataExportDateRange
     {
         return $this->fields['dateRange'] ?? null;
     }
 
-    public function setDateRange(null|CustomersDataExportDateRange|array $dateRange): static
+    public function setDateRange(null|DataExportDateRange|array $dateRange): static
     {
-        if ($dateRange !== null && !($dateRange instanceof CustomersDataExportDateRange)) {
-            $dateRange = CustomersDataExportDateRange::from($dateRange);
+        if ($dateRange !== null && !($dateRange instanceof DataExportDateRange)) {
+            $dateRange = DataExportDateRange::from($dateRange);
         }
 
         $this->fields['dateRange'] = $dateRange;

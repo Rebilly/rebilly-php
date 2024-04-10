@@ -47,46 +47,15 @@ class OneTimeSale implements SubscriptionOrOneTimeSale, JsonSerializable
 
     public const BILLING_STATUS_PARTIALLY_PAID = 'partially-paid';
 
-    public const CANCELED_BY_MERCHANT = 'merchant';
-
-    public const CANCELED_BY_CUSTOMER = 'customer';
-
-    public const CANCELED_BY_REBILLY = 'rebilly';
-
-    public const CANCELED_BY_NULL = 'null';
-
-    public const CANCEL_CATEGORY_BILLING_FAILURE = 'billing-failure';
-
-    public const CANCEL_CATEGORY_DID_NOT_USE = 'did-not-use';
-
-    public const CANCEL_CATEGORY_DID_NOT_WANT = 'did-not-want';
-
-    public const CANCEL_CATEGORY_MISSING_FEATURES = 'missing-features';
-
-    public const CANCEL_CATEGORY_BUGS_OR_PROBLEMS = 'bugs-or-problems';
-
-    public const CANCEL_CATEGORY_DO_NOT_REMEMBER = 'do-not-remember';
-
-    public const CANCEL_CATEGORY_RISK_WARNING = 'risk-warning';
-
-    public const CANCEL_CATEGORY_CONTRACT_EXPIRED = 'contract-expired';
-
-    public const CANCEL_CATEGORY_TOO_EXPENSIVE = 'too-expensive';
-
-    public const CANCEL_CATEGORY_NEVER_STARTED = 'never-started';
-
-    public const CANCEL_CATEGORY_SWITCHED_PLAN = 'switched-plan';
-
-    public const CANCEL_CATEGORY_OTHER = 'other';
-
-    public const CANCEL_CATEGORY_NULL = 'null';
-
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
+        }
+        if (array_key_exists('orderId', $data)) {
+            $this->setOrderId($data['orderId']);
         }
         if (array_key_exists('customerId', $data)) {
             $this->setCustomerId($data['customerId']);
@@ -163,81 +132,6 @@ class OneTimeSale implements SubscriptionOrOneTimeSale, JsonSerializable
         if (array_key_exists('_embedded', $data)) {
             $this->setEmbedded($data['_embedded']);
         }
-        if (array_key_exists('inTrial', $data)) {
-            $this->setInTrial($data['inTrial']);
-        }
-        if (array_key_exists('trial', $data)) {
-            $this->setTrial($data['trial']);
-        }
-        if (array_key_exists('lineItems', $data)) {
-            $this->setLineItems($data['lineItems']);
-        }
-        if (array_key_exists('delinquencyPeriod', $data)) {
-            $this->setDelinquencyPeriod($data['delinquencyPeriod']);
-        }
-        if (array_key_exists('abandonReminderNumber', $data)) {
-            $this->setAbandonReminderNumber($data['abandonReminderNumber']);
-        }
-        if (array_key_exists('paymentInstrumentId', $data)) {
-            $this->setPaymentInstrumentId($data['paymentInstrumentId']);
-        }
-        if (array_key_exists('trialReminderNumber', $data)) {
-            $this->setTrialReminderNumber($data['trialReminderNumber']);
-        }
-        if (array_key_exists('churnTime', $data)) {
-            $this->setChurnTime($data['churnTime']);
-        }
-        if (array_key_exists('lineItemSubtotal', $data)) {
-            $this->setLineItemSubtotal($data['lineItemSubtotal']);
-        }
-        if (array_key_exists('trialReminderTime', $data)) {
-            $this->setTrialReminderTime($data['trialReminderTime']);
-        }
-        if (array_key_exists('renewalReminderTime', $data)) {
-            $this->setRenewalReminderTime($data['renewalReminderTime']);
-        }
-        if (array_key_exists('rebillNumber', $data)) {
-            $this->setRebillNumber($data['rebillNumber']);
-        }
-        if (array_key_exists('isTrialOnly', $data)) {
-            $this->setIsTrialOnly($data['isTrialOnly']);
-        }
-        if (array_key_exists('canceledBy', $data)) {
-            $this->setCanceledBy($data['canceledBy']);
-        }
-        if (array_key_exists('renewalTime', $data)) {
-            $this->setRenewalTime($data['renewalTime']);
-        }
-        if (array_key_exists('startTime', $data)) {
-            $this->setStartTime($data['startTime']);
-        }
-        if (array_key_exists('recurringInterval', $data)) {
-            $this->setRecurringInterval($data['recurringInterval']);
-        }
-        if (array_key_exists('autopay', $data)) {
-            $this->setAutopay($data['autopay']);
-        }
-        if (array_key_exists('cancelDescription', $data)) {
-            $this->setCancelDescription($data['cancelDescription']);
-        }
-        if (array_key_exists('invoiceTimeShift', $data)) {
-            $this->setInvoiceTimeShift($data['invoiceTimeShift']);
-        }
-        if (array_key_exists('renewalReminderNumber', $data)) {
-            $this->setRenewalReminderNumber($data['renewalReminderNumber']);
-        }
-        if (array_key_exists('billingPortalToken', $data)) {
-            $this->setBillingPortalToken($data['billingPortalToken']);
-        }
-        if (array_key_exists('abandonReminderTime', $data)) {
-            $this->setAbandonReminderTime($data['abandonReminderTime']);
-        }
-        if (array_key_exists('isTrialConverted', $data)) {
-            $this->setIsTrialConverted($data['isTrialConverted']);
-        }
-        if (array_key_exists('cancelCategory', $data)) {
-            $this->setCancelCategory($data['cancelCategory']);
-        }
     }
 
     public static function from(array $data = []): self
@@ -255,6 +149,11 @@ class OneTimeSale implements SubscriptionOrOneTimeSale, JsonSerializable
         return $this->fields['id'] ?? null;
     }
 
+    public function getOrderId(): ?string
+    {
+        return $this->fields['orderId'] ?? null;
+    }
+
     public function getCustomerId(): string
     {
         return $this->fields['customerId'];
@@ -270,13 +169,6 @@ class OneTimeSale implements SubscriptionOrOneTimeSale, JsonSerializable
     public function getOrganizationId(): ?string
     {
         return $this->fields['organizationId'] ?? null;
-    }
-
-    public function setOrganizationId(null|string $organizationId): static
-    {
-        $this->fields['organizationId'] = $organizationId;
-
-        return $this;
     }
 
     public function getStatus(): ?string
@@ -304,13 +196,6 @@ class OneTimeSale implements SubscriptionOrOneTimeSale, JsonSerializable
     public function getCurrency(): ?string
     {
         return $this->fields['currency'] ?? null;
-    }
-
-    public function setCurrency(null|string $currency): static
-    {
-        $this->fields['currency'] = $currency;
-
-        return $this;
     }
 
     public function getInitialInvoiceId(): ?string
@@ -529,228 +414,6 @@ class OneTimeSale implements SubscriptionOrOneTimeSale, JsonSerializable
         return $this;
     }
 
-    public function getInTrial(): ?bool
-    {
-        return $this->fields['inTrial'] ?? null;
-    }
-
-    public function getTrial(): ?SubscriptionTrial
-    {
-        return $this->fields['trial'] ?? null;
-    }
-
-    public function setTrial(null|SubscriptionTrial|array $trial): static
-    {
-        if ($trial !== null && !($trial instanceof SubscriptionTrial)) {
-            $trial = SubscriptionTrial::from($trial);
-        }
-
-        $this->fields['trial'] = $trial;
-
-        return $this;
-    }
-
-    /**
-     * @return null|SubscriptionLineItems[]
-     */
-    public function getLineItems(): ?array
-    {
-        return $this->fields['lineItems'] ?? null;
-    }
-
-    public function getDelinquencyPeriod(): ?string
-    {
-        return $this->fields['delinquencyPeriod'] ?? null;
-    }
-
-    public function setDelinquencyPeriod(null|string $delinquencyPeriod): static
-    {
-        $this->fields['delinquencyPeriod'] = $delinquencyPeriod;
-
-        return $this;
-    }
-
-    public function getAbandonReminderNumber(): ?int
-    {
-        return $this->fields['abandonReminderNumber'] ?? null;
-    }
-
-    public function getPaymentInstrumentId(): ?string
-    {
-        return $this->fields['paymentInstrumentId'] ?? null;
-    }
-
-    public function setPaymentInstrumentId(null|string $paymentInstrumentId): static
-    {
-        $this->fields['paymentInstrumentId'] = $paymentInstrumentId;
-
-        return $this;
-    }
-
-    public function getTrialReminderNumber(): ?int
-    {
-        return $this->fields['trialReminderNumber'] ?? null;
-    }
-
-    public function getChurnTime(): ?DateTimeImmutable
-    {
-        return $this->fields['churnTime'] ?? null;
-    }
-
-    public function getLineItemSubtotal(): ?SubscriptionLineItemSubtotal
-    {
-        return $this->fields['lineItemSubtotal'] ?? null;
-    }
-
-    public function setLineItemSubtotal(null|SubscriptionLineItemSubtotal|array $lineItemSubtotal): static
-    {
-        if ($lineItemSubtotal !== null && !($lineItemSubtotal instanceof SubscriptionLineItemSubtotal)) {
-            $lineItemSubtotal = SubscriptionLineItemSubtotal::from($lineItemSubtotal);
-        }
-
-        $this->fields['lineItemSubtotal'] = $lineItemSubtotal;
-
-        return $this;
-    }
-
-    public function getTrialReminderTime(): ?DateTimeImmutable
-    {
-        return $this->fields['trialReminderTime'] ?? null;
-    }
-
-    public function getRenewalReminderTime(): ?DateTimeImmutable
-    {
-        return $this->fields['renewalReminderTime'] ?? null;
-    }
-
-    public function getRebillNumber(): ?int
-    {
-        return $this->fields['rebillNumber'] ?? null;
-    }
-
-    public function getIsTrialOnly(): ?bool
-    {
-        return $this->fields['isTrialOnly'] ?? null;
-    }
-
-    public function setIsTrialOnly(null|bool $isTrialOnly): static
-    {
-        $this->fields['isTrialOnly'] = $isTrialOnly;
-
-        return $this;
-    }
-
-    public function getCanceledBy(): ?string
-    {
-        return $this->fields['canceledBy'] ?? null;
-    }
-
-    public function getRenewalTime(): ?DateTimeImmutable
-    {
-        return $this->fields['renewalTime'] ?? null;
-    }
-
-    public function setRenewalTime(null|DateTimeImmutable|string $renewalTime): static
-    {
-        if ($renewalTime !== null && !($renewalTime instanceof DateTimeImmutable)) {
-            $renewalTime = new DateTimeImmutable($renewalTime);
-        }
-
-        $this->fields['renewalTime'] = $renewalTime;
-
-        return $this;
-    }
-
-    public function getStartTime(): ?DateTimeImmutable
-    {
-        return $this->fields['startTime'] ?? null;
-    }
-
-    public function setStartTime(null|DateTimeImmutable|string $startTime): static
-    {
-        if ($startTime !== null && !($startTime instanceof DateTimeImmutable)) {
-            $startTime = new DateTimeImmutable($startTime);
-        }
-
-        $this->fields['startTime'] = $startTime;
-
-        return $this;
-    }
-
-    public function getRecurringInterval(): ?SubscriptionRecurringInterval
-    {
-        return $this->fields['recurringInterval'] ?? null;
-    }
-
-    public function setRecurringInterval(null|SubscriptionRecurringInterval|array $recurringInterval): static
-    {
-        if ($recurringInterval !== null && !($recurringInterval instanceof SubscriptionRecurringInterval)) {
-            $recurringInterval = SubscriptionRecurringInterval::from($recurringInterval);
-        }
-
-        $this->fields['recurringInterval'] = $recurringInterval;
-
-        return $this;
-    }
-
-    public function getAutopay(): ?bool
-    {
-        return $this->fields['autopay'] ?? null;
-    }
-
-    public function setAutopay(null|bool $autopay): static
-    {
-        $this->fields['autopay'] = $autopay;
-
-        return $this;
-    }
-
-    public function getCancelDescription(): ?string
-    {
-        return $this->fields['cancelDescription'] ?? null;
-    }
-
-    public function getInvoiceTimeShift(): ?InvoiceTimeShift
-    {
-        return $this->fields['invoiceTimeShift'] ?? null;
-    }
-
-    public function setInvoiceTimeShift(null|InvoiceTimeShift|array $invoiceTimeShift): static
-    {
-        if ($invoiceTimeShift !== null && !($invoiceTimeShift instanceof InvoiceTimeShift)) {
-            $invoiceTimeShift = InvoiceTimeShift::from($invoiceTimeShift);
-        }
-
-        $this->fields['invoiceTimeShift'] = $invoiceTimeShift;
-
-        return $this;
-    }
-
-    public function getRenewalReminderNumber(): ?int
-    {
-        return $this->fields['renewalReminderNumber'] ?? null;
-    }
-
-    public function getBillingPortalToken(): ?string
-    {
-        return $this->fields['billingPortalToken'] ?? null;
-    }
-
-    public function getAbandonReminderTime(): ?DateTimeImmutable
-    {
-        return $this->fields['abandonReminderTime'] ?? null;
-    }
-
-    public function getIsTrialConverted(): ?bool
-    {
-        return $this->fields['isTrialConverted'] ?? null;
-    }
-
-    public function getCancelCategory(): ?string
-    {
-        return $this->fields['cancelCategory'] ?? null;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [
@@ -758,6 +421,9 @@ class OneTimeSale implements SubscriptionOrOneTimeSale, JsonSerializable
         ];
         if (array_key_exists('id', $this->fields)) {
             $data['id'] = $this->fields['id'];
+        }
+        if (array_key_exists('orderId', $this->fields)) {
+            $data['orderId'] = $this->fields['orderId'];
         }
         if (array_key_exists('customerId', $this->fields)) {
             $data['customerId'] = $this->fields['customerId'];
@@ -834,81 +500,6 @@ class OneTimeSale implements SubscriptionOrOneTimeSale, JsonSerializable
         if (array_key_exists('_embedded', $this->fields)) {
             $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();
         }
-        if (array_key_exists('inTrial', $this->fields)) {
-            $data['inTrial'] = $this->fields['inTrial'];
-        }
-        if (array_key_exists('trial', $this->fields)) {
-            $data['trial'] = $this->fields['trial']?->jsonSerialize();
-        }
-        if (array_key_exists('lineItems', $this->fields)) {
-            $data['lineItems'] = $this->fields['lineItems'];
-        }
-        if (array_key_exists('delinquencyPeriod', $this->fields)) {
-            $data['delinquencyPeriod'] = $this->fields['delinquencyPeriod'];
-        }
-        if (array_key_exists('abandonReminderNumber', $this->fields)) {
-            $data['abandonReminderNumber'] = $this->fields['abandonReminderNumber'];
-        }
-        if (array_key_exists('paymentInstrumentId', $this->fields)) {
-            $data['paymentInstrumentId'] = $this->fields['paymentInstrumentId'];
-        }
-        if (array_key_exists('trialReminderNumber', $this->fields)) {
-            $data['trialReminderNumber'] = $this->fields['trialReminderNumber'];
-        }
-        if (array_key_exists('churnTime', $this->fields)) {
-            $data['churnTime'] = $this->fields['churnTime']?->format(DateTimeInterface::RFC3339);
-        }
-        if (array_key_exists('lineItemSubtotal', $this->fields)) {
-            $data['lineItemSubtotal'] = $this->fields['lineItemSubtotal']?->jsonSerialize();
-        }
-        if (array_key_exists('trialReminderTime', $this->fields)) {
-            $data['trialReminderTime'] = $this->fields['trialReminderTime']?->format(DateTimeInterface::RFC3339);
-        }
-        if (array_key_exists('renewalReminderTime', $this->fields)) {
-            $data['renewalReminderTime'] = $this->fields['renewalReminderTime']?->format(DateTimeInterface::RFC3339);
-        }
-        if (array_key_exists('rebillNumber', $this->fields)) {
-            $data['rebillNumber'] = $this->fields['rebillNumber'];
-        }
-        if (array_key_exists('isTrialOnly', $this->fields)) {
-            $data['isTrialOnly'] = $this->fields['isTrialOnly'];
-        }
-        if (array_key_exists('canceledBy', $this->fields)) {
-            $data['canceledBy'] = $this->fields['canceledBy'];
-        }
-        if (array_key_exists('renewalTime', $this->fields)) {
-            $data['renewalTime'] = $this->fields['renewalTime']?->format(DateTimeInterface::RFC3339);
-        }
-        if (array_key_exists('startTime', $this->fields)) {
-            $data['startTime'] = $this->fields['startTime']?->format(DateTimeInterface::RFC3339);
-        }
-        if (array_key_exists('recurringInterval', $this->fields)) {
-            $data['recurringInterval'] = $this->fields['recurringInterval']?->jsonSerialize();
-        }
-        if (array_key_exists('autopay', $this->fields)) {
-            $data['autopay'] = $this->fields['autopay'];
-        }
-        if (array_key_exists('cancelDescription', $this->fields)) {
-            $data['cancelDescription'] = $this->fields['cancelDescription'];
-        }
-        if (array_key_exists('invoiceTimeShift', $this->fields)) {
-            $data['invoiceTimeShift'] = $this->fields['invoiceTimeShift']?->jsonSerialize();
-        }
-        if (array_key_exists('renewalReminderNumber', $this->fields)) {
-            $data['renewalReminderNumber'] = $this->fields['renewalReminderNumber'];
-        }
-        if (array_key_exists('billingPortalToken', $this->fields)) {
-            $data['billingPortalToken'] = $this->fields['billingPortalToken'];
-        }
-        if (array_key_exists('abandonReminderTime', $this->fields)) {
-            $data['abandonReminderTime'] = $this->fields['abandonReminderTime']?->format(DateTimeInterface::RFC3339);
-        }
-        if (array_key_exists('isTrialConverted', $this->fields)) {
-            $data['isTrialConverted'] = $this->fields['isTrialConverted'];
-        }
-        if (array_key_exists('cancelCategory', $this->fields)) {
-            $data['cancelCategory'] = $this->fields['cancelCategory'];
-        }
 
         return $data;
     }
@@ -916,6 +507,20 @@ class OneTimeSale implements SubscriptionOrOneTimeSale, JsonSerializable
     private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
+
+        return $this;
+    }
+
+    private function setOrderId(null|string $orderId): static
+    {
+        $this->fields['orderId'] = $orderId;
+
+        return $this;
+    }
+
+    private function setOrganizationId(null|string $organizationId): static
+    {
+        $this->fields['organizationId'] = $organizationId;
 
         return $this;
     }
@@ -930,6 +535,13 @@ class OneTimeSale implements SubscriptionOrOneTimeSale, JsonSerializable
     private function setBillingStatus(null|string $billingStatus): static
     {
         $this->fields['billingStatus'] = $billingStatus;
+
+        return $this;
+    }
+
+    private function setCurrency(null|string $currency): static
+    {
+        $this->fields['currency'] = $currency;
 
         return $this;
     }
@@ -1010,135 +622,6 @@ class OneTimeSale implements SubscriptionOrOneTimeSale, JsonSerializable
         ) : null;
 
         $this->fields['_links'] = $links;
-
-        return $this;
-    }
-
-    private function setInTrial(null|bool $inTrial): static
-    {
-        $this->fields['inTrial'] = $inTrial;
-
-        return $this;
-    }
-
-    /**
-     * @param null|array[]|SubscriptionLineItems[] $lineItems
-     */
-    private function setLineItems(null|array $lineItems): static
-    {
-        $lineItems = $lineItems !== null ? array_map(
-            fn ($value) => $value instanceof SubscriptionLineItems ? $value : SubscriptionLineItems::from($value),
-            $lineItems,
-        ) : null;
-
-        $this->fields['lineItems'] = $lineItems;
-
-        return $this;
-    }
-
-    private function setAbandonReminderNumber(null|int $abandonReminderNumber): static
-    {
-        $this->fields['abandonReminderNumber'] = $abandonReminderNumber;
-
-        return $this;
-    }
-
-    private function setTrialReminderNumber(null|int $trialReminderNumber): static
-    {
-        $this->fields['trialReminderNumber'] = $trialReminderNumber;
-
-        return $this;
-    }
-
-    private function setChurnTime(null|DateTimeImmutable|string $churnTime): static
-    {
-        if ($churnTime !== null && !($churnTime instanceof DateTimeImmutable)) {
-            $churnTime = new DateTimeImmutable($churnTime);
-        }
-
-        $this->fields['churnTime'] = $churnTime;
-
-        return $this;
-    }
-
-    private function setTrialReminderTime(null|DateTimeImmutable|string $trialReminderTime): static
-    {
-        if ($trialReminderTime !== null && !($trialReminderTime instanceof DateTimeImmutable)) {
-            $trialReminderTime = new DateTimeImmutable($trialReminderTime);
-        }
-
-        $this->fields['trialReminderTime'] = $trialReminderTime;
-
-        return $this;
-    }
-
-    private function setRenewalReminderTime(null|DateTimeImmutable|string $renewalReminderTime): static
-    {
-        if ($renewalReminderTime !== null && !($renewalReminderTime instanceof DateTimeImmutable)) {
-            $renewalReminderTime = new DateTimeImmutable($renewalReminderTime);
-        }
-
-        $this->fields['renewalReminderTime'] = $renewalReminderTime;
-
-        return $this;
-    }
-
-    private function setRebillNumber(null|int $rebillNumber): static
-    {
-        $this->fields['rebillNumber'] = $rebillNumber;
-
-        return $this;
-    }
-
-    private function setCanceledBy(null|string $canceledBy): static
-    {
-        $this->fields['canceledBy'] = $canceledBy;
-
-        return $this;
-    }
-
-    private function setCancelDescription(null|string $cancelDescription): static
-    {
-        $this->fields['cancelDescription'] = $cancelDescription;
-
-        return $this;
-    }
-
-    private function setRenewalReminderNumber(null|int $renewalReminderNumber): static
-    {
-        $this->fields['renewalReminderNumber'] = $renewalReminderNumber;
-
-        return $this;
-    }
-
-    private function setBillingPortalToken(null|string $billingPortalToken): static
-    {
-        $this->fields['billingPortalToken'] = $billingPortalToken;
-
-        return $this;
-    }
-
-    private function setAbandonReminderTime(null|DateTimeImmutable|string $abandonReminderTime): static
-    {
-        if ($abandonReminderTime !== null && !($abandonReminderTime instanceof DateTimeImmutable)) {
-            $abandonReminderTime = new DateTimeImmutable($abandonReminderTime);
-        }
-
-        $this->fields['abandonReminderTime'] = $abandonReminderTime;
-
-        return $this;
-    }
-
-    private function setIsTrialConverted(null|bool $isTrialConverted): static
-    {
-        $this->fields['isTrialConverted'] = $isTrialConverted;
-
-        return $this;
-    }
-
-    private function setCancelCategory(null|string $cancelCategory): static
-    {
-        $this->fields['cancelCategory'] = $cancelCategory;
 
         return $this;
     }

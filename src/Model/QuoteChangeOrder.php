@@ -59,8 +59,8 @@ class QuoteChangeOrder implements Quote, JsonSerializable
         if (array_key_exists('acceptanceFulfillment', $data)) {
             $this->setAcceptanceFulfillment($data['acceptanceFulfillment']);
         }
-        if (array_key_exists('orderId', $data)) {
-            $this->setOrderId($data['orderId']);
+        if (array_key_exists('subscriptionId', $data)) {
+            $this->setSubscriptionId($data['subscriptionId']);
         }
         if (array_key_exists('invoiceId', $data)) {
             $this->setInvoiceId($data['invoiceId']);
@@ -140,18 +140,6 @@ class QuoteChangeOrder implements Quote, JsonSerializable
         if (array_key_exists('_embedded', $data)) {
             $this->setEmbedded($data['_embedded']);
         }
-        if (array_key_exists('renewalTime', $data)) {
-            $this->setRenewalTime($data['renewalTime']);
-        }
-        if (array_key_exists('deliveryAddress', $data)) {
-            $this->setDeliveryAddress($data['deliveryAddress']);
-        }
-        if (array_key_exists('paymentInstrumentId', $data)) {
-            $this->setPaymentInstrumentId($data['paymentInstrumentId']);
-        }
-        if (array_key_exists('billingAddress', $data)) {
-            $this->setBillingAddress($data['billingAddress']);
-        }
     }
 
     public static function from(array $data = []): self
@@ -193,21 +181,21 @@ class QuoteChangeOrder implements Quote, JsonSerializable
     }
 
     /**
-     * @return null|QuoteCreateOrderAcceptanceFulfillment[]
+     * @return null|QuoteChangeOrderAcceptanceFulfillment[]
      */
     public function getAcceptanceFulfillment(): ?array
     {
         return $this->fields['acceptanceFulfillment'] ?? null;
     }
 
-    public function getOrderId(): string
+    public function getSubscriptionId(): string
     {
-        return $this->fields['orderId'];
+        return $this->fields['subscriptionId'];
     }
 
-    public function setOrderId(string $orderId): static
+    public function setSubscriptionId(string $subscriptionId): static
     {
-        $this->fields['orderId'] = $orderId;
+        $this->fields['subscriptionId'] = $subscriptionId;
 
         return $this;
     }
@@ -247,7 +235,7 @@ class QuoteChangeOrder implements Quote, JsonSerializable
     }
 
     /**
-     * @return QuoteCreateOrderItems[]
+     * @return QuoteChangeOrderItems[]
      */
     public function getItems(): array
     {
@@ -255,12 +243,12 @@ class QuoteChangeOrder implements Quote, JsonSerializable
     }
 
     /**
-     * @param array[]|QuoteCreateOrderItems[] $items
+     * @param array[]|QuoteChangeOrderItems[] $items
      */
     public function setItems(array $items): static
     {
         $items = array_map(
-            fn ($value) => $value instanceof QuoteCreateOrderItems ? $value : QuoteCreateOrderItems::from($value),
+            fn ($value) => $value instanceof QuoteChangeOrderItems ? $value : QuoteChangeOrderItems::from($value),
             $items,
         );
 
@@ -356,15 +344,15 @@ class QuoteChangeOrder implements Quote, JsonSerializable
         return $this;
     }
 
-    public function getInvoicePreview(): ?QuoteCreateOrderInvoicePreview
+    public function getInvoicePreview(): ?QuoteChangeOrderInvoicePreview
     {
         return $this->fields['invoicePreview'] ?? null;
     }
 
-    public function setInvoicePreview(null|QuoteCreateOrderInvoicePreview|array $invoicePreview): static
+    public function setInvoicePreview(null|QuoteChangeOrderInvoicePreview|array $invoicePreview): static
     {
-        if ($invoicePreview !== null && !($invoicePreview instanceof QuoteCreateOrderInvoicePreview)) {
-            $invoicePreview = QuoteCreateOrderInvoicePreview::from($invoicePreview);
+        if ($invoicePreview !== null && !($invoicePreview instanceof QuoteChangeOrderInvoicePreview)) {
+            $invoicePreview = QuoteChangeOrderInvoicePreview::from($invoicePreview);
         }
 
         $this->fields['invoicePreview'] = $invoicePreview;
@@ -444,15 +432,15 @@ class QuoteChangeOrder implements Quote, JsonSerializable
         return $this;
     }
 
-    public function getSignature(): ?QuoteCreateOrderSignature
+    public function getSignature(): ?QuoteChangeOrderSignature
     {
         return $this->fields['signature'] ?? null;
     }
 
-    public function setSignature(null|QuoteCreateOrderSignature|array $signature): static
+    public function setSignature(null|QuoteChangeOrderSignature|array $signature): static
     {
-        if ($signature !== null && !($signature instanceof QuoteCreateOrderSignature)) {
-            $signature = QuoteCreateOrderSignature::from($signature);
+        if ($signature !== null && !($signature instanceof QuoteChangeOrderSignature)) {
+            $signature = QuoteChangeOrderSignature::from($signature);
         }
 
         $this->fields['signature'] = $signature;
@@ -518,78 +506,18 @@ class QuoteChangeOrder implements Quote, JsonSerializable
         return $this->fields['_links'] ?? null;
     }
 
-    public function getEmbedded(): ?QuoteCreateOrderEmbedded
+    public function getEmbedded(): ?QuoteChangeOrderEmbedded
     {
         return $this->fields['_embedded'] ?? null;
     }
 
-    public function setEmbedded(null|QuoteCreateOrderEmbedded|array $embedded): static
+    public function setEmbedded(null|QuoteChangeOrderEmbedded|array $embedded): static
     {
-        if ($embedded !== null && !($embedded instanceof QuoteCreateOrderEmbedded)) {
-            $embedded = QuoteCreateOrderEmbedded::from($embedded);
+        if ($embedded !== null && !($embedded instanceof QuoteChangeOrderEmbedded)) {
+            $embedded = QuoteChangeOrderEmbedded::from($embedded);
         }
 
         $this->fields['_embedded'] = $embedded;
-
-        return $this;
-    }
-
-    public function getRenewalTime(): ?DateTimeImmutable
-    {
-        return $this->fields['renewalTime'] ?? null;
-    }
-
-    public function setRenewalTime(null|DateTimeImmutable|string $renewalTime): static
-    {
-        if ($renewalTime !== null && !($renewalTime instanceof DateTimeImmutable)) {
-            $renewalTime = new DateTimeImmutable($renewalTime);
-        }
-
-        $this->fields['renewalTime'] = $renewalTime;
-
-        return $this;
-    }
-
-    public function getDeliveryAddress(): ?ContactObject
-    {
-        return $this->fields['deliveryAddress'] ?? null;
-    }
-
-    public function setDeliveryAddress(null|ContactObject|array $deliveryAddress): static
-    {
-        if ($deliveryAddress !== null && !($deliveryAddress instanceof ContactObject)) {
-            $deliveryAddress = ContactObject::from($deliveryAddress);
-        }
-
-        $this->fields['deliveryAddress'] = $deliveryAddress;
-
-        return $this;
-    }
-
-    public function getPaymentInstrumentId(): ?string
-    {
-        return $this->fields['paymentInstrumentId'] ?? null;
-    }
-
-    public function setPaymentInstrumentId(null|string $paymentInstrumentId): static
-    {
-        $this->fields['paymentInstrumentId'] = $paymentInstrumentId;
-
-        return $this;
-    }
-
-    public function getBillingAddress(): ?ContactObject
-    {
-        return $this->fields['billingAddress'] ?? null;
-    }
-
-    public function setBillingAddress(null|ContactObject|array $billingAddress): static
-    {
-        if ($billingAddress !== null && !($billingAddress instanceof ContactObject)) {
-            $billingAddress = ContactObject::from($billingAddress);
-        }
-
-        $this->fields['billingAddress'] = $billingAddress;
 
         return $this;
     }
@@ -611,8 +539,8 @@ class QuoteChangeOrder implements Quote, JsonSerializable
         if (array_key_exists('acceptanceFulfillment', $this->fields)) {
             $data['acceptanceFulfillment'] = $this->fields['acceptanceFulfillment'];
         }
-        if (array_key_exists('orderId', $this->fields)) {
-            $data['orderId'] = $this->fields['orderId'];
+        if (array_key_exists('subscriptionId', $this->fields)) {
+            $data['subscriptionId'] = $this->fields['subscriptionId'];
         }
         if (array_key_exists('invoiceId', $this->fields)) {
             $data['invoiceId'] = $this->fields['invoiceId'];
@@ -692,18 +620,6 @@ class QuoteChangeOrder implements Quote, JsonSerializable
         if (array_key_exists('_embedded', $this->fields)) {
             $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();
         }
-        if (array_key_exists('renewalTime', $this->fields)) {
-            $data['renewalTime'] = $this->fields['renewalTime']?->format(DateTimeInterface::RFC3339);
-        }
-        if (array_key_exists('deliveryAddress', $this->fields)) {
-            $data['deliveryAddress'] = $this->fields['deliveryAddress']?->jsonSerialize();
-        }
-        if (array_key_exists('paymentInstrumentId', $this->fields)) {
-            $data['paymentInstrumentId'] = $this->fields['paymentInstrumentId'];
-        }
-        if (array_key_exists('billingAddress', $this->fields)) {
-            $data['billingAddress'] = $this->fields['billingAddress']?->jsonSerialize();
-        }
 
         return $data;
     }
@@ -723,12 +639,12 @@ class QuoteChangeOrder implements Quote, JsonSerializable
     }
 
     /**
-     * @param null|array[]|QuoteCreateOrderAcceptanceFulfillment[] $acceptanceFulfillment
+     * @param null|array[]|QuoteChangeOrderAcceptanceFulfillment[] $acceptanceFulfillment
      */
     private function setAcceptanceFulfillment(null|array $acceptanceFulfillment): static
     {
         $acceptanceFulfillment = $acceptanceFulfillment !== null ? array_map(
-            fn ($value) => $value instanceof QuoteCreateOrderAcceptanceFulfillment ? $value : QuoteCreateOrderAcceptanceFulfillment::from($value),
+            fn ($value) => $value instanceof QuoteChangeOrderAcceptanceFulfillment ? $value : QuoteChangeOrderAcceptanceFulfillment::from($value),
             $acceptanceFulfillment,
         ) : null;
 

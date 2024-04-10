@@ -17,7 +17,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
-use Rebilly\Sdk\Model\GetPayoutRequestPaymentInstruments200Response;
+use Rebilly\Sdk\Model\GetPayoutRequestPaymentInstrumentsResponse;
 use Rebilly\Sdk\Model\PayoutRequest;
 use Rebilly\Sdk\Model\PayoutRequestCancellation;
 use Rebilly\Sdk\Paginator;
@@ -131,7 +131,7 @@ class PayoutRequestsApi
     }
 
     /**
-     * @return GetPayoutRequestPaymentInstruments200Response[]
+     * @return GetPayoutRequestPaymentInstrumentsResponse[]
      */
     public function getPaymentInstruments(
         string $id,
@@ -146,7 +146,7 @@ class PayoutRequestsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): GetPayoutRequestPaymentInstruments200Response => GetPayoutRequestPaymentInstruments200Response::from($item), $data);
+        return array_map(fn (array $item): GetPayoutRequestPaymentInstrumentsResponse => GetPayoutRequestPaymentInstrumentsResponse::from($item), $data);
     }
 
     /**
@@ -154,7 +154,7 @@ class PayoutRequestsApi
      */
     public function update(
         string $id,
-        ?PayoutRequest $payoutRequest = null,
+        PayoutRequest $payoutRequest,
     ): PayoutRequest {
         $pathParams = [
             '{id}' => $id,

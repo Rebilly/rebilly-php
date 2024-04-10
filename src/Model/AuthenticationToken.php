@@ -17,7 +17,9 @@ use DateTimeImmutable;
 
 interface AuthenticationToken
 {
-    public function getMode(): ?string;
+    public function getMode(): string;
+
+    public function getCustomerId(): ?string;
 
     public function getToken(): ?string;
 
@@ -26,8 +28,6 @@ interface AuthenticationToken
     public function setOtpRequired(null|bool $otpRequired): static;
 
     public function getCredentialId(): ?string;
-
-    public function setCredentialId(null|string $credentialId): static;
 
     public function getExpiredTime(): ?DateTimeImmutable;
 

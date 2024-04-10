@@ -18,6 +18,7 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\Plan;
+use Rebilly\Sdk\Model\PlanFactory;
 use Rebilly\Sdk\Paginator;
 
 class PlansApi
@@ -38,7 +39,7 @@ class PlansApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Plan::from($data);
+        return PlanFactory::from($data);
     }
 
     public function delete(
@@ -70,7 +71,7 @@ class PlansApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Plan::from($data);
+        return PlanFactory::from($data);
     }
 
     /**
@@ -97,7 +98,7 @@ class PlansApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): Plan => Plan::from($item), $data),
+            array_map(fn (array $item): Plan => PlanFactory::from($item), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
@@ -142,6 +143,6 @@ class PlansApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Plan::from($data);
+        return PlanFactory::from($data);
     }
 }

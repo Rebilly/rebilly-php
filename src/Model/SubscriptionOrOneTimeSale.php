@@ -17,19 +17,17 @@ use DateTimeImmutable;
 
 interface SubscriptionOrOneTimeSale
 {
+    public function getOrderType(): string;
+
     public function getId(): ?string;
 
-    public function getOrderType(): string;
+    public function getOrderId(): ?string;
 
     public function getCustomerId(): string;
 
     public function setCustomerId(string $customerId): static;
 
     public function getOrganizationId(): ?string;
-
-    public function setOrganizationId(null|string $organizationId): static;
-
-    public function getStatus(): ?string;
 
     public function getBillingStatus(): ?string;
 
@@ -38,8 +36,6 @@ interface SubscriptionOrOneTimeSale
     public function setWebsiteId(string $websiteId): static;
 
     public function getCurrency(): ?string;
-
-    public function setCurrency(null|string $currency): static;
 
     public function getInitialInvoiceId(): ?string;
 

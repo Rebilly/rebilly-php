@@ -31,13 +31,17 @@ class AttachmentEmbedded implements JsonSerializable
         return new self($data);
     }
 
-    public function getFile(): ?object
+    public function getFile(): ?File
     {
         return $this->fields['file'] ?? null;
     }
 
-    public function setFile(null|object $file): static
+    public function setFile(null|File|array $file): static
     {
+        if ($file !== null && !($file instanceof File)) {
+            $file = File::from($file);
+        }
+
         $this->fields['file'] = $file;
 
         return $this;
@@ -47,7 +51,7 @@ class AttachmentEmbedded implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('file', $this->fields)) {
-            $data['file'] = $this->fields['file'];
+            $data['file'] = $this->fields['file']?->jsonSerialize();
         }
 
         return $data;

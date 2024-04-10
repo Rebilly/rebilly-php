@@ -34,7 +34,7 @@ class RuleActionDisplayOtherChoices extends RuleAction
     }
 
     /**
-     * @return RuleActionDisplayMessageMessages[]
+     * @return RuleActionDisplayOtherChoicesChoices[]
      */
     public function getChoices(): array
     {
@@ -42,12 +42,12 @@ class RuleActionDisplayOtherChoices extends RuleAction
     }
 
     /**
-     * @param array[]|RuleActionDisplayMessageMessages[] $choices
+     * @param array[]|RuleActionDisplayOtherChoicesChoices[] $choices
      */
     public function setChoices(array $choices): static
     {
         $choices = array_map(
-            fn ($value) => $value instanceof RuleActionDisplayMessageMessages ? $value : RuleActionDisplayMessageMessages::from($value),
+            fn ($value) => $value instanceof RuleActionDisplayOtherChoicesChoices ? $value : RuleActionDisplayOtherChoicesChoices::from($value),
             $choices,
         );
 

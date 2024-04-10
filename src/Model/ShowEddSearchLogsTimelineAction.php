@@ -35,15 +35,6 @@ class ShowEddSearchLogsTimelineAction implements TimelineAction, JsonSerializabl
         if (array_key_exists('type', $data)) {
             $this->setType($data['type']);
         }
-        if (array_key_exists('redemptionId', $data)) {
-            $this->setRedemptionId($data['redemptionId']);
-        }
-        if (array_key_exists('messageId', $data)) {
-            $this->setMessageId($data['messageId']);
-        }
-        if (array_key_exists('version', $data)) {
-            $this->setVersion($data['version']);
-        }
     }
 
     public static function from(array $data = []): self
@@ -80,42 +71,6 @@ class ShowEddSearchLogsTimelineAction implements TimelineAction, JsonSerializabl
         return $this;
     }
 
-    public function getRedemptionId(): ?string
-    {
-        return $this->fields['redemptionId'] ?? null;
-    }
-
-    public function setRedemptionId(null|string $redemptionId): static
-    {
-        $this->fields['redemptionId'] = $redemptionId;
-
-        return $this;
-    }
-
-    public function getMessageId(): ?string
-    {
-        return $this->fields['messageId'] ?? null;
-    }
-
-    public function setMessageId(null|string $messageId): static
-    {
-        $this->fields['messageId'] = $messageId;
-
-        return $this;
-    }
-
-    public function getVersion(): ?int
-    {
-        return $this->fields['version'] ?? null;
-    }
-
-    public function setVersion(null|int $version): static
-    {
-        $this->fields['version'] = $version;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [
@@ -126,15 +81,6 @@ class ShowEddSearchLogsTimelineAction implements TimelineAction, JsonSerializabl
         }
         if (array_key_exists('type', $this->fields)) {
             $data['type'] = $this->fields['type'];
-        }
-        if (array_key_exists('redemptionId', $this->fields)) {
-            $data['redemptionId'] = $this->fields['redemptionId'];
-        }
-        if (array_key_exists('messageId', $this->fields)) {
-            $data['messageId'] = $this->fields['messageId'];
-        }
-        if (array_key_exists('version', $this->fields)) {
-            $data['version'] = $this->fields['version'];
         }
 
         return $data;

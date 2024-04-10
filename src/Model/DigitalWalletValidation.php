@@ -18,6 +18,8 @@ use JsonSerializable;
 
 abstract class DigitalWalletValidation implements JsonSerializable
 {
+    public const TYPE_APPLE_PAY = 'Apple Pay';
+
     private array $fields = [];
 
     protected function __construct(array $data = [])
@@ -31,7 +33,7 @@ abstract class DigitalWalletValidation implements JsonSerializable
     {
         switch ($data['type']) {
             case 'Apple Pay':
-                return new ApplePayValidation($data);
+                return ApplePayValidation::from($data);
         }
 
         throw new InvalidArgumentException("Unsupported type value: '{$data['type']}'");

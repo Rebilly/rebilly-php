@@ -371,10 +371,15 @@ class AML implements JsonSerializable
     }
 
     /**
-     * @param null|DateTimeImmutable[] $dob
+     * @param null|DateTimeImmutable[]|string[] $dob
      */
     private function setDob(null|array $dob): static
     {
+        $dob = $dob !== null ? array_map(
+            fn ($value) => $value instanceof DateTimeImmutable ? $value : new DateTimeImmutable($value),
+            $dob,
+        ) : null;
+
         $this->fields['dob'] = $dob;
 
         return $this;

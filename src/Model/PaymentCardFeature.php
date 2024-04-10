@@ -15,7 +15,7 @@ namespace Rebilly\Sdk\Model;
 
 interface PaymentCardFeature
 {
-    public function getName(): ?string;
+    public function getName(): string;
 
     public function getCountry(): ?string;
 

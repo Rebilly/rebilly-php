@@ -218,7 +218,7 @@ class CouponsApi
      */
     public function setExpiration(
         string $id,
-        ?CouponExpiration $couponExpiration = null,
+        CouponExpiration $couponExpiration,
     ): Coupon {
         $pathParams = [
             '{id}' => $id,

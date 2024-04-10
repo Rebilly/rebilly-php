@@ -20,6 +20,7 @@ class AdjustPaymentMethodFactory
     public static function from(array $data = []): AdjustPaymentMethod
     {
         return match ($data['paymentMethod']) {
+            'ach' => AdjustReadyToPayAch::from($data),
             'AdvCash' => AdjustReadyToPayGeneric::from($data),
             'Alfa-click' => AdjustReadyToPayGeneric::from($data),
             'Alipay' => AdjustReadyToPayGeneric::from($data),
@@ -124,7 +125,6 @@ class AdjustPaymentMethodFactory
             'Yandex-money' => AdjustReadyToPayGeneric::from($data),
             'Zimpler' => AdjustReadyToPayGeneric::from($data),
             'Zotapay' => AdjustReadyToPayGeneric::from($data),
-            'ach' => AdjustReadyToPayAch::from($data),
             'bank-transfer' => AdjustReadyToPayGeneric::from($data),
             'bank-transfer-2' => AdjustReadyToPayGeneric::from($data),
             'bank-transfer-3' => AdjustReadyToPayGeneric::from($data),
@@ -155,8 +155,6 @@ class AdjustPaymentMethodFactory
             'miscellaneous' => AdjustReadyToPayGeneric::from($data),
             'online-bank-transfer' => AdjustReadyToPayGeneric::from($data),
             'oriental-wallet' => AdjustReadyToPayGeneric::from($data),
-            'payment-card' => AdjustReadyToPayPaymentCard::from($data),
-            'paypal' => AdjustReadyToPayPaypal::from($data),
             'phone' => AdjustReadyToPayGeneric::from($data),
             'plaid-account' => AdjustReadyToPayGeneric::from($data),
             'rapyd-checkout' => AdjustReadyToPayGeneric::from($data),
@@ -165,6 +163,8 @@ class AdjustPaymentMethodFactory
             'voucher-2' => AdjustReadyToPayGeneric::from($data),
             'voucher-3' => AdjustReadyToPayGeneric::from($data),
             'voucher-4' => AdjustReadyToPayGeneric::from($data),
+            'payment-card' => AdjustReadyToPayPaymentCard::from($data),
+            'paypal' => AdjustReadyToPayPaypal::from($data),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

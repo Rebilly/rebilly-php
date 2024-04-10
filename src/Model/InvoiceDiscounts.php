@@ -17,6 +17,12 @@ use JsonSerializable;
 
 class InvoiceDiscounts implements JsonSerializable
 {
+    public const CONTEXT_ITEMS = 'items';
+
+    public const CONTEXT_SHIPPING = 'shipping';
+
+    public const CONTEXT_ITEMS_AND_SHIPPING = 'items-and-shipping';
+
     private array $fields = [];
 
     public function __construct(array $data = [])

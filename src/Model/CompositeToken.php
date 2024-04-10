@@ -17,9 +17,11 @@ use DateTimeImmutable;
 
 interface CompositeToken
 {
-    public function getId(): ?string;
+    public function getMethod(): string;
 
-    public function setId(null|string $id): static;
+    public function getBillingAddress(): ?ContactObject;
+
+    public function getId(): ?string;
 
     public function getIsUsed(): ?bool;
 

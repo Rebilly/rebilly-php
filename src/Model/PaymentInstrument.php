@@ -17,7 +17,17 @@ use DateTimeImmutable;
 
 interface PaymentInstrument
 {
+    public function getMethod(): string;
+
     public function getId(): ?string;
+
+    public function getCustomerId(): ?string;
+
+    public function setCustomerId(string $customerId): static;
+
+    public function getBillingAddress(): ?ContactObject;
+
+    public function setBillingAddress(ContactObject|array $billingAddress): static;
 
     public function getUseAsBackup(): ?bool;
 
@@ -38,4 +48,9 @@ interface PaymentInstrument
     public function setRiskMetadata(null|RiskMetadata|array $riskMetadata): static;
 
     public function getRevision(): ?int;
+
+    /**
+     * @return null|ResourceLink[]
+     */
+    public function getLinks(): ?array;
 }

@@ -52,15 +52,15 @@ class ICanPay extends GatewayAccount
         return $this;
     }
 
-    public function getSettings(): ?AsiaPaymentGatewaySettings
+    public function getSettings(): ?ICanPaySettings
     {
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|AsiaPaymentGatewaySettings|array $settings): static
+    public function setSettings(null|ICanPaySettings|array $settings): static
     {
-        if ($settings !== null && !($settings instanceof AsiaPaymentGatewaySettings)) {
-            $settings = AsiaPaymentGatewaySettings::from($settings);
+        if ($settings !== null && !($settings instanceof ICanPaySettings)) {
+            $settings = ICanPaySettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;

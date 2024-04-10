@@ -30,7 +30,7 @@ class PreviewsApi
      * @return OrderPreview
      */
     public function order(
-        ?OrderPreview $orderPreview = null,
+        OrderPreview $orderPreview,
     ): OrderPreview {
         $uri = '/previews/orders';
 

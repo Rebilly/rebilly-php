@@ -166,13 +166,6 @@ class OrderPreview implements JsonSerializable
         return $this->fields['currency'] ?? null;
     }
 
-    public function setCurrency(null|string $currency): static
-    {
-        $this->fields['currency'] = $currency;
-
-        return $this;
-    }
-
     /**
      * @return null|OrderPreviewLineItems[]
      */
@@ -299,6 +292,13 @@ class OrderPreview implements JsonSerializable
         }
 
         return $data;
+    }
+
+    private function setCurrency(null|string $currency): static
+    {
+        $this->fields['currency'] = $currency;
+
+        return $this;
     }
 
     /**

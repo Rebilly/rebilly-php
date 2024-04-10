@@ -31,13 +31,24 @@ class KycRequestEmbedded implements JsonSerializable
         return new self($data);
     }
 
+    /**
+     * @return null|KycDocument[]
+     */
     public function getDocuments(): ?array
     {
         return $this->fields['documents'] ?? null;
     }
 
+    /**
+     * @param null|array[]|KycDocument[] $documents
+     */
     public function setDocuments(null|array $documents): static
     {
+        $documents = $documents !== null ? array_map(
+            fn ($value) => $value instanceof KycDocument ? $value : KycDocumentFactory::from($value),
+            $documents,
+        ) : null;
+
         $this->fields['documents'] = $documents;
 
         return $this;

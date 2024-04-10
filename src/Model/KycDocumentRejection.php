@@ -17,6 +17,38 @@ use JsonSerializable;
 
 class KycDocumentRejection implements JsonSerializable
 {
+    public const TYPE_DOCUMENT_UNREADABLE = 'document-unreadable';
+
+    public const TYPE_DOCUMENT_EXPIRED = 'document-expired';
+
+    public const TYPE_DOCUMENT_NOT_MATCHING = 'document-not-matching';
+
+    public const TYPE_DOCUMENT_DUPLICATE = 'document-duplicate';
+
+    public const TYPE_DOCUMENT_INVALID = 'document-invalid';
+
+    public const TYPE_DOCUMENT_NOT_OPEN = 'document-not-open';
+
+    public const TYPE_UNDERAGE_PERSON = 'underage-person';
+
+    public const TYPE_THIRD_PARTY_OR_MISMATCH = 'third-party-or-mismatch';
+
+    public const TYPE_EXPIRATION_DATE_MISSING = 'expiration-date-missing';
+
+    public const TYPE_ISSUE_DATE_MISSING = 'issue-date-missing';
+
+    public const TYPE_DOB_MISMATCH = 'dob-mismatch';
+
+    public const TYPE_NAME_MISMATCH = 'name-mismatch';
+
+    public const TYPE_CRITICAL_INFO_MISSING = 'critical-info-missing';
+
+    public const TYPE_OLD_ADDRESS_ON_ID = 'old-address-on-id';
+
+    public const TYPE_TAMPERED_DOCUMENT = 'tampered-document';
+
+    public const TYPE_OTHER = 'other';
+
     private array $fields = [];
 
     public function __construct(array $data = [])

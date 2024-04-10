@@ -24,9 +24,6 @@ class ManualShipping implements Shipping, JsonSerializable
         if (array_key_exists('amount', $data)) {
             $this->setAmount($data['amount']);
         }
-        if (array_key_exists('rateId', $data)) {
-            $this->setRateId($data['rateId']);
-        }
     }
 
     public static function from(array $data = []): self
@@ -55,18 +52,6 @@ class ManualShipping implements Shipping, JsonSerializable
         return $this;
     }
 
-    public function getRateId(): ?string
-    {
-        return $this->fields['rateId'] ?? null;
-    }
-
-    public function setRateId(null|string $rateId): static
-    {
-        $this->fields['rateId'] = $rateId;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [
@@ -74,9 +59,6 @@ class ManualShipping implements Shipping, JsonSerializable
         ];
         if (array_key_exists('amount', $this->fields)) {
             $data['amount'] = $this->fields['amount'];
-        }
-        if (array_key_exists('rateId', $this->fields)) {
-            $data['rateId'] = $this->fields['rateId'];
         }
 
         return $data;

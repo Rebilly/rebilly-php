@@ -23,7 +23,7 @@ class QuoteFactory
             'change' => QuoteChangeOrder::from($data),
             'create' => QuoteCreateOrder::from($data),
             'reactivate' => QuoteReactivateOrder::from($data),
-            'trial-conversion' => QuoteTrialConversionOrder::from($data),
+            'trial-only-conversion' => QuoteTrialConversionOrder::from($data),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

@@ -17,9 +17,9 @@ use JsonSerializable;
 
 class GridSegment implements JsonSerializable
 {
-    public const SCOPE__PRIVATE = 'private';
+    public const SCOPE_PRIVATE = 'private';
 
-    public const SCOPE__PUBLIC = 'public';
+    public const SCOPE_PUBLIC = 'public';
 
     public const SCOPE_SHARED = 'shared';
 
@@ -82,12 +82,12 @@ class GridSegment implements JsonSerializable
         return $this;
     }
 
-    public function getData(): object
+    public function getData(): array
     {
         return $this->fields['data'];
     }
 
-    public function setData(object $data): static
+    public function setData(array $data): static
     {
         $this->fields['data'] = $data;
 

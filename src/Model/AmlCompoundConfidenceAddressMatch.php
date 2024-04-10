@@ -17,6 +17,30 @@ use JsonSerializable;
 
 class AmlCompoundConfidenceAddressMatch implements JsonSerializable
 {
+    public const MATCHING_COUNTRY_WEAK = 'weak';
+
+    public const MATCHING_COUNTRY_MEDIUM = 'medium';
+
+    public const MATCHING_COUNTRY_STRONG = 'strong';
+
+    public const MATCHING_COUNTRY_VERY_STRONG = 'very-strong';
+
+    public const MISMATCHING_COUNTRY_WEAK = 'weak';
+
+    public const MISMATCHING_COUNTRY_MEDIUM = 'medium';
+
+    public const MISMATCHING_COUNTRY_STRONG = 'strong';
+
+    public const MISMATCHING_COUNTRY_VERY_STRONG = 'very-strong';
+
+    public const NO_COUNTRY_WEAK = 'weak';
+
+    public const NO_COUNTRY_MEDIUM = 'medium';
+
+    public const NO_COUNTRY_STRONG = 'strong';
+
+    public const NO_COUNTRY_VERY_STRONG = 'very-strong';
+
     private array $fields = [];
 
     public function __construct(array $data = [])

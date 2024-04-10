@@ -15,9 +15,13 @@ namespace Rebilly\Sdk\Model;
 
 interface CheckoutFormPlan
 {
+    public function getType(): string;
+
     public function getPlanId(): string;
 
     public function setPlanId(string $planId): static;
 
-    public function getType(): string;
+    public function getQuantity(): int;
+
+    public function setQuantity(int $quantity): static;
 }
