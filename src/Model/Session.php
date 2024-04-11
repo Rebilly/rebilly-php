@@ -164,49 +164,49 @@ class Session implements JsonSerializable
         $this->fields['id'] = $id;
 
         return $this;
+    }
+
+    private function setUserId(null|string $userId): static
+    {
+        $this->fields['userId'] = $userId;
+
+        return $this;
+    }
+
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
+    {
+        if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
+            $createdTime = new DateTimeImmutable($createdTime);
         }
 
-        private function setUserId(null|string $userId): static
-        {
-            $this->fields['userId'] = $userId;
+        $this->fields['createdTime'] = $createdTime;
 
-            return $this;
+        return $this;
+    }
+
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
+    {
+        if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
+            $updatedTime = new DateTimeImmutable($updatedTime);
         }
 
-        private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
-        {
-            if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
-                $createdTime = new DateTimeImmutable($createdTime);
-            }
+        $this->fields['updatedTime'] = $updatedTime;
 
-            $this->fields['createdTime'] = $createdTime;
+        return $this;
+    }
 
-            return $this;
-        }
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    private function setLinks(null|array $links): static
+    {
+        $links = $links !== null ? array_map(
+            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+            $links,
+        ) : null;
 
-        private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
-        {
-            if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
-                $updatedTime = new DateTimeImmutable($updatedTime);
-            }
+        $this->fields['_links'] = $links;
 
-            $this->fields['updatedTime'] = $updatedTime;
-
-            return $this;
-        }
-
-        /**
-         * @param null|array[]|ResourceLink[] $links
-         */
-        private function setLinks(null|array $links): static
-        {
-            $links = $links !== null ? array_map(
-                fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
-                $links,
-            ) : null;
-
-            $this->fields['_links'] = $links;
-
-            return $this;
-        }
+        return $this;
+    }
 }

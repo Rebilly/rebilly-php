@@ -927,43 +927,43 @@ class PayoutRequestAllocations implements JsonSerializable
         }
         if (array_key_exists('amount', $this->fields)) {
             $data['amount'] = $this->fields['amount'];
-            }
-            if (array_key_exists('createdTime', $this->fields)) {
-                $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
-            }
-            if (array_key_exists('updatedTime', $this->fields)) {
-                $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
-            }
+        }
+        if (array_key_exists('createdTime', $this->fields)) {
+            $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
+        }
+        if (array_key_exists('updatedTime', $this->fields)) {
+            $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
+        }
 
-            return $data;
-            }
+        return $data;
+    }
 
-            private function setTransactionResult(null|string $transactionResult): static
-            {
-                $this->fields['transactionResult'] = $transactionResult;
+    private function setTransactionResult(null|string $transactionResult): static
+    {
+        $this->fields['transactionResult'] = $transactionResult;
 
-                return $this;
-            }
+        return $this;
+    }
 
-            private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
-            {
-                if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
-                    $createdTime = new DateTimeImmutable($createdTime);
-                }
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
+    {
+        if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
+            $createdTime = new DateTimeImmutable($createdTime);
+        }
 
-                $this->fields['createdTime'] = $createdTime;
+        $this->fields['createdTime'] = $createdTime;
 
-                return $this;
-            }
+        return $this;
+    }
 
-            private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
-            {
-                if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
-                    $updatedTime = new DateTimeImmutable($updatedTime);
-                }
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
+    {
+        if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
+            $updatedTime = new DateTimeImmutable($updatedTime);
+        }
 
-                $this->fields['updatedTime'] = $updatedTime;
+        $this->fields['updatedTime'] = $updatedTime;
 
-                return $this;
-            }
+        return $this;
+    }
 }
