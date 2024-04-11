@@ -25,30 +25,28 @@ class DigitalWalletsApi
     {
     }
 
-    /**
-     * @return DigitalWalletOnboardingApplePay
-     */
     public function create(
         DigitalWalletOnboardingApplePay $digitalWalletOnboardingApplePay,
     ): DigitalWalletOnboardingApplePay {
         $uri = '/digital-wallets/onboarding/apple-pay';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($digitalWalletOnboardingApplePay));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($digitalWalletOnboardingApplePay));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return DigitalWalletOnboardingApplePay::from($data);
     }
 
-    /**
-     * @return DigitalWalletValidation
-     */
     public function validate(
         DigitalWalletValidation $digitalWalletValidation,
     ): DigitalWalletValidation {
         $uri = '/digital-wallets/validation';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($digitalWalletValidation));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($digitalWalletValidation));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

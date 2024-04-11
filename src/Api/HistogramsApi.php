@@ -25,9 +25,6 @@ class HistogramsApi
     {
     }
 
-    /**
-     * @return HistogramData
-     */
     public function getTransactionHistogramReport(
         DateTimeImmutable $periodStart,
         DateTimeImmutable $periodEnd,
@@ -44,7 +41,9 @@ class HistogramsApi
         ];
         $uri = '/experimental/histograms/transactions?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

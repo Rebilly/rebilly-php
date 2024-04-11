@@ -31,30 +31,28 @@ class CustomerAuthenticationApi
     {
     }
 
-    /**
-     * @return CustomerCredential
-     */
     public function createCredential(
         CustomerCredential $customerCredential,
     ): CustomerCredential {
         $uri = '/credentials';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($customerCredential));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($customerCredential));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CustomerCredential::from($data);
     }
 
-    /**
-     * @return ResetPasswordToken
-     */
     public function createResetPasswordToken(
         ResetPasswordToken $resetPasswordToken,
     ): ResetPasswordToken {
         $uri = '/password-tokens';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($resetPasswordToken));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($resetPasswordToken));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -87,9 +85,6 @@ class CustomerAuthenticationApi
         $this->client->send($request);
     }
 
-    /**
-     * @return CustomerJWT
-     */
     public function exchangeToken(
         string $token,
         CustomerJWT $customerJWT,
@@ -100,7 +95,9 @@ class CustomerAuthenticationApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/authentication-tokens/{token}/exchange');
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($customerJWT));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($customerJWT));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -120,7 +117,9 @@ class CustomerAuthenticationApi
         ];
         $uri = '/authentication-tokens?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -132,6 +131,9 @@ class CustomerAuthenticationApi
         );
     }
 
+    /**
+     * @return Paginator<AuthenticationTokenResponse>
+     */
     public function getAllAuthTokensPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -160,7 +162,9 @@ class CustomerAuthenticationApi
         ];
         $uri = '/credentials?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -172,6 +176,9 @@ class CustomerAuthenticationApi
         );
     }
 
+    /**
+     * @return Paginator<CustomerCredential>
+     */
     public function getAllCredentialsPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -200,7 +207,9 @@ class CustomerAuthenticationApi
         ];
         $uri = '/password-tokens?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -212,6 +221,9 @@ class CustomerAuthenticationApi
         );
     }
 
+    /**
+     * @return Paginator<ResetPasswordToken>
+     */
     public function getAllResetPasswordTokensPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -227,23 +239,19 @@ class CustomerAuthenticationApi
         );
     }
 
-    /**
-     * @return AuthenticationOptions
-     */
     public function getAuthOptions(): AuthenticationOptions
     {
         $uri = '/authentication-options';
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return AuthenticationOptions::from($data);
     }
 
-    /**
-     * @return CustomerCredential
-     */
     public function getCredential(
         string $id,
     ): CustomerCredential {
@@ -253,16 +261,15 @@ class CustomerAuthenticationApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credentials/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CustomerCredential::from($data);
     }
 
-    /**
-     * @return ResetPasswordToken
-     */
     public function getResetPasswordToken(
         string $id,
     ): ResetPasswordToken {
@@ -272,22 +279,23 @@ class CustomerAuthenticationApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/password-tokens/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ResetPasswordToken::from($data);
     }
 
-    /**
-     * @return AuthenticationTokenResponse
-     */
     public function login(
         AuthenticationToken $authenticationToken,
     ): AuthenticationTokenResponse {
         $uri = '/authentication-tokens';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($authenticationToken));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($authenticationToken));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -307,24 +315,20 @@ class CustomerAuthenticationApi
         $this->client->send($request);
     }
 
-    /**
-     * @return AuthenticationOptions
-     */
     public function updateAuthOptions(
         AuthenticationOptions $authenticationOptions,
     ): AuthenticationOptions {
         $uri = '/authentication-options';
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($authenticationOptions));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($authenticationOptions));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return AuthenticationOptions::from($data);
     }
 
-    /**
-     * @return CustomerCredential
-     */
     public function updateCredential(
         string $id,
         CustomerCredential $customerCredential,
@@ -335,16 +339,15 @@ class CustomerAuthenticationApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credentials/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($customerCredential));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($customerCredential));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CustomerCredential::from($data);
     }
 
-    /**
-     * @return AuthenticationTokenResponse
-     */
     public function verify(
         string $token,
     ): AuthenticationTokenResponse {
@@ -354,7 +357,9 @@ class CustomerAuthenticationApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/authentication-tokens/{token}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

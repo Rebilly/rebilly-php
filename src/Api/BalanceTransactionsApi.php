@@ -27,9 +27,6 @@ class BalanceTransactionsApi
     {
     }
 
-    /**
-     * @return BalanceTransaction
-     */
     public function get(
         string $id,
     ): BalanceTransaction {
@@ -39,7 +36,9 @@ class BalanceTransactionsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/balance-transactions/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -63,7 +62,9 @@ class BalanceTransactionsApi
         ];
         $uri = '/balance-transactions?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -75,6 +76,9 @@ class BalanceTransactionsApi
         );
     }
 
+    /**
+     * @return Paginator<BalanceTransaction>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,

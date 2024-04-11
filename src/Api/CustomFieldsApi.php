@@ -27,9 +27,6 @@ class CustomFieldsApi
     {
     }
 
-    /**
-     * @return CustomField
-     */
     public function create(
         string $resource,
         string $name,
@@ -42,16 +39,15 @@ class CustomFieldsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/custom-fields/{resource}/{name}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($customField));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($customField));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CustomFieldFactory::from($data);
     }
 
-    /**
-     * @return CustomField
-     */
     public function get(
         string $resource,
         string $name,
@@ -63,7 +59,9 @@ class CustomFieldsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/custom-fields/{resource}/{name}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -88,7 +86,9 @@ class CustomFieldsApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/custom-fields/{resource}?') . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -100,6 +100,9 @@ class CustomFieldsApi
         );
     }
 
+    /**
+     * @return Paginator<CustomField>
+     */
     public function getAllPaginator(
         string $resource,
         ?int $limit = null,

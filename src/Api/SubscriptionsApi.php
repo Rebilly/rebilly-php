@@ -36,9 +36,6 @@ class SubscriptionsApi
     {
     }
 
-    /**
-     * @return SubscriptionOrOneTimeSale
-     */
     public function changeItems(
         string $id,
         SubscriptionChange $subscriptionChange,
@@ -53,16 +50,15 @@ class SubscriptionsApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}/change-items?') . http_build_query($queryParams);
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($subscriptionChange));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($subscriptionChange));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return SubscriptionOrOneTimeSaleFactory::from($data);
     }
 
-    /**
-     * @return SubscriptionOrOneTimeSale
-     */
     public function create(
         SubscriptionOrOneTimeSale $subscriptionOrOneTimeSale,
         ?string $expand = null,
@@ -72,16 +68,15 @@ class SubscriptionsApi
         ];
         $uri = '/subscriptions?' . http_build_query($queryParams);
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($subscriptionOrOneTimeSale));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($subscriptionOrOneTimeSale));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return SubscriptionOrOneTimeSaleFactory::from($data);
     }
 
-    /**
-     * @return Invoice
-     */
     public function createInterimInvoice(
         string $id,
         SubscriptionInvoice $subscriptionInvoice,
@@ -92,16 +87,15 @@ class SubscriptionsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}/interim-invoice');
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($subscriptionInvoice));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($subscriptionInvoice));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Invoice::from($data);
     }
 
-    /**
-     * @return OrderTimeline
-     */
     public function createTimelineComment(
         string $id,
         OrderTimeline $orderTimeline,
@@ -112,7 +106,9 @@ class SubscriptionsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}/timeline');
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($orderTimeline));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($orderTimeline));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -147,9 +143,6 @@ class SubscriptionsApi
         $this->client->send($request);
     }
 
-    /**
-     * @return SubscriptionOrOneTimeSale
-     */
     public function get(
         string $id,
         ?string $expand = null,
@@ -163,7 +156,9 @@ class SubscriptionsApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}?') . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -191,7 +186,9 @@ class SubscriptionsApi
         ];
         $uri = '/subscriptions?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -203,6 +200,9 @@ class SubscriptionsApi
         );
     }
 
+    /**
+     * @return Paginator<SubscriptionOrOneTimeSale>
+     */
     public function getAllPaginator(
         ?string $filter = null,
         ?array $sort = null,
@@ -250,7 +250,9 @@ class SubscriptionsApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}/timeline?') . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -262,6 +264,9 @@ class SubscriptionsApi
         );
     }
 
+    /**
+     * @return Paginator<OrderTimeline>
+     */
     public function getAllTimelineMessagesPaginator(
         string $id,
         ?int $limit = null,
@@ -301,16 +306,15 @@ class SubscriptionsApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}/upcoming-invoices?') . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return array_map(fn (array $item): UpcomingInvoice => UpcomingInvoice::from($item), $data);
     }
 
-    /**
-     * @return SubscriptionSummaryMetrics
-     */
     public function getSubscriptionSummaryMetrics(
         string $subscriptionId,
     ): SubscriptionSummaryMetrics {
@@ -320,16 +324,15 @@ class SubscriptionsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/experimental/subscriptions/{subscriptionId}/summary-metrics');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return SubscriptionSummaryMetrics::from($data);
     }
 
-    /**
-     * @return OrderTimeline
-     */
     public function getTimelineMessage(
         string $id,
         string $messageId,
@@ -341,16 +344,15 @@ class SubscriptionsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}/timeline/{messageId}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return OrderTimeline::from($data);
     }
 
-    /**
-     * @return UpcomingInvoice
-     */
     public function getUpcomingInvoice(
         string $id,
         ?string $expand = null,
@@ -364,16 +366,15 @@ class SubscriptionsApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}/upcoming-invoice?') . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return UpcomingInvoice::from($data);
     }
 
-    /**
-     * @return UpcomingInvoice
-     */
     public function issueEarlyUpcomingInvoice(
         string $id,
         InvoiceIssue $invoiceIssue,
@@ -384,16 +385,15 @@ class SubscriptionsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}/upcoming-invoice/issue');
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($invoiceIssue));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($invoiceIssue));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return UpcomingInvoice::from($data);
     }
 
-    /**
-     * @return UpcomingInvoice
-     */
     public function issueUpcomingInvoice(
         string $id,
         string $invoiceId,
@@ -406,16 +406,15 @@ class SubscriptionsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}/upcoming-invoices/{invoiceId}/issue');
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($invoiceIssue));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($invoiceIssue));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return UpcomingInvoice::from($data);
     }
 
-    /**
-     * @return SubscriptionOrOneTimeSale
-     */
     public function update(
         string $id,
         SubscriptionOrOneTimeSale $subscriptionOrOneTimeSale,
@@ -430,16 +429,15 @@ class SubscriptionsApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}?') . http_build_query($queryParams);
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($subscriptionOrOneTimeSale));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($subscriptionOrOneTimeSale));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return SubscriptionOrOneTimeSaleFactory::from($data);
     }
 
-    /**
-     * @return SubscriptionOrOneTimeSaleItem
-     */
     public function updateItem(
         string $id,
         string $itemId,
@@ -452,16 +450,15 @@ class SubscriptionsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}/items/{itemId}');
 
-        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($subscriptionItemUpdate));
+        $request = new Request('PATCH', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($subscriptionItemUpdate));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return SubscriptionOrOneTimeSaleItem::from($data);
     }
 
-    /**
-     * @return SubscriptionOrOneTimeSale
-     */
     public function void(
         string $id,
     ): SubscriptionOrOneTimeSale {
@@ -471,7 +468,9 @@ class SubscriptionsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}/void');
 
-        $request = new Request('POST', $uri);
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

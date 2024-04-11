@@ -26,9 +26,6 @@ class PaymentMethodsApi
     {
     }
 
-    /**
-     * @return PaymentMethodMetadata
-     */
     public function get(
         string $apiName,
     ): PaymentMethodMetadata {
@@ -38,7 +35,9 @@ class PaymentMethodsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/payment-methods/{apiName}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -58,7 +57,9 @@ class PaymentMethodsApi
         ];
         $uri = '/payment-methods?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -70,6 +71,9 @@ class PaymentMethodsApi
         );
     }
 
+    /**
+     * @return Paginator<PaymentMethodMetadata>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,

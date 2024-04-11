@@ -26,15 +26,14 @@ class UsagesApi
     {
     }
 
-    /**
-     * @return Usage
-     */
     public function create(
         Usage $usage,
     ): Usage {
         $uri = '/usages';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($usage));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($usage));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -54,9 +53,6 @@ class UsagesApi
         $this->client->send($request);
     }
 
-    /**
-     * @return Usage
-     */
     public function get(
         string $id,
     ): Usage {
@@ -66,7 +62,9 @@ class UsagesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/usages/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -92,7 +90,9 @@ class UsagesApi
         ];
         $uri = '/usages?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -104,6 +104,9 @@ class UsagesApi
         );
     }
 
+    /**
+     * @return Paginator<Usage>
+     */
     public function getAllPaginator(
         ?string $filter = null,
         ?array $sort = null,
@@ -125,9 +128,6 @@ class UsagesApi
         );
     }
 
-    /**
-     * @return Usage
-     */
     public function update(
         string $id,
         Usage $usage,
@@ -138,7 +138,9 @@ class UsagesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/usages/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($usage));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($usage));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

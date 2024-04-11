@@ -29,24 +29,20 @@ class PaymentInstrumentsApi
     {
     }
 
-    /**
-     * @return PaymentInstrument
-     */
     public function create(
         PostPaymentInstrumentRequest $postPaymentInstrumentRequest,
     ): PaymentInstrument {
         $uri = '/payment-instruments';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($postPaymentInstrumentRequest));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($postPaymentInstrumentRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return PaymentInstrumentFactory::from($data);
     }
 
-    /**
-     * @return PaymentInstrument
-     */
     public function deactivate(
         string $id,
     ): PaymentInstrument {
@@ -56,16 +52,15 @@ class PaymentInstrumentsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/payment-instruments/{id}/deactivation');
 
-        $request = new Request('POST', $uri);
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return PaymentInstrumentFactory::from($data);
     }
 
-    /**
-     * @return PaymentInstrument
-     */
     public function get(
         string $id,
     ): PaymentInstrument {
@@ -75,7 +70,9 @@ class PaymentInstrumentsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/payment-instruments/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -103,7 +100,9 @@ class PaymentInstrumentsApi
         ];
         $uri = '/payment-instruments?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -115,6 +114,9 @@ class PaymentInstrumentsApi
         );
     }
 
+    /**
+     * @return Paginator<PaymentInstrument>
+     */
     public function getAllPaginator(
         ?string $filter = null,
         ?array $sort = null,
@@ -138,9 +140,6 @@ class PaymentInstrumentsApi
         );
     }
 
-    /**
-     * @return PaymentInstrument
-     */
     public function update(
         string $id,
         PatchPaymentInstrumentRequest $patchPaymentInstrumentRequest,
@@ -151,7 +150,9 @@ class PaymentInstrumentsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/payment-instruments/{id}');
 
-        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($patchPaymentInstrumentRequest));
+        $request = new Request('PATCH', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($patchPaymentInstrumentRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

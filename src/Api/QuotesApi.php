@@ -30,9 +30,6 @@ class QuotesApi
     {
     }
 
-    /**
-     * @return Quote
-     */
     public function accept(
         string $id,
     ): Quote {
@@ -42,16 +39,15 @@ class QuotesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/quotes/{id}/accept');
 
-        $request = new Request('POST', $uri);
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return QuoteFactory::from($data);
     }
 
-    /**
-     * @return Quote
-     */
     public function cancel(
         string $id,
     ): Quote {
@@ -61,31 +57,29 @@ class QuotesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/quotes/{id}/cancel');
 
-        $request = new Request('POST', $uri);
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return QuoteFactory::from($data);
     }
 
-    /**
-     * @return Quote
-     */
     public function create(
         Quote $quote,
     ): Quote {
         $uri = '/quotes';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($quote));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($quote));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return QuoteFactory::from($data);
     }
 
-    /**
-     * @return QuoteTimeline
-     */
     public function createTimelineComment(
         string $id,
         QuoteTimeline $quoteTimeline,
@@ -96,7 +90,9 @@ class QuotesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/quotes/{id}/timeline');
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($quoteTimeline));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($quoteTimeline));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -118,9 +114,6 @@ class QuotesApi
         $this->client->send($request);
     }
 
-    /**
-     * @return Quote
-     */
     public function get(
         string $id,
         ?string $expand = null,
@@ -183,7 +176,9 @@ class QuotesApi
         ];
         $uri = '/quotes?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -195,6 +190,9 @@ class QuotesApi
         );
     }
 
+    /**
+     * @return Paginator<Quote>
+     */
     public function getAllPaginator(
         ?string $filter = null,
         ?array $sort = null,
@@ -240,7 +238,9 @@ class QuotesApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/quotes/{id}/timeline?') . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -252,6 +252,9 @@ class QuotesApi
         );
     }
 
+    /**
+     * @return Paginator<QuoteTimeline>
+     */
     public function getAllTimelineMessagesPaginator(
         string $id,
         ?int $limit = null,
@@ -275,9 +278,6 @@ class QuotesApi
         );
     }
 
-    /**
-     * @return QuoteTimeline
-     */
     public function getTimelineMessage(
         string $id,
         string $messageId,
@@ -289,16 +289,15 @@ class QuotesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/quotes/{id}/timeline/{messageId}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return QuoteTimeline::from($data);
     }
 
-    /**
-     * @return Quote
-     */
     public function issue(
         string $id,
     ): Quote {
@@ -308,16 +307,15 @@ class QuotesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/quotes/{id}/issue');
 
-        $request = new Request('POST', $uri);
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return QuoteFactory::from($data);
     }
 
-    /**
-     * @return Quote
-     */
     public function patch(
         string $id,
         PatchQuote $patchQuote,
@@ -328,16 +326,15 @@ class QuotesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/quotes/{id}');
 
-        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($patchQuote));
+        $request = new Request('PATCH', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($patchQuote));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return QuoteFactory::from($data);
     }
 
-    /**
-     * @return Quote
-     */
     public function recall(
         string $id,
     ): Quote {
@@ -347,16 +344,15 @@ class QuotesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/quotes/{id}/recall');
 
-        $request = new Request('POST', $uri);
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return QuoteFactory::from($data);
     }
 
-    /**
-     * @return Quote
-     */
     public function reject(
         string $id,
     ): Quote {
@@ -366,16 +362,15 @@ class QuotesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/quotes/{id}/reject');
 
-        $request = new Request('POST', $uri);
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return QuoteFactory::from($data);
     }
 
-    /**
-     * @return Quote
-     */
     public function update(
         string $id,
         Quote $quote,
@@ -386,7 +381,9 @@ class QuotesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/quotes/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($quote));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($quote));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

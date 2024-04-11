@@ -176,42 +176,42 @@ class CouponRedemption implements JsonSerializable
         $this->fields['createdTime'] = $createdTime;
 
         return $this;
-    }
-
-    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
-    {
-        if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
-            $updatedTime = new DateTimeImmutable($updatedTime);
         }
 
-        $this->fields['updatedTime'] = $updatedTime;
+        private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
+        {
+            if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
+                $updatedTime = new DateTimeImmutable($updatedTime);
+            }
 
-        return $this;
-    }
+            $this->fields['updatedTime'] = $updatedTime;
 
-    private function setCanceledTime(null|DateTimeImmutable|string $canceledTime): static
-    {
-        if ($canceledTime !== null && !($canceledTime instanceof DateTimeImmutable)) {
-            $canceledTime = new DateTimeImmutable($canceledTime);
+            return $this;
         }
 
-        $this->fields['canceledTime'] = $canceledTime;
+        private function setCanceledTime(null|DateTimeImmutable|string $canceledTime): static
+        {
+            if ($canceledTime !== null && !($canceledTime instanceof DateTimeImmutable)) {
+                $canceledTime = new DateTimeImmutable($canceledTime);
+            }
 
-        return $this;
-    }
+            $this->fields['canceledTime'] = $canceledTime;
 
-    /**
-     * @param null|array[]|ResourceLink[] $links
-     */
-    private function setLinks(null|array $links): static
-    {
-        $links = $links !== null ? array_map(
-            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
-            $links,
-        ) : null;
+            return $this;
+        }
 
-        $this->fields['_links'] = $links;
+        /**
+         * @param null|array[]|ResourceLink[] $links
+         */
+        private function setLinks(null|array $links): static
+        {
+            $links = $links !== null ? array_map(
+                fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+                $links,
+            ) : null;
 
-        return $this;
-    }
+            $this->fields['_links'] = $links;
+
+            return $this;
+        }
 }

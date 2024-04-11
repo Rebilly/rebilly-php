@@ -43,9 +43,6 @@ class GatewayAccountsApi
         $this->client->send($request);
     }
 
-    /**
-     * @return GatewayAccount
-     */
     public function close(
         string $id,
     ): GatewayAccount {
@@ -55,31 +52,29 @@ class GatewayAccountsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}/close');
 
-        $request = new Request('POST', $uri);
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GatewayAccount::from($data);
     }
 
-    /**
-     * @return GatewayAccount
-     */
     public function create(
         GatewayAccount $gatewayAccount,
     ): GatewayAccount {
         $uri = '/gateway-accounts';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($gatewayAccount));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($gatewayAccount));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GatewayAccount::from($data);
     }
 
-    /**
-     * @return GatewayAccountDowntimeSchedule
-     */
     public function createDowntimeSchedule(
         string $id,
         GatewayAccountDowntimeSchedule $gatewayAccountDowntimeSchedule,
@@ -90,16 +85,15 @@ class GatewayAccountsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}/downtime-schedules');
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($gatewayAccountDowntimeSchedule));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($gatewayAccountDowntimeSchedule));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GatewayAccountDowntimeSchedule::from($data);
     }
 
-    /**
-     * @return GatewayAccountTimeline
-     */
     public function createTimelineComment(
         string $id,
         GatewayAccountTimeline $gatewayAccountTimeline,
@@ -110,7 +104,9 @@ class GatewayAccountsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}/timeline');
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($gatewayAccountTimeline));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($gatewayAccountTimeline));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -175,9 +171,6 @@ class GatewayAccountsApi
         $this->client->send($request);
     }
 
-    /**
-     * @return GatewayAccount
-     */
     public function disable(
         string $id,
     ): GatewayAccount {
@@ -187,16 +180,15 @@ class GatewayAccountsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}/disable');
 
-        $request = new Request('POST', $uri);
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GatewayAccount::from($data);
     }
 
-    /**
-     * @return GatewayAccount
-     */
     public function enable(
         string $id,
     ): GatewayAccount {
@@ -206,16 +198,15 @@ class GatewayAccountsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}/enable');
 
-        $request = new Request('POST', $uri);
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GatewayAccount::from($data);
     }
 
-    /**
-     * @return GatewayAccount
-     */
     public function get(
         string $id,
     ): GatewayAccount {
@@ -225,7 +216,9 @@ class GatewayAccountsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -253,7 +246,9 @@ class GatewayAccountsApi
         ];
         $uri = '/gateway-accounts?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -265,6 +260,9 @@ class GatewayAccountsApi
         );
     }
 
+    /**
+     * @return Paginator<GatewayAccount>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -310,7 +308,9 @@ class GatewayAccountsApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}/downtime-schedules?') . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -322,6 +322,9 @@ class GatewayAccountsApi
         );
     }
 
+    /**
+     * @return Paginator<GatewayAccountDowntimeSchedule>
+     */
     public function getAllDowntimeSchedulesPaginator(
         string $id,
         ?int $limit = null,
@@ -367,7 +370,9 @@ class GatewayAccountsApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}/timeline?') . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -379,6 +384,9 @@ class GatewayAccountsApi
         );
     }
 
+    /**
+     * @return Paginator<GatewayAccountTimeline>
+     */
     public function getAllTimelineMessagesPaginator(
         string $id,
         ?int $limit = null,
@@ -414,16 +422,15 @@ class GatewayAccountsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}/limits');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return array_map(fn (array $item): GatewayAccountLimit => GatewayAccountLimit::from($item), $data);
     }
 
-    /**
-     * @return GatewayAccountDowntimeSchedule
-     */
     public function getDowntimeSchedule(
         string $id,
         string $downtimeId,
@@ -435,16 +442,15 @@ class GatewayAccountsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}/downtime-schedules/{downtimeId}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GatewayAccountDowntimeSchedule::from($data);
     }
 
-    /**
-     * @return GatewayAccountFinancialSettings
-     */
     public function getFinancialSettings(
         string $id,
     ): GatewayAccountFinancialSettings {
@@ -454,16 +460,15 @@ class GatewayAccountsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}/financial-settings');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GatewayAccountFinancialSettings::from($data);
     }
 
-    /**
-     * @return GatewayAccountTimeline
-     */
     public function getTimelineMessage(
         string $id,
         string $messageId,
@@ -475,16 +480,15 @@ class GatewayAccountsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}/timeline/{messageId}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GatewayAccountTimeline::from($data);
     }
 
-    /**
-     * @return GatewayAccountLimit
-     */
     public function getVolumeLimit(
         string $id,
         string $limitId,
@@ -496,16 +500,15 @@ class GatewayAccountsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}/limits/{limitId}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GatewayAccountLimit::from($data);
     }
 
-    /**
-     * @return GatewayAccountFinancialSettings
-     */
     public function setFinancialSettings(
         string $id,
         GatewayAccountFinancialSettings $gatewayAccountFinancialSettings,
@@ -516,16 +519,15 @@ class GatewayAccountsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}/financial-settings');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($gatewayAccountFinancialSettings));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($gatewayAccountFinancialSettings));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GatewayAccountFinancialSettings::from($data);
     }
 
-    /**
-     * @return GatewayAccount
-     */
     public function update(
         string $id,
         GatewayAccount $gatewayAccount,
@@ -536,16 +538,15 @@ class GatewayAccountsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}');
 
-        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($gatewayAccount));
+        $request = new Request('PATCH', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($gatewayAccount));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GatewayAccount::from($data);
     }
 
-    /**
-     * @return GatewayAccountDowntimeSchedule
-     */
     public function updateDowntimeSchedule(
         string $id,
         string $downtimeId,
@@ -558,16 +559,15 @@ class GatewayAccountsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}/downtime-schedules/{downtimeId}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($gatewayAccountDowntimeSchedule));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($gatewayAccountDowntimeSchedule));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GatewayAccountDowntimeSchedule::from($data);
     }
 
-    /**
-     * @return GatewayAccountLimit
-     */
     public function updateVolumeLimit(
         string $id,
         string $limitId,
@@ -580,16 +580,15 @@ class GatewayAccountsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}/limits/{limitId}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($gatewayAccountLimit));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($gatewayAccountLimit));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GatewayAccountLimit::from($data);
     }
 
-    /**
-     * @return GatewayAccount
-     */
     public function upsert(
         string $id,
         GatewayAccount $gatewayAccount,
@@ -600,7 +599,9 @@ class GatewayAccountsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/gateway-accounts/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($gatewayAccount));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($gatewayAccount));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

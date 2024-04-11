@@ -33,15 +33,14 @@ class TagsApi
     {
     }
 
-    /**
-     * @return Tag
-     */
     public function create(
         Tag $tag,
     ): Tag {
         $uri = '/tags';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($tag));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($tag));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -61,9 +60,6 @@ class TagsApi
         $this->client->send($request);
     }
 
-    /**
-     * @return Tag
-     */
     public function get(
         string $tag,
     ): Tag {
@@ -73,7 +69,9 @@ class TagsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/tags/{tag}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -99,7 +97,9 @@ class TagsApi
         ];
         $uri = '/tags?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -111,6 +111,9 @@ class TagsApi
         );
     }
 
+    /**
+     * @return Paginator<Tag>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -306,9 +309,6 @@ class TagsApi
         $this->client->send($request);
     }
 
-    /**
-     * @return Tag
-     */
     public function update(
         string $tag,
         PatchTagRequest $patchTagRequest,
@@ -319,7 +319,9 @@ class TagsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/tags/{tag}');
 
-        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($patchTagRequest));
+        $request = new Request('PATCH', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($patchTagRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

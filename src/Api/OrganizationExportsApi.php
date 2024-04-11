@@ -27,24 +27,20 @@ class OrganizationExportsApi
     {
     }
 
-    /**
-     * @return OrganizationExport
-     */
     public function create(
         PostOrganizationExportRequest $postOrganizationExportRequest,
     ): OrganizationExport {
         $uri = '/organization-exports';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($postOrganizationExportRequest));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($postOrganizationExportRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return OrganizationExport::from($data);
     }
 
-    /**
-     * @return OrganizationExport
-     */
     public function get(
         string $id,
     ): OrganizationExport {
@@ -54,7 +50,9 @@ class OrganizationExportsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/organization-exports/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -80,7 +78,9 @@ class OrganizationExportsApi
         ];
         $uri = '/organization-exports?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -92,6 +92,9 @@ class OrganizationExportsApi
         );
     }
 
+    /**
+     * @return Paginator<OrganizationExport>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,

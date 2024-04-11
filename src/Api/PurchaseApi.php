@@ -34,7 +34,9 @@ class PurchaseApi
     ): array {
         $uri = '/ready-to-pay';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($postReadyToPay));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($postReadyToPay));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

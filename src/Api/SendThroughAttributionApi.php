@@ -36,7 +36,9 @@ class SendThroughAttributionApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/send-through-attribution/{eventType}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

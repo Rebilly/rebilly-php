@@ -27,15 +27,14 @@ class SubscriptionCancellationsApi
     {
     }
 
-    /**
-     * @return SubscriptionCancellation
-     */
     public function create(
         SubscriptionCancellation $subscriptionCancellation,
     ): SubscriptionCancellation {
         $uri = '/subscription-cancellations';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($subscriptionCancellation));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($subscriptionCancellation));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -55,9 +54,6 @@ class SubscriptionCancellationsApi
         $this->client->send($request);
     }
 
-    /**
-     * @return SubscriptionCancellation
-     */
     public function get(
         string $id,
     ): SubscriptionCancellation {
@@ -67,7 +63,9 @@ class SubscriptionCancellationsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscription-cancellations/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -91,7 +89,9 @@ class SubscriptionCancellationsApi
         ];
         $uri = '/subscription-cancellations?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -103,6 +103,9 @@ class SubscriptionCancellationsApi
         );
     }
 
+    /**
+     * @return Paginator<SubscriptionCancellation>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -122,9 +125,6 @@ class SubscriptionCancellationsApi
         );
     }
 
-    /**
-     * @return SubscriptionCancellation
-     */
     public function patch(
         string $id,
         PatchSubscriptionCancellationRequest $patchSubscriptionCancellationRequest,
@@ -135,16 +135,15 @@ class SubscriptionCancellationsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscription-cancellations/{id}');
 
-        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($patchSubscriptionCancellationRequest));
+        $request = new Request('PATCH', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($patchSubscriptionCancellationRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return SubscriptionCancellation::from($data);
     }
 
-    /**
-     * @return SubscriptionCancellation
-     */
     public function update(
         string $id,
         SubscriptionCancellation $subscriptionCancellation,
@@ -155,7 +154,9 @@ class SubscriptionCancellationsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscription-cancellations/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($subscriptionCancellation));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($subscriptionCancellation));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

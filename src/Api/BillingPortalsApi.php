@@ -26,15 +26,14 @@ class BillingPortalsApi
     {
     }
 
-    /**
-     * @return BillingPortal
-     */
     public function create(
         BillingPortal $billingPortal,
     ): BillingPortal {
         $uri = '/billing-portals';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($billingPortal));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($billingPortal));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -54,9 +53,6 @@ class BillingPortalsApi
         $this->client->send($request);
     }
 
-    /**
-     * @return BillingPortal
-     */
     public function get(
         string $id,
     ): BillingPortal {
@@ -66,7 +62,9 @@ class BillingPortalsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/billing-portals/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -92,7 +90,9 @@ class BillingPortalsApi
         ];
         $uri = '/billing-portals?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -104,6 +104,9 @@ class BillingPortalsApi
         );
     }
 
+    /**
+     * @return Paginator<BillingPortal>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -125,9 +128,6 @@ class BillingPortalsApi
         );
     }
 
-    /**
-     * @return BillingPortal
-     */
     public function update(
         string $id,
         BillingPortal $billingPortal,
@@ -138,7 +138,9 @@ class BillingPortalsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/billing-portals/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($billingPortal));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($billingPortal));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

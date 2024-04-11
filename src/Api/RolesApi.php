@@ -26,15 +26,14 @@ class RolesApi
     {
     }
 
-    /**
-     * @return Role
-     */
     public function create(
         Role $role,
     ): Role {
         $uri = '/roles';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($role));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($role));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -54,9 +53,6 @@ class RolesApi
         $this->client->send($request);
     }
 
-    /**
-     * @return Role
-     */
     public function get(
         string $id,
         ?string $expand = null,
@@ -70,7 +66,9 @@ class RolesApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/roles/{id}?') . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -98,7 +96,9 @@ class RolesApi
         ];
         $uri = '/roles?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -110,6 +110,9 @@ class RolesApi
         );
     }
 
+    /**
+     * @return Paginator<Role>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -133,9 +136,6 @@ class RolesApi
         );
     }
 
-    /**
-     * @return Role
-     */
     public function update(
         string $id,
         Role $role,
@@ -146,7 +146,9 @@ class RolesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/roles/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($role));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($role));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

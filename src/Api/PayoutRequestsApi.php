@@ -28,9 +28,6 @@ class PayoutRequestsApi
     {
     }
 
-    /**
-     * @return PayoutRequest
-     */
     public function cancel(
         string $id,
         PayoutRequestCancellation $payoutRequestCancellation,
@@ -41,31 +38,29 @@ class PayoutRequestsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/payout-requests/{id}/cancel');
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($payoutRequestCancellation));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($payoutRequestCancellation));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return PayoutRequest::from($data);
     }
 
-    /**
-     * @return PayoutRequest
-     */
     public function create(
         PayoutRequest $payoutRequest,
     ): PayoutRequest {
         $uri = '/payout-requests';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($payoutRequest));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($payoutRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return PayoutRequest::from($data);
     }
 
-    /**
-     * @return PayoutRequest
-     */
     public function get(
         string $id,
     ): PayoutRequest {
@@ -75,7 +70,9 @@ class PayoutRequestsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/payout-requests/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -99,7 +96,9 @@ class PayoutRequestsApi
         ];
         $uri = '/payout-requests?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -111,6 +110,9 @@ class PayoutRequestsApi
         );
     }
 
+    /**
+     * @return Paginator<PayoutRequest>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -142,16 +144,15 @@ class PayoutRequestsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/payout-requests/{id}/payment-instruments');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return array_map(fn (array $item): GetPayoutRequestPaymentInstrumentsResponse => GetPayoutRequestPaymentInstrumentsResponse::from($item), $data);
     }
 
-    /**
-     * @return PayoutRequest
-     */
     public function update(
         string $id,
         PayoutRequest $payoutRequest,
@@ -162,7 +163,9 @@ class PayoutRequestsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/payout-requests/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($payoutRequest));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($payoutRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

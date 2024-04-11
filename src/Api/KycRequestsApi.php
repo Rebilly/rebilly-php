@@ -27,15 +27,14 @@ class KycRequestsApi
     {
     }
 
-    /**
-     * @return KycRequest
-     */
     public function create(
         KycRequest $kycRequest,
     ): KycRequest {
         $uri = '/kyc-requests';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($kycRequest));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($kycRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -55,9 +54,6 @@ class KycRequestsApi
         $this->client->send($request);
     }
 
-    /**
-     * @return KycRequest
-     */
     public function get(
         string $id,
     ): KycRequest {
@@ -67,7 +63,9 @@ class KycRequestsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/kyc-requests/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -91,7 +89,9 @@ class KycRequestsApi
         ];
         $uri = '/kyc-requests?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -103,6 +103,9 @@ class KycRequestsApi
         );
     }
 
+    /**
+     * @return Paginator<KycRequest>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -122,9 +125,6 @@ class KycRequestsApi
         );
     }
 
-    /**
-     * @return KycRequest
-     */
     public function update(
         string $id,
         PatchKycRequestRequest $patchKycRequestRequest,
@@ -135,7 +135,9 @@ class KycRequestsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/kyc-requests/{id}');
 
-        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($patchKycRequestRequest));
+        $request = new Request('PATCH', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($patchKycRequestRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

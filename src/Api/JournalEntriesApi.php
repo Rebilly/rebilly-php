@@ -27,24 +27,20 @@ class JournalEntriesApi
     {
     }
 
-    /**
-     * @return JournalEntry
-     */
     public function createEntry(
         JournalEntry $journalEntry,
     ): JournalEntry {
         $uri = '/journal-entries';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($journalEntry));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($journalEntry));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return JournalEntry::from($data);
     }
 
-    /**
-     * @return JournalRecord
-     */
     public function createRecord(
         string $id,
         JournalRecord $journalRecord,
@@ -55,7 +51,9 @@ class JournalEntriesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/journal-entries/{id}/records');
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($journalRecord));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($journalRecord));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -94,7 +92,9 @@ class JournalEntriesApi
         ];
         $uri = '/journal-entries?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -106,6 +106,9 @@ class JournalEntriesApi
         );
     }
 
+    /**
+     * @return Paginator<JournalEntry>
+     */
     public function getAllEntriesPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -149,7 +152,9 @@ class JournalEntriesApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/journal-entries/{id}/records?') . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -161,6 +166,9 @@ class JournalEntriesApi
         );
     }
 
+    /**
+     * @return Paginator<JournalRecord>
+     */
     public function getAllRecordsPaginator(
         string $id,
         ?int $limit = null,
@@ -184,9 +192,6 @@ class JournalEntriesApi
         );
     }
 
-    /**
-     * @return JournalEntry
-     */
     public function getEntry(
         string $id,
     ): JournalEntry {
@@ -196,16 +201,15 @@ class JournalEntriesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/journal-entries/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return JournalEntry::from($data);
     }
 
-    /**
-     * @return JournalRecord
-     */
     public function getRecord(
         string $id,
         string $journalRecordId,
@@ -217,16 +221,15 @@ class JournalEntriesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/journal-entries/{id}/records/{journalRecordId}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return JournalRecord::from($data);
     }
 
-    /**
-     * @return JournalEntry
-     */
     public function updateEntry(
         string $id,
         JournalEntry $journalEntry,
@@ -237,16 +240,15 @@ class JournalEntriesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/journal-entries/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($journalEntry));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($journalEntry));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return JournalEntry::from($data);
     }
 
-    /**
-     * @return JournalRecord
-     */
     public function updateRecord(
         string $id,
         string $journalRecordId,
@@ -259,7 +261,9 @@ class JournalEntriesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/journal-entries/{id}/records/{journalRecordId}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($journalRecord));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($journalRecord));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

@@ -28,24 +28,20 @@ class CreditMemosApi
     {
     }
 
-    /**
-     * @return CreditMemo
-     */
     public function create(
         CreditMemo $creditMemo,
     ): CreditMemo {
         $uri = '/credit-memos';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($creditMemo));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($creditMemo));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CreditMemo::from($data);
     }
 
-    /**
-     * @return CreditMemoTimeline
-     */
     public function createTimelineComment(
         string $id,
         CreditMemoTimeline $creditMemoTimeline,
@@ -56,7 +52,9 @@ class CreditMemosApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credit-memos/{id}/timeline');
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($creditMemoTimeline));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($creditMemoTimeline));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -78,9 +76,6 @@ class CreditMemosApi
         $this->client->send($request);
     }
 
-    /**
-     * @return CreditMemo
-     */
     public function get(
         string $id,
     ): CreditMemo {
@@ -90,7 +85,9 @@ class CreditMemosApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credit-memos/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -116,7 +113,9 @@ class CreditMemosApi
         ];
         $uri = '/credit-memos?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -128,6 +127,9 @@ class CreditMemosApi
         );
     }
 
+    /**
+     * @return Paginator<CreditMemo>
+     */
     public function getAllPaginator(
         ?string $filter = null,
         ?array $sort = null,
@@ -173,7 +175,9 @@ class CreditMemosApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credit-memos/{id}/timeline?') . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -185,6 +189,9 @@ class CreditMemosApi
         );
     }
 
+    /**
+     * @return Paginator<CreditMemoTimeline>
+     */
     public function getAllTimelineMessagesPaginator(
         string $id,
         ?int $limit = null,
@@ -208,9 +215,6 @@ class CreditMemosApi
         );
     }
 
-    /**
-     * @return CreditMemoTimeline
-     */
     public function getTimelineMessage(
         string $id,
         string $messageId,
@@ -222,16 +226,15 @@ class CreditMemosApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credit-memos/{id}/timeline/{messageId}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CreditMemoTimeline::from($data);
     }
 
-    /**
-     * @return CreditMemo
-     */
     public function patch(
         string $id,
         PatchCreditMemo $patchCreditMemo,
@@ -242,16 +245,15 @@ class CreditMemosApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credit-memos/{id}');
 
-        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($patchCreditMemo));
+        $request = new Request('PATCH', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($patchCreditMemo));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CreditMemo::from($data);
     }
 
-    /**
-     * @return CreditMemo
-     */
     public function update(
         string $id,
         CreditMemo $creditMemo,
@@ -262,16 +264,15 @@ class CreditMemosApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credit-memos/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($creditMemo));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($creditMemo));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CreditMemo::from($data);
     }
 
-    /**
-     * @return CreditMemo
-     */
     public function void(
         string $id,
     ): CreditMemo {
@@ -281,7 +282,9 @@ class CreditMemosApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credit-memos/{id}/void');
 
-        $request = new Request('POST', $uri);
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

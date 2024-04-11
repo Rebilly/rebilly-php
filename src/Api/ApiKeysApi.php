@@ -26,15 +26,14 @@ class ApiKeysApi
     {
     }
 
-    /**
-     * @return ApiKey
-     */
     public function create(
         ApiKey $apiKey,
     ): ApiKey {
         $uri = '/api-keys';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($apiKey));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($apiKey));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -54,9 +53,6 @@ class ApiKeysApi
         $this->client->send($request);
     }
 
-    /**
-     * @return ApiKey
-     */
     public function get(
         string $id,
     ): ApiKey {
@@ -66,7 +62,9 @@ class ApiKeysApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/api-keys/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -88,7 +86,9 @@ class ApiKeysApi
         ];
         $uri = '/api-keys?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -100,6 +100,9 @@ class ApiKeysApi
         );
     }
 
+    /**
+     * @return Paginator<ApiKey>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -117,9 +120,6 @@ class ApiKeysApi
         );
     }
 
-    /**
-     * @return ApiKey
-     */
     public function update(
         string $id,
         ApiKey $apiKey,
@@ -130,7 +130,9 @@ class ApiKeysApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/api-keys/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($apiKey));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($apiKey));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

@@ -24,29 +24,27 @@ class KycSettingsApi
     {
     }
 
-    /**
-     * @return KycSettings
-     */
     public function getKycSettings(): KycSettings
     {
         $uri = '/kyc-settings';
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return KycSettings::from($data);
     }
 
-    /**
-     * @return KycSettings
-     */
     public function updateKycSettings(
         KycSettings $kycSettings,
     ): KycSettings {
         $uri = '/kyc-settings';
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($kycSettings));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($kycSettings));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

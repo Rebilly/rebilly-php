@@ -31,9 +31,6 @@ class EventsApi
     {
     }
 
-    /**
-     * @return RuleSetDraft
-     */
     public function createDraftRuleset(
         string $eventType,
         RuleSetDraft $ruleSetDraft,
@@ -44,16 +41,15 @@ class EventsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/rules/drafts');
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($ruleSetDraft));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($ruleSetDraft));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return RuleSetDraft::from($data);
     }
 
-    /**
-     * @return RuleSet
-     */
     public function createRules(
         string $eventType,
         RuleSet $ruleSet,
@@ -64,16 +60,15 @@ class EventsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/rules');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($ruleSet));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($ruleSet));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return RuleSet::from($data);
     }
 
-    /**
-     * @return RulesEngineTimeline
-     */
     public function createTimelineComment(
         string $eventType,
         RulesEngineTimeline $rulesEngineTimeline,
@@ -84,7 +79,9 @@ class EventsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/timeline');
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($rulesEngineTimeline));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($rulesEngineTimeline));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -121,9 +118,6 @@ class EventsApi
         $this->client->send($request);
     }
 
-    /**
-     * @return SystemEvent
-     */
     public function get(
         string $eventType,
     ): SystemEvent {
@@ -133,7 +127,9 @@ class EventsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -157,7 +153,9 @@ class EventsApi
         ];
         $uri = '/events?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -169,6 +167,9 @@ class EventsApi
         );
     }
 
+    /**
+     * @return Paginator<SystemEvent>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -214,7 +215,9 @@ class EventsApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/rules/drafts?') . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -226,6 +229,9 @@ class EventsApi
         );
     }
 
+    /**
+     * @return Paginator<RuleSetDraft>
+     */
     public function getAllDraftRulesetsPaginator(
         string $eventType,
         ?int $limit = null,
@@ -275,7 +281,9 @@ class EventsApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/timeline?') . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -287,6 +295,9 @@ class EventsApi
         );
     }
 
+    /**
+     * @return Paginator<RulesEngineTimeline>
+     */
     public function getAllTimelineMessagesPaginator(
         string $eventType,
         ?int $limit = null,
@@ -310,9 +321,6 @@ class EventsApi
         );
     }
 
-    /**
-     * @return RuleSetDraft
-     */
     public function getDraftRuleset(
         string $eventType,
         string $id,
@@ -328,16 +336,15 @@ class EventsApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/rules/drafts/{id}?') . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return RuleSetDraft::from($data);
     }
 
-    /**
-     * @return RuleSet
-     */
     public function getRules(
         string $eventType,
     ): RuleSet {
@@ -347,7 +354,9 @@ class EventsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/rules');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -380,7 +389,9 @@ class EventsApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/rules/history?') . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -392,6 +403,9 @@ class EventsApi
         );
     }
 
+    /**
+     * @return Paginator<RuleSetHistoryItem>
+     */
     public function getRulesHistoryPaginator(
         string $eventType,
         ?int $limit = null,
@@ -417,9 +431,6 @@ class EventsApi
         );
     }
 
-    /**
-     * @return RuleSetVersion
-     */
     public function getRulesVersionDetail(
         string $eventType,
         int $version,
@@ -435,16 +446,15 @@ class EventsApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/rules/versions/{version}?') . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return RuleSetVersion::from($data);
     }
 
-    /**
-     * @return RuleSetHistoryItem
-     */
     public function getRulesVersionNumber(
         string $eventType,
         int $version,
@@ -460,16 +470,15 @@ class EventsApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/rules/history/{version}?') . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return RuleSetHistoryItem::from($data);
     }
 
-    /**
-     * @return RulesEngineTimeline
-     */
     public function getTimelineMessage(
         string $eventType,
         string $messageId,
@@ -481,16 +490,15 @@ class EventsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/timeline/{messageId}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return RulesEngineTimeline::from($data);
     }
 
-    /**
-     * @return RuleSetDraft
-     */
     public function updateDraftRuleset(
         string $eventType,
         string $id,
@@ -503,7 +511,9 @@ class EventsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/events/{eventType}/rules/drafts/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($ruleSetDraft));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($ruleSetDraft));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

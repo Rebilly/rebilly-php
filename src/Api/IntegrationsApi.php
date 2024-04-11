@@ -26,9 +26,6 @@ class IntegrationsApi
     {
     }
 
-    /**
-     * @return Integration
-     */
     public function get(
         string $label,
     ): Integration {
@@ -38,7 +35,9 @@ class IntegrationsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/integrations/{label}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -58,7 +57,9 @@ class IntegrationsApi
         ];
         $uri = '/integrations?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -70,6 +71,9 @@ class IntegrationsApi
         );
     }
 
+    /**
+     * @return Paginator<Integration>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,

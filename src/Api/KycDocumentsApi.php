@@ -29,9 +29,6 @@ class KycDocumentsApi
     {
     }
 
-    /**
-     * @return KycDocument
-     */
     public function accept(
         string $id,
     ): KycDocument {
@@ -41,31 +38,29 @@ class KycDocumentsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/kyc-documents/{id}/acceptance');
 
-        $request = new Request('POST', $uri);
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return KycDocumentFactory::from($data);
     }
 
-    /**
-     * @return KycDocument
-     */
     public function create(
         KycDocument $kycDocument,
     ): KycDocument {
         $uri = '/kyc-documents';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($kycDocument));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($kycDocument));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return KycDocumentFactory::from($data);
     }
 
-    /**
-     * @return KycDocument
-     */
     public function get(
         string $id,
     ): KycDocument {
@@ -75,7 +70,9 @@ class KycDocumentsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/kyc-documents/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -101,7 +98,9 @@ class KycDocumentsApi
         ];
         $uri = '/kyc-documents?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -113,6 +112,9 @@ class KycDocumentsApi
         );
     }
 
+    /**
+     * @return Paginator<KycDocument>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -148,9 +150,6 @@ class KycDocumentsApi
         $this->client->send($request);
     }
 
-    /**
-     * @return KycDocument
-     */
     public function reject(
         string $id,
         KycDocumentRejection $kycDocumentRejection,
@@ -161,16 +160,15 @@ class KycDocumentsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/kyc-documents/{id}/rejection');
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($kycDocumentRejection));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($kycDocumentRejection));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return KycDocumentFactory::from($data);
     }
 
-    /**
-     * @return KycDocument
-     */
     public function review(
         string $id,
     ): KycDocument {
@@ -180,16 +178,15 @@ class KycDocumentsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/kyc-documents/{id}/review');
 
-        $request = new Request('POST', $uri);
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return KycDocumentFactory::from($data);
     }
 
-    /**
-     * @return KycDocument
-     */
     public function startReview(
         string $id,
     ): KycDocument {
@@ -199,16 +196,15 @@ class KycDocumentsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/kyc-documents/{id}/start-review');
 
-        $request = new Request('POST', $uri);
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return KycDocumentFactory::from($data);
     }
 
-    /**
-     * @return KycDocument
-     */
     public function stopReview(
         string $id,
     ): KycDocument {
@@ -218,16 +214,15 @@ class KycDocumentsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/kyc-documents/{id}/stop-review');
 
-        $request = new Request('POST', $uri);
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return KycDocumentFactory::from($data);
     }
 
-    /**
-     * @return KycDocument
-     */
     public function update(
         string $id,
         KycDocument $kycDocument,
@@ -238,7 +233,9 @@ class KycDocumentsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/kyc-documents/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($kycDocument));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($kycDocument));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

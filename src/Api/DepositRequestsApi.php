@@ -27,24 +27,20 @@ class DepositRequestsApi
     {
     }
 
-    /**
-     * @return DepositRequest
-     */
     public function create(
         PostDepositRequest $postDepositRequest,
     ): DepositRequest {
         $uri = '/deposit-requests';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($postDepositRequest));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($postDepositRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return DepositRequest::from($data);
     }
 
-    /**
-     * @return DepositRequest
-     */
     public function get(
         string $id,
         ?string $expand = null,
@@ -58,7 +54,9 @@ class DepositRequestsApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/deposit-requests/{id}?') . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -82,7 +80,9 @@ class DepositRequestsApi
         ];
         $uri = '/deposit-requests?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -94,6 +94,9 @@ class DepositRequestsApi
         );
     }
 
+    /**
+     * @return Paginator<DepositRequest>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,

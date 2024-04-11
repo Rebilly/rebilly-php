@@ -39,9 +39,6 @@ class AllowlistsApi
         $this->client->send($request);
     }
 
-    /**
-     * @return Allowlist
-     */
     public function getAllowlist(
         string $id,
     ): Allowlist {
@@ -51,7 +48,9 @@ class AllowlistsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/allowlists/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -75,7 +74,9 @@ class AllowlistsApi
         ];
         $uri = '/allowlists?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -87,6 +88,9 @@ class AllowlistsApi
         );
     }
 
+    /**
+     * @return Paginator<Allowlist>
+     */
     public function getAllowlistCollectionPaginator(
         ?string $filter = null,
         ?array $sort = null,
@@ -106,15 +110,14 @@ class AllowlistsApi
         );
     }
 
-    /**
-     * @return Allowlist
-     */
     public function storeAllowlist(
         Allowlist $allowlist,
     ): Allowlist {
         $uri = '/allowlists';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($allowlist));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($allowlist));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

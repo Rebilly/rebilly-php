@@ -41,24 +41,20 @@ class CouponsApi
         $this->client->send($request);
     }
 
-    /**
-     * @return Coupon
-     */
     public function create(
         Coupon $coupon,
     ): Coupon {
         $uri = '/coupons';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($coupon));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($coupon));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Coupon::from($data);
     }
 
-    /**
-     * @return Coupon
-     */
     public function get(
         string $id,
     ): Coupon {
@@ -68,7 +64,9 @@ class CouponsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/coupons/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -94,7 +92,9 @@ class CouponsApi
         ];
         $uri = '/coupons?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -106,6 +106,9 @@ class CouponsApi
         );
     }
 
+    /**
+     * @return Paginator<Coupon>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -146,7 +149,9 @@ class CouponsApi
         ];
         $uri = '/coupons-redemptions?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -158,6 +163,9 @@ class CouponsApi
         );
     }
 
+    /**
+     * @return Paginator<CouponRedemption>
+     */
     public function getAllRedemptionsPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -179,9 +187,6 @@ class CouponsApi
         );
     }
 
-    /**
-     * @return CouponRedemption
-     */
     public function getRedemption(
         string $id,
     ): CouponRedemption {
@@ -191,31 +196,29 @@ class CouponsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/coupons-redemptions/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CouponRedemption::from($data);
     }
 
-    /**
-     * @return CouponRedemption
-     */
     public function redeem(
         CouponRedemption $couponRedemption,
     ): CouponRedemption {
         $uri = '/coupons-redemptions';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($couponRedemption));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($couponRedemption));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CouponRedemption::from($data);
     }
 
-    /**
-     * @return Coupon
-     */
     public function setExpiration(
         string $id,
         CouponExpiration $couponExpiration,
@@ -226,16 +229,15 @@ class CouponsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/coupons/{id}/expiration');
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($couponExpiration));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($couponExpiration));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Coupon::from($data);
     }
 
-    /**
-     * @return Coupon
-     */
     public function update(
         string $id,
         Coupon $coupon,
@@ -246,7 +248,9 @@ class CouponsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/coupons/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($coupon));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($coupon));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

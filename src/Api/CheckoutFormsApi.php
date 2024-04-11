@@ -26,15 +26,14 @@ class CheckoutFormsApi
     {
     }
 
-    /**
-     * @return CheckoutForm
-     */
     public function create(
         CheckoutForm $checkoutForm,
     ): CheckoutForm {
         $uri = '/checkout-forms';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($checkoutForm));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($checkoutForm));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -54,9 +53,6 @@ class CheckoutFormsApi
         $this->client->send($request);
     }
 
-    /**
-     * @return CheckoutForm
-     */
     public function get(
         string $id,
     ): CheckoutForm {
@@ -66,7 +62,9 @@ class CheckoutFormsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/checkout-forms/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -92,7 +90,9 @@ class CheckoutFormsApi
         ];
         $uri = '/checkout-forms?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -104,6 +104,9 @@ class CheckoutFormsApi
         );
     }
 
+    /**
+     * @return Paginator<CheckoutForm>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -125,9 +128,6 @@ class CheckoutFormsApi
         );
     }
 
-    /**
-     * @return CheckoutForm
-     */
     public function update(
         string $id,
         CheckoutForm $checkoutForm,
@@ -138,7 +138,9 @@ class CheckoutFormsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/checkout-forms/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($checkoutForm));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($checkoutForm));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

@@ -26,15 +26,14 @@ class ShippingRatesApi
     {
     }
 
-    /**
-     * @return ShippingRate
-     */
     public function create(
         ShippingRate $shippingRate,
     ): ShippingRate {
         $uri = '/shipping-rates';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($shippingRate));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($shippingRate));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -54,9 +53,6 @@ class ShippingRatesApi
         $this->client->send($request);
     }
 
-    /**
-     * @return ShippingRate
-     */
     public function get(
         string $id,
     ): ShippingRate {
@@ -66,7 +62,9 @@ class ShippingRatesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/shipping-rates/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -92,7 +90,9 @@ class ShippingRatesApi
         ];
         $uri = '/shipping-rates?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -104,6 +104,9 @@ class ShippingRatesApi
         );
     }
 
+    /**
+     * @return Paginator<ShippingRate>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -125,9 +128,6 @@ class ShippingRatesApi
         );
     }
 
-    /**
-     * @return ShippingRate
-     */
     public function update(
         string $id,
         ShippingRate $shippingRate,
@@ -138,7 +138,9 @@ class ShippingRatesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/shipping-rates/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($shippingRate));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($shippingRate));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

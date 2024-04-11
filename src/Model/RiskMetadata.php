@@ -453,219 +453,219 @@ class RiskMetadata implements JsonSerializable
         }
         if (array_key_exists('score', $this->fields)) {
             $data['score'] = $this->fields['score'];
-        }
+            }
 
-        return $data;
-    }
+            return $data;
+            }
 
-    private function setIsProxy(null|bool $isProxy): static
-    {
-        $this->fields['isProxy'] = $isProxy;
+            private function setIsProxy(null|bool $isProxy): static
+            {
+                $this->fields['isProxy'] = $isProxy;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setIsVpn(null|bool $isVpn): static
-    {
-        $this->fields['isVpn'] = $isVpn;
+            private function setIsVpn(null|bool $isVpn): static
+            {
+                $this->fields['isVpn'] = $isVpn;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setIsTor(null|bool $isTor): static
-    {
-        $this->fields['isTor'] = $isTor;
+            private function setIsTor(null|bool $isTor): static
+            {
+                $this->fields['isTor'] = $isTor;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setIsHosting(null|bool $isHosting): static
-    {
-        $this->fields['isHosting'] = $isHosting;
+            private function setIsHosting(null|bool $isHosting): static
+            {
+                $this->fields['isHosting'] = $isHosting;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setHostingName(null|string $hostingName): static
-    {
-        $this->fields['hostingName'] = $hostingName;
+            private function setHostingName(null|string $hostingName): static
+            {
+                $this->fields['hostingName'] = $hostingName;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setIsp(null|string $isp): static
-    {
-        $this->fields['isp'] = $isp;
+            private function setIsp(null|string $isp): static
+            {
+                $this->fields['isp'] = $isp;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setCountry(null|string $country): static
-    {
-        $this->fields['country'] = $country;
+            private function setCountry(null|string $country): static
+            {
+                $this->fields['country'] = $country;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setRegion(null|string $region): static
-    {
-        $this->fields['region'] = $region;
+            private function setRegion(null|string $region): static
+            {
+                $this->fields['region'] = $region;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setCity(null|string $city): static
-    {
-        $this->fields['city'] = $city;
+            private function setCity(null|string $city): static
+            {
+                $this->fields['city'] = $city;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setLatitude(null|float|string $latitude): static
-    {
-        if (is_string($latitude)) {
-            $latitude = (float) $latitude;
-        }
+            private function setLatitude(null|float|string $latitude): static
+            {
+                if (is_string($latitude)) {
+                    $latitude = (float) $latitude;
+                }
 
-        $this->fields['latitude'] = $latitude;
+                $this->fields['latitude'] = $latitude;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setLongitude(null|float|string $longitude): static
-    {
-        if (is_string($longitude)) {
-            $longitude = (float) $longitude;
-        }
+            private function setLongitude(null|float|string $longitude): static
+            {
+                if (is_string($longitude)) {
+                    $longitude = (float) $longitude;
+                }
 
-        $this->fields['longitude'] = $longitude;
+                $this->fields['longitude'] = $longitude;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setPostalCode(null|string $postalCode): static
-    {
-        $this->fields['postalCode'] = $postalCode;
+            private function setPostalCode(null|string $postalCode): static
+            {
+                $this->fields['postalCode'] = $postalCode;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setTimeZone(null|string $timeZone): static
-    {
-        $this->fields['timeZone'] = $timeZone;
+            private function setTimeZone(null|string $timeZone): static
+            {
+                $this->fields['timeZone'] = $timeZone;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setAccuracyRadius(null|int $accuracyRadius): static
-    {
-        $this->fields['accuracyRadius'] = $accuracyRadius;
+            private function setAccuracyRadius(null|int $accuracyRadius): static
+            {
+                $this->fields['accuracyRadius'] = $accuracyRadius;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setDistance(null|int $distance): static
-    {
-        $this->fields['distance'] = $distance;
+            private function setDistance(null|int $distance): static
+            {
+                $this->fields['distance'] = $distance;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setHasMismatchedBillingAddressCountry(null|bool $hasMismatchedBillingAddressCountry): static
-    {
-        $this->fields['hasMismatchedBillingAddressCountry'] = $hasMismatchedBillingAddressCountry;
+            private function setHasMismatchedBillingAddressCountry(null|bool $hasMismatchedBillingAddressCountry): static
+            {
+                $this->fields['hasMismatchedBillingAddressCountry'] = $hasMismatchedBillingAddressCountry;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setHasMismatchedBankCountry(null|bool $hasMismatchedBankCountry): static
-    {
-        $this->fields['hasMismatchedBankCountry'] = $hasMismatchedBankCountry;
+            private function setHasMismatchedBankCountry(null|bool $hasMismatchedBankCountry): static
+            {
+                $this->fields['hasMismatchedBankCountry'] = $hasMismatchedBankCountry;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setHasMismatchedTimeZone(null|bool $hasMismatchedTimeZone): static
-    {
-        $this->fields['hasMismatchedTimeZone'] = $hasMismatchedTimeZone;
+            private function setHasMismatchedTimeZone(null|bool $hasMismatchedTimeZone): static
+            {
+                $this->fields['hasMismatchedTimeZone'] = $hasMismatchedTimeZone;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setHasMismatchedHolderName(null|bool $hasMismatchedHolderName): static
-    {
-        $this->fields['hasMismatchedHolderName'] = $hasMismatchedHolderName;
+            private function setHasMismatchedHolderName(null|bool $hasMismatchedHolderName): static
+            {
+                $this->fields['hasMismatchedHolderName'] = $hasMismatchedHolderName;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setHasFakeName(null|bool $hasFakeName): static
-    {
-        $this->fields['hasFakeName'] = $hasFakeName;
+            private function setHasFakeName(null|bool $hasFakeName): static
+            {
+                $this->fields['hasFakeName'] = $hasFakeName;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setIsHighRiskCountry(null|bool $isHighRiskCountry): static
-    {
-        $this->fields['isHighRiskCountry'] = $isHighRiskCountry;
+            private function setIsHighRiskCountry(null|bool $isHighRiskCountry): static
+            {
+                $this->fields['isHighRiskCountry'] = $isHighRiskCountry;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setPaymentInstrumentVelocity(null|int $paymentInstrumentVelocity): static
-    {
-        $this->fields['paymentInstrumentVelocity'] = $paymentInstrumentVelocity;
+            private function setPaymentInstrumentVelocity(null|int $paymentInstrumentVelocity): static
+            {
+                $this->fields['paymentInstrumentVelocity'] = $paymentInstrumentVelocity;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setDeclinedPaymentInstrumentVelocity(null|int $declinedPaymentInstrumentVelocity): static
-    {
-        $this->fields['declinedPaymentInstrumentVelocity'] = $declinedPaymentInstrumentVelocity;
+            private function setDeclinedPaymentInstrumentVelocity(null|int $declinedPaymentInstrumentVelocity): static
+            {
+                $this->fields['declinedPaymentInstrumentVelocity'] = $declinedPaymentInstrumentVelocity;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setIsBot(null|bool $isBot): static
-    {
-        $this->fields['isBot'] = $isBot;
+            private function setIsBot(null|bool $isBot): static
+            {
+                $this->fields['isBot'] = $isBot;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setDeviceVelocity(null|int $deviceVelocity): static
-    {
-        $this->fields['deviceVelocity'] = $deviceVelocity;
+            private function setDeviceVelocity(null|int $deviceVelocity): static
+            {
+                $this->fields['deviceVelocity'] = $deviceVelocity;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setIpVelocity(null|int $ipVelocity): static
-    {
-        $this->fields['ipVelocity'] = $ipVelocity;
+            private function setIpVelocity(null|int $ipVelocity): static
+            {
+                $this->fields['ipVelocity'] = $ipVelocity;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setEmailVelocity(null|int $emailVelocity): static
-    {
-        $this->fields['emailVelocity'] = $emailVelocity;
+            private function setEmailVelocity(null|int $emailVelocity): static
+            {
+                $this->fields['emailVelocity'] = $emailVelocity;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setBillingAddressVelocity(null|int $billingAddressVelocity): static
-    {
-        $this->fields['billingAddressVelocity'] = $billingAddressVelocity;
+            private function setBillingAddressVelocity(null|int $billingAddressVelocity): static
+            {
+                $this->fields['billingAddressVelocity'] = $billingAddressVelocity;
 
-        return $this;
-    }
+                return $this;
+            }
 
-    private function setScore(null|int $score): static
-    {
-        $this->fields['score'] = $score;
+            private function setScore(null|int $score): static
+            {
+                $this->fields['score'] = $score;
 
-        return $this;
-    }
+                return $this;
+            }
 }

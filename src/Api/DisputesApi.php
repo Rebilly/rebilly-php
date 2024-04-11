@@ -27,24 +27,20 @@ class DisputesApi
     {
     }
 
-    /**
-     * @return Dispute
-     */
     public function create(
         PostDisputeRequest $postDisputeRequest,
     ): Dispute {
         $uri = '/disputes';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($postDisputeRequest));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($postDisputeRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Dispute::from($data);
     }
 
-    /**
-     * @return Dispute
-     */
     public function get(
         string $id,
     ): Dispute {
@@ -54,7 +50,9 @@ class DisputesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/disputes/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -82,7 +80,9 @@ class DisputesApi
         ];
         $uri = '/disputes?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -94,6 +94,9 @@ class DisputesApi
         );
     }
 
+    /**
+     * @return Paginator<Dispute>
+     */
     public function getAllPaginator(
         ?string $filter = null,
         ?array $sort = null,
@@ -117,9 +120,6 @@ class DisputesApi
         );
     }
 
-    /**
-     * @return Dispute
-     */
     public function update(
         string $id,
         PostDisputeRequest $postDisputeRequest,
@@ -130,7 +130,9 @@ class DisputesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/disputes/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($postDisputeRequest));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($postDisputeRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

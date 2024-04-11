@@ -26,15 +26,14 @@ class ListsApi
     {
     }
 
-    /**
-     * @return ValueList
-     */
     public function create(
         ValueList $valueList,
     ): ValueList {
         $uri = '/lists';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($valueList));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($valueList));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -75,7 +74,9 @@ class ListsApi
         ];
         $uri = '/lists?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -87,6 +88,9 @@ class ListsApi
         );
     }
 
+    /**
+     * @return Paginator<ValueList>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -110,9 +114,6 @@ class ListsApi
         );
     }
 
-    /**
-     * @return ValueList
-     */
     public function getByVersion(
         string $id,
         int $version,
@@ -124,16 +125,15 @@ class ListsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/lists/{id}/{version}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ValueList::from($data);
     }
 
-    /**
-     * @return ValueList
-     */
     public function getLatestVersion(
         string $id,
     ): ValueList {
@@ -143,16 +143,15 @@ class ListsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/lists/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ValueList::from($data);
     }
 
-    /**
-     * @return ValueList
-     */
     public function update(
         string $id,
         ValueList $valueList,
@@ -163,7 +162,9 @@ class ListsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/lists/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($valueList));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($valueList));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

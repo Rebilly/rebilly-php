@@ -28,24 +28,20 @@ class OrganizationsApi
     {
     }
 
-    /**
-     * @return Organization
-     */
     public function create(
         PostOrganizationRequest $postOrganizationRequest,
     ): Organization {
         $uri = '/organizations';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($postOrganizationRequest));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($postOrganizationRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Organization::from($data);
     }
 
-    /**
-     * @return Organization
-     */
     public function get(
         string $id,
     ): Organization {
@@ -55,7 +51,9 @@ class OrganizationsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/organizations/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -81,7 +79,9 @@ class OrganizationsApi
         ];
         $uri = '/organizations?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -93,6 +93,9 @@ class OrganizationsApi
         );
     }
 
+    /**
+     * @return Paginator<Organization>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -114,9 +117,6 @@ class OrganizationsApi
         );
     }
 
-    /**
-     * @return Organization
-     */
     public function update(
         string $id,
         PatchOrganizationRequest $patchOrganizationRequest,
@@ -127,7 +127,9 @@ class OrganizationsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/organizations/{id}');
 
-        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($patchOrganizationRequest));
+        $request = new Request('PATCH', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($patchOrganizationRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
