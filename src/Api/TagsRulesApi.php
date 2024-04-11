@@ -26,15 +26,14 @@ class TagsRulesApi
     {
     }
 
-    /**
-     * @return TagUntagRule
-     */
     public function createTagsRule(
         TagUntagRule $tagUntagRule,
     ): TagUntagRule {
         $uri = '/tags-rules';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($tagUntagRule));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($tagUntagRule));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -73,7 +72,9 @@ class TagsRulesApi
         ];
         $uri = '/tags-rules?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -85,6 +86,9 @@ class TagsRulesApi
         );
     }
 
+    /**
+     * @return Paginator<TagUntagRule>
+     */
     public function getAllTagsRulesPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -106,9 +110,6 @@ class TagsRulesApi
         );
     }
 
-    /**
-     * @return TagUntagRule
-     */
     public function getTagsRule(
         string $id,
     ): TagUntagRule {
@@ -118,16 +119,15 @@ class TagsRulesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/tags-rules/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return TagUntagRule::from($data);
     }
 
-    /**
-     * @return TagUntagRule
-     */
     public function updateTagsRule(
         string $id,
         TagUntagRule $tagUntagRule,
@@ -138,7 +138,9 @@ class TagsRulesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/tags-rules/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($tagUntagRule));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($tagUntagRule));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

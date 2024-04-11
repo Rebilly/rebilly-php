@@ -43,7 +43,9 @@ class SearchApi
         ];
         $uri = '/search?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -55,6 +57,9 @@ class SearchApi
         );
     }
 
+    /**
+     * @return Paginator<Search>
+     */
     public function getPaginator(
         ?array $sort = null,
         ?int $limit = null,

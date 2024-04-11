@@ -27,15 +27,14 @@ class FeesApi
     {
     }
 
-    /**
-     * @return Fee
-     */
     public function create(
         Fee $fee,
     ): Fee {
         $uri = '/fees';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($fee));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($fee));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -55,9 +54,6 @@ class FeesApi
         $this->client->send($request);
     }
 
-    /**
-     * @return Fee
-     */
     public function get(
         string $id,
     ): Fee {
@@ -67,7 +63,9 @@ class FeesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/fees/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -91,7 +89,9 @@ class FeesApi
         ];
         $uri = '/fees?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -103,6 +103,9 @@ class FeesApi
         );
     }
 
+    /**
+     * @return Paginator<Fee>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -122,9 +125,6 @@ class FeesApi
         );
     }
 
-    /**
-     * @return Fee
-     */
     public function patch(
         string $id,
         PatchFee $patchFee,
@@ -135,16 +135,15 @@ class FeesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/fees/{id}');
 
-        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($patchFee));
+        $request = new Request('PATCH', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($patchFee));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Fee::from($data);
     }
 
-    /**
-     * @return Fee
-     */
     public function upsert(
         string $id,
         Fee $fee,
@@ -155,7 +154,9 @@ class FeesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/fees/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($fee));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($fee));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

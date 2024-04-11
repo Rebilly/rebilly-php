@@ -26,15 +26,14 @@ class SegmentsApi
     {
     }
 
-    /**
-     * @return GridSegment
-     */
     public function create(
         GridSegment $gridSegment,
     ): GridSegment {
         $uri = '/grid-segments';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($gridSegment));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($gridSegment));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -54,9 +53,6 @@ class SegmentsApi
         $this->client->send($request);
     }
 
-    /**
-     * @return GridSegment
-     */
     public function get(
         string $id,
     ): GridSegment {
@@ -66,7 +62,9 @@ class SegmentsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/grid-segments/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -92,7 +90,9 @@ class SegmentsApi
         ];
         $uri = '/grid-segments?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -104,6 +104,9 @@ class SegmentsApi
         );
     }
 
+    /**
+     * @return Paginator<GridSegment>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -125,9 +128,6 @@ class SegmentsApi
         );
     }
 
-    /**
-     * @return GridSegment
-     */
     public function update(
         string $id,
         GridSegment $gridSegment,
@@ -138,7 +138,9 @@ class SegmentsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/grid-segments/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($gridSegment));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($gridSegment));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

@@ -27,24 +27,20 @@ class UsersApi
     {
     }
 
-    /**
-     * @return User
-     */
     public function create(
         User $user,
     ): User {
         $uri = '/users';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($user));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($user));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return User::from($data);
     }
 
-    /**
-     * @return User
-     */
     public function get(
         string $id,
     ): User {
@@ -54,7 +50,9 @@ class UsersApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/users/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -80,7 +78,9 @@ class UsersApi
         ];
         $uri = '/users?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -92,6 +92,9 @@ class UsersApi
         );
     }
 
+    /**
+     * @return Paginator<User>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -113,9 +116,6 @@ class UsersApi
         );
     }
 
-    /**
-     * @return ProfileMfa
-     */
     public function getMfa(
         string $id,
     ): ProfileMfa {
@@ -125,16 +125,15 @@ class UsersApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/users/{id}/mfa');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ProfileMfa::from($data);
     }
 
-    /**
-     * @return User
-     */
     public function update(
         string $id,
         User $user,
@@ -145,7 +144,9 @@ class UsersApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/users/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($user));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($user));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

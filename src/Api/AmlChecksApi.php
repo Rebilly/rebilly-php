@@ -27,9 +27,6 @@ class AmlChecksApi
     {
     }
 
-    /**
-     * @return AmlCheck
-     */
     public function get(
         string $id,
     ): AmlCheck {
@@ -39,7 +36,9 @@ class AmlChecksApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/aml-checks/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -65,7 +64,9 @@ class AmlChecksApi
         ];
         $uri = '/aml-checks?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -77,6 +78,9 @@ class AmlChecksApi
         );
     }
 
+    /**
+     * @return Paginator<AmlCheck>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -98,9 +102,6 @@ class AmlChecksApi
         );
     }
 
-    /**
-     * @return AmlCheck
-     */
     public function review(
         string $id,
         AmlCheckReview $amlCheckReview,
@@ -111,16 +112,15 @@ class AmlChecksApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/aml-checks/{id}/review');
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($amlCheckReview));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($amlCheckReview));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return AmlCheck::from($data);
     }
 
-    /**
-     * @return AmlCheck
-     */
     public function startReview(
         string $id,
     ): AmlCheck {
@@ -130,16 +130,15 @@ class AmlChecksApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/aml-checks/{id}/start-review');
 
-        $request = new Request('POST', $uri);
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return AmlCheck::from($data);
     }
 
-    /**
-     * @return AmlCheck
-     */
     public function stopReview(
         string $id,
     ): AmlCheck {
@@ -149,7 +148,9 @@ class AmlChecksApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/aml-checks/{id}/stop-review');
 
-        $request = new Request('POST', $uri);
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

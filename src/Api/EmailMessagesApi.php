@@ -27,15 +27,14 @@ class EmailMessagesApi
     {
     }
 
-    /**
-     * @return EmailMessage
-     */
     public function create(
         EmailMessage $emailMessage,
     ): EmailMessage {
         $uri = '/email-messages';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($emailMessage));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($emailMessage));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -55,9 +54,6 @@ class EmailMessagesApi
         $this->client->send($request);
     }
 
-    /**
-     * @return EmailMessage
-     */
     public function get(
         string $id,
     ): EmailMessage {
@@ -67,7 +63,9 @@ class EmailMessagesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/email-messages/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -93,7 +91,9 @@ class EmailMessagesApi
         ];
         $uri = '/email-messages?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -105,6 +105,9 @@ class EmailMessagesApi
         );
     }
 
+    /**
+     * @return Paginator<EmailMessage>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -126,9 +129,6 @@ class EmailMessagesApi
         );
     }
 
-    /**
-     * @return EmailMessage
-     */
     public function send(
         string $id,
         PatchEmailMessageRequest $patchEmailMessageRequest,
@@ -139,7 +139,9 @@ class EmailMessagesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/email-messages/{id}');
 
-        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($patchEmailMessageRequest));
+        $request = new Request('PATCH', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($patchEmailMessageRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

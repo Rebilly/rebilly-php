@@ -35,86 +35,80 @@ class ProfileApi
         $this->client->send($request);
     }
 
-    /**
-     * @return Profile
-     */
     public function get(): Profile
     {
         $uri = '/profile';
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Profile::from($data);
     }
 
-    /**
-     * @return ProfileMfa
-     */
     public function getMfa(): ProfileMfa
     {
         $uri = '/profile/mfa';
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ProfileMfa::from($data);
     }
 
-    /**
-     * @return Session
-     */
     public function startPermissionsEmulation(
         PostPermissionsEmulationRequest $postPermissionsEmulationRequest,
     ): Session {
         $uri = '/permissions-emulation';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($postPermissionsEmulationRequest));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($postPermissionsEmulationRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Session::from($data);
     }
 
-    /**
-     * @return Session
-     */
     public function stopPermissionsEmulation(): Session
     {
         $uri = '/permissions-emulation';
 
-        $request = new Request('DELETE', $uri);
+        $request = new Request('DELETE', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Session::from($data);
     }
 
-    /**
-     * @return Profile
-     */
     public function update(
         Profile $profile,
     ): Profile {
         $uri = '/profile';
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($profile));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($profile));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Profile::from($data);
     }
 
-    /**
-     * @return ProfileMfa
-     */
     public function updateMfa(): ProfileMfa
     {
         $uri = '/profile/mfa';
 
-        $request = new Request('POST', $uri);
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

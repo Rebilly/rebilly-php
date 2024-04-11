@@ -26,30 +26,28 @@ class PreviewsApi
     {
     }
 
-    /**
-     * @return OrderPreview
-     */
     public function order(
         OrderPreview $orderPreview,
     ): OrderPreview {
         $uri = '/previews/orders';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($orderPreview));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($orderPreview));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return OrderPreview::from($data);
     }
 
-    /**
-     * @return RulesEmailNotification
-     */
     public function sendEmailRuleAction(
         RulesEmailNotification $rulesEmailNotification,
     ): RulesEmailNotification {
         $uri = '/previews/rule-actions/send-email';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($rulesEmailNotification));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($rulesEmailNotification));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

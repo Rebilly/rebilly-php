@@ -51,9 +51,6 @@ class ReportsApi
     {
     }
 
-    /**
-     * @return ApiLogSummary
-     */
     public function getApiLogSummary(
         DateTimeImmutable $periodStart,
         DateTimeImmutable $periodEnd,
@@ -68,16 +65,15 @@ class ReportsApi
         ];
         $uri = '/experimental/reports/api-log-summary?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ApiLogSummary::from($data);
     }
 
-    /**
-     * @return CumulativeSubscriptions
-     */
     public function getCumulativeSubscriptions(
         string $aggregationField,
         DateTimeImmutable $periodStart,
@@ -96,16 +92,15 @@ class ReportsApi
         ];
         $uri = '/experimental/reports/cumulative-subscriptions?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CumulativeSubscriptions::from($data);
     }
 
-    /**
-     * @return DashboardResponse
-     */
     public function getDashboardMetrics(
         DateTimeImmutable $periodStart,
         DateTimeImmutable $periodEnd,
@@ -120,16 +115,15 @@ class ReportsApi
         ];
         $uri = '/experimental/reports/dashboard?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return DashboardResponse::from($data);
     }
 
-    /**
-     * @return DccMarkup
-     */
     public function getDccMarkup(
         string $aggregationField,
         DateTimeImmutable $periodStart,
@@ -148,16 +142,15 @@ class ReportsApi
         ];
         $uri = '/experimental/reports/dcc-markup?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return DccMarkup::from($data);
     }
 
-    /**
-     * @return ReportDeclinedTransactions
-     */
     public function getDeclinedTransactions(
         string $aggregationField,
         DateTimeImmutable $periodStart,
@@ -176,16 +169,15 @@ class ReportsApi
         ];
         $uri = '/experimental/reports/declined-transactions?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ReportDeclinedTransactions::from($data);
     }
 
-    /**
-     * @return ReportDisputes
-     */
     public function getDisputes(
         string $aggregationField,
         string $periodMonth,
@@ -202,16 +194,15 @@ class ReportsApi
         ];
         $uri = '/experimental/reports/disputes?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ReportDisputes::from($data);
     }
 
-    /**
-     * @return ReportEventsTriggeredSummary
-     */
     public function getEventsTriggeredSummary(
         DateTimeImmutable $periodStart,
         DateTimeImmutable $periodEnd,
@@ -226,16 +217,15 @@ class ReportsApi
         ];
         $uri = '/experimental/reports/events-triggered?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ReportEventsTriggeredSummary::from($data);
     }
 
-    /**
-     * @return FutureRenewals
-     */
     public function getFutureRenewals(
         string $periodStart,
         string $periodEnd,
@@ -250,16 +240,15 @@ class ReportsApi
         ];
         $uri = '/experimental/reports/future-renewals?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return FutureRenewals::from($data);
     }
 
-    /**
-     * @return ReportJournal
-     */
     public function getJournal(
         string $currency,
         string $recognizedAt,
@@ -282,16 +271,15 @@ class ReportsApi
         ];
         $uri = '/experimental/reports/journal?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ReportJournal::from($data);
     }
 
-    /**
-     * @return GetKycAcceptanceSummaryReportResponse
-     */
     public function getKycAcceptanceSummary(
         DateTimeImmutable $periodStart,
         DateTimeImmutable $periodEnd,
@@ -302,16 +290,15 @@ class ReportsApi
         ];
         $uri = '/experimental/reports/kyc-acceptance-summary?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GetKycAcceptanceSummaryReportResponse::from($data);
     }
 
-    /**
-     * @return ReportKycRejections
-     */
     public function getKycRejectionSummary(
         DateTimeImmutable $periodStart,
         DateTimeImmutable $periodEnd,
@@ -322,16 +309,15 @@ class ReportsApi
         ];
         $uri = '/experimental/reports/kyc-rejection-summary?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ReportKycRejections::from($data);
     }
 
-    /**
-     * @return ReportKycRequests
-     */
     public function getKycRequestSummary(
         DateTimeImmutable $periodStart,
         DateTimeImmutable $periodEnd,
@@ -342,16 +328,15 @@ class ReportsApi
         ];
         $uri = '/experimental/reports/kyc-request-summary?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ReportKycRequests::from($data);
     }
 
-    /**
-     * @return ReportMonthlyRecurringRevenue
-     */
     public function getMonthlyRecurringRevenue(
         string $currency,
         string $periodStart,
@@ -368,16 +353,15 @@ class ReportsApi
         ];
         $uri = '/experimental/reports/monthly-recurring-revenue?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ReportMonthlyRecurringRevenue::from($data);
     }
 
-    /**
-     * @return RenewalSales
-     */
     public function getRenewalSales(
         string $periodStart,
         string $periodEnd,
@@ -392,16 +376,15 @@ class ReportsApi
         ];
         $uri = '/experimental/reports/renewal-sales?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return RenewalSales::from($data);
     }
 
-    /**
-     * @return ReportRetentionPercentage
-     */
     public function getRetentionPercentage(
         string $aggregationField,
         string $aggregationPeriod,
@@ -426,16 +409,15 @@ class ReportsApi
         ];
         $uri = '/experimental/reports/retention-percentage?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ReportRetentionPercentage::from($data);
     }
 
-    /**
-     * @return ReportRetentionValue
-     */
     public function getRetentionValue(
         string $aggregationField,
         string $aggregationPeriod,
@@ -464,7 +446,9 @@ class ReportsApi
         ];
         $uri = '/experimental/reports/retention-value?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -488,7 +472,9 @@ class ReportsApi
         ];
         $uri = '/experimental/reports/revenue-audit?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -500,6 +486,9 @@ class ReportsApi
         );
     }
 
+    /**
+     * @return Paginator<RevenueEntry>
+     */
     public function getRevenueAuditPaginator(
         ?string $filter = null,
         ?array $sort = null,
@@ -519,9 +508,6 @@ class ReportsApi
         );
     }
 
-    /**
-     * @return ReportRevenueWaterfall
-     */
     public function getRevenueWaterfall(
         string $currency,
         string $issuedFrom,
@@ -536,16 +522,15 @@ class ReportsApi
         ];
         $uri = '/experimental/reports/revenue-waterfall?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ReportRevenueWaterfall::from($data);
     }
 
-    /**
-     * @return SubscriptionCancellationReport
-     */
     public function getSubscriptionCancellation(
         DateTimeImmutable $periodStart,
         DateTimeImmutable $periodEnd,
@@ -564,16 +549,15 @@ class ReportsApi
         ];
         $uri = '/experimental/reports/subscription-cancellation?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return SubscriptionCancellationReport::from($data);
     }
 
-    /**
-     * @return SubscriptionRenewal
-     */
     public function getSubscriptionRenewal(
         DateTimeImmutable $periodStart,
         DateTimeImmutable $periodEnd,
@@ -588,16 +572,15 @@ class ReportsApi
         ];
         $uri = '/experimental/reports/subscription-renewal?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return SubscriptionRenewal::from($data);
     }
 
-    /**
-     * @return ReportTax
-     */
     public function getTax(
         DateTimeImmutable $periodStart,
         DateTimeImmutable $periodEnd,
@@ -614,16 +597,15 @@ class ReportsApi
         ];
         $uri = '/experimental/reports/tax?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ReportTax::from($data);
     }
 
-    /**
-     * @return TimeSeriesTransaction
-     */
     public function getTimeSeriesTransaction(
         string $type,
         string $subaggregate,
@@ -642,16 +624,15 @@ class ReportsApi
         ];
         $uri = '/experimental/reports/time-series-transaction?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return TimeSeriesTransaction::from($data);
     }
 
-    /**
-     * @return ReportTransactions
-     */
     public function getTransactions(
         DateTimeImmutable $periodStart,
         DateTimeImmutable $periodEnd,
@@ -670,16 +651,15 @@ class ReportsApi
         ];
         $uri = '/experimental/reports/transactions?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ReportTransactions::from($data);
     }
 
-    /**
-     * @return ReportDisputeDelays
-     */
     public function getTransactionsTimeDispute(
         string $aggregationField,
         DateTimeImmutable $periodStart,
@@ -698,16 +678,15 @@ class ReportsApi
         ];
         $uri = '/experimental/reports/transactions-time-dispute?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ReportDisputeDelays::from($data);
     }
 
-    /**
-     * @return ReportRulesMatchedSummary
-     */
     public function getTriggeredEventRuleReport(
         string $eventType,
         DateTimeImmutable $periodStart,
@@ -727,7 +706,9 @@ class ReportsApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/experimental/reports/events-triggered/{eventType}/rules?') . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

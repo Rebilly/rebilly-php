@@ -24,14 +24,13 @@ class StatusApi
     {
     }
 
-    /**
-     * @return Status
-     */
     public function get(): Status
     {
         $uri = '/status';
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

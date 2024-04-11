@@ -26,15 +26,14 @@ class WebsitesApi
     {
     }
 
-    /**
-     * @return Website
-     */
     public function create(
         Website $website,
     ): Website {
         $uri = '/websites';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($website));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($website));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -54,9 +53,6 @@ class WebsitesApi
         $this->client->send($request);
     }
 
-    /**
-     * @return Website
-     */
     public function get(
         string $id,
     ): Website {
@@ -66,7 +62,9 @@ class WebsitesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/websites/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -92,7 +90,9 @@ class WebsitesApi
         ];
         $uri = '/websites?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -104,6 +104,9 @@ class WebsitesApi
         );
     }
 
+    /**
+     * @return Paginator<Website>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -125,9 +128,6 @@ class WebsitesApi
         );
     }
 
-    /**
-     * @return Website
-     */
     public function update(
         string $id,
         Website $website,
@@ -138,7 +138,9 @@ class WebsitesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/websites/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($website));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($website));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

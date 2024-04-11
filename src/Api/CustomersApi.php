@@ -33,24 +33,20 @@ class CustomersApi
     {
     }
 
-    /**
-     * @return Customer
-     */
     public function create(
         Customer $customer,
     ): Customer {
         $uri = '/customers';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($customer));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($customer));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Customer::from($data);
     }
 
-    /**
-     * @return EddTimeline
-     */
     public function createEddTimelineComment(
         string $id,
         EddTimeline $eddTimeline,
@@ -61,16 +57,15 @@ class CustomersApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/edd-timeline');
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($eddTimeline));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($eddTimeline));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return EddTimeline::from($data);
     }
 
-    /**
-     * @return LeadSource
-     */
     public function createLeadSource(
         string $id,
         LeadSource $leadSource,
@@ -81,16 +76,15 @@ class CustomersApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/lead-source');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($leadSource));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($leadSource));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return LeadSource::from($data);
     }
 
-    /**
-     * @return CustomerTimeline
-     */
     public function createTimelineComment(
         string $id,
         CustomerTimeline $customerTimeline,
@@ -101,7 +95,9 @@ class CustomersApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/timeline');
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($customerTimeline));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($customerTimeline));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -151,9 +147,6 @@ class CustomersApi
         $this->client->send($request);
     }
 
-    /**
-     * @return Customer
-     */
     public function get(
         string $id,
         ?string $expand = null,
@@ -169,7 +162,9 @@ class CustomersApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}?') . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -199,7 +194,9 @@ class CustomersApi
         ];
         $uri = '/customers?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -211,6 +208,9 @@ class CustomersApi
         );
     }
 
+    /**
+     * @return Paginator<Customer>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -254,7 +254,9 @@ class CustomersApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/edd-search-results?') . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -266,6 +268,9 @@ class CustomersApi
         );
     }
 
+    /**
+     * @return Paginator<EddSearchResult>
+     */
     public function getAllEddSearchResultsPaginator(
         string $id,
         ?int $limit = null,
@@ -307,7 +312,9 @@ class CustomersApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/timeline?') . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -319,6 +326,9 @@ class CustomersApi
         );
     }
 
+    /**
+     * @return Paginator<CustomerTimeline>
+     */
     public function getAllTimelineMessagesPaginator(
         string $id,
         ?int $limit = null,
@@ -342,9 +352,6 @@ class CustomersApi
         );
     }
 
-    /**
-     * @return Edd
-     */
     public function getCustomerEddScore(
         string $id,
     ): Edd {
@@ -354,16 +361,15 @@ class CustomersApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/edd-score');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Edd::from($data);
     }
 
-    /**
-     * @return CustomerInformation
-     */
     public function getCustomerLifetimeSummaryMetrics(
         string $customerId,
     ): CustomerInformation {
@@ -373,16 +379,15 @@ class CustomersApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/experimental/customers/{customerId}/summary-metrics');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CustomerInformation::from($data);
     }
 
-    /**
-     * @return EddSearchResult
-     */
     public function getEddSearchResult(
         string $id,
         string $searchResultId,
@@ -394,7 +399,9 @@ class CustomersApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/edd-search-results/{searchResultId}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -425,7 +432,9 @@ class CustomersApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/edd-timeline?') . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -437,6 +446,9 @@ class CustomersApi
         );
     }
 
+    /**
+     * @return Paginator<EddTimeline>
+     */
     public function getEddTimelineCollectionPaginator(
         string $id,
         ?int $limit = null,
@@ -460,9 +472,6 @@ class CustomersApi
         );
     }
 
-    /**
-     * @return EddTimeline
-     */
     public function getEddTimelineMessage(
         string $id,
         string $messageId,
@@ -474,16 +483,15 @@ class CustomersApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/edd-timeline/{messageId}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return EddTimeline::from($data);
     }
 
-    /**
-     * @return LeadSource
-     */
     public function getLeadSource(
         string $id,
     ): LeadSource {
@@ -493,16 +501,15 @@ class CustomersApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/lead-source');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return LeadSource::from($data);
     }
 
-    /**
-     * @return CustomerTimeline
-     */
     public function getTimelineMessage(
         string $id,
         string $messageId,
@@ -514,7 +521,9 @@ class CustomersApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/timeline/{messageId}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -538,9 +547,6 @@ class CustomersApi
         $this->client->send($request);
     }
 
-    /**
-     * @return Edd
-     */
     public function patchCustomerEddScore(
         string $id,
         PatchCustomerEddScoreRequest $patchCustomerEddScoreRequest,
@@ -551,16 +557,15 @@ class CustomersApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/edd-score');
 
-        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($patchCustomerEddScoreRequest));
+        $request = new Request('PATCH', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($patchCustomerEddScoreRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Edd::from($data);
     }
 
-    /**
-     * @return Customer
-     */
     public function update(
         string $id,
         Customer $customer,
@@ -571,7 +576,9 @@ class CustomersApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($customer));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($customer));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

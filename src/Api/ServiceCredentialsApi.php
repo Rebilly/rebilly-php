@@ -29,9 +29,6 @@ class ServiceCredentialsApi
     {
     }
 
-    /**
-     * @return ServiceCredential
-     */
     public function create(
         string $type,
         ServiceCredential $serviceCredential,
@@ -42,16 +39,15 @@ class ServiceCredentialsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/service-credentials/{type}');
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($serviceCredential));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($serviceCredential));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ServiceCredentialFactory::from($data);
     }
 
-    /**
-     * @return ServiceCredential
-     */
     public function get(
         string $type,
         string $id,
@@ -63,7 +59,9 @@ class ServiceCredentialsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/service-credentials/{type}/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -94,7 +92,9 @@ class ServiceCredentialsApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/service-credentials/{type}?') . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -106,6 +106,9 @@ class ServiceCredentialsApi
         );
     }
 
+    /**
+     * @return Paginator<ServiceCredential>
+     */
     public function getAllPaginator(
         string $type,
         ?string $filter = null,
@@ -157,7 +160,9 @@ class ServiceCredentialsApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/service-credentials/{type}/{id}/items?') . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -169,6 +174,9 @@ class ServiceCredentialsApi
         );
     }
 
+    /**
+     * @return Paginator<GoogleSpreadsheet>
+     */
     public function getItemsPaginator(
         string $type,
         string $id,
@@ -196,9 +204,6 @@ class ServiceCredentialsApi
         );
     }
 
-    /**
-     * @return ServiceCredential
-     */
     public function update(
         string $type,
         string $id,
@@ -211,7 +216,9 @@ class ServiceCredentialsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/service-credentials/{type}/{id}');
 
-        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($patchServiceCredentialRequest));
+        $request = new Request('PATCH', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($patchServiceCredentialRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

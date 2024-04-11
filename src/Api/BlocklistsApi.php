@@ -26,15 +26,14 @@ class BlocklistsApi
     {
     }
 
-    /**
-     * @return Blocklist
-     */
     public function create(
         Blocklist $blocklist,
     ): Blocklist {
         $uri = '/blocklists';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($blocklist));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($blocklist));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -54,9 +53,6 @@ class BlocklistsApi
         $this->client->send($request);
     }
 
-    /**
-     * @return Blocklist
-     */
     public function get(
         string $id,
     ): Blocklist {
@@ -66,7 +62,9 @@ class BlocklistsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/blocklists/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -92,7 +90,9 @@ class BlocklistsApi
         ];
         $uri = '/blocklists?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -104,6 +104,9 @@ class BlocklistsApi
         );
     }
 
+    /**
+     * @return Paginator<Blocklist>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -125,9 +128,6 @@ class BlocklistsApi
         );
     }
 
-    /**
-     * @return Blocklist
-     */
     public function update(
         string $id,
         Blocklist $blocklist,
@@ -138,7 +138,9 @@ class BlocklistsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/blocklists/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($blocklist));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($blocklist));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

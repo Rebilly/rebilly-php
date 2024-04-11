@@ -24,29 +24,27 @@ class AmlSettingsApi
     {
     }
 
-    /**
-     * @return AmlSettings
-     */
     public function getAmlSettings(): AmlSettings
     {
         $uri = '/aml-settings';
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return AmlSettings::from($data);
     }
 
-    /**
-     * @return AmlSettings
-     */
     public function putAmlSettings(
         AmlSettings $amlSettings,
     ): AmlSettings {
         $uri = '/aml-settings';
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($amlSettings));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($amlSettings));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

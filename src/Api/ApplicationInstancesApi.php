@@ -38,9 +38,6 @@ class ApplicationInstancesApi
         $this->client->send($request);
     }
 
-    /**
-     * @return ApplicationInstance
-     */
     public function get(
         string $applicationId,
     ): ApplicationInstance {
@@ -50,16 +47,15 @@ class ApplicationInstancesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/application-instances/{applicationId}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ApplicationInstance::from($data);
     }
 
-    /**
-     * @return ApplicationInstanceConfiguration
-     */
     public function getConfiguration(
         string $applicationId,
     ): ApplicationInstanceConfiguration {
@@ -69,16 +65,15 @@ class ApplicationInstancesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/application-instances/{applicationId}/configuration');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ApplicationInstanceConfiguration::from($data);
     }
 
-    /**
-     * @return ApplicationInstance
-     */
     public function upsert(
         string $applicationId,
         ApplicationInstance $applicationInstance,
@@ -89,16 +84,15 @@ class ApplicationInstancesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/application-instances/{applicationId}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($applicationInstance));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($applicationInstance));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ApplicationInstance::from($data);
     }
 
-    /**
-     * @return ApplicationInstanceConfiguration
-     */
     public function upsertConfiguration(
         string $applicationId,
         ApplicationInstanceConfiguration $applicationInstanceConfiguration,
@@ -109,7 +103,9 @@ class ApplicationInstancesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/application-instances/{applicationId}/configuration');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($applicationInstanceConfiguration));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($applicationInstanceConfiguration));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

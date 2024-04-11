@@ -26,15 +26,14 @@ class EmailDeliverySettingsApi
     {
     }
 
-    /**
-     * @return EmailDeliverySetting
-     */
     public function create(
         EmailDeliverySetting $emailDeliverySetting,
     ): EmailDeliverySetting {
         $uri = '/email-delivery-settings';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($emailDeliverySetting));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($emailDeliverySetting));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -54,9 +53,6 @@ class EmailDeliverySettingsApi
         $this->client->send($request);
     }
 
-    /**
-     * @return EmailDeliverySetting
-     */
     public function get(
         string $id,
     ): EmailDeliverySetting {
@@ -66,7 +62,9 @@ class EmailDeliverySettingsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/email-delivery-settings/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -92,7 +90,9 @@ class EmailDeliverySettingsApi
         ];
         $uri = '/email-delivery-settings?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -104,6 +104,9 @@ class EmailDeliverySettingsApi
         );
     }
 
+    /**
+     * @return Paginator<EmailDeliverySetting>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -125,9 +128,6 @@ class EmailDeliverySettingsApi
         );
     }
 
-    /**
-     * @return EmailDeliverySetting
-     */
     public function resendVerification(
         string $id,
     ): EmailDeliverySetting {
@@ -137,16 +137,15 @@ class EmailDeliverySettingsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/email-delivery-settings/{id}/resend-email-verification');
 
-        $request = new Request('POST', $uri);
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return EmailDeliverySetting::from($data);
     }
 
-    /**
-     * @return EmailDeliverySetting
-     */
     public function update(
         string $id,
         EmailDeliverySetting $emailDeliverySetting,
@@ -157,16 +156,15 @@ class EmailDeliverySettingsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/email-delivery-settings/{id}');
 
-        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($emailDeliverySetting));
+        $request = new Request('PATCH', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($emailDeliverySetting));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return EmailDeliverySetting::from($data);
     }
 
-    /**
-     * @return EmailDeliverySetting
-     */
     public function verify(
         string $token,
     ): EmailDeliverySetting {
@@ -176,7 +174,9 @@ class EmailDeliverySettingsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/email-delivery-setting-verifications/{token}');
 
-        $request = new Request('PUT', $uri);
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

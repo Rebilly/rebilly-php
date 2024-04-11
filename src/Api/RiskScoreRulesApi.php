@@ -25,58 +25,54 @@ class RiskScoreRulesApi
     {
     }
 
-    /**
-     * @return RiskScoreRules
-     */
     public function getAll(): RiskScoreRules
     {
         $uri = '/risk-score-rules';
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return RiskScoreRules::from($data);
     }
 
-    /**
-     * @return RiskScoreBlocklist
-     */
     public function getAllBlocklistRules(): RiskScoreBlocklist
     {
         $uri = '/risk-score-rules/blocklists';
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return RiskScoreBlocklist::from($data);
     }
 
-    /**
-     * @return RiskScoreBlocklist
-     */
     public function updateRiskScoreBlocklistRules(
         RiskScoreBlocklist $riskScoreBlocklist,
     ): RiskScoreBlocklist {
         $uri = '/risk-score-rules/blocklists';
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($riskScoreBlocklist));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($riskScoreBlocklist));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return RiskScoreBlocklist::from($data);
     }
 
-    /**
-     * @return RiskScoreRules
-     */
     public function updateRiskScoreRules(
         RiskScoreRules $riskScoreRules,
     ): RiskScoreRules {
         $uri = '/risk-score-rules';
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($riskScoreRules));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($riskScoreRules));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

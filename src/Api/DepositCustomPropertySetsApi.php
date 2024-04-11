@@ -26,15 +26,14 @@ class DepositCustomPropertySetsApi
     {
     }
 
-    /**
-     * @return DepositCustomPropertySet
-     */
     public function create(
         DepositCustomPropertySet $depositCustomPropertySet,
     ): DepositCustomPropertySet {
         $uri = '/deposit-custom-property-sets';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($depositCustomPropertySet));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($depositCustomPropertySet));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -54,9 +53,6 @@ class DepositCustomPropertySetsApi
         $this->client->send($request);
     }
 
-    /**
-     * @return DepositCustomPropertySet
-     */
     public function get(
         string $id,
     ): DepositCustomPropertySet {
@@ -66,7 +62,9 @@ class DepositCustomPropertySetsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/deposit-custom-property-sets/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -90,7 +88,9 @@ class DepositCustomPropertySetsApi
         ];
         $uri = '/deposit-custom-property-sets?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -102,6 +102,9 @@ class DepositCustomPropertySetsApi
         );
     }
 
+    /**
+     * @return Paginator<DepositCustomPropertySet>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -121,9 +124,6 @@ class DepositCustomPropertySetsApi
         );
     }
 
-    /**
-     * @return DepositCustomPropertySet
-     */
     public function update(
         string $id,
         DepositCustomPropertySet $depositCustomPropertySet,
@@ -134,7 +134,9 @@ class DepositCustomPropertySetsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/deposit-custom-property-sets/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($depositCustomPropertySet));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($depositCustomPropertySet));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

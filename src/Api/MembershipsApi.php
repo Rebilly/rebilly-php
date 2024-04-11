@@ -41,9 +41,6 @@ class MembershipsApi
         $this->client->send($request);
     }
 
-    /**
-     * @return Membership
-     */
     public function get(
         string $organizationId,
         string $userId,
@@ -55,7 +52,9 @@ class MembershipsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/memberships/{organizationId}/{userId}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -79,7 +78,9 @@ class MembershipsApi
         ];
         $uri = '/memberships?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -91,6 +92,9 @@ class MembershipsApi
         );
     }
 
+    /**
+     * @return Paginator<Membership>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -110,9 +114,6 @@ class MembershipsApi
         );
     }
 
-    /**
-     * @return Membership
-     */
     public function update(
         string $organizationId,
         string $userId,
@@ -125,7 +126,9 @@ class MembershipsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/memberships/{organizationId}/{userId}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($membership));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($membership));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

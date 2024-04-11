@@ -27,15 +27,14 @@ class PlansApi
     {
     }
 
-    /**
-     * @return Plan
-     */
     public function create(
         Plan $plan,
     ): Plan {
         $uri = '/plans';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($plan));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($plan));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -55,9 +54,6 @@ class PlansApi
         $this->client->send($request);
     }
 
-    /**
-     * @return Plan
-     */
     public function get(
         string $id,
     ): Plan {
@@ -67,7 +63,9 @@ class PlansApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/plans/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -93,7 +91,9 @@ class PlansApi
         ];
         $uri = '/plans?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -105,6 +105,9 @@ class PlansApi
         );
     }
 
+    /**
+     * @return Paginator<Plan>
+     */
     public function getAllPaginator(
         ?string $filter = null,
         ?array $sort = null,
@@ -126,9 +129,6 @@ class PlansApi
         );
     }
 
-    /**
-     * @return Plan
-     */
     public function update(
         string $id,
         Plan $plan,
@@ -139,7 +139,9 @@ class PlansApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/plans/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($plan));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($plan));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

@@ -28,24 +28,20 @@ class ApplicationsApi
     {
     }
 
-    /**
-     * @return Application
-     */
     public function create(
         Application $application,
     ): Application {
         $uri = '/applications';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($application));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($application));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Application::from($data);
     }
 
-    /**
-     * @return UserApplication
-     */
     public function get(
         string $id,
     ): UserApplication {
@@ -55,7 +51,9 @@ class ApplicationsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/applications/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -85,7 +83,9 @@ class ApplicationsApi
         ];
         $uri = '/applications?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -97,6 +97,9 @@ class ApplicationsApi
         );
     }
 
+    /**
+     * @return Paginator<UserApplication>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -122,9 +125,6 @@ class ApplicationsApi
         );
     }
 
-    /**
-     * @return OwnerApplicationInstance
-     */
     public function getInstance(
         string $id,
         string $organizationId,
@@ -136,7 +136,9 @@ class ApplicationsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/applications/{id}/instances/{organizationId}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -161,7 +163,9 @@ class ApplicationsApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/applications/{id}/instances?') . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -173,6 +177,9 @@ class ApplicationsApi
         );
     }
 
+    /**
+     * @return Paginator<OwnerApplicationInstance>
+     */
     public function getInstancesPaginator(
         string $id,
         ?int $limit = null,

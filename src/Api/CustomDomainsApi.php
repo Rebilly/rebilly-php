@@ -26,15 +26,14 @@ class CustomDomainsApi
     {
     }
 
-    /**
-     * @return CustomDomain
-     */
     public function create(
         CustomDomain $customDomain,
     ): CustomDomain {
         $uri = '/custom-domains';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($customDomain));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($customDomain));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -54,9 +53,6 @@ class CustomDomainsApi
         $this->client->send($request);
     }
 
-    /**
-     * @return CustomDomain
-     */
     public function get(
         string $domain,
     ): CustomDomain {
@@ -66,7 +62,9 @@ class CustomDomainsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/custom-domains/{domain}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -92,7 +90,9 @@ class CustomDomainsApi
         ];
         $uri = '/custom-domains?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -104,6 +104,9 @@ class CustomDomainsApi
         );
     }
 
+    /**
+     * @return Paginator<CustomDomain>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,

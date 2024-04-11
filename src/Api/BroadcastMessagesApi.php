@@ -26,15 +26,14 @@ class BroadcastMessagesApi
     {
     }
 
-    /**
-     * @return BroadcastMessage
-     */
     public function create(
         BroadcastMessage $broadcastMessage,
     ): BroadcastMessage {
         $uri = '/broadcast-messages';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($broadcastMessage));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($broadcastMessage));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -54,9 +53,6 @@ class BroadcastMessagesApi
         $this->client->send($request);
     }
 
-    /**
-     * @return BroadcastMessage
-     */
     public function get(
         string $id,
     ): BroadcastMessage {
@@ -66,7 +62,9 @@ class BroadcastMessagesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/broadcast-messages/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -90,7 +88,9 @@ class BroadcastMessagesApi
         ];
         $uri = '/broadcast-messages?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -102,6 +102,9 @@ class BroadcastMessagesApi
         );
     }
 
+    /**
+     * @return Paginator<BroadcastMessage>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -121,9 +124,6 @@ class BroadcastMessagesApi
         );
     }
 
-    /**
-     * @return BroadcastMessage
-     */
     public function update(
         string $id,
         BroadcastMessage $broadcastMessage,
@@ -134,7 +134,9 @@ class BroadcastMessagesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/broadcast-messages/{id}');
 
-        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($broadcastMessage));
+        $request = new Request('PATCH', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($broadcastMessage));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

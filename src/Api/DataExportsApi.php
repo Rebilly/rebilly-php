@@ -40,9 +40,6 @@ class DataExportsApi
         $this->client->send($request);
     }
 
-    /**
-     * @return DataExport
-     */
     public function get(
         string $id,
         ?string $expand = null,
@@ -56,7 +53,9 @@ class DataExportsApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/experimental/data-exports/{id}?') . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -86,7 +85,9 @@ class DataExportsApi
         ];
         $uri = '/experimental/data-exports?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -98,6 +99,9 @@ class DataExportsApi
         );
     }
 
+    /**
+     * @return Paginator<DataExport>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -123,9 +127,6 @@ class DataExportsApi
         );
     }
 
-    /**
-     * @return DataExport
-     */
     public function queue(
         DataExport $dataExport,
         ?string $expand = null,
@@ -135,16 +136,15 @@ class DataExportsApi
         ];
         $uri = '/experimental/data-exports?' . http_build_query($queryParams);
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($dataExport));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($dataExport));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return DataExportFactory::from($data);
     }
 
-    /**
-     * @return DataExport
-     */
     public function update(
         string $id,
         DataExport $dataExport,
@@ -159,7 +159,9 @@ class DataExportsApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/experimental/data-exports/{id}?') . http_build_query($queryParams);
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($dataExport));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($dataExport));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

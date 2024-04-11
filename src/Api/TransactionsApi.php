@@ -32,9 +32,6 @@ class TransactionsApi
     {
     }
 
-    /**
-     * @return Transaction
-     */
     public function create(
         PostTransactionRequest $postTransactionRequest,
         ?string $expand = null,
@@ -44,16 +41,15 @@ class TransactionsApi
         ];
         $uri = '/transactions?' . http_build_query($queryParams);
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($postTransactionRequest));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($postTransactionRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Transaction::from($data);
     }
 
-    /**
-     * @return TransactionTimeline
-     */
     public function createTimelineComment(
         string $id,
         TransactionTimeline $transactionTimeline,
@@ -64,7 +60,9 @@ class TransactionsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/transactions/{id}/timeline');
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($transactionTimeline));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($transactionTimeline));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -86,9 +84,6 @@ class TransactionsApi
         $this->client->send($request);
     }
 
-    /**
-     * @return Transaction
-     */
     public function get(
         string $id,
         ?string $expand = null,
@@ -102,7 +97,9 @@ class TransactionsApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/transactions/{id}?') . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -130,7 +127,9 @@ class TransactionsApi
         ];
         $uri = '/transactions?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -142,6 +141,9 @@ class TransactionsApi
         );
     }
 
+    /**
+     * @return Paginator<Transaction>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -189,7 +191,9 @@ class TransactionsApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/transactions/{id}/timeline?') . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -201,6 +205,9 @@ class TransactionsApi
         );
     }
 
+    /**
+     * @return Paginator<TransactionTimeline>
+     */
     public function getAllTimelineMessagesPaginator(
         string $id,
         ?int $limit = null,
@@ -224,9 +231,6 @@ class TransactionsApi
         );
     }
 
-    /**
-     * @return TransactionTimeline
-     */
     public function getTimelineMessage(
         string $id,
         string $messageId,
@@ -238,16 +242,15 @@ class TransactionsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/transactions/{id}/timeline/{messageId}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return TransactionTimeline::from($data);
     }
 
-    /**
-     * @return Transaction
-     */
     public function patch(
         string $id,
         PatchTransactionRequest $patchTransactionRequest,
@@ -258,16 +261,15 @@ class TransactionsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/transactions/{id}');
 
-        $request = new Request('PATCH', $uri, body: Utils::jsonEncode($patchTransactionRequest));
+        $request = new Request('PATCH', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($patchTransactionRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Transaction::from($data);
     }
 
-    /**
-     * @return TransactionQuery
-     */
     public function query(
         string $id,
     ): TransactionQuery {
@@ -277,16 +279,15 @@ class TransactionsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/transactions/{id}/query');
 
-        $request = new Request('POST', $uri);
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return TransactionQuery::from($data);
     }
 
-    /**
-     * @return Transaction
-     */
     public function refund(
         string $id,
         TransactionRefund $transactionRefund,
@@ -297,16 +298,15 @@ class TransactionsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/transactions/{id}/refund');
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($transactionRefund));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($transactionRefund));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Transaction::from($data);
     }
 
-    /**
-     * @return Transaction
-     */
     public function update(
         string $id,
         TransactionUpdate $transactionUpdate,
@@ -317,7 +317,9 @@ class TransactionsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/transactions/{id}/update');
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($transactionUpdate));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($transactionUpdate));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

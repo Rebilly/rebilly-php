@@ -29,15 +29,14 @@ class FilesApi
     {
     }
 
-    /**
-     * @return Attachment
-     */
     public function attach(
         Attachment $attachment,
     ): Attachment {
         $uri = '/attachments';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($attachment));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($attachment));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -70,9 +69,6 @@ class FilesApi
         $this->client->send($request);
     }
 
-    /**
-     * @return StreamInterface
-     */
     public function download(
         string $id,
         ?string $imageSize = null,
@@ -113,9 +109,6 @@ class FilesApi
         return $response->getBody();
     }
 
-    /**
-     * @return File
-     */
     public function get(
         string $id,
     ): File {
@@ -125,7 +118,9 @@ class FilesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/files/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -153,7 +148,9 @@ class FilesApi
         ];
         $uri = '/files?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -165,6 +162,9 @@ class FilesApi
         );
     }
 
+    /**
+     * @return Paginator<File>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -211,7 +211,9 @@ class FilesApi
         ];
         $uri = '/attachments?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -223,6 +225,9 @@ class FilesApi
         );
     }
 
+    /**
+     * @return Paginator<Attachment>
+     */
     public function getAllAttachmentsPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -248,9 +253,6 @@ class FilesApi
         );
     }
 
-    /**
-     * @return Attachment
-     */
     public function getAttachment(
         string $id,
     ): Attachment {
@@ -260,16 +262,15 @@ class FilesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/attachments/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Attachment::from($data);
     }
 
-    /**
-     * @return File
-     */
     public function update(
         string $id,
         File $file,
@@ -280,16 +281,15 @@ class FilesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/files/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($file));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($file));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return File::from($data);
     }
 
-    /**
-     * @return Attachment
-     */
     public function updateAttachment(
         string $id,
         Attachment $attachment,
@@ -300,22 +300,23 @@ class FilesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/attachments/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($attachment));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($attachment));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Attachment::from($data);
     }
 
-    /**
-     * @return File
-     */
     public function upload(
         PostFileRequest $postFileRequest,
     ): File {
         $uri = '/files';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($postFileRequest));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($postFileRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

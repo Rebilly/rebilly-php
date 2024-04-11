@@ -27,24 +27,20 @@ class PaymentTokensApi
     {
     }
 
-    /**
-     * @return CompositeToken
-     */
     public function create(
         CompositeToken $compositeToken,
     ): CompositeToken {
         $uri = '/tokens';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($compositeToken));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($compositeToken));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CompositeTokenFactory::from($data);
     }
 
-    /**
-     * @return CompositeToken
-     */
     public function get(
         string $token,
     ): CompositeToken {
@@ -54,7 +50,9 @@ class PaymentTokensApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/tokens/{token}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -74,7 +72,9 @@ class PaymentTokensApi
         ];
         $uri = '/tokens?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -86,6 +86,9 @@ class PaymentTokensApi
         );
     }
 
+    /**
+     * @return Paginator<CompositeToken>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,

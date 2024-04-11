@@ -26,24 +26,20 @@ class JournalAccountsApi
     {
     }
 
-    /**
-     * @return JournalAccount
-     */
     public function createAccount(
         JournalAccount $journalAccount,
     ): JournalAccount {
         $uri = '/journal-accounts';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($journalAccount));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($journalAccount));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return JournalAccount::from($data);
     }
 
-    /**
-     * @return JournalAccount
-     */
     public function getAccount(
         string $id,
     ): JournalAccount {
@@ -53,7 +49,9 @@ class JournalAccountsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/journal-accounts/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -77,7 +75,9 @@ class JournalAccountsApi
         ];
         $uri = '/journal-accounts?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -89,6 +89,9 @@ class JournalAccountsApi
         );
     }
 
+    /**
+     * @return Paginator<JournalAccount>
+     */
     public function getAllAccountsPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -108,9 +111,6 @@ class JournalAccountsApi
         );
     }
 
-    /**
-     * @return JournalAccount
-     */
     public function updateAccount(
         string $id,
         JournalAccount $journalAccount,
@@ -121,7 +121,9 @@ class JournalAccountsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/journal-accounts/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($journalAccount));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($journalAccount));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

@@ -43,9 +43,6 @@ class ExternalIdentifiersApi
         $this->client->send($request);
     }
 
-    /**
-     * @return ExternalIdentifier
-     */
     public function get(
         string $resource,
         string $resourceId,
@@ -59,7 +56,9 @@ class ExternalIdentifiersApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/{resource}/{resourceId}/external-identifiers/{service}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -83,7 +82,9 @@ class ExternalIdentifiersApi
         ];
         $uri = '/external-identifiers?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -95,6 +96,9 @@ class ExternalIdentifiersApi
         );
     }
 
+    /**
+     * @return Paginator<ExternalIdentifier>
+     */
     public function getAllPaginator(
         ?string $filter = null,
         ?array $sort = null,
@@ -131,9 +135,6 @@ class ExternalIdentifiersApi
         $this->client->send($request);
     }
 
-    /**
-     * @return ExternalIdentifier
-     */
     public function update(
         string $resource,
         string $resourceId,
@@ -148,7 +149,9 @@ class ExternalIdentifiersApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/{resource}/{resourceId}/external-identifiers/{service}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($externalIdentifier));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($externalIdentifier));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

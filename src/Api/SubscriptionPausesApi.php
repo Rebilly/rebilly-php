@@ -39,9 +39,6 @@ class SubscriptionPausesApi
         $this->client->send($request);
     }
 
-    /**
-     * @return SubscriptionPause
-     */
     public function get(
         string $id,
     ): SubscriptionPause {
@@ -51,7 +48,9 @@ class SubscriptionPausesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscription-pauses/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -75,7 +74,9 @@ class SubscriptionPausesApi
         ];
         $uri = '/subscription-pauses?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -87,6 +88,9 @@ class SubscriptionPausesApi
         );
     }
 
+    /**
+     * @return Paginator<SubscriptionPause>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -106,24 +110,20 @@ class SubscriptionPausesApi
         );
     }
 
-    /**
-     * @return SubscriptionPause
-     */
     public function pause(
         SubscriptionPause $subscriptionPause,
     ): SubscriptionPause {
         $uri = '/subscription-pauses';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($subscriptionPause));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($subscriptionPause));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return SubscriptionPause::from($data);
     }
 
-    /**
-     * @return SubscriptionPause
-     */
     public function update(
         string $id,
         SubscriptionPause $subscriptionPause,
@@ -134,7 +134,9 @@ class SubscriptionPausesApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscription-pauses/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($subscriptionPause));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($subscriptionPause));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

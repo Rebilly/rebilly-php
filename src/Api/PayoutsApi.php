@@ -25,15 +25,14 @@ class PayoutsApi
     {
     }
 
-    /**
-     * @return Transaction
-     */
     public function create(
         PostPayoutRequest $postPayoutRequest,
     ): Transaction {
         $uri = '/payouts';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($postPayoutRequest));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($postPayoutRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

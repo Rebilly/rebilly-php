@@ -26,15 +26,14 @@ class ProductsApi
     {
     }
 
-    /**
-     * @return Product
-     */
     public function create(
         Product $product,
     ): Product {
         $uri = '/products';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($product));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($product));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -54,9 +53,6 @@ class ProductsApi
         $this->client->send($request);
     }
 
-    /**
-     * @return Product
-     */
     public function get(
         string $id,
     ): Product {
@@ -66,7 +62,9 @@ class ProductsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/products/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -92,7 +90,9 @@ class ProductsApi
         ];
         $uri = '/products?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -104,6 +104,9 @@ class ProductsApi
         );
     }
 
+    /**
+     * @return Paginator<Product>
+     */
     public function getAllPaginator(
         ?string $filter = null,
         ?array $sort = null,
@@ -125,9 +128,6 @@ class ProductsApi
         );
     }
 
-    /**
-     * @return Product
-     */
     public function update(
         string $id,
         Product $product,
@@ -138,7 +138,9 @@ class ProductsApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/products/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($product));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($product));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

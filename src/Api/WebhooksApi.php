@@ -26,24 +26,20 @@ class WebhooksApi
     {
     }
 
-    /**
-     * @return GlobalWebhook
-     */
     public function create(
         GlobalWebhook $globalWebhook,
     ): GlobalWebhook {
         $uri = '/webhooks';
 
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($globalWebhook));
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($globalWebhook));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return GlobalWebhook::from($data);
     }
 
-    /**
-     * @return GlobalWebhook
-     */
     public function get(
         string $id,
     ): GlobalWebhook {
@@ -53,7 +49,9 @@ class WebhooksApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/webhooks/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -75,7 +73,9 @@ class WebhooksApi
         ];
         $uri = '/webhooks?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -87,6 +87,9 @@ class WebhooksApi
         );
     }
 
+    /**
+     * @return Paginator<GlobalWebhook>
+     */
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -104,9 +107,6 @@ class WebhooksApi
         );
     }
 
-    /**
-     * @return GlobalWebhook
-     */
     public function update(
         string $id,
         GlobalWebhook $globalWebhook,
@@ -117,7 +117,9 @@ class WebhooksApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/webhooks/{id}');
 
-        $request = new Request('PUT', $uri, body: Utils::jsonEncode($globalWebhook));
+        $request = new Request('PUT', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($globalWebhook));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

@@ -50,7 +50,9 @@ class TrackingApi
         ];
         $uri = '/tracking/api?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -62,6 +64,9 @@ class TrackingApi
         );
     }
 
+    /**
+     * @return Paginator<ApiTracking>
+     */
     public function getAllApiLogsPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -104,7 +109,9 @@ class TrackingApi
         ];
         $uri = '/tracking/lists?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -116,6 +123,9 @@ class TrackingApi
         );
     }
 
+    /**
+     * @return Paginator<ValueList>
+     */
     public function getAllListsChangesHistoryPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -156,7 +166,9 @@ class TrackingApi
         ];
         $uri = '/tracking/taxes?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -168,6 +180,9 @@ class TrackingApi
         );
     }
 
+    /**
+     * @return Paginator<TaxTracking>
+     */
     public function getAllTaxTrackingLogsPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -208,7 +223,9 @@ class TrackingApi
         ];
         $uri = '/tracking/webhooks?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -220,6 +237,9 @@ class TrackingApi
         );
     }
 
+    /**
+     * @return Paginator<WebhookTracking>
+     */
     public function getAllWebhookTrackingLogsPaginator(
         ?int $limit = null,
         ?int $offset = null,
@@ -241,9 +261,6 @@ class TrackingApi
         );
     }
 
-    /**
-     * @return ApiTracking
-     */
     public function getApiLog(
         string $id,
     ): ApiTracking {
@@ -253,16 +270,15 @@ class TrackingApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/tracking/api/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ApiTracking::from($data);
     }
 
-    /**
-     * @return TaxTracking
-     */
     public function getTaxTrackingLog(
         string $id,
     ): TaxTracking {
@@ -272,16 +288,15 @@ class TrackingApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/tracking/taxes/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return TaxTracking::from($data);
     }
 
-    /**
-     * @return WebhookTracking
-     */
     public function getWebhookTrackingLog(
         string $id,
     ): WebhookTracking {
@@ -291,7 +306,9 @@ class TrackingApi
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/tracking/webhooks/{id}');
 
-        $request = new Request('GET', $uri);
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
