@@ -2,4 +2,4 @@
 "@rebilly/client-php": patch
 ---
 
-SDK Generator updated
+Improve type hints for API classes
