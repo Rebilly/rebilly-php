@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-interface TransactionPaymentInstrument
+use JsonSerializable;
+
+interface TransactionPaymentInstrument extends JsonSerializable
 {
 }

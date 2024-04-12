@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class SchedulingMethodDateInterval implements InvoiceRetryScheduleInstruction, SettlementPeriod, ScheduleInstruction, ReminderScheduleInstruction, JsonSerializable
+class SchedulingMethodDateInterval implements InvoiceRetryScheduleInstruction, SettlementPeriod, ScheduleInstruction, ReminderScheduleInstruction
 {
     public const UNIT_SECOND = 'second';
 

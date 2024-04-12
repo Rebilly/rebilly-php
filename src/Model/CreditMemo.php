@@ -277,7 +277,12 @@ class CreditMemo implements JsonSerializable
             $data['allocations'] = $this->fields['allocations']?->jsonSerialize();
         }
         if (array_key_exists('items', $this->fields)) {
-            $data['items'] = $this->fields['items'];
+            $data['items'] = $this->fields['items'] !== null
+                ? array_map(
+                    static fn (CreditMemoItems $creditMemoItems) => $creditMemoItems->jsonSerialize(),
+                    $this->fields['items'],
+                )
+                : null;
         }
         if (array_key_exists('status', $this->fields)) {
             $data['status'] = $this->fields['status'];
@@ -319,7 +324,12 @@ class CreditMemo implements JsonSerializable
             $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
 
         return $data;

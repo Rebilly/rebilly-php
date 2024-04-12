@@ -200,10 +200,15 @@ class Coupon implements JsonSerializable
             $data['id'] = $this->fields['id'];
         }
         if (array_key_exists('discount', $this->fields)) {
-            $data['discount'] = $this->fields['discount']?->jsonSerialize();
+            $data['discount'] = $this->fields['discount']->jsonSerialize();
         }
         if (array_key_exists('restrictions', $this->fields)) {
-            $data['restrictions'] = $this->fields['restrictions'];
+            $data['restrictions'] = $this->fields['restrictions'] !== null
+                ? array_map(
+                    static fn (CouponRestriction $couponRestriction) => $couponRestriction->jsonSerialize(),
+                    $this->fields['restrictions'],
+                )
+                : null;
         }
         if (array_key_exists('redemptionsCount', $this->fields)) {
             $data['redemptionsCount'] = $this->fields['redemptionsCount'];
@@ -215,7 +220,7 @@ class Coupon implements JsonSerializable
             $data['description'] = $this->fields['description'];
         }
         if (array_key_exists('issuedTime', $this->fields)) {
-            $data['issuedTime'] = $this->fields['issuedTime']?->format(DateTimeInterface::RFC3339);
+            $data['issuedTime'] = $this->fields['issuedTime']->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('expiredTime', $this->fields)) {
             $data['expiredTime'] = $this->fields['expiredTime']?->format(DateTimeInterface::RFC3339);
@@ -230,7 +235,12 @@ class Coupon implements JsonSerializable
             $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
 
         return $data;

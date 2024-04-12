@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-interface TimelineAction
+use JsonSerializable;
+
+interface TimelineAction extends JsonSerializable
 {
     public function getAction(): string;
 }

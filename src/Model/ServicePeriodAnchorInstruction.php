@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-interface ServicePeriodAnchorInstruction
+use JsonSerializable;
+
+interface ServicePeriodAnchorInstruction extends JsonSerializable
 {
     public function getMethod(): string;
 }

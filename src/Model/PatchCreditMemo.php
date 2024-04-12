@@ -147,7 +147,12 @@ class PatchCreditMemo implements JsonSerializable
             $data['allocations'] = $this->fields['allocations']?->jsonSerialize();
         }
         if (array_key_exists('items', $this->fields)) {
-            $data['items'] = $this->fields['items'];
+            $data['items'] = $this->fields['items'] !== null
+                ? array_map(
+                    static fn (PatchCreditMemoItems $patchCreditMemoItems) => $patchCreditMemoItems->jsonSerialize(),
+                    $this->fields['items'],
+                )
+                : null;
         }
         if (array_key_exists('reason', $this->fields)) {
             $data['reason'] = $this->fields['reason'];

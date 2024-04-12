@@ -267,7 +267,12 @@ class JournalRecord implements JsonSerializable
             $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
 
         return $data;

@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class ReadyToPayAmount implements PostReadyToPay, JsonSerializable
+class ReadyToPayAmount implements PostReadyToPay
 {
     private array $fields = [];
 
@@ -131,7 +129,7 @@ class ReadyToPayAmount implements PostReadyToPay, JsonSerializable
             $data['billingAddress'] = $this->fields['billingAddress']?->jsonSerialize();
         }
         if (array_key_exists('riskMetadata', $this->fields)) {
-            $data['riskMetadata'] = $this->fields['riskMetadata']?->jsonSerialize();
+            $data['riskMetadata'] = $this->fields['riskMetadata']->jsonSerialize();
         }
 
         return $data;

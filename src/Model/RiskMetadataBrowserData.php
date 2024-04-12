@@ -39,6 +39,9 @@ class RiskMetadataBrowserData implements JsonSerializable
         if (array_key_exists('timeZoneOffset', $data)) {
             $this->setTimeZoneOffset($data['timeZoneOffset']);
         }
+        if (array_key_exists('isAdBlockEnabled', $data)) {
+            $this->setIsAdBlockEnabled($data['isAdBlockEnabled']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -118,6 +121,18 @@ class RiskMetadataBrowserData implements JsonSerializable
         return $this;
     }
 
+    public function getIsAdBlockEnabled(): ?bool
+    {
+        return $this->fields['isAdBlockEnabled'] ?? null;
+    }
+
+    public function setIsAdBlockEnabled(null|bool $isAdBlockEnabled): static
+    {
+        $this->fields['isAdBlockEnabled'] = $isAdBlockEnabled;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -138,6 +153,9 @@ class RiskMetadataBrowserData implements JsonSerializable
         }
         if (array_key_exists('timeZoneOffset', $this->fields)) {
             $data['timeZoneOffset'] = $this->fields['timeZoneOffset'];
+        }
+        if (array_key_exists('isAdBlockEnabled', $this->fields)) {
+            $data['isAdBlockEnabled'] = $this->fields['isAdBlockEnabled'];
         }
 
         return $data;

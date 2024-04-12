@@ -82,10 +82,20 @@ class Integration implements JsonSerializable
             $data['count'] = $this->fields['count'];
         }
         if (array_key_exists('configurations', $this->fields)) {
-            $data['configurations'] = $this->fields['configurations'];
+            $data['configurations'] = $this->fields['configurations'] !== null
+                ? array_map(
+                    static fn (IntegrationConfigurations $integrationConfigurations) => $integrationConfigurations->jsonSerialize(),
+                    $this->fields['configurations'],
+                )
+                : null;
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
 
         return $data;

@@ -60,7 +60,10 @@ class RuleActionOfferPurchaseBump extends RuleAction
     {
         $data = [];
         if (array_key_exists('bumpOffers', $this->fields)) {
-            $data['bumpOffers'] = $this->fields['bumpOffers'];
+            $data['bumpOffers'] = array_map(
+                static fn (RuleActionOfferPurchaseBumpBumpOffers $ruleActionOfferPurchaseBumpBumpOffers) => $ruleActionOfferPurchaseBumpBumpOffers->jsonSerialize(),
+                $this->fields['bumpOffers'],
+            );
         }
 
         return parent::jsonSerialize() + $data;

@@ -336,52 +336,52 @@ class RiskScoreRules implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('isProxy', $this->fields)) {
-            $data['isProxy'] = $this->fields['isProxy']?->jsonSerialize();
+            $data['isProxy'] = $this->fields['isProxy']->jsonSerialize();
         }
         if (array_key_exists('isVpn', $this->fields)) {
-            $data['isVpn'] = $this->fields['isVpn']?->jsonSerialize();
+            $data['isVpn'] = $this->fields['isVpn']->jsonSerialize();
         }
         if (array_key_exists('isTor', $this->fields)) {
-            $data['isTor'] = $this->fields['isTor']?->jsonSerialize();
+            $data['isTor'] = $this->fields['isTor']->jsonSerialize();
         }
         if (array_key_exists('isHosting', $this->fields)) {
-            $data['isHosting'] = $this->fields['isHosting']?->jsonSerialize();
+            $data['isHosting'] = $this->fields['isHosting']->jsonSerialize();
         }
         if (array_key_exists('hasMismatchedBillingAddressCountry', $this->fields)) {
-            $data['hasMismatchedBillingAddressCountry'] = $this->fields['hasMismatchedBillingAddressCountry']?->jsonSerialize();
+            $data['hasMismatchedBillingAddressCountry'] = $this->fields['hasMismatchedBillingAddressCountry']->jsonSerialize();
         }
         if (array_key_exists('hasMismatchedBankCountry', $this->fields)) {
-            $data['hasMismatchedBankCountry'] = $this->fields['hasMismatchedBankCountry']?->jsonSerialize();
+            $data['hasMismatchedBankCountry'] = $this->fields['hasMismatchedBankCountry']->jsonSerialize();
         }
         if (array_key_exists('hasMismatchedTimeZone', $this->fields)) {
-            $data['hasMismatchedTimeZone'] = $this->fields['hasMismatchedTimeZone']?->jsonSerialize();
+            $data['hasMismatchedTimeZone'] = $this->fields['hasMismatchedTimeZone']->jsonSerialize();
         }
         if (array_key_exists('hasMismatchedHolderName', $this->fields)) {
-            $data['hasMismatchedHolderName'] = $this->fields['hasMismatchedHolderName']?->jsonSerialize();
+            $data['hasMismatchedHolderName'] = $this->fields['hasMismatchedHolderName']->jsonSerialize();
         }
         if (array_key_exists('hasFakeName', $this->fields)) {
-            $data['hasFakeName'] = $this->fields['hasFakeName']?->jsonSerialize();
+            $data['hasFakeName'] = $this->fields['hasFakeName']->jsonSerialize();
         }
         if (array_key_exists('isHighRiskCountry', $this->fields)) {
-            $data['isHighRiskCountry'] = $this->fields['isHighRiskCountry']?->jsonSerialize();
+            $data['isHighRiskCountry'] = $this->fields['isHighRiskCountry']->jsonSerialize();
         }
         if (array_key_exists('paymentInstrumentVelocity', $this->fields)) {
-            $data['paymentInstrumentVelocity'] = $this->fields['paymentInstrumentVelocity']?->jsonSerialize();
+            $data['paymentInstrumentVelocity'] = $this->fields['paymentInstrumentVelocity']->jsonSerialize();
         }
         if (array_key_exists('declinedPaymentInstrumentVelocity', $this->fields)) {
-            $data['declinedPaymentInstrumentVelocity'] = $this->fields['declinedPaymentInstrumentVelocity']?->jsonSerialize();
+            $data['declinedPaymentInstrumentVelocity'] = $this->fields['declinedPaymentInstrumentVelocity']->jsonSerialize();
         }
         if (array_key_exists('deviceVelocity', $this->fields)) {
-            $data['deviceVelocity'] = $this->fields['deviceVelocity']?->jsonSerialize();
+            $data['deviceVelocity'] = $this->fields['deviceVelocity']->jsonSerialize();
         }
         if (array_key_exists('ipVelocity', $this->fields)) {
-            $data['ipVelocity'] = $this->fields['ipVelocity']?->jsonSerialize();
+            $data['ipVelocity'] = $this->fields['ipVelocity']->jsonSerialize();
         }
         if (array_key_exists('emailVelocity', $this->fields)) {
-            $data['emailVelocity'] = $this->fields['emailVelocity']?->jsonSerialize();
+            $data['emailVelocity'] = $this->fields['emailVelocity']->jsonSerialize();
         }
         if (array_key_exists('billingAddressVelocity', $this->fields)) {
-            $data['billingAddressVelocity'] = $this->fields['billingAddressVelocity']?->jsonSerialize();
+            $data['billingAddressVelocity'] = $this->fields['billingAddressVelocity']->jsonSerialize();
         }
 
         return $data;

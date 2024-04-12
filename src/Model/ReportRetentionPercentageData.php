@@ -94,7 +94,12 @@ class ReportRetentionPercentageData implements JsonSerializable
             $data['subscriptionsCount'] = $this->fields['subscriptionsCount'];
         }
         if (array_key_exists('periods', $this->fields)) {
-            $data['periods'] = $this->fields['periods'];
+            $data['periods'] = $this->fields['periods'] !== null
+                ? array_map(
+                    static fn (ReportRetentionPercentageDataPeriods $reportRetentionPercentageDataPeriods) => $reportRetentionPercentageDataPeriods->jsonSerialize(),
+                    $this->fields['periods'],
+                )
+                : null;
         }
 
         return $data;

@@ -142,7 +142,12 @@ class CouponRedemption implements JsonSerializable
             $data['customerId'] = $this->fields['customerId'];
         }
         if (array_key_exists('additionalRestrictions', $this->fields)) {
-            $data['additionalRestrictions'] = $this->fields['additionalRestrictions'];
+            $data['additionalRestrictions'] = $this->fields['additionalRestrictions'] !== null
+                ? array_map(
+                    static fn (RedemptionRestriction $redemptionRestriction) => $redemptionRestriction->jsonSerialize(),
+                    $this->fields['additionalRestrictions'],
+                )
+                : null;
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
@@ -154,7 +159,12 @@ class CouponRedemption implements JsonSerializable
             $data['canceledTime'] = $this->fields['canceledTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
 
         return $data;

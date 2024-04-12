@@ -15,9 +15,8 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use JsonSerializable;
 
-class PayPalAccount implements PaymentInstrument, PostPaymentInstrumentRequest, JsonSerializable
+class PayPalAccount implements PaymentInstrument, PostPaymentInstrumentRequest
 {
     public const STATUS_INACTIVE = 'inactive';
 
@@ -222,7 +221,7 @@ class PayPalAccount implements PaymentInstrument, PostPaymentInstrumentRequest, 
             $data['customerId'] = $this->fields['customerId'];
         }
         if (array_key_exists('billingAddress', $this->fields)) {
-            $data['billingAddress'] = $this->fields['billingAddress']?->jsonSerialize();
+            $data['billingAddress'] = $this->fields['billingAddress']->jsonSerialize();
         }
         if (array_key_exists('username', $this->fields)) {
             $data['username'] = $this->fields['username'];
@@ -252,7 +251,12 @@ class PayPalAccount implements PaymentInstrument, PostPaymentInstrumentRequest, 
             $data['revision'] = $this->fields['revision'];
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
         if (array_key_exists('_embedded', $this->fields)) {
             $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();

@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-interface AmountAdjustmentInstructionPartialAfterApprovalPolicy
+use JsonSerializable;
+
+interface AmountAdjustmentInstructionPartialAfterApprovalPolicy extends JsonSerializable
 {
     public function getMethod(): string;
 }

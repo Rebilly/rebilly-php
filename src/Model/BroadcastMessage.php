@@ -177,13 +177,16 @@ class BroadcastMessage implements JsonSerializable
             $data['title'] = $this->fields['title'];
         }
         if (array_key_exists('messages', $this->fields)) {
-            $data['messages'] = $this->fields['messages'];
+            $data['messages'] = array_map(
+                static fn (BroadcastMessageMessages $broadcastMessageMessages) => $broadcastMessageMessages->jsonSerialize(),
+                $this->fields['messages'],
+            );
         }
         if (array_key_exists('splitTestStartTime', $this->fields)) {
             $data['splitTestStartTime'] = $this->fields['splitTestStartTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('startSendingTime', $this->fields)) {
-            $data['startSendingTime'] = $this->fields['startSendingTime']?->format(DateTimeInterface::RFC3339);
+            $data['startSendingTime'] = $this->fields['startSendingTime']->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('status', $this->fields)) {
             $data['status'] = $this->fields['status'];
@@ -195,7 +198,12 @@ class BroadcastMessage implements JsonSerializable
             $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
 
         return $data;

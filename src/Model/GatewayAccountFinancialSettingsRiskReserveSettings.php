@@ -91,7 +91,7 @@ class GatewayAccountFinancialSettingsRiskReserveSettings implements JsonSerializ
             $data['bips'] = $this->fields['bips'];
         }
         if (array_key_exists('period', $this->fields)) {
-            $data['period'] = $this->fields['period']?->jsonSerialize();
+            $data['period'] = $this->fields['period']->jsonSerialize();
         }
 
         return $data;

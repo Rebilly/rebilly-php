@@ -98,7 +98,12 @@ class FutureRenewalsData implements JsonSerializable
             $data['sum'] = $this->fields['sum'];
         }
         if (array_key_exists('plansCount', $this->fields)) {
-            $data['plansCount'] = $this->fields['plansCount'];
+            $data['plansCount'] = $this->fields['plansCount'] !== null
+                ? array_map(
+                    static fn (FutureRenewalsDataPlansCount $futureRenewalsDataPlansCount) => $futureRenewalsDataPlansCount->jsonSerialize(),
+                    $this->fields['plansCount'],
+                )
+                : null;
         }
 
         return $data;

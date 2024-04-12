@@ -150,10 +150,20 @@ class TimelineExtraData implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('actions', $this->fields)) {
-            $data['actions'] = $this->fields['actions'];
+            $data['actions'] = $this->fields['actions'] !== null
+                ? array_map(
+                    static fn (TimelineAction $timelineAction) => $timelineAction->jsonSerialize(),
+                    $this->fields['actions'],
+                )
+                : null;
         }
         if (array_key_exists('tables', $this->fields)) {
-            $data['tables'] = $this->fields['tables'];
+            $data['tables'] = $this->fields['tables'] !== null
+                ? array_map(
+                    static fn (TimelineTable $timelineTable) => $timelineTable->jsonSerialize(),
+                    $this->fields['tables'],
+                )
+                : null;
         }
         if (array_key_exists('author', $this->fields)) {
             $data['author'] = $this->fields['author']?->jsonSerialize();
@@ -162,7 +172,12 @@ class TimelineExtraData implements JsonSerializable
             $data['mentions'] = $this->fields['mentions'];
         }
         if (array_key_exists('links', $this->fields)) {
-            $data['links'] = $this->fields['links'];
+            $data['links'] = $this->fields['links'] !== null
+                ? array_map(
+                    static fn (TimelineExtraDataLinks $timelineExtraDataLinks) => $timelineExtraDataLinks->jsonSerialize(),
+                    $this->fields['links'],
+                )
+                : null;
         }
 
         return $data;

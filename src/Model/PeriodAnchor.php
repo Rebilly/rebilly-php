@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-interface PeriodAnchor
+use JsonSerializable;
+
+interface PeriodAnchor extends JsonSerializable
 {
     public function getMethod(): string;
 

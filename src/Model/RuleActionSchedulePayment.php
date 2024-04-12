@@ -70,7 +70,7 @@ class RuleActionSchedulePayment extends RuleAction
     {
         $data = [];
         if (array_key_exists('scheduleInstruction', $this->fields)) {
-            $data['scheduleInstruction'] = $this->fields['scheduleInstruction']?->jsonSerialize();
+            $data['scheduleInstruction'] = $this->fields['scheduleInstruction']->jsonSerialize();
         }
         if (array_key_exists('amountPolicy', $this->fields)) {
             $data['amountPolicy'] = $this->fields['amountPolicy'];

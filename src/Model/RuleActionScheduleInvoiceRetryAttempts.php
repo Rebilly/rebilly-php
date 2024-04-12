@@ -85,7 +85,7 @@ class RuleActionScheduleInvoiceRetryAttempts implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('scheduleInstruction', $this->fields)) {
-            $data['scheduleInstruction'] = $this->fields['scheduleInstruction']?->jsonSerialize();
+            $data['scheduleInstruction'] = $this->fields['scheduleInstruction']->jsonSerialize();
         }
         if (array_key_exists('amountAdjustmentInstruction', $this->fields)) {
             $data['amountAdjustmentInstruction'] = $this->fields['amountAdjustmentInstruction']?->jsonSerialize();

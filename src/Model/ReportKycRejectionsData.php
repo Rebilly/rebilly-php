@@ -86,7 +86,12 @@ class ReportKycRejectionsData implements JsonSerializable
             $data['documentType'] = $this->fields['documentType'];
         }
         if (array_key_exists('rejectionReasons', $this->fields)) {
-            $data['rejectionReasons'] = $this->fields['rejectionReasons'];
+            $data['rejectionReasons'] = $this->fields['rejectionReasons'] !== null
+                ? array_map(
+                    static fn (ReportKycRejectionsDataRejectionReasons $reportKycRejectionsDataRejectionReasons) => $reportKycRejectionsDataRejectionReasons->jsonSerialize(),
+                    $this->fields['rejectionReasons'],
+                )
+                : null;
         }
 
         return $data;

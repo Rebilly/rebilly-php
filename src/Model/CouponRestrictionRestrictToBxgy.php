@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class CouponRestrictionRestrictToBxgy implements CouponRestriction, JsonSerializable
+class CouponRestrictionRestrictToBxgy implements CouponRestriction
 {
     private array $fields = [];
 
@@ -91,10 +89,16 @@ class CouponRestrictionRestrictToBxgy implements CouponRestriction, JsonSerializ
             'type' => 'restrict-to-bxgy',
         ];
         if (array_key_exists('buy', $this->fields)) {
-            $data['buy'] = $this->fields['buy'];
+            $data['buy'] = array_map(
+                static fn (CouponRestrictionRestrictToBxgyBuy $couponRestrictionRestrictToBxgyBuy) => $couponRestrictionRestrictToBxgyBuy->jsonSerialize(),
+                $this->fields['buy'],
+            );
         }
         if (array_key_exists('get', $this->fields)) {
-            $data['get'] = $this->fields['get'];
+            $data['get'] = array_map(
+                static fn (CouponRestrictionRestrictToBxgyGet $couponRestrictionRestrictToBxgyGet) => $couponRestrictionRestrictToBxgyGet->jsonSerialize(),
+                $this->fields['get'],
+            );
         }
 
         return $data;

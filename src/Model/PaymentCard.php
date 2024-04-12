@@ -15,9 +15,8 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use JsonSerializable;
 
-class PaymentCard implements PaymentInstrument, JsonSerializable
+class PaymentCard implements PaymentInstrument
 {
     public const STATUS_ACTIVE = 'active';
 
@@ -492,7 +491,12 @@ class PaymentCard implements PaymentInstrument, JsonSerializable
             $data['revision'] = $this->fields['revision'];
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
         if (array_key_exists('_embedded', $this->fields)) {
             $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();

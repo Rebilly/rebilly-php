@@ -120,7 +120,12 @@ class QuoteTrialConversionOrderInvoicePreview implements JsonSerializable
             $data['recurringAmounts'] = $this->fields['recurringAmounts']?->jsonSerialize();
         }
         if (array_key_exists('items', $this->fields)) {
-            $data['items'] = $this->fields['items'];
+            $data['items'] = $this->fields['items'] !== null
+                ? array_map(
+                    static fn (QuoteTrialConversionOrderInvoicePreviewItems $quoteTrialConversionOrderInvoicePreviewItems) => $quoteTrialConversionOrderInvoicePreviewItems->jsonSerialize(),
+                    $this->fields['items'],
+                )
+                : null;
         }
 
         return $data;

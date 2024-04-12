@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class CountriesUnrestrictedMetadata implements CountriesMetadata, JsonSerializable
+class CountriesUnrestrictedMetadata implements CountriesMetadata
 {
     public const MODE_UNKNOWN = 'unknown';
 

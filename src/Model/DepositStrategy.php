@@ -146,10 +146,10 @@ class DepositStrategy implements JsonSerializable
             $data['filter'] = $this->fields['filter'];
         }
         if (array_key_exists('amounts', $this->fields)) {
-            $data['amounts'] = $this->fields['amounts']?->jsonSerialize();
+            $data['amounts'] = $this->fields['amounts']->jsonSerialize();
         }
         if (array_key_exists('customAmount', $this->fields)) {
-            $data['customAmount'] = $this->fields['customAmount']?->jsonSerialize();
+            $data['customAmount'] = $this->fields['customAmount']->jsonSerialize();
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
@@ -158,7 +158,12 @@ class DepositStrategy implements JsonSerializable
             $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
 
         return $data;

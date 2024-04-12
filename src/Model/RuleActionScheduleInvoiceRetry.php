@@ -123,7 +123,10 @@ class RuleActionScheduleInvoiceRetry extends RuleAction
     {
         $data = [];
         if (array_key_exists('attempts', $this->fields)) {
-            $data['attempts'] = $this->fields['attempts'];
+            $data['attempts'] = array_map(
+                static fn (RuleActionScheduleInvoiceRetryAttempts $ruleActionScheduleInvoiceRetryAttempts) => $ruleActionScheduleInvoiceRetryAttempts->jsonSerialize(),
+                $this->fields['attempts'],
+            );
         }
         if (array_key_exists('afterAttemptPolicies', $this->fields)) {
             $data['afterAttemptPolicies'] = $this->fields['afterAttemptPolicies'];

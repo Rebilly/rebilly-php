@@ -94,10 +94,10 @@ class WorldlineAtosFrankfurt extends GatewayAccount
             $data['threeDSecureServer'] = $this->fields['threeDSecureServer']?->jsonSerialize();
         }
         if (array_key_exists('credentials', $this->fields)) {
-            $data['credentials'] = $this->fields['credentials']?->jsonSerialize();
+            $data['credentials'] = $this->fields['credentials']->jsonSerialize();
         }
         if (array_key_exists('settings', $this->fields)) {
-            $data['settings'] = $this->fields['settings']?->jsonSerialize();
+            $data['settings'] = $this->fields['settings']->jsonSerialize();
         }
 
         return parent::jsonSerialize() + $data;

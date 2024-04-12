@@ -15,9 +15,8 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use JsonSerializable;
 
-class PayPalToken implements CompositeToken, JsonSerializable
+class PayPalToken implements CompositeToken
 {
     private array $fields = [];
 
@@ -176,7 +175,7 @@ class PayPalToken implements CompositeToken, JsonSerializable
             'method' => 'paypal',
         ];
         if (array_key_exists('paymentInstrument', $this->fields)) {
-            $data['paymentInstrument'] = $this->fields['paymentInstrument']?->jsonSerialize();
+            $data['paymentInstrument'] = $this->fields['paymentInstrument']->jsonSerialize();
         }
         if (array_key_exists('billingAddress', $this->fields)) {
             $data['billingAddress'] = $this->fields['billingAddress']?->jsonSerialize();
@@ -206,7 +205,12 @@ class PayPalToken implements CompositeToken, JsonSerializable
             $data['expirationTime'] = $this->fields['expirationTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
 
         return $data;

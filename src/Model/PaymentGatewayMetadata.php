@@ -466,7 +466,12 @@ class PaymentGatewayMetadata implements JsonSerializable
             $data['apiName'] = $this->fields['apiName'];
         }
         if (array_key_exists('otherNames', $this->fields)) {
-            $data['otherNames'] = $this->fields['otherNames'];
+            $data['otherNames'] = $this->fields['otherNames'] !== null
+                ? array_map(
+                    static fn (PaymentGatewayMetadataOtherNames $paymentGatewayMetadataOtherNames) => $paymentGatewayMetadataOtherNames->jsonSerialize(),
+                    $this->fields['otherNames'],
+                )
+                : null;
         }
         if (array_key_exists('logo', $this->fields)) {
             $data['logo'] = $this->fields['logo'];
@@ -478,7 +483,12 @@ class PaymentGatewayMetadata implements JsonSerializable
             $data['homepage'] = $this->fields['homepage'];
         }
         if (array_key_exists('externalDocs', $this->fields)) {
-            $data['externalDocs'] = $this->fields['externalDocs'];
+            $data['externalDocs'] = $this->fields['externalDocs'] !== null
+                ? array_map(
+                    static fn (PaymentGatewayMetadataExternalDocs $paymentGatewayMetadataExternalDocs) => $paymentGatewayMetadataExternalDocs->jsonSerialize(),
+                    $this->fields['externalDocs'],
+                )
+                : null;
         }
         if (array_key_exists('publishedPricing', $this->fields)) {
             $data['publishedPricing'] = $this->fields['publishedPricing'];
@@ -493,10 +503,10 @@ class PaymentGatewayMetadata implements JsonSerializable
             $data['cardBrands'] = $this->fields['cardBrands'];
         }
         if (array_key_exists('merchantCountries', $this->fields)) {
-            $data['merchantCountries'] = $this->fields['merchantCountries']?->jsonSerialize();
+            $data['merchantCountries'] = $this->fields['merchantCountries']->jsonSerialize();
         }
         if (array_key_exists('currencies', $this->fields)) {
-            $data['currencies'] = $this->fields['currencies']?->jsonSerialize();
+            $data['currencies'] = $this->fields['currencies']->jsonSerialize();
         }
         if (array_key_exists('operations', $this->fields)) {
             $data['operations'] = $this->fields['operations'];
@@ -523,7 +533,12 @@ class PaymentGatewayMetadata implements JsonSerializable
             $data['recommendedWaitingApprovalTtl'] = $this->fields['recommendedWaitingApprovalTtl'];
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
 
         return $data;

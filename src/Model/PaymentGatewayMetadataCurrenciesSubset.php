@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class PaymentGatewayMetadataCurrenciesSubset implements PaymentGatewayMetadataCurrencies, JsonSerializable
+class PaymentGatewayMetadataCurrenciesSubset implements PaymentGatewayMetadataCurrencies
 {
     private array $fields = [];
 

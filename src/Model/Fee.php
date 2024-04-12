@@ -168,7 +168,7 @@ class Fee implements JsonSerializable
             $data['filter'] = $this->fields['filter'];
         }
         if (array_key_exists('formula', $this->fields)) {
-            $data['formula'] = $this->fields['formula']?->jsonSerialize();
+            $data['formula'] = $this->fields['formula']->jsonSerialize();
         }
         if (array_key_exists('settlementSettings', $this->fields)) {
             $data['settlementSettings'] = $this->fields['settlementSettings']?->jsonSerialize();
@@ -180,7 +180,12 @@ class Fee implements JsonSerializable
             $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
 
         return $data;

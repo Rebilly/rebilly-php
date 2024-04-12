@@ -15,9 +15,8 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use JsonSerializable;
 
-class SmtpCredential implements ServiceCredential, JsonSerializable
+class SmtpCredential implements ServiceCredential
 {
     public const STATUS_ACTIVE = 'active';
 
@@ -191,7 +190,12 @@ class SmtpCredential implements ServiceCredential, JsonSerializable
             $data['auth'] = $this->fields['auth']?->jsonSerialize();
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
 
         return $data;

@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class AmountAdjustmentInstructionPartial implements InvoiceRetryAmountAdjustmentInstruction, JsonSerializable
+class AmountAdjustmentInstructionPartial implements InvoiceRetryAmountAdjustmentInstruction
 {
     public const TYPE_PERCENT = 'percent';
 

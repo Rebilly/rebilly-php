@@ -143,7 +143,10 @@ class SubscriptionChange implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('items', $this->fields)) {
-            $data['items'] = $this->fields['items'];
+            $data['items'] = array_map(
+                static fn (SubscriptionChangeItems $subscriptionChangeItems) => $subscriptionChangeItems->jsonSerialize(),
+                $this->fields['items'],
+            );
         }
         if (array_key_exists('renewalPolicy', $this->fields)) {
             $data['renewalPolicy'] = $this->fields['renewalPolicy'];

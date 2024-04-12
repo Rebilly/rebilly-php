@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-interface SmtpAuthorization
+use JsonSerializable;
+
+interface SmtpAuthorization extends JsonSerializable
 {
     public function getType(): string;
 }

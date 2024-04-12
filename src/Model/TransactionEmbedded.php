@@ -258,7 +258,12 @@ class TransactionEmbedded implements JsonSerializable
             $data['parentTransaction'] = $this->fields['parentTransaction']?->jsonSerialize();
         }
         if (array_key_exists('childTransactions', $this->fields)) {
-            $data['childTransactions'] = $this->fields['childTransactions'];
+            $data['childTransactions'] = $this->fields['childTransactions'] !== null
+                ? array_map(
+                    static fn (Transaction $transaction) => $transaction->jsonSerialize(),
+                    $this->fields['childTransactions'],
+                )
+                : null;
         }
         if (array_key_exists('gatewayAccount', $this->fields)) {
             $data['gatewayAccount'] = $this->fields['gatewayAccount']?->jsonSerialize();
@@ -273,7 +278,12 @@ class TransactionEmbedded implements JsonSerializable
             $data['website'] = $this->fields['website']?->jsonSerialize();
         }
         if (array_key_exists('invoices', $this->fields)) {
-            $data['invoices'] = $this->fields['invoices'];
+            $data['invoices'] = $this->fields['invoices'] !== null
+                ? array_map(
+                    static fn (Invoice $invoice) => $invoice->jsonSerialize(),
+                    $this->fields['invoices'],
+                )
+                : null;
         }
         if (array_key_exists('organization', $this->fields)) {
             $data['organization'] = $this->fields['organization']?->jsonSerialize();

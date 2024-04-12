@@ -185,13 +185,18 @@ class PaymentMethodMetadata implements JsonSerializable
             $data['description'] = $this->fields['description'];
         }
         if (array_key_exists('countries', $this->fields)) {
-            $data['countries'] = $this->fields['countries']?->jsonSerialize();
+            $data['countries'] = $this->fields['countries']->jsonSerialize();
         }
         if (array_key_exists('storefrontEnabled', $this->fields)) {
             $data['storefrontEnabled'] = $this->fields['storefrontEnabled'];
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
 
         return $data;

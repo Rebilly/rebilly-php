@@ -14,8 +14,9 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
+use JsonSerializable;
 
-interface CompositeToken
+interface CompositeToken extends JsonSerializable
 {
     public function getMethod(): string;
 

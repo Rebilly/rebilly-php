@@ -87,16 +87,36 @@ class Search implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('customers', $this->fields)) {
-            $data['customers'] = $this->fields['customers'];
+            $data['customers'] = $this->fields['customers'] !== null
+                ? array_map(
+                    static fn (Customer $customer) => $customer->jsonSerialize(),
+                    $this->fields['customers'],
+                )
+                : null;
         }
         if (array_key_exists('invoices', $this->fields)) {
-            $data['invoices'] = $this->fields['invoices'];
+            $data['invoices'] = $this->fields['invoices'] !== null
+                ? array_map(
+                    static fn (Invoice $invoice) => $invoice->jsonSerialize(),
+                    $this->fields['invoices'],
+                )
+                : null;
         }
         if (array_key_exists('orders', $this->fields)) {
-            $data['orders'] = $this->fields['orders'];
+            $data['orders'] = $this->fields['orders'] !== null
+                ? array_map(
+                    static fn (SubscriptionOrOneTimeSale $subscriptionOrOneTimeSale) => $subscriptionOrOneTimeSale->jsonSerialize(),
+                    $this->fields['orders'],
+                )
+                : null;
         }
         if (array_key_exists('transactions', $this->fields)) {
-            $data['transactions'] = $this->fields['transactions'];
+            $data['transactions'] = $this->fields['transactions'] !== null
+                ? array_map(
+                    static fn (Transaction $transaction) => $transaction->jsonSerialize(),
+                    $this->fields['transactions'],
+                )
+                : null;
         }
         if (array_key_exists('searched', $this->fields)) {
             $data['searched'] = $this->fields['searched'];

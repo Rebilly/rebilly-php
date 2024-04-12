@@ -84,10 +84,20 @@ class CreditMemoAllocations implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('transactions', $this->fields)) {
-            $data['transactions'] = $this->fields['transactions'];
+            $data['transactions'] = $this->fields['transactions'] !== null
+                ? array_map(
+                    static fn (CreditMemoAllocationsTransactions $creditMemoAllocationsTransactions) => $creditMemoAllocationsTransactions->jsonSerialize(),
+                    $this->fields['transactions'],
+                )
+                : null;
         }
         if (array_key_exists('invoices', $this->fields)) {
-            $data['invoices'] = $this->fields['invoices'];
+            $data['invoices'] = $this->fields['invoices'] !== null
+                ? array_map(
+                    static fn (CreditMemoAllocationsInvoices $creditMemoAllocationsInvoices) => $creditMemoAllocationsInvoices->jsonSerialize(),
+                    $this->fields['invoices'],
+                )
+                : null;
         }
 
         return $data;

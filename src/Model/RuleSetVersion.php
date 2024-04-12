@@ -131,10 +131,20 @@ class RuleSetVersion implements JsonSerializable
             $data['version'] = $this->fields['version'];
         }
         if (array_key_exists('binds', $this->fields)) {
-            $data['binds'] = $this->fields['binds'];
+            $data['binds'] = $this->fields['binds'] !== null
+                ? array_map(
+                    static fn (Bind $bind) => $bind->jsonSerialize(),
+                    $this->fields['binds'],
+                )
+                : null;
         }
         if (array_key_exists('rules', $this->fields)) {
-            $data['rules'] = $this->fields['rules'];
+            $data['rules'] = $this->fields['rules'] !== null
+                ? array_map(
+                    static fn (Rule $rule) => $rule->jsonSerialize(),
+                    $this->fields['rules'],
+                )
+                : null;
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
@@ -143,7 +153,12 @@ class RuleSetVersion implements JsonSerializable
             $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
 
         return $data;

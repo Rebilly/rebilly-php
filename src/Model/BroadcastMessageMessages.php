@@ -112,7 +112,10 @@ class BroadcastMessageMessages implements JsonSerializable
             $data['weight'] = $this->fields['weight'];
         }
         if (array_key_exists('templates', $this->fields)) {
-            $data['templates'] = $this->fields['templates'];
+            $data['templates'] = array_map(
+                static fn (BroadcastMessageMessagesTemplates $broadcastMessageMessagesTemplates) => $broadcastMessageMessagesTemplates->jsonSerialize(),
+                $this->fields['templates'],
+            );
         }
 
         return $data;

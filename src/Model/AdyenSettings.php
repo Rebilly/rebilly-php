@@ -128,7 +128,12 @@ class AdyenSettings implements JsonSerializable
             $data['url'] = $this->fields['url'];
         }
         if (array_key_exists('splitPayments', $this->fields)) {
-            $data['splitPayments'] = $this->fields['splitPayments'];
+            $data['splitPayments'] = $this->fields['splitPayments'] !== null
+                ? array_map(
+                    static fn (AdyenSettingsSplitPayments $adyenSettingsSplitPayments) => $adyenSettingsSplitPayments->jsonSerialize(),
+                    $this->fields['splitPayments'],
+                )
+                : null;
         }
         if (array_key_exists('totalTaxRate', $this->fields)) {
             $data['totalTaxRate'] = $this->fields['totalTaxRate'];

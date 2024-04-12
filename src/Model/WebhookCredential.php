@@ -15,9 +15,8 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use JsonSerializable;
 
-class WebhookCredential implements ServiceCredential, JsonSerializable
+class WebhookCredential implements ServiceCredential
 {
     public const STATUS_ACTIVE = 'active';
 

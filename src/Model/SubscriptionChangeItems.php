@@ -85,7 +85,7 @@ class SubscriptionChangeItems implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('plan', $this->fields)) {
-            $data['plan'] = $this->fields['plan']?->jsonSerialize();
+            $data['plan'] = $this->fields['plan']->jsonSerialize();
         }
         if (array_key_exists('quantity', $this->fields)) {
             $data['quantity'] = $this->fields['quantity'];

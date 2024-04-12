@@ -60,7 +60,10 @@ class PickInstructionGatewayAcquirerWeights extends GatewayAccountPickInstructio
     {
         $data = [];
         if (array_key_exists('weightedList', $this->fields)) {
-            $data['weightedList'] = $this->fields['weightedList'];
+            $data['weightedList'] = array_map(
+                static fn (PickInstructionGatewayAcquirerWeightsWeightedList $pickInstructionGatewayAcquirerWeightsWeightedList) => $pickInstructionGatewayAcquirerWeightsWeightedList->jsonSerialize(),
+                $this->fields['weightedList'],
+            );
         }
 
         return parent::jsonSerialize() + $data;

@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class SmtpAuthorizationNone implements SmtpAuthorization, JsonSerializable
+class SmtpAuthorizationNone implements SmtpAuthorization
 {
     public function __construct(array $data = [])
     {

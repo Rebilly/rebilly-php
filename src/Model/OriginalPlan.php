@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class OriginalPlan implements ConfigurablePlan, JsonSerializable
+class OriginalPlan implements ConfigurablePlan
 {
     private array $fields = [];
 

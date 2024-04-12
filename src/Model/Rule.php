@@ -173,7 +173,10 @@ class Rule implements JsonSerializable
             $data['filter'] = $this->fields['filter'];
         }
         if (array_key_exists('actions', $this->fields)) {
-            $data['actions'] = $this->fields['actions'];
+            $data['actions'] = array_map(
+                static fn (RuleAction $ruleAction) => $ruleAction->jsonSerialize(),
+                $this->fields['actions'],
+            );
         }
         if (array_key_exists('final', $this->fields)) {
             $data['final'] = $this->fields['final'];

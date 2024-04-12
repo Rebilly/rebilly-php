@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class SchedulingMethodDayOfWeek implements ServicePeriodAnchorInstruction, InvoiceRetryScheduleInstruction, PeriodAnchor, ScheduleInstruction, ReminderScheduleInstruction, JsonSerializable
+class SchedulingMethodDayOfWeek implements ServicePeriodAnchorInstruction, InvoiceRetryScheduleInstruction, PeriodAnchor, ScheduleInstruction, ReminderScheduleInstruction
 {
     public const DAY_SUNDAY = 'Sunday';
 

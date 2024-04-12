@@ -178,7 +178,7 @@ class SubscriptionOrOneTimeSaleItem implements JsonSerializable
             $data['quantityFilled'] = $this->fields['quantityFilled'];
         }
         if (array_key_exists('plan', $this->fields)) {
-            $data['plan'] = $this->fields['plan']?->jsonSerialize();
+            $data['plan'] = $this->fields['plan']->jsonSerialize();
         }
         if (array_key_exists('usageLimits', $this->fields)) {
             $data['usageLimits'] = $this->fields['usageLimits']?->jsonSerialize();

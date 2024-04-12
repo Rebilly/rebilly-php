@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class ApplePayFeature implements PaymentCardFeature, JsonSerializable
+class ApplePayFeature implements PaymentCardFeature
 {
     private array $fields = [];
 

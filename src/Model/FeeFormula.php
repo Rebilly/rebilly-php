@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-interface FeeFormula
+use JsonSerializable;
+
+interface FeeFormula extends JsonSerializable
 {
     public function getType(): string;
 

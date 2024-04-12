@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-interface PostKycDocumentMatchesRequest
+use JsonSerializable;
+
+interface PostKycDocumentMatchesRequest extends JsonSerializable
 {
     public function getFirstName(): ?string;
 

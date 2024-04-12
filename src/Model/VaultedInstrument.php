@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class VaultedInstrument implements CustomerDefaultPaymentInstrument, TransactionPaymentInstrument, JsonSerializable
+class VaultedInstrument implements CustomerDefaultPaymentInstrument, TransactionPaymentInstrument
 {
     public const METHOD_PAYMENT_CARD = 'payment-card';
 

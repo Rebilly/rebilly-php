@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class AdjustReadyToPayoutGeneric implements AdjustReadyToPayoutPaymentMethod, JsonSerializable
+class AdjustReadyToPayoutGeneric implements AdjustReadyToPayoutPaymentMethod
 {
     public const PAYMENT_METHOD_CASH = 'cash';
 

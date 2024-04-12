@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class GooglePayFeature implements PaymentCardFeature, JsonSerializable
+class GooglePayFeature implements PaymentCardFeature
 {
     private array $fields = [];
 

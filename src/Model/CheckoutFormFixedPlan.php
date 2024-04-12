@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class CheckoutFormFixedPlan implements CheckoutFormPlan, JsonSerializable
+class CheckoutFormFixedPlan implements CheckoutFormPlan
 {
     private array $fields = [];
 

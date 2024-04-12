@@ -15,9 +15,8 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use JsonSerializable;
 
-class CouponRestrictionPaidByTime implements RedemptionRestriction, CouponRestriction, JsonSerializable
+class CouponRestrictionPaidByTime implements RedemptionRestriction, CouponRestriction
 {
     private array $fields = [];
 
@@ -60,7 +59,7 @@ class CouponRestrictionPaidByTime implements RedemptionRestriction, CouponRestri
             'type' => 'paid-by-time',
         ];
         if (array_key_exists('time', $this->fields)) {
-            $data['time'] = $this->fields['time']?->format(DateTimeInterface::RFC3339);
+            $data['time'] = $this->fields['time']->format(DateTimeInterface::RFC3339);
         }
 
         return $data;

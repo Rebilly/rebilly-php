@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class SchedulingMethodAuto implements ScheduleInstruction, JsonSerializable
+class SchedulingMethodAuto implements ScheduleInstruction
 {
     public function __construct(array $data = [])
     {

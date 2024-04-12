@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class PaymentCardCreatePlain implements PostPaymentInstrumentRequest, PaymentInstruction, JsonSerializable
+class PaymentCardCreatePlain implements PostPaymentInstrumentRequest, PaymentInstruction
 {
     private array $fields = [];
 
@@ -197,7 +195,7 @@ class PaymentCardCreatePlain implements PostPaymentInstrumentRequest, PaymentIns
             $data['cvv'] = $this->fields['cvv'];
         }
         if (array_key_exists('billingAddress', $this->fields)) {
-            $data['billingAddress'] = $this->fields['billingAddress']?->jsonSerialize();
+            $data['billingAddress'] = $this->fields['billingAddress']->jsonSerialize();
         }
         if (array_key_exists('customFields', $this->fields)) {
             $data['customFields'] = $this->fields['customFields'];

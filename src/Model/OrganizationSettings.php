@@ -121,7 +121,12 @@ class OrganizationSettings implements JsonSerializable
             $data['billing'] = $this->fields['billing']?->jsonSerialize();
         }
         if (array_key_exists('taxLocations', $this->fields)) {
-            $data['taxLocations'] = $this->fields['taxLocations'];
+            $data['taxLocations'] = $this->fields['taxLocations'] !== null
+                ? array_map(
+                    static fn (OrganizationSettingsTaxLocations $organizationSettingsTaxLocations) => $organizationSettingsTaxLocations->jsonSerialize(),
+                    $this->fields['taxLocations'],
+                )
+                : null;
         }
         if (array_key_exists('notifications', $this->fields)) {
             $data['notifications'] = $this->fields['notifications']?->jsonSerialize();

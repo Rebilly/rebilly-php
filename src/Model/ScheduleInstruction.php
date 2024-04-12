@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-interface ScheduleInstruction
+use JsonSerializable;
+
+interface ScheduleInstruction extends JsonSerializable
 {
     public function getMethod(): string;
 }

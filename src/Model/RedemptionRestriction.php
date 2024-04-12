@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-interface RedemptionRestriction
+use JsonSerializable;
+
+interface RedemptionRestriction extends JsonSerializable
 {
     public function getType(): string;
 }

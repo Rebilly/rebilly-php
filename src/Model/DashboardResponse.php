@@ -204,7 +204,12 @@ class DashboardResponse implements JsonSerializable
             $data['increaseIsGood'] = $this->fields['increaseIsGood'];
         }
         if (array_key_exists('segments', $this->fields)) {
-            $data['segments'] = $this->fields['segments'];
+            $data['segments'] = $this->fields['segments'] !== null
+                ? array_map(
+                    static fn (DashboardResponseSegments $dashboardResponseSegments) => $dashboardResponseSegments->jsonSerialize(),
+                    $this->fields['segments'],
+                )
+                : null;
         }
 
         return $data;

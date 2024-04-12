@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class CountriesSubsetMetadata implements CountriesMetadata, JsonSerializable
+class CountriesSubsetMetadata implements CountriesMetadata
 {
     private array $fields = [];
 

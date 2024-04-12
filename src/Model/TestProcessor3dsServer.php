@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class TestProcessor3dsServer implements TestProcessor3dsServers, JsonSerializable
+class TestProcessor3dsServer implements TestProcessor3dsServers
 {
     public function __construct(array $data = [])
     {

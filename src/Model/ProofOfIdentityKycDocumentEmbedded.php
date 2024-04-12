@@ -80,7 +80,12 @@ class ProofOfIdentityKycDocumentEmbedded implements JsonSerializable
             $data['customer'] = $this->fields['customer']?->jsonSerialize();
         }
         if (array_key_exists('files', $this->fields)) {
-            $data['files'] = $this->fields['files'];
+            $data['files'] = $this->fields['files'] !== null
+                ? array_map(
+                    static fn (File $file) => $file->jsonSerialize(),
+                    $this->fields['files'],
+                )
+                : null;
         }
 
         return $data;

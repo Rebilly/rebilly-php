@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class CouponRestrictionRestrictToCustomerTags implements CouponRestriction, JsonSerializable
+class CouponRestrictionRestrictToCustomerTags implements CouponRestriction
 {
     public const REQUIRE_ALL_TAGS_TRUE = 'true';
 

@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-interface PatchPaymentInstrumentRequest
+use JsonSerializable;
+
+interface PatchPaymentInstrumentRequest extends JsonSerializable
 {
     public function getBillingAddress(): ?ContactObject;
 

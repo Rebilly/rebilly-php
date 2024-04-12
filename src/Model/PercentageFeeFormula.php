@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class PercentageFeeFormula implements FeeFormula, JsonSerializable
+class PercentageFeeFormula implements FeeFormula
 {
     private array $fields = [];
 

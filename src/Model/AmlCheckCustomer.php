@@ -113,7 +113,12 @@ class AmlCheckCustomer implements JsonSerializable
             $data['primaryAddress'] = $this->fields['primaryAddress']?->jsonSerialize();
         }
         if (array_key_exists('tags', $this->fields)) {
-            $data['tags'] = $this->fields['tags'];
+            $data['tags'] = $this->fields['tags'] !== null
+                ? array_map(
+                    static fn (Tag $tag) => $tag->jsonSerialize(),
+                    $this->fields['tags'],
+                )
+                : null;
         }
         if (array_key_exists('organizationId', $this->fields)) {
             $data['organizationId'] = $this->fields['organizationId'];

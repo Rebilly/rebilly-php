@@ -135,7 +135,12 @@ class CreditFileMatchesReferenceData implements JsonSerializable
             $data['singleDecision'] = $this->fields['singleDecision']?->jsonSerialize();
         }
         if (array_key_exists('dualDecision', $this->fields)) {
-            $data['dualDecision'] = $this->fields['dualDecision'];
+            $data['dualDecision'] = $this->fields['dualDecision'] !== null
+                ? array_map(
+                    static fn (CreditFileCommonDecisionData $creditFileCommonDecisionData) => $creditFileCommonDecisionData->jsonSerialize(),
+                    $this->fields['dualDecision'],
+                )
+                : null;
         }
 
         return $data;

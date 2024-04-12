@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class AdjustReadyToPayPaypal implements AdjustPaymentMethod, JsonSerializable
+class AdjustReadyToPayPaypal implements AdjustPaymentMethod
 {
     public const FEATURE_PAY_PAL_BILLING_AGREEMENT = 'PayPal billing agreement';
 

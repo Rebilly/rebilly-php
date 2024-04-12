@@ -238,7 +238,12 @@ class RulesEmailNotificationTemplates implements JsonSerializable
             $data['editor'] = $this->fields['editor'];
         }
         if (array_key_exists('attachments', $this->fields)) {
-            $data['attachments'] = $this->fields['attachments'];
+            $data['attachments'] = $this->fields['attachments'] !== null
+                ? array_map(
+                    static fn (RulesEmailNotificationTemplatesAttachments $rulesEmailNotificationTemplatesAttachments) => $rulesEmailNotificationTemplatesAttachments->jsonSerialize(),
+                    $this->fields['attachments'],
+                )
+                : null;
         }
 
         return $data;

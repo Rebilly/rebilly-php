@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-interface ReadyToPayKlarnaMethodFeature
+use JsonSerializable;
+
+interface ReadyToPayKlarnaMethodFeature extends JsonSerializable
 {
     public function getName(): string;
 

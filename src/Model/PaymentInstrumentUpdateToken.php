@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class PaymentInstrumentUpdateToken implements PatchPaymentInstrumentRequest, JsonSerializable
+class PaymentInstrumentUpdateToken implements PatchPaymentInstrumentRequest
 {
     private array $fields = [];
 

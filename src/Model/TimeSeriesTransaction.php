@@ -58,7 +58,12 @@ class TimeSeriesTransaction implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('data', $this->fields)) {
-            $data['data'] = $this->fields['data'];
+            $data['data'] = $this->fields['data'] !== null
+                ? array_map(
+                    static fn (TimeSeriesTransactionData $timeSeriesTransactionData) => $timeSeriesTransactionData->jsonSerialize(),
+                    $this->fields['data'],
+                )
+                : null;
         }
 
         return $data;

@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class DiscountFixed implements Discount, JsonSerializable
+class DiscountFixed implements Discount
 {
     public const CONTEXT_ITEMS = 'items';
 

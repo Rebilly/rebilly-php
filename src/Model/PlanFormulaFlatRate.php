@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class PlanFormulaFlatRate implements PlanPriceFormula, JsonSerializable
+class PlanFormulaFlatRate implements PlanPriceFormula
 {
     private array $fields = [];
 

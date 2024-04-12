@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class CouponRestrictionTotalRedemptions implements CouponRestriction, JsonSerializable
+class CouponRestrictionTotalRedemptions implements CouponRestriction
 {
     private array $fields = [];
 

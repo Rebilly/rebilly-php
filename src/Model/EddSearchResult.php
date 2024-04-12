@@ -91,7 +91,12 @@ class EddSearchResult implements JsonSerializable
             $data['type'] = $this->fields['type'];
         }
         if (array_key_exists('searchResultData', $this->fields)) {
-            $data['searchResultData'] = $this->fields['searchResultData'];
+            $data['searchResultData'] = $this->fields['searchResultData'] !== null
+                ? array_map(
+                    static fn (EddScoreDetails $eddScoreDetails) => $eddScoreDetails->jsonSerialize(),
+                    $this->fields['searchResultData'],
+                )
+                : null;
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);

@@ -128,7 +128,12 @@ class TransactionBumpOffer implements JsonSerializable
             $data['outcome'] = $this->fields['outcome'];
         }
         if (array_key_exists('presentedOffers', $this->fields)) {
-            $data['presentedOffers'] = $this->fields['presentedOffers'];
+            $data['presentedOffers'] = $this->fields['presentedOffers'] !== null
+                ? array_map(
+                    static fn (PurchaseBumpOffer $purchaseBumpOffer) => $purchaseBumpOffer->jsonSerialize(),
+                    $this->fields['presentedOffers'],
+                )
+                : null;
         }
         if (array_key_exists('selectedOffer', $this->fields)) {
             $data['selectedOffer'] = $this->fields['selectedOffer']?->jsonSerialize();

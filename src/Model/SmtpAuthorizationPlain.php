@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class SmtpAuthorizationPlain implements SmtpAuthorization, JsonSerializable
+class SmtpAuthorizationPlain implements SmtpAuthorization
 {
     private array $fields = [];
 

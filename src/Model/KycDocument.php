@@ -14,8 +14,9 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
+use JsonSerializable;
 
-interface KycDocument
+interface KycDocument extends JsonSerializable
 {
     public function getDocumentType(): string;
 

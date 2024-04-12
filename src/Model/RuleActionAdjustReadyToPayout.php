@@ -78,7 +78,12 @@ class RuleActionAdjustReadyToPayout extends RuleAction
             $data['prioritizeActivePaymentInstruments'] = $this->fields['prioritizeActivePaymentInstruments'];
         }
         if (array_key_exists('paymentMethods', $this->fields)) {
-            $data['paymentMethods'] = $this->fields['paymentMethods'];
+            $data['paymentMethods'] = $this->fields['paymentMethods'] !== null
+                ? array_map(
+                    static fn (AdjustReadyToPayoutPaymentMethod $adjustReadyToPayoutPaymentMethod) => $adjustReadyToPayoutPaymentMethod->jsonSerialize(),
+                    $this->fields['paymentMethods'],
+                )
+                : null;
         }
 
         return parent::jsonSerialize() + $data;

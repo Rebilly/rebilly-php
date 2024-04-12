@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class WebhookAuthorizationBasic implements WebhookAuthorization, JsonSerializable
+class WebhookAuthorizationBasic implements WebhookAuthorization
 {
     private array $fields = [];
 

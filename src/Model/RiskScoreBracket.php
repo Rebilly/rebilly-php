@@ -58,7 +58,10 @@ class RiskScoreBracket implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('brackets', $this->fields)) {
-            $data['brackets'] = $this->fields['brackets'];
+            $data['brackets'] = array_map(
+                static fn (RiskScoreBracketBrackets $riskScoreBracketBrackets) => $riskScoreBracketBrackets->jsonSerialize(),
+                $this->fields['brackets'],
+            );
         }
 
         return $data;

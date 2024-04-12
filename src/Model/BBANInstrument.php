@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class BBANInstrument implements BankAccountInstrument, JsonSerializable
+class BBANInstrument implements BankAccountInstrument
 {
     public const ACCOUNT_TYPE_CHECKING = 'checking';
 

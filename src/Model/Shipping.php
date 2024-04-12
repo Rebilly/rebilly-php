@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-interface Shipping
+use JsonSerializable;
+
+interface Shipping extends JsonSerializable
 {
     public function getCalculator(): string;
 

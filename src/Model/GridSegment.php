@@ -175,7 +175,7 @@ class GridSegment implements JsonSerializable
             $data['id'] = $this->fields['id'];
         }
         if (array_key_exists('owner', $this->fields)) {
-            $data['owner'] = $this->fields['owner']?->jsonSerialize();
+            $data['owner'] = $this->fields['owner']->jsonSerialize();
         }
         if (array_key_exists('data', $this->fields)) {
             $data['data'] = $this->fields['data'];
@@ -190,7 +190,12 @@ class GridSegment implements JsonSerializable
             $data['userIds'] = $this->fields['userIds'];
         }
         if (array_key_exists('users', $this->fields)) {
-            $data['users'] = $this->fields['users'];
+            $data['users'] = $this->fields['users'] !== null
+                ? array_map(
+                    static fn (GridSegmentUsers $gridSegmentUsers) => $gridSegmentUsers->jsonSerialize(),
+                    $this->fields['users'],
+                )
+                : null;
         }
         if (array_key_exists('scope', $this->fields)) {
             $data['scope'] = $this->fields['scope'];

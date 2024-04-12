@@ -178,7 +178,12 @@ class DashboardResponseSegments implements JsonSerializable
             $data['humanChangeRatio'] = $this->fields['humanChangeRatio'];
         }
         if (array_key_exists('timeseries', $this->fields)) {
-            $data['timeseries'] = $this->fields['timeseries'];
+            $data['timeseries'] = $this->fields['timeseries'] !== null
+                ? array_map(
+                    static fn (DashboardResponseSegmentsTimeseries $dashboardResponseSegmentsTimeseries) => $dashboardResponseSegmentsTimeseries->jsonSerialize(),
+                    $this->fields['timeseries'],
+                )
+                : null;
         }
 
         return $data;

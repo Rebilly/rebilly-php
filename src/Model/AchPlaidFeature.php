@@ -15,9 +15,8 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use JsonSerializable;
 
-class AchPlaidFeature implements ReadyToPayAchMethodFeature, JsonSerializable
+class AchPlaidFeature implements ReadyToPayAchMethodFeature
 {
     private array $fields = [];
 
@@ -78,7 +77,7 @@ class AchPlaidFeature implements ReadyToPayAchMethodFeature, JsonSerializable
             $data['linkToken'] = $this->fields['linkToken'];
         }
         if (array_key_exists('expirationTime', $this->fields)) {
-            $data['expirationTime'] = $this->fields['expirationTime']?->format(DateTimeInterface::RFC3339);
+            $data['expirationTime'] = $this->fields['expirationTime']->format(DateTimeInterface::RFC3339);
         }
 
         return $data;

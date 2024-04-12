@@ -72,7 +72,7 @@ class Acl implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('scope', $this->fields)) {
-            $data['scope'] = $this->fields['scope']?->jsonSerialize();
+            $data['scope'] = $this->fields['scope']->jsonSerialize();
         }
         if (array_key_exists('permissions', $this->fields)) {
             $data['permissions'] = $this->fields['permissions'];

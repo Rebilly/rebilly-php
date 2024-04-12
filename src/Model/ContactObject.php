@@ -289,10 +289,20 @@ class ContactObject implements JsonSerializable
             $data['postalCode'] = $this->fields['postalCode'];
         }
         if (array_key_exists('phoneNumbers', $this->fields)) {
-            $data['phoneNumbers'] = $this->fields['phoneNumbers'];
+            $data['phoneNumbers'] = $this->fields['phoneNumbers'] !== null
+                ? array_map(
+                    static fn (ContactPhoneNumbers $contactPhoneNumbers) => $contactPhoneNumbers->jsonSerialize(),
+                    $this->fields['phoneNumbers'],
+                )
+                : null;
         }
         if (array_key_exists('emails', $this->fields)) {
-            $data['emails'] = $this->fields['emails'];
+            $data['emails'] = $this->fields['emails'] !== null
+                ? array_map(
+                    static fn (ContactEmails $contactEmails) => $contactEmails->jsonSerialize(),
+                    $this->fields['emails'],
+                )
+                : null;
         }
         if (array_key_exists('dob', $this->fields)) {
             $data['dob'] = $this->fields['dob']?->format('Y-m-d');

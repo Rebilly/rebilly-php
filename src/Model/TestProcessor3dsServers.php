@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-interface TestProcessor3dsServers
+use JsonSerializable;
+
+interface TestProcessor3dsServers extends JsonSerializable
 {
     public function getName(): string;
 }

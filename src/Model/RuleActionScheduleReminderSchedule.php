@@ -77,7 +77,10 @@ class RuleActionScheduleReminderSchedule implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('instructions', $this->fields)) {
-            $data['instructions'] = $this->fields['instructions'];
+            $data['instructions'] = array_map(
+                static fn (ReminderScheduleInstruction $reminderScheduleInstruction) => $reminderScheduleInstruction->jsonSerialize(),
+                $this->fields['instructions'],
+            );
         }
         if (array_key_exists('chronology', $this->fields)) {
             $data['chronology'] = $this->fields['chronology'];

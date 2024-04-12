@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class ReadyToPayItems implements PostReadyToPay, JsonSerializable
+class ReadyToPayItems implements PostReadyToPay
 {
     private array $fields = [];
 
@@ -114,13 +112,16 @@ class ReadyToPayItems implements PostReadyToPay, JsonSerializable
             $data['websiteId'] = $this->fields['websiteId'];
         }
         if (array_key_exists('items', $this->fields)) {
-            $data['items'] = $this->fields['items'];
+            $data['items'] = array_map(
+                static fn (ReadyToPayItemsItems $readyToPayItemsItems) => $readyToPayItemsItems->jsonSerialize(),
+                $this->fields['items'],
+            );
         }
         if (array_key_exists('billingAddress', $this->fields)) {
             $data['billingAddress'] = $this->fields['billingAddress']?->jsonSerialize();
         }
         if (array_key_exists('riskMetadata', $this->fields)) {
-            $data['riskMetadata'] = $this->fields['riskMetadata']?->jsonSerialize();
+            $data['riskMetadata'] = $this->fields['riskMetadata']->jsonSerialize();
         }
 
         return $data;

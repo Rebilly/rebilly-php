@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class SchedulingMethodIntelligent implements InvoiceRetryScheduleInstruction, ScheduleInstruction, JsonSerializable
+class SchedulingMethodIntelligent implements InvoiceRetryScheduleInstruction, ScheduleInstruction
 {
     public const UNIT_SECOND = 'second';
 

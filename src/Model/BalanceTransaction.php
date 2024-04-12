@@ -14,8 +14,9 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
+use JsonSerializable;
 
-interface BalanceTransaction
+interface BalanceTransaction extends JsonSerializable
 {
     public function getType(): string;
 

@@ -14,9 +14,8 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use InvalidArgumentException;
-use JsonSerializable;
 
-abstract class BankAccountCreatePlain implements PostPaymentInstrumentRequest, PaymentInstruction, JsonSerializable
+abstract class BankAccountCreatePlain implements PostPaymentInstrumentRequest, PaymentInstruction
 {
     public const ACCOUNT_NUMBER_TYPE_IBAN = 'IBAN';
 

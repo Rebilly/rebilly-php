@@ -95,10 +95,15 @@ class SettlementSettings implements JsonSerializable
             $data['settlementCurrency'] = $this->fields['settlementCurrency'];
         }
         if (array_key_exists('settlementPeriod', $this->fields)) {
-            $data['settlementPeriod'] = $this->fields['settlementPeriod']?->jsonSerialize();
+            $data['settlementPeriod'] = $this->fields['settlementPeriod']->jsonSerialize();
         }
         if (array_key_exists('advancedSettings', $this->fields)) {
-            $data['advancedSettings'] = $this->fields['advancedSettings'];
+            $data['advancedSettings'] = $this->fields['advancedSettings'] !== null
+                ? array_map(
+                    static fn (SettlementSettingsAdvancedSettings $settlementSettingsAdvancedSettings) => $settlementSettingsAdvancedSettings->jsonSerialize(),
+                    $this->fields['advancedSettings'],
+                )
+                : null;
         }
 
         return $data;

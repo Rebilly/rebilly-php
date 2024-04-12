@@ -212,10 +212,10 @@ class Membership implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('organization', $this->fields)) {
-            $data['organization'] = $this->fields['organization']?->jsonSerialize();
+            $data['organization'] = $this->fields['organization']->jsonSerialize();
         }
         if (array_key_exists('user', $this->fields)) {
-            $data['user'] = $this->fields['user']?->jsonSerialize();
+            $data['user'] = $this->fields['user']->jsonSerialize();
         }
         if (array_key_exists('allowedIps', $this->fields)) {
             $data['allowedIps'] = $this->fields['allowedIps'];
@@ -233,10 +233,20 @@ class Membership implements JsonSerializable
             $data['roleIds'] = $this->fields['roleIds'];
         }
         if (array_key_exists('acl', $this->fields)) {
-            $data['acl'] = $this->fields['acl'];
+            $data['acl'] = $this->fields['acl'] !== null
+                ? array_map(
+                    static fn (Acl $acl) => $acl->jsonSerialize(),
+                    $this->fields['acl'],
+                )
+                : null;
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
         if (array_key_exists('_embedded', $this->fields)) {
             $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();

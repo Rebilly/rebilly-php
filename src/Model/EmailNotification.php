@@ -258,10 +258,20 @@ class EmailNotification implements JsonSerializable
             $data['count'] = $this->fields['count'];
         }
         if (array_key_exists('notifications', $this->fields)) {
-            $data['notifications'] = $this->fields['notifications'];
+            $data['notifications'] = $this->fields['notifications'] !== null
+                ? array_map(
+                    static fn (EmailNotificationNotifications $emailNotificationNotifications) => $emailNotificationNotifications->jsonSerialize(),
+                    $this->fields['notifications'],
+                )
+                : null;
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
 
         return $data;
