@@ -2,4 +2,4 @@
 "@rebilly/client-php": patch
 ---
 
-SDK Generator updated
+Move JsonSerializable down to interfaces

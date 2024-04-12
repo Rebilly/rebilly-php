@@ -2,4 +2,4 @@
 "@rebilly/client-php": patch
 ---
 
-SDK Generator updated
+Add jsonSerialization for non-scalar collections Rebilly/rebilly-php#675
