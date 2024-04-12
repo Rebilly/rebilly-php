@@ -117,7 +117,7 @@ jobs:
         run: |
           composer cs-fix
           rm .php-cs-fixer.cache # Remove cache for the second run
-          composer cs-fix # Run twice to ensure all large files are fixed
+          composer cs-fix # Run twice to ensure all large files are fixed (required due to a bug in the php-cs-fixer, remove once resolved)
       
       - name: Add changeset
         id: changeset
