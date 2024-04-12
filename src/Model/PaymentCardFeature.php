@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-interface PaymentCardFeature
+use JsonSerializable;
+
+interface PaymentCardFeature extends JsonSerializable
 {
     public function getName(): string;
 

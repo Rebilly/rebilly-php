@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class AdjustReadyToPayAch implements AdjustPaymentMethod, JsonSerializable
+class AdjustReadyToPayAch implements AdjustPaymentMethod
 {
     public const FEATURE_PLAID = 'Plaid';
 

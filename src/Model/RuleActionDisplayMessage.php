@@ -60,7 +60,10 @@ class RuleActionDisplayMessage extends RuleAction
     {
         $data = [];
         if (array_key_exists('messages', $this->fields)) {
-            $data['messages'] = $this->fields['messages'];
+            $data['messages'] = array_map(
+                static fn (RuleActionDisplayMessageMessages $ruleActionDisplayMessageMessages) => $ruleActionDisplayMessageMessages->jsonSerialize(),
+                $this->fields['messages'],
+            );
         }
 
         return parent::jsonSerialize() + $data;

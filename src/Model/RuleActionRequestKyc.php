@@ -217,7 +217,10 @@ class RuleActionRequestKyc extends RuleAction
     {
         $data = [];
         if (array_key_exists('documents', $this->fields)) {
-            $data['documents'] = $this->fields['documents'];
+            $data['documents'] = array_map(
+                static fn (KycRequestDocument $kycRequestDocument) => $kycRequestDocument->jsonSerialize(),
+                $this->fields['documents'],
+            );
         }
         if (array_key_exists('excludePolicy', $this->fields)) {
             $data['excludePolicy'] = $this->fields['excludePolicy'];

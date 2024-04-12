@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-interface PostReadyToPay
+use JsonSerializable;
+
+interface PostReadyToPay extends JsonSerializable
 {
     public function getWebsiteId(): string;
 

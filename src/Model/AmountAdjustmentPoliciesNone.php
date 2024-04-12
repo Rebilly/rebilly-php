@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class AmountAdjustmentPoliciesNone implements AmountAdjustmentInstructionPartialAfterApprovalPolicy, JsonSerializable
+class AmountAdjustmentPoliciesNone implements AmountAdjustmentInstructionPartialAfterApprovalPolicy
 {
     public function __construct(array $data = [])
     {

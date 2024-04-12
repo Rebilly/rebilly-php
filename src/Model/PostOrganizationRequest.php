@@ -388,10 +388,20 @@ class PostOrganizationRequest implements JsonSerializable
             $data['postalCode'] = $this->fields['postalCode'];
         }
         if (array_key_exists('phoneNumbers', $this->fields)) {
-            $data['phoneNumbers'] = $this->fields['phoneNumbers'];
+            $data['phoneNumbers'] = $this->fields['phoneNumbers'] !== null
+                ? array_map(
+                    static fn (ContactPhoneNumbers $contactPhoneNumbers) => $contactPhoneNumbers->jsonSerialize(),
+                    $this->fields['phoneNumbers'],
+                )
+                : null;
         }
         if (array_key_exists('emails', $this->fields)) {
-            $data['emails'] = $this->fields['emails'];
+            $data['emails'] = $this->fields['emails'] !== null
+                ? array_map(
+                    static fn (ContactEmails $contactEmails) => $contactEmails->jsonSerialize(),
+                    $this->fields['emails'],
+                )
+                : null;
         }
         if (array_key_exists('taxDescriptor', $this->fields)) {
             $data['taxDescriptor'] = $this->fields['taxDescriptor'];
@@ -409,10 +419,20 @@ class PostOrganizationRequest implements JsonSerializable
             $data['settings'] = $this->fields['settings']?->jsonSerialize();
         }
         if (array_key_exists('taxNumbers', $this->fields)) {
-            $data['taxNumbers'] = $this->fields['taxNumbers'];
+            $data['taxNumbers'] = $this->fields['taxNumbers'] !== null
+                ? array_map(
+                    static fn (TaxNumber $taxNumber) => $taxNumber->jsonSerialize(),
+                    $this->fields['taxNumbers'],
+                )
+                : null;
         }
         if (array_key_exists('features', $this->fields)) {
-            $data['features'] = $this->fields['features'];
+            $data['features'] = $this->fields['features'] !== null
+                ? array_map(
+                    static fn (OrganizationFeatures $organizationFeatures) => $organizationFeatures->jsonSerialize(),
+                    $this->fields['features'],
+                )
+                : null;
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
@@ -421,7 +441,12 @@ class PostOrganizationRequest implements JsonSerializable
             $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
 
         return $data;

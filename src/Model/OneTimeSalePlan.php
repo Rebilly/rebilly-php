@@ -15,9 +15,8 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use JsonSerializable;
 
-class OneTimeSalePlan implements Plan, FlexiblePlan, JsonSerializable
+class OneTimeSalePlan implements Plan, FlexiblePlan
 {
     private array $fields = [];
 
@@ -288,7 +287,7 @@ class OneTimeSalePlan implements Plan, FlexiblePlan, JsonSerializable
             $data['currencySign'] = $this->fields['currencySign'];
         }
         if (array_key_exists('pricing', $this->fields)) {
-            $data['pricing'] = $this->fields['pricing']?->jsonSerialize();
+            $data['pricing'] = $this->fields['pricing']->jsonSerialize();
         }
         if (array_key_exists('setup', $this->fields)) {
             $data['setup'] = $this->fields['setup']?->jsonSerialize();
@@ -312,7 +311,12 @@ class OneTimeSalePlan implements Plan, FlexiblePlan, JsonSerializable
             $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
 
         return $data;

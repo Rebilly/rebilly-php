@@ -121,7 +121,7 @@ class JournalEntry implements JsonSerializable
             $data['id'] = $this->fields['id'];
         }
         if (array_key_exists('period', $this->fields)) {
-            $data['period'] = $this->fields['period']?->jsonSerialize();
+            $data['period'] = $this->fields['period']->jsonSerialize();
         }
         if (array_key_exists('currency', $this->fields)) {
             $data['currency'] = $this->fields['currency'];
@@ -136,7 +136,12 @@ class JournalEntry implements JsonSerializable
             $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
 
         return $data;

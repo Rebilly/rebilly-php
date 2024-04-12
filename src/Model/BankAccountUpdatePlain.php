@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class BankAccountUpdatePlain implements PatchPaymentInstrumentRequest, JsonSerializable
+class BankAccountUpdatePlain implements PatchPaymentInstrumentRequest
 {
     public const ACCOUNT_TYPE_CHECKING = 'checking';
 

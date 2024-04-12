@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class IBANInstrument implements BankAccountInstrument, JsonSerializable
+class IBANInstrument implements BankAccountInstrument
 {
     private array $fields = [];
 

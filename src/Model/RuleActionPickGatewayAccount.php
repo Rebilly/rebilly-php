@@ -53,7 +53,7 @@ class RuleActionPickGatewayAccount extends RuleAction
     {
         $data = [];
         if (array_key_exists('pickInstruction', $this->fields)) {
-            $data['pickInstruction'] = $this->fields['pickInstruction']?->jsonSerialize();
+            $data['pickInstruction'] = $this->fields['pickInstruction']->jsonSerialize();
         }
 
         return parent::jsonSerialize() + $data;

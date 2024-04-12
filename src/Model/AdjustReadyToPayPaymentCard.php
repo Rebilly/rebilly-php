@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class AdjustReadyToPayPaymentCard implements AdjustPaymentMethod, JsonSerializable
+class AdjustReadyToPayPaymentCard implements AdjustPaymentMethod
 {
     public const FEATURE_APPLE_PAY = 'Apple Pay';
 

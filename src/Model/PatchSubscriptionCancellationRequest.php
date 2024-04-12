@@ -330,13 +330,25 @@ class PatchSubscriptionCancellationRequest implements JsonSerializable
             $data['churnTimePolicy'] = $this->fields['churnTimePolicy'];
         }
         if (array_key_exists('lineItems', $this->fields)) {
-            $data['lineItems'] = $this->fields['lineItems'];
+            $data['lineItems'] = $this->fields['lineItems'] !== null
+                ? array_map(
+                    static fn (SubscriptionCancellationLineItems $subscriptionCancellationLineItems) => $subscriptionCancellationLineItems->jsonSerialize(),
+                    $this->fields['lineItems'],
+                )
+                : null;
         }
         if (array_key_exists('lineItemSubtotal', $this->fields)) {
             $data['lineItemSubtotal'] = $this->fields['lineItemSubtotal']?->jsonSerialize();
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (
+                        ResourceLink $resourceLink
+                    ) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
 
         return $data;

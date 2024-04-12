@@ -191,10 +191,18 @@ class RuleSetDraft implements JsonSerializable
             $data['baseVersion'] = $this->fields['baseVersion'];
         }
         if (array_key_exists('binds', $this->fields)) {
-            $data['binds'] = $this->fields['binds'];
+            $data['binds'] = $this->fields['binds'] !== null
+                ? array_map(
+                    static fn (Bind $bind) => $bind->jsonSerialize(),
+                    $this->fields['binds'],
+                )
+                : null;
         }
         if (array_key_exists('rules', $this->fields)) {
-            $data['rules'] = $this->fields['rules'];
+            $data['rules'] = array_map(
+                static fn (Rule $rule) => $rule->jsonSerialize(),
+                $this->fields['rules'],
+            );
         }
         if (array_key_exists('author', $this->fields)) {
             $data['author'] = $this->fields['author']?->jsonSerialize();
@@ -212,7 +220,12 @@ class RuleSetDraft implements JsonSerializable
             $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
 
         return $data;

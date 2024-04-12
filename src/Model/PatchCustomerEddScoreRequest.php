@@ -51,7 +51,7 @@ class PatchCustomerEddScoreRequest implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('score', $this->fields)) {
-            $data['score'] = $this->fields['score']?->jsonSerialize();
+            $data['score'] = $this->fields['score']->jsonSerialize();
         }
 
         return $data;

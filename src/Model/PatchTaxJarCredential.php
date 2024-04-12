@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class PatchTaxJarCredential implements PatchServiceCredentialRequest, JsonSerializable
+class PatchTaxJarCredential implements PatchServiceCredentialRequest
 {
     public const STATUS_ACTIVE = 'active';
 

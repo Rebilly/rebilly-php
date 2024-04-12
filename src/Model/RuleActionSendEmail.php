@@ -118,7 +118,10 @@ class RuleActionSendEmail extends RuleAction
             $data['title'] = $this->fields['title'];
         }
         if (array_key_exists('emails', $this->fields)) {
-            $data['emails'] = $this->fields['emails'];
+            $data['emails'] = array_map(
+                static fn (RulesEmailNotification $rulesEmailNotification) => $rulesEmailNotification->jsonSerialize(),
+                $this->fields['emails'],
+            );
         }
         if (array_key_exists('splitTestStartTime', $this->fields)) {
             $data['splitTestStartTime'] = $this->fields['splitTestStartTime']?->format(DateTimeInterface::RFC3339);

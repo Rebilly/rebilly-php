@@ -91,7 +91,7 @@ class EMerchantPay extends GatewayAccount
     {
         $data = [];
         if (array_key_exists('credentials', $this->fields)) {
-            $data['credentials'] = $this->fields['credentials']?->jsonSerialize();
+            $data['credentials'] = $this->fields['credentials']->jsonSerialize();
         }
         if (array_key_exists('settings', $this->fields)) {
             $data['settings'] = $this->fields['settings']?->jsonSerialize();

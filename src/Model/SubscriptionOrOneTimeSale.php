@@ -14,8 +14,9 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
+use JsonSerializable;
 
-interface SubscriptionOrOneTimeSale
+interface SubscriptionOrOneTimeSale extends JsonSerializable
 {
     public function getOrderType(): string;
 

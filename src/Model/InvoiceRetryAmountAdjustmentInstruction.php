@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-interface InvoiceRetryAmountAdjustmentInstruction
+use JsonSerializable;
+
+interface InvoiceRetryAmountAdjustmentInstruction extends JsonSerializable
 {
     public function getMethod(): string;
 }

@@ -194,7 +194,7 @@ class IBANType extends BankAccountCreatePlain
             $data['bic'] = $this->fields['bic'];
         }
         if (array_key_exists('billingAddress', $this->fields)) {
-            $data['billingAddress'] = $this->fields['billingAddress']?->jsonSerialize();
+            $data['billingAddress'] = $this->fields['billingAddress']->jsonSerialize();
         }
         if (array_key_exists('customFields', $this->fields)) {
             $data['customFields'] = $this->fields['customFields'];

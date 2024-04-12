@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-interface BankAccountInstrument
+use JsonSerializable;
+
+interface BankAccountInstrument extends JsonSerializable
 {
     public function getAccountNumberType(): string;
 

@@ -75,7 +75,7 @@ class PayPal extends GatewayAccount
             $data['credentials'] = $this->fields['credentials']?->jsonSerialize();
         }
         if (array_key_exists('settings', $this->fields)) {
-            $data['settings'] = $this->fields['settings']?->jsonSerialize();
+            $data['settings'] = $this->fields['settings']->jsonSerialize();
         }
 
         return parent::jsonSerialize() + $data;

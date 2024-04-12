@@ -44,7 +44,7 @@ Create a Rebilly Client
 
 ```php
 use Rebilly\Sdk\Client;
-use Rebilly\Sdk\CoreService;
+use Rebilly\Sdk\Service;
 
 // Instantiate Rebilly client.
 $client = new Client([
@@ -52,7 +52,7 @@ $client = new Client([
     'organizationId' => '{organizationId}',
     'apiKey' => '{secretKey}',
 ]);
-$coreService = new CoreService(client: $client);
+$service = new Service(client: $client);
 ```
 
 Create a Customer
@@ -71,7 +71,7 @@ $customer = Customer::from([])
     );
 
 try {
-  $customer = $coreService->customers()->create($form);
+  $customer = $service->customers()->create($form);
 } catch (DataValidationException $e) {
   var_dump($e->getValidationErrors());
 }
@@ -87,9 +87,9 @@ Read [Rebilly REST APIs documentation][link-api-doc] for more details.
 
 This new major version brings several new helper classes to communicate with Rebilly REST APIs and some incompatibilities that should be tested before switching SDK versions.
 
-- Now, a service class can be explicitly created to make the API calls instead of using only the `Client`. The service is a helper class that encapsulates the API calls for a specific context. It means that `CoreService` is responsible for the API calls related to the [core API][link-api-doc], `UsersService` for the [users API][link-api-doc-user], and `ReportsService` for the [reports API][link-api-doc-reports]. `CombinedService` can be used to make calls to any of the contexts.
+- Now, a `Service` class can be explicitly instantiated to make the API calls instead of using only the `Client`, as it encapsulates the API calls.
 
-- To simplify the migration from the previous version, the `Client` object can be used to make calls to any API context directly. For example, instead of instantiating a service class, one can use:
+- To simplify the migration from the previous version, the `Client` object can be used to make calls to any API directly. For example, instead of instantiating a service class, one can use:
   ```php
   $client->customers()->create($form);
   ```
@@ -103,8 +103,6 @@ This new major version brings several new helper classes to communicate with Reb
 [ico-downloads]: https://img.shields.io/packagist/dt/rebilly/client-php.svg
 
 [link-api-doc]: https://api-reference.rebilly.com/
-[link-api-doc-user]: https://user-api-docs.rebilly.com/
-[link-api-doc-reports]: https://reports-api-docs.rebilly.com/
 [link-github]: https://github.com/Rebilly/rebilly-php
 [link-packagist]: https://packagist.org/packages/rebilly/client-php
 [link-downloads]: https://packagist.org/packages/rebilly/client-php

@@ -344,7 +344,12 @@ class EmailMessage implements JsonSerializable
             $data['html'] = $this->fields['html'];
         }
         if (array_key_exists('attachments', $this->fields)) {
-            $data['attachments'] = $this->fields['attachments'];
+            $data['attachments'] = $this->fields['attachments'] !== null
+                ? array_map(
+                    static fn (EmailMessageAttachments $emailMessageAttachments) => $emailMessageAttachments->jsonSerialize(),
+                    $this->fields['attachments'],
+                )
+                : null;
         }
         if (array_key_exists('responseCode', $this->fields)) {
             $data['responseCode'] = $this->fields['responseCode'];
@@ -365,7 +370,12 @@ class EmailMessage implements JsonSerializable
             $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
 
         return $data;

@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class RebillyShipping implements Shipping, JsonSerializable
+class RebillyShipping implements Shipping
 {
     private array $fields = [];
 

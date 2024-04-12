@@ -14,8 +14,9 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
+use JsonSerializable;
 
-interface Quote
+interface Quote extends JsonSerializable
 {
     public function getAction(): string;
 

@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class ReadyToPayPaymentCardMethod implements ReadyToPayMethods, JsonSerializable
+class ReadyToPayPaymentCardMethod implements ReadyToPayMethods
 {
     public const BRANDS_VISA = 'Visa';
 

@@ -671,13 +671,26 @@ class CheckoutForm implements JsonSerializable
             $data['customDomain'] = $this->fields['customDomain'];
         }
         if (array_key_exists('plans', $this->fields)) {
-            $data['plans'] = $this->fields['plans'];
+            $data['plans'] = array_map(
+                static fn (CheckoutFormPlan $checkoutFormPlan) => $checkoutFormPlan->jsonSerialize(),
+                $this->fields['plans'],
+            );
         }
         if (array_key_exists('addonPlans', $this->fields)) {
-            $data['addonPlans'] = $this->fields['addonPlans'];
+            $data['addonPlans'] = $this->fields['addonPlans'] !== null
+                ? array_map(
+                    static fn (CheckoutFormPlan $checkoutFormPlan) => $checkoutFormPlan->jsonSerialize(),
+                    $this->fields['addonPlans'],
+                )
+                : null;
         }
         if (array_key_exists('bumpPlans', $this->fields)) {
-            $data['bumpPlans'] = $this->fields['bumpPlans'];
+            $data['bumpPlans'] = $this->fields['bumpPlans'] !== null
+                ? array_map(
+                    static fn (CheckoutFormPlan $checkoutFormPlan) => $checkoutFormPlan->jsonSerialize(),
+                    $this->fields['bumpPlans'],
+                )
+                : null;
         }
         if (array_key_exists('accountsEnabled', $this->fields)) {
             $data['accountsEnabled'] = $this->fields['accountsEnabled'];
@@ -707,7 +720,12 @@ class CheckoutForm implements JsonSerializable
             $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
 
         return $data;

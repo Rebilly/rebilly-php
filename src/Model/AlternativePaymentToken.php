@@ -15,9 +15,8 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use JsonSerializable;
 
-class AlternativePaymentToken implements CompositeToken, JsonSerializable
+class AlternativePaymentToken implements CompositeToken
 {
     public const METHOD_CASH = 'cash';
 
@@ -466,7 +465,7 @@ class AlternativePaymentToken implements CompositeToken, JsonSerializable
             $data['method'] = $this->fields['method'];
         }
         if (array_key_exists('billingAddress', $this->fields)) {
-            $data['billingAddress'] = $this->fields['billingAddress']?->jsonSerialize();
+            $data['billingAddress'] = $this->fields['billingAddress']->jsonSerialize();
         }
         if (array_key_exists('id', $this->fields)) {
             $data['id'] = $this->fields['id'];
@@ -493,7 +492,12 @@ class AlternativePaymentToken implements CompositeToken, JsonSerializable
             $data['expirationTime'] = $this->fields['expirationTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
 
         return $data;

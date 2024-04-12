@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-interface PostPaymentInstrumentRequest
+use JsonSerializable;
+
+interface PostPaymentInstrumentRequest extends JsonSerializable
 {
 }

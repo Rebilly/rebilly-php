@@ -102,7 +102,12 @@ class DepositRequestEmbedded implements JsonSerializable
             $data['website'] = $this->fields['website']?->jsonSerialize();
         }
         if (array_key_exists('transactions', $this->fields)) {
-            $data['transactions'] = $this->fields['transactions'];
+            $data['transactions'] = $this->fields['transactions'] !== null
+                ? array_map(
+                    static fn (Transaction $transaction) => $transaction->jsonSerialize(),
+                    $this->fields['transactions'],
+                )
+                : null;
         }
 
         return $data;

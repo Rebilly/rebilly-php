@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class FileCreateFromInline implements PostFileRequest, JsonSerializable
+class FileCreateFromInline implements PostFileRequest
 {
     public const SOURCE_TYPE_UPLOAD = 'upload';
 

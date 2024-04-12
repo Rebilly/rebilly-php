@@ -15,9 +15,8 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use JsonSerializable;
 
-class ProofOfCreditFileKycDocument implements KycDocument, JsonSerializable
+class ProofOfCreditFileKycDocument implements KycDocument
 {
     public const DOCUMENT_SUBTYPE_PASSPORT = 'passport';
 
@@ -428,7 +427,12 @@ class ProofOfCreditFileKycDocument implements KycDocument, JsonSerializable
             $data['notes'] = $this->fields['notes'];
         }
         if (array_key_exists('tags', $this->fields)) {
-            $data['tags'] = $this->fields['tags'];
+            $data['tags'] = $this->fields['tags'] !== null
+                ? array_map(
+                    static fn (Tag $tag) => $tag->jsonSerialize(),
+                    $this->fields['tags'],
+                )
+                : null;
         }
         if (array_key_exists('reason', $this->fields)) {
             $data['reason'] = $this->fields['reason'];
@@ -446,7 +450,12 @@ class ProofOfCreditFileKycDocument implements KycDocument, JsonSerializable
             $data['documentMatches'] = $this->fields['documentMatches']?->jsonSerialize();
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
         if (array_key_exists('_embedded', $this->fields)) {
             $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();

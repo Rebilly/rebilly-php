@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-interface ReadyToPayMethods
+use JsonSerializable;
+
+interface ReadyToPayMethods extends JsonSerializable
 {
     public function getMethod(): string;
 

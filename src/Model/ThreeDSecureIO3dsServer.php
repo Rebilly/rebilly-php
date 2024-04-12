@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class ThreeDSecureIO3dsServer implements TestProcessor3dsServers, JsonSerializable
+class ThreeDSecureIO3dsServer implements TestProcessor3dsServers
 {
     public const TRANSACTION_TYPE_01 = '01';
 

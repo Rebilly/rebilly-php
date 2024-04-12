@@ -84,10 +84,20 @@ class RuleActionCreateInfusionsoftOrderContactBody implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('email_addresses', $this->fields)) {
-            $data['email_addresses'] = $this->fields['email_addresses'];
+            $data['email_addresses'] = $this->fields['email_addresses'] !== null
+                ? array_map(
+                    static fn (RuleActionCreateInfusionsoftOrderContactBodyEmailAddresses $ruleActionCreateInfusionsoftOrderContactBodyEmailAddresses) => $ruleActionCreateInfusionsoftOrderContactBodyEmailAddresses->jsonSerialize(),
+                    $this->fields['email_addresses'],
+                )
+                : null;
         }
         if (array_key_exists('phone_numbers', $this->fields)) {
-            $data['phone_numbers'] = $this->fields['phone_numbers'];
+            $data['phone_numbers'] = $this->fields['phone_numbers'] !== null
+                ? array_map(
+                    static fn (RuleActionCreateInfusionsoftOrderContactBodyPhoneNumbers $ruleActionCreateInfusionsoftOrderContactBodyPhoneNumbers) => $ruleActionCreateInfusionsoftOrderContactBodyPhoneNumbers->jsonSerialize(),
+                    $this->fields['phone_numbers'],
+                )
+                : null;
         }
 
         return $data;

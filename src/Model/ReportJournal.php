@@ -154,7 +154,12 @@ class ReportJournal implements JsonSerializable
             $data['recognizedAt'] = $this->fields['recognizedAt'];
         }
         if (array_key_exists('data', $this->fields)) {
-            $data['data'] = $this->fields['data'];
+            $data['data'] = $this->fields['data'] !== null
+                ? array_map(
+                    static fn (ReportJournalData $reportJournalData) => $reportJournalData->jsonSerialize(),
+                    $this->fields['data'],
+                )
+                : null;
         }
 
         return $data;

@@ -61,7 +61,7 @@ class ApplePayValidation extends DigitalWalletValidation
     {
         $data = [];
         if (array_key_exists('validationRequest', $this->fields)) {
-            $data['validationRequest'] = $this->fields['validationRequest']?->jsonSerialize();
+            $data['validationRequest'] = $this->fields['validationRequest']->jsonSerialize();
         }
         if (array_key_exists('validationResponse', $this->fields)) {
             $data['validationResponse'] = $this->fields['validationResponse'];

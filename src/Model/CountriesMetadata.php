@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-interface CountriesMetadata
+use JsonSerializable;
+
+interface CountriesMetadata extends JsonSerializable
 {
     public function getMode(): string;
 

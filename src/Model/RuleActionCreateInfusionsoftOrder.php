@@ -87,10 +87,10 @@ class RuleActionCreateInfusionsoftOrder extends RuleAction
     {
         $data = [];
         if (array_key_exists('contactBody', $this->fields)) {
-            $data['contactBody'] = $this->fields['contactBody']?->jsonSerialize();
+            $data['contactBody'] = $this->fields['contactBody']->jsonSerialize();
         }
         if (array_key_exists('orderBody', $this->fields)) {
-            $data['orderBody'] = $this->fields['orderBody']?->jsonSerialize();
+            $data['orderBody'] = $this->fields['orderBody']->jsonSerialize();
         }
         if (array_key_exists('credentialHash', $this->fields)) {
             $data['credentialHash'] = $this->fields['credentialHash'];

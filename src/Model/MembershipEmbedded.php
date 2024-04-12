@@ -58,7 +58,12 @@ class MembershipEmbedded implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('roles', $this->fields)) {
-            $data['roles'] = $this->fields['roles'];
+            $data['roles'] = $this->fields['roles'] !== null
+                ? array_map(
+                    static fn (Role $role) => $role->jsonSerialize(),
+                    $this->fields['roles'],
+                )
+                : null;
         }
 
         return $data;

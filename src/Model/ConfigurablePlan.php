@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-interface ConfigurablePlan
+use JsonSerializable;
+
+interface ConfigurablePlan extends JsonSerializable
 {
     public function getId(): ?string;
 

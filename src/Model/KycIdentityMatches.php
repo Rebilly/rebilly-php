@@ -15,9 +15,8 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use JsonSerializable;
 
-class KycIdentityMatches implements PostKycDocumentMatchesRequest, JsonSerializable
+class KycIdentityMatches implements PostKycDocumentMatchesRequest
 {
     public const DOCUMENT_SUBTYPE_PASSPORT = 'passport';
 

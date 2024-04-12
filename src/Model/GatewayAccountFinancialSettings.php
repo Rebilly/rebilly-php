@@ -77,10 +77,15 @@ class GatewayAccountFinancialSettings implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('settlementSettings', $this->fields)) {
-            $data['settlementSettings'] = $this->fields['settlementSettings']?->jsonSerialize();
+            $data['settlementSettings'] = $this->fields['settlementSettings']->jsonSerialize();
         }
         if (array_key_exists('riskReserveSettings', $this->fields)) {
-            $data['riskReserveSettings'] = $this->fields['riskReserveSettings'];
+            $data['riskReserveSettings'] = $this->fields['riskReserveSettings'] !== null
+                ? array_map(
+                    static fn (GatewayAccountFinancialSettingsRiskReserveSettings $gatewayAccountFinancialSettingsRiskReserveSettings) => $gatewayAccountFinancialSettingsRiskReserveSettings->jsonSerialize(),
+                    $this->fields['riskReserveSettings'],
+                )
+                : null;
         }
 
         return $data;

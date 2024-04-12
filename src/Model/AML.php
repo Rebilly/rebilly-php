@@ -248,22 +248,47 @@ class AML implements JsonSerializable
             $data['nationality'] = $this->fields['nationality'];
         }
         if (array_key_exists('address', $this->fields)) {
-            $data['address'] = $this->fields['address'];
+            $data['address'] = $this->fields['address'] !== null
+                ? array_map(
+                    static fn (AMLAddress $aMLAddress) => $aMLAddress->jsonSerialize(),
+                    $this->fields['address'],
+                )
+                : null;
         }
         if (array_key_exists('dob', $this->fields)) {
-            $data['dob'] = $this->fields['dob'];
+            $data['dob'] = $this->fields['dob'] !== null
+                ? array_map(
+                    static fn (DateTimeImmutable $item) => $item->format('Y-m-d'),
+                    $this->fields['dob'],
+                )
+                : null;
         }
         if (array_key_exists('aliases', $this->fields)) {
-            $data['aliases'] = $this->fields['aliases'];
+            $data['aliases'] = $this->fields['aliases'] !== null
+                ? array_map(
+                    static fn (AMLAliases $aMLAliases) => $aMLAliases->jsonSerialize(),
+                    $this->fields['aliases'],
+                )
+                : null;
         }
         if (array_key_exists('passport', $this->fields)) {
-            $data['passport'] = $this->fields['passport'];
+            $data['passport'] = $this->fields['passport'] !== null
+                ? array_map(
+                    static fn (AMLPassport $aMLPassport) => $aMLPassport->jsonSerialize(),
+                    $this->fields['passport'],
+                )
+                : null;
         }
         if (array_key_exists('comments', $this->fields)) {
             $data['comments'] = $this->fields['comments'];
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
 
         return $data;

@@ -73,7 +73,7 @@ class PlanTrial implements JsonSerializable
             $data['price'] = $this->fields['price'];
         }
         if (array_key_exists('period', $this->fields)) {
-            $data['period'] = $this->fields['period']?->jsonSerialize();
+            $data['period'] = $this->fields['period']->jsonSerialize();
         }
 
         return $data;

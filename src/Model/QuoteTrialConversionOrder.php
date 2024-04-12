@@ -15,9 +15,8 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use JsonSerializable;
 
-class QuoteTrialConversionOrder implements Quote, JsonSerializable
+class QuoteTrialConversionOrder implements Quote
 {
     public const TYPE_SUBSCRIPTION_ORDER = 'subscription-order';
 
@@ -428,7 +427,12 @@ class QuoteTrialConversionOrder implements Quote, JsonSerializable
             $data['acceptanceConditions'] = $this->fields['acceptanceConditions'];
         }
         if (array_key_exists('acceptanceFulfillment', $this->fields)) {
-            $data['acceptanceFulfillment'] = $this->fields['acceptanceFulfillment'];
+            $data['acceptanceFulfillment'] = $this->fields['acceptanceFulfillment'] !== null
+                ? array_map(
+                    static fn (QuoteTrialConversionOrderAcceptanceFulfillment $quoteTrialConversionOrderAcceptanceFulfillment) => $quoteTrialConversionOrderAcceptanceFulfillment->jsonSerialize(),
+                    $this->fields['acceptanceFulfillment'],
+                )
+                : null;
         }
         if (array_key_exists('subscriptionId', $this->fields)) {
             $data['subscriptionId'] = $this->fields['subscriptionId'];
@@ -446,7 +450,10 @@ class QuoteTrialConversionOrder implements Quote, JsonSerializable
             $data['customerId'] = $this->fields['customerId'];
         }
         if (array_key_exists('items', $this->fields)) {
-            $data['items'] = $this->fields['items'];
+            $data['items'] = array_map(
+                static fn (QuoteTrialConversionOrderItems $quoteTrialConversionOrderItems) => $quoteTrialConversionOrderItems->jsonSerialize(),
+                $this->fields['items'],
+            );
         }
         if (array_key_exists('invoicePreview', $this->fields)) {
             $data['invoicePreview'] = $this->fields['invoicePreview']?->jsonSerialize();
@@ -488,7 +495,12 @@ class QuoteTrialConversionOrder implements Quote, JsonSerializable
             $data['couponIds'] = $this->fields['couponIds'];
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
         if (array_key_exists('_embedded', $this->fields)) {
             $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();

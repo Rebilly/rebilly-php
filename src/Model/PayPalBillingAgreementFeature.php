@@ -15,9 +15,8 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use JsonSerializable;
 
-class PayPalBillingAgreementFeature implements ReadyToPayPayPalMethodFeature, JsonSerializable
+class PayPalBillingAgreementFeature implements ReadyToPayPayPalMethodFeature
 {
     private array $fields = [];
 
@@ -114,7 +113,7 @@ class PayPalBillingAgreementFeature implements ReadyToPayPayPalMethodFeature, Js
             $data['billingAgreementToken'] = $this->fields['billingAgreementToken'];
         }
         if (array_key_exists('expirationTime', $this->fields)) {
-            $data['expirationTime'] = $this->fields['expirationTime']?->format(DateTimeInterface::RFC3339);
+            $data['expirationTime'] = $this->fields['expirationTime']->format(DateTimeInterface::RFC3339);
         }
 
         return $data;

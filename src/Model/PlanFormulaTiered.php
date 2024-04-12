@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class PlanFormulaTiered implements PlanPriceFormula, JsonSerializable
+class PlanFormulaTiered implements PlanPriceFormula
 {
     private array $fields = [];
 
@@ -80,7 +78,10 @@ class PlanFormulaTiered implements PlanPriceFormula, JsonSerializable
             'formula' => 'tiered',
         ];
         if (array_key_exists('brackets', $this->fields)) {
-            $data['brackets'] = $this->fields['brackets'];
+            $data['brackets'] = array_map(
+                static fn (PlanFormulaTieredBrackets $planFormulaTieredBrackets) => $planFormulaTieredBrackets->jsonSerialize(),
+                $this->fields['brackets'],
+            );
         }
         if (array_key_exists('minQuantity', $this->fields)) {
             $data['minQuantity'] = $this->fields['minQuantity'];

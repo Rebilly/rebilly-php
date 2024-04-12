@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-interface PatchServiceCredentialRequest
+use JsonSerializable;
+
+interface PatchServiceCredentialRequest extends JsonSerializable
 {
     public function getStatus(): ?string;
 

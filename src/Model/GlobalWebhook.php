@@ -361,7 +361,12 @@ class GlobalWebhook implements JsonSerializable
             $data['url'] = $this->fields['url'];
         }
         if (array_key_exists('headers', $this->fields)) {
-            $data['headers'] = $this->fields['headers'];
+            $data['headers'] = $this->fields['headers'] !== null
+                ? array_map(
+                    static fn (GlobalWebhookHeaders $globalWebhookHeaders) => $globalWebhookHeaders->jsonSerialize(),
+                    $this->fields['headers'],
+                )
+                : null;
         }
         if (array_key_exists('credentialHash', $this->fields)) {
             $data['credentialHash'] = $this->fields['credentialHash'];
@@ -379,7 +384,12 @@ class GlobalWebhook implements JsonSerializable
             $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
 
         return $data;

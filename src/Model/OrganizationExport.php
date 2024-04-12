@@ -136,7 +136,12 @@ class OrganizationExport implements JsonSerializable
             $data['status'] = $this->fields['status'];
         }
         if (array_key_exists('resources', $this->fields)) {
-            $data['resources'] = $this->fields['resources'];
+            $data['resources'] = $this->fields['resources'] !== null
+                ? array_map(
+                    static fn (OrganizationExportResources $organizationExportResources) => $organizationExportResources->jsonSerialize(),
+                    $this->fields['resources'],
+                )
+                : null;
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
@@ -148,7 +153,12 @@ class OrganizationExport implements JsonSerializable
             $data['retentionTime'] = $this->fields['retentionTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
 
         return $data;

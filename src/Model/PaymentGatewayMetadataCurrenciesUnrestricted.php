@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class PaymentGatewayMetadataCurrenciesUnrestricted implements PaymentGatewayMetadataCurrencies, JsonSerializable
+class PaymentGatewayMetadataCurrenciesUnrestricted implements PaymentGatewayMetadataCurrencies
 {
     public const MODE_UNKNOWN = 'unknown';
 

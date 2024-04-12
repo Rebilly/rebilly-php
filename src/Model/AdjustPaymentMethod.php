@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-interface AdjustPaymentMethod
+use JsonSerializable;
+
+interface AdjustPaymentMethod extends JsonSerializable
 {
     public function getPaymentMethod(): string;
 }

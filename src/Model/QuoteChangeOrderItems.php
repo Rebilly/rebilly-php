@@ -166,7 +166,7 @@ class QuoteChangeOrderItems implements JsonSerializable
             $data['quantity'] = $this->fields['quantity'];
         }
         if (array_key_exists('plan', $this->fields)) {
-            $data['plan'] = $this->fields['plan']?->jsonSerialize();
+            $data['plan'] = $this->fields['plan']->jsonSerialize();
         }
         if (array_key_exists('description', $this->fields)) {
             $data['description'] = $this->fields['description'];

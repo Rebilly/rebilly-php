@@ -305,13 +305,28 @@ class AmlCheck implements JsonSerializable
             $data['customer'] = $this->fields['customer']?->jsonSerialize();
         }
         if (array_key_exists('hits', $this->fields)) {
-            $data['hits'] = $this->fields['hits'];
+            $data['hits'] = $this->fields['hits'] !== null
+                ? array_map(
+                    static fn (AML $aML) => $aML->jsonSerialize(),
+                    $this->fields['hits'],
+                )
+                : null;
         }
         if (array_key_exists('tags', $this->fields)) {
-            $data['tags'] = $this->fields['tags'];
+            $data['tags'] = $this->fields['tags'] !== null
+                ? array_map(
+                    static fn (Tag $tag) => $tag->jsonSerialize(),
+                    $this->fields['tags'],
+                )
+                : null;
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
 
         return $data;

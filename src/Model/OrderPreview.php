@@ -246,7 +246,10 @@ class OrderPreview implements JsonSerializable
             $data['websiteId'] = $this->fields['websiteId'];
         }
         if (array_key_exists('items', $this->fields)) {
-            $data['items'] = $this->fields['items'];
+            $data['items'] = array_map(
+                static fn (OrderPreviewItems $orderPreviewItems) => $orderPreviewItems->jsonSerialize(),
+                $this->fields['items'],
+            );
         }
         if (array_key_exists('billingAddress', $this->fields)) {
             $data['billingAddress'] = $this->fields['billingAddress']?->jsonSerialize();
@@ -261,16 +264,36 @@ class OrderPreview implements JsonSerializable
             $data['currency'] = $this->fields['currency'];
         }
         if (array_key_exists('lineItems', $this->fields)) {
-            $data['lineItems'] = $this->fields['lineItems'];
+            $data['lineItems'] = $this->fields['lineItems'] !== null
+                ? array_map(
+                    static fn (OrderPreviewLineItems $orderPreviewLineItems) => $orderPreviewLineItems->jsonSerialize(),
+                    $this->fields['lineItems'],
+                )
+                : null;
         }
         if (array_key_exists('shippingRates', $this->fields)) {
-            $data['shippingRates'] = $this->fields['shippingRates'];
+            $data['shippingRates'] = $this->fields['shippingRates'] !== null
+                ? array_map(
+                    static fn (ShippingOption $shippingOption) => $shippingOption->jsonSerialize(),
+                    $this->fields['shippingRates'],
+                )
+                : null;
         }
         if (array_key_exists('taxes', $this->fields)) {
-            $data['taxes'] = $this->fields['taxes'];
+            $data['taxes'] = $this->fields['taxes'] !== null
+                ? array_map(
+                    static fn (OrderPreviewTaxes $orderPreviewTaxes) => $orderPreviewTaxes->jsonSerialize(),
+                    $this->fields['taxes'],
+                )
+                : null;
         }
         if (array_key_exists('discounts', $this->fields)) {
-            $data['discounts'] = $this->fields['discounts'];
+            $data['discounts'] = $this->fields['discounts'] !== null
+                ? array_map(
+                    static fn (OrderPreviewDiscounts $orderPreviewDiscounts) => $orderPreviewDiscounts->jsonSerialize(),
+                    $this->fields['discounts'],
+                )
+                : null;
         }
         if (array_key_exists('subtotalAmount', $this->fields)) {
             $data['subtotalAmount'] = $this->fields['subtotalAmount'];

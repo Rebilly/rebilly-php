@@ -53,7 +53,7 @@ class Cleo extends GatewayAccount
     {
         $data = [];
         if (array_key_exists('credentials', $this->fields)) {
-            $data['credentials'] = $this->fields['credentials']?->jsonSerialize();
+            $data['credentials'] = $this->fields['credentials']->jsonSerialize();
         }
 
         return parent::jsonSerialize() + $data;

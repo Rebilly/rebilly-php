@@ -58,7 +58,12 @@ class KycRequestEmbedded implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('documents', $this->fields)) {
-            $data['documents'] = $this->fields['documents'];
+            $data['documents'] = $this->fields['documents'] !== null
+                ? array_map(
+                    static fn (KycDocument $kycDocument) => $kycDocument->jsonSerialize(),
+                    $this->fields['documents'],
+                )
+                : null;
         }
 
         return $data;

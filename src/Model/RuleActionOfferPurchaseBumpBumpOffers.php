@@ -120,10 +120,16 @@ class RuleActionOfferPurchaseBumpBumpOffers implements JsonSerializable
             $data['weight'] = $this->fields['weight'];
         }
         if (array_key_exists('offers', $this->fields)) {
-            $data['offers'] = $this->fields['offers'];
+            $data['offers'] = array_map(
+                static fn (PurchaseBumpOffer $purchaseBumpOffer) => $purchaseBumpOffer->jsonSerialize(),
+                $this->fields['offers'],
+            );
         }
         if (array_key_exists('choices', $this->fields)) {
-            $data['choices'] = $this->fields['choices'];
+            $data['choices'] = array_map(
+                static fn (RuleActionOfferPurchaseBumpBumpOffersChoices $ruleActionOfferPurchaseBumpBumpOffersChoices) => $ruleActionOfferPurchaseBumpBumpOffersChoices->jsonSerialize(),
+                $this->fields['choices'],
+            );
         }
 
         return $data;

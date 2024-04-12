@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class PatchPlaidCredential implements PatchServiceCredentialRequest, JsonSerializable
+class PatchPlaidCredential implements PatchServiceCredentialRequest
 {
     public const STATUS_ACTIVE = 'active';
 

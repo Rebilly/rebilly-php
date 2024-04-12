@@ -133,7 +133,12 @@ class CreditFileMatches implements JsonSerializable
             $data['decision'] = $this->fields['decision'];
         }
         if (array_key_exists('trades', $this->fields)) {
-            $data['trades'] = $this->fields['trades'];
+            $data['trades'] = $this->fields['trades'] !== null
+                ? array_map(
+                    static fn (CreditFileMatchesTrades $creditFileMatchesTrades) => $creditFileMatchesTrades->jsonSerialize(),
+                    $this->fields['trades'],
+                )
+                : null;
         }
         if (array_key_exists('referenceData', $this->fields)) {
             $data['referenceData'] = $this->fields['referenceData']?->jsonSerialize();

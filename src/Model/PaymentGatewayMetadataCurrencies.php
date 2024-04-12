@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-interface PaymentGatewayMetadataCurrencies
+use JsonSerializable;
+
+interface PaymentGatewayMetadataCurrencies extends JsonSerializable
 {
     public function getMode(): string;
 }

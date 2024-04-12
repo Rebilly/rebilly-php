@@ -15,9 +15,8 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use JsonSerializable;
 
-class OneTimeSale implements SubscriptionOrOneTimeSale, JsonSerializable
+class OneTimeSale implements SubscriptionOrOneTimeSale
 {
     public const STATUS_PENDING = 'pending';
 
@@ -450,7 +449,10 @@ class OneTimeSale implements SubscriptionOrOneTimeSale, JsonSerializable
             $data['recentInvoiceId'] = $this->fields['recentInvoiceId'];
         }
         if (array_key_exists('items', $this->fields)) {
-            $data['items'] = $this->fields['items'];
+            $data['items'] = array_map(
+                static fn (SubscriptionOrOneTimeSaleItem $subscriptionOrOneTimeSaleItem) => $subscriptionOrOneTimeSaleItem->jsonSerialize(),
+                $this->fields['items'],
+            );
         }
         if (array_key_exists('deliveryAddress', $this->fields)) {
             $data['deliveryAddress'] = $this->fields['deliveryAddress']?->jsonSerialize();
@@ -495,7 +497,12 @@ class OneTimeSale implements SubscriptionOrOneTimeSale, JsonSerializable
             $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
         if (array_key_exists('_embedded', $this->fields)) {
             $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();

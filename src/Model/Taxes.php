@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-interface Taxes
+use JsonSerializable;
+
+interface Taxes extends JsonSerializable
 {
     public function getCalculator(): string;
 

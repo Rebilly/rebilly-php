@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-interface PostFileRequest
+use JsonSerializable;
+
+interface PostFileRequest extends JsonSerializable
 {
     public function getIsPublic(): ?bool;
 

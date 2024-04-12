@@ -60,7 +60,10 @@ class RuleActionDisplayOtherChoices extends RuleAction
     {
         $data = [];
         if (array_key_exists('choices', $this->fields)) {
-            $data['choices'] = $this->fields['choices'];
+            $data['choices'] = array_map(
+                static fn (RuleActionDisplayOtherChoicesChoices $ruleActionDisplayOtherChoicesChoices) => $ruleActionDisplayOtherChoicesChoices->jsonSerialize(),
+                $this->fields['choices'],
+            );
         }
 
         return parent::jsonSerialize() + $data;

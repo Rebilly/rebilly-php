@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class PaymentInstructionMethods implements PaymentInstruction, JsonSerializable
+class PaymentInstructionMethods implements PaymentInstruction
 {
     public const METHODS_PAYMENT_CARD = 'payment-card';
 

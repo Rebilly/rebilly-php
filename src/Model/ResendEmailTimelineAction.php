@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class ResendEmailTimelineAction implements TimelineAction, JsonSerializable
+class ResendEmailTimelineAction implements TimelineAction
 {
     private array $fields = [];
 

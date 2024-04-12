@@ -120,6 +120,9 @@ class RiskMetadata implements JsonSerializable
         if (array_key_exists('billingAddressVelocity', $data)) {
             $this->setBillingAddressVelocity($data['billingAddressVelocity']);
         }
+        if (array_key_exists('paymentInstrumentApprovedTransactionCount', $data)) {
+            $this->setPaymentInstrumentApprovedTransactionCount($data['paymentInstrumentApprovedTransactionCount']);
+        }
         if (array_key_exists('score', $data)) {
             $this->setScore($data['score']);
         }
@@ -344,6 +347,11 @@ class RiskMetadata implements JsonSerializable
         return $this->fields['billingAddressVelocity'] ?? null;
     }
 
+    public function getPaymentInstrumentApprovedTransactionCount(): ?int
+    {
+        return $this->fields['paymentInstrumentApprovedTransactionCount'] ?? null;
+    }
+
     public function getScore(): ?int
     {
         return $this->fields['score'] ?? null;
@@ -450,6 +458,9 @@ class RiskMetadata implements JsonSerializable
         }
         if (array_key_exists('billingAddressVelocity', $this->fields)) {
             $data['billingAddressVelocity'] = $this->fields['billingAddressVelocity'];
+        }
+        if (array_key_exists('paymentInstrumentApprovedTransactionCount', $this->fields)) {
+            $data['paymentInstrumentApprovedTransactionCount'] = $this->fields['paymentInstrumentApprovedTransactionCount'];
         }
         if (array_key_exists('score', $this->fields)) {
             $data['score'] = $this->fields['score'];
@@ -658,6 +669,13 @@ class RiskMetadata implements JsonSerializable
     private function setBillingAddressVelocity(null|int $billingAddressVelocity): static
     {
         $this->fields['billingAddressVelocity'] = $billingAddressVelocity;
+
+        return $this;
+    }
+
+    private function setPaymentInstrumentApprovedTransactionCount(null|int $paymentInstrumentApprovedTransactionCount): static
+    {
+        $this->fields['paymentInstrumentApprovedTransactionCount'] = $paymentInstrumentApprovedTransactionCount;
 
         return $this;
     }

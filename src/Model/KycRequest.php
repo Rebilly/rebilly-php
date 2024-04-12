@@ -231,7 +231,10 @@ class KycRequest implements JsonSerializable
             $data['customerId'] = $this->fields['customerId'];
         }
         if (array_key_exists('documents', $this->fields)) {
-            $data['documents'] = $this->fields['documents'];
+            $data['documents'] = array_map(
+                static fn (KycRequestDocument $kycRequestDocument) => $kycRequestDocument->jsonSerialize(),
+                $this->fields['documents'],
+            );
         }
         if (array_key_exists('status', $this->fields)) {
             $data['status'] = $this->fields['status'];
@@ -258,7 +261,12 @@ class KycRequest implements JsonSerializable
             $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
         if (array_key_exists('_embedded', $this->fields)) {
             $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();

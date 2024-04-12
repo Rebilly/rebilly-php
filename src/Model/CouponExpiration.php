@@ -53,7 +53,7 @@ class CouponExpiration implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('expiredTime', $this->fields)) {
-            $data['expiredTime'] = $this->fields['expiredTime']?->format(DateTimeInterface::RFC3339);
+            $data['expiredTime'] = $this->fields['expiredTime']->format(DateTimeInterface::RFC3339);
         }
 
         return $data;

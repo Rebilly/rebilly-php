@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class ReadyToPayKlarnaMethod implements ReadyToPayMethods, JsonSerializable
+class ReadyToPayKlarnaMethod implements ReadyToPayMethods
 {
     private array $fields = [];
 

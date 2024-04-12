@@ -586,7 +586,7 @@ class PostDisputeRequest implements JsonSerializable
             $data['status'] = $this->fields['status'];
         }
         if (array_key_exists('postedTime', $this->fields)) {
-            $data['postedTime'] = $this->fields['postedTime']?->format(DateTimeInterface::RFC3339);
+            $data['postedTime'] = $this->fields['postedTime']->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('deadlineTime', $this->fields)) {
             $data['deadlineTime'] = $this->fields['deadlineTime']?->format(DateTimeInterface::RFC3339);

@@ -272,7 +272,12 @@ class PayoutRequest implements JsonSerializable
             $data['selectPaymentInstrumentUrl'] = $this->fields['selectPaymentInstrumentUrl'];
         }
         if (array_key_exists('allocations', $this->fields)) {
-            $data['allocations'] = $this->fields['allocations'];
+            $data['allocations'] = $this->fields['allocations'] !== null
+                ? array_map(
+                    static fn (PayoutRequestAllocations $payoutRequestAllocations) => $payoutRequestAllocations->jsonSerialize(),
+                    $this->fields['allocations'],
+                )
+                : null;
         }
         if (array_key_exists('selectedPaymentInstrumentRedirectUrl', $this->fields)) {
             $data['selectedPaymentInstrumentRedirectUrl'] = $this->fields['selectedPaymentInstrumentRedirectUrl'];
@@ -287,7 +292,12 @@ class PayoutRequest implements JsonSerializable
             $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
 
         return $data;

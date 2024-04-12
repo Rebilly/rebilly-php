@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class PaymentCardUpdatePlain implements PatchPaymentInstrumentRequest, JsonSerializable
+class PaymentCardUpdatePlain implements PatchPaymentInstrumentRequest
 {
     private array $fields = [];
 

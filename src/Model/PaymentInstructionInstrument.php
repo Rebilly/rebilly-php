@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
-
-class PaymentInstructionInstrument implements PaymentInstruction, JsonSerializable
+class PaymentInstructionInstrument implements PaymentInstruction
 {
     private array $fields = [];
 

@@ -657,10 +657,20 @@ class Invoice implements JsonSerializable
             $data['notes'] = $this->fields['notes'];
         }
         if (array_key_exists('items', $this->fields)) {
-            $data['items'] = $this->fields['items'];
+            $data['items'] = $this->fields['items'] !== null
+                ? array_map(
+                    static fn (InvoiceItem $invoiceItem) => $invoiceItem->jsonSerialize(),
+                    $this->fields['items'],
+                )
+                : null;
         }
         if (array_key_exists('discounts', $this->fields)) {
-            $data['discounts'] = $this->fields['discounts'];
+            $data['discounts'] = $this->fields['discounts'] !== null
+                ? array_map(
+                    static fn (InvoiceDiscounts $invoiceDiscounts) => $invoiceDiscounts->jsonSerialize(),
+                    $this->fields['discounts'],
+                )
+                : null;
         }
         if (array_key_exists('autopayScheduledTime', $this->fields)) {
             $data['autopayScheduledTime'] = $this->fields['autopayScheduledTime']?->format(DateTimeInterface::RFC3339);
@@ -705,7 +715,12 @@ class Invoice implements JsonSerializable
             $data['customerId'] = $this->fields['customerId'];
         }
         if (array_key_exists('transactions', $this->fields)) {
-            $data['transactions'] = $this->fields['transactions'];
+            $data['transactions'] = $this->fields['transactions'] !== null
+                ? array_map(
+                    static fn (Transaction $transaction) => $transaction->jsonSerialize(),
+                    $this->fields['transactions'],
+                )
+                : null;
         }
         if (array_key_exists('retryInstruction', $this->fields)) {
             $data['retryInstruction'] = $this->fields['retryInstruction']?->jsonSerialize();
@@ -729,7 +744,12 @@ class Invoice implements JsonSerializable
             $data['delinquencyTime'] = $this->fields['delinquencyTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('_links', $this->fields)) {
-            $data['_links'] = $this->fields['_links'];
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
         }
         if (array_key_exists('_embedded', $this->fields)) {
             $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();

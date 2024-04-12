@@ -142,7 +142,12 @@ class ReportRevenueWaterfall implements JsonSerializable
             $data['remaining'] = $this->fields['remaining'];
         }
         if (array_key_exists('waterfall', $this->fields)) {
-            $data['waterfall'] = $this->fields['waterfall'];
+            $data['waterfall'] = $this->fields['waterfall'] !== null
+                ? array_map(
+                    static fn (ReportRevenueWaterfallWaterfall $reportRevenueWaterfallWaterfall) => $reportRevenueWaterfallWaterfall->jsonSerialize(),
+                    $this->fields['waterfall'],
+                )
+                : null;
         }
 
         return $data;
