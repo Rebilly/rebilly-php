@@ -1,5 +1,13 @@
 # @rebilly/client-php
 
+## 3.1.1
+
+### Patch Changes
+
+- Move JsonSerializable down to interfaces
+- Add isAdBlockEnabled to RiskMetadata.browserData Rebilly/api-definitions#1848
+- Add jsonSerialization for non-scalar collections Rebilly/rebilly-php#675
+
 ## 3.1.0
 
 ### Minor Changes
