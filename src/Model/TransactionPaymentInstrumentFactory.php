@@ -131,6 +131,7 @@ class TransactionPaymentInstrumentFactory
             'Resurs' => AlternativePaymentInstrument::from($data),
             'SEPA' => AlternativePaymentInstrument::from($data),
             'SMSVoucher' => AlternativePaymentInstrument::from($data),
+            'SPEI' => AlternativePaymentInstrument::from($data),
             'SafetyPay' => AlternativePaymentInstrument::from($data),
             'Samsung Pay' => AlternativePaymentInstrument::from($data),
             'Siirto' => AlternativePaymentInstrument::from($data),

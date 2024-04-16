@@ -319,6 +319,8 @@ class PaymentInstructionMethods implements PaymentInstruction
 
     public const METHODS_SPARK_PAY = 'SparkPay';
 
+    public const METHODS_SPEI = 'SPEI';
+
     public const METHODS_SWIFT_DBT = 'swift-dbt';
 
     public const METHODS_TELE2 = 'Tele2';

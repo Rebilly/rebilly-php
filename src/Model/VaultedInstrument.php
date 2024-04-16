@@ -319,6 +319,8 @@ class VaultedInstrument implements CustomerDefaultPaymentInstrument, Transaction
 
     public const METHOD_SPARK_PAY = 'SparkPay';
 
+    public const METHOD_SPEI = 'SPEI';
+
     public const METHOD_SWIFT_DBT = 'swift-dbt';
 
     public const METHOD_TELE2 = 'Tele2';

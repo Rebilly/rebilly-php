@@ -323,6 +323,8 @@ class CheckoutForm implements JsonSerializable
 
     public const PAYMENT_METHODS_SPARK_PAY = 'SparkPay';
 
+    public const PAYMENT_METHODS_SPEI = 'SPEI';
+
     public const PAYMENT_METHODS_SWIFT_DBT = 'swift-dbt';
 
     public const PAYMENT_METHODS_TELE2 = 'Tele2';
