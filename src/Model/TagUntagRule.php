@@ -125,8 +125,6 @@ class TagUntagRule implements JsonSerializable
 
     public const EVENT_TYPE_SUBSCRIPTION_DOWNGRADED = 'subscription-downgraded';
 
-    public const EVENT_TYPE_SUBSCRIPTION_ITEMS_CHANGED = 'subscription-items-changed';
-
     public const EVENT_TYPE_SUBSCRIPTION_PAUSED = 'subscription-paused';
 
     public const EVENT_TYPE_SUBSCRIPTION_REACTIVATED = 'subscription-reactivated';
@@ -142,6 +140,8 @@ class TagUntagRule implements JsonSerializable
     public const EVENT_TYPE_TRANSACTION_DECLINED = 'transaction-declined';
 
     public const EVENT_TYPE_TRANSACTION_DISCREPANCY_FOUND = 'transaction-discrepancy-found';
+
+    public const EVENT_TYPE_TRANSACTION_PROCESSED = 'transaction-processed';
 
     public const EVENT_TYPE_ORDER_DELINQUENCY_REACHED = 'order-delinquency-reached';
 
