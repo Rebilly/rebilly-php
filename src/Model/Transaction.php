@@ -443,6 +443,8 @@ class Transaction implements JsonSerializable
 
     public const GATEWAY_NAME_TWINT = 'TWINT';
 
+    public const GATEWAY_NAME_UNLIMIT = 'Unlimit';
+
     public const GATEWAY_NAME_U_PAY_CARD = 'UPayCard';
 
     public const GATEWAY_NAME_US_AE_PAY = 'USAePay';
@@ -1168,6 +1170,8 @@ class Transaction implements JsonSerializable
     public const METHOD_SOFORT = 'Sofort';
 
     public const METHOD_SPARK_PAY = 'SparkPay';
+
+    public const METHOD_SPEI = 'SPEI';
 
     public const METHOD_SWIFT_DBT = 'swift-dbt';
 

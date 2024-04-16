@@ -385,6 +385,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
 
     public const GATEWAY_NAME_TWINT = 'TWINT';
 
+    public const GATEWAY_NAME_UNLIMIT = 'Unlimit';
+
     public const GATEWAY_NAME_U_PAY_CARD = 'UPayCard';
 
     public const GATEWAY_NAME_US_AE_PAY = 'USAePay';
