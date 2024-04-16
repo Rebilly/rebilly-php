@@ -69,7 +69,7 @@ class SendThroughAttribution implements JsonSerializable
 
     public const EVENT_TYPE_GATEWAY_ACCOUNT_REQUESTED = 'gateway-account-requested';
 
-    public const EVENT_TYPE_HARD_USAGE_LIMIT_REACHED_YAML = 'hard-usage-limit-reached.yaml';
+    public const EVENT_TYPE_HARD_USAGE_LIMIT_REACHED = 'hard-usage-limit-reached';
 
     public const EVENT_TYPE_INVOICE_ISSUED = 'invoice-issued';
 
@@ -147,7 +147,7 @@ class SendThroughAttribution implements JsonSerializable
 
     public const EVENT_TYPE_RISK_SCORE_CHANGED = 'risk-score-changed';
 
-    public const EVENT_TYPE_SOFT_USAGE_LIMIT_REACHED_YAML = 'soft-usage-limit-reached.yaml';
+    public const EVENT_TYPE_SOFT_USAGE_LIMIT_REACHED = 'soft-usage-limit-reached';
 
     public const EVENT_TYPE_SUBSCRIPTION_ACTIVATED = 'subscription-activated';
 

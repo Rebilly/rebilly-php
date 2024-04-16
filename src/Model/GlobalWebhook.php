@@ -125,8 +125,6 @@ class GlobalWebhook implements JsonSerializable
 
     public const EVENTS_FILTER_SUBSCRIPTION_DOWNGRADED = 'subscription-downgraded';
 
-    public const EVENTS_FILTER_SUBSCRIPTION_ITEMS_CHANGED = 'subscription-items-changed';
-
     public const EVENTS_FILTER_SUBSCRIPTION_PAUSED = 'subscription-paused';
 
     public const EVENTS_FILTER_SUBSCRIPTION_REACTIVATED = 'subscription-reactivated';
@@ -142,6 +140,8 @@ class GlobalWebhook implements JsonSerializable
     public const EVENTS_FILTER_TRANSACTION_DECLINED = 'transaction-declined';
 
     public const EVENTS_FILTER_TRANSACTION_DISCREPANCY_FOUND = 'transaction-discrepancy-found';
+
+    public const EVENTS_FILTER_TRANSACTION_PROCESSED = 'transaction-processed';
 
     public const EVENTS_FILTER_ORDER_DELINQUENCY_REACHED = 'order-delinquency-reached';
 
