@@ -18,6 +18,8 @@ use JsonSerializable;
 
 abstract class RuleAction implements JsonSerializable
 {
+    public const NAME_ABANDON_SCHEDULED_PAYMENTS = 'abandon-scheduled-payments';
+
     public const NAME_ADD_RISK_SCORE = 'add-risk-score';
 
     public const NAME_ADJUST_READY_TO_PAY = 'adjust-ready-to-pay';
@@ -97,6 +99,8 @@ abstract class RuleAction implements JsonSerializable
     public static function from(array $data = []): self
     {
         switch ($data['name']) {
+            case 'abandon-scheduled-payments':
+                return RuleActionAbandonScheduledPayments::from($data);
             case 'blocklist':
                 return RuleActionAddBlockList::from($data);
             case 'add-risk-score':
