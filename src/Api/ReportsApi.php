@@ -101,12 +101,15 @@ class ReportsApi
         return CumulativeSubscriptions::from($data);
     }
 
+    /**
+     * @return DashboardResponse[]
+     */
     public function getDashboardMetrics(
         DateTimeImmutable $periodStart,
         DateTimeImmutable $periodEnd,
         ?string $metrics = null,
         ?string $segments = null,
-    ): DashboardResponse {
+    ): array {
         $queryParams = [
             'periodStart' => $periodStart->format('Y-m-d\TH:i:s\Z'),
             'periodEnd' => $periodEnd->format('Y-m-d\TH:i:s\Z'),
@@ -121,7 +124,7 @@ class ReportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return DashboardResponse::from($data);
+        return array_map(fn (array $item): DashboardResponse => DashboardResponse::from($item), $data);
     }
 
     public function getDccMarkup(
@@ -508,12 +511,15 @@ class ReportsApi
         );
     }
 
+    /**
+     * @return ReportRevenueWaterfall[]
+     */
     public function getRevenueWaterfall(
         string $currency,
         string $issuedFrom,
         string $issuedTo,
         string $recognizedTo,
-    ): ReportRevenueWaterfall {
+    ): array {
         $queryParams = [
             'currency' => $currency,
             'issuedFrom' => $issuedFrom,
@@ -528,7 +534,7 @@ class ReportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ReportRevenueWaterfall::from($data);
+        return array_map(fn (array $item): ReportRevenueWaterfall => ReportRevenueWaterfall::from($item), $data);
     }
 
     public function getSubscriptionCancellation(
