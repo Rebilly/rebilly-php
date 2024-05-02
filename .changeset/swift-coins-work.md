@@ -2,4 +2,4 @@
 "@rebilly/client-php": patch
 ---
 
-SDK Generator updated
+Fix ReportsAPI::getDashboardMetrics and ReportsAPI::getRevenueWaterfall return types 
