@@ -21,11 +21,11 @@ class MobilePayCredentials implements JsonSerializable
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('providerId', $data)) {
-            $this->setProviderId($data['providerId']);
+        if (array_key_exists('merchantSerialNumber', $data)) {
+            $this->setMerchantSerialNumber($data['merchantSerialNumber']);
         }
-        if (array_key_exists('merchantVat', $data)) {
-            $this->setMerchantVat($data['merchantVat']);
+        if (array_key_exists('subscriptionKey', $data)) {
+            $this->setSubscriptionKey($data['subscriptionKey']);
         }
         if (array_key_exists('clientId', $data)) {
             $this->setClientId($data['clientId']);
@@ -40,26 +40,26 @@ class MobilePayCredentials implements JsonSerializable
         return new self($data);
     }
 
-    public function getProviderId(): string
+    public function getMerchantSerialNumber(): string
     {
-        return $this->fields['providerId'];
+        return $this->fields['merchantSerialNumber'];
     }
 
-    public function setProviderId(string $providerId): static
+    public function setMerchantSerialNumber(string $merchantSerialNumber): static
     {
-        $this->fields['providerId'] = $providerId;
+        $this->fields['merchantSerialNumber'] = $merchantSerialNumber;
 
         return $this;
     }
 
-    public function getMerchantVat(): string
+    public function getSubscriptionKey(): string
     {
-        return $this->fields['merchantVat'];
+        return $this->fields['subscriptionKey'];
     }
 
-    public function setMerchantVat(string $merchantVat): static
+    public function setSubscriptionKey(string $subscriptionKey): static
     {
-        $this->fields['merchantVat'] = $merchantVat;
+        $this->fields['subscriptionKey'] = $subscriptionKey;
 
         return $this;
     }
@@ -91,11 +91,11 @@ class MobilePayCredentials implements JsonSerializable
     public function jsonSerialize(): array
     {
         $data = [];
-        if (array_key_exists('providerId', $this->fields)) {
-            $data['providerId'] = $this->fields['providerId'];
+        if (array_key_exists('merchantSerialNumber', $this->fields)) {
+            $data['merchantSerialNumber'] = $this->fields['merchantSerialNumber'];
         }
-        if (array_key_exists('merchantVat', $this->fields)) {
-            $data['merchantVat'] = $this->fields['merchantVat'];
+        if (array_key_exists('subscriptionKey', $this->fields)) {
+            $data['subscriptionKey'] = $this->fields['subscriptionKey'];
         }
         if (array_key_exists('clientId', $this->fields)) {
             $data['clientId'] = $this->fields['clientId'];

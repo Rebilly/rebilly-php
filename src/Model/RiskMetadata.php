@@ -105,9 +105,6 @@ class RiskMetadata implements JsonSerializable
         if (array_key_exists('declinedPaymentInstrumentVelocity', $data)) {
             $this->setDeclinedPaymentInstrumentVelocity($data['declinedPaymentInstrumentVelocity']);
         }
-        if (array_key_exists('isBot', $data)) {
-            $this->setIsBot($data['isBot']);
-        }
         if (array_key_exists('deviceVelocity', $data)) {
             $this->setDeviceVelocity($data['deviceVelocity']);
         }
@@ -322,11 +319,6 @@ class RiskMetadata implements JsonSerializable
         return $this->fields['declinedPaymentInstrumentVelocity'] ?? null;
     }
 
-    public function getIsBot(): ?bool
-    {
-        return $this->fields['isBot'] ?? null;
-    }
-
     public function getDeviceVelocity(): ?int
     {
         return $this->fields['deviceVelocity'] ?? null;
@@ -443,9 +435,6 @@ class RiskMetadata implements JsonSerializable
         }
         if (array_key_exists('declinedPaymentInstrumentVelocity', $this->fields)) {
             $data['declinedPaymentInstrumentVelocity'] = $this->fields['declinedPaymentInstrumentVelocity'];
-        }
-        if (array_key_exists('isBot', $this->fields)) {
-            $data['isBot'] = $this->fields['isBot'];
         }
         if (array_key_exists('deviceVelocity', $this->fields)) {
             $data['deviceVelocity'] = $this->fields['deviceVelocity'];
@@ -634,13 +623,6 @@ class RiskMetadata implements JsonSerializable
     private function setDeclinedPaymentInstrumentVelocity(null|int $declinedPaymentInstrumentVelocity): static
     {
         $this->fields['declinedPaymentInstrumentVelocity'] = $declinedPaymentInstrumentVelocity;
-
-        return $this;
-    }
-
-    private function setIsBot(null|bool $isBot): static
-    {
-        $this->fields['isBot'] = $isBot;
 
         return $this;
     }

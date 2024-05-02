@@ -30,9 +30,6 @@ class RiskMetadataExtraData implements JsonSerializable
         if (array_key_exists('threatMetrixSessionId', $data)) {
             $this->setThreatMetrixSessionId($data['threatMetrixSessionId']);
         }
-        if (array_key_exists('fingerprintJsRequestId', $data)) {
-            $this->setFingerprintJsRequestId($data['fingerprintJsRequestId']);
-        }
     }
 
     public static function from(array $data = []): self
@@ -76,18 +73,6 @@ class RiskMetadataExtraData implements JsonSerializable
         return $this;
     }
 
-    public function getFingerprintJsRequestId(): ?string
-    {
-        return $this->fields['fingerprintJsRequestId'] ?? null;
-    }
-
-    public function setFingerprintJsRequestId(null|string $fingerprintJsRequestId): static
-    {
-        $this->fields['fingerprintJsRequestId'] = $fingerprintJsRequestId;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [];
@@ -99,9 +84,6 @@ class RiskMetadataExtraData implements JsonSerializable
         }
         if (array_key_exists('threatMetrixSessionId', $this->fields)) {
             $data['threatMetrixSessionId'] = $this->fields['threatMetrixSessionId'];
-        }
-        if (array_key_exists('fingerprintJsRequestId', $this->fields)) {
-            $data['fingerprintJsRequestId'] = $this->fields['fingerprintJsRequestId'];
         }
 
         return $data;
