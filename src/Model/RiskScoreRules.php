@@ -69,6 +69,21 @@ class RiskScoreRules implements JsonSerializable
         if (array_key_exists('billingAddressVelocity', $data)) {
             $this->setBillingAddressVelocity($data['billingAddressVelocity']);
         }
+        if (array_key_exists('isRebill', $data)) {
+            $this->setIsRebill($data['isRebill']);
+        }
+        if (array_key_exists('isRetry', $data)) {
+            $this->setIsRetry($data['isRetry']);
+        }
+        if (array_key_exists('customerLifetimeValue', $data)) {
+            $this->setCustomerLifetimeValue($data['customerLifetimeValue']);
+        }
+        if (array_key_exists('browserAdBlockEnabled', $data)) {
+            $this->setBrowserAdBlockEnabled($data['browserAdBlockEnabled']);
+        }
+        if (array_key_exists('paymentInstrumentApprovedTransactionCount', $data)) {
+            $this->setPaymentInstrumentApprovedTransactionCount($data['paymentInstrumentApprovedTransactionCount']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -332,6 +347,86 @@ class RiskScoreRules implements JsonSerializable
         return $this;
     }
 
+    public function getIsRebill(): RiskScoreBoolean
+    {
+        return $this->fields['isRebill'];
+    }
+
+    public function setIsRebill(RiskScoreBoolean|array $isRebill): static
+    {
+        if (!($isRebill instanceof RiskScoreBoolean)) {
+            $isRebill = RiskScoreBoolean::from($isRebill);
+        }
+
+        $this->fields['isRebill'] = $isRebill;
+
+        return $this;
+    }
+
+    public function getIsRetry(): RiskScoreBoolean
+    {
+        return $this->fields['isRetry'];
+    }
+
+    public function setIsRetry(RiskScoreBoolean|array $isRetry): static
+    {
+        if (!($isRetry instanceof RiskScoreBoolean)) {
+            $isRetry = RiskScoreBoolean::from($isRetry);
+        }
+
+        $this->fields['isRetry'] = $isRetry;
+
+        return $this;
+    }
+
+    public function getCustomerLifetimeValue(): RiskScoreBracket
+    {
+        return $this->fields['customerLifetimeValue'];
+    }
+
+    public function setCustomerLifetimeValue(RiskScoreBracket|array $customerLifetimeValue): static
+    {
+        if (!($customerLifetimeValue instanceof RiskScoreBracket)) {
+            $customerLifetimeValue = RiskScoreBracket::from($customerLifetimeValue);
+        }
+
+        $this->fields['customerLifetimeValue'] = $customerLifetimeValue;
+
+        return $this;
+    }
+
+    public function getBrowserAdBlockEnabled(): RiskScoreBoolean
+    {
+        return $this->fields['browserAdBlockEnabled'];
+    }
+
+    public function setBrowserAdBlockEnabled(RiskScoreBoolean|array $browserAdBlockEnabled): static
+    {
+        if (!($browserAdBlockEnabled instanceof RiskScoreBoolean)) {
+            $browserAdBlockEnabled = RiskScoreBoolean::from($browserAdBlockEnabled);
+        }
+
+        $this->fields['browserAdBlockEnabled'] = $browserAdBlockEnabled;
+
+        return $this;
+    }
+
+    public function getPaymentInstrumentApprovedTransactionCount(): RiskScoreBracket
+    {
+        return $this->fields['paymentInstrumentApprovedTransactionCount'];
+    }
+
+    public function setPaymentInstrumentApprovedTransactionCount(RiskScoreBracket|array $paymentInstrumentApprovedTransactionCount): static
+    {
+        if (!($paymentInstrumentApprovedTransactionCount instanceof RiskScoreBracket)) {
+            $paymentInstrumentApprovedTransactionCount = RiskScoreBracket::from($paymentInstrumentApprovedTransactionCount);
+        }
+
+        $this->fields['paymentInstrumentApprovedTransactionCount'] = $paymentInstrumentApprovedTransactionCount;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -382,6 +477,21 @@ class RiskScoreRules implements JsonSerializable
         }
         if (array_key_exists('billingAddressVelocity', $this->fields)) {
             $data['billingAddressVelocity'] = $this->fields['billingAddressVelocity']->jsonSerialize();
+        }
+        if (array_key_exists('isRebill', $this->fields)) {
+            $data['isRebill'] = $this->fields['isRebill']->jsonSerialize();
+        }
+        if (array_key_exists('isRetry', $this->fields)) {
+            $data['isRetry'] = $this->fields['isRetry']->jsonSerialize();
+        }
+        if (array_key_exists('customerLifetimeValue', $this->fields)) {
+            $data['customerLifetimeValue'] = $this->fields['customerLifetimeValue']->jsonSerialize();
+        }
+        if (array_key_exists('browserAdBlockEnabled', $this->fields)) {
+            $data['browserAdBlockEnabled'] = $this->fields['browserAdBlockEnabled']->jsonSerialize();
+        }
+        if (array_key_exists('paymentInstrumentApprovedTransactionCount', $this->fields)) {
+            $data['paymentInstrumentApprovedTransactionCount'] = $this->fields['paymentInstrumentApprovedTransactionCount']->jsonSerialize();
         }
 
         return $data;
