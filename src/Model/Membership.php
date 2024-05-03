@@ -170,21 +170,6 @@ class Membership implements JsonSerializable
     }
 
     /**
-     * @param null|Acl[]|array[] $acl
-     */
-    public function setAcl(null|array $acl): static
-    {
-        $acl = $acl !== null ? array_map(
-            fn ($value) => $value instanceof Acl ? $value : Acl::from($value),
-            $acl,
-        ) : null;
-
-        $this->fields['acl'] = $acl;
-
-        return $this;
-    }
-
-    /**
      * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
@@ -258,6 +243,21 @@ class Membership implements JsonSerializable
     private function setIsDefault(null|bool $isDefault): static
     {
         $this->fields['isDefault'] = $isDefault;
+
+        return $this;
+    }
+
+    /**
+     * @param null|Acl[]|array[] $acl
+     */
+    private function setAcl(null|array $acl): static
+    {
+        $acl = $acl !== null ? array_map(
+            fn ($value) => $value instanceof Acl ? $value : Acl::from($value),
+            $acl,
+        ) : null;
+
+        $this->fields['acl'] = $acl;
 
         return $this;
     }
