@@ -48,7 +48,7 @@ use Rebilly\Sdk\Service;
 
 // Instantiate Rebilly client.
 $client = new Client([
-    'base_uri' => Client::SANDBOX_HOST,
+    'baseUrl' => Client::SANDBOX_HOST,
     'organizationId' => '{organizationId}',
     'apiKey' => '{secretKey}',
 ]);
