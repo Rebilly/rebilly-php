@@ -31,6 +31,9 @@ class Status implements JsonSerializable
         if (array_key_exists('time', $data)) {
             $this->setTime($data['time']);
         }
+        if (array_key_exists('release', $data)) {
+            $this->setRelease($data['release']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -48,6 +51,18 @@ class Status implements JsonSerializable
         return $this->fields['time'] ?? null;
     }
 
+    public function getRelease(): ?string
+    {
+        return $this->fields['release'] ?? null;
+    }
+
+    public function setRelease(null|string $release): static
+    {
+        $this->fields['release'] = $release;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -56,6 +71,9 @@ class Status implements JsonSerializable
         }
         if (array_key_exists('time', $this->fields)) {
             $data['time'] = $this->fields['time']?->format(DateTimeInterface::RFC3339);
+        }
+        if (array_key_exists('release', $this->fields)) {
+            $data['release'] = $this->fields['release'];
         }
 
         return $data;
