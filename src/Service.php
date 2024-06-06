@@ -171,6 +171,8 @@ class Service
 
     private Api\RiskScoreRulesApi $riskScoreRules;
 
+    private Api\RiskScoreSimulationJobsApi $riskScoreSimulationJobs;
+
     private Api\AllowlistsApi $allowlists;
 
     private Api\TagsRulesApi $tagsRules;
@@ -254,6 +256,7 @@ class Service
         $this->histograms = new Api\HistogramsApi($this->client);
         $this->reports = new Api\ReportsApi($this->client);
         $this->riskScoreRules = new Api\RiskScoreRulesApi($this->client);
+        $this->riskScoreSimulationJobs = new Api\RiskScoreSimulationJobsApi($this->client);
         $this->allowlists = new Api\AllowlistsApi($this->client);
         $this->tagsRules = new Api\TagsRulesApi($this->client);
     }
@@ -641,6 +644,11 @@ class Service
     public function riskScoreRules(): Api\RiskScoreRulesApi
     {
         return $this->riskScoreRules;
+    }
+
+    public function riskScoreSimulationJobs(): Api\RiskScoreSimulationJobsApi
+    {
+        return $this->riskScoreSimulationJobs;
     }
 
     public function allowlists(): Api\AllowlistsApi

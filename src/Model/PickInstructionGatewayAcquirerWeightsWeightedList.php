@@ -311,6 +311,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
 
     public const GATEWAY_NAME_PAY_TABS = 'PayTabs';
 
+    public const GATEWAY_NAME_PAY_U = 'PayU';
+
     public const GATEWAY_NAME_PAY_U_LATAM = 'PayULatam';
 
     public const GATEWAY_NAME_PAYVISION = 'Payvision';
@@ -702,6 +704,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
     public const ACQUIRER_NAME_PAY_RETAILERS = 'PayRetailers';
 
     public const ACQUIRER_NAME_PAY_TABS = 'PayTabs';
+
+    public const ACQUIRER_NAME_PAY_U = 'PayU';
 
     public const ACQUIRER_NAME_PAY_U_LATAM = 'PayULatam';
 

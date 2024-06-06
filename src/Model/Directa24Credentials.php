@@ -42,6 +42,12 @@ class Directa24Credentials implements JsonSerializable
         if (array_key_exists('cashout_password', $data)) {
             $this->setCashoutPassword($data['cashout_password']);
         }
+        if (array_key_exists('chargebackAccessKey', $data)) {
+            $this->setChargebackAccessKey($data['chargebackAccessKey']);
+        }
+        if (array_key_exists('chargebackSecretKey', $data)) {
+            $this->setChargebackSecretKey($data['chargebackSecretKey']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -133,6 +139,30 @@ class Directa24Credentials implements JsonSerializable
         return $this;
     }
 
+    public function getChargebackAccessKey(): ?string
+    {
+        return $this->fields['chargebackAccessKey'] ?? null;
+    }
+
+    public function setChargebackAccessKey(null|string $chargebackAccessKey): static
+    {
+        $this->fields['chargebackAccessKey'] = $chargebackAccessKey;
+
+        return $this;
+    }
+
+    public function getChargebackSecretKey(): ?string
+    {
+        return $this->fields['chargebackSecretKey'] ?? null;
+    }
+
+    public function setChargebackSecretKey(null|string $chargebackSecretKey): static
+    {
+        $this->fields['chargebackSecretKey'] = $chargebackSecretKey;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -156,6 +186,12 @@ class Directa24Credentials implements JsonSerializable
         }
         if (array_key_exists('cashout_password', $this->fields)) {
             $data['cashout_password'] = $this->fields['cashout_password'];
+        }
+        if (array_key_exists('chargebackAccessKey', $this->fields)) {
+            $data['chargebackAccessKey'] = $this->fields['chargebackAccessKey'];
+        }
+        if (array_key_exists('chargebackSecretKey', $this->fields)) {
+            $data['chargebackSecretKey'] = $this->fields['chargebackSecretKey'];
         }
 
         return $data;

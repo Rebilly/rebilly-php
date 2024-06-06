@@ -691,6 +691,8 @@ class PayoutRequestAllocations implements JsonSerializable
 
     public const GATEWAY_NAME_PAY_TABS = 'PayTabs';
 
+    public const GATEWAY_NAME_PAY_U = 'PayU';
+
     public const GATEWAY_NAME_PAY_U_LATAM = 'PayULatam';
 
     public const GATEWAY_NAME_PAYVISION = 'Payvision';
