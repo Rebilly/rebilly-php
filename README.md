@@ -102,7 +102,7 @@ This new major version brings several new helper classes to communicate with Reb
 [ico-version]: https://img.shields.io/packagist/v/rebilly/client-php.svg
 [ico-downloads]: https://img.shields.io/packagist/dt/rebilly/client-php.svg
 
-[link-api-doc]: https://api-reference.rebilly.com/
+[link-api-doc]: https://www.rebilly.com/catalog/all
 [link-github]: https://github.com/Rebilly/rebilly-php
 [link-packagist]: https://packagist.org/packages/rebilly/client-php
 [link-downloads]: https://packagist.org/packages/rebilly/client-php
