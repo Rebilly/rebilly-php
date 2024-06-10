@@ -1,6 +1,6 @@
 # Examples of Rebilly SDK for PHP
 
-This directory contains examples of how to use the **Rebilly PHP SDK for PHP** version v3.0. Below, there are instructions for running the code examples. Check out the [Rebilly API](https://api-reference.rebilly.com/) for more SDK examples.
+This directory contains examples of how to use the **Rebilly PHP SDK for PHP** version v3.0. Below, there are instructions for running the code examples. Check out the [Rebilly API docs](https://www.rebilly.com/catalog/all) for more SDK examples.
 
 ## Requirements
 
