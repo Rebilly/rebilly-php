@@ -17,6 +17,10 @@ use JsonSerializable;
 
 class KycSettings implements JsonSerializable
 {
+    public const UI_VERSION_1 = '1';
+
+    public const UI_VERSION_2 = '2';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -26,6 +30,9 @@ class KycSettings implements JsonSerializable
         }
         if (array_key_exists('addressProof', $data)) {
             $this->setAddressProof($data['addressProof']);
+        }
+        if (array_key_exists('uiVersion', $data)) {
+            $this->setUiVersion($data['uiVersion']);
         }
     }
 
@@ -66,6 +73,18 @@ class KycSettings implements JsonSerializable
         return $this;
     }
 
+    public function getUiVersion(): ?string
+    {
+        return $this->fields['uiVersion'] ?? null;
+    }
+
+    public function setUiVersion(null|string $uiVersion): static
+    {
+        $this->fields['uiVersion'] = $uiVersion;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -74,6 +93,9 @@ class KycSettings implements JsonSerializable
         }
         if (array_key_exists('addressProof', $this->fields)) {
             $data['addressProof'] = $this->fields['addressProof']?->jsonSerialize();
+        }
+        if (array_key_exists('uiVersion', $this->fields)) {
+            $data['uiVersion'] = $this->fields['uiVersion'];
         }
 
         return $data;
