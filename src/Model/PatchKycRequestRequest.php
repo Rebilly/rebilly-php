@@ -35,6 +35,12 @@ class PatchKycRequestRequest implements JsonSerializable
 
     public const STATUS_EXPIRED = 'expired';
 
+    public const MATCH_LEVEL_1 = '1';
+
+    public const MATCH_LEVEL_2 = '2';
+
+    public const MATCH_LEVEL_3 = '3';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
