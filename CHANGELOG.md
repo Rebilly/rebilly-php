@@ -1,5 +1,32 @@
 # @rebilly/client-php
 
+## 3.1.2
+
+### Patch Changes
+
+- Fix api errors in risk-score-simualtion-jobs Rebilly/rebilly#5709
+- Add PostReadyToPayFactory Rebilly/rebilly#5745
+- feat(api-definitions): Add matchLevel to KycDocument Rebilly/rebilly#6027
+- feat(api-definition): Add UI version to KYC settings Rebilly/rebilly#5890
+- Add optional credentials to Buckaroo Rebilly/api-definitions#1884
+- Remove unused models
+- Add SecureTrading recurring settings Rebilly/api-definitions#1889
+- Update MobilePay credentials Rebilly/api-definitions#1883
+- feat(api-definitions): Add basic kyc matchLevel Rebilly/rebilly#5975
+- Add "release" version attribute to Status API response Rebilly/rebilly#1883
+- feat: Add new factors to RiskScoreRules Rebilly/api-definitions#1881
+- feat: Add transaction-processed to the list of supported tag/untag rules Rebilly/api-definitions#1871
+- Add Unlimit gateway adapter Rebilly/api-definitions#1873
+- Risk score simulation configuration Rebilly/rebilly#5613
+- SDK Generator updated
+- fix(api-definitions): Add missing cancel category entries Rebilly/rebilly#6146
+- Remove Buckaroo debtor code Rebilly/rebilly#5772
+- Add abandon-scheduled-payments rule action Rebilly/api-definitions#1875
+- Add autopay to trial only conversion quote Rebilly/rebilly#5685
+- Fix ReportsAPI::getDashboardMetrics and ReportsAPI::getRevenueWaterfall return types
+- Add PayU gateway account Rebilly/rebilly#5250
+- remove isBot riskfactor field Rebilly/api-definitions#1882
+
 ## 3.1.1
 
 ### Patch Changes
