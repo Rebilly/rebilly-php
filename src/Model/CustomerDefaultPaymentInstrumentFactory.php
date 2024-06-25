@@ -20,7 +20,7 @@ class CustomerDefaultPaymentInstrumentFactory
     public static function from(array $data = []): CustomerDefaultPaymentInstrument
     {
         if (isset($data['paymentInstrumentId'])) {
-            return new VaultedInstrument($data);
+            return VaultedInstrument::from($data);
         }
 
         return match ($data['method']) {

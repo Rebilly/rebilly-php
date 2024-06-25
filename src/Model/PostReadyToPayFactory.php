@@ -20,10 +20,10 @@ class PostReadyToPayFactory
     public static function from(array $data = []): PostReadyToPay
     {
         if (isset($data['amount']) || isset($data['currency'])) {
-            return new ReadyToPayAmount($data);
+            return ReadyToPayAmount::from($data);
         }
         if (isset($data['items'])) {
-            return new ReadyToPayItems($data);
+            return ReadyToPayItems::from($data);
         }
 
         throw new UnknownDiscriminatorValueException();

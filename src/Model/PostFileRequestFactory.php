@@ -20,10 +20,10 @@ class PostFileRequestFactory
     public static function from(array $data = []): PostFileRequest
     {
         if (isset($data['file'])) {
-            return new FileCreateFromInline($data);
+            return FileCreateFromInline::from($data);
         }
         if (isset($data['url'])) {
-            return new FileCreateFromUrl($data);
+            return FileCreateFromUrl::from($data);
         }
 
         throw new UnknownDiscriminatorValueException();
