@@ -20,7 +20,7 @@ class PostPaymentInstrumentRequestFactory
     public static function from(array $data = []): PostPaymentInstrumentRequest
     {
         if (isset($data['token'])) {
-            return new PaymentInstrumentCreateToken($data);
+            return PaymentInstrumentCreateToken::from($data);
         }
 
         return match ($data['method']) {

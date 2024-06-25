@@ -446,7 +446,7 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const ACQUIRER_NAME_IPAY_OPTIONS = 'Ipay Options';
 
-    public const ACQUIRER_NAME_B_S = 'B+S';
+    public const ACQUIRER_NAME_B_PLUS_S = 'B+S';
 
     public const ACQUIRER_NAME_BAMBORA = 'Bambora';
 
