@@ -66,6 +66,8 @@ class Subscription implements SubscriptionOrOneTimeSale
 
     public const CANCEL_CATEGORY_BILLING_FAILURE = 'billing-failure';
 
+    public const CANCEL_CATEGORY_DELINQUENCY = 'delinquency';
+
     public const CANCEL_CATEGORY_DID_NOT_USE = 'did-not-use';
 
     public const CANCEL_CATEGORY_DID_NOT_WANT = 'did-not-want';
@@ -85,6 +87,8 @@ class Subscription implements SubscriptionOrOneTimeSale
     public const CANCEL_CATEGORY_NEVER_STARTED = 'never-started';
 
     public const CANCEL_CATEGORY_SWITCHED_PLAN = 'switched-plan';
+
+    public const CANCEL_CATEGORY_ORGANIZATION_DEACTIVATED = 'organization-deactivated';
 
     public const CANCEL_CATEGORY_OTHER = 'other';
 
