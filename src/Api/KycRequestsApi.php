@@ -80,12 +80,14 @@ class KycRequestsApi
         ?int $offset = null,
         ?string $filter = null,
         ?array $sort = null,
+        ?string $expand = null,
     ): Collection {
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
             'sort' => $sort ? implode(',', $sort) : null,
+            'expand' => $expand,
         ];
         $uri = '/kyc-requests?' . http_build_query($queryParams);
 
@@ -111,12 +113,14 @@ class KycRequestsApi
         ?int $offset = null,
         ?string $filter = null,
         ?array $sort = null,
+        ?string $expand = null,
     ): Paginator {
         $closure = fn (?int $limit, ?int $offset): Collection => $this->getAll(
             limit: $limit,
             offset: $offset,
             filter: $filter,
             sort: $sort,
+            expand: $expand,
         );
 
         return new Paginator(
