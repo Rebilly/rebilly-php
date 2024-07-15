@@ -22,8 +22,6 @@ interface SubscriptionOrOneTimeSale extends JsonSerializable
 
     public function getId(): ?string;
 
-    public function getOrderId(): ?string;
-
     public function getCustomerId(): string;
 
     public function setCustomerId(string $customerId): static;
