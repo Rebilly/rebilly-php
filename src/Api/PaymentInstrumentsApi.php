@@ -20,6 +20,7 @@ use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\PatchPaymentInstrumentRequest;
 use Rebilly\Sdk\Model\PaymentInstrument;
 use Rebilly\Sdk\Model\PaymentInstrumentFactory;
+use Rebilly\Sdk\Model\PaymentInstrumentNameInquiry;
 use Rebilly\Sdk\Model\PostPaymentInstrumentRequest;
 use Rebilly\Sdk\Paginator;
 
@@ -138,6 +139,25 @@ class PaymentInstrumentsApi
             $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
             $closure,
         );
+    }
+
+    public function nameInquiry(
+        string $id,
+        PaymentInstrumentNameInquiry $paymentInstrumentNameInquiry,
+    ): PaymentInstrumentNameInquiry {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/payment-instruments/{id}/name-inquiry');
+
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($paymentInstrumentNameInquiry));
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return PaymentInstrumentNameInquiry::from($data);
     }
 
     public function update(

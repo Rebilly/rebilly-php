@@ -22,6 +22,7 @@ class DataExportFactory
         return match ($data['resource']) {
             'amlChecks' => AmlChecksDataExport::from($data),
             'customers' => CustomersDataExport::from($data),
+            'disputes' => DisputesDataExport::from($data),
             'invoiceItems' => InvoiceItemsDataExport::from($data),
             'invoices' => InvoicesDataExport::from($data),
             'revenueAudit' => RevenueAuditDataExport::from($data),
