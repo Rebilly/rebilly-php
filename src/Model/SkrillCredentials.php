@@ -30,6 +30,9 @@ class SkrillCredentials implements JsonSerializable
         if (array_key_exists('mqiPassword', $data)) {
             $this->setMqiPassword($data['mqiPassword']);
         }
+        if (array_key_exists('currencyAccountIds', $data)) {
+            $this->setCurrencyAccountIds($data['currencyAccountIds']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -73,6 +76,18 @@ class SkrillCredentials implements JsonSerializable
         return $this;
     }
 
+    public function getCurrencyAccountIds(): ?string
+    {
+        return $this->fields['currencyAccountIds'] ?? null;
+    }
+
+    public function setCurrencyAccountIds(null|string $currencyAccountIds): static
+    {
+        $this->fields['currencyAccountIds'] = $currencyAccountIds;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -84,6 +99,9 @@ class SkrillCredentials implements JsonSerializable
         }
         if (array_key_exists('mqiPassword', $this->fields)) {
             $data['mqiPassword'] = $this->fields['mqiPassword'];
+        }
+        if (array_key_exists('currencyAccountIds', $this->fields)) {
+            $data['currencyAccountIds'] = $this->fields['currencyAccountIds'];
         }
 
         return $data;
