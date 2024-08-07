@@ -225,6 +225,8 @@ class GetPayoutRequestPaymentInstrumentsResponse implements JsonSerializable
 
     public const GATEWAY_NAME_MONERIS = 'Moneris';
 
+    public const GATEWAY_NAME_MONOLO = 'Monolo';
+
     public const GATEWAY_NAME_MTA_PAY = 'MtaPay';
 
     public const GATEWAY_NAME_MUCH_BETTER = 'MuchBetter';
