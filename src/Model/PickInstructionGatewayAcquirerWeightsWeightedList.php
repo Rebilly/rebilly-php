@@ -223,6 +223,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
 
     public const GATEWAY_NAME_MONERIS = 'Moneris';
 
+    public const GATEWAY_NAME_MONOLO = 'Monolo';
+
     public const GATEWAY_NAME_MTA_PAY = 'MtaPay';
 
     public const GATEWAY_NAME_MUCH_BETTER = 'MuchBetter';
@@ -626,6 +628,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
     public const ACQUIRER_NAME_MOBILE_PAY = 'MobilePay';
 
     public const ACQUIRER_NAME_MONERIS = 'Moneris';
+
+    public const ACQUIRER_NAME_MONOLO = 'Monolo';
 
     public const ACQUIRER_NAME_MUCH_BETTER = 'MuchBetter';
 
