@@ -87,6 +87,8 @@ class OrderTimeline implements JsonSerializable
 
     public const TYPE_ORDER_ABANDONED = 'order-abandoned';
 
+    public const TYPE_QUOTE_ACCEPTED = 'quote-accepted';
+
     public const TYPE_SUBSCRIPTION_PAUSED = 'subscription-paused';
 
     public const TYPE_SUBSCRIPTION_PAUSE_CREATED = 'subscription-pause-created';

@@ -62,6 +62,7 @@ final class Client implements GuzzleClientInterface, PsrClientInterface
         $stack = new HandlerStack(Utils::chooseHandler());
 
         $stack->push(new ErrorHandler(), 'http_errors');
+        $stack->push(Middleware::redirect(), 'allow_redirects');
         $stack->push(Middleware::prepareBody(), 'prepare_body');
 
         if (isset($config['apiKey'])) {
@@ -78,7 +79,6 @@ final class Client implements GuzzleClientInterface, PsrClientInterface
             $config['baseUrl'] = self::BASE_HOST;
         }
 
-        $stack->push(Middleware::redirect(), 'allow_redirects');
         $stack->push(
             new BaseUri(
                 $this->createUri($config['baseUrl']),

@@ -226,6 +226,8 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const GATEWAY_NAME_MONERIS = 'Moneris';
 
+    public const GATEWAY_NAME_MONOLO = 'Monolo';
+
     public const GATEWAY_NAME_MTA_PAY = 'MtaPay';
 
     public const GATEWAY_NAME_MUCH_BETTER = 'MuchBetter';
@@ -629,6 +631,8 @@ abstract class GatewayAccount implements JsonSerializable
     public const ACQUIRER_NAME_MOBILE_PAY = 'MobilePay';
 
     public const ACQUIRER_NAME_MONERIS = 'Moneris';
+
+    public const ACQUIRER_NAME_MONOLO = 'Monolo';
 
     public const ACQUIRER_NAME_MUCH_BETTER = 'MuchBetter';
 
@@ -1548,6 +1552,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return MobilePay::from($data);
             case 'Moneris':
                 return Moneris::from($data);
+            case 'Monolo':
+                return Monolo::from($data);
             case 'MtaPay':
                 return MtaPay::from($data);
             case 'MuchBetter':
