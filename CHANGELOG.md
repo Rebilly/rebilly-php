@@ -1,5 +1,43 @@
 # @rebilly/client-php
 
+## 3.1.2
+
+### Patch Changes
+
+- Add Monolo payment integration Rebilly/rebilly#6870
+- Mark Worldpay dispute as representment Rebilly/rebilly#7022
+- Add device ID to Mercadopago Rebilly/rebilly#6313
+- Fix api errors in risk-score-simualtion-jobs Rebilly/rebilly#5709
+- Add PostReadyToPayFactory Rebilly/rebilly#5745
+- Add matchLevel to KycDocument Rebilly/rebilly#6027
+- Add UI version to KYC settings Rebilly/rebilly#5890
+- Remove orderId from Subscription and OneTimeSale Rebilly/rebilly#6331
+- Add expand to KYC request get Rebilly/rebilly#6306
+- Add optional credentials to Buckaroo Rebilly/api-definitions#1884
+- Remove unused models
+- Add SecureTrading recurring settings Rebilly/api-definitions#1889
+- Update MobilePay credentials Rebilly/api-definitions#1883
+- Add basic KYC matchLevel Rebilly/rebilly#5975
+- Add "release" version attribute to Status API response Rebilly/rebilly#1883
+- Add PostPaymentInstrumentNameInquiry endpoint Rebilly/rebilly#6399
+- Fix handling redirect responses Rebilly/rebilly-php#708
+- Add new factors to RiskScoreRules Rebilly/api-definitions#1881
+- Add transaction-processed to the list of supported tag/untag rules Rebilly/api-definitions#1871
+- Add Unlimit gateway adapter Rebilly/api-definitions#1873
+- Risk score simulation configuration Rebilly/rebilly#5613
+- Add missing cancel category entries Rebilly/rebilly#6146
+- Add quote-accepted event to order timeline Rebilly/rebilly#7076
+- Add currencyAccountIds credential field to Skrill gateway Rebilly/rebilly#6310
+- Remove Buckaroo debtor code Rebilly/rebilly#5772
+- Add abandon-scheduled-payments rule action Rebilly/api-definitions#1875
+- Add hasCompletedFaceLiveness property to KycIdentityMatches schema Rebilly/rebilly#6777
+- Add disputes resource to Data Exports Rebilly/rebilly#6175
+- Add autopay to trial only conversion quote Rebilly/rebilly#5685
+- Fix ReportsAPI::getDashboardMetrics and ReportsAPI::getRevenueWaterfall return types
+- Add PayU gateway account Rebilly/rebilly#5250
+- Fix incorrect links. Rebilly/rebilly#6415
+- Remove isBot risk factor field Rebilly/api-definitions#1882
+
 ## 3.1.1
 
 ### Patch Changes
