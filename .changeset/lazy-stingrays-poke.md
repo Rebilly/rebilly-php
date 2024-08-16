@@ -2,4 +2,4 @@
 "@rebilly/client-php": patch
 ---
 
-SDK Generator updated
+Fix handling redirect responses Rebilly/rebilly-php#708
