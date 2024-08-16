@@ -4,42 +4,39 @@
 
 ### Patch Changes
 
-- feat(be): Add Monolo payment integration Rebilly/rebilly#6870
-- fix(be): Mark Worldpay dispute as representment Rebilly/rebilly#7022
-- feat(be): Add device ID to Mercadopago Rebilly/rebilly#6313
+- Add Monolo payment integration Rebilly/rebilly#6870
+- Mark Worldpay dispute as representment Rebilly/rebilly#7022
+- Add device ID to Mercadopago Rebilly/rebilly#6313
 - Fix api errors in risk-score-simualtion-jobs Rebilly/rebilly#5709
-- build(deps): merge passing FE dependabot PRs Rebilly/rebilly#6511
 - Add PostReadyToPayFactory Rebilly/rebilly#5745
-- feat(api-definitions): Add matchLevel to KycDocument Rebilly/rebilly#6027
-- feat(api-definition): Add UI version to KYC settings Rebilly/rebilly#5890
-- refactor(api-definitions): Remove orderId from Subscription and OneTimeSale yaml files Rebilly/rebilly#6331
-- docs(api-definitions): Add expand to KYC request get Rebilly/rebilly#6306
+- Add matchLevel to KycDocument Rebilly/rebilly#6027
+- Add UI version to KYC settings Rebilly/rebilly#5890
+- Remove orderId from Subscription and OneTimeSale Rebilly/rebilly#6331
+- Add expand to KYC request get Rebilly/rebilly#6306
 - Add optional credentials to Buckaroo Rebilly/api-definitions#1884
 - Remove unused models
 - Add SecureTrading recurring settings Rebilly/api-definitions#1889
 - Update MobilePay credentials Rebilly/api-definitions#1883
-- feat(api-definitions): Add basic kyc matchLevel Rebilly/rebilly#5975
+- Add basic KYC matchLevel Rebilly/rebilly#5975
 - Add "release" version attribute to Status API response Rebilly/rebilly#1883
-- feat(be): Add PostPaymentInstrumentNameInquiry endpoint Rebilly/rebilly#6399
+- Add PostPaymentInstrumentNameInquiry endpoint Rebilly/rebilly#6399
 - Fix handling redirect responses Rebilly/rebilly-php#708
-- feat: Add new factors to RiskScoreRules Rebilly/api-definitions#1881
-- feat: Add transaction-processed to the list of supported tag/untag rules Rebilly/api-definitions#1871
+- Add new factors to RiskScoreRules Rebilly/api-definitions#1881
+- Add transaction-processed to the list of supported tag/untag rules Rebilly/api-definitions#1871
 - Add Unlimit gateway adapter Rebilly/api-definitions#1873
 - Risk score simulation configuration Rebilly/rebilly#5613
-- SDK Generator updated
-- fix(api-definitions): Add missing cancel category entries Rebilly/rebilly#6146
-- feat(api-definitions): Add quote-accepted event to order timeline Rebilly/rebilly#7076
-- feat(api-definitions): Add currencyAccountIds credential field to Skrill gateway Rebilly/rebilly#6310
-- fix(api-definitions): Fix StorefrontAccount schema Rebilly/rebilly#6476
+- Add missing cancel category entries Rebilly/rebilly#6146
+- Add quote-accepted event to order timeline Rebilly/rebilly#7076
+- Add currencyAccountIds credential field to Skrill gateway Rebilly/rebilly#6310
 - Remove Buckaroo debtor code Rebilly/rebilly#5772
 - Add abandon-scheduled-payments rule action Rebilly/api-definitions#1875
-- feat(api-definitions): Add hasCompletedFaceLiveness property to KycIdentityMatches schema Rebilly/rebilly#6777
-- feat(api-definitions): Add disputes resource to Data Exports Rebilly/rebilly#6175
+- Add hasCompletedFaceLiveness property to KycIdentityMatches schema Rebilly/rebilly#6777
+- Add disputes resource to Data Exports Rebilly/rebilly#6175
 - Add autopay to trial only conversion quote Rebilly/rebilly#5685
 - Fix ReportsAPI::getDashboardMetrics and ReportsAPI::getRevenueWaterfall return types
 - Add PayU gateway account Rebilly/rebilly#5250
-- fix(api-definitions): Fix incorrect links. Rebilly/rebilly#6415
-- remove isBot riskfactor field Rebilly/api-definitions#1882
+- Fix incorrect links. Rebilly/rebilly#6415
+- Remove isBot risk factor field Rebilly/api-definitions#1882
 
 ## 3.1.1
 
