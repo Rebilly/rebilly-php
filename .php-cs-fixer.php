@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 use PhpCsFixer\Config;
 use PhpCsFixer\Finder;
+use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
 
 $header = <<<'EOF'
 This source file is proprietary and part of Rebilly.
@@ -63,7 +64,6 @@ $rules = [
     'no_mixed_echo_print' => true,
     'no_multiline_whitespace_around_double_arrow' => true,
     'no_null_property_initialization' => true,
-    // 'no_short_echo_tag' => true,
     'no_short_bool_cast' => true,
     'no_singleline_whitespace_before_semicolons' => true,
     'no_spaces_around_offset' => true,
@@ -82,14 +82,12 @@ $rules = [
     'ordered_class_elements' => true,
     'ordered_imports' => true,
     'php_unit_strict' => true,
-    // 'php_unit_test_class_requires_covers' => true,
     'phpdoc_add_missing_param_annotation' => true,
     'phpdoc_order' => true,
     'phpdoc_types_order' => true,
     'protected_to_private' => true,
     'return_type_declaration' => true,
     'self_accessor' => true,
-    // 'semicolon_after_instruction' => false,
     'semicolon_after_instruction' => true,
     'short_scalar_cast' => true,
     'single_line_comment_style' => true,
@@ -120,6 +118,7 @@ $finder = (new Finder())
     ->in(__DIR__);
 
 return (new Config())
+    ->setParallelConfig(ParallelConfigFactory::detect())
     ->setFinder($finder)
     ->setRules($rules)
     ->setRiskyAllowed(true)

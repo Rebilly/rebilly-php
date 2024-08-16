@@ -49,6 +49,8 @@ class Dispute implements JsonSerializable
 
     public const TYPE_PAYPAL_CLAIM = 'paypal-claim';
 
+    public const TYPE_REPRESENTMENT = 'representment';
+
     public const STATUS_RESPONSE_NEEDED = 'response-needed';
 
     public const STATUS_UNDER_REVIEW = 'under-review';

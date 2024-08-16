@@ -16,6 +16,7 @@ namespace Rebilly\Sdk\Middleware;
 use Closure;
 use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use Rebilly\Sdk\Client;
 
 final class BaseUri
@@ -27,27 +28,50 @@ final class BaseUri
     public function __invoke(callable $next): Closure
     {
         return function (RequestInterface $request, array $options) use ($next) {
-            if ($request->getHeaderLine('Host') === '') {
-                $uri = $this->uri;
-                $basePath = $uri->getPath();
-                $requestPath = $request->getUri()->getPath();
-                if (
-                    str_starts_with($requestPath, Client::EXPERIMENTAL_BASE)
-                    && !str_ends_with(rtrim($basePath, '/'), ltrim(Client::EXPERIMENTAL_BASE, '/'))
-                ) {
-                    $basePath .= Client::EXPERIMENTAL_BASE;
-                    $requestPath = mb_substr($requestPath, mb_strlen(Client::EXPERIMENTAL_BASE));
-                }
-                $basePath .= '/';
-                if ($this->organizationId) {
-                    $basePath .= 'organizations/' . $this->organizationId . '/';
-                }
-                $uri = $uri->withPath($basePath . ltrim($requestPath, '/'));
-                $uri = $uri->withQuery($request->getUri()->getQuery());
-                $request = $request->withUri($uri);
+            if ($request->getHeaderLine('Host') !== '') {
+                return $next($request, $options);
             }
+            $newPath = $this->adjustUriPath($request->getUri()->getPath());
+            $request = $request->withUri(
+                $this->uri->withPath($newPath)
+                    ->withQuery($request->getUri()->getQuery()),
+            );
 
-            return $next($request, $options);
+            return $next($request, $options)->then(
+                function (ResponseInterface $response) {
+                    if ($response->getHeaderLine('Location') === '') {
+                        return $response;
+                    }
+                    $locationUri = new Uri($response->getHeaderLine('Location'));
+                    $newPath = $this->adjustUriPath($locationUri->getPath());
+
+                    return $response->withHeader(
+                        'Location',
+                        $this->uri->withPath($newPath)
+                            ->withQuery($locationUri->getQuery())
+                            ->__toString(),
+                    );
+                },
+            );
         };
+    }
+
+    private function adjustUriPath(string $requestPath): string
+    {
+        $basePath = $this->uri->getPath();
+
+        if (
+            str_starts_with($requestPath, Client::EXPERIMENTAL_BASE)
+            && !str_ends_with(rtrim($basePath, '/'), ltrim(Client::EXPERIMENTAL_BASE, '/'))
+        ) {
+            $basePath .= Client::EXPERIMENTAL_BASE;
+            $requestPath = mb_substr($requestPath, mb_strlen(Client::EXPERIMENTAL_BASE));
+        }
+        $basePath .= '/';
+        if ($this->organizationId) {
+            $basePath .= 'organizations/' . $this->organizationId . '/';
+        }
+
+        return $basePath . ltrim($requestPath, '/');
     }
 }

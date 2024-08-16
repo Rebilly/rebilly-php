@@ -127,6 +127,9 @@ class KycIdentityMatches implements PostKycDocumentMatchesRequest
         if (array_key_exists('isTampered', $data)) {
             $this->setIsTampered($data['isTampered']);
         }
+        if (array_key_exists('hasCompletedFaceLiveness', $data)) {
+            $this->setHasCompletedFaceLiveness($data['hasCompletedFaceLiveness']);
+        }
         if (array_key_exists('expiryDate', $data)) {
             $this->setExpiryDate($data['expiryDate']);
         }
@@ -342,6 +345,11 @@ class KycIdentityMatches implements PostKycDocumentMatchesRequest
         return $this;
     }
 
+    public function getHasCompletedFaceLiveness(): ?bool
+    {
+        return $this->fields['hasCompletedFaceLiveness'] ?? null;
+    }
+
     public function getExpiryDate(): ?DateTimeImmutable
     {
         return $this->fields['expiryDate'] ?? null;
@@ -412,6 +420,9 @@ class KycIdentityMatches implements PostKycDocumentMatchesRequest
         if (array_key_exists('isTampered', $this->fields)) {
             $data['isTampered'] = $this->fields['isTampered'];
         }
+        if (array_key_exists('hasCompletedFaceLiveness', $this->fields)) {
+            $data['hasCompletedFaceLiveness'] = $this->fields['hasCompletedFaceLiveness'];
+        }
         if (array_key_exists('expiryDate', $this->fields)) {
             $data['expiryDate'] = $this->fields['expiryDate']?->format(DateTimeInterface::RFC3339);
         }
@@ -432,6 +443,13 @@ class KycIdentityMatches implements PostKycDocumentMatchesRequest
     private function setHasMinimalAge(null|bool $hasMinimalAge): static
     {
         $this->fields['hasMinimalAge'] = $hasMinimalAge;
+
+        return $this;
+    }
+
+    private function setHasCompletedFaceLiveness(null|bool $hasCompletedFaceLiveness): static
+    {
+        $this->fields['hasCompletedFaceLiveness'] = $hasCompletedFaceLiveness;
 
         return $this;
     }
