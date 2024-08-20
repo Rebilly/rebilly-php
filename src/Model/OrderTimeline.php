@@ -81,6 +81,8 @@ class OrderTimeline implements JsonSerializable
 
     public const TYPE_ORDER_RISK_METADATA_CHANGED = 'order-risk-metadata-changed';
 
+    public const TYPE_ORDER_TRIAL_ENDED = 'order-trial-ended';
+
     public const TYPE_ORDER_UPGRADED = 'order-upgraded';
 
     public const TYPE_ORDER_VOIDED = 'order-voided';
