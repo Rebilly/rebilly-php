@@ -125,6 +125,8 @@ class CustomerTimeline implements JsonSerializable
 
     public const TYPE_ORDER_RENEWED = 'order-renewed';
 
+    public const TYPE_ORDER_TRIAL_ENDED = 'order-trial-ended';
+
     public const TYPE_ORDER_UPGRADED = 'order-upgraded';
 
     public const TYPE_PAYMENT_CARD_EXPIRATION_WAS_MODIFIED = 'payment-card-expiration-was-modified';
