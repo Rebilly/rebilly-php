@@ -30,6 +30,9 @@ class WebsiteSettingsPaymentFormFeatures implements JsonSerializable
         if (array_key_exists('skipRedirectOnPaymentComplete', $data)) {
             $this->setSkipRedirectOnPaymentComplete($data['skipRedirectOnPaymentComplete']);
         }
+        if (array_key_exists('hideZeroAmountSummaryItems', $data)) {
+            $this->setHideZeroAmountSummaryItems($data['hideZeroAmountSummaryItems']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -79,6 +82,18 @@ class WebsiteSettingsPaymentFormFeatures implements JsonSerializable
         return $this;
     }
 
+    public function getHideZeroAmountSummaryItems(): ?bool
+    {
+        return $this->fields['hideZeroAmountSummaryItems'] ?? null;
+    }
+
+    public function setHideZeroAmountSummaryItems(null|bool $hideZeroAmountSummaryItems): static
+    {
+        $this->fields['hideZeroAmountSummaryItems'] = $hideZeroAmountSummaryItems;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -90,6 +105,9 @@ class WebsiteSettingsPaymentFormFeatures implements JsonSerializable
         }
         if (array_key_exists('skipRedirectOnPaymentComplete', $this->fields)) {
             $data['skipRedirectOnPaymentComplete'] = $this->fields['skipRedirectOnPaymentComplete'];
+        }
+        if (array_key_exists('hideZeroAmountSummaryItems', $this->fields)) {
+            $data['hideZeroAmountSummaryItems'] = $this->fields['hideZeroAmountSummaryItems'];
         }
 
         return $data;

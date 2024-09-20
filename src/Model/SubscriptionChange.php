@@ -45,6 +45,9 @@ class SubscriptionChange implements JsonSerializable
         if (array_key_exists('keepTrial', $data)) {
             $this->setKeepTrial($data['keepTrial']);
         }
+        if (array_key_exists('ignoreRecurring', $data)) {
+            $this->setIgnoreRecurring($data['ignoreRecurring']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -139,6 +142,18 @@ class SubscriptionChange implements JsonSerializable
         return $this;
     }
 
+    public function getIgnoreRecurring(): ?bool
+    {
+        return $this->fields['ignoreRecurring'] ?? null;
+    }
+
+    public function setIgnoreRecurring(null|bool $ignoreRecurring): static
+    {
+        $this->fields['ignoreRecurring'] = $ignoreRecurring;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -162,6 +177,9 @@ class SubscriptionChange implements JsonSerializable
         }
         if (array_key_exists('keepTrial', $this->fields)) {
             $data['keepTrial'] = $this->fields['keepTrial'];
+        }
+        if (array_key_exists('ignoreRecurring', $this->fields)) {
+            $data['ignoreRecurring'] = $this->fields['ignoreRecurring'];
         }
 
         return $data;

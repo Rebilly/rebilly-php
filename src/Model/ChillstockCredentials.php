@@ -27,6 +27,9 @@ class ChillstockCredentials implements JsonSerializable
         if (array_key_exists('privateKey', $data)) {
             $this->setPrivateKey($data['privateKey']);
         }
+        if (array_key_exists('publicKey', $data)) {
+            $this->setPublicKey($data['publicKey']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -58,6 +61,18 @@ class ChillstockCredentials implements JsonSerializable
         return $this;
     }
 
+    public function getPublicKey(): ?string
+    {
+        return $this->fields['publicKey'] ?? null;
+    }
+
+    public function setPublicKey(null|string $publicKey): static
+    {
+        $this->fields['publicKey'] = $publicKey;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -66,6 +81,9 @@ class ChillstockCredentials implements JsonSerializable
         }
         if (array_key_exists('privateKey', $this->fields)) {
             $data['privateKey'] = $this->fields['privateKey'];
+        }
+        if (array_key_exists('publicKey', $this->fields)) {
+            $data['publicKey'] = $this->fields['publicKey'];
         }
 
         return $data;
