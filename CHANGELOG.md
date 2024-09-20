@@ -4,13 +4,13 @@
 
 ### Patch Changes
 
-- feat(api-definitions): Add orderDelinquencyPeriod to Organization settings. Rebilly/rebilly#7016
-- Update Conekta OXXO URL (Rebilly/rebilly#7396)
-- fix(api-definitions): Remove pricing from TrialOnlyPlan Rebilly/rebilly#7665
-- Add IPN signature support to Chillstock (Rebilly/rebilly#7615)
-- feat(api-definitions): Add trial ended event to order and customer timelines Rebilly/rebilly#7148
-- Add ignoreRecurring for change items (Rebilly/rebilly#7433)
-- Add new website payment form setting hideZeroAmountSummaryItems (Rebilly/rebilly#7462)
+- Add orderDelinquencyPeriod to Organization settings Rebilly/rebilly#7016
+- Update Conekta OXXO URL Rebilly/rebilly#7396
+- Remove pricing from TrialOnlyPlan Rebilly/rebilly#7665
+- Add IPN signature support to Chillstock Rebilly/rebilly#7615
+- Add trial ended event to order and customer timelines Rebilly/rebilly#7148
+- Add ignoreRecurring for change items Rebilly/rebilly#7433
+- Add new website payment form setting hideZeroAmountSummaryItems Rebilly/rebilly#7462
 
 ## 3.1.2
 
