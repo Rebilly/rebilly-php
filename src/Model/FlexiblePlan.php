@@ -53,10 +53,6 @@ interface FlexiblePlan extends ConfigurablePlan
 
     public function getCurrencySign(): ?string;
 
-    public function getPricing(): PlanPriceFormula;
-
-    public function setPricing(PlanPriceFormula|array $pricing): static;
-
     public function getSetup(): ?PlanSetup;
 
     public function setSetup(null|PlanSetup|array $setup): static;
