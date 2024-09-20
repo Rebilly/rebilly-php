@@ -59,7 +59,7 @@ jobs:
 
       - name: Build api-definitions
         working-directory: ./api-definitions
-        run: npx redocly bundle all@latest -o dist/all.yaml
+        run: npx redocly bundle all@latest -o all.yaml
 
       - name: Login to GitHub Registry
         uses: docker/login-action@v3
@@ -74,7 +74,7 @@ jobs:
           docker run --rm \
             -u $(id -u ${USER}):$(id -g ${USER}) \
             -v "/tmp/sdk:/out" \
-            -v "$(pwd)/api-definitions/dist:/api-definitions" \
+            -v "$(pwd)/api-definitions/catalog:/api-definitions" \
             ghcr.io/rebilly/regenerator:latest  generate \
             -g rebilly-php \
             -D /out/openapi.json \
