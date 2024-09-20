@@ -46,9 +46,6 @@ class TrialOnlyPlan implements Plan, FlexiblePlan
         if (array_key_exists('currencySign', $data)) {
             $this->setCurrencySign($data['currencySign']);
         }
-        if (array_key_exists('pricing', $data)) {
-            $this->setPricing($data['pricing']);
-        }
         if (array_key_exists('setup', $data)) {
             $this->setSetup($data['setup']);
         }
@@ -181,22 +178,6 @@ class TrialOnlyPlan implements Plan, FlexiblePlan
         return $this->fields['currencySign'] ?? null;
     }
 
-    public function getPricing(): PlanPriceFormula
-    {
-        return $this->fields['pricing'];
-    }
-
-    public function setPricing(PlanPriceFormula|array $pricing): static
-    {
-        if (!($pricing instanceof PlanPriceFormula)) {
-            $pricing = PlanPriceFormulaFactory::from($pricing);
-        }
-
-        $this->fields['pricing'] = $pricing;
-
-        return $this;
-    }
-
     public function getSetup(): ?PlanSetup
     {
         return $this->fields['setup'] ?? null;
@@ -323,9 +304,6 @@ class TrialOnlyPlan implements Plan, FlexiblePlan
         }
         if (array_key_exists('currencySign', $this->fields)) {
             $data['currencySign'] = $this->fields['currencySign'];
-        }
-        if (array_key_exists('pricing', $this->fields)) {
-            $data['pricing'] = $this->fields['pricing']->jsonSerialize();
         }
         if (array_key_exists('setup', $this->fields)) {
             $data['setup'] = $this->fields['setup']?->jsonSerialize();
