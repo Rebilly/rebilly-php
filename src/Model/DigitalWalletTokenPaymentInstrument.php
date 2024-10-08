@@ -21,6 +21,8 @@ class DigitalWalletTokenPaymentInstrument implements JsonSerializable
 
     public const TYPE_GOOGLE_PAY = 'Google Pay';
 
+    public const TYPE_SAMSUNG_PAY = 'Samsung Pay';
+
     public const BRAND_VISA = 'Visa';
 
     public const BRAND_MASTER_CARD = 'MasterCard';

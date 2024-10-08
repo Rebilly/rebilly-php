@@ -60,6 +60,8 @@ class PaymentCard implements PaymentInstrument
 
     public const DIGITAL_WALLET_GOOGLE_PAY = 'Google Pay';
 
+    public const DIGITAL_WALLET_SAMSUNG_PAY = 'Samsung Pay';
+
     public const DIGITAL_WALLET_NULL = 'null';
 
     private array $fields = [];

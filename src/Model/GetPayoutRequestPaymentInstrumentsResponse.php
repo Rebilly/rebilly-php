@@ -161,6 +161,8 @@ class GetPayoutRequestPaymentInstrumentsResponse implements JsonSerializable
 
     public const GATEWAY_NAME_FORTE = 'Forte';
 
+    public const GATEWAY_NAME_GATE2WAY = 'gate2way';
+
     public const GATEWAY_NAME_GET = 'GET';
 
     public const GATEWAY_NAME_GIGADAT = 'Gigadat';

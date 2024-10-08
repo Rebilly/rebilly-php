@@ -159,6 +159,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
 
     public const GATEWAY_NAME_FORTE = 'Forte';
 
+    public const GATEWAY_NAME_GATE2WAY = 'gate2way';
+
     public const GATEWAY_NAME_GET = 'GET';
 
     public const GATEWAY_NAME_GIGADAT = 'Gigadat';
@@ -570,6 +572,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
     public const ACQUIRER_NAME_FORTE = 'Forte';
 
     public const ACQUIRER_NAME_FUND_SEND = 'FundSend';
+
+    public const ACQUIRER_NAME_GATE2WAY = 'gate2way';
 
     public const ACQUIRER_NAME_GIGADAT = 'Gigadat';
 
