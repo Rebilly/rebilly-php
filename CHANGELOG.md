@@ -1,5 +1,13 @@
 # @rebilly/client-php
 
+## 3.1.4
+
+### Patch Changes
+
+- build(deps): merge passing FE dependabot PRs Rebilly/rebilly#7937
+- feat(be): Add gate2way integration Rebilly/rebilly#7887
+- feat(be): Add support for Samsung Pay digital wallet Rebilly/rebilly#7760
+
 ## 3.1.3
 
 ### Patch Changes
