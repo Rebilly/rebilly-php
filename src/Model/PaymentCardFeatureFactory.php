@@ -22,6 +22,7 @@ class PaymentCardFeatureFactory
         return match ($data['name']) {
             'Apple Pay' => ApplePayFeature::from($data),
             'Google Pay' => GooglePayFeature::from($data),
+            'Samsung Pay' => SamsungPayFeature::from($data),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }
