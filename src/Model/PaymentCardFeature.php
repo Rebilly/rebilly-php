@@ -18,8 +18,4 @@ use JsonSerializable;
 interface PaymentCardFeature extends JsonSerializable
 {
     public function getName(): string;
-
-    public function getCountry(): ?string;
-
-    public function setCountry(null|string $country): static;
 }
