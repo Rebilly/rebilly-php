@@ -171,6 +171,8 @@ class SystemEvent implements JsonSerializable
 
     public const EVENT_TYPE_SUBSCRIPTION_PAUSED = 'subscription-paused';
 
+    public const EVENT_TYPE_SUBSCRIPTION_QUANTITY_FILLED_LIMIT_REACHED = 'subscription-quantity-filled-limit-reached';
+
     public const EVENT_TYPE_SUBSCRIPTION_REACTIVATED = 'subscription-reactivated';
 
     public const EVENT_TYPE_SUBSCRIPTION_RENEWAL_REMINDER = 'subscription-renewal-reminder';

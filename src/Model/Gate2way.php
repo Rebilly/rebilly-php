@@ -13,21 +13,18 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-class Monolo extends GatewayAccount
+class Gate2way extends GatewayAccount
 {
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
         parent::__construct([
-            'gatewayName' => 'Monolo',
+            'gatewayName' => 'gate2way',
         ] + $data);
 
         if (array_key_exists('credentials', $data)) {
             $this->setCredentials($data['credentials']);
-        }
-        if (array_key_exists('settings', $data)) {
-            $this->setSettings($data['settings']);
         }
     }
 
@@ -36,34 +33,18 @@ class Monolo extends GatewayAccount
         return new self($data);
     }
 
-    public function getCredentials(): MonoloCredentials
+    public function getCredentials(): Gate2wayCredentials
     {
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(MonoloCredentials|array $credentials): static
+    public function setCredentials(Gate2wayCredentials|array $credentials): static
     {
-        if (!($credentials instanceof MonoloCredentials)) {
-            $credentials = MonoloCredentials::from($credentials);
+        if (!($credentials instanceof Gate2wayCredentials)) {
+            $credentials = Gate2wayCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
-
-        return $this;
-    }
-
-    public function getSettings(): ?MonoloSettings
-    {
-        return $this->fields['settings'] ?? null;
-    }
-
-    public function setSettings(null|MonoloSettings|array $settings): static
-    {
-        if ($settings !== null && !($settings instanceof MonoloSettings)) {
-            $settings = MonoloSettings::from($settings);
-        }
-
-        $this->fields['settings'] = $settings;
 
         return $this;
     }
@@ -73,9 +54,6 @@ class Monolo extends GatewayAccount
         $data = [];
         if (array_key_exists('credentials', $this->fields)) {
             $data['credentials'] = $this->fields['credentials']->jsonSerialize();
-        }
-        if (array_key_exists('settings', $this->fields)) {
-            $data['settings'] = $this->fields['settings']?->jsonSerialize();
         }
 
         return parent::jsonSerialize() + $data;

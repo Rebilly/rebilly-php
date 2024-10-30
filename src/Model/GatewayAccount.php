@@ -1492,6 +1492,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return Forte::from($data);
             case 'FundSend':
                 return FundSend::from($data);
+            case 'gate2way':
+                return Gate2way::from($data);
             case 'GET':
                 return GET::from($data);
             case 'Gigadat':
