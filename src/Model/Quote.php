@@ -68,6 +68,10 @@ interface Quote extends JsonSerializable
 
     public function getCanceledTime(): ?DateTimeImmutable;
 
+    public function getCreatedTime(): ?DateTimeImmutable;
+
+    public function getUpdatedTime(): ?DateTimeImmutable;
+
     public function getRedirectUrl(): ?string;
 
     public function setRedirectUrl(null|string $redirectUrl): static;
