@@ -177,6 +177,8 @@ class CheckoutForm implements JsonSerializable
 
     public const PAYMENT_METHODS_JETON = 'Jeton';
 
+    public const PAYMENT_METHODS_JETON_CASH = 'JetonCash';
+
     public const PAYMENT_METHODS_JPAY = 'jpay';
 
     public const PAYMENT_METHODS_KAKAO_PAY = 'KakaoPay';

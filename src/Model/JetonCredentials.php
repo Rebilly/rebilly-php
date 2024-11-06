@@ -24,6 +24,9 @@ class JetonCredentials implements JsonSerializable
         if (array_key_exists('apiKey', $data)) {
             $this->setApiKey($data['apiKey']);
         }
+        if (array_key_exists('secret', $data)) {
+            $this->setSecret($data['secret']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -43,11 +46,26 @@ class JetonCredentials implements JsonSerializable
         return $this;
     }
 
+    public function getSecret(): ?string
+    {
+        return $this->fields['secret'] ?? null;
+    }
+
+    public function setSecret(null|string $secret): static
+    {
+        $this->fields['secret'] = $secret;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
         if (array_key_exists('apiKey', $this->fields)) {
             $data['apiKey'] = $this->fields['apiKey'];
+        }
+        if (array_key_exists('secret', $this->fields)) {
+            $data['secret'] = $this->fields['secret'];
         }
 
         return $data;
