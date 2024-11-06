@@ -173,6 +173,8 @@ class PaymentInstructionMethods implements PaymentInstruction
 
     public const METHODS_JETON = 'Jeton';
 
+    public const METHODS_JETON_CASH = 'JetonCash';
+
     public const METHODS_JPAY = 'jpay';
 
     public const METHODS_KAKAO_PAY = 'KakaoPay';

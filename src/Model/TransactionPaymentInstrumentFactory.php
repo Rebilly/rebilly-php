@@ -75,6 +75,7 @@ class TransactionPaymentInstrumentFactory
             'Interac-express-connect' => AlternativePaymentInstrument::from($data),
             'Interac-online' => AlternativePaymentInstrument::from($data),
             'Jeton' => AlternativePaymentInstrument::from($data),
+            'JetonCash' => AlternativePaymentInstrument::from($data),
             'KNOT' => AlternativePaymentInstrument::from($data),
             'KakaoPay' => AlternativePaymentInstrument::from($data),
             'Khelocard' => AlternativePaymentInstrument::from($data),

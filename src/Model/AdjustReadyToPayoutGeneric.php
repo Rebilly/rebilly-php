@@ -135,6 +135,8 @@ class AdjustReadyToPayoutGeneric implements AdjustReadyToPayoutPaymentMethod
 
     public const PAYMENT_METHOD_JETON = 'Jeton';
 
+    public const PAYMENT_METHOD_JETON_CASH = 'JetonCash';
+
     public const PAYMENT_METHOD_JPAY = 'jpay';
 
     public const PAYMENT_METHOD_KAKAO_PAY = 'KakaoPay';

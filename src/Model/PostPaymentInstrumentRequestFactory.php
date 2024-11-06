@@ -62,6 +62,7 @@ class PostPaymentInstrumentRequestFactory
             'Interac-eTransfer' => AlternativeInstrument::from($data),
             'Interac-online' => AlternativeInstrument::from($data),
             'Jeton' => AlternativeInstrument::from($data),
+            'JetonCash' => AlternativeInstrument::from($data),
             'KNOT' => AlternativeInstrument::from($data),
             'KakaoPay' => AlternativeInstrument::from($data),
             'Klarna' => AlternativeInstrument::from($data),

@@ -135,6 +135,8 @@ class ReadyToPayGenericMethod implements ReadyToPayMethods
 
     public const METHOD_JETON = 'Jeton';
 
+    public const METHOD_JETON_CASH = 'JetonCash';
+
     public const METHOD_JPAY = 'jpay';
 
     public const METHOD_KAKAO_PAY = 'KakaoPay';
