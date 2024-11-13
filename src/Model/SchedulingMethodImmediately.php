@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-class SchedulingMethodImmediately implements ServicePeriodAnchorInstruction, InvoiceRetryScheduleInstruction, SettlementPeriod, ScheduleInstruction
+class SchedulingMethodImmediately implements InvoiceRetryScheduleInstruction, SettlementPeriod, ScheduleInstruction
 {
     public function __construct(array $data = [])
     {

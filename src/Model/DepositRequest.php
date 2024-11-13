@@ -77,6 +77,9 @@ class DepositRequest implements JsonSerializable
         if (array_key_exists('notificationUrl', $data)) {
             $this->setNotificationUrl($data['notificationUrl']);
         }
+        if (array_key_exists('cashierToken', $data)) {
+            $this->setCashierToken($data['cashierToken']);
+        }
         if (array_key_exists('customFields', $data)) {
             $this->setCustomFields($data['customFields']);
         }
@@ -260,6 +263,11 @@ class DepositRequest implements JsonSerializable
         return $this;
     }
 
+    public function getCashierToken(): ?string
+    {
+        return $this->fields['cashierToken'] ?? null;
+    }
+
     public function getCustomFields(): ?array
     {
         return $this->fields['customFields'] ?? null;
@@ -351,6 +359,9 @@ class DepositRequest implements JsonSerializable
         if (array_key_exists('notificationUrl', $this->fields)) {
             $data['notificationUrl'] = $this->fields['notificationUrl'];
         }
+        if (array_key_exists('cashierToken', $this->fields)) {
+            $data['cashierToken'] = $this->fields['cashierToken'];
+        }
         if (array_key_exists('customFields', $this->fields)) {
             $data['customFields'] = $this->fields['customFields'];
         }
@@ -409,6 +420,13 @@ class DepositRequest implements JsonSerializable
     private function setProperties(null|array $properties): static
     {
         $this->fields['properties'] = $properties;
+
+        return $this;
+    }
+
+    private function setCashierToken(null|string $cashierToken): static
+    {
+        $this->fields['cashierToken'] = $cashierToken;
 
         return $this;
     }

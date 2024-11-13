@@ -22,7 +22,6 @@ class ServicePeriodAnchorInstructionFactory
         return match ($data['method']) {
             'day-of-month' => SchedulingMethodDayOfMonth::from($data),
             'day-of-week' => SchedulingMethodDayOfWeek::from($data),
-            'immediately' => SchedulingMethodImmediately::from($data),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }
