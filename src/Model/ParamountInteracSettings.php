@@ -27,6 +27,12 @@ class ParamountInteracSettings implements JsonSerializable
         if (array_key_exists('merchantSubId', $data)) {
             $this->setMerchantSubId($data['merchantSubId']);
         }
+        if (array_key_exists('autodepositLookup', $data)) {
+            $this->setAutodepositLookup($data['autodepositLookup']);
+        }
+        if (array_key_exists('autodepositLookupDay', $data)) {
+            $this->setAutodepositLookupDay($data['autodepositLookupDay']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -58,6 +64,30 @@ class ParamountInteracSettings implements JsonSerializable
         return $this;
     }
 
+    public function getAutodepositLookup(): ?bool
+    {
+        return $this->fields['autodepositLookup'] ?? null;
+    }
+
+    public function setAutodepositLookup(null|bool $autodepositLookup): static
+    {
+        $this->fields['autodepositLookup'] = $autodepositLookup;
+
+        return $this;
+    }
+
+    public function getAutodepositLookupDay(): ?int
+    {
+        return $this->fields['autodepositLookupDay'] ?? null;
+    }
+
+    public function setAutodepositLookupDay(null|int $autodepositLookupDay): static
+    {
+        $this->fields['autodepositLookupDay'] = $autodepositLookupDay;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -66,6 +96,12 @@ class ParamountInteracSettings implements JsonSerializable
         }
         if (array_key_exists('merchantSubId', $this->fields)) {
             $data['merchantSubId'] = $this->fields['merchantSubId'];
+        }
+        if (array_key_exists('autodepositLookup', $this->fields)) {
+            $data['autodepositLookup'] = $this->fields['autodepositLookup'];
+        }
+        if (array_key_exists('autodepositLookupDay', $this->fields)) {
+            $data['autodepositLookupDay'] = $this->fields['autodepositLookupDay'];
         }
 
         return $data;

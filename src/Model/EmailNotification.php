@@ -201,6 +201,8 @@ class EmailNotification implements JsonSerializable
 
     public const EVENT_TYPE_ORDER_DELINQUENCY_REACHED = 'order-delinquency-reached';
 
+    public const EVENT_TYPE_AUTODEPOSIT_LOOKUP_PERFORMED = 'autodeposit-lookup-performed';
+
     private array $fields = [];
 
     public function __construct(array $data = [])

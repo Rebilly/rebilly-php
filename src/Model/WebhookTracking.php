@@ -203,6 +203,8 @@ class WebhookTracking implements JsonSerializable
 
     public const EVENT_TYPE_ORDER_DELINQUENCY_REACHED = 'order-delinquency-reached';
 
+    public const EVENT_TYPE_AUTODEPOSIT_LOOKUP_PERFORMED = 'autodeposit-lookup-performed';
+
     public const SOURCE_WEBHOOKS = 'webhooks';
 
     public const SOURCE_RULES = 'rules';
