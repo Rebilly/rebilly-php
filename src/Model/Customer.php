@@ -89,6 +89,9 @@ class Customer implements JsonSerializable
         if (array_key_exists('organizationId', $data)) {
             $this->setOrganizationId($data['organizationId']);
         }
+        if (array_key_exists('locale', $data)) {
+            $this->setLocale($data['locale']);
+        }
         if (array_key_exists('taxNumbers', $data)) {
             $this->setTaxNumbers($data['taxNumbers']);
         }
@@ -301,6 +304,18 @@ class Customer implements JsonSerializable
         return $this->fields['organizationId'] ?? null;
     }
 
+    public function getLocale(): ?string
+    {
+        return $this->fields['locale'] ?? null;
+    }
+
+    public function setLocale(null|string $locale): static
+    {
+        $this->fields['locale'] = $locale;
+
+        return $this;
+    }
+
     /**
      * @return null|TaxNumber[]
      */
@@ -421,6 +436,9 @@ class Customer implements JsonSerializable
         }
         if (array_key_exists('organizationId', $this->fields)) {
             $data['organizationId'] = $this->fields['organizationId'];
+        }
+        if (array_key_exists('locale', $this->fields)) {
+            $data['locale'] = $this->fields['locale'];
         }
         if (array_key_exists('taxNumbers', $this->fields)) {
             $data['taxNumbers'] = $this->fields['taxNumbers'] !== null
