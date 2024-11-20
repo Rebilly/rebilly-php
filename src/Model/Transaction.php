@@ -313,6 +313,8 @@ class Transaction implements JsonSerializable
 
     public const GATEWAY_NAME_OCHA_PAY = 'OchaPay';
 
+    public const GATEWAY_NAME_OMNI_MATRIX = 'OmniMatrix';
+
     public const GATEWAY_NAME_ONLINEUEBERWEISEN = 'Onlineueberweisen';
 
     public const GATEWAY_NAME_ON_RAMP = 'OnRamp';
@@ -720,6 +722,8 @@ class Transaction implements JsonSerializable
     public const ACQUIRER_NAME_NUVEI = 'Nuvei';
 
     public const ACQUIRER_NAME_OCHA_PAY = 'OchaPay';
+
+    public const ACQUIRER_NAME_OMNI_MATRIX = 'OmniMatrix';
 
     public const ACQUIRER_NAME_ONLINEUEBERWEISEN = 'Onlineueberweisen';
 

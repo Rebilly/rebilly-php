@@ -258,6 +258,8 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const GATEWAY_NAME_OCHA_PAY = 'OchaPay';
 
+    public const GATEWAY_NAME_OMNI_MATRIX = 'OmniMatrix';
+
     public const GATEWAY_NAME_ONLINEUEBERWEISEN = 'Onlineueberweisen';
 
     public const GATEWAY_NAME_ON_RAMP = 'OnRamp';
@@ -665,6 +667,8 @@ abstract class GatewayAccount implements JsonSerializable
     public const ACQUIRER_NAME_NUVEI = 'Nuvei';
 
     public const ACQUIRER_NAME_OCHA_PAY = 'OchaPay';
+
+    public const ACQUIRER_NAME_OMNI_MATRIX = 'OmniMatrix';
 
     public const ACQUIRER_NAME_ONLINEUEBERWEISEN = 'Onlineueberweisen';
 
@@ -1590,6 +1594,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return NuaPay::from($data);
             case 'OchaPay':
                 return OchaPay::from($data);
+            case 'OmniMatrix':
+                return OmniMatrix::from($data);
             case 'Onlineueberweisen':
                 return Onlineueberweisen::from($data);
             case 'OnRamp':
