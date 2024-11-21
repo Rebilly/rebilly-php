@@ -33,15 +33,15 @@ class TestProcessor extends GatewayAccount
         return new self($data);
     }
 
-    public function getThreeDSecureServer(): ?TestProcessor3dsServers
+    public function getThreeDSecureServer(): ?ThreeDSecureIO3dsServer
     {
         return $this->fields['threeDSecureServer'] ?? null;
     }
 
-    public function setThreeDSecureServer(null|TestProcessor3dsServers|array $threeDSecureServer): static
+    public function setThreeDSecureServer(null|ThreeDSecureIO3dsServer|array $threeDSecureServer): static
     {
-        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof TestProcessor3dsServers)) {
-            $threeDSecureServer = TestProcessor3dsServersFactory::from($threeDSecureServer);
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof ThreeDSecureIO3dsServer)) {
+            $threeDSecureServer = ThreeDSecureIO3dsServer::from($threeDSecureServer);
         }
 
         $this->fields['threeDSecureServer'] = $threeDSecureServer;

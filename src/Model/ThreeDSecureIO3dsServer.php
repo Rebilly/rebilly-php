@@ -13,8 +13,12 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-class ThreeDSecureIO3dsServer implements TestProcessor3dsServers
+use JsonSerializable;
+
+class ThreeDSecureIO3dsServer implements JsonSerializable
 {
+    public const NAME_THREE_D_SECURE_IO3DS_SERVER = 'ThreeDSecureIO3dsServer';
+
     public const TRANSACTION_TYPE_01 = '01';
 
     public const TRANSACTION_TYPE_03 = '03';
@@ -51,6 +55,9 @@ class ThreeDSecureIO3dsServer implements TestProcessor3dsServers
 
     public function __construct(array $data = [])
     {
+        if (array_key_exists('name', $data)) {
+            $this->setName($data['name']);
+        }
         if (array_key_exists('acquirerMerchantIdVisa', $data)) {
             $this->setAcquirerMerchantIdVisa($data['acquirerMerchantIdVisa']);
         }
@@ -111,7 +118,14 @@ class ThreeDSecureIO3dsServer implements TestProcessor3dsServers
 
     public function getName(): string
     {
-        return 'ThreeDSecureIO3dsServer';
+        return $this->fields['name'];
+    }
+
+    public function setName(string $name): static
+    {
+        $this->fields['name'] = $name;
+
+        return $this;
     }
 
     public function getAcquirerMerchantIdVisa(): string
@@ -320,9 +334,10 @@ class ThreeDSecureIO3dsServer implements TestProcessor3dsServers
 
     public function jsonSerialize(): array
     {
-        $data = [
-            'name' => 'ThreeDSecureIO3dsServer',
-        ];
+        $data = [];
+        if (array_key_exists('name', $this->fields)) {
+            $data['name'] = $this->fields['name'];
+        }
         if (array_key_exists('acquirerMerchantIdVisa', $this->fields)) {
             $data['acquirerMerchantIdVisa'] = $this->fields['acquirerMerchantIdVisa'];
         }
