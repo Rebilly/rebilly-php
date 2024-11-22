@@ -97,13 +97,6 @@ class SubscriptionPlan implements Plan, FlexiblePlan
         return $this->fields['id'] ?? null;
     }
 
-    public function setId(null|string $id): static
-    {
-        $this->fields['id'] = $id;
-
-        return $this;
-    }
-
     public function getName(): string
     {
         return $this->fields['name'];
@@ -253,14 +246,14 @@ class SubscriptionPlan implements Plan, FlexiblePlan
         return $this->fields['isTrialOnly'] ?? null;
     }
 
-    public function getRecurringInterval(): SubscriptionPlanRecurringInterval
+    public function getRecurringInterval(): ?SubscriptionPlanRecurringInterval
     {
-        return $this->fields['recurringInterval'];
+        return $this->fields['recurringInterval'] ?? null;
     }
 
-    public function setRecurringInterval(SubscriptionPlanRecurringInterval|array $recurringInterval): static
+    public function setRecurringInterval(null|SubscriptionPlanRecurringInterval|array $recurringInterval): static
     {
-        if (!($recurringInterval instanceof SubscriptionPlanRecurringInterval)) {
+        if ($recurringInterval !== null && !($recurringInterval instanceof SubscriptionPlanRecurringInterval)) {
             $recurringInterval = SubscriptionPlanRecurringInterval::from($recurringInterval);
         }
 
@@ -381,7 +374,7 @@ class SubscriptionPlan implements Plan, FlexiblePlan
             $data['isTrialOnly'] = $this->fields['isTrialOnly'];
         }
         if (array_key_exists('recurringInterval', $this->fields)) {
-            $data['recurringInterval'] = $this->fields['recurringInterval']->jsonSerialize();
+            $data['recurringInterval'] = $this->fields['recurringInterval']?->jsonSerialize();
         }
         if (array_key_exists('trial', $this->fields)) {
             $data['trial'] = $this->fields['trial']?->jsonSerialize();
@@ -408,6 +401,13 @@ class SubscriptionPlan implements Plan, FlexiblePlan
         }
 
         return $data;
+    }
+
+    private function setId(null|string $id): static
+    {
+        $this->fields['id'] = $id;
+
+        return $this;
     }
 
     private function setCurrencySign(null|string $currencySign): static

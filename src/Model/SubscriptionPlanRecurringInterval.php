@@ -71,24 +71,24 @@ class SubscriptionPlanRecurringInterval implements JsonSerializable
         return $this;
     }
 
-    public function getUnit(): ?string
+    public function getUnit(): string
     {
-        return $this->fields['unit'] ?? null;
+        return $this->fields['unit'];
     }
 
-    public function setUnit(null|string $unit): static
+    public function setUnit(string $unit): static
     {
         $this->fields['unit'] = $unit;
 
         return $this;
     }
 
-    public function getLength(): ?int
+    public function getLength(): int
     {
-        return $this->fields['length'] ?? null;
+        return $this->fields['length'];
     }
 
-    public function setLength(null|int $length): static
+    public function setLength(int $length): static
     {
         $this->fields['length'] = $length;
 
