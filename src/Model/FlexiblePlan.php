@@ -19,8 +19,6 @@ interface FlexiblePlan extends ConfigurablePlan
 {
     public function getId(): ?string;
 
-    public function setId(null|string $id): static;
-
     public function getName(): string;
 
     public function setName(string $name): static;
