@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This source file is proprietary and part of Rebilly.
  *
@@ -71,12 +72,14 @@ class DepositRequestsApi
         ?int $offset = null,
         ?string $filter = null,
         ?array $sort = null,
+        ?string $expand = null,
     ): Collection {
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
             'sort' => $sort ? implode(',', $sort) : null,
+            'expand' => $expand,
         ];
         $uri = '/deposit-requests?' . http_build_query($queryParams);
 
@@ -102,12 +105,14 @@ class DepositRequestsApi
         ?int $offset = null,
         ?string $filter = null,
         ?array $sort = null,
+        ?string $expand = null,
     ): Paginator {
         $closure = fn (?int $limit, ?int $offset): Collection => $this->getAll(
             limit: $limit,
             offset: $offset,
             filter: $filter,
             sort: $sort,
+            expand: $expand,
         );
 
         return new Paginator(

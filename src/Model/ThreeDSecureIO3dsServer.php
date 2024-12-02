@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This source file is proprietary and part of Rebilly.
  *

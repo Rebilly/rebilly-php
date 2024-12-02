@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This source file is proprietary and part of Rebilly.
  *
@@ -23,7 +24,6 @@ class QuoteFactory
             'change' => QuoteChangeOrder::from($data),
             'create' => QuoteCreateOrder::from($data),
             'reactivate' => QuoteReactivateOrder::from($data),
-            'trial-only-conversion' => QuoteTrialConversionOrder::from($data),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }
