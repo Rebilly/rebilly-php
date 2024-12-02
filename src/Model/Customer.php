@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This source file is proprietary and part of Rebilly.
  *
@@ -443,9 +444,7 @@ class Customer implements JsonSerializable
         if (array_key_exists('taxNumbers', $this->fields)) {
             $data['taxNumbers'] = $this->fields['taxNumbers'] !== null
                 ? array_map(
-                    static fn (
-                        TaxNumber $taxNumber
-                    ) => $taxNumber->jsonSerialize(),
+                    static fn (TaxNumber $taxNumber) => $taxNumber->jsonSerialize(),
                     $this->fields['taxNumbers'],
                 )
                 : null;
