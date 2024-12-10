@@ -287,6 +287,8 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const GATEWAY_NAME_PAY_CLUB = 'PayClub';
 
+    public const GATEWAY_NAME_PAY_COM = 'PayCom';
+
     public const GATEWAY_NAME_PAY_ECARDS = 'PayEcards';
 
     public const GATEWAY_NAME_PAYEEZY = 'Payeezy';
@@ -1623,6 +1625,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return PayCash::from($data);
             case 'PayClub':
                 return PayClub::from($data);
+            case 'PayCom':
+                return PayCom::from($data);
             case 'PayEcards':
                 return PayEcards::from($data);
             case 'Payeezy':
