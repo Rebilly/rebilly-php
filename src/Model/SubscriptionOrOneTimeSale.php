@@ -29,6 +29,8 @@ interface SubscriptionOrOneTimeSale extends JsonSerializable
 
     public function getOrganizationId(): ?string;
 
+    public function getStatus(): ?string;
+
     public function getBillingStatus(): ?string;
 
     public function getWebsiteId(): string;
@@ -107,4 +109,8 @@ interface SubscriptionOrOneTimeSale extends JsonSerializable
      * @return null|ResourceLink[]
      */
     public function getLinks(): ?array;
+
+    public function getEmbedded(): null|OneTimeSaleEmbedded|SubscriptionEmbedded;
+
+    public function setEmbedded(null|array $embedded): static;
 }

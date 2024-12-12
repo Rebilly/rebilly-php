@@ -19,4 +19,8 @@ use JsonSerializable;
 interface AdjustPaymentMethod extends JsonSerializable
 {
     public function getPaymentMethod(): string;
+
+    public function getFeature(): ?string;
+
+    public function setFeature(null|string $feature): static;
 }

@@ -35,6 +35,11 @@ interface Quote extends JsonSerializable
      */
     public function setAcceptanceConditions(null|array $acceptanceConditions): static;
 
+    /**
+     * @return null|QuoteChangeOrderAcceptanceFulfillment[]|QuoteCreateOrderAcceptanceFulfillment[]|QuoteReactivateOrderAcceptanceFulfillment[]
+     */
+    public function getAcceptanceFulfillment(): ?array;
+
     public function getSubscriptionId(): ?string;
 
     public function getInvoiceId(): ?string;
@@ -48,6 +53,15 @@ interface Quote extends JsonSerializable
     public function getCustomerId(): string;
 
     public function setCustomerId(string $customerId): static;
+
+    /**
+     * @return QuoteChangeOrderItems[]|QuoteCreateOrderItems[]|QuoteReactivateOrderItems[]
+     */
+    public function getItems(): array;
+
+    public function getInvoicePreview(): null|QuoteChangeOrderInvoicePreview|QuoteCreateOrderInvoicePreview|QuoteReactivateOrderInvoicePreview;
+
+    public function setInvoicePreview(null|array $invoicePreview): static;
 
     public function getAutopay(): ?bool;
 
@@ -77,6 +91,10 @@ interface Quote extends JsonSerializable
 
     public function setRedirectUrl(null|string $redirectUrl): static;
 
+    public function getSignature(): null|QuoteChangeOrderSignature|QuoteCreateOrderSignature|QuoteReactivateOrderSignature;
+
+    public function setSignature(null|array $signature): static;
+
     public function getShipping(): ?Shipping;
 
     public function setShipping(null|Shipping|array $shipping): static;
@@ -99,4 +117,8 @@ interface Quote extends JsonSerializable
      * @return null|ResourceLink[]
      */
     public function getLinks(): ?array;
+
+    public function getEmbedded(): null|QuoteChangeOrderEmbedded|QuoteCreateOrderEmbedded|QuoteReactivateOrderEmbedded;
+
+    public function setEmbedded(null|array $embedded): static;
 }

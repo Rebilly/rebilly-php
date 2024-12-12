@@ -27,6 +27,10 @@ interface DataExport extends JsonSerializable
 
     public function setName(string $name): static;
 
+    public function getFormat(): string;
+
+    public function setFormat(string $format): static;
+
     public function getArguments(): ?DataExportArguments;
 
     public function setArguments(null|DataExportArguments|array $arguments): static;
@@ -77,4 +81,8 @@ interface DataExport extends JsonSerializable
      * @return null|ResourceLink[]
      */
     public function getLinks(): ?array;
+
+    public function getEmbedded(): null|AmlChecksDataExportEmbedded|CustomersDataExportEmbedded|DisputesDataExportEmbedded|InvoiceItemsDataExportEmbedded|InvoicesDataExportEmbedded|RevenueAuditDataExportEmbedded|SubscriptionsDataExportEmbedded|TransactionsDataExportEmbedded;
+
+    public function setEmbedded(null|array $embedded): static;
 }
