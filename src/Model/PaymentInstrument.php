@@ -31,6 +31,8 @@ interface PaymentInstrument extends JsonSerializable
 
     public function setBillingAddress(ContactObject|array $billingAddress): static;
 
+    public function getStatus(): ?string;
+
     public function getUseAsBackup(): ?bool;
 
     public function setUseAsBackup(null|bool $useAsBackup): static;
@@ -55,4 +57,8 @@ interface PaymentInstrument extends JsonSerializable
      * @return null|ResourceLink[]
      */
     public function getLinks(): ?array;
+
+    public function getEmbedded(): null|AlternativeInstrumentEmbedded|BankAccountEmbedded|KhelocardCardEmbedded|PayPalAccountEmbedded|PaymentCardEmbedded;
+
+    public function setEmbedded(null|array $embedded): static;
 }

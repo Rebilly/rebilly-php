@@ -82,8 +82,18 @@ interface KycDocument extends JsonSerializable
 
     public function getRevision(): ?int;
 
+    public function getDocumentMatches(): null|ProofOfAddressKycDocumentDocumentMatches|ProofOfCreditFileKycDocumentDocumentMatches|ProofOfFundsKycDocumentDocumentMatches|ProofOfIdentityKycDocumentDocumentMatches|ProofOfPurchaseKycDocumentDocumentMatches;
+
+    public function setDocumentMatches(null|array $documentMatches): static;
+
+    public function getSettings(): null|KycSettingsAddress|KycSettingsIdentity|array;
+
     /**
      * @return null|ResourceLink[]
      */
     public function getLinks(): ?array;
+
+    public function getEmbedded(): null|ProofOfAddressKycDocumentEmbedded|ProofOfCreditFileKycDocumentEmbedded|ProofOfFundsKycDocumentEmbedded|ProofOfIdentityKycDocumentEmbedded|ProofOfPurchaseKycDocumentEmbedded;
+
+    public function setEmbedded(null|array $embedded): static;
 }

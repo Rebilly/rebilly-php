@@ -20,6 +20,8 @@ interface ServicePeriodAnchorInstruction extends JsonSerializable
 {
     public function getMethod(): string;
 
+    public function getDay(): int|string;
+
     public function getTime(): ?string;
 
     public function setTime(null|string $time): static;
