@@ -4,44 +4,32 @@
 
 ### Patch Changes
 
-- fix(api-definitions): Fix some of the inconsistencies of Plan API-defs Rebilly/rebilly#8670
-- feat(be): Add 3DS support to Rapyd Rebilly/rebilly#8067
-- SDK Generator updated
-- fix(be,api-definitions): Fix payout requests datetime format issues Rebilly/rebilly#8923
-- SDK Generator updated
-- feat(be): Add payout via Monolo Rebilly/rebilly#8128
-- SDK Generator updated
-- build(deps): merge passing FE dependabot PRs Rebilly/rebilly#7937
-- feat(api-definitions): Add customFields property to StorefrontPurchase schema Rebilly/rebilly#7908
-- SDK Generator updated
-- fix(api-definitions): Fix lint errors Rebilly/rebilly#8540
-- feat(be): Tampered KYC document detection Rebilly/rebilly#7876
-- feat(be): Add Samsung Pay feature to RTP and GatewayAccount Rebilly/rebilly#7971
-- feat(api-definitions): Add quantity filled limit reached event and webhook Rebilly/rebilly#8095
-- SDK Generator updated
-- build(deps): merge passing FE dependabot PRs Rebilly/rebilly#8656
-- refactor(api-definitions,recomm): Remove trial only conversion quotes Rebilly/rebilly#8879
-- feat(be): Add PayCom integration Rebilly/rebilly#9093
-- revert(be): Tampered KYC document detection Rebilly/rebilly#8078
-- feat(be): Add 3ds support to Redsys Rebilly/rebilly#8234
-- feat(be): Add Omnimatrix integration Rebilly/rebilly#8616
-- feat(be): Add gate2way integration Rebilly/rebilly#7887
-- build(deps): merge passing FE dependabot PRs Rebilly/rebilly#8178
-- feat(be): Integrate JetonCash Rebilly/rebilly#8391
-- fix(api-definitions): Add missing locale in Customer.yaml Rebilly/rebilly#8662
-- feat(api-definitions): Add parameter to PostTransactionRefund Rebilly/rebilly#9180
-- docs: Fix the typo Rebilly/rebilly#8981
-- fix(api): Fix missing gate2way mapping Rebilly/rebilly#8029
-- feat(api-definitions): Remove TestSandbox3dsServer from supported 3ds servers Rebilly/rebilly#8718
-- SDK Generator updated
-- feat(be): Add support for Samsung Pay digital wallet Rebilly/rebilly#7760
-- build(deps): merge passing FE dependabot PRs Rebilly/rebilly#8272
-- fix(api): Add expand param to Deposit requests collection request Rebilly/rebilly#8841
-- feat(be): Buckaroo sepa Rebilly/rebilly#8620
-- feat(be): Add 3DS support to Paysafe Rebilly/rebilly#8434
-- feat(api-definitions, backend): Add JWT to DepositRequest response Rebilly/rebilly#8345
-- docs(api-definitions): Add link to deposit URL field Rebilly/rebilly#8290
-- fix(api-definitions): Add missing createdTime and updatedTime to Quote schema Rebilly/rebilly#8374
+- Fix some of the inconsistencies of Plan API-defs Rebilly/rebilly#8670
+- Add 3DS support to Rapyd Rebilly/rebilly#8067
+- Fix payout requests datetime format issues Rebilly/rebilly#8923
+- Add payout via Monolo Rebilly/rebilly#8128
+- Merge common properties in interfaces using union
+- Add customFields property to StorefrontPurchase schema Rebilly/rebilly#7908
+- Tampered KYC document detection Rebilly/rebilly#7876
+- Add Samsung Pay feature to RTP and GatewayAccount Rebilly/rebilly#7971
+- Add quantity filled limit reached event and webhook Rebilly/rebilly#8095
+- Remove trial only conversion quotes Rebilly/rebilly#8879
+- Add PayCom integration Rebilly/rebilly#9093
+- Add 3ds support to Redsys Rebilly/rebilly#8234
+- Add Omnimatrix integration Rebilly/rebilly#8616
+- Add gate2way integration Rebilly/rebilly#7887
+- Integrate JetonCash Rebilly/rebilly#8391
+- Add missing locale in Customer.yaml Rebilly/rebilly#8662
+- Add parameter to PostTransactionRefund Rebilly/rebilly#9180
+- Fix missing gate2way mapping Rebilly/rebilly#8029
+- Remove TestSandbox3dsServer from supported 3ds servers Rebilly/rebilly#8718
+- Add support for Samsung Pay digital wallet Rebilly/rebilly#7760
+- Add expand param to Deposit requests collection request Rebilly/rebilly#8841
+- Buckaroo sepa Rebilly/rebilly#8620
+- Add 3DS support to Paysafe Rebilly/rebilly#8434
+- Add JWT to DepositRequest response Rebilly/rebilly#8345
+- Add link to deposit URL field Rebilly/rebilly#8290
+- Add missing createdTime and updatedTime to Quote schema Rebilly/rebilly#8374
 
 ## 3.1.3
 
