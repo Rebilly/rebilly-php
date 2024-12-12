@@ -1,5 +1,36 @@
 # @rebilly/client-php
 
+## 3.1.4
+
+### Patch Changes
+
+- Fix some of the inconsistencies of Plan API-defs Rebilly/rebilly#8670
+- Add 3DS support to Rapyd Rebilly/rebilly#8067
+- Fix payout requests datetime format issues Rebilly/rebilly#8923
+- Add payout via Monolo Rebilly/rebilly#8128
+- Merge common properties in interfaces using union
+- Add customFields property to StorefrontPurchase schema Rebilly/rebilly#7908
+- Tampered KYC document detection Rebilly/rebilly#7876
+- Add Samsung Pay feature to RTP and GatewayAccount Rebilly/rebilly#7971
+- Add quantity filled limit reached event and webhook Rebilly/rebilly#8095
+- Remove trial only conversion quotes Rebilly/rebilly#8879
+- Add PayCom integration Rebilly/rebilly#9093
+- Add 3ds support to Redsys Rebilly/rebilly#8234
+- Add Omnimatrix integration Rebilly/rebilly#8616
+- Add gate2way integration Rebilly/rebilly#7887
+- Integrate JetonCash Rebilly/rebilly#8391
+- Add missing locale in Customer.yaml Rebilly/rebilly#8662
+- Add parameter to PostTransactionRefund Rebilly/rebilly#9180
+- Fix missing gate2way mapping Rebilly/rebilly#8029
+- Remove TestSandbox3dsServer from supported 3ds servers Rebilly/rebilly#8718
+- Add support for Samsung Pay digital wallet Rebilly/rebilly#7760
+- Add expand param to Deposit requests collection request Rebilly/rebilly#8841
+- Buckaroo sepa Rebilly/rebilly#8620
+- Add 3DS support to Paysafe Rebilly/rebilly#8434
+- Add JWT to DepositRequest response Rebilly/rebilly#8345
+- Add link to deposit URL field Rebilly/rebilly#8290
+- Add missing createdTime and updatedTime to Quote schema Rebilly/rebilly#8374
+
 ## 3.1.3
 
 ### Patch Changes
