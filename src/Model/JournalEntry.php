@@ -30,6 +30,9 @@ class JournalEntry implements JsonSerializable
         if (array_key_exists('period', $data)) {
             $this->setPeriod($data['period']);
         }
+        if (array_key_exists('label', $data)) {
+            $this->setLabel($data['label']);
+        }
         if (array_key_exists('currency', $data)) {
             $this->setCurrency($data['currency']);
         }
@@ -69,6 +72,18 @@ class JournalEntry implements JsonSerializable
         }
 
         $this->fields['period'] = $period;
+
+        return $this;
+    }
+
+    public function getLabel(): ?string
+    {
+        return $this->fields['label'] ?? null;
+    }
+
+    public function setLabel(null|string $label): static
+    {
+        $this->fields['label'] = $label;
 
         return $this;
     }
@@ -123,6 +138,9 @@ class JournalEntry implements JsonSerializable
         }
         if (array_key_exists('period', $this->fields)) {
             $data['period'] = $this->fields['period']->jsonSerialize();
+        }
+        if (array_key_exists('label', $this->fields)) {
+            $data['label'] = $this->fields['label'];
         }
         if (array_key_exists('currency', $this->fields)) {
             $data['currency'] = $this->fields['currency'];
