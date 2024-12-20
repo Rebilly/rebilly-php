@@ -45,9 +45,6 @@ class DepositRequest implements JsonSerializable
         if (array_key_exists('customerId', $data)) {
             $this->setCustomerId($data['customerId']);
         }
-        if (array_key_exists('transactionId', $data)) {
-            $this->setTransactionId($data['transactionId']);
-        }
         if (array_key_exists('transactionIds', $data)) {
             $this->setTransactionIds($data['transactionIds']);
         }
@@ -130,11 +127,6 @@ class DepositRequest implements JsonSerializable
         $this->fields['customerId'] = $customerId;
 
         return $this;
-    }
-
-    public function getTransactionId(): ?string
-    {
-        return $this->fields['transactionId'] ?? null;
     }
 
     /**
@@ -327,9 +319,6 @@ class DepositRequest implements JsonSerializable
         if (array_key_exists('customerId', $this->fields)) {
             $data['customerId'] = $this->fields['customerId'];
         }
-        if (array_key_exists('transactionId', $this->fields)) {
-            $data['transactionId'] = $this->fields['transactionId'];
-        }
         if (array_key_exists('transactionIds', $this->fields)) {
             $data['transactionIds'] = $this->fields['transactionIds'];
         }
@@ -390,13 +379,6 @@ class DepositRequest implements JsonSerializable
     private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
-
-        return $this;
-    }
-
-    private function setTransactionId(null|string $transactionId): static
-    {
-        $this->fields['transactionId'] = $transactionId;
 
         return $this;
     }
