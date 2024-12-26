@@ -270,6 +270,8 @@ class Transaction implements JsonSerializable
 
     public const GATEWAY_NAME_LA_CORE = 'LaCore';
 
+    public const GATEWAY_NAME_LIMEPAY = 'Limepay';
+
     public const GATEWAY_NAME_LOONIE = 'loonie';
 
     public const GATEWAY_NAME_LPG = 'LPG';
@@ -675,6 +677,8 @@ class Transaction implements JsonSerializable
     public const ACQUIRER_NAME_KLARNA = 'Klarna';
 
     public const ACQUIRER_NAME_KONNEKTIVE = 'Konnektive';
+
+    public const ACQUIRER_NAME_LIMEPAY = 'Limepay';
 
     public const ACQUIRER_NAME_LOONIE = 'loonie';
 

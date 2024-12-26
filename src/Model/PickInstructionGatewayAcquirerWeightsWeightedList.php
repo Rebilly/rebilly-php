@@ -212,6 +212,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
 
     public const GATEWAY_NAME_LA_CORE = 'LaCore';
 
+    public const GATEWAY_NAME_LIMEPAY = 'Limepay';
+
     public const GATEWAY_NAME_LOONIE = 'loonie';
 
     public const GATEWAY_NAME_LPG = 'LPG';
@@ -617,6 +619,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
     public const ACQUIRER_NAME_KLARNA = 'Klarna';
 
     public const ACQUIRER_NAME_KONNEKTIVE = 'Konnektive';
+
+    public const ACQUIRER_NAME_LIMEPAY = 'Limepay';
 
     public const ACQUIRER_NAME_LOONIE = 'loonie';
 
