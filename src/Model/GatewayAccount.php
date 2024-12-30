@@ -387,6 +387,8 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const GATEWAY_NAME_STRIPE = 'Stripe';
 
+    public const GATEWAY_NAME_TABBY = 'Tabby';
+
     public const GATEWAY_NAME_TELR = 'Telr';
 
     public const GATEWAY_NAME_TEST_PROCESSOR = 'TestProcessor';
@@ -786,6 +788,8 @@ abstract class GatewayAccount implements JsonSerializable
     public const ACQUIRER_NAME_STP_MEXICO = 'STPMexico';
 
     public const ACQUIRER_NAME_STRIPE = 'Stripe';
+
+    public const ACQUIRER_NAME_TABBY = 'Tabby';
 
     public const ACQUIRER_NAME_TBI = 'TBI';
 
@@ -1729,6 +1733,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return STPMexico::from($data);
             case 'Stripe':
                 return Stripe::from($data);
+            case 'Tabby':
+                return Tabby::from($data);
             case 'Telr':
                 return Telr::from($data);
             case 'TestProcessor':
