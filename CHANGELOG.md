@@ -1,5 +1,16 @@
 # @rebilly/client-php
 
+## 3.1.5
+
+### Patch Changes
+
+- fix(be): Fix Tabby API definitions Rebilly/rebilly#9444
+- feat(be): Add Limepay integration Rebilly/rebilly#9321
+- feat(be): Add merchant feature to skip notificationUrl webhooks for abandoned transactions Rebilly/rebilly#9311
+- feat(api-definitions): Add isDigitallyTampered to KycIdentityMatches.yaml Rebilly/rebilly#9309
+- feat(be): Add Tabby gateway integration Rebilly/rebilly#9429
+- feat(be, api-definitions): separate monthly and annual QB journal entries Rebilly/rebilly#8292
+
 ## 3.1.4
 
 ### Patch Changes
