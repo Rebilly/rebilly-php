@@ -766,6 +766,8 @@ class PayoutRequestAllocations implements JsonSerializable
 
     public const GATEWAY_NAME_STRIPE = 'Stripe';
 
+    public const GATEWAY_NAME_TABBY = 'Tabby';
+
     public const GATEWAY_NAME_TELR = 'Telr';
 
     public const GATEWAY_NAME_TEST_PROCESSOR = 'TestProcessor';

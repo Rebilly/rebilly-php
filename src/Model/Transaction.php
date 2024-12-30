@@ -442,6 +442,8 @@ class Transaction implements JsonSerializable
 
     public const GATEWAY_NAME_STRIPE = 'Stripe';
 
+    public const GATEWAY_NAME_TABBY = 'Tabby';
+
     public const GATEWAY_NAME_TELR = 'Telr';
 
     public const GATEWAY_NAME_TEST_PROCESSOR = 'TestProcessor';
@@ -841,6 +843,8 @@ class Transaction implements JsonSerializable
     public const ACQUIRER_NAME_STP_MEXICO = 'STPMexico';
 
     public const ACQUIRER_NAME_STRIPE = 'Stripe';
+
+    public const ACQUIRER_NAME_TABBY = 'Tabby';
 
     public const ACQUIRER_NAME_TBI = 'TBI';
 
