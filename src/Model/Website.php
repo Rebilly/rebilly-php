@@ -54,6 +54,9 @@ class Website implements JsonSerializable
         if (array_key_exists('logoId', $data)) {
             $this->setLogoId($data['logoId']);
         }
+        if (array_key_exists('logoUrl', $data)) {
+            $this->setLogoUrl($data['logoUrl']);
+        }
         if (array_key_exists('organizationId', $data)) {
             $this->setOrganizationId($data['organizationId']);
         }
@@ -170,6 +173,11 @@ class Website implements JsonSerializable
         return $this;
     }
 
+    public function getLogoUrl(): ?string
+    {
+        return $this->fields['logoUrl'] ?? null;
+    }
+
     public function getOrganizationId(): ?string
     {
         return $this->fields['organizationId'] ?? null;
@@ -216,6 +224,9 @@ class Website implements JsonSerializable
         if (array_key_exists('logoId', $this->fields)) {
             $data['logoId'] = $this->fields['logoId'];
         }
+        if (array_key_exists('logoUrl', $this->fields)) {
+            $data['logoUrl'] = $this->fields['logoUrl'];
+        }
         if (array_key_exists('organizationId', $this->fields)) {
             $data['organizationId'] = $this->fields['organizationId'];
         }
@@ -256,6 +267,13 @@ class Website implements JsonSerializable
         }
 
         $this->fields['updatedTime'] = $updatedTime;
+
+        return $this;
+    }
+
+    private function setLogoUrl(null|string $logoUrl): static
+    {
+        $this->fields['logoUrl'] = $logoUrl;
 
         return $this;
     }
