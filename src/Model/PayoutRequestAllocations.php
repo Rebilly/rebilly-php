@@ -836,6 +836,9 @@ class PayoutRequestAllocations implements JsonSerializable
         if (array_key_exists('amount', $data)) {
             $this->setAmount($data['amount']);
         }
+        if (array_key_exists('currency', $data)) {
+            $this->setCurrency($data['currency']);
+        }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
         }
@@ -918,6 +921,18 @@ class PayoutRequestAllocations implements JsonSerializable
         return $this;
     }
 
+    public function getCurrency(): ?string
+    {
+        return $this->fields['currency'] ?? null;
+    }
+
+    public function setCurrency(null|string $currency): static
+    {
+        $this->fields['currency'] = $currency;
+
+        return $this;
+    }
+
     public function getCreatedTime(): ?DateTimeImmutable
     {
         return $this->fields['createdTime'] ?? null;
@@ -948,6 +963,9 @@ class PayoutRequestAllocations implements JsonSerializable
         }
         if (array_key_exists('amount', $this->fields)) {
             $data['amount'] = $this->fields['amount'];
+        }
+        if (array_key_exists('currency', $this->fields)) {
+            $data['currency'] = $this->fields['currency'];
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
