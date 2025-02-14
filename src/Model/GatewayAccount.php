@@ -171,6 +171,8 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const GATEWAY_NAME_GLOBAL_ONE_PAY = 'GlobalOnePay';
 
+    public const GATEWAY_NAME_GO_CARDLESS = 'GoCardless';
+
     public const GATEWAY_NAME_GOONEY = 'Gooney';
 
     public const GATEWAY_NAME_GPAYSAFE = 'Gpaysafe';
@@ -1517,6 +1519,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return Gigadat::from($data);
             case 'GlobalOne':
                 return GlobalOne::from($data);
+            case 'GoCardless':
+                return GoCardless::from($data);
             case 'Gooney':
                 return Gooney::from($data);
             case 'Gpaysafe':
