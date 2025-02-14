@@ -25,6 +25,9 @@ class DisputeEmbedded implements JsonSerializable
         if (array_key_exists('transaction', $data)) {
             $this->setTransaction($data['transaction']);
         }
+        if (array_key_exists('customer', $data)) {
+            $this->setCustomer($data['customer']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -48,11 +51,30 @@ class DisputeEmbedded implements JsonSerializable
         return $this;
     }
 
+    public function getCustomer(): ?Customer
+    {
+        return $this->fields['customer'] ?? null;
+    }
+
+    public function setCustomer(null|Customer|array $customer): static
+    {
+        if ($customer !== null && !($customer instanceof Customer)) {
+            $customer = Customer::from($customer);
+        }
+
+        $this->fields['customer'] = $customer;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
         if (array_key_exists('transaction', $this->fields)) {
             $data['transaction'] = $this->fields['transaction']?->jsonSerialize();
+        }
+        if (array_key_exists('customer', $this->fields)) {
+            $data['customer'] = $this->fields['customer']?->jsonSerialize();
         }
 
         return $data;

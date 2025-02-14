@@ -168,6 +168,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
 
     public const GATEWAY_NAME_GLOBAL_ONE_PAY = 'GlobalOnePay';
 
+    public const GATEWAY_NAME_GO_CARDLESS = 'GoCardless';
+
     public const GATEWAY_NAME_GOONEY = 'Gooney';
 
     public const GATEWAY_NAME_GPAYSAFE = 'Gpaysafe';

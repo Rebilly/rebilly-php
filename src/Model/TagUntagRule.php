@@ -146,6 +146,8 @@ class TagUntagRule implements JsonSerializable
 
     public const EVENT_TYPE_ORDER_DELINQUENCY_REACHED = 'order-delinquency-reached';
 
+    public const EVENT_TYPE_AUTODEPOSIT_LOOKUP_PERFORMED = 'autodeposit-lookup-performed';
+
     public const STATUS_ACTIVE = 'active';
 
     public const STATUS_INACTIVE = 'inactive';
