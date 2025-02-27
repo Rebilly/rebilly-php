@@ -14,21 +14,18 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-class Payper extends GatewayAccount
+class Triple000 extends GatewayAccount
 {
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
         parent::__construct([
-            'gatewayName' => 'Payper',
+            'gatewayName' => 'Triple000',
         ] + $data);
 
         if (array_key_exists('credentials', $data)) {
             $this->setCredentials($data['credentials']);
-        }
-        if (array_key_exists('settings', $data)) {
-            $this->setSettings($data['settings']);
         }
     }
 
@@ -37,34 +34,18 @@ class Payper extends GatewayAccount
         return new self($data);
     }
 
-    public function getCredentials(): PayperCredentials
+    public function getCredentials(): Triple000Credentials
     {
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(PayperCredentials|array $credentials): static
+    public function setCredentials(Triple000Credentials|array $credentials): static
     {
-        if (!($credentials instanceof PayperCredentials)) {
-            $credentials = PayperCredentials::from($credentials);
+        if (!($credentials instanceof Triple000Credentials)) {
+            $credentials = Triple000Credentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
-
-        return $this;
-    }
-
-    public function getSettings(): ?PayperSettings
-    {
-        return $this->fields['settings'] ?? null;
-    }
-
-    public function setSettings(null|PayperSettings|array $settings): static
-    {
-        if ($settings !== null && !($settings instanceof PayperSettings)) {
-            $settings = PayperSettings::from($settings);
-        }
-
-        $this->fields['settings'] = $settings;
 
         return $this;
     }
@@ -74,9 +55,6 @@ class Payper extends GatewayAccount
         $data = [];
         if (array_key_exists('credentials', $this->fields)) {
             $data['credentials'] = $this->fields['credentials']->jsonSerialize();
-        }
-        if (array_key_exists('settings', $this->fields)) {
-            $data['settings'] = $this->fields['settings']?->jsonSerialize();
         }
 
         return parent::jsonSerialize() + $data;

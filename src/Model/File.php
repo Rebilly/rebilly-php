@@ -38,6 +38,12 @@ class File implements JsonSerializable
 
     public const MIME_APPLICATION_PDF = 'application/pdf';
 
+    public const MIME_APPLICATION_JSON = 'application/json';
+
+    public const MIME_APPLICATION_ZIP = 'application/zip';
+
+    public const MIME_TEXT_CSV = 'text/csv';
+
     private array $fields = [];
 
     public function __construct(array $data = [])

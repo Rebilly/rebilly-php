@@ -226,6 +226,8 @@ class Transaction implements JsonSerializable
 
     public const GATEWAY_NAME_GLOBAL_ONE_PAY = 'GlobalOnePay';
 
+    public const GATEWAY_NAME_GO_CARDLESS = 'GoCardless';
+
     public const GATEWAY_NAME_GOONEY = 'Gooney';
 
     public const GATEWAY_NAME_GPAYSAFE = 'Gpaysafe';
@@ -449,6 +451,8 @@ class Transaction implements JsonSerializable
     public const GATEWAY_NAME_TEST_PROCESSOR = 'TestProcessor';
 
     public const GATEWAY_NAME_TODITO_CASH = 'ToditoCash';
+
+    public const GATEWAY_NAME_TRIPLE000 = 'Triple000';
 
     public const GATEWAY_NAME_TRUEVO = 'Truevo';
 
@@ -853,6 +857,8 @@ class Transaction implements JsonSerializable
     public const ACQUIRER_NAME_TEST_PROCESSOR = 'TestProcessor';
 
     public const ACQUIRER_NAME_TODITO_CASH = 'ToditoCash';
+
+    public const ACQUIRER_NAME_TRIPLE000 = 'Triple000';
 
     public const ACQUIRER_NAME_TRUEVO = 'Truevo';
 

@@ -18,12 +18,19 @@ use JsonSerializable;
 
 class GigadatSettings implements JsonSerializable
 {
+    public const METHOD_TYPE_CPI = 'CPI';
+
+    public const METHOD_TYPE_ETI = 'ETI';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
         if (array_key_exists('sandbox', $data)) {
             $this->setSandbox($data['sandbox']);
+        }
+        if (array_key_exists('methodType', $data)) {
+            $this->setMethodType($data['methodType']);
         }
     }
 
@@ -44,11 +51,26 @@ class GigadatSettings implements JsonSerializable
         return $this;
     }
 
+    public function getMethodType(): ?string
+    {
+        return $this->fields['methodType'] ?? null;
+    }
+
+    public function setMethodType(null|string $methodType): static
+    {
+        $this->fields['methodType'] = $methodType;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
         if (array_key_exists('sandbox', $this->fields)) {
             $data['sandbox'] = $this->fields['sandbox'];
+        }
+        if (array_key_exists('methodType', $this->fields)) {
+            $data['methodType'] = $this->fields['methodType'];
         }
 
         return $data;

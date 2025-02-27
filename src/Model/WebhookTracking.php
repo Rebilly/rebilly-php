@@ -74,6 +74,8 @@ class WebhookTracking implements JsonSerializable
 
     public const EVENT_TYPE_HARD_USAGE_LIMIT_REACHED = 'hard-usage-limit-reached';
 
+    public const EVENT_TYPE_INVOICE_ABANDONED = 'invoice-abandoned';
+
     public const EVENT_TYPE_INVOICE_ISSUED = 'invoice-issued';
 
     public const EVENT_TYPE_INVOICE_MODIFIED = 'invoice-modified';
@@ -142,6 +144,8 @@ class WebhookTracking implements JsonSerializable
 
     public const EVENT_TYPE_READY_TO_PAY_REQUESTED = 'ready-to-pay-requested';
 
+    public const EVENT_TYPE_READY_TO_PAYOUT_REQUESTED = 'ready-to-payout-requested';
+
     public const EVENT_TYPE_RENEWAL_INVOICE_ISSUED = 'renewal-invoice-issued';
 
     public const EVENT_TYPE_RENEWAL_INVOICE_PAYMENT_CANCELED = 'renewal-invoice-payment-canceled';
@@ -189,6 +193,10 @@ class WebhookTracking implements JsonSerializable
     public const EVENT_TYPE_SUBSCRIPTION_TRIAL_END_CHANGED = 'subscription-trial-end-changed';
 
     public const EVENT_TYPE_SUBSCRIPTION_TRIAL_END_REMINDER = 'subscription-trial-end-reminder';
+
+    public const EVENT_TYPE_SUBSCRIPTION_TRIAL_WILL_END = 'subscription-trial-will-end';
+
+    public const EVENT_TYPE_SUBSCRIPTION_TRIAL_ENDED = 'subscription-trial-ended';
 
     public const EVENT_TYPE_SUBSCRIPTION_UPGRADED = 'subscription-upgraded';
 

@@ -38,6 +38,9 @@ class IlixiumSettings implements JsonSerializable
         if (array_key_exists('platform', $data)) {
             $this->setPlatform($data['platform']);
         }
+        if (array_key_exists('usePaceCreditEndpoint', $data)) {
+            $this->setUsePaceCreditEndpoint($data['usePaceCreditEndpoint']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -93,6 +96,18 @@ class IlixiumSettings implements JsonSerializable
         return $this;
     }
 
+    public function getUsePaceCreditEndpoint(): ?bool
+    {
+        return $this->fields['usePaceCreditEndpoint'] ?? null;
+    }
+
+    public function setUsePaceCreditEndpoint(null|bool $usePaceCreditEndpoint): static
+    {
+        $this->fields['usePaceCreditEndpoint'] = $usePaceCreditEndpoint;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -107,6 +122,9 @@ class IlixiumSettings implements JsonSerializable
         }
         if (array_key_exists('platform', $this->fields)) {
             $data['platform'] = $this->fields['platform'];
+        }
+        if (array_key_exists('usePaceCreditEndpoint', $this->fields)) {
+            $data['usePaceCreditEndpoint'] = $this->fields['usePaceCreditEndpoint'];
         }
 
         return $data;

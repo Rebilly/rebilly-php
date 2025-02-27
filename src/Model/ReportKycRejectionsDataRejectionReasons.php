@@ -38,6 +38,8 @@ class ReportKycRejectionsDataRejectionReasons implements JsonSerializable
 
     public const REJECTION_REASON_ISSUE_DATE_MISSING = 'issue-date-missing';
 
+    public const REJECTION_REASON_SUBTYPE_MISSING = 'subtype-missing';
+
     public const REJECTION_REASON_DOB_MISMATCH = 'dob-mismatch';
 
     public const REJECTION_REASON_NAME_MISMATCH = 'name-mismatch';
