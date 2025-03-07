@@ -25,6 +25,9 @@ class CheckoutComCredentials implements JsonSerializable
         if (array_key_exists('secretKey', $data)) {
             $this->setSecretKey($data['secretKey']);
         }
+        if (array_key_exists('signatureKey', $data)) {
+            $this->setSignatureKey($data['signatureKey']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -44,11 +47,26 @@ class CheckoutComCredentials implements JsonSerializable
         return $this;
     }
 
+    public function getSignatureKey(): ?string
+    {
+        return $this->fields['signatureKey'] ?? null;
+    }
+
+    public function setSignatureKey(null|string $signatureKey): static
+    {
+        $this->fields['signatureKey'] = $signatureKey;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
         if (array_key_exists('secretKey', $this->fields)) {
             $data['secretKey'] = $this->fields['secretKey'];
+        }
+        if (array_key_exists('signatureKey', $this->fields)) {
+            $data['signatureKey'] = $this->fields['signatureKey'];
         }
 
         return $data;

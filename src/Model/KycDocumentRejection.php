@@ -38,6 +38,8 @@ class KycDocumentRejection implements JsonSerializable
 
     public const TYPE_ISSUE_DATE_MISSING = 'issue-date-missing';
 
+    public const TYPE_SUBTYPE_MISSING = 'subtype-missing';
+
     public const TYPE_DOB_MISMATCH = 'dob-mismatch';
 
     public const TYPE_NAME_MISMATCH = 'name-mismatch';
@@ -67,12 +69,12 @@ class KycDocumentRejection implements JsonSerializable
         return new self($data);
     }
 
-    public function getType(): ?string
+    public function getType(): string
     {
-        return $this->fields['type'] ?? null;
+        return $this->fields['type'];
     }
 
-    public function setType(null|string $type): static
+    public function setType(string $type): static
     {
         $this->fields['type'] = $type;
 

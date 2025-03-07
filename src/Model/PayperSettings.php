@@ -16,18 +16,12 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class ParamountInteracSettings implements JsonSerializable
+class PayperSettings implements JsonSerializable
 {
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('sandbox', $data)) {
-            $this->setSandbox($data['sandbox']);
-        }
-        if (array_key_exists('merchantSubId', $data)) {
-            $this->setMerchantSubId($data['merchantSubId']);
-        }
         if (array_key_exists('autodepositLookup', $data)) {
             $this->setAutodepositLookup($data['autodepositLookup']);
         }
@@ -42,30 +36,6 @@ class ParamountInteracSettings implements JsonSerializable
     public static function from(array $data = []): self
     {
         return new self($data);
-    }
-
-    public function getSandbox(): ?bool
-    {
-        return $this->fields['sandbox'] ?? null;
-    }
-
-    public function setSandbox(null|bool $sandbox): static
-    {
-        $this->fields['sandbox'] = $sandbox;
-
-        return $this;
-    }
-
-    public function getMerchantSubId(): ?int
-    {
-        return $this->fields['merchantSubId'] ?? null;
-    }
-
-    public function setMerchantSubId(null|int $merchantSubId): static
-    {
-        $this->fields['merchantSubId'] = $merchantSubId;
-
-        return $this;
     }
 
     public function getAutodepositLookup(): ?bool
@@ -107,12 +77,6 @@ class ParamountInteracSettings implements JsonSerializable
     public function jsonSerialize(): array
     {
         $data = [];
-        if (array_key_exists('sandbox', $this->fields)) {
-            $data['sandbox'] = $this->fields['sandbox'];
-        }
-        if (array_key_exists('merchantSubId', $this->fields)) {
-            $data['merchantSubId'] = $this->fields['merchantSubId'];
-        }
         if (array_key_exists('autodepositLookup', $this->fields)) {
             $data['autodepositLookup'] = $this->fields['autodepositLookup'];
         }

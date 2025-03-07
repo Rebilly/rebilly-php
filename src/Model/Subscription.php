@@ -111,12 +111,6 @@ class Subscription implements SubscriptionOrOneTimeSale
         if (array_key_exists('renewalReminderNumber', $data)) {
             $this->setRenewalReminderNumber($data['renewalReminderNumber']);
         }
-        if (array_key_exists('trialReminderTime', $data)) {
-            $this->setTrialReminderTime($data['trialReminderTime']);
-        }
-        if (array_key_exists('trialReminderNumber', $data)) {
-            $this->setTrialReminderNumber($data['trialReminderNumber']);
-        }
         if (array_key_exists('abandonReminderTime', $data)) {
             $this->setAbandonReminderTime($data['abandonReminderTime']);
         }
@@ -140,6 +134,9 @@ class Subscription implements SubscriptionOrOneTimeSale
         }
         if (array_key_exists('isTrialConverted', $data)) {
             $this->setIsTrialConverted($data['isTrialConverted']);
+        }
+        if (array_key_exists('trialConversionTime', $data)) {
+            $this->setTrialConversionTime($data['trialConversionTime']);
         }
         if (array_key_exists('invoiceTimeShift', $data)) {
             $this->setInvoiceTimeShift($data['invoiceTimeShift']);
@@ -291,16 +288,6 @@ class Subscription implements SubscriptionOrOneTimeSale
         return $this->fields['renewalReminderNumber'] ?? null;
     }
 
-    public function getTrialReminderTime(): ?DateTimeImmutable
-    {
-        return $this->fields['trialReminderTime'] ?? null;
-    }
-
-    public function getTrialReminderNumber(): ?int
-    {
-        return $this->fields['trialReminderNumber'] ?? null;
-    }
-
     public function getAbandonReminderTime(): ?DateTimeImmutable
     {
         return $this->fields['abandonReminderTime'] ?? null;
@@ -357,6 +344,11 @@ class Subscription implements SubscriptionOrOneTimeSale
     public function getIsTrialConverted(): ?bool
     {
         return $this->fields['isTrialConverted'] ?? null;
+    }
+
+    public function getTrialConversionTime(): ?DateTimeImmutable
+    {
+        return $this->fields['trialConversionTime'] ?? null;
     }
 
     public function getInvoiceTimeShift(): ?InvoiceTimeShift
@@ -768,12 +760,6 @@ class Subscription implements SubscriptionOrOneTimeSale
         if (array_key_exists('renewalReminderNumber', $this->fields)) {
             $data['renewalReminderNumber'] = $this->fields['renewalReminderNumber'];
         }
-        if (array_key_exists('trialReminderTime', $this->fields)) {
-            $data['trialReminderTime'] = $this->fields['trialReminderTime']?->format(DateTimeInterface::RFC3339);
-        }
-        if (array_key_exists('trialReminderNumber', $this->fields)) {
-            $data['trialReminderNumber'] = $this->fields['trialReminderNumber'];
-        }
         if (array_key_exists('abandonReminderTime', $this->fields)) {
             $data['abandonReminderTime'] = $this->fields['abandonReminderTime']?->format(DateTimeInterface::RFC3339);
         }
@@ -797,6 +783,9 @@ class Subscription implements SubscriptionOrOneTimeSale
         }
         if (array_key_exists('isTrialConverted', $this->fields)) {
             $data['isTrialConverted'] = $this->fields['isTrialConverted'];
+        }
+        if (array_key_exists('trialConversionTime', $this->fields)) {
+            $data['trialConversionTime'] = $this->fields['trialConversionTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('invoiceTimeShift', $this->fields)) {
             $data['invoiceTimeShift'] = $this->fields['invoiceTimeShift']?->jsonSerialize();
@@ -951,24 +940,6 @@ class Subscription implements SubscriptionOrOneTimeSale
         return $this;
     }
 
-    private function setTrialReminderTime(null|DateTimeImmutable|string $trialReminderTime): static
-    {
-        if ($trialReminderTime !== null && !($trialReminderTime instanceof DateTimeImmutable)) {
-            $trialReminderTime = new DateTimeImmutable($trialReminderTime);
-        }
-
-        $this->fields['trialReminderTime'] = $trialReminderTime;
-
-        return $this;
-    }
-
-    private function setTrialReminderNumber(null|int $trialReminderNumber): static
-    {
-        $this->fields['trialReminderNumber'] = $trialReminderNumber;
-
-        return $this;
-    }
-
     private function setAbandonReminderTime(null|DateTimeImmutable|string $abandonReminderTime): static
     {
         if ($abandonReminderTime !== null && !($abandonReminderTime instanceof DateTimeImmutable)) {
@@ -1011,6 +982,17 @@ class Subscription implements SubscriptionOrOneTimeSale
     private function setIsTrialConverted(null|bool $isTrialConverted): static
     {
         $this->fields['isTrialConverted'] = $isTrialConverted;
+
+        return $this;
+    }
+
+    private function setTrialConversionTime(null|DateTimeImmutable|string $trialConversionTime): static
+    {
+        if ($trialConversionTime !== null && !($trialConversionTime instanceof DateTimeImmutable)) {
+            $trialConversionTime = new DateTimeImmutable($trialConversionTime);
+        }
+
+        $this->fields['trialConversionTime'] = $trialConversionTime;
 
         return $this;
     }

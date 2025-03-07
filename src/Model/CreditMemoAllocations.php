@@ -59,7 +59,7 @@ class CreditMemoAllocations implements JsonSerializable
     }
 
     /**
-     * @return null|CreditMemoAllocationsInvoices[]
+     * @return null|CreditMemoInvoiceAllocation[]
      */
     public function getInvoices(): ?array
     {
@@ -67,12 +67,12 @@ class CreditMemoAllocations implements JsonSerializable
     }
 
     /**
-     * @param null|array[]|CreditMemoAllocationsInvoices[] $invoices
+     * @param null|array[]|CreditMemoInvoiceAllocation[] $invoices
      */
     public function setInvoices(null|array $invoices): static
     {
         $invoices = $invoices !== null ? array_map(
-            fn ($value) => $value instanceof CreditMemoAllocationsInvoices ? $value : CreditMemoAllocationsInvoices::from($value),
+            fn ($value) => $value instanceof CreditMemoInvoiceAllocation ? $value : CreditMemoInvoiceAllocation::from($value),
             $invoices,
         ) : null;
 
@@ -95,7 +95,7 @@ class CreditMemoAllocations implements JsonSerializable
         if (array_key_exists('invoices', $this->fields)) {
             $data['invoices'] = $this->fields['invoices'] !== null
                 ? array_map(
-                    static fn (CreditMemoAllocationsInvoices $creditMemoAllocationsInvoices) => $creditMemoAllocationsInvoices->jsonSerialize(),
+                    static fn (CreditMemoInvoiceAllocation $creditMemoInvoiceAllocation) => $creditMemoInvoiceAllocation->jsonSerialize(),
                     $this->fields['invoices'],
                 )
                 : null;

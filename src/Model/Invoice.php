@@ -164,6 +164,9 @@ class Invoice implements JsonSerializable
         if (array_key_exists('paymentFormUrl', $data)) {
             $this->setPaymentFormUrl($data['paymentFormUrl']);
         }
+        if (array_key_exists('creditMemoAllocations', $data)) {
+            $this->setCreditMemoAllocations($data['creditMemoAllocations']);
+        }
         if (array_key_exists('customerId', $data)) {
             $this->setCustomerId($data['customerId']);
         }
@@ -496,6 +499,14 @@ class Invoice implements JsonSerializable
         return $this->fields['paymentFormUrl'] ?? null;
     }
 
+    /**
+     * @return null|CreditMemoInvoiceAllocation[]
+     */
+    public function getCreditMemoAllocations(): ?array
+    {
+        return $this->fields['creditMemoAllocations'] ?? null;
+    }
+
     public function getCustomerId(): string
     {
         return $this->fields['customerId'];
@@ -711,6 +722,14 @@ class Invoice implements JsonSerializable
         }
         if (array_key_exists('paymentFormUrl', $this->fields)) {
             $data['paymentFormUrl'] = $this->fields['paymentFormUrl'];
+        }
+        if (array_key_exists('creditMemoAllocations', $this->fields)) {
+            $data['creditMemoAllocations'] = $this->fields['creditMemoAllocations'] !== null
+                ? array_map(
+                    static fn (CreditMemoInvoiceAllocation $creditMemoInvoiceAllocation) => $creditMemoInvoiceAllocation->jsonSerialize(),
+                    $this->fields['creditMemoAllocations'],
+                )
+                : null;
         }
         if (array_key_exists('customerId', $this->fields)) {
             $data['customerId'] = $this->fields['customerId'];
@@ -965,6 +984,21 @@ class Invoice implements JsonSerializable
     private function setPaymentFormUrl(null|string $paymentFormUrl): static
     {
         $this->fields['paymentFormUrl'] = $paymentFormUrl;
+
+        return $this;
+    }
+
+    /**
+     * @param null|array[]|CreditMemoInvoiceAllocation[] $creditMemoAllocations
+     */
+    private function setCreditMemoAllocations(null|array $creditMemoAllocations): static
+    {
+        $creditMemoAllocations = $creditMemoAllocations !== null ? array_map(
+            fn ($value) => $value instanceof CreditMemoInvoiceAllocation ? $value : CreditMemoInvoiceAllocation::from($value),
+            $creditMemoAllocations,
+        ) : null;
+
+        $this->fields['creditMemoAllocations'] = $creditMemoAllocations;
 
         return $this;
     }
