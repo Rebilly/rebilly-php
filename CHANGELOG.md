@@ -1,5 +1,51 @@
 # @rebilly/client-php
 
+## 3.1.5
+
+### Patch Changes
+
+- fix(be): Fix Tabby API definitions Rebilly/rebilly#9444
+- feat(be): Add Limepay integration Rebilly/rebilly#9321
+- SDK Generator updated
+- feat(be): Add merchant feature to skip notificationUrl webhooks for abandoned transactions Rebilly/rebilly#9311
+- SDK Generator updated
+- feat(be): Add bypassAutodepositLookup flag for autodeposit Rebilly/rebilly#10213
+- SDK Generator updated
+- SDK Generator updated
+- feat(be): Add Triple000 gateway integration Rebilly/rebilly#10110
+- fix(be,api-definitions): Fix Checkout.com IPN signature verification Rebilly/rebilly#9819
+- fix(api-definitions): Add missing Triple000 gatewayName and acquirerName Rebilly/rebilly#10202
+- feat(api-definition): Add `logoUrl` property to Website Rebilly/rebilly#9578
+- build(deps): merge passing FE dependabot PRs Rebilly/rebilly#10273
+- feat(be): Implement Gocardless Rebilly/rebilly#9890
+- feat(api-definitions): Add isDigitallyTampered to KycIdentityMatches.yaml Rebilly/rebilly#9309
+- feat(be): Add setting for CPI/ETI via Gigadat Rebilly/rebilly#10246
+- feat(api-definitions,be): Add autodeposit webhook API definition Rebilly/rebilly#9946
+- feat(api-definition): Add Tabby gateway settings Rebilly/rebilly#9588
+- feat(be,api-definitions,recomm): Record specific rejection reason type when document subtype missing Rebilly/rebilly#10191
+- feat(be): Add Tabby gateway integration Rebilly/rebilly#9429
+- feat(be,api-definitions): Add \_embedded customer to dispute resource Rebilly/rebilly#10056
+- feat(be): Add PACE API payout via Ilixium Rebilly/rebilly#10037
+- build(deps): merge passing FE dependabot PRs Rebilly/rebilly#9775
+- fix(api-definitions): redeclared var in code example Rebilly/rebilly#9935
+- fix(api-definitions): Fix API definitions discrepancies found by Spot Rebilly/rebilly#10050
+- build(deps): merge passing FE dependabot PRs Rebilly/rebilly#9892
+- feat(be): Implement option to store ID for Limepay Rebilly/rebilly#9748
+- fix(api-definitions): Fix column types for Payout requests grid Rebilly/rebilly#9513
+- feat(api-definition): Remove old trial reminder properties. Rebilly/rebilly#9708
+- feat(be, api-definitions): separate monthly and annual QB journal entries Rebilly/rebilly#8292
+- feat(be,api-definitions): Add embedded customer to dispute resource Rebilly/rebilly#10078
+- fix(be,api-definitions): Add missing \_links to allowlist resource Rebilly/rebilly#10167
+- feat(api-definitions): Add Credit memo allocations to Invoice Rebilly/rebilly#9108
+- chore: Pull in upstream changes Rebilly/rebilly#1
+- feat(be): Implement auto deposit via Payper Rebilly/rebilly#9743
+- build(deps): merge passing FE dependabot PRs Rebilly/rebilly#10155
+- fix(api-definitions): Fix KycDocumentRejection schema Rebilly/rebilly#10225
+- feat(api-definitions): Add to schema Rebilly/rebilly#9733
+- SDK Generator updated
+- build(deps): merge passing FE dependabot PRs Rebilly/rebilly#9991
+- feat(be,api-definitions): Improve allowlists Rebilly/rebilly#10172
+
 ## 3.1.4
 
 ### Patch Changes
