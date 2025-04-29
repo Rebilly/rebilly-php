@@ -1,6 +1,6 @@
 name: Updates SDK based on api-definitions
 
-on: 
+on:
   workflow_dispatch:
     inputs:
       trigger-reason:
@@ -95,14 +95,14 @@ jobs:
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
       - name: Cache composer dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Cache npm dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: '~/.npm'
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -115,7 +115,7 @@ jobs:
       - name: CS fix SDK
         working-directory: ./sdk
         run: composer cs-fix
-      
+
       - name: Add changeset
         id: changeset
         if: github.event.inputs.trigger-reason != ''
@@ -134,7 +134,7 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v5
         with:
-          # Path of the checked-out repo where we placed the generated resources  
+          # Path of the checked-out repo where we placed the generated resources
           path: 'sdk'
           token: ${{ secrets.MACHINE_USER_PAT }}
           title: 'chore: update SDK from api-definitions'

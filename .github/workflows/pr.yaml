@@ -31,7 +31,7 @@ jobs:
         id: composer-cache
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
@@ -71,7 +71,7 @@ jobs:
         id: composer-cache
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
@@ -81,7 +81,7 @@ jobs:
       - name: "Install dependencies"
         run: composer install --no-interaction --no-scripts --no-suggest
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: .php-cs-fixer.cache
           key: ${{ runner.os }}-cs-fixer-${{ hashFiles('**/composer.lock') }}
