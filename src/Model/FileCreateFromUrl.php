@@ -20,6 +20,12 @@ class FileCreateFromUrl implements PostFileRequest
 
     public const SOURCE_TYPE_CAMERA = 'camera';
 
+    public const SOURCE_TYPE_ORGANIZATION_EXPORT = 'organization-export';
+
+    public const SOURCE_TYPE_ORGANIZATION_CLOSURE_EXPORT = 'organization-closure-export';
+
+    public const SOURCE_TYPE_NULL = 'null';
+
     private array $fields = [];
 
     public function __construct(array $data = [])

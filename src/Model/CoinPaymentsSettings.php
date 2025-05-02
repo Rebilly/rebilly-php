@@ -25,6 +25,9 @@ class CoinPaymentsSettings implements JsonSerializable
         if (array_key_exists('useCallbackAddress', $data)) {
             $this->setUseCallbackAddress($data['useCallbackAddress']);
         }
+        if (array_key_exists('useV2Api', $data)) {
+            $this->setUseV2Api($data['useV2Api']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -44,11 +47,26 @@ class CoinPaymentsSettings implements JsonSerializable
         return $this;
     }
 
+    public function getUseV2Api(): ?bool
+    {
+        return $this->fields['useV2Api'] ?? null;
+    }
+
+    public function setUseV2Api(null|bool $useV2Api): static
+    {
+        $this->fields['useV2Api'] = $useV2Api;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
         if (array_key_exists('useCallbackAddress', $this->fields)) {
             $data['useCallbackAddress'] = $this->fields['useCallbackAddress'];
+        }
+        if (array_key_exists('useV2Api', $this->fields)) {
+            $data['useV2Api'] = $this->fields['useV2Api'];
         }
 
         return $data;

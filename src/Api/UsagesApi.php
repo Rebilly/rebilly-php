@@ -128,23 +128,4 @@ class UsagesApi
             $closure,
         );
     }
-
-    public function update(
-        string $id,
-        Usage $usage,
-    ): Usage {
-        $pathParams = [
-            '{id}' => $id,
-        ];
-
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/usages/{id}');
-
-        $request = new Request('PUT', $uri, headers: [
-            'Accept' => 'application/json',
-        ], body: Utils::jsonEncode($usage));
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return Usage::from($data);
-    }
 }

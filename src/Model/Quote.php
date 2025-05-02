@@ -19,11 +19,9 @@ use JsonSerializable;
 
 interface Quote extends JsonSerializable
 {
-    public function getAction(): string;
+    public function getType(): string;
 
     public function getId(): ?string;
-
-    public function getType(): ?string;
 
     /**
      * @return null|string[]
@@ -36,11 +34,9 @@ interface Quote extends JsonSerializable
     public function setAcceptanceConditions(null|array $acceptanceConditions): static;
 
     /**
-     * @return null|QuoteChangeOrderAcceptanceFulfillment[]|QuoteCreateOrderAcceptanceFulfillment[]|QuoteReactivateOrderAcceptanceFulfillment[]
+     * @return null|ChangeQuoteAcceptanceFulfillment[]|CreationQuoteAcceptanceFulfillment[]|ReactivationQuoteAcceptanceFulfillment[]
      */
     public function getAcceptanceFulfillment(): ?array;
-
-    public function getSubscriptionId(): ?string;
 
     public function getInvoiceId(): ?string;
 
@@ -54,18 +50,13 @@ interface Quote extends JsonSerializable
 
     public function setCustomerId(string $customerId): static;
 
-    /**
-     * @return QuoteChangeOrderItems[]|QuoteCreateOrderItems[]|QuoteReactivateOrderItems[]
-     */
-    public function getItems(): array;
+    public function getOrder(): ChangeQuoteOrder|CreationQuoteOrder|ReactivationQuoteOrder;
 
-    public function getInvoicePreview(): null|QuoteChangeOrderInvoicePreview|QuoteCreateOrderInvoicePreview|QuoteReactivateOrderInvoicePreview;
+    public function setOrder(array $order): static;
+
+    public function getInvoicePreview(): null|ChangeQuoteInvoicePreview|CreationQuoteInvoicePreview|ReactivationQuoteInvoicePreview;
 
     public function setInvoicePreview(null|array $invoicePreview): static;
-
-    public function getAutopay(): ?bool;
-
-    public function setAutopay(null|bool $autopay): static;
 
     public function getPaymentTerms(): ?string;
 
@@ -91,13 +82,9 @@ interface Quote extends JsonSerializable
 
     public function setRedirectUrl(null|string $redirectUrl): static;
 
-    public function getSignature(): null|QuoteChangeOrderSignature|QuoteCreateOrderSignature|QuoteReactivateOrderSignature;
+    public function getSignature(): null|ChangeQuoteSignature|CreationQuoteSignature|ReactivationQuoteSignature;
 
     public function setSignature(null|array $signature): static;
-
-    public function getShipping(): ?Shipping;
-
-    public function setShipping(null|Shipping|array $shipping): static;
 
     public function getTax(): ?Taxes;
 
@@ -118,7 +105,7 @@ interface Quote extends JsonSerializable
      */
     public function getLinks(): ?array;
 
-    public function getEmbedded(): null|QuoteChangeOrderEmbedded|QuoteCreateOrderEmbedded|QuoteReactivateOrderEmbedded;
+    public function getEmbedded(): null|ChangeQuoteEmbedded|CreationQuoteEmbedded|ReactivationQuoteEmbedded;
 
     public function setEmbedded(null|array $embedded): static;
 }

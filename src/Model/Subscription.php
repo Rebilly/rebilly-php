@@ -165,6 +165,9 @@ class Subscription implements SubscriptionOrOneTimeSale
         if (array_key_exists('lineItemSubtotal', $data)) {
             $this->setLineItemSubtotal($data['lineItemSubtotal']);
         }
+        if (array_key_exists('mrr', $data)) {
+            $this->setMrr($data['mrr']);
+        }
         if (array_key_exists('paymentInstrumentId', $data)) {
             $this->setPaymentInstrumentId($data['paymentInstrumentId']);
         }
@@ -459,6 +462,11 @@ class Subscription implements SubscriptionOrOneTimeSale
         $this->fields['lineItemSubtotal'] = $lineItemSubtotal;
 
         return $this;
+    }
+
+    public function getMrr(): ?float
+    {
+        return $this->fields['mrr'] ?? null;
     }
 
     public function getPaymentInstrumentId(): ?string
@@ -819,6 +827,9 @@ class Subscription implements SubscriptionOrOneTimeSale
         if (array_key_exists('lineItemSubtotal', $this->fields)) {
             $data['lineItemSubtotal'] = $this->fields['lineItemSubtotal']?->jsonSerialize();
         }
+        if (array_key_exists('mrr', $this->fields)) {
+            $data['mrr'] = $this->fields['mrr'];
+        }
         if (array_key_exists('paymentInstrumentId', $this->fields)) {
             $data['paymentInstrumentId'] = $this->fields['paymentInstrumentId'];
         }
@@ -1026,6 +1037,17 @@ class Subscription implements SubscriptionOrOneTimeSale
         ) : null;
 
         $this->fields['lineItems'] = $lineItems;
+
+        return $this;
+    }
+
+    private function setMrr(null|float|string $mrr): static
+    {
+        if (is_string($mrr)) {
+            $mrr = (float) $mrr;
+        }
+
+        $this->fields['mrr'] = $mrr;
 
         return $this;
     }

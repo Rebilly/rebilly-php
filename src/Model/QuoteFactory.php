@@ -20,10 +20,10 @@ class QuoteFactory
 {
     public static function from(array $data = []): Quote
     {
-        return match ($data['action']) {
-            'change' => QuoteChangeOrder::from($data),
-            'create' => QuoteCreateOrder::from($data),
-            'reactivate' => QuoteReactivateOrder::from($data),
+        return match ($data['type']) {
+            'change' => ChangeQuote::from($data),
+            'creation' => CreationQuote::from($data),
+            'reactivation' => ReactivationQuote::from($data),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

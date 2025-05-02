@@ -28,6 +28,9 @@ class WorldlineAtosFrankfurtCredentials implements JsonSerializable
         if (array_key_exists('acquiringInstitutionIdentificationCode', $data)) {
             $this->setAcquiringInstitutionIdentificationCode($data['acquiringInstitutionIdentificationCode']);
         }
+        if (array_key_exists('mpgId', $data)) {
+            $this->setMpgId($data['mpgId']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -59,6 +62,18 @@ class WorldlineAtosFrankfurtCredentials implements JsonSerializable
         return $this;
     }
 
+    public function getMpgId(): string
+    {
+        return $this->fields['mpgId'];
+    }
+
+    public function setMpgId(string $mpgId): static
+    {
+        $this->fields['mpgId'] = $mpgId;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -67,6 +82,9 @@ class WorldlineAtosFrankfurtCredentials implements JsonSerializable
         }
         if (array_key_exists('acquiringInstitutionIdentificationCode', $this->fields)) {
             $data['acquiringInstitutionIdentificationCode'] = $this->fields['acquiringInstitutionIdentificationCode'];
+        }
+        if (array_key_exists('mpgId', $this->fields)) {
+            $data['mpgId'] = $this->fields['mpgId'];
         }
 
         return $data;

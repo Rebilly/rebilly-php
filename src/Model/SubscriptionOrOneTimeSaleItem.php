@@ -40,6 +40,9 @@ class SubscriptionOrOneTimeSaleItem implements JsonSerializable
         if (array_key_exists('usageLimits', $data)) {
             $this->setUsageLimits($data['usageLimits']);
         }
+        if (array_key_exists('usageStatus', $data)) {
+            $this->setUsageStatus($data['usageStatus']);
+        }
         if (array_key_exists('revision', $data)) {
             $this->setRevision($data['revision']);
         }
@@ -48,6 +51,9 @@ class SubscriptionOrOneTimeSaleItem implements JsonSerializable
         }
         if (array_key_exists('isGrandfathered', $data)) {
             $this->setIsGrandfathered($data['isGrandfathered']);
+        }
+        if (array_key_exists('excludeFromMrr', $data)) {
+            $this->setExcludeFromMrr($data['excludeFromMrr']);
         }
         if (array_key_exists('_embedded', $data)) {
             $this->setEmbedded($data['_embedded']);
@@ -116,18 +122,34 @@ class SubscriptionOrOneTimeSaleItem implements JsonSerializable
         return $this;
     }
 
-    public function getUsageLimits(): ?SubscriptionOrOneTimeSaleItemUsageLimits
+    public function getUsageLimits(): ?UsageLimits
     {
         return $this->fields['usageLimits'] ?? null;
     }
 
-    public function setUsageLimits(null|SubscriptionOrOneTimeSaleItemUsageLimits|array $usageLimits): static
+    public function setUsageLimits(null|UsageLimits|array $usageLimits): static
     {
-        if ($usageLimits !== null && !($usageLimits instanceof SubscriptionOrOneTimeSaleItemUsageLimits)) {
-            $usageLimits = SubscriptionOrOneTimeSaleItemUsageLimits::from($usageLimits);
+        if ($usageLimits !== null && !($usageLimits instanceof UsageLimits)) {
+            $usageLimits = UsageLimits::from($usageLimits);
         }
 
         $this->fields['usageLimits'] = $usageLimits;
+
+        return $this;
+    }
+
+    public function getUsageStatus(): ?SubscriptionOrOneTimeSaleItemUsageStatus
+    {
+        return $this->fields['usageStatus'] ?? null;
+    }
+
+    public function setUsageStatus(null|SubscriptionOrOneTimeSaleItemUsageStatus|array $usageStatus): static
+    {
+        if ($usageStatus !== null && !($usageStatus instanceof SubscriptionOrOneTimeSaleItemUsageStatus)) {
+            $usageStatus = SubscriptionOrOneTimeSaleItemUsageStatus::from($usageStatus);
+        }
+
+        $this->fields['usageStatus'] = $usageStatus;
 
         return $this;
     }
@@ -145,6 +167,18 @@ class SubscriptionOrOneTimeSaleItem implements JsonSerializable
     public function getIsGrandfathered(): ?bool
     {
         return $this->fields['isGrandfathered'] ?? null;
+    }
+
+    public function getExcludeFromMrr(): ?bool
+    {
+        return $this->fields['excludeFromMrr'] ?? null;
+    }
+
+    public function setExcludeFromMrr(null|bool $excludeFromMrr): static
+    {
+        $this->fields['excludeFromMrr'] = $excludeFromMrr;
+
+        return $this;
     }
 
     public function getEmbedded(): ?SubscriptionOrOneTimeSaleItemEmbedded
@@ -184,6 +218,9 @@ class SubscriptionOrOneTimeSaleItem implements JsonSerializable
         if (array_key_exists('usageLimits', $this->fields)) {
             $data['usageLimits'] = $this->fields['usageLimits']?->jsonSerialize();
         }
+        if (array_key_exists('usageStatus', $this->fields)) {
+            $data['usageStatus'] = $this->fields['usageStatus']?->jsonSerialize();
+        }
         if (array_key_exists('revision', $this->fields)) {
             $data['revision'] = $this->fields['revision'];
         }
@@ -192,6 +229,9 @@ class SubscriptionOrOneTimeSaleItem implements JsonSerializable
         }
         if (array_key_exists('isGrandfathered', $this->fields)) {
             $data['isGrandfathered'] = $this->fields['isGrandfathered'];
+        }
+        if (array_key_exists('excludeFromMrr', $this->fields)) {
+            $data['excludeFromMrr'] = $this->fields['excludeFromMrr'];
         }
         if (array_key_exists('_embedded', $this->fields)) {
             $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();

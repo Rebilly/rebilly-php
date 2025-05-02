@@ -614,6 +614,8 @@ class PayoutRequestAllocations implements JsonSerializable
 
     public const GATEWAY_NAME_MONOLO = 'Monolo';
 
+    public const GATEWAY_NAME_MON_REM = 'MonRem';
+
     public const GATEWAY_NAME_MTA_PAY = 'MtaPay';
 
     public const GATEWAY_NAME_MUCH_BETTER = 'MuchBetter';

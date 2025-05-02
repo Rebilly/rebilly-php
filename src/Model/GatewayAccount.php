@@ -235,6 +235,8 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const GATEWAY_NAME_MONOLO = 'Monolo';
 
+    public const GATEWAY_NAME_MON_REM = 'MonRem';
+
     public const GATEWAY_NAME_MTA_PAY = 'MtaPay';
 
     public const GATEWAY_NAME_MUCH_BETTER = 'MuchBetter';
@@ -652,6 +654,8 @@ abstract class GatewayAccount implements JsonSerializable
     public const ACQUIRER_NAME_MONERIS = 'Moneris';
 
     public const ACQUIRER_NAME_MONOLO = 'Monolo';
+
+    public const ACQUIRER_NAME_MON_REM = 'MonRem';
 
     public const ACQUIRER_NAME_MUCH_BETTER = 'MuchBetter';
 
@@ -1587,6 +1591,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return Moneris::from($data);
             case 'Monolo':
                 return Monolo::from($data);
+            case 'MonRem':
+                return MonRem::from($data);
             case 'MtaPay':
                 return MtaPay::from($data);
             case 'MuchBetter':

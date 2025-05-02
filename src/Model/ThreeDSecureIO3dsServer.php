@@ -129,24 +129,24 @@ class ThreeDSecureIO3dsServer implements JsonSerializable
         return $this;
     }
 
-    public function getAcquirerMerchantIdVisa(): string
+    public function getAcquirerMerchantIdVisa(): ?string
     {
-        return $this->fields['acquirerMerchantIdVisa'];
+        return $this->fields['acquirerMerchantIdVisa'] ?? null;
     }
 
-    public function setAcquirerMerchantIdVisa(string $acquirerMerchantIdVisa): static
+    public function setAcquirerMerchantIdVisa(null|string $acquirerMerchantIdVisa): static
     {
         $this->fields['acquirerMerchantIdVisa'] = $acquirerMerchantIdVisa;
 
         return $this;
     }
 
-    public function getAcquirerMerchantIdMastercard(): string
+    public function getAcquirerMerchantIdMastercard(): ?string
     {
-        return $this->fields['acquirerMerchantIdMastercard'];
+        return $this->fields['acquirerMerchantIdMastercard'] ?? null;
     }
 
-    public function setAcquirerMerchantIdMastercard(string $acquirerMerchantIdMastercard): static
+    public function setAcquirerMerchantIdMastercard(null|string $acquirerMerchantIdMastercard): static
     {
         $this->fields['acquirerMerchantIdMastercard'] = $acquirerMerchantIdMastercard;
 
@@ -201,24 +201,24 @@ class ThreeDSecureIO3dsServer implements JsonSerializable
         return $this;
     }
 
-    public function getMerchantAcquirerBinVisa(): string
+    public function getMerchantAcquirerBinVisa(): ?string
     {
-        return $this->fields['merchantAcquirerBinVisa'];
+        return $this->fields['merchantAcquirerBinVisa'] ?? null;
     }
 
-    public function setMerchantAcquirerBinVisa(string $merchantAcquirerBinVisa): static
+    public function setMerchantAcquirerBinVisa(null|string $merchantAcquirerBinVisa): static
     {
         $this->fields['merchantAcquirerBinVisa'] = $merchantAcquirerBinVisa;
 
         return $this;
     }
 
-    public function getMerchantAcquirerBinMastercard(): string
+    public function getMerchantAcquirerBinMastercard(): ?string
     {
-        return $this->fields['merchantAcquirerBinMastercard'];
+        return $this->fields['merchantAcquirerBinMastercard'] ?? null;
     }
 
-    public function setMerchantAcquirerBinMastercard(string $merchantAcquirerBinMastercard): static
+    public function setMerchantAcquirerBinMastercard(null|string $merchantAcquirerBinMastercard): static
     {
         $this->fields['merchantAcquirerBinMastercard'] = $merchantAcquirerBinMastercard;
 

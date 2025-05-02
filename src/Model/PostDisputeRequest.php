@@ -172,9 +172,101 @@ class PostDisputeRequest implements JsonSerializable
 
     public const REASON_CODE_1000 = '1000';
 
+    public const REASON_CODE_2001 = '2001';
+
+    public const REASON_CODE_2002 = '2002';
+
+    public const REASON_CODE_2003 = '2003';
+
+    public const REASON_CODE_2004 = '2004';
+
+    public const REASON_CODE_2005 = '2005';
+
+    public const REASON_CODE_2008 = '2008';
+
+    public const REASON_CODE_2011 = '2011';
+
     public const REASON_CODE_2700 = '2700';
 
+    public const REASON_CODE_2701 = '2701';
+
     public const REASON_CODE_2702 = '2702';
+
+    public const REASON_CODE_2703 = '2703';
+
+    public const REASON_CODE_2704 = '2704';
+
+    public const REASON_CODE_2705 = '2705';
+
+    public const REASON_CODE_2706 = '2706';
+
+    public const REASON_CODE_2707 = '2707';
+
+    public const REASON_CODE_2708 = '2708';
+
+    public const REASON_CODE_2709 = '2709';
+
+    public const REASON_CODE_2710 = '2710';
+
+    public const REASON_CODE_2713 = '2713';
+
+    public const REASON_CODE_2870 = '2870';
+
+    public const REASON_CODE_2871 = '2871';
+
+    public const REASON_CODE_4807 = '4807';
+
+    public const REASON_CODE_4808 = '4808';
+
+    public const REASON_CODE_4812 = '4812';
+
+    public const REASON_CODE_4831 = '4831';
+
+    public const REASON_CODE_4834 = '4834';
+
+    public const REASON_CODE_4837 = '4837';
+
+    public const REASON_CODE_4840 = '4840';
+
+    public const REASON_CODE_4841 = '4841';
+
+    public const REASON_CODE_4842 = '4842';
+
+    public const REASON_CODE_4846 = '4846';
+
+    public const REASON_CODE_4849 = '4849';
+
+    public const REASON_CODE_4850 = '4850';
+
+    public const REASON_CODE_4853 = '4853';
+
+    public const REASON_CODE_4854 = '4854';
+
+    public const REASON_CODE_4855 = '4855';
+
+    public const REASON_CODE_4859 = '4859';
+
+    public const REASON_CODE_4860 = '4860';
+
+    public const REASON_CODE_4863 = '4863';
+
+    public const REASON_CODE_4870 = '4870';
+
+    public const REASON_CODE_4871 = '4871';
+
+    public const REASON_CODE_4901 = '4901';
+
+    public const REASON_CODE_4902 = '4902';
+
+    public const REASON_CODE_4903 = '4903';
+
+    public const REASON_CODE_4904 = '4904';
+
+    public const REASON_CODE_4905 = '4905';
+
+    public const REASON_CODE_4908 = '4908';
+
+    public const REASON_CODE_4999 = '4999';
 
     public const REASON_CODE_A = 'A';
 
@@ -245,6 +337,8 @@ class PostDisputeRequest implements JsonSerializable
     public const REASON_CODE_IN = 'IN';
 
     public const REASON_CODE_IS = 'IS';
+
+    public const REASON_CODE_ITA = 'ITA';
 
     public const REASON_CODE_LP = 'LP';
 
@@ -348,13 +442,25 @@ class PostDisputeRequest implements JsonSerializable
 
     public const REASON_CODE_INSUFFICIENT_FUNDS = 'insufficient_funds';
 
+    public const REASON_CODE_MERCHANDISE = 'merchandise';
+
+    public const REASON_CODE_NON_RECEIPT = 'non_receipt';
+
+    public const REASON_CODE_NOT_AS_DESCRIBED = 'not_as_described';
+
     public const REASON_CODE_PRE_CHARGEBACK_ALERT = 'pre-chargeback-alert';
 
     public const REASON_CODE_PRODUCT_NOT_RECEIVED = 'product_not_received';
 
     public const REASON_CODE_PRODUCT_UNACCEPTABLE = 'product_unacceptable';
 
+    public const REASON_CODE_SPECIAL = 'special';
+
     public const REASON_CODE_SUBSCRIPTION_CANCELED = 'subscription_canceled';
+
+    public const REASON_CODE_UNAUTHORIZED = 'unauthorized';
+
+    public const REASON_CODE_UNAUTHORIZED_CLAIM = 'unauthorized_claim';
 
     public const REASON_CODE_UNRECOGNIZED = 'unrecognized';
 
@@ -377,6 +483,10 @@ class PostDisputeRequest implements JsonSerializable
     public const TYPE_PAYPAL_CLAIM = 'paypal-claim';
 
     public const TYPE_REPRESENTMENT = 'representment';
+
+    public const TYPE_INQUIRY = 'inquiry';
+
+    public const TYPE_FORCED_REFUND = 'forced-refund';
 
     public const STATUS_RESPONSE_NEEDED = 'response-needed';
 
