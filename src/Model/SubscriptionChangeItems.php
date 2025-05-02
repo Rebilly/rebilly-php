@@ -66,15 +66,15 @@ class SubscriptionChangeItems implements JsonSerializable
         return $this;
     }
 
-    public function getUsageLimits(): ?SubscriptionChangeItemsUsageLimits
+    public function getUsageLimits(): ?UsageLimits
     {
         return $this->fields['usageLimits'] ?? null;
     }
 
-    public function setUsageLimits(null|SubscriptionChangeItemsUsageLimits|array $usageLimits): static
+    public function setUsageLimits(null|UsageLimits|array $usageLimits): static
     {
-        if ($usageLimits !== null && !($usageLimits instanceof SubscriptionChangeItemsUsageLimits)) {
-            $usageLimits = SubscriptionChangeItemsUsageLimits::from($usageLimits);
+        if ($usageLimits !== null && !($usageLimits instanceof UsageLimits)) {
+            $usageLimits = UsageLimits::from($usageLimits);
         }
 
         $this->fields['usageLimits'] = $usageLimits;

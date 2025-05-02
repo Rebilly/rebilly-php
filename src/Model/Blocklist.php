@@ -40,6 +40,12 @@ class Blocklist implements JsonSerializable
 
     public const TYPE_ADDRESS = 'address';
 
+    public const SOURCE_AUTOMATED_BLOCKLISTS = 'automated-blocklists';
+
+    public const SOURCE_MANUAL_BLOCKLISTS = 'manual-blocklists';
+
+    public const SOURCE_RISK_SCORE_RULES = 'risk-score-rules';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -55,6 +61,12 @@ class Blocklist implements JsonSerializable
         }
         if (array_key_exists('expirationTime', $data)) {
             $this->setExpirationTime($data['expirationTime']);
+        }
+        if (array_key_exists('source', $data)) {
+            $this->setSource($data['source']);
+        }
+        if (array_key_exists('entityId', $data)) {
+            $this->setEntityId($data['entityId']);
         }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
@@ -117,6 +129,16 @@ class Blocklist implements JsonSerializable
         return $this;
     }
 
+    public function getSource(): ?string
+    {
+        return $this->fields['source'] ?? null;
+    }
+
+    public function getEntityId(): ?string
+    {
+        return $this->fields['entityId'] ?? null;
+    }
+
     public function getCreatedTime(): ?DateTimeImmutable
     {
         return $this->fields['createdTime'] ?? null;
@@ -150,6 +172,12 @@ class Blocklist implements JsonSerializable
         if (array_key_exists('expirationTime', $this->fields)) {
             $data['expirationTime'] = $this->fields['expirationTime']?->format(DateTimeInterface::RFC3339);
         }
+        if (array_key_exists('source', $this->fields)) {
+            $data['source'] = $this->fields['source'];
+        }
+        if (array_key_exists('entityId', $this->fields)) {
+            $data['entityId'] = $this->fields['entityId'];
+        }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
         }
@@ -171,6 +199,20 @@ class Blocklist implements JsonSerializable
     private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
+
+        return $this;
+    }
+
+    private function setSource(null|string $source): static
+    {
+        $this->fields['source'] = $source;
+
+        return $this;
+    }
+
+    private function setEntityId(null|string $entityId): static
+    {
+        $this->fields['entityId'] = $entityId;
 
         return $this;
     }

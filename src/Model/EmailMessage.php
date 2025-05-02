@@ -24,8 +24,6 @@ class EmailMessage implements JsonSerializable
 
     public const STATUS_OUTBOX = 'outbox';
 
-    public const STATUS_SENDING = 'sending';
-
     public const STATUS_SENT = 'sent';
 
     public const STATUS_FAILED = 'failed';

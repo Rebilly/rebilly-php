@@ -34,6 +34,12 @@ class CoinPaymentsCredentials implements JsonSerializable
         if (array_key_exists('merchantId', $data)) {
             $this->setMerchantId($data['merchantId']);
         }
+        if (array_key_exists('clientId', $data)) {
+            $this->setClientId($data['clientId']);
+        }
+        if (array_key_exists('clientSecret', $data)) {
+            $this->setClientSecret($data['clientSecret']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -89,6 +95,30 @@ class CoinPaymentsCredentials implements JsonSerializable
         return $this;
     }
 
+    public function getClientId(): ?string
+    {
+        return $this->fields['clientId'] ?? null;
+    }
+
+    public function setClientId(null|string $clientId): static
+    {
+        $this->fields['clientId'] = $clientId;
+
+        return $this;
+    }
+
+    public function getClientSecret(): ?string
+    {
+        return $this->fields['clientSecret'] ?? null;
+    }
+
+    public function setClientSecret(null|string $clientSecret): static
+    {
+        $this->fields['clientSecret'] = $clientSecret;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -103,6 +133,12 @@ class CoinPaymentsCredentials implements JsonSerializable
         }
         if (array_key_exists('merchantId', $this->fields)) {
             $data['merchantId'] = $this->fields['merchantId'];
+        }
+        if (array_key_exists('clientId', $this->fields)) {
+            $data['clientId'] = $this->fields['clientId'];
+        }
+        if (array_key_exists('clientSecret', $this->fields)) {
+            $data['clientSecret'] = $this->fields['clientSecret'];
         }
 
         return $data;

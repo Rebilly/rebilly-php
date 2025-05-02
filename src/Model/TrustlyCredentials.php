@@ -41,12 +41,12 @@ class TrustlyCredentials implements JsonSerializable
         return new self($data);
     }
 
-    public function getUsername(): ?string
+    public function getUsername(): string
     {
-        return $this->fields['username'] ?? null;
+        return $this->fields['username'];
     }
 
-    public function setUsername(null|string $username): static
+    public function setUsername(string $username): static
     {
         $this->fields['username'] = $username;
 

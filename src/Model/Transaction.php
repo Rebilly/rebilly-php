@@ -290,6 +290,8 @@ class Transaction implements JsonSerializable
 
     public const GATEWAY_NAME_MONOLO = 'Monolo';
 
+    public const GATEWAY_NAME_MON_REM = 'MonRem';
+
     public const GATEWAY_NAME_MTA_PAY = 'MtaPay';
 
     public const GATEWAY_NAME_MUCH_BETTER = 'MuchBetter';
@@ -707,6 +709,8 @@ class Transaction implements JsonSerializable
     public const ACQUIRER_NAME_MONERIS = 'Moneris';
 
     public const ACQUIRER_NAME_MONOLO = 'Monolo';
+
+    public const ACQUIRER_NAME_MON_REM = 'MonRem';
 
     public const ACQUIRER_NAME_MUCH_BETTER = 'MuchBetter';
 
@@ -1426,12 +1430,6 @@ class Transaction implements JsonSerializable
         if (array_key_exists('dcc', $data)) {
             $this->setDcc($data['dcc']);
         }
-        if (array_key_exists('hasBumpOffer', $data)) {
-            $this->setHasBumpOffer($data['hasBumpOffer']);
-        }
-        if (array_key_exists('bumpOffer', $data)) {
-            $this->setBumpOffer($data['bumpOffer']);
-        }
         if (array_key_exists('riskScore', $data)) {
             $this->setRiskScore($data['riskScore']);
         }
@@ -1861,27 +1859,6 @@ class Transaction implements JsonSerializable
         return $this;
     }
 
-    public function getHasBumpOffer(): ?bool
-    {
-        return $this->fields['hasBumpOffer'] ?? null;
-    }
-
-    public function getBumpOffer(): ?TransactionBumpOffer
-    {
-        return $this->fields['bumpOffer'] ?? null;
-    }
-
-    public function setBumpOffer(null|TransactionBumpOffer|array $bumpOffer): static
-    {
-        if ($bumpOffer !== null && !($bumpOffer instanceof TransactionBumpOffer)) {
-            $bumpOffer = TransactionBumpOffer::from($bumpOffer);
-        }
-
-        $this->fields['bumpOffer'] = $bumpOffer;
-
-        return $this;
-    }
-
     public function getRiskScore(): ?int
     {
         return $this->fields['riskScore'] ?? null;
@@ -2196,12 +2173,6 @@ class Transaction implements JsonSerializable
         }
         if (array_key_exists('dcc', $this->fields)) {
             $data['dcc'] = $this->fields['dcc']?->jsonSerialize();
-        }
-        if (array_key_exists('hasBumpOffer', $this->fields)) {
-            $data['hasBumpOffer'] = $this->fields['hasBumpOffer'];
-        }
-        if (array_key_exists('bumpOffer', $this->fields)) {
-            $data['bumpOffer'] = $this->fields['bumpOffer']?->jsonSerialize();
         }
         if (array_key_exists('riskScore', $this->fields)) {
             $data['riskScore'] = $this->fields['riskScore'];
@@ -2544,13 +2515,6 @@ class Transaction implements JsonSerializable
     private function setHasDcc(null|bool $hasDcc): static
     {
         $this->fields['hasDcc'] = $hasDcc;
-
-        return $this;
-    }
-
-    private function setHasBumpOffer(null|bool $hasBumpOffer): static
-    {
-        $this->fields['hasBumpOffer'] = $hasBumpOffer;
 
         return $this;
     }

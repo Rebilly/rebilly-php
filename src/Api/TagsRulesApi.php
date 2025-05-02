@@ -27,7 +27,7 @@ class TagsRulesApi
     {
     }
 
-    public function createTagsRule(
+    public function create(
         TagUntagRule $tagUntagRule,
     ): TagUntagRule {
         $uri = '/tags-rules';
@@ -41,7 +41,7 @@ class TagsRulesApi
         return TagUntagRule::from($data);
     }
 
-    public function deleteTagsRule(
+    public function delete(
         string $id,
     ): void {
         $pathParams = [
@@ -54,10 +54,28 @@ class TagsRulesApi
         $this->client->send($request);
     }
 
+    public function get(
+        string $id,
+    ): TagUntagRule {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/tags-rules/{id}');
+
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return TagUntagRule::from($data);
+    }
+
     /**
      * @return Collection<TagUntagRule>
      */
-    public function getAllTagsRules(
+    public function getAll(
         ?int $limit = null,
         ?int $offset = null,
         ?array $sort = null,
@@ -90,14 +108,14 @@ class TagsRulesApi
     /**
      * @return Paginator<TagUntagRule>
      */
-    public function getAllTagsRulesPaginator(
+    public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
         ?array $sort = null,
         ?string $filter = null,
         ?string $q = null,
     ): Paginator {
-        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllTagsRules(
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAll(
             limit: $limit,
             offset: $offset,
             sort: $sort,
@@ -111,25 +129,7 @@ class TagsRulesApi
         );
     }
 
-    public function getTagsRule(
-        string $id,
-    ): TagUntagRule {
-        $pathParams = [
-            '{id}' => $id,
-        ];
-
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/tags-rules/{id}');
-
-        $request = new Request('GET', $uri, headers: [
-            'Accept' => 'application/json',
-        ]);
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return TagUntagRule::from($data);
-    }
-
-    public function updateTagsRule(
+    public function update(
         string $id,
         TagUntagRule $tagUntagRule,
     ): TagUntagRule {

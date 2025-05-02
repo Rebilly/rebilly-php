@@ -104,8 +104,6 @@ class SystemEvent implements JsonSerializable
 
     public const EVENT_TYPE_KYC_REQUEST_FULFILLED = 'kyc-request-fulfilled';
 
-    public const EVENT_TYPE_NSF_RESPONSE_RECEIVED = 'nsf-response-received';
-
     public const EVENT_TYPE_ORDER_ABANDON_REMINDER = 'order-abandon-reminder';
 
     public const EVENT_TYPE_ORDER_ABANDONED = 'order-abandoned';
@@ -191,8 +189,6 @@ class SystemEvent implements JsonSerializable
     public const EVENT_TYPE_SUBSCRIPTION_TRIAL_END_CHANGED = 'subscription-trial-end-changed';
 
     public const EVENT_TYPE_SUBSCRIPTION_TRIAL_END_REMINDER = 'subscription-trial-end-reminder';
-
-    public const EVENT_TYPE_SUBSCRIPTION_TRIAL_WILL_END = 'subscription-trial-will-end';
 
     public const EVENT_TYPE_SUBSCRIPTION_TRIAL_ENDED = 'subscription-trial-ended';
 

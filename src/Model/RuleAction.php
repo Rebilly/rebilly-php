@@ -53,8 +53,6 @@ abstract class RuleAction implements JsonSerializable
 
     public const NAME_GUESS_PAYMENT_CARD_EXPIRATION = 'guess-payment-card-expiration';
 
-    public const NAME_OFFER_PURCHASE_BUMP = 'offer-purchase-bump';
-
     public const NAME_PERFORM_EXPERIAN_CHECK = 'perform-experian-check';
 
     public const NAME_PICK_GATEWAY_ACCOUNT = 'pick-gateway-account';
@@ -134,8 +132,6 @@ abstract class RuleAction implements JsonSerializable
                 return RuleActionDisplayOtherChoices::from($data);
             case 'guess-payment-card-expiration':
                 return RuleActionGuessPaymentCardExpiration::from($data);
-            case 'offer-purchase-bump':
-                return RuleActionOfferPurchaseBump::from($data);
             case 'perform-experian-check':
                 return RuleActionPerformExperianCheck::from($data);
             case 'pick-gateway-account':

@@ -18,6 +18,10 @@ use JsonSerializable;
 
 class ParamountInteracSettings implements JsonSerializable
 {
+    public const PAYMENT_FLOW_REQUEST_MONEY = 'request_money';
+
+    public const PAYMENT_FLOW_MANUAL = 'manual';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -36,6 +40,9 @@ class ParamountInteracSettings implements JsonSerializable
         }
         if (array_key_exists('bypassAutodepositLookup', $data)) {
             $this->setBypassAutodepositLookup($data['bypassAutodepositLookup']);
+        }
+        if (array_key_exists('paymentFlow', $data)) {
+            $this->setPaymentFlow($data['paymentFlow']);
         }
     }
 
@@ -104,6 +111,18 @@ class ParamountInteracSettings implements JsonSerializable
         return $this;
     }
 
+    public function getPaymentFlow(): ?string
+    {
+        return $this->fields['paymentFlow'] ?? null;
+    }
+
+    public function setPaymentFlow(null|string $paymentFlow): static
+    {
+        $this->fields['paymentFlow'] = $paymentFlow;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -121,6 +140,9 @@ class ParamountInteracSettings implements JsonSerializable
         }
         if (array_key_exists('bypassAutodepositLookup', $this->fields)) {
             $data['bypassAutodepositLookup'] = $this->fields['bypassAutodepositLookup'];
+        }
+        if (array_key_exists('paymentFlow', $this->fields)) {
+            $data['paymentFlow'] = $this->fields['paymentFlow'];
         }
 
         return $data;

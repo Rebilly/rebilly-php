@@ -52,6 +52,10 @@ class Dispute implements JsonSerializable
 
     public const TYPE_REPRESENTMENT = 'representment';
 
+    public const TYPE_INQUIRY = 'inquiry';
+
+    public const TYPE_FORCED_REFUND = 'forced-refund';
+
     public const STATUS_RESPONSE_NEEDED = 'response-needed';
 
     public const STATUS_UNDER_REVIEW = 'under-review';

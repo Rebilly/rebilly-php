@@ -45,6 +45,9 @@ class Usage implements JsonSerializable
         if (array_key_exists('usageTime', $data)) {
             $this->setUsageTime($data['usageTime']);
         }
+        if (array_key_exists('acceptPartialQuantity', $data)) {
+            $this->setAcceptPartialQuantity($data['acceptPartialQuantity']);
+        }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
         }
@@ -132,6 +135,18 @@ class Usage implements JsonSerializable
         return $this;
     }
 
+    public function getAcceptPartialQuantity(): ?bool
+    {
+        return $this->fields['acceptPartialQuantity'] ?? null;
+    }
+
+    public function setAcceptPartialQuantity(null|bool $acceptPartialQuantity): static
+    {
+        $this->fields['acceptPartialQuantity'] = $acceptPartialQuantity;
+
+        return $this;
+    }
+
     public function getCreatedTime(): ?DateTimeImmutable
     {
         return $this->fields['createdTime'] ?? null;
@@ -173,6 +188,9 @@ class Usage implements JsonSerializable
         }
         if (array_key_exists('usageTime', $this->fields)) {
             $data['usageTime'] = $this->fields['usageTime']?->format(DateTimeInterface::RFC3339);
+        }
+        if (array_key_exists('acceptPartialQuantity', $this->fields)) {
+            $data['acceptPartialQuantity'] = $this->fields['acceptPartialQuantity'];
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
