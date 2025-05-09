@@ -89,13 +89,6 @@ class SmtpCredential implements ServiceCredential
         return $this->fields['status'] ?? null;
     }
 
-    public function setStatus(null|string $status): static
-    {
-        $this->fields['status'] = $status;
-
-        return $this;
-    }
-
     public function getDeactivationTime(): ?DateTimeImmutable
     {
         return $this->fields['deactivationTime'] ?? null;
@@ -212,6 +205,13 @@ class SmtpCredential implements ServiceCredential
     private function setHash(null|string $hash): static
     {
         $this->fields['hash'] = $hash;
+
+        return $this;
+    }
+
+    private function setStatus(null|string $status): static
+    {
+        $this->fields['status'] = $status;
 
         return $this;
     }
