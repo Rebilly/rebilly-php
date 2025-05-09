@@ -31,6 +31,12 @@ class WorldlineAtosFrankfurtCredentials implements JsonSerializable
         if (array_key_exists('mpgId', $data)) {
             $this->setMpgId($data['mpgId']);
         }
+        if (array_key_exists('clientCertificate', $data)) {
+            $this->setClientCertificate($data['clientCertificate']);
+        }
+        if (array_key_exists('privateKey', $data)) {
+            $this->setPrivateKey($data['privateKey']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -74,6 +80,30 @@ class WorldlineAtosFrankfurtCredentials implements JsonSerializable
         return $this;
     }
 
+    public function getClientCertificate(): ?string
+    {
+        return $this->fields['clientCertificate'] ?? null;
+    }
+
+    public function setClientCertificate(null|string $clientCertificate): static
+    {
+        $this->fields['clientCertificate'] = $clientCertificate;
+
+        return $this;
+    }
+
+    public function getPrivateKey(): ?string
+    {
+        return $this->fields['privateKey'] ?? null;
+    }
+
+    public function setPrivateKey(null|string $privateKey): static
+    {
+        $this->fields['privateKey'] = $privateKey;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -85,6 +115,12 @@ class WorldlineAtosFrankfurtCredentials implements JsonSerializable
         }
         if (array_key_exists('mpgId', $this->fields)) {
             $data['mpgId'] = $this->fields['mpgId'];
+        }
+        if (array_key_exists('clientCertificate', $this->fields)) {
+            $data['clientCertificate'] = $this->fields['clientCertificate'];
+        }
+        if (array_key_exists('privateKey', $this->fields)) {
+            $data['privateKey'] = $this->fields['privateKey'];
         }
 
         return $data;
