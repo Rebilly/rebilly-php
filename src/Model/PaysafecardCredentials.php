@@ -25,6 +25,9 @@ class PaysafecardCredentials implements JsonSerializable
         if (array_key_exists('apiKey', $data)) {
             $this->setApiKey($data['apiKey']);
         }
+        if (array_key_exists('reconciliationApiKey', $data)) {
+            $this->setReconciliationApiKey($data['reconciliationApiKey']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -44,11 +47,26 @@ class PaysafecardCredentials implements JsonSerializable
         return $this;
     }
 
+    public function getReconciliationApiKey(): ?string
+    {
+        return $this->fields['reconciliationApiKey'] ?? null;
+    }
+
+    public function setReconciliationApiKey(null|string $reconciliationApiKey): static
+    {
+        $this->fields['reconciliationApiKey'] = $reconciliationApiKey;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
         if (array_key_exists('apiKey', $this->fields)) {
             $data['apiKey'] = $this->fields['apiKey'];
+        }
+        if (array_key_exists('reconciliationApiKey', $this->fields)) {
+            $data['reconciliationApiKey'] = $this->fields['reconciliationApiKey'];
         }
 
         return $data;

@@ -34,6 +34,9 @@ class WorldlineAtosFrankfurtSettings implements JsonSerializable
         if (array_key_exists('terminalIds', $data)) {
             $this->setTerminalIds($data['terminalIds']);
         }
+        if (array_key_exists('useMtls', $data)) {
+            $this->setUseMtls($data['useMtls']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -89,6 +92,18 @@ class WorldlineAtosFrankfurtSettings implements JsonSerializable
         return $this;
     }
 
+    public function getUseMtls(): ?bool
+    {
+        return $this->fields['useMtls'] ?? null;
+    }
+
+    public function setUseMtls(null|bool $useMtls): static
+    {
+        $this->fields['useMtls'] = $useMtls;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -103,6 +118,9 @@ class WorldlineAtosFrankfurtSettings implements JsonSerializable
         }
         if (array_key_exists('terminalIds', $this->fields)) {
             $data['terminalIds'] = $this->fields['terminalIds'];
+        }
+        if (array_key_exists('useMtls', $this->fields)) {
+            $data['useMtls'] = $this->fields['useMtls'];
         }
 
         return $data;
