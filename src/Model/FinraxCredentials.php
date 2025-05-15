@@ -31,6 +31,9 @@ class FinraxCredentials implements JsonSerializable
         if (array_key_exists('apiSecret', $data)) {
             $this->setApiSecret($data['apiSecret']);
         }
+        if (array_key_exists('publicKey', $data)) {
+            $this->setPublicKey($data['publicKey']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -74,6 +77,18 @@ class FinraxCredentials implements JsonSerializable
         return $this;
     }
 
+    public function getPublicKey(): ?string
+    {
+        return $this->fields['publicKey'] ?? null;
+    }
+
+    public function setPublicKey(null|string $publicKey): static
+    {
+        $this->fields['publicKey'] = $publicKey;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -85,6 +100,9 @@ class FinraxCredentials implements JsonSerializable
         }
         if (array_key_exists('apiSecret', $this->fields)) {
             $data['apiSecret'] = $this->fields['apiSecret'];
+        }
+        if (array_key_exists('publicKey', $this->fields)) {
+            $data['publicKey'] = $this->fields['publicKey'];
         }
 
         return $data;
