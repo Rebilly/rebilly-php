@@ -41,6 +41,9 @@ class StripeSettings implements JsonSerializable
         if (array_key_exists('setupFutureUsage', $data)) {
             $this->setSetupFutureUsage($data['setupFutureUsage']);
         }
+        if (array_key_exists('applicationFeePercentage', $data)) {
+            $this->setApplicationFeePercentage($data['applicationFeePercentage']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -108,6 +111,18 @@ class StripeSettings implements JsonSerializable
         return $this;
     }
 
+    public function getApplicationFeePercentage(): ?int
+    {
+        return $this->fields['applicationFeePercentage'] ?? null;
+    }
+
+    public function setApplicationFeePercentage(null|int $applicationFeePercentage): static
+    {
+        $this->fields['applicationFeePercentage'] = $applicationFeePercentage;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -125,6 +140,9 @@ class StripeSettings implements JsonSerializable
         }
         if (array_key_exists('setupFutureUsage', $this->fields)) {
             $data['setupFutureUsage'] = $this->fields['setupFutureUsage'];
+        }
+        if (array_key_exists('applicationFeePercentage', $this->fields)) {
+            $data['applicationFeePercentage'] = $this->fields['applicationFeePercentage'];
         }
 
         return $data;

@@ -47,8 +47,6 @@ abstract class RuleAction implements JsonSerializable
 
     public const NAME_CHECK_ONTARIO_RESTRICTION = 'check-ontario-restriction';
 
-    public const NAME_DISPLAY_MESSAGE = 'display-message';
-
     public const NAME_DISPLAY_OTHER_CHOICES = 'display-other-choices';
 
     public const NAME_GUESS_PAYMENT_CARD_EXPIRATION = 'guess-payment-card-expiration';
@@ -126,8 +124,6 @@ abstract class RuleAction implements JsonSerializable
                 return RuleActionCreateIntuitQuickbooksRevenueRecognitionEntry::from($data);
             case 'decline-transaction':
                 return RuleActionDeclineTransaction::from($data);
-            case 'display-message':
-                return RuleActionDisplayMessage::from($data);
             case 'display-other-choices':
                 return RuleActionDisplayOtherChoices::from($data);
             case 'guess-payment-card-expiration':
@@ -136,12 +132,8 @@ abstract class RuleAction implements JsonSerializable
                 return RuleActionPerformExperianCheck::from($data);
             case 'pick-gateway-account':
                 return RuleActionPickGatewayAccount::from($data);
-            case 'remove-reminder':
-                return RuleActionRemoveReminder::from($data);
             case 'request-kyc':
                 return RuleActionRequestKyc::from($data);
-            case 'reset-reminder':
-                return RuleActionResetReminder::from($data);
             case 'schedule-invoice-retry':
                 return RuleActionScheduleInvoiceRetry::from($data);
             case 'schedule-payment':

@@ -27,7 +27,5 @@ interface ServiceCredential extends JsonSerializable
 
     public function getStatus(): ?string;
 
-    public function setStatus(null|string $status): static;
-
     public function getDeactivationTime(): ?DateTimeImmutable;
 }
