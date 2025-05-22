@@ -308,6 +308,8 @@ class CheckoutForm implements JsonSerializable
 
     public const PAYMENT_METHODS_RESURS = 'Resurs';
 
+    public const PAYMENT_METHODS_RIPPLE = 'Ripple';
+
     public const PAYMENT_METHODS_SAFETY_PAY = 'SafetyPay';
 
     public const PAYMENT_METHODS_SAMSUNG_PAY = 'Samsung Pay';

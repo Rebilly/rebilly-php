@@ -304,6 +304,8 @@ class PaymentInstructionMethods implements PaymentInstruction
 
     public const METHODS_RESURS = 'Resurs';
 
+    public const METHODS_RIPPLE = 'Ripple';
+
     public const METHODS_SAFETY_PAY = 'SafetyPay';
 
     public const METHODS_SAMSUNG_PAY = 'Samsung Pay';
