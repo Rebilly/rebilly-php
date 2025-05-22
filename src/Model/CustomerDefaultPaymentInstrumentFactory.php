@@ -131,6 +131,7 @@ class CustomerDefaultPaymentInstrumentFactory
             'QPay' => AlternativePaymentInstrument::from($data),
             'QQPay' => AlternativePaymentInstrument::from($data),
             'Resurs' => AlternativePaymentInstrument::from($data),
+            'Ripple' => AlternativePaymentInstrument::from($data),
             'SEPA' => AlternativePaymentInstrument::from($data),
             'SMSVoucher' => AlternativePaymentInstrument::from($data),
             'SPEI' => AlternativePaymentInstrument::from($data),

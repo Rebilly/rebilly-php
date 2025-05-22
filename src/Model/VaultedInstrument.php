@@ -304,6 +304,8 @@ class VaultedInstrument implements CustomerDefaultPaymentInstrument, Transaction
 
     public const METHOD_RESURS = 'Resurs';
 
+    public const METHOD_RIPPLE = 'Ripple';
+
     public const METHOD_SAFETY_PAY = 'SafetyPay';
 
     public const METHOD_SAMSUNG_PAY = 'Samsung Pay';

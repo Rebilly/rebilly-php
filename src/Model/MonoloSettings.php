@@ -28,6 +28,9 @@ class MonoloSettings implements JsonSerializable
         if (array_key_exists('payoutNetwork', $data)) {
             $this->setPayoutNetwork($data['payoutNetwork']);
         }
+        if (array_key_exists('destinationTagCustomField', $data)) {
+            $this->setDestinationTagCustomField($data['destinationTagCustomField']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -59,6 +62,18 @@ class MonoloSettings implements JsonSerializable
         return $this;
     }
 
+    public function getDestinationTagCustomField(): ?string
+    {
+        return $this->fields['destinationTagCustomField'] ?? null;
+    }
+
+    public function setDestinationTagCustomField(null|string $destinationTagCustomField): static
+    {
+        $this->fields['destinationTagCustomField'] = $destinationTagCustomField;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -67,6 +82,9 @@ class MonoloSettings implements JsonSerializable
         }
         if (array_key_exists('payoutNetwork', $this->fields)) {
             $data['payoutNetwork'] = $this->fields['payoutNetwork'];
+        }
+        if (array_key_exists('destinationTagCustomField', $this->fields)) {
+            $data['destinationTagCustomField'] = $this->fields['destinationTagCustomField'];
         }
 
         return $data;
