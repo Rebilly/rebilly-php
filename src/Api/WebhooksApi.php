@@ -41,6 +41,19 @@ class WebhooksApi
         return GlobalWebhook::from($data);
     }
 
+    public function delete(
+        string $id,
+    ): void {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/webhooks/{id}');
+
+        $request = new Request('DELETE', $uri);
+        $this->client->send($request);
+    }
+
     public function get(
         string $id,
     ): GlobalWebhook {

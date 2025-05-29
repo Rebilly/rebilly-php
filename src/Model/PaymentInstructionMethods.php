@@ -144,6 +144,8 @@ class PaymentInstructionMethods implements PaymentInstruction
 
     public const METHODS_GPAYSAFE = 'Gpaysafe';
 
+    public const METHODS_I_CASH_ONE_VOUCHER = 'iCashOne Voucher';
+
     public const METHODS_I_DEBIT = 'iDebit';
 
     public const METHODS_I_DEAL = 'iDEAL';
@@ -303,6 +305,8 @@ class PaymentInstructionMethods implements PaymentInstruction
     public const METHODS_REBILLY_HOSTED_PAYMENT_FORM = 'rebilly-hosted-payment-form';
 
     public const METHODS_RESURS = 'Resurs';
+
+    public const METHODS_RIPPLE = 'Ripple';
 
     public const METHODS_SAFETY_PAY = 'SafetyPay';
 

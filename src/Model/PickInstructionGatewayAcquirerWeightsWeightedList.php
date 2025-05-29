@@ -178,6 +178,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
 
     public const GATEWAY_NAME_HI_PAY = 'HiPay';
 
+    public const GATEWAY_NAME_I_CASH_ONE = 'iCashOne';
+
     public const GATEWAY_NAME_I_CAN_PAY = 'iCanPay';
 
     public const GATEWAY_NAME_ICEPAY = 'ICEPAY';
@@ -603,6 +605,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
     public const ACQUIRER_NAME_HI_PAY = 'HiPay';
 
     public const ACQUIRER_NAME_HSBC = 'HSBC';
+
+    public const ACQUIRER_NAME_I_CASH_ONE = 'iCashOne';
 
     public const ACQUIRER_NAME_I_CAN_PAY = 'iCanPay';
 

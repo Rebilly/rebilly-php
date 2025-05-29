@@ -144,6 +144,8 @@ class AlternativePaymentInstrument implements CustomerDefaultPaymentInstrument, 
 
     public const METHOD_GPAYSAFE = 'Gpaysafe';
 
+    public const METHOD_I_CASH_ONE_VOUCHER = 'iCashOne Voucher';
+
     public const METHOD_I_DEBIT = 'iDebit';
 
     public const METHOD_I_DEAL = 'iDEAL';
@@ -303,6 +305,8 @@ class AlternativePaymentInstrument implements CustomerDefaultPaymentInstrument, 
     public const METHOD_REBILLY_HOSTED_PAYMENT_FORM = 'rebilly-hosted-payment-form';
 
     public const METHOD_RESURS = 'Resurs';
+
+    public const METHOD_RIPPLE = 'Ripple';
 
     public const METHOD_SAFETY_PAY = 'SafetyPay';
 
