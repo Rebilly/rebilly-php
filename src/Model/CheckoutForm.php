@@ -148,6 +148,8 @@ class CheckoutForm implements JsonSerializable
 
     public const PAYMENT_METHODS_GPAYSAFE = 'Gpaysafe';
 
+    public const PAYMENT_METHODS_I_CASH_ONE_VOUCHER = 'iCashOne Voucher';
+
     public const PAYMENT_METHODS_I_DEBIT = 'iDebit';
 
     public const PAYMENT_METHODS_I_DEAL = 'iDEAL';
@@ -307,6 +309,8 @@ class CheckoutForm implements JsonSerializable
     public const PAYMENT_METHODS_REBILLY_HOSTED_PAYMENT_FORM = 'rebilly-hosted-payment-form';
 
     public const PAYMENT_METHODS_RESURS = 'Resurs';
+
+    public const PAYMENT_METHODS_RIPPLE = 'Ripple';
 
     public const PAYMENT_METHODS_SAFETY_PAY = 'SafetyPay';
 

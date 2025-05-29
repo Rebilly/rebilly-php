@@ -236,6 +236,8 @@ class Transaction implements JsonSerializable
 
     public const GATEWAY_NAME_HI_PAY = 'HiPay';
 
+    public const GATEWAY_NAME_I_CASH_ONE = 'iCashOne';
+
     public const GATEWAY_NAME_I_CAN_PAY = 'iCanPay';
 
     public const GATEWAY_NAME_ICEPAY = 'ICEPAY';
@@ -662,6 +664,8 @@ class Transaction implements JsonSerializable
 
     public const ACQUIRER_NAME_HSBC = 'HSBC';
 
+    public const ACQUIRER_NAME_I_CASH_ONE = 'iCashOne';
+
     public const ACQUIRER_NAME_I_CAN_PAY = 'iCanPay';
 
     public const ACQUIRER_NAME_ICEPAY = 'ICEPAY';
@@ -1032,6 +1036,8 @@ class Transaction implements JsonSerializable
 
     public const METHOD_GPAYSAFE = 'Gpaysafe';
 
+    public const METHOD_I_CASH_ONE_VOUCHER = 'iCashOne Voucher';
+
     public const METHOD_I_DEBIT = 'iDebit';
 
     public const METHOD_I_DEAL = 'iDEAL';
@@ -1191,6 +1197,8 @@ class Transaction implements JsonSerializable
     public const METHOD_REBILLY_HOSTED_PAYMENT_FORM = 'rebilly-hosted-payment-form';
 
     public const METHOD_RESURS = 'Resurs';
+
+    public const METHOD_RIPPLE = 'Ripple';
 
     public const METHOD_SAFETY_PAY = 'SafetyPay';
 

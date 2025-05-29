@@ -180,6 +180,8 @@ class GetPayoutRequestPaymentInstrumentsResponse implements JsonSerializable
 
     public const GATEWAY_NAME_HI_PAY = 'HiPay';
 
+    public const GATEWAY_NAME_I_CASH_ONE = 'iCashOne';
+
     public const GATEWAY_NAME_I_CAN_PAY = 'iCanPay';
 
     public const GATEWAY_NAME_ICEPAY = 'ICEPAY';
