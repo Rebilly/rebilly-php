@@ -46,6 +46,9 @@ class PaymentMethodMetadata implements JsonSerializable
         if (array_key_exists('storefrontEnabled', $data)) {
             $this->setStorefrontEnabled($data['storefrontEnabled']);
         }
+        if (array_key_exists('isSingleUse', $data)) {
+            $this->setIsSingleUse($data['isSingleUse']);
+        }
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
@@ -156,6 +159,18 @@ class PaymentMethodMetadata implements JsonSerializable
         return $this;
     }
 
+    public function getIsSingleUse(): ?bool
+    {
+        return $this->fields['isSingleUse'] ?? null;
+    }
+
+    public function setIsSingleUse(null|bool $isSingleUse): static
+    {
+        $this->fields['isSingleUse'] = $isSingleUse;
+
+        return $this;
+    }
+
     /**
      * @return null|ResourceLink[]
      */
@@ -190,6 +205,9 @@ class PaymentMethodMetadata implements JsonSerializable
         }
         if (array_key_exists('storefrontEnabled', $this->fields)) {
             $data['storefrontEnabled'] = $this->fields['storefrontEnabled'];
+        }
+        if (array_key_exists('isSingleUse', $this->fields)) {
+            $data['isSingleUse'] = $this->fields['isSingleUse'];
         }
         if (array_key_exists('_links', $this->fields)) {
             $data['_links'] = $this->fields['_links'] !== null
