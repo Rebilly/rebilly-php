@@ -26,6 +26,8 @@ class CustomerDefaultPaymentInstrumentFactory
 
         return match ($data['method']) {
             'AdvCash' => AlternativePaymentInstrument::from($data),
+            'Affirm' => AlternativePaymentInstrument::from($data),
+            'Afterpay' => AlternativePaymentInstrument::from($data),
             'Aircash' => AlternativePaymentInstrument::from($data),
             'Airpay' => AlternativePaymentInstrument::from($data),
             'Alfa-click' => AlternativePaymentInstrument::from($data),
@@ -51,6 +53,7 @@ class CustomerDefaultPaymentInstrumentFactory
             'CODVoucher' => AlternativePaymentInstrument::from($data),
             'CashToCode' => AlternativePaymentInstrument::from($data),
             'China UnionPay' => AlternativePaymentInstrument::from($data),
+            'Clearpay' => AlternativePaymentInstrument::from($data),
             'Cleo' => AlternativePaymentInstrument::from($data),
             'Conekta-oxxo' => AlternativePaymentInstrument::from($data),
             'Conekta-spei' => AlternativePaymentInstrument::from($data),
@@ -167,6 +170,7 @@ class CustomerDefaultPaymentInstrumentFactory
             'XPay-QR' => AlternativePaymentInstrument::from($data),
             'Yandex-money' => AlternativePaymentInstrument::from($data),
             'Zimpler' => AlternativePaymentInstrument::from($data),
+            'Zip' => AlternativePaymentInstrument::from($data),
             'Zotapay' => AlternativePaymentInstrument::from($data),
             'ach' => AlternativePaymentInstrument::from($data),
             'bank-transfer' => AlternativePaymentInstrument::from($data),
