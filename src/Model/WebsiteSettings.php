@@ -28,6 +28,9 @@ class WebsiteSettings implements JsonSerializable
         if (array_key_exists('paymentForm', $data)) {
             $this->setPaymentForm($data['paymentForm']);
         }
+        if (array_key_exists('amplitude', $data)) {
+            $this->setAmplitude($data['amplitude']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -67,6 +70,22 @@ class WebsiteSettings implements JsonSerializable
         return $this;
     }
 
+    public function getAmplitude(): ?WebsiteSettingsAmplitude
+    {
+        return $this->fields['amplitude'] ?? null;
+    }
+
+    public function setAmplitude(null|WebsiteSettingsAmplitude|array $amplitude): static
+    {
+        if ($amplitude !== null && !($amplitude instanceof WebsiteSettingsAmplitude)) {
+            $amplitude = WebsiteSettingsAmplitude::from($amplitude);
+        }
+
+        $this->fields['amplitude'] = $amplitude;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -75,6 +94,9 @@ class WebsiteSettings implements JsonSerializable
         }
         if (array_key_exists('paymentForm', $this->fields)) {
             $data['paymentForm'] = $this->fields['paymentForm']?->jsonSerialize();
+        }
+        if (array_key_exists('amplitude', $this->fields)) {
+            $data['amplitude'] = $this->fields['amplitude']?->jsonSerialize();
         }
 
         return $data;

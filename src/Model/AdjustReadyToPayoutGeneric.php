@@ -22,6 +22,10 @@ class AdjustReadyToPayoutGeneric implements AdjustReadyToPayoutPaymentMethod
 
     public const PAYMENT_METHOD_ADV_CASH = 'AdvCash';
 
+    public const PAYMENT_METHOD_AFFIRM = 'Affirm';
+
+    public const PAYMENT_METHOD_AFTERPAY = 'Afterpay';
+
     public const PAYMENT_METHOD_AIRCASH = 'Aircash';
 
     public const PAYMENT_METHOD_ALFA_CLICK = 'Alfa-click';
@@ -71,6 +75,8 @@ class AdjustReadyToPayoutGeneric implements AdjustReadyToPayoutPaymentMethod
     public const PAYMENT_METHOD_CASH_TO_CODE = 'CashToCode';
 
     public const PAYMENT_METHOD_CHINA_UNION_PAY = 'China UnionPay';
+
+    public const PAYMENT_METHOD_CLEARPAY = 'Clearpay';
 
     public const PAYMENT_METHOD_CLEO = 'Cleo';
 
@@ -315,6 +321,8 @@ class AdjustReadyToPayoutGeneric implements AdjustReadyToPayoutPaymentMethod
     public const PAYMENT_METHOD_ZOTAPAY = 'Zotapay';
 
     public const PAYMENT_METHOD_ZIMPLER = 'Zimpler';
+
+    public const PAYMENT_METHOD_ZIP = 'Zip';
 
     private array $fields = [];
 

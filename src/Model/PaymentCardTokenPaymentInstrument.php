@@ -56,6 +56,9 @@ class PaymentCardTokenPaymentInstrument implements JsonSerializable
         if (array_key_exists('cvv', $data)) {
             $this->setCvv($data['cvv']);
         }
+        if (array_key_exists('encryptedCvv', $data)) {
+            $this->setEncryptedCvv($data['encryptedCvv']);
+        }
         if (array_key_exists('expMonth', $data)) {
             $this->setExpMonth($data['expMonth']);
         }
@@ -98,6 +101,18 @@ class PaymentCardTokenPaymentInstrument implements JsonSerializable
     public function setCvv(null|string $cvv): static
     {
         $this->fields['cvv'] = $cvv;
+
+        return $this;
+    }
+
+    public function getEncryptedCvv(): ?string
+    {
+        return $this->fields['encryptedCvv'] ?? null;
+    }
+
+    public function setEncryptedCvv(null|string $encryptedCvv): static
+    {
+        $this->fields['encryptedCvv'] = $encryptedCvv;
 
         return $this;
     }
@@ -149,6 +164,9 @@ class PaymentCardTokenPaymentInstrument implements JsonSerializable
         }
         if (array_key_exists('cvv', $this->fields)) {
             $data['cvv'] = $this->fields['cvv'];
+        }
+        if (array_key_exists('encryptedCvv', $this->fields)) {
+            $data['encryptedCvv'] = $this->fields['encryptedCvv'];
         }
         if (array_key_exists('expMonth', $this->fields)) {
             $data['expMonth'] = $this->fields['expMonth'];

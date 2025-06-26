@@ -18,6 +18,10 @@ use JsonSerializable;
 
 class PaymentMethodMetadata implements JsonSerializable
 {
+    public const RELEVANT_BUSINESS_MODELS_B2_B = 'B2B';
+
+    public const RELEVANT_BUSINESS_MODELS_B2_C = 'B2C';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -48,6 +52,27 @@ class PaymentMethodMetadata implements JsonSerializable
         }
         if (array_key_exists('isSingleUse', $data)) {
             $this->setIsSingleUse($data['isSingleUse']);
+        }
+        if (array_key_exists('supportedCurrencies', $data)) {
+            $this->setSupportedCurrencies($data['supportedCurrencies']);
+        }
+        if (array_key_exists('relevantBusinessModels', $data)) {
+            $this->setRelevantBusinessModels($data['relevantBusinessModels']);
+        }
+        if (array_key_exists('type', $data)) {
+            $this->setType($data['type']);
+        }
+        if (array_key_exists('recurringPayments', $data)) {
+            $this->setRecurringPayments($data['recurringPayments']);
+        }
+        if (array_key_exists('refunds', $data)) {
+            $this->setRefunds($data['refunds']);
+        }
+        if (array_key_exists('disputes', $data)) {
+            $this->setDisputes($data['disputes']);
+        }
+        if (array_key_exists('ux', $data)) {
+            $this->setUx($data['ux']);
         }
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
@@ -171,6 +196,111 @@ class PaymentMethodMetadata implements JsonSerializable
         return $this;
     }
 
+    public function getSupportedCurrencies(): ?PaymentMethodMetadataSupportedCurrencies
+    {
+        return $this->fields['supportedCurrencies'] ?? null;
+    }
+
+    public function setSupportedCurrencies(null|PaymentMethodMetadataSupportedCurrencies|array $supportedCurrencies): static
+    {
+        if ($supportedCurrencies !== null && !($supportedCurrencies instanceof PaymentMethodMetadataSupportedCurrencies)) {
+            $supportedCurrencies = PaymentMethodMetadataSupportedCurrenciesFactory::from($supportedCurrencies);
+        }
+
+        $this->fields['supportedCurrencies'] = $supportedCurrencies;
+
+        return $this;
+    }
+
+    /**
+     * @return null|string[]
+     */
+    public function getRelevantBusinessModels(): ?array
+    {
+        return $this->fields['relevantBusinessModels'] ?? null;
+    }
+
+    /**
+     * @param null|string[] $relevantBusinessModels
+     */
+    public function setRelevantBusinessModels(null|array $relevantBusinessModels): static
+    {
+        $this->fields['relevantBusinessModels'] = $relevantBusinessModels;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->fields['type'] ?? null;
+    }
+
+    public function setType(null|string $type): static
+    {
+        $this->fields['type'] = $type;
+
+        return $this;
+    }
+
+    public function getRecurringPayments(): ?bool
+    {
+        return $this->fields['recurringPayments'] ?? null;
+    }
+
+    public function setRecurringPayments(null|bool $recurringPayments): static
+    {
+        $this->fields['recurringPayments'] = $recurringPayments;
+
+        return $this;
+    }
+
+    public function getRefunds(): ?bool
+    {
+        return $this->fields['refunds'] ?? null;
+    }
+
+    public function setRefunds(null|bool $refunds): static
+    {
+        $this->fields['refunds'] = $refunds;
+
+        return $this;
+    }
+
+    public function getDisputes(): ?bool
+    {
+        return $this->fields['disputes'] ?? null;
+    }
+
+    public function setDisputes(null|bool $disputes): static
+    {
+        $this->fields['disputes'] = $disputes;
+
+        return $this;
+    }
+
+    /**
+     * @return null|PaymentMethodMetadataUx[]
+     */
+    public function getUx(): ?array
+    {
+        return $this->fields['ux'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|PaymentMethodMetadataUx[] $ux
+     */
+    public function setUx(null|array $ux): static
+    {
+        $ux = $ux !== null ? array_map(
+            fn ($value) => $value instanceof PaymentMethodMetadataUx ? $value : PaymentMethodMetadataUx::from($value),
+            $ux,
+        ) : null;
+
+        $this->fields['ux'] = $ux;
+
+        return $this;
+    }
+
     /**
      * @return null|ResourceLink[]
      */
@@ -208,6 +338,32 @@ class PaymentMethodMetadata implements JsonSerializable
         }
         if (array_key_exists('isSingleUse', $this->fields)) {
             $data['isSingleUse'] = $this->fields['isSingleUse'];
+        }
+        if (array_key_exists('supportedCurrencies', $this->fields)) {
+            $data['supportedCurrencies'] = $this->fields['supportedCurrencies']?->jsonSerialize();
+        }
+        if (array_key_exists('relevantBusinessModels', $this->fields)) {
+            $data['relevantBusinessModels'] = $this->fields['relevantBusinessModels'];
+        }
+        if (array_key_exists('type', $this->fields)) {
+            $data['type'] = $this->fields['type'];
+        }
+        if (array_key_exists('recurringPayments', $this->fields)) {
+            $data['recurringPayments'] = $this->fields['recurringPayments'];
+        }
+        if (array_key_exists('refunds', $this->fields)) {
+            $data['refunds'] = $this->fields['refunds'];
+        }
+        if (array_key_exists('disputes', $this->fields)) {
+            $data['disputes'] = $this->fields['disputes'];
+        }
+        if (array_key_exists('ux', $this->fields)) {
+            $data['ux'] = $this->fields['ux'] !== null
+                ? array_map(
+                    static fn (PaymentMethodMetadataUx $paymentMethodMetadataUx) => $paymentMethodMetadataUx->jsonSerialize(),
+                    $this->fields['ux'],
+                )
+                : null;
         }
         if (array_key_exists('_links', $this->fields)) {
             $data['_links'] = $this->fields['_links'] !== null

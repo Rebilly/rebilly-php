@@ -22,6 +22,10 @@ class ReadyToPayGenericMethod implements ReadyToPayMethods
 
     public const METHOD_ADV_CASH = 'AdvCash';
 
+    public const METHOD_AFFIRM = 'Affirm';
+
+    public const METHOD_AFTERPAY = 'Afterpay';
+
     public const METHOD_AIRCASH = 'Aircash';
 
     public const METHOD_ALFA_CLICK = 'Alfa-click';
@@ -71,6 +75,8 @@ class ReadyToPayGenericMethod implements ReadyToPayMethods
     public const METHOD_CASH_TO_CODE = 'CashToCode';
 
     public const METHOD_CHINA_UNION_PAY = 'China UnionPay';
+
+    public const METHOD_CLEARPAY = 'Clearpay';
 
     public const METHOD_CLEO = 'Cleo';
 
@@ -315,6 +321,8 @@ class ReadyToPayGenericMethod implements ReadyToPayMethods
     public const METHOD_ZOTAPAY = 'Zotapay';
 
     public const METHOD_ZIMPLER = 'Zimpler';
+
+    public const METHOD_ZIP = 'Zip';
 
     private array $fields = [];
 
