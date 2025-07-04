@@ -170,6 +170,42 @@ class PostDisputeRequest implements JsonSerializable
 
     public const REASON_CODE_98 = '98';
 
+    public const REASON_CODE_004 = '004';
+
+    public const REASON_CODE_021 = '021';
+
+    public const REASON_CODE_024 = '024';
+
+    public const REASON_CODE_059 = '059';
+
+    public const REASON_CODE_062 = '062';
+
+    public const REASON_CODE_063 = '063';
+
+    public const REASON_CODE_127 = '127';
+
+    public const REASON_CODE_154 = '154';
+
+    public const REASON_CODE_155 = '155';
+
+    public const REASON_CODE_158 = '158';
+
+    public const REASON_CODE_173 = '173';
+
+    public const REASON_CODE_175 = '175';
+
+    public const REASON_CODE_176 = '176';
+
+    public const REASON_CODE_193 = '193';
+
+    public const REASON_CODE_680 = '680';
+
+    public const REASON_CODE_684 = '684';
+
+    public const REASON_CODE_691 = '691';
+
+    public const REASON_CODE_693 = '693';
+
     public const REASON_CODE_1000 = '1000';
 
     public const REASON_CODE_2001 = '2001';
@@ -326,7 +362,13 @@ class PostDisputeRequest implements JsonSerializable
 
     public const REASON_CODE_F29 = 'F29';
 
+    public const REASON_CODE_F30 = 'F30';
+
+    public const REASON_CODE_F31 = 'F31';
+
     public const REASON_CODE_FR1 = 'FR1';
+
+    public const REASON_CODE_FR2 = 'FR2';
 
     public const REASON_CODE_FR4 = 'FR4';
 

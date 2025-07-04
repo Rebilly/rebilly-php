@@ -32,6 +32,10 @@ class CheckoutForm implements JsonSerializable
 
     public const PAYMENT_METHODS_ADV_CASH = 'AdvCash';
 
+    public const PAYMENT_METHODS_AFFIRM = 'Affirm';
+
+    public const PAYMENT_METHODS_AFTERPAY = 'Afterpay';
+
     public const PAYMENT_METHODS_AIRCASH = 'Aircash';
 
     public const PAYMENT_METHODS_AIRPAY = 'Airpay';
@@ -97,6 +101,8 @@ class CheckoutForm implements JsonSerializable
     public const PAYMENT_METHODS_CC_AVENUE = 'CCAvenue';
 
     public const PAYMENT_METHODS_CHINA_UNION_PAY = 'China UnionPay';
+
+    public const PAYMENT_METHODS_CLEARPAY = 'Clearpay';
 
     public const PAYMENT_METHODS_CLEO = 'Cleo';
 
@@ -393,6 +399,8 @@ class CheckoutForm implements JsonSerializable
     public const PAYMENT_METHODS_ZOTAPAY = 'Zotapay';
 
     public const PAYMENT_METHODS_ZIMPLER = 'Zimpler';
+
+    public const PAYMENT_METHODS_ZIP = 'Zip';
 
     public const STATUS_ACTIVE = 'active';
 
