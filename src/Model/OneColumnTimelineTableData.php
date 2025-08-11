@@ -47,13 +47,17 @@ class OneColumnTimelineTableData implements JsonSerializable
         return $this;
     }
 
-    public function getValue(): ?string
+    public function getValue(): null|bool|float|int|string
     {
         return $this->fields['value'] ?? null;
     }
 
-    public function setValue(null|string $value): static
+    public function setValue(null|bool|float|int|string $value): static
     {
+        if (is_string($value)) {
+            $value = (float) $value;
+        }
+
         $this->fields['value'] = $value;
 
         return $this;

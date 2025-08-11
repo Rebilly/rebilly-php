@@ -272,6 +272,8 @@ class Transaction implements JsonSerializable
 
     public const GATEWAY_NAME_KONNEKTIVE = 'Konnektive';
 
+    public const GATEWAY_NAME_KUSHKI = 'Kushki';
+
     public const GATEWAY_NAME_LA_CORE = 'LaCore';
 
     public const GATEWAY_NAME_LIMEPAY = 'Limepay';
@@ -347,6 +349,8 @@ class Transaction implements JsonSerializable
     public const GATEWAY_NAME_PAY4_FUN = 'Pay4Fun';
 
     public const GATEWAY_NAME_PAY_CASH = 'PayCash';
+
+    public const GATEWAY_NAME_PAYCLY = 'Paycly';
 
     public const GATEWAY_NAME_PAY_CLUB = 'PayClub';
 
@@ -690,6 +694,8 @@ class Transaction implements JsonSerializable
 
     public const ACQUIRER_NAME_KONNEKTIVE = 'Konnektive';
 
+    public const ACQUIRER_NAME_KUSHKI = 'Kushki';
+
     public const ACQUIRER_NAME_LIMEPAY = 'Limepay';
 
     public const ACQUIRER_NAME_LOONIE = 'loonie';
@@ -920,6 +926,10 @@ class Transaction implements JsonSerializable
 
     public const METHOD_ADV_CASH = 'AdvCash';
 
+    public const METHOD_AFFIRM = 'Affirm';
+
+    public const METHOD_AFTERPAY = 'Afterpay';
+
     public const METHOD_AIRCASH = 'Aircash';
 
     public const METHOD_AIRPAY = 'Airpay';
@@ -985,6 +995,8 @@ class Transaction implements JsonSerializable
     public const METHOD_CC_AVENUE = 'CCAvenue';
 
     public const METHOD_CHINA_UNION_PAY = 'China UnionPay';
+
+    public const METHOD_CLEARPAY = 'Clearpay';
 
     public const METHOD_CLEO = 'Cleo';
 
@@ -1281,6 +1293,8 @@ class Transaction implements JsonSerializable
     public const METHOD_ZOTAPAY = 'Zotapay';
 
     public const METHOD_ZIMPLER = 'Zimpler';
+
+    public const METHOD_ZIP = 'Zip';
 
     public const DISPUTE_STATUS_NULL = 'null';
 

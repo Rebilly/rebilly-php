@@ -218,6 +218,9 @@ class EmailNotification implements JsonSerializable
         if (array_key_exists('count', $data)) {
             $this->setCount($data['count']);
         }
+        if (array_key_exists('activeCount', $data)) {
+            $this->setActiveCount($data['activeCount']);
+        }
         if (array_key_exists('notifications', $data)) {
             $this->setNotifications($data['notifications']);
         }
@@ -239,6 +242,11 @@ class EmailNotification implements JsonSerializable
     public function getCount(): ?int
     {
         return $this->fields['count'] ?? null;
+    }
+
+    public function getActiveCount(): ?int
+    {
+        return $this->fields['activeCount'] ?? null;
     }
 
     /**
@@ -265,6 +273,9 @@ class EmailNotification implements JsonSerializable
         }
         if (array_key_exists('count', $this->fields)) {
             $data['count'] = $this->fields['count'];
+        }
+        if (array_key_exists('activeCount', $this->fields)) {
+            $data['activeCount'] = $this->fields['activeCount'];
         }
         if (array_key_exists('notifications', $this->fields)) {
             $data['notifications'] = $this->fields['notifications'] !== null
@@ -296,6 +307,13 @@ class EmailNotification implements JsonSerializable
     private function setCount(null|int $count): static
     {
         $this->fields['count'] = $count;
+
+        return $this;
+    }
+
+    private function setActiveCount(null|int $activeCount): static
+    {
+        $this->fields['activeCount'] = $activeCount;
 
         return $this;
     }

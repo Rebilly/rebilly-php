@@ -39,6 +39,12 @@ class JournalEntry implements JsonSerializable
         if (array_key_exists('description', $data)) {
             $this->setDescription($data['description']);
         }
+        if (array_key_exists('totalRecognizedAmount', $data)) {
+            $this->setTotalRecognizedAmount($data['totalRecognizedAmount']);
+        }
+        if (array_key_exists('totalEstimatedAmount', $data)) {
+            $this->setTotalEstimatedAmount($data['totalEstimatedAmount']);
+        }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
         }
@@ -112,6 +118,16 @@ class JournalEntry implements JsonSerializable
         return $this;
     }
 
+    public function getTotalRecognizedAmount(): ?float
+    {
+        return $this->fields['totalRecognizedAmount'] ?? null;
+    }
+
+    public function getTotalEstimatedAmount(): ?float
+    {
+        return $this->fields['totalEstimatedAmount'] ?? null;
+    }
+
     public function getCreatedTime(): ?DateTimeImmutable
     {
         return $this->fields['createdTime'] ?? null;
@@ -148,6 +164,12 @@ class JournalEntry implements JsonSerializable
         if (array_key_exists('description', $this->fields)) {
             $data['description'] = $this->fields['description'];
         }
+        if (array_key_exists('totalRecognizedAmount', $this->fields)) {
+            $data['totalRecognizedAmount'] = $this->fields['totalRecognizedAmount'];
+        }
+        if (array_key_exists('totalEstimatedAmount', $this->fields)) {
+            $data['totalEstimatedAmount'] = $this->fields['totalEstimatedAmount'];
+        }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
         }
@@ -169,6 +191,28 @@ class JournalEntry implements JsonSerializable
     private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
+
+        return $this;
+    }
+
+    private function setTotalRecognizedAmount(null|float|string $totalRecognizedAmount): static
+    {
+        if (is_string($totalRecognizedAmount)) {
+            $totalRecognizedAmount = (float) $totalRecognizedAmount;
+        }
+
+        $this->fields['totalRecognizedAmount'] = $totalRecognizedAmount;
+
+        return $this;
+    }
+
+    private function setTotalEstimatedAmount(null|float|string $totalEstimatedAmount): static
+    {
+        if (is_string($totalEstimatedAmount)) {
+            $totalEstimatedAmount = (float) $totalEstimatedAmount;
+        }
+
+        $this->fields['totalEstimatedAmount'] = $totalEstimatedAmount;
 
         return $this;
     }

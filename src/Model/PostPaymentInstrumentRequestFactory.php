@@ -26,6 +26,8 @@ class PostPaymentInstrumentRequestFactory
 
         return match ($data['method']) {
             'AdvCash' => AlternativeInstrument::from($data),
+            'Affirm' => AlternativeInstrument::from($data),
+            'Afterpay' => AlternativeInstrument::from($data),
             'Aircash' => AlternativeInstrument::from($data),
             'Alfa-click' => AlternativeInstrument::from($data),
             'Alipay' => AlternativeInstrument::from($data),
@@ -43,6 +45,7 @@ class PostPaymentInstrumentRequestFactory
             'CODVoucher' => AlternativeInstrument::from($data),
             'CashToCode' => AlternativeInstrument::from($data),
             'China UnionPay' => AlternativeInstrument::from($data),
+            'Clearpay' => AlternativeInstrument::from($data),
             'Cleo' => AlternativeInstrument::from($data),
             'Conekta-oxxo' => AlternativeInstrument::from($data),
             'Cupon-de-pagos' => AlternativeInstrument::from($data),
@@ -138,6 +141,7 @@ class PostPaymentInstrumentRequestFactory
             'XPay-QR' => AlternativeInstrument::from($data),
             'Yandex-money' => AlternativeInstrument::from($data),
             'Zimpler' => AlternativeInstrument::from($data),
+            'Zip' => AlternativeInstrument::from($data),
             'Zotapay' => AlternativeInstrument::from($data),
             'bank-transfer' => AlternativeInstrument::from($data),
             'bank-transfer-2' => AlternativeInstrument::from($data),

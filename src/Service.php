@@ -54,6 +54,8 @@ class Service
 
     private Api\JournalEntriesApi $journalEntries;
 
+    private Api\JournalRecordsApi $journalRecords;
+
     private Api\KycRequestsApi $kycRequests;
 
     private Api\KycDocumentsApi $kycDocuments;
@@ -198,6 +200,7 @@ class Service
         $this->creditMemos = new Api\CreditMemosApi($this->client);
         $this->journalAccounts = new Api\JournalAccountsApi($this->client);
         $this->journalEntries = new Api\JournalEntriesApi($this->client);
+        $this->journalRecords = new Api\JournalRecordsApi($this->client);
         $this->kycRequests = new Api\KycRequestsApi($this->client);
         $this->kycDocuments = new Api\KycDocumentsApi($this->client);
         $this->kycSettings = new Api\KycSettingsApi($this->client);
@@ -350,6 +353,11 @@ class Service
     public function journalEntries(): Api\JournalEntriesApi
     {
         return $this->journalEntries;
+    }
+
+    public function journalRecords(): Api\JournalRecordsApi
+    {
+        return $this->journalRecords;
     }
 
     public function kycRequests(): Api\KycRequestsApi

@@ -94,13 +94,17 @@ class SubscriptionOrOneTimeSaleItem implements JsonSerializable
         return $this;
     }
 
-    public function getQuantityFilled(): ?int
+    public function getQuantityFilled(): ?float
     {
         return $this->fields['quantityFilled'] ?? null;
     }
 
-    public function setQuantityFilled(null|int $quantityFilled): static
+    public function setQuantityFilled(null|float|string $quantityFilled): static
     {
+        if (is_string($quantityFilled)) {
+            $quantityFilled = (float) $quantityFilled;
+        }
+
         $this->fields['quantityFilled'] = $quantityFilled;
 
         return $this;

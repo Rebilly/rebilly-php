@@ -26,6 +26,9 @@ class DateTimeCustomField implements CustomField
         if (array_key_exists('description', $data)) {
             $this->setDescription($data['description']);
         }
+        if (array_key_exists('isEnabled', $data)) {
+            $this->setIsEnabled($data['isEnabled']);
+        }
         if (array_key_exists('additionalSchema', $data)) {
             $this->setAdditionalSchema($data['additionalSchema']);
         }
@@ -57,6 +60,18 @@ class DateTimeCustomField implements CustomField
     public function setDescription(null|string $description): static
     {
         $this->fields['description'] = $description;
+
+        return $this;
+    }
+
+    public function getIsEnabled(): ?bool
+    {
+        return $this->fields['isEnabled'] ?? null;
+    }
+
+    public function setIsEnabled(null|bool $isEnabled): static
+    {
+        $this->fields['isEnabled'] = $isEnabled;
 
         return $this;
     }
@@ -95,6 +110,9 @@ class DateTimeCustomField implements CustomField
         }
         if (array_key_exists('description', $this->fields)) {
             $data['description'] = $this->fields['description'];
+        }
+        if (array_key_exists('isEnabled', $this->fields)) {
+            $data['isEnabled'] = $this->fields['isEnabled'];
         }
         if (array_key_exists('additionalSchema', $this->fields)) {
             $data['additionalSchema'] = $this->fields['additionalSchema']?->jsonSerialize();

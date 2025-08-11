@@ -116,6 +116,8 @@ abstract class RuleAction implements JsonSerializable
                 return RuleActionCreateInfusionsoftPayment::from($data);
             case 'create-intuit-quickbooks-balance-transaction-entry':
                 return RuleActionCreateIntuitQuickbooksBalanceTransactionEntry::from($data);
+            case 'create-intuit-quickbooks-invoice':
+                return RuleActionCreateIntuitQuickbooksInvoice::from($data);
             case 'create-intuit-quickbooks-payment':
                 return RuleActionCreateIntuitQuickbooksPayment::from($data);
             case 'create-intuit-quickbooks-refund-receipt':

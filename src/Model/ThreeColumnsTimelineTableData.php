@@ -50,25 +50,33 @@ class ThreeColumnsTimelineTableData implements JsonSerializable
         return $this;
     }
 
-    public function getPreviousValue(): ?string
+    public function getPreviousValue(): null|bool|float|int|string
     {
         return $this->fields['previousValue'] ?? null;
     }
 
-    public function setPreviousValue(null|string $previousValue): static
+    public function setPreviousValue(null|bool|float|int|string $previousValue): static
     {
+        if (is_string($previousValue)) {
+            $previousValue = (float) $previousValue;
+        }
+
         $this->fields['previousValue'] = $previousValue;
 
         return $this;
     }
 
-    public function getNewValue(): ?string
+    public function getNewValue(): null|bool|float|int|string
     {
         return $this->fields['newValue'] ?? null;
     }
 
-    public function setNewValue(null|string $newValue): static
+    public function setNewValue(null|bool|float|int|string $newValue): static
     {
+        if (is_string($newValue)) {
+            $newValue = (float) $newValue;
+        }
+
         $this->fields['newValue'] = $newValue;
 
         return $this;

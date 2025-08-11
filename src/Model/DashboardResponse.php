@@ -74,6 +74,8 @@ class DashboardResponse implements JsonSerializable
 
     public const METRIC_MONTHLY_RECURRING_REVENUE = 'monthlyRecurringRevenue';
 
+    public const METRIC_ANNUAL_RECURRING_REVENUE = 'annualRecurringRevenue';
+
     public const METRIC_AVERAGE_REVENUE_PER_CUSTOMER = 'averageRevenuePerCustomer';
 
     public const METRIC_CUSTOMER_LIFETIME_VALUE = 'customerLifetimeValue';

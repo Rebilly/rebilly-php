@@ -25,7 +25,9 @@ use Rebilly\Sdk\Model\DashboardResponse;
 use Rebilly\Sdk\Model\DccMarkup;
 use Rebilly\Sdk\Model\FutureRenewals;
 use Rebilly\Sdk\Model\GetKycAcceptanceSummaryReportResponse;
+use Rebilly\Sdk\Model\JournalSummaryReport;
 use Rebilly\Sdk\Model\RenewalSales;
+use Rebilly\Sdk\Model\ReportAnnualRecurringRevenue;
 use Rebilly\Sdk\Model\ReportDeclinedTransactions;
 use Rebilly\Sdk\Model\ReportDisputeDelays;
 use Rebilly\Sdk\Model\ReportDisputes;
@@ -50,6 +52,27 @@ class ReportsApi
 {
     public function __construct(protected ?ClientInterface $client)
     {
+    }
+
+    public function getAnnualRecurringRevenue(
+        string $currency,
+        string $periodStart,
+        string $periodEnd,
+    ): ReportAnnualRecurringRevenue {
+        $queryParams = [
+            'currency' => $currency,
+            'periodStart' => $periodStart,
+            'periodEnd' => $periodEnd,
+        ];
+        $uri = '/experimental/reports/annual-recurring-revenue?' . http_build_query($queryParams);
+
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return ReportAnnualRecurringRevenue::from($data);
     }
 
     public function getApiLogSummary(
@@ -282,6 +305,31 @@ class ReportsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ReportJournal::from($data);
+    }
+
+    public function getJournalSummary(
+        ?string $periodStart = null,
+        ?string $periodEnd = null,
+        ?string $currency = null,
+        ?string $aggregationField = null,
+        ?string $journalAccountIds = null,
+    ): JournalSummaryReport {
+        $queryParams = [
+            'periodStart' => $periodStart,
+            'periodEnd' => $periodEnd,
+            'currency' => $currency,
+            'aggregationField' => $aggregationField,
+            'journalAccountIds' => $journalAccountIds,
+        ];
+        $uri = '/experimental/reports/journal-summary?' . http_build_query($queryParams);
+
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return JournalSummaryReport::from($data);
     }
 
     public function getKycAcceptanceSummary(

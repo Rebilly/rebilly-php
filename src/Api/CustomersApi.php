@@ -25,7 +25,7 @@ use Rebilly\Sdk\Model\Edd;
 use Rebilly\Sdk\Model\EddSearchResult;
 use Rebilly\Sdk\Model\EddTimeline;
 use Rebilly\Sdk\Model\LeadSource;
-use Rebilly\Sdk\Model\PatchCustomerEddScoreRequest;
+use Rebilly\Sdk\Model\PatchEddScore;
 use Rebilly\Sdk\Paginator;
 
 class CustomersApi
@@ -550,7 +550,7 @@ class CustomersApi
 
     public function patchCustomerEddScore(
         string $id,
-        PatchCustomerEddScoreRequest $patchCustomerEddScoreRequest,
+        PatchEddScore $patchEddScore,
     ): Edd {
         $pathParams = [
             '{id}' => $id,
@@ -560,7 +560,7 @@ class CustomersApi
 
         $request = new Request('PATCH', $uri, headers: [
             'Accept' => 'application/json',
-        ], body: Utils::jsonEncode($patchCustomerEddScoreRequest));
+        ], body: Utils::jsonEncode($patchEddScore));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

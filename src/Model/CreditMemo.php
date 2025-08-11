@@ -104,6 +104,9 @@ class CreditMemo implements JsonSerializable
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
+        if (array_key_exists('_embedded', $data)) {
+            $this->setEmbedded($data['_embedded']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -230,9 +233,23 @@ class CreditMemo implements JsonSerializable
         return $this->fields['customerId'];
     }
 
+    public function setCustomerId(string $customerId): static
+    {
+        $this->fields['customerId'] = $customerId;
+
+        return $this;
+    }
+
     public function getCurrency(): string
     {
         return $this->fields['currency'];
+    }
+
+    public function setCurrency(string $currency): static
+    {
+        $this->fields['currency'] = $currency;
+
+        return $this;
     }
 
     public function getInvoiceId(): ?string
@@ -263,6 +280,22 @@ class CreditMemo implements JsonSerializable
     public function getLinks(): ?array
     {
         return $this->fields['_links'] ?? null;
+    }
+
+    public function getEmbedded(): ?CreditMemoEmbedded
+    {
+        return $this->fields['_embedded'] ?? null;
+    }
+
+    public function setEmbedded(null|CreditMemoEmbedded|array $embedded): static
+    {
+        if ($embedded !== null && !($embedded instanceof CreditMemoEmbedded)) {
+            $embedded = CreditMemoEmbedded::from($embedded);
+        }
+
+        $this->fields['_embedded'] = $embedded;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -332,6 +365,9 @@ class CreditMemo implements JsonSerializable
                 )
                 : null;
         }
+        if (array_key_exists('_embedded', $this->fields)) {
+            $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();
+        }
 
         return $data;
     }
@@ -393,20 +429,6 @@ class CreditMemo implements JsonSerializable
     private function setRevision(null|int $revision): static
     {
         $this->fields['revision'] = $revision;
-
-        return $this;
-    }
-
-    private function setCustomerId(string $customerId): static
-    {
-        $this->fields['customerId'] = $customerId;
-
-        return $this;
-    }
-
-    private function setCurrency(string $currency): static
-    {
-        $this->fields['currency'] = $currency;
 
         return $this;
     }

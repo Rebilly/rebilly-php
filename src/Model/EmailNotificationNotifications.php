@@ -28,6 +28,9 @@ class EmailNotificationNotifications implements JsonSerializable
         if (array_key_exists('title', $data)) {
             $this->setTitle($data['title']);
         }
+        if (array_key_exists('isActive', $data)) {
+            $this->setIsActive($data['isActive']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -65,6 +68,18 @@ class EmailNotificationNotifications implements JsonSerializable
         return $this;
     }
 
+    public function getIsActive(): ?bool
+    {
+        return $this->fields['isActive'] ?? null;
+    }
+
+    public function setIsActive(null|bool $isActive): static
+    {
+        $this->fields['isActive'] = $isActive;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -73,6 +88,9 @@ class EmailNotificationNotifications implements JsonSerializable
         }
         if (array_key_exists('title', $this->fields)) {
             $data['title'] = $this->fields['title'];
+        }
+        if (array_key_exists('isActive', $this->fields)) {
+            $data['isActive'] = $this->fields['isActive'];
         }
 
         return $data;

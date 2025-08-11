@@ -216,6 +216,8 @@ class GetPayoutRequestPaymentInstrumentsResponse implements JsonSerializable
 
     public const GATEWAY_NAME_KONNEKTIVE = 'Konnektive';
 
+    public const GATEWAY_NAME_KUSHKI = 'Kushki';
+
     public const GATEWAY_NAME_LA_CORE = 'LaCore';
 
     public const GATEWAY_NAME_LIMEPAY = 'Limepay';
@@ -291,6 +293,8 @@ class GetPayoutRequestPaymentInstrumentsResponse implements JsonSerializable
     public const GATEWAY_NAME_PAY4_FUN = 'Pay4Fun';
 
     public const GATEWAY_NAME_PAY_CASH = 'PayCash';
+
+    public const GATEWAY_NAME_PAYCLY = 'Paycly';
 
     public const GATEWAY_NAME_PAY_CLUB = 'PayClub';
 

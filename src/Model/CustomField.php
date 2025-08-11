@@ -26,6 +26,10 @@ interface CustomField extends JsonSerializable
 
     public function setDescription(null|string $description): static;
 
+    public function getIsEnabled(): ?bool;
+
+    public function setIsEnabled(null|bool $isEnabled): static;
+
     public function getAdditionalSchema(): null|ArrayCustomFieldAdditionalSchema|BooleanCustomFieldAdditionalSchema|DateCustomFieldAdditionalSchema|DateTimeCustomFieldAdditionalSchema|IntegerCustomFieldAdditionalSchema|MonetaryCustomFieldAdditionalSchema|NumberCustomFieldAdditionalSchema|StringCustomFieldAdditionalSchema;
 
     public function setAdditionalSchema(null|array $additionalSchema): static;
