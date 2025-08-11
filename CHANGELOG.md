@@ -1,5 +1,139 @@
 # @rebilly/client-php
 
+## 3.1.5
+
+### Patch Changes
+
+- fix(api-definitions): Fix issues reported by linter Rebilly/rebilly#12841
+- fix(be): Improve error message when reissuing voided invoice Rebilly/rebilly#12661
+- fix(be): Fix Tabby API definitions Rebilly/rebilly#9444
+- feat(recomm, be, api-definition): Remove nullable type and make journal entry total amounts sortable and filterable Rebilly/rebilly#14049
+- fix(be,api-definitions): Make bank-transfer alternative method vaultable Rebilly/rebilly#12944
+- build(deps): bump @redocly/cli from 1.34.3 to 1.34.4 in /website/api-definitions Rebilly/rebilly#13219
+- feat(be, api-definitions): Update usage settings for change items Rebilly/rebilly#13147
+- feat(be): Add Limepay integration Rebilly/rebilly#9321
+- fix(be,api-definitions): Fix iCashOne signature generation Rebilly/rebilly#12375
+- fix(api-definitions): Change embedded Role.juniorRoles to Role.juniors Rebilly/rebilly#12406
+- docs(team-docs): Apply feedback to internal docs Rebilly/rebilly#12611
+- feat(be, payment-gateways): Muchbettergateway request phone number Rebilly/rebilly#12761
+- SDK Generator updated
+- feat(api-definitions): Add new fields to metadata apis Rebilly/rebilly#13013
+- refactor(api-definitions): Remove journal records temporary definitions Rebilly/rebilly#13838
+- docs(website): Add export configuration topic Rebilly/rebilly#13478
+- SDK Generator updated
+- chore(api-definitions): Use pnpm instead of npm Rebilly/rebilly#13265
+- fix(api-definitions): change shipping component anyOf to oneOf Rebilly/rebilly#12750
+- SDK Generator updated
+- fix(be,recomm,api-definitions): Add missing Visa chargeback reason codes Rebilly/rebilly#13523
+- feat(be): Add merchant feature to skip notificationUrl webhooks for abandoned transactions Rebilly/rebilly#9311
+- SDK Generator updated
+- feat(api-definitions): Update JournalRecord customer and invoice fields Rebilly/rebilly#13938
+- feat(be): Add bypassAutodepositLookup flag for autodeposit Rebilly/rebilly#10213
+- fix(api-definitions): change period anchor component anyOf to oneOf Rebilly/rebilly#13624
+- feat(api-definitions,be): Add reference for bank-transfer payment method Rebilly/rebilly#12873
+- fix(api-definitions): Add separated Paysafecard reconciliation API Key Rebilly/rebilly#12011
+- fix(api-definitions): Add PaymentGatewayMetadata currencies values rules with discriminator Rebilly/rebilly#11685
+- docs(website): Add feedback to revenue recognition docs Rebilly/rebilly#13945
+- feat(be, payment-gateways): Add more methods via Adyen Rebilly/rebilly#12916
+- refactor(api-definition): Rename Journal Records routes to be BC Rebilly/rebilly#13569
+- fix(api-definitions): Add missing embedded objects of Customer resource Rebilly/rebilly#13508
+- fix(api-definitions): Make status readOnly on service credential creation Rebilly/rebilly#11761
+- SDK Generator updated
+- fix(api-definitions): Fix BVNK setting description Rebilly/rebilly#11688
+- SDK Generator updated
+- feat(api-definitions): Add settings, credentials for Worldline mtls Rebilly/rebilly#11583
+- docs(api-definitions): Add journal summary report api definitions Rebilly/rebilly#13229
+- feat(be): Add Ripple payouts to Monolo Rebilly/rebilly#12118
+- feat(be): Add Triple000 gateway integration Rebilly/rebilly#10110
+- refactor(be,api-definitions): Refactor CustomerEddScore to use Symfony validation Rebilly/rebilly#13404
+- docs(website): Add health check arazzo to Respect Rebilly/rebilly#11899
+- fix(api-definitions): Fix Role schema fields length information Rebilly/rebilly#11848
+- fix(be,api-definitions): Fix Checkout.com IPN signature verification Rebilly/rebilly#9819
+- docs(website): Add 422 response in GetAnnualRecurringRevenueReport Rebilly/rebilly#13547
+- fix(api-definitions): Add missing Triple000 gatewayName and acquirerName Rebilly/rebilly#10202
+- feat(api-definition): Add `logoUrl` property to Website Rebilly/rebilly#9578
+- build(deps): merge passing FE dependabot PRs Rebilly/rebilly#10273
+- docs(api-definitions): Add website Amplitude settings Rebilly/rebilly#13012
+- feat(be): Implement Gocardless Rebilly/rebilly#9890
+- feat(api-definitions): Add isDigitallyTampered to KycIdentityMatches.yaml Rebilly/rebilly#9309
+- feat(be,payment-gateways): Add Paycly gateway integration Rebilly/rebilly#13662
+- fix(api-definitions): Add Ripple to payment method schema Rebilly/rebilly#12196
+- feat(be): Add setting for CPI/ETI via Gigadat Rebilly/rebilly#10246
+- refactor(api-definitions): Remove oauth1 webhook auth schema Rebilly/rebilly#14063
+- feat(api-definitions,be): Add autodeposit webhook API definition Rebilly/rebilly#9946
+- feat(be,api-definitions): Add isSingleUse to payment method metadata response Rebilly/rebilly#12531
+- refactor(docs): Rename Journal Records routes to be BC Rebilly/rebilly#13447
+- feat(be,api-definitions): Implement deleting webhook subscribers Rebilly/rebilly#12287
+- SDK Generator updated
+- feat(api-definition): Add Tabby gateway settings Rebilly/rebilly#9588
+- feat(api-definitions, be/payment-gateways): Update Finrax ipn to verify signature Rebilly/rebilly#11947
+- fix(api-definitions): Update custom fields code sample Rebilly/rebilly#12988
+- feat(be, payment-gateways): Add Kushki integration Rebilly/rebilly#13791
+- SDK Generator updated
+- fix(api-metadata): Add missing validaiton properties to product Rebilly/rebilly#13805
+- feat(be,api-definitions,recomm): Record specific rejection reason type when document subtype missing Rebilly/rebilly#10191
+- refactor(be,api-definitions): refactor TransactionHistogramReport to use symfony validation Rebilly/rebilly#13270
+- feat(api-definitions,be): Add application fee via Stripe Rebilly/rebilly#11742
+- feat(be): Add Tabby gateway integration Rebilly/rebilly#9429
+- fix(api-definitions): Make journal summary report params optional Rebilly/rebilly#14031
+- fix(be, api-definitions): enforce segment title length Rebilly/rebilly#13992
+- fix(api-definitions): Fix inconsistency in storefront order preview definition Rebilly/rebilly#13037
+- feat(docs): Add smoke tests to Respect Rebilly/rebilly#13545
+- feat(api-definitions): Add HMAC key for Adyen IPN signature Rebilly/rebilly#13400
+- feat(be,api-definitions): Add \_embedded customer to dispute resource Rebilly/rebilly#10056
+- feat(be): Add PACE API payout via Ilixium Rebilly/rebilly#10037
+- fix(be,recomm,api-definitions): Add more fraud codes for Visa and MC Rebilly/rebilly#13527
+- build(deps): merge passing FE dependabot PRs Rebilly/rebilly#9775
+- fix(api-definitions): redeclared var in code example Rebilly/rebilly#9935
+- fix(api-definitions): Fix API definitions discrepancies found by Spot Rebilly/rebilly#10050
+- feat(api-definitions): Expose active notifications count in API Rebilly/rebilly#13575
+- build(deps): merge passing FE dependabot PRs Rebilly/rebilly#9892
+- feat(be): Implement option to store ID for Limepay Rebilly/rebilly#9748
+- fix(api-definitions): Fix column types for Payout requests grid Rebilly/rebilly#9513
+- feat(api-definitions): Mark payout-requests as experimental Rebilly/rebilly#13372
+- feat(api-definition): Remove old trial reminder properties. Rebilly/rebilly#9708
+- fix(be,api-definitions): Add missing string length validation for transaction redirectUrl and notificationUrl Rebilly/rebilly#13842
+- build(deps): bump @redocly/cli from 1.34.5 to 2.0.1 in /website/api-definitions Rebilly/rebilly#13868
+- feat(be, api-definitions): Custom field disabling Rebilly/rebilly#13707
+- feat(be, api-definitions): separate monthly and annual QB journal entries Rebilly/rebilly#8292
+- feat(be,api-definitions): Add embedded customer to dispute resource Rebilly/rebilly#10078
+- feat(api-definitions): Add journal records as data export resource Rebilly/rebilly#13451
+- SDK Generator updated
+- fix(be,api-definitions): Add missing \_links to allowlist resource Rebilly/rebilly#10167
+- fix(api-definitions): Make CreditMemo customerId and currency writable Rebilly/rebilly#12832
+- refactor(docs): Revert - Rename Journal Records routes to be BC Rebilly/rebilly#13565
+- feat(api-definitions): Add Credit memo allocations to Invoice Rebilly/rebilly#9108
+- build(deps): bump form-data and @redocly/cli in /website/api-definitions Rebilly/rebilly#13736
+- fix(be, api-definitions): add journal-entry type to grid segment Rebilly/rebilly#14076
+- build(deps): bump brace-expansion in /website/api-definitions Rebilly/rebilly#12821
+- chore: add the missing lodash.set depenency (#1902) Rebilly/rebilly#13747
+- chore: Pull in upstream changes Rebilly/rebilly#1
+- docs(website): Rework JS SDK topic and update links Rebilly/rebilly#13028
+- docs(website): Refine lead source attribution docs Rebilly/rebilly#12334
+- feat(be): Implement auto deposit via Payper Rebilly/rebilly#9743
+- fix: upgrade @redocly/cli to fix a vulnerability alert Rebilly/rebilly#12783
+- fix(api-definitions): Fix property type for quantity filled reached event Rebilly/rebilly#13996
+- test(be): Migrate Spot library to Respect and migrate API spec tests to the Arazzo format Rebilly/rebilly#10008
+- feat(api-definitions): Extend description and add example for usage quantity Rebilly/rebilly#11650
+- fix(api-definitions): Correct value type in TimelineTable schemas Rebilly/rebilly#13497
+- chore(api-definitions): fix trigger reason when commit includes quotes Rebilly/rebilly#11726
+- fix(api-definitions): add affiliate_month to cumulative subscriptions aggregationField enum Rebilly/rebilly#12009
+- fix(be,api-definitions): Add missing Amex, Visa, MC dispute reason code mappings Rebilly/rebilly#13320
+- SDK Generator updated
+- feat(be): Add merchant name setting to iCashOne Rebilly/rebilly#12633
+- fix(api-definitions): Include Quickbooks Invoice action fields manually Rebilly/rebilly#13539
+- build(deps): merge passing FE dependabot PRs Rebilly/rebilly#10155
+- fix(api-definitions): Fix KycDocumentRejection schema Rebilly/rebilly#10225
+- feat(api-definitions): Add to schema Rebilly/rebilly#9733
+- feat(api-definition): New journal records API Rebilly/rebilly#13516
+- docs(website): Add ARR report website api definitions Rebilly/rebilly#13157
+- fix(api-definitions): Mark subscription lineItemSubtotal as deprecated Rebilly/rebilly#13799
+- feat(be, payment-gateways): Add iCashOne integration Rebilly/rebilly#12319
+- SDK Generator updated
+- build(deps): merge passing FE dependabot PRs Rebilly/rebilly#9991
+- feat(api-definition): Add customer as an embedded output property in get credit memos collection response Rebilly/rebilly#13472
+- feat(be,api-definitions): Improve allowlists Rebilly/rebilly#10172
+
 ## 3.1.4
 
 ### Patch Changes
