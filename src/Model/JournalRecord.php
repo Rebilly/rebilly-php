@@ -82,40 +82,26 @@ class JournalRecord implements JsonSerializable
         return $this->fields['id'] ?? null;
     }
 
-    public function setId(null|string $id): static
-    {
-        $this->fields['id'] = $id;
-
-        return $this;
-    }
-
     public function getJournalEntryId(): string
     {
         return $this->fields['journalEntryId'];
     }
 
-    public function getCustomerId(): string
+    public function setJournalEntryId(string $journalEntryId): static
     {
-        return $this->fields['customerId'];
-    }
-
-    public function setCustomerId(string $customerId): static
-    {
-        $this->fields['customerId'] = $customerId;
+        $this->fields['journalEntryId'] = $journalEntryId;
 
         return $this;
     }
 
-    public function getInvoiceId(): string
+    public function getCustomerId(): ?string
     {
-        return $this->fields['invoiceId'];
+        return $this->fields['customerId'] ?? null;
     }
 
-    public function setInvoiceId(string $invoiceId): static
+    public function getInvoiceId(): ?string
     {
-        $this->fields['invoiceId'] = $invoiceId;
-
-        return $this;
+        return $this->fields['invoiceId'] ?? null;
     }
 
     public function getInvoiceItemId(): string
@@ -130,9 +116,9 @@ class JournalRecord implements JsonSerializable
         return $this;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
-        return $this->fields['type'];
+        return $this->fields['type'] ?? null;
     }
 
     public function getEstimatedAmount(): ?float
@@ -279,14 +265,28 @@ class JournalRecord implements JsonSerializable
         return $data;
     }
 
-    private function setJournalEntryId(string $journalEntryId): static
+    private function setId(null|string $id): static
     {
-        $this->fields['journalEntryId'] = $journalEntryId;
+        $this->fields['id'] = $id;
 
         return $this;
     }
 
-    private function setType(string $type): static
+    private function setCustomerId(null|string $customerId): static
+    {
+        $this->fields['customerId'] = $customerId;
+
+        return $this;
+    }
+
+    private function setInvoiceId(null|string $invoiceId): static
+    {
+        $this->fields['invoiceId'] = $invoiceId;
+
+        return $this;
+    }
+
+    private function setType(null|string $type): static
     {
         $this->fields['type'] = $type;
 

@@ -16,7 +16,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class PatchCustomerEddScoreRequestScore implements JsonSerializable
+class PatchEddScoreScore implements JsonSerializable
 {
     public const OCCUPATION_NOT_FOUND = 'not-found';
 
@@ -81,48 +81,48 @@ class PatchCustomerEddScoreRequestScore implements JsonSerializable
         return new self($data);
     }
 
-    public function getOccupation(): ?string
+    public function getOccupation(): string
     {
-        return $this->fields['occupation'] ?? null;
+        return $this->fields['occupation'];
     }
 
-    public function setOccupation(null|string $occupation): static
+    public function setOccupation(string $occupation): static
     {
         $this->fields['occupation'] = $occupation;
 
         return $this;
     }
 
-    public function getArrest(): ?string
+    public function getArrest(): string
     {
-        return $this->fields['arrest'] ?? null;
+        return $this->fields['arrest'];
     }
 
-    public function setArrest(null|string $arrest): static
+    public function setArrest(string $arrest): static
     {
         $this->fields['arrest'] = $arrest;
 
         return $this;
     }
 
-    public function getBankruptcy(): ?string
+    public function getBankruptcy(): string
     {
-        return $this->fields['bankruptcy'] ?? null;
+        return $this->fields['bankruptcy'];
     }
 
-    public function setBankruptcy(null|string $bankruptcy): static
+    public function setBankruptcy(string $bankruptcy): static
     {
         $this->fields['bankruptcy'] = $bankruptcy;
 
         return $this;
     }
 
-    public function getFraud(): ?string
+    public function getFraud(): string
     {
-        return $this->fields['fraud'] ?? null;
+        return $this->fields['fraud'];
     }
 
-    public function setFraud(null|string $fraud): static
+    public function setFraud(string $fraud): static
     {
         $this->fields['fraud'] = $fraud;
 

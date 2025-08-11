@@ -22,6 +22,12 @@ class CustomerEmbedded implements JsonSerializable
 
     public function __construct(array $data = [])
     {
+        if (array_key_exists('defaultPaymentInstrument', $data)) {
+            $this->setDefaultPaymentInstrument($data['defaultPaymentInstrument']);
+        }
+        if (array_key_exists('website', $data)) {
+            $this->setWebsite($data['website']);
+        }
         if (array_key_exists('leadSource', $data)) {
             $this->setLeadSource($data['leadSource']);
         }
@@ -30,6 +36,34 @@ class CustomerEmbedded implements JsonSerializable
     public static function from(array $data = []): self
     {
         return new self($data);
+    }
+
+    public function getDefaultPaymentInstrument(): ?array
+    {
+        return $this->fields['defaultPaymentInstrument'] ?? null;
+    }
+
+    public function setDefaultPaymentInstrument(null|array $defaultPaymentInstrument): static
+    {
+        $this->fields['defaultPaymentInstrument'] = $defaultPaymentInstrument;
+
+        return $this;
+    }
+
+    public function getWebsite(): ?Website
+    {
+        return $this->fields['website'] ?? null;
+    }
+
+    public function setWebsite(null|Website|array $website): static
+    {
+        if ($website !== null && !($website instanceof Website)) {
+            $website = Website::from($website);
+        }
+
+        $this->fields['website'] = $website;
+
+        return $this;
     }
 
     public function getLeadSource(): ?LeadSource
@@ -51,6 +85,12 @@ class CustomerEmbedded implements JsonSerializable
     public function jsonSerialize(): array
     {
         $data = [];
+        if (array_key_exists('defaultPaymentInstrument', $this->fields)) {
+            $data['defaultPaymentInstrument'] = $this->fields['defaultPaymentInstrument'];
+        }
+        if (array_key_exists('website', $this->fields)) {
+            $data['website'] = $this->fields['website']?->jsonSerialize();
+        }
         if (array_key_exists('leadSource', $this->fields)) {
             $data['leadSource'] = $this->fields['leadSource']?->jsonSerialize();
         }

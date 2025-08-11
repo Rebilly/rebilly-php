@@ -24,7 +24,6 @@ class WebhookAuthorizationFactory
             'basic' => WebhookAuthorizationBasic::from($data),
             'digest' => WebhookAuthorizationDigest::from($data),
             'none' => WebhookAuthorizationNone::from($data),
-            'oauth1' => WebhookAuthorizationOAuth1::from($data),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

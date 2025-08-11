@@ -35,13 +35,17 @@ class SubscriptionItemUpdate implements JsonSerializable
         return new self($data);
     }
 
-    public function getQuantityFilled(): int
+    public function getQuantityFilled(): float
     {
         return $this->fields['quantityFilled'];
     }
 
-    public function setQuantityFilled(int $quantityFilled): static
+    public function setQuantityFilled(float|string $quantityFilled): static
     {
+        if (is_string($quantityFilled)) {
+            $quantityFilled = (float) $quantityFilled;
+        }
+
         $this->fields['quantityFilled'] = $quantityFilled;
 
         return $this;

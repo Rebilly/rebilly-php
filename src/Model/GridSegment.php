@@ -83,13 +83,17 @@ class GridSegment implements JsonSerializable
         return $this;
     }
 
-    public function getData(): array
+    public function getData(): GridSegmentData
     {
         return $this->fields['data'];
     }
 
-    public function setData(array $data): static
+    public function setData(GridSegmentData|array $data): static
     {
+        if (!($data instanceof GridSegmentData)) {
+            $data = GridSegmentData::from($data);
+        }
+
         $this->fields['data'] = $data;
 
         return $this;
@@ -179,7 +183,7 @@ class GridSegment implements JsonSerializable
             $data['owner'] = $this->fields['owner']->jsonSerialize();
         }
         if (array_key_exists('data', $this->fields)) {
-            $data['data'] = $this->fields['data'];
+            $data['data'] = $this->fields['data']->jsonSerialize();
         }
         if (array_key_exists('isStarred', $this->fields)) {
             $data['isStarred'] = $this->fields['isStarred'];

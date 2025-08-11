@@ -28,6 +28,10 @@ class PaymentInstructionMethods implements PaymentInstruction
 
     public const METHODS_ADV_CASH = 'AdvCash';
 
+    public const METHODS_AFFIRM = 'Affirm';
+
+    public const METHODS_AFTERPAY = 'Afterpay';
+
     public const METHODS_AIRCASH = 'Aircash';
 
     public const METHODS_AIRPAY = 'Airpay';
@@ -93,6 +97,8 @@ class PaymentInstructionMethods implements PaymentInstruction
     public const METHODS_CC_AVENUE = 'CCAvenue';
 
     public const METHODS_CHINA_UNION_PAY = 'China UnionPay';
+
+    public const METHODS_CLEARPAY = 'Clearpay';
 
     public const METHODS_CLEO = 'Cleo';
 
@@ -389,6 +395,8 @@ class PaymentInstructionMethods implements PaymentInstruction
     public const METHODS_ZOTAPAY = 'Zotapay';
 
     public const METHODS_ZIMPLER = 'Zimpler';
+
+    public const METHODS_ZIP = 'Zip';
 
     private array $fields = [];
 

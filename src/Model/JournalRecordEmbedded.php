@@ -37,6 +37,9 @@ class JournalRecordEmbedded implements JsonSerializable
         if (array_key_exists('creditAccount', $data)) {
             $this->setCreditAccount($data['creditAccount']);
         }
+        if (array_key_exists('journalEntry', $data)) {
+            $this->setJournalEntry($data['journalEntry']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -124,6 +127,18 @@ class JournalRecordEmbedded implements JsonSerializable
         return $this;
     }
 
+    public function getJournalEntry(): ?array
+    {
+        return $this->fields['journalEntry'] ?? null;
+    }
+
+    public function setJournalEntry(null|array $journalEntry): static
+    {
+        $this->fields['journalEntry'] = $journalEntry;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -141,6 +156,9 @@ class JournalRecordEmbedded implements JsonSerializable
         }
         if (array_key_exists('creditAccount', $this->fields)) {
             $data['creditAccount'] = $this->fields['creditAccount']?->jsonSerialize();
+        }
+        if (array_key_exists('journalEntry', $this->fields)) {
+            $data['journalEntry'] = $this->fields['journalEntry'];
         }
 
         return $data;

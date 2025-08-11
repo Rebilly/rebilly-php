@@ -72,6 +72,10 @@ class PostDisputeRequest implements JsonSerializable
 
     public const REASON_CODE_12_6 = '12.6';
 
+    public const REASON_CODE_12_6_1 = '12.6.1';
+
+    public const REASON_CODE_12_6_2 = '12.6.2';
+
     public const REASON_CODE_12_7 = '12.7';
 
     public const REASON_CODE_13_1 = '13.1';
@@ -124,6 +128,8 @@ class PostDisputeRequest implements JsonSerializable
 
     public const REASON_CODE_55 = '55';
 
+    public const REASON_CODE_56 = '56';
+
     public const REASON_CODE_57 = '57';
 
     public const REASON_CODE_59 = '59';
@@ -169,6 +175,42 @@ class PostDisputeRequest implements JsonSerializable
     public const REASON_CODE_93 = '93';
 
     public const REASON_CODE_98 = '98';
+
+    public const REASON_CODE_004 = '004';
+
+    public const REASON_CODE_021 = '021';
+
+    public const REASON_CODE_024 = '024';
+
+    public const REASON_CODE_059 = '059';
+
+    public const REASON_CODE_062 = '062';
+
+    public const REASON_CODE_063 = '063';
+
+    public const REASON_CODE_127 = '127';
+
+    public const REASON_CODE_154 = '154';
+
+    public const REASON_CODE_155 = '155';
+
+    public const REASON_CODE_158 = '158';
+
+    public const REASON_CODE_173 = '173';
+
+    public const REASON_CODE_175 = '175';
+
+    public const REASON_CODE_176 = '176';
+
+    public const REASON_CODE_193 = '193';
+
+    public const REASON_CODE_680 = '680';
+
+    public const REASON_CODE_684 = '684';
+
+    public const REASON_CODE_691 = '691';
+
+    public const REASON_CODE_693 = '693';
 
     public const REASON_CODE_1000 = '1000';
 
@@ -284,6 +326,8 @@ class PostDisputeRequest implements JsonSerializable
 
     public const REASON_CODE_B = 'B';
 
+    public const REASON_CODE_C = 'C';
+
     public const REASON_CODE_C02 = 'C02';
 
     public const REASON_CODE_C04 = 'C04';
@@ -308,6 +352,8 @@ class PostDisputeRequest implements JsonSerializable
 
     public const REASON_CODE_CR = 'CR';
 
+    public const REASON_CODE_D = 'D';
+
     public const REASON_CODE_DA = 'DA';
 
     public const REASON_CODE_DP = 'DP';
@@ -326,7 +372,13 @@ class PostDisputeRequest implements JsonSerializable
 
     public const REASON_CODE_F29 = 'F29';
 
+    public const REASON_CODE_F30 = 'F30';
+
+    public const REASON_CODE_F31 = 'F31';
+
     public const REASON_CODE_FR1 = 'FR1';
+
+    public const REASON_CODE_FR2 = 'FR2';
 
     public const REASON_CODE_FR4 = 'FR4';
 

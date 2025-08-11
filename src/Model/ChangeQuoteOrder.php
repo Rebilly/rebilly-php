@@ -49,6 +49,9 @@ class ChangeQuoteOrder implements JsonSerializable
         if (array_key_exists('interimOnly', $data)) {
             $this->setInterimOnly($data['interimOnly']);
         }
+        if (array_key_exists('usageSettings', $data)) {
+            $this->setUsageSettings($data['usageSettings']);
+        }
         if (array_key_exists('autopay', $data)) {
             $this->setAutopay($data['autopay']);
         }
@@ -161,6 +164,29 @@ class ChangeQuoteOrder implements JsonSerializable
         return $this;
     }
 
+    /**
+     * @return null|ChangeQuoteOrderUsageSettings[]
+     */
+    public function getUsageSettings(): ?array
+    {
+        return $this->fields['usageSettings'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|ChangeQuoteOrderUsageSettings[] $usageSettings
+     */
+    public function setUsageSettings(null|array $usageSettings): static
+    {
+        $usageSettings = $usageSettings !== null ? array_map(
+            fn ($value) => $value instanceof ChangeQuoteOrderUsageSettings ? $value : ChangeQuoteOrderUsageSettings::from($value),
+            $usageSettings,
+        ) : null;
+
+        $this->fields['usageSettings'] = $usageSettings;
+
+        return $this;
+    }
+
     public function getAutopay(): ?bool
     {
         return $this->fields['autopay'] ?? null;
@@ -215,6 +241,14 @@ class ChangeQuoteOrder implements JsonSerializable
         }
         if (array_key_exists('interimOnly', $this->fields)) {
             $data['interimOnly'] = $this->fields['interimOnly'];
+        }
+        if (array_key_exists('usageSettings', $this->fields)) {
+            $data['usageSettings'] = $this->fields['usageSettings'] !== null
+                ? array_map(
+                    static fn (ChangeQuoteOrderUsageSettings $changeQuoteOrderUsageSettings) => $changeQuoteOrderUsageSettings->jsonSerialize(),
+                    $this->fields['usageSettings'],
+                )
+                : null;
         }
         if (array_key_exists('autopay', $this->fields)) {
             $data['autopay'] = $this->fields['autopay'];

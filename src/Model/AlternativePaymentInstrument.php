@@ -28,6 +28,10 @@ class AlternativePaymentInstrument implements CustomerDefaultPaymentInstrument, 
 
     public const METHOD_ADV_CASH = 'AdvCash';
 
+    public const METHOD_AFFIRM = 'Affirm';
+
+    public const METHOD_AFTERPAY = 'Afterpay';
+
     public const METHOD_AIRCASH = 'Aircash';
 
     public const METHOD_AIRPAY = 'Airpay';
@@ -93,6 +97,8 @@ class AlternativePaymentInstrument implements CustomerDefaultPaymentInstrument, 
     public const METHOD_CC_AVENUE = 'CCAvenue';
 
     public const METHOD_CHINA_UNION_PAY = 'China UnionPay';
+
+    public const METHOD_CLEARPAY = 'Clearpay';
 
     public const METHOD_CLEO = 'Cleo';
 
@@ -390,6 +396,8 @@ class AlternativePaymentInstrument implements CustomerDefaultPaymentInstrument, 
 
     public const METHOD_ZIMPLER = 'Zimpler';
 
+    public const METHOD_ZIP = 'Zip';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -399,6 +407,9 @@ class AlternativePaymentInstrument implements CustomerDefaultPaymentInstrument, 
         }
         if (array_key_exists('paymentInstrumentId', $data)) {
             $this->setPaymentInstrumentId($data['paymentInstrumentId']);
+        }
+        if (array_key_exists('reference', $data)) {
+            $this->setReference($data['reference']);
         }
     }
 
@@ -431,6 +442,18 @@ class AlternativePaymentInstrument implements CustomerDefaultPaymentInstrument, 
         return $this;
     }
 
+    public function getReference(): ?string
+    {
+        return $this->fields['reference'] ?? null;
+    }
+
+    public function setReference(null|string $reference): static
+    {
+        $this->fields['reference'] = $reference;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -439,6 +462,9 @@ class AlternativePaymentInstrument implements CustomerDefaultPaymentInstrument, 
         }
         if (array_key_exists('paymentInstrumentId', $this->fields)) {
             $data['paymentInstrumentId'] = $this->fields['paymentInstrumentId'];
+        }
+        if (array_key_exists('reference', $this->fields)) {
+            $data['reference'] = $this->fields['reference'];
         }
 
         return $data;
