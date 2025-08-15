@@ -108,6 +108,8 @@ class Service
 
     private Api\DepositRequestsApi $depositRequests;
 
+    private Api\CashiersApi $cashiers;
+
     private Api\DepositStrategiesApi $depositStrategies;
 
     private Api\DepositCustomPropertySetsApi $depositCustomPropertySets;
@@ -227,6 +229,7 @@ class Service
         $this->billingPortals = new Api\BillingPortalsApi($this->client);
         $this->broadcastMessages = new Api\BroadcastMessagesApi($this->client);
         $this->depositRequests = new Api\DepositRequestsApi($this->client);
+        $this->cashiers = new Api\CashiersApi($this->client);
         $this->depositStrategies = new Api\DepositStrategiesApi($this->client);
         $this->depositCustomPropertySets = new Api\DepositCustomPropertySetsApi($this->client);
         $this->checkoutForms = new Api\CheckoutFormsApi($this->client);
@@ -488,6 +491,11 @@ class Service
     public function depositRequests(): Api\DepositRequestsApi
     {
         return $this->depositRequests;
+    }
+
+    public function cashiers(): Api\CashiersApi
+    {
+        return $this->cashiers;
     }
 
     public function depositStrategies(): Api\DepositStrategiesApi

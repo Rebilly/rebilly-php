@@ -1595,6 +1595,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return Klarna::from($data);
             case 'Konnektive':
                 return Konnektive::from($data);
+            case 'Kushki':
+                return Kushki::from($data);
             case 'LaCore':
                 return LaCore::from($data);
             case 'Limepay':
