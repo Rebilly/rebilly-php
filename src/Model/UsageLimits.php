@@ -28,6 +28,9 @@ class UsageLimits implements JsonSerializable
         if (array_key_exists('hardLimit', $data)) {
             $this->setHardLimit($data['hardLimit']);
         }
+        if (array_key_exists('trialLimit', $data)) {
+            $this->setTrialLimit($data['trialLimit']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -67,6 +70,22 @@ class UsageLimits implements JsonSerializable
         return $this;
     }
 
+    public function getTrialLimit(): ?float
+    {
+        return $this->fields['trialLimit'] ?? null;
+    }
+
+    public function setTrialLimit(null|float|string $trialLimit): static
+    {
+        if (is_string($trialLimit)) {
+            $trialLimit = (float) $trialLimit;
+        }
+
+        $this->fields['trialLimit'] = $trialLimit;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -75,6 +94,9 @@ class UsageLimits implements JsonSerializable
         }
         if (array_key_exists('hardLimit', $this->fields)) {
             $data['hardLimit'] = $this->fields['hardLimit']?->jsonSerialize();
+        }
+        if (array_key_exists('trialLimit', $this->fields)) {
+            $data['trialLimit'] = $this->fields['trialLimit'];
         }
 
         return $data;
