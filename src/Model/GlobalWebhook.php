@@ -144,6 +144,8 @@ class GlobalWebhook implements JsonSerializable
 
     public const EVENTS_FILTER_TRANSACTION_PROCESSED = 'transaction-processed';
 
+    public const EVENTS_FILTER_TRIAL_USAGE_LIMIT_REACHED = 'trial-usage-limit-reached';
+
     public const EVENTS_FILTER_ORDER_DELINQUENCY_REACHED = 'order-delinquency-reached';
 
     public const EVENTS_FILTER_AUTODEPOSIT_LOOKUP_PERFORMED = 'autodeposit-lookup-performed';

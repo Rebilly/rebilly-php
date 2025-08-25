@@ -41,6 +41,8 @@ interface PaymentInstrument extends JsonSerializable
 
     public function getUpdatedTime(): ?DateTimeImmutable;
 
+    public function getLastPaymentTime(): ?DateTimeImmutable;
+
     public function getCustomFields(): ?array;
 
     public function setCustomFields(null|array $customFields): static;

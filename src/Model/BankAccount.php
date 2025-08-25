@@ -85,6 +85,9 @@ class BankAccount implements PaymentInstrument
         if (array_key_exists('updatedTime', $data)) {
             $this->setUpdatedTime($data['updatedTime']);
         }
+        if (array_key_exists('lastPaymentTime', $data)) {
+            $this->setLastPaymentTime($data['lastPaymentTime']);
+        }
         if (array_key_exists('customFields', $data)) {
             $this->setCustomFields($data['customFields']);
         }
@@ -260,6 +263,11 @@ class BankAccount implements PaymentInstrument
         return $this->fields['updatedTime'] ?? null;
     }
 
+    public function getLastPaymentTime(): ?DateTimeImmutable
+    {
+        return $this->fields['lastPaymentTime'] ?? null;
+    }
+
     public function getCustomFields(): ?array
     {
         return $this->fields['customFields'] ?? null;
@@ -354,6 +362,9 @@ class BankAccount implements PaymentInstrument
         if (array_key_exists('updatedTime', $this->fields)) {
             $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
         }
+        if (array_key_exists('lastPaymentTime', $this->fields)) {
+            $data['lastPaymentTime'] = $this->fields['lastPaymentTime']?->format(DateTimeInterface::RFC3339);
+        }
         if (array_key_exists('customFields', $this->fields)) {
             $data['customFields'] = $this->fields['customFields'];
         }
@@ -428,6 +439,17 @@ class BankAccount implements PaymentInstrument
         }
 
         $this->fields['updatedTime'] = $updatedTime;
+
+        return $this;
+    }
+
+    private function setLastPaymentTime(null|DateTimeImmutable|string $lastPaymentTime): static
+    {
+        if ($lastPaymentTime !== null && !($lastPaymentTime instanceof DateTimeImmutable)) {
+            $lastPaymentTime = new DateTimeImmutable($lastPaymentTime);
+        }
+
+        $this->fields['lastPaymentTime'] = $lastPaymentTime;
 
         return $this;
     }
