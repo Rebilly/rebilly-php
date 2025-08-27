@@ -22,6 +22,8 @@ class GlobalWebhook implements JsonSerializable
 {
     public const EVENTS_FILTER_AML_LIST_POSSIBLY_MATCHED = 'aml-list-possibly-matched';
 
+    public const EVENTS_FILTER_AUTODEPOSIT_LOOKUP_PERFORMED = 'autodeposit-lookup-performed';
+
     public const EVENTS_FILTER_COUPON_APPLICATION_REMOVED = 'coupon-application-removed';
 
     public const EVENTS_FILTER_COUPON_APPLIED = 'coupon-applied';
@@ -43,6 +45,8 @@ class GlobalWebhook implements JsonSerializable
     public const EVENTS_FILTER_CUSTOMER_MERGED = 'customer-merged';
 
     public const EVENTS_FILTER_CUSTOMER_ONE_TIME_PASSWORD_REQUESTED = 'customer-one-time-password-requested';
+
+    public const EVENTS_FILTER_CUSTOMER_TAX_NUMBER_VALIDATED = 'customer-tax-number-validated';
 
     public const EVENTS_FILTER_CUSTOMER_UPDATED = 'customer-updated';
 
@@ -92,7 +96,11 @@ class GlobalWebhook implements JsonSerializable
 
     public const EVENTS_FILTER_ORDER_COMPLETED = 'order-completed';
 
+    public const EVENTS_FILTER_ORDER_DELINQUENCY_REACHED = 'order-delinquency-reached';
+
     public const EVENTS_FILTER_PAYMENT_CARD_EXPIRED = 'payment-card-expired';
+
+    public const EVENTS_FILTER_PAYOUT_REQUEST_CANCELED = 'payout-request-canceled';
 
     public const EVENTS_FILTER_PAYOUT_REQUEST_CREATED = 'payout-request-created';
 
@@ -114,6 +122,8 @@ class GlobalWebhook implements JsonSerializable
 
     public const EVENTS_FILTER_QUOTE_UPDATED = 'quote-updated';
 
+    public const EVENTS_FILTER_READY_TO_PAY_REQUESTED = 'ready-to-pay-requested';
+
     public const EVENTS_FILTER_RENEWAL_INVOICE_ISSUED = 'renewal-invoice-issued';
 
     public const EVENTS_FILTER_RENEWAL_INVOICE_PAYMENT_DECLINED = 'renewal-invoice-payment-declined';
@@ -123,6 +133,8 @@ class GlobalWebhook implements JsonSerializable
     public const EVENTS_FILTER_SUBSCRIPTION_CANCELED = 'subscription-canceled';
 
     public const EVENTS_FILTER_SUBSCRIPTION_CHURNED = 'subscription-churned';
+
+    public const EVENTS_FILTER_SUBSCRIPTION_CREATED = 'subscription-created';
 
     public const EVENTS_FILTER_SUBSCRIPTION_DOWNGRADED = 'subscription-downgraded';
 
@@ -144,9 +156,7 @@ class GlobalWebhook implements JsonSerializable
 
     public const EVENTS_FILTER_TRANSACTION_PROCESSED = 'transaction-processed';
 
-    public const EVENTS_FILTER_ORDER_DELINQUENCY_REACHED = 'order-delinquency-reached';
-
-    public const EVENTS_FILTER_AUTODEPOSIT_LOOKUP_PERFORMED = 'autodeposit-lookup-performed';
+    public const EVENTS_FILTER_TRIAL_USAGE_LIMIT_REACHED = 'trial-usage-limit-reached';
 
     public const STATUS_ACTIVE = 'active';
 

@@ -108,6 +108,8 @@ class Service
 
     private Api\DepositRequestsApi $depositRequests;
 
+    private Api\CashiersApi $cashiers;
+
     private Api\DepositStrategiesApi $depositStrategies;
 
     private Api\DepositCustomPropertySetsApi $depositCustomPropertySets;
@@ -174,8 +176,6 @@ class Service
 
     private Api\RiskScoreRulesApi $riskScoreRules;
 
-    private Api\RiskScoreSimulationJobsApi $riskScoreSimulationJobs;
-
     private Api\AllowlistsApi $allowlists;
 
     private Api\TagsRulesApi $tagsRules;
@@ -227,6 +227,7 @@ class Service
         $this->billingPortals = new Api\BillingPortalsApi($this->client);
         $this->broadcastMessages = new Api\BroadcastMessagesApi($this->client);
         $this->depositRequests = new Api\DepositRequestsApi($this->client);
+        $this->cashiers = new Api\CashiersApi($this->client);
         $this->depositStrategies = new Api\DepositStrategiesApi($this->client);
         $this->depositCustomPropertySets = new Api\DepositCustomPropertySetsApi($this->client);
         $this->checkoutForms = new Api\CheckoutFormsApi($this->client);
@@ -260,7 +261,6 @@ class Service
         $this->histograms = new Api\HistogramsApi($this->client);
         $this->reports = new Api\ReportsApi($this->client);
         $this->riskScoreRules = new Api\RiskScoreRulesApi($this->client);
-        $this->riskScoreSimulationJobs = new Api\RiskScoreSimulationJobsApi($this->client);
         $this->allowlists = new Api\AllowlistsApi($this->client);
         $this->tagsRules = new Api\TagsRulesApi($this->client);
     }
@@ -490,6 +490,11 @@ class Service
         return $this->depositRequests;
     }
 
+    public function cashiers(): Api\CashiersApi
+    {
+        return $this->cashiers;
+    }
+
     public function depositStrategies(): Api\DepositStrategiesApi
     {
         return $this->depositStrategies;
@@ -653,11 +658,6 @@ class Service
     public function riskScoreRules(): Api\RiskScoreRulesApi
     {
         return $this->riskScoreRules;
-    }
-
-    public function riskScoreSimulationJobs(): Api\RiskScoreSimulationJobsApi
-    {
-        return $this->riskScoreSimulationJobs;
     }
 
     public function allowlists(): Api\AllowlistsApi

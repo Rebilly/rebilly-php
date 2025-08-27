@@ -20,15 +20,13 @@ use JsonSerializable;
 
 class WebhookTracking implements JsonSerializable
 {
-    public const EVENT_TYPE_ACCOUNT_PASSWORD_RESET_REQUESTED = 'account-password-reset-requested';
-
-    public const EVENT_TYPE_ACCOUNT_VERIFICATION_REQUESTED = 'account-verification-requested';
-
     public const EVENT_TYPE_AML_LIST_POSSIBLY_MATCHED = 'aml-list-possibly-matched';
 
     public const EVENT_TYPE_APPLICATION_INSTANCE_DISABLED = 'application-instance-disabled';
 
     public const EVENT_TYPE_APPLICATION_INSTANCE_ENABLED = 'application-instance-enabled';
+
+    public const EVENT_TYPE_AUTODEPOSIT_LOOKUP_PERFORMED = 'autodeposit-lookup-performed';
 
     public const EVENT_TYPE_BALANCE_TRANSACTION_SETTLED = 'balance-transaction-settled';
 
@@ -48,11 +46,31 @@ class WebhookTracking implements JsonSerializable
 
     public const EVENT_TYPE_COUPON_REDEMPTION_CANCELED = 'coupon-redemption-canceled';
 
+    public const EVENT_TYPE_CREDIT_MEMO_APPLIED = 'credit-memo-applied';
+
+    public const EVENT_TYPE_CREDIT_MEMO_CREATED = 'credit-memo-created';
+
+    public const EVENT_TYPE_CREDIT_MEMO_MODIFIED = 'credit-memo-modified';
+
+    public const EVENT_TYPE_CREDIT_MEMO_PARTIALLY_APPLIED = 'credit-memo-partially-applied';
+
+    public const EVENT_TYPE_CREDIT_MEMO_VOIDED = 'credit-memo-voided';
+
     public const EVENT_TYPE_CUSTOMER_CREATED = 'customer-created';
+
+    public const EVENT_TYPE_CUSTOMER_MERGED = 'customer-merged';
 
     public const EVENT_TYPE_CUSTOMER_ONE_TIME_PASSWORD_REQUESTED = 'customer-one-time-password-requested';
 
+    public const EVENT_TYPE_CUSTOMER_REDIRECTED_OFFSITE = 'customer-redirected-offsite';
+
+    public const EVENT_TYPE_CUSTOMER_RETURNED = 'customer-returned';
+
+    public const EVENT_TYPE_CUSTOMER_TAX_NUMBER_VALIDATED = 'customer-tax-number-validated';
+
     public const EVENT_TYPE_CUSTOMER_UPDATED = 'customer-updated';
+
+    public const EVENT_TYPE_DATA_EXPORT_COMPLETED = 'data-export-completed';
 
     public const EVENT_TYPE_DISPUTE_CREATED = 'dispute-created';
 
@@ -76,6 +94,8 @@ class WebhookTracking implements JsonSerializable
 
     public const EVENT_TYPE_INVOICE_ABANDONED = 'invoice-abandoned';
 
+    public const EVENT_TYPE_INVOICE_CREATED = 'invoice-created';
+
     public const EVENT_TYPE_INVOICE_ISSUED = 'invoice-issued';
 
     public const EVENT_TYPE_INVOICE_MODIFIED = 'invoice-modified';
@@ -92,7 +112,7 @@ class WebhookTracking implements JsonSerializable
 
     public const EVENT_TYPE_INVOICE_REFUNDED = 'invoice-refunded';
 
-    public const EVENT_TYPE_INVOICE_REVENUE_RECOGNIZED = 'invoice-revenue-recognized';
+    public const EVENT_TYPE_INVOICE_REISSUED = 'invoice-reissued';
 
     public const EVENT_TYPE_INVOICE_TAX_CALCULATION_FAILED = 'invoice-tax-calculation-failed';
 
@@ -100,17 +120,35 @@ class WebhookTracking implements JsonSerializable
 
     public const EVENT_TYPE_KYC_DOCUMENT_ACCEPTED = 'kyc-document-accepted';
 
+    public const EVENT_TYPE_KYC_DOCUMENT_ARCHIVED = 'kyc-document-archived';
+
+    public const EVENT_TYPE_KYC_DOCUMENT_CREATED = 'kyc-document-created';
+
     public const EVENT_TYPE_KYC_DOCUMENT_MODIFIED = 'kyc-document-modified';
 
     public const EVENT_TYPE_KYC_DOCUMENT_REJECTED = 'kyc-document-rejected';
 
+    public const EVENT_TYPE_KYC_DOCUMENT_REVIEWED = 'kyc-document-reviewed';
+
+    public const EVENT_TYPE_KYC_REQUEST_ATTEMPTED = 'kyc-request-attempted';
+
+    public const EVENT_TYPE_KYC_REQUEST_FAILED = 'kyc-request-failed';
+
     public const EVENT_TYPE_KYC_REQUEST_FULFILLED = 'kyc-request-fulfilled';
 
-    public const EVENT_TYPE_ORDER_ABANDON_REMINDER = 'order-abandon-reminder';
+    public const EVENT_TYPE_KYC_REQUEST_PARTIALLY_FULFILLED = 'kyc-request-partially-fulfilled';
+
+    public const EVENT_TYPE_LEAD_SOURCE_CHANGED = 'lead-source-changed';
+
+    public const EVENT_TYPE_OFFSITE_PAYMENT_COMPLETED = 'offsite-payment-completed';
 
     public const EVENT_TYPE_ORDER_ABANDONED = 'order-abandoned';
 
     public const EVENT_TYPE_ORDER_COMPLETED = 'order-completed';
+
+    public const EVENT_TYPE_ORDER_DELINQUENCY_REACHED = 'order-delinquency-reached';
+
+    public const EVENT_TYPE_ORGANIZATION_TAX_NUMBER_VALIDATED = 'organization-tax-number-validated';
 
     public const EVENT_TYPE_PAYMENT_CARD_CREATED = 'payment-card-created';
 
@@ -119,6 +157,8 @@ class WebhookTracking implements JsonSerializable
     public const EVENT_TYPE_PAYMENT_CARD_EXPIRED = 'payment-card-expired';
 
     public const EVENT_TYPE_PAYMENT_INSTRUMENT_MODIFIED = 'payment-instrument-modified';
+
+    public const EVENT_TYPE_PAYOUT_REQUEST_CANCELED = 'payout-request-canceled';
 
     public const EVENT_TYPE_PAYOUT_REQUEST_CREATED = 'payout-request-created';
 
@@ -141,8 +181,6 @@ class WebhookTracking implements JsonSerializable
     public const EVENT_TYPE_QUOTE_UPDATED = 'quote-updated';
 
     public const EVENT_TYPE_READY_TO_PAY_REQUESTED = 'ready-to-pay-requested';
-
-    public const EVENT_TYPE_READY_TO_PAYOUT_REQUESTED = 'ready-to-payout-requested';
 
     public const EVENT_TYPE_RENEWAL_INVOICE_ISSUED = 'renewal-invoice-issued';
 
@@ -188,8 +226,6 @@ class WebhookTracking implements JsonSerializable
 
     public const EVENT_TYPE_SUBSCRIPTION_TRIAL_CONVERTED = 'subscription-trial-converted';
 
-    public const EVENT_TYPE_SUBSCRIPTION_TRIAL_END_CHANGED = 'subscription-trial-end-changed';
-
     public const EVENT_TYPE_SUBSCRIPTION_TRIAL_END_REMINDER = 'subscription-trial-end-reminder';
 
     public const EVENT_TYPE_SUBSCRIPTION_TRIAL_ENDED = 'subscription-trial-ended';
@@ -206,9 +242,13 @@ class WebhookTracking implements JsonSerializable
 
     public const EVENT_TYPE_TRANSACTION_PROCESSED = 'transaction-processed';
 
-    public const EVENT_TYPE_ORDER_DELINQUENCY_REACHED = 'order-delinquency-reached';
+    public const EVENT_TYPE_TRANSACTION_RECONCILED = 'transaction-reconciled';
 
-    public const EVENT_TYPE_AUTODEPOSIT_LOOKUP_PERFORMED = 'autodeposit-lookup-performed';
+    public const EVENT_TYPE_TRANSACTION_TIMEOUT_RESOLVED = 'transaction-timeout-resolved';
+
+    public const EVENT_TYPE_TRIAL_USAGE_LIMIT_REACHED = 'trial-usage-limit-reached';
+
+    public const EVENT_TYPE_WAITING_GATEWAY_TRANSACTION_COMPLETED = 'waiting-gateway-transaction-completed';
 
     public const SOURCE_WEBHOOKS = 'webhooks';
 
@@ -436,6 +476,13 @@ class WebhookTracking implements JsonSerializable
         return $this->fields['eventType'] ?? null;
     }
 
+    public function setEventType(null|string $eventType): static
+    {
+        $this->fields['eventType'] = $eventType;
+
+        return $this;
+    }
+
     public function getSource(): ?string
     {
         return $this->fields['source'] ?? null;
@@ -559,13 +606,6 @@ class WebhookTracking implements JsonSerializable
         }
 
         $this->fields['initiatedTime'] = $initiatedTime;
-
-        return $this;
-    }
-
-    private function setEventType(null|string $eventType): static
-    {
-        $this->fields['eventType'] = $eventType;
 
         return $this;
     }
