@@ -25,6 +25,9 @@ class ProofOfCreditFileKycDocumentDocumentMatches implements JsonSerializable
         if (array_key_exists('data', $data)) {
             $this->setData($data['data']);
         }
+        if (array_key_exists('checkList', $data)) {
+            $this->setCheckList($data['checkList']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -48,11 +51,42 @@ class ProofOfCreditFileKycDocumentDocumentMatches implements JsonSerializable
         return $this;
     }
 
+    /**
+     * @return null|KycDocumentCheck[]
+     */
+    public function getCheckList(): ?array
+    {
+        return $this->fields['checkList'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|KycDocumentCheck[] $checkList
+     */
+    public function setCheckList(null|array $checkList): static
+    {
+        $checkList = $checkList !== null ? array_map(
+            fn ($value) => $value instanceof KycDocumentCheck ? $value : KycDocumentCheck::from($value),
+            $checkList,
+        ) : null;
+
+        $this->fields['checkList'] = $checkList;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
         if (array_key_exists('data', $this->fields)) {
             $data['data'] = $this->fields['data']?->jsonSerialize();
+        }
+        if (array_key_exists('checkList', $this->fields)) {
+            $data['checkList'] = $this->fields['checkList'] !== null
+                ? array_map(
+                    static fn (KycDocumentCheck $kycDocumentCheck) => $kycDocumentCheck->jsonSerialize(),
+                    $this->fields['checkList'],
+                )
+                : null;
         }
 
         return $data;

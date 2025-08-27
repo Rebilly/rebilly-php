@@ -25,6 +25,9 @@ class ProofOfIdentityKycDocumentDocumentMatches implements JsonSerializable
         if (array_key_exists('score', $data)) {
             $this->setScore($data['score']);
         }
+        if (array_key_exists('checkList', $data)) {
+            $this->setCheckList($data['checkList']);
+        }
         if (array_key_exists('data', $data)) {
             $this->setData($data['data']);
         }
@@ -35,18 +38,37 @@ class ProofOfIdentityKycDocumentDocumentMatches implements JsonSerializable
         return new self($data);
     }
 
-    public function getScore(): ?float
+    public function getScore(): ?int
     {
         return $this->fields['score'] ?? null;
     }
 
-    public function setScore(null|float|string $score): static
+    public function setScore(null|int $score): static
     {
-        if (is_string($score)) {
-            $score = (float) $score;
-        }
-
         $this->fields['score'] = $score;
+
+        return $this;
+    }
+
+    /**
+     * @return null|KycDocumentCheck[]
+     */
+    public function getCheckList(): ?array
+    {
+        return $this->fields['checkList'] ?? null;
+    }
+
+    /**
+     * @param null|array[]|KycDocumentCheck[] $checkList
+     */
+    public function setCheckList(null|array $checkList): static
+    {
+        $checkList = $checkList !== null ? array_map(
+            fn ($value) => $value instanceof KycDocumentCheck ? $value : KycDocumentCheck::from($value),
+            $checkList,
+        ) : null;
+
+        $this->fields['checkList'] = $checkList;
 
         return $this;
     }
@@ -72,6 +94,14 @@ class ProofOfIdentityKycDocumentDocumentMatches implements JsonSerializable
         $data = [];
         if (array_key_exists('score', $this->fields)) {
             $data['score'] = $this->fields['score'];
+        }
+        if (array_key_exists('checkList', $this->fields)) {
+            $data['checkList'] = $this->fields['checkList'] !== null
+                ? array_map(
+                    static fn (KycDocumentCheck $kycDocumentCheck) => $kycDocumentCheck->jsonSerialize(),
+                    $this->fields['checkList'],
+                )
+                : null;
         }
         if (array_key_exists('data', $this->fields)) {
             $data['data'] = $this->fields['data']?->jsonSerialize();

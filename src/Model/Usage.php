@@ -30,9 +30,6 @@ class Usage implements JsonSerializable
         if (array_key_exists('subscriptionId', $data)) {
             $this->setSubscriptionId($data['subscriptionId']);
         }
-        if (array_key_exists('planId', $data)) {
-            $this->setPlanId($data['planId']);
-        }
         if (array_key_exists('invoiceId', $data)) {
             $this->setInvoiceId($data['invoiceId']);
         }
@@ -77,18 +74,6 @@ class Usage implements JsonSerializable
     public function setSubscriptionId(string $subscriptionId): static
     {
         $this->fields['subscriptionId'] = $subscriptionId;
-
-        return $this;
-    }
-
-    public function getPlanId(): string
-    {
-        return $this->fields['planId'];
-    }
-
-    public function setPlanId(string $planId): static
-    {
-        $this->fields['planId'] = $planId;
 
         return $this;
     }
@@ -173,9 +158,6 @@ class Usage implements JsonSerializable
         }
         if (array_key_exists('subscriptionId', $this->fields)) {
             $data['subscriptionId'] = $this->fields['subscriptionId'];
-        }
-        if (array_key_exists('planId', $this->fields)) {
-            $data['planId'] = $this->fields['planId'];
         }
         if (array_key_exists('invoiceId', $this->fields)) {
             $data['invoiceId'] = $this->fields['invoiceId'];

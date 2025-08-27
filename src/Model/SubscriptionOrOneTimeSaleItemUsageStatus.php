@@ -28,6 +28,9 @@ class SubscriptionOrOneTimeSaleItemUsageStatus implements JsonSerializable
         if (array_key_exists('isHardLimitReached', $data)) {
             $this->setIsHardLimitReached($data['isHardLimitReached']);
         }
+        if (array_key_exists('isTrialLimitReached', $data)) {
+            $this->setIsTrialLimitReached($data['isTrialLimitReached']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -59,6 +62,18 @@ class SubscriptionOrOneTimeSaleItemUsageStatus implements JsonSerializable
         return $this;
     }
 
+    public function getIsTrialLimitReached(): ?bool
+    {
+        return $this->fields['isTrialLimitReached'] ?? null;
+    }
+
+    public function setIsTrialLimitReached(null|bool $isTrialLimitReached): static
+    {
+        $this->fields['isTrialLimitReached'] = $isTrialLimitReached;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -67,6 +82,9 @@ class SubscriptionOrOneTimeSaleItemUsageStatus implements JsonSerializable
         }
         if (array_key_exists('isHardLimitReached', $this->fields)) {
             $data['isHardLimitReached'] = $this->fields['isHardLimitReached'];
+        }
+        if (array_key_exists('isTrialLimitReached', $this->fields)) {
+            $data['isTrialLimitReached'] = $this->fields['isTrialLimitReached'];
         }
 
         return $data;

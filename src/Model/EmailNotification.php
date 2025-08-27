@@ -204,6 +204,8 @@ class EmailNotification implements JsonSerializable
 
     public const EVENT_TYPE_TRANSACTION_PROCESSED = 'transaction-processed';
 
+    public const EVENT_TYPE_TRIAL_USAGE_LIMIT_REACHED = 'trial-usage-limit-reached';
+
     public const EVENT_TYPE_ORDER_DELINQUENCY_REACHED = 'order-delinquency-reached';
 
     public const EVENT_TYPE_AUTODEPOSIT_LOOKUP_PERFORMED = 'autodeposit-lookup-performed';
