@@ -20,10 +20,10 @@ use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\Invoice;
 use Rebilly\Sdk\Model\InvoiceIssue;
+use Rebilly\Sdk\Model\OrderItemUpdate;
 use Rebilly\Sdk\Model\OrderTimeline;
 use Rebilly\Sdk\Model\SubscriptionChange;
 use Rebilly\Sdk\Model\SubscriptionInvoice;
-use Rebilly\Sdk\Model\SubscriptionItemUpdate;
 use Rebilly\Sdk\Model\SubscriptionOrOneTimeSale;
 use Rebilly\Sdk\Model\SubscriptionOrOneTimeSaleFactory;
 use Rebilly\Sdk\Model\SubscriptionOrOneTimeSaleItem;
@@ -442,7 +442,7 @@ class SubscriptionsApi
     public function updateItem(
         string $id,
         string $itemId,
-        SubscriptionItemUpdate $subscriptionItemUpdate,
+        OrderItemUpdate $orderItemUpdate,
     ): SubscriptionOrOneTimeSaleItem {
         $pathParams = [
             '{id}' => $id,
@@ -453,7 +453,7 @@ class SubscriptionsApi
 
         $request = new Request('PATCH', $uri, headers: [
             'Accept' => 'application/json',
-        ], body: Utils::jsonEncode($subscriptionItemUpdate));
+        ], body: Utils::jsonEncode($orderItemUpdate));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

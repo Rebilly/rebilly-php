@@ -28,6 +28,12 @@ class OrganizationSettingsBilling implements JsonSerializable
         if (array_key_exists('orderDelinquencyPeriod', $data)) {
             $this->setOrderDelinquencyPeriod($data['orderDelinquencyPeriod']);
         }
+        if (array_key_exists('subtractRecurringDiscountsFromMrr', $data)) {
+            $this->setSubtractRecurringDiscountsFromMrr($data['subtractRecurringDiscountsFromMrr']);
+        }
+        if (array_key_exists('subtractOneTimeDiscountsFromMrr', $data)) {
+            $this->setSubtractOneTimeDiscountsFromMrr($data['subtractOneTimeDiscountsFromMrr']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -59,6 +65,30 @@ class OrganizationSettingsBilling implements JsonSerializable
         return $this;
     }
 
+    public function getSubtractRecurringDiscountsFromMrr(): ?bool
+    {
+        return $this->fields['subtractRecurringDiscountsFromMrr'] ?? null;
+    }
+
+    public function setSubtractRecurringDiscountsFromMrr(null|bool $subtractRecurringDiscountsFromMrr): static
+    {
+        $this->fields['subtractRecurringDiscountsFromMrr'] = $subtractRecurringDiscountsFromMrr;
+
+        return $this;
+    }
+
+    public function getSubtractOneTimeDiscountsFromMrr(): ?bool
+    {
+        return $this->fields['subtractOneTimeDiscountsFromMrr'] ?? null;
+    }
+
+    public function setSubtractOneTimeDiscountsFromMrr(null|bool $subtractOneTimeDiscountsFromMrr): static
+    {
+        $this->fields['subtractOneTimeDiscountsFromMrr'] = $subtractOneTimeDiscountsFromMrr;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -67,6 +97,12 @@ class OrganizationSettingsBilling implements JsonSerializable
         }
         if (array_key_exists('orderDelinquencyPeriod', $this->fields)) {
             $data['orderDelinquencyPeriod'] = $this->fields['orderDelinquencyPeriod'];
+        }
+        if (array_key_exists('subtractRecurringDiscountsFromMrr', $this->fields)) {
+            $data['subtractRecurringDiscountsFromMrr'] = $this->fields['subtractRecurringDiscountsFromMrr'];
+        }
+        if (array_key_exists('subtractOneTimeDiscountsFromMrr', $this->fields)) {
+            $data['subtractOneTimeDiscountsFromMrr'] = $this->fields['subtractOneTimeDiscountsFromMrr'];
         }
 
         return $data;

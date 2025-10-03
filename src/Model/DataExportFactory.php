@@ -27,7 +27,6 @@ class DataExportFactory
             'invoiceItems' => InvoiceItemsDataExport::from($data),
             'invoices' => InvoicesDataExport::from($data),
             'journalRecords' => JournalRecordsDataExport::from($data),
-            'revenueAudit' => RevenueAuditDataExport::from($data),
             'subscriptions' => SubscriptionsDataExport::from($data),
             'transactions' => TransactionsDataExport::from($data),
             default => throw new UnknownDiscriminatorValueException(),

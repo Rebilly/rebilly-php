@@ -59,6 +59,9 @@ class OAuth2Credential implements ServiceCredential
         if (array_key_exists('refreshToken', $data)) {
             $this->setRefreshToken($data['refreshToken']);
         }
+        if (array_key_exists('expirationTime', $data)) {
+            $this->setExpirationTime($data['expirationTime']);
+        }
         if (array_key_exists('scopes', $data)) {
             $this->setScopes($data['scopes']);
         }
@@ -131,6 +134,11 @@ class OAuth2Credential implements ServiceCredential
         return $this->fields['refreshToken'] ?? null;
     }
 
+    public function getExpirationTime(): ?DateTimeImmutable
+    {
+        return $this->fields['expirationTime'] ?? null;
+    }
+
     /**
      * @return string[]
      */
@@ -185,6 +193,9 @@ class OAuth2Credential implements ServiceCredential
         }
         if (array_key_exists('refreshToken', $this->fields)) {
             $data['refreshToken'] = $this->fields['refreshToken'];
+        }
+        if (array_key_exists('expirationTime', $this->fields)) {
+            $data['expirationTime'] = $this->fields['expirationTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('scopes', $this->fields)) {
             $data['scopes'] = $this->fields['scopes'];
@@ -243,6 +254,17 @@ class OAuth2Credential implements ServiceCredential
     private function setRefreshToken(null|string $refreshToken): static
     {
         $this->fields['refreshToken'] = $refreshToken;
+
+        return $this;
+    }
+
+    private function setExpirationTime(null|DateTimeImmutable|string $expirationTime): static
+    {
+        if ($expirationTime !== null && !($expirationTime instanceof DateTimeImmutable)) {
+            $expirationTime = new DateTimeImmutable($expirationTime);
+        }
+
+        $this->fields['expirationTime'] = $expirationTime;
 
         return $this;
     }

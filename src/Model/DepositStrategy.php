@@ -39,6 +39,12 @@ class DepositStrategy implements JsonSerializable
         if (array_key_exists('customAmount', $data)) {
             $this->setCustomAmount($data['customAmount']);
         }
+        if (array_key_exists('priority', $data)) {
+            $this->setPriority($data['priority']);
+        }
+        if (array_key_exists('isActive', $data)) {
+            $this->setIsActive($data['isActive']);
+        }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
         }
@@ -116,6 +122,30 @@ class DepositStrategy implements JsonSerializable
         return $this;
     }
 
+    public function getPriority(): ?int
+    {
+        return $this->fields['priority'] ?? null;
+    }
+
+    public function setPriority(null|int $priority): static
+    {
+        $this->fields['priority'] = $priority;
+
+        return $this;
+    }
+
+    public function getIsActive(): ?bool
+    {
+        return $this->fields['isActive'] ?? null;
+    }
+
+    public function setIsActive(null|bool $isActive): static
+    {
+        $this->fields['isActive'] = $isActive;
+
+        return $this;
+    }
+
     public function getCreatedTime(): ?DateTimeImmutable
     {
         return $this->fields['createdTime'] ?? null;
@@ -151,6 +181,12 @@ class DepositStrategy implements JsonSerializable
         }
         if (array_key_exists('customAmount', $this->fields)) {
             $data['customAmount'] = $this->fields['customAmount']->jsonSerialize();
+        }
+        if (array_key_exists('priority', $this->fields)) {
+            $data['priority'] = $this->fields['priority'];
+        }
+        if (array_key_exists('isActive', $this->fields)) {
+            $data['isActive'] = $this->fields['isActive'];
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);

@@ -20,7 +20,7 @@ class IpayOptionsSettings implements JsonSerializable
 {
     public const SUBDOMAIN_MIGLITE = 'miglite';
 
-    public const SUBDOMAIN_W88ASIAPAY = 'w88asiapay';
+    public const SUBDOMAIN_W88_ASIAPAY = 'w88asiapay';
 
     public const PLATFORM_SOAP = 'SOAP';
 

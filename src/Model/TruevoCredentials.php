@@ -43,6 +43,9 @@ class TruevoCredentials implements JsonSerializable
         if (array_key_exists('sftpKeyPassphrase', $data)) {
             $this->setSftpKeyPassphrase($data['sftpKeyPassphrase']);
         }
+        if (array_key_exists('ipnSecret', $data)) {
+            $this->setIpnSecret($data['ipnSecret']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -134,6 +137,18 @@ class TruevoCredentials implements JsonSerializable
         return $this;
     }
 
+    public function getIpnSecret(): ?string
+    {
+        return $this->fields['ipnSecret'] ?? null;
+    }
+
+    public function setIpnSecret(null|string $ipnSecret): static
+    {
+        $this->fields['ipnSecret'] = $ipnSecret;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -157,6 +172,9 @@ class TruevoCredentials implements JsonSerializable
         }
         if (array_key_exists('sftpKeyPassphrase', $this->fields)) {
             $data['sftpKeyPassphrase'] = $this->fields['sftpKeyPassphrase'];
+        }
+        if (array_key_exists('ipnSecret', $this->fields)) {
+            $data['ipnSecret'] = $this->fields['ipnSecret'];
         }
 
         return $data;

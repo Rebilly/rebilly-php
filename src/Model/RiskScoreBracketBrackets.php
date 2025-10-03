@@ -16,77 +16,17 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class RiskScoreBracketBrackets implements JsonSerializable
+interface RiskScoreBracketBrackets extends JsonSerializable
 {
-    private array $fields = [];
+    public function getStart(): ?int;
 
-    public function __construct(array $data = [])
-    {
-        if (array_key_exists('start', $data)) {
-            $this->setStart($data['start']);
-        }
-        if (array_key_exists('end', $data)) {
-            $this->setEnd($data['end']);
-        }
-        if (array_key_exists('value', $data)) {
-            $this->setValue($data['value']);
-        }
-    }
+    public function setStart(null|int $start): static;
 
-    public static function from(array $data = []): self
-    {
-        return new self($data);
-    }
+    public function getEnd(): ?int;
 
-    public function getStart(): int
-    {
-        return $this->fields['start'];
-    }
+    public function setEnd(null|int $end): static;
 
-    public function setStart(int $start): static
-    {
-        $this->fields['start'] = $start;
+    public function getValue(): ?int;
 
-        return $this;
-    }
-
-    public function getEnd(): int
-    {
-        return $this->fields['end'];
-    }
-
-    public function setEnd(int $end): static
-    {
-        $this->fields['end'] = $end;
-
-        return $this;
-    }
-
-    public function getValue(): int
-    {
-        return $this->fields['value'];
-    }
-
-    public function setValue(int $value): static
-    {
-        $this->fields['value'] = $value;
-
-        return $this;
-    }
-
-    public function jsonSerialize(): array
-    {
-        $data = [];
-        if (array_key_exists('start', $this->fields)) {
-            $data['start'] = $this->fields['start'];
-        }
-        if (array_key_exists('end', $this->fields)) {
-            $data['end'] = $this->fields['end'];
-        }
-        if (array_key_exists('value', $this->fields)) {
-            $data['value'] = $this->fields['value'];
-        }
-
-        return $data;
-    }
+    public function setValue(null|int $value): static;
 }

@@ -26,6 +26,8 @@ class GetPayoutRequestPaymentInstrumentsResponse implements JsonSerializable
 
     public const GATEWAY_NAME_ADYEN = 'Adyen';
 
+    public const GATEWAY_NAME_AERA = 'Aera';
+
     public const GATEWAY_NAME_AIRCASH = 'Aircash';
 
     public const GATEWAY_NAME_AIRPAY = 'Airpay';
@@ -128,6 +130,8 @@ class GetPayoutRequestPaymentInstrumentsResponse implements JsonSerializable
 
     public const GATEWAY_NAME_ECO_PAYZ = 'ecoPayz';
 
+    public const GATEWAY_NAME_ECO_PAYZ_TURKEY = 'ecoPayzTurkey';
+
     public const GATEWAY_NAME_ECORE_PAY = 'EcorePay';
 
     public const GATEWAY_NAME_ELAVON = 'Elavon';
@@ -162,7 +166,7 @@ class GetPayoutRequestPaymentInstrumentsResponse implements JsonSerializable
 
     public const GATEWAY_NAME_FORTE = 'Forte';
 
-    public const GATEWAY_NAME_GATE2WAY = 'gate2way';
+    public const GATEWAY_NAME_GATE2_WAY = 'gate2way';
 
     public const GATEWAY_NAME_GET = 'GET';
 

@@ -142,15 +142,15 @@ class SubscriptionOrOneTimeSaleItem implements JsonSerializable
         return $this;
     }
 
-    public function getUsageStatus(): ?SubscriptionOrOneTimeSaleItemUsageStatus
+    public function getUsageStatus(): ?UsageStatus
     {
         return $this->fields['usageStatus'] ?? null;
     }
 
-    public function setUsageStatus(null|SubscriptionOrOneTimeSaleItemUsageStatus|array $usageStatus): static
+    public function setUsageStatus(null|UsageStatus|array $usageStatus): static
     {
-        if ($usageStatus !== null && !($usageStatus instanceof SubscriptionOrOneTimeSaleItemUsageStatus)) {
-            $usageStatus = SubscriptionOrOneTimeSaleItemUsageStatus::from($usageStatus);
+        if ($usageStatus !== null && !($usageStatus instanceof UsageStatus)) {
+            $usageStatus = UsageStatus::from($usageStatus);
         }
 
         $this->fields['usageStatus'] = $usageStatus;

@@ -18,7 +18,7 @@ use JsonSerializable;
 
 class IlixiumThreeDSecureServer implements JsonSerializable
 {
-    public const NAME_ILIXIUM3DS_SERVER = 'Ilixium3dsServer';
+    public const NAME_ILIXIUM3_DS_SERVER = 'Ilixium3dsServer';
 
     private array $fields = [];
 

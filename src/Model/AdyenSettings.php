@@ -37,6 +37,9 @@ class AdyenSettings implements JsonSerializable
         if (array_key_exists('enableMoto', $data)) {
             $this->setEnableMoto($data['enableMoto']);
         }
+        if (array_key_exists('riskProfile', $data)) {
+            $this->setRiskProfile($data['riskProfile']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -119,6 +122,18 @@ class AdyenSettings implements JsonSerializable
         return $this;
     }
 
+    public function getRiskProfile(): ?string
+    {
+        return $this->fields['riskProfile'] ?? null;
+    }
+
+    public function setRiskProfile(null|string $riskProfile): static
+    {
+        $this->fields['riskProfile'] = $riskProfile;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -141,6 +156,9 @@ class AdyenSettings implements JsonSerializable
         }
         if (array_key_exists('enableMoto', $this->fields)) {
             $data['enableMoto'] = $this->fields['enableMoto'];
+        }
+        if (array_key_exists('riskProfile', $this->fields)) {
+            $data['riskProfile'] = $this->fields['riskProfile'];
         }
 
         return $data;

@@ -85,6 +85,9 @@ class RiskScoreRules implements JsonSerializable
         if (array_key_exists('paymentInstrumentApprovedTransactionCount', $data)) {
             $this->setPaymentInstrumentApprovedTransactionCount($data['paymentInstrumentApprovedTransactionCount']);
         }
+        if (array_key_exists('customerVelocity', $data)) {
+            $this->setCustomerVelocity($data['customerVelocity']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -428,6 +431,22 @@ class RiskScoreRules implements JsonSerializable
         return $this;
     }
 
+    public function getCustomerVelocity(): RiskScoreBracket
+    {
+        return $this->fields['customerVelocity'];
+    }
+
+    public function setCustomerVelocity(RiskScoreBracket|array $customerVelocity): static
+    {
+        if (!($customerVelocity instanceof RiskScoreBracket)) {
+            $customerVelocity = RiskScoreBracket::from($customerVelocity);
+        }
+
+        $this->fields['customerVelocity'] = $customerVelocity;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -493,6 +512,9 @@ class RiskScoreRules implements JsonSerializable
         }
         if (array_key_exists('paymentInstrumentApprovedTransactionCount', $this->fields)) {
             $data['paymentInstrumentApprovedTransactionCount'] = $this->fields['paymentInstrumentApprovedTransactionCount']->jsonSerialize();
+        }
+        if (array_key_exists('customerVelocity', $this->fields)) {
+            $data['customerVelocity'] = $this->fields['customerVelocity']->jsonSerialize();
         }
 
         return $data;

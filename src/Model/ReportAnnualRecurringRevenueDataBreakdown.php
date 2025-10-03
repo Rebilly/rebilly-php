@@ -22,6 +22,9 @@ class ReportAnnualRecurringRevenueDataBreakdown implements JsonSerializable
 
     public function __construct(array $data = [])
     {
+        if (array_key_exists('change', $data)) {
+            $this->setChange($data['change']);
+        }
         if (array_key_exists('new', $data)) {
             $this->setNew($data['new']);
         }
@@ -42,6 +45,22 @@ class ReportAnnualRecurringRevenueDataBreakdown implements JsonSerializable
     public static function from(array $data = []): self
     {
         return new self($data);
+    }
+
+    public function getChange(): ?float
+    {
+        return $this->fields['change'] ?? null;
+    }
+
+    public function setChange(null|float|string $change): static
+    {
+        if (is_string($change)) {
+            $change = (float) $change;
+        }
+
+        $this->fields['change'] = $change;
+
+        return $this;
     }
 
     public function getNew(): ?float
@@ -127,6 +146,9 @@ class ReportAnnualRecurringRevenueDataBreakdown implements JsonSerializable
     public function jsonSerialize(): array
     {
         $data = [];
+        if (array_key_exists('change', $this->fields)) {
+            $data['change'] = $this->fields['change'];
+        }
         if (array_key_exists('new', $this->fields)) {
             $data['new'] = $this->fields['new'];
         }

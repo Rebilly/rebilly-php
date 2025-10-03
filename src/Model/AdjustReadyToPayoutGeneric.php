@@ -22,6 +22,8 @@ class AdjustReadyToPayoutGeneric implements AdjustReadyToPayoutPaymentMethod
 
     public const PAYMENT_METHOD_ADV_CASH = 'AdvCash';
 
+    public const PAYMENT_METHOD_AERA = 'Aera';
+
     public const PAYMENT_METHOD_AFFIRM = 'Affirm';
 
     public const PAYMENT_METHOD_AFTERPAY = 'Afterpay';
@@ -40,21 +42,21 @@ class AdjustReadyToPayoutGeneric implements AdjustReadyToPayoutPaymentMethod
 
     public const PAYMENT_METHOD_BANK_TRANSFER = 'bank-transfer';
 
-    public const PAYMENT_METHOD_BANK_TRANSFER_2 = 'bank-transfer-2';
+    public const PAYMENT_METHOD_BANK_TRANSFER2 = 'bank-transfer-2';
 
-    public const PAYMENT_METHOD_BANK_TRANSFER_3 = 'bank-transfer-3';
+    public const PAYMENT_METHOD_BANK_TRANSFER3 = 'bank-transfer-3';
 
-    public const PAYMENT_METHOD_BANK_TRANSFER_4 = 'bank-transfer-4';
+    public const PAYMENT_METHOD_BANK_TRANSFER4 = 'bank-transfer-4';
 
-    public const PAYMENT_METHOD_BANK_TRANSFER_5 = 'bank-transfer-5';
+    public const PAYMENT_METHOD_BANK_TRANSFER5 = 'bank-transfer-5';
 
-    public const PAYMENT_METHOD_BANK_TRANSFER_6 = 'bank-transfer-6';
+    public const PAYMENT_METHOD_BANK_TRANSFER6 = 'bank-transfer-6';
 
-    public const PAYMENT_METHOD_BANK_TRANSFER_7 = 'bank-transfer-7';
+    public const PAYMENT_METHOD_BANK_TRANSFER7 = 'bank-transfer-7';
 
-    public const PAYMENT_METHOD_BANK_TRANSFER_8 = 'bank-transfer-8';
+    public const PAYMENT_METHOD_BANK_TRANSFER8 = 'bank-transfer-8';
 
-    public const PAYMENT_METHOD_BANK_TRANSFER_9 = 'bank-transfer-9';
+    public const PAYMENT_METHOD_BANK_TRANSFER9 = 'bank-transfer-9';
 
     public const PAYMENT_METHOD_BALOTO = 'Baloto';
 
@@ -93,6 +95,8 @@ class AdjustReadyToPayoutGeneric implements AdjustReadyToPayoutPaymentMethod
     public const PAYMENT_METHOD_DIRECTA24_CARD = 'Directa24Card';
 
     public const PAYMENT_METHOD_ECO_PAYZ = 'ecoPayz';
+
+    public const PAYMENT_METHOD_ECO_PAYZ_TURKEY = 'ecoPayzTurkey';
 
     public const PAYMENT_METHOD_ECO_VOUCHER = 'ecoVoucher';
 
@@ -292,11 +296,11 @@ class AdjustReadyToPayoutGeneric implements AdjustReadyToPayoutPaymentMethod
 
     public const PAYMENT_METHOD_VOUCHER = 'voucher';
 
-    public const PAYMENT_METHOD_VOUCHER_2 = 'voucher-2';
+    public const PAYMENT_METHOD_VOUCHER2 = 'voucher-2';
 
-    public const PAYMENT_METHOD_VOUCHER_3 = 'voucher-3';
+    public const PAYMENT_METHOD_VOUCHER3 = 'voucher-3';
 
-    public const PAYMENT_METHOD_VOUCHER_4 = 'voucher-4';
+    public const PAYMENT_METHOD_VOUCHER4 = 'voucher-4';
 
     public const PAYMENT_METHOD_WALLET88 = 'Wallet88';
 
@@ -304,7 +308,7 @@ class AdjustReadyToPayoutGeneric implements AdjustReadyToPayoutPaymentMethod
 
     public const PAYMENT_METHOD_WEBPAY = 'Webpay';
 
-    public const PAYMENT_METHOD_WEBPAY_2 = 'Webpay-2';
+    public const PAYMENT_METHOD_WEBPAY2 = 'Webpay-2';
 
     public const PAYMENT_METHOD_WEBPAY_CARD = 'Webpay Card';
 

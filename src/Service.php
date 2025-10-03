@@ -76,6 +76,14 @@ class Service
 
     private Api\ShippingRatesApi $shippingRates;
 
+    private Api\OrdersApi $orders;
+
+    private Api\OrderPausesApi $orderPauses;
+
+    private Api\OrderCancellationsApi $orderCancellations;
+
+    private Api\OrderReactivationsApi $orderReactivations;
+
     private Api\SubscriptionsApi $subscriptions;
 
     private Api\SubscriptionPausesApi $subscriptionPauses;
@@ -180,7 +188,7 @@ class Service
 
     private Api\TagsRulesApi $tagsRules;
 
-    public function __construct(Client $client = null, array $config = [])
+    public function __construct(?Client $client = null, array $config = [])
     {
         $this->client = $client ?? new Client($config);
         $this->amlChecks = new Api\AmlChecksApi($this->client);
@@ -211,6 +219,10 @@ class Service
         $this->purchase = new Api\PurchaseApi($this->client);
         $this->search = new Api\SearchApi($this->client);
         $this->shippingRates = new Api\ShippingRatesApi($this->client);
+        $this->orders = new Api\OrdersApi($this->client);
+        $this->orderPauses = new Api\OrderPausesApi($this->client);
+        $this->orderCancellations = new Api\OrderCancellationsApi($this->client);
+        $this->orderReactivations = new Api\OrderReactivationsApi($this->client);
         $this->subscriptions = new Api\SubscriptionsApi($this->client);
         $this->subscriptionPauses = new Api\SubscriptionPausesApi($this->client);
         $this->subscriptionCancellations = new Api\SubscriptionCancellationsApi($this->client);
@@ -408,6 +420,26 @@ class Service
     public function shippingRates(): Api\ShippingRatesApi
     {
         return $this->shippingRates;
+    }
+
+    public function orders(): Api\OrdersApi
+    {
+        return $this->orders;
+    }
+
+    public function orderPauses(): Api\OrderPausesApi
+    {
+        return $this->orderPauses;
+    }
+
+    public function orderCancellations(): Api\OrderCancellationsApi
+    {
+        return $this->orderCancellations;
+    }
+
+    public function orderReactivations(): Api\OrderReactivationsApi
+    {
+        return $this->orderReactivations;
     }
 
     public function subscriptions(): Api\SubscriptionsApi

@@ -28,6 +28,9 @@ class JournalSummaryReportDataBreakdown implements JsonSerializable
         if (array_key_exists('recognizedAmount', $data)) {
             $this->setRecognizedAmount($data['recognizedAmount']);
         }
+        if (array_key_exists('estimatedAmount', $data)) {
+            $this->setEstimatedAmount($data['estimatedAmount']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -63,6 +66,22 @@ class JournalSummaryReportDataBreakdown implements JsonSerializable
         return $this;
     }
 
+    public function getEstimatedAmount(): ?float
+    {
+        return $this->fields['estimatedAmount'] ?? null;
+    }
+
+    public function setEstimatedAmount(null|float|string $estimatedAmount): static
+    {
+        if (is_string($estimatedAmount)) {
+            $estimatedAmount = (float) $estimatedAmount;
+        }
+
+        $this->fields['estimatedAmount'] = $estimatedAmount;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -71,6 +90,9 @@ class JournalSummaryReportDataBreakdown implements JsonSerializable
         }
         if (array_key_exists('recognizedAmount', $this->fields)) {
             $data['recognizedAmount'] = $this->fields['recognizedAmount'];
+        }
+        if (array_key_exists('estimatedAmount', $this->fields)) {
+            $data['estimatedAmount'] = $this->fields['estimatedAmount'];
         }
 
         return $data;

@@ -22,12 +22,19 @@ class JournalSummaryReport implements JsonSerializable
 
     public const AGGREGATION_FIELD_DEBIT_ACCOUNT_ID = 'journalRecord.debitAccountId';
 
+    public const AMOUNT_FIELD_ESTIMATED_AMOUNT = 'journalRecord.estimatedAmount';
+
+    public const AMOUNT_FIELD_RECOGNIZED_AMOUNT = 'journalRecord.recognizedAmount';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
         if (array_key_exists('aggregationField', $data)) {
             $this->setAggregationField($data['aggregationField']);
+        }
+        if (array_key_exists('amountField', $data)) {
+            $this->setAmountField($data['amountField']);
         }
         if (array_key_exists('currency', $data)) {
             $this->setCurrency($data['currency']);
@@ -59,6 +66,18 @@ class JournalSummaryReport implements JsonSerializable
     public function setAggregationField(null|string $aggregationField): static
     {
         $this->fields['aggregationField'] = $aggregationField;
+
+        return $this;
+    }
+
+    public function getAmountField(): ?string
+    {
+        return $this->fields['amountField'] ?? null;
+    }
+
+    public function setAmountField(null|string $amountField): static
+    {
+        $this->fields['amountField'] = $amountField;
 
         return $this;
     }
@@ -139,6 +158,9 @@ class JournalSummaryReport implements JsonSerializable
         $data = [];
         if (array_key_exists('aggregationField', $this->fields)) {
             $data['aggregationField'] = $this->fields['aggregationField'];
+        }
+        if (array_key_exists('amountField', $this->fields)) {
+            $data['amountField'] = $this->fields['amountField'];
         }
         if (array_key_exists('currency', $this->fields)) {
             $data['currency'] = $this->fields['currency'];

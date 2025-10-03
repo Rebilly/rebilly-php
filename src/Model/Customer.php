@@ -45,6 +45,9 @@ class Customer implements JsonSerializable
         if (array_key_exists('defaultPaymentInstrument', $data)) {
             $this->setDefaultPaymentInstrument($data['defaultPaymentInstrument']);
         }
+        if (array_key_exists('preferredPayoutInstrumentId', $data)) {
+            $this->setPreferredPayoutInstrumentId($data['preferredPayoutInstrumentId']);
+        }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
         }
@@ -95,6 +98,9 @@ class Customer implements JsonSerializable
         }
         if (array_key_exists('taxNumbers', $data)) {
             $this->setTaxNumbers($data['taxNumbers']);
+        }
+        if (array_key_exists('leadSource', $data)) {
+            $this->setLeadSource($data['leadSource']);
         }
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
@@ -165,6 +171,18 @@ class Customer implements JsonSerializable
         }
 
         $this->fields['defaultPaymentInstrument'] = $defaultPaymentInstrument;
+
+        return $this;
+    }
+
+    public function getPreferredPayoutInstrumentId(): ?string
+    {
+        return $this->fields['preferredPayoutInstrumentId'] ?? null;
+    }
+
+    public function setPreferredPayoutInstrumentId(null|string $preferredPayoutInstrumentId): static
+    {
+        $this->fields['preferredPayoutInstrumentId'] = $preferredPayoutInstrumentId;
 
         return $this;
     }
@@ -340,6 +358,22 @@ class Customer implements JsonSerializable
         return $this;
     }
 
+    public function getLeadSource(): ?LeadSourceData
+    {
+        return $this->fields['leadSource'] ?? null;
+    }
+
+    public function setLeadSource(null|LeadSourceData|array $leadSource): static
+    {
+        if ($leadSource !== null && !($leadSource instanceof LeadSourceData)) {
+            $leadSource = LeadSourceData::from($leadSource);
+        }
+
+        $this->fields['leadSource'] = $leadSource;
+
+        return $this;
+    }
+
     /**
      * @return null|ResourceLink[]
      */
@@ -387,6 +421,9 @@ class Customer implements JsonSerializable
         }
         if (array_key_exists('defaultPaymentInstrument', $this->fields)) {
             $data['defaultPaymentInstrument'] = $this->fields['defaultPaymentInstrument']?->jsonSerialize();
+        }
+        if (array_key_exists('preferredPayoutInstrumentId', $this->fields)) {
+            $data['preferredPayoutInstrumentId'] = $this->fields['preferredPayoutInstrumentId'];
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
@@ -448,6 +485,9 @@ class Customer implements JsonSerializable
                     $this->fields['taxNumbers'],
                 )
                 : null;
+        }
+        if (array_key_exists('leadSource', $this->fields)) {
+            $data['leadSource'] = $this->fields['leadSource']?->jsonSerialize();
         }
         if (array_key_exists('_links', $this->fields)) {
             $data['_links'] = $this->fields['_links'] !== null

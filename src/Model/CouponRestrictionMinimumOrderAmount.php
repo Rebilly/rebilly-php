@@ -38,13 +38,17 @@ class CouponRestrictionMinimumOrderAmount implements RedemptionRestriction, Coup
         return 'minimum-order-amount';
     }
 
-    public function getAmount(): int
+    public function getAmount(): float
     {
         return $this->fields['amount'];
     }
 
-    public function setAmount(int $amount): static
+    public function setAmount(float|string $amount): static
     {
+        if (is_string($amount)) {
+            $amount = (float) $amount;
+        }
+
         $this->fields['amount'] = $amount;
 
         return $this;

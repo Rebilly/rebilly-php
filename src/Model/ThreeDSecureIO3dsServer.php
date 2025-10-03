@@ -18,7 +18,7 @@ use JsonSerializable;
 
 class ThreeDSecureIO3dsServer implements JsonSerializable
 {
-    public const NAME_THREE_D_SECURE_IO3DS_SERVER = 'ThreeDSecureIO3dsServer';
+    public const NAME_THREE_D_SECURE_IO3_DS_SERVER = 'ThreeDSecureIO3dsServer';
 
     public const TRANSACTION_TYPE_01 = '01';
 
@@ -29,28 +29,6 @@ class ThreeDSecureIO3dsServer implements JsonSerializable
     public const TRANSACTION_TYPE_11 = '11';
 
     public const TRANSACTION_TYPE_28 = '28';
-
-    public const THREE_RI_IND_01 = '01';
-
-    public const THREE_RI_IND_02 = '02';
-
-    public const THREE_RI_IND_03 = '03';
-
-    public const THREE_RI_IND_04 = '04';
-
-    public const THREE_RI_IND_05 = '05';
-
-    public const THREE_RI_IND_06 = '06';
-
-    public const THREE_RI_IND_07 = '07';
-
-    public const THREE_RI_IND_08 = '08';
-
-    public const THREE_RI_IND_09 = '09';
-
-    public const THREE_RI_IND_10 = '10';
-
-    public const THREE_RI_IND_11 = '11';
 
     private array $fields = [];
 
@@ -104,11 +82,8 @@ class ThreeDSecureIO3dsServer implements JsonSerializable
         if (array_key_exists('declineNotEnrolled', $data)) {
             $this->setDeclineNotEnrolled($data['declineNotEnrolled']);
         }
-        if (array_key_exists('use3dsForMerchantInitiated', $data)) {
-            $this->setUse3dsForMerchantInitiated($data['use3dsForMerchantInitiated']);
-        }
-        if (array_key_exists('threeRIInd', $data)) {
-            $this->setThreeRIInd($data['threeRIInd']);
+        if (array_key_exists('forceChallenge', $data)) {
+            $this->setForceChallenge($data['forceChallenge']);
         }
     }
 
@@ -309,26 +284,14 @@ class ThreeDSecureIO3dsServer implements JsonSerializable
         return $this;
     }
 
-    public function getUse3dsForMerchantInitiated(): ?bool
+    public function getForceChallenge(): ?bool
     {
-        return $this->fields['use3dsForMerchantInitiated'] ?? null;
+        return $this->fields['forceChallenge'] ?? null;
     }
 
-    public function setUse3dsForMerchantInitiated(null|bool $use3dsForMerchantInitiated): static
+    public function setForceChallenge(null|bool $forceChallenge): static
     {
-        $this->fields['use3dsForMerchantInitiated'] = $use3dsForMerchantInitiated;
-
-        return $this;
-    }
-
-    public function getThreeRIInd(): ?string
-    {
-        return $this->fields['threeRIInd'] ?? null;
-    }
-
-    public function setThreeRIInd(null|string $threeRIInd): static
-    {
-        $this->fields['threeRIInd'] = $threeRIInd;
+        $this->fields['forceChallenge'] = $forceChallenge;
 
         return $this;
     }
@@ -384,11 +347,8 @@ class ThreeDSecureIO3dsServer implements JsonSerializable
         if (array_key_exists('declineNotEnrolled', $this->fields)) {
             $data['declineNotEnrolled'] = $this->fields['declineNotEnrolled'];
         }
-        if (array_key_exists('use3dsForMerchantInitiated', $this->fields)) {
-            $data['use3dsForMerchantInitiated'] = $this->fields['use3dsForMerchantInitiated'];
-        }
-        if (array_key_exists('threeRIInd', $this->fields)) {
-            $data['threeRIInd'] = $this->fields['threeRIInd'];
+        if (array_key_exists('forceChallenge', $this->fields)) {
+            $data['forceChallenge'] = $this->fields['forceChallenge'];
         }
 
         return $data;

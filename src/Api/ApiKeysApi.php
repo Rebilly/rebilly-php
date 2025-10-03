@@ -76,14 +76,16 @@ class ApiKeysApi
      * @return Collection<ApiKey>
      */
     public function getAll(
+        ?string $filter = null,
+        ?array $sort = null,
         ?int $limit = null,
         ?int $offset = null,
-        ?array $sort = null,
     ): Collection {
         $queryParams = [
+            'filter' => $filter,
+            'sort' => $sort ? implode(',', $sort) : null,
             'limit' => $limit,
             'offset' => $offset,
-            'sort' => $sort ? implode(',', $sort) : null,
         ];
         $uri = '/api-keys?' . http_build_query($queryParams);
 
@@ -105,14 +107,16 @@ class ApiKeysApi
      * @return Paginator<ApiKey>
      */
     public function getAllPaginator(
+        ?string $filter = null,
+        ?array $sort = null,
         ?int $limit = null,
         ?int $offset = null,
-        ?array $sort = null,
     ): Paginator {
         $closure = fn (?int $limit, ?int $offset): Collection => $this->getAll(
+            filter: $filter,
+            sort: $sort,
             limit: $limit,
             offset: $offset,
-            sort: $sort,
         );
 
         return new Paginator(
