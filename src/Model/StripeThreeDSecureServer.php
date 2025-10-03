@@ -18,7 +18,7 @@ use JsonSerializable;
 
 class StripeThreeDSecureServer implements JsonSerializable
 {
-    public const NAME_STRIPE3DS_SERVER = 'Stripe3dsServer';
+    public const NAME_STRIPE3_DS_SERVER = 'Stripe3dsServer';
 
     private array $fields = [];
 

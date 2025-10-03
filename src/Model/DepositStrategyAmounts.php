@@ -38,6 +38,9 @@ class DepositStrategyAmounts implements JsonSerializable
         if (array_key_exists('adjustBaseToLastDeposit', $data)) {
             $this->setAdjustBaseToLastDeposit($data['adjustBaseToLastDeposit']);
         }
+        if (array_key_exists('hideBaseAmount', $data)) {
+            $this->setHideBaseAmount($data['hideBaseAmount']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -108,6 +111,18 @@ class DepositStrategyAmounts implements JsonSerializable
         return $this;
     }
 
+    public function getHideBaseAmount(): ?bool
+    {
+        return $this->fields['hideBaseAmount'] ?? null;
+    }
+
+    public function setHideBaseAmount(null|bool $hideBaseAmount): static
+    {
+        $this->fields['hideBaseAmount'] = $hideBaseAmount;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -122,6 +137,9 @@ class DepositStrategyAmounts implements JsonSerializable
         }
         if (array_key_exists('adjustBaseToLastDeposit', $this->fields)) {
             $data['adjustBaseToLastDeposit'] = $this->fields['adjustBaseToLastDeposit'];
+        }
+        if (array_key_exists('hideBaseAmount', $this->fields)) {
+            $data['hideBaseAmount'] = $this->fields['hideBaseAmount'];
         }
 
         return $data;

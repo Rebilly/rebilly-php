@@ -18,16 +18,16 @@ use JsonSerializable;
 
 class AmlCheckReview implements JsonSerializable
 {
-    public const TAG_CONFIRMED = 'aml-match-confirmed';
+    public const STATUS_CONFIRMED_MATCH = 'confirmed-match';
 
-    public const TAG_FALSE_POSITIVE = 'aml-match-false-positive';
+    public const STATUS_FALSE_POSITIVE = 'false-positive';
 
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
-        if (array_key_exists('tag', $data)) {
-            $this->setTag($data['tag']);
+        if (array_key_exists('status', $data)) {
+            $this->setStatus($data['status']);
         }
     }
 
@@ -36,14 +36,14 @@ class AmlCheckReview implements JsonSerializable
         return new self($data);
     }
 
-    public function getTag(): ?string
+    public function getStatus(): ?string
     {
-        return $this->fields['tag'] ?? null;
+        return $this->fields['status'] ?? null;
     }
 
-    public function setTag(null|string $tag): static
+    public function setStatus(null|string $status): static
     {
-        $this->fields['tag'] = $tag;
+        $this->fields['status'] = $status;
 
         return $this;
     }
@@ -51,8 +51,8 @@ class AmlCheckReview implements JsonSerializable
     public function jsonSerialize(): array
     {
         $data = [];
-        if (array_key_exists('tag', $this->fields)) {
-            $data['tag'] = $this->fields['tag'];
+        if (array_key_exists('status', $this->fields)) {
+            $data['status'] = $this->fields['status'];
         }
 
         return $data;

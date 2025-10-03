@@ -28,6 +28,8 @@ class PaymentInstructionMethods implements PaymentInstruction
 
     public const METHODS_ADV_CASH = 'AdvCash';
 
+    public const METHODS_AERA = 'Aera';
+
     public const METHODS_AFFIRM = 'Affirm';
 
     public const METHODS_AFTERPAY = 'Afterpay';
@@ -54,21 +56,21 @@ class PaymentInstructionMethods implements PaymentInstruction
 
     public const METHODS_BANK_TRANSFER = 'bank-transfer';
 
-    public const METHODS_BANK_TRANSFER_2 = 'bank-transfer-2';
+    public const METHODS_BANK_TRANSFER2 = 'bank-transfer-2';
 
-    public const METHODS_BANK_TRANSFER_3 = 'bank-transfer-3';
+    public const METHODS_BANK_TRANSFER3 = 'bank-transfer-3';
 
-    public const METHODS_BANK_TRANSFER_4 = 'bank-transfer-4';
+    public const METHODS_BANK_TRANSFER4 = 'bank-transfer-4';
 
-    public const METHODS_BANK_TRANSFER_5 = 'bank-transfer-5';
+    public const METHODS_BANK_TRANSFER5 = 'bank-transfer-5';
 
-    public const METHODS_BANK_TRANSFER_6 = 'bank-transfer-6';
+    public const METHODS_BANK_TRANSFER6 = 'bank-transfer-6';
 
-    public const METHODS_BANK_TRANSFER_7 = 'bank-transfer-7';
+    public const METHODS_BANK_TRANSFER7 = 'bank-transfer-7';
 
-    public const METHODS_BANK_TRANSFER_8 = 'bank-transfer-8';
+    public const METHODS_BANK_TRANSFER8 = 'bank-transfer-8';
 
-    public const METHODS_BANK_TRANSFER_9 = 'bank-transfer-9';
+    public const METHODS_BANK_TRANSFER9 = 'bank-transfer-9';
 
     public const METHODS_BALOTO = 'Baloto';
 
@@ -84,9 +86,9 @@ class PaymentInstructionMethods implements PaymentInstruction
 
     public const METHODS_BOLETO = 'Boleto';
 
-    public const METHODS_BOLETO_2 = 'Boleto-2';
+    public const METHODS_BOLETO2 = 'Boleto-2';
 
-    public const METHODS_BOLETO_3 = 'Boleto-3';
+    public const METHODS_BOLETO3 = 'Boleto-3';
 
     public const METHODS_CASH_DEPOSIT = 'cash-deposit';
 
@@ -125,6 +127,8 @@ class PaymentInstructionMethods implements PaymentInstruction
     public const METHODS_ECHECK = 'echeck';
 
     public const METHODS_ECO_PAYZ = 'ecoPayz';
+
+    public const METHODS_ECO_PAYZ_TURKEY = 'ecoPayzTurkey';
 
     public const METHODS_ECO_VOUCHER = 'ecoVoucher';
 
@@ -312,6 +316,8 @@ class PaymentInstructionMethods implements PaymentInstruction
 
     public const METHODS_RESURS = 'Resurs';
 
+    public const METHODS_REVERSE_WITHDRAWAL = 'reverse-withdrawal';
+
     public const METHODS_RIPPLE = 'Ripple';
 
     public const METHODS_SAFETY_PAY = 'SafetyPay';
@@ -368,11 +374,11 @@ class PaymentInstructionMethods implements PaymentInstruction
 
     public const METHODS_VOUCHER = 'voucher';
 
-    public const METHODS_VOUCHER_2 = 'voucher-2';
+    public const METHODS_VOUCHER2 = 'voucher-2';
 
-    public const METHODS_VOUCHER_3 = 'voucher-3';
+    public const METHODS_VOUCHER3 = 'voucher-3';
 
-    public const METHODS_VOUCHER_4 = 'voucher-4';
+    public const METHODS_VOUCHER4 = 'voucher-4';
 
     public const METHODS_WALLET88 = 'Wallet88';
 
@@ -380,7 +386,7 @@ class PaymentInstructionMethods implements PaymentInstruction
 
     public const METHODS_WEBPAY = 'Webpay';
 
-    public const METHODS_WEBPAY_2 = 'Webpay-2';
+    public const METHODS_WEBPAY2 = 'Webpay-2';
 
     public const METHODS_WEBPAY_CARD = 'Webpay Card';
 

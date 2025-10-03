@@ -31,11 +31,17 @@ class QuickBooksOnlineInvoiceExternalServiceSettings implements JsonSerializable
         if (array_key_exists('sync', $data)) {
             $this->setSync($data['sync']);
         }
+        if (array_key_exists('syncZeroInvoices', $data)) {
+            $this->setSyncZeroInvoices($data['syncZeroInvoices']);
+        }
         if (array_key_exists('unearnedRevenueAccountId', $data)) {
             $this->setUnearnedRevenueAccountId($data['unearnedRevenueAccountId']);
         }
         if (array_key_exists('taxesAccountId', $data)) {
             $this->setTaxesAccountId($data['taxesAccountId']);
+        }
+        if (array_key_exists('discountsAccountId', $data)) {
+            $this->setDiscountsAccountId($data['discountsAccountId']);
         }
         if (array_key_exists('department', $data)) {
             $this->setDepartment($data['department']);
@@ -83,6 +89,18 @@ class QuickBooksOnlineInvoiceExternalServiceSettings implements JsonSerializable
         return $this;
     }
 
+    public function getSyncZeroInvoices(): ?bool
+    {
+        return $this->fields['syncZeroInvoices'] ?? null;
+    }
+
+    public function setSyncZeroInvoices(null|bool $syncZeroInvoices): static
+    {
+        $this->fields['syncZeroInvoices'] = $syncZeroInvoices;
+
+        return $this;
+    }
+
     public function getUnearnedRevenueAccountId(): ?string
     {
         return $this->fields['unearnedRevenueAccountId'] ?? null;
@@ -103,6 +121,18 @@ class QuickBooksOnlineInvoiceExternalServiceSettings implements JsonSerializable
     public function setTaxesAccountId(null|string $taxesAccountId): static
     {
         $this->fields['taxesAccountId'] = $taxesAccountId;
+
+        return $this;
+    }
+
+    public function getDiscountsAccountId(): ?string
+    {
+        return $this->fields['discountsAccountId'] ?? null;
+    }
+
+    public function setDiscountsAccountId(null|string $discountsAccountId): static
+    {
+        $this->fields['discountsAccountId'] = $discountsAccountId;
 
         return $this;
     }
@@ -221,11 +251,17 @@ class QuickBooksOnlineInvoiceExternalServiceSettings implements JsonSerializable
         if (array_key_exists('sync', $this->fields)) {
             $data['sync'] = $this->fields['sync'];
         }
+        if (array_key_exists('syncZeroInvoices', $this->fields)) {
+            $data['syncZeroInvoices'] = $this->fields['syncZeroInvoices'];
+        }
         if (array_key_exists('unearnedRevenueAccountId', $this->fields)) {
             $data['unearnedRevenueAccountId'] = $this->fields['unearnedRevenueAccountId'];
         }
         if (array_key_exists('taxesAccountId', $this->fields)) {
             $data['taxesAccountId'] = $this->fields['taxesAccountId'];
+        }
+        if (array_key_exists('discountsAccountId', $this->fields)) {
+            $data['discountsAccountId'] = $this->fields['discountsAccountId'];
         }
         if (array_key_exists('department', $this->fields)) {
             $data['department'] = $this->fields['department'];

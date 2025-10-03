@@ -20,7 +20,7 @@ use JsonSerializable;
 
 class Transaction implements JsonSerializable
 {
-    public const TYPE_3DS_AUTHENTICATION = '3ds-authentication';
+    public const TYPE_3_DS_AUTHENTICATION = '3ds-authentication';
 
     public const TYPE_AUTHORIZE = 'authorize';
 
@@ -81,6 +81,8 @@ class Transaction implements JsonSerializable
     public const GATEWAY_NAME_ACI = 'ACI';
 
     public const GATEWAY_NAME_ADYEN = 'Adyen';
+
+    public const GATEWAY_NAME_AERA = 'Aera';
 
     public const GATEWAY_NAME_AIRCASH = 'Aircash';
 
@@ -184,6 +186,8 @@ class Transaction implements JsonSerializable
 
     public const GATEWAY_NAME_ECO_PAYZ = 'ecoPayz';
 
+    public const GATEWAY_NAME_ECO_PAYZ_TURKEY = 'ecoPayzTurkey';
+
     public const GATEWAY_NAME_ECORE_PAY = 'EcorePay';
 
     public const GATEWAY_NAME_ELAVON = 'Elavon';
@@ -218,7 +222,7 @@ class Transaction implements JsonSerializable
 
     public const GATEWAY_NAME_FORTE = 'Forte';
 
-    public const GATEWAY_NAME_GATE2WAY = 'gate2way';
+    public const GATEWAY_NAME_GATE2_WAY = 'gate2way';
 
     public const GATEWAY_NAME_GET = 'GET';
 
@@ -508,6 +512,8 @@ class Transaction implements JsonSerializable
 
     public const ACQUIRER_NAME_ACI = 'ACI';
 
+    public const ACQUIRER_NAME_AERA = 'Aera';
+
     public const ACQUIRER_NAME_ALIPAY = 'Alipay';
 
     public const ACQUIRER_NAME_AIB = 'AIB';
@@ -528,7 +534,7 @@ class Transaction implements JsonSerializable
 
     public const ACQUIRER_NAME_IPAY_OPTIONS = 'Ipay Options';
 
-    public const ACQUIRER_NAME_B_PLUS_S = 'B+S';
+    public const ACQUIRER_NAME_B_S = 'B+S';
 
     public const ACQUIRER_NAME_BAMBORA = 'Bambora';
 
@@ -654,7 +660,7 @@ class Transaction implements JsonSerializable
 
     public const ACQUIRER_NAME_FUND_SEND = 'FundSend';
 
-    public const ACQUIRER_NAME_GATE2WAY = 'gate2way';
+    public const ACQUIRER_NAME_GATE2_WAY = 'gate2way';
 
     public const ACQUIRER_NAME_GIGADAT = 'Gigadat';
 
@@ -776,7 +782,7 @@ class Transaction implements JsonSerializable
 
     public const ACQUIRER_NAME_PARAMOUNT_INTERAC = 'ParamountInterac';
 
-    public const ACQUIRER_NAME_PAY4FUN = 'Pay4fun';
+    public const ACQUIRER_NAME_PAY4_FUN = 'Pay4fun';
 
     public const ACQUIRER_NAME_PAY_CASH = 'PayCash';
 
@@ -930,6 +936,8 @@ class Transaction implements JsonSerializable
 
     public const METHOD_ADV_CASH = 'AdvCash';
 
+    public const METHOD_AERA = 'Aera';
+
     public const METHOD_AFFIRM = 'Affirm';
 
     public const METHOD_AFTERPAY = 'Afterpay';
@@ -956,21 +964,21 @@ class Transaction implements JsonSerializable
 
     public const METHOD_BANK_TRANSFER = 'bank-transfer';
 
-    public const METHOD_BANK_TRANSFER_2 = 'bank-transfer-2';
+    public const METHOD_BANK_TRANSFER2 = 'bank-transfer-2';
 
-    public const METHOD_BANK_TRANSFER_3 = 'bank-transfer-3';
+    public const METHOD_BANK_TRANSFER3 = 'bank-transfer-3';
 
-    public const METHOD_BANK_TRANSFER_4 = 'bank-transfer-4';
+    public const METHOD_BANK_TRANSFER4 = 'bank-transfer-4';
 
-    public const METHOD_BANK_TRANSFER_5 = 'bank-transfer-5';
+    public const METHOD_BANK_TRANSFER5 = 'bank-transfer-5';
 
-    public const METHOD_BANK_TRANSFER_6 = 'bank-transfer-6';
+    public const METHOD_BANK_TRANSFER6 = 'bank-transfer-6';
 
-    public const METHOD_BANK_TRANSFER_7 = 'bank-transfer-7';
+    public const METHOD_BANK_TRANSFER7 = 'bank-transfer-7';
 
-    public const METHOD_BANK_TRANSFER_8 = 'bank-transfer-8';
+    public const METHOD_BANK_TRANSFER8 = 'bank-transfer-8';
 
-    public const METHOD_BANK_TRANSFER_9 = 'bank-transfer-9';
+    public const METHOD_BANK_TRANSFER9 = 'bank-transfer-9';
 
     public const METHOD_BALOTO = 'Baloto';
 
@@ -986,9 +994,9 @@ class Transaction implements JsonSerializable
 
     public const METHOD_BOLETO = 'Boleto';
 
-    public const METHOD_BOLETO_2 = 'Boleto-2';
+    public const METHOD_BOLETO2 = 'Boleto-2';
 
-    public const METHOD_BOLETO_3 = 'Boleto-3';
+    public const METHOD_BOLETO3 = 'Boleto-3';
 
     public const METHOD_CASH_DEPOSIT = 'cash-deposit';
 
@@ -1027,6 +1035,8 @@ class Transaction implements JsonSerializable
     public const METHOD_ECHECK = 'echeck';
 
     public const METHOD_ECO_PAYZ = 'ecoPayz';
+
+    public const METHOD_ECO_PAYZ_TURKEY = 'ecoPayzTurkey';
 
     public const METHOD_ECO_VOUCHER = 'ecoVoucher';
 
@@ -1214,6 +1224,8 @@ class Transaction implements JsonSerializable
 
     public const METHOD_RESURS = 'Resurs';
 
+    public const METHOD_REVERSE_WITHDRAWAL = 'reverse-withdrawal';
+
     public const METHOD_RIPPLE = 'Ripple';
 
     public const METHOD_SAFETY_PAY = 'SafetyPay';
@@ -1270,11 +1282,11 @@ class Transaction implements JsonSerializable
 
     public const METHOD_VOUCHER = 'voucher';
 
-    public const METHOD_VOUCHER_2 = 'voucher-2';
+    public const METHOD_VOUCHER2 = 'voucher-2';
 
-    public const METHOD_VOUCHER_3 = 'voucher-3';
+    public const METHOD_VOUCHER3 = 'voucher-3';
 
-    public const METHOD_VOUCHER_4 = 'voucher-4';
+    public const METHOD_VOUCHER4 = 'voucher-4';
 
     public const METHOD_WALLET88 = 'Wallet88';
 
@@ -1282,7 +1294,7 @@ class Transaction implements JsonSerializable
 
     public const METHOD_WEBPAY = 'Webpay';
 
-    public const METHOD_WEBPAY_2 = 'Webpay-2';
+    public const METHOD_WEBPAY2 = 'Webpay-2';
 
     public const METHOD_WEBPAY_CARD = 'Webpay Card';
 

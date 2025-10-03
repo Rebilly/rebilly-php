@@ -18,7 +18,6 @@ use DateTimeImmutable;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
-use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\ApiLogSummary;
 use Rebilly\Sdk\Model\CumulativeSubscriptions;
 use Rebilly\Sdk\Model\DashboardResponse;
@@ -42,11 +41,9 @@ use Rebilly\Sdk\Model\ReportRevenueWaterfall;
 use Rebilly\Sdk\Model\ReportRulesMatchedSummary;
 use Rebilly\Sdk\Model\ReportTax;
 use Rebilly\Sdk\Model\ReportTransactions;
-use Rebilly\Sdk\Model\RevenueEntry;
 use Rebilly\Sdk\Model\SubscriptionCancellationReport;
 use Rebilly\Sdk\Model\SubscriptionRenewal;
 use Rebilly\Sdk\Model\TimeSeriesTransaction;
-use Rebilly\Sdk\Paginator;
 
 class ReportsApi
 {
@@ -58,11 +55,15 @@ class ReportsApi
         string $currency,
         string $periodStart,
         string $periodEnd,
+        ?int $limit = null,
+        ?int $offset = null,
     ): ReportAnnualRecurringRevenue {
         $queryParams = [
             'currency' => $currency,
             'periodStart' => $periodStart,
             'periodEnd' => $periodEnd,
+            'limit' => $limit,
+            'offset' => $offset,
         ];
         $uri = '/experimental/reports/annual-recurring-revenue?' . http_build_query($queryParams);
 
@@ -277,21 +278,21 @@ class ReportsApi
     }
 
     public function getJournal(
-        string $currency,
-        string $recognizedAt,
-        string $aggregationField,
+        ?string $currency = null,
         ?string $bookedFrom = null,
         ?string $bookedTo = null,
+        ?string $recognizedAt = null,
+        ?string $aggregationField = null,
         ?int $limit = null,
         ?int $offset = null,
         ?string $filter = null,
     ): ReportJournal {
         $queryParams = [
             'currency' => $currency,
-            'recognizedAt' => $recognizedAt,
-            'aggregationField' => $aggregationField,
             'bookedFrom' => $bookedFrom,
             'bookedTo' => $bookedTo,
+            'recognizedAt' => $recognizedAt,
+            'aggregationField' => $aggregationField,
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
@@ -312,6 +313,7 @@ class ReportsApi
         ?string $periodEnd = null,
         ?string $currency = null,
         ?string $aggregationField = null,
+        ?string $amountField = null,
         ?string $journalAccountIds = null,
     ): JournalSummaryReport {
         $queryParams = [
@@ -319,6 +321,7 @@ class ReportsApi
             'periodEnd' => $periodEnd,
             'currency' => $currency,
             'aggregationField' => $aggregationField,
+            'amountField' => $amountField,
             'journalAccountIds' => $journalAccountIds,
         ];
         $uri = '/experimental/reports/journal-summary?' . http_build_query($queryParams);
@@ -505,59 +508,6 @@ class ReportsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ReportRetentionValue::from($data);
-    }
-
-    /**
-     * @return Collection<RevenueEntry>
-     */
-    public function getRevenueAudit(
-        ?string $filter = null,
-        ?array $sort = null,
-        ?int $limit = null,
-        ?int $offset = null,
-    ): Collection {
-        $queryParams = [
-            'filter' => $filter,
-            'sort' => $sort ? implode(',', $sort) : null,
-            'limit' => $limit,
-            'offset' => $offset,
-        ];
-        $uri = '/experimental/reports/revenue-audit?' . http_build_query($queryParams);
-
-        $request = new Request('GET', $uri, headers: [
-            'Accept' => 'application/json',
-        ]);
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return new Collection(
-            array_map(fn (array $item): RevenueEntry => RevenueEntry::from($item), $data),
-            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
-            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
-            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
-        );
-    }
-
-    /**
-     * @return Paginator<RevenueEntry>
-     */
-    public function getRevenueAuditPaginator(
-        ?string $filter = null,
-        ?array $sort = null,
-        ?int $limit = null,
-        ?int $offset = null,
-    ): Paginator {
-        $closure = fn (?int $limit, ?int $offset): Collection => $this->getRevenueAudit(
-            filter: $filter,
-            sort: $sort,
-            limit: $limit,
-            offset: $offset,
-        );
-
-        return new Paginator(
-            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
-            $closure,
-        );
     }
 
     /**

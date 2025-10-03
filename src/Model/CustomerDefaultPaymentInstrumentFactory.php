@@ -26,6 +26,7 @@ class CustomerDefaultPaymentInstrumentFactory
 
         return match ($data['method']) {
             'AdvCash' => AlternativePaymentInstrument::from($data),
+            'Aera' => AlternativePaymentInstrument::from($data),
             'Affirm' => AlternativePaymentInstrument::from($data),
             'Afterpay' => AlternativePaymentInstrument::from($data),
             'Aircash' => AlternativePaymentInstrument::from($data),
@@ -191,6 +192,7 @@ class CustomerDefaultPaymentInstrumentFactory
             'eZeeWallet' => AlternativePaymentInstrument::from($data),
             'echeck' => AlternativePaymentInstrument::from($data),
             'ecoPayz' => AlternativePaymentInstrument::from($data),
+            'ecoPayzTurkey' => AlternativePaymentInstrument::from($data),
             'ecoVoucher' => AlternativePaymentInstrument::from($data),
             'ezyEFT' => AlternativePaymentInstrument::from($data),
             'iCashOne Voucher' => AlternativePaymentInstrument::from($data),
@@ -209,6 +211,7 @@ class CustomerDefaultPaymentInstrumentFactory
             'phone' => AlternativePaymentInstrument::from($data),
             'rapyd-checkout' => AlternativePaymentInstrument::from($data),
             'rebilly-hosted-payment-form' => AlternativePaymentInstrument::from($data),
+            'reverse-withdrawal' => AlternativePaymentInstrument::from($data),
             'swift-dbt' => AlternativePaymentInstrument::from($data),
             'voucher' => AlternativePaymentInstrument::from($data),
             'voucher-2' => AlternativePaymentInstrument::from($data),

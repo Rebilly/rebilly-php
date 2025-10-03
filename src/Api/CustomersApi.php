@@ -25,7 +25,6 @@ use Rebilly\Sdk\Model\Edd;
 use Rebilly\Sdk\Model\EddSearchResult;
 use Rebilly\Sdk\Model\EddTimeline;
 use Rebilly\Sdk\Model\LeadSource;
-use Rebilly\Sdk\Model\PatchEddScore;
 use Rebilly\Sdk\Paginator;
 
 class CustomersApi
@@ -46,25 +45,6 @@ class CustomersApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Customer::from($data);
-    }
-
-    public function createEddTimelineComment(
-        string $id,
-        EddTimeline $eddTimeline,
-    ): EddTimeline {
-        $pathParams = [
-            '{id}' => $id,
-        ];
-
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/edd-timeline');
-
-        $request = new Request('POST', $uri, headers: [
-            'Accept' => 'application/json',
-        ], body: Utils::jsonEncode($eddTimeline));
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return EddTimeline::from($data);
     }
 
     public function createLeadSource(
@@ -103,21 +83,6 @@ class CustomersApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CustomerTimeline::from($data);
-    }
-
-    public function deleteEddTimelineMessage(
-        string $id,
-        string $messageId,
-    ): void {
-        $pathParams = [
-            '{id}' => $id,
-            '{messageId}' => $messageId,
-        ];
-
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/edd-timeline/{messageId}');
-
-        $request = new Request('DELETE', $uri);
-        $this->client->send($request);
     }
 
     public function deleteLeadSource(
@@ -546,25 +511,6 @@ class CustomersApi
 
         $request = new Request('DELETE', $uri);
         $this->client->send($request);
-    }
-
-    public function patchCustomerEddScore(
-        string $id,
-        PatchEddScore $patchEddScore,
-    ): Edd {
-        $pathParams = [
-            '{id}' => $id,
-        ];
-
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/edd-score');
-
-        $request = new Request('PATCH', $uri, headers: [
-            'Accept' => 'application/json',
-        ], body: Utils::jsonEncode($patchEddScore));
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return Edd::from($data);
     }
 
     public function update(

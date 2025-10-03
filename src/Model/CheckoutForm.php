@@ -32,6 +32,8 @@ class CheckoutForm implements JsonSerializable
 
     public const PAYMENT_METHODS_ADV_CASH = 'AdvCash';
 
+    public const PAYMENT_METHODS_AERA = 'Aera';
+
     public const PAYMENT_METHODS_AFFIRM = 'Affirm';
 
     public const PAYMENT_METHODS_AFTERPAY = 'Afterpay';
@@ -58,21 +60,21 @@ class CheckoutForm implements JsonSerializable
 
     public const PAYMENT_METHODS_BANK_TRANSFER = 'bank-transfer';
 
-    public const PAYMENT_METHODS_BANK_TRANSFER_2 = 'bank-transfer-2';
+    public const PAYMENT_METHODS_BANK_TRANSFER2 = 'bank-transfer-2';
 
-    public const PAYMENT_METHODS_BANK_TRANSFER_3 = 'bank-transfer-3';
+    public const PAYMENT_METHODS_BANK_TRANSFER3 = 'bank-transfer-3';
 
-    public const PAYMENT_METHODS_BANK_TRANSFER_4 = 'bank-transfer-4';
+    public const PAYMENT_METHODS_BANK_TRANSFER4 = 'bank-transfer-4';
 
-    public const PAYMENT_METHODS_BANK_TRANSFER_5 = 'bank-transfer-5';
+    public const PAYMENT_METHODS_BANK_TRANSFER5 = 'bank-transfer-5';
 
-    public const PAYMENT_METHODS_BANK_TRANSFER_6 = 'bank-transfer-6';
+    public const PAYMENT_METHODS_BANK_TRANSFER6 = 'bank-transfer-6';
 
-    public const PAYMENT_METHODS_BANK_TRANSFER_7 = 'bank-transfer-7';
+    public const PAYMENT_METHODS_BANK_TRANSFER7 = 'bank-transfer-7';
 
-    public const PAYMENT_METHODS_BANK_TRANSFER_8 = 'bank-transfer-8';
+    public const PAYMENT_METHODS_BANK_TRANSFER8 = 'bank-transfer-8';
 
-    public const PAYMENT_METHODS_BANK_TRANSFER_9 = 'bank-transfer-9';
+    public const PAYMENT_METHODS_BANK_TRANSFER9 = 'bank-transfer-9';
 
     public const PAYMENT_METHODS_BALOTO = 'Baloto';
 
@@ -88,9 +90,9 @@ class CheckoutForm implements JsonSerializable
 
     public const PAYMENT_METHODS_BOLETO = 'Boleto';
 
-    public const PAYMENT_METHODS_BOLETO_2 = 'Boleto-2';
+    public const PAYMENT_METHODS_BOLETO2 = 'Boleto-2';
 
-    public const PAYMENT_METHODS_BOLETO_3 = 'Boleto-3';
+    public const PAYMENT_METHODS_BOLETO3 = 'Boleto-3';
 
     public const PAYMENT_METHODS_CASH_DEPOSIT = 'cash-deposit';
 
@@ -129,6 +131,8 @@ class CheckoutForm implements JsonSerializable
     public const PAYMENT_METHODS_ECHECK = 'echeck';
 
     public const PAYMENT_METHODS_ECO_PAYZ = 'ecoPayz';
+
+    public const PAYMENT_METHODS_ECO_PAYZ_TURKEY = 'ecoPayzTurkey';
 
     public const PAYMENT_METHODS_ECO_VOUCHER = 'ecoVoucher';
 
@@ -316,6 +320,8 @@ class CheckoutForm implements JsonSerializable
 
     public const PAYMENT_METHODS_RESURS = 'Resurs';
 
+    public const PAYMENT_METHODS_REVERSE_WITHDRAWAL = 'reverse-withdrawal';
+
     public const PAYMENT_METHODS_RIPPLE = 'Ripple';
 
     public const PAYMENT_METHODS_SAFETY_PAY = 'SafetyPay';
@@ -372,11 +378,11 @@ class CheckoutForm implements JsonSerializable
 
     public const PAYMENT_METHODS_VOUCHER = 'voucher';
 
-    public const PAYMENT_METHODS_VOUCHER_2 = 'voucher-2';
+    public const PAYMENT_METHODS_VOUCHER2 = 'voucher-2';
 
-    public const PAYMENT_METHODS_VOUCHER_3 = 'voucher-3';
+    public const PAYMENT_METHODS_VOUCHER3 = 'voucher-3';
 
-    public const PAYMENT_METHODS_VOUCHER_4 = 'voucher-4';
+    public const PAYMENT_METHODS_VOUCHER4 = 'voucher-4';
 
     public const PAYMENT_METHODS_WALLET88 = 'Wallet88';
 
@@ -384,7 +390,7 @@ class CheckoutForm implements JsonSerializable
 
     public const PAYMENT_METHODS_WEBPAY = 'Webpay';
 
-    public const PAYMENT_METHODS_WEBPAY_2 = 'Webpay-2';
+    public const PAYMENT_METHODS_WEBPAY2 = 'Webpay-2';
 
     public const PAYMENT_METHODS_WEBPAY_CARD = 'Webpay Card';
 

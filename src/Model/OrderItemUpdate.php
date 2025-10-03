@@ -16,7 +16,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class SubscriptionItemUpdate implements JsonSerializable
+class OrderItemUpdate implements JsonSerializable
 {
     private array $fields = [];
 

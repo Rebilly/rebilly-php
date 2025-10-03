@@ -26,6 +26,7 @@ class PostPaymentInstrumentRequestFactory
 
         return match ($data['method']) {
             'AdvCash' => AlternativeInstrument::from($data),
+            'Aera' => AlternativeInstrument::from($data),
             'Affirm' => AlternativeInstrument::from($data),
             'Afterpay' => AlternativeInstrument::from($data),
             'Aircash' => AlternativeInstrument::from($data),
@@ -161,6 +162,7 @@ class PostPaymentInstrumentRequestFactory
             'ePay.bg' => AlternativeInstrument::from($data),
             'eZeeWallet' => AlternativeInstrument::from($data),
             'ecoPayz' => AlternativeInstrument::from($data),
+            'ecoPayzTurkey' => AlternativeInstrument::from($data),
             'ecoVoucher' => AlternativeInstrument::from($data),
             'iDEAL' => AlternativeInstrument::from($data),
             'iDebit' => AlternativeInstrument::from($data),

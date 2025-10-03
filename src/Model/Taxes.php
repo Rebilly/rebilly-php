@@ -20,7 +20,7 @@ interface Taxes extends JsonSerializable
 {
     public function getCalculator(): string;
 
-    public function getAmount(): ?int;
+    public function getAmount(): ?float;
 
     /**
      * @return null|TaxItem[]

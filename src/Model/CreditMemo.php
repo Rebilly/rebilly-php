@@ -20,6 +20,8 @@ use JsonSerializable;
 
 class CreditMemo implements JsonSerializable
 {
+    public const STATUS_DRAFT = 'draft';
+
     public const STATUS_ISSUED = 'issued';
 
     public const STATUS_APPLIED = 'applied';

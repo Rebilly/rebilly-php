@@ -24,6 +24,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
 
     public const GATEWAY_NAME_ADYEN = 'Adyen';
 
+    public const GATEWAY_NAME_AERA = 'Aera';
+
     public const GATEWAY_NAME_AIRCASH = 'Aircash';
 
     public const GATEWAY_NAME_AIRPAY = 'Airpay';
@@ -126,6 +128,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
 
     public const GATEWAY_NAME_ECO_PAYZ = 'ecoPayz';
 
+    public const GATEWAY_NAME_ECO_PAYZ_TURKEY = 'ecoPayzTurkey';
+
     public const GATEWAY_NAME_ECORE_PAY = 'EcorePay';
 
     public const GATEWAY_NAME_ELAVON = 'Elavon';
@@ -160,7 +164,7 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
 
     public const GATEWAY_NAME_FORTE = 'Forte';
 
-    public const GATEWAY_NAME_GATE2WAY = 'gate2way';
+    public const GATEWAY_NAME_GATE2_WAY = 'gate2way';
 
     public const GATEWAY_NAME_GET = 'GET';
 
@@ -450,6 +454,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
 
     public const ACQUIRER_NAME_ACI = 'ACI';
 
+    public const ACQUIRER_NAME_AERA = 'Aera';
+
     public const ACQUIRER_NAME_ALIPAY = 'Alipay';
 
     public const ACQUIRER_NAME_AIB = 'AIB';
@@ -470,7 +476,7 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
 
     public const ACQUIRER_NAME_IPAY_OPTIONS = 'Ipay Options';
 
-    public const ACQUIRER_NAME_B_PLUS_S = 'B+S';
+    public const ACQUIRER_NAME_B_S = 'B+S';
 
     public const ACQUIRER_NAME_BAMBORA = 'Bambora';
 
@@ -596,7 +602,7 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
 
     public const ACQUIRER_NAME_FUND_SEND = 'FundSend';
 
-    public const ACQUIRER_NAME_GATE2WAY = 'gate2way';
+    public const ACQUIRER_NAME_GATE2_WAY = 'gate2way';
 
     public const ACQUIRER_NAME_GIGADAT = 'Gigadat';
 
@@ -718,7 +724,7 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
 
     public const ACQUIRER_NAME_PARAMOUNT_INTERAC = 'ParamountInterac';
 
-    public const ACQUIRER_NAME_PAY4FUN = 'Pay4fun';
+    public const ACQUIRER_NAME_PAY4_FUN = 'Pay4fun';
 
     public const ACQUIRER_NAME_PAY_CASH = 'PayCash';
 

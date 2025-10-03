@@ -38,7 +38,7 @@ class RebillyTaxJarTax implements Taxes
         return 'rebilly-taxjar';
     }
 
-    public function getAmount(): ?int
+    public function getAmount(): ?float
     {
         return $this->fields['amount'] ?? null;
     }
@@ -86,8 +86,12 @@ class RebillyTaxJarTax implements Taxes
         return $data;
     }
 
-    private function setAmount(null|int $amount): static
+    private function setAmount(null|float|string $amount): static
     {
+        if (is_string($amount)) {
+            $amount = (float) $amount;
+        }
+
         $this->fields['amount'] = $amount;
 
         return $this;

@@ -19,7 +19,6 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\JournalEntry;
-use Rebilly\Sdk\Model\JournalRecord;
 use Rebilly\Sdk\Paginator;
 
 class JournalEntriesApi
@@ -40,40 +39,6 @@ class JournalEntriesApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return JournalEntry::from($data);
-    }
-
-    public function createRecord(
-        string $id,
-        JournalRecord $journalRecord,
-    ): JournalRecord {
-        $pathParams = [
-            '{id}' => $id,
-        ];
-
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/journal-entries/{id}/records');
-
-        $request = new Request('POST', $uri, headers: [
-            'Accept' => 'application/json',
-        ], body: Utils::jsonEncode($journalRecord));
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return JournalRecord::from($data);
-    }
-
-    public function deleteRecord(
-        string $id,
-        string $journalRecordId,
-    ): void {
-        $pathParams = [
-            '{id}' => $id,
-            '{journalRecordId}' => $journalRecordId,
-        ];
-
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/journal-entries/{id}/records/{journalRecordId}');
-
-        $request = new Request('DELETE', $uri);
-        $this->client->send($request);
     }
 
     /**
@@ -129,70 +94,6 @@ class JournalEntriesApi
         );
     }
 
-    /**
-     * @return Collection<JournalRecord>
-     */
-    public function getAllRecords(
-        string $id,
-        ?int $limit = null,
-        ?int $offset = null,
-        ?string $filter = null,
-        ?array $sort = null,
-        ?string $expand = null,
-    ): Collection {
-        $pathParams = [
-            '{id}' => $id,
-        ];
-
-        $queryParams = [
-            'limit' => $limit,
-            'offset' => $offset,
-            'filter' => $filter,
-            'sort' => $sort ? implode(',', $sort) : null,
-            'expand' => $expand,
-        ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/journal-entries/{id}/records?') . http_build_query($queryParams);
-
-        $request = new Request('GET', $uri, headers: [
-            'Accept' => 'application/json',
-        ]);
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return new Collection(
-            array_map(fn (array $item): JournalRecord => JournalRecord::from($item), $data),
-            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
-            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
-            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
-        );
-    }
-
-    /**
-     * @return Paginator<JournalRecord>
-     */
-    public function getAllRecordsPaginator(
-        string $id,
-        ?int $limit = null,
-        ?int $offset = null,
-        ?string $filter = null,
-        ?array $sort = null,
-        ?string $expand = null,
-    ): Paginator {
-        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllRecords(
-            id: $id,
-            limit: $limit,
-            offset: $offset,
-            filter: $filter,
-            sort: $sort,
-            expand: $expand,
-        );
-
-        return new Paginator(
-            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
-            $closure,
-        );
-    }
-
     public function getEntry(
         string $id,
     ): JournalEntry {
@@ -209,26 +110,6 @@ class JournalEntriesApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return JournalEntry::from($data);
-    }
-
-    public function getRecord(
-        string $id,
-        string $journalRecordId,
-    ): JournalRecord {
-        $pathParams = [
-            '{id}' => $id,
-            '{journalRecordId}' => $journalRecordId,
-        ];
-
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/journal-entries/{id}/records/{journalRecordId}');
-
-        $request = new Request('GET', $uri, headers: [
-            'Accept' => 'application/json',
-        ]);
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return JournalRecord::from($data);
     }
 
     public function updateEntry(
@@ -248,26 +129,5 @@ class JournalEntriesApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return JournalEntry::from($data);
-    }
-
-    public function updateRecord(
-        string $id,
-        string $journalRecordId,
-        JournalRecord $journalRecord,
-    ): JournalRecord {
-        $pathParams = [
-            '{id}' => $id,
-            '{journalRecordId}' => $journalRecordId,
-        ];
-
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/journal-entries/{id}/records/{journalRecordId}');
-
-        $request = new Request('PUT', $uri, headers: [
-            'Accept' => 'application/json',
-        ], body: Utils::jsonEncode($journalRecord));
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return JournalRecord::from($data);
     }
 }

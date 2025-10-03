@@ -46,7 +46,7 @@ class RiskScoreBracket implements JsonSerializable
     public function setBrackets(array $brackets): static
     {
         $brackets = array_map(
-            fn ($value) => $value instanceof RiskScoreBracketBrackets ? $value : RiskScoreBracketBrackets::from($value),
+            fn ($value) => $value instanceof RiskScoreBracketBrackets ? $value : RiskScoreBracketBracketsFactory::from($value),
             $brackets,
         );
 

@@ -142,6 +142,8 @@ class WebhookTracking implements JsonSerializable
 
     public const EVENT_TYPE_OFFSITE_PAYMENT_COMPLETED = 'offsite-payment-completed';
 
+    public const EVENT_TYPE_ORDER_ABANDON_REMINDER = 'order-abandon-reminder';
+
     public const EVENT_TYPE_ORDER_ABANDONED = 'order-abandoned';
 
     public const EVENT_TYPE_ORDER_COMPLETED = 'order-completed';

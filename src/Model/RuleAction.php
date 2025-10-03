@@ -25,6 +25,8 @@ abstract class RuleAction implements JsonSerializable
 
     public const NAME_ADJUST_READY_TO_PAY = 'adjust-ready-to-pay';
 
+    public const NAME_ADJUST_READY_TO_PAYOUT = 'adjust-ready-to-payout';
+
     public const NAME_BLOCKLIST = 'blocklist';
 
     public const NAME_CANCEL_SCHEDULED_PAYMENTS = 'cancel-scheduled-payments';
@@ -76,6 +78,10 @@ abstract class RuleAction implements JsonSerializable
     public const NAME_UPDATE_INTUIT_QUICKBOOKS_INVOICE = 'update-intuit-quickbooks-invoice';
 
     public const NAME_VOID_INTUIT_QUICKBOOKS_INVOICE = 'void-intuit-quickbooks-invoice';
+
+    public const NAME_TRIGGER_WEBHOOK = 'trigger-webhook';
+
+    public const NAME_SHOW_DESCRIPTOR_DISCLAIMER = 'show-descriptor-disclaimer';
 
     public const STATUS_ACTIVE = 'active';
 

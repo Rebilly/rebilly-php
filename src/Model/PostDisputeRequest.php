@@ -42,59 +42,59 @@ class PostDisputeRequest implements JsonSerializable
 
     public const REASON_CODE_9 = '9';
 
-    public const REASON_CODE_10_1 = '10.1';
+    public const REASON_CODE_101 = '10.1';
 
-    public const REASON_CODE_10_2 = '10.2';
+    public const REASON_CODE_102 = '10.2';
 
-    public const REASON_CODE_10_3 = '10.3';
+    public const REASON_CODE_103 = '10.3';
 
-    public const REASON_CODE_10_4 = '10.4';
+    public const REASON_CODE_104 = '10.4';
 
-    public const REASON_CODE_10_5 = '10.5';
+    public const REASON_CODE_105 = '10.5';
 
-    public const REASON_CODE_11_1 = '11.1';
+    public const REASON_CODE_111 = '11.1';
 
-    public const REASON_CODE_11_2 = '11.2';
+    public const REASON_CODE_112 = '11.2';
 
-    public const REASON_CODE_11_3 = '11.3';
+    public const REASON_CODE_113 = '11.3';
 
     public const REASON_CODE_12 = '12';
 
-    public const REASON_CODE_12_1 = '12.1';
+    public const REASON_CODE_121 = '12.1';
 
-    public const REASON_CODE_12_2 = '12.2';
+    public const REASON_CODE_122 = '12.2';
 
-    public const REASON_CODE_12_3 = '12.3';
+    public const REASON_CODE_123 = '12.3';
 
-    public const REASON_CODE_12_4 = '12.4';
+    public const REASON_CODE_124 = '12.4';
 
-    public const REASON_CODE_12_5 = '12.5';
+    public const REASON_CODE_125 = '12.5';
 
-    public const REASON_CODE_12_6 = '12.6';
+    public const REASON_CODE_126 = '12.6';
 
-    public const REASON_CODE_12_6_1 = '12.6.1';
+    public const REASON_CODE_1261 = '12.6.1';
 
-    public const REASON_CODE_12_6_2 = '12.6.2';
+    public const REASON_CODE_1262 = '12.6.2';
 
-    public const REASON_CODE_12_7 = '12.7';
+    public const REASON_CODE_127 = '12.7';
 
-    public const REASON_CODE_13_1 = '13.1';
+    public const REASON_CODE_131 = '13.1';
 
-    public const REASON_CODE_13_2 = '13.2';
+    public const REASON_CODE_132 = '13.2';
 
-    public const REASON_CODE_13_3 = '13.3';
+    public const REASON_CODE_133 = '13.3';
 
-    public const REASON_CODE_13_4 = '13.4';
+    public const REASON_CODE_134 = '13.4';
 
-    public const REASON_CODE_13_5 = '13.5';
+    public const REASON_CODE_135 = '13.5';
 
-    public const REASON_CODE_13_6 = '13.6';
+    public const REASON_CODE_136 = '13.6';
 
-    public const REASON_CODE_13_7 = '13.7';
+    public const REASON_CODE_137 = '13.7';
 
-    public const REASON_CODE_13_8 = '13.8';
+    public const REASON_CODE_138 = '13.8';
 
-    public const REASON_CODE_13_9 = '13.9';
+    public const REASON_CODE_139 = '13.9';
 
     public const REASON_CODE_30 = '30';
 
@@ -188,7 +188,7 @@ class PostDisputeRequest implements JsonSerializable
 
     public const REASON_CODE_063 = '063';
 
-    public const REASON_CODE_127 = '127';
+    public const REASON_CODE_127_1 = '127';
 
     public const REASON_CODE_154 = '154';
 
@@ -516,6 +516,26 @@ class PostDisputeRequest implements JsonSerializable
 
     public const REASON_CODE_UNRECOGNIZED = 'unrecognized';
 
+    public const REASON_CODE_MERCHANDISE_OR_SERVICE_NOT_RECEIVED = 'MERCHANDISE_OR_SERVICE_NOT_RECEIVED';
+
+    public const REASON_CODE_MERCHANDISE_OR_SERVICE_NOT_AS_DESCRIBED = 'MERCHANDISE_OR_SERVICE_NOT_AS_DESCRIBED';
+
+    public const REASON_CODE_UNAUTHORISED = 'UNAUTHORISED';
+
+    public const REASON_CODE_CREDIT_NOT_PROCESSED_1 = 'CREDIT_NOT_PROCESSED';
+
+    public const REASON_CODE_DUPLICATE_TRANSACTION = 'DUPLICATE_TRANSACTION';
+
+    public const REASON_CODE_INCORRECT_AMOUNT = 'INCORRECT_AMOUNT';
+
+    public const REASON_CODE_PAYMENT_BY_OTHER_MEANS = 'PAYMENT_BY_OTHER_MEANS';
+
+    public const REASON_CODE_CANCELED_RECURRING_BILLING = 'CANCELED_RECURRING_BILLING';
+
+    public const REASON_CODE_PROBLEM_WITH_REMITTANCE = 'PROBLEM_WITH_REMITTANCE';
+
+    public const REASON_CODE_OTHER = 'OTHER';
+
     public const TYPE_INFORMATION_REQUEST = 'information-request';
 
     public const TYPE_FIRST_CHARGEBACK = 'first-chargeback';
@@ -539,6 +559,8 @@ class PostDisputeRequest implements JsonSerializable
     public const TYPE_INQUIRY = 'inquiry';
 
     public const TYPE_FORCED_REFUND = 'forced-refund';
+
+    public const TYPE_COLLABORATION = 'collaboration';
 
     public const STATUS_RESPONSE_NEEDED = 'response-needed';
 

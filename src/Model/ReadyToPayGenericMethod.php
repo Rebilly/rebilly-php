@@ -22,6 +22,8 @@ class ReadyToPayGenericMethod implements ReadyToPayMethods
 
     public const METHOD_ADV_CASH = 'AdvCash';
 
+    public const METHOD_AERA = 'Aera';
+
     public const METHOD_AFFIRM = 'Affirm';
 
     public const METHOD_AFTERPAY = 'Afterpay';
@@ -40,21 +42,21 @@ class ReadyToPayGenericMethod implements ReadyToPayMethods
 
     public const METHOD_BANK_TRANSFER = 'bank-transfer';
 
-    public const METHOD_BANK_TRANSFER_2 = 'bank-transfer-2';
+    public const METHOD_BANK_TRANSFER2 = 'bank-transfer-2';
 
-    public const METHOD_BANK_TRANSFER_3 = 'bank-transfer-3';
+    public const METHOD_BANK_TRANSFER3 = 'bank-transfer-3';
 
-    public const METHOD_BANK_TRANSFER_4 = 'bank-transfer-4';
+    public const METHOD_BANK_TRANSFER4 = 'bank-transfer-4';
 
-    public const METHOD_BANK_TRANSFER_5 = 'bank-transfer-5';
+    public const METHOD_BANK_TRANSFER5 = 'bank-transfer-5';
 
-    public const METHOD_BANK_TRANSFER_6 = 'bank-transfer-6';
+    public const METHOD_BANK_TRANSFER6 = 'bank-transfer-6';
 
-    public const METHOD_BANK_TRANSFER_7 = 'bank-transfer-7';
+    public const METHOD_BANK_TRANSFER7 = 'bank-transfer-7';
 
-    public const METHOD_BANK_TRANSFER_8 = 'bank-transfer-8';
+    public const METHOD_BANK_TRANSFER8 = 'bank-transfer-8';
 
-    public const METHOD_BANK_TRANSFER_9 = 'bank-transfer-9';
+    public const METHOD_BANK_TRANSFER9 = 'bank-transfer-9';
 
     public const METHOD_BALOTO = 'Baloto';
 
@@ -93,6 +95,8 @@ class ReadyToPayGenericMethod implements ReadyToPayMethods
     public const METHOD_DIRECTA24_CARD = 'Directa24Card';
 
     public const METHOD_ECO_PAYZ = 'ecoPayz';
+
+    public const METHOD_ECO_PAYZ_TURKEY = 'ecoPayzTurkey';
 
     public const METHOD_ECO_VOUCHER = 'ecoVoucher';
 
@@ -292,11 +296,11 @@ class ReadyToPayGenericMethod implements ReadyToPayMethods
 
     public const METHOD_VOUCHER = 'voucher';
 
-    public const METHOD_VOUCHER_2 = 'voucher-2';
+    public const METHOD_VOUCHER2 = 'voucher-2';
 
-    public const METHOD_VOUCHER_3 = 'voucher-3';
+    public const METHOD_VOUCHER3 = 'voucher-3';
 
-    public const METHOD_VOUCHER_4 = 'voucher-4';
+    public const METHOD_VOUCHER4 = 'voucher-4';
 
     public const METHOD_WALLET88 = 'Wallet88';
 
@@ -304,7 +308,7 @@ class ReadyToPayGenericMethod implements ReadyToPayMethods
 
     public const METHOD_WEBPAY = 'Webpay';
 
-    public const METHOD_WEBPAY_2 = 'Webpay-2';
+    public const METHOD_WEBPAY2 = 'Webpay-2';
 
     public const METHOD_WEBPAY_CARD = 'Webpay Card';
 
