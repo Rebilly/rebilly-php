@@ -178,6 +178,8 @@ class AdjustReadyToPayoutGeneric implements AdjustReadyToPayoutPaymentMethod
 
     public const PAYMENT_METHOD_MUCH_BETTER = 'MuchBetter';
 
+    public const PAYMENT_METHOD_MUCH_BETTER_VOUCHER = 'MuchBetterVoucher';
+
     public const PAYMENT_METHOD_MULTIBANCO = 'Multibanco';
 
     public const PAYMENT_METHOD_NEOSURF = 'Neosurf';

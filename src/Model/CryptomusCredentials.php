@@ -16,7 +16,7 @@ namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
 
-class PayClubCredentials implements JsonSerializable
+class CryptomusCredentials implements JsonSerializable
 {
     private array $fields = [];
 
@@ -25,11 +25,8 @@ class PayClubCredentials implements JsonSerializable
         if (array_key_exists('merchantId', $data)) {
             $this->setMerchantId($data['merchantId']);
         }
-        if (array_key_exists('accountNumber', $data)) {
-            $this->setAccountNumber($data['accountNumber']);
-        }
-        if (array_key_exists('signKey', $data)) {
-            $this->setSignKey($data['signKey']);
+        if (array_key_exists('apiKey', $data)) {
+            $this->setApiKey($data['apiKey']);
         }
     }
 
@@ -50,26 +47,14 @@ class PayClubCredentials implements JsonSerializable
         return $this;
     }
 
-    public function getAccountNumber(): string
+    public function getApiKey(): string
     {
-        return $this->fields['accountNumber'];
+        return $this->fields['apiKey'];
     }
 
-    public function setAccountNumber(string $accountNumber): static
+    public function setApiKey(string $apiKey): static
     {
-        $this->fields['accountNumber'] = $accountNumber;
-
-        return $this;
-    }
-
-    public function getSignKey(): string
-    {
-        return $this->fields['signKey'];
-    }
-
-    public function setSignKey(string $signKey): static
-    {
-        $this->fields['signKey'] = $signKey;
+        $this->fields['apiKey'] = $apiKey;
 
         return $this;
     }
@@ -80,11 +65,8 @@ class PayClubCredentials implements JsonSerializable
         if (array_key_exists('merchantId', $this->fields)) {
             $data['merchantId'] = $this->fields['merchantId'];
         }
-        if (array_key_exists('accountNumber', $this->fields)) {
-            $data['accountNumber'] = $this->fields['accountNumber'];
-        }
-        if (array_key_exists('signKey', $this->fields)) {
-            $data['signKey'] = $this->fields['signKey'];
+        if (array_key_exists('apiKey', $this->fields)) {
+            $data['apiKey'] = $this->fields['apiKey'];
         }
 
         return $data;
