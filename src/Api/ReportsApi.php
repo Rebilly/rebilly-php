@@ -587,9 +587,9 @@ class ReportsApi
     }
 
     public function getTax(
-        DateTimeImmutable $periodStart,
-        DateTimeImmutable $periodEnd,
-        string $accountingMethod,
+        ?DateTimeImmutable $periodStart = null,
+        ?DateTimeImmutable $periodEnd = null,
+        ?string $accountingMethod = null,
         ?int $limit = null,
         ?int $offset = null,
     ): ReportTax {

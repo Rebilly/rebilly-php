@@ -234,6 +234,8 @@ class CheckoutForm implements JsonSerializable
 
     public const PAYMENT_METHODS_MUCH_BETTER = 'MuchBetter';
 
+    public const PAYMENT_METHODS_MUCH_BETTER_VOUCHER = 'MuchBetterVoucher';
+
     public const PAYMENT_METHODS_MY_FATOORAH = 'MyFatoorah';
 
     public const PAYMENT_METHODS_NEOSURF = 'Neosurf';

@@ -244,6 +244,8 @@ class PayoutRequestAllocations implements JsonSerializable
 
     public const METHOD_MUCH_BETTER = 'MuchBetter';
 
+    public const METHOD_MUCH_BETTER_VOUCHER = 'MuchBetterVoucher';
+
     public const METHOD_MY_FATOORAH = 'MyFatoorah';
 
     public const METHOD_NEOSURF = 'Neosurf';
@@ -504,6 +506,8 @@ class PayoutRequestAllocations implements JsonSerializable
 
     public const GATEWAY_NAME_CREDORAX = 'Credorax';
 
+    public const GATEWAY_NAME_CRYPTOMUS = 'Cryptomus';
+
     public const GATEWAY_NAME_CRYPTONATOR = 'Cryptonator';
 
     public const GATEWAY_NAME_CYBER_SOURCE = 'CyberSource';
@@ -652,6 +656,8 @@ class PayoutRequestAllocations implements JsonSerializable
 
     public const GATEWAY_NAME_MY_FATOORAH = 'MyFatoorah';
 
+    public const GATEWAY_NAME_NAEWE = 'Naewe';
+
     public const GATEWAY_NAME_NEOSURF = 'Neosurf';
 
     public const GATEWAY_NAME_NETBANKING = 'Netbanking';
@@ -793,6 +799,8 @@ class PayoutRequestAllocations implements JsonSerializable
     public const GATEWAY_NAME_SOFORT = 'Sofort';
 
     public const GATEWAY_NAME_SPARK_PAY = 'SparkPay';
+
+    public const GATEWAY_NAME_SPLITIT = 'Splitit';
 
     public const GATEWAY_NAME_STATIC_GATEWAY = 'StaticGateway';
 
