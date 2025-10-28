@@ -57,6 +57,9 @@ class DepositRequest implements JsonSerializable
         if (array_key_exists('amounts', $data)) {
             $this->setAmounts($data['amounts']);
         }
+        if (array_key_exists('defaultAmount', $data)) {
+            $this->setDefaultAmount($data['defaultAmount']);
+        }
         if (array_key_exists('customAmount', $data)) {
             $this->setCustomAmount($data['customAmount']);
         }
@@ -183,6 +186,22 @@ class DepositRequest implements JsonSerializable
         ) : null;
 
         $this->fields['amounts'] = $amounts;
+
+        return $this;
+    }
+
+    public function getDefaultAmount(): ?float
+    {
+        return $this->fields['defaultAmount'] ?? null;
+    }
+
+    public function setDefaultAmount(null|float|string $defaultAmount): static
+    {
+        if (is_string($defaultAmount)) {
+            $defaultAmount = (float) $defaultAmount;
+        }
+
+        $this->fields['defaultAmount'] = $defaultAmount;
 
         return $this;
     }
@@ -330,6 +349,9 @@ class DepositRequest implements JsonSerializable
         }
         if (array_key_exists('amounts', $this->fields)) {
             $data['amounts'] = $this->fields['amounts'];
+        }
+        if (array_key_exists('defaultAmount', $this->fields)) {
+            $data['defaultAmount'] = $this->fields['defaultAmount'];
         }
         if (array_key_exists('customAmount', $this->fields)) {
             $data['customAmount'] = $this->fields['customAmount']?->jsonSerialize();

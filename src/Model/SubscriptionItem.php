@@ -32,27 +32,6 @@ class SubscriptionItem implements RecurringOrderItems
         if (array_key_exists('renewalReminderNumber', $data)) {
             $this->setRenewalReminderNumber($data['renewalReminderNumber']);
         }
-        if (array_key_exists('trialReminderTime', $data)) {
-            $this->setTrialReminderTime($data['trialReminderTime']);
-        }
-        if (array_key_exists('trialReminderNumber', $data)) {
-            $this->setTrialReminderNumber($data['trialReminderNumber']);
-        }
-        if (array_key_exists('inTrial', $data)) {
-            $this->setInTrial($data['inTrial']);
-        }
-        if (array_key_exists('trialEnabled', $data)) {
-            $this->setTrialEnabled($data['trialEnabled']);
-        }
-        if (array_key_exists('trialEndTime', $data)) {
-            $this->setTrialEndTime($data['trialEndTime']);
-        }
-        if (array_key_exists('trialOnly', $data)) {
-            $this->setTrialOnly($data['trialOnly']);
-        }
-        if (array_key_exists('trialConversionTime', $data)) {
-            $this->setTrialConversionTime($data['trialConversionTime']);
-        }
         if (array_key_exists('recurringInterval', $data)) {
             $this->setRecurringInterval($data['recurringInterval']);
         }
@@ -61,6 +40,12 @@ class SubscriptionItem implements RecurringOrderItems
         }
         if (array_key_exists('rebillNumber', $data)) {
             $this->setRebillNumber($data['rebillNumber']);
+        }
+        if (array_key_exists('planId', $data)) {
+            $this->setPlanId($data['planId']);
+        }
+        if (array_key_exists('productId', $data)) {
+            $this->setProductId($data['productId']);
         }
         if (array_key_exists('plan', $data)) {
             $this->setPlan($data['plan']);
@@ -113,66 +98,6 @@ class SubscriptionItem implements RecurringOrderItems
         return $this->fields['renewalReminderNumber'] ?? null;
     }
 
-    public function getTrialReminderTime(): ?DateTimeImmutable
-    {
-        return $this->fields['trialReminderTime'] ?? null;
-    }
-
-    public function getTrialReminderNumber(): ?int
-    {
-        return $this->fields['trialReminderNumber'] ?? null;
-    }
-
-    public function getInTrial(): ?bool
-    {
-        return $this->fields['inTrial'] ?? null;
-    }
-
-    public function getTrialEnabled(): ?bool
-    {
-        return $this->fields['trialEnabled'] ?? null;
-    }
-
-    public function setTrialEnabled(null|bool $trialEnabled): static
-    {
-        $this->fields['trialEnabled'] = $trialEnabled;
-
-        return $this;
-    }
-
-    public function getTrialEndTime(): ?DateTimeImmutable
-    {
-        return $this->fields['trialEndTime'] ?? null;
-    }
-
-    public function setTrialEndTime(null|DateTimeImmutable|string $trialEndTime): static
-    {
-        if ($trialEndTime !== null && !($trialEndTime instanceof DateTimeImmutable)) {
-            $trialEndTime = new DateTimeImmutable($trialEndTime);
-        }
-
-        $this->fields['trialEndTime'] = $trialEndTime;
-
-        return $this;
-    }
-
-    public function getTrialOnly(): ?bool
-    {
-        return $this->fields['trialOnly'] ?? null;
-    }
-
-    public function setTrialOnly(null|bool $trialOnly): static
-    {
-        $this->fields['trialOnly'] = $trialOnly;
-
-        return $this;
-    }
-
-    public function getTrialConversionTime(): ?DateTimeImmutable
-    {
-        return $this->fields['trialConversionTime'] ?? null;
-    }
-
     public function getRecurringInterval(): ?SubscriptionItemRecurringInterval
     {
         return $this->fields['recurringInterval'] ?? null;
@@ -208,6 +133,23 @@ class SubscriptionItem implements RecurringOrderItems
     public function getRebillNumber(): ?int
     {
         return $this->fields['rebillNumber'] ?? null;
+    }
+
+    public function getPlanId(): ?string
+    {
+        return $this->fields['planId'] ?? null;
+    }
+
+    public function setPlanId(null|string $planId): static
+    {
+        $this->fields['planId'] = $planId;
+
+        return $this;
+    }
+
+    public function getProductId(): ?string
+    {
+        return $this->fields['productId'] ?? null;
     }
 
     public function getPlan(): ConfigurablePlan
@@ -322,27 +264,6 @@ class SubscriptionItem implements RecurringOrderItems
         if (array_key_exists('renewalReminderNumber', $this->fields)) {
             $data['renewalReminderNumber'] = $this->fields['renewalReminderNumber'];
         }
-        if (array_key_exists('trialReminderTime', $this->fields)) {
-            $data['trialReminderTime'] = $this->fields['trialReminderTime']?->format(DateTimeInterface::RFC3339);
-        }
-        if (array_key_exists('trialReminderNumber', $this->fields)) {
-            $data['trialReminderNumber'] = $this->fields['trialReminderNumber'];
-        }
-        if (array_key_exists('inTrial', $this->fields)) {
-            $data['inTrial'] = $this->fields['inTrial'];
-        }
-        if (array_key_exists('trialEnabled', $this->fields)) {
-            $data['trialEnabled'] = $this->fields['trialEnabled'];
-        }
-        if (array_key_exists('trialEndTime', $this->fields)) {
-            $data['trialEndTime'] = $this->fields['trialEndTime']?->format(DateTimeInterface::RFC3339);
-        }
-        if (array_key_exists('trialOnly', $this->fields)) {
-            $data['trialOnly'] = $this->fields['trialOnly'];
-        }
-        if (array_key_exists('trialConversionTime', $this->fields)) {
-            $data['trialConversionTime'] = $this->fields['trialConversionTime']?->format(DateTimeInterface::RFC3339);
-        }
         if (array_key_exists('recurringInterval', $this->fields)) {
             $data['recurringInterval'] = $this->fields['recurringInterval']?->jsonSerialize();
         }
@@ -351,6 +272,12 @@ class SubscriptionItem implements RecurringOrderItems
         }
         if (array_key_exists('rebillNumber', $this->fields)) {
             $data['rebillNumber'] = $this->fields['rebillNumber'];
+        }
+        if (array_key_exists('planId', $this->fields)) {
+            $data['planId'] = $this->fields['planId'];
+        }
+        if (array_key_exists('productId', $this->fields)) {
+            $data['productId'] = $this->fields['productId'];
         }
         if (array_key_exists('plan', $this->fields)) {
             $data['plan'] = $this->fields['plan']->jsonSerialize();
@@ -405,45 +332,16 @@ class SubscriptionItem implements RecurringOrderItems
         return $this;
     }
 
-    private function setTrialReminderTime(null|DateTimeImmutable|string $trialReminderTime): static
-    {
-        if ($trialReminderTime !== null && !($trialReminderTime instanceof DateTimeImmutable)) {
-            $trialReminderTime = new DateTimeImmutable($trialReminderTime);
-        }
-
-        $this->fields['trialReminderTime'] = $trialReminderTime;
-
-        return $this;
-    }
-
-    private function setTrialReminderNumber(null|int $trialReminderNumber): static
-    {
-        $this->fields['trialReminderNumber'] = $trialReminderNumber;
-
-        return $this;
-    }
-
-    private function setInTrial(null|bool $inTrial): static
-    {
-        $this->fields['inTrial'] = $inTrial;
-
-        return $this;
-    }
-
-    private function setTrialConversionTime(null|DateTimeImmutable|string $trialConversionTime): static
-    {
-        if ($trialConversionTime !== null && !($trialConversionTime instanceof DateTimeImmutable)) {
-            $trialConversionTime = new DateTimeImmutable($trialConversionTime);
-        }
-
-        $this->fields['trialConversionTime'] = $trialConversionTime;
-
-        return $this;
-    }
-
     private function setRebillNumber(null|int $rebillNumber): static
     {
         $this->fields['rebillNumber'] = $rebillNumber;
+
+        return $this;
+    }
+
+    private function setProductId(null|string $productId): static
+    {
+        $this->fields['productId'] = $productId;
 
         return $this;
     }

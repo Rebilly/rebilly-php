@@ -28,6 +28,9 @@ class CoinPaymentsSettings implements JsonSerializable
         if (array_key_exists('useV2Api', $data)) {
             $this->setUseV2Api($data['useV2Api']);
         }
+        if (array_key_exists('apiUrl', $data)) {
+            $this->setApiUrl($data['apiUrl']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -59,6 +62,18 @@ class CoinPaymentsSettings implements JsonSerializable
         return $this;
     }
 
+    public function getApiUrl(): ?string
+    {
+        return $this->fields['apiUrl'] ?? null;
+    }
+
+    public function setApiUrl(null|string $apiUrl): static
+    {
+        $this->fields['apiUrl'] = $apiUrl;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -67,6 +82,9 @@ class CoinPaymentsSettings implements JsonSerializable
         }
         if (array_key_exists('useV2Api', $this->fields)) {
             $data['useV2Api'] = $this->fields['useV2Api'];
+        }
+        if (array_key_exists('apiUrl', $this->fields)) {
+            $data['apiUrl'] = $this->fields['apiUrl'];
         }
 
         return $data;

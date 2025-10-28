@@ -54,7 +54,7 @@ class PatchOrderCancellationRequest implements JsonSerializable
 
     public const REASON_BILLING_FAILURE = 'billing-failure';
 
-    public const CHURN_TIME_POLICY_NULL = 'null';
+    public const CHURN_TIME_POLICY_UNDEFINED = 'undefined';
 
     public const CHURN_TIME_POLICY_NOW = 'now';
 

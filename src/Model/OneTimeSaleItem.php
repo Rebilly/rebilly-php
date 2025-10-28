@@ -26,6 +26,12 @@ class OneTimeSaleItem implements RecurringOrderItems
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
         }
+        if (array_key_exists('planId', $data)) {
+            $this->setPlanId($data['planId']);
+        }
+        if (array_key_exists('productId', $data)) {
+            $this->setProductId($data['productId']);
+        }
         if (array_key_exists('plan', $data)) {
             $this->setPlan($data['plan']);
         }
@@ -56,6 +62,23 @@ class OneTimeSaleItem implements RecurringOrderItems
     public function getId(): ?string
     {
         return $this->fields['id'] ?? null;
+    }
+
+    public function getPlanId(): ?string
+    {
+        return $this->fields['planId'] ?? null;
+    }
+
+    public function setPlanId(null|string $planId): static
+    {
+        $this->fields['planId'] = $planId;
+
+        return $this;
+    }
+
+    public function getProductId(): ?string
+    {
+        return $this->fields['productId'] ?? null;
     }
 
     public function getPlan(): ConfigurablePlan
@@ -109,6 +132,12 @@ class OneTimeSaleItem implements RecurringOrderItems
         if (array_key_exists('id', $this->fields)) {
             $data['id'] = $this->fields['id'];
         }
+        if (array_key_exists('planId', $this->fields)) {
+            $data['planId'] = $this->fields['planId'];
+        }
+        if (array_key_exists('productId', $this->fields)) {
+            $data['productId'] = $this->fields['productId'];
+        }
         if (array_key_exists('plan', $this->fields)) {
             $data['plan'] = $this->fields['plan']->jsonSerialize();
         }
@@ -131,6 +160,13 @@ class OneTimeSaleItem implements RecurringOrderItems
     private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
+
+        return $this;
+    }
+
+    private function setProductId(null|string $productId): static
+    {
+        $this->fields['productId'] = $productId;
 
         return $this;
     }

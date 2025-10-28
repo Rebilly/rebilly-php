@@ -96,6 +96,7 @@ class TransactionPaymentInstrumentFactory
             'MiFinity-eWallet' => AlternativePaymentInstrument::from($data),
             'MobilePay' => AlternativePaymentInstrument::from($data),
             'MuchBetter' => AlternativePaymentInstrument::from($data),
+            'MuchBetterVoucher' => AlternativePaymentInstrument::from($data),
             'Multibanco' => AlternativePaymentInstrument::from($data),
             'MyFatoorah' => AlternativePaymentInstrument::from($data),
             'Neosurf' => AlternativePaymentInstrument::from($data),

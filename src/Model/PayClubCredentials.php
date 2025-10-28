@@ -38,12 +38,12 @@ class PayClubCredentials implements JsonSerializable
         return new self($data);
     }
 
-    public function getMerchantId(): ?string
+    public function getMerchantId(): string
     {
-        return $this->fields['merchantId'] ?? null;
+        return $this->fields['merchantId'];
     }
 
-    public function setMerchantId(null|string $merchantId): static
+    public function setMerchantId(string $merchantId): static
     {
         $this->fields['merchantId'] = $merchantId;
 

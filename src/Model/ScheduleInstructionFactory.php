@@ -23,6 +23,7 @@ class ScheduleInstructionFactory
         return match ($data['method']) {
             'auto' => SchedulingMethodAuto::from($data),
             'date-interval' => SchedulingMethodDateInterval::from($data),
+            'day-and-month-of-year' => SchedulingMethodDayAndMonthOfYear::from($data),
             'day-of-month' => SchedulingMethodDayOfMonth::from($data),
             'day-of-week' => SchedulingMethodDayOfWeek::from($data),
             'immediately' => SchedulingMethodImmediately::from($data),

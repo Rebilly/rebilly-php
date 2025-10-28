@@ -73,6 +73,9 @@ class KycDocumentCheck implements JsonSerializable
         if (array_key_exists('score', $data)) {
             $this->setScore($data['score']);
         }
+        if (array_key_exists('reason', $data)) {
+            $this->setReason($data['reason']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -116,6 +119,18 @@ class KycDocumentCheck implements JsonSerializable
         return $this;
     }
 
+    public function getReason(): ?string
+    {
+        return $this->fields['reason'] ?? null;
+    }
+
+    public function setReason(null|string $reason): static
+    {
+        $this->fields['reason'] = $reason;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -127,6 +142,9 @@ class KycDocumentCheck implements JsonSerializable
         }
         if (array_key_exists('score', $this->fields)) {
             $data['score'] = $this->fields['score'];
+        }
+        if (array_key_exists('reason', $this->fields)) {
+            $data['reason'] = $this->fields['reason'];
         }
 
         return $data;
