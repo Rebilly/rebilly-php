@@ -79,6 +79,7 @@ class PostPaymentInstrumentRequestFactory
             'MiFinity-eWallet' => AlternativeInstrument::from($data),
             'MobilePay' => AlternativeInstrument::from($data),
             'MuchBetter' => AlternativeInstrument::from($data),
+            'MuchBetterVoucher' => AlternativeInstrument::from($data),
             'Multibanco' => AlternativeInstrument::from($data),
             'Neosurf' => AlternativeInstrument::from($data),
             'Netbanking' => AlternativeInstrument::from($data),

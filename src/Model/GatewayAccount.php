@@ -107,6 +107,8 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const GATEWAY_NAME_CREDORAX = 'Credorax';
 
+    public const GATEWAY_NAME_CRYPTOMUS = 'Cryptomus';
+
     public const GATEWAY_NAME_CRYPTONATOR = 'Cryptonator';
 
     public const GATEWAY_NAME_CYBER_SOURCE = 'CyberSource';
@@ -255,6 +257,8 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const GATEWAY_NAME_MY_FATOORAH = 'MyFatoorah';
 
+    public const GATEWAY_NAME_NAEWE = 'Naewe';
+
     public const GATEWAY_NAME_NEOSURF = 'Neosurf';
 
     public const GATEWAY_NAME_NETBANKING = 'Netbanking';
@@ -396,6 +400,8 @@ abstract class GatewayAccount implements JsonSerializable
     public const GATEWAY_NAME_SOFORT = 'Sofort';
 
     public const GATEWAY_NAME_SPARK_PAY = 'SparkPay';
+
+    public const GATEWAY_NAME_SPLITIT = 'Splitit';
 
     public const GATEWAY_NAME_STATIC_GATEWAY = 'StaticGateway';
 
@@ -1083,6 +1089,8 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const METHOD_MUCH_BETTER = 'MuchBetter';
 
+    public const METHOD_MUCH_BETTER_VOUCHER = 'MuchBetterVoucher';
+
     public const METHOD_MY_FATOORAH = 'MyFatoorah';
 
     public const METHOD_NEOSURF = 'Neosurf';
@@ -1503,6 +1511,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return Coppr::from($data);
             case 'Credorax':
                 return Credorax::from($data);
+            case 'Cryptomus':
+                return Cryptomus::from($data);
             case 'Cryptonator':
                 return Cryptonator::from($data);
             case 'CyberSource':
@@ -1649,6 +1659,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return MuchBetterGateway::from($data);
             case 'MyFatoorah':
                 return MyFatoorah::from($data);
+            case 'Naewe':
+                return Naewe::from($data);
             case 'Neosurf':
                 return Neosurf::from($data);
             case 'Netbanking':
@@ -1789,6 +1801,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return Sofort::from($data);
             case 'SparkPay':
                 return SparkPay::from($data);
+            case 'Splitit':
+                return Splitit::from($data);
             case 'StaticGateway':
                 return StaticGateway::from($data);
             case 'STPMexico':

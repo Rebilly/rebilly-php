@@ -99,6 +99,18 @@ class RecurringOrder implements Order
         if (array_key_exists('status', $data)) {
             $this->setStatus($data['status']);
         }
+        if (array_key_exists('inTrial', $data)) {
+            $this->setInTrial($data['inTrial']);
+        }
+        if (array_key_exists('trial', $data)) {
+            $this->setTrial($data['trial']);
+        }
+        if (array_key_exists('isTrialOnly', $data)) {
+            $this->setIsTrialOnly($data['isTrialOnly']);
+        }
+        if (array_key_exists('trialConversionTime', $data)) {
+            $this->setTrialConversionTime($data['trialConversionTime']);
+        }
         if (array_key_exists('items', $data)) {
             $this->setItems($data['items']);
         }
@@ -174,6 +186,9 @@ class RecurringOrder implements Order
         if (array_key_exists('cancelDescription', $data)) {
             $this->setCancelDescription($data['cancelDescription']);
         }
+        if (array_key_exists('billingPortalToken', $data)) {
+            $this->setBillingPortalToken($data['billingPortalToken']);
+        }
         if (array_key_exists('customFields', $data)) {
             $this->setCustomFields($data['customFields']);
         }
@@ -182,6 +197,9 @@ class RecurringOrder implements Order
         }
         if (array_key_exists('revision', $data)) {
             $this->setRevision($data['revision']);
+        }
+        if (array_key_exists('renewalTime', $data)) {
+            $this->setRenewalTime($data['renewalTime']);
         }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
@@ -259,6 +277,44 @@ class RecurringOrder implements Order
     public function getStatus(): ?string
     {
         return $this->fields['status'] ?? null;
+    }
+
+    public function getInTrial(): ?bool
+    {
+        return $this->fields['inTrial'] ?? null;
+    }
+
+    public function getTrial(): ?RecurringOrderTrial
+    {
+        return $this->fields['trial'] ?? null;
+    }
+
+    public function setTrial(null|RecurringOrderTrial|array $trial): static
+    {
+        if ($trial !== null && !($trial instanceof RecurringOrderTrial)) {
+            $trial = RecurringOrderTrial::from($trial);
+        }
+
+        $this->fields['trial'] = $trial;
+
+        return $this;
+    }
+
+    public function getIsTrialOnly(): ?bool
+    {
+        return $this->fields['isTrialOnly'] ?? null;
+    }
+
+    public function setIsTrialOnly(null|bool $isTrialOnly): static
+    {
+        $this->fields['isTrialOnly'] = $isTrialOnly;
+
+        return $this;
+    }
+
+    public function getTrialConversionTime(): ?DateTimeImmutable
+    {
+        return $this->fields['trialConversionTime'] ?? null;
     }
 
     /**
@@ -532,6 +588,11 @@ class RecurringOrder implements Order
         return $this->fields['cancelDescription'] ?? null;
     }
 
+    public function getBillingPortalToken(): ?string
+    {
+        return $this->fields['billingPortalToken'] ?? null;
+    }
+
     public function getCustomFields(): ?array
     {
         return $this->fields['customFields'] ?? null;
@@ -552,6 +613,11 @@ class RecurringOrder implements Order
     public function getRevision(): ?int
     {
         return $this->fields['revision'] ?? null;
+    }
+
+    public function getRenewalTime(): ?DateTimeImmutable
+    {
+        return $this->fields['renewalTime'] ?? null;
     }
 
     public function getCreatedTime(): ?DateTimeImmutable
@@ -616,6 +682,18 @@ class RecurringOrder implements Order
         }
         if (array_key_exists('status', $this->fields)) {
             $data['status'] = $this->fields['status'];
+        }
+        if (array_key_exists('inTrial', $this->fields)) {
+            $data['inTrial'] = $this->fields['inTrial'];
+        }
+        if (array_key_exists('trial', $this->fields)) {
+            $data['trial'] = $this->fields['trial']?->jsonSerialize();
+        }
+        if (array_key_exists('isTrialOnly', $this->fields)) {
+            $data['isTrialOnly'] = $this->fields['isTrialOnly'];
+        }
+        if (array_key_exists('trialConversionTime', $this->fields)) {
+            $data['trialConversionTime'] = $this->fields['trialConversionTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('items', $this->fields)) {
             $data['items'] = array_map(
@@ -695,6 +773,9 @@ class RecurringOrder implements Order
         if (array_key_exists('cancelDescription', $this->fields)) {
             $data['cancelDescription'] = $this->fields['cancelDescription'];
         }
+        if (array_key_exists('billingPortalToken', $this->fields)) {
+            $data['billingPortalToken'] = $this->fields['billingPortalToken'];
+        }
         if (array_key_exists('customFields', $this->fields)) {
             $data['customFields'] = $this->fields['customFields'];
         }
@@ -703,6 +784,9 @@ class RecurringOrder implements Order
         }
         if (array_key_exists('revision', $this->fields)) {
             $data['revision'] = $this->fields['revision'];
+        }
+        if (array_key_exists('renewalTime', $this->fields)) {
+            $data['renewalTime'] = $this->fields['renewalTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
@@ -763,6 +847,24 @@ class RecurringOrder implements Order
     private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
+
+        return $this;
+    }
+
+    private function setInTrial(null|bool $inTrial): static
+    {
+        $this->fields['inTrial'] = $inTrial;
+
+        return $this;
+    }
+
+    private function setTrialConversionTime(null|DateTimeImmutable|string $trialConversionTime): static
+    {
+        if ($trialConversionTime !== null && !($trialConversionTime instanceof DateTimeImmutable)) {
+            $trialConversionTime = new DateTimeImmutable($trialConversionTime);
+        }
+
+        $this->fields['trialConversionTime'] = $trialConversionTime;
 
         return $this;
     }
@@ -857,6 +959,13 @@ class RecurringOrder implements Order
         return $this;
     }
 
+    private function setBillingPortalToken(null|string $billingPortalToken): static
+    {
+        $this->fields['billingPortalToken'] = $billingPortalToken;
+
+        return $this;
+    }
+
     private function setMrr(null|float|string $mrr): static
     {
         if (is_string($mrr)) {
@@ -871,6 +980,17 @@ class RecurringOrder implements Order
     private function setRevision(null|int $revision): static
     {
         $this->fields['revision'] = $revision;
+
+        return $this;
+    }
+
+    private function setRenewalTime(null|DateTimeImmutable|string $renewalTime): static
+    {
+        if ($renewalTime !== null && !($renewalTime instanceof DateTimeImmutable)) {
+            $renewalTime = new DateTimeImmutable($renewalTime);
+        }
+
+        $this->fields['renewalTime'] = $renewalTime;
 
         return $this;
     }

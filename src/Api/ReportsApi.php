@@ -180,9 +180,9 @@ class ReportsApi
     }
 
     public function getDeclinedTransactions(
-        string $aggregationField,
-        DateTimeImmutable $periodStart,
-        DateTimeImmutable $periodEnd,
+        ?string $aggregationField = null,
+        ?DateTimeImmutable $periodStart = null,
+        ?DateTimeImmutable $periodEnd = null,
         ?int $limit = null,
         ?int $offset = null,
         ?string $filter = null,
@@ -587,9 +587,9 @@ class ReportsApi
     }
 
     public function getTax(
-        DateTimeImmutable $periodStart,
-        DateTimeImmutable $periodEnd,
-        string $accountingMethod,
+        ?DateTimeImmutable $periodStart = null,
+        ?DateTimeImmutable $periodEnd = null,
+        ?string $accountingMethod = null,
         ?int $limit = null,
         ?int $offset = null,
     ): ReportTax {

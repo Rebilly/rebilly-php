@@ -178,6 +178,8 @@ class ReadyToPayGenericMethod implements ReadyToPayMethods
 
     public const METHOD_MUCH_BETTER = 'MuchBetter';
 
+    public const METHOD_MUCH_BETTER_VOUCHER = 'MuchBetterVoucher';
+
     public const METHOD_MULTIBANCO = 'Multibanco';
 
     public const METHOD_NEOSURF = 'Neosurf';

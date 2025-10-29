@@ -230,6 +230,8 @@ class PaymentInstructionMethods implements PaymentInstruction
 
     public const METHODS_MUCH_BETTER = 'MuchBetter';
 
+    public const METHODS_MUCH_BETTER_VOUCHER = 'MuchBetterVoucher';
+
     public const METHODS_MY_FATOORAH = 'MyFatoorah';
 
     public const METHODS_NEOSURF = 'Neosurf';

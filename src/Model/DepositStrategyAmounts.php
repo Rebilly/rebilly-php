@@ -35,11 +35,17 @@ class DepositStrategyAmounts implements JsonSerializable
         if (array_key_exists('increments', $data)) {
             $this->setIncrements($data['increments']);
         }
+        if (array_key_exists('defaultIndex', $data)) {
+            $this->setDefaultIndex($data['defaultIndex']);
+        }
         if (array_key_exists('adjustBaseToLastDeposit', $data)) {
             $this->setAdjustBaseToLastDeposit($data['adjustBaseToLastDeposit']);
         }
         if (array_key_exists('hideBaseAmount', $data)) {
             $this->setHideBaseAmount($data['hideBaseAmount']);
+        }
+        if (array_key_exists('minimumBaseAmount', $data)) {
+            $this->setMinimumBaseAmount($data['minimumBaseAmount']);
         }
     }
 
@@ -99,6 +105,18 @@ class DepositStrategyAmounts implements JsonSerializable
         return $this;
     }
 
+    public function getDefaultIndex(): ?int
+    {
+        return $this->fields['defaultIndex'] ?? null;
+    }
+
+    public function setDefaultIndex(null|int $defaultIndex): static
+    {
+        $this->fields['defaultIndex'] = $defaultIndex;
+
+        return $this;
+    }
+
     public function getAdjustBaseToLastDeposit(): ?bool
     {
         return $this->fields['adjustBaseToLastDeposit'] ?? null;
@@ -123,6 +141,22 @@ class DepositStrategyAmounts implements JsonSerializable
         return $this;
     }
 
+    public function getMinimumBaseAmount(): ?float
+    {
+        return $this->fields['minimumBaseAmount'] ?? null;
+    }
+
+    public function setMinimumBaseAmount(null|float|string $minimumBaseAmount): static
+    {
+        if (is_string($minimumBaseAmount)) {
+            $minimumBaseAmount = (float) $minimumBaseAmount;
+        }
+
+        $this->fields['minimumBaseAmount'] = $minimumBaseAmount;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -135,11 +169,17 @@ class DepositStrategyAmounts implements JsonSerializable
         if (array_key_exists('increments', $this->fields)) {
             $data['increments'] = $this->fields['increments'];
         }
+        if (array_key_exists('defaultIndex', $this->fields)) {
+            $data['defaultIndex'] = $this->fields['defaultIndex'];
+        }
         if (array_key_exists('adjustBaseToLastDeposit', $this->fields)) {
             $data['adjustBaseToLastDeposit'] = $this->fields['adjustBaseToLastDeposit'];
         }
         if (array_key_exists('hideBaseAmount', $this->fields)) {
             $data['hideBaseAmount'] = $this->fields['hideBaseAmount'];
+        }
+        if (array_key_exists('minimumBaseAmount', $this->fields)) {
+            $data['minimumBaseAmount'] = $this->fields['minimumBaseAmount'];
         }
 
         return $data;
