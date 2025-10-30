@@ -25,6 +25,9 @@ class OnlineueberweisenSettings implements JsonSerializable
         if (array_key_exists('payformCode', $data)) {
             $this->setPayformCode($data['payformCode']);
         }
+        if (array_key_exists('extraStep', $data)) {
+            $this->setExtraStep($data['extraStep']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -44,11 +47,26 @@ class OnlineueberweisenSettings implements JsonSerializable
         return $this;
     }
 
+    public function getExtraStep(): ?bool
+    {
+        return $this->fields['extraStep'] ?? null;
+    }
+
+    public function setExtraStep(null|bool $extraStep): static
+    {
+        $this->fields['extraStep'] = $extraStep;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
         if (array_key_exists('payformCode', $this->fields)) {
             $data['payformCode'] = $this->fields['payformCode'];
+        }
+        if (array_key_exists('extraStep', $this->fields)) {
+            $data['extraStep'] = $this->fields['extraStep'];
         }
 
         return $data;
