@@ -26,7 +26,7 @@ class ProfileMfa implements JsonSerializable
 
     public const TYPE_DUO = 'duo';
 
-    public const TYPE_GUARDIAN = 'guardian';
+    public const TYPE_OTP = 'otp';
 
     public const TYPE_NULL = 'null';
 

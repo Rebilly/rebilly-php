@@ -90,6 +90,8 @@ class Transaction implements JsonSerializable
 
     public const GATEWAY_NAME_AIRWALLEX = 'Airwallex';
 
+    public const GATEWAY_NAME_ASIA_PAY = 'AsiaPay';
+
     public const GATEWAY_NAME_AMAZON_PAY = 'AmazonPay';
 
     public const GATEWAY_NAME_AMEX_VPC = 'AmexVPC';

@@ -28,6 +28,7 @@ use Rebilly\Sdk\Model\JournalSummaryReport;
 use Rebilly\Sdk\Model\RenewalSales;
 use Rebilly\Sdk\Model\ReportAnnualRecurringRevenue;
 use Rebilly\Sdk\Model\ReportDeclinedTransactions;
+use Rebilly\Sdk\Model\ReportDeferredRevenue;
 use Rebilly\Sdk\Model\ReportDisputeDelays;
 use Rebilly\Sdk\Model\ReportDisputes;
 use Rebilly\Sdk\Model\ReportEventsTriggeredSummary;
@@ -206,6 +207,31 @@ class ReportsApi
         return ReportDeclinedTransactions::from($data);
     }
 
+    public function getDeferredRevenue(
+        ?string $currency = null,
+        ?DateTimeImmutable $asOfDate = null,
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $filter = null,
+    ): ReportDeferredRevenue {
+        $queryParams = [
+            'currency' => $currency,
+            'asOfDate' => $asOfDate->format('Y-m-d\TH:i:s\Z'),
+            'limit' => $limit,
+            'offset' => $offset,
+            'filter' => $filter,
+        ];
+        $uri = '/experimental/reports/deferred-revenue?' . http_build_query($queryParams);
+
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return ReportDeferredRevenue::from($data);
+    }
+
     public function getDisputes(
         string $aggregationField,
         string $periodMonth,
@@ -255,8 +281,8 @@ class ReportsApi
     }
 
     public function getFutureRenewals(
-        string $periodStart,
-        string $periodEnd,
+        ?string $periodStart = null,
+        ?string $periodEnd = null,
         ?int $limit = null,
         ?int $offset = null,
     ): FutureRenewals {

@@ -30,6 +30,8 @@ class GridSegmentData implements JsonSerializable
 
     public const TYPE_SUBSCRIPTIONS = 'subscriptions';
 
+    public const TYPE_ORDERS = 'orders';
+
     public const TYPE_API_LOGS = 'api-logs';
 
     public const TYPE_COUPON_REDEMPTIONS = 'coupon-redemptions';

@@ -27,8 +27,6 @@ class OAuth2Credential implements ServiceCredential
 
     public const SERVICE_GOOGLE_SHEETS = 'google-sheets';
 
-    public const SERVICE_KEAP_INFUSIONSOFT = 'keap-infusionsoft';
-
     public const SERVICE_INTUIT_QUICKBOOKS = 'intuit-quickbooks';
 
     private array $fields = [];
