@@ -28,6 +28,9 @@ class KycSettingsIdentity implements JsonSerializable
         if (array_key_exists('thresholds', $data)) {
             $this->setThresholds($data['thresholds']);
         }
+        if (array_key_exists('minimumAgeSettings', $data)) {
+            $this->setMinimumAgeSettings($data['minimumAgeSettings']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -67,6 +70,22 @@ class KycSettingsIdentity implements JsonSerializable
         return $this;
     }
 
+    public function getMinimumAgeSettings(): ?KycSettingsIdentityMinimumAgeSettings
+    {
+        return $this->fields['minimumAgeSettings'] ?? null;
+    }
+
+    public function setMinimumAgeSettings(null|KycSettingsIdentityMinimumAgeSettings|array $minimumAgeSettings): static
+    {
+        if ($minimumAgeSettings !== null && !($minimumAgeSettings instanceof KycSettingsIdentityMinimumAgeSettings)) {
+            $minimumAgeSettings = KycSettingsIdentityMinimumAgeSettings::from($minimumAgeSettings);
+        }
+
+        $this->fields['minimumAgeSettings'] = $minimumAgeSettings;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -75,6 +94,9 @@ class KycSettingsIdentity implements JsonSerializable
         }
         if (array_key_exists('thresholds', $this->fields)) {
             $data['thresholds'] = $this->fields['thresholds']?->jsonSerialize();
+        }
+        if (array_key_exists('minimumAgeSettings', $this->fields)) {
+            $data['minimumAgeSettings'] = $this->fields['minimumAgeSettings']?->jsonSerialize();
         }
 
         return $data;

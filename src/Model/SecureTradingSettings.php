@@ -25,8 +25,8 @@ class SecureTradingSettings implements JsonSerializable
         if (array_key_exists('enableRecurring', $data)) {
             $this->setEnableRecurring($data['enableRecurring']);
         }
-        if (array_key_exists('includeParentTransactionForRecurring', $data)) {
-            $this->setIncludeParentTransactionForRecurring($data['includeParentTransactionForRecurring']);
+        if (array_key_exists('useParentTransactionOnFile', $data)) {
+            $this->setUseParentTransactionOnFile($data['useParentTransactionOnFile']);
         }
     }
 
@@ -47,14 +47,14 @@ class SecureTradingSettings implements JsonSerializable
         return $this;
     }
 
-    public function getIncludeParentTransactionForRecurring(): ?bool
+    public function getUseParentTransactionOnFile(): ?bool
     {
-        return $this->fields['includeParentTransactionForRecurring'] ?? null;
+        return $this->fields['useParentTransactionOnFile'] ?? null;
     }
 
-    public function setIncludeParentTransactionForRecurring(null|bool $includeParentTransactionForRecurring): static
+    public function setUseParentTransactionOnFile(null|bool $useParentTransactionOnFile): static
     {
-        $this->fields['includeParentTransactionForRecurring'] = $includeParentTransactionForRecurring;
+        $this->fields['useParentTransactionOnFile'] = $useParentTransactionOnFile;
 
         return $this;
     }
@@ -65,8 +65,8 @@ class SecureTradingSettings implements JsonSerializable
         if (array_key_exists('enableRecurring', $this->fields)) {
             $data['enableRecurring'] = $this->fields['enableRecurring'];
         }
-        if (array_key_exists('includeParentTransactionForRecurring', $this->fields)) {
-            $data['includeParentTransactionForRecurring'] = $this->fields['includeParentTransactionForRecurring'];
+        if (array_key_exists('useParentTransactionOnFile', $this->fields)) {
+            $data['useParentTransactionOnFile'] = $this->fields['useParentTransactionOnFile'];
         }
 
         return $data;

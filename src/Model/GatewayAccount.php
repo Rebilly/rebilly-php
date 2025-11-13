@@ -35,6 +35,8 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const GATEWAY_NAME_AIRWALLEX = 'Airwallex';
 
+    public const GATEWAY_NAME_ASIA_PAY = 'AsiaPay';
+
     public const GATEWAY_NAME_AMAZON_PAY = 'AmazonPay';
 
     public const GATEWAY_NAME_AMEX_VPC = 'AmexVPC';
@@ -1445,6 +1447,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return AmexVPC::from($data);
             case 'ApcoPay':
                 return ApcoPay::from($data);
+            case 'AsiaPay':
+                return AsiaPay::from($data);
             case 'AsiaPaymentGateway':
                 return AsiaPaymentGateway::from($data);
             case 'AstroPayCard':

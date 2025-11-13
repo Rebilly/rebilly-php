@@ -44,6 +44,9 @@ class StripeSettings implements JsonSerializable
         if (array_key_exists('applicationFeePercentage', $data)) {
             $this->setApplicationFeePercentage($data['applicationFeePercentage']);
         }
+        if (array_key_exists('includeCardNetwork', $data)) {
+            $this->setIncludeCardNetwork($data['includeCardNetwork']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -123,6 +126,18 @@ class StripeSettings implements JsonSerializable
         return $this;
     }
 
+    public function getIncludeCardNetwork(): ?bool
+    {
+        return $this->fields['includeCardNetwork'] ?? null;
+    }
+
+    public function setIncludeCardNetwork(null|bool $includeCardNetwork): static
+    {
+        $this->fields['includeCardNetwork'] = $includeCardNetwork;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -143,6 +158,9 @@ class StripeSettings implements JsonSerializable
         }
         if (array_key_exists('applicationFeePercentage', $this->fields)) {
             $data['applicationFeePercentage'] = $this->fields['applicationFeePercentage'];
+        }
+        if (array_key_exists('includeCardNetwork', $this->fields)) {
+            $data['includeCardNetwork'] = $this->fields['includeCardNetwork'];
         }
 
         return $data;

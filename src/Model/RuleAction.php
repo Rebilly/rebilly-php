@@ -41,10 +41,6 @@ abstract class RuleAction implements JsonSerializable
 
     public const NAME_CREATE_INTUIT_QUICKBOOKS_REVENUE_RECOGNITION_ENTRY = 'create-intuit-quickbooks-revenue-recognition-entry';
 
-    public const NAME_CREATE_KEAP_INFUSIONSOFT_ORDER = 'create-keap-infusionsoft-order';
-
-    public const NAME_CREATE_KEAP_INFUSIONSOFT_PAYMENT = 'create-keap-infusionsoft-payment';
-
     public const NAME_DECLINE_TRANSACTION = 'decline-transaction';
 
     public const NAME_CHECK_ONTARIO_RESTRICTION = 'check-ontario-restriction';
@@ -116,10 +112,6 @@ abstract class RuleAction implements JsonSerializable
                 return RuleActionCancelScheduledPayments::from($data);
             case 'check-ontario-restriction':
                 return RuleActionCheckOntarioRestriction::from($data);
-            case 'create-keap-infusionsoft-order':
-                return RuleActionCreateInfusionsoftOrder::from($data);
-            case 'create-keap-infusionsoft-payment':
-                return RuleActionCreateInfusionsoftPayment::from($data);
             case 'create-intuit-quickbooks-balance-transaction-entry':
                 return RuleActionCreateIntuitQuickbooksBalanceTransactionEntry::from($data);
             case 'create-intuit-quickbooks-invoice':

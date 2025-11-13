@@ -14,14 +14,14 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-class PayTabs extends GatewayAccount
+class AsiaPay extends GatewayAccount
 {
     private array $fields = [];
 
     public function __construct(array $data = [])
     {
         parent::__construct([
-            'gatewayName' => 'PayTabs',
+            'gatewayName' => 'AsiaPay',
         ] + $data);
 
         if (array_key_exists('credentials', $data)) {
@@ -37,15 +37,15 @@ class PayTabs extends GatewayAccount
         return new self($data);
     }
 
-    public function getCredentials(): PayTabsCredentials
+    public function getCredentials(): AsiaPayCredentials
     {
         return $this->fields['credentials'];
     }
 
-    public function setCredentials(PayTabsCredentials|array $credentials): static
+    public function setCredentials(AsiaPayCredentials|array $credentials): static
     {
-        if (!($credentials instanceof PayTabsCredentials)) {
-            $credentials = PayTabsCredentials::from($credentials);
+        if (!($credentials instanceof AsiaPayCredentials)) {
+            $credentials = AsiaPayCredentials::from($credentials);
         }
 
         $this->fields['credentials'] = $credentials;
@@ -53,15 +53,15 @@ class PayTabs extends GatewayAccount
         return $this;
     }
 
-    public function getSettings(): ?PayTabsSettings
+    public function getSettings(): ?AsiaPaySettings
     {
         return $this->fields['settings'] ?? null;
     }
 
-    public function setSettings(null|PayTabsSettings|array $settings): static
+    public function setSettings(null|AsiaPaySettings|array $settings): static
     {
-        if ($settings !== null && !($settings instanceof PayTabsSettings)) {
-            $settings = PayTabsSettings::from($settings);
+        if ($settings !== null && !($settings instanceof AsiaPaySettings)) {
+            $settings = AsiaPaySettings::from($settings);
         }
 
         $this->fields['settings'] = $settings;
