@@ -102,6 +102,9 @@ class Customer implements JsonSerializable
         if (array_key_exists('leadSource', $data)) {
             $this->setLeadSource($data['leadSource']);
         }
+        if (array_key_exists('personId', $data)) {
+            $this->setPersonId($data['personId']);
+        }
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
@@ -374,6 +377,18 @@ class Customer implements JsonSerializable
         return $this;
     }
 
+    public function getPersonId(): ?string
+    {
+        return $this->fields['personId'] ?? null;
+    }
+
+    public function setPersonId(null|string $personId): static
+    {
+        $this->fields['personId'] = $personId;
+
+        return $this;
+    }
+
     /**
      * @return null|ResourceLink[]
      */
@@ -488,6 +503,9 @@ class Customer implements JsonSerializable
         }
         if (array_key_exists('leadSource', $this->fields)) {
             $data['leadSource'] = $this->fields['leadSource']?->jsonSerialize();
+        }
+        if (array_key_exists('personId', $this->fields)) {
+            $data['personId'] = $this->fields['personId'];
         }
         if (array_key_exists('_links', $this->fields)) {
             $data['_links'] = $this->fields['_links'] !== null
