@@ -1,5 +1,31 @@
 # @rebilly/client-php
 
+## 3.1.6
+
+### Patch Changes
+
+- fix(api-definitions): Update ProfileMfa schema to replace guardian with otp in enum values Rebilly/rebilly#16289
+- fix(api-definitions,be): Add redirectUrl and riskMetadata to StorefrontPostDeposit Rebilly/rebilly#16319
+- feat(be, payment-gateways): Add Stripe setting to include payment card network Rebilly/rebilly#16126
+- feat(be, api-definitions): Add new orders segment Rebilly/rebilly#16258
+- fix(be, payment-gateways): Add Secure trading setting and use MIT Rebilly/rebilly#16373
+- refactor(be): use default dates for FutureRenewalReport Rebilly/rebilly#16087
+- feat(be, payment-gateways): Implement AsiaPay gateway integration Rebilly/rebilly#16196
+- refactor(be,api-definitions): refactor TransactionReportDto to use default values Rebilly/rebilly#16499
+- fix(api-definitions): Improve descriptions of gateway account custom fields settings Rebilly/rebilly#16229
+- feat(backend): Parametrize minimal age in KYC identity proof checks Rebilly/rebilly#15925
+- fix(api-definitions): Fix missed properties for required Rebilly/rebilly#16470
+- fix(website): Fix no-past-future lint issue Rebilly/rebilly#16465
+- docs(api-definitions): Remove infusionsoft related definitions for api schema Rebilly/rebilly#15802
+- feat(be): Create a Person entity when a Customer is created Rebilly/rebilly#16340
+- feat(api-definitions): Add supported file type docs for identity verification Rebilly/rebilly#16153
+- fix(website): Fix broken E2E test & lint issues Rebilly/rebilly#16464
+- feat(be/payment-gateways, api-definitions): Add extra step to collect account holder and bank country to Onlineueberweisen Rebilly/rebilly#16133
+- feat(be): Add Deferred Revenue report Rebilly/rebilly#16189
+- feat(be, payment-gateways): Refactor PayTabs to own form integration Rebilly/rebilly#16342
+- docs(api-definitions,replay-platform): Add guidance for fields Rebilly/rebilly#16304
+- feat(be,api-definitions): Improve PostStorefrontDeposit to accept a payment instrument or token Rebilly/rebilly#16257
+
 ## 3.1.5
 
 ### Patch Changes
