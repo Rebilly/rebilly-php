@@ -665,9 +665,9 @@ class ReportsApi
     }
 
     public function getTransactions(
-        DateTimeImmutable $periodStart,
-        DateTimeImmutable $periodEnd,
-        string $aggregationField,
+        ?DateTimeImmutable $periodStart = null,
+        ?DateTimeImmutable $periodEnd = null,
+        ?string $aggregationField = null,
         ?int $limit = null,
         ?int $offset = null,
         ?string $filter = null,
