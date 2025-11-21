@@ -93,9 +93,6 @@ class RecurringOrder implements Order
         if (array_key_exists('recentInvoiceId', $data)) {
             $this->setRecentInvoiceId($data['recentInvoiceId']);
         }
-        if (array_key_exists('upcomingInvoiceId', $data)) {
-            $this->setUpcomingInvoiceId($data['upcomingInvoiceId']);
-        }
         if (array_key_exists('status', $data)) {
             $this->setStatus($data['status']);
         }
@@ -267,11 +264,6 @@ class RecurringOrder implements Order
     public function getRecentInvoiceId(): ?string
     {
         return $this->fields['recentInvoiceId'] ?? null;
-    }
-
-    public function getUpcomingInvoiceId(): ?string
-    {
-        return $this->fields['upcomingInvoiceId'] ?? null;
     }
 
     public function getStatus(): ?string
@@ -677,9 +669,6 @@ class RecurringOrder implements Order
         if (array_key_exists('recentInvoiceId', $this->fields)) {
             $data['recentInvoiceId'] = $this->fields['recentInvoiceId'];
         }
-        if (array_key_exists('upcomingInvoiceId', $this->fields)) {
-            $data['upcomingInvoiceId'] = $this->fields['upcomingInvoiceId'];
-        }
         if (array_key_exists('status', $this->fields)) {
             $data['status'] = $this->fields['status'];
         }
@@ -833,13 +822,6 @@ class RecurringOrder implements Order
     private function setRecentInvoiceId(null|string $recentInvoiceId): static
     {
         $this->fields['recentInvoiceId'] = $recentInvoiceId;
-
-        return $this;
-    }
-
-    private function setUpcomingInvoiceId(null|string $upcomingInvoiceId): static
-    {
-        $this->fields['upcomingInvoiceId'] = $upcomingInvoiceId;
 
         return $this;
     }

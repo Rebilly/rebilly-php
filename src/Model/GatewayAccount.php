@@ -305,6 +305,8 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const GATEWAY_NAME_PAY4_FUN = 'Pay4Fun';
 
+    public const GATEWAY_NAME_PAYBILT = 'Paybilt';
+
     public const GATEWAY_NAME_PAY_CASH = 'PayCash';
 
     public const GATEWAY_NAME_PAYCLY = 'Paycly';
@@ -736,6 +738,8 @@ abstract class GatewayAccount implements JsonSerializable
     public const ACQUIRER_NAME_PARAMOUNT_INTERAC = 'ParamountInterac';
 
     public const ACQUIRER_NAME_PAY4_FUN = 'Pay4fun';
+
+    public const ACQUIRER_NAME_PAYBILT = 'Paybilt';
 
     public const ACQUIRER_NAME_PAY_CASH = 'PayCash';
 
@@ -1709,6 +1713,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return ParamountInterac::from($data);
             case 'Pay4Fun':
                 return Pay4Fun::from($data);
+            case 'Paybilt':
+                return Paybilt::from($data);
             case 'PayCash':
                 return PayCash::from($data);
             case 'PayClub':

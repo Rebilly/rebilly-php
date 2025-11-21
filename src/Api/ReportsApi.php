@@ -233,8 +233,8 @@ class ReportsApi
     }
 
     public function getDisputes(
-        string $aggregationField,
-        string $periodMonth,
+        ?string $aggregationField = null,
+        ?string $periodMonth = null,
         ?int $limit = null,
         ?int $offset = null,
         ?string $filter = null,
@@ -541,9 +541,9 @@ class ReportsApi
      */
     public function getRevenueWaterfall(
         string $currency,
-        string $issuedFrom,
-        string $issuedTo,
-        string $recognizedTo,
+        ?string $issuedFrom = null,
+        ?string $issuedTo = null,
+        ?string $recognizedTo = null,
     ): array {
         $queryParams = [
             'currency' => $currency,
@@ -692,9 +692,9 @@ class ReportsApi
     }
 
     public function getTransactionsTimeDispute(
-        string $aggregationField,
-        DateTimeImmutable $periodStart,
-        DateTimeImmutable $periodEnd,
+        ?string $aggregationField = null,
+        ?DateTimeImmutable $periodStart = null,
+        ?DateTimeImmutable $periodEnd = null,
         ?int $limit = null,
         ?int $offset = null,
         ?string $filter = null,
