@@ -154,9 +154,9 @@ class ReportsApi
     }
 
     public function getDccMarkup(
-        string $aggregationField,
-        DateTimeImmutable $periodStart,
-        DateTimeImmutable $periodEnd,
+        ?string $aggregationField = null,
+        ?DateTimeImmutable $periodStart = null,
+        ?DateTimeImmutable $periodEnd = null,
         ?int $limit = null,
         ?int $offset = null,
         ?string $filter = null,
@@ -233,8 +233,8 @@ class ReportsApi
     }
 
     public function getDisputes(
-        string $aggregationField,
-        string $periodMonth,
+        ?string $aggregationField = null,
+        ?string $periodMonth = null,
         ?int $limit = null,
         ?int $offset = null,
         ?string $filter = null,
@@ -258,8 +258,8 @@ class ReportsApi
     }
 
     public function getEventsTriggeredSummary(
-        DateTimeImmutable $periodStart,
-        DateTimeImmutable $periodEnd,
+        ?DateTimeImmutable $periodStart = null,
+        ?DateTimeImmutable $periodEnd = null,
         ?int $limit = null,
         ?int $offset = null,
     ): ReportEventsTriggeredSummary {
@@ -500,12 +500,12 @@ class ReportsApi
     }
 
     public function getRetentionValue(
-        string $aggregationField,
-        string $aggregationPeriod,
-        DateTimeImmutable $periodStart,
-        DateTimeImmutable $periodEnd,
+        ?string $aggregationField = null,
+        ?string $aggregationPeriod = null,
         ?string $includeRefunds = null,
         ?string $includeDisputes = null,
+        ?DateTimeImmutable $periodStart = null,
+        ?DateTimeImmutable $periodEnd = null,
         ?int $limit = null,
         ?int $offset = null,
         ?string $filter = null,
@@ -515,10 +515,10 @@ class ReportsApi
         $queryParams = [
             'aggregationField' => $aggregationField,
             'aggregationPeriod' => $aggregationPeriod,
-            'periodStart' => $periodStart->format('Y-m-d\TH:i:s\Z'),
-            'periodEnd' => $periodEnd->format('Y-m-d\TH:i:s\Z'),
             'includeRefunds' => $includeRefunds,
             'includeDisputes' => $includeDisputes,
+            'periodStart' => $periodStart->format('Y-m-d\TH:i:s\Z'),
+            'periodEnd' => $periodEnd->format('Y-m-d\TH:i:s\Z'),
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
@@ -541,9 +541,9 @@ class ReportsApi
      */
     public function getRevenueWaterfall(
         string $currency,
-        string $issuedFrom,
-        string $issuedTo,
-        string $recognizedTo,
+        ?string $issuedFrom = null,
+        ?string $issuedTo = null,
+        ?string $recognizedTo = null,
     ): array {
         $queryParams = [
             'currency' => $currency,
@@ -638,10 +638,10 @@ class ReportsApi
     }
 
     public function getTimeSeriesTransaction(
-        string $type,
-        string $subaggregate,
-        DateTimeImmutable $periodStart,
-        DateTimeImmutable $periodEnd,
+        ?string $type = null,
+        ?string $subaggregate = null,
+        ?DateTimeImmutable $periodStart = null,
+        ?DateTimeImmutable $periodEnd = null,
         ?int $limit = null,
         ?int $offset = null,
     ): TimeSeriesTransaction {
@@ -692,9 +692,9 @@ class ReportsApi
     }
 
     public function getTransactionsTimeDispute(
-        string $aggregationField,
-        DateTimeImmutable $periodStart,
-        DateTimeImmutable $periodEnd,
+        ?string $aggregationField = null,
+        ?DateTimeImmutable $periodStart = null,
+        ?DateTimeImmutable $periodEnd = null,
         ?int $limit = null,
         ?int $offset = null,
         ?string $filter = null,
@@ -720,8 +720,8 @@ class ReportsApi
 
     public function getTriggeredEventRuleReport(
         string $eventType,
-        DateTimeImmutable $periodStart,
-        DateTimeImmutable $periodEnd,
+        ?DateTimeImmutable $periodStart = null,
+        ?DateTimeImmutable $periodEnd = null,
         ?int $limit = null,
         ?int $offset = null,
     ): ReportRulesMatchedSummary {
