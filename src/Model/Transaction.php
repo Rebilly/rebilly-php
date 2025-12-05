@@ -360,6 +360,8 @@ class Transaction implements JsonSerializable
 
     public const GATEWAY_NAME_PAY4_FUN = 'Pay4Fun';
 
+    public const GATEWAY_NAME_PAYBILT = 'Paybilt';
+
     public const GATEWAY_NAME_PAY_CASH = 'PayCash';
 
     public const GATEWAY_NAME_PAYCLY = 'Paycly';
@@ -791,6 +793,8 @@ class Transaction implements JsonSerializable
     public const ACQUIRER_NAME_PARAMOUNT_INTERAC = 'ParamountInterac';
 
     public const ACQUIRER_NAME_PAY4_FUN = 'Pay4fun';
+
+    public const ACQUIRER_NAME_PAYBILT = 'Paybilt';
 
     public const ACQUIRER_NAME_PAY_CASH = 'PayCash';
 

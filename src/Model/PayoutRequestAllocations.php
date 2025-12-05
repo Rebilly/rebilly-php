@@ -704,6 +704,8 @@ class PayoutRequestAllocations implements JsonSerializable
 
     public const GATEWAY_NAME_PAY4_FUN = 'Pay4Fun';
 
+    public const GATEWAY_NAME_PAYBILT = 'Paybilt';
+
     public const GATEWAY_NAME_PAY_CASH = 'PayCash';
 
     public const GATEWAY_NAME_PAYCLY = 'Paycly';
