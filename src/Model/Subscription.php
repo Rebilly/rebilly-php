@@ -132,9 +132,6 @@ class Subscription implements SubscriptionOrOneTimeSale
         if (array_key_exists('isTrialOnly', $data)) {
             $this->setIsTrialOnly($data['isTrialOnly']);
         }
-        if (array_key_exists('isTrialConverted', $data)) {
-            $this->setIsTrialConverted($data['isTrialConverted']);
-        }
         if (array_key_exists('trialConversionTime', $data)) {
             $this->setTrialConversionTime($data['trialConversionTime']);
         }
@@ -342,11 +339,6 @@ class Subscription implements SubscriptionOrOneTimeSale
         $this->fields['isTrialOnly'] = $isTrialOnly;
 
         return $this;
-    }
-
-    public function getIsTrialConverted(): ?bool
-    {
-        return $this->fields['isTrialConverted'] ?? null;
     }
 
     public function getTrialConversionTime(): ?DateTimeImmutable
@@ -789,9 +781,6 @@ class Subscription implements SubscriptionOrOneTimeSale
         if (array_key_exists('isTrialOnly', $this->fields)) {
             $data['isTrialOnly'] = $this->fields['isTrialOnly'];
         }
-        if (array_key_exists('isTrialConverted', $this->fields)) {
-            $data['isTrialConverted'] = $this->fields['isTrialConverted'];
-        }
         if (array_key_exists('trialConversionTime', $this->fields)) {
             $data['trialConversionTime'] = $this->fields['trialConversionTime']?->format(DateTimeInterface::RFC3339);
         }
@@ -986,13 +975,6 @@ class Subscription implements SubscriptionOrOneTimeSale
     private function setInTrial(null|bool $inTrial): static
     {
         $this->fields['inTrial'] = $inTrial;
-
-        return $this;
-    }
-
-    private function setIsTrialConverted(null|bool $isTrialConverted): static
-    {
-        $this->fields['isTrialConverted'] = $isTrialConverted;
 
         return $this;
     }

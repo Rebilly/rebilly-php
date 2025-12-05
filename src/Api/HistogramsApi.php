@@ -27,10 +27,10 @@ class HistogramsApi
     }
 
     public function getTransactionHistogramReport(
-        DateTimeImmutable $periodStart,
-        DateTimeImmutable $periodEnd,
-        string $aggregationPeriod,
-        string $metric,
+        ?DateTimeImmutable $periodStart = null,
+        ?DateTimeImmutable $periodEnd = null,
+        ?string $aggregationPeriod = null,
+        ?string $metric = null,
         ?string $filter = null,
     ): HistogramData {
         $queryParams = [
