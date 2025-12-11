@@ -78,8 +78,8 @@ class ReportsApi
     }
 
     public function getApiLogSummary(
-        DateTimeImmutable $periodStart,
-        DateTimeImmutable $periodEnd,
+        ?DateTimeImmutable $periodStart = null,
+        ?DateTimeImmutable $periodEnd = null,
         ?int $limit = null,
         ?int $offset = null,
     ): ApiLogSummary {
@@ -101,9 +101,9 @@ class ReportsApi
     }
 
     public function getCumulativeSubscriptions(
-        string $aggregationField,
-        DateTimeImmutable $periodStart,
-        DateTimeImmutable $periodEnd,
+        ?string $aggregationField = null,
+        ?DateTimeImmutable $periodStart = null,
+        ?DateTimeImmutable $periodEnd = null,
         ?int $limit = null,
         ?int $offset = null,
         ?string $filter = null,
@@ -131,8 +131,8 @@ class ReportsApi
      * @return DashboardResponse[]
      */
     public function getDashboardMetrics(
-        DateTimeImmutable $periodStart,
-        DateTimeImmutable $periodEnd,
+        ?DateTimeImmutable $periodStart = null,
+        ?DateTimeImmutable $periodEnd = null,
         ?string $metrics = null,
         ?string $segments = null,
     ): array {
@@ -154,9 +154,9 @@ class ReportsApi
     }
 
     public function getDccMarkup(
-        string $aggregationField,
-        DateTimeImmutable $periodStart,
-        DateTimeImmutable $periodEnd,
+        ?string $aggregationField = null,
+        ?DateTimeImmutable $periodStart = null,
+        ?DateTimeImmutable $periodEnd = null,
         ?int $limit = null,
         ?int $offset = null,
         ?string $filter = null,
@@ -233,8 +233,8 @@ class ReportsApi
     }
 
     public function getDisputes(
-        string $aggregationField,
-        string $periodMonth,
+        ?string $aggregationField = null,
+        ?string $periodMonth = null,
         ?int $limit = null,
         ?int $offset = null,
         ?string $filter = null,
@@ -258,8 +258,8 @@ class ReportsApi
     }
 
     public function getEventsTriggeredSummary(
-        DateTimeImmutable $periodStart,
-        DateTimeImmutable $periodEnd,
+        ?DateTimeImmutable $periodStart = null,
+        ?DateTimeImmutable $periodEnd = null,
         ?int $limit = null,
         ?int $offset = null,
     ): ReportEventsTriggeredSummary {
@@ -362,12 +362,12 @@ class ReportsApi
     }
 
     public function getKycAcceptanceSummary(
-        DateTimeImmutable $periodStart,
-        DateTimeImmutable $periodEnd,
+        ?DateTimeImmutable $periodStart = null,
+        mixed $periodEnd = null,
     ): GetKycAcceptanceSummaryReportResponse {
         $queryParams = [
             'periodStart' => $periodStart->format('Y-m-d\TH:i:s\Z'),
-            'periodEnd' => $periodEnd->format('Y-m-d\TH:i:s\Z'),
+            'periodEnd' => $periodEnd,
         ];
         $uri = '/experimental/reports/kyc-acceptance-summary?' . http_build_query($queryParams);
 
@@ -444,8 +444,8 @@ class ReportsApi
     }
 
     public function getRenewalSales(
-        string $periodStart,
-        string $periodEnd,
+        ?string $periodStart = null,
+        ?string $periodEnd = null,
         ?int $limit = null,
         ?int $offset = null,
     ): RenewalSales {
@@ -467,11 +467,11 @@ class ReportsApi
     }
 
     public function getRetentionPercentage(
-        string $aggregationField,
-        string $aggregationPeriod,
-        DateTimeImmutable $periodStart,
-        DateTimeImmutable $periodEnd,
+        ?string $aggregationField = null,
+        ?string $aggregationPeriod = null,
         ?string $includeSwitchedSubscriptions = null,
+        ?DateTimeImmutable $periodStart = null,
+        ?DateTimeImmutable $periodEnd = null,
         ?int $limit = null,
         ?int $offset = null,
         ?string $filter = null,
@@ -480,9 +480,9 @@ class ReportsApi
         $queryParams = [
             'aggregationField' => $aggregationField,
             'aggregationPeriod' => $aggregationPeriod,
+            'includeSwitchedSubscriptions' => $includeSwitchedSubscriptions,
             'periodStart' => $periodStart->format('Y-m-d\TH:i:s\Z'),
             'periodEnd' => $periodEnd->format('Y-m-d\TH:i:s\Z'),
-            'includeSwitchedSubscriptions' => $includeSwitchedSubscriptions,
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
@@ -500,12 +500,12 @@ class ReportsApi
     }
 
     public function getRetentionValue(
-        string $aggregationField,
-        string $aggregationPeriod,
-        DateTimeImmutable $periodStart,
-        DateTimeImmutable $periodEnd,
+        ?string $aggregationField = null,
+        ?string $aggregationPeriod = null,
         ?string $includeRefunds = null,
         ?string $includeDisputes = null,
+        ?DateTimeImmutable $periodStart = null,
+        ?DateTimeImmutable $periodEnd = null,
         ?int $limit = null,
         ?int $offset = null,
         ?string $filter = null,
@@ -515,10 +515,10 @@ class ReportsApi
         $queryParams = [
             'aggregationField' => $aggregationField,
             'aggregationPeriod' => $aggregationPeriod,
-            'periodStart' => $periodStart->format('Y-m-d\TH:i:s\Z'),
-            'periodEnd' => $periodEnd->format('Y-m-d\TH:i:s\Z'),
             'includeRefunds' => $includeRefunds,
             'includeDisputes' => $includeDisputes,
+            'periodStart' => $periodStart->format('Y-m-d\TH:i:s\Z'),
+            'periodEnd' => $periodEnd->format('Y-m-d\TH:i:s\Z'),
             'limit' => $limit,
             'offset' => $offset,
             'filter' => $filter,
@@ -541,9 +541,9 @@ class ReportsApi
      */
     public function getRevenueWaterfall(
         string $currency,
-        string $issuedFrom,
-        string $issuedTo,
-        string $recognizedTo,
+        ?string $issuedFrom = null,
+        ?string $issuedTo = null,
+        ?string $recognizedTo = null,
     ): array {
         $queryParams = [
             'currency' => $currency,
@@ -563,9 +563,9 @@ class ReportsApi
     }
 
     public function getSubscriptionCancellation(
-        DateTimeImmutable $periodStart,
-        DateTimeImmutable $periodEnd,
-        string $aggregationField,
+        ?DateTimeImmutable $periodStart = null,
+        ?DateTimeImmutable $periodEnd = null,
+        ?string $aggregationField = null,
         ?int $limit = null,
         ?int $offset = null,
         ?string $filter = null,
@@ -590,14 +590,14 @@ class ReportsApi
     }
 
     public function getSubscriptionRenewal(
-        DateTimeImmutable $periodStart,
-        DateTimeImmutable $periodEnd,
+        ?DateTimeImmutable $periodStart = null,
+        mixed $periodEnd = null,
         ?int $limit = null,
         ?int $offset = null,
     ): SubscriptionRenewal {
         $queryParams = [
             'periodStart' => $periodStart->format('Y-m-d\TH:i:s\Z'),
-            'periodEnd' => $periodEnd->format('Y-m-d\TH:i:s\Z'),
+            'periodEnd' => $periodEnd,
             'limit' => $limit,
             'offset' => $offset,
         ];
@@ -638,10 +638,10 @@ class ReportsApi
     }
 
     public function getTimeSeriesTransaction(
-        string $type,
-        string $subaggregate,
-        DateTimeImmutable $periodStart,
-        DateTimeImmutable $periodEnd,
+        ?string $type = null,
+        ?string $subaggregate = null,
+        ?DateTimeImmutable $periodStart = null,
+        ?DateTimeImmutable $periodEnd = null,
         ?int $limit = null,
         ?int $offset = null,
     ): TimeSeriesTransaction {
@@ -692,9 +692,9 @@ class ReportsApi
     }
 
     public function getTransactionsTimeDispute(
-        string $aggregationField,
-        DateTimeImmutable $periodStart,
-        DateTimeImmutable $periodEnd,
+        ?string $aggregationField = null,
+        ?DateTimeImmutable $periodStart = null,
+        ?DateTimeImmutable $periodEnd = null,
         ?int $limit = null,
         ?int $offset = null,
         ?string $filter = null,
@@ -720,8 +720,8 @@ class ReportsApi
 
     public function getTriggeredEventRuleReport(
         string $eventType,
-        DateTimeImmutable $periodStart,
-        DateTimeImmutable $periodEnd,
+        ?DateTimeImmutable $periodStart = null,
+        ?DateTimeImmutable $periodEnd = null,
         ?int $limit = null,
         ?int $offset = null,
     ): ReportRulesMatchedSummary {
