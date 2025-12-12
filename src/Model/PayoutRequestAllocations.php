@@ -440,6 +440,8 @@ class PayoutRequestAllocations implements JsonSerializable
 
     public const GATEWAY_NAME_AMEX_VPC = 'AmexVPC';
 
+    public const GATEWAY_NAME_ANTOM = 'Antom';
+
     public const GATEWAY_NAME_APCO_PAY = 'ApcoPay';
 
     public const GATEWAY_NAME_ASIA_PAYMENT_GATEWAY = 'AsiaPaymentGateway';
@@ -703,6 +705,8 @@ class PayoutRequestAllocations implements JsonSerializable
     public const GATEWAY_NAME_PANDA_GATEWAY = 'PandaGateway';
 
     public const GATEWAY_NAME_PAY4_FUN = 'Pay4Fun';
+
+    public const GATEWAY_NAME_PAYBILT = 'Paybilt';
 
     public const GATEWAY_NAME_PAY_CASH = 'PayCash';
 
