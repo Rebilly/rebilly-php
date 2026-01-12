@@ -41,6 +41,8 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const GATEWAY_NAME_AMEX_VPC = 'AmexVPC';
 
+    public const GATEWAY_NAME_ANTOM = 'Antom';
+
     public const GATEWAY_NAME_APCO_PAY = 'ApcoPay';
 
     public const GATEWAY_NAME_ASIA_PAYMENT_GATEWAY = 'AsiaPaymentGateway';
@@ -304,6 +306,8 @@ abstract class GatewayAccount implements JsonSerializable
     public const GATEWAY_NAME_PANDA_GATEWAY = 'PandaGateway';
 
     public const GATEWAY_NAME_PAY4_FUN = 'Pay4Fun';
+
+    public const GATEWAY_NAME_PAYBILT = 'Paybilt';
 
     public const GATEWAY_NAME_PAY_CASH = 'PayCash';
 
@@ -736,6 +740,8 @@ abstract class GatewayAccount implements JsonSerializable
     public const ACQUIRER_NAME_PARAMOUNT_INTERAC = 'ParamountInterac';
 
     public const ACQUIRER_NAME_PAY4_FUN = 'Pay4fun';
+
+    public const ACQUIRER_NAME_PAYBILT = 'Paybilt';
 
     public const ACQUIRER_NAME_PAY_CASH = 'PayCash';
 
@@ -1445,6 +1451,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return AmazonPay::from($data);
             case 'AmexVPC':
                 return AmexVPC::from($data);
+            case 'Antom':
+                return Antom::from($data);
             case 'ApcoPay':
                 return ApcoPay::from($data);
             case 'AsiaPay':
@@ -1709,6 +1717,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return ParamountInterac::from($data);
             case 'Pay4Fun':
                 return Pay4Fun::from($data);
+            case 'Paybilt':
+                return Paybilt::from($data);
             case 'PayCash':
                 return PayCash::from($data);
             case 'PayClub':
