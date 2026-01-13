@@ -422,6 +422,8 @@ class Transaction implements JsonSerializable
 
     public const GATEWAY_NAME_POST_FINANCE = 'PostFinance';
 
+    public const GATEWAY_NAME_POWERTRANZ = 'Powertranz';
+
     public const GATEWAY_NAME_PPRO = 'PPRO';
 
     public const GATEWAY_NAME_PROSA = 'Prosa';

@@ -164,7 +164,11 @@ class WebhookTracking implements JsonSerializable
 
     public const EVENT_TYPE_PAYOUT_REQUEST_CREATED = 'payout-request-created';
 
+    public const EVENT_TYPE_PAYOUT_REQUEST_FULFILLED = 'payout-request-fulfilled';
+
     public const EVENT_TYPE_PAYOUT_REQUEST_MODIFIED = 'payout-request-modified';
+
+    public const EVENT_TYPE_PAYOUT_REQUEST_REVERSED = 'payout-request-reversed';
 
     public const EVENT_TYPE_QUOTE_ACCEPTED = 'quote-accepted';
 

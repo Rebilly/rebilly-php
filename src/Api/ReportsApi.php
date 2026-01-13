@@ -80,12 +80,14 @@ class ReportsApi
     public function getApiLogSummary(
         ?DateTimeImmutable $periodStart = null,
         ?DateTimeImmutable $periodEnd = null,
+        ?string $filter = null,
         ?int $limit = null,
         ?int $offset = null,
     ): ApiLogSummary {
         $queryParams = [
             'periodStart' => $periodStart->format('Y-m-d\TH:i:s\Z'),
             'periodEnd' => $periodEnd->format('Y-m-d\TH:i:s\Z'),
+            'filter' => $filter,
             'limit' => $limit,
             'offset' => $offset,
         ];
@@ -363,11 +365,11 @@ class ReportsApi
 
     public function getKycAcceptanceSummary(
         ?DateTimeImmutable $periodStart = null,
-        mixed $periodEnd = null,
+        ?DateTimeImmutable $periodEnd = null,
     ): GetKycAcceptanceSummaryReportResponse {
         $queryParams = [
             'periodStart' => $periodStart->format('Y-m-d\TH:i:s\Z'),
-            'periodEnd' => $periodEnd,
+            'periodEnd' => $periodEnd->format('Y-m-d\TH:i:s\Z'),
         ];
         $uri = '/experimental/reports/kyc-acceptance-summary?' . http_build_query($queryParams);
 
@@ -591,13 +593,13 @@ class ReportsApi
 
     public function getSubscriptionRenewal(
         ?DateTimeImmutable $periodStart = null,
-        mixed $periodEnd = null,
+        ?DateTimeImmutable $periodEnd = null,
         ?int $limit = null,
         ?int $offset = null,
     ): SubscriptionRenewal {
         $queryParams = [
             'periodStart' => $periodStart->format('Y-m-d\TH:i:s\Z'),
-            'periodEnd' => $periodEnd,
+            'periodEnd' => $periodEnd->format('Y-m-d\TH:i:s\Z'),
             'limit' => $limit,
             'offset' => $offset,
         ];

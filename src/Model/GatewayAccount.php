@@ -367,6 +367,8 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const GATEWAY_NAME_POST_FINANCE = 'PostFinance';
 
+    public const GATEWAY_NAME_POWERTRANZ = 'Powertranz';
+
     public const GATEWAY_NAME_PPRO = 'PPRO';
 
     public const GATEWAY_NAME_PROSA = 'Prosa';
@@ -1723,6 +1725,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return PayCash::from($data);
             case 'PayClub':
                 return PayClub::from($data);
+            case 'Paycly':
+                return Paycly::from($data);
             case 'PayCom':
                 return PayCom::from($data);
             case 'PayEcards':
@@ -1775,6 +1779,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return Plugnpay::from($data);
             case 'PostFinance':
                 return PostFinance::from($data);
+            case 'Powertranz':
+                return Powertranz::from($data);
             case 'PPRO':
                 return PPRO::from($data);
             case 'Prosa':

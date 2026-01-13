@@ -104,7 +104,11 @@ class GlobalWebhook implements JsonSerializable
 
     public const EVENTS_FILTER_PAYOUT_REQUEST_CREATED = 'payout-request-created';
 
+    public const EVENTS_FILTER_PAYOUT_REQUEST_FULFILLED = 'payout-request-fulfilled';
+
     public const EVENTS_FILTER_PAYOUT_REQUEST_MODIFIED = 'payout-request-modified';
+
+    public const EVENTS_FILTER_PAYOUT_REQUEST_REVERSED = 'payout-request-reversed';
 
     public const EVENTS_FILTER_QUOTE_ACCEPTED = 'quote-accepted';
 
