@@ -18,7 +18,7 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
 
-class GetPayoutRequestPaymentInstrumentsResponse implements JsonSerializable
+class GetPayoutRequestV2PaymentInstrumentsResponse implements JsonSerializable
 {
     public const GATEWAY_NAME_A1_GATEWAY = 'A1Gateway';
 
@@ -476,6 +476,9 @@ class GetPayoutRequestPaymentInstrumentsResponse implements JsonSerializable
         if (array_key_exists('gatewayName', $data)) {
             $this->setGatewayName($data['gatewayName']);
         }
+        if (array_key_exists('gatewayAccountId', $data)) {
+            $this->setGatewayAccountId($data['gatewayAccountId']);
+        }
         if (array_key_exists('exposureAmount', $data)) {
             $this->setExposureAmount($data['exposureAmount']);
         }
@@ -515,6 +518,18 @@ class GetPayoutRequestPaymentInstrumentsResponse implements JsonSerializable
     public function setGatewayName(null|string $gatewayName): static
     {
         $this->fields['gatewayName'] = $gatewayName;
+
+        return $this;
+    }
+
+    public function getGatewayAccountId(): ?string
+    {
+        return $this->fields['gatewayAccountId'] ?? null;
+    }
+
+    public function setGatewayAccountId(null|string $gatewayAccountId): static
+    {
+        $this->fields['gatewayAccountId'] = $gatewayAccountId;
 
         return $this;
     }
@@ -591,6 +606,9 @@ class GetPayoutRequestPaymentInstrumentsResponse implements JsonSerializable
         }
         if (array_key_exists('gatewayName', $this->fields)) {
             $data['gatewayName'] = $this->fields['gatewayName'];
+        }
+        if (array_key_exists('gatewayAccountId', $this->fields)) {
+            $data['gatewayAccountId'] = $this->fields['gatewayAccountId'];
         }
         if (array_key_exists('exposureAmount', $this->fields)) {
             $data['exposureAmount'] = $this->fields['exposureAmount'];

@@ -19,8 +19,10 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\GetPayoutRequestPaymentInstrumentsResponse;
+use Rebilly\Sdk\Model\PatchPayoutRequestRequest;
 use Rebilly\Sdk\Model\PayoutRequest;
 use Rebilly\Sdk\Model\PayoutRequestCancellation;
+use Rebilly\Sdk\Model\PayoutRequestTimelineMessage;
 use Rebilly\Sdk\Paginator;
 
 class PayoutRequestsApi
@@ -60,6 +62,40 @@ class PayoutRequestsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return PayoutRequest::from($data);
+    }
+
+    public function createTimelineComment(
+        string $id,
+        PayoutRequestTimelineMessage $payoutRequestTimelineMessage,
+    ): PayoutRequestTimelineMessage {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/payout-requests/{id}/timeline');
+
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($payoutRequestTimelineMessage));
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return PayoutRequestTimelineMessage::from($data);
+    }
+
+    public function deleteTimelineMessage(
+        string $id,
+        string $messageId,
+    ): void {
+        $pathParams = [
+            '{id}' => $id,
+            '{messageId}' => $messageId,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/payout-requests/{id}/timeline/{messageId}');
+
+        $request = new Request('DELETE', $uri);
+        $this->client->send($request);
     }
 
     public function get(
@@ -134,6 +170,70 @@ class PayoutRequestsApi
     }
 
     /**
+     * @return Collection<PayoutRequestTimelineMessage>
+     */
+    public function getAllTimelineMessages(
+        string $id,
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $filter = null,
+        ?array $sort = null,
+        ?string $q = null,
+    ): Collection {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $queryParams = [
+            'limit' => $limit,
+            'offset' => $offset,
+            'filter' => $filter,
+            'sort' => $sort ? implode(',', $sort) : null,
+            'q' => $q,
+        ];
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/payout-requests/{id}/timeline?') . http_build_query($queryParams);
+
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return new Collection(
+            array_map(fn (array $item): PayoutRequestTimelineMessage => PayoutRequestTimelineMessage::from($item), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+        );
+    }
+
+    /**
+     * @return Paginator<PayoutRequestTimelineMessage>
+     */
+    public function getAllTimelineMessagesPaginator(
+        string $id,
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $filter = null,
+        ?array $sort = null,
+        ?string $q = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllTimelineMessages(
+            id: $id,
+            limit: $limit,
+            offset: $offset,
+            filter: $filter,
+            sort: $sort,
+            q: $q,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
+    }
+
+    /**
      * @return GetPayoutRequestPaymentInstrumentsResponse[]
      */
     public function getPaymentInstruments(
@@ -152,6 +252,45 @@ class PayoutRequestsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return array_map(fn (array $item): GetPayoutRequestPaymentInstrumentsResponse => GetPayoutRequestPaymentInstrumentsResponse::from($item), $data);
+    }
+
+    public function getTimelineMessage(
+        string $id,
+        string $messageId,
+    ): PayoutRequestTimelineMessage {
+        $pathParams = [
+            '{id}' => $id,
+            '{messageId}' => $messageId,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/payout-requests/{id}/timeline/{messageId}');
+
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return PayoutRequestTimelineMessage::from($data);
+    }
+
+    public function patch(
+        string $id,
+        PatchPayoutRequestRequest $patchPayoutRequestRequest,
+    ): PayoutRequest {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/payout-requests/{id}');
+
+        $request = new Request('PATCH', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($patchPayoutRequestRequest));
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return PayoutRequest::from($data);
     }
 
     public function update(

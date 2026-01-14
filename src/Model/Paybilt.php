@@ -30,6 +30,9 @@ class Paybilt extends GatewayAccount
         if (array_key_exists('threeDSecureServer', $data)) {
             $this->setThreeDSecureServer($data['threeDSecureServer']);
         }
+        if (array_key_exists('settings', $data)) {
+            $this->setSettings($data['settings']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -69,6 +72,22 @@ class Paybilt extends GatewayAccount
         return $this;
     }
 
+    public function getSettings(): ?PaybiltSettings
+    {
+        return $this->fields['settings'] ?? null;
+    }
+
+    public function setSettings(null|PaybiltSettings|array $settings): static
+    {
+        if ($settings !== null && !($settings instanceof PaybiltSettings)) {
+            $settings = PaybiltSettings::from($settings);
+        }
+
+        $this->fields['settings'] = $settings;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -77,6 +96,9 @@ class Paybilt extends GatewayAccount
         }
         if (array_key_exists('threeDSecureServer', $this->fields)) {
             $data['threeDSecureServer'] = $this->fields['threeDSecureServer']?->jsonSerialize();
+        }
+        if (array_key_exists('settings', $this->fields)) {
+            $data['settings'] = $this->fields['settings']?->jsonSerialize();
         }
 
         return parent::jsonSerialize() + $data;
