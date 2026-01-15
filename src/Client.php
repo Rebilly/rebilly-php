@@ -42,7 +42,7 @@ final class Client implements GuzzleClientInterface, PsrClientInterface
 
     public const EXPERIMENTAL_BASE = '/experimental';
 
-    public const SDK_VERSION = '3.1.6';
+    public const SDK_VERSION = '3.1.7';
 
     private GuzzleClient $client;
 
