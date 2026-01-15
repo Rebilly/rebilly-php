@@ -93,6 +93,9 @@ class AML implements JsonSerializable
         if (array_key_exists('comments', $data)) {
             $this->setComments($data['comments']);
         }
+        if (array_key_exists('matchDetails', $data)) {
+            $this->setMatchDetails($data['matchDetails']);
+        }
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
@@ -204,6 +207,22 @@ class AML implements JsonSerializable
         return $this->fields['comments'] ?? null;
     }
 
+    public function getMatchDetails(): ?AMLMatchDetails
+    {
+        return $this->fields['matchDetails'] ?? null;
+    }
+
+    public function setMatchDetails(null|AMLMatchDetails|array $matchDetails): static
+    {
+        if ($matchDetails !== null && !($matchDetails instanceof AMLMatchDetails)) {
+            $matchDetails = AMLMatchDetails::from($matchDetails);
+        }
+
+        $this->fields['matchDetails'] = $matchDetails;
+
+        return $this;
+    }
+
     /**
      * @return null|ResourceLink[]
      */
@@ -282,6 +301,9 @@ class AML implements JsonSerializable
         }
         if (array_key_exists('comments', $this->fields)) {
             $data['comments'] = $this->fields['comments'];
+        }
+        if (array_key_exists('matchDetails', $this->fields)) {
+            $data['matchDetails'] = $this->fields['matchDetails']?->jsonSerialize();
         }
         if (array_key_exists('_links', $this->fields)) {
             $data['_links'] = $this->fields['_links'] !== null

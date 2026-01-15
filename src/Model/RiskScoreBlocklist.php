@@ -52,6 +52,12 @@ class RiskScoreBlocklist implements JsonSerializable
         if (array_key_exists('payment-card', $data)) {
             $this->setPaymentCard($data['payment-card']);
         }
+        if (array_key_exists('permanentlyBlockList', $data)) {
+            $this->setPermanentlyBlockList($data['permanentlyBlockList']);
+        }
+        if (array_key_exists('temporaryBlockList', $data)) {
+            $this->setTemporaryBlockList($data['temporaryBlockList']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -219,6 +225,38 @@ class RiskScoreBlocklist implements JsonSerializable
         return $this;
     }
 
+    public function getPermanentlyBlockList(): ?RiskScoreBlocklistPermanentRules
+    {
+        return $this->fields['permanentlyBlockList'] ?? null;
+    }
+
+    public function setPermanentlyBlockList(null|RiskScoreBlocklistPermanentRules|array $permanentlyBlockList): static
+    {
+        if ($permanentlyBlockList !== null && !($permanentlyBlockList instanceof RiskScoreBlocklistPermanentRules)) {
+            $permanentlyBlockList = RiskScoreBlocklistPermanentRules::from($permanentlyBlockList);
+        }
+
+        $this->fields['permanentlyBlockList'] = $permanentlyBlockList;
+
+        return $this;
+    }
+
+    public function getTemporaryBlockList(): ?RiskScoreBlocklistTemporaryRules
+    {
+        return $this->fields['temporaryBlockList'] ?? null;
+    }
+
+    public function setTemporaryBlockList(null|RiskScoreBlocklistTemporaryRules|array $temporaryBlockList): static
+    {
+        if ($temporaryBlockList !== null && !($temporaryBlockList instanceof RiskScoreBlocklistTemporaryRules)) {
+            $temporaryBlockList = RiskScoreBlocklistTemporaryRules::from($temporaryBlockList);
+        }
+
+        $this->fields['temporaryBlockList'] = $temporaryBlockList;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -251,6 +289,12 @@ class RiskScoreBlocklist implements JsonSerializable
         }
         if (array_key_exists('payment-card', $this->fields)) {
             $data['payment-card'] = $this->fields['payment-card']?->jsonSerialize();
+        }
+        if (array_key_exists('permanentlyBlockList', $this->fields)) {
+            $data['permanentlyBlockList'] = $this->fields['permanentlyBlockList']?->jsonSerialize();
+        }
+        if (array_key_exists('temporaryBlockList', $this->fields)) {
+            $data['temporaryBlockList'] = $this->fields['temporaryBlockList']?->jsonSerialize();
         }
 
         return $data;

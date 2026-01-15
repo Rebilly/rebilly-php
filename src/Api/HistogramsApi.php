@@ -26,6 +26,33 @@ class HistogramsApi
     {
     }
 
+    public function getAmlCheckHistogramReport(
+        ?DateTimeImmutable $periodStart = null,
+        ?DateTimeImmutable $periodEnd = null,
+        ?string $aggregationPeriod = null,
+        ?string $metric = null,
+        ?bool $includePropagatedResults = null,
+        ?string $filter = null,
+    ): HistogramData {
+        $queryParams = [
+            'periodStart' => $periodStart->format('Y-m-d\TH:i:s\Z'),
+            'periodEnd' => $periodEnd->format('Y-m-d\TH:i:s\Z'),
+            'aggregationPeriod' => $aggregationPeriod,
+            'metric' => $metric,
+            'includePropagatedResults' => $includePropagatedResults,
+            'filter' => $filter,
+        ];
+        $uri = '/experimental/histograms/aml-checks?' . http_build_query($queryParams);
+
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return HistogramData::from($data);
+    }
+
     public function getTransactionHistogramReport(
         ?DateTimeImmutable $periodStart = null,
         ?DateTimeImmutable $periodEnd = null,
