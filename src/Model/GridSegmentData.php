@@ -50,6 +50,8 @@ class GridSegmentData implements JsonSerializable
 
     public const TYPE_PAYOUT_REQUESTS = 'payout-requests';
 
+    public const TYPE_PAYOUT_ALLOCATIONS = 'payout-allocations';
+
     public const TYPE_ORGANIZATIONS = 'organizations';
 
     public const TYPE_QUOTES = 'quotes';
