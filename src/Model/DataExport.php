@@ -82,7 +82,7 @@ interface DataExport extends JsonSerializable
      */
     public function getLinks(): ?array;
 
-    public function getEmbedded(): null|AmlChecksDataExportEmbedded|CustomersDataExportEmbedded|DisputesDataExportEmbedded|InvoiceItemsDataExportEmbedded|InvoicesDataExportEmbedded|JournalRecordsDataExportEmbedded|SubscriptionsDataExportEmbedded|TransactionsDataExportEmbedded;
+    public function getEmbedded(): null|AmlChecksDataExportEmbedded|CustomersDataExportEmbedded|DisputesDataExportEmbedded|InvoiceItemsDataExportEmbedded|InvoicesDataExportEmbedded|JournalRecordsDataExportEmbedded|PayoutRequestAllocationsDataExportEmbedded|PayoutRequestsDataExportEmbedded|SubscriptionsDataExportEmbedded|TransactionsDataExportEmbedded;
 
     public function setEmbedded(null|array $embedded): static;
 }

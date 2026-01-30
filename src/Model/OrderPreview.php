@@ -67,6 +67,12 @@ class OrderPreview implements JsonSerializable
         if (array_key_exists('total', $data)) {
             $this->setTotal($data['total']);
         }
+        if (array_key_exists('initialAmounts', $data)) {
+            $this->setInitialAmounts($data['initialAmounts']);
+        }
+        if (array_key_exists('recurringAmounts', $data)) {
+            $this->setRecurringAmounts($data['recurringAmounts']);
+        }
         if (array_key_exists('shipping', $data)) {
             $this->setShipping($data['shipping']);
         }
@@ -224,6 +230,38 @@ class OrderPreview implements JsonSerializable
         return $this->fields['total'] ?? null;
     }
 
+    public function getInitialAmounts(): ?OrderPreviewInitialAmounts
+    {
+        return $this->fields['initialAmounts'] ?? null;
+    }
+
+    public function setInitialAmounts(null|OrderPreviewInitialAmounts|array $initialAmounts): static
+    {
+        if ($initialAmounts !== null && !($initialAmounts instanceof OrderPreviewInitialAmounts)) {
+            $initialAmounts = OrderPreviewInitialAmounts::from($initialAmounts);
+        }
+
+        $this->fields['initialAmounts'] = $initialAmounts;
+
+        return $this;
+    }
+
+    public function getRecurringAmounts(): ?OrderPreviewRecurringAmounts
+    {
+        return $this->fields['recurringAmounts'] ?? null;
+    }
+
+    public function setRecurringAmounts(null|OrderPreviewRecurringAmounts|array $recurringAmounts): static
+    {
+        if ($recurringAmounts !== null && !($recurringAmounts instanceof OrderPreviewRecurringAmounts)) {
+            $recurringAmounts = OrderPreviewRecurringAmounts::from($recurringAmounts);
+        }
+
+        $this->fields['recurringAmounts'] = $recurringAmounts;
+
+        return $this;
+    }
+
     public function getShipping(): ?Shipping
     {
         return $this->fields['shipping'] ?? null;
@@ -310,6 +348,12 @@ class OrderPreview implements JsonSerializable
         }
         if (array_key_exists('total', $this->fields)) {
             $data['total'] = $this->fields['total'];
+        }
+        if (array_key_exists('initialAmounts', $this->fields)) {
+            $data['initialAmounts'] = $this->fields['initialAmounts']?->jsonSerialize();
+        }
+        if (array_key_exists('recurringAmounts', $this->fields)) {
+            $data['recurringAmounts'] = $this->fields['recurringAmounts']?->jsonSerialize();
         }
         if (array_key_exists('shipping', $this->fields)) {
             $data['shipping'] = $this->fields['shipping']?->jsonSerialize();

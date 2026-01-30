@@ -18,50 +18,92 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
-use Rebilly\Sdk\Model\PatchPayoutRequestAllocationRequest;
-use Rebilly\Sdk\Model\PayoutRequestAllocation;
-use Rebilly\Sdk\Model\PostPayoutRequestAllocationRequest;
-use Rebilly\Sdk\Model\PostPayoutRequestAllocationsProcessRequest;
-use Rebilly\Sdk\Model\PostPayoutRequestAutoAllocationRequest;
+use Rebilly\Sdk\Model\PayoutRequestBatch;
+use Rebilly\Sdk\Model\PostPayoutRequestBatchRequest;
 use Rebilly\Sdk\Paginator;
 
-class PayoutRequestAllocationsApi
+class PayoutRequestBatchesApi
 {
     public function __construct(protected ?ClientInterface $client)
     {
     }
 
-    public function autoAllocate(
-        PostPayoutRequestAutoAllocationRequest $postPayoutRequestAutoAllocationRequest,
-    ): void {
-        $uri = '/payout-request-allocations/auto';
-
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($postPayoutRequestAutoAllocationRequest));
-        $this->client->send($request);
-    }
-
-    public function create(
-        PostPayoutRequestAllocationRequest $postPayoutRequestAllocationRequest,
-    ): PayoutRequestAllocation {
-        $uri = '/payout-request-allocations';
-
-        $request = new Request('POST', $uri, headers: [
-            'Accept' => 'application/json',
-        ], body: Utils::jsonEncode($postPayoutRequestAllocationRequest));
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return PayoutRequestAllocation::from($data);
-    }
-
-    public function get(
+    public function approve(
         string $id,
-    ): PayoutRequestAllocation {
+    ): PayoutRequestBatch {
         $pathParams = [
             '{id}' => $id,
         ];
 
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/payout-request-allocations/{id}');
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/payout-request-batches/{id}/approve');
+
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return PayoutRequestBatch::from($data);
+    }
+
+    public function autoAllocate(
+        string $id,
+    ): PayoutRequestBatch {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/payout-request-batches/{id}/auto-allocate');
+
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return PayoutRequestBatch::from($data);
+    }
+
+    public function block(
+        string $id,
+    ): PayoutRequestBatch {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/payout-request-batches/{id}/block');
+
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return PayoutRequestBatch::from($data);
+    }
+
+    public function create(
+        PostPayoutRequestBatchRequest $postPayoutRequestBatchRequest,
+    ): PayoutRequestBatch {
+        $uri = '/payout-request-batches';
+
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($postPayoutRequestBatchRequest));
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return PayoutRequestBatch::from($data);
+    }
+
+    public function get(
+        string $id,
+    ): PayoutRequestBatch {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/payout-request-batches/{id}');
 
         $request = new Request('GET', $uri, headers: [
             'Accept' => 'application/json',
@@ -69,11 +111,11 @@ class PayoutRequestAllocationsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return PayoutRequestAllocation::from($data);
+        return PayoutRequestBatch::from($data);
     }
 
     /**
-     * @return Collection<PayoutRequestAllocation>
+     * @return Collection<PayoutRequestBatch>
      */
     public function getAll(
         ?int $limit = null,
@@ -87,7 +129,7 @@ class PayoutRequestAllocationsApi
             'filter' => $filter,
             'sort' => $sort ? implode(',', $sort) : null,
         ];
-        $uri = '/payout-request-allocations?' . http_build_query($queryParams);
+        $uri = '/payout-request-batches?' . http_build_query($queryParams);
 
         $request = new Request('GET', $uri, headers: [
             'Accept' => 'application/json',
@@ -96,7 +138,7 @@ class PayoutRequestAllocationsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): PayoutRequestAllocation => PayoutRequestAllocation::from($item), $data),
+            array_map(fn (array $item): PayoutRequestBatch => PayoutRequestBatch::from($item), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
@@ -104,7 +146,7 @@ class PayoutRequestAllocationsApi
     }
 
     /**
-     * @return Paginator<PayoutRequestAllocation>
+     * @return Paginator<PayoutRequestBatch>
      */
     public function getAllPaginator(
         ?int $limit = null,
@@ -123,33 +165,5 @@ class PayoutRequestAllocationsApi
             $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
             $closure,
         );
-    }
-
-    public function process(
-        PostPayoutRequestAllocationsProcessRequest $postPayoutRequestAllocationsProcessRequest,
-    ): void {
-        $uri = '/payout-request-allocations/process';
-
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($postPayoutRequestAllocationsProcessRequest));
-        $this->client->send($request);
-    }
-
-    public function update(
-        string $id,
-        PatchPayoutRequestAllocationRequest $patchPayoutRequestAllocationRequest,
-    ): PayoutRequestAllocation {
-        $pathParams = [
-            '{id}' => $id,
-        ];
-
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/payout-request-allocations/{id}');
-
-        $request = new Request('PATCH', $uri, headers: [
-            'Accept' => 'application/json',
-        ], body: Utils::jsonEncode($patchPayoutRequestAllocationRequest));
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return PayoutRequestAllocation::from($data);
     }
 }

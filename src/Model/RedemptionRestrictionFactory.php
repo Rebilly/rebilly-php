@@ -22,6 +22,7 @@ class RedemptionRestrictionFactory
     {
         return match ($data['type']) {
             'discounts-per-redemption' => CouponRestrictionDiscountPerRedemption::from($data),
+            'maximum-order-amount' => CouponRestrictionMaximumOrderAmount::from($data),
             'minimum-order-amount' => CouponRestrictionMinimumOrderAmount::from($data),
             'paid-by-time' => CouponRestrictionPaidByTime::from($data),
             'restrict-to-invoices' => CouponRestrictionRestrictToInvoices::from($data),
