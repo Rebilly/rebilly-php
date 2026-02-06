@@ -84,9 +84,9 @@ class TrialOnlyPlan implements Plan, FlexiblePlan
         return new self($data);
     }
 
-    public function getId(): ?string
+    public function getId(): string
     {
-        return $this->fields['id'] ?? null;
+        return $this->fields['id'];
     }
 
     public function getName(): string
@@ -338,7 +338,7 @@ class TrialOnlyPlan implements Plan, FlexiblePlan
         return $data;
     }
 
-    private function setId(null|string $id): static
+    private function setId(string $id): static
     {
         $this->fields['id'] = $id;
 
