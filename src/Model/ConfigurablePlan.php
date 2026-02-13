@@ -18,5 +18,5 @@ use JsonSerializable;
 
 interface ConfigurablePlan extends JsonSerializable
 {
-    public function getId(): ?string;
+    public function getId(): string;
 }

@@ -20,7 +20,7 @@ class PatchPayoutRequestRequest implements JsonSerializable
 {
     public const STATUS_PENDING = 'pending';
 
-    public const STATUS_FLUSHED = 'flushed';
+    public const STATUS_READY = 'ready';
 
     public const STATUS_APPROVED = 'approved';
 

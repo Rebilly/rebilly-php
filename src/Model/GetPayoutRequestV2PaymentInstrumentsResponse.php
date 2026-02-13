@@ -466,6 +466,14 @@ class GetPayoutRequestV2PaymentInstrumentsResponse implements JsonSerializable
 
     public const GATEWAY_NAME_ZOTAPAY = 'Zotapay';
 
+    public const GATEWAY_PAYOUT_INSTRUCTION_ALL = 'all';
+
+    public const GATEWAY_PAYOUT_INSTRUCTION_COVERED_PAYOUT = 'covered-payout';
+
+    public const GATEWAY_PAYOUT_INSTRUCTION_APPROVED_PAYMENT = 'approved-payment';
+
+    public const GATEWAY_PAYOUT_INSTRUCTION_NONE = 'none';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -478,6 +486,9 @@ class GetPayoutRequestV2PaymentInstrumentsResponse implements JsonSerializable
         }
         if (array_key_exists('gatewayAccountId', $data)) {
             $this->setGatewayAccountId($data['gatewayAccountId']);
+        }
+        if (array_key_exists('gatewayPayoutInstruction', $data)) {
+            $this->setGatewayPayoutInstruction($data['gatewayPayoutInstruction']);
         }
         if (array_key_exists('exposureAmount', $data)) {
             $this->setExposureAmount($data['exposureAmount']);
@@ -530,6 +541,18 @@ class GetPayoutRequestV2PaymentInstrumentsResponse implements JsonSerializable
     public function setGatewayAccountId(null|string $gatewayAccountId): static
     {
         $this->fields['gatewayAccountId'] = $gatewayAccountId;
+
+        return $this;
+    }
+
+    public function getGatewayPayoutInstruction(): ?string
+    {
+        return $this->fields['gatewayPayoutInstruction'] ?? null;
+    }
+
+    public function setGatewayPayoutInstruction(null|string $gatewayPayoutInstruction): static
+    {
+        $this->fields['gatewayPayoutInstruction'] = $gatewayPayoutInstruction;
 
         return $this;
     }
@@ -609,6 +632,9 @@ class GetPayoutRequestV2PaymentInstrumentsResponse implements JsonSerializable
         }
         if (array_key_exists('gatewayAccountId', $this->fields)) {
             $data['gatewayAccountId'] = $this->fields['gatewayAccountId'];
+        }
+        if (array_key_exists('gatewayPayoutInstruction', $this->fields)) {
+            $data['gatewayPayoutInstruction'] = $this->fields['gatewayPayoutInstruction'];
         }
         if (array_key_exists('exposureAmount', $this->fields)) {
             $data['exposureAmount'] = $this->fields['exposureAmount'];
