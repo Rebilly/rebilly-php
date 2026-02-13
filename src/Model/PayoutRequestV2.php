@@ -22,7 +22,7 @@ class PayoutRequestV2 implements JsonSerializable
 {
     public const STATUS_PENDING = 'pending';
 
-    public const STATUS_FLUSHED = 'flushed';
+    public const STATUS_READY = 'ready';
 
     public const STATUS_APPROVED = 'approved';
 
@@ -75,6 +75,9 @@ class PayoutRequestV2 implements JsonSerializable
         }
         if (array_key_exists('blocked', $data)) {
             $this->setBlocked($data['blocked']);
+        }
+        if (array_key_exists('batchId', $data)) {
+            $this->setBatchId($data['batchId']);
         }
         if (array_key_exists('selectPaymentInstrumentUrl', $data)) {
             $this->setSelectPaymentInstrumentUrl($data['selectPaymentInstrumentUrl']);
@@ -214,6 +217,11 @@ class PayoutRequestV2 implements JsonSerializable
         return $this;
     }
 
+    public function getBatchId(): ?string
+    {
+        return $this->fields['batchId'] ?? null;
+    }
+
     public function getSelectPaymentInstrumentUrl(): ?string
     {
         return $this->fields['selectPaymentInstrumentUrl'] ?? null;
@@ -306,6 +314,9 @@ class PayoutRequestV2 implements JsonSerializable
         if (array_key_exists('blocked', $this->fields)) {
             $data['blocked'] = $this->fields['blocked'];
         }
+        if (array_key_exists('batchId', $this->fields)) {
+            $data['batchId'] = $this->fields['batchId'];
+        }
         if (array_key_exists('selectPaymentInstrumentUrl', $this->fields)) {
             $data['selectPaymentInstrumentUrl'] = $this->fields['selectPaymentInstrumentUrl'];
         }
@@ -355,6 +366,13 @@ class PayoutRequestV2 implements JsonSerializable
         }
 
         $this->fields['availableAmount'] = $availableAmount;
+
+        return $this;
+    }
+
+    private function setBatchId(null|string $batchId): static
+    {
+        $this->fields['batchId'] = $batchId;
 
         return $this;
     }

@@ -14,6 +14,8 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use DateTimeImmutable;
+use DateTimeInterface;
 use JsonSerializable;
 
 class CreationQuoteOrder implements JsonSerializable
@@ -39,6 +41,9 @@ class CreationQuoteOrder implements JsonSerializable
         }
         if (array_key_exists('billingAddress', $data)) {
             $this->setBillingAddress($data['billingAddress']);
+        }
+        if (array_key_exists('startTime', $data)) {
+            $this->setStartTime($data['startTime']);
         }
     }
 
@@ -135,6 +140,22 @@ class CreationQuoteOrder implements JsonSerializable
         return $this;
     }
 
+    public function getStartTime(): ?DateTimeImmutable
+    {
+        return $this->fields['startTime'] ?? null;
+    }
+
+    public function setStartTime(null|DateTimeImmutable|string $startTime): static
+    {
+        if ($startTime !== null && !($startTime instanceof DateTimeImmutable)) {
+            $startTime = new DateTimeImmutable($startTime);
+        }
+
+        $this->fields['startTime'] = $startTime;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -158,6 +179,9 @@ class CreationQuoteOrder implements JsonSerializable
         }
         if (array_key_exists('billingAddress', $this->fields)) {
             $data['billingAddress'] = $this->fields['billingAddress']?->jsonSerialize();
+        }
+        if (array_key_exists('startTime', $this->fields)) {
+            $data['startTime'] = $this->fields['startTime']?->format(DateTimeInterface::RFC3339);
         }
 
         return $data;

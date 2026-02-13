@@ -26,6 +26,7 @@ use Rebilly\Sdk\Model\FutureRenewals;
 use Rebilly\Sdk\Model\GetKycAcceptanceSummaryReportResponse;
 use Rebilly\Sdk\Model\JournalSummaryReport;
 use Rebilly\Sdk\Model\RenewalSales;
+use Rebilly\Sdk\Model\ReportAmlChecks;
 use Rebilly\Sdk\Model\ReportAnnualRecurringRevenue;
 use Rebilly\Sdk\Model\ReportDeclinedTransactions;
 use Rebilly\Sdk\Model\ReportDeferredRevenue;
@@ -50,6 +51,31 @@ class ReportsApi
 {
     public function __construct(protected ?ClientInterface $client)
     {
+    }
+
+    public function getAmlChecks(
+        ?DateTimeImmutable $periodStart = null,
+        ?DateTimeImmutable $periodEnd = null,
+        ?string $metric = null,
+        ?bool $includePropagatedResults = null,
+        ?string $filter = null,
+    ): ReportAmlChecks {
+        $queryParams = [
+            'periodStart' => $periodStart->format('Y-m-d\TH:i:s\Z'),
+            'periodEnd' => $periodEnd->format('Y-m-d\TH:i:s\Z'),
+            'metric' => $metric,
+            'includePropagatedResults' => $includePropagatedResults,
+            'filter' => $filter,
+        ];
+        $uri = '/experimental/reports/aml-checks?' . http_build_query($queryParams);
+
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return ReportAmlChecks::from($data);
     }
 
     public function getAnnualRecurringRevenue(

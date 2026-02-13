@@ -26,6 +26,7 @@ use Rebilly\Sdk\Model\OrderFactory;
 use Rebilly\Sdk\Model\OrderItemUpdate;
 use Rebilly\Sdk\Model\OrderUpcomingInvoice;
 use Rebilly\Sdk\Model\SubscriptionInvoice;
+use Rebilly\Sdk\Model\SubscriptionOrOneTimeSaleItem;
 use Rebilly\Sdk\Model\UpcomingInvoice;
 use Rebilly\Sdk\Paginator;
 
@@ -242,7 +243,7 @@ class OrdersApi
         string $id,
         string $itemId,
         OrderItemUpdate $orderItemUpdate,
-    ): Order {
+    ): SubscriptionOrOneTimeSaleItem {
         $pathParams = [
             '{id}' => $id,
             '{itemId}' => $itemId,
@@ -256,7 +257,7 @@ class OrdersApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return OrderFactory::from($data);
+        return SubscriptionOrOneTimeSaleItem::from($data);
     }
 
     public function void(

@@ -90,6 +90,10 @@ class DashboardResponse implements JsonSerializable
 
     public const METRIC_CREDIT_FILE_PROOF_ACCEPTANCE_RATE = 'creditFileProofAcceptanceRate';
 
+    public const METRIC_KYC_ACCEPTANCE_RATE = 'kycAcceptanceRate';
+
+    public const METRIC_KYC_REVIEW_TIME = 'kycReviewTime';
+
     public const METRIC_KYC_REJECTION_RATE = 'kycRejectionRate';
 
     public const METRIC_KYC_ACCURACY_RATE = 'kycAccuracyRate';

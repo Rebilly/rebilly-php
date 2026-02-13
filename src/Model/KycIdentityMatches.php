@@ -131,6 +131,9 @@ class KycIdentityMatches implements PostKycDocumentMatchesRequest
         if (array_key_exists('isDigitallyTampered', $data)) {
             $this->setIsDigitallyTampered($data['isDigitallyTampered']);
         }
+        if (array_key_exists('isPhotocopy', $data)) {
+            $this->setIsPhotocopy($data['isPhotocopy']);
+        }
         if (array_key_exists('hasCompletedFaceLiveness', $data)) {
             $this->setHasCompletedFaceLiveness($data['hasCompletedFaceLiveness']);
         }
@@ -361,6 +364,18 @@ class KycIdentityMatches implements PostKycDocumentMatchesRequest
         return $this;
     }
 
+    public function getIsPhotocopy(): ?bool
+    {
+        return $this->fields['isPhotocopy'] ?? null;
+    }
+
+    public function setIsPhotocopy(null|bool $isPhotocopy): static
+    {
+        $this->fields['isPhotocopy'] = $isPhotocopy;
+
+        return $this;
+    }
+
     public function getHasCompletedFaceLiveness(): ?bool
     {
         return $this->fields['hasCompletedFaceLiveness'] ?? null;
@@ -438,6 +453,9 @@ class KycIdentityMatches implements PostKycDocumentMatchesRequest
         }
         if (array_key_exists('isDigitallyTampered', $this->fields)) {
             $data['isDigitallyTampered'] = $this->fields['isDigitallyTampered'];
+        }
+        if (array_key_exists('isPhotocopy', $this->fields)) {
+            $data['isPhotocopy'] = $this->fields['isPhotocopy'];
         }
         if (array_key_exists('hasCompletedFaceLiveness', $this->fields)) {
             $data['hasCompletedFaceLiveness'] = $this->fields['hasCompletedFaceLiveness'];

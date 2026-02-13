@@ -18,7 +18,7 @@ use DateTimeImmutable;
 
 interface FlexiblePlan extends ConfigurablePlan
 {
-    public function getId(): ?string;
+    public function getId(): string;
 
     public function getName(): string;
 
