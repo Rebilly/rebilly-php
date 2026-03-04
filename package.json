@@ -4,9 +4,12 @@
   "version": "3.1.6",
   "devDependencies": {
     "@changesets/cli": "^2.26.2",
-    "@changesets/write": "^0.2.3"
+    "@changesets/write": "^0.2.3",
+    "@rebilly/regenerator": "^0.0.4",
+    "ts-node": "^10.9.2"
   },
   "scripts": {
-    "version": "npx changeset version && npm i && node scripts/update-sdk-version.js"
+    "version": "npx changeset version && npm i && node scripts/update-sdk-version.js",
+    "generate": "regenerator generate -g rebilly-php -o"
   }
 }
