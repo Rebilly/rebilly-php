@@ -62,6 +62,9 @@ class SubscriptionItem implements RecurringOrderItems
         if (array_key_exists('usageStatus', $data)) {
             $this->setUsageStatus($data['usageStatus']);
         }
+        if (array_key_exists('revision', $data)) {
+            $this->setRevision($data['revision']);
+        }
         if (array_key_exists('excludeFromMrr', $data)) {
             $this->setExcludeFromMrr($data['excludeFromMrr']);
         }
@@ -228,6 +231,11 @@ class SubscriptionItem implements RecurringOrderItems
         return $this;
     }
 
+    public function getRevision(): ?int
+    {
+        return $this->fields['revision'] ?? null;
+    }
+
     public function getExcludeFromMrr(): ?bool
     {
         return $this->fields['excludeFromMrr'] ?? null;
@@ -294,6 +302,9 @@ class SubscriptionItem implements RecurringOrderItems
         if (array_key_exists('usageStatus', $this->fields)) {
             $data['usageStatus'] = $this->fields['usageStatus']?->jsonSerialize();
         }
+        if (array_key_exists('revision', $this->fields)) {
+            $data['revision'] = $this->fields['revision'];
+        }
         if (array_key_exists('excludeFromMrr', $this->fields)) {
             $data['excludeFromMrr'] = $this->fields['excludeFromMrr'];
         }
@@ -342,6 +353,13 @@ class SubscriptionItem implements RecurringOrderItems
     private function setProductId(null|string $productId): static
     {
         $this->fields['productId'] = $productId;
+
+        return $this;
+    }
+
+    private function setRevision(null|int $revision): static
+    {
+        $this->fields['revision'] = $revision;
 
         return $this;
     }

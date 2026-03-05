@@ -84,9 +84,9 @@ class TrialOnlyPlan implements Plan, FlexiblePlan
         return new self($data);
     }
 
-    public function getId(): ?string
+    public function getId(): string
     {
-        return $this->fields['id'] ?? null;
+        return $this->fields['id'];
     }
 
     public function getName(): string
@@ -243,17 +243,6 @@ class TrialOnlyPlan implements Plan, FlexiblePlan
         return $this->fields['invoiceTimeShift'] ?? null;
     }
 
-    public function setInvoiceTimeShift(null|InvoiceTimeShift|array $invoiceTimeShift): static
-    {
-        if ($invoiceTimeShift !== null && !($invoiceTimeShift instanceof InvoiceTimeShift)) {
-            $invoiceTimeShift = InvoiceTimeShift::from($invoiceTimeShift);
-        }
-
-        $this->fields['invoiceTimeShift'] = $invoiceTimeShift;
-
-        return $this;
-    }
-
     public function getCreatedTime(): ?DateTimeImmutable
     {
         return $this->fields['createdTime'] ?? null;
@@ -338,7 +327,7 @@ class TrialOnlyPlan implements Plan, FlexiblePlan
         return $data;
     }
 
-    private function setId(null|string $id): static
+    private function setId(string $id): static
     {
         $this->fields['id'] = $id;
 
@@ -362,6 +351,17 @@ class TrialOnlyPlan implements Plan, FlexiblePlan
     private function setIsTrialOnly(null|bool $isTrialOnly): static
     {
         $this->fields['isTrialOnly'] = $isTrialOnly;
+
+        return $this;
+    }
+
+    private function setInvoiceTimeShift(null|InvoiceTimeShift|array $invoiceTimeShift): static
+    {
+        if ($invoiceTimeShift !== null && !($invoiceTimeShift instanceof InvoiceTimeShift)) {
+            $invoiceTimeShift = InvoiceTimeShift::from($invoiceTimeShift);
+        }
+
+        $this->fields['invoiceTimeShift'] = $invoiceTimeShift;
 
         return $this;
     }

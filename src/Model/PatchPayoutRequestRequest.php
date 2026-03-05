@@ -20,7 +20,7 @@ class PatchPayoutRequestRequest implements JsonSerializable
 {
     public const STATUS_PENDING = 'pending';
 
-    public const STATUS_FLUSHED = 'flushed';
+    public const STATUS_READY = 'ready';
 
     public const STATUS_APPROVED = 'approved';
 
@@ -44,6 +44,12 @@ class PatchPayoutRequestRequest implements JsonSerializable
         }
         if (array_key_exists('blocked', $data)) {
             $this->setBlocked($data['blocked']);
+        }
+        if (array_key_exists('blockReason', $data)) {
+            $this->setBlockReason($data['blockReason']);
+        }
+        if (array_key_exists('blockDescription', $data)) {
+            $this->setBlockDescription($data['blockDescription']);
         }
     }
 
@@ -88,6 +94,34 @@ class PatchPayoutRequestRequest implements JsonSerializable
         return $this;
     }
 
+    public function getBlockReason(): ?PayoutRequestBlockReason
+    {
+        return $this->fields['blockReason'] ?? null;
+    }
+
+    public function setBlockReason(null|PayoutRequestBlockReason|array $blockReason): static
+    {
+        if ($blockReason !== null && !($blockReason instanceof PayoutRequestBlockReason)) {
+            $blockReason = PayoutRequestBlockReason::from($blockReason);
+        }
+
+        $this->fields['blockReason'] = $blockReason;
+
+        return $this;
+    }
+
+    public function getBlockDescription(): ?string
+    {
+        return $this->fields['blockDescription'] ?? null;
+    }
+
+    public function setBlockDescription(null|string $blockDescription): static
+    {
+        $this->fields['blockDescription'] = $blockDescription;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -99,6 +133,12 @@ class PatchPayoutRequestRequest implements JsonSerializable
         }
         if (array_key_exists('blocked', $this->fields)) {
             $data['blocked'] = $this->fields['blocked'];
+        }
+        if (array_key_exists('blockReason', $this->fields)) {
+            $data['blockReason'] = $this->fields['blockReason']?->jsonSerialize();
+        }
+        if (array_key_exists('blockDescription', $this->fields)) {
+            $data['blockDescription'] = $this->fields['blockDescription'];
         }
 
         return $data;

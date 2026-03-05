@@ -18,11 +18,11 @@ use JsonSerializable;
 
 class TransactionDcc implements JsonSerializable
 {
+    public const OUTCOME_UNPROCESSED = 'unprocessed';
+
     public const OUTCOME_REJECTED = 'rejected';
 
     public const OUTCOME_SELECTED = 'selected';
-
-    public const OUTCOME_UNKNOWN = 'unknown';
 
     private array $fields = [];
 

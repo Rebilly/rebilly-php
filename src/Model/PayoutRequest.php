@@ -61,6 +61,15 @@ class PayoutRequest implements JsonSerializable
         if (array_key_exists('status', $data)) {
             $this->setStatus($data['status']);
         }
+        if (array_key_exists('blocked', $data)) {
+            $this->setBlocked($data['blocked']);
+        }
+        if (array_key_exists('blockReason', $data)) {
+            $this->setBlockReason($data['blockReason']);
+        }
+        if (array_key_exists('batchId', $data)) {
+            $this->setBatchId($data['batchId']);
+        }
         if (array_key_exists('selectPaymentInstrumentUrl', $data)) {
             $this->setSelectPaymentInstrumentUrl($data['selectPaymentInstrumentUrl']);
         }
@@ -180,6 +189,39 @@ class PayoutRequest implements JsonSerializable
         return $this->fields['status'] ?? null;
     }
 
+    public function getBlocked(): ?bool
+    {
+        return $this->fields['blocked'] ?? null;
+    }
+
+    public function setBlocked(null|bool $blocked): static
+    {
+        $this->fields['blocked'] = $blocked;
+
+        return $this;
+    }
+
+    public function getBlockReason(): ?PayoutRequestBlockReason
+    {
+        return $this->fields['blockReason'] ?? null;
+    }
+
+    public function setBlockReason(null|PayoutRequestBlockReason|array $blockReason): static
+    {
+        if ($blockReason !== null && !($blockReason instanceof PayoutRequestBlockReason)) {
+            $blockReason = PayoutRequestBlockReason::from($blockReason);
+        }
+
+        $this->fields['blockReason'] = $blockReason;
+
+        return $this;
+    }
+
+    public function getBatchId(): ?string
+    {
+        return $this->fields['batchId'] ?? null;
+    }
+
     public function getSelectPaymentInstrumentUrl(): ?string
     {
         return $this->fields['selectPaymentInstrumentUrl'] ?? null;
@@ -269,6 +311,15 @@ class PayoutRequest implements JsonSerializable
         if (array_key_exists('status', $this->fields)) {
             $data['status'] = $this->fields['status'];
         }
+        if (array_key_exists('blocked', $this->fields)) {
+            $data['blocked'] = $this->fields['blocked'];
+        }
+        if (array_key_exists('blockReason', $this->fields)) {
+            $data['blockReason'] = $this->fields['blockReason']?->jsonSerialize();
+        }
+        if (array_key_exists('batchId', $this->fields)) {
+            $data['batchId'] = $this->fields['batchId'];
+        }
         if (array_key_exists('selectPaymentInstrumentUrl', $this->fields)) {
             $data['selectPaymentInstrumentUrl'] = $this->fields['selectPaymentInstrumentUrl'];
         }
@@ -325,6 +376,13 @@ class PayoutRequest implements JsonSerializable
     private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
+
+        return $this;
+    }
+
+    private function setBatchId(null|string $batchId): static
+    {
+        $this->fields['batchId'] = $batchId;
 
         return $this;
     }

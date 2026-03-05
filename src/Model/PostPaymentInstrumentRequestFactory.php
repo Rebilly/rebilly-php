@@ -184,7 +184,7 @@ class PostPaymentInstrumentRequestFactory
             'voucher-3' => AlternativeInstrument::from($data),
             'voucher-4' => AlternativeInstrument::from($data),
             'wire' => AlternativeInstrument::from($data),
-            'ach' => BankAccountCreatePlain::from($data),
+            'ach' => BankAccountCreatePlainFactory::from($data),
             'payment-card' => PaymentCardCreatePlain::from($data),
             'paypal' => PayPalAccount::from($data),
             default => throw new UnknownDiscriminatorValueException(),

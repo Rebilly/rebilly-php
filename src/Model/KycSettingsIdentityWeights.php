@@ -64,6 +64,9 @@ class KycSettingsIdentityWeights implements JsonSerializable
         if (array_key_exists('isTampered', $data)) {
             $this->setIsTampered($data['isTampered']);
         }
+        if (array_key_exists('isPhotocopy', $data)) {
+            $this->setIsPhotocopy($data['isPhotocopy']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -239,6 +242,18 @@ class KycSettingsIdentityWeights implements JsonSerializable
         return $this;
     }
 
+    public function getIsPhotocopy(): ?int
+    {
+        return $this->fields['isPhotocopy'] ?? null;
+    }
+
+    public function setIsPhotocopy(null|int $isPhotocopy): static
+    {
+        $this->fields['isPhotocopy'] = $isPhotocopy;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -283,6 +298,9 @@ class KycSettingsIdentityWeights implements JsonSerializable
         }
         if (array_key_exists('isTampered', $this->fields)) {
             $data['isTampered'] = $this->fields['isTampered'];
+        }
+        if (array_key_exists('isPhotocopy', $this->fields)) {
+            $data['isPhotocopy'] = $this->fields['isPhotocopy'];
         }
 
         return $data;
