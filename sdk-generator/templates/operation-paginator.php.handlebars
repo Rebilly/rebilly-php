@@ -1,0 +1,17 @@
+    {{#if returnTypeHint}}
+    /**
+     * @return {{{returnTypeHint}}}
+     */
+    {{/if}}
+    public function {{methodName}}({{#each arguments as |argument|}}
+        {{>operation-argument argument}}{{#if @last}}
+    {{/if}}{{/each}}): {{returnType}} {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->{{originalMethodName}}({{#each arguments as |argument|}}
+            {{argument.name}}: ${{argument.name}},{{#if @last}}
+        {{/if}}{{/each}});
+
+        return new {{returnType}}(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
+    }

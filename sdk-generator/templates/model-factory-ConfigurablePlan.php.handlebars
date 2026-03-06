@@ -1,0 +1,17 @@
+<?php
+{{>file-header}}
+declare(strict_types=1);
+
+namespace {{fqn model.namespace}};
+
+class {{model.className}}Factory
+{
+    public static function from(array $data = [], array $metadata = []): {{model.className}}
+    {
+        if (count($data) === 1 && isset($data['id'])) {
+            return OriginalPlan::from($data, $metadata);
+        }
+
+        return FlexiblePlanFactory::from($data, $metadata);
+    }
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<psalm
+    errorLevel="4"
+    resolveFromConfigFile="true"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+    findUnusedBaselineEntry="true"
+    findUnusedCode="true"
+>
+    <projectFiles>
+        <directory name="src" />
+        <directory name="examples" />
+        <ignoreFiles>
+            <directory name="vendor" />
+        </ignoreFiles>
+    </projectFiles>
+    <issueHandlers>
+        <UnusedClass>
+            <errorLevel type="suppress">
+                <file name="src/CombinedService.php" />
+                <file name="src/Service.php" />
+                <file name="src/Model/AuthenticationTokenFactory.php" />
+                <file name="src/Model/PostFileRequestFactory.php" />
+                <file name="src/Model/PostPaymentInstrumentRequestFactory.php" />
+                <file name="src/Model/PostReadyToPayFactory.php" />
+                <file name="src/Model/PostPayoutRequestBatchRequestFactory.php" />
+            </errorLevel>
+        </UnusedClass>
+        <PossiblyUnusedMethod errorLevel="suppress"/>
+        <PossiblyUnusedParam errorLevel="suppress"/>
+        <UnusedMethod errorLevel="suppress"/>
+        <PossiblyUnusedReturnValue errorLevel="suppress"/>
+        <ForbiddenCode errorLevel="suppress"/>
+    </issueHandlers>
+</psalm>

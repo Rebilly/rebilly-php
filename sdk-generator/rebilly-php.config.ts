@@ -95,7 +95,7 @@ const config: GeneratorConfig<PHPCodeGen, AnyStaticContext> = {
     },
 
     buildConfig: {
-        outputFilename: 'rebilly-php',
+        outputFilename: 'templates',
     },
 
     rootNameSpace: 'Rebilly\\Sdk',
@@ -287,7 +287,7 @@ const config: GeneratorConfig<PHPCodeGen, AnyStaticContext> = {
         'operation-pdf': 'operation-pdf.php.handlebars',
     },
 
-    templateDirs: ['@bundled/rebilly-php'],
+    templateDirs: ['./sdk-generator/templates', '@bundled/php'],
 };
 
 export default config;

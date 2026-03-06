@@ -1,0 +1,24 @@
+<?php
+{{>file-header}}
+declare(strict_types=1);
+
+namespace {{fqn codegen.rootNameSpace}}\Middleware;
+
+use Closure;
+use Psr\Http\Message\RequestInterface;
+
+final class ApiKeyAuthentication
+{
+    public const HEADER = 'REB-APIKEY';
+
+    public function __construct(private string $key)
+    {
+    }
+
+    public function __invoke(callable $next): Closure
+    {
+        return function (RequestInterface $request, array $options) use ($next) {
+            return $next($request->withHeader(self::HEADER, $this->key), $options);
+        };
+    }
+}
