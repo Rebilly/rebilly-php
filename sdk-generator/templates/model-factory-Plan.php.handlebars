@@ -1,0 +1,20 @@
+<?php
+{{>file-header}}
+declare(strict_types=1);
+
+namespace {{fqn model.namespace}};
+
+class {{model.className}}Factory
+{
+    public static function from(array $data = [], array $metadata = []): {{model.className}}
+    {
+        if ($data['isTrialOnly'] ?? false) {
+            return TrialOnlyPlan::from($data, $metadata);
+        }
+        if (isset($data['recurringInterval'])) {
+            return SubscriptionPlan::from($data, $metadata);
+        }
+
+        return OneTimeSalePlan::from($data, $metadata);
+    }
+}

@@ -10,6 +10,6 @@
   },
   "scripts": {
     "version": "npx changeset version && npm i && node scripts/update-sdk-version.js",
-    "generate": "regenerator generate -g rebilly-php -o"
+    "generate": "regenerator generate -g rebilly-php -c sdk-generator/rebilly-php.config.ts -o"
   }
 }

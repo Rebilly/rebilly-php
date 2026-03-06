@@ -1,0 +1,16 @@
+{{#>operation-layout}}
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        {{#with responseType.[0].containedTypes.[0]}}
+        return new Collection(
+            array_map(fn (array $item): {{classname name}} => {{classname name}}{{#if (isFactory name)}}Factory{{/if}}::from($item, ['headers' => $response->getHeaders()]), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
+        );
+        {{/with}}
+{{/operation-layout}}
