@@ -5,7 +5,7 @@ on:
     branches:
       - main
 
-concurrency: 
+concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
@@ -20,14 +20,19 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.MACHINE_USER_PAT }}
 
-      - name: Setup Node.js 20
-        uses: actions/setup-node@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
         with:
           node-version: 20
-          cache: 'npm'
+          cache: "npm"
+          registry-url: "https://npm.pkg.github.com/"
+          scope: "@rebilly"
+          cache-dependency-path: "package-lock.json"
 
       - name: Install Dependencies
         run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Release Pull Request
         uses: changesets/action@v1

@@ -53,6 +53,16 @@ jobs:
           extensions: mbstring, intl, curl, json
           tools: composer:v2
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: "npm"
+          registry-url: "https://npm.pkg.github.com/"
+          scope: "@rebilly"
+          cache-dependency-path: "sdk/package-lock.json"
+
+
       - name: Install api-definitions dependencies
         working-directory: ./api-definitions
         run: npm install
@@ -68,20 +78,18 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.MACHINE_USER_PAT }}
 
+      - name: Install Dependencies
+        working-directory: ./sdk
+        run: npm ci --dev
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build SDK
+        working-directory: ./sdk
         run: |
           mkdir /tmp/sdk
-          docker run --rm \
-            -u $(id -u ${USER}):$(id -g ${USER}) \
-            -v "/tmp/sdk:/out" \
-            -v "$(pwd)/api-definitions/catalog:/api-definitions" \
-            ghcr.io/rebilly/regenerator:latest  generate \
-            -g rebilly-php \
-            -D /out/openapi.json \
-            -o /out \
-            -C '{"rootNameSpace": "Rebilly.Sdk", "customOperationGroupMapping": "/shared/custom-resource-names.json"}' \
-            "/api-definitions/all.yaml"
-          ls -lAh /tmp/ /tmp/sdk/
+          rm -rf src
+          npm run generate /tmp/sdk ../api-definitions/catalog/all.yaml
 
       - name: Bundle SDK
         run: |
@@ -129,6 +137,8 @@ jobs:
             echo "Added a patch changeset '${CHANGESET_ID}': '${{ github.event.inputs.trigger-reason }}'"
             echo "id=${CHANGESET_ID}" >> $GITHUB_OUTPUT
           fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create PR
         id: cpr

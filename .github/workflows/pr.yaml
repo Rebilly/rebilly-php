@@ -101,16 +101,20 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Node.js 20
-        if: ${{ ! startsWith(github.head_ref, 'changeset-release/') }}
-        uses: actions/setup-node@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
         with:
           node-version: 20
-          cache: 'npm'
+          cache: "npm"
+          registry-url: "https://npm.pkg.github.com/"
+          scope: "@rebilly"
+          cache-dependency-path: "package-lock.json"
 
       - name: Install Dependencies
         if: ${{ ! startsWith(github.head_ref, 'changeset-release/') }}
         run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Check Changesets
         if: ${{ ! startsWith(github.head_ref, 'changeset-release/') }}
