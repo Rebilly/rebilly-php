@@ -22,7 +22,9 @@ use Rebilly\Sdk\Model\GetPayoutRequestPaymentInstrumentsResponse;
 use Rebilly\Sdk\Model\PatchPayoutRequestRequest;
 use Rebilly\Sdk\Model\PayoutRequest;
 use Rebilly\Sdk\Model\PayoutRequestCancellation;
+use Rebilly\Sdk\Model\PayoutRequestSplit;
 use Rebilly\Sdk\Model\PayoutRequestTimelineMessage;
+use Rebilly\Sdk\Model\PayoutRequestV2;
 use Rebilly\Sdk\Paginator;
 
 class PayoutRequestsApi
@@ -291,6 +293,28 @@ class PayoutRequestsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return PayoutRequest::from($data);
+    }
+
+    /**
+     * @return PayoutRequestV2[]
+     */
+    public function split(
+        string $id,
+        PayoutRequestSplit $payoutRequestSplit,
+    ): array {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/payout-requests/{id}/split');
+
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($payoutRequestSplit));
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return array_map(fn (array $item): PayoutRequestV2 => PayoutRequestV2::from($item), $data);
     }
 
     public function update(

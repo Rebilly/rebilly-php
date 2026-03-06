@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-class BBANType extends BankAccountCreatePlain
+class BBANType implements BankAccountCreatePlain
 {
     public const METHOD_ACH = 'ach';
 
@@ -28,10 +28,6 @@ class BBANType extends BankAccountCreatePlain
 
     public function __construct(array $data = [])
     {
-        parent::__construct([
-            'accountNumberType' => 'BBAN',
-        ] + $data);
-
         if (array_key_exists('method', $data)) {
             $this->setMethod($data['method']);
         }
@@ -70,6 +66,11 @@ class BBANType extends BankAccountCreatePlain
     public static function from(array $data = []): self
     {
         return new self($data);
+    }
+
+    public function getAccountNumberType(): string
+    {
+        return 'BBAN';
     }
 
     public function getMethod(): string
@@ -214,7 +215,9 @@ class BBANType extends BankAccountCreatePlain
 
     public function jsonSerialize(): array
     {
-        $data = [];
+        $data = [
+            'accountNumberType' => 'BBAN',
+        ];
         if (array_key_exists('method', $this->fields)) {
             $data['method'] = $this->fields['method'];
         }
@@ -249,6 +252,6 @@ class BBANType extends BankAccountCreatePlain
             $data['useAsBackup'] = $this->fields['useAsBackup'];
         }
 
-        return parent::jsonSerialize() + $data;
+        return $data;
     }
 }

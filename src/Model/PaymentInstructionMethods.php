@@ -16,16 +16,6 @@ namespace Rebilly\Sdk\Model;
 
 class PaymentInstructionMethods implements PaymentInstruction
 {
-    public const METHODS_PAYMENT_CARD = 'payment-card';
-
-    public const METHODS_ACH = 'ach';
-
-    public const METHODS_CASH = 'cash';
-
-    public const METHODS_CHECK = 'check';
-
-    public const METHODS_PAYPAL = 'paypal';
-
     public const METHODS_ADV_CASH = 'AdvCash';
 
     public const METHODS_AERA = 'Aera';

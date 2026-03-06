@@ -20,16 +20,6 @@ use JsonSerializable;
 
 class CheckoutForm implements JsonSerializable
 {
-    public const PAYMENT_METHODS_PAYMENT_CARD = 'payment-card';
-
-    public const PAYMENT_METHODS_ACH = 'ach';
-
-    public const PAYMENT_METHODS_CASH = 'cash';
-
-    public const PAYMENT_METHODS_CHECK = 'check';
-
-    public const PAYMENT_METHODS_PAYPAL = 'paypal';
-
     public const PAYMENT_METHODS_ADV_CASH = 'AdvCash';
 
     public const PAYMENT_METHODS_AERA = 'Aera';

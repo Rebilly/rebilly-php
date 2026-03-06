@@ -24,9 +24,9 @@ class PayoutRequestTimelineMessage implements JsonSerializable
 
     public const TYPE_PAYOUT_REQUEST_CREATED = 'payout-request-created';
 
-    public const TYPE_PAYOUT_REQUEST_FLUSHED = 'payout-request-flushed';
+    public const TYPE_PAYOUT_REQUEST_READY = 'payout-request-ready';
 
-    public const TYPE_PAYOUT_REQUEST_FLUSH_UNDONE = 'payout-request-flush-undone';
+    public const TYPE_PAYOUT_REQUEST_RETURNED_TO_PENDING = 'payout-request-returned-to-pending';
 
     public const TYPE_PAYOUT_REQUEST_APPROVED = 'payout-request-approved';
 

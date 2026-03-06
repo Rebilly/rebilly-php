@@ -105,6 +105,9 @@ class Customer implements JsonSerializable
         if (array_key_exists('personId', $data)) {
             $this->setPersonId($data['personId']);
         }
+        if (array_key_exists('notificationEmails', $data)) {
+            $this->setNotificationEmails($data['notificationEmails']);
+        }
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
@@ -390,6 +393,24 @@ class Customer implements JsonSerializable
     }
 
     /**
+     * @return null|string[]
+     */
+    public function getNotificationEmails(): ?array
+    {
+        return $this->fields['notificationEmails'] ?? null;
+    }
+
+    /**
+     * @param null|string[] $notificationEmails
+     */
+    public function setNotificationEmails(null|array $notificationEmails): static
+    {
+        $this->fields['notificationEmails'] = $notificationEmails;
+
+        return $this;
+    }
+
+    /**
      * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
@@ -506,6 +527,9 @@ class Customer implements JsonSerializable
         }
         if (array_key_exists('personId', $this->fields)) {
             $data['personId'] = $this->fields['personId'];
+        }
+        if (array_key_exists('notificationEmails', $this->fields)) {
+            $data['notificationEmails'] = $this->fields['notificationEmails'];
         }
         if (array_key_exists('_links', $this->fields)) {
             $data['_links'] = $this->fields['_links'] !== null

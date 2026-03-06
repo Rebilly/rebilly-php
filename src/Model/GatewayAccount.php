@@ -885,16 +885,6 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const ACQUIRER_NAME_ZOTAPAY = 'Zotapay';
 
-    public const METHOD_PAYMENT_CARD = 'payment-card';
-
-    public const METHOD_ACH = 'ach';
-
-    public const METHOD_CASH = 'cash';
-
-    public const METHOD_CHECK = 'check';
-
-    public const METHOD_PAYPAL = 'paypal';
-
     public const METHOD_ADV_CASH = 'AdvCash';
 
     public const METHOD_AERA = 'Aera';

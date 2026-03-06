@@ -22,7 +22,7 @@ class PayoutRequestV2 implements JsonSerializable
 {
     public const STATUS_PENDING = 'pending';
 
-    public const STATUS_FLUSHED = 'flushed';
+    public const STATUS_READY = 'ready';
 
     public const STATUS_APPROVED = 'approved';
 
@@ -42,6 +42,10 @@ class PayoutRequestV2 implements JsonSerializable
 
     public const STATUS_ADMIN_REVERSED = 'admin-reversed';
 
+    public const STATUS_SPLIT = 'split';
+
+    public const STATUS_MERGED = 'merged';
+
     private array $fields = [];
 
     public function __construct(array $data = [])
@@ -57,6 +61,12 @@ class PayoutRequestV2 implements JsonSerializable
         }
         if (array_key_exists('paymentInstrumentId', $data)) {
             $this->setPaymentInstrumentId($data['paymentInstrumentId']);
+        }
+        if (array_key_exists('splitFromPayoutRequestId', $data)) {
+            $this->setSplitFromPayoutRequestId($data['splitFromPayoutRequestId']);
+        }
+        if (array_key_exists('mergedIntoPayoutRequestId', $data)) {
+            $this->setMergedIntoPayoutRequestId($data['mergedIntoPayoutRequestId']);
         }
         if (array_key_exists('currency', $data)) {
             $this->setCurrency($data['currency']);
@@ -75,6 +85,12 @@ class PayoutRequestV2 implements JsonSerializable
         }
         if (array_key_exists('blocked', $data)) {
             $this->setBlocked($data['blocked']);
+        }
+        if (array_key_exists('blockReason', $data)) {
+            $this->setBlockReason($data['blockReason']);
+        }
+        if (array_key_exists('batchId', $data)) {
+            $this->setBatchId($data['batchId']);
         }
         if (array_key_exists('selectPaymentInstrumentUrl', $data)) {
             $this->setSelectPaymentInstrumentUrl($data['selectPaymentInstrumentUrl']);
@@ -145,6 +161,16 @@ class PayoutRequestV2 implements JsonSerializable
         return $this;
     }
 
+    public function getSplitFromPayoutRequestId(): ?string
+    {
+        return $this->fields['splitFromPayoutRequestId'] ?? null;
+    }
+
+    public function getMergedIntoPayoutRequestId(): ?string
+    {
+        return $this->fields['mergedIntoPayoutRequestId'] ?? null;
+    }
+
     public function getCurrency(): string
     {
         return $this->fields['currency'];
@@ -212,6 +238,27 @@ class PayoutRequestV2 implements JsonSerializable
         $this->fields['blocked'] = $blocked;
 
         return $this;
+    }
+
+    public function getBlockReason(): ?PayoutRequestBlockReason
+    {
+        return $this->fields['blockReason'] ?? null;
+    }
+
+    public function setBlockReason(null|PayoutRequestBlockReason|array $blockReason): static
+    {
+        if ($blockReason !== null && !($blockReason instanceof PayoutRequestBlockReason)) {
+            $blockReason = PayoutRequestBlockReason::from($blockReason);
+        }
+
+        $this->fields['blockReason'] = $blockReason;
+
+        return $this;
+    }
+
+    public function getBatchId(): ?string
+    {
+        return $this->fields['batchId'] ?? null;
     }
 
     public function getSelectPaymentInstrumentUrl(): ?string
@@ -288,6 +335,12 @@ class PayoutRequestV2 implements JsonSerializable
         if (array_key_exists('paymentInstrumentId', $this->fields)) {
             $data['paymentInstrumentId'] = $this->fields['paymentInstrumentId'];
         }
+        if (array_key_exists('splitFromPayoutRequestId', $this->fields)) {
+            $data['splitFromPayoutRequestId'] = $this->fields['splitFromPayoutRequestId'];
+        }
+        if (array_key_exists('mergedIntoPayoutRequestId', $this->fields)) {
+            $data['mergedIntoPayoutRequestId'] = $this->fields['mergedIntoPayoutRequestId'];
+        }
         if (array_key_exists('currency', $this->fields)) {
             $data['currency'] = $this->fields['currency'];
         }
@@ -305,6 +358,12 @@ class PayoutRequestV2 implements JsonSerializable
         }
         if (array_key_exists('blocked', $this->fields)) {
             $data['blocked'] = $this->fields['blocked'];
+        }
+        if (array_key_exists('blockReason', $this->fields)) {
+            $data['blockReason'] = $this->fields['blockReason']?->jsonSerialize();
+        }
+        if (array_key_exists('batchId', $this->fields)) {
+            $data['batchId'] = $this->fields['batchId'];
         }
         if (array_key_exists('selectPaymentInstrumentUrl', $this->fields)) {
             $data['selectPaymentInstrumentUrl'] = $this->fields['selectPaymentInstrumentUrl'];
@@ -348,6 +407,20 @@ class PayoutRequestV2 implements JsonSerializable
         return $this;
     }
 
+    private function setSplitFromPayoutRequestId(null|string $splitFromPayoutRequestId): static
+    {
+        $this->fields['splitFromPayoutRequestId'] = $splitFromPayoutRequestId;
+
+        return $this;
+    }
+
+    private function setMergedIntoPayoutRequestId(null|string $mergedIntoPayoutRequestId): static
+    {
+        $this->fields['mergedIntoPayoutRequestId'] = $mergedIntoPayoutRequestId;
+
+        return $this;
+    }
+
     private function setAvailableAmount(null|float|string $availableAmount): static
     {
         if (is_string($availableAmount)) {
@@ -355,6 +428,13 @@ class PayoutRequestV2 implements JsonSerializable
         }
 
         $this->fields['availableAmount'] = $availableAmount;
+
+        return $this;
+    }
+
+    private function setBatchId(null|string $batchId): static
+    {
+        $this->fields['batchId'] = $batchId;
 
         return $this;
     }

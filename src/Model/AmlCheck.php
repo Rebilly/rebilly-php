@@ -20,6 +20,10 @@ use JsonSerializable;
 
 class AmlCheck implements JsonSerializable
 {
+    public const REVIEWER_TYPE_HUMAN = 'human';
+
+    public const REVIEWER_TYPE_BOT = 'bot';
+
     public const SOURCE_SIGN_UP = 'sign-up';
 
     public const SOURCE_RECURRING = 'recurring';
@@ -35,6 +39,14 @@ class AmlCheck implements JsonSerializable
     public const STATUS_CONFIRMED_MATCH = 'confirmed-match';
 
     public const STATUS_FALSE_POSITIVE = 'false-positive';
+
+    public const NO_MATCH_REASON_NO_HITS_FOUND = 'no_hits_found';
+
+    public const NO_MATCH_REASON_MISMATCHED_HITS = 'mismatched_hits';
+
+    public const NO_MATCH_REASON_HITS_ARE_BELOW_RELEVANCE_SCORE_THRESHOLD = 'hits_are_below_relevance_score_threshold';
+
+    public const NO_MATCH_REASON_INTERNAL_SYSTEM_ERROR = 'internal_system_error';
 
     private array $fields = [];
 
@@ -54,6 +66,9 @@ class AmlCheck implements JsonSerializable
         }
         if (array_key_exists('reviewerId', $data)) {
             $this->setReviewerId($data['reviewerId']);
+        }
+        if (array_key_exists('reviewerType', $data)) {
+            $this->setReviewerType($data['reviewerType']);
         }
         if (array_key_exists('reviewerName', $data)) {
             $this->setReviewerName($data['reviewerName']);
@@ -81,6 +96,12 @@ class AmlCheck implements JsonSerializable
         }
         if (array_key_exists('tags', $data)) {
             $this->setTags($data['tags']);
+        }
+        if (array_key_exists('provenance', $data)) {
+            $this->setProvenance($data['provenance']);
+        }
+        if (array_key_exists('noMatchReason', $data)) {
+            $this->setNoMatchReason($data['noMatchReason']);
         }
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
@@ -136,6 +157,11 @@ class AmlCheck implements JsonSerializable
         $this->fields['reviewerId'] = $reviewerId;
 
         return $this;
+    }
+
+    public function getReviewerType(): ?string
+    {
+        return $this->fields['reviewerType'] ?? null;
     }
 
     public function getReviewerName(): ?string
@@ -258,6 +284,27 @@ class AmlCheck implements JsonSerializable
         return $this->fields['tags'] ?? null;
     }
 
+    public function getProvenance(): ?AmlCheckProvenance
+    {
+        return $this->fields['provenance'] ?? null;
+    }
+
+    public function setProvenance(null|AmlCheckProvenance|array $provenance): static
+    {
+        if ($provenance !== null && !($provenance instanceof AmlCheckProvenance)) {
+            $provenance = AmlCheckProvenance::from($provenance);
+        }
+
+        $this->fields['provenance'] = $provenance;
+
+        return $this;
+    }
+
+    public function getNoMatchReason(): ?string
+    {
+        return $this->fields['noMatchReason'] ?? null;
+    }
+
     /**
      * @return null|ResourceLink[]
      */
@@ -283,6 +330,9 @@ class AmlCheck implements JsonSerializable
         }
         if (array_key_exists('reviewerId', $this->fields)) {
             $data['reviewerId'] = $this->fields['reviewerId'];
+        }
+        if (array_key_exists('reviewerType', $this->fields)) {
+            $data['reviewerType'] = $this->fields['reviewerType'];
         }
         if (array_key_exists('reviewerName', $this->fields)) {
             $data['reviewerName'] = $this->fields['reviewerName'];
@@ -321,6 +371,12 @@ class AmlCheck implements JsonSerializable
                 )
                 : null;
         }
+        if (array_key_exists('provenance', $this->fields)) {
+            $data['provenance'] = $this->fields['provenance']?->jsonSerialize();
+        }
+        if (array_key_exists('noMatchReason', $this->fields)) {
+            $data['noMatchReason'] = $this->fields['noMatchReason'];
+        }
         if (array_key_exists('_links', $this->fields)) {
             $data['_links'] = $this->fields['_links'] !== null
                 ? array_map(
@@ -355,6 +411,13 @@ class AmlCheck implements JsonSerializable
         return $this;
     }
 
+    private function setReviewerType(null|string $reviewerType): static
+    {
+        $this->fields['reviewerType'] = $reviewerType;
+
+        return $this;
+    }
+
     private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
@@ -373,6 +436,13 @@ class AmlCheck implements JsonSerializable
         ) : null;
 
         $this->fields['tags'] = $tags;
+
+        return $this;
+    }
+
+    private function setNoMatchReason(null|string $noMatchReason): static
+    {
+        $this->fields['noMatchReason'] = $noMatchReason;
 
         return $this;
     }

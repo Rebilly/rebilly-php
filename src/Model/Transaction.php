@@ -940,16 +940,6 @@ class Transaction implements JsonSerializable
 
     public const ACQUIRER_NAME_ZOTAPAY = 'Zotapay';
 
-    public const METHOD_PAYMENT_CARD = 'payment-card';
-
-    public const METHOD_ACH = 'ach';
-
-    public const METHOD_CASH = 'cash';
-
-    public const METHOD_CHECK = 'check';
-
-    public const METHOD_PAYPAL = 'paypal';
-
     public const METHOD_ADV_CASH = 'AdvCash';
 
     public const METHOD_AERA = 'Aera';
@@ -1543,6 +1533,9 @@ class Transaction implements JsonSerializable
         if (array_key_exists('depositRequestId', $data)) {
             $this->setDepositRequestId($data['depositRequestId']);
         }
+        if (array_key_exists('transferId', $data)) {
+            $this->setTransferId($data['transferId']);
+        }
         if (array_key_exists('payoutRequestId', $data)) {
             $this->setPayoutRequestId($data['payoutRequestId']);
         }
@@ -2060,6 +2053,11 @@ class Transaction implements JsonSerializable
         return $this->fields['depositRequestId'] ?? null;
     }
 
+    public function getTransferId(): ?string
+    {
+        return $this->fields['transferId'] ?? null;
+    }
+
     public function getPayoutRequestId(): ?string
     {
         return $this->fields['payoutRequestId'] ?? null;
@@ -2286,6 +2284,9 @@ class Transaction implements JsonSerializable
         }
         if (array_key_exists('depositRequestId', $this->fields)) {
             $data['depositRequestId'] = $this->fields['depositRequestId'];
+        }
+        if (array_key_exists('transferId', $this->fields)) {
+            $data['transferId'] = $this->fields['transferId'];
         }
         if (array_key_exists('payoutRequestId', $this->fields)) {
             $data['payoutRequestId'] = $this->fields['payoutRequestId'];
@@ -2678,6 +2679,13 @@ class Transaction implements JsonSerializable
     private function setDepositRequestId(null|string $depositRequestId): static
     {
         $this->fields['depositRequestId'] = $depositRequestId;
+
+        return $this;
+    }
+
+    private function setTransferId(null|string $transferId): static
+    {
+        $this->fields['transferId'] = $transferId;
 
         return $this;
     }

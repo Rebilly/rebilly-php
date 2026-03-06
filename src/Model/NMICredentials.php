@@ -28,6 +28,9 @@ class NMICredentials implements JsonSerializable
         if (array_key_exists('password', $data)) {
             $this->setPassword($data['password']);
         }
+        if (array_key_exists('apiKey', $data)) {
+            $this->setApiKey($data['apiKey']);
+        }
     }
 
     public static function from(array $data = []): self
@@ -59,6 +62,18 @@ class NMICredentials implements JsonSerializable
         return $this;
     }
 
+    public function getApiKey(): ?string
+    {
+        return $this->fields['apiKey'] ?? null;
+    }
+
+    public function setApiKey(null|string $apiKey): static
+    {
+        $this->fields['apiKey'] = $apiKey;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -67,6 +82,9 @@ class NMICredentials implements JsonSerializable
         }
         if (array_key_exists('password', $this->fields)) {
             $data['password'] = $this->fields['password'];
+        }
+        if (array_key_exists('apiKey', $this->fields)) {
+            $data['apiKey'] = $this->fields['apiKey'];
         }
 
         return $data;

@@ -22,6 +22,8 @@ class PayoutRequestAllocation implements JsonSerializable
 {
     public const STATUS_PENDING = 'pending';
 
+    public const STATUS_QUEUED = 'queued';
+
     public const STATUS_PROCESSING = 'processing';
 
     public const STATUS_COMPLETED = 'completed';
@@ -29,6 +31,8 @@ class PayoutRequestAllocation implements JsonSerializable
     public const STATUS_FAILED = 'failed';
 
     public const STATUS_CANCELED = 'canceled';
+
+    public const STATUS_DECLINED = 'declined';
 
     private array $fields = [];
 
@@ -39,6 +43,9 @@ class PayoutRequestAllocation implements JsonSerializable
         }
         if (array_key_exists('payoutRequestId', $data)) {
             $this->setPayoutRequestId($data['payoutRequestId']);
+        }
+        if (array_key_exists('batchId', $data)) {
+            $this->setBatchId($data['batchId']);
         }
         if (array_key_exists('paymentInstrumentId', $data)) {
             $this->setPaymentInstrumentId($data['paymentInstrumentId']);
@@ -85,6 +92,11 @@ class PayoutRequestAllocation implements JsonSerializable
     public function getPayoutRequestId(): string
     {
         return $this->fields['payoutRequestId'];
+    }
+
+    public function getBatchId(): ?string
+    {
+        return $this->fields['batchId'] ?? null;
     }
 
     public function getPaymentInstrumentId(): string
@@ -195,6 +207,9 @@ class PayoutRequestAllocation implements JsonSerializable
         if (array_key_exists('payoutRequestId', $this->fields)) {
             $data['payoutRequestId'] = $this->fields['payoutRequestId'];
         }
+        if (array_key_exists('batchId', $this->fields)) {
+            $data['batchId'] = $this->fields['batchId'];
+        }
         if (array_key_exists('paymentInstrumentId', $this->fields)) {
             $data['paymentInstrumentId'] = $this->fields['paymentInstrumentId'];
         }
@@ -244,6 +259,13 @@ class PayoutRequestAllocation implements JsonSerializable
     private function setPayoutRequestId(string $payoutRequestId): static
     {
         $this->fields['payoutRequestId'] = $payoutRequestId;
+
+        return $this;
+    }
+
+    private function setBatchId(null|string $batchId): static
+    {
+        $this->fields['batchId'] = $batchId;
 
         return $this;
     }

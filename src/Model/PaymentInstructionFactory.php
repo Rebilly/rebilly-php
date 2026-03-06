@@ -31,7 +31,7 @@ class PaymentInstructionFactory
         }
 
         return match ($data['method']) {
-            'ach' => BankAccountCreatePlain::from($data),
+            'ach' => BankAccountCreatePlainFactory::from($data),
             'payment-card' => PaymentCardCreatePlain::from($data),
             default => throw new UnknownDiscriminatorValueException(),
         };
