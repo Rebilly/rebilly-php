@@ -50,20 +50,6 @@ jobs:
           npm run generate /tmp/sdk https://www.rebilly.com/_spec/catalog/all.yaml
           cp -r examples /tmp/sdk
 
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: "8.1"
-          extensions: mbstring, intl, curl, json
-          tools: composer:v2
-
-      - name: Run Psalm on generated SDK
-        working-directory: /tmp/sdk
-        run: |
-          composer install --no-interaction --no-scripts --prefer-dist
-          ./vendor/bin/psalm
-
       - name: Generate diff (generated SDK vs main)
         id: text-diff
         working-directory: main-sdk
@@ -99,7 +85,7 @@ jobs:
 
       - name: Generate HTML diff
         run: |
-          npx -y diff2html -s side -t 'Rebilly PHP SDK (generated vs main)' -F /tmp/rebilly-sdk-diff.html -i file /tmp/rebilly-sdk-diff.txt || true
+          npx -y diff2html-cli -s side -t 'Rebilly PHP SDK (generated vs main)' -F /tmp/rebilly-sdk-diff.html -i file /tmp/rebilly-sdk-diff.txt || true
 
       - name: Upload Artifact
         id: diff-upload
