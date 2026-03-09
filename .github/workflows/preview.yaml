@@ -84,6 +84,7 @@ jobs:
           fi
 
       - name: Generate HTML diff
+        working-directory: main-sdk
         run: |
           npx -y diff2html-cli -s side -t 'Rebilly PHP SDK' -F /tmp/rebilly-sdk-diff.html
 
