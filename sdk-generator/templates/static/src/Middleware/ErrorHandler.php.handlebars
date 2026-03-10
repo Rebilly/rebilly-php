@@ -1,0 +1,57 @@
+<?php
+{{>file-header}}
+declare(strict_types=1);
+
+namespace {{fqn codegen.rootNameSpace}}\Middleware;
+
+use Closure;
+use GuzzleHttp\Exception\RequestException;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
+use {{fqn codegen.rootNameSpace}}\Exception;
+
+final class ErrorHandler
+{
+    public function __invoke(callable $next): Closure
+    {
+        return function (RequestInterface $request, array $options) use ($next) {
+            return $next($request, $options)
+                ->then(function (ResponseInterface $response) use ($request): ResponseInterface {
+                    $code = $response->getStatusCode();
+                    if ($code < 400) {
+                        return $response;
+                    }
+                    if ($code === 404) {
+                        throw new Exception\NotFoundException();
+                    }
+
+                    if ($code === 410) {
+                        throw new Exception\GoneException();
+                    }
+
+                    if ($code === 422) {
+                        $content = json_decode($response->getBody()->getContents(), true);
+
+                        throw new Exception\DataValidationException($content ?? []);
+                    }
+
+                    if ($code === 429) {
+                        throw new Exception\TooManyRequestsException(
+                            $response->getHeaderLine('Retry-After'),
+                            $response->getHeaderLine('Rate-Limit-Limit'),
+                            'Too many requests, retry after ' . $response->getHeaderLine('Retry-After')
+                        );
+                    }
+
+                    if ($code >= 500) {
+                        throw new Exception\ServerException(
+                            $response->getStatusCode(),
+                            $response->getReasonPhrase(),
+                        );
+                    }
+
+                    throw RequestException::create($request, $response);
+                });
+        };
+    }
+}

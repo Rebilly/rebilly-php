@@ -1,0 +1,71 @@
+<?php
+{{>file-header}}
+declare(strict_types=1);
+
+namespace {{fqn codegen.rootNameSpace}}\Middleware;
+
+use Closure;
+use GuzzleHttp\Psr7\Uri;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\RequestInterface;
+use {{fqn codegen.rootNameSpace}}\Client;
+
+final class BaseUri
+{
+    public function __construct(private ?Uri $uri = null, private ?string $organizationId = null)
+    {
+    }
+
+    public function __invoke(callable $next): Closure
+    {
+        return function (RequestInterface $request, array $options) use ($next) {
+            if ($request->getHeaderLine('Host') !== '') {
+                return $next($request, $options);
+            }
+            $newPath = $this->adjustUriPath($request->getUri()->getPath());
+            $request = $request->withUri(
+                $this->uri->withPath($newPath)
+                    ->withQuery($request->getUri()->getQuery()),
+            );
+
+            return $next($request, $options)->then(
+                function (ResponseInterface $response) {
+                    if ($response->getHeaderLine('Location') === '') {
+                        return $response;
+                    }
+                    $locationUri = new Uri($response->getHeaderLine('Location'));
+                    $newPath = $this->adjustUriPath($locationUri->getPath());
+
+                    return $response->withHeader(
+                        'Location',
+                        $this->uri->withPath($newPath)
+                            ->withQuery($locationUri->getQuery())
+                            ->__toString(),
+                    );
+                },
+            );
+        };
+    }
+
+    private function adjustUriPath(string $requestPath): string
+    {
+        $basePath = $this->uri->getPath();
+
+        if (
+            str_starts_with($requestPath, Client::EXPERIMENTAL_BASE)
+            && !str_ends_with(rtrim($basePath, '/'), ltrim(Client::EXPERIMENTAL_BASE, '/'))
+        ) {
+            $basePath .= Client::EXPERIMENTAL_BASE;
+            $requestPath = mb_substr($requestPath, mb_strlen(Client::EXPERIMENTAL_BASE));
+        }
+        $basePath .= '/';
+        if ($this->organizationId) {
+            $organizationPrefix = 'organizations/' . $this->organizationId . '/';
+            if (!str_starts_with(ltrim($requestPath, '/'), $organizationPrefix)) {
+                $basePath .= $organizationPrefix;
+            }
+        }
+
+        return $basePath . ltrim($requestPath, '/');
+    }
+}

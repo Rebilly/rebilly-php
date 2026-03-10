@@ -1,0 +1,135 @@
+name: Preview generated SDK vs main
+
+on:
+  pull_request:
+    paths:
+      - "sdk-generator/**"
+      - "package-lock.json"
+  workflow_dispatch:
+
+jobs:
+  generate-and-diff:
+    name: Generate SDK and diff vs main
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout current ref
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.MACHINE_USER_PAT }}
+
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository }}
+          ref: main
+          path: main-sdk
+          token: ${{ secrets.MACHINE_USER_PAT }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: "npm"
+          cache-dependency-path: |
+            package-lock.json
+
+      - name: Login to GitHub Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.MACHINE_USER_PAT }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build PHP SDK
+        run: |
+          mkdir -p /tmp/sdk
+          npm run generate /tmp/sdk https://www.rebilly.com/_spec/catalog/all.yaml
+          cp -r examples /tmp/sdk
+
+      - name: Generate diff (generated SDK vs main)
+        id: text-diff
+        working-directory: main-sdk
+        run: |
+          # Replace main's SDK files with generated ones, then diff
+          rm -rf src composer.json .php-cs-fixer.php psalm.xml 2>/dev/null || true
+          cp -r /tmp/sdk/src .
+          cp /tmp/sdk/composer.json . 2>/dev/null || true
+          cp /tmp/sdk/psalm.xml . 2>/dev/null || true
+          cp /tmp/sdk/.php-cs-fixer.php . 2>/dev/null || true
+
+          # Add all files to git to ensure diff works correctly
+          git add -A || true
+
+          # Generate text diff (staged = generated vs main's content)
+          git diff --no-color --cached > /tmp/rebilly-sdk-diff.txt || true
+
+          # Check diff size (GitHub PR comment limit is ~65,536 characters)
+          DIFF_SIZE=$(wc -c < /tmp/rebilly-sdk-diff.txt)
+          echo "diff_size=$DIFF_SIZE" >> $GITHUB_OUTPUT
+          echo "Diff size: $DIFF_SIZE bytes"
+
+          if [ "$DIFF_SIZE" -gt 0 ] && [ "$DIFF_SIZE" -lt 60000 ]; then
+            echo "include_diff=true" >> $GITHUB_OUTPUT
+          else
+            echo "include_diff=false" >> $GITHUB_OUTPUT
+          fi
+          if [ "$DIFF_SIZE" -eq 0 ]; then
+            echo "diff_empty=true" >> $GITHUB_OUTPUT
+          else
+            echo "diff_empty=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Generate HTML diff
+        working-directory: main-sdk
+        run: |
+          npx -y diff2html-cli -s side -t 'Rebilly PHP SDK' -F /tmp/rebilly-sdk-diff.html
+
+      - name: Upload Artifact
+        id: diff-upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: rebilly-sdk-diff
+          path: /tmp/rebilly-sdk-diff.html
+          retention-days: 3
+          if-no-files-found: ignore
+
+
+      - name: Prepare PR Comment Message
+        if: github.event_name == 'pull_request'
+        id: comment-message
+        run: |
+          echo "## 🔍 PHP SDK Changes Preview" >> /tmp/pr-comment.md
+          echo "" >> /tmp/pr-comment.md
+          if [ "${{ steps.text-diff.outputs.include_diff }}" == "true" ]; then
+            {
+              echo '```diff'
+              cat /tmp/rebilly-sdk-diff.txt
+              echo '```'
+            } >> /tmp/pr-comment.md
+          else
+            echo "**Diff is too large to display inline**" >> /tmp/pr-comment.md
+          fi
+          echo "" >> /tmp/pr-comment.md
+          echo "📦 Download the **rebilly-sdk-diff** artifact from the [workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for a formatted HTML diff." >> /tmp/pr-comment.md
+          echo "" >> /tmp/pr-comment.md
+          echo "---" >> /tmp/pr-comment.md
+          echo "**Updated:** $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> /tmp/pr-comment.md
+          echo "**Commit:** [${{ github.event.pull_request.head.sha }}](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.event.pull_request.head.sha }})" >> /tmp/pr-comment.md
+
+          {
+            echo "message<<EOF"
+            cat /tmp/pr-comment.md
+            echo "EOF"
+          } >> $GITHUB_OUTPUT
+
+      - name: Create/Update PR Comment
+        if: github.event_name == 'pull_request'
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          GITHUB_TOKEN: ${{ github.token }}
+          number: ${{ github.event.pull_request.number }}
+          message: ${{ steps.comment-message.outputs.message }}
