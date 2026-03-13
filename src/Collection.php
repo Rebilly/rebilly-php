@@ -20,6 +20,7 @@ use Countable;
 use IteratorAggregate;
 use JsonSerializable;
 use LogicException;
+use Rebilly\Sdk\Trait\HasMetadata;
 use Traversable;
 
 /**
@@ -29,6 +30,8 @@ use Traversable;
  */
 class Collection implements JsonSerializable, IteratorAggregate, ArrayAccess, Countable
 {
+    use HasMetadata;
+
     public const HEADER_LIMIT = 'Pagination-Limit';
 
     public const HEADER_OFFSET = 'Pagination-Offset';
@@ -40,13 +43,16 @@ class Collection implements JsonSerializable, IteratorAggregate, ArrayAccess, Co
      * @param int $limit
      * @param int $offset
      * @param int $total
+     * @param array $metadata
      */
     public function __construct(
         private array $items,
         private int $limit,
         private int $offset,
         private int $total,
+        array $metadata = [],
     ) {
+        $this->setMetadata($metadata);
     }
 
     /**

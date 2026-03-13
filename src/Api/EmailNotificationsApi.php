@@ -47,10 +47,13 @@ class EmailNotificationsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): EmailNotification => EmailNotification::from($item), $data),
+            array_map(fn (array $item): EmailNotification => EmailNotification::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 

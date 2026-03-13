@@ -15,16 +15,19 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class StripeSettings implements JsonSerializable
 {
+    use HasMetadata;
+
     public const SETUP_FUTURE_USAGE_OFF_SESSION = 'off_session';
 
     public const SETUP_FUTURE_USAGE_ON_SESSION = 'on_session';
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('redirectUrl', $data)) {
             $this->setRedirectUrl($data['redirectUrl']);
@@ -47,11 +50,12 @@ class StripeSettings implements JsonSerializable
         if (array_key_exists('includeCardNetwork', $data)) {
             $this->setIncludeCardNetwork($data['includeCardNetwork']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getRedirectUrl(): string

@@ -18,11 +18,11 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class CheckoutFormPlanFactory
 {
-    public static function from(array $data = []): CheckoutFormPlan
+    public static function from(array $data = [], array $metadata = []): CheckoutFormPlan
     {
         return match ($data['type']) {
-            'fixed' => CheckoutFormFixedPlan::from($data),
-            'variable' => CheckoutFormVariablePlan::from($data),
+            'fixed' => CheckoutFormFixedPlan::from($data, $metadata),
+            'variable' => CheckoutFormVariablePlan::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

@@ -16,9 +16,12 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class InvoicesDataExport implements DataExport
 {
+    use HasMetadata;
+
     public const FORMAT_CSV = 'csv';
 
     public const FORMAT_JSON = 'json';
@@ -39,7 +42,7 @@ class InvoicesDataExport implements DataExport
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
@@ -92,11 +95,12 @@ class InvoicesDataExport implements DataExport
         if (array_key_exists('_embedded', $data)) {
             $this->setEmbedded($data['_embedded']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getResource(): string
@@ -236,15 +240,15 @@ class InvoicesDataExport implements DataExport
         return $this->fields['status'] ?? null;
     }
 
-    public function getDateRange(): ?DataExportDateRange
+    public function getDateRange(): ?InvoicesDataExportDateRange
     {
         return $this->fields['dateRange'] ?? null;
     }
 
-    public function setDateRange(null|DataExportDateRange|array $dateRange): static
+    public function setDateRange(null|InvoicesDataExportDateRange|array $dateRange): static
     {
-        if ($dateRange !== null && !($dateRange instanceof DataExportDateRange)) {
-            $dateRange = DataExportDateRange::from($dateRange);
+        if ($dateRange !== null && !($dateRange instanceof InvoicesDataExportDateRange)) {
+            $dateRange = InvoicesDataExportDateRange::from($dateRange);
         }
 
         $this->fields['dateRange'] = $dateRange;

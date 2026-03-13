@@ -58,10 +58,13 @@ class TrackingApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): ApiTracking => ApiTracking::from($item), $data),
+            array_map(fn (array $item): ApiTracking => ApiTracking::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -117,10 +120,13 @@ class TrackingApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): ValueList => ValueList::from($item), $data),
+            array_map(fn (array $item): ValueList => ValueList::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -174,10 +180,13 @@ class TrackingApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): TaxTracking => TaxTracking::from($item), $data),
+            array_map(fn (array $item): TaxTracking => TaxTracking::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -231,10 +240,13 @@ class TrackingApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): WebhookTracking => WebhookTracking::from($item), $data),
+            array_map(fn (array $item): WebhookTracking => WebhookTracking::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -277,7 +289,7 @@ class TrackingApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ApiTracking::from($data);
+        return ApiTracking::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getTaxTrackingLog(
@@ -295,7 +307,7 @@ class TrackingApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return TaxTracking::from($data);
+        return TaxTracking::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getWebhookTrackingLog(
@@ -313,7 +325,7 @@ class TrackingApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return WebhookTracking::from($data);
+        return WebhookTracking::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function resendWebhook(

@@ -14,8 +14,12 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use Rebilly\Sdk\Trait\HasMetadata;
+
 class DiscountPercent implements Discount
 {
+    use HasMetadata;
+
     public const CONTEXT_ITEMS = 'items';
 
     public const CONTEXT_SHIPPING = 'shipping';
@@ -24,7 +28,7 @@ class DiscountPercent implements Discount
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('value', $data)) {
             $this->setValue($data['value']);
@@ -32,11 +36,12 @@ class DiscountPercent implements Discount
         if (array_key_exists('context', $data)) {
             $this->setContext($data['context']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getType(): string

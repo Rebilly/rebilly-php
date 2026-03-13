@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class PaymentInstrumentNameInquiry implements JsonSerializable
 {
+    use HasMetadata;
+
     public const RESULT_FULL_MATCH = 'full-match';
 
     public const RESULT_PARTIAL_MATCH = 'partial-match';
@@ -30,7 +33,7 @@ class PaymentInstrumentNameInquiry implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('gatewayAccountId', $data)) {
             $this->setGatewayAccountId($data['gatewayAccountId']);
@@ -41,11 +44,12 @@ class PaymentInstrumentNameInquiry implements JsonSerializable
         if (array_key_exists('response', $data)) {
             $this->setResponse($data['response']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getGatewayAccountId(): string

@@ -15,12 +15,15 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class EcoPayzCredentials implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('paymentPageId', $data)) {
             $this->setPaymentPageId($data['paymentPageId']);
@@ -31,11 +34,12 @@ class EcoPayzCredentials implements JsonSerializable
         if (array_key_exists('merchantPassword', $data)) {
             $this->setMerchantPassword($data['merchantPassword']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getPaymentPageId(): string

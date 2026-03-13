@@ -39,7 +39,7 @@ class UsersApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return User::from($data);
+        return User::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function get(
@@ -57,7 +57,7 @@ class UsersApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return User::from($data);
+        return User::from($data, ['headers' => $response->getHeaders()]);
     }
 
     /**
@@ -86,10 +86,13 @@ class UsersApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): User => User::from($item), $data),
+            array_map(fn (array $item): User => User::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -132,7 +135,7 @@ class UsersApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ProfileMfa::from($data);
+        return ProfileMfa::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function update(
@@ -151,6 +154,6 @@ class UsersApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return User::from($data);
+        return User::from($data, ['headers' => $response->getHeaders()]);
     }
 }

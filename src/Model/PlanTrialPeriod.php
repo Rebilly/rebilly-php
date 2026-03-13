@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class PlanTrialPeriod implements JsonSerializable
 {
+    use HasMetadata;
+
     public const UNIT_DAY = 'day';
 
     public const UNIT_WEEK = 'week';
@@ -28,7 +31,7 @@ class PlanTrialPeriod implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('unit', $data)) {
             $this->setUnit($data['unit']);
@@ -36,11 +39,12 @@ class PlanTrialPeriod implements JsonSerializable
         if (array_key_exists('length', $data)) {
             $this->setLength($data['length']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getUnit(): string

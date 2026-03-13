@@ -16,12 +16,15 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class PayPalBillingAgreementFeature implements ReadyToPayPayPalMethodFeature
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('paypalMerchantId', $data)) {
             $this->setPaypalMerchantId($data['paypalMerchantId']);
@@ -35,11 +38,12 @@ class PayPalBillingAgreementFeature implements ReadyToPayPayPalMethodFeature
         if (array_key_exists('expirationTime', $data)) {
             $this->setExpirationTime($data['expirationTime']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getName(): string

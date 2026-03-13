@@ -16,9 +16,12 @@ namespace Rebilly\Sdk\Model;
 
 use InvalidArgumentException;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 abstract class RuleAction implements JsonSerializable
 {
+    use HasMetadata;
+
     public const NAME_ABANDON_SCHEDULED_PAYMENTS = 'abandon-scheduled-payments';
 
     public const NAME_ADD_RISK_SCORE = 'add-risk-score';
@@ -85,7 +88,7 @@ abstract class RuleAction implements JsonSerializable
 
     private array $fields = [];
 
-    protected function __construct(array $data = [])
+    protected function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('name', $data)) {
             $this->setName($data['name']);
@@ -93,63 +96,64 @@ abstract class RuleAction implements JsonSerializable
         if (array_key_exists('status', $data)) {
             $this->setStatus($data['status']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
         switch ($data['name']) {
             case 'abandon-scheduled-payments':
-                return RuleActionAbandonScheduledPayments::from($data);
+                return RuleActionAbandonScheduledPayments::from($data, $metadata);
             case 'blocklist':
-                return RuleActionAddBlockList::from($data);
+                return RuleActionAddBlockList::from($data, $metadata);
             case 'add-risk-score':
-                return RuleActionAddRiskScore::from($data);
+                return RuleActionAddRiskScore::from($data, $metadata);
             case 'adjust-ready-to-pay':
-                return RuleActionAdjustReadyToPay::from($data);
+                return RuleActionAdjustReadyToPay::from($data, $metadata);
             case 'adjust-ready-to-payout':
-                return RuleActionAdjustReadyToPayout::from($data);
+                return RuleActionAdjustReadyToPayout::from($data, $metadata);
             case 'cancel-scheduled-payments':
-                return RuleActionCancelScheduledPayments::from($data);
+                return RuleActionCancelScheduledPayments::from($data, $metadata);
             case 'check-ontario-restriction':
-                return RuleActionCheckOntarioRestriction::from($data);
+                return RuleActionCheckOntarioRestriction::from($data, $metadata);
             case 'create-intuit-quickbooks-balance-transaction-entry':
-                return RuleActionCreateIntuitQuickbooksBalanceTransactionEntry::from($data);
+                return RuleActionCreateIntuitQuickbooksBalanceTransactionEntry::from($data, $metadata);
             case 'create-intuit-quickbooks-invoice':
-                return RuleActionCreateIntuitQuickbooksInvoice::from($data);
+                return RuleActionCreateIntuitQuickbooksInvoice::from($data, $metadata);
             case 'create-intuit-quickbooks-payment':
-                return RuleActionCreateIntuitQuickbooksPayment::from($data);
+                return RuleActionCreateIntuitQuickbooksPayment::from($data, $metadata);
             case 'create-intuit-quickbooks-refund-receipt':
-                return RuleActionCreateIntuitQuickbooksRefundReceipt::from($data);
+                return RuleActionCreateIntuitQuickbooksRefundReceipt::from($data, $metadata);
             case 'create-intuit-quickbooks-revenue-recognition-entry':
-                return RuleActionCreateIntuitQuickbooksRevenueRecognitionEntry::from($data);
+                return RuleActionCreateIntuitQuickbooksRevenueRecognitionEntry::from($data, $metadata);
             case 'decline-transaction':
-                return RuleActionDeclineTransaction::from($data);
+                return RuleActionDeclineTransaction::from($data, $metadata);
             case 'display-other-choices':
-                return RuleActionDisplayOtherChoices::from($data);
+                return RuleActionDisplayOtherChoices::from($data, $metadata);
             case 'guess-payment-card-expiration':
-                return RuleActionGuessPaymentCardExpiration::from($data);
+                return RuleActionGuessPaymentCardExpiration::from($data, $metadata);
             case 'perform-experian-check':
-                return RuleActionPerformExperianCheck::from($data);
+                return RuleActionPerformExperianCheck::from($data, $metadata);
             case 'pick-gateway-account':
-                return RuleActionPickGatewayAccount::from($data);
+                return RuleActionPickGatewayAccount::from($data, $metadata);
             case 'request-kyc':
-                return RuleActionRequestKyc::from($data);
+                return RuleActionRequestKyc::from($data, $metadata);
             case 'schedule-invoice-retry':
-                return RuleActionScheduleInvoiceRetry::from($data);
+                return RuleActionScheduleInvoiceRetry::from($data, $metadata);
             case 'schedule-payment':
-                return RuleActionSchedulePayment::from($data);
+                return RuleActionSchedulePayment::from($data, $metadata);
             case 'schedule-reminder':
-                return RuleActionScheduleReminder::from($data);
+                return RuleActionScheduleReminder::from($data, $metadata);
             case 'send-email':
-                return RuleActionSendEmail::from($data);
+                return RuleActionSendEmail::from($data, $metadata);
             case 'stop-subscriptions':
-                return RuleActionStopSubscriptions::from($data);
+                return RuleActionStopSubscriptions::from($data, $metadata);
             case 'tag-or-untag-customer':
-                return RuleActionTagOrUntagCustomer::from($data);
+                return RuleActionTagOrUntagCustomer::from($data, $metadata);
             case 'update-intuit-quickbooks-invoice':
-                return RuleActionUpdateIntuitQuickbooksInvoice::from($data);
+                return RuleActionUpdateIntuitQuickbooksInvoice::from($data, $metadata);
             case 'void-intuit-quickbooks-invoice':
-                return RuleActionVoidIntuitQuickbooksInvoice::from($data);
+                return RuleActionVoidIntuitQuickbooksInvoice::from($data, $metadata);
         }
 
         throw new InvalidArgumentException("Unsupported name value: '{$data['name']}'");

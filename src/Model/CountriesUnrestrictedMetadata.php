@@ -14,15 +14,19 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use Rebilly\Sdk\Trait\HasMetadata;
+
 class CountriesUnrestrictedMetadata implements CountriesMetadata
 {
+    use HasMetadata;
+
     public const MODE_UNKNOWN = 'unknown';
 
     public const MODE_ALL = 'all';
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('mode', $data)) {
             $this->setMode($data['mode']);
@@ -30,11 +34,12 @@ class CountriesUnrestrictedMetadata implements CountriesMetadata
         if (array_key_exists('values', $data)) {
             $this->setValues($data['values']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getMode(): string

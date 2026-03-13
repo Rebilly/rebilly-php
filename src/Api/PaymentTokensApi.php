@@ -39,7 +39,7 @@ class PaymentTokensApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CompositeTokenFactory::from($data);
+        return CompositeTokenFactory::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function get(
@@ -57,7 +57,7 @@ class PaymentTokensApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CompositeTokenFactory::from($data);
+        return CompositeTokenFactory::from($data, ['headers' => $response->getHeaders()]);
     }
 
     /**
@@ -80,10 +80,13 @@ class PaymentTokensApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): CompositeToken => CompositeTokenFactory::from($item), $data),
+            array_map(fn (array $item): CompositeToken => CompositeTokenFactory::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 

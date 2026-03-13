@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class EddScore implements JsonSerializable
 {
+    use HasMetadata;
+
     public const OCCUPATION_NOT_FOUND = 'not-found';
 
     public const OCCUPATION_UNLIKELY = 'unlikely';
@@ -60,7 +63,7 @@ class EddScore implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('occupation', $data)) {
             $this->setOccupation($data['occupation']);
@@ -74,11 +77,12 @@ class EddScore implements JsonSerializable
         if (array_key_exists('fraud', $data)) {
             $this->setFraud($data['fraud']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getOccupation(): ?string

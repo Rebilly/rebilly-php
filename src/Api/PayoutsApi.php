@@ -37,6 +37,6 @@ class PayoutsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Transaction::from($data);
+        return Transaction::from($data, ['headers' => $response->getHeaders()]);
     }
 }

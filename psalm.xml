@@ -24,6 +24,7 @@
                 <file name="src/Model/PostFileRequestFactory.php" />
                 <file name="src/Model/PostPaymentInstrumentRequestFactory.php" />
                 <file name="src/Model/PostReadyToPayFactory.php" />
+                <file name="src/Model/PostPayoutRequestBatchRequestFactory.php" />
             </errorLevel>
         </UnusedClass>
         <PossiblyUnusedMethod errorLevel="suppress"/>

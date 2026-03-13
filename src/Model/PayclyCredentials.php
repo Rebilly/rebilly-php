@@ -15,12 +15,15 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class PayclyCredentials implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('apiToken', $data)) {
             $this->setApiToken($data['apiToken']);
@@ -28,11 +31,12 @@ class PayclyCredentials implements JsonSerializable
         if (array_key_exists('websiteId', $data)) {
             $this->setWebsiteId($data['websiteId']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getApiToken(): string

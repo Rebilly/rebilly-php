@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class ReportEventsTriggeredSummaryData implements JsonSerializable
 {
+    use HasMetadata;
+
     public const EVENT_NAME_DISPUTE_CREATED = 'dispute-created';
 
     public const EVENT_NAME_GATEWAY_ACCOUNT_REQUESTED = 'gateway-account-requested';
@@ -38,7 +41,7 @@ class ReportEventsTriggeredSummaryData implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('eventName', $data)) {
             $this->setEventName($data['eventName']);
@@ -46,11 +49,12 @@ class ReportEventsTriggeredSummaryData implements JsonSerializable
         if (array_key_exists('count', $data)) {
             $this->setCount($data['count']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getEventName(): ?string

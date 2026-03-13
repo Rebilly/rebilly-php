@@ -41,7 +41,7 @@ class FilesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Attachment::from($data);
+        return Attachment::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function delete(
@@ -125,7 +125,7 @@ class FilesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return File::from($data);
+        return File::from($data, ['headers' => $response->getHeaders()]);
     }
 
     /**
@@ -156,10 +156,13 @@ class FilesApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): File => File::from($item), $data),
+            array_map(fn (array $item): File => File::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -219,10 +222,13 @@ class FilesApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): Attachment => Attachment::from($item), $data),
+            array_map(fn (array $item): Attachment => Attachment::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -269,7 +275,7 @@ class FilesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Attachment::from($data);
+        return Attachment::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function update(
@@ -288,7 +294,7 @@ class FilesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return File::from($data);
+        return File::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function updateAttachment(
@@ -307,7 +313,7 @@ class FilesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Attachment::from($data);
+        return Attachment::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function upload(
@@ -321,6 +327,6 @@ class FilesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return File::from($data);
+        return File::from($data, ['headers' => $response->getHeaders()]);
     }
 }

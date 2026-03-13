@@ -15,12 +15,15 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class RiskMetadataBrowserData implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('colorDepth', $data)) {
             $this->setColorDepth($data['colorDepth']);
@@ -43,11 +46,12 @@ class RiskMetadataBrowserData implements JsonSerializable
         if (array_key_exists('isAdBlockEnabled', $data)) {
             $this->setIsAdBlockEnabled($data['isAdBlockEnabled']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getColorDepth(): int

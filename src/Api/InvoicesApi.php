@@ -49,7 +49,7 @@ class InvoicesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Invoice::from($data);
+        return Invoice::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function applyTransaction(
@@ -68,7 +68,7 @@ class InvoicesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Invoice::from($data);
+        return Invoice::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function create(
@@ -82,7 +82,7 @@ class InvoicesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Invoice::from($data);
+        return Invoice::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function createInvoiceItem(
@@ -101,7 +101,7 @@ class InvoicesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return InvoiceItem::from($data);
+        return InvoiceItem::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function createTimelineComment(
@@ -120,7 +120,7 @@ class InvoicesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return InvoiceTimeline::from($data);
+        return InvoiceTimeline::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function deleteInvoiceItem(
@@ -156,7 +156,7 @@ class InvoicesApi
     public function get(
         string $id,
         ?string $expand = null,
-    ): Invoice {
+    ): StreamInterface {
         $pathParams = [
             '{id}' => $id,
         ];
@@ -166,13 +166,10 @@ class InvoicesApi
         ];
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/invoices/{id}?') . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri, headers: [
-            'Accept' => 'application/json',
-        ]);
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
+        $request = new Request('GET', $uri);
+        $response = $this->client->send($request, ['allow_redirects' => ['refer' => true]]);
 
-        return Invoice::from($data);
+        return $response->getBody();
     }
 
     public function getPdf(
@@ -224,10 +221,13 @@ class InvoicesApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): Invoice => Invoice::from($item), $data),
+            array_map(fn (array $item): Invoice => Invoice::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -284,10 +284,13 @@ class InvoicesApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): InvoiceItem => InvoiceItem::from($item), $data),
+            array_map(fn (array $item): InvoiceItem => InvoiceItem::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -344,10 +347,13 @@ class InvoicesApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): InvoiceTimeline => InvoiceTimeline::from($item), $data),
+            array_map(fn (array $item): InvoiceTimeline => InvoiceTimeline::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -402,10 +408,13 @@ class InvoicesApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): InvoiceTransactionAllocation => InvoiceTransactionAllocation::from($item), $data),
+            array_map(fn (array $item): InvoiceTransactionAllocation => InvoiceTransactionAllocation::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -446,7 +455,7 @@ class InvoicesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return InvoiceItem::from($data);
+        return InvoiceItem::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getTimelineMessage(
@@ -466,7 +475,7 @@ class InvoicesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return InvoiceTimeline::from($data);
+        return InvoiceTimeline::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function issue(
@@ -485,7 +494,7 @@ class InvoicesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Invoice::from($data);
+        return Invoice::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function recalculate(
@@ -503,7 +512,7 @@ class InvoicesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Invoice::from($data);
+        return Invoice::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function reissue(
@@ -522,7 +531,7 @@ class InvoicesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Invoice::from($data);
+        return Invoice::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function update(
@@ -541,7 +550,7 @@ class InvoicesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Invoice::from($data);
+        return Invoice::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function updateInvoiceItem(
@@ -562,7 +571,7 @@ class InvoicesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return InvoiceItem::from($data);
+        return InvoiceItem::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function void(
@@ -580,6 +589,6 @@ class InvoicesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Invoice::from($data);
+        return Invoice::from($data, ['headers' => $response->getHeaders()]);
     }
 }

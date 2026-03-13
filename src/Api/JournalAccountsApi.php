@@ -38,7 +38,7 @@ class JournalAccountsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return JournalAccount::from($data);
+        return JournalAccount::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getAccount(
@@ -56,7 +56,7 @@ class JournalAccountsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return JournalAccount::from($data);
+        return JournalAccount::from($data, ['headers' => $response->getHeaders()]);
     }
 
     /**
@@ -83,10 +83,13 @@ class JournalAccountsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): JournalAccount => JournalAccount::from($item), $data),
+            array_map(fn (array $item): JournalAccount => JournalAccount::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -128,6 +131,6 @@ class JournalAccountsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return JournalAccount::from($data);
+        return JournalAccount::from($data, ['headers' => $response->getHeaders()]);
     }
 }

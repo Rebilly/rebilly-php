@@ -18,9 +18,12 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use InvalidArgumentException;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 abstract class GatewayAccount implements JsonSerializable
 {
+    use HasMetadata;
+
     public const GATEWAY_NAME_A1_GATEWAY = 'A1Gateway';
 
     public const GATEWAY_NAME_ACI = 'ACI';
@@ -448,6 +451,8 @@ abstract class GatewayAccount implements JsonSerializable
     public const GATEWAY_NAME_V_CREDITOS = 'VCreditos';
 
     public const GATEWAY_NAME_VEGA_WALLET = 'VegaWallet';
+
+    public const GATEWAY_NAME_VIVA = 'Viva';
 
     public const GATEWAY_NAME_WALLET88 = 'Wallet88';
 
@@ -885,16 +890,6 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const ACQUIRER_NAME_ZOTAPAY = 'Zotapay';
 
-    public const METHOD_PAYMENT_CARD = 'payment-card';
-
-    public const METHOD_ACH = 'ach';
-
-    public const METHOD_CASH = 'cash';
-
-    public const METHOD_CHECK = 'check';
-
-    public const METHOD_PAYPAL = 'paypal';
-
     public const METHOD_ADV_CASH = 'AdvCash';
 
     public const METHOD_AERA = 'Aera';
@@ -1243,6 +1238,8 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const METHOD_VENUS_POINT = 'VenusPoint';
 
+    public const METHOD_VIVA = 'Viva';
+
     public const METHOD_VOUCHER = 'voucher';
 
     public const METHOD_VOUCHER2 = 'voucher-2';
@@ -1329,7 +1326,7 @@ abstract class GatewayAccount implements JsonSerializable
 
     private array $fields = [];
 
-    protected function __construct(array $data = [])
+    protected function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
@@ -1430,455 +1427,458 @@ abstract class GatewayAccount implements JsonSerializable
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
         switch ($data['gatewayName']) {
             case 'A1Gateway':
-                return A1Gateway::from($data);
+                return A1Gateway::from($data, $metadata);
             case 'ACI':
-                return ACI::from($data);
+                return ACI::from($data, $metadata);
             case 'Adyen':
-                return Adyen::from($data);
+                return Adyen::from($data, $metadata);
             case 'Aera':
-                return Aera::from($data);
+                return Aera::from($data, $metadata);
             case 'Aircash':
-                return Aircash::from($data);
+                return Aircash::from($data, $metadata);
             case 'Airpay':
-                return Airpay::from($data);
+                return Airpay::from($data, $metadata);
             case 'Airwallex':
-                return Airwallex::from($data);
+                return Airwallex::from($data, $metadata);
             case 'AmazonPay':
-                return AmazonPay::from($data);
+                return AmazonPay::from($data, $metadata);
             case 'AmexVPC':
-                return AmexVPC::from($data);
+                return AmexVPC::from($data, $metadata);
             case 'Antom':
-                return Antom::from($data);
+                return Antom::from($data, $metadata);
             case 'ApcoPay':
-                return ApcoPay::from($data);
+                return ApcoPay::from($data, $metadata);
             case 'AsiaPay':
-                return AsiaPay::from($data);
+                return AsiaPay::from($data, $metadata);
             case 'AsiaPaymentGateway':
-                return AsiaPaymentGateway::from($data);
+                return AsiaPaymentGateway::from($data, $metadata);
             case 'AstroPayCard':
-                return AstroPayCard::from($data);
+                return AstroPayCard::from($data, $metadata);
             case 'AuthorizeNet':
-                return AuthorizeNet::from($data);
+                return AuthorizeNet::from($data, $metadata);
             case 'Awepay':
-                return Awepay::from($data);
+                return Awepay::from($data, $metadata);
             case 'Bambora':
-                return Bambora::from($data);
+                return Bambora::from($data, $metadata);
             case 'BankSEND':
-                return BankSEND::from($data);
+                return BankSEND::from($data, $metadata);
             case 'BitPay':
-                return BitPay::from($data);
+                return BitPay::from($data, $metadata);
             case 'BlueSnap':
-                return BlueSnap::from($data);
+                return BlueSnap::from($data, $metadata);
             case 'BraintreePayments':
-                return BraintreePayments::from($data);
+                return BraintreePayments::from($data, $metadata);
             case 'Buckaroo':
-                return Buckaroo::from($data);
+                return Buckaroo::from($data, $metadata);
             case 'BVNK':
-                return BVNK::from($data);
+                return BVNK::from($data, $metadata);
             case 'Cardknox':
-                return Cardknox::from($data);
+                return Cardknox::from($data, $metadata);
             case 'Cashflows':
-                return Cashflows::from($data);
+                return Cashflows::from($data, $metadata);
             case 'CASHlib':
-                return CASHlib::from($data);
+                return CASHlib::from($data, $metadata);
             case 'Cashterminal':
-                return Cashterminal::from($data);
+                return Cashterminal::from($data, $metadata);
             case 'CashToCode':
-                return CashToCode::from($data);
+                return CashToCode::from($data, $metadata);
             case 'CauriPayment':
-                return CauriPayment::from($data);
+                return CauriPayment::from($data, $metadata);
             case 'Cayan':
-                return Cayan::from($data);
+                return Cayan::from($data, $metadata);
             case 'CCAvenue':
-                return CCAvenue::from($data);
+                return CCAvenue::from($data, $metadata);
             case 'Chase':
-                return Chase::from($data);
+                return Chase::from($data, $metadata);
             case 'CheckoutCom':
-                return CheckoutCom::from($data);
+                return CheckoutCom::from($data, $metadata);
             case 'Chillstock':
-                return Chillstock::from($data);
+                return Chillstock::from($data, $metadata);
             case 'Circle':
-                return Circle::from($data);
+                return Circle::from($data, $metadata);
             case 'Citadel':
-                return Citadel::from($data);
+                return Citadel::from($data, $metadata);
             case 'Clearhaus':
-                return Clearhaus::from($data);
+                return Clearhaus::from($data, $metadata);
             case 'Cleo':
-                return Cleo::from($data);
+                return Cleo::from($data, $metadata);
             case 'CODVoucher':
-                return CODVoucher::from($data);
+                return CODVoucher::from($data, $metadata);
             case 'Coinbase':
-                return Coinbase::from($data);
+                return Coinbase::from($data, $metadata);
             case 'CoinGate':
-                return CoinGate::from($data);
+                return CoinGate::from($data, $metadata);
             case 'CoinPayments':
-                return CoinPayments::from($data);
+                return CoinPayments::from($data, $metadata);
             case 'Conekta':
-                return Conekta::from($data);
+                return Conekta::from($data, $metadata);
             case 'Coppr':
-                return Coppr::from($data);
+                return Coppr::from($data, $metadata);
             case 'Credorax':
-                return Credorax::from($data);
+                return Credorax::from($data, $metadata);
             case 'Cryptomus':
-                return Cryptomus::from($data);
+                return Cryptomus::from($data, $metadata);
             case 'Cryptonator':
-                return Cryptonator::from($data);
+                return Cryptonator::from($data, $metadata);
             case 'CyberSource':
-                return CyberSource::from($data);
+                return CyberSource::from($data, $metadata);
             case 'DataCash':
-                return DataCash::from($data);
+                return DataCash::from($data, $metadata);
             case 'Dengi':
-                return Dengi::from($data);
+                return Dengi::from($data, $metadata);
             case 'Dimoco':
-                return Dimoco::from($data);
+                return Dimoco::from($data, $metadata);
             case 'Directa24':
-                return Directa24::from($data);
+                return Directa24::from($data, $metadata);
             case 'dLocal':
-                return DLocal::from($data);
+                return DLocal::from($data, $metadata);
             case 'Dragonphoenix':
-                return Dragonphoenix::from($data);
+                return Dragonphoenix::from($data, $metadata);
             case 'Dropayment':
-                return Dropayment::from($data);
+                return Dropayment::from($data, $metadata);
             case 'EasyPayDirect':
-                return EasyPayDirect::from($data);
+                return EasyPayDirect::from($data, $metadata);
             case 'EBANX':
-                return EBANX::from($data);
+                return EBANX::from($data, $metadata);
             case 'ecoPayz':
-                return EcoPayz::from($data);
+                return EcoPayz::from($data, $metadata);
             case 'ecoPayzTurkey':
-                return EcoPayzTurkey::from($data);
+                return EcoPayzTurkey::from($data, $metadata);
             case 'EcorePay':
-                return EcorePay::from($data);
+                return EcorePay::from($data, $metadata);
             case 'Elavon':
-                return Elavon::from($data);
+                return Elavon::from($data, $metadata);
             case 'eMerchantPay':
-                return EMerchantPay::from($data);
+                return EMerchantPay::from($data, $metadata);
             case 'EMS':
-                return EMS::from($data);
+                return EMS::from($data, $metadata);
             case 'ePay':
-                return EPay::from($data);
+                return EPay::from($data, $metadata);
             case 'EPG':
-                return EPG::from($data);
+                return EPG::from($data, $metadata);
             case 'EPro':
-                return EPro::from($data);
+                return EPro::from($data, $metadata);
             case 'Euteller':
-                return Euteller::from($data);
+                return Euteller::from($data, $metadata);
             case 'Ezeebill':
-                return Ezeebill::from($data);
+                return Ezeebill::from($data, $metadata);
             case 'eZeeWallet':
-                return EZeeWallet::from($data);
+                return EZeeWallet::from($data, $metadata);
             case 'ezyEFT':
-                return EzyEFT::from($data);
+                return EzyEFT::from($data, $metadata);
             case 'Finrax':
-                return Finrax::from($data);
+                return Finrax::from($data, $metadata);
             case 'FinTecSystems':
-                return FinTecSystems::from($data);
+                return FinTecSystems::from($data, $metadata);
             case 'Flexepin':
-                return Flexepin::from($data);
+                return Flexepin::from($data, $metadata);
             case 'Forte':
-                return Forte::from($data);
+                return Forte::from($data, $metadata);
             case 'FundSend':
-                return FundSend::from($data);
+                return FundSend::from($data, $metadata);
             case 'gate2way':
-                return Gate2way::from($data);
+                return Gate2way::from($data, $metadata);
             case 'GET':
-                return GET::from($data);
+                return GET::from($data, $metadata);
             case 'Gigadat':
-                return Gigadat::from($data);
+                return Gigadat::from($data, $metadata);
             case 'GlobalOne':
-                return GlobalOne::from($data);
+                return GlobalOne::from($data, $metadata);
             case 'GoCardless':
-                return GoCardless::from($data);
+                return GoCardless::from($data, $metadata);
             case 'Gooney':
-                return Gooney::from($data);
+                return Gooney::from($data, $metadata);
             case 'Gpaysafe':
-                return Gpaysafe::from($data);
+                return Gpaysafe::from($data, $metadata);
             case 'Greenbox':
-                return Greenbox::from($data);
+                return Greenbox::from($data, $metadata);
             case 'HiPay':
-                return HiPay::from($data);
+                return HiPay::from($data, $metadata);
             case 'iCanPay':
-                return ICanPay::from($data);
+                return ICanPay::from($data, $metadata);
             case 'iCashOne':
-                return ICashOne::from($data);
+                return ICashOne::from($data, $metadata);
             case 'ICEPAY':
-                return ICEPAY::from($data);
+                return ICEPAY::from($data, $metadata);
             case 'iCheque':
-                return ICheque::from($data);
+                return ICheque::from($data, $metadata);
             case 'iDebit':
-                return IDebit::from($data);
+                return IDebit::from($data, $metadata);
             case 'Ilixium':
-                return Ilixium::from($data);
+                return Ilixium::from($data, $metadata);
             case 'Ingenico':
-                return Ingenico::from($data);
+                return Ingenico::from($data, $metadata);
             case 'INOVAPAY':
-                return INOVAPAY::from($data);
+                return INOVAPAY::from($data, $metadata);
             case 'Inovio':
-                return Inovio::from($data);
+                return Inovio::from($data, $metadata);
             case 'InstaDebit':
-                return InstaDebit::from($data);
+                return InstaDebit::from($data, $metadata);
             case 'Intuit':
-                return Intuit::from($data);
+                return Intuit::from($data, $metadata);
             case 'IpayOptions':
-                return IpayOptions::from($data);
+                return IpayOptions::from($data, $metadata);
             case 'Jeton':
-                return Jeton::from($data);
+                return Jeton::from($data, $metadata);
             case 'JetPay':
-                return JetPay::from($data);
+                return JetPay::from($data, $metadata);
             case 'JPMOrbital':
-                return JPMOrbital::from($data);
+                return JPMOrbital::from($data, $metadata);
             case 'Khelocard':
-                return Khelocard::from($data);
+                return Khelocard::from($data, $metadata);
             case 'Klarna':
-                return Klarna::from($data);
+                return Klarna::from($data, $metadata);
             case 'Konnektive':
-                return Konnektive::from($data);
+                return Konnektive::from($data, $metadata);
             case 'Kushki':
-                return Kushki::from($data);
+                return Kushki::from($data, $metadata);
             case 'LaCore':
-                return LaCore::from($data);
+                return LaCore::from($data, $metadata);
             case 'Limepay':
-                return Limepay::from($data);
+                return Limepay::from($data, $metadata);
             case 'loonie':
-                return Loonie::from($data);
+                return Loonie::from($data, $metadata);
             case 'Loonio':
-                return Loonio::from($data);
+                return Loonio::from($data, $metadata);
             case 'LPG':
-                return LPG::from($data);
+                return LPG::from($data, $metadata);
             case 'MaxiCash':
-                return MaxiCash::from($data);
+                return MaxiCash::from($data, $metadata);
             case 'MercadoPago':
-                return MercadoPago::from($data);
+                return MercadoPago::from($data, $metadata);
             case 'MiFinity':
-                return MiFinity::from($data);
+                return MiFinity::from($data, $metadata);
             case 'MobilePay':
-                return MobilePay::from($data);
+                return MobilePay::from($data, $metadata);
             case 'Moneris':
-                return Moneris::from($data);
+                return Moneris::from($data, $metadata);
             case 'Monolo':
-                return Monolo::from($data);
+                return Monolo::from($data, $metadata);
             case 'MonRem':
-                return MonRem::from($data);
+                return MonRem::from($data, $metadata);
             case 'MtaPay':
-                return MtaPay::from($data);
+                return MtaPay::from($data, $metadata);
             case 'MuchBetter':
-                return MuchBetter::from($data);
+                return MuchBetter::from($data, $metadata);
             case 'MuchBetterGateway':
-                return MuchBetterGateway::from($data);
+                return MuchBetterGateway::from($data, $metadata);
             case 'MyFatoorah':
-                return MyFatoorah::from($data);
+                return MyFatoorah::from($data, $metadata);
             case 'Naewe':
-                return Naewe::from($data);
+                return Naewe::from($data, $metadata);
             case 'Neosurf':
-                return Neosurf::from($data);
+                return Neosurf::from($data, $metadata);
             case 'Netbanking':
-                return Netbanking::from($data);
+                return Netbanking::from($data, $metadata);
             case 'Neteller':
-                return Neteller::from($data);
+                return Neteller::from($data, $metadata);
             case 'NGenius':
-                return NGenius::from($data);
+                return NGenius::from($data, $metadata);
             case 'NinjaWallet':
-                return NinjaWallet::from($data);
+                return NinjaWallet::from($data, $metadata);
             case 'NMI':
-                return NMI::from($data);
+                return NMI::from($data, $metadata);
             case 'NordikCoin':
-                return NordikCoin::from($data);
+                return NordikCoin::from($data, $metadata);
             case 'NOWPayments':
-                return NOWPayments::from($data);
+                return NOWPayments::from($data, $metadata);
             case 'NuaPay':
-                return NuaPay::from($data);
+                return NuaPay::from($data, $metadata);
             case 'OchaPay':
-                return OchaPay::from($data);
+                return OchaPay::from($data, $metadata);
             case 'OmniMatrix':
-                return OmniMatrix::from($data);
+                return OmniMatrix::from($data, $metadata);
             case 'Onlineueberweisen':
-                return Onlineueberweisen::from($data);
+                return Onlineueberweisen::from($data, $metadata);
             case 'OnRamp':
-                return OnRamp::from($data);
+                return OnRamp::from($data, $metadata);
             case 'Orbital':
-                return Orbital::from($data);
+                return Orbital::from($data, $metadata);
             case 'Pagadito':
-                return Pagadito::from($data);
+                return Pagadito::from($data, $metadata);
             case 'Pagsmile':
-                return Pagsmile::from($data);
+                return Pagsmile::from($data, $metadata);
             case 'Panamerican':
-                return Panamerican::from($data);
+                return Panamerican::from($data, $metadata);
             case 'PandaGateway':
-                return PandaGateway::from($data);
+                return PandaGateway::from($data, $metadata);
             case 'ParamountCommerce':
-                return ParamountCommerce::from($data);
+                return ParamountCommerce::from($data, $metadata);
             case 'ParamountEft':
-                return ParamountEft::from($data);
+                return ParamountEft::from($data, $metadata);
             case 'ParamountInterac':
-                return ParamountInterac::from($data);
+                return ParamountInterac::from($data, $metadata);
             case 'Pay4Fun':
-                return Pay4Fun::from($data);
+                return Pay4Fun::from($data, $metadata);
             case 'Paybilt':
-                return Paybilt::from($data);
+                return Paybilt::from($data, $metadata);
             case 'PayCash':
-                return PayCash::from($data);
+                return PayCash::from($data, $metadata);
             case 'PayClub':
-                return PayClub::from($data);
+                return PayClub::from($data, $metadata);
             case 'Paycly':
-                return Paycly::from($data);
+                return Paycly::from($data, $metadata);
             case 'PayCom':
-                return PayCom::from($data);
+                return PayCom::from($data, $metadata);
             case 'PayEcards':
-                return PayEcards::from($data);
+                return PayEcards::from($data, $metadata);
             case 'Payeezy':
-                return Payeezy::from($data);
+                return Payeezy::from($data, $metadata);
             case 'Payflow':
-                return Payflow::from($data);
+                return Payflow::from($data, $metadata);
             case 'PaymentAsia':
-                return PaymentAsia::from($data);
+                return PaymentAsia::from($data, $metadata);
             case 'PaymenTechnologies':
-                return PaymenTechnologies::from($data);
+                return PaymenTechnologies::from($data, $metadata);
             case 'PaymentsOS':
-                return PaymentsOS::from($data);
+                return PaymentsOS::from($data, $metadata);
             case 'Paymero':
-                return Paymero::from($data);
+                return Paymero::from($data, $metadata);
             case 'Paynote':
-                return Paynote::from($data);
+                return Paynote::from($data, $metadata);
             case 'PayPal':
-                return PayPal::from($data);
+                return PayPal::from($data, $metadata);
             case 'Payper':
-                return Payper::from($data);
+                return Payper::from($data, $metadata);
             case 'Payr':
-                return Payr::from($data);
+                return Payr::from($data, $metadata);
             case 'PayRedeem':
-                return PayRedeem::from($data);
+                return PayRedeem::from($data, $metadata);
             case 'PayRetailers':
-                return PayRetailers::from($data);
+                return PayRetailers::from($data, $metadata);
             case 'Paysafe':
-                return Paysafe::from($data);
+                return Paysafe::from($data, $metadata);
             case 'Paysafecard':
-                return Paysafecard::from($data);
+                return Paysafecard::from($data, $metadata);
             case 'Paysafecash':
-                return Paysafecash::from($data);
+                return Paysafecash::from($data, $metadata);
             case 'PayTabs':
-                return PayTabs::from($data);
+                return PayTabs::from($data, $metadata);
             case 'PayU':
-                return PayU::from($data);
+                return PayU::from($data, $metadata);
             case 'PayULatam':
-                return PayULatam::from($data);
+                return PayULatam::from($data, $metadata);
             case 'Payvision':
-                return Payvision::from($data);
+                return Payvision::from($data, $metadata);
             case 'PharosPayments':
-                return PharosPayments::from($data);
+                return PharosPayments::from($data, $metadata);
             case 'Piastrix':
-                return Piastrix::from($data);
+                return Piastrix::from($data, $metadata);
             case 'Pin4Pay':
-                return Pin4Pay::from($data);
+                return Pin4Pay::from($data, $metadata);
             case 'Plugnpay':
-                return Plugnpay::from($data);
+                return Plugnpay::from($data, $metadata);
             case 'PostFinance':
-                return PostFinance::from($data);
+                return PostFinance::from($data, $metadata);
             case 'Powertranz':
-                return Powertranz::from($data);
+                return Powertranz::from($data, $metadata);
             case 'PPRO':
-                return PPRO::from($data);
+                return PPRO::from($data, $metadata);
             case 'Prosa':
-                return Prosa::from($data);
+                return Prosa::from($data, $metadata);
             case 'PSiGate':
-                return PSiGate::from($data);
+                return PSiGate::from($data, $metadata);
             case 'Rapyd':
-                return Rapyd::from($data);
+                return Rapyd::from($data, $metadata);
             case 'Realex':
-                return Realex::from($data);
+                return Realex::from($data, $metadata);
             case 'Realtime':
-                return Realtime::from($data);
+                return Realtime::from($data, $metadata);
             case 'Redsys':
-                return Redsys::from($data);
+                return Redsys::from($data, $metadata);
             case 'Rotessa':
-                return Rotessa::from($data);
+                return Rotessa::from($data, $metadata);
             case 'RPN':
-                return RPN::from($data);
+                return RPN::from($data, $metadata);
             case 'Safecharge':
-                return Safecharge::from($data);
+                return Safecharge::from($data, $metadata);
             case 'Sagepay':
-                return Sagepay::from($data);
+                return Sagepay::from($data, $metadata);
             case 'SaltarPay':
-                return SaltarPay::from($data);
+                return SaltarPay::from($data, $metadata);
             case 'SeamlessChex':
-                return SeamlessChex::from($data);
+                return SeamlessChex::from($data, $metadata);
             case 'SecureTrading':
-                return SecureTrading::from($data);
+                return SecureTrading::from($data, $metadata);
             case 'SecurionPay':
-                return SecurionPay::from($data);
+                return SecurionPay::from($data, $metadata);
             case 'Skrill':
-                return Skrill::from($data);
+                return Skrill::from($data, $metadata);
             case 'SmartInvoice':
-                return SmartInvoice::from($data);
+                return SmartInvoice::from($data, $metadata);
             case 'SMSVoucher':
-                return SMSVoucher::from($data);
+                return SMSVoucher::from($data, $metadata);
             case 'Sofort':
-                return Sofort::from($data);
+                return Sofort::from($data, $metadata);
             case 'SparkPay':
-                return SparkPay::from($data);
+                return SparkPay::from($data, $metadata);
             case 'Splitit':
-                return Splitit::from($data);
+                return Splitit::from($data, $metadata);
             case 'StaticGateway':
-                return StaticGateway::from($data);
+                return StaticGateway::from($data, $metadata);
             case 'STPMexico':
-                return STPMexico::from($data);
+                return STPMexico::from($data, $metadata);
             case 'Stripe':
-                return Stripe::from($data);
+                return Stripe::from($data, $metadata);
             case 'Tabby':
-                return Tabby::from($data);
+                return Tabby::from($data, $metadata);
             case 'Telr':
-                return Telr::from($data);
+                return Telr::from($data, $metadata);
             case 'TestProcessor':
-                return TestProcessor::from($data);
+                return TestProcessor::from($data, $metadata);
             case 'ToditoCash':
-                return ToditoCash::from($data);
+                return ToditoCash::from($data, $metadata);
             case 'Triple000':
-                return Triple000::from($data);
+                return Triple000::from($data, $metadata);
             case 'Truevo':
-                return Truevo::from($data);
+                return Truevo::from($data, $metadata);
             case 'Trustly':
-                return Trustly::from($data);
+                return Trustly::from($data, $metadata);
             case 'TrustsPay':
-                return TrustsPay::from($data);
+                return TrustsPay::from($data, $metadata);
             case 'TWINT':
-                return TWINT::from($data);
+                return TWINT::from($data, $metadata);
             case 'Unlimit':
-                return Unlimit::from($data);
+                return Unlimit::from($data, $metadata);
             case 'UPayCard':
-                return UPayCard::from($data);
+                return UPayCard::from($data, $metadata);
             case 'USAePay':
-                return USAePay::from($data);
+                return USAePay::from($data, $metadata);
             case 'VantivLitle':
-                return VantivLitle::from($data);
+                return VantivLitle::from($data, $metadata);
             case 'VCreditos':
-                return VCreditos::from($data);
+                return VCreditos::from($data, $metadata);
             case 'vegaaH':
-                return VegaaH::from($data);
+                return VegaaH::from($data, $metadata);
             case 'VegaWallet':
-                return VegaWallet::from($data);
+                return VegaWallet::from($data, $metadata);
+            case 'Viva':
+                return Viva::from($data, $metadata);
             case 'Wallet88':
-                return Wallet88::from($data);
+                return Wallet88::from($data, $metadata);
             case 'Walpay':
-                return Walpay::from($data);
+                return Walpay::from($data, $metadata);
             case 'WesternUnion':
-                return WesternUnion::from($data);
+                return WesternUnion::from($data, $metadata);
             case 'Wirecard':
-                return Wirecard::from($data);
+                return Wirecard::from($data, $metadata);
             case 'WorldlineAtosFrankfurt':
-                return WorldlineAtosFrankfurt::from($data);
+                return WorldlineAtosFrankfurt::from($data, $metadata);
             case 'Worldpay':
-                return Worldpay::from($data);
+                return Worldpay::from($data, $metadata);
             case 'XPay':
-                return XPay::from($data);
+                return XPay::from($data, $metadata);
             case 'Zimpler':
-                return Zimpler::from($data);
+                return Zimpler::from($data, $metadata);
             case 'Zotapay':
-                return Zotapay::from($data);
+                return Zotapay::from($data, $metadata);
         }
 
         throw new InvalidArgumentException("Unsupported gatewayName value: '{$data['gatewayName']}'");

@@ -16,9 +16,12 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class JournalRecordsDataExport implements DataExport
 {
+    use HasMetadata;
+
     public const FORMAT_CSV = 'csv';
 
     public const FORMAT_JSON = 'json';
@@ -37,7 +40,7 @@ class JournalRecordsDataExport implements DataExport
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
@@ -90,11 +93,12 @@ class JournalRecordsDataExport implements DataExport
         if (array_key_exists('_embedded', $data)) {
             $this->setEmbedded($data['_embedded']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getResource(): string
@@ -234,15 +238,15 @@ class JournalRecordsDataExport implements DataExport
         return $this->fields['status'] ?? null;
     }
 
-    public function getDateRange(): ?DataExportDateRange
+    public function getDateRange(): ?JournalRecordsDataExportDateRange
     {
         return $this->fields['dateRange'] ?? null;
     }
 
-    public function setDateRange(null|DataExportDateRange|array $dateRange): static
+    public function setDateRange(null|JournalRecordsDataExportDateRange|array $dateRange): static
     {
-        if ($dateRange !== null && !($dateRange instanceof DataExportDateRange)) {
-            $dateRange = DataExportDateRange::from($dateRange);
+        if ($dateRange !== null && !($dateRange instanceof JournalRecordsDataExportDateRange)) {
+            $dateRange = JournalRecordsDataExportDateRange::from($dateRange);
         }
 
         $this->fields['dateRange'] = $dateRange;

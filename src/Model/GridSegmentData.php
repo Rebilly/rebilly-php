@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class GridSegmentData implements JsonSerializable
 {
+    use HasMetadata;
+
     public const PAGE_DATA_TABLES = 'data-tables';
 
     public const PAGE_CUSTOMER_DETAILS = 'customer-details';
@@ -50,6 +53,10 @@ class GridSegmentData implements JsonSerializable
 
     public const TYPE_PAYOUT_REQUESTS = 'payout-requests';
 
+    public const TYPE_PAYOUT_ALLOCATIONS = 'payout-allocations';
+
+    public const TYPE_PAYOUT_REQUEST_BATCHES = 'payout-request-batches';
+
     public const TYPE_ORGANIZATIONS = 'organizations';
 
     public const TYPE_QUOTES = 'quotes';
@@ -58,7 +65,7 @@ class GridSegmentData implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('name', $data)) {
             $this->setName($data['name']);
@@ -78,11 +85,12 @@ class GridSegmentData implements JsonSerializable
         if (array_key_exists('type', $data)) {
             $this->setType($data['type']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getName(): ?string

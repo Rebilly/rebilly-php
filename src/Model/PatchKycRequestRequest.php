@@ -17,9 +17,12 @@ namespace Rebilly\Sdk\Model;
 use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class PatchKycRequestRequest implements JsonSerializable
 {
+    use HasMetadata;
+
     public const STATUS_GATHERING = 'gathering';
 
     public const STATUS_ATTEMPTED = 'attempted';
@@ -44,7 +47,7 @@ class PatchKycRequestRequest implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('customerId', $data)) {
             $this->setCustomerId($data['customerId']);
@@ -85,11 +88,12 @@ class PatchKycRequestRequest implements JsonSerializable
         if (array_key_exists('_embedded', $data)) {
             $this->setEmbedded($data['_embedded']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getCustomerId(): string
