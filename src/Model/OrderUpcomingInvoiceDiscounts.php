@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class OrderUpcomingInvoiceDiscounts implements JsonSerializable
 {
+    use HasMetadata;
+
     public const CONTEXT_ITEMS = 'items';
 
     public const CONTEXT_SHIPPING = 'shipping';
@@ -26,7 +29,7 @@ class OrderUpcomingInvoiceDiscounts implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('couponId', $data)) {
             $this->setCouponId($data['couponId']);
@@ -43,11 +46,12 @@ class OrderUpcomingInvoiceDiscounts implements JsonSerializable
         if (array_key_exists('context', $data)) {
             $this->setContext($data['context']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getCouponId(): ?string

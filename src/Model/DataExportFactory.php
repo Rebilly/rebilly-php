@@ -18,17 +18,19 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class DataExportFactory
 {
-    public static function from(array $data = []): DataExport
+    public static function from(array $data = [], array $metadata = []): DataExport
     {
         return match ($data['resource']) {
-            'amlChecks' => AmlChecksDataExport::from($data),
-            'customers' => CustomersDataExport::from($data),
-            'disputes' => DisputesDataExport::from($data),
-            'invoiceItems' => InvoiceItemsDataExport::from($data),
-            'invoices' => InvoicesDataExport::from($data),
-            'journalRecords' => JournalRecordsDataExport::from($data),
-            'subscriptions' => SubscriptionsDataExport::from($data),
-            'transactions' => TransactionsDataExport::from($data),
+            'amlChecks' => AmlChecksDataExport::from($data, $metadata),
+            'customers' => CustomersDataExport::from($data, $metadata),
+            'disputes' => DisputesDataExport::from($data, $metadata),
+            'invoiceItems' => InvoiceItemsDataExport::from($data, $metadata),
+            'invoices' => InvoicesDataExport::from($data, $metadata),
+            'journalRecords' => JournalRecordsDataExport::from($data, $metadata),
+            'payoutRequestAllocations' => PayoutRequestAllocationsDataExport::from($data, $metadata),
+            'payoutRequests' => PayoutRequestsDataExport::from($data, $metadata),
+            'subscriptions' => SubscriptionsDataExport::from($data, $metadata),
+            'transactions' => TransactionsDataExport::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

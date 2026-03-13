@@ -14,11 +14,15 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use Rebilly\Sdk\Trait\HasMetadata;
+
 class GooglePayFeature implements PaymentCardFeature
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('merchantName', $data)) {
             $this->setMerchantName($data['merchantName']);
@@ -29,11 +33,12 @@ class GooglePayFeature implements PaymentCardFeature
         if (array_key_exists('country', $data)) {
             $this->setCountry($data['country']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getName(): string

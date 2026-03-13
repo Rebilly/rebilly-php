@@ -15,16 +15,19 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class PatchFee implements JsonSerializable
 {
+    use HasMetadata;
+
     public const TYPE_BUY = 'buy';
 
     public const TYPE_SELL = 'sell';
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('type', $data)) {
             $this->setType($data['type']);
@@ -41,11 +44,12 @@ class PatchFee implements JsonSerializable
         if (array_key_exists('settlementSettings', $data)) {
             $this->setSettlementSettings($data['settlementSettings']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getType(): ?string

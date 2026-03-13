@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class ReportKycRejectionsDataRejectionReasons implements JsonSerializable
 {
+    use HasMetadata;
+
     public const REJECTION_REASON_DOCUMENT_UNREADABLE = 'document-unreadable';
 
     public const REJECTION_REASON_DOCUMENT_EXPIRED = 'document-expired';
@@ -54,7 +57,7 @@ class ReportKycRejectionsDataRejectionReasons implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('rejectionReason', $data)) {
             $this->setRejectionReason($data['rejectionReason']);
@@ -62,11 +65,12 @@ class ReportKycRejectionsDataRejectionReasons implements JsonSerializable
         if (array_key_exists('count', $data)) {
             $this->setCount($data['count']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getRejectionReason(): ?string

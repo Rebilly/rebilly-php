@@ -18,14 +18,14 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class PlanPriceFormulaFactory
 {
-    public static function from(array $data = []): PlanPriceFormula
+    public static function from(array $data = [], array $metadata = []): PlanPriceFormula
     {
         return match ($data['formula']) {
-            'fixed-fee' => PlanFormulaFixedFee::from($data),
-            'flat-rate' => PlanFormulaFlatRate::from($data),
-            'stairstep' => PlanFormulaStairstep::from($data),
-            'tiered' => PlanFormulaTiered::from($data),
-            'volume' => PlanFormulaVolume::from($data),
+            'fixed-fee' => PlanFormulaFixedFee::from($data, $metadata),
+            'flat-rate' => PlanFormulaFlatRate::from($data, $metadata),
+            'stairstep' => PlanFormulaStairstep::from($data, $metadata),
+            'tiered' => PlanFormulaTiered::from($data, $metadata),
+            'volume' => PlanFormulaVolume::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

@@ -16,9 +16,12 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class BankAccount implements PaymentInstrument
 {
+    use HasMetadata;
+
     public const ACCOUNT_NUMBER_TYPE_BBAN = 'BBAN';
 
     public const ACCOUNT_NUMBER_TYPE_IBAN = 'IBAN';
@@ -35,7 +38,7 @@ class BankAccount implements PaymentInstrument
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
@@ -100,11 +103,12 @@ class BankAccount implements PaymentInstrument
         if (array_key_exists('_embedded', $data)) {
             $this->setEmbedded($data['_embedded']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getMethod(): string

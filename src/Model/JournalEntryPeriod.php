@@ -16,12 +16,15 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class JournalEntryPeriod implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('startDate', $data)) {
             $this->setStartDate($data['startDate']);
@@ -29,11 +32,12 @@ class JournalEntryPeriod implements JsonSerializable
         if (array_key_exists('endDate', $data)) {
             $this->setEndDate($data['endDate']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getStartDate(): ?DateTimeImmutable

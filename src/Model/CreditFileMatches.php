@@ -17,9 +17,12 @@ namespace Rebilly\Sdk\Model;
 use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class CreditFileMatches implements JsonSerializable
 {
+    use HasMetadata;
+
     public const CREDIT_BUREAU_EQUIFAX = 'equifax';
 
     public const CREDIT_BUREAU_EXPERIAN = 'experian';
@@ -36,7 +39,7 @@ class CreditFileMatches implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('creditBureau', $data)) {
             $this->setCreditBureau($data['creditBureau']);
@@ -59,11 +62,12 @@ class CreditFileMatches implements JsonSerializable
         if (array_key_exists('referenceData', $data)) {
             $this->setReferenceData($data['referenceData']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getCreditBureau(): ?string

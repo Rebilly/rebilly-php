@@ -18,10 +18,10 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class ReadyToPayKlarnaMethodFeatureFactory
 {
-    public static function from(array $data = []): ReadyToPayKlarnaMethodFeature
+    public static function from(array $data = [], array $metadata = []): ReadyToPayKlarnaMethodFeature
     {
         return match ($data['name']) {
-            'Klarna' => KlarnaFeature::from($data),
+            'Klarna' => KlarnaFeature::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

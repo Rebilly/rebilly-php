@@ -44,7 +44,7 @@ class PayoutRequestsV2Api
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): GetPayoutRequestV2PaymentInstrumentsResponse => GetPayoutRequestV2PaymentInstrumentsResponse::from($item), $data);
+        return array_map(fn (array $item): GetPayoutRequestV2PaymentInstrumentsResponse => GetPayoutRequestV2PaymentInstrumentsResponse::from($item, ['headers' => $response->getHeaders()]), $data);
     }
 
     public function getV2(
@@ -62,6 +62,6 @@ class PayoutRequestsV2Api
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return PayoutRequestV2::from($data);
+        return PayoutRequestV2::from($data, ['headers' => $response->getHeaders()]);
     }
 }

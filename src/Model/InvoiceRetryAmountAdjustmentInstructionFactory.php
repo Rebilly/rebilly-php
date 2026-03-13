@@ -18,11 +18,11 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class InvoiceRetryAmountAdjustmentInstructionFactory
 {
-    public static function from(array $data = []): InvoiceRetryAmountAdjustmentInstruction
+    public static function from(array $data = [], array $metadata = []): InvoiceRetryAmountAdjustmentInstruction
     {
         return match ($data['method']) {
-            'none' => AmountAdjustmentInstructionNone::from($data),
-            'partial' => AmountAdjustmentInstructionPartial::from($data),
+            'none' => AmountAdjustmentInstructionNone::from($data, $metadata),
+            'partial' => AmountAdjustmentInstructionPartial::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

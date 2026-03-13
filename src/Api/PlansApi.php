@@ -39,7 +39,7 @@ class PlansApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return PlanFactory::from($data);
+        return PlanFactory::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function delete(
@@ -70,7 +70,7 @@ class PlansApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return PlanFactory::from($data);
+        return PlanFactory::from($data, ['headers' => $response->getHeaders()]);
     }
 
     /**
@@ -99,10 +99,13 @@ class PlansApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): Plan => PlanFactory::from($item), $data),
+            array_map(fn (array $item): Plan => PlanFactory::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -146,6 +149,6 @@ class PlansApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return PlanFactory::from($data);
+        return PlanFactory::from($data, ['headers' => $response->getHeaders()]);
     }
 }

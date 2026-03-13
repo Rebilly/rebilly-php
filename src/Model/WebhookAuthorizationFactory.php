@@ -18,12 +18,12 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class WebhookAuthorizationFactory
 {
-    public static function from(array $data = []): WebhookAuthorization
+    public static function from(array $data = [], array $metadata = []): WebhookAuthorization
     {
         return match ($data['type']) {
-            'basic' => WebhookAuthorizationBasic::from($data),
-            'digest' => WebhookAuthorizationDigest::from($data),
-            'none' => WebhookAuthorizationNone::from($data),
+            'basic' => WebhookAuthorizationBasic::from($data, $metadata),
+            'digest' => WebhookAuthorizationDigest::from($data, $metadata),
+            'none' => WebhookAuthorizationNone::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

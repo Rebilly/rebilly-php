@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class TimelineExtraDataLinks implements JsonSerializable
 {
+    use HasMetadata;
+
     public const RESOURCE_TYPE_KYC_DOCUMENT = 'kyc-document';
 
     public const RESOURCE_TYPE_INVOICE = 'invoice';
@@ -36,7 +39,7 @@ class TimelineExtraDataLinks implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('resourceType', $data)) {
             $this->setResourceType($data['resourceType']);
@@ -50,11 +53,12 @@ class TimelineExtraDataLinks implements JsonSerializable
         if (array_key_exists('externalUrl', $data)) {
             $this->setExternalUrl($data['externalUrl']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getResourceType(): ?string

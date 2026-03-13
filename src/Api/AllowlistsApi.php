@@ -55,7 +55,7 @@ class AllowlistsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Allowlist::from($data);
+        return Allowlist::from($data, ['headers' => $response->getHeaders()]);
     }
 
     /**
@@ -82,10 +82,13 @@ class AllowlistsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): Allowlist => Allowlist::from($item), $data),
+            array_map(fn (array $item): Allowlist => Allowlist::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -122,6 +125,6 @@ class AllowlistsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Allowlist::from($data);
+        return Allowlist::from($data, ['headers' => $response->getHeaders()]);
     }
 }

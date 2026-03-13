@@ -14,61 +14,39 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use InvalidArgumentException;
-
-abstract class BankAccountCreatePlain implements PostPaymentInstrumentRequest, PaymentInstruction
+interface BankAccountCreatePlain extends PostPaymentInstrumentRequest, PaymentInstruction
 {
-    public const ACCOUNT_NUMBER_TYPE_IBAN = 'IBAN';
+    public function getAccountNumberType(): string;
 
-    public const ACCOUNT_NUMBER_TYPE_BBAN = 'BBAN';
+    public function getCustomerId(): string;
 
-    private array $fields = [];
+    public function setCustomerId(string $customerId): static;
 
-    protected function __construct(array $data = [])
-    {
-        if (array_key_exists('accountNumberType', $data)) {
-            $this->setAccountNumberType($data['accountNumberType']);
-        }
-    }
+    public function getAccountNumber(): string;
 
-    public static function from(array $data = []): self
-    {
-        switch ($data['accountNumberType']) {
-            case 'BBAN':
-                return BBANType::from($data);
-            case 'IBAN':
-                return IBANType::from($data);
-        }
+    public function setAccountNumber(string $accountNumber): static;
 
-        throw new InvalidArgumentException("Unsupported accountNumberType value: '{$data['accountNumberType']}'");
-    }
+    public function getBankName(): ?string;
 
-    public function getMethod(): string
-    {
-        return 'ach';
-    }
+    public function setBankName(null|string $bankName): static;
 
-    public function getAccountNumberType(): string
-    {
-        return $this->fields['accountNumberType'];
-    }
+    public function getBic(): ?string;
 
-    public function jsonSerialize(): array
-    {
-        $data = [
-            'method' => 'ach',
-        ];
-        if (array_key_exists('accountNumberType', $this->fields)) {
-            $data['accountNumberType'] = $this->fields['accountNumberType'];
-        }
+    public function setBic(null|string $bic): static;
 
-        return $data;
-    }
+    public function getBillingAddress(): ContactObject;
 
-    private function setAccountNumberType(string $accountNumberType): static
-    {
-        $this->fields['accountNumberType'] = $accountNumberType;
+    public function setBillingAddress(ContactObject|array $billingAddress): static;
 
-        return $this;
-    }
+    public function getCustomFields(): ?array;
+
+    public function setCustomFields(null|array $customFields): static;
+
+    public function getRiskMetadata(): ?RiskMetadata;
+
+    public function setRiskMetadata(null|RiskMetadata|array $riskMetadata): static;
+
+    public function getUseAsBackup(): ?bool;
+
+    public function setUseAsBackup(null|bool $useAsBackup): static;
 }

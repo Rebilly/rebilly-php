@@ -35,7 +35,7 @@ class KycSettingsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return KycSettings::from($data);
+        return KycSettings::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function updateKycSettings(
@@ -49,6 +49,6 @@ class KycSettingsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return KycSettings::from($data);
+        return KycSettings::from($data, ['headers' => $response->getHeaders()]);
     }
 }

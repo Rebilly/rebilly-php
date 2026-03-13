@@ -14,8 +14,12 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use Rebilly\Sdk\Trait\HasMetadata;
+
 class AdjustReadyToPayoutGeneric implements AdjustReadyToPayoutPaymentMethod
 {
+    use HasMetadata;
+
     public const PAYMENT_METHOD_CASH = 'cash';
 
     public const PAYMENT_METHOD_CHECK = 'check';
@@ -87,8 +91,6 @@ class AdjustReadyToPayoutGeneric implements AdjustReadyToPayoutPaymentMethod
     public const PAYMENT_METHOD_CONEKTA_OXXO = 'Conekta-oxxo';
 
     public const PAYMENT_METHOD_CUPON_DE_PAGOS = 'Cupon-de-pagos';
-
-    public const PAYMENT_METHOD_CRYPTOCURRENCY = 'cryptocurrency';
 
     public const PAYMENT_METHOD_DOMESTIC_CARDS = 'domestic-cards';
 
@@ -296,6 +298,8 @@ class AdjustReadyToPayoutGeneric implements AdjustReadyToPayoutPaymentMethod
 
     public const PAYMENT_METHOD_VENUS_POINT = 'VenusPoint';
 
+    public const PAYMENT_METHOD_VIVA = 'Viva';
+
     public const PAYMENT_METHOD_VOUCHER = 'voucher';
 
     public const PAYMENT_METHOD_VOUCHER2 = 'voucher-2';
@@ -332,16 +336,17 @@ class AdjustReadyToPayoutGeneric implements AdjustReadyToPayoutPaymentMethod
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('paymentMethod', $data)) {
             $this->setPaymentMethod($data['paymentMethod']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getPaymentMethod(): string

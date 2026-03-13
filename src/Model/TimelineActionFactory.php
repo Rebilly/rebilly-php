@@ -18,13 +18,13 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class TimelineActionFactory
 {
-    public static function from(array $data = []): TimelineAction
+    public static function from(array $data = [], array $metadata = []): TimelineAction
     {
         return match ($data['action']) {
-            'redemption-cancel' => RedemptionCancelTimelineAction::from($data),
-            'resend-email' => ResendEmailTimelineAction::from($data),
-            'ruleset-restore' => RulesetRestoreTimelineAction::from($data),
-            'show-edd-search-logs' => ShowEddSearchLogsTimelineAction::from($data),
+            'redemption-cancel' => RedemptionCancelTimelineAction::from($data, $metadata),
+            'resend-email' => ResendEmailTimelineAction::from($data, $metadata),
+            'ruleset-restore' => RulesetRestoreTimelineAction::from($data, $metadata),
+            'show-edd-search-logs' => ShowEddSearchLogsTimelineAction::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

@@ -16,16 +16,19 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class BankAccountToken implements CompositeToken
 {
+    use HasMetadata;
+
     public const METHOD_ACH = 'ach';
 
     public const METHOD_ECHECK = 'echeck';
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('method', $data)) {
             $this->setMethod($data['method']);
@@ -63,11 +66,12 @@ class BankAccountToken implements CompositeToken
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getMethod(): string

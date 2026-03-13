@@ -18,17 +18,17 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class CustomFieldFactory
 {
-    public static function from(array $data = []): CustomField
+    public static function from(array $data = [], array $metadata = []): CustomField
     {
         return match ($data['type']) {
-            'array' => ArrayCustomField::from($data),
-            'boolean' => BooleanCustomField::from($data),
-            'date' => DateCustomField::from($data),
-            'datetime' => DateTimeCustomField::from($data),
-            'integer' => IntegerCustomField::from($data),
-            'monetary' => MonetaryCustomField::from($data),
-            'number' => NumberCustomField::from($data),
-            'string' => StringCustomField::from($data),
+            'array' => ArrayCustomField::from($data, $metadata),
+            'boolean' => BooleanCustomField::from($data, $metadata),
+            'date' => DateCustomField::from($data, $metadata),
+            'datetime' => DateTimeCustomField::from($data, $metadata),
+            'integer' => IntegerCustomField::from($data, $metadata),
+            'monetary' => MonetaryCustomField::from($data, $metadata),
+            'number' => NumberCustomField::from($data, $metadata),
+            'string' => StringCustomField::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

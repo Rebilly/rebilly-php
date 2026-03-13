@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class DigitalWalletTokenPaymentInstrument implements JsonSerializable
 {
+    use HasMetadata;
+
     public const TYPE_APPLE_PAY = 'Apple Pay';
 
     public const TYPE_GOOGLE_PAY = 'Google Pay';
@@ -54,7 +57,7 @@ class DigitalWalletTokenPaymentInstrument implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('type', $data)) {
             $this->setType($data['type']);
@@ -86,11 +89,12 @@ class DigitalWalletTokenPaymentInstrument implements JsonSerializable
         if (array_key_exists('payload', $data)) {
             $this->setPayload($data['payload']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getType(): string

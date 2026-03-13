@@ -15,12 +15,15 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class KycSettingsIdentityWeights implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('containsImage', $data)) {
             $this->setContainsImage($data['containsImage']);
@@ -64,11 +67,15 @@ class KycSettingsIdentityWeights implements JsonSerializable
         if (array_key_exists('isTampered', $data)) {
             $this->setIsTampered($data['isTampered']);
         }
+        if (array_key_exists('isPhotocopy', $data)) {
+            $this->setIsPhotocopy($data['isPhotocopy']);
+        }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getContainsImage(): ?int
@@ -239,6 +246,18 @@ class KycSettingsIdentityWeights implements JsonSerializable
         return $this;
     }
 
+    public function getIsPhotocopy(): ?int
+    {
+        return $this->fields['isPhotocopy'] ?? null;
+    }
+
+    public function setIsPhotocopy(null|int $isPhotocopy): static
+    {
+        $this->fields['isPhotocopy'] = $isPhotocopy;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -283,6 +302,9 @@ class KycSettingsIdentityWeights implements JsonSerializable
         }
         if (array_key_exists('isTampered', $this->fields)) {
             $data['isTampered'] = $this->fields['isTampered'];
+        }
+        if (array_key_exists('isPhotocopy', $this->fields)) {
+            $data['isPhotocopy'] = $this->fields['isPhotocopy'];
         }
 
         return $data;

@@ -15,12 +15,15 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class ReportRevenueWaterfall implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('issuedMonth', $data)) {
             $this->setIssuedMonth($data['issuedMonth']);
@@ -37,11 +40,12 @@ class ReportRevenueWaterfall implements JsonSerializable
         if (array_key_exists('waterfall', $data)) {
             $this->setWaterfall($data['waterfall']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getIssuedMonth(): ?string

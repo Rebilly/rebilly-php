@@ -14,8 +14,12 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use Rebilly\Sdk\Trait\HasMetadata;
+
 class BBANInstrument implements BankAccountInstrument
 {
+    use HasMetadata;
+
     public const ACCOUNT_TYPE_CHECKING = 'checking';
 
     public const ACCOUNT_TYPE_SAVINGS = 'savings';
@@ -24,7 +28,7 @@ class BBANInstrument implements BankAccountInstrument
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('accountNumber', $data)) {
             $this->setAccountNumber($data['accountNumber']);
@@ -44,11 +48,12 @@ class BBANInstrument implements BankAccountInstrument
         if (array_key_exists('last4', $data)) {
             $this->setLast4($data['last4']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getAccountNumberType(): string
