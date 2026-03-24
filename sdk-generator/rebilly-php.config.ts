@@ -223,17 +223,6 @@ const config: GeneratorConfig<PHPCodeGen, AnyStaticContext> = {
                         }
                     }
                     break;
-
-                case 'application/pdf':
-                    templates.push({
-                        name: 'operation-pdf',
-                        context: {
-                            methodName: `${operation.methodName}Pdf`,
-                            accept: response.mimeType,
-                            returnType: 'StreamInterface',
-                        },
-                    });
-                    break;
             }
         }
 
@@ -284,7 +273,6 @@ const config: GeneratorConfig<PHPCodeGen, AnyStaticContext> = {
     partials: {
         'operation-json-collection': 'operation-json-collection.php.handlebars',
         'operation-paginator': 'operation-paginator.php.handlebars',
-        'operation-pdf': 'operation-pdf.php.handlebars',
     },
 
     templateDirs: ['./sdk-generator/templates', '@bundled/php'],
