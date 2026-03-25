@@ -14,17 +14,11 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use Rebilly\Sdk\Trait\HasMetadata;
+
 class AlternativePaymentInstrument implements CustomerDefaultPaymentInstrument, TransactionPaymentInstrument
 {
-    public const METHOD_PAYMENT_CARD = 'payment-card';
-
-    public const METHOD_ACH = 'ach';
-
-    public const METHOD_CASH = 'cash';
-
-    public const METHOD_CHECK = 'check';
-
-    public const METHOD_PAYPAL = 'paypal';
+    use HasMetadata;
 
     public const METHOD_ADV_CASH = 'AdvCash';
 
@@ -374,6 +368,8 @@ class AlternativePaymentInstrument implements CustomerDefaultPaymentInstrument, 
 
     public const METHOD_VENUS_POINT = 'VenusPoint';
 
+    public const METHOD_VIVA = 'Viva';
+
     public const METHOD_VOUCHER = 'voucher';
 
     public const METHOD_VOUCHER2 = 'voucher-2';
@@ -408,7 +404,7 @@ class AlternativePaymentInstrument implements CustomerDefaultPaymentInstrument, 
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('method', $data)) {
             $this->setMethod($data['method']);
@@ -419,11 +415,12 @@ class AlternativePaymentInstrument implements CustomerDefaultPaymentInstrument, 
         if (array_key_exists('reference', $data)) {
             $this->setReference($data['reference']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getMethod(): string

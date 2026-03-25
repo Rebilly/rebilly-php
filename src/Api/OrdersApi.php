@@ -26,6 +26,7 @@ use Rebilly\Sdk\Model\OrderFactory;
 use Rebilly\Sdk\Model\OrderItemUpdate;
 use Rebilly\Sdk\Model\OrderUpcomingInvoice;
 use Rebilly\Sdk\Model\SubscriptionInvoice;
+use Rebilly\Sdk\Model\SubscriptionOrOneTimeSaleItem;
 use Rebilly\Sdk\Model\UpcomingInvoice;
 use Rebilly\Sdk\Paginator;
 
@@ -55,7 +56,7 @@ class OrdersApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return OrderFactory::from($data);
+        return OrderFactory::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function create(
@@ -73,7 +74,7 @@ class OrdersApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return OrderFactory::from($data);
+        return OrderFactory::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function createInterimInvoice(
@@ -92,7 +93,7 @@ class OrdersApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Invoice::from($data);
+        return Invoice::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function get(
@@ -114,7 +115,7 @@ class OrdersApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return OrderFactory::from($data);
+        return OrderFactory::from($data, ['headers' => $response->getHeaders()]);
     }
 
     /**
@@ -143,10 +144,13 @@ class OrdersApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): Order => OrderFactory::from($item), $data),
+            array_map(fn (array $item): Order => OrderFactory::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -193,7 +197,7 @@ class OrdersApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return OrderUpcomingInvoice::from($data);
+        return OrderUpcomingInvoice::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function issueEarlyUpcomingInvoice(
@@ -212,7 +216,7 @@ class OrdersApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return UpcomingInvoice::from($data);
+        return UpcomingInvoice::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function update(
@@ -235,14 +239,14 @@ class OrdersApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return OrderFactory::from($data);
+        return OrderFactory::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function updateItem(
         string $id,
         string $itemId,
         OrderItemUpdate $orderItemUpdate,
-    ): Order {
+    ): SubscriptionOrOneTimeSaleItem {
         $pathParams = [
             '{id}' => $id,
             '{itemId}' => $itemId,
@@ -256,7 +260,7 @@ class OrdersApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return OrderFactory::from($data);
+        return SubscriptionOrOneTimeSaleItem::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function void(
@@ -274,6 +278,6 @@ class OrdersApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return OrderFactory::from($data);
+        return OrderFactory::from($data, ['headers' => $response->getHeaders()]);
     }
 }

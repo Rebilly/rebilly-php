@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializable
 {
+    use HasMetadata;
+
     public const GATEWAY_NAME_A1_GATEWAY = 'A1Gateway';
 
     public const GATEWAY_NAME_ACI = 'ACI';
@@ -445,6 +448,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
     public const GATEWAY_NAME_V_CREDITOS = 'VCreditos';
 
     public const GATEWAY_NAME_VEGA_WALLET = 'VegaWallet';
+
+    public const GATEWAY_NAME_VIVA = 'Viva';
 
     public const GATEWAY_NAME_WALLET88 = 'Wallet88';
 
@@ -884,7 +889,7 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('gatewayName', $data)) {
             $this->setGatewayName($data['gatewayName']);
@@ -895,11 +900,12 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
         if (array_key_exists('weight', $data)) {
             $this->setWeight($data['weight']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getGatewayName(): ?string

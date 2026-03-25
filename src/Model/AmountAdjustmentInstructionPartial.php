@@ -14,15 +14,19 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use Rebilly\Sdk\Trait\HasMetadata;
+
 class AmountAdjustmentInstructionPartial implements InvoiceRetryAmountAdjustmentInstruction
 {
+    use HasMetadata;
+
     public const TYPE_PERCENT = 'percent';
 
     public const TYPE_FIXED = 'fixed';
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('value', $data)) {
             $this->setValue($data['value']);
@@ -33,11 +37,12 @@ class AmountAdjustmentInstructionPartial implements InvoiceRetryAmountAdjustment
         if (array_key_exists('afterApprovalPolicy', $data)) {
             $this->setAfterApprovalPolicy($data['afterApprovalPolicy']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getMethod(): string

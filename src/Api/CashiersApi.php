@@ -37,7 +37,7 @@ class CashiersApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Cashier::from($data);
+        return Cashier::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function get(
@@ -55,6 +55,6 @@ class CashiersApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Cashier::from($data);
+        return Cashier::from($data, ['headers' => $response->getHeaders()]);
     }
 }

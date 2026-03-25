@@ -14,11 +14,15 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use Rebilly\Sdk\Trait\HasMetadata;
+
 class CheckoutFormVariablePlan implements CheckoutFormPlan
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('planId', $data)) {
             $this->setPlanId($data['planId']);
@@ -35,11 +39,12 @@ class CheckoutFormVariablePlan implements CheckoutFormPlan
         if (array_key_exists('maximum', $data)) {
             $this->setMaximum($data['maximum']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getType(): string

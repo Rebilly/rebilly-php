@@ -46,7 +46,7 @@ class ProfileApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Profile::from($data);
+        return Profile::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getMfa(): ProfileMfa
@@ -59,7 +59,7 @@ class ProfileApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ProfileMfa::from($data);
+        return ProfileMfa::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function startPermissionsEmulation(
@@ -73,7 +73,7 @@ class ProfileApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Session::from($data);
+        return Session::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function stopPermissionsEmulation(): Session
@@ -86,7 +86,7 @@ class ProfileApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Session::from($data);
+        return Session::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function update(
@@ -100,7 +100,7 @@ class ProfileApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Profile::from($data);
+        return Profile::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function updateMfa(): ProfileMfa
@@ -113,6 +113,6 @@ class ProfileApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ProfileMfa::from($data);
+        return ProfileMfa::from($data, ['headers' => $response->getHeaders()]);
     }
 }

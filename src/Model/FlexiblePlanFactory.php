@@ -16,15 +16,15 @@ namespace Rebilly\Sdk\Model;
 
 class FlexiblePlanFactory
 {
-    public static function from(array $data = []): FlexiblePlan
+    public static function from(array $data = [], array $metadata = []): FlexiblePlan
     {
         if ($data['isTrialOnly'] ?? false) {
-            return TrialOnlyPlan::from($data);
+            return TrialOnlyPlan::from($data, $metadata);
         }
         if (isset($data['recurringInterval'])) {
-            return SubscriptionPlan::from($data);
+            return SubscriptionPlan::from($data, $metadata);
         }
 
-        return OneTimeSalePlan::from($data);
+        return OneTimeSalePlan::from($data, $metadata);
     }
 }

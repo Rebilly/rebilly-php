@@ -18,13 +18,13 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class PostFileRequestFactory
 {
-    public static function from(array $data = []): PostFileRequest
+    public static function from(array $data = [], array $metadata = []): PostFileRequest
     {
         if (isset($data['file'])) {
-            return FileCreateFromInline::from($data);
+            return FileCreateFromInline::from($data, $metadata);
         }
         if (isset($data['url'])) {
-            return FileCreateFromUrl::from($data);
+            return FileCreateFromUrl::from($data, $metadata);
         }
 
         throw new UnknownDiscriminatorValueException();

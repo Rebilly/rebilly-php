@@ -18,11 +18,11 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class ShippingFactory
 {
-    public static function from(array $data = []): Shipping
+    public static function from(array $data = [], array $metadata = []): Shipping
     {
         return match ($data['calculator']) {
-            'manual' => ManualShipping::from($data),
-            'rebilly' => RebillyShipping::from($data),
+            'manual' => ManualShipping::from($data, $metadata),
+            'rebilly' => RebillyShipping::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

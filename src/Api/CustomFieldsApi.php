@@ -46,7 +46,7 @@ class CustomFieldsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CustomFieldFactory::from($data);
+        return CustomFieldFactory::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function get(
@@ -66,7 +66,7 @@ class CustomFieldsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CustomFieldFactory::from($data);
+        return CustomFieldFactory::from($data, ['headers' => $response->getHeaders()]);
     }
 
     /**
@@ -94,10 +94,13 @@ class CustomFieldsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): CustomField => CustomFieldFactory::from($item), $data),
+            array_map(fn (array $item): CustomField => CustomFieldFactory::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 

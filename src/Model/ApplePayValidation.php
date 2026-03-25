@@ -14,15 +14,19 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use Rebilly\Sdk\Trait\HasMetadata;
+
 class ApplePayValidation extends DigitalWalletValidation
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         parent::__construct([
             'type' => 'Apple Pay',
-        ] + $data);
+        ] + $data, $metadata);
 
         if (array_key_exists('validationRequest', $data)) {
             $this->setValidationRequest($data['validationRequest']);
@@ -30,11 +34,12 @@ class ApplePayValidation extends DigitalWalletValidation
         if (array_key_exists('validationResponse', $data)) {
             $this->setValidationResponse($data['validationResponse']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getValidationRequest(): ApplePayValidationValidationRequest

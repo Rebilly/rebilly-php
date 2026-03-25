@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class KycDocumentRejection implements JsonSerializable
 {
+    use HasMetadata;
+
     public const TYPE_DOCUMENT_UNREADABLE = 'document-unreadable';
 
     public const TYPE_DOCUMENT_EXPIRED = 'document-expired';
@@ -54,7 +57,7 @@ class KycDocumentRejection implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('type', $data)) {
             $this->setType($data['type']);
@@ -62,11 +65,12 @@ class KycDocumentRejection implements JsonSerializable
         if (array_key_exists('message', $data)) {
             $this->setMessage($data['message']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getType(): string

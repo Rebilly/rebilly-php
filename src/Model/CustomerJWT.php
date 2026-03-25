@@ -17,14 +17,17 @@ namespace Rebilly\Sdk\Model;
 use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class CustomerJWT implements JsonSerializable
 {
+    use HasMetadata;
+
     public const TYPE_CUSTOMER = 'customer';
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
@@ -62,11 +65,12 @@ class CustomerJWT implements JsonSerializable
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getId(): ?string
@@ -136,11 +140,17 @@ class CustomerJWT implements JsonSerializable
         return $this;
     }
 
+    /**
+     * @return null|array<string,mixed>
+     */
     public function getCustomClaims(): ?array
     {
         return $this->fields['customClaims'] ?? null;
     }
 
+    /**
+     * @param null|array<string,mixed> $customClaims
+     */
     public function setCustomClaims(null|array $customClaims): static
     {
         $this->fields['customClaims'] = $customClaims;

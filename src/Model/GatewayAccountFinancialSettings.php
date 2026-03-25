@@ -15,12 +15,15 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class GatewayAccountFinancialSettings implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('settlementSettings', $data)) {
             $this->setSettlementSettings($data['settlementSettings']);
@@ -28,11 +31,12 @@ class GatewayAccountFinancialSettings implements JsonSerializable
         if (array_key_exists('riskReserveSettings', $data)) {
             $this->setRiskReserveSettings($data['riskReserveSettings']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getSettlementSettings(): SettlementSettings

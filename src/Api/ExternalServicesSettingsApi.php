@@ -35,7 +35,7 @@ class ExternalServicesSettingsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ExternalServiceSettings::from($data);
+        return ExternalServiceSettings::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function updateExternalServiceSettings(
@@ -49,6 +49,6 @@ class ExternalServicesSettingsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ExternalServiceSettings::from($data);
+        return ExternalServiceSettings::from($data, ['headers' => $response->getHeaders()]);
     }
 }

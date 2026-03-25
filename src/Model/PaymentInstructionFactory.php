@@ -18,21 +18,21 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class PaymentInstructionFactory
 {
-    public static function from(array $data = []): PaymentInstruction
+    public static function from(array $data = [], array $metadata = []): PaymentInstruction
     {
         if (isset($data['paymentInstrumentId'])) {
-            return PaymentInstructionInstrument::from($data);
+            return PaymentInstructionInstrument::from($data, $metadata);
         }
         if (isset($data['methods'])) {
-            return PaymentInstructionMethods::from($data);
+            return PaymentInstructionMethods::from($data, $metadata);
         }
         if (isset($data['token'])) {
-            return PaymentInstructionToken::from($data);
+            return PaymentInstructionToken::from($data, $metadata);
         }
 
         return match ($data['method']) {
-            'ach' => BankAccountCreatePlain::from($data),
-            'payment-card' => PaymentCardCreatePlain::from($data),
+            'ach' => BankAccountCreatePlainFactory::from($data, $metadata),
+            'payment-card' => PaymentCardCreatePlain::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

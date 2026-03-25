@@ -16,12 +16,15 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class OneTimeSalePlan implements Plan, FlexiblePlan
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
@@ -74,16 +77,17 @@ class OneTimeSalePlan implements Plan, FlexiblePlan
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
-    public function getId(): ?string
+    public function getId(): string
     {
-        return $this->fields['id'] ?? null;
+        return $this->fields['id'];
     }
 
     public function getName(): string
@@ -316,7 +320,7 @@ class OneTimeSalePlan implements Plan, FlexiblePlan
         return $data;
     }
 
-    private function setId(null|string $id): static
+    private function setId(string $id): static
     {
         $this->fields['id'] = $id;
 

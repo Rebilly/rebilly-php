@@ -40,7 +40,7 @@ class CreditMemosApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CreditMemo::from($data);
+        return CreditMemo::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function createTimelineComment(
@@ -59,7 +59,7 @@ class CreditMemosApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CreditMemoTimeline::from($data);
+        return CreditMemoTimeline::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function deleteTimelineMessage(
@@ -92,7 +92,7 @@ class CreditMemosApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CreditMemo::from($data);
+        return CreditMemo::from($data, ['headers' => $response->getHeaders()]);
     }
 
     /**
@@ -123,10 +123,13 @@ class CreditMemosApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): CreditMemo => CreditMemo::from($item), $data),
+            array_map(fn (array $item): CreditMemo => CreditMemo::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -187,10 +190,13 @@ class CreditMemosApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): CreditMemoTimeline => CreditMemoTimeline::from($item), $data),
+            array_map(fn (array $item): CreditMemoTimeline => CreditMemoTimeline::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -237,7 +243,7 @@ class CreditMemosApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CreditMemoTimeline::from($data);
+        return CreditMemoTimeline::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function patch(
@@ -256,7 +262,7 @@ class CreditMemosApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CreditMemo::from($data);
+        return CreditMemo::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function update(
@@ -275,7 +281,7 @@ class CreditMemosApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CreditMemo::from($data);
+        return CreditMemo::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function void(
@@ -293,6 +299,6 @@ class CreditMemosApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CreditMemo::from($data);
+        return CreditMemo::from($data, ['headers' => $response->getHeaders()]);
     }
 }

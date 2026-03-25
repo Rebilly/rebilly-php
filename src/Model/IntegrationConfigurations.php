@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class IntegrationConfigurations implements JsonSerializable
 {
+    use HasMetadata;
+
     public const EVENT_TYPE_ACCOUNT_PASSWORD_RESET_REQUESTED = 'account-password-reset-requested';
 
     public const EVENT_TYPE_ACCOUNT_VERIFICATION_REQUESTED = 'account-verification-requested';
@@ -212,7 +215,7 @@ class IntegrationConfigurations implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('labels', $data)) {
             $this->setLabels($data['labels']);
@@ -223,11 +226,12 @@ class IntegrationConfigurations implements JsonSerializable
         if (array_key_exists('title', $data)) {
             $this->setTitle($data['title']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     /**

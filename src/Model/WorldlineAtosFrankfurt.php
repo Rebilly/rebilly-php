@@ -14,15 +14,19 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use Rebilly\Sdk\Trait\HasMetadata;
+
 class WorldlineAtosFrankfurt extends GatewayAccount
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         parent::__construct([
             'gatewayName' => 'WorldlineAtosFrankfurt',
-        ] + $data);
+        ] + $data, $metadata);
 
         if (array_key_exists('threeDSecureServer', $data)) {
             $this->setThreeDSecureServer($data['threeDSecureServer']);
@@ -33,11 +37,12 @@ class WorldlineAtosFrankfurt extends GatewayAccount
         if (array_key_exists('settings', $data)) {
             $this->setSettings($data['settings']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getThreeDSecureServer(): ?ThreeDSecureIO3dsServer

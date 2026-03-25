@@ -18,11 +18,11 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class BankAccountInstrumentFactory
 {
-    public static function from(array $data = []): BankAccountInstrument
+    public static function from(array $data = [], array $metadata = []): BankAccountInstrument
     {
         return match ($data['accountNumberType']) {
-            'BBAN' => BBANInstrument::from($data),
-            'IBAN' => IBANInstrument::from($data),
+            'BBAN' => BBANInstrument::from($data, $metadata),
+            'IBAN' => IBANInstrument::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

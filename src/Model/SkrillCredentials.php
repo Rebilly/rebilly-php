@@ -15,12 +15,15 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class SkrillCredentials implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('accountEmail', $data)) {
             $this->setAccountEmail($data['accountEmail']);
@@ -34,11 +37,15 @@ class SkrillCredentials implements JsonSerializable
         if (array_key_exists('currencyAccountIds', $data)) {
             $this->setCurrencyAccountIds($data['currencyAccountIds']);
         }
+        if (array_key_exists('merchantId', $data)) {
+            $this->setMerchantId($data['merchantId']);
+        }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getAccountEmail(): string
@@ -89,6 +96,18 @@ class SkrillCredentials implements JsonSerializable
         return $this;
     }
 
+    public function getMerchantId(): ?string
+    {
+        return $this->fields['merchantId'] ?? null;
+    }
+
+    public function setMerchantId(null|string $merchantId): static
+    {
+        $this->fields['merchantId'] = $merchantId;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -103,6 +122,9 @@ class SkrillCredentials implements JsonSerializable
         }
         if (array_key_exists('currencyAccountIds', $this->fields)) {
             $data['currencyAccountIds'] = $this->fields['currencyAccountIds'];
+        }
+        if (array_key_exists('merchantId', $this->fields)) {
+            $data['merchantId'] = $this->fields['merchantId'];
         }
 
         return $data;

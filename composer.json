@@ -2,20 +2,7 @@
   "name": "rebilly/client-php",
   "description": "Rebilly PHP Client",
   "type": "library",
-  "keywords": [
-    "payment processing",
-    "api",
-    "transactions",
-    "subscriptions"
-  ],
-  "homepage": "http://rebilly.com/",
   "license": "MIT",
-  "authors": [
-    {
-      "name": "Rebilly",
-      "homepage": "https://github.com/rebilly"
-    }
-  ],
   "minimum-stability": "stable",
   "require": {
     "php": "^8.0",
@@ -52,6 +39,19 @@
     "cs-changes": "composer cs -- \"$(composer diff-files HEAD)\"",
     "cs-fix-changes": "composer cs-fix -- \"$(composer diff-files HEAD)\""
   },
+  "keywords": [
+    "payment processing",
+    "api",
+    "transactions",
+    "subscriptions"
+  ],
+  "homepage": "http://rebilly.com/",
+  "authors": [
+    {
+      "name": "Rebilly",
+      "homepage": "https://github.com/rebilly"
+    }
+  ],
   "extra": {
     "branch-alias": {
       "dev-main": "3.x-dev",

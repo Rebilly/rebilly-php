@@ -16,12 +16,15 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class AMLPassport implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('number', $data)) {
             $this->setNumber($data['number']);
@@ -29,11 +32,12 @@ class AMLPassport implements JsonSerializable
         if (array_key_exists('registrationDate', $data)) {
             $this->setRegistrationDate($data['registrationDate']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getNumber(): ?string

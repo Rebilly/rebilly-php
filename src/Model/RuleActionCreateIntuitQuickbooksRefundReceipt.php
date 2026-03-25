@@ -14,15 +14,19 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use Rebilly\Sdk\Trait\HasMetadata;
+
 class RuleActionCreateIntuitQuickbooksRefundReceipt extends RuleAction
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         parent::__construct([
             'name' => 'create-intuit-quickbooks-refund-receipt',
-        ] + $data);
+        ] + $data, $metadata);
 
         if (array_key_exists('depositAccount', $data)) {
             $this->setDepositAccount($data['depositAccount']);
@@ -33,11 +37,12 @@ class RuleActionCreateIntuitQuickbooksRefundReceipt extends RuleAction
         if (array_key_exists('credentialHash', $data)) {
             $this->setCredentialHash($data['credentialHash']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getDepositAccount(): string

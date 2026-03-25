@@ -17,12 +17,15 @@ namespace Rebilly\Sdk\Model;
 use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class Customer implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
@@ -105,17 +108,21 @@ class Customer implements JsonSerializable
         if (array_key_exists('personId', $data)) {
             $this->setPersonId($data['personId']);
         }
+        if (array_key_exists('notificationEmails', $data)) {
+            $this->setNotificationEmails($data['notificationEmails']);
+        }
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
         if (array_key_exists('_embedded', $data)) {
             $this->setEmbedded($data['_embedded']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getId(): ?string
@@ -390,6 +397,24 @@ class Customer implements JsonSerializable
     }
 
     /**
+     * @return null|string[]
+     */
+    public function getNotificationEmails(): ?array
+    {
+        return $this->fields['notificationEmails'] ?? null;
+    }
+
+    /**
+     * @param null|string[] $notificationEmails
+     */
+    public function setNotificationEmails(null|array $notificationEmails): static
+    {
+        $this->fields['notificationEmails'] = $notificationEmails;
+
+        return $this;
+    }
+
+    /**
      * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
@@ -506,6 +531,9 @@ class Customer implements JsonSerializable
         }
         if (array_key_exists('personId', $this->fields)) {
             $data['personId'] = $this->fields['personId'];
+        }
+        if (array_key_exists('notificationEmails', $this->fields)) {
+            $data['notificationEmails'] = $this->fields['notificationEmails'];
         }
         if (array_key_exists('_links', $this->fields)) {
             $data['_links'] = $this->fields['_links'] !== null

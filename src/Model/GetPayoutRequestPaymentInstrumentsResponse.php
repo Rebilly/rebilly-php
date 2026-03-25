@@ -17,9 +17,12 @@ namespace Rebilly\Sdk\Model;
 use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class GetPayoutRequestPaymentInstrumentsResponse implements JsonSerializable
 {
+    use HasMetadata;
+
     public const GATEWAY_NAME_A1_GATEWAY = 'A1Gateway';
 
     public const GATEWAY_NAME_ACI = 'ACI';
@@ -448,6 +451,8 @@ class GetPayoutRequestPaymentInstrumentsResponse implements JsonSerializable
 
     public const GATEWAY_NAME_VEGA_WALLET = 'VegaWallet';
 
+    public const GATEWAY_NAME_VIVA = 'Viva';
+
     public const GATEWAY_NAME_WALLET88 = 'Wallet88';
 
     public const GATEWAY_NAME_WALPAY = 'Walpay';
@@ -468,7 +473,7 @@ class GetPayoutRequestPaymentInstrumentsResponse implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('paymentInstrumentId', $data)) {
             $this->setPaymentInstrumentId($data['paymentInstrumentId']);
@@ -488,11 +493,12 @@ class GetPayoutRequestPaymentInstrumentsResponse implements JsonSerializable
         if (array_key_exists('lastPayoutTime', $data)) {
             $this->setLastPayoutTime($data['lastPayoutTime']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getPaymentInstrumentId(): ?string

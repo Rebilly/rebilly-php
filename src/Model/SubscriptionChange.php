@@ -17,16 +17,19 @@ namespace Rebilly\Sdk\Model;
 use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class SubscriptionChange implements JsonSerializable
 {
+    use HasMetadata;
+
     public const RENEWAL_POLICY_RESET = 'reset';
 
     public const RENEWAL_POLICY_RETAIN = 'retain';
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('items', $data)) {
             $this->setItems($data['items']);
@@ -49,11 +52,12 @@ class SubscriptionChange implements JsonSerializable
         if (array_key_exists('ignoreRecurring', $data)) {
             $this->setIgnoreRecurring($data['ignoreRecurring']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     /**

@@ -18,12 +18,12 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class TaxesFactory
 {
-    public static function from(array $data = []): Taxes
+    public static function from(array $data = [], array $metadata = []): Taxes
     {
         return match ($data['calculator']) {
-            'manual' => ManualTax::from($data),
-            'rebilly-avalara' => RebillyAvalaraTax::from($data),
-            'rebilly-taxjar' => RebillyTaxJarTax::from($data),
+            'manual' => ManualTax::from($data, $metadata),
+            'rebilly-avalara' => RebillyAvalaraTax::from($data, $metadata),
+            'rebilly-taxjar' => RebillyTaxJarTax::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

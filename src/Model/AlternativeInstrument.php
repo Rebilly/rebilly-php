@@ -16,9 +16,12 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class AlternativeInstrument implements PaymentInstrument, PostPaymentInstrumentRequest
 {
+    use HasMetadata;
+
     public const METHOD_CASH = 'cash';
 
     public const METHOD_CHECK = 'check';
@@ -303,6 +306,8 @@ class AlternativeInstrument implements PaymentInstrument, PostPaymentInstrumentR
 
     public const METHOD_VENUS_POINT = 'VenusPoint';
 
+    public const METHOD_VIVA = 'Viva';
+
     public const METHOD_VOUCHER = 'voucher';
 
     public const METHOD_VOUCHER2 = 'voucher-2';
@@ -343,7 +348,7 @@ class AlternativeInstrument implements PaymentInstrument, PostPaymentInstrumentR
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
@@ -393,11 +398,12 @@ class AlternativeInstrument implements PaymentInstrument, PostPaymentInstrumentR
         if (array_key_exists('_embedded', $data)) {
             $this->setEmbedded($data['_embedded']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getId(): ?string

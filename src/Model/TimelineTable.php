@@ -16,9 +16,12 @@ namespace Rebilly\Sdk\Model;
 
 use InvalidArgumentException;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 abstract class TimelineTable implements JsonSerializable
 {
+    use HasMetadata;
+
     public const TYPE_LIST = 'list';
 
     public const TYPE_ONE_COLUMNS = 'one-columns';
@@ -29,7 +32,7 @@ abstract class TimelineTable implements JsonSerializable
 
     private array $fields = [];
 
-    protected function __construct(array $data = [])
+    protected function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('type', $data)) {
             $this->setType($data['type']);
@@ -40,19 +43,20 @@ abstract class TimelineTable implements JsonSerializable
         if (array_key_exists('footer', $data)) {
             $this->setFooter($data['footer']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
         switch ($data['type']) {
             case 'list':
-                return ListTimelineTable::from($data);
+                return ListTimelineTable::from($data, $metadata);
             case 'one-column':
-                return OneColumnTimelineTable::from($data);
+                return OneColumnTimelineTable::from($data, $metadata);
             case 'three-columns':
-                return ThreeColumnsTimelineTable::from($data);
+                return ThreeColumnsTimelineTable::from($data, $metadata);
             case 'two-columns':
-                return TwoColumnsTimelineTable::from($data);
+                return TwoColumnsTimelineTable::from($data, $metadata);
         }
 
         throw new InvalidArgumentException("Unsupported type value: '{$data['type']}'");

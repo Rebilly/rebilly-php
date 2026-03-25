@@ -22,7 +22,9 @@ use Rebilly\Sdk\Model\GetPayoutRequestPaymentInstrumentsResponse;
 use Rebilly\Sdk\Model\PatchPayoutRequestRequest;
 use Rebilly\Sdk\Model\PayoutRequest;
 use Rebilly\Sdk\Model\PayoutRequestCancellation;
+use Rebilly\Sdk\Model\PayoutRequestSplit;
 use Rebilly\Sdk\Model\PayoutRequestTimelineMessage;
+use Rebilly\Sdk\Model\PayoutRequestV2;
 use Rebilly\Sdk\Paginator;
 
 class PayoutRequestsApi
@@ -47,7 +49,7 @@ class PayoutRequestsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return PayoutRequest::from($data);
+        return PayoutRequest::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function create(
@@ -61,7 +63,7 @@ class PayoutRequestsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return PayoutRequest::from($data);
+        return PayoutRequest::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function createTimelineComment(
@@ -80,7 +82,7 @@ class PayoutRequestsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return PayoutRequestTimelineMessage::from($data);
+        return PayoutRequestTimelineMessage::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function deleteTimelineMessage(
@@ -113,7 +115,7 @@ class PayoutRequestsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return PayoutRequest::from($data);
+        return PayoutRequest::from($data, ['headers' => $response->getHeaders()]);
     }
 
     /**
@@ -140,10 +142,13 @@ class PayoutRequestsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): PayoutRequest => PayoutRequest::from($item), $data),
+            array_map(fn (array $item): PayoutRequest => PayoutRequest::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -200,10 +205,13 @@ class PayoutRequestsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): PayoutRequestTimelineMessage => PayoutRequestTimelineMessage::from($item), $data),
+            array_map(fn (array $item): PayoutRequestTimelineMessage => PayoutRequestTimelineMessage::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -251,7 +259,7 @@ class PayoutRequestsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): GetPayoutRequestPaymentInstrumentsResponse => GetPayoutRequestPaymentInstrumentsResponse::from($item), $data);
+        return array_map(fn (array $item): GetPayoutRequestPaymentInstrumentsResponse => GetPayoutRequestPaymentInstrumentsResponse::from($item, ['headers' => $response->getHeaders()]), $data);
     }
 
     public function getTimelineMessage(
@@ -271,7 +279,7 @@ class PayoutRequestsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return PayoutRequestTimelineMessage::from($data);
+        return PayoutRequestTimelineMessage::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function patch(
@@ -290,7 +298,29 @@ class PayoutRequestsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return PayoutRequest::from($data);
+        return PayoutRequest::from($data, ['headers' => $response->getHeaders()]);
+    }
+
+    /**
+     * @return PayoutRequestV2[]
+     */
+    public function split(
+        string $id,
+        PayoutRequestSplit $payoutRequestSplit,
+    ): array {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/payout-requests/{id}/split');
+
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($payoutRequestSplit));
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return array_map(fn (array $item): PayoutRequestV2 => PayoutRequestV2::from($item, ['headers' => $response->getHeaders()]), $data);
     }
 
     public function update(
@@ -309,6 +339,6 @@ class PayoutRequestsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return PayoutRequest::from($data);
+        return PayoutRequest::from($data, ['headers' => $response->getHeaders()]);
     }
 }

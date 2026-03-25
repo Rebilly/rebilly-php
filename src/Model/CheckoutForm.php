@@ -17,18 +17,11 @@ namespace Rebilly\Sdk\Model;
 use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class CheckoutForm implements JsonSerializable
 {
-    public const PAYMENT_METHODS_PAYMENT_CARD = 'payment-card';
-
-    public const PAYMENT_METHODS_ACH = 'ach';
-
-    public const PAYMENT_METHODS_CASH = 'cash';
-
-    public const PAYMENT_METHODS_CHECK = 'check';
-
-    public const PAYMENT_METHODS_PAYPAL = 'paypal';
+    use HasMetadata;
 
     public const PAYMENT_METHODS_ADV_CASH = 'AdvCash';
 
@@ -378,6 +371,8 @@ class CheckoutForm implements JsonSerializable
 
     public const PAYMENT_METHODS_VENUS_POINT = 'VenusPoint';
 
+    public const PAYMENT_METHODS_VIVA = 'Viva';
+
     public const PAYMENT_METHODS_VOUCHER = 'voucher';
 
     public const PAYMENT_METHODS_VOUCHER2 = 'voucher-2';
@@ -416,7 +411,7 @@ class CheckoutForm implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
@@ -466,11 +461,12 @@ class CheckoutForm implements JsonSerializable
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getId(): ?string

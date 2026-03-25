@@ -14,13 +14,18 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use DateTimeImmutable;
+use DateTimeInterface;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class CreationQuoteOrder implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
@@ -40,11 +45,18 @@ class CreationQuoteOrder implements JsonSerializable
         if (array_key_exists('billingAddress', $data)) {
             $this->setBillingAddress($data['billingAddress']);
         }
+        if (array_key_exists('startTime', $data)) {
+            $this->setStartTime($data['startTime']);
+        }
+        if (array_key_exists('isLegacy', $data)) {
+            $this->setIsLegacy($data['isLegacy']);
+        }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getId(): ?string
@@ -135,6 +147,34 @@ class CreationQuoteOrder implements JsonSerializable
         return $this;
     }
 
+    public function getStartTime(): ?DateTimeImmutable
+    {
+        return $this->fields['startTime'] ?? null;
+    }
+
+    public function setStartTime(null|DateTimeImmutable|string $startTime): static
+    {
+        if ($startTime !== null && !($startTime instanceof DateTimeImmutable)) {
+            $startTime = new DateTimeImmutable($startTime);
+        }
+
+        $this->fields['startTime'] = $startTime;
+
+        return $this;
+    }
+
+    public function getIsLegacy(): ?bool
+    {
+        return $this->fields['isLegacy'] ?? null;
+    }
+
+    public function setIsLegacy(null|bool $isLegacy): static
+    {
+        $this->fields['isLegacy'] = $isLegacy;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -158,6 +198,12 @@ class CreationQuoteOrder implements JsonSerializable
         }
         if (array_key_exists('billingAddress', $this->fields)) {
             $data['billingAddress'] = $this->fields['billingAddress']?->jsonSerialize();
+        }
+        if (array_key_exists('startTime', $this->fields)) {
+            $data['startTime'] = $this->fields['startTime']?->format(DateTimeInterface::RFC3339);
+        }
+        if (array_key_exists('isLegacy', $this->fields)) {
+            $data['isLegacy'] = $this->fields['isLegacy'];
         }
 
         return $data;

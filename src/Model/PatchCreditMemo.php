@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class PatchCreditMemo implements JsonSerializable
 {
+    use HasMetadata;
+
     public const REASON_RETURN = 'return';
 
     public const REASON_PRODUCT_UNSATISFACTORY = 'product-unsatisfactory';
@@ -38,7 +41,7 @@ class PatchCreditMemo implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('allocations', $data)) {
             $this->setAllocations($data['allocations']);
@@ -55,11 +58,12 @@ class PatchCreditMemo implements JsonSerializable
         if (array_key_exists('shippingAmount', $data)) {
             $this->setShippingAmount($data['shippingAmount']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getAllocations(): ?PatchCreditMemoAllocations

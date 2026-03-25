@@ -18,13 +18,13 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class SmtpAuthorizationFactory
 {
-    public static function from(array $data = []): SmtpAuthorization
+    public static function from(array $data = [], array $metadata = []): SmtpAuthorization
     {
         return match ($data['type']) {
-            'cram-md5' => SmtpAuthorizationCramMd5::from($data),
-            'login' => SmtpAuthorizationLogin::from($data),
-            'none' => SmtpAuthorizationNone::from($data),
-            'plain' => SmtpAuthorizationPlain::from($data),
+            'cram-md5' => SmtpAuthorizationCramMd5::from($data, $metadata),
+            'login' => SmtpAuthorizationLogin::from($data, $metadata),
+            'none' => SmtpAuthorizationNone::from($data, $metadata),
+            'plain' => SmtpAuthorizationPlain::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

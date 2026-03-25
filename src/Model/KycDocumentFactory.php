@@ -18,14 +18,14 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class KycDocumentFactory
 {
-    public static function from(array $data = []): KycDocument
+    public static function from(array $data = [], array $metadata = []): KycDocument
     {
         return match ($data['documentType']) {
-            'address-proof' => ProofOfAddressKycDocument::from($data),
-            'credit-file-proof' => ProofOfCreditFileKycDocument::from($data),
-            'funds-proof' => ProofOfFundsKycDocument::from($data),
-            'identity-proof' => ProofOfIdentityKycDocument::from($data),
-            'purchase-proof' => ProofOfPurchaseKycDocument::from($data),
+            'address-proof' => ProofOfAddressKycDocument::from($data, $metadata),
+            'credit-file-proof' => ProofOfCreditFileKycDocument::from($data, $metadata),
+            'funds-proof' => ProofOfFundsKycDocument::from($data, $metadata),
+            'identity-proof' => ProofOfIdentityKycDocument::from($data, $metadata),
+            'purchase-proof' => ProofOfPurchaseKycDocument::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

@@ -40,7 +40,7 @@ class ApplicationsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Application::from($data);
+        return Application::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function get(
@@ -58,7 +58,7 @@ class ApplicationsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return UserApplication::from($data);
+        return UserApplication::from($data, ['headers' => $response->getHeaders()]);
     }
 
     /**
@@ -91,10 +91,13 @@ class ApplicationsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): UserApplication => UserApplication::from($item), $data),
+            array_map(fn (array $item): UserApplication => UserApplication::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -143,7 +146,7 @@ class ApplicationsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return OwnerApplicationInstance::from($data);
+        return OwnerApplicationInstance::from($data, ['headers' => $response->getHeaders()]);
     }
 
     /**
@@ -171,10 +174,13 @@ class ApplicationsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): OwnerApplicationInstance => OwnerApplicationInstance::from($item), $data),
+            array_map(fn (array $item): OwnerApplicationInstance => OwnerApplicationInstance::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
