@@ -53,7 +53,7 @@ class CouponsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Coupon::from($data);
+        return Coupon::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function get(
@@ -71,7 +71,7 @@ class CouponsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Coupon::from($data);
+        return Coupon::from($data, ['headers' => $response->getHeaders()]);
     }
 
     /**
@@ -100,10 +100,13 @@ class CouponsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): Coupon => Coupon::from($item), $data),
+            array_map(fn (array $item): Coupon => Coupon::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -157,10 +160,13 @@ class CouponsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): CouponRedemption => CouponRedemption::from($item), $data),
+            array_map(fn (array $item): CouponRedemption => CouponRedemption::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -203,7 +209,7 @@ class CouponsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CouponRedemption::from($data);
+        return CouponRedemption::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function redeem(
@@ -217,7 +223,7 @@ class CouponsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CouponRedemption::from($data);
+        return CouponRedemption::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function setExpiration(
@@ -236,7 +242,7 @@ class CouponsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Coupon::from($data);
+        return Coupon::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function update(
@@ -255,6 +261,6 @@ class CouponsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Coupon::from($data);
+        return Coupon::from($data, ['headers' => $response->getHeaders()]);
     }
 }

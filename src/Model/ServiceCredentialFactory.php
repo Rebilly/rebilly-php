@@ -18,20 +18,20 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class ServiceCredentialFactory
 {
-    public static function from(array $data = []): ServiceCredential
+    public static function from(array $data = [], array $metadata = []): ServiceCredential
     {
         return match ($data['type']) {
-            'avalara' => AvalaraCredential::from($data),
-            'experian' => ExperianCredential::from($data),
-            'mailgun' => MailgunCredential::from($data),
-            'oauth2' => OAuth2Credential::from($data),
-            'plaid' => PlaidCredential::from($data),
-            'postmark' => PostmarkCredential::from($data),
-            'sendgrid' => SendGridCredential::from($data),
-            'aws-ses' => SESCredential::from($data),
-            'smtp' => SmtpCredential::from($data),
-            'taxjar' => TaxJarCredential::from($data),
-            'webhook' => WebhookCredential::from($data),
+            'avalara' => AvalaraCredential::from($data, $metadata),
+            'experian' => ExperianCredential::from($data, $metadata),
+            'mailgun' => MailgunCredential::from($data, $metadata),
+            'oauth2' => OAuth2Credential::from($data, $metadata),
+            'plaid' => PlaidCredential::from($data, $metadata),
+            'postmark' => PostmarkCredential::from($data, $metadata),
+            'sendgrid' => SendGridCredential::from($data, $metadata),
+            'aws-ses' => SESCredential::from($data, $metadata),
+            'smtp' => SmtpCredential::from($data, $metadata),
+            'taxjar' => TaxJarCredential::from($data, $metadata),
+            'webhook' => WebhookCredential::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

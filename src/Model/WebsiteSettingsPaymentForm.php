@@ -15,12 +15,15 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class WebsiteSettingsPaymentForm implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('css', $data)) {
             $this->setCss($data['css']);
@@ -31,11 +34,12 @@ class WebsiteSettingsPaymentForm implements JsonSerializable
         if (array_key_exists('features', $data)) {
             $this->setFeatures($data['features']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getCss(): ?string
@@ -91,7 +95,9 @@ class WebsiteSettingsPaymentForm implements JsonSerializable
             $data['css'] = $this->fields['css'];
         }
         if (array_key_exists('theme', $this->fields)) {
-            $data['theme'] = $this->fields['theme'];
+            $data['theme'] = $this->fields['theme'] !== null
+                ? (object) $this->fields['theme']
+                : null;
         }
         if (array_key_exists('features', $this->fields)) {
             $data['features'] = $this->fields['features']?->jsonSerialize();

@@ -15,16 +15,19 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class DepositStrategyAmounts implements JsonSerializable
 {
+    use HasMetadata;
+
     public const CALCULATOR_ABSOLUTE = 'absolute';
 
     public const CALCULATOR_PERCENT = 'percent';
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('calculator', $data)) {
             $this->setCalculator($data['calculator']);
@@ -47,11 +50,12 @@ class DepositStrategyAmounts implements JsonSerializable
         if (array_key_exists('minimumBaseAmount', $data)) {
             $this->setMinimumBaseAmount($data['minimumBaseAmount']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getCalculator(): string

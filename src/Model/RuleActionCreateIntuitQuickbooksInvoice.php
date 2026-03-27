@@ -14,15 +14,19 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use Rebilly\Sdk\Trait\HasMetadata;
+
 class RuleActionCreateIntuitQuickbooksInvoice extends RuleAction
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         parent::__construct([
             'name' => 'create-intuit-quickbooks-invoice',
-        ] + $data);
+        ] + $data, $metadata);
 
         if (array_key_exists('unearnedRevenueAccount', $data)) {
             $this->setUnearnedRevenueAccount($data['unearnedRevenueAccount']);
@@ -45,11 +49,12 @@ class RuleActionCreateIntuitQuickbooksInvoice extends RuleAction
         if (array_key_exists('customerDisplayName', $data)) {
             $this->setCustomerDisplayName($data['customerDisplayName']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getUnearnedRevenueAccount(): string

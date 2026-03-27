@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class KlarnaSettings implements JsonSerializable
 {
+    use HasMetadata;
+
     public const REGION_EU = 'EU';
 
     public const REGION_NA = 'NA';
@@ -26,7 +29,7 @@ class KlarnaSettings implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('region', $data)) {
             $this->setRegion($data['region']);
@@ -34,11 +37,12 @@ class KlarnaSettings implements JsonSerializable
         if (array_key_exists('usePayNowStandalone', $data)) {
             $this->setUsePayNowStandalone($data['usePayNowStandalone']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getRegion(): string

@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class OrbitalSettings implements JsonSerializable
 {
+    use HasMetadata;
+
     public const TARGET_CURRENCY_USD = 'USD';
 
     public const TARGET_CURRENCY_EUR = 'EUR';
@@ -32,7 +35,7 @@ class OrbitalSettings implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('targetCurrency', $data)) {
             $this->setTargetCurrency($data['targetCurrency']);
@@ -46,11 +49,12 @@ class OrbitalSettings implements JsonSerializable
         if (array_key_exists('productImageUrl', $data)) {
             $this->setProductImageUrl($data['productImageUrl']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getTargetCurrency(): ?string

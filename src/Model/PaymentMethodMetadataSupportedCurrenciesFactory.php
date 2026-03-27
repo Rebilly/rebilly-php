@@ -18,12 +18,12 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class PaymentMethodMetadataSupportedCurrenciesFactory
 {
-    public static function from(array $data = []): PaymentMethodMetadataSupportedCurrencies
+    public static function from(array $data = [], array $metadata = []): PaymentMethodMetadataSupportedCurrencies
     {
         return match ($data['mode']) {
-            'subset' => CurrenciesSubsetMetadata::from($data),
-            'all' => CurrenciesUnrestrictedMetadata::from($data),
-            'unknown' => CurrenciesUnrestrictedMetadata::from($data),
+            'subset' => CurrenciesSubsetMetadata::from($data, $metadata),
+            'all' => CurrenciesUnrestrictedMetadata::from($data, $metadata),
+            'unknown' => CurrenciesUnrestrictedMetadata::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

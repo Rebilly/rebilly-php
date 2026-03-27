@@ -18,11 +18,11 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class SettlementPeriodFactory
 {
-    public static function from(array $data = []): SettlementPeriod
+    public static function from(array $data = [], array $metadata = []): SettlementPeriod
     {
         return match ($data['method']) {
-            'date-interval' => SchedulingMethodDateInterval::from($data),
-            'immediately' => SchedulingMethodImmediately::from($data),
+            'date-interval' => SchedulingMethodDateInterval::from($data, $metadata),
+            'immediately' => SchedulingMethodImmediately::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

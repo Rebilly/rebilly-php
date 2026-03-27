@@ -38,7 +38,7 @@ class PreviewsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return OrderPreview::from($data);
+        return OrderPreview::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function sendEmailRuleAction(
@@ -52,7 +52,7 @@ class PreviewsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return RulesEmailNotification::from($data);
+        return RulesEmailNotification::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function webhook(

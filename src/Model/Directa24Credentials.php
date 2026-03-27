@@ -15,12 +15,15 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class Directa24Credentials implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('x_login', $data)) {
             $this->setXLogin($data['x_login']);
@@ -49,11 +52,12 @@ class Directa24Credentials implements JsonSerializable
         if (array_key_exists('chargebackSecretKey', $data)) {
             $this->setChargebackSecretKey($data['chargebackSecretKey']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getXLogin(): string

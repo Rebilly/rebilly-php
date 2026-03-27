@@ -16,9 +16,12 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class AML implements JsonSerializable
 {
+    use HasMetadata;
+
     public const SOURCE_TYPE_PEP = 'pep';
 
     public const SOURCE_TYPE_SANCTIONS = 'sanctions';
@@ -43,7 +46,7 @@ class AML implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('firstName', $data)) {
             $this->setFirstName($data['firstName']);
@@ -99,11 +102,12 @@ class AML implements JsonSerializable
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getFirstName(): ?string

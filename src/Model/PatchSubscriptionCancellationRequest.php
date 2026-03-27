@@ -17,9 +17,12 @@ namespace Rebilly\Sdk\Model;
 use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class PatchSubscriptionCancellationRequest implements JsonSerializable
 {
+    use HasMetadata;
+
     public const CANCELED_BY_MERCHANT = 'merchant';
 
     public const CANCELED_BY_CUSTOMER = 'customer';
@@ -62,7 +65,7 @@ class PatchSubscriptionCancellationRequest implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('canceledBy', $data)) {
             $this->setCanceledBy($data['canceledBy']);
@@ -115,11 +118,12 @@ class PatchSubscriptionCancellationRequest implements JsonSerializable
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getCanceledBy(): ?string

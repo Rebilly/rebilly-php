@@ -16,12 +16,15 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class ReportDeferredRevenue implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('asOfDate', $data)) {
             $this->setAsOfDate($data['asOfDate']);
@@ -41,11 +44,12 @@ class ReportDeferredRevenue implements JsonSerializable
         if (array_key_exists('months', $data)) {
             $this->setMonths($data['months']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getAsOfDate(): ?DateTimeImmutable

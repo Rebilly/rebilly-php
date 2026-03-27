@@ -15,12 +15,15 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class KycSettingsIdentityMinimumAgeSettingsLocationOverrides implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('country', $data)) {
             $this->setCountry($data['country']);
@@ -31,11 +34,12 @@ class KycSettingsIdentityMinimumAgeSettingsLocationOverrides implements JsonSeri
         if (array_key_exists('minimumAge', $data)) {
             $this->setMinimumAge($data['minimumAge']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getCountry(): string

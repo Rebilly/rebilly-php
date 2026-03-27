@@ -39,7 +39,7 @@ class DisputesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Dispute::from($data);
+        return Dispute::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function get(
@@ -57,7 +57,7 @@ class DisputesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Dispute::from($data);
+        return Dispute::from($data, ['headers' => $response->getHeaders()]);
     }
 
     /**
@@ -88,10 +88,13 @@ class DisputesApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): Dispute => Dispute::from($item), $data),
+            array_map(fn (array $item): Dispute => Dispute::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -137,6 +140,6 @@ class DisputesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Dispute::from($data);
+        return Dispute::from($data, ['headers' => $response->getHeaders()]);
     }
 }

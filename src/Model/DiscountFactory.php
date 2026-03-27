@@ -18,11 +18,11 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class DiscountFactory
 {
-    public static function from(array $data = []): Discount
+    public static function from(array $data = [], array $metadata = []): Discount
     {
         return match ($data['type']) {
-            'fixed' => DiscountFixed::from($data),
-            'percent' => DiscountPercent::from($data),
+            'fixed' => DiscountFixed::from($data, $metadata),
+            'percent' => DiscountPercent::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

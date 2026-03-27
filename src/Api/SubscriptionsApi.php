@@ -57,7 +57,7 @@ class SubscriptionsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return SubscriptionOrOneTimeSaleFactory::from($data);
+        return SubscriptionOrOneTimeSaleFactory::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function create(
@@ -75,7 +75,7 @@ class SubscriptionsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return SubscriptionOrOneTimeSaleFactory::from($data);
+        return SubscriptionOrOneTimeSaleFactory::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function createInterimInvoice(
@@ -94,7 +94,7 @@ class SubscriptionsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Invoice::from($data);
+        return Invoice::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function createTimelineComment(
@@ -113,7 +113,7 @@ class SubscriptionsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return OrderTimeline::from($data);
+        return OrderTimeline::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function delete(
@@ -163,7 +163,7 @@ class SubscriptionsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return SubscriptionOrOneTimeSaleFactory::from($data);
+        return SubscriptionOrOneTimeSaleFactory::from($data, ['headers' => $response->getHeaders()]);
     }
 
     /**
@@ -194,10 +194,13 @@ class SubscriptionsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): SubscriptionOrOneTimeSale => SubscriptionOrOneTimeSaleFactory::from($item), $data),
+            array_map(fn (array $item): SubscriptionOrOneTimeSale => SubscriptionOrOneTimeSaleFactory::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -258,10 +261,13 @@ class SubscriptionsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): OrderTimeline => OrderTimeline::from($item), $data),
+            array_map(fn (array $item): OrderTimeline => OrderTimeline::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -313,7 +319,7 @@ class SubscriptionsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): UpcomingInvoice => UpcomingInvoice::from($item), $data);
+        return array_map(fn (array $item): UpcomingInvoice => UpcomingInvoice::from($item, ['headers' => $response->getHeaders()]), $data);
     }
 
     public function getSubscriptionSummaryMetrics(
@@ -331,7 +337,7 @@ class SubscriptionsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return SubscriptionSummaryMetrics::from($data);
+        return SubscriptionSummaryMetrics::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getTimelineMessage(
@@ -351,7 +357,7 @@ class SubscriptionsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return OrderTimeline::from($data);
+        return OrderTimeline::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getUpcomingInvoice(
@@ -373,7 +379,7 @@ class SubscriptionsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return UpcomingInvoice::from($data);
+        return UpcomingInvoice::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function issueEarlyUpcomingInvoice(
@@ -392,7 +398,7 @@ class SubscriptionsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return UpcomingInvoice::from($data);
+        return UpcomingInvoice::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function issueUpcomingInvoice(
@@ -413,7 +419,7 @@ class SubscriptionsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return UpcomingInvoice::from($data);
+        return UpcomingInvoice::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function update(
@@ -436,7 +442,7 @@ class SubscriptionsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return SubscriptionOrOneTimeSaleFactory::from($data);
+        return SubscriptionOrOneTimeSaleFactory::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function updateItem(
@@ -457,7 +463,7 @@ class SubscriptionsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return SubscriptionOrOneTimeSaleItem::from($data);
+        return SubscriptionOrOneTimeSaleItem::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function void(
@@ -475,6 +481,6 @@ class SubscriptionsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return SubscriptionOrOneTimeSaleFactory::from($data);
+        return SubscriptionOrOneTimeSaleFactory::from($data, ['headers' => $response->getHeaders()]);
     }
 }

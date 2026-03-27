@@ -18,16 +18,16 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class BalanceTransactionFactory
 {
-    public static function from(array $data = []): BalanceTransaction
+    public static function from(array $data = [], array $metadata = []): BalanceTransaction
     {
         return match ($data['type']) {
-            'buy-fee' => BuyFeeTransaction::from($data),
-            'charge' => ChargeTransaction::from($data),
-            'refund' => RefundTransaction::from($data),
-            'reverse' => ReverseTransaction::from($data),
-            'risk-reserve-release' => RiskReserveReleaseTransaction::from($data),
-            'risk-reserve' => RiskReserveTransaction::from($data),
-            'sell-fee' => SellFeeTransaction::from($data),
+            'buy-fee' => BuyFeeTransaction::from($data, $metadata),
+            'charge' => ChargeTransaction::from($data, $metadata),
+            'refund' => RefundTransaction::from($data, $metadata),
+            'reverse' => ReverseTransaction::from($data, $metadata),
+            'risk-reserve-release' => RiskReserveReleaseTransaction::from($data, $metadata),
+            'risk-reserve' => RiskReserveTransaction::from($data, $metadata),
+            'sell-fee' => SellFeeTransaction::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

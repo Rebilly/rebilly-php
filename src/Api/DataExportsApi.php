@@ -60,7 +60,7 @@ class DataExportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return DataExportFactory::from($data);
+        return DataExportFactory::from($data, ['headers' => $response->getHeaders()]);
     }
 
     /**
@@ -93,10 +93,13 @@ class DataExportsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): DataExport => DataExportFactory::from($item), $data),
+            array_map(fn (array $item): DataExport => DataExportFactory::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -143,7 +146,7 @@ class DataExportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return DataExportFactory::from($data);
+        return DataExportFactory::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function update(
@@ -166,6 +169,6 @@ class DataExportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return DataExportFactory::from($data);
+        return DataExportFactory::from($data, ['headers' => $response->getHeaders()]);
     }
 }

@@ -70,7 +70,10 @@ final class BaseUri
         }
         $basePath .= '/';
         if ($this->organizationId) {
-            $basePath .= 'organizations/' . $this->organizationId . '/';
+            $organizationPrefix = 'organizations/' . $this->organizationId . '/';
+            if (!str_starts_with(ltrim($requestPath, '/'), $organizationPrefix)) {
+                $basePath .= $organizationPrefix;
+            }
         }
 
         return $basePath . ltrim($requestPath, '/');

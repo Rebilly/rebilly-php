@@ -18,12 +18,12 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class QuoteFactory
 {
-    public static function from(array $data = []): Quote
+    public static function from(array $data = [], array $metadata = []): Quote
     {
         return match ($data['type']) {
-            'change' => ChangeQuote::from($data),
-            'creation' => CreationQuote::from($data),
-            'reactivation' => ReactivationQuote::from($data),
+            'change' => ChangeQuote::from($data, $metadata),
+            'creation' => CreationQuote::from($data, $metadata),
+            'reactivation' => ReactivationQuote::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

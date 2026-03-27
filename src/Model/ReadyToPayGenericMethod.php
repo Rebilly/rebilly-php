@@ -14,8 +14,12 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use Rebilly\Sdk\Trait\HasMetadata;
+
 class ReadyToPayGenericMethod implements ReadyToPayMethods
 {
+    use HasMetadata;
+
     public const METHOD_CASH = 'cash';
 
     public const METHOD_CHECK = 'check';
@@ -87,8 +91,6 @@ class ReadyToPayGenericMethod implements ReadyToPayMethods
     public const METHOD_CONEKTA_OXXO = 'Conekta-oxxo';
 
     public const METHOD_CUPON_DE_PAGOS = 'Cupon-de-pagos';
-
-    public const METHOD_CRYPTOCURRENCY = 'cryptocurrency';
 
     public const METHOD_DOMESTIC_CARDS = 'domestic-cards';
 
@@ -175,6 +177,8 @@ class ReadyToPayGenericMethod implements ReadyToPayMethods
     public const METHOD_BANCONTACT_MOBILE = 'Bancontact-mobile';
 
     public const METHOD_MTS = 'MTS';
+
+    public const METHOD_MOLLIE = 'Mollie';
 
     public const METHOD_MUCH_BETTER = 'MuchBetter';
 
@@ -296,6 +300,8 @@ class ReadyToPayGenericMethod implements ReadyToPayMethods
 
     public const METHOD_VENUS_POINT = 'VenusPoint';
 
+    public const METHOD_VIVA = 'Viva';
+
     public const METHOD_VOUCHER = 'voucher';
 
     public const METHOD_VOUCHER2 = 'voucher-2';
@@ -332,7 +338,7 @@ class ReadyToPayGenericMethod implements ReadyToPayMethods
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('method', $data)) {
             $this->setMethod($data['method']);
@@ -340,11 +346,12 @@ class ReadyToPayGenericMethod implements ReadyToPayMethods
         if (array_key_exists('filters', $data)) {
             $this->setFilters($data['filters']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getMethod(): string

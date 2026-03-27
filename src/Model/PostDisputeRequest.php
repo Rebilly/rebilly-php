@@ -17,9 +17,12 @@ namespace Rebilly\Sdk\Model;
 use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class PostDisputeRequest implements JsonSerializable
 {
+    use HasMetadata;
+
     public const REASON_CODE_0 = '0';
 
     public const REASON_CODE_00 = '00';
@@ -310,6 +313,36 @@ class PostDisputeRequest implements JsonSerializable
 
     public const REASON_CODE_4999 = '4999';
 
+    public const REASON_CODE_4534 = '4534';
+
+    public const REASON_CODE_4541 = '4541';
+
+    public const REASON_CODE_4542 = '4542';
+
+    public const REASON_CODE_4550 = '4550';
+
+    public const REASON_CODE_4553 = '4553';
+
+    public const REASON_CODE_4586 = '4586';
+
+    public const REASON_CODE_4752 = '4752';
+
+    public const REASON_CODE_4753 = '4753';
+
+    public const REASON_CODE_4755 = '4755';
+
+    public const REASON_CODE_4865 = '4865';
+
+    public const REASON_CODE_4866 = '4866';
+
+    public const REASON_CODE_4867 = '4867';
+
+    public const REASON_CODE_7010 = '7010';
+
+    public const REASON_CODE_7030 = '7030';
+
+    public const REASON_CODE_8002 = '8002';
+
     public const REASON_CODE_A = 'A';
 
     public const REASON_CODE_A01 = 'A01';
@@ -576,7 +609,7 @@ class PostDisputeRequest implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('transactionId', $data)) {
             $this->setTransactionId($data['transactionId']);
@@ -608,11 +641,12 @@ class PostDisputeRequest implements JsonSerializable
         if (array_key_exists('deadlineTime', $data)) {
             $this->setDeadlineTime($data['deadlineTime']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getTransactionId(): string

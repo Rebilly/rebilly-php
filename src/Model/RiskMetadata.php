@@ -15,12 +15,15 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class RiskMetadata implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('ipAddress', $data)) {
             $this->setIpAddress($data['ipAddress']);
@@ -124,11 +127,12 @@ class RiskMetadata implements JsonSerializable
         if (array_key_exists('score', $data)) {
             $this->setScore($data['score']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getIpAddress(): ?string
@@ -360,7 +364,9 @@ class RiskMetadata implements JsonSerializable
             $data['fingerprint'] = $this->fields['fingerprint'];
         }
         if (array_key_exists('httpHeaders', $this->fields)) {
-            $data['httpHeaders'] = $this->fields['httpHeaders'];
+            $data['httpHeaders'] = $this->fields['httpHeaders'] !== null
+                ? (object) $this->fields['httpHeaders']
+                : null;
         }
         if (array_key_exists('browserData', $this->fields)) {
             $data['browserData'] = $this->fields['browserData']?->jsonSerialize();

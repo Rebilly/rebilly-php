@@ -14,18 +14,18 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-class IBANType extends BankAccountCreatePlain
+use Rebilly\Sdk\Trait\HasMetadata;
+
+class IBANType implements BankAccountCreatePlain
 {
+    use HasMetadata;
+
     public const METHOD_ACH = 'ach';
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
-        parent::__construct([
-            'accountNumberType' => 'IBAN',
-        ] + $data);
-
         if (array_key_exists('method', $data)) {
             $this->setMethod($data['method']);
         }
@@ -53,11 +53,17 @@ class IBANType extends BankAccountCreatePlain
         if (array_key_exists('useAsBackup', $data)) {
             $this->setUseAsBackup($data['useAsBackup']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
+    }
+
+    public function getAccountNumberType(): string
+    {
+        return 'IBAN';
     }
 
     public function getMethod(): string
@@ -178,7 +184,9 @@ class IBANType extends BankAccountCreatePlain
 
     public function jsonSerialize(): array
     {
-        $data = [];
+        $data = [
+            'accountNumberType' => 'IBAN',
+        ];
         if (array_key_exists('method', $this->fields)) {
             $data['method'] = $this->fields['method'];
         }
@@ -207,6 +215,6 @@ class IBANType extends BankAccountCreatePlain
             $data['useAsBackup'] = $this->fields['useAsBackup'];
         }
 
-        return parent::jsonSerialize() + $data;
+        return $data;
     }
 }

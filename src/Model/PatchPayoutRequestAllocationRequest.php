@@ -15,25 +15,29 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class PatchPayoutRequestAllocationRequest implements JsonSerializable
 {
+    use HasMetadata;
+
     public const STATUS_PROCESSING = 'processing';
 
     public const STATUS_CANCELED = 'canceled';
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('status', $data)) {
             $this->setStatus($data['status']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getStatus(): string

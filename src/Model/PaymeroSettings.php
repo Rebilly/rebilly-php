@@ -15,16 +15,19 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class PaymeroSettings implements JsonSerializable
 {
+    use HasMetadata;
+
     public const MAIN_CURRENCY_TRX = 'TRX';
 
     public const MAIN_CURRENCY_ETH = 'ETH';
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('targetCurrency', $data)) {
             $this->setTargetCurrency($data['targetCurrency']);
@@ -35,11 +38,12 @@ class PaymeroSettings implements JsonSerializable
         if (array_key_exists('amountExceeded', $data)) {
             $this->setAmountExceeded($data['amountExceeded']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getTargetCurrency(): ?string

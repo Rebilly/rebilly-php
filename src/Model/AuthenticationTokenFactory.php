@@ -18,11 +18,11 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class AuthenticationTokenFactory
 {
-    public static function from(array $data = []): AuthenticationToken
+    public static function from(array $data = [], array $metadata = []): AuthenticationToken
     {
         return match ($data['mode']) {
-            'passwordless' => AuthenticationTokenPasswordlessMode::from($data),
-            'password' => AuthenticationTokenPasswordMode::from($data),
+            'passwordless' => AuthenticationTokenPasswordlessMode::from($data, $metadata),
+            'password' => AuthenticationTokenPasswordMode::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

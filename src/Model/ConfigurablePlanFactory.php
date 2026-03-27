@@ -16,12 +16,12 @@ namespace Rebilly\Sdk\Model;
 
 class ConfigurablePlanFactory
 {
-    public static function from(array $data = []): ConfigurablePlan
+    public static function from(array $data = [], array $metadata = []): ConfigurablePlan
     {
         if (count($data) === 1 && isset($data['id'])) {
-            return OriginalPlan::from($data);
+            return OriginalPlan::from($data, $metadata);
         }
 
-        return FlexiblePlanFactory::from($data);
+        return FlexiblePlanFactory::from($data, $metadata);
     }
 }

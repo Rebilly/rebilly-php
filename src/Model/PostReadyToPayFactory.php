@@ -18,13 +18,13 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class PostReadyToPayFactory
 {
-    public static function from(array $data = []): PostReadyToPay
+    public static function from(array $data = [], array $metadata = []): PostReadyToPay
     {
         if (isset($data['amount']) || isset($data['currency'])) {
-            return ReadyToPayAmount::from($data);
+            return ReadyToPayAmount::from($data, $metadata);
         }
         if (isset($data['items'])) {
-            return ReadyToPayItems::from($data);
+            return ReadyToPayItems::from($data, $metadata);
         }
 
         throw new UnknownDiscriminatorValueException();

@@ -15,16 +15,19 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class SubscriptionPlanMeteredBilling implements JsonSerializable
 {
+    use HasMetadata;
+
     public const STRATEGY_SUM = 'sum';
 
     public const STRATEGY_LAST = 'last';
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('strategy', $data)) {
             $this->setStrategy($data['strategy']);
@@ -35,11 +38,12 @@ class SubscriptionPlanMeteredBilling implements JsonSerializable
         if (array_key_exists('max', $data)) {
             $this->setMax($data['max']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getStrategy(): string

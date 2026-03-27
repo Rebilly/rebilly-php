@@ -14,8 +14,12 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use Rebilly\Sdk\Trait\HasMetadata;
+
 class AdjustReadyToPayGeneric implements AdjustPaymentMethod
 {
+    use HasMetadata;
+
     public const PAYMENT_METHOD_CASH = 'cash';
 
     public const PAYMENT_METHOD_CHECK = 'check';
@@ -87,8 +91,6 @@ class AdjustReadyToPayGeneric implements AdjustPaymentMethod
     public const PAYMENT_METHOD_CONEKTA_OXXO = 'Conekta-oxxo';
 
     public const PAYMENT_METHOD_CUPON_DE_PAGOS = 'Cupon-de-pagos';
-
-    public const PAYMENT_METHOD_CRYPTOCURRENCY = 'cryptocurrency';
 
     public const PAYMENT_METHOD_DOMESTIC_CARDS = 'domestic-cards';
 
@@ -175,6 +177,8 @@ class AdjustReadyToPayGeneric implements AdjustPaymentMethod
     public const PAYMENT_METHOD_BANCONTACT_MOBILE = 'Bancontact-mobile';
 
     public const PAYMENT_METHOD_MTS = 'MTS';
+
+    public const PAYMENT_METHOD_MOLLIE = 'Mollie';
 
     public const PAYMENT_METHOD_MUCH_BETTER = 'MuchBetter';
 
@@ -296,6 +300,8 @@ class AdjustReadyToPayGeneric implements AdjustPaymentMethod
 
     public const PAYMENT_METHOD_VENUS_POINT = 'VenusPoint';
 
+    public const PAYMENT_METHOD_VIVA = 'Viva';
+
     public const PAYMENT_METHOD_VOUCHER = 'voucher';
 
     public const PAYMENT_METHOD_VOUCHER2 = 'voucher-2';
@@ -332,7 +338,7 @@ class AdjustReadyToPayGeneric implements AdjustPaymentMethod
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('paymentMethod', $data)) {
             $this->setPaymentMethod($data['paymentMethod']);
@@ -340,11 +346,12 @@ class AdjustReadyToPayGeneric implements AdjustPaymentMethod
         if (array_key_exists('feature', $data)) {
             $this->setFeature($data['feature']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getPaymentMethod(): string
