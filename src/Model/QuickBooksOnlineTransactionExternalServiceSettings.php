@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class QuickBooksOnlineTransactionExternalServiceSettings implements JsonSerializable
 {
+    use HasMetadata;
+
     public const SYNC_PAYMENTS_MANUALLY = 'manually';
 
     public const SYNC_PAYMENTS_ALWAYS = 'always';
@@ -28,7 +31,7 @@ class QuickBooksOnlineTransactionExternalServiceSettings implements JsonSerializ
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('syncPayments', $data)) {
             $this->setSyncPayments($data['syncPayments']);
@@ -42,11 +45,12 @@ class QuickBooksOnlineTransactionExternalServiceSettings implements JsonSerializ
         if (array_key_exists('department', $data)) {
             $this->setDepartment($data['department']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getSyncPayments(): ?string

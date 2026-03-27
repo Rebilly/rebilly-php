@@ -15,12 +15,15 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class SkrillSettings implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('merchantFields', $data)) {
             $this->setMerchantFields($data['merchantFields']);
@@ -28,11 +31,15 @@ class SkrillSettings implements JsonSerializable
         if (array_key_exists('useSPX', $data)) {
             $this->setUseSPX($data['useSPX']);
         }
+        if (array_key_exists('enableCustomerVerification', $data)) {
+            $this->setEnableCustomerVerification($data['enableCustomerVerification']);
+        }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getMerchantFields(): ?string
@@ -59,6 +66,18 @@ class SkrillSettings implements JsonSerializable
         return $this;
     }
 
+    public function getEnableCustomerVerification(): ?bool
+    {
+        return $this->fields['enableCustomerVerification'] ?? null;
+    }
+
+    public function setEnableCustomerVerification(null|bool $enableCustomerVerification): static
+    {
+        $this->fields['enableCustomerVerification'] = $enableCustomerVerification;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -67,6 +86,9 @@ class SkrillSettings implements JsonSerializable
         }
         if (array_key_exists('useSPX', $this->fields)) {
             $data['useSPX'] = $this->fields['useSPX'];
+        }
+        if (array_key_exists('enableCustomerVerification', $this->fields)) {
+            $data['enableCustomerVerification'] = $this->fields['enableCustomerVerification'];
         }
 
         return $data;

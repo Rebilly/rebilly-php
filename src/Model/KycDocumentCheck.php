@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class KycDocumentCheck implements JsonSerializable
 {
+    use HasMetadata;
+
     public const NAME_CITY = 'city';
 
     public const NAME_CONTAINS_IMAGE = 'containsImage';
@@ -62,7 +65,7 @@ class KycDocumentCheck implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('name', $data)) {
             $this->setName($data['name']);
@@ -76,11 +79,12 @@ class KycDocumentCheck implements JsonSerializable
         if (array_key_exists('reason', $data)) {
             $this->setReason($data['reason']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getName(): ?string

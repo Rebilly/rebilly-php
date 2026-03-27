@@ -44,7 +44,7 @@ class CustomersApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Customer::from($data);
+        return Customer::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function createLeadSource(
@@ -63,7 +63,7 @@ class CustomersApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return LeadSource::from($data);
+        return LeadSource::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function createTimelineComment(
@@ -82,7 +82,7 @@ class CustomersApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CustomerTimeline::from($data);
+        return CustomerTimeline::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function deleteLeadSource(
@@ -134,7 +134,7 @@ class CustomersApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Customer::from($data);
+        return Customer::from($data, ['headers' => $response->getHeaders()]);
     }
 
     /**
@@ -167,10 +167,13 @@ class CustomersApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): Customer => Customer::from($item), $data),
+            array_map(fn (array $item): Customer => Customer::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -227,10 +230,13 @@ class CustomersApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): EddSearchResult => EddSearchResult::from($item), $data),
+            array_map(fn (array $item): EddSearchResult => EddSearchResult::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -285,10 +291,13 @@ class CustomersApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): CustomerTimeline => CustomerTimeline::from($item), $data),
+            array_map(fn (array $item): CustomerTimeline => CustomerTimeline::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -333,7 +342,7 @@ class CustomersApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Edd::from($data);
+        return Edd::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getCustomerLifetimeSummaryMetrics(
@@ -351,7 +360,7 @@ class CustomersApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CustomerInformation::from($data);
+        return CustomerInformation::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getEddSearchResult(
@@ -371,7 +380,7 @@ class CustomersApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return EddSearchResult::from($data);
+        return EddSearchResult::from($data, ['headers' => $response->getHeaders()]);
     }
 
     /**
@@ -405,10 +414,13 @@ class CustomersApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): EddTimeline => EddTimeline::from($item), $data),
+            array_map(fn (array $item): EddTimeline => EddTimeline::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -455,7 +467,7 @@ class CustomersApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return EddTimeline::from($data);
+        return EddTimeline::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getLeadSource(
@@ -473,7 +485,7 @@ class CustomersApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return LeadSource::from($data);
+        return LeadSource::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getTimelineMessage(
@@ -493,7 +505,7 @@ class CustomersApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CustomerTimeline::from($data);
+        return CustomerTimeline::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function merge(
@@ -529,6 +541,6 @@ class CustomersApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Customer::from($data);
+        return Customer::from($data, ['headers' => $response->getHeaders()]);
     }
 }

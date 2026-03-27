@@ -15,16 +15,19 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class PaymentMethodMetadata implements JsonSerializable
 {
+    use HasMetadata;
+
     public const RELEVANT_BUSINESS_MODELS_B2_B = 'B2B';
 
     public const RELEVANT_BUSINESS_MODELS_B2_C = 'B2C';
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('apiName', $data)) {
             $this->setApiName($data['apiName']);
@@ -77,11 +80,12 @@ class PaymentMethodMetadata implements JsonSerializable
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getApiName(): string

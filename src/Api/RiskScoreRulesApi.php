@@ -36,7 +36,7 @@ class RiskScoreRulesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return RiskScoreRules::from($data);
+        return RiskScoreRules::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getAllBlocklistRules(): RiskScoreBlocklist
@@ -49,7 +49,7 @@ class RiskScoreRulesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return RiskScoreBlocklist::from($data);
+        return RiskScoreBlocklist::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function updateRiskScoreBlocklistRules(
@@ -63,7 +63,7 @@ class RiskScoreRulesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return RiskScoreBlocklist::from($data);
+        return RiskScoreBlocklist::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function updateRiskScoreRules(
@@ -77,6 +77,6 @@ class RiskScoreRulesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return RiskScoreRules::from($data);
+        return RiskScoreRules::from($data, ['headers' => $response->getHeaders()]);
     }
 }

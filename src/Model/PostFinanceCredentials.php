@@ -15,12 +15,15 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class PostFinanceCredentials implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('pspId', $data)) {
             $this->setPspId($data['pspId']);
@@ -46,11 +49,12 @@ class PostFinanceCredentials implements JsonSerializable
         if (array_key_exists('sftpKeyPassphrase', $data)) {
             $this->setSftpKeyPassphrase($data['sftpKeyPassphrase']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getPspId(): string

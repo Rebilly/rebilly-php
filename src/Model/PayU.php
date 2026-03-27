@@ -14,15 +14,19 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use Rebilly\Sdk\Trait\HasMetadata;
+
 class PayU extends GatewayAccount
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         parent::__construct([
             'gatewayName' => 'PayU',
-        ] + $data);
+        ] + $data, $metadata);
 
         if (array_key_exists('credentials', $data)) {
             $this->setCredentials($data['credentials']);
@@ -30,11 +34,12 @@ class PayU extends GatewayAccount
         if (array_key_exists('threeDSecureServer', $data)) {
             $this->setThreeDSecureServer($data['threeDSecureServer']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getCredentials(): PayUCredentials

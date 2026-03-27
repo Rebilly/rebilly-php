@@ -14,11 +14,15 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use Rebilly\Sdk\Trait\HasMetadata;
+
 class KlarnaFeature implements ReadyToPayKlarnaMethodFeature
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('clientToken', $data)) {
             $this->setClientToken($data['clientToken']);
@@ -26,11 +30,12 @@ class KlarnaFeature implements ReadyToPayKlarnaMethodFeature
         if (array_key_exists('sessionId', $data)) {
             $this->setSessionId($data['sessionId']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getName(): string

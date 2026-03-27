@@ -17,9 +17,12 @@ namespace Rebilly\Sdk\Model;
 use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class GetPayoutRequestV2PaymentInstrumentsResponse implements JsonSerializable
 {
+    use HasMetadata;
+
     public const GATEWAY_NAME_A1_GATEWAY = 'A1Gateway';
 
     public const GATEWAY_NAME_ACI = 'ACI';
@@ -244,6 +247,8 @@ class GetPayoutRequestV2PaymentInstrumentsResponse implements JsonSerializable
 
     public const GATEWAY_NAME_MI_FINITY = 'MiFinity';
 
+    public const GATEWAY_NAME_MOLLIE = 'Mollie';
+
     public const GATEWAY_NAME_MOBILE_PAY = 'MobilePay';
 
     public const GATEWAY_NAME_MONERIS = 'Moneris';
@@ -448,6 +453,8 @@ class GetPayoutRequestV2PaymentInstrumentsResponse implements JsonSerializable
 
     public const GATEWAY_NAME_VEGA_WALLET = 'VegaWallet';
 
+    public const GATEWAY_NAME_VIVA = 'Viva';
+
     public const GATEWAY_NAME_WALLET88 = 'Wallet88';
 
     public const GATEWAY_NAME_WALPAY = 'Walpay';
@@ -466,9 +473,17 @@ class GetPayoutRequestV2PaymentInstrumentsResponse implements JsonSerializable
 
     public const GATEWAY_NAME_ZOTAPAY = 'Zotapay';
 
+    public const GATEWAY_PAYOUT_INSTRUCTION_ALL = 'all';
+
+    public const GATEWAY_PAYOUT_INSTRUCTION_COVERED_PAYOUT = 'covered-payout';
+
+    public const GATEWAY_PAYOUT_INSTRUCTION_APPROVED_PAYMENT = 'approved-payment';
+
+    public const GATEWAY_PAYOUT_INSTRUCTION_NONE = 'none';
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('paymentInstrumentId', $data)) {
             $this->setPaymentInstrumentId($data['paymentInstrumentId']);
@@ -478,6 +493,9 @@ class GetPayoutRequestV2PaymentInstrumentsResponse implements JsonSerializable
         }
         if (array_key_exists('gatewayAccountId', $data)) {
             $this->setGatewayAccountId($data['gatewayAccountId']);
+        }
+        if (array_key_exists('gatewayPayoutInstruction', $data)) {
+            $this->setGatewayPayoutInstruction($data['gatewayPayoutInstruction']);
         }
         if (array_key_exists('exposureAmount', $data)) {
             $this->setExposureAmount($data['exposureAmount']);
@@ -491,11 +509,12 @@ class GetPayoutRequestV2PaymentInstrumentsResponse implements JsonSerializable
         if (array_key_exists('lastPayoutTime', $data)) {
             $this->setLastPayoutTime($data['lastPayoutTime']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getPaymentInstrumentId(): ?string
@@ -530,6 +549,18 @@ class GetPayoutRequestV2PaymentInstrumentsResponse implements JsonSerializable
     public function setGatewayAccountId(null|string $gatewayAccountId): static
     {
         $this->fields['gatewayAccountId'] = $gatewayAccountId;
+
+        return $this;
+    }
+
+    public function getGatewayPayoutInstruction(): ?string
+    {
+        return $this->fields['gatewayPayoutInstruction'] ?? null;
+    }
+
+    public function setGatewayPayoutInstruction(null|string $gatewayPayoutInstruction): static
+    {
+        $this->fields['gatewayPayoutInstruction'] = $gatewayPayoutInstruction;
 
         return $this;
     }
@@ -609,6 +640,9 @@ class GetPayoutRequestV2PaymentInstrumentsResponse implements JsonSerializable
         }
         if (array_key_exists('gatewayAccountId', $this->fields)) {
             $data['gatewayAccountId'] = $this->fields['gatewayAccountId'];
+        }
+        if (array_key_exists('gatewayPayoutInstruction', $this->fields)) {
+            $data['gatewayPayoutInstruction'] = $this->fields['gatewayPayoutInstruction'];
         }
         if (array_key_exists('exposureAmount', $this->fields)) {
             $data['exposureAmount'] = $this->fields['exposureAmount'];

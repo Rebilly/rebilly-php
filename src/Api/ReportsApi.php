@@ -26,6 +26,8 @@ use Rebilly\Sdk\Model\FutureRenewals;
 use Rebilly\Sdk\Model\GetKycAcceptanceSummaryReportResponse;
 use Rebilly\Sdk\Model\JournalSummaryReport;
 use Rebilly\Sdk\Model\RenewalSales;
+use Rebilly\Sdk\Model\ReportAmlChecks;
+use Rebilly\Sdk\Model\ReportAmlChecksInheritedSummary;
 use Rebilly\Sdk\Model\ReportAnnualRecurringRevenue;
 use Rebilly\Sdk\Model\ReportDeclinedTransactions;
 use Rebilly\Sdk\Model\ReportDeferredRevenue;
@@ -52,6 +54,52 @@ class ReportsApi
     {
     }
 
+    public function getAmlChecks(
+        ?DateTimeImmutable $periodStart = null,
+        ?DateTimeImmutable $periodEnd = null,
+        ?string $metric = null,
+        ?bool $includePropagatedResults = null,
+        ?string $filter = null,
+    ): ReportAmlChecks {
+        $queryParams = [
+            'periodStart' => $periodStart->format('Y-m-d\TH:i:s\Z'),
+            'periodEnd' => $periodEnd->format('Y-m-d\TH:i:s\Z'),
+            'metric' => $metric,
+            'includePropagatedResults' => $includePropagatedResults,
+            'filter' => $filter,
+        ];
+        $uri = '/experimental/reports/aml-checks?' . http_build_query($queryParams);
+
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return ReportAmlChecks::from($data, ['headers' => $response->getHeaders()]);
+    }
+
+    public function getAmlChecksInheritedSummary(
+        ?DateTimeImmutable $periodStart = null,
+        ?DateTimeImmutable $periodEnd = null,
+        ?string $filter = null,
+    ): ReportAmlChecksInheritedSummary {
+        $queryParams = [
+            'periodStart' => $periodStart->format('Y-m-d\TH:i:s\Z'),
+            'periodEnd' => $periodEnd->format('Y-m-d\TH:i:s\Z'),
+            'filter' => $filter,
+        ];
+        $uri = '/experimental/reports/aml-checks-inherited-summary?' . http_build_query($queryParams);
+
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return ReportAmlChecksInheritedSummary::from($data, ['headers' => $response->getHeaders()]);
+    }
+
     public function getAnnualRecurringRevenue(
         string $currency,
         string $periodStart,
@@ -74,7 +122,7 @@ class ReportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ReportAnnualRecurringRevenue::from($data);
+        return ReportAnnualRecurringRevenue::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getApiLogSummary(
@@ -99,7 +147,7 @@ class ReportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ApiLogSummary::from($data);
+        return ApiLogSummary::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getCumulativeSubscriptions(
@@ -126,7 +174,7 @@ class ReportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CumulativeSubscriptions::from($data);
+        return CumulativeSubscriptions::from($data, ['headers' => $response->getHeaders()]);
     }
 
     /**
@@ -152,7 +200,7 @@ class ReportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): DashboardResponse => DashboardResponse::from($item), $data);
+        return array_map(fn (array $item): DashboardResponse => DashboardResponse::from($item, ['headers' => $response->getHeaders()]), $data);
     }
 
     public function getDccMarkup(
@@ -179,7 +227,7 @@ class ReportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return DccMarkup::from($data);
+        return DccMarkup::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getDeclinedTransactions(
@@ -206,7 +254,7 @@ class ReportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ReportDeclinedTransactions::from($data);
+        return ReportDeclinedTransactions::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getDeferredRevenue(
@@ -231,7 +279,7 @@ class ReportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ReportDeferredRevenue::from($data);
+        return ReportDeferredRevenue::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getDisputes(
@@ -256,7 +304,7 @@ class ReportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ReportDisputes::from($data);
+        return ReportDisputes::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getEventsTriggeredSummary(
@@ -279,7 +327,7 @@ class ReportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ReportEventsTriggeredSummary::from($data);
+        return ReportEventsTriggeredSummary::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getFutureRenewals(
@@ -302,7 +350,7 @@ class ReportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return FutureRenewals::from($data);
+        return FutureRenewals::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getJournal(
@@ -333,7 +381,7 @@ class ReportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ReportJournal::from($data);
+        return ReportJournal::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getJournalSummary(
@@ -360,7 +408,7 @@ class ReportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return JournalSummaryReport::from($data);
+        return JournalSummaryReport::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getKycAcceptanceSummary(
@@ -379,12 +427,12 @@ class ReportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return GetKycAcceptanceSummaryReportResponse::from($data);
+        return GetKycAcceptanceSummaryReportResponse::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getKycRejectionSummary(
-        DateTimeImmutable $periodStart,
-        DateTimeImmutable $periodEnd,
+        ?DateTimeImmutable $periodStart = null,
+        ?DateTimeImmutable $periodEnd = null,
     ): ReportKycRejections {
         $queryParams = [
             'periodStart' => $periodStart->format('Y-m-d\TH:i:s\Z'),
@@ -398,12 +446,12 @@ class ReportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ReportKycRejections::from($data);
+        return ReportKycRejections::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getKycRequestSummary(
-        DateTimeImmutable $periodStart,
-        DateTimeImmutable $periodEnd,
+        ?DateTimeImmutable $periodStart = null,
+        ?DateTimeImmutable $periodEnd = null,
     ): ReportKycRequests {
         $queryParams = [
             'periodStart' => $periodStart->format('Y-m-d\TH:i:s\Z'),
@@ -417,7 +465,7 @@ class ReportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ReportKycRequests::from($data);
+        return ReportKycRequests::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getMonthlyRecurringRevenue(
@@ -442,7 +490,7 @@ class ReportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ReportMonthlyRecurringRevenue::from($data);
+        return ReportMonthlyRecurringRevenue::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getRenewalSales(
@@ -465,7 +513,7 @@ class ReportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return RenewalSales::from($data);
+        return RenewalSales::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getRetentionPercentage(
@@ -498,7 +546,7 @@ class ReportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ReportRetentionPercentage::from($data);
+        return ReportRetentionPercentage::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getRetentionValue(
@@ -535,7 +583,7 @@ class ReportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ReportRetentionValue::from($data);
+        return ReportRetentionValue::from($data, ['headers' => $response->getHeaders()]);
     }
 
     /**
@@ -561,7 +609,7 @@ class ReportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): ReportRevenueWaterfall => ReportRevenueWaterfall::from($item), $data);
+        return array_map(fn (array $item): ReportRevenueWaterfall => ReportRevenueWaterfall::from($item, ['headers' => $response->getHeaders()]), $data);
     }
 
     public function getSubscriptionCancellation(
@@ -588,7 +636,7 @@ class ReportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return SubscriptionCancellationReport::from($data);
+        return SubscriptionCancellationReport::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getSubscriptionRenewal(
@@ -611,7 +659,7 @@ class ReportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return SubscriptionRenewal::from($data);
+        return SubscriptionRenewal::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getTax(
@@ -636,7 +684,7 @@ class ReportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ReportTax::from($data);
+        return ReportTax::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getTimeSeriesTransaction(
@@ -663,7 +711,7 @@ class ReportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return TimeSeriesTransaction::from($data);
+        return TimeSeriesTransaction::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getTransactions(
@@ -690,7 +738,7 @@ class ReportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ReportTransactions::from($data);
+        return ReportTransactions::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getTransactionsTimeDispute(
@@ -717,7 +765,7 @@ class ReportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ReportDisputeDelays::from($data);
+        return ReportDisputeDelays::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getTriggeredEventRuleReport(
@@ -745,6 +793,6 @@ class ReportsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ReportRulesMatchedSummary::from($data);
+        return ReportRulesMatchedSummary::from($data, ['headers' => $response->getHeaders()]);
     }
 }

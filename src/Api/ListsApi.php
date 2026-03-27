@@ -38,7 +38,7 @@ class ListsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ValueList::from($data);
+        return ValueList::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function delete(
@@ -82,10 +82,13 @@ class ListsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): ValueList => ValueList::from($item), $data),
+            array_map(fn (array $item): ValueList => ValueList::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -132,7 +135,7 @@ class ListsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ValueList::from($data);
+        return ValueList::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getLatestVersion(
@@ -150,7 +153,7 @@ class ListsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ValueList::from($data);
+        return ValueList::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function update(
@@ -169,6 +172,6 @@ class ListsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ValueList::from($data);
+        return ValueList::from($data, ['headers' => $response->getHeaders()]);
     }
 }

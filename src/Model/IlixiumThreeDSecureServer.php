@@ -15,23 +15,27 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class IlixiumThreeDSecureServer implements JsonSerializable
 {
+    use HasMetadata;
+
     public const NAME_ILIXIUM3_DS_SERVER = 'Ilixium3dsServer';
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('name', $data)) {
             $this->setName($data['name']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getName(): ?string

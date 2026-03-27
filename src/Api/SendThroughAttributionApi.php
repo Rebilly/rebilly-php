@@ -43,6 +43,6 @@ class SendThroughAttributionApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): SendThroughAttribution => SendThroughAttribution::from($item), $data);
+        return array_map(fn (array $item): SendThroughAttribution => SendThroughAttribution::from($item, ['headers' => $response->getHeaders()]), $data);
     }
 }

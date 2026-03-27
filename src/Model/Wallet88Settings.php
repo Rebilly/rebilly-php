@@ -15,25 +15,29 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class Wallet88Settings implements JsonSerializable
 {
+    use HasMetadata;
+
     public const PAYMENT_CARD_METHOD_CREDITCARD = 'creditcard';
 
     public const PAYMENT_CARD_METHOD_MASTERCARD = 'mastercard';
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('paymentCardMethod', $data)) {
             $this->setPaymentCardMethod($data['paymentCardMethod']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getPaymentCardMethod(): ?string

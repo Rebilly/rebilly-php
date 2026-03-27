@@ -15,12 +15,15 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class VegaWalletCredentials implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('merchantId', $data)) {
             $this->setMerchantId($data['merchantId']);
@@ -28,11 +31,15 @@ class VegaWalletCredentials implements JsonSerializable
         if (array_key_exists('password', $data)) {
             $this->setPassword($data['password']);
         }
+        if (array_key_exists('payoutPassword', $data)) {
+            $this->setPayoutPassword($data['payoutPassword']);
+        }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getMerchantId(): string
@@ -59,6 +66,18 @@ class VegaWalletCredentials implements JsonSerializable
         return $this;
     }
 
+    public function getPayoutPassword(): ?string
+    {
+        return $this->fields['payoutPassword'] ?? null;
+    }
+
+    public function setPayoutPassword(null|string $payoutPassword): static
+    {
+        $this->fields['payoutPassword'] = $payoutPassword;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -67,6 +86,9 @@ class VegaWalletCredentials implements JsonSerializable
         }
         if (array_key_exists('password', $this->fields)) {
             $data['password'] = $this->fields['password'];
+        }
+        if (array_key_exists('payoutPassword', $this->fields)) {
+            $data['payoutPassword'] = $this->fields['payoutPassword'];
         }
 
         return $data;

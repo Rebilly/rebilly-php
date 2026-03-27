@@ -15,16 +15,19 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class ParamountInteracSettings implements JsonSerializable
 {
+    use HasMetadata;
+
     public const PAYMENT_FLOW_REQUEST_MONEY = 'request_money';
 
     public const PAYMENT_FLOW_MANUAL = 'manual';
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('sandbox', $data)) {
             $this->setSandbox($data['sandbox']);
@@ -44,11 +47,12 @@ class ParamountInteracSettings implements JsonSerializable
         if (array_key_exists('paymentFlow', $data)) {
             $this->setPaymentFlow($data['paymentFlow']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getSandbox(): ?bool

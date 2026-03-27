@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class FinTecSystemsSettings implements JsonSerializable
 {
+    use HasMetadata;
+
     public const RECIPIENT_COUNTRY_AT = 'AT';
 
     public const RECIPIENT_COUNTRY_CH = 'CH';
@@ -26,7 +29,7 @@ class FinTecSystemsSettings implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('recipientIBAN', $data)) {
             $this->setRecipientIBAN($data['recipientIBAN']);
@@ -40,11 +43,12 @@ class FinTecSystemsSettings implements JsonSerializable
         if (array_key_exists('recipientHolder', $data)) {
             $this->setRecipientHolder($data['recipientHolder']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getRecipientIBAN(): string

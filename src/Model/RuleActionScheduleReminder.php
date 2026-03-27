@@ -14,8 +14,12 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use Rebilly\Sdk\Trait\HasMetadata;
+
 class RuleActionScheduleReminder extends RuleAction
 {
+    use HasMetadata;
+
     public const ROLE_ALL = 'all';
 
     public const ROLE_RENEWAL = 'renewal';
@@ -24,11 +28,11 @@ class RuleActionScheduleReminder extends RuleAction
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         parent::__construct([
             'name' => 'schedule-reminder',
-        ] + $data);
+        ] + $data, $metadata);
 
         if (array_key_exists('role', $data)) {
             $this->setRole($data['role']);
@@ -36,11 +40,12 @@ class RuleActionScheduleReminder extends RuleAction
         if (array_key_exists('schedule', $data)) {
             $this->setSchedule($data['schedule']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getRole(): string

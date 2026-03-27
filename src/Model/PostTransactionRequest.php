@@ -17,9 +17,12 @@ namespace Rebilly\Sdk\Model;
 use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class PostTransactionRequest implements JsonSerializable
 {
+    use HasMetadata;
+
     public const TYPE_SALE = 'sale';
 
     public const TYPE_AUTHORIZE = 'authorize';
@@ -28,7 +31,7 @@ class PostTransactionRequest implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('upsertCustomer', $data)) {
             $this->setUpsertCustomer($data['upsertCustomer']);
@@ -90,11 +93,12 @@ class PostTransactionRequest implements JsonSerializable
         if (array_key_exists('processedTime', $data)) {
             $this->setProcessedTime($data['processedTime']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getUpsertCustomer(): ?bool

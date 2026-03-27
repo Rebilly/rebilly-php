@@ -14,8 +14,12 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use Rebilly\Sdk\Trait\HasMetadata;
+
 class ShowEddSearchLogsTimelineAction implements TimelineAction
 {
+    use HasMetadata;
+
     public const TYPE_ARREST = 'arrest';
 
     public const TYPE_BANKRUPTCY = 'bankruptcy';
@@ -26,7 +30,7 @@ class ShowEddSearchLogsTimelineAction implements TimelineAction
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('searchLogId', $data)) {
             $this->setSearchLogId($data['searchLogId']);
@@ -34,11 +38,12 @@ class ShowEddSearchLogsTimelineAction implements TimelineAction
         if (array_key_exists('type', $data)) {
             $this->setType($data['type']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getAction(): string

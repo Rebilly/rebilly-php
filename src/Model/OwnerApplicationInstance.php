@@ -17,9 +17,12 @@ namespace Rebilly\Sdk\Model;
 use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class OwnerApplicationInstance implements JsonSerializable
 {
+    use HasMetadata;
+
     public const STATUS_ENABLING = 'enabling';
 
     public const STATUS_ENABLED = 'enabled';
@@ -30,7 +33,7 @@ class OwnerApplicationInstance implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('status', $data)) {
             $this->setStatus($data['status']);
@@ -56,11 +59,12 @@ class OwnerApplicationInstance implements JsonSerializable
         if (array_key_exists('token', $data)) {
             $this->setToken($data['token']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getStatus(): ?string
@@ -119,7 +123,9 @@ class OwnerApplicationInstance implements JsonSerializable
             $data['isConfigured'] = $this->fields['isConfigured'];
         }
         if (array_key_exists('settings', $this->fields)) {
-            $data['settings'] = $this->fields['settings'];
+            $data['settings'] = $this->fields['settings'] !== null
+                ? (object) $this->fields['settings']
+                : null;
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);

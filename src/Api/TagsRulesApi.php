@@ -38,7 +38,7 @@ class TagsRulesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return TagUntagRule::from($data);
+        return TagUntagRule::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function delete(
@@ -69,7 +69,7 @@ class TagsRulesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return TagUntagRule::from($data);
+        return TagUntagRule::from($data, ['headers' => $response->getHeaders()]);
     }
 
     /**
@@ -98,10 +98,13 @@ class TagsRulesApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): TagUntagRule => TagUntagRule::from($item), $data),
+            array_map(fn (array $item): TagUntagRule => TagUntagRule::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -145,6 +148,6 @@ class TagsRulesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return TagUntagRule::from($data);
+        return TagUntagRule::from($data, ['headers' => $response->getHeaders()]);
     }
 }

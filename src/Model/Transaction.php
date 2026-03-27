@@ -17,9 +17,12 @@ namespace Rebilly\Sdk\Model;
 use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class Transaction implements JsonSerializable
 {
+    use HasMetadata;
+
     public const TYPE_3_DS_AUTHENTICATION = '3ds-authentication';
 
     public const TYPE_AUTHORIZE = 'authorize';
@@ -300,6 +303,8 @@ class Transaction implements JsonSerializable
 
     public const GATEWAY_NAME_MI_FINITY = 'MiFinity';
 
+    public const GATEWAY_NAME_MOLLIE = 'Mollie';
+
     public const GATEWAY_NAME_MOBILE_PAY = 'MobilePay';
 
     public const GATEWAY_NAME_MONERIS = 'Moneris';
@@ -503,6 +508,8 @@ class Transaction implements JsonSerializable
     public const GATEWAY_NAME_V_CREDITOS = 'VCreditos';
 
     public const GATEWAY_NAME_VEGA_WALLET = 'VegaWallet';
+
+    public const GATEWAY_NAME_VIVA = 'Viva';
 
     public const GATEWAY_NAME_WALLET88 = 'Wallet88';
 
@@ -940,16 +947,6 @@ class Transaction implements JsonSerializable
 
     public const ACQUIRER_NAME_ZOTAPAY = 'Zotapay';
 
-    public const METHOD_PAYMENT_CARD = 'payment-card';
-
-    public const METHOD_ACH = 'ach';
-
-    public const METHOD_CASH = 'cash';
-
-    public const METHOD_CHECK = 'check';
-
-    public const METHOD_PAYPAL = 'paypal';
-
     public const METHOD_ADV_CASH = 'AdvCash';
 
     public const METHOD_AERA = 'Aera';
@@ -1144,6 +1141,8 @@ class Transaction implements JsonSerializable
 
     public const METHOD_MOBILE_PAY = 'MobilePay';
 
+    public const METHOD_MOLLIE = 'Mollie';
+
     public const METHOD_MULTIBANCO = 'Multibanco';
 
     public const METHOD_BANCONTACT = 'Bancontact';
@@ -1298,6 +1297,8 @@ class Transaction implements JsonSerializable
 
     public const METHOD_VENUS_POINT = 'VenusPoint';
 
+    public const METHOD_VIVA = 'Viva';
+
     public const METHOD_VOUCHER = 'voucher';
 
     public const METHOD_VOUCHER2 = 'voucher-2';
@@ -1346,7 +1347,7 @@ class Transaction implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
@@ -1543,6 +1544,9 @@ class Transaction implements JsonSerializable
         if (array_key_exists('depositRequestId', $data)) {
             $this->setDepositRequestId($data['depositRequestId']);
         }
+        if (array_key_exists('transferId', $data)) {
+            $this->setTransferId($data['transferId']);
+        }
         if (array_key_exists('payoutRequestId', $data)) {
             $this->setPayoutRequestId($data['payoutRequestId']);
         }
@@ -1552,11 +1556,12 @@ class Transaction implements JsonSerializable
         if (array_key_exists('_embedded', $data)) {
             $this->setEmbedded($data['_embedded']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getId(): ?string
@@ -2060,6 +2065,11 @@ class Transaction implements JsonSerializable
         return $this->fields['depositRequestId'] ?? null;
     }
 
+    public function getTransferId(): ?string
+    {
+        return $this->fields['transferId'] ?? null;
+    }
+
     public function getPayoutRequestId(): ?string
     {
         return $this->fields['payoutRequestId'] ?? null;
@@ -2216,7 +2226,9 @@ class Transaction implements JsonSerializable
             $data['revision'] = $this->fields['revision'];
         }
         if (array_key_exists('referenceData', $this->fields)) {
-            $data['referenceData'] = $this->fields['referenceData'];
+            $data['referenceData'] = $this->fields['referenceData'] !== null
+                ? (object) $this->fields['referenceData']
+                : null;
         }
         if (array_key_exists('bin', $this->fields)) {
             $data['bin'] = $this->fields['bin'];
@@ -2286,6 +2298,9 @@ class Transaction implements JsonSerializable
         }
         if (array_key_exists('depositRequestId', $this->fields)) {
             $data['depositRequestId'] = $this->fields['depositRequestId'];
+        }
+        if (array_key_exists('transferId', $this->fields)) {
+            $data['transferId'] = $this->fields['transferId'];
         }
         if (array_key_exists('payoutRequestId', $this->fields)) {
             $data['payoutRequestId'] = $this->fields['payoutRequestId'];
@@ -2678,6 +2693,13 @@ class Transaction implements JsonSerializable
     private function setDepositRequestId(null|string $depositRequestId): static
     {
         $this->fields['depositRequestId'] = $depositRequestId;
+
+        return $this;
+    }
+
+    private function setTransferId(null|string $transferId): static
+    {
+        $this->fields['transferId'] = $transferId;
 
         return $this;
     }

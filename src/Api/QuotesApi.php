@@ -46,7 +46,7 @@ class QuotesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return QuoteFactory::from($data);
+        return QuoteFactory::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function cancel(
@@ -64,7 +64,7 @@ class QuotesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return QuoteFactory::from($data);
+        return QuoteFactory::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function create(
@@ -78,7 +78,7 @@ class QuotesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return QuoteFactory::from($data);
+        return QuoteFactory::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function createTimelineComment(
@@ -97,7 +97,7 @@ class QuotesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return QuoteTimeline::from($data);
+        return QuoteTimeline::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function deleteTimelineMessage(
@@ -134,7 +134,7 @@ class QuotesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return QuoteFactory::from($data);
+        return QuoteFactory::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getPdf(
@@ -184,10 +184,13 @@ class QuotesApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): Quote => QuoteFactory::from($item), $data),
+            array_map(fn (array $item): Quote => QuoteFactory::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -246,10 +249,13 @@ class QuotesApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): QuoteTimeline => QuoteTimeline::from($item), $data),
+            array_map(fn (array $item): QuoteTimeline => QuoteTimeline::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -296,7 +302,7 @@ class QuotesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return QuoteTimeline::from($data);
+        return QuoteTimeline::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function issue(
@@ -314,7 +320,7 @@ class QuotesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return QuoteFactory::from($data);
+        return QuoteFactory::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function patch(
@@ -333,7 +339,7 @@ class QuotesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return QuoteFactory::from($data);
+        return QuoteFactory::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function recall(
@@ -351,7 +357,7 @@ class QuotesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return QuoteFactory::from($data);
+        return QuoteFactory::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function reject(
@@ -369,7 +375,7 @@ class QuotesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return QuoteFactory::from($data);
+        return QuoteFactory::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function update(
@@ -388,6 +394,6 @@ class QuotesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return QuoteFactory::from($data);
+        return QuoteFactory::from($data, ['headers' => $response->getHeaders()]);
     }
 }

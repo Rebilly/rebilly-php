@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class IpayOptionsSettings implements JsonSerializable
 {
+    use HasMetadata;
+
     public const SUBDOMAIN_MIGLITE = 'miglite';
 
     public const SUBDOMAIN_W88_ASIAPAY = 'w88asiapay';
@@ -36,7 +39,7 @@ class IpayOptionsSettings implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('extraStep', $data)) {
             $this->setExtraStep($data['extraStep']);
@@ -50,11 +53,12 @@ class IpayOptionsSettings implements JsonSerializable
         if (array_key_exists('cardType', $data)) {
             $this->setCardType($data['cardType']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getExtraStep(): ?bool

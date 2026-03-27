@@ -15,12 +15,15 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class OrderItemUpdate implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('quantityFilled', $data)) {
             $this->setQuantityFilled($data['quantityFilled']);
@@ -28,19 +31,23 @@ class OrderItemUpdate implements JsonSerializable
         if (array_key_exists('excludeFromMrr', $data)) {
             $this->setExcludeFromMrr($data['excludeFromMrr']);
         }
+        if (array_key_exists('plan', $data)) {
+            $this->setPlan($data['plan']);
+        }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
-    public function getQuantityFilled(): float
+    public function getQuantityFilled(): ?float
     {
-        return $this->fields['quantityFilled'];
+        return $this->fields['quantityFilled'] ?? null;
     }
 
-    public function setQuantityFilled(float|string $quantityFilled): static
+    public function setQuantityFilled(null|float|string $quantityFilled): static
     {
         if (is_string($quantityFilled)) {
             $quantityFilled = (float) $quantityFilled;
@@ -63,6 +70,22 @@ class OrderItemUpdate implements JsonSerializable
         return $this;
     }
 
+    public function getPlan(): ?OrderItemUpdatePlan
+    {
+        return $this->fields['plan'] ?? null;
+    }
+
+    public function setPlan(null|OrderItemUpdatePlan|array $plan): static
+    {
+        if ($plan !== null && !($plan instanceof OrderItemUpdatePlan)) {
+            $plan = OrderItemUpdatePlan::from($plan);
+        }
+
+        $this->fields['plan'] = $plan;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -71,6 +94,9 @@ class OrderItemUpdate implements JsonSerializable
         }
         if (array_key_exists('excludeFromMrr', $this->fields)) {
             $data['excludeFromMrr'] = $this->fields['excludeFromMrr'];
+        }
+        if (array_key_exists('plan', $this->fields)) {
+            $data['plan'] = $this->fields['plan']?->jsonSerialize();
         }
 
         return $data;

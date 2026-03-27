@@ -14,8 +14,12 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use Rebilly\Sdk\Trait\HasMetadata;
+
 class RuleActionAddBlockList extends RuleAction
 {
+    use HasMetadata;
+
     public const TYPE_CUSTOMER_ID = 'customer-id';
 
     public const TYPE_EMAIL = 'email';
@@ -28,11 +32,11 @@ class RuleActionAddBlockList extends RuleAction
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         parent::__construct([
             'name' => 'blocklist',
-        ] + $data);
+        ] + $data, $metadata);
 
         if (array_key_exists('type', $data)) {
             $this->setType($data['type']);
@@ -40,11 +44,12 @@ class RuleActionAddBlockList extends RuleAction
         if (array_key_exists('ttl', $data)) {
             $this->setTtl($data['ttl']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getType(): string

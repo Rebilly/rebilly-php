@@ -14,15 +14,20 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use Rebilly\Sdk\Trait\HasMetadata;
+
 class SchedulingMethodAuto implements ScheduleInstruction
 {
-    public function __construct(array $data = [])
+    use HasMetadata;
+
+    public function __construct(array $data = [], array $metadata = [])
     {
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getMethod(): string

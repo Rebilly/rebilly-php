@@ -35,6 +35,6 @@ class StatusApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return Status::from($data);
+        return Status::from($data, ['headers' => $response->getHeaders()]);
     }
 }

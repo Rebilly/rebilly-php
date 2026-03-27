@@ -42,7 +42,7 @@ class PaymentMethodsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return PaymentMethodMetadata::from($data);
+        return PaymentMethodMetadata::from($data, ['headers' => $response->getHeaders()]);
     }
 
     /**
@@ -65,10 +65,13 @@ class PaymentMethodsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): PaymentMethodMetadata => PaymentMethodMetadata::from($item), $data),
+            array_map(fn (array $item): PaymentMethodMetadata => PaymentMethodMetadata::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 

@@ -14,11 +14,15 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use Rebilly\Sdk\Trait\HasMetadata;
+
 class RiskScoreBracketBrackets1 implements RiskScoreBracketBrackets
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('start', $data)) {
             $this->setStart($data['start']);
@@ -29,11 +33,12 @@ class RiskScoreBracketBrackets1 implements RiskScoreBracketBrackets
         if (array_key_exists('value', $data)) {
             $this->setValue($data['value']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getStart(): ?int

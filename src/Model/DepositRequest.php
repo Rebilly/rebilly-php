@@ -17,9 +17,12 @@ namespace Rebilly\Sdk\Model;
 use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class DepositRequest implements JsonSerializable
 {
+    use HasMetadata;
+
     public const STATUS_CREATED = 'created';
 
     public const STATUS_PENDING = 'pending';
@@ -34,7 +37,7 @@ class DepositRequest implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
@@ -96,11 +99,12 @@ class DepositRequest implements JsonSerializable
         if (array_key_exists('_embedded', $data)) {
             $this->setEmbedded($data['_embedded']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getId(): ?string
@@ -366,7 +370,9 @@ class DepositRequest implements JsonSerializable
             $data['propertiesSchema'] = $this->fields['propertiesSchema'];
         }
         if (array_key_exists('properties', $this->fields)) {
-            $data['properties'] = $this->fields['properties'];
+            $data['properties'] = $this->fields['properties'] !== null
+                ? (object) $this->fields['properties']
+                : null;
         }
         if (array_key_exists('notificationUrl', $this->fields)) {
             $data['notificationUrl'] = $this->fields['notificationUrl'];

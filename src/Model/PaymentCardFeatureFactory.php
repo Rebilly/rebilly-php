@@ -18,12 +18,12 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class PaymentCardFeatureFactory
 {
-    public static function from(array $data = []): PaymentCardFeature
+    public static function from(array $data = [], array $metadata = []): PaymentCardFeature
     {
         return match ($data['name']) {
-            'Apple Pay' => ApplePayFeature::from($data),
-            'Google Pay' => GooglePayFeature::from($data),
-            'Samsung Pay' => SamsungPayFeature::from($data),
+            'Apple Pay' => ApplePayFeature::from($data, $metadata),
+            'Google Pay' => GooglePayFeature::from($data, $metadata),
+            'Samsung Pay' => SamsungPayFeature::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

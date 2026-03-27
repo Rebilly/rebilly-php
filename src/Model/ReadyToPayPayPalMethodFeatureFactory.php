@@ -18,10 +18,10 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class ReadyToPayPayPalMethodFeatureFactory
 {
-    public static function from(array $data = []): ReadyToPayPayPalMethodFeature
+    public static function from(array $data = [], array $metadata = []): ReadyToPayPayPalMethodFeature
     {
         return match ($data['name']) {
-            'PayPal billing agreement' => PayPalBillingAgreementFeature::from($data),
+            'PayPal billing agreement' => PayPalBillingAgreementFeature::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }
