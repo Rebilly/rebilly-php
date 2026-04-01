@@ -16,9 +16,12 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class ReactivationQuote implements Quote
 {
+    use HasMetadata;
+
     public const ACCEPTANCE_CONDITIONS_CUSTOMER = 'customer';
 
     public const ACCEPTANCE_CONDITIONS_PAYMENT = 'payment';
@@ -37,7 +40,7 @@ class ReactivationQuote implements Quote
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
@@ -108,11 +111,12 @@ class ReactivationQuote implements Quote
         if (array_key_exists('_embedded', $data)) {
             $this->setEmbedded($data['_embedded']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getType(): string

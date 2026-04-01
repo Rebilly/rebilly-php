@@ -14,24 +14,29 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use Rebilly\Sdk\Trait\HasMetadata;
+
 class OneColumnTimelineTable extends TimelineTable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         parent::__construct([
             'type' => 'one-column',
-        ] + $data);
+        ] + $data, $metadata);
 
         if (array_key_exists('data', $data)) {
             $this->setData($data['data']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     /**

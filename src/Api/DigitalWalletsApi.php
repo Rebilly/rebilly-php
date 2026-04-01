@@ -37,7 +37,7 @@ class DigitalWalletsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return DigitalWalletOnboardingApplePay::from($data);
+        return DigitalWalletOnboardingApplePay::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function validate(
@@ -51,6 +51,6 @@ class DigitalWalletsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return DigitalWalletValidation::from($data);
+        return DigitalWalletValidation::from($data, ['headers' => $response->getHeaders()]);
     }
 }

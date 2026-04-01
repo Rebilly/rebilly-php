@@ -14,15 +14,19 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use Rebilly\Sdk\Trait\HasMetadata;
+
 class RuleActionAdjustReadyToPayout extends RuleAction
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         parent::__construct([
             'name' => 'adjust-ready-to-payout',
-        ] + $data);
+        ] + $data, $metadata);
 
         if (array_key_exists('prioritizeActivePaymentInstruments', $data)) {
             $this->setPrioritizeActivePaymentInstruments($data['prioritizeActivePaymentInstruments']);
@@ -30,11 +34,12 @@ class RuleActionAdjustReadyToPayout extends RuleAction
         if (array_key_exists('paymentMethods', $data)) {
             $this->setPaymentMethods($data['paymentMethods']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getPrioritizeActivePaymentInstruments(): ?bool

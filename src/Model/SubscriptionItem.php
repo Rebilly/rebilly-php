@@ -16,12 +16,15 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class SubscriptionItem implements RecurringOrderItems
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
@@ -62,6 +65,9 @@ class SubscriptionItem implements RecurringOrderItems
         if (array_key_exists('usageStatus', $data)) {
             $this->setUsageStatus($data['usageStatus']);
         }
+        if (array_key_exists('revision', $data)) {
+            $this->setRevision($data['revision']);
+        }
         if (array_key_exists('excludeFromMrr', $data)) {
             $this->setExcludeFromMrr($data['excludeFromMrr']);
         }
@@ -71,11 +77,12 @@ class SubscriptionItem implements RecurringOrderItems
         if (array_key_exists('updatedTime', $data)) {
             $this->setUpdatedTime($data['updatedTime']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getType(): string
@@ -228,6 +235,11 @@ class SubscriptionItem implements RecurringOrderItems
         return $this;
     }
 
+    public function getRevision(): ?int
+    {
+        return $this->fields['revision'] ?? null;
+    }
+
     public function getExcludeFromMrr(): ?bool
     {
         return $this->fields['excludeFromMrr'] ?? null;
@@ -294,6 +306,9 @@ class SubscriptionItem implements RecurringOrderItems
         if (array_key_exists('usageStatus', $this->fields)) {
             $data['usageStatus'] = $this->fields['usageStatus']?->jsonSerialize();
         }
+        if (array_key_exists('revision', $this->fields)) {
+            $data['revision'] = $this->fields['revision'];
+        }
         if (array_key_exists('excludeFromMrr', $this->fields)) {
             $data['excludeFromMrr'] = $this->fields['excludeFromMrr'];
         }
@@ -342,6 +357,13 @@ class SubscriptionItem implements RecurringOrderItems
     private function setProductId(null|string $productId): static
     {
         $this->fields['productId'] = $productId;
+
+        return $this;
+    }
+
+    private function setRevision(null|int $revision): static
+    {
+        $this->fields['revision'] = $revision;
 
         return $this;
     }

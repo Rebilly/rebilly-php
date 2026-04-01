@@ -18,12 +18,12 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class ServicePeriodAnchorInstructionFactory
 {
-    public static function from(array $data = []): ServicePeriodAnchorInstruction
+    public static function from(array $data = [], array $metadata = []): ServicePeriodAnchorInstruction
     {
         return match ($data['method']) {
-            'day-and-month-of-year' => SchedulingMethodDayAndMonthOfYear::from($data),
-            'day-of-month' => SchedulingMethodDayOfMonth::from($data),
-            'day-of-week' => SchedulingMethodDayOfWeek::from($data),
+            'day-and-month-of-year' => SchedulingMethodDayAndMonthOfYear::from($data, $metadata),
+            'day-of-month' => SchedulingMethodDayOfMonth::from($data, $metadata),
+            'day-of-week' => SchedulingMethodDayOfWeek::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

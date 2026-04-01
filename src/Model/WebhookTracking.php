@@ -17,9 +17,12 @@ namespace Rebilly\Sdk\Model;
 use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class WebhookTracking implements JsonSerializable
 {
+    use HasMetadata;
+
     public const EVENT_TYPE_AML_LIST_POSSIBLY_MATCHED = 'aml-list-possibly-matched';
 
     public const EVENT_TYPE_APPLICATION_INSTANCE_DISABLED = 'application-instance-disabled';
@@ -168,8 +171,6 @@ class WebhookTracking implements JsonSerializable
 
     public const EVENT_TYPE_PAYOUT_REQUEST_MODIFIED = 'payout-request-modified';
 
-    public const EVENT_TYPE_PAYOUT_REQUEST_REVERSED = 'payout-request-reversed';
-
     public const EVENT_TYPE_QUOTE_ACCEPTED = 'quote-accepted';
 
     public const EVENT_TYPE_QUOTE_CANCELED = 'quote-canceled';
@@ -262,7 +263,7 @@ class WebhookTracking implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
@@ -321,11 +322,12 @@ class WebhookTracking implements JsonSerializable
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getId(): ?string
@@ -564,10 +566,14 @@ class WebhookTracking implements JsonSerializable
             $data['response'] = $this->fields['response'];
         }
         if (array_key_exists('requestHeaders', $this->fields)) {
-            $data['requestHeaders'] = $this->fields['requestHeaders'];
+            $data['requestHeaders'] = $this->fields['requestHeaders'] !== null
+                ? (object) $this->fields['requestHeaders']
+                : null;
         }
         if (array_key_exists('responseHeaders', $this->fields)) {
-            $data['responseHeaders'] = $this->fields['responseHeaders'];
+            $data['responseHeaders'] = $this->fields['responseHeaders'] !== null
+                ? (object) $this->fields['responseHeaders']
+                : null;
         }
         if (array_key_exists('entityId', $this->fields)) {
             $data['entityId'] = $this->fields['entityId'];

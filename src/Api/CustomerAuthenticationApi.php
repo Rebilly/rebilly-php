@@ -43,7 +43,7 @@ class CustomerAuthenticationApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CustomerCredential::from($data);
+        return CustomerCredential::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function createResetPasswordToken(
@@ -57,7 +57,7 @@ class CustomerAuthenticationApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ResetPasswordToken::from($data);
+        return ResetPasswordToken::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function deleteCredential(
@@ -102,7 +102,7 @@ class CustomerAuthenticationApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CustomerJWT::from($data);
+        return CustomerJWT::from($data, ['headers' => $response->getHeaders()]);
     }
 
     /**
@@ -125,10 +125,13 @@ class CustomerAuthenticationApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): AuthenticationTokenResponse => AuthenticationTokenResponse::from($item), $data),
+            array_map(fn (array $item): AuthenticationTokenResponse => AuthenticationTokenResponse::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -170,10 +173,13 @@ class CustomerAuthenticationApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): CustomerCredential => CustomerCredential::from($item), $data),
+            array_map(fn (array $item): CustomerCredential => CustomerCredential::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -215,10 +221,13 @@ class CustomerAuthenticationApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): ResetPasswordToken => ResetPasswordToken::from($item), $data),
+            array_map(fn (array $item): ResetPasswordToken => ResetPasswordToken::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -250,7 +259,7 @@ class CustomerAuthenticationApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return AuthenticationOptions::from($data);
+        return AuthenticationOptions::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getCredential(
@@ -268,7 +277,7 @@ class CustomerAuthenticationApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CustomerCredential::from($data);
+        return CustomerCredential::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getResetPasswordToken(
@@ -286,7 +295,7 @@ class CustomerAuthenticationApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ResetPasswordToken::from($data);
+        return ResetPasswordToken::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function login(
@@ -300,7 +309,7 @@ class CustomerAuthenticationApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return AuthenticationTokenResponse::from($data);
+        return AuthenticationTokenResponse::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function logout(
@@ -327,7 +336,7 @@ class CustomerAuthenticationApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return AuthenticationOptions::from($data);
+        return AuthenticationOptions::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function updateCredential(
@@ -346,7 +355,7 @@ class CustomerAuthenticationApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CustomerCredential::from($data);
+        return CustomerCredential::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function verify(
@@ -364,6 +373,6 @@ class CustomerAuthenticationApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return AuthenticationTokenResponse::from($data);
+        return AuthenticationTokenResponse::from($data, ['headers' => $response->getHeaders()]);
     }
 }

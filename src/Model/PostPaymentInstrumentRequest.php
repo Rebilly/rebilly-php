@@ -18,4 +18,15 @@ use JsonSerializable;
 
 interface PostPaymentInstrumentRequest extends JsonSerializable
 {
+    public function getCustomerId(): string;
+
+    public function setCustomerId(string $customerId): static;
+
+    public function getUseAsBackup(): ?bool;
+
+    public function setUseAsBackup(null|bool $useAsBackup): static;
+
+    public function getCustomFields(): ?array;
+
+    public function setCustomFields(null|array $customFields): static;
 }

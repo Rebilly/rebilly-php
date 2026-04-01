@@ -17,10 +17,13 @@ namespace Rebilly\Sdk\Api;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
+use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\PatchPayoutRequestAllocationRequest;
 use Rebilly\Sdk\Model\PayoutRequestAllocation;
 use Rebilly\Sdk\Model\PostPayoutRequestAllocationRequest;
+use Rebilly\Sdk\Model\PostPayoutRequestAllocationsProcessRequest;
 use Rebilly\Sdk\Model\PostPayoutRequestAutoAllocationRequest;
+use Rebilly\Sdk\Paginator;
 
 class PayoutRequestAllocationsApi
 {
@@ -48,7 +51,90 @@ class PayoutRequestAllocationsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return PayoutRequestAllocation::from($data);
+        return PayoutRequestAllocation::from($data, ['headers' => $response->getHeaders()]);
+    }
+
+    public function get(
+        string $id,
+    ): PayoutRequestAllocation {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/payout-request-allocations/{id}');
+
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return PayoutRequestAllocation::from($data, ['headers' => $response->getHeaders()]);
+    }
+
+    /**
+     * @return Collection<PayoutRequestAllocation>
+     */
+    public function getAll(
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $filter = null,
+        ?array $sort = null,
+    ): Collection {
+        $queryParams = [
+            'limit' => $limit,
+            'offset' => $offset,
+            'filter' => $filter,
+            'sort' => $sort ? implode(',', $sort) : null,
+        ];
+        $uri = '/payout-request-allocations?' . http_build_query($queryParams);
+
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return new Collection(
+            array_map(fn (array $item): PayoutRequestAllocation => PayoutRequestAllocation::from($item, ['headers' => $response->getHeaders()]), $data),
+            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
+            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
+            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
+        );
+    }
+
+    /**
+     * @return Paginator<PayoutRequestAllocation>
+     */
+    public function getAllPaginator(
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $filter = null,
+        ?array $sort = null,
+    ): Paginator {
+        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAll(
+            limit: $limit,
+            offset: $offset,
+            filter: $filter,
+            sort: $sort,
+        );
+
+        return new Paginator(
+            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
+            $closure,
+        );
+    }
+
+    public function process(
+        PostPayoutRequestAllocationsProcessRequest $postPayoutRequestAllocationsProcessRequest,
+    ): void {
+        $uri = '/payout-request-allocations/process';
+
+        $request = new Request('POST', $uri, body: Utils::jsonEncode($postPayoutRequestAllocationsProcessRequest));
+        $this->client->send($request);
     }
 
     public function update(
@@ -67,6 +153,6 @@ class PayoutRequestAllocationsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return PayoutRequestAllocation::from($data);
+        return PayoutRequestAllocation::from($data, ['headers' => $response->getHeaders()]);
     }
 }

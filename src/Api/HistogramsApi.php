@@ -50,7 +50,7 @@ class HistogramsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return HistogramData::from($data);
+        return HistogramData::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getTransactionHistogramReport(
@@ -75,6 +75,6 @@ class HistogramsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return HistogramData::from($data);
+        return HistogramData::from($data, ['headers' => $response->getHeaders()]);
     }
 }

@@ -16,9 +16,12 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class OneTimeOrder implements Order
 {
+    use HasMetadata;
+
     public const STATUS_PENDING = 'pending';
 
     public const STATUS_VOIDED = 'voided';
@@ -29,7 +32,7 @@ class OneTimeOrder implements Order
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
@@ -103,6 +106,9 @@ class OneTimeOrder implements Order
         if (array_key_exists('revision', $data)) {
             $this->setRevision($data['revision']);
         }
+        if (array_key_exists('isNew', $data)) {
+            $this->setIsNew($data['isNew']);
+        }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
         }
@@ -115,11 +121,12 @@ class OneTimeOrder implements Order
         if (array_key_exists('_embedded', $data)) {
             $this->setEmbedded($data['_embedded']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getType(): string
@@ -375,6 +382,11 @@ class OneTimeOrder implements Order
         return $this->fields['revision'] ?? null;
     }
 
+    public function getIsNew(): ?bool
+    {
+        return $this->fields['isNew'] ?? null;
+    }
+
     public function getCreatedTime(): ?DateTimeImmutable
     {
         return $this->fields['createdTime'] ?? null;
@@ -489,6 +501,9 @@ class OneTimeOrder implements Order
         if (array_key_exists('revision', $this->fields)) {
             $data['revision'] = $this->fields['revision'];
         }
+        if (array_key_exists('isNew', $this->fields)) {
+            $data['isNew'] = $this->fields['isNew'];
+        }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
         }
@@ -595,6 +610,13 @@ class OneTimeOrder implements Order
     private function setRevision(null|int $revision): static
     {
         $this->fields['revision'] = $revision;
+
+        return $this;
+    }
+
+    private function setIsNew(null|bool $isNew): static
+    {
+        $this->fields['isNew'] = $isNew;
 
         return $this;
     }

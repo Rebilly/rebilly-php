@@ -15,12 +15,15 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class CumulativeSubscriptionsData implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('aggregationValue', $data)) {
             $this->setAggregationValue($data['aggregationValue']);
@@ -34,11 +37,12 @@ class CumulativeSubscriptionsData implements JsonSerializable
         if (array_key_exists('cumulativeCount', $data)) {
             $this->setCumulativeCount($data['cumulativeCount']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getAggregationValue(): ?string

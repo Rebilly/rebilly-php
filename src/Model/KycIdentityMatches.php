@@ -16,9 +16,12 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class KycIdentityMatches implements PostKycDocumentMatchesRequest
 {
+    use HasMetadata;
+
     public const DOCUMENT_SUBTYPE_PASSPORT = 'passport';
 
     public const DOCUMENT_SUBTYPE_ID_CARD = 'id-card';
@@ -75,7 +78,7 @@ class KycIdentityMatches implements PostKycDocumentMatchesRequest
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('containsImage', $data)) {
             $this->setContainsImage($data['containsImage']);
@@ -131,17 +134,21 @@ class KycIdentityMatches implements PostKycDocumentMatchesRequest
         if (array_key_exists('isDigitallyTampered', $data)) {
             $this->setIsDigitallyTampered($data['isDigitallyTampered']);
         }
+        if (array_key_exists('isPhotocopy', $data)) {
+            $this->setIsPhotocopy($data['isPhotocopy']);
+        }
         if (array_key_exists('hasCompletedFaceLiveness', $data)) {
             $this->setHasCompletedFaceLiveness($data['hasCompletedFaceLiveness']);
         }
         if (array_key_exists('expiryDate', $data)) {
             $this->setExpiryDate($data['expiryDate']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getContainsImage(): ?bool
@@ -361,6 +368,18 @@ class KycIdentityMatches implements PostKycDocumentMatchesRequest
         return $this;
     }
 
+    public function getIsPhotocopy(): ?bool
+    {
+        return $this->fields['isPhotocopy'] ?? null;
+    }
+
+    public function setIsPhotocopy(null|bool $isPhotocopy): static
+    {
+        $this->fields['isPhotocopy'] = $isPhotocopy;
+
+        return $this;
+    }
+
     public function getHasCompletedFaceLiveness(): ?bool
     {
         return $this->fields['hasCompletedFaceLiveness'] ?? null;
@@ -438,6 +457,9 @@ class KycIdentityMatches implements PostKycDocumentMatchesRequest
         }
         if (array_key_exists('isDigitallyTampered', $this->fields)) {
             $data['isDigitallyTampered'] = $this->fields['isDigitallyTampered'];
+        }
+        if (array_key_exists('isPhotocopy', $this->fields)) {
+            $data['isPhotocopy'] = $this->fields['isPhotocopy'];
         }
         if (array_key_exists('hasCompletedFaceLiveness', $this->fields)) {
             $data['hasCompletedFaceLiveness'] = $this->fields['hasCompletedFaceLiveness'];

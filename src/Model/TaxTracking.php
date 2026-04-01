@@ -17,9 +17,12 @@ namespace Rebilly\Sdk\Model;
 use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class TaxTracking implements JsonSerializable
 {
+    use HasMetadata;
+
     public const TAX_SERVICE_TAXJAR = 'taxjar';
 
     public const TAX_SERVICE_AVALARA = 'avalara';
@@ -30,7 +33,7 @@ class TaxTracking implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
@@ -80,11 +83,12 @@ class TaxTracking implements JsonSerializable
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getId(): ?string
@@ -308,10 +312,14 @@ class TaxTracking implements JsonSerializable
             $data['response'] = $this->fields['response'];
         }
         if (array_key_exists('requestHeaders', $this->fields)) {
-            $data['requestHeaders'] = $this->fields['requestHeaders'];
+            $data['requestHeaders'] = $this->fields['requestHeaders'] !== null
+                ? (object) $this->fields['requestHeaders']
+                : null;
         }
         if (array_key_exists('responseHeaders', $this->fields)) {
-            $data['responseHeaders'] = $this->fields['responseHeaders'];
+            $data['responseHeaders'] = $this->fields['responseHeaders'] !== null
+                ? (object) $this->fields['responseHeaders']
+                : null;
         }
         if (array_key_exists('entityId', $this->fields)) {
             $data['entityId'] = $this->fields['entityId'];

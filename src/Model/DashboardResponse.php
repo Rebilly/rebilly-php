@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class DashboardResponse implements JsonSerializable
 {
+    use HasMetadata;
+
     public const METRIC_APPROVAL_RATE = 'approvalRate';
 
     public const METRIC_SALES_COUNT = 'salesCount';
@@ -90,6 +93,10 @@ class DashboardResponse implements JsonSerializable
 
     public const METRIC_CREDIT_FILE_PROOF_ACCEPTANCE_RATE = 'creditFileProofAcceptanceRate';
 
+    public const METRIC_KYC_ACCEPTANCE_RATE = 'kycAcceptanceRate';
+
+    public const METRIC_KYC_REVIEW_TIME = 'kycReviewTime';
+
     public const METRIC_KYC_REJECTION_RATE = 'kycRejectionRate';
 
     public const METRIC_KYC_ACCURACY_RATE = 'kycAccuracyRate';
@@ -114,7 +121,7 @@ class DashboardResponse implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('metric', $data)) {
             $this->setMetric($data['metric']);
@@ -128,11 +135,12 @@ class DashboardResponse implements JsonSerializable
         if (array_key_exists('segments', $data)) {
             $this->setSegments($data['segments']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getMetric(): ?string

@@ -18,11 +18,11 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class RecurringOrderItemsFactory
 {
-    public static function from(array $data = []): RecurringOrderItems
+    public static function from(array $data = [], array $metadata = []): RecurringOrderItems
     {
         return match ($data['type']) {
-            'one-time-sale' => OneTimeSaleItem::from($data),
-            'subscription' => SubscriptionItem::from($data),
+            'one-time-sale' => OneTimeSaleItem::from($data, $metadata),
+            'subscription' => SubscriptionItem::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

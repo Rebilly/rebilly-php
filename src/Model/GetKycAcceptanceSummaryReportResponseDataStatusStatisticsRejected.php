@@ -15,12 +15,15 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class GetKycAcceptanceSummaryReportResponseDataStatusStatisticsRejected implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('total', $data)) {
             $this->setTotal($data['total']);
@@ -34,11 +37,12 @@ class GetKycAcceptanceSummaryReportResponseDataStatusStatisticsRejected implemen
         if (array_key_exists('afterAutoAccepted', $data)) {
             $this->setAfterAutoAccepted($data['afterAutoAccepted']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getTotal(): ?int

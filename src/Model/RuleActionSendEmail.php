@@ -16,16 +16,19 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class RuleActionSendEmail extends RuleAction
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         parent::__construct([
             'name' => 'send-email',
-        ] + $data);
+        ] + $data, $metadata);
 
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
@@ -39,11 +42,12 @@ class RuleActionSendEmail extends RuleAction
         if (array_key_exists('splitTestStartTime', $data)) {
             $this->setSplitTestStartTime($data['splitTestStartTime']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getId(): ?string

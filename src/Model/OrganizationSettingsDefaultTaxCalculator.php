@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class OrganizationSettingsDefaultTaxCalculator implements JsonSerializable
 {
+    use HasMetadata;
+
     public const TYPE_TAXJAR = 'taxjar';
 
     public const TYPE_AVALARA = 'avalara';
@@ -26,7 +29,7 @@ class OrganizationSettingsDefaultTaxCalculator implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('type', $data)) {
             $this->setType($data['type']);
@@ -34,11 +37,12 @@ class OrganizationSettingsDefaultTaxCalculator implements JsonSerializable
         if (array_key_exists('rate', $data)) {
             $this->setRate($data['rate']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getType(): string

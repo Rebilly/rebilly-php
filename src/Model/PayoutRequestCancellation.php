@@ -15,16 +15,21 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class PayoutRequestCancellation implements JsonSerializable
 {
+    use HasMetadata;
+
     public const CANCELED_BY_MERCHANT = 'merchant';
 
     public const CANCELED_BY_CUSTOMER = 'customer';
 
+    public const CANCELED_BY_SYSTEM = 'system';
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('canceledBy', $data)) {
             $this->setCanceledBy($data['canceledBy']);
@@ -32,11 +37,12 @@ class PayoutRequestCancellation implements JsonSerializable
         if (array_key_exists('description', $data)) {
             $this->setDescription($data['description']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getCanceledBy(): ?string

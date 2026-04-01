@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class ReportKycRejectionsData implements JsonSerializable
 {
+    use HasMetadata;
+
     public const DOCUMENT_TYPE_IDENTITY_PROOF = 'identity-proof';
 
     public const DOCUMENT_TYPE_ADDRESS_PROOF = 'address-proof';
@@ -30,7 +33,7 @@ class ReportKycRejectionsData implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('documentType', $data)) {
             $this->setDocumentType($data['documentType']);
@@ -38,11 +41,12 @@ class ReportKycRejectionsData implements JsonSerializable
         if (array_key_exists('rejectionReasons', $data)) {
             $this->setRejectionReasons($data['rejectionReasons']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getDocumentType(): ?string

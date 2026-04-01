@@ -15,12 +15,15 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class CreditMemoTaxItemJurisdictions implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('country', $data)) {
             $this->setCountry($data['country']);
@@ -34,11 +37,12 @@ class CreditMemoTaxItemJurisdictions implements JsonSerializable
         if (array_key_exists('city', $data)) {
             $this->setCity($data['city']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getCountry(): ?string

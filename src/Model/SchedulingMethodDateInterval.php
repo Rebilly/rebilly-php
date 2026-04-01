@@ -14,8 +14,12 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use Rebilly\Sdk\Trait\HasMetadata;
+
 class SchedulingMethodDateInterval implements InvoiceRetryScheduleInstruction, SettlementPeriod, ScheduleInstruction, ReminderScheduleInstruction
 {
+    use HasMetadata;
+
     public const UNIT_SECOND = 'second';
 
     public const UNIT_MINUTE = 'minute';
@@ -42,7 +46,7 @@ class SchedulingMethodDateInterval implements InvoiceRetryScheduleInstruction, S
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('duration', $data)) {
             $this->setDuration($data['duration']);
@@ -53,11 +57,12 @@ class SchedulingMethodDateInterval implements InvoiceRetryScheduleInstruction, S
         if (array_key_exists('anchor', $data)) {
             $this->setAnchor($data['anchor']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getMethod(): string

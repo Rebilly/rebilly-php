@@ -17,14 +17,17 @@ namespace Rebilly\Sdk\Model;
 use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class Status implements JsonSerializable
 {
+    use HasMetadata;
+
     public const STATUS_OK = 'ok';
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('status', $data)) {
             $this->setStatus($data['status']);
@@ -35,11 +38,12 @@ class Status implements JsonSerializable
         if (array_key_exists('release', $data)) {
             $this->setRelease($data['release']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getStatus(): ?string

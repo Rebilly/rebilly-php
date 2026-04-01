@@ -48,7 +48,7 @@ class EventsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return RuleSetDraft::from($data);
+        return RuleSetDraft::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function createRules(
@@ -67,7 +67,7 @@ class EventsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return RuleSet::from($data);
+        return RuleSet::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function createTimelineComment(
@@ -86,7 +86,7 @@ class EventsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return RulesEngineTimeline::from($data);
+        return RulesEngineTimeline::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function deleteDraftRuleset(
@@ -134,7 +134,7 @@ class EventsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return SystemEvent::from($data);
+        return SystemEvent::from($data, ['headers' => $response->getHeaders()]);
     }
 
     /**
@@ -161,10 +161,13 @@ class EventsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): SystemEvent => SystemEvent::from($item), $data),
+            array_map(fn (array $item): SystemEvent => SystemEvent::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -223,10 +226,13 @@ class EventsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): RuleSetDraft => RuleSetDraft::from($item), $data),
+            array_map(fn (array $item): RuleSetDraft => RuleSetDraft::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -289,10 +295,13 @@ class EventsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): RulesEngineTimeline => RulesEngineTimeline::from($item), $data),
+            array_map(fn (array $item): RulesEngineTimeline => RulesEngineTimeline::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -343,7 +352,7 @@ class EventsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return RuleSetDraft::from($data);
+        return RuleSetDraft::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getRules(
@@ -361,7 +370,7 @@ class EventsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return RuleSet::from($data);
+        return RuleSet::from($data, ['headers' => $response->getHeaders()]);
     }
 
     /**
@@ -397,10 +406,13 @@ class EventsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): RuleSetHistoryItem => RuleSetHistoryItem::from($item), $data),
+            array_map(fn (array $item): RuleSetHistoryItem => RuleSetHistoryItem::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -453,7 +465,7 @@ class EventsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return RuleSetVersion::from($data);
+        return RuleSetVersion::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getRulesVersionNumber(
@@ -477,7 +489,7 @@ class EventsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return RuleSetHistoryItem::from($data);
+        return RuleSetHistoryItem::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getTimelineMessage(
@@ -497,7 +509,7 @@ class EventsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return RulesEngineTimeline::from($data);
+        return RulesEngineTimeline::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function updateDraftRuleset(
@@ -518,6 +530,6 @@ class EventsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return RuleSetDraft::from($data);
+        return RuleSetDraft::from($data, ['headers' => $response->getHeaders()]);
     }
 }

@@ -43,7 +43,7 @@ class BalanceTransactionsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return BalanceTransactionFactory::from($data);
+        return BalanceTransactionFactory::from($data, ['headers' => $response->getHeaders()]);
     }
 
     /**
@@ -70,10 +70,13 @@ class BalanceTransactionsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): BalanceTransaction => BalanceTransactionFactory::from($item), $data),
+            array_map(fn (array $item): BalanceTransaction => BalanceTransactionFactory::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 

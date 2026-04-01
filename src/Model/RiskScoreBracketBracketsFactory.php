@@ -16,8 +16,8 @@ namespace Rebilly\Sdk\Model;
 
 class RiskScoreBracketBracketsFactory
 {
-    public static function from(array $data = []): RiskScoreBracketBrackets
+    public static function from(array $data = [], array $metadata = []): RiskScoreBracketBrackets
     {
-        return new RiskScoreBracketBrackets0($data);
+        return new RiskScoreBracketBrackets0($data, $metadata);
     }
 }

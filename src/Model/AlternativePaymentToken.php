@@ -16,9 +16,12 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class AlternativePaymentToken implements CompositeToken
 {
+    use HasMetadata;
+
     public const METHOD_CASH = 'cash';
 
     public const METHOD_CHECK = 'check';
@@ -90,8 +93,6 @@ class AlternativePaymentToken implements CompositeToken
     public const METHOD_CONEKTA_OXXO = 'Conekta-oxxo';
 
     public const METHOD_CUPON_DE_PAGOS = 'Cupon-de-pagos';
-
-    public const METHOD_CRYPTOCURRENCY = 'cryptocurrency';
 
     public const METHOD_DOMESTIC_CARDS = 'domestic-cards';
 
@@ -179,6 +180,8 @@ class AlternativePaymentToken implements CompositeToken
 
     public const METHOD_MTS = 'MTS';
 
+    public const METHOD_MOLLIE = 'Mollie';
+
     public const METHOD_MUCH_BETTER = 'MuchBetter';
 
     public const METHOD_MUCH_BETTER_VOUCHER = 'MuchBetterVoucher';
@@ -257,6 +260,8 @@ class AlternativePaymentToken implements CompositeToken
 
     public const METHOD_QQ_PAY = 'QQPay';
 
+    public const METHOD_QUICKPAY = 'Quickpay';
+
     public const METHOD_RAPYD_CHECKOUT = 'rapyd-checkout';
 
     public const METHOD_RESURS = 'Resurs';
@@ -299,6 +304,8 @@ class AlternativePaymentToken implements CompositeToken
 
     public const METHOD_VENUS_POINT = 'VenusPoint';
 
+    public const METHOD_VIVA = 'Viva';
+
     public const METHOD_VOUCHER = 'voucher';
 
     public const METHOD_VOUCHER2 = 'voucher-2';
@@ -335,7 +342,7 @@ class AlternativePaymentToken implements CompositeToken
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('method', $data)) {
             $this->setMethod($data['method']);
@@ -370,11 +377,12 @@ class AlternativePaymentToken implements CompositeToken
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getMethod(): string

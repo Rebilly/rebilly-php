@@ -14,8 +14,12 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use Rebilly\Sdk\Trait\HasMetadata;
+
 class BankAccountUpdatePlain implements PatchPaymentInstrumentRequest
 {
+    use HasMetadata;
+
     public const ACCOUNT_TYPE_CHECKING = 'checking';
 
     public const ACCOUNT_TYPE_SAVINGS = 'savings';
@@ -24,7 +28,7 @@ class BankAccountUpdatePlain implements PatchPaymentInstrumentRequest
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('bankName', $data)) {
             $this->setBankName($data['bankName']);
@@ -44,11 +48,12 @@ class BankAccountUpdatePlain implements PatchPaymentInstrumentRequest
         if (array_key_exists('useAsBackup', $data)) {
             $this->setUseAsBackup($data['useAsBackup']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getBankName(): ?string

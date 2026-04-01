@@ -43,7 +43,7 @@ class AmlChecksApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return AmlCheck::from($data);
+        return AmlCheck::from($data, ['headers' => $response->getHeaders()]);
     }
 
     /**
@@ -72,10 +72,13 @@ class AmlChecksApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): AmlCheck => AmlCheck::from($item), $data),
+            array_map(fn (array $item): AmlCheck => AmlCheck::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -119,7 +122,7 @@ class AmlChecksApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return AmlCheck::from($data);
+        return AmlCheck::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function startReview(
@@ -137,7 +140,7 @@ class AmlChecksApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return AmlCheck::from($data);
+        return AmlCheck::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function stopReview(
@@ -155,6 +158,6 @@ class AmlChecksApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return AmlCheck::from($data);
+        return AmlCheck::from($data, ['headers' => $response->getHeaders()]);
     }
 }
