@@ -37,6 +37,8 @@ interface RecurringOrderItems extends JsonSerializable
 
     public function setQuantity(null|int $quantity): static;
 
+    public function getRevision(): ?int;
+
     public function getCreatedTime(): ?DateTimeImmutable;
 
     public function getUpdatedTime(): ?DateTimeImmutable;

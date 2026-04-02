@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class ReportJournal implements JsonSerializable
 {
+    use HasMetadata;
+
     public const AGGREGATION_FIELD_PRODUCT_ACCOUNTING_CODE = 'product.accountingCode';
 
     public const AGGREGATION_FIELD_PRODUCT_ID = 'product.id';
@@ -26,7 +29,7 @@ class ReportJournal implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('aggregationField', $data)) {
             $this->setAggregationField($data['aggregationField']);
@@ -46,11 +49,12 @@ class ReportJournal implements JsonSerializable
         if (array_key_exists('data', $data)) {
             $this->setData($data['data']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getAggregationField(): ?string

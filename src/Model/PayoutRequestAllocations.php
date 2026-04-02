@@ -17,9 +17,12 @@ namespace Rebilly\Sdk\Model;
 use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class PayoutRequestAllocations implements JsonSerializable
 {
+    use HasMetadata;
+
     public const TRANSACTION_RESULT_ABANDONED = 'abandoned';
 
     public const TRANSACTION_RESULT_APPROVED = 'approved';
@@ -29,16 +32,6 @@ class PayoutRequestAllocations implements JsonSerializable
     public const TRANSACTION_RESULT_DECLINED = 'declined';
 
     public const TRANSACTION_RESULT_UNKNOWN = 'unknown';
-
-    public const METHOD_PAYMENT_CARD = 'payment-card';
-
-    public const METHOD_ACH = 'ach';
-
-    public const METHOD_CASH = 'cash';
-
-    public const METHOD_CHECK = 'check';
-
-    public const METHOD_PAYPAL = 'paypal';
 
     public const METHOD_ADV_CASH = 'AdvCash';
 
@@ -234,6 +227,8 @@ class PayoutRequestAllocations implements JsonSerializable
 
     public const METHOD_MOBILE_PAY = 'MobilePay';
 
+    public const METHOD_MOLLIE = 'Mollie';
+
     public const METHOD_MULTIBANCO = 'Multibanco';
 
     public const METHOD_BANCONTACT = 'Bancontact';
@@ -326,6 +321,8 @@ class PayoutRequestAllocations implements JsonSerializable
 
     public const METHOD_QQ_PAY = 'QQPay';
 
+    public const METHOD_QUICKPAY = 'Quickpay';
+
     public const METHOD_RAPYD_CHECKOUT = 'rapyd-checkout';
 
     public const METHOD_REBILLY_HOSTED_PAYMENT_FORM = 'rebilly-hosted-payment-form';
@@ -387,6 +384,8 @@ class PayoutRequestAllocations implements JsonSerializable
     public const METHOD_VEGA_WALLET = 'VegaWallet';
 
     public const METHOD_VENUS_POINT = 'VenusPoint';
+
+    public const METHOD_VIVA = 'Viva';
 
     public const METHOD_VOUCHER = 'voucher';
 
@@ -644,6 +643,8 @@ class PayoutRequestAllocations implements JsonSerializable
 
     public const GATEWAY_NAME_MI_FINITY = 'MiFinity';
 
+    public const GATEWAY_NAME_MOLLIE = 'Mollie';
+
     public const GATEWAY_NAME_MOBILE_PAY = 'MobilePay';
 
     public const GATEWAY_NAME_MONERIS = 'Moneris';
@@ -774,6 +775,8 @@ class PayoutRequestAllocations implements JsonSerializable
 
     public const GATEWAY_NAME_P_SI_GATE = 'PSiGate';
 
+    public const GATEWAY_NAME_QUICKPAY = 'Quickpay';
+
     public const GATEWAY_NAME_RAPYD = 'Rapyd';
 
     public const GATEWAY_NAME_REALEX = 'Realex';
@@ -848,6 +851,8 @@ class PayoutRequestAllocations implements JsonSerializable
 
     public const GATEWAY_NAME_VEGA_WALLET = 'VegaWallet';
 
+    public const GATEWAY_NAME_VIVA = 'Viva';
+
     public const GATEWAY_NAME_WALLET88 = 'Wallet88';
 
     public const GATEWAY_NAME_WALPAY = 'Walpay';
@@ -868,7 +873,7 @@ class PayoutRequestAllocations implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('transactionId', $data)) {
             $this->setTransactionId($data['transactionId']);
@@ -897,11 +902,12 @@ class PayoutRequestAllocations implements JsonSerializable
         if (array_key_exists('updatedTime', $data)) {
             $this->setUpdatedTime($data['updatedTime']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getTransactionId(): ?string

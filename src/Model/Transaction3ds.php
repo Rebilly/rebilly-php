@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class Transaction3ds implements JsonSerializable
 {
+    use HasMetadata;
+
     public const VERSION_102 = '1.0.2';
 
     public const VERSION_210 = '2.1.0';
@@ -52,7 +55,7 @@ class Transaction3ds implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('server', $data)) {
             $this->setServer($data['server']);
@@ -75,11 +78,12 @@ class Transaction3ds implements JsonSerializable
         if (array_key_exists('isDowngraded', $data)) {
             $this->setIsDowngraded($data['isDowngraded']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getServer(): ?string

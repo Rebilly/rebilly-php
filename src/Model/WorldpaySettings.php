@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class WorldpaySettings implements JsonSerializable
 {
+    use HasMetadata;
+
     public const ENFORCE_STORED_CREDENTIALS_DISABLED = 'disabled';
 
     public const ENFORCE_STORED_CREDENTIALS_MIT_ENABLED = 'mit-enabled';
@@ -42,7 +45,7 @@ class WorldpaySettings implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('delay', $data)) {
             $this->setDelay($data['delay']);
@@ -53,11 +56,12 @@ class WorldpaySettings implements JsonSerializable
         if (array_key_exists('merchantInitiatedReason', $data)) {
             $this->setMerchantInitiatedReason($data['merchantInitiatedReason']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getDelay(): ?int

@@ -54,7 +54,7 @@ class ApplicationInstancesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ApplicationInstance::from($data);
+        return ApplicationInstance::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getConfiguration(
@@ -72,7 +72,7 @@ class ApplicationInstancesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ApplicationInstanceConfiguration::from($data);
+        return ApplicationInstanceConfiguration::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function upsert(
@@ -91,7 +91,7 @@ class ApplicationInstancesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ApplicationInstance::from($data);
+        return ApplicationInstance::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function upsertConfiguration(
@@ -110,6 +110,6 @@ class ApplicationInstancesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return ApplicationInstanceConfiguration::from($data);
+        return ApplicationInstanceConfiguration::from($data, ['headers' => $response->getHeaders()]);
     }
 }

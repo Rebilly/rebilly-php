@@ -15,12 +15,15 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class UsageLimits implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('softLimit', $data)) {
             $this->setSoftLimit($data['softLimit']);
@@ -31,11 +34,12 @@ class UsageLimits implements JsonSerializable
         if (array_key_exists('trialLimit', $data)) {
             $this->setTrialLimit($data['trialLimit']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getSoftLimit(): ?UsageLimitsSoftLimit

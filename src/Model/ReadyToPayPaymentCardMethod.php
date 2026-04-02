@@ -14,8 +14,12 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use Rebilly\Sdk\Trait\HasMetadata;
+
 class ReadyToPayPaymentCardMethod implements ReadyToPayMethods
 {
+    use HasMetadata;
+
     public const BRANDS_VISA = 'Visa';
 
     public const BRANDS_MASTER_CARD = 'MasterCard';
@@ -46,7 +50,7 @@ class ReadyToPayPaymentCardMethod implements ReadyToPayMethods
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('feature', $data)) {
             $this->setFeature($data['feature']);
@@ -57,11 +61,12 @@ class ReadyToPayPaymentCardMethod implements ReadyToPayMethods
         if (array_key_exists('filters', $data)) {
             $this->setFilters($data['filters']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getMethod(): string

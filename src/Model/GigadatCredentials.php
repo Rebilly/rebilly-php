@@ -15,12 +15,15 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class GigadatCredentials implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('campaignId', $data)) {
             $this->setCampaignId($data['campaignId']);
@@ -31,11 +34,12 @@ class GigadatCredentials implements JsonSerializable
         if (array_key_exists('securityToken', $data)) {
             $this->setSecurityToken($data['securityToken']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getCampaignId(): string

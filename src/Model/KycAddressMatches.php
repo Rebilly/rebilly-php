@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class KycAddressMatches implements PostKycDocumentMatchesRequest
 {
+    use HasMetadata;
+
     public const DOCUMENT_SUBTYPE_PASSPORT = 'passport';
 
     public const DOCUMENT_SUBTYPE_ID_CARD = 'id-card';
@@ -74,7 +77,7 @@ class KycAddressMatches implements PostKycDocumentMatchesRequest
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('firstName', $data)) {
             $this->setFirstName($data['firstName']);
@@ -112,11 +115,12 @@ class KycAddressMatches implements PostKycDocumentMatchesRequest
         if (array_key_exists('isTampered', $data)) {
             $this->setIsTampered($data['isTampered']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getFirstName(): ?string

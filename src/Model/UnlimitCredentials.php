@@ -15,12 +15,15 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class UnlimitCredentials implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('terminalId', $data)) {
             $this->setTerminalId($data['terminalId']);
@@ -31,11 +34,12 @@ class UnlimitCredentials implements JsonSerializable
         if (array_key_exists('ipnSecret', $data)) {
             $this->setIpnSecret($data['ipnSecret']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getTerminalId(): string

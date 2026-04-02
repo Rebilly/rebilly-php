@@ -14,20 +14,25 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use Rebilly\Sdk\Trait\HasMetadata;
+
 class PaymentInstructionInstrument implements PaymentInstruction
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('paymentInstrumentId', $data)) {
             $this->setPaymentInstrumentId($data['paymentInstrumentId']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getPaymentInstrumentId(): string

@@ -16,12 +16,15 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class DigitalWalletToken implements CompositeToken
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('paymentInstrument', $data)) {
             $this->setPaymentInstrument($data['paymentInstrument']);
@@ -56,11 +59,12 @@ class DigitalWalletToken implements CompositeToken
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getMethod(): string

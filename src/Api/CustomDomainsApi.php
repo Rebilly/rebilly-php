@@ -38,7 +38,7 @@ class CustomDomainsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CustomDomain::from($data);
+        return CustomDomain::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function delete(
@@ -69,7 +69,7 @@ class CustomDomainsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return CustomDomain::from($data);
+        return CustomDomain::from($data, ['headers' => $response->getHeaders()]);
     }
 
     /**
@@ -98,10 +98,13 @@ class CustomDomainsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): CustomDomain => CustomDomain::from($item), $data),
+            array_map(fn (array $item): CustomDomain => CustomDomain::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 

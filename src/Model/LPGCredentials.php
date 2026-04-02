@@ -15,12 +15,15 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class LPGCredentials implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('publicKey', $data)) {
             $this->setPublicKey($data['publicKey']);
@@ -34,11 +37,12 @@ class LPGCredentials implements JsonSerializable
         if (array_key_exists('payoutPassword', $data)) {
             $this->setPayoutPassword($data['payoutPassword']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getPublicKey(): string

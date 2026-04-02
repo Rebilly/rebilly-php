@@ -15,16 +15,19 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class OrderPreviewLineItems implements JsonSerializable
 {
+    use HasMetadata;
+
     public const TYPE_DEBIT = 'debit';
 
     public const TYPE_CREDIT = 'credit';
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('type', $data)) {
             $this->setType($data['type']);
@@ -47,11 +50,12 @@ class OrderPreviewLineItems implements JsonSerializable
         if (array_key_exists('productId', $data)) {
             $this->setProductId($data['productId']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getType(): ?string

@@ -15,18 +15,21 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class TransactionDcc implements JsonSerializable
 {
+    use HasMetadata;
+
+    public const OUTCOME_UNPROCESSED = 'unprocessed';
+
     public const OUTCOME_REJECTED = 'rejected';
 
     public const OUTCOME_SELECTED = 'selected';
 
-    public const OUTCOME_UNKNOWN = 'unknown';
-
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('base', $data)) {
             $this->setBase($data['base']);
@@ -40,11 +43,12 @@ class TransactionDcc implements JsonSerializable
         if (array_key_exists('outcome', $data)) {
             $this->setOutcome($data['outcome']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getBase(): ?Money

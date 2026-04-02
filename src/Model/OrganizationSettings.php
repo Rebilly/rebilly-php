@@ -15,12 +15,15 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class OrganizationSettings implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('defaultTaxCalculator', $data)) {
             $this->setDefaultTaxCalculator($data['defaultTaxCalculator']);
@@ -34,11 +37,15 @@ class OrganizationSettings implements JsonSerializable
         if (array_key_exists('notifications', $data)) {
             $this->setNotifications($data['notifications']);
         }
+        if (array_key_exists('payoutRequestAllocationOrder', $data)) {
+            $this->setPayoutRequestAllocationOrder($data['payoutRequestAllocationOrder']);
+        }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getDefaultTaxCalculator(): ?OrganizationSettingsDefaultTaxCalculator
@@ -112,6 +119,24 @@ class OrganizationSettings implements JsonSerializable
         return $this;
     }
 
+    /**
+     * @return null|string[]
+     */
+    public function getPayoutRequestAllocationOrder(): ?array
+    {
+        return $this->fields['payoutRequestAllocationOrder'] ?? null;
+    }
+
+    /**
+     * @param null|string[] $payoutRequestAllocationOrder
+     */
+    public function setPayoutRequestAllocationOrder(null|array $payoutRequestAllocationOrder): static
+    {
+        $this->fields['payoutRequestAllocationOrder'] = $payoutRequestAllocationOrder;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -131,6 +156,9 @@ class OrganizationSettings implements JsonSerializable
         }
         if (array_key_exists('notifications', $this->fields)) {
             $data['notifications'] = $this->fields['notifications']?->jsonSerialize();
+        }
+        if (array_key_exists('payoutRequestAllocationOrder', $this->fields)) {
+            $data['payoutRequestAllocationOrder'] = $this->fields['payoutRequestAllocationOrder'];
         }
 
         return $data;

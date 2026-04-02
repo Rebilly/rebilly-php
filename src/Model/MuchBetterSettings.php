@@ -15,12 +15,15 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class MuchBetterSettings implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('brandName', $data)) {
             $this->setBrandName($data['brandName']);
@@ -28,11 +31,12 @@ class MuchBetterSettings implements JsonSerializable
         if (array_key_exists('hasPhoneNumberRequest', $data)) {
             $this->setHasPhoneNumberRequest($data['hasPhoneNumberRequest']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getBrandName(): ?string

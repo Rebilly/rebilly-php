@@ -15,12 +15,15 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class GetKycAcceptanceSummaryReportResponseData implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('documentType', $data)) {
             $this->setDocumentType($data['documentType']);
@@ -40,24 +43,21 @@ class GetKycAcceptanceSummaryReportResponseData implements JsonSerializable
         if (array_key_exists('manualReviewTime', $data)) {
             $this->setManualReviewTime($data['manualReviewTime']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
-    public function getDocumentType(): ?GetKycAcceptanceSummaryReportResponseDataDocumentType
+    public function getDocumentType(): ?string
     {
         return $this->fields['documentType'] ?? null;
     }
 
-    public function setDocumentType(null|GetKycAcceptanceSummaryReportResponseDataDocumentType|array $documentType): static
+    public function setDocumentType(null|string $documentType): static
     {
-        if ($documentType !== null && !($documentType instanceof GetKycAcceptanceSummaryReportResponseDataDocumentType)) {
-            $documentType = GetKycAcceptanceSummaryReportResponseDataDocumentType::from($documentType);
-        }
-
         $this->fields['documentType'] = $documentType;
 
         return $this;
@@ -143,7 +143,7 @@ class GetKycAcceptanceSummaryReportResponseData implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('documentType', $this->fields)) {
-            $data['documentType'] = $this->fields['documentType']?->jsonSerialize();
+            $data['documentType'] = $this->fields['documentType'];
         }
         if (array_key_exists('statusStatistics', $this->fields)) {
             $data['statusStatistics'] = $this->fields['statusStatistics']?->jsonSerialize();

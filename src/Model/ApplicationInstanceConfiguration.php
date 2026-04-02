@@ -15,12 +15,15 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class ApplicationInstanceConfiguration implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('settings', $data)) {
             $this->setSettings($data['settings']);
@@ -28,11 +31,12 @@ class ApplicationInstanceConfiguration implements JsonSerializable
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     /**
@@ -65,7 +69,7 @@ class ApplicationInstanceConfiguration implements JsonSerializable
     {
         $data = [];
         if (array_key_exists('settings', $this->fields)) {
-            $data['settings'] = $this->fields['settings'];
+            $data['settings'] = (object) $this->fields['settings'];
         }
         if (array_key_exists('_links', $this->fields)) {
             $data['_links'] = $this->fields['_links'] !== null

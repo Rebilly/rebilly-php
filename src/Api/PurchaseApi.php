@@ -41,6 +41,6 @@ class PurchaseApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): ReadyToPayMethods => ReadyToPayMethodsFactory::from($item), $data);
+        return array_map(fn (array $item): ReadyToPayMethods => ReadyToPayMethodsFactory::from($item, ['headers' => $response->getHeaders()]), $data);
     }
 }

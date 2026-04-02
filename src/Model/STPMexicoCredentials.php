@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class STPMexicoCredentials implements JsonSerializable
 {
+    use HasMetadata;
+
     public const BANK_ID_37006 = '37006';
 
     public const BANK_ID_37009 = '37009';
@@ -220,7 +223,7 @@ class STPMexicoCredentials implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('companyName', $data)) {
             $this->setCompanyName($data['companyName']);
@@ -240,11 +243,12 @@ class STPMexicoCredentials implements JsonSerializable
         if (array_key_exists('keyPassphrase', $data)) {
             $this->setKeyPassphrase($data['keyPassphrase']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getCompanyName(): string

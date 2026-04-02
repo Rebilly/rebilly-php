@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class AmlSettingsPriorityStateOwnedEnterprise implements JsonSerializable
 {
+    use HasMetadata;
+
     public const VERY_STRONG_P0 = 'p0';
 
     public const VERY_STRONG_P1 = 'p1';
@@ -52,7 +55,7 @@ class AmlSettingsPriorityStateOwnedEnterprise implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('veryStrong', $data)) {
             $this->setVeryStrong($data['veryStrong']);
@@ -66,11 +69,12 @@ class AmlSettingsPriorityStateOwnedEnterprise implements JsonSerializable
         if (array_key_exists('weak', $data)) {
             $this->setWeak($data['weak']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getVeryStrong(): ?string

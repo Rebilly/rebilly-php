@@ -16,9 +16,12 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class RecurringOrder implements Order
 {
+    use HasMetadata;
+
     public const STATUS_PENDING = 'pending';
 
     public const STATUS_ACTIVE = 'active';
@@ -73,7 +76,7 @@ class RecurringOrder implements Order
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
@@ -198,6 +201,9 @@ class RecurringOrder implements Order
         if (array_key_exists('renewalTime', $data)) {
             $this->setRenewalTime($data['renewalTime']);
         }
+        if (array_key_exists('isNew', $data)) {
+            $this->setIsNew($data['isNew']);
+        }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
         }
@@ -210,11 +216,12 @@ class RecurringOrder implements Order
         if (array_key_exists('_embedded', $data)) {
             $this->setEmbedded($data['_embedded']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getType(): string
@@ -612,6 +619,11 @@ class RecurringOrder implements Order
         return $this->fields['renewalTime'] ?? null;
     }
 
+    public function getIsNew(): ?bool
+    {
+        return $this->fields['isNew'] ?? null;
+    }
+
     public function getCreatedTime(): ?DateTimeImmutable
     {
         return $this->fields['createdTime'] ?? null;
@@ -776,6 +788,9 @@ class RecurringOrder implements Order
         }
         if (array_key_exists('renewalTime', $this->fields)) {
             $data['renewalTime'] = $this->fields['renewalTime']?->format(DateTimeInterface::RFC3339);
+        }
+        if (array_key_exists('isNew', $this->fields)) {
+            $data['isNew'] = $this->fields['isNew'];
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
@@ -973,6 +988,13 @@ class RecurringOrder implements Order
         }
 
         $this->fields['renewalTime'] = $renewalTime;
+
+        return $this;
+    }
+
+    private function setIsNew(null|bool $isNew): static
+    {
+        $this->fields['isNew'] = $isNew;
 
         return $this;
     }

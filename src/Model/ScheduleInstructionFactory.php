@@ -18,16 +18,16 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class ScheduleInstructionFactory
 {
-    public static function from(array $data = []): ScheduleInstruction
+    public static function from(array $data = [], array $metadata = []): ScheduleInstruction
     {
         return match ($data['method']) {
-            'auto' => SchedulingMethodAuto::from($data),
-            'date-interval' => SchedulingMethodDateInterval::from($data),
-            'day-and-month-of-year' => SchedulingMethodDayAndMonthOfYear::from($data),
-            'day-of-month' => SchedulingMethodDayOfMonth::from($data),
-            'day-of-week' => SchedulingMethodDayOfWeek::from($data),
-            'immediately' => SchedulingMethodImmediately::from($data),
-            'intelligent' => SchedulingMethodIntelligent::from($data),
+            'auto' => SchedulingMethodAuto::from($data, $metadata),
+            'date-interval' => SchedulingMethodDateInterval::from($data, $metadata),
+            'day-and-month-of-year' => SchedulingMethodDayAndMonthOfYear::from($data, $metadata),
+            'day-of-month' => SchedulingMethodDayOfMonth::from($data, $metadata),
+            'day-of-week' => SchedulingMethodDayOfWeek::from($data, $metadata),
+            'immediately' => SchedulingMethodImmediately::from($data, $metadata),
+            'intelligent' => SchedulingMethodIntelligent::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

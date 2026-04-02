@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class AdyenSettingsSplitPayments implements JsonSerializable
 {
+    use HasMetadata;
+
     public const TYPE_BALANCE_ACCOUNT = 'BalanceAccount';
 
     public const TYPE_COMMISSION = 'Commission';
@@ -28,7 +31,7 @@ class AdyenSettingsSplitPayments implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('percentage', $data)) {
             $this->setPercentage($data['percentage']);
@@ -48,11 +51,12 @@ class AdyenSettingsSplitPayments implements JsonSerializable
         if (array_key_exists('type', $data)) {
             $this->setType($data['type']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getPercentage(): ?float

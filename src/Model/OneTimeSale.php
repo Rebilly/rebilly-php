@@ -16,9 +16,12 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class OneTimeSale implements SubscriptionOrOneTimeSale
 {
+    use HasMetadata;
+
     public const STATUS_PENDING = 'pending';
 
     public const STATUS_ABANDONED = 'abandoned';
@@ -49,7 +52,7 @@ class OneTimeSale implements SubscriptionOrOneTimeSale
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
@@ -129,11 +132,12 @@ class OneTimeSale implements SubscriptionOrOneTimeSale
         if (array_key_exists('_embedded', $data)) {
             $this->setEmbedded($data['_embedded']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getOrderType(): string

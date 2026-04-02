@@ -35,7 +35,7 @@ class AmlSettingsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return AmlSettings::from($data);
+        return AmlSettings::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function putAmlSettings(
@@ -49,6 +49,6 @@ class AmlSettingsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return AmlSettings::from($data);
+        return AmlSettings::from($data, ['headers' => $response->getHeaders()]);
     }
 }

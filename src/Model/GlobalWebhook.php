@@ -17,9 +17,12 @@ namespace Rebilly\Sdk\Model;
 use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class GlobalWebhook implements JsonSerializable
 {
+    use HasMetadata;
+
     public const EVENTS_FILTER_AML_LIST_POSSIBLY_MATCHED = 'aml-list-possibly-matched';
 
     public const EVENTS_FILTER_AUTODEPOSIT_LOOKUP_PERFORMED = 'autodeposit-lookup-performed';
@@ -108,8 +111,6 @@ class GlobalWebhook implements JsonSerializable
 
     public const EVENTS_FILTER_PAYOUT_REQUEST_MODIFIED = 'payout-request-modified';
 
-    public const EVENTS_FILTER_PAYOUT_REQUEST_REVERSED = 'payout-request-reversed';
-
     public const EVENTS_FILTER_QUOTE_ACCEPTED = 'quote-accepted';
 
     public const EVENTS_FILTER_QUOTE_CANCELED = 'quote-canceled';
@@ -178,7 +179,7 @@ class GlobalWebhook implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
@@ -216,11 +217,12 @@ class GlobalWebhook implements JsonSerializable
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getId(): ?string

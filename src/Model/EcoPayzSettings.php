@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class EcoPayzSettings implements JsonSerializable
 {
+    use HasMetadata;
+
     public const VALID_CURRENCY_CAD = 'CAD';
 
     public const VALID_CURRENCY_EUR = 'EUR';
@@ -28,16 +31,17 @@ class EcoPayzSettings implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('validCurrency', $data)) {
             $this->setValidCurrency($data['validCurrency']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getValidCurrency(): string

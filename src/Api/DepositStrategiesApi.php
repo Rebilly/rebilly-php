@@ -38,7 +38,7 @@ class DepositStrategiesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return DepositStrategy::from($data);
+        return DepositStrategy::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function delete(
@@ -69,7 +69,7 @@ class DepositStrategiesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return DepositStrategy::from($data);
+        return DepositStrategy::from($data, ['headers' => $response->getHeaders()]);
     }
 
     /**
@@ -96,10 +96,13 @@ class DepositStrategiesApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): DepositStrategy => DepositStrategy::from($item), $data),
+            array_map(fn (array $item): DepositStrategy => DepositStrategy::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -141,6 +144,6 @@ class DepositStrategiesApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return DepositStrategy::from($data);
+        return DepositStrategy::from($data, ['headers' => $response->getHeaders()]);
     }
 }

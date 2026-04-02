@@ -17,9 +17,12 @@ namespace Rebilly\Sdk\Model;
 use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class EddSearchResult implements JsonSerializable
 {
+    use HasMetadata;
+
     public const TYPE_OCCUPATION = 'occupation';
 
     public const TYPE_ARREST = 'arrest';
@@ -30,7 +33,7 @@ class EddSearchResult implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
@@ -47,11 +50,12 @@ class EddSearchResult implements JsonSerializable
         if (array_key_exists('updatedTime', $data)) {
             $this->setUpdatedTime($data['updatedTime']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getId(): ?string

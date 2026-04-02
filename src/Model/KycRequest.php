@@ -17,9 +17,12 @@ namespace Rebilly\Sdk\Model;
 use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class KycRequest implements JsonSerializable
 {
+    use HasMetadata;
+
     public const STATUS_GATHERING = 'gathering';
 
     public const STATUS_ATTEMPTED = 'attempted';
@@ -44,7 +47,7 @@ class KycRequest implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
@@ -85,11 +88,12 @@ class KycRequest implements JsonSerializable
         if (array_key_exists('_embedded', $data)) {
             $this->setEmbedded($data['_embedded']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getId(): ?string
