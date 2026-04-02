@@ -18,14 +18,14 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class InvoiceRetryScheduleInstructionFactory
 {
-    public static function from(array $data = []): InvoiceRetryScheduleInstruction
+    public static function from(array $data = [], array $metadata = []): InvoiceRetryScheduleInstruction
     {
         return match ($data['method']) {
-            'date-interval' => SchedulingMethodDateInterval::from($data),
-            'day-of-month' => SchedulingMethodDayOfMonth::from($data),
-            'day-of-week' => SchedulingMethodDayOfWeek::from($data),
-            'immediately' => SchedulingMethodImmediately::from($data),
-            'intelligent' => SchedulingMethodIntelligent::from($data),
+            'date-interval' => SchedulingMethodDateInterval::from($data, $metadata),
+            'day-of-month' => SchedulingMethodDayOfMonth::from($data, $metadata),
+            'day-of-week' => SchedulingMethodDayOfWeek::from($data, $metadata),
+            'immediately' => SchedulingMethodImmediately::from($data, $metadata),
+            'intelligent' => SchedulingMethodIntelligent::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

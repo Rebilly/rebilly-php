@@ -59,7 +59,7 @@ class GatewayAccountsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return GatewayAccount::from($data);
+        return GatewayAccount::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function create(
@@ -73,7 +73,7 @@ class GatewayAccountsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return GatewayAccount::from($data);
+        return GatewayAccount::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function createDowntimeSchedule(
@@ -92,7 +92,7 @@ class GatewayAccountsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return GatewayAccountDowntimeSchedule::from($data);
+        return GatewayAccountDowntimeSchedule::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function createTimelineComment(
@@ -111,7 +111,7 @@ class GatewayAccountsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return GatewayAccountTimeline::from($data);
+        return GatewayAccountTimeline::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function delete(
@@ -187,7 +187,7 @@ class GatewayAccountsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return GatewayAccount::from($data);
+        return GatewayAccount::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function enable(
@@ -205,7 +205,7 @@ class GatewayAccountsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return GatewayAccount::from($data);
+        return GatewayAccount::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function get(
@@ -223,7 +223,7 @@ class GatewayAccountsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return GatewayAccount::from($data);
+        return GatewayAccount::from($data, ['headers' => $response->getHeaders()]);
     }
 
     /**
@@ -254,10 +254,13 @@ class GatewayAccountsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): GatewayAccount => GatewayAccount::from($item), $data),
+            array_map(fn (array $item): GatewayAccount => GatewayAccount::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -316,10 +319,13 @@ class GatewayAccountsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): GatewayAccountDowntimeSchedule => GatewayAccountDowntimeSchedule::from($item), $data),
+            array_map(fn (array $item): GatewayAccountDowntimeSchedule => GatewayAccountDowntimeSchedule::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -378,10 +384,13 @@ class GatewayAccountsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): GatewayAccountTimeline => GatewayAccountTimeline::from($item), $data),
+            array_map(fn (array $item): GatewayAccountTimeline => GatewayAccountTimeline::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -429,7 +438,7 @@ class GatewayAccountsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): GatewayAccountLimit => GatewayAccountLimit::from($item), $data);
+        return array_map(fn (array $item): GatewayAccountLimit => GatewayAccountLimit::from($item, ['headers' => $response->getHeaders()]), $data);
     }
 
     public function getDowntimeSchedule(
@@ -449,7 +458,7 @@ class GatewayAccountsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return GatewayAccountDowntimeSchedule::from($data);
+        return GatewayAccountDowntimeSchedule::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getFinancialSettings(
@@ -467,7 +476,7 @@ class GatewayAccountsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return GatewayAccountFinancialSettings::from($data);
+        return GatewayAccountFinancialSettings::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getTimelineMessage(
@@ -487,7 +496,7 @@ class GatewayAccountsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return GatewayAccountTimeline::from($data);
+        return GatewayAccountTimeline::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getVolumeLimit(
@@ -507,7 +516,7 @@ class GatewayAccountsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return GatewayAccountLimit::from($data);
+        return GatewayAccountLimit::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function setFinancialSettings(
@@ -526,7 +535,7 @@ class GatewayAccountsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return GatewayAccountFinancialSettings::from($data);
+        return GatewayAccountFinancialSettings::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function update(
@@ -545,7 +554,7 @@ class GatewayAccountsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return GatewayAccount::from($data);
+        return GatewayAccount::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function updateDowntimeSchedule(
@@ -566,7 +575,7 @@ class GatewayAccountsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return GatewayAccountDowntimeSchedule::from($data);
+        return GatewayAccountDowntimeSchedule::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function updateVolumeLimit(
@@ -587,7 +596,7 @@ class GatewayAccountsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return GatewayAccountLimit::from($data);
+        return GatewayAccountLimit::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function upsert(
@@ -606,6 +615,6 @@ class GatewayAccountsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return GatewayAccount::from($data);
+        return GatewayAccount::from($data, ['headers' => $response->getHeaders()]);
     }
 }

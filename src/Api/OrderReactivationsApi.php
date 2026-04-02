@@ -42,7 +42,7 @@ class OrderReactivationsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return OrderReactivation::from($data);
+        return OrderReactivation::from($data, ['headers' => $response->getHeaders()]);
     }
 
     /**
@@ -69,10 +69,13 @@ class OrderReactivationsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): OrderReactivation => OrderReactivation::from($item), $data),
+            array_map(fn (array $item): OrderReactivation => OrderReactivation::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
+            [
+                'headers' => $response->getHeaders(),
+            ]
         );
     }
 
@@ -109,6 +112,6 @@ class OrderReactivationsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return OrderReactivation::from($data);
+        return OrderReactivation::from($data, ['headers' => $response->getHeaders()]);
     }
 }

@@ -17,9 +17,12 @@ namespace Rebilly\Sdk\Model;
 use DateTimeImmutable;
 use DateTimeInterface;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class PayoutRequest implements JsonSerializable
 {
+    use HasMetadata;
+
     public const STATUS_PENDING = 'pending';
 
     public const STATUS_INSTRUMENT_SELECTED = 'instrument-selected';
@@ -32,7 +35,7 @@ class PayoutRequest implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('id', $data)) {
             $this->setId($data['id']);
@@ -61,6 +64,15 @@ class PayoutRequest implements JsonSerializable
         if (array_key_exists('status', $data)) {
             $this->setStatus($data['status']);
         }
+        if (array_key_exists('blocked', $data)) {
+            $this->setBlocked($data['blocked']);
+        }
+        if (array_key_exists('blockReason', $data)) {
+            $this->setBlockReason($data['blockReason']);
+        }
+        if (array_key_exists('batchId', $data)) {
+            $this->setBatchId($data['batchId']);
+        }
         if (array_key_exists('selectPaymentInstrumentUrl', $data)) {
             $this->setSelectPaymentInstrumentUrl($data['selectPaymentInstrumentUrl']);
         }
@@ -82,11 +94,12 @@ class PayoutRequest implements JsonSerializable
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getId(): ?string
@@ -180,6 +193,35 @@ class PayoutRequest implements JsonSerializable
         return $this->fields['status'] ?? null;
     }
 
+    public function getBlocked(): ?bool
+    {
+        return $this->fields['blocked'] ?? null;
+    }
+
+    public function setBlocked(null|bool $blocked): static
+    {
+        $this->fields['blocked'] = $blocked;
+
+        return $this;
+    }
+
+    public function getBlockReason(): ?string
+    {
+        return $this->fields['blockReason'] ?? null;
+    }
+
+    public function setBlockReason(null|string $blockReason): static
+    {
+        $this->fields['blockReason'] = $blockReason;
+
+        return $this;
+    }
+
+    public function getBatchId(): ?string
+    {
+        return $this->fields['batchId'] ?? null;
+    }
+
     public function getSelectPaymentInstrumentUrl(): ?string
     {
         return $this->fields['selectPaymentInstrumentUrl'] ?? null;
@@ -269,6 +311,15 @@ class PayoutRequest implements JsonSerializable
         if (array_key_exists('status', $this->fields)) {
             $data['status'] = $this->fields['status'];
         }
+        if (array_key_exists('blocked', $this->fields)) {
+            $data['blocked'] = $this->fields['blocked'];
+        }
+        if (array_key_exists('blockReason', $this->fields)) {
+            $data['blockReason'] = $this->fields['blockReason'];
+        }
+        if (array_key_exists('batchId', $this->fields)) {
+            $data['batchId'] = $this->fields['batchId'];
+        }
         if (array_key_exists('selectPaymentInstrumentUrl', $this->fields)) {
             $data['selectPaymentInstrumentUrl'] = $this->fields['selectPaymentInstrumentUrl'];
         }
@@ -325,6 +376,13 @@ class PayoutRequest implements JsonSerializable
     private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
+
+        return $this;
+    }
+
+    private function setBatchId(null|string $batchId): static
+    {
+        $this->fields['batchId'] = $batchId;
 
         return $this;
     }

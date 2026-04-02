@@ -18,12 +18,12 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class ReminderScheduleInstructionFactory
 {
-    public static function from(array $data = []): ReminderScheduleInstruction
+    public static function from(array $data = [], array $metadata = []): ReminderScheduleInstruction
     {
         return match ($data['method']) {
-            'date-interval' => SchedulingMethodDateInterval::from($data),
-            'day-of-month' => SchedulingMethodDayOfMonth::from($data),
-            'day-of-week' => SchedulingMethodDayOfWeek::from($data),
+            'date-interval' => SchedulingMethodDateInterval::from($data, $metadata),
+            'day-of-month' => SchedulingMethodDayOfMonth::from($data, $metadata),
+            'day-of-week' => SchedulingMethodDayOfWeek::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

@@ -14,8 +14,12 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use Rebilly\Sdk\Trait\HasMetadata;
+
 class FileCreateFromInline implements PostFileRequest
 {
+    use HasMetadata;
+
     public const SOURCE_TYPE_UPLOAD = 'upload';
 
     public const SOURCE_TYPE_CAMERA = 'camera';
@@ -28,7 +32,7 @@ class FileCreateFromInline implements PostFileRequest
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('file', $data)) {
             $this->setFile($data['file']);
@@ -48,11 +52,12 @@ class FileCreateFromInline implements PostFileRequest
         if (array_key_exists('tags', $data)) {
             $this->setTags($data['tags']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getFile(): string

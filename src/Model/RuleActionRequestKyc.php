@@ -14,8 +14,12 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use Rebilly\Sdk\Trait\HasMetadata;
+
 class RuleActionRequestKyc extends RuleAction
 {
+    use HasMetadata;
+
     public const EXCLUDE_POLICY_CUSTOMERS_WITH_ACCEPTED_DOCUMENT = 'customers-with-accepted-document';
 
     public const EXCLUDE_POLICY_CUSTOMERS_WITH_DOCUMENT = 'customers-with-document';
@@ -40,11 +44,11 @@ class RuleActionRequestKyc extends RuleAction
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         parent::__construct([
             'name' => 'request-kyc',
-        ] + $data);
+        ] + $data, $metadata);
 
         if (array_key_exists('documents', $data)) {
             $this->setDocuments($data['documents']);
@@ -76,11 +80,12 @@ class RuleActionRequestKyc extends RuleAction
         if (array_key_exists('bypassCurrencyToDisplay', $data)) {
             $this->setBypassCurrencyToDisplay($data['bypassCurrencyToDisplay']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     /**

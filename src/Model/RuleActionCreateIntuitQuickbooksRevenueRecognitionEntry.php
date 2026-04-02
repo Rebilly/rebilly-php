@@ -14,15 +14,19 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use Rebilly\Sdk\Trait\HasMetadata;
+
 class RuleActionCreateIntuitQuickbooksRevenueRecognitionEntry extends RuleAction
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         parent::__construct([
             'name' => 'create-intuit-quickbooks-revenue-recognition-entry',
-        ] + $data);
+        ] + $data, $metadata);
 
         if (array_key_exists('debitAccount', $data)) {
             $this->setDebitAccount($data['debitAccount']);
@@ -36,11 +40,12 @@ class RuleActionCreateIntuitQuickbooksRevenueRecognitionEntry extends RuleAction
         if (array_key_exists('credentialHash', $data)) {
             $this->setCredentialHash($data['credentialHash']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getDebitAccount(): string

@@ -18,12 +18,12 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class CountriesMetadataFactory
 {
-    public static function from(array $data = []): CountriesMetadata
+    public static function from(array $data = [], array $metadata = []): CountriesMetadata
     {
         return match ($data['mode']) {
-            'subset' => CountriesSubsetMetadata::from($data),
-            'all' => CountriesUnrestrictedMetadata::from($data),
-            'unknown' => CountriesUnrestrictedMetadata::from($data),
+            'subset' => CountriesSubsetMetadata::from($data, $metadata),
+            'all' => CountriesUnrestrictedMetadata::from($data, $metadata),
+            'unknown' => CountriesUnrestrictedMetadata::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

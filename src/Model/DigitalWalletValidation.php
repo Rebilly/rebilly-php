@@ -16,25 +16,29 @@ namespace Rebilly\Sdk\Model;
 
 use InvalidArgumentException;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 abstract class DigitalWalletValidation implements JsonSerializable
 {
+    use HasMetadata;
+
     public const TYPE_APPLE_PAY = 'Apple Pay';
 
     private array $fields = [];
 
-    protected function __construct(array $data = [])
+    protected function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('type', $data)) {
             $this->setType($data['type']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
         switch ($data['type']) {
             case 'Apple Pay':
-                return ApplePayValidation::from($data);
+                return ApplePayValidation::from($data, $metadata);
         }
 
         throw new InvalidArgumentException("Unsupported type value: '{$data['type']}'");

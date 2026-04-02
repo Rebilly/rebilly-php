@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class ThreeDSecureIO3dsServer implements JsonSerializable
 {
+    use HasMetadata;
+
     public const NAME_THREE_D_SECURE_IO3_DS_SERVER = 'ThreeDSecureIO3dsServer';
 
     public const TRANSACTION_TYPE_01 = '01';
@@ -32,7 +35,7 @@ class ThreeDSecureIO3dsServer implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('name', $data)) {
             $this->setName($data['name']);
@@ -85,11 +88,12 @@ class ThreeDSecureIO3dsServer implements JsonSerializable
         if (array_key_exists('forceChallenge', $data)) {
             $this->setForceChallenge($data['forceChallenge']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getName(): string

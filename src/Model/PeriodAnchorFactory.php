@@ -18,11 +18,11 @@ use Rebilly\Sdk\Exception\UnknownDiscriminatorValueException;
 
 class PeriodAnchorFactory
 {
-    public static function from(array $data = []): PeriodAnchor
+    public static function from(array $data = [], array $metadata = []): PeriodAnchor
     {
         return match ($data['method']) {
-            'day-of-month' => SchedulingMethodDayOfMonth::from($data),
-            'day-of-week' => SchedulingMethodDayOfWeek::from($data),
+            'day-of-month' => SchedulingMethodDayOfMonth::from($data, $metadata),
+            'day-of-week' => SchedulingMethodDayOfWeek::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

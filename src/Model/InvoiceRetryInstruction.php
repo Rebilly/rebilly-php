@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class InvoiceRetryInstruction implements JsonSerializable
 {
+    use HasMetadata;
+
     public const AFTER_ATTEMPT_POLICIES_CHANGE_SUBSCRIPTION_RENEWAL_TIME = 'change-subscription-renewal-time';
 
     public const AFTER_RETRY_END_POLICIES_ABANDON_INVOICE = 'abandon-invoice';
@@ -26,7 +29,7 @@ class InvoiceRetryInstruction implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('attempts', $data)) {
             $this->setAttempts($data['attempts']);
@@ -37,11 +40,12 @@ class InvoiceRetryInstruction implements JsonSerializable
         if (array_key_exists('afterRetryEndPolicies', $data)) {
             $this->setAfterRetryEndPolicies($data['afterRetryEndPolicies']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     /**

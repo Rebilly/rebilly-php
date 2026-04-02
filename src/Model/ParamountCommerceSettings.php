@@ -15,9 +15,12 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class ParamountCommerceSettings implements JsonSerializable
 {
+    use HasMetadata;
+
     public const MERCHANT_TRANSACTION_TYPE_POKER = 'POKER';
 
     public const MERCHANT_TRANSACTION_TYPE_CASINO = 'CASINO';
@@ -32,7 +35,7 @@ class ParamountCommerceSettings implements JsonSerializable
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('merchantSubId', $data)) {
             $this->setMerchantSubId($data['merchantSubId']);
@@ -43,11 +46,12 @@ class ParamountCommerceSettings implements JsonSerializable
         if (array_key_exists('useDirectDeposit', $data)) {
             $this->setUseDirectDeposit($data['useDirectDeposit']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getMerchantSubId(): string

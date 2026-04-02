@@ -15,12 +15,15 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class MobilePayCredentials implements JsonSerializable
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('merchantSerialNumber', $data)) {
             $this->setMerchantSerialNumber($data['merchantSerialNumber']);
@@ -34,11 +37,12 @@ class MobilePayCredentials implements JsonSerializable
         if (array_key_exists('clientSecret', $data)) {
             $this->setClientSecret($data['clientSecret']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getMerchantSerialNumber(): string

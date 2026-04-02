@@ -15,16 +15,19 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 class KycSettings implements JsonSerializable
 {
+    use HasMetadata;
+
     public const UI_VERSION_1 = '1';
 
     public const UI_VERSION_2 = '2';
 
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('identityProof', $data)) {
             $this->setIdentityProof($data['identityProof']);
@@ -35,11 +38,12 @@ class KycSettings implements JsonSerializable
         if (array_key_exists('uiVersion', $data)) {
             $this->setUiVersion($data['uiVersion']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getIdentityProof(): ?KycSettingsIdentity

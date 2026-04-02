@@ -16,9 +16,12 @@ namespace Rebilly\Sdk\Model;
 
 use InvalidArgumentException;
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
 abstract class GatewayAccountPickInstruction implements JsonSerializable
 {
+    use HasMetadata;
+
     public const STRATEGY_WEIGHTED_RANDOM = 'weighted-random';
 
     public const STRATEGY_ROUND_ROBIN = 'round-robin';
@@ -29,7 +32,7 @@ abstract class GatewayAccountPickInstruction implements JsonSerializable
 
     private array $fields = [];
 
-    protected function __construct(array $data = [])
+    protected function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('strategy', $data)) {
             $this->setStrategy($data['strategy']);
@@ -37,15 +40,16 @@ abstract class GatewayAccountPickInstruction implements JsonSerializable
         if (array_key_exists('method', $data)) {
             $this->setMethod($data['method']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
         switch ($data['method']) {
             case 'gateway-account-weights':
-                return PickInstructionGatewayAccountWeights::from($data);
+                return PickInstructionGatewayAccountWeights::from($data, $metadata);
             case 'gateway-acquirer-weights':
-                return PickInstructionGatewayAcquirerWeights::from($data);
+                return PickInstructionGatewayAcquirerWeights::from($data, $metadata);
         }
 
         throw new InvalidArgumentException("Unsupported method value: '{$data['method']}'");

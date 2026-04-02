@@ -14,15 +14,19 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use Rebilly\Sdk\Trait\HasMetadata;
+
 class RuleActionPerformExperianCheck extends RuleAction
 {
+    use HasMetadata;
+
     private array $fields = [];
 
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], array $metadata = [])
     {
         parent::__construct([
             'name' => 'perform-experian-check',
-        ] + $data);
+        ] + $data, $metadata);
 
         if (array_key_exists('experianCredentialHash', $data)) {
             $this->setExperianCredentialHash($data['experianCredentialHash']);
@@ -36,11 +40,12 @@ class RuleActionPerformExperianCheck extends RuleAction
         if (array_key_exists('tagOnUnknown', $data)) {
             $this->setTagOnUnknown($data['tagOnUnknown']);
         }
+        $this->setMetadata($metadata);
     }
 
-    public static function from(array $data = []): self
+    public static function from(array $data = [], array $metadata = []): self
     {
-        return new self($data);
+        return new self($data, $metadata);
     }
 
     public function getExperianCredentialHash(): string
