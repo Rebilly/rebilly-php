@@ -361,6 +361,8 @@ class GetPayoutRequestV2PaymentInstrumentsResponse implements JsonSerializable
 
     public const GATEWAY_NAME_PAYVISION = 'Payvision';
 
+    public const GATEWAY_NAME_PAY_XPERT = 'PayXpert';
+
     public const GATEWAY_NAME_PHAROS_PAYMENTS = 'PharosPayments';
 
     public const GATEWAY_NAME_PIASTRIX = 'Piastrix';
