@@ -201,8 +201,8 @@ class RecurringOrder implements Order
         if (array_key_exists('renewalTime', $data)) {
             $this->setRenewalTime($data['renewalTime']);
         }
-        if (array_key_exists('isNew', $data)) {
-            $this->setIsNew($data['isNew']);
+        if (array_key_exists('isNewOrder', $data)) {
+            $this->setIsNewOrder($data['isNewOrder']);
         }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
@@ -619,9 +619,9 @@ class RecurringOrder implements Order
         return $this->fields['renewalTime'] ?? null;
     }
 
-    public function getIsNew(): ?bool
+    public function getIsNewOrder(): ?bool
     {
-        return $this->fields['isNew'] ?? null;
+        return $this->fields['isNewOrder'] ?? null;
     }
 
     public function getCreatedTime(): ?DateTimeImmutable
@@ -789,8 +789,8 @@ class RecurringOrder implements Order
         if (array_key_exists('renewalTime', $this->fields)) {
             $data['renewalTime'] = $this->fields['renewalTime']?->format(DateTimeInterface::RFC3339);
         }
-        if (array_key_exists('isNew', $this->fields)) {
-            $data['isNew'] = $this->fields['isNew'];
+        if (array_key_exists('isNewOrder', $this->fields)) {
+            $data['isNewOrder'] = $this->fields['isNewOrder'];
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
@@ -992,9 +992,9 @@ class RecurringOrder implements Order
         return $this;
     }
 
-    private function setIsNew(null|bool $isNew): static
+    private function setIsNewOrder(null|bool $isNewOrder): static
     {
-        $this->fields['isNew'] = $isNew;
+        $this->fields['isNewOrder'] = $isNewOrder;
 
         return $this;
     }

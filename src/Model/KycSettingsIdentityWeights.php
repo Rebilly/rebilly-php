@@ -46,9 +46,6 @@ class KycSettingsIdentityWeights implements JsonSerializable
         if (array_key_exists('dateOfBirth', $data)) {
             $this->setDateOfBirth($data['dateOfBirth']);
         }
-        if (array_key_exists('matchesDateOfBirth', $data)) {
-            $this->setMatchesDateOfBirth($data['matchesDateOfBirth']);
-        }
         if (array_key_exists('issueDate', $data)) {
             $this->setIssueDate($data['issueDate']);
         }
@@ -162,18 +159,6 @@ class KycSettingsIdentityWeights implements JsonSerializable
         return $this;
     }
 
-    public function getMatchesDateOfBirth(): ?int
-    {
-        return $this->fields['matchesDateOfBirth'] ?? null;
-    }
-
-    public function setMatchesDateOfBirth(null|int $matchesDateOfBirth): static
-    {
-        $this->fields['matchesDateOfBirth'] = $matchesDateOfBirth;
-
-        return $this;
-    }
-
     public function getIssueDate(): ?int
     {
         return $this->fields['issueDate'] ?? null;
@@ -281,9 +266,6 @@ class KycSettingsIdentityWeights implements JsonSerializable
         }
         if (array_key_exists('dateOfBirth', $this->fields)) {
             $data['dateOfBirth'] = $this->fields['dateOfBirth'];
-        }
-        if (array_key_exists('matchesDateOfBirth', $this->fields)) {
-            $data['matchesDateOfBirth'] = $this->fields['matchesDateOfBirth'];
         }
         if (array_key_exists('issueDate', $this->fields)) {
             $data['issueDate'] = $this->fields['issueDate'];

@@ -34,6 +34,9 @@ class DepositStrategyCustomAmount implements JsonSerializable
         if (array_key_exists('maximum', $data)) {
             $this->setMaximum($data['maximum']);
         }
+        if (array_key_exists('buttonText', $data)) {
+            $this->setButtonText($data['buttonText']);
+        }
         $this->setMetadata($metadata);
     }
 
@@ -90,6 +93,24 @@ class DepositStrategyCustomAmount implements JsonSerializable
         return $this;
     }
 
+    /**
+     * @return null|array<string,string>
+     */
+    public function getButtonText(): ?array
+    {
+        return $this->fields['buttonText'] ?? null;
+    }
+
+    /**
+     * @param null|array<string,string> $buttonText
+     */
+    public function setButtonText(null|array $buttonText): static
+    {
+        $this->fields['buttonText'] = $buttonText;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -101,6 +122,11 @@ class DepositStrategyCustomAmount implements JsonSerializable
         }
         if (array_key_exists('maximum', $this->fields)) {
             $data['maximum'] = $this->fields['maximum'];
+        }
+        if (array_key_exists('buttonText', $this->fields)) {
+            $data['buttonText'] = $this->fields['buttonText'] !== null
+                ? (object) $this->fields['buttonText']
+                : null;
         }
 
         return $data;

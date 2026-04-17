@@ -38,6 +38,8 @@ interface Quote extends JsonSerializable
      */
     public function getAcceptanceFulfillment(): ?array;
 
+    public function getIsNewOrder(): ?bool;
+
     public function getInvoiceId(): ?string;
 
     public function getStatus(): ?string;

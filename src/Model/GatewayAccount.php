@@ -362,6 +362,8 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const GATEWAY_NAME_PAYVISION = 'Payvision';
 
+    public const GATEWAY_NAME_PAY_XPERT = 'PayXpert';
+
     public const GATEWAY_NAME_PHAROS_PAYMENTS = 'PharosPayments';
 
     public const GATEWAY_NAME_PIASTRIX = 'Piastrix';
@@ -1780,6 +1782,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return PayULatam::from($data, $metadata);
             case 'Payvision':
                 return Payvision::from($data, $metadata);
+            case 'PayXpert':
+                return PayXpert::from($data, $metadata);
             case 'PharosPayments':
                 return PharosPayments::from($data, $metadata);
             case 'Piastrix':
