@@ -361,6 +361,8 @@ class GetPayoutRequestPaymentInstrumentsResponse implements JsonSerializable
 
     public const GATEWAY_NAME_PAYVISION = 'Payvision';
 
+    public const GATEWAY_NAME_PAY_XPERT = 'PayXpert';
+
     public const GATEWAY_NAME_PHAROS_PAYMENTS = 'PharosPayments';
 
     public const GATEWAY_NAME_PIASTRIX = 'Piastrix';
@@ -475,6 +477,16 @@ class GetPayoutRequestPaymentInstrumentsResponse implements JsonSerializable
 
     public const GATEWAY_NAME_ZOTAPAY = 'Zotapay';
 
+    public const GATEWAY_PAYOUT_INSTRUCTION_ALL = 'all';
+
+    public const GATEWAY_PAYOUT_INSTRUCTION_COVERED_PAYOUT = 'covered-payout';
+
+    public const GATEWAY_PAYOUT_INSTRUCTION_APPROVED_PAYMENT = 'approved-payment';
+
+    public const GATEWAY_PAYOUT_INSTRUCTION_NONE = 'none';
+
+    public const GATEWAY_PAYOUT_INSTRUCTION_NULL = 'null';
+
     private array $fields = [];
 
     public function __construct(array $data = [], array $metadata = [])
@@ -484,6 +496,12 @@ class GetPayoutRequestPaymentInstrumentsResponse implements JsonSerializable
         }
         if (array_key_exists('gatewayName', $data)) {
             $this->setGatewayName($data['gatewayName']);
+        }
+        if (array_key_exists('gatewayAccountId', $data)) {
+            $this->setGatewayAccountId($data['gatewayAccountId']);
+        }
+        if (array_key_exists('gatewayPayoutInstruction', $data)) {
+            $this->setGatewayPayoutInstruction($data['gatewayPayoutInstruction']);
         }
         if (array_key_exists('exposureAmount', $data)) {
             $this->setExposureAmount($data['exposureAmount']);
@@ -525,6 +543,30 @@ class GetPayoutRequestPaymentInstrumentsResponse implements JsonSerializable
     public function setGatewayName(null|string $gatewayName): static
     {
         $this->fields['gatewayName'] = $gatewayName;
+
+        return $this;
+    }
+
+    public function getGatewayAccountId(): ?string
+    {
+        return $this->fields['gatewayAccountId'] ?? null;
+    }
+
+    public function setGatewayAccountId(null|string $gatewayAccountId): static
+    {
+        $this->fields['gatewayAccountId'] = $gatewayAccountId;
+
+        return $this;
+    }
+
+    public function getGatewayPayoutInstruction(): ?string
+    {
+        return $this->fields['gatewayPayoutInstruction'] ?? null;
+    }
+
+    public function setGatewayPayoutInstruction(null|string $gatewayPayoutInstruction): static
+    {
+        $this->fields['gatewayPayoutInstruction'] = $gatewayPayoutInstruction;
 
         return $this;
     }
@@ -601,6 +643,12 @@ class GetPayoutRequestPaymentInstrumentsResponse implements JsonSerializable
         }
         if (array_key_exists('gatewayName', $this->fields)) {
             $data['gatewayName'] = $this->fields['gatewayName'];
+        }
+        if (array_key_exists('gatewayAccountId', $this->fields)) {
+            $data['gatewayAccountId'] = $this->fields['gatewayAccountId'];
+        }
+        if (array_key_exists('gatewayPayoutInstruction', $this->fields)) {
+            $data['gatewayPayoutInstruction'] = $this->fields['gatewayPayoutInstruction'];
         }
         if (array_key_exists('exposureAmount', $this->fields)) {
             $data['exposureAmount'] = $this->fields['exposureAmount'];

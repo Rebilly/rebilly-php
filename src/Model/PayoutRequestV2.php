@@ -31,8 +31,6 @@ class PayoutRequestV2 implements JsonSerializable
 
     public const STATUS_IN_PROGRESS = 'in-progress';
 
-    public const STATUS_INSTRUMENT_SELECTED = 'instrument-selected';
-
     public const STATUS_PARTIALLY_FULFILLED = 'partially-fulfilled';
 
     public const STATUS_FULFILLED = 'fulfilled';
