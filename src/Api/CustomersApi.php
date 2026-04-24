@@ -19,6 +19,7 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\Customer;
+use Rebilly\Sdk\Model\CustomerCreditBalance;
 use Rebilly\Sdk\Model\CustomerInformation;
 use Rebilly\Sdk\Model\CustomerTimeline;
 use Rebilly\Sdk\Model\Edd;
@@ -325,6 +326,24 @@ class CustomersApi
             $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
             $closure,
         );
+    }
+
+    public function getCustomerCreditBalance(
+        string $id,
+    ): CustomerCreditBalance {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/credit-balance');
+
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return CustomerCreditBalance::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function getCustomerEddScore(

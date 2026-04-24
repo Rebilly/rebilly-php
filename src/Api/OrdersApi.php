@@ -127,6 +127,7 @@ class OrdersApi
         ?int $limit = null,
         ?int $offset = null,
         ?string $q = null,
+        ?string $expand = null,
     ): Collection {
         $queryParams = [
             'filter' => $filter,
@@ -134,6 +135,7 @@ class OrdersApi
             'limit' => $limit,
             'offset' => $offset,
             'q' => $q,
+            'expand' => $expand,
         ];
         $uri = '/orders?' . http_build_query($queryParams);
 
@@ -163,6 +165,7 @@ class OrdersApi
         ?int $limit = null,
         ?int $offset = null,
         ?string $q = null,
+        ?string $expand = null,
     ): Paginator {
         $closure = fn (?int $limit, ?int $offset): Collection => $this->getAll(
             filter: $filter,
@@ -170,6 +173,7 @@ class OrdersApi
             limit: $limit,
             offset: $offset,
             q: $q,
+            expand: $expand,
         );
 
         return new Paginator(
