@@ -362,6 +362,8 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const GATEWAY_NAME_PAYVISION = 'Payvision';
 
+    public const GATEWAY_NAME_PAY_XPERT = 'PayXpert';
+
     public const GATEWAY_NAME_PHAROS_PAYMENTS = 'PharosPayments';
 
     public const GATEWAY_NAME_PIASTRIX = 'Piastrix';
@@ -441,6 +443,8 @@ abstract class GatewayAccount implements JsonSerializable
     public const GATEWAY_NAME_TRUSTLY = 'Trustly';
 
     public const GATEWAY_NAME_TWINT = 'TWINT';
+
+    public const GATEWAY_NAME_TXN = 'Txn';
 
     public const GATEWAY_NAME_UNLIMIT = 'Unlimit';
 
@@ -865,6 +869,8 @@ abstract class GatewayAccount implements JsonSerializable
     public const ACQUIRER_NAME_TSYS = 'TSYS';
 
     public const ACQUIRER_NAME_TWINT = 'TWINT';
+
+    public const ACQUIRER_NAME_TXN = 'Txn';
 
     public const ACQUIRER_NAME_U_PAY_CARD = 'UPayCard';
 
@@ -1780,6 +1786,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return PayULatam::from($data, $metadata);
             case 'Payvision':
                 return Payvision::from($data, $metadata);
+            case 'PayXpert':
+                return PayXpert::from($data, $metadata);
             case 'PharosPayments':
                 return PharosPayments::from($data, $metadata);
             case 'Piastrix':
@@ -1860,6 +1868,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return TrustsPay::from($data, $metadata);
             case 'TWINT':
                 return TWINT::from($data, $metadata);
+            case 'Txn':
+                return Txn::from($data, $metadata);
             case 'Unlimit':
                 return Unlimit::from($data, $metadata);
             case 'UPayCard':
