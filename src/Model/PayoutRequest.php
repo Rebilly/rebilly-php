@@ -25,13 +25,27 @@ class PayoutRequest implements JsonSerializable
 
     public const STATUS_PENDING = 'pending';
 
-    public const STATUS_INSTRUMENT_SELECTED = 'instrument-selected';
+    public const STATUS_READY = 'ready';
+
+    public const STATUS_APPROVED = 'approved';
+
+    public const STATUS_IN_PROGRESS = 'in-progress';
 
     public const STATUS_PARTIALLY_FULFILLED = 'partially-fulfilled';
 
     public const STATUS_FULFILLED = 'fulfilled';
 
     public const STATUS_CANCELED = 'canceled';
+
+    public const STATUS_CUSTOMER_REVERSED = 'customer-reversed';
+
+    public const STATUS_SYSTEM_REVERSED = 'system-reversed';
+
+    public const STATUS_ADMIN_REVERSED = 'admin-reversed';
+
+    public const STATUS_SPLIT = 'split';
+
+    public const STATUS_MERGED = 'merged';
 
     private array $fields = [];
 
@@ -48,6 +62,12 @@ class PayoutRequest implements JsonSerializable
         }
         if (array_key_exists('paymentInstrumentId', $data)) {
             $this->setPaymentInstrumentId($data['paymentInstrumentId']);
+        }
+        if (array_key_exists('splitFromPayoutRequestId', $data)) {
+            $this->setSplitFromPayoutRequestId($data['splitFromPayoutRequestId']);
+        }
+        if (array_key_exists('mergedIntoPayoutRequestId', $data)) {
+            $this->setMergedIntoPayoutRequestId($data['mergedIntoPayoutRequestId']);
         }
         if (array_key_exists('currency', $data)) {
             $this->setCurrency($data['currency']);
@@ -143,6 +163,16 @@ class PayoutRequest implements JsonSerializable
         return $this;
     }
 
+    public function getSplitFromPayoutRequestId(): ?string
+    {
+        return $this->fields['splitFromPayoutRequestId'] ?? null;
+    }
+
+    public function getMergedIntoPayoutRequestId(): ?string
+    {
+        return $this->fields['mergedIntoPayoutRequestId'] ?? null;
+    }
+
     public function getCurrency(): string
     {
         return $this->fields['currency'];
@@ -228,7 +258,7 @@ class PayoutRequest implements JsonSerializable
     }
 
     /**
-     * @return null|PayoutRequestAllocations[]
+     * @return null|PayoutRequestAllocation[]
      */
     public function getAllocations(): ?array
     {
@@ -296,6 +326,12 @@ class PayoutRequest implements JsonSerializable
         if (array_key_exists('paymentInstrumentId', $this->fields)) {
             $data['paymentInstrumentId'] = $this->fields['paymentInstrumentId'];
         }
+        if (array_key_exists('splitFromPayoutRequestId', $this->fields)) {
+            $data['splitFromPayoutRequestId'] = $this->fields['splitFromPayoutRequestId'];
+        }
+        if (array_key_exists('mergedIntoPayoutRequestId', $this->fields)) {
+            $data['mergedIntoPayoutRequestId'] = $this->fields['mergedIntoPayoutRequestId'];
+        }
         if (array_key_exists('currency', $this->fields)) {
             $data['currency'] = $this->fields['currency'];
         }
@@ -326,7 +362,7 @@ class PayoutRequest implements JsonSerializable
         if (array_key_exists('allocations', $this->fields)) {
             $data['allocations'] = $this->fields['allocations'] !== null
                 ? array_map(
-                    static fn (PayoutRequestAllocations $payoutRequestAllocations) => $payoutRequestAllocations->jsonSerialize(),
+                    static fn (PayoutRequestAllocation $payoutRequestAllocation) => $payoutRequestAllocation->jsonSerialize(),
                     $this->fields['allocations'],
                 )
                 : null;
@@ -358,6 +394,20 @@ class PayoutRequest implements JsonSerializable
     private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
+
+        return $this;
+    }
+
+    private function setSplitFromPayoutRequestId(null|string $splitFromPayoutRequestId): static
+    {
+        $this->fields['splitFromPayoutRequestId'] = $splitFromPayoutRequestId;
+
+        return $this;
+    }
+
+    private function setMergedIntoPayoutRequestId(null|string $mergedIntoPayoutRequestId): static
+    {
+        $this->fields['mergedIntoPayoutRequestId'] = $mergedIntoPayoutRequestId;
 
         return $this;
     }
@@ -395,12 +445,12 @@ class PayoutRequest implements JsonSerializable
     }
 
     /**
-     * @param null|array[]|PayoutRequestAllocations[] $allocations
+     * @param null|array[]|PayoutRequestAllocation[] $allocations
      */
     private function setAllocations(null|array $allocations): static
     {
         $allocations = $allocations !== null ? array_map(
-            fn ($value) => $value instanceof PayoutRequestAllocations ? $value : PayoutRequestAllocations::from($value),
+            fn ($value) => $value instanceof PayoutRequestAllocation ? $value : PayoutRequestAllocation::from($value),
             $allocations,
         ) : null;
 

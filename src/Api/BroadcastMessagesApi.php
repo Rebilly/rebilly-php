@@ -19,6 +19,7 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\BroadcastMessage;
+use Rebilly\Sdk\Model\PatchBroadcastMessage;
 use Rebilly\Sdk\Paginator;
 
 class BroadcastMessagesApi
@@ -130,7 +131,7 @@ class BroadcastMessagesApi
 
     public function update(
         string $id,
-        BroadcastMessage $broadcastMessage,
+        PatchBroadcastMessage $patchBroadcastMessage,
     ): BroadcastMessage {
         $pathParams = [
             '{id}' => $id,
@@ -140,7 +141,7 @@ class BroadcastMessagesApi
 
         $request = new Request('PATCH', $uri, headers: [
             'Accept' => 'application/json',
-        ], body: Utils::jsonEncode($broadcastMessage));
+        ], body: Utils::jsonEncode($patchBroadcastMessage));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

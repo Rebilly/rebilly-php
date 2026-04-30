@@ -34,6 +34,15 @@ class AwepayCredentials implements JsonSerializable
         if (array_key_exists('secretKey', $data)) {
             $this->setSecretKey($data['secretKey']);
         }
+        if (array_key_exists('apiKey', $data)) {
+            $this->setApiKey($data['apiKey']);
+        }
+        if (array_key_exists('publicKey', $data)) {
+            $this->setPublicKey($data['publicKey']);
+        }
+        if (array_key_exists('privateKey', $data)) {
+            $this->setPrivateKey($data['privateKey']);
+        }
         $this->setMetadata($metadata);
     }
 
@@ -78,6 +87,42 @@ class AwepayCredentials implements JsonSerializable
         return $this;
     }
 
+    public function getApiKey(): ?string
+    {
+        return $this->fields['apiKey'] ?? null;
+    }
+
+    public function setApiKey(null|string $apiKey): static
+    {
+        $this->fields['apiKey'] = $apiKey;
+
+        return $this;
+    }
+
+    public function getPublicKey(): ?string
+    {
+        return $this->fields['publicKey'] ?? null;
+    }
+
+    public function setPublicKey(null|string $publicKey): static
+    {
+        $this->fields['publicKey'] = $publicKey;
+
+        return $this;
+    }
+
+    public function getPrivateKey(): ?string
+    {
+        return $this->fields['privateKey'] ?? null;
+    }
+
+    public function setPrivateKey(null|string $privateKey): static
+    {
+        $this->fields['privateKey'] = $privateKey;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -89,6 +134,15 @@ class AwepayCredentials implements JsonSerializable
         }
         if (array_key_exists('secretKey', $this->fields)) {
             $data['secretKey'] = $this->fields['secretKey'];
+        }
+        if (array_key_exists('apiKey', $this->fields)) {
+            $data['apiKey'] = $this->fields['apiKey'];
+        }
+        if (array_key_exists('publicKey', $this->fields)) {
+            $data['publicKey'] = $this->fields['publicKey'];
+        }
+        if (array_key_exists('privateKey', $this->fields)) {
+            $data['privateKey'] = $this->fields['privateKey'];
         }
 
         return $data;
