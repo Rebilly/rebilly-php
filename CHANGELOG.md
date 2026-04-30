@@ -1,5 +1,245 @@
 # @rebilly/client-php
 
+## 3.1.8
+
+### Patch Changes
+
+- fix(be, payment-gateways): Update Paybilt payout new flow Rebilly/rebilly#18734
+- build(website, team-docs): Remove Vale linter Rebilly/rebilly#16937
+- chore(website): Upgrade redocly/realm to version 0.128.0-next.8 Rebilly/rebilly#16860
+- SDK Generator updated
+- chore(fe): Bump fast-xml-parser to fix security issues Rebilly/rebilly#18899
+- fix(api-definitions): fix vaulted and alt payment instrument Rebilly/rebilly#15355
+- feat(be): Remove old orders from new orders endpoint Rebilly/rebilly#20820
+- feat(be): add transactionEmailAliasTemplate to GatewayAccount Rebilly/rebilly#20226
+- fix(api-definitions): Change pdf response schema to binary string Rebilly/rebilly#19492
+- fix(be, api-definitions): Require at least 2 amounts and their sum equal to split payout request amount in split operation Rebilly/rebilly#19234
+- SDK Generator updated
+- fix(api-definitions): Update ProfileMfa schema to replace guardian with otp in enum values Rebilly/rebilly#16289
+- fix(api-definitions,be): Add redirectUrl and riskMetadata to StorefrontPostDeposit Rebilly/rebilly#16319
+- feat(be, recomm, api-definitions): Add MaximumOrderAmount coupon restriction Rebilly/rebilly#17757
+- feat(doc, be, payment-gateways): Implement Txn gateway adapter Rebilly/rebilly#20676
+- feat(be, recomm, instruments, storefront): Add creating a credit memo on change quote invoice with negative value Rebilly/rebilly#16334
+- fix(be,api-definitions): Loosen Address validation rules Rebilly/rebilly#17436
+- chore(deps): bump @redocly/cli from 2.25.2 to 2.26.0 in /website/api-definitions Rebilly/rebilly#20454
+- refactor(be): refactor remaining reports to use default values Rebilly/rebilly#17358
+- SDK Generator updated
+- feat(be, payment-gateways): Implement Txn payout Rebilly/rebilly#20986
+- fix(be, api-definitions): update reports to use 400 response Rebilly/rebilly#19748
+- feat(docs,be): Store FPAN last4 for digital wallets Rebilly/rebilly#20800
+- feat(api-definitions): Add PDF download support for transactions Rebilly/rebilly#20088
+- docs(website): Add Recheck to the website directory & fix violations Rebilly/rebilly#17585
+- fix(be, api-definitions): update reports to use 400 response Rebilly/rebilly#19699
+- SDK Generator updated
+- fix(api-definitions): Use block scalars for multi-sentence descriptions Rebilly/rebilly#17259
+- fix(docs): Add notificationEmails to Storefront account Rebilly/rebilly#19182
+- fix(backend): Permanently block above and Temporary block above use the independent pool of attributes (#16938) Rebilly/rebilly#17628
+- chore(deps): bump es-toolkit from 1.44.0 to 1.45.1 in /website/api-definitions Rebilly/rebilly#19405
+- feat(be, payment-gateways): Add Stripe setting to include payment card network Rebilly/rebilly#16126
+- fix(api-definitions): Remove empty Paycly settings object Rebilly/rebilly#17821
+- feat(be, api-definitions): Add data export functionality for payout requests and allocations Rebilly/rebilly#18168
+- feat(be,api-definitions): Add GetPayoutRequestV2PaymentInstrument endpoint for new payout-request flow Rebilly/rebilly#17540
+- feat(doc, be, payment-gateways): Implement Awepay REST API V2 Rebilly/rebilly#20868
+- refactor(be, api-definitions): Remove isNew field Rebilly/rebilly#20312
+- fix(api-definitions): Fix api defs patch order item Rebilly/rebilly#18565
+- fix(docs): Remove TransactionResult and TransactionStatus schemas Rebilly/rebilly#19804
+- feat(be,metadata,api-definitions): Update NMI API key authentication Rebilly/rebilly#18559
+- docs(website, api-definitions ): Add more noun phrase guidance for API fields Rebilly/rebilly#18686
+- feat(be, api-definitions): Add prepayment credit memo reason Rebilly/rebilly#20425
+- chore(deps): bump @redocly/cli from 2.14.4 to 2.14.5 in /website/api-definitions Rebilly/rebilly#18058
+- fix(be,api-definitions,recomm): Add missing Discover dispute reason codes Rebilly/rebilly#18032
+- feat(be,api-definitions): Introduce cryptocurrency token and store wallet details in reference data Rebilly/rebilly#18600
+- fix(api-definitions): Rename credit balance endpoint parameter Rebilly/rebilly#20701
+- feat(be,api-definitions): unify payout request reversal actions into cancel Rebilly/rebilly#20107
+- feat(be, api-definitions): Add new orders segment Rebilly/rebilly#16258
+- fix(api-definitions): Add missing required method in schemas Rebilly/rebilly#18742
+- fix(be, payment-gateways): Add Secure trading setting and use MIT Rebilly/rebilly#16373
+- fix(api-definitions): Fix orders experimental API fields Rebilly/rebilly#18768
+- feat(be, api-definitions): preview orders enhancements Rebilly/rebilly#17844
+- feat(api-definition, be, payment-gateways): Implement Paybilt payout Rebilly/rebilly#18651
+- refactor(be, api-definitions): Refactor RetentionValueReportDto to use default null values Rebilly/rebilly#16803
+- fix(be, api-definitions): refactor reports to use 400 response Rebilly/rebilly#19815
+- refactor(be): use default dates for FutureRenewalReport Rebilly/rebilly#16087
+- SDK Generator updated
+- feat(be, api-definitions): Remove v2 payout request routes and api definitions Rebilly/rebilly#20769
+- fix(api-definitions): add missing order expand to parameters Rebilly/rebilly#16726
+- SDK Generator updated
+- fix(be, api-definitions): refactor reports to use 400 response Rebilly/rebilly#19928
+- chore(deps): bump @redocly/cli from 2.14.1 to 2.14.3 in /website/api-definitions Rebilly/rebilly#17777
+- SDK Generator updated
+- feat(be, payment-gateways): Implement AsiaPay gateway integration Rebilly/rebilly#16196
+- fix(api-definitions): Add missing isNew field in API-defs Rebilly/rebilly#19712
+- refactor(be,api-definitions): refactor TransactionReportDto to use default values Rebilly/rebilly#16499
+- SDK Generator updated
+- feat(doc, be, payment-gateways): Implement PayXpert gateway adapter Rebilly/rebilly#20190
+- SDK Generator updated
+- build(deps): bump @redocly/cli from 2.24.1 to 2.25.2 in /website/api-definitions Rebilly/rebilly#20101
+- SDK Generator updated
+- feat(be,api-definitions): Create payout request batch using filter parameters Rebilly/rebilly#18767
+- fix(api-definitions): Improve descriptions of gateway account custom fields settings Rebilly/rebilly#16229
+- docs(api-definitions): Update filter descriptions Rebilly/rebilly#16644
+- SDK Generator updated
+- feat(backend): Parametrize minimal age in KYC identity proof checks Rebilly/rebilly#15925
+- chore(website): Add descriptive-link-text rule to linter Rebilly/rebilly#17802
+- fix(recomm, api-definition): Remove deprecated Rebilly/rebilly#15926
+- fix(docs): Fix format of URL properties Rebilly/rebilly#19268
+- feat(be, api-docs): Add filters support for ApiLogSummaryReport Rebilly/rebilly#17677
+- feat(api-definitions): add transferId to transaction schema Rebilly/rebilly#18563
+- feat(be, recomm, api-definitions): Add blocked and blockReason fields to payout request filters and exports Rebilly/rebilly#19217
+- feat(be,recomm,api-definitions): Limit payout request batch size Rebilly/rebilly#19287
+- refactor(be): Remove excess upcomingInvoiceId field Rebilly/rebilly#16612
+- fix(api-definitions): Mark invoiceTimeShift field as deprecated and readOnly Rebilly/rebilly#18532
+- revert(api-definitions): add missing order expand to parameters Rebilly/rebilly#16742
+- feat(api-definitions,be,payment-gateways,recomm): Add Paybilt gateway adapter Rebilly/rebilly#16673
+- fix(api-definitions): Fix startTime field Rebilly/rebilly#19553
+- refactor(be, api-definitions): refactor RenewalSaleReport to use default values Rebilly/rebilly#16651
+- feat(be,api-def): Add match details to AML Hit Rebilly/rebilly#17481
+- build(deps): bump @redocly/cli from 2.28.1 to 2.30.0 in /website/api-definitions Rebilly/rebilly#20881
+- feat(docs,be): Add paymentMethod, transactionResult, transactionStatus to allocation response Rebilly/rebilly#19548
+- refactor(be, api-definition): refactor retention percentage report to use default null values Rebilly/rebilly#17195
+- revert: fix(backend): Permanently block above and Temporary block above use the independent pool of attributes (#16938) Rebilly/rebilly#17594
+- feat(api,be): Add batchId to payout request allocation Rebilly/rebilly#18380
+- feat(docs,be): Add radarSessionCustomField setting to Stripe adapter Rebilly/rebilly#19758
+- feat(api-defs): Add POST /payment-request-allocations Rebilly/rebilly#17567
+- SDK Generator updated
+- fix(backend,recomm,api-definitions): Permanently block above and Temporary block above use the independent pool of attributes - remove backward compatibility Rebilly/rebilly#18099
+- feat(be, api-definitions): Add legacy property for creation quotes Rebilly/rebilly#18930
+- SDK Generator updated
+- feat(be, api-definitions): Add AML report endpoint Rebilly/rebilly#18271
+- chore(deps): bump @redocly/cli from 2.0.1 to 2.12.3 in /website/api-definitions Rebilly/rebilly#17269
+- SDK Generator updated
+- feat(api-definitions, be): Add customer credit memos unallocated amount endpoint Rebilly/rebilly#20482
+- chore(deps): bump @redocly/cli from 2.14.0 to 2.14.1 in /website/api-definitions Rebilly/rebilly#17705
+- revert(api-definitions): Fix orders experimental API fields Rebilly/rebilly#18789
+- chore(website): Fine-tune API descriptions review in Gemini Rebilly/rebilly#18723
+- build(deps): merge passing FE dependabot PRs Rebilly/rebilly#18118
+- docs(api-definitions): Add include to boolean-parameter-prefixes lint rule Rebilly/rebilly#17721
+- chore(deps): merge passing FE dependabot PRs Rebilly/rebilly#18528
+- fix(api-definitions): Fix missed properties for required Rebilly/rebilly#16470
+- chore(deps): bump @redocly/cli from 2.12.3 to 2.13.0 in /website/api-definitions Rebilly/rebilly#17461
+- feat(be): Implement AmlProvenance Rebilly/rebilly#17982
+- build(deps): merge passing FE dependabot PRs Rebilly/rebilly#18191
+- refactor(be, api-definition): refactor Dashboard Report to use default null values Rebilly/rebilly#17196
+- feat(api-defs): Add payout request batch operations Rebilly/rebilly#17873
+- chore(deps): bump es-toolkit from 1.42.0 to 1.43.0 in /website/api-definitions Rebilly/rebilly#17460
+- fix(api-definitions): Fix orders experimental API fields Rebilly/rebilly#18883
+- fix(website): Fix no-past-future lint issue Rebilly/rebilly#16465
+- fix(api-definitions): Remove from API docs Rebilly/rebilly#20627
+- feat(api-definitions, be, payment-gateways): Implement Powertranz payment gateway adapter Rebilly/rebilly#17587
+- SDK Generator updated
+- fix(be, api-definitions): Add isNewOrder field to API Rebilly/rebilly#20074
+- SDK Generator updated
+- feat(api-definitions): Add block reason fields to payout request related schema and body Rebilly/rebilly#18898
+- fix(docs): Fix BankAccountCreatePlain discriminator Rebilly/rebilly#19271
+- chore(deps): bump @redocly/cli from 2.20.4 to 2.21.1 in /website/api-definitions Rebilly/rebilly#19619
+- feat(recomm): Add GetAmlInheritedMatchSummaryReport ui Rebilly/rebilly#20149
+- feat(be): Add currency exchange rate to Storefront DCC response Rebilly/rebilly#19056
+- feat(be,api-definitions): Add payout request batches data table Rebilly/rebilly#18278
+- feat(be,api-definitions): Add payout request allocations data table Rebilly/rebilly#18273
+- feat(be, api-definitions): Add credit memo direct refund Rebilly/rebilly#20044
+- feat(be): Include gatewayPayoutInstruction in payout request payment instruments data Rebilly/rebilly#18507
+- feat(backend): implements option to add additional emails to customers Rebilly/rebilly#18543
+- refactor(be + api-definitions): migrate broadcast message validation to Symfony Rebilly/rebilly#14002
+- docs(api-definitions): Remove infusionsoft related definitions for api schema Rebilly/rebilly#15802
+- chore(deps): bump @redocly/cli from 2.13.0 to 2.14.0 in /website/api-definitions Rebilly/rebilly#17658
+- chore(api): Revert unintentional API changes Rebilly/rebilly#17423
+- feat(docs,be): Add optional step to verify if customer account exists before Skrill payout Rebilly/rebilly#19844
+- feat(api-definitions): Add payout request reversed and fulfilled to webhooks api definitions Rebilly/rebilly#17632
+- feat(be, api-definitions): Add startTime to creation quotes Rebilly/rebilly#18022
+- SDK Generator updated
+- feat(api-definition, be, payment-gateways): Implement Antom gateway adapter Rebilly/rebilly#17349
+- fix(ci): pin all third-party GitHub Actions to commit SHAs Rebilly/rebilly#19922
+- feat(be): Create a Person entity when a Customer is created Rebilly/rebilly#16340
+- feat(api-definitions): Extend v1 payout request schemas with v2 fields Rebilly/rebilly#20547
+- refactor(be, api-definitions): Refactor RevenueWaterfallReport to use default values Rebilly/rebilly#16572
+- fix(api-definitions): Update Transaction transferId description and remove transferId from storefrontTransaction Rebilly/rebilly#19153
+- docs(api-definitions): Remove Trigger from summaries Rebilly/rebilly#18212
+- refactor(be, api-definition): Refactor Subscription Cancellation Report to use default null values Rebilly/rebilly#17099
+- chore(deps): bump es-toolkit from 1.40.0 to 1.42.0 in /website/api-definitions Rebilly/rebilly#16873
+- build(deps): bump es-toolkit from 1.45.1 to 1.46.0 in /website/api-definitions Rebilly/rebilly#20884
+- feat(api-definitions): Add supported file type docs for identity verification Rebilly/rebilly#16153
+- build(deps): merge passing FE dependabot PRs Rebilly/rebilly#18806
+- SDK Generator updated
+- refactor(be,api-definitions): Refactor remaining reports to Symfony validation Rebilly/rebilly#19252
+- docs(api-definitions): Add writing linting rules to website/api-definitions Rebilly/rebilly#16472
+- feat(api-definitions): Payout processing MVP Rebilly/rebilly#17551
+- feat(doc, be, payment-gateways): Implement Quickpay gateway adapter Rebilly/rebilly#20082
+- fix(doc, be, payment-gateways): Add currency, network to crypto token Rebilly/rebilly#20638
+- fix(be, payment-gateways): Add payout password for VegaWallet Rebilly/rebilly#19833
+- chore(deps): bump @redocly/cli from 2.21.1 to 2.24.1 in /website/api-definitions Rebilly/rebilly#19916
+- feat(api-definition, be, payment-gateways): Implement Viva gateway adapter Rebilly/rebilly#19329
+- feat(be): Add noMatchReason to AmlCheck Rebilly/rebilly#18727
+- fix(api-definitions): Remove unused parameter from credit memo refund endpoint Rebilly/rebilly#20649
+- feat(be,recomm,api-definitions): Remove legacy instrument-selected status Rebilly/rebilly#19527
+- feat(be,recomm,api-definitions): remove redundant payoutRequestIds field from PayoutRequestBatch response Rebilly/rebilly#19393
+- refactor(be, api-definitions): refactor TransactionTimeDisputeReportDto to use default values Rebilly/rebilly#16557
+- feat(api-definitions): Add AML checks report path Rebilly/rebilly#18613
+- SDK Generator updated
+- SDK Generator updated
+- feat(api-definitions): Add POST endpoint for payout request auto allocation Rebilly/rebilly#17831
+- SDK Generator updated
+- feat(api-definition, be, payment-gateways): Add 3DSIO support for Paybilt Rebilly/rebilly#16984
+- chore(deps): bump @redocly/cli from 2.18.1 to 2.20.4 in /website/api-definitions Rebilly/rebilly#19406
+- feat(api-definitions): Add property for localized custom amount button labels Rebilly/rebilly#20267
+- docs: Add other missing KYC tile type Rebilly/rebilly#18368
+- revert(backend): Permanently block above and Temporary block above use the independent pool of attributes - remove backward compatibility Rebilly/rebilly#17885
+- feat(backend,api-definitions): expose tax number updates to storefront Rebilly/rebilly#18625
+- fix(ci): pin all third-party GitHub Actions to commit SHAs Rebilly/rebilly#19922
+- build(deps): bump @redocly/cli from 2.26.0 to 2.28.1 in /website/api-definitions Rebilly/rebilly#20689
+- SDK Generator updated
+- fix(api-definitions): Fix Paycly gateway account config mapping Rebilly/rebilly#17809
+- fix(website): Fix broken E2E test & lint issues Rebilly/rebilly#16464
+- SDK Generator updated
+- refactor(be): refactor DisputeReport to use default values Rebilly/rebilly#16392
+- fix(be, website): Restrict invoice address change Rebilly/rebilly#18836
+- chore(builds): Bump fast-xml-parser to resolve security issues Rebilly/rebilly#18581
+- feat(be/payment-gateways, api-definitions): Add extra step to collect account holder and bank country to Onlineueberweisen Rebilly/rebilly#16133
+- feat(api-defs): Add PATCH /payout-request-allocation/{id} Rebilly/rebilly#17591
+- fix(api-definitions): Fix api defs plan id required Rebilly/rebilly#18580
+- feat(be,api-definitions): Implement Storefront endpoints for transactions DCC offer Rebilly/rebilly#18749
+- feat(doc, be, payment-gateways): Add payment card to Quickpay Rebilly/rebilly#20318
+- SDK Generator updated
+- refactor(be, api-definition): Refactor Dcc markup report to use default values Rebilly/rebilly#16907
+- fix(be, api-definitions): refactor kyc acceptance report to use 400 response Rebilly/rebilly#19445
+- feat(doc, be, payment-gateways): Implement Mollie gateway adapter Rebilly/rebilly#20015
+- feat(backend): KYC - detect photocopies Rebilly/rebilly#18256
+- feat(be): Add Deferred Revenue report Rebilly/rebilly#16189
+- feat(be,api-definitions): remove filter field from batch preview response Rebilly/rebilly#19422
+- feat(api-definitions, docs): Add split and merge operations to payout request resource Rebilly/rebilly#17834
+- feat(be): Add payout request allocation status declined and queued Rebilly/rebilly#19064
+- fix(api-defs): Fix API endpoint operation ID Rebilly/rebilly#20007
+- refactor(be): refactor CumulativeSubscriptionReport to use default values Rebilly/rebilly#16972
+- feat(api-definitions): Add blockReason field to PayoutRequestV2 schema Rebilly/rebilly#19061
+- feat(be, docs): Add GetAmlInheritedMatchSummaryReport endpoint Rebilly/rebilly#19965
+- feat(api-definitions): Add new metrics for AML check histogram report Rebilly/rebilly#18012
+- feat(be, payment-gateways): Refactor PayTabs to own form integration Rebilly/rebilly#16342
+- refactor(be, api-definitions): refactor time series transaction report to use default values Rebilly/rebilly#16970
+- SDK Generator updated
+- SDK Generator updated
+- fix(backend): Permanently block above and Temporary block above use the independent pool of attributes - remove backward compatibility Rebilly/rebilly#17885
+- chore(deps): bump @redocly/cli from 2.14.3 to 2.14.4 in /website/api-definitions Rebilly/rebilly#17896
+- feat(be,api-definitions): Calculate payout request batch totals Rebilly/rebilly#19338
+- docs(api-definitions): Update description to use the style Rebilly/rebilly#20731
+- docs(api-definitions,replay-platform): Add guidance for fields Rebilly/rebilly#16304
+- feat(be): Add productOptions to PatchOrderItem Rebilly/rebilly#18533
+- feat(be,api-definitions): Improve PostStorefrontDeposit to accept a payment instrument or token Rebilly/rebilly#16257
+- refactor(be): refactor RulesMatchedSummaryReport to use default dates Rebilly/rebilly#16935
+- feat(api-definition, be, payment-gateways): Add delay setting to Paybilt Rebilly/rebilly#17522
+- feat(api/be): Add allocation order to OrganizationSettings and PayoutRequestBatch Rebilly/rebilly#19547
+- feat(api-definitions): Add Credit memo quotation status Rebilly/rebilly#17168
+- feat(api-definitions, be): Add credit balance invoice allocation Rebilly/rebilly#20819
+- refactor(be, api-definition): Refactor Transaction Histogram Report to use default null values Rebilly/rebilly#17048
+- feat(be, api-definitions): Add credit memo pdf download Rebilly/rebilly#20075
+- fix(docs, be, payment-gateways): Fix Antom private key Rebilly/rebilly#20012
+- feat(api-definitions): Add API definitions for AML checks histogram report Rebilly/rebilly#17668
+- docs(website, api-definitions): Add detail for split payouts Rebilly/rebilly#20835
+- SDK Generator updated
+- build(deps): merge passing FE dependabot PRs Rebilly/rebilly#18610
+- docs: Add missing KYC tile type Rebilly/rebilly#18362
+- SDK Generator updated
+- feat(be, payment-gateways): Add gateway account setting to Viva Rebilly/rebilly#19762
+- refactor(be, api-definition): Refactor Event Triggered Report to use default values Rebilly/rebilly#16987
+
 ## 3.1.7
 
 ### Patch Changes
