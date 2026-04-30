@@ -32,6 +32,12 @@ class CryptocurrencyToken implements CompositeToken
         if (array_key_exists('walletAddress', $data)) {
             $this->setWalletAddress($data['walletAddress']);
         }
+        if (array_key_exists('walletCurrency', $data)) {
+            $this->setWalletCurrency($data['walletCurrency']);
+        }
+        if (array_key_exists('walletNetwork', $data)) {
+            $this->setWalletNetwork($data['walletNetwork']);
+        }
         if (array_key_exists('billingAddress', $data)) {
             $this->setBillingAddress($data['billingAddress']);
         }
@@ -95,6 +101,30 @@ class CryptocurrencyToken implements CompositeToken
     public function setWalletAddress(null|string $walletAddress): static
     {
         $this->fields['walletAddress'] = $walletAddress;
+
+        return $this;
+    }
+
+    public function getWalletCurrency(): ?string
+    {
+        return $this->fields['walletCurrency'] ?? null;
+    }
+
+    public function setWalletCurrency(null|string $walletCurrency): static
+    {
+        $this->fields['walletCurrency'] = $walletCurrency;
+
+        return $this;
+    }
+
+    public function getWalletNetwork(): ?string
+    {
+        return $this->fields['walletNetwork'] ?? null;
+    }
+
+    public function setWalletNetwork(null|string $walletNetwork): static
+    {
+        $this->fields['walletNetwork'] = $walletNetwork;
 
         return $this;
     }
@@ -195,6 +225,12 @@ class CryptocurrencyToken implements CompositeToken
         }
         if (array_key_exists('walletAddress', $this->fields)) {
             $data['walletAddress'] = $this->fields['walletAddress'];
+        }
+        if (array_key_exists('walletCurrency', $this->fields)) {
+            $data['walletCurrency'] = $this->fields['walletCurrency'];
+        }
+        if (array_key_exists('walletNetwork', $this->fields)) {
+            $data['walletNetwork'] = $this->fields['walletNetwork'];
         }
         if (array_key_exists('billingAddress', $this->fields)) {
             $data['billingAddress'] = $this->fields['billingAddress']?->jsonSerialize();

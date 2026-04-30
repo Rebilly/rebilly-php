@@ -283,6 +283,24 @@ class CreditMemosApi
         return CreditMemo::from($data, ['headers' => $response->getHeaders()]);
     }
 
+    public function refund(
+        string $id,
+    ): CreditMemo {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/credit-memos/{id}/refund');
+
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return CreditMemo::from($data, ['headers' => $response->getHeaders()]);
+    }
+
     public function update(
         string $id,
         CreditMemo $creditMemo,

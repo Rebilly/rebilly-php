@@ -17,6 +17,7 @@ namespace Rebilly\Sdk\Api;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
+use Psr\Http\Message\StreamInterface;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\PatchTransactionRequest;
 use Rebilly\Sdk\Model\PostTransactionRequest;
@@ -105,6 +106,27 @@ class TransactionsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Transaction::from($data, ['headers' => $response->getHeaders()]);
+    }
+
+    public function getPdf(
+        string $id,
+        ?string $expand = null,
+    ): StreamInterface {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $queryParams = [
+            'expand' => $expand,
+        ];
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/transactions/{id}?') . http_build_query($queryParams);
+
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/pdf',
+        ]);
+        $response = $this->client->send($request, ['allow_redirects' => ['refer' => true]]);
+
+        return $response->getBody();
     }
 
     /**
