@@ -37,12 +37,6 @@ class PayoutRequest implements JsonSerializable
 
     public const STATUS_CANCELED = 'canceled';
 
-    public const STATUS_CUSTOMER_REVERSED = 'customer-reversed';
-
-    public const STATUS_SYSTEM_REVERSED = 'system-reversed';
-
-    public const STATUS_ADMIN_REVERSED = 'admin-reversed';
-
     public const STATUS_SPLIT = 'split';
 
     public const STATUS_MERGED = 'merged';
