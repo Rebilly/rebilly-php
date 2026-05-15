@@ -43,6 +43,9 @@ class AdyenSettings implements JsonSerializable
         if (array_key_exists('riskProfile', $data)) {
             $this->setRiskProfile($data['riskProfile']);
         }
+        if (array_key_exists('levelTwoThreeDataCustomField', $data)) {
+            $this->setLevelTwoThreeDataCustomField($data['levelTwoThreeDataCustomField']);
+        }
         $this->setMetadata($metadata);
     }
 
@@ -138,6 +141,18 @@ class AdyenSettings implements JsonSerializable
         return $this;
     }
 
+    public function getLevelTwoThreeDataCustomField(): ?string
+    {
+        return $this->fields['levelTwoThreeDataCustomField'] ?? null;
+    }
+
+    public function setLevelTwoThreeDataCustomField(null|string $levelTwoThreeDataCustomField): static
+    {
+        $this->fields['levelTwoThreeDataCustomField'] = $levelTwoThreeDataCustomField;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -163,6 +178,9 @@ class AdyenSettings implements JsonSerializable
         }
         if (array_key_exists('riskProfile', $this->fields)) {
             $data['riskProfile'] = $this->fields['riskProfile'];
+        }
+        if (array_key_exists('levelTwoThreeDataCustomField', $this->fields)) {
+            $data['levelTwoThreeDataCustomField'] = $this->fields['levelTwoThreeDataCustomField'];
         }
 
         return $data;

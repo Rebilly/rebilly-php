@@ -23,14 +23,6 @@ class PayoutRequestBatch implements JsonSerializable
 {
     use HasMetadata;
 
-    public const STATUS_PENDING = 'pending';
-
-    public const STATUS_PROCESSING = 'processing';
-
-    public const STATUS_COMPLETED = 'completed';
-
-    public const STATUS_FAILED = 'failed';
-
     private array $fields = [];
 
     public function __construct(array $data = [], array $metadata = [])
@@ -40,9 +32,6 @@ class PayoutRequestBatch implements JsonSerializable
         }
         if (array_key_exists('userId', $data)) {
             $this->setUserId($data['userId']);
-        }
-        if (array_key_exists('status', $data)) {
-            $this->setStatus($data['status']);
         }
         if (array_key_exists('totalCount', $data)) {
             $this->setTotalCount($data['totalCount']);
@@ -90,11 +79,6 @@ class PayoutRequestBatch implements JsonSerializable
     public function getUserId(): ?string
     {
         return $this->fields['userId'] ?? null;
-    }
-
-    public function getStatus(): ?string
-    {
-        return $this->fields['status'] ?? null;
     }
 
     public function getTotalCount(): ?int
@@ -182,9 +166,6 @@ class PayoutRequestBatch implements JsonSerializable
         if (array_key_exists('userId', $this->fields)) {
             $data['userId'] = $this->fields['userId'];
         }
-        if (array_key_exists('status', $this->fields)) {
-            $data['status'] = $this->fields['status'];
-        }
         if (array_key_exists('totalCount', $this->fields)) {
             $data['totalCount'] = $this->fields['totalCount'];
         }
@@ -239,13 +220,6 @@ class PayoutRequestBatch implements JsonSerializable
     private function setUserId(null|string $userId): static
     {
         $this->fields['userId'] = $userId;
-
-        return $this;
-    }
-
-    private function setStatus(null|string $status): static
-    {
-        $this->fields['status'] = $status;
 
         return $this;
     }

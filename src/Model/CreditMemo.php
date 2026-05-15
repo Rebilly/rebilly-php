@@ -104,6 +104,9 @@ class CreditMemo implements JsonSerializable
         if (array_key_exists('invoiceId', $data)) {
             $this->setInvoiceId($data['invoiceId']);
         }
+        if (array_key_exists('quoteId', $data)) {
+            $this->setQuoteId($data['quoteId']);
+        }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
         }
@@ -274,6 +277,11 @@ class CreditMemo implements JsonSerializable
         return $this;
     }
 
+    public function getQuoteId(): ?string
+    {
+        return $this->fields['quoteId'] ?? null;
+    }
+
     public function getCreatedTime(): ?DateTimeImmutable
     {
         return $this->fields['createdTime'] ?? null;
@@ -361,6 +369,9 @@ class CreditMemo implements JsonSerializable
         if (array_key_exists('invoiceId', $this->fields)) {
             $data['invoiceId'] = $this->fields['invoiceId'];
         }
+        if (array_key_exists('quoteId', $this->fields)) {
+            $data['quoteId'] = $this->fields['quoteId'];
+        }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
         }
@@ -439,6 +450,13 @@ class CreditMemo implements JsonSerializable
     private function setRevision(null|int $revision): static
     {
         $this->fields['revision'] = $revision;
+
+        return $this;
+    }
+
+    private function setQuoteId(null|string $quoteId): static
+    {
+        $this->fields['quoteId'] = $quoteId;
 
         return $this;
     }

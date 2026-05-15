@@ -61,6 +61,12 @@ class ChangeQuoteOrder implements JsonSerializable
         if (array_key_exists('shipping', $data)) {
             $this->setShipping($data['shipping']);
         }
+        if (array_key_exists('deliveryAddress', $data)) {
+            $this->setDeliveryAddress($data['deliveryAddress']);
+        }
+        if (array_key_exists('billingAddress', $data)) {
+            $this->setBillingAddress($data['billingAddress']);
+        }
         $this->setMetadata($metadata);
     }
 
@@ -219,6 +225,38 @@ class ChangeQuoteOrder implements JsonSerializable
         return $this;
     }
 
+    public function getDeliveryAddress(): ?ContactObject
+    {
+        return $this->fields['deliveryAddress'] ?? null;
+    }
+
+    public function setDeliveryAddress(null|ContactObject|array $deliveryAddress): static
+    {
+        if ($deliveryAddress !== null && !($deliveryAddress instanceof ContactObject)) {
+            $deliveryAddress = ContactObject::from($deliveryAddress);
+        }
+
+        $this->fields['deliveryAddress'] = $deliveryAddress;
+
+        return $this;
+    }
+
+    public function getBillingAddress(): ?ContactObject
+    {
+        return $this->fields['billingAddress'] ?? null;
+    }
+
+    public function setBillingAddress(null|ContactObject|array $billingAddress): static
+    {
+        if ($billingAddress !== null && !($billingAddress instanceof ContactObject)) {
+            $billingAddress = ContactObject::from($billingAddress);
+        }
+
+        $this->fields['billingAddress'] = $billingAddress;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -259,6 +297,12 @@ class ChangeQuoteOrder implements JsonSerializable
         }
         if (array_key_exists('shipping', $this->fields)) {
             $data['shipping'] = $this->fields['shipping']?->jsonSerialize();
+        }
+        if (array_key_exists('deliveryAddress', $this->fields)) {
+            $data['deliveryAddress'] = $this->fields['deliveryAddress']?->jsonSerialize();
+        }
+        if (array_key_exists('billingAddress', $this->fields)) {
+            $data['billingAddress'] = $this->fields['billingAddress']?->jsonSerialize();
         }
 
         return $data;
