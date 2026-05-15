@@ -1372,6 +1372,9 @@ abstract class GatewayAccount implements JsonSerializable
         if (array_key_exists('dccForceCurrency', $data)) {
             $this->setDccForceCurrency($data['dccForceCurrency']);
         }
+        if (array_key_exists('dccForceConfirmation', $data)) {
+            $this->setDccForceConfirmation($data['dccForceConfirmation']);
+        }
         if (array_key_exists('dccForceRounding', $data)) {
             $this->setDccForceRounding($data['dccForceRounding']);
         }
@@ -2020,6 +2023,18 @@ abstract class GatewayAccount implements JsonSerializable
         return $this;
     }
 
+    public function getDccForceConfirmation(): ?bool
+    {
+        return $this->fields['dccForceConfirmation'] ?? null;
+    }
+
+    public function setDccForceConfirmation(null|bool $dccForceConfirmation): static
+    {
+        $this->fields['dccForceConfirmation'] = $dccForceConfirmation;
+
+        return $this;
+    }
+
     public function getDccForceRounding(): ?bool
     {
         return $this->fields['dccForceRounding'] ?? null;
@@ -2315,6 +2330,9 @@ abstract class GatewayAccount implements JsonSerializable
         }
         if (array_key_exists('dccForceCurrency', $this->fields)) {
             $data['dccForceCurrency'] = $this->fields['dccForceCurrency'];
+        }
+        if (array_key_exists('dccForceConfirmation', $this->fields)) {
+            $data['dccForceConfirmation'] = $this->fields['dccForceConfirmation'];
         }
         if (array_key_exists('dccForceRounding', $this->fields)) {
             $data['dccForceRounding'] = $this->fields['dccForceRounding'];

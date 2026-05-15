@@ -52,8 +52,17 @@ class EMSCredentials implements JsonSerializable
         if (array_key_exists('merchantName', $data)) {
             $this->setMerchantName($data['merchantName']);
         }
+        if (array_key_exists('sftpUsername', $data)) {
+            $this->setSftpUsername($data['sftpUsername']);
+        }
+        if (array_key_exists('sftpPassword', $data)) {
+            $this->setSftpPassword($data['sftpPassword']);
+        }
         if (array_key_exists('sftpPrivateKey', $data)) {
             $this->setSftpPrivateKey($data['sftpPrivateKey']);
+        }
+        if (array_key_exists('sftpKeyPassphrase', $data)) {
+            $this->setSftpKeyPassphrase($data['sftpKeyPassphrase']);
         }
         $this->setMetadata($metadata);
     }
@@ -171,6 +180,30 @@ class EMSCredentials implements JsonSerializable
         return $this;
     }
 
+    public function getSftpUsername(): ?string
+    {
+        return $this->fields['sftpUsername'] ?? null;
+    }
+
+    public function setSftpUsername(null|string $sftpUsername): static
+    {
+        $this->fields['sftpUsername'] = $sftpUsername;
+
+        return $this;
+    }
+
+    public function getSftpPassword(): ?string
+    {
+        return $this->fields['sftpPassword'] ?? null;
+    }
+
+    public function setSftpPassword(null|string $sftpPassword): static
+    {
+        $this->fields['sftpPassword'] = $sftpPassword;
+
+        return $this;
+    }
+
     public function getSftpPrivateKey(): ?string
     {
         return $this->fields['sftpPrivateKey'] ?? null;
@@ -179,6 +212,18 @@ class EMSCredentials implements JsonSerializable
     public function setSftpPrivateKey(null|string $sftpPrivateKey): static
     {
         $this->fields['sftpPrivateKey'] = $sftpPrivateKey;
+
+        return $this;
+    }
+
+    public function getSftpKeyPassphrase(): ?string
+    {
+        return $this->fields['sftpKeyPassphrase'] ?? null;
+    }
+
+    public function setSftpKeyPassphrase(null|string $sftpKeyPassphrase): static
+    {
+        $this->fields['sftpKeyPassphrase'] = $sftpKeyPassphrase;
 
         return $this;
     }
@@ -213,8 +258,17 @@ class EMSCredentials implements JsonSerializable
         if (array_key_exists('merchantName', $this->fields)) {
             $data['merchantName'] = $this->fields['merchantName'];
         }
+        if (array_key_exists('sftpUsername', $this->fields)) {
+            $data['sftpUsername'] = $this->fields['sftpUsername'];
+        }
+        if (array_key_exists('sftpPassword', $this->fields)) {
+            $data['sftpPassword'] = $this->fields['sftpPassword'];
+        }
         if (array_key_exists('sftpPrivateKey', $this->fields)) {
             $data['sftpPrivateKey'] = $this->fields['sftpPrivateKey'];
+        }
+        if (array_key_exists('sftpKeyPassphrase', $this->fields)) {
+            $data['sftpKeyPassphrase'] = $this->fields['sftpKeyPassphrase'];
         }
 
         return $data;

@@ -198,6 +198,12 @@ class RecurringOrder implements Order
         if (array_key_exists('revision', $data)) {
             $this->setRevision($data['revision']);
         }
+        if (array_key_exists('currentPeriodStart', $data)) {
+            $this->setCurrentPeriodStart($data['currentPeriodStart']);
+        }
+        if (array_key_exists('currentPeriodEnd', $data)) {
+            $this->setCurrentPeriodEnd($data['currentPeriodEnd']);
+        }
         if (array_key_exists('renewalTime', $data)) {
             $this->setRenewalTime($data['renewalTime']);
         }
@@ -614,6 +620,16 @@ class RecurringOrder implements Order
         return $this->fields['revision'] ?? null;
     }
 
+    public function getCurrentPeriodStart(): ?DateTimeImmutable
+    {
+        return $this->fields['currentPeriodStart'] ?? null;
+    }
+
+    public function getCurrentPeriodEnd(): ?DateTimeImmutable
+    {
+        return $this->fields['currentPeriodEnd'] ?? null;
+    }
+
     public function getRenewalTime(): ?DateTimeImmutable
     {
         return $this->fields['renewalTime'] ?? null;
@@ -785,6 +801,12 @@ class RecurringOrder implements Order
         }
         if (array_key_exists('revision', $this->fields)) {
             $data['revision'] = $this->fields['revision'];
+        }
+        if (array_key_exists('currentPeriodStart', $this->fields)) {
+            $data['currentPeriodStart'] = $this->fields['currentPeriodStart']?->format(DateTimeInterface::RFC3339);
+        }
+        if (array_key_exists('currentPeriodEnd', $this->fields)) {
+            $data['currentPeriodEnd'] = $this->fields['currentPeriodEnd']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('renewalTime', $this->fields)) {
             $data['renewalTime'] = $this->fields['renewalTime']?->format(DateTimeInterface::RFC3339);
@@ -977,6 +999,28 @@ class RecurringOrder implements Order
     private function setRevision(null|int $revision): static
     {
         $this->fields['revision'] = $revision;
+
+        return $this;
+    }
+
+    private function setCurrentPeriodStart(null|DateTimeImmutable|string $currentPeriodStart): static
+    {
+        if ($currentPeriodStart !== null && !($currentPeriodStart instanceof DateTimeImmutable)) {
+            $currentPeriodStart = new DateTimeImmutable($currentPeriodStart);
+        }
+
+        $this->fields['currentPeriodStart'] = $currentPeriodStart;
+
+        return $this;
+    }
+
+    private function setCurrentPeriodEnd(null|DateTimeImmutable|string $currentPeriodEnd): static
+    {
+        if ($currentPeriodEnd !== null && !($currentPeriodEnd instanceof DateTimeImmutable)) {
+            $currentPeriodEnd = new DateTimeImmutable($currentPeriodEnd);
+        }
+
+        $this->fields['currentPeriodEnd'] = $currentPeriodEnd;
 
         return $this;
     }

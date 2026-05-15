@@ -67,6 +67,9 @@ class KycSettingsIdentityWeights implements JsonSerializable
         if (array_key_exists('isPhotocopy', $data)) {
             $this->setIsPhotocopy($data['isPhotocopy']);
         }
+        if (array_key_exists('mrzChecksum', $data)) {
+            $this->setMrzChecksum($data['mrzChecksum']);
+        }
         $this->setMetadata($metadata);
     }
 
@@ -243,6 +246,18 @@ class KycSettingsIdentityWeights implements JsonSerializable
         return $this;
     }
 
+    public function getMrzChecksum(): ?int
+    {
+        return $this->fields['mrzChecksum'] ?? null;
+    }
+
+    public function setMrzChecksum(null|int $mrzChecksum): static
+    {
+        $this->fields['mrzChecksum'] = $mrzChecksum;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -287,6 +302,9 @@ class KycSettingsIdentityWeights implements JsonSerializable
         }
         if (array_key_exists('isPhotocopy', $this->fields)) {
             $data['isPhotocopy'] = $this->fields['isPhotocopy'];
+        }
+        if (array_key_exists('mrzChecksum', $this->fields)) {
+            $data['mrzChecksum'] = $this->fields['mrzChecksum'];
         }
 
         return $data;

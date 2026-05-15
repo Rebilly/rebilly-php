@@ -34,6 +34,9 @@ class WebsiteSettings implements JsonSerializable
         if (array_key_exists('amplitude', $data)) {
             $this->setAmplitude($data['amplitude']);
         }
+        if (array_key_exists('payoutRequest', $data)) {
+            $this->setPayoutRequest($data['payoutRequest']);
+        }
         $this->setMetadata($metadata);
     }
 
@@ -90,6 +93,22 @@ class WebsiteSettings implements JsonSerializable
         return $this;
     }
 
+    public function getPayoutRequest(): ?WebsiteSettingsPayoutRequest
+    {
+        return $this->fields['payoutRequest'] ?? null;
+    }
+
+    public function setPayoutRequest(null|WebsiteSettingsPayoutRequest|array $payoutRequest): static
+    {
+        if ($payoutRequest !== null && !($payoutRequest instanceof WebsiteSettingsPayoutRequest)) {
+            $payoutRequest = WebsiteSettingsPayoutRequest::from($payoutRequest);
+        }
+
+        $this->fields['payoutRequest'] = $payoutRequest;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -101,6 +120,9 @@ class WebsiteSettings implements JsonSerializable
         }
         if (array_key_exists('amplitude', $this->fields)) {
             $data['amplitude'] = $this->fields['amplitude']?->jsonSerialize();
+        }
+        if (array_key_exists('payoutRequest', $this->fields)) {
+            $data['payoutRequest'] = $this->fields['payoutRequest']?->jsonSerialize();
         }
 
         return $data;

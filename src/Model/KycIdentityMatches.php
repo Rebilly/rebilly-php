@@ -122,6 +122,12 @@ class KycIdentityMatches implements PostKycDocumentMatchesRequest
         if (array_key_exists('documentNumber', $data)) {
             $this->setDocumentNumber($data['documentNumber']);
         }
+        if (array_key_exists('sex', $data)) {
+            $this->setSex($data['sex']);
+        }
+        if (array_key_exists('mrzChecksumValid', $data)) {
+            $this->setMrzChecksumValid($data['mrzChecksumValid']);
+        }
         if (array_key_exists('documentSubtype', $data)) {
             $this->setDocumentSubtype($data['documentSubtype']);
         }
@@ -320,6 +326,23 @@ class KycIdentityMatches implements PostKycDocumentMatchesRequest
         return $this;
     }
 
+    public function getSex(): ?string
+    {
+        return $this->fields['sex'] ?? null;
+    }
+
+    public function setSex(null|string $sex): static
+    {
+        $this->fields['sex'] = $sex;
+
+        return $this;
+    }
+
+    public function getMrzChecksumValid(): ?bool
+    {
+        return $this->fields['mrzChecksumValid'] ?? null;
+    }
+
     public function getDocumentSubtype(): ?string
     {
         return $this->fields['documentSubtype'] ?? null;
@@ -446,6 +469,12 @@ class KycIdentityMatches implements PostKycDocumentMatchesRequest
         if (array_key_exists('documentNumber', $this->fields)) {
             $data['documentNumber'] = $this->fields['documentNumber'];
         }
+        if (array_key_exists('sex', $this->fields)) {
+            $data['sex'] = $this->fields['sex'];
+        }
+        if (array_key_exists('mrzChecksumValid', $this->fields)) {
+            $data['mrzChecksumValid'] = $this->fields['mrzChecksumValid'];
+        }
         if (array_key_exists('documentSubtype', $this->fields)) {
             $data['documentSubtype'] = $this->fields['documentSubtype'];
         }
@@ -484,6 +513,13 @@ class KycIdentityMatches implements PostKycDocumentMatchesRequest
     private function setHasMinimalAge(null|bool $hasMinimalAge): static
     {
         $this->fields['hasMinimalAge'] = $hasMinimalAge;
+
+        return $this;
+    }
+
+    private function setMrzChecksumValid(null|bool $mrzChecksumValid): static
+    {
+        $this->fields['mrzChecksumValid'] = $mrzChecksumValid;
 
         return $this;
     }
