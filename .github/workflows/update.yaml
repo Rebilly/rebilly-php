@@ -2,12 +2,6 @@ name: Updates SDK based on api-definitions
 
 on:
   workflow_dispatch:
-    inputs:
-      trigger-reason:
-        description: |
-          The comment that will be posted to the PR if any changes are added.
-          Used to provide context about the source of the update.
-        required: false
 
 jobs:
   generate-sdk:
@@ -25,15 +19,16 @@ jobs:
           path: 'sdk'
           fetch-depth: 0
 
-      - name: Keep changesets
+      - name: Keep changesets and snapshot from auto-update branch
         working-directory: ./sdk
         run: |
-          mkdir ../existing-changesets
+          mkdir ../carry
           git checkout automations/update-sdk-from-api-definitions || true
-          ls -lAh .changeset
-          cp .changeset/* ../existing-changesets/
+          cp .changeset/* ../carry/ 2>/dev/null || true
+          [ -f .openapi-snapshot.yaml ] && cp .openapi-snapshot.yaml ../carry/.openapi-snapshot.yaml || true
           git checkout main || true
-          cp ../existing-changesets/* .changeset/
+          cp ../carry/*.md .changeset/ 2>/dev/null || true
+          [ -f ../carry/.openapi-snapshot.yaml ] && cp ../carry/.openapi-snapshot.yaml .openapi-snapshot.yaml || true
 
       - name: Checkout generator repo
         uses: actions/checkout@v4
@@ -70,6 +65,29 @@ jobs:
       - name: Build api-definitions
         working-directory: ./api-definitions
         run: npx redocly bundle all@latest -o all.yaml
+
+      - name: Diff API spec against previous snapshot
+        id: oasdiff
+        run: |
+          docker run --rm \
+            -v "$PWD/sdk:/sdk" \
+            -v "$PWD/api-definitions:/adef" \
+            tufin/oasdiff:v1.18.1 \
+            changelog /sdk/.openapi-snapshot.yaml /adef/all.yaml -f json > /tmp/spec-diff.json
+          counts=$(docker run --rm \
+            -v "$PWD/sdk:/sdk" \
+            -v "$PWD/api-definitions:/adef" \
+            tufin/oasdiff:v1.18.1 \
+            changelog /sdk/.openapi-snapshot.yaml /adef/all.yaml -f singleline 2>/dev/null | head -1)
+          echo "summary=$counts" >> $GITHUB_OUTPUT
+          if   echo "$counts" | grep -qE "[1-9][0-9]* error";   then echo "bump=major" >> $GITHUB_OUTPUT
+          elif echo "$counts" | grep -qE "[1-9][0-9]* warning"; then echo "bump=minor" >> $GITHUB_OUTPUT
+          else                                                       echo "bump=patch" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Summarize spec diff
+        working-directory: ./sdk
+        run: node ./scripts/summarize-spec-diff.js /tmp/spec-diff.json > /tmp/changeset-body.md || true
 
       - name: Login to GitHub Registry
         uses: docker/login-action@v3
@@ -124,19 +142,20 @@ jobs:
         working-directory: ./sdk
         run: composer cs-fix
 
+      - name: Update snapshot
+        working-directory: ./sdk
+        run: cp ../api-definitions/all.yaml .openapi-snapshot.yaml
+
       - name: Add changeset
-        id: changeset
-        if: github.event.inputs.trigger-reason != ''
+        if: hashFiles('/tmp/changeset-body.md') != ''
         working-directory: ./sdk
         run: |
-          git add .
-          git status
-          if [[ `git status --porcelain` ]]; then
-            npm ci
-            export CHANGESET_ID=$(node ./scripts/add-changeset.js patch "${{ github.event.inputs.trigger-reason }}")
-            echo "Added a patch changeset '${CHANGESET_ID}': '${{ github.event.inputs.trigger-reason }}'"
-            echo "id=${CHANGESET_ID}" >> $GITHUB_OUTPUT
+          if [ ! -s /tmp/changeset-body.md ]; then
+            echo "Spec diff produced no entries; skipping changeset."
+            exit 0
           fi
+          npm ci
+          node ./scripts/add-changeset.js ${{ steps.oasdiff.outputs.bump }} "$(cat /tmp/changeset-body.md)"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -154,16 +173,3 @@ jobs:
           # Delete the branch when closing PRs or merging
           delete-branch: true
           body: This PR is automatically generated and updates SDK based on a change in the API definitions
-
-      - name: Comment trigger reason
-        uses: marocchino/sticky-pull-request-comment@v2
-        if: |
-          (steps.cpr.outputs.pull-request-operation == 'created' ||
-          steps.cpr.outputs.pull-request-operation == 'updated') &&
-          github.event.inputs.trigger-reason != ''
-        with:
-          GITHUB_TOKEN: ${{ secrets.MACHINE_USER_PAT }}
-          append: true
-          number: ${{ steps.cpr.outputs.pull-request-number }}
-          message: |
-            - ${{ github.event.inputs.trigger-reason }} [edit changeset](https://github.com/Rebilly/rebilly-php/edit/automations/update-sdk-from-api-definitions/.changeset/${{ steps.changeset.outputs.id }}.md?pr=%2FRebilly%2Frebilly-php%2Fpull%2F${{ steps.cpr.outputs.pull-request-number }})
