@@ -218,6 +218,8 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const GATEWAY_NAME_IPAY_OPTIONS = 'IpayOptions';
 
+    public const GATEWAY_NAME_ISX = 'Isx';
+
     public const GATEWAY_NAME_JET_PAY = 'JetPay';
 
     public const GATEWAY_NAME_JETON = 'Jeton';
@@ -663,6 +665,8 @@ abstract class GatewayAccount implements JsonSerializable
     public const ACQUIRER_NAME_INOVAPAY = 'INOVAPAY';
 
     public const ACQUIRER_NAME_INTUIT = 'Intuit';
+
+    public const ACQUIRER_NAME_ISX = 'Isx';
 
     public const ACQUIRER_NAME_JETON = 'Jeton';
 
@@ -1372,6 +1376,9 @@ abstract class GatewayAccount implements JsonSerializable
         if (array_key_exists('dccForceCurrency', $data)) {
             $this->setDccForceCurrency($data['dccForceCurrency']);
         }
+        if (array_key_exists('dccForceConfirmation', $data)) {
+            $this->setDccForceConfirmation($data['dccForceConfirmation']);
+        }
         if (array_key_exists('dccForceRounding', $data)) {
             $this->setDccForceRounding($data['dccForceRounding']);
         }
@@ -1642,6 +1649,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return Intuit::from($data, $metadata);
             case 'IpayOptions':
                 return IpayOptions::from($data, $metadata);
+            case 'Isx':
+                return Isx::from($data, $metadata);
             case 'Jeton':
                 return Jeton::from($data, $metadata);
             case 'JetPay':
@@ -2020,6 +2029,18 @@ abstract class GatewayAccount implements JsonSerializable
         return $this;
     }
 
+    public function getDccForceConfirmation(): ?bool
+    {
+        return $this->fields['dccForceConfirmation'] ?? null;
+    }
+
+    public function setDccForceConfirmation(null|bool $dccForceConfirmation): static
+    {
+        $this->fields['dccForceConfirmation'] = $dccForceConfirmation;
+
+        return $this;
+    }
+
     public function getDccForceRounding(): ?bool
     {
         return $this->fields['dccForceRounding'] ?? null;
@@ -2315,6 +2336,9 @@ abstract class GatewayAccount implements JsonSerializable
         }
         if (array_key_exists('dccForceCurrency', $this->fields)) {
             $data['dccForceCurrency'] = $this->fields['dccForceCurrency'];
+        }
+        if (array_key_exists('dccForceConfirmation', $this->fields)) {
+            $data['dccForceConfirmation'] = $this->fields['dccForceConfirmation'];
         }
         if (array_key_exists('dccForceRounding', $this->fields)) {
             $data['dccForceRounding'] = $this->fields['dccForceRounding'];

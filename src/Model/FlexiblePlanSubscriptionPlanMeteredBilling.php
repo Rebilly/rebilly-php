@@ -17,7 +17,7 @@ namespace Rebilly\Sdk\Model;
 use JsonSerializable;
 use Rebilly\Sdk\Trait\HasMetadata;
 
-class SubscriptionPlanMeteredBilling implements JsonSerializable
+class FlexiblePlanSubscriptionPlanMeteredBilling implements JsonSerializable
 {
     use HasMetadata;
 

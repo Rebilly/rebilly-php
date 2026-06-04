@@ -87,9 +87,6 @@ class Customer implements JsonSerializable
         if (array_key_exists('revision', $data)) {
             $this->setRevision($data['revision']);
         }
-        if (array_key_exists('isEddRequired', $data)) {
-            $this->setIsEddRequired($data['isEddRequired']);
-        }
         if (array_key_exists('hasFulfilledKyc', $data)) {
             $this->setHasFulfilledKyc($data['hasFulfilledKyc']);
         }
@@ -311,18 +308,6 @@ class Customer implements JsonSerializable
         return $this->fields['revision'] ?? null;
     }
 
-    public function getIsEddRequired(): ?bool
-    {
-        return $this->fields['isEddRequired'] ?? null;
-    }
-
-    public function setIsEddRequired(null|bool $isEddRequired): static
-    {
-        $this->fields['isEddRequired'] = $isEddRequired;
-
-        return $this;
-    }
-
     public function getHasFulfilledKyc(): ?bool
     {
         return $this->fields['hasFulfilledKyc'] ?? null;
@@ -505,9 +490,6 @@ class Customer implements JsonSerializable
         }
         if (array_key_exists('revision', $this->fields)) {
             $data['revision'] = $this->fields['revision'];
-        }
-        if (array_key_exists('isEddRequired', $this->fields)) {
-            $data['isEddRequired'] = $this->fields['isEddRequired'];
         }
         if (array_key_exists('hasFulfilledKyc', $this->fields)) {
             $data['hasFulfilledKyc'] = $this->fields['hasFulfilledKyc'];
