@@ -73,12 +73,12 @@ jobs:
             -v "$PWD/sdk:/sdk" \
             -v "$PWD/api-definitions:/adef" \
             tufin/oasdiff:v1.18.1 \
-            changelog /sdk/.openapi-snapshot.yaml /adef/all.yaml -f json > /tmp/spec-diff.json
+            changelog /sdk/.openapi-snapshot.yaml /adef/catalog/all.yaml -f json > /tmp/spec-diff.json
           counts=$(docker run --rm \
             -v "$PWD/sdk:/sdk" \
             -v "$PWD/api-definitions:/adef" \
             tufin/oasdiff:v1.18.1 \
-            changelog /sdk/.openapi-snapshot.yaml /adef/all.yaml -f singleline 2>/dev/null | head -1)
+            changelog /sdk/.openapi-snapshot.yaml /adef/catalog/all.yaml -f singleline 2>/dev/null | head -1)
           echo "summary=$counts" >> $GITHUB_OUTPUT
           if   echo "$counts" | grep -qE "[1-9][0-9]* error";   then echo "bump=major" >> $GITHUB_OUTPUT
           elif echo "$counts" | grep -qE "[1-9][0-9]* warning"; then echo "bump=minor" >> $GITHUB_OUTPUT
@@ -144,7 +144,7 @@ jobs:
 
       - name: Update snapshot
         working-directory: ./sdk
-        run: cp ../api-definitions/all.yaml .openapi-snapshot.yaml
+        run: cp ../api-definitions/catalog/all.yaml .openapi-snapshot.yaml
 
       - name: Add changeset
         if: hashFiles('/tmp/changeset-body.md') != ''
