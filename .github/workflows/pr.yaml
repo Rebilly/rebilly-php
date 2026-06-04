@@ -48,6 +48,11 @@ jobs:
     name: "Coding Standards"
     runs-on: ubuntu-latest
 
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: ['8.0', '8.1', '8.2']
+
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
@@ -58,7 +63,7 @@ jobs:
       - name: "Install PHP w/ Extensions"
         uses: rebilly/setup-php@main
         with:
-          php-version: '8.0'
+          php-version: ${{ matrix.php-version }}
           extensions: mbstring, intl, curl, json
           tools: composer:v2
 
