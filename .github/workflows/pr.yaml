@@ -45,7 +45,7 @@ jobs:
         run: vendor/bin/psalm --php-version=${{ matrix.php-version }}
 
   cs:
-    name: "Coding Standards"
+    name: "Coding Standards (8.0)"
     runs-on: ubuntu-latest
 
     steps:
