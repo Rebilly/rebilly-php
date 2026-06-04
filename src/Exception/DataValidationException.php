@@ -20,7 +20,7 @@ final class DataValidationException extends HttpException
 {
     private array $validationErrors = [];
 
-    public function __construct(array $content = [], $message = '', $code = 0, Exception $previous = null)
+    public function __construct(array $content = [], $message = '', $code = 0, ?Exception $previous = null)
     {
         if (isset($content['invalidFields']) && is_array($content['invalidFields'])) {
             $this->validationErrors = $content['invalidFields'];
