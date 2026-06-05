@@ -17,7 +17,7 @@ namespace Rebilly\Sdk\Model;
 use JsonSerializable;
 use Rebilly\Sdk\Trait\HasMetadata;
 
-class SubscriptionPlanRecurringInterval implements JsonSerializable
+class FlexiblePlanSubscriptionPlanRecurringInterval implements JsonSerializable
 {
     use HasMetadata;
 

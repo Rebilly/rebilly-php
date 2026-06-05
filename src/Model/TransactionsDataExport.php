@@ -30,6 +30,8 @@ class TransactionsDataExport implements DataExport
 
     public const FORMAT_XML = 'xml';
 
+    public const FORMAT_DETAILED_CSV = 'detailed-csv';
+
     public const STATUS_PENDING = 'pending';
 
     public const STATUS_QUEUED = 'queued';

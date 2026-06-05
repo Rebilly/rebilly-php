@@ -18,7 +18,7 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use Rebilly\Sdk\Trait\HasMetadata;
 
-class OneTimeSalePlan implements Plan, FlexiblePlan
+class PlanTrialOnlyPlan implements Plan
 {
     use HasMetadata;
 
@@ -26,9 +26,6 @@ class OneTimeSalePlan implements Plan, FlexiblePlan
 
     public function __construct(array $data = [], array $metadata = [])
     {
-        if (array_key_exists('id', $data)) {
-            $this->setId($data['id']);
-        }
         if (array_key_exists('name', $data)) {
             $this->setName($data['name']);
         }
@@ -50,9 +47,6 @@ class OneTimeSalePlan implements Plan, FlexiblePlan
         if (array_key_exists('currencySign', $data)) {
             $this->setCurrencySign($data['currencySign']);
         }
-        if (array_key_exists('pricing', $data)) {
-            $this->setPricing($data['pricing']);
-        }
         if (array_key_exists('setup', $data)) {
             $this->setSetup($data['setup']);
         }
@@ -68,6 +62,12 @@ class OneTimeSalePlan implements Plan, FlexiblePlan
         if (array_key_exists('isTrialOnly', $data)) {
             $this->setIsTrialOnly($data['isTrialOnly']);
         }
+        if (array_key_exists('trial', $data)) {
+            $this->setTrial($data['trial']);
+        }
+        if (array_key_exists('invoiceTimeShift', $data)) {
+            $this->setInvoiceTimeShift($data['invoiceTimeShift']);
+        }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
         }
@@ -77,6 +77,9 @@ class OneTimeSalePlan implements Plan, FlexiblePlan
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
+        if (array_key_exists('id', $data)) {
+            $this->setId($data['id']);
+        }
         $this->setMetadata($metadata);
     }
 
@@ -85,17 +88,12 @@ class OneTimeSalePlan implements Plan, FlexiblePlan
         return new self($data, $metadata);
     }
 
-    public function getId(): string
+    public function getName(): ?string
     {
-        return $this->fields['id'];
+        return $this->fields['name'] ?? null;
     }
 
-    public function getName(): string
-    {
-        return $this->fields['name'];
-    }
-
-    public function setName(string $name): static
+    public function setName(null|string $name): static
     {
         $this->fields['name'] = $name;
 
@@ -173,22 +171,6 @@ class OneTimeSalePlan implements Plan, FlexiblePlan
         return $this->fields['currencySign'] ?? null;
     }
 
-    public function getPricing(): PlanPriceFormula
-    {
-        return $this->fields['pricing'];
-    }
-
-    public function setPricing(PlanPriceFormula|array $pricing): static
-    {
-        if (!($pricing instanceof PlanPriceFormula)) {
-            $pricing = PlanPriceFormulaFactory::from($pricing);
-        }
-
-        $this->fields['pricing'] = $pricing;
-
-        return $this;
-    }
-
     public function getSetup(): ?PlanSetup
     {
         return $this->fields['setup'] ?? null;
@@ -239,6 +221,27 @@ class OneTimeSalePlan implements Plan, FlexiblePlan
         return $this->fields['isTrialOnly'] ?? null;
     }
 
+    public function getTrial(): PlanTrial
+    {
+        return $this->fields['trial'];
+    }
+
+    public function setTrial(PlanTrial|array $trial): static
+    {
+        if (!($trial instanceof PlanTrial)) {
+            $trial = PlanTrial::from($trial);
+        }
+
+        $this->fields['trial'] = $trial;
+
+        return $this;
+    }
+
+    public function getInvoiceTimeShift(): ?InvoiceTimeShift
+    {
+        return $this->fields['invoiceTimeShift'] ?? null;
+    }
+
     public function getCreatedTime(): ?DateTimeImmutable
     {
         return $this->fields['createdTime'] ?? null;
@@ -257,12 +260,14 @@ class OneTimeSalePlan implements Plan, FlexiblePlan
         return $this->fields['_links'] ?? null;
     }
 
+    public function getId(): string
+    {
+        return $this->fields['id'];
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
-        if (array_key_exists('id', $this->fields)) {
-            $data['id'] = $this->fields['id'];
-        }
         if (array_key_exists('name', $this->fields)) {
             $data['name'] = $this->fields['name'];
         }
@@ -286,9 +291,6 @@ class OneTimeSalePlan implements Plan, FlexiblePlan
         if (array_key_exists('currencySign', $this->fields)) {
             $data['currencySign'] = $this->fields['currencySign'];
         }
-        if (array_key_exists('pricing', $this->fields)) {
-            $data['pricing'] = $this->fields['pricing']->jsonSerialize();
-        }
         if (array_key_exists('setup', $this->fields)) {
             $data['setup'] = $this->fields['setup']?->jsonSerialize();
         }
@@ -304,6 +306,12 @@ class OneTimeSalePlan implements Plan, FlexiblePlan
         if (array_key_exists('isTrialOnly', $this->fields)) {
             $data['isTrialOnly'] = $this->fields['isTrialOnly'];
         }
+        if (array_key_exists('trial', $this->fields)) {
+            $data['trial'] = $this->fields['trial']->jsonSerialize();
+        }
+        if (array_key_exists('invoiceTimeShift', $this->fields)) {
+            $data['invoiceTimeShift'] = $this->fields['invoiceTimeShift']?->jsonSerialize();
+        }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
         }
@@ -318,15 +326,11 @@ class OneTimeSalePlan implements Plan, FlexiblePlan
                 )
                 : null;
         }
+        if (array_key_exists('id', $this->fields)) {
+            $data['id'] = $this->fields['id'];
+        }
 
         return $data;
-    }
-
-    private function setId(string $id): static
-    {
-        $this->fields['id'] = $id;
-
-        return $this;
     }
 
     private function setCurrencySign(null|string $currencySign): static
@@ -346,6 +350,17 @@ class OneTimeSalePlan implements Plan, FlexiblePlan
     private function setIsTrialOnly(null|bool $isTrialOnly): static
     {
         $this->fields['isTrialOnly'] = $isTrialOnly;
+
+        return $this;
+    }
+
+    private function setInvoiceTimeShift(null|InvoiceTimeShift|array $invoiceTimeShift): static
+    {
+        if ($invoiceTimeShift !== null && !($invoiceTimeShift instanceof InvoiceTimeShift)) {
+            $invoiceTimeShift = InvoiceTimeShift::from($invoiceTimeShift);
+        }
+
+        $this->fields['invoiceTimeShift'] = $invoiceTimeShift;
 
         return $this;
     }
@@ -383,6 +398,13 @@ class OneTimeSalePlan implements Plan, FlexiblePlan
         ) : null;
 
         $this->fields['_links'] = $links;
+
+        return $this;
+    }
+
+    private function setId(string $id): static
+    {
+        $this->fields['id'] = $id;
 
         return $this;
     }

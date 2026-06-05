@@ -18,6 +18,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
+use Rebilly\Sdk\Model\GetPayoutRequestAllocationCollectionResponse;
 use Rebilly\Sdk\Model\PatchPayoutRequestAllocationRequest;
 use Rebilly\Sdk\Model\PayoutRequestAllocation;
 use Rebilly\Sdk\Model\PostPayoutRequestAllocationRequest;
@@ -73,7 +74,7 @@ class PayoutRequestAllocationsApi
     }
 
     /**
-     * @return Collection<PayoutRequestAllocation>
+     * @return Collection<GetPayoutRequestAllocationCollectionResponse>
      */
     public function getAll(
         ?int $limit = null,
@@ -96,7 +97,7 @@ class PayoutRequestAllocationsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): PayoutRequestAllocation => PayoutRequestAllocation::from($item, ['headers' => $response->getHeaders()]), $data),
+            array_map(fn (array $item): GetPayoutRequestAllocationCollectionResponse => GetPayoutRequestAllocationCollectionResponse::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
@@ -107,7 +108,7 @@ class PayoutRequestAllocationsApi
     }
 
     /**
-     * @return Paginator<PayoutRequestAllocation>
+     * @return Paginator<GetPayoutRequestAllocationCollectionResponse>
      */
     public function getAllPaginator(
         ?int $limit = null,

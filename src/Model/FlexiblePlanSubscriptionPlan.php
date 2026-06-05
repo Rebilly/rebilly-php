@@ -18,7 +18,7 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use Rebilly\Sdk\Trait\HasMetadata;
 
-class SubscriptionPlan implements Plan, FlexiblePlan
+class FlexiblePlanSubscriptionPlan implements FlexiblePlan
 {
     use HasMetadata;
 
@@ -26,9 +26,6 @@ class SubscriptionPlan implements Plan, FlexiblePlan
 
     public function __construct(array $data = [], array $metadata = [])
     {
-        if (array_key_exists('id', $data)) {
-            $this->setId($data['id']);
-        }
         if (array_key_exists('name', $data)) {
             $this->setName($data['name']);
         }
@@ -89,6 +86,9 @@ class SubscriptionPlan implements Plan, FlexiblePlan
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
+        if (array_key_exists('id', $data)) {
+            $this->setId($data['id']);
+        }
         $this->setMetadata($metadata);
     }
 
@@ -97,17 +97,12 @@ class SubscriptionPlan implements Plan, FlexiblePlan
         return new self($data, $metadata);
     }
 
-    public function getId(): string
+    public function getName(): ?string
     {
-        return $this->fields['id'];
+        return $this->fields['name'] ?? null;
     }
 
-    public function getName(): string
-    {
-        return $this->fields['name'];
-    }
-
-    public function setName(string $name): static
+    public function setName(null|string $name): static
     {
         $this->fields['name'] = $name;
 
@@ -251,15 +246,15 @@ class SubscriptionPlan implements Plan, FlexiblePlan
         return $this->fields['isTrialOnly'] ?? null;
     }
 
-    public function getRecurringInterval(): ?SubscriptionPlanRecurringInterval
+    public function getRecurringInterval(): ?FlexiblePlanSubscriptionPlanRecurringInterval
     {
         return $this->fields['recurringInterval'] ?? null;
     }
 
-    public function setRecurringInterval(null|SubscriptionPlanRecurringInterval|array $recurringInterval): static
+    public function setRecurringInterval(null|FlexiblePlanSubscriptionPlanRecurringInterval|array $recurringInterval): static
     {
-        if ($recurringInterval !== null && !($recurringInterval instanceof SubscriptionPlanRecurringInterval)) {
-            $recurringInterval = SubscriptionPlanRecurringInterval::from($recurringInterval);
+        if ($recurringInterval !== null && !($recurringInterval instanceof FlexiblePlanSubscriptionPlanRecurringInterval)) {
+            $recurringInterval = FlexiblePlanSubscriptionPlanRecurringInterval::from($recurringInterval);
         }
 
         $this->fields['recurringInterval'] = $recurringInterval;
@@ -283,15 +278,15 @@ class SubscriptionPlan implements Plan, FlexiblePlan
         return $this;
     }
 
-    public function getMeteredBilling(): ?SubscriptionPlanMeteredBilling
+    public function getMeteredBilling(): ?FlexiblePlanSubscriptionPlanMeteredBilling
     {
         return $this->fields['meteredBilling'] ?? null;
     }
 
-    public function setMeteredBilling(null|SubscriptionPlanMeteredBilling|array $meteredBilling): static
+    public function setMeteredBilling(null|FlexiblePlanSubscriptionPlanMeteredBilling|array $meteredBilling): static
     {
-        if ($meteredBilling !== null && !($meteredBilling instanceof SubscriptionPlanMeteredBilling)) {
-            $meteredBilling = SubscriptionPlanMeteredBilling::from($meteredBilling);
+        if ($meteredBilling !== null && !($meteredBilling instanceof FlexiblePlanSubscriptionPlanMeteredBilling)) {
+            $meteredBilling = FlexiblePlanSubscriptionPlanMeteredBilling::from($meteredBilling);
         }
 
         $this->fields['meteredBilling'] = $meteredBilling;
@@ -322,12 +317,21 @@ class SubscriptionPlan implements Plan, FlexiblePlan
         return $this->fields['_links'] ?? null;
     }
 
+    public function getId(): string
+    {
+        return $this->fields['id'];
+    }
+
+    public function setId(string $id): static
+    {
+        $this->fields['id'] = $id;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
-        if (array_key_exists('id', $this->fields)) {
-            $data['id'] = $this->fields['id'];
-        }
         if (array_key_exists('name', $this->fields)) {
             $data['name'] = $this->fields['name'];
         }
@@ -395,15 +399,11 @@ class SubscriptionPlan implements Plan, FlexiblePlan
                 )
                 : null;
         }
+        if (array_key_exists('id', $this->fields)) {
+            $data['id'] = $this->fields['id'];
+        }
 
         return $data;
-    }
-
-    private function setId(string $id): static
-    {
-        $this->fields['id'] = $id;
-
-        return $this;
     }
 
     private function setCurrencySign(null|string $currencySign): static

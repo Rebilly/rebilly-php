@@ -27,8 +27,6 @@ class Attachment implements JsonSerializable
 
     public const RELATED_TYPE_CUSTOMER_TIMELINE_COMMENT = 'customer-timeline-comment';
 
-    public const RELATED_TYPE_CUSTOMER_EDD_TIMELINE_COMMENT = 'customer-edd-timeline-comment';
-
     public const RELATED_TYPE_DISPUTE = 'dispute';
 
     public const RELATED_TYPE_GATEWAY_TIMELINE_COMMENT = 'gateway-timeline-comment';

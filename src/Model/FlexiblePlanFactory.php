@@ -19,12 +19,12 @@ class FlexiblePlanFactory
     public static function from(array $data = [], array $metadata = []): FlexiblePlan
     {
         if ($data['isTrialOnly'] ?? false) {
-            return TrialOnlyPlan::from($data, $metadata);
+            return FlexiblePlanTrialOnlyPlan::from($data, $metadata);
         }
         if (isset($data['recurringInterval'])) {
-            return SubscriptionPlan::from($data, $metadata);
+            return FlexiblePlanSubscriptionPlan::from($data, $metadata);
         }
 
-        return OneTimeSalePlan::from($data, $metadata);
+        return FlexiblePlanOneTimeSalePlan::from($data, $metadata);
     }
 }
