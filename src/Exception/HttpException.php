@@ -20,7 +20,7 @@ class HttpException extends Exception
 {
     private int $statusCode;
 
-    public function __construct($status, $message = '', $code = 0, Exception $previous = null)
+    public function __construct($status, $message = '', $code = 0, ?Exception $previous = null)
     {
         $this->statusCode = (int) $status;
         parent::__construct($message, $code, $previous);
