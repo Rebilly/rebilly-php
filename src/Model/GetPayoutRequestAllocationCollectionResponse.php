@@ -19,7 +19,7 @@ use DateTimeInterface;
 use JsonSerializable;
 use Rebilly\Sdk\Trait\HasMetadata;
 
-class PayoutRequestAllocation implements JsonSerializable
+class GetPayoutRequestAllocationCollectionResponse implements JsonSerializable
 {
     use HasMetadata;
 
@@ -417,7 +417,7 @@ class PayoutRequestAllocation implements JsonSerializable
 
     public const GATEWAY_PAYOUT_INSTRUCTION_NONE = 'none';
 
-    public const GATEWAY_PAYOUT_INSTRUCTION_NULL = 'null';
+    public const GATEWAY_PAYOUT_INSTRUCTION_UNDEFINED = 'undefined';
 
     public const STATUS_PENDING = 'pending';
 
@@ -445,7 +445,7 @@ class PayoutRequestAllocation implements JsonSerializable
 
     public const TRANSACTION_RESULT_UNKNOWN = 'unknown';
 
-    public const TRANSACTION_RESULT_NULL = 'null';
+    public const TRANSACTION_RESULT_UNDEFINED = 'undefined';
 
     public const TRANSACTION_STATUS_COMPLETED = 'completed';
 
@@ -477,7 +477,7 @@ class PayoutRequestAllocation implements JsonSerializable
 
     public const TRANSACTION_STATUS_WAITING_REFUND = 'waiting-refund';
 
-    public const TRANSACTION_STATUS_NULL = 'null';
+    public const TRANSACTION_STATUS_UNDEFINED = 'undefined';
 
     private array $fields = [];
 
@@ -533,6 +533,9 @@ class PayoutRequestAllocation implements JsonSerializable
         }
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
+        }
+        if (array_key_exists('exposureAmount', $data)) {
+            $this->setExposureAmount($data['exposureAmount']);
         }
         $this->setMetadata($metadata);
     }
@@ -676,6 +679,11 @@ class PayoutRequestAllocation implements JsonSerializable
         return $this->fields['_links'] ?? null;
     }
 
+    public function getExposureAmount(): ?float
+    {
+        return $this->fields['exposureAmount'] ?? null;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -734,6 +742,9 @@ class PayoutRequestAllocation implements JsonSerializable
                     $this->fields['_links'],
                 )
                 : null;
+        }
+        if (array_key_exists('exposureAmount', $this->fields)) {
+            $data['exposureAmount'] = $this->fields['exposureAmount'];
         }
 
         return $data;
@@ -828,6 +839,17 @@ class PayoutRequestAllocation implements JsonSerializable
         ) : null;
 
         $this->fields['_links'] = $links;
+
+        return $this;
+    }
+
+    private function setExposureAmount(null|float|string $exposureAmount): static
+    {
+        if (is_string($exposureAmount)) {
+            $exposureAmount = (float) $exposureAmount;
+        }
+
+        $this->fields['exposureAmount'] = $exposureAmount;
 
         return $this;
     }

@@ -281,6 +281,10 @@ tags:
       For information on the customer resource, see [Resources](https://www.rebilly.com/docs/dev-docs/concepts/#resources).
   - name: Customers timeline
     description: Use customer timelines to maintain an audit trail of changes and activity for each customer.
+  - name: Dashboards
+    description: |-
+      Use dashboard operations to manage the user's dashboard and its tabs with metrics over key performance indicators.
+      Each tab is a customizable view of tiles that display report data.
   - name: Data exports
     description: |-
       Use data export operations to manage the export of resource data, such as:
@@ -8215,7 +8219,7 @@ paths:
                   pass the customer's first name to the `accept` field.
                   If an incorrect first name is passed, the document is rejected.
                 value:
-                  customerId: '123_456789'
+                  customerId: 123_456789
                   redirectUrl: https://example.com/return-here/
                   documents:
                     - type: credit-file-proof
@@ -8226,7 +8230,7 @@ paths:
               identity-with-face-proof:
                 summary: Identity with face proof
                 value:
-                  customerId: '123_456789'
+                  customerId: 123_456789
                   redirectUrl: https://example.com/return-here/
                   documents:
                     - type: identity-proof
@@ -8236,7 +8240,7 @@ paths:
               identity-and-address:
                 summary: Identity and address
                 value:
-                  customerId: '123_456789'
+                  customerId: 123_456789
                   redirectUrl: https://example.com/return-here/
                   documents:
                     - type: identity-proof
@@ -24417,6 +24421,122 @@ paths:
             $service = new \Rebilly\Sdk\Service($client);
 
             $metrics = $service->customers()->getCustomerLifetimeSummaryMetrics('customerId');
+  /profile/dashboard:
+    get:
+      x-badges:
+        - name: Experimental
+      x-products:
+        - Reports
+      tags:
+        - Dashboards
+      summary: Retrieve profile dashboard
+      operationId: GetProfileDashboard
+      x-sdk-operation-name: getDashboard
+      description: Retrieves the profile dashboard configuration.
+      responses:
+        '200':
+          description: Profile dashboard retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileDashboard'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    put:
+      x-badges:
+        - name: Experimental
+      x-products:
+        - Reports
+      tags:
+        - Dashboards
+      summary: Update profile dashboard
+      operationId: PutProfileDashboard
+      x-sdk-operation-name: updateDashboard
+      description: Updates the profile dashboard configuration.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfileDashboard'
+        description: Profile dashboard resource.
+        required: true
+      responses:
+        '200':
+          description: Profile dashboard updated.
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/components/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/components/headers/X-RateLimit-Remaining'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileDashboard'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /profile/dashboard/metrics/{metric}:
+    parameters:
+      - name: metric
+        in: path
+        required: true
+        description: Name of the dashboard metric.
+        schema:
+          $ref: '#/components/schemas/DashboardMetric'
+    get:
+      x-badges:
+        - name: Experimental
+      x-products:
+        - Reports
+      tags:
+        - Dashboards
+      summary: Retrieve dashboard metric data
+      operationId: GetProfileDashboardMetricReport
+      x-sdk-operation-name: getDashboardMetricReport
+      description: Retrieves the report data for a single dashboard metric.
+      parameters:
+        - name: periodStart
+          in: query
+          required: true
+          description: |-
+            Start date and time of the metric range.
+            The interval between `periodStart` and `periodEnd` must not exceed 100 days.
+          schema:
+            type: string
+            format: date-time
+          example: '2024-01-01T00:00:00Z'
+        - name: periodEnd
+          in: query
+          required: true
+          description: |-
+            End date and time of the metric range.
+            The interval between `periodStart` and `periodEnd` must not exceed 100 days.
+          schema:
+            type: string
+            format: date-time
+          example: '2024-01-31T23:59:59Z'
+      responses:
+        '200':
+          description: Metric report retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardTileReport'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
   /experimental/data-exports:
     post:
       x-products:
@@ -67977,6 +68097,192 @@ components:
           readOnly: true
           type: number
           format: double
+    DashboardMetric:
+      type: string
+      description: Type of dashboard metric.
+      enum:
+        - approvalRate
+        - salesCount
+        - salesValue
+        - refundsValue
+        - chargebacksCount
+        - chargebacksValue
+        - transactionsCount
+        - redeemedCouponsCount
+        - newLeadsCount
+        - newCustomersCount
+        - appliedCouponsCount
+        - trialConversionsCount
+        - trialConversionsRate
+        - renewalSuccessRate
+        - renewalsCount
+        - newTrialsCount
+        - reactivationsCount
+        - successfulRetriesCount
+        - invoicedRevenue
+        - churnCount
+        - churnRate
+        - cancellationsCount
+        - cancellationsRate
+        - activeSubscriptionsCount
+        - newSubscriptionsCount
+        - upgradesCount
+        - downgradesCount
+        - monthlyRecurringRevenue
+        - annualRecurringRevenue
+        - averageRevenuePerCustomer
+        - customerLifetimeValue
+        - addressProofAcceptanceRate
+        - identityProofAcceptanceRate
+        - fundsProofAcceptanceRate
+        - purchaseProofAcceptanceRate
+        - creditFileProofAcceptanceRate
+        - kycAcceptanceRate
+        - kycReviewTime
+        - kycRejectionRate
+        - kycAccuracyRate
+        - addressProofAccuracyRate
+        - identityProofAccuracyRate
+        - creditFileProofAccuracyRate
+        - kycRequestCount
+        - kycRequestAbandonmentRate
+        - kycRequestAttemptedRate
+        - kycRequestFailureRate
+        - kycRequestFulfillmentRate
+        - kycRequestExpirationRate
+    DashboardTile:
+      type: object
+      required:
+        - metric
+      properties:
+        metric:
+          description: Metric displayed in the tile.
+          anyOf:
+            - $ref: '#/components/schemas/DashboardMetric'
+            - type: string
+        dateRange:
+          type: string
+          description: |-
+            Date range of the tile, in ISO-8601 interval format, extended with `NOW` and `NOW-P*` values for relative dates.
+            When omitted, the dashboard `dateRange` is used.
+            Supported formats:
+
+            - Start and end: `2024-01-01T00:00:00Z/2024-02-01T00:00:00Z`.
+            - Start and duration `2024-01-01T00:00:00Z/P1M`.
+            - Duration and end: `P1M/2024-02-01T00:00:00Z`.
+            - Now and duration: `NOW-P1M/NOW`. This format represents the last month.
+            - Month before last month: `NOW-P2M/NOW-P1M`.
+        columnsWidth:
+          type: integer
+          description: Number of dashboard columns that the tile occupies.
+          minimum: 1
+          maximum: 2
+          default: 1
+    DashboardTab:
+      type: object
+      required:
+        - title
+        - tiles
+      properties:
+        title:
+          type: string
+          description: Title of the dashboard tab.
+          minLength: 2
+          maxLength: 12
+          example: KYC
+        tiles:
+          type: array
+          description: List of tiles displayed on the dashboard tab.
+          maxItems: 20
+          items:
+            $ref: '#/components/schemas/DashboardTile'
+    ProfileDashboard:
+      type: object
+      required:
+        - tabs
+      properties:
+        dateRange:
+          type: string
+          description: |-
+            Date range of the dashboard, in ISO-8601 interval format, extended with `NOW` and `NOW-P*` values for relative dates.
+            This range applies to every tile that does not define its own `dateRange`.
+            Supported formats:
+
+            - Start and end: `2024-01-01T00:00:00Z/2024-02-01T00:00:00Z`.
+            - Start and duration `2024-01-01T00:00:00Z/P1M`.
+            - Duration and end: `P1M/2024-02-01T00:00:00Z`.
+            - Now and duration: `NOW-P1M/NOW`. This format represents the last month.
+            - Month before last month: `NOW-P2M/NOW-P1M`.
+          default: NOW-P1M/NOW
+        periodStart:
+          type: string
+          format: date-time
+          readOnly: true
+          description: |-
+            Date and time when the dashboard period starts.
+            The value is resolved from `dateRange`.
+        periodEnd:
+          type: string
+          format: date-time
+          readOnly: true
+          description: |-
+            Date and time when the dashboard period ends.
+            The value is resolved from `dateRange`.
+        tabs:
+          type: array
+          description: List of dashboard tabs.
+          maxItems: 10
+          items:
+            $ref: '#/components/schemas/DashboardTab'
+    DashboardTileReport:
+      type: object
+      properties:
+        metric:
+          $ref: '#/components/schemas/DashboardMetric'
+        value:
+          type:
+            - number
+            - 'null'
+          format: double
+          description: Tile value for the specified date range.
+        previousValue:
+          type:
+            - number
+            - 'null'
+          format: double
+          description: |-
+            Tile value for the previous date range.
+            This value is relative to the specified date range.
+        timeseries:
+          description: Time series of tile values across the specified date range.
+          type: array
+          maxItems: 100
+          items:
+            type: object
+            description: Chart data point.
+            readOnly: true
+            properties:
+              date:
+                type: string
+                description: Date and time of the entry.
+              value:
+                type:
+                  - number
+                  - 'null'
+                description: Value of the entry.
+    BadRequest:
+      allOf:
+        - title: Bad request
+        - type: object
+          properties:
+            status:
+              type: integer
+              description: HTTP status code.
+              minimum: 400
+              maximum: 400
+            invalidFields:
+              $ref: '#/components/schemas/InvalidFields'
+        - $ref: '#/components/schemas/BaseProblem'
     DataExportArguments:
       type: object
       description: |-
@@ -69388,19 +69694,6 @@ components:
               value:
                 type: number
                 description: Data entry value.
-    BadRequest:
-      allOf:
-        - title: Bad request
-        - type: object
-          properties:
-            status:
-              type: integer
-              description: HTTP status code.
-              minimum: 400
-              maximum: 400
-            invalidFields:
-              $ref: '#/components/schemas/InvalidFields'
-        - $ref: '#/components/schemas/BaseProblem'
     ApiLogSummary:
       type: object
       properties:
@@ -69516,58 +69809,7 @@ components:
         type: object
         properties:
           metric:
-            type: string
-            description: Type of metric.
-            enum:
-              - approvalRate
-              - salesCount
-              - salesValue
-              - refundsValue
-              - chargebacksCount
-              - chargebacksValue
-              - transactionsCount
-              - redeemedCouponsCount
-              - newLeadsCount
-              - newCustomersCount
-              - appliedCouponsCount
-              - trialConversionsCount
-              - trialConversionsRate
-              - renewalSuccessRate
-              - renewalsCount
-              - newTrialsCount
-              - reactivationsCount
-              - successfulRetriesCount
-              - invoicedRevenue
-              - churnCount
-              - churnRate
-              - cancellationsCount
-              - cancellationsRate
-              - activeSubscriptionsCount
-              - newSubscriptionsCount
-              - upgradesCount
-              - downgradesCount
-              - monthlyRecurringRevenue
-              - annualRecurringRevenue
-              - averageRevenuePerCustomer
-              - customerLifetimeValue
-              - addressProofAcceptanceRate
-              - identityProofAcceptanceRate
-              - fundsProofAcceptanceRate
-              - purchaseProofAcceptanceRate
-              - creditFileProofAcceptanceRate
-              - kycAcceptanceRate
-              - kycReviewTime
-              - kycRejectionRate
-              - kycAccuracyRate
-              - addressProofAccuracyRate
-              - identityProofAccuracyRate
-              - creditFileProofAccuracyRate
-              - kycRequestCount
-              - kycRequestAbandonmentRate
-              - kycRequestAttemptedRate
-              - kycRequestFailureRate
-              - kycRequestFulfillmentRate
-              - kycRequestExpirationRate
+            $ref: '#/components/schemas/DashboardMetric'
           humanName:
             type: string
             description: Display name of the metric.
@@ -70877,6 +71119,13 @@ components:
                 enum:
                   - self
                   - logoUrl
+    ReadyToPayoutFeature:
+      type: object
+      description: Feature indicators for payout method behavior.
+      properties:
+        requiresSetupTransaction:
+          type: boolean
+          description: Specifies if the payout method requires a setup transaction for each payout.
     StorefrontCashier:
       type: object
       required:
@@ -70960,15 +71209,8 @@ components:
               method:
                 type: string
                 example: payment-card
-              brands:
-                type: array
-                items:
-                  type: string
-                example:
-                  - Visa
-                  - MasterCard
-                  - American Express
-                  - Discover
+              feature:
+                $ref: '#/components/schemas/ReadyToPayoutFeature'
         depositAmounts:
           type: array
           items:
@@ -75536,13 +75778,6 @@ components:
           description: Amount to payout.
           type: number
           format: double
-    ReadyToPayoutFeature:
-      type: object
-      description: Feature indicators for payout method behavior.
-      properties:
-        requiresSetupTransaction:
-          type: boolean
-          description: Specifies if the payout method requires a setup transaction for each payout.
     ReadyToPayoutMethodFilters:
       type: array
       description: |-
@@ -76336,16 +76571,16 @@ components:
             type: string
             format: uri
           example: https://api.rebilly.com/example
-    NoContent:
-      description: |-
-        Request accepted.
-        No response body returned.
     BadRequest:
       description: Server could not understand the request due to invalid syntax.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/BadRequest'
+    NoContent:
+      description: |-
+        Request accepted.
+        No response body returned.
   requestBodies:
     AccountRegistrationSettings:
       content:

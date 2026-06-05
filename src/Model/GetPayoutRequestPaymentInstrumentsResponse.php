@@ -217,6 +217,8 @@ class GetPayoutRequestPaymentInstrumentsResponse implements JsonSerializable
 
     public const GATEWAY_NAME_IPAY_OPTIONS = 'IpayOptions';
 
+    public const GATEWAY_NAME_ISX = 'Isx';
+
     public const GATEWAY_NAME_JET_PAY = 'JetPay';
 
     public const GATEWAY_NAME_JETON = 'Jeton';

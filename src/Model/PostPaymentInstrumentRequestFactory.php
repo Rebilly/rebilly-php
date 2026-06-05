@@ -134,6 +134,7 @@ class PostPaymentInstrumentRequestFactory
             'UPayCard' => AlternativeInstrument::from($data, $metadata),
             'USD-coin' => AlternativeInstrument::from($data, $metadata),
             'VCreditos' => AlternativeInstrument::from($data, $metadata),
+            'VegaWallet' => AlternativeInstrument::from($data, $metadata),
             'VenusPoint' => AlternativeInstrument::from($data, $metadata),
             'Viva' => AlternativeInstrument::from($data, $metadata),
             'Wallet88' => AlternativeInstrument::from($data, $metadata),
