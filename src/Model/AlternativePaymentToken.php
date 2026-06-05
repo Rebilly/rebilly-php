@@ -302,6 +302,8 @@ class AlternativePaymentToken implements CompositeToken
 
     public const METHOD_V_CREDITOS = 'VCreditos';
 
+    public const METHOD_VEGA_WALLET = 'VegaWallet';
+
     public const METHOD_VENUS_POINT = 'VenusPoint';
 
     public const METHOD_VIVA = 'Viva';

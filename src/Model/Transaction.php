@@ -273,6 +273,8 @@ class Transaction implements JsonSerializable
 
     public const GATEWAY_NAME_IPAY_OPTIONS = 'IpayOptions';
 
+    public const GATEWAY_NAME_ISX = 'Isx';
+
     public const GATEWAY_NAME_JET_PAY = 'JetPay';
 
     public const GATEWAY_NAME_JETON = 'Jeton';
@@ -718,6 +720,8 @@ class Transaction implements JsonSerializable
     public const ACQUIRER_NAME_INOVAPAY = 'INOVAPAY';
 
     public const ACQUIRER_NAME_INTUIT = 'Intuit';
+
+    public const ACQUIRER_NAME_ISX = 'Isx';
 
     public const ACQUIRER_NAME_JETON = 'Jeton';
 

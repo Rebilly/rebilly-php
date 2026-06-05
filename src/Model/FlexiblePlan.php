@@ -18,11 +18,9 @@ use DateTimeImmutable;
 
 interface FlexiblePlan extends ConfigurablePlan
 {
-    public function getId(): string;
+    public function getName(): ?string;
 
-    public function getName(): string;
-
-    public function setName(string $name): static;
+    public function setName(null|string $name): static;
 
     public function getDescription(): ?string;
 
@@ -76,4 +74,8 @@ interface FlexiblePlan extends ConfigurablePlan
      * @return null|ResourceLink[]
      */
     public function getLinks(): ?array;
+
+    public function getId(): string;
+
+    public function setId(string $id): static;
 }

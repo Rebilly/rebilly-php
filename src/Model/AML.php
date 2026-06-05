@@ -96,6 +96,9 @@ class AML implements JsonSerializable
         if (array_key_exists('comments', $data)) {
             $this->setComments($data['comments']);
         }
+        if (array_key_exists('metadata', $data)) {
+            $this->setMetadata($data['metadata']);
+        }
         if (array_key_exists('matchDetails', $data)) {
             $this->setMatchDetails($data['matchDetails']);
         }
@@ -211,6 +214,22 @@ class AML implements JsonSerializable
         return $this->fields['comments'] ?? null;
     }
 
+    public function getMetadata(): ?AMLMetadata
+    {
+        return $this->fields['metadata'] ?? null;
+    }
+
+    public function setMetadata(null|AMLMetadata|array $metadata): static
+    {
+        if ($metadata !== null && !($metadata instanceof AMLMetadata)) {
+            $metadata = AMLMetadata::from($metadata);
+        }
+
+        $this->fields['metadata'] = $metadata;
+
+        return $this;
+    }
+
     public function getMatchDetails(): ?AMLMatchDetails
     {
         return $this->fields['matchDetails'] ?? null;
@@ -305,6 +324,9 @@ class AML implements JsonSerializable
         }
         if (array_key_exists('comments', $this->fields)) {
             $data['comments'] = $this->fields['comments'];
+        }
+        if (array_key_exists('metadata', $this->fields)) {
+            $data['metadata'] = $this->fields['metadata']?->jsonSerialize();
         }
         if (array_key_exists('matchDetails', $this->fields)) {
             $data['matchDetails'] = $this->fields['matchDetails']?->jsonSerialize();

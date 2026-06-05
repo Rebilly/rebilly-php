@@ -106,6 +106,9 @@ class AmlCheck implements JsonSerializable
         if (array_key_exists('noMatchReason', $data)) {
             $this->setNoMatchReason($data['noMatchReason']);
         }
+        if (array_key_exists('noMatchDetails', $data)) {
+            $this->setNoMatchDetails($data['noMatchDetails']);
+        }
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
@@ -310,6 +313,14 @@ class AmlCheck implements JsonSerializable
     }
 
     /**
+     * @return null|string[]
+     */
+    public function getNoMatchDetails(): ?array
+    {
+        return $this->fields['noMatchDetails'] ?? null;
+    }
+
+    /**
      * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
@@ -381,6 +392,9 @@ class AmlCheck implements JsonSerializable
         if (array_key_exists('noMatchReason', $this->fields)) {
             $data['noMatchReason'] = $this->fields['noMatchReason'];
         }
+        if (array_key_exists('noMatchDetails', $this->fields)) {
+            $data['noMatchDetails'] = $this->fields['noMatchDetails'];
+        }
         if (array_key_exists('_links', $this->fields)) {
             $data['_links'] = $this->fields['_links'] !== null
                 ? array_map(
@@ -447,6 +461,16 @@ class AmlCheck implements JsonSerializable
     private function setNoMatchReason(null|string $noMatchReason): static
     {
         $this->fields['noMatchReason'] = $noMatchReason;
+
+        return $this;
+    }
+
+    /**
+     * @param null|string[] $noMatchDetails
+     */
+    private function setNoMatchDetails(null|array $noMatchDetails): static
+    {
+        $this->fields['noMatchDetails'] = $noMatchDetails;
 
         return $this;
     }

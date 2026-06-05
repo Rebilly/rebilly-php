@@ -25,6 +25,8 @@ class Wallet88Settings implements JsonSerializable
 
     public const PAYMENT_CARD_METHOD_MASTERCARD = 'mastercard';
 
+    public const PAYMENT_CARD_METHOD_VISA = 'visa';
+
     private array $fields = [];
 
     public function __construct(array $data = [], array $metadata = [])
