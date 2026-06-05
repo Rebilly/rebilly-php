@@ -19,11 +19,11 @@ use Rebilly\Sdk\Model\PaymentCardToken;
 use Rebilly\Sdk\Model\PaymentInstructionToken;
 use Rebilly\Sdk\Model\PlanFormulaFlatRate;
 use Rebilly\Sdk\Model\PlanSubscriptionPlan;
+use Rebilly\Sdk\Model\PlanSubscriptionPlanRecurringInterval;
 use Rebilly\Sdk\Model\PostTransactionRequest;
 use Rebilly\Sdk\Model\Product;
 use Rebilly\Sdk\Model\Subscription;
 use Rebilly\Sdk\Model\SubscriptionOrOneTimeSaleItem;
-use Rebilly\Sdk\Model\SubscriptionPlanRecurringInterval;
 use Rebilly\Sdk\Model\Website;
 use Rebilly\Sdk\Service;
 
@@ -95,8 +95,8 @@ try {
                 ->setPrice(9.99),
         )
         ->setRecurringInterval(
-            SubscriptionPlanRecurringInterval::from()
-                ->setUnit(SubscriptionPlanRecurringInterval::UNIT_MONTH)
+            PlanSubscriptionPlanRecurringInterval::from()
+                ->setUnit(PlanSubscriptionPlanRecurringInterval::UNIT_MONTH)
                 ->setLength(1),
         );
 
