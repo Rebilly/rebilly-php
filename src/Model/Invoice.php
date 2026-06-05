@@ -170,6 +170,9 @@ class Invoice implements JsonSerializable
         if (array_key_exists('creditMemoAllocations', $data)) {
             $this->setCreditMemoAllocations($data['creditMemoAllocations']);
         }
+        if (array_key_exists('isNewOrder', $data)) {
+            $this->setIsNewOrder($data['isNewOrder']);
+        }
         if (array_key_exists('customerId', $data)) {
             $this->setCustomerId($data['customerId']);
         }
@@ -511,6 +514,11 @@ class Invoice implements JsonSerializable
         return $this->fields['creditMemoAllocations'] ?? null;
     }
 
+    public function getIsNewOrder(): ?bool
+    {
+        return $this->fields['isNewOrder'] ?? null;
+    }
+
     public function getCustomerId(): string
     {
         return $this->fields['customerId'];
@@ -734,6 +742,9 @@ class Invoice implements JsonSerializable
                     $this->fields['creditMemoAllocations'],
                 )
                 : null;
+        }
+        if (array_key_exists('isNewOrder', $this->fields)) {
+            $data['isNewOrder'] = $this->fields['isNewOrder'];
         }
         if (array_key_exists('customerId', $this->fields)) {
             $data['customerId'] = $this->fields['customerId'];
@@ -1003,6 +1014,13 @@ class Invoice implements JsonSerializable
         ) : null;
 
         $this->fields['creditMemoAllocations'] = $creditMemoAllocations;
+
+        return $this;
+    }
+
+    private function setIsNewOrder(null|bool $isNewOrder): static
+    {
+        $this->fields['isNewOrder'] = $isNewOrder;
 
         return $this;
     }

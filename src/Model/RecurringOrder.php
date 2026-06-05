@@ -198,11 +198,17 @@ class RecurringOrder implements Order
         if (array_key_exists('revision', $data)) {
             $this->setRevision($data['revision']);
         }
+        if (array_key_exists('currentPeriodStart', $data)) {
+            $this->setCurrentPeriodStart($data['currentPeriodStart']);
+        }
+        if (array_key_exists('currentPeriodEnd', $data)) {
+            $this->setCurrentPeriodEnd($data['currentPeriodEnd']);
+        }
         if (array_key_exists('renewalTime', $data)) {
             $this->setRenewalTime($data['renewalTime']);
         }
-        if (array_key_exists('isNew', $data)) {
-            $this->setIsNew($data['isNew']);
+        if (array_key_exists('isNewOrder', $data)) {
+            $this->setIsNewOrder($data['isNewOrder']);
         }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
@@ -614,14 +620,35 @@ class RecurringOrder implements Order
         return $this->fields['revision'] ?? null;
     }
 
+    public function getCurrentPeriodStart(): ?DateTimeImmutable
+    {
+        return $this->fields['currentPeriodStart'] ?? null;
+    }
+
+    public function getCurrentPeriodEnd(): ?DateTimeImmutable
+    {
+        return $this->fields['currentPeriodEnd'] ?? null;
+    }
+
+    public function setCurrentPeriodEnd(null|DateTimeImmutable|string $currentPeriodEnd): static
+    {
+        if ($currentPeriodEnd !== null && !($currentPeriodEnd instanceof DateTimeImmutable)) {
+            $currentPeriodEnd = new DateTimeImmutable($currentPeriodEnd);
+        }
+
+        $this->fields['currentPeriodEnd'] = $currentPeriodEnd;
+
+        return $this;
+    }
+
     public function getRenewalTime(): ?DateTimeImmutable
     {
         return $this->fields['renewalTime'] ?? null;
     }
 
-    public function getIsNew(): ?bool
+    public function getIsNewOrder(): ?bool
     {
-        return $this->fields['isNew'] ?? null;
+        return $this->fields['isNewOrder'] ?? null;
     }
 
     public function getCreatedTime(): ?DateTimeImmutable
@@ -786,11 +813,17 @@ class RecurringOrder implements Order
         if (array_key_exists('revision', $this->fields)) {
             $data['revision'] = $this->fields['revision'];
         }
+        if (array_key_exists('currentPeriodStart', $this->fields)) {
+            $data['currentPeriodStart'] = $this->fields['currentPeriodStart']?->format(DateTimeInterface::RFC3339);
+        }
+        if (array_key_exists('currentPeriodEnd', $this->fields)) {
+            $data['currentPeriodEnd'] = $this->fields['currentPeriodEnd']?->format(DateTimeInterface::RFC3339);
+        }
         if (array_key_exists('renewalTime', $this->fields)) {
             $data['renewalTime'] = $this->fields['renewalTime']?->format(DateTimeInterface::RFC3339);
         }
-        if (array_key_exists('isNew', $this->fields)) {
-            $data['isNew'] = $this->fields['isNew'];
+        if (array_key_exists('isNewOrder', $this->fields)) {
+            $data['isNewOrder'] = $this->fields['isNewOrder'];
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
@@ -981,6 +1014,17 @@ class RecurringOrder implements Order
         return $this;
     }
 
+    private function setCurrentPeriodStart(null|DateTimeImmutable|string $currentPeriodStart): static
+    {
+        if ($currentPeriodStart !== null && !($currentPeriodStart instanceof DateTimeImmutable)) {
+            $currentPeriodStart = new DateTimeImmutable($currentPeriodStart);
+        }
+
+        $this->fields['currentPeriodStart'] = $currentPeriodStart;
+
+        return $this;
+    }
+
     private function setRenewalTime(null|DateTimeImmutable|string $renewalTime): static
     {
         if ($renewalTime !== null && !($renewalTime instanceof DateTimeImmutable)) {
@@ -992,9 +1036,9 @@ class RecurringOrder implements Order
         return $this;
     }
 
-    private function setIsNew(null|bool $isNew): static
+    private function setIsNewOrder(null|bool $isNewOrder): static
     {
-        $this->fields['isNew'] = $isNew;
+        $this->fields['isNewOrder'] = $isNewOrder;
 
         return $this;
     }

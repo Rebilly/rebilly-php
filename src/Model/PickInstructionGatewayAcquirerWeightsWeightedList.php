@@ -215,6 +215,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
 
     public const GATEWAY_NAME_IPAY_OPTIONS = 'IpayOptions';
 
+    public const GATEWAY_NAME_ISX = 'Isx';
+
     public const GATEWAY_NAME_JET_PAY = 'JetPay';
 
     public const GATEWAY_NAME_JETON = 'Jeton';
@@ -359,6 +361,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
 
     public const GATEWAY_NAME_PAYVISION = 'Payvision';
 
+    public const GATEWAY_NAME_PAY_XPERT = 'PayXpert';
+
     public const GATEWAY_NAME_PHAROS_PAYMENTS = 'PharosPayments';
 
     public const GATEWAY_NAME_PIASTRIX = 'Piastrix';
@@ -438,6 +442,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
     public const GATEWAY_NAME_TRUSTLY = 'Trustly';
 
     public const GATEWAY_NAME_TWINT = 'TWINT';
+
+    public const GATEWAY_NAME_TXN = 'Txn';
 
     public const GATEWAY_NAME_UNLIMIT = 'Unlimit';
 
@@ -657,6 +663,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
 
     public const ACQUIRER_NAME_INTUIT = 'Intuit';
 
+    public const ACQUIRER_NAME_ISX = 'Isx';
+
     public const ACQUIRER_NAME_JETON = 'Jeton';
 
     public const ACQUIRER_NAME_JPM_ORBITAL = 'JPMOrbital';
@@ -862,6 +870,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
     public const ACQUIRER_NAME_TSYS = 'TSYS';
 
     public const ACQUIRER_NAME_TWINT = 'TWINT';
+
+    public const ACQUIRER_NAME_TXN = 'Txn';
 
     public const ACQUIRER_NAME_U_PAY_CARD = 'UPayCard';
 

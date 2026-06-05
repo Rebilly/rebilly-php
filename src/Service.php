@@ -20,6 +20,8 @@ class Service
 {
     private Client $client;
 
+    private Api\AccountRegistrationSettingsApi $accountRegistrationSettings;
+
     private Api\AmlChecksApi $amlChecks;
 
     private Api\AmlSettingsApi $amlSettings;
@@ -156,8 +158,6 @@ class Service
 
     private Api\PayoutRequestsApi $payoutRequests;
 
-    private Api\PayoutRequestsV2Api $payoutRequestsV2;
-
     private Api\PayoutRequestAllocationsApi $payoutRequestAllocations;
 
     private Api\PayoutRequestBatchesApi $payoutRequestBatches;
@@ -197,6 +197,7 @@ class Service
     public function __construct(?Client $client = null, array $config = [])
     {
         $this->client = $client ?? new Client($config);
+        $this->accountRegistrationSettings = new Api\AccountRegistrationSettingsApi($this->client);
         $this->amlChecks = new Api\AmlChecksApi($this->client);
         $this->amlSettings = new Api\AmlSettingsApi($this->client);
         $this->files = new Api\FilesApi($this->client);
@@ -265,7 +266,6 @@ class Service
         $this->paymentCardsBankNames = new Api\PaymentCardsBankNamesApi($this->client);
         $this->paymentMethods = new Api\PaymentMethodsApi($this->client);
         $this->payoutRequests = new Api\PayoutRequestsApi($this->client);
-        $this->payoutRequestsV2 = new Api\PayoutRequestsV2Api($this->client);
         $this->payoutRequestAllocations = new Api\PayoutRequestAllocationsApi($this->client);
         $this->payoutRequestBatches = new Api\PayoutRequestBatchesApi($this->client);
         $this->profile = new Api\ProfileApi($this->client);
@@ -289,6 +289,11 @@ class Service
     public function getClient(): Client
     {
         return $this->client;
+    }
+
+    public function accountRegistrationSettings(): Api\AccountRegistrationSettingsApi
+    {
+        return $this->accountRegistrationSettings;
     }
 
     public function amlChecks(): Api\AmlChecksApi
@@ -629,11 +634,6 @@ class Service
     public function payoutRequests(): Api\PayoutRequestsApi
     {
         return $this->payoutRequests;
-    }
-
-    public function payoutRequestsV2(): Api\PayoutRequestsV2Api
-    {
-        return $this->payoutRequestsV2;
     }
 
     public function payoutRequestAllocations(): Api\PayoutRequestAllocationsApi

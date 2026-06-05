@@ -409,11 +409,23 @@ class PayoutRequestAllocation implements JsonSerializable
 
     public const PAYMENT_METHOD_ZIP = 'Zip';
 
+    public const GATEWAY_PAYOUT_INSTRUCTION_ALL = 'all';
+
+    public const GATEWAY_PAYOUT_INSTRUCTION_COVERED_PAYOUT = 'covered-payout';
+
+    public const GATEWAY_PAYOUT_INSTRUCTION_APPROVED_PAYMENT = 'approved-payment';
+
+    public const GATEWAY_PAYOUT_INSTRUCTION_NONE = 'none';
+
+    public const GATEWAY_PAYOUT_INSTRUCTION_NULL = 'null';
+
     public const STATUS_PENDING = 'pending';
 
     public const STATUS_QUEUED = 'queued';
 
     public const STATUS_PROCESSING = 'processing';
+
+    public const STATUS_WAITING_COMPLETION = 'waiting-completion';
 
     public const STATUS_COMPLETED = 'completed';
 
@@ -491,6 +503,9 @@ class PayoutRequestAllocation implements JsonSerializable
         }
         if (array_key_exists('gatewayName', $data)) {
             $this->setGatewayName($data['gatewayName']);
+        }
+        if (array_key_exists('gatewayPayoutInstruction', $data)) {
+            $this->setGatewayPayoutInstruction($data['gatewayPayoutInstruction']);
         }
         if (array_key_exists('amount', $data)) {
             $this->setAmount($data['amount']);
@@ -581,6 +596,11 @@ class PayoutRequestAllocation implements JsonSerializable
         $this->fields['gatewayName'] = $gatewayName;
 
         return $this;
+    }
+
+    public function getGatewayPayoutInstruction(): ?string
+    {
+        return $this->fields['gatewayPayoutInstruction'] ?? null;
     }
 
     public function getAmount(): float
@@ -680,6 +700,9 @@ class PayoutRequestAllocation implements JsonSerializable
         if (array_key_exists('gatewayName', $this->fields)) {
             $data['gatewayName'] = $this->fields['gatewayName'];
         }
+        if (array_key_exists('gatewayPayoutInstruction', $this->fields)) {
+            $data['gatewayPayoutInstruction'] = $this->fields['gatewayPayoutInstruction'];
+        }
         if (array_key_exists('amount', $this->fields)) {
             $data['amount'] = $this->fields['amount'];
         }
@@ -740,6 +763,13 @@ class PayoutRequestAllocation implements JsonSerializable
     private function setPaymentMethod(null|string $paymentMethod): static
     {
         $this->fields['paymentMethod'] = $paymentMethod;
+
+        return $this;
+    }
+
+    private function setGatewayPayoutInstruction(null|string $gatewayPayoutInstruction): static
+    {
+        $this->fields['gatewayPayoutInstruction'] = $gatewayPayoutInstruction;
 
         return $this;
     }

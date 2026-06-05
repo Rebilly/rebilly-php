@@ -20,6 +20,8 @@ use GuzzleHttp\Utils;
 use Psr\Http\Message\StreamInterface;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\Invoice;
+use Rebilly\Sdk\Model\InvoiceCreditMemoAllocationRequest;
+use Rebilly\Sdk\Model\InvoiceCreditMemoAllocationResponse;
 use Rebilly\Sdk\Model\InvoiceIssue;
 use Rebilly\Sdk\Model\InvoiceItem;
 use Rebilly\Sdk\Model\InvoiceReissue;
@@ -50,6 +52,25 @@ class InvoicesApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return Invoice::from($data, ['headers' => $response->getHeaders()]);
+    }
+
+    public function allocateCreditBalance(
+        string $id,
+        InvoiceCreditMemoAllocationRequest $invoiceCreditMemoAllocationRequest,
+    ): InvoiceCreditMemoAllocationResponse {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/invoices/{id}/allocate-credit-balance');
+
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($invoiceCreditMemoAllocationRequest));
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return InvoiceCreditMemoAllocationResponse::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function applyTransaction(

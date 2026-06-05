@@ -218,6 +218,8 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const GATEWAY_NAME_IPAY_OPTIONS = 'IpayOptions';
 
+    public const GATEWAY_NAME_ISX = 'Isx';
+
     public const GATEWAY_NAME_JET_PAY = 'JetPay';
 
     public const GATEWAY_NAME_JETON = 'Jeton';
@@ -362,6 +364,8 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const GATEWAY_NAME_PAYVISION = 'Payvision';
 
+    public const GATEWAY_NAME_PAY_XPERT = 'PayXpert';
+
     public const GATEWAY_NAME_PHAROS_PAYMENTS = 'PharosPayments';
 
     public const GATEWAY_NAME_PIASTRIX = 'Piastrix';
@@ -441,6 +445,8 @@ abstract class GatewayAccount implements JsonSerializable
     public const GATEWAY_NAME_TRUSTLY = 'Trustly';
 
     public const GATEWAY_NAME_TWINT = 'TWINT';
+
+    public const GATEWAY_NAME_TXN = 'Txn';
 
     public const GATEWAY_NAME_UNLIMIT = 'Unlimit';
 
@@ -660,6 +666,8 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const ACQUIRER_NAME_INTUIT = 'Intuit';
 
+    public const ACQUIRER_NAME_ISX = 'Isx';
+
     public const ACQUIRER_NAME_JETON = 'Jeton';
 
     public const ACQUIRER_NAME_JPM_ORBITAL = 'JPMOrbital';
@@ -865,6 +873,8 @@ abstract class GatewayAccount implements JsonSerializable
     public const ACQUIRER_NAME_TSYS = 'TSYS';
 
     public const ACQUIRER_NAME_TWINT = 'TWINT';
+
+    public const ACQUIRER_NAME_TXN = 'Txn';
 
     public const ACQUIRER_NAME_U_PAY_CARD = 'UPayCard';
 
@@ -1366,6 +1376,9 @@ abstract class GatewayAccount implements JsonSerializable
         if (array_key_exists('dccForceCurrency', $data)) {
             $this->setDccForceCurrency($data['dccForceCurrency']);
         }
+        if (array_key_exists('dccForceConfirmation', $data)) {
+            $this->setDccForceConfirmation($data['dccForceConfirmation']);
+        }
         if (array_key_exists('dccForceRounding', $data)) {
             $this->setDccForceRounding($data['dccForceRounding']);
         }
@@ -1636,6 +1649,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return Intuit::from($data, $metadata);
             case 'IpayOptions':
                 return IpayOptions::from($data, $metadata);
+            case 'Isx':
+                return Isx::from($data, $metadata);
             case 'Jeton':
                 return Jeton::from($data, $metadata);
             case 'JetPay':
@@ -1780,6 +1795,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return PayULatam::from($data, $metadata);
             case 'Payvision':
                 return Payvision::from($data, $metadata);
+            case 'PayXpert':
+                return PayXpert::from($data, $metadata);
             case 'PharosPayments':
                 return PharosPayments::from($data, $metadata);
             case 'Piastrix':
@@ -1860,6 +1877,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return TrustsPay::from($data, $metadata);
             case 'TWINT':
                 return TWINT::from($data, $metadata);
+            case 'Txn':
+                return Txn::from($data, $metadata);
             case 'Unlimit':
                 return Unlimit::from($data, $metadata);
             case 'UPayCard':
@@ -2006,6 +2025,18 @@ abstract class GatewayAccount implements JsonSerializable
     public function setDccForceCurrency(null|string $dccForceCurrency): static
     {
         $this->fields['dccForceCurrency'] = $dccForceCurrency;
+
+        return $this;
+    }
+
+    public function getDccForceConfirmation(): ?bool
+    {
+        return $this->fields['dccForceConfirmation'] ?? null;
+    }
+
+    public function setDccForceConfirmation(null|bool $dccForceConfirmation): static
+    {
+        $this->fields['dccForceConfirmation'] = $dccForceConfirmation;
 
         return $this;
     }
@@ -2305,6 +2336,9 @@ abstract class GatewayAccount implements JsonSerializable
         }
         if (array_key_exists('dccForceCurrency', $this->fields)) {
             $data['dccForceCurrency'] = $this->fields['dccForceCurrency'];
+        }
+        if (array_key_exists('dccForceConfirmation', $this->fields)) {
+            $data['dccForceConfirmation'] = $this->fields['dccForceConfirmation'];
         }
         if (array_key_exists('dccForceRounding', $this->fields)) {
             $data['dccForceRounding'] = $this->fields['dccForceRounding'];

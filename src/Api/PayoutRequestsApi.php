@@ -24,7 +24,6 @@ use Rebilly\Sdk\Model\PayoutRequest;
 use Rebilly\Sdk\Model\PayoutRequestCancellation;
 use Rebilly\Sdk\Model\PayoutRequestSplit;
 use Rebilly\Sdk\Model\PayoutRequestTimelineMessage;
-use Rebilly\Sdk\Model\PayoutRequestV2;
 use Rebilly\Sdk\Paginator;
 
 class PayoutRequestsApi
@@ -302,7 +301,7 @@ class PayoutRequestsApi
     }
 
     /**
-     * @return PayoutRequestV2[]
+     * @return PayoutRequest[]
      */
     public function split(
         string $id,
@@ -320,7 +319,7 @@ class PayoutRequestsApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return array_map(fn (array $item): PayoutRequestV2 => PayoutRequestV2::from($item, ['headers' => $response->getHeaders()]), $data);
+        return array_map(fn (array $item): PayoutRequest => PayoutRequest::from($item, ['headers' => $response->getHeaders()]), $data);
     }
 
     public function update(

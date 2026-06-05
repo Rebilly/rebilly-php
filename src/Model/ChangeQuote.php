@@ -51,6 +51,9 @@ class ChangeQuote implements Quote
         if (array_key_exists('acceptanceFulfillment', $data)) {
             $this->setAcceptanceFulfillment($data['acceptanceFulfillment']);
         }
+        if (array_key_exists('isNewOrder', $data)) {
+            $this->setIsNewOrder($data['isNewOrder']);
+        }
         if (array_key_exists('invoiceId', $data)) {
             $this->setInvoiceId($data['invoiceId']);
         }
@@ -153,6 +156,11 @@ class ChangeQuote implements Quote
     public function getAcceptanceFulfillment(): ?array
     {
         return $this->fields['acceptanceFulfillment'] ?? null;
+    }
+
+    public function getIsNewOrder(): ?bool
+    {
+        return $this->fields['isNewOrder'] ?? null;
     }
 
     public function getInvoiceId(): ?string
@@ -384,6 +392,9 @@ class ChangeQuote implements Quote
                 )
                 : null;
         }
+        if (array_key_exists('isNewOrder', $this->fields)) {
+            $data['isNewOrder'] = $this->fields['isNewOrder'];
+        }
         if (array_key_exists('invoiceId', $this->fields)) {
             $data['invoiceId'] = $this->fields['invoiceId'];
         }
@@ -471,6 +482,13 @@ class ChangeQuote implements Quote
         ) : null;
 
         $this->fields['acceptanceFulfillment'] = $acceptanceFulfillment;
+
+        return $this;
+    }
+
+    private function setIsNewOrder(null|bool $isNewOrder): static
+    {
+        $this->fields['isNewOrder'] = $isNewOrder;
 
         return $this;
     }

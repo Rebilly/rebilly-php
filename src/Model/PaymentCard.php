@@ -90,6 +90,9 @@ class PaymentCard implements PaymentInstrument
         if (array_key_exists('last4', $data)) {
             $this->setLast4($data['last4']);
         }
+        if (array_key_exists('fpanLast4', $data)) {
+            $this->setFpanLast4($data['fpanLast4']);
+        }
         if (array_key_exists('pan', $data)) {
             $this->setPan($data['pan']);
         }
@@ -214,6 +217,11 @@ class PaymentCard implements PaymentInstrument
     public function getLast4(): ?string
     {
         return $this->fields['last4'] ?? null;
+    }
+
+    public function getFpanLast4(): ?string
+    {
+        return $this->fields['fpanLast4'] ?? null;
     }
 
     public function getPan(): ?string
@@ -445,6 +453,9 @@ class PaymentCard implements PaymentInstrument
         if (array_key_exists('last4', $this->fields)) {
             $data['last4'] = $this->fields['last4'];
         }
+        if (array_key_exists('fpanLast4', $this->fields)) {
+            $data['fpanLast4'] = $this->fields['fpanLast4'];
+        }
         if (array_key_exists('pan', $this->fields)) {
             $data['pan'] = $this->fields['pan'];
         }
@@ -549,6 +560,13 @@ class PaymentCard implements PaymentInstrument
     private function setLast4(null|string $last4): static
     {
         $this->fields['last4'] = $last4;
+
+        return $this;
+    }
+
+    private function setFpanLast4(null|string $fpanLast4): static
+    {
+        $this->fields['fpanLast4'] = $fpanLast4;
 
         return $this;
     }

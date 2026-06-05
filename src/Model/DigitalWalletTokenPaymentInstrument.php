@@ -77,6 +77,9 @@ class DigitalWalletTokenPaymentInstrument implements JsonSerializable
         if (array_key_exists('last4', $data)) {
             $this->setLast4($data['last4']);
         }
+        if (array_key_exists('fpanLast4', $data)) {
+            $this->setFpanLast4($data['fpanLast4']);
+        }
         if (array_key_exists('brand', $data)) {
             $this->setBrand($data['brand']);
         }
@@ -159,6 +162,11 @@ class DigitalWalletTokenPaymentInstrument implements JsonSerializable
         return $this->fields['last4'] ?? null;
     }
 
+    public function getFpanLast4(): ?string
+    {
+        return $this->fields['fpanLast4'] ?? null;
+    }
+
     public function getBrand(): ?string
     {
         return $this->fields['brand'] ?? null;
@@ -207,6 +215,9 @@ class DigitalWalletTokenPaymentInstrument implements JsonSerializable
         if (array_key_exists('last4', $this->fields)) {
             $data['last4'] = $this->fields['last4'];
         }
+        if (array_key_exists('fpanLast4', $this->fields)) {
+            $data['fpanLast4'] = $this->fields['fpanLast4'];
+        }
         if (array_key_exists('brand', $this->fields)) {
             $data['brand'] = $this->fields['brand'];
         }
@@ -233,6 +244,13 @@ class DigitalWalletTokenPaymentInstrument implements JsonSerializable
     private function setLast4(null|string $last4): static
     {
         $this->fields['last4'] = $last4;
+
+        return $this;
+    }
+
+    private function setFpanLast4(null|string $fpanLast4): static
+    {
+        $this->fields['fpanLast4'] = $fpanLast4;
 
         return $this;
     }

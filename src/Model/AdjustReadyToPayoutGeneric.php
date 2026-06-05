@@ -300,6 +300,8 @@ class AdjustReadyToPayoutGeneric implements AdjustReadyToPayoutPaymentMethod
 
     public const PAYMENT_METHOD_V_CREDITOS = 'VCreditos';
 
+    public const PAYMENT_METHOD_VEGA_WALLET = 'VegaWallet';
+
     public const PAYMENT_METHOD_VENUS_POINT = 'VenusPoint';
 
     public const PAYMENT_METHOD_VIVA = 'Viva';

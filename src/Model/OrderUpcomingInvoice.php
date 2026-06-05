@@ -63,6 +63,9 @@ class OrderUpcomingInvoice implements JsonSerializable
         if (array_key_exists('issuedTime', $data)) {
             $this->setIssuedTime($data['issuedTime']);
         }
+        if (array_key_exists('isNewOrder', $data)) {
+            $this->setIsNewOrder($data['isNewOrder']);
+        }
         if (array_key_exists('dueTime', $data)) {
             $this->setDueTime($data['dueTime']);
         }
@@ -200,6 +203,11 @@ class OrderUpcomingInvoice implements JsonSerializable
         return $this->fields['issuedTime'] ?? null;
     }
 
+    public function getIsNewOrder(): ?bool
+    {
+        return $this->fields['isNewOrder'] ?? null;
+    }
+
     public function getDueTime(): ?DateTimeImmutable
     {
         return $this->fields['dueTime'] ?? null;
@@ -282,6 +290,9 @@ class OrderUpcomingInvoice implements JsonSerializable
         }
         if (array_key_exists('issuedTime', $this->fields)) {
             $data['issuedTime'] = $this->fields['issuedTime']?->format(DateTimeInterface::RFC3339);
+        }
+        if (array_key_exists('isNewOrder', $this->fields)) {
+            $data['isNewOrder'] = $this->fields['isNewOrder'];
         }
         if (array_key_exists('dueTime', $this->fields)) {
             $data['dueTime'] = $this->fields['dueTime']?->format(DateTimeInterface::RFC3339);
@@ -377,6 +388,13 @@ class OrderUpcomingInvoice implements JsonSerializable
         }
 
         $this->fields['issuedTime'] = $issuedTime;
+
+        return $this;
+    }
+
+    private function setIsNewOrder(null|bool $isNewOrder): static
+    {
+        $this->fields['isNewOrder'] = $isNewOrder;
 
         return $this;
     }

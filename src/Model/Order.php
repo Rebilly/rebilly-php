@@ -102,7 +102,7 @@ interface Order extends JsonSerializable
 
     public function getRevision(): ?int;
 
-    public function getIsNew(): ?bool;
+    public function getIsNewOrder(): ?bool;
 
     public function getCreatedTime(): ?DateTimeImmutable;
 

@@ -43,6 +43,9 @@ class TransactionDcc implements JsonSerializable
         if (array_key_exists('outcome', $data)) {
             $this->setOutcome($data['outcome']);
         }
+        if (array_key_exists('isForceDcc', $data)) {
+            $this->setIsForceDcc($data['isForceDcc']);
+        }
         $this->setMetadata($metadata);
     }
 
@@ -111,6 +114,18 @@ class TransactionDcc implements JsonSerializable
         return $this;
     }
 
+    public function getIsForceDcc(): ?bool
+    {
+        return $this->fields['isForceDcc'] ?? null;
+    }
+
+    public function setIsForceDcc(null|bool $isForceDcc): static
+    {
+        $this->fields['isForceDcc'] = $isForceDcc;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -125,6 +140,9 @@ class TransactionDcc implements JsonSerializable
         }
         if (array_key_exists('outcome', $this->fields)) {
             $data['outcome'] = $this->fields['outcome'];
+        }
+        if (array_key_exists('isForceDcc', $this->fields)) {
+            $data['isForceDcc'] = $this->fields['isForceDcc'];
         }
 
         return $data;

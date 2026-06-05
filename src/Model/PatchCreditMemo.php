@@ -37,6 +37,8 @@ class PatchCreditMemo implements JsonSerializable
 
     public const REASON_CUSTOMER_CREDIT = 'customer-credit';
 
+    public const REASON_PREPAYMENT = 'prepayment';
+
     public const REASON_OTHER = 'other';
 
     private array $fields = [];
