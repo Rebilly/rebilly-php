@@ -21,8 +21,8 @@ use Rebilly\Sdk\Model\PlanFormulaFlatRate;
 use Rebilly\Sdk\Model\PostTransactionRequest;
 use Rebilly\Sdk\Model\Product;
 use Rebilly\Sdk\Model\Subscription;
+use Rebilly\Sdk\Model\PlanSubscriptionPlan;
 use Rebilly\Sdk\Model\SubscriptionOrOneTimeSaleItem;
-use Rebilly\Sdk\Model\SubscriptionPlan;
 use Rebilly\Sdk\Model\SubscriptionPlanRecurringInterval;
 use Rebilly\Sdk\Model\Website;
 use Rebilly\Sdk\Service;
@@ -86,7 +86,7 @@ try {
 
     // Create plan
 
-    $plan = SubscriptionPlan::from([])
+    $plan = PlanSubscriptionPlan::from([])
         ->setProductId($product->getId())
         ->setName('Test plan')
         ->setCurrency('USD')
