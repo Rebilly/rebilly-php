@@ -9,12 +9,12 @@ class {{model.className}}Factory
     public static function from(array $data = [], array $metadata = []): {{model.className}}
     {
         if ($data['isTrialOnly'] ?? false) {
-            return TrialOnlyPlan::from($data, $metadata);
+            return {{model.className}}TrialOnlyPlan::from($data, $metadata);
         }
         if (isset($data['recurringInterval'])) {
-            return SubscriptionPlan::from($data, $metadata);
+            return {{model.className}}SubscriptionPlan::from($data, $metadata);
         }
 
-        return OneTimeSalePlan::from($data, $metadata);
+        return {{model.className}}OneTimeSalePlan::from($data, $metadata);
     }
 }
