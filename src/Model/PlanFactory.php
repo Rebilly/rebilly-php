@@ -19,12 +19,12 @@ class PlanFactory
     public static function from(array $data = [], array $metadata = []): Plan
     {
         if ($data['isTrialOnly'] ?? false) {
-            return TrialOnlyPlan::from($data, $metadata);
+            return PlanTrialOnlyPlan::from($data, $metadata);
         }
         if (isset($data['recurringInterval'])) {
-            return SubscriptionPlan::from($data, $metadata);
+            return PlanSubscriptionPlan::from($data, $metadata);
         }
 
-        return OneTimeSalePlan::from($data, $metadata);
+        return PlanOneTimeSalePlan::from($data, $metadata);
     }
 }

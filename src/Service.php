@@ -20,6 +20,8 @@ class Service
 {
     private Client $client;
 
+    private Api\AccountRegistrationSettingsApi $accountRegistrationSettings;
+
     private Api\AmlChecksApi $amlChecks;
 
     private Api\AmlSettingsApi $amlSettings;
@@ -195,6 +197,7 @@ class Service
     public function __construct(?Client $client = null, array $config = [])
     {
         $this->client = $client ?? new Client($config);
+        $this->accountRegistrationSettings = new Api\AccountRegistrationSettingsApi($this->client);
         $this->amlChecks = new Api\AmlChecksApi($this->client);
         $this->amlSettings = new Api\AmlSettingsApi($this->client);
         $this->files = new Api\FilesApi($this->client);
@@ -286,6 +289,11 @@ class Service
     public function getClient(): Client
     {
         return $this->client;
+    }
+
+    public function accountRegistrationSettings(): Api\AccountRegistrationSettingsApi
+    {
+        return $this->accountRegistrationSettings;
     }
 
     public function amlChecks(): Api\AmlChecksApi

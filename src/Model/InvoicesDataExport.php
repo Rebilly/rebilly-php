@@ -32,6 +32,8 @@ class InvoicesDataExport implements DataExport
 
     public const FORMAT_PDF = 'pdf';
 
+    public const FORMAT_DETAILED_CSV = 'detailed-csv';
+
     public const STATUS_PENDING = 'pending';
 
     public const STATUS_QUEUED = 'queued';

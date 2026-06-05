@@ -24,7 +24,6 @@ class TimelineActionFactory
             'redemption-cancel' => RedemptionCancelTimelineAction::from($data, $metadata),
             'resend-email' => ResendEmailTimelineAction::from($data, $metadata),
             'ruleset-restore' => RulesetRestoreTimelineAction::from($data, $metadata),
-            'show-edd-search-logs' => ShowEddSearchLogsTimelineAction::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }
