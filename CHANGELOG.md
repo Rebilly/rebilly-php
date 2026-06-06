@@ -137,6 +137,11 @@
   - response-body-any-of-removed (4x) — e.g. removed `#/components/schemas/OneTimeSalePlan, #/components/schemas/SubscriptionPlan, #/components/schemas/TrialOnlyPlan
 
 - fix(sdk): Make SDK compatible with PHP 8.4
+- fix(sdk): **(breaking)** Removed bare plan model classes `SubscriptionPlan`, `OneTimeSalePlan`, and `TrialOnlyPlan`. `Plan` and `FlexiblePlan` unions now deserialize to prefixed variants:
+  - Catalog `/plans` responses: `PlanSubscriptionPlan`, `PlanOneTimeSalePlan`, `PlanTrialOnlyPlan`
+  - Embedded subscription/order item plans: `FlexiblePlanSubscriptionPlan`, `FlexiblePlanOneTimeSalePlan`, `FlexiblePlanTrialOnlyPlan`
+  - Id-only plan references: `OriginalPlan`
+  - When upgrading from 3.1.6 or earlier, replace `instanceof SubscriptionPlan` (and other bare plan classes) with the variant for your API context. See [#779](https://github.com/Rebilly/rebilly-php/pull/779).
 
 ## 3.1.7
 
