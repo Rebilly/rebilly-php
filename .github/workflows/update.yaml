@@ -19,16 +19,14 @@ jobs:
           path: 'sdk'
           fetch-depth: 0
 
-      - name: Keep changesets and snapshot from auto-update branch
+      - name: Keep changesets from auto-update branch
         working-directory: ./sdk
         run: |
           mkdir ../carry
           git checkout automations/update-sdk-from-api-definitions || true
           cp .changeset/* ../carry/ 2>/dev/null || true
-          [ -f .openapi-snapshot.yaml ] && cp .openapi-snapshot.yaml ../carry/.openapi-snapshot.yaml || true
           git checkout main || true
           cp ../carry/*.md .changeset/ 2>/dev/null || true
-          [ -f ../carry/.openapi-snapshot.yaml ] && cp ../carry/.openapi-snapshot.yaml .openapi-snapshot.yaml || true
 
       - name: Checkout generator repo
         uses: actions/checkout@v4
