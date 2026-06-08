@@ -1,0 +1,3 @@
+---
+"@rebilly/client-php": patch
+---
