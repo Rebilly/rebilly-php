@@ -225,6 +225,9 @@ class Subscription implements SubscriptionOrOneTimeSale
         if (array_key_exists('notes', $data)) {
             $this->setNotes($data['notes']);
         }
+        if (array_key_exists('canceledTime', $data)) {
+            $this->setCanceledTime($data['canceledTime']);
+        }
         if (array_key_exists('canceledBy', $data)) {
             $this->setCanceledBy($data['canceledBy']);
         }
@@ -676,6 +679,11 @@ class Subscription implements SubscriptionOrOneTimeSale
         return $this;
     }
 
+    public function getCanceledTime(): ?DateTimeImmutable
+    {
+        return $this->fields['canceledTime'] ?? null;
+    }
+
     public function getCanceledBy(): ?string
     {
         return $this->fields['canceledBy'] ?? null;
@@ -898,6 +906,9 @@ class Subscription implements SubscriptionOrOneTimeSale
         }
         if (array_key_exists('notes', $this->fields)) {
             $data['notes'] = $this->fields['notes'];
+        }
+        if (array_key_exists('canceledTime', $this->fields)) {
+            $data['canceledTime'] = $this->fields['canceledTime']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('canceledBy', $this->fields)) {
             $data['canceledBy'] = $this->fields['canceledBy'];
@@ -1128,6 +1139,17 @@ class Subscription implements SubscriptionOrOneTimeSale
         }
 
         $this->fields['voidTime'] = $voidTime;
+
+        return $this;
+    }
+
+    private function setCanceledTime(null|DateTimeImmutable|string $canceledTime): static
+    {
+        if ($canceledTime !== null && !($canceledTime instanceof DateTimeImmutable)) {
+            $canceledTime = new DateTimeImmutable($canceledTime);
+        }
+
+        $this->fields['canceledTime'] = $canceledTime;
 
         return $this;
     }

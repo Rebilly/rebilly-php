@@ -59,6 +59,8 @@ class RegistrationField implements JsonSerializable
 
     public const ATTRIBUTE_PASSWORD_STEP = 'passwordStep';
 
+    public const ATTRIBUTE_CONTENT_BLOCK = 'contentBlock';
+
     public const REQUIREMENT_LEVEL_REQUIRED = 'required';
 
     public const REQUIREMENT_LEVEL_OPTIONAL = 'optional';
@@ -82,6 +84,16 @@ class RegistrationField implements JsonSerializable
     public const VALIDATION_TYPE_REGEX = 'regex';
 
     public const VALIDATION_TYPE_PASSWORD = 'password';
+
+    public const INPUT_TYPE_TEXT = 'text';
+
+    public const INPUT_TYPE_SELECT = 'select';
+
+    public const INPUT_TYPE_CHECKBOX = 'checkbox';
+
+    public const INPUT_TYPE_DATE = 'date';
+
+    public const INPUT_TYPE_NULL = 'null';
 
     private array $fields = [];
 
@@ -110,6 +122,18 @@ class RegistrationField implements JsonSerializable
         }
         if (array_key_exists('helpText', $data)) {
             $this->setHelpText($data['helpText']);
+        }
+        if (array_key_exists('minimumAge', $data)) {
+            $this->setMinimumAge($data['minimumAge']);
+        }
+        if (array_key_exists('inputType', $data)) {
+            $this->setInputType($data['inputType']);
+        }
+        if (array_key_exists('placeholder', $data)) {
+            $this->setPlaceholder($data['placeholder']);
+        }
+        if (array_key_exists('contentBlock', $data)) {
+            $this->setContentBlock($data['contentBlock']);
         }
         if (array_key_exists('order', $data)) {
             $this->setOrder($data['order']);
@@ -221,6 +245,54 @@ class RegistrationField implements JsonSerializable
         return $this;
     }
 
+    public function getMinimumAge(): ?int
+    {
+        return $this->fields['minimumAge'] ?? null;
+    }
+
+    public function setMinimumAge(null|int $minimumAge): static
+    {
+        $this->fields['minimumAge'] = $minimumAge;
+
+        return $this;
+    }
+
+    public function getInputType(): ?string
+    {
+        return $this->fields['inputType'] ?? null;
+    }
+
+    public function setInputType(null|string $inputType): static
+    {
+        $this->fields['inputType'] = $inputType;
+
+        return $this;
+    }
+
+    public function getPlaceholder(): ?string
+    {
+        return $this->fields['placeholder'] ?? null;
+    }
+
+    public function setPlaceholder(null|string $placeholder): static
+    {
+        $this->fields['placeholder'] = $placeholder;
+
+        return $this;
+    }
+
+    public function getContentBlock(): ?string
+    {
+        return $this->fields['contentBlock'] ?? null;
+    }
+
+    public function setContentBlock(null|string $contentBlock): static
+    {
+        $this->fields['contentBlock'] = $contentBlock;
+
+        return $this;
+    }
+
     public function getOrder(): int
     {
         return $this->fields['order'];
@@ -275,6 +347,18 @@ class RegistrationField implements JsonSerializable
         }
         if (array_key_exists('helpText', $this->fields)) {
             $data['helpText'] = $this->fields['helpText'];
+        }
+        if (array_key_exists('minimumAge', $this->fields)) {
+            $data['minimumAge'] = $this->fields['minimumAge'];
+        }
+        if (array_key_exists('inputType', $this->fields)) {
+            $data['inputType'] = $this->fields['inputType'];
+        }
+        if (array_key_exists('placeholder', $this->fields)) {
+            $data['placeholder'] = $this->fields['placeholder'];
+        }
+        if (array_key_exists('contentBlock', $this->fields)) {
+            $data['contentBlock'] = $this->fields['contentBlock'];
         }
         if (array_key_exists('order', $this->fields)) {
             $data['order'] = $this->fields['order'];
