@@ -31,6 +31,9 @@ class OnlineueberweisenCredentials implements JsonSerializable
         if (array_key_exists('nuaPayApiKey', $data)) {
             $this->setNuaPayApiKey($data['nuaPayApiKey']);
         }
+        if (array_key_exists('isxSiinSecret', $data)) {
+            $this->setIsxSiinSecret($data['isxSiinSecret']);
+        }
         if (array_key_exists('nuaPayAccountId', $data)) {
             $this->setNuaPayAccountId($data['nuaPayAccountId']);
         }
@@ -66,6 +69,18 @@ class OnlineueberweisenCredentials implements JsonSerializable
         return $this;
     }
 
+    public function getIsxSiinSecret(): ?string
+    {
+        return $this->fields['isxSiinSecret'] ?? null;
+    }
+
+    public function setIsxSiinSecret(null|string $isxSiinSecret): static
+    {
+        $this->fields['isxSiinSecret'] = $isxSiinSecret;
+
+        return $this;
+    }
+
     public function getNuaPayAccountId(): ?string
     {
         return $this->fields['nuaPayAccountId'] ?? null;
@@ -86,6 +101,9 @@ class OnlineueberweisenCredentials implements JsonSerializable
         }
         if (array_key_exists('nuaPayApiKey', $this->fields)) {
             $data['nuaPayApiKey'] = $this->fields['nuaPayApiKey'];
+        }
+        if (array_key_exists('isxSiinSecret', $this->fields)) {
+            $data['isxSiinSecret'] = $this->fields['isxSiinSecret'];
         }
         if (array_key_exists('nuaPayAccountId', $this->fields)) {
             $data['nuaPayAccountId'] = $this->fields['nuaPayAccountId'];
