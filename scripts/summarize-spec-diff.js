@@ -209,22 +209,53 @@ function suppressCompositionNoise(data) {
     return kept;
 }
 
-function renderOne(verb, side, leafName, schemas, breaking, endpointCount, examples, bucket) {
-    const sidePart = side ? ` ${side} property` : '';
+function renderOne(verb, sides, leafName, schemas, breaking, bucket) {
     const schemaPart = schemas.size ? ` on \`${[...schemas].sort().join(', ')}\`` : '';
     const bk = breaking ? ' **(breaking)**' : '';
-    let endpointPart;
-    if (endpointCount === 1) {
-        endpointPart = examples.length ? ` — ${examples[0]}` : '';
-    } else {
-        const sample = examples.slice(0, 2).join(', ');
-        const more = endpointCount > 2 ? ` + ${endpointCount - 2} more` : '';
-        endpointPart = examples.length ? ` — ${sample}${more}` : ` (${endpointCount} endpoints)`;
-    }
     if (bucket === 'endpoint') {
-        return `- ${verb}${endpointPart}${bk}`;
+        return `- ${verb} \`${leafName}\`${bk}`;
     }
-    return `- ${verb}${sidePart} \`${leafName}\`${schemaPart}${endpointPart}${bk}`;
+    let sideHint = '';
+    if (sides.size === 1) {
+        const only = [...sides][0];
+        if (only) sideHint = ` (${only} only)`;
+    }
+    return `- ${verb} \`${leafName}\`${schemaPart}${sideHint}${bk}`;
+}
+
+const OTHER_VERBS = {
+    'min-decreased':                  'Lowered minimum on',
+    'min-increased':                  'Raised minimum on',
+    'max-decreased':                  'Lowered maximum on',
+    'max-increased':                  'Raised maximum on',
+    'min-length-decreased':           'Shortened minimum length on',
+    'min-length-increased':           'Raised minimum length on',
+    'max-length-decreased':           'Shortened maximum length on',
+    'max-length-increased':           'Raised maximum length on',
+    'discriminator-mapping-added':    'Added discriminator mapping for',
+    'discriminator-mapping-deleted':  'Removed discriminator mapping for',
+    'discriminator-mapping-changed':  'Changed discriminator mapping for',
+    'all-of-added':                   'Composed schema with',
+    'all-of-removed':                 'Uncomposed schema from',
+    'any-of-added':                   'Added union member to',
+    'any-of-removed':                 'Removed union member from',
+    'one-of-added':                   'Added discriminator variant to',
+    'one-of-removed':                 'Removed discriminator variant from',
+    'became-nullable':                'Made nullable',
+    'became-not-nullable':            'Made not nullable',
+    'default-value-added':            'Default added on',
+    'default-value-removed':          'Default removed on',
+    'min-items-decreased':            'Lowered minItems on',
+    'max-items-decreased':            'Lowered maxItems on',
+    'min-items-increased':            'Raised minItems on',
+    'max-items-increased':            'Raised maxItems on',
+};
+
+function otherChangeFamily(id) {
+    // Strip request/response/-body-/-property- prefixes and discriminator wrappers.
+    return id
+        .replace(/^(request|response)(-body|-property)?-/, '')
+        .replace(/^(request|response)-/, '');
 }
 
 function recordEndpoint(rec, ep) {
@@ -252,15 +283,15 @@ function main() {
     for (const it of data) {
         if (ENUM_IDS.has(it.id)) {
             const [value, prop] = enumValueAndProp(it.text);
-            const verb = it.id.includes('added') ? 'Enum value added' : 'Enum value removed';
+            const verb = it.id.includes('added') ? 'added' : 'removed';
             const side = it.id.includes('request') ? 'request' : 'response';
-            const key = `${verb}\x1f${side}\x1f${leaf(prop) || '?'}`;
+            const key = `${verb}\x1f${leaf(prop) || '?'}`;
             const rec = getOrCreate(enumRows, key, () => ({
-                verb, side, prop: leaf(prop) || '?',
-                values: [], endpoints: new Set(), examples: [], breaking: false, schemas: new Set(),
+                verb, prop: leaf(prop) || '?',
+                values: [], sides: new Set(), breaking: false, schemas: new Set(),
             }));
             if (value && !rec.values.includes(value)) rec.values.push(value);
-            recordEndpoint(rec, endpointOf(it));
+            rec.sides.add(side);
             const sch = deepestSchema(it.text);
             if (sch) rec.schemas.add(sch);
             if ((it.level || 1) >= 3) rec.breaking = true;
@@ -277,21 +308,33 @@ function main() {
         }
         const rule = RULES.get(it.id);
         if (!rule) {
-            const rec = getOrCreate(unknown, it.id, () => []);
-            rec.push(it);
+            const prop = firstProp(it.text) || '';
+            const leafName = leaf(prop);
+            const family = otherChangeFamily(it.id);
+            const key = `${family}\x1f${leafName || '?'}`;
+            const rec = getOrCreate(unknown, key, () => ({
+                family, leafName,
+                sides: new Set(), schemas: new Set(), items: [],
+            }));
+            rec.sides.add(it.id.includes('request') ? 'request' : 'response');
+            const sch = deepestSchema(it.text);
+            if (sch) rec.schemas.add(sch);
+            rec.items.push(it);
             continue;
         }
         const [verb, side, bucket] = rule;
         const prop = firstProp(it.text) || '';
         const leafName = leaf(prop) || it.text.slice(0, 50);
         const schema = deepestSchema(it.text);
-        const key = `${bucket}\x1f${verb}\x1f${leafName}\x1f${side || ''}`;
+        // Strip the request/response split: collapse same logical change.
+        const baseVerb = verb.replace(/^Added (required|optional|union member|discriminator variant|parameter)$/, 'Added').replace(/^Removed (required|optional|union member|discriminator variant|parameter)$/, 'Removed');
+        const key = `${bucket}\x1f${baseVerb}\x1f${leafName}`;
         const rec = getOrCreate(grouped, key, () => ({
-            bucket, verb, leafName, side,
-            schemas: new Set(), endpoints: new Set(), examples: [], breaking: false,
+            bucket, verb: baseVerb, leafName,
+            schemas: new Set(), sides: new Set(), breaking: false,
         }));
         if (schema) rec.schemas.add(schema);
-        recordEndpoint(rec, endpointOf(it));
+        if (side) rec.sides.add(side);
         if ((it.level || 1) >= 3) rec.breaking = true;
     }
 
@@ -312,23 +355,24 @@ function main() {
             return byCodePoint(a.leafName, b.leafName);
         });
         out.push(sections[bucket]);
-        for (const r of rows) out.push(renderOne(r.verb, r.side, r.leafName, r.schemas, r.breaking, r.endpoints.size, r.examples, bucket));
+        for (const r of rows) out.push(renderOne(r.verb, r.sides, r.leafName, r.schemas, r.breaking, bucket));
         out.push('');
     }
 
     if (enumRows.size) {
         out.push('### Enum changes');
         const rows = [...enumRows.values()].sort((a, b) =>
-            byCodePoint(a.verb + a.side + a.prop, b.verb + b.side + b.prop)
+            byCodePoint(a.verb + a.prop, b.verb + b.prop)
         );
         for (const r of rows) {
             const schemasS = r.schemas.size ? ` on \`${[...r.schemas].sort().join(', ')}\`` : '';
             const bk = r.breaking ? ' **(breaking)**' : '';
             const sampleV = r.values.slice(0, 6).map(v => `\`${v}\``).join(', ');
             const moreV = r.values.length > 6 ? ` + ${r.values.length - 6} more` : '';
-            const sampleEp = r.examples.slice(0, 2).join(', ');
-            const moreEp = r.endpoints.size > 2 ? ` + ${r.endpoints.size - 2} more` : '';
-            out.push(`- ${r.verb} on ${r.side} \`${r.prop}\`${schemasS}: ${sampleV}${moreV} — ${sampleEp}${moreEp}${bk}`);
+            const verbPhrase = r.verb === 'added' ? 'accepts new values' : 'no longer accepts';
+            let sideHint = '';
+            if (r.sides.size === 1) sideHint = ` (${[...r.sides][0]} only)`;
+            out.push(`- \`${r.prop}\`${schemasS}${sideHint} ${verbPhrase}: ${sampleV}${moreV}${bk}`);
         }
         out.push('');
     }
@@ -350,10 +394,23 @@ function main() {
 
     if (unknown.size) {
         out.push('### Other');
-        const entries = [...unknown.entries()].sort((a, b) => b[1].length - a[1].length).slice(0, 10);
-        for (const [changeId, items] of entries) {
-            const ex = items[0].text.slice(0, 120);
-            out.push(`- ${changeId} (${items.length}x) — e.g. ${ex}`);
+        const rows = [...unknown.values()].sort((a, b) =>
+            byCodePoint((a.family || '') + (a.leafName || ''), (b.family || '') + (b.leafName || ''))
+        );
+        for (const r of rows) {
+            const verb = OTHER_VERBS[r.family];
+            const schemaPart = r.schemas.size ? ` on \`${[...r.schemas].sort().join(', ')}\`` : '';
+            let sideHint = '';
+            if (r.sides.size === 1) sideHint = ` (${[...r.sides][0]} only)`;
+            if (verb && r.leafName) {
+                out.push(`- ${verb} \`${r.leafName}\`${schemaPart}${sideHint}`);
+            } else if (r.leafName) {
+                out.push(`- ${r.family} on \`${r.leafName}\`${schemaPart}${sideHint}`);
+            } else {
+                // Fallback for changes without a clear property path.
+                const ex = r.items[0].text.slice(0, 120);
+                out.push(`- ${r.family} (${r.items.length}x) — e.g. ${ex}`);
+            }
         }
         out.push('');
     }
