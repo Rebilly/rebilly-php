@@ -21492,13 +21492,14 @@ paths:
       operationId: PostPayoutRequestSplit
       x-sdk-operation-name: split
       description: |-
-        Splits a pending payout request into two or more separate requests.
+        Splits a payout request that is in `pending`, `ready`, or `approved` status into two or more separate requests.
 
         Use this operation when the full amount cannot be processed due to amount restrictions, but a smaller amount can be processed.
         For example, if a payout request for `$4,000` cannot be processed, but `$3,000` can be processed, split the request into two. This allows you to approve and process `$3,000` instead of blocking the entire request.
 
         Provide an array of at least two amounts; one new payout request is created per amount.
         The sum of the amounts must equal the original payout request amount.
+        Each new payout request is created in `pending` status.
         The original request transitions to the `split` status.
         This operation returns the newly created payout requests.
       requestBody:
@@ -38095,6 +38096,7 @@ components:
         - iCheque
         - iDebit
         - Ilixium
+        - IMerchant
         - Ingenico
         - INOVAPAY
         - Inovio
@@ -41206,6 +41208,7 @@ components:
         - subtype-missing
         - dob-mismatch
         - name-mismatch
+        - name-and-dob-mismatch
         - critical-info-missing
         - old-address-on-id
         - tampered-document
@@ -48677,6 +48680,14 @@ components:
                   minimum: 0
                   maximum: 8760
                   default: 48
+                automaticReadinessTime:
+                  description: |-
+                    Time of day when the automatic readiness job processes eligible pending payout requests.
+                    Use extended ISO-8601 time format (`HH:MM:SS`) with an optional timezone offset.
+                  allOf:
+                    - $ref: '#/components/schemas/TimeIso8601Extended'
+                  default: '10:00:00'
+                  example: 10:00:00Z
         logoId:
           type:
             - string
@@ -57036,6 +57047,7 @@ components:
           ICEPAY: '#/components/schemas/ICEPAY'
           INOVAPAY: '#/components/schemas/INOVAPAY'
           Ilixium: '#/components/schemas/Ilixium'
+          IMerchant: '#/components/schemas/IMerchant'
           Ingenico: '#/components/schemas/Ingenico'
           Inovio: '#/components/schemas/Inovio'
           InstaDebit: '#/components/schemas/InstaDebit'
@@ -60410,6 +60422,27 @@ components:
                   type: string
                   enum:
                     - Ilixium3dsServer
+    IMerchant:
+      description: IMerchant gateway configuration.
+      allOf:
+        - $ref: '#/components/schemas/GatewayAccount'
+        - type: object
+          required:
+            - credentials
+          properties:
+            credentials:
+              type: object
+              description: Credentials of the IMerchant gateway.
+              properties:
+                apiKey:
+                  type: string
+                  description: IMerchant API key.
+                  format: password
+                  writeOnly: true
+              required:
+                - apiKey
+            threeDSecureServer:
+              $ref: '#/components/schemas/ThreeDSecureIO3dsServer'
     Ingenico:
       description: Ingenico gateway configuration.
       allOf:
