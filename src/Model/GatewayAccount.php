@@ -206,6 +206,8 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const GATEWAY_NAME_ILIXIUM = 'Ilixium';
 
+    public const GATEWAY_NAME_I_MERCHANT = 'IMerchant';
+
     public const GATEWAY_NAME_INGENICO = 'Ingenico';
 
     public const GATEWAY_NAME_INOVAPAY = 'INOVAPAY';
@@ -1637,6 +1639,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return IDebit::from($data, $metadata);
             case 'Ilixium':
                 return Ilixium::from($data, $metadata);
+            case 'IMerchant':
+                return IMerchant::from($data, $metadata);
             case 'Ingenico':
                 return Ingenico::from($data, $metadata);
             case 'INOVAPAY':
