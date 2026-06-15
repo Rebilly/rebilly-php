@@ -38,6 +38,9 @@ class PlanSubscriptionPlanMeteredBilling implements JsonSerializable
         if (array_key_exists('max', $data)) {
             $this->setMax($data['max']);
         }
+        if (array_key_exists('sticky', $data)) {
+            $this->setSticky($data['sticky']);
+        }
         $this->setMetadata($metadata);
     }
 
@@ -90,6 +93,18 @@ class PlanSubscriptionPlanMeteredBilling implements JsonSerializable
         return $this;
     }
 
+    public function getSticky(): ?bool
+    {
+        return $this->fields['sticky'] ?? null;
+    }
+
+    public function setSticky(null|bool $sticky): static
+    {
+        $this->fields['sticky'] = $sticky;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -101,6 +116,9 @@ class PlanSubscriptionPlanMeteredBilling implements JsonSerializable
         }
         if (array_key_exists('max', $this->fields)) {
             $data['max'] = $this->fields['max'];
+        }
+        if (array_key_exists('sticky', $this->fields)) {
+            $data['sticky'] = $this->fields['sticky'];
         }
 
         return $data;

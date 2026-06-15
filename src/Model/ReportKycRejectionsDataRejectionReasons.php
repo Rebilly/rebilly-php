@@ -47,6 +47,8 @@ class ReportKycRejectionsDataRejectionReasons implements JsonSerializable
 
     public const REJECTION_REASON_NAME_MISMATCH = 'name-mismatch';
 
+    public const REJECTION_REASON_NAME_AND_DOB_MISMATCH = 'name-and-dob-mismatch';
+
     public const REJECTION_REASON_CRITICAL_INFO_MISSING = 'critical-info-missing';
 
     public const REJECTION_REASON_OLD_ADDRESS_ON_ID = 'old-address-on-id';

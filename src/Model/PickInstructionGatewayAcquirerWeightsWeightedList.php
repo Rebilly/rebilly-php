@@ -203,6 +203,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
 
     public const GATEWAY_NAME_ILIXIUM = 'Ilixium';
 
+    public const GATEWAY_NAME_I_MERCHANT = 'IMerchant';
+
     public const GATEWAY_NAME_INGENICO = 'Ingenico';
 
     public const GATEWAY_NAME_INOVAPAY = 'INOVAPAY';

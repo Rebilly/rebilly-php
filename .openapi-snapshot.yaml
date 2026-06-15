@@ -21242,7 +21242,7 @@ paths:
       description: |-
         Retrieves a list of payout requests.
 
-        Filter by: `id`, `customerId`, `websiteId`, `batchId`, `status`, `blocked`, `blockReason`, `createdTime`, `updatedTime`, `currency`, `amount`.
+        Filter by: `id`, `customerId`, `websiteId`, `batchId`, `status`, `blocked`, `blockReason`, `splitReason`, `createdTime`, `updatedTime`, `currency`, `amount`.
       parameters:
         - $ref: '#/components/parameters/collectionLimit'
         - $ref: '#/components/parameters/collectionOffset'
@@ -21492,13 +21492,14 @@ paths:
       operationId: PostPayoutRequestSplit
       x-sdk-operation-name: split
       description: |-
-        Splits a pending payout request into two or more separate requests.
+        Splits a payout request that is in `pending`, `ready`, or `approved` status into two or more separate requests.
 
         Use this operation when the full amount cannot be processed due to amount restrictions, but a smaller amount can be processed.
         For example, if a payout request for `$4,000` cannot be processed, but `$3,000` can be processed, split the request into two. This allows you to approve and process `$3,000` instead of blocking the entire request.
 
         Provide an array of at least two amounts; one new payout request is created per amount.
         The sum of the amounts must equal the original payout request amount.
+        Each new payout request is created in `pending` status.
         The original request transitions to the `split` status.
         This operation returns the newly created payout requests.
       requestBody:
@@ -38095,6 +38096,7 @@ components:
         - iCheque
         - iDebit
         - Ilixium
+        - IMerchant
         - Ingenico
         - INOVAPAY
         - Inovio
@@ -41206,6 +41208,7 @@ components:
         - subtype-missing
         - dob-mismatch
         - name-mismatch
+        - name-and-dob-mismatch
         - critical-info-missing
         - old-address-on-id
         - tampered-document
@@ -43064,6 +43067,13 @@ components:
         bankName:
           description: Bank name of the payment instrument.
           type: string
+          readOnly: true
+        isPayoutable:
+          description: |-
+            Specifies if payouts are supported for cards with this BIN.
+            Defaults to `true`.
+            This value is `false` if the BIN does not support payouts.
+          type: boolean
           readOnly: true
         billingAddress:
           description: Contact's billing address.
@@ -44957,6 +44967,15 @@ components:
                 - 'null'
               format: float
               minimum: 0.01
+            sticky:
+              description: |-
+                When enabled, if no usage is reported during a service period,
+                the plan bills the last known reported quantity from a previous period instead of zero.
+                This is suitable for hosted or persistent resources whose usage does not change every period.
+                Only supported with `strategy`: `last`.
+              type: boolean
+              default: false
+              example: false
         invoiceTimeShift:
           readOnly: true
           deprecated: true
@@ -48674,9 +48693,17 @@ components:
                 pendingPeriodHours:
                   type: integer
                   description: Number of hours a payout request stays pending before the automatic readiness job can set it to ready.
-                  minimum: 0
+                  minimum: 1
                   maximum: 8760
                   default: 48
+                automaticReadinessTime:
+                  description: |-
+                    Time of day when the automatic readiness job processes eligible pending payout requests.
+                    Use extended ISO-8601 time format (`HH:MM:SS`) with an optional timezone offset.
+                  allOf:
+                    - $ref: '#/components/schemas/TimeIso8601Extended'
+                  default: '10:00:00'
+                  example: 10:00:00Z
         logoId:
           type:
             - string
@@ -57036,6 +57063,7 @@ components:
           ICEPAY: '#/components/schemas/ICEPAY'
           INOVAPAY: '#/components/schemas/INOVAPAY'
           Ilixium: '#/components/schemas/Ilixium'
+          IMerchant: '#/components/schemas/IMerchant'
           Ingenico: '#/components/schemas/Ingenico'
           Inovio: '#/components/schemas/Inovio'
           InstaDebit: '#/components/schemas/InstaDebit'
@@ -60410,6 +60438,27 @@ components:
                   type: string
                   enum:
                     - Ilixium3dsServer
+    IMerchant:
+      description: IMerchant gateway configuration.
+      allOf:
+        - $ref: '#/components/schemas/GatewayAccount'
+        - type: object
+          required:
+            - credentials
+          properties:
+            credentials:
+              type: object
+              description: Credentials of the IMerchant gateway.
+              properties:
+                apiKey:
+                  type: string
+                  description: IMerchant API key.
+                  format: password
+                  writeOnly: true
+              required:
+                - apiKey
+            threeDSecureServer:
+              $ref: '#/components/schemas/ThreeDSecureIO3dsServer'
     Ingenico:
       description: Ingenico gateway configuration.
       allOf:
@@ -66493,6 +66542,17 @@ components:
         - insufficient-documentation
         - risk-review
         - other
+    PayoutRequestSplitReason:
+      type: string
+      description: Reason for splitting the payout request.
+      enum:
+        - payment-instrument-limit
+        - processor-limit
+        - risk-review
+        - compliance-review
+        - partial-processing
+        - operational-reconciliation
+        - other
     PayoutRequestAllocation:
       type: object
       required:
@@ -66777,6 +66837,10 @@ components:
           oneOf:
             - $ref: '#/components/schemas/PayoutRequestBlockReason'
             - type: 'null'
+        splitReason:
+          oneOf:
+            - $ref: '#/components/schemas/PayoutRequestSplitReason'
+            - type: 'null'
         batchId:
           description: ID of the payout request batch that contains this request.
           type:
@@ -66834,6 +66898,7 @@ components:
       type: object
       required:
         - amounts
+        - splitReason
       properties:
         amounts:
           description: |-
@@ -66854,6 +66919,14 @@ components:
             - 50
             - 30
             - 20
+        splitReason:
+          $ref: '#/components/schemas/PayoutRequestSplitReason'
+        splitDescription:
+          description: Additional description for splitting the payout request.
+          type:
+            - string
+            - 'null'
+          maxLength: 255
     PayoutRequestTimelineMessage:
       type: object
       properties:
@@ -74982,6 +75055,15 @@ components:
                 - 'null'
               format: float
               minimum: 0.01
+            sticky:
+              description: |-
+                When enabled, if no usage is reported during a service period,
+                the plan bills the last known reported quantity from a previous period instead of zero.
+                This is suitable for hosted or persistent resources whose usage does not change every period.
+                Only supported with `strategy`: `last`.
+              type: boolean
+              default: false
+              example: false
         createdTime:
           $ref: '#/components/schemas/CreatedTime'
         updatedTime:
