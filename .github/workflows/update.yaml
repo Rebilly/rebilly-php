@@ -9,7 +9,6 @@ jobs:
     permissions:
       contents: read
       packages: read
-      pull-requests: write
     steps:
       - name: Checkout api-definitions repo
         uses: actions/checkout@v4
