@@ -6,6 +6,10 @@ on:
 jobs:
   generate-sdk:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+      pull-requests: write
     steps:
       - name: Checkout api-definitions repo
         uses: actions/checkout@v4
@@ -27,17 +31,6 @@ jobs:
           cp .changeset/* ../carry/ 2>/dev/null || true
           git checkout main || true
           cp ../carry/*.md .changeset/ 2>/dev/null || true
-
-      - name: Checkout generator repo
-        uses: actions/checkout@v4
-        with:
-          token: '${{ secrets.MACHINE_USER_PAT }}'
-          path: 'generator'
-          repository: 'Rebilly/rebilly'
-          sparse-checkout: |
-            backend/php-sdk-generator/remove-fqcns.php
-            backend/php-sdk-generator/remove-unused-models.php
-          sparse-checkout-cone-mode: true
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -87,7 +80,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.MACHINE_USER_PAT }}
+          password: ${{ github.token }}
 
       - name: Install Dependencies
         working-directory: ./sdk
@@ -151,13 +144,21 @@ jobs:
             cat /tmp/changeset-body.md
           } > .changeset/spec-diff.md
 
+      - id: sdk-write-token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          client-id: ${{ vars.REBILLY_CI_SDK_WRITE_CLIENT_ID }}
+          private-key: ${{ secrets.REBILLY_CI_SDK_WRITE_APP_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
+
       - name: Create PR
         id: cpr
         uses: peter-evans/create-pull-request@v5
         with:
           # Path of the checked-out repo where we placed the generated resources
           path: 'sdk'
-          token: ${{ secrets.MACHINE_USER_PAT }}
+          token: ${{ steps.sdk-write-token.outputs.token }}
           title: 'chore: update SDK from api-definitions'
           commit-message: update SDK from api-definitions
           branch: automations/update-sdk-from-api-definitions

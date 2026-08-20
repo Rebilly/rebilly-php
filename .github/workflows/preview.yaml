@@ -11,12 +11,14 @@ jobs:
   generate-and-diff:
     name: Generate SDK and diff vs main
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+      pull-requests: write
 
     steps:
       - name: Checkout current ref
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.MACHINE_USER_PAT }}
 
       - name: Checkout main
         uses: actions/checkout@v4
@@ -24,7 +26,6 @@ jobs:
           repository: ${{ github.repository }}
           ref: main
           path: main-sdk
-          token: ${{ secrets.MACHINE_USER_PAT }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -41,7 +42,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.MACHINE_USER_PAT }}
+          password: ${{ github.token }}
 
       - name: Install dependencies
         run: npm ci
