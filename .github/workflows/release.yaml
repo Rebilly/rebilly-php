@@ -13,12 +13,23 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
     steps:
+      - id: sdk-write-token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          client-id: ${{ vars.REBILLY_CI_SDK_WRITE_CLIENT_ID }}
+          private-key: ${{ secrets.REBILLY_CI_SDK_WRITE_APP_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
+
       - name: Checkout Repo
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ secrets.MACHINE_USER_PAT }}
+          token: ${{ steps.sdk-write-token.outputs.token }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
@@ -41,4 +52,4 @@ jobs:
           title: 'chore: 🔖 release new version'
           version: npm run version
         env:
-          GITHUB_TOKEN: ${{ secrets.MACHINE_USER_PAT }}
+          GITHUB_TOKEN: ${{ steps.sdk-write-token.outputs.token }}
