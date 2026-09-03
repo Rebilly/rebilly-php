@@ -62,7 +62,7 @@ jobs:
           docker run --rm \
             -v "$PWD/sdk:/sdk" \
             -v "$PWD/api-definitions:/adef" \
-            tufin/oasdiff:v1.18.1 \
+            tufin/oasdiff:v1.30.0 \
             changelog /sdk/.openapi-snapshot.yaml /adef/catalog/all.yaml -f json > /tmp/spec-diff.json
 
       - name: Summarize spec diff
