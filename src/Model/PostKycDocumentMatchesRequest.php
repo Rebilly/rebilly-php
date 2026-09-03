@@ -18,6 +18,8 @@ use JsonSerializable;
 
 interface PostKycDocumentMatchesRequest extends JsonSerializable
 {
+    public function getType(): string;
+
     public function getFirstName(): ?string;
 
     public function setFirstName(null|string $firstName): static;
@@ -29,8 +31,4 @@ interface PostKycDocumentMatchesRequest extends JsonSerializable
     public function getDocumentSubtype(): ?string;
 
     public function setDocumentSubtype(null|string $documentSubtype): static;
-
-    public function getIsTampered(): ?bool;
-
-    public function setIsTampered(null|bool $isTampered): static;
 }

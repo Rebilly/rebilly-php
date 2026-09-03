@@ -48,6 +48,9 @@ class Customer implements JsonSerializable
         if (array_key_exists('defaultPaymentInstrument', $data)) {
             $this->setDefaultPaymentInstrument($data['defaultPaymentInstrument']);
         }
+        if (array_key_exists('defaultPaymentInstrumentId', $data)) {
+            $this->setDefaultPaymentInstrumentId($data['defaultPaymentInstrumentId']);
+        }
         if (array_key_exists('preferredPayoutInstrumentId', $data)) {
             $this->setPreferredPayoutInstrumentId($data['preferredPayoutInstrumentId']);
         }
@@ -174,10 +177,22 @@ class Customer implements JsonSerializable
     public function setDefaultPaymentInstrument(null|CustomerDefaultPaymentInstrument|array $defaultPaymentInstrument): static
     {
         if ($defaultPaymentInstrument !== null && !($defaultPaymentInstrument instanceof CustomerDefaultPaymentInstrument)) {
-            $defaultPaymentInstrument = CustomerDefaultPaymentInstrumentFactory::from($defaultPaymentInstrument);
+            $defaultPaymentInstrument = CustomerDefaultPaymentInstrument::from($defaultPaymentInstrument);
         }
 
         $this->fields['defaultPaymentInstrument'] = $defaultPaymentInstrument;
+
+        return $this;
+    }
+
+    public function getDefaultPaymentInstrumentId(): ?string
+    {
+        return $this->fields['defaultPaymentInstrumentId'] ?? null;
+    }
+
+    public function setDefaultPaymentInstrumentId(null|string $defaultPaymentInstrumentId): static
+    {
+        $this->fields['defaultPaymentInstrumentId'] = $defaultPaymentInstrumentId;
 
         return $this;
     }
@@ -446,6 +461,9 @@ class Customer implements JsonSerializable
         }
         if (array_key_exists('defaultPaymentInstrument', $this->fields)) {
             $data['defaultPaymentInstrument'] = $this->fields['defaultPaymentInstrument']?->jsonSerialize();
+        }
+        if (array_key_exists('defaultPaymentInstrumentId', $this->fields)) {
+            $data['defaultPaymentInstrumentId'] = $this->fields['defaultPaymentInstrumentId'];
         }
         if (array_key_exists('preferredPayoutInstrumentId', $this->fields)) {
             $data['preferredPayoutInstrumentId'] = $this->fields['preferredPayoutInstrumentId'];

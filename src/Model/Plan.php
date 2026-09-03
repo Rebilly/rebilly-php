@@ -67,6 +67,10 @@ interface Plan extends JsonSerializable
 
     public function getIsTrialOnly(): ?bool;
 
+    public function getRecurringInterval(): ?PlanSubscriptionPlanRecurringInterval;
+
+    public function getTrial(): ?PlanTrial;
+
     public function getCreatedTime(): ?DateTimeImmutable;
 
     public function getUpdatedTime(): ?DateTimeImmutable;

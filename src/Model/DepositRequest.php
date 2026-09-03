@@ -54,6 +54,9 @@ class DepositRequest implements JsonSerializable
         if (array_key_exists('status', $data)) {
             $this->setStatus($data['status']);
         }
+        if (array_key_exists('coinPurchase', $data)) {
+            $this->setCoinPurchase($data['coinPurchase']);
+        }
         if (array_key_exists('currency', $data)) {
             $this->setCurrency($data['currency']);
         }
@@ -157,6 +160,11 @@ class DepositRequest implements JsonSerializable
     public function getStatus(): ?string
     {
         return $this->fields['status'] ?? null;
+    }
+
+    public function getCoinPurchase(): ?bool
+    {
+        return $this->fields['coinPurchase'] ?? null;
     }
 
     public function getCurrency(): string
@@ -348,6 +356,9 @@ class DepositRequest implements JsonSerializable
         if (array_key_exists('status', $this->fields)) {
             $data['status'] = $this->fields['status'];
         }
+        if (array_key_exists('coinPurchase', $this->fields)) {
+            $data['coinPurchase'] = $this->fields['coinPurchase'];
+        }
         if (array_key_exists('currency', $this->fields)) {
             $data['currency'] = $this->fields['currency'];
         }
@@ -414,6 +425,13 @@ class DepositRequest implements JsonSerializable
     private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
+
+        return $this;
+    }
+
+    private function setCoinPurchase(null|bool $coinPurchase): static
+    {
+        $this->fields['coinPurchase'] = $coinPurchase;
 
         return $this;
     }

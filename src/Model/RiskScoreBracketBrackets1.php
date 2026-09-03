@@ -27,12 +27,6 @@ class RiskScoreBracketBrackets1 implements RiskScoreBracketBrackets
         if (array_key_exists('start', $data)) {
             $this->setStart($data['start']);
         }
-        if (array_key_exists('end', $data)) {
-            $this->setEnd($data['end']);
-        }
-        if (array_key_exists('value', $data)) {
-            $this->setValue($data['value']);
-        }
         $this->setMetadata($metadata);
     }
 
@@ -41,38 +35,18 @@ class RiskScoreBracketBrackets1 implements RiskScoreBracketBrackets
         return new self($data, $metadata);
     }
 
-    public function getStart(): ?int
+    public function getStart(): ?RiskScoreBracketBrackets1Start
     {
         return $this->fields['start'] ?? null;
     }
 
-    public function setStart(null|int $start): static
+    public function setStart(null|RiskScoreBracketBrackets1Start|array $start): static
     {
+        if ($start !== null && !($start instanceof RiskScoreBracketBrackets1Start)) {
+            $start = RiskScoreBracketBrackets1Start::from($start);
+        }
+
         $this->fields['start'] = $start;
-
-        return $this;
-    }
-
-    public function getEnd(): ?int
-    {
-        return $this->fields['end'] ?? null;
-    }
-
-    public function setEnd(null|int $end): static
-    {
-        $this->fields['end'] = $end;
-
-        return $this;
-    }
-
-    public function getValue(): ?int
-    {
-        return $this->fields['value'] ?? null;
-    }
-
-    public function setValue(null|int $value): static
-    {
-        $this->fields['value'] = $value;
 
         return $this;
     }
@@ -81,13 +55,7 @@ class RiskScoreBracketBrackets1 implements RiskScoreBracketBrackets
     {
         $data = [];
         if (array_key_exists('start', $this->fields)) {
-            $data['start'] = $this->fields['start'];
-        }
-        if (array_key_exists('end', $this->fields)) {
-            $data['end'] = $this->fields['end'];
-        }
-        if (array_key_exists('value', $this->fields)) {
-            $data['value'] = $this->fields['value'];
+            $data['start'] = $this->fields['start']?->jsonSerialize();
         }
 
         return $data;

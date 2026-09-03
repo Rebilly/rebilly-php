@@ -21,7 +21,6 @@ use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\GetPayoutRequestPaymentInstrumentsResponse;
 use Rebilly\Sdk\Model\PatchPayoutRequestRequest;
 use Rebilly\Sdk\Model\PayoutRequest;
-use Rebilly\Sdk\Model\PayoutRequestCancellation;
 use Rebilly\Sdk\Model\PayoutRequestSplit;
 use Rebilly\Sdk\Model\PayoutRequestTimelineMessage;
 use Rebilly\Sdk\Paginator;
@@ -30,25 +29,6 @@ class PayoutRequestsApi
 {
     public function __construct(protected ?ClientInterface $client)
     {
-    }
-
-    public function cancel(
-        string $id,
-        PayoutRequestCancellation $payoutRequestCancellation,
-    ): PayoutRequest {
-        $pathParams = [
-            '{id}' => $id,
-        ];
-
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/payout-requests/{id}/cancel');
-
-        $request = new Request('POST', $uri, headers: [
-            'Accept' => 'application/json',
-        ], body: Utils::jsonEncode($payoutRequestCancellation));
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return PayoutRequest::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function create(

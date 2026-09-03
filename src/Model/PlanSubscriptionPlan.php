@@ -246,14 +246,14 @@ class PlanSubscriptionPlan implements Plan
         return $this->fields['isTrialOnly'] ?? null;
     }
 
-    public function getRecurringInterval(): ?PlanSubscriptionPlanRecurringInterval
+    public function getRecurringInterval(): PlanSubscriptionPlanRecurringInterval
     {
-        return $this->fields['recurringInterval'] ?? null;
+        return $this->fields['recurringInterval'];
     }
 
-    public function setRecurringInterval(null|PlanSubscriptionPlanRecurringInterval|array $recurringInterval): static
+    public function setRecurringInterval(PlanSubscriptionPlanRecurringInterval|array $recurringInterval): static
     {
-        if ($recurringInterval !== null && !($recurringInterval instanceof PlanSubscriptionPlanRecurringInterval)) {
+        if (!($recurringInterval instanceof PlanSubscriptionPlanRecurringInterval)) {
             $recurringInterval = PlanSubscriptionPlanRecurringInterval::from($recurringInterval);
         }
 
@@ -367,7 +367,7 @@ class PlanSubscriptionPlan implements Plan
             $data['isTrialOnly'] = $this->fields['isTrialOnly'];
         }
         if (array_key_exists('recurringInterval', $this->fields)) {
-            $data['recurringInterval'] = $this->fields['recurringInterval']?->jsonSerialize();
+            $data['recurringInterval'] = $this->fields['recurringInterval']->jsonSerialize();
         }
         if (array_key_exists('trial', $this->fields)) {
             $data['trial'] = $this->fields['trial']?->jsonSerialize();

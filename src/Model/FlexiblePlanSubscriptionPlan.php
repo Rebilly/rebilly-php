@@ -246,14 +246,14 @@ class FlexiblePlanSubscriptionPlan implements FlexiblePlan
         return $this->fields['isTrialOnly'] ?? null;
     }
 
-    public function getRecurringInterval(): ?FlexiblePlanSubscriptionPlanRecurringInterval
+    public function getRecurringInterval(): FlexiblePlanSubscriptionPlanRecurringInterval
     {
-        return $this->fields['recurringInterval'] ?? null;
+        return $this->fields['recurringInterval'];
     }
 
-    public function setRecurringInterval(null|FlexiblePlanSubscriptionPlanRecurringInterval|array $recurringInterval): static
+    public function setRecurringInterval(FlexiblePlanSubscriptionPlanRecurringInterval|array $recurringInterval): static
     {
-        if ($recurringInterval !== null && !($recurringInterval instanceof FlexiblePlanSubscriptionPlanRecurringInterval)) {
+        if (!($recurringInterval instanceof FlexiblePlanSubscriptionPlanRecurringInterval)) {
             $recurringInterval = FlexiblePlanSubscriptionPlanRecurringInterval::from($recurringInterval);
         }
 
@@ -374,7 +374,7 @@ class FlexiblePlanSubscriptionPlan implements FlexiblePlan
             $data['isTrialOnly'] = $this->fields['isTrialOnly'];
         }
         if (array_key_exists('recurringInterval', $this->fields)) {
-            $data['recurringInterval'] = $this->fields['recurringInterval']?->jsonSerialize();
+            $data['recurringInterval'] = $this->fields['recurringInterval']->jsonSerialize();
         }
         if (array_key_exists('trial', $this->fields)) {
             $data['trial'] = $this->fields['trial']?->jsonSerialize();

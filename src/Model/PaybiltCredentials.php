@@ -34,6 +34,9 @@ class PaybiltCredentials implements JsonSerializable
         if (array_key_exists('apiKey', $data)) {
             $this->setApiKey($data['apiKey']);
         }
+        if (array_key_exists('hmacKey', $data)) {
+            $this->setHmacKey($data['hmacKey']);
+        }
         $this->setMetadata($metadata);
     }
 
@@ -78,6 +81,18 @@ class PaybiltCredentials implements JsonSerializable
         return $this;
     }
 
+    public function getHmacKey(): ?string
+    {
+        return $this->fields['hmacKey'] ?? null;
+    }
+
+    public function setHmacKey(null|string $hmacKey): static
+    {
+        $this->fields['hmacKey'] = $hmacKey;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -89,6 +104,9 @@ class PaybiltCredentials implements JsonSerializable
         }
         if (array_key_exists('apiKey', $this->fields)) {
             $data['apiKey'] = $this->fields['apiKey'];
+        }
+        if (array_key_exists('hmacKey', $this->fields)) {
+            $data['hmacKey'] = $this->fields['hmacKey'];
         }
 
         return $data;

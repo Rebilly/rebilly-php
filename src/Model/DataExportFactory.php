@@ -31,6 +31,7 @@ class DataExportFactory
             'payoutRequests' => PayoutRequestsDataExport::from($data, $metadata),
             'subscriptions' => SubscriptionsDataExport::from($data, $metadata),
             'transactions' => TransactionsDataExport::from($data, $metadata),
+            'users' => UsersDataExport::from($data, $metadata),
             default => throw new UnknownDiscriminatorValueException(),
         };
     }

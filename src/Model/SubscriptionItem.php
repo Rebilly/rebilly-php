@@ -50,9 +50,6 @@ class SubscriptionItem implements RecurringOrderItems
         if (array_key_exists('rebillNumber', $data)) {
             $this->setRebillNumber($data['rebillNumber']);
         }
-        if (array_key_exists('planId', $data)) {
-            $this->setPlanId($data['planId']);
-        }
         if (array_key_exists('productId', $data)) {
             $this->setProductId($data['productId']);
         }
@@ -156,18 +153,6 @@ class SubscriptionItem implements RecurringOrderItems
     public function getRebillNumber(): ?int
     {
         return $this->fields['rebillNumber'] ?? null;
-    }
-
-    public function getPlanId(): ?string
-    {
-        return $this->fields['planId'] ?? null;
-    }
-
-    public function setPlanId(null|string $planId): static
-    {
-        $this->fields['planId'] = $planId;
-
-        return $this;
     }
 
     public function getProductId(): ?string
@@ -306,9 +291,6 @@ class SubscriptionItem implements RecurringOrderItems
         }
         if (array_key_exists('rebillNumber', $this->fields)) {
             $data['rebillNumber'] = $this->fields['rebillNumber'];
-        }
-        if (array_key_exists('planId', $this->fields)) {
-            $data['planId'] = $this->fields['planId'];
         }
         if (array_key_exists('productId', $this->fields)) {
             $data['productId'] = $this->fields['productId'];

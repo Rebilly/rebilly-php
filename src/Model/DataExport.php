@@ -73,7 +73,9 @@ interface DataExport extends JsonSerializable
 
     public function getStatus(): ?string;
 
-    public function getDateRange(): null|AmlChecksDataExportDateRange|CustomersDataExportDateRange|DisputesDataExportDateRange|InvoiceItemsDataExportDateRange|InvoicesDataExportDateRange|JournalRecordsDataExportDateRange|PayoutRequestAllocationsDataExportDateRange|PayoutRequestsDataExportDateRange|SubscriptionsDataExportDateRange|TransactionsDataExportDateRange;
+    public function getFailureReason(): ?string;
+
+    public function getDateRange(): null|AmlChecksDataExportDateRange|CustomersDataExportDateRange|DisputesDataExportDateRange|InvoiceItemsDataExportDateRange|InvoicesDataExportDateRange|JournalRecordsDataExportDateRange|PayoutRequestAllocationsDataExportDateRange|PayoutRequestsDataExportDateRange|SubscriptionsDataExportDateRange|TransactionsDataExportDateRange|UsersDataExportDateRange;
 
     public function setDateRange(null|array $dateRange): static;
 
@@ -82,7 +84,7 @@ interface DataExport extends JsonSerializable
      */
     public function getLinks(): ?array;
 
-    public function getEmbedded(): null|AmlChecksDataExportEmbedded|CustomersDataExportEmbedded|DisputesDataExportEmbedded|InvoiceItemsDataExportEmbedded|InvoicesDataExportEmbedded|JournalRecordsDataExportEmbedded|PayoutRequestAllocationsDataExportEmbedded|PayoutRequestsDataExportEmbedded|SubscriptionsDataExportEmbedded|TransactionsDataExportEmbedded;
+    public function getEmbedded(): null|AmlChecksDataExportEmbedded|CustomersDataExportEmbedded|DisputesDataExportEmbedded|InvoiceItemsDataExportEmbedded|InvoicesDataExportEmbedded|JournalRecordsDataExportEmbedded|PayoutRequestAllocationsDataExportEmbedded|PayoutRequestsDataExportEmbedded|SubscriptionsDataExportEmbedded|TransactionsDataExportEmbedded|UsersDataExportEmbedded;
 
     public function setEmbedded(null|array $embedded): static;
 }

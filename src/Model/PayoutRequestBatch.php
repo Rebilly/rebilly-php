@@ -36,12 +36,6 @@ class PayoutRequestBatch implements JsonSerializable
         if (array_key_exists('totalCount', $data)) {
             $this->setTotalCount($data['totalCount']);
         }
-        if (array_key_exists('successCount', $data)) {
-            $this->setSuccessCount($data['successCount']);
-        }
-        if (array_key_exists('failureCount', $data)) {
-            $this->setFailureCount($data['failureCount']);
-        }
         if (array_key_exists('customerCount', $data)) {
             $this->setCustomerCount($data['customerCount']);
         }
@@ -84,16 +78,6 @@ class PayoutRequestBatch implements JsonSerializable
     public function getTotalCount(): ?int
     {
         return $this->fields['totalCount'] ?? null;
-    }
-
-    public function getSuccessCount(): ?int
-    {
-        return $this->fields['successCount'] ?? null;
-    }
-
-    public function getFailureCount(): ?int
-    {
-        return $this->fields['failureCount'] ?? null;
     }
 
     public function getCustomerCount(): ?int
@@ -169,12 +153,6 @@ class PayoutRequestBatch implements JsonSerializable
         if (array_key_exists('totalCount', $this->fields)) {
             $data['totalCount'] = $this->fields['totalCount'];
         }
-        if (array_key_exists('successCount', $this->fields)) {
-            $data['successCount'] = $this->fields['successCount'];
-        }
-        if (array_key_exists('failureCount', $this->fields)) {
-            $data['failureCount'] = $this->fields['failureCount'];
-        }
         if (array_key_exists('customerCount', $this->fields)) {
             $data['customerCount'] = $this->fields['customerCount'];
         }
@@ -227,20 +205,6 @@ class PayoutRequestBatch implements JsonSerializable
     private function setTotalCount(null|int $totalCount): static
     {
         $this->fields['totalCount'] = $totalCount;
-
-        return $this;
-    }
-
-    private function setSuccessCount(null|int $successCount): static
-    {
-        $this->fields['successCount'] = $successCount;
-
-        return $this;
-    }
-
-    private function setFailureCount(null|int $failureCount): static
-    {
-        $this->fields['failureCount'] = $failureCount;
 
         return $this;
     }
