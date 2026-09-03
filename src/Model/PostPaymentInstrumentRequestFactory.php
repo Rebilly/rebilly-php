@@ -91,6 +91,7 @@ class PostPaymentInstrumentRequestFactory
             'Onlineueberweisen' => AlternativeInstrument::from($data, $metadata),
             'P24' => AlternativeInstrument::from($data, $metadata),
             'PIX' => AlternativeInstrument::from($data, $metadata),
+            'PIX-Automatico' => AlternativeInstrument::from($data, $metadata),
             'POLi' => AlternativeInstrument::from($data, $metadata),
             'Pagadito' => AlternativeInstrument::from($data, $metadata),
             'PagoEffectivo' => AlternativeInstrument::from($data, $metadata),

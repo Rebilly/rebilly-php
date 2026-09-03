@@ -44,6 +44,11 @@ class PatchTaxJarCredential implements PatchServiceCredentialRequest
         return new self($data, $metadata);
     }
 
+    public function getType(): string
+    {
+        return 'taxjar';
+    }
+
     public function getStatus(): string
     {
         return $this->fields['status'];
@@ -70,7 +75,9 @@ class PatchTaxJarCredential implements PatchServiceCredentialRequest
 
     public function jsonSerialize(): array
     {
-        $data = [];
+        $data = [
+            'type' => 'taxjar',
+        ];
         if (array_key_exists('status', $this->fields)) {
             $data['status'] = $this->fields['status'];
         }

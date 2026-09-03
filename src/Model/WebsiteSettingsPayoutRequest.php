@@ -14,6 +14,8 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
+use DateTimeImmutable;
+use DateTimeInterface;
 use JsonSerializable;
 use Rebilly\Sdk\Trait\HasMetadata;
 
@@ -30,6 +32,12 @@ class WebsiteSettingsPayoutRequest implements JsonSerializable
         }
         if (array_key_exists('pendingPeriodHours', $data)) {
             $this->setPendingPeriodHours($data['pendingPeriodHours']);
+        }
+        if (array_key_exists('automaticReadinessTime', $data)) {
+            $this->setAutomaticReadinessTime($data['automaticReadinessTime']);
+        }
+        if (array_key_exists('automaticReadinessLastExecutedAt', $data)) {
+            $this->setAutomaticReadinessLastExecutedAt($data['automaticReadinessLastExecutedAt']);
         }
         $this->setMetadata($metadata);
     }
@@ -63,6 +71,23 @@ class WebsiteSettingsPayoutRequest implements JsonSerializable
         return $this;
     }
 
+    public function getAutomaticReadinessTime(): ?string
+    {
+        return $this->fields['automaticReadinessTime'] ?? null;
+    }
+
+    public function setAutomaticReadinessTime(null|string $automaticReadinessTime): static
+    {
+        $this->fields['automaticReadinessTime'] = $automaticReadinessTime;
+
+        return $this;
+    }
+
+    public function getAutomaticReadinessLastExecutedAt(): ?DateTimeImmutable
+    {
+        return $this->fields['automaticReadinessLastExecutedAt'] ?? null;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -72,7 +97,24 @@ class WebsiteSettingsPayoutRequest implements JsonSerializable
         if (array_key_exists('pendingPeriodHours', $this->fields)) {
             $data['pendingPeriodHours'] = $this->fields['pendingPeriodHours'];
         }
+        if (array_key_exists('automaticReadinessTime', $this->fields)) {
+            $data['automaticReadinessTime'] = $this->fields['automaticReadinessTime'];
+        }
+        if (array_key_exists('automaticReadinessLastExecutedAt', $this->fields)) {
+            $data['automaticReadinessLastExecutedAt'] = $this->fields['automaticReadinessLastExecutedAt']?->format(DateTimeInterface::RFC3339);
+        }
 
         return $data;
+    }
+
+    private function setAutomaticReadinessLastExecutedAt(null|DateTimeImmutable|string $automaticReadinessLastExecutedAt): static
+    {
+        if ($automaticReadinessLastExecutedAt !== null && !($automaticReadinessLastExecutedAt instanceof DateTimeImmutable)) {
+            $automaticReadinessLastExecutedAt = new DateTimeImmutable($automaticReadinessLastExecutedAt);
+        }
+
+        $this->fields['automaticReadinessLastExecutedAt'] = $automaticReadinessLastExecutedAt;
+
+        return $this;
     }
 }

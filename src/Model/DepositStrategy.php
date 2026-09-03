@@ -48,6 +48,9 @@ class DepositStrategy implements JsonSerializable
         if (array_key_exists('isActive', $data)) {
             $this->setIsActive($data['isActive']);
         }
+        if (array_key_exists('coinPurchase', $data)) {
+            $this->setCoinPurchase($data['coinPurchase']);
+        }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
         }
@@ -150,6 +153,18 @@ class DepositStrategy implements JsonSerializable
         return $this;
     }
 
+    public function getCoinPurchase(): ?bool
+    {
+        return $this->fields['coinPurchase'] ?? null;
+    }
+
+    public function setCoinPurchase(null|bool $coinPurchase): static
+    {
+        $this->fields['coinPurchase'] = $coinPurchase;
+
+        return $this;
+    }
+
     public function getCreatedTime(): ?DateTimeImmutable
     {
         return $this->fields['createdTime'] ?? null;
@@ -191,6 +206,9 @@ class DepositStrategy implements JsonSerializable
         }
         if (array_key_exists('isActive', $this->fields)) {
             $data['isActive'] = $this->fields['isActive'];
+        }
+        if (array_key_exists('coinPurchase', $this->fields)) {
+            $data['coinPurchase'] = $this->fields['coinPurchase'];
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);

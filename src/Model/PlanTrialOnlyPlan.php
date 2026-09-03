@@ -62,6 +62,9 @@ class PlanTrialOnlyPlan implements Plan
         if (array_key_exists('isTrialOnly', $data)) {
             $this->setIsTrialOnly($data['isTrialOnly']);
         }
+        if (array_key_exists('recurringInterval', $data)) {
+            $this->setRecurringInterval($data['recurringInterval']);
+        }
         if (array_key_exists('trial', $data)) {
             $this->setTrial($data['trial']);
         }
@@ -221,6 +224,11 @@ class PlanTrialOnlyPlan implements Plan
         return $this->fields['isTrialOnly'] ?? null;
     }
 
+    public function getRecurringInterval(): null
+    {
+        return $this->fields['recurringInterval'] ?? null;
+    }
+
     public function getTrial(): PlanTrial
     {
         return $this->fields['trial'];
@@ -306,6 +314,9 @@ class PlanTrialOnlyPlan implements Plan
         if (array_key_exists('isTrialOnly', $this->fields)) {
             $data['isTrialOnly'] = $this->fields['isTrialOnly'];
         }
+        if (array_key_exists('recurringInterval', $this->fields)) {
+            $data['recurringInterval'] = $this->fields['recurringInterval'];
+        }
         if (array_key_exists('trial', $this->fields)) {
             $data['trial'] = $this->fields['trial']->jsonSerialize();
         }
@@ -350,6 +361,13 @@ class PlanTrialOnlyPlan implements Plan
     private function setIsTrialOnly(null|bool $isTrialOnly): static
     {
         $this->fields['isTrialOnly'] = $isTrialOnly;
+
+        return $this;
+    }
+
+    private function setRecurringInterval(null $recurringInterval): static
+    {
+        $this->fields['recurringInterval'] = $recurringInterval;
 
         return $this;
     }

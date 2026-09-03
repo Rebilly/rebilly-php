@@ -1,0 +1,227 @@
+---
+"@rebilly/client-php": patch
+---
+
+### Endpoints
+- Added endpoint `endpoint added`
+
+### Added
+- Added `AlternativeInstrument` on `AlternativeInstrument, OneTimeOrder, RecurringOrder` **(breaking)**
+- Added `CryptocurrencyToken` on `CryptocurrencyToken` (response only) **(breaking)**
+- Added `FlexiblePlan` on `FlexiblePlan, OneTimeSale, Subscription` **(breaking)**
+- Added `UsersDataExport` on `UsersDataExport` **(breaking)**
+- Added `method` on `OneTimeOrder, RecurringOrder` **(breaking)**
+- Added `paymentInstrumentId` on `OneTimeOrder, RecurringOrder` **(breaking)**
+- Added `splitReason` **(breaking)**
+- Added `subschema #1, subschema #2, subschema #3` on `FlexiblePlan` **(breaking)**
+- Added error status `409` (response only)
+- Added error status `422` (response only)
+- Added `_links` (response only)
+- Added `amount` (response only)
+- Added `annualComplianceScreening` on `Organization`
+- Added `automaticReadinessLastExecutedAt` on `OneTimeOrder, RecurringOrder` (response only)
+- Added `automaticReadinessTime` on `OneTimeOrder, RecurringOrder`
+- Added `batchId` (response only)
+- Added `billingManagementToken` (response only)
+- Added `canWithdraw` (response only)
+- Added `checkList`
+- Added `coinPurchase`
+- Added `createdTime` (response only)
+- Added `currency` (response only)
+- Added `defaultPaymentInstrumentId` on `OneTimeOrder, RecurringOrder, StorefrontAccount` (request only)
+- Added `description`
+- Added `documentMatches` on `StorefrontProofOfFundsKycDocument` (response only)
+- Added `documentNumber` on `KycSettingsIdentity`
+- Added `exposureAmount` (response only)
+- Added `failureReason` on `AmlChecksDataExport, CustomersDataExport, DisputesDataExport, InvoiceItemsDataExport, InvoicesDataExport, JournalRecordsDataExport, PayoutRequestAllocationsDataExport, PayoutRequestsDataExport, SubscriptionsDataExport, TransactionsDataExport` (response only)
+- Added `gatewayAccountId` (response only)
+- Added `gatewayName` (response only)
+- Added `gatewayPayoutInstruction` (response only)
+- Added `hasCardOnFile` (response only)
+- Added `id` (response only)
+- Added `includeUnpaidInvoices` on `StorefrontReactivationQuote`
+- Added `isPayoutable` (response only)
+- Added `issuanceCountry` on `KycSettingsIdentity`
+- Added `issuanceRegion` on `KycSettingsIdentity`
+- Added `parsedData` (response only)
+- Added `pastDueInvoice` (response only)
+- Added `paymentMethod` (response only)
+- Added `payoutLimits`
+- Added `payoutRequestId` (response only)
+- Added `periodEnd` (response only)
+- Added `periodStart` (response only)
+- Added `plan`
+- Added `preset`
+- Added `quantityFilled` on `QuoteSubscriptionItem`
+- Added optional parameter `query` (request only)
+- Added `recordCount` (request only)
+- Added `requiresCardOnFile` (response only)
+- Added `score`
+- Added `splitDescription` (request only)
+- Added `status`
+- Added `sticky` (response only)
+- Added `title`
+- Added `transactionId` (response only)
+- Added `transactionResult` (response only)
+- Added `transactionStatus` (response only)
+- Added `updatedTime` (response only)
+- Added `version` on `StorefrontProofOfAddressKycDocument, StorefrontProofOfIdentityKycDocument, StorefrontProofOfPurchaseKycDocument` (response only)
+
+### Removed
+- Removed `AlternativeInstrument` on `AlternativeInstrument, OneTimeOrder, RecurringOrder` (request only) **(breaking)**
+- Removed `CheckInstrument` on `CheckInstrument, OneTimeOrder, RecurringOrder` **(breaking)**
+- Removed `FlexiblePlan` on `OneTimeSale, Subscription` (request only) **(breaking)**
+- Removed `schemas` on `DashboardMetric` (request only) **(breaking)**
+- Removed `subschema #1, subschema #2` (request only) **(breaking)**
+- Removed `subschema #1, subschema #2, subschema #3` on `FlexiblePlan` (request only) **(breaking)**
+- Removed `RebillyShipping` on `RebillyShipping, StorefrontChangeQuote, StorefrontReactivationQuote`
+- Removed schema `StorefrontProofOfCreditFileKycDocument`
+- Removed `balance` (request only)
+- Removed `bonusBalance` (request only)
+- Removed `discountAmount` on `OneTimeOrder, RecurringOrder, StorefrontInvoice` (response only)
+- Removed `failureCount` (response only)
+- Removed `isDigitallyTampered` on `StorefrontProofOfIdentityKycDocument`
+- Removed `isPhotocopy` on `StorefrontProofOfIdentityKycDocument`
+- Removed `isPublishedOnline` on `StorefrontProofOfIdentityKycDocument`
+- Removed `isTampered` on `StorefrontProofOfAddressKycDocument, StorefrontProofOfIdentityKycDocument`
+- Removed `matchingImages` on `StorefrontProofOfIdentityKycDocument` (response only)
+- Removed `mrzChecksumValid` on `StorefrontProofOfIdentityKycDocument` (response only)
+- Removed `pendingPayoutTotal` (request only)
+- Removed `planId` on `OneTimeOrder, OneTimeSaleItem, SubscriptionItem`
+- Removed `score` on `StorefrontProofOfAddressKycDocument, StorefrontProofOfIdentityKycDocument`
+- Removed `subaggregate` (response only)
+- Removed `successCount` (response only)
+- Removed `value` (response only)
+
+### Changed
+- Type changed `date` on `StorefrontProofOfAddressKycDocument` **(breaking)**
+- Made nullable `dateRange` **(breaking)**
+- Made nullable `defaultPaymentInstrument` on `StorefrontAccount` **(breaking)**
+- Made nullable `documentMatches` on `StorefrontProofOfAddressKycDocument, StorefrontProofOfIdentityKycDocument, StorefrontProofOfPurchaseKycDocument` **(breaking)**
+- Made nullable `hasMatchingFaceProof` on `StorefrontProofOfIdentityKycDocument` **(breaking)**
+- Type changed `metric` (request only) **(breaking)**
+- Made optional `planId` **(breaking)**
+- Made required `quantity` **(breaking)**
+- Type changed `subaggregates` (response only) **(breaking)**
+- Made required `type` on `QuoteOneTimeSaleItem, QuoteSubscriptionItem` **(breaking)**
+- Discriminator mapping added `IMerchant, PayGlocal` (request only)
+- Discriminator mapping added `PayGlocal, IMerchant`
+- Discriminator mapping changed `avalara` on `PostAvalaraCredential` (request only)
+- Discriminator mapping changed `aws-ses` on `PostAwsSesCredential` (request only)
+- Made required `collectedAmount` (response only)
+- Made required `currency` (response only)
+- Became read-only `defaultPaymentInstrument` on `OneTimeOrder, RecurringOrder, StorefrontAccount`
+- Discriminator mapping changed `experian` on `PostExperianCredential` (request only)
+- Made nullable `fileId` (request only)
+- Made required `invoiceCount` (response only)
+- Made required `invoicedAmount` (response only)
+- Discriminator mapping changed `mailgun` on `PostMailgunCredential` (request only)
+- Pattern changed `name` on `OneTimeOrder, RecurringOrder`
+- Discriminator mapping changed `oauth2` on `PostOAuth2Credential` (request only)
+- Made required `paymentInstrumentId` on `StorefrontAccount`
+- Discriminator mapping changed `plaid` on `PostPlaidCredential` (request only)
+- Discriminator mapping changed `postmark` on `PostPostmarkCredential` (request only)
+- Discriminator mapping changed `sendgrid` on `PostSendGridCredential` (request only)
+- Discriminator mapping changed `smtp` on `PostSmtpCredential` (request only)
+- Discriminator mapping changed `taxjar` on `PostTaxJarCredential` (request only)
+- Discriminator mapping added `users`
+- Discriminator mapping changed `webhook` on `PostWebhookCredential` (request only)
+
+### Deprecated
+- Deprecated `ignoreRecurring` (request only)
+- Deprecated `keepTrial` on `StorefrontChangeQuote`
+- Deprecated `planId`
+
+### Enum changes
+- `acquirerName` on `AcquirerName` accepts new values: `PayGlocal`
+- `eventType` on `GlobalEventType` accepts new values: `data-export-failed`, `transaction-partially-refunded`, `transaction-refunded`, `transaction-voided`, `transaction-reconciled`
+- `eventsFilter` accepts new values: `data-export-failed`, `transaction-partially-refunded`, `transaction-refunded`, `transaction-voided` **(breaking)**
+- `gatewayName` on `GatewayName` accepts new values: `IMerchant`, `PayGlocal` **(breaking)**
+- `method` on `AlternativePaymentMethods, PaymentMethod, ReadyToPayMethods, StorefrontAccount, StorefrontInvoice, StorefrontTransaction` accepts new values: `PIX-Automatico` **(breaking)**
+- `methods` on `PaymentInstruction` accepts new values: `PIX-Automatico`
+- `name` accepts new values: `documentNumber`, `issuanceCountry`, `issuanceRegion` **(breaking)**
+- `not` accepts new values: `data-export-failed`
+- `paymentMethod` on `PaymentMethod` accepts new values: `PIX-Automatico`
+- `paymentMethods` accepts new values: `PIX-Automatico` **(breaking)**
+- `reason` accepts new values: `gateway-unreachable` **(breaking)**
+- `rejectionReason` (response only) accepts new values: `document-was-valid-but-expired`, `name-and-dob-mismatch` **(breaking)**
+- `relatedType` accepts new values: `credit-memo-timeline-comment`, `payout-request-timeline-comment`, `quote-timeline-comment` **(breaking)**
+- `renewalPolicy` on `StorefrontChangeQuote` accepts new values: `resetToRecurring`, `retainRecurring`, `retainTrialThenRecurring`, `retainTrialOnly` **(breaking)**
+- `status` on `AmlChecksDataExport, CustomersDataExport, DisputesDataExport, InvoiceItemsDataExport, InvoicesDataExport, JournalRecordsDataExport, PayoutRequestAllocationsDataExport, PayoutRequestsDataExport, SubscriptionsDataExport, TransactionsDataExport` accepts new values: `failed`, `approved`, `canceled`, `merged`, `ready`, `split` **(breaking)**
+- `type` on `StorefrontProofOfAddressKycDocument, StorefrontProofOfFundsKycDocument, StorefrontProofOfIdentityKycDocument, StorefrontProofOfPurchaseKycDocument` accepts new values: `subscription-pause-created`, `subscription-pause-revoked`, `transaction-partially-refunded`, `gateway-account-carding-circuit-opened`, `document-was-valid-but-expired`, `name-and-dob-mismatch` + 1 more **(breaking)**
+- `documentType` on `StorefrontProofOfAddressKycDocument, StorefrontProofOfFundsKycDocument, StorefrontProofOfIdentityKycDocument, StorefrontProofOfPurchaseKycDocument` no longer accepts: `credit-file-proof` **(breaking)**
+- `rel` (response only) no longer accepts: `documents`
+
+### Schema composition refactors
+- Refactored under `_embedded/quote/oneOf[subschema #2: ChangeQuote]/order/shipping` to compose `Shipping` — `POST webhook:quote-accepted`, `POST webhook:quote-canceled` + 6 more
+- Refactored under `_embedded/quote/oneOf[subschema #3: ReactivationQuote]/order/shipping` to compose `Shipping` — `POST webhook:quote-accepted`, `POST webhook:quote-canceled` + 6 more
+- Refactored under `currency` to compose `CurrencyCode` — `POST /invoices/{id}/allocate-credit-balance`
+- Refactored under `customerId` to compose `CustomerId` — `POST /storefront/kyc-liveness-sessions`, `GET /storefront/kyc-liveness-sessions/{id}` + 1 more
+- Refactored under `items/oneOf[subschema #2: ChangeQuote]/order/shipping` to compose `Shipping` — `GET /quotes`
+- Refactored under `items/oneOf[subschema #3: ReactivationQuote]/order/shipping` to compose `Shipping` — `GET /quotes`
+- Refactored under `oneOf[#/components/schemas/StorefrontChangeQuote]/order/shipping` to compose `Shipping`, `StorefrontChangeQuote` — `GET /storefront/quotes/{id}`, `POST /storefront/quotes/{id}/accept` + 1 more
+- Refactored under `oneOf[#/components/schemas/StorefrontReactivationQuote]/order/shipping` to compose `Shipping`, `StorefrontReactivationQuote` — `GET /storefront/quotes/{id}`, `POST /storefront/quotes/{id}/accept` + 1 more
+- Refactored under `oneOf[subschema #2: ChangeQuote]/order/shipping` to compose `Shipping` — `POST /quotes`, `PUT /quotes/{id}` + 7 more
+- Refactored under `oneOf[subschema #3: ReactivationQuote]/order/shipping` to compose `Shipping` — `POST /quotes`, `PUT /quotes/{id}` + 7 more
+- Refactored under `order/shipping` to compose `Shipping` — `POST /storefront/subscription-reactivations`, `POST /storefront/subscriptions/{id}/change-items`
+
+### Other
+- all-of-removed-annotation-only on `subschema #1: Validation error` (response only)
+- Uncomposed schema from `schemas` on `BaseProblem, PayoutRequestAllocation` (response only)
+- Removed union member from `AlternativeInstrument` on `AlternativeInstrument, OneTimeOrder, RecurringOrder` (response only)
+- Removed union member from `CryptocurrencyToken` on `CryptocurrencyToken`
+- Removed union member from `FlexiblePlan` on `FlexiblePlan, OneTimeSale, Subscription` (response only)
+- Removed union member from `KycAddressMatches` on `KycAddressMatches` (request only)
+- Removed union member from `PatchTaxJarCredential` on `PatchTaxJarCredential` (request only)
+- Removed union member from `schemas` on `DashboardMetric` (response only)
+- Removed union member from `subschema #1, subschema #2` (response only)
+- Removed union member from `subschema #1, subschema #2, subschema #3` on `FlexiblePlan`
+- api-operation-id-removed on `PostPayoutRequestSplit` (response only)
+- api-path-removed-without-deprecation (1x) — e.g. api path removed without deprecation
+- api-removed-without-deprecation (1x) — e.g. api removed without deprecation
+- Made not nullable `city` on `StorefrontProofOfAddressKycDocument`
+- Made not nullable `firstName` on `StorefrontProofOfAddressKycDocument, StorefrontProofOfIdentityKycDocument`
+- Made not nullable `lastName` on `StorefrontProofOfAddressKycDocument, StorefrontProofOfIdentityKycDocument`
+- Made not nullable `line1` on `StorefrontProofOfAddressKycDocument`
+- Made not nullable `phone` on `StorefrontProofOfAddressKycDocument`
+- Made not nullable `postalCode` on `StorefrontProofOfAddressKycDocument`
+- Made not nullable `region` on `StorefrontProofOfAddressKycDocument`
+- became-required (1x) — e.g. request body became required
+- default-value-changed on `renewalPolicy`
+- Default removed on `pendingPeriodHours`
+- discriminator-added (2x) — e.g. added request discriminator
+- Added discriminator mapping for `IMerchant, PayGlocal`
+- Added discriminator mapping for `PayGlocal, IMerchant` (response only)
+- Added discriminator mapping for `users`
+- Removed discriminator mapping for `credit-file-proof`
+- discriminator-removed on `shipping` on `StorefrontChangeQuote, StorefrontReactivationQuote`
+- max-length-unset on `currency` (response only)
+- max-length-unset on `customerId` (response only)
+- max-set on `quantity` (request only)
+- Raised minimum on `pendingPeriodHours` on `OneTimeOrder, RecurringOrder` (request only)
+- Shortened minimum length on `currency` (response only)
+- Raised minimum length on `cancellationDescription` (request only)
+- min-set on `quantity` (request only)
+- Added discriminator variant to `AlternativeInstrument` on `AlternativeInstrument` (response only)
+- Added discriminator variant to `CryptocurrencyToken` on `CryptocurrencyToken`
+- Added discriminator variant to `DataExportLimitExceeded` on `DataExportLimitExceeded` (response only)
+- Added discriminator variant to `KycFundsMatchesOverwrite` on `KycFundsMatchesOverwrite` (request only)
+- Added discriminator variant to `PatchTaxJarCredential` on `PatchTaxJarCredential` (request only)
+- Added discriminator variant to `PostPlaidCredential` on `PostPlaidCredential` (request only)
+- Added discriminator variant to `UsersDataExport` on `UsersDataExport`
+- Added discriminator variant to `subschema #1, subschema #2, subschema #3`
+- Removed discriminator variant from `PlaidCredential` on `PlaidCredential` (request only)
+- Removed discriminator variant from `StorefrontProofOfCreditFileKycDocument` on `StorefrontProofOfCreditFileKycDocument`
+- optional-property-became-not-write-only on `billingAddress`
+- optional-property-became-not-write-only on `deliveryAddress`
+- optional-write-only-property-added on `defaultPaymentInstrumentId` on `OneTimeOrder, RecurringOrder` (response only)
+- required-property-became-read-only on `balance` (response only)
+- required-property-became-read-only on `bonusBalance` (response only)
+- required-property-became-read-only on `pendingPayoutTotal` (response only)
+- type-generalized on `shipping` (request only)
+- type-specialized on `items/` (response only)
+- type-specialized on `metric` (response only)
+- webhook-added on `data-export-failed` (response only)
+- webhook-added on `transaction-partially-refunded` (response only)
+- webhook-added on `transaction-refunded` (response only)
+- webhook-added on `transaction-voided` (response only)

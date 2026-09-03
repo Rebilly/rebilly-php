@@ -23,6 +23,14 @@ class OrderChange implements JsonSerializable
 {
     use HasMetadata;
 
+    public const RENEWAL_POLICY_RESET_TO_RECURRING = 'resetToRecurring';
+
+    public const RENEWAL_POLICY_RETAIN_RECURRING = 'retainRecurring';
+
+    public const RENEWAL_POLICY_RETAIN_TRIAL_THEN_RECURRING = 'retainTrialThenRecurring';
+
+    public const RENEWAL_POLICY_RETAIN_TRIAL_ONLY = 'retainTrialOnly';
+
     public const RENEWAL_POLICY_RESET = 'reset';
 
     public const RENEWAL_POLICY_RETAIN = 'retain';
