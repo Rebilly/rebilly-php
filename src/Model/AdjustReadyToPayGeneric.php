@@ -230,6 +230,8 @@ class AdjustReadyToPayGeneric implements AdjustPaymentMethod
 
     public const PAYMENT_METHOD_PIX = 'PIX';
 
+    public const PAYMENT_METHOD_PIX_AUTOMATICO = 'PIX-Automatico';
+
     public const PAYMENT_METHOD_PAY_TABS = 'PayTabs';
 
     public const PAYMENT_METHOD_PAYSAFECARD = 'Paysafecard';

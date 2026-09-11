@@ -79,6 +79,8 @@ class InvoiceTimeline implements JsonSerializable
 
     public const TYPE_TRANSACTION_INITIATED = 'transaction-initiated';
 
+    public const TYPE_TRANSACTION_PARTIALLY_REFUNDED = 'transaction-partially-refunded';
+
     public const TYPE_TRANSACTION_REFUNDED = 'transaction-refunded';
 
     public const TYPE_TRANSACTION_VOIDED = 'transaction-voided';

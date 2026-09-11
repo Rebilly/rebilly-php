@@ -24,14 +24,8 @@ class RiskScoreBracketBrackets0 implements RiskScoreBracketBrackets
 
     public function __construct(array $data = [], array $metadata = [])
     {
-        if (array_key_exists('start', $data)) {
-            $this->setStart($data['start']);
-        }
         if (array_key_exists('end', $data)) {
             $this->setEnd($data['end']);
-        }
-        if (array_key_exists('value', $data)) {
-            $this->setValue($data['value']);
         }
         $this->setMetadata($metadata);
     }
@@ -41,38 +35,18 @@ class RiskScoreBracketBrackets0 implements RiskScoreBracketBrackets
         return new self($data, $metadata);
     }
 
-    public function getStart(): ?int
-    {
-        return $this->fields['start'] ?? null;
-    }
-
-    public function setStart(null|int $start): static
-    {
-        $this->fields['start'] = $start;
-
-        return $this;
-    }
-
-    public function getEnd(): ?int
+    public function getEnd(): ?RiskScoreBracketBrackets0End
     {
         return $this->fields['end'] ?? null;
     }
 
-    public function setEnd(null|int $end): static
+    public function setEnd(null|RiskScoreBracketBrackets0End|array $end): static
     {
+        if ($end !== null && !($end instanceof RiskScoreBracketBrackets0End)) {
+            $end = RiskScoreBracketBrackets0End::from($end);
+        }
+
         $this->fields['end'] = $end;
-
-        return $this;
-    }
-
-    public function getValue(): ?int
-    {
-        return $this->fields['value'] ?? null;
-    }
-
-    public function setValue(null|int $value): static
-    {
-        $this->fields['value'] = $value;
 
         return $this;
     }
@@ -80,14 +54,8 @@ class RiskScoreBracketBrackets0 implements RiskScoreBracketBrackets
     public function jsonSerialize(): array
     {
         $data = [];
-        if (array_key_exists('start', $this->fields)) {
-            $data['start'] = $this->fields['start'];
-        }
         if (array_key_exists('end', $this->fields)) {
-            $data['end'] = $this->fields['end'];
-        }
-        if (array_key_exists('value', $this->fields)) {
-            $data['value'] = $this->fields['value'];
+            $data['end'] = $this->fields['end']?->jsonSerialize();
         }
 
         return $data;

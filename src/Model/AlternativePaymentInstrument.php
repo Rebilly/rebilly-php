@@ -16,7 +16,7 @@ namespace Rebilly\Sdk\Model;
 
 use Rebilly\Sdk\Trait\HasMetadata;
 
-class AlternativePaymentInstrument implements CustomerDefaultPaymentInstrument, TransactionPaymentInstrument
+class AlternativePaymentInstrument implements TransactionPaymentInstrument
 {
     use HasMetadata;
 
@@ -289,6 +289,8 @@ class AlternativePaymentInstrument implements CustomerDefaultPaymentInstrument, 
     public const METHOD_PIASTRIX = 'Piastrix';
 
     public const METHOD_PIX = 'PIX';
+
+    public const METHOD_PIX_AUTOMATICO = 'PIX-Automatico';
 
     public const METHOD_PIN_PAY = 'PinPay';
 

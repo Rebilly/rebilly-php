@@ -203,6 +203,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
 
     public const GATEWAY_NAME_ILIXIUM = 'Ilixium';
 
+    public const GATEWAY_NAME_I_MERCHANT = 'IMerchant';
+
     public const GATEWAY_NAME_INGENICO = 'Ingenico';
 
     public const GATEWAY_NAME_INOVAPAY = 'INOVAPAY';
@@ -326,6 +328,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
     public const GATEWAY_NAME_PAYEEZY = 'Payeezy';
 
     public const GATEWAY_NAME_PAYFLOW = 'Payflow';
+
+    public const GATEWAY_NAME_PAY_GLOCAL = 'PayGlocal';
 
     public const GATEWAY_NAME_PAYNOTE = 'Paynote';
 
@@ -764,6 +768,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
     public const ACQUIRER_NAME_PAY_CLUB = 'PayClub';
 
     public const ACQUIRER_NAME_PAY_ECARDS = 'PayEcards';
+
+    public const ACQUIRER_NAME_PAY_GLOCAL = 'PayGlocal';
 
     public const ACQUIRER_NAME_PAYMENT_ASIA = 'PaymentAsia';
 

@@ -53,6 +53,11 @@ class PatchPlaidCredential implements PatchServiceCredentialRequest
         return new self($data, $metadata);
     }
 
+    public function getType(): string
+    {
+        return 'plaid';
+    }
+
     public function getStatus(): ?string
     {
         return $this->fields['status'] ?? null;
@@ -115,7 +120,9 @@ class PatchPlaidCredential implements PatchServiceCredentialRequest
 
     public function jsonSerialize(): array
     {
-        $data = [];
+        $data = [
+            'type' => 'plaid',
+        ];
         if (array_key_exists('status', $this->fields)) {
             $data['status'] = $this->fields['status'];
         }
