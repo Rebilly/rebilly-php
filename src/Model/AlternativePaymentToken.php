@@ -232,6 +232,8 @@ class AlternativePaymentToken implements CompositeToken
 
     public const METHOD_PIX = 'PIX';
 
+    public const METHOD_PIX_AUTOMATICO = 'PIX-Automatico';
+
     public const METHOD_PAY_TABS = 'PayTabs';
 
     public const METHOD_PAYSAFECARD = 'Paysafecard';

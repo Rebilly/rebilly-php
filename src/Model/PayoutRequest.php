@@ -82,6 +82,9 @@ class PayoutRequest implements JsonSerializable
         if (array_key_exists('blockReason', $data)) {
             $this->setBlockReason($data['blockReason']);
         }
+        if (array_key_exists('splitReason', $data)) {
+            $this->setSplitReason($data['splitReason']);
+        }
         if (array_key_exists('batchId', $data)) {
             $this->setBatchId($data['batchId']);
         }
@@ -239,6 +242,18 @@ class PayoutRequest implements JsonSerializable
         return $this;
     }
 
+    public function getSplitReason(): ?string
+    {
+        return $this->fields['splitReason'] ?? null;
+    }
+
+    public function setSplitReason(null|string $splitReason): static
+    {
+        $this->fields['splitReason'] = $splitReason;
+
+        return $this;
+    }
+
     public function getBatchId(): ?string
     {
         return $this->fields['batchId'] ?? null;
@@ -344,6 +359,9 @@ class PayoutRequest implements JsonSerializable
         }
         if (array_key_exists('blockReason', $this->fields)) {
             $data['blockReason'] = $this->fields['blockReason'];
+        }
+        if (array_key_exists('splitReason', $this->fields)) {
+            $data['splitReason'] = $this->fields['splitReason'];
         }
         if (array_key_exists('batchId', $this->fields)) {
             $data['batchId'] = $this->fields['batchId'];

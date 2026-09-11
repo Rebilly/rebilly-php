@@ -15,9 +15,11 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
+use DateTimeInterface;
+use JsonSerializable;
 use Rebilly\Sdk\Trait\HasMetadata;
 
-class KycAddressMatches implements PostKycDocumentMatchesRequest
+class KycAddressMatches implements JsonSerializable
 {
     use HasMetadata;
 
@@ -299,7 +301,7 @@ class KycAddressMatches implements PostKycDocumentMatchesRequest
             $data['uniqueWords'] = $this->fields['uniqueWords'];
         }
         if (array_key_exists('date', $this->fields)) {
-            $data['date'] = $this->fields['date']?->format('Y-m-d');
+            $data['date'] = $this->fields['date']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('phone', $this->fields)) {
             $data['phone'] = $this->fields['phone'];

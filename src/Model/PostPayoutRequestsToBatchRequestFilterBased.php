@@ -14,10 +14,9 @@ declare(strict_types=1);
 
 namespace Rebilly\Sdk\Model;
 
-use JsonSerializable;
 use Rebilly\Sdk\Trait\HasMetadata;
 
-class PayoutRequestSplit implements JsonSerializable
+class PostPayoutRequestsToBatchRequestFilterBased implements PostPayoutRequestsToBatchRequest
 {
     use HasMetadata;
 
@@ -25,8 +24,8 @@ class PayoutRequestSplit implements JsonSerializable
 
     public function __construct(array $data = [], array $metadata = [])
     {
-        if (array_key_exists('amounts', $data)) {
-            $this->setAmounts($data['amounts']);
+        if (array_key_exists('filter', $data)) {
+            $this->setFilter($data['filter']);
         }
         $this->setMetadata($metadata);
     }
@@ -36,25 +35,14 @@ class PayoutRequestSplit implements JsonSerializable
         return new self($data, $metadata);
     }
 
-    /**
-     * @return float[]
-     */
-    public function getAmounts(): array
+    public function getFilter(): string
     {
-        return $this->fields['amounts'];
+        return $this->fields['filter'];
     }
 
-    /**
-     * @param float[]|string[] $amounts
-     */
-    public function setAmounts(array $amounts): static
+    public function setFilter(string $filter): static
     {
-        $amounts = array_map(
-            fn ($value) => is_string($value) ? (float) $value : $value,
-            $amounts,
-        );
-
-        $this->fields['amounts'] = $amounts;
+        $this->fields['filter'] = $filter;
 
         return $this;
     }
@@ -62,8 +50,8 @@ class PayoutRequestSplit implements JsonSerializable
     public function jsonSerialize(): array
     {
         $data = [];
-        if (array_key_exists('amounts', $this->fields)) {
-            $data['amounts'] = $this->fields['amounts'];
+        if (array_key_exists('filter', $this->fields)) {
+            $data['filter'] = $this->fields['filter'];
         }
 
         return $data;

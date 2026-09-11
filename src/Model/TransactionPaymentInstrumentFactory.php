@@ -110,6 +110,7 @@ class TransactionPaymentInstrumentFactory
             'Onlineueberweisen' => AlternativePaymentInstrument::from($data, $metadata),
             'P24' => AlternativePaymentInstrument::from($data, $metadata),
             'PIX' => AlternativePaymentInstrument::from($data, $metadata),
+            'PIX-Automatico' => AlternativePaymentInstrument::from($data, $metadata),
             'POLi' => AlternativePaymentInstrument::from($data, $metadata),
             'Pagadito' => AlternativePaymentInstrument::from($data, $metadata),
             'PagoEffectivo' => AlternativePaymentInstrument::from($data, $metadata),

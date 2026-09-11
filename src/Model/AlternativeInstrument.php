@@ -236,6 +236,8 @@ class AlternativeInstrument implements PaymentInstrument, PostPaymentInstrumentR
 
     public const METHOD_PIX = 'PIX';
 
+    public const METHOD_PIX_AUTOMATICO = 'PIX-Automatico';
+
     public const METHOD_PLAID_ACCOUNT = 'plaid-account';
 
     public const METHOD_PAY_TABS = 'PayTabs';

@@ -290,6 +290,8 @@ class PaymentInstructionMethods implements PaymentInstruction
 
     public const METHODS_PIX = 'PIX';
 
+    public const METHODS_PIX_AUTOMATICO = 'PIX-Automatico';
+
     public const METHODS_PIN_PAY = 'PinPay';
 
     public const METHODS_PHONE = 'phone';

@@ -35,6 +35,8 @@ class GatewayAccountDowntimeSchedule implements JsonSerializable
 
     public const REASON_MONTHLY_LIMIT_REACHED = 'monthly-limit-reached';
 
+    public const REASON_GATEWAY_UNREACHABLE = 'gateway-unreachable';
+
     private array $fields = [];
 
     public function __construct(array $data = [], array $metadata = [])

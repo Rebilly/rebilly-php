@@ -75,6 +75,8 @@ class WebhookTracking implements JsonSerializable
 
     public const EVENT_TYPE_DATA_EXPORT_COMPLETED = 'data-export-completed';
 
+    public const EVENT_TYPE_DATA_EXPORT_FAILED = 'data-export-failed';
+
     public const EVENT_TYPE_DISPUTE_CREATED = 'dispute-created';
 
     public const EVENT_TYPE_DISPUTE_MODIFIED = 'dispute-modified';
@@ -251,7 +253,13 @@ class WebhookTracking implements JsonSerializable
 
     public const EVENT_TYPE_TRANSACTION_RECONCILED = 'transaction-reconciled';
 
+    public const EVENT_TYPE_TRANSACTION_PARTIALLY_REFUNDED = 'transaction-partially-refunded';
+
+    public const EVENT_TYPE_TRANSACTION_REFUNDED = 'transaction-refunded';
+
     public const EVENT_TYPE_TRANSACTION_TIMEOUT_RESOLVED = 'transaction-timeout-resolved';
+
+    public const EVENT_TYPE_TRANSACTION_VOIDED = 'transaction-voided';
 
     public const EVENT_TYPE_TRIAL_USAGE_LIMIT_REACHED = 'trial-usage-limit-reached';
 

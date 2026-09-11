@@ -66,6 +66,10 @@ interface FlexiblePlan extends ConfigurablePlan
 
     public function getIsTrialOnly(): ?bool;
 
+    public function getRecurringInterval(): ?FlexiblePlanSubscriptionPlanRecurringInterval;
+
+    public function getTrial(): ?PlanTrial;
+
     public function getCreatedTime(): ?DateTimeImmutable;
 
     public function getUpdatedTime(): ?DateTimeImmutable;

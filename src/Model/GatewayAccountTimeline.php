@@ -45,6 +45,8 @@ class GatewayAccountTimeline implements JsonSerializable
 
     public const TYPE_ONBOARDING_FAILED = 'gateway-account-onboarding-failed';
 
+    public const TYPE_CARDING_CIRCUIT_OPENED = 'gateway-account-carding-circuit-opened';
+
     public const TRIGGERED_BY_REBILLY = 'rebilly';
 
     public const TRIGGERED_BY_APP = 'app';

@@ -31,9 +31,6 @@ class AwepaySettings implements JsonSerializable
         if (array_key_exists('useRestApi', $data)) {
             $this->setUseRestApi($data['useRestApi']);
         }
-        if (array_key_exists('paymentCode', $data)) {
-            $this->setPaymentCode($data['paymentCode']);
-        }
         if (array_key_exists('methodType', $data)) {
             $this->setMethodType($data['methodType']);
         }
@@ -69,18 +66,6 @@ class AwepaySettings implements JsonSerializable
         return $this;
     }
 
-    public function getPaymentCode(): ?string
-    {
-        return $this->fields['paymentCode'] ?? null;
-    }
-
-    public function setPaymentCode(null|string $paymentCode): static
-    {
-        $this->fields['paymentCode'] = $paymentCode;
-
-        return $this;
-    }
-
     public function getMethodType(): ?string
     {
         return $this->fields['methodType'] ?? null;
@@ -101,9 +86,6 @@ class AwepaySettings implements JsonSerializable
         }
         if (array_key_exists('useRestApi', $this->fields)) {
             $data['useRestApi'] = $this->fields['useRestApi'];
-        }
-        if (array_key_exists('paymentCode', $this->fields)) {
-            $data['paymentCode'] = $this->fields['paymentCode'];
         }
         if (array_key_exists('methodType', $this->fields)) {
             $data['methodType'] = $this->fields['methodType'];
