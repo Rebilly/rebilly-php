@@ -37,20 +37,11 @@ class PostCashier implements JsonSerializable
         if (array_key_exists('redirectUrl', $data)) {
             $this->setRedirectUrl($data['redirectUrl']);
         }
-        if (array_key_exists('balance', $data)) {
-            $this->setBalance($data['balance']);
-        }
-        if (array_key_exists('bonusBalance', $data)) {
-            $this->setBonusBalance($data['bonusBalance']);
-        }
         if (array_key_exists('depositLimits', $data)) {
             $this->setDepositLimits($data['depositLimits']);
         }
         if (array_key_exists('notificationUrl', $data)) {
             $this->setNotificationUrl($data['notificationUrl']);
-        }
-        if (array_key_exists('pendingPayoutTotal', $data)) {
-            $this->setPendingPayoutTotal($data['pendingPayoutTotal']);
         }
         $this->setMetadata($metadata);
     }
@@ -108,38 +99,6 @@ class PostCashier implements JsonSerializable
         return $this;
     }
 
-    public function getBalance(): ?float
-    {
-        return $this->fields['balance'] ?? null;
-    }
-
-    public function setBalance(null|float|string $balance): static
-    {
-        if (is_string($balance)) {
-            $balance = (float) $balance;
-        }
-
-        $this->fields['balance'] = $balance;
-
-        return $this;
-    }
-
-    public function getBonusBalance(): ?float
-    {
-        return $this->fields['bonusBalance'] ?? null;
-    }
-
-    public function setBonusBalance(null|float|string $bonusBalance): static
-    {
-        if (is_string($bonusBalance)) {
-            $bonusBalance = (float) $bonusBalance;
-        }
-
-        $this->fields['bonusBalance'] = $bonusBalance;
-
-        return $this;
-    }
-
     public function getDepositLimits(): ?PostCashierDepositLimits
     {
         return $this->fields['depositLimits'] ?? null;
@@ -168,22 +127,6 @@ class PostCashier implements JsonSerializable
         return $this;
     }
 
-    public function getPendingPayoutTotal(): ?float
-    {
-        return $this->fields['pendingPayoutTotal'] ?? null;
-    }
-
-    public function setPendingPayoutTotal(null|float|string $pendingPayoutTotal): static
-    {
-        if (is_string($pendingPayoutTotal)) {
-            $pendingPayoutTotal = (float) $pendingPayoutTotal;
-        }
-
-        $this->fields['pendingPayoutTotal'] = $pendingPayoutTotal;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [];
@@ -199,20 +142,11 @@ class PostCashier implements JsonSerializable
         if (array_key_exists('redirectUrl', $this->fields)) {
             $data['redirectUrl'] = $this->fields['redirectUrl'];
         }
-        if (array_key_exists('balance', $this->fields)) {
-            $data['balance'] = $this->fields['balance'];
-        }
-        if (array_key_exists('bonusBalance', $this->fields)) {
-            $data['bonusBalance'] = $this->fields['bonusBalance'];
-        }
         if (array_key_exists('depositLimits', $this->fields)) {
             $data['depositLimits'] = $this->fields['depositLimits']?->jsonSerialize();
         }
         if (array_key_exists('notificationUrl', $this->fields)) {
             $data['notificationUrl'] = $this->fields['notificationUrl'];
-        }
-        if (array_key_exists('pendingPayoutTotal', $this->fields)) {
-            $data['pendingPayoutTotal'] = $this->fields['pendingPayoutTotal'];
         }
 
         return $data;

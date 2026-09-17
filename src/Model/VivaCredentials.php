@@ -37,6 +37,9 @@ class VivaCredentials implements JsonSerializable
         if (array_key_exists('apiKey', $data)) {
             $this->setApiKey($data['apiKey']);
         }
+        if (array_key_exists('ipnKey', $data)) {
+            $this->setIpnKey($data['ipnKey']);
+        }
         $this->setMetadata($metadata);
     }
 
@@ -93,6 +96,18 @@ class VivaCredentials implements JsonSerializable
         return $this;
     }
 
+    public function getIpnKey(): string
+    {
+        return $this->fields['ipnKey'];
+    }
+
+    public function setIpnKey(string $ipnKey): static
+    {
+        $this->fields['ipnKey'] = $ipnKey;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -107,6 +122,9 @@ class VivaCredentials implements JsonSerializable
         }
         if (array_key_exists('apiKey', $this->fields)) {
             $data['apiKey'] = $this->fields['apiKey'];
+        }
+        if (array_key_exists('ipnKey', $this->fields)) {
+            $data['ipnKey'] = $this->fields['ipnKey'];
         }
 
         return $data;

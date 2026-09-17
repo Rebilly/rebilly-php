@@ -23,6 +23,12 @@ class ChangeQuoteOrder implements JsonSerializable
 {
     use HasMetadata;
 
+    public const RENEWAL_POLICY_RESET_TO_RECURRING = 'resetToRecurring';
+
+    public const RENEWAL_POLICY_RETAIN_RECURRING = 'retainRecurring';
+
+    public const RENEWAL_POLICY_RETAIN_TRIAL_THEN_RECURRING = 'retainTrialThenRecurring';
+
     public const RENEWAL_POLICY_RESET = 'reset';
 
     public const RENEWAL_POLICY_RETAIN = 'retain';
@@ -209,15 +215,15 @@ class ChangeQuoteOrder implements JsonSerializable
         return $this;
     }
 
-    public function getShipping(): ?Shipping
+    public function getShipping(): ?ChangeQuoteOrderShipping
     {
         return $this->fields['shipping'] ?? null;
     }
 
-    public function setShipping(null|Shipping|array $shipping): static
+    public function setShipping(null|ChangeQuoteOrderShipping|array $shipping): static
     {
-        if ($shipping !== null && !($shipping instanceof Shipping)) {
-            $shipping = ShippingFactory::from($shipping);
+        if ($shipping !== null && !($shipping instanceof ChangeQuoteOrderShipping)) {
+            $shipping = ChangeQuoteOrderShipping::from($shipping);
         }
 
         $this->fields['shipping'] = $shipping;
