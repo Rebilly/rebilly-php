@@ -45,24 +45,24 @@ class SubscriptionSummaryMetrics implements JsonSerializable
         return new self($data, $metadata);
     }
 
-    public function getCurrency(): ?string
+    public function getCurrency(): string
     {
-        return $this->fields['currency'] ?? null;
+        return $this->fields['currency'];
     }
 
-    public function getInvoicedAmount(): ?float
+    public function getInvoicedAmount(): float
     {
-        return $this->fields['invoicedAmount'] ?? null;
+        return $this->fields['invoicedAmount'];
     }
 
-    public function getCollectedAmount(): ?float
+    public function getCollectedAmount(): float
     {
-        return $this->fields['collectedAmount'] ?? null;
+        return $this->fields['collectedAmount'];
     }
 
-    public function getInvoiceCount(): ?int
+    public function getInvoiceCount(): int
     {
-        return $this->fields['invoiceCount'] ?? null;
+        return $this->fields['invoiceCount'];
     }
 
     public function jsonSerialize(): array
@@ -84,14 +84,14 @@ class SubscriptionSummaryMetrics implements JsonSerializable
         return $data;
     }
 
-    private function setCurrency(null|string $currency): static
+    private function setCurrency(string $currency): static
     {
         $this->fields['currency'] = $currency;
 
         return $this;
     }
 
-    private function setInvoicedAmount(null|float|string $invoicedAmount): static
+    private function setInvoicedAmount(float|string $invoicedAmount): static
     {
         if (is_string($invoicedAmount)) {
             $invoicedAmount = (float) $invoicedAmount;
@@ -102,7 +102,7 @@ class SubscriptionSummaryMetrics implements JsonSerializable
         return $this;
     }
 
-    private function setCollectedAmount(null|float|string $collectedAmount): static
+    private function setCollectedAmount(float|string $collectedAmount): static
     {
         if (is_string($collectedAmount)) {
             $collectedAmount = (float) $collectedAmount;
@@ -113,7 +113,7 @@ class SubscriptionSummaryMetrics implements JsonSerializable
         return $this;
     }
 
-    private function setInvoiceCount(null|int $invoiceCount): static
+    private function setInvoiceCount(int $invoiceCount): static
     {
         $this->fields['invoiceCount'] = $invoiceCount;
 

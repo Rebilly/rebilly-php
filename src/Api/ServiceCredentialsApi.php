@@ -20,6 +20,7 @@ use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\GoogleSpreadsheet;
 use Rebilly\Sdk\Model\PatchServiceCredentialRequest;
+use Rebilly\Sdk\Model\PostServiceCredentialRequest;
 use Rebilly\Sdk\Model\ServiceCredential;
 use Rebilly\Sdk\Model\ServiceCredentialFactory;
 use Rebilly\Sdk\Paginator;
@@ -32,7 +33,7 @@ class ServiceCredentialsApi
 
     public function create(
         string $type,
-        ServiceCredential $serviceCredential,
+        PostServiceCredentialRequest $postServiceCredentialRequest,
     ): ServiceCredential {
         $pathParams = [
             '{type}' => $type,
@@ -42,7 +43,7 @@ class ServiceCredentialsApi
 
         $request = new Request('POST', $uri, headers: [
             'Accept' => 'application/json',
-        ], body: Utils::jsonEncode($serviceCredential));
+        ], body: Utils::jsonEncode($postServiceCredentialRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

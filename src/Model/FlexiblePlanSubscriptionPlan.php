@@ -22,10 +22,15 @@ class FlexiblePlanSubscriptionPlan implements FlexiblePlan
 {
     use HasMetadata;
 
+    public const TYPE_SUBSCRIPTION = 'subscription';
+
     private array $fields = [];
 
     public function __construct(array $data = [], array $metadata = [])
     {
+        if (array_key_exists('type', $data)) {
+            $this->setType($data['type']);
+        }
         if (array_key_exists('name', $data)) {
             $this->setName($data['name']);
         }
@@ -95,6 +100,18 @@ class FlexiblePlanSubscriptionPlan implements FlexiblePlan
     public static function from(array $data = [], array $metadata = []): self
     {
         return new self($data, $metadata);
+    }
+
+    public function getType(): ?string
+    {
+        return $this->fields['type'] ?? null;
+    }
+
+    public function setType(null|string $type): static
+    {
+        $this->fields['type'] = $type;
+
+        return $this;
     }
 
     public function getName(): ?string
@@ -246,14 +263,14 @@ class FlexiblePlanSubscriptionPlan implements FlexiblePlan
         return $this->fields['isTrialOnly'] ?? null;
     }
 
-    public function getRecurringInterval(): ?FlexiblePlanSubscriptionPlanRecurringInterval
+    public function getRecurringInterval(): FlexiblePlanSubscriptionPlanRecurringInterval
     {
-        return $this->fields['recurringInterval'] ?? null;
+        return $this->fields['recurringInterval'];
     }
 
-    public function setRecurringInterval(null|FlexiblePlanSubscriptionPlanRecurringInterval|array $recurringInterval): static
+    public function setRecurringInterval(FlexiblePlanSubscriptionPlanRecurringInterval|array $recurringInterval): static
     {
-        if ($recurringInterval !== null && !($recurringInterval instanceof FlexiblePlanSubscriptionPlanRecurringInterval)) {
+        if (!($recurringInterval instanceof FlexiblePlanSubscriptionPlanRecurringInterval)) {
             $recurringInterval = FlexiblePlanSubscriptionPlanRecurringInterval::from($recurringInterval);
         }
 
@@ -332,6 +349,9 @@ class FlexiblePlanSubscriptionPlan implements FlexiblePlan
     public function jsonSerialize(): array
     {
         $data = [];
+        if (array_key_exists('type', $this->fields)) {
+            $data['type'] = $this->fields['type'];
+        }
         if (array_key_exists('name', $this->fields)) {
             $data['name'] = $this->fields['name'];
         }
@@ -374,7 +394,7 @@ class FlexiblePlanSubscriptionPlan implements FlexiblePlan
             $data['isTrialOnly'] = $this->fields['isTrialOnly'];
         }
         if (array_key_exists('recurringInterval', $this->fields)) {
-            $data['recurringInterval'] = $this->fields['recurringInterval']?->jsonSerialize();
+            $data['recurringInterval'] = $this->fields['recurringInterval']->jsonSerialize();
         }
         if (array_key_exists('trial', $this->fields)) {
             $data['trial'] = $this->fields['trial']?->jsonSerialize();

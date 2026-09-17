@@ -158,6 +158,10 @@ class Service
 
     private Api\PayoutRequestsApi $payoutRequests;
 
+    private Api\PayoutRequestSplitsApi $payoutRequestSplits;
+
+    private Api\PayoutRequestAutoAllocationsApi $payoutRequestAutoAllocations;
+
     private Api\PayoutRequestAllocationsApi $payoutRequestAllocations;
 
     private Api\PayoutRequestBatchesApi $payoutRequestBatches;
@@ -266,6 +270,8 @@ class Service
         $this->paymentCardsBankNames = new Api\PaymentCardsBankNamesApi($this->client);
         $this->paymentMethods = new Api\PaymentMethodsApi($this->client);
         $this->payoutRequests = new Api\PayoutRequestsApi($this->client);
+        $this->payoutRequestSplits = new Api\PayoutRequestSplitsApi($this->client);
+        $this->payoutRequestAutoAllocations = new Api\PayoutRequestAutoAllocationsApi($this->client);
         $this->payoutRequestAllocations = new Api\PayoutRequestAllocationsApi($this->client);
         $this->payoutRequestBatches = new Api\PayoutRequestBatchesApi($this->client);
         $this->profile = new Api\ProfileApi($this->client);
@@ -634,6 +640,16 @@ class Service
     public function payoutRequests(): Api\PayoutRequestsApi
     {
         return $this->payoutRequests;
+    }
+
+    public function payoutRequestSplits(): Api\PayoutRequestSplitsApi
+    {
+        return $this->payoutRequestSplits;
+    }
+
+    public function payoutRequestAutoAllocations(): Api\PayoutRequestAutoAllocationsApi
+    {
+        return $this->payoutRequestAutoAllocations;
     }
 
     public function payoutRequestAllocations(): Api\PayoutRequestAllocationsApi
