@@ -32,6 +32,9 @@ class QuoteSubscriptionItem implements QuoteItem
         if (array_key_exists('quantity', $data)) {
             $this->setQuantity($data['quantity']);
         }
+        if (array_key_exists('quantityFilled', $data)) {
+            $this->setQuantityFilled($data['quantityFilled']);
+        }
         if (array_key_exists('plan', $data)) {
             $this->setPlan($data['plan']);
         }
@@ -76,6 +79,22 @@ class QuoteSubscriptionItem implements QuoteItem
     public function setQuantity(null|int $quantity): static
     {
         $this->fields['quantity'] = $quantity;
+
+        return $this;
+    }
+
+    public function getQuantityFilled(): ?float
+    {
+        return $this->fields['quantityFilled'] ?? null;
+    }
+
+    public function setQuantityFilled(null|float|string $quantityFilled): static
+    {
+        if (is_string($quantityFilled)) {
+            $quantityFilled = (float) $quantityFilled;
+        }
+
+        $this->fields['quantityFilled'] = $quantityFilled;
 
         return $this;
     }
@@ -156,6 +175,9 @@ class QuoteSubscriptionItem implements QuoteItem
         }
         if (array_key_exists('quantity', $this->fields)) {
             $data['quantity'] = $this->fields['quantity'];
+        }
+        if (array_key_exists('quantityFilled', $this->fields)) {
+            $data['quantityFilled'] = $this->fields['quantityFilled'];
         }
         if (array_key_exists('plan', $this->fields)) {
             $data['plan'] = $this->fields['plan']->jsonSerialize();

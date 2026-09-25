@@ -21,6 +21,12 @@ class DashboardTab implements JsonSerializable
 {
     use HasMetadata;
 
+    public const PRESET_PAYMENTS = 'Payments';
+
+    public const PRESET_BILLING = 'Billing';
+
+    public const PRESET_KYC = 'KYC';
+
     private array $fields = [];
 
     public function __construct(array $data = [], array $metadata = [])
@@ -30,6 +36,9 @@ class DashboardTab implements JsonSerializable
         }
         if (array_key_exists('tiles', $data)) {
             $this->setTiles($data['tiles']);
+        }
+        if (array_key_exists('preset', $data)) {
+            $this->setPreset($data['preset']);
         }
         $this->setMetadata($metadata);
     }
@@ -74,6 +83,18 @@ class DashboardTab implements JsonSerializable
         return $this;
     }
 
+    public function getPreset(): ?string
+    {
+        return $this->fields['preset'] ?? null;
+    }
+
+    public function setPreset(null|string $preset): static
+    {
+        $this->fields['preset'] = $preset;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -85,6 +106,9 @@ class DashboardTab implements JsonSerializable
                 static fn (DashboardTile $dashboardTile) => $dashboardTile->jsonSerialize(),
                 $this->fields['tiles'],
             );
+        }
+        if (array_key_exists('preset', $this->fields)) {
+            $data['preset'] = $this->fields['preset'];
         }
 
         return $data;

@@ -154,6 +154,8 @@ class AdjustReadyToPayoutGeneric implements AdjustReadyToPayoutPaymentMethod
 
     public const PAYMENT_METHOD_KAKAO_PAY = 'KakaoPay';
 
+    public const PAYMENT_METHOD_KHELOCARD = 'Khelocard';
+
     public const PAYMENT_METHOD_KNOT = 'KNOT';
 
     public const PAYMENT_METHOD_LOONIE = 'loonie';
@@ -229,6 +231,8 @@ class AdjustReadyToPayoutGeneric implements AdjustReadyToPayoutPaymentMethod
     public const PAYMENT_METHOD_PIASTRIX = 'Piastrix';
 
     public const PAYMENT_METHOD_PIX = 'PIX';
+
+    public const PAYMENT_METHOD_PIX_AUTOMATICO = 'PIX-Automatico';
 
     public const PAYMENT_METHOD_PAY_TABS = 'PayTabs';
 

@@ -206,6 +206,8 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const GATEWAY_NAME_ILIXIUM = 'Ilixium';
 
+    public const GATEWAY_NAME_I_MERCHANT = 'IMerchant';
+
     public const GATEWAY_NAME_INGENICO = 'Ingenico';
 
     public const GATEWAY_NAME_INOVAPAY = 'INOVAPAY';
@@ -329,6 +331,8 @@ abstract class GatewayAccount implements JsonSerializable
     public const GATEWAY_NAME_PAYEEZY = 'Payeezy';
 
     public const GATEWAY_NAME_PAYFLOW = 'Payflow';
+
+    public const GATEWAY_NAME_PAY_GLOCAL = 'PayGlocal';
 
     public const GATEWAY_NAME_PAYNOTE = 'Paynote';
 
@@ -768,6 +772,8 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const ACQUIRER_NAME_PAY_ECARDS = 'PayEcards';
 
+    public const ACQUIRER_NAME_PAY_GLOCAL = 'PayGlocal';
+
     public const ACQUIRER_NAME_PAYMENT_ASIA = 'PaymentAsia';
 
     public const ACQUIRER_NAME_PAYMEN_TECHNOLOGIES = 'PaymenTechnologies';
@@ -1174,6 +1180,8 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const METHOD_PIX = 'PIX';
 
+    public const METHOD_PIX_AUTOMATICO = 'PIX-Automatico';
+
     public const METHOD_PIN_PAY = 'PinPay';
 
     public const METHOD_PHONE = 'phone';
@@ -1433,6 +1441,9 @@ abstract class GatewayAccount implements JsonSerializable
         if (array_key_exists('readyToPayoutInstruction', $data)) {
             $this->setReadyToPayoutInstruction($data['readyToPayoutInstruction']);
         }
+        if (array_key_exists('payoutLimits', $data)) {
+            $this->setPayoutLimits($data['payoutLimits']);
+        }
         if (array_key_exists('transactionEmailAliasTemplate', $data)) {
             $this->setTransactionEmailAliasTemplate($data['transactionEmailAliasTemplate']);
         }
@@ -1637,6 +1648,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return IDebit::from($data, $metadata);
             case 'Ilixium':
                 return Ilixium::from($data, $metadata);
+            case 'IMerchant':
+                return IMerchant::from($data, $metadata);
             case 'Ingenico':
                 return Ingenico::from($data, $metadata);
             case 'INOVAPAY':
@@ -1761,6 +1774,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return Payeezy::from($data, $metadata);
             case 'Payflow':
                 return Payflow::from($data, $metadata);
+            case 'PayGlocal':
+                return PayGlocal::from($data, $metadata);
             case 'PaymentAsia':
                 return PaymentAsia::from($data, $metadata);
             case 'PaymenTechnologies':
@@ -2257,6 +2272,22 @@ abstract class GatewayAccount implements JsonSerializable
         return $this;
     }
 
+    public function getPayoutLimits(): ?GatewayAccountPayoutLimits
+    {
+        return $this->fields['payoutLimits'] ?? null;
+    }
+
+    public function setPayoutLimits(null|GatewayAccountPayoutLimits|array $payoutLimits): static
+    {
+        if ($payoutLimits !== null && !($payoutLimits instanceof GatewayAccountPayoutLimits)) {
+            $payoutLimits = GatewayAccountPayoutLimits::from($payoutLimits);
+        }
+
+        $this->fields['payoutLimits'] = $payoutLimits;
+
+        return $this;
+    }
+
     public function getTransactionEmailAliasTemplate(): ?string
     {
         return $this->fields['transactionEmailAliasTemplate'] ?? null;
@@ -2393,6 +2424,9 @@ abstract class GatewayAccount implements JsonSerializable
         }
         if (array_key_exists('readyToPayoutInstruction', $this->fields)) {
             $data['readyToPayoutInstruction'] = $this->fields['readyToPayoutInstruction'];
+        }
+        if (array_key_exists('payoutLimits', $this->fields)) {
+            $data['payoutLimits'] = $this->fields['payoutLimits']?->jsonSerialize();
         }
         if (array_key_exists('transactionEmailAliasTemplate', $this->fields)) {
             $data['transactionEmailAliasTemplate'] = $this->fields['transactionEmailAliasTemplate'];

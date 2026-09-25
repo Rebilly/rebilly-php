@@ -161,6 +161,12 @@ class TagUntagRule implements JsonSerializable
 
     public const EVENT_TYPE_TRANSACTION_PROCESSED = 'transaction-processed';
 
+    public const EVENT_TYPE_TRANSACTION_PARTIALLY_REFUNDED = 'transaction-partially-refunded';
+
+    public const EVENT_TYPE_TRANSACTION_REFUNDED = 'transaction-refunded';
+
+    public const EVENT_TYPE_TRANSACTION_VOIDED = 'transaction-voided';
+
     public const EVENT_TYPE_TRIAL_USAGE_LIMIT_REACHED = 'trial-usage-limit-reached';
 
     public const STATUS_ACTIVE = 'active';

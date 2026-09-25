@@ -165,6 +165,10 @@ class CustomerTimeline implements JsonSerializable
 
     public const TYPE_REFUND_WAS_REFLECTED_IN_INVOICES = 'refund-was-reflected-in-invoices';
 
+    public const TYPE_SUBSCRIPTION_PAUSE_CREATED = 'subscription-pause-created';
+
+    public const TYPE_SUBSCRIPTION_PAUSE_REVOKED = 'subscription-pause-revoked';
+
     public const TYPE_SUBSCRIPTION_PAUSED = 'subscription-paused';
 
     public const TYPE_SUBSCRIPTION_RESUMED = 'subscription-resumed';
@@ -187,11 +191,17 @@ class CustomerTimeline implements JsonSerializable
 
     public const TYPE_TRANSACTION_RECONCILED = 'transaction-reconciled';
 
+    public const TYPE_TRANSACTION_PARTIALLY_REFUNDED = 'transaction-partially-refunded';
+
     public const TYPE_TRANSACTION_REFUNDED = 'transaction-refunded';
 
     public const TYPE_TRANSACTION_VOIDED = 'transaction-voided';
 
     public const TYPE_TRANSACTION_WAITING_GATEWAY = 'transaction-waiting-gateway';
+
+    public const TYPE_WALLET_ADMIN_CREDITED = 'wallet-admin-credited';
+
+    public const TYPE_WALLET_ADMIN_DEBITED = 'wallet-admin-debited';
 
     public const TRIGGERED_BY_REBILLY = 'rebilly';
 

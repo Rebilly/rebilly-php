@@ -26,12 +26,33 @@ class PatchServiceCredential implements PatchServiceCredentialRequest
 
     public const STATUS_DEACTIVATED = 'deactivated';
 
+    public const TYPE_SMTP = 'smtp';
+
+    public const TYPE_WEBHOOK = 'webhook';
+
+    public const TYPE_MAILGUN = 'mailgun';
+
+    public const TYPE_SENDGRID = 'sendgrid';
+
+    public const TYPE_AWS_SES = 'aws-ses';
+
+    public const TYPE_OAUTH2 = 'oauth2';
+
+    public const TYPE_POSTMARK = 'postmark';
+
+    public const TYPE_EXPERIAN = 'experian';
+
+    public const TYPE_AVALARA = 'avalara';
+
     private array $fields = [];
 
     public function __construct(array $data = [], array $metadata = [])
     {
         if (array_key_exists('status', $data)) {
             $this->setStatus($data['status']);
+        }
+        if (array_key_exists('type', $data)) {
+            $this->setType($data['type']);
         }
         $this->setMetadata($metadata);
     }
@@ -53,11 +74,26 @@ class PatchServiceCredential implements PatchServiceCredentialRequest
         return $this;
     }
 
+    public function getType(): string
+    {
+        return $this->fields['type'];
+    }
+
+    public function setType(string $type): static
+    {
+        $this->fields['type'] = $type;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
         if (array_key_exists('status', $this->fields)) {
             $data['status'] = $this->fields['status'];
+        }
+        if (array_key_exists('type', $this->fields)) {
+            $data['type'] = $this->fields['type'];
         }
 
         return $data;
