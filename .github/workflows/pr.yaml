@@ -96,7 +96,28 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Detect lockfile-only change
+        id: diff
+        run: |
+          files=$(git diff --name-only HEAD^1 HEAD)
+          echo "Changed files:"
+          printf '%s\n' "$files"
+          lockfile_only=true
+          if [ -z "$files" ]; then
+            lockfile_only=false
+          else
+            while IFS= read -r file; do
+              [ -z "$file" ] && continue
+              if [ "$file" != "package-lock.json" ]; then
+                lockfile_only=false
+                break
+              fi
+            done <<< "$files"
+          fi
+          echo "lockfile_only=$lockfile_only" >> "$GITHUB_OUTPUT"
+
       - name: Setup Node.js
+        if: ${{ ! startsWith(github.head_ref, 'changeset-release/') && steps.diff.outputs.lockfile_only != 'true' }}
         uses: actions/setup-node@v6
         with:
           node-version: 20
@@ -106,11 +127,11 @@ jobs:
           cache-dependency-path: "package-lock.json"
 
       - name: Install Dependencies
-        if: ${{ ! startsWith(github.head_ref, 'changeset-release/') }}
+        if: ${{ ! startsWith(github.head_ref, 'changeset-release/') && steps.diff.outputs.lockfile_only != 'true' }}
         run: npm ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Check Changesets
-        if: ${{ ! startsWith(github.head_ref, 'changeset-release/') }}
+        if: ${{ ! startsWith(github.head_ref, 'changeset-release/') && steps.diff.outputs.lockfile_only != 'true' }}
         run: npx changeset status --since origin/main
