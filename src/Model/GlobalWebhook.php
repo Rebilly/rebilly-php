@@ -67,6 +67,14 @@ class GlobalWebhook implements JsonSerializable
 
     public const EVENTS_FILTER_INVOICE_PAST_DUE = 'invoice-past-due';
 
+    public const EVENTS_FILTER_INVOICE_PAST_DUE_REMINDER15_DAYS = 'invoice-past-due-reminder-15-days';
+
+    public const EVENTS_FILTER_INVOICE_PAST_DUE_REMINDER30_DAYS = 'invoice-past-due-reminder-30-days';
+
+    public const EVENTS_FILTER_INVOICE_PAST_DUE_REMINDER60_DAYS = 'invoice-past-due-reminder-60-days';
+
+    public const EVENTS_FILTER_INVOICE_PAST_DUE_REMINDER90_DAYS = 'invoice-past-due-reminder-90-days';
+
     public const EVENTS_FILTER_INVOICE_REFUNDED = 'invoice-refunded';
 
     public const EVENTS_FILTER_INVOICE_REISSUED = 'invoice-reissued';
@@ -101,9 +109,23 @@ class GlobalWebhook implements JsonSerializable
 
     public const EVENTS_FILTER_ORDER_DELINQUENCY_REACHED = 'order-delinquency-reached';
 
+    public const EVENTS_FILTER_PAYMENT_CARD_EXPIRATION_REMINDER1_DAY = 'payment-card-expiration-reminder-1-day';
+
+    public const EVENTS_FILTER_PAYMENT_CARD_EXPIRATION_REMINDER14_DAYS = 'payment-card-expiration-reminder-14-days';
+
+    public const EVENTS_FILTER_PAYMENT_CARD_EXPIRATION_REMINDER7_DAYS = 'payment-card-expiration-reminder-7-days';
+
     public const EVENTS_FILTER_PAYMENT_CARD_EXPIRED = 'payment-card-expired';
 
+    public const EVENTS_FILTER_PAYOUT_REQUEST_BATCH_CREATED = 'payout-request-batch-created';
+
+    public const EVENTS_FILTER_PAYOUT_REQUEST_BATCH_DELETED = 'payout-request-batch-deleted';
+
+    public const EVENTS_FILTER_PAYOUT_REQUEST_BATCH_MODIFIED = 'payout-request-batch-modified';
+
     public const EVENTS_FILTER_PAYOUT_REQUEST_CANCELED = 'payout-request-canceled';
+
+    public const EVENTS_FILTER_PAYOUT_REQUEST_CHANGED = 'payout-request-changed';
 
     public const EVENTS_FILTER_PAYOUT_REQUEST_CREATED = 'payout-request-created';
 
@@ -147,6 +169,12 @@ class GlobalWebhook implements JsonSerializable
 
     public const EVENTS_FILTER_SUBSCRIPTION_REACTIVATED = 'subscription-reactivated';
 
+    public const EVENTS_FILTER_SUBSCRIPTION_RENEWAL_REMINDER1_DAY = 'subscription-renewal-reminder-1-day';
+
+    public const EVENTS_FILTER_SUBSCRIPTION_RENEWAL_REMINDER30_DAYS = 'subscription-renewal-reminder-30-days';
+
+    public const EVENTS_FILTER_SUBSCRIPTION_RENEWAL_REMINDER7_DAYS = 'subscription-renewal-reminder-7-days';
+
     public const EVENTS_FILTER_SUBSCRIPTION_RENEWED = 'subscription-renewed';
 
     public const EVENTS_FILTER_SUBSCRIPTION_RESUMED = 'subscription-resumed';
@@ -160,6 +188,12 @@ class GlobalWebhook implements JsonSerializable
     public const EVENTS_FILTER_TRANSACTION_DISCREPANCY_FOUND = 'transaction-discrepancy-found';
 
     public const EVENTS_FILTER_TRANSACTION_PROCESSED = 'transaction-processed';
+
+    public const EVENTS_FILTER_TRANSACTION_PARTIALLY_REFUNDED = 'transaction-partially-refunded';
+
+    public const EVENTS_FILTER_TRANSACTION_REFUNDED = 'transaction-refunded';
+
+    public const EVENTS_FILTER_TRANSACTION_VOIDED = 'transaction-voided';
 
     public const EVENTS_FILTER_TRIAL_USAGE_LIMIT_REACHED = 'trial-usage-limit-reached';
 

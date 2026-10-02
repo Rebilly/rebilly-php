@@ -54,6 +54,9 @@ class DepositRequest implements JsonSerializable
         if (array_key_exists('status', $data)) {
             $this->setStatus($data['status']);
         }
+        if (array_key_exists('coinPricing', $data)) {
+            $this->setCoinPricing($data['coinPricing']);
+        }
         if (array_key_exists('currency', $data)) {
             $this->setCurrency($data['currency']);
         }
@@ -157,6 +160,11 @@ class DepositRequest implements JsonSerializable
     public function getStatus(): ?string
     {
         return $this->fields['status'] ?? null;
+    }
+
+    public function getCoinPricing(): ?CoinPricing
+    {
+        return $this->fields['coinPricing'] ?? null;
     }
 
     public function getCurrency(): string
@@ -348,6 +356,9 @@ class DepositRequest implements JsonSerializable
         if (array_key_exists('status', $this->fields)) {
             $data['status'] = $this->fields['status'];
         }
+        if (array_key_exists('coinPricing', $this->fields)) {
+            $data['coinPricing'] = $this->fields['coinPricing']?->jsonSerialize();
+        }
         if (array_key_exists('currency', $this->fields)) {
             $data['currency'] = $this->fields['currency'];
         }
@@ -414,6 +425,17 @@ class DepositRequest implements JsonSerializable
     private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
+
+        return $this;
+    }
+
+    private function setCoinPricing(null|CoinPricing|array $coinPricing): static
+    {
+        if ($coinPricing !== null && !($coinPricing instanceof CoinPricing)) {
+            $coinPricing = CoinPricingFactory::from($coinPricing);
+        }
+
+        $this->fields['coinPricing'] = $coinPricing;
 
         return $this;
     }

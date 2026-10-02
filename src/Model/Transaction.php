@@ -261,6 +261,8 @@ class Transaction implements JsonSerializable
 
     public const GATEWAY_NAME_ILIXIUM = 'Ilixium';
 
+    public const GATEWAY_NAME_I_MERCHANT = 'IMerchant';
+
     public const GATEWAY_NAME_INGENICO = 'Ingenico';
 
     public const GATEWAY_NAME_INOVAPAY = 'INOVAPAY';
@@ -384,6 +386,8 @@ class Transaction implements JsonSerializable
     public const GATEWAY_NAME_PAYEEZY = 'Payeezy';
 
     public const GATEWAY_NAME_PAYFLOW = 'Payflow';
+
+    public const GATEWAY_NAME_PAY_GLOCAL = 'PayGlocal';
 
     public const GATEWAY_NAME_PAYNOTE = 'Paynote';
 
@@ -823,6 +827,8 @@ class Transaction implements JsonSerializable
 
     public const ACQUIRER_NAME_PAY_ECARDS = 'PayEcards';
 
+    public const ACQUIRER_NAME_PAY_GLOCAL = 'PayGlocal';
+
     public const ACQUIRER_NAME_PAYMENT_ASIA = 'PaymentAsia';
 
     public const ACQUIRER_NAME_PAYMEN_TECHNOLOGIES = 'PaymenTechnologies';
@@ -958,6 +964,16 @@ class Transaction implements JsonSerializable
     public const ACQUIRER_NAME_ZIMPLER = 'Zimpler';
 
     public const ACQUIRER_NAME_ZOTAPAY = 'Zotapay';
+
+    public const METHOD_PAYMENT_CARD = 'payment-card';
+
+    public const METHOD_ACH = 'ach';
+
+    public const METHOD_CASH = 'cash';
+
+    public const METHOD_CHECK = 'check';
+
+    public const METHOD_PAYPAL = 'paypal';
 
     public const METHOD_ADV_CASH = 'AdvCash';
 
@@ -1228,6 +1244,8 @@ class Transaction implements JsonSerializable
     public const METHOD_PIASTRIX = 'Piastrix';
 
     public const METHOD_PIX = 'PIX';
+
+    public const METHOD_PIX_AUTOMATICO = 'PIX-Automatico';
 
     public const METHOD_PIN_PAY = 'PinPay';
 

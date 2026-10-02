@@ -75,6 +75,8 @@ class WebhookTracking implements JsonSerializable
 
     public const EVENT_TYPE_DATA_EXPORT_COMPLETED = 'data-export-completed';
 
+    public const EVENT_TYPE_DATA_EXPORT_FAILED = 'data-export-failed';
+
     public const EVENT_TYPE_DISPUTE_CREATED = 'dispute-created';
 
     public const EVENT_TYPE_DISPUTE_MODIFIED = 'dispute-modified';
@@ -112,6 +114,14 @@ class WebhookTracking implements JsonSerializable
     public const EVENT_TYPE_INVOICE_PAST_DUE = 'invoice-past-due';
 
     public const EVENT_TYPE_INVOICE_PAST_DUE_REMINDER = 'invoice-past-due-reminder';
+
+    public const EVENT_TYPE_INVOICE_PAST_DUE_REMINDER15_DAYS = 'invoice-past-due-reminder-15-days';
+
+    public const EVENT_TYPE_INVOICE_PAST_DUE_REMINDER30_DAYS = 'invoice-past-due-reminder-30-days';
+
+    public const EVENT_TYPE_INVOICE_PAST_DUE_REMINDER60_DAYS = 'invoice-past-due-reminder-60-days';
+
+    public const EVENT_TYPE_INVOICE_PAST_DUE_REMINDER90_DAYS = 'invoice-past-due-reminder-90-days';
 
     public const EVENT_TYPE_INVOICE_REFUNDED = 'invoice-refunded';
 
@@ -153,17 +163,37 @@ class WebhookTracking implements JsonSerializable
 
     public const EVENT_TYPE_ORDER_DELINQUENCY_REACHED = 'order-delinquency-reached';
 
+    public const EVENT_TYPE_ORDER_CHANGE_APPLIED = 'order-change-applied';
+
+    public const EVENT_TYPE_ORDER_CHANGE_CANCELED = 'order-change-canceled';
+
+    public const EVENT_TYPE_ORDER_CHANGE_CREATED = 'order-change-created';
+
     public const EVENT_TYPE_ORGANIZATION_TAX_NUMBER_VALIDATED = 'organization-tax-number-validated';
 
     public const EVENT_TYPE_PAYMENT_CARD_CREATED = 'payment-card-created';
 
     public const EVENT_TYPE_PAYMENT_CARD_EXPIRATION_REMINDER = 'payment-card-expiration-reminder';
 
+    public const EVENT_TYPE_PAYMENT_CARD_EXPIRATION_REMINDER1_DAY = 'payment-card-expiration-reminder-1-day';
+
+    public const EVENT_TYPE_PAYMENT_CARD_EXPIRATION_REMINDER14_DAYS = 'payment-card-expiration-reminder-14-days';
+
+    public const EVENT_TYPE_PAYMENT_CARD_EXPIRATION_REMINDER7_DAYS = 'payment-card-expiration-reminder-7-days';
+
     public const EVENT_TYPE_PAYMENT_CARD_EXPIRED = 'payment-card-expired';
 
     public const EVENT_TYPE_PAYMENT_INSTRUMENT_MODIFIED = 'payment-instrument-modified';
 
+    public const EVENT_TYPE_PAYOUT_REQUEST_BATCH_CREATED = 'payout-request-batch-created';
+
+    public const EVENT_TYPE_PAYOUT_REQUEST_BATCH_DELETED = 'payout-request-batch-deleted';
+
+    public const EVENT_TYPE_PAYOUT_REQUEST_BATCH_MODIFIED = 'payout-request-batch-modified';
+
     public const EVENT_TYPE_PAYOUT_REQUEST_CANCELED = 'payout-request-canceled';
+
+    public const EVENT_TYPE_PAYOUT_REQUEST_CHANGED = 'payout-request-changed';
 
     public const EVENT_TYPE_PAYOUT_REQUEST_CREATED = 'payout-request-created';
 
@@ -227,6 +257,12 @@ class WebhookTracking implements JsonSerializable
 
     public const EVENT_TYPE_SUBSCRIPTION_RENEWAL_REMINDER = 'subscription-renewal-reminder';
 
+    public const EVENT_TYPE_SUBSCRIPTION_RENEWAL_REMINDER1_DAY = 'subscription-renewal-reminder-1-day';
+
+    public const EVENT_TYPE_SUBSCRIPTION_RENEWAL_REMINDER30_DAYS = 'subscription-renewal-reminder-30-days';
+
+    public const EVENT_TYPE_SUBSCRIPTION_RENEWAL_REMINDER7_DAYS = 'subscription-renewal-reminder-7-days';
+
     public const EVENT_TYPE_SUBSCRIPTION_RENEWED = 'subscription-renewed';
 
     public const EVENT_TYPE_SUBSCRIPTION_RESUMED = 'subscription-resumed';
@@ -251,7 +287,13 @@ class WebhookTracking implements JsonSerializable
 
     public const EVENT_TYPE_TRANSACTION_RECONCILED = 'transaction-reconciled';
 
+    public const EVENT_TYPE_TRANSACTION_PARTIALLY_REFUNDED = 'transaction-partially-refunded';
+
+    public const EVENT_TYPE_TRANSACTION_REFUNDED = 'transaction-refunded';
+
     public const EVENT_TYPE_TRANSACTION_TIMEOUT_RESOLVED = 'transaction-timeout-resolved';
+
+    public const EVENT_TYPE_TRANSACTION_VOIDED = 'transaction-voided';
 
     public const EVENT_TYPE_TRIAL_USAGE_LIMIT_REACHED = 'trial-usage-limit-reached';
 

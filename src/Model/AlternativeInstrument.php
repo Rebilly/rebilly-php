@@ -158,6 +158,8 @@ class AlternativeInstrument implements PaymentInstrument, PostPaymentInstrumentR
 
     public const METHOD_KAKAO_PAY = 'KakaoPay';
 
+    public const METHOD_KHELOCARD = 'Khelocard';
+
     public const METHOD_KLARNA = 'Klarna';
 
     public const METHOD_KNOT = 'KNOT';
@@ -235,6 +237,8 @@ class AlternativeInstrument implements PaymentInstrument, PostPaymentInstrumentR
     public const METHOD_PIASTRIX = 'Piastrix';
 
     public const METHOD_PIX = 'PIX';
+
+    public const METHOD_PIX_AUTOMATICO = 'PIX-Automatico';
 
     public const METHOD_PLAID_ACCOUNT = 'plaid-account';
 

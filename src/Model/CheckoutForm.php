@@ -293,6 +293,8 @@ class CheckoutForm implements JsonSerializable
 
     public const PAYMENT_METHODS_PIX = 'PIX';
 
+    public const PAYMENT_METHODS_PIX_AUTOMATICO = 'PIX-Automatico';
+
     public const PAYMENT_METHODS_PIN_PAY = 'PinPay';
 
     public const PAYMENT_METHODS_PHONE = 'phone';
