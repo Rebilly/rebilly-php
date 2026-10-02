@@ -40,6 +40,14 @@ class InvoiceItemsDataExport implements DataExport
 
     public const STATUS_COMPLETED = 'completed';
 
+    public const STATUS_FAILED = 'failed';
+
+    public const FAILURE_REASON_RECORD_LIMIT_EXCEEDED = 'record-limit-exceeded';
+
+    public const FAILURE_REASON_MAX_RETRIES_REACHED = 'max-retries-reached';
+
+    public const FAILURE_REASON_NULL = 'null';
+
     private array $fields = [];
 
     public function __construct(array $data = [], array $metadata = [])
@@ -85,6 +93,9 @@ class InvoiceItemsDataExport implements DataExport
         }
         if (array_key_exists('status', $data)) {
             $this->setStatus($data['status']);
+        }
+        if (array_key_exists('failureReason', $data)) {
+            $this->setFailureReason($data['failureReason']);
         }
         if (array_key_exists('dateRange', $data)) {
             $this->setDateRange($data['dateRange']);
@@ -240,6 +251,11 @@ class InvoiceItemsDataExport implements DataExport
         return $this->fields['status'] ?? null;
     }
 
+    public function getFailureReason(): ?string
+    {
+        return $this->fields['failureReason'] ?? null;
+    }
+
     public function getDateRange(): ?InvoiceItemsDataExportDateRange
     {
         return $this->fields['dateRange'] ?? null;
@@ -327,6 +343,9 @@ class InvoiceItemsDataExport implements DataExport
         if (array_key_exists('status', $this->fields)) {
             $data['status'] = $this->fields['status'];
         }
+        if (array_key_exists('failureReason', $this->fields)) {
+            $data['failureReason'] = $this->fields['failureReason'];
+        }
         if (array_key_exists('dateRange', $this->fields)) {
             $data['dateRange'] = $this->fields['dateRange']?->jsonSerialize();
         }
@@ -409,6 +428,13 @@ class InvoiceItemsDataExport implements DataExport
     private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
+
+        return $this;
+    }
+
+    private function setFailureReason(null|string $failureReason): static
+    {
+        $this->fields['failureReason'] = $failureReason;
 
         return $this;
     }

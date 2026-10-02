@@ -22,10 +22,15 @@ class FlexiblePlanTrialOnlyPlan implements FlexiblePlan
 {
     use HasMetadata;
 
+    public const TYPE_TRIAL_ONLY = 'trial-only';
+
     private array $fields = [];
 
     public function __construct(array $data = [], array $metadata = [])
     {
+        if (array_key_exists('type', $data)) {
+            $this->setType($data['type']);
+        }
         if (array_key_exists('name', $data)) {
             $this->setName($data['name']);
         }
@@ -62,6 +67,9 @@ class FlexiblePlanTrialOnlyPlan implements FlexiblePlan
         if (array_key_exists('isTrialOnly', $data)) {
             $this->setIsTrialOnly($data['isTrialOnly']);
         }
+        if (array_key_exists('recurringInterval', $data)) {
+            $this->setRecurringInterval($data['recurringInterval']);
+        }
         if (array_key_exists('trial', $data)) {
             $this->setTrial($data['trial']);
         }
@@ -86,6 +94,18 @@ class FlexiblePlanTrialOnlyPlan implements FlexiblePlan
     public static function from(array $data = [], array $metadata = []): self
     {
         return new self($data, $metadata);
+    }
+
+    public function getType(): ?string
+    {
+        return $this->fields['type'] ?? null;
+    }
+
+    public function setType(null|string $type): static
+    {
+        $this->fields['type'] = $type;
+
+        return $this;
     }
 
     public function getName(): ?string
@@ -221,15 +241,20 @@ class FlexiblePlanTrialOnlyPlan implements FlexiblePlan
         return $this->fields['isTrialOnly'] ?? null;
     }
 
-    public function getTrial(): PlanTrial
+    public function getRecurringInterval(): null
+    {
+        return $this->fields['recurringInterval'] ?? null;
+    }
+
+    public function getTrial(): FlexiblePlanTrialOnlyPlanTrial
     {
         return $this->fields['trial'];
     }
 
-    public function setTrial(PlanTrial|array $trial): static
+    public function setTrial(FlexiblePlanTrialOnlyPlanTrial|array $trial): static
     {
-        if (!($trial instanceof PlanTrial)) {
-            $trial = PlanTrial::from($trial);
+        if (!($trial instanceof FlexiblePlanTrialOnlyPlanTrial)) {
+            $trial = FlexiblePlanTrialOnlyPlanTrial::from($trial);
         }
 
         $this->fields['trial'] = $trial;
@@ -275,6 +300,9 @@ class FlexiblePlanTrialOnlyPlan implements FlexiblePlan
     public function jsonSerialize(): array
     {
         $data = [];
+        if (array_key_exists('type', $this->fields)) {
+            $data['type'] = $this->fields['type'];
+        }
         if (array_key_exists('name', $this->fields)) {
             $data['name'] = $this->fields['name'];
         }
@@ -312,6 +340,9 @@ class FlexiblePlanTrialOnlyPlan implements FlexiblePlan
         }
         if (array_key_exists('isTrialOnly', $this->fields)) {
             $data['isTrialOnly'] = $this->fields['isTrialOnly'];
+        }
+        if (array_key_exists('recurringInterval', $this->fields)) {
+            $data['recurringInterval'] = $this->fields['recurringInterval'];
         }
         if (array_key_exists('trial', $this->fields)) {
             $data['trial'] = $this->fields['trial']->jsonSerialize();
@@ -357,6 +388,13 @@ class FlexiblePlanTrialOnlyPlan implements FlexiblePlan
     private function setIsTrialOnly(null|bool $isTrialOnly): static
     {
         $this->fields['isTrialOnly'] = $isTrialOnly;
+
+        return $this;
+    }
+
+    private function setRecurringInterval(null $recurringInterval): static
+    {
+        $this->fields['recurringInterval'] = $recurringInterval;
 
         return $this;
     }

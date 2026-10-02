@@ -16,9 +16,10 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
+use JsonSerializable;
 use Rebilly\Sdk\Trait\HasMetadata;
 
-class KycIdentityMatches implements PostKycDocumentMatchesRequest
+class KycIdentityMatches implements JsonSerializable
 {
     use HasMetadata;
 

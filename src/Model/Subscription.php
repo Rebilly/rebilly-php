@@ -141,9 +141,6 @@ class Subscription implements SubscriptionOrOneTimeSale
         if (array_key_exists('invoiceTimeShift', $data)) {
             $this->setInvoiceTimeShift($data['invoiceTimeShift']);
         }
-        if (array_key_exists('recurringInterval', $data)) {
-            $this->setRecurringInterval($data['recurringInterval']);
-        }
         if (array_key_exists('autopay', $data)) {
             $this->setAutopay($data['autopay']);
         }
@@ -371,22 +368,6 @@ class Subscription implements SubscriptionOrOneTimeSale
         }
 
         $this->fields['invoiceTimeShift'] = $invoiceTimeShift;
-
-        return $this;
-    }
-
-    public function getRecurringInterval(): ?SubscriptionRecurringInterval
-    {
-        return $this->fields['recurringInterval'] ?? null;
-    }
-
-    public function setRecurringInterval(null|SubscriptionRecurringInterval|array $recurringInterval): static
-    {
-        if ($recurringInterval !== null && !($recurringInterval instanceof SubscriptionRecurringInterval)) {
-            $recurringInterval = SubscriptionRecurringInterval::from($recurringInterval);
-        }
-
-        $this->fields['recurringInterval'] = $recurringInterval;
 
         return $this;
     }
@@ -814,9 +795,6 @@ class Subscription implements SubscriptionOrOneTimeSale
         }
         if (array_key_exists('invoiceTimeShift', $this->fields)) {
             $data['invoiceTimeShift'] = $this->fields['invoiceTimeShift']?->jsonSerialize();
-        }
-        if (array_key_exists('recurringInterval', $this->fields)) {
-            $data['recurringInterval'] = $this->fields['recurringInterval']?->jsonSerialize();
         }
         if (array_key_exists('autopay', $this->fields)) {
             $data['autopay'] = $this->fields['autopay'];

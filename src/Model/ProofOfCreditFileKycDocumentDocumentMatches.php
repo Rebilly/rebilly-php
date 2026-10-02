@@ -25,11 +25,17 @@ class ProofOfCreditFileKycDocumentDocumentMatches implements JsonSerializable
 
     public function __construct(array $data = [], array $metadata = [])
     {
-        if (array_key_exists('data', $data)) {
-            $this->setData($data['data']);
+        if (array_key_exists('version', $data)) {
+            $this->setVersion($data['version']);
+        }
+        if (array_key_exists('score', $data)) {
+            $this->setScore($data['score']);
         }
         if (array_key_exists('checkList', $data)) {
             $this->setCheckList($data['checkList']);
+        }
+        if (array_key_exists('data', $data)) {
+            $this->setData($data['data']);
         }
         $this->setMetadata($metadata);
     }
@@ -39,18 +45,19 @@ class ProofOfCreditFileKycDocumentDocumentMatches implements JsonSerializable
         return new self($data, $metadata);
     }
 
-    public function getData(): ?CreditFileMatches
+    public function getVersion(): ?string
     {
-        return $this->fields['data'] ?? null;
+        return $this->fields['version'] ?? null;
     }
 
-    public function setData(null|CreditFileMatches|array $data): static
+    public function getScore(): ?int
     {
-        if ($data !== null && !($data instanceof CreditFileMatches)) {
-            $data = CreditFileMatches::from($data);
-        }
+        return $this->fields['score'] ?? null;
+    }
 
-        $this->fields['data'] = $data;
+    public function setScore(null|int $score): static
+    {
+        $this->fields['score'] = $score;
 
         return $this;
     }
@@ -78,11 +85,30 @@ class ProofOfCreditFileKycDocumentDocumentMatches implements JsonSerializable
         return $this;
     }
 
+    public function getData(): ?CreditFileMatches
+    {
+        return $this->fields['data'] ?? null;
+    }
+
+    public function setData(null|CreditFileMatches|array $data): static
+    {
+        if ($data !== null && !($data instanceof CreditFileMatches)) {
+            $data = CreditFileMatches::from($data);
+        }
+
+        $this->fields['data'] = $data;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
-        if (array_key_exists('data', $this->fields)) {
-            $data['data'] = $this->fields['data']?->jsonSerialize();
+        if (array_key_exists('version', $this->fields)) {
+            $data['version'] = $this->fields['version'];
+        }
+        if (array_key_exists('score', $this->fields)) {
+            $data['score'] = $this->fields['score'];
         }
         if (array_key_exists('checkList', $this->fields)) {
             $data['checkList'] = $this->fields['checkList'] !== null
@@ -92,7 +118,17 @@ class ProofOfCreditFileKycDocumentDocumentMatches implements JsonSerializable
                 )
                 : null;
         }
+        if (array_key_exists('data', $this->fields)) {
+            $data['data'] = $this->fields['data']?->jsonSerialize();
+        }
 
         return $data;
+    }
+
+    private function setVersion(null|string $version): static
+    {
+        $this->fields['version'] = $version;
+
+        return $this;
     }
 }

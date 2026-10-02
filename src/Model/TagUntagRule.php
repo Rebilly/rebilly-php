@@ -67,6 +67,14 @@ class TagUntagRule implements JsonSerializable
 
     public const EVENT_TYPE_INVOICE_PAST_DUE = 'invoice-past-due';
 
+    public const EVENT_TYPE_INVOICE_PAST_DUE_REMINDER15_DAYS = 'invoice-past-due-reminder-15-days';
+
+    public const EVENT_TYPE_INVOICE_PAST_DUE_REMINDER30_DAYS = 'invoice-past-due-reminder-30-days';
+
+    public const EVENT_TYPE_INVOICE_PAST_DUE_REMINDER60_DAYS = 'invoice-past-due-reminder-60-days';
+
+    public const EVENT_TYPE_INVOICE_PAST_DUE_REMINDER90_DAYS = 'invoice-past-due-reminder-90-days';
+
     public const EVENT_TYPE_INVOICE_REFUNDED = 'invoice-refunded';
 
     public const EVENT_TYPE_INVOICE_REISSUED = 'invoice-reissued';
@@ -101,9 +109,23 @@ class TagUntagRule implements JsonSerializable
 
     public const EVENT_TYPE_ORDER_DELINQUENCY_REACHED = 'order-delinquency-reached';
 
+    public const EVENT_TYPE_PAYMENT_CARD_EXPIRATION_REMINDER1_DAY = 'payment-card-expiration-reminder-1-day';
+
+    public const EVENT_TYPE_PAYMENT_CARD_EXPIRATION_REMINDER14_DAYS = 'payment-card-expiration-reminder-14-days';
+
+    public const EVENT_TYPE_PAYMENT_CARD_EXPIRATION_REMINDER7_DAYS = 'payment-card-expiration-reminder-7-days';
+
     public const EVENT_TYPE_PAYMENT_CARD_EXPIRED = 'payment-card-expired';
 
+    public const EVENT_TYPE_PAYOUT_REQUEST_BATCH_CREATED = 'payout-request-batch-created';
+
+    public const EVENT_TYPE_PAYOUT_REQUEST_BATCH_DELETED = 'payout-request-batch-deleted';
+
+    public const EVENT_TYPE_PAYOUT_REQUEST_BATCH_MODIFIED = 'payout-request-batch-modified';
+
     public const EVENT_TYPE_PAYOUT_REQUEST_CANCELED = 'payout-request-canceled';
+
+    public const EVENT_TYPE_PAYOUT_REQUEST_CHANGED = 'payout-request-changed';
 
     public const EVENT_TYPE_PAYOUT_REQUEST_CREATED = 'payout-request-created';
 
@@ -147,6 +169,12 @@ class TagUntagRule implements JsonSerializable
 
     public const EVENT_TYPE_SUBSCRIPTION_REACTIVATED = 'subscription-reactivated';
 
+    public const EVENT_TYPE_SUBSCRIPTION_RENEWAL_REMINDER1_DAY = 'subscription-renewal-reminder-1-day';
+
+    public const EVENT_TYPE_SUBSCRIPTION_RENEWAL_REMINDER30_DAYS = 'subscription-renewal-reminder-30-days';
+
+    public const EVENT_TYPE_SUBSCRIPTION_RENEWAL_REMINDER7_DAYS = 'subscription-renewal-reminder-7-days';
+
     public const EVENT_TYPE_SUBSCRIPTION_RENEWED = 'subscription-renewed';
 
     public const EVENT_TYPE_SUBSCRIPTION_RESUMED = 'subscription-resumed';
@@ -160,6 +188,12 @@ class TagUntagRule implements JsonSerializable
     public const EVENT_TYPE_TRANSACTION_DISCREPANCY_FOUND = 'transaction-discrepancy-found';
 
     public const EVENT_TYPE_TRANSACTION_PROCESSED = 'transaction-processed';
+
+    public const EVENT_TYPE_TRANSACTION_PARTIALLY_REFUNDED = 'transaction-partially-refunded';
+
+    public const EVENT_TYPE_TRANSACTION_REFUNDED = 'transaction-refunded';
+
+    public const EVENT_TYPE_TRANSACTION_VOIDED = 'transaction-voided';
 
     public const EVENT_TYPE_TRIAL_USAGE_LIMIT_REACHED = 'trial-usage-limit-reached';
 

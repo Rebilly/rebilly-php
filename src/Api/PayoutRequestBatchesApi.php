@@ -18,17 +18,37 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
-use Rebilly\Sdk\Model\GetPayoutRequestBatchPreviewResponse;
 use Rebilly\Sdk\Model\PatchPayoutRequestBatchRequest;
 use Rebilly\Sdk\Model\PayoutRequestBatch;
 use Rebilly\Sdk\Model\PostPayoutRequestBatchBlockRequest;
 use Rebilly\Sdk\Model\PostPayoutRequestBatchRequest;
+use Rebilly\Sdk\Model\PostPayoutRequestsToBatchRequest;
+use Rebilly\Sdk\Model\PostRemovePayoutRequestsFromBatchRequest;
 use Rebilly\Sdk\Paginator;
 
 class PayoutRequestBatchesApi
 {
     public function __construct(protected ?ClientInterface $client)
     {
+    }
+
+    public function addPayoutRequests(
+        string $id,
+        PostPayoutRequestsToBatchRequest $postPayoutRequestsToBatchRequest,
+    ): PayoutRequestBatch {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/payout-request-batches/{id}/payout-requests');
+
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($postPayoutRequestsToBatchRequest));
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return PayoutRequestBatch::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function approve(
@@ -100,6 +120,19 @@ class PayoutRequestBatchesApi
         return PayoutRequestBatch::from($data, ['headers' => $response->getHeaders()]);
     }
 
+    public function delete(
+        string $id,
+    ): void {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/payout-request-batches/{id}');
+
+        $request = new Request('DELETE', $uri);
+        $this->client->send($request);
+    }
+
     public function get(
         string $id,
     ): PayoutRequestBatch {
@@ -124,12 +157,14 @@ class PayoutRequestBatchesApi
     public function getAll(
         ?int $limit = null,
         ?int $offset = null,
+        ?string $q = null,
         ?string $filter = null,
         ?array $sort = null,
     ): Collection {
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
+            'q' => $q,
             'filter' => $filter,
             'sort' => $sort ? implode(',', $sort) : null,
         ];
@@ -158,12 +193,14 @@ class PayoutRequestBatchesApi
     public function getAllPaginator(
         ?int $limit = null,
         ?int $offset = null,
+        ?string $q = null,
         ?string $filter = null,
         ?array $sort = null,
     ): Paginator {
         $closure = fn (?int $limit, ?int $offset): Collection => $this->getAll(
             limit: $limit,
             offset: $offset,
+            q: $q,
             filter: $filter,
             sort: $sort,
         );
@@ -193,20 +230,40 @@ class PayoutRequestBatchesApi
         return PayoutRequestBatch::from($data, ['headers' => $response->getHeaders()]);
     }
 
-    public function preview(
-        ?string $filter = null,
-    ): GetPayoutRequestBatchPreviewResponse {
-        $queryParams = [
-            'filter' => $filter,
+    public function removePayoutRequests(
+        string $id,
+        PostRemovePayoutRequestsFromBatchRequest $postRemovePayoutRequestsFromBatchRequest,
+    ): PayoutRequestBatch {
+        $pathParams = [
+            '{id}' => $id,
         ];
-        $uri = '/payout-request-batches/preview?' . http_build_query($queryParams);
 
-        $request = new Request('GET', $uri, headers: [
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/payout-request-batches/{id}/payout-requests/remove');
+
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($postRemovePayoutRequestsFromBatchRequest));
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return PayoutRequestBatch::from($data, ['headers' => $response->getHeaders()]);
+    }
+
+    public function unblock(
+        string $id,
+    ): PayoutRequestBatch {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/payout-request-batches/{id}/unblock');
+
+        $request = new Request('POST', $uri, headers: [
             'Accept' => 'application/json',
         ]);
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return GetPayoutRequestBatchPreviewResponse::from($data, ['headers' => $response->getHeaders()]);
+        return PayoutRequestBatch::from($data, ['headers' => $response->getHeaders()]);
     }
 }

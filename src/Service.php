@@ -20,8 +20,6 @@ class Service
 {
     private Client $client;
 
-    private Api\AccountRegistrationSettingsApi $accountRegistrationSettings;
-
     private Api\AmlChecksApi $amlChecks;
 
     private Api\AmlSettingsApi $amlSettings;
@@ -74,6 +72,8 @@ class Service
 
     private Api\PurchaseApi $purchase;
 
+    private Api\ReleaseFlagsApi $releaseFlags;
+
     private Api\SearchApi $search;
 
     private Api\ShippingRatesApi $shippingRates;
@@ -81,6 +81,8 @@ class Service
     private Api\OrdersApi $orders;
 
     private Api\OrderPausesApi $orderPauses;
+
+    private Api\OrderChangesApi $orderChanges;
 
     private Api\OrderCancellationsApi $orderCancellations;
 
@@ -158,7 +160,15 @@ class Service
 
     private Api\PayoutRequestsApi $payoutRequests;
 
+    private Api\PayoutRequestSplitsApi $payoutRequestSplits;
+
+    private Api\PayoutRequestAutoAllocationsApi $payoutRequestAutoAllocations;
+
     private Api\PayoutRequestAllocationsApi $payoutRequestAllocations;
+
+    private Api\PayoutRequestBatchOperationsApi $payoutRequestBatchOperations;
+
+    private Api\PayoutRequestBatchPreviewsApi $payoutRequestBatchPreviews;
 
     private Api\PayoutRequestBatchesApi $payoutRequestBatches;
 
@@ -197,7 +207,6 @@ class Service
     public function __construct(?Client $client = null, array $config = [])
     {
         $this->client = $client ?? new Client($config);
-        $this->accountRegistrationSettings = new Api\AccountRegistrationSettingsApi($this->client);
         $this->amlChecks = new Api\AmlChecksApi($this->client);
         $this->amlSettings = new Api\AmlSettingsApi($this->client);
         $this->files = new Api\FilesApi($this->client);
@@ -224,10 +233,12 @@ class Service
         $this->products = new Api\ProductsApi($this->client);
         $this->quotes = new Api\QuotesApi($this->client);
         $this->purchase = new Api\PurchaseApi($this->client);
+        $this->releaseFlags = new Api\ReleaseFlagsApi($this->client);
         $this->search = new Api\SearchApi($this->client);
         $this->shippingRates = new Api\ShippingRatesApi($this->client);
         $this->orders = new Api\OrdersApi($this->client);
         $this->orderPauses = new Api\OrderPausesApi($this->client);
+        $this->orderChanges = new Api\OrderChangesApi($this->client);
         $this->orderCancellations = new Api\OrderCancellationsApi($this->client);
         $this->orderReactivations = new Api\OrderReactivationsApi($this->client);
         $this->subscriptions = new Api\SubscriptionsApi($this->client);
@@ -266,7 +277,11 @@ class Service
         $this->paymentCardsBankNames = new Api\PaymentCardsBankNamesApi($this->client);
         $this->paymentMethods = new Api\PaymentMethodsApi($this->client);
         $this->payoutRequests = new Api\PayoutRequestsApi($this->client);
+        $this->payoutRequestSplits = new Api\PayoutRequestSplitsApi($this->client);
+        $this->payoutRequestAutoAllocations = new Api\PayoutRequestAutoAllocationsApi($this->client);
         $this->payoutRequestAllocations = new Api\PayoutRequestAllocationsApi($this->client);
+        $this->payoutRequestBatchOperations = new Api\PayoutRequestBatchOperationsApi($this->client);
+        $this->payoutRequestBatchPreviews = new Api\PayoutRequestBatchPreviewsApi($this->client);
         $this->payoutRequestBatches = new Api\PayoutRequestBatchesApi($this->client);
         $this->profile = new Api\ProfileApi($this->client);
         $this->previews = new Api\PreviewsApi($this->client);
@@ -289,11 +304,6 @@ class Service
     public function getClient(): Client
     {
         return $this->client;
-    }
-
-    public function accountRegistrationSettings(): Api\AccountRegistrationSettingsApi
-    {
-        return $this->accountRegistrationSettings;
     }
 
     public function amlChecks(): Api\AmlChecksApi
@@ -426,6 +436,11 @@ class Service
         return $this->purchase;
     }
 
+    public function releaseFlags(): Api\ReleaseFlagsApi
+    {
+        return $this->releaseFlags;
+    }
+
     public function search(): Api\SearchApi
     {
         return $this->search;
@@ -444,6 +459,11 @@ class Service
     public function orderPauses(): Api\OrderPausesApi
     {
         return $this->orderPauses;
+    }
+
+    public function orderChanges(): Api\OrderChangesApi
+    {
+        return $this->orderChanges;
     }
 
     public function orderCancellations(): Api\OrderCancellationsApi
@@ -636,9 +656,29 @@ class Service
         return $this->payoutRequests;
     }
 
+    public function payoutRequestSplits(): Api\PayoutRequestSplitsApi
+    {
+        return $this->payoutRequestSplits;
+    }
+
+    public function payoutRequestAutoAllocations(): Api\PayoutRequestAutoAllocationsApi
+    {
+        return $this->payoutRequestAutoAllocations;
+    }
+
     public function payoutRequestAllocations(): Api\PayoutRequestAllocationsApi
     {
         return $this->payoutRequestAllocations;
+    }
+
+    public function payoutRequestBatchOperations(): Api\PayoutRequestBatchOperationsApi
+    {
+        return $this->payoutRequestBatchOperations;
+    }
+
+    public function payoutRequestBatchPreviews(): Api\PayoutRequestBatchPreviewsApi
+    {
+        return $this->payoutRequestBatchPreviews;
     }
 
     public function payoutRequestBatches(): Api\PayoutRequestBatchesApi

@@ -70,6 +70,15 @@ class KycSettingsIdentityWeights implements JsonSerializable
         if (array_key_exists('mrzChecksum', $data)) {
             $this->setMrzChecksum($data['mrzChecksum']);
         }
+        if (array_key_exists('documentNumber', $data)) {
+            $this->setDocumentNumber($data['documentNumber']);
+        }
+        if (array_key_exists('issuanceCountry', $data)) {
+            $this->setIssuanceCountry($data['issuanceCountry']);
+        }
+        if (array_key_exists('issuanceRegion', $data)) {
+            $this->setIssuanceRegion($data['issuanceRegion']);
+        }
         $this->setMetadata($metadata);
     }
 
@@ -258,6 +267,42 @@ class KycSettingsIdentityWeights implements JsonSerializable
         return $this;
     }
 
+    public function getDocumentNumber(): ?int
+    {
+        return $this->fields['documentNumber'] ?? null;
+    }
+
+    public function setDocumentNumber(null|int $documentNumber): static
+    {
+        $this->fields['documentNumber'] = $documentNumber;
+
+        return $this;
+    }
+
+    public function getIssuanceCountry(): ?int
+    {
+        return $this->fields['issuanceCountry'] ?? null;
+    }
+
+    public function setIssuanceCountry(null|int $issuanceCountry): static
+    {
+        $this->fields['issuanceCountry'] = $issuanceCountry;
+
+        return $this;
+    }
+
+    public function getIssuanceRegion(): ?int
+    {
+        return $this->fields['issuanceRegion'] ?? null;
+    }
+
+    public function setIssuanceRegion(null|int $issuanceRegion): static
+    {
+        $this->fields['issuanceRegion'] = $issuanceRegion;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -305,6 +350,15 @@ class KycSettingsIdentityWeights implements JsonSerializable
         }
         if (array_key_exists('mrzChecksum', $this->fields)) {
             $data['mrzChecksum'] = $this->fields['mrzChecksum'];
+        }
+        if (array_key_exists('documentNumber', $this->fields)) {
+            $data['documentNumber'] = $this->fields['documentNumber'];
+        }
+        if (array_key_exists('issuanceCountry', $this->fields)) {
+            $data['issuanceCountry'] = $this->fields['issuanceCountry'];
+        }
+        if (array_key_exists('issuanceRegion', $this->fields)) {
+            $data['issuanceRegion'] = $this->fields['issuanceRegion'];
         }
 
         return $data;

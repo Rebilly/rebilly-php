@@ -60,7 +60,7 @@ interface PaymentInstrument extends JsonSerializable
      */
     public function getLinks(): ?array;
 
-    public function getEmbedded(): null|AlternativeInstrumentEmbedded|BankAccountEmbedded|KhelocardCardEmbedded|PayPalAccountEmbedded|PaymentCardEmbedded;
+    public function getEmbedded(): null|AlternativeInstrumentEmbedded|BankAccountEmbedded|PayPalAccountEmbedded|PaymentCardEmbedded;
 
     public function setEmbedded(null|array $embedded): static;
 }

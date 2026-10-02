@@ -156,6 +156,8 @@ class AlternativePaymentToken implements CompositeToken
 
     public const METHOD_KAKAO_PAY = 'KakaoPay';
 
+    public const METHOD_KHELOCARD = 'Khelocard';
+
     public const METHOD_KNOT = 'KNOT';
 
     public const METHOD_LOONIE = 'loonie';
@@ -231,6 +233,8 @@ class AlternativePaymentToken implements CompositeToken
     public const METHOD_PIASTRIX = 'Piastrix';
 
     public const METHOD_PIX = 'PIX';
+
+    public const METHOD_PIX_AUTOMATICO = 'PIX-Automatico';
 
     public const METHOD_PAY_TABS = 'PayTabs';
 
