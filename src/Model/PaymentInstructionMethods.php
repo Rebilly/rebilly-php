@@ -290,6 +290,8 @@ class PaymentInstructionMethods implements PaymentInstruction
 
     public const METHODS_PIX = 'PIX';
 
+    public const METHODS_PIX_AUTOMATICO = 'PIX-Automatico';
+
     public const METHODS_PIN_PAY = 'PinPay';
 
     public const METHODS_PHONE = 'phone';
@@ -349,6 +351,8 @@ class PaymentInstructionMethods implements PaymentInstruction
     public const METHODS_TERMINALY_RF = 'Terminaly-RF';
 
     public const METHODS_TETHER = 'Tether';
+
+    public const METHODS_THUNES_CHECKOUT = 'Thunes-Checkout';
 
     public const METHODS_TODITO_CASH_CARD = 'ToditoCash-card';
 

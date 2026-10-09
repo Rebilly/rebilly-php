@@ -49,6 +49,10 @@ class PayoutRequestTimelineMessage implements JsonSerializable
 
     public const TYPE_PAYOUT_REQUEST_UNBLOCKED = 'payout-request-unblocked';
 
+    public const TYPE_PAYOUT_REQUEST_ADDED_TO_BATCH = 'payout-request-added-to-batch';
+
+    public const TYPE_PAYOUT_REQUEST_REMOVED_FROM_BATCH = 'payout-request-removed-from-batch';
+
     public const TRIGGERED_BY_REBILLY = 'rebilly';
 
     public const TRIGGERED_BY_APP = 'app';

@@ -28,6 +28,9 @@ class QuickpayCredentials implements JsonSerializable
         if (array_key_exists('apiKey', $data)) {
             $this->setApiKey($data['apiKey']);
         }
+        if (array_key_exists('privateKey', $data)) {
+            $this->setPrivateKey($data['privateKey']);
+        }
         $this->setMetadata($metadata);
     }
 
@@ -48,11 +51,26 @@ class QuickpayCredentials implements JsonSerializable
         return $this;
     }
 
+    public function getPrivateKey(): string
+    {
+        return $this->fields['privateKey'];
+    }
+
+    public function setPrivateKey(string $privateKey): static
+    {
+        $this->fields['privateKey'] = $privateKey;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
         if (array_key_exists('apiKey', $this->fields)) {
             $data['apiKey'] = $this->fields['apiKey'];
+        }
+        if (array_key_exists('privateKey', $this->fields)) {
+            $data['privateKey'] = $this->fields['privateKey'];
         }
 
         return $data;

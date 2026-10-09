@@ -54,9 +54,6 @@ class PostDepositRequest implements JsonSerializable
         if (array_key_exists('expirationTime', $data)) {
             $this->setExpirationTime($data['expirationTime']);
         }
-        if (array_key_exists('customPropertySetId', $data)) {
-            $this->setCustomPropertySetId($data['customPropertySetId']);
-        }
         if (array_key_exists('notificationUrl', $data)) {
             $this->setNotificationUrl($data['notificationUrl']);
         }
@@ -199,18 +196,6 @@ class PostDepositRequest implements JsonSerializable
         return $this;
     }
 
-    public function getCustomPropertySetId(): ?string
-    {
-        return $this->fields['customPropertySetId'] ?? null;
-    }
-
-    public function setCustomPropertySetId(null|string $customPropertySetId): static
-    {
-        $this->fields['customPropertySetId'] = $customPropertySetId;
-
-        return $this;
-    }
-
     public function getNotificationUrl(): ?string
     {
         return $this->fields['notificationUrl'] ?? null;
@@ -252,9 +237,6 @@ class PostDepositRequest implements JsonSerializable
         }
         if (array_key_exists('expirationTime', $this->fields)) {
             $data['expirationTime'] = $this->fields['expirationTime']?->format(DateTimeInterface::RFC3339);
-        }
-        if (array_key_exists('customPropertySetId', $this->fields)) {
-            $data['customPropertySetId'] = $this->fields['customPropertySetId'];
         }
         if (array_key_exists('notificationUrl', $this->fields)) {
             $data['notificationUrl'] = $this->fields['notificationUrl'];

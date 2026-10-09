@@ -33,6 +33,8 @@ class KycDocumentCheck implements JsonSerializable
 
     public const NAME_DECISION = 'decision';
 
+    public const NAME_DOCUMENT_NUMBER = 'documentNumber';
+
     public const NAME_DOCUMENT_SUBTYPE = 'documentSubtype';
 
     public const NAME_EXPIRATION_DATE = 'expirationDate';
@@ -48,6 +50,10 @@ class KycDocumentCheck implements JsonSerializable
     public const NAME_IS_PUBLISHED_ONLINE = 'isPublishedOnline';
 
     public const NAME_IS_TAMPERED = 'isTampered';
+
+    public const NAME_ISSUANCE_COUNTRY = 'issuanceCountry';
+
+    public const NAME_ISSUANCE_REGION = 'issuanceRegion';
 
     public const NAME_ISSUE_DATE = 'issueDate';
 

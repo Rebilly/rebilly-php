@@ -23,6 +23,8 @@ class Attachment implements JsonSerializable
 {
     use HasMetadata;
 
+    public const RELATED_TYPE_CREDIT_MEMO_TIMELINE_COMMENT = 'credit-memo-timeline-comment';
+
     public const RELATED_TYPE_CUSTOMER = 'customer';
 
     public const RELATED_TYPE_CUSTOMER_TIMELINE_COMMENT = 'customer-timeline-comment';
@@ -41,9 +43,13 @@ class Attachment implements JsonSerializable
 
     public const RELATED_TYPE_PAYMENT = 'payment';
 
+    public const RELATED_TYPE_PAYOUT_REQUEST_TIMELINE_COMMENT = 'payout-request-timeline-comment';
+
     public const RELATED_TYPE_PLAN = 'plan';
 
     public const RELATED_TYPE_PRODUCT = 'product';
+
+    public const RELATED_TYPE_QUOTE_TIMELINE_COMMENT = 'quote-timeline-comment';
 
     public const RELATED_TYPE_SUBSCRIPTION = 'subscription';
 

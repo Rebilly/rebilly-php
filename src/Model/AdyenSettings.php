@@ -46,6 +46,12 @@ class AdyenSettings implements JsonSerializable
         if (array_key_exists('levelTwoThreeDataCustomField', $data)) {
             $this->setLevelTwoThreeDataCustomField($data['levelTwoThreeDataCustomField']);
         }
+        if (array_key_exists('mastercardDpaId', $data)) {
+            $this->setMastercardDpaId($data['mastercardDpaId']);
+        }
+        if (array_key_exists('mastercardServiceId', $data)) {
+            $this->setMastercardServiceId($data['mastercardServiceId']);
+        }
         $this->setMetadata($metadata);
     }
 
@@ -153,6 +159,30 @@ class AdyenSettings implements JsonSerializable
         return $this;
     }
 
+    public function getMastercardDpaId(): ?string
+    {
+        return $this->fields['mastercardDpaId'] ?? null;
+    }
+
+    public function setMastercardDpaId(null|string $mastercardDpaId): static
+    {
+        $this->fields['mastercardDpaId'] = $mastercardDpaId;
+
+        return $this;
+    }
+
+    public function getMastercardServiceId(): ?string
+    {
+        return $this->fields['mastercardServiceId'] ?? null;
+    }
+
+    public function setMastercardServiceId(null|string $mastercardServiceId): static
+    {
+        $this->fields['mastercardServiceId'] = $mastercardServiceId;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -181,6 +211,12 @@ class AdyenSettings implements JsonSerializable
         }
         if (array_key_exists('levelTwoThreeDataCustomField', $this->fields)) {
             $data['levelTwoThreeDataCustomField'] = $this->fields['levelTwoThreeDataCustomField'];
+        }
+        if (array_key_exists('mastercardDpaId', $this->fields)) {
+            $data['mastercardDpaId'] = $this->fields['mastercardDpaId'];
+        }
+        if (array_key_exists('mastercardServiceId', $this->fields)) {
+            $data['mastercardServiceId'] = $this->fields['mastercardServiceId'];
         }
 
         return $data;

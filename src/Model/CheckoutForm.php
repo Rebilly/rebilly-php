@@ -293,6 +293,8 @@ class CheckoutForm implements JsonSerializable
 
     public const PAYMENT_METHODS_PIX = 'PIX';
 
+    public const PAYMENT_METHODS_PIX_AUTOMATICO = 'PIX-Automatico';
+
     public const PAYMENT_METHODS_PIN_PAY = 'PinPay';
 
     public const PAYMENT_METHODS_PHONE = 'phone';
@@ -352,6 +354,8 @@ class CheckoutForm implements JsonSerializable
     public const PAYMENT_METHODS_TERMINALY_RF = 'Terminaly-RF';
 
     public const PAYMENT_METHODS_TETHER = 'Tether';
+
+    public const PAYMENT_METHODS_THUNES_CHECKOUT = 'Thunes-Checkout';
 
     public const PAYMENT_METHODS_TODITO_CASH_CARD = 'ToditoCash-card';
 
