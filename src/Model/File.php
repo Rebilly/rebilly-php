@@ -39,6 +39,8 @@ class File implements JsonSerializable
 
     public const MIME_IMAGE_GIF = 'image/gif';
 
+    public const MIME_IMAGE_WEBP = 'image/webp';
+
     public const MIME_APPLICATION_PDF = 'application/pdf';
 
     public const MIME_APPLICATION_JSON = 'application/json';

@@ -261,6 +261,8 @@ class Transaction implements JsonSerializable
 
     public const GATEWAY_NAME_ILIXIUM = 'Ilixium';
 
+    public const GATEWAY_NAME_I_MERCHANT = 'IMerchant';
+
     public const GATEWAY_NAME_INGENICO = 'Ingenico';
 
     public const GATEWAY_NAME_INOVAPAY = 'INOVAPAY';
@@ -385,6 +387,8 @@ class Transaction implements JsonSerializable
 
     public const GATEWAY_NAME_PAYFLOW = 'Payflow';
 
+    public const GATEWAY_NAME_PAY_GLOCAL = 'PayGlocal';
+
     public const GATEWAY_NAME_PAYNOTE = 'Paynote';
 
     public const GATEWAY_NAME_PAYMENT_ASIA = 'PaymentAsia';
@@ -488,6 +492,8 @@ class Transaction implements JsonSerializable
     public const GATEWAY_NAME_TELR = 'Telr';
 
     public const GATEWAY_NAME_TEST_PROCESSOR = 'TestProcessor';
+
+    public const GATEWAY_NAME_THUNES = 'Thunes';
 
     public const GATEWAY_NAME_TODITO_CASH = 'ToditoCash';
 
@@ -823,6 +829,8 @@ class Transaction implements JsonSerializable
 
     public const ACQUIRER_NAME_PAY_ECARDS = 'PayEcards';
 
+    public const ACQUIRER_NAME_PAY_GLOCAL = 'PayGlocal';
+
     public const ACQUIRER_NAME_PAYMENT_ASIA = 'PaymentAsia';
 
     public const ACQUIRER_NAME_PAYMEN_TECHNOLOGIES = 'PaymenTechnologies';
@@ -913,6 +921,8 @@ class Transaction implements JsonSerializable
 
     public const ACQUIRER_NAME_TEST_PROCESSOR = 'TestProcessor';
 
+    public const ACQUIRER_NAME_THUNES = 'Thunes';
+
     public const ACQUIRER_NAME_TODITO_CASH = 'ToditoCash';
 
     public const ACQUIRER_NAME_TRIPLE000 = 'Triple000';
@@ -958,6 +968,16 @@ class Transaction implements JsonSerializable
     public const ACQUIRER_NAME_ZIMPLER = 'Zimpler';
 
     public const ACQUIRER_NAME_ZOTAPAY = 'Zotapay';
+
+    public const METHOD_PAYMENT_CARD = 'payment-card';
+
+    public const METHOD_ACH = 'ach';
+
+    public const METHOD_CASH = 'cash';
+
+    public const METHOD_CHECK = 'check';
+
+    public const METHOD_PAYPAL = 'paypal';
 
     public const METHOD_ADV_CASH = 'AdvCash';
 
@@ -1229,6 +1249,8 @@ class Transaction implements JsonSerializable
 
     public const METHOD_PIX = 'PIX';
 
+    public const METHOD_PIX_AUTOMATICO = 'PIX-Automatico';
+
     public const METHOD_PIN_PAY = 'PinPay';
 
     public const METHOD_PHONE = 'phone';
@@ -1288,6 +1310,8 @@ class Transaction implements JsonSerializable
     public const METHOD_TERMINALY_RF = 'Terminaly-RF';
 
     public const METHOD_TETHER = 'Tether';
+
+    public const METHOD_THUNES_CHECKOUT = 'Thunes-Checkout';
 
     public const METHOD_TODITO_CASH_CARD = 'ToditoCash-card';
 
@@ -1491,6 +1515,9 @@ class Transaction implements JsonSerializable
         }
         if (array_key_exists('bin', $data)) {
             $this->setBin($data['bin']);
+        }
+        if (array_key_exists('paymentInstrumentFingerprint', $data)) {
+            $this->setPaymentInstrumentFingerprint($data['paymentInstrumentFingerprint']);
         }
         if (array_key_exists('paymentInstrument', $data)) {
             $this->setPaymentInstrument($data['paymentInstrument']);
@@ -1897,6 +1924,11 @@ class Transaction implements JsonSerializable
         return $this->fields['bin'] ?? null;
     }
 
+    public function getPaymentInstrumentFingerprint(): ?string
+    {
+        return $this->fields['paymentInstrumentFingerprint'] ?? null;
+    }
+
     public function getPaymentInstrument(): ?TransactionPaymentInstrument
     {
         return $this->fields['paymentInstrument'] ?? null;
@@ -2247,6 +2279,9 @@ class Transaction implements JsonSerializable
         if (array_key_exists('bin', $this->fields)) {
             $data['bin'] = $this->fields['bin'];
         }
+        if (array_key_exists('paymentInstrumentFingerprint', $this->fields)) {
+            $data['paymentInstrumentFingerprint'] = $this->fields['paymentInstrumentFingerprint'];
+        }
         if (array_key_exists('paymentInstrument', $this->fields)) {
             $data['paymentInstrument'] = $this->fields['paymentInstrument']?->jsonSerialize();
         }
@@ -2593,6 +2628,13 @@ class Transaction implements JsonSerializable
     private function setBin(null|string $bin): static
     {
         $this->fields['bin'] = $bin;
+
+        return $this;
+    }
+
+    private function setPaymentInstrumentFingerprint(null|string $paymentInstrumentFingerprint): static
+    {
+        $this->fields['paymentInstrumentFingerprint'] = $paymentInstrumentFingerprint;
 
         return $this;
     }

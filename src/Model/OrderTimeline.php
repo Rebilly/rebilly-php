@@ -69,6 +69,12 @@ class OrderTimeline implements JsonSerializable
 
     public const TYPE_ORDER_DOWNGRADED = 'order-downgraded';
 
+    public const TYPE_ORDER_CHANGE_APPLIED = 'order-change-applied';
+
+    public const TYPE_ORDER_CHANGE_CANCELED = 'order-change-canceled';
+
+    public const TYPE_ORDER_CHANGE_CREATED = 'order-change-created';
+
     public const TYPE_ORDER_ITEMS_CHANGED = 'order-items-changed';
 
     public const TYPE_ORDER_PAID_EARLY = 'order-paid-early';

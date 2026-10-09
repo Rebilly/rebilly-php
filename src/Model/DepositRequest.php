@@ -54,6 +54,9 @@ class DepositRequest implements JsonSerializable
         if (array_key_exists('status', $data)) {
             $this->setStatus($data['status']);
         }
+        if (array_key_exists('coinPricing', $data)) {
+            $this->setCoinPricing($data['coinPricing']);
+        }
         if (array_key_exists('currency', $data)) {
             $this->setCurrency($data['currency']);
         }
@@ -71,12 +74,6 @@ class DepositRequest implements JsonSerializable
         }
         if (array_key_exists('expirationTime', $data)) {
             $this->setExpirationTime($data['expirationTime']);
-        }
-        if (array_key_exists('propertiesSchema', $data)) {
-            $this->setPropertiesSchema($data['propertiesSchema']);
-        }
-        if (array_key_exists('properties', $data)) {
-            $this->setProperties($data['properties']);
         }
         if (array_key_exists('notificationUrl', $data)) {
             $this->setNotificationUrl($data['notificationUrl']);
@@ -157,6 +154,11 @@ class DepositRequest implements JsonSerializable
     public function getStatus(): ?string
     {
         return $this->fields['status'] ?? null;
+    }
+
+    public function getCoinPricing(): ?CoinPricing
+    {
+        return $this->fields['coinPricing'] ?? null;
     }
 
     public function getCurrency(): string
@@ -254,19 +256,6 @@ class DepositRequest implements JsonSerializable
         return $this;
     }
 
-    public function getPropertiesSchema(): ?array
-    {
-        return $this->fields['propertiesSchema'] ?? null;
-    }
-
-    /**
-     * @return null|array<string,string>
-     */
-    public function getProperties(): ?array
-    {
-        return $this->fields['properties'] ?? null;
-    }
-
     public function getNotificationUrl(): ?string
     {
         return $this->fields['notificationUrl'] ?? null;
@@ -348,6 +337,9 @@ class DepositRequest implements JsonSerializable
         if (array_key_exists('status', $this->fields)) {
             $data['status'] = $this->fields['status'];
         }
+        if (array_key_exists('coinPricing', $this->fields)) {
+            $data['coinPricing'] = $this->fields['coinPricing']?->jsonSerialize();
+        }
         if (array_key_exists('currency', $this->fields)) {
             $data['currency'] = $this->fields['currency'];
         }
@@ -365,14 +357,6 @@ class DepositRequest implements JsonSerializable
         }
         if (array_key_exists('expirationTime', $this->fields)) {
             $data['expirationTime'] = $this->fields['expirationTime']?->format(DateTimeInterface::RFC3339);
-        }
-        if (array_key_exists('propertiesSchema', $this->fields)) {
-            $data['propertiesSchema'] = $this->fields['propertiesSchema'];
-        }
-        if (array_key_exists('properties', $this->fields)) {
-            $data['properties'] = $this->fields['properties'] !== null
-                ? (object) $this->fields['properties']
-                : null;
         }
         if (array_key_exists('notificationUrl', $this->fields)) {
             $data['notificationUrl'] = $this->fields['notificationUrl'];
@@ -418,19 +402,13 @@ class DepositRequest implements JsonSerializable
         return $this;
     }
 
-    private function setPropertiesSchema(null|array $propertiesSchema): static
+    private function setCoinPricing(null|CoinPricing|array $coinPricing): static
     {
-        $this->fields['propertiesSchema'] = $propertiesSchema;
+        if ($coinPricing !== null && !($coinPricing instanceof CoinPricing)) {
+            $coinPricing = CoinPricingFactory::from($coinPricing);
+        }
 
-        return $this;
-    }
-
-    /**
-     * @param null|array<string,string> $properties
-     */
-    private function setProperties(null|array $properties): static
-    {
-        $this->fields['properties'] = $properties;
+        $this->fields['coinPricing'] = $coinPricing;
 
         return $this;
     }

@@ -47,6 +47,8 @@ class InvoiceTimeline implements JsonSerializable
 
     public const TYPE_INVOICE_RENEWAL_PAYMENT_DECLINED = 'invoice-renewal-payment-declined';
 
+    public const TYPE_INVOICE_RESTORED = 'invoice-restored';
+
     public const TYPE_INVOICE_REVENUE_RECOGNIZED = 'invoice-revenue-recognized';
 
     public const TYPE_INVOICE_TAX_CALCULATION_FAILED = 'invoice-tax-calculation-failed';
@@ -78,6 +80,8 @@ class InvoiceTimeline implements JsonSerializable
     public const TYPE_TRANSACTION_DECLINED = 'transaction-declined';
 
     public const TYPE_TRANSACTION_INITIATED = 'transaction-initiated';
+
+    public const TYPE_TRANSACTION_PARTIALLY_REFUNDED = 'transaction-partially-refunded';
 
     public const TYPE_TRANSACTION_REFUNDED = 'transaction-refunded';
 

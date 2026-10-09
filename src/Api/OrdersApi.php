@@ -21,8 +21,8 @@ use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\Invoice;
 use Rebilly\Sdk\Model\InvoiceIssue;
 use Rebilly\Sdk\Model\Order;
-use Rebilly\Sdk\Model\OrderChange;
 use Rebilly\Sdk\Model\OrderFactory;
+use Rebilly\Sdk\Model\OrderItemsChange;
 use Rebilly\Sdk\Model\OrderItemUpdate;
 use Rebilly\Sdk\Model\OrderUpcomingInvoice;
 use Rebilly\Sdk\Model\SubscriptionInvoice;
@@ -38,7 +38,7 @@ class OrdersApi
 
     public function changeItems(
         string $id,
-        OrderChange $orderChange,
+        OrderItemsChange $orderItemsChange,
         ?string $expand = null,
     ): Order {
         $pathParams = [
@@ -52,7 +52,7 @@ class OrdersApi
 
         $request = new Request('POST', $uri, headers: [
             'Accept' => 'application/json',
-        ], body: Utils::jsonEncode($orderChange));
+        ], body: Utils::jsonEncode($orderItemsChange));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

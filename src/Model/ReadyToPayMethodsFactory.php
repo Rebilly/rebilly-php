@@ -108,6 +108,7 @@ class ReadyToPayMethodsFactory
             'SparkPay' => ReadyToPayGenericMethod::from($data, $metadata),
             'Tele2' => ReadyToPayGenericMethod::from($data, $metadata),
             'Terminaly-RF' => ReadyToPayGenericMethod::from($data, $metadata),
+            'Thunes-Checkout' => ReadyToPayGenericMethod::from($data, $metadata),
             'ToditoCash-card' => ReadyToPayGenericMethod::from($data, $metadata),
             'Trustly' => ReadyToPayGenericMethod::from($data, $metadata),
             'UPI' => ReadyToPayGenericMethod::from($data, $metadata),

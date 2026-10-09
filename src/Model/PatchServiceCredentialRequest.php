@@ -18,6 +18,8 @@ use JsonSerializable;
 
 interface PatchServiceCredentialRequest extends JsonSerializable
 {
+    public function getType(): string;
+
     public function getStatus(): ?string;
 
     public function setStatus(string $status): static;

@@ -25,6 +25,8 @@ class KycDocumentRejection implements JsonSerializable
 
     public const TYPE_DOCUMENT_EXPIRED = 'document-expired';
 
+    public const TYPE_DOCUMENT_WAS_VALID_BUT_EXPIRED = 'document-was-valid-but-expired';
+
     public const TYPE_DOCUMENT_NOT_MATCHING = 'document-not-matching';
 
     public const TYPE_DOCUMENT_DUPLICATE = 'document-duplicate';
@@ -46,6 +48,8 @@ class KycDocumentRejection implements JsonSerializable
     public const TYPE_DOB_MISMATCH = 'dob-mismatch';
 
     public const TYPE_NAME_MISMATCH = 'name-mismatch';
+
+    public const TYPE_NAME_AND_DOB_MISMATCH = 'name-and-dob-mismatch';
 
     public const TYPE_CRITICAL_INFO_MISSING = 'critical-info-missing';
 
