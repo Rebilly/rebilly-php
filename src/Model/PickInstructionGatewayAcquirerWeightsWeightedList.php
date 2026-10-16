@@ -109,6 +109,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
 
     public const GATEWAY_NAME_COPPR = 'Coppr';
 
+    public const GATEWAY_NAME_CPS = 'Cps';
+
     public const GATEWAY_NAME_CREDORAX = 'Credorax';
 
     public const GATEWAY_NAME_CRYPTOMUS = 'Cryptomus';
@@ -202,6 +204,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
     public const GATEWAY_NAME_I_DEBIT = 'iDebit';
 
     public const GATEWAY_NAME_ILIXIUM = 'Ilixium';
+
+    public const GATEWAY_NAME_I_MERCHANT = 'IMerchant';
 
     public const GATEWAY_NAME_INGENICO = 'Ingenico';
 
@@ -327,6 +331,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
 
     public const GATEWAY_NAME_PAYFLOW = 'Payflow';
 
+    public const GATEWAY_NAME_PAY_GLOCAL = 'PayGlocal';
+
     public const GATEWAY_NAME_PAYNOTE = 'Paynote';
 
     public const GATEWAY_NAME_PAYMENT_ASIA = 'PaymentAsia';
@@ -430,6 +436,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
     public const GATEWAY_NAME_TELR = 'Telr';
 
     public const GATEWAY_NAME_TEST_PROCESSOR = 'TestProcessor';
+
+    public const GATEWAY_NAME_THUNES = 'Thunes';
 
     public const GATEWAY_NAME_TODITO_CASH = 'ToditoCash';
 
@@ -572,6 +580,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
     public const ACQUIRER_NAME_CONEKTA = 'Conekta';
 
     public const ACQUIRER_NAME_COPPR = 'Coppr';
+
+    public const ACQUIRER_NAME_CPS = 'Cps';
 
     public const ACQUIRER_NAME_CREDORAX = 'Credorax';
 
@@ -765,6 +775,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
 
     public const ACQUIRER_NAME_PAY_ECARDS = 'PayEcards';
 
+    public const ACQUIRER_NAME_PAY_GLOCAL = 'PayGlocal';
+
     public const ACQUIRER_NAME_PAYMENT_ASIA = 'PaymentAsia';
 
     public const ACQUIRER_NAME_PAYMEN_TECHNOLOGIES = 'PaymenTechnologies';
@@ -854,6 +866,8 @@ class PickInstructionGatewayAcquirerWeightsWeightedList implements JsonSerializa
     public const ACQUIRER_NAME_TELR = 'Telr';
 
     public const ACQUIRER_NAME_TEST_PROCESSOR = 'TestProcessor';
+
+    public const ACQUIRER_NAME_THUNES = 'Thunes';
 
     public const ACQUIRER_NAME_TODITO_CASH = 'ToditoCash';
 

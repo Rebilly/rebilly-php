@@ -82,8 +82,14 @@ class PayoutRequest implements JsonSerializable
         if (array_key_exists('blockReason', $data)) {
             $this->setBlockReason($data['blockReason']);
         }
+        if (array_key_exists('splitReason', $data)) {
+            $this->setSplitReason($data['splitReason']);
+        }
         if (array_key_exists('batchId', $data)) {
             $this->setBatchId($data['batchId']);
+        }
+        if (array_key_exists('batchDescription', $data)) {
+            $this->setBatchDescription($data['batchDescription']);
         }
         if (array_key_exists('selectPaymentInstrumentUrl', $data)) {
             $this->setSelectPaymentInstrumentUrl($data['selectPaymentInstrumentUrl']);
@@ -239,9 +245,26 @@ class PayoutRequest implements JsonSerializable
         return $this;
     }
 
+    public function getSplitReason(): ?string
+    {
+        return $this->fields['splitReason'] ?? null;
+    }
+
+    public function setSplitReason(null|string $splitReason): static
+    {
+        $this->fields['splitReason'] = $splitReason;
+
+        return $this;
+    }
+
     public function getBatchId(): ?string
     {
         return $this->fields['batchId'] ?? null;
+    }
+
+    public function getBatchDescription(): ?string
+    {
+        return $this->fields['batchDescription'] ?? null;
     }
 
     public function getSelectPaymentInstrumentUrl(): ?string
@@ -345,8 +368,14 @@ class PayoutRequest implements JsonSerializable
         if (array_key_exists('blockReason', $this->fields)) {
             $data['blockReason'] = $this->fields['blockReason'];
         }
+        if (array_key_exists('splitReason', $this->fields)) {
+            $data['splitReason'] = $this->fields['splitReason'];
+        }
         if (array_key_exists('batchId', $this->fields)) {
             $data['batchId'] = $this->fields['batchId'];
+        }
+        if (array_key_exists('batchDescription', $this->fields)) {
+            $data['batchDescription'] = $this->fields['batchDescription'];
         }
         if (array_key_exists('selectPaymentInstrumentUrl', $this->fields)) {
             $data['selectPaymentInstrumentUrl'] = $this->fields['selectPaymentInstrumentUrl'];
@@ -425,6 +454,13 @@ class PayoutRequest implements JsonSerializable
     private function setBatchId(null|string $batchId): static
     {
         $this->fields['batchId'] = $batchId;
+
+        return $this;
+    }
+
+    private function setBatchDescription(null|string $batchDescription): static
+    {
+        $this->fields['batchDescription'] = $batchDescription;
 
         return $this;
     }
