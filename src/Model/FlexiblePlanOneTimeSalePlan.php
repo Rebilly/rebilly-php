@@ -22,10 +22,15 @@ class FlexiblePlanOneTimeSalePlan implements FlexiblePlan
 {
     use HasMetadata;
 
+    public const TYPE_ONE_TIME_SALE = 'one-time-sale';
+
     private array $fields = [];
 
     public function __construct(array $data = [], array $metadata = [])
     {
+        if (array_key_exists('type', $data)) {
+            $this->setType($data['type']);
+        }
         if (array_key_exists('name', $data)) {
             $this->setName($data['name']);
         }
@@ -53,6 +58,9 @@ class FlexiblePlanOneTimeSalePlan implements FlexiblePlan
         if (array_key_exists('setup', $data)) {
             $this->setSetup($data['setup']);
         }
+        if (array_key_exists('setupFee', $data)) {
+            $this->setSetupFee($data['setupFee']);
+        }
         if (array_key_exists('customFields', $data)) {
             $this->setCustomFields($data['customFields']);
         }
@@ -64,6 +72,12 @@ class FlexiblePlanOneTimeSalePlan implements FlexiblePlan
         }
         if (array_key_exists('isTrialOnly', $data)) {
             $this->setIsTrialOnly($data['isTrialOnly']);
+        }
+        if (array_key_exists('recurringInterval', $data)) {
+            $this->setRecurringInterval($data['recurringInterval']);
+        }
+        if (array_key_exists('trial', $data)) {
+            $this->setTrial($data['trial']);
         }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
@@ -83,6 +97,18 @@ class FlexiblePlanOneTimeSalePlan implements FlexiblePlan
     public static function from(array $data = [], array $metadata = []): self
     {
         return new self($data, $metadata);
+    }
+
+    public function getType(): ?string
+    {
+        return $this->fields['type'] ?? null;
+    }
+
+    public function setType(null|string $type): static
+    {
+        $this->fields['type'] = $type;
+
+        return $this;
     }
 
     public function getName(): ?string
@@ -200,6 +226,22 @@ class FlexiblePlanOneTimeSalePlan implements FlexiblePlan
         return $this;
     }
 
+    public function getSetupFee(): ?float
+    {
+        return $this->fields['setupFee'] ?? null;
+    }
+
+    public function setSetupFee(null|float|string $setupFee): static
+    {
+        if (is_string($setupFee)) {
+            $setupFee = (float) $setupFee;
+        }
+
+        $this->fields['setupFee'] = $setupFee;
+
+        return $this;
+    }
+
     public function getCustomFields(): ?array
     {
         return $this->fields['customFields'] ?? null;
@@ -232,6 +274,16 @@ class FlexiblePlanOneTimeSalePlan implements FlexiblePlan
     public function getIsTrialOnly(): ?bool
     {
         return $this->fields['isTrialOnly'] ?? null;
+    }
+
+    public function getRecurringInterval(): null
+    {
+        return $this->fields['recurringInterval'] ?? null;
+    }
+
+    public function getTrial(): null
+    {
+        return $this->fields['trial'] ?? null;
     }
 
     public function getCreatedTime(): ?DateTimeImmutable
@@ -267,6 +319,9 @@ class FlexiblePlanOneTimeSalePlan implements FlexiblePlan
     public function jsonSerialize(): array
     {
         $data = [];
+        if (array_key_exists('type', $this->fields)) {
+            $data['type'] = $this->fields['type'];
+        }
         if (array_key_exists('name', $this->fields)) {
             $data['name'] = $this->fields['name'];
         }
@@ -296,6 +351,9 @@ class FlexiblePlanOneTimeSalePlan implements FlexiblePlan
         if (array_key_exists('setup', $this->fields)) {
             $data['setup'] = $this->fields['setup']?->jsonSerialize();
         }
+        if (array_key_exists('setupFee', $this->fields)) {
+            $data['setupFee'] = $this->fields['setupFee'];
+        }
         if (array_key_exists('customFields', $this->fields)) {
             $data['customFields'] = $this->fields['customFields'];
         }
@@ -307,6 +365,12 @@ class FlexiblePlanOneTimeSalePlan implements FlexiblePlan
         }
         if (array_key_exists('isTrialOnly', $this->fields)) {
             $data['isTrialOnly'] = $this->fields['isTrialOnly'];
+        }
+        if (array_key_exists('recurringInterval', $this->fields)) {
+            $data['recurringInterval'] = $this->fields['recurringInterval'];
+        }
+        if (array_key_exists('trial', $this->fields)) {
+            $data['trial'] = $this->fields['trial'];
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
@@ -346,6 +410,20 @@ class FlexiblePlanOneTimeSalePlan implements FlexiblePlan
     private function setIsTrialOnly(null|bool $isTrialOnly): static
     {
         $this->fields['isTrialOnly'] = $isTrialOnly;
+
+        return $this;
+    }
+
+    private function setRecurringInterval(null $recurringInterval): static
+    {
+        $this->fields['recurringInterval'] = $recurringInterval;
+
+        return $this;
+    }
+
+    private function setTrial(null $trial): static
+    {
+        $this->fields['trial'] = $trial;
 
         return $this;
     }
