@@ -105,6 +105,8 @@ class TagUntagRule implements JsonSerializable
 
     public const EVENT_TYPE_PAYOUT_REQUEST_CANCELED = 'payout-request-canceled';
 
+    public const EVENT_TYPE_PAYOUT_REQUEST_CHANGED = 'payout-request-changed';
+
     public const EVENT_TYPE_PAYOUT_REQUEST_CREATED = 'payout-request-created';
 
     public const EVENT_TYPE_PAYOUT_REQUEST_FULFILLED = 'payout-request-fulfilled';
@@ -160,6 +162,12 @@ class TagUntagRule implements JsonSerializable
     public const EVENT_TYPE_TRANSACTION_DISCREPANCY_FOUND = 'transaction-discrepancy-found';
 
     public const EVENT_TYPE_TRANSACTION_PROCESSED = 'transaction-processed';
+
+    public const EVENT_TYPE_TRANSACTION_PARTIALLY_REFUNDED = 'transaction-partially-refunded';
+
+    public const EVENT_TYPE_TRANSACTION_REFUNDED = 'transaction-refunded';
+
+    public const EVENT_TYPE_TRANSACTION_VOIDED = 'transaction-voided';
 
     public const EVENT_TYPE_TRIAL_USAGE_LIMIT_REACHED = 'trial-usage-limit-reached';
 

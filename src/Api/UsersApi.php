@@ -18,7 +18,6 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
-use Rebilly\Sdk\Model\ProfileMfa;
 use Rebilly\Sdk\Model\User;
 use Rebilly\Sdk\Paginator;
 
@@ -118,24 +117,6 @@ class UsersApi
             $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
             $closure,
         );
-    }
-
-    public function getMfa(
-        string $id,
-    ): ProfileMfa {
-        $pathParams = [
-            '{id}' => $id,
-        ];
-
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/users/{id}/mfa');
-
-        $request = new Request('GET', $uri, headers: [
-            'Accept' => 'application/json',
-        ]);
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return ProfileMfa::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function update(

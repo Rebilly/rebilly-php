@@ -70,6 +70,12 @@ class RecurringOrder implements Order
 
     public const CANCEL_CATEGORY_SWITCHED_PLAN = 'switched-plan';
 
+    public const CANCEL_CATEGORY_ORGANIZATION_DEACTIVATED = 'organization-deactivated';
+
+    public const CANCEL_CATEGORY_DELINQUENCY = 'delinquency';
+
+    public const CANCEL_CATEGORY_SANDBOX_RETENTION = 'sandbox-retention';
+
     public const CANCEL_CATEGORY_OTHER = 'other';
 
     public const CANCEL_CATEGORY_NULL = 'null';

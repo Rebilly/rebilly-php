@@ -21,6 +21,10 @@ class AdyenSettingsSplitPayments implements JsonSerializable
 {
     use HasMetadata;
 
+    public const CARD_TYPE_CREDIT = 'credit';
+
+    public const CARD_TYPE_DEBIT = 'debit';
+
     public const TYPE_BALANCE_ACCOUNT = 'BalanceAccount';
 
     public const TYPE_COMMISSION = 'Commission';
@@ -47,6 +51,9 @@ class AdyenSettingsSplitPayments implements JsonSerializable
         }
         if (array_key_exists('merchantCountry', $data)) {
             $this->setMerchantCountry($data['merchantCountry']);
+        }
+        if (array_key_exists('cardType', $data)) {
+            $this->setCardType($data['cardType']);
         }
         if (array_key_exists('type', $data)) {
             $this->setType($data['type']);
@@ -127,6 +134,18 @@ class AdyenSettingsSplitPayments implements JsonSerializable
         return $this;
     }
 
+    public function getCardType(): ?string
+    {
+        return $this->fields['cardType'] ?? null;
+    }
+
+    public function setCardType(null|string $cardType): static
+    {
+        $this->fields['cardType'] = $cardType;
+
+        return $this;
+    }
+
     public function getType(): ?string
     {
         return $this->fields['type'] ?? null;
@@ -156,6 +175,9 @@ class AdyenSettingsSplitPayments implements JsonSerializable
         }
         if (array_key_exists('merchantCountry', $this->fields)) {
             $data['merchantCountry'] = $this->fields['merchantCountry'];
+        }
+        if (array_key_exists('cardType', $this->fields)) {
+            $data['cardType'] = $this->fields['cardType'];
         }
         if (array_key_exists('type', $this->fields)) {
             $data['type'] = $this->fields['type'];

@@ -113,7 +113,7 @@ class OrderPreview implements JsonSerializable
     public function setItems(array $items): static
     {
         $items = array_map(
-            fn ($value) => $value instanceof OrderPreviewItems ? $value : OrderPreviewItems::from($value),
+            fn ($value) => $value instanceof OrderPreviewItems ? $value : OrderPreviewItemsFactory::from($value),
             $items,
         );
 

@@ -16,7 +16,7 @@ namespace Rebilly\Sdk\Model;
 
 use Rebilly\Sdk\Trait\HasMetadata;
 
-class CheckInstrument implements CustomerDefaultPaymentInstrument, TransactionPaymentInstrument
+class CheckInstrument implements TransactionPaymentInstrument
 {
     use HasMetadata;
 

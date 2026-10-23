@@ -81,11 +81,26 @@ class Profile implements JsonSerializable
         if (array_key_exists('hasPermissionsEmulation', $data)) {
             $this->setHasPermissionsEmulation($data['hasPermissionsEmulation']);
         }
+        if (array_key_exists('mfaRequiredByOrganization', $data)) {
+            $this->setMfaRequiredByOrganization($data['mfaRequiredByOrganization']);
+        }
         if (array_key_exists('displayName', $data)) {
             $this->setDisplayName($data['displayName']);
         }
         if (array_key_exists('hash', $data)) {
             $this->setHash($data['hash']);
+        }
+        if (array_key_exists('requiresCardOnFile', $data)) {
+            $this->setRequiresCardOnFile($data['requiresCardOnFile']);
+        }
+        if (array_key_exists('hasCardOnFile', $data)) {
+            $this->setHasCardOnFile($data['hasCardOnFile']);
+        }
+        if (array_key_exists('billingManagementToken', $data)) {
+            $this->setBillingManagementToken($data['billingManagementToken']);
+        }
+        if (array_key_exists('pastDueInvoice', $data)) {
+            $this->setPastDueInvoice($data['pastDueInvoice']);
         }
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
@@ -191,6 +206,11 @@ class Profile implements JsonSerializable
         return $this->fields['hasPermissionsEmulation'] ?? null;
     }
 
+    public function getMfaRequiredByOrganization(): ?bool
+    {
+        return $this->fields['mfaRequiredByOrganization'] ?? null;
+    }
+
     public function getDisplayName(): ?string
     {
         return $this->fields['displayName'] ?? null;
@@ -199,6 +219,37 @@ class Profile implements JsonSerializable
     public function getHash(): ?string
     {
         return $this->fields['hash'] ?? null;
+    }
+
+    public function getRequiresCardOnFile(): ?bool
+    {
+        return $this->fields['requiresCardOnFile'] ?? null;
+    }
+
+    public function getHasCardOnFile(): ?bool
+    {
+        return $this->fields['hasCardOnFile'] ?? null;
+    }
+
+    public function getBillingManagementToken(): ?string
+    {
+        return $this->fields['billingManagementToken'] ?? null;
+    }
+
+    public function getPastDueInvoice(): ?ProfilePastDueInvoice
+    {
+        return $this->fields['pastDueInvoice'] ?? null;
+    }
+
+    public function setPastDueInvoice(null|ProfilePastDueInvoice|array $pastDueInvoice): static
+    {
+        if ($pastDueInvoice !== null && !($pastDueInvoice instanceof ProfilePastDueInvoice)) {
+            $pastDueInvoice = ProfilePastDueInvoice::from($pastDueInvoice);
+        }
+
+        $this->fields['pastDueInvoice'] = $pastDueInvoice;
+
+        return $this;
     }
 
     /**
@@ -260,11 +311,26 @@ class Profile implements JsonSerializable
         if (array_key_exists('hasPermissionsEmulation', $this->fields)) {
             $data['hasPermissionsEmulation'] = $this->fields['hasPermissionsEmulation'];
         }
+        if (array_key_exists('mfaRequiredByOrganization', $this->fields)) {
+            $data['mfaRequiredByOrganization'] = $this->fields['mfaRequiredByOrganization'];
+        }
         if (array_key_exists('displayName', $this->fields)) {
             $data['displayName'] = $this->fields['displayName'];
         }
         if (array_key_exists('hash', $this->fields)) {
             $data['hash'] = $this->fields['hash'];
+        }
+        if (array_key_exists('requiresCardOnFile', $this->fields)) {
+            $data['requiresCardOnFile'] = $this->fields['requiresCardOnFile'];
+        }
+        if (array_key_exists('hasCardOnFile', $this->fields)) {
+            $data['hasCardOnFile'] = $this->fields['hasCardOnFile'];
+        }
+        if (array_key_exists('billingManagementToken', $this->fields)) {
+            $data['billingManagementToken'] = $this->fields['billingManagementToken'];
+        }
+        if (array_key_exists('pastDueInvoice', $this->fields)) {
+            $data['pastDueInvoice'] = $this->fields['pastDueInvoice']?->jsonSerialize();
         }
         if (array_key_exists('_links', $this->fields)) {
             $data['_links'] = $this->fields['_links'] !== null
@@ -401,6 +467,13 @@ class Profile implements JsonSerializable
         return $this;
     }
 
+    private function setMfaRequiredByOrganization(null|bool $mfaRequiredByOrganization): static
+    {
+        $this->fields['mfaRequiredByOrganization'] = $mfaRequiredByOrganization;
+
+        return $this;
+    }
+
     private function setDisplayName(null|string $displayName): static
     {
         $this->fields['displayName'] = $displayName;
@@ -411,6 +484,27 @@ class Profile implements JsonSerializable
     private function setHash(null|string $hash): static
     {
         $this->fields['hash'] = $hash;
+
+        return $this;
+    }
+
+    private function setRequiresCardOnFile(null|bool $requiresCardOnFile): static
+    {
+        $this->fields['requiresCardOnFile'] = $requiresCardOnFile;
+
+        return $this;
+    }
+
+    private function setHasCardOnFile(null|bool $hasCardOnFile): static
+    {
+        $this->fields['hasCardOnFile'] = $hasCardOnFile;
+
+        return $this;
+    }
+
+    private function setBillingManagementToken(null|string $billingManagementToken): static
+    {
+        $this->fields['billingManagementToken'] = $billingManagementToken;
 
         return $this;
     }

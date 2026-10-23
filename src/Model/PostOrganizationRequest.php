@@ -63,6 +63,9 @@ class PostOrganizationRequest implements JsonSerializable
         if (array_key_exists('taxDescriptor', $data)) {
             $this->setTaxDescriptor($data['taxDescriptor']);
         }
+        if (array_key_exists('regulatorOperatorId', $data)) {
+            $this->setRegulatorOperatorId($data['regulatorOperatorId']);
+        }
         if (array_key_exists('invoiceTimeZone', $data)) {
             $this->setInvoiceTimeZone($data['invoiceTimeZone']);
         }
@@ -257,6 +260,18 @@ class PostOrganizationRequest implements JsonSerializable
         return $this;
     }
 
+    public function getRegulatorOperatorId(): ?string
+    {
+        return $this->fields['regulatorOperatorId'] ?? null;
+    }
+
+    public function setRegulatorOperatorId(null|string $regulatorOperatorId): static
+    {
+        $this->fields['regulatorOperatorId'] = $regulatorOperatorId;
+
+        return $this;
+    }
+
     public function getInvoiceTimeZone(): ?string
     {
         return $this->fields['invoiceTimeZone'] ?? null;
@@ -410,6 +425,9 @@ class PostOrganizationRequest implements JsonSerializable
         }
         if (array_key_exists('taxDescriptor', $this->fields)) {
             $data['taxDescriptor'] = $this->fields['taxDescriptor'];
+        }
+        if (array_key_exists('regulatorOperatorId', $this->fields)) {
+            $data['regulatorOperatorId'] = $this->fields['regulatorOperatorId'];
         }
         if (array_key_exists('invoiceTimeZone', $this->fields)) {
             $data['invoiceTimeZone'] = $this->fields['invoiceTimeZone'];

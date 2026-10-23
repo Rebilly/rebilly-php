@@ -33,20 +33,20 @@ class PayoutRequestBatch implements JsonSerializable
         if (array_key_exists('userId', $data)) {
             $this->setUserId($data['userId']);
         }
+        if (array_key_exists('user', $data)) {
+            $this->setUser($data['user']);
+        }
         if (array_key_exists('totalCount', $data)) {
             $this->setTotalCount($data['totalCount']);
-        }
-        if (array_key_exists('successCount', $data)) {
-            $this->setSuccessCount($data['successCount']);
-        }
-        if (array_key_exists('failureCount', $data)) {
-            $this->setFailureCount($data['failureCount']);
         }
         if (array_key_exists('customerCount', $data)) {
             $this->setCustomerCount($data['customerCount']);
         }
         if (array_key_exists('totalAmountByCurrency', $data)) {
             $this->setTotalAmountByCurrency($data['totalAmountByCurrency']);
+        }
+        if (array_key_exists('name', $data)) {
+            $this->setName($data['name']);
         }
         if (array_key_exists('description', $data)) {
             $this->setDescription($data['description']);
@@ -81,19 +81,25 @@ class PayoutRequestBatch implements JsonSerializable
         return $this->fields['userId'] ?? null;
     }
 
+    public function getUser(): ?PayoutRequestBatchUser
+    {
+        return $this->fields['user'] ?? null;
+    }
+
+    public function setUser(null|PayoutRequestBatchUser|array $user): static
+    {
+        if ($user !== null && !($user instanceof PayoutRequestBatchUser)) {
+            $user = PayoutRequestBatchUser::from($user);
+        }
+
+        $this->fields['user'] = $user;
+
+        return $this;
+    }
+
     public function getTotalCount(): ?int
     {
         return $this->fields['totalCount'] ?? null;
-    }
-
-    public function getSuccessCount(): ?int
-    {
-        return $this->fields['successCount'] ?? null;
-    }
-
-    public function getFailureCount(): ?int
-    {
-        return $this->fields['failureCount'] ?? null;
     }
 
     public function getCustomerCount(): ?int
@@ -107,6 +113,18 @@ class PayoutRequestBatch implements JsonSerializable
     public function getTotalAmountByCurrency(): ?array
     {
         return $this->fields['totalAmountByCurrency'] ?? null;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->fields['name'] ?? null;
+    }
+
+    public function setName(null|string $name): static
+    {
+        $this->fields['name'] = $name;
+
+        return $this;
     }
 
     public function getDescription(): ?string
@@ -166,14 +184,11 @@ class PayoutRequestBatch implements JsonSerializable
         if (array_key_exists('userId', $this->fields)) {
             $data['userId'] = $this->fields['userId'];
         }
+        if (array_key_exists('user', $this->fields)) {
+            $data['user'] = $this->fields['user']?->jsonSerialize();
+        }
         if (array_key_exists('totalCount', $this->fields)) {
             $data['totalCount'] = $this->fields['totalCount'];
-        }
-        if (array_key_exists('successCount', $this->fields)) {
-            $data['successCount'] = $this->fields['successCount'];
-        }
-        if (array_key_exists('failureCount', $this->fields)) {
-            $data['failureCount'] = $this->fields['failureCount'];
         }
         if (array_key_exists('customerCount', $this->fields)) {
             $data['customerCount'] = $this->fields['customerCount'];
@@ -185,6 +200,9 @@ class PayoutRequestBatch implements JsonSerializable
                     $this->fields['totalAmountByCurrency'],
                 )
                 : null;
+        }
+        if (array_key_exists('name', $this->fields)) {
+            $data['name'] = $this->fields['name'];
         }
         if (array_key_exists('description', $this->fields)) {
             $data['description'] = $this->fields['description'];
@@ -227,20 +245,6 @@ class PayoutRequestBatch implements JsonSerializable
     private function setTotalCount(null|int $totalCount): static
     {
         $this->fields['totalCount'] = $totalCount;
-
-        return $this;
-    }
-
-    private function setSuccessCount(null|int $successCount): static
-    {
-        $this->fields['successCount'] = $successCount;
-
-        return $this;
-    }
-
-    private function setFailureCount(null|int $failureCount): static
-    {
-        $this->fields['failureCount'] = $failureCount;
 
         return $this;
     }
