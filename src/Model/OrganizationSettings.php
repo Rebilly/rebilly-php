@@ -37,6 +37,12 @@ class OrganizationSettings implements JsonSerializable
         if (array_key_exists('notifications', $data)) {
             $this->setNotifications($data['notifications']);
         }
+        if (array_key_exists('security', $data)) {
+            $this->setSecurity($data['security']);
+        }
+        if (array_key_exists('annualComplianceScreening', $data)) {
+            $this->setAnnualComplianceScreening($data['annualComplianceScreening']);
+        }
         if (array_key_exists('payoutRequestAllocationOrder', $data)) {
             $this->setPayoutRequestAllocationOrder($data['payoutRequestAllocationOrder']);
         }
@@ -119,6 +125,38 @@ class OrganizationSettings implements JsonSerializable
         return $this;
     }
 
+    public function getSecurity(): ?OrganizationSettingsSecurity
+    {
+        return $this->fields['security'] ?? null;
+    }
+
+    public function setSecurity(null|OrganizationSettingsSecurity|array $security): static
+    {
+        if ($security !== null && !($security instanceof OrganizationSettingsSecurity)) {
+            $security = OrganizationSettingsSecurity::from($security);
+        }
+
+        $this->fields['security'] = $security;
+
+        return $this;
+    }
+
+    public function getAnnualComplianceScreening(): ?OrganizationSettingsAnnualComplianceScreening
+    {
+        return $this->fields['annualComplianceScreening'] ?? null;
+    }
+
+    public function setAnnualComplianceScreening(null|OrganizationSettingsAnnualComplianceScreening|array $annualComplianceScreening): static
+    {
+        if ($annualComplianceScreening !== null && !($annualComplianceScreening instanceof OrganizationSettingsAnnualComplianceScreening)) {
+            $annualComplianceScreening = OrganizationSettingsAnnualComplianceScreening::from($annualComplianceScreening);
+        }
+
+        $this->fields['annualComplianceScreening'] = $annualComplianceScreening;
+
+        return $this;
+    }
+
     /**
      * @return null|string[]
      */
@@ -156,6 +194,12 @@ class OrganizationSettings implements JsonSerializable
         }
         if (array_key_exists('notifications', $this->fields)) {
             $data['notifications'] = $this->fields['notifications']?->jsonSerialize();
+        }
+        if (array_key_exists('security', $this->fields)) {
+            $data['security'] = $this->fields['security']?->jsonSerialize();
+        }
+        if (array_key_exists('annualComplianceScreening', $this->fields)) {
+            $data['annualComplianceScreening'] = $this->fields['annualComplianceScreening']?->jsonSerialize();
         }
         if (array_key_exists('payoutRequestAllocationOrder', $this->fields)) {
             $data['payoutRequestAllocationOrder'] = $this->fields['payoutRequestAllocationOrder'];

@@ -18,6 +18,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Model\DigitalWalletOnboardingApplePay;
+use Rebilly\Sdk\Model\DigitalWalletOnboardingApplePayDomains;
 use Rebilly\Sdk\Model\DigitalWalletValidation;
 
 class DigitalWalletsApi
@@ -38,6 +39,32 @@ class DigitalWalletsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return DigitalWalletOnboardingApplePay::from($data, ['headers' => $response->getHeaders()]);
+    }
+
+    public function deleteApplePayDomain(
+        string $domain,
+    ): void {
+        $pathParams = [
+            '{domain}' => $domain,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/digital-wallets/onboarding/apple-pay/{domain}');
+
+        $request = new Request('DELETE', $uri);
+        $this->client->send($request);
+    }
+
+    public function getApplePayDomains(): DigitalWalletOnboardingApplePayDomains
+    {
+        $uri = '/digital-wallets/onboarding/apple-pay';
+
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return DigitalWalletOnboardingApplePayDomains::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function validate(

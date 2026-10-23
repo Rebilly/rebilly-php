@@ -16,9 +16,10 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
+use JsonSerializable;
 use Rebilly\Sdk\Trait\HasMetadata;
 
-class KycIdentityMatches implements PostKycDocumentMatchesRequest
+class KycIdentityMatches implements JsonSerializable
 {
     use HasMetadata;
 
@@ -145,6 +146,9 @@ class KycIdentityMatches implements PostKycDocumentMatchesRequest
         }
         if (array_key_exists('hasCompletedFaceLiveness', $data)) {
             $this->setHasCompletedFaceLiveness($data['hasCompletedFaceLiveness']);
+        }
+        if (array_key_exists('faceProofBrightness', $data)) {
+            $this->setFaceProofBrightness($data['faceProofBrightness']);
         }
         if (array_key_exists('expiryDate', $data)) {
             $this->setExpiryDate($data['expiryDate']);
@@ -408,6 +412,11 @@ class KycIdentityMatches implements PostKycDocumentMatchesRequest
         return $this->fields['hasCompletedFaceLiveness'] ?? null;
     }
 
+    public function getFaceProofBrightness(): ?float
+    {
+        return $this->fields['faceProofBrightness'] ?? null;
+    }
+
     public function getExpiryDate(): ?DateTimeImmutable
     {
         return $this->fields['expiryDate'] ?? null;
@@ -493,6 +502,9 @@ class KycIdentityMatches implements PostKycDocumentMatchesRequest
         if (array_key_exists('hasCompletedFaceLiveness', $this->fields)) {
             $data['hasCompletedFaceLiveness'] = $this->fields['hasCompletedFaceLiveness'];
         }
+        if (array_key_exists('faceProofBrightness', $this->fields)) {
+            $data['faceProofBrightness'] = $this->fields['faceProofBrightness'];
+        }
         if (array_key_exists('expiryDate', $this->fields)) {
             $data['expiryDate'] = $this->fields['expiryDate']?->format(DateTimeInterface::RFC3339);
         }
@@ -527,6 +539,17 @@ class KycIdentityMatches implements PostKycDocumentMatchesRequest
     private function setHasCompletedFaceLiveness(null|bool $hasCompletedFaceLiveness): static
     {
         $this->fields['hasCompletedFaceLiveness'] = $hasCompletedFaceLiveness;
+
+        return $this;
+    }
+
+    private function setFaceProofBrightness(null|float|string $faceProofBrightness): static
+    {
+        if (is_string($faceProofBrightness)) {
+            $faceProofBrightness = (float) $faceProofBrightness;
+        }
+
+        $this->fields['faceProofBrightness'] = $faceProofBrightness;
 
         return $this;
     }

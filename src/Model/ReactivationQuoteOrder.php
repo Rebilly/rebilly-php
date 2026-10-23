@@ -45,6 +45,9 @@ class ReactivationQuoteOrder implements JsonSerializable
         if (array_key_exists('autopay', $data)) {
             $this->setAutopay($data['autopay']);
         }
+        if (array_key_exists('includeUnpaidInvoices', $data)) {
+            $this->setIncludeUnpaidInvoices($data['includeUnpaidInvoices']);
+        }
         if (array_key_exists('shipping', $data)) {
             $this->setShipping($data['shipping']);
         }
@@ -153,15 +156,27 @@ class ReactivationQuoteOrder implements JsonSerializable
         return $this;
     }
 
-    public function getShipping(): ?Shipping
+    public function getIncludeUnpaidInvoices(): ?bool
+    {
+        return $this->fields['includeUnpaidInvoices'] ?? null;
+    }
+
+    public function setIncludeUnpaidInvoices(null|bool $includeUnpaidInvoices): static
+    {
+        $this->fields['includeUnpaidInvoices'] = $includeUnpaidInvoices;
+
+        return $this;
+    }
+
+    public function getShipping(): ?ReactivationQuoteOrderShipping
     {
         return $this->fields['shipping'] ?? null;
     }
 
-    public function setShipping(null|Shipping|array $shipping): static
+    public function setShipping(null|ReactivationQuoteOrderShipping|array $shipping): static
     {
-        if ($shipping !== null && !($shipping instanceof Shipping)) {
-            $shipping = ShippingFactory::from($shipping);
+        if ($shipping !== null && !($shipping instanceof ReactivationQuoteOrderShipping)) {
+            $shipping = ReactivationQuoteOrderShipping::from($shipping);
         }
 
         $this->fields['shipping'] = $shipping;
@@ -224,6 +239,9 @@ class ReactivationQuoteOrder implements JsonSerializable
         }
         if (array_key_exists('autopay', $this->fields)) {
             $data['autopay'] = $this->fields['autopay'];
+        }
+        if (array_key_exists('includeUnpaidInvoices', $this->fields)) {
+            $data['includeUnpaidInvoices'] = $this->fields['includeUnpaidInvoices'];
         }
         if (array_key_exists('shipping', $this->fields)) {
             $data['shipping'] = $this->fields['shipping']?->jsonSerialize();

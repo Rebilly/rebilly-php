@@ -84,24 +84,24 @@ class WorldlineAtosFrankfurtCredentials implements JsonSerializable
         return $this;
     }
 
-    public function getClientCertificate(): ?string
+    public function getClientCertificate(): string
     {
-        return $this->fields['clientCertificate'] ?? null;
+        return $this->fields['clientCertificate'];
     }
 
-    public function setClientCertificate(null|string $clientCertificate): static
+    public function setClientCertificate(string $clientCertificate): static
     {
         $this->fields['clientCertificate'] = $clientCertificate;
 
         return $this;
     }
 
-    public function getPrivateKey(): ?string
+    public function getPrivateKey(): string
     {
-        return $this->fields['privateKey'] ?? null;
+        return $this->fields['privateKey'];
     }
 
-    public function setPrivateKey(null|string $privateKey): static
+    public function setPrivateKey(string $privateKey): static
     {
         $this->fields['privateKey'] = $privateKey;
 
