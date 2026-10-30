@@ -18,27 +18,15 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
-use Rebilly\Sdk\Model\GetPayoutRequestAllocationCollectionResponse;
 use Rebilly\Sdk\Model\PatchPayoutRequestAllocationRequest;
 use Rebilly\Sdk\Model\PayoutRequestAllocation;
 use Rebilly\Sdk\Model\PostPayoutRequestAllocationRequest;
-use Rebilly\Sdk\Model\PostPayoutRequestAllocationsProcessRequest;
-use Rebilly\Sdk\Model\PostPayoutRequestAutoAllocationRequest;
 use Rebilly\Sdk\Paginator;
 
 class PayoutRequestAllocationsApi
 {
     public function __construct(protected ?ClientInterface $client)
     {
-    }
-
-    public function autoAllocate(
-        PostPayoutRequestAutoAllocationRequest $postPayoutRequestAutoAllocationRequest,
-    ): void {
-        $uri = '/payout-request-allocations/auto';
-
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($postPayoutRequestAutoAllocationRequest));
-        $this->client->send($request);
     }
 
     public function create(
@@ -74,7 +62,7 @@ class PayoutRequestAllocationsApi
     }
 
     /**
-     * @return Collection<GetPayoutRequestAllocationCollectionResponse>
+     * @return Collection<PayoutRequestAllocation>
      */
     public function getAll(
         ?int $limit = null,
@@ -97,7 +85,7 @@ class PayoutRequestAllocationsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return new Collection(
-            array_map(fn (array $item): GetPayoutRequestAllocationCollectionResponse => GetPayoutRequestAllocationCollectionResponse::from($item, ['headers' => $response->getHeaders()]), $data),
+            array_map(fn (array $item): PayoutRequestAllocation => PayoutRequestAllocation::from($item, ['headers' => $response->getHeaders()]), $data),
             (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
             (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
             (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
@@ -108,7 +96,7 @@ class PayoutRequestAllocationsApi
     }
 
     /**
-     * @return Paginator<GetPayoutRequestAllocationCollectionResponse>
+     * @return Paginator<PayoutRequestAllocation>
      */
     public function getAllPaginator(
         ?int $limit = null,
@@ -127,15 +115,6 @@ class PayoutRequestAllocationsApi
             $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
             $closure,
         );
-    }
-
-    public function process(
-        PostPayoutRequestAllocationsProcessRequest $postPayoutRequestAllocationsProcessRequest,
-    ): void {
-        $uri = '/payout-request-allocations/process';
-
-        $request = new Request('POST', $uri, body: Utils::jsonEncode($postPayoutRequestAllocationsProcessRequest));
-        $this->client->send($request);
     }
 
     public function update(

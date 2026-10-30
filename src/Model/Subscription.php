@@ -94,6 +94,8 @@ class Subscription implements SubscriptionOrOneTimeSale
 
     public const CANCEL_CATEGORY_ORGANIZATION_DEACTIVATED = 'organization-deactivated';
 
+    public const CANCEL_CATEGORY_SANDBOX_RETENTION = 'sandbox-retention';
+
     public const CANCEL_CATEGORY_OTHER = 'other';
 
     public const CANCEL_CATEGORY_NULL = 'null';
@@ -140,9 +142,6 @@ class Subscription implements SubscriptionOrOneTimeSale
         }
         if (array_key_exists('invoiceTimeShift', $data)) {
             $this->setInvoiceTimeShift($data['invoiceTimeShift']);
-        }
-        if (array_key_exists('recurringInterval', $data)) {
-            $this->setRecurringInterval($data['recurringInterval']);
         }
         if (array_key_exists('autopay', $data)) {
             $this->setAutopay($data['autopay']);
@@ -218,6 +217,9 @@ class Subscription implements SubscriptionOrOneTimeSale
         }
         if (array_key_exists('poNumber', $data)) {
             $this->setPoNumber($data['poNumber']);
+        }
+        if (array_key_exists('sandboxRetention', $data)) {
+            $this->setSandboxRetention($data['sandboxRetention']);
         }
         if (array_key_exists('shipping', $data)) {
             $this->setShipping($data['shipping']);
@@ -371,22 +373,6 @@ class Subscription implements SubscriptionOrOneTimeSale
         }
 
         $this->fields['invoiceTimeShift'] = $invoiceTimeShift;
-
-        return $this;
-    }
-
-    public function getRecurringInterval(): ?SubscriptionRecurringInterval
-    {
-        return $this->fields['recurringInterval'] ?? null;
-    }
-
-    public function setRecurringInterval(null|SubscriptionRecurringInterval|array $recurringInterval): static
-    {
-        if ($recurringInterval !== null && !($recurringInterval instanceof SubscriptionRecurringInterval)) {
-            $recurringInterval = SubscriptionRecurringInterval::from($recurringInterval);
-        }
-
-        $this->fields['recurringInterval'] = $recurringInterval;
 
         return $this;
     }
@@ -651,6 +637,22 @@ class Subscription implements SubscriptionOrOneTimeSale
         return $this;
     }
 
+    public function getSandboxRetention(): ?SandboxRetention
+    {
+        return $this->fields['sandboxRetention'] ?? null;
+    }
+
+    public function setSandboxRetention(null|SandboxRetention|array $sandboxRetention): static
+    {
+        if ($sandboxRetention !== null && !($sandboxRetention instanceof SandboxRetention)) {
+            $sandboxRetention = SandboxRetention::from($sandboxRetention);
+        }
+
+        $this->fields['sandboxRetention'] = $sandboxRetention;
+
+        return $this;
+    }
+
     public function getShipping(): ?Shipping
     {
         return $this->fields['shipping'] ?? null;
@@ -815,9 +817,6 @@ class Subscription implements SubscriptionOrOneTimeSale
         if (array_key_exists('invoiceTimeShift', $this->fields)) {
             $data['invoiceTimeShift'] = $this->fields['invoiceTimeShift']?->jsonSerialize();
         }
-        if (array_key_exists('recurringInterval', $this->fields)) {
-            $data['recurringInterval'] = $this->fields['recurringInterval']?->jsonSerialize();
-        }
         if (array_key_exists('autopay', $this->fields)) {
             $data['autopay'] = $this->fields['autopay'];
         }
@@ -900,6 +899,9 @@ class Subscription implements SubscriptionOrOneTimeSale
         }
         if (array_key_exists('poNumber', $this->fields)) {
             $data['poNumber'] = $this->fields['poNumber'];
+        }
+        if (array_key_exists('sandboxRetention', $this->fields)) {
+            $data['sandboxRetention'] = $this->fields['sandboxRetention']?->jsonSerialize();
         }
         if (array_key_exists('shipping', $this->fields)) {
             $data['shipping'] = $this->fields['shipping']?->jsonSerialize();

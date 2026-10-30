@@ -70,16 +70,23 @@ class TimeSeriesTransactionData implements JsonSerializable
         return $this;
     }
 
-    public function getSubaggregates(): ?TimeSeriesTransactionDataSubaggregates
+    /**
+     * @return null|TimeSeriesTransactionDataSubaggregates[]
+     */
+    public function getSubaggregates(): ?array
     {
         return $this->fields['subaggregates'] ?? null;
     }
 
-    public function setSubaggregates(null|TimeSeriesTransactionDataSubaggregates|array $subaggregates): static
+    /**
+     * @param null|array[]|TimeSeriesTransactionDataSubaggregates[] $subaggregates
+     */
+    public function setSubaggregates(null|array $subaggregates): static
     {
-        if ($subaggregates !== null && !($subaggregates instanceof TimeSeriesTransactionDataSubaggregates)) {
-            $subaggregates = TimeSeriesTransactionDataSubaggregates::from($subaggregates);
-        }
+        $subaggregates = $subaggregates !== null ? array_map(
+            fn ($value) => $value instanceof TimeSeriesTransactionDataSubaggregates ? $value : TimeSeriesTransactionDataSubaggregates::from($value),
+            $subaggregates,
+        ) : null;
 
         $this->fields['subaggregates'] = $subaggregates;
 
@@ -96,7 +103,12 @@ class TimeSeriesTransactionData implements JsonSerializable
             $data['total'] = $this->fields['total'];
         }
         if (array_key_exists('subaggregates', $this->fields)) {
-            $data['subaggregates'] = $this->fields['subaggregates']?->jsonSerialize();
+            $data['subaggregates'] = $this->fields['subaggregates'] !== null
+                ? array_map(
+                    static fn (TimeSeriesTransactionDataSubaggregates $timeSeriesTransactionDataSubaggregates) => $timeSeriesTransactionDataSubaggregates->jsonSerialize(),
+                    $this->fields['subaggregates'],
+                )
+                : null;
         }
 
         return $data;

@@ -46,6 +46,15 @@ class ApiKey implements JsonSerializable
         if (array_key_exists('allowedIps', $data)) {
             $this->setAllowedIps($data['allowedIps']);
         }
+        if (array_key_exists('lastUsedTime', $data)) {
+            $this->setLastUsedTime($data['lastUsedTime']);
+        }
+        if (array_key_exists('lastUsedIp', $data)) {
+            $this->setLastUsedIp($data['lastUsedIp']);
+        }
+        if (array_key_exists('expirationTime', $data)) {
+            $this->setExpirationTime($data['expirationTime']);
+        }
         if (array_key_exists('apiUser', $data)) {
             $this->setApiUser($data['apiUser']);
         }
@@ -139,6 +148,32 @@ class ApiKey implements JsonSerializable
         return $this;
     }
 
+    public function getLastUsedTime(): ?DateTimeImmutable
+    {
+        return $this->fields['lastUsedTime'] ?? null;
+    }
+
+    public function getLastUsedIp(): ?string
+    {
+        return $this->fields['lastUsedIp'] ?? null;
+    }
+
+    public function getExpirationTime(): ?DateTimeImmutable
+    {
+        return $this->fields['expirationTime'] ?? null;
+    }
+
+    public function setExpirationTime(null|DateTimeImmutable|string $expirationTime): static
+    {
+        if ($expirationTime !== null && !($expirationTime instanceof DateTimeImmutable)) {
+            $expirationTime = new DateTimeImmutable($expirationTime);
+        }
+
+        $this->fields['expirationTime'] = $expirationTime;
+
+        return $this;
+    }
+
     public function getApiUser(): ?string
     {
         return $this->fields['apiUser'] ?? null;
@@ -190,6 +225,15 @@ class ApiKey implements JsonSerializable
         if (array_key_exists('allowedIps', $this->fields)) {
             $data['allowedIps'] = $this->fields['allowedIps'];
         }
+        if (array_key_exists('lastUsedTime', $this->fields)) {
+            $data['lastUsedTime'] = $this->fields['lastUsedTime']?->format(DateTimeInterface::RFC3339);
+        }
+        if (array_key_exists('lastUsedIp', $this->fields)) {
+            $data['lastUsedIp'] = $this->fields['lastUsedIp'];
+        }
+        if (array_key_exists('expirationTime', $this->fields)) {
+            $data['expirationTime'] = $this->fields['expirationTime']?->format(DateTimeInterface::RFC3339);
+        }
         if (array_key_exists('apiUser', $this->fields)) {
             $data['apiUser'] = $this->fields['apiUser'];
         }
@@ -217,6 +261,24 @@ class ApiKey implements JsonSerializable
     private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
+
+        return $this;
+    }
+
+    private function setLastUsedTime(null|DateTimeImmutable|string $lastUsedTime): static
+    {
+        if ($lastUsedTime !== null && !($lastUsedTime instanceof DateTimeImmutable)) {
+            $lastUsedTime = new DateTimeImmutable($lastUsedTime);
+        }
+
+        $this->fields['lastUsedTime'] = $lastUsedTime;
+
+        return $this;
+    }
+
+    private function setLastUsedIp(null|string $lastUsedIp): static
+    {
+        $this->fields['lastUsedIp'] = $lastUsedIp;
 
         return $this;
     }
