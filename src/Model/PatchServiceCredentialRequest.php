@@ -15,10 +15,88 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
 
-interface PatchServiceCredentialRequest extends JsonSerializable
+class PatchServiceCredentialRequest implements JsonSerializable
 {
-    public function getStatus(): ?string;
+    use HasMetadata;
 
-    public function setStatus(string $status): static;
+    public const STATUS_ACTIVE = 'active';
+
+    public const STATUS_INACTIVE = 'inactive';
+
+    public const STATUS_DEACTIVATED = 'deactivated';
+
+    public const TYPE_SMTP = 'smtp';
+
+    public const TYPE_WEBHOOK = 'webhook';
+
+    public const TYPE_MAILGUN = 'mailgun';
+
+    public const TYPE_SENDGRID = 'sendgrid';
+
+    public const TYPE_AWS_SES = 'aws-ses';
+
+    public const TYPE_OAUTH2 = 'oauth2';
+
+    public const TYPE_POSTMARK = 'postmark';
+
+    public const TYPE_EXPERIAN = 'experian';
+
+    public const TYPE_AVALARA = 'avalara';
+
+    private array $fields = [];
+
+    public function __construct(array $data = [], array $metadata = [])
+    {
+        if (array_key_exists('status', $data)) {
+            $this->setStatus($data['status']);
+        }
+        if (array_key_exists('type', $data)) {
+            $this->setType($data['type']);
+        }
+        $this->setMetadata($metadata);
+    }
+
+    public static function from(array $data = [], array $metadata = []): self
+    {
+        return new self($data, $metadata);
+    }
+
+    public function getStatus(): string
+    {
+        return $this->fields['status'];
+    }
+
+    public function setStatus(string $status): static
+    {
+        $this->fields['status'] = $status;
+
+        return $this;
+    }
+
+    public function getType(): string
+    {
+        return $this->fields['type'];
+    }
+
+    public function setType(string $type): static
+    {
+        $this->fields['type'] = $type;
+
+        return $this;
+    }
+
+    public function jsonSerialize(): array
+    {
+        $data = [];
+        if (array_key_exists('status', $this->fields)) {
+            $data['status'] = $this->fields['status'];
+        }
+        if (array_key_exists('type', $this->fields)) {
+            $data['type'] = $this->fields['type'];
+        }
+
+        return $data;
+    }
 }

@@ -23,23 +23,25 @@ class QuoteTimeline implements JsonSerializable
 {
     use HasMetadata;
 
-    public const TYPE_CREATED = 'quote-created';
+    public const TYPE_QUOTE_CREATED = 'quote-created';
 
-    public const TYPE_ISSUED = 'quote-issued';
+    public const TYPE_QUOTE_ISSUED = 'quote-issued';
 
-    public const TYPE_ACCEPTED = 'quote-accepted';
+    public const TYPE_QUOTE_ACCEPTED = 'quote-accepted';
 
-    public const TYPE_REJECTED = 'quote-rejected';
+    public const TYPE_QUOTE_REJECTED = 'quote-rejected';
 
-    public const TYPE_CANCELED = 'quote-canceled';
+    public const TYPE_QUOTE_CANCELED = 'quote-canceled';
 
-    public const TYPE_RECALLED = 'quote-recalled';
+    public const TYPE_QUOTE_RECALLED = 'quote-recalled';
 
-    public const TYPE_UPDATED = 'quote-updated';
+    public const TYPE_QUOTE_UPDATED = 'quote-updated';
 
-    public const TYPE_EXPIRED = 'quote-expired';
+    public const TYPE_QUOTE_EXPIRED = 'quote-expired';
 
-    public const TYPE_ORDER_ATTACHED = 'quote-order-attached';
+    public const TYPE_QUOTE_ORDER_ATTACHED = 'quote-order-attached';
+
+    public const TYPE_TIMELINE_COMMENT_CREATED = 'timeline-comment-created';
 
     public const TRIGGERED_BY_REBILLY = 'rebilly';
 

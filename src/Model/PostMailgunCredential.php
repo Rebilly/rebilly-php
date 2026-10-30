@@ -1,0 +1,220 @@
+<?php
+
+/**
+ * This source file is proprietary and part of Rebilly.
+ *
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
+ *
+ * @see https://www.rebilly.com
+ */
+
+declare(strict_types=1);
+
+namespace Rebilly\Sdk\Model;
+
+use DateTimeImmutable;
+use DateTimeInterface;
+use Rebilly\Sdk\Trait\HasMetadata;
+
+class PostMailgunCredential implements PostServiceCredentialRequest
+{
+    use HasMetadata;
+
+    public const STATUS_ACTIVE = 'active';
+
+    public const STATUS_INACTIVE = 'inactive';
+
+    public const STATUS_DEACTIVATED = 'deactivated';
+
+    private array $fields = [];
+
+    public function __construct(array $data = [], array $metadata = [])
+    {
+        if (array_key_exists('id', $data)) {
+            $this->setId($data['id']);
+        }
+        if (array_key_exists('hash', $data)) {
+            $this->setHash($data['hash']);
+        }
+        if (array_key_exists('status', $data)) {
+            $this->setStatus($data['status']);
+        }
+        if (array_key_exists('deactivationTime', $data)) {
+            $this->setDeactivationTime($data['deactivationTime']);
+        }
+        if (array_key_exists('emailFrom', $data)) {
+            $this->setEmailFrom($data['emailFrom']);
+        }
+        if (array_key_exists('apiKey', $data)) {
+            $this->setApiKey($data['apiKey']);
+        }
+        if (array_key_exists('domain', $data)) {
+            $this->setDomain($data['domain']);
+        }
+        if (array_key_exists('_links', $data)) {
+            $this->setLinks($data['_links']);
+        }
+        $this->setMetadata($metadata);
+    }
+
+    public static function from(array $data = [], array $metadata = []): self
+    {
+        return new self($data, $metadata);
+    }
+
+    public function getType(): string
+    {
+        return 'mailgun';
+    }
+
+    public function getId(): ?string
+    {
+        return $this->fields['id'] ?? null;
+    }
+
+    public function getHash(): ?string
+    {
+        return $this->fields['hash'] ?? null;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->fields['status'] ?? null;
+    }
+
+    public function getDeactivationTime(): ?DateTimeImmutable
+    {
+        return $this->fields['deactivationTime'] ?? null;
+    }
+
+    public function getEmailFrom(): ?string
+    {
+        return $this->fields['emailFrom'] ?? null;
+    }
+
+    public function setEmailFrom(null|string $emailFrom): static
+    {
+        $this->fields['emailFrom'] = $emailFrom;
+
+        return $this;
+    }
+
+    public function getApiKey(): string
+    {
+        return $this->fields['apiKey'];
+    }
+
+    public function setApiKey(string $apiKey): static
+    {
+        $this->fields['apiKey'] = $apiKey;
+
+        return $this;
+    }
+
+    public function getDomain(): string
+    {
+        return $this->fields['domain'];
+    }
+
+    public function setDomain(string $domain): static
+    {
+        $this->fields['domain'] = $domain;
+
+        return $this;
+    }
+
+    /**
+     * @return null|ResourceLink[]
+     */
+    public function getLinks(): ?array
+    {
+        return $this->fields['_links'] ?? null;
+    }
+
+    public function jsonSerialize(): array
+    {
+        $data = [
+            'type' => 'mailgun',
+        ];
+        if (array_key_exists('id', $this->fields)) {
+            $data['id'] = $this->fields['id'];
+        }
+        if (array_key_exists('hash', $this->fields)) {
+            $data['hash'] = $this->fields['hash'];
+        }
+        if (array_key_exists('status', $this->fields)) {
+            $data['status'] = $this->fields['status'];
+        }
+        if (array_key_exists('deactivationTime', $this->fields)) {
+            $data['deactivationTime'] = $this->fields['deactivationTime']?->format(DateTimeInterface::RFC3339);
+        }
+        if (array_key_exists('emailFrom', $this->fields)) {
+            $data['emailFrom'] = $this->fields['emailFrom'];
+        }
+        if (array_key_exists('apiKey', $this->fields)) {
+            $data['apiKey'] = $this->fields['apiKey'];
+        }
+        if (array_key_exists('domain', $this->fields)) {
+            $data['domain'] = $this->fields['domain'];
+        }
+        if (array_key_exists('_links', $this->fields)) {
+            $data['_links'] = $this->fields['_links'] !== null
+                ? array_map(
+                    static fn (ResourceLink $resourceLink) => $resourceLink->jsonSerialize(),
+                    $this->fields['_links'],
+                )
+                : null;
+        }
+
+        return $data;
+    }
+
+    private function setId(null|string $id): static
+    {
+        $this->fields['id'] = $id;
+
+        return $this;
+    }
+
+    private function setHash(null|string $hash): static
+    {
+        $this->fields['hash'] = $hash;
+
+        return $this;
+    }
+
+    private function setStatus(null|string $status): static
+    {
+        $this->fields['status'] = $status;
+
+        return $this;
+    }
+
+    private function setDeactivationTime(null|DateTimeImmutable|string $deactivationTime): static
+    {
+        if ($deactivationTime !== null && !($deactivationTime instanceof DateTimeImmutable)) {
+            $deactivationTime = new DateTimeImmutable($deactivationTime);
+        }
+
+        $this->fields['deactivationTime'] = $deactivationTime;
+
+        return $this;
+    }
+
+    /**
+     * @param null|array[]|ResourceLink[] $links
+     */
+    private function setLinks(null|array $links): static
+    {
+        $links = $links !== null ? array_map(
+            fn ($value) => $value instanceof ResourceLink ? $value : ResourceLink::from($value),
+            $links,
+        ) : null;
+
+        $this->fields['_links'] = $links;
+
+        return $this;
+    }
+}

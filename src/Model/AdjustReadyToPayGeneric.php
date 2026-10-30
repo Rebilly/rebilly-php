@@ -154,6 +154,8 @@ class AdjustReadyToPayGeneric implements AdjustPaymentMethod
 
     public const PAYMENT_METHOD_KAKAO_PAY = 'KakaoPay';
 
+    public const PAYMENT_METHOD_KHELOCARD = 'Khelocard';
+
     public const PAYMENT_METHOD_KNOT = 'KNOT';
 
     public const PAYMENT_METHOD_LOONIE = 'loonie';
@@ -230,6 +232,8 @@ class AdjustReadyToPayGeneric implements AdjustPaymentMethod
 
     public const PAYMENT_METHOD_PIX = 'PIX';
 
+    public const PAYMENT_METHOD_PIX_AUTOMATICO = 'PIX-Automatico';
+
     public const PAYMENT_METHOD_PAY_TABS = 'PayTabs';
 
     public const PAYMENT_METHOD_PAYSAFECARD = 'Paysafecard';
@@ -285,6 +289,8 @@ class AdjustReadyToPayGeneric implements AdjustPaymentMethod
     public const PAYMENT_METHOD_TELE2 = 'Tele2';
 
     public const PAYMENT_METHOD_TERMINALY_RF = 'Terminaly-RF';
+
+    public const PAYMENT_METHOD_THUNES_CHECKOUT = 'Thunes-Checkout';
 
     public const PAYMENT_METHOD_TODITO_CASH_CARD = 'ToditoCash-card';
 
