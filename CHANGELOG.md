@@ -1,5 +1,13 @@
 # @rebilly/client-php
 
+## 3.1.10
+
+### Patch Changes
+
+- chore(deps-dev): bump esbuild
+-
+-
+
 ## 3.1.9
 
 ### Patch Changes
