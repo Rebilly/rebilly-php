@@ -18,6 +18,7 @@ use DateTimeImmutable;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
+use Psr\Http\Message\StreamInterface;
 use Rebilly\Sdk\Model\ApiLogSummary;
 use Rebilly\Sdk\Model\CumulativeSubscriptions;
 use Rebilly\Sdk\Model\DashboardResponse;
@@ -26,6 +27,7 @@ use Rebilly\Sdk\Model\FutureRenewals;
 use Rebilly\Sdk\Model\GetKycAcceptanceSummaryReportResponse;
 use Rebilly\Sdk\Model\JournalSummaryReport;
 use Rebilly\Sdk\Model\RenewalSales;
+use Rebilly\Sdk\Model\ReportAmlAuditReport;
 use Rebilly\Sdk\Model\ReportAmlChecks;
 use Rebilly\Sdk\Model\ReportAmlChecksInheritedSummary;
 use Rebilly\Sdk\Model\ReportAnnualRecurringRevenue;
@@ -52,6 +54,53 @@ class ReportsApi
 {
     public function __construct(protected ?ClientInterface $client)
     {
+    }
+
+    public function getAmlAuditReport(
+        string $personId,
+        ?DateTimeImmutable $periodStart = null,
+        ?DateTimeImmutable $periodEnd = null,
+        ?string $filter = null,
+        ?string $accept = null,
+    ): ReportAmlAuditReport {
+        $queryParams = [
+            'personId' => $personId,
+            'periodStart' => $periodStart->format('Y-m-d\TH:i:s\Z'),
+            'periodEnd' => $periodEnd->format('Y-m-d\TH:i:s\Z'),
+            'filter' => $filter,
+        ];
+        $uri = '/experimental/reports/aml-audit-reports?' . http_build_query($queryParams);
+
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return ReportAmlAuditReport::from($data, ['headers' => $response->getHeaders()]);
+    }
+
+    public function getAmlAuditReportPdf(
+        string $personId,
+        ?DateTimeImmutable $periodStart = null,
+        ?DateTimeImmutable $periodEnd = null,
+        ?string $filter = null,
+        ?string $accept = null,
+    ): StreamInterface {
+        $queryParams = [
+            'personId' => $personId,
+            'periodStart' => $periodStart->format('Y-m-d\TH:i:s\Z'),
+            'periodEnd' => $periodEnd->format('Y-m-d\TH:i:s\Z'),
+            'filter' => $filter,
+        ];
+        $uri = '/experimental/reports/aml-audit-reports?' . http_build_query($queryParams);
+
+        $request = new Request('GET', $uri, headers: [
+            'Accept' => 'application/pdf',
+        ]);
+        $response = $this->client->send($request, ['allow_redirects' => ['refer' => true]]);
+
+        return $response->getBody();
     }
 
     public function getAmlChecks(

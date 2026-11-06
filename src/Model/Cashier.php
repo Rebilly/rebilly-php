@@ -57,6 +57,9 @@ class Cashier implements JsonSerializable
         if (array_key_exists('pendingPayoutTotal', $data)) {
             $this->setPendingPayoutTotal($data['pendingPayoutTotal']);
         }
+        if (array_key_exists('canWithdraw', $data)) {
+            $this->setCanWithdraw($data['canWithdraw']);
+        }
         if (array_key_exists('lastDepositRequestId', $data)) {
             $this->setLastDepositRequestId($data['lastDepositRequestId']);
         }
@@ -138,31 +141,9 @@ class Cashier implements JsonSerializable
         return $this->fields['balance'];
     }
 
-    public function setBalance(float|string $balance): static
-    {
-        if (is_string($balance)) {
-            $balance = (float) $balance;
-        }
-
-        $this->fields['balance'] = $balance;
-
-        return $this;
-    }
-
     public function getBonusBalance(): float
     {
         return $this->fields['bonusBalance'];
-    }
-
-    public function setBonusBalance(float|string $bonusBalance): static
-    {
-        if (is_string($bonusBalance)) {
-            $bonusBalance = (float) $bonusBalance;
-        }
-
-        $this->fields['bonusBalance'] = $bonusBalance;
-
-        return $this;
     }
 
     public function getNotificationUrl(): ?string
@@ -198,15 +179,9 @@ class Cashier implements JsonSerializable
         return $this->fields['pendingPayoutTotal'];
     }
 
-    public function setPendingPayoutTotal(float|string $pendingPayoutTotal): static
+    public function getCanWithdraw(): bool
     {
-        if (is_string($pendingPayoutTotal)) {
-            $pendingPayoutTotal = (float) $pendingPayoutTotal;
-        }
-
-        $this->fields['pendingPayoutTotal'] = $pendingPayoutTotal;
-
-        return $this;
+        return $this->fields['canWithdraw'];
     }
 
     public function getLastDepositRequestId(): ?string
@@ -277,6 +252,9 @@ class Cashier implements JsonSerializable
         if (array_key_exists('pendingPayoutTotal', $this->fields)) {
             $data['pendingPayoutTotal'] = $this->fields['pendingPayoutTotal'];
         }
+        if (array_key_exists('canWithdraw', $this->fields)) {
+            $data['canWithdraw'] = $this->fields['canWithdraw'];
+        }
         if (array_key_exists('lastDepositRequestId', $this->fields)) {
             $data['lastDepositRequestId'] = $this->fields['lastDepositRequestId'];
         }
@@ -304,6 +282,46 @@ class Cashier implements JsonSerializable
     private function setId(string $id): static
     {
         $this->fields['id'] = $id;
+
+        return $this;
+    }
+
+    private function setBalance(float|string $balance): static
+    {
+        if (is_string($balance)) {
+            $balance = (float) $balance;
+        }
+
+        $this->fields['balance'] = $balance;
+
+        return $this;
+    }
+
+    private function setBonusBalance(float|string $bonusBalance): static
+    {
+        if (is_string($bonusBalance)) {
+            $bonusBalance = (float) $bonusBalance;
+        }
+
+        $this->fields['bonusBalance'] = $bonusBalance;
+
+        return $this;
+    }
+
+    private function setPendingPayoutTotal(float|string $pendingPayoutTotal): static
+    {
+        if (is_string($pendingPayoutTotal)) {
+            $pendingPayoutTotal = (float) $pendingPayoutTotal;
+        }
+
+        $this->fields['pendingPayoutTotal'] = $pendingPayoutTotal;
+
+        return $this;
+    }
+
+    private function setCanWithdraw(bool $canWithdraw): static
+    {
+        $this->fields['canWithdraw'] = $canWithdraw;
 
         return $this;
     }

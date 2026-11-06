@@ -16,7 +16,7 @@ namespace Rebilly\Sdk\Model;
 
 use Rebilly\Sdk\Trait\HasMetadata;
 
-class ReadyToPayAmount implements PostReadyToPay
+class ReadyToPayAmount implements PostReadyToPayRequest
 {
     use HasMetadata;
 

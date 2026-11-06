@@ -19,9 +19,10 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Psr\Http\Message\StreamInterface;
 use Rebilly\Sdk\Collection;
-use Rebilly\Sdk\Model\PatchQuote;
+use Rebilly\Sdk\Model\PatchQuoteRequest;
 use Rebilly\Sdk\Model\Quote;
 use Rebilly\Sdk\Model\QuoteFactory;
+use Rebilly\Sdk\Model\QuoteReissue;
 use Rebilly\Sdk\Model\QuoteTimeline;
 use Rebilly\Sdk\Paginator;
 
@@ -325,7 +326,7 @@ class QuotesApi
 
     public function patch(
         string $id,
-        PatchQuote $patchQuote,
+        PatchQuoteRequest $patchQuoteRequest,
     ): Quote {
         $pathParams = [
             '{id}' => $id,
@@ -335,7 +336,7 @@ class QuotesApi
 
         $request = new Request('PATCH', $uri, headers: [
             'Accept' => 'application/json',
-        ], body: Utils::jsonEncode($patchQuote));
+        ], body: Utils::jsonEncode($patchQuoteRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
@@ -354,6 +355,25 @@ class QuotesApi
         $request = new Request('POST', $uri, headers: [
             'Accept' => 'application/json',
         ]);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return QuoteFactory::from($data, ['headers' => $response->getHeaders()]);
+    }
+
+    public function reissue(
+        string $id,
+        QuoteReissue $quoteReissue,
+    ): Quote {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/quotes/{id}/reissue');
+
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($quoteReissue));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

@@ -293,6 +293,8 @@ class PayoutRequestAllocation implements JsonSerializable
 
     public const PAYMENT_METHOD_PIX = 'PIX';
 
+    public const PAYMENT_METHOD_PIX_AUTOMATICO = 'PIX-Automatico';
+
     public const PAYMENT_METHOD_PIN_PAY = 'PinPay';
 
     public const PAYMENT_METHOD_PHONE = 'phone';
@@ -352,6 +354,8 @@ class PayoutRequestAllocation implements JsonSerializable
     public const PAYMENT_METHOD_TERMINALY_RF = 'Terminaly-RF';
 
     public const PAYMENT_METHOD_TETHER = 'Tether';
+
+    public const PAYMENT_METHOD_THUNES_CHECKOUT = 'Thunes-Checkout';
 
     public const PAYMENT_METHOD_TODITO_CASH_CARD = 'ToditoCash-card';
 
@@ -510,6 +514,9 @@ class PayoutRequestAllocation implements JsonSerializable
         if (array_key_exists('amount', $data)) {
             $this->setAmount($data['amount']);
         }
+        if (array_key_exists('exposureAmount', $data)) {
+            $this->setExposureAmount($data['exposureAmount']);
+        }
         if (array_key_exists('currency', $data)) {
             $this->setCurrency($data['currency']);
         }
@@ -619,6 +626,11 @@ class PayoutRequestAllocation implements JsonSerializable
         return $this;
     }
 
+    public function getExposureAmount(): ?float
+    {
+        return $this->fields['exposureAmount'] ?? null;
+    }
+
     public function getCurrency(): string
     {
         return $this->fields['currency'];
@@ -706,6 +718,9 @@ class PayoutRequestAllocation implements JsonSerializable
         if (array_key_exists('amount', $this->fields)) {
             $data['amount'] = $this->fields['amount'];
         }
+        if (array_key_exists('exposureAmount', $this->fields)) {
+            $data['exposureAmount'] = $this->fields['exposureAmount'];
+        }
         if (array_key_exists('currency', $this->fields)) {
             $data['currency'] = $this->fields['currency'];
         }
@@ -770,6 +785,17 @@ class PayoutRequestAllocation implements JsonSerializable
     private function setGatewayPayoutInstruction(null|string $gatewayPayoutInstruction): static
     {
         $this->fields['gatewayPayoutInstruction'] = $gatewayPayoutInstruction;
+
+        return $this;
+    }
+
+    private function setExposureAmount(null|float|string $exposureAmount): static
+    {
+        if (is_string($exposureAmount)) {
+            $exposureAmount = (float) $exposureAmount;
+        }
+
+        $this->fields['exposureAmount'] = $exposureAmount;
 
         return $this;
     }

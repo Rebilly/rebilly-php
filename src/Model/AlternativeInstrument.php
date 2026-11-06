@@ -158,6 +158,8 @@ class AlternativeInstrument implements PaymentInstrument, PostPaymentInstrumentR
 
     public const METHOD_KAKAO_PAY = 'KakaoPay';
 
+    public const METHOD_KHELOCARD = 'Khelocard';
+
     public const METHOD_KLARNA = 'Klarna';
 
     public const METHOD_KNOT = 'KNOT';
@@ -236,6 +238,8 @@ class AlternativeInstrument implements PaymentInstrument, PostPaymentInstrumentR
 
     public const METHOD_PIX = 'PIX';
 
+    public const METHOD_PIX_AUTOMATICO = 'PIX-Automatico';
+
     public const METHOD_PLAID_ACCOUNT = 'plaid-account';
 
     public const METHOD_PAY_TABS = 'PayTabs';
@@ -293,6 +297,8 @@ class AlternativeInstrument implements PaymentInstrument, PostPaymentInstrumentR
     public const METHOD_TELE2 = 'Tele2';
 
     public const METHOD_TERMINALY_RF = 'Terminaly-RF';
+
+    public const METHOD_THUNES_CHECKOUT = 'Thunes-Checkout';
 
     public const METHOD_TODITO_CASH_CARD = 'ToditoCash-card';
 

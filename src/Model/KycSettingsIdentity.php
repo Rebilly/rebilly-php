@@ -34,6 +34,9 @@ class KycSettingsIdentity implements JsonSerializable
         if (array_key_exists('minimumAgeSettings', $data)) {
             $this->setMinimumAgeSettings($data['minimumAgeSettings']);
         }
+        if (array_key_exists('faceProofSettings', $data)) {
+            $this->setFaceProofSettings($data['faceProofSettings']);
+        }
         $this->setMetadata($metadata);
     }
 
@@ -90,6 +93,22 @@ class KycSettingsIdentity implements JsonSerializable
         return $this;
     }
 
+    public function getFaceProofSettings(): ?KycSettingsIdentityFaceProofSettings
+    {
+        return $this->fields['faceProofSettings'] ?? null;
+    }
+
+    public function setFaceProofSettings(null|KycSettingsIdentityFaceProofSettings|array $faceProofSettings): static
+    {
+        if ($faceProofSettings !== null && !($faceProofSettings instanceof KycSettingsIdentityFaceProofSettings)) {
+            $faceProofSettings = KycSettingsIdentityFaceProofSettings::from($faceProofSettings);
+        }
+
+        $this->fields['faceProofSettings'] = $faceProofSettings;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -101,6 +120,9 @@ class KycSettingsIdentity implements JsonSerializable
         }
         if (array_key_exists('minimumAgeSettings', $this->fields)) {
             $data['minimumAgeSettings'] = $this->fields['minimumAgeSettings']?->jsonSerialize();
+        }
+        if (array_key_exists('faceProofSettings', $this->fields)) {
+            $data['faceProofSettings'] = $this->fields['faceProofSettings']?->jsonSerialize();
         }
 
         return $data;

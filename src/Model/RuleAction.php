@@ -60,6 +60,8 @@ abstract class RuleAction implements JsonSerializable
 
     public const NAME_REQUEST_KYC = 'request-kyc';
 
+    public const NAME_REQUEST_PHYSICAL_ADDRESS = 'request-physical-address';
+
     public const NAME_RESET_REMINDER = 'reset-reminder';
 
     public const NAME_SCHEDULE_INVOICE_RETRY = 'schedule-invoice-retry';
@@ -138,6 +140,8 @@ abstract class RuleAction implements JsonSerializable
                 return RuleActionPickGatewayAccount::from($data, $metadata);
             case 'request-kyc':
                 return RuleActionRequestKyc::from($data, $metadata);
+            case 'request-physical-address':
+                return RuleActionRequestPhysicalAddress::from($data, $metadata);
             case 'schedule-invoice-retry':
                 return RuleActionScheduleInvoiceRetry::from($data, $metadata);
             case 'schedule-payment':
