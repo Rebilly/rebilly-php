@@ -220,14 +220,12 @@ class TrackingApi
     public function getAllWebhookTrackingLogs(
         ?int $limit = null,
         ?int $offset = null,
-        ?array $sort = null,
         ?string $filter = null,
         ?string $q = null,
     ): Collection {
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
-            'sort' => $sort ? implode(',', $sort) : null,
             'filter' => $filter,
             'q' => $q,
         ];
@@ -256,14 +254,12 @@ class TrackingApi
     public function getAllWebhookTrackingLogsPaginator(
         ?int $limit = null,
         ?int $offset = null,
-        ?array $sort = null,
         ?string $filter = null,
         ?string $q = null,
     ): Paginator {
         $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllWebhookTrackingLogs(
             limit: $limit,
             offset: $offset,
-            sort: $sort,
             filter: $filter,
             q: $q,
         );

@@ -21,7 +21,7 @@ use Psr\Http\Message\StreamInterface;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\CreditMemo;
 use Rebilly\Sdk\Model\CreditMemoTimeline;
-use Rebilly\Sdk\Model\PatchCreditMemo;
+use Rebilly\Sdk\Model\PatchCreditMemoRequest;
 use Rebilly\Sdk\Paginator;
 
 class CreditMemosApi
@@ -266,7 +266,7 @@ class CreditMemosApi
 
     public function patch(
         string $id,
-        PatchCreditMemo $patchCreditMemo,
+        PatchCreditMemoRequest $patchCreditMemoRequest,
     ): CreditMemo {
         $pathParams = [
             '{id}' => $id,
@@ -276,7 +276,7 @@ class CreditMemosApi
 
         $request = new Request('PATCH', $uri, headers: [
             'Accept' => 'application/json',
-        ], body: Utils::jsonEncode($patchCreditMemo));
+        ], body: Utils::jsonEncode($patchCreditMemoRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

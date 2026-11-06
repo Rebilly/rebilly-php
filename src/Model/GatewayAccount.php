@@ -112,6 +112,8 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const GATEWAY_NAME_COPPR = 'Coppr';
 
+    public const GATEWAY_NAME_CPS = 'Cps';
+
     public const GATEWAY_NAME_CREDORAX = 'Credorax';
 
     public const GATEWAY_NAME_CRYPTOMUS = 'Cryptomus';
@@ -205,6 +207,8 @@ abstract class GatewayAccount implements JsonSerializable
     public const GATEWAY_NAME_I_DEBIT = 'iDebit';
 
     public const GATEWAY_NAME_ILIXIUM = 'Ilixium';
+
+    public const GATEWAY_NAME_I_MERCHANT = 'IMerchant';
 
     public const GATEWAY_NAME_INGENICO = 'Ingenico';
 
@@ -330,6 +334,8 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const GATEWAY_NAME_PAYFLOW = 'Payflow';
 
+    public const GATEWAY_NAME_PAY_GLOCAL = 'PayGlocal';
+
     public const GATEWAY_NAME_PAYNOTE = 'Paynote';
 
     public const GATEWAY_NAME_PAYMENT_ASIA = 'PaymentAsia';
@@ -433,6 +439,8 @@ abstract class GatewayAccount implements JsonSerializable
     public const GATEWAY_NAME_TELR = 'Telr';
 
     public const GATEWAY_NAME_TEST_PROCESSOR = 'TestProcessor';
+
+    public const GATEWAY_NAME_THUNES = 'Thunes';
 
     public const GATEWAY_NAME_TODITO_CASH = 'ToditoCash';
 
@@ -575,6 +583,8 @@ abstract class GatewayAccount implements JsonSerializable
     public const ACQUIRER_NAME_CONEKTA = 'Conekta';
 
     public const ACQUIRER_NAME_COPPR = 'Coppr';
+
+    public const ACQUIRER_NAME_CPS = 'Cps';
 
     public const ACQUIRER_NAME_CREDORAX = 'Credorax';
 
@@ -768,6 +778,8 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const ACQUIRER_NAME_PAY_ECARDS = 'PayEcards';
 
+    public const ACQUIRER_NAME_PAY_GLOCAL = 'PayGlocal';
+
     public const ACQUIRER_NAME_PAYMENT_ASIA = 'PaymentAsia';
 
     public const ACQUIRER_NAME_PAYMEN_TECHNOLOGIES = 'PaymenTechnologies';
@@ -857,6 +869,8 @@ abstract class GatewayAccount implements JsonSerializable
     public const ACQUIRER_NAME_TELR = 'Telr';
 
     public const ACQUIRER_NAME_TEST_PROCESSOR = 'TestProcessor';
+
+    public const ACQUIRER_NAME_THUNES = 'Thunes';
 
     public const ACQUIRER_NAME_TODITO_CASH = 'ToditoCash';
 
@@ -1174,6 +1188,8 @@ abstract class GatewayAccount implements JsonSerializable
 
     public const METHOD_PIX = 'PIX';
 
+    public const METHOD_PIX_AUTOMATICO = 'PIX-Automatico';
+
     public const METHOD_PIN_PAY = 'PinPay';
 
     public const METHOD_PHONE = 'phone';
@@ -1233,6 +1249,8 @@ abstract class GatewayAccount implements JsonSerializable
     public const METHOD_TERMINALY_RF = 'Terminaly-RF';
 
     public const METHOD_TETHER = 'Tether';
+
+    public const METHOD_THUNES_CHECKOUT = 'Thunes-Checkout';
 
     public const METHOD_TODITO_CASH_CARD = 'ToditoCash-card';
 
@@ -1433,6 +1451,9 @@ abstract class GatewayAccount implements JsonSerializable
         if (array_key_exists('readyToPayoutInstruction', $data)) {
             $this->setReadyToPayoutInstruction($data['readyToPayoutInstruction']);
         }
+        if (array_key_exists('payoutLimits', $data)) {
+            $this->setPayoutLimits($data['payoutLimits']);
+        }
         if (array_key_exists('transactionEmailAliasTemplate', $data)) {
             $this->setTransactionEmailAliasTemplate($data['transactionEmailAliasTemplate']);
         }
@@ -1545,6 +1566,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return Conekta::from($data, $metadata);
             case 'Coppr':
                 return Coppr::from($data, $metadata);
+            case 'Cps':
+                return Cps::from($data, $metadata);
             case 'Credorax':
                 return Credorax::from($data, $metadata);
             case 'Cryptomus':
@@ -1637,6 +1660,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return IDebit::from($data, $metadata);
             case 'Ilixium':
                 return Ilixium::from($data, $metadata);
+            case 'IMerchant':
+                return IMerchant::from($data, $metadata);
             case 'Ingenico':
                 return Ingenico::from($data, $metadata);
             case 'INOVAPAY':
@@ -1761,6 +1786,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return Payeezy::from($data, $metadata);
             case 'Payflow':
                 return Payflow::from($data, $metadata);
+            case 'PayGlocal':
+                return PayGlocal::from($data, $metadata);
             case 'PaymentAsia':
                 return PaymentAsia::from($data, $metadata);
             case 'PaymenTechnologies':
@@ -1865,6 +1892,8 @@ abstract class GatewayAccount implements JsonSerializable
                 return Telr::from($data, $metadata);
             case 'TestProcessor':
                 return TestProcessor::from($data, $metadata);
+            case 'Thunes':
+                return Thunes::from($data, $metadata);
             case 'ToditoCash':
                 return ToditoCash::from($data, $metadata);
             case 'Triple000':
@@ -2257,6 +2286,22 @@ abstract class GatewayAccount implements JsonSerializable
         return $this;
     }
 
+    public function getPayoutLimits(): ?GatewayAccountPayoutLimits
+    {
+        return $this->fields['payoutLimits'] ?? null;
+    }
+
+    public function setPayoutLimits(null|GatewayAccountPayoutLimits|array $payoutLimits): static
+    {
+        if ($payoutLimits !== null && !($payoutLimits instanceof GatewayAccountPayoutLimits)) {
+            $payoutLimits = GatewayAccountPayoutLimits::from($payoutLimits);
+        }
+
+        $this->fields['payoutLimits'] = $payoutLimits;
+
+        return $this;
+    }
+
     public function getTransactionEmailAliasTemplate(): ?string
     {
         return $this->fields['transactionEmailAliasTemplate'] ?? null;
@@ -2393,6 +2438,9 @@ abstract class GatewayAccount implements JsonSerializable
         }
         if (array_key_exists('readyToPayoutInstruction', $this->fields)) {
             $data['readyToPayoutInstruction'] = $this->fields['readyToPayoutInstruction'];
+        }
+        if (array_key_exists('payoutLimits', $this->fields)) {
+            $data['payoutLimits'] = $this->fields['payoutLimits']?->jsonSerialize();
         }
         if (array_key_exists('transactionEmailAliasTemplate', $this->fields)) {
             $data['transactionEmailAliasTemplate'] = $this->fields['transactionEmailAliasTemplate'];

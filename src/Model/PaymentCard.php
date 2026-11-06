@@ -114,6 +114,9 @@ class PaymentCard implements PaymentInstrument
         if (array_key_exists('bankName', $data)) {
             $this->setBankName($data['bankName']);
         }
+        if (array_key_exists('isPayoutable', $data)) {
+            $this->setIsPayoutable($data['isPayoutable']);
+        }
         if (array_key_exists('billingAddress', $data)) {
             $this->setBillingAddress($data['billingAddress']);
         }
@@ -285,6 +288,11 @@ class PaymentCard implements PaymentInstrument
     public function getBankName(): ?string
     {
         return $this->fields['bankName'] ?? null;
+    }
+
+    public function getIsPayoutable(): ?bool
+    {
+        return $this->fields['isPayoutable'] ?? null;
     }
 
     public function getBillingAddress(): ?ContactObject
@@ -477,6 +485,9 @@ class PaymentCard implements PaymentInstrument
         if (array_key_exists('bankName', $this->fields)) {
             $data['bankName'] = $this->fields['bankName'];
         }
+        if (array_key_exists('isPayoutable', $this->fields)) {
+            $data['isPayoutable'] = $this->fields['isPayoutable'];
+        }
         if (array_key_exists('billingAddress', $this->fields)) {
             $data['billingAddress'] = $this->fields['billingAddress']?->jsonSerialize();
         }
@@ -588,6 +599,13 @@ class PaymentCard implements PaymentInstrument
     private function setBankName(null|string $bankName): static
     {
         $this->fields['bankName'] = $bankName;
+
+        return $this;
+    }
+
+    private function setIsPayoutable(null|bool $isPayoutable): static
+    {
+        $this->fields['isPayoutable'] = $isPayoutable;
 
         return $this;
     }

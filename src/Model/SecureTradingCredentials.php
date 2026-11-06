@@ -81,12 +81,12 @@ class SecureTradingCredentials implements JsonSerializable
         return $this;
     }
 
-    public function getNotificationPassword(): ?string
+    public function getNotificationPassword(): string
     {
-        return $this->fields['notificationPassword'] ?? null;
+        return $this->fields['notificationPassword'];
     }
 
-    public function setNotificationPassword(null|string $notificationPassword): static
+    public function setNotificationPassword(string $notificationPassword): static
     {
         $this->fields['notificationPassword'] = $notificationPassword;
 

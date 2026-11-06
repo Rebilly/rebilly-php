@@ -42,6 +42,9 @@ class Role implements JsonSerializable
         if (array_key_exists('allowedIps', $data)) {
             $this->setAllowedIps($data['allowedIps']);
         }
+        if (array_key_exists('computedAllowedIps', $data)) {
+            $this->setComputedAllowedIps($data['computedAllowedIps']);
+        }
         if (array_key_exists('seniorIds', $data)) {
             $this->setSeniorIds($data['seniorIds']);
         }
@@ -144,6 +147,14 @@ class Role implements JsonSerializable
     /**
      * @return null|string[]
      */
+    public function getComputedAllowedIps(): ?array
+    {
+        return $this->fields['computedAllowedIps'] ?? null;
+    }
+
+    /**
+     * @return null|string[]
+     */
     public function getSeniorIds(): ?array
     {
         return $this->fields['seniorIds'] ?? null;
@@ -227,6 +238,9 @@ class Role implements JsonSerializable
         if (array_key_exists('allowedIps', $this->fields)) {
             $data['allowedIps'] = $this->fields['allowedIps'];
         }
+        if (array_key_exists('computedAllowedIps', $this->fields)) {
+            $data['computedAllowedIps'] = $this->fields['computedAllowedIps'];
+        }
         if (array_key_exists('seniorIds', $this->fields)) {
             $data['seniorIds'] = $this->fields['seniorIds'];
         }
@@ -260,6 +274,16 @@ class Role implements JsonSerializable
     private function setId(null|string $id): static
     {
         $this->fields['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * @param null|string[] $computedAllowedIps
+     */
+    private function setComputedAllowedIps(null|array $computedAllowedIps): static
+    {
+        $this->fields['computedAllowedIps'] = $computedAllowedIps;
 
         return $this;
     }

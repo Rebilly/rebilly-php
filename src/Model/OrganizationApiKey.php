@@ -1,0 +1,324 @@
+<?php
+
+/**
+ * This source file is proprietary and part of Rebilly.
+ *
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
+ *
+ * @see https://www.rebilly.com
+ */
+
+declare(strict_types=1);
+
+namespace Rebilly\Sdk\Model;
+
+use DateTimeImmutable;
+use DateTimeInterface;
+use JsonSerializable;
+use Rebilly\Sdk\Trait\HasMetadata;
+
+class OrganizationApiKey implements JsonSerializable
+{
+    use HasMetadata;
+
+    public const TYPE_SECRET = 'secret';
+
+    public const TYPE_PUBLISHABLE = 'publishable';
+
+    private array $fields = [];
+
+    public function __construct(array $data = [], array $metadata = [])
+    {
+        if (array_key_exists('id', $data)) {
+            $this->setId($data['id']);
+        }
+        if (array_key_exists('description', $data)) {
+            $this->setDescription($data['description']);
+        }
+        if (array_key_exists('type', $data)) {
+            $this->setType($data['type']);
+        }
+        if (array_key_exists('acl', $data)) {
+            $this->setAcl($data['acl']);
+        }
+        if (array_key_exists('allowedIps', $data)) {
+            $this->setAllowedIps($data['allowedIps']);
+        }
+        if (array_key_exists('lastUsedTime', $data)) {
+            $this->setLastUsedTime($data['lastUsedTime']);
+        }
+        if (array_key_exists('lastUsedIp', $data)) {
+            $this->setLastUsedIp($data['lastUsedIp']);
+        }
+        if (array_key_exists('expirationTime', $data)) {
+            $this->setExpirationTime($data['expirationTime']);
+        }
+        if (array_key_exists('apiUser', $data)) {
+            $this->setApiUser($data['apiUser']);
+        }
+        if (array_key_exists('secretKey', $data)) {
+            $this->setSecretKey($data['secretKey']);
+        }
+        if (array_key_exists('createdTime', $data)) {
+            $this->setCreatedTime($data['createdTime']);
+        }
+        if (array_key_exists('updatedTime', $data)) {
+            $this->setUpdatedTime($data['updatedTime']);
+        }
+        if (array_key_exists('owner', $data)) {
+            $this->setOwner($data['owner']);
+        }
+        $this->setMetadata($metadata);
+    }
+
+    public static function from(array $data = [], array $metadata = []): self
+    {
+        return new self($data, $metadata);
+    }
+
+    public function getId(): string
+    {
+        return $this->fields['id'];
+    }
+
+    public function getDescription(): string
+    {
+        return $this->fields['description'];
+    }
+
+    public function getType(): string
+    {
+        return $this->fields['type'];
+    }
+
+    /**
+     * @return null|Acl[]
+     */
+    public function getAcl(): ?array
+    {
+        return $this->fields['acl'] ?? null;
+    }
+
+    /**
+     * @return null|string[]
+     */
+    public function getAllowedIps(): ?array
+    {
+        return $this->fields['allowedIps'] ?? null;
+    }
+
+    public function getLastUsedTime(): ?DateTimeImmutable
+    {
+        return $this->fields['lastUsedTime'] ?? null;
+    }
+
+    public function getLastUsedIp(): ?string
+    {
+        return $this->fields['lastUsedIp'] ?? null;
+    }
+
+    public function getExpirationTime(): ?DateTimeImmutable
+    {
+        return $this->fields['expirationTime'] ?? null;
+    }
+
+    public function getApiUser(): string
+    {
+        return $this->fields['apiUser'];
+    }
+
+    public function getSecretKey(): string
+    {
+        return $this->fields['secretKey'];
+    }
+
+    public function getCreatedTime(): ?DateTimeImmutable
+    {
+        return $this->fields['createdTime'] ?? null;
+    }
+
+    public function getUpdatedTime(): ?DateTimeImmutable
+    {
+        return $this->fields['updatedTime'] ?? null;
+    }
+
+    public function getOwner(): OrganizationApiKeyOwner
+    {
+        return $this->fields['owner'];
+    }
+
+    public function setOwner(OrganizationApiKeyOwner|array $owner): static
+    {
+        if (!($owner instanceof OrganizationApiKeyOwner)) {
+            $owner = OrganizationApiKeyOwner::from($owner);
+        }
+
+        $this->fields['owner'] = $owner;
+
+        return $this;
+    }
+
+    public function jsonSerialize(): array
+    {
+        $data = [];
+        if (array_key_exists('id', $this->fields)) {
+            $data['id'] = $this->fields['id'];
+        }
+        if (array_key_exists('description', $this->fields)) {
+            $data['description'] = $this->fields['description'];
+        }
+        if (array_key_exists('type', $this->fields)) {
+            $data['type'] = $this->fields['type'];
+        }
+        if (array_key_exists('acl', $this->fields)) {
+            $data['acl'] = $this->fields['acl'] !== null
+                ? array_map(
+                    static fn (Acl $acl) => $acl->jsonSerialize(),
+                    $this->fields['acl'],
+                )
+                : null;
+        }
+        if (array_key_exists('allowedIps', $this->fields)) {
+            $data['allowedIps'] = $this->fields['allowedIps'];
+        }
+        if (array_key_exists('lastUsedTime', $this->fields)) {
+            $data['lastUsedTime'] = $this->fields['lastUsedTime']?->format(DateTimeInterface::RFC3339);
+        }
+        if (array_key_exists('lastUsedIp', $this->fields)) {
+            $data['lastUsedIp'] = $this->fields['lastUsedIp'];
+        }
+        if (array_key_exists('expirationTime', $this->fields)) {
+            $data['expirationTime'] = $this->fields['expirationTime']?->format(DateTimeInterface::RFC3339);
+        }
+        if (array_key_exists('apiUser', $this->fields)) {
+            $data['apiUser'] = $this->fields['apiUser'];
+        }
+        if (array_key_exists('secretKey', $this->fields)) {
+            $data['secretKey'] = $this->fields['secretKey'];
+        }
+        if (array_key_exists('createdTime', $this->fields)) {
+            $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
+        }
+        if (array_key_exists('updatedTime', $this->fields)) {
+            $data['updatedTime'] = $this->fields['updatedTime']?->format(DateTimeInterface::RFC3339);
+        }
+        if (array_key_exists('owner', $this->fields)) {
+            $data['owner'] = $this->fields['owner']->jsonSerialize();
+        }
+
+        return $data;
+    }
+
+    private function setId(string $id): static
+    {
+        $this->fields['id'] = $id;
+
+        return $this;
+    }
+
+    private function setDescription(string $description): static
+    {
+        $this->fields['description'] = $description;
+
+        return $this;
+    }
+
+    private function setType(string $type): static
+    {
+        $this->fields['type'] = $type;
+
+        return $this;
+    }
+
+    /**
+     * @param null|Acl[]|array[] $acl
+     */
+    private function setAcl(null|array $acl): static
+    {
+        $acl = $acl !== null ? array_map(
+            fn ($value) => $value instanceof Acl ? $value : Acl::from($value),
+            $acl,
+        ) : null;
+
+        $this->fields['acl'] = $acl;
+
+        return $this;
+    }
+
+    /**
+     * @param null|string[] $allowedIps
+     */
+    private function setAllowedIps(null|array $allowedIps): static
+    {
+        $this->fields['allowedIps'] = $allowedIps;
+
+        return $this;
+    }
+
+    private function setLastUsedTime(null|DateTimeImmutable|string $lastUsedTime): static
+    {
+        if ($lastUsedTime !== null && !($lastUsedTime instanceof DateTimeImmutable)) {
+            $lastUsedTime = new DateTimeImmutable($lastUsedTime);
+        }
+
+        $this->fields['lastUsedTime'] = $lastUsedTime;
+
+        return $this;
+    }
+
+    private function setLastUsedIp(null|string $lastUsedIp): static
+    {
+        $this->fields['lastUsedIp'] = $lastUsedIp;
+
+        return $this;
+    }
+
+    private function setExpirationTime(null|DateTimeImmutable|string $expirationTime): static
+    {
+        if ($expirationTime !== null && !($expirationTime instanceof DateTimeImmutable)) {
+            $expirationTime = new DateTimeImmutable($expirationTime);
+        }
+
+        $this->fields['expirationTime'] = $expirationTime;
+
+        return $this;
+    }
+
+    private function setApiUser(string $apiUser): static
+    {
+        $this->fields['apiUser'] = $apiUser;
+
+        return $this;
+    }
+
+    private function setSecretKey(string $secretKey): static
+    {
+        $this->fields['secretKey'] = $secretKey;
+
+        return $this;
+    }
+
+    private function setCreatedTime(null|DateTimeImmutable|string $createdTime): static
+    {
+        if ($createdTime !== null && !($createdTime instanceof DateTimeImmutable)) {
+            $createdTime = new DateTimeImmutable($createdTime);
+        }
+
+        $this->fields['createdTime'] = $createdTime;
+
+        return $this;
+    }
+
+    private function setUpdatedTime(null|DateTimeImmutable|string $updatedTime): static
+    {
+        if ($updatedTime !== null && !($updatedTime instanceof DateTimeImmutable)) {
+            $updatedTime = new DateTimeImmutable($updatedTime);
+        }
+
+        $this->fields['updatedTime'] = $updatedTime;
+
+        return $this;
+    }
+}

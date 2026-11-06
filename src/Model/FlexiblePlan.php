@@ -18,6 +18,10 @@ use DateTimeImmutable;
 
 interface FlexiblePlan extends ConfigurablePlan
 {
+    public function getType(): ?string;
+
+    public function setType(null|string $type): static;
+
     public function getName(): ?string;
 
     public function setName(null|string $name): static;
@@ -54,6 +58,10 @@ interface FlexiblePlan extends ConfigurablePlan
 
     public function setSetup(null|PlanSetup|array $setup): static;
 
+    public function getSetupFee(): ?float;
+
+    public function setSetupFee(null|float|string $setupFee): static;
+
     public function getCustomFields(): ?array;
 
     public function setCustomFields(null|array $customFields): static;
@@ -65,6 +73,10 @@ interface FlexiblePlan extends ConfigurablePlan
     public function getRevision(): ?int;
 
     public function getIsTrialOnly(): ?bool;
+
+    public function getRecurringInterval(): ?FlexiblePlanSubscriptionPlanRecurringInterval;
+
+    public function getTrial(): null|FlexiblePlanTrialOnlyPlanTrial|PlanTrial;
 
     public function getCreatedTime(): ?DateTimeImmutable;
 

@@ -37,17 +37,43 @@ class PayoutRequestTimelineMessage implements JsonSerializable
 
     public const TYPE_PAYOUT_REQUEST_ALLOCATED = 'payout-request-allocated';
 
+    public const TYPE_PAYOUT_REQUEST_ALLOCATION_FAILED = 'payout-request-allocation-failed';
+
     public const TYPE_PAYOUT_REQUEST_PROCESSING_STARTED = 'payout-request-processing-started';
 
     public const TYPE_PAYOUT_REQUEST_FULFILLED = 'payout-request-fulfilled';
+
+    public const TYPE_PAYOUT_REQUEST_PAYMENT_INSTRUMENT_SELECTED = 'payout-request-payment-instrument-selected';
 
     public const TYPE_PAYOUT_REQUEST_CANCELED = 'payout-request-canceled';
 
     public const TYPE_PAYOUT_REQUEST_REVERSED = 'payout-request-reversed';
 
+    public const TYPE_PAYOUT_REQUEST_ALLOCATION_CREATED = 'payout-request-allocation-created';
+
+    public const TYPE_PAYOUT_REQUEST_ALLOCATION_PROCESSING_STARTED = 'payout-request-allocation-processing-started';
+
+    public const TYPE_PAYOUT_REQUEST_ALLOCATION_DECLINED = 'payout-request-allocation-declined';
+
+    public const TYPE_PAYOUT_REQUEST_ALLOCATION_CANCELED = 'payout-request-allocation-canceled';
+
+    public const TYPE_PAYOUT_REQUEST_ALLOCATION_COMPLETED = 'payout-request-allocation-completed';
+
+    public const TYPE_PAYOUT_REQUEST_ALLOCATION_WAITING_COMPLETION = 'payout-request-allocation-waiting-completion';
+
     public const TYPE_PAYOUT_REQUEST_BLOCKED = 'payout-request-blocked';
 
     public const TYPE_PAYOUT_REQUEST_UNBLOCKED = 'payout-request-unblocked';
+
+    public const TYPE_PAYOUT_REQUEST_SPLIT = 'payout-request-split';
+
+    public const TYPE_PAYOUT_REQUEST_MERGED = 'payout-request-merged';
+
+    public const TYPE_PAYOUT_REQUEST_ADDED_TO_BATCH = 'payout-request-added-to-batch';
+
+    public const TYPE_PAYOUT_REQUEST_REMOVED_FROM_BATCH = 'payout-request-removed-from-batch';
+
+    public const TYPE_PAYOUT_REQUEST_AUTO_ALLOCATION_FAILED = 'payout-request-auto-allocation-failed';
 
     public const TRIGGERED_BY_REBILLY = 'rebilly';
 

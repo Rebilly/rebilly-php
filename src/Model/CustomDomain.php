@@ -23,6 +23,18 @@ class CustomDomain implements JsonSerializable
 {
     use HasMetadata;
 
+    public const PURPOSE_HOSTED_PAGES = 'hosted-pages';
+
+    public const PURPOSE_MEDIA = 'media';
+
+    public const VERIFICATION_FAILURE_CERTIFICATE_FAILED = 'certificate-failed';
+
+    public const VERIFICATION_FAILURE_HOSTNAME_TAKEN = 'hostname-taken';
+
+    public const VERIFICATION_FAILURE_CNAME_MISSING = 'cname-missing';
+
+    public const VERIFICATION_FAILURE_NULL = 'null';
+
     private array $fields = [];
 
     public function __construct(array $data = [], array $metadata = [])
@@ -33,8 +45,14 @@ class CustomDomain implements JsonSerializable
         if (array_key_exists('domain', $data)) {
             $this->setDomain($data['domain']);
         }
+        if (array_key_exists('purpose', $data)) {
+            $this->setPurpose($data['purpose']);
+        }
         if (array_key_exists('isVerified', $data)) {
             $this->setIsVerified($data['isVerified']);
+        }
+        if (array_key_exists('verificationFailure', $data)) {
+            $this->setVerificationFailure($data['verificationFailure']);
         }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
@@ -70,9 +88,26 @@ class CustomDomain implements JsonSerializable
         return $this;
     }
 
+    public function getPurpose(): ?string
+    {
+        return $this->fields['purpose'] ?? null;
+    }
+
+    public function setPurpose(null|string $purpose): static
+    {
+        $this->fields['purpose'] = $purpose;
+
+        return $this;
+    }
+
     public function getIsVerified(): ?bool
     {
         return $this->fields['isVerified'] ?? null;
+    }
+
+    public function getVerificationFailure(): ?string
+    {
+        return $this->fields['verificationFailure'] ?? null;
     }
 
     public function getCreatedTime(): ?DateTimeImmutable
@@ -102,8 +137,14 @@ class CustomDomain implements JsonSerializable
         if (array_key_exists('domain', $this->fields)) {
             $data['domain'] = $this->fields['domain'];
         }
+        if (array_key_exists('purpose', $this->fields)) {
+            $data['purpose'] = $this->fields['purpose'];
+        }
         if (array_key_exists('isVerified', $this->fields)) {
             $data['isVerified'] = $this->fields['isVerified'];
+        }
+        if (array_key_exists('verificationFailure', $this->fields)) {
+            $data['verificationFailure'] = $this->fields['verificationFailure'];
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
@@ -133,6 +174,13 @@ class CustomDomain implements JsonSerializable
     private function setIsVerified(null|bool $isVerified): static
     {
         $this->fields['isVerified'] = $isVerified;
+
+        return $this;
+    }
+
+    private function setVerificationFailure(null|string $verificationFailure): static
+    {
+        $this->fields['verificationFailure'] = $verificationFailure;
 
         return $this;
     }

@@ -31,6 +31,9 @@ class DLocalSettings implements JsonSerializable
         if (array_key_exists('customerDocumentCustomField', $data)) {
             $this->setCustomerDocumentCustomField($data['customerDocumentCustomField']);
         }
+        if (array_key_exists('requestAddress', $data)) {
+            $this->setRequestAddress($data['requestAddress']);
+        }
         $this->setMetadata($metadata);
     }
 
@@ -63,6 +66,18 @@ class DLocalSettings implements JsonSerializable
         return $this;
     }
 
+    public function getRequestAddress(): ?bool
+    {
+        return $this->fields['requestAddress'] ?? null;
+    }
+
+    public function setRequestAddress(null|bool $requestAddress): static
+    {
+        $this->fields['requestAddress'] = $requestAddress;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -71,6 +86,9 @@ class DLocalSettings implements JsonSerializable
         }
         if (array_key_exists('customerDocumentCustomField', $this->fields)) {
             $data['customerDocumentCustomField'] = $this->fields['customerDocumentCustomField'];
+        }
+        if (array_key_exists('requestAddress', $this->fields)) {
+            $data['requestAddress'] = $this->fields['requestAddress'];
         }
 
         return $data;

@@ -179,7 +179,6 @@ class FilesApi
         ?int $offset = null,
         ?string $filter = null,
         ?string $q = null,
-        ?string $expand = null,
         ?string $fields = null,
         ?array $sort = null,
     ): Collection {
@@ -188,7 +187,6 @@ class FilesApi
             'offset' => $offset,
             'filter' => $filter,
             'q' => $q,
-            'expand' => $expand,
             'fields' => $fields,
             'sort' => $sort ? implode(',', $sort) : null,
         ];
@@ -219,7 +217,6 @@ class FilesApi
         ?int $offset = null,
         ?string $filter = null,
         ?string $q = null,
-        ?string $expand = null,
         ?string $fields = null,
         ?array $sort = null,
     ): Paginator {
@@ -228,7 +225,6 @@ class FilesApi
             offset: $offset,
             filter: $filter,
             q: $q,
-            expand: $expand,
             fields: $fields,
             sort: $sort,
         );

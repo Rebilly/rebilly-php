@@ -159,6 +159,9 @@ class ProofOfCreditFileKycDocument implements KycDocument
         if (array_key_exists('documentMatches', $data)) {
             $this->setDocumentMatches($data['documentMatches']);
         }
+        if (array_key_exists('parsedData', $data)) {
+            $this->setParsedData($data['parsedData']);
+        }
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
@@ -363,6 +366,22 @@ class ProofOfCreditFileKycDocument implements KycDocument
         return $this;
     }
 
+    public function getParsedData(): ?ProofOfCreditFileKycDocumentParsedData
+    {
+        return $this->fields['parsedData'] ?? null;
+    }
+
+    public function setParsedData(null|ProofOfCreditFileKycDocumentParsedData|array $parsedData): static
+    {
+        if ($parsedData !== null && !($parsedData instanceof ProofOfCreditFileKycDocumentParsedData)) {
+            $parsedData = ProofOfCreditFileKycDocumentParsedData::from($parsedData);
+        }
+
+        $this->fields['parsedData'] = $parsedData;
+
+        return $this;
+    }
+
     /**
      * @return null|ResourceLink[]
      */
@@ -459,6 +478,9 @@ class ProofOfCreditFileKycDocument implements KycDocument
         }
         if (array_key_exists('documentMatches', $this->fields)) {
             $data['documentMatches'] = $this->fields['documentMatches']?->jsonSerialize();
+        }
+        if (array_key_exists('parsedData', $this->fields)) {
+            $data['parsedData'] = $this->fields['parsedData']?->jsonSerialize();
         }
         if (array_key_exists('_links', $this->fields)) {
             $data['_links'] = $this->fields['_links'] !== null

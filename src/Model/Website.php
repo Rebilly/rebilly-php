@@ -42,6 +42,9 @@ class Website implements JsonSerializable
         if (array_key_exists('serviceEmail', $data)) {
             $this->setServiceEmail($data['serviceEmail']);
         }
+        if (array_key_exists('regulatorSiteId', $data)) {
+            $this->setRegulatorSiteId($data['regulatorSiteId']);
+        }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
         }
@@ -123,6 +126,18 @@ class Website implements JsonSerializable
     public function setServiceEmail(string $serviceEmail): static
     {
         $this->fields['serviceEmail'] = $serviceEmail;
+
+        return $this;
+    }
+
+    public function getRegulatorSiteId(): ?string
+    {
+        return $this->fields['regulatorSiteId'] ?? null;
+    }
+
+    public function setRegulatorSiteId(null|string $regulatorSiteId): static
+    {
+        $this->fields['regulatorSiteId'] = $regulatorSiteId;
 
         return $this;
     }
@@ -212,6 +227,9 @@ class Website implements JsonSerializable
         }
         if (array_key_exists('serviceEmail', $this->fields)) {
             $data['serviceEmail'] = $this->fields['serviceEmail'];
+        }
+        if (array_key_exists('regulatorSiteId', $this->fields)) {
+            $data['regulatorSiteId'] = $this->fields['regulatorSiteId'];
         }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);

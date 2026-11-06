@@ -58,9 +58,6 @@ class InvoiceItem implements JsonSerializable
         if (array_key_exists('subscriptionId', $data)) {
             $this->setSubscriptionId($data['subscriptionId']);
         }
-        if (array_key_exists('discountAmount', $data)) {
-            $this->setDiscountAmount($data['discountAmount']);
-        }
         if (array_key_exists('periodStartTime', $data)) {
             $this->setPeriodStartTime($data['periodStartTime']);
         }
@@ -177,11 +174,6 @@ class InvoiceItem implements JsonSerializable
         return $this->fields['subscriptionId'] ?? null;
     }
 
-    public function getDiscountAmount(): ?float
-    {
-        return $this->fields['discountAmount'] ?? null;
-    }
-
     public function getPeriodStartTime(): ?DateTimeImmutable
     {
         return $this->fields['periodStartTime'] ?? null;
@@ -295,9 +287,6 @@ class InvoiceItem implements JsonSerializable
         if (array_key_exists('subscriptionId', $this->fields)) {
             $data['subscriptionId'] = $this->fields['subscriptionId'];
         }
-        if (array_key_exists('discountAmount', $this->fields)) {
-            $data['discountAmount'] = $this->fields['discountAmount'];
-        }
         if (array_key_exists('periodStartTime', $this->fields)) {
             $data['periodStartTime'] = $this->fields['periodStartTime']?->format(DateTimeInterface::RFC3339);
         }
@@ -359,17 +348,6 @@ class InvoiceItem implements JsonSerializable
     private function setSubscriptionId(null|string $subscriptionId): static
     {
         $this->fields['subscriptionId'] = $subscriptionId;
-
-        return $this;
-    }
-
-    private function setDiscountAmount(null|float|string $discountAmount): static
-    {
-        if (is_string($discountAmount)) {
-            $discountAmount = (float) $discountAmount;
-        }
-
-        $this->fields['discountAmount'] = $discountAmount;
 
         return $this;
     }

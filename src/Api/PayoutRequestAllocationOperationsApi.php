@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * This source file is proprietary and part of Rebilly.
+ *
+ * (c) Rebilly SRL
+ *     Rebilly Ltd.
+ *     Rebilly Inc.
+ *
+ * @see https://www.rebilly.com
+ */
+
+declare(strict_types=1);
+
+namespace Rebilly\Sdk\Api;
+
+use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
+use Rebilly\Sdk\Model\PayoutRequestAllocationOperation;
+use Rebilly\Sdk\Model\PayoutRequestAllocationOperationRequest;
+
+class PayoutRequestAllocationOperationsApi
+{
+    public function __construct(protected ?ClientInterface $client)
+    {
+    }
+
+    public function create(
+        PayoutRequestAllocationOperationRequest $payoutRequestAllocationOperationRequest,
+    ): PayoutRequestAllocationOperation {
+        $uri = '/payout-request-allocation-operations';
+
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($payoutRequestAllocationOperationRequest));
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return PayoutRequestAllocationOperation::from($data, ['headers' => $response->getHeaders()]);
+    }
+}
