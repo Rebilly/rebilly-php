@@ -18,7 +18,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Model\Cashier;
-use Rebilly\Sdk\Model\PostCashier;
+use Rebilly\Sdk\Model\PostCashierRequest;
 
 class CashiersApi
 {
@@ -27,13 +27,13 @@ class CashiersApi
     }
 
     public function create(
-        PostCashier $postCashier,
+        PostCashierRequest $postCashierRequest,
     ): Cashier {
         $uri = '/cashiers';
 
         $request = new Request('POST', $uri, headers: [
             'Accept' => 'application/json',
-        ], body: Utils::jsonEncode($postCashier));
+        ], body: Utils::jsonEncode($postCashierRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

@@ -23,6 +23,10 @@ class CreditMemoAllocationsTransactions implements JsonSerializable
 {
     use HasMetadata;
 
+    public const STATUS_PENDING = 'pending';
+
+    public const STATUS_APPROVED = 'approved';
+
     private array $fields = [];
 
     public function __construct(array $data = [], array $metadata = [])
@@ -35,6 +39,9 @@ class CreditMemoAllocationsTransactions implements JsonSerializable
         }
         if (array_key_exists('currency', $data)) {
             $this->setCurrency($data['currency']);
+        }
+        if (array_key_exists('status', $data)) {
+            $this->setStatus($data['status']);
         }
         if (array_key_exists('createdTime', $data)) {
             $this->setCreatedTime($data['createdTime']);
@@ -83,6 +90,11 @@ class CreditMemoAllocationsTransactions implements JsonSerializable
         return $this->fields['currency'] ?? null;
     }
 
+    public function getStatus(): ?string
+    {
+        return $this->fields['status'] ?? null;
+    }
+
     public function getCreatedTime(): ?DateTimeImmutable
     {
         return $this->fields['createdTime'] ?? null;
@@ -105,6 +117,9 @@ class CreditMemoAllocationsTransactions implements JsonSerializable
         if (array_key_exists('currency', $this->fields)) {
             $data['currency'] = $this->fields['currency'];
         }
+        if (array_key_exists('status', $this->fields)) {
+            $data['status'] = $this->fields['status'];
+        }
         if (array_key_exists('createdTime', $this->fields)) {
             $data['createdTime'] = $this->fields['createdTime']?->format(DateTimeInterface::RFC3339);
         }
@@ -118,6 +133,13 @@ class CreditMemoAllocationsTransactions implements JsonSerializable
     private function setCurrency(null|string $currency): static
     {
         $this->fields['currency'] = $currency;
+
+        return $this;
+    }
+
+    private function setStatus(null|string $status): static
+    {
+        $this->fields['status'] = $status;
 
         return $this;
     }

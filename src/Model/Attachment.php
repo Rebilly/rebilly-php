@@ -23,6 +23,8 @@ class Attachment implements JsonSerializable
 {
     use HasMetadata;
 
+    public const RELATED_TYPE_CREDIT_MEMO_TIMELINE_COMMENT = 'credit-memo-timeline-comment';
+
     public const RELATED_TYPE_CUSTOMER = 'customer';
 
     public const RELATED_TYPE_CUSTOMER_TIMELINE_COMMENT = 'customer-timeline-comment';
@@ -41,9 +43,13 @@ class Attachment implements JsonSerializable
 
     public const RELATED_TYPE_PAYMENT = 'payment';
 
+    public const RELATED_TYPE_PAYOUT_REQUEST_TIMELINE_COMMENT = 'payout-request-timeline-comment';
+
     public const RELATED_TYPE_PLAN = 'plan';
 
     public const RELATED_TYPE_PRODUCT = 'product';
+
+    public const RELATED_TYPE_QUOTE_TIMELINE_COMMENT = 'quote-timeline-comment';
 
     public const RELATED_TYPE_SUBSCRIPTION = 'subscription';
 
@@ -81,9 +87,6 @@ class Attachment implements JsonSerializable
         }
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
-        }
-        if (array_key_exists('_embedded', $data)) {
-            $this->setEmbedded($data['_embedded']);
         }
         $this->setMetadata($metadata);
     }
@@ -176,22 +179,6 @@ class Attachment implements JsonSerializable
         return $this->fields['_links'] ?? null;
     }
 
-    public function getEmbedded(): ?AttachmentEmbedded
-    {
-        return $this->fields['_embedded'] ?? null;
-    }
-
-    public function setEmbedded(null|AttachmentEmbedded|array $embedded): static
-    {
-        if ($embedded !== null && !($embedded instanceof AttachmentEmbedded)) {
-            $embedded = AttachmentEmbedded::from($embedded);
-        }
-
-        $this->fields['_embedded'] = $embedded;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [];
@@ -226,9 +213,6 @@ class Attachment implements JsonSerializable
                     $this->fields['_links'],
                 )
                 : null;
-        }
-        if (array_key_exists('_embedded', $this->fields)) {
-            $data['_embedded'] = $this->fields['_embedded']?->jsonSerialize();
         }
 
         return $data;

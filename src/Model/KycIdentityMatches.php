@@ -16,9 +16,10 @@ namespace Rebilly\Sdk\Model;
 
 use DateTimeImmutable;
 use DateTimeInterface;
+use JsonSerializable;
 use Rebilly\Sdk\Trait\HasMetadata;
 
-class KycIdentityMatches implements PostKycDocumentMatchesRequest
+class KycIdentityMatches implements JsonSerializable
 {
     use HasMetadata;
 
@@ -104,11 +105,17 @@ class KycIdentityMatches implements PostKycDocumentMatchesRequest
         if (array_key_exists('expirationDate', $data)) {
             $this->setExpirationDate($data['expirationDate']);
         }
+        if (array_key_exists('isExpired', $data)) {
+            $this->setIsExpired($data['isExpired']);
+        }
         if (array_key_exists('issueDate', $data)) {
             $this->setIssueDate($data['issueDate']);
         }
         if (array_key_exists('hasMinimalAge', $data)) {
             $this->setHasMinimalAge($data['hasMinimalAge']);
+        }
+        if (array_key_exists('matchesDateOfBirth', $data)) {
+            $this->setMatchesDateOfBirth($data['matchesDateOfBirth']);
         }
         if (array_key_exists('nationality', $data)) {
             $this->setNationality($data['nationality']);
@@ -145,6 +152,9 @@ class KycIdentityMatches implements PostKycDocumentMatchesRequest
         }
         if (array_key_exists('hasCompletedFaceLiveness', $data)) {
             $this->setHasCompletedFaceLiveness($data['hasCompletedFaceLiveness']);
+        }
+        if (array_key_exists('faceProofBrightness', $data)) {
+            $this->setFaceProofBrightness($data['faceProofBrightness']);
         }
         if (array_key_exists('expiryDate', $data)) {
             $this->setExpiryDate($data['expiryDate']);
@@ -257,6 +267,11 @@ class KycIdentityMatches implements PostKycDocumentMatchesRequest
         return $this;
     }
 
+    public function getIsExpired(): ?bool
+    {
+        return $this->fields['isExpired'] ?? null;
+    }
+
     public function getIssueDate(): ?DateTimeImmutable
     {
         return $this->fields['issueDate'] ?? null;
@@ -276,6 +291,11 @@ class KycIdentityMatches implements PostKycDocumentMatchesRequest
     public function getHasMinimalAge(): ?bool
     {
         return $this->fields['hasMinimalAge'] ?? null;
+    }
+
+    public function getMatchesDateOfBirth(): ?bool
+    {
+        return $this->fields['matchesDateOfBirth'] ?? null;
     }
 
     public function getNationality(): ?string
@@ -408,6 +428,11 @@ class KycIdentityMatches implements PostKycDocumentMatchesRequest
         return $this->fields['hasCompletedFaceLiveness'] ?? null;
     }
 
+    public function getFaceProofBrightness(): ?float
+    {
+        return $this->fields['faceProofBrightness'] ?? null;
+    }
+
     public function getExpiryDate(): ?DateTimeImmutable
     {
         return $this->fields['expiryDate'] ?? null;
@@ -451,11 +476,17 @@ class KycIdentityMatches implements PostKycDocumentMatchesRequest
         if (array_key_exists('expirationDate', $this->fields)) {
             $data['expirationDate'] = $this->fields['expirationDate']?->format(DateTimeInterface::RFC3339);
         }
+        if (array_key_exists('isExpired', $this->fields)) {
+            $data['isExpired'] = $this->fields['isExpired'];
+        }
         if (array_key_exists('issueDate', $this->fields)) {
             $data['issueDate'] = $this->fields['issueDate']?->format(DateTimeInterface::RFC3339);
         }
         if (array_key_exists('hasMinimalAge', $this->fields)) {
             $data['hasMinimalAge'] = $this->fields['hasMinimalAge'];
+        }
+        if (array_key_exists('matchesDateOfBirth', $this->fields)) {
+            $data['matchesDateOfBirth'] = $this->fields['matchesDateOfBirth'];
         }
         if (array_key_exists('nationality', $this->fields)) {
             $data['nationality'] = $this->fields['nationality'];
@@ -493,6 +524,9 @@ class KycIdentityMatches implements PostKycDocumentMatchesRequest
         if (array_key_exists('hasCompletedFaceLiveness', $this->fields)) {
             $data['hasCompletedFaceLiveness'] = $this->fields['hasCompletedFaceLiveness'];
         }
+        if (array_key_exists('faceProofBrightness', $this->fields)) {
+            $data['faceProofBrightness'] = $this->fields['faceProofBrightness'];
+        }
         if (array_key_exists('expiryDate', $this->fields)) {
             $data['expiryDate'] = $this->fields['expiryDate']?->format(DateTimeInterface::RFC3339);
         }
@@ -510,9 +544,23 @@ class KycIdentityMatches implements PostKycDocumentMatchesRequest
         return $this;
     }
 
+    private function setIsExpired(null|bool $isExpired): static
+    {
+        $this->fields['isExpired'] = $isExpired;
+
+        return $this;
+    }
+
     private function setHasMinimalAge(null|bool $hasMinimalAge): static
     {
         $this->fields['hasMinimalAge'] = $hasMinimalAge;
+
+        return $this;
+    }
+
+    private function setMatchesDateOfBirth(null|bool $matchesDateOfBirth): static
+    {
+        $this->fields['matchesDateOfBirth'] = $matchesDateOfBirth;
 
         return $this;
     }
@@ -527,6 +575,17 @@ class KycIdentityMatches implements PostKycDocumentMatchesRequest
     private function setHasCompletedFaceLiveness(null|bool $hasCompletedFaceLiveness): static
     {
         $this->fields['hasCompletedFaceLiveness'] = $hasCompletedFaceLiveness;
+
+        return $this;
+    }
+
+    private function setFaceProofBrightness(null|float|string $faceProofBrightness): static
+    {
+        if (is_string($faceProofBrightness)) {
+            $faceProofBrightness = (float) $faceProofBrightness;
+        }
+
+        $this->fields['faceProofBrightness'] = $faceProofBrightness;
 
         return $this;
     }

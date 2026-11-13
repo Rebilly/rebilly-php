@@ -87,6 +87,15 @@ class User implements JsonSerializable
         if (array_key_exists('allowedIps', $data)) {
             $this->setAllowedIps($data['allowedIps']);
         }
+        if (array_key_exists('computedAllowedIps', $data)) {
+            $this->setComputedAllowedIps($data['computedAllowedIps']);
+        }
+        if (array_key_exists('mfaEnabled', $data)) {
+            $this->setMfaEnabled($data['mfaEnabled']);
+        }
+        if (array_key_exists('mfaResetBlockedByOtherOrganizations', $data)) {
+            $this->setMfaResetBlockedByOtherOrganizations($data['mfaResetBlockedByOtherOrganizations']);
+        }
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
         }
@@ -283,6 +292,24 @@ class User implements JsonSerializable
     }
 
     /**
+     * @return null|string[]
+     */
+    public function getComputedAllowedIps(): ?array
+    {
+        return $this->fields['computedAllowedIps'] ?? null;
+    }
+
+    public function getMfaEnabled(): ?bool
+    {
+        return $this->fields['mfaEnabled'] ?? null;
+    }
+
+    public function getMfaResetBlockedByOtherOrganizations(): ?bool
+    {
+        return $this->fields['mfaResetBlockedByOtherOrganizations'] ?? null;
+    }
+
+    /**
      * @return null|ResourceLink[]
      */
     public function getLinks(): ?array
@@ -346,6 +373,15 @@ class User implements JsonSerializable
         }
         if (array_key_exists('allowedIps', $this->fields)) {
             $data['allowedIps'] = $this->fields['allowedIps'];
+        }
+        if (array_key_exists('computedAllowedIps', $this->fields)) {
+            $data['computedAllowedIps'] = $this->fields['computedAllowedIps'];
+        }
+        if (array_key_exists('mfaEnabled', $this->fields)) {
+            $data['mfaEnabled'] = $this->fields['mfaEnabled'];
+        }
+        if (array_key_exists('mfaResetBlockedByOtherOrganizations', $this->fields)) {
+            $data['mfaResetBlockedByOtherOrganizations'] = $this->fields['mfaResetBlockedByOtherOrganizations'];
         }
         if (array_key_exists('_links', $this->fields)) {
             $data['_links'] = $this->fields['_links'] !== null
@@ -429,6 +465,30 @@ class User implements JsonSerializable
     private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * @param null|string[] $computedAllowedIps
+     */
+    private function setComputedAllowedIps(null|array $computedAllowedIps): static
+    {
+        $this->fields['computedAllowedIps'] = $computedAllowedIps;
+
+        return $this;
+    }
+
+    private function setMfaEnabled(null|bool $mfaEnabled): static
+    {
+        $this->fields['mfaEnabled'] = $mfaEnabled;
+
+        return $this;
+    }
+
+    private function setMfaResetBlockedByOtherOrganizations(null|bool $mfaResetBlockedByOtherOrganizations): static
+    {
+        $this->fields['mfaResetBlockedByOtherOrganizations'] = $mfaResetBlockedByOtherOrganizations;
 
         return $this;
     }

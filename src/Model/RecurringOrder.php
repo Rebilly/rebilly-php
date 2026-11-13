@@ -70,6 +70,12 @@ class RecurringOrder implements Order
 
     public const CANCEL_CATEGORY_SWITCHED_PLAN = 'switched-plan';
 
+    public const CANCEL_CATEGORY_ORGANIZATION_DEACTIVATED = 'organization-deactivated';
+
+    public const CANCEL_CATEGORY_DELINQUENCY = 'delinquency';
+
+    public const CANCEL_CATEGORY_SANDBOX_RETENTION = 'sandbox-retention';
+
     public const CANCEL_CATEGORY_OTHER = 'other';
 
     public const CANCEL_CATEGORY_NULL = 'null';
@@ -125,6 +131,9 @@ class RecurringOrder implements Order
         }
         if (array_key_exists('poNumber', $data)) {
             $this->setPoNumber($data['poNumber']);
+        }
+        if (array_key_exists('sandboxRetention', $data)) {
+            $this->setSandboxRetention($data['sandboxRetention']);
         }
         if (array_key_exists('notes', $data)) {
             $this->setNotes($data['notes']);
@@ -191,6 +200,12 @@ class RecurringOrder implements Order
         }
         if (array_key_exists('customFields', $data)) {
             $this->setCustomFields($data['customFields']);
+        }
+        if (array_key_exists('lineItems', $data)) {
+            $this->setLineItems($data['lineItems']);
+        }
+        if (array_key_exists('lineItemSubtotal', $data)) {
+            $this->setLineItemSubtotal($data['lineItemSubtotal']);
         }
         if (array_key_exists('mrr', $data)) {
             $this->setMrr($data['mrr']);
@@ -389,6 +404,22 @@ class RecurringOrder implements Order
     public function setPoNumber(null|string $poNumber): static
     {
         $this->fields['poNumber'] = $poNumber;
+
+        return $this;
+    }
+
+    public function getSandboxRetention(): ?SandboxRetention
+    {
+        return $this->fields['sandboxRetention'] ?? null;
+    }
+
+    public function setSandboxRetention(null|SandboxRetention|array $sandboxRetention): static
+    {
+        if ($sandboxRetention !== null && !($sandboxRetention instanceof SandboxRetention)) {
+            $sandboxRetention = SandboxRetention::from($sandboxRetention);
+        }
+
+        $this->fields['sandboxRetention'] = $sandboxRetention;
 
         return $this;
     }
@@ -610,6 +641,30 @@ class RecurringOrder implements Order
         return $this;
     }
 
+    /**
+     * @return null|RecurringOrderLineItems[]
+     */
+    public function getLineItems(): ?array
+    {
+        return $this->fields['lineItems'] ?? null;
+    }
+
+    public function getLineItemSubtotal(): ?RecurringOrderLineItemSubtotal
+    {
+        return $this->fields['lineItemSubtotal'] ?? null;
+    }
+
+    public function setLineItemSubtotal(null|RecurringOrderLineItemSubtotal|array $lineItemSubtotal): static
+    {
+        if ($lineItemSubtotal !== null && !($lineItemSubtotal instanceof RecurringOrderLineItemSubtotal)) {
+            $lineItemSubtotal = RecurringOrderLineItemSubtotal::from($lineItemSubtotal);
+        }
+
+        $this->fields['lineItemSubtotal'] = $lineItemSubtotal;
+
+        return $this;
+    }
+
     public function getMrr(): ?float
     {
         return $this->fields['mrr'] ?? null;
@@ -741,6 +796,9 @@ class RecurringOrder implements Order
         if (array_key_exists('poNumber', $this->fields)) {
             $data['poNumber'] = $this->fields['poNumber'];
         }
+        if (array_key_exists('sandboxRetention', $this->fields)) {
+            $data['sandboxRetention'] = $this->fields['sandboxRetention']?->jsonSerialize();
+        }
         if (array_key_exists('notes', $this->fields)) {
             $data['notes'] = $this->fields['notes'];
         }
@@ -806,6 +864,17 @@ class RecurringOrder implements Order
         }
         if (array_key_exists('customFields', $this->fields)) {
             $data['customFields'] = $this->fields['customFields'];
+        }
+        if (array_key_exists('lineItems', $this->fields)) {
+            $data['lineItems'] = $this->fields['lineItems'] !== null
+                ? array_map(
+                    static fn (RecurringOrderLineItems $recurringOrderLineItems) => $recurringOrderLineItems->jsonSerialize(),
+                    $this->fields['lineItems'],
+                )
+                : null;
+        }
+        if (array_key_exists('lineItemSubtotal', $this->fields)) {
+            $data['lineItemSubtotal'] = $this->fields['lineItemSubtotal']?->jsonSerialize();
         }
         if (array_key_exists('mrr', $this->fields)) {
             $data['mrr'] = $this->fields['mrr'];
@@ -992,6 +1061,21 @@ class RecurringOrder implements Order
     private function setBillingPortalToken(null|string $billingPortalToken): static
     {
         $this->fields['billingPortalToken'] = $billingPortalToken;
+
+        return $this;
+    }
+
+    /**
+     * @param null|array[]|RecurringOrderLineItems[] $lineItems
+     */
+    private function setLineItems(null|array $lineItems): static
+    {
+        $lineItems = $lineItems !== null ? array_map(
+            fn ($value) => $value instanceof RecurringOrderLineItems ? $value : RecurringOrderLineItems::from($value),
+            $lineItems,
+        ) : null;
+
+        $this->fields['lineItems'] = $lineItems;
 
         return $this;
     }

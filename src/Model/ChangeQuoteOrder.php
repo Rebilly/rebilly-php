@@ -23,9 +23,19 @@ class ChangeQuoteOrder implements JsonSerializable
 {
     use HasMetadata;
 
+    public const RENEWAL_POLICY_RESET_TO_RECURRING = 'resetToRecurring';
+
+    public const RENEWAL_POLICY_RETAIN_RECURRING = 'retainRecurring';
+
+    public const RENEWAL_POLICY_RETAIN_TRIAL_THEN_RECURRING = 'retainTrialThenRecurring';
+
     public const RENEWAL_POLICY_RESET = 'reset';
 
     public const RENEWAL_POLICY_RETAIN = 'retain';
+
+    public const APPLY_AT_NOW = 'now';
+
+    public const APPLY_AT_NEXT_RENEWAL = 'nextRenewal';
 
     private array $fields = [];
 
@@ -45,6 +55,9 @@ class ChangeQuoteOrder implements JsonSerializable
         }
         if (array_key_exists('effectiveTime', $data)) {
             $this->setEffectiveTime($data['effectiveTime']);
+        }
+        if (array_key_exists('applyAt', $data)) {
+            $this->setApplyAt($data['applyAt']);
         }
         if (array_key_exists('keepTrial', $data)) {
             $this->setKeepTrial($data['keepTrial']);
@@ -150,6 +163,18 @@ class ChangeQuoteOrder implements JsonSerializable
         return $this;
     }
 
+    public function getApplyAt(): ?string
+    {
+        return $this->fields['applyAt'] ?? null;
+    }
+
+    public function setApplyAt(null|string $applyAt): static
+    {
+        $this->fields['applyAt'] = $applyAt;
+
+        return $this;
+    }
+
     public function getKeepTrial(): ?bool
     {
         return $this->fields['keepTrial'] ?? null;
@@ -209,15 +234,15 @@ class ChangeQuoteOrder implements JsonSerializable
         return $this;
     }
 
-    public function getShipping(): ?Shipping
+    public function getShipping(): ?ChangeQuoteOrderShipping
     {
         return $this->fields['shipping'] ?? null;
     }
 
-    public function setShipping(null|Shipping|array $shipping): static
+    public function setShipping(null|ChangeQuoteOrderShipping|array $shipping): static
     {
-        if ($shipping !== null && !($shipping instanceof Shipping)) {
-            $shipping = ShippingFactory::from($shipping);
+        if ($shipping !== null && !($shipping instanceof ChangeQuoteOrderShipping)) {
+            $shipping = ChangeQuoteOrderShipping::from($shipping);
         }
 
         $this->fields['shipping'] = $shipping;
@@ -277,6 +302,9 @@ class ChangeQuoteOrder implements JsonSerializable
         }
         if (array_key_exists('effectiveTime', $this->fields)) {
             $data['effectiveTime'] = $this->fields['effectiveTime']?->format(DateTimeInterface::RFC3339);
+        }
+        if (array_key_exists('applyAt', $this->fields)) {
+            $data['applyAt'] = $this->fields['applyAt'];
         }
         if (array_key_exists('keepTrial', $this->fields)) {
             $data['keepTrial'] = $this->fields['keepTrial'];

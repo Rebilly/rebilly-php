@@ -23,10 +23,6 @@ interface RecurringOrderItems extends JsonSerializable
 
     public function getId(): ?string;
 
-    public function getPlanId(): ?string;
-
-    public function setPlanId(null|string $planId): static;
-
     public function getProductId(): ?string;
 
     public function getPlan(): ConfigurablePlan;

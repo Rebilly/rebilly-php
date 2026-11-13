@@ -90,6 +90,8 @@ class AlternativePaymentToken implements CompositeToken
 
     public const METHOD_COD_VOUCHER = 'CODVoucher';
 
+    public const METHOD_COMMAS_CHECKOUT = 'Commas-Checkout';
+
     public const METHOD_CONEKTA_OXXO = 'Conekta-oxxo';
 
     public const METHOD_CUPON_DE_PAGOS = 'Cupon-de-pagos';
@@ -115,6 +117,8 @@ class AlternativePaymentToken implements CompositeToken
     public const METHOD_FASTER_PAY = 'FasterPay';
 
     public const METHOD_FLEXEPIN = 'Flexepin';
+
+    public const METHOD_FYNTRA_CHECKOUT = 'Fyntra-Checkout';
 
     public const METHOD_GIROPAY = 'Giropay';
 
@@ -155,6 +159,8 @@ class AlternativePaymentToken implements CompositeToken
     public const METHOD_JPAY = 'jpay';
 
     public const METHOD_KAKAO_PAY = 'KakaoPay';
+
+    public const METHOD_KHELOCARD = 'Khelocard';
 
     public const METHOD_KNOT = 'KNOT';
 
@@ -232,6 +238,8 @@ class AlternativePaymentToken implements CompositeToken
 
     public const METHOD_PIX = 'PIX';
 
+    public const METHOD_PIX_AUTOMATICO = 'PIX-Automatico';
+
     public const METHOD_PAY_TABS = 'PayTabs';
 
     public const METHOD_PAYSAFECARD = 'Paysafecard';
@@ -287,6 +295,8 @@ class AlternativePaymentToken implements CompositeToken
     public const METHOD_TELE2 = 'Tele2';
 
     public const METHOD_TERMINALY_RF = 'Terminaly-RF';
+
+    public const METHOD_THUNES_CHECKOUT = 'Thunes-Checkout';
 
     public const METHOD_TODITO_CASH_CARD = 'ToditoCash-card';
 

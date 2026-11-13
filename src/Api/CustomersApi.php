@@ -18,6 +18,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
+use Rebilly\Sdk\Model\Attachment;
 use Rebilly\Sdk\Model\Customer;
 use Rebilly\Sdk\Model\CustomerCreditBalance;
 use Rebilly\Sdk\Model\CustomerInformation;
@@ -109,6 +110,24 @@ class CustomersApi
 
         $request = new Request('DELETE', $uri);
         $this->client->send($request);
+    }
+
+    public function generateComplianceScreeningReport(
+        string $id,
+    ): Attachment {
+        $pathParams = [
+            '{id}' => $id,
+        ];
+
+        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/customers/{id}/compliance-screening-report');
+
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ]);
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return Attachment::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function get(

@@ -88,6 +88,8 @@ class AdjustReadyToPayGeneric implements AdjustPaymentMethod
 
     public const PAYMENT_METHOD_COD_VOUCHER = 'CODVoucher';
 
+    public const PAYMENT_METHOD_COMMAS_CHECKOUT = 'Commas-Checkout';
+
     public const PAYMENT_METHOD_CONEKTA_OXXO = 'Conekta-oxxo';
 
     public const PAYMENT_METHOD_CUPON_DE_PAGOS = 'Cupon-de-pagos';
@@ -113,6 +115,8 @@ class AdjustReadyToPayGeneric implements AdjustPaymentMethod
     public const PAYMENT_METHOD_FASTER_PAY = 'FasterPay';
 
     public const PAYMENT_METHOD_FLEXEPIN = 'Flexepin';
+
+    public const PAYMENT_METHOD_FYNTRA_CHECKOUT = 'Fyntra-Checkout';
 
     public const PAYMENT_METHOD_GIROPAY = 'Giropay';
 
@@ -153,6 +157,8 @@ class AdjustReadyToPayGeneric implements AdjustPaymentMethod
     public const PAYMENT_METHOD_JPAY = 'jpay';
 
     public const PAYMENT_METHOD_KAKAO_PAY = 'KakaoPay';
+
+    public const PAYMENT_METHOD_KHELOCARD = 'Khelocard';
 
     public const PAYMENT_METHOD_KNOT = 'KNOT';
 
@@ -230,6 +236,8 @@ class AdjustReadyToPayGeneric implements AdjustPaymentMethod
 
     public const PAYMENT_METHOD_PIX = 'PIX';
 
+    public const PAYMENT_METHOD_PIX_AUTOMATICO = 'PIX-Automatico';
+
     public const PAYMENT_METHOD_PAY_TABS = 'PayTabs';
 
     public const PAYMENT_METHOD_PAYSAFECARD = 'Paysafecard';
@@ -285,6 +293,8 @@ class AdjustReadyToPayGeneric implements AdjustPaymentMethod
     public const PAYMENT_METHOD_TELE2 = 'Tele2';
 
     public const PAYMENT_METHOD_TERMINALY_RF = 'Terminaly-RF';
+
+    public const PAYMENT_METHOD_THUNES_CHECKOUT = 'Thunes-Checkout';
 
     public const PAYMENT_METHOD_TODITO_CASH_CARD = 'ToditoCash-card';
 

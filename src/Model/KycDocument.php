@@ -86,6 +86,10 @@ interface KycDocument extends JsonSerializable
 
     public function setDocumentMatches(null|array $documentMatches): static;
 
+    public function getParsedData(): null|ProofOfAddressKycDocumentParsedData|ProofOfCreditFileKycDocumentParsedData|ProofOfFundsKycDocumentParsedData|ProofOfIdentityKycDocumentParsedData|ProofOfPurchaseKycDocumentParsedData;
+
+    public function setParsedData(null|array $parsedData): static;
+
     public function getSettings(): null|KycSettingsAddress|KycSettingsIdentity|array;
 
     /**

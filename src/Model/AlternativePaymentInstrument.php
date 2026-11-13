@@ -16,7 +16,7 @@ namespace Rebilly\Sdk\Model;
 
 use Rebilly\Sdk\Trait\HasMetadata;
 
-class AlternativePaymentInstrument implements CustomerDefaultPaymentInstrument, TransactionPaymentInstrument
+class AlternativePaymentInstrument implements TransactionPaymentInstrument
 {
     use HasMetadata;
 
@@ -100,6 +100,8 @@ class AlternativePaymentInstrument implements CustomerDefaultPaymentInstrument, 
 
     public const METHOD_COD_VOUCHER = 'CODVoucher';
 
+    public const METHOD_COMMAS_CHECKOUT = 'Commas-Checkout';
+
     public const METHOD_CONEKTA_OXXO = 'Conekta-oxxo';
 
     public const METHOD_CONEKTA_SPEI = 'Conekta-spei';
@@ -141,6 +143,8 @@ class AlternativePaymentInstrument implements CustomerDefaultPaymentInstrument, 
     public const METHOD_FASTER_PAY = 'FasterPay';
 
     public const METHOD_FLEXEPIN = 'Flexepin';
+
+    public const METHOD_FYNTRA_CHECKOUT = 'Fyntra-Checkout';
 
     public const METHOD_GIROPAY = 'Giropay';
 
@@ -290,6 +294,8 @@ class AlternativePaymentInstrument implements CustomerDefaultPaymentInstrument, 
 
     public const METHOD_PIX = 'PIX';
 
+    public const METHOD_PIX_AUTOMATICO = 'PIX-Automatico';
+
     public const METHOD_PIN_PAY = 'PinPay';
 
     public const METHOD_PHONE = 'phone';
@@ -349,6 +355,8 @@ class AlternativePaymentInstrument implements CustomerDefaultPaymentInstrument, 
     public const METHOD_TERMINALY_RF = 'Terminaly-RF';
 
     public const METHOD_TETHER = 'Tether';
+
+    public const METHOD_THUNES_CHECKOUT = 'Thunes-Checkout';
 
     public const METHOD_TODITO_CASH_CARD = 'ToditoCash-card';
 
