@@ -25,11 +25,15 @@ class ReportKycRejectionsDataRejectionReasons implements JsonSerializable
 
     public const REJECTION_REASON_DOCUMENT_EXPIRED = 'document-expired';
 
+    public const REJECTION_REASON_DOCUMENT_WAS_VALID_BUT_EXPIRED = 'document-was-valid-but-expired';
+
     public const REJECTION_REASON_DOCUMENT_NOT_MATCHING = 'document-not-matching';
 
     public const REJECTION_REASON_DOCUMENT_DUPLICATE = 'document-duplicate';
 
     public const REJECTION_REASON_DOCUMENT_INVALID = 'document-invalid';
+
+    public const REJECTION_REASON_DOCUMENT_SUBTYPE_PROHIBITED = 'document-subtype-prohibited';
 
     public const REJECTION_REASON_DOCUMENT_NOT_OPEN = 'document-not-open';
 
@@ -47,11 +51,15 @@ class ReportKycRejectionsDataRejectionReasons implements JsonSerializable
 
     public const REJECTION_REASON_NAME_MISMATCH = 'name-mismatch';
 
+    public const REJECTION_REASON_NAME_AND_DOB_MISMATCH = 'name-and-dob-mismatch';
+
     public const REJECTION_REASON_CRITICAL_INFO_MISSING = 'critical-info-missing';
 
     public const REJECTION_REASON_OLD_ADDRESS_ON_ID = 'old-address-on-id';
 
     public const REJECTION_REASON_TAMPERED_DOCUMENT = 'tampered-document';
+
+    public const REJECTION_REASON_NO_DOCUMENT_DATA_DETECTED = 'no-document-data-detected';
 
     public const REJECTION_REASON_OTHER = 'other';
 

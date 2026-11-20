@@ -35,6 +35,24 @@ class ApiTracking implements JsonSerializable
 
     public const METHOD_PATCH = 'PATCH';
 
+    public const AUTHENTICATION_METHOD_SECRET_API_KEY = 'secret-api-key';
+
+    public const AUTHENTICATION_METHOD_SIGNATURE = 'signature';
+
+    public const AUTHENTICATION_METHOD_JWT_USER = 'jwt-user';
+
+    public const AUTHENTICATION_METHOD_JWT_CUSTOMER = 'jwt-customer';
+
+    public const AUTHENTICATION_METHOD_PUBLISHABLE_KEY = 'publishable-key';
+
+    public const AUTHENTICATION_METHOD_JWT_GUEST = 'jwt-guest';
+
+    public const AUTHENTICATION_METHOD_JWT_APPLICATION = 'jwt-application';
+
+    public const AUTHENTICATION_METHOD_JWT_SERVICE_ACCOUNT = 'jwt-service-account';
+
+    public const AUTHENTICATION_METHOD_NULL = 'null';
+
     private array $fields = [];
 
     public function __construct(array $data = [], array $metadata = [])
@@ -68,6 +86,9 @@ class ApiTracking implements JsonSerializable
         }
         if (array_key_exists('user', $data)) {
             $this->setUser($data['user']);
+        }
+        if (array_key_exists('authenticationMethod', $data)) {
+            $this->setAuthenticationMethod($data['authenticationMethod']);
         }
         if (array_key_exists('ipAddress', $data)) {
             $this->setIpAddress($data['ipAddress']);
@@ -237,6 +258,11 @@ class ApiTracking implements JsonSerializable
         return $this;
     }
 
+    public function getAuthenticationMethod(): ?string
+    {
+        return $this->fields['authenticationMethod'] ?? null;
+    }
+
     public function getIpAddress(): ?string
     {
         return $this->fields['ipAddress'] ?? null;
@@ -352,6 +378,9 @@ class ApiTracking implements JsonSerializable
         if (array_key_exists('user', $this->fields)) {
             $data['user'] = $this->fields['user']?->jsonSerialize();
         }
+        if (array_key_exists('authenticationMethod', $this->fields)) {
+            $data['authenticationMethod'] = $this->fields['authenticationMethod'];
+        }
         if (array_key_exists('ipAddress', $this->fields)) {
             $data['ipAddress'] = $this->fields['ipAddress'];
         }
@@ -383,6 +412,13 @@ class ApiTracking implements JsonSerializable
         }
 
         return $data;
+    }
+
+    private function setAuthenticationMethod(null|string $authenticationMethod): static
+    {
+        $this->fields['authenticationMethod'] = $authenticationMethod;
+
+        return $this;
     }
 
     /**

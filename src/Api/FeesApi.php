@@ -19,7 +19,7 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\Fee;
-use Rebilly\Sdk\Model\PatchFee;
+use Rebilly\Sdk\Model\PatchFeeRequest;
 use Rebilly\Sdk\Paginator;
 
 class FeesApi
@@ -131,7 +131,7 @@ class FeesApi
 
     public function patch(
         string $id,
-        PatchFee $patchFee,
+        PatchFeeRequest $patchFeeRequest,
     ): Fee {
         $pathParams = [
             '{id}' => $id,
@@ -141,7 +141,7 @@ class FeesApi
 
         $request = new Request('PATCH', $uri, headers: [
             'Accept' => 'application/json',
-        ], body: Utils::jsonEncode($patchFee));
+        ], body: Utils::jsonEncode($patchFeeRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

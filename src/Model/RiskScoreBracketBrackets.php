@@ -18,15 +18,4 @@ use JsonSerializable;
 
 interface RiskScoreBracketBrackets extends JsonSerializable
 {
-    public function getStart(): ?int;
-
-    public function setStart(null|int $start): static;
-
-    public function getEnd(): ?int;
-
-    public function setEnd(null|int $end): static;
-
-    public function getValue(): ?int;
-
-    public function setValue(null|int $value): static;
 }

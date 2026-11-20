@@ -17,10 +17,8 @@ namespace Rebilly\Sdk\Api;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
-use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\CompositeToken;
 use Rebilly\Sdk\Model\CompositeTokenFactory;
-use Rebilly\Sdk\Paginator;
 
 class PaymentTokensApi
 {
@@ -58,53 +56,5 @@ class PaymentTokensApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return CompositeTokenFactory::from($data, ['headers' => $response->getHeaders()]);
-    }
-
-    /**
-     * @return Collection<CompositeToken>
-     */
-    public function getAll(
-        ?int $limit = null,
-        ?int $offset = null,
-    ): Collection {
-        $queryParams = [
-            'limit' => $limit,
-            'offset' => $offset,
-        ];
-        $uri = '/tokens?' . http_build_query($queryParams);
-
-        $request = new Request('GET', $uri, headers: [
-            'Accept' => 'application/json',
-        ]);
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return new Collection(
-            array_map(fn (array $item): CompositeToken => CompositeTokenFactory::from($item, ['headers' => $response->getHeaders()]), $data),
-            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
-            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
-            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
-            [
-                'headers' => $response->getHeaders(),
-            ]
-        );
-    }
-
-    /**
-     * @return Paginator<CompositeToken>
-     */
-    public function getAllPaginator(
-        ?int $limit = null,
-        ?int $offset = null,
-    ): Paginator {
-        $closure = fn (?int $limit, ?int $offset): Collection => $this->getAll(
-            limit: $limit,
-            offset: $offset,
-        );
-
-        return new Paginator(
-            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
-            $closure,
-        );
     }
 }

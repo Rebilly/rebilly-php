@@ -34,6 +34,9 @@ class OrderChangeItems implements JsonSerializable
         if (array_key_exists('usageLimits', $data)) {
             $this->setUsageLimits($data['usageLimits']);
         }
+        if (array_key_exists('excludeFromMrr', $data)) {
+            $this->setExcludeFromMrr($data['excludeFromMrr']);
+        }
         $this->setMetadata($metadata);
     }
 
@@ -86,6 +89,18 @@ class OrderChangeItems implements JsonSerializable
         return $this;
     }
 
+    public function getExcludeFromMrr(): ?bool
+    {
+        return $this->fields['excludeFromMrr'] ?? null;
+    }
+
+    public function setExcludeFromMrr(null|bool $excludeFromMrr): static
+    {
+        $this->fields['excludeFromMrr'] = $excludeFromMrr;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -97,6 +112,9 @@ class OrderChangeItems implements JsonSerializable
         }
         if (array_key_exists('usageLimits', $this->fields)) {
             $data['usageLimits'] = $this->fields['usageLimits']?->jsonSerialize();
+        }
+        if (array_key_exists('excludeFromMrr', $this->fields)) {
+            $data['excludeFromMrr'] = $this->fields['excludeFromMrr'];
         }
 
         return $data;

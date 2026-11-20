@@ -28,6 +28,12 @@ class PayperCredentials implements JsonSerializable
         if (array_key_exists('secretKey', $data)) {
             $this->setSecretKey($data['secretKey']);
         }
+        if (array_key_exists('tokenId', $data)) {
+            $this->setTokenId($data['tokenId']);
+        }
+        if (array_key_exists('tokenApiKey', $data)) {
+            $this->setTokenApiKey($data['tokenApiKey']);
+        }
         $this->setMetadata($metadata);
     }
 
@@ -48,11 +54,41 @@ class PayperCredentials implements JsonSerializable
         return $this;
     }
 
+    public function getTokenId(): ?string
+    {
+        return $this->fields['tokenId'] ?? null;
+    }
+
+    public function setTokenId(null|string $tokenId): static
+    {
+        $this->fields['tokenId'] = $tokenId;
+
+        return $this;
+    }
+
+    public function getTokenApiKey(): ?string
+    {
+        return $this->fields['tokenApiKey'] ?? null;
+    }
+
+    public function setTokenApiKey(null|string $tokenApiKey): static
+    {
+        $this->fields['tokenApiKey'] = $tokenApiKey;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
         if (array_key_exists('secretKey', $this->fields)) {
             $data['secretKey'] = $this->fields['secretKey'];
+        }
+        if (array_key_exists('tokenId', $this->fields)) {
+            $data['tokenId'] = $this->fields['tokenId'];
+        }
+        if (array_key_exists('tokenApiKey', $this->fields)) {
+            $data['tokenApiKey'] = $this->fields['tokenApiKey'];
         }
 
         return $data;

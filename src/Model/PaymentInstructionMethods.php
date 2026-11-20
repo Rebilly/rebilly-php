@@ -100,6 +100,8 @@ class PaymentInstructionMethods implements PaymentInstruction
 
     public const METHODS_COD_VOUCHER = 'CODVoucher';
 
+    public const METHODS_COMMAS_CHECKOUT = 'Commas-Checkout';
+
     public const METHODS_CONEKTA_OXXO = 'Conekta-oxxo';
 
     public const METHODS_CONEKTA_SPEI = 'Conekta-spei';
@@ -141,6 +143,8 @@ class PaymentInstructionMethods implements PaymentInstruction
     public const METHODS_FASTER_PAY = 'FasterPay';
 
     public const METHODS_FLEXEPIN = 'Flexepin';
+
+    public const METHODS_FYNTRA_CHECKOUT = 'Fyntra-Checkout';
 
     public const METHODS_GIROPAY = 'Giropay';
 
@@ -290,6 +294,8 @@ class PaymentInstructionMethods implements PaymentInstruction
 
     public const METHODS_PIX = 'PIX';
 
+    public const METHODS_PIX_AUTOMATICO = 'PIX-Automatico';
+
     public const METHODS_PIN_PAY = 'PinPay';
 
     public const METHODS_PHONE = 'phone';
@@ -349,6 +355,8 @@ class PaymentInstructionMethods implements PaymentInstruction
     public const METHODS_TERMINALY_RF = 'Terminaly-RF';
 
     public const METHODS_TETHER = 'Tether';
+
+    public const METHODS_THUNES_CHECKOUT = 'Thunes-Checkout';
 
     public const METHODS_TODITO_CASH_CARD = 'ToditoCash-card';
 
