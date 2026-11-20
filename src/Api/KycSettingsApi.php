@@ -18,6 +18,8 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Model\KycSettings;
+use Rebilly\Sdk\Model\ResolveScopedKycSettingsRequest;
+use Rebilly\Sdk\Model\ResolveScopedKycSettingsResponse;
 
 class KycSettingsApi
 {
@@ -36,6 +38,20 @@ class KycSettingsApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return KycSettings::from($data, ['headers' => $response->getHeaders()]);
+    }
+
+    public function resolveScopedSettings(
+        ResolveScopedKycSettingsRequest $resolveScopedKycSettingsRequest,
+    ): ResolveScopedKycSettingsResponse {
+        $uri = '/kyc-settings/resolve-scoped-settings';
+
+        $request = new Request('POST', $uri, headers: [
+            'Accept' => 'application/json',
+        ], body: Utils::jsonEncode($resolveScopedKycSettingsRequest));
+        $response = $this->client->send($request);
+        $data = Utils::jsonDecode((string) $response->getBody(), true);
+
+        return ResolveScopedKycSettingsResponse::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function updateKycSettings(

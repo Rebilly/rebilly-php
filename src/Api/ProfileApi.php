@@ -22,21 +22,12 @@ use Rebilly\Sdk\Model\DashboardTileReport;
 use Rebilly\Sdk\Model\PostPermissionsEmulationRequest;
 use Rebilly\Sdk\Model\Profile;
 use Rebilly\Sdk\Model\ProfileDashboard;
-use Rebilly\Sdk\Model\ProfileMfa;
 use Rebilly\Sdk\Model\Session;
 
 class ProfileApi
 {
     public function __construct(protected ?ClientInterface $client)
     {
-    }
-
-    public function deleteMfa(): void
-    {
-        $uri = '/profile/mfa';
-
-        $request = new Request('DELETE', $uri);
-        $this->client->send($request);
     }
 
     public function get(): Profile
@@ -87,19 +78,6 @@ class ProfileApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return DashboardTileReport::from($data, ['headers' => $response->getHeaders()]);
-    }
-
-    public function getMfa(): ProfileMfa
-    {
-        $uri = '/profile/mfa';
-
-        $request = new Request('GET', $uri, headers: [
-            'Accept' => 'application/json',
-        ]);
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return ProfileMfa::from($data, ['headers' => $response->getHeaders()]);
     }
 
     public function startPermissionsEmulation(
@@ -155,18 +133,5 @@ class ProfileApi
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
         return ProfileDashboard::from($data, ['headers' => $response->getHeaders()]);
-    }
-
-    public function updateMfa(): ProfileMfa
-    {
-        $uri = '/profile/mfa';
-
-        $request = new Request('POST', $uri, headers: [
-            'Accept' => 'application/json',
-        ]);
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return ProfileMfa::from($data, ['headers' => $response->getHeaders()]);
     }
 }

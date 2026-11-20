@@ -44,6 +44,12 @@ class AML implements JsonSerializable
 
     public const CONFIDENCE_VERY_STRONG = 'very-strong';
 
+    public const DECISION_CONFIRMED_MATCH = 'confirmed-match';
+
+    public const DECISION_FALSE_POSITIVE = 'false-positive';
+
+    public const DECISION_NULL = 'null';
+
     private array $fields = [];
 
     public function __construct(array $data = [], array $metadata = [])
@@ -101,6 +107,12 @@ class AML implements JsonSerializable
         }
         if (array_key_exists('matchDetails', $data)) {
             $this->setMatchDetails($data['matchDetails']);
+        }
+        if (array_key_exists('decision', $data)) {
+            $this->setDecision($data['decision']);
+        }
+        if (array_key_exists('decisionInherited', $data)) {
+            $this->setDecisionInherited($data['decisionInherited']);
         }
         if (array_key_exists('_links', $data)) {
             $this->setLinks($data['_links']);
@@ -246,6 +258,16 @@ class AML implements JsonSerializable
         return $this;
     }
 
+    public function getDecision(): ?string
+    {
+        return $this->fields['decision'] ?? null;
+    }
+
+    public function getDecisionInherited(): ?bool
+    {
+        return $this->fields['decisionInherited'] ?? null;
+    }
+
     /**
      * @return null|ResourceLink[]
      */
@@ -330,6 +352,12 @@ class AML implements JsonSerializable
         }
         if (array_key_exists('matchDetails', $this->fields)) {
             $data['matchDetails'] = $this->fields['matchDetails']?->jsonSerialize();
+        }
+        if (array_key_exists('decision', $this->fields)) {
+            $data['decision'] = $this->fields['decision'];
+        }
+        if (array_key_exists('decisionInherited', $this->fields)) {
+            $data['decisionInherited'] = $this->fields['decisionInherited'];
         }
         if (array_key_exists('_links', $this->fields)) {
             $data['_links'] = $this->fields['_links'] !== null
@@ -492,6 +520,20 @@ class AML implements JsonSerializable
     private function setComments(null|string $comments): static
     {
         $this->fields['comments'] = $comments;
+
+        return $this;
+    }
+
+    private function setDecision(null|string $decision): static
+    {
+        $this->fields['decision'] = $decision;
+
+        return $this;
+    }
+
+    private function setDecisionInherited(null|bool $decisionInherited): static
+    {
+        $this->fields['decisionInherited'] = $decisionInherited;
 
         return $this;
     }

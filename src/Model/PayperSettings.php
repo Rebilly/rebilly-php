@@ -25,6 +25,9 @@ class PayperSettings implements JsonSerializable
 
     public function __construct(array $data = [], array $metadata = [])
     {
+        if (array_key_exists('delay', $data)) {
+            $this->setDelay($data['delay']);
+        }
         if (array_key_exists('autodepositLookup', $data)) {
             $this->setAutodepositLookup($data['autodepositLookup']);
         }
@@ -40,6 +43,18 @@ class PayperSettings implements JsonSerializable
     public static function from(array $data = [], array $metadata = []): self
     {
         return new self($data, $metadata);
+    }
+
+    public function getDelay(): ?int
+    {
+        return $this->fields['delay'] ?? null;
+    }
+
+    public function setDelay(null|int $delay): static
+    {
+        $this->fields['delay'] = $delay;
+
+        return $this;
     }
 
     public function getAutodepositLookup(): ?bool
@@ -81,6 +96,9 @@ class PayperSettings implements JsonSerializable
     public function jsonSerialize(): array
     {
         $data = [];
+        if (array_key_exists('delay', $this->fields)) {
+            $data['delay'] = $this->fields['delay'];
+        }
         if (array_key_exists('autodepositLookup', $this->fields)) {
             $data['autodepositLookup'] = $this->fields['autodepositLookup'];
         }

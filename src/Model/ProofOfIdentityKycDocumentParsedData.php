@@ -25,6 +25,9 @@ class ProofOfIdentityKycDocumentParsedData implements JsonSerializable
 
     public function __construct(array $data = [], array $metadata = [])
     {
+        if (array_key_exists('version', $data)) {
+            $this->setVersion($data['version']);
+        }
         if (array_key_exists('score', $data)) {
             $this->setScore($data['score']);
         }
@@ -40,6 +43,11 @@ class ProofOfIdentityKycDocumentParsedData implements JsonSerializable
     public static function from(array $data = [], array $metadata = []): self
     {
         return new self($data, $metadata);
+    }
+
+    public function getVersion(): ?string
+    {
+        return $this->fields['version'] ?? null;
     }
 
     public function getScore(): ?int
@@ -96,6 +104,9 @@ class ProofOfIdentityKycDocumentParsedData implements JsonSerializable
     public function jsonSerialize(): array
     {
         $data = [];
+        if (array_key_exists('version', $this->fields)) {
+            $data['version'] = $this->fields['version'];
+        }
         if (array_key_exists('score', $this->fields)) {
             $data['score'] = $this->fields['score'];
         }
@@ -112,5 +123,12 @@ class ProofOfIdentityKycDocumentParsedData implements JsonSerializable
         }
 
         return $data;
+    }
+
+    private function setVersion(null|string $version): static
+    {
+        $this->fields['version'] = $version;
+
+        return $this;
     }
 }

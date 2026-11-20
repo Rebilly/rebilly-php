@@ -57,6 +57,12 @@ class PatchSubscriptionCancellationRequest implements JsonSerializable
 
     public const REASON_BILLING_FAILURE = 'billing-failure';
 
+    public const REASON_DELINQUENCY = 'delinquency';
+
+    public const REASON_ORGANIZATION_DEACTIVATED = 'organization-deactivated';
+
+    public const REASON_SANDBOX_RETENTION = 'sandbox-retention';
+
     public const CHURN_TIME_POLICY_NULL = 'null';
 
     public const CHURN_TIME_POLICY_NOW = 'now';

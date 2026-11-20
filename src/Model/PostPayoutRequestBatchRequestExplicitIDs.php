@@ -27,6 +27,9 @@ class PostPayoutRequestBatchRequestExplicitIDs implements PostPayoutRequestBatch
         if (array_key_exists('payoutRequestIds', $data)) {
             $this->setPayoutRequestIds($data['payoutRequestIds']);
         }
+        if (array_key_exists('name', $data)) {
+            $this->setName($data['name']);
+        }
         if (array_key_exists('description', $data)) {
             $this->setDescription($data['description']);
         }
@@ -56,6 +59,18 @@ class PostPayoutRequestBatchRequestExplicitIDs implements PostPayoutRequestBatch
         return $this;
     }
 
+    public function getName(): ?string
+    {
+        return $this->fields['name'] ?? null;
+    }
+
+    public function setName(null|string $name): static
+    {
+        $this->fields['name'] = $name;
+
+        return $this;
+    }
+
     public function getDescription(): ?string
     {
         return $this->fields['description'] ?? null;
@@ -73,6 +88,9 @@ class PostPayoutRequestBatchRequestExplicitIDs implements PostPayoutRequestBatch
         $data = [];
         if (array_key_exists('payoutRequestIds', $this->fields)) {
             $data['payoutRequestIds'] = $this->fields['payoutRequestIds'];
+        }
+        if (array_key_exists('name', $this->fields)) {
+            $data['name'] = $this->fields['name'];
         }
         if (array_key_exists('description', $this->fields)) {
             $data['description'] = $this->fields['description'];

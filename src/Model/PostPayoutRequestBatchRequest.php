@@ -18,6 +18,10 @@ use JsonSerializable;
 
 interface PostPayoutRequestBatchRequest extends JsonSerializable
 {
+    public function getName(): ?string;
+
+    public function setName(null|string $name): static;
+
     public function getDescription(): ?string;
 
     public function setDescription(null|string $description): static;

@@ -17,9 +17,7 @@ namespace Rebilly\Sdk\Api;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
-use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\Search;
-use Rebilly\Sdk\Paginator;
 
 class SearchApi
 {
@@ -27,20 +25,17 @@ class SearchApi
     {
     }
 
-    /**
-     * @return Collection<Search>
-     */
     public function get(
+        string $q,
         ?array $sort = null,
         ?int $limit = null,
         ?int $offset = null,
-        ?string $q = null,
-    ): Collection {
+    ): Search {
         $queryParams = [
+            'q' => $q,
             'sort' => $sort ? implode(',', $sort) : null,
             'limit' => $limit,
             'offset' => $offset,
-            'q' => $q,
         ];
         $uri = '/search?' . http_build_query($queryParams);
 
@@ -50,36 +45,6 @@ class SearchApi
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 
-        return new Collection(
-            array_map(fn (array $item): Search => Search::from($item, ['headers' => $response->getHeaders()]), $data),
-            (int) $response->getHeaderLine(Collection::HEADER_LIMIT),
-            (int) $response->getHeaderLine(Collection::HEADER_OFFSET),
-            (int) $response->getHeaderLine(Collection::HEADER_TOTAL),
-            [
-                'headers' => $response->getHeaders(),
-            ]
-        );
-    }
-
-    /**
-     * @return Paginator<Search>
-     */
-    public function getPaginator(
-        ?array $sort = null,
-        ?int $limit = null,
-        ?int $offset = null,
-        ?string $q = null,
-    ): Paginator {
-        $closure = fn (?int $limit, ?int $offset): Collection => $this->get(
-            sort: $sort,
-            limit: $limit,
-            offset: $offset,
-            q: $q,
-        );
-
-        return new Paginator(
-            $limit !== null || $offset !== null ? $closure(limit: $limit, offset: $offset) : null,
-            $closure,
-        );
+        return Search::from($data, ['headers' => $response->getHeaders()]);
     }
 }

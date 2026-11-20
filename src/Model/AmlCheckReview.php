@@ -15,50 +15,20 @@ declare(strict_types=1);
 namespace Rebilly\Sdk\Model;
 
 use JsonSerializable;
-use Rebilly\Sdk\Trait\HasMetadata;
 
-class AmlCheckReview implements JsonSerializable
+interface AmlCheckReview extends JsonSerializable
 {
-    use HasMetadata;
+    public function getStatus(): ?string;
 
-    public const STATUS_CONFIRMED_MATCH = 'confirmed-match';
+    public function setStatus(string $status): static;
 
-    public const STATUS_FALSE_POSITIVE = 'false-positive';
+    /**
+     * @return null|AmlHitDecision[]
+     */
+    public function getHits(): ?array;
 
-    private array $fields = [];
-
-    public function __construct(array $data = [], array $metadata = [])
-    {
-        if (array_key_exists('status', $data)) {
-            $this->setStatus($data['status']);
-        }
-        $this->setMetadata($metadata);
-    }
-
-    public static function from(array $data = [], array $metadata = []): self
-    {
-        return new self($data, $metadata);
-    }
-
-    public function getStatus(): ?string
-    {
-        return $this->fields['status'] ?? null;
-    }
-
-    public function setStatus(null|string $status): static
-    {
-        $this->fields['status'] = $status;
-
-        return $this;
-    }
-
-    public function jsonSerialize(): array
-    {
-        $data = [];
-        if (array_key_exists('status', $this->fields)) {
-            $data['status'] = $this->fields['status'];
-        }
-
-        return $data;
-    }
+    /**
+     * @param AmlHitDecision[]|array[] $hits
+     */
+    public function setHits(array $hits): static;
 }

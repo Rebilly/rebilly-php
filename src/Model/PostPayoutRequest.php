@@ -78,9 +78,6 @@ class PostPayoutRequest implements JsonSerializable
         if (array_key_exists('processedTime', $data)) {
             $this->setProcessedTime($data['processedTime']);
         }
-        if (array_key_exists('payoutRequestId', $data)) {
-            $this->setPayoutRequestId($data['payoutRequestId']);
-        }
         $this->setMetadata($metadata);
     }
 
@@ -319,18 +316,6 @@ class PostPayoutRequest implements JsonSerializable
         return $this;
     }
 
-    public function getPayoutRequestId(): ?string
-    {
-        return $this->fields['payoutRequestId'] ?? null;
-    }
-
-    public function setPayoutRequestId(null|string $payoutRequestId): static
-    {
-        $this->fields['payoutRequestId'] = $payoutRequestId;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         $data = [];
@@ -384,9 +369,6 @@ class PostPayoutRequest implements JsonSerializable
         }
         if (array_key_exists('processedTime', $this->fields)) {
             $data['processedTime'] = $this->fields['processedTime']?->format(DateTimeInterface::RFC3339);
-        }
-        if (array_key_exists('payoutRequestId', $this->fields)) {
-            $data['payoutRequestId'] = $this->fields['payoutRequestId'];
         }
 
         return $data;
