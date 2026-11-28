@@ -19,6 +19,8 @@ use JsonSerializable;
 
 interface Plan extends JsonSerializable
 {
+    public function getType(): string;
+
     public function getName(): ?string;
 
     public function setName(null|string $name): static;
@@ -45,15 +47,19 @@ interface Plan extends JsonSerializable
      */
     public function setProductOptions(null|array $productOptions): static;
 
-    public function getCurrency(): string;
+    public function getCurrency(): ?string;
 
-    public function setCurrency(string $currency): static;
+    public function setCurrency(null|string $currency): static;
 
     public function getCurrencySign(): ?string;
 
     public function getSetup(): ?PlanSetup;
 
     public function setSetup(null|PlanSetup|array $setup): static;
+
+    public function getSetupFee(): ?float;
+
+    public function setSetupFee(null|float|string $setupFee): static;
 
     public function getCustomFields(): ?array;
 
@@ -66,6 +72,10 @@ interface Plan extends JsonSerializable
     public function getRevision(): ?int;
 
     public function getIsTrialOnly(): ?bool;
+
+    public function getRecurringInterval(): ?SubscriptionPlanDetailsRecurringInterval;
+
+    public function getTrial(): null|PlanTrial|TrialOnlyPlanDetailsTrial;
 
     public function getCreatedTime(): ?DateTimeImmutable;
 

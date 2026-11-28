@@ -29,6 +29,14 @@ class CustomerTimeline implements JsonSerializable
 
     public const TYPE_AML_LIST_WAS_POSSIBLY_MATCHED = 'aml-list-was-possibly-matched';
 
+    public const TYPE_BONUS_CLEARED = 'bonus-cleared';
+
+    public const TYPE_BONUS_EXPIRED = 'bonus-expired';
+
+    public const TYPE_BONUS_FORFEITED = 'bonus-forfeited';
+
+    public const TYPE_BONUS_GRANTED = 'bonus-granted';
+
     public const TYPE_DEPOSIT_REQUEST_COMPLETED = 'deposit-request-completed';
 
     public const TYPE_DEPOSIT_REQUEST_CREATED = 'deposit-request-created';
@@ -123,11 +131,19 @@ class CustomerTimeline implements JsonSerializable
 
     public const TYPE_ORDER_DOWNGRADED = 'order-downgraded';
 
+    public const TYPE_ORDER_CHANGE_APPLIED = 'order-change-applied';
+
+    public const TYPE_ORDER_CHANGE_CANCELED = 'order-change-canceled';
+
+    public const TYPE_ORDER_CHANGE_CREATED = 'order-change-created';
+
     public const TYPE_ORDER_PAID_EARLY = 'order-paid-early';
 
     public const TYPE_ORDER_REACTIVATED = 'order-reactivated';
 
     public const TYPE_ORDER_RENEWED = 'order-renewed';
+
+    public const TYPE_ORDER_TRIAL_CONVERTED = 'order-trial-converted';
 
     public const TYPE_ORDER_TRIAL_ENDED = 'order-trial-ended';
 
@@ -165,6 +181,10 @@ class CustomerTimeline implements JsonSerializable
 
     public const TYPE_REFUND_WAS_REFLECTED_IN_INVOICES = 'refund-was-reflected-in-invoices';
 
+    public const TYPE_SUBSCRIPTION_PAUSE_CREATED = 'subscription-pause-created';
+
+    public const TYPE_SUBSCRIPTION_PAUSE_REVOKED = 'subscription-pause-revoked';
+
     public const TYPE_SUBSCRIPTION_PAUSED = 'subscription-paused';
 
     public const TYPE_SUBSCRIPTION_RESUMED = 'subscription-resumed';
@@ -187,11 +207,17 @@ class CustomerTimeline implements JsonSerializable
 
     public const TYPE_TRANSACTION_RECONCILED = 'transaction-reconciled';
 
+    public const TYPE_TRANSACTION_PARTIALLY_REFUNDED = 'transaction-partially-refunded';
+
     public const TYPE_TRANSACTION_REFUNDED = 'transaction-refunded';
 
     public const TYPE_TRANSACTION_VOIDED = 'transaction-voided';
 
     public const TYPE_TRANSACTION_WAITING_GATEWAY = 'transaction-waiting-gateway';
+
+    public const TYPE_WALLET_ADMIN_CREDITED = 'wallet-admin-credited';
+
+    public const TYPE_WALLET_ADMIN_DEBITED = 'wallet-admin-debited';
 
     public const TRIGGERED_BY_REBILLY = 'rebilly';
 

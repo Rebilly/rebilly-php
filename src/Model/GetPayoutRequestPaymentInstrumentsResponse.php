@@ -63,6 +63,8 @@ class GetPayoutRequestPaymentInstrumentsResponse implements JsonSerializable
 
     public const GATEWAY_NAME_BLUE_SNAP = 'BlueSnap';
 
+    public const GATEWAY_NAME_BOOM_FI = 'BoomFi';
+
     public const GATEWAY_NAME_BRAINTREE_PAYMENTS = 'BraintreePayments';
 
     public const GATEWAY_NAME_BUCKAROO = 'Buckaroo';
@@ -107,9 +109,13 @@ class GetPayoutRequestPaymentInstrumentsResponse implements JsonSerializable
 
     public const GATEWAY_NAME_COIN_PAYMENTS = 'CoinPayments';
 
+    public const GATEWAY_NAME_COMMAS = 'Commas';
+
     public const GATEWAY_NAME_CONEKTA = 'Conekta';
 
     public const GATEWAY_NAME_COPPR = 'Coppr';
+
+    public const GATEWAY_NAME_CPS = 'Cps';
 
     public const GATEWAY_NAME_CREDORAX = 'Credorax';
 
@@ -175,6 +181,8 @@ class GetPayoutRequestPaymentInstrumentsResponse implements JsonSerializable
 
     public const GATEWAY_NAME_FORTE = 'Forte';
 
+    public const GATEWAY_NAME_FYNTRA = 'Fyntra';
+
     public const GATEWAY_NAME_GATE2_WAY = 'gate2way';
 
     public const GATEWAY_NAME_GET = 'GET';
@@ -204,6 +212,8 @@ class GetPayoutRequestPaymentInstrumentsResponse implements JsonSerializable
     public const GATEWAY_NAME_I_DEBIT = 'iDebit';
 
     public const GATEWAY_NAME_ILIXIUM = 'Ilixium';
+
+    public const GATEWAY_NAME_I_MERCHANT = 'IMerchant';
 
     public const GATEWAY_NAME_INGENICO = 'Ingenico';
 
@@ -329,6 +339,8 @@ class GetPayoutRequestPaymentInstrumentsResponse implements JsonSerializable
 
     public const GATEWAY_NAME_PAYFLOW = 'Payflow';
 
+    public const GATEWAY_NAME_PAY_GLOCAL = 'PayGlocal';
+
     public const GATEWAY_NAME_PAYNOTE = 'Paynote';
 
     public const GATEWAY_NAME_PAYMENT_ASIA = 'PaymentAsia';
@@ -432,6 +444,8 @@ class GetPayoutRequestPaymentInstrumentsResponse implements JsonSerializable
     public const GATEWAY_NAME_TELR = 'Telr';
 
     public const GATEWAY_NAME_TEST_PROCESSOR = 'TestProcessor';
+
+    public const GATEWAY_NAME_THUNES = 'Thunes';
 
     public const GATEWAY_NAME_TODITO_CASH = 'ToditoCash';
 

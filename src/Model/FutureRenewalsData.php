@@ -31,6 +31,9 @@ class FutureRenewalsData implements JsonSerializable
         if (array_key_exists('sum', $data)) {
             $this->setSum($data['sum']);
         }
+        if (array_key_exists('unpricedRenewalsCount', $data)) {
+            $this->setUnpricedRenewalsCount($data['unpricedRenewalsCount']);
+        }
         if (array_key_exists('plansCount', $data)) {
             $this->setPlansCount($data['plansCount']);
         }
@@ -70,6 +73,18 @@ class FutureRenewalsData implements JsonSerializable
         return $this;
     }
 
+    public function getUnpricedRenewalsCount(): ?int
+    {
+        return $this->fields['unpricedRenewalsCount'] ?? null;
+    }
+
+    public function setUnpricedRenewalsCount(null|int $unpricedRenewalsCount): static
+    {
+        $this->fields['unpricedRenewalsCount'] = $unpricedRenewalsCount;
+
+        return $this;
+    }
+
     /**
      * @return null|FutureRenewalsDataPlansCount[]
      */
@@ -101,6 +116,9 @@ class FutureRenewalsData implements JsonSerializable
         }
         if (array_key_exists('sum', $this->fields)) {
             $data['sum'] = $this->fields['sum'];
+        }
+        if (array_key_exists('unpricedRenewalsCount', $this->fields)) {
+            $data['unpricedRenewalsCount'] = $this->fields['unpricedRenewalsCount'];
         }
         if (array_key_exists('plansCount', $this->fields)) {
             $data['plansCount'] = $this->fields['plansCount'] !== null

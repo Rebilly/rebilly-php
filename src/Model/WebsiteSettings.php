@@ -25,9 +25,6 @@ class WebsiteSettings implements JsonSerializable
 
     public function __construct(array $data = [], array $metadata = [])
     {
-        if (array_key_exists('depositForm', $data)) {
-            $this->setDepositForm($data['depositForm']);
-        }
         if (array_key_exists('paymentForm', $data)) {
             $this->setPaymentForm($data['paymentForm']);
         }
@@ -43,22 +40,6 @@ class WebsiteSettings implements JsonSerializable
     public static function from(array $data = [], array $metadata = []): self
     {
         return new self($data, $metadata);
-    }
-
-    public function getDepositForm(): ?WebsiteSettingsDepositForm
-    {
-        return $this->fields['depositForm'] ?? null;
-    }
-
-    public function setDepositForm(null|WebsiteSettingsDepositForm|array $depositForm): static
-    {
-        if ($depositForm !== null && !($depositForm instanceof WebsiteSettingsDepositForm)) {
-            $depositForm = WebsiteSettingsDepositForm::from($depositForm);
-        }
-
-        $this->fields['depositForm'] = $depositForm;
-
-        return $this;
     }
 
     public function getPaymentForm(): ?WebsiteSettingsPaymentForm
@@ -112,9 +93,6 @@ class WebsiteSettings implements JsonSerializable
     public function jsonSerialize(): array
     {
         $data = [];
-        if (array_key_exists('depositForm', $this->fields)) {
-            $data['depositForm'] = $this->fields['depositForm']?->jsonSerialize();
-        }
         if (array_key_exists('paymentForm', $this->fields)) {
             $data['paymentForm'] = $this->fields['paymentForm']?->jsonSerialize();
         }

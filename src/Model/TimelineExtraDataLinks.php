@@ -37,6 +37,12 @@ class TimelineExtraDataLinks implements JsonSerializable
 
     public const RESOURCE_TYPE_EXTERNAL = 'external';
 
+    public const RESOURCE_TYPE_PAYOUT_REQUEST_BATCH = 'payout-request-batch';
+
+    public const RESOURCE_TYPE_REPLAY_PROMOTION_CLAIM = 'replay-promotion-claim';
+
+    public const RESOURCE_TYPE_REPLAY_PLAYER_LEVEL_REWARD_AWARD = 'replay-player-level-reward-award';
+
     private array $fields = [];
 
     public function __construct(array $data = [], array $metadata = [])

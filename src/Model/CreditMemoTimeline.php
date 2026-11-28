@@ -31,6 +31,8 @@ class CreditMemoTimeline implements JsonSerializable
 
     public const TYPE_VOIDED = 'credit-memo-voided';
 
+    public const TYPE_MODIFIED = 'credit-memo-modified';
+
     public const TRIGGERED_BY_REBILLY = 'rebilly';
 
     public const TRIGGERED_BY_APP = 'app';

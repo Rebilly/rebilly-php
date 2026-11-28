@@ -37,6 +37,9 @@ class PayPalCredentials implements JsonSerializable
         if (array_key_exists('partnerBnCode', $data)) {
             $this->setPartnerBnCode($data['partnerBnCode']);
         }
+        if (array_key_exists('merchantId', $data)) {
+            $this->setMerchantId($data['merchantId']);
+        }
         $this->setMetadata($metadata);
     }
 
@@ -93,6 +96,11 @@ class PayPalCredentials implements JsonSerializable
         return $this;
     }
 
+    public function getMerchantId(): ?string
+    {
+        return $this->fields['merchantId'] ?? null;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -108,7 +116,17 @@ class PayPalCredentials implements JsonSerializable
         if (array_key_exists('partnerBnCode', $this->fields)) {
             $data['partnerBnCode'] = $this->fields['partnerBnCode'];
         }
+        if (array_key_exists('merchantId', $this->fields)) {
+            $data['merchantId'] = $this->fields['merchantId'];
+        }
 
         return $data;
+    }
+
+    private function setMerchantId(null|string $merchantId): static
+    {
+        $this->fields['merchantId'] = $merchantId;
+
+        return $this;
     }
 }

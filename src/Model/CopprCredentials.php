@@ -31,6 +31,9 @@ class CopprCredentials implements JsonSerializable
         if (array_key_exists('apiKey', $data)) {
             $this->setApiKey($data['apiKey']);
         }
+        if (array_key_exists('rebillySecretKey', $data)) {
+            $this->setRebillySecretKey($data['rebillySecretKey']);
+        }
         $this->setMetadata($metadata);
     }
 
@@ -63,6 +66,18 @@ class CopprCredentials implements JsonSerializable
         return $this;
     }
 
+    public function getRebillySecretKey(): ?string
+    {
+        return $this->fields['rebillySecretKey'] ?? null;
+    }
+
+    public function setRebillySecretKey(null|string $rebillySecretKey): static
+    {
+        $this->fields['rebillySecretKey'] = $rebillySecretKey;
+
+        return $this;
+    }
+
     public function jsonSerialize(): array
     {
         $data = [];
@@ -71,6 +86,9 @@ class CopprCredentials implements JsonSerializable
         }
         if (array_key_exists('apiKey', $this->fields)) {
             $data['apiKey'] = $this->fields['apiKey'];
+        }
+        if (array_key_exists('rebillySecretKey', $this->fields)) {
+            $data['rebillySecretKey'] = $this->fields['rebillySecretKey'];
         }
 
         return $data;

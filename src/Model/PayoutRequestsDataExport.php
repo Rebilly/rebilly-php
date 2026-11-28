@@ -26,10 +26,6 @@ class PayoutRequestsDataExport implements DataExport
 
     public const FORMAT_JSON = 'json';
 
-    public const FORMAT_JSON_API = 'json-api';
-
-    public const FORMAT_XML = 'xml';
-
     public const STATUS_PENDING = 'pending';
 
     public const STATUS_QUEUED = 'queued';
@@ -37,6 +33,16 @@ class PayoutRequestsDataExport implements DataExport
     public const STATUS_PROCESSING = 'processing';
 
     public const STATUS_COMPLETED = 'completed';
+
+    public const STATUS_FAILED = 'failed';
+
+    public const FAILURE_REASON_RECORD_LIMIT_EXCEEDED = 'record-limit-exceeded';
+
+    public const FAILURE_REASON_MAX_RETRIES_REACHED = 'max-retries-reached';
+
+    public const FAILURE_REASON_CREATOR_ACCESS_REVOKED = 'creator-access-revoked';
+
+    public const FAILURE_REASON_NULL = 'null';
 
     private array $fields = [];
 
@@ -83,6 +89,9 @@ class PayoutRequestsDataExport implements DataExport
         }
         if (array_key_exists('status', $data)) {
             $this->setStatus($data['status']);
+        }
+        if (array_key_exists('failureReason', $data)) {
+            $this->setFailureReason($data['failureReason']);
         }
         if (array_key_exists('dateRange', $data)) {
             $this->setDateRange($data['dateRange']);
@@ -238,6 +247,11 @@ class PayoutRequestsDataExport implements DataExport
         return $this->fields['status'] ?? null;
     }
 
+    public function getFailureReason(): ?string
+    {
+        return $this->fields['failureReason'] ?? null;
+    }
+
     public function getDateRange(): ?PayoutRequestsDataExportDateRange
     {
         return $this->fields['dateRange'] ?? null;
@@ -325,6 +339,9 @@ class PayoutRequestsDataExport implements DataExport
         if (array_key_exists('status', $this->fields)) {
             $data['status'] = $this->fields['status'];
         }
+        if (array_key_exists('failureReason', $this->fields)) {
+            $data['failureReason'] = $this->fields['failureReason'];
+        }
         if (array_key_exists('dateRange', $this->fields)) {
             $data['dateRange'] = $this->fields['dateRange']?->jsonSerialize();
         }
@@ -407,6 +424,13 @@ class PayoutRequestsDataExport implements DataExport
     private function setStatus(null|string $status): static
     {
         $this->fields['status'] = $status;
+
+        return $this;
+    }
+
+    private function setFailureReason(null|string $failureReason): static
+    {
+        $this->fields['failureReason'] = $failureReason;
 
         return $this;
     }

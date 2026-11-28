@@ -29,11 +29,11 @@ interface ReadyToPayPayPalMethodFeature extends JsonSerializable
 
     public function setPaypalClientId(string $paypalClientId): static;
 
-    public function getBillingAgreementToken(): string;
+    public function getBillingAgreementToken(): ?string;
 
-    public function setBillingAgreementToken(string $billingAgreementToken): static;
+    public function setBillingAgreementToken(null|string $billingAgreementToken): static;
 
-    public function getExpirationTime(): DateTimeImmutable;
+    public function getExpirationTime(): ?DateTimeImmutable;
 
-    public function setExpirationTime(DateTimeImmutable|string $expirationTime): static;
+    public function setExpirationTime(null|DateTimeImmutable|string $expirationTime): static;
 }

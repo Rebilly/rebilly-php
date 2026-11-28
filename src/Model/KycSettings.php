@@ -35,6 +35,9 @@ class KycSettings implements JsonSerializable
         if (array_key_exists('addressProof', $data)) {
             $this->setAddressProof($data['addressProof']);
         }
+        if (array_key_exists('scopedKycSettings', $data)) {
+            $this->setScopedKycSettings($data['scopedKycSettings']);
+        }
         if (array_key_exists('uiVersion', $data)) {
             $this->setUiVersion($data['uiVersion']);
         }
@@ -78,6 +81,22 @@ class KycSettings implements JsonSerializable
         return $this;
     }
 
+    public function getScopedKycSettings(): ?ScopedKycSettings
+    {
+        return $this->fields['scopedKycSettings'] ?? null;
+    }
+
+    public function setScopedKycSettings(null|ScopedKycSettings|array $scopedKycSettings): static
+    {
+        if ($scopedKycSettings !== null && !($scopedKycSettings instanceof ScopedKycSettings)) {
+            $scopedKycSettings = ScopedKycSettings::from($scopedKycSettings);
+        }
+
+        $this->fields['scopedKycSettings'] = $scopedKycSettings;
+
+        return $this;
+    }
+
     public function getUiVersion(): ?string
     {
         return $this->fields['uiVersion'] ?? null;
@@ -98,6 +117,9 @@ class KycSettings implements JsonSerializable
         }
         if (array_key_exists('addressProof', $this->fields)) {
             $data['addressProof'] = $this->fields['addressProof']?->jsonSerialize();
+        }
+        if (array_key_exists('scopedKycSettings', $this->fields)) {
+            $data['scopedKycSettings'] = $this->fields['scopedKycSettings']?->jsonSerialize();
         }
         if (array_key_exists('uiVersion', $this->fields)) {
             $data['uiVersion'] = $this->fields['uiVersion'];

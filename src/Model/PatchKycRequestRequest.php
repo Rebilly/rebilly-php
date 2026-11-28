@@ -73,6 +73,9 @@ class PatchKycRequestRequest implements JsonSerializable
         if (array_key_exists('revision', $data)) {
             $this->setRevision($data['revision']);
         }
+        if (array_key_exists('subtypeRestrictions', $data)) {
+            $this->setSubtypeRestrictions($data['subtypeRestrictions']);
+        }
         if (array_key_exists('expirationTime', $data)) {
             $this->setExpirationTime($data['expirationTime']);
         }
@@ -175,6 +178,11 @@ class PatchKycRequestRequest implements JsonSerializable
         return $this->fields['revision'] ?? null;
     }
 
+    public function getSubtypeRestrictions(): ?KycSubtypeRestrictions
+    {
+        return $this->fields['subtypeRestrictions'] ?? null;
+    }
+
     public function getExpirationTime(): ?DateTimeImmutable
     {
         return $this->fields['expirationTime'] ?? null;
@@ -255,6 +263,9 @@ class PatchKycRequestRequest implements JsonSerializable
         if (array_key_exists('revision', $this->fields)) {
             $data['revision'] = $this->fields['revision'];
         }
+        if (array_key_exists('subtypeRestrictions', $this->fields)) {
+            $data['subtypeRestrictions'] = $this->fields['subtypeRestrictions']?->jsonSerialize();
+        }
         if (array_key_exists('expirationTime', $this->fields)) {
             $data['expirationTime'] = $this->fields['expirationTime']?->format(DateTimeInterface::RFC3339);
         }
@@ -303,6 +314,17 @@ class PatchKycRequestRequest implements JsonSerializable
     private function setRevision(null|int $revision): static
     {
         $this->fields['revision'] = $revision;
+
+        return $this;
+    }
+
+    private function setSubtypeRestrictions(null|KycSubtypeRestrictions|array $subtypeRestrictions): static
+    {
+        if ($subtypeRestrictions !== null && !($subtypeRestrictions instanceof KycSubtypeRestrictions)) {
+            $subtypeRestrictions = KycSubtypeRestrictions::from($subtypeRestrictions);
+        }
+
+        $this->fields['subtypeRestrictions'] = $subtypeRestrictions;
 
         return $this;
     }

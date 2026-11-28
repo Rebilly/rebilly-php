@@ -75,26 +75,26 @@ class PayPalBillingAgreementFeature implements ReadyToPayPayPalMethodFeature
         return $this;
     }
 
-    public function getBillingAgreementToken(): string
+    public function getBillingAgreementToken(): ?string
     {
-        return $this->fields['billingAgreementToken'];
+        return $this->fields['billingAgreementToken'] ?? null;
     }
 
-    public function setBillingAgreementToken(string $billingAgreementToken): static
+    public function setBillingAgreementToken(null|string $billingAgreementToken): static
     {
         $this->fields['billingAgreementToken'] = $billingAgreementToken;
 
         return $this;
     }
 
-    public function getExpirationTime(): DateTimeImmutable
+    public function getExpirationTime(): ?DateTimeImmutable
     {
-        return $this->fields['expirationTime'];
+        return $this->fields['expirationTime'] ?? null;
     }
 
-    public function setExpirationTime(DateTimeImmutable|string $expirationTime): static
+    public function setExpirationTime(null|DateTimeImmutable|string $expirationTime): static
     {
-        if (!($expirationTime instanceof DateTimeImmutable)) {
+        if ($expirationTime !== null && !($expirationTime instanceof DateTimeImmutable)) {
             $expirationTime = new DateTimeImmutable($expirationTime);
         }
 
@@ -118,7 +118,7 @@ class PayPalBillingAgreementFeature implements ReadyToPayPayPalMethodFeature
             $data['billingAgreementToken'] = $this->fields['billingAgreementToken'];
         }
         if (array_key_exists('expirationTime', $this->fields)) {
-            $data['expirationTime'] = $this->fields['expirationTime']->format(DateTimeInterface::RFC3339);
+            $data['expirationTime'] = $this->fields['expirationTime']?->format(DateTimeInterface::RFC3339);
         }
 
         return $data;
