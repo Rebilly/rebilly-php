@@ -19,7 +19,7 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Utils;
 use Rebilly\Sdk\Collection;
 use Rebilly\Sdk\Model\DepositRequest;
-use Rebilly\Sdk\Model\PostDepositRequest;
+use Rebilly\Sdk\Model\PostDepositRequestRequest;
 use Rebilly\Sdk\Paginator;
 
 class DepositRequestsApi
@@ -29,13 +29,13 @@ class DepositRequestsApi
     }
 
     public function create(
-        PostDepositRequest $postDepositRequest,
+        PostDepositRequestRequest $postDepositRequestRequest,
     ): DepositRequest {
         $uri = '/deposit-requests';
 
         $request = new Request('POST', $uri, headers: [
             'Accept' => 'application/json',
-        ], body: Utils::jsonEncode($postDepositRequest));
+        ], body: Utils::jsonEncode($postDepositRequestRequest));
         $response = $this->client->send($request);
         $data = Utils::jsonDecode((string) $response->getBody(), true);
 

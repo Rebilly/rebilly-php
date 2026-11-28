@@ -40,6 +40,7 @@ class TrackingApi
         ?string $filter = null,
         ?string $q = null,
         ?string $expand = null,
+        ?string $fields = null,
     ): Collection {
         $queryParams = [
             'limit' => $limit,
@@ -48,6 +49,7 @@ class TrackingApi
             'filter' => $filter,
             'q' => $q,
             'expand' => $expand,
+            'fields' => $fields,
         ];
         $uri = '/tracking/api?' . http_build_query($queryParams);
 
@@ -78,6 +80,7 @@ class TrackingApi
         ?string $filter = null,
         ?string $q = null,
         ?string $expand = null,
+        ?string $fields = null,
     ): Paginator {
         $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllApiLogs(
             limit: $limit,
@@ -86,6 +89,7 @@ class TrackingApi
             filter: $filter,
             q: $q,
             expand: $expand,
+            fields: $fields,
         );
 
         return new Paginator(
@@ -220,14 +224,12 @@ class TrackingApi
     public function getAllWebhookTrackingLogs(
         ?int $limit = null,
         ?int $offset = null,
-        ?array $sort = null,
         ?string $filter = null,
         ?string $q = null,
     ): Collection {
         $queryParams = [
             'limit' => $limit,
             'offset' => $offset,
-            'sort' => $sort ? implode(',', $sort) : null,
             'filter' => $filter,
             'q' => $q,
         ];
@@ -256,14 +258,12 @@ class TrackingApi
     public function getAllWebhookTrackingLogsPaginator(
         ?int $limit = null,
         ?int $offset = null,
-        ?array $sort = null,
         ?string $filter = null,
         ?string $q = null,
     ): Paginator {
         $closure = fn (?int $limit, ?int $offset): Collection => $this->getAllWebhookTrackingLogs(
             limit: $limit,
             offset: $offset,
-            sort: $sort,
             filter: $filter,
             q: $q,
         );

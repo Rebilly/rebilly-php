@@ -43,14 +43,14 @@ class ReadyToPayPayPalMethod implements ReadyToPayMethods
         return 'paypal';
     }
 
-    public function getFeature(): ?ReadyToPayPayPalMethodFeature
+    public function getFeature(): ReadyToPayPayPalMethodFeature
     {
-        return $this->fields['feature'] ?? null;
+        return $this->fields['feature'];
     }
 
-    public function setFeature(null|ReadyToPayPayPalMethodFeature|array $feature): static
+    public function setFeature(ReadyToPayPayPalMethodFeature|array $feature): static
     {
-        if ($feature !== null && !($feature instanceof ReadyToPayPayPalMethodFeature)) {
+        if (!($feature instanceof ReadyToPayPayPalMethodFeature)) {
             $feature = ReadyToPayPayPalMethodFeatureFactory::from($feature);
         }
 
@@ -83,7 +83,7 @@ class ReadyToPayPayPalMethod implements ReadyToPayMethods
             'method' => 'paypal',
         ];
         if (array_key_exists('feature', $this->fields)) {
-            $data['feature'] = $this->fields['feature']?->jsonSerialize();
+            $data['feature'] = $this->fields['feature']->jsonSerialize();
         }
         if (array_key_exists('filters', $this->fields)) {
             $data['filters'] = $this->fields['filters'];

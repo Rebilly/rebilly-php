@@ -297,31 +297,6 @@ class SubscriptionsApi
         );
     }
 
-    /**
-     * @return UpcomingInvoice[]
-     */
-    public function getAllUpcomingInvoices(
-        string $id,
-        ?string $expand = null,
-    ): array {
-        $pathParams = [
-            '{id}' => $id,
-        ];
-
-        $queryParams = [
-            'expand' => $expand,
-        ];
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}/upcoming-invoices?') . http_build_query($queryParams);
-
-        $request = new Request('GET', $uri, headers: [
-            'Accept' => 'application/json',
-        ]);
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return array_map(fn (array $item): UpcomingInvoice => UpcomingInvoice::from($item, ['headers' => $response->getHeaders()]), $data);
-    }
-
     public function getSubscriptionSummaryMetrics(
         string $subscriptionId,
     ): SubscriptionSummaryMetrics {
@@ -391,27 +366,6 @@ class SubscriptionsApi
         ];
 
         $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}/upcoming-invoice/issue');
-
-        $request = new Request('POST', $uri, headers: [
-            'Accept' => 'application/json',
-        ], body: Utils::jsonEncode($invoiceIssue));
-        $response = $this->client->send($request);
-        $data = Utils::jsonDecode((string) $response->getBody(), true);
-
-        return UpcomingInvoice::from($data, ['headers' => $response->getHeaders()]);
-    }
-
-    public function issueUpcomingInvoice(
-        string $id,
-        string $invoiceId,
-        InvoiceIssue $invoiceIssue,
-    ): UpcomingInvoice {
-        $pathParams = [
-            '{id}' => $id,
-            '{invoiceId}' => $invoiceId,
-        ];
-
-        $uri = str_replace(array_keys($pathParams), array_values($pathParams), '/subscriptions/{id}/upcoming-invoices/{invoiceId}/issue');
 
         $request = new Request('POST', $uri, headers: [
             'Accept' => 'application/json',

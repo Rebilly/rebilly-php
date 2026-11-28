@@ -97,6 +97,8 @@ class TransactionTimeline implements JsonSerializable
 
     public const TYPE_TRANSACTION_PAYMENT_METHOD_CHANGED = 'transaction-payment-method-changed';
 
+    public const TYPE_TRANSACTION_PARTIALLY_REFUNDED = 'transaction-partially-refunded';
+
     public const TYPE_TRANSACTION_PROCESS_REQUESTED = 'transaction-process-requested';
 
     public const TYPE_TRANSACTION_PROCESSED = 'transaction-processed';

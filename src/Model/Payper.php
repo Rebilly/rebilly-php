@@ -31,6 +31,9 @@ class Payper extends GatewayAccount
         if (array_key_exists('credentials', $data)) {
             $this->setCredentials($data['credentials']);
         }
+        if (array_key_exists('threeDSecureServer', $data)) {
+            $this->setThreeDSecureServer($data['threeDSecureServer']);
+        }
         if (array_key_exists('settings', $data)) {
             $this->setSettings($data['settings']);
         }
@@ -58,6 +61,22 @@ class Payper extends GatewayAccount
         return $this;
     }
 
+    public function getThreeDSecureServer(): ?ThreeDSecureIO3dsServer
+    {
+        return $this->fields['threeDSecureServer'] ?? null;
+    }
+
+    public function setThreeDSecureServer(null|ThreeDSecureIO3dsServer|array $threeDSecureServer): static
+    {
+        if ($threeDSecureServer !== null && !($threeDSecureServer instanceof ThreeDSecureIO3dsServer)) {
+            $threeDSecureServer = ThreeDSecureIO3dsServer::from($threeDSecureServer);
+        }
+
+        $this->fields['threeDSecureServer'] = $threeDSecureServer;
+
+        return $this;
+    }
+
     public function getSettings(): ?PayperSettings
     {
         return $this->fields['settings'] ?? null;
@@ -79,6 +98,9 @@ class Payper extends GatewayAccount
         $data = [];
         if (array_key_exists('credentials', $this->fields)) {
             $data['credentials'] = $this->fields['credentials']->jsonSerialize();
+        }
+        if (array_key_exists('threeDSecureServer', $this->fields)) {
+            $data['threeDSecureServer'] = $this->fields['threeDSecureServer']?->jsonSerialize();
         }
         if (array_key_exists('settings', $this->fields)) {
             $data['settings'] = $this->fields['settings']?->jsonSerialize();
